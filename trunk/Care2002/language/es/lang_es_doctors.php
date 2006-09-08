@@ -1,8 +1,11 @@
 <?php
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C. y Dr. Manuel Montemayor
-*/
+/*
+ * Nombre: lang_es_doctors.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 $Jan='Enero';
 $Feb='Febrero';
@@ -23,26 +26,26 @@ $Dez='Diciembre';
 $monat=array('',$Jan,$Feb,$Mae,$Apr,$Mai,$Jun,$Jul,$Aug,$Sep,$Okt,$Nov,$Dez);
 
 $LDDoctors='Doctores';
-$LDQView='Vista rápida para el médico de guardia';  // DOC = doctor on call
-$LDQViewTxt='Vista rápida del itinerario de trabajo del médico de guardia';
+$LDQView='Vista rÃ¡pida para el mÃ©dico de guardia';  // DOC = doctor on call
+$LDQViewTxt='Vista rÃ¡pida del itinerario de trabajo del mÃ©dico de guardia';
 $LDDutyPlan='Plan de actividades';
 $LDDutyPlanTxt='Plan de actividades, ver, actualizar, borrar, administrar, etc.';
-$LDDocsList='Lista de los médicos';
-$LDDocsListTxt='Crear o modificar la lista de los médicos, ingresar datos, etc.';
+$LDDocsList='Lista de los mÃ©dicos';
+$LDDocsListTxt='Crear o modificar la lista de los mÃ©dicos, ingresar datos, etc.';
 $LDDocsForum='Foro';
-$LDDocsForumTxt='Foro de  discusión para médicos';
+$LDDocsForumTxt='Foro de  discusiÃ³n para mÃ©dicos';
 $LDNews='Noticias';
 $LDNewsTxt='Componer, leer, editar noticias';
 $LDMemo='Memo';
 $LDMemoTxt='Componer, leer, editar memo';
-$LDCloseAlt='Cerrar la ventana de los médicos y cirujanos';
-$LDDocsOnDuty='Médicos de guardia';
+$LDCloseAlt='Cerrar la ventana de los mÃ©dicos y cirujanos';
+$LDDocsOnDuty='MÃ©dicos de guardia';
 
 $LDTabElements=array('Departamento',
 								 'DOC 1',
-								 'Beeper/Teléfono',
+								 'Beeper/TelÃ©fono',
 								 'DOC 2',
-								 'Beeper/Teléfono',
+								 'Beeper/TelÃ©fono',
 								 'Plan de actividades'
 								 );
 $LDShowActualPlan='Mostrar plan actual de actividades';
@@ -57,70 +60,70 @@ $LDShortDay=array('Do',
 $LDFullDay=array('Domingo',
 								'Lunes',
 								'Martes',
-								'Miércoles',
+								'MiÃ©rcoles',
 								'Jueves',
 								'Viernes',
-								'Sábado'
+								'SÃ¡bado'
 								);
-$LDDoc1='Médico de guardia 1';
-$LDDoc2='Médico de guardia 2';
+$LDDoc1='MÃ©dico de guardia 1';
+$LDDoc2='MÃ©dico de guardia 2';
 $LDClosePlan='Cerrar este plan';
 $LDNewPlan='Crear un nuevo plan ';
 $LDBack='Volver';
 $LDHelp='Ayuda';
 $LDMakeDutyPlan='Crear un plan de actividades';
 $LDClk2Plan='Click para abrir la lista de personal';
-$LDInfo4Duty='Información';
+$LDInfo4Duty='InformaciÃ³n';
 $LDStayIn='Activo';
 $LDOnCall='De guardia';
-$LDPhone='Teléfono';
+$LDPhone='TelÃ©fono';
 $LDBeeper='Beeper';
-$LDMoreInfo='Más información';
+$LDMoreInfo='MÃ¡s informaciÃ³n';
 $LDOn='en';
 $LDCloseWindow='Cerrar ventana';
 $LDMonth='Mes';
-$LDYear='Año';
+$LDYear='AÃ±o';
 $LDPerElements=array('Apellido',
 									'Nombre',
 									'Fecha de nacimiento',
 									'Beeper',
-									'Teléfono',
+									'TelÃ©fono',
 									'Beeper',
-									'Teléfono'
+									'TelÃ©fono'
 									);
 $LDChgDept='Cambiar Departamento: ';
 $LDChange='Cambiar';
 $LDCreatePersonList='Crear la lista de personal';
-$LDNoPersonList='La lista del personal todavía no se ha creado' ;
+$LDNoPersonList='La lista del personal todavÃ­a no se ha creado' ;
 $LDShow='Mostrar';
 
-$LDDOCS='Actividades para el médico de guardia';
-$LDDOCSTxt='Agenda del médico de guardia, planificar, ver, editar, etc.';
+$LDDOCS='Actividades para el mÃ©dico de guardia';
+$LDDOCSTxt='Agenda del mÃ©dico de guardia, planificar, ver, editar, etc.';
 $LDDOCSR='DOCSR';
-$LDDOCSRTxt='Solicitante de horario - Médico de guardia';
+$LDDOCSRTxt='Solicitante de horario - MÃ©dico de guardia';
 /* 2002-09-15 EL */
-$LDTestRequest='Petición de prueba ';
+$LDTestRequest='PeticiÃ³n de prueba ';
 /* 2003-03-16 EL */
-$LDContactInfo='Información de contacto';
-$LDPersonalContactInfo='Información de contacto personal';
-$LDOnCallContactInfo='Información para contactar al médico de guardia';
+$LDContactInfo='InformaciÃ³n de contacto';
+$LDPersonalContactInfo='InformaciÃ³n de contacto personal';
+$LDOnCallContactInfo='InformaciÃ³n para contactar al mÃ©dico de guardia';
 $LDPlsSelectDept='Por favor seleccione el Departamento';
-$LDCreateDoctorsList='Crear la lista de los médicos';
+$LDCreateDoctorsList='Crear la lista de los mÃ©dicos';
 $LDPlsCreateList='Por favor, cree la lista primero.';
-$LDPlsClickButton='Dé clic en el siguiente botón.';
+$LDPlsClickButton='DÃ© clic en el siguiente botÃ³n.';
 $LDFamilyName='Apellido';
 $LDGivenName='Nombre';
 $LDDateOfBirth='Fecha de nacimiento';
-$LDEntryPrompt='Por favor ingrese el texto a buscar:<br>(e.g. apellido, nombre, número de personal, etc.)<br>';
-$LDPersonellNr='Número de personal ';
-$LDFunction='Función';
+$LDEntryPrompt='Por favor ingrese el texto a buscar:<br>(e.g. apellido, nombre, nÃºmero de personal, etc.)<br>';
+$LDPersonellNr='NÃºmero de personal ';
+$LDFunction='FunciÃ³n';
 $LDOptions='Opciones';
-$LDSearchFound='La búsqueda halló ~nr~ datos relevantes.';
-$LDAddDoctorToList='Agregar médico a la lista.';
+$LDSearchFound='La bÃºsqueda hallÃ³ ~nr~ datos relevantes.';
+$LDAddDoctorToList='Agregar mÃ©dico a la lista.';
 $LDAdd='Agregar';
 $LDDelete='Borrar';
-$LDSureToDeleteEntry='Está seguro que quiere borrar este registro?';
+$LDSureToDeleteEntry='Â¿EstÃ¡ seguro que quiere borrar este registro?';
 /* 2003-03-18 EL */
 $LDChangeOnlyDept='Cambiar el Departamento';
-$LDCreateNursesList='Crear la lista de las enfermeras';
+$LDCreateNursesList='Crear el listado de enfermeras';
 ?>

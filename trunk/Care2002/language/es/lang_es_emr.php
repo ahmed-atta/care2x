@@ -1,25 +1,29 @@
 <?php
-/**
-* Traducido por: Dr. med. Daniel Hinostroza C.
-*/
 
-$LDAdmit='Antecedentes de admisión y examen físico';
+/*
+ * Nombre: lang_es_emr.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
-$LDAdmitHistoPhysical='Antecedentes de admisión y examen físico';
+$LDAdmit='Antecedentes de admisiÃ³n y examen fÃ­sico';
 
-$LDDoctorDailyNotes='Apuntes diarios del médico';
+$LDAdmitHistoPhysical='Antecedentes de admisiÃ³n y examen fÃ­sico';
+
+$LDDoctorDailyNotes='Apuntes diarios del mÃ©dico';
 
 $LDDischargeSummary='Epicrisis (Resumen para el alta)';
 
 $LDConsultNotes='Apuntes de la consulta';
 
-$LDOpNotes='Apuntes de la cirugía';
+$LDOpNotes='Apuntes de la cirugÃ­a';
 
-$LDDailyNurseNotes='Apuntes diarios desde el pabellón';
+$LDDailyNurseNotes='Apuntes diarios desde el pabellÃ³n';
 
 $LDOther='Otros apuntes';
 
-$LDChartNotes='Apuntes de los registros gráficos';
+$LDChartNotes='Apuntes de los registros grÃ¡ficos';
 
 $LDPTATGetc='Apuntes diarios de la terapia con PT, ATG, etc.';
 
@@ -27,23 +31,23 @@ $LDIVDailyNotes='Apuntes diarios de la terapia intravenosa';
 
 $LDAnticoagDailyNotes='Apuntes diarios de la terapia anticoagulante';
 
-$LDMaterialLOTChargeNr='Material LOT, No. de facturación';
+$LDMaterialLOTChargeNr='Material LOT, No. de facturaciÃ³n';
 
-$LDDiagnosis='Texto acerca del diagnóstico';
+$LDDiagnosis='Texto acerca del diagnÃ³stico';
 
 $LDTherapy='Texto acerca de la terapia';
 
 $LDExtraNotes='Apuntes adicionales';
 
-$LDNursingReport='Reporte de enfermería';
+$LDNursingReport='Reporte de enfermerÃ­a';
 
-$LDNursingProblemReport='Reporte de problemas de enfermería';
+$LDNursingProblemReport='Reporte de problemas de enfermerÃ­a';
 
-$LDNursingEffectivityReport='Reporte de la efectividad de enfermería';
+$LDNursingEffectivityReport='Reporte de la efectividad de enfermerÃ­a';
 
-$LDInquiryToDoctor='Consulta al médico';
+$LDInquiryToDoctor='Consulta al mÃ©dico';
 
-$LDDoctorDirective='Órdenes del médico';
+$LDDoctorDirective='Órdenes del mÃ©dico';
 
 $LDProblem='Problemas';
 
@@ -52,5 +56,6 @@ $LDDevelopment='Desarrollo';
 $LDAllergy='Alergia';
 
 $LDDietPlan='Plan de dieta';
-$LDPrintPDFDocAllReport='PDF document of all reports';
+
+$LDPrintPDFDocAllReport='documento de reportes en PDF';
 ?>

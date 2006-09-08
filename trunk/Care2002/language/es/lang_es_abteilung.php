@@ -1,40 +1,43 @@
 <?php
 $LDPageTitle='Departamentos';
 $LDDeptTxt='Departamentos';
-$LDOpenHrsTxt='Horario de la clÌnica';
+$LDOpenHrsTxt='Horario de la cl√≠nica';
 $LDChkHrsTxt='Horario de consultas';
-$LDClk4Info='DÈ clic para m·s informaciÛn';
-$LDDayTxt='DÌa';
+$LDClk4Info='D√© clic para m√°s informaci√≥n';
+$LDDayTxt='D√≠a';
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_abteilung.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * Versi√≥n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 /**
 * A small dictionary:
-* ORL = OtorrinolaringologÌa
-* Gineco-obst= GinecologÌa y Obstetricia
+* ORL = Otorrinolaringolog√≠a
+* Gineco-obst= Ginecolog√≠a y Obstetricia
 * U.V.I= 
 * U.C.I= Unidad de Cuidados Intensivos
 */
-$dept=array('CirugÌa general',
-					'CirugÌa de urgencias',
-					'CirugÌa pl·stica',
-					'OtorrinolaringologÌa',
-					'OftalmologÌa',
-					'PatologÌa',
+$dept=array('Cirug√≠a general',
+					'Cirug√≠a de urgencias',
+					'Cirug√≠a pl√°stica',
+					'Otorrinolaringolog√≠a',
+					'Oftalmolog√≠a',
+					'Patolog√≠a',
 					'Gineco-obst',
-					'RehabilitaciÛn',
+					'Rehabilitaci√≥n',
 					'Medicina interna',
-					'OncologÌa',
+					'Oncolog√≠a',
 					'Mantenimiento',
 					'U.V.I.',
 					'U.C.I.',
 					'Laboratorio',
 					'Ambulatorio de urgencias',
 					'Ambulatorio general',
-					'SonografÌa',
-					'DiagnÛstico nuclear',
+					'Sonograf√≠a',
+					'Diagn√≥stico nuclear',
 					'Ambulatorio - Med. interna');
 					
 					
@@ -65,10 +68,10 @@ $LDBackTxt='Volver';
 
 $LDOpenDays=array('Lunes',
 					'Martes',
-					'MiÈrcoles',
+					'Mi√©rcoles',
 					'Jueves',
 					'Viernes',
-					'S·bado',
+					'S√°bado',
 					'Domingo');
 $LDOpenTimes=array('8.30 - 21.00', //Mo
 					'8.30 - 21.00', //Di

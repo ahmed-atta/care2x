@@ -1,11 +1,19 @@
 <?php
+
+/*
+ * Nombre: lang_es_search.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
+ 
 #2003-10-02 EL
-$LDSearchFound='La búsqueda halló <font color=red><b>~nr~</b></font> datos relevantes.';
+$LDSearchFound='La bÃºsqueda hallÃ³ <font color=red><b>~nr~</b></font> datos relevantes.';
 $LDShowing='Mostrando';
 $LDTo='a';
-$LDSex='Género';
+$LDSex='GÃ©nero';
 $LDSelect='Seleccione';
-$LDZipCode='Código postal';
-$LDPlsSearchDoctor='Por favor, busque primero al médico.';
+$LDZipCode='CÃ³digo postal';
+$LDPlsSearchDoctor='Por favor, busque primero al mÃ©dico.';
 $LDPlsSearchNurse='Por favor, busque primero a la enfermera.';
 ?>

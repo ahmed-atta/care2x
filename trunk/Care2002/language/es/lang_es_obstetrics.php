@@ -2,17 +2,18 @@
 
 
 
-/**
+/*
+ * Nombre: lang_es_obstetrics.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com> y Dr. Manuel Montemayor
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
-* Correcciones: Dr. med. Daniel Hinostroza C. y Dr. Manuel Montemayor
-
-*/
 
 
+$LD['pregnancy_nr']='NÃºmero de embarazo (gestas)';
 
-$LD['pregnancy_nr']='No. de embarazo (gestas)';
-
-$LD['delivery_nr']='Número de partos (para)';
+$LD['delivery_nr']='NÃºmero de partos (para)';
 
 $LD['delivery_place']='Lugar del parto';
 
@@ -20,15 +21,15 @@ $LD['delivery_date']='Fecha del parto';
 
 $LD['delivery_mode']='Tipo de parto';
 
-$LD['c_s_reason']='Razón si fue cesárea';
+$LD['c_s_reason']='RazÃ³n si fue cesÃ¡rea';
 
-$LD['born_before_arrival']='Nació antes de llegar';
+$LD['born_before_arrival']='NaciÃ³ antes de llegar';
 
-$LD['face_presentation']='Presentación de rostro';
+$LD['face_presentation']='PresentaciÃ³n de rostro';
 
-$LD['posterio_occipital_position']='Presentación occipital posterior';
+$LD['posterio_occipital_position']='PresentaciÃ³n occipital posterior';
 
-$LD['delivery_rank']='Categoría del parto';
+$LD['delivery_rank']='CategorÃ­a del parto';
 
 $LD['apgar_1_min']='Puntaje Apgar 1 min.';
 
@@ -36,7 +37,7 @@ $LD['apgar_5_min']='Puntaje Apgar 5 min.';
 
 $LD['apgar_10_min']='Puntaje Apgar 10 min.';
 
-$LD['condition']='Condición';
+$LD['condition']='CondiciÃ³n';
 
 $LD['weight']='Peso al nacer';
 
@@ -46,13 +47,13 @@ $LD['head_circumference']='Circunferencia craneal';
 
 $LD['scored_gestational_age']='Edad gestacional calculada';
 
-$LD['feeding']='Alimentación';
+$LD['feeding']='AlimentaciÃ³n';
 
-$LD['congenital_abnormality']='Anomalías congénitas';
+$LD['congenital_abnormality']='AnomalÃ­as congÃ©nitas';
 
-$LD['classification']='Clasificación';
+$LD['classification']='ClasificaciÃ³n';
 
-$LD['disease_category']='Categoría de enfermedades';
+$LD['disease_category']='CategorÃ­a de enfermedades';
 
 $LD['outcome']='Desenlace';
 
@@ -64,7 +65,7 @@ $LD['delivery_time']='Hora del parto';
 
 # 2003-07-24 EL
 
-$LD['this_pregnancy_nr']='Número de embarazos';
+$LD['this_pregnancy_nr']='NÃºmero de embarazos';
 
 $LD['gravida']='Gestas';
 
@@ -84,31 +85,31 @@ $LD['delivery_type']='Tipo de parto';
 
 $LD['delivery_by']='Parto recibido por';
 
-$LD['bp_systolic_high']='Valor sistólico elevado';
+$LD['bp_systolic_high']='Valor sistÃ³lico elevado';
 
-$LD['bp_diastolic_high']='Valor diastólico elevado';
+$LD['bp_diastolic_high']='Valor diastÃ³lico elevado';
 
 $LD['proteinuria']='Proteinuria';
 
-$LD['labour_duration']='Duración de la labor';
+$LD['labour_duration']='DuraciÃ³n de la labor';
 
-$LD['induction_method']='Método de inducción';
+$LD['induction_method']='MÃ©todo de inducciÃ³n';
 
-$LD['induction_indication']='Indicación para la inducción';
+$LD['induction_indication']='IndicaciÃ³n para la inducciÃ³n';
 
 $LD['is_epidural']='Epidural';
 
 $LD['complications']='Complicaciones';
 
-$LD['perineum']='Periné';
+$LD['perineum']='PerinÃ©';
 
-$LD['blood_loss']='Pérdidas sanguíneas';
+$LD['blood_loss']='PÃ©rdidas sanguÃ­neas';
 
 $LD['blood_loss_unit']='Unidades de sangre perdidas';
 
 $LD['is_retained_placenta']='Placenta retenida';
 
-$LD['post_labour_condition']='Condición post labor';
+$LD['post_labour_condition']='CondiciÃ³n post labor';
 
 $LD['update_preg_details']='Actualizar los detalles del ambarazo';
 
@@ -128,13 +129,13 @@ $LD['sepspace']='Separar con espacios';
 
 $LDNormal='Normal';
 
-$LDBreech='Presentación de nalgas';
+$LDBreech='PresentaciÃ³n de nalgas';
 
-$LDCaesarian='Cesárea';
+$LDCaesarian='CesÃ¡rea';
 
-$LDForceps='Fórceps';
+$LDForceps='FÃ³rceps';
 
-$LDVacuum='Con succ. al vacío';
+$LDVacuum='Con succ. al vacÃ­o';
 
 $LDAlive='Vivo';
 
@@ -142,7 +143,7 @@ $LDStillborn='Nacido muerto';
 
 $LDEarlyNeonatalDeath='Muerte neonatal temprana';
 
-$LDLateNeonatalDeath='Muerte neonatal tardía';
+$LDLateNeonatalDeath='Muerte neonatal tardÃ­a';
 
 $LDDeathUncertainTiming='Muerte de hora imprecisa';
 
@@ -156,7 +157,7 @@ $LDThirdDegreeTear='Desgarro 3°';
 
 $LDBreast='Mama';
 
-$LDFormula='Fórmula';
+$LDFormula='FÃ³rmula';
 
 $LDBoth='ambos';
 
@@ -166,9 +167,9 @@ $LDNeverFed='Nunca alimentado';
 
 $LDAsphyxia='Asfixia';
 
-$LDInfection='Infección';
+$LDInfection='InfecciÃ³n';
 
-$LDCongenitalAbnormality='Anomalía congénita';
+$LDCongenitalAbnormality='AnomalÃ­a congÃ©nita';
 
 $LDTrauma='Trauma';
 
@@ -180,33 +181,33 @@ $LDTrauma='Trauma';
 
 $LDNeonatalJaundice='Ictericia neonatal';
 
-$LDExchangeTransfusion='Exanguineo-transfusión';
+$LDExchangeTransfusion='Exanguineo-transfusiÃ³n';
 
 $LDPhotoTherapy='Fototerapia';
 
-$LDH_I_Encephalopathy='Encefalopatía hipóxica isquémica';
+$LDH_I_Encephalopathy='EncefalopatÃ­a hipÃ³xica isquÃ©mica';
 
-$LDParenteralNutrition='Nutrición parenteral';
+$LDParenteralNutrition='NutriciÃ³n parenteral';
 
 $LDVentilatorySupport='Soporte ventilatorio';
 
 
 
-$LDOxygenTherapy='Terapia con oxígeno';
+$LDOxygenTherapy='Terapia con oxÃ­geno';
 
 $LDCPAP='CPAP';
 
-$LDCongenitalAbnormality='Anomalía congénita';
+$LDCongenitalAbnormality='AnomalÃ­a congÃ©nita';
 
-$LDCongenitalInfection='Infección congénita';
+$LDCongenitalInfection='InfecciÃ³n congÃ©nita';
 
-$LDAcquiredInfection='Infección adquirida';
+$LDAcquiredInfection='InfecciÃ³n adquirida';
 
-$LDGBSInfection='Infección GBS';
+$LDGBSInfection='InfecciÃ³n GBS';
 
-$LDRespDistressSyndrome='Síndrome de distrés respiratorio';
+$LDRespDistressSyndrome='SÃ­ndrome de distrÃ©s respiratorio';
 
-$LDBloodTransfusion='Transfusión sanguínea';
+$LDBloodTransfusion='TransfusiÃ³n sanguÃ­nea';
 
 $LDAntibioticTherapy='Antibioticoterapia';
 
@@ -230,19 +231,18 @@ $LDEpidural='Epidural';
 
 $LDPudendal='Pudenda';
 
-$LDEpisiotomy='Episiotomía';
+$LDEpisiotomy='EpisiotomÃ­a';
 
 $LDNotInduced='No inducida';
 
-$LD['time_to_spont_resp']='Tiempo hasta la respiración espontánea';
+$LD['time_to_spont_resp']='Tiempo hasta la respiraciÃ³n espontÃ¡nea';
 
 $LDMinutes='Minutos';
 
 # 2003-08-26 EL
-$LDParentEncNrMissing='El número de encuentros con la madre está perdido.\\n Salvar de cualquier modo?';
+$LDParentEncNrMissing='El nÃºmero de encuentros con la madre estÃ¡ perdido.\\n Salvar de cualquier modo?';
 $LDPlsEnterDeliveryPlace='Escriba el lugar del alumbramiento.';
 $LDPlsSelectDeliveryMode='Escriba el modo del alumbramiento.';
 $LDPlsEnterDeliveryDate='Escriba la fecha del alumbramiento.';
 $LDPlsEnterDeliveryTime='Escriba la hora del alumbramiento.';
 ?>
-

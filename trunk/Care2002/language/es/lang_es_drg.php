@@ -1,16 +1,19 @@
 <?php
 
-/**
-* Traducido por: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_drg.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
-$LDIcd10='ICD_10'; // ICD = Clasificación Internacional de Enfermedades
-$LDOps301='OPS_301 (quirúrgico)'; // OPS = Operationenschlüssel - Código alemán para procedimientos quirúrgicos
-$LDBack2Logbook='Volver a la bitácora';
-$LDIcd10Search='Búsqueda en el ICD-10';
-$LDSearch4ICD10='Buscar el código en ICD-10';
-$LDSearch4OPS301='Buscar en el código OPS-301';
-$LDDescription='Descripción';
+$LDIcd10='ICD_10'; // ICD = ClasificaciÃ³n Internacional de Enfermedades
+$LDOps301='OPS_301 (quirÃºrgico)'; // OPS = OperationenschlÃ¼ssel - CÃ³digo alemÃ¡n para procedimientos quirÃºrgicos
+$LDBack2Logbook='Volver a la bitÃ¡cora';
+$LDIcd10Search='BÃºsqueda en el ICD-10';
+$LDSearch4ICD10='Buscar el cÃ³digo en ICD-10';
+$LDSearch4OPS301='Buscar en el cÃ³digo OPS-301';
+$LDDescription='DescripciÃ³n';
 $LDMainAuxDiag='Principal/Auxiliar';
 $LDMainAuxOp='Procedimiento Principal/Auxiliar';
 $LDDiagBy='Diagnosticado por';
@@ -19,19 +22,19 @@ $LDInclusive='Inclusiones';
 $LDExclusive='Exclusiones';
 $LDNotes='Notas';
 $LDRemarks='Comentarios';
-$LDExtraCodes='Códigos adicionales';
-$LDAddCodes='Notas o códigos adicionales';
+$LDExtraCodes='CÃ³digos adicionales';
+$LDAddCodes='Notas o cÃ³digos adicionales';
 $LDApplySelection='Aplicar selecciones';
-$LDSGBV='SGB_V';  // ¡¡No traducir!!
-$LDLocalization='Localización';
-$LDOpsIntern='Código interno';
-$LDSearchCodes='Códigos de búsqueda';
-$LDQuickList='Lista rápida';
-$LDConvert2IcdOps='->ICD/ICPM';  // ¡¡No traducir!!
+$LDSGBV='SGB_V';  // Â¡Â¡No traducir!!
+$LDLocalization='LocalizaciÃ³n';
+$LDOpsIntern='CÃ³digo interno';
+$LDSearchCodes='CÃ³digos de bÃºsqueda';
+$LDQuickList='Lista rÃ¡pida';
+$LDConvert2IcdOps='->ICD/ICPM';  // Â¡Â¡No traducir!!
 
 $LDSearch='Buscar';
-$LDOperation='Operación';
-$LDAlertSureDelete='¿Está seguro que desea borrar este registro?';
+$LDOperation='OperaciÃ³n';
+$LDAlertSureDelete='Â¿EstÃ¡ seguro que desea borrar este registro?';
 
 $LDAux='Aux';   // A = Auxiliar
 $LDMain='Principal'; // M = Principal
@@ -40,17 +43,17 @@ $LDLeft='Izq';   // L = Izquierda
 $LDBoth='Ambos lados';  // B = Ambos (lados)
 
 $LDDeleteEntry='Borrar el registro';
-$LDNoQuickList='La lista rápida al momento está vacía.';
-$LDClick2Search='Por favor, dé clic aquí para ir a la búsqueda.';
-$LDPossibleCodes='Códigos ICD & ICPM posibles';
+$LDNoQuickList='La lista rÃ¡pida al momento estÃ¡ vacÃ­a.';
+$LDClick2Search='Por favor, dÃ© clic aquÃ­ para ir a la bÃºsqueda.';
+$LDPossibleCodes='CÃ³digos ICD & ICPM posibles';
 /*2003-05-25 EL */
-$LDCategory='Categoría';
+$LDCategory='CategorÃ­a';
 $LDLoc='Loc.';
 $LDBy='Por';
-$LDMostResponsible='Más responsable';
+$LDMostResponsible='MÃ¡s responsable';
 $LDAssociated='Associado';
 $LDNosocomial='Nosocomial';
-$LDIatrogenic='Iatrogénico';
+$LDIatrogenic='IatrogÃ©nico';
 $LDOther='Otro';
 $LDMostResp_s='MR';
 $LDAssociated_s='Asoc';
@@ -64,36 +67,38 @@ $LDRight_s='Der';
 $LDBothSides_s='Ambos';
 /* 2003-05-29 EL*/
 $LDQMarks='??????';
-$LDNonSpecifiedGroup='No agrupado aún';
+$LDNonSpecifiedGroup='No agrupado aÃºn';
 $LDSpecifyGroup='Especifique el grupo';
 $LDCreateGroupName='Crear nuevo nombre de grupo';
 $LDSelect='Seleccionar';
 /*2003-06-01 EL*/
-$LDUseToGroupItems='Use ésto para agrupar los ítems aún no agrupados';
-$LDItemsDegrouped='Al borrar este grupo romperá los vínculos asociados a él.';
+$LDUseToGroupItems='Use Ã©sto para agrupar los Ã­tems aÃºn no agrupados';
+$LDItemsDegrouped='Al borrar este grupo romperÃ¡ los vÃ­nculos asociados a Ã©l.';
 $LDOptions='Opciones';
 /*2003-06-01 EL*/
-$LDCreateInternDRGGroup='Crear un nuevo grupo relacionado con el diagnóstico';
-$LDInternalCodeNr='Código Interno No.';
-$LDSynonyms='Sinónimos o palabras clave';
+$LDCreateInternDRGGroup='Crear un nuevo grupo relacionado con el diagnÃ³stico';
+$LDInternalCodeNr='CÃ³digo Interno No.';
+$LDSynonyms='SinÃ³nimos o palabras clave';
 $LDSeparateCommas='Separe las palabras con comas';
-$LDIsSubGroup='¿Es un subgrupo?';
-$LDParentCodeNr='Código de Autoría No.';
+$LDIsSubGroup='Â¿Es un subgrupo?';
+$LDParentCodeNr='CÃ³digo de AutorÃ­a No.';
 $LDIfSubGroup='Si el grupo es un subgrupo';
 $LDAuxillaryNotes='Notas auxiliares';
-$LDStdCodeNr='No. de código estándar';
+$LDStdCodeNr='No. de cÃ³digo estÃ¡ndar';
 $LDIfAvailable='De estar disponible';
-$LDYes='Sí';
+$LDYes='SÃ­';
 $LDNo='No';
 $LDExtraNotes='Apuntes adicionales';
-$LDAlertNoCode='Por favor, ingrese el código del grupo.';
-$LDAlertNoDescription='Por favor, ingrese la descripción del código.';
+$LDAlertNoCode='Por favor, ingrese el cÃ³digo del grupo.';
+$LDAlertNoDescription='Por favor, ingrese la descripciÃ³n del cÃ³digo.';
 /*2003-06-07 EL*/
-$LDCode='Código';
+$LDCode='CÃ³digo';
 /*2003-06-13 EL*/
-$LDAddGroupEncounter='Añada el grupo a reunirse';
+$LDAddGroupEncounter='AÃ±ada el grupo a reunirse';
 $LDMain_s='Principal';
 $LDSupplemental='Suplementario';
 $LDSupp_s='Supl.';
 $LDCreateNew='Crear nuevo';
+
+$LDSureToCreateNewGr='Va a crear un nuevo cÃ³digo de grupo';
 ?>

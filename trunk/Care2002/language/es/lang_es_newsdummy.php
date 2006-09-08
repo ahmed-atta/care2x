@@ -1,18 +1,23 @@
 <?php
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+
+/*
+ * Nombre: lang_es_newsdummy.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * Versi√≥n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
+ 
 print '
 		<FONT  SIZE=+1 COLOR="#cc0000" FACE="verdana,Arial">
-		<b>'.ucfirst($LDNewsDummy[$i]).' artÌculo</b>
+		<b>'.ucfirst($LDNewsDummy[$i]).' art√≠culo</b>
 			</FONT>
 		<BR>
 		<font size=-1 color="#000000" face="arial">
-		<b>'.$LDNewsDummy[$i].' la informaciÛn de noticias o artÌculos ser·n mostrados aquÌ.</b><p>
-			Usted puede publicar sus noticias, informaciÛn, memorandos, etc. en esta ·rea.
-			Con el sencillo redactor que le proporcionamos, puede componer y publicar su artÌculo de una manera f·cil y r·pida.
-			 El redactor le guiar· paso a paso.
+		<b>'.$LDNewsDummy[$i].' la informaci√≥n de noticias o art√≠culos ser√°n mostrados aqu√≠.</b><p>
+			Usted puede publicar sus noticias, informaci√≥n, memorandos, etc. en esta √°rea.
+			Con el sencillo redactor que le proporcionamos, puede componer y publicar su art√≠culo de una manera f√°cil y r√°pida.
+			 El redactor le guiar√° paso a paso.
 
-			Usted puede incluir una fotografÌa para completar el artÌculo.<p>
-			Escriba su artÌculo ahora...</font>';
+			Usted puede incluir una fotograf√≠a para completar el art√≠culo.<p>
+			Escriba su art√≠culo ahora...</font>';
 ?>

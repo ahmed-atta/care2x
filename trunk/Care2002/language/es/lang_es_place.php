@@ -1,52 +1,55 @@
 <?php
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_place.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 $LDPlace='Lugar';
-$LDAddress='Dirección';
+$LDAddress='DirecciÃ³n';
 $LDStreet='Calle';
-$LDStreetNr='Número de la calle';
-$LDZipCode='Código postal';
+$LDStreetNr='NÃºmero de la calle';
+$LDZipCode='CÃ³digo postal';
 $LDProvince='Provincia';
 $LDCity='Ciudad';
 $LDTown='Parroquia';
 $LDCityTown='Ciudad/Parroquia';
-$LDRegion='Región';
-$LDCountry='País';
+$LDRegion='RegiÃ³n';
+$LDCountry='PaÃ­s';
 $LDData='Datos';
 $LDNewData='Datos nuevos';
-$LDNewDataTxt='Ingrese los nuevos datos de la dirección';
+$LDNewDataTxt='Ingrese los nuevos datos de la direcciÃ³n';
 $LDUpdateData='Actualizar los datos';
 $LDListAll='Muestre la lista completa';
 $LDManager='Gerente';
 $LDNeedEmptyFormPls='Necesito un formulario en blanco, por favor.';
 $LDEnterAllFields='Por favor, llene todos los campos marcados con <font color="red"><b>*</b></font>';
 $LDPlsCheckData='Por favor, revise los datos.';
-$LDPlsEnterInfo='Por favor, ingrese la información';
+$LDPlsEnterInfo='Por favor, ingrese la informaciÃ³n';
 $LDListAllTxt='Muestre una lista de todas las direcciones disponibles';
 $LDSearch='Buscar';
-$LDSearchTxt='Buscar los datos de una dirección';
+$LDSearchTxt='Buscar los datos de una direcciÃ³n';
 $LDNewCityTown='Ciudad/parroquia nueva';
-$LDPlsEnterInfo='Por favor ingrese la información';
-$LDAlertNoCityTownName='No escribió el nombre de la ciudad o parroquia.';
+$LDPlsEnterInfo='Por favor ingrese la informaciÃ³n';
+$LDAlertNoCityTownName='No escribiÃ³ el nombre de la ciudad o parroquia.';
 $LDCityTownName='Nombre de la ciudad/parroquia';
-$LDISOCountryCode='Código ISO de país';
-$LDUNECELocalCode='Código de lugar UNECE';
-$LDUNECELocalCodeType='Tipo de código de lugar UNECE';
+$LDISOCountryCode='CÃ³digo ISO de paÃ­s';
+$LDUNECELocalCode='CÃ³digo de lugar UNECE';
+$LDUNECELocalCodeType='Tipo de cÃ³digo de lugar UNECE';
 $LDUNECEModifier='Modificador UNECE';
 $LDUNECECoordinates='Coordenadas UNECE';
-$LDWebsiteURL='Dirección web informativa del sitio';
+$LDWebsiteURL='DirecciÃ³n web informativa del sitio';
 $LDCityTownExists='Ya existe ese nombre de ciudad o pueblo.';
 $LDDataNoSave='Los datos ingresados no pueden ser guardados.';
 $LDPlsChangeName='Por favor ingrese un nombre diferente';
-$LDAddressNameExists='La dirección ya existe.';
-$LDAddressInfoSaved='Los datos de dirección fueron guardados exitosamente.';
-$LDSearchPrompt='Por favor, ingrese un nombre de dirección o código de área local';
+$LDAddressNameExists='La direcciÃ³n ya existe.';
+$LDAddressInfoSaved='Los datos de direcciÃ³n fueron guardados exitosamente.';
+$LDSearchPrompt='Por favor, ingrese un nombre de direcciÃ³n o cÃ³digo de Ã¡rea local';
 #2004-09-02
-$LDWrongUneceLocCode = 'UNECE location code type accepts only numbers between 0 and 99.';
-$LDEnterZero = 'If you do not know the value please enter 0';
-$LDEnterISOCountryCode = 'Please enter the ISO country code.';
-$LDEnterQMark ='If you do not know the code please enter a question mark (?)';
+$LDWrongUneceLocCode = 'CÃ³digos de localizaciÃ³n UNECE solamente acepta nÃºmeros entre 0 y 99.';
+$LDEnterZero = 'Si no conoce el valor, escriba 0';
+$LDEnterISOCountryCode = 'Por favor, escriba el cÃ³digo ISO de paÃ­s.';
+$LDEnterQMark ='Si no conoce el cÃ³digo, por favor escriba interrogaciÃ³n (?)';
 ?>

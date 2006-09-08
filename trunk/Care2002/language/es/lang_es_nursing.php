@@ -3,58 +3,62 @@
 *	IMPORTANT!	All words or characters enclosed with ~ ~ must not be changed.
 */
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C. y Dr. Manuel Montemayor
-*/
+/*
+ * Nombre: lang_es_nursing.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com> y Dr. Manuel Montemayor
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
-$LDNursing='Enfermería';
+
+$LDNursing='EnfermerÃ­a';
 $LDStation='Planta';
 
-$LDQuickView='Vista rápida';
+$LDQuickView='Vista rÃ¡pida';
 $LDSearchPatient='Buscar un paciente';
 $LDArchive='Archivo';
-$LDStationMan='Dirección de enf.';
+$LDStationMan='DirecciÃ³n de enf.';
 $LDNews='Noticias';
 $LDMemo='Memo';
-$LDNursingForum='Foro de enfermería';
-$LDNursingStations='Estaciones de enfermería';
+$LDNursingForum='Foro de enfermerÃ­a';
+$LDNursingStations='Estaciones de enfermerÃ­a';
 
-$LDQuickViewTxt='Vista rápida de la ocupación de hoy, de las estaciones de enfermeria.';
+$LDQuickViewTxt='Vista rÃ¡pida de la ocupaciÃ³n de hoy, de las estaciones de enfermeria.';
 $LDSearchPatientTxt='Busque en las estaciones para admitir el paciente.';
 $LDArchiveTxt='Buscar en los archivos de las estaciones. ';
-$LDStationManTxt='Cree un pabellón, inicialice los parámetros como el número de camas, del personal etc.';
-$LDNewsTxt='Lea, escriba o corrija un artículo de la sección de noticias.';
+$LDStationManTxt='Cree un pabellÃ³n, inicialice los parÃ¡metros como el nÃºmero de camas, del personal etc.';
+$LDNewsTxt='Lea, escriba o corrija un artÃ­culo de la secciÃ³n de noticias.';
 $LDMemoTxt='Lea, escriba o edite un memo';
-$LDNursingForumTxt='Foro de discusión de enfermería.';
-$LDNursingStationsTxt='Ocupación, fichas de los pacientes, fotografías, etc.';
+$LDNursingForumTxt='Foro de discusiÃ³n de enfermerÃ­a.';
+$LDNursingStationsTxt='OcupaciÃ³n, fichas de los pacientes, fotografÃ­as, etc.';
 
-$LDCloseBack2Main='Cerrar e ir nuevamente a la página de inicio';
-$LDOld='Histórico';
+$LDCloseBack2Main='Cerrar e ir nuevamente a la pÃ¡gina de inicio';
+$LDOld='HistÃ³rico';
 $LDTodays='Hoy';
-$LDOccupancy='Ocupación';
+$LDOccupancy='OcupaciÃ³n';
 $LDBedNr='Nº de camas';
 $LDOptions='Opciones';
 $LDFreeBed='Desocupado';
 
-$LDNoOcc='La lista de ocupación de hoy todavía no está disponible!';
-$LDClk2Archive='Dé clic aquí para ir al archivo.';
-$LDNrUnocc='Número de camas ocupadas';
-$LDEditStation='Editar datos en la estación/planta ~station~';
-$LDSearchKeyword='Búsqueda de palabras clave';
-$LDWasFound='hallado en ~rows~ lista de ocupación!';
-$LDPlsClk='Por favor, dé clic en el apropiado.';
-$LDMoreFunctions='Más funciones';
+$LDNoOcc='La lista de ocupaciÃ³n de hoy todavÃ­a no estÃ¡ disponible!';
+$LDClk2Archive='DÃ© clic aquÃ­ para ir al archivo.';
+$LDNrUnocc='NÃºmero de camas ocupadas';
+$LDEditStation='Editar datos en la estaciÃ³n/planta ~station~';
+$LDSearchKeyword='BÃºsqueda de palabras clave';
+$LDWasFound='hallado en ~rows~ lista de ocupaciÃ³n!';
+$LDPlsClk='Por favor, dÃ© clic en el apropiado.';
+$LDMoreFunctions='MÃ¡s funciones';
 $LDSrcKeyword='Buscar palabras clave';
-$LDSearchArchive='Incluir archivo en la búsqueda.';
-$LDSearchPrompt='Por favor, incorpore una palabra clave de búsqueda.<br>	Por ejemplo: un nombre, apellido, ambos, etc.';
+$LDSearchArchive='Incluir archivo en la bÃºsqueda.';
+$LDSearchPrompt='Por favor, incorpore una palabra clave de bÃºsqueda.<br>	Por ejemplo: un nombre, apellido, ambos, etc.';
 $LDSearch='Buscar';
 $LDCancel='Cancelar';
-$LDHow2Search='¡Ayuda!  ¿Cómo puedo hallar un paciente? ';
-$LDClk2Show='Dé clic para mostrar datos';
+$LDHow2Search='Â¡Ayuda!  Â¿CÃ³mo puedo hallar un paciente? ';
+$LDClk2Show='DÃ© clic para mostrar datos';
 $LDDate='Fecha';
 $LDClockTime='Hora';
 
-$LDClkDate='Dé clic en la fecha deseada.';
+$LDClkDate='DÃ© clic en la fecha deseada.';
 
 $monat=array('Enero',
 					'Febrero',
@@ -79,18 +83,18 @@ $tage=array(
 					'Sa'
 					);
 					
-$LDDay='Día';					
+$LDDay='DÃ­a';					
 $LDMonth='Mes';
-$LDYear='Año';
+$LDYear='AÃ±o';
 
-$LDDirectSelect='Selección directa';
-$LDPlusYear='Añadir un año';
-$LDMinusYear='Restar un año';
+$LDDirectSelect='SelecciÃ³n directa';
+$LDPlusYear='AÃ±adir un aÃ±o';
+$LDMinusYear='Restar un aÃ±o';
 $LDGo='Ir a';
 $LDLastMonth='Mes anterior';
 $LDNextMonth='Siguiente mes';
 $LDNursingManage='Supervisor';
-$LDShowStationDataTxt='&nbsp;Mostrar, editar, crear, <br> &nbsp;descripción, número de camas<br>	&nbsp;etc.';
+$LDShowStationDataTxt='&nbsp;Mostrar, editar, crear, <br> &nbsp;descripciÃ³n, nÃºmero de camas<br>	&nbsp;etc.';
 $LDLockBedTxt='&nbsp;o desocupe una cama';
 $LDAccessRightsTxt='&nbsp;Crear, ver, cambiar,<br>&nbsp;activar, borrar, etc.';
 $LDShowStationData='Datos de perfil de las estaciones';
@@ -98,53 +102,53 @@ $LDLockBed='Bloquear una cama';
 $LDAccessRights='Derechos de acceso';
 $LDProfile='Perfil';
 $LDCreate='Cree';
-$LDNewStation='Nueva estación/planta';
-$LDDescription='Descripción';
+$LDNewStation='Nueva estaciÃ³n/planta';
+$LDDescription='DescripciÃ³n';
 $LDDept='Servicio';
-$LDRoom1Nr='Número de la primera habitación';
-$LDRoom2Nr='Número de la última habitación';
-$LDRoomPrefix='Prefijo de la habitación';
-$LDNrBeds='Numero de camas en una habitación';
-$LDMaxBeds='Número máximo de camas';
-$LDMaxBeds='Número total de camas disponibles';
+$LDRoom1Nr='NÃºmero de la primera habitaciÃ³n';
+$LDRoom2Nr='NÃºmero de la Ãºltima habitaciÃ³n';
+$LDRoomPrefix='Prefijo de la habitaciÃ³n';
+$LDNrBeds='Numero de camas en una habitaciÃ³n';
+$LDMaxBeds='NÃºmero mÃ¡ximo de camas';
+$LDMaxBeds='NÃºmero total de camas disponibles';
 $LDBed1Prefix='Prefijo para la primera cama';
-$LDBed2Prefix='Prefijo para la última cama';
-$LDHeadNurse='Dirección de enfermería';
-$LDHeadNurse2='Subdireccion de enfermería';
+$LDBed2Prefix='Prefijo para la Ãºltima cama';
+$LDHeadNurse='DirecciÃ³n de enfermerÃ­a';
+$LDHeadNurse2='Subdireccion de enfermerÃ­a';
 $LDNurses='Enfermeras';
-$LDCreateStation='Cree la estación/planta';
+$LDCreateStation='Cree la estaciÃ³n/planta';
 $LDEnterAllFields ='Los campos marcados con <font color=#ff0000><b>*</b></font> deben ser completados.';
 $LDPlsSelect='Seleccione el servicio';
-$LDStationExists='La estación/planta ~station~ ¡ ya existe!  ';
-$LDAlertIncomplete='Falta alguna información.  Por favor, complete la información de los campos marcados con *.';
-$LDAlertRoomNr='El número de la última habitación  DEBE SER MAYOR que el número de la primera!';
-$LDExistStations='Estaciones existentes. Dé clic en la que desee ver.';
+$LDStationExists='La estaciÃ³n/planta ~station~ Â¡ ya existe!  ';
+$LDAlertIncomplete='Falta alguna informaciÃ³n.  Por favor, complete la informaciÃ³n de los campos marcados con *.';
+$LDAlertRoomNr='El nÃºmero de la Ãºltima habitaciÃ³n  DEBE SER MAYOR que el nÃºmero de la primera!';
+$LDExistStations='Estaciones existentes. DÃ© clic en la que desee ver.';
 $LDOtherStations='Otras estaciones';
 $LDEditProfile='Editar el perfil de la sala';
 $LDCreatedOn='Creado:';
 $LDCreatedBy='Creado por:';
 
 /**********do not change the ~station~ **************************/
-$LDTemplateMissing='La plantilla para la estación/planta ~station~ ¡no pudo hallarse!';
-$LDNoOrigData='¡Los datos originales no fueron hallados!';
+$LDTemplateMissing='La plantilla para la estaciÃ³n/planta ~station~ Â¡no pudo hallarse!';
+$LDNoOrigData='Â¡Los datos originales no fueron hallados!';
 
-$LDShowLastList='Mostrar la última lista de ocupación.';
-$LDNoListYet='¡La lista de hoy todavía no se ha creado!';
-$LDLastList='Lista más reciente de ocupación';
-$LDNotToday='(¡¡Hoy no!!)';
-$LDFromYesterday='(¡¡Lista de ayer!!)';
+$LDShowLastList='Mostrar la Ãºltima lista de ocupaciÃ³n.';
+$LDNoListYet='Â¡La lista de hoy todavÃ­a no se ha creado!';
+$LDLastList='Lista mÃ¡s reciente de ocupaciÃ³n';
+$LDNotToday='(Â¡Â¡Hoy no!!)';
+$LDFromYesterday='(Â¡Â¡Lista de ayer!!)';
 /**********do not change the ~nr~ **************************/
-$LDListFrom='Esta lista tiene ~nr~ días de antigüedad.';
+$LDListFrom='Esta lista tiene ~nr~ dÃ­as de antigÃ¼edad.';
 $LDCopyAnyway='De todos modos, copie esta lista para hoy.';
 $LDTakeoverList='Copie esta lista para hoy.';
-$LDDoNotCopy='¡No copie ésta! Cree una nueva lista.';
-$LDOldList='¡Esta es una lista antigua!';
-$LDQuickInformer='Informe rápido';
-$LDAttention='Atención!';
+$LDDoNotCopy='Â¡No copie Ã©sta! Cree una nueva lista.';
+$LDOldList='Â¡Esta es una lista antigua!';
+$LDQuickInformer='Informe rÃ¡pido';
+$LDAttention='AtenciÃ³n!';
 $LDOccupied='Ocupado';
 $LDFree='Libre';
 $LDLocked='Bloqueado';
-$LDDutyDoctor='<b>Médico</b><br>(trabajando)';
+$LDDutyDoctor='<b>MÃ©dico</b><br>(trabajando)';
 $LDShortMale='H';
 $LDShortFemale='M';
 $LDLegend='Leyenda';
@@ -157,14 +161,14 @@ $LDFreeOccupy='Libre/Ocupado';
 $LDMale='Masculino';
 $LDFemale='Femenino';
 /**********do not change the ~station~ **************************/
-$LDNoInit='La estación/planta ~station~ todavía no está inicializada!';
-$LDIfInit='Para inicializar la estación/planta, dé clic aquí.';
+$LDNoInit='La estaciÃ³n/planta ~station~ todavÃ­a no estÃ¡ inicializada!';
+$LDIfInit='Para inicializar la estaciÃ³n/planta, dÃ© clic aquÃ­.';
 $LDShowPatData='Abra el fichero de datos del paciente';
-$LDReleasePatient='Dé el alta al paciente';
+$LDReleasePatient='DÃ© el alta al paciente';
 $LDNoticeRW='Leer o escribir un aviso';
-$LDInfoUnlock='Leer o abrir información';
+$LDInfoUnlock='Leer o abrir informaciÃ³n';
 $LDPatListElements=array(
-										'Habitación',
+										'HabitaciÃ³n',
 										'Cama',
 										'Apellido, Nombre',
 										'Fecha de nacimiento',
@@ -173,11 +177,11 @@ $LDPatListElements=array(
 										'Opciones'
 										);
 /********** NOTE: !! do not change the \'+b+\' and \'+r+\'  !! **************************/
-$LDConfirmUnlock='Realmente desean abrir la \'+b+\' cama en la habitación \'+r+\' ?';							
+$LDConfirmUnlock='Realmente desean abrir la \'+b+\' cama en la habitaciÃ³n \'+r+\' ?';							
 /********** NOTE: !! do not change the \'+t+\' \'+n+\' and \'+r+b+\'  **************************/
-$LDConfirmDelete='Realmente desea suprimir \'+t+\' \'+n+\' de la habitación \'+r+b+\'?';
-$LDConfirmLock='¿Realmente desea bloquear esta cama?';
-$LDClk2Occupy='Dé clic para ocupar esta cama';
+$LDConfirmDelete='Realmente desea suprimir \'+t+\' \'+n+\' de la habitaciÃ³n \'+r+b+\'?';
+$LDConfirmLock='Â¿Realmente desea bloquear esta cama?';
+$LDClk2Occupy='DÃ© clic para ocupar esta cama';
 /*$LDInsurance=array(
 								x=>'Pago',
 								privat=>'Privado',
@@ -186,13 +190,13 @@ $LDClk2Occupy='Dé clic para ocupar esta cama';
 */
 $LDSave='Guardar';
 $LDNurse='Enfermera';
-$LDYesSure='Sí, estoy seguro. Dé el alta al paciente.';
-$LDFtpAttempted='Intentó conectar con el SERVIDOR FTP .<br>El SERVIDOR FTP puede que no funcione. Si este problema persiste mucho tiempo, contacte con el Departamento de informática.';
-$LDFtpNoLink='No fue posible hacer la conexión por FTP';
-$LDJustReleased='El paciente fue dado de alta. Dé clic en \'Cerrar\' para continuar.';
+$LDYesSure='SÃ­, estoy seguro. DÃ© el alta al paciente.';
+$LDFtpAttempted='IntentÃ³ conectar con el SERVIDOR FTP .<br>El SERVIDOR FTP puede que no funcione. Si este problema persiste mucho tiempo, contacte con el Departamento de informÃ¡tica.';
+$LDFtpNoLink='No fue posible hacer la conexiÃ³n por FTP';
+$LDJustReleased='El paciente fue dado de alta. DÃ© clic en \'Cerrar\' para continuar.';
 $LDReleaseType='Tipo de alta';
 $LDRegularRelease='Alta normal';
-$LDSelfRelease='El paciente salió del hospital por su propia voluntad';
+$LDSelfRelease='El paciente saliÃ³ del hospital por su propia voluntad';
 $LDEmRelease='Fue sacado del hospital por razones de emergencia';
 $LDAlertNoName='Por favor escriba su nombre.';
 $LDAlertNoDate='Escriba la fecha en el formulario: formato: dd.mm.AAAA.';
@@ -203,100 +207,100 @@ $LDClose='Cerrar';
 $LDHelp='Ayuda';
 $LDReset='Borrar';
 
-$LDNoLabReport='¡No hay informes disponibles del laboratorio!';
+$LDNoLabReport='Â¡No hay informes disponibles del laboratorio!';
 $LDFeverCurve='Curva de fiebre';
-//$LDNursingReport='Informe de enfermería';
+//$LDNursingReport='Informe de enfermerÃ­a';
 $LDNursingReport='Informe de enferm.';
-$LDDocsPrescription='Instrucciones del médico';
-//$LDNursingPlan='Plan de trabajo de enfermería';
+$LDDocsPrescription='Instrucciones del mÃ©dico';
+//$LDNursingPlan='Plan de trabajo de enfermerÃ­a';
 $LDNursingPlan='Plan de trabajo de enferm.';
 $LDRootData='Datos de origen';
 $LDReports='Informes diagnosticos';
-//$LDLabReports='Análisis del laboratorio';
+//$LDLabReports='AnÃ¡lisis del laboratorio';
 $LDLabReports='Resultados de labor.';
-$LDPhotos='Fotografías';
+$LDPhotos='FotografÃ­as';
 $LDChkUpRequests='Peticiones de chequeo';
-$LDPleaseSelect='Seleccione la petición de prueba diagnóstica';
-$LDSetColorRider='Dé clic para fijar o reiniciar el conductor de color';
+$LDPleaseSelect='Seleccione la peticiÃ³n de prueba diagnÃ³stica';
+$LDSetColorRider='DÃ© clic para fijar o reiniciar el conductor de color';
 $LDDiet='Dieta';
-$LDBackDay='Ir 1 día hacia atrás. (Use el botón derecho para incorporar cualquier fecha)';
-$LDFwdDay='Ir 1 día hacia adelante. (Use el botón derecho para incorporar cualquier fecha)';
-$LDClk2PlanDiet='Dé clic para planear la dieta para este día';
+$LDBackDay='Ir 1 dÃ­a hacia atrÃ¡s. (Use el botÃ³n derecho para incorporar cualquier fecha)';
+$LDFwdDay='Ir 1 dÃ­a hacia adelante. (Use el botÃ³n derecho para incorporar cualquier fecha)';
+$LDClk2PlanDiet='DÃ© clic para planear la dieta para este dÃ­a';
 
 $LDAllergy='Alergias';
-$LDDiagnosisTherapy='Diagnóstico/Terapia';
-$LDBpTemp='Temperatura/Tensión arterial';
+$LDDiagnosisTherapy='DiagnÃ³stico/Terapia';
+$LDBpTemp='Temperatura/TensiÃ³n arterial';
 $LDPtAtgEtc='PT, Atg, etc';
 $LDAntiCoag='Anticoagulantes';
 $LDExtraNotes='Notas';
-$LDMedication='Medicación';
+$LDMedication='MedicaciÃ³n';
 $LDIvPort='Intravenosos';
-$LDPtAtgEtcTxt='Terapia física, anticoagulación, etc.';
-$LDExtraNotesTxt='Notas, LOT, cambio de número, etc.';
+$LDPtAtgEtcTxt='Terapia fÃ­sica, anticoagulaciÃ³n, etc.';
+$LDExtraNotesTxt='Notas, LOT, cambio de nÃºmero, etc.';
 
-$LDBp='Tensión arterial';
+$LDBp='TensiÃ³n arterial';
 $LDTemp='Temperatura';
 
-$LDClk2Enter='Dé clic para ingresar ~tagword~';
-$LDClk2EnterDaily='Dé clic para ingresar ~tagword~ en este día';
-$LDSpecialsExtra='Notas, diagnósticos adicionales';
-$LDClk2PlanDaily='Dé clic al plan ~tagword~ para este día';
-$LDInputWin='Ventana de ingreso de información';
+$LDClk2Enter='DÃ© clic para ingresar ~tagword~';
+$LDClk2EnterDaily='DÃ© clic para ingresar ~tagword~ en este dÃ­a';
+$LDSpecialsExtra='Notas, diagnÃ³sticos adicionales';
+$LDClk2PlanDaily='DÃ© clic al plan ~tagword~ para este dÃ­a';
+$LDInputWin='Ventana de ingreso de informaciÃ³n';
 $LDFullDayName=array(
 									'Domingo',
 									'Lunes',
 									'Martes',
-									'Miércoles',
+									'MiÃ©rcoles',
 									'Jueves',
 									'Viernes',
-									'Sábado',
+									'SÃ¡bado',
 									'Domingo',
 									'Lunes',
 									'Martes',
-									'Miércoles',
+									'MiÃ©rcoles',
 									'Jueves',
 									'Viernes',
-									'Sábado',
+									'SÃ¡bado',
 									'Domingo'
 									);
 $LDCurrentEntry='Ingresos actuales';
-$LDEntryPrompt='Incorpore la nueva información aquí';
+$LDEntryPrompt='Incorpore la nueva informaciÃ³n aquÃ­';
 $LDConfirmSetDate='Usted desea fijar \'+dayID+\' ?';
 $LDStartDate='Fecha de comienzo';
-$LDEndDate='Fecha de finalización';
+$LDEndDate='Fecha de finalizaciÃ³n';
 $LDShowCurveDate='Mostrar la curva con el siguiente';
-$LDDailyDiagTher='Tratamiento, informes, plan de enfermería, etc.';
+$LDDailyDiagTher='Tratamiento, informes, plan de enfermerÃ­a, etc.';
 $LDAntiCoagTxt='Anticoagulantes - informe diario';
-$LDSFormatPrompt='Incorpore la nueva información aquí o corrija las entradas actuales:<br><font size=1 > Máximo 16 caracteres.</font>';
-$LDDosage='Dosificación';
+$LDSFormatPrompt='Incorpore la nueva informaciÃ³n aquÃ­ o corrija las entradas actuales:<br><font size=1 > MÃ¡ximo 16 caracteres.</font>';
+$LDDosage='DosificaciÃ³n';
 $LDColorMark='Marcar con el color';
 $LDNormal='Normal';
-$LDAntibiotic='Antibiótico';
-$LDDialytic='Diurético';
-$LDHemolytic='Hemolítico';
+$LDAntibiotic='AntibiÃ³tico';
+$LDDialytic='DiurÃ©tico';
+$LDHemolytic='HemolÃ­tico';
 $LDIntravenous='Intravenoso';
 $LDTodaysReport='Informes de hoy';
-$LDNoMedicineYet='¡No hay medicación todavía!';
+$LDNoMedicineYet='Â¡No hay medicaciÃ³n todavÃ­a!';
 $LDEffectReport='Informe de efectividad';
 $LDFrom='Para';
 $LDTo='A';
-$LDPage='Página';
+$LDPage='PÃ¡gina';
 $LDSignature='Firma';
-$LDInsertSymbol='Ponga este símbolo en el comienzo.';
+$LDInsertSymbol='Ponga este sÃ­mbolo en el comienzo.';
 $LDInsertDate='Inserte la fecha de hoy';
 $LDInsertTimeNow='Inserte la hora actual';
 $LDSpecialNotice='Aviso especial';
-$LDAddendum='Información adicional';
-$LDDiagnosticReport='Informe diagnóstico';
-$LDDoctor='Médico';
-$LDPassword='Contraseña';
+$LDAddendum='InformaciÃ³n adicional';
+$LDDiagnosticReport='Informe diagnÃ³stico';
+$LDDoctor='MÃ©dico';
+$LDPassword='ContraseÃ±a';
 $LDCallBackPhone='Para acceder a preguntas';
 
-$LDPicShots='Toma de fotografías';
-$LDClk2Preview='Dé clic para previsualizar';
+$LDPicShots='Toma de fotografÃ­as';
+$LDClk2Preview='DÃ© clic para previsualizar';
 $LDPreview='Previo';
 $LDShotDate='Fecha de la toma';
-$LDShotNr='Número de fotografía';
+$LDShotNr='NÃºmero de fotografÃ­a';
 
 $LDLastName='Apellidos';
 $LDName='Nombre';
@@ -304,37 +308,37 @@ $LDBirthDate='Fecha de nacimiento';
 $LDLockThisBed='Ver esta cama';
 $LDClk2LockBed='Click para ver esta cama';
 $LDAssignOcc='Asigne un ocupante';
-$LDSearchFound='Resultados de la búsqueda <font color=red><b>~nr~</b></font> pacientes.';
+$LDSearchFound='Resultados de la bÃºsqueda <font color=red><b>~nr~</b></font> pacientes.';
 $LDAssign2Bed='Asigne a este paciente como ocupante';
 $LDSend='Enviar';
-$LDSendLater='Enviar después';
-$LDReqTest='Prueba de diagnóstico solicitada';
+$LDSendLater='Enviar despuÃ©s';
+$LDReqTest='Prueba de diagnÃ³stico solicitada';
 $LDSpeedTest='Prueba urgente.';
-$LDDiagnosticTest='Pedir prueba diagnóstica';
-$LDRelayResult='Comunicar el diagnóstico por TLF/BUSCA';
+$LDDiagnosticTest='Pedir prueba diagnÃ³stica';
+$LDRelayResult='Comunicar el diagnÃ³stico por TLF/BUSCA';
 $LDSpeedCut='Exprese el corte.';
-$LDClk4Phone='Dé clic para mostrar la info del TLF/BUSCA';
+$LDClk4Phone='DÃ© clic para mostrar la info del TLF/BUSCA';
 $LDHour='Horario';
 
-$LDClkHere='Por favor dé clic aquí';
+$LDClkHere='Por favor dÃ© clic aquÃ­';
 
 $LDNoOccList='No hay antecedentes disponibles';
 $LDFromWard='lista de la planta ';
-$LDWithinLast='dentro del último ';
-$LDDays='días.';
+$LDWithinLast='dentro del Ãºltimo ';
+$LDDays='dÃ­as.';
 $LDAvailable='disponible';
 
-$LDQueries='Preguntas al médico';
-$LDChangeWard='Cambio de estación/planta';
+$LDQueries='Preguntas al mÃ©dico';
+$LDChangeWard='Cambio de estaciÃ³n/planta';
 $LDChangeBed='Cambio de cama';
-$LDPatientDied='el paciente falleció';
+$LDPatientDied='el paciente falleciÃ³';
 
 $LDFollowing='following';
-$LDErrorDuplicateBed='Error: existe un registro duplicado en la ocupación de camas en la tabla \'nursing_station_patients\'';
-$LDNoFound='La búsqueda no halló al paciente.';
+$LDErrorDuplicateBed='Error: existe un registro duplicado en la ocupaciÃ³n de camas en la tabla \'nursing_station_patients\'';
+$LDNoFound='La bÃºsqueda no hallÃ³ al paciente.';
 
-$LDNoWardsYet='Todavía no existen estaciones de enfermería.';
-$LDClk2CreateWard='Para crear una estación/planta, por favor dé clic aquí.';
+$LDNoWardsYet='TodavÃ­a no existen estaciones de enfermerÃ­a.';
+$LDClk2CreateWard='Para crear una estaciÃ³n/planta, por favor dÃ© clic aquÃ­.';
 /* 2002-10-12 EL */
 $LDToCreateNewList='Para crear una lista nueva';
 $LD_ddpMMpyyyy='dd.mm.aaaa';
@@ -342,76 +346,76 @@ $LD_yyyyhMMhdd='aaaa-mm-dd';
 $LD_MMsddsyyyy='mm/dd/aaaa';
 
 /* 2002-10-23 EL*/
-$LDQueryDoctor='Consulta al médico';
-$LDDoctorInfo='Información del médico, instrucciones';
-$LDDiagnosticsReport='Ha llegado un reporte de diagnósticos';
-$LDInfusionTherapy='Programa/terapéutica de infusión';
-$LDMonitorFluidDischarge='Supresión de la monitorización de líquidos';
-$LDBloodProgram='Muestra/transfusión de sangre';
-$LDVitalStatistics='Estadísticas vitales';
-$LDAntibioticsProgram='Programa/terapéutica de antibióticos';
+$LDQueryDoctor='Consulta al mÃ©dico';
+$LDDoctorInfo='InformaciÃ³n del mÃ©dico, instrucciones';
+$LDDiagnosticsReport='Ha llegado un reporte de diagnÃ³sticos';
+$LDInfusionTherapy='Programa/terapÃ©utica de infusiÃ³n';
+$LDMonitorFluidDischarge='SupresiÃ³n de la monitorizaciÃ³n de lÃ­quidos';
+$LDBloodProgram='Muestra/transfusiÃ³n de sangre';
+$LDVitalStatistics='EstadÃ­sticas vitales';
+$LDAntibioticsProgram='Programa/terapÃ©utica de antibiÃ³ticos';
 $LDAnticoagProgram='Anticoagulantes';
-$LDSpecialCare='Cuidados especiales, estadísticas vitales';
+$LDSpecialCare='Cuidados especiales, estadÃ­sticas vitales';
 $LDTestConsultRequested='Ha llegado una solicitud de prueba/consulta';
-$LDNurseReport='Reporte (nuevo) de enfermería ';
+$LDNurseReport='Reporte (nuevo) de enfermerÃ­a ';
 $LDDaily='Diariamente';
 $LDSaveChanges='Guardar los cambios';
 /* 2002-12-07*/
-$LDNoDiagReport='No hay reportes diagnósticos disponibles.';
+$LDNoDiagReport='No hay reportes diagnÃ³sticos disponibles.';
 /* 2003-03-23 EL */
-$LDNursesList='Lista de enfermería';
-$LDNursesListTxt='Lista, ver, crear y editar la lista de enfermería';
+$LDNursesList='Lista de enfermerÃ­a';
+$LDNursesListTxt='Lista, ver, crear y editar la lista de enfermerÃ­a';
 /* 2003-04-18 */
 $LDInsurance='General';
 $LDPrivate='Privado';
 $LDSelfPay='Pago';
 /* 2003-04-21 EL */
-$LDRoom='Habitación';
-$LDAdm_Nr='No. de admisión';
+$LDRoom='HabitaciÃ³n';
+$LDAdm_Nr='No. de admisiÃ³n';
 $LDStatus='Estado actual';
-$LDInWard='En la estación/planta';
+$LDInWard='En la estaciÃ³n/planta';
 /* 2003-04-23 EL */
-$LDWard_ID='Identif. de la estación/planta';
+$LDWard_ID='Identif. de la estaciÃ³n/planta';
 $LDNoSpecChars='No special characters allowed';
 /* 2003-04-24 EL*/
-$LDTemporaryCloseWard='Cerrar temporalmente esta estación/planta';
-$LDIrreversiblyCloseWard='Cerrar irreversiblemente esta estación/planta';
-$LDSureTemporaryClose='Está seguro que desea ¿cerrar temporalmente esta estación/planta?';
-$LDSureIrreversibleClose='Está seguro que desea ¿cerrar irreversiblemente esta estación/planta?';
+$LDTemporaryCloseWard='Cerrar temporalmente esta estaciÃ³n/planta';
+$LDIrreversiblyCloseWard='Cerrar irreversiblemente esta estaciÃ³n/planta';
+$LDSureTemporaryClose='EstÃ¡ seguro que desea Â¿cerrar temporalmente esta estaciÃ³n/planta?';
+$LDSureIrreversibleClose='EstÃ¡ seguro que desea Â¿cerrar irreversiblemente esta estaciÃ³n/planta?';
 /* Do not translate the ~str~ , it will be replaced with the ward's name by the program */
-$LDWardNoClose='La estación/planta ~str~ no pudo cerrarse debido a que aún hay pacientes ingresados.<br>Debe dar el alta a todos los pacientes antes de poder cerrarla.';
-$LDBackToWardProfile='Para retornar a los parámetros de la planta';
-$LDShowWardOccupancy='Para mostrar la lista de ocupación de la estación/planta';
+$LDWardNoClose='La estaciÃ³n/planta ~str~ no pudo cerrarse debido a que aÃºn hay pacientes ingresados.<br>Debe dar el alta a todos los pacientes antes de poder cerrarla.';
+$LDBackToWardProfile='Para retornar a los parÃ¡metros de la planta';
+$LDShowWardOccupancy='Para mostrar la lista de ocupaciÃ³n de la estaciÃ³n/planta';
 $LDTemporaryClosed='Temporalmente cerrado';
-$LDReopenWard='Reabrir esta estación/planta';
-$LDSureReopenWard='¿Está seguro que desea reabrir esta estación/planta?';
-$LDShortDescription='Descripción corta';
-$LDRoomShortDescription='Descripción corta de la habitación';
-$LDRoomNotCreated='Las habitaciones no han sido creadas aún';
+$LDReopenWard='Reabrir esta estaciÃ³n/planta';
+$LDSureReopenWard='Â¿EstÃ¡ seguro que desea reabrir esta estaciÃ³n/planta?';
+$LDShortDescription='DescripciÃ³n corta';
+$LDRoomShortDescription='DescripciÃ³n corta de la habitaciÃ³n';
+$LDRoomNotCreated='Las habitaciones no han sido creadas aÃºn';
 /* 2003-05-10 EL */
-$LDChangeRoom='Cambio de habitación';
+$LDChangeRoom='Cambio de habitaciÃ³n';
 /*2003-06-14 EL*/
-$LDNrOfBedsRoom='El número de camas en la habitación';
-$LDIsNotANumber='no es un número válido';
+$LDNrOfBedsRoom='El nÃºmero de camas en la habitaciÃ³n';
+$LDIsNotANumber='no es un nÃºmero vÃ¡lido';
 $LDWaitingList='Lista de espera';
 $LDShowAll='Mostrar todos';
-$LDShowWardOnly='Mostrar solamente la estación/planta';
-$LDTransferToBed='Transferir a otra cama en esta estación/planta';
-$LDTransferToWard='Transferir a otra estación/planta';
+$LDShowWardOnly='Mostrar solamente la estaciÃ³n/planta';
+$LDTransferToBed='Transferir a otra cama en esta estaciÃ³n/planta';
+$LDTransferToWard='Transferir a otra estaciÃ³n/planta';
 $LDShowBeds='Mostrar las camas';
 $LDTransferPatient='Transferir al paciente';
-$LDDRG='Grupos relacionados con el diagnóstico';
+$LDDRG='Grupos relacionados con el diagnÃ³stico';
 $LDFinanceType='Seguro';
 #2003-08-02 EL
-$LDOutToInpatient='Cambiar los datos de admisión del paciente que ya está ingresado';
-$LDTransferClinic='Transferir a la clínica o departamento';
-$LDClinic='Clínica';
+$LDOutToInpatient='Cambiar los datos de admisiÃ³n del paciente que ya estÃ¡ ingresado';
+$LDTransferClinic='Transferir a la clÃ­nica o departamento';
+$LDClinic='ClÃ­nica';
 $LDOwnPatient='Paciente propio';
 $LDNonOwnPatient='No es paciente propio';
 # 2003-08-04 EL
-$LDShowClinicOnly='Solamente a esta clínica';
+$LDShowClinicOnly='Solamente a esta clÃ­nica';
 # 2003-09-16 EL
-$LDAdmissionData='Datos de Admisión';
+$LDAdmissionData='Datos de AdmisiÃ³n';
 $LDShowPhoto='Mostrar Foto';
-$LDOpenWardManagement='Abrir pabellon para administración';
+$LDOpenWardManagement='Abrir pabellÃ³n para administraciÃ³n';
 ?>

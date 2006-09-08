@@ -1,14 +1,17 @@
 <?php
 
-/**
-* Traducido por: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_images.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
-$LDTogglePreviewOrig='Dé clic para mostrarlo en su tamaño original';
-$LDToggleOrigPreview='Dé clic para mostrarlo en tamaño reducido';
+$LDTogglePreviewOrig='DÃ© clic para mostrarlo en su tamaÃ±o original';
+$LDToggleOrigPreview='DÃ© clic para mostrarlo en tamaÃ±o reducido';
 
 #2004-08-06 EL
-$LDHideJavaApplet = 'Hide control panel';
-$LDShowJavaApplet = 'Show control panel';
-$LDEditWithImageJ = 'Edit image with ImageJ';
+$LDHideJavaApplet = 'Ocultar el panel de control';
+$LDShowJavaApplet = 'Mostrar el panel de control';
+$LDEditWithImageJ = 'Editar imagen con ImageJ';
 ?>

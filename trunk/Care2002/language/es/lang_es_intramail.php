@@ -1,8 +1,11 @@
 <?php
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_intramail.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * Versi√≥n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 $LDClose='Cerrar';
 $LDCancel='Cancelar';
@@ -11,11 +14,11 @@ $LDSave='Grabar';
 $LDReset='Borrar';
 
 
-$LDNewSearch='Nueva b˙squeda';
+$LDNewSearch='Nueva b√∫squeda';
 $LDSearch='Buscar';
 
 $LDContinue='Continuar';
-$LDBack='Volver atr·s';
+$LDBack='Volver atr√°s';
 
 $LDOn='En';
 $LDAt='A';
@@ -29,7 +32,7 @@ $LDSelect='Seleccionar';
 
 $LDOrderArchive='Archivo';
 
-$LDGoodMorning='Buen dÌa';
+$LDGoodMorning='Buen d√≠a';
 $LDGoodDay='Hola, encantado de verlo';
 $LDGoodEvening='Buenas noches';
 
@@ -42,7 +45,7 @@ $LDPageTop='Volver arriba.';
 $LDPreview='Vista previa';
 $LDUpdateData='Actualizar o editar';
 
-$LDNoBack='No. Volver atr·s.';
+$LDNoBack='No. Volver atr√°s.';
 $LDOK='OK';
 $LDName='Nombre';
 $LDPassword='Clave';
@@ -55,23 +58,23 @@ $LDYesSure='Si, estoy seguro.';
 $LDKeywordPrompt='Ingrese una palabra clave a buscar';
 $LDWelcome='Bienvenido';
 
-$LDErrorLogin='Nombre o clave incorrectos. Por favor ingrÈselos correctamente.';
-$LDErrorForm='El formulario no est· completo. Por favor complÈtelo.';
-$LDErrorPassword='La clave ingresada no es la misma! <br>Por favor corrÌjala. La clave debe ser la misma.';
-$LDErrorIncomplete='Los datos ingresados °no estan completos!  Por favor complete la informaciÛn.';
+$LDErrorLogin='Nombre o clave incorrectos. Por favor ingr√©selos correctamente.';
+$LDErrorForm='El formulario no est√° completo. Por favor compl√©telo.';
+$LDErrorPassword='La clave ingresada no es la misma! <br>Por favor corr√≠jala. La clave debe ser la misma.';
+$LDErrorIncomplete='Los datos ingresados ¬°no estan completos!  Por favor complete la informaci√≥n.';
 
 $LDIntraEmail='Correo interno';
 $LDLogin='Nombre';
-$LDUrEmailAddr='Su direcciÛn de correo';
+$LDUrEmailAddr='Su direcci√≥n de correo';
 
-$LDNotRegUser= 'Usted no est· registrado. Por favor, complete el siguiente formulario para registrarse.';
+$LDNotRegUser= 'Usted no est√° registrado. Por favor, complete el siguiente formulario para registrarse.';
 $LDFirstName='Nombre';
-$LDChoiceAddr='Elija la direcciÛn de correo';
+$LDChoiceAddr='Elija la direcci√≥n de correo';
 $LDAlias='Alias';
 $LDChoicePassword='Elija la clave';
 $LDPassword2x='Reingrese la clave';
 $LDRegister='Registro';
-$LDNewReg='Un nuevo usuario puede ser registrado aquÌ.';
+$LDNewReg='Un nuevo usuario puede ser registrado aqu√≠.';
 
 $LDInbox='Bandeja de entrada';
 $LDNewEmail='Nuevo correo';
@@ -88,7 +91,7 @@ $LDSortDate='Ordenar por fecha';
 $LDSubject='Asunto';
 $LDDate='Fecha';
 $LDTime='Hora';
-$LDSize='TamaÒo';
+$LDSize='Tama√±o';
 $LDFrom='De';
 $LDTo='Para';
 $LDSend='Enviar';
@@ -98,17 +101,17 @@ $LDChange='Cambiar';
 $LDAskAck='Preguntar por acuse de recibo';
 $LDCC='';
 $LDBCC='';
-$LDBCCTxt='Las direcciones BCC no ser·n mostradas en el receptante principal.';
+$LDBCCTxt='Las direcciones BCC no ser√°n mostradas en el receptante principal.';
 $LDRecipient='Receptante';
-$LDQuickAddr='Direcciones r·pidas';
+$LDQuickAddr='Direcciones r√°pidas';
 $LDInsertAddr='Insertar';
-$LDFolderEmpty='la carpeta ~tagword~ est· vacÌa hasta el momento.';
-$LDNoteIntra='Por favor tenga en cuenta que este correo SOLAMENTE se puede enviar y recibir DENTRO DEL CORREO INTERNO. <p>Por favor pulse aquÌ para abrir su bandeja de entrada.';
+$LDFolderEmpty='la carpeta ~tagword~ est√° vac√≠a hasta el momento.';
+$LDNoteIntra='Por favor tenga en cuenta que este correo SOLAMENTE se puede enviar y recibir DENTRO DEL CORREO INTERNO. <p>Por favor pulse aqu√≠ para abrir su bandeja de entrada.';
 $LDEmailSent='El correo fue enviado exitosamente';
-$LDConfirmDelete='Est· usted seguro de borrar los correos marcados?';
-$LDAlertNoRecipient='Sin receptante! Por favor ingrese la direcciÛn de correo del receptante.';
+$LDConfirmDelete='Est√° usted seguro de borrar los correos marcados?';
+$LDAlertNoRecipient='Sin receptante! Por favor ingrese la direcci√≥n de correo del receptante.';
 $LDAlertNoSubject='Sin asunto! si quiere enviar el correo sin asunto, pulse OK.';
-$LDAlertNoText='Usted no escribiÛ nada. Por favor escriba primero su mensaje antes de enviar.';
+$LDAlertNoText='Usted no escribi√≥ nada. Por favor escriba primero su mensaje antes de enviar.';
 $LDRead='Leer';
 $LDBack2='Volver a';
 $LDReply2='Responder a';
@@ -116,25 +119,25 @@ $LDReply='Responder';
 $LDResend='Enviar nuevamente';
 $LDReplyAgain='Responder nuevamente';
 $LDForward='Reenviar';
-$LDClk4Printer='Pulse aquÌ para abrir una versiÛn imprimible';
-$LDPrinterVersion='VersiÛn imprimible';
-$LDAskDeleteMail='Est· usted seguro de borrar este correo?';
+$LDClk4Printer='Pulse aqu√≠ para abrir una versi√≥n imprimible';
+$LDPrinterVersion='Versi√≥n imprimible';
+$LDAskDeleteMail='Est√° usted seguro de borrar este correo?';
 $LDPrint='Imprimir';
 $LDAttach='Datos adjuntos';
-$LDEmailAddr='DirecciÛn de correo';
+$LDEmailAddr='Direcci√≥n de correo';
 $LDShortName='Sobrenombre';
 $LDSortName='Ordenar por nombre';
-$LDMoreInfo='Mas informaciÛn';
+$LDMoreInfo='Mas informaci√≥n';
 /*$LDTakeOver='Apropiarse';*/
 $LDTakeOver='Adquirir';
 $LDJustReset='Borrar';
-$LDMaximum='M·ximo';
-$LDSaveNewAddr='Grabar esta nueva direcciÛn de correo en la libreta de direcciones.';
+$LDMaximum='M√°ximo';
+$LDSaveNewAddr='Grabar esta nueva direcci√≥n de correo en la libreta de direcciones.';
 $LDWriteEmail='Componer correo';
-$LDAddNewAddr='Agregar una nueva direcciÛn de correo';
-$LDConfirmDeleteAddr='øEst· usted seguro de borrar las direcciones de correo marcadas?';
+$LDAddNewAddr='Agregar una nueva direcci√≥n de correo';
+$LDConfirmDeleteAddr='¬øEst√° usted seguro de borrar las direcciones de correo marcadas?';
 
-$LDUrInfo='Su informaciÛn';
+$LDUrInfo='Su informaci√≥n';
 $LDEmailProc='Procesando correo';
 $LDProfile='Perfil';
 $LDProfileTxt='Nombre, alias, modificar, actualizar';
@@ -142,15 +145,15 @@ $LDPasswordChange='Cambiar clave';
 $LDSecretQ='Pregunta secreta';
 $LDSecretQChange='Cambiar pregunta secreta';
 $LDMemberDir='Lista de miembros';
-$LDMemberDirTxt='Registrar la direcciÛn en la lista <br>&nbsp;o borrar de la lista';
-$LDReply2Txt='Cambiar la direcciÛn \'Responder a\'';
-$LDEmailAddrChange='Cambiar la direcciÛn de correo';
+$LDMemberDirTxt='Registrar la direcci√≥n en la lista <br>&nbsp;o borrar de la lista';
+$LDReply2Txt='Cambiar la direcci√≥n \'Responder a\'';
+$LDEmailAddrChange='Cambiar la direcci√≥n de correo';
 $LDSignature='Firma';
-$LDSignatureTxt='Crear un mensaje de despedida;<br>&nbsp; Èsta se incluye autom·ticamente<br>&nbsp;en cada correo enviado.';
+$LDSignatureTxt='Crear un mensaje de despedida;<br>&nbsp; √©sta se incluye autom√°ticamente<br>&nbsp;en cada correo enviado.';
 
 $LDEmail2Drafts='El correo fue grabado como borrador.';
-$LDNoEmailAddress='°Falta la direcciÛn de correo! Por favor ingrese una direcciÛn de correo';
+$LDNoEmailAddress='¬°Falta la direcci√≥n de correo! Por favor ingrese una direcci√≥n de correo';
 $LDLogout='Salir';
-$LDNameIsUsed='La direcciÛn de correo ya est· siendo usada por alguien. Por favor elija otro nombre de usuario.';
+$LDNameIsUsed='La direcci√≥n de correo ya est√° siendo usada por alguien. Por favor elija otro nombre de usuario.';
 
 ?>

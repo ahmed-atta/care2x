@@ -1,28 +1,31 @@
 <?php
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+
+/*
+ * Nombre: lang_es_ambulatory.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 /* 2002-10-02 EL */
 $LDDepartments='Departamento';
 $LDPendingRequest='Tareas pendientes';
-$LDPendingRequestTxt='Recepción, listar, imprimir, búsquedas y resultados';
-$LDGeneralSurgery='Cirugía general';
+$LDPendingRequestTxt='RecepciÃ³n, listar, imprimir, bÃºsquedas y resultados';
+$LDGeneralSurgery='CirugÃ­a general';
 $LDInternalMed='Ambulatorio - Medicina interna';
 $LDEmergency='Urgencias';
-$LDSonography='Ecografía';
-$LDNuclearMed='Diagnóstico nuclear';
-$LDAdmission='Admisión';
-$LDAdmissionTxt='Nueva cita para ambulatorio, búsqueda, archivo';
+$LDSonography='EcografÃ­a';
+$LDNuclearMed='DiagnÃ³stico nuclear';
+$LDAdmission='AdmisiÃ³n';
+$LDAdmissionTxt='Nueva cita para ambulatorio, bÃºsqueda, archivo';
 $LDNews='Noticias';
-$LDNewsTxt='Noticias exclusivamente clínicas, memorias, info, etc.';
+$LDNewsTxt='Noticias exclusivamente clÃ­nicas, memorias, info, etc.';
 # 2003-08-01 EL
 $LDAppointments='Citas';
 $LDAppointmentsTxt='Citas del paciente en este Departamento';
 $LDPatientWaitingList='Pacientes';
 $LDPWListTxt='Pacientes de consulta externa';
-$LDOutpatientClinic='Clínica del día';
+$LDOutpatientClinic='ClÃ­nica del dÃ­a';
 $LDGeneralAmbulatory='Ambulatorio general';
-$LDAmbulatory='Clínica del dia';
+$LDAmbulatory='ClÃ­nica del dia';
 ?>
-

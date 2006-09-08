@@ -1,79 +1,82 @@
 <?php
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_stdpass.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 $LDUserPrompt='Usuario';
-$LDPwPrompt='Contraseña';
+$LDPwPrompt='ContraseÃ±a';
 $LDSubmitBut='Continuar...';
-$LDPwNeeded='Necesita contraseña';
-$LDIntroTo='Introducción para editar los artículos de noticias';
-$LDWhatTo='¿Qué y cómo puedo editar los artículos de noticias?';
+$LDPwNeeded='Necesita contraseÃ±a';
+$LDIntroTo='IntroducciÃ³n para editar los artÃ­culos de noticias';
+$LDWhatTo='Â¿QuÃ© y cÃ³mo puedo editar los artÃ­culos de noticias?';
 
-$LDWrongEntry='¡Entradas incorrectas!';
-//$LDNoAuth='¡No tiene acceso!';
-$LDNoAuth='¡Usted no tiene permiso de acceso!';
-$LDAuthLocked='¡Su permiso se encuentra bloqueado!';
+$LDWrongEntry='Â¡Entradas incorrectas!';
+//$LDNoAuth='Â¡No tiene acceso!';
+$LDNoAuth='Â¡Usted no tiene permiso de acceso!';
+$LDAuthLocked='Â¡Su permiso se encuentra bloqueado!';
 
 $LDNewData='Datos nuevos';
 $LDEdit='Editar';
 $LDAdmit='Admitir';
 $LDSearch='Buscar';
 $LDArchive='Archivo';
-$LDAdmission='Admisión paciente';
-$LDAdmTargetEntry='Admisión';
+$LDAdmission='AdmisiÃ³n paciente';
+$LDAdmTargetEntry='AdmisiÃ³n';
 $LDAdmTargetSearch='Buscar pacientes admitidos';
 $LDAdmTargetArchive='Investigar en archivo';
 $LDAdmWantEntry='Necesito ingresar un paciente';
 $LDAdmWantSearch='Estoy buscando un paciente';
 $LDAdmWantArchive='Necesito investigar en archivo';
-$LDAdmHow2Enter='Cómo admitir a un paciente';
-$LDAdmHow2Edit='Cómo corregir los datos de pacientes';
-$LDAdmHow2Search='Cómo encontrar los datos de algún paciente';
-$LDAdmHow2Archive='Cómo investigar en el archivo';
+$LDAdmHow2Enter='CÃ³mo admitir a un paciente';
+$LDAdmHow2Edit='CÃ³mo corregir los datos de pacientes';
+$LDAdmHow2Search='CÃ³mo encontrar los datos de algÃºn paciente';
+$LDAdmHow2Archive='CÃ³mo investigar en el archivo';
 
 $LDMedocs='Medocs';
-$LDMedocsHow2Enter='Cómo comenzar un nuevo documento en Medocs';
-$LDMedocsHow2Edit='Cómo editar un Medocs';
-$LDMedocsHow2Search='Cómo encontrar cierto documento de los Medocs';
-$LDMedocsHow2Archive='Cómo investigar en los archivos de Medocs';
+$LDMedocsHow2Enter='CÃ³mo comenzar un nuevo documento en Medocs';
+$LDMedocsHow2Edit='CÃ³mo editar un Medocs';
+$LDMedocsHow2Search='CÃ³mo encontrar cierto documento de los Medocs';
+$LDMedocsHow2Archive='CÃ³mo investigar en los archivos de Medocs';
 
-$LDIntro2='Introducción a';
-$LDWhat2Do='Cómo hacer en';
-$LDHowManage='Cómo utilizar el directorio';
-$LDHowEnter='Cómo introducir un número telefónico';
+$LDIntro2='IntroducciÃ³n a';
+$LDWhat2Do='CÃ³mo hacer en';
+$LDHowManage='CÃ³mo utilizar el directorio';
+$LDHowEnter='CÃ³mo introducir un nÃºmero telefÃ³nico';
 
-$LDPhoneDir='Directorio de teléfonos';
+$LDPhoneDir='Directorio de telÃ©fonos';
 $LDMakeDutyPlan='Cree un plan de trabajo';
-$LDDocsList='Lista de médicos';
-$LDNursingManage='Administración de la estación de enfermería';
+$LDDocsList='Lista de mÃ©dicos';
+$LDNursingManage='AdministraciÃ³n de la estaciÃ³n de enfermerÃ­a';
 
-$LDNursingStation='Oficina de enfermería';
-$LDOrDocu='Documentación en Quirófanos';
-$LDOrLogBook='Libro de registro enfermería en Quirófanos';
-$LDOrNursing='Enfermería en Quirófanos';
+$LDNursingStation='Oficina de enfermerÃ­a';
+$LDOrDocu='DocumentaciÃ³n en quirÃ³fanos';
+$LDOrLogBook='Libro de registro enfermerÃ­a en QuirÃ³fanos';
+$LDOrNursing='EnfermerÃ­a en quirÃ³fanos';
 $LDCreate='Crear';
 $LDPersonList='Lista de personal';
-$LDRepabotActivate='Activar Robot de Reparaciones';
-$LDQBotActivate='Activar Robot Q';
+$LDRepabotActivate='Activar bot de reparaciones';
+$LDQBotActivate='Activar bot Q';
 
-$LDMedLab='Laboratorio médico';
+$LDMedLab='Laboratorio mÃ©dico';
 $LDCancel='Cancelar';
 
 $LDPharmacy='Farmacia';
 $LDOrderArchive='Archivo';
 $LDPharmaOrder='Organizar';
-$LDOrderCat='Mi catálogo de productos';
-$LDPharmaDb='Banco de datos';
+$LDOrderCat='Mi catÃ¡logo de productos';
+$LDPharmaDb='Base de datos';
 $LDPharmaOrderBot='Activar Robot de pedidos';
 
-$LDMedDepot='Insumos médicos';
-$LDMediBotActivate='Activar Robot médico';
-$LDSqlDb='Banco de datos SQL';
-$LDManageAccess='Panel de administración de permisos';
+$LDMedDepot='Insumos mÃ©dicos';
+$LDMediBotActivate='Activar bot mÃ©dico';
+$LDSqlDb='Base de datos SQL o PostgreSQL';
+$LDManageAccess='Panel de administraciÃ³n de permisos';
 $LDListAll='Listar todo';
-$LDSystemLogin='Login de Administración del Sistema ';
+$LDSystemLogin='Login de administraciÃ³n del Sistema ';
 $LDSeeData='Mostrar datos';
 $LDNewData='Introducir nuevos datos';
 
@@ -83,33 +86,33 @@ $LDChangeSaved='Los cambios fueron grabados.';
 $LDPcID='Identidad actual de esta computadora';
 $LDDept='Departamento';
 $LDWard='Planta';
-$LDWardOR='Habitación o No. de quirófano';
-$LDPhoneNr='Número de teléfono de la/las habitaciones';
-$LDIntercomNr='Número de intercomunicador en la/las habitaciones';
-$LDPcIP='Dirección IP de esta computadora';
+$LDWardOR='HabitaciÃ³n o No. de quirÃ³fano';
+$LDPhoneNr='NÃºmero de telÃ©fono de la/las habitaciones';
+$LDIntercomNr='NÃºmero de intercomunicador en la/las habitaciones';
+$LDPcIP='DirecciÃ³n IP de esta computadora';
 $LDSave='Guardar cambios';
-$LDNoChange='No cambie la configuración actual';
+$LDNoChange='No cambie la configuraciÃ³n actual';
 $LDClose='Cerrar';
 $LDLogout='Salir';
 $LDNewLogin='Nuevo login';
-$LDLogoutConfirm='¿Realmente desea salir del sistema?';
+$LDLogoutConfirm='Â¿Realmente desea salir del sistema?';
 $LDOK='OK';
-$LDYes='Sí';
+$LDYes='SÃ­';
 $LDNotReally='No, no realmente.';
-$LDDOCScheduler='Agenda del Médico de Llamada';
-$LDORNOCScheduler='Agenda NOC de quirófanos';
-$LDFotolab='Laboratorio fotográfico';
+$LDDOCScheduler='Agenda del mÃ©dico de Llamada';
+$LDORNOCScheduler='Agenda NOC de quirÃ³fanos';
+$LDFotolab='Laboratorio fotogrÃ¡fico';
 /* 2002-09-08 EL */
-$LDTestRequest='Pedido de prueba diagnóstica';
-$LDTestType=array('patho'=>'Anatomía patológica', 
-                             'chemlabor'=>'Laboratorio médico', 
-							 'baclabor'=>'Laboratorio bacteriológico',
+$LDTestRequest='Pedido de prueba diagnÃ³stica';
+$LDTestType=array('patho'=>'AnatomÃ­a patolÃ³gica', 
+                             'chemlabor'=>'Laboratorio mÃ©dico', 
+							 'baclabor'=>'Laboratorio bacteriolÃ³gico',
 							 'blood'=>'Banco de sangre',
-							 'radio'=>'Radiología',
-							 'sono'=>'Ecografía',
+							 'radio'=>'RadiologÃ­a',
+							 'sono'=>'EcografÃ­a',
 							 'allamb'=>'Ambulatorio',
 							 'unfamb'=>'Urgencias',
-							 'nuklear'=>'Diagnóstico nuclear',
+							 'nuklear'=>'DiagnÃ³stico nuclear',
 							 'inmed'=>'Consulta a Medicina interna');
 $LDBloodOrder='Pedido reserva de sangre';
 /* 2002-09-22 EL */
@@ -120,7 +123,7 @@ $LDLoggedOut='salido del sistema';
 $LDNursesList='Lista de las enfermeras';
 $LDAppointments='Citas';
 /* 2003-04-27 */
-$LDInsuranceCoManager='Administrador de compañías de seguros';
+$LDInsuranceCoManager='Administrador de compaÃ±Ã­as de seguros';
 $LDAddressMngr='Administrador de direcciones';
 /* 2003-04-30 EL*/
 $LDBilling='eComBill';
@@ -129,14 +132,14 @@ $LDPlsContactEDP='Por favor, contacte al Departamento de Admin. de Sistemas.';
 $LDPlsTryAgain='Por favor, intente nuevamente';
 /* 2003-07-11 EL */
 $LDAdministration='Gerencia';
-$LDOutpatientClinic='Clínica de dia';
+$LDOutpatientClinic='ClÃ­nica de dia';
 
-$LDUploadDicom='Guardar imágenes DICOM en el servidor';
-$LDViewDicom='Ver las imágenes DICOM';
+$LDUploadDicom='Guardar imÃ¡genes DICOM en el servidor';
+$LDViewDicom='Ver las imÃ¡genes DICOM';
 # 2003-08-22 EL
 $LDYellowList='Lista Amarilla';
 $LDRedList='Lista Roja';
 #2003-11-22 EL
 $LDAdvancedSearch='Advanced search';
-$LDNewPerson='Register new person';
+$LDNewPerson='Ingrese a una nueva persona';
 ?>

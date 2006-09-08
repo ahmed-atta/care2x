@@ -1,74 +1,77 @@
 <?php
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_newscolumns.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 $LDTitleTag=array
 					(headline=>'',
-					cafenews=>'Cafetería',
+					cafenews=>'CafeterÃ­a',
 					management=>'Gerencia',
 					healthtips=>'Consejos de salud',
-					adv_studies=>'Avances en investigación',
-					prof_training=>'Educación',
+					adv_studies=>'Avances en investigaciÃ³n',
+					prof_training=>'EducaciÃ³n',
 					physiotherapy=>'Fisioterapia',
 					events=>'Demostraciones',
-					dept_generalsurgery=>'Cirugía general',
+					dept_generalsurgery=>'CirugÃ­a general',
 					dept_emergency=>'Urgencias',
-					dept_plasticsurgery=>'Cirugía plástica',
-					dept_ent=>'Otorrinolaringología',
-					dept_eyesurgery=>'Oftalmología',
-					dept_pathology=>'Anatomía patológica',
-					dept_gynecology=>'Ginecología',
-					dept_internalmed=>'Medicína interna',
-					dept_oncology=>'Oncología',
+					dept_plasticsurgery=>'CirugÃ­a plÃ¡stica',
+					dept_ent=>'OtorrinolaringologÃ­a',
+					dept_eyesurgery=>'OftalmologÃ­a',
+					dept_pathology=>'AnatomÃ­a patolÃ³gica',
+					dept_gynecology=>'GinecologÃ­a',
+					dept_internalmed=>'MedicÃ­na interna',
+					dept_oncology=>'OncologÃ­a',
 					dept_techservice=>'Mantenimiento',
 					dept_IMCU=>'U.V.I.',
 					dept_ICU=>'U.C.I.',
 					dept_lab=>'Laboratorio',
-					patient_admission=>'Admisión',
+					patient_admission=>'AdmisiÃ³n',
 					allamb=>'Ambulatorio general',
 					unfamb=>'Ambulatorio de urgencias',
-					sono=>'Sonografía',
-					nuklear=>'Diagnóstico nuclear',
+					sono=>'SonografÃ­a',
+					nuklear=>'DiagnÃ³stico nuclear',
 					inmed=>'Ambulatorio de Medicina interna');
 					
 					
 $LDSubTitle=array
 					(headline=>'',
-					cafenews=>'Noticias de la cafetería',
+					cafenews=>'Noticias de la cafeterÃ­a',
 					management=>'Gerencia',
-					healthtips=>'Más especialidades de la salud',
-					adv_studies=>'Información relevante sobre los estudios avanzados',
-					prof_training=>'Información relevante sobre educación',
+					healthtips=>'MÃ¡s especialidades de la salud',
+					adv_studies=>'InformaciÃ³n relevante sobre los estudios avanzados',
+					prof_training=>'InformaciÃ³n relevante sobre educaciÃ³n',
 					physiotherapy=>'Fisioterapia',
 					events=>'Eventos',
-					dept_generalsurgery=>'Cirugía general',
+					dept_generalsurgery=>'CirugÃ­a general',
 					dept_emergency=>'Emergencias',
-					dept_plasticsurgery=>'Cirugía plástica',
-					dept_ent=>'Otorrinolaringología',
-					dept_eyesurgery=>'Cirugía oftálmica',
-					dept_pathology=>'Patología',
-					dept_gynecology=>'Ginecología',
+					dept_plasticsurgery=>'CirugÃ­a plÃ¡stica',
+					dept_ent=>'OtorrinolaringologÃ­a',
+					dept_eyesurgery=>'CirugÃ­a oftÃ¡lmica',
+					dept_pathology=>'PatologÃ­a',
+					dept_gynecology=>'GinecologÃ­a',
 					dept_internalmed=>'Medicina interna',
-					dept_oncology=>'Oncología',
-					dept_techservice=>'Soporte técnico',
+					dept_oncology=>'OncologÃ­a',
+					dept_techservice=>'Soporte tÃ©cnico',
 					dept_IMCU=>'U.V.I',
 					dept_ICU=>'U.C.I',
 					dept_lab=>'Laboratorio',
-					patient_admission=>'Más información acerca de la admisión',
-					SBDefault=>'Más información');
+					patient_admission=>'MÃ¡s informaciÃ³n acerca de la admisiÃ³n',
+					SBDefault=>'MÃ¡s informaciÃ³n');
 
 
-$LDMore='Más acerca del artículo';
+$LDMore='MÃ¡s acerca del artÃ­culo';
 $LDBackTxt='Volver';
-$LDClk2Read='Dé clic para leer';
+$LDClk2Read='DÃ© clic para leer';
 
-$LDArticle='Artículo';
+$LDArticle='ArtÃ­culo';
 $LDWrittenOn='en';
 $LDWrittenBy='Escrito por';
 
 $LDNewsDummy=array(1=>'primer',2=>'segundo',3=>'tercer',4=>'cuarto');
-$LDClk2Compose='Dé clic aquí para componer...';
-$LDClk2Write='Dé clic aquí para componer';
+$LDClk2Compose='DÃ© clic aquÃ­ para componer...';
+$LDClk2Write='DÃ© clic aquÃ­ para componer';
 ?>

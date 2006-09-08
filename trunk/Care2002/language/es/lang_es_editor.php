@@ -1,100 +1,103 @@
 <?php
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C. y Dr. Manuel Montemayor
-*/
+/*
+ * Nombre: lang_es_editor.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
-$LDWhereTo='¿Dónde desea colocar el artículo?';
-$LDPlsSelect='Por favor, elija el número basado en el ejemplo gráfico, luego pulse \'Continuar...\'.';
+$LDWhereTo='Â¿DÃ³nde desea colocar el artÃ­culo?';
+$LDPlsSelect='Por favor, elija el nÃºmero basado en el ejemplo grÃ¡fico, luego pulse \'Continuar...\'.';
 $LDContinueBut='Continuar...';
 $LDCancelBut='Cancelar';
 $LDBackBut='Volver';
 $LDSaveBut='Grabar';
 $LDFinishBut='Terminar';
-$LDArticle1='Primer (1) artículo';
-$LDArticle2='Segundo (2) artículo';
-$LDArticle3='Tercer (3) artículo';
-$LDArticle4='Cuarto (4) artículo';
-$LDArticle5='Artículo (5) secundario';
+$LDArticle1='Primer (1) artÃ­culo';
+$LDArticle2='Segundo (2) artÃ­culo';
+$LDArticle3='Tercer (3) artÃ­culo';
+$LDArticle4='Cuarto (4) artÃ­culo';
+$LDArticle5='ArtÃ­culo (5) secundario';
 
-$LDArticleTxt='Artículo';
+$LDArticleTxt='ArtÃ­culo';
 
-$LDTitleTag='Título';
-$LDTitleMaxNote='Máximo 50';
+$LDTitleTag='TÃ­tulo';
+$LDTitleMaxNote='MÃ¡ximo 50';
 $LDHeader='Encabezado';
-$LDHeaderMaxNote='Máximo 250';
+$LDHeaderMaxNote='MÃ¡ximo 250';
 $LDNews='Noticia';
 /**
 * Do not translate the '<font size=1>' and '</font>'
 */
-$LDPicFile='Imagen <font size=1>(tamaño máximo 1 MB)</font>';
+$LDPicFile='Imagen <font size=1>(tamaÃ±o mÃ¡ximo 1 MB)</font>';
 $LDAuthor='Autor';
 /**
 * Do not translate the '<font size=1>' and '</font>'
 */
-$LDPublishDate='Fecha de publicación <font size=1>(\'T\' Para hoy)</font>';
+$LDPublishDate='Fecha de publicaciÃ³n <font size=1>(\'T\' Para hoy)</font>';
 
-$LDAlertTitle='Por favor, ingrese un título';
+$LDAlertTitle='Por favor, ingrese un tÃ­tulo';
 $LDAlertNews='Por favor, ingrese la noticia';
 $LDAlertAuthor='Por favor, ingrese un autor';
-$LDAlertDate='Por favor, ingrese la fecha de publicación';
+$LDAlertDate='Por favor, ingrese la fecha de publicaciÃ³n';
 
 $LDWrittenOn='Escrito el:';
 $LDWrittenFrom='Por:';
 
-$LDArticleSaved='El artículo fue grabado. Tiene una vista previa.';
+$LDArticleSaved='El artÃ­culo fue grabado. Tiene una vista previa.';
 $LDBackTxt='Volver';
 
-$LDQuickInfo='Información rápida';
-$LDPhonePolice='Policía';
+$LDQuickInfo='InformaciÃ³n rÃ¡pida';
+$LDPhonePolice='PolicÃ­a';
 $LDPhoneFire='Bomberos';
 $LDAmbulance='Emergencia';
 $LDPhone='Tel. (Hospital)';
 $LDFax='Fax';
-$LDAddress='Dirección';
-$LDEmail='Correo electrónico';
+$LDAddress='DirecciÃ³n';
+$LDEmail='Correo electrÃ³nico';
 
-$LDOpenTimes ='Horas de admisión';
-$LDManagement ='Administración';
+$LDOpenTimes ='Horas de admisiÃ³n';
+$LDManagement ='AdministraciÃ³n';
 $LDDept ='Departamentos';
-$LDCafenews ='Noticias de la cafetería';
-$LDAdmission ='Admisión';
-$LDExhibition ='Exhibición';
-$LDEducation ='Educación';
+$LDCafenews ='Noticias de la cafeterÃ­a';
+$LDAdmission ='AdmisiÃ³n';
+$LDExhibition ='ExhibiciÃ³n';
+$LDEducation ='EducaciÃ³n';
 $LDAdvStudies ='Estudios';
-$LDPhyTherapy ='Terapia física';
+$LDPhyTherapy ='Terapia fÃ­sica';
 $LDCalendar ='Calendario';
 $LDHelp='Ayuda';
-$LDMore='Más del artículo';
+$LDMore='MÃ¡s del artÃ­culo';
 
-$LDCafeNews='Noticias de la cafetería';
-$LDConfirmEdit='Quiere usted editar los datos en las noticias de la cafetería?';
+$LDCafeNews='Noticias de la cafeterÃ­a';
+$LDConfirmEdit='Quiere usted editar los datos en las noticias de la cafeterÃ­a?';
 $LDNewsDummy=array(1=>'primero',2=>'segundo',3=>'tercero',4=>'cuarto');
-$LDMenuToday='Menú de hoy';
-$LDMenuAll='Menu para <br> &nbsp;otros días';
+$LDMenuToday='MenÃº de hoy';
+$LDMenuAll='Menu para <br> &nbsp;otros dÃ­as';
 $LDPrices='Precios';
-$LDNoMenu='El menú no está<br> disponible.';
+$LDNoMenu='El menÃº no estÃ¡<br> disponible.';
 $LDWhatToDo='Que desea editar?';
-$LDPlsMarkSelection='Por favor elija una opción, luego pulse \'Continuar...\'.';
-$LDMenuEdit='Editar el menú';
+$LDPlsMarkSelection='Por favor elija una opciÃ³n, luego pulse \'Continuar...\'.';
+$LDMenuEdit='Editar el menÃº';
 $LDPriceEdit='Editar los precios';
-$LDNewsEdit='Editar las noticias o artículo de información';
+$LDNewsEdit='Editar las noticias o artÃ­culo de informaciÃ³n';
 
 $dayname=array('Lu','Ma','Mi','Ju','Vi','Sa','Do');
-$LDCafeMenu='Menu de la cafetería';
-$LDMenu='Menú';
+$LDCafeMenu='Menu de la cafeterÃ­a';
+$LDMenu='MenÃº';
 $LDThisWeek='Esta semana';
-$LDNextWeek='la próxima semana';
+$LDNextWeek='la prÃ³xima semana';
 $LD3rdWeek='Tercera semana';
-$LDBack2CafeNews='Volver a las noticias de la cafetería';
+$LDBack2CafeNews='Volver a las noticias de la cafeterÃ­a';
 
 $LDProdName='Nombre del producto';
 $LDPriceDM='Precio DM';
 $LDPriceEuro='Precio €';
 $LDPrice='Precio';
-$LDNoPrice='La lista de precios no está disponible en este momento.';
-$LDSorry='Lo sentimos. Por favor intente más tarde.';
-$LDCafePrices='Lista de precios de la cafetería';
+$LDNoPrice='La lista de precios no estÃ¡ disponible en este momento.';
+$LDSorry='Lo sentimos. Por favor intente mÃ¡s tarde.';
+$LDCafePrices='Lista de precios de la cafeterÃ­a';
 
 $LDCreateGroup='Crear un nuevo grupo de productos';
 $LDCreateGroupPrompt='Usted debe crear un nuevo grupo de productos. Por favor pulse \'Continuar...\'.';
@@ -104,26 +107,26 @@ $LDCreateGroupPrompt='Usted debe crear un nuevo grupo de productos. Por favor pu
 $LDMarkGroup='Usted debe elegir un grupo de productos  a editar.<br> Luego pulse  \'<font color=\'#000000\'>Continuar...</font>\'';
 $LDEnterGroup='Ingrese el nombre del nuevo grupo.<br>Luego pulse \'<font color=\'#000000\'>Continuar...</font>\'';
 $LDProdGroup='Grupo de producto';
-$LDClk2End='Para terminar pulse aquí >> ';
+$LDClk2End='Para terminar pulse aquÃ­ >> ';
 $LDPriceSaved='El(los) producto(s) y precio(s) fue(ron) grabado(s).';
 
 $LDMarkWeek='Por favor elija la semana.';
 $LDClkContinue='Luego pulse \'Continuar...\'.';
-$LDPlsEnter='Ingrese el menú aquí...';
-$LDClk2Edit='Dé clic para editar';
+$LDPlsEnter='Ingrese el menÃº aquÃ­...';
+$LDClk2Edit='DÃ© clic para editar';
 $LDPreviewPic='Vista previa de la imagen';
-$LDCafeEditorial='Editor de noticias del café';
+$LDCafeEditorial='Editor de noticias del cafÃ©';
 $LDHealthTips='Consejos saludables';
-$LDClk2Write='Pulse aquí para iniciar el editor';
+$LDClk2Write='Pulse aquÃ­ para iniciar el editor';
 
 $LDOr='O';
 $LDSetCurrency='Elegir la moneda';
-$LDNewCurrencySet='La nueva moneda está ahora activa.';
+$LDNewCurrencySet='La nueva moneda estÃ¡ ahora activa.';
 $LDPlsSelectCurrency='Por favor elija la moneda.';
 $LDmain='Principal';
-$LDClk2AddCurrency='Para ingresar el nuevo tipo de moneda, Por favor pulse aquí. (Nota: será enviado a las noticias del café!)';
+$LDClk2AddCurrency='Para ingresar el nuevo tipo de moneda, Por favor pulse aquÃ­. (Nota: serÃ¡ enviado a las noticias del cafÃ©!)';
 
-$LDMenuSaved='El menú fue grabado.';
+$LDMenuSaved='El menÃº fue grabado.';
 /* 2002-10-13 EL */
 $LD_ddpMMpyyyy='dd.mm.aaaa';
 $LD_yyyyhMMhdd='aaaa-mm-dd';
@@ -131,7 +134,7 @@ $LD_MMsddsyyyy='mm/dd/aaaa';
 /* 2003-02-11*/
 $LDSubmitNews='Enviar noticias';
 $LDDelete='Borrar';
-$LDDeleteCurrency='Está seguro que quiere borrar esta moneda?';
+$LDDeleteCurrency='EstÃ¡ seguro que quiere borrar esta moneda?';
 $LDNoMainDelete='Usted no puede borrar la moneda principal. \n Por favor elija primero una moneda principal distinta.';
 $LDCurrencyExisting='Esta moneda ya existe!';
 ?>

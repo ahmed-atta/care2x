@@ -1,8 +1,11 @@
 <?php
 
-/**
-* Traducido por: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_chemlab_params.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 /**
 * These are the chemical lab test groups and parameters. If you are not sure of their exact translation please leave it in the original form
@@ -11,7 +14,7 @@ $top_param=array(
 	'00q'=>'Quick',
 	'00ptt'=>'TTP',
 	'00hb'=>'Hb',
-	'00hc'=>'Hematócrito',
+	'00hc'=>'HematÃ³crito',
 	'00pla'=>'Plaquetas',
 	'00rbc'=>'Contaje eritrocitario',
 	'00wbc'=>'Contaje leucocitario',
@@ -20,7 +23,7 @@ $top_param=array(
 	'00k'=>'Potasio',
 	'00sug'=>'Glucemia');
 
-// Parámetros de química clínica
+// ParÃ¡metros de quÃ­mica clÃ­nica
 $klinichemie_list0=array(	
 	'0aph'=>'Fosf. alcalina',
 	'0agt'=>'Alfa GT',
@@ -41,7 +44,7 @@ $klinichemie_list0=array(
 	'0gldh'=>'GLDH',
 	'0got'=>'SGOT',
 	'0gpt'=>'SGPT',
-	'0ucid'=>'Ácido úrico',
+	'0ucid'=>'Ácido Ãºrico',
 	'0urea'=>'Urea',
 	'0hbdh'=>'HBDH',
 	'0hdlc'=>'HDL Colesterol',
@@ -52,42 +55,42 @@ $klinichemie_list0=array(
 	'0ldh'=>'LDH',
 	'0ldlc'=>'LDL Colesterol',
 	'0lip'=>'Lipasa',
-	'0lpid'=>'Lípido Elpho',
+	'0lpid'=>'LÃ­pido Elpho',
 	'0mg'=>'Magnesio',
 	'0myo'=>'Mioglobina',
 	'0na'=>'Sodio',
 	'0osm'=>'Osmolal.',
 	'0pho'=>'Fosfor',
-	'0glo'=>'Azúcar sérica',
+	'0glo'=>'AzÃºcar sÃ©rica',
 	'0tri'=>'Tri',
 	'0tro'=>'Troponina T' );
 
-// Parámetros Licor
+// ParÃ¡metros LCR
 $liquor_list1=array(
-	'1stat'=>'Estado Licor',
-	'1elp'=>'Licor elpho',
+	'1stat'=>'Estado LCR',
+	'1elp'=>'LCR elpho',
 	'1oli'=>'IgG Oligoclonales',
 	'1sch'=>'Esquema Reiber',
 	'1a1'=>'A1');
 
-// Parámetros Gerinnung 
+// ParÃ¡metros Gerinnung 
 $gerinnung_list2=array(
 	'2fiby'=>'Fibrinolisis',
 	'2q'=>'Quick',
 	'2ptt'=>'TTP',
 	'2ptz'=>'PTZ',
-	'2fibg'=>'Fibrinógeno',
+	'2fibg'=>'FibrinÃ³geno',
 	'2fibs'=>'Sol.Fibr.mon.',
-	'2fsp'=>'Dímero FSP',
+	'2fsp'=>'DÃ­mero FSP',
 	'2coag'=>'Tr.Coagul.',
 	'2at3'=>'AT III',
 	'2f8'=>'Factor VII',
 	'2apc'=>'Resistencia APC',
-	'2prc'=>'Proteína C',
-	'2prs'=>'Proteína S',
+	'2prc'=>'ProteÃ­na C',
+	'2prs'=>'ProteÃ­na S',
 	'2bt'=>'Tiempo de sangrado');
 
-//Parámetros Hematología
+//ParÃ¡metros HematologÃ­a
 $haematologie_list3=array(
 	'3ret'=>'Reticulocitos',
 	'3mal'=>'Malaria',
@@ -96,7 +99,7 @@ $haematologie_list3=array(
 	'3tab'=>'Plaquetas AB',
 	'3wbp'=>'WBC Fosf.');
 
-// Parámetros azúcar en sangre 
+// ParÃ¡metros azÃºcar en sangre 
 $blutzucker_list4=array(
 	'4bsf'=>'Glucemia en ayunas',
 	'4bs9'=>'Glucemia 9:00',
@@ -109,22 +112,22 @@ $blutzucker_list4=array(
 	'4hba'=>'HBA 1c',
 	'4fru'=>'Fructosamina');
 
-// Parámetros RN
+// ParÃ¡metros RN
 $saeugling_list5=array(
 	'5bil'=>'Bilirrubina neonatal',
-	'5bilc'=>'Bilirrubina en cordón umb.',
+	'5bilc'=>'Bilirrubina en cordÃ³n umb.',
 	'5bild'=>'Bilirrubina directa',
 	'5glo1'=>'Glucemia neonatal 1',
 	'5glo2'=>'Glucemia neonatal 2',
 	'5ret'=>'Reticulocitos',
 	'5b1'=>'B1');
 
-// Parámetros Proteínas
+// ParÃ¡metros ProteÃ­nas
 $proteine_list6=array(
 	'6tot'=>'Proteinas totales',
-	'6alb'=>'Albúmina',
+	'6alb'=>'AlbÃºmina',
 	'6elp'=>'Elpho',
-	'6imm'=>'Fijación inmune',
+	'6imm'=>'FijaciÃ³n inmune',
 	'6b2'=>'Beta2 Microglobulina en suero',
 	'6img'=>'Inmunoglobulina cuant.',
 	'6ige'=>'IgE',
@@ -137,7 +140,7 @@ $proteine_list6=array(
 	'6ssw'=>'SSW:',
 	'6mic'=>'Alfa 1 Microglobulina');
 
-// Parámetros tiroideos
+// ParÃ¡metros tiroideos
 $schilddruse_list7=array(
 	'7t3'=>'T3',
 	'7t4'=>'Tiroxina/T4',
@@ -151,13 +154,13 @@ $schilddruse_list7=array(
 	'7ft3'=>'T3 libre',
 	'7ft4'=>'T4 libre');
 
-// Parámetros Hormonales
+// ParÃ¡metros Hormonales
 $hormone_list8=array(
 	'8acth'=>'ACTH',
 	'8ald'=>'Aldosterona',
 	'8cal'=>'Calcitonina',
 	'8cor'=>'Cortisol',
-	'8dcor'=>'Cortisol día',
+	'8dcor'=>'Cortisol dÃ­a',
 	'8fsh'=>'FSH',
 	'8gas'=>'Gastrina',
 	'8hcg'=>'HCG',
@@ -177,7 +180,7 @@ $hormone_list8=array(
 	'8tes'=>'Testosterona',
 	'8c1'=>'C1');
 
-// Parámetros marcadores tumorales
+// ParÃ¡metros marcadores tumorales
 $tumormarker_list9=array(
 	'9afp'=>'AFP',
 	'9c153'=>'CA. 15 3',
@@ -191,7 +194,7 @@ $tumormarker_list9=array(
 	'9scc'=>'SCC',
 	'9tpa'=>'TPA');
 
-// Parámetros Gewebe AK
+// ParÃ¡metros Gewebe AK
 $gewebeak_list10=array(
 	'10ana'=>'ANA',
 	'ama'=>'AMA',
@@ -202,17 +205,17 @@ $gewebeak_list10=array(
 
 // Factor reumatoide
 $rheumafakt_list11=array(
-	'11ast'=>'Titulación antiestrepto.',
+	'11ast'=>'TitulaciÃ³n antiestrepto.',
 	'11lrf'=>'FR lat.',
 	'11stz'=>'Streptozim',
 	'11waa'=>'Waaler Rose');
 
-// Parámetros Hepatitis 
+// ParÃ¡metros Hepatitis 
 $hepatitis_list12=array(
 	'12hav'=>'Anti HAV',
 	'12hai'=>'Anti HAV IgM',
 	'12hba'=>'Antigeno Hbs',
-	'12hbt'=>'Titulación Anti HBs',
+	'12hbt'=>'TitulaciÃ³n Anti HBs',
 	'12hbe'=>'Anti HBe',
 	'12hbc'=>'Anti HBc',
 	'12hci'=>'Anti HBc.IgM',
@@ -220,21 +223,21 @@ $hepatitis_list12=array(
 	'12hda'=>'Hep.D Delta A.',
 	'12hev'=>'Anti HEV');
 
-// Parámetros Punción biopsia
+// ParÃ¡metros PunciÃ³n biopsia
 $punktate_list13=array(
-	'13pro'=>'Proteína en biopsia',
+	'13pro'=>'ProteÃ­na en biopsia',
 	'13ldh'=>'LDH en biopsia',
 	'13cho'=>'Colest.en biopsia',
 	'13cea'=>'CEA en biopsia',
 	'13afp'=>'Alfafetoprot. en biopsia',
-	'13ure'=>'Ácido úrico en biopsia',
+	'13ure'=>'Ácido Ãºrico en biopsia',
 	'13rhe'=>'Factor reumat. en biopsia',
 	'13d1'=>'D1',
 	'13d2'=>'D2');
 
-// Serología infecciones
+// SerologÃ­a infecciones
 $infektion_list14=array(
-	'14stap'=>'Titulación antiestafil.',
+	'14stap'=>'TitulaciÃ³n antiestafil.',
 	'14ade'=>'Ac. Adenovirus',
 	'14bor'=>'Ac. Borrelia',
 	'14bori'=>'Borr.Inmunoblot',
@@ -267,10 +270,10 @@ $infektion_list14=array(
 	'14neu'=>'Ac. Neutrop Virus',
 	'14pi2'=>'Ac. Parainfluenza II',
 	'14pi3'=>'Ac. Parainfluenza III',
-	'14pic'=>'Ac. Picorna Virus',
+	'14pic'=>'Ac. Picornavirus',
 	'14vric'=>'Ac. Rickettsia',
-	'14rot'=>'Ac. Röteln',
-	'14roi'=>'Estado de inmunidad Röteln',
+	'14rot'=>'Ac. RÃ¶teln',
+	'14roi'=>'Estado de inmunidad RÃ¶teln',
 	'14rsv'=>'Ac. RS Virus',
 	'14shi'=>'Ac. Shigella/Salm',
 	'14tox'=>'Ac. Toxoplasma',
@@ -285,7 +288,7 @@ $infektion_list14=array(
 // Medicamentos
 $medikamente_list15=array(
 	'15ami'=>'Amiodarona',
-	'15bar'=>'Barbitúricos en suero',
+	'15bar'=>'BarbitÃºricos en suero',
 	'15ben'=>'Benzodiacep. en suero',
 	'15car'=>'Carbamazepina',
 	'15clo'=>'Clonazepam',
@@ -294,28 +297,28 @@ $medikamente_list15=array(
 	'15gen'=>'Gentamicina',
 	'15lit'=>'Litio',
 	'15phe'=>'Fenobarbital',
-	'15pny'=>'Fenitoína',
+	'15pny'=>'FenitoÃ­na',
 	'15pri'=>'Primidona',
-	'15sal'=>'Ácido salicílico',
+	'15sal'=>'Ácido salicÃ­lico',
 	'15the'=>'Teofilina',
 	'15tob'=>'Tobramicina',
 	'15val'=>'Ácido valproico',
 	'15van'=>'Vancomicina',
 	'15amp'=>'Anfetaminas en orina',
 	'15ant'=>'Antidepresivos en orina',
-	'15bau'=>'Barbitúricos en orina',
+	'15bau'=>'BarbitÃºricos en orina',
 	'15beu'=>'Benzodiacepinas en orina',
 	'15can'=>'Cannabinol en orina',
-	'15coc'=>'Cocaína en orina',
+	'15coc'=>'CocaÃ­na en orina',
 	'15met'=>'Metadona en orina',
-	'15opi'=>'Opiáceos en orina');
+	'15opi'=>'OpiÃ¡ceos en orina');
 
 // Embarazo
 $muttersch_list16=array(
 	'16chl'=>'Chlamyd.cult./SSW',
 	'16ssw'=>'SSW:',
 	'16dow'=>'Tamizaje Down',
-	'16stb'=>'Prueba rápida Strep. B',
+	'16stb'=>'Prueba rÃ¡pida Strep. B',
 	'16tpha'=>'TPHA',
 	'16hbs'=>'HBs Ag',
 	'16hiv'=>'HIV1/HIV2 AV' );
@@ -337,16 +340,16 @@ $raritaeten_list18=array(
 	'18f2'=>'F2',
 	'18f3'=>'F3');
 
-// Orina / Orina espontánea
+// Orina / Orina espontÃ¡nea
 $urin_list19=array(
 	'19amy'=>'Amilasa en orina',
-	'19sug'=>'Azúcar en orina',
-	'19pro'=>'Proteína en orina',
-	'19alb'=>'Albúmina en orina',
+	'19sug'=>'AzÃºcar en orina',
+	'19pro'=>'ProteÃ­na en orina',
+	'19alb'=>'AlbÃºmina en orina',
 	'19osm'=>'Osmol. en orina',
 	'19pre'=>'Prueba de embarazo',
 	'19cym'=>'Cytomeg. en orina',
-	'19cyt'=>'Citología en orina',
+	'19cyt'=>'CitologÃ­a en orina',
 	'19bj'=>'Bence Jones',
 	'19elp'=>'Orina elpho',
 	'19bm2'=>'Beta2 microglobulina en orina');
@@ -357,8 +360,8 @@ $sammelurin_list20=array(
 	'20na'=>'Sodio en orina',
 	'20k'=>'Potasio en orina',
 	'20ca'=>'Calcio en orina',
-	'20pho'=>'Fósforo en orina',
-	'20ura'=>'Ácido úrico en orina',
+	'20pho'=>'FÃ³sforo en orina',
+	'20ura'=>'Ácido Ãºrico en orina',
 	'20cre'=>'Creatinina en orina',
 	'20por'=>'Porfirina en orina',
 	'20cor'=>'Cortisol en orina',
@@ -372,10 +375,10 @@ $sonstiges_list21=array(
 	'21bal'=>'Alcohol en sangre',
 	'21cdt'=>'CDT',
 	'21vb12'=>'Vitamina B12',
-	'21fol'=>'Ácido fólico',
+	'21fol'=>'Ácido fÃ³lico',
 	'21inab'=>'Ac. insulina',
-	'21iab'=>'Ac. intrínsecos',
-	'21sto'=>'Análisis de cálculos',
+	'21iab'=>'Ac. intrÃ­nsecos',
+	'21sto'=>'AnÃ¡lisis de cÃ¡lculos',
 	'21ace'=>'ACE',
 	'21g1'=>'G1',
 	'21g2'=>'G2',

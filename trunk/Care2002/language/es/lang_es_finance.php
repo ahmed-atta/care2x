@@ -1,39 +1,42 @@
 <?php
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_finance.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * Versi贸n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 /* 2003-04-27 EL */
-$LDInsuranceCo='Compa駃a de seguro';
-$LDInsuranceCoName='Nombre de la compa耥a de seguros';
-$LDInsuranceCoID='ID de la compa駃a de seguros';
-$LDMainPhoneNr='Tel閒ono'; 
+$LDInsuranceCo='Compa帽ia de seguro';
+$LDInsuranceCoName='Nombre de la compa帽铆a de seguros';
+$LDInsuranceCoID='ID de la compa帽ia de seguros';
+$LDMainPhoneNr='Tel茅fono'; 
 $LDMainFaxNr='Fax';
-$LDAuxPhoneNr='Tel閒ono (aux)'; 
+$LDAuxPhoneNr='Tel茅fono (aux)'; 
 $LDAuxFaxNr='Fax (aux)';
-$LDAddress='Direcci髇 principal';
-$LDEmailAddress='Direcci髇 de correo electr髇ico';
-$LDMailingAddress='Direcci髇 de correo';
-$LDBillingAddress='Direcci髇 para la cobranza';
+$LDAddress='Direcci贸n principal';
+$LDEmailAddress='Direcci贸n de correo electr贸nico';
+$LDMailingAddress='Direcci贸n de correo';
+$LDBillingAddress='Direcci贸n para la cobranza';
 $LDContactPerson='Persona a contactar';
-$LDContactPersonPhoneNr='Tel閒ono del contacto';
+$LDContactPersonPhoneNr='Tel茅fono del contacto';
 $LDContactPersonFaxNr='Fax del contacto';
-$LDContactPersonEmailAddr='Correo electr髇ico del contacto';
-$LDPlsEnterInfo='Por favor ingrese la informaci髇';
-$LDAlertFirmID='alta la ID de la compa耥a de seguros!';
-$LDAlertFirmName='alta el nombre de la compa駃a de seguros!';
-$LDAlertBillingAddress='alta la direcci髇 para cobranza!';
-$LDAlertMailingAddress='alta la direcci髇 de correo!';
+$LDContactPersonEmailAddr='Correo electr贸nico del contacto';
+$LDPlsEnterInfo='Por favor ingrese la informaci贸n';
+$LDAlertFirmID='隆Falta la ID de la compa帽铆a de seguros!';
+$LDAlertFirmName='隆Falta el nombre de la compa帽ia de seguros!';
+$LDAlertBillingAddress='隆Falta la direcci贸n para cobranza!';
+$LDAlertMailingAddress='隆Falta la direcci贸n de correo!';
 $LDEnterAllFields='Debe llenar todos los campos marcados con <font color="red"><b>*</b></font>';
 $LDFirmID='ID de la empresa';
-$LDNeedEmptyFormPls='Necesito un formulario vac韔, por favor.';
+$LDNeedEmptyFormPls='Necesito un formulario vac铆o, por favor.';
 $LDData='Datos';
 $LDNewData='Nuevos datos';
 $LDUpdateData='Actualizar los datos';
 $LDListAll='Listar todos';
 $LDFirmExists='La ID de la empresa ya existe en la base de datos.';
-$LDDataNoSave='Los datos ingresados no ser醤 grabados.';
+$LDDataNoSave='Los datos ingresados no ser谩n grabados.';
 $LDPlsChangeFirmID='Por favor ingrese otra ID empresarial';
 $LDFirmInfoSaved='Los datos empresariales fueron grabados exitosamente.';
 $LDPlsCheckData='Por favor revise los datos.';
@@ -42,5 +45,5 @@ $LDNewDataTxt='Ingrese los datos del nuevo comercio de seguro';
 $LDListAllTxt='Lista de todos los comercios de seguro disponibles';
 $LDSearch='Buscar';
 $LDSearchTxt='buscar un comercio de seguro';
-$LDSearchPrompt='Por favor ingrese un nombre de comercio, ID, o direcci髇 de correo electr髇ico';
+$LDSearchPrompt='Por favor ingrese un nombre de comercio, ID, o direcci贸n de correo electr贸nico';
 ?>

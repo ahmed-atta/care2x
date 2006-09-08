@@ -1,84 +1,87 @@
 <?php
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_tech.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 16.08.2006
+ */
 
 /**
 * IMPORTANT NOTICE: Do not replace the words or characters enclosed in ~ ~ .
 */
 $LDClose="Cerrar";
-$LDTech="Técnico";
-$LDTechRepair="Reparación técnica";
-$LDTechMaint="Mantenimiento técnico";
-$LDTechSupport="Ayuda técnica";
-$LDTechInfo="información técnica";
+$LDTech="TÃ©cnico";
+$LDTechRepair="ReparaciÃ³n tÃ©cnica";
+$LDTechMaint="Mantenimiento tÃ©cnico";
+$LDTechSupport="Ayuda tÃ©cnica";
+$LDTechInfo="informaciÃ³n tÃ©cnica";
 
 $LDReRepair="Hacer un parte a mantenimiento";
-$LDReRepairTxt="Avise de una avería, cumplimente y envíe el parte a mantenmiento.";
+$LDReRepairTxt="Avise de una averÃ­a, cumplimente y envÃ­e el parte a mantenmiento.";
 $LDRepabotActivate="Activar Robot de reparaciones";
-$LDRepabotActivateTxt="Un sistema para la recepción automática de los partes de reparación.";
-$LDRepairReport="Reparación concluida.";
-$LDRepairReportTxt="Avise que los trabajos de reparación han finalizado.";
-$LDReportsArchive="Archivo de informes técnicos";
-$LDReportsArchiveTxt="Rebuscar entre los archivos de los informes técnicos";
+$LDRepabotActivateTxt="Un sistema para la recepciÃ³n automÃ¡tica de los partes de reparaciÃ³n.";
+$LDRepairReport="ReparaciÃ³n concluida.";
+$LDRepairReportTxt="Avise que los trabajos de reparaciÃ³n han finalizado.";
+$LDReportsArchive="Archivo de informes tÃ©cnicos";
+$LDReportsArchiveTxt="Rebuscar entre los archivos de los informes tÃ©cnicos";
 $LDQuestions="Dudas, Preguntas";
-$LDQuestionsTxt="Escriba, lea, y envíe las preguntas o dudas";
+$LDQuestionsTxt="Escriba, lea, y envÃ­e las preguntas o dudas";
 $LDQBotActivate="Activar Robot Q";
-$LDQBotActivateTxt="Un sistema para la recepción automática de las preguntas y dudas";
-$LDInfo="Información";
-$LDInfoTxt="Para examinar información de naturaleza técnica.";
-$LDSendRequest="Envíe la petición";
-$LDSendReport="Envíe el informe";
-$LDSendInquiry="Envíe la duda";
+$LDQBotActivateTxt="Un sistema para la recepciÃ³n automÃ¡tica de las preguntas y dudas";
+$LDInfo="InformaciÃ³n";
+$LDInfoTxt="Para examinar informaciÃ³n de naturaleza tÃ©cnica.";
+$LDSendRequest="EnvÃ­e la peticiÃ³n";
+$LDSendReport="EnvÃ­e el informe";
+$LDSendInquiry="EnvÃ­e la duda";
 $LDReset="Borrar";
-$LDRepairArea="Localización de la avería";
+$LDRepairArea="LocalizaciÃ³n de la averÃ­a";
 $LDReporter="Solicitado por";
 $LDPersonnelNr="Empleado No.";
-$LDPhoneNr="No. de teléfono.  <font size=1>(Para resolver una duda eventual)</font>";
-$LDPlsDescribe="Describa la avería";
+$LDPhoneNr="No. de telÃ©fono.  <font size=1>(Para resolver una duda eventual)</font>";
+$LDPlsDescribe="Describa la averÃ­a";
 
 $LDAlertName="Por favor, escriba su nombre.";
-$LDAlertDept="Por favor, registre el departmento o localización de la avería.";
+$LDAlertDept="Por favor, registre el departmento o localizaciÃ³n de la averÃ­a.";
 $LDAlertDeptOnly="Por favor escriba su departmento.";
-$LDAlertPNr="Por favor escriba su identificación personal";
+$LDAlertPNr="Por favor escriba su identificaciÃ³n personal";
 $LDAck="Acuse de recibo";
 $LDYour="su";
 $LDReceived="fue recibido perfectamente";
 $LDAt="en";
 $LDAtTech="Gracias. <i>Su servicio de mantenimiento.</i>";
-$LDRequest="petición";
+$LDRequest="peticiÃ³n";
 $LDReport="informe";
 $LDThanksSir="Muchas gracias, Sr/Sra";
-$LDPlsTypeReport="Por favor describa el trabajo de reparación que se llevó a cabo.";
-$LDJobIdNr="No. de parte de reparación.";
-$LDTechnician="Técnico";
-$LDPlsDoneOnly="(Señale solamente los trabajos acabados de la reparación.)";
+$LDPlsTypeReport="Por favor describa el trabajo de reparaciÃ³n que se llevÃ³ a cabo.";
+$LDJobIdNr="No. de parte de reparaciÃ³n.";
+$LDTechnician="TÃ©cnico";
+$LDPlsDoneOnly="(SeÃ±ale solamente los trabajos acabados de la reparaciÃ³n.)";
 $LDName="Nombre";
 $LDDept="Departamento";
 $LDEnterQuestion="Por favor escriba su pregunta";
-$LDLogIn="Conexión";
-$LDPlsNoRequest="(No haga los partes para reparación aquí. Si usted desea avisar de una avería y necesita una reparación dé clic aquí.";
+$LDLogIn="ConexiÃ³n";
+$LDPlsNoRequest="(No haga los partes para reparaciÃ³n aquÃ­. Si usted desea avisar de una averÃ­a y necesita una reparaciÃ³n dÃ© clic aquÃ­.";
 $LDLastQuestions="Última ~tagword~ pregunta(s) o respuesta(s)";
 $LDFrom="De";
 $LDTo="Para";
-$LDAlertQuestion="No escrbió ninguna pregunta.";
+$LDAlertQuestion="No escrbiÃ³ ninguna pregunta.";
 $LDOn="en";
 $LDOClock="en punto";
 $LDInquiry="Duda";
 $LDReply="Contestar";
 $LDSearch="Buscar";
-$LDSearchReport="Búsqueda de informes";
+$LDSearchReport="BÃºsqueda de informes";
 $LDDate="Fecha";
 $LDReportListMany="Los siguientes informes";
-$LDNotReadMany=" Este informe no se ha leído ni se ha impreso todavía."; 
+$LDNotReadMany=" Este informe no se ha leÃ­do ni se ha impreso todavÃ­a."; 
 $LDReportList="Este es el informe.";
-$LDNotRead=" Este informe no se ha leído ni se ha impreso todavía.";
+$LDNotRead=" Este informe no se ha leÃ­do ni se ha impreso todavÃ­a.";
 $LDClk2Read="Pulse en la flecha para leer el contenido.";
-$LDLikeSearch=" Esto corresponde a las palabras claves de la búsqueda.";
-$LDLikeSearchMany=" Esto corresponde a las palabras claves de la búsqueda.";
+$LDLikeSearch=" Esto corresponde a las palabras claves de la bÃºsqueda.";
+$LDLikeSearchMany=" Esto corresponde a las palabras claves de la bÃºsqueda.";
 
-$LDTelephoneNr="Teléfono No.";
+$LDTelephoneNr="TelÃ©fono No.";
 
 $bcatindex=array("&nbsp;","&nbsp;",$LDTechnician,$LDDept,"Recibido",$LDAt,"&nbsp;");
 $blistindex=array("Report $LDFrom",$LDOn,$LDAt,$LDDept,$LDJobIdNr);
@@ -86,26 +89,26 @@ $reportindex=array("&nbsp;","&nbsp;","$LDRequest $LDFrom:","Recibido el:",$LDAt,
 $requestindex=array("$LDRequest $LDFrom:",$LDAt,$LDOn,$LDDept,$LDTelephoneNr,$LDJobIdNr);
 $queryindex=array("&nbsp;","&nbsp;","$LDInquiry $LDFrom:",$LDDept,"Recibido $LDOn:",$LDAt,"&nbsp;");
 
-$LDMarkRead="Marque según lo \"leído\".";
+$LDMarkRead="Marque segÃºn lo \"leÃ­do\".";
 $LDPrint="Imprimir";
-$LDGoBack="Atrás";
+$LDGoBack="AtrÃ¡s";
 $LDImRepabot="Soy el Robot de reparaciones";
 $LDImQBot="Soy el Robot Q";
-$LDNewReport="El siguiente es el partes llegado nuevamente a reparación. ";
-$LDNewReportMany="Los siguientes son los partes nuevos llegados la reparación. ";
-$LDReportArrived="El parte de reparación ha sido entregado!";
+$LDNewReport="El siguiente es el partes llegado nuevamente a reparaciÃ³n. ";
+$LDNewReportMany="Los siguientes son los partes nuevos llegados la reparaciÃ³n. ";
+$LDReportArrived="El parte de reparaciÃ³n ha sido entregado!";
 $LDShowRequest="Mostrar partes";
-$LDNoDataFound="No se encontraron datos. Ocurrió un error en el proceso. Pulse el botón \"Cerrar\" e intente abrir la lista de peticiones de nuevo.  
-Si el problema persiste a pesar de varios intentos, comuníquelo a informática y al departamento de soporte técnico.";
+$LDNoDataFound="No se encontraron datos. OcurriÃ³ un error en el proceso. Pulse el botÃ³n \"Cerrar\" e intente abrir la lista de peticiones de nuevo.  
+Si el problema persiste a pesar de varios intentos, comunÃ­quelo a informÃ¡tica y al departamento de soporte tÃ©cnico.";
 $LDAckPrint="Seleccione e imprima";
 $LDPrintRequest="Imprimir el documento";
 $LDArchiveRequest="Mover al archivo";
 $LDAckBy="Visto bueno";
 $LDAlertEnterName="Incorpore su nombre en el campo \"Visto bueno\".";
-$LDYourReply="Su contestación";
+$LDYourReply="Su contestaciÃ³n";
 $LDNewInquiry="La siguiente es una nueva consulta.";
 $LDNewInquiryMany="Las siguientes son las consultas llegadas nuevamente.";
-$LDClk2Reply="Dé clic en la flecha para leer y/o a contestar";
+$LDClk2Reply="DÃ© clic en la flecha para leer y/o a contestar";
 $LDSendReply="Enviar la respuesta";
 $LDMove2Archive="Mover a archivo";
 $LDShow="Ver";
@@ -113,19 +116,19 @@ $LDShowInquiry="Ver duda";
 $LDInquiryArrived="Una nueva duda ha llegado!";
 $LDSearchWordPrompt="Introduca palabras clave";
 $LDInfoCat=array(
-						"Solicitar una reparación",
-						"Avisar de avería",
-						"Climatización",
-						"Informática",
-						"Dirección IP de un ordenador",
+						"Solicitar una reparaciÃ³n",
+						"Avisar de averÃ­a",
+						"ClimatizaciÃ³n",
+						"InformÃ¡tica",
+						"DirecciÃ³n IP de un ordenador",
 						"Imprimir/Impresoras",
 						"Mantenimiento",
 						"Limpieza",
 						"Electricidad",
-						"Telefonía",
-						"Fontanería"
+						"TelefonÃ­a",
+						"FontanerÃ­a"
 						);
-$LDNoFound="No se encontró nada que corresponda con la palabra clave de la búsqueda.  <br>Inténtelo otra vez e incorpore más información.  ";
+$LDNoFound="No se encontrÃ³ nada que corresponda con la palabra clave de la bÃºsqueda.  <br>IntÃ©ntelo otra vez e incorpore mÃ¡s informaciÃ³n.  ";
 /* 2003-02-11*/
 $LDCancel='Cancelar';
 ?>

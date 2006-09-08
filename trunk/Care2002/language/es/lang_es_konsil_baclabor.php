@@ -1,20 +1,27 @@
 <?php
 
+/*
+ * Nombre: lang_es_konsil_baclabor.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * Versi贸n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
+ 
 //error_reporting(E_ALL);
 $LDInitFindings='Hallazgos iniciales';
 $LDCurrentFindings='Hallazgos actuales';
 $LDFinalFindings='Hallazgo definitivo';
 
 $LDFillLabOnly='Solamente para uso del laboratorio';
-$LDLEN='NRL';  /* Lab entry number: N鷐ero de registro de laboratorio */
+$LDLEN='NRL';  /* Lab entry number: N煤mero de registro de laboratorio */
 $LDDate='Date';
 $LDEye='Ojo';
-$LDBac_1='Bact.1'; /* Nota: Bact. significa bacteria o pat骻eno */
+$LDBac_1='Bact.1'; /* Nota: Bact. significa bacteria o pat贸geno */
 $LDBac_2='Bact.2';
 $LDBac_3='Bact.3';
-$LDBac_I='Pat骻.I';
-$LDBac_II='Pat骻.II';
-$LDBac_III='Pat骻.III';
+$LDBac_I='Pat贸g.I';
+$LDBac_II='Pat贸g.II';
+$LDBac_III='Pat贸g.III';
 $LDFungi='Hongo';
 $LDResistanceTestAnaerob='Prueba de resistencia anaerobio';				
 $LDResistanceTestAerob='Prueba de resistencia aerobio';
@@ -28,7 +35,7 @@ $LDBacNrNeg='Cnt.Bact.neg';
 $LDSMR=array('S','M','R');
 
 /* 2002-09-19 EL */
-$LDBAC=array('Pat骻. I', 'Pat骻. II', 'Pat骻. III');
+$LDBAC=array('Pat贸g. I', 'Pat贸g. II', 'Pat贸g. III');
 
 /* Note: the following arrays use strict medical terminology.
 *  If you are not sure about their translation, please leave the 
@@ -69,7 +76,7 @@ $lab_TestType = array('_lab_culture_aerob_' => 'C.aer.',
 								 
 								 '_lab_culture_stool_' => 'Cult.heces',
 								 '_lab_culture_blood_' => 'Cult.sangr',
-								 '_lab_liquor_cult_vial' => 'KF.LCR (por confirmar t閞mino)',
+								 '_lab_liquor_cult_vial' => 'KF.LCR (por confirmar t茅rmino)',
 								 '_lab_laal_' => 'LAAL',
 								 '_lab_own_blood_' => 'Sangre propia',
 								 '_extra_1_' => ' ',
@@ -170,7 +177,7 @@ $lab_TestType = array('_lab_culture_aerob_' => 'C.aer.',
 								 
 								 '_lab_culture_stool_' => 'Cult.heces',
 								 '_lab_culture_blood_' => 'Cult.sangre',
-								 '_lab_liquor_cult_vial' => 'Cult.Fco.LCR (por confirmar t閞mino)',
+								 '_lab_liquor_cult_vial' => 'Cult.Fco.LCR (por confirmar t茅rmino)',
 								 '_lab_laal_' => 'LAAL',
 								 '_lab_own_blood_' => 'Sangre propia',
 								 '_extra_1_' => ' ',
@@ -210,7 +217,7 @@ $lab_TestType = array('_lab_culture_aerob_' => 'C.aer.',
 								 '_lab_bbl_1_' => 'BBL 1',
 								 '_lab_api_1_' => 'API 1',
 								 '_lab_api_anaerob_1_' => 'API aner.1',
-								 '_lab_gram_dye_1_' => 'Tinci髇 Gram.1',
+								 '_lab_gram_dye_1_' => 'Tinci贸n Gram.1',
 								 
 								 '_lab_streptex_2_' => 'Streptex 2',
 								 '_lab_plasma_coag_2_' => 'Plasmacoag.2',
@@ -221,7 +228,7 @@ $lab_TestType = array('_lab_culture_aerob_' => 'C.aer.',
 								 '_lab_bbl_2_' => 'BBL 2',
 								 '_lab_api_2_' => 'API 2',
 								 '_lab_api_anaerob_2_' => 'API aner.2',
-								 '_lab_gram_dye_2_' => 'Tinci髇 Gram.2',
+								 '_lab_gram_dye_2_' => 'Tinci贸n Gram.2',
 								 
 								 
 								 '_lab_streptex_3_' => 'Streptex 3',
@@ -233,14 +240,14 @@ $lab_TestType = array('_lab_culture_aerob_' => 'C.aer.',
 								 '_lab_bbl_3_' => 'BBL 3',
 								 '_lab_api_3_' => 'API 3',
 								 '_lab_api_anaerob_3_' => 'API aner.3',
-								 '_lab_gram_dye_3_' => 'Tinci髇 Gram.3'
+								 '_lab_gram_dye_3_' => 'Tinci贸n Gram.3'
 								 );*/
 $lab_ResistANaerobAcro=array('PEN','AMO','AMC','MZL','PIC','IMI','CTX','CMP','TET','CLI','MTR','ERY','TEC','VAN','');
 									
 $lab_ResistAerobAcro=array('P','AMX','AMC','CC','MZ','PIP','GM','AN','CZ',
                                            'CXM','CRO','MER','OFX','SXT','U','AZ',
 										   'VA','NN','IPM','CTX','CAZ','FEP','TEC',
-										   'FF','25','E','OX','CIP','CFS','30','31','週ac.');
+										   'FF','25','E','OX','CIP','CFS','30','31','脽Lac.');
 										   
 $lab_ResistAerobExtra=array('AB','MIC','NY','AC','KET','6','','',
                                             'C','NE','GM','D','OFX','K','','',
@@ -286,12 +293,12 @@ $lab_TestResultId_1=array('Staph.aureus', 'E.coli', 'enterob.aerogenes',
 									 
 */									 
 $lab_TestResultId_2 = array('Sin crecimiento luego de 48 horas', 'Crecim. tipo aerobios', 'Negativo para amebas en heces',
-                                           'Sin crecimiento luego de 5 d韆s', '', 'Negativo para Lamblia en heces',
-										   'Sin crecimiento luego de 9 d韆s', 'Sin evidencia de Diplococ. gramneg.', 'Neg. para huevos de nematodos en heces',
-										   'No Bact. del grupo TPE', 'Cultivo GO negativo', 'Sin crecimiento de E coli',
-										   'cultivo neg. Campylobacter.', '', 'Liquorant韌eno (緼g. LCR?) negativo',
+                                           'Sin crecimiento luego de 5 d铆as', '', 'Negativo para Lamblia en heces',
+										   'Sin crecimiento luego de 9 d铆as', 'Sin evidencia de Diplococ. gramneg.', 'Neg. para huevos de nematodos en heces',
+										   'No Bact. del grupo TPE', 'Cultivo GO negativo', 'Sin crecimiento de E. coli',
+										   'cultivo neg. Campylobacter.', '', 'Ag. LCR negativo',
 										   'NoG. Campylobacter pylori', 'Sin evid.microscp.acid.Cilind.', 'EHEC negativo',
-										   'Sin evid.serolog.dispepsia.coli', 'Sin crecimiento luego de 7 d韆s', '',
+										   'Sin evid.serolog.dispepsia.coli', 'Sin crecimiento luego de 7 d铆as', '',
 										   'Evid. esporas de hongos', '' ,'',
 										   'Cultivo hongos negativo', '', '',
 										   'Cocos flora mixta', '', '',

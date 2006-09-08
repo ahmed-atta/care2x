@@ -1,23 +1,26 @@
 <?php
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_indexframe.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * Versi√≥n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 $LDHome='Inicio';
 $LDPatient='Paciente';
-$LDAdmission='AdmisiÛn';
+$LDAdmission='Admisi√≥n';
 $LDAmbulatory='Ambulatorio';
 $LDMedocs='Medocs';
-$LDDoctors='MÈdicos';
+$LDDoctors='M√©dicos';
 $LDNursing='Enfermeras';
-$LDOR='QuirÛfanos';
+$LDOR='Quir√≥fanos';
 $LDLabs='Laboratorios';
-$LDRadiology='RadiologÌa';
+$LDRadiology='Radiolog√≠a';
 $LDPharmacy='Farmacia';
-$LDMedDepot='Insumos mÈdicos';
+$LDMedDepot='Insumos m√©dicos';
 $LDDirectory='Directorio';
-$LDTechSupport='Soporte tÈcnico';
+$LDTechSupport='Soporte t√©cnico';
 $LDEDP='Admin. Sistemas';
 $LDIntraEmail='Email intranet';
 $LDInterEmail='Email internet';
@@ -28,23 +31,23 @@ $LDAppointments='Citas';
 
 $VersionChgTarget='_top';
 $LDLanguage='Idioma';
-$LDPlsWaitInit='Por favor espere. El sistema se est· iniciando...';
+$LDPlsWaitInit='Por favor espere. El sistema se est√° iniciando...';
 
 $LDChange='Cambio';
 /* 2003-04-27 EL */
-$LDBrazilian='BrasileÒo';
+$LDBrazilian='Brasile√±o';
 $LDCzech='Checo';
-$LDEnglish='InglÈs';
-$LDFrench='FrancÈs';
-$LDGerman='Alem·n';
+$LDEnglish='Ingl√©s';
+$LDFrench='Franc√©s';
+$LDGerman='Alem√°n';
 $LDIndonesian='Indonesio';
 $LDItalian='Italiano';
 $LDNorwegian='Noruego';
 $LDPolish='Polaco';
-$LDPortuguese='PortuguÈs';
-$LDSpanish='EspaÒol';
+$LDPortuguese='Portugu√©s';
+$LDSpanish='Espa√±ol';
 /* 2003-04-28 El */
-$LDDutch='HolandÈs';
+$LDDutch='Holand√©s';
 # 2003-08-04 EL
 $LDPerson='Persona';
 # 2003-09-05 EL

@@ -1,20 +1,23 @@
 <?php
 
-/**
-* Traducido por: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_lab.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 $LDLab='Laboratorios';
-$LDMedLab='Laboratorio clínico';
-$LDPathLab='Laboratorio patológico';
-$LDBacLab='Laboratorio bacteriológico';
+$LDMedLab='Laboratorio clÃ­nico';
+$LDPathLab='Laboratorio patolÃ³gico';
+$LDBacLab='Laboratorio bacteriolÃ³gico';
 $LDClose='Cerrar';
 $LDSeeLabData='Buscar y mostrar los datos de laboratorio del paciente.';
 $LDSeeData='Mostrar datos';
 $LDEnterLabData='Ingresar los datos de laboratorio del paciente';
 $LDNewData='Ingresar datos nuevos';
-$LDEnterPrioParams='Fijar los parámetros de prioridades';
-$LDPrioParams='Parámetros de prioridades';
+$LDEnterPrioParams='Fijar los parÃ¡metros de prioridades';
+$LDPrioParams='ParÃ¡metros de prioridades';
 $LDEnterNorms='Fijar el rango normal';
 $LDNorms='Rango normal';
 $LDOtherOptions='Otras opciones';
@@ -22,12 +25,12 @@ $LDOptions='Opciones';
 $LDMemo='Leer o componer un memo';
 $LDTitleMemo='Memo';
 $LDfieldname=array('No. de paciente','Apellido','Nombre','Fecha de nacimiento');
-$LDSearchWordPrompt='Ingrese una plabra de búsqueda, por ejemplo: un apellido, un nombre, una fecha de nacimiento, etc.';
-$LDEnterData='Dé clic para ingresar los datos';
-$LDClk2See='Dé clic para ver los datos';
-$LDFoundPatient='La búsqueda halló <b>~nr~</b> pacientes';
-$LDWildCards='Qué son los comodines y cómo usarlos';
-$LDNewSearch='Nueva búsqueda';
+$LDSearchWordPrompt='Ingrese una plabra de bÃºsqueda, por ejemplo: un apellido, un nombre, una fecha de nacimiento, etc.';
+$LDEnterData='DÃ© clic para ingresar los datos';
+$LDClk2See='DÃ© clic para ver los datos';
+$LDFoundPatient='La bÃºsqueda hallÃ³ <b>~nr~</b> pacientes';
+$LDWildCards='QuÃ© son los comodines y cÃ³mo usarlos';
+$LDNewSearch='Nueva bÃºsqueda';
 
 $LDCaseNr='No. de paciente';
 $LDLabReport='Reporte de laboratorio';
@@ -35,56 +38,56 @@ $LDLastName='Apellido';
 $LDName='Nombre';
 $LDBday='Fecha de nacimiento';
 $LDNoLabReport='No existe un reporte de laboratorio disponible para';
-$LDParameter='Parámetro';
+$LDParameter='ParÃ¡metro';
 $LDNormalValue='Rango normal';
 $LDOClock='Hora';
-$LDClk2Graph='Dé clic para ver el despliegue gráfico';
-$LDClk2SelectAll='Dé clic para seleccionar o deseleccionar todo para el despliegue gráfico';
-$LDGraph='Gráfico';
+$LDClk2Graph='DÃ© clic para ver el despliegue grÃ¡fico';
+$LDClk2SelectAll='DÃ© clic para seleccionar o deseleccionar todo para el despliegue grÃ¡fico';
+$LDGraph='GrÃ¡fico';
 $LDBack='Volver';
 $LDReportFound='El siguiente es un reporte de laboratorio para el paciente con el No. ';
 $LDReportFoundMany='Los siguientes son reportes de laboratorio para el paciente con el No. ';
-$LDIfWantEdit='Si desea editar el reporte, dé clic en el botón con la flecha.';
-$LDIfWantEditMany='Si desea editar alguno de ellos, dé clic en el botón con la flecha.';
+$LDIfWantEdit='Si desea editar el reporte, dÃ© clic en el botÃ³n con la flecha.';
+$LDIfWantEditMany='Si desea editar alguno de ellos, dÃ© clic en el botÃ³n con la flecha.';
 
 $LDJobIdNr='Lote No.';
-$LDExamDate='Fecha de examinación';
+$LDExamDate='Fecha de examinaciÃ³n';
 $LDOn='En';
 $LDAt='A las';
-$LDClk2Edit='Dé clic para editar este reporte';
+$LDClk2Edit='DÃ© clic para editar este reporte';
 
 $LDNewJob='Deseo crear un nuevo reporte de laboratorio';
 $LDNew='Nuevo';
 $LDEdit='Editar';
 $LDCreate='Crear';
-$LDParamGroup='Grupo de parámetros';
-$LDSelectParamGroup='Seleccionar el grupo de parámetros';
+$LDParamGroup='Grupo de parÃ¡metros';
+$LDSelectParamGroup='Seleccionar el grupo de parÃ¡metros';
 $LDValue='Valor';
 
-$LDParamNoSee='¡No se ha desplegado el parámetro que necesito!';
+$LDParamNoSee='Â¡No se ha desplegado el parÃ¡metro que necesito!';
 $LDOnlyPair='Necesito ingresar solamente unos cuantos valores!';
-$LDHow2Save='¿Cómo debo guardar los valores?';
-$LDWrongValueHow='Guardé un valor erróneo, ¿Cómo puedo corregirlo?';
-$LDVal2Note='Necesito ingresar una nota en lugar de un valor.  ¿Cómo lo hago?';
-$LDImDone='Estoy listo.  ¿Y ahora qué?';
-$LDAlertJobId='¡Ingrese el número de lote primero!';
-$LDAlertTestDate='¡Ingrese la fecha de examinación primero!';
+$LDHow2Save='Â¿CÃ³mo debo guardar los valores?';
+$LDWrongValueHow='GuardÃ© un valor errÃ³neo, Â¿CÃ³mo puedo corregirlo?';
+$LDVal2Note='Necesito ingresar una nota en lugar de un valor.  Â¿CÃ³mo lo hago?';
+$LDImDone='Estoy listo.  Â¿Y ahora quÃ©?';
+$LDAlertJobId='Â¡Ingrese el nÃºmero de lote primero!';
+$LDAlertTestDate='Â¡Ingrese la fecha de examinaciÃ³n primero!';
 
 /* 2002-09-01 EL */
 $LDTestRequest='Solicitud de prueba';
-$LDFillUpSend='Llene y envíe un formulario de pedidos para ';
-$LDTestRequestPathoTxt=$LDFillUpSend.'prueba de patología/histología';
-$LDTestRequestBacterioTxt=$LDFillUpSend.'prueba bacteriológica';
-$LDTestRequestChemLabTxt=$LDFillUpSend.'prueba de laboratorio clínico';
+$LDFillUpSend='Llene y envÃ­e un formulario de pedidos para ';
+$LDTestRequestPathoTxt=$LDFillUpSend.'prueba de patologÃ­a/histologÃ­a';
+$LDTestRequestBacterioTxt=$LDFillUpSend.'prueba bacteriolÃ³gica';
+$LDTestRequestChemLabTxt=$LDFillUpSend.'prueba de laboratorio clÃ­nico';
 $LDBloodBank='Banco de sangre';
 $LDBloodRequest='Pedido de sangre';
-$LDBloodRequestTxt=$LDFillUpSend.'productos sanguíneos';
+$LDBloodRequestTxt=$LDFillUpSend.'productos sanguÃ­neos';
 
 $LDRequestSent['insert']='La solicitud de prueba ha sido enviada. ';
-$LDFormSaved['insert']='El formulario fue guardado (no ha sido enviado todavía).';
-$LDRequestSent['update']='La solicitud para actualización de pruebas fue enviada. ';
-$LDFormSaved['update']='La prueba actualizada fue guardada (no ha sido enviada todavía).';
-$LDWhatToDo='¿Qué desea hacer ahora?';
+$LDFormSaved['insert']='El formulario fue guardado (no ha sido enviado todavÃ­a).';
+$LDRequestSent['update']='La solicitud para actualizaciÃ³n de pruebas fue enviada. ';
+$LDFormSaved['update']='La prueba actualizada fue guardada (no ha sido enviada todavÃ­a).';
+$LDWhatToDo='Â¿QuÃ© desea hacer ahora?';
 
 $LDNewFormSamePatient='Crear una nueva prueba para el <b>mismo</b> paciente';
 $LDEditForm='Editar el mismo pedido de prueba';
@@ -96,15 +99,15 @@ $LDSearchPatient='Buscar patiente';
 $LDSearchFound='~nr~ pacientes fueron hallados.';
 /* 2002-09-04 EL */		
 $LDTestRequestFor='Solicitud de';
-$LDTestType=array('chemlabor'=>'pruebas de laboratorio químico',
-                              'patho'=>'pruebas de patología',
-								 'baclabor'=>'pruebas bacteriológicas',
-								 'radio'=>'pruebas radiológicas',
-								 'blood'=>'productos sanguíneos',
+$LDTestType=array('chemlabor'=>'pruebas de laboratorio quÃ­mico',
+                              'patho'=>'pruebas de patologÃ­a',
+								 'baclabor'=>'pruebas bacteriolÃ³gicas',
+								 'radio'=>'pruebas radiolÃ³gicas',
+								 'blood'=>'productos sanguÃ­neos',
 								 'radio'=>'pruebas radiologias');
 /* 2002-09-10 EL */
 $LDTestReception='Solicitudes pendientes';
-$LDTestReceptionTxt='Recibir y procesar pedidos, escribir los resultados/hallazgos/diagnósticos';
+$LDTestReceptionTxt='Recibir y procesar pedidos, escribir los resultados/hallazgos/diagnÃ³sticos';
 /* 2002-09-15 EL */
 $LDPrintForm='Imprimir el formulario solicitado';
 
@@ -113,17 +116,17 @@ $LDInitFindings='Hallazgos iniciales';
 $LDCurrentFindings='Hallazgos actuales';
 $LDFinalFindings='Hallazgos finales';
 $LDFillLabOnly='Para uso de laboratorio exclusivamente';
-$LDLEN='NRL';  /* Lab entry number: Número de registro de laboratorio */
+$LDLEN='NRL';  /* Lab entry number: NÃºmero de registro de laboratorio */
 /*2003-07-11 EL*/
-$LDAdministration='Administración';
-$LDTestParameters='Parámetros de prueba';
-$LDTestParametersTxt='Escriba o edite las unidades o medidas, valores, rango, límites, etc.';
+$LDAdministration='AdministraciÃ³n';
+$LDTestParameters='ParÃ¡metros de prueba';
+$LDTestParametersTxt='Escriba o edite las unidades o medidas, valores, rango, lÃ­mites, etc.';
 $LDMsrUnit='Unidad de medida';
 $LDMedian='Mediana';
-$LDUpperBound='Límite superior';
-$LDLowerBound='Límite inferior';
-$LDUpperCritical='Crítico superior';
-$LDLowerCritical='Crítico inferior';
-$LDUpperToxic='Nivel tóxico superior';
-$LDLowerToxic='Nivel tóxico inferior';
+$LDUpperBound='LÃ­mite superior';
+$LDLowerBound='LÃ­mite inferior';
+$LDUpperCritical='CrÃ­tico superior';
+$LDLowerCritical='CrÃ­tico inferior';
+$LDUpperToxic='Nivel tÃ³xico superior';
+$LDLowerToxic='Nivel tÃ³xico inferior';
 ?>

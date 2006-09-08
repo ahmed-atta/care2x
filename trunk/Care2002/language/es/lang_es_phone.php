@@ -1,40 +1,43 @@
 <?php
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_phone.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 $fieldname=array(
 							"Apellidos",
 							"Nombre",
-							"Teléfono 1",
-							"Teléfono 2",
-							"Teléfono 3",
+							"TelÃ©fono 1",
+							"TelÃ©fono 2",
+							"TelÃ©fono 3",
 							"Buscapersonas 1",
 							"Buscapersonas 2",
 							"Privado 1",
 							"Privado 2"
 							);
 							
-$LDPhoneDir="Directorio telefónico";
+$LDPhoneDir="Directorio telefÃ³nico";
 $LDSearch="Buscar";
 $LDDir="Directorio";
 $LDNewData="Nueva ficha";
 $LDSEARCH="Buscar";
 
 /**************** note the " ~nr~ " must not be erased it will be replaced by the script with the number of search results ******/
-$LDPhoneFound="Búsqueda encontrada, <font color=red><b> ~nr~ </b></font> datos relevantes.";
+$LDPhoneFound="BÃºsqueda encontrada, <font color=red><b> ~nr~ </b></font> datos relevantes.";
 
-$LDKeywordPrompt="Introduzca la palabra clave para la búsqueda. Por ejemplo: un nombre, o un departamento, etc.";
+$LDKeywordPrompt="Introduzca la palabra clave para la bÃºsqueda. Por ejemplo: un nombre, o un departamento, etc.";
 $LDShowDir="Mostrar el directorio completo";
-$LDNewEntry="Introducir nuevo teléfono o buscapersonas.";
+$LDNewEntry="Introducir nuevo telÃ©fono o buscapersonas.";
 
 $LDExtFields=array(
 								"No.",
 								"Tratamiento",
 								"Apellidos",
 								"Nombre",
-								"Profesión",
+								"ProfesiÃ³n",
 								"Depto.1",
 								"Depto.2",
 				 				"Tel.1",
@@ -47,59 +50,59 @@ $LDExtFields=array(
 								"Despacho No.",
 								"Fecha",
 								"Hora",
-								"Registró");
+								"RegistrÃ³");
 $LDEditFields=array(
 								"No.",
 								"Tratamiento",
 								"Apellidos",
 								"Nombre",
-								"Profesión",
+								"ProfesiÃ³n",
 								"Departamento 1",
 								"Departamento 2",
-				 				"Teléfono (interno) 1",
-								"Teléfono (interno) 2",
-								"Teléfono (interno) 3",
+				 				"TelÃ©fono (interno) 1",
+								"TelÃ©fono (interno) 2",
+								"TelÃ©fono (interno) 3",
 								"Privado (externo) 1",
 								"Privado (externo) 2",
-								"Búsca 1",
-								"Búsca 2",
+								"BÃºsca 1",
+								"BÃºsca 2",
 								"Despacho Nº.",
 								"Fecha",
 								"Hora",
-								"Registró");
+								"RegistrÃ³");
 $LDOK=" OK ";
 $LDCancel="Cancelar";
 $LDSave="Guardar";
 $LDEdit="Editar";
 $LDDelete="Borrar";
 $LDReset="Reiniciar";
-$LDNewPhoneEntry="Introduzca la nueva información de teléfono";
+$LDNewPhoneEntry="Introduzca la nueva informaciÃ³n de telÃ©fono";
 $LDShow="Mostrar";
 $LDActualDir="Contenido actual del directorio";
-$LDMoreInfo="Más información del directorio";
-$LDMaxItem="Número total de registros en el directorio";
-$LDUpdateOk="La información ha sido actualizada exitosamente";
+$LDMoreInfo="MÃ¡s informaciÃ³n del directorio";
+$LDMaxItem="NÃºmero total de registros en el directorio";
+$LDUpdateOk="La informaciÃ³n ha sido actualizada exitosamente";
 $LDRows="Filas";
 
-$LDGoodMorning="¡Buenos dias!";
-$LDGoodDay="¡Hola, buenas tardes!";
+$LDGoodMorning="Â¡Buenos dias!";
+$LDGoodDay="Â¡Hola, buenas tardes!";
 $LDGoodEvening="Buenas noches";
 
-$LDShowActualDir="Mostrar las últimas entradas en el directorio";
-$LDYesDelete="Sí, borrar";
+$LDShowActualDir="Mostrar las Ãºltimas entradas en el directorio";
+$LDYesDelete="SÃ­, borrar";
 $LDNoCancel="No! Cancelar";
 $LDDeleteEntry="Borrar estos datos";
-$LDNoData="No incorporó algún campo. Por favor, incorpore todos los datos antes de pulsar el botón \"Guardar\".";
-$LDReallyDelete="¿Realmente desea borrar estos datos?";
+$LDNoData="No incorporÃ³ algÃºn campo. Por favor, incorpore todos los datos antes de pulsar el botÃ³n \"Guardar\".";
+$LDReallyDelete="Â¿Realmente desea borrar estos datos?";
 
-$LDHowManage="Cómo utilizar el directorio";
-$LDHow2OpenDir="Cómo abrir el directorio entero";
-$LDHowEnter="Cómo introducir una nueva información de teléfono";
-$LDHow2SearchPhone="Cómo buscar  un número de teléfono";
+$LDHowManage="CÃ³mo utilizar el directorio";
+$LDHow2OpenDir="CÃ³mo abrir el directorio entero";
+$LDHowEnter="CÃ³mo introducir una nueva informaciÃ³n de telÃ©fono";
+$LDHow2SearchPhone="CÃ³mo buscar  un nÃºmero de telÃ©fono";
 $LDUpdate="Actualizar los datos";
 
 $LDDirData="Editar la entrada del directorio No. <font color=\"red\">~nr~</font>";
 
-$LDTelephone='Telephone';
-$LDBeeper='Beeper';
+$LDTelephone='TelÃ©fono';
+$LDBeeper='Buscapersonas';
 ?>

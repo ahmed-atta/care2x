@@ -1,51 +1,54 @@
 <?php
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_departments.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 $LDHeadlines='Noticias';
-$LDCafeNews='Novedades en la cafetería';
-$LDManagement='Administración';
+$LDCafeNews='Novedades en la cafeterÃ­a';
+$LDManagement='AdministraciÃ³n';
 $LDHealthTips='Consejos saludables';
-$LDEducation='Educación';
+$LDEducation='EducaciÃ³n';
 $LDStudies='Estudios';
 $LDExhibitions='Exhibiciones';
-$LDHeadline='Título';
-$LDAdmission='Admisión';
+$LDHeadline='TÃ­tulo';
+$LDAdmission='AdmisiÃ³n';
 /* 2003-08-20 DH */
-$LDAnesthesiology='Anestesiología';
-$LDCafeteria='Novedades en la cafetería';
-$LDGeneralSurgery='Cirugía general';
-$LDEmergencySurgery='Cirugía de urgencias';
-$LDPlasticSurgery='Cirugía plástica';
-$LDEarNoseThroath='Otorrinolaringología';
-$LDOpthalmology='Oftalmología';
-$LDPathology='Anatomía patológica';
-$LDObGynecology='Ginecología y Obstetricia';
-$LDPhysicalTherapy='Rehabilitación';
+$LDAnesthesiology='AnestesiologÃ­a';
+$LDCafeteria='Novedades en la cafeterÃ­a';
+$LDGeneralSurgery='CirugÃ­a general';
+$LDEmergencySurgery='CirugÃ­a de urgencias';
+$LDPlasticSurgery='CirugÃ­a plÃ¡stica';
+$LDEarNoseThroath='OtorrinolaringologÃ­a';
+$LDOpthalmology='OftalmologÃ­a';
+$LDPathology='AnatomÃ­a patolÃ³gica';
+$LDObGynecology='GinecologÃ­a y Obstetricia';
+$LDPhysicalTherapy='RehabilitaciÃ³n';
 $LDInternalMedicine='Medicina interna';
 $LDIntermediateCareUnit='U.C.Intermedios';
 $LDIntensiveCareUnit='U.C.Intensivos';
 $LDEmergencyAmbulatory='Ambulatorio de urgencias';
 $LDInternalMedicineAmbulatory='Ambulatorio de Medicina interna';
-$LDSonography='Ecografía';
-$LDNuclearDiagnostics='Diagnóstico nuclear';
-$LDRadiology='Radiología';
-$LDOncology='Oncología';
-$LDNeonatal='Neonatología';
+$LDSonography='EcografÃ­a';
+$LDNuclearDiagnostics='DiagnÃ³stico nuclear';
+$LDRadiology='RadiologÃ­a';
+$LDOncology='OncologÃ­a';
+$LDNeonatal='NeonatologÃ­a';
 $LDCentralLaboratory='Laboratorio central';
-$LDSerologicalLaboratory='Laboratorio serológico';
-$LDChemicalLaboratory='Laboratorio médico';
-$LDBacteriologicalLaboratory='Laboratorio bacteriológico';
-$LDTechnicalMaintenance='Mantenimiento técnico';
+$LDSerologicalLaboratory='Laboratorio serolÃ³gico';
+$LDChemicalLaboratory='Laboratorio mÃ©dico';
+$LDBacteriologicalLaboratory='Laboratorio bacteriolÃ³gico';
+$LDTechnicalMaintenance='Mantenimiento tÃ©cnico';
 $LDITDepartment='Departamento de IT';
 $LDGeneralAmbulatory='Ambulatorio general';
 $LDBloodBank='Banco de sangre';
-$LDNursing='Enfermería';
+$LDNursing='EnfermerÃ­a';
 /* 2003-04-27 EL */
 $LDMedical='Medico';
-$LDSupport='No-médico';
+$LDSupport='No-mÃ©dico';
 $LDNews='Noticias';
 $LDDepartment='Departamento';
 $LDPressRelations='Prensa';
@@ -53,6 +56,6 @@ $LDPressRelations='Prensa';
 $LDSelectDept='Elija un departamento';
 /*2003-06-15 EL*/
 $LDPlsSelectDept='Por favor elija un departamento';
-$LD_AllMedicalDept='Todos los departamentos médicos';
-$LDClinic='Clínica';
+$LD_AllMedicalDept='Todos los departamentos mÃ©dicos';
+$LDClinic='ClÃ­nica';
 ?>

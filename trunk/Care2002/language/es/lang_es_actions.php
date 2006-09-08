@@ -1,8 +1,11 @@
 <?php
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_actions.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 $LDSend='Enviar';
 $LDCancel='Cancelar';
@@ -10,29 +13,29 @@ $LDPrint='Imprimir';
 $LDStop='Detener';
 $LDContinue='Continuar';
 $LDSearch='Buscar';
-$LDBack='Atrás';
+$LDBack='AtrÃ¡s';
 $LDOpen='Abrir';
 $LDClose='Cerrar';
 
 $LDRegister='Registro';
 $LDRegistration='Registrar';
-$LDAdmission='Admisión';
+$LDAdmission='AdmisiÃ³n';
 $LDAdmit='Admitir';
 $LDArchive='Archivo';
 $LDStart='Iniciar';
 $LDEnd='Finalizar';
 # 2003-07-29 EL
 $LDListApptByDept='Mostrar la lista de citas por Departamento';
-$LDListApptByDoc='Mostrar la lista de citas según el Tratante';
+$LDListApptByDoc='Mostrar la lista de citas segÃºn el Tratante';
 $LDdone='Hecho';
 $LDOk='Ok';
 $LDSelect='Seleccionar';
 
 $LDHelp="Ayudar";
-$LDCloseHelpWin="Close help window";
+$LDCloseHelpWin="Cerrar la ventana de ayuda";
 
-$LDRefreshWindow = 'Refresh display';
+$LDRefreshWindow = 'Actualizar la ventana';
 
-$LDNext = 'Next';
-$LDPrevious = 'Previous';
+$LDNext = 'Siguiente';
+$LDPrevious = 'Previo';
 ?>

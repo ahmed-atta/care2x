@@ -1,14 +1,11 @@
 <?php
 
-
-
-/**
-
-* Correcciones: Dr. med. Daniel Hinostroza C.
-
-*/
-
-
+/*
+ * Nombre: lang_es_products.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 $LDClose='Cerrar';
 
@@ -24,25 +21,25 @@ $LDReset='Resetear';
 
 $LDPharmacy='Farmacia';
 
-$LDMedDepot='Insumos médicos';
+$LDMedDepot='Insumos mÃ©dicos';
 
 
 
-$LDSearchWordPrompt='Ingrese una palabra de búsqueda, por ejemplo: un número de orden, un número de producto o un nombre de producto, etc.';
+$LDSearchWordPrompt='Ingrese una palabra de bÃºsqueda, por ejemplo: un nÃºmero de orden, un nÃºmero de producto o un nombre de producto, etc.';
 
-$LDEnterData='Dé clic para ingresar datos';
+$LDEnterData='DÃ© clic para ingresar datos';
 
-$LDClk2See='Dé clic para ver datos';
+$LDClk2See='DÃ© clic para ver datos';
 
 
 
 # note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results #
 
-$LDFoundPatient='La búsqueda halló <b>~nr~</b> pacientes';
+$LDFoundPatient='La bÃºsqueda hallÃ³ <b>~nr~</b> pacientes';
 
-$LDWildCards='Qué son los comodines y cómo usarlos';
+$LDWildCards='QuÃ© son los comodines y cÃ³mo usarlos';
 
-$LDNewSearch='Nueva búsqueda';
+$LDNewSearch='Nueva bÃºsqueda';
 
 $LDSearch='Buscar';
 
@@ -60,7 +57,7 @@ $LDOn='En';
 
 $LDAt='localizado en';
 
-$LDClk2Edit='Dé clic para editar este reporte';
+$LDClk2Edit='DÃ© clic para editar este reporte';
 
 
 
@@ -84,11 +81,11 @@ $LDMemoTxt='Leer o escribir un memo';
 
 $LDSearchPat='Buscar un paciente';
 
-$LDCategory='Categoría';
+$LDCategory='CategorÃ­a';
 
-$LDPast3Days='Los últimos tres días';
+$LDPast3Days='Los Ãºltimos tres dÃ­as';
 
-$LDPast3Months='Los últimos tres meses';
+$LDPast3Months='Los Ãºltimos tres meses';
 
 $LDPastAll='Todo';
 
@@ -98,63 +95,63 @@ $LDSelect='Seleccionar';
 
 $LDOrderArchive='Archivo';
 
-$LDOrderArchiveTxt='Ver, editar, archivar las órdenes procesadas';
+$LDOrderArchiveTxt='Ver, editar, archivar las Ã³rdenes procesadas';
 
 $LDPharmaOrder='Pedido a la farmacia';
 
 $LDPharmaOrderTxt='Crear y/o enviar el pedido';
 
-$LDHow2Order='¿Cómo hacer el pedido?';
+$LDHow2Order='Â¿CÃ³mo hacer el pedido?';
 
-$LDHow2OrderTxt='¿Cómo, qué y cuándo debo hacer el pedido?';
+$LDHow2OrderTxt='Â¿CÃ³mo, quÃ© y cuÃ¡ndo debo hacer el pedido?';
 
-$LDOrderCat='Mi catálogo de productos';
+$LDOrderCat='Mi catÃ¡logo de productos';
 
 $LDOrderCatTxt='Crear, editar, actualizar, remover, etc.';
 
 $LDPharmaDb='Banco de datos';
 
-$LDPharmaDbTxt='Administrando la información de los productos';
+$LDPharmaDbTxt='Administrando la informaciÃ³n de los productos';
 
-$LDRedList='Índice de especialidades médicas';
+$LDRedList='Índice de especialidades mÃ©dicas';
 
-$LDRedListTxt='Información detallada acerca de los productos médicos';
+$LDRedListTxt='InformaciÃ³n detallada acerca de los productos mÃ©dicos';
 
 $LDOrderBotActivate='Robot de pedidos';
 
-$LDOrderBotActivateTxt='Activar la recepción automática de las listas de pedidos.';
+$LDOrderBotActivateTxt='Activar la recepciÃ³n automÃ¡tica de las listas de pedidos.';
 
 
 
-$LDNotSent='¡No ha sido enviado todavía!';
+$LDNotSent='Â¡No ha sido enviado todavÃ­a!';
 
-$LDcatindex=array('','Artículo','Unidades.','','No. de pedido','','');
+$LDcatindex=array('','ArtÃ­culo','Unidades.','','No. de pedido','','');
 
-$LDFinindex=array('','Artículo','Unidades','','No. de pedido');
+$LDFinindex=array('','ArtÃ­culo','Unidades','','No. de pedido');
 
 $LDListindex=array('','','Creado el','Tiempo','Creado por','');
 
-$LDGenindex=array('','','','Artículo','Genérico','Descripción','No. de pedido');
+$LDGenindex=array('','','','ArtÃ­culo','GenÃ©rico','DescripciÃ³n','No. de pedido');
 
-$LDCindex=array('&nbsp;','&nbsp;','Artículo','Unidades','&nbsp;','No. de pedido','&nbsp;','&nbsp;');
+$LDCindex=array('&nbsp;','&nbsp;','ArtÃ­culo','Unidades','&nbsp;','No. de pedido','&nbsp;','&nbsp;');
 
-$LDMCindex=array('','Artículo','Unidades pro orden','No. de pedido','');
+$LDMCindex=array('','ArtÃ­culo','Unidades pro orden','No. de pedido','');
 
-$LDMSRCindex=array('','No. de pedido','Artículo No.','No. de licencia','Artículo','Genérico','Descripción','');
+$LDMSRCindex=array('','No. de pedido','ArtÃ­culo No.','No. de licencia','ArtÃ­culo','GenÃ©rico','DescripciÃ³n','');
 
 
 
-$LDBasketEmpty='Al momento su canasta de compras está vacía.';
+$LDBasketEmpty='Al momento su canasta de compras estÃ¡ vacÃ­a.';
 
-$LDWasSent='Alguien ya envió el pedido a la farmacia ¡o lo borró! Por favor cree una nueva lista de pedido. Gracias.';
+$LDWasSent='Alguien ya enviÃ³ el pedido a la farmacia Â¡o lo borrÃ³! Por favor cree una nueva lista de pedido. Gracias.';
 
 $LDFinalizeList='Finalice la lista de pedido';
 
-$LDClk2SeeEdit='Para ver y/o editar, dé clic en el botón de la flecha.';
+$LDClk2SeeEdit='Para ver y/o editar, dÃ© clic en el botÃ³n de la flecha.';
 
-$LDListNotSentMany='Las siguientes listas de pedidos no han sido enviadas todavía.';
+$LDListNotSentMany='Las siguientes listas de pedidos no han sido enviadas todavÃ­a.';
 
-$LDListNotSent='La siguiente lista de pedidos no ha sido enviada todavía.';
+$LDListNotSent='La siguiente lista de pedidos no ha sido enviada todavÃ­a.';
 
 $LDEditList='Editar esta lista';
 
@@ -164,37 +161,37 @@ $LDRemoveList='Borrar esta lista';
 
 $LDBasket='Canasta';
 
-$LDCatalog='Catálogo de pedidos';
+$LDCatalog='CatÃ¡logo de pedidos';
 
 $LDPutNBasket='Colocar en la canasta';
 
-$LDRemoveArticle='Remover artículo';
+$LDRemoveArticle='Remover artÃ­culo';
 
 $LDPut2BasketAway='Colocar en la canasta inmediatamente';
 
-$LDNoDataFound='La búsqueda <font color=red><b>no</b></font> no halló datos.';
+$LDNoDataFound='La bÃºsqueda <font color=red><b>no</b></font> no hallÃ³ datos.';
 
-$LDClk2SeeInfo='Por favor dé clic en el botón apropiado para ver la información completa';
+$LDClk2SeeInfo='Por favor dÃ© clic en el botÃ³n apropiado para ver la informaciÃ³n completa';
 
 /********************** Do not erase or replace the ~nr~ *****************************/
 
-$LDFoundNrData='La búsqueda halló <font color=red><b>~nr~</b></font> resultados que corresponden con la palabra clave de búsqueda.';
+$LDFoundNrData='La bÃºsqueda hallÃ³ <font color=red><b>~nr~</b></font> resultados que corresponden con la palabra clave de bÃºsqueda.';
 
-$LDSearchArticle='Hallar artículo';
+$LDSearchArticle='Hallar artÃ­culo';
 
 $LDSearchKey='Buscar palabra clave';
 
-$LDPut2Catalog='Poner este artículo en el catálogo';
+$LDPut2Catalog='Poner este artÃ­culo en el catÃ¡logo';
 
 $LDActualOrder='Pedido actual';
 
-$LDOrderSent='La siguiente lista de pedidos fue enviada a farmacia. ¡Gracias!';
+$LDOrderSent='La siguiente lista de pedidos fue enviada a farmacia. Â¡Gracias!';
 
 $LDNormal='Normal';
 
 $LDUrgent='Urgente';
 
-$LDPassword='Contraseña';
+$LDPassword='ContraseÃ±a';
 
 $LDValidatedBy='Validado por';
 
@@ -208,15 +205,15 @@ $LDCreateBasket='Empezar una nueva lista de pedidos.';
 
 $LDAlertNoValidator='Se necesita el validador.';
 
-$LDAlertNoPassword='Se necesita la contraseña del validador.';
+$LDAlertNoPassword='Se necesita la contraseÃ±a del validador.';
 
-$LDOpenInfo='Mostrar la información completa en lo referente a ';
+$LDOpenInfo='Mostrar la informaciÃ³n completa en lo referente a ';
 
 
 
 $LDSearch4OrderList='Buscar una lista de pedidos';
 
-$LDGoodMorning='Buenos días';
+$LDGoodMorning='Buenos dÃ­as';
 
 $LDGoodDay='Hola, es un placer atenderle';
 
@@ -230,7 +227,7 @@ $LDDept='Departamento';
 
 $LDPrio='Prioridad';
 
-$LDSearchIn='Buscar después de';
+$LDSearchIn='Buscar despuÃ©s de';
 
 
 
@@ -238,29 +235,29 @@ $LDArchindex=array('&nbsp;','&nbsp;','Lista pedida por:','Recibida el:','a las:'
 
 $LDArchValindex=array('Lista pedida por','en','a las','Enviado por','Validado por','Enviado el',' a las','');
 
-$LDOrderIndex=array('&nbsp;','&nbsp;','Lista pedida por','Llegó el','a las','Estado actual');
+$LDOrderIndex=array('&nbsp;','&nbsp;','Lista pedida por','LlegÃ³ el','a las','Estado actual');
 
 
 
-$LDPlsEnterMore='Por favor escriba alguna información e intente nuevamente.';
+$LDPlsEnterMore='Por favor escriba alguna informaciÃ³n e intente nuevamente.';
 
-$LDNoSingleChar='Si escribe solamete una letra o número, será ignorada.';
-
-
-
-$LDListFound='La siguiente es la lista de pedido en el archivo que correspondió con las palabras clave de búsqueda.';
-
-$LDListFoundMany='Las siguientes son las listas de pedidos en el archivo que correspondieron con la palabra clave de búsqueda.';
-
-$LDDataRemoved='La información pudo haber sido eliminada de la base de datos de la farmacia.';
-
-$LDPlsInformDept='Por favor, notificar al departamento de ~tagword~ y eventualmente el departamento de Admin. de Sistemas. ¡Gracias!.';
+$LDNoSingleChar='Si escribe solamete una letra o nÃºmero, serÃ¡ ignorada.';
 
 
 
-$LDOrderedArticle='Artículo pedido';
+$LDListFound='La siguiente es la lista de pedido en el archivo que correspondiÃ³ con las palabras clave de bÃºsqueda.';
 
-$LDOrderedArticleMany='Artículos pedidos';
+$LDListFoundMany='Las siguientes son las listas de pedidos en el archivo que correspondieron con la palabra clave de bÃºsqueda.';
+
+$LDDataRemoved='La informaciÃ³n pudo haber sido eliminada de la base de datos de la farmacia.';
+
+$LDPlsInformDept='Por favor, notificar al departamento de ~tagword~ y eventualmente el departamento de Admin. de Sistemas. Â¡Gracias!.';
+
+
+
+$LDOrderedArticle='ArtÃ­culo pedido';
+
+$LDOrderedArticleMany='ArtÃ­culos pedidos';
 
 $LDNewProduct='Producto nuevo';
 
@@ -270,49 +267,49 @@ $LDReports='Reportes';
 
 $LDReportsTxt='Crear, buscar, leer reportes, etc.';
 
-$LDInfo='Información';
+$LDInfo='InformaciÃ³n';
 
-$LDInfoTxt='Buscar y leer información referente a la farmacia';
+$LDInfoTxt='Buscar y leer informaciÃ³n referente a la farmacia';
 
-$LDManage='Administración';
+$LDManage='AdministraciÃ³n';
 
 $LDSearchDb='Buscar en el banco de datos de la farmacia';
 
-$LDUpdateOk='La actualización fue <b>exitosa</b>:';
+$LDUpdateOk='La actualizaciÃ³n fue <b>exitosa</b>:';
 
 $LDDataSaved='Los siguientes datos se guardaron exitosamente:';
 
-$LDDataNoUpdate='La actualización <b>fracasó</b>. Por favor revise los datos ingresados.';
+$LDDataNoUpdate='La actualizaciÃ³n <b>fracasÃ³</b>. Por favor revise los datos ingresados.';
 
 $LDDataNoSaved='<b>No fue posible guardar</b>. Por favor revise los datos ingresados.';
 
-$LDClk2EnterNew='Si usted desea ingresar un producto nuevo, por favor dé clic aquí.';
+$LDClk2EnterNew='Si usted desea ingresar un producto nuevo, por favor dÃ© clic aquÃ­.';
 
-$LDOrderNr='Número de pedido';
+$LDOrderNr='NÃºmero de pedido';
 
-$LDArticleName='Nombre del artículo';
+$LDArticleName='Nombre del artÃ­culo';
 
-$LDGeneric='Nombre genérico';
+$LDGeneric='Nombre genÃ©rico';
 
-$LDDescription='Descripción';
+$LDDescription='DescripciÃ³n';
 
 $LDPacking='Empacado';
 
 $LDCAVE='CAVE';
 
-$LDMinOrder='Pedido mínimo';
+$LDMinOrder='Pedido mÃ­nimo';
 
-$LDMaxOrder='Pedido máximo';
+$LDMaxOrder='Pedido mÃ¡ximo';
 
-$LDPcsProOrder='Número de unidades por pedido';
+$LDPcsProOrder='NÃºmero de unidades por pedido';
 
-$LDIndustrialNr='Número industrial';
+$LDIndustrialNr='NÃºmero industrial';
 
-$LDLicenseNr='Número de licencia';
+$LDLicenseNr='NÃºmero de licencia';
 
-$LDPicFile='Fotografía archivada';
+$LDPicFile='FotografÃ­a archivada';
 
-$LDBack2Menu='Volver al menú del banco de datos';
+$LDBack2Menu='Volver al menÃº del banco de datos';
 
 $LDPageTop='Volver arriba.';
 
@@ -322,31 +319,31 @@ $LDUpdateData='Actualizar o editar';
 
 $LDRemoveFromDb='Remover del banco de datos';
 
-$LDDataRemoved='El producto ¡fue removido del banco de datos!';
+$LDDataRemoved='El producto Â¡fue removido del banco de datos!';
 
-$LDAlertNoOrderNr='¡No existe el número de pedido!';
+$LDAlertNoOrderNr='Â¡No existe el nÃºmero de pedido!';
 
-$LDAlertNoArticleName='¡No se halló el nombre del artículo!';
+$LDAlertNoArticleName='Â¡No se hallÃ³ el nombre del artÃ­culo!';
 
-$LDAlertNoDescription='¡No se halló la descripción!';
+$LDAlertNoDescription='Â¡No se hallÃ³ la descripciÃ³n!';
 
 
 
-$LDConfirmDelete='Realmente quiere <b>eliminar</b> o <b>remover</b> los siguientes datos ¿del banco de datos?';
+$LDConfirmDelete='Realmente quiere <b>eliminar</b> o <b>remover</b> los siguientes datos Â¿del banco de datos?';
 
-$LDAlertDelete='<b>¡ATENCIÓN!</b> Borre o elimine ¡<b>NO SE PUEDE</b> deshacer después!';
+$LDAlertDelete='<b>Â¡ATENCIÓN!</b> Borre o elimine Â¡<b>NO SE PUEDE</b> deshacer despuÃ©s!';
 
-$LDNoDelete='¡No fue posible eliminar los datos!<br>Por favor notifique al departamento de EDP.';
+$LDNoDelete='Â¡No fue posible eliminar los datos!<br>Por favor notifique al departamento de EDP.';
 
-$LDYesDelete='Sí, estoy completamente seguro(a).  Borre los datos solicitados.';
+$LDYesDelete='SÃ­, estoy completamente seguro(a).  Borre los datos solicitados.';
 
 $LDNoBack='No, no los borre. Volver.';
 
 $LDIm='Yo soy el/Yo soy la';
 
-$LDClk2Ack='Dé clic en el botón de flecha para aceptar y/o imprimir la lista de pedidos.';
+$LDClk2Ack='DÃ© clic en el botÃ³n de flecha para aceptar y/o imprimir la lista de pedidos.';
 
-$LDOrderArrived='¡Ha llegado una nueva lista de pedidos!';
+$LDOrderArrived='Â¡Ha llegado una nueva lista de pedidos!';
 
 $LDShowOrder='Mostrar la lista de pedidos';
 
@@ -356,7 +353,7 @@ $LDNewOrderMany='Acaban de llegar las siguientes listas de pedidos.';
 
 $LDOK='OK';
 
-$LDAck='Aceptación';
+$LDAck='AceptaciÃ³n';
 
 $LDOrderAck='Acepte e imprima';
 
@@ -366,7 +363,7 @@ $LDOrder2Archive='Mueva la lista de pedidos al archivo';
 
 $LDProcessedBy='Procesado por';
 
-$LDDataNoFoundTxt='La información no puede ser hallada. Un error ocurrió en alguna parte. Por favor dé clic en el botón \'Cerrar\' y vuelva
+$LDDataNoFoundTxt='La informaciÃ³n no puede ser hallada. Un error ocurriÃ³ en alguna parte. Por favor dÃ© clic en el botÃ³n \'Cerrar\' y vuelva
 
 a abrir la lista de pedidos. Si este problema persiste luego de varios intentos, por favor notifique a la farmacia y al departamento de Admin. de Sistemas. Gracias.';
 
@@ -374,11 +371,11 @@ $LDCreatedBy='Creado por';
 
 $LDAlertEnterName='Por favor ingrese su nombre en el campo \'Creado por\'.';
 
-$LDMediBotActivate='Medibot, robot para médicos';
+$LDMediBotActivate='Medibot, robot para mÃ©dicos';
 
 $LDOpenHelp='Abra la ventana de ayuda';
 
-$LDOrderListKey='Palabra clave de búsqueda para la lista de pedidos';
+$LDOrderListKey='Palabra clave de bÃºsqueda para la lista de pedidos';
 
 
 
@@ -390,7 +387,7 @@ $LDReportSent='El reporte ha sido enviado';
 
 $LDSend='Enviar';
 
-$LDPersonellNr='Número de personal';
+$LDPersonellNr='NÃºmero de personal';
 
 $LDResetAll='Resetear todo';
 
@@ -400,19 +397,19 @@ $LDReporter='Reportero';
 
 $LDAlertName='Por favor, ingrese su nombre';
 
-$LDAlertPersonNr='Por favor, ingrese su número de identificación de Personal!';
+$LDAlertPersonNr='Por favor, ingrese su nÃºmero de identificaciÃ³n de Personal!';
 
 $LDAlertReport='Por favor, escriba su reporte!';
 
 
 
-$LDOrderNrExists='El número de pedido ¡ya existe! Por favor, use otro número.';
+$LDOrderNrExists='El nÃºmero de pedido Â¡ya existe! Por favor, use otro nÃºmero.';
 
 /* 2002-10-11 EL */
 
-$LDPharmaOrderBot='Robot de pedidos de farmacia';
+$LDPharmaOrderBot='Bot de pedidos de farmacia';
 
-$LDDepotOrderBot='Medibot, robot para médicos';
+$LDDepotOrderBot='Medibot, Bot para mÃ©dicos';
 
 /* 2002-10-15 EL */
 
@@ -422,29 +419,29 @@ $LDTime='Hora';
 
 /* 2002-11-5 EL */
 
-$LDInvalidPassword='La contraseña ¡no es válida!';
+$LDInvalidPassword='La contraseÃ±a Â¡no es vÃ¡lida!';
 
-$LDUnknownValidator='¡La persona que registró estos datos es desconocida!';
+$LDUnknownValidator='Â¡La persona que registrÃ³ estos datos es desconocida!';
 
 $LDPlsEnterInfo='Por favor, ingrese los datos correctamente.';
 
 # 2003-08-17 EL
 
-$LDAlertInvalidMinorder='El pedido mínimo tiene un caracter no permitido';
+$LDAlertInvalidMinorder='El pedido mÃ­nimo tiene un caracter no permitido';
 
-$LDAlertInvalidMaxorder='El pedido máximo tiene un caracter no permitido';
+$LDAlertInvalidMaxorder='El pedido mÃ¡ximo tiene un caracter no permitido';
 
 $LDAlertInvalidProorder='El No. de unidades por pedido tiene un caracter no permitido';
 
-$LDAlertMinHigherMax='Mínimo mayor que el máximo no está permitido';
+$LDAlertMinHigherMax='MÃ­nimo mayor que el mÃ¡ximo no estÃ¡ permitido';
 
-$LDAlertNoNegativeOrder='El valor negativo al momento no está permitido';
+$LDAlertNoNegativeOrder='El valor negativo al momento no estÃ¡ permitido';
 
 # 2003-08-22 EL
 
 $LDYellowList='Listado amarillo';
 
-$LDYellowListTxt='Índice de productos farmacéuticos en Alemania (requiere conexión al internet)';
-$LDClickSelectDept='Por favor, dé clic aquí para seleccionar un Departamento';
+$LDYellowListTxt='Índice de productos farmacÃ©uticos en Alemania (requiere conexiÃ³n a internet)';
+$LDClickSelectDept='Por favor, dÃ© clic aquÃ­ para seleccionar un Departamento';
 
 ?>

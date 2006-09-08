@@ -1,9 +1,17 @@
 <?php
+
+/*
+ * Nombre: lang_es_date_time.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * Versi√≥n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
+ 
 /* 2003-04-05 EL*/
 $LDMonthFullName=array('','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
 $LDMonthShortName=array('','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic');
-$LDDayFullName=array('Lunes','Martes','MiÈrcoles','Jueves','Viernes','S·bado','Domingo');
-$LDDayShortName=array('Lun','Mar','MiÈ','Jue','Vie','S·b','Dom');
+$LDDayFullName=array('Lunes','Martes','Mi√©rcoles','Jueves','Viernes','S√°bado','Domingo');
+$LDDayShortName=array('Lun','Mar','Mi√©','Jue','Vie','S√°b','Dom');
 $LDDate='Fecha';
 $LDTime='Hora';
 $LDHour='Hora';
@@ -16,9 +24,9 @@ $LDmillisecond='milisegundo';
 $LDmilliseconds='milisegundos';
 $LDmicrosecond='microsegundo';
 $LDmicroseconds='microsegundos';
-$LDDay='DÌa';
+$LDDay='D√≠a';
 $LDWeek='Semana';
-$LDNoon='MediodÌa';
+$LDNoon='Mediod√≠a';
 $LDEvening='Noche';
 $LDNight='Noche';
 #2003-11-11 EL

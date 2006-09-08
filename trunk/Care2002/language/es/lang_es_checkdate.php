@@ -1,15 +1,18 @@
 <?php
 
-/**
-* Traducido por: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_checkdate.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
-$LDErrorDate="La fecha está errada. Por favor ingrese la fecha correcta";
-$LDErrorDateLen="La longitud de la fecha está errada.";
-$LDErrorDateFormat="El formato de la fecha está errado.";
-$LDErrorNotNumeric="No se permiten letras.  Escriba números.";
-$LDErrorYear="El año está errado";
-$LDErrorMonth="El mes está errado";
-$LDErrorDay="El día está errado";
+$LDErrorDate="La fecha estÃ¡ errada. Por favor ingrese la fecha correcta";
+$LDErrorDateLen="La longitud de la fecha estÃ¡ errada.";
+$LDErrorDateFormat="El formato de la fecha estÃ¡ errado.";
+$LDErrorNotNumeric="No se permiten letras.  Por favor, escriba nÃºmeros.";
+$LDErrorYear="El aÃ±o estÃ¡ errado";
+$LDErrorMonth="El mes estÃ¡ errado";
+$LDErrorDay="El dÃ­a estÃ¡ errado";
 
 ?>

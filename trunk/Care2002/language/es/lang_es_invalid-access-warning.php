@@ -1,8 +1,11 @@
 <?php
 
-/**
-* Correcciones: Dr. med. Daniel Hinostroza C.
-*/
+/*
+ * Nombre: lang_es_invalid-access-warning.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
@@ -12,7 +15,7 @@ require_once($root_path.'include/inc_img_fx.php');
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
  <TITLE>Advertencia de acceso no autorizado</TITLE>
 </HEAD>
 
@@ -21,7 +24,7 @@ require_once($root_path.'include/inc_img_fx.php');
 <table width=100% border=1>
 <tr>
 <td bgcolor="navy">
-<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>&nbsp;No está autorizado para acceder a esta página</STRONG></FONT>
+<FONT  COLOR="white"  SIZE=+3  FACE="Arial"><STRONG>&nbsp;No estÃ¡ autorizado para acceder a esta pÃ¡gina</STRONG></FONT>
 </td>
 </tr>
 <tr>
@@ -30,7 +33,7 @@ require_once($root_path.'include/inc_img_fx.php');
 
 <center>
 <FONT    SIZE=3 color=red  FACE="Arial">
-<b>No tiene permisos de acceso a esta página!</b></font><p>
+<b>No tiene permisos de acceso a esta pÃ¡gina!</b></font><p>
 <FORM >
 <INPUT type="button"  value=" OK "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
 <p>
@@ -43,18 +46,18 @@ Probables causas del problema:
 </FONT><p>
 <font size=2 face="verdana,arial">
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Puede ser que haya utilizado la función atrás o adelante  de su navegador.  Evite usar estos botones.<br>
+Puede ser que haya utilizado la funciÃ³n atrÃ¡s o adelante  de su navegador.  Evite usar estos botones.<br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
 Puede que haya rechazado una cookie.  El programa depende de cookies para funcionar correctamente.  Acepte las cookies.
 <br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-Su navegador no pudo aceptar las cookies.  Por favor configure su navegador para que acepte las cookies automáticamente.
+Su navegador no pudo aceptar las cookies.  Por favor configure su navegador para que acepte las cookies automÃ¡ticamente.
 <br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
 Su navegador no pudo hacer funcionar Javascript o el Javascript no pudo ser interpretado. Habilite Javascript en las opciones de su navegador.  
 <br>
 <img <?php echo createComIcon('../../','achtung.gif') ?>>
-En raras ocasiones puede haber un error en la transferencia de datos.  Para corregirlo pulse el botón de "recarga" de su navegador.
+En raras ocasiones puede haber un error en la transferencia de datos.  Para corregirlo pulse el botÃ³n de "recarga" de su navegador.
 <p>
 </FONT>
 <p>

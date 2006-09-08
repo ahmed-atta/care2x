@@ -1,37 +1,37 @@
 <?php
+
+/*
+ * Nombre: lang_es_credits.php
+ * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
+ * VersiÃ³n: CARE2X 2nd Generation Deployment 2.2
+ * Fecha: 07.09.2006
+ */
+ 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>Créditos</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>CrÃ©ditos</title>
 </head>
 <body onLoad="if(window.focus) window.focus()">
-<font face="verdana,arial" size=6 color="#0000ff">Créditos</fonts>
+<font face="verdana,arial" size=6 color="#0000ff">CrÃ©ditos</fonts>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/hinostroza.jpg"  border=0  width=135 align=right vspace=10>
-          <b>Dr. med Daniel Hinostroza C. (EC)<br> La traducción Española de CARE 2X.</b>
+          <b>Dr. med Daniel Hinostroza C. (EC)<br> TraducciÃ³n de CARE 2X al castellano.</b>
         <p>
-<li>Autor y coautor de numerosos textos médicos.<br>
-<li>5 años como Director del Centro de Informática Médica Grünenthal, Quito
-- Ecuador.<br>
-<li>Estudios preliminares en Informática Médica en la Universidad de
-Stanford.<br>
-<li>2 años como Líder de Proyectos Multimedia en Grünenthal GmbH, Aquisgrán,
-Alemania.<br>
-<li>Traductor oficial para phpMyAdmin (Español)<p>
-Webmaster de la iniciativa de sitio web médico más grande del Ecuador
-(www.cmpichincha.med.ec) y la Sociedad Ecuatoriana de Dermatología
-(www.sociedadecuatorianadedermatologia.org.ec).<br>
+<li>Autor y coautor de software y textos mÃ©dicos.<br>
+<li>Estudios en InformÃ¡tica MÃ©dica en la Universidad de Stanford, NLM/MBL y OHSU/HIBA.<br>
+<li>Traductor oficial para phpMyAdmin (EspaÃ±ol)<p>
 Website: www.cerebroperiferico.com
 
-        <P><a href="mailto:postmaster@cerebroperiferico.com"><u>Puede Ponerse en contacto con Dr. Daniel Hinostroza aquí</u></a>
+        <P><a href="mailto:care2x@cerebroperiferico.com"><u>Puede ccontactar al Dr. Daniel Hinostroza aquÃ­</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <table cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -62,17 +62,17 @@ Website: www.cerebroperiferico.com
         <TBODY>
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
-          <b>Patxi Gomaríz (ES)<br> La traducción Española de CARE 2X.</b> 
+          <b>Patxi GomarÃ­z (ES)<br> La traducciÃ³n EspaÃ±ola de CARE 2X.</b> 
         <p>
-			Patxi Gomaríz nació en la primavera del año 1966 en Murcia (España).
-        <p> Su vida laboral gira entorno a la fotografía, es especialista en fotografía 
-          de Oftalmología (fundus camera). Apasionado por Internet, también construye 
+			Patxi GomarÃ­z naciÃ³ en la primavera del aÃ±o 1966 en Murcia (EspaÃ±a).
+        <p> Su vida laboral gira entorno a la fotografÃ­a, es especialista en fotografÃ­a 
+          de OftalmologÃ­a (fundus camera). Apasionado por Internet, tambiÃ©n construye 
           sitios web. 
-        <p> "<i>Pienso que el código abierto es una manera eficaz de luchar contra 
-          la localización económica, especialmente en asuntos tan fundamentales 
-          como la salud, por eso me siento orgulloso de mi pequeña aportación 
+        <p> "<i>Pienso que el cÃ³digo abierto es una manera eficaz de luchar contra 
+          la localizaciÃ³n econÃ³mica, especialmente en asuntos tan fundamentales 
+          como la salud, por eso me siento orgulloso de mi pequeÃ±a aportaciÃ³n 
           a este gran proyecto</i>". 
-        <P><a href="mailto:pgomariz@ono.com"><u>Puede Ponerse en contacto con Patxi Gomaríz aquí</u></a>
+        <P><a href="mailto:pgomariz@ono.com"><u>Puede Ponerse en contacto con Patxi GomarÃ­z aquÃ­</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 
@@ -81,7 +81,7 @@ Website: www.cerebroperiferico.com
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/javier.jpg"  border=0  width=135 align=right vspace=10>
-          <b>Javier Alberto Arias (AR)<br> La traducción Española de CARE 2X.</b>
+          <b>Javier Alberto Arias (AR)<br> La traducciÃ³n EspaÃ±ola de CARE 2X.</b>
         <p>
 
         <P><a href="mailto:javisxx@hotmail.com"><u>Puede Ponerse en contacto con Javier Alberto Arias</u></a>
@@ -92,7 +92,7 @@ Website: www.cerebroperiferico.com
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/gonzalo.jpg"  border=0  width=135 align=right vspace=10> 
-          <b>Gonzalo Gomez Sotelo (AR)<br> La traducción Española de CARE 2X.</b> 
+          <b>Gonzalo Gomez Sotelo (AR)<br> La traducciÃ³n EspaÃ±ola de CARE 2X.</b> 
         <p>
 
         <P><a href="mailto:gonzalo@smandes.com.ar"><u>Puede Ponerse en contacto con Gonzalo Gomez Sotelo</u></a>
@@ -107,20 +107,20 @@ Website: www.cerebroperiferico.com
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/giuseppe_scarpi.jpg"  border=0  width=135 height=170 align=right vspace=10> 
-          <b>La traducción Italiana de CARE 2X fue hecha por Giuseppe Scarpi:</b> 
-        <p> Giuseppe Scarpi nació en Roma, Italia, hace 35 años. 
-        <p>Graduado en ingeniería electrónica ha trabajado para 
-          varias compañías en el sector biomédico, donde 
-          él desarrolló un trabajo sobre las relaciones entre el 
-          mundo de la medicina y la informática. <br>
+          <b>La traducciÃ³n Italiana de CARE 2X fue hecha por Giuseppe Scarpi:</b> 
+        <p> Giuseppe Scarpi naciÃ³ en Roma, Italia, hace 35 aÃ±os. 
+        <p>Graduado en ingenierÃ­a electrÃ³nica ha trabajado para 
+          varias compaÃ±Ã­as en el sector biomÃ©dico, donde 
+          Ã©l desarrollÃ³ un trabajo sobre las relaciones entre el 
+          mundo de la medicina y la informÃ¡tica. <br>
           Él utiliza y aprecia Linux y Windows, <em>&quot;pues ambos son 
           el resultado de un gran trabajo humano que se debe respetar&quot;. </em> 
-        <p> Él decidió ensamblar activamente código abierto 
+        <p> Él decidiÃ³ ensamblar activamente cÃ³digo abierto 
           porque:<br>
-          <em>&quot;un mundo tan ideal puede sobrevivir solamente si está 
-          equilibrado perfectamente. Si usted toma algo, usted debe también 
-          dar algo en proporción.&quot; </em>
-        <P><a href="mailto:kalbun@inwind.it"><u>Puede Ponerse en contacto con Giuseppe Scarpi aquí</u></a>
+          <em>&quot;un mundo tan ideal puede sobrevivir solamente si estÃ¡ 
+          equilibrado perfectamente. Si usted toma algo, usted debe tambiÃ©n 
+          dar algo en proporciÃ³n.&quot; </em>
+        <P><a href="mailto:kalbun@inwind.it"><u>Puede Ponerse en contacto con Giuseppe Scarpi aquÃ­</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -133,8 +133,8 @@ Website: www.cerebroperiferico.com
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/gabriele_cicala.jpg"  border=0  align=right vspace=10> 
-          <b>La traducción Italiana de www.care2x.com fue hecha por Gabriele Cicala.</b> 
-        <P><a href="mailto:gabcicala@tiscali.it"><u>Puede Ponerse en contacto con Gabriele Cicala aquí</u></a>
+          <b>La traducciÃ³n Italiana de www.care2x.com fue hecha por Gabriele Cicala.</b> 
+        <P><a href="mailto:gabcicala@tiscali.it"><u>Puede Ponerse en contacto con Gabriele Cicala aquÃ­</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
@@ -147,23 +147,23 @@ Website: www.cerebroperiferico.com
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
             <P><img src="../../fotos/credits/daniel_zilli.jpg"  border=0  align=right vspace=10> 
-          <b>La traducción brasileña-Portuguesa de CARE 2X y www.care2x.com 
+          <b>La traducciÃ³n brasileÃ±a-Portuguesa de CARE 2X y www.care2x.com 
           fue hecha por Daniel Zilli.</b> 
-        <P><a href="mailto:danielz@cco.matrix.com.br"><u>Puede Ponerse en contacto con Daniel Zilli aquí.</u></a>
+        <P><a href="mailto:danielz@cco.matrix.com.br"><u>Puede Ponerse en contacto con Daniel Zilli aquÃ­.</u></a>
 </TD></TR></TBODY></TABLE>
 
 <hr>
-<font face="verdana,arial" size=3 color="#0000ff">Más créditos</font>
-<font face="verdana,arial" size=1 > (por orden alfabético)</font>
+<font face="verdana,arial" size=3 color="#0000ff">MÃ¡s crÃ©ditos</font>
+<font face="verdana,arial" size=1 > (por orden alfabÃ©tico)</font>
 
 <table border=0 cellspacing=1 cellpadding=1>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Agus M. Ramdan (ID)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Revisiones de código, care2x.com CMS</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Revisiones de cÃ³digo, care2x.com CMS</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Daniele Frijia (DE)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Comprobaciónes de seguridad, php consultor</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;ComprobaciÃ³nes de seguridad, php consultor</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Luki Rustianto (ID)</font></nobr>&nbsp;</td>
@@ -171,31 +171,31 @@ Website: www.cerebroperiferico.com
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Traducción 
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;TraducciÃ³n 
       Francesa</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Muhammad Panji (ID)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Traducción 
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;TraducciÃ³n 
       a lengua Indonesia</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Nino Novak (DE)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Edición alemana de www.care2x.com</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;EdiciÃ³n alemana de www.care2x.com</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Patxi Gomaríz (ES)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Traducción 
-      Española</font></td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Patxi GomarÃ­z (ES)</font></nobr>&nbsp;</td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;TraducciÃ³n 
+      EspaÃ±ola</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Pawel Cyrta (PL)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Traducción 
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;TraducciÃ³n 
       Polaca</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Prantar Deka (IN)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Módulo de facturación genérico</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;MÃ³dulo de facturaciÃ³n genÃ©rico</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Roberto Nanucci (IT)</font></nobr>&nbsp;</td>
@@ -203,12 +203,12 @@ Website: www.cerebroperiferico.com
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Simone Aveotti (IT)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Traducciónes 
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;TraducciÃ³nes 
       Italianas</font></td>
   </tr>
   <tr>
     <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Thomas Wiedmann (DE)</font></nobr>&nbsp;</td>
-    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Pruebas, eliminación de fallos, escrituras de validación</font></td>
+    <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Pruebas, eliminaciÃ³n de fallos, escrituras de validaciÃ³n</font></td>
   </tr>
 </table>
 
