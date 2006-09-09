@@ -4,7 +4,7 @@
  * Nombre: lang_es_tech.php
  * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
  * Versión: CARE2X 2nd Generation Deployment 2.2
- * Fecha: 16.08.2006
+ * Fecha: 08.09.2006
  */
 
 /**
@@ -62,7 +62,7 @@ $LDDept="Departamento";
 $LDEnterQuestion="Por favor escriba su pregunta";
 $LDLogIn="Conexión";
 $LDPlsNoRequest="(No haga los partes para reparación aquí. Si usted desea avisar de una avería y necesita una reparación dé clic aquí.";
-$LDLastQuestions="�ltima ~tagword~ pregunta(s) o respuesta(s)";
+$LDLastQuestions="Última ~tagword~ pregunta(s) o respuesta(s)";
 $LDFrom="De";
 $LDTo="Para";
 $LDAlertQuestion="No escrbió ninguna pregunta.";

@@ -4,7 +4,7 @@
  * Nombre: lang_es_konsil.php
  * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
  * Versi贸n: CARE2X 2nd Generation Deployment 2.2
- * Fecha: 07.09.2006
+ * Fecha: 08.09.2006
  */
 
 $LDEntryDate='Fecha de ingreso';
@@ -38,7 +38,7 @@ $LDClinicalQuestions='Diagn贸stico cl铆nico, reportes, consultas:';
 $LDExtraInfo='Informaci贸n de soporte';
 $LDExtraInfoSample='(por ej., resultados importantes de laboratorio, luego de radiaci贸n en el 谩rea de escisi贸n, luego de quimioterapia)';
 $LDForGynTests='Para pruebas ginecol贸gicas:';
-$LDLastPeriod='趌timo periodo:';
+$LDLastPeriod='脷ltimo periodo:';
 $LDPeriodType='Tipo de periodo:';
 $LDGravidity='Embarazada:';
 $LDMenopauseSince='Menopausia desde:';

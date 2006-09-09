@@ -4,7 +4,7 @@
  * Nombre: lang_es_products.php
  * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
  * Versión: CARE2X 2nd Generation Deployment 2.2
- * Fecha: 07.09.2006
+ * Fecha: 08.09.2006
  */
 
 $LDClose='Cerrar';
@@ -113,7 +113,7 @@ $LDPharmaDb='Banco de datos';
 
 $LDPharmaDbTxt='Administrando la información de los productos';
 
-$LDRedList='�ndice de especialidades médicas';
+$LDRedList='Índice de especialidades médicas';
 
 $LDRedListTxt='Información detallada acerca de los productos médicos';
 
@@ -441,7 +441,7 @@ $LDAlertNoNegativeOrder='El valor negativo al momento no está permitido';
 
 $LDYellowList='Listado amarillo';
 
-$LDYellowListTxt='�ndice de productos farmacéuticos en Alemania (requiere conexión a internet)';
+$LDYellowListTxt='Índice de productos farmacéuticos en Alemania (requiere conexión a internet)';
 $LDClickSelectDept='Por favor, dé clic aquí para seleccionar un Departamento';
 
 ?>

@@ -4,7 +4,7 @@
  * Nombre: lang_es_edp.php
  * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com> y Dr. Manuel Montemayor
  * Versión: CARE2X 2nd Generation Deployment 2.2
- * Fecha: 07.09.2006
+ * Fecha: 08.09.2006
 */
 
 $LDClose='Cerrar';
@@ -211,7 +211,7 @@ $LDDeleteCurrency='¿Está seguro? ¿realmente desea borrar esta moneda?';
 $LDNoMainDelete='No puede borrar la moneda principal. \nPrimero debe cambiar la moneda a otra alternativa para poder asignar a otra como principal.';
 $LDCurrencyExisting='¡Esta moneda ya existe!';
 /* 2003-02-21 EL*/
-$LDMenuItem='�tem del menú';
+$LDMenuItem='Ítem del menú';
 $LDOrderNr='No. de orden';
 $LDStatus='Estado actual';
 $LDHideBy='Ocultar según:';
@@ -226,13 +226,13 @@ $LDYes='Sí';
 $LDAllowMultiLang='Permita la selección de múltiples idiomas';
 $LDDefaultLang='El idioma predeterminado (en caso de que no se permita escoger múltiples idiomas)';
 /* 2003-02-22 EL*/
-$LDMainMenuItems='�tems del menú principal';
+$LDMainMenuItems='Ítems del menú principal';
 $LDMainMenuDisplay='Despliegue del menú principal';
 $LDDataEntryForms='Formularios para el ingreso de datos';
 $LDControlButImg='Fondo de color para los botones de control e imágenes';
 $LDSampleButtons='Botones de muestra';
 $LDTheme='Fondo de color';
-$LDItem='�tem';
+$LDItem='Ítem';
 /* 2003-02-26- EL*/
 $LDDeptAdmin='Administración del Departamento';
 $LDNewDept='Crear y configurar Departamentos nuevos';
@@ -305,7 +305,7 @@ $LDPatientSearch='Buscar Paciente';
 $LDPatientSearchTxt='Cuando la búsqueda de un paciente devuelve una lista.';
 $LDORPatientSearch='Buscar Paciente para cirugía';
 $LDORPatientSearchTxt='Cuando la búsqueda de un paciente para cirugía devuelve una lista. 
-�ste valor es usualmente menor de 10 debido al poco espacio de la vista en el módulo de Quirofanos o logbook';
+Éste valor es usualmente menor de 10 debido al poco espacio de la vista en el módulo de Quirofanos o logbook';
 $LDEnterMaxRows='Escriba el número maximo de renglones a mostrar por página después de una búsqueda exitosa.';
 #2003-11-01 EL
 $LDTimeOut='Sesión expirada';

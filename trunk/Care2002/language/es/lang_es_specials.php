@@ -4,7 +4,7 @@
  * Nombre: lang_es_specials.php
  * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
  * Versión: CARE2X 2nd Generation Deployment 2.2
- * Fecha: 07.09.2006
+ * Fecha: 08.09.2006
  */
 
 $LDNews='Noticias';
@@ -239,8 +239,8 @@ $LDTicketedSupportTxt='Envíe una solicitud de tiquetes al grupo de soporte téc
 $LDNewsgroup='Grupo de noticias';
 $LDNewsgroupTxt='Grupo de noticias con duplicación de la lista de correos de los desarrolladores.';
 # 2002-08-19 EL
-$LDPharmaIndex='�ndice farmacéutico';
-$LDPharmaIndexTxt='�ndices farmacéuticos tales como los vademécum de PLM, PDR, etc.';
+$LDPharmaIndex='Índice farmacéutico';
+$LDPharmaIndexTxt='Índices farmacéuticos tales como los vademécum de PLM, PDR, etc.';
 
 #2004-05-23 EL
 $LDPlugins='Plugins';

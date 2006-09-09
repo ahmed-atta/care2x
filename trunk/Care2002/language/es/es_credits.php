@@ -4,7 +4,7 @@
  * Nombre: lang_es_credits.php
  * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
  * Versión: CARE2X 2nd Generation Deployment 2.2
- * Fecha: 07.09.2006
+ * Fecha: 08.09.2006
  */
  
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
@@ -28,10 +28,10 @@ require_once($root_path.'include/inc_environment_global.php');
         <p>
 <li>Autor y coautor de software y textos médicos.<br>
 <li>Estudios en Informática Médica en la Universidad de Stanford, NLM/MBL y OHSU/HIBA.<br>
-<li>Traductor oficial para phpMyAdmin (Español)<p>
+<li>Traductor oficial para phpMyAdmin (Castellano)<p>
 Website: www.cerebroperiferico.com
 
-        <P><a href="mailto:care2x@cerebroperiferico.com"><u>Puede ccontactar al Dr. Daniel Hinostroza aquí</u></a>
+        <P><a href="mailto:care2x@cerebroperiferico.com"><u>Puede contactar al Dr. Daniel Hinostroza aquí</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <table cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -84,7 +84,7 @@ Website: www.cerebroperiferico.com
           <b>Javier Alberto Arias (AR)<br> La traducción Española de CARE 2X.</b>
         <p>
 
-        <P><a href="mailto:javisxx@hotmail.com"><u>Puede Ponerse en contacto con Javier Alberto Arias</u></a>
+        <P><a href="mailto:javisxx@hotmail.com"><u>Puede ponerse en contacto con Javier Alberto Arias</u></a>
 </TD></TR></TBODY></TABLE>
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
@@ -92,7 +92,7 @@ Website: www.cerebroperiferico.com
         <TR>
           <TD vAlign=top><font face="verdana,arial" size=2>
 			<P><img src="../../fotos/credits/gonzalo.jpg"  border=0  width=135 align=right vspace=10> 
-          <b>Gonzalo Gomez Sotelo (AR)<br> La traducción Española de CARE 2X.</b> 
+          <b>Gonzalo Gomez Sotelo (AR)<br> La traducción española de CARE 2X.</b> 
         <p>
 
         <P><a href="mailto:gonzalo@smandes.com.ar"><u>Puede Ponerse en contacto con Gonzalo Gomez Sotelo</u></a>
@@ -113,9 +113,9 @@ Website: www.cerebroperiferico.com
           varias compañías en el sector biomédico, donde 
           él desarrolló un trabajo sobre las relaciones entre el 
           mundo de la medicina y la informática. <br>
-          �l utiliza y aprecia Linux y Windows, <em>&quot;pues ambos son 
+          Él utiliza y aprecia Linux y Windows, <em>&quot;pues ambos son 
           el resultado de un gran trabajo humano que se debe respetar&quot;. </em> 
-        <p> �l decidió ensamblar activamente código abierto 
+        <p> Él decidió ensamblar activamente código abierto 
           porque:<br>
           <em>&quot;un mundo tan ideal puede sobrevivir solamente si está 
           equilibrado perfectamente. Si usted toma algo, usted debe también 
@@ -170,7 +170,7 @@ Website: www.cerebroperiferico.com
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Realces de seguridad</font></td>
   </tr>
   <tr>
-    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Mat�j Hausenblas (FR)</font></nobr>&nbsp;</td>
+    <td bgcolor="#efefef"><nobr><img src="../../gui/img/common/default/redpfeil.gif" border=0 width=4 height=7 align="absmiddle"><font face="verdana,arial" size=2> Matêj Hausenblas (FR)</font></nobr>&nbsp;</td>
     <td bgcolor="#f9f9f9"><font face="verdana,arial" size=2>&nbsp;&nbsp;Traducción 
       Francesa</font></td>
   </tr>

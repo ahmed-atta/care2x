@@ -4,7 +4,7 @@
  * Nombre: lang_es_billing.php
  * Revisado por: Daniel Hinostroza <care2x@cerebroperiferico.com>
  * Versión: CARE2X 2nd Generation Deployment 2.2
- * Fecha: 07.09.2006
+ * Fecha: 08.09.2006
  */
 
 /* 2003-06-21 El */
@@ -13,15 +13,15 @@ $TXT['Billing']='Facturación eComBill';
 $TXT['PlsEnterFF']='Por favor, ingrese lo siguiente';
 $TXT['TestCode']='Servicio/Código o número de prueba';
 
-$TXT['HospitalServiceItem']='�tem de servicio para el hospital';
-$TXT['HospitalServiceItems']='�tems de servicio para el hospital';
+$TXT['HospitalServiceItem']='Ítem de servicio para el hospital';
+$TXT['HospitalServiceItems']='Ítems de servicio para el hospital';
 $TXT['CreateHospitalServiceItem']='Crear ítem de servicio para el hospital';
 $TXT['EditHospitalServiceItems']='Editar los ítems de servicio para el hospital';
 $TXT['EnterNameHS']='Ingrese el nombre del servicio del hospital';
 $TXT['NameHS']='Nombre del servicio del hospital';
 
-$TXT['LabTestItem']='�tem de prueba de laboratorio';
-$TXT['LabTestItems']='�tems para prueba de laboratorio';
+$TXT['LabTestItem']='Ítem de prueba de laboratorio';
+$TXT['LabTestItems']='Ítems para prueba de laboratorio';
 $TXT['CreateLabTestItem']='Crear ítem para prueba de laboratorio';
 $TXT['EditLabTestItems']='Editar los ítems para pruebas de laboratorio';
 $TXT['NameLT']='Nombre de la prueba de laboratorio';
