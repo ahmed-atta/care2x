@@ -102,7 +102,7 @@ $LDRhFactor='Rh-faktörü:';
 $LDKell='Kell';
 $LDDateProtNumber='Tetkikin tarih ve protokol numarasýný veren:';
 $LDBloodSpecimen='Örnek';
-$LDCount='Sayým';
+$LDCount='Adet';
 $LDPureBlood='Saf kan';
 $LDRedBloodCon='Konsantre eritrosit ';
 $LDLeukoLessRedBlood='Lökositi alýnmýþ eritrositler';
@@ -166,7 +166,7 @@ $LDPlsEnterDoctorName='Lütfen doktorun ismini giriniz';
 $LDPlsEnterBloodGroup='Lütfen kan grubunu giriniz.';
 $LDPlsEnterRhFactor='Lütfen Rh faktörünü giriniz.';
 $LDPlsEnterKell='Lütfen Kell deðerini giriniz.';
-$LDPlsEnterBloodPcs='Lütfen kan ürün numarasýný  giriniz.';
+$LDPlsEnterBloodPcs='Lütfen kaç ünite istediðinizi giriniz.';
 $LDPlsEnterDate='Lütfen tarihi giriniz.';
 /* 2002-09-09 EL */
 $LDPlsEnterDiagnosisQuiry='Lütfen tanýlar veya sorgularý giriniz.';

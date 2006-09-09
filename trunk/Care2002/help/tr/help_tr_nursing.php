@@ -12,7 +12,7 @@ Bir servis nasýl kaydedilir?</b>
 	<img src="../help/tr/img/tr_ward_select.png" border=0 width=317 height=144>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Tüm servislerin doluluk durumu nasýl izlenir?</b>
+Tüm servislerin yatan hasta durumu nasýl izlenir?</b>
 </font>
 <ul>       	
  	<b>Adým: </b> "<font color=#000088><b>Hýzlýbakýþ</b></font>" ý týklayýnýz.<br>

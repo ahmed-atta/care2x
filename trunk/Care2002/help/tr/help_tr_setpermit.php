@@ -27,7 +27,7 @@ Interkom no:<p>
 Baþvuru formu
 <p>
 </blockquote>
-<a href="../../main/help-info.php" > "Ýlk adýmlar" a  geri</a>
+<a href="../../main/help-info.php?lang=tr" target="HELPINFOFRAME">"Ýlk adýmlar"</a> a  geri
 </font></blockquote>
 
 </body>

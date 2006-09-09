@@ -12,7 +12,7 @@ Bir hasta nasýl çýkarýlýr?</b></font>
 		<b>Adým 4: </b>Ýsminizi eðer boþ ise "<span style="background-color:yellow" > Hemþire: <input type="text" name="a" size=20 maxlength=20></span>" alanýna yazýnýz. <br>
 		<b>Adým 5: </b> " <span style="background-color:yellow" ><input type="checkbox" name="d" value="d"> Evet, eminim hastayý çýkar. </span>" alanýný iþaretleyiniz. <br>
 		<b>Adým 6: </b>Hastayý çýkarmak için <input type="button" value="çýkar"> düðmesini týklayýnýz.<p>
-		<b>Adým 7: </b>Servisin yeni doluluk listesine geri gitmek için  <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> düðmesini týklayýnýz.<p>
+		<b>Adým 7: </b>Servisin yeni yatan hasta listesine geri gitmek için  <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> düðmesini týklayýnýz.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
  <input type="button" value="çýkar"> düðmesini denedim, ama yanýt olmadý. Neden?</b></font>

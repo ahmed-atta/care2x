@@ -19,5 +19,5 @@ Olasý nedenleri:
 <img <?php echo createComIcon('../','warn.gif','0') ?>> <font color="#990000"><b>
 Ne yapabilirim?</b></font>
 <p>
-Problem hakkýnsa sistem yöneticisine haber veriniz. Etkilenen klasör veya dosyayý bildiriniz:
+Problem hakkýnda sistem yöneticisine haber veriniz. Etkilenen klasör veya dosyayý bildiriniz:
 <blockquote><font color="red"><b><?php echo $x1 ?></b></font></blockquote>

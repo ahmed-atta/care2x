@@ -27,11 +27,11 @@
 	<b>Adým 3: </b><?php if($x1=="docs") print "Doktor orderlarýný"; else print "Hemþire gözlemini"; ?>  "<span style="background-color:yellow" > <?php if($x1=="docs") print "Doktor orderlarý"; else print "Hemþire gözlemi"; ?>: <input type="text" name="d" size=10 maxlength=10 value="Tetkik raporu"> </span>" alanýna yazýnýz.<br>
 		<font color="#000099" size=1><b>Ýpucu:</b>
 		<ul type=disc>
-		<li>  Eðer <img <?php echo createComIcon('../','warn.gif','0') ?>>  sembolünün  <?php if($x1=="docs") print "doktor orderlarý"; else print "hemþire gözlem kaðýdý"; ?> baþýnda görünmesini ister iseniz "<span style="background-color:yellow" > <input type="checkbox" name="c" value="c"> <img <?php echo createComIcon('../','warn.gif','0') ?>>Bu sembolü baþlangýca yerleþtiriniz. </span>" kutusunu iþaretleyiniz,.
-		<li> <?php if($x1=="docs") print "order veya"; ?> raporu belirgin yazmak ister iseniz, sözcük veya cümleyi yazmadan önce  <img <?php echo createComIcon('../','hilite-s.gif','0') ?>> simgesini týklayýnýz. Belirgin yazýya son vermek için belirgin yazýnýn son harfini yazdýktan sonra  <img <?php echo createComIcon('../','hilite-e.gif','0') ?>> simgesini týklayýnýz.
+		<li>  Eðer <img <?php echo createComIcon('../','warn.gif','0') ?>>  sembolünün  <?php if($x1=="docs") print "doktor orderlarý"; else print "hemþire gözlem kaðýdý"; ?> baþýnda görünmesini ister iseniz "<span style="background-color:yellow" > <input type="checkbox" name="c" value="c"> <img <?php echo createComIcon('../','warn.gif','0') ?>> Bu iþareti baþlangýca koyunuz. </span>" kutusunu iþaretleyiniz,.
+		<li> <?php if($x1=="docs") print "order veya"; ?> raporu belirgin yazmak ister iseniz, sözcük veya cümleyi yazmadan önce  <img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0','',TRUE) ?>><?php echo '<b><font color="#000000">Baþla</b></font>' ?> simgesini týklayýnýz. Belirgin yazýya son vermek için belirgin yazýnýn son harfini yazdýktan sonra  <img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0','',TRUE) ?>><?php echo '<b><font color="#000000">Bitir</b></font>' ?> simgesini týklayýnýz.
 		</font>
 		</ul>
-	<b>Adým 4: </b>Ad doyad ilk harflerinizi "<span style="background-color:yellow" > Ýmza: <input type="text" name="d" size=3 maxlength=3 value="ela"> </span>" alanýna giriniz.<br>
+	<b>Adým 4: </b>Ad soyad ilk harflerinizi "<span style="background-color:yellow" > Ýmza: <input type="text" name="d" size=3 maxlength=3 value="AHK"> </span>" alanýna giriniz.<br>
   		<b>Uyarý: </b>Ýptal etmek isterseniz,  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düðmesini týklayýnýz.<br>
 		<b>Adým 5: </b>Bilgiyi kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> simgesini týklayýnýz.<br>
 		<b>Adým 6: </b>Ýþiniz bitti ise, pencereyi kapatýp hastanýn veri klasörüne geri gitmek için <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> simgesini týklayýnýz.<br>
@@ -40,7 +40,7 @@
 <?php if($x1=="docs") print "Doktora bir soru"; else print "Bir etkinlik raporu"; ?> nasýl girilir?</b></font>
 <ul> 
 	<b>Adým 1: </b>Tarihi "<?php if($x1=="docs") print "Doktora sorular"; else print "Etkinlik raporu"; ?>" sütunundaki "<span style="background-color:yellow" > Tarih: <input type="text" name="d" size=10 maxlength=10 value="10.10.2002"> </span>" alanýna giriniz.<br>
-		<font color="#000099" size=1><b>Ýpuçlarý:</b>
+		<font color="#000099" size=1><b>Ýp uçlarý:</b>
 		<ul type=disc>
 		<li>Güncel tarihi girmek için tarih alanýna "t" veya "T" (Today=Bugün anlamýnda) yazýnýz. Güncel tarih otomatik olarak tarih alanýnda görüntülenir.
 		<li>Veya alanýn altýndaki  <img <?php echo createComIcon('../','arrow-t.gif','0') ?>> düðmesini týklayýnýz. Güncel tarih otomatik olarak tarih alanýnda görüntülenir.
@@ -48,13 +48,13 @@
 		</font>
 		</ul>
 	<b>Adým 2: </b><?php if($x1=="docs") print "Soruyu "; else print "Etkinlik raporunu "; ?>  "<span style="background-color:yellow" > <?php if($x1=="docs") print "doktora sorular"; else print "etkinlik raporu"; ?>: <input type="text" name="d" size=10 maxlength=10 value="test report"> </span>" alanýna yazýnýz.<br>
-		<font color="#000099" size=1><b>Tips:</b>
+		<font color="#000099" size=1><b>Ýp uçlarý:</b>
 		<ul type=disc>
-		<li> <img <?php echo createComIcon('../','warn.gif','0') ?>> sembolünün  <?php if($x1=="docs") print "soru"; else print "etkinlik raporu"; ?> yazýsýnýn baþlangýcýnda görünmesini ister iseniz  "<span style="background-color:yellow" > <input type="checkbox" name="c" value="c"> <img <?php echo createComIcon('../','warn.gif','0') ?>>Bu sembolü baþlangýca yerleþtir. </span>" seçim kutusunu iþaretleyiniz.
-		<li> <?php if($x1=="docs") print "order veya"; ?> raporun bir kýsmýný belirgin yazmak ister iseniz, cümle veya sözcüðü yazmadan önce  <img <?php echo createComIcon('../','hilite-s.gif','0') ?>> simgesini týklayýnýz. Belirgin yazmaya son vermek için belirgin yazýlan kýsmýn son harfini yazdýktan sonra  <img <?php echo createComIcon('../','hilite-e.gif','0') ?>> simgesini týklayýnýz.
+		<li> <img <?php echo createComIcon('../','warn.gif','0') ?>> sembolünün  <?php if($x1=="docs") print "soru"; else print "etkinlik raporu"; ?> yazýsýnýn baþlangýcýnda görünmesini ister iseniz  "<span style="background-color:yellow" > <input type="checkbox" name="c" value="c"> <img <?php echo createComIcon('../','warn.gif','0') ?>> Bu iþareti baþlangýca koyunuz </span>" seçim kutusunu iþaretleyiniz.
+		<li> <?php if($x1=="docs") print "order veya"; ?> raporun bir kýsmýný belirgin yazmak ister iseniz, cümle veya sözcüðü yazmadan önce  <img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0','',TRUE) ?>><?php echo '<b><font color="#000000">Baþla</b></font>' ?> simgesini týklayýnýz. Belirgin yazýya son vermek için belirgin yazýnýn son harfini yazdýktan sonra  <img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0','',TRUE) ?>><?php echo '<b><font color="#000000">Bitir</b></font>' ?> simgesini týklayýnýz.
 		</font>
 		</ul>
-	<b>Adým 3: </b>Ad soyadýnýzýn ilk harflerini "<span style="background-color:yellow" > Ýmza: <input type="text" name="d" size=3 maxlength=3 value="ela"> </span>" alanýna giriniz.<br>
+	<b>Adým 3: </b>Ad soyadýnýzýn ilk harflerini "<span style="background-color:yellow" > Ýmza: <input type="text" name="d" size=3 maxlength=3 value="AHK"> </span>" alanýna giriniz.<br>
   		<b>Uyarý: </b>Ýptal etmek ister iseniz, <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> simgesini týklayýnýz.<br>
 		<b>Adým 4: </b>Bilgiyi kayýt etmek için  <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> simgesini týklayýnýz.<br>
 		<b>Adým 5: </b>Ýþiniz bitti ise, pencereyi kapatýp hastanýn veri klasörüne geri dönmek için  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> simgesini týklayýnýz.<br>

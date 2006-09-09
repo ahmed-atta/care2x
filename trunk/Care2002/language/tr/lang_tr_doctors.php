@@ -25,7 +25,7 @@ $LDDutyPlanTxt='Nöbet planý, izle, güncelle, sil, yönet, vs.';
 $LDDocsList='Doktor listesi';
 $LDDocsListTxt='Doktor listesi oluþtur veya güncelle veri gir vs.';
 $LDDocsForum='Forum';
-$LDDocsForumTxt='Doktorlar tartýþma listesi';
+$LDDocsForumTxt='Doktorlar listesi';
 $LDNews='Haberler';
 $LDNewsTxt='Haber oku, düzenle, yaz';
 $LDMemo='Not';
@@ -89,7 +89,7 @@ $LDCreatePersonList='Personel için yeni bir liste yap';
 $LDNoPersonList='Personel listesi henüz oluþturulmadý. Önce listeyi yapýnýz.';
 $LDShow='Göster';
 
-$LDDOCS='DOKTOR Nöbetleri';
+$LDDOCS='Doktor Nöbetleri';
 $LDDOCSTxt='Doktor Nöbetleri, planlama, izleme, güncelleme, düzeltme, vs.';
 $LDDOCSR='Nöbetçi doktor listesi istemcisi';
 $LDDOCSRTxt='Doktor Nöbet listesi hazýrlama yardýmcýsý';

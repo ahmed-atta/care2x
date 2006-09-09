@@ -121,11 +121,11 @@ Görüntülenen bölüm yanlýþ. Doðru bölüme deðiþtirmek istiyorum.</b></font>
                                                                      	<option value="Örnek bölüm 4"> Örnek bölüm 4</option>
                                                                      </select>"</nobr> alanýndan seçiniz.
                                                                      <br>
-		<b>Adým 2: </b>Seçilen bölümü deðiþtirmek için <input type="button" value="Change"> düðmesini týklayýnýz.
+		<b>Adým 2: </b>Seçilen bölümü deðiþtirmek için <input type="button" value="Deðiþtir"> düðmesini týklayýnýz.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Listede bir ismi silmek istiyorum</b></font>
-<ul> <b>Adým 1: </b>Silinecek ismin metin giriþ alanýna  "<input type="text" name="t" size=11 maxlength=4 value="Name">" týklayýnýz.<br>
+<ul> <b>Adým 1: </b>Silinecek ismin metin giriþ alanýna  "<input type="text" name="t" size=11 maxlength=4 value="Ýsim">" týklayýnýz.<br>
 		<b>Adým 2: </b>Ýsmi klavyenin geri veya sil tuþlarýný kullanarak el ile siliniz.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Personel listesini kayýt etmek istiyorum</b></font>

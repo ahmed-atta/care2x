@@ -1,5 +1,5 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Sistem Yönetimi :: Hýzlý Bilgiler</b></font>
+<b>Sistem Yönetimi :: Önemli Bilgiler</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
@@ -8,7 +8,7 @@
 <ul> 
 
 <p>
-	"<b>Hýzlý bilgiler</b>" bilgiler baþlangýç sayfasýnýn sað üst kutusunda görüntülenir. Bu bilgiler þunlardýr:<p>
+	"<b>Önemli Bilgiler</b>" baþlangýç sayfasýnýn sað üst kutusunda görüntülenir. Bu bilgiler þunlardýr:<p>
 
 	<li>Polis telefon numarasý</li>
 	<li>Ýtfaiye telefon numarasý</li>

@@ -14,24 +14,24 @@ $LDMemo='Not';
 $LDNursingForum='Hemþirelik forumu';
 $LDNursingStations='Yatan Hasta Servisleri';
 
-$LDQuickViewTxt='Bugünkü servislerin doluluk durumuna kýsa bakýþ.';
+$LDQuickViewTxt='Bugünkü servislerin yatan hasta listelerine kýsa bakýþ.';
 $LDSearchPatientTxt='Yatan bir hastanýn servislerde aranmasý.';
 $LDArchiveTxt='Servislerin arþivli dosyalarý içerisinde arama';
 $LDStationManTxt='Bir servis oluþturma, yatak sayýsý, personel vs. gibi parametreleri ilk defa belirleme.';
 $LDNewsTxt='Bir haber makalesini yazma, düzenleme veya okuma.';
 $LDMemoTxt='Bir notu yazma düzenleme veya okuma.';
 $LDNursingForumTxt='Servisler hakkýnda tartýþmalar forumu.';
-$LDNursingStationsTxt='Doluluk durumu, hastanýn çizelgeleri fotograflarý vs.';
+$LDNursingStationsTxt='Yatan hasta listesi, hastanýn çizelgeleri fotograflarý vs.';
 
 $LDCloseBack2Main='Kapat ve baþlangýç sayfasýna dön';
 $LDOld='Eski';
 $LDTodays='Bugünkü';
-$LDOccupancy='Doluluk';
+$LDOccupancy='Yatan Hasta Listesi';
 $LDBedNr='Yatak sayýsý';
 $LDOptions='Seçenekler';
 $LDFreeBed='Boþ';
 
-$LDNoOcc='Doluluk listesi hazýr deðil!';
+$LDNoOcc='Yatan hasta listesi hazýr deðil!';
 $LDClk2Archive='Arþive gitmek için burayý týklayýnýz.';
 $LDNrUnocc='Boþ yatak sayýsý';
 $LDEditStation=' ~station~ servisindeki kayýtlarý düzenleme';
@@ -181,7 +181,7 @@ $LDInsurance=array(
 $LDSave='Kaydet';
 $LDNurse='Hemþire';
 $LDYesSure='Evet, eminim. Hastayý çýkar.';
-$LDFtpAttempted='FTP sunucuya baðlanma denendi.<br>FTP sunucu kapalý ya da meþgul olabilir. Bu problem uzun sürer ise EDP bölümüyle temas kurun.';
+$LDFtpAttempted='FTP sunucuya baðlanma denendi.<br>FTP sunucu kapalý ya da meþgul olabilir. Bu problem uzun sürer ise Bilgi Ýþlem bölümüyle temas kurun.';
 $LDFtpNoLink='FTP giriþi baþarýsýz';
 $LDJustReleased='Hasta çýkarýldý. Servis hasta listesine geri dönmek için  \'Kapat\' ý týklayýnýz.';
 $LDReleaseType='Çýkýþ tipi';
@@ -192,7 +192,7 @@ $LDAlertNoName='Lütfen isminizi giriniz.';
 $LDAlertNoDate='Tarihi bu tarzda giriniz:';
 $LDAlertNoTime='Zamaný þu tarzda giriniz: SS.dd.';
 $LDPatDataFolder='Hasta dosyasý';
-
+$LDChangeDept='Bölüm deðiþtirme';
 $LDClose='Kapat';
 $LDHelp='Yardým';
 $LDReset='Baþtan baþla';

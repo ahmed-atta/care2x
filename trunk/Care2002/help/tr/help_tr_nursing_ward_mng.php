@@ -94,7 +94,7 @@ Bir odadaki yatak sayýsýný düzenleyebilir miyim?</b>
 </font>
 <ul>
  	<b>Evet. </b>Fakat ancak
-	<input type="button" value="Create the ward"> düðmesine týklayýp servisi oluþturduktan SONRA yatak sayýsýný girme þansýnýz olacaktýr.<br>
+	<input type="button" value="Servisi oluþtur"> düðmesine týklayýp servisi oluþturduktan SONRA yatak sayýsýný girme þansýnýz olacaktýr.<br>
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Bir yataðýn ön ek (veya kimliði) ini düzenleyebilir miyim?</b>

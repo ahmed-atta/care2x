@@ -91,5 +91,5 @@ $LDSupplemental='Supplemaental:Ek';
 $LDSupp_s='S'; //ek
 $LDCreateNew='Yeni oluþtur';
 /*2006-09-03 Potur*/
-$LDSureToCreateNewGr='Yeni bir grup kodu oluþturmak istediðinizden emin misiniz?';
+$LDSuretocreatenewgr='Yeni bir grup kodu oluþturmak istediðinizden emin misiniz?';
 ?>

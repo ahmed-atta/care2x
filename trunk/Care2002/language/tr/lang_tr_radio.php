@@ -11,7 +11,7 @@ $LDFoundPatient='Arama sonucu <b>~nr~</b> hasta bulundu';
 $LDWildCards='Joker nedir nasýl kullanýlýr';
 $LDNewSearch='Yeni arama';
 
-$LDCaseNr='Vizit no.';
+$LDCaseNr='Protokol no.';
 $LDLastName='Soyad';
 $LDName='Ad';
 $LDBday='Doðum tarihi';
@@ -43,15 +43,15 @@ $LDSelect='Seç';
 $LDShootDate='Çekim tarihi';
 $LDFullScreen='Tam ekranda izle';
 $LDEditXrayDiag='Rapor düzenle';
-$LDReadDiag='Tanýyý oku';
-$LDWriteDiag='Tanýyý yaz';
-$LDPreviewReport='Taný/Ön izleme';
+$LDReadDiag='Teþhisi oku';
+$LDWriteDiag='Teþhisi yaz';
+$LDPreviewReport='Teþhis/Ön izleme';
 /* 2002-09-08 EL*/
 $LDTestRequestRadio='Tetkik istemi';
 $LDTestRequestRadioTxt='Radyolojik tetkik istemi';
 /* 2002-09-10 EL */
 $LDTestReception='Bekleyen Ýstem';
-$LDTestReceptionTxt='Tetkik istemlerini alma ve iþleme, sonuçlarý/tanýlarý yazma';
+$LDTestReceptionTxt='Tetkik istemlerini alma ve iþleme, sonuçlarý/teþhisleri yazma';
 # 2003-08-08 EL
 $LDDicomImages='DICOM resimleri';
 $LDDicomImagesTxt='DICOM formatýndaki resimleri izleme';
@@ -81,4 +81,7 @@ $LDImageNotes='Resim notlarý';
 #2004-08-05 EL
 $LDMissingImageFile = 'Resim dosyalarý eksik!';
 #Çeviren Op.Dr. Bülent Potur 4/12/2004
+#For Kaloyan Raev's new Dicom module 5/9/2006  Op.Dr. Bülent Potur
+$LDDownload='Ýndir'; 
+$LDFileName='Dosya adý';
 ?>

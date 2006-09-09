@@ -178,13 +178,13 @@ $LDShotDate='Çekim tarihi';
 $LDPatientNr='Vizit No';
 $LDSetShotDate='Tüm resimlere bu tarihi ver.';
 $LDFotoLab='Fotolab';
-$LDHowManyPics='Veribankasýna kaç tane resim kaydetmek istiyorsunuz?';
+$LDHowManyPics='Veritabanýna kaç tane resim kaydetmek istiyorsunuz?';
 $LDNr='Sayý';
 $LDNewPics='yeni bir hastadan resimler';
 $LDMorePics='ayný hastadan resimler';
 $LDAdditional='Ek';
 $LDLinkBroken='Foto sunucusuna baðlantý kesik.';
-$LDPicsSaved='Aþaðýdaki resimler tekrar adlandýrýlarak veribankasýna kaydedildi:';
+$LDPicsSaved='Aþaðýdaki resimler tekrar adlandýrýlarak veritabanýna kaydedildi:';
 $LDEditTitle='Baþlýk';
 
 $LDAlertPhotoInfo='Giriþ alanýndaki bilgi';
@@ -226,7 +226,7 @@ $LDLastName='Soyadý';
 $LDWantUpload='Yüklemek istiyorum';
 $LDImage='resim(ler)';
 # 2002-01-18 EL
-$LDTicketedSupport='Biletli Destek';
+$LDTicketedSupport='Ücretli Destek';
 $LDTicketedSupportTxt='Projenin online destek hizmetine biletli bir istem gönder';
 $LDNewsgroup='Haber grubu';
 $LDNewsgroupTxt='Geliþtiricilerin haberleþme listesinin yansýsý haber grubu.';

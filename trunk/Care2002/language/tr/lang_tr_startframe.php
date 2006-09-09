@@ -9,7 +9,7 @@ $LDTipsAskMe='Benzerlerini deneyiniz, örneðin "koðuþ" yerine "servis" yazýnýz.';
 $LDTipsImgAlt='En iyi sonuçlarýn nasýl alýndýðý konusundaki ip uçlarý için burayý týklayýnýz.';
 $LDSubmitBut='Sorguyu gönder';
 
-$LDQuickInfo='Hýzlý Bilgiler';
+$LDQuickInfo='Önemli Bilgiler';
 $LDPhonePolice='Polis';
 $LDPhoneFire='Ýtfaiye';
 $LDAmbulance='Acil';
@@ -22,12 +22,12 @@ $LDOpenTimes ='Kabul Saatleri';
 $LDManagement ='Yönetim';
 $LDDept ='Bölümler';
 $LDCafenews ='Kafeterya Haberleri';
-$LDAdmission ='Kabul';
+$LDAdmission ='Hasta Kabul';
 $LDExhibition ='Sergiler';
 $LDEducation ='Eðitim';
-$LDAdvStudies ='Çalýþmalar';
+$LDAdvStudies ='Araþtýrmalar';
 $LDPhyTherapy ='Fizik Tedavi';
-$LDHealthTips ='Faydalý saðlýk bilgileri';
+$LDHealthTips ='Saðlýk bilgileri';
 $LDCalendar ='Takvim';
 $LDHelp='Yardým';
 $LDMore='yazýnýn devamý';
@@ -58,5 +58,5 @@ $LDCredits='Programda emeði geçenler';
 /* 2003-05-24 EL */
 $LDPublicItems='Genel konular';
 # 2003-08-28 EL
-$LDHeadline='Umut Hastanesi';
+$LDHeadline='Care2x Hastanesi';
 ?>

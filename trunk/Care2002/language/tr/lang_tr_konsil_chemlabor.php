@@ -1,6 +1,6 @@
 <?php
 $LDDiagnosticTest='Tetkik Ýstemi';
-$LDHospitalName='Aksaray Umut Hastanesi';
+$LDHospitalName='Care2x Hastanesi';
 $LDCentralLab='Merkez Laboratuvarý';
 $LDLabel='Etiket';
 $LDRoomNr='Oda no.';
