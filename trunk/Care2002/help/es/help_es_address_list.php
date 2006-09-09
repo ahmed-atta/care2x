@@ -4,17 +4,17 @@
 
 <form>
   <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> </a> 
-  <font color="990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>Cómo 
-  mostrar la información con la dirección completa?</strong> </font> 
+  <font color="990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>CÃ³mo 
+  mostrar la informaciÃ³n con la direcciÃ³n completa?</strong> </font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b>Dé 
-    clic en la dirección. </font> 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b>DÃ© 
+    clic en la direcciÃ³n. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b><img <?php echo createComIcon('../','warn.gif','0') ?>> 
   Nota</b> </font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted ha terminado 
-    o decide cerrar esta ventana, dé clic al botón <img <?php  print createLDImgSrc('../','cancel.gif','0'); ?>></font>. 
+    o decide cerrar esta ventana, dÃ© clic al botÃ³n <img <?php  print createLDImgSrc('../','cancel.gif','0'); ?>></font>. 
   </ul>
 
 </form>

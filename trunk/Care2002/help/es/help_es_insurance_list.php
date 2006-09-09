@@ -9,20 +9,20 @@
   mostrar los datos de una Aseguradora?</strong></font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
   </font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b>Dé 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b>DÃ© 
     clic al ID o nombre de la misma. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b><img <?php echo createComIcon('../','warn.gif','0') ?>> 
   Nota</b> </font><font face="Verdana, Arial, Helvetica, sans-serif">
   <ul>
-    <font size="2"> Si desea enviar un email a la compañia, haga clic en su direcciçon 
+    <font size="2"> Si desea enviar un email a la compaÃ±ia, haga clic en su direcciçon 
     de email y el cliente de correo se abrira automaticamente. </font>
   </ul>
   <font size="2"><b><img <?php echo createComIcon('../','warn.gif','0') ?>> Nota</b> 
   </font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted ha terminado 
-    o decide cerrar esta ventana, dé clic al botón <img <?php  print createLDImgSrc('../','cancel.gif','0'); ?>> 
+    o decide cerrar esta ventana, dÃ© clic al botÃ³n <img <?php  print createLDImgSrc('../','cancel.gif','0'); ?>> 
     . </font> 
   </ul>
 

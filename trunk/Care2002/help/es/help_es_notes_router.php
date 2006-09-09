@@ -44,18 +44,18 @@ if($x2=='show'||$src=='sickness'){
   <p> 
 </ul>
 <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>¿Como salvar la confirmación?</b></font></font> 
+<font color="#990000"><b>¿Como salvar la confirmaciÃ³n?</b></font></font> 
 <ul>
-  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b> Dé 
-  clic al bot&oacute;n<img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> 
+  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b> DÃ© 
+  clic al botÃ³n<img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> 
   . </font> 
   <p> 
 </ul>
 <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>&iquest;Como imprimir la confirmac&iacute;on?</b></font></font> 
+<font color="#990000"><b>Â¿Como imprimir la confirmacÃ­on?</b></font></font> 
 <ul>
-  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b> Dé 
-  clic al bot&oacute;n <img <?php echo createLDImgSrc('../','printout.gif','0') ?>> 
+  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b> DÃ© 
+  clic al botÃ³n <img <?php echo createLDImgSrc('../','printout.gif','0') ?>> 
   . </font> 
   <p> 
 </ul>
@@ -63,11 +63,11 @@ if($x2=='show'||$src=='sickness'){
 <?php
 		}elseif($src=='diagnostics'){
 ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Aún 
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>AÃºn 
 no hay datos disponibles. Como agregar nuevos datos?</b></font></font> 
 <ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota: </b> Nuevos 
-  reportes diagnósticos o reportes solo pueden ser ingresados via el laboratorio 
+  reportes diagnÃ³sticos o reportes solo pueden ser ingresados via el laboratorio 
   o modulo diagnostico apropiado. El modulo de Admision es de modo "solo lectura" 
   . </font> 
   <p> 
@@ -76,8 +76,8 @@ no hay datos disponibles. Como agregar nuevos datos?</b></font></font>
 <?php
 		}elseif($src=='notes'){
 ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>><font color="#990000"><b><font color="#990000"><b>Aún 
-no hay datos disponibles. &iquest;Como agregar nuevos datos</b></font></b></font>? 
+<img <?php echo createComIcon('../','frage.gif','0') ?>><font color="#990000"><b><font color="#990000"><b>AÃºn 
+no hay datos disponibles. Â¿Como agregar nuevos datos</b></font></b></font>? 
 </font> 
 <ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b> Haga 
@@ -97,8 +97,8 @@ no hay datos disponibles. &iquest;Como agregar nuevos datos</b></font></b></font
 <?php
 		}else{
 ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b><font color="#990000"><b>Aún 
-no hay datos disponibles. &iquest;Como agregar nuevos datos?</b></font></b></font></font> 
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b><font color="#990000"><b>AÃºn 
+no hay datos disponibles. Â¿Como agregar nuevos datos?</b></font></b></font></font> 
 <ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b> Haga 
   clic en el enlace"<img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> 
@@ -115,19 +115,19 @@ no hay datos disponibles. &iquest;Como agregar nuevos datos?</b></font></b></fon
 crear el registro?</b></font></font> 
 <ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b> Escriba 
-  la información y luego haga clic en el botón<img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> 
+  la informaciÃ³n y luego haga clic en el botÃ³n<img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> 
   . </font> 
 </ul>
 <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
 <font color="#990000"><b>¿Como escribir la fecha?</b></font></font> 
 <ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b> 
-  Dé clic al icono <img <?php echo createComIcon('../','show-calendar.gif','0') ?>> 
-  y aparecerá un mini-calendario. </font> 
+  DÃ© clic al icono <img <?php echo createComIcon('../','show-calendar.gif','0') ?>> 
+  y aparecerÃ¡ un mini-calendario. </font> 
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="../help/es/img/es_date_select.png"> 
     </font>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2: </b> 
-    Dé clic a la fecha en el mini-calendario. </font>
+    DÃ© clic a la fecha en el mini-calendario. </font>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="../help/es/img/es_mini_calendar.png"> 
     </font>
   <p>&nbsp; 

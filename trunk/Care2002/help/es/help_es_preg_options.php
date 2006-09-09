@@ -4,7 +4,7 @@
 
 <p>
 
-  <p><font color="#990000"><b> <font size="2" face="Verdana, Arial, Helvetica, sans-serif">Admisi&oacute;n 
+  <p><font color="#990000"><b> <font size="2" face="Verdana, Arial, Helvetica, sans-serif">Admisión 
     - Internado</font></b></font> </p>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Admitir a la 
     persona como internado.</font></p>
@@ -21,7 +21,7 @@
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Fijar una cita 
     o ver citas existentes.</font></p>
   <p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Lista 
-    de admisi&oacute;n</b></font> </p>
+    de admisión</b></font> </p>
 </ul>
 <ul>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Listar todos 
@@ -32,14 +32,14 @@
 <ul>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Listar todos 
     los documentos medocs para esta persona</font></p>
-  <p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Diagn&oacute;sticos 
+  <p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Diagnósticos 
     </b></font> </p>
 </ul>
 <ul>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Listar todos 
     los documentos diagnosticos para esta persona</font></p>
   <p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Resultados 
-    de diagn&oacute;stico</b></font> </p>
+    de diagnóstico</b></font> </p>
 </ul>
 <ul>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Listar todos 
@@ -56,12 +56,12 @@
 <ul>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Listar todos 
     las notas y reportes para esta persona.</font></p>
-  <p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Inmunizaci&oacute;n</b></font> 
+  <p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Inmunización</b></font> 
   </p>
 </ul>
 <ul>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Listar todos 
-    los documentos de inmunizaci&oacute;n para esta persona .</font></p>
+    los documentos de inmunización para esta persona .</font></p>
   <p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Pesos 
     y altura</b></font> </p>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Listar todos 

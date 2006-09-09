@@ -1,33 +1,33 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<font face="Verdana, Arial" size=3 color="#0000cc"> <b>¿Cómo documentar un paciente 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<font face="Verdana, Arial" size=3 color="#0000cc"> <b>¿CÃ³mo documentar un paciente 
 en medocs?</b></font> 
 <form action="#" >
   <?php if($src=="?") : ?>
   <b><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Paso 1</font></b> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Halle los datos básicos 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Halle los datos bÃ¡sicos 
     del paciente.<br>
     Escriba en el campo "Documentar este paciente:" cualquiera de los siguientes 
     datos:<br>
     </font>
     <Ul type="disc">
-      <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">número del paciente 
+      <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">nÃºmero del paciente 
         o<br>
         </font>
       <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">apellido o<br>
         </font>
       <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">nombre del paciente<br>
-        <font color="#000099"> <b>Tip:</b> Si su sistema está equipado 
-        con un escáner de códigos de barras, dé clic en el campo "Documentar este 
-        paciente:" para enfocarlo y escanear el código de barras en la tarjeta 
-        del paciente con el escáner. Sáltese el paso 2. </font></font> 
+        <font color="#000099"> <b>Tip:</b> Si su sistema estÃ¡ equipado 
+        con un escÃ¡ner de cÃ³digos de barras, dÃ© clic en el campo "Documentar este 
+        paciente:" para enfocarlo y escanear el cÃ³digo de barras en la tarjeta 
+        del paciente con el escÃ¡ner. SÃ¡ltese el paso 2. </font></font> 
     </ul>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2</b> 
   </font><font face="Verdana, Arial, Helvetica, sans-serif"><ul><font size="2">
-    Dé clic en el botón 
+    DÃ© clic en el botÃ³n 
     <input type="button" value="Buscar">
-    para iniciar la búsqueda. 
+    para iniciar la bÃºsqueda. 
   </font></ul>
   <font size="2"><b>Alternativa al paso 2</b> </font></font>
   <ul>
@@ -42,20 +42,20 @@ en medocs?</b></font>
         del paciente en el campo "Nombre:" <br>
         </font>
     </ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif">luego dé clic en la tecla 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif">luego dÃ© clic en la tecla 
     "Enter" del teclado. </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 3</b> 
   </font><font face="Verdana, Arial, Helvetica, sans-serif"><ul><font size="2">
-    Si la búsqueda halla un solo resultado, aparecerá un nuevo formulario con 
-    los datos básicos del paciente. Por el contrario, si la búsqueda halla varios 
-    resultados, aparecerá una lista con los resultados. 
+    Si la bÃºsqueda halla un solo resultado, aparecerÃ¡ un nuevo formulario con 
+    los datos bÃ¡sicos del paciente. Por el contrario, si la bÃºsqueda halla varios 
+    resultados, aparecerÃ¡ una lista con los resultados. 
     <?php endif ?>
     <?php if(($src=="?")||($x1>1)) : ?>
     <br>
-    Para documentar un paciente de la lista, dé clic ya sea en el botón <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> 
-    correspondiente a él, o el apellido, nombre o el número de identificación 
-    del paciente, o la fecha de admisión. 
+    Para documentar un paciente de la lista, dÃ© clic ya sea en el botÃ³n <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> 
+    correspondiente a Ã©l, o el apellido, nombre o el nÃºmero de identificaciÃ³n 
+    del paciente, o la fecha de admisiÃ³n. 
   </font></ul>
   <font size="2"><?php endif ?>
   <?php if($src=="?") : ?>
@@ -70,39 +70,39 @@ en medocs?</b></font>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Una vez abierto el formulario 
     con los datos del paciente, usted puede: </font>
     <Ul type="disc">
-      <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">escribir información 
-        adicional en el asegurador o seguro en el campo "Información adicional",<br>
+      <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">escribir informaciÃ³n 
+        adicional en el asegurador o seguro en el campo "InformaciÃ³n adicional",<br>
         </font>
-      <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">dé clic en "<span style="background-color:yellow" >
+      <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">dÃ© clic en "<span style="background-color:yellow" >
         <input type="radio" name="n" value="a">
-        Sí</span>" en los botones de "Consejo médico" si el paciente recibió el 
-        consejo médico obligatorio,<br>
+        SÃ­</span>" en los botones de "Consejo mÃ©dico" si el paciente recibiÃ³ el 
+        consejo mÃ©dico obligatorio,<br>
         </font>
-      <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">dé clic en "<span style="background-color:yellow" >
+      <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">dÃ© clic en "<span style="background-color:yellow" >
         <input type="radio" name="n" value="a">
-        No</span>" en los botones de "Consejo médico" si el paciente no recibió 
-        el consejo médico obligatorio,<br>
+        No</span>" en los botones de "Consejo mÃ©dico" si el paciente no recibiÃ³ 
+        el consejo mÃ©dico obligatorio,<br>
         </font>
       <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">escriba el reporte 
-        diagnóstico en el campo "Diagnóstico:" ,<br>
+        diagnÃ³stico en el campo "DiagnÃ³stico:" ,<br>
         </font>
       <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">escriba el reporte 
-        terapéutico en el campo "Terapia:" ,<br>
+        terapÃ©utico en el campo "Terapia:" ,<br>
         </font>
       <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">de ser necesario, 
-        cambie la fecha en el campo "Documentado el día:" ,<br>
+        cambie la fecha en el campo "Documentado el dÃ­a:" ,<br>
         </font>
       <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">de ser necesario, 
         cambie el nombre en el campo "Documentado por:" ,<br>
         </font>
       <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">de ser necesario, 
-        escriba un número clave en el campo "número clave:" ,<br>
+        escriba un nÃºmero clave en el campo "nÃºmero clave:" ,<br>
         </font>
     </ul>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota</b> 
   </font><font face="Verdana, Arial, Helvetica, sans-serif"><ul><font size="2">
-    Si usted decide borrar lo que haya escrito, dé clic en el botón 
+    Si usted decide borrar lo que haya escrito, dÃ© clic en el botÃ³n 
     <input type="button" value="Reiniciar">
     . 
   </font></ul>
@@ -110,7 +110,7 @@ en medocs?</b></font>
   <?php if($src!="?") print "2"; else print "5"; ?>
   </b> 
   <ul>
-    Dé clic en el botón 
+    DÃ© clic en el botÃ³n 
     <input type="button" value="Guardar">
     para guardar el documento. 
   </ul>
@@ -118,7 +118,7 @@ en medocs?</b></font>
   <b>Nota</b> </font></font>
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted decide cerrar 
-    el documento sin guardar los cambios, dé clic en el botón <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
+    el documento sin guardar los cambios, dÃ© clic en el botÃ³n <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
     </font> 
   </ul>
 

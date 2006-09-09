@@ -4,17 +4,17 @@
 <ul>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
     <font color="#990000"><b> 縋or que configurar esta terminal?</b></font> </font></p>
-  <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif">La informaci&oacute;n 
+  <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif">La informaci贸n 
     configurada puede ser usada en muchos modulos .. </font> </p>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-    <font color="#990000"><b> &iquest;Puedo descartar esta configuraci&oacute;n 
+    <font color="#990000"><b> 驴Puedo descartar esta configuraci贸n 
     y dejar los campos en blanco?</b></font></font> </p>
-  <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Si. Si pero obligar&aacute; 
-    a muchos modulos a ingresar la informaci&oacute;n a mano. </font> </p>
+  <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Si. Si pero obligar谩 
+    a muchos modulos a ingresar la informaci贸n a mano. </font> </p>
   <p> 
 </ul>
-<font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>><b><font color="#990000">&iquest;Es 
+<font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>><b><font color="#990000">驴Es 
 malo dejar los campos en blanco</font></b><font color="#990000"><b>?</b></font></font> 
 <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
-No. pero obligar&aacute; a muchos modulos a ingresar la informaci&oacute;n a mano. 
+No. pero obligar谩 a muchos modulos a ingresar la informaci贸n a mano. 
 </font> 

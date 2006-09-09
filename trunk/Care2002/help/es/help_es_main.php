@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>CARE2X</title>
 
 </head>
@@ -13,17 +13,17 @@
 <img <?php echo createComIcon('../','butft2_d.gif') ?>><p>
 <b>Primeros pasos para usar<br>
 CARE2X</b><p>
-Con el poder de CARE2X y el Internet o su Intranet, hallará y procesará todo tipo de información dentro de su hospital. Dé clic en los temas mostrados arriba para empezar. En los
-temas de ayuda en la columna izquierda (donde está la tabla de contenidos) usted hallará información adicional que lo ayudará a trabajar de manera más fácil con CARE2X.
+Con el poder de CARE2X internet o su intranet, hallarÃ¡ y procesarÃ¡ todo tipo de informaciÃ³n dentro de su hospital. DÃ© clic en los temas mostrados arriba para empezar. En los
+temas de ayuda en la columna izquierda (donde estÃ¡ la tabla de contenidos) usted hallarÃ¡ informaciÃ³n adicional que lo ayudarÃ¡ a trabajar de manera mÃ¡s fÃ¡cil con CARE2X.
   <p> <a href="../help/en/help_en_setpermit.php"><u>Autorizando los derechos de acceso</u></a>
   <p>
-<a href="../help/en/help_en_basic_usage.php"><u>Introducción a CARE2X</u></a><p>
-<a href="../help/en/help_en_onlineman.php"><u>Busque información</u></a><p>
-<a href="http://www.care2x.org?lang=es"><u>Información acerca de CARE2X.</u></a><br>
-Si CARE2X es totalmente nuevo para usted, podrá hallar aquí toda la información que quiere conocer. 
+<a href="../help/en/help_en_basic_usage.php"><u>IntroducciÃ³n a CARE2X</u></a><p>
+<a href="../help/en/help_en_onlineman.php"><u>Busque informaciÃ³n</u></a><p>
+<a href="http://www.care2x.org?lang=es"><u>InformaciÃ³n acerca de CARE2X.</u></a><br>
+Si CARE2X es totalmente nuevo para usted, podrÃ¡ hallar aquÃ­ toda la informaciÃ³n que quiere conocer. 
 <!--
 <p>
-<a href="#"><u>Aprendiendo cómo hacer más rápido y sencillo sus tareas usando CARE2X</u></a><br>
+<a href="#"><u>Aprendiendo cÃ³mo hacer mÃ¡s rÃ¡pido y sencillo sus tareas usando CARE2X</u></a><br>
 -->
 
 </font></blockquote>

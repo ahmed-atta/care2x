@@ -1,5 +1,5 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<font face="Verdana, Arial" size=3 color="#0000cc"> <b> Procesamiento electrónico 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<font face="Verdana, Arial" size=3 color="#0000cc"> <b> Procesamiento electrÃ³nico 
 de datos  
 <?php
 	if($x1=='edit') $x1='update';
@@ -31,7 +31,7 @@ de datos
   <?php if($src=="access") : ?>
   <?php if($x1=="") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-  <font size="2" face="Verdana, Arial, Helvetica, sans-serif">¿Cómo se crea un nuevo derecho 
+  <font size="2" face="Verdana, Arial, Helvetica, sans-serif">¿CÃ³mo se crea un nuevo derecho 
   de acceso?</font></b> </font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Escriba 
@@ -42,21 +42,21 @@ de datos
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota:</b> No se 
       permiten espacios para el nombre de usuario. </font>
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 3: </b>Escriba 
-      la contraseña para el usuario en el campo "<span style="background-color:yellow" > 
-      Contrase&ntilde;a</span>" .<br>
-      <b>Paso 4: </b>Seleccione las areas donde el usuario tendrá permisos de 
+      la contraseÃ±a para el usuario en el campo "<span style="background-color:yellow" > 
+      ContraseÃ±a</span>" .<br>
+      <b>Paso 4: </b>Seleccione las areas donde el usuario tendrÃ¡ permisos de 
       acceso en el campo "<span style="background-color:yellow" > Area # </span>". 
       </font>
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota:</b> Un usuario 
-      puede tener un máximo de 10 areas de acceso (Area 1 a 10). </font>
+      puede tener un mÃ¡ximo de 10 areas de acceso (Area 1 a 10). </font>
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> Ya ingres&eacute; todos los datos &iquest;Como salvar 
+  <font color="#990000"><b> Ya ingresÃ© todos los datos Â¿Como salvar 
   los permisos de acceso?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé clic 
-    en el botón 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© clic 
+    en el botÃ³n 
     <input type="button" value="Salvar">
     .<br>
     </font>
@@ -65,13 +65,13 @@ de datos
   <?php endif ?>
   <?php if($x1=="save") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-  El nuevo acceso está salvado ahora. ¿Como creo otro acceso?</b> </font></font> 
+  El nuevo acceso estÃ¡ salvado ahora. ¿Como creo otro acceso?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé clic 
-    al bot&oacute;n 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© clic 
+    al botÃ³n 
     <input type="button" value="Crear un nuevo usuario">
     .<br>
-    <b>Paso 2: </b>Aparecerá la misma forma.<br>
+    <b>Paso 2: </b>AparecerÃ¡ la misma forma.<br>
     <b>Paso 3: </b>Siga las instrucciones de crear un nuevo acceso.<br>
     </font>
   </ul>
@@ -79,11 +79,11 @@ de datos
   <font color="#990000"><b> ¿Como puedo ver la lista de todos los derechos de 
   acceso?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé clic 
-    en el botón 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© clic 
+    en el botÃ³n 
     <input type="button" value="Lista actual de derechos de acceso">
     .<br>
-    <b>Paso 2: </b>Se mostrará la lista actual de derechos de acceso<br>
+    <b>Paso 2: </b>Se mostrarÃ¡ la lista actual de derechos de acceso<br>
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
@@ -91,19 +91,19 @@ de datos
   <?php if($x1=="list") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Los botones <img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> 
-  y<img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> &iquest;que 
+  y<img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> Â¿que 
   significan y que hacen?</b> </font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> 
-    = Los derechos de acceso para este usuario est&aacute;n bloqueados o congelados. 
-    No puede tener acceso a las areas a las que tenía acceso.<br>
+    = Los derechos de acceso para este usuario estÃ¡n bloqueados o congelados. 
+    No puede tener acceso a las areas a las que tenÃ­a acceso.<br>
     <img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> = 
-    El acceso de este usuario está libre. Podrá entrar a las areas permitidas 
-    previamente para él.<br>
+    El acceso de este usuario estÃ¡ libre. PodrÃ¡ entrar a las areas permitidas 
+    previamente para Ã©l.<br>
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> Las opciones"C","L", and "D", or "U" </b></font></font><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>&iquest;que 
+  <font color="#990000"><b> Las opciones"C","L", and "D", or "U" </b></font></font><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Â¿que 
   significan y que hacen?</b></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>C: </b> = Cambiar o 
@@ -117,7 +117,7 @@ de datos
   <font color="#990000"><b> ¿Como cambiar o editar los datos de acceso del usuario?</b> 
   </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Dé clic a la opcion "<span style="background-color:yellow" > 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> DÃ© clic a la opcion "<span style="background-color:yellow" > 
     C </span>" correspondiente al usuario.<br>
     </font>
   </ul>
@@ -125,7 +125,7 @@ de datos
   <font color="#990000"><b> ¿Como cerrar los derechos de acceso del usuario?</b> 
   </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Dé clic a la opcion "<span style="background-color:yellow" > 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> DÃ© clic a la opcion "<span style="background-color:yellow" > 
     L</span>" correspondiente al usuario.<br>
     <br>
     </font>
@@ -134,14 +134,14 @@ de datos
   <font color="#990000"><b> ¿Como Liberar los derechos de acceso de un usuario 
   (Actualmente cerrados)</b>? </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Dé clic a la opcion "<span style="background-color:yellow" > 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> DÃ© clic a la opcion "<span style="background-color:yellow" > 
     U</span>" correspondiente al usuario.<br>
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b> ¿Como borrar el acceso a ese usuario?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Dé clic a la opcion "<span style="background-color:yellow" > 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> DÃ© clic a la opcion "<span style="background-color:yellow" > 
     D</span>" correspondiente al usuario.<br>
     .<br>
     </font>
@@ -150,11 +150,11 @@ de datos
   <?php endif ?>
   <?php if($x1=="update") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-  &iquest;Como editar algun derecho de acceso?</b> </font></font> 
+  Â¿Como editar algun derecho de acceso?</b> </font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Edite la 
-    informaci&oacute;n.<br>
-    <b>Paso 2: </b>Dé clic en el botón 
+    informaciÃ³n.<br>
+    <b>Paso 2: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="Salvar">
     .<br>
     </font>
@@ -162,8 +162,8 @@ de datos
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> 
   <font color="#990000"><b> Nota:</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si decide no editar dé 
-    clic al botón
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si decide no editar dÃ© 
+    clic al botÃ³n
     <input type="button" value="Cancelar">
     .<br>
     </font>
@@ -176,7 +176,7 @@ de datos
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Si usted 
     esta seguro de borrarlo ,<br>
-    dé clic al botón 
+    dÃ© clic al botÃ³n 
     <input type="button" value="Si, Estoy bien seguro. Borrar este derecho de acceso.">
     .<br>
     </font>
@@ -184,8 +184,8 @@ de datos
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> 
   <font color="#990000"><b> Nota:</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si decide no borrar dé 
-    clic al botón 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si decide no borrar dÃ© 
+    clic al botÃ³n 
     <input type="button" value="Cancelar">
     .<br>
     </font>
@@ -194,15 +194,15 @@ de datos
   <?php endif ?>
   <?php if($x1=="lock") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> &iquest;C&oacute;mo 
+  <font color="#990000"><b> Â¿CÃ³mo 
   <?php if($x2=="0") print "lock"; else print "unlock"; ?>
   un derecho de acceso?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Si está 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Si estÃ¡ 
     seguro de querer 
     <?php if($x2=="0") print "lock"; else print "unlock"; ?>
     el derecho de acceso,<br>
-    dé clic al botón 
+    dÃ© clic al botÃ³n 
     <input type="button" value="Si, Estoy seguro.">
     .<br>
     </font>
@@ -212,7 +212,7 @@ de datos
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted decide no 
     <?php if($x2=="0") print "lock"; else print "unlock"; ?>
-    dé clic al botón
+    dÃ© clic al botÃ³n
     <input type="button" value="No. Regresar.">
     .</font><br>
 </ul>

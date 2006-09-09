@@ -1,13 +1,13 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Administración del Departamento</b></font>
+<b>AdministraciÃ³n del Departamento</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 <form>
-  <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>></a><font color="990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>¿Cómo 
-  puedo leer información detallada de un Departamento? </strong></font> 
+  <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>></a><font color="990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>¿CÃ³mo 
+  puedo leer informaciÃ³n detallada de un Departamento? </strong></font> 
   <ul>
-    <b><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Paso: </font></b><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Dé 
+    <b><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Paso: </font></b><font size="2" face="Verdana, Arial, Helvetica, sans-serif">DÃ© 
     clic al nombre del Departamento.</font>
     <p>
 </ul>

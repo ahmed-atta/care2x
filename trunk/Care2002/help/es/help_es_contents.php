@@ -1,6 +1,6 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 </head>
 <body><font face="Verdana" size=2>
@@ -8,26 +8,26 @@
 <p>
 Direcciones<br>
 Citas<br>
-Facturación<br>
-Admisión del paciente<br>
-Tablas gráficas del paciente<br>
-Administración del departamento<br>
-Diagnósticos, Procedimientos y Gr. Rel. con el Dg. (Grupos Relacionados con el Diagnóstico)<br>
-Imágenes DICOM<br>
-Administración del plan de actividades - Médicos<br>
-Administración del plan de actividades - Enfermeras<br>
-RME<br> Registros médicos electrónicos
+FacturaciÃ³n<br>
+AdmisiÃ³n del paciente<br>
+Tablas grÃ¡ficas del paciente<br>
+AdministraciÃ³n del departamento<br>
+DiagnÃ³sticos, Procedimientos y Gr. Rel. con el Dg. (Grupos Relacionados con el DiagnÃ³stico)<br>
+ImÃ¡genes DICOM<br>
+AdministraciÃ³n del plan de actividades - MÃ©dicos<br>
+AdministraciÃ³n del plan de actividades - Enfermeras<br>
+RME<br> Registros mÃ©dicos electrÃ³nicos
 Seguro<br>
-Insumos médicos<br>
+Insumos mÃ©dicos<br>
 Enfermeras<br>
-Pabellón de enfermería<br>
+PabellÃ³n de enfermerÃ­a<br>
 Paciente de consulta externa<br>
 Farmacia<br>
-Médicos y cirujanos<br>
+MÃ©dicos y cirujanos<br>
 Registro de personas<br>
-Administración del personal<br>
-Radiología<br>
-Directorio telefónico<br>
+AdministraciÃ³n del personal<br>
+RadiologÃ­a<br>
+Directorio telefÃ³nico<br>
 </font>
 </body>
 </html>

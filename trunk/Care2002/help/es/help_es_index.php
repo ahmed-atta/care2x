@@ -1,6 +1,6 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 </head>
 <body alink="#0000ff" vlink="#0000ff" link="#0000ff">
@@ -8,10 +8,10 @@
 <p> <font face="Verdana, Arial" size=2><b> <a href="../main/help-info.php?lang=es" target="HELPINFOFRAME">Primeros 
   pasos</a><br>
 <!--  <a href="#">Contenido</a><br>
-  <a href="#">Índice</a><br>
+  <a href="#">Ãndice</a><br>
 <a href="#">Buscar</a><br>
 <a href="#">Tips y Trucos</a><br>
-<a href="#">Introducción</a></b></font>
+<a href="#">IntroducciÃ³n</a></b></font>
 -->
  <p>
  <b>

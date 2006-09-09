@@ -1,10 +1,10 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <font face="Verdana, Arial" size=3 color="#0000cc"> <b> 
 <?php
-if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
+if($x2=="pharma") print "Farmacia - "; else print "Insumos mÃ©dicos - ";
 	switch($src)
 	{
-	case "input": if($x1=="update") print "Editando la información de un producto";
+	case "input": if($x1=="update") print "Editando la informaciÃ³n de un producto";
                           else print "Ingresando un producto nuevo en la base de datos";
 					break;
 	case "search": print "Buscar un producto";
@@ -23,31 +23,31 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
   <?php if($x1=="") : ?>
   <ul>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif">Cómo ingresar 
-    un producto nuevo en el catálogo de pedidos?</font></b> </font> 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif">CÃ³mo ingresar 
+    un producto nuevo en el catÃ¡logo de pedidos?</font></b> </font> 
     <ul>
       <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Ingrese 
-      toda la información acerca del producto en el campo respectivo.<br>
+      toda la informaciÃ³n acerca del producto en el campo respectivo.<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-    <font color="#990000"><b> Deseo seleccionar una fotografía del producto. Cómo 
+    <font color="#990000"><b> Deseo seleccionar una fotografÃ­a del producto. CÃ³mo 
     lo hago?</b> </font></font> 
     <ul>
-      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-      clic en el botón 
+      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+      clic en el botÃ³n 
       <input type="button" value="Seleccionar...">
-      en el campo "<span style="background-color:yellow" > archivo de imágenes</span>".<br>
-      <b>Paso 2: </b>Una pequeña ventana aparecerá para seleccionar el archivo. 
-      Seleccione el archivo de imágenes de su elección y luego dé clic en "OK".<br>
+      en el campo "<span style="background-color:yellow" > archivo de imÃ¡genes</span>".<br>
+      <b>Paso 2: </b>Una pequeÃ±a ventana aparecerÃ¡ para seleccionar el archivo. 
+      Seleccione el archivo de imÃ¡genes de su elecciÃ³n y luego dÃ© clic en "OK".<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-    <font color="#990000"><b> Terminé de ingresar toda la información del producto. 
-    Cómo lo guardo?</b> </font></font> 
+    <font color="#990000"><b> TerminÃ© de ingresar toda la informaciÃ³n del producto. 
+    CÃ³mo lo guardo?</b> </font></font> 
     <ul>
-      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-      clic en el botón 
+      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+      clic en el botÃ³n 
       <input type="button" value="Salvar">
       .<br>
       </font> 
@@ -56,50 +56,50 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     <?php endif ?>
     <?php if($x1=="save") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-    Cómo ingreso un producto nuevo en la base de datos?</b> </font></font> 
+    CÃ³mo ingreso un producto nuevo en la base de datos?</b> </font></font> 
     <ul>
-      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-      clic en el botón 
+      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+      clic en el botÃ³n 
       <input type="button" value="Producto nuevo">
       .<br>
-      <b>Paso 2: </b>Aparecerá el formulario de pedidos.<br>
-      <b>Paso 3: </b>Escriba la información disponible acerca del producto nuevo.<br>
-      <b>Paso 4: </b>Dé clic en el botón 
+      <b>Paso 2: </b>AparecerÃ¡ el formulario de pedidos.<br>
+      <b>Paso 3: </b>Escriba la informaciÃ³n disponible acerca del producto nuevo.<br>
+      <b>Paso 4: </b>DÃ© clic en el botÃ³n 
       <input type="button" value="Guardar">
-      para guardar la información.<br>
+      para guardar la informaciÃ³n.<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
     <font color="#990000"><b> Deseo hacer cambios al producto que al momento estoy 
-    viendo. ¿Cómo lo hago?</b> </font></font> 
+    viendo. ¿CÃ³mo lo hago?</b> </font></font> 
     <ul>
       <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b> 
-      dé clic al botón 
+      dÃ© clic al botÃ³n 
       <input type="button" value="Actualizar o editar">
       .<br>
-      <b>Paso 2: </b>La información de producto ingresará automáticamente al formulario 
-      de edición.<br>
-      <b>Paso 3: </b>Edite la información.<br>
-      <b>Paso 4: </b> dé clic al botón 
+      <b>Paso 2: </b>La informaciÃ³n de producto ingresarÃ¡ automÃ¡ticamente al formulario 
+      de ediciÃ³n.<br>
+      <b>Paso 3: </b>Edite la informaciÃ³n.<br>
+      <b>Paso 4: </b> dÃ© clic al botÃ³n 
       <input type="button" value="Guardar">
-      para guardar la información.<br>
+      para guardar la informaciÃ³n.<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
     <?php endif ?>
     <?php if($x1=="update") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-    Deseo hacer cambios al producto que al momento estoy viendo. Cómo lo hago?</b> 
+    Deseo hacer cambios al producto que al momento estoy viendo. CÃ³mo lo hago?</b> 
     </font></font> 
     <ul>
       <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>De 
-      ser necesario, primero deberá borrar los datos que ya están ingresados.</font> 
+      ser necesario, primero deberÃ¡ borrar los datos que ya estÃ¡n ingresados.</font> 
       <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 
-        2: </b>Escriba la nueva información en el campo apropiado.</font> 
+        2: </b>Escriba la nueva informaciÃ³n en el campo apropiado.</font> 
       <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 
-        3: </b>Dé clic en el botón 
+        3: </b>DÃ© clic en el botÃ³n 
         <input type="button" value="Guardar">
-        para guardar la información nueva.<br>
+        para guardar la informaciÃ³n nueva.<br>
         </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
@@ -107,44 +107,44 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     <?php endif ?>
     <?php if($src=="search") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-    Cómo busco un producto?</b> </font></font> 
+    CÃ³mo busco un producto?</b> </font></font> 
     <ul>
       <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Escriba 
-      la palabra completa o las primeras letras de la marca del artículo, o el 
-      nombre genérico, o el número de pedido, etc. en el campo <nobr><span style="background-color:yellow" >" 
+      la palabra completa o las primeras letras de la marca del artÃ­culo, o el 
+      nombre genÃ©rico, o el nÃºmero de pedido, etc. en el campo <nobr><span style="background-color:yellow" >" 
       Busque la palabra...: 
       <input type="text" name="s" size=10 maxlength=10>
       "</span></nobr>.<br>
-      <b>Paso 2: </b> dé clic al botón 
+      <b>Paso 2: </b> dÃ© clic al botÃ³n 
       <input type="button" value="Buscar">
-      para hallar el artículo.<br>
-      <b>Paso 3: </b>Si la búsqueda halla el artículo que concuerda de manera 
-      exacta con la palabra de búsqueda, aparecerá información detallada acerca 
-      del artículo.<br>
-      <b>Paso 4: </b>Si la búsqueda halla varios artículos que se parecen a la 
-      palabra que busca, aparecerá una lista con los artículos posibles.<br>
+      para hallar el artÃ­culo.<br>
+      <b>Paso 3: </b>Si la bÃºsqueda halla el artÃ­culo que concuerda de manera 
+      exacta con la palabra de bÃºsqueda, aparecerÃ¡ informaciÃ³n detallada acerca 
+      del artÃ­culo.<br>
+      <b>Paso 4: </b>Si la bÃºsqueda halla varios artÃ­culos que se parecen a la 
+      palabra que busca, aparecerÃ¡ una lista con los artÃ­culos posibles.<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
     <?php if($x1!="multiple") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-    Hay una lista con muchos artículos. Cómo veo la información de un artículo 
+    Hay una lista con muchos artÃ­culos. CÃ³mo veo la informaciÃ³n de un artÃ­culo 
     en particular?</b> </font></font> 
     <ul>
-      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-      clic en el botón <img <?php echo createComIcon('../','info3.gif','0') ?>> 
-      o en el nombre del artículo.<br>
+      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+      clic en el botÃ³n <img <?php echo createComIcon('../','info3.gif','0') ?>> 
+      o en el nombre del artÃ­culo.<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
     <?php endif ?>
     <?php if($x1=="multiple") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-    Deseo ver la lista previa de artículos hallados. Qué debo hacer?</b> </font></font> 
+    Deseo ver la lista previa de artÃ­culos hallados. QuÃ© debo hacer?</b> </font></font> 
     <ul>
-      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-      clic en el botón 
-      <input type="button" value="Ir atrás">
+      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+      clic en el botÃ³n 
+      <input type="button" value="Ir atrÃ¡s">
       .<br>
       </font> 
     </ul>
@@ -154,7 +154,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     Nota:</b></font></font> 
     <ul>
       <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted ya 
-      no desea ver esa información, dé clic en <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
+      no desea ver esa informaciÃ³n, dÃ© clic en <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
@@ -162,90 +162,90 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     <?php if($src=="mng") : ?>
     <?php if(($x3=="1")) : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-    Cómo hacer cambios a la información del producto?</b> </font></font> 
+    CÃ³mo hacer cambios a la informaciÃ³n del producto?</b> </font></font> 
     <ul>
       <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Cambie 
-      la información acerca del producto nuevo.<br>
-      <b>Paso 2: </b>Dé clic en el botón 
+      la informaciÃ³n acerca del producto nuevo.<br>
+      <b>Paso 2: </b>DÃ© clic en el botÃ³n 
       <input type="button" value="Guardar">
-      para guardar la información nueva.<br>
+      para guardar la informaciÃ³n nueva.<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
     <?php endif ?>
     <?php if($x1=="multiple") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-    Cómo hago cambios al producto que estoy viendo en este momento?</b> </font></font> 
+    CÃ³mo hago cambios al producto que estoy viendo en este momento?</b> </font></font> 
     <ul>
-      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-      clic en el botón 
+      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+      clic en el botÃ³n 
       <input type="button" value="Actualizar o editar">
       .<br>
-      <b>Paso 2: </b>La información del producto aparecerá en el formulario para 
+      <b>Paso 2: </b>La informaciÃ³n del producto aparecerÃ¡ en el formulario para 
       que le pueda hacer los cambios.<br>
-      <b>Paso 3: </b>Edite la información.<br>
-      <b>Paso 4: </b>Dé clic en el botón 
+      <b>Paso 3: </b>Edite la informaciÃ³n.<br>
+      <b>Paso 4: </b>DÃ© clic en el botÃ³n 
       <input type="button" value="Guardar">
-      para guardar la información nueva.<br>
+      para guardar la informaciÃ³n nueva.<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-    <font color="#990000"><b> Cómo elimino totalmente el producto que estoy viendo?</b> 
+    <font color="#990000"><b> CÃ³mo elimino totalmente el producto que estoy viendo?</b> 
     </font></font> 
     <ul>
-      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-      clic en el botón 
+      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+      clic en el botÃ³n 
       <input type="button" value="Eliminar de la base de datos">
       .<br>
-      <b>Paso 2: </b>Se le preguntará si realmente desea eliminar la información 
+      <b>Paso 2: </b>Se le preguntarÃ¡ si realmente desea eliminar la informaciÃ³n 
       de la base de datos<br>
-      <b>Paso 3: </b>Si usted realmente desea eliminar la información del producto, 
-      dé clic en el botón 
-      <input type="button" value="Sí, estoy absolutamente seguro. Elimine el producto.">
+      <b>Paso 3: </b>Si usted realmente desea eliminar la informaciÃ³n del producto, 
+      dÃ© clic en el botÃ³n 
+      <input type="button" value="SÃ­, estoy absolutamente seguro. Elimine el producto.">
       </font> 
       <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> 
         <font color="#990000"><b> Nota:</b></font> Este paso no se puede deshacer 
-        una vez que eliminó los datos.<br>
+        una vez que eliminÃ³ los datos.<br>
         </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-    <font color="#990000"><b> No deseo eliminar el producto. Qué debo hacer?</b> 
+    <font color="#990000"><b> No deseo eliminar el producto. QuÃ© debo hacer?</b> 
     </font></font> 
     <ul>
-      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
+      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
       clic en "<span style="background-color:yellow" > No, no deseo eliminar este 
-      producto. Lléveme a la ventana anterior </span>".<br>
+      producto. LlÃ©veme a la ventana anterior </span>".<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
     <?php endif ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-    Cómo administrar un producto en la base de datos?</b> </font></font> 
+    CÃ³mo administrar un producto en la base de datos?</b> </font></font> 
     <ul>
       <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Primero 
-      encuentre el producto. Escriba ya sea la información completa escriba las 
-      primeras letras de la marca, nombre genérico, código, etc. en el <nobr><span style="background-color:yellow" >" 
-      campo de Búsqueda: 
+      encuentre el producto. Escriba ya sea la informaciÃ³n completa escriba las 
+      primeras letras de la marca, nombre genÃ©rico, cÃ³digo, etc. en el <nobr><span style="background-color:yellow" >" 
+      campo de BÃºsqueda: 
       <input type="text" name="s" size=10 maxlength=10>
       "</span></nobr>.<br>
-      <b>Paso 2: </b>Dé clic en el botón 
+      <b>Paso 2: </b>DÃ© clic en el botÃ³n 
       <input type="button" value="Buscar">
-      para encontrar el artículo.<br>
-      <b>Paso 3: </b>Si se encuentra un artículo coincidente con la palabra de 
-      búsqueda, aparecerá la información detallada del producto en cuestión.<br>
-      <b>Paso 4: </b>Si se encuentran varios artículos aproximados con la palabra 
-      de búsqueda, aparecerá una list de los artículos coincidentes.<br>
+      para encontrar el artÃ­culo.<br>
+      <b>Paso 3: </b>Si se encuentra un artÃ­culo coincidente con la palabra de 
+      bÃºsqueda, aparecerÃ¡ la informaciÃ³n detallada del producto en cuestiÃ³n.<br>
+      <b>Paso 4: </b>Si se encuentran varios artÃ­culos aproximados con la palabra 
+      de bÃºsqueda, aparecerÃ¡ una list de los artÃ­culos coincidentes.<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
     <?php if(($x1!="multiple")&&($x3=="")) : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-    Me apareció una lista de artículos. ¿Como ver la información de un artículo 
+    Me apareciÃ³ una lista de artÃ­culos. ¿Como ver la informaciÃ³n de un artÃ­culo 
     en particular?</b> </font></font> 
     <ul>
-      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>dé 
-      clic, ya sea al botón <img <?php echo createComIcon('../','info3.gif','0') ?>> 
-      o al nombre del artículo.<br>
+      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>dÃ© 
+      clic, ya sea al botÃ³n <img <?php echo createComIcon('../','info3.gif','0') ?>> 
+      o al nombre del artÃ­culo.<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
@@ -254,28 +254,28 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     Nota:</b></font></font> 
     <ul>
       <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted decide 
-      cerrar esta ventana dé clic al botón<img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
+      cerrar esta ventana dÃ© clic al botÃ³n<img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
     <?php endif ?>
     <?php if($src=="delete") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-    ¿Como remover un artículo de la lista?</b> </font></font> 
+    ¿Como remover un artÃ­culo de la lista?</b> </font></font> 
     <ul>
       <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> 
-      <font color="#990000"><b> Nota:</b></font> La remoción de un producto es 
+      <font color="#990000"><b> Nota:</b></font> La remociÃ³n de un producto es 
       irreversible.</font> 
       <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 
-        1: </b>Si está seguro de querer borrarlo, dé clic al botón 
-        <input type="button" value="Sí estoy seguro. Borra los datos">
+        1: </b>Si estÃ¡ seguro de querer borrarlo, dÃ© clic al botÃ³n 
+        <input type="button" value="SÃ­ estoy seguro. Borra los datos">
         .<br>
         </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
     <font color="#990000"><b> ¿Y si no quiero borrarlo?</b> </font></font> 
     <ul>
-      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
+      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
       clic al enlace "<span style="background-color:yellow" > No borrar </span>".<br>
       </font> 
     </ul>
@@ -283,7 +283,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     <font color="#990000"><b> Nota:</b></font></font> 
     <ul>
       <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted decide 
-      cerrar esta ventana dé clic al botón<img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
+      cerrar esta ventana dÃ© clic al botÃ³n<img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
@@ -296,14 +296,14 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
       su reporte en el campo <nobr><span style="background-color:yellow" >"Reporte: 
       <input type="text" name="s" size=10 maxlength=10>
       "</span></nobr>.<br>
-      <b>Paso 2: </b>Escriba su nombre en el campo <nobr><span style="background-color:yellow" >"Reportó: 
+      <b>Paso 2: </b>Escriba su nombre en el campo <nobr><span style="background-color:yellow" >"ReportÃ³: 
       <input type="text" name="s" size=10 maxlength=10>
       "</span></nobr>.<br>
       <b>Paso 3: </b>Escriba su numero personal en el campo <nobr><span style="background-color:yellow" >" 
       No. Personal: 
       <input type="text" name="s" size=10 maxlength=10>
       "</span></nobr>.<br>
-      <b>Paso 4: </b>Dé clic en el botón 
+      <b>Paso 4: </b>DÃ© clic en el botÃ³n 
       <input type="button" value="Enviar">
       para enviar el reporte.<br>
       </font> 
@@ -311,7 +311,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> 
     <font color="#990000"><b> <font size="2" face="Verdana, Arial, Helvetica, sans-serif">Nota:</font></b> 
     </font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted decide 
-    cerrar esta ventana dé clic al botón</font><img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. 
+    cerrar esta ventana dÃ© clic al botÃ³n</font><img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. 
   </ul> 
   <?php endif ?>
   </font> 

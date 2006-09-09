@@ -1,11 +1,11 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<font face="Verdana, Arial" size=3 color="#0000cc"> <b>¿Cómo buscar? 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<font face="Verdana, Arial" size=3 color="#0000cc"> <b>¿CÃ³mo buscar? 
 <?php
 switch($src)
 {
- 	case "search": print 'busco un número telefónico?'; break;
+ 	case "search": print 'busco un nÃºmero telefÃ³nico?'; break;
 	case "dir": print 'abro todo el directorio?';break;
-	case "newphone": print 'escribo nueva información telefónica?';break;
+	case "newphone": print 'escribo nueva informaciÃ³n telefÃ³nica?';break;
  }
  ?>
 </b></font> 
@@ -15,8 +15,8 @@ switch($src)
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1</b> </font><font face="Verdana, Arial, Helvetica, sans-serif">
   <ul>
     <font size="2"> Escriba en el campo "<span style="background-color:yellow" >Escriba 
-    la palabra clave.</span>" ya sea información completa o unas pocas letras, 
-    como por ejemplo un código de pabellón o departamento, nombre, o numero de 
+    la palabra clave.</span>" ya sea informaciÃ³n completa o unas pocas letras, 
+    como por ejemplo un cÃ³digo de pabellÃ³n o departamento, nombre, o numero de 
     cuarto. <br>
     <font color="#000066">Ejemplo 1: escriba "m9a" o "M9A" o "M9". <br>
     Ejemplo 2: escriba "Guerrero" o "gue". <br>
@@ -25,16 +25,16 @@ switch($src)
   </ul>
   <font size="2"><b>Paso 2</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Dé clic en el 
-    botón 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> DÃ© clic en el 
+    botÃ³n 
     <input type="button" value="BUSCAR">
-    para empezar la búsqueda.</font> 
+    para empezar la bÃºsqueda.</font> 
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 3</b> </font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si la búsqueda 
-    halla resultado(s), una lista se desplegará.</font> 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si la bÃºsqueda 
+    halla resultado(s), una lista se desplegarÃ¡.</font> 
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
@@ -42,7 +42,7 @@ switch($src)
   <?php if($src=="dir") : ?>
   <b>Paso 1</b> </font><font face="Verdana, Arial, Helvetica, sans-serif">
   <ul>
-    <font size="2"> Dé clic en el botón <img src="../img/en/en_phonedir-gray.gif" border="0">. 
+    <font size="2"> DÃ© clic en el botÃ³n <img src="../img/en/en_phonedir-gray.gif" border="0">. 
     </font>
   </ul>
   <font size="2">
@@ -50,24 +50,24 @@ switch($src)
   <?php if($src=="newphone") : ?>
   <b>Paso 1</b> 
   <ul>
-    Dé clic en el botón <img src="../img/en/en_newdata-gray.gif" border="0">. 
+    DÃ© clic en el botÃ³n <img src="../img/en/en_newdata-gray.gif" border="0">. 
   </ul>
   <b>Paso 2</b> 
   <ul>
-    Si usted ingresó su nombre y contraseña y tiene permiso para esta función, 
-    aparecerá el formulario de ingreso de la nueva información telefónica en la 
+    Si usted ingresÃ³ su nombre y contraseÃ±a y tiene permiso para esta funciÃ³n, 
+    aparecerÃ¡ el formulario de ingreso de la nueva informaciÃ³n telefÃ³nica en la 
     ventana principal.<br>
-    De otro modo, si usted no ha ingresado, se le pedirá que escriba su nombre 
-    y contraseña. 
-    <p> Escriba su nombre y contraseña y dé clic en el botón <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.
-    <p> Si usted decide cerrar esta ventana, dé clic en el botón <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
+    De otro modo, si usted no ha ingresado, se le pedirÃ¡ que escriba su nombre 
+    y contraseÃ±a. 
+    <p> Escriba su nombre y contraseÃ±a y dÃ© clic en el botÃ³n <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.
+    <p> Si usted decide cerrar esta ventana, dÃ© clic en el botÃ³n <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
   </ul>
   </font></font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
   <?php endif ?>
   <b>Nota</b> </font><font face="Verdana, Arial, Helvetica, sans-serif">
   <ul>
-    <font size="2"> Si usted decide cerrar la ventana de búsqueda, dé clic en 
-    el botón <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. </font> 
+    <font size="2"> Si usted decide cerrar la ventana de bÃºsqueda, dÃ© clic en 
+    el botÃ³n <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. </font> 
   </ul>
 
 

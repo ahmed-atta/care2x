@@ -5,24 +5,24 @@
   datos</font></b> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted desea 
-    hacer cambios en la información, dé clic en el botón 
+    hacer cambios en la informaciÃ³n, dÃ© clic en el botÃ³n 
     <input type="button" value="Actualice los datos">
     . </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
   <?php if($src=="search") : ?>
-  <b><font color="990000">Búsqueda nueva</font></b> </font><font face="Verdana, Arial, Helvetica, sans-serif"> 
+  <b><font color="990000">BÃºsqueda nueva</font></b> </font><font face="Verdana, Arial, Helvetica, sans-serif"> 
   <ul>
-    <font size="2"> Si usted desea hacer una nueva búsqueda, dé clic en el botón 
-    <input type="button" value="Volver a la búsqueda">
+    <font size="2"> Si usted desea hacer una nueva bÃºsqueda, dÃ© clic en el botÃ³n 
+    <input type="button" value="Volver a la bÃºsqueda">
     . </font> 
   </ul>
   <font size="2"> 
   <?php else : ?>
-  <b><font color="990000">Para registrar la información de un paciente nuevo</font></b> 
+  <b><font color="990000">Para registrar la informaciÃ³n de un paciente nuevo</font></b> 
   <ul>
-    Si usted desea empezar un registro nuevo, dé clic en el botón<font face="Verdana, Arial, Helvetica, sans-serif"><font face="Verdana, Arial, Helvetica, sans-serif"><font size="2">
-    <input name="button" type="button" value="Volver a admisión">
+    Si usted desea empezar un registro nuevo, dÃ© clic en el botÃ³n<font face="Verdana, Arial, Helvetica, sans-serif"><font face="Verdana, Arial, Helvetica, sans-serif"><font size="2">
+    <input name="button" type="button" value="Volver a admisiÃ³n">
     </font></font>.</font>
   </ul>
   </font></font>
@@ -31,7 +31,7 @@
     <b>Nota</b> </font></font> </p>
 <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted desea volver 
-    una ventana atrás, dé clic en el botón <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>></font>. 
+    una ventana atrÃ¡s, dÃ© clic en el botÃ³n <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>></font>. 
   </ul>
 
 

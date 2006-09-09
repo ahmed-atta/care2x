@@ -19,7 +19,7 @@
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota</b> </font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted ha terminado 
-    o decide cerrar esta ventana, dé clic al botón <img <?php  print createLDImgSrc('../','close2.gif','0'); ?>></font> 
+    o decide cerrar esta ventana, dÃ© clic al botÃ³n <img <?php  print createLDImgSrc('../','close2.gif','0'); ?>></font> 
     . 
   </ul>
 

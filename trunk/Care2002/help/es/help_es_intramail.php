@@ -1,7 +1,7 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-Email de la Intranet   
+Correo de la Intranet   
 <?php
 	switch($src)
 	{
@@ -37,12 +37,11 @@ Email de la Intranet
   <?php if($src=="pass") : ?>
   <?php if($x1=="") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-  <font size="2" face="Verdana, Arial, Helvetica, sans-serif">&iquest;Como accesar 
-  el email de la intranet?</font></b> </font> 
+  <font size="2" face="Verdana, Arial, Helvetica, sans-serif">Â¿CÃ³mo accedo al correo de la intranet?</font></b> </font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Escriba 
-    la direccion del email de la intranet (sin la parte @xxxxxx )en el campo <nobr>"<span style="background-color:yellow" > 
-    Su email: </span>"</nobr>.<br>
+    la direcciÃ³n del correo de la intranet (sin la parte @xxxxxx )en el campo <nobr>"<span style="background-color:yellow" > 
+    Su correo: </span>"</nobr>.<br>
     <b>Paso 2: </b>Seleccione la parte del dominio en el campo <nobr>"<span style="background-color:yellow" > 
     @ 
     <select name="d">
@@ -50,35 +49,35 @@ Email de la Intranet
       <option value="Test Domain 2"> Test Domain 2</option>
     </select>
     </span>"</nobr>.<br>
-    <b>Paso 3: </b>Escriba su contrase&ntilde;aen el campo <nobr>"<span style="background-color:yellow" > 
-    Contrase&ntilde;a: </span>"</nobr>..<br>
-    <b>Paso 4: </b>Dé clic al bot&oacute;n 
+    <b>Paso 3: </b>Escriba su contraseÃ±a en el campo <nobr>"<span style="background-color:yellow" > 
+    ContraseÃ±a: </span>"</nobr>..<br>
+    <b>Paso 4: </b>DÃ© clic al botÃ³n 
     <input name="button" type="button" value="Accesar">
     para lograrlo.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> Aún no tengo email. ¿como lo obtengo?</b> </font></font> 
+  <font color="#990000"><b> AÃºn no tengo cuenta de correo. Â¿CÃ³mo lo obtengo?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
     clic al enlace "<span style="background-color:yellow" > El nuevo usuario puede 
-    registrarse aqu&iacute;. <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>> 
-    </span>" para abrir la forma de registro.<br>
-    <b>Paso 2: </b>Para instrucciones adicionales, dé clic en el botón "Ayuda" 
-    una vez que la forma se despleg&oacute;.<br>
+    registrarse aquÃ­. <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>> 
+    </span>" para abrir el formulario de registro.<br>
+    <b>Paso 2: </b>Para instrucciones adicionales, dÃ© clic en el botÃ³n "Ayuda" 
+    una vez que el formulario se desplegÃ³.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
   <?php endif ?>
   <?php if($x1=="1") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-  &iquest;Como registrarse?</b> </font></font> 
+  Â¿CÃ³mo registrarse?</b> </font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Escriba 
     nombre y apellidos en el campo"<span style="background-color:yellow" > Nombre: 
     </span>".<br>
-    <b>Paso 2: </b>Escriba el nombre de email que desee en el campo"<span style="background-color:yellow" > 
-    Escoja una dirección de email: </span>". </font> 
+    <b>Paso 2: </b>Escriba la cuenta de correo que desee en el campo"<span style="background-color:yellow" > 
+    Escoja una direcciÃ³n de correo: </span>". </font> 
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 3: 
       </b>Seleccione el dominio en el campo <nobr>"<span style="background-color:yellow" > 
       @ 
@@ -87,14 +86,14 @@ Email de la Intranet
         <option value="Test Domain 2"> Test Domain 2</option>
       </select>
       </span>"</nobr>.<br>
-      <b>Paso 4: </b>Escriba el alias de su elección en el campo "<span style="background-color:yellow" > 
+      <b>Paso 4: </b>Escriba el alias de su elecciÃ³n en el campo "<span style="background-color:yellow" > 
       Alias: </span>"<b>.</b> </font>
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 5: 
-      </b>Escriba la contrase&ntilde;a de su elección en el campo"<span style="background-color:yellow" > 
-      Escoja la contrase&ntilde;a: </span>" .<br>
-      <b>Paso 6: </b>reescriba la contrase&ntilde;a en el campo "<span style="background-color:yellow" > 
-      Reintroduzca la contrase&ntilde;a: </span>".<br>
-      <b>Paso 3: </b>Dé clic al bot&oacute;n 
+      </b>Escriba la contraseÃ±a de su elecciÃ³n en el campo"<span style="background-color:yellow" > 
+      Escoja la contraseÃ±a: </span>" .<br>
+      <b>Paso 6: </b>reescriba la contraseÃ±a en el campo "<span style="background-color:yellow" > 
+      Reintroduzca la contraseÃ±a: </span>".<br>
+      <b>Paso 3: </b>DÃ© clic al botÃ³n 
       <input type="button" value="Registrar">
       para registrarse.<br>
       </font>
@@ -105,99 +104,98 @@ Email de la Intranet
   <?php if($src=="mail") : ?>
   <?php if($x1=="listmail") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-  &iquest;Como abrir un correo?</b> </font></font> 
+  Â¿Como abrir un correo?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic en cualquer parte del mail, remitente, receptor, asunto o fecha, o los 
-    iconos <img src="../img/c-mail.gif" border=0 align="absmiddle"> o <img src="../img/o-mail.gif" border=0 align="absmiddle">.<br>
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic en cualquer parte del correo, remitente, receptor, asunto o fecha, o los 
+    Ã­conos <img src="../img/c-mail.gif" border=0 align="absmiddle"> o <img src="../img/o-mail.gif" border=0 align="absmiddle">.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> &iquest;Que significan los iconos <img src="../img/c-mail.gif" border=0 align="absmiddle"> 
+  <font color="#990000"><b> Â¿QuÃ© significan los Ã­conos <img src="../img/c-mail.gif" border=0 align="absmiddle"> 
   y <img src="../img/o-mail.gif" border=0 align="absmiddle"> ?</b> </font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="../img/c-mail.gif" border=0 align="absmiddle"> 
-    = Correo no leido. <br>
-    <img src="../img/o-mail.gif" border=0 align="absmiddle"> = Correo le&iacute;do 
+    = Correo no leÃ­do. <br>
+    <img src="../img/o-mail.gif" border=0 align="absmiddle"> = Correo leÃ­do 
     o abierto. <br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> ¿Como borrar un correo?</b> </font></font> 
+  <font color="#990000"><b>Â¿CÃ³mo borrar un correo?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Check 
-    the mail's 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Revise la casilla 
     <input type="checkbox" name="a" value="s" checked>
-    checkbox to select it.<br>
-    <b>Paso 2: </b>Dé clic al 
+    para seleccionarla.<br>
+    <b>Paso 2: </b>DÃ© clic al 
     <input type="button" value="Delete">
-    button.<br>
+    botÃ³n.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> ¿Como pasar de un folder a otro?</b> </font></font> 
+  <font color="#990000"><b> ¿CÃ³mo pasar de una carpeta a otra?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Solo 
-    haga clic en el nombre del folder.<br>
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic en el nombre de la carpeta.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> ¿Como escribir un nuevo email?</b> </font></font> 
+  <font color="#990000"><b>Â¿CÃ³mo escribo un nuevo mensaje?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic al enlace"<span style="background-color:yellow" > Nuevo E-mail </span>".<br>
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic al enlace"<span style="background-color:yellow" > Nuevo correo</span>".<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
   <?php endif ?>
   <?php if($x1=="compose") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-  ¿Como escribir un nuevo email?</b> </font></font> 
+  Â¿CÃ³mo escribo un nuevo mensaje?</b> </font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Escriba 
-    la direccion de email del receptor en el campo "<span style="background-color:yellow" > 
-    Recipiente: </span>".<br>
-    <b>Paso 2: </b>Si desea enviar este mismo correo a alguien mas escriba su 
-    direcci&oacute;n en el campo "<span style="background-color:yellow" > (CC) 
+    la direccion de correo del receptor en el campo "<span style="background-color:yellow" > 
+    Para: </span>".<br>
+    <b>Paso 2: </b>Si desea enviar este mismo correo a alguien mÃ¡s, escriba su 
+    direcciÃ³n en el campo "<span style="background-color:yellow" > (CC) 
     </span>" .<br>
-    <b>Paso 3: </b>Si desea enviar este mismo correo a alguien mas (sin mostrar 
-    su dirección) escriba su direcci&oacute;n en el campo "<span style="background-color:yellow" >(BCC) 
+    <b>Paso 3: </b>Si desea enviar este mismo correo a alguien mÃ¡s (sin mostrar 
+    su direcciÃ³n) escriba su direcciÃ³n en el campo "<span style="background-color:yellow" >(BCC) 
     </span>".<br>
     <b>Paso 4: </b>Escriba el asunto del mensaje en el campo "<span style="background-color:yellow" > 
     Asunto: </span>".<br>
     <b>Paso 5: </b>Ahora escriba su mensaje en el campo destinado para ello.<br>
-    <b>Paso 6: </b>Dé clic al botón 
+    <b>Paso 6: </b>DÃ© clic al botÃ³n 
     <input type="button" value="Enviar">
     para enviar el correo.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> Si quiero guardar el correo como borrador ¿Como lo 
-  hago??</b> </font></font> 
+  <font color="#990000"><b> Si quiero guardar el correo como borrador, Â¿cÃ³mo lo 
+  hago?</b> </font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Escriba 
     su mensaje en el campo.<br>
-    <b>Paso 2: </b>Después de escribir su mensaje, dé clic en el botón 
+    <b>Paso 2: </b>DespuÃ©s de escribir su mensaje, dÃ© clic en el botÃ³n 
     <input type="button" value="Salvar como borrador">
     .<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> ¿Como usar direcciones de email directamende de mi 
+  <font color="#990000"><b>Â¿CÃ³mo usar direcciones de correo directamende de mi 
   libreta de direcciones?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic al bot&oacute;n 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic al botÃ³n 
     <input type="button" value="Mostrar todos">
-    abajo de "Direccion Rápida"".<br>
-    <b>Paso 2: </b>Aparecerá una ventana mostrando tu libreta de direcciones.<br>
-    <b>Paso 3: </b>Seleccione la opción correspondiente al campo donde será copiada 
+    abajo de "DirecciÃ³n rÃ¡pida"".<br>
+    <b>Paso 2: </b>AparecerÃ¡ una ventana mostrando su libreta de direcciones.<br>
+    <b>Paso 3: </b>Seleccione la opciÃ³n correspondiente al campo donde serÃ¡ copiada 
     </font> 
     <p> 
     <ul>
-      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Click "Para 
+      <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Clic "Para 
       <input type="radio" name="t" value="a">
-      " para copiarla al campo "Recipiente".<br>
+      " para copiarla al campo "Para".<br>
       Click "CC 
       <input type="radio" name="t" value="a">
       " para copiarla al campo "CC".<br>
@@ -207,39 +205,39 @@ Email de la Intranet
       <p> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> 
-    <b>Nota:</b> si quiere reajustar la selección de clic al icono<img src="../img/redpfeil.gif" border=0>.<br>
+    <b>Nota:</b> si quiere reajustar la selecciÃ³n, dÃ© clic al icono<img src="../img/redpfeil.gif" border=0>.<br>
     <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Nota:</b> 
     Puede seleccionar varias direcciones a la vez. </font> 
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 4: 
-      </b>Dé clic al bot&oacute;n 
+      </b>DÃ© clic al botÃ³n 
       <input type="button" value="Insertar">
-      para copiar las direcciones seleccionadas al email.<br>
-      <b>Paso 5: </b>Dé clic al bot&oacute;n"<span style="background-color:yellow" > 
+      para copiar las direcciones seleccionadas al mensaje que quiere enviar.<br>
+      <b>Paso 5: </b>DÃ© clic al botÃ³n"<span style="background-color:yellow" > 
       <img src="../img/l_arrowGrnSm.gif" border=0> Cerrar </span>" para cerrar 
       la ventana.<br>
       </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> ¿Para que sirve dirección rápida?</b> </font></font> 
+  <font color="#990000"><b> ¿Para quÃ© sirve direcciÃ³n rÃ¡pida?</b> </font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota: </b>Si 
-    usted tiene direcciones guardadas en el cache "Dirección rápida", las primeras 
-    5 serán listadas. </font> 
+    usted tiene direcciones guardadas en el cachÃ© "DirecciÃ³n rÃ¡pida", las primeras 
+    5 serÃ¡n listadas. </font> 
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: 
-      </b>Primero haga clic en el campo donde quiere poner la direccion ("Recipiente" 
+      </b>Primero haga clic en el campo donde quiere poner la direcciÃ³n ("Recipiente" 
       o "CC" o "BCC").<br>
-      <b>Paso 2: </b>Dé clic en la dirección deseada de la lista "Dirección rápida". 
-      Esta dirección será copiada en el campo donde hizo clic previamente.<br>
+      <b>Paso 2: </b>DÃ© clic en la direcciÃ³n deseada de la lista "DirecciÃ³n rÃ¡pida". 
+      Esta direcciÃ³n serÃ¡ copiada en el campo donde hizo clic previamente.<br>
       </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
   <?php endif ?>
   <?php if(($x1=="sendmail")&&($x3=="1")) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-  ¿Como escribir un nuevo email?</b> </font></font> 
+  Â¿CÃ³mo escribir un nuevo mensaje?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic al enlace "<span style="background-color:yellow" > New Email </span>".<br>
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic al enlace "<span style="background-color:yellow" > Nuevo mensaje </span>".<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
@@ -247,74 +245,74 @@ Email de la Intranet
   <?php endif ?>
   <?php if($src=="read") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-  ¿Como imprimo el correo?</b> </font></font> 
+  Â¿CÃ³mo imprimo el mensaje?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
     clic al enlace "<span style="background-color:yellow" > Version impresa <img src="../img/bul_arrowGrnSm.gif" border=0></span>".<br>
-    <b>Paso 2: </b>Aparecerá una versión formateada para imprimir.<br>
-    <b>Paso 3: </b>Dé clic a la opción "<span style="background-color:yellow" > 
+    <b>Paso 2: </b>AparecerÃ¡ una versiÃ³n formateada para imprimir.<br>
+    <b>Paso 3: </b>DÃ© clic a la opciÃ³n "<span style="background-color:yellow" > 
     < Imprimir > </span>" para imprimirlo.<br>
-    <b>Paso 4: </b>Aparecerá el menu de impresoras de Windows. Dé clic en el botón 
+    <b>Paso 4: </b>AparecerÃ¡ el menu de impresoras. DÃ© clic en el botÃ³n 
     "OK".<br>
-    <b>Paso 5: </b>Para cerrar la ventana de impresión, de clic en la opción "<span style="background-color:yellow" > 
+    <b>Paso 5: </b>Para cerrar la ventana de impresiÃ³n, dÃ© clic en la opciÃ³n "<span style="background-color:yellow" > 
     < Cerrar > </span>".<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> ¿Como responder un correo?</b> </font></font> 
+  <font color="#990000"><b>Â¿CÃ³mo responder un correo?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
     clic al 
     <input type="button" value="Reenviar">
     .<br>
-    <b>Paso 2: </b>Edite las direcciones de email de ser necesario.<br>
-    <b>Paso 3: </b>Dé clic al botón 
+    <b>Paso 2: </b>Edite las direcciones de correo de ser necesario.<br>
+    <b>Paso 3: </b>DÃ© clic al botÃ³n 
     <input type="button" value="Enviar">
-    para finalmente reenviar el email. </font> 
+    para finalmente reenviar el mensaje. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> ¿Como reenviar el correo?</b> </font></font> 
+  <font color="#990000"><b>Â¿CÃ³mo reenviar el mensaje?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic al botón 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic al botÃ³n 
     <input type="button" value="Reenviar">
     .<br>
-    <b>Paso 2: </b>Escriba la direccion del receptor.<br>
-    <b>Paso 3: </b>Dé clic al bot&oacute;n 
+    <b>Paso 2: </b>Escriba la direcciÃ³n del receptor.<br>
+    <b>Paso 3: </b>DÃ© clic al botÃ³n 
     <input type="button" value="Enviar">
-    para finalmente enviar el email. </font> 
+    para finalmente enviar el mensaje. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> ¿Como borrar el email?</b> </font></font> 
+  <font color="#990000"><b>Â¿CÃ³mo borrar el mensaje?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic al boton 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic al botÃ³n 
     <input type="button" value="Borrar">
     .<br>
-    <b>Paso 2: </b>Se le preguntará si realmente desea borrar el email.<br>
-    <b>Paso 3: </b>Dé clic al bot&oacute;n 
+    <b>Paso 2: </b>Se le preguntarÃ¡ si realmente desea borrar el mensaje.<br>
+    <b>Paso 3: </b>DÃ© clic al botÃ³n 
     <input type="button" value="OK">
-    para finalmente borrar el email. </font> 
+    para finalmente borrar el mensaje. </font> 
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota:</b> 
-      Los correos que son borrados de la "bandeja de entrada" son temporalmente 
+      Los mensajes que son borrados de la "bandeja de entrada" son temporalmente 
       almacenados en la papelera de reciclaje. </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
   <?php endif ?>
   <?php if($src=="address") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-  ¿Como agregar una dirección de correo a la Libreta de direcciones?</b> </font></font> 
+  Â¿CÃ³mo agregar una direcciÃ³n de correo a la Libreta de direcciones?</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic al botón 
-    <input type="button" value="Agregar nueva dirección">
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic al botÃ³n 
+    <input type="button" value="Agregar nueva direcciÃ³n">
     .<br>
-    <b>Paso 2: </b>aparecerá una forma, Escriba el nombre en el campo "<span style="background-color:yellow" > 
+    <b>Paso 2: </b>aparecerÃ¡ un formulario. Escriba el nombre en el campo "<span style="background-color:yellow" > 
     Nombre: </span>".<br>
     <b>Paso 3: </b>Escriba el alias en el campo "<span style="background-color:yellow" > 
     Alias: </span>".<br>
-    <b>Paso 4: </b>Escriba la direccion de email en el campo "<span style="background-color:yellow" > 
-    Email: </span>".<br>
+    <b>Paso 4: </b>Escriba la direccion de correo en el campo "<span style="background-color:yellow" > 
+    Correo: </span>".<br>
     <b>Paso 5: </b>Seleccione el dominio en el campo <nobr>"<span style="background-color:yellow" > 
     @ 
     <select name="d">
@@ -322,25 +320,25 @@ Email de la Intranet
       <option value="Test Domain 2"> Test Domain 2</option>
     </select>
     </span>"</nobr>.<br>
-    <b>Paso 6: </b>Dé clic al botón 
+    <b>Paso 6: </b>DÃ© clic al botÃ³n 
     <input type="button" value="Salvar">
     .<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> ¿Como borrar una dirección de la libreta de direcciones?</b> 
+  <font color="#990000"><b>Â¿CÃ³mo borrar una direcciÃ³n de la libreta de direcciones?</b> 
   </font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Seleccione 
     <input type="checkbox" name="d" value="s" checked>
-    la direccion que desee eliminar.<br>
-    <b>Paso 2: </b>Dé clic al botón 
+    la direcciÃ³n que desee eliminar.<br>
+    <b>Paso 2: </b>DÃ© clic al botÃ³n 
     <input type="button" value="Borrar">
     .<br>
-    <b>Paso 3: </b>Te preguntará si realmente quiere borrar el email.<br>
-    <b>Paso 4: </b>Dé clic al botón 
+    <b>Paso 3: </b>Te preguntarÃ¡ si realmente quiere borrar el mensaje.<br>
+    <b>Paso 4: </b>DÃ© clic al botÃ³n 
     <input type="button" value="OK">
-    para eliminar finalmente la dirección.</font> 
+    para eliminar finalmente la direcciÃ³n.</font> 
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
@@ -348,9 +346,9 @@ Email de la Intranet
   <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> 
   Nota:</b> </font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Los emails de 
-    Intranet y las direcciones SOLAMENTE funcionan en la intranet y no pueden 
-    usarse para la Internet.<br>
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Los correos de 
+    intranet y las direcciones SOLAMENTE funcionan en la intranet y no pueden 
+    usarse para internet.<br>
     </font><font face="Verdana, Arial, Helvetica, sans-serif"> </font> 
   </ul>
 	</form>

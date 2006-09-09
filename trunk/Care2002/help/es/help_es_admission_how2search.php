@@ -1,11 +1,11 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<font face="Verdana, Arial" size=3 color="#0000cc"> <b>Cómo buscar un paciente</b></font> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<font face="Verdana, Arial" size=3 color="#0000cc"> <b>CÃ³mo buscar un paciente</b></font> 
 <form action="#" >
   <b><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Paso 1</font></b> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Escriba una palabra 
-    completa o unas pocas letras de la información del paciente, como por ejemplo, 
-    el número de identificación, o el nombre, o el apellido, o la fecha de nacimiento. 
+    completa o unas pocas letras de la informaciÃ³n del paciente, como por ejemplo, 
+    el nÃºmero de identificaciÃ³n, o el nombre, o el apellido, o la fecha de nacimiento. 
     </font><font face="Verdana, Arial, Helvetica, sans-serif">
     <p><font size="2">Ejemplo 1: escriba "21000012" o "12". <br>
       Ejemplo 2: escriba "Guerero" o "gue". <br>
@@ -14,22 +14,22 @@
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2</b> </font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Dé clic en el 
-    botón 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> DÃ© clic en el 
+    botÃ³n 
     <input type="button" value="BUSCAR">
     para empezar a buscar.</font> 
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 3</b> </font><font face="Verdana, Arial, Helvetica, sans-serif">
   <ul>
-    <font size="2"> Si la búsqueda le da un resultado, aparecerá una lista.<br>
-    Para ver los datos de admisión del paciente que está buscando, dé clic en 
-    el ícono <img src="../gui/img/common/default/statbel2.gif" border=0> que le 
+    <font size="2"> Si la bÃºsqueda le da un resultado, aparecerÃ¡ una lista.<br>
+    Para ver los datos de admisiÃ³n del paciente que estÃ¡ buscando, dÃ© clic en 
+    el Ã­cono <img src="../gui/img/common/default/statbel2.gif" border=0> que le 
     sigue. </font>
   </ul>
   <font size="2"><b>Nota</b> </font>
   <ul>
-    <font size="2"> Si usted desea cerrar esta ventana, dé clic en el botón <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
+    <font size="2"> Si usted desea cerrar esta ventana, dÃ© clic en el botÃ³n <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
     </font> 
   </ul>
 

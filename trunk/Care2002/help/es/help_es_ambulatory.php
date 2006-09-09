@@ -1,38 +1,38 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 </head>
 <body bgcolor="#FFFFFF">
 <b> 
-<p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif">¿Porqué 
-  no puedo ver el nombre del Departamento en la página?</font></b> 
+<p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif">¿PorquÃ© 
+  no puedo ver el nombre del Departamento en la pÃ¡gina?</font></b> 
 <ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso:</b> Seleccione 
   el Departamento del campo selector.</font>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="../help/es/img/es_ambulatory.png" border=0>
     </font> 
 </ul> 
-<p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>¿Cómo 
+<p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>¿CÃ³mo 
   veo la lista de pacientes de consulta externa?</strong></font>  
 <ul>
-  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso:</b> Dé 
-  clic en el "área clínica de consulta externa" y escriba su nombre y contraseña 
-  si la máquina lo solicita. </font> 
+  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso:</b> DÃ© 
+  clic en el "Ã¡rea clÃ­nica de consulta externa" y escriba su nombre y contraseÃ±a 
+  si la mÃ¡quina lo solicita. </font> 
 </ul>
 <b> 
-<p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>¿Cómo 
+<p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>¿CÃ³mo 
   veo las citas para el Departamento?</strong></font>  
 <ul>
-  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso:</b> Dé 
-  clic en "Citas" y escriba su nombre y contraseña si la máquina lo solicita. 
+  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso:</b> DÃ© 
+  clic en "Citas" y escriba su nombre y contraseÃ±a si la mÃ¡quina lo solicita. 
   </font> 
 </ul>
-<p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>¿Cómo 
+<p><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>¿CÃ³mo 
   proceso las solicitudes pendientes?</strong></font> <font face="Verdana, Arial" size=2> 
 <ul>
-  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso:</b> Dé 
-  clic en "Solicitudes pendientes" y escriba su nombre y contraseña si la máquina 
+  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso:</b> DÃ© 
+  clic en "Solicitudes pendientes" y escriba su nombre y contraseÃ±a si la mÃ¡quina 
   lo solicita. </font> 
 </ul>
 </font> 

@@ -2,7 +2,7 @@
 <b><?php echo "$x3 - $x2" ?></b></font>
 <form action="#" >
 <p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-  <font size="2" face="Verdana, Arial, Helvetica, sans-serif">&iquest;Como escribir 
+  <font size="2" face="Verdana, Arial, Helvetica, sans-serif">¿Como escribir 
   comentarios o notas acerca del paciente?</font></b></font> 
 <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Haga 
@@ -11,29 +11,29 @@
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> Ya termin&eacute; de escribir. &iquest;Como los guardo?</b></font></font> 
+  <font color="#990000"><b> Ya terminé de escribir. ¿Como los guardo?</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>D� 
-    clic al bot&oacute;n <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
+    clic al botón <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> 
     para salvar. </font> 
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> Ya salv&eacute; los comentarios.&iquest;Como cierro 
+  <font color="#990000"><b> Ya salvé los comentarios.¿Como cierro 
   la ventana?</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>D� 
-    clic al bot&oacute;n <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
+    clic al botón <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> 
     para cerrar la ventana. </font> 
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> Escrib&iacute; un error. &iquest;Puedo borrar o editar?</b></font></font> 
+  <font color="#990000"><b> Escribí un error. ¿Puedo borrar o editar?</b></font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">No!</font> 
-    </b>No est&aacute; permitido borrar o editar ninguna informaci&oacute;n. Solo 
-    agregue una nueva nota que mencione la informaci&oacute;n incorrecta, y agregue 
-    la informaci&oacute;n correcta. </font> 
+    </b>No está permitido borrar o editar ninguna información. Solo 
+    agregue una nueva nota que mencione la información incorrecta, y agregue 
+    la información correcta. </font> 
     <p> 
   </ul>
 

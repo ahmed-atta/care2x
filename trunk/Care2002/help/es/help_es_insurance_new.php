@@ -1,5 +1,5 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Aseguradora - Nuevos datos de la compañia</b></font>
+<b>Aseguradora - Nuevos datos de la compaÃ±ia</b></font>
 <p> 
 <ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
@@ -8,12 +8,12 @@
   <ul>
     <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">ID de la Aseguradora 
       </font>
-    <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Nombre de la compañia 
+    <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Nombre de la compaÃ±ia 
       </font>
     <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Domicilio fiscal </font>
     <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Domicilio de pago </font>
   </ul>
-  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2:</b> Dé clic al 
+  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2:</b> DÃ© clic al 
   boton <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para guardar 
   los datos. </font> 
 </ul>

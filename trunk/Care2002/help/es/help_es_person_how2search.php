@@ -8,7 +8,7 @@
     </font></p>
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Escriba ya sea 
-    la informaciÛn completa o las primeras letras de su informaci&oacute;n, como 
+    la informaci√≥n completa o las primeras letras de su informaci√≥n, como 
     por ejemplo el apellido, nombre, o numero PID (person identifier). </font><font face="Verdana, Arial, Helvetica, sans-serif">
     <p><font size="2">Ejemplo 1: escriba "21000012" o "12". <br>
       Ejemplo 2: escriba "Guerrero" o "gue". <br>
@@ -17,22 +17,22 @@
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2</b> </font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> DÈ clic al bot&oacute;n 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> D√© clic al bot√≥n 
     <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> para empezar 
-    la b˙squeda. </font> 
+    la b√∫squeda. </font> 
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 3</b> </font><font face="Verdana, Arial, Helvetica, sans-serif">
   <ul>
-    <font size="2"> Si la b˙squeda halla un resultado o resultados, se mostrar· 
+    <font size="2"> Si la b√∫squeda halla un resultado o resultados, se mostrar√° 
     una lista.<br>
-    Para ver los datos de la persona que est&aacute; buscando, dÈ clic al botÛn 
+    Para ver los datos de la persona que est√° buscando, d√© clic al bot√≥n 
     <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> contigua al nombre. 
     </font>
   </ul>
   <font size="2"><b>Nota</b> </font>
   <ul>
-    <font size="2"> Si usted decide cancelar la b˙squeda dÈ clic al botÛn <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
+    <font size="2"> Si usted decide cancelar la b√∫squeda d√© clic al bot√≥n <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
     </font> 
   </ul>
 

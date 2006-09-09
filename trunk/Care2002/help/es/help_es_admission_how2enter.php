@@ -1,37 +1,37 @@
 
 <form action="#">
-  <font color="#0000FF" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>Cómo 
-  ingresar los datos de admisión de un paciente </strong></font> 
+  <font color="#0000FF" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>CÃ³mo 
+  ingresar los datos de admisiÃ³n de un paciente </strong></font> 
   <p> <b><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Paso 1</font></b> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif">Dé clic en "Admisión" en 
-    el marco del menú principal. </font>
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif">DÃ© clic en "AdmisiÃ³n" en 
+    el marco del menÃº principal. </font>
   </ul>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2</b> </font>
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si ya ingresó su nombre 
-    y contraseña y tiene permiso para ver esta ventana, aparecerá el formulario 
-    de admisión del paciente en la ventana de contenidos.<br>
-    De otro modo, si usted no ha ingresado su nombre y contraseña, se le pedirá 
-    que los escriba. Ingrese su nombre y contraseña y dé clic en el botón <img src="../img/<?php echo "$lang/$lang" ?>_continue.gif" border=0>. 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si ya ingresÃ³ su nombre 
+    y contraseÃ±a y tiene permiso para ver esta ventana, aparecerÃ¡ el formulario 
+    de admisiÃ³n del paciente en la ventana de contenidos.<br>
+    De otro modo, si usted no ha ingresado su nombre y contraseÃ±a, se le pedirÃ¡ 
+    que los escriba. Ingrese su nombre y contraseÃ±a y dÃ© clic en el botÃ³n <img src="../img/<?php echo "$lang/$lang" ?>_continue.gif" border=0>. 
     </font>
   </ul>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 3</b> </font>
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif">Ingrese los datos personales 
-    del paciente. Luego dé clic en el botón 
+    del paciente. Luego dÃ© clic en el botÃ³n 
     <input type="button" value="Guardar">
-    para guardar los datos. Si alguna información importante está faltando, aparecerá 
-    un mensaje solicitándole que ingrese la información faltante en los campos 
-    marcados con rojo. Si desea guardar la información completa a pesar de esta 
-    advertencia, de clic en el botón 
+    para guardar los datos. Si alguna informaciÃ³n importante estÃ¡ faltando, aparecerÃ¡ 
+    un mensaje solicitÃ¡ndole que ingrese la informaciÃ³n faltante en los campos 
+    marcados con rojo. Si desea guardar la informaciÃ³n completa a pesar de esta 
+    advertencia, de clic en el botÃ³n 
     <input type="button" value="Guardar de todos modos">
     . </font>
   </ul>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 4</b> </font>
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif">Dé clic en "Admisión" localizado 
-    en el marco del menú izquie</font>rdo. 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif">DÃ© clic en "AdmisiÃ³n" localizado 
+    en el marco del menÃº izquie</font>rdo. 
 </ul>
 <p>
 <p>

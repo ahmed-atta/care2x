@@ -3,7 +3,7 @@
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">øComo dar de ALTA 
   un paciente?</font></b></font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b><br>
-  Paso 1: </b>Aseg˙rese de escribir la fecha y hora correctas del alta.<br>
+  Paso 1: </b>Aseg√∫rese de escribir la fecha y hora correctas del alta.<br>
   <b>Paso 2: </b>Seleccione el tipo de alta marcando la casilla correspondiente<br>
   </font> 
   <ul>
@@ -15,34 +15,34 @@
     notas adicionales acerca del alta en el campo si es necesario. &quot;<span style="background-color:yellow" >Notas</span>" 
     . <br>
     <b>Paso 4: </b>Escriba en el campo "<span style="background-color:yellow" > 
-    EnfermerÌa: 
+    Enfermer√≠a: 
     <input type="text" name="a" size=20 maxlength=20>
-    </span>" si este est· vacÌo. <br>
+    </span>" si este est√° vac√≠o. <br>
     <b>Paso 5: </b>Marque el campo "<span style="background-color:yellow" > 
     <input type="checkbox" name="d" value="d">
     Si, estoy seguro de dar de alta el paciente. </span>" <br>
-    <b>Paso 6: </b>DÈ clic al bot&oacute;n 
+    <b>Paso 6: </b>D√© clic al bot√≥n 
     <input type="button" value="Alta">
     para dar de alta al paciente. </font> 
-  <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 7: </b>DÈ 
-    clic al bot&oacute;n <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> 
+  <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 7: </b>D√© 
+    clic al bot√≥n <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> 
     para regresar a la lista de cuartos ocupados. </font> 
   <p> 
 </ul>
 <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b> IntentÈ hacer clic en el botÛn 
+<font color="#990000"><b> Intent√© hacer clic en el bot√≥n 
 <input type="button" value="Alta">
 pero no responde. øPor que?</b></font></font> 
 <ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota: </b>Debe 
-  estar seleccionada la siguiente opciÛn: <br>
+  estar seleccionada la siguiente opci√≥n: <br>
   " <span style="background-color:yellow" > 
   <input type="checkbox" name="d" value="d" checked>
   Si, estoy seguro de dar de alta el paciente. </span>". </font> 
-  <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÈ 
-    clic a esta opciÛn si no est· marcada.</font>
+  <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>D√© 
+    clic a esta opci√≥n si no est√° marcada.</font>
   <p> 
 </ul>
 <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota: </b>Si desea 
-cancelar, dÈ clic al botÛn <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.</ul> 
+cancelar, d√© clic al bot√≥n <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.</ul> 
 </font>

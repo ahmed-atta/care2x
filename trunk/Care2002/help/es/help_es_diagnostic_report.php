@@ -3,20 +3,20 @@
 <form action="#" >
 <p><img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b> 
-  ¿Cómo mostrar un reporte diagnóstico?</b></font> 
+  ¿CÃ³mo mostrar un reporte diagnÃ³stico?</b></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota: </b>De 
     manera predeterminada, primero aparece el primer reporte en la lista.</font> 
-    <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b>Dé 
-      clic en un número particular de reporte en el índice izquierdo para mostrar 
+    <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b>DÃ© 
+      clic en un nÃºmero particular de reporte en el Ã­ndice izquierdo para mostrar 
       ese reporte.<br>
       </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> ¿Cómo imprimir el reporte?</b></font></font> 
+  <font color="#990000"><b> ¿CÃ³mo imprimir el reporte?</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b>Dé 
-    clic al botón <img <?php echo createLDImgSrc('../','printout.gif','0') ?> align="absmiddle"> 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b>DÃ© 
+    clic al botÃ³n <img <?php echo createLDImgSrc('../','printout.gif','0') ?> align="absmiddle"> 
     para imprimir el reporte.<br>
     </font><font face="Verdana, Arial, Helvetica, sans-serif"> </font> 
 </ul>

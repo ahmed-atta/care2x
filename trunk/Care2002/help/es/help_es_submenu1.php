@@ -1,21 +1,21 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 
 </head>
 <body>
-<b> <?php echo $src ?> <font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif">Qué puedo hacer aquí?</font></b>
+<b> <?php echo $src ?> <font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif">QuÃ© puedo hacer aquÃ­?</font></b>
 <p>
 <font face="Verdana, Arial, Helvetica, sans-serif" size=2>
-Este es un submenú típico. Un submenú generalmente está organizado en tres columnas. 
+Este es un submenÃº tÃ­pico. Un submenÃº generalmente estÃ¡ organizado en tres columnas. 
 </font><font face="Verdana, Arial" size=2><ul>
-  <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Columna 1</b> : Íconos. Los íconos responden si sobre ellos les da un clic.
+  <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Columna 1</b> : Ãconos. Los Ã­conos responden si sobre ellos les da un clic.
     </font><p>
-<li><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Columna 2</b> : Ítems de menú. Al dar clic sobre ellos 1.) Activan una función 2.) Abren nuevas funciones o submenús. Si usted desea activar o abrir la función,
-dé clic sobre el ítem.</font><p>
-<li><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Columna 3</b> : Descripciones. Estas son descripciones breves o vistazos rápidos de las funciones o propósitos de los ítems del menú en la columna 2.
+<li><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Columna 2</b> : Ãtems de menÃº. Al dar clic sobre ellos 1.) Activan una funciÃ³n 2.) Abren nuevas funciones o submenÃºs. Si usted desea activar o abrir la funciÃ³n,
+dÃ© clic sobre el Ã­tem.</font><p>
+<li><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Columna 3</b> : Descripciones. Estas son descripciones breves o vistazos rÃ¡pidos de las funciones o propÃ³sitos de los Ã­tems del menÃº en la columna 2.
 
 </font></ul>
 

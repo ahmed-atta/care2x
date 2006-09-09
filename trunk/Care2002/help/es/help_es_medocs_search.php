@@ -2,20 +2,20 @@
 <b>Medocs - Hallando al paciente</b></font>
 <p>
 <ul>
-  <p><font size=2 face="Verdana, Arial, Helvetica, sans-serif" > <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>></a><font color="990000"><strong>Cómo 
+  <p><font size=2 face="Verdana, Arial, Helvetica, sans-serif" > <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>></a><font color="990000"><strong>CÃ³mo 
     crear un nuevo documento Medocs?</strong></font></font></p>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Si 
-    el paciente se halla en la lista resultante, dé clic en su <img <?php echo createComIcon('../','statbel2.gif','0') ?>> 
-    ícono para mostrar los documentos Medocs disponibles.</font></p>
-  <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2: </b>Dé 
+    el paciente se halla en la lista resultante, dÃ© clic en su <img <?php echo createComIcon('../','statbel2.gif','0') ?>> 
+    Ã­cono para mostrar los documentos Medocs disponibles.</font></p>
+  <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2: </b>DÃ© 
     clic en "Escriba en un registro nuevo" para generar un formulario nuevo.</font>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 3: </b>Escriba 
-    la "Información adicional" de estar disponible.</font>
+    la "InformaciÃ³n adicional" de estar disponible.</font>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 4: </b>Seleccione 
-    el botón de radio apropiado para el consejo médico recibido por parte del 
+    el botÃ³n de radio apropiado para el consejo mÃ©dico recibido por parte del 
     paciente.</font>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 5: </b>Escriba 
-    los diagnósticos textuales.</font>
+    los diagnÃ³sticos textuales.</font>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 6: </b>Escriba 
     las terapias textuales.</font>
   <p> 

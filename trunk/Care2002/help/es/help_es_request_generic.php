@@ -16,11 +16,11 @@
     el nombre del Medico. </font>
   <p> 
 </ul>
-<a name="send"> <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>&iquest;Como 
+<a name="send"> <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>¿Como 
 enviar?</strong> </font> 
 <ul>
-  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b>D� 
-  clic al bot&oacute;n<img <?php echo createLDImgSrc('../','abschic.gif','0') ?>>. 
+  <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso: </b>Dé 
+  clic al botón<img <?php echo createLDImgSrc('../','abschic.gif','0') ?>>. 
   </font><font size="3" face="Verdana, Arial, Helvetica, sans-serif"> </font> 
 </ul>
 

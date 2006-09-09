@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>CARE 2002</title>
 
 </head>
@@ -13,19 +13,19 @@
 <img src="../../gui/img/common/default/butft2_d.gif">
   <p> <b>Configurando un permiso de acceso</b>
 <p>
-Debido a los altos requisitos de seguridad en los sistemas de salud, no cualquiera puede crear un permiso de acceso. El permiso de acceso normalmente se crea por un empleado designado en su organización. 
+Debido a los altos requisitos de seguridad en los sistemas de salud, no cualquiera puede crear un permiso de acceso. El permiso de acceso normalmente se crea por un empleado designado en su organizaciÃ³n. 
 <p>
-<b>¿Qué hacer?</b>
-  <p> Aplique para un permiso de acceso a través de los cauces oficiales segun 
-    las reglas y regulacionesde su organización. Se debe tener al menos la información 
+<b>¿QuÃ© hacer?</b>
+  <p> Aplique para un permiso de acceso a travÃ©s de los cauces oficiales segun 
+    las reglas y regulacionesde su organizaciÃ³n. Se debe tener al menos la informaciÃ³n 
     de contacto siguiente:
 <p>
   <blockquote> 
     <p>Nombre de persona designada:<br>
       Departamento:<br>
-      Número de Teléfono:<br>
-      Número de Fax:<br>
-      N&uacute;mero de extensi&oacute;n: </p>
+      NÃºmero de TelÃ©fono:<br>
+      NÃºmero de Fax:<br>
+      NÃºmero de extensiÃ³n: </p>
     </blockquote>
 </font></blockquote>
 

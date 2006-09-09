@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 
 </head>
@@ -9,14 +9,14 @@
 <form >
   <font face="Verdana, Arial" size=2> <font  size=3 color="#0000cc"> <b> 
   <?php
-print "Soporte Técnico - ";	
+print "Soporte TÃ©cnico - ";	
 switch($src)
 	{
-		case "request": print "Solicitud de servicio de reparación";
+		case "request": print "Solicitud de servicio de reparaciÃ³n";
 							break;
-		case "report": print "Reporte el cumplimiento de un servicio de reparación";
+		case "report": print "Reporte el cumplimiento de un servicio de reparaciÃ³n";
 							break;
-		case "queries": print "Envíe una consulta o pregunta";
+		case "queries": print "EnvÃ­e una consulta o pregunta";
 							break;
 		case "arch": print "Investigue en los archivos";
 							break;
@@ -29,11 +29,11 @@ switch($src)
     <?php if($src=="request") : ?>
     </font> 
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-    <font color="#990000"><b> Cómo escribo una solicitud para servicio de reparación?</b></font></font> 
+    <font color="#990000"><b> CÃ³mo escribo una solicitud para servicio de reparaciÃ³n?</b></font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Escriba 
-    la localización del daño en el campo <nobr>"<span style="background-color:yellow" > 
-    Localización del daño 
+    la localizaciÃ³n del daÃ±o en el campo <nobr>"<span style="background-color:yellow" > 
+    LocalizaciÃ³n del daÃ±o 
     <input type="text" name="d" size=20 maxlength=10>
     </span>"</nobr>.</font> 
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2: 
@@ -41,29 +41,29 @@ switch($src)
       Solicitado por: 
       <input type="text" name="d" size=20 maxlength=10>
       </span>"</nobr>.<br>
-      <b>Paso 3: </b>Escriba su número de personal en el campo <nobr>"<span style="background-color:yellow" > 
+      <b>Paso 3: </b>Escriba su nÃºmero de personal en el campo <nobr>"<span style="background-color:yellow" > 
       No. de Personal: 
       <input type="text" name="d" size=20 maxlength=5>
       </span>"</nobr>.<br>
-      <b>Paso 4: </b>Escriba su número telefónico en el campo <nobr>"<span style="background-color:yellow" > 
-      Número telefónico: 
+      <b>Paso 4: </b>Escriba su nÃºmero telefÃ³nico en el campo <nobr>"<span style="background-color:yellow" > 
+      NÃºmero telefÃ³nico: 
       <input type="text" name="d" size=20 maxlength=5>
-      </span>"</nobr> en caso de que el departamento de soporte técnico tenga 
+      </span>"</nobr> en caso de que el departamento de soporte tÃ©cnico tenga 
       consultas referentes a su solicitud.</font> 
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 5: 
-      </b>Escriba la descripción del daño en el campo <nobr>"<span style="background-color:yellow" > 
-      Por favor describa el tipo de daño: 
+      </b>Escriba la descripciÃ³n del daÃ±o en el campo <nobr>"<span style="background-color:yellow" > 
+      Por favor describa el tipo de daÃ±o: 
       <input type="text" name="d" size=20 maxlength=5>
       </span>"</nobr>.<br>
-      <b>Paso 6: </b>Dé clic en el botón 
+      <b>Paso 6: </b>DÃ© clic en el botÃ³n 
       <input type="button" value="Enviar">
       para enviar su solicitud. <br>
       </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota</b> </font><font face="Verdana, Arial, Helvetica, sans-serif"> 
   <ul>
-    <font size="2"> Si usted decide cerrar el formulario de pedidos, dé clic en 
-    el botón <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. </font> 
+    <font size="2"> Si usted decide cerrar el formulario de pedidos, dÃ© clic en 
+    el botÃ³n <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. </font> 
   </ul>
   <font size="2"> </font><font face="Verdana, Arial" size=2><font face="Verdana, Arial, Helvetica, sans-serif"><font size="2">
   <?php endif ?>
@@ -71,49 +71,49 @@ switch($src)
   <?php if($src=="report") : ?>
   </font></font> 
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-    <font color="#990000"><b> ¿Cómo se reporta que un servico de reparación ha 
+    <font color="#990000"><b> ¿CÃ³mo se reporta que un servico de reparaciÃ³n ha 
     concluido satisfactoriamente?</b></font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Escriba 
-    la localización del daño en el campo <nobr>"<span style="background-color:yellow" > 
-    Localización del daño 
+    la localizaciÃ³n del daÃ±o en el campo <nobr>"<span style="background-color:yellow" > 
+    LocalizaciÃ³n del daÃ±o 
     <input type="text" name="d" size=20 maxlength=10>
     </span>"</nobr>.</font> 
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2: 
-      </b>Escriba el número de identificación de trabajo en el campo <nobr>"<span style="background-color:yellow" > 
+      </b>Escriba el nÃºmero de identificaciÃ³n de trabajo en el campo <nobr>"<span style="background-color:yellow" > 
       No. de ID de trabajo: 
       <input type="text" name="d" size=20 maxlength=10>
       </span>"</nobr>.<br>
       <b>Paso 3: </b>Escriba su nombre el el campo <nobr>"<span style="background-color:yellow" > 
-      Técnico: 
+      TÃ©cnico: 
       <input type="text" name="d" size=20 maxlength=10>
       </span>"</nobr>.<br>
-      <b>Paso 4: </b>Escriba su número de Personal en el campo <nobr>"<span style="background-color:yellow" > 
+      <b>Paso 4: </b>Escriba su nÃºmero de Personal en el campo <nobr>"<span style="background-color:yellow" > 
       No. de Personal: 
       <input type="text" name="d" size=20 maxlength=5>
       </span>"</nobr>.<br>
-      <b>Paso 5: </b>Escriba la descripción del trabajo de reparación que ha llevado 
+      <b>Paso 5: </b>Escriba la descripciÃ³n del trabajo de reparaciÃ³n que ha llevado 
       a cabo en el campo <nobr>"<span style="background-color:yellow" > Por favor 
-      describa el trabajo de reparación que ha llevado a cabo: 
+      describa el trabajo de reparaciÃ³n que ha llevado a cabo: 
       <input type="text" name="d" size=20 maxlength=5>
       </span>"</nobr>.<br>
-      <b>Paso 6: </b>Dé clic en el botón 
+      <b>Paso 6: </b>DÃ© clic en el botÃ³n 
       <input type="button" value="Enviar reporte">
       para enviar su reporte. <br>
       </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota</b> </font><font face="Verdana, Arial, Helvetica, sans-serif"> 
   <ul>
-    <font size="2"> Si usted decide cerrar el formulario de pedidos, dé clic en 
-    el botón <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. </font> 
+    <font size="2"> Si usted decide cerrar el formulario de pedidos, dÃ© clic en 
+    el botÃ³n <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. </font> 
   </ul>
   <font size="2"> 
   <?php endif ?>
   <?php if($src=="queries") : ?>
   </font></font> 
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-    <font color="#990000"><b> ¿Cómo envío una consulta o pregunta al departamento 
-    de soporte técnico?</b></font></font> 
+    <font color="#990000"><b> ¿CÃ³mo envÃ­o una consulta o pregunta al departamento 
+    de soporte tÃ©cnico?</b></font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Escriba 
     su consulta o pregunta en el campo <nobr>"<span style="background-color:yellow" > 
@@ -128,63 +128,63 @@ switch($src)
     Departamento: 
     <input type="text" name="d" size=20 maxlength=5>
     </span>"</nobr>.<br>
-    <b>Paso 4: </b>Dé clic en el botón 
+    <b>Paso 4: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="Enviar consulta">
     para enviar su consulta. <br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> ¿Cómo puedo ver mis consultas anteriores y las respuestas 
-  que el Departamento Técnico haya dado a ellas?</b></font></font> 
+  <font color="#990000"><b> ¿CÃ³mo puedo ver mis consultas anteriores y las respuestas 
+  que el Departamento TÃ©cnico haya dado a ellas?</b></font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Primero 
-    debe escribir su nombre y contraseña. Escriba su nombre en el campo <nobr>"<span style="background-color:yellow" > 
+    debe escribir su nombre y contraseÃ±a. Escriba su nombre en el campo <nobr>"<span style="background-color:yellow" > 
     De: 
     <input type="text" name="d" size=20 maxlength=5>
     </span>"</nobr> que se halla en la esquina superior derecha.<br>
-    <b>Paso 2: </b>Dé clic en el botón 
+    <b>Paso 2: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="Ingresar">
     . <br>
-    <b>Paso 3: </b>Si usted ha enviado consultas previamente, verá una lista de 
+    <b>Paso 3: </b>Si usted ha enviado consultas previamente, verÃ¡ una lista de 
     ellos en formato corto. <br>
-    <b>Paso 4: </b>Si su consulta recibió respuesta por parte del Departamento 
-    Técnico, el símbolo <img src="../gui/img/common/default/warn.gif" border=0 width=16 height=16 align="absmiddle"> 
-    aparecerá al final. <br>
-    <b>Paso 5: </b>Para leer su consulta y la respuesta del Departamento Técnico 
-    a ella, dé clic en ella. <br>
+    <b>Paso 4: </b>Si su consulta recibiÃ³ respuesta por parte del Departamento 
+    TÃ©cnico, el sÃ­mbolo <img src="../gui/img/common/default/warn.gif" border=0 width=16 height=16 align="absmiddle"> 
+    aparecerÃ¡ al final. <br>
+    <b>Paso 5: </b>Para leer su consulta y la respuesta del Departamento TÃ©cnico 
+    a ella, dÃ© clic en ella. <br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota</b> </font><font face="Verdana, Arial, Helvetica, sans-serif"> 
   <ul>
-    <font size="2"> Si usted decide cerrar el formulario de consultas, dé clic 
-    en el botón <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. </font> 
+    <font size="2"> Si usted decide cerrar el formulario de consultas, dÃ© clic 
+    en el botÃ³n <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. </font> 
   </ul>
   <font size="2"> 
   <?php endif ?>
   <?php if($src=="arch") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-  ¿Cómo se leen los reportes técnicos?</b></font></font></font> 
+  ¿CÃ³mo se leen los reportes tÃ©cnicos?</b></font></font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota: </b>Los 
-    reportes técnicos que no han sido leídos o impresos todavía se muestran de 
+    reportes tÃ©cnicos que no han sido leÃ­dos o impresos todavÃ­a se muestran de 
     manera inmediata en una lista.</font> 
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: 
-      </b>Dé clic en el botón <img src="../gui/img/common/default/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle"> 
+      </b>DÃ© clic en el botÃ³n <img src="../gui/img/common/default/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle"> 
       del reporte que usted desea abrir. <br>
       </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> ¿Cómo busco un reporte técnico en particular?</b></font></font> 
+  <font color="#990000"><b> ¿CÃ³mo busco un reporte tÃ©cnico en particular?</b></font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Escriba 
     ya sea palabras completas o las primeras letras en los campos correspondientes 
-    como se describe a continuación.<br>
+    como se describe a continuaciÃ³n.<br>
     </font> 
     <ul type=disc>
       <li><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Si usted 
-        desea hallar reportes escritos por un técnico en particular, escriba el 
-        nombre del técnico en el campo "<span style="background-color:yellow" > 
-        Técnico: 
+        desea hallar reportes escritos por un tÃ©cnico en particular, escriba el 
+        nombre del tÃ©cnico en el campo "<span style="background-color:yellow" > 
+        TÃ©cnico: 
         <input type="text" name="t" size=11 maxlength=4 value="Nombre">
         </span>".<br>
         </font> 
@@ -205,53 +205,53 @@ switch($src)
         desea hallar reportes escritos dentro de un periodo dado, escriba la fecha 
         de inicio en el campo "<span style="background-color:yellow" > Fecha desde: 
         <input type="text" name="t" size=11 maxlength=4 value="Nombre">
-        </span>" y escriba la fecha de finalización en el campo "<span style="background-color:yellow" > 
+        </span>" y escriba la fecha de finalizaciÃ³n en el campo "<span style="background-color:yellow" > 
         hasta: 
         <input type="text" name="t" size=11 maxlength=4 value="Nombre">
         </span>".<br>
         </font> 
     </ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2: </b>Dé 
-    clic en el botón 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2: </b>DÃ© 
+    clic en el botÃ³n 
     <input type="button" value="Buscar">
-    para empezar la búsqueda. <br>
-    <b>Paso 3: </b>Los resultados se mostrarán en una lista. Dé clic en el ícono 
+    para empezar la bÃºsqueda. <br>
+    <b>Paso 3: </b>Los resultados se mostrarÃ¡n en una lista. DÃ© clic en el Ã­cono 
     <img src="../gui/img/common/default/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle"> 
     del reporte que desea abrir. <br>
-    <b>Nota: </b>Los reportes técnicos que se encuentran marcados con <img src="../gui/img/common/default/check-r.gif" border=0  align="absmiddle"> 
-    ya han sido leídos o impresos.</font> 
+    <b>Nota: </b>Los reportes tÃ©cnicos que se encuentran marcados con <img src="../gui/img/common/default/check-r.gif" border=0  align="absmiddle"> 
+    ya han sido leÃ­dos o impresos.</font> 
     <p> 
   </ul>
   </font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
   <?php endif ?>
   <?php if($src=="showarch") : ?>
   <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> 
-  Marcando el reporte como leído.</b></font></font> 
+  Marcando el reporte como leÃ­do.</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic en el botón 
-    <input type="button" value="Marcar como 'leído'">
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic en el botÃ³n 
+    <input type="button" value="Marcar como 'leÃ­do'">
     .</font> 
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota: </b>Cuando 
-      el reporte ha sido marcado como leído, no aparecerá en la lista inmediatamente 
-      al inicio de cada búsqueda en el archivo. Solamente podrán hallarse nuevamente 
-      mediante los métodos de búsqueda en archivo usuales.</font>
+      el reporte ha sido marcado como leÃ­do, no aparecerÃ¡ en la lista inmediatamente 
+      al inicio de cada bÃºsqueda en el archivo. Solamente podrÃ¡n hallarse nuevamente 
+      mediante los mÃ©todos de bÃºsqueda en archivo usuales.</font>
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> 
   <font color="#990000"><b> Imprimiendo el reporte.</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic en el botón 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic en el botÃ³n 
     <input type="button" value="Imprimir">
     .</font> 
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b> ¿Cómo volver al inicio de la búsqueda en el archivo?</b></font></font> 
+  <font color="#990000"><b> ¿CÃ³mo volver al inicio de la bÃºsqueda en el archivo?</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic en el botón 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic en el botÃ³n 
     <input type="button" value="Volver">
     .</font> 
     <p> 
@@ -260,7 +260,7 @@ switch($src)
   <?php endif ?>
   <?php if($src=="dutydoc") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
-  ¿Cómo se documentan las labores hechas durante las horas de trabajo?</b></font></font> 
+  ¿CÃ³mo se documentan las labores hechas durante las horas de trabajo?</b></font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Escriba 
     la fecha en el campo " Fecha 
@@ -269,10 +269,10 @@ switch($src)
     <p> 
     <ul>
       <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Tip: </b>Escriba 
-      ya sea "h" o "H" (que significa HOY) para que ingrese de manera automática 
+      ya sea "h" o "H" (que significa HOY) para que ingrese de manera automÃ¡tica 
       la fecha de hoy.<br>
       <b>Tip: </b>Escriba ya sea "a" o "A" (que significa AYER) para que ingrese 
-      de manera automática la fecha de ayer.</font> 
+      de manera automÃ¡tica la fecha de ayer.</font> 
       <p> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2: </b>Escriba 
@@ -280,28 +280,28 @@ switch($src)
     Apellido, nombre 
     <input type="text" name="d" size=20 maxlength=10>
     </span>"</nobr>.<br>
-    <b>Paso 3: </b>Escriba la hora en la que comenzó la tarea asignada en el campo 
+    <b>Paso 3: </b>Escriba la hora en la que comenzÃ³ la tarea asignada en el campo 
     "<span style="background-color:yellow" > de 
     <input type="text" name="d" size=5 maxlength=5>
     </span>".<br>
-    <b>Paso 4: </b>Escriba la hora en la que terminó la tarea asignada en el campo 
+    <b>Paso 4: </b>Escriba la hora en la que terminÃ³ la tarea asignada en el campo 
     "<span style="background-color:yellow" > para 
     <input type="text" name="d" size=5 maxlength=5>
     </span>".</font> 
     <p> 
     <ul>
       <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Tip: </b>Escriba 
-      ya sea "n" o "N" (que significa AHORA) para que ingrese de manera automática 
+      ya sea "n" o "N" (que significa AHORA) para que ingrese de manera automÃ¡tica 
       la hora actual.</font> 
       <p> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 5: </b>Escriba 
-    el número OR number en el campo "<span style="background-color:yellow" > Sala 
+    el nÃºmero OR number en el campo "<span style="background-color:yellow" > Sala 
     de operaciones 
     <input type="text" name="d" size=5 maxlength=5>
     </span>".<br>
-    <b>Paso 6: </b>Escriba el diagnóstico, tratamiento o cirugía en el campo <nobr>"<span style="background-color:yellow" > 
-    Diagnóstico/Terapia: 
+    <b>Paso 6: </b>Escriba el diagnÃ³stico, tratamiento o cirugÃ­a en el campo <nobr>"<span style="background-color:yellow" > 
+    DiagnÃ³stico/Terapia: 
     <input type="text" name="d" size=5 maxlength=5>
     </span>"</nobr>.<br>
     <b>Paso 7: </b>Escriba el nombre de la enfermera en standby en el campo <nobr>"<span style="background-color:yellow" > 
@@ -312,27 +312,27 @@ switch($src)
     De guardia: 
     <input type="text" name="d" size=5 maxlength=5>
     </span>"</nobr>de ser necesario.<br>
-    <b>Paso 1: </b>Dé clic en el botón 
+    <b>Paso 1: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="Guardar">
     para guardar el documento. <br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b>¿Cómo imprimo el listado del documento?</b></font></font> 
+  <font color="#990000"><b>¿CÃ³mo imprimo el listado del documento?</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic en el botón 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic en el botÃ³n 
     <input type="button" value="Imprimir">
-    y aparecerá la ventana de impresión.<br>
-    <b>Paso 2: </b>Siga las instrucciones en la ventana de impresión.<br>
+    y aparecerÃ¡ la ventana de impresiÃ³n.<br>
+    <b>Paso 2: </b>Siga las instrucciones en la ventana de impresiÃ³n.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b>He guardado el documento y deseo cerrarlo. ¿Qué debo 
+  <font color="#990000"><b>He guardado el documento y deseo cerrarlo. ¿QuÃ© debo 
   hacer? </b></font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Si 
-    usted ha terminado, dé clic en el botón <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. 
+    usted ha terminado, dÃ© clic en el botÃ³n <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. 
     </font><br>
 </ul>
 <?php endif ?>

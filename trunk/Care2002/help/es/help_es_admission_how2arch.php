@@ -1,181 +1,181 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Cómo investigar en el archivo</b></font>
+<b>CÃ³mo investigar en el archivo</b></font>
 <form action="#" >
 <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
   <?php if($src=="select") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Deseo 
   actualizar los datos mostrados</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso : </b>Dé 
-    clic en el botón 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso : </b>DÃ© 
+    clic en el botÃ³n 
     <input type="button" value="Actualizar">
     para empezar a editar los datos.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b>Deseo hacer una búsqueda nueva en los archivos</b></font></font> 
+  <font color="#990000"><b>Deseo hacer una bÃºsqueda nueva en los archivos</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso : </b>Dé 
-    clic en el botón 
-    <input type="button" value="Nueva búsqueda en el archivo">
-    para empezar una nueva búsqueda.<br>
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso : </b>DÃ© 
+    clic en el botÃ³n 
+    <input type="button" value="Nueva bÃºsqueda en el archivo">
+    para empezar una nueva bÃºsqueda.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
   <?php elseif($src=="search") : ?>
   <b>Nota</b> </font><font face="Verdana, Arial, Helvetica, sans-serif">
   <ul>
-    <font size="2"> Si la búsqueda halla un solo resultado, la información completa 
-    se mostrará inmediatamente.<br>
-    Sin embargo, si la búsqueda encuentra varios resultados posibles, se mostrará 
+    <font size="2"> Si la bÃºsqueda halla un solo resultado, la informaciÃ³n completa 
+    se mostrarÃ¡ inmediatamente.<br>
+    Sin embargo, si la bÃºsqueda encuentra varios resultados posibles, se mostrarÃ¡ 
     una lista.<br>
-    Para ver la información del paciente que busca, dé clic ya sea en el botón 
+    Para ver la informaciÃ³n del paciente que busca, dÃ© clic ya sea en el botÃ³n 
     <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> correspondiente, 
-    o el nombre, el apellido o la fecha de admisión. </font>
+    o el nombre, el apellido o la fecha de admisiÃ³n. </font>
   </ul>
   <font size="2"><b>Nota</b> 
   <ul>
-    Si usted desea iniciar una nueva búsqueda, dé clic en el botón 
-    <input type="button" value="Nueva búsqueda en el archivo">
+    Si usted desea iniciar una nueva bÃºsqueda, dÃ© clic en el botÃ³n 
+    <input type="button" value="Nueva bÃºsqueda en el archivo">
     . 
   </ul>
   <?php else : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Deseo 
-  ver una lista con todos los pacientes admitidos el día de hoy</b></font></font></font> 
+  ver una lista con todos los pacientes admitidos el dÃ­a de hoy</b></font></font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Ingrese 
-    la fecha de hoy en el campo "Fecha de admisión: desde:". <br>
+    la fecha de hoy en el campo "Fecha de admisiÃ³n: desde:". <br>
     </font> 
     <ul>
       <font color="#000099" size=2 face="Verdana, Arial, Helvetica, sans-serif"> 
-      <b>Tip:</b> Escriba "H" o "h" para que la máquina escriba automáticamente 
-      el día de hoy.<br>
+      <b>Tip:</b> Escriba "H" o "h" para que la mÃ¡quina escriba automÃ¡ticamente 
+      el dÃ­a de hoy.<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2: </b>Deje 
-    el campo "hasta:" vacío.<br>
-    <b>Paso 3: </b>Dé clic en el botón 
+    el campo "hasta:" vacÃ­o.<br>
+    <b>Paso 3: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="BUSCAR">
-    para empezar la búsqueda.<br>
+    para empezar la bÃºsqueda.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b>Deseo ver la lista de todos los pacientes ingresados 
-  en un periodo de dos días</b></font></font> 
+  en un periodo de dos dÃ­as</b></font></font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Escriba 
-    el primer día en el campo "Fecha de admisión: desde:". <br>
+    el primer dÃ­a en el campo "Fecha de admisiÃ³n: desde:". <br>
     </font> 
     <ul>
       <font color="#000099" size=2 face="Verdana, Arial, Helvetica, sans-serif"> 
-      <b>Tip:</b> Escriba "H" o "h" para que la máquina use el día de hoy.<br>
-      <b>Tip:</b> Escriba "A" o "a" para que la máquina use el día de ayer.<br>
+      <b>Tip:</b> Escriba "H" o "h" para que la mÃ¡quina use el dÃ­a de hoy.<br>
+      <b>Tip:</b> Escriba "A" o "a" para que la mÃ¡quina use el dÃ­a de ayer.<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2: </b>Escriba 
-    el último día en el campo "hasta:".<br>
-    <b>Paso 3: </b>Dé clic en el botón 
+    el Ãºltimo dÃ­a en el campo "hasta:".<br>
+    <b>Paso 3: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="Buscar">
-    para empezar la búsqueda.<br>
+    para empezar la bÃºsqueda.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b>Deseo ver una lista de todos los pacientes MASCULINOS 
   ingresados. </b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic en la opción "Género 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic en la opciÃ³n "GÃ©nero 
     <input type="radio" name="r" value="1">
     masculino". <br>
-    <b>Paso 2: </b>Deje todos los demás campos vacíos o sin llenar.<br>
-    <b>Paso 3: </b>Dé clic en el botón 
+    <b>Paso 2: </b>Deje todos los demÃ¡s campos vacÃ­os o sin llenar.<br>
+    <b>Paso 3: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="BUSCAR">
-    para empezar la búsqueda.<br>
+    para empezar la bÃºsqueda.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b>Deseo ver la lista de todas las pacientes FEMENINAS 
   ingresadas </b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic en la opción "Género 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic en la opciÃ³n "GÃ©nero 
     <input type="radio" name="r" value="1">
     femenino". <br>
-    <b>Paso 2: </b>Deje todos los demás campos vacíos o sin llenar.<br>
-    <b>Paso 3: </b>Dé clic en el botón 
+    <b>Paso 2: </b>Deje todos los demÃ¡s campos vacÃ­os o sin llenar.<br>
+    <b>Paso 3: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="BUSCAR">
-    para empezar la búsqueda.<br>
+    para empezar la bÃºsqueda.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b>Deseo ver la lista de todos los pacientes ambulatorios 
   ingresados</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic en la opción " 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic en la opciÃ³n " 
     <input type="radio" name="r" value="1">
     Ambulatorio". <br>
-    <b>Paso 2: </b>Deje todos los demás campos vacíos o sin llenar.<br>
-    <b>Paso 3: </b>Dé clic en el botón 
+    <b>Paso 2: </b>Deje todos los demÃ¡s campos vacÃ­os o sin llenar.<br>
+    <b>Paso 3: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="BUSCAR">
-    para empezar la búsqueda.<br>
+    para empezar la bÃºsqueda.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b>Deseo ver la lista de todos los pacientes con admisión 
+  <font color="#990000"><b>Deseo ver la lista de todos los pacientes con admisiÃ³n 
   estacionaria</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic en la opción " 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic en la opciÃ³n " 
     <input type="radio" name="r" value="1">
     estacionaria". <br>
-    <b>Paso 2: </b>Deje todos los demás campos vacíos o sin llenar.<br>
-    <b>Paso 3: </b>Dé clic en el botón 
+    <b>Paso 2: </b>Deje todos los demÃ¡s campos vacÃ­os o sin llenar.<br>
+    <b>Paso 3: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="BUSCAR">
-    para empezar la búsqueda.<br>
+    para empezar la bÃºsqueda.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
-  <font color="#990000"><b>Deseo ver la lista de todos los pacientes que pagarán 
+  <font color="#990000"><b>Deseo ver la lista de todos los pacientes que pagarÃ¡n 
   su cuenta sin seguros</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic en la opción " 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic en la opciÃ³n " 
     <input type="radio" name="r" value="1">
     Paga el paciente". <br>
-    <b>Paso 2: </b>Deje todos los demás campos vacíos o sin llenar.<br>
-    <b>Paso 3: </b>Dé clic en el botón 
+    <b>Paso 2: </b>Deje todos los demÃ¡s campos vacÃ­os o sin llenar.<br>
+    <b>Paso 3: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="BUSCAR">
-    para empezar la búsqueda.<br>
+    para empezar la bÃºsqueda.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b>Deseo ver la lista de todos los pacientes con seguro 
   privado</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic en la opción " 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic en la opciÃ³n " 
     <input type="radio" name="r" value="1">
     seguro Privado". <br>
-    <b>Paso 2: </b>Deje todos los demás campos vacíos o sin llenar.<br>
-    <b>Paso 3: </b>Dé clic en el botón 
+    <b>Paso 2: </b>Deje todos los demÃ¡s campos vacÃ­os o sin llenar.<br>
+    <b>Paso 3: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="BUSCAR">
-    para empezar la búsqueda.<br>
+    para empezar la bÃºsqueda.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b>Deseo ver la lista de todos los pacientes con seguro 
   general</b></font></font> 
   <ul>
-    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Dé 
-    clic en la opción " 
+    <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>DÃ© 
+    clic en la opciÃ³n " 
     <input type="radio" name="r" value="1">
     Aseguradora". <br>
-    <b>Paso 2: </b>Deje todos los demás campos vacíos o sin llenar.<br>
-    <b>Paso 3: </b>Dé clic en el botón 
+    <b>Paso 2: </b>Deje todos los demÃ¡s campos vacÃ­os o sin llenar.<br>
+    <b>Paso 3: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="BUSCAR">
-    para empezar la búsqueda.<br>
+    para empezar la bÃºsqueda.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
@@ -184,10 +184,10 @@
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: </b>Escriba 
     la abreviatura de la aseguradora en el campo "Aseguradora". <br>
-    <b>Paso 2: </b>Deje todos los demás campos vacíos o sin llenar.<br>
-    <b>Paso 3: </b>Dé clic en el botón 
+    <b>Paso 2: </b>Deje todos los demÃ¡s campos vacÃ­os o sin llenar.<br>
+    <b>Paso 3: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="BUSCAR">
-    para empezar la búsqueda.<br>
+    para empezar la bÃºsqueda.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
@@ -200,20 +200,20 @@
     </font> 
     <ul>
       <font color="#000099" size=2 face="Verdana, Arial, Helvetica, sans-serif" > 
-      <b>Ejemplo:</b> Para hallar un diagnóstico, escríbalo en el campo "Diagnóstico".<br>
-      <b>Ejemplo:</b> Para hallar una recomendación, escríbalo en el campo "Recomendado 
+      <b>Ejemplo:</b> Para hallar un diagnÃ³stico, escrÃ­balo en el campo "DiagnÃ³stico".<br>
+      <b>Ejemplo:</b> Para hallar una recomendaciÃ³n, escrÃ­balo en el campo "Recomendado 
       por".<br>
-      <b>Ejemplo:</b> Para una palabra clave terapéutica, escríbala en el campo 
+      <b>Ejemplo:</b> Para una palabra clave terapÃ©utica, escrÃ­bala en el campo 
       "Terapia recomendada".<br>
-      <b>Ejemplo:</b> Para hallar un apunte especial escríbalo en el campo "Apuntes 
+      <b>Ejemplo:</b> Para hallar un apunte especial escrÃ­balo en el campo "Apuntes 
       especiales".<br>
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2: </b>Deje 
-    todos los demás campos vacíos o sin llenar.<br>
-    <b>Paso 3: </b>Dé clic en el botón 
+    todos los demÃ¡s campos vacÃ­os o sin llenar.<br>
+    <b>Paso 3: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="BUSCAR">
-    para empezar la búsqueda.<br>
+    para empezar la bÃºsqueda.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
@@ -227,49 +227,49 @@
       <font color="#000099" size=2 face="Verdana, Arial, Helvetica, sans-serif" > 
       <b>Los siguientes campos pueden ser buscados con palabras completas o parciales:</b> 
       <br>
-      Número de identificación del paciente <br>
+      NÃºmero de identificaciÃ³n del paciente <br>
       Apellido <br>
       Nombre <br>
       Fecha de nacimiento <br>
-      Dirección </font> 
+      DirecciÃ³n </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2: </b>Deje 
-    todos los demás campos vacíos o sin llenar.<br>
-    <b>Paso 3: </b>Dé clic en el botón 
+    todos los demÃ¡s campos vacÃ­os o sin llenar.<br>
+    <b>Paso 3: </b>DÃ© clic en el botÃ³n 
     <input type="button" value="BUSCAR">
-    para empezar la búsqueda.<br>
+    para empezar la bÃºsqueda.<br>
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota</b> </font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Puede combinar 
-    varias condiciones de búsqueda. Por ejemplo: Si usted desea una lista de todos 
+    varias condiciones de bÃºsqueda. Por ejemplo: Si usted desea una lista de todos 
     los pacientes MASCULINOS que fueron ingresados entre 10.12.1999 y 24.01.2001 
     inclusive:</font> 
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: 
-      </b>Escriba "10.12.1999" en el campo "Fecha de admisión: desde:". <br>
+      </b>Escriba "10.12.1999" en el campo "Fecha de admisiÃ³n: desde:". <br>
       <b>Paso 2: </b>Escriba "24.01.2001 en el campo "hasta:".<br>
-      <b>Paso 3: </b>Dé clic en la opción "Género 
+      <b>Paso 3: </b>DÃ© clic en la opciÃ³n "GÃ©nero 
       <input type="radio" name="r" value="1">
       masculino". <br>
-      <b>Paso 4: </b>Dé clic en el botón 
+      <b>Paso 4: </b>DÃ© clic en el botÃ³n 
       <input type="button" value="BUSCAR">
-      para empezar la búsqueda.<br>
+      para empezar la bÃºsqueda.<br>
       </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota</b> </font><font face="Verdana, Arial, Helvetica, sans-serif">
   <ul>
-    <font size="2"> Si la búsqueda halla un solo resultado, la información completa 
-    se mostrará inmediatamente.<br>
-    Sin embargo, si la búsqueda halla varios resultados, se mostrará una lista.<br>
-    Para ver la información del paciente, dé clic ya sea en el botón <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> 
-    correspondiente, o el nombre, o el apellido, o la fecha de admisión. </font>
+    <font size="2"> Si la bÃºsqueda halla un solo resultado, la informaciÃ³n completa 
+    se mostrarÃ¡ inmediatamente.<br>
+    Sin embargo, si la bÃºsqueda halla varios resultados, se mostrarÃ¡ una lista.<br>
+    Para ver la informaciÃ³n del paciente, dÃ© clic ya sea en el botÃ³n <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> 
+    correspondiente, o el nombre, o el apellido, o la fecha de admisiÃ³n. </font>
   </ul>
   <font size="2">
   <?php endif ?>
   <b>Nota</b> </font>
   <ul>
-    <font size="2"> Si desea cerrar esta ventana, dé clic en el botón 
+    <font size="2"> Si desea cerrar esta ventana, dÃ© clic en el botÃ³n 
     <input type="button" value="Cancelar">
     . </font> 
 </ul>
