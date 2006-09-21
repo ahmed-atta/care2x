@@ -499,7 +499,7 @@ if(!empty($rows)){
 
 <p>
 <a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php';
+<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo $root_path.'main/startframe.php';
 	else echo 'patient.php';
 	echo URL_APPEND;
 ?>
