@@ -341,8 +341,8 @@ if($cnt){
 		<td><?php echo $LDDocsPrescription ?>:<br>&nbsp;<textarea rows="4" cols="25" name="berichtput"><?php if(!$saved) echo $berichtput; ?></textarea><br>
 		<input type="checkbox" name="warn" <?php if((!$saved)&&($warn)) echo "checked"; ?> value="warn"> <img <?php echo createComIcon($root_path,'warn.gif','0','top',TRUE) ?>>
 		 <font size=1 face=arial><?php echo $LDInsertSymbol ?><br>
-		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'hilite-s.gif','0','',TRUE) ?>></a>
-		<a href="javascript:endhilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'hilite-e.gif','0','',TRUE) ?>></a>
+		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput)"><img <?php echo createLDImgSrc($root_path,'hilite-s.gif','0','',TRUE) ?>></a>
+		<a href="javascript:endhilite(document.berichtform.berichtput)"><img <?php echo createLDImgSrc($root_path,'hilite-e.gif','0','',TRUE) ?>></a>
 		</td>
 		<td valign="top"><?php echo $LDSignature ?>:<br><input type=text size="3" name="author" onFocus=this.select() value="<?php if(!$saved) echo $author; ?>">
 		</td>
@@ -364,8 +364,8 @@ if($cnt){
 		<td><?php echo $LDQueries ?>:<br>&nbsp;<textarea rows="4" cols="25"  name="berichtput2"><?php if(!$saved) echo $berichtput2; ?></textarea><br>
 		<input type="checkbox" name="warn2" <?php if((!$saved)&&($warn2)) echo "checked"; ?> value="warn"> <img <?php echo createComIcon($root_path,'warn.gif','0','top',TRUE) ?>>
 		<font size=1 face=arial><?php echo $LDInsertSymbol ?><br>
-		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'hilite-s.gif','0','',TRUE) ?>></a>
-		<a href="javascript:endhilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'hilite-e.gif','0','',TRUE) ?>></a>
+		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput2)"><img <?php echo createLDImgSrc($root_path,'hilite-s.gif','0','',TRUE) ?>></a>
+		<a href="javascript:endhilite(document.berichtform.berichtput2)"><img <?php echo createLDImgSrc($root_path,'hilite-e.gif','0','',TRUE) ?>></a>
 		</td>
 		<td valign="top"><?php echo $LDSignature ?>:<br><input type=text size="3" name="author2" onFocus=this.select() value="<?php if(!$saved) echo $author2; ?>">
 		</td>

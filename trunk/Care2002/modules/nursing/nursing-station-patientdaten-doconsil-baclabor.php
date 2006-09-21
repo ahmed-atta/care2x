@@ -815,7 +815,7 @@ for($n=0;$n<8;$n++)
 	<b><?php echo $LDMaterial ?></b><br>
 	<b><?php echo $LDDiagnosis ?></b></font>
 	<font size=1 color="#990000" face="verdana,arial">
-	<?php echo $LDImmuneSupp ?> 	
+	<br><?php echo $LDImmuneSupp ?> 	
     </td>
 	
 	<td colspan=3><font size=3 color="#cc0000" face="verdana,arial">

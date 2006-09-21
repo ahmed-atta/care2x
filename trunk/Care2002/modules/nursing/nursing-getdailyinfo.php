@@ -194,8 +194,8 @@ if($sformat) {
 <textarea cols="16" rows="10" name="notes" wrap="physical"><?php echo $notes ?></textarea>
 
 <br>
-		 &nbsp;<a href="javascript:sethilite(document.infoform.notes)"><img <?php echo createComIcon($root_path,'hilite-s.gif','0') ?>></a>
-		<a href="javascript:endhilite(document.infoform.notes)"><img <?php echo createComIcon($root_path,'hilite-e.gif','0') ?>></a>
+		 &nbsp;<a href="javascript:sethilite(document.infoform.notes)"><img <?php echo createLDImgSrc($root_path,'hilite-s.gif','0') ?>></a>
+		<a href="javascript:endhilite(document.infoform.notes)"><img <?php echo createLDImgSrc($root_path,'hilite-e.gif','0') ?>></a>
 <?php } ?>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">

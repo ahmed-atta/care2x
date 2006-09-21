@@ -10,7 +10,8 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('date_time.php');
+#$lang_tables=array('date_time.php');
+$lang_tables=array('actions.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -185,8 +186,8 @@ if($count){
 <input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="mode" value="save">
 <br>
-		 &nbsp;<a href="javascript:sethilite(document.infoform.notes)"><img <?php echo createComIcon($root_path,'hilite-s.gif','0') ?>></a>
-		<a href="javascript:endhilite(document.infoform.notes)"><img <?php echo createComIcon($root_path,'hilite-e.gif','0') ?>></a>
+		 &nbsp;<a href="javascript:sethilite(document.infoform.notes)"><img <?php echo createLDImgSrc($root_path,'color_marker_yellow.gif','0','',TRUE) ?>><?php echo $LDStart ?></a>
+		<a href="javascript:sethilite(document.infoform.notes)"><img <?php echo createLDImgSrc($root_path,'color_marker_yellow.gif','0','',TRUE) ?>><?php echo $LDEnd ?></a>
 
 <p>
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>>
