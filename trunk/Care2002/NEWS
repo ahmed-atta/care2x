@@ -3,12 +3,53 @@ Care2X - News
 
 
 
+2nd Generation beta 2.2.2 version
+------------------------------------
+
+A. Fixes and improvements
+
+  * Fixed broken link to Care2x Wiki in the help index.
+  * Fix in laboratory module (UNIX-related): rename confirmlabtests.php to the 
+correct case-sensitive file name. 
+  * Delete create_admin.php. This file is obsolete, because of the new 
+installer.
+  * Small fix in the 'RenameFile' action of the installer: the order of the 
+files to be renamed is changed.
+  * Fix in smarty_care.class.php that causes blank page result in some setups. 
+  * Delete phpinfo.php - security issue. 
+  * Fixed the problem of coming to patient.php page in English (not the 
+selected language) after closing the aufnahme_list.php page. 
+  * Fixed broken link for the Cancel button in the aufnahme_list.php page. 
+  * Fixed broken links for city and insurance company selection in the 
+personell register page. 
+  * Fixes language problems in nursing module. It involves usage of the 
+Start & End image links. 
+
+B. Translations
+
+  * Major improvements in the Turkish translation: language and help files. 
+  * Spanish translation is converted to UTF-8 encoding. This includes language
+files, help files, ICD10 and OPS301 code tables. 
+  * Updates Turkish, Italian and Spanish translation with some new strings in 
+the radiology and drg modules. 
+  * Add missing Argentinian (es-ar) language files. 
+      
+Credits
+
+  * Dr. Bülent Potur (TR)
+  * Claudio Giulio Torbinio (IT)
+  * Daniel Hinostroza C. Dr. med. (EC)
+  * Kaloyan Raev (BG) 
+
+    Kaloyan Raev (2006-09-25)
+
+
 2nd Generation beta 2.2.1 version
 ------------------------------------
 
 A. Improvements
 
-  * Update Nogoya's dicom viewer from version 0.5.4 to version 1.0.0.
+  * Update Nagoya's dicom viewer from version 0.5.4 to version 1.0.0.
   * Radiology case studies list now shows the dicom images included in the 
 study. 
   * Download button available for the dicom images in case the user chooses to 
