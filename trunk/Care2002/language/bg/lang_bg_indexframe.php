@@ -1,47 +1,47 @@
 <?php
-$LDHome='Íà÷àëî';
-$LDPatient='Ïàöèåíòè';
-$LDAdmission='Ïðèåì';
-$LDAmbulatory='Àìáóëàòîðèÿ';
-$LDMedocs='Äîêóìåíòè';
-$LDDoctors='Ëåêàðè';
-$LDNursing='Ñåñòðè';
-$LDOR='Îïåðàöèîííà';
-$LDLabs='Ëàáîðàòîðèè';
-$LDRadiology='Îáðàçíà äèàãíîñòèêà';
-$LDPharmacy='Àïòåêà';
-$LDMedDepot='Ìåäèöèíñêè ñêëàä';
-$LDDirectory='Óêàçàòåë';
-$LDTechSupport='Òåõí. ïîääðúæêà';
-$LDEDP='Àäìèíèñòðàòîð';
-$LDIntraEmail='Âúòðåøíà å-ïîùà';
-$LDInterEmail='Âúíøíà å-ïîùà';
-$LDSpecials='Ñïåö. èíñòðóìåíòè';
-$LDLogin='Âõîä';
-$LDLogout='Èçõîä';
-$LDAppointments='Âèçèòàöèè';
+$LDHome='ÐÐ°Ñ‡Ð°Ð»Ð¾';
+$LDPatient='ÐŸÐ°Ñ†Ð¸ÐµÐ½Ñ‚Ð¸';
+$LDAdmission='ÐŸÑ€Ð¸ÐµÐ¼';
+$LDAmbulatory='ÐÐ¼Ð±ÑƒÐ»Ð°Ñ‚Ð¾Ñ€Ð¸Ñ';
+$LDMedocs='Ð”Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð¸';
+$LDDoctors='Ð›ÐµÐºÐ°Ñ€Ð¸';
+$LDNursing='Ð¡ÐµÑÑ‚Ñ€Ð¸';
+$LDOR='ÐžÐ¿ÐµÑ€Ð°Ñ†Ð¸Ð¾Ð½Ð½Ð°';
+$LDLabs='Ð›Ð°Ð±Ð¾Ñ€Ð°Ñ‚Ð¾Ñ€Ð¸Ð¸';
+$LDRadiology='ÐžÐ±Ñ€Ð°Ð·Ð½Ð° Ð´Ð¸Ð°Ð³Ð½Ð¾ÑÑ‚Ð¸ÐºÐ°';
+$LDPharmacy='ÐÐ¿Ñ‚ÐµÐºÐ°';
+$LDMedDepot='ÐœÐµÐ´Ð¸Ñ†Ð¸Ð½ÑÐºÐ¸ ÑÐºÐ»Ð°Ð´';
+$LDDirectory='Ð£ÐºÐ°Ð·Ð°Ñ‚ÐµÐ»';
+$LDTechSupport='Ð¢ÐµÑ…Ð½. Ð¿Ð¾Ð´Ð´Ñ€ÑŠÐ¶ÐºÐ°';
+$LDEDP='ÐÐ´Ð¼Ð¸Ð½Ð¸ÑÑ‚Ñ€Ð°Ñ‚Ð¾Ñ€';
+$LDIntraEmail='Ð’ÑŠÑ‚Ñ€ÐµÑˆÐ½Ð° Ðµ-Ð¿Ð¾Ñ‰Ð°';
+$LDInterEmail='Ð’ÑŠÐ½ÑˆÐ½Ð° Ðµ-Ð¿Ð¾Ñ‰Ð°';
+$LDSpecials='Ð¡Ð¿ÐµÑ†. Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ð¸';
+$LDLogin='Ð’Ñ…Ð¾Ð´';
+$LDLogout='Ð˜Ð·Ñ…Ð¾Ð´';
+$LDAppointments='Ð’Ð¸Ð·Ð¸Ñ‚Ð°Ñ†Ð¸Ð¸';
 
 $VersionChgTarget='_top';
-$LDLanguage='Åçèê';
-$LDPlsWaitInit='Ìîëÿ, èç÷àêàéòå. Èçâúðøâà ñå èíèöèàëèðàíå ...';
+$LDLanguage='Ð•Ð·Ð¸Ðº';
+$LDPlsWaitInit='ÐœÐ¾Ð»Ñ, Ð¸Ð·Ñ‡Ð°ÐºÐ°Ð¹Ñ‚Ðµ. Ð˜Ð·Ð²ÑŠÑ€ÑˆÐ²Ð° ÑÐµ Ð¸Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ñ€Ð°Ð½Ðµ ...';
 
-$LDChange='Ñìÿíà';
+$LDChange='Ð¡Ð¼ÑÐ½Ð°';
 /* 2003-04-27 EL */
-$LDBrazilian='Áðàçèëñêè';
-$LDCzech='×åøêè';
-$LDEnglish='Àíãëèéñêè';
-$LDFrench='Ôðåíñêè';
-$LDGerman='Íåìñêè';
-$LDIndonesian='Èíäîíåçèéñêè';
-$LDItalian='Èòàëèàíñêè';
-$LDNorwegian='Íîðâåæêè';
-$LDPolish='Ïîëñêè';
-$LDPortuguese='Ïîðòóãàëñêè';
-$LDSpanish='Èñïàíñêè';
+$LDBrazilian='Ð‘Ñ€Ð°Ð·Ð¸Ð»ÑÐºÐ¸';
+$LDCzech='Ð§ÐµÑˆÐºÐ¸';
+$LDEnglish='ÐÐ½Ð³Ð»Ð¸Ð¹ÑÐºÐ¸';
+$LDFrench='Ð¤Ñ€ÐµÐ½ÑÐºÐ¸';
+$LDGerman='ÐÐµÐ¼ÑÐºÐ¸';
+$LDIndonesian='Ð˜Ð½Ð´Ð¾Ð½ÐµÐ·Ð¸Ð¹ÑÐºÐ¸';
+$LDItalian='Ð˜Ñ‚Ð°Ð»Ð¸Ð°Ð½ÑÐºÐ¸';
+$LDNorwegian='ÐÐ¾Ñ€Ð²ÐµÐ¶ÐºÐ¸';
+$LDPolish='ÐŸÐ¾Ð»ÑÐºÐ¸';
+$LDPortuguese='ÐŸÐ¾Ñ€Ñ‚ÑƒÐ³Ð°Ð»ÑÐºÐ¸';
+$LDSpanish='Ð˜ÑÐ¿Ð°Ð½ÑÐºÐ¸';
 /* 2003-04-28 El */
-$LDDutch='Äàòñêè';
+$LDDutch='Ð”Ð°Ñ‚ÑÐºÐ¸';
 # 2003-08-04 EL
-$LDPerson='Ëèöà';
+$LDPerson='Ð›Ð¸Ñ†Ð°';
 # 2003-09-05 EL
-$LDUser='Ïîòðåáèòåë';
+$LDUser='ÐŸÐ¾Ñ‚Ñ€ÐµÐ±Ð¸Ñ‚ÐµÐ»';
 ?>
