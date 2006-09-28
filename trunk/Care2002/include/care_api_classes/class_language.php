@@ -38,7 +38,7 @@ class Language {
 				}
 			} 
 		}
-		@asort($langdirs,SORT_STRING);
+		@ksort($langdirs,SORT_STRING);
 		while(list($x,$v)=each($langdirs)){
 			$str.= '<option value="'.$x.'"';
 			if($curr_lang==$x) $str.='selected';
