@@ -6,9 +6,57 @@
 
 error_reporting(E_ALL ^ E_NOTICE);
  
-define('INSTALLER_PATH', realpath(dirname(__FILE__)));
+
+
+
+if (version_compare(PHP_VERSION, '4.3', '<'))
+{
+	// Very very old version of PHP.  Needs to be upgraded.
+	trigger_error('Warning!  PHP version is less than 4.3, you should upgrade to at least php version 4.3', E_USER_WARNING);
+	define('PHP_COMPAT', 40);
+}
+elseif (version_compare(PHP_VERSION, '5.0', '<'))
+{
+	define('PHP_COMPAT', 43);
+}
+elseif (version_compare(PHP_VERSION, '5.3', '<'))
+{
+	define('PHP_COMPAT', 50);	
+}
+else
+{
+	define('PHP_COMPAT', 53);
+}
+
+
+
+
+if (PHP_COMPAT < 43)
+{
+	define('INSTALLER_PATH', str_replace('\\', '/', realpath(dirname(__FILE__))));
+}
+else
+{
+	define('INSTALLER_PATH', str_replace('\\', '/', dirname(__FILE__)));
+}
+
+
+
+define('APP_PATH',      realpath(INSTALLER_PATH . '/..'));
 define('INSTALLER_API', true);
-define('APP_PATH', realpath(INSTALLER_PATH.'/..'));
+
+
+if (APP_PATH === false)
+{
+	// The only reason APP_PATH would be a literal false is if the
+	// installer path could not be resolved to a literal path.  This
+	// occurs if perms are bad or if base include is set too strict.
+	// Either way, this situation is unrecoverable in any php version.
+	
+	trigger_error(INSTALLER_PATH . '/.. could not be resolved to a literal path.  This installation will fail.');	
+}
+
+
 
 require_once(INSTALLER_PATH.'/includes/InstallerConfig.php');
 require_once(INSTALLER_PATH.'/includes/InstallerEngine.php');
