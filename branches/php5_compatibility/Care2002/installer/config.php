@@ -76,8 +76,32 @@ $version_detection_class = 'VersionCheck';
  * Writable directory for smarty compile dir
  */
 $writable_dir = '/tmp';
-if (!file_exists($writable_dir)) {
-	$writable_dir = realpath(dirname(__FILE__).'/tmp');
+if (!file_exists($writable_dir))
+{
+	// The temporary directory does not exist.  We have to come up with something...	
+	
+	
+	if ((PHP_COMPAT >= 50) && function_exists('sys_get_temp_dir'))
+	{
+		$writable_dir = sys_get_temp_dir();
+	}
+	else
+	{	
+		// We should create one
+		$writable_dir = INSTALLER_PATH . '/tmp';
+		
+		if (!file_exists($writable_dir))
+		{
+			mkdir($writable_dir, 0700);
+		}	
+	}
+	
+	
+	if (!file_exists($writable_dir))
+	{
+		// We are STILL failing to get a writable directory for temporary files.	
+		trigger_error("Our best efforts to secure a writable temporary directory is failing.  The final test was: $writable_dir", E_USER_WARNING);
+	}
 }
 
 /*
