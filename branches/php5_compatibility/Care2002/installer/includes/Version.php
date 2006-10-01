@@ -4,9 +4,9 @@
  * 
  */
 
-require_once realpath(dirname(__FILE__)).'/ActionSet.php';
-require_once realpath(dirname(__FILE__)).'/TestSet.php';
-require_once realpath(dirname(__FILE__)).'/FieldSet.php';
+require_once str_replace('\\', '/', dirname(__FILE__)).'/ActionSet.php';
+require_once str_replace('\\', '/', dirname(__FILE__)).'/TestSet.php';
+require_once str_replace('\\', '/', dirname(__FILE__)).'/FieldSet.php';
 
 class Version{
 

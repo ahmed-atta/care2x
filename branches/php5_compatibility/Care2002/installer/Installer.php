@@ -31,19 +31,9 @@ else
 
 
 
-if (PHP_COMPAT < 43)
-{
-	define('INSTALLER_PATH', str_replace('\\', '/', realpath(dirname(__FILE__))));
-}
-else
-{
-	define('INSTALLER_PATH', str_replace('\\', '/', dirname(__FILE__)));
-}
-
-
-
-define('APP_PATH',      realpath(INSTALLER_PATH . '/..'));
-define('INSTALLER_API', true);
+define('INSTALLER_PATH', str_replace('\\', '/', dirname(__FILE__)));
+define('APP_PATH',       realpath(INSTALLER_PATH . '/..'));
+define('INSTALLER_API',  true);
 
 
 if (APP_PATH === false)

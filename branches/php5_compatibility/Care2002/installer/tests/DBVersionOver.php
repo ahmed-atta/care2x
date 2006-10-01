@@ -61,6 +61,7 @@ class DBVersionOver extends BaseTest {
         if (isset($this->params['type_field'])) {
             $type_field = $engine->getField($this->params['type_field']);
             $this->type = $type_field->value;
+           
         } else if (isset($this->params['type'])) {
             $this->type = $this->params['type'];
         } else {

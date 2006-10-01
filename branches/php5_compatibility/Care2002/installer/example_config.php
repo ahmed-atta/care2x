@@ -40,7 +40,7 @@ $action_dirs = array();
  * and the Tests and Actions required to go from the previous version
  * to the defined version.
  */
-$version_file = realpath(dirname(__FILE__)).'/example_versions.php';
+$version_file = str_replace('\\', '/', dirname(__FILE__)).'/example_versions.php';
 
 /*
  * We need to ensure the class for determining the current version
@@ -59,11 +59,11 @@ $version_detection_class = 'VersionCheck';
 /*
  * Writable directory for smarty compile dir
  */
-$writable_dir = realpath(dirname(__FILE__)).'/tmp';
+$writable_dir = str_replace('\\', '/', dirname(__FILE__)).'/tmp';
 
 /*
  * Template directory
  */
-$template_dir = realpath(dirname(__FILE__)).'/templates';
+$template_dir = str_replace('\\', '/', dirname(__FILE__)).'/templates';
 
 ?>

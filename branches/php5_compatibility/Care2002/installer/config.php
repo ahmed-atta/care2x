@@ -56,7 +56,7 @@ $action_dirs = array();
  * and the Tests and Actions required to go from the previous version
  * to the defined version.
  */
-$version_file = realpath(dirname(__FILE__)).'/versions.php';
+$version_file = str_replace('\\', '/', dirname(__FILE__)) . '/versions.php';
 
 /*
  * We need to ensure the class for determining the current version
@@ -107,6 +107,6 @@ if (!file_exists($writable_dir))
 /*
  * Template directory
  */
-//$template_dir = realpath(dirname(__FILE__)).'/templates';
+//$template_dir = str_replace('\\', '/', dirname(__FILE__)).'/templates';
 
 ?>

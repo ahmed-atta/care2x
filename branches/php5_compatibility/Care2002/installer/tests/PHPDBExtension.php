@@ -22,9 +22,11 @@ class PHPDBExtension extends BaseTest {
 
     function prepareParameters() {
         $engine =& $GLOBALS['INSTALLER']['ENGINE'];
-        if (isset($this->params['type_field'])) {
+        if (isset($this->params['type_field'])) 
+        {
             $type_field = $engine->getField($this->params['type_field']);
             $this->type = $type_field->value;
+                                   
         } else if (isset($this->params['type'])) {
             $this->type = $this->params['type'];
         } else {
@@ -42,7 +44,8 @@ class PHPDBExtension extends BaseTest {
 
         $this->result_message = "PHP Database Extension $this->type found";
         $this->result = INSTALLER_TEST_SUCCESS;
-        if(!extension_loaded($this->type)){
+       
+        if(!extension_loaded(strtolower($this->type))){
             $this->result = INSTALLER_TEST_FAIL;
             $this->result_message = "PHP Database Extension $this->type is not loaded";
         }

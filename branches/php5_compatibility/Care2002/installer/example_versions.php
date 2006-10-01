@@ -15,7 +15,7 @@ $version_0_2->collectData('db_port', 'Database Port', 'text', '3306');
 $version_0_2->collectData('db_database', 'Database Name', 'text', '');
 $version_0_2->addTest('PHPVersionOver', array('4.2.0'));
 $version_0_2->addTest('PHPExtension', array('mysql', 'gd'));
-$version_0_2->addTest('WritableLocation', array(dirname(__FILE__).'/test_replacement.txt', realpath(dirname(__FILE__).'/tmp')));
+$version_0_2->addTest('WritableLocation', array(dirname(__FILE__).'/test_replacement.txt', str_replace('\\', '/', dirname(__FILE__).'/tmp')));
 $version_0_2->addTest('MysqlVersionOver', array(
 'username_field' => 'db_user',
 'password_field' => 'db_password',
@@ -29,7 +29,7 @@ $version_0_2->addAction('SQLFile', array(
 'server_field' => 'db_server',
 'port_field' => 'db_port',
 'db_field' => 'db_database',
-'files' => array(realpath(dirname(__FILE__).'/sql').'/sureinvoice.sql')));
+'files' => array(str_replace('\\', '/', dirname(__FILE__).'/sql').'/sureinvoice.sql')));
 $version_0_2->addAction('ReplaceString', array(
 'message' => "Saved database configuration information!",
 'files' => array(dirname(__FILE__).'/test_replacement.txt'),
@@ -46,7 +46,7 @@ $version_0_3->addAction('SQLFile', array(
 'server_field' => 'db_server',
 'port_field' => 'db_port',
 'db_field' => 'db_database',
-'files' => array(realpath(dirname(__FILE__).'/sql').'/update-0.2-0.3.sql')));
+'files' => array(str_replace('\\', '/', dirname(__FILE__).'/sql').'/update-0.2-0.3.sql')));
 $versions->add($version_0_3);
 
 $version_0_4 = new Version('0.4');
@@ -56,6 +56,6 @@ $version_0_4->addAction('SQLFile', array(
 'server_field' => 'db_server',
 'port_field' => 'db_port',
 'db_field' => 'db_database',
-'files' => array(realpath(dirname(__FILE__).'/sql').'/update-0.3-0.4.sql')));
+'files' => array(str_replace('\\', '/', dirname(__FILE__).'/sql').'/update-0.3-0.4.sql')));
 $versions->add($version_0_4);
 ?>

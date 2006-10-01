@@ -110,7 +110,7 @@ class InstallerConfig{
 					$this->errors[] = "template_dir $template_dir is not readable!";
 				}	
 			}else{
-				$this->settings['TEMPLATE_DIR'] = realpath(dirname(__FILE__).'/../templates/').'/';
+				$this->settings['TEMPLATE_DIR'] = str_replace('\\', '/', dirname(__FILE__).'/../templates/').'/';
 			}
 		}else{
 			$this->errors[] = "Error loading config file ".$this->file_name;

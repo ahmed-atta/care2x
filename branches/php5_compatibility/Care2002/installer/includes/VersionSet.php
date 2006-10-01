@@ -119,9 +119,12 @@ class VersionSet extends BaseSet{
 	function &getField($name){
 		$fields = array();
 		$this->reset();
+		
 		while($version =& $this->get()){
 			$version->fields->reset();
-			while($field =& $version->fields->get()){
+			
+			while($field =& $version->fields->get())
+			{	
 				if($field->name == $name){
 					return $field;
 				}

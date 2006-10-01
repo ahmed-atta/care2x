@@ -53,4 +53,5 @@ class BaseTest {
 		return false;
 	}
 }
+
 ?>

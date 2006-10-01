@@ -43,8 +43,10 @@ class InstallerEngine {
 			$output .= $smarty->fetch(Installer::getTemplatePath('version_check.tpl'));
 			$smarty->assign('CAN_CONTINUE', true);
 		}elseif($this->phase == 1){
+			
 			$fields = $versions->getFieldsForUpgrade($this->old_version);
 			$field_count = count($fields);
+			
 			if($field_count == 0){
 				$this->phase++;
 				return $this->run();
@@ -69,6 +71,7 @@ class InstallerEngine {
 				$output .= $smarty->fetch(Installer::getTemplatePath('collect_data.tpl'));
 			}
 		}elseif($this->phase == 2){
+			
 			$tests =& $versions->getTestsForUpgrade($this->old_version);
 			$test_count = count($tests);
 			for($i = 0; $i < $test_count; $i++){
@@ -204,6 +207,8 @@ class InstallerEngine {
 	function &getField($name){
 		$versions =& $this->config->getSetting('VERSION_SET');
 		$return = $versions->getField($name);
+		$return->saveField($name);
+		
 		return $return;
 	}
 	

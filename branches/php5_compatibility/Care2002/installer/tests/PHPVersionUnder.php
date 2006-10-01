@@ -19,12 +19,12 @@ class PHPVersionUnder extends BaseTest{
 	
 	function perform(){		
 		if(version_compare(phpversion(), $this->params[0], '<')){
-			$this->result_message = "PHP Version lower than {$this->params[0]}  is required, you are running ".phpversion();
+			$this->result_message = "PHP Version lower than {$this->params[0]} is seriously recommended, you are running ".phpversion();
 			$this->result = INSTALLER_TEST_SUCCESS;
 			return $this->result;
 		}else{
-			$this->result = INSTALLER_TEST_FAIL;
-			$this->result_message = "PHP Version lower than {$this->params[0]}  is required, you are running ".phpversion();
+			$this->result = INSTALLER_TEST_WARN;
+			$this->result_message = "PHP Version lower than {$this->params[0]} is seriously recommended, you are running ".phpversion();
 		}
 		
 		return $this->result;

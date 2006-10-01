@@ -14,7 +14,7 @@ class InstallerSmarty extends Smarty {
 		$this->Smarty();
 		$this->template_dir = INSTALLER_PATH;
 		$this->cache_dir = $GLOBALS['INSTALLER']['ENGINE']->getSetting('WRITABLE_DIR');
-		$this->config_dir = realpath(dirname(__FILE__)).'/smarty';
+		$this->config_dir = str_replace('\\', '/', dirname(__FILE__)).'/smarty';
 		$this->compile_dir = $GLOBALS['INSTALLER']['ENGINE']->getSetting('WRITABLE_DIR');
 		
 		// Setup some variables
