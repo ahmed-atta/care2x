@@ -93,7 +93,7 @@ if($mode!= ''){
 						   '".addslashes($userid)."',
 						   '".md5($pass)."',
 						   '".$p_areas."',
-						   '".$personell_nr."',
+						   '".((int)$personell_nr)."',
 						   '".date('Y-m-d')."',
 						   '".date('H:i:s')."',
 						   'normal',
