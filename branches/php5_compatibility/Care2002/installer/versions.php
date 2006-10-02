@@ -2,9 +2,9 @@
 
 require(INSTALLER_PATH.'/config.php');
 
-# seed the random generator
-srand ((double) microtime() * 1000000);
-$rmax=getrandmax();
+
+// New randmax is 2.blahblah billion (to stop floating the values in windows)
+$rmax = 0x7fffffff;
 
 $versions = new VersionSet();
 
@@ -24,9 +24,9 @@ $version->addSeparator('Network Protocol and Domain');
 $version->collectOption('transfer_protocol', 'Transfer Protocol', array('http', 'https'), array('http', 'https'), 'http');
 $version->collectText('care2x_address', 'Care2x Host', 'localhost');
 $version->addSeparator('Encryption Keys');
-$version->collectText('1st_key', '1st Key', (rand(1,$rmax).rand(1,$rmax))*rand(1,$rmax));
-$version->collectText('2nd_key', '2nd Key', (rand(1,$rmax).rand(1,$rmax))*rand(1,$rmax));
-$version->collectText('3rd_key', '3rd Key', (rand(1,$rmax).rand(1,$rmax))*rand(1,$rmax));
+$version->collectText('1st_key', '1st Key', (string)(mt_rand(1, $rmax)) . mt_rand(1, $rmax));
+$version->collectText('2nd_key', '2nd Key', (string)(mt_rand(1, $rmax)) . mt_rand(1, $rmax));
+$version->collectText('3rd_key', '3rd Key', (string)(mt_rand(1, $rmax)) . mt_rand(1, $rmax));
 $version->addSeparator('');
 
 $version->addTest('PHPVersionOver', array('4.3.0'));
@@ -128,15 +128,17 @@ $version->addAction('CSVOptions', 'Install Optional DB Tables', array(
         dirname(__FILE__).'/db/icd10',
         dirname(__FILE__).'/db/ops301')));
 
+
 $version->addFinalAction('RenameFile', 'Rename Critical Installation Files', array(
     'message' => "Critical installation files renamed",
     'files' => array(
-        APP_PATH.'/installer/install.php' => APP_PATH.'/installer/install_'.rand(1,$rmax).'.php'),
-        APP_PATH.'/install/install.php' => APP_PATH.'/install/install_'.rand(1,$rmax).'.php',
-        APP_PATH.'/install/encode_pw_md5.php' => APP_PATH.'/install/encode_pw_md5_'.rand(1,$rmax).'.php',
-        APP_PATH.'/install/initialize.php' => APP_PATH.'/install/initialize_'.rand(1,$rmax).'.php',
-        APP_PATH.'/create_admin.php' => APP_PATH.'/create_admin_'.rand(1,$rmax).'.php',
+        APP_PATH.'/installer/install.php' => APP_PATH.'/installer/install_'.mt_rand(1,$rmax).'.php'),
+        APP_PATH.'/install/install.php' => APP_PATH.'/install/install_'.mt_rand(1,$rmax).'.php',
+        APP_PATH.'/install/encode_pw_md5.php' => APP_PATH.'/install/encode_pw_md5_'.mt_rand(1,$rmax).'.php',
+        APP_PATH.'/install/initialize.php' => APP_PATH.'/install/initialize_'.mt_rand(1,$rmax).'.php',
+        APP_PATH.'/create_admin.php' => APP_PATH.'/create_admin_'.mt_rand(1,$rmax).'.php',
     ));
+
 
 $versions->add($version);
 ?>
