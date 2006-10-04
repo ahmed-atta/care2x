@@ -3,5 +3,5 @@
 
 if (!defined('INSTALLER_PATH')) { die('Hacking attempt detected.'); }
 
-$install_status = 'YTowOnt9';
+$install_status = '';
 ?>

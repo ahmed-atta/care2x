@@ -1,29 +1,11 @@
-<?php
+<?php if (!defined('INSTALLER_PATH')) { die('Hacking attempt detected.'); }
 /*
  *	This is the list of actions to perform during the installation of Care2x
  *
  *	Most of this is self explanatory, so just make sure it's all good and you
  *	will be fine.  Have fun!
  *
- */
-
-
-// Boot out people who shouldn't be here...
-if (!defined('INSTALLER_PATH')) { die('Hacking attempt detected.'); }
-
-
-
-
-// Initializations
-$actions = array();
-$actions['list'] = array();
-$actions['writable_paths'] = array();
-$actions['writable_files'] = array();
-
-
-
-
-/*
+ *
  *	THE ACTION LIST STARTS HERE
  *
  *	Put the actions in order that they need to run.  This list will be modified
@@ -37,8 +19,12 @@ $actions['list'][] = 'check_php_version';
 $actions['list'][] = 'check_extensions';
 $actions['list'][] = 'check_writables';
 
+$actions['list'][] = 'prepare_post_data';
 
 
+
+// This should be the last action
+$actions['list'][] = 'do_post_action';
 
 
 
@@ -67,6 +53,7 @@ $actions['params']['maximum_php_version'] = '5.9';
 // PHP Required Extensions
 $actions['extensions']['gd']       = array('required'=>true);
 $actions['extensions']['calendar'] = array('required'=>true);
+$actions['extensions']['pcre']     = array('required'=>true);
 
 // Be careful with your references
 $actions['extensions']['mysql']    = array('required'=>'pgsql');
@@ -108,6 +95,151 @@ $actions['writable_paths'][] = APP_PATH.'/installer';
 $actions['writable_files'][] = APP_PATH.'/installer/install.php';
 $actions['writable_files'][] = APP_PATH.'/counter/hitcount.txt';
 $actions['writable_files'][] = APP_PATH.'/include/inc_init_main.php';
+
+
+
+
+
+
+
+
+
+
+
+$actions['fields']['db_host'] = array(
+	'html_label'   => 'Database Server',
+	'html_name'    => 'db_host',
+	'html_size'    => 32,
+	'html_max'     => 64,
+	'html_type'    => 'text',
+	
+	'default' => 'localhost',
+	'type'    => 'string',
+	'preg'    => '/^[a-z0-9\._](1,64)$/iU',
+	'tip'     => 'Must contain only letters, numbers, periods, or an underscore character.  Length limit is 64.',
+	
+	'group'   => 1
+);
+
+
+$actions['fields']['db_port'] = array(
+	'html_label'   => 'DB Listening Port',
+	'html_name'    => 'db_port',
+	'html_size'    => 7,
+	'html_max'     => 5,
+	'html_type'    => 'text',
+	
+	'default' => '10061',
+	'type'    => 'number',
+	
+	'min'     => 1,
+	'max'     => 65535,
+	
+	'tip'     => 'A number between 1 and 65536.  Defaults to 10061.',
+	
+	'group'   => 1
+);
+
+
+$actions['fields']['db_user'] = array(
+	'html_label'   => 'DB Server Username',
+	'html_name'    => 'db_user',
+	'html_size'    => 28,
+	'html_max'     => 24,
+	'html_type'    => 'text',
+	
+	'default' => 'root',
+	'type'    => 'string',
+	'preg'    => '/^[a-z0-9_](1,24)$/iU',
+	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 24.',
+	
+	'group'   => 1
+);
+
+
+$actions['fields']['db_pass'] = array(
+	'html_label'   => 'DB Server Password',
+	'html_name'    => 'db_pass',
+	'html_size'    => 32,
+	'html_max'     => 48,
+	'html_type'    => 'password',
+	
+	'default' => '',
+	'type'    => 'string',
+	'preg'    => '/^[.](0,48)$/iU',
+	'tip'     => 'Can contain almost any typable character.  Length limit is 48.',
+	
+	'group'   => 1
+);
+
+
+$actions['fields']['db_name'] = array(
+	'html_label'   => 'Database Name',
+	'html_name'    => 'db_name',
+	'html_size'    => 28,
+	'html_max'     => 24,
+	'html_type'    => 'text',
+	
+	'default' => 'care2x',
+	'type'    => 'string',
+	'preg'    => '/^[a-z0-9_](1,24)$/iU',
+	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 24.',
+	
+	'group'   => 1
+);
+
+
+
+$actions['fields']['admin_user'] = array(
+	'html_label'   => 'Care2x Admin Username',
+	'html_name'    => 'admin_user',
+	'html_size'    => 22,
+	'html_max'     => 20,
+	'html_type'    => 'text',
+	
+	'default' => 'admin',
+	'type'    => 'string',
+	'preg'    => '/^[a-z0-9_](1,20)$/iU',
+	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 20.',
+	
+	'group'   => 2
+);
+
+
+$actions['fields']['admin_password1'] = array(
+	'html_label'   => 'Password',
+	'html_name'    => 'admin_password1',
+	'html_size'    => 48,
+	'html_max'     => 40,
+	'html_type'    => 'password',
+	
+	'default' => '',
+	'type'    => 'string',
+	'preg'    => '/^[.](1,40)$/iU',
+	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 48.',
+	
+	'group'   => 2
+);
+
+
+$actions['fields']['admin_password2'] = array(
+	'html_label'   => 'Confirm Password',
+	'html_name'    => 'admin_password2',
+	'html_size'    => 48,
+	'html_max'     => 40,
+	'html_type'    => 'password',
+	
+	'default' => '',
+	'type'    => 'string',
+	'preg'    => '/^[.](1,40)$/iU',
+	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 48.',
+	
+	'group'   => 2
+);
+
+
+
+
 
 
 ?>
