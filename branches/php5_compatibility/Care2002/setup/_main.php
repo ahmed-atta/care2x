@@ -36,6 +36,59 @@
 
 
 
+
+	if ((!function_exists('version_compare')) || (version_compare(PHP_VERSION, '5.0', '<')))
+	{
+		// Define missing stuff here
+		
+		
+		if (!defined('FILE_APPEND'))
+		{
+			define('FILE_APPEND', 1);
+		}
+		
+		
+		
+		// Thanks to Kurt Brauchli for this quick piece of code.
+		if( !function_exists('file_put_contents') )
+		{	
+			function file_put_contents($filename, $content, $flag = 0)
+			{
+				if ($flag == FILE_APPEND)
+				{
+					$fp = fopen($filename, 'w+');
+				}
+				else
+				{
+					$fp = fopen($filename, 'w');
+				}
+					
+				fwrite($fp, $content);
+				fclose($fp);
+			}
+		}
+
+
+
+
+		
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	// Inititalize a couple of things:
 	$install_status          = '';
 	$previous_install_status = '';
