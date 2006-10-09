@@ -115,7 +115,7 @@ $actions['fields']['db_host'] = array(
 	
 	'default' => 'localhost',
 	'type'    => 'string',
-	'preg'    => '/^[a-z0-9\._](1,64)$/iU',
+	'preg'    => '/^[a-z0-9\._]{1,64}$/iU',
 	'tip'     => 'Must contain only letters, numbers, periods, or an underscore character.  Length limit is 64.',
 	
 	'group'   => 1
@@ -150,7 +150,7 @@ $actions['fields']['db_user'] = array(
 	
 	'default' => 'root',
 	'type'    => 'string',
-	'preg'    => '/^[a-z0-9_](1,24)$/iU',
+	'preg'    => '/^[a-z0-9_]{1,24}$/iU',
 	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 24.',
 	
 	'group'   => 1
@@ -166,7 +166,7 @@ $actions['fields']['db_pass'] = array(
 	
 	'default' => '',
 	'type'    => 'string',
-	'preg'    => '/^[.](0,48)$/iU',
+	'preg'    => '/^(.){0,48}$/iU',
 	'tip'     => 'Can contain almost any typable character.  Length limit is 48.',
 	
 	'group'   => 1
@@ -182,7 +182,7 @@ $actions['fields']['db_name'] = array(
 	
 	'default' => 'care2x',
 	'type'    => 'string',
-	'preg'    => '/^[a-z0-9_](1,24)$/iU',
+	'preg'    => '/^[a-z0-9_]{1,24}$/iU',
 	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 24.',
 	
 	'group'   => 1
@@ -199,7 +199,7 @@ $actions['fields']['admin_user'] = array(
 	
 	'default' => 'admin',
 	'type'    => 'string',
-	'preg'    => '/^[a-z0-9_](1,20)$/iU',
+	'preg'    => '/^[a-z0-9_]{1,20}$/iU',
 	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 20.',
 	
 	'group'   => 2
@@ -215,7 +215,7 @@ $actions['fields']['admin_password1'] = array(
 	
 	'default' => '',
 	'type'    => 'string',
-	'preg'    => '/^[.](1,40)$/iU',
+	'preg'    => '/^(.){0,48}$/iU',
 	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 48.',
 	
 	'group'   => 2
@@ -231,7 +231,7 @@ $actions['fields']['admin_password2'] = array(
 	
 	'default' => '',
 	'type'    => 'string',
-	'preg'    => '/^[.](1,40)$/iU',
+	'preg'    => '/^(.){0,48}$/iU',
 	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 48.',
 	
 	'group'   => 2

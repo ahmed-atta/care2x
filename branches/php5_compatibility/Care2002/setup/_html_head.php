@@ -21,7 +21,82 @@
 <br />  
 
 <div class="content">
+
+<?php
+if ((($status['step'] != 2) && (count($errors) > 0)) || ($status['step'] == 2))
+{ ?>
+	<div class="ErrorList">
+		<big>Errors</big><br />
+		<br />
+	
+		<?php
+			if (count($errors) == 0)
+			{
+				echo "<i>There are no errors to display.  Good job!</i>\n";
+			}
+			else
+			{
+				foreach($errors as $index => $error)
+				{
+					$ticktock = (floor($index / 2) == ($index / 2)) ? 'spantick' : 'spantock';
+					echo "<div class=\"$ticktock\">$error</div>\n";
+				}
+			
+				echo "<br />\nTotal Errors: " . count($errors) . "\n";
+			}
+		?>
+	</div>
+<?php } ?>
+
+<?php if ($status['step'] == 2) { ?>
+<div class="WarningList">
+	<big>Warnings</big><br />
+	<br />
+	
+	<?php
+		if (count($warnings) == 0)
+		{
+			echo "<i>There are no warnings to display.</i>\n";
+		}
+		else
+		{
+			foreach($warnings as $index => $warning)
+			{
+				$ticktock = (floor($index / 2) == ($index / 2)) ? 'spantick' : 'spantock';
+				echo "<div class=\"$ticktock\">$warning</div>\n";
+			}
+			
+			echo "<br />\nTotal Warnings: " . count($warnings) . "\n";
+		}
+	?>
+</div>
+
+<div class="MessageList">
+	<big>Messages</big><br />
+	<br />
+	
+	<?php
+		if (count($messages) == 0)
+		{
+			echo "<i>There are no messages to display.</i>\n";
+		}
+		else
+		{
+			foreach($messages as $index => $message)
+			{
+				$ticktock = (floor($index / 2) == ($index / 2)) ? 'spantick' : 'spantock';
+				echo "<div class=\"$ticktock\">$message</div>\n";
+			}
+			
+			echo "<br />\nTotal Messages: " . count($messages) . "\n";
+		}
+	?>
+</div>
+<?php } ?>
+	
+
+
 <form action="index.php" method="post">
 	<?php foreach ($status['data'] as $key => $value) { ?>
-		<input type="hidden" name="<?php echo $key; ?>" value="<?php echo $value; ?>" />
+		<input type="hidden" name="s<?php echo $key; ?>" value="<?php echo $value; ?>" />
 	<?php } ?>	

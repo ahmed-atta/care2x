@@ -14,6 +14,12 @@ function task_do_post_action(&$status)
 
 	if ($_REQUEST['submit'] == 'Next >')
 	{
+		if (($status['step'] >= 2) && (count($GLOBALS['errors']) > 0))
+		{
+			$GLOBALS['warnings'][] = "You must correct the errors before continuing.";
+			return true;	
+		}
+		
 		$status['step'] += 1;
 		
 		if ($status['step'] > STEP_COUNT)
@@ -35,6 +41,10 @@ function task_do_post_action(&$status)
 		$status['step'] = 1;
 		$status['data'] = array();
 		$GLOBALS['warnings'][] = "You have started the installation process over.";
+	}
+	elseif ($_REQUEST['submit'] == 'Refresh')
+	{
+		// Do nothing
 	}
 	else
 	{

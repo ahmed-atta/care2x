@@ -26,6 +26,68 @@ a:hover {
 	color: #cc0033; 
 }
 
+
+dt
+{
+	margin-top:     0px;
+	margin-bottom:  6px;
+	margin-left:    0px;
+	margin-right:   0px;
+	font-weight:   bold;
+	text-align:    left;
+}
+
+dd
+{
+	margin-top:     0px;
+	margin-bottom: 12px;
+	margin-left:   24px;
+	margin-right:   0px;
+	text-align:    left;
+}
+
+
+.ErrorList
+{
+	border: solid 1px #ff0000;
+	padding: 10px;
+	margin:  10px;
+	text-align: left;
+}
+
+.WarningList
+{
+	border: solid 1px #ffff00;
+	padding: 10px;
+	margin:  10px;
+	text-align: left;
+}
+
+.MessageList
+{
+	border: solid 1px #00ff00;
+	padding: 10px;
+	margin:  10px;
+	text-align: left;
+}
+
+.spantick
+{
+	background-color: #eeeeee;
+	margin: 4px;
+	padding: 8px;
+}
+
+.spantock
+{
+	background-color: #eeffff;
+	margin: 4px;
+	padding: 8px;
+}
+
+
+
+
 input#button {
    background-color: white;
 	padding: 3px;
@@ -37,7 +99,7 @@ input#button {
 }
 
 .content {
-	width: 720px;
+	width: 620px;
 	margin: 0 auto 0 auto;
 	text-align: center;
 }

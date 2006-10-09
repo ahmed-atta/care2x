@@ -6,6 +6,7 @@
 	<table class="install_block">
 		<tr>
 			<td align="left"><input type="submit" name="submit" value="Start Over" style="width:128px;" class="navlink" /></td>
+			<td align="center"><input type="submit" name="submit" value="Refresh" style="width:128px;" class="navlink" /></td>
 			<td align="right" nowrap="nowrap">
 				<input type="submit" name="submit" style="width:72px;" value="&lt; Back" class="navlink" />
 				&nbsp;&nbsp;&nbsp;
