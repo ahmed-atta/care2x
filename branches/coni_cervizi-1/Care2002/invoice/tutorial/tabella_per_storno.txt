@@ -1,9 +1,0 @@
-CREATE TABLE care_storno (
-  storno_id tinyint(3) NOT NULL auto_increment,
-  storno_encounter_nr int(10) unsigned NOT NULL default 0,
-  storno_bill_no int(11) default NULL,
-  storno_date date default NULL,
-  storno_total_bill_amount float(10,2) default NULL,
-  PRIMARY KEY  (storno_id),
-  KEY index_storno_patnum (storno_encounter_nr)
-)
