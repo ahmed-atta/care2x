@@ -3,5 +3,5 @@
 
 if (!defined('INSTALLER_PATH')) { die('Hacking attempt detected.'); }
 
-$install_status = 'YTozOntzOjQ6InN0ZXAiO2k6MjtzOjk6Imluc3RhbGxlZCI7YjowO3M6NDoiZGF0YSI7YTo1OntzOjc6ImRiX3BvcnQiO3M6NToiMTAwNjEiO3M6NzoiZGJfaG9zdCI7czo5OiJsb2NhbGhvc3QiO3M6NzoiZGJfdXNlciI7czo0OiJyb290IjtzOjc6ImRiX3Bhc3MiO3M6MDoiIjtzOjc6ImRiX25hbWUiO3M6NjoiY2FyZTJ4Ijt9fQ==';
+$install_status = '';
 ?>

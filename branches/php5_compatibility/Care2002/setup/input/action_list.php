@@ -23,9 +23,11 @@ $actions['list'][] = 'prepare_post_data';
 
 
 
-// This should be the last action
 $actions['list'][] = 'do_post_action';
 
+
+// This should be executed AFTER do_post_action
+$actions['list'][] = 'check_database';
 
 
 
@@ -103,6 +105,24 @@ $actions['writable_files'][] = APP_PATH.'/include/inc_init_main.php';
 
 
 
+
+$actions['fields']['db_type'] = array(
+	'html_label'   => 'Schema Type',
+	'html_name'    => 'db_type',
+	'html_size'    => 32,
+	'html_type'    => 'select',
+	
+	'values'       => array(
+	
+				'mysql' => 'MySQL',
+				'pgsql' => 'PostgreSQL'
+			),
+	
+	'default' => 'mysql',
+	'type'    => 'numeric',
+	
+	'group'   => 1
+);
 
 
 

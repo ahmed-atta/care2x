@@ -2,6 +2,9 @@
 
 Welcome to the Care2X Installer!<br />
 <br />
+<i>Please refrain from using the web browser <u>back button</u>.  Instead, use the navigation
+buttons near the bottom of each one of these pages.</i>
+<br />
 Somebody with MUCH BETTER writing skills than I should come up with a nice into here, but
 for now, this placeholder intro will have to do.  It seems to be working...<br />
 <br />

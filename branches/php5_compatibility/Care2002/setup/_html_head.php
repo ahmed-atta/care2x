@@ -7,6 +7,23 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<link href="style.css" rel="stylesheet" type="text/css" />
 
+	<script language="Javascript" type="text/javascript">
+		function confirm_start_over()
+		{
+			var confirmed = confirm("Starting over will scrap all your work so far, including knowledge of existing installations.");
+			
+			if (confirmed)
+			{
+				return true;
+			}
+			else
+			{
+				alert("Use the navigation buttons at the bottom of the pages (NOT the browser navigation buttons) to move around instead.");
+				return false;	
+			}
+		}
+	
+	</script>
 </head>
 <body>
 
