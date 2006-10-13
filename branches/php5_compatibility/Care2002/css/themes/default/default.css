@@ -165,7 +165,7 @@ ul {
 }
 /* -- ward lists title row -- */
 .wardlisttitlerow{
-	background-color: cyan;
+	background-color: #00ffff; /* cyan */
 }
 /* -- photo id block -- */
 .photo_id{
@@ -197,7 +197,7 @@ ul {
 /* -- Admission form item area -- */
 .adm_item{
 	background-image: url(/gui/img/skin/default/tableHeaderbg3.gif);
-	background-color: cyan;
+	background-color: #00ffff; /* cyan */
 	padding: 2px 6px 2px 6px;
 }
 /* -- Admission forms input area -- */
