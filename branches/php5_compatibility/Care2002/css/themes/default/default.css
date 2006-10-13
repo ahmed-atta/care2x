@@ -12,6 +12,10 @@ body {
 	font-weight: normal;
 	color: #000088;
 }
+form
+{
+	background-color: white;
+}
 /* default table design */
 table {
 	font-family: verdana, arial, tahoma;
@@ -249,7 +253,7 @@ hr {
 	border: 1px solid silver;
 	padding: 2px;
 	color: black;
-	margin-left: 5 px;
+	margin-left: 5px;
 }
 /*----- Registration search mask */
 .reg_searchmask{
