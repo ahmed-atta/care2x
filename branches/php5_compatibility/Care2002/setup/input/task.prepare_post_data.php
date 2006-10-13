@@ -25,7 +25,7 @@ function task_prepare_post_data(&$status)
 			{
 				// Check it against the preg
 				
-				if (isset($field_data['preg']))
+				if (isset($field_data['preg']) && (strlen($field_data['preg']) > 0))
 				{
 					if (!preg_match($field_data['preg'], $_REQUEST[$field_data['html_name']]))
 					{
@@ -34,11 +34,6 @@ function task_prepare_post_data(&$status)
 						$GLOBALS['actions']['fields'][$field_name]['has_error'] = true;
 						continue;
 					}
-				}
-				else
-				{
-					// Raise a warning
-					$GLOBALS['warnings'][] = "The field '$field_name' defined in the action list does not have a perl-compatible regular expression to test against.";
 				}
 			}
 			elseif (substr($field_data['type'], 0, 1) == 'n')

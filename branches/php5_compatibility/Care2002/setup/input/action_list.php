@@ -197,12 +197,12 @@ $actions['fields']['db_name'] = array(
 	'html_label'   => 'Database Name',
 	'html_name'    => 'db_name',
 	'html_size'    => 28,
-	'html_max'     => 24,
+	'html_max'     => 32,
 	'html_type'    => 'text',
 	
 	'default' => 'care2x',
 	'type'    => 'string',
-	'preg'    => '/^[a-z0-9_]{1,24}$/iU',
+	'preg'    => '', //empty string to ignore match checking.
 	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 24.',
 	
 	'group'   => 1
