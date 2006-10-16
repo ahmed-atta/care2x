@@ -1,33 +1,33 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Röntgen tetkiki için bekleyen istemler</b></font>
+<b>RÃ¶ntgen tetkiki iÃ§in bekleyen istemler</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 
 <a name="stime"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bekleyen istemler nasıl görüntülenir?</b></font>
+Bekleyen istemler nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b></font>
 <ul> 
-	<b>Uyarı:</b> Listenin ilk istemi otomatik olarak görünür.<p>
-	<b>Adım:</b> İstem formunu görüntülemek için soldaki listedeki küme numarasını tıklayınız.
+	<b>UyarÄ±:</b> Listenin ilk istemi otomatik olarak gÃ¶rÃ¼nÃ¼r.<p>
+	<b>AdÄ±m:</b> Ä°stem formunu gÃ¶rÃ¼ntÃ¼lemek iÃ§in soldaki listedeki kÃ¼me numarasÄ±nÄ± tÄ±klayÄ±nÄ±z.
 </ul>
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bu form nasıl yazdırılır?</b></font>
+Bu form nasÄ±l yazdÄ±rÄ±lÄ±r?</b></font>
 <ul> 
-	<b>Adım: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tetkik sonuçları veya bulgular nasıl girilir?</b></font>
+Tetkik sonuÃ§larÄ± veya bulgular nasÄ±l girilir?</b></font>
 <ul> 
-	<b>Adım: </b>Düzenleme moduna gitmek için <img <?php echo createLDImgSrc('../','enter_result.gif','0') ?>> düğmesini tıklayınız.<p>
+	<b>AdÄ±m: </b>DÃ¼zenleme moduna gitmek iÃ§in <img <?php echo createLDImgSrc('../','enter_result.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tüm veriler girildi, şimdi ne yapmalı?</b></font>
+TÃ¼m veriler girildi, ÅŸimdi ne yapmalÄ±?</b></font>
 <ul> 
-	<b>Adım: </b><img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayıp bilgiyi kaydediniz..
+	<b>AdÄ±m: </b><img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±p bilgiyi kaydediniz..
 </ul>
 
 

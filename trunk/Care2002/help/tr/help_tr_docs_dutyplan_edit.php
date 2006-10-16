@@ -1,37 +1,37 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Hekim/cerrah - Nöbet planı oluşturmak veya düzenlemek</b></font>
+<b>Hekim/cerrah - NÃ¶bet planÄ± oluÅŸturmak veya dÃ¼zenlemek</b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Hekim/cerrah listesini kullanarak bir/hekim/cerrah nöbeti planlamak istiyorum</b></font>
-<ul> <b>Adım 1: </b>Seçilen günün simgesi düğmeye tıklayarak &nbsp;<button><img <?php echo createComIcon('../','patdata.gif','0') ?>></button> hekim/cerrahlar listesini açınız. <br>
-			Küçük bir pencere açılır ve hekim/cerrahlar listesi görünür.<br>
+Hekim/cerrah listesini kullanarak bir/hekim/cerrah nÃ¶beti planlamak istiyorum</b></font>
+<ul> <b>AdÄ±m 1: </b>SeÃ§ilen gÃ¼nÃ¼n simgesi dÃ¼ÄŸmeye tÄ±klayarak &nbsp;<button><img <?php echo createComIcon('../','patdata.gif','0') ?>></button> hekim/cerrahlar listesini aÃ§Ä±nÄ±z. <br>
+			KÃ¼Ã§Ã¼k bir pencere aÃ§Ä±lÄ±r ve hekim/cerrahlar listesi gÃ¶rÃ¼nÃ¼r.<br>
 			<ul type=disc>
-			<li>Sol sütundaki simgeye tıklayarak bir hekim/cerrahı 1. olarak planlayınız.<br>
-			<li>Sağ sütundaki simgeye tıklayarak bir hekim/cerrahı 2. olarak planlayınız.
+			<li>Sol sÃ¼tundaki simgeye tÄ±klayarak bir hekim/cerrahÄ± 1. olarak planlayÄ±nÄ±z.<br>
+			<li>SaÄŸ sÃ¼tundaki simgeye tÄ±klayarak bir hekim/cerrahÄ± 2. olarak planlayÄ±nÄ±z.
 			</ul>
-		<b>Adım 2: </b><span style="background-color:yellow" >Bir hekim/cerrah ismini tıklayıp</span> nöbet listesine kopyalayınız.<br>
-		<b>Adım 3: </b>Eğer yanlış isme tıkladı iseniz, 2. adımı yineleyiniz ve doğru isme tıklayınız.<br>
-		<b>Adım 4: </b>İşiniz bitti ise, hekim/cerrahlar listesi penceresinde <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> simgesine tıklayınız.<br>
+		<b>AdÄ±m 2: </b><span style="background-color:yellow" >Bir hekim/cerrah ismini tÄ±klayÄ±p</span> nÃ¶bet listesine kopyalayÄ±nÄ±z.<br>
+		<b>AdÄ±m 3: </b>EÄŸer yanlÄ±ÅŸ isme tÄ±kladÄ± iseniz, 2. adÄ±mÄ± yineleyiniz ve doÄŸru isme tÄ±klayÄ±nÄ±z.<br>
+		<b>AdÄ±m 4: </b>Ä°ÅŸiniz bitti ise, hekim/cerrahlar listesi penceresinde <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> simgesine tÄ±klayÄ±nÄ±z.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Nöbet listesine hekim/cerrah ismini el ile girmek istiyorum</b></font>
-<ul> <b>Adım 1: </b>Seçilen günün metin giriş alanına "<input type="text" name="t" size=11 maxlength=4 >" tıklayınız.<br>
-		<b>Adım 2: </b>Hekim/cerrahın ismini el ile yazınız<br>
+NÃ¶bet listesine hekim/cerrah ismini el ile girmek istiyorum</b></font>
+<ul> <b>AdÄ±m 1: </b>SeÃ§ilen gÃ¼nÃ¼n metin giriÅŸ alanÄ±na "<input type="text" name="t" size=11 maxlength=4 >" tÄ±klayÄ±nÄ±z.<br>
+		<b>AdÄ±m 2: </b>Hekim/cerrahÄ±n ismini el ile yazÄ±nÄ±z<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Nöbet listesinden bir ismi silmek istiyorum</b></font>
-<ul> <b>Adım 1: </b>Silinecek ismin metin giriş alanına "<input type="text" name="t" size=11 maxlength=4 value="İsim">" tıklayınız.<br>
-		<b>Adım 2: </b>İsmi klavyedeki delete veya geri silme tuşlarını kullanarak siliniz.<br>
+NÃ¶bet listesinden bir ismi silmek istiyorum</b></font>
+<ul> <b>AdÄ±m 1: </b>Silinecek ismin metin giriÅŸ alanÄ±na "<input type="text" name="t" size=11 maxlength=4 value="Ä°sim">" tÄ±klayÄ±nÄ±z.<br>
+		<b>AdÄ±m 2: </b>Ä°smi klavyedeki delete veya geri silme tuÅŸlarÄ±nÄ± kullanarak siliniz.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Nöbet planını kaydetmek istiyorum</b></font>
-<ul> <b>Adım  1: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>NÃ¶bet planÄ±nÄ± kaydetmek istiyorum</b></font>
+<ul> <b>AdÄ±m  1: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Planı kaydettim ve planlamayı sonlandırmak istiyorum, ne yapmalıyım? </b></font>
-<ul> <b>Adım 1: </b>İşiniz bitti ise, <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>PlanÄ± kaydettim ve planlamayÄ± sonlandÄ±rmak istiyorum, ne yapmalÄ±yÄ±m? </b></font>
+<ul> <b>AdÄ±m 1: </b>Ä°ÅŸiniz bitti ise, <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
 </ul>
 </form>
 

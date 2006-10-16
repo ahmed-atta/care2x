@@ -4,22 +4,22 @@
 <font size=2 face="verdana,arial" >
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Para birimi nasıl ayarlanır?</b></font>
+Para birimi nasÄ±l ayarlanÄ±r?</b></font>
 <ul> 
-	<b>Adım 1: </b>Kullanmak istediğiniz para biriminin kutusunu işaretleyiniz.<p>
-	<b>Adım 2: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p>
+	<b>AdÄ±m 1: </b>Kullanmak istediÄŸiniz para biriminin kutusunu iÅŸaretleyiniz.<p>
+	<b>AdÄ±m 2: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 </ul>
 <form>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Para birimi bilgisi nasıl düzenlenir?</b></font>
+Para birimi bilgisi nasÄ±l dÃ¼zenlenir?</b></font>
 <ul> 
-	<b>Adım 1: </b>Kullanmak istediğiniz para biriminin  <input type="button" value="Düzenle"> düğmesini tıklayınız.<p>
+	<b>AdÄ±m 1: </b>Kullanmak istediÄŸiniz para biriminin  <input type="button" value="DÃ¼zenle"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 </ul>
 </form>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Para birimi bilgisi nasıl silinir?</b></font>
+Para birimi bilgisi nasÄ±l silinir?</b></font>
 <ul> 
-	<b>Adım 2: </b> <img <?php echo createComIcon('../','delete2.gif','0') ?>> düğmesini tıklayınız.<p>
+	<b>AdÄ±m 2: </b> <img <?php echo createComIcon('../','delete2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 </ul>
 
 

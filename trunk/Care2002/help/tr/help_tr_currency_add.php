@@ -4,12 +4,12 @@
 <font size=2 face="verdana,arial" >
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yeni bir para birimi nasıl eklenir?</b></font>
+Yeni bir para birimi nasÄ±l eklenir?</b></font>
 <ul> 
-	<b>Adım 1: </b>Para biriminin resmi sembolü veya harfini yazınız (örneğin $).<p>
-	<b>Adım 2: </b>Paranın resmi ismini yazınız  (örneğin Dolar).<p>
-	<b>Adım 3: </b>Varsa para birimi ile ilgili ek bilgileri yazınız örneğin kullanıldığı ülke, ISO kodu, vs..<p>
-		<b>Adım 4: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p>
+	<b>AdÄ±m 1: </b>Para biriminin resmi sembolÃ¼ veya harfini yazÄ±nÄ±z (Ã¶rneÄŸin $).<p>
+	<b>AdÄ±m 2: </b>ParanÄ±n resmi ismini yazÄ±nÄ±z  (Ã¶rneÄŸin Dolar).<p>
+	<b>AdÄ±m 3: </b>Varsa para birimi ile ilgili ek bilgileri yazÄ±nÄ±z Ã¶rneÄŸin kullanÄ±ldÄ±ÄŸÄ± Ã¼lke, ISO kodu, vs..<p>
+		<b>AdÄ±m 4: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 </ul>
 
 

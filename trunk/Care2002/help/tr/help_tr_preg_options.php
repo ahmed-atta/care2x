@@ -1,83 +1,83 @@
 <img src="../help/tr/img/tr_preg_options.png" border=0 width=192 height=318 align="right">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Kişi kayıt seçenekleri</b></font>
+<b>KiÅŸi kayÄ±t seÃ§enekleri</b></font>
 
 <p><font size=2 face="verdana,arial" >
 
 <font color="#990000"><b>
 Yatan hasta  -kabul</b></font>
 <ul> 
-Kişiyi <b>yatan hasta</b> olarak kabul eder.<p>
+KiÅŸiyi <b>yatan hasta</b> olarak kabul eder.<p>
 </ul>
 
 <font color="#990000"><b>
 Ayaktan  poliklinik</b></font>
 <ul> 
-Hastayı <b>poliklinik hastası</b> olarak kabul eder.
+HastayÄ± <b>poliklinik hastasÄ±</b> olarak kabul eder.
 </ul>
 
 <font color="#990000"><b>
 Randevular</b></font>
 <ul> 
-Bir randevu planlar veya olan randevuları gösterir.
+Bir randevu planlar veya olan randevularÄ± gÃ¶sterir.
 </ul>
 
 <font color="#990000"><b>
 Kabul listesi</b></font>
 <ul> 
-Bu kişinin tüm müracaatlarını listeler.
+Bu kiÅŸinin tÃ¼m mÃ¼racaatlarÄ±nÄ± listeler.
 </ul>
 
 <font color="#990000"><b>
-Tıbbi belgeler</b></font>
+TÄ±bbi belgeler</b></font>
 <ul> 
-Bu kişinin bulunan tüm tıbbi belgelerini listeler.
+Bu kiÅŸinin bulunan tÃ¼m tÄ±bbi belgelerini listeler.
 </ul>
 
 <font color="#990000"><b>
-TİG (tümleşik)</b></font>
+TÄ°G (tÃ¼mleÅŸik)</b></font>
 <ul> 
-Bu kişinin tüm (TİG) tanı ile ilgili gruplar belgelerini listeler.
+Bu kiÅŸinin tÃ¼m (TÄ°G) tanÄ± ile ilgili gruplar belgelerini listeler.
 </ul>
 
-<font color="#990000"><b>Tetkik sonuçları</b></font>
+<font color="#990000"><b>Tetkik sonuÃ§larÄ±</b></font>
 <ul> 
-Bu kişinin tüm tetkik sonuçlarını listeler.
+Bu kiÅŸinin tÃ¼m tetkik sonuÃ§larÄ±nÄ± listeler.
 </ul>
 
-<font color="#990000"><b>Reçeteler</b></font>
+<font color="#990000"><b>ReÃ§eteler</b></font>
 <ul> 
-Bu kişinin bulunan tüm reçetelerini listeler.
+Bu kiÅŸinin bulunan tÃ¼m reÃ§etelerini listeler.
 </ul>
 
 <font color="#990000"><b>Notlar ve Raporlar</b></font>
 <ul> 
-Bu kişi ile ilgili bulunan tüm rapor ve notları listeler.
+Bu kiÅŸi ile ilgili bulunan tÃ¼m rapor ve notlarÄ± listeler.
 </ul>
 
-<font color="#990000"><b>Bağışıklama - Aşılar</b></font>
+<font color="#990000"><b>BaÄŸÄ±ÅŸÄ±klama - AÅŸÄ±lar</b></font>
 <ul> 
-Bu kişi ile ilgili bulunan tüm bağışıklama - aşı belgelerini listeler.
+Bu kiÅŸi ile ilgili bulunan tÃ¼m baÄŸÄ±ÅŸÄ±klama - aÅŸÄ± belgelerini listeler.
 </ul>
 
-<font color="#990000"><b>Ölçüler</b></font>
+<font color="#990000"><b>Ã–lÃ§Ã¼ler</b></font>
 <ul> 
-Bu kişi ile ilgili bulunan tüm ölçüm bilgilerini listeler.
+Bu kiÅŸi ile ilgili bulunan tÃ¼m Ã¶lÃ§Ã¼m bilgilerini listeler.
 </ul>
 
 
 <font color="#990000"><b>Gebelik</b></font>
 <ul> 
-Bu kişi ile ilgili bulunan tüm gebelik belgelerini listeler.
+Bu kiÅŸi ile ilgili bulunan tÃ¼m gebelik belgelerini listeler.
 </ul>
 
-<font color="#990000"><b>Doğum ayrıntıları</b></font>
+<font color="#990000"><b>DoÄŸum ayrÄ±ntÄ±larÄ±</b></font>
 <ul> 
-Bu kişi ile ilgili doğum ayrıntılarını listeler.
+Bu kiÅŸi ile ilgili doÄŸum ayrÄ±ntÄ±larÄ±nÄ± listeler.
 </ul>
 
-<font color="#990000"><b>Veri tabanı kaydı geçmişi</b></font>
+<font color="#990000"><b>Veri tabanÄ± kaydÄ± geÃ§miÅŸi</b></font>
 <ul> 
-Veri tabanındaki kaydın geçmişini gösteren açılır pencere.
+Veri tabanÄ±ndaki kaydÄ±n geÃ§miÅŸini gÃ¶steren aÃ§Ä±lÄ±r pencere.
 </ul>
 

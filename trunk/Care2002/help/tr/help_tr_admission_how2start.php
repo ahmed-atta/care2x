@@ -3,13 +3,13 @@ $foreword='
 <form action="#">
 
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Nasıl başlanır ';
+<b>NasÄ±l baÅŸlanÄ±r ';
 
 switch($x1)
 {
- 	case "giriş": print $foreword.'yeni hasta kabul'; break;
-	case "ara": print $foreword.'bir hastanın kabul bilgisini ara';break;
-	case "arşiv": print $foreword.'arşivde arama';break;
+ 	case "giriÅŸ": print $foreword.'yeni hasta kabul'; break;
+	case "ara": print $foreword.'bir hastanÄ±n kabul bilgisini ara';break;
+	case "arÅŸiv": print $foreword.'arÅŸivde arama';break;
  }
 ?>
 
@@ -17,34 +17,34 @@ switch($x1)
 // 		<?php require("help_tr_main.php"); ?>
 <?php else : ?>
 </b></font>
- <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <p>
 <font face="Verdana, Arial" size=2>
 
 <?php if($src!=$x1) : ?>
-<b>Adım 1</b>
+<b>AdÄ±m 1</b>
 <ul>  <img src="../gui/img/control/default/en/en<?php switch($x1)
 																			{
 																				case "entry": print '_admit-gray.gif'; break;
 																				case "search": print '_such-gray.gif'; break;
 																				case "archiv": print '_arch-gray.gif'; break;
 																			}
-?>" border="0"> düğmesini tıklayınız.
+?>" border="0"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 		
 </ul>
-<b>Adım 2</b>
+<b>AdÄ±m 2</b>
 <?php endif ?>
-<ul> Eğer daha önce giriş yaptı iseniz ve bu işleve erişim hakkınız var ise ,  
+<ul> EÄŸer daha Ã¶nce giriÅŸ yaptÄ± iseniz ve bu iÅŸleve eriÅŸim hakkÄ±nÄ±z var ise ,  
 <?php switch($x1)
 	{
-		case "giriş": print 'hasta kabul formu'; break;
-		case "ara": print 'ara alanı '; break;
-		case "arşiv": print 'arşiv de ara alanı'; break;
+		case "giriÅŸ": print 'hasta kabul formu'; break;
+		case "ara": print 'ara alanÄ± '; break;
+		case "arÅŸiv": print 'arÅŸiv de ara alanÄ±'; break;
 	}
-?>  ana çerçevede görüntülenecektir.<br>
-		Giriş yapmadı iseniz kullanıcı adı ve şifrenizi girmeniz istenecektir. <p>
-		Kullanıcı adı ve şifrenizi girip <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> düğmesini tıklayınız.<p>
-		Eğer iptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
+?>  ana Ã§erÃ§evede gÃ¶rÃ¼ntÃ¼lenecektir.<br>
+		GiriÅŸ yapmadÄ± iseniz kullanÄ±cÄ± adÄ± ve ÅŸifrenizi girmeniz istenecektir. <p>
+		KullanÄ±cÄ± adÄ± ve ÅŸifrenizi girip <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+		EÄŸer iptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 		
 </ul>
 

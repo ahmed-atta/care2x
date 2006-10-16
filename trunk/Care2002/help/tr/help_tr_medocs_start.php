@@ -1,18 +1,18 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Tıbbi belgeler - Yeni bir belge oluşturma</b></font>
+<b>TÄ±bbi belgeler - Yeni bir belge oluÅŸturma</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Yeni bir tıbbi belge nasıl oluşturulur?</b></font>
+Yeni bir tÄ±bbi belge nasÄ±l oluÅŸturulur?</b></font>
 <ul> 
-	<b>Adım 1: </b>Önce hastayı bulunuz.<p>
+	<b>AdÄ±m 1: </b>Ã–nce hastayÄ± bulunuz.<p>
 	
-	<b>Adım 2: </b>Hasta bulunan listede ise tıbbi belgelerini görüntülemek için  <img <?php echo createComIcon('../','statbel2.gif','0') ?>> simgesine tıklayınız.<p>
-	<b>Adım 3: </b>Yeni bir form oluşturmak için  "Yeni kayıt gir" yazısını tıklayınız.<p>
-	<b>Adım 4: </b>Varsa "Ek bilgiler" i giriniz.<p>
-	<b>Adım 5: </b>Hastanın aldığı tıbbi danışmanlıkla ilgili seçim kutusunu işaretleyiniz.<p>
-	<b>Adım 6: </b>Metin halinde tanıları yazınız.<p>
-	<b>Adım 7: </b>Metin halinde tedavileri yazınız.<p>
+	<b>AdÄ±m 2: </b>Hasta bulunan listede ise tÄ±bbi belgelerini gÃ¶rÃ¼ntÃ¼lemek iÃ§in  <img <?php echo createComIcon('../','statbel2.gif','0') ?>> simgesine tÄ±klayÄ±nÄ±z.<p>
+	<b>AdÄ±m 3: </b>Yeni bir form oluÅŸturmak iÃ§in  "Yeni kayÄ±t gir" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<p>
+	<b>AdÄ±m 4: </b>Varsa "Ek bilgiler" i giriniz.<p>
+	<b>AdÄ±m 5: </b>HastanÄ±n aldÄ±ÄŸÄ± tÄ±bbi danÄ±ÅŸmanlÄ±kla ilgili seÃ§im kutusunu iÅŸaretleyiniz.<p>
+	<b>AdÄ±m 6: </b>Metin halinde tanÄ±larÄ± yazÄ±nÄ±z.<p>
+	<b>AdÄ±m 7: </b>Metin halinde tedavileri yazÄ±nÄ±z.<p>
 </ul>
 
 

@@ -6,15 +6,15 @@ if($src=="arch")
 {
 	switch($x1)
 	{
-	case "dummy": print "Arşiv";
+	case "dummy": print "ArÅŸiv";
 						break;
-	case "": print "Arşiv";
+	case "": print "ArÅŸiv";
 						break;
-	case "?": print "Arşiv";
+	case "?": print "ArÅŸiv";
 						break;
-	case "search": print  "Arşiv arama sonuçları listesi";
+	case "search": print  "ArÅŸiv arama sonuÃ§larÄ± listesi";
 						break;
-	case "select": print "Hastanın belgesi";
+	case "select": print "HastanÄ±n belgesi";
 	}
 }
  ?></b></font>
@@ -23,146 +23,146 @@ if($src=="arch")
 
 <?php if($src=="arch") : ?>
 	<?php if(($x1=="dummy")||($x1=="?")||($x1=="")||!$x2) : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir tarihte yapılmış ameliyatların tüm belgelerini listelemek istiyorum</b></font>
-<ul> <b>Adım 1: </b>Ameliyat tarihini "<span style="background-color:yellow" > Ameliyat tarihi: </span>" alanına giriniz. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir tarihte yapÄ±lmÄ±ÅŸ ameliyatlarÄ±n tÃ¼m belgelerini listelemek istiyorum</b></font>
+<ul> <b>AdÄ±m 1: </b>Ameliyat tarihini "<span style="background-color:yellow" > Ameliyat tarihi: </span>" alanÄ±na giriniz. <br>
 		<ul><font size=1 color="#000099">
-		<!-- <b>İpucu:</b> Bugünkü tarihin otomatik yazılması için "T" veya "t" giriniz.<br>
-		<b>İpucu:</b> Dünkü tarihin otomatik yazılması için "Y" veya "y" giriniz.<br> -->
+		<!-- <b>Ä°pucu:</b> BugÃ¼nkÃ¼ tarihin otomatik yazÄ±lmasÄ± iÃ§in "T" veya "t" giriniz.<br>
+		<b>Ä°pucu:</b> DÃ¼nkÃ¼ tarihin otomatik yazÄ±lmasÄ± iÃ§in "Y" veya "y" giriniz.<br> -->
 		</font>
-		</ul><b>Adım 2: </b>Tüm diğer alanları boş bırakınız.<br>
-		<b>Adım 3: </b>Aramayı başlatmak için  <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düğmesini tıklayınız.<br>
+		</ul><b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
+		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in  <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir hastanın tüm ameliyathane belgelerini listelemek istiyorum. </b></font>
-<ul> <b>Adım 1: </b>İlgili alana anahtar sözcüğü giriniz. Hastanın kişisel bilgisinden tam bir sözcük, cümle veya ilk birkaç harfi olabilir. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir hastanÄ±n tÃ¼m ameliyathane belgelerini listelemek istiyorum. </b></font>
+<ul> <b>AdÄ±m 1: </b>Ä°lgili alana anahtar sÃ¶zcÃ¼ÄŸÃ¼ giriniz. HastanÄ±n kiÅŸisel bilgisinden tam bir sÃ¶zcÃ¼k, cÃ¼mle veya ilk birkaÃ§ harfi olabilir. <br>
 		<ul><font size=1 color="#000099" >
-		<b>Aşağıdaki alanlar bir anahtar sözcük ile doldurulabilir:</b>
-		<br> Hasta numarası.
+		<b>AÅŸaÄŸÄ±daki alanlar bir anahtar sÃ¶zcÃ¼k ile doldurulabilir:</b>
+		<br> Hasta numarasÄ±.
 		<br> Soyad
 		<br> Ad
-		<br> Doğum tarihi
+		<br> DoÄŸum tarihi
 		</font>
-		</ul><b>Adım 2: </b>Tüm diğer alanları boş bırakınız.<br>
-		<b>Adım 3: </b>Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düğmesini tıklayınız.<br>
+		</ul><b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
+		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir cerrahın tüm ameliyathane belgelerini listelemek istiyorum.</b></font>
-<ul> <b>Adım 1: </b>Cerrahın ismini "<span style="background-color:yellow" > Cerrah: </span>" alanına giriniz. <br>
-		<b>Adım 2: </b>Tüm diğer alanları boş bırakınız.<br>
-		<b>Adım 3: </b>Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düğmesini tıklayınız.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir cerrahÄ±n tÃ¼m ameliyathane belgelerini listelemek istiyorum.</b></font>
+<ul> <b>AdÄ±m 1: </b>CerrahÄ±n ismini "<span style="background-color:yellow" > Cerrah: </span>" alanÄ±na giriniz. <br>
+		<b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
+		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Poliklinik hastalarının tüm ameliyathane belgelerini listelemek istiyorum </b></font>
-<ul> <b>Adım 1: </b> "<span style="background-color:yellow" >Poliklinik <input type="radio" name="r" value="1"></span>" seçim kutusunu tıklayınız. <br>
-		<b>Adım 2: </b>Tüm diğer alanları boş bırakınız.<br>
-		<b>Adım 3: </b>Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düğmesini tıklayınız.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Poliklinik hastalarÄ±nÄ±n tÃ¼m ameliyathane belgelerini listelemek istiyorum </b></font>
+<ul> <b>AdÄ±m 1: </b> "<span style="background-color:yellow" >Poliklinik <input type="radio" name="r" value="1"></span>" seÃ§im kutusunu tÄ±klayÄ±nÄ±z. <br>
+		<b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
+		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Yatan hastaların tüm ameliyathane belgelerini listelemek istiyorum </b></font>
-<ul> <b>Adım 1: </b> "<span style="background-color:yellow" >Yatan hasta <input type="radio" name="r" value="1"></span>" seçim kutusunu tıklayınız. <br>
-		<b>Adım 2: </b>Tüm diğer alanları boş bırakınız.<br>
-		<b>Adım 3: </b>Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düğmesini tıklayınız.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Yatan hastalarÄ±n tÃ¼m ameliyathane belgelerini listelemek istiyorum </b></font>
+<ul> <b>AdÄ±m 1: </b> "<span style="background-color:yellow" >Yatan hasta <input type="radio" name="r" value="1"></span>" seÃ§im kutusunu tÄ±klayÄ±nÄ±z. <br>
+		<b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
+		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Genel sağlık sigortasına bağlı hastaların tüm ameliyathane belgelerini listelemek istiyorum </b></font>
-<ul> <b>Adım 1: </b> "<span style="background-color:yellow" >Genel sağlık sigortası <input type="radio" name="r" value="1"></span>" seçim kutusunu tıklayınız. <br>
-		<b>Adım 2: </b>Tüm diğer alanları boş bırakınız.<br>
-		<b>Adım 3: </b>Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düğmesini tıklayınız.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Genel saÄŸlÄ±k sigortasÄ±na baÄŸlÄ± hastalarÄ±n tÃ¼m ameliyathane belgelerini listelemek istiyorum </b></font>
+<ul> <b>AdÄ±m 1: </b> "<span style="background-color:yellow" >Genel saÄŸlÄ±k sigortasÄ± <input type="radio" name="r" value="1"></span>" seÃ§im kutusunu tÄ±klayÄ±nÄ±z. <br>
+		<b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
+		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Özel sigortalı hastaların tüm ameliyathane belgelerini görmek istiyorum </b></font>
-<ul> <b>Adım 1: </b> "<span style="background-color:yellow" >Özel <input type="radio" name="r" value="1"></span>" seçim kutusunu tıklayınız. <br>
-		<b>Adım 2: </b>Tüm diğer alanları boş bırakınız.<br>
-		<b>Adım 3: </b>Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düğmesini tıklayınız.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ã–zel sigortalÄ± hastalarÄ±n tÃ¼m ameliyathane belgelerini gÃ¶rmek istiyorum </b></font>
+<ul> <b>AdÄ±m 1: </b> "<span style="background-color:yellow" >Ã–zel <input type="radio" name="r" value="1"></span>" seÃ§im kutusunu tÄ±klayÄ±nÄ±z. <br>
+		<b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
+		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ücretli hastaların tüm ameliyathane belgelerini listelemek istiyorum </b></font>
-<ul> <b>Adım 1: </b> "<span style="background-color:yellow" >Ücretli<input type="radio" name="r" value="1"></span>" seçim kutusunu tıklayınız. <br>
-		<b>Adım 2: </b>Tüm diğer alanları boş bırakınız.<br>
-		<b>Adım 3: </b>Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düğmesini tıklayınız.
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ãœcretli hastalarÄ±n tÃ¼m ameliyathane belgelerini listelemek istiyorum </b></font>
+<ul> <b>AdÄ±m 1: </b> "<span style="background-color:yellow" >Ãœcretli<input type="radio" name="r" value="1"></span>" seÃ§im kutusunu tÄ±klayÄ±nÄ±z. <br>
+		<b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
+		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir anahtar sözcük ile tüm ameliyathane belgelerini listelemek istiyorum.</b></font>
-<ul> <b>Adım 1: </b>Anahtar sözcüğü ilgili alana giriniz. Tam bir sözcük, cümle veya bir sözcüğün ilk bir kaç harfi olabilir. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir anahtar sÃ¶zcÃ¼k ile tÃ¼m ameliyathane belgelerini listelemek istiyorum.</b></font>
+<ul> <b>AdÄ±m 1: </b>Anahtar sÃ¶zcÃ¼ÄŸÃ¼ ilgili alana giriniz. Tam bir sÃ¶zcÃ¼k, cÃ¼mle veya bir sÃ¶zcÃ¼ÄŸÃ¼n ilk bir kaÃ§ harfi olabilir. <br>
 		<ul><font size=2 color="#000099" >
-		<b>Örnek:</b> Tanı ile ilgili anahtar sözcüğü "Tanı" alanına giriniz.<br>
-		<b>Örnek:</b> Yeri ile ilgili anahtar sözcüğü  "Yeri" alanına giriniz.<br>
-		<b>Örnek:</b> Tedavi ile ilgili anahtar sözcüğü "Tedavi" alanına giriniz.<br>
-		<b>Örnek:</b> Özel uyarı ile ilgili anahtar sözcüğü  "Özel uyarı" alanına giriniz.<br>
+		<b>Ã–rnek:</b> TanÄ± ile ilgili anahtar sÃ¶zcÃ¼ÄŸÃ¼ "TanÄ±" alanÄ±na giriniz.<br>
+		<b>Ã–rnek:</b> Yeri ile ilgili anahtar sÃ¶zcÃ¼ÄŸÃ¼  "Yeri" alanÄ±na giriniz.<br>
+		<b>Ã–rnek:</b> Tedavi ile ilgili anahtar sÃ¶zcÃ¼ÄŸÃ¼ "Tedavi" alanÄ±na giriniz.<br>
+		<b>Ã–rnek:</b> Ã–zel uyarÄ± ile ilgili anahtar sÃ¶zcÃ¼ÄŸÃ¼  "Ã–zel uyarÄ±" alanÄ±na giriniz.<br>
 		</font>
-		</ul><b>Adım 2: </b>Tüm diğer alanları boş bırakınız.<br>
-		<b>Adım 3: </b>Aramayı başlatmak için  <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düğmesini tıklayınız.<br>
+		</ul><b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
+		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in  <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir ameliyat sınıfı içeren tüm belgeleri listelemek istiyorum</b></font>
-<ul> <b>Adım 1: </b>İlgili alana anahtar sözcüğü giriniz. Tam bir sözcük, cümle, veya bir sözcüğün ilk birkaç harfi olabilir. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir ameliyat sÄ±nÄ±fÄ± iÃ§eren tÃ¼m belgeleri listelemek istiyorum</b></font>
+<ul> <b>AdÄ±m 1: </b>Ä°lgili alana anahtar sÃ¶zcÃ¼ÄŸÃ¼ giriniz. Tam bir sÃ¶zcÃ¼k, cÃ¼mle, veya bir sÃ¶zcÃ¼ÄŸÃ¼n ilk birkaÃ§ harfi olabilir. <br>
 		<ul><font size=2 color="#000099" >
-		<b>Örnek:</b> Küçük ameliyat için sayıyı  "<span style="background-color:yellow" > <input type="text" name="m" size=4 maxlength=2> küçük </span>" alanına giriniz.<br>
-		<b>Örnek:</b> Orta ameliyat için sayıyı  "<span style="background-color:yellow" > <input type="text" name="m" size=4 maxlength=2> orta </span>" alanına giriniz.<br>
-		<b>Örnek:</b> Büyük ameliyat için sayıyı  "<span style="background-color:yellow" > <input type="text" name="m" size=4 maxlength=2> büyük </span>" alanına giriniz.<br>
+		<b>Ã–rnek:</b> KÃ¼Ã§Ã¼k ameliyat iÃ§in sayÄ±yÄ±  "<span style="background-color:yellow" > <input type="text" name="m" size=4 maxlength=2> kÃ¼Ã§Ã¼k </span>" alanÄ±na giriniz.<br>
+		<b>Ã–rnek:</b> Orta ameliyat iÃ§in sayÄ±yÄ±  "<span style="background-color:yellow" > <input type="text" name="m" size=4 maxlength=2> orta </span>" alanÄ±na giriniz.<br>
+		<b>Ã–rnek:</b> BÃ¼yÃ¼k ameliyat iÃ§in sayÄ±yÄ±  "<span style="background-color:yellow" > <input type="text" name="m" size=4 maxlength=2> bÃ¼yÃ¼k </span>" alanÄ±na giriniz.<br>
 		</font>
-		</ul><b>Adım 2: </b>Tüm diğer alanları boş bırakınız.<br>
-		<b>Adım 3: </b>Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düğmesini tıklayınız.<br>
+		</ul><b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
+		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>><b><font color="#990000"> Uyarı:</font></b>
-<ul> Birkaç arama koşulunu birleştirebilirsiniz. Örneğin cerrah "Gürlek" tarafından ameliyat edilmiş ve tedavisi "lipo" ile başlayan bir sözcük içeren tüm yatan hastaları listelemek isterseniz:<p>
-		<b>Adım 1: </b> "<span style="background-color:yellow" > Cerrah: <input type="text" name="s" size=15 maxlength=4 value="Gürlek"> </span>" alanına "Gürlek" giriniz.<br>
-		<b>Adım 2: </b>"<span style="background-color:yellow" > <input type="radio" name="r" value="1" checked>Yatan hasta </span>" seçim kutusunu tıklayınız.<br>
-		<b>Adım 3: </b>"<span style="background-color:yellow" > Tedavi: <input type="text" name="s" size=20 maxlength=4 value="lipo"> </span>" alanına "lipo" giriniz. <br>
-		<b>Adım 4: </b>Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düğmesini tıklayınız.<p>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>><b><font color="#990000"> UyarÄ±:</font></b>
+<ul> BirkaÃ§ arama koÅŸulunu birleÅŸtirebilirsiniz. Ã–rneÄŸin cerrah "GÃ¼rlek" tarafÄ±ndan ameliyat edilmiÅŸ ve tedavisi "lipo" ile baÅŸlayan bir sÃ¶zcÃ¼k iÃ§eren tÃ¼m yatan hastalarÄ± listelemek isterseniz:<p>
+		<b>AdÄ±m 1: </b> "<span style="background-color:yellow" > Cerrah: <input type="text" name="s" size=15 maxlength=4 value="GÃ¼rlek"> </span>" alanÄ±na "GÃ¼rlek" giriniz.<br>
+		<b>AdÄ±m 2: </b>"<span style="background-color:yellow" > <input type="radio" name="r" value="1" checked>Yatan hasta </span>" seÃ§im kutusunu tÄ±klayÄ±nÄ±z.<br>
+		<b>AdÄ±m 3: </b>"<span style="background-color:yellow" > Tedavi: <input type="text" name="s" size=20 maxlength=4 value="lipo"> </span>" alanÄ±na "lipo" giriniz. <br>
+		<b>AdÄ±m 4: </b>AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 
-<b>Uyarı</b><br>
-Eğer arama bir tek sonuç bulur ise, belgenin tamamı derhal görüntülenir.<br>
-		Ancak eğer arama birkaç sonuç bulur ise bir liste görüntülenir.<p>
-		Aradığınız hastanın belgesini açmak için, ya ilgili  <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> düğmesini, veya ad, veya soyad, veya tarih veya ameliyat numarasını <nobr>(op nr)</nobr> tıklayınız.
+<b>UyarÄ±</b><br>
+EÄŸer arama bir tek sonuÃ§ bulur ise, belgenin tamamÄ± derhal gÃ¶rÃ¼ntÃ¼lenir.<br>
+		Ancak eÄŸer arama birkaÃ§ sonuÃ§ bulur ise bir liste gÃ¶rÃ¼ntÃ¼lenir.<p>
+		AradÄ±ÄŸÄ±nÄ±z hastanÄ±n belgesini aÃ§mak iÃ§in, ya ilgili  <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> dÃ¼ÄŸmesini, veya ad, veya soyad, veya tarih veya ameliyat numarasÄ±nÄ± <nobr>(op nr)</nobr> tÄ±klayÄ±nÄ±z.
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
 <ul>       	
- Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
+ Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 	<?php endif ?>
 <?php if(($x1=="search"||$x1='paginate')&&($x2>0)) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Arşivdeki belirli bir belge görüntülenmek üzere nasıl seçilir?</b>
+ArÅŸivdeki belirli bir belge gÃ¶rÃ¼ntÃ¼lenmek Ã¼zere nasÄ±l seÃ§ilir?</b>
 </font>
 <ul>       	
- 	<b>Uyarı: </b> Arşivdeki belgeyi görüntülemek için hastanın adını, veya soyadını, veya ameliyat tarihini, veya ameliyat numarasını tıklayınız.<p> 
+ 	<b>UyarÄ±: </b> ArÅŸivdeki belgeyi gÃ¶rÃ¼ntÃ¼lemek iÃ§in hastanÄ±n adÄ±nÄ±, veya soyadÄ±nÄ±, veya ameliyat tarihini, veya ameliyat numarasÄ±nÄ± tÄ±klayÄ±nÄ±z.<p> 
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Liste nasıl sıralanır?</b>
+Liste nasÄ±l sÄ±ralanÄ±r?</b>
 </font>
 <ul>       	
- 	<b>Uyarı: </b> Listenin sıralanmasını istediğiniz sütunun başlığını tıklayınız.<p> 
-	Örnek: Listeyi ameliyat tarihine göre sıralamak ister iseniz "Ameliyat tarihi" başlığını tıklayınız.  <br>Tekrar tıkladığınızda sıralama tersine döner:<p>
+ 	<b>UyarÄ±: </b> Listenin sÄ±ralanmasÄ±nÄ± istediÄŸiniz sÃ¼tunun baÅŸlÄ±ÄŸÄ±nÄ± tÄ±klayÄ±nÄ±z.<p> 
+	Ã–rnek: Listeyi ameliyat tarihine gÃ¶re sÄ±ralamak ister iseniz "Ameliyat tarihi" baÅŸlÄ±ÄŸÄ±nÄ± tÄ±klayÄ±nÄ±z.  <br>Tekrar tÄ±kladÄ±ÄŸÄ±nÄ±zda sÄ±ralama tersine dÃ¶ner:<p>
 	<blockquote>
 	<img src='../help/tr/img/tr_or_search_sort.png'>
 	</blockquote>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Arşivde aramaya nasıl devam edilir?</b>
+ArÅŸivde aramaya nasÄ±l devam edilir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Arşivde arama alanlarına geri itmek için  <input type="button" value="New archive research"> düğmesini tıklayınız.<p> 
+ 	<b>AdÄ±m 1: </b>ArÅŸivde arama alanlarÄ±na geri itmek iÃ§in  <input type="button" value="New archive research"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p> 
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
 <ul>       	
- Kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
+ Kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 	<?php endif ?>
 <?php if(($x1=="select"||$x1='paginate')&&($x2==1)) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Görüntülenen arşiv belgesi nasıl düzenlenir veya güncellenir?</b>
+GÃ¶rÃ¼ntÃ¼lenen arÅŸiv belgesi nasÄ±l dÃ¼zenlenir veya gÃ¼ncellenir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Düzenleme moduna geçmek için  <input type="button" value="Bilgiyi güncelle"> düğmesini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b>DÃ¼zenleme moduna geÃ§mek iÃ§in  <input type="button" value="Bilgiyi gÃ¼ncelle"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Arşivlerde aramaya nasıl devam edilir?</b>
+ArÅŸivlerde aramaya nasÄ±l devam edilir?</b>
 </font>
 <ul>       	
- 	<b>Yöntem 1: </b>Arşivin arama giriş alanlarına geri gitmek için <input type="button" value="Yeni arşiv araması"> düğmesini tıklayınız.<p> 
- 	<b>Veya Yöntem 2: </b>Arşivin giriş alanlarına geri gitmek için <img <?php echo createLDImgSrc('../','arch-blu.gif','0','absmiddle') ?>> düğmesini tıklayınız.<p> 
+ 	<b>YÃ¶ntem 1: </b>ArÅŸivin arama giriÅŸ alanlarÄ±na geri gitmek iÃ§in <input type="button" value="Yeni arÅŸiv aramasÄ±"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p> 
+ 	<b>Veya YÃ¶ntem 2: </b>ArÅŸivin giriÅŸ alanlarÄ±na geri gitmek iÃ§in <img <?php echo createLDImgSrc('../','arch-blu.gif','0','absmiddle') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p> 
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
 <ul>       	
- Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
+ Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 <?php endif ?>

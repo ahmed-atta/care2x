@@ -1,31 +1,31 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Doktorlar listesi oluşturmak veya düzenlemek</b></font>
+<b>Doktorlar listesi oluÅŸturmak veya dÃ¼zenlemek</b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Listeye bir doktor nasıl eklenir?</b></font>
+Listeye bir doktor nasÄ±l eklenir?</b></font>
 <ul> 
-<b>Adım 1: </b>Önce arama işlevi ile doktoru bulunuz.<p>
-<b>Adım 2: </b>Eğer doktor listede ise, <img <?php echo createLDImgSrc('../','add2list_sm.gif','0') ?>> düğmesini tıklayınız.<p>
+<b>AdÄ±m 1: </b>Ã–nce arama iÅŸlevi ile doktoru bulunuz.<p>
+<b>AdÄ±m 2: </b>EÄŸer doktor listede ise, <img <?php echo createLDImgSrc('../','add2list_sm.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Görüntülenen bölüm yanlış. Bölümü düzeltmek istiyorum.</b></font>
-<ul> <b>Adım 1: </b>Bölümü <nobr>"<span style="background-color:yellow" >Bölümü değiştir: </span><select name="s">
-                                                                     	<option value="Sample department 1" selected> Örnek bölüm 1</option>
-                                                                     	<option value="Sample department 2"> Örnek bölüm 2</option>
-                                                                     	<option value="Sample department 3"> Örnek bölüm 3</option>
-                                                                     	<option value="Sample department 4"> Örnek bölüm 4</option>
-                                                                     </select>"</nobr> alanından seçiniz.
+GÃ¶rÃ¼ntÃ¼lenen bÃ¶lÃ¼m yanlÄ±ÅŸ. BÃ¶lÃ¼mÃ¼ dÃ¼zeltmek istiyorum.</b></font>
+<ul> <b>AdÄ±m 1: </b>BÃ¶lÃ¼mÃ¼ <nobr>"<span style="background-color:yellow" >BÃ¶lÃ¼mÃ¼ deÄŸiÅŸtir: </span><select name="s">
+                                                                     	<option value="Sample department 1" selected> Ã–rnek bÃ¶lÃ¼m 1</option>
+                                                                     	<option value="Sample department 2"> Ã–rnek bÃ¶lÃ¼m 2</option>
+                                                                     	<option value="Sample department 3"> Ã–rnek bÃ¶lÃ¼m 3</option>
+                                                                     	<option value="Sample department 4"> Ã–rnek bÃ¶lÃ¼m 4</option>
+                                                                     </select>"</nobr> alanÄ±ndan seÃ§iniz.
                                                                      <br>
-		<b>Adım 2: </b>Seçilen bölüme değiştirmek için  <input type="button" value="Değiştir"> düğmesini tıklayınız.
+		<b>AdÄ±m 2: </b>SeÃ§ilen bÃ¶lÃ¼me deÄŸiÅŸtirmek iÃ§in  <input type="button" value="DeÄŸiÅŸtir"> dÃ¼ÄŸmesiniÂ tÄ±klayÄ±nÄ±z.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Listeden bir doktoru silmek istiyorum.</b></font>
 <ul> 
-<b>Adım 1: </b> İlgili <img <?php echo createComIcon('../','delete2.gif','0') ?>> simgesini tıklayınız.<p>
-<b>Adım 2: </b> Sileceğinizden emin iseniz "Tamam" ı tıklatınız, yoksa "iptal" i tıklayarak silmeyi iptal ediniz.
+<b>AdÄ±m 1: </b> Ä°lgili <img <?php echo createComIcon('../','delete2.gif','0') ?>> simgesini tÄ±klayÄ±nÄ±z.<p>
+<b>AdÄ±m 2: </b> SileceÄŸinizden emin iseniz "Tamam" Ä± tÄ±klatÄ±nÄ±z, yoksa "iptal" i tÄ±klayarak silmeyi iptal ediniz.
 </ul>
 
 </form>

@@ -7,50 +7,50 @@
 if(!$src){
 ?>
 <a name="sday"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Hastanın etiketi eklenmemiş. Ne yapmalıyım?</b></font>
+HastanÄ±n etiketi eklenmemiÅŸ. Ne yapmalÄ±yÄ±m?</b></font>
 <ul> 
-	<b>Adım 1: </b>Bir hastanın ad, soyad, veya protokol numarası bilgisinin tamamını ya da birkaç harf giriniz.
-		<p>Örnek 1: "21000012" veya "12" giriniz.
-		<br>Örnek 2: "Potur" veya "pot" giriniz.
-		<br>Örnek 3: "Bülent" veya "Bül" giriniz.<p>
-	<b>Adım 2: </b>Aramayı başlatmak için<img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düğmesini tıklayınız. <p>
-	<b>Adım 3: </b> Eğer arama bir sonuç bulur ise, listeden doğru kişiyi seçmek için 
-	 <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m 1: </b>Bir hastanÄ±n ad, soyad, veya protokol numarasÄ± bilgisinin tamamÄ±nÄ± ya da birkaÃ§ harf giriniz.
+		<p>Ã–rnek 1: "21000012" veya "12" giriniz.
+		<br>Ã–rnek 2: "Potur" veya "pot" giriniz.
+		<br>Ã–rnek 3: "BÃ¼lent" veya "BÃ¼l" giriniz.<p>
+	<b>AdÄ±m 2: </b>AramayÄ± baÅŸlatmak iÃ§in<img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <p>
+	<b>AdÄ±m 3: </b> EÄŸer arama bir sonuÃ§ bulur ise, listeden doÄŸru kiÅŸiyi seÃ§mek iÃ§in 
+	 <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 <?php
 }else{
 ?>
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tetkik parametresi nasıl seçilir?</b></font>
+Tetkik parametresi nasÄ±l seÃ§ilir?</b></font>
 <ul> 
-	<b>Adım: </b>Parametrenin yanındaki küçük pembe kutuyu tıklatıp "karartınız".<p>
+	<b>AdÄ±m: </b>Parametrenin yanÄ±ndaki kÃ¼Ã§Ã¼k pembe kutuyu tÄ±klatÄ±p "karartÄ±nÄ±z".<p>
 	<img src="../help/tr/img/tr_request_chemlab.png" border=0 width=352 height=125>
 </ul>
 
 <a name="usel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bir parametre seçimden nasıl çıkarılır?</b></font>
+Bir parametre seÃ§imden nasÄ±l Ã§Ä±karÄ±lÄ±r?</b></font>
 <ul> 
-	<b>Adım: </b>Parametrenin yanındaki "karartılmış" kutuya tekrar tıklayıp "rengini açabilir" siniz. <br>
+	<b>AdÄ±m: </b>Parametrenin yanÄ±ndaki "karartÄ±lmÄ±ÅŸ" kutuya tekrar tÄ±klayÄ±p "rengini aÃ§abilir" siniz. <br>
 </ul>
 
 <a name="sday"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Örnek alma günü nasıl seçilir?</b></font>
+Ã–rnek alma gÃ¼nÃ¼ nasÄ±l seÃ§ilir?</b></font>
 <ul> 
-	<b>Adım: </b>Günün altındaki küçük pembe kutuyu tıklayıp "karartınız".<p>
+	<b>AdÄ±m: </b>GÃ¼nÃ¼n altÄ±ndaki kÃ¼Ã§Ã¼k pembe kutuyu tÄ±klayÄ±p "karartÄ±nÄ±z".<p>
 <img src="../help/tr/img/tr_request_chemlab_sday.png" border=0 width=325 height=120>
 </ul>
 
 <a name="stime"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Örnek alma saati nasıl seçilir?</b></font>
+Ã–rnek alma saati nasÄ±l seÃ§ilir?</b></font>
 <ul> 
-	<b>Adım: </b>Saat ve dakikanın altındaki küçük pembe kutuyu tıklayıp "karartınız".<p>
+	<b>AdÄ±m: </b>Saat ve dakikanÄ±n altÄ±ndaki kÃ¼Ã§Ã¼k pembe kutuyu tÄ±klayÄ±p "karartÄ±nÄ±z".<p>
 <img src="../help/tr/img/tr_request_chemlab_stime.png" border=0 width=325 height=120>
 </ul>
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tetkik istemi nasıl gönderilir?</b></font>
+Tetkik istemi nasÄ±l gÃ¶nderilir?</b></font>
 <ul> 
-	<b>Adım: </b><img <?php echo createLDImgSrc('../','abschic.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m: </b><img <?php echo createLDImgSrc('../','abschic.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 <?php

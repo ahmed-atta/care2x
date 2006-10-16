@@ -1,12 +1,12 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Ameliyathane yönetimi</b></font>
+<b>Ameliyathane yÃ¶netimi</b></font>
 <p>
 
 <form>
 <font size=2 face="verdana,arial" >
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"></a>
-<b>Ameliyathane bilgisi nasıl güncellenir veya değiştirilir?</b></font>
+<b>Ameliyathane bilgisi nasÄ±l gÃ¼ncellenir veya deÄŸiÅŸtirilir?</b></font>
 <ul> 
-	<b>Adım:</b>  <input type="button" value="Güncelle veya düzenle"> düğmesini tıklayınız. Bilgi düzenlemek için bir form açılır.
+	<b>AdÄ±m:</b>  <input type="button" value="GÃ¼ncelle veya dÃ¼zenle"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. Bilgi dÃ¼zenlemek iÃ§in bir form aÃ§Ä±lÄ±r.
 </ul>
 </form>

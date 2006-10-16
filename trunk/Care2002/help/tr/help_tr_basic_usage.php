@@ -1,41 +1,41 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 </head>
 <body>
-<font face="Verdana, Arial" size=3 color="maroon"><b>Temel kullanım</b></font>
+<font face="Verdana, Arial" size=3 color="maroon"><b>Temel kullanÄ±m</b></font>
 <p>
 <font face="Verdana, Arial" size=2>
-Care 2X % 100 internet tarayıcı tabanlıdır. Onu internette dolaşırcasına kullanabilirsiniz.<br>
-Görüldüğü gibi ana pencere üç büyük bloğa bölünmüştür:
+Care 2X % 100 internet tarayÄ±cÄ± tabanlÄ±dÄ±r. Onu internette dolaÅŸÄ±rcasÄ±na kullanabilirsiniz.<br>
+GÃ¶rÃ¼ldÃ¼ÄŸÃ¼ gibi ana pencere Ã¼Ã§ bÃ¼yÃ¼k bloÄŸa bÃ¶lÃ¼nmÃ¼ÅŸtÃ¼r:
 <blockquote>
-<li>Blok A = Ana menü. Her iş burada başlar.
-<li>Blok B = Çalışma alanı.
-<li>Blok C = Modülün veya işlevin ismi ve işlevsel düğmeler.
+<li>Blok A = Ana menÃ¼. Her iÅŸ burada baÅŸlar.
+<li>Blok B = Ã‡alÄ±ÅŸma alanÄ±.
+<li>Blok C = ModÃ¼lÃ¼n veya iÅŸlevin ismi ve iÅŸlevsel dÃ¼ÄŸmeler.
 <p>
 <img src="img/tr_mainframe.png">
 </blockquote>
 
-<b>Bir işlevin başlatılması</b><p>
+<b>Bir iÅŸlevin baÅŸlatÄ±lmasÄ±</b><p>
 <blockquote>
-Basitçe işlevin ismini tıklayınız<br>
+BasitÃ§e iÅŸlevin ismini tÄ±klayÄ±nÄ±z<br>
 <img src="img/tr_linkclick.png">
 </blockquote>
 
-<b>Çalışma dilinin seçimi</b><p>
+<b>Ã‡alÄ±ÅŸma dilinin seÃ§imi</b><p>
 <blockquote>
-<li>Ana menünün en alt kısmındaki dil seçimi kutusunu tıklayınız.
-<li>Seçtiğiniz dili tıklayınız.
-<li>"Değiştir" düğmesini tıklayınız.
+<li>Ana menÃ¼nÃ¼n en alt kÄ±smÄ±ndaki dil seÃ§imi kutusunu tÄ±klayÄ±nÄ±z.
+<li>SeÃ§tiÄŸiniz dili tÄ±klayÄ±nÄ±z.
+<li>"DeÄŸiÅŸtir" dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 <img src="img/tr_lang_select.png">
 </blockquote>
 
-<b>Kendinizi tanıtma</b><p>
+<b>Kendinizi tanÄ±tma</b><p>
 <blockquote>
-<li>Kullanıcı adınızı giriniz.
-<li>Şifrenizi giriniz.
-<li>"Devam..." düğmesini tıklayınız.<p>
+<li>KullanÄ±cÄ± adÄ±nÄ±zÄ± giriniz.
+<li>Åifrenizi giriniz.
+<li>"Devam..." dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 <img src="img/tr_login.png">
 </blockquote>
 </font>

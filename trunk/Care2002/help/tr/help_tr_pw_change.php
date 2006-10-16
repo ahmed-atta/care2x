@@ -1,16 +1,16 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Şifre değişimi</b></font>
+<b>Åifre deÄŸiÅŸimi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 <form>
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Şifremi nasıl değiştiririm?</b></font>
+Åifremi nasÄ±l deÄŸiÅŸtiririm?</b></font>
 <ul> 
-	<b>Adım 1: </b>Kullanıcı adınızı  "Kullanıcı giriş adı:" alanına yazınız.<p>
-	<b>Adım 2: </b>Güncel şifrenizi "Şifre:" alanına yazınız.<p>
-	<b>Adım 3: </b>Yeni şifrenizi "Şimdi seçtiğiniz yeni şifreyi yazınız:" alanına yazınız.<p>
-	<b>Adım 4: </b>Yeni şifrenizi "Yeni şifreyi tekrar yazınız:" alanına tekrar yazınız.<p>
-	<b>Adım 5: </b><input type="button" value="Şifreyi değiştir"> düğmesini tıklayınız.
+	<b>AdÄ±m 1: </b>KullanÄ±cÄ± adÄ±nÄ±zÄ±  "KullanÄ±cÄ± giriÅŸ adÄ±:" alanÄ±na yazÄ±nÄ±z.<p>
+	<b>AdÄ±m 2: </b>GÃ¼ncel ÅŸifrenizi "Åifre:" alanÄ±na yazÄ±nÄ±z.<p>
+	<b>AdÄ±m 3: </b>Yeni ÅŸifrenizi "Åimdi seÃ§tiÄŸiniz yeni ÅŸifreyi yazÄ±nÄ±z:" alanÄ±na yazÄ±nÄ±z.<p>
+	<b>AdÄ±m 4: </b>Yeni ÅŸifrenizi "Yeni ÅŸifreyi tekrar yazÄ±nÄ±z:" alanÄ±na tekrar yazÄ±nÄ±z.<p>
+	<b>AdÄ±m 5: </b><input type="button" value="Åifreyi deÄŸiÅŸtir"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 </form>
 

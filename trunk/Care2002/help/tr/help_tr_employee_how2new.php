@@ -1,50 +1,50 @@
-<font face="Verdana, Arial" size=3 color="#0000cc"><b>Personnel yönetimi</b></font><p>
+<font face="Verdana, Arial" size=3 color="#0000cc"><b>Personnel yÃ¶netimi</b></font><p>
 <?php 
 if(!$src&&!$x1){
 ?>
 <font size=2 face="verdana,arial" >
-<b>Bir kişi nasıl işe alınır</b></font>
+<b>Bir kiÅŸi nasÄ±l iÅŸe alÄ±nÄ±r</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<b>Adım 1</b>
+<b>AdÄ±m 1</b>
 
 <ul> 
-<font color=#ff0000>Kişinin temel bilgilerinin önceden bulunup bulunmadığını kontrol ediniz</font>.<p>
-		 Bir hastanın ad, soyad gibi bilgilerinden ya tamamını ya da birkaç harfini veya TC kimlik numarasını giriniz.
-		<p>Örnek 1: "21000012" veya "12" giriniz.
-		<br>Örnek 2:  "Potur" veya "pot" giriniz.
-		<br>Örnek 3: "Bülent" veya "Bül" giriniz.
+<font color=#ff0000>KiÅŸinin temel bilgilerinin Ã¶nceden bulunup bulunmadÄ±ÄŸÄ±nÄ± kontrol ediniz</font>.<p>
+		 Bir hastanÄ±n ad, soyad gibi bilgilerinden ya tamamÄ±nÄ± ya da birkaÃ§ harfini veya TC kimlik numarasÄ±nÄ± giriniz.
+		<p>Ã–rnek 1: "21000012" veya "12" giriniz.
+		<br>Ã–rnek 2:  "Potur" veya "pot" giriniz.
+		<br>Ã–rnek 3: "BÃ¼lent" veya "BÃ¼l" giriniz.
 		
 </ul>
 
-<b>Adım 2</b>
-<ul> Aramaya başlamak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düğmesini tıklayınız. 
+<b>AdÄ±m 2</b>
+<ul> Aramaya baÅŸlamak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. 
 </ul>
 
-<b>Adım 3</b>
-<ul> Arama sonunda hiç kimse bulunamaz ise, önce kişi kaydını girmek gerekir.  <img <?php echo createLDImgSrc('../','register_gray.gif','0') ?>>  düğmesine tıklayınız ve kişi kaydı için gereken yönergeleri izleyiniz.
+<b>AdÄ±m 3</b>
+<ul> Arama sonunda hiÃ§ kimse bulunamaz ise, Ã¶nce kiÅŸi kaydÄ±nÄ± girmek gerekir.  <img <?php echo createLDImgSrc('../','register_gray.gif','0') ?>>  dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z ve kiÅŸi kaydÄ± iÃ§in gereken yÃ¶nergeleri izleyiniz.
 </ul>
-<b>Adım 4</b>
-<ul> Eğer araştırma bir sonuç bulur ise yanındaki <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> düğmesini tıklayarak listeden doğru kişiyi seçiniz.
+<b>AdÄ±m 4</b>
+<ul> EÄŸer araÅŸtÄ±rma bir sonuÃ§ bulur ise yanÄ±ndaki <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayarak listeden doÄŸru kiÅŸiyi seÃ§iniz.
 </ul>
-<b>Adım 5</b>
-<ul> İşe alma formu görüntülenince, iş ile ilgili tüm bilgileri giriniz.<p>
-		<img <?php echo createComIcon('../','warn.gif','0') ?>> Uyarı: Eğer bir kişi halen çalışmakta ise, onun bilgileri görüntülenecektir .
+<b>AdÄ±m 5</b>
+<ul> Ä°ÅŸe alma formu gÃ¶rÃ¼ntÃ¼lenince, iÅŸ ile ilgili tÃ¼m bilgileri giriniz.<p>
+		<img <?php echo createComIcon('../','warn.gif','0') ?>> UyarÄ±: EÄŸer bir kiÅŸi halen Ã§alÄ±ÅŸmakta ise, onun bilgileri gÃ¶rÃ¼ntÃ¼lenecektir .
 </ul>
-<b>Adım 6</b>
+<b>AdÄ±m 6</b>
 <ul> 
-	 Sicil bilgisini kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p>
+	 Sicil bilgisini kaydetmek iÃ§in <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 	
 </ul>
 
 
-<b>Uyarı</b>
+<b>UyarÄ±</b>
 
-<ul> Eğer bir bilgi eksik ise, bilgiler tekrar görüntülenir ve kırmızı ile işaretli alan(lar) daki bilgileri girmeniz istenir. Daha sonra tam bilgiyi kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p>
+<ul> EÄŸer bir bilgi eksik ise, bilgiler tekrar gÃ¶rÃ¼ntÃ¼lenir ve kÄ±rmÄ±zÄ± ile iÅŸaretli alan(lar) daki bilgileri girmeniz istenir. Daha sonra tam bilgiyi kaydetmek iÃ§in <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 </ul>
 
-<b>Uyarı</b>
-<ul> Eğer kaydı iptal etmeye karar verirseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
+<b>UyarÄ±</b>
+<ul> EÄŸer kaydÄ± iptal etmeye karar verirseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 		
 </ul>
 </form>
@@ -57,20 +57,20 @@ if(!$src&&!$x1){
 <?php
 	if($src){
 ?>
-<font color="#990000"><b>Çalışan sicil bilgisi nasıl güncellenir?</b></font>
+<font color="#990000"><b>Ã‡alÄ±ÅŸan sicil bilgisi nasÄ±l gÃ¼ncellenir?</b></font>
 <ul> 
-	<b>Adım 1:</b> Uygun alanlara yeni bilgileri giriniz.<p>
-	<b>Adım 2:</b> Güncellenmiş sicil bilgisini kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p>
-	<img <?php echo createComIcon('../','warn.gif','0') ?>> Uyarı: Güncellemeyi iptal etmeye karar verirseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m 1:</b> Uygun alanlara yeni bilgileri giriniz.<p>
+	<b>AdÄ±m 2:</b> GÃ¼ncellenmiÅŸ sicil bilgisini kaydetmek iÃ§in <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+	<img <?php echo createComIcon('../','warn.gif','0') ?>> UyarÄ±: GÃ¼ncellemeyi iptal etmeye karar verirseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 <?php
 	}else{
 ?>
-<font color="#990000"><b>Kişi nasıl işe alınır?</b></font>
+<font color="#990000"><b>KiÅŸi nasÄ±l iÅŸe alÄ±nÄ±r?</b></font>
 <ul> 
-	<b>Adım 1:</b> Uygun alanlara sicil bilgisini giriniz.<p>
-	<b>Adım 2:</b> Sicil bilgisini kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p>
-	<img <?php echo createComIcon('../','warn.gif','0') ?>> Uyarı: İptal etmek ister iseniz, <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m 1:</b> Uygun alanlara sicil bilgisini giriniz.<p>
+	<b>AdÄ±m 2:</b> Sicil bilgisini kaydetmek iÃ§in <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+	<img <?php echo createComIcon('../','warn.gif','0') ?>> UyarÄ±: Ä°ptal etmek ister iseniz, <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 <?php
 	}

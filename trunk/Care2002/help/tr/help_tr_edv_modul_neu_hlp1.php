@@ -4,7 +4,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 
 </head>
@@ -13,11 +13,11 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <font face="Verdana, Arial" size=3>
 <b>
 <?php echo $src . " - module generator"; ?>
-<p><font color="#990000">Modül oluşturucu yardımı sayfasındasınız.</font></b><p>
+<p><font color="#990000">ModÃ¼l oluÅŸturucu yardÄ±mÄ± sayfasÄ±ndasÄ±nÄ±z.</font></b><p>
 <font face="Verdana, Arial" size=2>
-<!-- Çeviren Dr. Bülent Potur http://bpotur.tripod.com -->
+<!-- Ã‡eviren Dr. BÃ¼lent Potur http://bpotur.tripod.com -->
 <ul>
-<li><b> Birinci nokta</b> :  Bu modül oluşturucu zaten kendi kendini genişçe açıklıyor. Eğer başka bir sorunuz ya da yardımcı önerileriniz olur ise lütfen <a href=mailto:xanef@web.de>yazara bir email</a> gönderiniz.<p>
+<li><b> Birinci nokta</b> :  Bu modÃ¼l oluÅŸturucu zaten kendi kendini geniÅŸÃ§e aÃ§Ä±klÄ±yor. EÄŸer baÅŸka bir sorunuz ya da yardÄ±mcÄ± Ã¶nerileriniz olur ise lÃ¼tfen <a href=mailto:xanef@web.de>yazara bir email</a> gÃ¶nderiniz.<p>
 
 </ul>
 

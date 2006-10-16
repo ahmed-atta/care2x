@@ -1,89 +1,89 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?php echo "Hasta Dosyası" ?></b></font>
+<b><?php echo "Hasta DosyasÄ±" ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
 <?php if($src=="") : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bu renkli çubukların anlamı nedir? </b> <img <?php echo createComIcon('../','colorcodebar3.gif','0') ?> ></font>
-<ul> <b>Uyarı: </b>"Görünür" hale gelmiş bu renkli çubukların her biri belirli bir bilgi, uyarı, değişiklik, veya soru vs. nin varlığını bildirirler.<br>
-			Bir rengin anlamı her servis için ayrı düzenlenebilir. <br>
-			Sağdaki pembe renkli çubuklar dizisi bir belirli bir yönergenin uygulanacağı yaklaşık zamanı temsil eder.<br>
-			Örneğin: altıncı pembe çubuğun anlamı "altıncı saat" veya "saat 6.00" 22. renkli çubuk "22.saat" veya "saat 22" anlamına gelir.
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bu renkli Ã§ubuklarÄ±n anlamÄ± nedir? </b> <img <?php echo createComIcon('../','colorcodebar3.gif','0') ?> ></font>
+<ul> <b>UyarÄ±: </b>"GÃ¶rÃ¼nÃ¼r" hale gelmiÅŸ bu renkli Ã§ubuklarÄ±n her biri belirli bir bilgi, uyarÄ±, deÄŸiÅŸiklik, veya soru vs. nin varlÄ±ÄŸÄ±nÄ± bildirirler.<br>
+			Bir rengin anlamÄ± her servis iÃ§in ayrÄ± dÃ¼zenlenebilir. <br>
+			SaÄŸdaki pembe renkli Ã§ubuklar dizisi bir belirli bir yÃ¶nergenin uygulanacaÄŸÄ± yaklaÅŸÄ±k zamanÄ± temsil eder.<br>
+			Ã–rneÄŸin: altÄ±ncÄ± pembe Ã§ubuÄŸun anlamÄ± "altÄ±ncÄ± saat" veya "saat 6.00" 22. renkli Ã§ubuk "22.saat" veya "saat 22" anlamÄ±na gelir.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-İzleyen bu düğmeler nelerdir?</b></font>
-<ul> <input type="button" value="Ateş çizelgesi">
+Ä°zleyen bu dÃ¼ÄŸmeler nelerdir?</b></font>
+<ul> <input type="button" value="AteÅŸ Ã§izelgesi">
 	<ul>
-		Bu hastanın günlük derece kâğıdı formunu açar. Forma ateş ve kan basıncı değerlerini girer, düzenler veya silebilirsiniz.<br>
-		Düzenlenebilen ek veri alanları şunlardır:
+		Bu hastanÄ±n gÃ¼nlÃ¼k derece kÃ¢ÄŸÄ±dÄ± formunu aÃ§ar. Forma ateÅŸ ve kan basÄ±ncÄ± deÄŸerlerini girer, dÃ¼zenler veya silebilirsiniz.<br>
+		DÃ¼zenlenebilen ek veri alanlarÄ± ÅŸunlardÄ±r:
 	<ul type="disc">
 	<li>Allerji<br>
-	<li>Günlük diyet planı<br>
-	<li>Ana tanı/tedavi<br>
-	<li>günlük tanı/tedavi<br>
-	<li>Notlar, ek tanılar<br>
-	<li>Pt (Fizik tedavi), Atg (anti-tromboz jimnastiği), vs.<br>
-	<li>Antikoagülanlar<br>
-	<li>Anti koagülanlar için günlük kayıtlar<br>
-	<li>Intravenöz tedavi, bandaj ve pansuman<br>
-	<li>İntravenöz ilaçların gönlük kaydı<br>
+	<li>GÃ¼nlÃ¼k diyet planÄ±<br>
+	<li>Ana tanÄ±/tedavi<br>
+	<li>gÃ¼nlÃ¼k tanÄ±/tedavi<br>
+	<li>Notlar, ek tanÄ±lar<br>
+	<li>Pt (Fizik tedavi), Atg (anti-tromboz jimnastiÄŸi), vs.<br>
+	<li>AntikoagÃ¼lanlar<br>
+	<li>Anti koagÃ¼lanlar iÃ§in gÃ¼nlÃ¼k kayÄ±tlar<br>
+	<li>IntravenÃ¶z tedavi, bandaj ve pansuman<br>
+	<li>Ä°ntravenÃ¶z ilaÃ§larÄ±n gÃ¶nlÃ¼k kaydÄ±<br>
 	<li>Notlar<br>
-	<li>İlaç listesi<br>
-	<li>İlaç ve dozlarınıın günlük kaydı<br>
+	<li>Ä°laÃ§ listesi<br>
+	<li>Ä°laÃ§ ve dozlarÄ±nÄ±Ä±n gÃ¼nlÃ¼k kaydÄ±<br>
 	</ul>		
 	</ul>
-<input type="button" value="Hemşire gözlemi">
+<input type="button" value="HemÅŸire gÃ¶zlemi">
 	<ul>
-		Bu hemşire gözlem formunu açar. Hemşirelik çalışmanızı, etkinliğini, gözlemlerinizi, soruları veya önerileri vs belgelendirebilirsiniz.
+		Bu hemÅŸire gÃ¶zlem formunu aÃ§ar. HemÅŸirelik Ã§alÄ±ÅŸmanÄ±zÄ±, etkinliÄŸini, gÃ¶zlemlerinizi, sorularÄ± veya Ã¶nerileri vs belgelendirebilirsiniz.
 	</ul>
-	<input type="button" value="Doktor orderları">
+	<input type="button" value="Doktor orderlarÄ±">
 	<ul>
-	Görevli doktor buraya yönergelerini, ilaç, doz, hemşire sorularına yanıtlar veya değişiklik yönergelerini, vs. girer.
+	GÃ¶revli doktor buraya yÃ¶nergelerini, ilaÃ§, doz, hemÅŸire sorularÄ±na yanÄ±tlar veya deÄŸiÅŸiklik yÃ¶nergelerini, vs. girer.
 	</ul>	
-	<input type="button" value="Tetkik raporları">
+	<input type="button" value="Tetkik raporlarÄ±">
 	<ul>
-	Burada farklı tetkik klinik veya bölümlerinden gelen tetkik raporları saklanır.
+	Burada farklÄ± tetkik klinik veya bÃ¶lÃ¼mlerinden gelen tetkik raporlarÄ± saklanÄ±r.
 	</ul>	
-<!-- 	<input type="button" value="Ana kayıt">
+<!-- 	<input type="button" value="Ana kayÄ±t">
 	<ul>
-	Burada hastanın ana kaydı ve ad, soyad vs gibi kişisel bilgileri saklanır. Bu aynı zamanda hastanın anamnez veya öyküsünün ilk belgesidir. Her hemşirelik planının temelini oluşturur.
+	Burada hastanÄ±n ana kaydÄ± ve ad, soyad vs gibi kiÅŸisel bilgileri saklanÄ±r. Bu aynÄ± zamanda hastanÄ±n anamnez veya Ã¶ykÃ¼sÃ¼nÃ¼n ilk belgesidir. Her hemÅŸirelik planÄ±nÄ±n temelini oluÅŸturur.
 	</ul>	
-	<input type="button" value="Hemşirelik  Planı">
+	<input type="button" value="HemÅŸirelik  PlanÄ±">
 	<ul>
-	Bu özel hemşirelik planıdır. Planı oluşurabilir, düzenleyebilir ya da silebilirsiniz.
+	Bu Ã¶zel hemÅŸirelik planÄ±dÄ±r. PlanÄ± oluÅŸurabilir, dÃ¼zenleyebilir ya da silebilirsiniz.
 	</ul>	
  -->	
- <input type="button" value="TİG">
+ <input type="button" value="TÄ°G">
 	<ul>
-	Bu TİG (Tanı ile ilgili grup) birleşik penceresini açar.
+	Bu TÄ°G (TanÄ± ile ilgili grup) birleÅŸik penceresini aÃ§ar.
 	</ul>	
- <input type="button" value="Laboratuvar Sonuçları">
+ <input type="button" value="Laboratuvar SonuÃ§larÄ±">
 	<ul>
-	Burada hem biyokimya hem de patoloji laboratuvar sonuçları saklanır.
+	Burada hem biyokimya hem de patoloji laboratuvar sonuÃ§larÄ± saklanÄ±r.
 	</ul>	
-	<input type="button" value="Fotoğraflar">
+	<input type="button" value="FotoÄŸraflar">
 	<ul>
-	Bu hastanın fotoğraf kataloğunu açar.
+	Bu hastanÄ±n fotoÄŸraf kataloÄŸunu aÃ§ar.
 	</ul>	
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bu seçim kutusunun işlevi nedir </b>	<select name="d"><option value="">Tetkik istemini seçiniz</option></select>?
+Bu seÃ§im kutusunun iÅŸlevi nedir </b>	<select name="d"><option value="">Tetkik istemini seÃ§iniz</option></select>?
 </font>
-<ul>       	<b>Uyarı: </b>Bu belirli bir tetkik için istem formu seçer.<br>
- 	<b>Adım 1: </b> <select name="d"><option value="">Tetkik istemi seçiniz</option></select> üzerine tıklayınız.
+<ul>       	<b>UyarÄ±: </b>Bu belirli bir tetkik iÃ§in istem formu seÃ§er.<br>
+ 	<b>AdÄ±m 1: </b> <select name="d"><option value="">Tetkik istemi seÃ§iniz</option></select> Ã¼zerine tÄ±klayÄ±nÄ±z.
                                                                      <br>
-		<b>Adım 2: </b>Seçilen klinik, bölüm veya tetkiki tıklayınız.<br>
-		<b>Adım 3: </b>İstem formu otomatik olarak açılır.<br>
+		<b>AdÄ±m 2: </b>SeÃ§ilen klinik, bÃ¶lÃ¼m veya tetkiki tÄ±klayÄ±nÄ±z.<br>
+		<b>AdÄ±m 3: </b>Ä°stem formu otomatik olarak aÃ§Ä±lÄ±r.<br>
 </ul>
 <?php endif ?>
 
 <?php if($src=="labor") : ?>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>Şu anda tetkik sonucu yok. </b></font>
-<ul> Hastanın veri klasörüne dönmek için  <input type="button" value="Tamam"> düğmesini tıklayınız.</ul>
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>Åu anda tetkik sonucu yok. </b></font>
+<ul> HastanÄ±n veri klasÃ¶rÃ¼ne dÃ¶nmek iÃ§in  <input type="button" value="Tamam"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.</ul>
 <?php else  : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Hastanın dosyası nasıl kapatılır? </b></font>
-<ul> <b>Uyarı: </b>Eğer kapatmak ister iseniz,  <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> düğmesini tıklayınız.</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>HastanÄ±n dosyasÄ± nasÄ±l kapatÄ±lÄ±r? </b></font>
+<ul> <b>UyarÄ±: </b>EÄŸer kapatmak ister iseniz,  <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.</ul>
 
 <?php endif ?>
 

@@ -1,32 +1,32 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Sistem Yönetimi :: Haber görüntüsü </b></font>
+<b>Sistem YÃ¶netimi :: Haber gÃ¶rÃ¼ntÃ¼sÃ¼ </b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 
 <blockquote>
 <p>
-	"<b>Haber görüntüsü </b>" makalelerin ve manşetlerinin görünüşünü düzenler:<p>
+	"<b>Haber gÃ¶rÃ¼ntÃ¼sÃ¼ </b>" makalelerin ve manÅŸetlerinin gÃ¶rÃ¼nÃ¼ÅŸÃ¼nÃ¼ dÃ¼zenler:<p>
 	
-	Haber makalesi görüntüsü biçiminin nelerini düzenleyebilirsiniz?
+	Haber makalesi gÃ¶rÃ¼ntÃ¼sÃ¼ biÃ§iminin nelerini dÃ¼zenleyebilirsiniz?
 	<p>
-	<li>Başlık yazı büyüklüğü</li>
-	<li>Başlık yazı tipi</li>
-	<li>Başlık yazı rengi : Renk seçiciyi başlatmak için  <img src="../gui/img/common/default/colorcube_s.gif"> simgesini tıklayınız.</li>
-	<li>Başlık yazı kalınlığı :  <b>kalın</b> veya normal</li>
-	<li>Özet yazı büyüklüğü</li>
-	<li>Özet yazı tipi</li>
-	<li>Özet yazı rengi : Renk seçiciyi başlatmak için  <img src="../gui/img/common/default/colorcube_s.gif"> simgesini tıklayınız.</li>
-	<li>Özet yazı kalınlığı :  <b>kalın</b> veya normal</li>
-	<li>Haber yazı büyüklüğü</li>
-	<li>Haber yazı tipi</li>
-	<li>Haber yazı rengi : Renk seeçiciyi başlatmak için  <img src="../gui/img/common/default/colorcube_s.gif"> simgesini tıklayınız.</li>
-	<li>Özette görüntülenen maksimum harf sayısı.</li>
-	<li>Haber görünüm genişliği: piksel veya yüzde olarak. Uyarı: yüzde için girdiğiniz rakamın sonuna % işaretini yazınız.  ( örneğin tüm sayfa genişliği için  100% )</li>
+	<li>BaÅŸlÄ±k yazÄ± bÃ¼yÃ¼klÃ¼ÄŸÃ¼</li>
+	<li>BaÅŸlÄ±k yazÄ± tipi</li>
+	<li>BaÅŸlÄ±k yazÄ± rengi : Renk seÃ§iciyi baÅŸlatmak iÃ§in  <img src="../gui/img/common/default/colorcube_s.gif"> simgesini tÄ±klayÄ±nÄ±z.</li>
+	<li>BaÅŸlÄ±k yazÄ± kalÄ±nlÄ±ÄŸÄ± :  <b>kalÄ±n</b> veya normal</li>
+	<li>Ã–zet yazÄ± bÃ¼yÃ¼klÃ¼ÄŸÃ¼</li>
+	<li>Ã–zet yazÄ± tipi</li>
+	<li>Ã–zet yazÄ± rengi : Renk seÃ§iciyi baÅŸlatmak iÃ§in  <img src="../gui/img/common/default/colorcube_s.gif"> simgesini tÄ±klayÄ±nÄ±z.</li>
+	<li>Ã–zet yazÄ± kalÄ±nlÄ±ÄŸÄ± :  <b>kalÄ±n</b> veya normal</li>
+	<li>Haber yazÄ± bÃ¼yÃ¼klÃ¼ÄŸÃ¼</li>
+	<li>Haber yazÄ± tipi</li>
+	<li>Haber yazÄ± rengi : Renk seeÃ§iciyi baÅŸlatmak iÃ§in  <img src="../gui/img/common/default/colorcube_s.gif"> simgesini tÄ±klayÄ±nÄ±z.</li>
+	<li>Ã–zette gÃ¶rÃ¼ntÃ¼lenen maksimum harf sayÄ±sÄ±.</li>
+	<li>Haber gÃ¶rÃ¼nÃ¼m geniÅŸliÄŸi: piksel veya yÃ¼zde olarak. UyarÄ±: yÃ¼zde iÃ§in girdiÄŸiniz rakamÄ±n sonuna % iÅŸaretini yazÄ±nÄ±z.  ( Ã¶rneÄŸin tÃ¼m sayfa geniÅŸliÄŸi iÃ§in  100% )</li>
 	<p>
-	UYARI: Geçersiz bir değer girer iseniz sistem ön değer atar.</p>
+	UYARI: GeÃ§ersiz bir deÄŸer girer iseniz sistem Ã¶n deÄŸer atar.</p>
 	<p>
-	Ön değerleri kullanmak için, <button>Ön değerleri kullan</button> düğmesini tıklayınız.
+	Ã–n deÄŸerleri kullanmak iÃ§in, <button>Ã–n deÄŸerleri kullan</button> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 	</p>
 	</p>
 </blockquote>

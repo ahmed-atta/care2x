@@ -1,5 +1,5 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Alındı(makbuz)</b></font>
+<b>AlÄ±ndÄ±(makbuz)</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
@@ -8,11 +8,11 @@
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Sonra ne var?</b></font>
 <ul> 
-	<b>Adım: </b>Önceki sayfaya gitmek için ya   <img <?php echo createLDImgSrc('../','back2.gif','0') ?>> veya  <input type="button" value="Ok"> düğmesini tıklayınız.
+	<b>AdÄ±m: </b>Ã–nceki sayfaya gitmek iÃ§in ya   <img <?php echo createLDImgSrc('../','back2.gif','0') ?>> veya  <input type="button" value="Ok"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
-<b>Uyarı</b>
-<ul> Eğer işiniz bitti ise ya da iptal etmeye karar verdi iseniz  <img <?php  print createLDImgSrc('../','close2.gif','0'); ?>> düğmesini tıklayınız.
+<b>UyarÄ±</b>
+<ul> EÄŸer iÅŸiniz bitti ise ya da iptal etmeye karar verdi iseniz  <img <?php  print createLDImgSrc('../','close2.gif','0'); ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 </form>

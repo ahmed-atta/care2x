@@ -1,15 +1,15 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Sistem Yönetimi :: Sayfalayıcı azami satır</b></font>
+<b>Sistem YÃ¶netimi :: SayfalayÄ±cÄ± azami satÄ±r</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 <ul>
 <p>
-	<b>Sayfalayıcı azami satır:</b> Bir arama sonucunda geçerli veriler bulunduğunda bir sayfada listelenen azami satır sayısıdır.
-	<p>Bulunan satır sayısı sayfalayıcının azami satır sayısından fazla ise bilgiler birkaç sayfa halinde görüntülenir. Görüntülenen her sayfa en fazla azami satır sayısı kadar satır içerir.</p>
-	<p><li>Uyarı 1: Her arama türü için özel azami satır nuumarası belirlenebilir.</p>
-	<li>Uyarı 2: Eğer değer 0 olarak ayarlanır ise sistem ön tanımlı olarak 50 değerini kullanır.</li>
+	<b>SayfalayÄ±cÄ± azami satÄ±r:</b> Bir arama sonucunda geÃ§erli veriler bulunduÄŸunda bir sayfada listelenen azami satÄ±r sayÄ±sÄ±dÄ±r.
+	<p>Bulunan satÄ±r sayÄ±sÄ± sayfalayÄ±cÄ±nÄ±n azami satÄ±r sayÄ±sÄ±ndan fazla ise bilgiler birkaÃ§ sayfa halinde gÃ¶rÃ¼ntÃ¼lenir. GÃ¶rÃ¼ntÃ¼lenen her sayfa en fazla azami satÄ±r sayÄ±sÄ± kadar satÄ±r iÃ§erir.</p>
+	<p><li>UyarÄ± 1: Her arama tÃ¼rÃ¼ iÃ§in Ã¶zel azami satÄ±r nuumarasÄ± belirlenebilir.</p>
+	<li>UyarÄ± 2: EÄŸer deÄŸer 0 olarak ayarlanÄ±r ise sistem Ã¶n tanÄ±mlÄ± olarak 50 deÄŸerini kullanÄ±r.</li>
 	<p>
-	<li>Uyarı 3: "Ameliyathane ameliyat araması için hasta" sayısı azami değeri 10 dan küçük ayarlanmalıdır. Ameliyathane kütük modülündeki görüntüleme yeri darlığından dolayı tercihan sadece 5 olmalıdır. </li>
+	<li>UyarÄ± 3: "Ameliyathane ameliyat aramasÄ± iÃ§in hasta" sayÄ±sÄ± azami deÄŸeri 10 dan kÃ¼Ã§Ã¼k ayarlanmalÄ±dÄ±r. Ameliyathane kÃ¼tÃ¼k modÃ¼lÃ¼ndeki gÃ¶rÃ¼ntÃ¼leme yeri darlÄ±ÄŸÄ±ndan dolayÄ± tercihan sadece 5 olmalÄ±dÄ±r. </li>
 </ul>
 </font>
 

@@ -1,6 +1,6 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-Radyoloji - Dicom resimlerini yükleme
+Radyoloji - Dicom resimlerini yÃ¼kleme
 
  </b>
  </font>
@@ -12,48 +12,48 @@ if(!$src){
 ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Dicom resimleri nasıl yüklenir?</b>
+Dicom resimleri nasÄ±l yÃ¼klenir?</b>
 </font>
 	
 	<ul>       	
- 	<b>Adım 1: </b>Resim ile ilgili vizit numarası var ise "<font color=#0000ff>İlgili vizit numarası</font>" alanına giriniz.<p>
- 	<b>Adım 2: </b>Eğer kimlik veya ilgili belgeler var ise  "<font color=#0000ff>İlgili belgeler, kimlik</font>" alanına giriniz. Kimliği virgüllerle ayırınız.<p> 
- 	<b>Adım 3: </b>Resimlerin kısa bir tanımını  "<font color=#0000ff>Notlar</font>" alanına yazınız.<p> 
- 	<b>Adım 4: </b> Dosya seçme penceresini açmak için <input type="button" value="Tara"> button to düğmesini tıklayınız.<p> 
- 	<b>Adım 5: </b>Resim dosyasını seçiniz.<p> 
- 	<b>Adım 6: </b>Tüm resim dosyaları seçildiğinde yüklemeyi başlatmak için  <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p> 
+ 	<b>AdÄ±m 1: </b>Resim ile ilgili vizit numarasÄ± var ise "<font color=#0000ff>Ä°lgili vizit numarasÄ±</font>" alanÄ±na giriniz.<p>
+ 	<b>AdÄ±m 2: </b>EÄŸer kimlik veya ilgili belgeler var ise  "<font color=#0000ff>Ä°lgili belgeler, kimlik</font>" alanÄ±na giriniz. KimliÄŸi virgÃ¼llerle ayÄ±rÄ±nÄ±z.<p> 
+ 	<b>AdÄ±m 3: </b>Resimlerin kÄ±sa bir tanÄ±mÄ±nÄ±  "<font color=#0000ff>Notlar</font>" alanÄ±na yazÄ±nÄ±z.<p> 
+ 	<b>AdÄ±m 4: </b> Dosya seÃ§me penceresini aÃ§mak iÃ§in <input type="button" value="Tara"> button to dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p> 
+ 	<b>AdÄ±m 5: </b>Resim dosyasÄ±nÄ± seÃ§iniz.<p> 
+ 	<b>AdÄ±m 6: </b>TÃ¼m resim dosyalarÄ± seÃ§ildiÄŸinde yÃ¼klemeyi baÅŸlatmak iÃ§in  <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p> 
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yüklenecek resim sayısı nasıl değiştirilir?</b>
+YÃ¼klenecek resim sayÄ±sÄ± nasÄ±l deÄŸiÅŸtirilir?</b>
 </font>
 	
 	<ul>       	
- 	<b>Uyarı: </b>Sayıyı herhangi bir veri girmeden, ya da resim dosyalarını seçmeye başlamadan belirleyiniz.<p> 
- 	<b>Adım 1: </b>Sayıyı "Yüklemem gerekiyor <input type="text" name="d" size=3 maxlength=1 value=4>" alanına giriniz.<p>
- 	<b>Adım 2: </b> "Git" i tıklayınız.<p> 
+ 	<b>UyarÄ±: </b>SayÄ±yÄ± herhangi bir veri girmeden, ya da resim dosyalarÄ±nÄ± seÃ§meye baÅŸlamadan belirleyiniz.<p> 
+ 	<b>AdÄ±m 1: </b>SayÄ±yÄ± "YÃ¼klemem gerekiyor <input type="text" name="d" size=3 maxlength=1 value=4>" alanÄ±na giriniz.<p>
+ 	<b>AdÄ±m 2: </b> "Git" i tÄ±klayÄ±nÄ±z.<p> 
 </ul>
 <?php
 }else{
 ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Başarılı bir yüklemeden sonra, yüklenmiş resimlerin durmunu nasıl kontrol edebilirim?</b>
+BaÅŸarÄ±lÄ± bir yÃ¼klemeden sonra, yÃ¼klenmiÅŸ resimlerin durmunu nasÄ±l kontrol edebilirim?</b>
 </font>
 	<ul>       	
- 	<b>Uyarı: </b> Resimleri (tarayıcıya bağlı olarak) aynı pencerede izlemek için "<b>Resim Grubu #</b>" nun <img <?php echo createComIcon('../','torso.gif','0') ?>> simgesine tıklayınız.<p>
+ 	<b>UyarÄ±: </b> Resimleri (tarayÄ±cÄ±ya baÄŸlÄ± olarak) aynÄ± pencerede izlemek iÃ§in "<b>Resim Grubu #</b>" nun <img <?php echo createComIcon('../','torso.gif','0') ?>> simgesine tÄ±klayÄ±nÄ±z.<p>
 	<img src="../help/tr/img/tr_dicom_group_in.png" border=0 width=318 height=132><p> 
-  	<b>Veya:</b> Yeni bir pencerede izlemek için "<b>Image Group #</b>" grubunun  <img <?php echo createComIcon('../','torso_win.gif','0') ?>> simgesine tıklayınız.<p>
+  	<b>Veya:</b> Yeni bir pencerede izlemek iÃ§in "<b>Image Group #</b>" grubunun  <img <?php echo createComIcon('../','torso_win.gif','0') ?>> simgesine tÄ±klayÄ±nÄ±z.<p>
 	<img src="../help/tr/img/tr_dicom_group_ex.png" border=0 width=318 height=132> 
 	 
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Başarılı vir yüklemeden sonra, yüklenmiş her bir resmi ayry ayrı nasıl kontrol edebilirim?</b>
+BaÅŸarÄ±lÄ± vir yÃ¼klemeden sonra, yÃ¼klenmiÅŸ her bir resmi ayry ayrÄ± nasÄ±l kontrol edebilirim?</b>
 </font>
 	<ul>       	
- 	<b>Adım: </b>Resmi aynı pencerede (tarayıcıya bağlı) izlemek için  listedeki <img <?php echo createComIcon('../','torso.gif','0') ?>> simgesini tıklayınız.<p>
+ 	<b>AdÄ±m: </b>Resmi aynÄ± pencerede (tarayÄ±cÄ±ya baÄŸlÄ±) izlemek iÃ§in  listedeki <img <?php echo createComIcon('../','torso.gif','0') ?>> simgesini tÄ±klayÄ±nÄ±z.<p>
 	<img src="../help/tr/img/tr_dicom_single_in.png" border=0 width=410 height=101><p> 
-  	<b>Veya: </b>Bir resmi ayrı bir pencerede izlemek için listedeki <img <?php echo createComIcon('../','torso_win.gif','0') ?>> simgesini tıklayınız.<p>
+  	<b>Veya: </b>Bir resmi ayrÄ± bir pencerede izlemek iÃ§in listedeki <img <?php echo createComIcon('../','torso_win.gif','0') ?>> simgesini tÄ±klayÄ±nÄ±z.<p>
 	<img src="../help/tr/img/tr_dicom_single_ex.png" border=0 width=410 height=101>
 	 
 </ul>

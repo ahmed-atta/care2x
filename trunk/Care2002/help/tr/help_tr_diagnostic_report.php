@@ -2,15 +2,15 @@
 <b><?php echo "$x3 - $x2" ?></b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" ><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir tetkik raporu nasıl gösterilir?</b></font>
+Bir tetkik raporu nasÄ±l gÃ¶sterilir?</b></font>
 <ul> 
-<b>Uyarı: </b>Ön tanımlı olarak, listedeki ilk rapor derhal görünür.<p>
-<b>Adım: </b>Belirli bir raporu izlemek için sol indeksteki raporun numarasını tıklayınız.<br>
+<b>UyarÄ±: </b>Ã–n tanÄ±mlÄ± olarak, listedeki ilk rapor derhal gÃ¶rÃ¼nÃ¼r.<p>
+<b>AdÄ±m: </b>Belirli bir raporu izlemek iÃ§in sol indeksteki raporun numarasÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir rapor nasıl yazdırılır?</b></font>
+Bir rapor nasÄ±l yazdÄ±rÄ±lÄ±r?</b></font>
 <ul> 	
-	<b>Adım: </b>Raporu yazdırmak için <img <?php echo createLDImgSrc('../','printout.gif','0') ?> align="absmiddle">  düğmesini tıklayınız.<br>
+	<b>AdÄ±m: </b>Raporu yazdÄ±rmak iÃ§in <img <?php echo createLDImgSrc('../','printout.gif','0') ?> align="absmiddle">  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 
 

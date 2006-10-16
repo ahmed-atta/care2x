@@ -1,5 +1,5 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bakteriyolojik tetkikler için bekleyen istemler</b></font>
+<b>Bakteriyolojik tetkikler iÃ§in bekleyen istemler</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
@@ -7,25 +7,25 @@
 if(!$src){
 ?>
 <a name="stime"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bekleyen bir istem nasıl görüntülenir?</b></font>
+Bekleyen bir istem nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b></font>
 <ul> 
-	<b>Uyarı:</b> İlk istem kendiliğinden görünür.<p>
-	<b>Adım:</b> İstem formunu görüntülemek için soldaki listedeki küme numarasını tıklayınız.
+	<b>UyarÄ±:</b> Ä°lk istem kendiliÄŸinden gÃ¶rÃ¼nÃ¼r.<p>
+	<b>AdÄ±m:</b> Ä°stem formunu gÃ¶rÃ¼ntÃ¼lemek iÃ§in soldaki listedeki kÃ¼me numarasÄ±nÄ± tÄ±klayÄ±nÄ±z.
 </ul>
 </ul>
 <?php
 }
 ?>
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Sonuçlar veya bulgular nasıl girilir?</b></font>
+SonuÃ§lar veya bulgular nasÄ±l girilir?</b></font>
 <ul> 
-	<b>Adım 1: </b>Düzenleme moduna gitmek için <img <?php echo createLDImgSrc('../','enter_result.gif','0') ?>> düğmesini tıklayınız.<p>
-	<b>Adım 2: </b>Sonuç ya da bulguları ya ilgili metin kutularına yazarak ya da küçük pembe kutuları tıklayıp karartarak giriniz.
+	<b>AdÄ±m 1: </b>DÃ¼zenleme moduna gitmek iÃ§in <img <?php echo createLDImgSrc('../','enter_result.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+	<b>AdÄ±m 2: </b>SonuÃ§ ya da bulgularÄ± ya ilgili metin kutularÄ±na yazarak ya da kÃ¼Ã§Ã¼k pembe kutularÄ± tÄ±klayÄ±p karartarak giriniz.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Form nasıl yazdırılır?</b></font>
+Form nasÄ±l yazdÄ±rÄ±lÄ±r?</b></font>
 <ul> 
-	<b>Adım: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 

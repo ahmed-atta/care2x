@@ -1,78 +1,78 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bir hastanın tıbbi belgeleri nasıl hazırlanır</b></font>
+<b>Bir hastanÄ±n tÄ±bbi belgeleri nasÄ±l hazÄ±rlanÄ±r</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 <?php if($src=="?") : ?>
-<b>Adım 1</b>
+<b>AdÄ±m 1</b>
 
-<ul> Hastanın temel bilgilerini bulunuz.<br>
-		"Şu hastanın belgelerini hazırla:" alanına aşağıdaki bilgilerden her hangi birini giriniz:<br>
+<ul> HastanÄ±n temel bilgilerini bulunuz.<br>
+		"Åu hastanÄ±n belgelerini hazÄ±rla:" alanÄ±na aÅŸaÄŸÄ±daki bilgilerden her hangi birini giriniz:<br>
 		<Ul type="disc">
-			<li>protokol numarası veya<br>
-			<li>hastanın soyadı veya<br>
-			<li>hastanın adı <br>
+			<li>protokol numarasÄ± veya<br>
+			<li>hastanÄ±n soyadÄ± veya<br>
+			<li>hastanÄ±n adÄ± <br>
 		<font size=1 color="#000099" face="verdana,arial">
-		<b>İpucu:</b> Eğer sisteminizde barkod okuyucu var ise, odaklamak için "Şu hastanın belgelerini hazırla" alanını tıklatıp hastanın kartındaki barkodu tarayıcı ile okutup 3. Adıma geçiniz.
+		<b>Ä°pucu:</b> EÄŸer sisteminizde barkod okuyucu var ise, odaklamak iÃ§in "Åu hastanÄ±n belgelerini hazÄ±rla" alanÄ±nÄ± tÄ±klatÄ±p hastanÄ±n kartÄ±ndaki barkodu tarayÄ±cÄ± ile okutup 3. AdÄ±ma geÃ§iniz.
 		</font>
 		</ul>
 		
 </ul>
-<b>Adım 2</b>
+<b>AdÄ±m 2</b>
 
-<ul> Aramayı başlatmak için <input type="button" value="Ara"> düğmesini tıklayınız.
+<ul> AramayÄ± baÅŸlatmak iÃ§in <input type="button" value="Ara"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 		
 </ul>
-<b>Adım 2 ye bir başka seçenek</b>
-<ul> Şunlardan herhangibirini yapabilirsiniz:<br>
+<b>AdÄ±m 2 ye bir baÅŸka seÃ§enek</b>
+<ul> Åunlardan herhangibirini yapabilirsiniz:<br>
 		<Ul type="disc">		
-		<li>"Soyadı:" alanına hastanın soyadını giriniz <br>
-		<li>Veya "Adı:" alanına hastanın adını giriniz <br>
+		<li>"SoyadÄ±:" alanÄ±na hastanÄ±n soyadÄ±nÄ± giriniz <br>
+		<li>Veya "AdÄ±:" alanÄ±na hastanÄ±n adÄ±nÄ± giriniz <br>
 		</ul>
-		 sonra klavyede "enter" tuşuna basınız.
+		 sonra klavyede "enter" tuÅŸuna basÄ±nÄ±z.
 		
 </ul>
-<b>Adım 3</b>
-<ul> Arama sonucu bir tek sonuç bulunur ise hastanın temel bilgileri ile yeni bir form görüntülenir.
-		Eğer birkaç sonuç bulunur ise, bir liste görüntülenir.
+<b>AdÄ±m 3</b>
+<ul> Arama sonucu bir tek sonuÃ§ bulunur ise hastanÄ±n temel bilgileri ile yeni bir form gÃ¶rÃ¼ntÃ¼lenir.
+		EÄŸer birkaÃ§ sonuÃ§ bulunur ise, bir liste gÃ¶rÃ¼ntÃ¼lenir.
 <?php endif ?>
 
 <?php if(($src=="?")||($x1>1)) : ?>
 
- <br>Listedeki bir hastanın belgesini oluşturmak için ya ilgili  <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> düğmesini, veya soyad, veya ad, veya protokol numarası, veya kabul tarihini tıklayınız.
+ <br>Listedeki bir hastanÄ±n belgesini oluÅŸturmak iÃ§in ya ilgili  <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> dÃ¼ÄŸmesini, veya soyad, veya ad, veya protokol numarasÄ±, veya kabul tarihini tÄ±klayÄ±nÄ±z.
 </ul>
 <?php endif ?>
 
 <?php if($src=="?") : ?>
-<b>Adım 4</b>
+<b>AdÄ±m 4</b>
 <?php endif ?>
 
 <?php if(($src!="?")&&($x1==1)) : ?>
-<b>Adım 1</b>
+<b>AdÄ±m 1</b>
 <?php endif ?>
 <?php if(($x1=="1")||($src=="?")) : ?>
-<ul> Hastanın bilgileri ile yeni bir form görüntülendiğinde şunları yapabilirsiniz: 
+<ul> HastanÄ±n bilgileri ile yeni bir form gÃ¶rÃ¼ntÃ¼lendiÄŸinde ÅŸunlarÄ± yapabilirsiniz: 
 		<Ul type="disc">		
-    	<li>sigorta şirketi veya sosyal güvenlik durumu hakkındaki bilgileri "Ek bilgiler:" alanına girebilirsiniz;<br>
-		<li>Eğer hastaya zorunlu olan danışmanlık hizmeti verildi ise "Tıbbi danışmanlık" düğmelerinden  "<span style="background-color:yellow" ><input type="radio" name="n" value="a">Evet</span>" i tıklayınız;<br>
-		<li>Eğer hastaya zorunlu danışmanlık hizmeti verilmedi ise "Tıbbi danışmanlık" düğmelerinden  "<span style="background-color:yellow" ><input type="radio" name="n" value="a">Hayır</span>" ı tıklayınız;<br>
-		<li>tanı raporunu "Tanı:" alanına yazınız;<br>
-		<li>sağaltım raporunu "Tedavi:" alanına yazınız,<br>
-		<li>gerekir ise, "Belgenin yazıldığı tarih:" alanını düzenleyiniz;<br>
-		<li>gerekir ise, "Belgeyi yazan:" alanını düzenleyiniz;<br>
-		<li>gerekir ise, "Anahtar sayı:" alanını düzenleyiniz;<br>
+    	<li>sigorta ÅŸirketi veya sosyal gÃ¼venlik durumu hakkÄ±ndaki bilgileri "Ek bilgiler:" alanÄ±na girebilirsiniz;<br>
+		<li>EÄŸer hastaya zorunlu olan danÄ±ÅŸmanlÄ±k hizmeti verildi ise "TÄ±bbi danÄ±ÅŸmanlÄ±k" dÃ¼ÄŸmelerinden  "<span style="background-color:yellow" ><input type="radio" name="n" value="a">Evet</span>" i tÄ±klayÄ±nÄ±z;<br>
+		<li>EÄŸer hastaya zorunlu danÄ±ÅŸmanlÄ±k hizmeti verilmedi ise "TÄ±bbi danÄ±ÅŸmanlÄ±k" dÃ¼ÄŸmelerinden  "<span style="background-color:yellow" ><input type="radio" name="n" value="a">HayÄ±r</span>" Ä± tÄ±klayÄ±nÄ±z;<br>
+		<li>tanÄ± raporunu "TanÄ±:" alanÄ±na yazÄ±nÄ±z;<br>
+		<li>saÄŸaltÄ±m raporunu "Tedavi:" alanÄ±na yazÄ±nÄ±z,<br>
+		<li>gerekir ise, "Belgenin yazÄ±ldÄ±ÄŸÄ± tarih:" alanÄ±nÄ± dÃ¼zenleyiniz;<br>
+		<li>gerekir ise, "Belgeyi yazan:" alanÄ±nÄ± dÃ¼zenleyiniz;<br>
+		<li>gerekir ise, "Anahtar sayÄ±:" alanÄ±nÄ± dÃ¼zenleyiniz;<br>
 		</ul>
 </ul>
-<b>Uyarı</b>
-<ul> Girdiklerinizi silmek ister iseniz <input type="button" value="Yeni baştan"> düğmesini tıklayınız.
+<b>UyarÄ±</b>
+<ul> Girdiklerinizi silmek ister iseniz <input type="button" value="Yeni baÅŸtan"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
-<b>Adım <?php if($src!="?") print "2"; else print "5"; ?></b>
-<ul> Belgeyi kaydetmek için <input type="button" value="Kaydet"> düğmesini tıklayınız.
+<b>AdÄ±m <?php if($src!="?") print "2"; else print "5"; ?></b>
+<ul> Belgeyi kaydetmek iÃ§in <input type="button" value="Kaydet"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 <?php endif ?>
-<b>Uyarı</b>
-<ul> Belgeyi iptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
+<b>UyarÄ±</b>
+<ul> Belgeyi iptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 		
 </ul>
 

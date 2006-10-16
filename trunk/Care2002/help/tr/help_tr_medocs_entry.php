@@ -1,36 +1,36 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Tıbbi belgeler - Yeni belge</b></font>
+<b>TÄ±bbi belgeler - Yeni belge</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Yeni bir tıbbi belge nasıl oluşturulur?</b></font>
+Yeni bir tÄ±bbi belge nasÄ±l oluÅŸturulur?</b></font>
 <ul> 
 
-	<b>Adım 1: </b>Yeni bir form oluşturmak için "<font color=#000080>Yeni kayıt gir</font>" i tıklayınız.<p>
-	<b>Adım 2: </b>Varsa ek bilgileri giriniz.<p>
-	<b>Adım 3: </b>Hastanın aldığı tıbbi danışmanlık açısından ilgili kutuyu seçiniz.<p>
-	<b>Adım 4: </b>Metin olarak tanıları yazınız.<p>
-	<b>Adım 5: </b>Metin olarak tedavileri yazınız.<p>
+	<b>AdÄ±m 1: </b>Yeni bir form oluÅŸturmak iÃ§in "<font color=#000080>Yeni kayÄ±t gir</font>" i tÄ±klayÄ±nÄ±z.<p>
+	<b>AdÄ±m 2: </b>Varsa ek bilgileri giriniz.<p>
+	<b>AdÄ±m 3: </b>HastanÄ±n aldÄ±ÄŸÄ± tÄ±bbi danÄ±ÅŸmanlÄ±k aÃ§Ä±sÄ±ndan ilgili kutuyu seÃ§iniz.<p>
+	<b>AdÄ±m 4: </b>Metin olarak tanÄ±larÄ± yazÄ±nÄ±z.<p>
+	<b>AdÄ±m 5: </b>Metin olarak tedavileri yazÄ±nÄ±z.<p>
 </ul>
 
 <font size=2 face="verdana,arial" >
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"></a>
-<b>Tıbbi belge nasıl kayıt edilir?</b></font>
+<b>TÄ±bbi belge nasÄ±l kayÄ±t edilir?</b></font>
 <ul> 
-	<b>Adım:</b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m:</b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 <font size=2 face="verdana,arial" >
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"></a>
-<b>Tıbbi belgeler nasıl listelenir?</b></font>
+<b>TÄ±bbi belgeler nasÄ±l listelenir?</b></font>
 <ul> 
-	<b>Adım:</b> Belge formunun altındaki  "<font color=#000080>Belge listesini göster</font>" yazısını tıklayınız.
+	<b>AdÄ±m:</b> Belge formunun altÄ±ndaki  "<font color=#000080>Belge listesini gÃ¶ster</font>" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.
 </ul>
 
 <font size=2 face="verdana,arial" >
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"></a>
-<b>Tıbbi belgeler nasıl izlenir?</b></font>
+<b>TÄ±bbi belgeler nasÄ±l izlenir?</b></font>
 <ul> 
-	<b>Adım:</b> Belgenin <img <?php echo createComIcon('../','info3.gif','0') ?>> simgesini tıklayınız.
+	<b>AdÄ±m:</b> Belgenin <img <?php echo createComIcon('../','info3.gif','0') ?>> simgesini tÄ±klayÄ±nÄ±z.
 </ul>
 

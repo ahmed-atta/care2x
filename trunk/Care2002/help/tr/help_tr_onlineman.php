@@ -1,25 +1,25 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 </head>
 <body>
-<font face="Verdana, Arial" size=3 color="maroon"><b>Online el kitabı nasıl kullanılır</b></font>
+<font face="Verdana, Arial" size=3 color="maroon"><b>Online el kitabÄ± nasÄ±l kullanÄ±lÄ±r</b></font>
 <p>
 <font face="Verdana, Arial" size=2>
-Online el kitabı internet tabanlıdır. Eğer sisteminizin internet erişimi var ise veya ateş duvarı yazılımınız internete ulaşmaya izin veriyor ise ancak o zaman kullanabilirsiniz.<p>
-<b>Online el kitabı nasıl açılır</b>
+Online el kitabÄ± internet tabanlÄ±dÄ±r. EÄŸer sisteminizin internet eriÅŸimi var ise veya ateÅŸ duvarÄ± yazÄ±lÄ±mÄ±nÄ±z internete ulaÅŸmaya izin veriyor ise ancak o zaman kullanabilirsiniz.<p>
+<b>Online el kitabÄ± nasÄ±l aÃ§Ä±lÄ±r</b>
 <blockquote>
-Sol menüden "Online el kitabı" yazısını tıklayınız.
+Sol menÃ¼den "Online el kitabÄ±" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.
 </blockquote>
 <p>
-<b>Hızlı yardım bulmak</b>
+<b>HÄ±zlÄ± yardÄ±m bulmak</b>
 <blockquote>
-<li>Online el kitabından "Sayfa Bul" fonksiyonunu kullanınız. Sayfanın sol altındaki "Sayfabul" bağlantısını tıklayınız.
+<li>Online el kitabÄ±ndan "Sayfa Bul" fonksiyonunu kullanÄ±nÄ±z. SayfanÄ±n sol altÄ±ndaki "Sayfabul" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.
 <p>
 <img src="img/tr_online_findpage.png"><p>
-<li>Sayfadaki ilk alana bir başlık yazınız, sonra "Ara" düğmesini tıklayınız.
-<li>Veya gereken yardımdan türetilmiş bir sözcüğü (örneğin:günlük diyet") ikinci alana giriniz sonra "Ara" düğmesini tıklayınız..<p>
+<li>Sayfadaki ilk alana bir baÅŸlÄ±k yazÄ±nÄ±z, sonra "Ara" dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<li>Veya gereken yardÄ±mdan tÃ¼retilmiÅŸ bir sÃ¶zcÃ¼ÄŸÃ¼ (Ã¶rneÄŸin:gÃ¼nlÃ¼k diyet") ikinci alana giriniz sonra "Ara" dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z..<p>
 <img src="img/tr_online_search.png"><p>
 </blockquote>
 </font>

@@ -1,39 +1,39 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>Kabul bilgileri</b></font>
 
 <p><font size=2 face="verdana,arial" >
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Kabul bilgileri nasıl güncellenir?</b></font>
+Kabul bilgileri nasÄ±l gÃ¼ncellenir?</b></font>
 <ul> 
-<b>Adım: </b> Kabul formunu düzenlemek üzere açmak için  <img <?php echo createLDImgSrc('../','update_data.gif','0') ?>> düğmesini tıklayınız.<p>
+<b>AdÄ±m: </b> Kabul formunu dÃ¼zenlemek Ã¼zere aÃ§mak iÃ§in  <img <?php echo createLDImgSrc('../','update_data.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Barkod etiketleri nasıl yapılır?</b></font>
+Barkod etiketleri nasÄ±l yapÄ±lÄ±r?</b></font>
 <ul> 
-<b>Adım 1: </b>  <img <?php echo createLDImgSrc('../','barcode_label.gif','0') ?>> düğmesini tıklayınız.<p>
-<b>Adım 2: </b> Yazdırmak için oluşturulan etiketleri tıklayınız.<p>
+<b>AdÄ±m 1: </b>  <img <?php echo createLDImgSrc('../','barcode_label.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+<b>AdÄ±m 2: </b> YazdÄ±rmak iÃ§in oluÅŸturulan etiketleri tÄ±klayÄ±nÄ±z.<p>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Barkodlu kol bağları nasıl yapılır?</b></font>
+Barkodlu kol baÄŸlarÄ± nasÄ±l yapÄ±lÄ±r?</b></font>
 <ul> 
-<b>Adım 1: </b>  <img <?php echo createLDImgSrc('../','barcode_wristband.gif','0') ?>> düğmesini tıklayınız.<p>
-<b>Adım 2: </b> Yazdırmak için oluşturulan kol bağı resmini tıklayınız.<p>
+<b>AdÄ±m 1: </b>  <img <?php echo createLDImgSrc('../','barcode_wristband.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+<b>AdÄ±m 2: </b> YazdÄ±rmak iÃ§in oluÅŸturulan kol baÄŸÄ± resmini tÄ±klayÄ±nÄ±z.<p>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Hasta için seçeneklerin çoğu devre dışı (gri renkli) Neden?</b></font>
+Hasta iÃ§in seÃ§eneklerin Ã§oÄŸu devre dÄ±ÅŸÄ± (gri renkli) Neden?</b></font>
 <ul> 
-<b>Sebep: </b> Hasta bir polikliniğe ya da bir servise kabul edilmedikçe bu seçenekler etkinleşmez.<p>
+<b>Sebep: </b> Hasta bir polikliniÄŸe ya da bir servise kabul edilmedikÃ§e bu seÃ§enekler etkinleÅŸmez.<p>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Servise nasıl gidilir?</b></font>
+Servise nasÄ±l gidilir?</b></font>
 <ul> 
-<b>Adım: </b>Kabul bilgisinde görülen servisin ismini tıklayınız.<p>
+<b>AdÄ±m: </b>Kabul bilgisinde gÃ¶rÃ¼len servisin ismini tÄ±klayÄ±nÄ±z.<p>
 <img src="../help/tr/img/tr_admission_ward.png" border=0 width=366 height=109>
 </ul>
 

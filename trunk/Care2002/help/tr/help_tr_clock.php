@@ -4,6 +4,6 @@
 <font size=2 face="verdana,arial" >
 
 <img <?php echo createComIcon('../','warn.gif','0') ?>> <font color="#990000"><b></a>
-Şu an için saat üzerinde kullanıcı kontrolü bulunmamaktadır.</b></font>
+Åu an iÃ§in saat Ã¼zerinde kullanÄ±cÄ± kontrolÃ¼ bulunmamaktadÄ±r.</b></font>
 
 

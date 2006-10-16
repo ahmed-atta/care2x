@@ -1,31 +1,31 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Arşiv kullanılarak nasıl bilgi aranır?</b></font>
+<b>ArÅŸiv kullanÄ±larak nasÄ±l bilgi aranÄ±r?</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<b>Adım 1</b>
-<ul> Bir kişinin ad, soyad, TC kimlik no gibi bilgisini ya tam veya birkaç harfini giriniz.
-		<p>Örnek 1: "21000012" veya "12" giriniz.
-		<br>Örnek 2: "Potur" veya "pot" giriniz.
-		<br>Örnek 3: "Ayşe" veya "Ayş" giriniz.
-		<br>Örnek 4: "10.1" veya "10.12.1956" giriniz.
+<b>AdÄ±m 1</b>
+<ul> Bir kiÅŸinin ad, soyad, TC kimlik no gibi bilgisini ya tam veya birkaÃ§ harfini giriniz.
+		<p>Ã–rnek 1: "21000012" veya "12" giriniz.
+		<br>Ã–rnek 2: "Potur" veya "pot" giriniz.
+		<br>Ã–rnek 3: "AyÅŸe" veya "AyÅŸ" giriniz.
+		<br>Ã–rnek 4: "10.1" veya "10.12.1956" giriniz.
 		
 <p>
-	Uyarı: Aramanızı daraltmak için bir kaç bilgiyi birleştirebilirsiniz. 
+	UyarÄ±: AramanÄ±zÄ± daraltmak iÃ§in bir kaÃ§ bilgiyi birleÅŸtirebilirsiniz. 
 	<br>
-	Örnek: Cinsiyet ve medeni hali seçiniz.
+	Ã–rnek: Cinsiyet ve medeni hali seÃ§iniz.
 	<br>
 	<img src="../help/tr/img/tr_person_arch.png" border=0 width=540 height=98>
 </ul>
-<b>Adım 2</b>
-<ul> Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düğmesini tıklayınız.<p>
+<b>AdÄ±m 2</b>
+<ul> AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 </ul>
-<b>Adım 3</b>
-<ul> Arama sonuç bulur ise bir liste görünür. Aradığınız kişinin kayıt bilgisini görmek için yanındaki <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> düğmesini tıklayınız.
+<b>AdÄ±m 3</b>
+<ul> Arama sonuÃ§ bulur ise bir liste gÃ¶rÃ¼nÃ¼r. AradÄ±ÄŸÄ±nÄ±z kiÅŸinin kayÄ±t bilgisini gÃ¶rmek iÃ§in yanÄ±ndaki <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
-<b>Uyarı</b>
-<ul> Aramayı iptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
+<b>UyarÄ±</b>
+<ul> AramayÄ± iptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 

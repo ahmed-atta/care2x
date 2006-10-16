@@ -1,29 +1,29 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Röntgen tetkikleri için bekleyen istemler</b></font>
+<b>RÃ¶ntgen tetkikleri iÃ§in bekleyen istemler</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tetkik sonuçları veya bulgular nasıl girilir?</b></font>
+Tetkik sonuÃ§larÄ± veya bulgular nasÄ±l girilir?</b></font>
 <ul> 
-	<b>Adım: </b>Sonuçları, bulguları, tanıları, vs. uygun metin kutularına yazınız.
+	<b>AdÄ±m: </b>SonuÃ§larÄ±, bulgularÄ±, tanÄ±larÄ±, vs. uygun metin kutularÄ±na yazÄ±nÄ±z.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Form nasıl yazdırılır?</b></font>
+Form nasÄ±l yazdÄ±rÄ±lÄ±r?</b></font>
 <ul> 
-	<b>Adım: </b> <img <?php echo createLDImgSrc('../','printout.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m: </b> <img <?php echo createLDImgSrc('../','printout.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tüm bilgiler girildi, şimdi ne yapmalı?</b></font>
+TÃ¼m bilgiler girildi, ÅŸimdi ne yapmalÄ±?</b></font>
 <ul> 
-	<b>Adım: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayarak tetkik sonucu ve bulguları kayıt ediniz.
+	<b>AdÄ±m: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayarak tetkik sonucu ve bulgularÄ± kayÄ±t ediniz.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bulgular kaydedildi. Sonra ne yapmalı?</b></font>
+Bulgular kaydedildi. Sonra ne yapmalÄ±?</b></font>
 <ul> 
-	<b>Adım: </b> <img <?php echo createLDImgSrc('../','done.gif','0') ?>> düğmesini tıklayıp formu arşive naklediniz ve servis veya polikliniğe erişilebilir olduğunu bildiriniz.
+	<b>AdÄ±m: </b> <img <?php echo createLDImgSrc('../','done.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±p formu arÅŸive naklediniz ve servis veya polikliniÄŸe eriÅŸilebilir olduÄŸunu bildiriniz.
 </ul>
 

@@ -1,29 +1,29 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bakteriyoloji laboratuvarı tetkikleri için bekleyen istemler</b></font>
+<b>Bakteriyoloji laboratuvarÄ± tetkikleri iÃ§in bekleyen istemler</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tetkik sonuçları veya bulgular nasıl girilir?</b></font>
+Tetkik sonuÃ§larÄ± veya bulgular nasÄ±l girilir?</b></font>
 <ul> 
-	<b>Adım: </b>Sonuçları, bulguları, tanıları vs. uygun metin kutularına yazınız.
+	<b>AdÄ±m: </b>SonuÃ§larÄ±, bulgularÄ±, tanÄ±larÄ± vs. uygun metin kutularÄ±na yazÄ±nÄ±z.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Form nasıl yazdırılır?</b></font>
+Form nasÄ±l yazdÄ±rÄ±lÄ±r?</b></font>
 <ul> 
-	<b>Adım: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tüm bilgiler girildi, şimdi ne yapmalı?</b></font>
+TÃ¼m bilgiler girildi, ÅŸimdi ne yapmalÄ±?</b></font>
 <ul> 
-	<b>Adım: </b>Tetkik sonuçlarını veya bulguları  <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayıp kaydediniz.
+	<b>AdÄ±m: </b>Tetkik sonuÃ§larÄ±nÄ± veya bulgularÄ±  <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±p kaydediniz.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bulgular kaydedildi, sonra ne yapmalı?</b></font>
+Bulgular kaydedildi, sonra ne yapmalÄ±?</b></font>
 <ul> 
-	<b>Adım: </b>Formu arşive göndermek ve poliklinik ya da servise sonucun çıktığını bildirmek için  <img <?php echo createLDImgSrc('../','done.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m: </b>Formu arÅŸive gÃ¶ndermek ve poliklinik ya da servise sonucun Ã§Ä±ktÄ±ÄŸÄ±nÄ± bildirmek iÃ§in  <img <?php echo createLDImgSrc('../','done.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 

@@ -1,19 +1,19 @@
 <form action="#" >
 <p><font size=2 face="verdana,arial" ><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir hasta, bir başka servise nasıl nakledilir?</b></font>
-<ul> <b>Adım: </b>Bölüm listesinde <img <?php echo createLDImgSrc('../','transfer_sm.gif','0') ?>> düğmesini tıklayınız.<br>
+Bir hasta, bir baÅŸka servise nasÄ±l nakledilir?</b></font>
+<ul> <b>AdÄ±m: </b>BÃ¶lÃ¼m listesinde <img <?php echo createLDImgSrc('../','transfer_sm.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir hasta bir başka odaya veya yatağa nasıl nakledilir?</b></font>
+Bir hasta bir baÅŸka odaya veya yataÄŸa nasÄ±l nakledilir?</b></font>
 <ul> 	
 
-	<b>Adım 1: </b>Servis hasta listesini görmek için <input type="button" value="Yatakları göster"> düğmesini tıklayınız.<br>
-	<b>Adım 2: </b>Hastayı bir başka odaya/yatağa nakletmek için <img <?php echo createLDImgSrc('../','transfer_sm.gif','0') ?>> düğmesini tıklayınız.<br>							
+	<b>AdÄ±m 1: </b>Servis hasta listesini gÃ¶rmek iÃ§in <input type="button" value="YataklarÄ± gÃ¶ster"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+	<b>AdÄ±m 2: </b>HastayÄ± bir baÅŸka odaya/yataÄŸa nakletmek iÃ§in <img <?php echo createLDImgSrc('../','transfer_sm.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>							
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Nakile devam etmek istemiyor isem?</b></font>
-<ul> 	<b>Adım 1: </b>Pencereyi kapatmak için <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> düğmesini tıklayınız.<p>
+<ul> 	<b>AdÄ±m 1: </b>Pencereyi kapatmak iÃ§in <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 </ul>
 
 </form>

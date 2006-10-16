@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>CARE 2002</title>
 
 </head>
@@ -11,23 +11,23 @@
 <p>
 <blockquote><font face="Verdana, Arial" size=2>
 <img src="../../gui/img/common/default/butft2_d.gif"><p>
-<b>Bir erişim hakkının düzenlenmesi</b><p>
-Sağlık hizmetlerindeki yüksek güvenlik gereksinimleri nedeniyle, kendi kendinize erişim hakkı oluşturamazsınız. Erişim hakları genellikle bilgi işlem merkezinizde bu işle görevlendirilmiş bir memur tarafından oluşturulur.
+<b>Bir eriÅŸim hakkÄ±nÄ±n dÃ¼zenlenmesi</b><p>
+SaÄŸlÄ±k hizmetlerindeki yÃ¼ksek gÃ¼venlik gereksinimleri nedeniyle, kendi kendinize eriÅŸim hakkÄ± oluÅŸturamazsÄ±nÄ±z. EriÅŸim haklarÄ± genellikle bilgi iÅŸlem merkezinizde bu iÅŸle gÃ¶revlendirilmiÅŸ bir memur tarafÄ±ndan oluÅŸturulur.
 <p>
-<b>Ne yapmalı?</b>
+<b>Ne yapmalÄ±?</b>
 <p>
-Kurumunuzun resmi kanalları yolu ile, kurumunuzun kural ve düzenlemelerinde belirtildiği şekilde erişim hakkı izni için baş vurun.
-Şu başvuru adresini deneyebilirsiniz:<p>
+Kurumunuzun resmi kanallarÄ± yolu ile, kurumunuzun kural ve dÃ¼zenlemelerinde belirtildiÄŸi ÅŸekilde eriÅŸim hakkÄ± izni iÃ§in baÅŸ vurun.
+Åu baÅŸvuru adresini deneyebilirsiniz:<p>
 <blockquote>
-İlgili kişinin adı:<br>
-Bölüm adresi:<br>
+Ä°lgili kiÅŸinin adÄ±:<br>
+BÃ¶lÃ¼m adresi:<br>
 Telefon no:<br>
 Fax no:<br>
 Interkom no:<p>
-Başvuru formu
+BaÅŸvuru formu
 <p>
 </blockquote>
-<a href="../../main/help-info.php?lang=tr" target="HELPINFOFRAME">"İlk adımlar"</a> a  geri
+<a href="../../main/help-info.php?lang=tr" target="HELPINFOFRAME">"Ä°lk adÄ±mlar"</a> a  geri
 </font></blockquote>
 
 </body>

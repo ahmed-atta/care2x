@@ -1,15 +1,15 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Sistem Yönetimi</b></font>
+<b>Sistem YÃ¶netimi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 
 <form>
-	Düzenlemek için "Sistem yönetimi" seçeneği ile çerçevesini açınız.
+	DÃ¼zenlemek iÃ§in "Sistem yÃ¶netimi" seÃ§eneÄŸi ile Ã§erÃ§evesini aÃ§Ä±nÄ±z.
 <ul> 
-<b>Uyarı</b>:
+<b>UyarÄ±</b>:
 <p>
-	Sistemi düzenlerken dikkatli olunuz.
+	Sistemi dÃ¼zenlerken dikkatli olunuz.
 	</p>
 </ul>
 

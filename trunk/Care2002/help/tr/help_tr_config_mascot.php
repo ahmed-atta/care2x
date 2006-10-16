@@ -1,19 +1,19 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Kullanıcı ara yüzü düzenlemesi</b></font>
+<b>KullanÄ±cÄ± ara yÃ¼zÃ¼ dÃ¼zenlemesi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bir maskot nasıl seçilir?</b></font>
+Bir maskot nasÄ±l seÃ§ilir?</b></font>
 <ul> 
-	<b>Adım 1: </b>Seçilen maskotun kutusunu işaretleyiniz.<p>
-	<b>Adım 2: </b> <img <?php  print createLDImgSrc('../','savedisc.gif','0'); ?>> düğmesini tıklayınız.
+	<b>AdÄ±m 1: </b>SeÃ§ilen maskotun kutusunu iÅŸaretleyiniz.<p>
+	<b>AdÄ±m 2: </b> <img <?php  print createLDImgSrc('../','savedisc.gif','0'); ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bir maskot nasıl gizlenir?</b></font>
+Bir maskot nasÄ±l gizlenir?</b></font>
 <ul> 
-	<b>Adım 1: </b>"Maskotu gösterme" seçeneğinin kutusunu işaretleyinizn.<p>
-	<b>Adım 2: </b> <img <?php  print createLDImgSrc('../','savedisc.gif','0'); ?>> düğmesini tıklayınız.
+	<b>AdÄ±m 1: </b>"Maskotu gÃ¶sterme" seÃ§eneÄŸinin kutusunu iÅŸaretleyinizn.<p>
+	<b>AdÄ±m 2: </b> <img <?php  print createLDImgSrc('../','savedisc.gif','0'); ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 

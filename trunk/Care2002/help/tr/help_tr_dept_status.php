@@ -1,21 +1,21 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bölüm yönetimi</b></font>
+<b>BÃ¶lÃ¼m yÃ¶netimi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 <form>
 <font size=2 face="verdana,arial" >
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bölüm durumu</b></font>
+BÃ¶lÃ¼m durumu</b></font>
 <ul> 
-	"etkin" ise, bölüm bölümler listesinde görülür.<p>
-	"etkin değil" ise, bölüm bölümler listesinde görünmez.<p>
+	"etkin" ise, bÃ¶lÃ¼m bÃ¶lÃ¼mler listesinde gÃ¶rÃ¼lÃ¼r.<p>
+	"etkin deÄŸil" ise, bÃ¶lÃ¼m bÃ¶lÃ¼mler listesinde gÃ¶rÃ¼nmez.<p>
 </ul>
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Kayıt durumu</b></font>
+KayÄ±t durumu</b></font>
 <ul> 
-	"görünür" ise, bölümün kayıtlarına ulaşıp görüntülenebilir.<p>
-	"gizli" ise, bölüm kayıtları görülemez. Ancak sistem yöneticisi doğrudan veritabanından ulaşabilir.<p>
+	"gÃ¶rÃ¼nÃ¼r" ise, bÃ¶lÃ¼mÃ¼n kayÄ±tlarÄ±na ulaÅŸÄ±p gÃ¶rÃ¼ntÃ¼lenebilir.<p>
+	"gizli" ise, bÃ¶lÃ¼m kayÄ±tlarÄ± gÃ¶rÃ¼lemez. Ancak sistem yÃ¶neticisi doÄŸrudan veritabanÄ±ndan ulaÅŸabilir.<p>
 </ul>
 
 </form>

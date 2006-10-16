@@ -1,10 +1,10 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Nasıl 
+<b>NasÄ±l 
 <?php
 switch($x1)
 {
- 	case "search": print 'bir telefon numarasını aranır?'; break;
-	case "dir": print 'tüm telefon rehberi açılır?';break;
+ 	case "search": print 'bir telefon numarasÄ±nÄ± aranÄ±r?'; break;
+	case "dir": print 'tÃ¼m telefon rehberi aÃ§Ä±lÄ±r?';break;
 	case "newphone": print 'yeni telefon bilgisi girilir?';break;
  }
  ?></b></font>
@@ -12,30 +12,30 @@ switch($x1)
 <form action="#" >
 <?php if($x1=="search") { ?>
 	<?php if($src=="newphone") { ?>
-	<b>Adım 1</b>
-	<ul> <img <?php echo createLDImgSrc('../','such-gray.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m 1</b>
+	<ul> <img <?php echo createLDImgSrc('../','such-gray.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 	</ul>
 	<?php } ?>
-<b>Adım <?php if($src=="newphone") print "2"; else print "1"; ?></b>
+<b>AdÄ±m <?php if($src=="newphone") print "2"; else print "1"; ?></b>
 
-<ul>  "<span style="background-color:yellow" >Aranacak anahtar sözcüğü giriniz.</span>" alanına ad, soyad, servis, oda numarası, veya bölüm kodu gibi bir bilgiyi ya tam veya birkaç harfini giriniz.
-		<br>Örnek 1: "Nisaiye 3" veya "nis" veya  "Ni" giriniz.
-		<br>Örnek 2:  "Arıkan" veya "arı" giriniz.
-		<br>Örnek 3:  "Rükneddin" veya "rük" giriniz.
-		<br>Örnek 4:  "op11" veya "OP11" veya "op" giriniz.
+<ul>  "<span style="background-color:yellow" >Aranacak anahtar sÃ¶zcÃ¼ÄŸÃ¼ giriniz.</span>" alanÄ±na ad, soyad, servis, oda numarasÄ±, veya bÃ¶lÃ¼m kodu gibi bir bilgiyi ya tam veya birkaÃ§ harfini giriniz.
+		<br>Ã–rnek 1: "Nisaiye 3" veya "nis" veya  "Ni" giriniz.
+		<br>Ã–rnek 2:  "ArÄ±kan" veya "arÄ±" giriniz.
+		<br>Ã–rnek 3:  "RÃ¼kneddin" veya "rÃ¼k" giriniz.
+		<br>Ã–rnek 4:  "op11" veya "OP11" veya "op" giriniz.
 		
 </ul>
-<b>Adım <?php if($src=="newphone") print "3"; else print "2"; ?></b>
-<ul> Aramayı başlatmak için <input type="button" value="ARA"> düğmesini tıklayınız.<p>
+<b>AdÄ±m <?php if($src=="newphone") print "3"; else print "2"; ?></b>
+<ul> AramayÄ± baÅŸlatmak iÃ§in <input type="button" value="ARA"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 </ul>
-<b>Adım <?php if($src=="newphone") print "4"; else print "3"; ?></b>
-<ul> Eğer arama sonuç bulur ise bir liste görünür.<p>
+<b>AdÄ±m <?php if($src=="newphone") print "4"; else print "3"; ?></b>
+<ul> EÄŸer arama sonuÃ§ bulur ise bir liste gÃ¶rÃ¼nÃ¼r.<p>
 </ul>
 <?php } ?>
 
 <?php if($x1=="dir") { ?>
-<b>Adım 1</b>
-<ul> <img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?>> düğmesini tıklayınız.
+<b>AdÄ±m 1</b>
+<ul> <img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 <?php 
 } 
@@ -43,26 +43,26 @@ switch($x1)
  if($x1=="newphone") { 
 	 if($src=="search") { 
 ?>
-<b>Adım 1</b>
-<ul> <img <?php echo createLDImgSrc('../','newdata-gray.gif','0') ?>> düğmesini tıklayınız.
+<b>AdÄ±m 1</b>
+<ul> <img <?php echo createLDImgSrc('../','newdata-gray.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
-<b>Adım 2</b>
-<ul> Eğer önceden giriş yaptı iseniz ve bu işleve erişim hakkınız var ise, ana çerçevede yeni telefon bilgisi giriş formu görüntülenir.<br>
-		Giriş yapmadı iseniz, kullanıcı adı ve şifrenizi girmeniz istenir. <p>
+<b>AdÄ±m 2</b>
+<ul> EÄŸer Ã¶nceden giriÅŸ yaptÄ± iseniz ve bu iÅŸleve eriÅŸim hakkÄ±nÄ±z var ise, ana Ã§erÃ§evede yeni telefon bilgisi giriÅŸ formu gÃ¶rÃ¼ntÃ¼lenir.<br>
+		GiriÅŸ yapmadÄ± iseniz, kullanÄ±cÄ± adÄ± ve ÅŸifrenizi girmeniz istenir. <p>
 	<?php } ?>
-		Kullanıcı adı ve şifrenizi girip  <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> düğmesini tıklayınız.<p>
+		KullanÄ±cÄ± adÄ± ve ÅŸifrenizi girip  <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 		
 </ul>
 <?php } ?>
 
-<b>Uyarı</b>
-<ul> İptal etmeye karar verir iseniz 
+<b>UyarÄ±</b>
+<ul> Ä°ptal etmeye karar verir iseniz 
 <?php
 switch($x1)
 {
- 	case "search": print ' <img '.createLDImgSrc('../','cancel.gif','0').'> düğmesini tıklayınız.'; break;
-	case "dir": print '  <input type="button" value="İptal"> düğmesini tıklayınız.';break;
-	case "newphone": print '  <img '.createLDImgSrc('../','cancel.gif','0').'> düğmesini tıklayınız.';break;
+ 	case "search": print ' <img '.createLDImgSrc('../','cancel.gif','0').'> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.'; break;
+	case "dir": print '  <input type="button" value="Ä°ptal"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.';break;
+	case "newphone": print '  <img '.createLDImgSrc('../','cancel.gif','0').'> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.';break;
  }
  ?>
 </ul>

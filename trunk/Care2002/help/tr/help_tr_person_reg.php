@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 
 </head>
@@ -10,22 +10,22 @@
 <font face="Verdana, Arial" size=3>
 <b>
 <?php echo $src ?>
-<p><font color="#990000"> <b>Kişi</b> ve <b>Hasta</b> arasındaki fark nedir?</font></b><p>
+<p><font color="#990000"> <b>KiÅŸi</b> ve <b>Hasta</b> arasÄ±ndaki fark nedir?</font></b><p>
 <font face="Verdana, Arial" size=2>
-Kişi bilgileri:
+KiÅŸi bilgileri:
 <ul>
 <li> demografiktir.<br>
-<li> sağlığa özgü değildir.
-<li> tıbba özgü değildir.
-<li> pek çok müracaatta aynıdır.
+<li> saÄŸlÄ±ÄŸa Ã¶zgÃ¼ deÄŸildir.
+<li> tÄ±bba Ã¶zgÃ¼ deÄŸildir.
+<li> pek Ã§ok mÃ¼racaatta aynÄ±dÄ±r.
 </ul>
 
 Hasta bilgileri:
 <ul>
-<li> sağlığa müracaata özgü bilgilerdir.<br>
+<li> saÄŸlÄ±ÄŸa mÃ¼racaata Ã¶zgÃ¼ bilgilerdir.<br>
 </ul>
-<p><font color="#990000">Ne zaman bir <b>Kişi</b> kaydedilmelidir?</font></b><p>
-<blockquote>Bir kişiyi veri bankasında bulunmadığı zaman kaydediniz.
+<p><font color="#990000">Ne zaman bir <b>KiÅŸi</b> kaydedilmelidir?</font></b><p>
+<blockquote>Bir kiÅŸiyi veri bankasÄ±nda bulunmadÄ±ÄŸÄ± zaman kaydediniz.
 </blockquote>
 
 <p>

@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 
 </head>
@@ -12,11 +12,11 @@
 <?php echo $src ?>
 <p><font color="#990000">Burada ne yapabilirim?</font></b><p>
 <font face="Verdana, Arial" size=2>
-Bu tipik bir alt menü. Alt menüler genel olarak üç kolon halinde düzenlenir. 
+Bu tipik bir alt menÃ¼. Alt menÃ¼ler genel olarak Ã¼Ã§ kolon halinde dÃ¼zenlenir. 
 <ul>
-<li><b>Kolon 1</b> : Simgeler. Simgeler tıklanamaz.<p>
-<li><b>Kolon 2</b> : Menü kalemleri. Bunlar tıklanabilir kalemlerdir. Ya bir işlevi etkinleştirir ya da diğer işlev ve alt menülere yol açar. Eğer bir işlevi açmak ya da etkinleştirmek ister iseniz o kalemi tıklayınız.<p>
-<li><b>Kolon 3</b> : Tanımlar. Bunlar 2. kolondaki işlev ya da amaçların kısa tanımlamalarıdır.
+<li><b>Kolon 1</b> : Simgeler. Simgeler tÄ±klanamaz.<p>
+<li><b>Kolon 2</b> : MenÃ¼ kalemleri. Bunlar tÄ±klanabilir kalemlerdir. Ya bir iÅŸlevi etkinleÅŸtirir ya da diÄŸer iÅŸlev ve alt menÃ¼lere yol aÃ§ar. EÄŸer bir iÅŸlevi aÃ§mak ya da etkinleÅŸtirmek ister iseniz o kalemi tÄ±klayÄ±nÄ±z.<p>
+<li><b>Kolon 3</b> : TanÄ±mlar. Bunlar 2. kolondaki iÅŸlev ya da amaÃ§larÄ±n kÄ±sa tanÄ±mlamalarÄ±dÄ±r.
 
 </ul>
 

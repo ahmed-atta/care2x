@@ -1,27 +1,27 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Kan ürünleri için bekleyen istemler</b></font>
+<b>Kan Ã¼rÃ¼nleri iÃ§in bekleyen istemler</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 
 <a name="stime"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bekleyen istemler nasıl görüntülenir?</b></font>
+Bekleyen istemler nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b></font>
 <ul> 
-	<b>Uyarı:</b> Listedeki ilk istem kendiliğinden görünür.<p>
-	<b>Adım:</b> İstem formunu görüntülemek için sol listedeki küme numarasını tıklayınız.
+	<b>UyarÄ±:</b> Listedeki ilk istem kendiliÄŸinden gÃ¶rÃ¼nÃ¼r.<p>
+	<b>AdÄ±m:</b> Ä°stem formunu gÃ¶rÃ¼ntÃ¼lemek iÃ§in sol listedeki kÃ¼me numarasÄ±nÄ± tÄ±klayÄ±nÄ±z.
 </ul>
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Form nasıl yazdırılır?</b></font>
+Form nasÄ±l yazdÄ±rÄ±lÄ±r?</b></font>
 <ul> 
-	<b>Adım: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>>  düğmesini tıklayınız.
+	<b>AdÄ±m: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tüm bilgiler girildi, şimdi ne yapmalı?</b></font>
+TÃ¼m bilgiler girildi, ÅŸimdi ne yapmalÄ±?</b></font>
 <ul> 
-	<b>Adım: </b>Bilgileri <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayıp kaydediniz.
+	<b>AdÄ±m: </b>Bilgileri <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±p kaydediniz.
 </ul>
 
 

@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 
 </head>
@@ -9,38 +9,38 @@
 
 <font face="Verdana, Arial" size=3>
 <b>
-<p><font color="#990000">Randevu nasıl gösterilir?</font></b><p>
+<p><font color="#990000">Randevu nasÄ±l gÃ¶sterilir?</font></b><p>
 <font face="Verdana, Arial" size=2>
 <ul>
-Ön tanımlı olarak, o günkü randevular görünür.
+Ã–n tanÄ±mlÄ± olarak, o gÃ¼nkÃ¼ randevular gÃ¶rÃ¼nÃ¼r.
 </ul>
 
 <font face="Verdana, Arial" size=3>
 <b>
-<p><font color="#990000">Başka günlerin randevuları nasıl gösterilir?</font></b><p>
+<p><font color="#990000">BaÅŸka gÃ¼nlerin randevularÄ± nasÄ±l gÃ¶sterilir?</font></b><p>
 <font face="Verdana, Arial" size=2>
 <ul>
-Mini takvimden günü tıklayınız.
+Mini takvimden gÃ¼nÃ¼ tÄ±klayÄ±nÄ±z.
 <p>
 <img src="../help/tr/img/tr_minicalendar.png" border=0 width=230 height=136>
 </ul>
 
 <font face="Verdana, Arial" size=3>
 <b>
-<p><font color="#990000">Bir bölümün randevuları nasıl gösterilir?</font></b><p>
+<p><font color="#990000">Bir bÃ¶lÃ¼mÃ¼n randevularÄ± nasÄ±l gÃ¶sterilir?</font></b><p>
 <font face="Verdana, Arial" size=2>
 <ul>
-Seçiciden bölümü seçiniz, sonra  "<font color=#ff0000>Göster</font>" i tıklayınız.
+SeÃ§iciden bÃ¶lÃ¼mÃ¼ seÃ§iniz, sonra  "<font color=#ff0000>GÃ¶ster</font>" i tÄ±klayÄ±nÄ±z.
 <p>
 <img src="../help/tr/img/tr_deptselect.png" border=0 width=306 height=234></ul>
 
 
 <font face="Verdana, Arial" size=3>
 <b>
-<p><font color="#990000">Bir doktorun randevuları nasıl gösterilir?</font></b><p>
+<p><font color="#990000">Bir doktorun randevularÄ± nasÄ±l gÃ¶sterilir?</font></b><p>
 <font face="Verdana, Arial" size=2>
 <ul>
-Doktorun arama anahtar sözcüğünü giriniz, sonra "<font color=#ff0000>Göster</font>"i tıklayınız;
+Doktorun arama anahtar sÃ¶zcÃ¼ÄŸÃ¼nÃ¼ giriniz, sonra "<font color=#ff0000>GÃ¶ster</font>"i tÄ±klayÄ±nÄ±z;
 <p>
 <img src="../help/tr/img/tr_doctorselect.png" border=0 width=308 height=157>
 </ul>

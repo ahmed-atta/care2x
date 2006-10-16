@@ -1,14 +1,14 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>TİG - İşlem - Kategori</b></font>
+<b>TÄ°G - Ä°ÅŸlem - Kategori</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 <font size=2 face="verdana,arial" >
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-İşlemin kategorisi nasıl düzenlenir ?</b></font>
+Ä°ÅŸlemin kategorisi nasÄ±l dÃ¼zenlenir ?</b></font>
 <ul> 
-	<b>Adım 1: </b>İşlem ile ilgili seçim kutusunu tıklayınız.<p>
-	<b>Adım 2: </b>Listeden kategoriyi seçip tıklayınız.<p>
+	<b>AdÄ±m 1: </b>Ä°ÅŸlem ile ilgili seÃ§im kutusunu tÄ±klayÄ±nÄ±z.<p>
+	<b>AdÄ±m 2: </b>Listeden kategoriyi seÃ§ip tÄ±klayÄ±nÄ±z.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Kategoriler nelerdir?</b></font>
@@ -18,15 +18,15 @@ Kategoriler nelerdir?</b></font>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Ana işlem nasıl ayarlanır?</b></font>
+Ana iÅŸlem nasÄ±l ayarlanÄ±r?</b></font>
 <ul> 
-	<b>Adım 1: </b>İşlem ile ilgili seçim kutusunu tıklayınız.<p>
-	<b>Adım 2: </b>Listeden "Esas" kategorisini tıklayınız.<p>
+	<b>AdÄ±m 1: </b>Ä°ÅŸlem ile ilgili seÃ§im kutusunu tÄ±klayÄ±nÄ±z.<p>
+	<b>AdÄ±m 2: </b>Listeden "Esas" kategorisini tÄ±klayÄ±nÄ±z.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Esas işlem nasıl değiştirilir?</b></font>
+Esas iÅŸlem nasÄ±l deÄŸiÅŸtirilir?</b></font>
 <ul> 
-	<b>Adım 1: </b>İşlem ile ilgili seçim kutusuna tıklayınız.<p>
-	<b>Adım 2: </b>Listeden  "Esas" kategorisini tıklayınız.<p>
+	<b>AdÄ±m 1: </b>Ä°ÅŸlem ile ilgili seÃ§im kutusuna tÄ±klayÄ±nÄ±z.<p>
+	<b>AdÄ±m 2: </b>Listeden  "Esas" kategorisini tÄ±klayÄ±nÄ±z.<p>
 </ul>
 

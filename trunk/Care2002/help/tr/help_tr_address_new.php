@@ -1,5 +1,5 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Adres yöneticisi - Yeni adres bilgisi</b></font>
+<b>Adres yÃ¶neticisi - Yeni adres bilgisi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
@@ -7,18 +7,18 @@
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Forma ne doldurulacak?</b></font>
 <ul>
-	<b>Adım 1:</b> En azından zorunlu olan şehir ya da ilçe adını giriniz.<p>
-	<b>Adım 2:</b> Eğer var ise, uygun alanlara ek bilgileri giriniz.<p>
-	<b>Adım 3:</b> Bilgiyi kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m 1:</b> En azÄ±ndan zorunlu olan ÅŸehir ya da ilÃ§e adÄ±nÄ± giriniz.<p>
+	<b>AdÄ±m 2:</b> EÄŸer var ise, uygun alanlara ek bilgileri giriniz.<p>
+	<b>AdÄ±m 3:</b> Bilgiyi kaydetmek iÃ§in <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Devamlı olarak  "Save attempt to DB failed!" hata mesajını alıyorum ve bilgiler veritabanına kaydedilmiyor. Yanlış nerede?</b></font>
+DevamlÄ± olarak  "Save attempt to DB failed!" hata mesajÄ±nÄ± alÄ±yorum ve bilgiler veritabanÄ±na kaydedilmiyor. YanlÄ±ÅŸ nerede?</b></font>
 <ul>
-Bu genellikle bir PostgreSQL veritabanı kullanır iken olur. En büyük olasılık "ISO Country Code" ülke kodu girdisini boş bırakmanızdan kaynaklanır.
+Bu genellikle bir PostgreSQL veritabanÄ± kullanÄ±r iken olur. En bÃ¼yÃ¼k olasÄ±lÄ±k "ISO Country Code" Ã¼lke kodu girdisini boÅŸ bÄ±rakmanÄ±zdan kaynaklanÄ±r.
 	<p>
-	<b>Adım 1:</b> Adresin ISO ülke kodunu doğru olarak giriniz<p>
-	<b>Adım 2:</b> Eğer ISO ülke kodunu bilmiyor iseniz bir soru işareti, bir boşluk ya da "-na-" (not available-yok anlamında-) girebilirsiniz.<p>
-	<b>Adım 3:</b> "ISO Ülke Kodu" girdisini asla boş bırakmayınız.<p>
+	<b>AdÄ±m 1:</b> Adresin ISO Ã¼lke kodunu doÄŸru olarak giriniz<p>
+	<b>AdÄ±m 2:</b> EÄŸer ISO Ã¼lke kodunu bilmiyor iseniz bir soru iÅŸareti, bir boÅŸluk ya da "-na-" (not available-yok anlamÄ±nda-) girebilirsiniz.<p>
+	<b>AdÄ±m 3:</b> "ISO Ãœlke Kodu" girdisini asla boÅŸ bÄ±rakmayÄ±nÄ±z.<p>
 </ul>

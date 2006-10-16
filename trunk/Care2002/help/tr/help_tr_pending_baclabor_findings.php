@@ -1,29 +1,29 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bakteriyoloji laboratuvarı tetkikleri için bekleyen istemler</b></font>
+<b>Bakteriyoloji laboratuvarÄ± tetkikleri iÃ§in bekleyen istemler</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tetkik sonuçları veya bulgular nasıl girilir?</b></font>
+Tetkik sonuÃ§larÄ± veya bulgular nasÄ±l girilir?</b></font>
 <ul> 
-	<b>Adım: </b>Sonuç veya bulguları ya ilgili metin kutusuna yazarak, veya küçük pembe kutuları tıklayıp karartarak giriniz.
+	<b>AdÄ±m: </b>SonuÃ§ veya bulgularÄ± ya ilgili metin kutusuna yazarak, veya kÃ¼Ã§Ã¼k pembe kutularÄ± tÄ±klayÄ±p karartarak giriniz.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bir form nasıl yazdırılır?</b></font>
+Bir form nasÄ±l yazdÄ±rÄ±lÄ±r?</b></font>
 <ul> 
-	<b>Adım: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tüm bilgiler girildi. Şimdi ne yapmalı?</b></font>
+TÃ¼m bilgiler girildi. Åimdi ne yapmalÄ±?</b></font>
 <ul> 
-	<b>Adım: </b>Tetkik sonuçları veya bulguları <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayıp kaydediniz.
+	<b>AdÄ±m: </b>Tetkik sonuÃ§larÄ± veya bulgularÄ± <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±p kaydediniz.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bulgular kaydedildi. Sonra ne yapmalı?</b></font>
+Bulgular kaydedildi. Sonra ne yapmalÄ±?</b></font>
 <ul> 
-	<b>Adım: </b>Formu arşive göndermek, sonuçların çıktığını servis veya polikliniğe bildirmek için  <img <?php echo createLDImgSrc('../','done.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m: </b>Formu arÅŸive gÃ¶ndermek, sonuÃ§larÄ±n Ã§Ä±ktÄ±ÄŸÄ±nÄ± servis veya polikliniÄŸe bildirmek iÃ§in  <img <?php echo createLDImgSrc('../','done.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 

@@ -1,24 +1,24 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Sigorta şirketi bilgileri</b></font>
+<b>Sigorta ÅŸirketi bilgileri</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 
 <form>
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bilgiler nasıl güncellenir?</b></font>
+Bilgiler nasÄ±l gÃ¼ncellenir?</b></font>
 <ul> 
-	<b>Adım: </b>Formu düzenlemek üzere açmak için <img <?php echo createLDImgSrc('../','update.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m: </b>Formu dÃ¼zenlemek Ã¼zere aÃ§mak iÃ§in <img <?php echo createLDImgSrc('../','update.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tüm sigorta şirketleri nasıl listelenir?</b></font>
+TÃ¼m sigorta ÅŸirketleri nasÄ±l listelenir?</b></font>
 <ul> 
-	<b>Adım: </b><img <?php echo createLDImgSrc('../','list_all.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m: </b><img <?php echo createLDImgSrc('../','list_all.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
-<b>Uyarı</b>
-<ul> İşiniz bitti ise ya da iptal etmeye karar verir iseniz <img <?php  print createLDImgSrc('../','cancel.gif','0'); ?>> düğmesini tıklayınız.
+<b>UyarÄ±</b>
+<ul> Ä°ÅŸiniz bitti ise ya da iptal etmeye karar verir iseniz <img <?php  print createLDImgSrc('../','cancel.gif','0'); ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 </form>

@@ -1,25 +1,25 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-İntranet Eposta - 
+Ä°ntranet Eposta - 
 <?php
 	switch($src)
 	{
 	case "pass": switch($x1)
 						{
-							case "": print "Giriş";
+							case "": print "GiriÅŸ";
 												break;
-							case "1": print "Yeni kullanıcı kaydı";
+							case "1": print "Yeni kullanÄ±cÄ± kaydÄ±";
 												break;
 						}
 						break;
 	case "mail": switch($x1)
 						{
-							case "compose": print "Yeni eposta oluştur";
+							case "compose": print "Yeni eposta oluÅŸtur";
 												break;
 							case "listmail": print "Posta listesi";
 												break;
-							case "sendmail": print "Gönderilmiş posta";
+							case "sendmail": print "GÃ¶nderilmiÅŸ posta";
 												break;
 						}
 						break;
@@ -40,42 +40,42 @@
 <?php if($src=="pass") : ?>
 <?php if($x1=="") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Nasıl giriş yapılır?</b>
+NasÄ±l giriÅŸ yapÄ±lÄ±r?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>İntranet eposta adresinizi  ( @xxxxxx kısmı olmaksızın)  <nobr>"<span style="background-color:yellow" > Eposta adresiniz: </span>"</nobr> alanına yazınız.<br>
- 	<b>Adım 2: </b>Alan kısmını <nobr>"<span style="background-color:yellow" > @<select name="d">
+ 	<b>AdÄ±m 1: </b>Ä°ntranet eposta adresinizi  ( @xxxxxx kÄ±smÄ± olmaksÄ±zÄ±n)  <nobr>"<span style="background-color:yellow" > Eposta adresiniz: </span>"</nobr> alanÄ±na yazÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>Alan kÄ±smÄ±nÄ± <nobr>"<span style="background-color:yellow" > @<select name="d">
                                                                                           	<option value="Test Domain 1"> Test Domain 1</option>
                                                                                           	<option value="Test Domain 2"> Test Domain 2</option>
                                                                                           </select>
-                                                                                           </span>"</nobr> alanlarından seçiniz.<br>
- 	<b>Adım 3: </b>Girmek için <input type="button" value="Giriş"> düğmesini tıklayınız.<br>
+                                                                                           </span>"</nobr> alanlarÄ±ndan seÃ§iniz.<br>
+ 	<b>AdÄ±m 3: </b>Girmek iÃ§in <input type="button" value="GiriÅŸ"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Henüz bir adresim yok. Nasıl yeni bir adres alabilirim?</b>
+HenÃ¼z bir adresim yok. NasÄ±l yeni bir adres alabilirim?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b> Kayıt formu açmak için "<span style="background-color:yellow" > Yeni kullanıcı buradan kayıt olabilir. <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>> </span>" bağlantısını tıklayınız.<br>
- 	<b>Adım 2: </b>Daha çok bilgi için kayıt formundaki "Yardım" düğmesini tıklayabilirsiniz.<br>
+ 	<b>AdÄ±m 1: </b> KayÄ±t formu aÃ§mak iÃ§in "<span style="background-color:yellow" > Yeni kullanÄ±cÄ± buradan kayÄ±t olabilir. <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>> </span>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>Daha Ã§ok bilgi iÃ§in kayÄ±t formundaki "YardÄ±m" dÃ¼ÄŸmesini tÄ±klayabilirsiniz.<br>
 </ul>
 	<?php endif ?>		
 	<?php if($x1=="1") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Nasıl kayıt olunur?</b>
+NasÄ±l kayÄ±t olunur?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Soyad ve adınızı "<span style="background-color:yellow" > Soyad, Ad: </span>" alanına giriniz.<br>
- 	<b>Adım 2: </b>Tercih ettiğiniz eposta adresini "<span style="background-color:yellow" > Seçilen eposta adresi: </span>" alanına giriniz.<p>
- 	<b>Adım 3: </b>Alan kısmını <nobr>"<span style="background-color:yellow" > @<select name="d">
+ 	<b>AdÄ±m 1: </b>Soyad ve adÄ±nÄ±zÄ± "<span style="background-color:yellow" > Soyad, Ad: </span>" alanÄ±na giriniz.<br>
+ 	<b>AdÄ±m 2: </b>Tercih ettiÄŸiniz eposta adresini "<span style="background-color:yellow" > SeÃ§ilen eposta adresi: </span>" alanÄ±na giriniz.<p>
+ 	<b>AdÄ±m 3: </b>Alan kÄ±smÄ±nÄ± <nobr>"<span style="background-color:yellow" > @<select name="d">
                                                                                           	<option value="Test Domain 1"> Test Domain 1</option>
                                                                                           	<option value="Test Domain 2"> Test Domain 2</option>
                                                                                           </select>
-                                                                                           </span>"</nobr> alanından seçiniz.<br>
- 	<b>Adım 4: </b>İstediğiniz takma ismi "<span style="background-color:yellow" > Takma isim: </span>" alanından seçiniz.<p>
- 	<b>Adım 5: </b>Seçtiğiniz şifreyi "<span style="background-color:yellow" > Şifre seçiniz: </span>" alanına giriniz.<br>
- 	<b>Adım 6: </b>Şifrenizi "<span style="background-color:yellow" > Şifrenizi tekrar giriniz: </span>" alanına tekrar giriniz.<br>
- 	<b>Adım 7: </b>Kayıt olmak için <input type="button" value="Register"> düğmesini tıklayınız.<br>
+                                                                                           </span>"</nobr> alanÄ±ndan seÃ§iniz.<br>
+ 	<b>AdÄ±m 4: </b>Ä°stediÄŸiniz takma ismi "<span style="background-color:yellow" > Takma isim: </span>" alanÄ±ndan seÃ§iniz.<p>
+ 	<b>AdÄ±m 5: </b>SeÃ§tiÄŸiniz ÅŸifreyi "<span style="background-color:yellow" > Åifre seÃ§iniz: </span>" alanÄ±na giriniz.<br>
+ 	<b>AdÄ±m 6: </b>Åifrenizi "<span style="background-color:yellow" > Åifrenizi tekrar giriniz: </span>" alanÄ±na tekrar giriniz.<br>
+ 	<b>AdÄ±m 7: </b>KayÄ±t olmak iÃ§in <input type="button" value="Register"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 
 	<?php endif ?>		
@@ -84,92 +84,92 @@ Nasıl kayıt olunur?</b>
 <?php if($src=="mail") : ?>
 <?php if($x1=="listmail") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir posta nasıl açılır?</b>
+Bir posta nasÄ±l aÃ§Ä±lÄ±r?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Postanıı alıcısını, veya göndericisini, veya konusunu, veya tarihini veya simgelerini tıklayınız <img <?php echo createComIcon('../','c-mail.gif','0') ?>> or <img <?php echo createComIcon('../','o-mail.gif','0') ?>>.<br>
+ 	<b>AdÄ±m 1: </b>PostanÄ±Ä± alÄ±cÄ±sÄ±nÄ±, veya gÃ¶ndericisini, veya konusunu, veya tarihini veya simgelerini tÄ±klayÄ±nÄ±z <img <?php echo createComIcon('../','c-mail.gif','0') ?>> or <img <?php echo createComIcon('../','o-mail.gif','0') ?>>.<br>
 </ul>
 
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Simgelerin anlamı <img <?php echo createComIcon('../','c-mail.gif','0') ?>> and <img <?php echo createComIcon('../','o-mail.gif','0') ?>> nedir?</b>
+Simgelerin anlamÄ± <img <?php echo createComIcon('../','c-mail.gif','0') ?>> and <img <?php echo createComIcon('../','o-mail.gif','0') ?>> nedir?</b>
 </font>
 <ul>       	
- 	<img <?php echo createComIcon('../','c-mail.gif','0') ?>> = Posta henüz okunmadı veya açılmadı. <br>
- 	<img <?php echo createComIcon('../','o-mail.gif','0') ?>> = Posa önceden okundu veya açıldı. <br>
+ 	<img <?php echo createComIcon('../','c-mail.gif','0') ?>> = Posta henÃ¼z okunmadÄ± veya aÃ§Ä±lmadÄ±. <br>
+ 	<img <?php echo createComIcon('../','o-mail.gif','0') ?>> = Posa Ã¶nceden okundu veya aÃ§Ä±ldÄ±. <br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Posta nasıl silinir?</b>
+Posta nasÄ±l silinir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Seçmek için postanın kontrol kutusunu <input type="checkbox" name="a" value="s" checked> işaretleyiniz.<br>
- 	<b>Adım 2: </b><input type="button" value="Sil"> düğmesini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b>SeÃ§mek iÃ§in postanÄ±n kontrol kutusunu <input type="checkbox" name="a" value="s" checked> iÅŸaretleyiniz.<br>
+ 	<b>AdÄ±m 2: </b><input type="button" value="Sil"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir klasörden diğer klasöre nasıl geçilir?</b>
+Bir klasÃ¶rden diÄŸer klasÃ¶re nasÄ±l geÃ§ilir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Klasörün ismini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b>KlasÃ¶rÃ¼n ismini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yeni bir posta nasıl yazılır?</b>
+Yeni bir posta nasÄ±l yazÄ±lÄ±r?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b> "<span style="background-color:yellow" > Yeni Email </span>" bağlantısını tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b> "<span style="background-color:yellow" > Yeni Email </span>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	<?php endif ?>		
 	<?php if($x1=="compose") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yeni  mail nasıl yazılır?</b>
+Yeni  mail nasÄ±l yazÄ±lÄ±r?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b> Alacak olanın email adresini "<span style="background-color:yellow" > Alıcı: </span>" alanına yazınız.<br>
- 	<b>Adım 2: </b>Eğer bir başka kişiye kopyasını göndermek isterseniz onun email adresini "<span style="background-color:yellow" > Bilgi </span>" alanına yazınız.<br>
- 	<b>Adım 3: </b>Adresinin belli olmasını istemediğiniz bir kişiye bir kopya göndermek isterseniz onun email adresini  "<span style="background-color:yellow" > Gizli </span>" alanına yazınız.<br>
- 	<b>Adım 4: </b>Mesajınızın konusunu "<span style="background-color:yellow" > Konu: </span>" alanına yazınız.<br>
- 	<b>Adım 5: </b>Şimdi mesajınızı metin alanına yazınız.<br>
- 	<b>Adım 6: </b>Postayı göndermek için  <input type="button" value="Gönder"> düğmesini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b> Alacak olanÄ±n email adresini "<span style="background-color:yellow" > AlÄ±cÄ±: </span>" alanÄ±na yazÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>EÄŸer bir baÅŸka kiÅŸiye kopyasÄ±nÄ± gÃ¶ndermek isterseniz onun email adresini "<span style="background-color:yellow" > Bilgi </span>" alanÄ±na yazÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 3: </b>Adresinin belli olmasÄ±nÄ± istemediÄŸiniz bir kiÅŸiye bir kopya gÃ¶ndermek isterseniz onun email adresini  "<span style="background-color:yellow" > Gizli </span>" alanÄ±na yazÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 4: </b>MesajÄ±nÄ±zÄ±n konusunu "<span style="background-color:yellow" > Konu: </span>" alanÄ±na yazÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 5: </b>Åimdi mesajÄ±nÄ±zÄ± metin alanÄ±na yazÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 6: </b>PostayÄ± gÃ¶ndermek iÃ§in  <input type="button" value="GÃ¶nder"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Maili bir taslak olarak saklamak istiyorum nasıl yapılır?</b>
+Maili bir taslak olarak saklamak istiyorum nasÄ±l yapÄ±lÄ±r?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Mesajınızı metin kutusuna yazınız.<br>
- 	<b>Adım 2: </b>Mesajınızı yazdıktan sonra, <input type="button" value="Taslak olarak kaydet"> düğmesini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b>MesajÄ±nÄ±zÄ± metin kutusuna yazÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>MesajÄ±nÄ±zÄ± yazdÄ±ktan sonra, <input type="button" value="Taslak olarak kaydet"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Adres defterimdeki email adreslerini doğrudan nasıl kullanırım?</b>
+Adres defterimdeki email adreslerini doÄŸrudan nasÄ±l kullanÄ±rÄ±m?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>"Hızlı adresler" deki <input type="button" value="Hepsini göster"> düğmesini tıklayınız.<br>
- 	<b>Adım 2: </b>Küçük bir pencere açılır adres defteriniz görünür.<br>
- 	<b>Adım 3: </b>Adresin ilgili düğmesini tıklayarak gerekli alana kopyalanmasını sağlayınız.<p>
+ 	<b>AdÄ±m 1: </b>"HÄ±zlÄ± adresler" deki <input type="button" value="Hepsini gÃ¶ster"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>KÃ¼Ã§Ã¼k bir pencere aÃ§Ä±lÄ±r adres defteriniz gÃ¶rÃ¼nÃ¼r.<br>
+ 	<b>AdÄ±m 3: </b>Adresin ilgili dÃ¼ÄŸmesini tÄ±klayarak gerekli alana kopyalanmasÄ±nÄ± saÄŸlayÄ±nÄ±z.<p>
 <ul>   
-		Adresi "Alıcı" alanına kopyalamak için  "Kime<input type="radio" name="t" value="a">" yi tıklayınız.<br>
-		Adresi "Bilgi" alanına kopyalamak için "Bilgi<input type="radio" name="t" value="a">" yi tıklayınız.<br>
-		Adresi "Gizli" alanına kopyalamak için "Gizli<input type="radio" name="t" value="a">" yi tıklayınız.<p>
+		Adresi "AlÄ±cÄ±" alanÄ±na kopyalamak iÃ§in  "Kime<input type="radio" name="t" value="a">" yi tÄ±klayÄ±nÄ±z.<br>
+		Adresi "Bilgi" alanÄ±na kopyalamak iÃ§in "Bilgi<input type="radio" name="t" value="a">" yi tÄ±klayÄ±nÄ±z.<br>
+		Adresi "Gizli" alanÄ±na kopyalamak iÃ§in "Gizli<input type="radio" name="t" value="a">" yi tÄ±klayÄ±nÄ±z.<p>
 </ul>
-        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Uyarı:</b>  Eğer bir seçeneği baştan düzenlemek ister iseniz, ilgili <img <?php echo createComIcon('../','redpfeil.gif','0') ?>> simgesini tıklayınız.<br> 	
-        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>Uyarı:</b> Aynı anda birkaç adresi birden seçebilirsiniz.<p>
- 	<b>Adım 4: </b>Seçilmiş adresleri oluşturulan maile kopyalamak için <input type="button" value="Taşı"> düğmesini tıklayınız.<br>
- 	<b>Adım 5: </b>Açılmış penncereyi kapatmak için "<span style="background-color:yellow" > <img <?php echo createComIcon('../','l_arrowgrnsm.gif','0') ?>> Kapat </span>"
-	 bağlantısıını tıklayınız.<br>
+        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>UyarÄ±:</b>  EÄŸer bir seÃ§eneÄŸi baÅŸtan dÃ¼zenlemek ister iseniz, ilgili <img <?php echo createComIcon('../','redpfeil.gif','0') ?>> simgesini tÄ±klayÄ±nÄ±z.<br> 	
+        <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <b>UyarÄ±:</b> AynÄ± anda birkaÃ§ adresi birden seÃ§ebilirsiniz.<p>
+ 	<b>AdÄ±m 4: </b>SeÃ§ilmiÅŸ adresleri oluÅŸturulan maile kopyalamak iÃ§in <input type="button" value="TaÅŸÄ±"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 5: </b>AÃ§Ä±lmÄ±ÅŸ penncereyi kapatmak iÃ§in "<span style="background-color:yellow" > <img <?php echo createComIcon('../','l_arrowgrnsm.gif','0') ?>> Kapat </span>"
+	 baÄŸlantÄ±sÄ±Ä±nÄ± tÄ±klayÄ±nÄ±z.<br>
 </ul>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bu "çabuk adres" de nedir?</b>
+Bu "Ã§abuk adres" de nedir?</b>
 </font>
 <ul>       	
- 	<b>Uyarı: </b>"Çabuk adres" hafızasında saklı e-mail adresleri var ise ilk beşi "çabuk adres" olarak listelenir.<p>
- 	<b>Adım 1: </b>Adresi koymak istediğiniz giriş alanını(yani kime:, veya bilgi:, veya gizli:)  odaklanmak için tıklayınız.<br>
- 	<b>Adım 2: </b>"Çabuk adres" listesindeki adrese tıklayınız. Bu adres otomatik olarak daha önce tıkladığınız giriş alanına kopyalanır.<br>
+ 	<b>UyarÄ±: </b>"Ã‡abuk adres" hafÄ±zasÄ±nda saklÄ± e-mail adresleri var ise ilk beÅŸi "Ã§abuk adres" olarak listelenir.<p>
+ 	<b>AdÄ±m 1: </b>Adresi koymak istediÄŸiniz giriÅŸ alanÄ±nÄ±(yani kime:, veya bilgi:, veya gizli:)  odaklanmak iÃ§in tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>"Ã‡abuk adres" listesindeki adrese tÄ±klayÄ±nÄ±z. Bu adres otomatik olarak daha Ã¶nce tÄ±kladÄ±ÄŸÄ±nÄ±z giriÅŸ alanÄ±na kopyalanÄ±r.<br>
 </ul>
 
 	<?php endif ?>		
 <?php if(($x1=="sendmail")&&($x3=="1")) : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yeni bir email nasıl yazılır?</b>
+Yeni bir email nasÄ±l yazÄ±lÄ±r?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>"<span style="background-color:yellow" > Yeni Email </span>" linkini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b>"<span style="background-color:yellow" > Yeni Email </span>" linkini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	<?php endif ?>		
 <?php endif ?>	
@@ -177,74 +177,74 @@ Yeni bir email nasıl yazılır?</b>
 
 <?php if($src=="read") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Email nasıl yazdırılır?</b>
+Email nasÄ±l yazdÄ±rÄ±lÄ±r?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>"<span style="background-color:yellow" > Yazıcı sürümü <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>></span>"bağlantısını tıklayınız.<br>
- 	<b>Adım 2: </b>E mailin yazıcı uyumlu görüntüsü yeni bir pencerede açılır.<br>
- 	<b>Adım 3: </b>Yazdırmak için <span style="background-color:yellow" >  "Yazdır"  </span> seçeneğini tıklayınız.<br>
- 	<b>Adım 4: </b>Yazıcı menüsü açılır. "Tamam" düğmesini tıklayınız.<br>
- 	<b>Adım 5: </b>Yazıcı sürümü penceresini kapatmak için, "<span style="background-color:yellow" > < Kapat > </span>" seçeneğini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b>"<span style="background-color:yellow" > YazÄ±cÄ± sÃ¼rÃ¼mÃ¼ <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>></span>"baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>E mailin yazÄ±cÄ± uyumlu gÃ¶rÃ¼ntÃ¼sÃ¼ yeni bir pencerede aÃ§Ä±lÄ±r.<br>
+ 	<b>AdÄ±m 3: </b>YazdÄ±rmak iÃ§in <span style="background-color:yellow" >  "YazdÄ±r"  </span> seÃ§eneÄŸini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 4: </b>YazÄ±cÄ± menÃ¼sÃ¼ aÃ§Ä±lÄ±r. "Tamam" dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 5: </b>YazÄ±cÄ± sÃ¼rÃ¼mÃ¼ penceresini kapatmak iÃ§in, "<span style="background-color:yellow" > < Kapat > </span>" seÃ§eneÄŸini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Email nasıl tekrar gönderilir?</b>
+Email nasÄ±l tekrar gÃ¶nderilir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b> <input type="button" value="Tekrar gönder"> düğmesini tıklayınız.<br>
- 	<b>Adım 2: </b>Gerekli ise email adreslerini düzenleyiniz.<br>
- 	<b>Adım 3: </b>Emaili göndermek için <input type="button" value="Gönder"> düğmesini tıklayınız.
+ 	<b>AdÄ±m 1: </b> <input type="button" value="Tekrar gÃ¶nder"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>Gerekli ise email adreslerini dÃ¼zenleyiniz.<br>
+ 	<b>AdÄ±m 3: </b>Emaili gÃ¶ndermek iÃ§in <input type="button" value="GÃ¶nder"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir email nasıl iletilir?</b>
+Bir email nasÄ±l iletilir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b> <input type="button" value="İlet"> düğmesini tıklayınız.<br>
- 	<b>Adım 2: </b>Alıcının adresini giriniz.<br>
- 	<b>Adım 3: </b>Sonunda emaili göndermek için <input type="button" value="Gönder"> düğmesini tıklayınız.
+ 	<b>AdÄ±m 1: </b> <input type="button" value="Ä°let"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>AlÄ±cÄ±nÄ±n adresini giriniz.<br>
+ 	<b>AdÄ±m 3: </b>Sonunda emaili gÃ¶ndermek iÃ§in <input type="button" value="GÃ¶nder"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Email nasıl silinir?</b>
+Email nasÄ±l silinir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b> <input type="button" value="Sil"> düğmesini tıklayınız.<br>
- 	<b>Adım 2: </b>Gerçekten emaili silmeyi isteyip istemediğiniz soruluur.<br>
- 	<b>Adım 3: </b>Emaili sonunda silmak için  <input type="button" value="Tamam"> düğmesini tıklayınız.<p>
-	<b>Uyarı:</b> "Gelen kutusu"ndan silinmiş emailler geçici olarak "silinmiş ögeler"de depolanırlar.
+ 	<b>AdÄ±m 1: </b> <input type="button" value="Sil"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>GerÃ§ekten emaili silmeyi isteyip istemediÄŸiniz soruluur.<br>
+ 	<b>AdÄ±m 3: </b>Emaili sonunda silmak iÃ§in  <input type="button" value="Tamam"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+	<b>UyarÄ±:</b> "Gelen kutusu"ndan silinmiÅŸ emailler geÃ§ici olarak "silinmiÅŸ Ã¶geler"de depolanÄ±rlar.
 </ul>
 	<?php endif ?>		
 	
 <?php if($src=="address") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Adres defterine bir email nasıl eklenir?</b>
+Adres defterine bir email nasÄ±l eklenir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b> <input type="button" value="Yeni email adresi ekle"> düğmesini tıklayınız.<br>
- 	<b>Adım 2: </b>Bir giriş formu görüntülenir "<span style="background-color:yellow" > Soyad, Ad: </span>" alanına ismi giriniz.<br>
- 	<b>Adım 3: </b> "<span style="background-color:yellow" > Takma ad: </span>" alanına takma adı giriniz.<br>
- 	<b>Adım 4: </b> "<span style="background-color:yellow" > Email adresi: </span>" alanına email adresini giriniz.<br>
- 	<b>Adım 5: </b>Alanı <nobr>"<span style="background-color:yellow" > @<select name="d">
+ 	<b>AdÄ±m 1: </b> <input type="button" value="Yeni email adresi ekle"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>Bir giriÅŸ formu gÃ¶rÃ¼ntÃ¼lenir "<span style="background-color:yellow" > Soyad, Ad: </span>" alanÄ±na ismi giriniz.<br>
+ 	<b>AdÄ±m 3: </b> "<span style="background-color:yellow" > Takma ad: </span>" alanÄ±na takma adÄ± giriniz.<br>
+ 	<b>AdÄ±m 4: </b> "<span style="background-color:yellow" > Email adresi: </span>" alanÄ±na email adresini giriniz.<br>
+ 	<b>AdÄ±m 5: </b>AlanÄ± <nobr>"<span style="background-color:yellow" > @<select name="d">
                                                                                           	<option value="Test Domain 1"> Test Domain 1</option>
                                                                                           	<option value="Test Domain 2"> Test Domain 2</option>
                                                                                           </select>
-                                                                                           </span>"</nobr> test alanlarından seçiniz.<br>
- 	<b>Adım 6: </b> <input type="button" value="Kaydet"> düğmesini tıklayınız.<br>
+                                                                                           </span>"</nobr> test alanlarÄ±ndan seÃ§iniz.<br>
+ 	<b>AdÄ±m 6: </b> <input type="button" value="Kaydet"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Adres defterinden bir email adresi nasıl silinir?</b>
+Adres defterinden bir email adresi nasÄ±l silinir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Silinecek adresin kutusunu <input type="checkbox" name="d" value="s" checked> işaretleyiniz.<br>
- 	<b>Adım 2: </b> <input type="button" value="Sil"> düğmesini tıklayınız.<br>
- 	<b>Adım 3: </b>Gerçekten silmeyi isteyip istemediğiniz sorulacak.<br>
- 	<b>Adım 4: </b>Adresi sonunda silmek için <input type="button" value="Tamam"> düğmesini tıklayınız.<p>
+ 	<b>AdÄ±m 1: </b>Silinecek adresin kutusunu <input type="checkbox" name="d" value="s" checked> iÅŸaretleyiniz.<br>
+ 	<b>AdÄ±m 2: </b> <input type="button" value="Sil"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 3: </b>GerÃ§ekten silmeyi isteyip istemediÄŸiniz sorulacak.<br>
+ 	<b>AdÄ±m 4: </b>Adresi sonunda silmek iÃ§in <input type="button" value="Tamam"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
 </ul>
 	<?php endif ?>		
 
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Uyarı:</b>
+UyarÄ±:</b>
 </font>
 <ul>       	
- 	İntranet emailleri ve adresleri YALNIZCA intranet sistemi içerisinde çalışır internette kullanılamaz.<br>
+ 	Ä°ntranet emailleri ve adresleri YALNIZCA intranet sistemi iÃ§erisinde Ã§alÄ±ÅŸÄ±r internette kullanÄ±lamaz.<br>
 </ul>
 	</form>
 

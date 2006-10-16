@@ -3,38 +3,38 @@ require_once('../include/inc_date_format_functions.php');
  ?>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 </head>
 <body>
-<font face="Verdana, Arial" size=3 color="#000099"><b>Bir kişiyi aramada ip uçları</b></font>
+<font face="Verdana, Arial" size=3 color="#000099"><b>Bir kiÅŸiyi aramada ip uÃ§larÄ±</b></font>
 <p>
 <img <?php echo createComIcon('../','warn.gif','0') ?>>
 <font color="#990000" face="Verdana, Arial" ><b></a>
-Anımsamak önemli!</b></font>
+AnÄ±msamak Ã¶nemli!</b></font>
 <font face="Verdana, Arial" size=2>
 <blockquote>
-Girdiğiniz her hangi bir sözcük bir bilginin olası başlangıcı olarak kabul edilir. <p>
-Böylece, örneğin "Can" girdi iseniz Care2x  "can" ile başlayan tüm soyadları (veya adları) arar. Arama somucu olasılıkla "Can", "Canan", "Caner" vs gibi isimleri de içerir.
+GirdiÄŸiniz her hangi bir sÃ¶zcÃ¼k bir bilginin olasÄ± baÅŸlangÄ±cÄ± olarak kabul edilir. <p>
+BÃ¶ylece, Ã¶rneÄŸin "Can" girdi iseniz Care2x  "can" ile baÅŸlayan tÃ¼m soyadlarÄ± (veya adlarÄ±) arar. Arama somucu olasÄ±lÄ±kla "Can", "Canan", "Caner" vs gibi isimleri de iÃ§erir.
 <p>
 </blockquote>
 
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>>
 <font color="#990000" face="Verdana, Arial" ><b></a>
-Bir kişiyi en hızlı bulmanın yolu nedir?</b></font>
+Bir kiÅŸiyi en hÄ±zlÄ± bulmanÄ±n yolu nedir?</b></font>
 <font face="Verdana, Arial" size=2>
 <blockquote>
-<li>Tam TC kimlik numarası ile arayınız.
+<li>Tam TC kimlik numarasÄ± ile arayÄ±nÄ±z.
 </blockquote>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>>
 <font color="#990000" face="Verdana, Arial" ><b></a>
-Soyad ile nasıl aranır?</b></font>
+Soyad ile nasÄ±l aranÄ±r?</b></font>
 <font face="Verdana, Arial" size=2>
 <blockquote>
-<li>Soyadı veya baştan birkaç harfini giriniz.
-<li> "Ara" düğmesini tıklayınız.<br>
+<li>SoyadÄ± veya baÅŸtan birkaÃ§ harfini giriniz.
+<li> "Ara" dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 <img src="../help/tr/img/tr_search_fname.png">
 <p>
 </blockquote>
@@ -44,7 +44,7 @@ Soyad ile nasıl aranır?</b></font>
 Arar iken ad neden dahil edilmeli?</b></font>
 <font face="Verdana, Arial" size=2>
 <blockquote>
-<li>Eğer "Adları da ara" düğmesi görünüyor ise etkinleşmesi için tıklanması gerekir. O zaman Care2x hem ad hem de soyadları aramaya zorlanır. Yoksa (düğme işaretlenmemiş ise) sadece soyadlar aranır.
+<li>EÄŸer "AdlarÄ± da ara" dÃ¼ÄŸmesi gÃ¶rÃ¼nÃ¼yor ise etkinleÅŸmesi iÃ§in tÄ±klanmasÄ± gerekir. O zaman Care2x hem ad hem de soyadlarÄ± aramaya zorlanÄ±r. Yoksa (dÃ¼ÄŸme iÅŸaretlenmemiÅŸ ise) sadece soyadlar aranÄ±r.
 <br>
 <img src="../help/tr/img/tr_search_radio.png">
 </blockquote>
@@ -52,10 +52,10 @@ Arar iken ad neden dahil edilmeli?</b></font>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>>
 <font color="#990000" face="Verdana, Arial" ><b></a>
-Aramamı niçin soyadlara sınırlı tutmalıyım?</b></font>
+AramamÄ± niÃ§in soyadlara sÄ±nÄ±rlÄ± tutmalÄ±yÄ±m?</b></font>
 <font face="Verdana, Arial" size=2>
 <blockquote>
-<li>Arama hızlı olur.
+<li>Arama hÄ±zlÄ± olur.
 
 </blockquote>
 
@@ -65,7 +65,7 @@ Aramamı niçin soyadlara sınırlı tutmalıyım?</b></font>
 Sadece ad ile HIZLI arama!</b></font>
 <font face="Verdana, Arial" size=2>
 <blockquote>
-<li>Adı yazınız, bir boşluk bırakınız, sonra <b>*</b> yazınız.
+<li>AdÄ± yazÄ±nÄ±z, bir boÅŸluk bÄ±rakÄ±nÄ±z, sonra <b>*</b> yazÄ±nÄ±z.
 <br>
 <img src="../help/tr/img/tr_search_quickfirst.png">
 
@@ -76,30 +76,30 @@ Sadece ad ile HIZLI arama!</b></font>
 Ad ve soyad ile arama.</b></font>
 <font face="Verdana, Arial" size=2>
 <blockquote>
-<li>Adı ve soyadı aralarında boşluk bırakarak yazınız
+<li>AdÄ± ve soyadÄ± aralarÄ±nda boÅŸluk bÄ±rakarak yazÄ±nÄ±z
 <br>
 <img src="../help/tr/img/tr_search_firstlast.png">
 <p>
-<img <?php echo createComIcon('../','warn.gif','0') ?>> Uyarı: İlk uyarı burada da geçerlidir. Birinci ve ikinci adlar ad ve soyadın başlangıcı olarak kabul edilir. Böylece yukarıdaki örneğe göre "Can Potuk", "Caner Potur", "Cansu Poturlu", vs. gibi isimler de bulunur.
+<img <?php echo createComIcon('../','warn.gif','0') ?>> UyarÄ±: Ä°lk uyarÄ± burada da geÃ§erlidir. Birinci ve ikinci adlar ad ve soyadÄ±n baÅŸlangÄ±cÄ± olarak kabul edilir. BÃ¶ylece yukarÄ±daki Ã¶rneÄŸe gÃ¶re "Can Potuk", "Caner Potur", "Cansu Poturlu", vs. gibi isimler de bulunur.
 </blockquote>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>>
 <font color="#990000" face="Verdana, Arial" ><b></a>
-Soyad ve ada göre arama.</b></font>
+Soyad ve ada gÃ¶re arama.</b></font>
 <font face="Verdana, Arial" size=2>
 <blockquote>
-<li>Önce soyad, sonra ad yazarak aramak ister iseniz:
-<li>Önce soyadı yazınız, hemen bitişiğine bir virgül yazınız, sonra bir boşluk bırakınız ve en sonuna ad yazınız.
+<li>Ã–nce soyad, sonra ad yazarak aramak ister iseniz:
+<li>Ã–nce soyadÄ± yazÄ±nÄ±z, hemen bitiÅŸiÄŸine bir virgÃ¼l yazÄ±nÄ±z, sonra bir boÅŸluk bÄ±rakÄ±nÄ±z ve en sonuna ad yazÄ±nÄ±z.
 <br>
 <img src="../help/tr/img/tr_search_lastfirst.png">
 </blockquote>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>>
 <font color="#990000" face="Verdana, Arial" ><b></a>
-1 Kasım 1967 (01.11.1967) de doğan kişileri aramak .</b></font>
+1 KasÄ±m 1967 (01.11.1967) de doÄŸan kiÅŸileri aramak .</b></font>
 <font face="Verdana, Arial" size=2>
 <blockquote>
-<li>Güncel tarih biçiminize göre doğum tarihini giriniz.
+<li>GÃ¼ncel tarih biÃ§iminize gÃ¶re doÄŸum tarihini giriniz.
 <br>
 <img src="../help/tr/img/tr_search_fullbday.png">
 </blockquote>
@@ -107,20 +107,20 @@ Soyad ve ada göre arama.</b></font>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>>
 <font color="#990000" face="Verdana, Arial" ><b></a>
-Güncel tarih biçimim nedir?</b></font>
+GÃ¼ncel tarih biÃ§imim nedir?</b></font>
 <font face="Verdana, Arial" size=2>
 <blockquote>
-<li>Güncel tarih biçiminiz: <font color="red"><?php echo $date_format.'</font>. Bugün = ('.@formatDate2Local(date('Y-m-d'),$date_format).')'; ?>
+<li>GÃ¼ncel tarih biÃ§iminiz: <font color="red"><?php echo $date_format.'</font>. BugÃ¼n = ('.@formatDate2Local(date('Y-m-d'),$date_format).')'; ?>
 
 </blockquote>
 
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>>
 <font color="#990000" face="Verdana, Arial" ><b></a>
-1947 de doğmuş tüm Ahmet Polat ları aramak.</b></font>
+1947 de doÄŸmuÅŸ tÃ¼m Ahmet Polat larÄ± aramak.</b></font>
 <font face="Verdana, Arial" size=2>
 <blockquote>
-<li>Adı, soyadı, doğum yılını yazınız
+<li>AdÄ±, soyadÄ±, doÄŸum yÄ±lÄ±nÄ± yazÄ±nÄ±z
 <br>
 <img src="../help/tr/img/tr_search_firstlastyear.png">
 </blockquote>
@@ -128,10 +128,10 @@ Güncel tarih biçimim nedir?</b></font>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>>
 <font color="#990000" face="Verdana, Arial" ><b></a>
-1989 da doğmuş tüm kişileri arama.</b></font>
+1989 da doÄŸmuÅŸ tÃ¼m kiÅŸileri arama.</b></font>
 <font face="Verdana, Arial" size=2>
 <blockquote>
-<li> *, boşluk,  *, boşluk, doğum yılı yazınız
+<li> *, boÅŸluk,  *, boÅŸluk, doÄŸum yÄ±lÄ± yazÄ±nÄ±z
 <br>
 <img src="../help/tr/img/tr_search_allyear.png">
 </blockquote>
@@ -139,10 +139,10 @@ Güncel tarih biçimim nedir?</b></font>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>>
 <font color="#990000" face="Verdana, Arial" ><b></a>
-Tüm 20 yüzyılda doğmuş (1900-1999) Ahmet Potur ları arama.</b></font>
+TÃ¼m 20 yÃ¼zyÄ±lda doÄŸmuÅŸ (1900-1999) Ahmet Potur larÄ± arama.</b></font>
 <font face="Verdana, Arial" size=2>
 <blockquote>
-<li>"ahmet", boşluk, "potur", boşluk, "19" yazınız.
+<li>"ahmet", boÅŸluk, "potur", boÅŸluk, "19" yazÄ±nÄ±z.
 <br>
 <img src="../help/tr/img/tr_search_firstlastcent.png">
 </blockquote>

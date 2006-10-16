@@ -4,23 +4,23 @@
 <font face="Verdana, Arial" size=3>
 How to enter a new patient's admission<p>
 <font face="Verdana, Arial" size=2>
-<b>Adım 1</b>
-<ul>Ana menü çerçevesimde "Kabul" yazısını tıklayınız.
+<b>AdÄ±m 1</b>
+<ul>Ana menÃ¼ Ã§erÃ§evesimde "Kabul" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.
 </ul>
 <p>
-<b>Adım 2</b>
-<ul> Eğer önceden  giriş yaptı iseniz ve bu işleve erişim hakkınız var ise, hasta kabul formu ana ana çerçevede görünür.<br>
+<b>AdÄ±m 2</b>
+<ul> EÄŸer Ã¶nceden  giriÅŸ yaptÄ± iseniz ve bu iÅŸleve eriÅŸim hakkÄ±nÄ±z var ise, hasta kabul formu ana ana Ã§erÃ§evede gÃ¶rÃ¼nÃ¼r.<br>
 		Y
-	Önceden giriş yapmadı iseniz, kullanıcı adı ve şifreniz sizden istenecektir. Kullanıcı adı ve şifrenizi girip <img src="../img/<?php echo "$lang/$lang" ?>_continue.gif" border=0> düğmesine tıklayınız.
+	Ã–nceden giriÅŸ yapmadÄ± iseniz, kullanÄ±cÄ± adÄ± ve ÅŸifreniz sizden istenecektir. KullanÄ±cÄ± adÄ± ve ÅŸifrenizi girip <img src="../img/<?php echo "$lang/$lang" ?>_continue.gif" border=0> dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z.
 </ul>
 <p>
-<b>Adım 3</b>
-<ul>Hastanın kişisel bilgilerini giriniz. Sonra kaydetmek için <input type="button" value="Kaydet">
- 		 düğmesini tıklayınız. Eğer bir bilgi eksik ise kırmızı ile işaretli alanları doldurmanızı isteyen bir mesaj görünür. Bilgiyi tamamlamadan yine de kaydetmek ister iseniz  <input type="button" value="Yine de kaydet "> düğmesini tıklayınız.
+<b>AdÄ±m 3</b>
+<ul>HastanÄ±n kiÅŸisel bilgilerini giriniz. Sonra kaydetmek iÃ§in <input type="button" value="Kaydet">
+ 		 dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. EÄŸer bir bilgi eksik ise kÄ±rmÄ±zÄ± ile iÅŸaretli alanlarÄ± doldurmanÄ±zÄ± isteyen bir mesaj gÃ¶rÃ¼nÃ¼r. Bilgiyi tamamlamadan yine de kaydetmek ister iseniz  <input type="button" value="Yine de kaydet "> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 <p>
-<b>Adım 4</b>
-<ul>Sol menü çerçevesindeki  "Kabul" yazısını tıklayınız.
+<b>AdÄ±m 4</b>
+<ul>Sol menÃ¼ Ã§erÃ§evesindeki  "Kabul" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.
 </ul>
 <p>
 <p>

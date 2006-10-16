@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 EDP - 
@@ -9,17 +9,17 @@ EDP -
 	case "access": 
 		switch($x1)
 						{
-							case "": print "Erişim hakkı oluşturma";
+							case "": print "EriÅŸim hakkÄ± oluÅŸturma";
 												break;
-							case "save": print "Yeni erişim hakkı kaydedildi";
+							case "save": print "Yeni eriÅŸim hakkÄ± kaydedildi";
 												break;
-							case "list": print "Bulunan erişim hakları";
+							case "list": print "Bulunan eriÅŸim haklarÄ±";
 												break;
-							case "update": print "Bir erişim hakkının düzenlenmesi";
+							case "update": print "Bir eriÅŸim hakkÄ±nÄ±n dÃ¼zenlenmesi";
 												break;
-							case "lock":  print  " Bulunan bir erişim hakkının"; if($x2=="0") print " kilitlenmesi"; else print " kilidinin açılması"; 
+							case "lock":  print  " Bulunan bir eriÅŸim hakkÄ±nÄ±n"; if($x2=="0") print " kilitlenmesi"; else print " kilidinin aÃ§Ä±lmasÄ±"; 
 												break;
-							case "delete": print "Bir erişim hakkının silinmesi";
+							case "delete": print "Bir eriÅŸim hakkÄ±nÄ±n silinmesi";
 												break;
 						}
 						break;
@@ -35,139 +35,139 @@ EDP -
 <?php if($src=="access") : ?>
 	<?php if($x1=="") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir hastane çalışanı için erişim hakları nasıl oluşturulur ?</b>
+Bir hastane Ã§alÄ±ÅŸanÄ± iÃ§in eriÅŸim haklarÄ± nasÄ±l oluÅŸturulur ?</b>
 </font>
 <ul>       	
- 	<b>Adım  1: </b>Önce çalışanı bulunuz.  <input type="button" value="Bir çalışanı bul"> düğmesini tıklayınız.<p>
- 	<b>Adım 2: </b>Bir arama sayfası açılır. Bir çalışanı arama konusundaki yönergeleri izleyiniz.<p>
+ 	<b>AdÄ±m  1: </b>Ã–nce Ã§alÄ±ÅŸanÄ± bulunuz.  <input type="button" value="Bir Ã§alÄ±ÅŸanÄ± bul"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+ 	<b>AdÄ±m 2: </b>Bir arama sayfasÄ± aÃ§Ä±lÄ±r. Bir Ã§alÄ±ÅŸanÄ± arama konusundaki yÃ¶nergeleri izleyiniz.<p>
 </ul>
 
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yeni erişim hakkı nasıl oluşturulur?</b>
+Yeni eriÅŸim hakkÄ± nasÄ±l oluÅŸturulur?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Kişi, bölüm, veya klinik vs.nin tam adını "<span style="background-color:yellow" > İsim </span>" alanına yazınız.<br>
- 	<b>Adım 2: </b>Kullanıcı ismini "<span style="background-color:yellow" > kullanıcı giriş ismi </span>" alanına yazınız.<p>
-	<b>Uyarı:</b> Kullanıcı adında boşluğa izin verilmez.<p>
- 	<b>Adım 3: </b>Kullanıcı şifresini "<span style="background-color:yellow" > Şifre </span>" alanına giriniz.<p>
- 	<b>Adım 4: </b>"İzin ağacı" nda kullanıcının girmesine izin verilen alanları işaretleyiniz.<p>
+ 	<b>AdÄ±m 1: </b>KiÅŸi, bÃ¶lÃ¼m, veya klinik vs.nin tam adÄ±nÄ± "<span style="background-color:yellow" > Ä°sim </span>" alanÄ±na yazÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>KullanÄ±cÄ± ismini "<span style="background-color:yellow" > kullanÄ±cÄ± giriÅŸ ismi </span>" alanÄ±na yazÄ±nÄ±z.<p>
+	<b>UyarÄ±:</b> KullanÄ±cÄ± adÄ±nda boÅŸluÄŸa izin verilmez.<p>
+ 	<b>AdÄ±m 3: </b>KullanÄ±cÄ± ÅŸifresini "<span style="background-color:yellow" > Åifre </span>" alanÄ±na giriniz.<p>
+ 	<b>AdÄ±m 4: </b>"Ä°zin aÄŸacÄ±" nda kullanÄ±cÄ±nÄ±n girmesine izin verilen alanlarÄ± iÅŸaretleyiniz.<p>
 </ul>
 
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Tüm ilgili bilgileri girmeyi bitirdim. Nasıl kaydederim?</b>
+TÃ¼m ilgili bilgileri girmeyi bitirdim. NasÄ±l kaydederim?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	<?php endif ?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Şimdi yeni erişim hakkı kaydedildi. Bir başka erişim hakkı daha nasıl oluşturulur?</b>
+Åimdi yeni eriÅŸim hakkÄ± kaydedildi. Bir baÅŸka eriÅŸim hakkÄ± daha nasÄ±l oluÅŸturulur?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b> <input type="button" value="Tamam"> düğmesini tıklayınız.<br>
- 	<b>Adım 2: </b>Giriş formu görülecek.<br>
- 	<b>Adım 3: </b>Erişim hakkı oluşturmak hakkında daha fazla bilgi görmek için "Yardım" düğmesini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b> <input type="button" value="Tamam"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>GiriÅŸ formu gÃ¶rÃ¼lecek.<br>
+ 	<b>AdÄ±m 3: </b>EriÅŸim hakkÄ± oluÅŸturmak hakkÄ±nda daha fazla bilgi gÃ¶rmek iÃ§in "YardÄ±m" dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Daha önceden verilmiş erişim haklarının listesini görmek istiyorum. Nasıl yaparım?</b>
+Daha Ã¶nceden verilmiÅŸ eriÅŸim haklarÄ±nÄ±n listesini gÃ¶rmek istiyorum. NasÄ±l yaparÄ±m?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b> <input type="button" value="Güncel erişim hakları listesi"> düğmesini tıklayınız.<br>
- 	<b>Adım 2: </b>Güncel erişim hakları listelenir<br>
+ 	<b>AdÄ±m 1: </b> <input type="button" value="GÃ¼ncel eriÅŸim haklarÄ± listesi"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>GÃ¼ncel eriÅŸim haklarÄ± listelenir<br>
 </ul>
 	
 	<?php endif ?>	
 	<?php if($x1=="list") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-<img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> ve <img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> düğmelerinin anlamı ne?</b>
+<img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> ve <img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> dÃ¼ÄŸmelerinin anlamÄ± ne?</b>
 </font>
 <ul>       	
- 	<img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> = Kullanıcının erişim hakkı kilitlenmiş veya "dondurulmuş". Erişilebilir olarak düzenlenmiş alanlara giremez.<br>
- 	<img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> = Kullanıcının erişim hakkı kilitli değil. Erişilebilir olarak düzenlenmiş alanlara girebilir.<br>
+ 	<img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> = KullanÄ±cÄ±nÄ±n eriÅŸim hakkÄ± kilitlenmiÅŸ veya "dondurulmuÅŸ". EriÅŸilebilir olarak dÃ¼zenlenmiÅŸ alanlara giremez.<br>
+ 	<img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> = KullanÄ±cÄ±nÄ±n eriÅŸim hakkÄ± kilitli deÄŸil. EriÅŸilebilir olarak dÃ¼zenlenmiÅŸ alanlara girebilir.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
- "C","L", ve "D", veya "U" seçenekleri ne anlama gelir?</b>
+ "C","L", ve "D", veya "U" seÃ§enekleri ne anlama gelir?</b>
 </font>
 <ul>       	
- 	<b>C: </b> = Kullanıcının erişim bilgisini değiştirmek veya düzenlemek.<br>
- 	<b>L: </b> = Kullanıcının erişim hakkını kilitlemek.<br>
- 	<b>D: </b> = Kullanıcının erişim hakkını silmek.<br>
- 	<b>U: </b> = (Halen kilitli ise) kullanıcının erişim hakkının kilidini çözmek.<br>
+ 	<b>C: </b> = KullanÄ±cÄ±nÄ±n eriÅŸim bilgisini deÄŸiÅŸtirmek veya dÃ¼zenlemek.<br>
+ 	<b>L: </b> = KullanÄ±cÄ±nÄ±n eriÅŸim hakkÄ±nÄ± kilitlemek.<br>
+ 	<b>D: </b> = KullanÄ±cÄ±nÄ±n eriÅŸim hakkÄ±nÄ± silmek.<br>
+ 	<b>U: </b> = (Halen kilitli ise) kullanÄ±cÄ±nÄ±n eriÅŸim hakkÄ±nÄ±n kilidini Ã§Ã¶zmek.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Kullanıcının erişim bilgisi nasıl düzenlenir veya değiştirilir?</b>
+KullanÄ±cÄ±nÄ±n eriÅŸim bilgisi nasÄ±l dÃ¼zenlenir veya deÄŸiÅŸtirilir?</b>
 </font>
 <ul>       	
- 	Kullanıcı ile ilgili "<span style="background-color:yellow" > C </span>" seçeneğini tıklayınız.<br>
+ 	KullanÄ±cÄ± ile ilgili "<span style="background-color:yellow" > C </span>" seÃ§eneÄŸini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Kullanıcının  erişim verisi nasıl kilitlenir?</b>
+KullanÄ±cÄ±nÄ±n  eriÅŸim verisi nasÄ±l kilitlenir?</b>
 </font>
 <ul>       	
- 	Kullanıcı ile ilgili "<span style="background-color:yellow" > L </span>" seçeneğini tıklayınız.<br>
+ 	KullanÄ±cÄ± ile ilgili "<span style="background-color:yellow" > L </span>" seÃ§eneÄŸini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-(Eğer halen kilitli ise) Kullanıcının erişim hakkının kilidi nasıl açılır?</b>
+(EÄŸer halen kilitli ise) KullanÄ±cÄ±nÄ±n eriÅŸim hakkÄ±nÄ±n kilidi nasÄ±l aÃ§Ä±lÄ±r?</b>
 </font>
 <ul>       	
- 	Kullanıcı ile ilgili "<span style="background-color:yellow" > U </span>" seçeneğini tıklayınız.<br>
+ 	KullanÄ±cÄ± ile ilgili "<span style="background-color:yellow" > U </span>" seÃ§eneÄŸini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir erişim hakkı nasıl silinir?</b>
+Bir eriÅŸim hakkÄ± nasÄ±l silinir?</b>
 </font>
 <ul>       	
- 	Kullanıcı ile ilgili  "<span style="background-color:yellow" > D </span>" seçeneğini tıklayınız.<br>
+ 	KullanÄ±cÄ± ile ilgili  "<span style="background-color:yellow" > D </span>" seÃ§eneÄŸini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 
 	<?php endif ?>	
 	
 	<?php if($x1=="update") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir erişim hakkı nasıl düzenlenir?</b>
+Bir eriÅŸim hakkÄ± nasÄ±l dÃ¼zenlenir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Bilgiyi düzenleyiniz.<br>
- 	<b>Adım 2: </b><img <?php echo createLDImgSrc('../','savedisc.gif','0','absmiddle') ?>> düğmesini tıklayınız .<br>
+ 	<b>AdÄ±m 1: </b>Bilgiyi dÃ¼zenleyiniz.<br>
+ 	<b>AdÄ±m 2: </b><img <?php echo createLDImgSrc('../','savedisc.gif','0','absmiddle') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z .<br>
 </ul>
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Uyarı:</b>
+UyarÄ±:</b>
 </font>
 <ul>       	
- 	Eğer düzenlememeye karar verirseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0','absmiddle') ?>>  düğmesini tıklayınız.<br>
+ 	EÄŸer dÃ¼zenlememeye karar verirseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0','absmiddle') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	
 	<?php endif ?>		
 	<?php if($x1=="delete") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir erişim hakkı nasıl silinir?</b>
+Bir eriÅŸim hakkÄ± nasÄ±l silinir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Erişim hakkını silmek istediğinizden emin iseniz,<br>
-	  <input type="button" value="Evet, Kesinlikle eminim. Erişim hakkını sil."> düğmesini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b>EriÅŸim hakkÄ±nÄ± silmek istediÄŸinizden emin iseniz,<br>
+	  <input type="button" value="Evet, Kesinlikle eminim. EriÅŸim hakkÄ±nÄ± sil."> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Uyarı:</b>
+UyarÄ±:</b>
 </font>
 <ul>       	
- 	Silmemeye karar verir iseniz <input type="button" value="Hayır Geri."> düğmesini tıklayınız.<br>
+ 	Silmemeye karar verir iseniz <input type="button" value="HayÄ±r Geri."> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	
 	<?php endif ?>		
 	
 	<?php if($x1=="lock") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir erişim hakkı nasıl <?php if($x2=="0") print "kilitlenir"; else print "açılır"; ?> ?</b>
+Bir eriÅŸim hakkÄ± nasÄ±l <?php if($x2=="0") print "kilitlenir"; else print "aÃ§Ä±lÄ±r"; ?> ?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Eğer bir erişim hakkını  <?php if($x2=="0") print "kilitlemek"; else print "açmak"; ?> istediğinizden emin iseniz,<br>
-	  <input type="button" value="Evet, eminim."> düğmesini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b>EÄŸer bir eriÅŸim hakkÄ±nÄ±  <?php if($x2=="0") print "kilitlemek"; else print "aÃ§mak"; ?> istediÄŸinizden emin iseniz,<br>
+	  <input type="button" value="Evet, eminim."> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Uyarı:</b>
+UyarÄ±:</b>
 </font>
 <ul>       	
- 	Eğer <?php if($x2=="0") print "kilitlemeye"; else print "çözmemeye"; ?> karar verirseniz <input type="button" value="Hayır. Geri."> düğmesini tıklayınız.<br>
+ 	EÄŸer <?php if($x2=="0") print "kilitlemeye"; else print "Ã§Ã¶zmemeye"; ?> karar verirseniz <input type="button" value="HayÄ±r. Geri."> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 	
 	<?php endif ?>		

@@ -1,7 +1,7 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-Renk seçenekleri 
+Renk seÃ§enekleri 
 <?php
 	switch($src)
 	{
@@ -14,54 +14,54 @@ Renk seçenekleri
 <form action="#" >
 <?php if($src=="") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Arka plan rengi nasıl seçilir?</b>
+Arka plan rengi nasÄ±l seÃ§ilir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b> İstediğiniz çerçevede "<span style="background-color:yellow" > Arka plan rengi <img <?php echo createComIcon('../','settings_tree.gif','0') ?>> </span>" bağlantısına tıklayınız.<br>
- 	<b>Adım 2: </b>Renk paleti bulunan bir pencere açılır.<br>
- 	<b>Adım 3: </b>Arka plan için istediğiniz renge tıklayınız.<br>
- 	<b>Adım 4: </b>Rengi uygulamak için <input type="button" value="Uygula"> düğmesini tıklayınız.<br>
- 	<b>Adım 5: </b>İşiniz bitti ise  <input type="button" value="Tamam"> düğmesini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b> Ä°stediÄŸiniz Ã§erÃ§evede "<span style="background-color:yellow" > Arka plan rengi <img <?php echo createComIcon('../','settings_tree.gif','0') ?>> </span>" baÄŸlantÄ±sÄ±na tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>Renk paleti bulunan bir pencere aÃ§Ä±lÄ±r.<br>
+ 	<b>AdÄ±m 3: </b>Arka plan iÃ§in istediÄŸiniz renge tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 4: </b>Rengi uygulamak iÃ§in <input type="button" value="Uygula"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 5: </b>Ä°ÅŸiniz bitti ise  <input type="button" value="Tamam"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yazı rengi nasıl seçilir?</b>
+YazÄ± rengi nasÄ±l seÃ§ilir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Ya üst çerçevedeki  "<span style="background-color:yellow" > Yazı rengi </span>" veya menü çerçevesindeki 
-	"<span style="background-color:yellow" > Menü kalemleri </span>" bağlantısını tıklayınız.<br>
- 	<b>Adım 2: </b>Renk paletli bir pencere açılır.<br>
- 	<b>Adım 3: </b>Yazı için istediğiniz rengi seçiniz.<br>
- 	<b>Adım 4: </b>Rengi uygulamak için <input type="button" value="Uygula"> düğmesini tıklayınız.<br>
- 	<b>Adım 5: </b>İşiniz bitti ise <input type="button" value="Tamam"> düğmesini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b>Ya Ã¼st Ã§erÃ§evedeki  "<span style="background-color:yellow" > YazÄ± rengi </span>" veya menÃ¼ Ã§erÃ§evesindeki 
+	"<span style="background-color:yellow" > MenÃ¼ kalemleri </span>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>Renk paletli bir pencere aÃ§Ä±lÄ±r.<br>
+ 	<b>AdÄ±m 3: </b>YazÄ± iÃ§in istediÄŸiniz rengi seÃ§iniz.<br>
+ 	<b>AdÄ±m 4: </b>Rengi uygulamak iÃ§in <input type="button" value="Uygula"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 5: </b>Ä°ÅŸiniz bitti ise <input type="button" value="Tamam"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bağlantı renkleri nasıl seçilir?</b>
+BaÄŸlantÄ± renkleri nasÄ±l seÃ§ilir?</b>
 </font>
 <ul>       	
- 	<b>Adım 5: </b>İleri renk seçeneklerini görmek için <input type="button" value="İleri renk seçenekleri"> düğmesini tıklayınız.<br>
+ 	<b>AdÄ±m 5: </b>Ä°leri renk seÃ§eneklerini gÃ¶rmek iÃ§in <input type="button" value="Ä°leri renk seÃ§enekleri"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 <?php endif ?>
 
 <?php if($src=="ext") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Aktif bağlantı rengi nasıl seçilir?</b>
+Aktif baÄŸlantÄ± rengi nasÄ±l seÃ§ilir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Ya ana çerçevede "<span style="background-color:yellow" > Etkin bağlantı </span>" bağlantısını ya da menü çerçevesinde "<span style="background-color:yellow" > Etkin bağlantı </span>" bağlantısını tıklayınız.<br>
- 	<b>Adım 2: </b>Bir renk paleti penceresi açılır.<br>
- 	<b>Adım 3: </b>Etkin bağlantı için istediğiniz rengi tıklayınız.<br>
- 	<b>Adım 4: </b>Rengi uygulamak için <input type="button" value="Uygula"> düğmesini tıklatınız.<br>
- 	<b>Adım 5: </b>İşiniz bitti ise <input type="button" value="Tamam"> düğmesini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b>Ya ana Ã§erÃ§evede "<span style="background-color:yellow" > Etkin baÄŸlantÄ± </span>" baÄŸlantÄ±sÄ±nÄ± ya da menÃ¼ Ã§erÃ§evesinde "<span style="background-color:yellow" > Etkin baÄŸlantÄ± </span>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>Bir renk paleti penceresi aÃ§Ä±lÄ±r.<br>
+ 	<b>AdÄ±m 3: </b>Etkin baÄŸlantÄ± iÃ§in istediÄŸiniz rengi tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 4: </b>Rengi uygulamak iÃ§in <input type="button" value="Uygula"> dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 5: </b>Ä°ÅŸiniz bitti ise <input type="button" value="Tamam"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Hover bağlantı rengi nasıl seçilir?</b>
+Hover baÄŸlantÄ± rengi nasÄ±l seÃ§ilir?</b>
 </font>
 <ul>       	
- 	<b>Adım 1: </b>Ya ana çerçevede "<span style="background-color:yellow" > hover bağlantı </span>" bağlantısını ya da menü çerçevesinde "<span style="background-color:yellow" > hover bağlantı </span>" bağlantısını tıklayınız.<br>
- 	<b>Adım 2: </b>Bir renk paleti penceresi açılır.<br>
- 	<b>Adım 3: </b>Etkin bağlantı için istediğiniz rengi tıklayınız.<br>
- 	<b>Adım 4: </b>Rengi uygulamak için <input type="button" value="Uygula"> düğmesini tıklatınız.<br>
- 	<b>Adım 5: </b>İşiniz bitti ise <input type="button" value="Tamam"> düğmesini tıklayınız.<br>
+ 	<b>AdÄ±m 1: </b>Ya ana Ã§erÃ§evede "<span style="background-color:yellow" > hover baÄŸlantÄ± </span>" baÄŸlantÄ±sÄ±nÄ± ya da menÃ¼ Ã§erÃ§evesinde "<span style="background-color:yellow" > hover baÄŸlantÄ± </span>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 2: </b>Bir renk paleti penceresi aÃ§Ä±lÄ±r.<br>
+ 	<b>AdÄ±m 3: </b>Etkin baÄŸlantÄ± iÃ§in istediÄŸiniz rengi tÄ±klayÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 4: </b>Rengi uygulamak iÃ§in <input type="button" value="Uygula"> dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<br>
+ 	<b>AdÄ±m 5: </b>Ä°ÅŸiniz bitti ise <input type="button" value="Tamam"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
 </ul>
 
 

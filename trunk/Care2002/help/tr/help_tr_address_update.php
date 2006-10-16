@@ -6,14 +6,14 @@
 
 <form>
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bilgi nasıl güncellenir?</b></font>
+Bilgi nasÄ±l gÃ¼ncellenir?</b></font>
 <ul> 
-	<b>Adım 1: </b>Önceki bilginin yerine konulacak bilgiyi giriniz.<p>
-	<b>Adım 2: </b>Güncellenmiş bilgiyi kaydetmek için   <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.
+	<b>AdÄ±m 1: </b>Ã–nceki bilginin yerine konulacak bilgiyi giriniz.<p>
+	<b>AdÄ±m 2: </b>GÃ¼ncellenmiÅŸ bilgiyi kaydetmek iÃ§in   <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
-<b>Uyarı</b>
-<ul> Eğer işiniz bitti ise ya da iptal etmeye karar verdi iseniz<img <?php  print createLDImgSrc('../','cancel.gif','0'); ?>> düğmesini tıklayınız.
+<b>UyarÄ±</b>
+<ul> EÄŸer iÅŸiniz bitti ise ya da iptal etmeye karar verdi iseniz<img <?php  print createLDImgSrc('../','cancel.gif','0'); ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
 </ul>
 
 </form>
