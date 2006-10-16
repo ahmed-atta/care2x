@@ -1,5 +1,5 @@
 <?php
-$LDPerson='Kiþi';
+$LDPerson='KiÅŸi';
 $LDPatient='Hasta';
 $LDBloodGroup='Kan grubu';
 # these are blood groups
@@ -8,13 +8,13 @@ $LDB='B';
 $LDAB='AB';
 $LDO='O';
 # 2003-08-28 EL
-$LDPlsEnterLastName='Lütfen soyadý giriniz';
-$LDPlsEnterFirstName='Lütfen ad giriniz';
-$LDPlsEnterDateBirth='Lütfen doðum tarihini giriniz';
-$LDPlsSelectSex='Lütfen cinsiyeti seçiniz';
-$LDPlsEnterStreetName='Lütfen cadde adý giriniz';
-$LDPlsEnterBldgNr='Lütfen ev veya bina numarasýný giriniz';
+$LDPlsEnterLastName='LÃ¼tfen soyadÄ± giriniz';
+$LDPlsEnterFirstName='LÃ¼tfen ad giriniz';
+$LDPlsEnterDateBirth='LÃ¼tfen doÄŸum tarihini giriniz';
+$LDPlsSelectSex='LÃ¼tfen cinsiyeti seÃ§iniz';
+$LDPlsEnterStreetName='LÃ¼tfen cadde adÄ± giriniz';
+$LDPlsEnterBldgNr='LÃ¼tfen ev veya bina numarasÄ±nÄ± giriniz';
 #2003-10-03 EL
-$LDPlsEnterZip='Lütfen posta kodunu giriniz';
-$LDPlsEnterFullName='Lütfen tam adýnýzý giriniz';
+$LDPlsEnterZip='LÃ¼tfen posta kodunu giriniz';
+$LDPlsEnterFullName='LÃ¼tfen tam adÄ±nÄ±zÄ± giriniz';
 ?>

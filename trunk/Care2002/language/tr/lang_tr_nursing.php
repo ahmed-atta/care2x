@@ -5,403 +5,403 @@
 $LDNursing='Servisler';
 $LDStation='Servis';
 
-$LDQuickView='Hızlı bakış';
+$LDQuickView='HÄ±zlÄ± bakÄ±ÅŸ';
 $LDSearchPatient='Hasta arama';
-$LDArchive='Arşiv';
-$LDStationMan='Servis yönetimi';
+$LDArchive='ArÅŸiv';
+$LDStationMan='Servis yÃ¶netimi';
 $LDNews='Haberler';
 $LDMemo='Not';
-$LDNursingForum='Hemşirelik forumu';
+$LDNursingForum='HemÅŸirelik forumu';
 $LDNursingStations='Yatan Hasta Servisleri';
 
-$LDQuickViewTxt='Bugünkü servislerin yatan hasta listelerine kısa bakış.';
-$LDSearchPatientTxt='Yatan bir hastanın servislerde aranması.';
-$LDArchiveTxt='Servislerin arşivli dosyaları içerisinde arama';
-$LDStationManTxt='Bir servis oluşturma, yatak sayısı, personel vs. gibi parametreleri ilk defa belirleme.';
-$LDNewsTxt='Bir haber makalesini yazma, düzenleme veya okuma.';
-$LDMemoTxt='Bir notu yazma düzenleme veya okuma.';
-$LDNursingForumTxt='Servisler hakkında tartışmalar forumu.';
-$LDNursingStationsTxt='Yatan hasta listesi, hastanın çizelgeleri fotografları vs.';
+$LDQuickViewTxt='BugÃ¼nkÃ¼ servislerin yatan hasta listelerine kÄ±sa bakÄ±ÅŸ.';
+$LDSearchPatientTxt='Yatan bir hastanÄ±n servislerde aranmasÄ±.';
+$LDArchiveTxt='Servislerin arÅŸivli dosyalarÄ± iÃ§erisinde arama';
+$LDStationManTxt='Bir servis oluÅŸturma, yatak sayÄ±sÄ±, personel vs. gibi parametreleri ilk defa belirleme.';
+$LDNewsTxt='Bir haber makalesini yazma, dÃ¼zenleme veya okuma.';
+$LDMemoTxt='Bir notu yazma dÃ¼zenleme veya okuma.';
+$LDNursingForumTxt='Servisler hakkÄ±nda tartÄ±ÅŸmalar forumu.';
+$LDNursingStationsTxt='Yatan hasta listesi, hastanÄ±n Ã§izelgeleri fotograflarÄ± vs.';
 
-$LDCloseBack2Main='Kapat ve başlangıç sayfasına dön';
+$LDCloseBack2Main='Kapat ve baÅŸlangÄ±Ã§ sayfasÄ±na dÃ¶n';
 $LDOld='Eski';
-$LDTodays='Bugünkü';
+$LDTodays='BugÃ¼nkÃ¼';
 $LDOccupancy='Yatan Hasta Listesi';
-$LDBedNr='Yatak sayısı';
-$LDOptions='Seçenekler';
-$LDFreeBed='Boş';
+$LDBedNr='Yatak sayÄ±sÄ±';
+$LDOptions='SeÃ§enekler';
+$LDFreeBed='BoÅŸ';
 
-$LDNoOcc='Yatan hasta listesi hazır değil!';
-$LDClk2Archive='Arşive gitmek için burayı tıklayınız.';
-$LDNrUnocc='Boş yatak sayısı';
-$LDEditStation=' ~station~ servisindeki kayıtları düzenleme';
-$LDSearchKeyword='Arama anahtar sözcüğü';
+$LDNoOcc='Yatan hasta listesi hazÄ±r deÄŸil!';
+$LDClk2Archive='ArÅŸive gitmek iÃ§in burayÄ± tÄ±klayÄ±nÄ±z.';
+$LDNrUnocc='BoÅŸ yatak sayÄ±sÄ±';
+$LDEditStation=' ~station~ servisindeki kayÄ±tlarÄ± dÃ¼zenleme';
+$LDSearchKeyword='Arama anahtar sÃ¶zcÃ¼ÄŸÃ¼';
 $LDWasFound='~rows~ hasta listesinde bulundu!';
-$LDPlsClk='Lütfen doğru olanı seçiniz.';
-$LDMoreFunctions='Daha fazla işlev';
-$LDSrcKeyword='Aranacak anahtar sözcük';
-$LDSearchArchive='Aramaya arşiv de katılsın.';
-$LDSearchPrompt='Aranacak anahtar sözcüğü giriniz.<br>	Örneğin: bir ad, bir soyad veya ikisi, vs.';
+$LDPlsClk='LÃ¼tfen doÄŸru olanÄ± seÃ§iniz.';
+$LDMoreFunctions='Daha fazla iÅŸlev';
+$LDSrcKeyword='Aranacak anahtar sÃ¶zcÃ¼k';
+$LDSearchArchive='Aramaya arÅŸiv de katÄ±lsÄ±n.';
+$LDSearchPrompt='Aranacak anahtar sÃ¶zcÃ¼ÄŸÃ¼ giriniz.<br>	Ã–rneÄŸin: bir ad, bir soyad veya ikisi, vs.';
 $LDSearch='Ara';
-$LDCancel='İptal';
-$LDHow2Search='Yardım edin! Bir hastayı nasıl bulabilirim?';
-$LDClk2Show='Bilgileri göstermek için tıklayınız';
+$LDCancel='Ä°ptal';
+$LDHow2Search='YardÄ±m edin! Bir hastayÄ± nasÄ±l bulabilirim?';
+$LDClk2Show='Bilgileri gÃ¶stermek iÃ§in tÄ±klayÄ±nÄ±z';
 $LDDate='Tarih';
 $LDClockTime='Saat';
 
-$LDClkDate='İstenilen tarih için tıklayınız.';
+$LDClkDate='Ä°stenilen tarih iÃ§in tÄ±klayÄ±nÄ±z.';
 
 $monat=array('Ocak',
-					'Şubat',
+					'Åubat',
 					'Mart',
 					'Nisan',
-					'Mayıs',
+					'MayÄ±s',
 					'Haziran',
 					'Temmuz',
-					'Ağustos',
-					'Eylül',
+					'AÄŸustos',
+					'EylÃ¼l',
 					'Ekim',
-					'Kasım',
-					'Aralık'
+					'KasÄ±m',
+					'AralÄ±k'
 					);
 $tage=array(
 					'Pa',
 					'Pt',
 					'Sa',
-					'Ça',
+					'Ã‡a',
 					'Pe',
 					'Cu',
 					'Ct'
 					);
 					
-$LDDay='Gün';					
+$LDDay='GÃ¼n';					
 $LDMonth='Ay';
-$LDYear='Yıl';
+$LDYear='YÄ±l';
 
-$LDDirectSelect='Doğrudan seçim';
-$LDPlusYear='Bir yıl ekle';
-$LDMinusYear='Bir yıl çıkar';
+$LDDirectSelect='DoÄŸrudan seÃ§im';
+$LDPlusYear='Bir yÄ±l ekle';
+$LDMinusYear='Bir yÄ±l Ã§Ä±kar';
 $LDGo='Git';
-$LDLastMonth='Geçen ay';
+$LDLastMonth='GeÃ§en ay';
 $LDNextMonth='Sonraki ay';
-$LDNursingManage='Servis yönetimi';
-$LDShowStationDataTxt='&nbsp;Göster, düzenle, oluştur, <br> &nbsp;tanım, yatak sayısı<br>	&nbsp;vs.';
-$LDLockBedTxt='&nbsp;veya bir yatağı boşalt';
-$LDAccessRightsTxt='&nbsp;Oluştur, kilitle, değiştir,<br>&nbsp;etkinleştir, sil, usw.';
+$LDNursingManage='Servis yÃ¶netimi';
+$LDShowStationDataTxt='&nbsp;GÃ¶ster, dÃ¼zenle, oluÅŸtur, <br> &nbsp;tanÄ±m, yatak sayÄ±sÄ±<br>	&nbsp;vs.';
+$LDLockBedTxt='&nbsp;veya bir yataÄŸÄ± boÅŸalt';
+$LDAccessRightsTxt='&nbsp;OluÅŸtur, kilitle, deÄŸiÅŸtir,<br>&nbsp;etkinleÅŸtir, sil, usw.';
 $LDShowStationData='Servislerin profil verileri';
-$LDLockBed='Bir yatağı kilitle';
-$LDAccessRights='Erişim hakları';
+$LDLockBed='Bir yataÄŸÄ± kilitle';
+$LDAccessRights='EriÅŸim haklarÄ±';
 $LDProfile='Profil';
-$LDCreate='Oluştur';
+$LDCreate='OluÅŸtur';
 $LDNewStation='Yeni servis';
-$LDDescription='Tanımı';
-$LDDept='Bölümü';
-$LDRoom1Nr='İlk odanın oda numarası';
-$LDRoom2Nr='Son odanın oda numarası';
-$LDRoomPrefix='Oda ön eki';
-$LDNrBeds='Bir odadaki yatak sayısı';
-$LDMaxBeds='Toplam boş yatak sayısı';
-$LDBed1Prefix='İlk yatağın ön eki';
-$LDBed2Prefix='İkinci yatağın ön eki';
-$LDHeadNurse='Sorumlu hemşire';
-$LDHeadNurse2='Sorumlu hemşire yardımcısı';
-$LDNurses='Hemşireler';
-$LDCreateStation='Servisi oluştur';
-$LDEnterAllFields ='<font color=#ff0000><b>*</b></font> ile işaretli alanların doldurulması zorunludur.';
-$LDPlsSelect='Lutfen bir bölüm seçiniz';
-$LDStationExists='~station~ isimli servis önceden var! Lütfen bir başka servis ismi kullanınız.';
-$LDAlertIncomplete='Bazı bilgiler eksik. Lütfen önemli bilgileri doldurunuz.';
-$LDAlertRoomNr='Son odanın numarası ilk odanınkinden büyük olmak zorunda!';
-$LDExistStations='Bulunan servisler. Lütfen istediğinizi tıklayınız.';
-$LDOtherStations='Diğer servisler';
-$LDEditProfile='Servis profilini düzenle';
-$LDCreatedOn='Oluşturulduğu tarih:';
-$LDCreatedBy='Oluşturan:';
+$LDDescription='TanÄ±mÄ±';
+$LDDept='BÃ¶lÃ¼mÃ¼';
+$LDRoom1Nr='Ä°lk odanÄ±n oda numarasÄ±';
+$LDRoom2Nr='Son odanÄ±n oda numarasÄ±';
+$LDRoomPrefix='Oda Ã¶n eki';
+$LDNrBeds='Bir odadaki yatak sayÄ±sÄ±';
+$LDMaxBeds='Toplam boÅŸ yatak sayÄ±sÄ±';
+$LDBed1Prefix='Ä°lk yataÄŸÄ±n Ã¶n eki';
+$LDBed2Prefix='Ä°kinci yataÄŸÄ±n Ã¶n eki';
+$LDHeadNurse='Sorumlu hemÅŸire';
+$LDHeadNurse2='Sorumlu hemÅŸire yardÄ±mcÄ±sÄ±';
+$LDNurses='HemÅŸireler';
+$LDCreateStation='Servisi oluÅŸtur';
+$LDEnterAllFields ='<font color=#ff0000><b>*</b></font> ile iÅŸaretli alanlarÄ±n doldurulmasÄ± zorunludur.';
+$LDPlsSelect='Lutfen bir bÃ¶lÃ¼m seÃ§iniz';
+$LDStationExists='~station~ isimli servis Ã¶nceden var! LÃ¼tfen bir baÅŸka servis ismi kullanÄ±nÄ±z.';
+$LDAlertIncomplete='BazÄ± bilgiler eksik. LÃ¼tfen Ã¶nemli bilgileri doldurunuz.';
+$LDAlertRoomNr='Son odanÄ±n numarasÄ± ilk odanÄ±nkinden bÃ¼yÃ¼k olmak zorunda!';
+$LDExistStations='Bulunan servisler. LÃ¼tfen istediÄŸinizi tÄ±klayÄ±nÄ±z.';
+$LDOtherStations='DiÄŸer servisler';
+$LDEditProfile='Servis profilini dÃ¼zenle';
+$LDCreatedOn='OluÅŸturulduÄŸu tarih:';
+$LDCreatedBy='OluÅŸturan:';
 
 /**********do not change the ~station~ **************************/
-$LDTemplateMissing=' ~station~ servisi kayıt kalıbı eksik!';
-$LDNoOrigData='Özgün veriler bulunamıyor!';
+$LDTemplateMissing=' ~station~ servisi kayÄ±t kalÄ±bÄ± eksik!';
+$LDNoOrigData='Ã–zgÃ¼n veriler bulunamÄ±yor!';
 
-$LDShowLastList='Son hasta listesini göster.';
-$LDNoListYet='Bugünkü liste henüz yapılmadı!';
+$LDShowLastList='Son hasta listesini gÃ¶ster.';
+$LDNoListYet='BugÃ¼nkÃ¼ liste henÃ¼z yapÄ±lmadÄ±!';
 $LDLastList='Son hasta listesi.';
-$LDNotToday='(Bugün değil!!)';
-$LDFromYesterday='(Dünkü liste!!)';
+$LDNotToday='(BugÃ¼n deÄŸil!!)';
+$LDFromYesterday='(DÃ¼nkÃ¼ liste!!)';
 /**********do not change the ~nr~ **************************/
-$LDListFrom='Bu liste şimdiden ~nr~ gün eski.';
-$LDCopyAnyway='Yine da bu listeyi bugün için kopyala.';
-$LDTakeoverList='Bu listeyi bugün için kopyala.';
+$LDListFrom='Bu liste ÅŸimdiden ~nr~ gÃ¼n eski.';
+$LDCopyAnyway='Yine da bu listeyi bugÃ¼n iÃ§in kopyala.';
+$LDTakeoverList='Bu listeyi bugÃ¼n iÃ§in kopyala.';
 $LDDoNotCopy='Bunu kopyalama! Yeni bir liste yap.';
 $LDOldList='Bu eski bir liste!';
-$LDQuickInformer='Çabuk Bilgilendirme';
+$LDQuickInformer='Ã‡abuk Bilgilendirme';
 $LDAttention='Dikkat!';
 $LDOccupied='Dolu';
-$LDFree='Boş';
+$LDFree='BoÅŸ';
 $LDLocked='Kilitli';
-$LDDutyDoctor='(Nöbetçi) <b>Doktor</b> ';
+$LDDutyDoctor='(NÃ¶betÃ§i) <b>Doktor</b> ';
 $LDShortMale='E';
 $LDShortFemale='K';
 $LDLegend='Not';
 
-$LDOpenFile='Çizelgeleri aç';
-$LDNotesEmpty='Boş uyarısı';
+$LDOpenFile='Ã‡izelgeleri aÃ§';
+$LDNotesEmpty='BoÅŸ uyarÄ±sÄ±';
 $LDNotes='Notlar';
-$LDRelease='Çıkış';
-$LDFreeOccupy='Boşalt/Doldur';
+$LDRelease='Ã‡Ä±kÄ±ÅŸ';
+$LDFreeOccupy='BoÅŸalt/Doldur';
 $LDMale='Erkek';
-$LDFemale='Kadın';
+$LDFemale='KadÄ±n';
 /**********do not change the ~station~ **************************/
-$LDNoInit=' ~station~ servisinin ilk kaydı henüz yapılmadı!';
-$LDIfInit='Servisin ilk kaydını yapmak için lütfen buraya tıklayınız.';
-$LDShowPatData='Hasta dosyasını';
-$LDReleasePatient='Hastayı çıkar';
-$LDNoticeRW='Oku veya yaz uyarısı';
-$LDInfoUnlock='Bilgiyi oku veya kilidi çöz';
+$LDNoInit=' ~station~ servisinin ilk kaydÄ± henÃ¼z yapÄ±lmadÄ±!';
+$LDIfInit='Servisin ilk kaydÄ±nÄ± yapmak iÃ§in lÃ¼tfen buraya tÄ±klayÄ±nÄ±z.';
+$LDShowPatData='Hasta dosyasÄ±nÄ±';
+$LDReleasePatient='HastayÄ± Ã§Ä±kar';
+$LDNoticeRW='Oku veya yaz uyarÄ±sÄ±';
+$LDInfoUnlock='Bilgiyi oku veya kilidi Ã§Ã¶z';
 $LDPatListElements=array(
 										'Oda',
 										'Yatak',
 										'Soyad, Ad',
-										'Doğum tarihi',
+										'DoÄŸum tarihi',
 										'Hasta no.',
-										'Sigortası',
-										'Seçenekler'
+										'SigortasÄ±',
+										'SeÃ§enekler'
 										);
 /********** NOTE: !! do not change the \'+b+\' and \'+r+\'  !! **************************/
-$LDConfirmUnlock='Gerçekten \'+r+\'  odasının \'+b+\' yatağının kilidini çözmek istiyor musunuz?';							
+$LDConfirmUnlock='GerÃ§ekten \'+r+\'  odasÄ±nÄ±n \'+b+\' yataÄŸÄ±nÄ±n kilidini Ã§Ã¶zmek istiyor musunuz?';							
 /********** NOTE: !! do not change the \'+t+\' \'+n+\' and \'+r+b+\'  **************************/
-$LDConfirmDelete='Gerçekten oda \'+r+b+\' den   \'+t+\' \'+n+\' yi silmek istiyor musunuz ?';
-$LDConfirmLock='Gerçekten bu yatağı kilitlemek istiyor musunuz?';
-$LDClk2Occupy='Bu yatağı doldurmak için tıklayınız';
+$LDConfirmDelete='GerÃ§ekten oda \'+r+b+\' den   \'+t+\' \'+n+\' yi silmek istiyor musunuz ?';
+$LDConfirmLock='GerÃ§ekten bu yataÄŸÄ± kilitlemek istiyor musunuz?';
+$LDClk2Occupy='Bu yataÄŸÄ± doldurmak iÃ§in tÄ±klayÄ±nÄ±z';
 $LDInsurance=array(
-								'x'=>'Ücretli',
-								'privat'=>'Özel sigorta',
+								'x'=>'Ãœcretli',
+								'privat'=>'Ã–zel sigorta',
 								'kasse'=>'Genel sigorta'
 								);
 
 $LDSave='Kaydet';
-$LDNurse='Hemşire';
-$LDYesSure='Evet, eminim. Hastayı çıkar.';
-$LDFtpAttempted='FTP sunucuya bağlanma denendi.<br>FTP sunucu kapalı ya da meşgul olabilir. Bu problem uzun sürer ise Bilgi İşlem bölümüyle temas kurun.';
-$LDFtpNoLink='FTP girişi başarısız';
-$LDJustReleased='Hasta çıkarıldı. Servis hasta listesine geri dönmek için  \'Kapat\' ı tıklayınız.';
-$LDReleaseType='Çıkış tipi';
-$LDRegularRelease='Normal çıkış';
-$LDSelfRelease='Hasta hastaneyi kendi isteği ile terk etmiştir';
-$LDEmRelease='Acil çıkış';
-$LDAlertNoName='Lütfen isminizi giriniz.';
+$LDNurse='HemÅŸire';
+$LDYesSure='Evet, eminim. HastayÄ± Ã§Ä±kar.';
+$LDFtpAttempted='FTP sunucuya baÄŸlanma denendi.<br>FTP sunucu kapalÄ± ya da meÅŸgul olabilir. Bu problem uzun sÃ¼rer ise Bilgi Ä°ÅŸlem bÃ¶lÃ¼mÃ¼yle temas kurun.';
+$LDFtpNoLink='FTP giriÅŸi baÅŸarÄ±sÄ±z';
+$LDJustReleased='Hasta Ã§Ä±karÄ±ldÄ±. Servis hasta listesine geri dÃ¶nmek iÃ§in  \'Kapat\' Ä± tÄ±klayÄ±nÄ±z.';
+$LDReleaseType='Ã‡Ä±kÄ±ÅŸ tipi';
+$LDRegularRelease='Normal Ã§Ä±kÄ±ÅŸ';
+$LDSelfRelease='Hasta hastaneyi kendi isteÄŸi ile terk etmiÅŸtir';
+$LDEmRelease='Acil Ã§Ä±kÄ±ÅŸ';
+$LDAlertNoName='LÃ¼tfen isminizi giriniz.';
 $LDAlertNoDate='Tarihi bu tarzda giriniz:';
-$LDAlertNoTime='Zamanı şu tarzda giriniz: SS.dd.';
-$LDPatDataFolder='Hasta dosyası';
-$LDChangeDept='Bölüm değiştirme';
+$LDAlertNoTime='ZamanÄ± ÅŸu tarzda giriniz: SS.dd.';
+$LDPatDataFolder='Hasta dosyasÄ±';
+$LDChangeDept='BÃ¶lÃ¼m deÄŸiÅŸtirme';
 $LDClose='Kapat';
-$LDHelp='Yardım';
-$LDReset='Baştan başla';
+$LDHelp='YardÄ±m';
+$LDReset='BaÅŸtan baÅŸla';
 
 $LDNoLabReport='Laboratuvar raporu yok!';
-$LDFeverCurve='Ateş çizelgesi';
-$LDNursingReport='Hemşire gözlemi';
-$LDDocsPrescription='Hekim orderları';
-$LDNursingPlan='Hemşirelik planı';
-$LDRootData='Kök verileri';
-$LDReports='Tanısal raporlar';
-$LDLabReports='Lab raporları';
-$LDPhotos='Fotoğraflar';
+$LDFeverCurve='AteÅŸ Ã§izelgesi';
+$LDNursingReport='HemÅŸire gÃ¶zlemi';
+$LDDocsPrescription='Hekim orderlarÄ±';
+$LDNursingPlan='HemÅŸirelik planÄ±';
+$LDRootData='KÃ¶k verileri';
+$LDReports='TanÄ±sal raporlar';
+$LDLabReports='Lab raporlarÄ±';
+$LDPhotos='FotoÄŸraflar';
 $LDChkUpRequests='Tetkik istemi';
-$LDPleaseSelect='Tetkik istemini seçiniz';
-$LDSetColorRider='Rengi seçmek veya özgün durumuna getirmek için tıklayınız';
-$LDDiet='Diyet planı';
-$LDBackDay='Bir gün geri. (sağ tuşu tıklayıp serbest tarih girebilirsiniz)';
-$LDFwdDay='Bir gün ileri. (sağ tuşu tıklayıp serbest tarih girebilirsiniz)';
-$LDClk2PlanDiet='Bugünkü diyeti planlamak için tıklayınız';
+$LDPleaseSelect='Tetkik istemini seÃ§iniz';
+$LDSetColorRider='Rengi seÃ§mek veya Ã¶zgÃ¼n durumuna getirmek iÃ§in tÄ±klayÄ±nÄ±z';
+$LDDiet='Diyet planÄ±';
+$LDBackDay='Bir gÃ¼n geri. (saÄŸ tuÅŸu tÄ±klayÄ±p serbest tarih girebilirsiniz)';
+$LDFwdDay='Bir gÃ¼n ileri. (saÄŸ tuÅŸu tÄ±klayÄ±p serbest tarih girebilirsiniz)';
+$LDClk2PlanDiet='BugÃ¼nkÃ¼ diyeti planlamak iÃ§in tÄ±klayÄ±nÄ±z';
 
 $LDAllergy='Allerji';
-$LDDiagnosisTherapy='Tanı / Tedavi';
-$LDBpTemp='Ateş/Kan basıncı';
+$LDDiagnosisTherapy='TanÄ± / Tedavi';
+$LDBpTemp='AteÅŸ/Kan basÄ±ncÄ±';
 $LDPtAtgEtc='FTR,Atj,vs';
-$LDAntiCoag='Antikooagülanlar';
+$LDAntiCoag='AntikooagÃ¼lanlar';
 $LDExtraNotes='Notlar';
-$LDMedication='İlaçlar';
-$LDIvPort='İntravenöz';
-$LDPtAtgEtcTxt='Fizik tedavi, Anti tromboz jimnastiği, vs.';
-$LDExtraNotesTxt='Notlar, Parti, Yük no., vs.';
+$LDMedication='Ä°laÃ§lar';
+$LDIvPort='Ä°ntravenÃ¶z';
+$LDPtAtgEtcTxt='Fizik tedavi, Anti tromboz jimnastiÄŸi, vs.';
+$LDExtraNotesTxt='Notlar, Parti, YÃ¼k no., vs.';
 
-$LDBp='Kan basıncı';
-$LDTemp='Ateş';
+$LDBp='Kan basÄ±ncÄ±';
+$LDTemp='AteÅŸ';
 
-$LDClk2Enter='~tagword~ yi girmek için tıklayınız';
-$LDClk2EnterDaily='Bugünkü ~tagword~ yi girmek için tıklayınız';
-$LDSpecialsExtra='Notlar, ekstra tanılar';
-$LDClk2PlanDaily='Bugünkü ~tagword~ ü planlamak için tıklayınız';
-$LDInputWin='Giriş penceresi';
+$LDClk2Enter='~tagword~ yi girmek iÃ§in tÄ±klayÄ±nÄ±z';
+$LDClk2EnterDaily='BugÃ¼nkÃ¼ ~tagword~ yi girmek iÃ§in tÄ±klayÄ±nÄ±z';
+$LDSpecialsExtra='Notlar, ekstra tanÄ±lar';
+$LDClk2PlanDaily='BugÃ¼nkÃ¼ ~tagword~ Ã¼ planlamak iÃ§in tÄ±klayÄ±nÄ±z';
+$LDInputWin='GiriÅŸ penceresi';
 $LDFullDayName=array(
 									'Pazar',
 									'Pazartesi',
-									'Salı',
-									'Çarşamba',
-									'Perşembe',
+									'SalÄ±',
+									'Ã‡arÅŸamba',
+									'PerÅŸembe',
 									'Cuma',
 									'Cumartesi',
 									'Pazar',
 									'Pazartesi',
-									'Salı',
-									'Çarşamba',
-									'Perşembe',
+									'SalÄ±',
+									'Ã‡arÅŸamba',
+									'PerÅŸembe',
 									'Cuma',
 									'Cumartesi',
 									'Pazar'
 									);
-$LDCurrentEntry='Şu anki bilgiler';
-$LDEntryPrompt='Lütfen yeni bilgileri buraya giriniz';
+$LDCurrentEntry='Åu anki bilgiler';
+$LDEntryPrompt='LÃ¼tfen yeni bilgileri buraya giriniz';
 $LDConfirmSetDate=' "+dayID+" i ayarlamak istermisiniz?';
-$LDStartDate='Başlama tarihi';
-$LDEndDate='Bitiş tarihi';
-$LDShowCurveDate='Eğriyi şunlarla birlikte göster';
-$LDDailyDiagTher='Tedavi, rapor, hemşirelik planı, vs.';
-$LDAntiCoagTxt='Antikoagülanlar - günlük rapor';
-$LDSFormatPrompt='Yeni bilgiyi buraya giriniz veya günceli düzenleyiniz:<br><font size=1 > Maksimum 16 karakter.</font>';
+$LDStartDate='BaÅŸlama tarihi';
+$LDEndDate='BitiÅŸ tarihi';
+$LDShowCurveDate='EÄŸriyi ÅŸunlarla birlikte gÃ¶ster';
+$LDDailyDiagTher='Tedavi, rapor, hemÅŸirelik planÄ±, vs.';
+$LDAntiCoagTxt='AntikoagÃ¼lanlar - gÃ¼nlÃ¼k rapor';
+$LDSFormatPrompt='Yeni bilgiyi buraya giriniz veya gÃ¼nceli dÃ¼zenleyiniz:<br><font size=1 > Maksimum 16 karakter.</font>';
 $LDDosage='Doz';
-$LDColorMark='İşaret rengi';
+$LDColorMark='Ä°ÅŸaret rengi';
 $LDNormal='Normal';
 $LDAntibiotic='Antibiyotik';
 $LDDialytic='Dialitik';
 $LDHemolytic='Hemolitik';
-$LDIntravenous='Intravenöz';
-$LDTodaysReport='Bugünün gözlemi';
-$LDNoMedicineYet='Henüz ilaç başlanmadı!';
+$LDIntravenous='IntravenÃ¶z';
+$LDTodaysReport='BugÃ¼nÃ¼n gÃ¶zlemi';
+$LDNoMedicineYet='HenÃ¼z ilaÃ§ baÅŸlanmadÄ±!';
 $LDEffectReport='Etkinlik raporu';
 $LDFrom='den';
 $LDTo='ye';
 $LDPage='Sayfa';
-$LDSignature='İmza';
-$LDInsertSymbol='Bu işareti başlangıca koyunuz.';
-$LDInsertDate='Bugünkü tarihi giriniz';
-$LDInsertTimeNow='Şu andaki saati giriniz';
-$LDSpecialNotice='Özel uyarı';
+$LDSignature='Ä°mza';
+$LDInsertSymbol='Bu iÅŸareti baÅŸlangÄ±ca koyunuz.';
+$LDInsertDate='BugÃ¼nkÃ¼ tarihi giriniz';
+$LDInsertTimeNow='Åu andaki saati giriniz';
+$LDSpecialNotice='Ã–zel uyarÄ±';
 $LDAddendum='Ek bilgiler';
-$LDDiagnosticReport='Tanı raporu';
+$LDDiagnosticReport='TanÄ± raporu';
 $LDDoctor='Doktor';
-$LDPassword='Şifre';
-$LDCallBackPhone='Sorunuz için aranacak numara';
+$LDPassword='Åifre';
+$LDCallBackPhone='Sorunuz iÃ§in aranacak numara';
 
 $LDPicShots='Enjeksiyonlar';
-$LDClk2Preview='Ön izleme için tıklayınız';
-$LDPreview='Ön izleme';
+$LDClk2Preview='Ã–n izleme iÃ§in tÄ±klayÄ±nÄ±z';
+$LDPreview='Ã–n izleme';
 $LDShotDate='Enjeksiyon tarihi';
 $LDShotNr='Enjeksiyon no.';
 
 $LDLastName='Soyad';
 $LDName='Ad';
-$LDBirthDate='Doğum tarihi';
-$LDLockThisBed='Bu yatağı kilitle';
-$LDClk2LockBed='Bu yatağı kilitlemek için tıklayınız';
-$LDAssignOcc='Yatağa Hasta kaydet';
-$LDSearchFound='Araştırmada <font color=red><b>~nr~</b></font> hasta bulundu.';
-$LDAssign2Bed='Bu hastayı yatağa kaydet';
-$LDSend='Gönder';
-$LDSendLater='Sonra gönder';
-$LDReqTest='İstenen tetkik';
+$LDBirthDate='DoÄŸum tarihi';
+$LDLockThisBed='Bu yataÄŸÄ± kilitle';
+$LDClk2LockBed='Bu yataÄŸÄ± kilitlemek iÃ§in tÄ±klayÄ±nÄ±z';
+$LDAssignOcc='YataÄŸa Hasta kaydet';
+$LDSearchFound='AraÅŸtÄ±rmada <font color=red><b>~nr~</b></font> hasta bulundu.';
+$LDAssign2Bed='Bu hastayÄ± yataÄŸa kaydet';
+$LDSend='GÃ¶nder';
+$LDSendLater='Sonra gÃ¶nder';
+$LDReqTest='Ä°stenen tetkik';
 $LDSpeedTest='Acil tetkik.';
 $LDDiagnosticTest='Tetkik iste';
-$LDRelayResult='Tanıyı Telefona /cebe yönlendir';
+$LDRelayResult='TanÄ±yÄ± Telefona /cebe yÃ¶nlendir';
 $LDSpeedCut='Acele kesim.';
-$LDClk4Phone='Telefon /Cep bilgisi için tıkla';
+$LDClk4Phone='Telefon /Cep bilgisi iÃ§in tÄ±kla';
 $LDHour='Saat';
 
-$LDClkHere='Lütfen burayı tıklayınız.';
+$LDClkHere='LÃ¼tfen burayÄ± tÄ±klayÄ±nÄ±z.';
 
-$LDNoOccList='Geçmiş hasta listesi yok';
+$LDNoOccList='GeÃ§miÅŸ hasta listesi yok';
 $LDFromWard='servisinin listesi ';
-$LDWithinLast='son  içerisinde';
-$LDDays=' gün.';
+$LDWithinLast='son  iÃ§erisinde';
+$LDDays=' gÃ¼n.';
 $LDAvailable='';
 
 $LDQueries='Hekime sorular';
-$LDChangeWard='Servis değişimi';
-$LDChangeBed='Yatak değişimi';
-$LDPatientDied='Hasta ölümü';
+$LDChangeWard='Servis deÄŸiÅŸimi';
+$LDChangeBed='Yatak deÄŸiÅŸimi';
+$LDPatientDied='Hasta Ã¶lÃ¼mÃ¼';
 
 $LDFollowing='izleyen';
-$LDErrorDuplicateBed='Hata: Servis hasta listesinde çifte yatak işgal kaydı';
-$LDNoFound='Arama sonucu hiçbir hasta bulunamadı.';
+$LDErrorDuplicateBed='Hata: Servis hasta listesinde Ã§ifte yatak iÅŸgal kaydÄ±';
+$LDNoFound='Arama sonucu hiÃ§bir hasta bulunamadÄ±.';
 
-$LDNoWardsYet='Henüz hiçbir servis oluşturulmamış.';
-$LDClk2CreateWard='Bir servis oluşturmak için lütfen burayı tıklayınız.';
+$LDNoWardsYet='HenÃ¼z hiÃ§bir servis oluÅŸturulmamÄ±ÅŸ.';
+$LDClk2CreateWard='Bir servis oluÅŸturmak iÃ§in lÃ¼tfen burayÄ± tÄ±klayÄ±nÄ±z.';
 /* 2002-10-12 EL */
-$LDToCreateNewList='Yeni bir liste oluşturmak için';
+$LDToCreateNewList='Yeni bir liste oluÅŸturmak iÃ§in';
 $LD_ddpMMpyyyy='gg.aa.yyyy';
 $LD_yyyyhMMhdd='yyyy-aa-gg';
 $LD_MMsddsyyyy='aa/gg/yyyy';
 /* 2002-10-23 EL*/
 $LDQueryDoctor='Doktora soru';
-$LDDoctorInfo='Doktorun yanıtı, talimatları';
+$LDDoctorInfo='Doktorun yanÄ±tÄ±, talimatlarÄ±';
 $LDDiagnosticsReport='Tetkik sonucu geldi';
-$LDInfusionTherapy='Infüzyon tedavi programı';
-$LDMonitorFluidDischarge='Sıvılar çıkardığı/idrarı';
-$LDBloodProgram='Kan örneği/transfüzyon';
+$LDInfusionTherapy='InfÃ¼zyon tedavi programÄ±';
+$LDMonitorFluidDischarge='SÄ±vÄ±lar Ã§Ä±kardÄ±ÄŸÄ±/idrarÄ±';
+$LDBloodProgram='Kan Ã¶rneÄŸi/transfÃ¼zyon';
 $LDVitalStatistics='Vital bulgular';
-$LDAntibioticsProgram='Antibiyotik tedavi programı';
-$LDAnticoagProgram='Antikoagülanlar';
-$LDSpecialCare='Özel bakım, vital bulgular';
-$LDTestConsultRequested='İstenen Test/Konsultasyonlar';
-$LDNurseReport='Yeni hemşire gözlemi';
-$LDDaily='Günlük';
-$LDSaveChanges='Değişiklikleri kaydet';
+$LDAntibioticsProgram='Antibiyotik tedavi programÄ±';
+$LDAnticoagProgram='AntikoagÃ¼lanlar';
+$LDSpecialCare='Ã–zel bakÄ±m, vital bulgular';
+$LDTestConsultRequested='Ä°stenen Test/Konsultasyonlar';
+$LDNurseReport='Yeni hemÅŸire gÃ¶zlemi';
+$LDDaily='GÃ¼nlÃ¼k';
+$LDSaveChanges='DeÄŸiÅŸiklikleri kaydet';
 /* 2002-12-07*/
-$LDNoDiagReport='Hiçbir tetkik sonucu bulunamadı.';
+$LDNoDiagReport='HiÃ§bir tetkik sonucu bulunamadÄ±.';
 /* 2003-03-23 EL */
-$LDNursesList='Hemşire Listesi';
-$LDNursesListTxt='Hemşire Listesini Görüntüle, İzle, Yeni oluştur, Düzenle';
+$LDNursesList='HemÅŸire Listesi';
+$LDNursesListTxt='HemÅŸire Listesini GÃ¶rÃ¼ntÃ¼le, Ä°zle, Yeni oluÅŸtur, DÃ¼zenle';
 /* 2003-04-18 */
-$LDInsurance='Genel Sağlık Sigortası';
-$LDPrivate='Özel';
-$LDSelfPay='Ücretli';
+$LDInsurance='Genel SaÄŸlÄ±k SigortasÄ±';
+$LDPrivate='Ã–zel';
+$LDSelfPay='Ãœcretli';
 /* 2003-04-21 EL */
 $LDRoom='Oda';
 $LDAdm_Nr='Kabul No.';
 $LDStatus='Durum';
 $LDInWard='Serviste';
 /* 2003-04-23 EL */
-$LDWard_ID='Servis kimliği';
-$LDNoSpecChars='Bu alana Türkçe karakter girmeyin';
+$LDWard_ID='Servis kimliÄŸi';
+$LDNoSpecChars='Bu alana TÃ¼rkÃ§e karakter girmeyin';
 /* 2003-04-24 EL*/
-$LDTemporaryCloseWard='Bu servisi geçici olarak kapat';
+$LDTemporaryCloseWard='Bu servisi geÃ§ici olarak kapat';
 $LDIrreversiblyCloseWard='Bu servisi tamamen kapat';
-$LDSureTemporaryClose='Bu servisi geçici kapatmak istediğinizden emin misiniz?';
-$LDSureIrreversibleClose='Bu servisi tamamen kapatmak istediğinizden emin misiniz? BU DEĞİŞİKLİK GERİ ALINAMAZ.';
+$LDSureTemporaryClose='Bu servisi geÃ§ici kapatmak istediÄŸinizden emin misiniz?';
+$LDSureIrreversibleClose='Bu servisi tamamen kapatmak istediÄŸinizden emin misiniz? BU DEÄÄ°ÅÄ°KLÄ°K GERÄ° ALINAMAZ.';
 /* Do not translate the ~str~ , it will be replaced with the ward's name by the program */
-$LDWardNoClose='Hala yatan hastaları bulunduğundan ~str~ servisi kapatılamaz.<br>Kapatmadan önce bütün hastaları boşaltmalısınız.';
-$LDBackToWardProfile='Servis profiline geri gitmek için';
-$LDShowWardOccupancy='Servis hasta listesini izlemek için';
-$LDTemporaryClosed='Geçici kapalı';
-$LDReopenWard='Bu servisi tekrar aç';
-$LDSureReopenWard='Bu servisi tekrar açmak istediğinizden emin misiniz?';
-$LDShortDescription='Kısa tanım';
-$LDRoomShortDescription='Odanın kısa tanımı';
-$LDRoomNotCreated='Odalar henüz oluşturulmadı';
+$LDWardNoClose='Hala yatan hastalarÄ± bulunduÄŸundan ~str~ servisi kapatÄ±lamaz.<br>Kapatmadan Ã¶nce bÃ¼tÃ¼n hastalarÄ± boÅŸaltmalÄ±sÄ±nÄ±z.';
+$LDBackToWardProfile='Servis profiline geri gitmek iÃ§in';
+$LDShowWardOccupancy='Servis hasta listesini izlemek iÃ§in';
+$LDTemporaryClosed='GeÃ§ici kapalÄ±';
+$LDReopenWard='Bu servisi tekrar aÃ§';
+$LDSureReopenWard='Bu servisi tekrar aÃ§mak istediÄŸinizden emin misiniz?';
+$LDShortDescription='KÄ±sa tanÄ±m';
+$LDRoomShortDescription='OdanÄ±n kÄ±sa tanÄ±mÄ±';
+$LDRoomNotCreated='Odalar henÃ¼z oluÅŸturulmadÄ±';
 /* 2003-05-10 EL */
-$LDChangeRoom='Oda değişimi';
+$LDChangeRoom='Oda deÄŸiÅŸimi';
 /*2003-06-14 EL*/
-$LDNrOfBedsRoom='Odanın yatak sayısı';
-$LDIsNotANumber='geçerli bir sayı değil';
+$LDNrOfBedsRoom='OdanÄ±n yatak sayÄ±sÄ±';
+$LDIsNotANumber='geÃ§erli bir sayÄ± deÄŸil';
 $LDWaitingList='Bekleme listesi';
-$LDShowAll='Hepsini göster';
-$LDShowWardOnly='Sadece servisi göster';
-$LDTransferToBed='Bu serviste başka bir yatağa taşı';
-$LDTransferToWard='Başka bir servise taşı';
-$LDShowBeds='Yatakları göster';
-$LDTransferPatient='Hastayı taşı';
-$LDDRG='TİG';
+$LDShowAll='Hepsini gÃ¶ster';
+$LDShowWardOnly='Sadece servisi gÃ¶ster';
+$LDTransferToBed='Bu serviste baÅŸka bir yataÄŸa taÅŸÄ±';
+$LDTransferToWard='BaÅŸka bir servise taÅŸÄ±';
+$LDShowBeds='YataklarÄ± gÃ¶ster';
+$LDTransferPatient='HastayÄ± taÅŸÄ±';
+$LDDRG='TÄ°G';
 $LDFinanceType='Sigorta';
 #2003-08-02 EL
-$LDOutToInpatient='Kabul durumunu yatan hastaya değiştir';
-$LDTransferClinic='Klinik ya da bölüme taşı';
+$LDOutToInpatient='Kabul durumunu yatan hastaya deÄŸiÅŸtir';
+$LDTransferClinic='Klinik ya da bÃ¶lÃ¼me taÅŸÄ±';
 $LDClinic='Klinik';
-$LDOwnPatient='Bu servisin hastası';
-$LDNonOwnPatient='Bu servisin hastası  değil';
+$LDOwnPatient='Bu servisin hastasÄ±';
+$LDNonOwnPatient='Bu servisin hastasÄ±  deÄŸil';
 # 2003-08-04 EL
-$LDShowClinicOnly='Yalnız bu klinik';
+$LDShowClinicOnly='YalnÄ±z bu klinik';
 # 2003-09-16 EL
 $LDAdmissionData='Kabul bilgileri';
-$LDShowPhoto='Fotoğraf göster';
-$LDOpenWardManagement='Servis kaydını yönetmek için aç';
+$LDShowPhoto='FotoÄŸraf gÃ¶ster';
+$LDOpenWardManagement='Servis kaydÄ±nÄ± yÃ¶netmek iÃ§in aÃ§';
 ?>

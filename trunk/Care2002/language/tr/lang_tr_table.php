@@ -1,20 +1,20 @@
 <?php
-$LDAddressCitytown='Þehir/Kasaba Listesi';
-$LDTypeImmunization='Baðýþýklama (aþý) Listesi';
-$Choose='Listeden bir tablo seçiniz';
-$Send='Seç';
-$LDPageTitle='Yönetim';
+$LDAddressCitytown='Åžehir/Kasaba Listesi';
+$LDTypeImmunization='BaÄŸÄ±ÅŸÄ±klama (aÅŸÄ±) Listesi';
+$Choose='Listeden bir tablo seÃ§iniz';
+$Send='SeÃ§';
+$LDPageTitle='YÃ¶netim';
 $LDType='Tip';
-$LDName='Ýsim';
-$LDPeriod='Dönem';
+$LDName='Ä°sim';
+$LDPeriod='DÃ¶nem';
 $LDTiter='Titre';
 $LDNote='Not';
 $LDDosage='Doz';
-$LDMedicine='Ýlaç';
+$LDMedicine='Ä°laÃ§';
 $LDTolerance='Tolerans';
 $LDApplication='Uygulama';
-$LDUpdatedbForm='Kaydý Güncelle';
-$LDNewdbForm='Kayýt Ekle';
-$LDDeletedbForm='Kayýt Sil';
-$LDSelectdbForm='Kayýt Seç';
+$LDUpdatedbForm='KaydÄ± GÃ¼ncelle';
+$LDNewdbForm='KayÄ±t Ekle';
+$LDDeletedbForm='KayÄ±t Sil';
+$LDSelectdbForm='KayÄ±t SeÃ§';
 ?>

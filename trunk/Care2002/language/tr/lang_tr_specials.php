@@ -1,14 +1,14 @@
 <?php
 $LDNews='Haberler';
-$LDNewsTxt='Manşet haberleri yaz';
+$LDNewsTxt='ManÅŸet haberleri yaz';
 $LDMemo='Not';
 $LDMemoTxt='Bir not oku veya yaz';
 
 $LDClose='Kapat';
-$LDCancel='İptal';
+$LDCancel='Ä°ptal';
 $LDResetEntry='Girilenleri sil';
 $LDSave='Kaydet';
-$LDReset='Yeni baştan';
+$LDReset='Yeni baÅŸtan';
 
 $LDNewSearch='Yeni arama';
 $LDSearch='Ara';
@@ -20,248 +20,248 @@ $LDOn='De:';
 $LDAt='De';
 
 $LDNew='Yeni';
-$LDEdit='Düzenle';
-$LDCreate='Oluştur';
+$LDEdit='DÃ¼zenle';
+$LDCreate='OluÅŸtur';
 
 $LDPastAll='Hepsi';
-$LDSelect='Seç';
+$LDSelect='SeÃ§';
 
-$LDOrderArchive='Arşiv';
+$LDOrderArchive='ArÅŸiv';
 
-$LDGoodMorning='Günaydın';
-$LDGoodDay='Merhaba, sizi gördüğüme sevindim';
-$LDGoodEvening='İyi akşamlar';
+$LDGoodMorning='GÃ¼naydÄ±n';
+$LDGoodDay='Merhaba, sizi gÃ¶rdÃ¼ÄŸÃ¼me sevindim';
+$LDGoodEvening='Ä°yi akÅŸamlar';
 
 $LDDate='Tarih';
-$LDDept='Bölüm';
-$LDPrio='Öncelik';
+$LDDept='BÃ¶lÃ¼m';
+$LDPrio='Ã–ncelik';
 
 
-$LDPageTop='Başa geri.';
-$LDPreview='Ön izleme';
-$LDUpdateData='Güncelle veya düzenle';
+$LDPageTop='BaÅŸa geri.';
+$LDPreview='Ã–n izleme';
+$LDUpdateData='GÃ¼ncelle veya dÃ¼zenle';
 
-$LDNoBack='Hayır. Geri git.';
+$LDNoBack='HayÄ±r. Geri git.';
 $LDOK='Tamam';
 $LDName='Ad';
-$LDPassword='Şifre';
-$LDUserId='Kullanıcı giriş adı';
-$LDChange='Değiştir';
+$LDPassword='Åifre';
+$LDUserId='KullanÄ±cÄ± giriÅŸ adÄ±';
+$LDChange='DeÄŸiÅŸtir';
 $LDLock='Kilitle';
-$LDUnlock='Kilidi aç';
+$LDUnlock='Kilidi aÃ§';
 $LDDelete='Sil';
 $LDYesSure='Evet, eminim.';
-$LDKeywordPrompt='Aranacak yeni bir anahtar sözcük giriniz';
-$LDWelcome='Hoşgeldiniz';
+$LDKeywordPrompt='Aranacak yeni bir anahtar sÃ¶zcÃ¼k giriniz';
+$LDWelcome='HoÅŸgeldiniz';
 
 
-$LDLogin='Giriş';
+$LDLogin='GiriÅŸ';
 
 $LDFirstName='Ad';
 
-$LDOptions='Seçenekler';
-$LDHelp='Yardım';
-$LDSent='Gönderildi';
+$LDOptions='SeÃ§enekler';
+$LDHelp='YardÄ±m';
+$LDSent='GÃ¶nderildi';
 $LDDrafts='Taslaklar';
 $LDDate='Tarih';
 $LDTime='Zaman';
-$LDSize='Büyüklük';
+$LDSize='BÃ¼yÃ¼klÃ¼k';
 $LDFrom='Kimden';
 $LDTo='Kime';
-$LDSend='Gönder';
-$LDChange='Değiştir';
+$LDSend='GÃ¶nder';
+$LDChange='DeÄŸiÅŸtir';
 $LDInsertAddr='Araya ekle';
 $LDRead='Oku';
 $LDBack2='Geri';
-$LDReply2='Yanıt adresi';
-$LDPrint='Yazdır';
-$LDMoreInfo='Daha çok bilgi';
+$LDReply2='YanÄ±t adresi';
+$LDPrint='YazdÄ±r';
+$LDMoreInfo='Daha Ã§ok bilgi';
 $LDTakeOver='Devir al';
-$LDJustReset='Yeni baştan';
+$LDJustReset='Yeni baÅŸtan';
 $LDMaximum='Maksimum';
 
-$LDSpexFunctions='Özel işlevler';
-$LDDutyPlanOrg='Nöbet Planı Düzenleyici';
-$LDDutyPlanOrgTxt='Nöbet planlayıcı ve düzenleyicisi, Mesai izleyici';
-$LDStandbyDuty='İcap nöbeti';
-$LDStandbyDutyTxt='İcap nöbetinde iş performansını belgelendirme';
+$LDSpexFunctions='Ã–zel iÅŸlevler';
+$LDDutyPlanOrg='NÃ¶bet PlanÄ± DÃ¼zenleyici';
+$LDDutyPlanOrgTxt='NÃ¶bet planlayÄ±cÄ± ve dÃ¼zenleyicisi, Mesai izleyici';
+$LDStandbyDuty='Ä°cap nÃ¶beti';
+$LDStandbyDutyTxt='Ä°cap nÃ¶betinde iÅŸ performansÄ±nÄ± belgelendirme';
 $LDHandStat='El cerrahisi istatistikleri';
-$LDHandStatTxt='El cerrahisi ameliyatlarının belgelendirilmesi';
+$LDHandStatTxt='El cerrahisi ameliyatlarÄ±nÄ±n belgelendirilmesi';
 $LDCalendar='Takvim';
-$LDCalendarTxt='Çok fonksiyonlu bir takvim';
+$LDCalendarTxt='Ã‡ok fonksiyonlu bir takvim';
 $LDBlackBoard='Kara tahta';
-$LDBlackBoardTxt='Her hangi bir bilgiyi yükle ya da ara';
+$LDBlackBoardTxt='Her hangi bir bilgiyi yÃ¼kle ya da ara';
 $LDForum='Forum';
-$LDForumTxt='Tartışma, düşünceler veya yorumları oku, araştır veya katıl.';
+$LDForumTxt='TartÄ±ÅŸma, dÃ¼ÅŸÃ¼nceler veya yorumlarÄ± oku, araÅŸtÄ±r veya katÄ±l.';
 $LDCalc='Hesap makinesi';
 $LDCalcTxt='Bir online hesap makinesi';
 $LDClock='Saat';
 $LDDigitalClock='Bir online dijital saat';
-$LDColorOpt='Renk seçenekleri';
-$LDColorOptTxt='Arka plan veya yazı rengi ayarlama.';
-$LDColorOptExt='İleri renk seçenekleri';
-$LDColorOptExtTxt='Bağlantı, fare izi vs. renklerini ayarlamak';
-$LDMyIntranet='İntranetim';
-$LDMyIntranetTxt='Kişisel planlayıcım, ajandam, günlüğüm, notlarım, takvimim, vs.';
-$LDAccessPw='Erişim şifresi';
-$LDAccessPwTxt='Erişim şifresini değiştir veya güncelle';
-$LDWebCam='Video Güvenlik';
-$LDWebCamTxt='Intranet web kamera güvenlik izlemi';
-$LDPhotoLab='Fotoğraflar';
-$LDPhotoLabTxt='Hasta fotoğraflarının kaydedilmesi, belgelendirilmesi, fihristi';
+$LDColorOpt='Renk seÃ§enekleri';
+$LDColorOptTxt='Arka plan veya yazÄ± rengi ayarlama.';
+$LDColorOptExt='Ä°leri renk seÃ§enekleri';
+$LDColorOptExtTxt='BaÄŸlantÄ±, fare izi vs. renklerini ayarlamak';
+$LDMyIntranet='Ä°ntranetim';
+$LDMyIntranetTxt='KiÅŸisel planlayÄ±cÄ±m, ajandam, gÃ¼nlÃ¼ÄŸÃ¼m, notlarÄ±m, takvimim, vs.';
+$LDAccessPw='EriÅŸim ÅŸifresi';
+$LDAccessPwTxt='EriÅŸim ÅŸifresini deÄŸiÅŸtir veya gÃ¼ncelle';
+$LDWebCam='Video GÃ¼venlik';
+$LDWebCamTxt='Intranet web kamera gÃ¼venlik izlemi';
+$LDPhotoLab='FotoÄŸraflar';
+$LDPhotoLabTxt='Hasta fotoÄŸraflarÄ±nÄ±n kaydedilmesi, belgelendirilmesi, fihristi';
 
 $LDBundyMachine='Mesai izleyici';
-$LDDutyPlanner='Nöbet planlayıcı';
-$LDPrevMonth='Önceki ay';
+$LDDutyPlanner='NÃ¶bet planlayÄ±cÄ±';
+$LDPrevMonth='Ã–nceki ay';
 $LDNextMonth='Sonraki ay';
-$monat=array('','Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık');
-$LDEntry='Giriş';
-$LDExit='Çıkış';
-$LDRemarks='Düşünceler';
+$monat=array('','Ocak','Åubat','Mart','Nisan','MayÄ±s','Haziran','Temmuz','AÄŸustos','EylÃ¼l','Ekim','KasÄ±m','AralÄ±k');
+$LDEntry='GiriÅŸ';
+$LDExit='Ã‡Ä±kÄ±ÅŸ';
+$LDRemarks='DÃ¼ÅŸÃ¼nceler';
 
-$tage=array('<font color=\'#ff0000\'>P</font>','P','S','Ç','P','C','C');
-$tagename=array('Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi','Pazar');
+$tage=array('<font color=\'#ff0000\'>P</font>','P','S','Ã‡','P','C','C');
+$tagename=array('Pazartesi','SalÄ±','Ã‡arÅŸamba','PerÅŸembe','Cuma','Cumartesi','Pazar');
 
 $LDTotal='Toplam';
-$LDClk4Options='Seçenekler için tıklayınız';
+$LDClk4Options='SeÃ§enekler iÃ§in tÄ±klayÄ±nÄ±z';
 $LDMonth='Ay';
-$LDYear='Yıl';
-$LDGO='GİT';
-$LDPlus1Year='Artı 1 yıl';
-$LDMinus1Year='Eksi 1 yıl';
-$LDDirectDial='Doğrudan seç';
-$LDFor='için';
+$LDYear='YÄ±l';
+$LDGO='GÄ°T';
+$LDPlus1Year='ArtÄ± 1 yÄ±l';
+$LDMinus1Year='Eksi 1 yÄ±l';
+$LDDirectDial='DoÄŸrudan seÃ§';
+$LDFor='iÃ§in';
 
-$LDShowMyCalendar='Nöbetimi takvimde göster.';
-$LDShowMySched='Randevularımı göster.';
-$LDShowMyOvertime='Fazla mesaimi göster.';
-$LDShowMyWorkTime='Çalışma planımın ayrıntılarını göster.';
-$LDPlanSched='Bu güne randevu planla.';
-$LDPlanDuty='Bu güne nöbet planla.';
-$LDORProgram='Ameliyathame programı';
-$LDDutyPerson='Nöbetçi hemşire';
-$LDDocsOnDuty='Nöbetçi doktorlar';
+$LDShowMyCalendar='NÃ¶betimi takvimde gÃ¶ster.';
+$LDShowMySched='RandevularÄ±mÄ± gÃ¶ster.';
+$LDShowMyOvertime='Fazla mesaimi gÃ¶ster.';
+$LDShowMyWorkTime='Ã‡alÄ±ÅŸma planÄ±mÄ±n ayrÄ±ntÄ±larÄ±nÄ± gÃ¶ster.';
+$LDPlanSched='Bu gÃ¼ne randevu planla.';
+$LDPlanDuty='Bu gÃ¼ne nÃ¶bet planla.';
+$LDORProgram='Ameliyathame programÄ±';
+$LDDutyPerson='NÃ¶betÃ§i hemÅŸire';
+$LDDocsOnDuty='NÃ¶betÃ§i doktorlar';
 $LDORLogbook='Ameliyat defteri (Yeni ameliyat kaydet)';
-$LDORLogbookArch='Ameliyat defteri (Arşiv)';
-$LDORLogbookSearch='Ameliyat defteri (Ameliyat olmuş hasta ara)';
-$LDPresent='Şu an';
+$LDORLogbookArch='Ameliyat defteri (ArÅŸiv)';
+$LDORLogbookSearch='Ameliyat defteri (Ameliyat olmuÅŸ hasta ara)';
+$LDPresent='Åu an';
 
 $LDBgColor='Arka plan rengi';
-$LDTxtColor='Yazı rengi';
-$LDClk4BgColor='Arka plan rengini seçmek için tıkla';
-$LDClk4TxtColor='Yazı rengini seçmek için tıkla';
+$LDTxtColor='YazÄ± rengi';
+$LDClk4BgColor='Arka plan rengini seÃ§mek iÃ§in tÄ±kla';
+$LDClk4TxtColor='YazÄ± rengini seÃ§mek iÃ§in tÄ±kla';
 $LDApply='Uygula';
 
 $LDColorMap='Renkler';
-$LDPlsClkColor='İstediğiniz renge tıklayınız';
-$LDMainFrame='Ana çerçeve';
-$LDTopFrame='Üst çerçeve';
-$LDBottomFrame='Alt çerçeve';
+$LDPlsClkColor='Ä°stediÄŸiniz renge tÄ±klayÄ±nÄ±z';
+$LDMainFrame='Ana Ã§erÃ§eve';
+$LDTopFrame='Ãœst Ã§erÃ§eve';
+$LDBottomFrame='Alt Ã§erÃ§eve';
 
-$LDPWChange='Şifre değişimi';
-$LDUserIdPWPrompt='Kullanıcı adınızı ve güncel şifrenizi giriniz:';
-$LDNewPwPrompt='Şimdi, yeni şifrenizi giriniz:';
-$LDNewPw='Yeni şifre';
-$LDNewPw2='Yeni şifreyi tekrar yazınız';
-$LDChangePw='Şifreyi değiştir';
-$LDOops='Hops! Hayır, değiştirme.';
+$LDPWChange='Åifre deÄŸiÅŸimi';
+$LDUserIdPWPrompt='KullanÄ±cÄ± adÄ±nÄ±zÄ± ve gÃ¼ncel ÅŸifrenizi giriniz:';
+$LDNewPwPrompt='Åimdi, yeni ÅŸifrenizi giriniz:';
+$LDNewPw='Yeni ÅŸifre';
+$LDNewPw2='Yeni ÅŸifreyi tekrar yazÄ±nÄ±z';
+$LDChangePw='Åifreyi deÄŸiÅŸtir';
+$LDOops='Hops! HayÄ±r, deÄŸiÅŸtirme.';
 
-/*$LDWrongEntry='Yanlış girişler!';
-$LDNoAuth='Erişim hakkı yok';
-$LDAuthLocked='Erişim hakkı donduruldu.';*/
+/*$LDWrongEntry='YanlÄ±ÅŸ giriÅŸler!';
+$LDNoAuth='EriÅŸim hakkÄ± yok';
+$LDAuthLocked='EriÅŸim hakkÄ± donduruldu.';*/
 
-$LDAlertPwError='Yeni şifreler birbirinin aynı değil. Lütfen yeni şifreleri tekrar giriniz.';
-$LDPWChanged='Yeni şifre kaydedildi.';
+$LDAlertPwError='Yeni ÅŸifreler birbirinin aynÄ± deÄŸil. LÃ¼tfen yeni ÅŸifreleri tekrar giriniz.';
+$LDPWChanged='Yeni ÅŸifre kaydedildi.';
 
-$LDBday='Doğum tarihi';
-$LDShotDate='Çekim tarihi';
+$LDBday='DoÄŸum tarihi';
+$LDShotDate='Ã‡ekim tarihi';
 $LDPatientNr='Vizit No';
-$LDSetShotDate='Tüm resimlere bu tarihi ver.';
+$LDSetShotDate='TÃ¼m resimlere bu tarihi ver.';
 $LDFotoLab='Fotolab';
-$LDHowManyPics='Veritabanına kaç tane resim kaydetmek istiyorsunuz?';
-$LDNr='Sayı';
+$LDHowManyPics='VeritabanÄ±na kaÃ§ tane resim kaydetmek istiyorsunuz?';
+$LDNr='SayÄ±';
 $LDNewPics='yeni bir hastadan resimler';
-$LDMorePics='aynı hastadan resimler';
+$LDMorePics='aynÄ± hastadan resimler';
 $LDAdditional='Ek';
-$LDLinkBroken='Foto sunucusuna bağlantı kesik.';
-$LDPicsSaved='Aşağıdaki resimler tekrar adlandırılarak veritabanına kaydedildi:';
-$LDEditTitle='Başlık';
+$LDLinkBroken='Foto sunucusuna baÄŸlantÄ± kesik.';
+$LDPicsSaved='AÅŸaÄŸÄ±daki resimler tekrar adlandÄ±rÄ±larak veritabanÄ±na kaydedildi:';
+$LDEditTitle='BaÅŸlÄ±k';
 
-$LDAlertPhotoInfo='Giriş alanındaki bilgi';
-$LDAlertNoPhotoInfo=' tamam değil. Lüfen bilgiyi tam giriniz.';
-$LDAlertNoPatientData='Hastanın bilgisi tam değil.';
-$LDAlertNumberOnly='Lütfen bir sayı ya da  "ana" sözcüğünü giriniz.';
+$LDAlertPhotoInfo='GiriÅŸ alanÄ±ndaki bilgi';
+$LDAlertNoPhotoInfo=' tamam deÄŸil. LÃ¼fen bilgiyi tam giriniz.';
+$LDAlertNoPatientData='HastanÄ±n bilgisi tam deÄŸil.';
+$LDAlertNumberOnly='LÃ¼tfen bir sayÄ± ya da  "ana" sÃ¶zcÃ¼ÄŸÃ¼nÃ¼ giriniz.';
 
-$LDStatistics='İstatistikler';
-$LDDisplay1='Görüntü 1';
-$LDDisplay1Txt='Menünün daima sol pencerede olduğu görüntüye geçiş';
-$LDDisplay2='Görüntü 2';
-$LDDisplay2Txt='Menünün yüzen çerçeve olduğu görüntüye geçiş. ';
+$LDStatistics='Ä°statistikler';
+$LDDisplay1='GÃ¶rÃ¼ntÃ¼ 1';
+$LDDisplay1Txt='MenÃ¼nÃ¼n daima sol pencerede olduÄŸu gÃ¶rÃ¼ntÃ¼ye geÃ§iÅŸ';
+$LDDisplay2='GÃ¶rÃ¼ntÃ¼ 2';
+$LDDisplay2Txt='MenÃ¼nÃ¼n yÃ¼zen Ã§erÃ§eve olduÄŸu gÃ¶rÃ¼ntÃ¼ye geÃ§iÅŸ. ';
 
-$LDNewPwDiffer='Yeni şifreler birbirinden farklı.<br> Lütfen yeni şifreyi tekrar giriniz.';
+$LDNewPwDiffer='Yeni ÅŸifreler birbirinden farklÄ±.<br> LÃ¼tfen yeni ÅŸifreyi tekrar giriniz.';
 /* 2003-03-22 EL*/
-$LDPersonellMngmnt='Personel Yöneticisi';
-$LDPersonellMngmntTxt='Personelleri yönetmek için araçlar ve işlevler';
+$LDPersonellMngmnt='Personel YÃ¶neticisi';
+$LDPersonellMngmntTxt='Personelleri yÃ¶netmek iÃ§in araÃ§lar ve iÅŸlevler';
 /* 2003-04-25 EL */
 $LDBilling='efatura';
-$LDBillingTxt='Hasta faturası kes, farura kalemlerini oluştur, fatura raporları oluştur vs. ';
-$LDInsuranceCoMngr='Sigorta Şirketi Yöneticisi';
-$LDInsuranceCoMngrTxt='Yeni sigorta şirketi bilgisi gir, düzenle';
-$LDAddressMngr='Adres Yöneticisi';
-$LDAddressMngrTxt='Adres bilgisi gir, listele, düzenle, ve güncelle';
+$LDBillingTxt='Hasta faturasÄ± kes, farura kalemlerini oluÅŸtur, fatura raporlarÄ± oluÅŸtur vs. ';
+$LDInsuranceCoMngr='Sigorta Åirketi YÃ¶neticisi';
+$LDInsuranceCoMngrTxt='Yeni sigorta ÅŸirketi bilgisi gir, dÃ¼zenle';
+$LDAddressMngr='Adres YÃ¶neticisi';
+$LDAddressMngrTxt='Adres bilgisi gir, listele, dÃ¼zenle, ve gÃ¼ncelle';
 /* 2003-05-18 EL */
-$LDUserConfigOpt='Düzenleme seçenekleri';
-$LDUserConfigOptTxt='Arkaplan, yazı rengi, maskotlar, simgeler vs için kullanıcı seçenekleri.';
-$LDMascotOpt='Maskot seçenekleri';
-$LDMascotOptTxt='Maskotları gizle, göster, seç.';
+$LDUserConfigOpt='DÃ¼zenleme seÃ§enekleri';
+$LDUserConfigOptTxt='Arkaplan, yazÄ± rengi, maskotlar, simgeler vs iÃ§in kullanÄ±cÄ± seÃ§enekleri.';
+$LDMascotOpt='Maskot seÃ§enekleri';
+$LDMascotOptTxt='MaskotlarÄ± gizle, gÃ¶ster, seÃ§.';
 $LDMascot='Maskot';
-$LDSampleMascot='Örnek maskotlar';
+$LDSampleMascot='Ã–rnek maskotlar';
 /* 2003-04-24 EL*/
-$LDGUITemplate='GKB Örnek seçimi';
-$LDGUITemplateTxt='GKB (grafik kullanıcı birimi) örneği seçiniz';
-$LDGUITheme='GKB Teması';
+$LDGUITemplate='GKB Ã–rnek seÃ§imi';
+$LDGUITemplateTxt='GKB (grafik kullanÄ±cÄ± birimi) Ã¶rneÄŸi seÃ§iniz';
+$LDGUITheme='GKB TemasÄ±';
 $LDTheme='Tema';
 # 2002-08-10
-$LDLastName='Soyadı';
-$LDWantUpload='Yüklemek istiyorum';
+$LDLastName='SoyadÄ±';
+$LDWantUpload='YÃ¼klemek istiyorum';
 $LDImage='resim(ler)';
 # 2002-01-18 EL
-$LDTicketedSupport='Ücretli Destek';
-$LDTicketedSupportTxt='Projenin online destek hizmetine biletli bir istem gönder';
+$LDTicketedSupport='Ãœcretli Destek';
+$LDTicketedSupportTxt='Projenin online destek hizmetine biletli bir istem gÃ¶nder';
 $LDNewsgroup='Haber grubu';
-$LDNewsgroupTxt='Geliştiricilerin haberleşme listesinin yansısı haber grubu.';
+$LDNewsgroupTxt='GeliÅŸtiricilerin haberleÅŸme listesinin yansÄ±sÄ± haber grubu.';
 # 2002-08-19 EL
-$LDPharmaIndex='İlaç İndeksi';
-$LDPharmaIndexTxt='İlaç indeksi, Kırmızı liste, IFAP, NIMS, vaya PIMS gibi';
+$LDPharmaIndex='Ä°laÃ§ Ä°ndeksi';
+$LDPharmaIndexTxt='Ä°laÃ§ indeksi, KÄ±rmÄ±zÄ± liste, IFAP, NIMS, vaya PIMS gibi';
 
 #2004-05-23 EL
 $LDPlugins='Eklentiler';
-$LDNoPluginsPrompt='Henüz kurulmuş bir eklenti yok. . Eğer bir  Care2x eklenti modülü ister iseniz lütfen  http://www.care2x-plugins.org adresini ziyaret ediniz.';
-$LDPluginsTxt='Eklenti araç ve modülleri kolleksiyonu';
+$LDNoPluginsPrompt='HenÃ¼z kurulmuÅŸ bir eklenti yok. . EÄŸer bir  Care2x eklenti modÃ¼lÃ¼ ister iseniz lÃ¼tfen  http://www.care2x-plugins.org adresini ziyaret ediniz.';
+$LDPluginsTxt='Eklenti araÃ§ ve modÃ¼lleri kolleksiyonu';
 
 #2004-06-13 EL
 $LDCssThemes = 'CSS Tema Stilleri';
-$LDCssThemesTxt= 'Kenar rengi, genişlik, dekorasyon, yazı tipleri büyüklükleri, arka planlar vs için dizayn seçiniz.';
-$LDDescription = 'Tanım';
-$LDScreenshot = 'Ekran görüntüsü';
+$LDCssThemesTxt= 'Kenar rengi, geniÅŸlik, dekorasyon, yazÄ± tipleri bÃ¼yÃ¼klÃ¼kleri, arka planlar vs iÃ§in dizayn seÃ§iniz.';
+$LDDescription = 'TanÄ±m';
+$LDScreenshot = 'Ekran gÃ¶rÃ¼ntÃ¼sÃ¼';
 
 #2004-06-30
-$LDSmartyTemplate = 'Gösterişli kalıp stilleri';
-$LDSmartyTemplateTxt = 'Gösterişli temelli kullanıcı ara yüzü kalıp stili seç';
+$LDSmartyTemplate = 'GÃ¶steriÅŸli kalÄ±p stilleri';
+$LDSmartyTemplateTxt = 'GÃ¶steriÅŸli temelli kullanÄ±cÄ± ara yÃ¼zÃ¼ kalÄ±p stili seÃ§';
 
 #2004-07-08
-$LDControlButtons = 'Kontrol düğme stilleri';
-$LDControlButtonsTxt = 'Kontrol düğme stilini seçiniz';
-$LDComIcons = 'Yaygın simge stilleri';
-$LDComIconsTxt = 'Dekoratif simge stilini seçiniz <br>(uyarı: bazı CSS temalarında, tema değişince simgeler de değişir)';
-$LDDevDesigner = 'Geliştirici/Dizayncı';
+$LDControlButtons = 'Kontrol dÃ¼ÄŸme stilleri';
+$LDControlButtonsTxt = 'Kontrol dÃ¼ÄŸme stilini seÃ§iniz';
+$LDComIcons = 'YaygÄ±n simge stilleri';
+$LDComIconsTxt = 'Dekoratif simge stilini seÃ§iniz <br>(uyarÄ±: bazÄ± CSS temalarÄ±nda, tema deÄŸiÅŸince simgeler de deÄŸiÅŸir)';
+$LDDevDesigner = 'GeliÅŸtirici/DizayncÄ±';
 $LDNoIcon = 'Simge yok';
-$LDNoIconTxt = 'Alt menülerde simge görülmez. Simgelerin görünümü baskılanır';
+$LDNoIconTxt = 'Alt menÃ¼lerde simge gÃ¶rÃ¼lmez. Simgelerin gÃ¶rÃ¼nÃ¼mÃ¼ baskÄ±lanÄ±r';
 
 #2004-07-29
-$LDMainMenuTree = 'Ana Menü Stilleri';
-$LDMainMenuTreeTxt = 'Ana menü stilini seçiniz';
+$LDMainMenuTree = 'Ana MenÃ¼ Stilleri';
+$LDMainMenuTreeTxt = 'Ana menÃ¼ stilini seÃ§iniz';
 $LDStyle = 'Stil';
-$LDRefreshBrowser = 'Değişiklikleri görmek için tarayıcınızın yenile düğmesini tıklayınız.';
+$LDRefreshBrowser = 'DeÄŸiÅŸiklikleri gÃ¶rmek iÃ§in tarayÄ±cÄ±nÄ±zÄ±n yenile dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.';
 
 ?>

@@ -1,124 +1,124 @@
 <?php
 $LDLab='Laboratuvarlar';
-$LDMedLab='Biyokimya laboratuvarı';
-$LDPathLab='Patoloji laboratuvarı';
-$LDBacLab='Bakteriyoloji laboratuvarı';
+$LDMedLab='Biyokimya laboratuvarÄ±';
+$LDPathLab='Patoloji laboratuvarÄ±';
+$LDBacLab='Bakteriyoloji laboratuvarÄ±';
 $LDClose='Kapat';
-$LDSeeLabData='Hasta laboratuvar sonuçlarını ara ve görüntüle.';
-$LDSeeData='Sonuçları görüntüle';
-$LDEnterLabData='Hastanın laboratuvar sonuçlarını gir';
+$LDSeeLabData='Hasta laboratuvar sonuÃ§larÄ±nÄ± ara ve gÃ¶rÃ¼ntÃ¼le.';
+$LDSeeData='SonuÃ§larÄ± gÃ¶rÃ¼ntÃ¼le';
+$LDEnterLabData='HastanÄ±n laboratuvar sonuÃ§larÄ±nÄ± gir';
 $LDNewData='Yeni veri gir';
-$LDEnterPrioParams='Öncelik parametrelerini belirle';
-$LDPrioParams='Öncelik parametreleri';
-$LDEnterNorms='Normal dağılım sınırlarını belirle';
-$LDNorms='Normal dağılım sınırları';
-$LDOtherOptions='Diğer seçenekler';
-$LDOptions='Seçenekler';
-$LDMemo='Bir not oku veya oluştur';
+$LDEnterPrioParams='Ã–ncelik parametrelerini belirle';
+$LDPrioParams='Ã–ncelik parametreleri';
+$LDEnterNorms='Normal daÄŸÄ±lÄ±m sÄ±nÄ±rlarÄ±nÄ± belirle';
+$LDNorms='Normal daÄŸÄ±lÄ±m sÄ±nÄ±rlarÄ±';
+$LDOtherOptions='DiÄŸer seÃ§enekler';
+$LDOptions='SeÃ§enekler';
+$LDMemo='Bir not oku veya oluÅŸtur';
 $LDTitleMemo='Not';
-$LDfieldname=array('Hasta no.','Soyad','Ad','Doğum tarihi');
-$LDSearchWordPrompt='Aranacak anahtar sözcük giriniz, örneğin: bir soyad, bir ad, bir doğum tarihi, vs.';
-$LDEnterData='Verileri girmek için tıklayınız';
-$LDClk2See='Verileri görmek için tıklayınız';
+$LDfieldname=array('Hasta no.','Soyad','Ad','DoÄŸum tarihi');
+$LDSearchWordPrompt='Aranacak anahtar sÃ¶zcÃ¼k giriniz, Ã¶rneÄŸin: bir soyad, bir ad, bir doÄŸum tarihi, vs.';
+$LDEnterData='Verileri girmek iÃ§in tÄ±klayÄ±nÄ±z';
+$LDClk2See='Verileri gÃ¶rmek iÃ§in tÄ±klayÄ±nÄ±z';
 $LDFoundPatient='Arama sonucunda <b>~nr~</b> hasta bulundu';
-$LDWildCards='Joker kartları nedir ve nasıl kullanılır?';
+$LDWildCards='Joker kartlarÄ± nedir ve nasÄ±l kullanÄ±lÄ±r?';
 $LDNewSearch='Yeni arama';
 
 $LDCaseNr='Hasta no.';
 $LDLabReport='Lab raporu';
 $LDLastName='Soyad';
 $LDName='Ad';
-$LDBday='Doğum tarihi';
-$LDNoLabReport='Laboratuvar raporu bulunamadı:';
+$LDBday='DoÄŸum tarihi';
+$LDNoLabReport='Laboratuvar raporu bulunamadÄ±:';
 $LDParameter='Parametre';
-$LDNormalValue='Normal dağılımı';
+$LDNormalValue='Normal daÄŸÄ±lÄ±mÄ±';
 $LDOClock='Saat';
-$LDClk2Graph='Grafik görünümü için tıklayınız';
-$LDClk2SelectAll='Grafik görünümü tümü için seçmek veya seçmemek için tıklayınız';
+$LDClk2Graph='Grafik gÃ¶rÃ¼nÃ¼mÃ¼ iÃ§in tÄ±klayÄ±nÄ±z';
+$LDClk2SelectAll='Grafik gÃ¶rÃ¼nÃ¼mÃ¼ tÃ¼mÃ¼ iÃ§in seÃ§mek veya seÃ§memek iÃ§in tÄ±klayÄ±nÄ±z';
 $LDGraph='Graf';
 $LDBack='Geri';
-$LDReportFound='Aşağıda laboratuvar raporu bulunan hastanın numarası  ';
-$LDReportFoundMany='Aşağıda laboratuvar raporları bulunan hastanın numarası ';
-$LDIfWantEdit='Raporu düzenlemek istiyor iseniz ok işaretini tıklayınız.';
-$LDIfWantEditMany='Onlardan birisini düzenlemek istiyor iseniz ilgili ok işaretini tıklayınız.';
+$LDReportFound='AÅŸaÄŸÄ±da laboratuvar raporu bulunan hastanÄ±n numarasÄ±  ';
+$LDReportFoundMany='AÅŸaÄŸÄ±da laboratuvar raporlarÄ± bulunan hastanÄ±n numarasÄ± ';
+$LDIfWantEdit='Raporu dÃ¼zenlemek istiyor iseniz ok iÅŸaretini tÄ±klayÄ±nÄ±z.';
+$LDIfWantEditMany='Onlardan birisini dÃ¼zenlemek istiyor iseniz ilgili ok iÅŸaretini tÄ±klayÄ±nÄ±z.';
 
-$LDJobIdNr='Küme no.';
+$LDJobIdNr='KÃ¼me no.';
 $LDExamDate='Tetkik tarihi';
 $LDOn='De';
 $LDAt='De';
-$LDClk2Edit='Bu raporu düzenlemek için tıklayınız';
+$LDClk2Edit='Bu raporu dÃ¼zenlemek iÃ§in tÄ±klayÄ±nÄ±z';
 
-$LDNewJob='Yeni bir laboratuvar raporu oluşturmak istiyorum!';
+$LDNewJob='Yeni bir laboratuvar raporu oluÅŸturmak istiyorum!';
 $LDNew='Yeni';
-$LDEdit='Düzenle';
-$LDCreate='Oluştur';
+$LDEdit='DÃ¼zenle';
+$LDCreate='OluÅŸtur';
 $LDParamGroup='Parametre grubu';
-$LDSelectParamGroup='Parametre grubunu seçiniz';
-$LDValue='Değer';
+$LDSelectParamGroup='Parametre grubunu seÃ§iniz';
+$LDValue='DeÄŸer';
 
-$LDParamNoSee='İstediğim parametre görülmüyor!';
-$LDOnlyPair='Sadece birkaç değer girmek istiyorum!';
-$LDHow2Save='Değerleri nasıl kaydederim?';
-$LDWrongValueHow='Yanlış bir değer kaydettim. Nasıl düzeltirim?';
-$LDVal2Note='Bir rakam yerine not girmek istiyorum. Nasıl yaparım?';
-$LDImDone='Bitti. Sırada ne var?';
-$LDAlertJobId='Önce küme numarasını girin!';
-$LDAlertTestDate='Önce tetkik tarihini girin!';
+$LDParamNoSee='Ä°stediÄŸim parametre gÃ¶rÃ¼lmÃ¼yor!';
+$LDOnlyPair='Sadece birkaÃ§ deÄŸer girmek istiyorum!';
+$LDHow2Save='DeÄŸerleri nasÄ±l kaydederim?';
+$LDWrongValueHow='YanlÄ±ÅŸ bir deÄŸer kaydettim. NasÄ±l dÃ¼zeltirim?';
+$LDVal2Note='Bir rakam yerine not girmek istiyorum. NasÄ±l yaparÄ±m?';
+$LDImDone='Bitti. SÄ±rada ne var?';
+$LDAlertJobId='Ã–nce kÃ¼me numarasÄ±nÄ± girin!';
+$LDAlertTestDate='Ã–nce tetkik tarihini girin!';
 
 /* 2002-09-01 EL */
-$LDTestRequest='Tetkik İstemi';
-$LDFillUpSend='Kendisi için tetkik istemi doldurulup gönderilecek kişi:';
+$LDTestRequest='Tetkik Ä°stemi';
+$LDFillUpSend='Kendisi iÃ§in tetkik istemi doldurulup gÃ¶nderilecek kiÅŸi:';
 $LDTestRequestPathoTxt=$LDFillUpSend.'patoloji/histoloji tetkiki';
 $LDTestRequestBacterioTxt=$LDFillUpSend.'bakteriyolojik tetkik';
 $LDTestRequestChemLabTxt=$LDFillUpSend.'biyokimya tetkiki';
-$LDBloodBank='Kan bankası';
-$LDBloodRequest='Kan İstemi';
-$LDBloodRequestTxt=$LDFillUpSend.'kan ürünleri';
+$LDBloodBank='Kan bankasÄ±';
+$LDBloodRequest='Kan Ä°stemi';
+$LDBloodRequestTxt=$LDFillUpSend.'kan Ã¼rÃ¼nleri';
 
-$LDRequestSent['insert']='Tetkik istemi gönderildi. ';
-$LDFormSaved['insert']='Form kaydedildi (henüz gönderilmedi).';
-$LDRequestSent['update']='Tetkiki güncelleme istemi gönderildi. ';
-$LDFormSaved['update']='Güncellenen tetkik kaydedildi (henüz gönderilmedi).';
-$LDWhatToDo=' Şimdi ne yapmak istiyorsunuz?';
+$LDRequestSent['insert']='Tetkik istemi gÃ¶nderildi. ';
+$LDFormSaved['insert']='Form kaydedildi (henÃ¼z gÃ¶nderilmedi).';
+$LDRequestSent['update']='Tetkiki gÃ¼ncelleme istemi gÃ¶nderildi. ';
+$LDFormSaved['update']='GÃ¼ncellenen tetkik kaydedildi (henÃ¼z gÃ¶nderilmedi).';
+$LDWhatToDo=' Åimdi ne yapmak istiyorsunuz?';
 
-$LDNewFormSamePatient=' <b>Aynı</b> hasta için yeni bir tetkik istemi oluşturmak';
-$LDEditForm='Aynı tetkik istemini düzenlemek';
+$LDNewFormSamePatient=' <b>AynÄ±</b> hasta iÃ§in yeni bir tetkik istemi oluÅŸturmak';
+$LDEditForm='AynÄ± tetkik istemini dÃ¼zenlemek';
 $LDEndTestRequest='Bitirdim.';
-$LDNewFormOtherPatient='<b>Bir başka</b> hasta için tetkik istemi oluşturmak';
+$LDNewFormOtherPatient='<b>Bir baÅŸka</b> hasta iÃ§in tetkik istemi oluÅŸturmak';
 
 /* 2002-09-03 EL */							  
 $LDSearchPatient='Hasta arama';
 $LDSearchFound='~nr~ hasta bulundu.';
 /* 2002-09-04 EL */		
-$LDTestRequestFor='İstenecek tetkik: ';
+$LDTestRequestFor='Ä°stenecek tetkik: ';
 $LDTestType=array('biyokim'=>'biyokimya tetkiki',
                               'pato'=>'patoloji tetkiki',
 								 'baklab'=>'bakteriyolojik tetkik',
-								 'rönt'=>'röntgen tetkiki',
-								 'kan'=>'kan ürünü',
-								 'rönt'=>'radyoloji');
+								 'rÃ¶nt'=>'rÃ¶ntgen tetkiki',
+								 'kan'=>'kan Ã¼rÃ¼nÃ¼',
+								 'rÃ¶nt'=>'radyoloji');
 /* 2002-09-10 EL */
-$LDTestReception='Bekleyen İstem';
-$LDTestReceptionTxt='İstemleri kabul et ve işle, sonuç/bulgu/tanıları yaz';
+$LDTestReception='Bekleyen Ä°stem';
+$LDTestReceptionTxt='Ä°stemleri kabul et ve iÅŸle, sonuÃ§/bulgu/tanÄ±larÄ± yaz';
 /* 2002-09-15 EL */
-$LDPrintForm='İstem formunu yazdır';
+$LDPrintForm='Ä°stem formunu yazdÄ±r';
 
 /* 2002-09-21 EL */
-$LDInitFindings='İlk bulgular';
-$LDCurrentFindings='Güncel bulgular';
+$LDInitFindings='Ä°lk bulgular';
+$LDCurrentFindings='GÃ¼ncel bulgular';
 $LDFinalFindings='Son bulgular';
-$LDFillLabOnly='Sadece lab kullanımı için';
-$LDLEN='LGN';  /* Laboratuar giriş no */
+$LDFillLabOnly='Sadece lab kullanÄ±mÄ± iÃ§in';
+$LDLEN='LGN';  /* Laboratuar giriÅŸ no */
 /*2003-07-11 EL*/
-$LDAdministration='Yönetim';
+$LDAdministration='YÃ¶netim';
 $LDTestParameters='Test parametreleri';
-$LDTestParametersTxt='Birimleri, ölçü, değerler, dağılım, limitler vs girmek veya düzenlemek.';
-$LDMsrUnit='Ölç. Birimi';
+$LDTestParametersTxt='Birimleri, Ã¶lÃ§Ã¼, deÄŸerler, daÄŸÄ±lÄ±m, limitler vs girmek veya dÃ¼zenlemek.';
+$LDMsrUnit='Ã–lÃ§. Birimi';
 $LDMedian='Median';
-$LDUpperBound='Üst sınır';
-$LDLowerBound='Alt sınır';
-$LDUpperCritical='Kritik üst';
+$LDUpperBound='Ãœst sÄ±nÄ±r';
+$LDLowerBound='Alt sÄ±nÄ±r';
+$LDUpperCritical='Kritik Ã¼st';
 $LDLowerCritical='Kritik alt';
-$LDUpperToxic='Toksik üst';
+$LDUpperToxic='Toksik Ã¼st';
 $LDLowerToxic='Toksik alt';
 ?>

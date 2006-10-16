@@ -4,125 +4,125 @@
 */
 $LDClose='Kapat';
 $LDTech='Teknik';
-$LDTechRepair='Teknik onarım';
-$LDTechMaint='Teknik bakım';
+$LDTechRepair='Teknik onarÄ±m';
+$LDTechMaint='Teknik bakÄ±m';
 $LDTechSupport='Teknik destek';
 $LDTechInfo='Teknik bilgi';
 
-$LDReRepair='Onarım desteği istemi';
-$LDReRepairTxt='Arıza rapor etme, onarım hizmeti için istem yazma ve gönderme.';
-$LDRepabotActivate='Onarım Robotunu etkinleştir';
-$LDRepabotActivateTxt='Onarım işi istemlerinin otomatik alınması için bir robot.';
-$LDRepairReport='Onarımı rapor et';
-$LDRepairReportTxt='Bitmiş onarım işlerini rapor et.';
-$LDReportsArchive='Rapor arşivi';
-$LDReportsArchiveTxt='Teknik raporlar arşivinde arama';
-$LDQuestions='Araştırma, Sorular';
-$LDQuestionsTxt='Araştırma veya soruları oluşturma, okuma ve gönderme';
-$LDQBotActivate='Sorgu Robotunu etkinleştir';
-$LDQBotActivateTxt='Soru ve araştırmaların otomatik alınması için bir robot.';
+$LDReRepair='OnarÄ±m desteÄŸi istemi';
+$LDReRepairTxt='ArÄ±za rapor etme, onarÄ±m hizmeti iÃ§in istem yazma ve gÃ¶nderme.';
+$LDRepabotActivate='OnarÄ±m Robotunu etkinleÅŸtir';
+$LDRepabotActivateTxt='OnarÄ±m iÅŸi istemlerinin otomatik alÄ±nmasÄ± iÃ§in bir robot.';
+$LDRepairReport='OnarÄ±mÄ± rapor et';
+$LDRepairReportTxt='BitmiÅŸ onarÄ±m iÅŸlerini rapor et.';
+$LDReportsArchive='Rapor arÅŸivi';
+$LDReportsArchiveTxt='Teknik raporlar arÅŸivinde arama';
+$LDQuestions='AraÅŸtÄ±rma, Sorular';
+$LDQuestionsTxt='AraÅŸtÄ±rma veya sorularÄ± oluÅŸturma, okuma ve gÃ¶nderme';
+$LDQBotActivate='Sorgu Robotunu etkinleÅŸtir';
+$LDQBotActivateTxt='Soru ve araÅŸtÄ±rmalarÄ±n otomatik alÄ±nmasÄ± iÃ§in bir robot.';
 $LDInfo='Bilgiler';
-$LDInfoTxt='Teknik özellikli bilgileri araştır';
+$LDInfoTxt='Teknik Ã¶zellikli bilgileri araÅŸtÄ±r';
 
-$LDSendRequest='İstem gönder';
-$LDSendReport='Rapor gönder';
-$LDSendInquiry='Sorgu gönder';
-$LDReset='Baştan başla';
-$LDRepairArea='Arızanın yeri';
-$LDReporter='İsteyen kişi:';
+$LDSendRequest='Ä°stem gÃ¶nder';
+$LDSendReport='Rapor gÃ¶nder';
+$LDSendInquiry='Sorgu gÃ¶nder';
+$LDReset='BaÅŸtan baÅŸla';
+$LDRepairArea='ArÄ±zanÄ±n yeri';
+$LDReporter='Ä°steyen kiÅŸi:';
 $LDPersonnelNr='Sicil no.';
-$LDPhoneNr='Telefon no.  <font size=1>(sonraki haberleşmeler için)</font>';
-$LDPlsDescribe='Lütfen arızayı anlatınız';
+$LDPhoneNr='Telefon no.  <font size=1>(sonraki haberleÅŸmeler iÃ§in)</font>';
+$LDPlsDescribe='LÃ¼tfen arÄ±zayÄ± anlatÄ±nÄ±z';
 
-$LDAlertName='Lütfen isminizi giriniz.';
-$LDAlertDept='Lütfen bölümünüzü veya arızanın bulunduğu yeri giriniz.';
-$LDAlertDeptOnly='Lütfen bölümünüzü giriniz.';
-$LDAlertPNr='Lütfen sicil numaranızı giriniz.';
-$LDAck='Alındı Makbuzu';
+$LDAlertName='LÃ¼tfen isminizi giriniz.';
+$LDAlertDept='LÃ¼tfen bÃ¶lÃ¼mÃ¼nÃ¼zÃ¼ veya arÄ±zanÄ±n bulunduÄŸu yeri giriniz.';
+$LDAlertDeptOnly='LÃ¼tfen bÃ¶lÃ¼mÃ¼nÃ¼zÃ¼ giriniz.';
+$LDAlertPNr='LÃ¼tfen sicil numaranÄ±zÄ± giriniz.';
+$LDAck='AlÄ±ndÄ± Makbuzu';
 $LDYour='Sizin';
-$LDReceived='alındığı tarih';
+$LDReceived='alÄ±ndÄ±ÄŸÄ± tarih';
 $LDAt='saat';
-$LDAtTech='. Teşekkürler. <i>Teknik destek ekibi.</i>';
+$LDAtTech='. TeÅŸekkÃ¼rler. <i>Teknik destek ekibi.</i>';
 $LDRequest='istem';
 $LDReport='rapor';
-$LDThanksSir='Teşekkürler Efendim';
-$LDPlsTypeReport='Lütfen yaptığınız onarım işini anlatınız.';
-$LDJobIdNr='İş kimlik no.';
+$LDThanksSir='TeÅŸekkÃ¼rler Efendim';
+$LDPlsTypeReport='LÃ¼tfen yaptÄ±ÄŸÄ±nÄ±z onarÄ±m iÅŸini anlatÄ±nÄ±z.';
+$LDJobIdNr='Ä°ÅŸ kimlik no.';
 $LDTechnician='Teknisyen';
-$LDPlsDoneOnly='(Lütfen sadece bitmiş onarım işlerini rapor ediniz.)';
-$LDName='İsim';
-$LDDept='Bölüm';
-$LDEnterQuestion='Lütfen sorunuzu yazınız';
-$LDLogIn='Giriş';
-$LDPlsNoRequest='(Buraya onarım istemi yazmayınız. Eğer bir arıza bildirmek istiyor iseniz ve onarıma gereksinim var ise lütfen bunu tıklayınız.';
-$LDLastQuestions='Son ~tagword~ soru(ları) veya cevap(lar)ı ';
+$LDPlsDoneOnly='(LÃ¼tfen sadece bitmiÅŸ onarÄ±m iÅŸlerini rapor ediniz.)';
+$LDName='Ä°sim';
+$LDDept='BÃ¶lÃ¼m';
+$LDEnterQuestion='LÃ¼tfen sorunuzu yazÄ±nÄ±z';
+$LDLogIn='GiriÅŸ';
+$LDPlsNoRequest='(Buraya onarÄ±m istemi yazmayÄ±nÄ±z. EÄŸer bir arÄ±za bildirmek istiyor iseniz ve onarÄ±ma gereksinim var ise lÃ¼tfen bunu tÄ±klayÄ±nÄ±z.';
+$LDLastQuestions='Son ~tagword~ soru(larÄ±) veya cevap(lar)Ä± ';
 $LDFrom='kimden';
 $LDTo='kime';
-$LDAlertQuestion='Hiçbir soru yazmadınız.';
+$LDAlertQuestion='HiÃ§bir soru yazmadÄ±nÄ±z.';
 $LDOn='de';
 $LDOClock='saat';
 $LDInquiry='Sorgu';
-$LDReply='Yanıt';
+$LDReply='YanÄ±t';
 $LDSearch='Ara';
 $LDSearchReport='Rapor ara';
 $LDDate='Tarih';
-$LDReportListMany='Raporlar aşağıdadır';
-$LDNotReadMany=' okumamış veya yazdırılmamış olanlar.'; 
-$LDReportList='Rapor aşağıdadır';
-$LDNotRead=' Henüz okunmadı veya yazdırılmadı.';
-$LDClk2Read='İçeriğini okumak için ok düğmesini tıklayınız.';
-$LDLikeSearch=' aranan anahtar sözcükle ilgilidir.';
-$LDLikeSearchMany=' aranan anahtar sözcükle ilgilidirler.';
+$LDReportListMany='Raporlar aÅŸaÄŸÄ±dadÄ±r';
+$LDNotReadMany=' okumamÄ±ÅŸ veya yazdÄ±rÄ±lmamÄ±ÅŸ olanlar.'; 
+$LDReportList='Rapor aÅŸaÄŸÄ±dadÄ±r';
+$LDNotRead=' HenÃ¼z okunmadÄ± veya yazdÄ±rÄ±lmadÄ±.';
+$LDClk2Read='Ä°Ã§eriÄŸini okumak iÃ§in ok dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.';
+$LDLikeSearch=' aranan anahtar sÃ¶zcÃ¼kle ilgilidir.';
+$LDLikeSearchMany=' aranan anahtar sÃ¶zcÃ¼kle ilgilidirler.';
 
 $LDTelephoneNr='Telefon no.';
 
-$bcatindex=array('&nbsp;','&nbsp;',$LDTechnician,$LDDept,'Alındığı tarih',$LDAt,'&nbsp;');
+$bcatindex=array('&nbsp;','&nbsp;',$LDTechnician,$LDDept,'AlÄ±ndÄ±ÄŸÄ± tarih',$LDAt,'&nbsp;');
 $blistindex=array("Rapor $LDFrom",$LDOn,$LDAt,$LDDept,$LDJobIdNr);
-$reportindex=array('&nbsp;','&nbsp;',"$LDRequest $LDFrom:",'Alındığı saat:',$LDAt,'&nbsp;');
+$reportindex=array('&nbsp;','&nbsp;',"$LDRequest $LDFrom:",'AlÄ±ndÄ±ÄŸÄ± saat:',$LDAt,'&nbsp;');
 $requestindex=array("$LDRequest $LDFrom:",$LDAt,$LDOn,$LDDept,$LDTelephoneNr,$LDJobIdNr);
-$queryindex=array('&nbsp;','&nbsp;',"$LDInquiry $LDFrom:",$LDDept,'Alındı $LDOn:',$LDAt,'&nbsp;');
+$queryindex=array('&nbsp;','&nbsp;',"$LDInquiry $LDFrom:",$LDDept,'AlÄ±ndÄ± $LDOn:',$LDAt,'&nbsp;');
 
-$LDMarkRead='\'Okundu\' olarak işaretle.';
-$LDPrint='Yazdır';
+$LDMarkRead='\'Okundu\' olarak iÅŸaretle.';
+$LDPrint='YazdÄ±r';
 $LDGoBack='Geri';
-$LDImRepabot='Ben onarım robotu';
+$LDImRepabot='Ben onarÄ±m robotu';
 $LDImQBot='Ben Sorru robotu';
-$LDNewReport='Yeni gelen onarım istemi aşağıdadır.';
-$LDNewReportMany='Yeni gelen onarım istemleri aşağıdadır.';
-$LDReportArrived='Bir onarım istemi geldi!';
-$LDShowRequest='İstemi göster';
-$LDNoDataFound='Hiçbir veri bulunamadı. Bir yerde bir hata oldu. Lütfen [Kapat] düğmesini tıklayın ve istem listesini tekrar açmayı deneyin.
-Bu problem birkaç kez denemenize rağmen sürer ise lütfen bilgi işlem ve teknik destek bölümlerini haberdar ediniz.';
-$LDAckPrint='İstemi kabul et ve yazdır';
-$LDPrintRequest='İstemi yazdır';
-$LDArchiveRequest='İstemi arşive gönder';
+$LDNewReport='Yeni gelen onarÄ±m istemi aÅŸaÄŸÄ±dadÄ±r.';
+$LDNewReportMany='Yeni gelen onarÄ±m istemleri aÅŸaÄŸÄ±dadÄ±r.';
+$LDReportArrived='Bir onarÄ±m istemi geldi!';
+$LDShowRequest='Ä°stemi gÃ¶ster';
+$LDNoDataFound='HiÃ§bir veri bulunamadÄ±. Bir yerde bir hata oldu. LÃ¼tfen [Kapat] dÃ¼ÄŸmesini tÄ±klayÄ±n ve istem listesini tekrar aÃ§mayÄ± deneyin.
+Bu problem birkaÃ§ kez denemenize raÄŸmen sÃ¼rer ise lÃ¼tfen bilgi iÅŸlem ve teknik destek bÃ¶lÃ¼mlerini haberdar ediniz.';
+$LDAckPrint='Ä°stemi kabul et ve yazdÄ±r';
+$LDPrintRequest='Ä°stemi yazdÄ±r';
+$LDArchiveRequest='Ä°stemi arÅŸive gÃ¶nder';
 $LDAckBy='Kabul eden';
-$LDAlertEnterName='Lütfen adınızı  [Kbul eden] alanına yazınıa.';
-$LDYourReply='Yanıtınız';
-$LDNewInquiry='Yeni gelen sorgu aşağıdadır.';
-$LDNewInquiryMany='Yeni gelen sorgular aşağıdadır.';
-$LDClk2Reply='Okumak ve/veya yanıtlamak için ok düğmesini tıklayınız';
-$LDSendReply='Yanıt gönder';
-$LDMove2Archive='Arşive gönder';
-$LDShow='Göster';
-$LDShowInquiry='Sorgu göster';
+$LDAlertEnterName='LÃ¼tfen adÄ±nÄ±zÄ±  [Kbul eden] alanÄ±na yazÄ±nÄ±a.';
+$LDYourReply='YanÄ±tÄ±nÄ±z';
+$LDNewInquiry='Yeni gelen sorgu aÅŸaÄŸÄ±dadÄ±r.';
+$LDNewInquiryMany='Yeni gelen sorgular aÅŸaÄŸÄ±dadÄ±r.';
+$LDClk2Reply='Okumak ve/veya yanÄ±tlamak iÃ§in ok dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z';
+$LDSendReply='YanÄ±t gÃ¶nder';
+$LDMove2Archive='ArÅŸive gÃ¶nder';
+$LDShow='GÃ¶ster';
+$LDShowInquiry='Sorgu gÃ¶ster';
 $LDInquiryArrived='Yeni bir sorgu geldi!';
-$LDSearchWordPrompt='Aranacak anahtar sözcük giriniz';
+$LDSearchWordPrompt='Aranacak anahtar sÃ¶zcÃ¼k giriniz';
 $LDInfoCat=array(
-						'Onarım istemi',
-						'Arıza bildirimi',
-						'Isıtma',
-						'Atık',
-						'Bilgi İşlem',
+						'OnarÄ±m istemi',
+						'ArÄ±za bildirimi',
+						'IsÄ±tma',
+						'AtÄ±k',
+						'Bilgi Ä°ÅŸlem',
 						'Bilgisayar IP adresleri',
-						'Yazdırma, Yazıcı',
-						'Çevre yönetimi, Bakım',
+						'YazdÄ±rma, YazÄ±cÄ±',
+						'Ã‡evre yÃ¶netimi, BakÄ±m',
 						'Temizlik',
 						'Elektrik',
 						'Telefon sistemi',
 						'Su, Tedarik'
 						);
-$LDNoFound='Aranan anahtar kelime ile ilgili hiçbirşey bulamadım. <br>Lütfen tekrar deneyiniz ve daha fazla bilgi giriniz.';
+$LDNoFound='Aranan anahtar kelime ile ilgili hiÃ§birÅŸey bulamadÄ±m. <br>LÃ¼tfen tekrar deneyiniz ve daha fazla bilgi giriniz.';
 /* 2003-02-11*/
-$LDCancel='İptal';
+$LDCancel='Ä°ptal';
 ?>

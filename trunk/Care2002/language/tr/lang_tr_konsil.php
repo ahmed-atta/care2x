@@ -1,60 +1,60 @@
 <?php
-$LDEntryDate='Kayýt tarihi';
-$LDJournalNumber='Günlük numarasý';
-$LDBlockNumber='Blok sayýsý';
+$LDEntryDate='KayÄ±t tarihi';
+$LDJournalNumber='GÃ¼nlÃ¼k numarasÄ±';
+$LDBlockNumber='Blok sayÄ±sÄ±';
 $LDDeepCuts='Derin Bloklar';
-$LDSpecialDye='Özel boya';
+$LDSpecialDye='Ã–zel boya';
 $LDImmuneHistoChem='Immune Histo-kimya';
-$LDHormoneReceptors='Hormon reseptörleri';
-$LDSpecials='Özeller';
-$LDSend='Gönder';
-$LDSendLater='Sonra gönder';
-$LDReset='Tekrar baþla';
+$LDHormoneReceptors='Hormon reseptÃ¶rleri';
+$LDSpecials='Ã–zeller';
+$LDSend='GÃ¶nder';
+$LDSendLater='Sonra gÃ¶nder';
+$LDReset='Tekrar baÅŸla';
 $LDClose='Kapat';
 $LDSpeedTest='Acil tetkik.';
 $LDDiagnosticTest='Tetkik iste';
-$LDRelayResult='Tanýyý telefona/çaðrýya yönlendir';
+$LDRelayResult='TanÄ±yÄ± telefona/Ã§aÄŸrÄ±ya yÃ¶nlendir';
 $LDSpeedCut='Acil kesim.';
 $LDDate='Tarih';
 $LDOpDate='Ameliyat tarihi';
 $LDDoctor='Doktor';
-$LDDept='Bölüm';
+$LDDept='BÃ¶lÃ¼m';
 $LDTel='Tel:';
 $LDMatType='Spesimen tipi';
-$LDPE='Biyopsi, örnek eksizyon';
+$LDPE='Biyopsi, Ã¶rnek eksizyon';
 $LDSpecimen='Ameliyat spesimeni';
-$LDShave='Küretaj';
+$LDShave='KÃ¼retaj';
 $LDCytology='Sitoloji';
 $LDLocalization='Yeri';
-$LDClinicalQuestions='Klinik Tanýlar, Raporlar,Sorgular:';
+$LDClinicalQuestions='Klinik TanÄ±lar, Raporlar,Sorgular:';
 $LDExtraInfo='Destekleyici bilgiler';
-$LDExtraInfoSample='(örneðin önemli laboratuvar sonuçlarý, eksizyon bölgesine daha önce radyasyon veya kemoterapi uygulanmýþ olmasý gibi)';
-$LDForGynTests='Jinekolojik tetkikler için:';
+$LDExtraInfoSample='(Ã¶rneÄŸin Ã¶nemli laboratuvar sonuÃ§larÄ±, eksizyon bÃ¶lgesine daha Ã¶nce radyasyon veya kemoterapi uygulanmÄ±ÅŸ olmasÄ± gibi)';
+$LDForGynTests='Jinekolojik tetkikler iÃ§in:';
 $LDLastPeriod='SAT:';
-$LDPeriodType='Adet düzeni:';
+$LDPeriodType='Adet dÃ¼zeni:';
 $LDGravidity='Gravida:';
-$LDMenopauseSince='Menopoz süresi:';
+$LDMenopauseSince='Menopoz sÃ¼resi:';
 $LDHormoneTherapy='Hormon tedavisi:';
 $LDContraceptive='Kontraseptif:';
-$LDIUD='RÝA:';
-$LDRepeatedTest='Tekrarlanan tetkikler için:';
-$LDRepeatedTestPls='lütfen önceki günlük numarasý ve tarihini giriniz';
+$LDIUD='RÄ°A:';
+$LDRepeatedTest='Tekrarlanan tetkikler iÃ§in:';
+$LDRepeatedTestPls='lÃ¼tfen Ã¶nceki gÃ¼nlÃ¼k numarasÄ± ve tarihini giriniz';
 $LDHysterectomy='Histerektomi:';
 $LDClinicalInfo='Klinik bilgi';
-$LDReqTest='Ýstenen tetkik';
-$LDNotesTempReport='Notlar / Ýlk bulgular:';
-$LDRequestingDoc='Ýsteyen doktor';
+$LDReqTest='Ä°stenen tetkik';
+$LDNotesTempReport='Notlar / Ä°lk bulgular:';
+$LDRequestingDoc='Ä°steyen doktor';
 $LDReportingDoc='Rapor veren doktor';
-$LDXrayNumber='Röntgen No.:';
-$LD_r_cm2='r cm² :';
-$LDXrayTechnician='Röntgen tekn.';
+$LDXrayNumber='RÃ¶ntgen No.:';
+$LD_r_cm2='r cmÂ² :';
+$LDXrayTechnician='RÃ¶ntgen tekn.';
 $LDYes='Evet';
-$LDNo='Hayýr';
-$LDXrayTest='Röntgen';
+$LDNo='HayÄ±r';
+$LDXrayTest='RÃ¶ntgen';
 $LDMammograph='Mamografi';
 $LDSonograph='Sonografi';
-$LDCT='Bilgisayarlý Tomografi';
-$LDNuclear='Nükleer Týp';
+$LDCT='BilgisayarlÄ± Tomografi';
+$LDNuclear='NÃ¼kleer TÄ±p';
 $LDMRT='Manyetik Rezonans Tomografisi';
 
 $LDPatMobile='Hasta mobil mi?';
@@ -62,58 +62,58 @@ $LDAllergyKnown='Bilinen allerjisi?';
 $LDHyperthyreosisKnown='Bilinen hipertiroidisi?';
 $LDPregnantPossible='Gebelik ihtimali';
 
-$LDDiagnosesInquiries='Tanýlar / Sorgular:';
-$LDDeptReport='Bölümün Raporu:';
-$LDRequestTo='Ýstem yapýlan';
-$LDDepartment='bölümü';
+$LDDiagnosesInquiries='TanÄ±lar / Sorgular:';
+$LDDeptReport='BÃ¶lÃ¼mÃ¼n Raporu:';
+$LDRequestTo='Ä°stem yapÄ±lan';
+$LDDepartment='bÃ¶lÃ¼mÃ¼';
 $LDVisitRequested='Yerinde rica olunur';
 $LDPatCanBeOrdered='Hasta istetilebilir';
 
 $LDShortMonth=array('',
                                    'Oc',
-								   'Þb',
+								   'Åžb',
 								   'Ma',
 								   'Ns',
 								   'My',
 								   'Hz',
 								   'Tm',
-								   'Að',
+								   'AÄŸ',
 								   'Ey',
 								   'Ek',
 								   'Ka',
 								   'Ar');
-$LDBatchNumber='Küme no';
+$LDBatchNumber='KÃ¼me no';
 $LDMaterial='Materyel:';
-$LDDiagnosis='Taný:';
-$LDImmuneSupp='Immün supresif.';		
+$LDDiagnosis='TanÄ±:';
+$LDImmuneSupp='ImmÃ¼n supresif.';		
 
-$LDRequestedTest='Ýstenen tetkik';
+$LDRequestedTest='Ä°stenen tetkik';
 $LDLabel='Etiket';					
 $LDCentralLab='Merkezi Laboratuvar';
 
-$LDRequestOf='Ýstenen ';
+$LDRequestOf='Ä°stenen ';
 $LDTelephone='Telefon';
-$LDToBloodBank='Kan bankasýna';
-$LDWithMatchTest='match testi örnekleri ile';
-$LDByBloodBank='kan bankasýndan:';
+$LDToBloodBank='Kan bankasÄ±na';
+$LDWithMatchTest='match testi Ã¶rnekleri ile';
+$LDByBloodBank='kan bankasÄ±ndan:';
 
 $LDBloodGroup='Kan grubu:';
-$LDRhFactor='Rh-faktörü:';
+$LDRhFactor='Rh-faktÃ¶rÃ¼:';
 $LDKell='Kell';
-$LDDateProtNumber='Tetkikin tarih ve protokol numarasýný veren:';
-$LDBloodSpecimen='Örnek';
+$LDDateProtNumber='Tetkikin tarih ve protokol numarasÄ±nÄ± veren:';
+$LDBloodSpecimen='Ã–rnek';
 $LDCount='Adet';
 $LDPureBlood='Saf kan';
 $LDRedBloodCon='Konsantre eritrosit ';
-$LDLeukoLessRedBlood='Lökositi alýnmýþ eritrositler';
-$LDWashedRedBlood='Yýkanmýþ eritrositler';
+$LDLeukoLessRedBlood='LÃ¶kositi alÄ±nmÄ±ÅŸ eritrositler';
+$LDWashedRedBlood='YÄ±kanmÄ±ÅŸ eritrositler';
 $LDPRP='Trombositten zengin plazma';
 $LDThromboCon='Konsantre Trombositler';
-$LDFFP='Taze dondurulmuþ plazma</font>';
-$LDTransfusionDevice='Transfüzyon cihazlarý';
-$LDTransfusionDate='Transfüzyon tarihi:';
-$LDNotesRequests='Notlar/özel orderlar:';
-$LDDoctorNotice='<b>Bu orderdan orderi veren doktor sorumludur!</b><br>Güvenlik nedenleriyle sadece üzerinde tam isim ve doðum tarihi bulunan kan tüpleri kabul edilecektir.';
+$LDFFP='Taze dondurulmuÅŸ plazma</font>';
+$LDTransfusionDevice='TransfÃ¼zyon cihazlarÄ±';
+$LDTransfusionDate='TransfÃ¼zyon tarihi:';
+$LDNotesRequests='Notlar/Ã¶zel orderlar:';
+$LDDoctorNotice='<b>Bu orderdan orderi veren doktor sorumludur!</b><br>GÃ¼venlik nedenleriyle sadece Ã¼zerinde tam isim ve doÄŸum tarihi bulunan kan tÃ¼pleri kabul edilecektir.';
 
 $LDPB='PB'; /* Pure blood */
 $LD350='350';
@@ -123,7 +123,7 @@ $LDWRB='WRB'; /* washed red blood cells */
 $LDPRP_Initial='PRP'; /* Platelet rich plasma*/
 $LDTC='TC'; /* Platelet - Thrombocytes concentrate*/
 $LDFFP_Initial='FFP'; /* Fresh frozen plasma*/
-$LDLabServices='Lab hizmetlerinin hesabý';
+$LDLabServices='Lab hizmetlerinin hesabÄ±';
 $LDServiceCode='S-CODE';
 $LDBloodGroupCode='1360';
 $LDA_SubgroupCode='1342';
@@ -133,104 +133,104 @@ $LDAntibodyTestCode='1355';
 $LDCrossTestCode='1365';
 $LDAntibodyDiffCode='1355';
 $LDA_Subgroup='Bir alt grup';
-$LDExtraBGFactors='diðer kan grubu faktörleri';
+$LDExtraBGFactors='diÄŸer kan grubu faktÃ¶rleri';
 $LDCoombsTest='Dir. Coombs testi';
 $LDAntibodyTest='Antikor arama testi';
 $LDCrossTest='Cross testi';
-$LDAntibodyDiff='Antikor farklýlaþma';
+$LDAntibodyDiff='Antikor farklÄ±laÅŸma';
 $LDTotalAmount='Toplam miktar';
-$LDPrice='Ücret';
-$LDConserveNrPaste='(Buraya ürün numarasýný hemen yapýþtýrýnýz)';
-$LDLabTimeStamp='(Kan bankasý zaman mühürü)';
-$LDReleaseVia='Çýkýþ yolu';
-$LDReceiptAck='Makbuz alýndýsý';
-$LDSignature='Ýmza';
-$LDLabLogBook='Günlük no:';
+$LDPrice='Ãœcret';
+$LDConserveNrPaste='(Buraya Ã¼rÃ¼n numarasÄ±nÄ± hemen yapÄ±ÅŸtÄ±rÄ±nÄ±z)';
+$LDLabTimeStamp='(Kan bankasÄ± zaman mÃ¼hÃ¼rÃ¼)';
+$LDReleaseVia='Ã‡Ä±kÄ±ÅŸ yolu';
+$LDReceiptAck='Makbuz alÄ±ndÄ±sÄ±';
+$LDSignature='Ä°mza';
+$LDLabLogBook='GÃ¼nlÃ¼k no:';
 $LDLabNumber='Lab-No.';
-$LDBookedOn='ayýrma tarihi';
+$LDBookedOn='ayÄ±rma tarihi';
 
-$LDFillByLab='Sadece kan bankasýnda doldurulur!';
-$LDFillByWard='Serviste doldurulmalýdýr!';
+$LDFillByLab='Sadece kan bankasÄ±nda doldurulur!';
+$LDFillByWard='Serviste doldurulmalÄ±dÄ±r!';
 
 /* 2002-09-03 EL */							  
 $LDSearchPatient='Hasta arama';
-$LDPlsSelectPatientFirst='Lütfen önce hastayý arayýnýz.';
+$LDPlsSelectPatientFirst='LÃ¼tfen Ã¶nce hastayÄ± arayÄ±nÄ±z.';
 /* 2002-09-07 EL*/
-$LDAlertQuickCut='Acil kesim seçildi.';
-$LDAlertQuickDiagnosis='Acil taný seçildi.';
-$LDPlsEnterPhone='Lütfen telefon veya çaðrý numarasýný giriniz.';
-$LDPlsEnterOpDate='Lütfen ameliyat tarihini giriniz.';
-$LDPlsEnterDoctorName='Lütfen doktorun ismini giriniz';
+$LDAlertQuickCut='Acil kesim seÃ§ildi.';
+$LDAlertQuickDiagnosis='Acil tanÄ± seÃ§ildi.';
+$LDPlsEnterPhone='LÃ¼tfen telefon veya Ã§aÄŸrÄ± numarasÄ±nÄ± giriniz.';
+$LDPlsEnterOpDate='LÃ¼tfen ameliyat tarihini giriniz.';
+$LDPlsEnterDoctorName='LÃ¼tfen doktorun ismini giriniz';
 
 /* 2002-09-08 EL */
-$LDPlsEnterBloodGroup='Lütfen kan grubunu giriniz.';
-$LDPlsEnterRhFactor='Lütfen Rh faktörünü giriniz.';
-$LDPlsEnterKell='Lütfen Kell deðerini giriniz.';
-$LDPlsEnterBloodPcs='Lütfen kaç ünite istediðinizi giriniz.';
-$LDPlsEnterDate='Lütfen tarihi giriniz.';
+$LDPlsEnterBloodGroup='LÃ¼tfen kan grubunu giriniz.';
+$LDPlsEnterRhFactor='LÃ¼tfen Rh faktÃ¶rÃ¼nÃ¼ giriniz.';
+$LDPlsEnterKell='LÃ¼tfen Kell deÄŸerini giriniz.';
+$LDPlsEnterBloodPcs='LÃ¼tfen kaÃ§ Ã¼nite istediÄŸinizi giriniz.';
+$LDPlsEnterDate='LÃ¼tfen tarihi giriniz.';
 /* 2002-09-09 EL */
-$LDPlsEnterDiagnosisQuiry='Lütfen tanýlar veya sorgularý giriniz.';
-$LDPlsSelectDept='Lütfen bir bölüm sçiniz.';
-$LDPlsSelectDeptShort='lütf. bölüm seçiniz';
+$LDPlsEnterDiagnosisQuiry='LÃ¼tfen tanÄ±lar veya sorgularÄ± giriniz.';
+$LDPlsSelectDept='LÃ¼tfen bir bÃ¶lÃ¼m sÃ§iniz.';
+$LDPlsSelectDeptShort='lÃ¼tf. bÃ¶lÃ¼m seÃ§iniz';
 /* 2002-12-09 EL */
-$LDPendingTestRequest='Bekleyen Tetkik Ýstemi';
+$LDPendingTestRequest='Bekleyen Tetkik Ä°stemi';
 /* 2002-09-13 EL */
-$LDPrevRequest='Önceki istem';
+$LDPrevRequest='Ã–nceki istem';
 $LDNextRequest='Sonraki istem';
-$LDEnterResult='Bu tetkik isteminin bulgularýný/sonuçlarýný yaz';
-$LDPrintOut='Bu formu yazdýr';
+$LDEnterResult='Bu tetkik isteminin bulgularÄ±nÄ±/sonuÃ§larÄ±nÄ± yaz';
+$LDPrintOut='Bu formu yazdÄ±r';
 $LDSaveEntry='Girilenleri kaydet';
 /* 2002-09-14 EL */
 $LDNoPendingRequest='Bekleyen istem yok.';
 /* 2002-09-15 EL */
-$LDTestFindings='Test bulgularý';
-$LDCaseNr='Olgu numarasý';
-$LDFamilyName='Soyadý';
-$LDName='Adý';
-$LDBDay='Doðum tarihi';
+$LDTestFindings='Test bulgularÄ±';
+$LDCaseNr='Olgu numarasÄ±';
+$LDFamilyName='SoyadÄ±';
+$LDName='AdÄ±';
+$LDBDay='DoÄŸum tarihi';
 /* 2002-09-15 EL */
 $LDMACROFindings='Makro bulgular';
 $LDMicroFindings='Mikro bulgular';
 $LDAddFindings='Ek notlar';
-$LDXrayDate='Röntgen tarihi';
-$LDPlsEnterTransfusionDate='Lütfen transfüzyon tarihini giriniz.';
+$LDXrayDate='RÃ¶ntgen tarihi';
+$LDPlsEnterTransfusionDate='LÃ¼tfen transfÃ¼zyon tarihini giriniz.';
 /* 2002-09-21 EL */
-$LDPlsEnterLEN='Lütfen Laboratuvar Giriþ Numarasýný giriniz (LGN)';
+$LDPlsEnterLEN='LÃ¼tfen Laboratuvar GiriÅŸ NumarasÄ±nÄ± giriniz (LGN)';
 /* 2002-09-28 EL */
 $LDHospitalName='Care';
 
 /* 2002-09-29 EL */
 $LDHematology='Hematoloji';
-$LDCoagulation='Koagülasyon';
-$LDUrine='Ýdrar';
+$LDCoagulation='KoagÃ¼lasyon';
+$LDUrine='Ä°drar';
 $LDSerum='Serum';
 $LDNuechtern='sob';
 $LDGlucose='Glukoz';
 $LDBLP='Pl'; /* BLP = Blood plasma */
-$LDBS='KÞ'; /* BLS = Blood sugar */
-$LDBS1='KÞ 1';
+$LDBS='KÅž'; /* BLS = Blood sugar */
+$LDBS1='KÅž 1';
 $LD900='9.00';
 $LD1500='15.00';
 
 /* 2002-10-14 EL */
-$LDDone='Tamam! Formu arþive taþýyýnýz';
+$LDDone='Tamam! Formu arÅŸive taÅŸÄ±yÄ±nÄ±z';
 
 /* Note: the following arrays use strict medical terminology.
 *  If you are not sure about their translation, please leave the 
 *  english word untranslated
 */
-$LDBacLabMaterialType = array(_mx_k_urin_=>'T.Ýdrar',                                              
+$LDBacLabMaterialType = array(_mx_k_urin_=>'T.Ä°drar',                                              
                                               _mx_sputum_=>'Balgam',
-											  _mx_m_urin_=>'S.Ýdrarý',
+											  _mx_m_urin_=>'S.Ä°drarÄ±',
 											  _mx_trachealsecrete_=>'Trak.salg.',
-											  _mx_uricult_=>'Ýdrarkült',
-											  _mx_bronchiallavage_=>'B.lavajý',
+											  _mx_uricult_=>'Ä°drarkÃ¼lt',
+											  _mx_bronchiallavage_=>'B.lavajÄ±',
 											  _mx_wundabstrich_=>'W.yayma',
-											  _mx_magensaft_=>'Mide sývý',
-											  _mx_augen_abstrich_right_=>'göz ak-r',
-											  _mx_secrete_=>'Salgý',
-											  _mx_augen_abstrich_left_=>'göz.ak-l',
-											  _mx_exsudat_=>'Eksüda',
+											  _mx_magensaft_=>'Mide sÄ±vÄ±',
+											  _mx_augen_abstrich_right_=>'gÃ¶z ak-r',
+											  _mx_secrete_=>'SalgÄ±',
+											  _mx_augen_abstrich_left_=>'gÃ¶z.ak-l',
+											  _mx_exsudat_=>'EksÃ¼da',
 											  _mx_ear_abstrich_right_=>'kul-ak-R',
 											  _mx_punction_=>'Ponksiyon',
 											  _mx_ear_abstrich_left_=>'kul-ak-L.',
@@ -242,15 +242,15 @@ $LDBacLabMaterialType = array(_mx_k_urin_=>'T.Ýdrar',
 											  _mx_nose_abstrich_=>'Br.yay',
 											  _mx_liquor_=>'BOS',
 											  _mx_vaginal_abstrich_=>'Vag.s.',
-											  _mx_blood_culture_=>'Kan.Kült.');
+											  _mx_blood_culture_=>'Kan.KÃ¼lt.');
 										  
-$LDBacLabTestType=array(_tx_special_body_material_=>'Öz.vüc.m.',
-                                        _tx_culture_aerob_=>'Aerob.Kült.',
+$LDBacLabTestType=array(_tx_special_body_material_=>'Ã–z.vÃ¼c.m.',
+                                        _tx_culture_aerob_=>'Aerob.KÃ¼lt.',
 										_tx_op_material_=>'Amel.Mat.',
-										_tx_culture_anaerob_=>'Anae.Kül.',
+										_tx_culture_anaerob_=>'Anae.KÃ¼l.',
 										_tx_k_point_=>'Cat.tip',
-										_tx_fungus_culture_=>'Mantar.Kül.',
-										_tx_tubus_point_=>'Tüp.tip',
+										_tx_fungus_culture_=>'Mantar.KÃ¼l.',
+										_tx_tubus_point_=>'TÃ¼p.tip',
 										_tx_stool_parasite_=>'Gaita.paraz.',
 										_tx_go_culture_=>'GO-Kult.',
 										_tx_stool_pathogen_=>'St.f.patho.',
@@ -259,12 +259,12 @@ $LDBacLabTestType=array(_tx_special_body_material_=>'Öz.vüc.m.',
 										_tx_biopsy_material_=>'Biops.Mat.',
 										_tx_stool_clost_toxin_=>'Gaita klost.Tox.',
 										_tx_stool_=>'Gaita',
-										_tx_tbc_dye_=>'TBC.Boyasý',
+										_tx_tbc_dye_=>'TBC.BoyasÄ±',
 										_tx_stool_yersinia_=>'Gaitada Yers.',
-										_tx_tbc_culture_=>'TBC.kült.',
+										_tx_tbc_culture_=>'TBC.kÃ¼lt.',
 										_tx_stool_ehec_=>'Gaitada.EHEC',
 										_tx_liquor_antigen_=>'BOS.antigen',
-										_tx_own_blood_=>'Kendi kaný',
+										_tx_own_blood_=>'Kendi kanÄ±',
 										_tx_gram_dye_=>'Gram.boyama',
 										_tx_pharma_material_=>'Pharm.mat.',
 										_tx_go_dye_=>'GO-boyama');

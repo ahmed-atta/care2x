@@ -1,9 +1,9 @@
 <?php
 /* 2003-04-05 EL*/
-$LDMonthFullName=array('','Ocak','Þubat','Mart','Nisan','Mayýs','Haziran','Temmuz','Aðustos','Eylül','Ekim','Kasým','Aralýk');
-$LDMonthShortName=array('','Oca','Þub','Mar','Nis','May','Haz','Tem','Aðu','Eyl','Eki','Kas','Ara');
-$LDDayFullName=array('Pazartesi','Salý','Çarþamba','Perþembe','Cuma','Cumartesi','Pazar');
-$LDDayShortName=array('Pzt','Sal','Çar','Per','Cum','Cts','Paz');
+$LDMonthFullName=array('','Ocak','Åžubat','Mart','Nisan','MayÄ±s','Haziran','Temmuz','AÄŸustos','EylÃ¼l','Ekim','KasÄ±m','AralÄ±k');
+$LDMonthShortName=array('','Oca','Åžub','Mar','Nis','May','Haz','Tem','AÄŸu','Eyl','Eki','Kas','Ara');
+$LDDayFullName=array('Pazartesi','SalÄ±','Ã‡arÅŸamba','PerÅŸembe','Cuma','Cumartesi','Pazar');
+$LDDayShortName=array('Pzt','Sal','Ã‡ar','Per','Cum','Cts','Paz');
 $LDDate='Tarih';
 $LDTime='Zaman';
 $LDHour='Saat';
@@ -16,10 +16,10 @@ $LDmillisecond='milisaniye';
 $LDmilliseconds='milisaniye';
 $LDmicrosecond='mikrosaniye';
 $LDmicroseconds='mikrosaniye';
-$LDDay='Gün';
+$LDDay='GÃ¼n';
 $LDWeek='Hafta';
-$LDNoon='Öðle';
-$LDEvening='Akþam';
+$LDNoon='Ã–ÄŸle';
+$LDEvening='AkÅŸam';
 $LDNight='Gece';
 #2003-11-11 EL
 $LD_ddpMMpyyyy='gg.aa.yyyy';

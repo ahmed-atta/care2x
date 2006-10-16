@@ -1,42 +1,42 @@
 <?php
 $LDIcd10='ICD_10'; // ICD = International Codes of Diseases  !! 
-$LDOps301='OPS_301'; // OPS = Opertionenschlüssel - German code for surgical operations !!
-$LDBack2Logbook='Kayýt kütüðüne geri';
+$LDOps301='OPS_301'; // OPS = OpertionenschlÃ¼ssel - German code for surgical operations !!
+$LDBack2Logbook='KayÄ±t kÃ¼tÃ¼ÄŸÃ¼ne geri';
 $LDIcd10Search='ICD-10 Arama';
-$LDSearch4ICD10='ICD-10 Kodlarýný Arama';
-$LDSearch4OPS301='OPS-301 Kodlarýný Arama';
-$LDDescription='Taným';
+$LDSearch4ICD10='ICD-10 KodlarÄ±nÄ± Arama';
+$LDSearch4OPS301='OPS-301 KodlarÄ±nÄ± Arama';
+$LDDescription='TanÄ±m';
 $LDMainAuxDiag='Ana/Ek';
-$LDMainAuxOp='Ana/Ek iþlem';
-$LDDiagBy='Taný koyan';
+$LDMainAuxOp='Ana/Ek iÅŸlem';
+$LDDiagBy='TanÄ± koyan';
 $LDDoneBy='Yapan';
-$LDInclusive='Ýçindekiler';
-$LDExclusive='Dýþýndakiler';
+$LDInclusive='Ä°Ã§indekiler';
+$LDExclusive='DÄ±ÅŸÄ±ndakiler';
 $LDNotes='Notlar';
-$LDRemarks='Uyarýlar';
+$LDRemarks='UyarÄ±lar';
 $LDExtraCodes='Ek kodlar veya kodlama';
 $LDAddCodes='Ek notlar veya kodlar';
-$LDApplySelection='Seçimleri uygula';
+$LDApplySelection='SeÃ§imleri uygula';
 $LDSGBV='SGB_V';  // !! Do not translate !!
 $LDLocalization='Yeri';
-$LDOpsIntern='Ýç kodu';
+$LDOpsIntern='Ä°Ã§ kodu';
 $LDSearchCodes='Kod arama';
-$LDQuickList='Çabuk liste';
+$LDQuickList='Ã‡abuk liste';
 $LDConvert2IcdOps='->ICD/ICPM';  // !! Do not translate !!
 $LDSearch='Arama';
 $LDOperation='Ameliyat';
-$LDAlertSureDelete='Bu kaydý sileceðinizden emin misiniz?';
+$LDAlertSureDelete='Bu kaydÄ± sileceÄŸinizden emin misiniz?';
 
 $LDAux='Auxiliary';   // E = Ek
 $LDMain='Main'; // A = Ana
-$LDRight='Right'; // G = Sað
+$LDRight='Right'; // G = SaÄŸ
 $LDLeft='Left';   // L = Sol
-$LDBoth='Both';  // Ý = Ýkisi (her iki taraf)
+$LDBoth='Both';  // Ä° = Ä°kisi (her iki taraf)
 
-$LDDeleteEntry='Kaydý sil';
-$LDNoQuickList='Þu anda çabuk liste boþ.';
-$LDClick2Search='Arama için burayý týklayýnýz.';
-$LDPossibleCodes='Olasý ICD ve ICPM Kodlarý';
+$LDDeleteEntry='KaydÄ± sil';
+$LDNoQuickList='Åžu anda Ã§abuk liste boÅŸ.';
+$LDClick2Search='Arama iÃ§in burayÄ± tÄ±klayÄ±nÄ±z.';
+$LDPossibleCodes='OlasÄ± ICD ve ICPM KodlarÄ±';
 /*2003-05-25 EL */
 $LDCategory='Kategori';
 $LDLoc='Yeri.';
@@ -44,8 +44,8 @@ $LDBy='Yapan';
 $LDMostResponsible='En sorumlu:M';
 $LDAssociated='ilgili:A';
 $LDNosocomial='Hastane:N';
-$LDIatrogenic='Ýatrojenik:I';
-$LDOther='Diðer:O';
+$LDIatrogenic='Ä°atrojenik:I';
+$LDOther='DiÄŸer:O';
 $LDMostResp_s='M';
 $LDAssociated_s='A';
 $LDNosocomial_s='N';
@@ -58,30 +58,30 @@ $LDRight_s='R';
 $LDBothSides_s='B';
 /* 2003-05-29 EL*/
 $LDQMarks='??????';
-$LDNonSpecifiedGroup='Henüz gruplanmadý';
+$LDNonSpecifiedGroup='HenÃ¼z gruplanmadÄ±';
 $LDSpecifyGroup='Grubu belirtiniz';
-$LDCreateGroupName='Yeni grup ismi oluþturma';
-$LDSelect='Seçiniz';
+$LDCreateGroupName='Yeni grup ismi oluÅŸturma';
+$LDSelect='SeÃ§iniz';
 /*2003-06-01 EL*/
-$LDUseToGroupItems='Gruplanmamýþ kalemler için bu grubu kullanýnýz';
-$LDItemsDegrouped='Bu grubu siler iseniz buna baðlantýlý olanlarýn baðlantýsýz kalmasýna yol açýlýr.';
-$LDOptions='Seçenekler';
+$LDUseToGroupItems='GruplanmamÄ±ÅŸ kalemler iÃ§in bu grubu kullanÄ±nÄ±z';
+$LDItemsDegrouped='Bu grubu siler iseniz buna baÄŸlantÄ±lÄ± olanlarÄ±n baÄŸlantÄ±sÄ±z kalmasÄ±na yol aÃ§Ä±lÄ±r.';
+$LDOptions='SeÃ§enekler';
 /*2003-06-01 EL*/
-$LDCreateInternDRGGroup='Yeni dahili TÝG grubu oluþturma';
+$LDCreateInternDRGGroup='Yeni dahili TÄ°G grubu oluÅŸturma';
 $LDInternalCodeNr='Dahili kod No.';
-$LDSynonyms='Eþ anlamlýlar veya anahtar sözcükler';
-$LDSeparateCommas='Sözcükleri virgüllerle ayýrýnýz';
+$LDSynonyms='EÅŸ anlamlÄ±lar veya anahtar sÃ¶zcÃ¼kler';
+$LDSeparateCommas='SÃ¶zcÃ¼kleri virgÃ¼llerle ayÄ±rÄ±nÄ±z';
 $LDIsSubGroup='Alt grup mu?';
 $LDParentCodeNr='Ana grup kod No.';
-$LDIfSubGroup='Eðer grup bir alt grupsa';
-$LDAuxillaryNotes='Yardýmcý notlar';
+$LDIfSubGroup='EÄŸer grup bir alt grupsa';
+$LDAuxillaryNotes='YardÄ±mcÄ± notlar';
 $LDStdCodeNr='Standart Kod No.';
 $LDIfAvailable='Varsa';
 $LDYes='Evet';
-$LDNo='Hayýr';
+$LDNo='HayÄ±r';
 $LDExtraNotes='Ek notlar';
-$LDAlertNoCode='Lütfen grubun kodunu giriniz.';
-$LDAlertNoDescription='Lütfen kodun tanýmýný giriniz.';
+$LDAlertNoCode='LÃ¼tfen grubun kodunu giriniz.';
+$LDAlertNoDescription='LÃ¼tfen kodun tanÄ±mÄ±nÄ± giriniz.';
 /*2003-06-07 EL*/
 $LDCode='Kod';
 /*2003-06-13 EL*/
@@ -89,7 +89,7 @@ $LDAddGroupEncounter='vizite grup ekle';
 $LDMain_s='M (Main:Ana)'; //ana
 $LDSupplemental='Supplemaental:Ek';
 $LDSupp_s='S'; //ek
-$LDCreateNew='Yeni oluþtur';
+$LDCreateNew='Yeni oluÅŸtur';
 /*2006-09-03 Potur*/
-$LDSuretocreatenewgr='Yeni bir grup kodu oluþturmak istediðinizden emin misiniz?';
+$LDSuretocreatenewgr='Yeni bir grup kodu oluÅŸturmak istediÄŸinizden emin misiniz?';
 ?>

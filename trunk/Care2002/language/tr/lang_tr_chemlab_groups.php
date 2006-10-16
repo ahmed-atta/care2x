@@ -1,27 +1,27 @@
 <?php
 # This are the chemical lab test groups and parameters. If you are not sure of their exact translation please leave it in the original form
 $parametergruppe=array(
-	'priority'=>'Öncelik',
+	'priority'=>'Ã–ncelik',
 	'clinical_chem'=>'Biyokimya',
 	'liquor'=>'BOS',
-	'coagulation'=>'Koagülasyon',
+	'coagulation'=>'KoagÃ¼lasyon',
 	'hematology'=>'Hematoloji',
-	'blood_sugar'=>'Kan þekeri',
-	'neonate'=>'Yeni doðan',
+	'blood_sugar'=>'Kan ÅŸekeri',
+	'neonate'=>'Yeni doÄŸan',
 	'proteins'=>'Proteinler',
 	'thyroid'=>'Tiroid',
 	'hormones'=>'Hormonlar',
-	'tumor_marker'=>'Tümör belirteci',
+	'tumor_marker'=>'TÃ¼mÃ¶r belirteci',
 	'tissue_antibody'=>'Doku antikoru',
-	'rheuma_factor'=>'Romatoid faktör',
+	'rheuma_factor'=>'Romatoid faktÃ¶r',
 	'hepatitis'=>'Hepatit',
 	'biopsy'=>'Biyopsi',
 	'infection_serology'=>'Enfeksiyon seroloji',
-	'medicines'=>'Ýlaçlar',
-	'prenatal'=>'Doðum öncesi',
+	'medicines'=>'Ä°laÃ§lar',
+	'prenatal'=>'DoÄŸum Ã¶ncesi',
 	'stool'=>'Gaita',
 	'rare'=>'Nadir',
-	'urine'=>'Ýdrar',
+	'urine'=>'Ä°drar',
 	'total_urine'=>'Tam idrar',
-	'special_params'=>'Özel');
+	'special_params'=>'Ã–zel');
 ?>

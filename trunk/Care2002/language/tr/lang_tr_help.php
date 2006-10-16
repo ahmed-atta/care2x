@@ -1,5 +1,5 @@
 <?php
-$LDHelp="Yardým";
+$LDHelp="YardÄ±m";
 $LDClose="Kapat";
-$LDCloseHelpWin="Yardým penceresini kapat";
+$LDCloseHelpWin="YardÄ±m penceresini kapat";
 ?>

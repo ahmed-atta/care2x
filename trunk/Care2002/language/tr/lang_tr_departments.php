@@ -1,12 +1,12 @@
 <?php
-$LDHeadlines='Baþlýklar';			
+$LDHeadlines='BaÅŸlÄ±klar';			
 $LDCafeNews='Kafeterya Haberleri';		
-$LDManagement='Yönetim';
-$LDHealthTips='Saðlýk Bilgileri';
-$LDEducation='Eðitim';
-$LDStudies='Çalýþmalar';
+$LDManagement='YÃ¶netim';
+$LDHealthTips='SaÄŸlÄ±k Bilgileri';
+$LDEducation='EÄŸitim';
+$LDStudies='Ã‡alÄ±ÅŸmalar';
 $LDExhibitions='Sergiler';
-$LDHeadline='Baþlýk';
+$LDHeadline='BaÅŸlÄ±k';
 $LDAdmission='Kabul';
 /* 2003-08-20 DH */
 $LDAnesthesiology='Anesteziyoloji';
@@ -15,43 +15,43 @@ $LDGeneralSurgery='Genel Cerrahi';
 $LDEmergencySurgery='Acil Cerrahi';
 $LDPlasticSurgery='Plastik Cerrahi';
 $LDEarNoseThroath='KBB';
-$LDOpthalmology='GÖZ';
+$LDOpthalmology='GÃ–Z';
 $LDPathology='Patoloji';
-$LDObGynecology='Kadýn Doðum';
+$LDObGynecology='KadÄ±n DoÄŸum';
 $LDPhysicalTherapy='Fizik Tedavi';
 $LDInternalMedicine='Dahiliye';
-$LDIntermediateCareUnit='Ara Bakým Ünitesi';
-$LDIntensiveCareUnit='Yoðun Bakým Ünitesi';
+$LDIntermediateCareUnit='Ara BakÄ±m Ãœnitesi';
+$LDIntensiveCareUnit='YoÄŸun BakÄ±m Ãœnitesi';
 $LDEmergencyAmbulatory='Acil Poliklinik';
 $LDInternalMedicineAmbulatory='Dahiliye Poliklinik';
 $LDSonography='Ultrason';
-$LDNuclearDiagnostics='Nükleer Týp';
+$LDNuclearDiagnostics='NÃ¼kleer TÄ±p';
 $LDRadiology='Radyoloji';
 $LDOncology='Onkoloji';
-$LDNeonatal='Yeni doðan';
+$LDNeonatal='Yeni doÄŸan';
 $LDCentralLaboratory='Merkezi Laboratuar';
-$LDSerologicalLaboratory='Seroloji Laboratuarý';
-$LDChemicalLaboratory='Biyokimya Laboratuarý';
-$LDBacteriologicalLaboratory='Bakteriyoloji Laboratuarý';
-$LDTechnicalMaintenance='Bakým onarým';
-$LDITDepartment='Bilgi iþlem Bölümü';
+$LDSerologicalLaboratory='Seroloji LaboratuarÄ±';
+$LDChemicalLaboratory='Biyokimya LaboratuarÄ±';
+$LDBacteriologicalLaboratory='Bakteriyoloji LaboratuarÄ±';
+$LDTechnicalMaintenance='BakÄ±m onarÄ±m';
+$LDITDepartment='Bilgi iÅŸlem BÃ¶lÃ¼mÃ¼';
 $LDGeneralAmbulatory='Genel Poliklinik';
-$LDBloodBank='Kan Bankasý';
+$LDBloodBank='Kan BankasÄ±';
 $LDNursing='Servisler';
 /* 2003-04-27 EL */
-$LDMedical='Týbbi';
-$LDSupport='Týbbi olmayan';
+$LDMedical='TÄ±bbi';
+$LDSupport='TÄ±bbi olmayan';
 $LDNews='Haberler';
-$LDDepartment='Bölüm';
-$LDPressRelations='Basýn';
+$LDDepartment='BÃ¶lÃ¼m';
+$LDPressRelations='BasÄ±n';
 /* 2003-05-19 EL */
-$LDSelectDept='Bölümü seçiniz';
+$LDSelectDept='BÃ¶lÃ¼mÃ¼ seÃ§iniz';
 /*2003-06-15 EL*/
-$LDPlsSelectDept='Lütfen bir bölüm seçiniz';
-$LD_AllMedicalDept='____Tüm týbbi bölümler_____';
+$LDPlsSelectDept='LÃ¼tfen bir bÃ¶lÃ¼m seÃ§iniz';
+$LD_AllMedicalDept='____TÃ¼m tÄ±bbi bÃ¶lÃ¼mler_____';
 $LDClinic='Klinik';
 #2003-10-23 EL
-$LDPlsNameFormal='Lütfen resmi adýný giriniz';
-$LDPlsDeptID='Lütfen bölümün kimliðini giriniz';
-$LDPlsSelectType='Lütfen tipini seçiniz';
+$LDPlsNameFormal='LÃ¼tfen resmi adÄ±nÄ± giriniz';
+$LDPlsDeptID='LÃ¼tfen bÃ¶lÃ¼mÃ¼n kimliÄŸini giriniz';
+$LDPlsSelectType='LÃ¼tfen tipini seÃ§iniz';
 ?>

@@ -1,124 +1,124 @@
 <?php
 $LDWhereTo='Makaleyi nereye koymak istersiniz?';
-$LDPlsSelect='Örnek grafik numarasını seçip  \'Devam...\' a tıklayınız.';
+$LDPlsSelect='Ã–rnek grafik numarasÄ±nÄ± seÃ§ip  \'Devam...\' a tÄ±klayÄ±nÄ±z.';
 $LDContinueBut='Devam...';
-$LDCancelBut='İptal';
+$LDCancelBut='Ä°ptal';
 $LDBackBut='Geri';
 $LDSaveBut='Kaydet';
 $LDFinishBut='Bitir';
-$LDArticle1='İlk (1) makale';
-$LDArticle2='İkinci (2) makale';
-$LDArticle3='Üçüncü (3) makale';
-$LDArticle4='Dördüncü (4) makale';
-$LDArticle5='İkincil (5) makale';
+$LDArticle1='Ä°lk (1) makale';
+$LDArticle2='Ä°kinci (2) makale';
+$LDArticle3='ÃœÃ§Ã¼ncÃ¼ (3) makale';
+$LDArticle4='DÃ¶rdÃ¼ncÃ¼ (4) makale';
+$LDArticle5='Ä°kincil (5) makale';
 
 $LDArticleTxt='Makale';
 
-$LDTitleTag='Başlık';
+$LDTitleTag='BaÅŸlÄ±k';
 $LDTitleMaxNote='Azami 50';
-$LDHeader='Başlık';
+$LDHeader='BaÅŸlÄ±k';
 $LDHeaderMaxNote='Azami 250';
 $LDNews='Haber makalesi';
 /**
 * Do not translate the '<font size=1>' and '</font>'
 */
-$LDPicFile='Resim <font size=1>(azami dosya büyüklüğü 1MB)</font>';
+$LDPicFile='Resim <font size=1>(azami dosya bÃ¼yÃ¼klÃ¼ÄŸÃ¼ 1MB)</font>';
 $LDAuthor='Yazar';
 /**
 * Do not translate the '<font size=1>' and '</font>'
 */
-$LDPublishDate='Yayın tarihi <font size=1>(\'T\' bugün için)</font>';
+$LDPublishDate='YayÄ±n tarihi <font size=1>(\'T\' bugÃ¼n iÃ§in)</font>';
 
-$LDAlertTitle='Lütfen bir başlık yazınız';
-$LDAlertNews='Lütfen makaleyi yazınız';
-$LDAlertAuthor='Lütfen yazarı giriniz';
-$LDAlertDate='Lütfen yayınlanma tarihini giriniz';
+$LDAlertTitle='LÃ¼tfen bir baÅŸlÄ±k yazÄ±nÄ±z';
+$LDAlertNews='LÃ¼tfen makaleyi yazÄ±nÄ±z';
+$LDAlertAuthor='LÃ¼tfen yazarÄ± giriniz';
+$LDAlertDate='LÃ¼tfen yayÄ±nlanma tarihini giriniz';
 
-$LDWrittenOn='Yazıldığı tarih:';
+$LDWrittenOn='YazÄ±ldÄ±ÄŸÄ± tarih:';
 $LDWrittenFrom='Yazan:';
 
-$LDArticleSaved='Makale kaydedildi. Siz ön izlemesini görüyorsunuz.';
+$LDArticleSaved='Makale kaydedildi. Siz Ã¶n izlemesini gÃ¶rÃ¼yorsunuz.';
 $LDBackTxt='Geri';
 
 $LDQuickInfo='Pratik Bilgiler';
 $LDPhonePolice='Polis';
-$LDPhoneFire='İtfaiye.';
+$LDPhoneFire='Ä°tfaiye.';
 $LDAmbulance='Acil';
 $LDPhone='Hastane Telefonu';
 $LDFax='Faks';
 $LDAddress='Adres';
-$LDEmail='Email';
+$LDEmail='Eposta';
 
 $LDOpenTimes ='Kabul Saatleri';
-$LDManagement ='Yönetim';
-$LDDept ='Bölümler';
+$LDManagement ='YÃ¶netim';
+$LDDept ='BÃ¶lÃ¼mler';
 $LDCafenews ='Kafeterya Haberleri';
 $LDAdmission ='Kabul';
 $LDExhibition ='Sergiler';
-$LDEducation ='Eğitim';
-$LDAdvStudies ='Çalışmalar';
+$LDEducation ='EÄŸitim';
+$LDAdvStudies ='Ã‡alÄ±ÅŸmalar';
 $LDPhyTherapy ='Fizik Tedavi';
 $LDCalendar ='Takvim';
-$LDHelp='Yardım';
-$LDMore='makalenin devamı';
+$LDHelp='YardÄ±m';
+$LDMore='makalenin devamÄ±';
 
 $LDCafeNews='Kafeterya Haberleri';
-$LDConfirmEdit='Kafeterya haberlerindeki bilgileri düzenlemek ister misiniz?';
-$LDNewsDummy=array(1=>'birinci',2=>'ikinci',3=>'üçüncü',4=>'dördüncü');
-$LDMenuToday='Bugünün Menüsü';
-$LDMenuAll='Diğer Günlerin <br> &nbsp;Menüsü';
+$LDConfirmEdit='Kafeterya haberlerindeki bilgileri dÃ¼zenlemek ister misiniz?';
+$LDNewsDummy=array(1=>'birinci',2=>'ikinci',3=>'Ã¼Ã§Ã¼ncÃ¼',4=>'dÃ¶rdÃ¼ncÃ¼');
+$LDMenuToday='BugÃ¼nÃ¼n MenÃ¼sÃ¼';
+$LDMenuAll='DiÄŸer GÃ¼nlerin <br> &nbsp;MenÃ¼sÃ¼';
 $LDPrices='Fiyatlar';
-$LDNoMenu='Menu hazır<br> değil.';
-$LDWhatToDo='Neyi düzeltmek istersiniz?';
-$LDPlsMarkSelection='Lütfen bir seçeneği işaretleyin, sonra \'Devam...\'ı tıklayınız.';
-$LDMenuEdit='Menüyü düzenleme';
-$LDPriceEdit='Fiyatları düzenleme';
-$LDNewsEdit='Haberleri veya makaleleri düzenleme';
+$LDNoMenu='Menu hazÄ±r<br> deÄŸil.';
+$LDWhatToDo='Neyi dÃ¼zeltmek istersiniz?';
+$LDPlsMarkSelection='LÃ¼tfen bir seÃ§eneÄŸi iÅŸaretleyin, sonra \'Devam...\'Ä± tÄ±klayÄ±nÄ±z.';
+$LDMenuEdit='MenÃ¼yÃ¼ dÃ¼zenleme';
+$LDPriceEdit='FiyatlarÄ± dÃ¼zenleme';
+$LDNewsEdit='Haberleri veya makaleleri dÃ¼zenleme';
 
-$dayname=array('Pt','Sa','Ça','Pe','Cu','Ct','Pa');
-$LDCafeMenu='Kafeterya Menüsü';
-$LDMenu='Menü';
+$dayname=array('Pt','Sa','Ã‡a','Pe','Cu','Ct','Pa');
+$LDCafeMenu='Kafeterya MenÃ¼sÃ¼';
+$LDMenu='MenÃ¼';
 $LDThisWeek='Bu hafta';
 $LDNextWeek='Gelecek hafta';
-$LD3rdWeek='Üçüncü hafta';
+$LD3rdWeek='ÃœÃ§Ã¼ncÃ¼ hafta';
 $LDBack2CafeNews='Kafeterya haberlerine Geri';
 
-$LDProdName='Ürün adı';
-$LDPriceDM='Fiyatı YTL';
-$LDPriceEuro='Fiyatı €';
-$LDPrice='Fiyatı';
-$LDNoPrice='Fiyat listesi henüz hazır değil.';
-$LDSorry='Üzgünüz sonra tekrar deneyin.';
+$LDProdName='ÃœrÃ¼n adÄ±';
+$LDPriceDM='FiyatÄ± YTL';
+$LDPriceEuro='FiyatÄ± Â€';
+$LDPrice='FiyatÄ±';
+$LDNoPrice='Fiyat listesi henÃ¼z hazÄ±r deÄŸil.';
+$LDSorry='ÃœzgÃ¼nÃ¼z sonra tekrar deneyin.';
 $LDCafePrices='kafeterya fiyat listesi';
 
-$LDCreateGroup='Yeni bir ürün grubu oluştur';
-$LDCreateGroupPrompt='Yeni bir ürün grubu oluşturmanız gerekiyor. Lütfen \'Devam...\' ı tıklayınız.';
+$LDCreateGroup='Yeni bir Ã¼rÃ¼n grubu oluÅŸtur';
+$LDCreateGroupPrompt='Yeni bir Ã¼rÃ¼n grubu oluÅŸturmanÄ±z gerekiyor. LÃ¼tfen \'Devam...\' Ä± tÄ±klayÄ±nÄ±z.';
 /**
 * Do not translate the '<font color=\'#000000\'>' and '</font>'
 */
-$LDMarkGroup='Düzeltmek için bir ürün grubu seçmelisiniz.<br> Sonra   \'<font color=\'#000000\'>Devam...</font>\'ı tıklayınız';
-$LDEnterGroup='Yeni grubun ismini giriniz .<br>Sonra \'<font color=\'#000000\'>Devam...</font>\' ı tıklayınız.';
-$LDProdGroup='Ürün grubu';
-$LDClk2End='Bitirmek için lütfen burayı tıklayınız >> ';
-$LDPriceSaved='Aşağıdaki ürün ve fiyatlar kaydedildi.';
+$LDMarkGroup='DÃ¼zeltmek iÃ§in bir Ã¼rÃ¼n grubu seÃ§melisiniz.<br> Sonra   \'<font color=\'#000000\'>Devam...</font>\'Ä± tÄ±klayÄ±nÄ±z';
+$LDEnterGroup='Yeni grubun ismini giriniz .<br>Sonra \'<font color=\'#000000\'>Devam...</font>\' Ä± tÄ±klayÄ±nÄ±z.';
+$LDProdGroup='ÃœrÃ¼n grubu';
+$LDClk2End='Bitirmek iÃ§in lÃ¼tfen burayÄ± tÄ±klayÄ±nÄ±z >> ';
+$LDPriceSaved='AÅŸaÄŸÄ±daki Ã¼rÃ¼n ve fiyatlar kaydedildi.';
 
-$LDMarkWeek='Lütfen haftayı şeçiniz.';
-$LDClkContinue='Sonra  \'Devam...\' ı tıklayınız.';
-$LDPlsEnter='Menüyü buraya yazınız...';
-$LDClk2Edit='Düzenlemek için burayı tıklayınız';
-$LDPreviewPic='Resim ön izleme';
-$LDCafeEditorial='Kafehaber düzenleyici';
-$LDHealthTips='Sağlık Bilgileri';
-$LDClk2Write='Düzenleyiciyi başlatmak için burayı tıklayınız';
+$LDMarkWeek='LÃ¼tfen haftayÄ± ÅŸeÃ§iniz.';
+$LDClkContinue='Sonra  \'Devam...\' Ä± tÄ±klayÄ±nÄ±z.';
+$LDPlsEnter='MenÃ¼yÃ¼ buraya yazÄ±nÄ±z...';
+$LDClk2Edit='DÃ¼zenlemek iÃ§in burayÄ± tÄ±klayÄ±nÄ±z';
+$LDPreviewPic='Resim Ã¶n izleme';
+$LDCafeEditorial='Kafehaber dÃ¼zenleyici';
+$LDHealthTips='SaÄŸlÄ±k Bilgileri';
+$LDClk2Write='DÃ¼zenleyiciyi baÅŸlatmak iÃ§in burayÄ± tÄ±klayÄ±nÄ±z';
 
 $LDOr='Veya';
 $LDSetCurrency='Para birimini ayarlama';
-$LDNewCurrencySet='Şimdi yeni para birimi etkin.';
-$LDPlsSelectCurrency='Lütfen para birimini seçiniz.';
+$LDNewCurrencySet='Åimdi yeni para birimi etkin.';
+$LDPlsSelectCurrency='LÃ¼tfen para birimini seÃ§iniz.';
 $LDmain='esas';
-$LDClk2AddCurrency='Yeni para birimi tipini girmek için, lütfen burayı tıklayınız. (Dikkat: Kafehaberden çıkıyorsunuz!)';
+$LDClk2AddCurrency='Yeni para birimi tipini girmek iÃ§in, lÃ¼tfen burayÄ± tÄ±klayÄ±nÄ±z. (Dikkat: Kafehaberden Ã§Ä±kÄ±yorsunuz!)';
 
-$LDMenuSaved='Menü kaydedildi.';
+$LDMenuSaved='MenÃ¼ kaydedildi.';
 /* 2002-10-13 EL */
 $LD_ddpMMpyyyy='gg.aa.yyyy';
 $LD_yyyyhMMhdd='yyyy-aa-gg';
@@ -126,7 +126,7 @@ $LD_MMsddsyyyy='aa/gg/yyyy';
 /* 2003-02-11*/
 $LDSubmitNews='Haberi Kaydet';
 $LDDelete='Sil';
-$LDDeleteCurrency='Emin misiniz, Bu para birimini gerçekten silmek istiyor musunuz?';
-$LDNoMainDelete='Esas para birimini silemezsiniz. \n Lütfen önce bir başka esas para birimi seçiniz.';
-$LDCurrencyExisting='Bu para birimi önceden var!';
+$LDDeleteCurrency='Emin misiniz, Bu para birimini gerÃ§ekten silmek istiyor musunuz?';
+$LDNoMainDelete='Esas para birimini silemezsiniz. \n LÃ¼tfen Ã¶nce bir baÅŸka esas para birimi seÃ§iniz.';
+$LDCurrencyExisting='Bu para birimi Ã¶nceden var!';
 ?>

@@ -1,22 +1,22 @@
 <?php
 /* 2002-10-02 EL */
-$LDDepartments='Bölümler';
-$LDPendingRequest='Bekleyen Ýstem';
-$LDPendingRequestTxt='Bulgularý ve sonuçlarý Alma, Girme, Listeleme ve Yazdýrma';
+$LDDepartments='BÃ¶lÃ¼mler';
+$LDPendingRequest='Bekleyen Ä°stem';
+$LDPendingRequestTxt='BulgularÄ± ve sonuÃ§larÄ± Alma, Girme, Listeleme ve YazdÄ±rma';
 $LDGeneralSurgery='Genel Cerrahi poliklinik';
 $LDInternalMed='Dahiliye poliklinik';
 $LDEmergency='Acil poliklinik';
 $LDSonography='Ultrason';
-$LDNuclearMed='Nükleer týp';
+$LDNuclearMed='NÃ¼kleer tÄ±p';
 $LDAdmission='Hasta Kabul';
-$LDAdmissionTxt='Poliklinik kabul ve çýkýþ, arama, arþiv';
+$LDAdmissionTxt='Poliklinik kabul ve Ã§Ä±kÄ±ÅŸ, arama, arÅŸiv';
 $LDNews='Haberler';
-$LDNewsTxt='Kliniðe özgü haberler, not, bilgi, vs.';
+$LDNewsTxt='KliniÄŸe Ã¶zgÃ¼ haberler, not, bilgi, vs.';
 # 2003-08-01 EL
 $LDAppointments='Randevular';
-$LDAppointmentsTxt='Bu bölümün hasta randevularý';
+$LDAppointmentsTxt='Bu bÃ¶lÃ¼mÃ¼n hasta randevularÄ±';
 $LDPatientWaitingList='Hasta bekleme listesi';
-$LDPWListTxt='Bugün kliniðe kabul edilmiþ hastalar';
+$LDPWListTxt='BugÃ¼n kliniÄŸe kabul edilmiÅŸ hastalar';
 $LDOutpatientClinic='Poliklinik';
 $LDGeneralAmbulatory='Genel Poliklinik';
 $LDAmbulatory='Poliklinik';

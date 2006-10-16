@@ -1,9 +1,9 @@
 <?php
-$LDHome='Baþlangýç';
+$LDHome='BaÅŸlangÄ±Ã§';
 $LDPatient='Hasta';
 $LDAdmission='Hasta Kabul ';
 $LDAmbulatory='Poliklinikler';
-$LDMedocs='Týbbi belgeler';
+$LDMedocs='TÄ±bbi belgeler';
 $LDDoctors='Doktorlar';
 $LDNursing='Servisler';
 $LDOR='Ameliyathane';
@@ -12,37 +12,37 @@ $LDRadiology='Radyoloji';
 $LDPharmacy='Eczane';
 $LDMedDepot='Ambar';
 $LDDirectory='Telefon Rehberi';
-$LDTechSupport='Bakým Onarým';
-$LDEDP='Bilgi Ýþlem';
+$LDTechSupport='BakÄ±m OnarÄ±m';
+$LDEDP='Bilgi Ä°ÅŸlem';
 $LDIntraEmail='Intranet Eposta';
 $LDInterEmail='Internet Eposta';
-$LDSpecials='Özel Araçlar';
-$LDLogin='Giriþ';
-$LDLogout='Çýkýþ';
+$LDSpecials='Ã–zel AraÃ§lar';
+$LDLogin='GiriÅŸ';
+$LDLogout='Ã‡Ä±kÄ±ÅŸ';
 $LDAppointments='Randevular';
 
-$VersionChgTarget='_üst';
+$VersionChgTarget='_Ã¼st';
 $LDLanguage='Dil';
-$LDPlsWaitInit='Program ilk defa baþlatýlýyor. Lütfen bekleyiniz.';
+$LDPlsWaitInit='Program ilk defa baÅŸlatÄ±lÄ±yor. LÃ¼tfen bekleyiniz.';
 
-$LDChange='Deðiþtir';
+$LDChange='DeÄŸiÅŸtir';
 /* 2003-04-27 EL */
 $LDBrazilian='Brezilyaca';
-$LDCzech='Çekoslovakyaca';
-$LDEnglish='Ýngilizce';
-$LDFrench='Fransýzca';
+$LDCzech='Ã‡ekoslovakyaca';
+$LDEnglish='Ä°ngilizce';
+$LDFrench='FransÄ±zca';
 $LDGerman='Almanca';
 $LDIndonesian='Endonezyaca';
-$LDItalian='Ýtalyanca';
-$LDNorwegian='Norveçce';
+$LDItalian='Ä°talyanca';
+$LDNorwegian='NorveÃ§ce';
 $LDPolish='Polonyaca';
 $LDPortuguese='Portekizce';
-$LDSpanish='Ýspanyolca';
-$LDTurkish='Türkçe';
+$LDSpanish='Ä°spanyolca';
+$LDTurkish='TÃ¼rkÃ§e';
 /* 2003-04-28 El */
 $LDDutch='Hollandaca';
 # 2003-08-04 EL
-$LDPerson='Kiþi';
+$LDPerson='KiÅŸi';
 # 2003-09-05 EL
-$LDUser='Kullanýcý';
+$LDUser='KullanÄ±cÄ±';
 ?>

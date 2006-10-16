@@ -1,15 +1,15 @@
 <?php
-$LDDbNoSave='Veritabanını kaydetme girişimi başarısız oldu!';
-$LDDbNoRead='Veri tabanını okuma girişimi başarısız oldu!';
-$LDDbNoLink='Veri tabanına bağlanma girişimi başarısız oldu!';
-$LDDbNoUpdate='Veri tabanını güncelleştirme girişimi başarısız oldu';
-$LDDbNoLastData='Kayıp veri bulunamadı!';
-$LDDbNoDelete='Silme başarısız!';
+$LDDbNoSave='VeritabanÄ±nÄ± kaydetme giriÅŸimi baÅŸarÄ±sÄ±z oldu!';
+$LDDbNoRead='Veri tabanÄ±nÄ± okuma giriÅŸimi baÅŸarÄ±sÄ±z oldu!';
+$LDDbNoLink='Veri tabanÄ±na baÄŸlanma giriÅŸimi baÅŸarÄ±sÄ±z oldu!';
+$LDDbNoUpdate='Veri tabanÄ±nÄ± gÃ¼ncelleÅŸtirme giriÅŸimi baÅŸarÄ±sÄ±z oldu';
+$LDDbNoLastData='KayÄ±p veri bulunamadÄ±!';
+$LDDbNoDelete='Silme baÅŸarÄ±sÄ±z!';
 
 #2003-11-01 EL
-$LDSessionTimeout='Oturum zaman aşımına uğradı';
-$LDSessionTimeoutTxt='Uzun süre işlem yapılmadı. Modül zaman aşımına uğradı ve güvenlik nedeni ile kendisini kilitledi. 
-Modülü tekrar etkinleştirmek için aşağıdakilerden birini deneyebilirsiniz:<p>
-- Ana menüden seçerek modülü tekrar başlatmak<br>
-- Tarayıcınızın yenile düğmesini tıklamak <p> Önceki verilerden kaydetmemiş olduklarınız maalesef kaybolacaktır.'; 
+$LDSessionTimeout='Oturum zaman aÅŸÄ±mÄ±na uÄŸradÄ±';
+$LDSessionTimeoutTxt='Uzun sÃ¼re iÅŸlem yapÄ±lmadÄ±. ModÃ¼l zaman aÅŸÄ±mÄ±na uÄŸradÄ± ve gÃ¼venlik nedeni ile kendisini kilitledi. 
+ModÃ¼lÃ¼ tekrar etkinleÅŸtirmek iÃ§in aÅŸaÄŸÄ±dakilerden birini deneyebilirsiniz:<p>
+- Ana menÃ¼den seÃ§erek modÃ¼lÃ¼ tekrar baÅŸlatmak<br>
+- TarayÄ±cÄ±nÄ±zÄ±n yenile dÃ¼ÄŸmesini tÄ±klamak <p> Ã–nceki verilerden kaydetmemiÅŸ olduklarÄ±nÄ±z maalesef kaybolacaktÄ±r.'; 
 ?>

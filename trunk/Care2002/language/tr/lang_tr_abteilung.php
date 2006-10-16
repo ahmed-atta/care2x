@@ -1,33 +1,33 @@
 <?php
-$LDPageTitle='Bölümler';
-$LDDeptTxt='Bölüm';
-$LDOpenHrsTxt='Çalýþma Saatleri';
+$LDPageTitle='BÃ¶lÃ¼mler';
+$LDDeptTxt='BÃ¶lÃ¼m';
+$LDOpenHrsTxt='Ã‡alÄ±ÅŸma Saatleri';
 $LDChkHrsTxt='Muayene Saatleri';
-$LDClk4Info='Daha fazla bilgi için týklayýnýz';
-$LDDayTxt='Gün';
+$LDClk4Info='Daha fazla bilgi iÃ§in tÄ±klayÄ±nÄ±z';
+$LDDayTxt='GÃ¼n';
 
 /**
-* Çeviren Op. Dr. Bülent Potur
+* Ã‡eviren Op. Dr. BÃ¼lent Potur
 * http://bpotur.tripod.com
 */
 $dept=array('Genel Cerrahi',
 					'Acil Cerrahi',
 					'Plastik Cerrahi',
 					'KBB',
-					'Göz',
+					'GÃ¶z',
 					'Patoloji',
-					'Kadýn doðum',
+					'KadÄ±n doÄŸum',
 					'Fizik Tedavi',
 					'Dahiliye',
 					'Onkoloji',
-					'Ýdame',
-					'Orta Bakým Birimi',
-					'Yoðun Bakým Birimi',
-					'Biyokimya Laboratuvarý',
+					'Ä°dame',
+					'Orta BakÄ±m Birimi',
+					'YoÄŸun BakÄ±m Birimi',
+					'Biyokimya LaboratuvarÄ±',
 					'Acil Poliklinik',
 					'Genel Poliklinik',
 					'Ultrason',
-					'Nükleer Týp',
+					'NÃ¼kleer TÄ±p',
 					'Dahiliye Poliklinik');
 					
 /**
@@ -56,9 +56,9 @@ $target=array('dept_generalsurgery',
 $LDBackTxt='Geri';
 
 $LDOpenDays=array('Pazartesi',
-					'Salý',
-					'Çarþamba',
-					'Perþembe',
+					'SalÄ±',
+					'Ã‡arÅŸamba',
+					'PerÅŸembe',
 					'Cuma',
 					'Cumartesi',
 					'Pazar');
