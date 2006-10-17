@@ -210,6 +210,39 @@ $actions['fields']['db_name'] = array(
 
 
 
+
+
+
+
+
+
+$actions['fields']['protocol'] = array(
+	'html_label'   => 'HTTP Protocol',
+	'html_name'    => 'protocol',
+	'html_size'    => 32,
+	'html_type'    => 'select',
+	
+	'values'       => array(
+	
+				'http'  => 'HTTP',
+				'https' => 'HTTPS'
+			),
+	
+	'default' => 'http',
+	'type'    => 'numeric',
+	
+	'group'   => 2
+);
+
+
+
+
+
+
+
+
+
+
 $actions['fields']['admin_user'] = array(
 	'html_label'   => 'Care2x Admin Username',
 	'html_name'    => 'admin_user',
@@ -222,7 +255,7 @@ $actions['fields']['admin_user'] = array(
 	'preg'    => '/^[a-z0-9_]{1,20}$/iU',
 	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 20.',
 	
-	'group'   => 2
+	'group'   => 3
 );
 
 
@@ -238,7 +271,7 @@ $actions['fields']['admin_password1'] = array(
 	'preg'    => '/^(.){0,48}$/iU',
 	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 48.',
 	
-	'group'   => 2
+	'group'   => 3
 );
 
 
@@ -254,7 +287,7 @@ $actions['fields']['admin_password2'] = array(
 	'preg'    => '/^(.){0,48}$/iU',
 	'tip'     => 'Must contain only letters, numbers, or an underscore character.  Length limit is 48.',
 	
-	'group'   => 2
+	'group'   => 3
 );
 
 

@@ -28,9 +28,8 @@ function task_check_database(&$status)
 	}
 
 	
-	@$ok = $db->Connect($status['data']['db_host'] . ':' . $status['data']['db_port'], $status['data']['db_user'], $status['data']['db_pass'], $status['data']['db_name']);
+	@$ok = $db->Connect($status['data']['db_host'] . ':' . $status['data']['db_port'], $status['data']['db_user'], $status['data']['db_pass']);
 	
-
 	if (!$ok)
 	{
 		$GLOBALS['errors'][] = "The ADO driver could not connect to the database using the information you provided.";
