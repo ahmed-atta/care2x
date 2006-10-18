@@ -78,11 +78,11 @@
 			break;
 		
 		case 7:
-			$output['page_title'] = 'Ready to Install';
+			$output['page_title'] = 'GNU General Public License';
 			break;
 		
 		case 8:
-			$output['page_title'] = 'Care2x Installation';
+			$output['page_title'] = 'Ready to Install';
 			break;
 		
 		case 9:

@@ -26,8 +26,10 @@ $actions['list'][] = 'prepare_post_data';
 $actions['list'][] = 'do_post_action';
 
 
-// This should be executed AFTER do_post_action
+// These should be executed AFTER do_post_action
 $actions['list'][] = 'check_database';
+$actions['list'][] = 'insert_sql';
+$actions['list'][] = 'write_config';
 
 
 
@@ -149,13 +151,13 @@ $actions['fields']['db_port'] = array(
 	'html_max'     => 5,
 	'html_type'    => 'text',
 	
-	'default' => '10061',
+	'default' => '3306',
 	'type'    => 'number',
 	
 	'min'     => 1,
 	'max'     => 65535,
 	
-	'tip'     => 'A number between 1 and 65536.  Defaults to 10061.',
+	'tip'     => 'A number between 1 and 65536.  Defaults to 3306.',
 	
 	'group'   => 1
 );
@@ -235,6 +237,22 @@ $actions['fields']['protocol'] = array(
 );
 
 
+$actions['fields']['domain'] = array(
+	'html_label'   => 'Domain Path',
+	'html_name'    => 'path',
+	'html_type'    => 'text',
+	'html_size'    => 48,
+	'html_max'     => 40,
+	
+	'default' => $_SERVER['HTTP_HOST'] . dirname(dirname($_SERVER['SCRIPT_NAME'])),
+	'type'    => 'string',
+	'preg'    => '/^(.){0,48}$/iU',
+	'tip'     => 'The path to the application on the server.',
+		
+	'group'   => 2
+);
+
+
 
 
 
@@ -291,6 +309,64 @@ $actions['fields']['admin_password2'] = array(
 );
 
 
+
+
+
+
+
+$actions['fields']['key1'] = array(
+	'html_label'   => 'Security Key 1',
+	'html_name'    => 'key1',
+	'html_size'    => 20,
+	'html_max'     => 32,
+	'html_type'    => 'numeric',
+	
+	'default' => mt_rand(1000000000,2100000000),
+	'type'    => 'number',
+	
+	'min'     => 1000000000,
+	'max'     => 2100000000,
+	
+	'tip'     => 'Enter any large number between 1 billion and 2.3 billion',
+	
+	'group'   => 4
+);
+
+$actions['fields']['key2'] = array(
+	'html_label'   => 'Security Key 2',
+	'html_name'    => 'key2',
+	'html_size'    => 20,
+	'html_max'     => 32,
+	'html_type'    => 'numeric',
+	
+	'default' => mt_rand(1000000000,2100000000),
+	'type'    => 'number',
+	
+	'min'     => 1000000000,
+	'max'     => 2100000000,
+	
+	'tip'     => 'Enter any large number between 1 billion and 2.3 billion',
+	
+	'group'   => 4
+);
+
+$actions['fields']['key3'] = array(
+	'html_label'   => 'Security Key 3',
+	'html_name'    => 'key3',
+	'html_size'    => 20,
+	'html_max'     => 32,
+	'html_type'    => 'numeric',
+	
+	'default' => mt_rand(1000000000,2100000000),
+	'type'    => 'number',
+	
+	'min'     => 1000000000,
+	'max'     => 2100000000,
+	
+	'tip'     => 'Enter any large number between 1 billion and 2.3 billion',
+	
+	'group'   => 4
+);
 
 
 
