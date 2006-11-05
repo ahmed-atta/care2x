@@ -18,7 +18,7 @@
  			else
  				return false;
  		}
- 		if ($this->getString()!='' && ($perm == 'Patient' || $perm == 'Appointments' || $perm == 'Ambulatory' || $perm == 'Intranet Email')) 
+ 		if ($this->getString()!='' && ($perm == 'Patient' || $perm == 'Appointments' || $perm == 'Ambulatory' || $perm == 'Intranet Email' || $perm == 'Special Tools')) 
  			return true;
  		return StringParser::isPresent($perm);
  	}
