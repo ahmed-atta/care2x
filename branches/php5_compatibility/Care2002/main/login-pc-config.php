@@ -20,7 +20,7 @@ $user=new UserConfig;
 
 //$db->debug=true;
 
-if($user->getConfig($HTTP_COOKIE_VARS['ck_config'])){
+if($user->getConfig($_COOKIE['ck_config'])){
 	$config=&$user->getConfigData();
 }else{
 	$config=array();
@@ -40,13 +40,13 @@ $ward_info=&$ward_obj->getAllWardsItemsArray($items);
 
 if(isset($mode)&&($mode=='save')){
 
-	$config['thispc_dept_nr']=$HTTP_POST_VARS['thispc_dept_nr'];
-	$config['thispc_ward_nr']=$HTTP_POST_VARS['thispc_ward_nr'];
-	$config['thispc_room_nr']=$HTTP_POST_VARS['thispc_room_nr'];
-	$config['thispc_phone']=$HTTP_POST_VARS['thispc_phone'];
-	$config['thispc_intercom']=$HTTP_POST_VARS['thispc_intercom'];
+	$config['thispc_dept_nr']=$_POST['thispc_dept_nr'];
+	$config['thispc_ward_nr']=$_POST['thispc_ward_nr'];
+	$config['thispc_room_nr']=$_POST['thispc_room_nr'];
+	$config['thispc_phone']=$_POST['thispc_phone'];
+	$config['thispc_intercom']=$_POST['thispc_intercom'];
 	
-	$user->saveConfig($HTTP_COOKIE_VARS['ck_config'],$config);
+	$user->saveConfig($_COOKIE['ck_config'],$config);
 	
 	header("location: login-pc-config.php?sid=$sid&lang=$lang&saved=1");
 	exit;
@@ -89,7 +89,7 @@ if(isset($mode)&&($mode=='save')){
   	$smarty->assign('sPromptText',$LDChangeSaved);
  }else{
  	$smarty->assign('sPromptText',$LDWelcome);
- 	$smarty->assign('sUserName',$HTTP_SESSION_VARS['sess_login_username']);
+ 	$smarty->assign('sUserName',$_SESSION['sess_login_username']);
  }
 
  #
@@ -117,7 +117,7 @@ if(isset($mode)&&($mode=='save')){
  $smarty->assign('LDIntercomNr',$LDIntercomNr);
 
  $smarty->assign('sIPAddressIcon','<img '.createComIcon($root_path,'lightning.gif').'>');
- $smarty->assign('sIPAddress',$HTTP_SERVER_VARS['REMOTE_ADDR']);
+ $smarty->assign('sIPAddress',$_SERVER['REMOTE_ADDR']);
  $smarty->assign('LDPcIP',$LDPcIP);
 
  #
@@ -270,7 +270,7 @@ if(isset($mode)&&($mode=='save')){
                   width=5></TD></TR>
               <TR class="submenu">  <td align=center><img <?php echo createComIcon($root_path,'lightning.gif') ?>></td>
                 <TD vAlign=top ><B>
-			 <?php echo $HTTP_SERVER_VARS['REMOTE_ADDR']; ?>
+			 <?php echo $_SERVER['REMOTE_ADDR']; ?>
 				  </B></TD>
                 <TD><?php echo $LDPcIP ?></TD>
 			</TR>
