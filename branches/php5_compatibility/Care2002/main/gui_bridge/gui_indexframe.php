@@ -89,7 +89,7 @@ require("menu/$LocMenuTreeDir/mainmenu.inc.php");
 <TABLE CELLPADDING=0 CELLSPACING=0 border=0>
 
 <?php
-//echo $HTTP_COOKIE_VARS['ck_config']; // used only in debugging related to user config data
+//echo $_COOKIE['ck_config']; // used only in debugging related to user config data
 
 if(!$GLOBALCONFIG['language_single']){
 ?>
@@ -128,7 +128,7 @@ echo $langselect;
 <?php echo $dbtype; ?>
 <br>
 <nobr><b><?php echo $LDUser ?>:</b></nobr><br>
-<?php echo  $HTTP_SESSION_VARS['sess_login_username']; ?><br>
+<?php echo  $_SESSION['sess_login_username']; ?><br>
 <?php echo $dept->FormalName($cfg['thispc_dept_nr']); ?><br>
 <?php echo $ward->WardName($cfg['thispc_ward_nr']); ?><br>
 </FONT>
