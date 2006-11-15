@@ -29,13 +29,13 @@ if(isset($mode)&&$mode=='save'){
 	
 	$user=new UserConfig;
 
-	if($user->getConfig($HTTP_COOKIE_VARS['ck_config'])){
+	if($user->getConfig($_COOKIE['ck_config'])){
 
 		$config=&$user->getConfigData();
 	
 		$config=array_merge($config,$config_new);
 
-		if($user->saveConfig($HTTP_COOKIE_VARS['ck_config'],$config)){
+		if($user->saveConfig($_COOKIE['ck_config'],$config)){
 			header('location:'.basename(__FILE__).URL_REDIRECT_APPEND.'&saved=1');
 			exit;
 		}

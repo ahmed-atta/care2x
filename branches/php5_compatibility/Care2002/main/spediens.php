@@ -19,14 +19,14 @@ $thisfile=basename(__FILE__);
 // reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
 
-$HTTP_SESSION_VARS['sess_file_break']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_file_return']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_file_editor']='headline-edit-select-art.php';
-$HTTP_SESSION_VARS['sess_file_reader']='headline-read.php';
-$HTTP_SESSION_VARS['sess_title']=$LDEditTitle.'::'.$LDSubmitNews;
-//$HTTP_SESSION_VARS['sess_user_origin']='main_start';
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_dept_nr']=0; // reset the department number used in the session
+$_SESSION['sess_file_break']=$top_dir.$thisfile;
+$_SESSION['sess_file_return']=$top_dir.$thisfile;
+$_SESSION['sess_file_editor']='headline-edit-select-art.php';
+$_SESSION['sess_file_reader']='headline-read.php';
+$_SESSION['sess_title']=$LDEditTitle.'::'.$LDSubmitNews;
+//$_SESSION['sess_user_origin']='main_start';
+$_SESSION['sess_path_referer']=$top_dir.$thisfile;
+$_SESSION['sess_dept_nr']=0; // reset the department number used in the session
 
 # Start Smarty templating here
  /**

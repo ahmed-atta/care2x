@@ -22,8 +22,8 @@ $config_new=array();
 if(!session_is_registered('sess_serial_buffer')){
 	session_register('sess_serial_buffer');
 }
-if(isset($HTTP_SESSION_VARS['sess_serial_buffer'])){
-	$config_new=unserialize($HTTP_SESSION_VARS['sess_serial_buffer']);
+if(isset($_SESSION['sess_serial_buffer'])){
+	$config_new=unserialize($_SESSION['sess_serial_buffer']);
 }	
 
       
@@ -33,21 +33,21 @@ if ($mode=='change'){
 
 	$config_new[$item]=$color;
 	
-	$HTTP_SESSION_VARS['sess_serial_buffer']=serialize($config_new);
+	$_SESSION['sess_serial_buffer']=serialize($config_new);
 	$config_new=array_merge($cfg,$config_new);
 
-}elseif((($mode=='ok')||($mode=='remain'))&&isset($HTTP_SESSION_VARS['sess_serial_buffer'])){
+}elseif((($mode=='ok')||($mode=='remain'))&&isset($_SESSION['sess_serial_buffer'])){
 
 	include_once($root_path.'include/care_api_classes/class_userconfig.php');
 	$user=new UserConfig;
 
-	if($user->getConfig($HTTP_COOKIE_VARS['ck_config'])){
+	if($user->getConfig($_COOKIE['ck_config'])){
 
 		$config=&$user->getConfigData();
 	
 		$config=array_merge($config,$config_new);
 
-		if($user->saveConfig($HTTP_COOKIE_VARS['ck_config'],$config)){
+		if($user->saveConfig($_COOKIE['ck_config'],$config)){
 			if($mode=='ok'){
 				header("location:spediens.php?sid=$sid&lang=$lang&idxreload=j");
 			}
