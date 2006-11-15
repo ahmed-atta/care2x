@@ -6,7 +6,7 @@ $dbname='care2002';
 $dbusername='root';
 
 # Database user password, default is empty char
-$dbpassword='';
+$dbpassword='root';
 
 # Database host name, default = localhost
 $dbhost='localhost';
@@ -21,10 +21,14 @@ $key_2level='826165905490';
 $key_login='1.13664924241E+013';
 
 # Main host address or domain
-$main_domain='localhost/care2x_d21_full';
+$main_domain='localhost';
+// damien: Where did the 'care2x..' bit come from?
+//$main_domain='localhost/care2x_d21_full';
 
 # Host address for images
-$fotoserver_ip='localhost/care2x_d21_full';
+$fotoserver_ip='localhost';
+// damien: Where did the 'care2x..' bit come from?
+//$fotoserver_ip='localhost/care2x_d21_full';
 
 # Transfer protocol. Use https if this runs on SSL server
 $httprotocol='http';

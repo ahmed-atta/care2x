@@ -23,7 +23,7 @@
 * @package care_api
 */
 
-$thisfile = basename($HTTP_SERVER_VARS['PHP_SELF']);
+$thisfile = basename($_SERVER['PHP_SELF']);
 
 class GuiInputPerson {
 	
@@ -104,9 +104,9 @@ class GuiInputPerson {
 	*/
 	function display(){
 		global $db, $sid, $lang, $root_path, $pid, $insurance_show, $user_id, $mode, $dbtype, $breakfile, $cfg,
-				$update, $photo_filename, $HTTP_POST_VARS,  $HTTP_POST_FILES, $HTTP_SESSION_VARS;
+				$update, $photo_filename;
 
-		extract($HTTP_POST_VARS);
+		extract($_POST);
 
 		# Load the language tables
 		$lang_tables =$this->langfiles;
@@ -177,7 +177,7 @@ class GuiInputPerson {
 				$img_obj=& new Image;
 
 				# Check the uploaded image file if exists and valid
-				if($img_obj->isValidUploadedImage($HTTP_POST_FILES['photo_filename'])){
+				if($img_obj->isValidUploadedImage($_POST['photo_filename'])){
 					$valid_image=TRUE;
 					# Get the file extension
 					$picext=$img_obj->UploadedImageMimeType();
@@ -221,13 +221,13 @@ class GuiInputPerson {
 						# Compose the new filename
 						$photo_filename=$pid.'.'.$picext;
 						# Save the file
-						$img_obj->saveUploadedImage($HTTP_POST_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
+						$img_obj->saveUploadedImage($_POST['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
 				   		# add to the sql query
 						$sql.=" photo_filename='$photo_filename',";
 					}
 
 					# complete the sql query
-					$sql.=" history=".$person_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." \n").", modify_id='".$HTTP_SESSION_VARS['sess_user_name']."' WHERE pid=$pid";
+					$sql.=" history=".$person_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." \n").", modify_id='".$_SESSION['sess_user_name']."' WHERE pid=$pid";
 
 					//$db->debug=true;
 					$db->BeginTrans();
@@ -243,8 +243,8 @@ class GuiInputPerson {
 									$insure_data=array('insurance_nr'=>$insurance_nr,
 											'firm_id'=>$insurance_firm_id,
 											'class_nr'=>$insurance_class_nr,
-											'history'=>"Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." \n",
-											'modify_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+											'history'=>"Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." \n",
+											'modify_id'=>$_SESSION['sess_user_name'],
 											'modify_time'=>date('YmdHis')
 											);
 
@@ -255,8 +255,8 @@ class GuiInputPerson {
 											'firm_id'=>$insurance_firm_id,
 											'pid'=>$pid,
 											'class_nr'=>$insurance_class_nr,
-											'history'=>"Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." \n",
-											'create_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+											'history'=>"Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." \n",
+											'create_id'=>$_SESSION['sess_user_name'],
 											'create_time'=>date('YmdHis')
 										);
 								$pinsure_obj->insertDataFromArray($insure_data);
@@ -280,14 +280,14 @@ class GuiInputPerson {
 					}
   				} else {
 					$from='entry';
-					$HTTP_POST_VARS['date_birth']=@formatDate2Std($date_birth,$date_format);
-					$HTTP_POST_VARS['date_reg']=date('Y-m-d H:i:s');
-					$HTTP_POST_VARS['blood_group']=trim($HTTP_POST_VARS['blood_group']);
-					$HTTP_POST_VARS['status']='normal';
-					$HTTP_POST_VARS['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+					$_POST['date_birth']=@formatDate2Std($date_birth,$date_format);
+					$_POST['date_reg']=date('Y-m-d H:i:s');
+					$_POST['blood_group']=trim($_POST['blood_group']);
+					$_POST['status']='normal';
+					$_POST['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
 					//$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-					$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-					$HTTP_POST_VARS['create_time']=date('YmdHis');
+					$_POST_VARS['create_id']=$_SESSION['sess_user_name'];
+					$_POST_VARS['create_time']=date('YmdHis');
 
 					# Prepare internal data to be stored together with the user input data
 					if(!$person_obj->InitPIDExists($GLOBAL_CONFIG['person_id_nr_init'])){
@@ -296,11 +296,11 @@ class GuiInputPerson {
 						# However, the sequence generator must be configured during db creation to start at
 						# the initial value set in the global config
 						if($dbtype=='mysql'){
-							$HTTP_POST_VARS['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
+							$_POST['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
 						}
 					}else{
 						# Persons are existing. Check if duplicate might exist
-						if(is_object($duperson=$person_obj->PIDbyData($HTTP_POST_VARS))){
+						if(is_object($duperson=$person_obj->PIDbyData($_POST))){
 							$error_person_exists=TRUE;
 						}
 					}
@@ -329,7 +329,7 @@ class GuiInputPerson {
 								# Compose the new filename by joining the pid number and the file extension with "."
 								$photo_filename=$pid.'.'.$picext;
 								# Save the file
-								if($img_obj->saveUploadedImage($HTTP_POST_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename)){
+								if($img_obj->saveUploadedImage($_POST['photo_filename'],$root_path.$photo_path.'/',$photo_filename)){
 									# Update the filename to the databank
 									$person_obj->setPhotoFilename($pid,$photo_filename);
 								}
@@ -848,7 +848,7 @@ class GuiInputPerson {
 		}
 
 		$this->smarty->assign('LDRegBy',$LDRegBy);
-		if(isset($user_id) && $user_id) $buffer=$user_id; else  $buffer = $HTTP_SESSION_VARS['sess_user_name'];
+		if(isset($user_id) && $user_id) $buffer=$user_id; else  $buffer = $_SESSION['sess_user_name'];
 		$this->smarty->assign('sRegByInput','<input  name="user_id" type="text" value="'.$buffer.'"  size="35" readonly>');
 
 		# Collect the hidden inputs

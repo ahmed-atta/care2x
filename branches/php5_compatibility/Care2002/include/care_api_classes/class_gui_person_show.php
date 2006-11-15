@@ -17,7 +17,7 @@
 * @package care_api
 */
 
-$thisfile = basename($HTTP_SERVER_VARS['PHP_SELF']);
+$thisfile = basename($_SERVER['PHP_SELF']);
 
 class GuiPersonShow {
 	# Language files to be loaded
@@ -155,7 +155,7 @@ class GuiPersonShow {
 	* Displays the GUI showing the data
 	*/
 	function display($pid=0){
-		global $HTTP_SESSION_VARS, $root_path, $dbf_nodate, $newdata, $kb_other_his_array, $lang;
+		global $root_path, $dbf_nodate, $newdata, $kb_other_his_array, $lang;
 
 		$validdata = TRUE;
 
@@ -219,7 +219,7 @@ class GuiPersonShow {
 				$this->current_encounter=$this->person_obj->CurrentEncounter($this->pid);
 
 				# update the record´s history
-				if(empty($newdata)) @$this->person_obj->setHistorySeen($HTTP_SESSION_VARS['sess_user_name']);
+				if(empty($newdata)) @$this->person_obj->setHistorySeen($_SESSION['sess_user_name']);
 			
 				# Check whether config foto path exists, else use default path
 				$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $this->default_photo_path;
