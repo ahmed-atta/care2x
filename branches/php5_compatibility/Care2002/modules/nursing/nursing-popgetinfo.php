@@ -186,8 +186,8 @@ if($count){
 <input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="mode" value="save">
 <br>
-		 &nbsp;<a href="javascript:sethilite(document.infoform.notes)"><img <?php echo createLDImgSrc($root_path,'hilite-s.gif','0','',TRUE) ?>></a>
-		<a href="javascript:endhilite(document.infoform.notes)"><img <?php echo createLDImgSrc($root_path,'hilite-e.gif','0','',TRUE) ?>></a>
+		 &nbsp;<a href="javascript:sethilite(document.infoform.notes)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0') ?>><?php echo $LDStart ?></a>
+		<a href="javascript:endhilite(document.infoform.notes)"><img <?php echo createComIcon($root_path,'color_marker_yellow.gif','0') ?>><?php echo $LDEnd ?></a>
 
 <p>
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>>
