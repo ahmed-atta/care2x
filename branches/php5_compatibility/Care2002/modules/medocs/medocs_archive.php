@@ -14,20 +14,20 @@ require($root_path.'include/inc_environment_global.php');
 define('AUTOSHOW_ONERESULT',0);
 
 function Cond($item,$k){
-	global $where,$tab,$HTTP_POST_VARS;
-	if(empty($HTTP_POST_VARS[$item])) return false;
+	global $where,$tab,$_POST;
+	if(empty($_POST[$item])) return false;
 	else{
-		$buf=" $tab.$item LIKE \"".$HTTP_POST_VARS[$item]."%\"";
+		$buf=" $tab.$item LIKE \"".$_POST[$item]."%\"";
 		if(!empty($where)) $where.=' AND '.$buf;
 		 else $where=$buf;
 	}
 }
 	
 function fCond($item,$k){
-	global $orwhere,$tab,$HTTP_POST_VARS;
-	if(empty($HTTP_POST_VARS[$item])) return false;
+	global $orwhere,$tab,$_POST;
+	if(empty($_POST[$item])) return false;
 	else{
-		$buf=" f.class_nr LIKE \"".$HTTP_POST_VARS[$item]."%\"";
+		$buf=" f.class_nr LIKE \"".$_POST[$item]."%\"";
 		if(!empty($orwhere)) $orwhere.=' OR '.$buf;
 		 else $orwhere=$buf;
 	}

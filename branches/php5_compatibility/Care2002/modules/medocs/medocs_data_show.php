@@ -112,7 +112,7 @@ if($dblink_ok) {
 	include_once($root_path.'include/inc_date_format_functions.php');
         
 	/* Update History */
-	if(!$newdata) $encounter_obj->setHistorySeen($HTTP_SESSION_VARS['sess_user_name'],$encounter_nr);
+	if(!$newdata) $encounter_obj->setHistorySeen($_SESSION['sess_user_name'],$encounter_nr);
 	/* Get insurance firm name*/
 	$insurance_firm_name=$insurance_obj->getFirmName($insurance_firm_id);
 	/* Get ward name */
@@ -129,10 +129,10 @@ require_once($root_path.'include/inc_patient_encounter_type.php');
 if(!session_is_registered('sess_parent_mod')) session_register('sess_parent_mod');
 
 /* Save encounter nrs to session */
-$HTTP_SESSION_VARS['sess_pid']=$pid;
-$HTTP_SESSION_VARS['sess_en']=$encounter_nr;
-$HTTP_SESSION_VARS['sess_full_en']=$full_en;
-$HTTP_SESSION_VARS['sess_parent_mod']='admission';
+$_SESSION['sess_pid']=$pid;
+$_SESSION['sess_en']=$encounter_nr;
+$_SESSION['sess_full_en']=$full_en;
+$_SESSION['sess_parent_mod']='admission';
 
 /* Prepare the photo filename */
 require_once($root_path.'include/inc_photo_filename_resolve.php');

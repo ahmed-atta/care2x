@@ -24,34 +24,34 @@ $this_type=$obj->getType($type_nr);
 if(!isset($mode)){
 	$mode='show';
 } elseif(($mode=='create'||$mode=='update')
-				&&!empty($HTTP_POST_VARS['text_diagnosis'])
-				&&!empty($HTTP_POST_VARS['text_therapy'])) {
+				&&!empty($_POST['text_diagnosis'])
+				&&!empty($_POST['text_therapy'])) {
 	# Prepare the posted data for saving in databank
 	include_once($root_path.'include/inc_date_format_functions.php');
 	# If date is empty,default to today
-	if(empty($HTTP_POST_VARS['date'])){
-		$HTTP_POST_VARS['date']=date('Y-m-d');
+	if(empty($_POST['date'])){
+		$_POST['date']=date('Y-m-d');
 	}else{
-		$HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
+		$_POST['date']=@formatDate2STD($_POST['date'],$date_format);
 	}
 	
 	# Prune the aux_notes  data to max 255
-		$HTTP_POST_VARS['aux_notes']=substr($HTTP_POST_VARS['aux_notes'],0,255);
+		$_POST['aux_notes']=substr($_POST['aux_notes'],0,255);
 
 	# Prepare history
-	$HTTP_POST_VARS['history']='Entry: '.date('Y-m-d H:i:s').' '.$HTTP_SESSION_VARS['sess_user_name'];
-	$HTTP_POST_VARS['time']=date('H:i:s');
-	$HTTP_POST_VARS['type_nr']=12; // 12 = text_diagnosis
-	$HTTP_POST_VARS['notes']=$HTTP_POST_VARS['text_diagnosis'];
+	$_POST['history']='Entry: '.date('Y-m-d H:i:s').' '.$_SESSION['sess_user_name'];
+	$_POST['time']=date('H:i:s');
+	$_POST['type_nr']=12; // 12 = text_diagnosis
+	$_POST['notes']=$_POST['text_diagnosis'];
 	# Prevent redirection
 	$redirect=false;
 	include('./include/save_admission_data.inc.php');
 	$insid=$db->Insert_ID();
-	$HTTP_POST_VARS['ref_notes_nr']=$obj->LastInsertPK('nr',$insid);
-	$HTTP_POST_VARS['notes']=$HTTP_POST_VARS['text_therapy'];
-	$HTTP_POST_VARS['type_nr']=13; // 13 = text_therapy
-	$HTTP_POST_VARS['short_notes']='';
-	$HTTP_POST_VARS['aux_notes']='';
+	$_POST['ref_notes_nr']=$obj->LastInsertPK('nr',$insid);
+	$_POST['notes']=$_POST['text_therapy'];
+	$_POST['type_nr']=13; // 13 = text_therapy
+	$_POST['short_notes']='';
+	$_POST['aux_notes']='';
 	$redirect=true;
 	include('./include/save_admission_data.inc.php');
 }
@@ -66,15 +66,15 @@ $enc_obj=new Encounter($encounter_nr);
 $enc_obj->loadEncounterData();
 # Get encounter class
 $enc_class=$enc_obj->EncounterClass();
-/*if($enc_class==2)  $HTTP_SESSION_VARS['sess_full_en']=$GLOBAL_CONFIG['patient_outpatient_nr_adder']+$encounter_nr;
-	else $HTTP_SESSION_VARS['sess_full_en']=$GLOBAL_CONFIG['patient_inpatient_nr_adder']+$encounter_nr;
+/*if($enc_class==2)  $_SESSION['sess_full_en']=$GLOBAL_CONFIG['patient_outpatient_nr_adder']+$encounter_nr;
+	else $_SESSION['sess_full_en']=$GLOBAL_CONFIG['patient_inpatient_nr_adder']+$encounter_nr;
 */
-$HTTP_SESSION_VARS['sess_full_en']=$encounter_nr;
+$_SESSION['sess_full_en']=$encounter_nr;
 	
-if(empty($encounter_nr)&&!empty($HTTP_SESSION_VARS['sess_en'])){
-	$encounter_nr=$HTTP_SESSION_VARS['sess_en'];
+if(empty($encounter_nr)&&!empty($_SESSION['sess_en'])){
+	$encounter_nr=$_SESSION['sess_en'];
 }elseif($encounter_nr) {
-	$HTTP_SESSION_VARS['sess_en']=$encounter_nr;
+	$_SESSION['sess_en']=$encounter_nr;
 }
 	
 if($mode=='show') 
@@ -94,7 +94,7 @@ if($mode=='show')
 	if($result=$db->Execute($sql)){
 		if($rows=$result->RecordCount()){
 			# Resync the encounter_nr
-			if($HTTP_SESSION_VARS['sess_en']!=$encounter_nr) $HTTP_SESSION_VARS['sess_en']=$encounter_nr;
+			if($_SESSION['sess_en']!=$encounter_nr) $_SESSION['sess_en']=$encounter_nr;
 			if($rows==1){
 				$row=$result->FetchRow();
 				if($row['is_discharged']) $edit=0;
@@ -128,7 +128,7 @@ $subtitle=$LDMedocs;
 	
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 # Set break file
 require('include/inc_breakfile.php');
