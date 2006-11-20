@@ -56,8 +56,8 @@ if(($report!=NULL)||($mode!=''))
 							'$report_date', 
 							'$report_time', 
 							'pending',
-							'Created: ".$HTTP_SESSION_VARS['sess_user_name']." ".date('Y-m-d H:i:s')."\n\r',
-							'".$HTTP_SESSION_VARS['sess_user_name']."',
+							'Created: ".$_SESSION['sess_user_name']." ".date('Y-m-d H:i:s')."\n\r',
+							'".$_SESSION['sess_user_name']."',
 							'".date('YmdHis')."'
 						)";
 						
@@ -179,7 +179,7 @@ echo '</font>
 <tr>
 <td bgcolor="#dddddd"><FONT    SIZE=-1  FACE="Arial">
 
-<?php echo $LDReporter ?>:<br><input type="text" name="reporter" size=30 value="<?php echo $HTTP_COOKIE_VARS[$local_user.$sid]; ?>"> <p>
+<?php echo $LDReporter ?>:<br><input type="text" name="reporter" size=30 value="<?php echo $_COOKIE[$local_user.$sid]; ?>"> <p>
 <?php echo $LDPersonellNr ?>:<br><input type="text" name="id_nr" size=30>
 <input type="hidden" name="report_date" value="<?php echo date('Y-m-d') ?>" >
 <input type="hidden" name="report_time" value= "<?php echo date('H:i:s') ?>">
