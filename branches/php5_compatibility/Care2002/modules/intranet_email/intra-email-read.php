@@ -45,7 +45,7 @@ $breakfile="intra-email.php".URL_APPEND."&mode=listmail";
 						if(!isset($read)||!$read)
 						{
 							$dbtable='care_mail_private_users';
-							$sql="SELECT $folder, lastcheck FROM $dbtable WHERE  email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
+							$sql="SELECT $folder, lastcheck FROM $dbtable WHERE  email='".$_COOKIE[$local_user.$sid]."'";
 							if($ergebnis=$db->Execute($sql)) 
 							{			
 								if($ergebnis->RecordCount())
@@ -62,7 +62,7 @@ $breakfile="intra-email.php".URL_APPEND."&mode=listmail";
 												$result[$folder]=implode('_',$inb);
 									
 												$sql="UPDATE $dbtable SET $folder='".$result[$folder]."', lastcheck='".$result[lastcheck]."'
-																		WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
+																		WHERE email='".$_COOKIE[$local_user.$sid]."'";
 								                $db->BeginTrans();
 								                $ok=$db->Execute($sql);
 								                if($ok){
@@ -157,7 +157,7 @@ if(!isset($mode)) $mode='';
  echo '
   &nbsp; <b><a href="intra-email.php'.URL_APPEND.'&mode=listmail">'.$LDInbox.'</a> | <a href="intra-email.php'.URL_APPEND.'&mode=compose">'.$LDNewEmail.'</a> | <a href="intra-email-addrbook.php'.URL_APPEND.'&mode='.$mode.'&folder='.$folder.'">'.$LDAddrBook.'</a> | <a href="intra-email-options.php'.URL_APPEND.'">'.$LDOptions.'</a> | <a href="javascript:gethelp(\'intramail.php\',\'read\',\''.$mode.'\',\''.$folder.'\')">'.$LDHelp.'</a></b>
   <hr color=#000080>
-   &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+   &nbsp; <FONT  color="#800000">'.$_COOKIE[$local_user.$sid].'</font> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
    <font size=1><a href="intra-email.php'.URL_APPEND.'&mode=listmail&l2h='.$l2h.'&folder='.$folder.'">
    <img '.createComIcon($root_path,'l_arrowgrnsm.gif','0','middle').'> '.$LDBack2.' ';
 switch($folder)
@@ -220,15 +220,15 @@ echo '
 
   switch($folder)
   {
-  	case 'inbox': if($HTTP_COOKIE_VARS[$local_user.$sid]!=$content['sender']) 
+  	case 'inbox': if($_COOKIE[$local_user.$sid]!=$content['sender']) 
 							{ $inp=0; echo '<input type="button" value="'.$LDReply.'" onClick="submitForm(1)"> '; break; }
 								else echo '<input type="button" value="'.$LDBack.'" onClick="window.location.href=\'intra-email.php'.URL_REDIRECT_APPEND.'&mode=listmail&folder=inbox&l2h='.$l2h.'\'"> '; break;
-  	case 'sent': if($HTTP_COOKIE_VARS[$local_user.$sid]!=$content['recipient'])
+  	case 'sent': if($_COOKIE[$local_user.$sid]!=$content['recipient'])
 							{ $inp=1; echo '<input type="button" value="'.$LDResend.'" onClick="submitForm(2)"> ';break; }
 								else  echo '<input type="button" value="'.$LDBack.'" onClick="window.location.href=\'intra-email.php'.URL_REDIRECT_APPEND.'&mode=listmail&folder=sent&l2h='.$l2h.'\'"> '; break;
   	case 'drafts':$inp=1; echo '
  								 <input type="button" value="'.$LDNewEmail.'" onClick="submitForm(2)"> '; break;
-  	case 'trash':if($HTTP_COOKIE_VARS[$local_user.$sid]!=$content['recipient'])
+  	case 'trash':if($_COOKIE[$local_user.$sid]!=$content['recipient'])
 						{	$inp=1; echo ' <input type="button" value="'.$LDResend.'" onClick="submitForm(2)"> '; 	break;}
 									else { $inp=0; echo '  <input type="button" value="'.$LDReplyAgain.'" onClick="submitForm(1)"> ';} break;
    }

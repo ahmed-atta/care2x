@@ -75,7 +75,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   <a href="javascript:gethelp()">'.$LDHelp.'</a>| 
   <a href="intra-email-pass.php'.URL_APPEND.'">'.$LDLogout.'</a></b>
   <hr color=#000080>
-   &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font>
+   &nbsp; <FONT  color="#800000">'.$_COOKIE[$local_user.$sid].'</font>
    ';
 /* echo '
 <FONT face="Verdana,Helvetica,Arial" size=2>
@@ -85,7 +85,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   <a href="javascript:gethelp()">'.$LDHelp.'</a>| 
   <a href="intra-email-pass.php'.URL_APPEND.'">'.$LDLogout.'</a></b>
   <hr color=#000080>
-   &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font>
+   &nbsp; <FONT  color="#800000">'.$_COOKIE[$local_user.$sid].'</font>
    ';
 */   
 // ******************************** Read email ***************************************

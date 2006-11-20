@@ -33,7 +33,7 @@ $dbtable='care_mail_private_users';
 $linecount=0;
 $modetypes=array('sendmail','listmail');
 
-				$sql="SELECT addr_book, lastcheck FROM $dbtable WHERE  email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
+				$sql="SELECT addr_book, lastcheck FROM $dbtable WHERE  email='".$_COOKIE[$local_user.$sid]."'";
 				if($ergebnis=$db->Execute($sql))
 				{ 
 					if($rows=$ergebnis->RecordCount())
@@ -50,7 +50,7 @@ $modetypes=array('sendmail','listmail');
 								if($content['addr_book']=="") $content['addr_book']=$buf;
 									else  $content[addr_book].="_".$buf;
 								$sql="UPDATE $dbtable SET addr_book='".$content['addr_book']."' , lastcheck='".$content['lastcheck']."'
-																	WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
+																	WHERE email='".$_COOKIE[$local_user.$sid]."'";
 								$db->BeginTrans();
 								$ok=$db->Execute($sql);
 								if($ok&&$db->CommitTrans())
@@ -87,7 +87,7 @@ $modetypes=array('sendmail','listmail');
 									}
 									$content['addr_book']=implode('_',$inb);
 									$sql="UPDATE $dbtable SET addr_book='".trim($content['addr_book'])."', lastcheck='".$content['lastcheck']."'
-																		WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
+																		WHERE email='".$_COOKIE[$local_user.$sid]."'";
 								    $db->BeginTrans();
 								    $ok=$db->Execute($sql);
 								    if($ok&&$db->CommitTrans()) { 
@@ -197,7 +197,7 @@ ob_start();
    <a href="javascript:gethelp(\'intramail.php\',\'address\',\''.$mode.'\',\''.$folder.'\')">'.$LDHelp.'</a>| 
 	<a href="intra-email-pass.php'.URL_APPEND.'">'.$LDLogout.'</a></b>
   <hr color=#000080>
-   &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font>';
+   &nbsp; <FONT  color="#800000">'.$_COOKIE[$local_user.$sid].'</font>';
 ?>
 
 <?php if($task=="newadd") : ?>
