@@ -16,9 +16,9 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $returnfile='headline-edit-select-art.php'.URL_APPEND;
-$breakfile=$root_path.$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
+$breakfile=$root_path.$_SESSION['sess_file_break'].URL_APPEND;
 
-//$HTTP_SESSION_VARS['sess_file_return']='start_page.php';
+//$_SESSION['sess_file_return']='start_page.php';
 
 # Get the news article
 require_once($root_path.'include/care_api_classes/class_news.php');

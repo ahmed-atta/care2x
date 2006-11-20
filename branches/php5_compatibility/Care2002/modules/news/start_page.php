@@ -15,7 +15,7 @@ define('NO_CHAIN',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $cksid='ck_sid'.$sid;
-if(!$HTTP_COOKIE_VARS[$cksid] && !$cookie) { header("location:".$root_path."cookies.php?lang=$lang&startframe=1"); exit;}
+if(!$_COOKIE[$cksid] && !$cookie) { header("location:".$root_path."cookies.php?lang=$lang&startframe=1"); exit;}
 
 if(!session_is_registered('sess_news_nr')) session_register('sess_news_nr');
 
@@ -43,14 +43,14 @@ $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
 if(!session_is_registered('sess_file_editor')) session_register('sess_file_editor');
 if(!session_is_registered('sess_file_reader')) session_register('sess_file_reader');
 
-$HTTP_SESSION_VARS['sess_file_break']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_file_return']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_file_editor']='headline-edit-select-art.php';
-$HTTP_SESSION_VARS['sess_file_reader']='headline-read.php';
-$HTTP_SESSION_VARS['sess_dept_nr']='1'; // 1= press relations dept
-$HTTP_SESSION_VARS['sess_title']=$LDEditTitle.'::'.$LDSubmitNews;
-$HTTP_SESSION_VARS['sess_user_origin']='main_start';
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
+$_SESSION['sess_file_break']=$top_dir.$thisfile;
+$_SESSION['sess_file_return']=$top_dir.$thisfile;
+$_SESSION['sess_file_editor']='headline-edit-select-art.php';
+$_SESSION['sess_file_reader']='headline-read.php';
+$_SESSION['sess_dept_nr']='1'; // 1= press relations dept
+$_SESSION['sess_title']=$LDEditTitle.'::'.$LDSubmitNews;
+$_SESSION['sess_user_origin']='main_start';
+$_SESSION['sess_path_referer']=$top_dir.$thisfile;
 
 $readerpath='headline-read.php'.URL_APPEND;
 # Load the news display configs

@@ -19,14 +19,14 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
 
-$HTTP_SESSION_VARS['sess_user_origin']='dept';
+$_SESSION['sess_user_origin']='dept';
 
 $default_url_news='modules/news/newscolumns.php';
 
-$returnfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
+$returnfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND;
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
+$_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
 
 //$db->debug=1;
 /* dept type = 1 = medical */

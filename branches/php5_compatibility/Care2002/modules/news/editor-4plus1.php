@@ -19,12 +19,12 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 $default_file_return='newscolumns.php';
 
-$title=$HTTP_SESSION_VARS['sess_title'];
+$title=$_SESSION['sess_title'];
 
 $returnfile='editor-4plus1-select-art.php'.URL_APPEND;
 $breakfile='newscolumns.php'.URL_APPEND;
 
-//$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+//$_SESSION['sess_file_return']=basename(__FILE__);
 
 ?>
 <?php html_rtl($lang); ?>

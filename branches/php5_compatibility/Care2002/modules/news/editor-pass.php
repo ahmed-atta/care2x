@@ -26,23 +26,23 @@ $default_forward=$root_path.'modules/news/editor-4plus1-select-art.php';
 $default_breakfile='newscolumns.php'.URL_APPEND;
 
 # Filter probable errors in navigation
-if(!isset($HTTP_SESSION_VARS['sess_file_editor']) || empty($HTTP_SESSION_VARS['sess_file_editor'])) $fileforward=$default_forward.URL_REDIRECT_APPEND;
-   else $fileforward=$HTTP_SESSION_VARS['sess_file_editor'].URL_REDIRECT_APPEND;
+if(!isset($_SESSION['sess_file_editor']) || empty($_SESSION['sess_file_editor'])) $fileforward=$default_forward.URL_REDIRECT_APPEND;
+   else $fileforward=$_SESSION['sess_file_editor'].URL_REDIRECT_APPEND;
 
-if(!isset($HTTP_SESSION_VARS['sess_file_break']) || empty($HTTP_SESSION_VARS['sess_file_break'])) $breakfile=$default_breakfile.URL_APPEND;
-   else $breakfile=$root_path.$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
+if(!isset($_SESSION['sess_file_break']) || empty($_SESSION['sess_file_break'])) $breakfile=$default_breakfile.URL_APPEND;
+   else $breakfile=$root_path.$_SESSION['sess_file_break'].URL_APPEND;
 
 # Filter dept_nr if available save to session, else use default department = 1, public relations headline news
-if(isset($dept_nr)&&$dept_nr) $HTTP_SESSION_VARS['sess_dept_nr']=$dept_nr;
-	elseif(!$HTTP_SESSION_VARS['sess_dept_nr']) $HTTP_SESSION_VARS['sess_dept_nr']=1; # Headline news
+if(isset($dept_nr)&&$dept_nr) $_SESSION['sess_dept_nr']=$dept_nr;
+	elseif(!$_SESSION['sess_dept_nr']) $_SESSION['sess_dept_nr']=1; # Headline news
 # Filter title, if no supplied, use session stored title
-$title= (empty($title)) ? $HTTP_SESSION_VARS['sess_title'] : $title ; 
+$title= (empty($title)) ? $_SESSION['sess_title'] : $title ; 
    
 $lognote="$title+editor";
 $userck="ck_editor_user";					
 
-//$fileforward=$HTTP_SESSION_VARS['sess_file_editor'].URL_REDIRECT_APPEND;
-//$breakfile=$HTTP_SESSION_VARS['sess_file_break'].$URL_APPEND;
+//$fileforward=$_SESSION['sess_file_editor'].URL_REDIRECT_APPEND;
+//$breakfile=$_SESSION['sess_file_break'].$URL_APPEND;
 
 $thisfile=basename(__FILE__);							
 

@@ -29,13 +29,13 @@ $default_editor_script='modules/news/editor-4plus1-select-art.php';
 $default_start_page='main/startframe.php';
 $thisfile=basename(__FILE__);
 
-$HTTP_SESSION_VARS['sess_file_break']=$top_dir.$thisfile;
+$_SESSION['sess_file_break']=$top_dir.$thisfile;
 
-if(isset($dept_nr) && $dept_nr) $HTTP_SESSION_VARS['sess_dept_nr']=$dept_nr;
-    else  $dept_nr=$HTTP_SESSION_VARS['sess_dept_nr'];
+if(isset($dept_nr) && $dept_nr) $_SESSION['sess_dept_nr']=$dept_nr;
+    else  $dept_nr=$_SESSION['sess_dept_nr'];
 	
-//if(!isset($user_origin)||empty($user_origin)) $user_origin=$HTTP_SESSION_VARS['sess_user_origin'];
-if(empty($user_origin)) $user_origin=$HTTP_SESSION_VARS['sess_user_origin'];
+//if(!isset($user_origin)||empty($user_origin)) $user_origin=$_SESSION['sess_user_origin'];
+if(empty($user_origin)) $user_origin=$_SESSION['sess_user_origin'];
 # Set the return paths 
 
 if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');
@@ -67,8 +67,8 @@ if($dblink_ok) {
 	} else echo "<p>$sql<p>$LDDbNoRead<p>";
 
 	/* Check the start script as break destination*/
-	if (!empty($HTTP_SESSION_VARS['sess_path_referer'])){
-		$breakfile=$HTTP_SESSION_VARS['sess_path_referer'];
+	if (!empty($_SESSION['sess_path_referer'])){
+		$breakfile=$_SESSION['sess_path_referer'];
 	} elseif(isset($row['module_start_script']) && !empty($row['module_start_script'])){
 		$breakfile =$row['module_start_script'];
 	} else {
@@ -83,20 +83,20 @@ if($dblink_ok) {
 		$title=$$row['LD_var'];
 	}	
 	 # Save to session
-	$HTTP_SESSION_VARS['sess_title']=$title;
+	$_SESSION['sess_title']=$title;
 	
 /*	# Check the editor script as forward file
 	if(isset($row['news_editor_script']) && (trim($row['news_editor_script'])!='')) {
-		$HTTP_SESSION_VARS['sess_file_forward'] =$root_path.$row['news_editor_script'];
-		$HTTP_SESSION_VARS['sess_file_editor'] =$root_path.$row['news_editor_script'];
+		$_SESSION['sess_file_forward'] =$root_path.$row['news_editor_script'];
+		$_SESSION['sess_file_editor'] =$root_path.$row['news_editor_script'];
 	} else {
 		 # default file forward
-		$HTTP_SESSION_VARS['sess_file_forward'] = $root_path.$default_editor_script;
-		$HTTP_SESSION_VARS['sess_file_editor'] = $root_path.$default_editor_script;
+		$_SESSION['sess_file_forward'] = $root_path.$default_editor_script;
+		$_SESSION['sess_file_editor'] = $root_path.$default_editor_script;
 	}
 */
-	$HTTP_SESSION_VARS['sess_file_forward'] = $root_path.$default_editor_script;
-	$HTTP_SESSION_VARS['sess_file_editor'] = $root_path.$default_editor_script;
+	$_SESSION['sess_file_forward'] = $root_path.$default_editor_script;
+	$_SESSION['sess_file_editor'] = $root_path.$default_editor_script;
 	
 	# Now get the news articles
     include_once($root_path.'include/inc_date_format_functions.php');
@@ -127,8 +127,8 @@ $returnfile=$breakfile;
 $readerpath='editor-4plus1-read.php'.URL_REDIRECT_APPEND;
 $editorpath='editor-pass.php'.URL_APPEND;
 $today=date('Y-m-d');
-//$HTTP_SESSION_VARS['sess_dept_nr']=$dept_nr;
-$HTTP_SESSION_VARS['sess_file_return']=$top_dir.basename(__FILE__);
+//$_SESSION['sess_dept_nr']=$dept_nr;
+$_SESSION['sess_file_return']=$top_dir.basename(__FILE__);
 
 # Start Smarty templating here
  /**
