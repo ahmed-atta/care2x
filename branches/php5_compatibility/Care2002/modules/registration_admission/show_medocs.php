@@ -22,15 +22,15 @@ require('./include/init_show.php');
 
 if($parent_admit){
 	# Get the medocs records data of this encounter
-	$med_obj=&$obj->encMedocsList($HTTP_SESSION_VARS['sess_en']);
+	$med_obj=&$obj->encMedocsList($_SESSION['sess_en']);
 }else{
 	# Get all medocs records  of this person
-	$med_obj=&$obj->pidMedocsList($HTTP_SESSION_VARS['sess_pid']);
+	$med_obj=&$obj->pidMedocsList($_SESSION['sess_pid']);
 }
 $rows=$obj->LastRecordCount();
 
 $subtitle=$LDMedocs;
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

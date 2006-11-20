@@ -127,8 +127,8 @@ if(is_object($encounter_classes)){
    </tr>
 
  </table>
-<input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
-<input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
+<input type="hidden" name="encounter_nr" value="<?php echo $_SESSION['sess_en']; ?>">
+<input type="hidden" name="pid" value="<?php echo $_SESSION['sess_pid']; ?>">
 <?php
 if($mode=='select'){
 ?>

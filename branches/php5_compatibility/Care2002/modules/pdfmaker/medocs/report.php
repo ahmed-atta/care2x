@@ -24,7 +24,7 @@ define('LANG_FILE','aufnahme.php');
 //define('NO_2LEVEL_CHK',1);
 //define('NO_CHAIN',TRUE);
 # Resolve the local user based on the origin of the script
-if(($HTTP_SESSION_VARS['sess_user_origin']=='admission')||($HTTP_SESSION_VARS['sess_user_origin']=='registration')){
+if(($_SESSION['sess_user_origin']=='admission')||($_SESSION['sess_user_origin']=='registration')){
 	$local_user='aufnahme_user';
 }else{
 	$local_user='medocs_user';

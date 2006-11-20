@@ -21,7 +21,7 @@ require($root_path.'include/inc_environment_global.php');
 
 function getNotes($type_nr){
 
-	global $db,$HTTP_SESSION_VARS,$rows,$result,$enc;
+	global $db,$rows,$result,$enc;
 
 	$sql="SELECT n.nr,n.notes,n.short_notes, n.encounter_nr,n.date,n.time, n.personell_nr,n.personell_name
 		FROM care_encounter AS e, 

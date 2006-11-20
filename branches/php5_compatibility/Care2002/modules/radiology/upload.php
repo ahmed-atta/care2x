@@ -15,7 +15,7 @@ define('FILE_DISCRIM','.dcm'); # define here the file discrimator string
 
 $thisfile=basename(__FILE__);
 
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'];
+$returnfile=$_SESSION['sess_file_return'];
 
 //$db->debug=1;
 
@@ -46,13 +46,13 @@ if(!isset($mode)){
 				//$data['mime_type']=$picext;
 				# Hard code image type to "dicom"
 				$data=array('pid'=>$pid,
-									'encounter_nr'=>$HTTP_POST_VARS['encounter_nr'],
-									'doc_ref_ids'=>$HTTP_POST_VARS['doc_ref_ids'],
+									'encounter_nr'=>$_POST['encounter_nr'],
+									'doc_ref_ids'=>$_POST['doc_ref_ids'],
 									'img_type'=>'dicom',
-									'notes'=>$HTTP_POST_VARS['notes'],
+									'notes'=>$_POST['notes'],
 									'upload_date'=>date('Y-m-d'),
-									'history'=>"Upload ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n",
-									'create_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+									'history'=>"Upload ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n",
+									'create_id'=>$_SESSION['sess_user_name'],
 									'create_time'=>date('YmdHis'));
 				
 				# Save data into the database
@@ -160,7 +160,7 @@ if(!isset($maxpic)||!$maxpic||!is_numeric($maxpic)||$maxpic<0) $maxpic=4;
 # Prepare some parameters based on selected dicom viewer module
 $pop_only=false;
 
-switch($HTTP_SESSION_VARS['sess_dicom_viewer']){
+switch($_SESSION['sess_dicom_viewer']){
 	case 'raimjava':
 			$pop_only=true;
 			break;

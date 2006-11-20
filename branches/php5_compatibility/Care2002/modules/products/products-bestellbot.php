@@ -24,20 +24,20 @@ $lang_tables[]='departments.php';
 define('LANG_FILE','products.php');
 
 if(!isset($userck)) 
-  if(isset($HTTP_GET_VARS['userck'])) $userck=$HTTP_GET_VARS['userck'];
-    elseif(isset($HTTP_POST_VARS['userck'])) $userck=$HTTP_POST_VARS['userck'];
+  if(isset($_GET['userck'])) $userck=$_GET['userck'];
+    elseif(isset($_POST['userck'])) $userck=$_POST['userck'];
 $local_user=$userck;
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 
 switch($cat)
 {
-	case 'pharma':	if ($HTTP_COOKIE_VARS[$local_user.$sid]==NULL) $cat="";  
+	case 'pharma':	if ($_COOKIE[$local_user.$sid]==NULL) $cat="";  
 							$title="$LDPharmacy - $LDOrderBotActivate";
 							$bot_name=$LDPharmaOrderBot;
 							$dbtable='care_pharma_orderlist';
 							break;
-	case 'medlager':if ($HTTP_COOKIE_VARS[$local_user.$sid]==NULL) $cat="";  
+	case 'medlager':if ($_COOKIE[$local_user.$sid]==NULL) $cat="";  
 							$title="$LDMedDepot - $LDOrderBotActivate";
 							$bot_name=$LDDepotOrderBot;
 							$dbtable='care_med_orderlist';

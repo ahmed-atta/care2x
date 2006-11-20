@@ -21,7 +21,7 @@ require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $GLOBAL_CONFIG=array();
 
 $thisfile=basename(__FILE__);
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 $personell_obj=new Personell();
@@ -40,10 +40,10 @@ $default_photo_path=$root_path.'fotos/registration';
 $photo_filename='nopic';
 
 #Check whether the origin is phone directory and if session personnel nr. is ok
-if($HTTP_SESSION_VARS['sess_user_origin']=='phonedir'&&$HTTP_SESSION_VARS['sess_personell_nr']){
-	$personell_nr=$HTTP_SESSION_VARS['sess_personell_nr'];
+if($_SESSION['sess_user_origin']=='phonedir'&&$_SESSION['sess_personell_nr']){
+	$personell_nr=$_SESSION['sess_personell_nr'];
 }else{
-	$HTTP_SESSION_VARS['sess_personell_nr']=$personell_nr;
+	$_SESSION['sess_personell_nr']=$personell_nr;
 }
 
 	//if(!empty($GLOBAL_CONFIG['patient_financial_class_single_result'])) $encounter_obj->setSingleResult(true);	
@@ -75,7 +75,7 @@ if($HTTP_SESSION_VARS['sess_user_origin']=='phonedir'&&$HTTP_SESSION_VARS['sess_
 	include_once($root_path.'include/inc_date_format_functions.php');
         
 	/* Update History */
-	//if(!$newdata) $encounter_obj->setHistorySeen($HTTP_SESSION_VARS['sess_user_name'],$encounter_nr);
+	//if(!$newdata) $encounter_obj->setHistorySeen($_SESSION['sess_user_name'],$encounter_nr);
 	/* Get insurance firm name*/
 	//$insurance_firm_name=$insurance_obj->getFirmName($insurance_firm_id);
 	/* Get ward name */
@@ -91,15 +91,15 @@ if(!session_is_registered('sess_parent_mod')) session_register('sess_parent_mod'
 if(!session_is_registered('sess_user_origin')) session_register('sess_user_origin');
 
 /* Save encounter nrs to session */
-$HTTP_SESSION_VARS['sess_pid']=$pid;
-//$HTTP_SESSION_VARS['sess_en']=$encounter_nr;
-//$HTTP_SESSION_VARS['sess_full_en']=$full_en;
-$HTTP_SESSION_VARS['sess_parent_mod']='admission';
-$HTTP_SESSION_VARS['sess_pnr']=$personell_nr;
+$_SESSION['sess_pid']=$pid;
+//$_SESSION['sess_en']=$encounter_nr;
+//$_SESSION['sess_full_en']=$full_en;
+$_SESSION['sess_parent_mod']='admission';
+$_SESSION['sess_pnr']=$personell_nr;
 //$full_pnr=$personell_nr+$GLOBAL_CONFIG['personell_nr_adder'];
 $full_pnr=$personell_nr;
-$HTTP_SESSION_VARS['sess_full_pnr']=$full_pnr;
-$HTTP_SESSION_VARS['sess_user_origin']='personell_admin';
+$_SESSION['sess_full_pnr']=$full_pnr;
+$_SESSION['sess_user_origin']='personell_admin';
 
 /* Prepare the photo filename */
 require_once($root_path.'include/inc_photo_filename_resolve.php');

@@ -56,7 +56,7 @@ if ($pass=='check')
 $errbuf=$LDAdmission;
 
 /* erase the user_origin */
-if(isset($HTTP_SESSION_VARS['sess_user_origin'])) $HTTP_SESSION_VARS['sess_user_origin']='';
+if(isset($_SESSION['sess_user_origin'])) $_SESSION['sess_user_origin']='';
 
 require($root_path.'include/inc_passcheck_head.php');
 ?>

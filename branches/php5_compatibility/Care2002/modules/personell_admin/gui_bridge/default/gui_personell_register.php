@@ -470,7 +470,7 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <tr>
 <td class="adm_item"><?php echo $LDAdmitBy ?>:
 </td>
-<td colspan=2 class="adm_input"><input  name="encoder" type="text" value="<?php if ($create_id) echo $create_id; else echo $HTTP_SESSION_VARS['sess_user_name']; ?>" size="30" >
+<td colspan=2 class="adm_input"><input  name="encoder" type="text" value="<?php if ($create_id) echo $create_id; else echo $_SESSION['sess_user_name']; ?>" size="30" >
 </nobr>
 </td>
 </tr>

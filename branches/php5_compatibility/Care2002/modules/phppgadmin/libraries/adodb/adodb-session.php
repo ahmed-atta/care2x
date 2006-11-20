@@ -15,24 +15,22 @@ wrapper library.
  Example
  =======
  
- 	GLOBAL $HTTP_SESSION_VARS;
 	include('adodb.inc.php');
 	include('adodb-session.php');
 	session_start();
 	session_register('AVAR');
-	$HTTP_SESSION_VARS['AVAR'] += 1;
-	print "<p>\$HTTP_SESSION_VARS['AVAR']={$HTTP_SESSION_VARS['AVAR']}</p>";
+	$_SESSION['AVAR'] += 1;
+	print "<p>\$_SESSION['AVAR']={$_SESSION['AVAR']}</p>";
 	
 To force non-persistent connections, call adodb_session_open first before session_start():
 
- 	GLOBAL $HTTP_SESSION_VARS;
 	include('adodb.inc.php');
 	include('adodb-session.php');
 	adodb_session_open(false,false,false);
 	session_start();
 	session_register('AVAR');
-	$HTTP_SESSION_VARS['AVAR'] += 1;
-	print "<p>\$HTTP_SESSION_VARS['AVAR']={$HTTP_SESSION_VARS['AVAR']}</p>";
+	$_SESSION['AVAR'] += 1;
+	print "<p>\$_SESSION['AVAR']={$_SESSION['AVAR']}</p>";
 
  
  Installation
@@ -263,8 +261,7 @@ function adodb_sess_gc($maxlifetime)
 		$dbt = $ADODB_SESS_CONN->UnixTimeStamp($dbt);
 		$t = time();
 		if (abs($dbt - $t) >= ADODB_SESSION_SYNCH_SECS) {
-		global $HTTP_SERVER_VARS;
-			$msg = "adodb-session.php: Server time for webserver {$HTTP_SERVER_VARS['HTTP_HOST']} not in synch: database=$dbt, webserver=".$t;
+			$msg = "adodb-session.php: Server time for webserver {$_SERVER['HTTP_HOST']} not in synch: database=$dbt, webserver=".$t;
 			error_log($msg);
 			if ($ADODB_SESS_DEBUG) ADOConnection::outp("<p>$msg</p>");
 		}
@@ -286,12 +283,10 @@ session_set_save_handler(
 /*  TEST SCRIPT -- UNCOMMENT */
 
 if (0) {
-GLOBAL $HTTP_SESSION_VARS;
-
 	session_start();
 	session_register('AVAR');
-	$HTTP_SESSION_VARS['AVAR'] += 1;
-	ADOConnection::outp( "<p>\$HTTP_SESSION_VARS['AVAR']={$HTTP_SESSION_VARS['AVAR']}</p>",false);
+	$_SESSION['AVAR'] += 1;
+	ADOConnection::outp( "<p>\$_SESSION['AVAR']={$_SESSION['AVAR']}</p>",false);
 }
 
 ?>

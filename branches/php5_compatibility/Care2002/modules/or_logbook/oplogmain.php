@@ -16,7 +16,7 @@ define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if (!$internok&&!$_COOKIE['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 # Load date shifter class 
 require_once($root_path.'classes/datetimemanager/class.dateTimeManager.php');
@@ -90,7 +90,7 @@ if($ergebnis=$db->Execute($sql)){
 	return true;
 }
 function getinfo(pid,pdata){
-	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-station-patientdaten.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&dept_nr=<?php echo "$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=".$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]; ?>";
+	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-station-patientdaten.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&dept_nr=<?php echo "$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=".$_COOKIE['ck_op_pflegelogbuch_user'.$sid]; ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	}
  function initall(){
@@ -354,7 +354,7 @@ if(!$datafound)
 		/*echo '<img src="../img/'.$lang.'/'.$lang.'_cat-com2.gif">';*/
 	}elseif(!$firstentry){
 	
-		$buffy=str_replace(" ","+",$HTTP_SESSION_VARS['sess_user_name']); 
+		$buffy=str_replace(" ","+",$_SESSION['sess_user_name']); 
 		 echo '<img src="'.$root_path.'main/imgcreator/catcom.php?lang='.$lang.'&person='.$buffy.'">';
 	}
 }

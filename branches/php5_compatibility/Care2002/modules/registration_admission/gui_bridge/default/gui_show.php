@@ -1,10 +1,10 @@
 <?php
 
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'];
+$returnfile=$_SESSION['sess_file_return'];
 
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfile = $root_path."main/startframe.php".URL_APPEND;
+if($_COOKIE["ck_login_logged".$sid]) $breakfile = $root_path."main/startframe.php".URL_APPEND;
 	else $breakfile = $breakfile.URL_APPEND."&target=entry";
 
 # Start Smarty templating here
@@ -17,8 +17,8 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfile = $root_path."main/star
  require_once($root_path.'gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('common');
  
-if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
-	else $sTitleNr = ($HTTP_SESSION_VARS['sess_full_pid']);
+if($parent_admit) $sTitleNr= ($_SESSION['sess_full_en']);
+	else $sTitleNr = ($_SESSION['sess_full_pid']);
 
 # Title in the toolbar
  $smarty->assign('sToolbarTitle',"$page_title ($sTitleNr)");
@@ -38,7 +38,7 @@ if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
  $smarty->assign('pbHelp',"javascript:gethelp('notes_router.php','echo $notestype','".strtr($subtitle,' ','+')."','$mode','$rows')");
 
   # href for return button
- $smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
+ $smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
 
 # Start buffering extra javascript output
 ob_start();
@@ -96,8 +96,8 @@ if($parent_admit&&$is_discharged){
 if($parent_admit) $smarty->assign('LDCaseNr',$LDAdmitNr);
 	else $smarty->assign('LDCaseNr',$LDRegistrationNr);
 
-if($parent_admit) $smarty->assign('sEncNrPID',$HTTP_SESSION_VARS['sess_full_en']);
-	else $smarty->assign('sEncNrPID',$HTTP_SESSION_VARS['sess_full_pid']);
+if($parent_admit) $smarty->assign('sEncNrPID',$_SESSION['sess_full_en']);
+	else $smarty->assign('sEncNrPID',$_SESSION['sess_full_pid']);
 
 $smarty->assign('img_source',"<img $img_source>");
 
@@ -190,7 +190,7 @@ if($mode=='show'){
 
 		if($parent_admit && !$is_discharged && $thisfile!='show_diagnostics_result.php'){
 			$smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
-			$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
+			$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
  		}else{
 			if(file_exists('./gui_bridge/default/gui_person_createnew_'.$thisfile)) include('./gui_bridge/default/gui_person_createnew_'.$thisfile);
 		}

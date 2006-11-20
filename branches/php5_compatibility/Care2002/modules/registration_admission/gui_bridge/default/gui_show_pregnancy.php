@@ -8,7 +8,7 @@ if($rows){
 	$this_enc_preg=false;
 	if(!isset($show_preg_enc)||!$show_preg_enc){
 		if($parent_admit) {
-			$show_preg_enc=$HTTP_SESSION_VARS['sess_en'];
+			$show_preg_enc=$_SESSION['sess_en'];
 			$this_enc_preg=true;
 		}elseif($rows==1){
 			$show_preg_enc=$buffer;
@@ -112,13 +112,13 @@ if($rows){
 <?php
 }
 
-	if($parent_admit&&$edit&&($show_preg_enc==$HTTP_SESSION_VARS['sess_en']||$no_enc_preg)){
+	if($parent_admit&&$edit&&($show_preg_enc==$_SESSION['sess_en']||$no_enc_preg)){
 ?>
   <tr valign="top">
     <td colspan=2>&nbsp;<br>
 	<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
 	<a href="<?php 
-		echo$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='. strtr($target,' ','+').'&mode=new&allow_update='.$allow_update;
+		echo$thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='. strtr($target,' ','+').'&mode=new&allow_update='.$allow_update;
 		if($this_enc_preg) echo '&rec_nr='.$pregbuf[$show_preg_enc]['nr'];
 	 ?>"> 
 <?php 
@@ -159,7 +159,7 @@ if($rows){
   <tr bgcolor="#fefefe" valign="top">
     <td>
 <?php
-		if($parent_admit&&($v['encounter_nr']==$HTTP_SESSION_VARS['sess_en']))	echo '<img '.createComIcon($root_path,'info3.gif','0').'>';
+		if($parent_admit&&($v['encounter_nr']==$_SESSION['sess_en']))	echo '<img '.createComIcon($root_path,'info3.gif','0').'>';
 			else echo '&nbsp;';
 ?>
 	</td>

@@ -21,10 +21,10 @@ if(!isset($mode)){
 	if(!isset($obj)) $obj=new Prescription;
 	include_once($root_path.'include/inc_date_format_functions.php');
 	
-	if($HTTP_POST_VARS['prescribe_date']) $HTTP_POST_VARS['prescribe_date']=@formatDate2STD($HTTP_POST_VARS['prescribe_date'],$date_format);
-	else $HTTP_POST_VARS['prescribe_date']=date('Y-m-d');
+	if($_POST['prescribe_date']) $_POST['prescribe_date']=@formatDate2STD($_POST['prescribe_date'],$date_format);
+	else $_POST['prescribe_date']=date('Y-m-d');
 
-	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	$_POST['create_id']=$_SESSION['sess_user_name'];
 
 	//$db->debug=true;
 	# Check the important items
@@ -38,14 +38,14 @@ require('./include/init_show.php');
 
 if($parent_admit){
 	$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr
-		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." 
+		WHERE p.pid=".$_SESSION['sess_pid']." 
 			AND p.pid=e.pid 
-			AND e.encounter_nr=".$HTTP_SESSION_VARS['sess_en']." 
+			AND e.encounter_nr=".$_SESSION['sess_en']." 
 			AND e.encounter_nr=pr.encounter_nr 
 		ORDER BY pr.modify_time DESC";
 }else{
 	$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr
-		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr 
+		WHERE p.pid=".$_SESSION['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr 
 		ORDER BY pr.modify_time DESC";
 }
 
@@ -59,7 +59,7 @@ echo $sql;
 $subtitle=$LDPrescriptions;
 $notestype='prescription';
 
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

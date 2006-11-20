@@ -49,7 +49,7 @@ require($root_path.'include/inc_2level_reset.php');
 setcookie(ck_2level_sid.$sid,'');
 
 # reset the user origin
-$HTTP_SESSION_VARS['sess_user_origin']='';
+$_SESSION['sess_user_origin']='';
 
 require($root_path.'include/inc_passcheck_internchk.php');
 if ($pass=='check') 	

@@ -93,7 +93,7 @@ function popSearchWin(target,obj_val,obj_name){
    </tr>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDAppBy; ?></td>
-     <td><input type="text" name="application_by" size=50 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly></td>
+     <td><input type="text" name="application_by" size=50 maxlength=60 value="<?php echo $_SESSION['sess_user_name']; ?>" readonly></td>
    </tr>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDNotes; ?></td>
@@ -101,14 +101,14 @@ function popSearchWin(target,obj_val,obj_name){
          </td>
    </tr>
  </table>
-<input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
-<input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
-<input type="hidden" name="modify_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
-<input type="hidden" name="create_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
+<input type="hidden" name="encounter_nr" value="<?php echo $_SESSION['sess_en']; ?>">
+<input type="hidden" name="pid" value="<?php echo $_SESSION['sess_pid']; ?>">
+<input type="hidden" name="modify_id" value="<?php echo $_SESSION['sess_user_name']; ?>">
+<input type="hidden" name="create_id" value="<?php echo $_SESSION['sess_user_name']; ?>">
 <input type="hidden" name="create_time" value="null">
 <input type="hidden" name="mode" value="create">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
-<input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $HTTP_SESSION_VARS['sess_user_name']."\n"; ?>">
+<input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $_SESSION['sess_user_name']."\n"; ?>">
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>
 
 </form>

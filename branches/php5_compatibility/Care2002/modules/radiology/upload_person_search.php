@@ -26,7 +26,7 @@ require('include/inc_breakfile.php');
 
 $thisfile=basename(__FILE__);
 
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 if(empty($target)) $target='search';
 

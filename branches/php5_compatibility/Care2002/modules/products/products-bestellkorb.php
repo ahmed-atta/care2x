@@ -17,7 +17,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 /*if(!isset($dept)||!$dept)
 {
-	if(isset($HTTP_COOKIE_VARS['ck_thispc_dept'])&&!empty($HTTP_COOKIE_VARS['ck_thispc_dept'])) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
+	if(isset($_COOKIE['ck_thispc_dept'])&&!empty($_COOKIE['ck_thispc_dept'])) $dept=$_COOKIE['ck_thispc_dept'];
 	 else $dept='plop';//default is plop dept
 }*/
 
@@ -31,7 +31,7 @@ if($cat=='pharma'){
 	$title=$LDMedDepot;
 }
  
-$encbuf=$HTTP_SESSION_VARS['sess_user_name'];
+$encbuf=$_SESSION['sess_user_name'];
 
 //$db->debug=1;
 
@@ -88,7 +88,7 @@ if($mode!=''){
 									sent_datetime='".$content['sent_datetime']."',
 									ip_addr='".$content['ip_addr']."',
 									priority='".$content['priority']."',
-									modify_id= '".$HTTP_COOKIE_VARS[$local_user.$sid]."'
+									modify_id= '".$_COOKIE[$local_user.$sid]."'
 							   		WHERE order_nr='".$content['order_nr']."'
 									AND dept_nr='$dept_nr'";
 									

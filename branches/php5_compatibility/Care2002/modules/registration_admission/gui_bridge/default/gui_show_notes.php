@@ -2,22 +2,22 @@
 
 # Resolve href for return button
 
-if(isset($HTTP_SESSION_VARS['sess_file_return'])&&!empty($HTTP_SESSION_VARS['sess_file_return']))
-	$returnfile=$HTTP_SESSION_VARS['sess_file_return'];
+if(isset($_SESSION['sess_file_return'])&&!empty($_SESSION['sess_file_return']))
+	$returnfile=$_SESSION['sess_file_return'];
 	else $returnfile=$top_dir.'show_appointment.php';
 
 # Patch 2003-11-20 
 if($parent_admit){
-	$retbuf='&encounter_nr='.$HTTP_SESSION_VARS['sess_full_en'];
-	$sTitleNr =($HTTP_SESSION_VARS['sess_full_en']);
+	$retbuf='&encounter_nr='.$_SESSION['sess_full_en'];
+	$sTitleNr =($_SESSION['sess_full_en']);
 }else{
-	$retbuf='&pid='.$HTTP_SESSION_VARS['sess_pid'];
-	$sTitleNr =($HTTP_SESSION_VARS['sess_full_pid']);
+	$retbuf='&pid='.$_SESSION['sess_pid'];
+	$sTitleNr =($_SESSION['sess_full_pid']);
 }
 
 # Resolve href for close button
 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfilen = $root_path."main/startframe.php".URL_APPEND;
+if($_COOKIE["ck_login_logged".$sid]) $breakfilen = $root_path."main/startframe.php".URL_APPEND;
 	else $breakfile = $breakfile.URL_APPEND."&target=entry";
 
 # Start Smarty templating here
@@ -132,8 +132,8 @@ if($parent_admit&&$is_discharged){
 if($parent_admit) $smarty->assign('LDCaseNr',$LDAdmitNr);
 	else $smarty->assign('LDCaseNr',$LDRegistrationNr);
 
-if($parent_admit) $smarty->assign('sEncNrPID',$HTTP_SESSION_VARS['sess_full_en']);
-	else $smarty->assign('sEncNrPID',$HTTP_SESSION_VARS['sess_full_pid']);
+if($parent_admit) $smarty->assign('sEncNrPID',$_SESSION['sess_full_en']);
+	else $smarty->assign('sEncNrPID',$_SESSION['sess_full_pid']);
 
 $smarty->assign('img_source',"<img $img_source>");
 
@@ -325,20 +325,20 @@ function chkform(d) {
 	$smarty->assign('LDSendCopyTo',$LDSendCopyTo);
 	$smarty->assign('sSendCopyInput','<input type="text" name="send_to_name" size=50 maxlength=60>');
 
-	$smarty->assign('sAuthorInput','<input type="text" name="personell_name" size=50 maxlength=60 value="'.$HTTP_SESSION_VARS['sess_user_name'].'" readonly>');
+	$smarty->assign('sAuthorInput','<input type="text" name="personell_name" size=50 maxlength=60 value="'.$_SESSION['sess_user_name'].'" readonly>');
 
 
-$sTemp = '<input type="hidden" name="encounter_nr" value="'.$HTTP_SESSION_VARS['sess_en'].'">
-<input type="hidden" name="pid" value="'.$HTTP_SESSION_VARS['sess_pid'].'">
-<input type="hidden" name="modify_id" value="'.$HTTP_SESSION_VARS['sess_user_name'].'">
-<input type="hidden" name="create_id" value="'.$HTTP_SESSION_VARS['sess_user_name'].'">
+$sTemp = '<input type="hidden" name="encounter_nr" value="'.$_SESSION['sess_en'].'">
+<input type="hidden" name="pid" value="'.$_SESSION['sess_pid'].'">
+<input type="hidden" name="modify_id" value="'.$_SESSION['sess_user_name'].'">
+<input type="hidden" name="create_id" value="'.$_SESSION['sess_user_name'].'">
 <input type="hidden" name="create_time" value="null">
 <input type="hidden" name="mode" value="create">
 <input type="hidden" name="personell_nr">
 <input type="hidden" name="send_to_pid">
 <input type="hidden" name="type_nr" value="'.$type_nr.'">
 <input type="hidden" name="target" value="'.$target.'">
-<input type="hidden" name="history" value="Created: '.date('Y-m-d H:i:s').' : '.$HTTP_SESSION_VARS['sess_user_name']."\n".'">';
+<input type="hidden" name="history" value="Created: '.date('Y-m-d H:i:s').' : '.$_SESSION['sess_user_name']."\n".'">';
 
 	$smarty->assign('sHiddenInputs',$sTemp);
 
@@ -348,8 +348,8 @@ $sTemp = '<input type="hidden" name="encounter_nr" value="'.$HTTP_SESSION_VARS['
 
 $smarty->assign('sBackIcon','<img '.createComIcon($root_path,'l-arrowgrnlrg.gif','0','absmiddle').'>');
 
-if($parent_admit) $buf='&encounter_nr='.$HTTP_SESSION_VARS['sess_full_en'];
-	else $buf='&pid='.$HTTP_SESSION_VARS['sess_full_pid'];
+if($parent_admit) $buf='&encounter_nr='.$_SESSION['sess_full_en'];
+	else $buf='&pid='.$_SESSION['sess_full_pid'];
 
 $smarty->assign('sBackLink','<a href="'.$returnfile.URL_APPEND.$buf.'&target='.$target.'&mode=show&type_nr='.$type_nr.'">'.$LDBackToOptions.'</a>');
 
@@ -359,7 +359,7 @@ $smarty->assign('sBackLink','<a href="'.$returnfile.URL_APPEND.$buf.'&target='.$
 if($parent_admit&&(!$is_discharged||$type_nr==3||$type_nr==99)) {
 
 	$smarty->assign('sNewRecIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle').'>');
-	$smarty->assign('sNewRecLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&type_nr='.$type_nr.'">'.$LDEnterNewRecord.'</a>');
+	$smarty->assign('sNewRecLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new&type_nr='.$type_nr.'">'.$LDEnterNewRecord.'</a>');
 }
 
 // Buffer the options table
@@ -415,7 +415,7 @@ ob_start();
 								<img <?php echo createComIcon($root_path,'icon_acro.gif','0');?>>
 								</TD>
 								<TD vAlign=top >
-									<a href="<?php echo $root_path."modules/pdfmaker/emr_generic/report_all.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']; ?>" target=_blank>
+									<a href="<?php echo $root_path."modules/pdfmaker/emr_generic/report_all.php".URL_APPEND."&enc=".$_SESSION['sess_en']; ?>" target=_blank>
 <?php
 									echo $LDPrintPDFDocAllReport;
 ?>

@@ -123,8 +123,6 @@
 	*/
 	function outp($msg,$newline=true)
 	{
-	global $HTTP_SERVER_VARS;
-	
 		if (defined('ADODB_OUTP')) {
 			$fn = ADODB_OUTP;
 			$fn($msg,$newline);
@@ -133,7 +131,7 @@
 		
 		if ($newline) $msg .= "<br>\n";
 		
-		if (isset($HTTP_SERVER_VARS['HTTP_USER_AGENT'])) echo $msg;
+		if (isset($_SERVER['HTTP_USER_AGENT'])) echo $msg;
 		else echo strip_tags($msg);
 		flush();
 	}
@@ -439,8 +437,6 @@
 		}
 		// debug version of query
 		if ($this->debug) {
-		global $HTTP_SERVER_VARS;
-		
 			$ss = '';
 			if ($inputarr) {
 				foreach ($inputarr as $kk => $vv)  {
@@ -453,7 +449,7 @@
 			else $sqlTxt = $sql;
 			
 			// check if running from browser or command-line
-			$inBrowser = isset($HTTP_SERVER_VARS['HTTP_USER_AGENT']);
+			$inBrowser = isset($_SERVER['HTTP_USER_AGENT']);
 			
 			if ($inBrowser)
 				ADOConnection::outp( "<hr />\n($this->databaseType): ".htmlspecialchars($sqlTxt)." &nbsp; <code>$ss</code>\n<hr />\n",false);
@@ -1189,9 +1185,7 @@
 		// ok, set cached object found
 			$rs->connection = &$this; // Pablo suggestion
 			if ($this->debug){ 
-			global $HTTP_SERVER_VARS;
-        			
-				$inBrowser = isset($HTTP_SERVER_VARS['HTTP_USER_AGENT']);
+				$inBrowser = isset($_SERVER['HTTP_USER_AGENT']);
 				$ttl = $rs->timeCreated + $secs2cache - time();
 				$s = is_array($sql) ? $sql[0] : $sql;
 				if ($inBrowser) $s = '<i>'.htmlspecialchars($s).'</i>';

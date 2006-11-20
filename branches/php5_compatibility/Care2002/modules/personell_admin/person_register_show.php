@@ -18,17 +18,17 @@ $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 	
 $admissionfile='aufnahme_start.php'.URL_APPEND;
 
-if((!isset($pid)||!$pid)&&$HTPP_SESSION_VARS['sess_pid']) $pid=$HTPP_SESSION_VARS['sess_pid'];
+if((!isset($pid)||!$pid)&&$_SESSION['sess_pid']) $pid=$_SESSION['sess_pid'];
 
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_pid']=$pid;
-$HTTP_SESSION_VARS['sess_full_pid']=$pid;
-$HTTP_SESSION_VARS['sess_parent_mod']='registration';
+$_SESSION['sess_path_referer']=$top_dir.$thisfile;
+$_SESSION['sess_pid']=$pid;
+$_SESSION['sess_full_pid']=$pid;
+$_SESSION['sess_parent_mod']='registration';
 
 
 # Start Smarty templating here

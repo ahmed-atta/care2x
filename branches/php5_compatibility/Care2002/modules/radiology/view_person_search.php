@@ -72,7 +72,7 @@ if($mode=='search'&&!empty($searchkey)){
 
 $pop_only=false;
 
-switch($HTTP_SESSION_VARS['sess_dicom_viewer']){
+switch($_SESSION['sess_dicom_viewer']){
 	case 'raimjava':
 			$pop_only=true;
 			break;

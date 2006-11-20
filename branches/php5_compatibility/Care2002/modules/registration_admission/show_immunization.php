@@ -16,7 +16,7 @@ if(!isset($mode)){
 } elseif($mode=='create'||$mode=='update') {
 	//$db->debug=true;
 	
-	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	$_POST['create_id']=$_SESSION['sess_user_name'];
 	
 	include('./include/save_immunization.inc.php');
 }
@@ -25,7 +25,7 @@ require('./include/init_show.php');
 
 if($mode=='show'){
 	$sql="SELECT i.*, t.LD_var AS \"app_LD_var\", t.name AS app_type_name FROM care_encounter AS e, care_person AS p, care_encounter_immunization AS i, care_type_application AS t
-		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=i.encounter_nr  AND i.application_type_nr=t.nr
+		WHERE p.pid=".$_SESSION['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=i.encounter_nr  AND i.application_type_nr=t.nr
 		ORDER BY i.modify_time DESC";
 		
 	if($result=$db->Execute($sql)){
@@ -36,7 +36,7 @@ if($mode=='show'){
 }
 
 $subtitle=$LDImmunization;
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

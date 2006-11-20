@@ -23,7 +23,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 $thisfile=basename(__FILE__);
 $toggle=0;
 
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 	else $breakfile='aufnahme_pass.php'.URL_APPEND.'&target=entry';
 
 # Set value for the search mask
@@ -42,7 +42,7 @@ if(!isset($mode)) $mode='';
 
 # Initialize page�s control variables
 if($mode=='paginate'){
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	$searchkey=$_SESSION['sess_searchkey'];
 }else{
 	# Reset paginator variables
 	$pgx=0;
@@ -52,7 +52,7 @@ if($mode=='paginate'){
 }
 #Load and create paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($searchkey)){
 	
@@ -61,7 +61,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 	//$db->debug=true;
 
 	if($mode!='paginate'){
-		$HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
+		$_SESSION['sess_searchkey']=$searchkey;
 	}	
 		# convert * and ? to % and &
 		$searchkey=strtr($searchkey,'*?','%_');

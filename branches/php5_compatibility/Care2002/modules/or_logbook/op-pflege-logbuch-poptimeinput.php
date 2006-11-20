@@ -13,7 +13,7 @@ switch ($mode)
 		$file=fopen($filename,"w+");
 		if($file)
 		{
-			while(list($k,$v)=each($HTTP_POST_VARS))
+			while(list($k,$v)=each($_POST))
 			{
 				$pdata[$k]=$v;
 			}

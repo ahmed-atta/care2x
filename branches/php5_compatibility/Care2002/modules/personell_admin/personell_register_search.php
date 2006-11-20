@@ -20,7 +20,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 if(empty($target)) $target='search';
 
 
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 

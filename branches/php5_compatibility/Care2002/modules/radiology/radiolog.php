@@ -17,7 +17,7 @@ require($root_path.'include/inc_2level_reset.php');
 
 $thisfile=basename(__FILE__);
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
+$_SESSION['sess_path_referer']=$top_dir.$thisfile;
 
 # Start Smarty templating here
  /**

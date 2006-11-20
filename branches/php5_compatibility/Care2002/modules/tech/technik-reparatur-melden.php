@@ -15,8 +15,8 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $breakfile='technik.php'.URL_APPEND;
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+$returnfile=$_SESSION['sess_file_return'].URL_APPEND;
+$_SESSION['sess_file_return']=basename(__FILE__);
 
 //$db->debug=1;
 
@@ -44,25 +44,25 @@ $dbtable='care_tech_repair_done';
 							 )
 						VALUES
 						(
-							'".htmlspecialchars($HTTP_POST_VARS['dept'])."',
-							'".htmlspecialchars($HTTP_POST_VARS['job'])."',
-							'".htmlspecialchars($HTTP_POST_VARS['job_id'])."',
-							'".htmlspecialchars($HTTP_POST_VARS['reporter'])."',
-							'".htmlspecialchars($HTTP_POST_VARS['id'])."', 
-							'".$HTTP_POST_VARS['tdate']."', 
-							'".$HTTP_POST_VARS['ttime']."',
+							'".htmlspecialchars($_POST['dept'])."',
+							'".htmlspecialchars($_POST['job'])."',
+							'".htmlspecialchars($_POST['job_id'])."',
+							'".htmlspecialchars($_POST['reporter'])."',
+							'".htmlspecialchars($_POST['id'])."', 
+							'".$_POST['tdate']."', 
+							'".$_POST['ttime']."',
 							'".date('YmdHis')."',
 							0,
 							'".date('Ymd')."',
 							'pending',
-							'Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-							'".$HTTP_SESSION_VARS['sess_user_name']."',
+							'Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n',
+							'".$_SESSION['sess_user_name']."',
 							'".date('YmdHis')."'
 							)";
         $db->BeginTrans();
         $ok=$db->Execute($sql);
         if($ok && $db->CommitTrans()) {
-		    header("Location: technik-reparatur-empfang.php".URL_REDIRECT_APPEND."&dept=".$HTTP_POST_VARS['dept']."&reporter=".$HTTP_POST_VARS['reporter']."&tdate=".$HTTP_POST_VARS['tdate']."&ttime=".$HTTP_POST_VARS['ttime']);
+		    header("Location: technik-reparatur-empfang.php".URL_REDIRECT_APPEND."&dept=".$_POST['dept']."&reporter=".$_POST['reporter']."&tdate=".$_POST['tdate']."&ttime=".$_POST['ttime']);
 		    exit;
          } else {
 			$db->RollbackTrans();

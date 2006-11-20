@@ -28,7 +28,7 @@ $insurance_obj=new Insurance;
 
 $thisfile=basename(__FILE__);
 
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 	else $breakfile='aufnahme_pass.php'.URL_APPEND.'&target=entry';
 
 //$breakfile='aufnahme_pass.php'.URL_APPEND;
@@ -151,7 +151,7 @@ $dbtable='care_encounter';
 	include_once($root_path.'include/inc_date_format_functions.php');
         
 	/* Update History */
-	if(!$newdata) $encounter_obj->setHistorySeen($HTTP_SESSION_VARS['sess_user_name'],$encounter_nr);
+	if(!$newdata) $encounter_obj->setHistorySeen($_SESSION['sess_user_name'],$encounter_nr);
 	/* Get insurance firm name*/
 	$insurance_firm_name=$insurance_obj->getFirmName($insurance_firm_id);
 	/* Check whether config path exists, else use default path */			
@@ -162,12 +162,12 @@ $dbtable='care_encounter';
 require_once($root_path.'include/inc_patient_encounter_type.php');		 
 
 /* Save encounter nrs to session */
-$HTTP_SESSION_VARS['sess_pid']=$pid;
-$HTTP_SESSION_VARS['sess_en']=$encounter_nr;
-$HTTP_SESSION_VARS['sess_full_en']=$full_en;
-$HTTP_SESSION_VARS['sess_parent_mod']='admission';
-$HTTP_SESSION_VARS['sess_user_origin']='admission';
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_pid']=$pid;
+$_SESSION['sess_en']=$encounter_nr;
+$_SESSION['sess_full_en']=$full_en;
+$_SESSION['sess_parent_mod']='admission';
+$_SESSION['sess_user_origin']='admission';
+$_SESSION['sess_file_return']=$thisfile;
 
 /* Prepare the photo filename */
 require_once($root_path.'include/inc_photo_filename_resolve.php');
@@ -411,7 +411,7 @@ if(!$GLOBAL_CONFIG['patient_service_att_dr_hide'] && $sc_att_dr_class_nr){
 }
 
 $smarty->assign('LDAdmitBy',$LDAdmitBy);
-if (empty($encoder)) $encoder = $HTTP_COOKIE_VARS[$local_user.$sid];
+if (empty($encoder)) $encoder = $_COOKIE[$local_user.$sid];
 $smarty->assign('encoder',$encoder);
 
 # Buffer the options block

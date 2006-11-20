@@ -222,7 +222,7 @@ for($n=0;$n<sizeof($artikeln);$n++)
 			<form action="'.$thisfile.'" method="post" onSubmit="return checkform(this)">'.$LDListindex[4].'<br>
 			<input type="text" name="sender" size=30 maxlength=40 value="';
 		
-		echo $HTTP_COOKIE_VARS[$local_user.$sid]; 
+		echo $_COOKIE[$local_user.$sid]; 
 		
 		echo '"> 
 			 &nbsp;'.$LDNormal.'<input type="radio" name="prior" value="normal" ';

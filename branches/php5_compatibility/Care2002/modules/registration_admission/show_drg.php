@@ -24,16 +24,16 @@ require('./include/init_show.php');
 
 if($parent_admit){
 	# Get the DRG records data of this encounter
-	$drg_obj=&$obj->encDRGList($HTTP_SESSION_VARS['sess_en']);
+	$drg_obj=&$obj->encDRGList($_SESSION['sess_en']);
 }else{
 	# Get all DRG records  of this person
-	$drg_obj=&$obj->pidDRGList($HTTP_SESSION_VARS['sess_pid']);
+	$drg_obj=&$obj->pidDRGList($_SESSION['sess_pid']);
 }
 $rows=$obj->LastRecordCount();
 //echo $obj->getLastQuery();
 
 $subtitle=$LDDRG;
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

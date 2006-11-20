@@ -30,21 +30,21 @@ if(!isset($mode)){
 	$saved=FALSE;
 
 	# Prepare additional info saving
-	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-	$HTTP_POST_VARS['modify_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
-	if(empty($HTTP_POST_VARS['delivery_date'])) $HTTP_POST_VARS['delivery_date']=date('Y-m-d');
-		else $HTTP_POST_VARS['delivery_date']=@formatDate2STD($HTTP_POST_VARS['delivery_date'],$date_format);
-	if(empty($HTTP_POST_VARS['delivery_time'])) $HTTP_POST_VARS['delivery_time']=date('H:i:s');
-		else $HTTP_POST_VARS['delivery_time']=@convertTimeToStandard($HTTP_POST_VARS['delivery_time']);
+	$_POST['modify_id']=$_SESSION['sess_user_name'];
+	$_POST['modify_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
+	if(empty($_POST['delivery_date'])) $_POST['delivery_date']=date('Y-m-d');
+		else $_POST['delivery_date']=@formatDate2STD($_POST['delivery_date'],$date_format);
+	if(empty($_POST['delivery_time'])) $_POST['delivery_time']=date('H:i:s');
+		else $_POST['delivery_time']=@convertTimeToStandard($_POST['delivery_time']);
 
-	//if(empty($HTTP_POST_VARS['blood_loss'])) $HTTP_POST_VARS['blood_loss_unit']=0;
+	//if(empty($_POST['blood_loss'])) $_POST['blood_loss_unit']=0;
 		
 
 	if($allow_update){
-		$obj->setWhereCondition('nr='.$HTTP_POST_VARS['rec_nr']);
-		$obj->setDataArray($HTTP_POST_VARS);
+		$obj->setWhereCondition('nr='.$_POST['rec_nr']);
+		$obj->setDataArray($_POST);
 
-		if($obj->updateDataFromInternalArray($HTTP_POST_VARS['rec_nr'])) {
+		if($obj->updateDataFromInternalArray($_POST['rec_nr'])) {
 			$saved=true;
 		}else{
 			echo $obj->getLastQuery()."<br>$LDDbNoUpdate";
@@ -52,12 +52,12 @@ if(!isset($mode)){
 	}else{
 		# Deactivate the old record first if exists
 		if(isset($rec_nr)&&$rec_nr){
-			$obj->deactivatePregnancy($HTTP_POST_VARS['rec_nr']);
+			$obj->deactivatePregnancy($_POST['rec_nr']);
 		}
-		$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-		$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$HTTP_POST_VARS['create_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
-		$obj->setDataArray($HTTP_POST_VARS);
+		$_POST['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+		$_POST['create_id']=$_SESSION['sess_user_name'];
+		$_POST['create_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
+		$obj->setDataArray($_POST);
 
 		if($obj->insertDataFromInternalArray()) {
 			$saved=true;
@@ -66,7 +66,7 @@ if(!isset($mode)){
 		}
 	}
 	if($saved){
-		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
+		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&allow_update=1&pid=".$_SESSION['sess_pid']);
 		exit;
 	}
 }
@@ -75,15 +75,15 @@ require('./include/init_show.php');
 
 if($parent_admit){
 	# Get the pregnancy data of this encounter
-	$pregs=&$obj->Pregnancies($HTTP_SESSION_VARS['sess_en'],'_ENC');
+	$pregs=&$obj->Pregnancies($_SESSION['sess_en'],'_ENC');
 }else{
 	# Get all pregnancies  of this person
-	$pregs=&$obj->Pregnancies($HTTP_SESSION_VARS['sess_pid'],'_REG');
+	$pregs=&$obj->Pregnancies($_SESSION['sess_pid'],'_REG');
 }
 $rows=$obj->LastRecordCount();
 
 $subtitle=$LDPregnancies;
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

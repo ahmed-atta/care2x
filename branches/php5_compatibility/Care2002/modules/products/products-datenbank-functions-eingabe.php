@@ -169,7 +169,7 @@ $sTemp='';
   <input type="hidden" name="userck" value="<?php echo $userck?>">
   <input type="hidden" name="picfilename" value="<?php echo  $picfilename ?>">
   <input type="hidden" name="mode" value="<?php if($saveok) echo "update"; else echo "save"; ?>">
-  <input type="hidden" name="encoder" value="<?php echo  str_replace(" ","+",$HTTP_COOKIES_VARS[$local_user.$sid])?>">
+  <input type="hidden" name="encoder" value="<?php echo  str_replace(" ","+",$_COOKIES[$local_user.$sid])?>">
   <input type="hidden" name="dstamp" value="<?php echo  str_replace("_",".",date(Y_m_d))?>">
   <input type="hidden" name="tstamp" value="<?php echo  str_replace("_",".",date(H_i))?>">
   <input type="hidden" name="lockflag" value="<?php echo  $lockflag?>">

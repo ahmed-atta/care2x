@@ -28,7 +28,7 @@ if($result=$db->Execute($sql)){
 </head>
 <body onBlur="window.close()"><font face=arial>
 
- <font size=3 color="#000099"><b><?php echo $HTTP_SESSION_VARS['sess_full_en']; ?></b></font><br>
+ <font size=3 color="#000099"><b><?php echo $_SESSION['sess_full_en']; ?></b></font><br>
  <font size=2 color="#000099"><b><?php echo @formatDate2Local($imm['date'],$date_format); ?></b></font>
 
 

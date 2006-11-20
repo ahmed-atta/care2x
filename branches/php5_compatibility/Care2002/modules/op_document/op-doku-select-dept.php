@@ -25,8 +25,8 @@ switch($retpath)
 	case "op": $breakfile='op-doku.php'.URL_APPEND; break;
 }
 */
-if (!empty($HTTP_SESSION_VARS['sess_path_referer'])){
-	$breakfile=$HTTP_SESSION_VARS['sess_path_referer'];
+if (!empty($_SESSION['sess_path_referer'])){
+	$breakfile=$_SESSION['sess_path_referer'];
 } else {
 	/* default startpage */
 	$breakfile = 'doctors.php';

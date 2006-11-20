@@ -15,7 +15,7 @@ $fileforward="edv-datenbank.php";
 $thisfile="edv-datenbank-pass.php";
 $breakfile="edv.php";
 
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]&&$HTTP_COOKIE_VARS['ck_login_userid'.$sid])
+if($_COOKIE['ck_login_logged'.$sid]&&$_COOKIE['ck_login_userid'.$sid])
 {
  header("location: passcheck-intern.php?sid=$sid&lang=$lang&allowedarea=$allowedarea&fileforward=$fileforward&retfilepath=$thisfile");
  exit;

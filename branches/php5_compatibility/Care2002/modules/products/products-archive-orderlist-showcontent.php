@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 /*if(!isset($dept)||!$dept)
 {
-	if(isset($HTTP_COOKIE_VARS['ck_thispc_dept'])&&!empty($HTTP_COOKIE_VARS['ck_thispc_dept'])) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
+	if(isset($_COOKIE['ck_thispc_dept'])&&!empty($_COOKIE['ck_thispc_dept'])) $dept=$_COOKIE['ck_thispc_dept'];
 	 else $dept='plop';//default is plop dept
 }
 */

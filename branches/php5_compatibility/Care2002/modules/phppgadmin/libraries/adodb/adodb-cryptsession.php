@@ -18,15 +18,14 @@ wrapper library.
  Example
  =======
  
- 	GLOBAL $HTTP_SESSION_VARS;
 	include('adodb.inc.php');
 	#---------------------------------#
 	include('adodb-cryptsession.php'); 
 	#---------------------------------#
 	session_start();
 	session_register('AVAR');
-	$HTTP_SESSION_VARS['AVAR'] += 1;
-	print "<p>\$HTTP_SESSION_VARS['AVAR']={$HTTP_SESSION_VARS['AVAR']}</p>";
+	$_SESSION['AVAR'] += 1;
+	print "<p>\$_SESSION['AVAR']={$_SESSION['AVAR']}</p>";
 
  
  Installation
@@ -235,12 +234,10 @@ session_set_save_handler(
 /*  TEST SCRIPT -- UNCOMMENT */
 /*
 if (0) {
-GLOBAL $HTTP_SESSION_VARS;
-
 	session_start();
 	session_register('AVAR');
-	$HTTP_SESSION_VARS['AVAR'] += 1;
-	print "<p>\$HTTP_SESSION_VARS['AVAR']={$HTTP_SESSION_VARS['AVAR']}</p>";
+	$_SESSION['AVAR'] += 1;
+	print "<p>\$_SESSION['AVAR']={$_SESSION['AVAR']}</p>";
 }
 */
 ?>

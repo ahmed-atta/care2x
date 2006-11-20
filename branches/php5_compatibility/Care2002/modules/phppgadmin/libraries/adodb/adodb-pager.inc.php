@@ -55,15 +55,15 @@ class ADODB_Pager {
 	// $db	adodb connection object
 	// $sql	sql statement
 	// $id	optional id to identify which pager, 
-	//		if you have multiple on 1 page. 
+	//		if you have $_ on 1 page. 
 	//		$id should be only be [a-z0-9]*
 	//
 	function ADODB_Pager(&$db,$sql,$id = 'adodb', $showPageLinks = false)
 	{
-	global $HTTP_SERVER_VARS,$PHP_SELF,$HTTP_SESSION_VARS,$HTTP_GET_VARS;
+	global $PHP_SELF;
 	
 		$curr_page = $id.'_curr_page';
-		if (empty($PHP_SELF)) $PHP_SELF = $HTTP_SERVER_VARS['PHP_SELF'];
+		if (empty($PHP_SELF)) $PHP_SELF = $_SERVER['PHP_SELF'];
 		
 		$this->sql = $sql;
 		$this->id = $id;
@@ -72,12 +72,12 @@ class ADODB_Pager {
 		
 		$next_page = $id.'_next_page';	
 		
-		if (isset($HTTP_GET_VARS[$next_page])) {
-			$HTTP_SESSION_VARS[$curr_page] = $HTTP_GET_VARS[$next_page];
+		if (isset($_GET[$next_page])) {
+			$_SESSION[$curr_page] = $_GET[$next_page];
 		}
-		if (empty($HTTP_SESSION_VARS[$curr_page])) $HTTP_SESSION_VARS[$curr_page] = 1; ## at first page
+		if (empty($_SESSION[$curr_page])) $_SESSION[$curr_page] = 1; ## at first page
 		
-		$this->curr_page = $HTTP_SESSION_VARS[$curr_page];
+		$this->curr_page = $_SESSION[$curr_page];
 		
 	}
 	

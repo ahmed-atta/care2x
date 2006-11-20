@@ -23,10 +23,10 @@ require($root_path.'include/inc_front_chain_lang.php');
 $thisfile=basename(__FILE__);
 $default_filebreak=$root_path.'main/startframe.php'.URL_APPEND;
 
-if(empty($HTTP_SESSION_VARS['sess_path_referer']) || !file_exists($root_path.$HTTP_SESSION_VARS['sess_path_referer'])) {
+if(empty($_SESSION['sess_path_referer']) || !file_exists($root_path.$_SESSION['sess_path_referer'])) {
     $breakfile=$default_filebreak;
 } else {
-    $breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
+    $breakfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND;
 }
 
 if(!session_is_registered('sess_pid')) session_register('sess_pid');
@@ -86,7 +86,7 @@ $smarty->assign('sSearchLink','<img '.createComIcon($root_path,'varrow.gif','0')
 $smarty->assign('sArchiveLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="patient_register_archive.php'.URL_APPEND.'&newdata=1&from=entry">'.$LDArchive.'</a>');
 
 $sCancel="<a href=";
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $sCancel.=$breakfile;
+if($_COOKIE['ck_login_logged'.$sid]) $sCancel.=$breakfile;
 	else $sCancel.='aufnahme_pass.php';
 $sCancel.=URL_APPEND.'><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt="'.$LDCancelClose.'"></a>';
 

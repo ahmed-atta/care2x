@@ -23,7 +23,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 # Added intrusion trap
-if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
+if (!$internok&&!$_COOKIE['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
 
 //$db->debug=true;
 
@@ -52,7 +52,7 @@ if($mode=='search'||$mode=='paginate'){
 
 		# Initialize page�s control variables
 		if($mode=='paginate'){
-			$sk=$HTTP_SESSION_VARS['sess_searchkey'];
+			$sk=$_SESSION['sess_searchkey'];
 			//$searchkey='USE_SESSION_SEARCHKEY';
 			//$mode='search';
 		}else{
@@ -64,7 +64,7 @@ if($mode=='search'||$mode=='paginate'){
 		}
 		# Paginator object
 		require_once($root_path.'include/care_api_classes/class_paginator.php');
-		$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+		$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 		
 		$GLOBAL_CONFIG=array();
 		require_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -85,7 +85,7 @@ if($mode=='search'||$mode=='paginate'){
 				else $sk=$pname;
 			else $sk=$gebdatum;
 			# Save searchkey to sessin for subsequent paginations
-			$HTTP_SESSION_VARS['sess_searchkey']=$sk;
+			$_SESSION['sess_searchkey']=$sk;
 		}
 		# Convert other wildcards
 		$sk=strtr($sk,'*?','%_');
@@ -175,7 +175,7 @@ if($mode=='search'||$mode=='paginate'){
 							}
 							
 							# Append update item names to history
-							$sql.= ",history = ".$enc_obj->ConcatHistory("Updated ".$updateitem." ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+							$sql.= ",history = ".$enc_obj->ConcatHistory("Updated ".$updateitem." ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
 
 							$sql.="	WHERE nr=".$item['nr']; 
 											
@@ -251,8 +251,8 @@ if($mode=='search'||$mode=='paginate'){
 										'e=".$encoder."&d=".date('Y-m-d')."&t=".date('H:i:s')."',
 										'".date('Y-m-d')."',
 										'".date('H:i:s')."',
-										'Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										'".$HTTP_SESSION_VARS['sess_user_name']."',
+										'Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n',
+										'".$_SESSION['sess_user_name']."',
 										'".date('YmdHis')."'
 										)";
 
@@ -321,8 +321,8 @@ if($mode=='search'||$mode=='paginate'){
 
 if(!session_is_registered('sess_comdat')) session_register('sess_comdat');
 # Set the user origin
-$HTTP_SESSION_VARS['sess_user_origin']='op_room';
-$HTTP_SESSION_VARS['sess_comdat']="&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&thisday=$pyear-$pmonth-$pday&op_nr=$op_nr&pyear=$pyear&pmonth=$pmonth&pday=$pday";
+$_SESSION['sess_user_origin']='op_room';
+$_SESSION['sess_comdat']="&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&thisday=$pyear-$pmonth-$pday&op_nr=$op_nr&pyear=$pyear&pmonth=$pmonth&pday=$pday";
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -542,7 +542,7 @@ function getinfo(m)
 	getinfowin=window.open(urlholder,"getinfo","width=800,height=500,menubar=no,resizable=yes,scrollbars=yes");
 }
 function openfolder(pid,pdata){
-	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-station-patientdaten.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&dept_nr=<?php echo "$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=".$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]; ?>";
+	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-station-patientdaten.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&dept_nr=<?php echo "$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=".$_COOKIE['ck_op_pflegelogbuch_user'.$sid]; ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	}
 
@@ -768,7 +768,7 @@ if(($mode=='search'||$mode=='paginate')&&!$datafound){
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="internok" value="<?php echo $internok; ?>">
-<input type="hidden" name="encoder" value="<?php echo $HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]; ?>">
+<input type="hidden" name="encoder" value="<?php echo $_COOKIE['ck_op_pflegelogbuch_user'.$sid]; ?>">
 <input type="hidden" name="op_nr" value="<?php echo $op_nr; ?>">
 <input type="hidden" name="thisday"  value="<?php echo $thisday; ?>">
 <input type="hidden" name="op_date"  value="<?php echo $thisday; ?>">
