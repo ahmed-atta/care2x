@@ -49,22 +49,22 @@ if($mode=='save'){
 	# Prepare parameter values and serialize
 	while(list($x,$v)=each($parameters))
 	{
-		if(isset($HTTP_POST_VARS[$x])&&!empty($HTTP_POST_VARS[$x])){
-		 $nbuf[$x]=$HTTP_POST_VARS[$x];
+		if(isset($_POST[$x])&&!empty($_POST[$x])){
+		 $nbuf[$x]=$_POST[$x];
 		}
 	}
 	$dbuf['group_id']=$parameterselect;
 	$dbuf['serial_value']=serialize($nbuf);
 	$dbuf['job_id']=$job_id;
 	$dbuf['encounter_nr']=$encounter_nr;
-	//$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	//$dbuf['modify_id']=$_SESSION['sess_user_name'];
 	if($allow_update){
 		
-		$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$dbuf['modify_id']=$_SESSION['sess_user_name'];
 		$dbuf['modify_time']=date('YmdHis');
 
-		# Recheck the date, ! bug pat	$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];ch
-		if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
+		# Recheck the date, ! bug pat	$dbuf['modify_id']=$_SESSION['sess_user_name'];ch
+		if($_POST['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
 	
 		$lab_obj->setDataArray($dbuf);
 		# set update pointer
@@ -79,15 +79,15 @@ if($mode=='save'){
 		$lab_obj->hideResultIfExists($encounter_nr,$job_id,$parameterselect);
 		# Convert date to standard format
 		if(isset($std_date)){
-			if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
-				else 	$dbuf['test_date']=$HTTP_POST_VARS['std_date'];
+			if($_POST['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
+				else 	$dbuf['test_date']=$_POST['std_date'];
 		}else{
-			$dbuf['test_date']=formatDate2STD($HTTP_POST_VARS['test_date'],$date_format);
+			$dbuf['test_date']=formatDate2STD($_POST['test_date'],$date_format);
 		}
 		$dbuf['test_time']=date('H:i:s');
 		
-		$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-		$dbuf['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+		$dbuf['create_id']=$_SESSION['sess_user_name'];
 		$dbuf['create_time']=date('YmdHis');
 		# Insert new job record
 		$lab_obj->setDataArray($dbuf);

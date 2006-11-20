@@ -37,23 +37,23 @@ include_once($root_path.'include/inc_date_format_functions.php');
 if($mode=='save'){
 	# Save the nr
 	
-/*	if(!$HTTP_POST_VARS['msr_unit']) $HTTP_POST_VARS['msr_unit']='NULL';
-	if(!$HTTP_POST_VARS['median']) $HTTP_POST_VARS['median']='NULL';
-	if(!$HTTP_POST_VARS['lo_bound']) $HTTP_POST_VARS['lo_bound']='NULL';
-	if(!$HTTP_POST_VARS['hi_bound']) $HTTP_POST_VARS['hi_bound']='NULL';
-	if(!$HTTP_POST_VARS['lo_critical']) $HTTP_POST_VARS['lo_critical']='NULL';
-	if(!$HTTP_POST_VARS['hi_critical']) $HTTP_POST_VARS['hi_critical']='NULL';
-	if(!$HTTP_POST_VARS['lo_toxic']) $HTTP_POST_VARS['lo_toxic']='NULL';
-	if(!$HTTP_POST_VARS['hi_toxic']) $HTTP_POST_VARS['hi_toxic']='NULL';
+/*	if(!$_POST['msr_unit']) $_POST['msr_unit']='NULL';
+	if(!$_POST['median']) $_POST['median']='NULL';
+	if(!$_POST['lo_bound']) $_POST['lo_bound']='NULL';
+	if(!$_POST['hi_bound']) $_POST['hi_bound']='NULL';
+	if(!$_POST['lo_critical']) $_POST['lo_critical']='NULL';
+	if(!$_POST['hi_critical']) $_POST['hi_critical']='NULL';
+	if(!$_POST['lo_toxic']) $_POST['lo_toxic']='NULL';
+	if(!$_POST['hi_toxic']) $_POST['hi_toxic']='NULL';
 */	
-	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-	$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+	$_POST['modify_id']=$_SESSION['sess_user_name'];
+	$_POST['history']=$lab_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
 	# Set to use the test params
 	$lab_obj->useTestParams();
 	# Point to the data array
-	$lab_obj->setDataArray($HTTP_POST_VARS);
+	$lab_obj->setDataArray($_POST);
 	
-	if($lab_obj->updateDataFromInternalArray($HTTP_POST_VARS['nr'])){
+	if($lab_obj->updateDataFromInternalArray($_POST['nr'])){
 ?>
 	
 <script language="JavaScript">

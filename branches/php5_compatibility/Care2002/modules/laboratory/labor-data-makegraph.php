@@ -30,7 +30,7 @@ if($user_origin=='lab'||$user_origin=='lab_mgmt'){
 	//$encounter_nr=$pn;
 }
 
-if(!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if(!$_COOKIE[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 if(!$encounter_nr) header("location:".$root_path."modules/laboratory/labor_data_patient_such.php?sid=$sid&lang=$lang");
 require_once($root_path.'include/inc_config_color.php');
@@ -188,7 +188,7 @@ echo'
 	
 
 # Prepare the graph values
-$tparam=explode('~',$HTTP_POST_VARS['params']);
+$tparam=explode('~',$_POST['params']);
 	   
 # Display the values
 $tracker=0;
