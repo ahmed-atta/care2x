@@ -16,7 +16,7 @@ $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
 //$db->debug=true;
-if(!$encoder) $encoder=$HTTP_COOKIE_VARS[$local_user.$sid];
+if(!$encoder) $encoder=$_COOKIE[$local_user.$sid];
 
 $breakfile="nursing-station.php".URL_APPEND."&edit=1&station=$station&ward_nr=$ward_nr";
 $thisfile=basename(__FILE__);

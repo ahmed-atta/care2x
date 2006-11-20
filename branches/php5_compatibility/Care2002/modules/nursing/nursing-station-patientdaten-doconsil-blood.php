@@ -106,8 +106,8 @@ $enc_obj=new Encounter;
 										   '".$ffp_plasma."','".$transfusion_dev."','".$match_sample."',
 										   '".formatDate2Std($transfusion_date,$date_format)."','".htmlspecialchars($diagnosis)."','".htmlspecialchars($notes)."','".formatDate2Std($send_date,$date_format)."',
 										   '".$doctor."','".$phone_nr."','pending',
-										   'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										   '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   'Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n',
+										   '".$_SESSION['sess_user_name']."',
 										   '".date('YmdHis')."'
 										   )";
 										   
@@ -155,8 +155,8 @@ $enc_obj=new Encounter;
 										   doctor='".$doctor."', 
 										   phone_nr='".$phone_nr."', 
 										   status='".$status."', 
-										   history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										   modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+										   history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										   modify_id='".$_COOKIE[$local_user.$sid]."',
 										   modify_time='".date('YmdHis')."'
                                            WHERE batch_nr = '".$batch_nr."'";
 									  							

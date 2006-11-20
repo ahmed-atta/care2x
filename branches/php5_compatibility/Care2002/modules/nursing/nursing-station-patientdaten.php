@@ -12,16 +12,16 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 */
 //$db->debug=true;
 if(isset($op_shortcut)&&$op_shortcut){
-	$HTTP_COOKIE_VARS['ck_pflege_user'.$sid]=$op_shortcut;
+	$_COOKIE['ck_pflege_user'.$sid]=$op_shortcut;
 	setcookie('ck_pflege_user'.$sid,$op_shortcut,0,'/');
 	$edit=1;
-}elseif($HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]){
-	setcookie('ck_pflege_user'.$sid,$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid],0,'/');
+}elseif($_COOKIE['ck_op_pflegelogbuch_user'.$sid]){
+	setcookie('ck_pflege_user'.$sid,$_COOKIE['ck_op_pflegelogbuch_user'.$sid],0,'/');
 	$edit=1;
-}elseif($HTTP_COOKIE_VARS['aufnahme_user'.$sid]){
-	setcookie('ck_pflege_user'.$sid,$HTTP_COOKIE_VARS['aufnahme_user'.$sid],0,'/');
+}elseif($_COOKIE['aufnahme_user'.$sid]){
+	setcookie('ck_pflege_user'.$sid,$_COOKIE['aufnahme_user'.$sid],0,'/');
 	$edit=1;
-}elseif(!$HTTP_COOKIE_VARS['ck_pflege_user'.$sid]){
+}elseif(!$_COOKIE['ck_pflege_user'.$sid]){
 	if($edit) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 }
 /* Load the visual signalling defined constants */
@@ -33,7 +33,7 @@ $z = SIGNAL_COLOR_LEVEL_ZERO;
 /* Retrieve the SIGNAL_COLOR_LEVEL_FULL = for convenience purposes */
 $f = SIGNAL_COLOR_LEVEL_FULL;
 
-$HTTP_SESSION_VARS['sess_user_origin']='nursing';
+$_SESSION['sess_user_origin']='nursing';
 
 /* Create department object and load all medical depts */
 require_once($root_path.'include/care_api_classes/class_department.php');
@@ -159,7 +159,7 @@ if($dblink_ok)
 
 					    if($event_result=$enc_obj->Transact($sql))
 					    {
-					       $event=&$HTTP_POST_VARS;
+					       $event=&$_POST;
 
 						   $mode='changes_saved';
 						    //echo "ok insertd $sql";
@@ -391,8 +391,8 @@ function openDRGComposite(){
 			h=650;';
 ?>
 	
-	drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=".$pn."&edit=$edit&ln=$name_last&fn=$name_first&bd=$date_birth&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $encounter_nr."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
-	window.drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
+	drgcomp_<?php echo $_SESSION['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=".$pn."&edit=$edit&ln=$name_last&fn=$name_first&bd=$date_birth&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $encounter_nr."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+	window.drgcomp_<?php echo $_SESSION['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
 } 
 
 //-->

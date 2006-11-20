@@ -12,33 +12,28 @@ require($root_path.'include/inc_environment_global.php');
 */
 function prepareTestParameters($param_type)
 {
-    global $HTTP_POST_VARS;
-	
 	$paramlist="";
 							   
-	while(list($x,$v)=each($HTTP_POST_VARS))
+	while(list($x,$v)=each($_POST))
 	{
-		if(substr_count($x,$param_type) && ($HTTP_POST_VARS[$x]==1))
+		if(substr_count($x,$param_type) && ($_POST[$x]==1))
 		{
 			if($paramlist=="") $paramlist=$x."=1";
 				else $paramlist.="&".$x."=1";
 		}
 	}
-    reset($HTTP_POST_VARS);		
+    reset($_POST);		
 	return $paramlist;
 }
 
 								
 function prepareSampleDate()
 {
-    global $HTTP_POST_VARS;
-	
-								
 								/* Prepare the weekday */
 								for($i=0;$i<7;$i++)
 								{
 								   $tday="day_".$i;
-								   if($HTTP_POST_VARS[$tday])
+								   if($_POST[$tday])
 								   {
 									  $sday=$i;
 									  break;
@@ -48,7 +43,7 @@ function prepareSampleDate()
 								for($i=1;$i<13;$i++)
 								{
 								   $tmon="month_".$i;
-								   if($HTTP_POST_VARS[$tmon])
+								   if($_POST[$tmon])
 								   {
 									  $smon=$i;
 									  break;
@@ -170,8 +165,8 @@ define('_BATCH_NR_INIT_',30000000);
 										'".date('Y-m-d')."',
 										'".date('Y-m-d')."',
 										'".$status."',  
-										'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										'".$HTTP_SESSION_VARS['sess_user_name']."',
+										'Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n',
+										'".$_SESSION['sess_user_name']."',
 										'".date('YmdHis')."'
 										)";
 
@@ -209,8 +204,8 @@ define('_BATCH_NR_INIT_',30000000);
 										  diagnosis_note='".htmlspecialchars($diagnosis_note)."',
 										  immune_supp='".$immune_supp."',
 										  status='".$status."',
-										  history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										  modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+										  history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										  modify_id='".$_COOKIE[$local_user.$sid]."',
 										  modify_time='".date('YmdHis')."'
 										  WHERE batch_nr='".$batch_nr."'";
 

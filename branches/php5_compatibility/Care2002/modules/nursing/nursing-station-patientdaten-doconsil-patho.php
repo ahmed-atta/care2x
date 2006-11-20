@@ -99,8 +99,8 @@ $enc_obj=new Encounter;
 										   '".addslashes($gyn_iud)."', '".addslashes($gyn_hormone_therapy)."', 
 										   '".addslashes($doctor_sign)."', '".formatDate2Std($op_date,$date_format)."', '".date('Y-m-d H:i:s')."',
 										   '".$status."',
-										   'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										   '".$HTTP_SESSION_VARS['sess_user_name']."', '".date('YmdHis')."'
+										   'Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n',
+										   '".$_SESSION['sess_user_name']."', '".date('YmdHis')."'
 										   )";
 
 
@@ -148,8 +148,8 @@ $enc_obj=new Encounter;
 										  doctor_sign = '".htmlspecialchars($doctor_sign)."', 
 										  op_date = '".formatDate2STD($op_date,$date_format)."',
 										  status = '".$status."', 
-										  history = ".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										  modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										  history = ".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										  modify_id = '".$_SESSION['sess_user_name']."',
 										  modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
 										  							

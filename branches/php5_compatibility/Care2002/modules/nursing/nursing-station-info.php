@@ -52,8 +52,8 @@ $rows=0;
 		
 		case 'update':
 		{
-			$HTTP_POST_VARS['nr']=$HTTP_POST_VARS['ward_nr'];
-			if($ward_obj->updateWard($ward_nr,$HTTP_POST_VARS)){
+			$_POST['nr']=$_POST['ward_nr'];
+			if($ward_obj->updateWard($ward_nr,$_POST)){
 				header("location:nursing-station-info.php".URL_REDIRECT_APPEND."&edit=0&mode=show&ward_id=$station&ward_nr=$ward_nr");
 				exit;
 			}else{

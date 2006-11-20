@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if($edit&&!$_COOKIE[$local_user.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
 $thisfile='nursing-station-patientdaten-diagnosis.php';
@@ -146,7 +146,7 @@ function select_this(formtag){
 	}
 	
 function getinfo(patientID){
-	urlholder="nursing-station.php?<?php echo "sid=$sid&lang=$lang" ?>&route=validroute&patient=" + patientID + "&user=<?php echo $HTTP_COOKIE_VARS[$local_user.$sid].'"' ?>;
+	urlholder="nursing-station.php?<?php echo "sid=$sid&lang=$lang" ?>&route=validroute&patient=" + patientID + "&user=<?php echo $_COOKIE[$local_user.$sid].'"' ?>;
 	patientwin=window.open(urlholder,patientID,"width=600,height=400,menubar=no,resizable=yes,scrollbars=yes");
 	}
 function sethilite(d){
