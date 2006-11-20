@@ -27,7 +27,7 @@ if($n==$n2)
 }
 else $n_error=1;
 
-if(!isset($userid)) $userid=$HTTP_SESSION_VARS['sess_user_name'];
+if(!isset($userid)) $userid=$_SESSION['sess_user_name'];
 
 # Start Smarty templating here
  /**
