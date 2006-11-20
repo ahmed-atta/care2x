@@ -19,7 +19,7 @@ if (!session_is_registered('loggedin') && $loggedin)
 if (!function_exists('is_uploaded_file'))
 	include ('is_uploaded_file.php');
 
-if ($HTTP_SERVER_VARS['REQUEST_METHOD'] != 'POST')
+if ($_SERVER['REQUEST_METHOD'] != 'POST')
 	go_back_index($attach_array, $tmpdir, $php_session, $sort, $sortdir, $lang);
 else
 {
