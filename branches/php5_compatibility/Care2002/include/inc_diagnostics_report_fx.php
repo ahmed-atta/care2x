@@ -10,7 +10,7 @@
 */
 function signalNewDiagnosticsReportEvent($report_date='', $script_name='labor_test_findings_printpop.php')
 {
-   global $db, $local_user, $sid, $batch_nr, $pn, $HTTP_SESSION_VARS, $target,$dept_nr,$formtitle,
+   global $db, $local_user, $sid, $batch_nr, $pn, $target,$dept_nr,$formtitle,
    				$subtarget, $LDDbNoRead, $LDDbNoSave, $date_format, $entry_date,$root_path;
    
 	# Check if the formatDate2Local function is loaded 
@@ -50,8 +50,8 @@ function signalNewDiagnosticsReportEvent($report_date='', $script_name='labor_te
 						report_date='".$report_date."',
 						report_time='".date('H:i:s')."',
 						status='pending',
-						history=".$core->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+						history=".$core->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n").",
+						modify_id='".$_SESSION['sess_user_name']."',
 						modify_time='".date('YmdHis')."'
 						WHERE item_nr='".$report['item_nr']."'";
 		}
@@ -81,8 +81,8 @@ function signalNewDiagnosticsReportEvent($report_date='', $script_name='labor_te
 						'$pn',
 						'".$script_name."?entry_date=".$entry_date."&target=".$target."&subtarget=".$subtarget."&dept_nr=".$dept_nr."&batch_nr=".$batch_nr."&pn=".$pn."',
 						'pending',
-						'Initial report: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n\r',
-						'".$HTTP_SESSION_VARS['sess_user_name']."',
+						'Initial report: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n\r',
+						'".$_SESSION['sess_user_name']."',
 						'".date('YmdHis')."'
 					)";
 																						

@@ -65,8 +65,8 @@ if($dblink_ok)
 		if(isset($checkintern)&&$checkintern)
 		{
 			$dec_login = new Crypt_HCEMD5($key_login,'');
-			//$keyword = $dec_login->DecodeMimeSelfRand($HTTP_COOKIE_VARS['ck_login_pw'.$sid]);
-			$keyword = $dec_login->DecodeMimeSelfRand($HTTP_SESSION_VARS['sess_login_pw']);
+			//$keyword = $dec_login->DecodeMimeSelfRand($_COOKIE['ck_login_pw'.$sid]);
+			$keyword = $dec_login->DecodeMimeSelfRand($_SESSION['sess_login_pw']);
     	}else{
 			$checkintern=false;
 		}
@@ -97,7 +97,7 @@ if($dblink_ok)
 					//setcookie('ck_2level_sid'.$sid,$ciphersid);
 					//setcookie($userck.$sid,$zeile['name']);	
 					//echo $fileforward;
-					$HTTP_SESSION_VARS['sess_user_name']=$zeile['name'];
+					$_SESSION['sess_user_name']=$zeile['name'];
 										
 					header('Location:'.strtr($fileforward,' ','+').'&checkintern='.$checkintern);
 					exit;					

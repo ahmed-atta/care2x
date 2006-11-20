@@ -31,8 +31,8 @@ function getLang($chk_file)
    if(!isset($lang)||empty($lang))
    {
 	  $ck_lang_buffer='ck_lang'.$sid;
-      if(!isset($HTTP_COOKIE_VARS[$ck_lang_buffer])||empty($HTTP_COOKIE_VARS[$ck_lang_buffer])) include($root_path.'chklang.php');
-         else $lang=$HTTP_COOKIE_VARS[$ck_lang_buffer];
+      if(!isset($_COOKIE[$ck_lang_buffer])||empty($_COOKIE[$ck_lang_buffer])) include($root_path.'chklang.php');
+         else $lang=$_COOKIE[$ck_lang_buffer];
    }
    
    if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_'.$chk_file)) return 1;
@@ -58,7 +58,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 	
    include($root_path.'include/inc_init_crypt.php'); # initialize crypt 
 	
-   $clear_ck_sid = $dec_hcemd5->DecodeMimeSelfRand($HTTP_COOKIE_VARS[$ck_sid_buffer]);
+   $clear_ck_sid = $dec_hcemd5->DecodeMimeSelfRand($_COOKIE[$ck_sid_buffer]);
 
 	$tnow=date('His');
    // echo $tnow."<p>";
@@ -79,48 +79,48 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 		
 			if(!$TIME_OUT_INACTIVE){
     				//echo $tnow."<br>";
-					//echo $HTTP_SESSION_VARS['sess_tos']."<br>";
-					//echo ($tnow-$HTTP_SESSION_VARS['sess_tos'])."<br>";
+					//echo $_SESSION['sess_tos']."<br>";
+					//echo ($tnow-$_SESSION['sess_tos'])."<br>";
 	  			# Check if session is still valid 
-	  			if(isset($HTTP_SESSION_VARS['sess_tos'])||session_is_registered('sess_tos')){
+	  			if(isset($_SESSION['sess_tos'])||session_is_registered('sess_tos')){
 					# Check if time out value is positive or not zero
 					# current time minus start time
-					if(($tnow - $HTTP_SESSION_VARS['sess_tos']) >= $TIME_OUT_TIME) $time_out=TRUE;
-						else $HTTP_SESSION_VARS['sess_tos']=$tnow;
+					if(($tnow - $_SESSION['sess_tos']) >= $TIME_OUT_TIME) $time_out=TRUE;
+						else $_SESSION['sess_tos']=$tnow;
 				}else{
 					$time_out=TRUE;
 				}
 			
-    			//if(!isset($HTTP_SESSION_VARS['sess_tos'])||!session_is_registered('sess_tos')||!$HTTP_SESSION_VARS['sess_tos']||$time_out){
-    			if($time_out||!$HTTP_SESSION_VARS['sess_tos']){
+    			//if(!isset($_SESSION['sess_tos'])||!session_is_registered('sess_tos')||!$_SESSION['sess_tos']||$time_out){
+    			if($time_out||!$_SESSION['sess_tos']){
     				//echo $tnow."<br>";
-					//echo $HTTP_SESSION_VARS['sess_tos']."<br>";
-					//echo ($tnow-$HTTP_SESSION_VARS['sess_tos'])."<br>";
+					//echo $_SESSION['sess_tos']."<br>";
+					//echo ($tnow-$_SESSION['sess_tos'])."<br>";
 	  				//echo "session expired<br>";
     				//echo $TIME_OUT_TIME."<br>";
-					//echo $HTTP_SESSION_VARS['sess_user_id'];
+					//echo $_SESSION['sess_user_id'];
 					# Show session time out warning and exit the script to stop the module
 					include($root_path."include/inc_session_timeout_warning.php");
 					exit;
 				}else{
 					# Reset the time-out start time
-					$HTTP_SESSION_VARS['sess_tos']=$tnow;
+					$_SESSION['sess_tos']=$tnow;
 					//echo $tnow;
 				}
 			}
 		}
 	  # Decrypt the second level cookie sid and compare to sid
        $dec_2level = new Crypt_HCEMD5($key_2level, '');
-       $clear_2sid = $dec_2level->DecodeMimeSelfRand($HTTP_COOKIE_VARS[('ck_2level_sid'.$sid)]);
+       $clear_2sid = $dec_2level->DecodeMimeSelfRand($_COOKIE[('ck_2level_sid'.$sid)]);
    
-       if(!$sid||($sid!=$clear_ck_sid)||($sid!=$clear_2sid)||!isset($HTTP_COOKIE_VARS[$local_user.$sid])||empty($HTTP_COOKIE_VARS[$local_user.$sid])) $no_valid=1;
+       if(!$sid||($sid!=$clear_ck_sid)||($sid!=$clear_2sid)||!isset($_COOKIE[$local_user.$sid])||empty($_COOKIE[$local_user.$sid])) $no_valid=1;
       
 	# if(!$sid||($sid!=$clear_ck_sid)||($sid!=$clear_2sid)) $no_valid=1; 
    }elseif (!$sid||($sid!=$clear_ck_sid)){
    		$no_valid=1;
 	}else{
 		# Reset the time-out start time
-		$HTTP_SESSION_VARS['sess_tos']=$tnow;
+		$_SESSION['sess_tos']=$tnow;
 	}
 		
 
