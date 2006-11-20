@@ -352,7 +352,7 @@ class Charts extends NursingNotes {
 		$this->data_array=$data;
 		$this->coretable=$this->tb_presc_notes;
 		$this->ref_array=$this->fld_presc_notes;
-		//$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		//$this->data_array['modify_id']=$_SESSION['sess_user_name'];
 		$this->data_array['create_id']=$_SESSION['sess_user_name'];
 		$this->data_array['create_time']=date('YmdHis');
 		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";

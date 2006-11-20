@@ -275,7 +275,7 @@ class Insurance extends Core {
 		$this->_useInsurance();
 		$this->data_array=$data;
 		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
-		//$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		//$this->data_array['modify_id']=$_SESSION['sess_user_name'];
 		$this->data_array['create_id']=$_SESSION['sess_user_name'];
 		$this->data_array['create_time']=date('YmdHis');
 		return $this->insertDataFromInternalArray();

@@ -285,7 +285,7 @@ class GuiInputPerson {
 					$_POST['blood_group']=trim($_POST['blood_group']);
 					$_POST['status']='normal';
 					$_POST['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
-					//$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+					//$_POST['modify_id']=$_SESSION['sess_user_name'];
 					$_POST_VARS['create_id']=$_SESSION['sess_user_name'];
 					$_POST_VARS['create_time']=date('YmdHis');
 

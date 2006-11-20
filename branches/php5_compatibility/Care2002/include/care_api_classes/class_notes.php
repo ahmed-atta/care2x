@@ -193,7 +193,7 @@ class Notes extends Core {
 		if(empty($this->data_array['date'])) $this->data_array['date']=date('Y-m-d');
 		if(empty($this->data_array['time'])) $this->data_array['time']=date('H:i:s');
 		$this->data_array['type_nr']=$type_nr;
-		//$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		//$this->data_array['modify_id']=$_SESSION['sess_user_name'];
 		$this->data_array['create_id']=$_SESSION['sess_user_name'];
 		$this->data_array['create_time']=date('YmdHis');
 		$this->data_array['history']="Create: ".date('Y-m-d H-i-s')." ".$_SESSION['sess_user_name']."\n\r";	

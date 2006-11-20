@@ -1690,9 +1690,9 @@ class Encounter extends Notes {
 		if(!$enr||empty($data)) return FALSE;
 		/*
 		if($dbtype=='mysql'){
-			$data.=",history=CONCAT(history,'\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'), ";
+			$data.=",history=CONCAT(history,'\n$act ".date('Y-m- H:i:s')." ".$_SESSION['sess_user_name']."'), ";
 		}else{
-			$data.=",history=(history || '\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'), ";
+			$data.=",history=(history || '\n$act ".date('Y-m- H:i:s')." ".$_SESSION['sess_user_name']."'), ";
 		}
 		*/
 		$data.=",history=".$this->ConcatHistory("\n$act ".date('Y-m- H:i:s')." ".$_SESSION['sess_user_name']).", ";
@@ -1938,9 +1938,9 @@ class Encounter extends Notes {
 									status='discharged',";
         /*
         if($dbtype=='mysql'){
-			$this->sql.=" history=CONCAT(history,'\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),";
+			$this->sql.=" history=CONCAT(history,'\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."'),";
 		}else{
-			$this->sql.=" history= history || '\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."' ,";
+			$this->sql.=" history= history || '\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."' ,";
 		}
         */
             $this->sql.= "history =".$this->ConcatHistory("Update (discharged): ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n").",";
