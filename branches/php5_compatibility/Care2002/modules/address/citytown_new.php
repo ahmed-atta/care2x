@@ -37,18 +37,18 @@ if(!isset($mode)){
 			#
 			# Validate important data
 			#
-			$HTTP_POST_VARS['name']=trim($HTTP_POST_VARS['name']);
-			if(!empty($HTTP_POST_VARS['name'])){
+			$_POST['name']=trim($_POST['name']);
+			if(!empty($_POST['name'])){
 				#
 				# Check if address exists
 				#
-				if($address_obj->CityTownExists($HTTP_POST_VARS['name'],$HTTP_POST_VARS['iso_country_id'])){
+				if($address_obj->CityTownExists($_POST['name'],$_POST['iso_country_id'])){
 					#
 					# Do notification
 					#
 					$mode='citytown_exists';
 				}else{
-					if($address_obj->saveCityTownInfoFromArray($HTTP_POST_VARS)){
+					if($address_obj->saveCityTownInfoFromArray($_POST)){
 						#
 						# Get the last insert ID
 						#
