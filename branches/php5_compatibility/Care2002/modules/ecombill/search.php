@@ -29,7 +29,7 @@ if(!isset($mode)) $mode='';
 
 # Initialize page´s control variables
 if($mode=='paginate'){
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	$searchkey=$_SESSION['sess_searchkey'];
 	
 	# Check the sort item
 	if($oitem=='encounter_nr') $oprep='enc'; 
@@ -49,7 +49,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 		# Convert * wildcards
 		$suchwort=trim($searchkey);
 		$suchwort=strtr($suchwort,'*?','%_');
-		$HTTP_SESSION_VARS['sess_searchkey']=$suchwort;
+		$_SESSION['sess_searchkey']=$suchwort;
 	}
 
 	# Data to append to url
@@ -57,7 +57,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 
 	# Paginator object
 	include_once($root_path.'include/care_api_classes/class_paginator.php');
-	$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+	$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -246,7 +246,7 @@ if($mode=='search'||$mode=='paginate'){
                         echo "</td>";	
 						
 						// Temporarily set to edit-for-all-user mode
-					    //if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
+					    //if($_COOKIE[$local_user.$sid]) echo '
 					   echo '
 						<td><font face=arial size=2>&nbsp;
 							<a href="patientbill.php'.URL_APPEND.'&patnum='.$zeile['encounter_nr'].'&update=1&mode='.$mode.'&full_en='.$full_en.'">
