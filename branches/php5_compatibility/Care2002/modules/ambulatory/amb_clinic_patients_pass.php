@@ -24,12 +24,12 @@ $lognote=$LDAppointments.'ok';
 
 $thisfile=basename(__FILE__);
 # Set the break (return) file
-switch($HTTP_SESSION_VARS['sess_user_origin']){
+switch($_SESSION['sess_user_origin']){
 	case 'amb': $breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND; break;
 	default: $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 }
 
-$HTTP_SESSION_VARS['sess_parent_mod']='';
+$_SESSION['sess_parent_mod']='';
 
 $userck='ck_pflege_user';
 
