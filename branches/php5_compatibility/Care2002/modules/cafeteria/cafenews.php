@@ -25,12 +25,12 @@ $title=$LDCafeNews;
 if(!session_is_registered('sess_file_editor')) session_register('sess_file_editor');
 if(!session_is_registered('sess_file_reader')) session_register('sess_file_reader');
 
-$HTTP_SESSION_VARS['sess_file_break']=basename(__FILE__);
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
-$HTTP_SESSION_VARS['sess_file_editor']='cafenews-edit-select.php';
-$HTTP_SESSION_VARS['sess_file_reader']='cafenews-read.php';
-$HTTP_SESSION_VARS['sess_dept_nr']=$dept_nr; 
-$HTTP_SESSION_VARS['sess_title']=$title;
+$_SESSION['sess_file_break']=basename(__FILE__);
+$_SESSION['sess_file_return']=basename(__FILE__);
+$_SESSION['sess_file_editor']='cafenews-edit-select.php';
+$_SESSION['sess_file_reader']='cafenews-read.php';
+$_SESSION['sess_dept_nr']=$dept_nr; 
+$_SESSION['sess_title']=$title;
 
 require_once($root_path.'include/inc_cafe_get_menu.php');
 
