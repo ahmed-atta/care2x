@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 $lang_tables=array('departments.php');
 define('LANG_FILE','doctors.php');
 
-switch($HTTP_SESSION_VARS['sess_user_origin'])
+switch($_SESSION['sess_user_origin'])
 {
 	case 'personell_admin':
 		$local_user='aufnahme_user';
@@ -27,8 +27,8 @@ switch($HTTP_SESSION_VARS['sess_user_origin'])
 		
 	default:
 		$local_user='ck_op_dienstplan_user';
-		if (!empty($HTTP_SESSION_VARS['sess_path_referer'])){
-			$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
+		if (!empty($_SESSION['sess_path_referer'])){
+			$breakfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND;
 		} else {
 			/* default startpage */
 			$breakfile = $root_path.'op-doku.php'.URL_APPEND;

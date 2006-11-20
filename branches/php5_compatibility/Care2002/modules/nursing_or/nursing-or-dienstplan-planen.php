@@ -23,7 +23,7 @@ if(!isset($dept_nr)||!$dept_nr){
 
 $thisfile=basename(__FILE__);
 $breakfile="nursing-or-dienstplan.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath";
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
@@ -76,11 +76,11 @@ if($dblink_ok)
 					$ref_buffer['role_nr']=14; // 14 = oncall nurse (role person)
 					$ref_buffer['year']=$pyear;
 					$ref_buffer['month']=$pmonth;
-					$ref_buffer['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+					$ref_buffer['modify_id']=$_SESSION['sess_user_name'];
 					
 					if($dpoc_nr=$pers_obj->NOCDutyplanExists($dept_nr,$pyear,$pmonth)){
 						//echo $dpoc_nr;
-						$ref_buffer['history']=$pers_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+						$ref_buffer['history']=$pers_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n");
 						// Point to the internal data array
 						$pers_obj->setDataArray($ref_buffer);
 															
@@ -94,8 +94,8 @@ if($dblink_ok)
 					} // else create new entry
 					else
 					{
-						$ref_buffer['history']="Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-						$ref_buffer['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+						$ref_buffer['history']="Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n";
+						$ref_buffer['create_id']=$_SESSION['sess_user_name'];
 						$ref_buffer['create_time']='NULL';
 						// Point to the internal data array
 						$pers_obj->setDataArray($ref_buffer);
