@@ -107,10 +107,10 @@ if($maxpic){
 		
 		$data=array('encounter_nr'=>$patnum,
 									'upload_date'=>date('Y-m-d'),
-									'history'=>"Upload ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n",
+									'history'=>"Upload ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n",
 									'modify_id'=>'',
 									'modify_time'=>0,
-									'create_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+									'create_id'=>$_SESSION['sess_user_name'],
 									'create_time'=>date('YmdHis'));
 		
 		for ($i=0;$i<$maxpic;$i++)
