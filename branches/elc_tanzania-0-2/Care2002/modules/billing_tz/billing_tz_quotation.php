@@ -15,9 +15,9 @@ require_once($root_path.'include/care_api_classes/class_tz_billing.php');
 $enc_obj=new Encounter;
 $bill_obj = new Bill;
 
-$debug = TRUE;
-($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-  		
+  define('LANG_FILE','billing.php');
+  require($root_path.'include/inc_front_chain_lang.php');
   require ("gui/gui_billing_tz_quotation.php");
+
 
 ?>

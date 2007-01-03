@@ -1,5 +1,17 @@
 /* Original js code taken from the phpemPower authored by Biju Gopinath (http://www.bijugopinath.com/phpempower/)
 *  permission for modification and use for Care2x granted
+
+INCLUDE THIS FILE IN PHP THIS WAY:
+
+    echo '<script language="JavaScript">';
+		require($root_path.'include/inc_checkdate_lang.php'); 
+    echo '</script>';
+    echo '<script language="javascript" src="'.$root_path.'js/setdatetime.js"></script>';
+    echo '<script language="javascript" src="'.$root_path.'js/checkdate.js"></script>';
+    echo '<script language="javascript" src="'.$root_path.'js/dtpick_care2x.js"></script>';
+
+
+
 */
 var weekend = [0,6];
 var weekendColor = "#e0e0e0";
@@ -24,6 +36,7 @@ Calendar.DOMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 Calendar.lDOMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 function Calendar(p_item, p_WinCal, p_month, p_year, p_format) {
+
 	if ((p_month == null) && (p_year == null))	return;
 
 	if (p_WinCal == null)
@@ -36,7 +49,9 @@ function Calendar(p_item, p_WinCal, p_month, p_year, p_format) {
 		this.gMonth = null;
 		this.gYearly = true;
 	} else {
+
 		this.gMonthName = Calendar.get_month(p_month);
+			
 		this.gMonth = new Number(p_month);
 		this.gYearly = false;
 	}
@@ -48,14 +63,16 @@ function Calendar(p_item, p_WinCal, p_month, p_year, p_format) {
 	this.gTextColor = "black";
 	this.gHeaderColor = "black";
 	this.gReturnItem = p_item;
+	
 }
-
 Calendar.get_month = Calendar_get_month;
+
 Calendar.get_daysofmonth = Calendar_get_daysofmonth;
 Calendar.calc_month_year = Calendar_calc_month_year;
 Calendar.print = Calendar_print;
 
 function Calendar_get_month(monthNo) {
+				
 	return Calendar.Months[monthNo];
 }
 
@@ -516,6 +533,7 @@ Calendar.prototype.format_data = function(p_day) {
 
 function Build(p_item, p_month, p_year, p_format) {
 	var p_WinCal = ggWinCal;
+
 	gCal = new Calendar(p_item, p_WinCal, p_month, p_year, p_format);
 
 	// Customize your Calendar here..

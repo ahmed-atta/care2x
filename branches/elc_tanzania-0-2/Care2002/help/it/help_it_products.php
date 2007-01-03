@@ -71,7 +71,7 @@ Come fare a: rimuovere un articolo dal catalogo?</b>
 <ul>       	
  	<b>1: </b>Premere il bottone <img <?php echo createComIcon('../','delete2.gif') ?>> dell'articolo.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="how2") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: ordinare <?php if($x2=="pharma") echo "prodotti farmaceutici"; else echo "prodotto dal deposito medicinali"; ?>?
@@ -160,7 +160,7 @@ Desidero creare un nuovo ordine. Che devo fare?</b>
 <ul>       	
  Per chiudere selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="head") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: ordinare <?php if($x2=="pharma") echo "prodotti farmaceutici"; 
@@ -181,7 +181,7 @@ operatoria.<p>
 <ul>       	
  Per chiudere selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="catalog") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: aggiungere un articolo all'ordine?
@@ -223,7 +223,7 @@ Come fare a: rimuovere un articolo dal catalogo?</b>
 <ul>       	
  	<b>1: </b>Premere il bottone <img <?php echo createComIcon('../','delete2.gif') ?>> dell'articolo.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="orderlist") : ?>
 	<?php if($x1=="0") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
@@ -279,8 +279,8 @@ L'ordine è completo: che faccio ora?</b>
 <ul>       	
  Per annullare l'invio dell'ordine, selezionare il link "<span style="background-color:yellow" > << Torna alla modifica lista </span>".
 </ul>
-	<?php endif ?>
-<?php endif ?>
+	<?php endif;?>
+<?php endif;?>
 <?php if($src=="final") : ?>
 	<?php if($x1=="1") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -310,8 +310,8 @@ Come fare a: send the final order list?</b>
 <ul>       	
  Per annullare l'invio dell'ordine, selezionare "<span style="background-color:yellow" > << Torna alla modifica lista </span>".
 </ul>
-	<?php endif ?>
-<?php endif ?>
+	<?php endif;?>
+<?php endif;?>
 <!-- ++++++++++++++++++++++++++++++++++ archive +++++++++++++++++++++++++++++++++++++++++++ -->
 <?php if($src=="arch") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
@@ -338,7 +338,7 @@ Come fare a: send the final order list?</b>
 <ul>       	
 Per terminare la ricerca e chiudere, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if($src=="archshow") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Desidero vedere più informazioni sull'articolo. Che devo fare?</b>
@@ -367,7 +367,7 @@ Che devo fare per vedere di nuovo l'elenco degli ordini archiviati?</b>
 <b>3: </b>Premere il bottone <input type="button" value="Ricerca"> per trovare l'articolo.<br>
  	<b>4: </b>Se la ricerca identifica uno o più ordini, apparirà un elenco.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 <?php if($src=="db") : ?>
 	<?php if($x1=="") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -389,7 +389,7 @@ Ho finito di inserire le informazioni che avevo. Come fare a salvarle?</b>
 <ul>       	
  	<b>1: </b>Premere il bottone <input type="button" value="Salva">.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: inserire un nuovo prodotto in banca dati?</b>
@@ -409,6 +409,6 @@ Desidero modificare il prodotto attualmente visualizzato: come fare?</b>
  	<b>3: </b>Modificare i dati.<br>
  	<b>4: </b>Premere il bottone <input type="button" value="Salva"> per salvare i nuovi dati.<br>
 </ul>
-	<?php endif ?>	
-<?php endif ?>	
+	<?php endif;?>	
+<?php endif;?>	
 </form>

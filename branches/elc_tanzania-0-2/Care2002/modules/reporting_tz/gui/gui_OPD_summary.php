@@ -9,19 +9,19 @@ echo '<head>
 echo '<html><body>';
 ?>
 <DIV align="center">
-	<h1>OPD Total Summary for <?php echo date('F Y',$start);?></h1>
-	<p>Creation time: <?php echo date("F j, Y, g:i a");?></p>
+	<h1><?php echo $LDOPDTotalSummary; ?><?php echo date('F Y',$start);?></h1>
+	<p><?php echo $LDCreationTime; ?><?php echo date("F j, Y, g:i a");?></p>
 </DIV>
                           <table width="500" border="1" cellspacing="0" cellpadding="0" align="center" >
                             <tr>
-                              <td widtd="220" >OPD Visits  </td>
+                              <td widtd="220" ><?php echo $LDOPDVisits; ?></td>
                               <td widtd="32" >&lt; 5 </td>
                               <td widtd="32" >&gt; 5 </td>
-                              <td colspan="2">Sex (male/female) </td>
-                              <td widtd="64" >Total</td>
+                              <td colspan="2"><?php echo $LDsex; ?></td>
+                              <td widtd="64" ><?php echo $LDtotal; ?></td>
                             </tr>
                             <tr>
-                              <td><b>New Patients</b> </td>
+                              <td><b><?php echo $LDNewPatients; ?></b> </td>
                               <td><?php echo $arr_ret['NewRegistration']['underage'];?></td>
                               <td><?php echo $arr_ret['NewRegistration']['adult'];?></td>
                               <td><?php echo $arr_ret['NewRegistration']['male'];?></td>
@@ -29,7 +29,7 @@ echo '<html><body>';
                               <td><?php echo $arr_ret['NewRegistration']['total'];?></td>
                             </tr>
                             <tr>
-                              <td><b>New Cases(diagnosis)</b></td>
+                              <td><b><?php echo $LDNewCases; ?></b></td>
                               <td><?php echo $arr_ret['return']['underage'];?></td>
                               <td><?php echo $arr_ret['return']['adult'];?></td>
                               <td width="69"><?php echo $arr_ret['return']['male'];?></td>
@@ -37,7 +37,7 @@ echo '<html><body>';
                               <td><?php echo $arr_ret['return']['total'];?></td>                            
                             </tr>
                             <tr>
-                              <td><b>Views for the same diseases:</b> </td>
+                              <td><b><?php echo $LDViewsforthesamedisease; ?></b> </td>
                               <td><?php echo $arr_ret['revisit']['underage'];?></td>
                               <td><?php echo $arr_ret['revisit']['adult'];?></td>
                               <td><?php echo $arr_ret['revisit']['male'];?></td>
@@ -45,7 +45,7 @@ echo '<html><body>';
                               <td><?php echo $arr_ret['revisit']['total'];?></td>
                             </tr>							
                             <tr>
-                              <td><b>Total</b></td>
+                              <td><b><?php echo $LDtotal; ?></b></td>
                               <td><b><?php echo $arr_ret['Total']['underage'];?></b></td>
                               <td><b><?php echo $arr_ret['Total']['adult'];?></b></td>
                               <td><b><?php echo $arr_ret['Total']['male'];?></b></td>
@@ -60,7 +60,7 @@ echo '<html><body>';
                               <td>&nbsp;</td>
                             </tr>
                             <tr>
-                              <td><b>Total Pedriatics: </b></td>
+                              <td><b><?php echo $LDTotalPediatrics; ?></b></td>
                               <td><?php echo $arr_ret['Total_Pedriatics']['underage'];?></td>
                               <td>&nbsp;</td>
                               <td colspan="2">&nbsp;</td>
@@ -77,7 +77,7 @@ exit();
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
- <TITLE> Reporting Module </TITLE>
+ <TITLE><?php echo $LDReportingModule; ?></TITLE>
  <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
  <meta name="Author" content="Robert Meggle">
  <meta name="Generator" content="various: Quanta, AceHTML 4 Freeware, NuSphere, PHP Coder">
@@ -139,10 +139,10 @@ function popPic(pid,nm){
 			 <table cellspacing="0"  class="titlebar" border=0>
  <tr valign=top  class="titlebar" >
   <td width="202" bgcolor="#99ccff" >
-    &nbsp;&nbsp;<font color="#330066">Reporting:: OPD Summary </font></td>
+    &nbsp;&nbsp;<font color="#330066"><?php echo $LDReportingOPDSummary; ?></font></td>
   <td width="408" align=right bgcolor="#99ccff">
    <a href="javascript: history.back();"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a>
-   <a href="javascript:gethelp('submenu1.php','Pharmacy Databank')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
+   <a href="javascript:gethelp('reporting_overview.php','Reporting :: Overviw')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
    <a href="<?php echo $root_path;?>modules/reporting_tz/reporting_main_menu.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  
   </td>
  </tr>
@@ -156,14 +156,14 @@ function popPic(pid,nm){
 						  <br><br><br>
                           <table width="500" border="1" cellspacing="0" cellpadding="0" align="center" bgcolor=#ffffdd>
                             <tr>
-                              <td widtd="220" bgcolor="#ffffaa">OPD Visits  </td>
+                              <td widtd="220" bgcolor="#ffffaa"><?php echo $LDOPDVisits; ?>O</td>
                               <td widtd="32" bgcolor="#ffffaa">&lt; 5 </td>
                               <td widtd="32" bgcolor="#ffffaa">&gt; 5 </td>
-                              <td colspan="2" bgcolor="#ffffaa">Sex (male/female) </td>
-                              <td widtd="64" bgcolor="#ffffaa">Total</td>
+                              <td colspan="2" bgcolor="#ffffaa"><?php echo $LDsex; ?></td>
+                              <td widtd="64" bgcolor="#ffffaa"><?php echo $LDtotal; ?></td>
                             </tr>
                             <tr>
-                              <td><b>New Patients</b> </td>
+                              <td><b><?php echo $LDNewPatients; ?></b> </td>
                               <td><?php echo $arr_ret['NewRegistration']['underage'];?></td>
                               <td><?php echo $arr_ret['NewRegistration']['adult'];?></td>
                               <td><?php echo $arr_ret['NewRegistration']['male'];?></td>
@@ -171,7 +171,7 @@ function popPic(pid,nm){
                               <td><?php echo $arr_ret['NewRegistration']['total'];?></td>
                             </tr>
                             <tr>
-                              <td><b>New Cases(diagnosis)</b></td>
+                              <td><b><?php echo $LDNewCases; ?></b></td>
                               <td><?php echo $arr_ret['return']['underage'];?></td>
                               <td><?php echo $arr_ret['return']['adult'];?></td>
                               <td width="69"><?php echo $arr_ret['return']['male'];?></td>
@@ -179,7 +179,7 @@ function popPic(pid,nm){
                               <td><?php echo $arr_ret['return']['total'];?></td>                            
                             </tr>
                              <tr>
-                              <td bgcolor="#ffffaa"><b>Views for the same diseases:</b> </td>
+                              <td bgcolor="#ffffaa"><b><?php echo $LDViewsforthesamedisease; ?></b> </td>
                               <td><?php echo $arr_ret['revisit']['underage'];?></td>
                               <td><?php echo $arr_ret['revisit']['adult'];?></td>
                               <td><?php echo $arr_ret['revisit']['male'];?></td>
@@ -187,7 +187,7 @@ function popPic(pid,nm){
                               <td><?php echo $arr_ret['revisit']['total'];?></td>
                             </tr>							
                             <tr>
-                              <td bgcolor="#ffffaa"><b>Total</b></td>
+                              <td bgcolor="#ffffaa"><b><?php echo $LDtotal; ?></b></td>
                               <td><b><?php echo $arr_ret['Total']['underage'];?></b></td>
                               <td><b><?php echo $arr_ret['Total']['adult'];?></b></td>
                               <td><b><?php echo $arr_ret['Total']['male'];?></b></td>
@@ -202,7 +202,7 @@ function popPic(pid,nm){
                               <td>&nbsp;</td>
                             </tr>
                             <tr>
-                              <td bgcolor="#ffffaa"><b>Total Pedriatics: </b></td>
+                              <td bgcolor="#ffffaa"><b><?php echo $LDTotalPediatrics; ?></b></td>
                               <td><?php echo $arr_ret['Total_Pedriatics']['underage'];?></td>
                               <td>&nbsp;</td>
                               <td colspan="2">&nbsp;</td>

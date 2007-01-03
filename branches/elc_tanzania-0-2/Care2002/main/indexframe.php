@@ -14,10 +14,10 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','indexframe.php');
 define(NO_CHAIN,1);
 
-# Set here the window title
-$wintitle='Menu - Care2x';
-
 require_once($root_path.'include/inc_front_chain_lang.php');
+
+# Set here the window title
+$wintitle=$LDTitle;
 
 /**
 * We check again the language variable lang. If table file not available use default (lang = "en")

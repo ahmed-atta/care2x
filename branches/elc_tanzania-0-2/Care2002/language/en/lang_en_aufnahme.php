@@ -3,10 +3,11 @@ $LDAdmission='Admission';
 $LDAdmitDate='Admission date';
 $LDAdmitTime='Admission time';
 $LDCaseNr='Admission-Nr.';
-$LDFileNr='Selian file nr';
+$LDFileNr='Hospital file nr';
 $LDTitle='Occupation';
 $LDLastName='Surname/Ukoo';
 $LDFirstName='First name';
+$LDPleaseSelectTribe = '-- select tribe --';
 $LDBday='Date of birth';
 $LDAge='OR: [ age in years ]';
 $LDPhone='Phone';
@@ -22,8 +23,11 @@ $LDPrivate='Private Insurance';
 $LDInsurance='Health Fund';
 $LDDiagnosis='Diagnosis';
 $LDRecBy='Referred by';
+$LDCon='Consultation';
+$LDReg='Registration';
 $LDTherapy='Therapy';
 $LDSpecials='Referrer notes';
+$LDSelianPID='Hospital PID';
 
 $LDPatientSearch='Search patient\'s data';
 $LDAdmit='Admission';
@@ -171,10 +175,10 @@ $LDMarried='Married';
 $LDDivorced='Divorced';
 $LDWidowed='Widowed';
 $LDSeparated='Separated';
-$LDCellPhone='Cellphone.';
+$LDCellPhone='Cellphone';
 $LDFax='Fax';
 $LDEmail='Email';
-$LDZipCode='P.O. Box';
+$LDZipCode='Hospital file nr';
 $LDPhoto='Photo';
 /* 2002-12-02 EL*/
 $LDPatientRegisterTxt='Register patient, search registrations, archive research';
@@ -268,7 +272,7 @@ $LDOutcome='Outcome';
 $LDNrOfFetus='Nr. of Fetuses';
 $LDDetails='Details';
 /* 2003-03-02 */
-$LDDosage='Dosage';
+$LDDosage='Dosage:';
 $LDAppType='Application type';
 $LDAppBy='Application by';
 $LDNotes='Notes';
@@ -334,7 +338,7 @@ $LDOptsForPatient='Options for this patient';
 /* 2003-05-06 EL */
 $LDRegisterNewPerson='Register a new person';
 /* 2003-05-17 EL */
-$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, file number, first name, family name, or birth date';
+$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, file number, first name, surname/Ukoo, or birth date';
 $LDPersonData='Personal data';
 /* 2003-05-26 EL*/
 $LDDiagnoses='Diagnoses';
@@ -383,7 +387,7 @@ $LDAdvancedSearch='Advanced search';
 $LDIncludeFirstName='Search for first names too.';
 $LDTipsTricks='Tips & tricks';
 #2003-12-06 EL
-$LDPrintPDFDoc='Make PDF document';
+$LDPrintPDFDoc='Make PDF documen';
 $LDDeathDate='Death date';
 
 # 2003-10-14 NDHC
@@ -415,4 +419,11 @@ $LDNoNrNoDelete = 'no number = delete';
 # 2005-02-02 RM
 $LDTribeNew = 'New Tribe';
 $LDTribeSelectComment = 'No hit -> Enter new tribe';
+# d.r from merotech
+$LDPOBOX='P.O. Box';
+$LDSelectReligion='-- select religion --';
+$LDSelectWard='-- select ward --';
+$LDPID='PID';
+$LDName='Name';
+
 ?>

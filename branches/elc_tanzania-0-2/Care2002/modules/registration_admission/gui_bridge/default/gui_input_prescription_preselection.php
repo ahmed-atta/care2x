@@ -8,18 +8,18 @@ if (empty($show))
   $show="drug list"; // if there are no other values given, show the default: It is the drug list for doctors
     
 if (!empty($show)) { // In case something goes wrong, then do nothing!      
-  
+ 
   if ($debug) echo "Show tab: ".$show."<br>";
   if ($debug) echo "DB-Filter: ".$db_drug_filter."<br>";
   if ($debug) echo "DB-Filter2: ".$filter."<br>";
   if ($debug) echo "This is external call?: ".$externalcall."<br>";
   
   
+
   if (empty($db_drug_filter))
-    $db_drug_filter="mems_drug_list";
+    $db_drug_filter="drug_list";
   
   $drug_list = $pres_obj->getDrugList($db_drug_filter, 0);
-  
   
   if ($filter=='pediadric') 
     $drug_list = $pres_obj->getDrugList($db_drug_filter, "is_pediatric");
@@ -31,9 +31,10 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
     $drug_list = $pres_obj->getDrugList($db_drug_filter, "is_consumable");
 } 
 else {
-  $drug_list = $pres_obj->getDrugList("mems_drug_list", 0);
+  $drug_list = $pres_obj->getDrugList("drug_list", 0);
 }
 ?>
+
 <script language="javascript" src="<?php echo $root_path;?>js/check_prescription_form.js"></script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
   <? if ($debug) echo "this file is named: ".$thisfile."<br>"; ?>
@@ -64,13 +65,14 @@ else {
   <tr>
     <br>
     <td colspan="4" bgcolor="#CAD3EC">
-    <?php if($activated_tab=='druglist' || $activated_tab == 'Supplies' || $activated_tab == 'supplies-lab' || $activated_tab == 'special-others')
+    <?php 
+    if($activated_tab=='druglist' || $activated_tab == 'Supplies' || $activated_tab == 'supplies-lab' || $activated_tab == 'special-others')
     {
     	?>
       <table width="100%" border="0" align="center" bordercolor="#330066" cellpadding="0" cellspacing="0">      
       <tr>
         <td height="10">
-          <font color="black">Common items of: </font>
+          <font color="black"><?php echo $LDCommonItemOf; ?> </font>
         </td>
         <td bgcolor="#CAD3EC" width="130">
           
@@ -79,7 +81,7 @@ else {
                   value="<?PHP echo ($filter=='pediadric') ? '1' : '0';?>" 
                  <? if ($filter=='pediadric') echo 'checked';?>
                   onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=pediadric&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons;?>&backpath=<?php echo urlencode($backpath); ?>')"
-              ><font color="black">Pediatric items</font>
+              ><font color="black"><?php echo $LDPediatricItems; ?></font>
         </td>
         <td bgcolor="#CAD3EC" width="100">
           
@@ -88,7 +90,7 @@ else {
                 value="<?PHP echo ($filter=='adult') ? '1' : '0';?>" 
                 <? if ($filter=='adult') echo 'checked';?> 
                 onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=adult&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons;?>&backpath=<?php echo urlencode($backpath); ?>')"
-              ><font color="black">Adult items</font>
+              ><font color="black"><?php echo $LDAdultItems; ?></font>
         </td>
         <td bgcolor="#CAD3EC" width="80">
           
@@ -97,7 +99,7 @@ else {
                 value="<?PHP echo ($filter=='others') ? '1' : '0';?>" 
                 <? if ($filter=='others') echo 'checked';?> 
                 onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&filter=others&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons;?>&backpath=<?php echo urlencode($backpath); ?>')"
-              ><font color="black">Others</font>
+              ><font color="black"><?php echo $LDOthers; ?></font>
         </td>
         <td bgcolor="#CAD3EC">
           
@@ -107,7 +109,7 @@ else {
                 <? if ($filter=='consumable') echo 'checked';?> 
                 onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&filter=consumable&mode=new&show=<?php echo $show;?>&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons;?>&backpath=<?php echo urlencode($backpath); ?>')"
               >
-              <font color="black">ARV Drugs</font></td>
+              <font color="black"><?php echo $LDARVDrugs; ?></font></td>
       </tr>
       </table>
       <?php
@@ -123,7 +125,8 @@ else {
                 <select name="itemlist[]" size="22" style="width:315px;" onDblClick="javascript:item_add();">
   
                   <!-- dynamically managed content -->
-  		            <?php	$pres_obj->DisplayDrugs($drug_list);	?>
+  		            <?php	$pres_obj->DisplayDrugs($drug_list);?>
+  		            
                   <!-- dynamically managed content -->
   
                 </select>
@@ -141,12 +144,12 @@ else {
           </tr>
           <tr>
             <td height=50" valign="top"><div align="center">&nbsp;
-                <input type="button" name="Del" value="add >>" onClick="javascript:item_add();">
+                <input type="button" name="Del" value="<?php echo $LDadd; ?> >>" onClick="javascript:item_add();">
               </div></td>
           </tr>
           <tr>
             <td width="25%" height="60" valign="top"> <div align="center">
-                <input type="button" name="Add" value="<< del" onClick="javascript:item_delete();">
+                <input type="button" name="Add" value="<< <?php echo $LDdel; ?>" onClick="javascript:item_delete();">
               </div></td>
           </tr>
           <tr>
@@ -154,11 +157,11 @@ else {
             <?
 			        if (isset($externalcall)) {      
 			        ?>
-			        <input type="button" name="show" value="Prescribe!" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons; ?>&backpath=<?php echo urlencode($backpath); ?>')">
+			        <input type="button" name="show" value="<?php echo $LDPrescribe; ?>" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons; ?>&backpath=<?php echo urlencode($backpath); ?>')">
 			        <?
 			        } else {
 			        ?>
-			        <input type="button" name="show" value="Prescribe!" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert&disablebuttons=<?php echo $disablebuttons; ?>&backpath=<?php echo urlencode($backpath); ?>')">
+			        <input type="button" name="show" value="<?php echo $LDPrescribe; ?>" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&show=insert&disablebuttons=<?php echo $disablebuttons; ?>&backpath=<?php echo urlencode($backpath); ?>')">
 			        <?
 			        }
         ?></td>

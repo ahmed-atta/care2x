@@ -164,7 +164,8 @@ $LDPatListElements=array(
 										'Birthdate',
 										'Admission-Nr.',
 										'Insurance',
-										'Options'
+										'Options',
+										'Hospital file nr'
 										);
 /********** NOTE: !! do not change the \'+b+\' and \'+r+\'  !! **************************/
 $LDConfirmUnlock='Do you really want to unlock the \'+b+\' bed in room \'+r+\' ?';							
@@ -289,7 +290,7 @@ $LDPreview='Preview';
 $LDShotDate='Shot date';
 $LDShotNr='Shot nr.';
 
-$LDLastName='Family name';
+$LDLastName='Surname/Ukoo';
 $LDName='Name';
 $LDBirthDate='Birthdate';
 $LDLockThisBed='Lock this bed';
@@ -404,4 +405,11 @@ $LDShowClinicOnly='This clinic only';
 $LDAdmissionData='Admission data';
 $LDShowPhoto='Show photo';
 $LDOpenWardManagement='Open ward for administration';
+# 2006-09-13 d.r. from merotech
+$LDDiagnoses='Diagnoses';
+$LDLabRequest='Lab requests';
+$LDPrescriptions='Prescriptions';
+$LDNoDiagnosesAvailable='--- NO DIAGNOSIS AVAILABLE ---';
+$LDLastDiagnosis='Last Diagnosis';
+$LDChangeDept='Change of Department';
 ?>

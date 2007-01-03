@@ -25,7 +25,7 @@ $LDEncounterClosed='This encounter is now closed';
 # 2003-08-02 EL
 $LDNoOutpatients='There are no outpatients yet.';
 $LDGoToAppointments='Please click here to check the pending appointments.';
-$LDSureTransferPatient='Are you really sure, you want to transfer this patient ?';
+$LDSureTransferPatient='Are you really sure, you want to transfer this patient?';
 $LDClkTransfer='Click to transfer patient';
 $LDSureTakeOverPatient='Are you sure? You want to take over this patient?';
 $LDChkClinicConflict='This patient was preassigned to another clinic/department (<b>~dept_id~</b>). 
@@ -89,4 +89,7 @@ $LDPlsORNr='Please enter the OR number';
 #2004-08-06 EL
 $LDInvalidDate ='The entered date was invalid.';
 $LDNoPastDate = 'Dates in the past are not accepted.';
+
+# 2006-09-15 d.r. from merotech
+$LDGo='Go';
 ?>

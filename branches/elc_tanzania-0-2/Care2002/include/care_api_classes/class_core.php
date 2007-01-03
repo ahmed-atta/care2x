@@ -695,6 +695,7 @@ class Core {
 		* Return value is the converted string or false if there was an error.
 		*/
 		//if(!$string) return 0;
+		$error=0;
 		$forbidden_chars="abcdefghijklmnopqrstuvwxyz!\"§$%&/()=?ß\\- ";
 		
 		$forbidden_chars_array = $this->_str_split($forbidden_chars,1);
@@ -758,6 +759,22 @@ class Core {
 	  }
 	  return FALSE;
 	}
+
+	function GetPIDfromEncounter($encounter_nr) {
+	  global $db;
+	  $debug=FALSE;
+	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+	  if (!empty($encounter_nr)) {
+	    $this->sql = "SELECT pid FROM ".$this->tbl_encounter." WHERE encounter_nr=".$encounter_nr;
+	    $this->db_res=$db->Execute($this->sql);
+	    $this->res=$this->db_res->FetchRow();
+	    if ($this->res) {
+	      return $this->res[0];
+	    }
+	  }
+	  return FALSE;
+	}
+
 	function ShowRedIfError($text,$error)
 	{
 		if($error)
@@ -765,5 +782,7 @@ class Core {
 		else
 			echo $text;
 	}
+	
+
 }
 ?>

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
- <TITLE> billing :: insurance </TITLE>
+ <TITLE> <?php echo $LDBillingInsurance; ?></TITLE>
  <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
 <meta name="Author" content="Robert Meggle">
 <meta name="Generator" content="various: Quanta, AceHTML 4 Freeware, NuSphere, PHP Coder">
@@ -59,12 +59,12 @@ function closewin()
 			 <table cellspacing="0"  class="titlebar" border=0>
           <tr valign=top  class="titlebar" >
             <td bgcolor="#99ccff" >
-                &nbsp;&nbsp;<font color="#330066">Insurance Types Overview</font>
+                &nbsp;&nbsp;<font color="#330066"><?php echo $LDInsuranceTypeOverview; ?></font>
 
        </td>
   <td bgcolor="#99ccff" align=right><a
    href="javascript:window.history.back()"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a><a
-   href="javascript:gethelp('submenu1.php','Pharmacy')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
+   href="javascript:gethelp('insurance_type_overview.php','Administrative Insurance types :: Overview')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
    href="insurance_tz.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
  </tr>
  </table>		</td>
@@ -74,7 +74,7 @@ function closewin()
 		<td bgcolor=#ffffff valign=top>
 				<?php $insurance_tz->ShowInsuranceTypesList(); ?>
 			<p>
-			<a href="insurance_types_tz_new.php">Click here to insert a new insurance type</a>
+			<a href="insurance_types_tz_new.php"><?php echo $LDInsertType; ?></a>
 			<p>
 			<a href="insurance_tz.php?ntid=false&lang=$lang"><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
 

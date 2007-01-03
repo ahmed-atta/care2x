@@ -10,8 +10,11 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
+
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
+
 require_once($root_path.'include/inc_front_chain_lang.php');
 $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 $returnfile=$root_path.'main/spediens.php'.URL_APPEND;
@@ -53,8 +56,8 @@ require($root_path.'include/inc_2level_reset.php');
 	$handle=opendir('./');
 	$count=0;
  	while (FALSE!==($file = readdir($handle))) {
-
-     	if ($file != "." && $file != ".." && is_dir($file)){
+        # d.r. from merotech, remove ipath_demo from plugins-menu
+     	if ($file != "." && $file != ".." && is_dir($file) && $file!=="ipath_demo" && $file!=="system_new_module") {
 			
 			include("$file/tags.php");
 			if($cfg['icons'] != 'no_icon'){
@@ -77,6 +80,7 @@ require($root_path.'include/inc_2level_reset.php');
 		}
 	}
 	closedir($handle);
+	
 
 	if(!$count){
 		echo $LDNoPluginsPrompt;

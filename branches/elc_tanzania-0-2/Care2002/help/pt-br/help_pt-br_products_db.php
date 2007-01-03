@@ -44,7 +44,7 @@ Finalizei a entrada de todas as informações de produto disponíveis. Como salvar?
 <ul>       	
  	<b>Passo 1: </b>Clique no botão <input type="button" value="Salvar">.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como inserir um novo produto no banco de dados?</b>
@@ -65,7 +65,7 @@ Eu quero editar um produto que já está cadastrado. Como fazer isso?</b>
  	<b>Passo 4: </b>Clique no botão <input type="button" value="Salvar"> para salvar a nova informação.<br>
 </ul>
 	
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="update") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Eu quero editar o produto que está sendo mostrado agora. Como fazer isso?</b>
@@ -75,8 +75,8 @@ Eu quero editar o produto que está sendo mostrado agora. Como fazer isso?</b>
  	<b>Passo 2: </b>Digite a nova informação no campo apropriado.<p>
  	<b>Passo 3: </b>Clique no botão <input type="button" value="Salvar"> para salvar a nova informação.<br>
 </ul>
-	<?php endif ?>	
-<?php endif ?>	
+	<?php endif;?>	
+<?php endif;?>	
 
 <?php if($src=="search") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -96,7 +96,7 @@ Uma lista com diversos artigos está listada. Como ver as informações de um artig
 <ul>       	
  	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','info3.gif','0') ?>> ou no nome do artigo.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="multiple") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Desejo ver a lista prévia dos artigos. O que eu deveria fazer?</b>
@@ -104,13 +104,13 @@ Desejo ver a lista prévia dos artigos. O que eu deveria fazer?</b>
 <ul>       	
  	<b>Passo 1: </b>Clique no botão <input type="button" value="Voltar">.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
  Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="mng") : ?>
 	<?php if(($x3=="1")) : ?>
@@ -121,7 +121,7 @@ Como editar a informação de um produto?</b>
  	<b>Passo 1: </b>Editar a informação sobre um novo produto.<br>
  	<b>Passo 2: </b>Clique no botão <input type="button" value="Salvar"> para salvar a nova informação.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
 	<?php if($x1=="multiple") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -148,7 +148,7 @@ Eu não quero remover a informação do produto. O que devo fazer?</b>
 <ul>       	
  	<b>Passo 1: </b>Clique no link "<span style="background-color:yellow" > << Não, não apague. Volte </span>".<br>
 </ul>	
-<?php endif ?>
+<?php endif;?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como gerenciar um produto no banco de dados?</b>
 </font>
@@ -169,12 +169,12 @@ Uma lista com diversos artigos está listada. Como ver as informações de um artig
 <ul>       	
  	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','info3.gif','0') ?>> ou no nome do artigo.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
  Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 
@@ -199,7 +199,7 @@ Eu não quero remover a informação do produto. O que devo fazer?</b>
  Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 
-<?php endif ?>	
+<?php endif;?>	
 
 <?php if($src=="report") : ?>
 
@@ -219,7 +219,7 @@ Como escrever um relatório?</b>
        	
 Se você decidir cancelar ou finalizar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>	
+<?php endif;?>	
 
 </form>
 

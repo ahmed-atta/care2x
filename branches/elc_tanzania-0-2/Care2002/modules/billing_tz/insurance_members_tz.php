@@ -14,6 +14,9 @@ require($root_path.'include/inc_environment_global.php');
 
 //define('NO_2LEVEL_CHK',1);
 $thisfile=basename(__FILE__);
+$debug=TRUE;
+define('LANG_FILE','billing.php');
+$lang_tables[]='aufnahme.php';
 require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 $person_obj = New Person();
@@ -21,8 +24,14 @@ require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
 $insurance_tz = New Insurance_tz();
 if($mode=='update')
 {
-	
+
 }
+if ($debug) {
+	echo  "item_no:".$item_no."<br>";
+	echo  "company_id:".$company_id."<br>";
+	echo "keyword: ".$keyword."<br>";
+}
+
 require ("gui/gui_insurance_members_tz.php");
 
 ?>

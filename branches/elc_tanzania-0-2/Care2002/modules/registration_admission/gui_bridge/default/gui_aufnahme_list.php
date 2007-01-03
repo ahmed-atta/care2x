@@ -11,7 +11,7 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfilen = $root_path."main/sta
  */
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
-
+ 
  require_once($root_path.'gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('common');
 
@@ -24,7 +24,7 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfilen = $root_path."main/sta
  $smarty->assign('title',$LDAdmission.' :: '.$LDArchive);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('admission_archive.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('search_advanced.php','Admission :: Archive Search')");
 
   # Onload Javascript code
  $smarty->assign('sOnLoadJs','onLoad="if (window.focus) window.focus();"');
@@ -207,7 +207,7 @@ if(!empty($rows)){
 			<td>&nbsp; &nbsp;'.@formatDate2Local($result['date_birth'],$date_format).'</td>';
 
 		echo '
-			<td align=right>&nbsp; &nbsp;'.$result['addr_zip'].'</td>
+			<td align=right>&nbsp; &nbsp;'.$result['selian_pid'].'</td>
 			<td align=right>&nbsp; &nbsp;'.$result['encounter_nr'].'</td>
 			<td align=right>&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.@formatDate2Local($result['encounter_date'],$date_format).'</a></td>
 		</tr>
@@ -352,9 +352,8 @@ if(!empty($rows)){
 	</td>
 		<td colspan=2 bgcolor="#eeeeee">
 			<select name="current_ward_nr">
-				<option value="">_______________________________________________</option>
+				<option value=""><?php echo $LDSelectWard ?></option>
 <?php
-
 		# Generate select box for the wards
 
 		if(!empty($ward_info)&&$ward_info->RecordCount()){
@@ -371,37 +370,40 @@ if(!empty($rows)){
 	</tr>
 
 <?php
-	createTR( 'referrer_diagnosis', $LDDiagnosis,$referrer_diagnosis);
+    //d.r from merotech: Remove Diagnoses from Archive Form
+	//createTR( 'referrer_diagnosis', $LDDiagnosis,$referrer_diagnosis);
 	createTR( 'referrer_dr', $LDRecBy,$referrer_dr);
 	createTR( 'referrer_recom_therapy', $LDTherapy,$referrer_recom_therapy);
 	createTR( 'referrer_notes', $LDSpecials,$referrer_notes);
 ?>
 
-	<tr bgcolor="white">
-		<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<?php echo $LDBillType ?>:
+	    <tr bgcolor="white">
+	    <!--d.r. from merotech: Remove Bill Type from Archive form-->
+		<!--<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<?php echo $LDBillType ?>:-->
 		</td>
 		<td colspan=2 bgcolor="#eeeeee">
 <?php
 	
 	# Create the bill type radiobuttons
 
-	if($insurance_classes){
-		while($result=$insurance_classes->FetchRow()) {
+	//if($insurance_classes){
+	//	while($result=$insurance_classes->FetchRow()) {
 ?>
-			<input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" >
+    <!--	<input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" >-->
 <?php
-			$LD=$result['LD_var'];
-			if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
-			echo '&nbsp;';
-		}
-	}
+	//		$LD=$result['LD_var'];
+	//		if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
+	//		echo '&nbsp;';
+	//	}
+	//}
 ?>
 		</td>
 	</tr>
 
 <?php
-	createTR( 'insurance_nr', $LDInsuranceNr,$insurance_nr);
-	createTR( 'insurance_firm_name', $LDInsuranceCo,$insurance_firm_name);
+    //d.r. from merotech: Remove Insurance from Archive Form
+	//createTR( 'insurance_nr', $LDInsuranceNr,$insurance_nr);
+	//createTR( 'insurance_firm_name', $LDInsuranceCo,$insurance_firm_name);
 
 	//if (!$GLOBAL_CONFIG['patient_care_service_hide'] && $care_ok)
 	if (!$GLOBAL_CONFIG['patient_service_care_hide']){

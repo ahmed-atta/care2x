@@ -323,5 +323,5 @@ Ho clickato il bottone <input type="button" value="dimetti">, ma non è successo 
  Se non lo è, occorre selezionarla.
 </ul>
   <b>Nota: </b>Per annullare l'operazione, clickare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.</ul>
-<?php endif ?>
+<?php endif;?>
 </form>

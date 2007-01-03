@@ -2,6 +2,9 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+
+
+
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -53,12 +56,17 @@ if(isset($retpath)){
 		case 'billing' : $breakfile='../modules/billing_tz/billing_tz_pending.php'.URL_APPEND;
 	}
 }
+
+
+
 # Mark where we are
 $HTTP_SESSION_VARS['sess_user_origin']='amb';
 
 # Load date formatter 
 require_once($root_path.'include/inc_date_format_functions.php');
-  
+
+require_once($root_path.'include/care_api_classes/class_arv_case.php');
+
 if(($mode=='')||($mode=='fresh')){
 
 	# Create encounter object
@@ -66,9 +74,9 @@ if(($mode=='')||($mode=='fresh')){
 	$enc_obj= new Encounter;
 	
 	# Get all outpatients for this dept
-	$opat_obj=&$enc_obj->OutPatientsBasic($dept_nr);
-	
-	//echo $enc_obj->getLastQuery();
+	if($sort=='') $sort='name_last';
+	$opat_obj=&$enc_obj->OutPatientsBasic($sort,$dept_nr);
+	#echo $enc_obj->getLastQuery();
 	$rows=$enc_obj->LastRecordCount();
 	
 	# If dept name is empty, fetch by location nr
@@ -87,8 +95,8 @@ if(($mode=='')||($mode=='fresh')){
 		
 		$dnr=(isset($w_waitlist)&&$w_waitlist) ? 0 : $dept_nr;
 		//echo '<p>'.$enc_obj->getLastQuery();
-		$waitlist=&$enc_obj->createWaitingOutpatientList($dnr);
 		
+		$waitlist=&$enc_obj->createWaitingOutpatientList($dnr);
 		$waitlist_count=$enc_obj->LastRecordCount();
 		//echo $waitlist_count.'<p>'.$enc_obj->getLastQuery();
 		
@@ -145,7 +153,7 @@ if(($mode=='')||($mode=='fresh')){
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('ambulatory_clinic.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('outpatient_clinic.php','Outpatient Clinic')");
 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
@@ -154,6 +162,23 @@ if(($mode=='')||($mode=='fresh')){
  $smarty->assign('sWindowTitle',$dept." :: $LDOutpatientClinic (".formatDate2Local($s_date,$date_format,'','',$null='').")");
 
  # Collect extra javascript code
+
+# Initialize page´s control variables
+if($mode=='paginate'){
+	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+}else{
+	# Reset paginator variables
+	$pgx=0;
+	$totalcount=0;
+	$odir='';
+	$oitem='';
+}
+require_once($root_path.'include/care_api_classes/class_paginator.php');
+$pagen=& new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+ $breakfile='amb_clinic_patients.php';
+$newdata=1;
+$target='archiv';
+
 
  ob_start();
 ?>
@@ -171,12 +196,22 @@ function getinfo(pn){
 	echo '";';
 	echo '
 	patientwin=window.open(urlholder,pn,"width=700,height=600,menubar=no,resizable=yes,scrollbars=yes");
-	';
+	
+	patientwin.moveTo(0,0)
+	patientwin.resizeTo(screen.availWidth,screen.availHeight)';
 	}
 	/*else echo '
 	window.location.href=\'nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$station.'\'';*/
 ?>
 	}
+function getARV(pid) {
+	urlholder="<?php echo $root_path ?>modules/arv/arv_pass.php<?php echo URL_REDIRECT_APPEND; ?>&pid="+pid;
+	patientwin=window.open(urlholder,"arv","menubar=no,resizable=yes,scrollbars=yes");
+	patientwin.moveTo(0,0);
+	patientwin.resizeTo(screen.availWidth,screen.availHeight);
+	patientwin.focus();
+}
+
 function getrem(pn){
 	urlholder="<?php echo $root_path ?>modules/nursing/nursing-station-remarks.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&dept_nr=$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>";
 	patientwin=window.open(urlholder,pn,"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
@@ -203,7 +238,7 @@ function assignWaiting(pn,pw)
 }
 function Transfer(pn,pw)
 {
-	if(confirm("<?php echo $LDSureTransferPatient ?>")){
+	if(confirm("<?php echo $LDSureTransferPatient."-" ?>")){
 		urlholder="amb_clinic_transfer_select.php<?php echo URL_REDIRECT_APPEND ?>&pn="+pn+"&pat_station="+pw+"&dept_nr=<?php echo $dept_nr ?>&station=<?php echo $station ?>";	
 		transwin<?php echo $sid ?>=window.open(urlholder,"transwin<?php echo $sid ?>","width=550,height=620,menubar=no,resizable=yes,scrollbars=yes");
 	}
@@ -246,11 +281,14 @@ if($rows){
 	$smarty->assign('LDTime',$LDTime);
 	$smarty->assign('LDRoom',$LDRoom);
 	$smarty->assign('LDBed',$LDPatListElements[1]);
-	$smarty->assign('LDFamilyName',$LDLastName);
-	$smarty->assign('LDName',$LDName);
-	$smarty->assign('LDBirthDate',$LDBirthDate);
-	$smarty->assign('LDPatNr',$LDPatListElements[4]);
-	$smarty->assign('LDInsuranceType',$LDPatListElements[5]);
+	$smarty->assign('LDFamilyName','<a href="amb_clinic_patients.php?&dept_nr='.$dept_nr.'&sort=name_last">'.$LDLastName.'</a>');
+	$smarty->assign('LDName','<a href="amb_clinic_patients.php?&dept_nr='.$dept_nr.'&sort=name_first">'.$LDName.'</a>');
+	#if($oitem=='date_birth') $flag=TRUE;
+				#else $flag=FALSE;
+				
+	$smarty->assign('LDBirthDate','<a href="amb_clinic_patients.php?&dept_nr='.$dept_nr.'&sort=date_birth">'.$LDBirthDate.'</a>');
+	$smarty->assign('LDPatNr','<a href="amb_clinic_patients.php?&dept_nr='.$dept_nr.'&sort=encounter_nr">'.$LDPatListElements[4].'</a>');
+	$smarty->assign('LDInsuranceType','<a href="amb_clinic_patients.php?&dept_nr='.$dept_nr.'&sort=selian_pid">'.$LDPatListElements[7].'</a>');
 	$smarty->assign('LDOptions',$LDPatListElements[6]);
 
 	# Initialize help flags
@@ -369,21 +407,36 @@ if($rows){
 			}
 
 			if ($patient['encounter_nr']) $smarty->assign('sPatNr',$patient['encounter_nr']);
-
+			if(isset($sfn)&&$sfn) $sNameBuffer = eregi_replace($sfn,'<span style="background:yellow">'.ucfirst($sln).'</span>',ucfirst($patient['title']));
+				else $sNameBuffer = ucfirst($patient['title']);
+		
 			$sBuffer = '';
-			if($patient['insurance_class_nr']!=2) $sBuffer = $sBuffer.'<font color="#ff0000">';
+			#if($patient['insurance_class_nr']!=2) $sBuffer = $sBuffer.'<font color="#ff0000">';
 
-			if(isset($$patient['LD_var'])&&!empty($$patient['LD_var']))  $sBuffer = $sBuffer.$$patient['LD_var'];
-				else  $sBuffer = $sBuffer.$patient['insurance_name'];
+			if(isset($$patient['selian_pid'])&&!empty($$patient['selian_pid']))  $sBuffer = $sBuffer.$$patient['selian_pid'];
+				else  $sBuffer = $sBuffer.$patient['selian_pid'];
 
 			$smarty->assign('sInsuranceType',$sBuffer);
-
+	
 			if($edit){
-
+		
 				/* MEROTECH:
 				Commented out for selian town clinic by Alexander Irro
 				$smarty->assign('sAdmitDataIcon','<a href="'.$root_path.'modules/registration_admission/aufnahme_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$patient['encounter_nr'].'" title="'.$LDAdmissionData.' : '.$LDClk2Show.'"><img '.createComIcon($root_path,'pdata.gif','0','',TRUE).' alt="'.$LDAdmissionData.' : '.$LDClk2Show.'"></a>');
 				*/
+				if ($dept_nr==42)
+				{
+					if(ARV_case::is_arv_admitted($patient['pid'])){
+						#$temp_image="<a href=\"".$root_path."modules/arv/arv_pass.php".URL_REDIRECT_APPEND."&pid=".$patient['pid']."\"><img ".createComIcon($root_path,'ball_gray.png','0','',TRUE)." alt=\"inARV\"></a>";
+						$temp_image="<a href=\"javascript:getARV('".$patient['pid']."')\"><img ".createComIcon($root_path,'ball_gray.png','0','',TRUE)." alt=\"inARV\"></a>";
+					}
+					else {
+						#$temp_image="<a href=\"".$root_path."modules/arv/arv_pass.php".URL_REDIRECT_APPEND."&pid=".$patient['pid']."\"><img ".createComIcon($root_path,'ball_red.png','0','',TRUE)." alt=\"not_inARV\"></a>";
+						$temp_image="<a href=\"javascript:getARV('".$patient['pid']."')\"><img ".createComIcon($root_path,'ball_red.png','0','',TRUE)." alt=\"not_inARV\"></a>";
+					}
+				}
+				
+				$smarty->assign('sARVIcon',$temp_image);
 				$smarty->assign('sChartFolderIcon','<a href="javascript:getinfo(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'open.gif','0','',TRUE).' alt="'.$LDShowPatData.'"></a>');
 
 				$sBuffer = '<a href="javascript:getrem(\''.$patient['encounter_nr'].'\')"><img ';

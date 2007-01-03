@@ -5,7 +5,7 @@ $LDShowing='Showing';
 $LDTo='to';
 $LDSex='Sex';
 $LDSelect='Select';
-$LDZipCode='Zip code';
+$LDZipCode='Hospital file nr';
 $LDPlsSearchDoctor='Please search for the doctor first.';
 $LDPlsSearchNurse='Please search for the nurse first.';
 ?>

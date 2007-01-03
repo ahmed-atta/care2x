@@ -189,7 +189,7 @@
 					</td>
 				</tr>
 			{{/if}}
-			
+				{{* done by d.r. from merotech
 				<tr>
 					<td class="adm_item">
 						{{$LDDiagnosis}}:
@@ -198,6 +198,7 @@
 						{{$referrer_diagnosis}}
 					</td>
 				</tr>
+				*}}
 				<tr>
 					<td class="adm_item">
 						{{$LDRecBy}}:
@@ -224,6 +225,7 @@
 				</tr>
 
 				<!-- The insurance class  -->
+				{{* done by d.r. from merotech
 				<tr>
 					<td class="adm_item">
 						{{$LDBillType}}:
@@ -232,7 +234,6 @@
 						{{$sBillTypeInput}}
 					</td>
 				</tr>
-
 				<tr>
 					<td class="adm_item">
 						{{$LDInsuranceNr}}:
@@ -249,6 +250,7 @@
 						{{$insurance_firm_name}}
 					</td>
 				</tr>
+				*}}
 			{{if $LDCareServiceClass}}
 				<tr>
 					<td class="adm_item">
@@ -300,13 +302,13 @@
 				</tr>
 				<tr>
 					<td>
-						{{$pbSave}}
-					</td>
-					<td align="right">
-						{{$pbRefresh}} {{$pbRegData}}
-					</td>
-					<td align="right">
 						{{$pbCancel}}
+					</td>
+					<td align="right">
+					{{* done by d.r. from merotech *}}	{{*{{$pbRefresh}} {{$pbRegData}}*}}&nbsp;
+					</td>
+					<td align="right">
+						{{$pbSave}}
 					</td>
 				</tr>
 

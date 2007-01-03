@@ -34,7 +34,7 @@ require($root_path.'include/inc_2level_reset.php');
  $smarty->assign('sToolbarTitle',$LDLab);
 
  # Help button href
- $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDLab')");
+ $smarty->assign('pbHelp',"javascript:gethelp('lab_menu.php','Laboratories :: Main Menu')");
 
  $smarty->assign('breakfile',$breakfile);
 
@@ -51,9 +51,9 @@ require($root_path.'include/inc_2level_reset.php');
 function open_request()
 {
  	urlholder=("\labor_test_request_pass.php?sid=$sid&lang=$lang&target=admin&subtarget=chemlabor&user_origin=lab\"");
-	helpwin=window.open(urlholder,"helpwin","menubar=no,resizable=yes,scrollbars=yes,status=yes");
-	helpwin.moveTo(0,0);
-	helpwin.resizeTo(screen.availWidth,screen.availHeight);
+	requestwin=window.open(urlholder,"requestwin_2","menubar=no,resizable=yes,scrollbars=yes,status=yes");
+	requestwin.moveTo(0,0);
+	requestwin_2.resizeTo(screen.availWidth,screen.availHeight);
 }
 
 </script>

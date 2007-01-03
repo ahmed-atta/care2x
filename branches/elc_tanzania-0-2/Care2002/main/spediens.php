@@ -57,59 +57,59 @@ $HTTP_SESSION_VARS['sess_dept_nr']=0; // reset the department number used in the
  # Prepare the submenu icons
 
  $aSubMenuIcon=array(createComIcon($root_path,'notepad.gif','0'),
-										createComIcon($root_path,'dollarsign.gif','0'),
+										//createComIcon($root_path,'dollarsign.gif','0'),
 										createComIcon($root_path,'man-gr.gif','0'),
-										createComIcon($root_path,'lockfolder.gif','0'),
+										//createComIcon($root_path,'lockfolder.gif','0'),
 										createComIcon($root_path,'home2.gif','0'),
-										createComIcon($root_path,'camera_s.gif','0'),
-										createComIcon($root_path,'video.gif','0'),
-										createComIcon($root_path,'post_discussion.gif','0'),
-										createComIcon($root_path,'calmonth.gif','0'),
+										//createComIcon($root_path,'camera_s.gif','0'),
+										///createComIcon($root_path,'video.gif','0'),
+										//createComIcon($root_path,'post_discussion.gif','0'),
+										//createComIcon($root_path,'calmonth.gif','0'),
 										createComIcon($root_path,'bubble.gif','0'),
-										createComIcon($root_path,'calendar.gif','0'),
-										createComIcon($root_path,'settings_tree.gif','0'),
+										//createComIcon($root_path,'calendar.gif','0'),
+										//createComIcon($root_path,'settings_tree.gif','0'),
 										createComIcon($root_path,'padlock.gif','0'),
-										createComIcon($root_path,'discussions.gif','0')
+										//createComIcon($root_path,'discussions.gif','0')
 										);
 
 # Prepare the submenu item descriptions
 
 $aSubMenuText=array($LDPluginsTxt,
-										$LDBillingTxt,
+										//$LDBillingTxt,
 										$LDPersonellMngmntTxt,
-										$LDInsuranceCoMngrTxt,
+										//$LDInsuranceCoMngrTxt,
 										$LDAddressMngrTxt,
-										$LDPhotoLabTxt,
-										$LDWebCamTxt,
-										$LDStandbyDutyTxt,
-										$LDCalendarTxt,
+										//$LDPhotoLabTxt,
+										//$LDWebCamTxt,
+										//$LDStandbyDutyTxt,
+										//$LDCalendarTxt,
 										$LDNewsTxt,
-										$LDCalcTxt,
-										$LDUserConfigOptTxt,
+										//$LDCalcTxt,
+										//$LDUserConfigOptTxt,
 										$LDAccessPwTxt,
-										$LDNewsgroupTxt
+										//$LDNewsgroupTxt
 										);
 
 # Prepare the submenu item links indexed by their template tags
 
-$aSubMenuItem=array('LDPlugins' => '<a href="'.$root_path.'plugins/plugins.php'.URL_APPEND.'">'.$LDPlugins.'</a>',
-										'LDBilling' => '<a href="'.$root_path.'modules/ecombill/ecombill_pass.php'.URL_APPEND.'">'. $LDBilling.'</a>',
-										'LDPersonellMngmnt' => '<a href="'.$root_path.'modules/personell_admin/personell_admin_pass.php'.URL_APPEND.'&retpath=spec&target=personell_reg">'.$LDPersonellMngmnt.'</a>',
-										'LDInsuranceCoMngr' => '<a href="'.$root_path.'modules/insurance_co/insurance_co_manage_pass.php'.URL_APPEND.'">'. $LDInsuranceCoMngr.'</a>',
-										'LDAddressMngr' => '<a href="'.$root_path.'modules/address/address_manage_pass.php'.URL_APPEND.'">'. $LDAddressMngr.'</a>',
+$aSubMenuItem=array('LDPlugins' => '<a href="'.$root_path.'plugins/plugins.php'.URL_APPEND.'">'.$LDPlugins.'</a>'/*,
+										'LDBilling' => '<a href="'.$root_path.'modules/ecombill/ecombill_pass.php'.URL_APPEND.'">'. $LDBilling.'</a>'*/,
+										'LDPersonellMngmnt' => '<a href="'.$root_path.'modules/personell_admin/personell_admin_pass.php'.URL_APPEND.'&retpath=spec&target=personell_reg">'.$LDPersonellMngmnt.'</a>'/*,
+										'LDInsuranceCoMngr' => '<a href="'.$root_path.'modules/insurance_co/insurance_co_manage_pass.php'.URL_APPEND.'">'. $LDInsuranceCoMngr.'</a>'*/,
+										'LDAddressMngr' => '<a href="'.$root_path.'modules/address/address_manage_pass.php'.URL_APPEND.'">'. $LDAddressMngr.'</a>'/*,
 										'LDPhotoLab' => '<a href="'.$root_path.'modules/fotolab/fotolab_pass.php'.URL_APPEND.'&ck_config='.$ck_config.'">'.$LDPhotoLab.'</a>',
 										'LDWebCam' => '<a href="../modules/video_monitor/video_monitoring.php'.URL_APPEND.'">'.$LDWebCam.'</a>',
 										'LDStandbyDuty' => '<a href="'.$root_path.'main/spediens-bdienst-zeit-erfassung.php'.URL_APPEND.'&retpath=spec">'.$LDStandbyDuty.'</a>',
-										'LDCalendar' => '<a href="'.$root_path.'modules/calendar/calendar.php'.URL_APPEND.'">'. $LDCalendar.'</a>',
-										'LDNews' => '<a href="'.$root_path.'modules/news/editor-pass.php'.URL_APPEND.'&dept_nr=1&title='.$LDEditTitle.'">'.$LDNews.'</a>',
+										'LDCalendar' => '<a href="'.$root_path.'modules/calendar/calendar.php'.URL_APPEND.'">'. $LDCalendar.'</a>'*/,
+										'LDNews' => '<a href="'.$root_path.'modules/news/editor-pass.php'.URL_APPEND.'&dept_nr=1&title='.$LDEditTitle.'">'.$LDNews.'</a>'/*,
 										'LDCalc' => '<a href="'.$root_path.'modules/tools/calculator.php'.URL_APPEND.'">'. $LDCalc.'</a>',
-										'LDUserConfigOpt' => '<a href="config_options.php'.URL_APPEND.'">'. $LDUserConfigOpt.'</a>',
-										'LDAccessPw' => '<a href="'.$root_path.'modules/myintranet/my-passw-change.php'.URL_APPEND.'">'. $LDAccessPw.'</a>',
-										'LDNewsgroup' => '<a href="http://www.mail-archive.com/care2002-developers@lists.sourceforge.net/">'.$LDNewsgroup.'</a>'
+										'LDUserConfigOpt' => '<a href="config_options.php'.URL_APPEND.'">'. $LDUserConfigOpt.'</a>'*/,
+										'LDAccessPw' => '<a href="'.$root_path.'modules/myintranet/my-passw-change.php'.URL_APPEND.'">'. $LDAccessPw.'</a>'/*,
+										'LDNewsgroup' => '<a href="http://www.mail-archive.com/care2002-developers@lists.sourceforge.net/">'.$LDNewsgroup.'</a>'*/
 										);
 
 # Create the submenu rows
-
+//var_dump($aSubMenuItem);
 $iRunner = 0;
 
 while(list($x,$v)=each($aSubMenuItem)){
@@ -123,6 +123,7 @@ while(list($x,$v)=each($aSubMenuItem)){
  	ob_end_clean();
 	$iRunner++;
 	$smarty->assign($x,$sTemp);
+	
 }
 
 # Create conditional submenu items

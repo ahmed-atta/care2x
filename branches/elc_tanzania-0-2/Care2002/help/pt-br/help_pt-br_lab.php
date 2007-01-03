@@ -136,7 +136,7 @@ Como entrar <?php echo $person ?> via lista de seleção rápida?</b>
 <ul>       	
  Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="time") : ?>
 	<?php if($x1=="entry_out") : ?>
@@ -152,7 +152,7 @@ Como documentar o horário de entrada e saída?</b>
  	<b>Nota: </b>Você pode entrar com vários horários de entrada e saída todos de uma vez só antes de você salvar a informação.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="cut_close") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como documentar os tempos de incisão e sutura?</b>
@@ -166,7 +166,7 @@ Como documentar os tempos de incisão e sutura?</b>
  	<b>Nota: </b>Você pode entrar com vários horários de incisão e sutura, todos de uma vez só, antes de você salvar a informação.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="wait_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como documentar tempos ociosos (em espera)?</b>
@@ -181,7 +181,7 @@ Como documentar tempos ociosos (em espera)?</b>
  	<b>Nota: </b>Você pode entrar com vários horários de início e fim, e razões todos de uma vez só, antes de você salvar a informação.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="bandage_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como documentar tempos de curativo?</b>
@@ -195,7 +195,7 @@ Como documentar tempos de curativo?</b>
  	<b>Nota: </b>Você pode entrar com vários horários de de início e fim, todos de uma vez só, antes de você salvar a informação.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="repos_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Com documentar tempos de reposição?</b>
@@ -209,7 +209,7 @@ Com documentar tempos de reposição?</b>
  	<b>Nota: </b>Você pode entrar com vários horários de de início e fim, todos de uma vez só, antes de você salvar a informação.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como salvar a informação?</b>
 </font>
@@ -231,7 +231,7 @@ Como salvar a informação?</b>
 <ul>       	
  Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="create") : ?>
@@ -299,7 +299,7 @@ Como exibir as entaradas do registro de um certo dia diferente do que está sendo
 
 <hr>
 
-	<?php endif ?>
+	<?php endif;?>
 	
 	<?php if($x2=="material") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -348,7 +348,7 @@ Como mostrar o livro principal de registros novamente?</b>
  	<b>Passo 1: </b>Clique no link "<span style="background-color:yellow" > <img <?php echo createComIcon('../','manfldr.gif','0') ?>> Mostre livro de registro. </span>" .<br> 
 </ul>
 <hr>
-	<?php endif ?>
+	<?php endif;?>
 
 	<?php if(($x1=="")||($x1=="fresh")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -503,9 +503,9 @@ Como iniciar um documento novo de registro?</b>
 <b>Nota</b>
 <ul> Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 
 
 
@@ -521,12 +521,12 @@ Como selecionar um paciente em particular cujo relatório do laboratório quero <?
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como continuar pesquisando?</b>
 </font>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if(($x2=="")||($x2=="0")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como pesquisar por um paciente?</b>
 </font>
-	<?php endif ?>
+	<?php endif;?>
 	
 	<ul>       	
  	<b>Passo 1: </b>Entre  ou com uma informação completa ou com umas poucas letras de informação do paciente, como por exemplo, o número de encontro do paciente, ou sobrenome, ou  nome, 
@@ -537,28 +537,28 @@ Como pesquisar por um paciente?</b>
 	</ul>
 	<?php if(($x2=="")||($x2=="0")) : ?>
  	<b>Passo 3: </b>Clique no botão&nbsp;<button><img <?php echo createComIcon('../','update2.gif','0') ?>> <font size=1>Lab report</font></button> correspondente a um paciente em particular cujo relatório do laboratório quero  <?php if($x1=="edit") print "editar"; else print "ver"; ?>.<p> 
-	<?php endif ?>
+	<?php endif;?>
 </ul>
 
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
  Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="arch") : ?>
 	<?php if($x2=="1") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota: As entradas mais recentes</b></font> 
 <ul>  Cada vez que você retornar ao arquivo, as últimas operações registradas serão mostradas imediatamente.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if(($x3=="")&&($x1!="0")) : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nenhuma operação foi realizada neste dia.</b></font> 
 <ul>       	
 Clique em "Opções" para abrir a caixa de opções.<br>
 Clique em "Pesquise" para ir para o modo de pesquisa.</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 	
 
 
@@ -602,7 +602,7 @@ Como abrir o arquivo de dados do paciente?</b>
  	<b>Passo 1: </b>Clique no botão <img src="../img/info2.gif" border=0> à esquerda do número do paciente.<br>
  	<b>Passo 2: </b>O arquivo de dados do paciente aparecerá. clique no botão "Ajuda" se você necessitar de mais instruções.<p> 
 	</ul>
-	<?php endif ?>
+	<?php endif;?>
 	
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
@@ -610,7 +610,7 @@ Como abrir o arquivo de dados do paciente?</b>
 </ul>
 
 
-	<?php endif ?>
+	<?php endif;?>
 
 <?php if($src=="input") : ?>
 	<?php if($x1=="main") : ?>
@@ -634,7 +634,7 @@ Como entrar com valores de resultados de testes?</b>
 		?>: </b> Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar os valores.<p> 
  	<b>Nota: </b>Depois que você salvou os valores e quiser fechar,<br> clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if($x1=="few") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -645,7 +645,7 @@ Eu preciso entrar somente com uns poucos valores! Como fazer isto?</b>
  	<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar os valores dos parâmetros.<p> 
  	<b>Nota: </b>Se você terminou de entrar todos os valores dos parâmetros e quiser fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="param") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -656,7 +656,7 @@ O parâmetro que eu preciso não foi mostrado! Como mudar para o grupo certo de pa
      <option value="Parâmetro exemplo"> Parâmetro exemplo</option> </select> </span>"</nobr> caixa de seleção.<p> 
  	<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','auswahl2.gif','0') ?>> para ir para o grupo de parâmetros selecionado.<p> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="save") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -666,7 +666,7 @@ Como devo salvar os valores?</b>
  	<b>Passo 1: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> salvar os valores dos parâmetros.<p> 
  	<b>Nota: </b>Depois que você salvou os valores e quiser fechar,<br> clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="correct") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -677,7 +677,7 @@ Eu salvei um valor errado. Como posso corrigir isto?</b>
  	<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar o valor correto.<p> 
  	<b>Nota: </b>Depois que você salvou os valores e quiser fechar,<br> clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="Note") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -688,7 +688,7 @@ Eu preciso entrar com uma nota em vez de um valor. Como fazer isto?</b>
  	<b>Passo 2: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar a nota.<p> 
  	<b>Nota: </b>Depois que você salvou e quiser fechar,<br> clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="done") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -698,13 +698,13 @@ Estou pronto. E agora?</b>
  	<b>Passo 1: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> para salvar todos os valores.<p> 
  	<b>Nota: </b>Clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	
 
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
  Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 </form>
 

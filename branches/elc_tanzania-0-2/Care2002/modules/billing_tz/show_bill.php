@@ -10,10 +10,15 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='billing.php';
+$lang_tables[]='aufnahme.php';
+require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
 $enc_obj=new Encounter;
 $bill_obj = new Bill;
+$insurance_tz = new Insurance_tz;
 
 $debug = FALSE;
 

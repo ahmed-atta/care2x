@@ -5,12 +5,12 @@
 /*
 # Plug-in name that is displayed on the menu or submenu pages
 */
-$sPluginName = 'VitalS Calculator';
+$sPluginName = $LDVitalCalc;
 
 /*
 # Plug-in description that is displayed on some format of menu pages or as context sensitive info
 */
-$sPluginDescription = 'Vital Statistics Calculator';
+$sPluginDescription = $LDVitalStatisticCalc;
 
 /*
 # Plug-in start script or URL. This will be started when the user clicks on the

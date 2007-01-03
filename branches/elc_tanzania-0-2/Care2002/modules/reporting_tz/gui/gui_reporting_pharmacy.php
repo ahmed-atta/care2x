@@ -2,7 +2,7 @@
 if ($PRINTOUT) {
 echo '<head>
 <script language="javascript"> this.window.print(); </script>
-<title>Pharmacy Report</title>
+<title>'.$LDPharmacyReport.'</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>';
 echo '<html><body>';
@@ -17,7 +17,7 @@ exit();
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
- <TITLE> Reporting Module </TITLE>
+ <TITLE><?php echo $LDReportingModule; ?></TITLE>
  <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
  <meta name="Author" content="Robert Meggle">
  <meta name="Generator" content="various: Quanta, AceHTML 4 Freeware, NuSphere, PHP Coder">
@@ -79,10 +79,10 @@ function popPic(pid,nm){
 			 <table cellspacing="0"  class="titlebar" border=0>
  <tr valign=top  class="titlebar" >
   <td width="202" bgcolor="#99ccff" >
-    &nbsp;&nbsp;<font color="#330066">Reporting:: Pharmacy Report</font></td>
+    &nbsp;&nbsp;<font color="#330066"><?php echo $LDReportingPharmacyReport; ?></font></td>
   <td width="408" align=right bgcolor="#99ccff">
    <a href="javascript: history.back();"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a>
-   <a href="javascript:gethelp('submenu1.php','Pharmacy Databank')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
+   <a href="javascript:gethelp('reporting_overview.php','Reporting :: Overview')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
    <a href="<?php echo $root_path;?>modules/reporting_tz/reporting_main_menu.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  
   </td>
  </tr>

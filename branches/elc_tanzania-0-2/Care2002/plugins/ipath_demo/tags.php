@@ -5,12 +5,12 @@
 /*
 # Plug-in name that is displayed on the menu or submenu pages
 */
-$sPluginName = 'iPath demo';
+$sPluginName = $LDIPathDemo;
 
 /*
 # Plug-in description that is displayed on some format of menu pages or as context sensitive info
 */
-$sPluginDescription = 'A well featured, useful collaborative telemedicine and diagnostics system';
+$sPluginDescription = $LDIPathText;
 
 /*
 # Plug-in start script or URL. This will be started when the user clicks on the

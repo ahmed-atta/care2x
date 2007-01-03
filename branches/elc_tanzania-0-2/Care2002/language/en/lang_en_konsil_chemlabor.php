@@ -511,4 +511,10 @@ else
 									 'tx_29'=>'clinical info',
 									  );
 }
+#2006 d.r. from merotech
+$LDHospitalFileNr='Hospital File Nr.:';
+$LDAdmNr='Adm. no.:';
+$LDSurnameUkoo='Surname/Ukoo:';
+$LDFirstName='First Name:';
+
 ?>

@@ -82,7 +82,7 @@ Wie entferne ich einen Artikel aus dem Katalog?</b>
  	<b>Schritt 1: </b>Klickt den <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> Knopf des Artikels an.<br>
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="how2") : ?>
 
@@ -176,7 +176,7 @@ Wie erstelle ich eine neue Bestellungsliste?</b>
 <ul>       	
 Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="head") : ?>
@@ -197,7 +197,7 @@ Wie bestelle ich <?php if($x2=="pharma") print "Arzneimittel"; else print "Produ
 <ul>       	
 Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="catalog") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -243,7 +243,7 @@ Wie entferne ich einen Artikel aus dem Katalog?</b>
  	<b>Schritt 1: </b>Klickt den <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> Knopf des Artikels an.<br>
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="orderlist") : ?>
 	<?php if($x1=="0") : ?>
@@ -303,9 +303,9 @@ Alle Artikel zum Bestellen sind jetzt im Bestellkorb. Was soll ich jetzt tun?</b
 <ul>       	
 Wenn Sie die Bestellungsliste nicht senden möchten klicken Sie die Option "<span style="background-color:yellow" > << Zurück und noch mal bearbeiten </span>" an.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="final") : ?>
@@ -339,9 +339,9 @@ Wie sende ich die endgültige Bestellungsliste?</b>
 <ul>       	
 Wenn Sie die Bestellungsliste nicht senden möchten klicken Sie die Option "<span style="background-color:yellow" > << Zurück und noch mal bearbeiten </span>" an.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 <!-- ++++++++++++++++++++++++++++++++++ archive +++++++++++++++++++++++++++++++++++++++++++ -->
 <?php if($src=="arch") : ?>
 
@@ -374,7 +374,7 @@ Gibt entweder eine vollständige Information oder die erste Zeichen von Namen der
 </ul>
 
 
-	<?php endif ?>
+	<?php endif;?>
 	
 <?php if($src=="archshow") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -406,7 +406,7 @@ Ich möchte die Liste wieder sehen. Was soll ich tun?</b>
  	<b>Schritt 4: </b>Wenn die Suche Ergebnisse findet wird eine Liste gezeigt.<br>
  	<b>Schritt 5: </b>Klickt den <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>> Knopf einer Bestellungsliste an. Die Details werden gezeigt.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	
 
 <?php if($src=="db") : ?>
@@ -430,7 +430,7 @@ I am finished entering all available product information. How to save it?</b>
 <ul>       	
  	<b>Schritt 1: </b>Click the button <input type="button" value="Save">.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to enter a new product into the databank?</b>
@@ -451,7 +451,7 @@ I want to edit the product that is currently displayed How to do it?</b>
  	<b>Schritt 4: </b>Click the button <input type="button" value="Save"> to save the new information.<br>
 </ul>
 	
-	<?php endif ?>	
-<?php endif ?>	
+	<?php endif;?>	
+<?php endif;?>	
 </form>
 

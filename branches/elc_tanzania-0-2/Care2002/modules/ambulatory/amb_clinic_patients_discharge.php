@@ -17,6 +17,7 @@ define('DOC_CHANGE_TIME','7.30'); # Define the time when the doc-on-duty will ch
 $lang_tables[]='ambulatory.php';
 $lang_tables[]='prompt.php';
 $lang_tables[]='departments.php';
+
 define('LANG_FILE','nursing.php');
 //define('NO_2LEVEL_CHK',1);
 
@@ -68,7 +69,8 @@ if(($mode=='')||($mode=='fresh')){
 	$enc_obj= new Encounter;
 	
 	# Get all outpatients for this dept
-	$opat_obj=&$enc_obj->OutPatientsBasic(false);
+	 if($sort=='') $sort='name_last';
+	$opat_obj=&$enc_obj->OutPatientsBasic($sort,false);
 	
 	//echo $enc_obj->getLastQuery();
 	$rows=$enc_obj->LastRecordCount();
@@ -136,13 +138,13 @@ if(($mode=='')||($mode=='fresh')){
  $smarty = new smarty_care('nursing');
 
 # Title in toolbar
- $smarty->assign('sToolbarTitle', "Discharge patients (".formatDate2Local($s_date,$date_format,'','',$null='').")");
+ $smarty->assign('sToolbarTitle', $LDDischargePatients." (".formatDate2Local($s_date,$date_format,'','',$null='').")");
 
   # hide back button
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('ambulatory_clinic.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('discharge_patient.php','Discharge Patient')");
 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
@@ -181,7 +183,7 @@ function getrem(pn){
 function release(nr)
 {
 	urlholder="amb_clinic_discharge.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+nr+"<?php echo "&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&station=<?php echo $station; ?>&dept_nr=<?php echo $dept_nr; ?>&backpath=<?php echo $breakfile; ?>";
-	indatawin=window.open(urlholder,"bedroom","width=500,height=530,menubar=no,resizable=yes,scrollbars=yes");
+	indatawin=window.open(urlholder,"bedroom","width=700,height=730,menubar=no,resizable=yes,scrollbars=yes");
 	//window.location.href=urlholder;
 }
 
@@ -243,12 +245,13 @@ if($rows){
 	$smarty->assign('LDTime',$LDTime);
 	$smarty->assign('LDRoom',$LDRoom);
 	$smarty->assign('LDBed',$LDPatListElements[1]);
-	$smarty->assign('LDFamilyName',$LDLastName);
-	$smarty->assign('LDName',$LDName);
-	$smarty->assign('LDBirthDate',$LDBirthDate);
-	$smarty->assign('LDPatNr',$LDPatListElements[4]);
-	$smarty->assign('LDAdmissionDate',$LDAdmissionDate);
-	$smarty->assign('LDInsuranceType',$LDPatListElements[5]);
+	$smarty->assign('LDFamilyName','<a href="amb_clinic_patients_discharge.php?&sort=name_last">'.$LDLastName.'</a>');
+	$smarty->assign('LDName','<a href="amb_clinic_patients_discharge.php?&sort=name_first">'.$LDName.'</a>');
+	$smarty->assign('LDBirthDate','<a href="amb_clinic_patients_discharge.php?&sort=date_birth">'.$LDBirthDate.'</a>');
+	$smarty->assign('LDPatNr','<a href="amb_clinic_patients_discharge.php?&sort=encounter_nr">'.$LDPatListElements[4].'</a>');
+	$smarty->assign('LDAdmissionDate','<a href="amb_clinic_patients_discharge.php?&sort=encounter_nr">'.$LDAdmissionDate.'</a>');
+	#$smarty->assign('LDSelian_pid',$LDFile_Nr);
+	$smarty->assign('LDInsuranceType','<a href="amb_clinic_patients_discharge.php?&sort=selian_pid">'.$LDPatListElements[7].'</a>');
 	$smarty->assign('LDOptions',$LDPatListElements[6]);
 
 	# Initialize help flags
@@ -286,11 +289,13 @@ if($rows){
 			$smarty->assign('sNotesIcon','');
 			$smarty->assign('sTransferIcon','');
 			$smarty->assign('sDischargeIcon','');
+			$smarty->assign('sSelianPid','');
 
 			$sAstart='';
 			$sAend='';
 			$sFamNameBuffer='';
 			$sNameBuffer='';
+			$sPidBuffer='';
 
 			# set row color/class
 
@@ -351,7 +356,8 @@ if($rows){
 			if(isset($sfn)&&$sfn) $sNameBuffer = eregi_replace($sfn,'<span style="background:yellow">'.ucfirst($sln).'</span>',ucfirst($patient['name_first']));
 				else $sNameBuffer = ucfirst($patient['name_first']);
 
-
+			
+				
 			if($edit) $sAend ='</a>';
 				else $sAend='';
 
@@ -371,16 +377,21 @@ if($rows){
 			{
 				$smarty->assign('sPatNr',$patient['encounter_nr']);
 				$smarty->assign('sAdmissionDate',formatDate2Local($patient['encounter_date'],$date_format,'','',$null=''));
+				
 			}
+			
+			
+			
+			
 
 			$sBuffer = '';
-			if($patient['insurance_class_nr']!=2) $sBuffer = $sBuffer.'<font color="#ff0000">';
+			#if($patient['insurance_class_nr']!=2) $sBuffer = $sBuffer.'<font color="#ff0000">';
 
-			if(isset($$patient['LD_var'])&&!empty($$patient['LD_var']))  $sBuffer = $sBuffer.$$patient['LD_var'];
-				else  $sBuffer = $sBuffer.$patient['insurance_name'];
+			if(isset($$patient['selian_pid'])&&!empty($$patient['selian_pid']))  $sBuffer = $sBuffer.$$patient['selian_pid'];
+				else  $sBuffer = $sBuffer.$patient['selian_pid'];
 
 			$smarty->assign('sInsuranceType',$sBuffer);
-
+			
 			if($edit){
 
 				/* MEROTECH:

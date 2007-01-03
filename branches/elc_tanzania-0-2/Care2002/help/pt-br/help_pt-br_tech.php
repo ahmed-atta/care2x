@@ -46,7 +46,7 @@ Como enviar uma requisição para um serviço de reparo ?</b></font>
 <b>Nota</b>
 <ul> Se você decidir fechar o formulário de requisição, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="report") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -62,7 +62,7 @@ Como relatar um serviço de reparo concluído?</b></font>
 <b>Nota</b>
 <ul> Se você decidir fechar o formulário de requisição, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="queries") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -84,7 +84,7 @@ Como ver minhas dúvidas anteriores e as respostas do departamento técnico ? </b>
 <b>Nota</b>
 <ul> Se você decidir fechar o formulário de dúvida clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="arch") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -109,7 +109,7 @@ Como pesquisar um relatório técnico específico?</b></font>
 
 </ul>
 </font>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="showarch") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Marcando o relatório como lido.</b></font>
@@ -125,7 +125,7 @@ Imprimindo o relatório.</b></font>
 Como voltar ao início da pesquisa de arquivos?</b></font>
 <ul> <b>Passo 1: </b>Clique no botão <input type="button" value="<< Voltar">.<p>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="dutydoc") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como documentar um trabalho feito durante horas de serviço ?</b></font>
@@ -151,7 +151,7 @@ Como documentar um trabalho feito durante horas de serviço ?</b></font>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>EU salvei o documento e gostaria de fechá-lo, o que devo fazer? </b></font>
 <ul> <b>Passo 1: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> . <br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 </form>
 </body>

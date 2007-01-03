@@ -1,3 +1,6 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <?php 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
@@ -19,12 +22,15 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 <head>
 <?php echo setCharSet(); ?>
 <title></title>
-
+<link rel="stylesheet" type="text/css" href="<?php echo $root_path; ?>/css/themes/default/help.css">
 </head>
 <body onLoad="if (window.focus) window.focus()">
 
-<?php 
+<?php
+$lang="en";
 # Resolve the help file to include
+
+
 if($helpidx=='') {
 	if(file_exists('../help/'.$lang.'/help_'.$lang.'_main.php')){
 		include('../help/'.$lang.'/help_'.$lang.'_main.php');
@@ -41,8 +47,12 @@ if($helpidx=='') {
 }
 ?>
 <hr>
+
 <ul>
-<a href="javascript:window.parent.close()"><img <?php echo createLDImgSrc($root_path,'closehelp.gif','0') ?> alt="<?php echo $LDCloseHelpWin ?>"></a>
+
+<img src="<?php echo $root_path?>gui/img/control/default/en/en_close2.gif" alt="<?php echo $LDCloseHelpWin ?>" onclick="javascript:window.parent.close()">
+
 </ul>
+
 </body>
 </html>

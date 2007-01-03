@@ -23,7 +23,7 @@ Come fare a inserire temperatura o pressione sanguigna</b></font>
 		<b>4: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>5: </b>Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="diet") : ?>
 <un name="diet"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire un regime di dieta?</b></font>
@@ -33,7 +33,7 @@ Come fare a: inserire un regime di dieta?</b></font>
 		<b>3: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>4: </b>Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="allergy") : ?>
 <un name="allergy"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire informazioni allergologiche?</b></font>
@@ -45,7 +45,7 @@ Come fare a: inserire informazioni allergologiche?</b></font>
 		<b>3: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>4: </b>Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="diag_ther") : ?>
 <un name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire la diagnosi principale e/o la terapia?</b></font>
@@ -57,7 +57,7 @@ Come fare a: inserire la diagnosi principale e/o la terapia?</b></font>
 		<b>3: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>4: </b>Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="diag_ther_dailyreport") : ?>
 <un name="daydiag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire informazioni sulla diagnosi o piano terapico giornalieri?</b></font>
@@ -69,7 +69,7 @@ Come fare a: inserire informazioni sulla diagnosi o piano terapico giornalieri?<
 		<b>3: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>4: </b>Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="xdiag_specials") : ?>
 <un name="extra"><un name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a></a>
 Come fare a: inserire note o diagnosi aggiuntive?</b></font>
@@ -81,7 +81,7 @@ Come fare a: inserire note o diagnosi aggiuntive?</b></font>
 		<b>3: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>4: </b>Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="kg_atg_etc") : ?>
 <un name="pt"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire informazioni su terapia fisica giornaliera, ginnastica anti-trombosi, etc.?</b></font>
@@ -93,7 +93,7 @@ Come fare a: inserire informazioni su terapia fisica giornaliera, ginnastica ant
 		<b>3: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>4: </b>Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="anticoag") : ?>
 <un name="coag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire gli anticoagulanti?</b></font>
@@ -105,7 +105,7 @@ Come fare a: inserire gli anticoagulanti?</b></font>
 		<b>3: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>4: </b>Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="anticoag_dailydose") : ?>
 <un name="daycoag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire informazioni sull'applicazione giornaliera di anticoagulanti?</b></font>
@@ -116,7 +116,7 @@ Come fare a: inserire informazioni sull'applicazione giornaliera di anticoagulan
 		<b>3: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>4: </b>Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="lot_mat_etc") : ?>
 <un name="lot"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire note on implants, LOT nr, charge nr, etc?</b></font>
@@ -129,7 +129,7 @@ Come fare a: inserire note on implants, LOT nr, charge nr, etc?</b></font>
 		<b>4: </b>Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="medication") : ?>
 <un name="med"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: enter medicinali e piani di dosaggio?</b></font>
@@ -151,7 +151,7 @@ Come fare a: enter medicinali e piani di dosaggio?</b></font>
 		<b>6: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>7: </b>Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="medication_dailydose") : ?>
 	<?php if($x2) : ?>
 <un name="daymed"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
@@ -189,8 +189,8 @@ Dice "Non c'è ancora un medicinale". Che devo fare?</b></font>
 		<b>9: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>10: </b>Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-	<?php endif ?>
-<?php endif ?>
+	<?php endif;?>
+<?php endif;?>
 <?php if($src=="iv_needle") : ?>
 <un name="iv"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire informazioni sull'applicazione giornaliera di medicine via endovena?</b></font>
@@ -201,5 +201,5 @@ Come fare a: inserire informazioni sull'applicazione giornaliera di medicine via
 		<b>3: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>4: </b>Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 </form>

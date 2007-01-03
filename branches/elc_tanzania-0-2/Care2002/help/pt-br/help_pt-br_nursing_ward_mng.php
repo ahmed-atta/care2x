@@ -32,7 +32,7 @@ ala padrão será exibida. O bloqueio de uma cama necessita de uma senha válida co
 <ul> Nesta opção você pode criar, editar, bloquear, ou apagar direitos de acesso para uma ala em particular. Todos os direitos de acesso criados terão um
 acesso somente nesta ala particular.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -68,10 +68,10 @@ Como exibir em visão rápida a ocupação usando o arquivo?</b>
  	<b>Passo 3: </b>clique numa data do calendário para exibir uma visão rápida da ocupação daquele dia.<br>
 	</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 <b>Nota</b>
 <ul> Se você decidir fechar a visão rápida clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
-</ul><?php endif ?>
+</ul><?php endif;?>
 
 <?php if($src=="new") : ?>
 
@@ -108,7 +108,7 @@ Posso assinalar o prefixo (ou id) para uma cama?</b>
 <b>Nota</b>
 <ul> Se você quiser cancelar, clique no botão  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 	
 <?php if($src=="sComo") : ?>
 	<?php if($x1=="1") : ?>
@@ -144,8 +144,8 @@ Eu quero editar o perfil de uma estação diferente desta que está exibida. O que 
 <ul> Se você quiser cancelar, clique no botão  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 
 
 <?php if($src=="") : ?>
@@ -160,7 +160,7 @@ Como selecionar uma ala para editar seu perfil?</b>
 <ul> Se você quiser cancelar, clique no botão  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 
 </form>

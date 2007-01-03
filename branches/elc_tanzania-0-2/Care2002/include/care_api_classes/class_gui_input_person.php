@@ -108,7 +108,7 @@ class GuiInputPerson {
 	*/
 	function display(){
 		global $db, $sid, $lang, $root_path, $pid, $insurance_show, $user_id, $mode, $dbtype, $no_tribe,
-				$update, $photo_filename, $HTTP_POST_VARS,  $HTTP_POST_FILES, $HTTP_SESSION_VARS;
+						$update, $photo_filename, $HTTP_POST_VARS,  $HTTP_POST_FILES, $HTTP_SESSION_VARS;
 
 		extract($HTTP_POST_VARS);
 		require_once($root_path.'include/care_api_classes/class_advanced_search.php');
@@ -159,13 +159,17 @@ class GuiInputPerson {
 		{
 			 $tribe_array=$result_array;
 		}
-		if (is_array($result_array=$search_obj->get_equal_words("NAME", "care_address_citytown", false, 65, 'nr')) && $addr_citytown_nr)
+//<<<<<<< class_gui_input_person.php
+		if (is_array($result_array=$search_obj->get_equal_words("NAME", "care_tz_religion", false, 65, 'nr')) && $religion)
+//=======
+		//if (is_array($result_array=$search_obj->get_equal_words("name", "care_tz_religion", false, 65, 'nr')) && $religion && !$person_religion_hide )
+//>>>>>>> 1.16
 		{
-			$town_array=$result_array;
+			$religion_array=$result_array;
 		}
 		else
 		{
-			 $town_array=$result_array;
+			 $religion_array=$result_array;
 		}
 
 			# If saving is not forced, validate important elements
@@ -413,6 +417,7 @@ class GuiInputPerson {
 		{
 			$tribe=$name_maiden;
 			$town=$citizenship;
+			
 		}
 		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", false, 65, 'tribe_id')) && $name_maiden &&!$no_tribe)
 		{
@@ -430,7 +435,7 @@ class GuiInputPerson {
 		{
 			 $town_array=$result_array;
 		}*/
-		if (is_array($result_array=$search_obj->get_equal_words("NAME", "care_tz_religion", false, 65, 'nr')) && $religion)
+		if (is_array($result_array=$search_obj->get_equal_words("name", "care_tz_religion", false, 65, 'nr')) && $religion )
 		{
 			$religion_array=$result_array;
 		}
@@ -470,7 +475,11 @@ class GuiInputPerson {
 			}
 		}
 		function chkform(d) {
-			if(d.name_last.value==""){
+			if(d.selian_pid.value==""){
+				alert("<?php echo 'Please enter Hospital Nr'; ?>");
+				d.selian_pid.focus();
+				return false;
+			}else if(d.name_last.value==""){
 				alert("<?php echo $LDPlsEnterLastName; ?>");
 				d.name_last.focus();
 				return false;
@@ -498,6 +507,9 @@ class GuiInputPerson {
 			} else if (d.addr_citytown_nr.value=="-1"){
 				alert ("Select location!");
 				return false;
+			}else if (d.citizenship.value==""){
+				alert ("Insert Town/City!");
+				return false;
 			}else{
 				return true;
 			}
@@ -520,6 +532,7 @@ class GuiInputPerson {
 		<table border=0 cellspacing=0 cellpadding=0>
 <?php
 		if($error) {
+		echo "<script language=\"Javascript\" type=\"text/javascript\"> alert('Information is missing in the input field marked red!') </script>";
 ?>
 			<tr bgcolor=#ffffee>
 			<td colspan=3>
@@ -527,14 +540,21 @@ class GuiInputPerson {
 				<font face=arial color=#7700ff size=4>
 				<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle">
 <?php
-		if ($error>1) echo $LDErrorS;
-			else echo $LDError;
+		if ($error>1) {
+		 echo "<script language=\"Javascript\" type=\"text/javascript\"> alert('$LDErrorS') </script>";
+		echo $LDErrorS ;}
+			else { 
+			/* echo "<script language=\"Javascript\" type=\"text/javascript\"> alert('Information is missing in the input field marked red!') </script>"; */
+			echo $LDError;
+			}
 ?>
 			</center>
 			</td>
 			</tr>
 <?php
 		}elseif($error_person_exists){
+		
+		
 ?>
 			<tr bgcolor=#ffffee>
 			<td colspan=3>
@@ -544,9 +564,11 @@ class GuiInputPerson {
 				<td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
 				<td><font face=arial color=#7700ff size=4>
 <?php
-			echo $LDPersonDuplicate;
+			
+ 			echo $LDPersonDuplicate;
 			if($duperson->RecordCount()>1) echo " $LDSimilarData2 $LDPlsCheckFirst2";
-				else echo " $LDSimilarData $LDPlsCheckFirst";
+				else echo  "$LDSimilarData $LDPlsCheckFirst";
+			echo "<script language=\"Javascript\" type=\"text/javascript\"> alert('$LDSimilarData $LDPlsCheckFirst') </script>";
 			echo '
 				</td>
 				</tr>
@@ -705,14 +727,15 @@ if(!$no_tribe)
 				<td class="reg_item"><FONT SIZE=-1  FACE="Arial,verdana,sans serif">
 				<?php if($errormaiden) { echo '<font color="FF0000">'; } echo '* '.$LDNameMaiden; ?></td>
 				<td  class="reg_input" colspan=1>
-
+					
 				<?php
 
 					echo '<SELECT name="name_maiden" onChange="list_popup(this, \'tribe\');">';
-					echo '<OPTION value="-1" >-- select tribe --</OPTION>';
+					echo '<OPTION value="-1" >'.$LDPleaseSelectTribe.'</OPTION>';
 					foreach($tribe_array as $unit)
 					{
-						if($update && (strtoupper($name_maiden) == strtoupper($unit[1])))
+						//if($update && (strtoupper($name_maiden) == strtoupper($unit[1])))
+						if((strtoupper($name_maiden) == strtoupper($unit[1])))
 						{
 							$check = 'selected';
 						}
@@ -842,7 +865,7 @@ if(!$no_tribe)
 					echo '<OPTION value="-1" >-- select location --</OPTION>';
 					foreach($town_array as $unit)
 					{
-						if($update && (strtoupper($addr_citytown_nr) == strtoupper($unit[1])))
+						if((strtoupper($addr_citytown_nr) == strtoupper($unit[1])))
 						{
 							$check = 'selected';
 						}
@@ -858,7 +881,7 @@ if(!$no_tribe)
 				
 			</td>-->
 			<td class="reg_input">
-				&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorzip) echo "<font color=red>"; ?>P.O. Box:<input name="addr_zip" type="text" size="10" value="<?php echo $addr_zip; ?>" >
+				&nbsp;&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($errorzip) echo "<font color=red>"; echo $LDPOBOX." "?><input name="addr_zip" type="text" size="10" value="<?php echo $addr_zip; ?>" >
 			</td>
 			</tr>
 
@@ -910,11 +933,12 @@ if(!$no_tribe)
 			</td>
 			<td class="reg_input">
 <?php
+
 					echo '<SELECT name="religion" onChange="list_popup(this,\'religion\');">';
-					echo '<OPTION value="-1" >-- select religion --</OPTION>';
+					echo '<OPTION value="-1" >'.$LDSelectReligion.'</OPTION>';
 					foreach($religion_array as $unit)
 					{
-						if($update && (strtoupper($religion) == strtoupper($unit[0])))
+						if((strtoupper($religion) == strtoupper($unit[1])))
 						{
 							$check = 'selected';
 						}

@@ -29,13 +29,13 @@ dokumen medocs</b></font>
       yang berhubungan dengannya, atau nama keluarga, atau nomor dokumen, atau 
       waktu. 
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1>1) : ?>
   Untuk melihat medocs pasien yang anda cari, Klik tombol <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> 
   yang berhubungan dengannya, atau dengan nama keluarga, atau nomor dokumen, atau 
   qaktu.. 
   <p> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if(($src!="?")&&($x1=="1")) : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Saya 
     ingin memutakhirkan(Update) dokumen</b></font>
@@ -44,7 +44,7 @@ dokumen medocs</b></font>
     <input type="button" value="Mutakhirkan data">
     . 
   </ul>
-<?php endif ?>
+<?php endif;?>
 <b>Catatan</b>
   <ul>
     Jika anda memutuskan untuk membatalkan. Klik tombol <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. 

@@ -2,7 +2,7 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-$debug=FALSE;
+$debug=false;
 if ($debug) {
     if (!isset($externalcall))
       echo "internal call<br>";
@@ -17,6 +17,7 @@ if ($debug) {
     
     echo "breakfile: ".$breakfile."<br>";
     echo "Back path: ".$back_path."<br>";
+    echo "Pharmacy: ".$pharmacy."<br>";
     
     echo "pid:".$pid;
 }
@@ -248,8 +249,15 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
  $smarty->assign('title',$LDPatientSearch);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('admission_how2search.php','$from')");
-
+ if ($back_path=="billing") {
+ 	$smarty->assign('pbHelp',"javascript:gethelp('search_patient.php','Billing :: Drug and other Services Request','billing')");
+ }
+ elseif ($pharmacy=="yes") {
+ 	$smarty->assign('pbHelp',"javascript:gethelp('search_patient.php','Prescription :: Overview','pharmacy')");
+ }
+ else {
+ 	$smarty->assign('pbHelp',"javascript:gethelp('registration_overview.php','Person Registration :: Overview')");
+ }
   # Onload Javascript code
  $smarty->assign('sOnLoadJs','onLoad="if(window.focus) window.focus();document.searchform.searchkey.select();"');
 

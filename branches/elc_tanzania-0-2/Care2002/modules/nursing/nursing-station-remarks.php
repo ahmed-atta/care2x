@@ -10,14 +10,18 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('date_time.php');
+$lang_tables=array('date_time.php','departments.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 //define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 /* Create nursing notes object */
 require_once($root_path.'include/care_api_classes/class_notes_nursing.php');
+require_once($root_path.'include/care_api_classes/class_person.php');
 $report_obj= new NursingNotes;
+$person_obj= new Person;
+
+$pid=$person_obj->GetPidFromEncounter($pn);
  
 //if ($station=='') { $station='Non-department specific';  }
 if($pday=='') $pday=date('d');
@@ -44,7 +48,7 @@ if($mode=='save'){
 		header("Location:$thisfile".URL_REDIRECT_APPEND."&pn=$pn&station=$station&dept_nr=$dept_nr&location_nr=$location_nr&saved=1");
 		exit;
 	}else{echo $report_obj->getLastQuery()."<p>$LDDbNoUpdate";}
-}else{
+}else{ //echo $HTTP_SESSION_VARS['sess_pid'];
 	if($d_notes=&$report_obj->getDailyWardNotes($pn)){
    		include_once($root_path.'include/inc_editor_fx.php');
 		$occup=true;
@@ -79,13 +83,14 @@ if($mode=='save'){
  $smarty = new smarty_care('nursing');
 
 # Title in toolbar
- $smarty->assign('sToolbarTitle', $LDNotes.' :: '.$station.' ('.formatDate2Local($s_date,$date_format).')');
+
+ $smarty->assign('sToolbarTitle', $LDNotes.' :: '.$$station.' ('.formatDate2Local($s_date,$date_format).')');
 
    # hide back button
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('patient_remarks.php','','','$station','$LDNotes')");
+ $smarty->assign('pbHelp',"javascript:gethelp('outpatient_notes.php','Outpatient Clinic :: Notes on the patient','','$station','$LDNotes')");
 
  # href for close button
  $smarty->assign('breakfile','javascript:window.close()');
@@ -98,7 +103,7 @@ if($mode=='save'){
  $smarty->assign('sOnLoadJs','onLoad="'.$sTemp.' if (window.focus) window.focus();"');
 
  # Window bar title
- $smarty->assign('sWindowTitle',$LDNotes.' :: '.$station.' ('.formatDate2Local($s_date,$date_format).')');
+ $smarty->assign('sWindowTitle',$LDNotes.' :: '.$$station.' ('.formatDate2Local($s_date,$date_format).')');
 
  # Collect extra javascript code
 

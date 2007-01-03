@@ -160,7 +160,7 @@ if($src=="input")
       </font> </p>
   </blockquote>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($src=="time") : ?>
     <?php if($x1=="entry_out") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> 
@@ -187,7 +187,7 @@ if($src=="input")
       de salvar la información. </font> </p>
   </blockquote>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($x1=="cut_close") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> 
     <font color="#990000"><b>¿Como documentar la hora de corte y sutura?</b> </font></font> 
@@ -212,7 +212,7 @@ if($src=="input")
       salvar la información</font> </p>
   </blockquote>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($x1=="wait_time") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> 
     <font color="#990000"><b>¿Como documentar tiempos de espera (tiempo muerto)?</b> 
@@ -238,7 +238,7 @@ if($src=="input")
         </font> </blockquote>
     <p>. </blockquote>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($x1=="bandage_time") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> 
     <font color="#990000"><b>¿Como documentar tiempos de vendaje?</b> </font></font> 
@@ -258,7 +258,7 @@ if($src=="input")
       <b>Nota: </b>Usted puede ingresar varias horas antes de salvar la información. 
       </font> </blockquote>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($x1=="repos_time") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> 
     <font color="#990000"><b>¿Como documentar tiempos de reposici&oacute;n?</b> 
@@ -278,7 +278,7 @@ if($src=="input")
       <b>Nota: </b>Usted puede ingresar varias horas antes de salvar la información. 
       </font> </blockquote>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> 
     <font color="#990000"><b>&iquest;Como salvar la informaci&oacute;n?</b> </font></font> 
   <blockquote>
@@ -311,7 +311,7 @@ if($src=="input")
       </font> </p>
   </blockquote>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($src=="create") : ?>
     <?php if($x1=="logmain") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> 
@@ -396,7 +396,7 @@ while(list($x,$v)=each($Or2Dept))
   </font> 
   <hr>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x2=="material") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b>&iquest;Como documentar el material usado para la operaci&oacute;n?</b> 
@@ -484,7 +484,7 @@ while(list($x,$v)=each($Or2Dept))
   </ul>
   <hr>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($x1=="")||($x1=="fresh")) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b>&iquest;Cómo empezar un documento de registro para 
@@ -729,8 +729,8 @@ while(list($x,$v)=each($Or2Dept))
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
-  <?php endif ?>
+  <?php endif;?>
+  <?php endif;?>
   <?php if($src=="search") : ?>
   <?php if(($x2!="")&&($x2!="0")) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
@@ -749,12 +749,12 @@ while(list($x,$v)=each($Or2Dept))
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b>&iquest;Como contin&uacute;o buscando?</b></font></font><font color="#990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
   </font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($x2=="")||($x2=="0")) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b> &iquest;Como buscar un paciente?</b> </font></font> 
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   </font> 
   <ul>
     <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 1: 
@@ -776,13 +776,13 @@ while(list($x,$v)=each($Or2Dept))
       <?php if($x1=="edit") print "edit"; else print "see"; ?>
       . </font> 
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-      <?php endif ?>
+      <?php endif;?>
       </font> 
   </ul>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> 
     <font color="#990000"><b> Nota:</b></font>Si usted decide cerrar esta ventana 
     dé clic al botón<img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
-    <?php endif ?>
+    <?php endif;?>
     </font></p>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
     <?php if($src=="arch") : ?>
@@ -796,7 +796,7 @@ while(list($x,$v)=each($Or2Dept))
     registradas. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($x3=="")&&($x1!="0")) : ?>
   <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> 
   <font color="#990000"><b>No hay operaciones para este dia.</b></font></font> 
@@ -806,7 +806,7 @@ while(list($x,$v)=each($Or2Dept))
     Dé clic al bot&oacute;n "Buscar" para cambiar a modo de b&uacute;squeda. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>><font color="#990000"><b>Quiero 
   ver entradas de registro archivadas otro d&iacute;a.</b></font></font> 
   <ul>
@@ -870,7 +870,7 @@ while(list($x,$v)=each($Or2Dept))
     al bot&oacute;n de &quot;Ayuda&quot; para m&aacute;s instrucciones. </font> 
   </ul>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> 
     <font color="#990000"><b> Nota:</b></font></font> 
   <ul>
@@ -879,7 +879,7 @@ while(list($x,$v)=each($Or2Dept))
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="input") : ?>
   <?php if($x1=="main") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
@@ -909,7 +909,7 @@ while(list($x,$v)=each($Or2Dept))
       </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="few") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b> Necesito ingresar solamente unos cuantos valores! 
@@ -925,7 +925,7 @@ while(list($x,$v)=each($Or2Dept))
       </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="param") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b> &iexcl;No se ha desplegado el par&aacute;metro que 
@@ -944,7 +944,7 @@ while(list($x,$v)=each($Or2Dept))
     <p>. 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="save") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b> &iquest;C&oacute;mo debo guardar los valores?</b></font></font> 
@@ -958,7 +958,7 @@ while(list($x,$v)=each($Or2Dept))
       </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="correct") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b> Guard&eacute; un valor err&oacute;neo, &iquest;C&oacute;mo 
@@ -974,7 +974,7 @@ while(list($x,$v)=each($Or2Dept))
       </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="note") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b> Necesito poner una nota preferente de un valor. &iquest;Como 
@@ -990,7 +990,7 @@ while(list($x,$v)=each($Or2Dept))
     <p>.</p>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="done") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b> Ya lo hice. &iquest;Que sigue?</b> </font></font> 
@@ -1004,7 +1004,7 @@ while(list($x,$v)=each($Or2Dept))
       </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> 
   <font color="#990000"><b> Nota:</b></font></font> 
   <ul>
@@ -1012,6 +1012,6 @@ while(list($x,$v)=each($Or2Dept))
     cerrar esta ventana dé clic al botón<img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
     </font> 
   </ul>
-  <?php endif ?>
+  <?php endif;?>
 </form>
 

@@ -1,4 +1,4 @@
-<?php
+<?php 
 $LDPerson='Person';
 $LDPatient='Patient';
 $LDBloodGroup='Blood group';
@@ -25,4 +25,6 @@ $LDInsuranceSilver='Silver';
 $LDInsuranceGold='Gold';
 $LDInsuranceFriedkin='Friedkin';
 $LDInsuranceSelianstuff='Selian Staff';
+#2006-07-22 RM
+$LDTribe='Tribe';
 ?>

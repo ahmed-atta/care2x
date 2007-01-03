@@ -350,7 +350,7 @@ if(!$encounter_nr && !$pid) $sOnLoadJs ='onLoad="if(document.searchform.searchke
  $smarty->assign('sToolbarTitle',$headframe_title);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('admission_how2new.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('','')");
 
  $smarty->assign('breakfile',$breakfile);
 
@@ -361,7 +361,7 @@ if(!$encounter_nr && !$pid) $sOnLoadJs ='onLoad="if(document.searchform.searchke
  $smarty->assign('sOnLoadJs',$sOnLoadJs);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('person_admit.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('registration_overview.php','Person Registration :: Overview')");
 
  # Hide the return button
  $smarty->assign('pbBack',FALSE);
@@ -604,8 +604,9 @@ if(!isset($pid) || !$pid){
 			} //  End of if no encounter nr
 
 			# If no encounter nr or outpatient, show clinic/department info, 2 = outpatient
+			$sTemp = $sTemp.'<input name="current_dept_nr" type="hidden"  value="'.$current_dept_nr.'">';
 			if(!$encounter_nr||$encounter_class_nr==2){
-
+				
 				if ($errorward||$encounter_class_nr==2) $smarty->assign('LDDepartment',"<font color=red>$LDClinic/$LDDepartment</font>");
 					else $smarty->assign('LDDepartment',"$LDClinic/$LDDepartment");
 				$sTemp = '';
@@ -639,13 +640,23 @@ if(!isset($pid) || !$pid){
 
 			$smarty->assign('LDDiagnosis',$LDDiagnosis);
 			$smarty->assign('referrer_diagnosis','<input name="referrer_diagnosis" type="text" size="60" value="'.$referrer_diagnosis.'">');
-			$smarty->assign('LDRecBy',$LDRecBy);
-			$smarty->assign('referrer_dr','<input name="referrer_dr" type="text" size="60" value="'.$referrer_dr.'">');
-			$smarty->assign('LDTherapy',$LDTherapy);
-			$smarty->assign('referrer_recom_therapy','<input name="referrer_recom_therapy" type="text" size="60" value="'.$referrer_recom_therapy.'">');
+			
+			
+			//$smarty->assign('LDTherapy',$LDTherapy);
+			//$smarty->assign('referrer_recom_therapy','<input name="referrer_recom_therapy" type="text" size="60" value="'.$referrer_recom_therapy.'">');
+			$smarty->assign('LDTherapy',$LDCon);
+			$smarty->assign('referrer_recom_therapy','<select name="referrer_recom_therapy" ><option></option><option value="Consultation 4000">Consultation 4000</option><option value="Consultation 7500">Consultation 7500</option><option value="Consultation 10000">Consultation 10000</option><option value="Consultation - Eye">Consultation - Eye</option><option value="Consultation - Specialty Clinic">Consultation - Specialty Clinic</option></select>');
+			
+			//$smarty->assign('LDRecBy',$LDRecBy);
+			//$smarty->assign('referrer_dr','<input name="referrer_dr" type="text" size="60" value="'.$referrer_dr.'">');
+			
+			$smarty->assign('LDRecBy',$LDReg);
+			$smarty->assign('referrer_dr','<select name="referrer_dr"><option></option><option value="Registration - New 1000Tsh">Registration - New 1000Tsh</option><option value="Registration - return 0 Tsh">Registration - return 0 Tsh</option></select>');
+			
 			$smarty->assign('LDSpecials',$LDSpecials);
 			$smarty->assign('referrer_notes','<input name="referrer_notes" type="text" size="60" value="'.$referrer_notes.'">');
-
+			
+			
 			if ($errorinsclass) $smarty->assign('LDBillType',"<font color=red>$LDBillType</font>");
 				else  $smarty->assign('LDBillType',$LDBillType);
 
@@ -776,6 +787,7 @@ if(!isset($pid) || !$pid){
 			$smarty->assign('LDAdmitBy',$LDAdmitBy);
 			if (empty($encoder)) $encoder = $HTTP_COOKIE_VARS[$local_user.$sid];
 			$smarty->assign('encoder','<input  name="encoder" type="text" value="'.$encoder.'" size="28" readonly>');
+			
 
 			$sTemp = '<input type="hidden" name="pid" value="'.$pid.'">
 				<input type="hidden" name="encounter_nr" value="'.$encounter_nr.'">

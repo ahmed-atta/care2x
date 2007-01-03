@@ -21,16 +21,16 @@
 		Para ver o documento de prontuário do paciente que você está procurando, clique no botão <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> correspondente a ele, ou
 		no sobrenome, ou no número do documento, ou horário.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1>1) : ?>
 		Para ver o documento de prontuário do paciente que você está procurando, clique no botão <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> correspondente a ele, ou
 		no sobrenome, ou no número do documento, ou horário.<p>
-<?php endif ?>
+<?php endif;?>
 <?php if(($src!="?")&&($x1=="1")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero atualizar o documento</b></font>
 <ul> Se você quiser atualizar o documento exibido, clique no botão <input type="button" value="Atualizar dados">.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <b>Note</b>
 <ul> Se você decidir cancelar a pesquisa clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>

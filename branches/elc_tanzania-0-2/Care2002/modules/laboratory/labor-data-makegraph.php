@@ -106,7 +106,7 @@ if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
  $smarty->assign('sToolbarTitle',"$LDLabReport - $LDGraph");
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('lab_list.php','graph','','','$LDGraph')");
+ $smarty->assign('pbHelp',"javascript:gethelp('patientcharts_lab_report.php','Laboratories :: Lab Report','','','$LDGraph')");
 
  # hide return  button
  $smarty->assign('pbBack',FALSE);

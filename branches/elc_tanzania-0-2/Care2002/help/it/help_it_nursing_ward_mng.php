@@ -31,7 +31,7 @@ il padiglione di default. Bloccare un letto richiede una password valida con dir
 <ul> Con questa opzione si possono creare, modificare, bloccare e cancellare i privilegi di accesso per un certo padiglione. Tutti i diritti di accesso
 creati saranno relativi solo a quel particolare padiglione.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -67,10 +67,10 @@ Come fare a: Mostrare la precedente lista di occupazione tramite l'archivio?</b>
  	<b>3: </b>Selezionare dal calendario la data per la quale si vuole vedere la lista di occupazione.<br>
 	</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 <b>Nota</b>
 <ul> Per chiudere premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
-</ul><?php endif ?>
+</ul><?php endif;?>
 
 <?php if($src=="new") : ?>
 
@@ -107,7 +107,7 @@ Posso stabilire il prefisso o codice di un letto?</b>
 <b>Nota</b>
 <ul> Per annullare premere il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="show") : ?>
 	<?php if($x1=="1") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -139,8 +139,8 @@ Desidero modificare il profilo di un padiglione diverso da quello mostrato ora. 
 <b>Nota</b>
 <ul> Per annullare premere il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 <?php if($src=="") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: scegliere un padiglione per modificarne il profilo?</b>
@@ -151,5 +151,5 @@ Come fare a: scegliere un padiglione per modificarne il profilo?</b>
 <b>Nota</b>
 <ul> Per annullare premere il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 </form>

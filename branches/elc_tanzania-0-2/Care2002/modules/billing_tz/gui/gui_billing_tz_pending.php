@@ -3,7 +3,7 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
- <TITLE>Pending Test Request (<?php echo $enc_obj->ShowPID($batch_nr); ?>) - </TITLE>
+ <TITLE><?php echo $LDPendingTestRequest; ?>(<?php echo $enc_obj->ShowPID($batch_nr); ?>) - </TITLE>
  <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
  <meta name="Author" content="Robert Meggle">
  <meta name="Generator" content="various: Quanta, AceHTML 4 Freeware, NuSphere, PHP Coder">
@@ -57,10 +57,10 @@ A:visited:hover {color: #cc0033;}
 		<td  valign="top" align="middle" height="35">
 			 <table cellspacing="0"  class="titlebar" border=0>
  <tr valign=top  class="titlebar" >
-            <td bgcolor="#99ccff" > &nbsp;&nbsp;<font color="#330066">Pending 
-              Bills (<?php echo $encoded_batch_number=$enc_obj->ShowPID($batch_nr); ?>)</font> </td>
+            <td bgcolor="#99ccff" > &nbsp;&nbsp;<font color="#330066"><?php echo $LDPendingBills; ?>
+               (<?php echo $encoded_batch_number=$enc_obj->ShowPID($batch_nr); ?>)</font> </td>
   <td bgcolor="#99ccff" align=left>
-  	<a href="javascript:gethelp('billing.php','billing','list')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
+  	<a href="javascript:gethelp('billing_pendingbills.php','Billing :: Pending Bills')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
    	<a href="billing_tz.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  
 	
   </td>
@@ -80,7 +80,7 @@ A:visited:hover {color: #cc0033;}
 		<!-- Left block for the request list  -->
 		    <td> <br>
               <br>
-              <a href="billing_tz_quotation.php">Go to quotations</a>
+              <a href="billing_tz_quotation.php"><?php echo $LDGotoQuotations; ?></a>
 <?php 
   
   require($root_path.'include/inc_billing_pending_lister_fx.php'); 

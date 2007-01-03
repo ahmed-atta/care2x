@@ -379,7 +379,9 @@ class Department extends Core {
 			return $this->preload_dept['name_formal'];
 		}elseif($nr){
 			$this->dept_nr=$nr;
-			return $this->_getItem('name_formal');
+			//d.r. from merotech: Use of Language file
+			//return $this->_getItem('name_formal');
+			return $this->_getItem('LD_var');
 		}else{
 			return FALSE;
 		}

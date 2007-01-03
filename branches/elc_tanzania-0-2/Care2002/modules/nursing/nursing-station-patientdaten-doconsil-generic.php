@@ -227,8 +227,9 @@ $medical_depts=$dept_obj->getAllMedical();
 	$smarty->assign('gifAux1',createLDImgSrc($root_path,'newpat2.gif','0') );
  }
 
+
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('request_generic.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('request_diagnostic_test.php','Request diagnostic test')");
 
  # hide return button
  $smarty->assign('pbBack',FALSE);
@@ -375,12 +376,12 @@ elseif(!$read_form && !$no_proc_assist)
 		<table   cellpadding=0 cellspacing=0 border="0" width=700>
 		<tr  valign="top">
 		<td bgcolor="<?php echo $bgc1 ?>"  class=fva2_ml10><div   class=fva2_ml10>
-       <b> <?php echo $LDRequestTo ?></b> <br>
+       <b> <?php echo $LDRequestTo	?></b> <br>
       <select name="dept_nr" size=1>
        <option value=""><?php echo $LDPlsSelectDeptShort ?></option>
 <?php
-
-
+	
+			
 			while(list($x,$v)=each($medical_depts)){
 				echo'
 				<option value="'.$v['nr'].'"';

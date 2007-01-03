@@ -52,11 +52,11 @@ function popPic(pid,nm){
 			 <table cellspacing="0"  class="titlebar" border=0>
  <tr valign=top  class="titlebar" >
   <td bgcolor="#99ccff" >
-    &nbsp;&nbsp;<font color="#330066">Pharmacy::Product Catalog</font>
+    &nbsp;&nbsp;<font color="#330066"><?php echo $LDPharmacyProductCatalog; ?></font>
        </td>
   <td bgcolor="#99ccff" align=right><a
    href="javascript:window.history.back()"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a><a
-   href="javascript:gethelp('submenu1.php','Pharmacy Databank')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
+   href="javascript:gethelp('pharmacy_product_menu.php','Pharmacy :: My Product Catalog')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
    href="pharmacy_tz.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
 
  </tr>
@@ -80,9 +80,9 @@ function popPic(pid,nm){
 											
 <TR>
 	<td align=center><img src="../../gui/img/common/default/settings_tree.gif" border=0 width="16" height="17"></td>
-	<TD class="submenu_item"><nobr><a href="pharmacy_tz_new_product.php">New product</a></nobr></TD>
+	<TD class="submenu_item"><nobr><a href="pharmacy_tz_new_product.php"><?php echo $LDNewProduct; ?></a></nobr></TD>
 
-	<TD>Enter new pharmacy product in the databank</TD>
+	<TD><?php echo $LDEnterNewPharmacyProduct; ?></TD>
 </tr>
 
 <TR  height=1>
@@ -90,8 +90,8 @@ function popPic(pid,nm){
 </TR>
 <TR>
 	<td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-	<TD class="submenu_item"><nobr><a href="pharmacy_tz_search.php">Search</a></nobr></TD>
-	<TD>Search in the pharmacy databank</TD>
+	<TD class="submenu_item"><nobr><a href="pharmacy_tz_search.php"><?php echo $LDSearch; ?></a></nobr></TD>
+	<TD><?php echo $LDSearchPharmacyDB; ?></TD>
 
 </tr>
 
@@ -101,8 +101,8 @@ function popPic(pid,nm){
 <!--
 <TR>
 	<td align=center><img src="../../gui/img/common/default/discussions.gif" border=0 width="16" height="17"></td>
-	<TD class="submenu_item"><nobr><a href="../../modules/products/products-datenbank-functions-manage.php?ntid=false&lang=$lang&userck=ck_prod_db_user&cat=pharma"><nobr>Management</nobr></a></nobr></TD>
-	<TD>Managing product information</TD>
+	<TD class="submenu_item"><nobr><a href="../../modules/products/products-datenbank-functions-manage.php?ntid=false&lang=$lang&userck=ck_prod_db_user&cat=pharma"><nobr><?php echo $LDManagement; ?></nobr></a></nobr></TD>
+	<TD><?php echo $LDManagingProductInformation; ?></TD>
 </tr>
 -->
 

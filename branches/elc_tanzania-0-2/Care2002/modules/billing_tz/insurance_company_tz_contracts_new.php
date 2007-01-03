@@ -13,6 +13,8 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 //define('NO_2LEVEL_CHK',1);
+$lang_tables[]='billing.php';
+$lang_tables[]='aufnahme.php';
 require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
 $insurance_tz = New Insurance_tz();
@@ -28,7 +30,7 @@ if($mode=="new")
 	}
 	else
 	{
-		$error = 'ERROR! The selected time frame is not valid or there is already another contract for this company.';
+		$error = $LDERRORTimeFrame;
 	}
 }
 require ("gui/gui_insurance_company_tz_contracts_new.php");

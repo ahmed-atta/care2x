@@ -65,7 +65,7 @@ Achtung!</b></font>
 <ul> 
 	Sie können auch beide <?php if($x1=="docs") print "ärztliche Anordnung und Fragen and den Arzt"; else print "Pflegebericht und Bericht über die Effektivität der Pflegeplanung"; ?> gleichzeitig schreiben.</ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="fotos") : ?>
 <a name="coag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
@@ -73,6 +73,6 @@ Wie kann ich die Vorschau zeigen lassen?</b></font>
 <ul> 
 	<b>Step 1: </b>Klicken Sie das Kleinbild auf dem linken Rahmen. Das Vollbild wird auf dem rechten Rahmen gezeigt.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 </form>
 

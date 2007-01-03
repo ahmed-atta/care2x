@@ -17,18 +17,18 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 
 class Product extends Core {
   
-  var $tbl_product_items='care_tz_druglist';
+  var $tbl_product_items='care_tz_drugsandservices';
   var $tbl_temp="tmp_search_results";
-	var $fields_tbl_product=array(
-	                'item_number',
-									'is_pediatric',
-									'is_adult',
-									'is_other',
-									'is_consumable',
-									'item_description',
-									'item_full_description',
-									'purchasing_class',
-									'unit_price');  
+  var $fields_tbl_product=array(
+	                            'item_number',
+								'is_pediatric',
+								'is_adult',
+								'is_other',
+								'is_consumable',
+								'item_description',
+								'item_full_description',
+								'purchasing_class',
+								'unit_price');  
   var $result;
   var $rs_fuzziness;
   
@@ -121,7 +121,7 @@ class Product extends Core {
     if(empty($item_id)) {
         return FALSE;
     } else {
-      $this->where="item_id='$item_id'";
+      $this->where="item_number='$item_id'";
       $this->sql="DELETE FROM $this->coretable WHERE $this->where";
       return $this->Transact();
     }
@@ -130,153 +130,59 @@ class Product extends Core {
   
   //------------------------------------------------------------------------------
   
-  function get_array_search_results($keyword){
-    /*
-    
-    global $db;
-    $debug=false;
-    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    
-    // hit´s of 100 per cent
-    
-    $this->sql="CREATE TEMPORARY TABLE tmp_search_results TYPE=HEAP
-                SELECT  
-                      `item_id`,100 AS plausibility
-               FROM ".$this->tbl_product_items." 
-               WHERE 
-                      (`item_id` LIKE '".$keyword."' OR `item_description` LIKE '".$keyword."' OR `item_full_description` LIKE '".$keyword."')
-                      OR
-                      (`item_id` LIKE '%".$keyword."' OR `item_description` LIKE '%".$keyword."' OR `item_full_description` LIKE '%".$keyword."')
-                      OR
-                      (`item_id` LIKE '%".$keyword."%' OR `item_description` LIKE '%".$keyword."%' OR `item_full_description` LIKE '%".$keyword."%')
-                      OR
-											(`item_id` LIKE '".$keyword."%' OR `item_description` LIKE '".$keyword."%' OR `item_full_description` LIKE '".$keyword."%')
-                      ";
-    $db->Execute($this->sql);
-    
-    if ($debug) {
-      $this->sql="select * from tmp_search_results";
-      $this->rs=$db->Execute($this->sql);
-      echo "Datasets in the first step:".$this->rs->RecordCount()."<br>";
-    }
-      
-    
-    // store the datasets with fuzzy idea also in this temp-table:
-    // Get at first a list of all item_numbers
-    
-    $this->sql="SELECT `item_id`, `item_description` FROM ".$this->tbl_product_items;
-    $this->rs_fuzziness = $db->Execute($this->sql);
-
-    while ($this->elem = $this->rs_fuzziness->FetchRow()) {
-    	
-      
-      $this->array_item_description = explode(",",$this->elem['item_description']);
-      $best_levenshtein=100;
-      $best_percent_similar=0;
-      while(list($x,$v) = each($this->array_item_description))
-      {
-      	if(strlen($v)>strlen($keyword)-3)
-      	{
-	  			$this->blur = similar_text(trim(strtolower($v)),strtolower($keyword),$percent_similar);
-	  			if($percent_similar > $best_percent_similar) $best_percent_similar = $percent_similar;
-	      	if(strlen($v)+1 >= strlen($keyword))
-	      	{
-	      		$levenshteinvalue = levenshtein(trim(strtolower($v)),strtolower($keyword)); 
-	      		if($levenshteinvalue < $best_levenshtein) 
-	      			$best_levenshtein = $levenshteinvalue;
-	      	}
-      	}
-      }
-      if($best_levenshtein>6) 
-      	$percent_levenshtein=0;
-      else
-      	$percent_levenshtein=100-(($best_levenshtein)*($best_levenshtein) + 10*$best_levenshtein);
-      if($percent_levenshtein<0) $percent_levenshtein=0;
-      $this->percent = ((($percent_levenshtein)*2 + $best_percent_similar)/3);
-      if ($this->percent>=40) {
-        $this->percent = round($this->percent,0);
-        $this->sql="INSERT INTO tmp_search_results (item_id, plausibility) VALUES ('".$this->elem['item_id']."',".$this->percent.")";
-        $db->Execute($this->sql);
-      }
-    }
-    if ($debug) {
-      $this->sql="select * from tmp_search_results";
-      $this->rs=$db->Execute($this->sql);
-      echo "Datasets in the second step:".$this->rs->RecordCount()."<br>";
-    }
-    
-    
-    $this->sql="SELECT origin.item_id FROM ".$this->tbl_product_items." as origin, tmp_search_results as tmp WHERE 
-                  (  origin.item_full_description LIKE '%".$keyword."'
-                  OR
-                    origin.item_full_description LIKE '%".$keyword."%'
-                  OR
-                    origin.item_full_description LIKE '".$keyword."%')
-                  AND origin.item_id != tmp.item_id
-                  GROUP by origin.item_id  	
-                    ";
-    $this->rs_fuzziness = $db->Execute($this->sql);
-    while ($this->elem = $this->rs_fuzziness->FetchRow()) {
-      $this->percent = "100";
-      if ($this->percent>0) {
-        $this->sql="INSERT INTO tmp_search_results (item_id, plausibility) VALUES ('".$this->elem['item_id']."',".$this->percent.")";
-        $db->Execute($this->sql);
-      }
-    }                    
-    
-    if ($debug) {
-      $this->sql="select * from tmp_search_results";
-      $this->rs=$db->Execute($this->sql);
-      echo "Datasets in the third step:".$this->rs->RecordCount()."<br>";
-    }
-    
-    
-    // perpareing return values:
-    $this->sql="SELECT `item_id`, `plausibility`  FROM tmp_search_results WHERE `plausibility` >=40 GROUP BY `item_id`, `plausibility` ORDER BY plausibility DESC LIMIT 0,10";
-    
-    return $db->Execute($this->sql);
-  }
-  
-  
-  */
-  
-  
-  
-  
-  
+  function get_array_search_results($keyword, $result_filter='all'){
  	global $db;
-    $debug=false;
+    $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    
+    switch ($result_filter) {
+    	case 'all':
+    		$SQL_FILTER=" 1=1 ";
+    		break;
+    	case 'stock':
+    		$SQL_FILTER=" (purchasing_class='drug_list' OR purchasing_class='supplies') ";
+    		break;
+    	default:
+    		$SQL_FILTER=" 1=1 ";
+    		break;
+    }
+    
     
     if ($debug) echo "class_tz_diagnostics::get_array_select_results starts here<br>";
     if($keyword=="*")
     {
-	    $this->sql="SELECT `item_id`, 100 as plausibility, `item_description` FROM ".$this->tbl_product_items."
-                WHERE 1";
+	    $this->sql="SELECT `item_id`, 100 as plausibility, `item_description` FROM ".$this->tbl_product_items." WHERE ".$SQL_FILTER;
 	    return $db->Execute($this->sql);
 
   	}
   	else
   	{
     // Just after 3 letters, try to find a keyword:
-    if (strlen($keyword)<3)
-      return $this->get_all_items();
+    if (strlen($keyword)<=3)
+      return $this->get_all_items($result_filter);
+
+	// Is there an exact hit for all words?
+	$this->sql="SELECT `item_id`, `item_description` FROM ".$this->tbl_product_items." WHERE `item_description`='".$keyword."' AND ".$SQL_FILTER;
+	$res=$db->execute($this->sql);
+	if ($res->RecordCount()>0) {
+		if ($debug) echo "Exact hit!"; 
+		return $res;
+	} 
+		
+	
 
     // Create the temporary table:
     $this->sql="CREATE TEMPORARY TABLE ".$this->tbl_temp." (
                 `item_id` VARCHAR( 20 ) ,
                 `plausibility` INT UNSIGNED,
-                `item_description` VARCHAR(255)
+                `item_description` VARCHAR(255)	
                 ) TYPE = HEAP ";
                 
     // Get at first a list of all item_numbers
     $db->Execute($this->sql);
     
-    if ($debug) 
-      //$this->sql="SELECT `item_id`, `item_description` FROM ".$this->tbl_product_items." where diagnosis_code LIKE \"B5%\" LIMIT 1,100";
-      $this->sql="SELECT `item_id`, `item_description` FROM ".$this->tbl_product_items;
-    else
-        $this->sql="SELECT `item_id`, `item_description` FROM ".$this->tbl_product_items;
+    $this->arr_nice_factor = array();
+    $this->sql="SELECT `item_id`, `item_description` FROM ".$this->tbl_product_items." WHERE ".$SQL_FILTER;
     $this->rs_tbl=$db->Execute($this->sql);
     
     if ($debug) echo "class_tz_diagnostics::get_array_select_results -> TMP-table is created<br>";
@@ -298,7 +204,7 @@ class Product extends Core {
       reset($this->arr_keywords);
       reset($this->arr_tbl_col_content);
       $nice_factor=0;
-      
+  
       while (list($keyword_index,$keyword_value) = each ($this->arr_keywords)) {
         reset($this->arr_tbl_col_content);
         while (list($content_index,$content_value) = each ( $this->arr_tbl_col_content )) {
@@ -306,33 +212,40 @@ class Product extends Core {
           if (strlen($content_value)>3 && strlen($keyword_value)>3 ) {
             if ($debug) echo "compare:".$keyword_value."<->".$content_value.":";
             if (strcmp($content_value,$keyword_value)==0) {
-              $this->nice_factor=100;
-              $this->EXACT_MATCH=TRUE;
-              array_push($this->arr_nice_factor,"100");
+              if ($this->EXACT_MATCH) {
+              	$this->nice_factor=4000;
+              	array_push($this->arr_nice_factor,$this->nice_factor);
+              } else {
+              	$this->EXACT_MATCH=TRUE;
+              	$this->nice_factor=1000;
+              	array_push($this->arr_nice_factor,$this->nice_factor);
+              }
+              	
+              
               if ($debug) echo "<b>WOUW</b>:".$keyword_value." with ".$content_value." gives a nice factor of:".$this->nice_factor."<br>";
               continue 2;
             } else {
+			  $this->nice_factor=0;            	
               $m1=metaphone(strtolower($keyword_value));
               $m2=metaphone(strtolower($content_value));
-              //echo "<br>".$m1."::".$m2."<br>";
+              if ($debug) echo "<br> metaphone value of $keyword_value is $m1::metaphone value of $content_value is $m2<br>";
               //$nix=similar_text($m1,$m2,$this->nice_factor);
-              $levenshtein=levenshtein(strtolower($keyword_value),strtolower($content_value));
-              
-              if ($debug) echo $levenshtein."<br>";
+              //$levenshtein=levenshtein(strtolower($keyword_value),strtolower($content_value));
+              $levenshtein=levenshtein($m1,$m2);
+              //if ($debug) echo $levenshtein."<br>";
               
               // Step 1: Function value of levensthein comparison:
               $this->nice = - 1/2 * $levenshtein + strlen($keyword_value);
-              
+              if ($debug) echo 'Nice: '.$this->nice.'= -1/2 * '.$levenshtein.' + '.strlen($keyword_value).'<br>';
               // Step 2: Percent value of levensthein comparison:
               $this->nice_factor = 100/strlen($keyword_value)*$this->nice;
-              
+              if ($debug) echo 'DEBUG: current nice factor of this run is:'.$this->nice_factor.'<br>';
               // By more exact hits increase the nice value more higher than the exact percent match
-              if ($this->nice_factor > 90) $this->nice_factor=500;
-              if ($this->nice_factor >= 75) $this->nice_factor=200;
+              //if ($this->nice_factor > 90) $this->nice_factor=500;
+              //if ($this->nice_factor >= 75) $this->nice_factor=200;
               
               
               //$this->nice_factor = ($levenshtein/strlen($keyword_value));
-              
               if ($this->nice_factor) {
                 array_push($this->arr_nice_factor,$this->nice_factor);
                 if ($debug) echo "<u>".$keyword_value."</u> with <u>".$content_value."</u> gives a nice factor of:".$this->nice_factor."<br>";
@@ -344,7 +257,7 @@ class Product extends Core {
       } // (list($keyword_index,$keyword_value) = each ($this->arr_keywords))
       
       // If there is an exact match:
-      if (!$this->EXACT_MATCH) {
+      //if (!$this->EXACT_MATCH) {
         // average of levensthein values:
         $this->nice_factor=0;
         /*
@@ -353,17 +266,21 @@ class Product extends Core {
         $this->nice_factor = 1 / count($this->arr_nice_factor) * ( $this->nice_factor );
         $this->nice_factor = 1/ $this->nice_factor;
         */
+
         for ($i=0; $i < count($this->arr_nice_factor); $i++) 
           $this->nice_factor = $this->nice_factor + $this->arr_nice_factor[$i];
         $this->nice_factor = $this->nice_factor / count($this->arr_nice_factor)  ;
-      } else {
-        $this->nice_factor=1000;
-      }
+      //} else {
+      //  $this->nice_factor=1000;
+      //}
       
       if ($debug) echo "=".$this->nice_factor."<br>";      
       
       if ($this->nice_factor) {
-        $this->sql="INSERT INTO ".$this->tbl_temp." (`item_id`,`plausibility`, `item_description`) VALUES ('".$this->row_elem['item_id']."',".round($this->nice_factor,0).",'".$this->row_elem['item_description']."')";
+        if ($debug) 
+        	$this->sql="INSERT INTO ".$this->tbl_temp." (`item_id`,`plausibility`, `item_description`) VALUES ('".$this->row_elem['item_id']."',".round($this->nice_factor,0).",'".$this->row_elem['item_description']." (nice=".$this->nice_factor.")')";
+        else
+        	$this->sql="INSERT INTO ".$this->tbl_temp." (`item_id`,`plausibility`, `item_description`) VALUES ('".$this->row_elem['item_id']."',".round($this->nice_factor,0).",'".$this->row_elem['item_description']."')";
         if ($debug) echo $this->sql."<br>";
         $db->Execute($this->sql);
         $this->EXACT_MATCH=FALSE; // Reset the exact match flag
@@ -374,7 +291,8 @@ class Product extends Core {
       
 
       
-    } // end of while ($this->row_elem = $this->rs_tbl->FetchRow())
+    } // end of while ($this->row_elem = $this->rs_tbl->FetchRow()) 
+    
       $this->sql="SELECT item_id, plausibility, item_description FROM ".$this->tbl_temp." ORDER BY plausibility DESC LIMIT 0,40";
       return $db->Execute($this->sql);
   }
@@ -386,11 +304,23 @@ class Product extends Core {
   
   //------------------------------------------------------------------------------
   
-  function get_all_items(){
+  function get_all_items($result_filter='all'){
     global $db;
     $debug=FALSE;
+    switch ($result_filter) {
+    	case 'all':
+    		$SQL_FILTER=" 1=1 ";
+    		break;
+    	case 'stock':
+    		$SQL_FILTER=" purchasing_class='drug_list' OR purchasing_class='supplies' ";
+    		break;
+    	default:
+    		$SQL_FILTER=" 1=1 ";
+    		break;
+    }
+    
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;    
-    $this->sql="SELECT `item_id`, \"n/a\" AS `plausibility` FROM care_tz_druglist ORDER BY purchasing_class, item_description ";
+    $this->sql="SELECT `item_id`, 'n/a' AS `plausibility`,  `item_description` FROM care_tz_drugsandservices WHERE $SQL_FILTER ORDER BY purchasing_class, item_description ";
     return $db->Execute($this->sql);
   }
   
@@ -401,7 +331,8 @@ class Product extends Core {
 
   function get_description($item_id) {
     global $db;
-    $this->sql="SELECT item_description FROM care_tz_druglist WHERE item_id='".$item_id."'";
+    $db->debug=false;
+    $this->sql="SELECT item_description FROM care_tz_drugsandservices WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -412,7 +343,7 @@ class Product extends Core {
 
   function get_itemnumber($item_id) {
     global $db;
-    $this->sql="SELECT item_number FROM care_tz_druglist WHERE item_id='".$item_id."'";
+    $this->sql="SELECT item_number FROM care_tz_drugsandservices WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -424,7 +355,7 @@ class Product extends Core {
 
   function get_item_peadric($item_id) {
     global $db;
-    $this->sql="SELECT is_pediatric FROM care_tz_druglist WHERE item_id='".$item_id."'";
+    $this->sql="SELECT is_pediatric FROM care_tz_drugsandservices WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -434,7 +365,7 @@ class Product extends Core {
   }
   function get_item_adult($item_id){
     global $db;
-    $this->sql="SELECT is_adult FROM care_tz_druglist WHERE item_id='".$item_id."'";
+    $this->sql="SELECT is_adult FROM care_tz_drugsandservices WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -445,7 +376,7 @@ class Product extends Core {
 
   function get_item_other($item_id){
     global $db;
-    $this->sql="SELECT is_other FROM care_tz_druglist WHERE item_id='".$item_id."'";
+    $this->sql="SELECT is_other FROM care_tz_drugsandservices WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -456,7 +387,7 @@ class Product extends Core {
 
   function get_item_consumable($item_id){
     global $db;
-    $this->sql="SELECT is_consumable FROM care_tz_druglist WHERE item_id='".$item_id."'";
+    $this->sql="SELECT is_consumable FROM care_tz_drugsandservices WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -467,7 +398,7 @@ class Product extends Core {
 
   function get_selians_item_description($item_id){
     global $db;
-    $this->sql="SELECT item_description FROM care_tz_druglist WHERE item_id='".$item_id."'";
+    $this->sql="SELECT item_description FROM care_tz_drugsandservices WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -477,7 +408,7 @@ class Product extends Core {
   }
   function get_items_full_description($item_id){
     global $db;
-    $this->sql="SELECT item_full_description FROM care_tz_druglist WHERE item_id='".$item_id."'";
+    $this->sql="SELECT item_full_description FROM care_tz_drugsandservices WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
@@ -487,27 +418,27 @@ class Product extends Core {
   }
   function get_item_classification($item_id){
     global $db;
-    $this->sql="SELECT purchasing_class FROM care_tz_druglist WHERE item_id='".$item_id."'";
+    $this->sql="SELECT purchasing_class FROM care_tz_drugsandservices WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
-      if ($this->elem[0]=="mems_drug_list")
+      if ($this->elem[0]=="drug_list")
         return "drug";
-      if ($this->elem[0]=="mems_supplies")
+      if ($this->elem[0]=="supplies")
         return "supplies";
-      if ($this->elem[0]=="mems_supplies_laboratory")
+      if ($this->elem[0]=="supplies_laboratory")
         return "supplies lab.";
-      if ($this->elem[0]=="mems_special_others_list")
+      if ($this->elem[0]=="special_others_list")
         return "special others";
-      if ($this->elem[0]=="mems_xray")
+      if ($this->elem[0]=="xray")
         return "x-ray";
-      if ($this->elem[0]=="mems_service")
+      if ($this->elem[0]=="service")
         return "service";
-      if ($this->elem[0]=="mems_dental")
+      if ($this->elem[0]=="dental")
         return "dental services";
-      if ($this->elem[0]=="mems_smallop")
+      if ($this->elem[0]=="smallop")
         return "small op";
-      if ($this->elem[0]=="mems_bigop")
+      if ($this->elem[0]=="bigop")
         return "major op";
       
       //return $this->elem[0];
@@ -517,7 +448,7 @@ class Product extends Core {
 
   function get_selians_item_price($item_id){
     global $db;
-    $this->sql="SELECT unit_price FROM care_tz_druglist WHERE item_id='".$item_id."'";
+    $this->sql="SELECT unit_price FROM care_tz_drugsandservices WHERE item_id='".$item_id."'";
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();

@@ -35,21 +35,21 @@
 {
 echo '				
 					<td width="25%">
-					<font color="purple">Selian File Nr.:
+					<font color="purple">'.$LDSelianFileNr.'
 						<font color="#ffffee" class="vi_data"><b>'.$h_selian_file_number.'
 					</td>
 					<td width="25%">
-					<font color="purple">Batch File Nr.:
+					<font color="purple">'.$LDBatchFileNr.'
 						<font color="#ffffee" class="vi_data"><b>'.$h_batch_nr.'				
 					</td>
 					<td width="25%">	
-							<font color="purple">Surname/Ukoo:
+							<font color="purple">'.$LDSurnameUkoo.'
 					 	<font color="#ffffee" class="vi_data"><b>
 						'.$h_name_last.'</b>
 					</td>	
 										
 					<td width="25%">
-					<font color="purple">First Name:
+					<font color="purple">'.$LDFirstName.'
 					<font color="#ffffee" class="vi_data"><b>
 						'.$h_name_first.' </b>
 					</font>
@@ -79,9 +79,9 @@ echo '
 	<tr bgcolor="<?php echo $bgc1 ?>">	    
 	<td align="center"  colspan=3>
 	<font size=1 color="purple" face="verdana,arial" >
-		<font size=1 color="purple" face="verdana,arial"> date of birth: </font><?php echo $h_birthdate;?>&nbsp;
-		<font size=1 color="purple" face="verdana,arial"> sex: </font><img src="<?php echo $root_path;?>/gui/img/common/default/<?php echo $h_sex_img;?>"&nbsp;
-		<font size=1 color="purple" face="verdana,arial"> System PID: </font><?php echo $h_pid;?>&nbsp;
+		<font size=1 color="purple" face="verdana,arial"><?php echo $LDBirthdate; ?>  </font><?php echo $h_birthdate;?>&nbsp;
+		<font size=1 color="purple" face="verdana,arial"><?php echo $LDSex; ?>  </font><img src="<?php echo $root_path;?>/gui/img/common/default/<?php echo $h_sex_img;?>"&nbsp;
+		<font size=1 color="purple" face="verdana,arial"><?php echo $LDSystemPID; ?>  </font><?php echo $h_pid;?>&nbsp;
     </td>
 
 	</tr>

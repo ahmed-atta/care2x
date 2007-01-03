@@ -94,7 +94,7 @@ define('LANG_FILE','konsil_chemlabor.php');
 *  $user_origin == lab ;  from the laboratory
 *  and set the user cookie name and break or return filename
 */
-$debug=FALSE;
+$debug=false;
 if($user_origin=='lab'){
   $local_user='ck_lab_user';
   $breakfile=$root_path."modules/laboratory/labor.php".URL_APPEND;
@@ -313,7 +313,8 @@ if(!isset($edit)) $edit=FALSE;
  $smarty->assign('sToolbarTitle', "$LDDiagnosticTest :: $LDCentralLab");
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('request_chemlab.php','$pn')");
+
+ $smarty->assign('pbHelp',"javascript:gethelp('laboratory_testrequest.php','Laboratories :: Test Request','$user_origin')");
 
  # hide return  button
  $smarty->assign('pbBack',FALSE);
@@ -572,22 +573,22 @@ echo '
 		
 			
 					<td width="25%">
-					<font color="purple">Hospital File Nr.:
+					<font color="purple">'.$LDHospitalFileNr.'
 						<font color="#ffffee" class="vi_data"><b>'.$h_selian_file_number.'
 					</td>
 					<td width="25%">
 
-					<font color="purple">Adm. no.:
+					<font color="purple">'.$LDAdmNr.'
 						<font color="#ffffee" class="vi_data"><b>'.$pn.'				
 					</td>
 					<td width="25%">	
-						<font color="purple">	Surname/Ukoo:
+						<font color="purple">	'.$LDSurnameUkoo.'
 					 	<font color="#ffffee" class="vi_data"><b>
 						'.$h_name_last.'</b>
 					</td>	
 										
 					<td width="25%">
-					<font color="purple"> First Name:
+					<font color="purple"> '.$LDFirstName.'
 					<font color="#ffffee" class="vi_data"><b>
 						'.$h_name_first.' </b>
 

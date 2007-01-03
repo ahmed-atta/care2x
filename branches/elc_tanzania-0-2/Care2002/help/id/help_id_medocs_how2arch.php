@@ -22,7 +22,7 @@ penelitian/pencarian di arsip medocs</font></b>
     Jika pencarian menemukan hasil tunggal, dokumen lengkap akan ditampilkan secepatnya.<br>
     Bagaimanapun juga, jika pencarian menemukan beberapa hasil, sebuah daftar 
     akan ditampilkan.<br>
-    <?php endif ?>
+    <?php endif;?>
     Untuk melihat informasi pasien yang anda cari, klik tombol <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> 
     yang berhubungan dengannya, atau namanya, atau nama keluarganya, atau tanggal 
     dia masuk.. 
@@ -198,12 +198,12 @@ penelitian/pencarian di arsip medocs</font></b>
       secepatnya.<br>
       Bagaimanapun juga, jika pencarian menemukan beberapa hasil, sebuah daftar 
       akan ditampilkan.<br>
-      <?php endif ?>
+      <?php endif;?>
       Untuk melihat informasi pasien yang anda cari, klik tombol <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> 
       yang berhubungan dengannya, atau namanya, atau nama keluarganya, atau tanggal 
       dia masuk.. </p>
     <p> 
-      <?php endif ?>
+      <?php endif;?>
       <b>Catatan</b> </p>
   </ul>
 

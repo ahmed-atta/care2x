@@ -26,11 +26,11 @@ Como desmarcar todos os parâmetros?</b>
 <ul>      
 		<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?> border=0> novamente para DESMARCAR todos os parâmetros.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="graph") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Como voltar para os resultados dos testes sem os gráficos? </b></font>
 <ul> <b>Nota: </b>Se você quiser voltar, clique no botão <img <?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?>>.</ul>
-<?php endif ?>
+<?php endif;?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Como fechar o laboratório <?php echo $x3 ?>? </b></font>
 <ul> <b>Nota: </b>Se você quiser fechar, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle">.</ul>

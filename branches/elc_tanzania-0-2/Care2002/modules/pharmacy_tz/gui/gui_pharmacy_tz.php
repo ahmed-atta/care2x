@@ -46,6 +46,9 @@ function closewin()
 function open_pending_prescriptions() {
 	urlholder="<?php echo $root_path;?>modules/pharmacy_tz/pharmacy_tz_pending_prescriptions.php?sid=<?php echo $HTTP_SESSION_VARS['sess_pid'];?>&comming_from=pharmacy";
 	patientwin=window.open(urlholder,"Ziel","width=1000,height=800,status=yes,menubar=no,resizable=yes,scrollbars=yes,statusbar=yes,top=0,left=0");
+	patientwin.moveTo(0,0);
+	patientwin.resizeTo(screen.availWidth,screen.availHeight);
+
 }
 // -->
 </script>
@@ -61,12 +64,12 @@ function open_pending_prescriptions() {
 			 <table cellspacing="0"  class="titlebar" border=0>
  <tr valign=top  class="titlebar" >
   <td bgcolor="#99ccff" >
-    &nbsp;&nbsp;<font color="#330066">Pharmacy</font>
+    &nbsp;&nbsp;<font color="#330066"><?php echo $LDPharmacy; ?></font>
 
        </td>
   <td bgcolor="#99ccff" align=right><a
    href="javascript:window.history.back()"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a><a
-   href="javascript:gethelp('submenu1.php','Pharmacy')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
+   href="javascript:gethelp('pharmacy_menu.php','Pharmacy :: Main Menu')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
    href="../../main/startframe.php?ntid=false&lang=$lang" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
  </tr>
  </table>		</td>
@@ -85,9 +88,8 @@ function open_pending_prescriptions() {
                     <TBODY class="submenu">
                       <TR> 
                         <td align=center><img src="../../gui/img/common/default/prescription.gif" border=0 width="27" height="17"></td>
-                        <TD class="submenu_item"><nobr><a href="javascript:open_pending_prescriptions()" >Drug 
-                          prescription</a></nobr></TD>
-                        <TD>Show prescriptions of patients</TD>
+                        <TD class="submenu_item"><nobr><a href="javascript:open_pending_prescriptions()" ><?php echo $LDDrugPrescription; ?></a></nobr></TD>
+                        <TD><?php echo $LDShowPrescriptionsofPatients; ?></TD>
                       </tr>
                       <TR  height=1> 
                         <TD colSpan=3 class="vspace"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>
@@ -95,14 +97,14 @@ function open_pending_prescriptions() {
                       <!--
                       <TR> 
                         <td height="26" align=center><img src="../../gui/img/common/default/bestell.gif" border=0 width="16" height="16"></td>
-                        <TD class="submenu_item"><nobr><a href="#">Ordering products</a></nobr></TD>
-                        <TD>ordering of products (comming soon)</TD>
+                        <TD class="submenu_item"><nobr><a href="#"><?php echo $LDOrderingProducts; ?></a></nobr></TD>
+                        <TD><?php echo $LDorderingOfProducts; ?></TD>
                       </tr>
                       -->
                       <TR> 
                         <td align=center><img src="../../gui/img/common/default/templates.gif" border=0 width="16" height="17"></td>
-                        <TD class="submenu_item"><nobr><a href="pharmacy_tz_product_catalog.php">My product catalog</a></nobr></TD>
-                        <TD>Create, edit, update, remove, etc.</TD>
+                        <TD class="submenu_item"><nobr><a href="pharmacy_tz_product_catalog.php"><?php echo $LDMyProductCatalog; ?></a></nobr></TD>
+                        <TD><?php echo $LDCreateEditUpdateRemove; ?></TD>
                       </tr>
                       <TR  height=1> 
                         <TD colSpan=3 class="vspace"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>
@@ -112,8 +114,8 @@ function open_pending_prescriptions() {
                       <TR> 
                       
                         <td align=center><img src="../../gui/img/common/default/documents.gif" border=0 width="16" height="17"></td>
-                        <TD class="submenu_item"><nobr><a href="apotheke-pass.php?ntid=false&lang=$lang&mode=archive">Archive</a></nobr></TD>
-                        <TD>View, edit, archive processed orders</TD>
+                        <TD class="submenu_item"><nobr><a href="apotheke-pass.php?ntid=false&lang=$lang&mode=archive"><?php echo $LDArchive; ?></a></nobr></TD>
+                        <TD><?php echo $LDViewEditArchiveProcessedOrders; ?></TD>
                       </tr>
                       -->
 

@@ -60,10 +60,18 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   </tr>
   <tr>
 	<td bgcolor="#e9e9e9" valign="top">
+	<FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo "ARV Admin";  ?></b> </FONT><br>
+	</td>
+  </tr>
+  <tr>
+	<td bgcolor="#ffffff">
+		&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><FONT  color="#0000cc" FACE="verdana,arial" size=2><a href="edv_arv_information.php<?php echo URL_APPEND ?>" target="SYSADMIN_WFRAME"> <?php echo "Facility Information" ?></a></FONT><br>
+  </tr>
+  <tr>
+	<td bgcolor="#e9e9e9" valign="top">
 	<FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDUsers;  ?></b> </FONT><br>
 	</td>
   </tr>
-
   <tr>
 	<td bgcolor="#ffffff">
 		&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><FONT  color="#0000cc" FACE="verdana,arial" size=2><a href="edv_user_access_edit.php?sid=<?php echo $sid."&lang=$lang&src=sysadmin" ?>" target="SYSADMIN_WFRAME"> <?php echo $LDCreateEditLock; ?></a></FONT><br>

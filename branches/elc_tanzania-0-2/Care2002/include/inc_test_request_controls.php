@@ -1,6 +1,8 @@
 <table width="<?php echo $controls_table_width ?>"  cellpadding=0 cellspacing=0>
 <tr><td>
-<input type="image" <?php echo createLDImgSrc($root_path,'abschic.gif') ?> alt="<?php echo $LDSend ?>">
+<!--done by d.r. from merotech
+<input type="image" <?php echo createLDImgSrc($root_path,'abschic.gif') ?> alt="<?php echo $LDSend ?>">-->
+<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 </td>
 <td align=right>
 <?php
@@ -14,7 +16,8 @@ if ($mode=="edit")
 <!-- 
 <a href="javascript:sendLater()"><img <?php echo createLDImgSrc($root_path,'sendlater.gif','0') ?> alt="<?php echo $LDSendLater ?>"></a>
  -->
- <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
+ <!--<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>-->
+ <input type="image" <?php echo createLDImgSrc($root_path,'abschic.gif') ?> alt="<?php echo $LDSend ?>">
 </td>
 </tr>
 </table>

@@ -13,8 +13,8 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 //define('NO_2LEVEL_CHK',1);
+define('LANG_FILE','billing.php');
 require($root_path.'include/inc_front_chain_lang.php');
-
 
 require ("gui/gui_billing_tz.php");
 

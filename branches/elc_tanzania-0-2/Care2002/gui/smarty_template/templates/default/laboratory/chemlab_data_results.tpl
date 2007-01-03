@@ -1,5 +1,4 @@
 {{* chemlab_data_results.tpl *}}
-
 <table width="100%" border="0">
   <tbody>
     <tr valign="top">

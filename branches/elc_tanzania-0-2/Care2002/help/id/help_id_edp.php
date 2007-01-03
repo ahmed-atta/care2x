@@ -53,7 +53,7 @@
  	<b>Langkah 1: </b>Klik tombol <input type="button" value="Simpan">.<br>
 </ul>
 	
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="save") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Hak Akses baru sekarang telah tersimpan, bagaimana cara membuat yang lain?</b> 
@@ -78,7 +78,7 @@
   </ul>
 	
 	
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="list") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Apa 
   kegunaan tombol <img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> 
@@ -129,7 +129,7 @@
 </ul>
 
 	
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="update") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Bagaimana cara mengedit Hak Akses?</b> </font> 
@@ -149,7 +149,7 @@ Catatan:</b>
   </ul>
 	
 	
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="delete") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Bagaimana Cara menghapus Hak Akses?</b> </font> 
@@ -167,7 +167,7 @@ Catatan:</b>
     <input type="button" value="Tidak. Kembali">
     .<br>
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="lock") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>><b><font color="#990000">Bagaimana 
   cara </font></b><font color="#990000"><b> 
@@ -191,8 +191,8 @@ Catatan:</b>
     .<br>
   </ul>
 	
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 
 	</form>
 

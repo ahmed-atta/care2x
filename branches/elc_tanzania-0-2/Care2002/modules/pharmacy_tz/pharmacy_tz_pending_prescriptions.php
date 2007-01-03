@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 
-$debug = FALSE;
+$debug = false;
 
 if ($debug) {
   echo $pn."<br>";
@@ -56,8 +56,6 @@ if ($mode=="done" && isset($pn) && isset($prescription_date)) {
   // => make a usual form here
   $mode = "";
 }
-
-
 	if(!$mode) /* Get the pending test requests */
 	{
 
@@ -115,6 +113,11 @@ if ($mode=="done" && isset($pn) && isset($prescription_date)) {
 		}
 		$mode="show";   
 	}	
+
+$lang_tables[]='billing.php';
+
+require($root_path.'include/inc_front_chain_lang.php');
+
 require ("gui/gui_pharmacy_tz_pending_prescriptions.php");
 
 ?>

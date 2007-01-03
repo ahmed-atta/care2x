@@ -1,12 +1,18 @@
+<?php 
+require('./roots.php');
+require($root_path.'include/inc_environment_global.php');
+$lang_tables[]='plugins_VitalCalc.php';
+require($root_path.'include/inc_front_chain_lang.php');
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
-<TITLE> Results and their Interpretations </TITLE>
+<TITLE> <?php echo $LDResultsInterpretations ?> </TITLE>
 </HEAD>
 
 <BODY>
 
-<DIV ALIGN="CENTER"><H1><font face="Verdana">Results and their Interpretations</font></H1></DIV>
+<DIV ALIGN="CENTER"><H1><font face="Verdana"><?php echo $LDResultsInterpretations ?></font></H1></DIV>
 
 <!-- Sources
 Body fat percentage calculator and interpretation: http://bestbodyever.com/body-fat-calculator.html
@@ -30,20 +36,20 @@ BMI Interpretation: http://www.cdc.gov/nccdphp/dnpa/bmi/bmi-adult.htm
 # All datas are in correct form. Now interpret the data as necessary.
 
 		# Set the ideal body weight values as per the sex of the patient...
-		if ($SexValue == "male") 
+		if ($SexValue == $LDMale) 
 		{
 			$maxWaistSize = 102;
 			$IBWValue = $HTValue - 105;
 			$IBWLVal = (int) ($IBWValue * 2.20462262185);
 			if ($AgeValue <= 20)
 			{
-				$SaluC = "young man";
-				$BMIntpret = "These BMI calculations are not applicable to you";
+				$SaluC = $LDYoungMen;
+				$BMIntpret = $LDTheseBMICalculations;
 			}
 			else
 			{
-				$SaluC = "man";
-				$BMIntpret = "The BMI calculations are applicable to you: ";
+				$SaluC = $LDman;
+				$BMIntpret = $LDTheBMICalculations;
 			}
 		}
 		else 
@@ -51,13 +57,13 @@ BMI Interpretation: http://www.cdc.gov/nccdphp/dnpa/bmi/bmi-adult.htm
 			$maxWaistSize = 88;
 			if ($AgeValue <= 20)
 			{
-				$SaluC = "young lady";
-				$BMIntpret = "These BMI calculations are not applicable to you";
+				$SaluC = $LDYoungLady;
+				$BMIntpret = $LDTheseBMICalculations;
 			}
 			else
 			{
-				$SaluC = "lady";
-				$BMIntpret = "The BMI calculations are applicable to you: ";
+				$SaluC = $LDlady;
+				$BMIntpret = $LDTheBMICalculations;
 			}
 			$IBWValue = $HTValue - 107;
 			$IBWLVal = (int) ($IBWValue * 2.20462262185);
@@ -99,115 +105,115 @@ BMI Interpretation: http://www.cdc.gov/nccdphp/dnpa/bmi/bmi-adult.htm
 		# Interpret the body fat percentage
 		if ($bodyFatP < 20)
 		{
-			$bfpInt = "<font color=\"#3300FF\">underweight</font>";
+			$bfpInt = "<font color=\"#3300FF\">".$LDunderweight."</font>";
 		}
 		elseif ( ($bodyFatP >= 20) and ($bodyFatP <= 25) )
 		{
-			$bfpInt = "<u>within healthy range</u>";
+			$bfpInt = "<u>".$LDwithinRange."</u>";
 		}
 		elseif ( ($bodyFatP > 25) and ($bodyFatP < 27) )
 		{
-			$bfpInt = "<font color=\"#FF6600\">overweight</font>";
+			$bfpInt = "<font color=\"#FF6600\">".$LDoverweight."</font>";
 		}
 		elseif ( ($bodyFatP > 27) and ($bodyFatP < 30) )
 		{
-			$bfpInt = "<font color=\"#CC0000\">significantly overweight</font>";
+			$bfpInt = "<font color=\"#CC0000\">".$LDsignificantlyoverweight."</font>";
 		}
 		elseif ($bodyFatP > 30)
 		{
-			$bfpInt = "<font color=\"#FF0000\">obese</font>";
+			$bfpInt = "<font color=\"#FF0000\">".$LDobese."</font>";
 		}
 
 		# Interpret the grade of obesity, if any
 		if ( ($WTValue < $AcBW) and ($waistSInCms <= $maxWaistSize) )
 		{
-			$ObGrader = "<font color=\"#339900\">You are not overweight</font>";
+			$ObGrader = "<font color=\"#339900\">".$LDNotOverweight."</font>";
 		}
 		elseif ( ($WTValue < $MaxBW) and ($waistSInCms <= $maxWaistSize) )
 		{
-			$ObGrader = "<font color=\"#FF9900\">You are overweight, and are at an increased risk, <br />particulary if you have type 2 diabetes and/or hypertension (high blood pressure) and/or heart disease</font>";
+			$ObGrader = $LDVitalCalcTxt[0];
 		}
 		elseif ( ($WTValue < $MaxBW) and ($waistSInCms > $maxWaistSize))
 		{
-			$ObGrader = "<font color=\"#FF9900\">You are overweight, and are at a high risk, <br />particulary if you have type 2 diabetes and/or hypertension (high blood pressure) and/or heart disease</font>";
+			$ObGrader = $LDVitalCalcTxt[1];
 		}
 		elseif ( ($WTValue < $ULGrIOb) and ($waistSInCms <= $maxWaistSize))
 		{
-			$ObGrader = "<font color=\"#FFCC00\">You appear to have class I obesity, and are at a high risk, <br />particulary if you have type 2 diabetes and/or hypertension (high blood pressure) and/or heart disease</font>";
+			$ObGrader = $LDVitalCalcTxt[2];
 		}
 		elseif ( ($WTValue < $ULGrIOb) and ($waistSInCms > $maxWaistSize) )
 		{
-			$ObGrader = "<font color=\"#FFCC00\">You appear to have class I obesity, and are at a very high risk, <br />particulary if you have type 2 diabetes and/or hypertension (high blood pressure) and/or heart disease</font>";
+			$ObGrader = $LDVitalCalcTxt[3];
 		}
 		elseif ($WTValue < $ULGrIIOb)
 		{
-			$ObGrader = "<font color=\"#FF6600\">You appear to have class II obesity, and are at a very high risk, <br />particulary if you have type 2 diabetes and/or hypertension (high blood pressure) and/or heart disease</font>";
+			$ObGrader = $LDVitalCalcTxt[4];
 		}
 		else
 		{
-			$ObGrader = "<font color=\"#FF0000\">You appear to have class III obesity, and are at an extremely high risk,<br /> particulary if you have type 2 diabetes and/or hypertension (high blood pressure) and/or heart disease</font>";
+			$ObGrader = $LDVitalCalcTxt[5];
 		}
 
 
 		# Interpret the body weight vis-a-vis ideal body weight
 		if ($IBWK == $WTValue) 
 		{
-			$IBWInt = "and this is your <font color=\"darkorchid\">ideal body weight</font>";
+			$IBWInt = $LDVitalCalcTxt[6];
 		}
 		else
 		{
-			$IBWInt = "while your ideal body weight should be <font color=\"darkorchid\">$IBWK </font>Kgs or <font color=\"darkorchid\">$IBWL </font>lbs";
+			$IBWInt = $LDVitalCalcTxt[7]." <font color=\"darkorchid\">$IBWK </font>".$LDKgsor." <font color=\"darkorchid\">$IBWL </font>".$LDlbs;
 		}
 
 		# Interpret the pulse pressure
 		if ($PPValue > 50) 
 		{
-			$PPInt = "<font color=\"red\">high</font> for it should be no more than 50";
+			$PPInt = $LDVitalCalcTxt[8];
 		}
 		elseif ($PPValue < 40)
 		{
-			$PPInt = "<font color=\"blue\">low</font> for it should be no less than 40";
+			$PPInt = $LDVitalCalcTxt[8];
 		}
 		else
 		#		($PPValue >= 40 || $PRValue <= 50)
 		{
-			$PPInt = "<font color=\"green\">within normal limits</font>";
+			$PPInt = $LDVitalCalcTxt[10];
 		}
 
 		# Interpret the type of pulse from its rate
 		if ($PRValue < 40) 
 		{
-			$PRInt = "<font color=\"red\">complete heart block</font>";
+			$PRInt = $LDVitalCalcTxt[11];
 		}
 		elseif ($PRValue < 60 and $PRValue >= 40) 
 		{
-			$PRInt = "<font color=\"blue\">bradycardia</font>";
+			$PRInt = "<font color=\"blue\">".$LDbradycardia."</font>";
 		} 
 		elseif ($PRValue > 100 and $PRValue <= 140) 
 		{
-			$PRInt = "<font color=\"#ff1cae\">sinus tachycardia</font>";
+			$PRInt = "<font color=\"#ff1cae\">".$LDSinusTachycardia."</font>";
 		} 
 		elseif ($PRValue > 140 and $PRValue <= 160) 
 		{
-			$PRInt = "<font color=\"red\">tachycardia</font>";
+			$PRInt = "<font color=\"red\">".$LDTachycardia."</font>";
 		} 
 		elseif ($PRValue > 160) 
 		{
-			$PRInt = "<font color=\"red\">supraventricular or ventricluar tachycardia</font>";
+			$PRInt = "<font color=\"red\">".$LDVitalCalcTxt[12]."</font>";
 		} 
 		else
 		#		($PRValue >= 60 | $PRValue <= 100)
 		{
-			$PRInt = "<font color=\"green\">a pulse rate within normal range</font>";
+			$PRInt = "<font color=\"green\">".$LDVitalCalcTxt[13]."</font>";
 		}
 
 		# Interpret the systolic BP
-		$BPInt = "<font color=\"green\">within normal limits</font>";
+		$BPInt = "<font color=\"green\">".$LDVitalCalcTxt[14]."</font>";
 		
 		# If the systolic is less than 60 and diastolic less than 40 say hypotensive
 		if ($BPSValue < 60 and $BPDValue < 40) 
 		{
-			$BPInt = "<font color=\"blue\">hypotensive</font>";
+			$BPInt = "<font color=\"blue\">".$LDhypotensive."</font>";
 		}
 
  		# If the systolic is more than 140 but less than or equal to 160
@@ -215,15 +221,15 @@ BMI Interpretation: http://www.cdc.gov/nccdphp/dnpa/bmi/bmi-adult.htm
 		{
 			if ($BPDValue > 90 and $BPDValue <= 100) 
 			{
-				$BPInt = "<font color=\"red\">mildly hypertensive</font>";
+				$BPInt = "<font color=\"red\">".$LDmildlyhypertensive."</font>";
 			}
 			elseif ($BPDValue > 100 and $BPDValue <= 110) 
 			{
-				$BPInt = "<font color=\"red\">moderately hypertensive</font>";
+				$BPInt = "<font color=\"red\">".$LDmoderatelyhypertensive."</font>";
 			}
 			elseif ($BPDValue > 110) 
 			{
-				$BPInt = "<font color=\"red\">severely hypertensive</font>";
+				$BPInt = "<font color=\"red\">".$LDseverelyhypertensive."</font>";
 			}
 		}		
 
@@ -232,73 +238,73 @@ BMI Interpretation: http://www.cdc.gov/nccdphp/dnpa/bmi/bmi-adult.htm
 		{
 			if ($BPDValue > 110) 
 			{
-				$BPInt = "<font color=\"red\">severely hypertensive</font>";
+				$BPInt = "<font color=\"red\">".$LDseverelyhypertensive."</font>";
 			}
 			else
 			{
-			   $BPInt = "<font color=\"red\">moderately hypertensive</font>";
+			   $BPInt = "<font color=\"red\">".$LDmoderatelyhypertensive."</font>";
 			}
 		}		
 		elseif ($BPSValue > 200) 
 		{
-			$BPInt = "<font color=\"red\">severely hypertensive</font>";
+			$BPInt = "<font color=\"red\">".$LDseverelyhypertensive."</font>";
 		}		
 
  		# If the diastolic is more than 90 but less than or equal to 100		
 		if ($BPDValue > 90 and $BPDValue <= 100)
 		{
-			$BPInt = "<font color=\"red\">mildly hypertensive</font>";
+			$BPInt = "<font color=\"red\">".$LDmildlyhypertensive."</font>";
 		}
 
  		# If the diastolic is more than 100 but less than or equal to 110		
 		if ($BPDValue > 100 and $BPDValue <= 110) 
 		{
-			$BPInt = "<font color=\"red\">moderately hypertensive</font>";
+			$BPInt = "<font color=\"red\">".$LDmoderatelyhypertensive."</font>";
 		}
 
  		# If the diastolic is more than 110		
 		if ($BPDValue > 110) 
 		{
-			$BPInt = "<font color=\"red\">severely hypertensive</font>";
+			$BPInt = "<font color=\"red\">".$LDseverelyhypertensive."</font>";
 		}
 
 		# Interpret the body mass index
 		if ($BMIValue < 19) 
 		{
-			$BMInt = " and you are <font color=\"blue\">underweight</font>";
+			$BMInt = " and you are <font color=\"blue\">".$LDunderweight."</font>";
 		} 
 		elseif ($BMIValue > 25 and $BMIValue <= 30) 
 		{
-			$BMInt = " and you are <font color=\"red\">prone to health risks</font>";
+			$BMInt = " and you are <font color=\"red\">".$LDpronetohealthrisks."prone to health risks</font>";
 		} 
 		elseif ($BMIValue > 30) 
 		{
-			$BMInt = " and you are <font color=\"red\">at a very high for development of heart diseases</font>";
+			$BMInt = $LDVitalCalcTxt[15];
 		}
 		elseif ($BMIValue > 25 and $BMIValue <= 30) 
 		{
-			$BMInt = " and you are <font color=\"red\">prone to health risks</font>";
+			$BMInt = $LDVitalCalcTxt[16];
 		} 
 		else
 		{
-			$BMInt = " and you are <font color=\"green\">fine</font>";
+			$BMInt = $LDVitalCalcTxt[17];
 		}
 
 		# Interpret the basal metabolic rate
 		if ($BMRValue > 10) 
 		{
 			$BMRVal = "<font color=\"red\">$BMRValue</font>";
-			$BMRInt = "this value is <font color=\"red\">high</font> for it should not be more than 10";
+			$BMRInt = $LDVitalCalcTxt[18];
 		} 
 		elseif ($BMRValue < -10) 
 		{
 			$BMRVal = "<font color=\"blue\">$BMRValue</font>";
-			$BMRInt = "this value is <font color=\"blue\">low</font> for it should not be less than 10";
+			$BMRInt = $LDVitalCalcTxt[19];
 		} 
 		else		#	if ($BMRValue >= -10 | $BMRValue <= 10) 
 		{
 			$BMRVal = "<font color=\"green\">$BMRValue</font>";
-			$BMRInt = "this value is <font color=\"green\">within normal limits</font>";
+			$BMRInt = $LDVitalCalcTxt[20];
 		}
 
 		#Interpret the BP according to age
@@ -306,16 +312,16 @@ BMI Interpretation: http://www.cdc.gov/nccdphp/dnpa/bmi/bmi-adult.htm
 		{
 			if ($AgeValue < 35 or $AgeValue > 55) 
 			{
-				$BPAgeInt = "<font color=\"red\">secondary causes of hypertension<br /><b>See your physician without delay!</b></font>";
+				$BPAgeInt = $LDVitalCalcTxt[21];
 			}
 			elseif ($AgeValue > 35 or $AgeValue < 55)
 			{
-				$BPAgeInt = "<font color=\"blue\">idiopathic causes of hypertension</font>";
+				$BPAgeInt = "<font color=\"blue\">".$LDidiopathicHypertension."</font>";
 			}
 		}
 		else
 		{
-			$BPAgeInt = "<font color=\"green\">no blood pressure problems</font>";
+			$BPAgeInt = "<font color=\"green\">".$LDVitalCalcTxt[22]."</font>";
 		}
 ?>
 
@@ -326,11 +332,11 @@ BMI Interpretation: http://www.cdc.gov/nccdphp/dnpa/bmi/bmi-adult.htm
 <TR>
 <TD ALIGN="LEFT">
 <font face="Verdana" size="2">
-<div align="center"><b><font color="#333399">You are a <u><?php echo $SaluC ?></u> and your age is <u><?php echo $AgeValue ?> years</u></font></b></div>&nbsp;<table border="5" cellpadding="2" cellspacing="5" style="border-collapse: collapse" bordercolor="#CCCCCC" width="100%" bordercolorlight="#999999" bordercolordark="#666666" bgcolor="#CCCCCC">
+<div align="center"><b><font color="#333399"><?php echo $LDVitalCalcTxt[23]; ?> <u><?php echo $SaluC ?></u> <?php echo $LDVitalCalcTxt[24]; ?> <u><?php echo $AgeValue ?> <?php echo $LDyears; ?></u></font></b></div>&nbsp;<table border="5" cellpadding="2" cellspacing="5" style="border-collapse: collapse" bordercolor="#CCCCCC" width="100%" bordercolorlight="#999999" bordercolordark="#666666" bgcolor="#CCCCCC">
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-<b><u><div align="center">Weight</div></u></b></font></td>
+<b><u><div align="center"><?php echo $LDWeight; ?></div></u></b></font></td>
   </tr>
   <tr>
     <td width="100%">
@@ -339,30 +345,30 @@ BMI Interpretation: http://www.cdc.gov/nccdphp/dnpa/bmi/bmi-adult.htm
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-Your weight is <font color="#FF3399"><?php echo $WTValue ?> </font>Kgs or <font color="#FF3399"><?php echo $WLValue ?> </font>lbs, <?php echo $IBWInt ?></font></td>
+<?php echo $LDVitalCalcTxt[55]; ?> <font color="#FF3399"><?php echo $WTValue ?> </font><?php echo $LDKgsor; ?> <font color="#FF3399"><?php echo $WLValue ?> </font><?php echo $LDlbs; ?>, <?php echo $IBWInt ?></font></td>
   </tr>
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-You should maintain <?php echo $SaluL ?> body weight between <font color="blue"><?php echo $LLBW ?></font> and <font color="green"><?php echo $AcBW ?></font> and should NOT cross <font color="red"><?php echo $MaxBW ?></font> Kgs</font></td>
+<?php echo $LDVitalCalcTxt[25]; ?> <?php echo $SaluL ?> <?php echo $LDVitalCalcTxt[26]; ?> <font color="blue"><?php echo $LLBW ?></font> <?php echo $LDand; ?> <font color="green"><?php echo $AcBW ?></font> <?php echo $LDVitalCalcTxt[27]; ?> <font color="red"><?php echo $MaxBW ?></font> <?php echo $LDKgs; ?></font></td>
   </tr>
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-This is equivalent to <font color="blue"><?php echo $LLBWLbs ?></font>, <font color="green"><?php echo $AcBWLbs ?></font> and <font color="red"><?php echo $MaxBWLbs ?></font> in lbs respectively</font></td>
+<?php echo $LDVitalCalcTxt[28]; ?> <font color="blue"><?php echo $LLBWLbs ?></font>, <font color="green"><?php echo $AcBWLbs ?></font> and <font color="red"><?php echo $MaxBWLbs ?></font> <?php echo $LDVitalCalcTxt[29]; ?></font></td>
   </tr>
 </table>
 <p>&nbsp;<TABLE FRAME="BORDER" BORDER="5" RULES="ROWS" COLS="1" CELLSPACING="5" CELLPADDING="2" bordercolorlight="#999999" bordercolordark="#808080" style="border-collapse: collapse" bordercolor="#111111" bgcolor="#CCCCCC" width="100%">
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-<b><u><div align="center">Height and Body Mass Index</div></u></b></font></td>
+<b><u><div align="center"><?php echo $LDVitalCalcTxt[30]; ?></div></u></b></font></td>
   </tr>
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
 <?php echo $BMIntpret ?><br />
-Your height is <font color="#FF3399"><?php echo $HTValue ?> </font>cms or <font color="#FF3399"><?php echo $INValue ?> </font>inches <?php echo $SaluL ?> body mass index is <font color="firebrick"><b><?php echo $BMIValue ?></b></font> <?php echo $BMInt ?> </font>
+<?php echo $LDVitalCalcTxt[31]; ?> <font color="#FF3399"><?php echo $HTValue ?> </font><?php echo $LDcmsor; ?> <font color="#FF3399"><?php echo $INValue ?> </font><?php echo $LDinches; ?> <?php echo $SaluL ?> <?php echo $LDVitalCalcTxt[32]; ?> <font color="firebrick"><b><?php echo $BMIValue ?></b></font> <?php echo $BMInt ?> </font>
     </td>
   </tr>
 </table>
@@ -371,30 +377,12 @@ Your height is <font color="#FF3399"><?php echo $HTValue ?> </font>cms or <font 
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-<b><u><div align="center">Required Calories</div></u></b></td>
+<b><u><div align="center"><?php echo $LDVitalCalcTxt[33]; ?></div></u></b></td>
   </tr>
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-You require to consume between <font color="red"> <?php echo $DRLValue ?> </font> and <font color="blue"> <?php echo $DRUValue ?> </font>KCalories per day to maintain/achieve your ideal body weight</td>
-  </tr>
-</table>
-<p>
-&nbsp;<table border="5" cellpadding="2" cellspacing="5" style="border-collapse: collapse" bordercolor="#111111" width="100%" bordercolorlight="#999999" bordercolordark="#666666" bgcolor="#CCCCCC">
-  <tr>
-    <td width="100%">
-<font face="Verdana" size="2">
-<b><u><div align="center">Body Surface Area and Fat Percentage</div></u></b></td>
-  </tr>
-  <tr>
-    <td width="100%">
-<font face="Verdana" size="2">
-Your body surface area is <b><font color="orange"><?php echo $SArea ?> </font></b>m<sup><b><font size="1">2</font></b></sup></td>
-  </tr>
-  <tr>
-    <td width="100%">
-<font face="Verdana" size="2">
-Your body fat percentage is <font color="#FF33CC"><?php echo $bodyFatP ?></font>%, and this indicates that you are <?php echo "$bfpInt" ?></u></td>
+<?php echo $LDVitalCalcTxt[34]; ?> <font color="red"> <?php echo $DRLValue ?> </font> <?php echo $LDand; ?> <font color="blue"> <?php echo $DRUValue ?> </font><?php echo $LDVitalCalcTxt[35]; ?></td>
   </tr>
 </table>
 <p>
@@ -402,22 +390,17 @@ Your body fat percentage is <font color="#FF33CC"><?php echo $bodyFatP ?></font>
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-<b><u><div align="center">Blood Pressure</div></u></b></td>
+<b><u><div align="center"><?php echo $LDVitalCalcTxt[36]; ?></div></u></b></td>
   </tr>
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-Your blood pressure is <font color="#3300CC"><?php echo $BPSValue ?>/<?php echo $BPDValue ?></font> torr<FONT COLOR="RED">*</FONT> or <font color="#3300CC"><?php echo $BPSValInkPa ?>/<?php echo $BPDValInkPa ?></font> kPa*</td>
+<?php echo $LDVitalCalcTxt[37]; ?> <b><font color="orange"><?php echo $SArea ?> </font></b>m<sup><b><font size="1">2</font></b></sup></td>
   </tr>
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-This means that you have a blood pressure that is <?php echo $BPInt ?> and you appear to have <?php echo $BPAgeInt ?></font></td>
-  </tr>
-  <tr>
-    <td width="100%">
-<font face="Verdana" size="2">
-Your pulse pressure is <font color="#FF3399"><?php echo $PPValue ?> </font> torr and this figure is <?php echo $PPInt ?></font></td>
+<?php echo $LDVitalCalcTxt[38]; ?> <font color="#FF33CC"><?php echo $bodyFatP ?></font>%, <?php echo $LDVitalCalcTxt[39]; ?> <?php echo "$bfpInt" ?></u></td>
   </tr>
 </table>
 <p>
@@ -425,22 +408,45 @@ Your pulse pressure is <font color="#FF3399"><?php echo $PPValue ?> </font> torr
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-<b><u><div align="center">Pulse Rate</div></u></b></font></td>
+<b><u><div align="center"><?php echo v; ?></div></u></b></td>
   </tr>
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-Your pulse rate is <font color="#FF3399"><?php echo $PRValue ?> </font>beats per minute and this means that you have <?php echo $PRInt ?></font></font></td>
+<?php echo $LDVitalCalcTxt[40]; ?> <font color="#3300CC"><?php echo $BPSValue ?>/<?php echo $BPDValue ?></font> <?php echo $LDtorr; ?><FONT COLOR="RED">*</FONT> <?php echo $LDor; ?> <font color="#3300CC"><?php echo $BPSValInkPa ?>/<?php echo $BPDValInkPa ?></font> <?php echo $LDkPa; ?></td>
   </tr>
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-Your target heart rate is <font color="red"><?php echo $THRate ?></font> beats per minute</font></td>
+<?php echo $LDVitalCalcTxt[41]; ?> <?php echo $BPInt ?> <?php echo $LDVitalCalcTxt[42]; ?> <?php echo $BPAgeInt ?></font></td>
   </tr>
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-You should achieve at least <font color="blue"><?php echo $OHRate ?></font> heart beats per minute when you are exercising at your peak</font></td>
+<?php echo $LDVitalCalcTxt[43]; ?> <font color="#FF3399"><?php echo $PPValue ?> </font> <?php echo $LDVitalCalcTxt[44]; ?> <?php echo $PPInt ?></font></td>
+  </tr>
+</table>
+<p>
+&nbsp;<table border="5" cellpadding="2" cellspacing="5" style="border-collapse: collapse" bordercolor="#111111" width="100%" bordercolorlight="#999999" bordercolordark="#666666" bgcolor="#CCCCCC">
+  <tr>
+    <td width="100%">
+<font face="Verdana" size="2">
+<b><u><div align="center"><?php echo $LDPulseRate; ?></div></u></b></font></td>
+  </tr>
+  <tr>
+    <td width="100%">
+<font face="Verdana" size="2">
+<?php echo $LDVitalCalcTxt[45]; ?> <font color="#FF3399"><?php echo $PRValue ?> </font><?php echo $LDVitalCalcTxt[46]; ?> <?php echo $PRInt ?></font></font></td>
+  </tr>
+  <tr>
+    <td width="100%">
+<font face="Verdana" size="2">
+<?php echo $LDVitalCalcTxt[47]; ?> <font color="red"><?php echo $THRate ?></font> <?php echo $LDbeatsperminute; ?></font></td>
+  </tr>
+  <tr>
+    <td width="100%">
+<font face="Verdana" size="2">
+<?php echo $LDVitalCalcTxt[48]; ?> <font color="blue"><?php echo $OHRate ?></font> <?php echo $LDVitalCalcTxt[49]; ?></font></td>
   </tr>
 </table>
 <br />
@@ -448,13 +454,13 @@ You should achieve at least <font color="blue"><?php echo $OHRate ?></font> hear
   <tr>
     <td width="100%">
 <font face="Verdana" size="2">
-<b><u><div align="center">Basal Metabolic Rate</div></u></b></font></td>
+<b><u><div align="center"><?php echo $LDBasalMetabolicRate; ?></div></u></b></font></td>
   </tr>
   <tr>
     <td width="100%">
 
 <font face="Verdana" size="2">
-Your basal metabolic rate is <?php echo $BMRVal ?> and <?php echo $BMRInt ?></font></td>
+<?php echo $LDVitalCalcTxt[50]; ?> <?php echo $BMRVal ?> <?php echo $LDand; ?> <?php echo $BMRInt ?></font></td>
   </tr>
 </table>
 <BR />
@@ -465,14 +471,12 @@ Your basal metabolic rate is <?php echo $BMRVal ?> and <?php echo $BMRInt ?></fo
 </div>
 <DIV ALIGN="CENTER">
 <font face="Verdana" size="1">
-<FONT COLOR="RED">*</FONT> 1 torr = 1 mmHg, *kPa 
-= kilo Pascals</font><font face="Verdana" size="2"><BR />
-<FONT COLOR="RED" SIZE="2">The target heart rate is not useful for children</FONT>
+<FONT COLOR="RED">*</FONT> <?php echo $LDVitalCalcTxt[51]; ?></font><font face="Verdana" size="2"><BR />
+<FONT COLOR="RED" SIZE="2"><?php echo $LDVitalCalcTxt[52]; ?></FONT>
 <BR />
-<FONT COLOR="RED" SIZE="2">The obesity calculator does not take into account the 
-waist to hip ratio, currently</FONT> </font>
+<FONT COLOR="RED" SIZE="2"><?php echo $LDVitalCalcTxt[53]; ?> </FONT> </font>
 <form method="POST" action="medical_eval.php">
-  <button name="recalc" value="Re-Calculate" type="submit"><font face="Verdana">
+  <button name="recalc" value="<?php echo $LDVitalCalcTxt[54]; ?>" type="submit"><font face="Verdana">
   Re-calculate</font></button>
   </font>
   </p>

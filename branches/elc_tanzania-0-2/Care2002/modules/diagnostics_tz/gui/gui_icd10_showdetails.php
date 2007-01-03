@@ -4,7 +4,7 @@ $encounter_arr = $diagnostic_obj->getLoadedEncounterData();?>
 
 <html>
 <head>
-<title>Diagnosis details: <?php echo $case_arr['ICD_10_code']; ?></title>
+<title><?php echo $LDDiagnosisDetails; ?> <?php echo $case_arr['ICD_10_code']; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link href="../../css/themes/default/default.css" rel="stylesheet" type="text/css">
 <script language="javascript" src="../../js/check_diagnostics_form.js"></script>
@@ -35,23 +35,23 @@ function openpopup(URL,target,content,id)
                 <td><?php echo $diagnostic_obj->ShowPid($encounter_arr['pid']); ?></td>
               </tr>
               <tr>
-                <td>Hospital file nr</td>
+                <td><?php echo $LDHospitalFileNr; ?></td>
                 <td><?php echo $encounter_arr['selian_pid']; ?></td>
               </tr>
               <tr>
-                <td>Last name</td>
+                <td><?php echo $LDLastName; ?></td>
                 <td><?php echo $encounter_arr['name_last']; ?></td>
               </tr>
               <tr>
-                <td>First name</td>
+                <td><?php echo $LDFirstName; ?></td>
                 <td><?php echo $encounter_arr['name_first']; ?></td>
               </tr>
               <tr>
-                <td>Birth</td>
+                <td><?php echo $LDBirth; ?></td>
                 <td><?php echo $encounter_arr['date_birth']; ?></td>
               </tr>
               <tr>
-                <td>Diagnose date</td>
+                <td><?php echo $LDDiagnoseDate; ?></td>
                 <td><?php echo date("Y-m-d - H:i:s",$case_arr['timestamp']); ?></td>
               </tr>
             </table></td>
@@ -60,7 +60,7 @@ function openpopup(URL,target,content,id)
       
 <table width="100%" border="0" cellpadding="1" cellspacing="1">
           <tr bgcolor="#99ccff">
-            <td width="100%">Comment:</td>
+            <td width="100%"><?php echo $LDComment; ?></td>
           </tr>
           <tr bgcolor="#CAD3EC">
             <td height="104">&nbsp;
@@ -68,12 +68,12 @@ function openpopup(URL,target,content,id)
             	if($case_arr['comment'])
             		echo $case_arr['comment'];
             	else
-            		echo '--- no comment available ---';
+            		echo $LDNoCommen;
             	
             	?></td>
           </tr>	 
 		  <tr bgcolor="#CAD3EC">
-		  	<td align="center"><input type="button" value="Close this window" onClick="javascript: window.close();"></td>
+		  	<td align="center"><input type="button" value="<?php echo $LDCloseThisWindow; ?>" onClick="javascript: window.close();"></td>
 		  </tr> 
         </table>                
  	  </form>

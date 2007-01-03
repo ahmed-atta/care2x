@@ -40,7 +40,7 @@ $bgc1='#fefefe';
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('diagnostic_report.php','$LDReports','','$station','$LDReports')");
+ $smarty->assign('pbHelp',"javascript:gethelp('consultation_reports.php','Patient&acute;s chart folder :: Consultation report','','$station','$LDReports')");
 
  # href for close button
  $smarty->assign('breakfile',$breakfile);

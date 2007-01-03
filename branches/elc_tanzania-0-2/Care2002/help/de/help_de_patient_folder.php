@@ -83,7 +83,7 @@ Wozu dient diese Auswahlbox: </b>	<select name="d"><option value="">Anforderung 
 <b>Schritt 2: </b>Klicken Sie auf die Klinik/Abteilung oder den Test.<br>
 <b>Schritt 3: </b>Das Anforderungsformular wird automatisch geöffnet.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="labor") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>Derzeit sind keine Laborbefunde verfügbar. </b></font>
@@ -92,6 +92,6 @@ Wozu dient diese Auswahlbox: </b>	<select name="d"><option value="">Anforderung 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Wie schließe ich die Ansicht mit den Patientendaten? </b></font>
 <ul> <b>Anmerkung: </b>Wenn Sie diese Ansicht schließen möchten, klicken Sie auf <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle">.</ul>
 
-<?php endif ?>
+<?php endif;?>
 
 </form>

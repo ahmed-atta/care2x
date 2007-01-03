@@ -117,7 +117,7 @@ in caso di più risultati apparirà invece una lista.<br>
 Per visualizzare le informazioni sul paziente che si sta cercando, premere o il bottone <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> corrispondente, 
 oppure il nome, il cognome o la data di accettazione.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <b>Nota</b>
 <ul>Per annullare la ricerca, clickare il bottone <input type="button" value="Annulla">.
 </ul>

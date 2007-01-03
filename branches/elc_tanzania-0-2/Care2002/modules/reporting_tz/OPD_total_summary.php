@@ -12,8 +12,10 @@ require_once($root_path.'include/care_api_classes/class_tz_selianreporting.php')
 $rep_obj = new selianreport();
 
 (!empty($_GET['printout'])) ? $PRINTOUT=TRUE : $PRINTOUT=FALSE;
- 
 
+$lang_tables[]='date_time.php';
+$lang_tables[]='reporting.php';
+require($root_path.'include/inc_front_chain_lang.php');
 require_once('include/inc_timeframe.php');
 $month=array_search(1,$ARR_SELECT_MONTH);
 $year=array_search(1,$ARR_SELECT_YEAR);

@@ -5,7 +5,7 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 
 /**
-*  Billing methods for tanzania (the product-module is completely rewritten by Robert Meggle. 
+*  Billing methods for tanzania (the product-module is completely rewritten by Robert Meggle.
 *
 * Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Robert Meggle
@@ -24,39 +24,39 @@ Class Core
               `--->Class Encounter
                         |
                         `----> Class Bill
-*/              
+*/
 
 class Bill extends Encounter {
-  
+
   // Properties
 
-	var $fields_tbl_bill=array(
+  var $fields_tbl_bill=array(
                   'encounter_nr',
                   'first_date',
-                  'create_id'); 
-									
+                  'create_id');
+
   var $tbl_bill='care_tz_billing';
   var $tbl_bill_elements='care_tz_billing_elem';
-  
+
   var $tbl_bill_archive='care_tz_billing_archive';
   var $tbl_bill_archive_elements='care_tz_billing_archive_elem';
-  
-  
+
+
   var $tbl_lab_param='care_tz_laboratory_param';
-  var $tb_drug_list='care_tz_druglist';
+  var $tb_drugsandservices='care_tz_drugsandservices';
   var $tbl_prescriptions='care_encounter_prescription';
   var $tbl_lab_requests='care_test_request_chemlabor';
-  
+
   var $fields_tbl_bill_elements=array (
                   'nr',
                   'date_change',
                   'is_labtest',
                   'is_medicine',
                   'is_comment',
-                  'is_paid', 
+                  'is_paid',
                   'amount',
                   'description');
-                  
+
   var $result;
   var $sql;
   var $debug;
@@ -71,25 +71,25 @@ class Bill extends Encounter {
   var $medical_item_name;
   var $medical_item_amount;
   var $item_number;
-  
-  
+
+
   //------------------------------------------------------------------------------
-  
+
   // Constructor
   function Bill() {
   }
-  
+
   // Methods:
-  
+
   /******************************************************************************
   *  PRIVATE
   **/
 
-  
+
   function _check_tbl_exists($tbl_name) {
     global $db;
     $this->debug=FALSE;
-    ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;        
+    ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
       $this->sql="SELECT * FROM $tbl_name LIMIT 0";
       return ($db->Execute($this->sql)) ? true : false;
   }
@@ -97,15 +97,15 @@ class Bill extends Encounter {
   function _delete_tbl($tbl_name) {
     global $db;
     $this->debug=FALSE;
-    ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;        
+    ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
       $this->sql="DROP TABLE $tbl_name";
       return ($db->Execute($this->sql)) ? true : false;
   }
 
 
-  //------------------------------------------------------------------------------    
+  //------------------------------------------------------------------------------
 
-  
+
   function _GetPendingResults($encounter_nr=FALSE) {
     /*
     * This private method goes through the main tables and returns an
@@ -117,17 +117,17 @@ class Bill extends Encounter {
     *   ** care_tz_billing (encounter_nr) but there are entries in the tables **
     *   ** care_test_request_chemlabor (encounter_nr) and                     **
     *   ** care_encounter_prescription (encounter_nr)                         **
-    *   ************************************************************************    
+    *   ************************************************************************
     *  if $encounter_nr is set, then this private function just returns the
     *  records for this encounter. Default is FALSE for this value and this
     *  method returns a list of all
     */
-    
+
     global $db;
     $this->debug=FALSE;
-    ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;    
+    ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
   }
-  
+
   /******************************************************************************
   *  PUBLIC
   **/
@@ -141,37 +141,37 @@ class Bill extends Encounter {
     *   ** care_tz_billing (encounter_nr) but there are entries in the tables **
     *   ** care_test_request_chemlabor (encounter_nr) and                     **
     *   ** care_encounter_prescription (encounter_nr)                         **
-    *   ************************************************************************    
+    *   ************************************************************************
     */
-    
-    /* 
+
+    /*
     * Note: 10.June 2005 by RM: This is an old function out of an billing experiment,
-    * there is the possibility that this function is not working correctely but I haven't 
+    * there is the possibility that this function is not working correctely but I haven't
     * fond an error right now. Never touch a running and working routine... But:
     * If there is a need for it, please replace this function and note that there are
     * now flags in the pending encounter and laboratory table to determine this result.
     * This function should return the first pid what could have pending bills.
     */
-    
-    
+
+
     $this->debug=FALSE;
     ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    
-		$this->sql="SELECT 
+
+		$this->sql="SELECT
 							care_person.selian_pid,
 							care_person.pid,
-              name_first, 
-              name_last, 
+              name_first,
+              name_last,
               bi.encounter_nr,
               bi.first_date,
               care_person.pid as batch_nr
-      FROM care_encounter, care_person, care_tz_billing bi, care_tz_billing_elem biel 
-      WHERE care_encounter.pid = care_person.pid 
+      FROM care_encounter, care_person, care_tz_billing bi, care_tz_billing_elem biel
+      WHERE care_encounter.pid = care_person.pid
             AND bi.encounter_nr = care_encounter.encounter_nr
             AND biel.nr = bi.nr
-            
+
       group by batch_nr
-      ORDER BY batch_nr ASC LIMIT 1";	
+      ORDER BY batch_nr ASC LIMIT 1";
     $this->results = $db->Execute($this->sql);
 		if($this->first_pn=$this->results->FetchRow()) {
     	return $this->first_pn['pid'];
@@ -180,18 +180,18 @@ class Bill extends Encounter {
   	}
   }
 
-  //------------------------------------------------------------------------------  
+  //------------------------------------------------------------------------------
   function getAllEncounters() {
-		global $db;
+	global $db;
     $this->debug=FALSE;
-    ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;		
-    if ($this->debug) echo "<br><b>statement from Method: class_tz_billing::GetAllEncounters:</b><br>"; 
-		$this->sql="SELECT 
+    ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    if ($this->debug) echo "<br><b>statement from Method: class_tz_billing::GetAllEncounters:</b><br>";
+		$this->sql="SELECT
             encounter_nr
     FROM care_encounter
-    
-    ORDER BY encounter_nr DESC";						              
-    
+
+    ORDER BY encounter_nr DESC";
+
 		$this->result=$db->Execute($this->sql);
 		$i=0;
 		while($encounters=$this->result->FetchRow()) {
@@ -200,8 +200,8 @@ class Bill extends Encounter {
   	}
   	return $enc_array;
 	}
-  //------------------------------------------------------------------------------  
-  
+  //------------------------------------------------------------------------------
+
   function CheckForPendingBill($encounter_nr) {
     /**
     * returns TRUE if there is a pending Bill existing for this encounter
@@ -211,56 +211,68 @@ class Bill extends Encounter {
     if ($this->debug) echo "<br><b>class_tz_billing::CheckForExistingBill($encounter_nr)</b><br>";
     $this->sql="select encounter_nr FROM care_tz_billing where encounter_nr=$encounter_nr LIMIT 0,1";
     $this->result=$db->Execute($this->sql);
-    
+
     return ($this->result->RecordCount())? TRUE : FALSE;
   }
 
-  
-  //------------------------------------------------------------------------------  
-  
+
+  //------------------------------------------------------------------------------
+
   function PendingBillObjects($encounter_nr) {
     /**
     * returns TRUE if at least one item in the billing table are missing...
     */
     global $db;
-    $this->debug=FALSE;
+    $this->debug=false;
     ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if ($this->debug) echo "<br><b>class_tz_billing::GetPendingObjects($encounter_nr)</b><br>";
     // prescription:
     // read all items out of the prescription table where no bill_number is given for this encounter
-    $this->sql = "select 
-                  	article_item_number 
+    $this->sql = "select
+                  	article_item_number
                   from $this->tbl_prescriptions
                   where bill_number = 0 AND encounter_nr=".$encounter_nr;
-    $this->result=$db->Execute($this->sql); 
-    if ($this->result->RecordCount()>0) 
-      return TRUE;
-      
-    //laboratory:
-    // read all items out of the laboratory table where no bill_number is given for this encounter
-    $this->sql="select 
-                        encounter_nr 
-                FROM 
-                  $this->tbl_lab_requests
-                where bill_number = 0 AND encounter_nr=".$encounter_nr;
-		// echo $this->sql;                
-    $this->result=$db->Execute($this->sql); 
-    if ($this->result->RecordCount()>0) 
+    $this->result=$db->Execute($this->sql);
+    if ($this->result->RecordCount()>0)
       return TRUE;
 
-    return FALSE; // We have nothing to do... no pending issues in the tables!                
-                
+    //laboratory:
+    // read all items out of the laboratory table where no bill_number is given for this encounter
+    $this->sql="select
+                        encounter_nr
+                FROM
+                  $this->tbl_lab_requests
+                where bill_number = 0 AND encounter_nr=".$encounter_nr;
+		// echo $this->sql;
+    $this->result=$db->Execute($this->sql);
+    if ($this->result->RecordCount()>0)
+      return TRUE;
+
+    return FALSE; // We have nothing to do... no pending issues in the tables!
+
   }
-  
-  //------------------------------------------------------------------------------  
- 
-  function DisplayArchivedBillHeadlines() {
+
+  //------------------------------------------------------------------------------
+
+ function DisplayArchivedBillHeadlines($no) {
     global $db;
     $enc_obj = New Encounter;
     $this->debug=FALSE;
     ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    if ($this->debug) echo "<br><b>class_tz_billing::DisplayArchivedBillHeadlines</b><br>";    
-    $this->sql="SELECT `nr`, `encounter_nr`, `first_date` FROM care_tz_billing_archive order by first_date DESC";
+    if ($this->debug) echo "<br><b>class_tz_billing::DisplayArchivedBillHeadlines</b><br>";
+	 $this->sql_pid="SELECT `pid` FROM care_person where selian_pid like '%$no%' OR name_first like '%$no%' OR name_last like '%$no%' ";
+      $this->request_pid=$db->Execute($this->sql_pid);
+      $color_change=FALSE;
+     while ($this->res_pid=$this->request_pid->FetchRow()){
+	  $pid=$this->res_pid['pid'];
+
+	 $this->sql_enr="SELECT `encounter_nr` FROM care_encounter where pid= '$pid' ";
+      $this->request_enr=$db->Execute($this->sql_enr);
+      $color_change=FALSE;
+     while ($this->res_enr=$this->request_enr->FetchRow()){
+      $enr=$this->res_enr['encounter_nr'];
+
+    $this->sql="SELECT `nr`, `encounter_nr`, `first_date` FROM care_tz_billing_archive where encounter_nr='$enr'   order by nr DESC";
     $this->request=$db->Execute($this->sql);
     $color_change=FALSE;
     while ($this->res=$this->request->FetchRow()) {
@@ -273,23 +285,23 @@ class Bill extends Encounter {
         $color_change=TRUE;
       }
   	  //$encoded_batch_number = $enc_obj->ShowPID($batch_nr);
-  	  $enc_number = $enc_obj->GetEncounterFromBatchNumber($batch_nr);      
-  	  
+  	  $enc_number = $enc_obj->GetEncounterFromBatchNumber($batch_nr);
+
       $this->bill_number=$this->res['nr'];
       $this->encounter_number=$this->res['encounter_nr'];
       $this->batch_number=$enc_obj->GetBatchFromEncounterNumber($this->encounter_number);
       $this->date=$this->res['first_date'];
       $enc_data = $enc_obj->loadEncounterData($this->encounter_number);
   		echo '<script language="javascript" >
-            <!-- 
+            <!--
             function printOut_'.$this->bill_number.'()
             {
             	urlholder="show_bill.php?bill_number='.$this->bill_number.'&batch_nr='.$this->batch_number.'&printout=TRUE&show_archived_bill=TRUE";
             	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
-              
+
             }
             // -->
-            </script> 
+            </script>
             ';
 
       echo '<tr>
@@ -300,37 +312,39 @@ class Bill extends Encounter {
   					  <td '.$BGCOLOR.'><div align="center">'.$enc_obj->FirstName($enc_data).' '.$enc_obj->LastName($enc_data).'</div></td>
   					</tr> ';
     }
+  }//
+  }//
   }
-  
-  
-  //------------------------------------------------------------------------------  
-  
+
+
+  //------------------------------------------------------------------------------
+
   function GetBill($encounter_nr) {
     global $db;
     /**
-    * Returns the ident bill number 
+    * Returns the ident bill number
     */
     $this->debug=FALSE;
     ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if ($this->debug) echo "<br><b>Method class_tz_billing::GetBill()</b><br>";
-    $this->sql = "SELECT nr FROM $this->tbl_bill WHERE encounter_nr=".$encounter_nr." limit 0,1 ";    
+    $this->sql = "SELECT nr FROM $this->tbl_bill WHERE encounter_nr=".$encounter_nr." limit 0,1 ";
     $this->request = $db->Execute($this->sql);
     if ($this->result=$this->request->FetchRow())
       return $this->result[0];
-    
+
   }
-  
-  //------------------------------------------------------------------------------  
-  
+
+  //------------------------------------------------------------------------------
+
   function CreateNewBill($encounter_nr) {
     global $db;
     /**
-    * Returns the ident bill number 
+    * Returns the ident bill number
     */
     $this->debug=FALSE;
     ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if ($this->debug) echo "<br><b>Method class_tz_billing::CreateNewBill()</b><br>";
-    $this->sql = "INSERT INTO care_tz_billing (encounter_nr, first_date, create_id) VALUES ('".$encounter_nr."','".time()."','') ";    
+    $this->sql = "INSERT INTO care_tz_billing (encounter_nr, first_date, create_id) VALUES ('".$encounter_nr."','".time()."','') ";
     $this->request = $db->Execute($this->sql);
     return $db->Insert_ID();
   }
@@ -341,7 +355,7 @@ class Bill extends Encounter {
 	  ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
     // do we have pending issues of prescriptions?
     // read all items out of the prescription table
-    $this->sql = "select 
+    $this->sql = "select
                   	article_item_number,
                     article,
                     notes,
@@ -349,8 +363,8 @@ class Bill extends Encounter {
                     price
                   from $this->tbl_prescriptions
                   where bill_number = 0 AND encounter_nr=".$encounter_nr;
-    $this->result=$db->Execute($this->sql); 
-    while ($this->records=$this->result->FetchRow()) {        
+    $this->result=$db->Execute($this->sql);
+    while ($this->records=$this->result->FetchRow()) {
         $this->item_number=$this->records['article_item_number'];
         $this->medical_item_name  =$this->records['article'];
         $this->medical_item_name  .= "(".$this->records['notes'].")";
@@ -360,18 +374,18 @@ class Bill extends Encounter {
         $this->medical_item_amount = $this->ConvertMedicalItemAmount($this->medical_item_amount);
         $this->sql ="INSERT INTO $this->tbl_bill_elements (nr, date_change, is_labtest, is_medicine, amount, amount_doc, price, description)
 							 			VALUES (".$bill_number.",".time().",0,1,'".$this->medical_item_amount."','".$this->medical_item_amount."','".$this->price."','".$this->medical_item_name."')";
-			  $db->Execute($this->sql);          
-  
+			  $db->Execute($this->sql);
+
         // Mark these lines in the table prescription as "still billed". We can do this
         // in that way: Insert the billing number where we can find this article again...
         $this->sql="UPDATE $this->tbl_prescriptions SET bill_number='".$bill_number."', bill_status='pending' WHERE bill_number = 0 AND encounter_nr=".$encounter_nr;
         $db->Execute($this->sql);
     }
-    
+
     // And now the laboratory...
-    $this->sql = "select 
-                          encounter_nr, 
-                          parameters 
+    $this->sql = "select
+                          encounter_nr,
+                          parameters
                   FROM $this->tbl_lab_requests
                   WHERE encounter_nr=".$encounter_nr." AND bill_number = 0";
     $this->parameters = $db->Execute($this->sql);
@@ -388,8 +402,8 @@ class Bill extends Encounter {
           $this->sql ="INSERT INTO $this->tbl_bill_elements (nr, date_change, is_labtest, is_medicine, amount, price, description)
 								 			VALUES (".$bill_number.",".time().",1,0,".$this->chemlab_amount.",'".$this->price."','".$this->chemlab_testname."')";
 				  $db->Execute($this->sql);
-								 			
-			  }          
+
+			  }
     }
     // Mark these lines in the table prescription as "still billed". We can do this
     // in that way: Insert the billing number where we can find this article again...
@@ -397,38 +411,41 @@ class Bill extends Encounter {
     $db->Execute($this->sql);
 
 	}
-	
+
 	function StorePrescriptionItemToBill($pid, $prescriptions_nr, $bill_number, $price, $dosage, $notes, $insurance){
+	  global $db, $root_path;
+	  $this->debug=FALSE;
+	  if ($this->debug) echo "<b>class_tz_billing::StorePrescriptionItemToBill($pid, $prescriptions_nr, $bill_number, $price, $dosage, $notes, $insurance)</b><br>";
+	  if ($this->debug) echo "prescriptions_nr: $prescriptions_nr, bill_number: $bill_number";
+	  ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+	  require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
+	  $insurance_tz = New Insurance_tz();
+	  $contract = $insurance_tz->CheckForValidContract($pid);
+    // do we have pending issues of prescriptions?
+    // read all items out of the prescription table
+    $this->sql = "
+    INSERT INTO $this->tbl_bill_elements (nr, date_change, is_labtest, is_medicine, amount, amount_doc, price, description, notes, item_number, balanced_insurance, insurance_id, prescriptions_nr)
+    SELECT '".$bill_number."', '".time()."' AS date_change, 0, 1, '".$dosage."', dosage, price, article, '".$notes."', article_item_number, '".$insurance."', '".$contract['id']."', '".$prescriptions_nr."'
+    FROM $this->tbl_prescriptions WHERE nr = $prescriptions_nr";
+	//echo ($this->sql);
+    $this->result=$db->Execute($this->sql);
+    if ($this->debug) echo $this->sql;
+
+	}
+
+
+	//------------------------------------------------------------------------------
+
+	function StoreLaboratoryItemToBill($pid, $batch_nr, $bill_number, $insurance){
 	  global $db, $root_path;
 	  $this->debug=FALSE;
 	  if ($this->debug) echo "<b>class_tz_billing::StorePrescriptionItemToBill(prescriptions_nr: $prescriptions_nr, bill_number: $bill_number)</b><br>";
 	  ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
-	  require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
-	  $insurance_tz = New Insurance_tz();
-	  $contract = $insurance_tz->CheckForValidContract($pid); 
     // do we have pending issues of prescriptions?
     // read all items out of the prescription table
-    $this->sql = "
-    INSERT INTO $this->tbl_bill_elements (nr, date_change, is_labtest, is_medicine, amount, amount_doc, price, description, notes, balanced_insurance, insurance_id, prescriptions_nr)
-    SELECT '".$bill_number."', '".time()."' AS date_change, 0, 1, '".$dosage."', dosage, price, article, '".$notes."', '".$insurance."', '".$contract['id']."', '".$prescriptions_nr."'
-    FROM $this->tbl_prescriptions WHERE nr = $prescriptions_nr";
-    $this->result=$db->Execute($this->sql); 
-	
-	}
-	
-	
-	//------------------------------------------------------------------------------  
-
-	function StoreLaboratoryItemToBill($pid, $batch_nr, $bill_number, $insurance){
-	  global $db, $root_path;
-	  $this->debug=false;
-	  if ($this->debug) echo "<b>class_tz_billing::StorePrescriptionItemToBill(prescriptions_nr: $prescriptions_nr, bill_number: $bill_number)</b><br>";
-	  ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    // do we have pending issues of prescriptions?
-    // read all items out of the prescription table
-    $this->sql = "select 
-                          encounter_nr, 
-                          parameters 
+    $this->sql = "select
+                          encounter_nr,
+                          parameters
                   FROM $this->tbl_lab_requests
                   WHERE batch_nr=".$batch_nr;
     $this->parameters = $db->Execute($this->sql);
@@ -438,30 +455,33 @@ class Bill extends Encounter {
       while(list($this->index,$this->chemlab_amount) = each($this->parameter_array)) {
   				//Strip the string baggage off to get the task id
   				$this->chemlab_testindex = substr($this->index,5,strlen($this->index)-6);
+
           $this->chemlab_testname = $this->GetNameOfLAboratoryFromID($this->chemlab_testindex);
+
           $this->price = $this->GetPriceOfLAboratoryItemFromID($this->chemlab_testindex);
           if ($this->debug) echo "the name of chemlab is:".$this->chemlab_testname." with a amount of ".$this->chemlab_amount." and a price of ".$this->price."<br>";
           require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
 		  $insurance_tz = New Insurance_tz();
-		  $contract = $insurance_tz->CheckForValidContract($pid); 
+		  $contract = $insurance_tz->CheckForValidContract($pid);
           // we have it all... now we store it into the billing-elements-table
           $this->sql ="INSERT INTO $this->tbl_bill_elements (nr, date_change, is_labtest, is_medicine, amount, price, balanced_insurance, insurance_id, description)
 								 			VALUES (".$bill_number.",".time().",1,0,".$this->chemlab_amount.",'".$this->price."','".$insurance."','".$contract['id']."','".$this->chemlab_testname."')";
 				  $db->Execute($this->sql);
+				  //echo $this->sql;
 				  $insurance=0;
-			  }          
+			  }
     }
     // Mark these lines in the table prescription as "still billed". We can do this
     // in that way: Insert the billing number where we can find this article again...
     $this->sql="UPDATE $this->tbl_lab_requests SET bill_number='".$bill_number."' , bill_status='pending' WHERE batch_nr=".$batch_nr;
     $db->Execute($this->sql);
 	}
-	
-	
-	//------------------------------------------------------------------------------  
-	
+
+
 	//------------------------------------------------------------------------------
-	
+
+	//------------------------------------------------------------------------------
+
 	function ConvertMedicalItemAmount ( $amount ) {
 	  return $amount;
 	}
@@ -472,7 +492,7 @@ class Bill extends Encounter {
     global $db;
     $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    $this->sql="SELECT unit_price as price FROM $this->tb_drug_list WHERE item_id = '$item_number' ";
+    $this->sql="SELECT unit_price as price FROM $this->tb_drugsandservices WHERE item_id = '$item_number' ";
     if ($this->result=$db->Execute($this->sql)) {
 		    if ($this->result->RecordCount()) {
 		        $this->item_array = $this->result->GetArray();
@@ -485,15 +505,15 @@ class Bill extends Encounter {
 				return false;
 			}
 		}
-  } // end of function GetPriceOfItem($item_number) 
-  
+  } // end of function GetPriceOfItem($item_number)
+
   //------------------------------------------------------------------------------
 
   function GetNameOfItem($item_number) {
     global $db;
     $debug=FALSE;
     ($debug)?$db->debug=TRUE:$db->debug=FALSE;
-    $this->sql="SELECT item_description as description FROM $this->tb_drug_list WHERE item_id = '$item_number' ";
+    $this->sql="SELECT item_description as description FROM $this->tb_drugsandservices WHERE item_id = '$item_number' ";
     if ($this->result=$db->Execute($this->sql)) {
 		    if ($this->result->RecordCount()) {
 		        $this->item_array = $this->result->GetArray();
@@ -506,10 +526,31 @@ class Bill extends Encounter {
 				return false;
 			}
 		}
-  } // end of function GetNameOfDrug($item_number) 
-  
+  } // end of function GetNameOfDrug($item_number)
+
+
   //------------------------------------------------------------------------------
-  
+
+
+  function CreateBalanceBill($insurance_id, $value) {
+    global $db;
+    $debug=FALSE;
+    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
+    $this->sql="SELECT b.nr, b.encounter_nr FROM care_tz_billing_archive b, care_tz_billing_archive_elem be WHERE be.nr = b.nr AND be.insurance_id=".$insurance_id." ORDER by b.id DESC Limit 0,1";
+	$this->result = $db->Execute($this->sql);
+	if($this->row = $this->result->FetchRow())
+	{
+		$this->sql="INSERT INTO care_tz_billing_archive SET nr='balanced".$this->row['nr']."', encounter_nr=".$this->row['encounter_nr'].", first_date=".time().", creation_date=".time();
+		$this->result = $db->Execute($this->sql);
+		$this->sql="INSERT INTO care_tz_billing_archive_elem SET nr='balanced".$this->row['nr']."', date_change=".time().", is_labtest=0, is_medicine=0, is_comment=0, is_paid=1, amount=1, price=0, balanced_insurance=".$value.", insurance_id=".$insurance_id.", item_number=0, prescriptions_nr=0";
+		$this->result = $db->Execute($this->sql);
+		return true;
+	}
+	return false;
+  }
+
+  //------------------------------------------------------------------------------
+
   function GetBillNumbersFromPID($pid) {
   	global $db;
     $debug=FALSE;
@@ -522,7 +563,7 @@ class Bill extends Encounter {
 					 GROUP BY cb.nr";
 		return $db->Execute($this->sql);
 	}
-  
+
   //------------------------------------------------------------------------------
 
   function GetArchivedBill($bill_nr) {
@@ -540,11 +581,11 @@ class Bill extends Encounter {
   	//echo $this->sql;
 		return $db->Execute($this->sql);
 	}
-  
+
 
   //------------------------------------------------------------------------------
 
-  
+
   function GetElemsOfArchivedBill($nr,$what_kind_of) {
   	global $db;
   	$debug=FALSE;
@@ -556,16 +597,16 @@ class Bill extends Encounter {
   	if ($what_kind_of=="laboratory")
   	  $sql_where = " AND is_labtest=1 ";
 
-  	  
+
   	$this->sql="SELECT * FROM care_tz_billing_archive_elem
-					 WHERE nr = ".$nr." ".$sql_where."
+					 WHERE nr = '".$nr."' ".$sql_where."
 					 ORDER BY date_change ASC";
 		return $db->Execute($this->sql);
 	}
 
   //------------------------------------------------------------------------------
 
-  
+
   function GetElemsOfBill($nr,$what_kind_of) {
   	global $db;
   	$debug=FALSE;
@@ -577,7 +618,7 @@ class Bill extends Encounter {
   	if ($what_kind_of=="laboratory")
   	  $sql_where = " AND is_labtest=1 ";
 
-  	  
+
   	$this->sql="SELECT * FROM ".$this->tbl_bill_elements."
 					 WHERE nr = ".$nr." ".$sql_where."
 					 ORDER BY date_change ASC";
@@ -585,319 +626,227 @@ class Bill extends Encounter {
 	}
 
 	//------------------------------------------------------------------------------
-	
+
 
   function GetElemsOfBillByPrescriptionNr($nr) {
   	global $db;
   	$debug=FALSE;
   	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
-  
+
   	$this->sql="SELECT * FROM ".$this->tbl_bill_elements."
 					 WHERE prescriptions_nr = ".$nr;
 		return $db->Execute($this->sql);
 	}
-	
+
 	//------------------------------------------------------------------------------
-	
+
   function GetElemsOfBillByPrescriptionNrArchive($nr) {
   	global $db;
   	$debug=FALSE;
   	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
-  
+
   	$this->sql="SELECT * FROM ".$this->tbl_bill_archive_elements."
 					 WHERE prescriptions_nr = ".$nr;
 					 //echo $this->sql;
 		return $db->Execute($this->sql);
 	}
-	
+
 	//------------------------------------------------------------------------------
-	
+
   function GetBillByBatchNr($nr) {
   	global $db;
   	$debug=FALSE;
   	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
-  
+
   	$this->sql="SELECT bill_number FROM care_test_request_chemlabor WHERE batch_nr=$nr";
   	$this->result= $db->Execute($this->sql);
 		return $this->result->FetchRow();
 	}
-	
+
 	//------------------------------------------------------------------------------
-	
-	
+
+
 	function GetNameOfLAboratoryFromID($id)	{
 		global $db;
   	$debug=FALSE;
-  	($debug) ? $db->debug=TRUE : $db->debug=FALSE;		
+  	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
   	$this->sql="SELECT name FROM ".$this->tbl_lab_param."
 					 WHERE id = '".$id."'";
 		$this->result = $db->Execute($this->sql);
 		if ($this->records=$this->result->FetchRow())
   		return $this->records['name'];
 	}
-	
+
 	//------------------------------------------------------------------------------
 
 	function GetPriceOfLAboratoryItemFromID($id)	{
 		global $db;
-  	$debug=FALSE;
-  	($debug) ? $db->debug=TRUE : $db->debug=FALSE;		
-  	$this->sql="SELECT price FROM ".$this->tbl_lab_param."
-					 WHERE id = '".$id."'";
+	  	$debug=FALSE;
+	  	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+	  	$this->sql="SELECT price FROM ".$this->tbl_lab_param."
+						 WHERE id = '".$id."'";
 		$this->result = $db->Execute($this->sql);
 		if ($this->records=$this->result->FetchRow())
   		return $this->records['price'];
 	}
-	
+
+	// -----------------------------------------------------------------------------
+
+	function GetBillTimestamp($bill_nr) {
+	    global $db;
+	    $debug=false;
+	    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+	    if(!$bill_nr) return false;
+	    $this->sql="SELECT first_date FROM care_tz_billing WHERE nr=".$bill_nr;
+		$this->result = $db->Execute($this->sql);
+		if($this->row = $this->result->FetchRow())
+		{
+			return $this->row['first_date'];
+		}
+		$this->sql="SELECT first_date FROM care_tz_billing_archive WHERE nr=".$bill_nr;
+		$this->result = $db->Execute($this->sql);
+		if($this->row = $this->result->FetchRow())
+		{
+			return $this->row['first_date'];
+	  	}
+	  	return false;
+	}
+
 	//------------------------------------------------------------------------------
-	
+
+	function GetBillCostSummaryInTimeframe($PID, $start, $end) {
+	    global $db;
+	    $debug=FALSE;
+	    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+	    if ($debug) echo 'PID: '.$PID.' - Start: '.$start.' - End: '.$end.'<br>';
+	    /*
+	    $this->sql="SELECT nr FROM care_tz_billing b, care_encounter e WHERE first_date>".$start." AND first_date <=".$end." AND e.encounter_nr = b.encounter_nr AND e.pid=".$PID;
+		if($this->result = $db->Execute($this->sql))
+			while($this->row = $this->result->FetchRow())
+			{
+				$balanced_insurance = false;
+				$this->elemsofbill = $this->GetElemsOfBill($this->row['nr'], false);
+				while($this->elems = $this->elemsofbill->FetchRow())
+				{
+					$balanced_insurance += $this->elems['balanced_insurance'];
+				}
+				$return[$this->row['nr']] = $balanced_insurance;
+			}
+		*/
+
+		$this->sql="SELECT nr FROM care_tz_billing_archive b, care_encounter e WHERE first_date>".$start." AND first_date <=".$end." AND e.encounter_nr = b.encounter_nr AND e.pid=".$PID;
+		if($this->result = $db->Execute($this->sql))
+			while($this->row = $this->result->FetchRow())
+			{
+				$balanced_insurance = false;
+				$this->elemsofbill = $this->GetElemsOfArchivedBill($this->row['nr'], false);
+				while($this->elems = $this->elemsofbill->FetchRow())
+				{
+					$balanced_insurance += $this->elems['balanced_insurance'];
+				}
+				$return[$this->row['nr']] = $balanced_insurance;
+			}
+	  	return $return;
+	}
+
+	//------------------------------------------------------------------------------
+
 	function DisplayBillHeadline($bill_nr, $batch_nr) {
-	  
+	  global $LDBatchFileNr,$LDEncounterNr,$LDLastName,$LDFirstName,$LDBday,$LDSex,$LDBillNumber;
 	  $enc_obj = New Encounter;
 	  $encoded_batch_number = $enc_obj->ShowPID($batch_nr);
 	  $enc_number = $enc_obj->GetEncounterFromBatchNumber($batch_nr);
-	  
-		
 
-	  
+
+
+
 	  if ($enc_obj->EncounterExists($enc_number)) {
 	    // Load the encounter data:
 	    $enc_data = $enc_obj->loadEncounterData($enc_number);
-  	  
-  	  echo '		
+
+  	  echo '
   	  <table border="0" cellspacing=1 cellpadding=0 width="50%">
   				<tr>
-  					<td class="adm_item"><b>Batch file no.</b></td>
+  					<td class="adm_item"><b>'.$LDBatchFileNr.'</b></td>
   					<td class="adm_item"><b>'.$encoded_batch_number.'</b></td>
   					<td rowspan="7">&nbsp;<td>
   				</tr>
   				<tr>
-  					<td class="adm_item">Encounter/Reg.Nr.:</td>
+  					<td class="adm_item">'.$LDEncounterNr.'</td>
   					<td bgcolor="#ffffee" class="vi_data"><b>'.$enc_number.'</b></td>
   				</tr>
   				<tr>
-  					<td class="adm_item">Surname/Ukoo:</td>
+  					<td class="adm_item">'.$LDLastName.':</td>
   					<td bgcolor="#ffffee" class="vi_data"><b>'.$enc_obj->LastName($enc_number).'</b></td>
   				</tr>
   				<tr>
-  					<td class="adm_item">First name:</td>
+  					<td class="adm_item">'.$LDFirstName.':</td>
   					<td bgcolor="#ffffee" class="vi_data">'.$enc_obj->FirstName($enc_number).'</td>
   				</tr>
   				<tr>
-  					<td class="adm_item">Date of birth:</td>
+  					<td class="adm_item">'.$LDBday.':</td>
   					<td bgcolor="#ffffee" class="vi_data">'.$enc_obj->BirthDate($enc_number).'</td>
   				</tr>
   				<tr>
-  					<td class="adm_item">Sex:</td>
+  					<td class="adm_item">'.$LDSex.':</td>
   					<td class="adm_input">'.$enc_obj->Sex($enc_number).'</td>
   				</tr>
   				<tr>
-  					<td class="adm_item"><b>Bill Number:</b></td>
+  					<td class="adm_item"><b>'.$LDBillNumber.'</b></td>
   					<td class="adm_item"><b>'.$bill_nr.'</b></td>
   				</tr>
-  				
+
   		</table>';
-      return TRUE;	  
+      return TRUE;
     }
   return FALSE;
-	} 
-	
-	//------------------------------------------------------------------------------  
-	
+	}
+
+	//------------------------------------------------------------------------------
+
 	function DisplayArchivedLaboratoryBill($bill_nr,$edit_fields) {
-		
-    global $root_path;
+
+   	global $root_path, $billnr, $batch_nr;
+   	global $LDArticle,$LDPrice,$LDAmount,$LDPaidbyInsurance,$LDpartSum,$LDtotalamount,$LDLaboratory;
     $sum_price=0;
 
   	echo '
   	<table width="800" border="1">
-
-  		';
-  			echo '
   			<tr>
-  				<td valign="top" width="100">';
-  					//echo 'Bill Nr. '.$bills['nr'].'</td><td>';
-  					echo '<p class="billing_topic"><br>Laboratory</p> </td><td>';
-      			
+  				<td valign="top" width="100">
+					<p class="billing_topic"><br>'.$LDLaboratory.'</p>
+				</td>
+				<td>';
+
       			$billelems=$this->GetElemsOfArchivedBill($bill_nr,"laboratory");
       			//echo "edit fields is set to:".$edit_fields;
       			echo '
       			<table width="100%" height="100%">
-      			<tr>
-      			  <td><b>Position Nr.</b></td>
-      				<td><b>Article</b></td>
-      				<td><b>Price</b></td>
-      				<td><b>Amount</b></td>' .
-      				'<td><b>Paid by Insurance</b></td>
-      				<td><b>part. sum</b></td>
-      				<td><b>';
-      				echo 'Already paid?';
-      				echo '</b><td>';
-      				//if ($edit_fields) echo "<td>Edit</td>";
-              echo '</tr>';
-      			
+	      			<tr>
+	      			  <td><b>Position Nr.</b></td>
+	      				<td><b>'.$LDArticle.'</b></td>
+	      				<td><b>'.$LDPrice.'</b></td>
+	      				<td><b>'.$LDAmount.'</b></td>' .
+	      				'<td><b>'.$LDPaidbyInsurance.'</b></td>
+	      				<td><b>'.$LDpartSum.'</b></td>
+	      			</tr>';
+
       			while($bill_elems_row=$billelems->FetchRow())
       			{
       				$pos_nr+=1;
+      				$insurance_used +=$bill_elems_row['balanced_insurance'];
       				if($bill_elems_row['is_labtest']==1)
       				{
       				  $this->tbl_bill_elem_ID=$bill_elems_row['ID'];
       					$this->chemlab_testname=$bill_elems_row['description'];
       					$this->price=$bill_elems_row['price'];
       					if (empty($this->price)) $this->price="0,00";
-      					
+
       				}
-      				$part_sum = ($this->price*$bill_elems_row['amount']);
-      				$sum += $part_sum;
-      				echo '
-      				<tr>
-      				  <td width="100">'.$pos_nr.'</td>
-        				<td width="200">'.$this->chemlab_testname.'</td>
-        				<td width="100">'.$this->price.'</td>
-        				<td width="100">'.$bill_elems_row['amount'].'</td>' .
-        				'<td width="100">';
-        				if($bill_elems_row['balanced_insurance']>0) echo number_format($bill_elems_row['balanced_insurance'],2,',','.');
-        				else echo '0,00';
-						echo '</td>
-        				<td width="100">'.number_format($part_sum,2,',','.').'</td>
-        				<td width="100">
-        				';
-        				if($bill_elems_row['is_paid']==1)
-        				{ 
-        					echo "Yes</td>";
-        				}
-        				else
-        				{
-        					echo "No</td>";
-        					$sum_to_pay += $part_sum;
-        				}
-        				echo "<td>&nbsp;</td>";
-        				//if ($edit_fields) echo '<td><a href="billing_tz_edit.php?mode=edit_elem&billing_item='.$this->tbl_bill_elem_ID.'"><img src="'.$root_path.'gui/img/common/default/bul_arrowgrnsm.gif" border="0"></td>';
-                echo "</tr>";
-      				
-      			}
-
-      			echo '
-      			<tr>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-      				<td>----------</td>      			
-      				<td>&nbsp;</td>
-      				<td>&nbsp;</td>';
-      			//if ($edit_fields) echo '<td>&nbsp;</td>';
-      			echo "</tr>";
-
-      			echo '
-      			<tr>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-      				<td><i>total amount:</i></td>
-      				<td><i>'.number_format($sum,2,',','.').'</i> </td>
-      				<td><b>&nbsp;</b></td>   
-      				<td>&nbsp;</td>';
-      			//if ($edit_fields) echo '<td>&nbsp;</td>';
-      			echo "</tr>";
-
-      			echo '
-      			<tr>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-              <td>----------</td>      			
-      				<td>&nbsp;</td>
-      				<td>&nbsp;</td>';
-      			//if ($edit_fields) echo '<td>&nbsp;</td>';
-      			echo "</tr>";
-
-      			echo '
-      			<tr>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-      				<td><b>open item accounting:</b></td>
-      				<td><b>'.number_format($sum_to_pay,2,',','.').'</b> </td>
-      				<td><b>&nbsp;</b></td>   
-      				<td>&nbsp;</td>';
-      			//if ($edit_fields) echo '<td>&nbsp;</td>';
-      			echo "</tr>";
-
-      			echo '
-      			<tr>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-              <td>======</td>      			
-      				<td>&nbsp;</td>
-      				<td>&nbsp;</td>';
-      			//if ($edit_fields) echo '<td>&nbsp;</td>';
-      			echo "</tr>";
-
-      			
-      			echo '</table>';
-      			echo '
-      	  </td>
-      	</tr>';
-      	
-  	echo'
-  	</table>';
-	  
-	}	
-	
-	//------------------------------------------------------------------------------  
-	
-	function DisplayLaboratoryBill($bill_nr,$edit_fields) {
-		
-		global $root_path, $billnr, $batch_nr;
-    $sum_price=0;
-
-  	echo '
-  	<table width="800" border="1">
-
-  		';
-  			echo '
-  			<tr>
-  				<td valign="top" width="100">';
-  					//echo 'Bill Nr. '.$bills['nr'].'</td><td>';
-  					echo '<p class="billing_topic"><br>Laboratory</p> </td><td>';
-      			
-      			$billelems=$this->GetElemsOfBill($bill_nr,"laboratory");
-      			//echo "edit fields is set to:".$edit_fields;
-      			echo '
-      			<table width="100%" height="100%">
-      			<tr>
-      			  <td><b>Position Nr.</b></td>
-      				<td><b>Article</b></td>
-      				<td><b>Price</b></td>
-      				<td><b>Amount</b></td>' .
-      				'<td><b>Paid by Insurance</b></td>
-      				<td><b>part. sum</b></td>
-      			</tr>';
-      			
-      			while($bill_elems_row=$billelems->FetchRow())
-      			{
-      				$pos_nr+=1;
-      				if($bill_elems_row['is_labtest']==1)
-      				{
-      				  $this->tbl_bill_elem_ID=$bill_elems_row['ID'];
-      					$this->chemlab_testname=$bill_elems_row['description'];
-      					$this->price=$bill_elems_row['price'];
-      					if (empty($this->price)) $this->price="0,00";
-      					
-      				}
-      				$part_sum = ($this->price*$bill_elems_row['amount']);
+      				$part_sum = ($this->price*$bill_elems_row['amount'])-$bill_elems_row['balanced_insurance'];
       				$sum += $part_sum;
       				echo '
       				<tr>
@@ -911,7 +860,7 @@ class Bill extends Encounter {
 						echo '</td>
         				<td width="100">'.number_format($part_sum,2,',','.').'</td>
         			</tr>';
-      				
+
       			}
 
       			echo '
@@ -919,231 +868,170 @@ class Bill extends Encounter {
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-      				<td>----------</td>      			
-						</tr>
-      			<tr>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-      				<td><i>total amount:</i></td>
-      				<td><i>'.number_format($sum,2,',','.').'</i> </td>
-						</tr>
+      			  <td>----------</td>
+				</tr>
       			<tr>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-              <td>----------</td>      			
-						</tr>
-      			<tr>
       			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-      				<td><b>open item accountingb:</b></td>
-      				<td><b>'.number_format($sum_to_pay,2,',','.').'</b> </td>
-						</tr>
+      			  <td><i>'.$LDtotalamount.'</i></td>
+      			  <td><i>'.number_format($sum,2,',','.').'</i> </td>
+				</tr>
       			<tr>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-              <td>======</td>      			
-						</tr>
-					</table>			
-      	</td>
-      </tr>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>
+              	  <td>----------</td>
+				</tr>
+			</table>
+			</td>
+		</tr>
   	</table>';
-	  
+	return $sum;
+
 	}
-	
-	//------------------------------------------------------------------------------  
-	
-	function DisplayArchivedPrescriptionBill($bill_nr, $edit_fields){
-		
-	  global $root_path;
+
+	//------------------------------------------------------------------------------
+
+	function DisplayLaboratoryBill($bill_nr,$edit_fields) {
+
+	global $root_path, $billnr, $batch_nr;
+	global $LDPositionNr,$LDArticle,$LDPrice,$LDAmount,$LDPaidbyInsurance,$LDpartSum,$LDtotalamount,$LDLaboratory;
+    $sum_price=0;
+
   	echo '
   	<table width="800" border="1">
-
-  		';
-  			echo '
   			<tr>
-  				<td valign="top" width="100">';
-  					//echo 'Bill Nr. '.$bills['nr'].'</td><td>';
-  					echo '<p class="billing_topic"><br>Prescriptions</p> </td><td>';
-      			
-      			$billelems=$this->GetElemsOfArchivedBill($bill_nr,"prescriptions");
-      			
+  				<td valign="top" width="100">
+					<p class="billing_topic"><br>'.$LDLaboratory.'</p>
+				</td>
+				<td>';
+
+      			$billelems=$this->GetElemsOfBill($bill_nr,"laboratory");
+      			//echo "edit fields is set to:".$edit_fields;
       			echo '
       			<table width="100%" height="100%">
-      			<tr>
-      			  <td><b>Position Nr.</b></td>
-      				<td><b>Article</b></td>
-      				<td><b>Price</b></td>
-      				<td><b>Amount</b></td>' .
-      				'<td><b>Paid by Insurance</b></td>
-      				<td><b>part. sum</b></td>
-      				<td><b>';
-      				echo 'Already paid?';
-      				echo '</b><td>';
-      				//if ($edit_fields) echo "<td>Edit</td>";
-              echo '</tr>';
-      			
+	      			<tr>
+	      			  <td><b>'.$LDPositionNr.'</b></td>
+	      				<td><b>'.$LDArticle.'</b></td>
+	      				<td><b>'.$LDPrice.'</b></td>
+	      				<td><b>'.$LDAmount.'</b></td>' .
+	      				'<td><b>'.$LDPaidbyInsurance.'</b></td>
+	      				<td><b>'.$LDpartSum.'</b></td>
+	      			</tr>';
+
       			while($bill_elems_row=$billelems->FetchRow())
       			{
       				$pos_nr+=1;
-      				if($bill_elems_row['is_medicine']==1)
+      				$insurance_id=$bill_elems_row['insurance_id']; // could be used later to display name of company
+      				$insurance_used +=$bill_elems_row['balanced_insurance'];
+      				if($bill_elems_row['is_labtest']==1)
       				{
-      					$this->tbl_bill_elem_ID=$bill_elems_row['ID'];
-      					$desc = $bill_elems_row['description'];
-      					$price = $bill_elems_row['price'];
+      				  $this->tbl_bill_elem_ID=$bill_elems_row['ID'];
+      					$this->chemlab_testname=$bill_elems_row['description'];
+      					$this->price=$bill_elems_row['price'];
+      					if (empty($this->price)) $this->price="0,00";
+
       				}
-      				$part_sum = ($price*$bill_elems_row['amount'])-$bill_emes_row['balanced_insurance'];
+      				$part_sum = ($this->price*$bill_elems_row['amount']);
       				$sum += $part_sum;
       				echo '
       				<tr>
-      				  <td width="100">'.$pos_nr.'
-      				  </td>
-        				<td width="200">'.$desc.'
-        				</td>
-        				<td width="100">'.$price.'
-        				</td>
-        				<td width="100">'.$bill_elems_row['amount'].'
-        				</td>' .
-        				'<td width="100">';
-						if($bill_elems_row['balanced_insurance']>0) echo number_format($bill_elems_row['balanced_insurance'],2,',','.');
-        				else echo '0,00';
-						echo '</td>
-        				<td width="100">'.number_format($part_sum,2,',','.').'
-        				</td>
-        				<td>
-        				';
-        				if($bill_elems_row['is_paid']==1)
-        				{ 
-        					echo "Yes";
-        				}
-        				else
-        				{
-        					echo "No";
-        					$sum_to_pay += $part_sum;
-        				}
-        				echo "<td>&nbsp;</td>";
-        				//if ($edit_fields) echo '<td><a href="billing_tz_edit.php?mode=edit_elem&billing_item='.$this->tbl_bill_elem_ID.'"><img src="'.$root_path.'gui/img/common/default/bul_arrowgrnsm.gif" border="0"></td>';
-                echo "</tr>";
-      				
+      				  <td width="100">'.$pos_nr.'</td>
+        				<td width="200">'.$this->chemlab_testname.'</td>
+        				<td width="100">'.$this->price.'</td>
+        				<td width="100">'.$bill_elems_row['amount'].'</td>
+        				<td width="100">&nbsp;</td>
+        				<td width="100">'.number_format($part_sum,2,',','.').'</td>
+        			</tr>';
+
       			}
-      			echo '
-      			<tr>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-      				<td>----------</td>      			
-      				<td>&nbsp;</td>
-      				<td>&nbsp;</td>';
-      			//if ($edit_fields) echo '<td>&nbsp;</td>';
-      			echo "</tr>";
+      			$sum -= $insurance_used;
+      			if($insurance_used) {
+      				echo "Hallo";
 
-      			echo '
-      			<tr>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-      				<td><i>total amount:</i></td>
-      				<td><i>'.number_format($sum,2,',','.').'</i> </td>
-      				<td><b>&nbsp;</b></td>   
-      				<td>&nbsp;</td>';
-      			//if ($edit_fields) echo '<td>&nbsp;</td>';
-      			echo "</tr>";
+					$pos_nr += 1;
+      				echo '
+      				<tr>
+      				  <td width="100">'.$pos_nr.'</td>
+        				<td width="200">-/-</td>
+        				<td width="100">-/-</td>
+        				<td width="100">-/-</td>
+        				<td width="100">'.number_format($insurance_used,2,',','.').'</td>
+        				<td width="100">'.number_format($insurance_used*-1,2,',','.').'</td>
+        			</tr>';
+
+      			}
 
       			echo '
       			<tr>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-              <td>----------</td>      			
-      				<td>&nbsp;</td>
-      				<td>&nbsp;</td>';
-      			//if ($edit_fields) echo '<td>&nbsp;</td>';
-      			echo "</tr>";
-
-      			echo '
-      			<tr>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-      				<td><b>open item accountingc:</b></td>
-      				<td><b>'.number_format($sum_to_pay,2,',','.').'</b> </td>
-      				<td><b>&nbsp;</b></td>   
-      				<td>&nbsp;</td>';
-      			//if ($edit_fields) echo '<td>&nbsp;</td>';
-      			echo "</tr>";
-
-      			echo '
+      			  <td>----------</td>
+				</tr>
       			<tr>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-              <td>======</td>      			
-      				<td>&nbsp;</td>
-      				<td>&nbsp;</td>';
-      			//if ($edit_fields) echo '<td>&nbsp;</td>';
-      			echo "</tr>";
-
-      			
-      			echo '</table>';
-      			echo '
-      		</td>
-      	</tr>';
-      	
-  	echo'
+      			  <td>&nbsp;</td>
+      			  <td><i>'.$LDtotalamount.'</i></td>
+      			  <td><i>'.number_format($sum,2,',','.').'</i> </td>
+				</tr>
+      			<tr>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>
+              	  <td>----------</td>
+				</tr>
+			</table>
+			</td>
+		</tr>
   	</table>';
-	  	  
-	  return TRUE;
+	return $sum;
 	}
 
-	//------------------------------------------------------------------------------  
-	
-	function DisplayPrescriptionBill($bill_nr, $edit_fields){
-		
-	  global $root_path, $billnr, $batch_nr;
+	//------------------------------------------------------------------------------
+
+	function DisplayArchivedPrescriptionBill($bill_nr, $edit_fields){
+
+	global $root_path, $billnr, $batch_nr;
+	global $LDPositionNr,$LDArticle,$LDPrice,$LDAmount,$LDpartSum,$LDPaidbyInsurance,$LDtotalamount,
+	       $LDPrescriptionOther;
+
   	echo '
   	<table width="800" border="1">
-
-  		';
-  			echo '
   			<tr>
-  				<td valign="top" width="100">';
-  					//echo 'Bill Nr. '.$bills['nr'].'</td><td>';
-  					echo '<p class="billing_topic"><br>Prescriptions/Other</p> </td><td>';
-      			
-      			$billelems=$this->GetElemsOfBill($bill_nr,"prescriptions");
-      			
+  				<td valign="top" width="100">
+  					<p class="billing_topic"><br>'.$LDPrescriptionOther.'</p>
+  				</td>
+  				<td>';
+
+      			$billelems=$this->GetElemsOfArchivedBill($bill_nr,"prescriptions");
+
       			echo '
-      			<table width="100%" height="100%">
+      			<table width="100%" height="100%" border="0">
       			<tr>
-      			  <td><b>Position Nr.</b></td>
-      				<td><b>Article</b></td>
-      				<td><b>Price</b></td>
-      				<td><b>Amount</b></td>' .
-      				'<td><b>Paid by Insurance</b></td>
-      				<td><b>part. sum</b></td>
-						</tr>';
-      			
+      			  <td><b>'.$LDPositionNr.'</b></td>
+      				<td><b>'.$LDArticle.'</b></td>
+      				<td><b>'.$LDPrice.'</b></td>
+      				<td><b>'.$LDAmount.'</b></td>
+      				<td><b>'.$LDPaidbyInsurance.'</b></td>
+      				<td><b>'.$LDpartSum.'</b></td>
+				</tr>';
+
       			while($bill_elems_row=$billelems->FetchRow())
       			{
+      				$insurance_used += $bill_elems_row['balanced_insurance'];
       				$pos_nr+=1;
       				if($bill_elems_row['is_medicine']==1)
       				{
@@ -1164,8 +1052,8 @@ class Bill extends Encounter {
         				else echo '0,00';
 						echo '</td>
         				<td width="100">'.number_format($part_sum,2,',','.').'</td>
-							</tr>';
-      				
+					</tr>';
+
       			}
       			echo '
       			<tr>
@@ -1174,7 +1062,98 @@ class Bill extends Encounter {
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>' .
       			  	'<td>&nbsp;</td>
-      				<td>----------</td>      			
+      				<td>----------</td>
+      			</tr>
+      			<tr>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>' .
+      			  '<td>&nbsp;</td>
+      				<td><i>'.$LDtotalamount.'</i></td>
+      				<td><i>'.number_format($sum,2,',','.').'</i> </td>
+      			</tr>
+      			<tr>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>
+              	  <td>----------</td>
+            	</tr>
+            </table>
+		</td>
+	</tr>
+  	</table>';
+
+	  return $sum;
+	}
+
+	//------------------------------------------------------------------------------
+
+	function DisplayPrescriptionBill($bill_nr, $edit_fields){
+
+	global $root_path, $billnr, $batch_nr;
+	global $LDPositionNr,$LDArticle,$LDPrice,$LDAmount,$LDpartSum,$LDPaidbyInsurance,
+	       $LDPrescriptionOther;
+	$this->debug = TRUE;
+  	echo '
+  	<table width="800" border="1">
+  			<tr>
+  				<td valign="top" width="100">
+  					<p class="billing_topic"><br>'.$LDPrescriptionOther.'</p>
+  				</td>
+  				<td>';
+
+      			$billelems=$this->GetElemsOfBill($bill_nr,"prescriptions");
+      			echo '
+      			<table width="100%" height="100%" border="0">
+      			<tr>
+      			  <td><b>'.$LDPositionNr.'</b></td>
+      				<td><b>'.$LDArticle.'</b></td>
+      				<td><b>'.$LDPrice.'</b></td>
+      				<td><b>'.$LDAmount.'</b></td>
+      				<td><b>'.$LDPaidbyInsurance.'</b></td>
+      				<td><b>'.$LDpartSum.'</b></td>
+				</tr>';
+
+      			while($bill_elems_row=$billelems->FetchRow())
+      			{
+      				$insurance_used += $bill_elems_row['balanced_insurance'];
+      				$pos_nr+=1;
+      				if($bill_elems_row['is_medicine']==1)
+      				{
+      					$this->tbl_bill_elem_ID=$bill_elems_row['ID'];
+      					$desc = $bill_elems_row['description'];
+      					$price = $bill_elems_row['price'];
+      				}
+      				$part_sum = ($price*$bill_elems_row['amount'])-$bill_elems_row['balanced_insurance'];
+      				if($this->debug) '+'.$price.'*'.$bill_elems_row['amount'].'-'.$bill_elems_row['balanced_insurance'];
+      				$sum += $part_sum;
+      				echo '
+      				<tr>
+      				  <td width="100">'.$pos_nr.'</td>
+        				<td width="200">'.$desc.'</td>
+        				<td width="50">'.$price.'</td>
+        				<td width="50">'.$bill_elems_row['amount'].'</td>' .
+        				'<td width="100">';
+						if($bill_elems_row['balanced_insurance']>0)
+							echo number_format($bill_elems_row['balanced_insurance'],2,',','.');
+        				else
+        					echo '0,00';
+						echo '</td>
+        				<td width="100">'.number_format($part_sum,2,',','.').'</td>
+					</tr>';
+
+      			}
+      			$sum -= $bill_elems_row['balanced_insurance'];
+      			echo '
+      			<tr>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>
+      			  <td>&nbsp;</td>' .
+      			  	'<td>&nbsp;</td>
+      				<td>----------</td>
       			</tr>
       			<tr>
       			  <td>&nbsp;</td>
@@ -1188,67 +1167,51 @@ class Bill extends Encounter {
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-              <td>----------</td>
-            </tr>
-      			<tr>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-      				<td><b>open item accounting:</b></td>
-      				<td><b>'.number_format($sum_to_pay,2,',','.').'</b> </td>
-						</tr>
-      			<tr>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-      			  <td>&nbsp;</td>' .
-      			  '<td>&nbsp;</td>
-      			  <td>&nbsp;</td>
-              <td>======</td>      			
-						</tr>
-					</table>
-				</td>
-      </tr>
+              	  <td>----------</td>
+            	</tr>
+            </table>
+		</td>
+	</tr>
   	</table>';
-	  	  
-	  return TRUE;
+
+	  return $sum;
 	}
 
 
-//------------------------------------------------------------------------------  
+//------------------------------------------------------------------------------
 
 function EditBillElement($id) {
   global $root_path, $db;
   // get the elements out of this billing-table:
-  $this->sql = "SELECT 
+  $this->sql = "SELECT
                       care_tz_billing_elem.nr,
-                      care_tz_billing.encounter_nr, 
+                      care_tz_billing.encounter_nr,
                       care_tz_billing_elem.description,
                       care_tz_billing_elem.price,
                       care_tz_billing_elem.amount,
                       care_tz_billing_elem.amount_doc,
                       care_tz_billing_elem.is_paid
-                FROM 
-                  care_tz_billing_elem 
-                    INNER JOIN care_tz_billing 
-                      ON care_tz_billing.nr=care_tz_billing_elem.nr 
+                FROM
+                  care_tz_billing_elem
+                    INNER JOIN care_tz_billing
+                      ON care_tz_billing.nr=care_tz_billing_elem.nr
                 WHERE care_tz_billing_elem.ID=".$id;
   $this->result = $db->Execute($this->sql);
   if ($this->row=$this->result->FetchRow()) {
 	  $enc_obj = New Encounter;
-	  
+
     $this->bill_number=$this->row['nr'];
-    
+
     $this->encounter_nr=$this->row['encounter_nr'];
     $this->batch_nr=$enc_obj->GetBatchFromEncounterNumber($this->encounter_nr);
-    
+
     $this->description=$this->row['description'];
     $this->price=$this->row['price'];
     $this->amount=$this->row['amount'];
     $this->amount_doc=$this->row['amount_doc'];
-    
+
     $this->payed_status_checked = '';
     $this->outstanding_checked  = '';
     if ($this->is_paid=$this->row['is_paid'])
@@ -1256,10 +1219,10 @@ function EditBillElement($id) {
     else
         $this->outstanding_checked = 'checked';
   }
-  
+
   //echo $this->batch_nr;
   $this->DisplayBillHeadline($this->bill_number, $this->batch_nr);
-  
+
   echo '<table width="800" border="1">';
   echo '
 <link rel="stylesheet" href="'.$root_path.'css/themes/default/default.css" type="text/css">
@@ -1284,61 +1247,61 @@ A:visited:hover {color: #cc0033;}
  		</td>
 	</tr>
 	<tr>
-    <td bgcolor=#ffffff valign=top> 
+    <td bgcolor=#ffffff valign=top>
       <font class="warnprompt"><br></font>
       <form ENCTYPE="multipart/form-data" action="billing_tz_edit.php" method="post" name="inputform">
 	      <table border=0 cellspacing=1 cellpadding=3>
             <tbody class="submenu">
-              <tr> 
+              <tr>
                 <td align=right width=339 >description</td>
                 <td width="339"><input type="text" name="description" value="'.$this->description.'"  size=50 maxlength=50></td>
                 <td width="37" rowspan=14 valign=top> <br> </td>
               </tr>
-              <tr> 
+              <tr>
                 <td align=right width=339>price</td>
-                <td><input name="price" type="text" value="'.$this->price.'"  size=10 maxlength=10> 
+                <td><input name="price" type="text" value="'.$this->price.'"  size=10 maxlength=10>
                 </td>
               </tr>
-              <tr> 
+              <tr>
                 <td align=right> Amount</td>
                 <td><input type="text" name="amount" value="'.$this->amount.'"  size=10 maxlength=10>
                 ';
-                
+
                 if($this->amount_doc!=$this->amount)
                 	echo '(Prescribed amount: '.$this->amount_doc.')';
-                
-                echo ' 
+
+                echo '
                 </td>
               </tr>
-              <tr> 
+              <tr>
                 <td align=right width=339> payment status of this billing item</td>
-                <td> 
+                <td>
                     <input type="radio" name="payment_status" value="paid" '.$this->payed_status_checked.'> paid
                     <input name="payment_status" type="radio" value="outstanding" '.$this->outstanding_checked.'> outstanding
                 </td>
               </tr>
-              <tr> 
+              <tr>
                 <td colspan="2" align=right>&nbsp;</td>
               </tr>
-              <tr> 
+              <tr>
                 <td align=right width=339>&nbsp;</td>
-                <td align=right> 
-                    Prepare this dataset for 
+                <td align=right>
+                    Prepare this dataset for
                     <select name="specific_mode">
                       <option value="delete">Delete</option>
                       <option value="update" selected>Update</option>
-                    </select> 
+                    </select>
                     <input type="hidden" name="mode" value="modfication">
                     <input type="hidden" name="bill_elem_number" value="'.$id.'">
                     <input type="hidden" name="encounter_nr" value="'.$this->encounter_nr.'">
                     <input type="hidden" name="batch_nr" value="'.$this->batch_nr.'">
-                    <input type="submit" value="OK"> 
+                    <input type="submit" value="OK">
                   </td>
               </tr>
             </tbody>
           </table>
         </form>
-      <a href="'.$root_path.'modules/billing_tz/billing_tz_pending.php"><img src="'.$root_path.'gui/img/control/default/en/en_cancel.gif" border=0 align="left" width="103" height="24" alt="Cancel and go back"></a>									
+      <a href="'.$root_path.'modules/billing_tz/billing_tz_pending.php"><img src="'.$root_path.'gui/img/control/default/en/en_cancel.gif" border=0 align="left" width="103" height="24" alt="Cancel and go back"></a>
 		  </td>
   	</tr>
 		<tr valign=top >
@@ -1360,17 +1323,17 @@ A:visited:hover {color: #cc0033;}
   	</tr>
 	</tbody>
  </table>';
-  echo '</table>';      
+  echo '</table>';
   return TRUE;
 }
-//------------------------------------------------------------------------------  
+//------------------------------------------------------------------------------
 
 function update_bill_element($bill_elem_number, $is_paid, $amount, $price, $description) {
   global $db;
   	$debug=FALSE;
   	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
-  $this->sql="UPDATE care_tz_billing_elem SET 
+  $this->sql="UPDATE care_tz_billing_elem SET
                 `is_paid` = '".$is_paid."',
                 `amount` = '".$amount."',
                 `price` = '".$price."',
@@ -1385,120 +1348,39 @@ function update_bill_element_allpaid($billnr, $is_paid) {
   	$debug=FALSE;
   	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
-  $this->sql="UPDATE care_tz_billing_elem SET 
+  $this->sql="UPDATE care_tz_billing_elem SET
                 `is_paid` = '".$is_paid."'
              WHERE `nr` = ".$billnr;
   $db->Execute($this->sql);
   return TRUE;
 }
 
-//------------------------------------------------------------------------------  
+//------------------------------------------------------------------------------
 
 
-//------------------------------------------------------------------------------  
+//------------------------------------------------------------------------------
 
 function delete_bill_element($bill_elem_number) {
   global $db;
   	$debug=FALSE;
   	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
-  $this->sql="DELETE FROM care_tz_billing_elem 
+  $this->sql="DELETE FROM care_tz_billing_elem
              WHERE `ID` = '".$bill_elem_number."'";
   $db->Execute($this->sql);
   return TRUE;
 }
 
 
-//------------------------------------------------------------------------------  
-	
-	function DisplayArchivedBills($batch_nr, $specific_bill, $edit_fields) {
-		
-	  if (func_num_args()>3)
-	    $printout=func_get_arg (3);
-		/*
-			This function displays a complete table containing the bill(s) of a batch_nr
-			$specific_bill = 0 -> Show all bills for this batch_nr
-			$specifig_bill != 0 -> Shows only bill[specific_bill]
-			$edif_fields = 0 -> (default)
-			$edit_fields != 0 -> All values editable
-		*/
-		global $db;
-		
-  	echo '
-  	<table width="800" border="1">
+//------------------------------------------------------------------------------
 
-  		';
-  			$billnumbers=$this->GetArchivedBill($specific_bill);
+	function DisplayArchivedBills($batch_nr, $specific_bill, $edit_fields)
+	{
+  		  global $db, $insurancebudget, $used_budget, $ceiling, $insurance_tz, $bill_obj;
+  		  global $LDInsurance,$LDOldBudget,$LDUsedBudget,$LDOverdrawnBudget,$LDOverdrawnPayment,
+  		  		 $LDNoCompanyCredit,$LDCompanyCredit,$LDLabTotal,$LDPrescTotal,$LDSumtopay,
+  		  		 $LDInsuranceTotal,$LDSummary;
 
-  		while($bills=$billnumbers->FetchRow()) { 
-
-        if ($printout==FALSE) {
-      		//Java script for print out the bill
-      		// We have to place it here, because here is one place where we have the bill number what is 
-      		// definetly displayed on the user-screen 
-      		echo '<script language="javascript" >
-                <!-- 
-                function printOut_'.$bills['nr'].'()
-                {
-                	urlholder="show_bill.php?bill_number='.$bills['nr'].'&batch_nr='.$batch_nr.'&printout=TRUE";
-                	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
-                  
-                }
-                // -->
-                </script> 
-                ';
-        }
-  		  
-				echo '
-					<tr>
-						<td>';
-						$this->DisplayBillHeadline($bills['nr'], $batch_nr);
-						echo '
-						</td>
-					</tr>';
-  			$sum_to_pay =0;
-  			$sum = 0;
-  			
-  			$billelems=$this->GetElemsOfArchivedBill($bills['nr'],"laboratory");
-				if($bill_elems_row=$billelems->FetchRow())
-				{			
-	  			echo '
-	  			<tr>
-	  				<td valign="top">';
-	  					$this->DisplayArchivedLaboratoryBill($bills['nr'],$edit_fields);
-	      	echo '
-	      		</td>
-	      	</tr>';
-      	}
-      	$billelems=$this->GetElemsOfArchivedBill($bills['nr'],"prescriptions");
-				if($bill_elems_row=$billelems->FetchRow())
-				{
-					echo '
-	  			<tr>
-	  				<td valign="top">';
-	  					$this->DisplayArchivedPrescriptionBill($bills['nr'],$edit_fields);
-	      		echo '
-	      		</td>
-	      	</tr>';
-      	}
-      	
-      	// is there the edit_fields flag set, then there should be finished the formular with the submit button. 
-      	// If not, then show the three kinds of the main folder.
-      	echo '
-			    <tr>
-			  		<td>';
-       echo '</td>
-			  	</tr>';
-  		}
-  	echo'
-
-  	</table>';
-	}
-
-//------------------------------------------------------------------------------  
-	
-	function DisplayBills($batch_nr, $specific_bill, $edit_fields) {
-		
 	  if (func_num_args()>3)
 	    $printout=func_get_arg (3);
 		/*
@@ -1509,39 +1391,36 @@ function delete_bill_element($bill_elem_number) {
 			$edit_fields != 0 -> All values editable
 		*/
 		global $db, $user_origin;
-		
-  	echo '
-  	<table width="800" border="1">
 
-  		';
-  		if($specific_bill>0)
-  		{ 
-  			$billnumbers=$this->VerifyBill($specific_bill);
-  		}
-  		else
-  		{ 
-  			$billnumbers=$this->GetBillNumbersFromPID($batch_nr);
-  		}
-  		if ($billnumbers) {
-    		while($bills=$billnumbers->FetchRow()) { 
-  
-          if ($printout==FALSE) {
-        		//Java script for print out the bill
-        		// We have to place it here, because here is one place where we have the bill number what is 
-        		// definetly displayed on the user-screen 
-        		echo '<script language="javascript" >
-                  <!-- 
-                  function printOut_'.$bills['nr'].'()
-                  {
-                  	urlholder="show_bill.php?bill_number='.$bills['nr'].'&batch_nr='.$batch_nr.'&printout=TRUE";
-                  	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
-                    
-                  }
-                  // -->
-                  </script> 
-                  ';
-          }
-    		  
+	  	echo '
+	  	<table width="800" border="1">';
+  		$billnumbers=$this->GetArchivedBill($specific_bill);
+  		if ($billnumbers)
+    		while($bills=$billnumbers->FetchRow())
+    		{
+				$bill_timestamp = $bill_obj->GetBillTimestamp($bills['nr']);
+				$matchingContract = $insurance_tz->GetContractMemberFromTimestamp($batch_nr,$bill_timestamp);
+				$matchingBills = $bill_obj->GetBillCostSummaryInTimeframe($batch_nr, $matchingContract['start_date'], $bill_timestamp);
+				$ceiling = $matchingContract['Member']['ceiling']-$matchingContract['Member']['ceiling_startup_subtraction'];
+				$used_budget = array_sum($matchingBills);
+				$insurancebudget = $ceiling-$used_budget;
+
+				if ($printout==FALSE) {
+						//Java script for print out the bill
+					// We have to place it here, because here is one place where we have the bill number what is
+					// definetly displayed on the user-screen
+					echo '<script language="javascript" >
+				      <!--
+				      function printOut_'.$bills['nr'].'()
+				      {
+				      	urlholder="show_bill.php?bill_number='.$bills['nr'].'&batch_nr='.$batch_nr.'&printout=TRUE";
+				      	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
+
+				      }
+				      // -->
+				      </script>
+				      ';
+				}
   				echo '
   					<tr>
   						<td>';
@@ -1551,83 +1430,392 @@ function delete_bill_element($bill_elem_number) {
   					</tr>';
     			$sum_to_pay =0;
     			$sum = 0;
-    			
-    			$billelems=$this->GetElemsOfBill($bills['nr'],"laboratory");
+
+    			$billelems=$this->GetElemsOfArchivedBill($bills['nr'],"laboratory");
   				if($bill_elems_row=$billelems->FetchRow())
-  				{			
-  	  			echo '
-  	  			<tr>
-  	  				<td valign="top">';
-  	  					$this->DisplayLaboratoryBill($bills['nr'],$edit_fields);
-  	      	echo '
-  	      		</td>
-  	      	</tr>';
-        	}
-        	$billelems=$this->GetElemsOfBill($bills['nr'],"prescriptions");
+  				{
+	  	  			echo '
+	  	  			<tr>
+	  	  				<td valign="top">';
+	  	  					$total_laboratory = $this->DisplayArchivedLaboratoryBill($bills['nr'],$edit_fields);
+		  	      		echo '
+		  	      		</td>
+		  	      	</tr>';
+	        	}
+	        	$billelems=$this->GetElemsOfArchivedBill($bills['nr'],"prescriptions");
   				if($bill_elems_row=$billelems->FetchRow())
   				{
   					echo '
-  	  			<tr>
-  	  				<td valign="top">';
-  	  					$this->DisplayPrescriptionBill($bills['nr'],$edit_fields);
-  	      		echo '
-  	      		</td>
-  	      	</tr>';
-        	}
-        	
-        	// is there the edit_fields flag set, then there should be finished the formular with the submit button. 
-        	// If not, then show the three kinds of the main folder.
-        	echo '
-  			    <tr>
-  			  		<td>';
-  			 
-  			 $show_printout_button = FALSE;
-  			 $show_done_button=FALSE;
-  			 $show_edit_button=FALSE;
-  			 $enc_obj = New Encounter;
-  			 $encounter_nr = $enc_obj->GetEncounterFromBatchNumber($batch_nr);
-         if ($printout==FALSE) {
-    			 if (!$show_printout_button) echo '<a href="javascript:printOut_'.$bills['nr'].'()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a> ';
-    			 
-    			 if ($edit_fields) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif"> &nbsp;&nbsp;&nbsp; To transfere this pending bill into the archive: <a href="billing_tz_pending.php?&mode=done&user_origin='.$user_origin.'&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It´s done! Move the form to the archive"></a>&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif">';
-    			 if (!$edit_fields) echo '<a href="billing_tz_edit.php?batch_nr='.$batch_nr.'&billnr='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_auswahl2.gif" border=0 align="absmiddle" width="120" height="24"></a>';
-    		 }
-         echo '</td>
-  			  	</tr>';
-    		}
-    	} else {
-    	  echo '<br><br><tr><td><div align="center"><h1>No pending bills available</h1><div></td></tr>';
-      }
-  	echo'
+	  	  			<tr>
+	  	  				<td valign="top">';
+	  	  					$total_prescription = $this->DisplayArchivedPrescriptionBill($bills['nr'],$edit_fields);
+		  	      		echo '
+		  	      		</td>
+		  	      	</tr>';
+	        	}
+	        	if($insurancebudget<0)
+	        	{
+	        		echo '<tr><td><table border="1" width="800"><tr><td width="105">'.$LDInsurance.'</td><td><table width="678" border="0" align="right"><tr>
+	        				<td align="right" width="408">'.$LDOldBudget.'</td>
+	        				<td colspan="2">
+	        					'.number_format(($insurancebudget+$used_budget),2,',','.').'
+	        				</td>
+	        			  </tr>
+	        			  <tr>
+	        				<td align="right">'.$LDUsedBudget.'</td>
+	        				<td colspan="2">
+	        					'.number_format(($used_budget),2,',','.').'
+	        				</td>
+	        			  </tr>
+	        			  <tr>
+	        				<td align="right">'.$LDOverdrawnBudget.'</td>
+	        				<td colspan="2">
+	        					<font color="FF0000">'.number_format(($insurancebudget),2,',','.').'</font>
+	        				</td>
+	        			  </tr>';
+	        		$contract = $insurance_tz->CheckForValidContract($batch_nr,0,$insurance_tz->GetCompanyFromPID($batch_nr));
+	        		if($contract['gets_company_credit'])
+	        		{
+	        			  echo '<tr>
+	        				<td align="right">'.$LDCompanyCredit.'</td>
+	        				<td colspan="2">
+	        					'.number_format(($insurancebudget*-1),2,',','.').'
+	        				</td>
+	        			  </tr>';
+	        		}
+	        		else
+	        		{
+	        			  echo '<tr>
+	        				<td align="right">'.$LDOverdrawnPayment.'</td>
+	        				<td width="150">'.$LDNoCompanyCredit.'</td><td>
+	        					<i>'.number_format(($insurancebudget*-1),2,',','.').'<br>
+	        					----------</i>
+	        				</td>
+	        			  </tr>';
+	        			  $sum_to_pay += $insurancebudget*-1;
 
-  	</table>';
+	        		}
+	        		echo '</table></td></tr></td></tr></table>';
+	  	      		echo '
+	  	      		</td>
+	  	      		</tr>';
+        		}
+        		$sum_to_pay += $total_laboratory;
+        		$sum_to_pay += $total_prescription;
+				echo '
+				<tr>
+					<td>
+						<table width="800" border="1">
+							<tr>
+								<td width="100">'.$LDSummary.'</td>
+								<td>
+									<table border="0" width="685">
+										<tr>
+											<td align="right">
+												'.$LDLabTotal.'
+											</td>
+											<td width="105">
+												'.number_format(($total_laboratory),2,',','.').'
+											</td>
+										</tr>
+										<tr>
+											<td align="right">
+												'.$LDPrescTotal.'
+											</td>
+											<td>
+												'.number_format(($total_prescription),2,',','.').'
+											</td>
+										</tr>
+										<tr>
+											<td align="right">
+												'.$LDInsuranceTotal.'
+											</td>
+											<td>
+												';
+												if($insurancebudget<0) echo number_format(($insurancebudget*-1),2,',','.');
+												else echo '0,00';
+												echo '
+											</td>
+										</tr>
+										<tr>
+											<td align="right">
+												<b>'.$LDSumtopay.'</b>
+											</td>
+											<td><b><font color="#FF0000">
+												'.number_format(($sum_to_pay),2,',','.').'</font><br>
+												=======</b>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>';
+    		}
+	}
+
+
+//------------------------------------------------------------------------------
+
+	function DisplayBills($batch_nr, $specific_bill, $edit_fields) {
+	  global $insurancebudget, $used_budget, $ceiling, $insurance_tz, $bill_obj;
+	  global $LDInsurance,$LDOldBudget,$LDUsedBudget,$LDOverdrawnBudget,$LDOverdrawnPayment,
+  		  	 $LDNoCompanyCredit,$LDCompanyCredit,$LDLabTotal,$LDPrescTotal,$LDSumtopay,
+  		  	 $LDInsuranceTotal,$LDSummary,$LDNoPendingBills,$LDTranferPendingBillArchive,$LDDone;
+	 $this->debug=FALSE;
+	  if (func_num_args()>3)
+	    $printout=func_get_arg (3);
+		/*
+			This function displays a complete table containing the bill(s) of a batch_nr
+			$specific_bill = 0 -> Show all bills for this batch_nr
+			$specifig_bill != 0 -> Shows only bill[specific_bill]
+			$edif_fields = 0 -> (default)
+			$edit_fields != 0 -> All values editable
+		*/
+		global $db, $user_origin;
+
+	  	echo '
+	  	<table width="800" border="1">';
+  		if($specific_bill>0)
+  		{
+  			$billnumbers=$this->VerifyBill($specific_bill);
+  		}
+  		else
+  		{
+  			$billnumbers=$this->GetBillNumbersFromPID($batch_nr);
+  		}
+  		if ($billnumbers) {
+    		while($bills=$billnumbers->FetchRow())
+    		{
+
+    			$ALL_PAID_BY_INSURANCE=FALSE;
+				$bill_timestamp = $bill_obj->GetBillTimestamp($bills['nr']);
+				$matchingContract = $insurance_tz->GetContractMemberFromTimestamp($batch_nr,$bill_timestamp);
+				$matchingBills = $bill_obj->GetBillCostSummaryInTimeframe($batch_nr, $matchingContract['start_date'], $bill_timestamp);
+				$ceiling = $matchingContract['Member']['ceiling']-$matchingContract['Member']['ceiling_startup_subtraction'];
+				$used_budget = array_sum($matchingBills);
+				$insurancebudget = $ceiling-$used_budget;
+				$this->debug=FALSE;
+
+				if ($this->debug) {
+					echo "ceiling = $ceuling<br> ";
+					echo "used_budget = $used_budget<br> ";
+					echo "insurancebudget = $insurancebudget<br> ";
+					print_r  ($matchingContract);
+				}
+				if (!is_array($matchingContract['Member']) && $matchingContract['company_id']>0) {
+					if ($this->debug) echo "<br><b>there is no ceiling but insured</b><br>";
+					$used_budget=0;
+					$insurancebudget=1; // must be greater than 0 (workaround, see below)
+					$ALL_PAID_BY_INSURANCE=TRUE;
+				}
+
+				if ($printout==FALSE) {
+						//Java script for print out the bill
+					// We have to place it here, because here is one place where we have the bill number what is
+					// definetly displayed on the user-screen
+					echo '<script language="javascript" >
+				      <!--
+				      function printOut_'.$bills['nr'].'()
+				      {
+				      	urlholder="show_bill.php?bill_number='.$bills['nr'].'&batch_nr='.$batch_nr.'&printout=TRUE";
+				      	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
+
+				      }
+				      // -->
+				      </script>
+				      ';
+				}
+  				echo '
+  					<tr>
+  						<td>';
+  						$this->DisplayBillHeadline($bills['nr'], $batch_nr);
+  						echo '
+  						</td>
+  					</tr>';
+    			$sum_to_pay =0;
+    			$sum = 0;
+
+    			$billelems=$this->GetElemsOfBill($bills['nr'],"laboratory");
+  				if($bill_elems_row=$billelems->FetchRow())
+  				{
+	  	  			echo '
+	  	  			<tr>
+	  	  				<td valign="top">';
+	  	  					$total_laboratory = $this->DisplayLaboratoryBill($bills['nr'],$edit_fields);
+		  	      		echo '
+		  	      		</td>
+		  	      	</tr>';
+	        	}
+	        	$billelems=$this->GetElemsOfBill($bills['nr'],"prescriptions");
+  				if($bill_elems_row=$billelems->FetchRow())
+  				{
+  					echo '
+	  	  			<tr>
+	  	  				<td valign="top">';
+	  	  					$total_prescription = $this->DisplayPrescriptionBill($bills['nr'],$edit_fields);
+		  	      		echo '
+		  	      		</td>
+		  	      	</tr>';
+	        	}
+	        	if($insurancebudget<0) 	{
+	        		echo '<tr><td><table border="1" width="800"><tr><td width="105">#'.$LDInsurance.'</td><td><table width="678" border="0" align="right"><tr>
+	        				<td align="right" width="408">'.$LDOldBudget.'</td>
+	        				<td colspan="2">
+	        					'.number_format(($insurancebudget+$used_budget),2,',','.').'
+	        				</td>
+	        			  </tr>
+	        			  <tr>
+	        				<td align="right">'.$LDOldBudget.'</td>
+	        				<td colspan="2">
+	        					'.number_format(($used_budget),2,',','.').'
+	        				</td>
+	        			  </tr>
+	        			  <tr>
+	        				<td align="right">'.$LDOverdrawnBudget.'</td>
+	        				<td colspan="2">
+	        					<font color="FF0000">'.number_format(($insurancebudget),2,',','.').'</font>
+	        				</td>
+	        			  </tr>';
+	        		$contract = $insurance_tz->CheckForValidContract($batch_nr,0,$insurance_tz->GetCompanyFromPID($batch_nr));
+	        		if($contract['gets_company_credit'])
+	        		{
+	        			  echo '<tr>
+	        				<td align="right">'.$LDCompanyCredit.'</td>
+	        				<td colspan="2">
+	        					'.number_format(($insurancebudget*-1),2,',','.').'
+	        				</td>
+	        			  </tr>';
+	        		}
+	        		else
+	        		{
+	        			  echo '<tr>
+	        				<td align="right">'.$LDOverdrawnPayment.'</td>
+	        				<td width="150">'.$LDNoCompanyCredit.'</td><td>
+	        					<i>'.number_format(($insurancebudget*-1),2,',','.').'<br>
+	        					----------</i>
+	        				</td>
+	        			  </tr>';
+	        			  $sum_to_pay += $insurancebudget*-1;
+
+	        		}
+	        		echo '</table></td></tr></td></tr></table>';
+	  	      		echo '
+	  	      		</td>
+	  	      		</tr>';
+        		}
+
+
+        		$sum_to_pay += $total_laboratory;
+        		$sum_to_pay += $total_prescription;
+				echo '
+				<tr>
+					<td>
+						<table width="800" border="1">
+							<tr>
+								<td width="100">'.$LDSummary.'</td>
+								<td>
+									<table border="0" width="685">
+										<tr>
+											<td align="right">
+												'.$LDLabTotal.'
+											</td>
+											<td width="105">
+												'.number_format(($total_laboratory),2,',','.').'
+											</td>
+										</tr>
+										<tr>
+											<td align="right">
+												'.$LDPrescTotal.'
+											</td>
+											<td>
+												'.number_format(($total_prescription),2,',','.').'
+											</td>
+										</tr>
+										<tr>
+											<td align="right">
+												'.$LDInsuranceTotal.'
+											</td>
+											<td>
+												';
+												if($insurancebudget<0)
+													echo number_format(($insurancebudget*-1),2,',','.');
+												elseif ($ALL_PAID_BY_INSURANCE)
+													echo number_format((($total_laboratory+$total_prescription)*-1),2,',','.');
+												else echo '0,00';
+												echo '
+											</td>
+										</tr>
+										<tr>
+											<td align="right">
+												<b>'.$LDSumtopay.'</b>
+											</td>
+											<td><b><font color="#FF0000">
+												'.number_format(($sum_to_pay),2,',','.').'</font><br>
+												=======</b>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>';
+	        	// is there the edit_fields flag set, then there should be finished the formular with the submit button.
+	        	// If not, then show the three kinds of the main folder.
+	        	echo '
+	  			    <tr>
+	  			  		<td>';
+				$show_printout_button = FALSE;
+				$show_done_button=FALSE;
+				$show_edit_button=FALSE;
+				$enc_obj = New Encounter;
+				$encounter_nr = $enc_obj->GetEncounterFromBatchNumber($batch_nr);
+		     	if ($printout==FALSE)
+		     	{
+					 if (!$show_printout_button) echo '<a href="javascript:printOut_'.$bills['nr'].'()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a> ';
+					 if ($edit_fields) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif"> &nbsp;&nbsp;&nbsp; '.$LDTranferPendingBillArchive.' <a href="billing_tz_pending.php?&mode=done&user_origin='.$user_origin.'&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="'.$LDDone.'"></a>&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif">';
+					 if (!$edit_fields) echo '<a href="billing_tz_edit.php?batch_nr='.$batch_nr.'&billnr='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_auswahl2.gif" border=0 align="absmiddle" width="120" height="24"></a>';
+				}
+	         	echo '</td>
+	  			  	</tr>';
+    		}
+    	}
+    	else
+    	{
+    	  echo '<br><br><tr><td><div align="center"><h1>'.$LDNoPendingBills.'</h1><div></td></tr>';
+      	}
+	  	echo'
+
+	  	</table>';
 	  //if($edit_fields) echo '<form method=post action="#" name="edit_bill">';
 	}
-	
-	//------------------------------------------------------------------------------  
-	
+
+	//------------------------------------------------------------------------------
+
 	function ArchiveBill($bill_number) {
 	  global $db;
 	  $debug=FALSE;
 	  if ($debug) echo "<b>class_tz_billing::ArchiveBill($bill_number)</b><br>";
-	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;	  
-    
-    $this->sql = "INSERT INTO care_tz_billing_archive 
-                      (`nr`,`encounter_nr`, `first_date`, `create_id`)	  
+	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+
+    $this->sql = "INSERT INTO care_tz_billing_archive
+                      (`nr`,`encounter_nr`, `first_date`, `create_id`)
                   SELECT `nr`, `encounter_nr`, `first_date`, `create_id` FROM care_tz_billing WHERE `nr`=".$bill_number;
     $this->result=$db->Execute($this->sql);
-    
+
     if ($db->Insert_ID())
       $CARE_TZ_BILLING_ARCHIVED=TRUE;
 
-    $this->sql = "INSERT INTO care_tz_billing_archive_elem 
-                      (`nr`,`date_change`, `is_labtest`, `is_medicine`, `is_comment`, `is_paid`, `amount`, `price`, `description`, `item_number`, `prescriptions_nr`)	  
-                  SELECT `nr`,`date_change`, `is_labtest`, `is_medicine`, `is_comment`, 1, `amount`, `price`, `description`, `item_number`, `prescriptions_nr` FROM care_tz_billing_elem WHERE `nr`=".$bill_number;
+    $this->sql = "INSERT INTO care_tz_billing_archive_elem
+                      (`nr`,`date_change`, `is_labtest`, `is_medicine`, `is_comment`, `is_paid`, `amount`, `price`, `balanced_insurance`, `insurance_id`, `description`, `item_number`, `prescriptions_nr`)
+                  SELECT `nr`,`date_change`, `is_labtest`, `is_medicine`, `is_comment`, 1, `amount`, `price`, `balanced_insurance`, `insurance_id`, `description`, `item_number`, `prescriptions_nr` FROM care_tz_billing_elem WHERE `nr`=".$bill_number;
     $this->result=$db->Execute($this->sql);
 
     if ($db->Insert_ID())
-      $CARE_TZ_BILLING_ELEM_ARCHIVED=TRUE;      
-    
+      $CARE_TZ_BILLING_ELEM_ARCHIVED=TRUE;
+
     if ($CARE_TZ_BILLING_ARCHIVED && $CARE_TZ_BILLING_ELEM_ARCHIVED) {
       $this->sql = "UPDATE care_encounter_prescription SET bill_status='archived' WHERE bill_number=".$bill_number;
       $db->Execute($this->sql);
@@ -1638,12 +1826,12 @@ function delete_bill_element($bill_elem_number) {
     }
     return FALSE;
 	}
-	
+
 	function DeleteBillFromPendingList($bill_number) {
 	  global $db;
 	  $debug=FALSE;
 	  if ($debug) echo "<b>class_tz_billing::DeleteBillFromPendingList($bill_number)</b><br>";
-	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;	  
+	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
     $this->sql = "DELETE FROM care_tz_billing WHERE `nr`=".$bill_number;
     $db->Execute($this->sql);
     $this->sql = "DELETE FROM care_tz_billing_elem WHERE `nr`=".$bill_number;
@@ -1651,20 +1839,20 @@ function delete_bill_element($bill_elem_number) {
     return TRUE;
   }
 
-  //------------------------------------------------------------------------------  
-  
+  //------------------------------------------------------------------------------
+
   function GetNewQuotation_Prescriptions($encounter_nr) {
     global $db;
     /**
-    * Returns all new prescriptions in a recordset. If no Encounter-Nr is given 
+    * Returns all new prescriptions in a recordset. If no Encounter-Nr is given
     * the result-list is grouped by encounters
     */
     $this->debug=FALSE;
     ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if ($this->debug) echo "<br><b>Method class_tz_billing::GetNewQuotation_Prescriptions()</b><br>";
-    if($encounter_nr>0) 
+    if($encounter_nr>0)
     	$where_encounter='AND cep.encounter_nr = '.$encounter_nr;
-    else 
+    else
     {
     	$where_encounter='GROUP BY cep.encounter_nr, cp.pid, cp.selian_pid, cp.name_first, cp.name_last, cp.date_birth';
     	$anzahl= 'count(*) AS anzahl,';
@@ -1676,26 +1864,26 @@ function delete_bill_element($bill_elem_number) {
 									AND cep.bill_number = 0
 									AND (isnull(cep.is_disabled) OR cep.is_disabled='')
 									$where_encounter
-									ORDER BY cep.prescribe_date DESC , cep.encounter_nr ASC";    
+									ORDER BY cep.prescribe_date DESC , cep.encounter_nr ASC";
     $this->request = $db->Execute($this->sql);
     return $this->request;
-    
+
   }
-  
-  //------------------------------------------------------------------------------  
+
+  //------------------------------------------------------------------------------
 
   function GetNewQuotation_Laboratory($encounter_nr) {
     global $db;
     /**
-    * Returns all new laboratory requests in a recordset. If no Encounter-Nr is given 
+    * Returns all new laboratory requests in a recordset. If no Encounter-Nr is given
     * the result-list is grouped by encounters
     */
-    $this->debug=FALSE;
+    $this->debug=false;
     ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    if ($this->debug) echo "<br><b>Method class_tz_billing::GetNewQuotation_Prescriptions()</b><br>";
-    if($encounter_nr>0) 
+    if ($this->debug) echo "<br><b>Method class_tz_billing::GetNewQuotation_Laboratory()</b><br>";
+    if($encounter_nr>0)
     	$where_encounter='AND ctr.encounter_nr = '.$encounter_nr;
-    else 
+    else
     {
     	$where_encounter='GROUP BY ctr.encounter_nr, cp.pid, cp.selian_pid, cp.name_first, cp.name_last, cp.date_birth';
     	$anzahl= 'count(*) AS anzahl,';
@@ -1707,27 +1895,27 @@ function delete_bill_element($bill_elem_number) {
 									AND ctr.bill_number = 0
 									AND (isnull(ctr.is_disabled) OR ctr.is_disabled='')
 									$where_encounter
-									ORDER BY ctr.modify_time DESC , ctr.encounter_nr ASC";    
+									ORDER BY ctr.modify_time DESC , ctr.encounter_nr ASC";
     $this->request = $db->Execute($this->sql);
     return $this->request;
-    
+
   }
-  
-  //------------------------------------------------------------------------------  
-    
+
+  //------------------------------------------------------------------------------
+
     function GetLaboratoryCount($encounter_nr) {
     global $db;
     /**
-    * Returns all new laboratory requests in a recordset. If no Encounter-Nr is given 
+    * Returns all new laboratory requests in a recordset. If no Encounter-Nr is given
     * the result-list is grouped by encounters
     */
     $this->debug=FALSE;
     ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    if ($this->debug) echo "<br><b>Method class_tz_billing::GetNewQuotation_Prescriptions()</b><br>";
+    if ($this->debug) echo "<br><b>Method class_tz_billing::GetLaboratoryCount()</b><br>";
   	$where_encounter='AND ctr.encounter_nr = '.$encounter_nr;
-  	$where_encounter='GROUP BY ctr.encounter_nr, cp.pid, cp.selian_pid, cp.name_first, cp.name_last, cp.date_birth';
+  	$where_encounter.=' GROUP BY ctr.encounter_nr, cp.pid, cp.selian_pid, cp.name_first, cp.name_last, cp.date_birth';
   	$anzahl= 'count(*) AS anzahl,';
-    
+
 	$this->sql = "SELECT $anzahl ctr.*, cp.pid, cp.selian_pid, cp.name_first, cp.name_last, cp.date_birth
 									FROM `care_test_request_chemlabor` ctr, care_encounter ce, care_person cp
 									WHERE ctr.encounter_nr = ce.encounter_nr
@@ -1735,19 +1923,19 @@ function delete_bill_element($bill_elem_number) {
 									AND ctr.bill_number = 0
 									AND (isnull(ctr.is_disabled) OR ctr.is_disabled='')
 									$where_encounter
-									ORDER BY ctr.modify_time DESC , ctr.encounter_nr ASC";    
+									ORDER BY ctr.modify_time DESC , ctr.encounter_nr ASC";
     $this->request = $db->Execute($this->sql);
     return $this->request->FetchRow();
-    
+
   }
-  
-  //------------------------------------------------------------------------------  
-   
+
+  //------------------------------------------------------------------------------
+
 	function DeleteNewPrescription($nr,$reason) {
 	  global $db;
 	  $debug=FALSE;
 	  if ($debug) echo "<b>class_tz_billing::DeleteNewPrescription($nr)</b><br>";
-	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;	  
+	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 	  if(!$nr) return false;
     $this->sql = "UPDATE care_encounter_prescription SET
     	is_disabled = '$reason'
@@ -1756,13 +1944,13 @@ function delete_bill_element($bill_elem_number) {
     return TRUE;
   }
 
-  //------------------------------------------------------------------------------  
-  
+  //------------------------------------------------------------------------------
+
 	function DeleteNewLaboratory($nr,$reason) {
 	  global $db;
 	  $debug=false;
 	  if ($debug) echo "<b>class_tz_billing::DeleteNewLaboratory($nr)</b><br>";
-	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;	  
+	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 	  if(!$nr) return false;
     $this->sql = "UPDATE care_test_request_chemlabor SET
     	is_disabled = '$reason'
@@ -1770,16 +1958,16 @@ function delete_bill_element($bill_elem_number) {
     $db->Execute($this->sql);
     return TRUE;
   }
-  
 
-  //------------------------------------------------------------------------------  
-  
-  
+
+  //------------------------------------------------------------------------------
+
+
 	function UpdateBillNumberNewPrescription($nr,$bill_number) {
 	  global $db;
 	  $debug=FALSE;
 	  if ($debug) echo "<b>class_tz_billing::DeleteNewPrescription($nr)</b><br>";
-	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;	  
+	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 	  if(!$nr) return false;
     $this->sql = "UPDATE care_encounter_prescription SET
     	bill_number = '$bill_number'
@@ -1788,35 +1976,18 @@ function delete_bill_element($bill_elem_number) {
     return TRUE;
   }
 
-  //------------------------------------------------------------------------------  
-  
-  
+  //------------------------------------------------------------------------------
+
+
   function ShowNewQuotations()
   {
   	global $db;
+  	$counter=0;
   	$this->debug=FALSE;
 		($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if ($this->debug) echo "<br><b>Method class_tz_billing::ShowNewQuotations()</b><br>";
-    
-/*
-	$result_pres = $this->GetNewQuotation_Prescriptions(0); 
-	$result_lab = $this->GetNewQuotation_Laboratory(0);
-	 if($result_pres && $result_lab)
-    {
-		
-	    while ($row_pres=$result_pres->FetchRow())		 
-		//{
-		while ($row_lab=$result_lab->FetchRow())
-	  		//{
-	    
-		//echo $row_pres['prescribe_date'] ;
-		//echo " <br>";
-		//echo substr($row_lab['modify_time'],0,10) ;
-			if($row_pres['prescribe_date']<(substr($row_lab['modify_time'],0,10)))
-			{
-	
-	*/
-	$result = $this->GetNewQuotation_Prescriptions(0);     
+
+	$result = $this->GetNewQuotation_Prescriptions(0);
     $color_change=FALSE;
     if($result)
     {
@@ -1847,11 +2018,7 @@ function delete_bill_element($bill_elem_number) {
 					</tr>';
 				$alreadyshown[$row['encounter_nr']] = $row['encounter_nr'];
 	    }
-			    
-			//}//for prakash code
-			//else
-			//{//for prakash code	
-				
+
 				$result = $this->GetNewQuotation_Laboratory(0);
 			    if($result)
 			    {
@@ -1860,7 +2027,7 @@ function delete_bill_element($bill_elem_number) {
 			    		if(!$alreadyshown[$row['encounter_nr']])
 			    		{
 			    		$counter++;
-			    		
+
 				      if ($color_change) {
 				        $BGCOLOR='bgcolor="#ffffdd"';
 				        $color_change=FALSE;
@@ -1880,23 +2047,22 @@ function delete_bill_element($bill_elem_number) {
 								  <td '.$BGCOLOR.'><div align="center">'.$row['date_birth'].'</div></td>
 								  <td '.$BGCOLOR.'><div align="center">0 pres.<br>'.$row['anzahl'].' req.</div></td>
 								  <td '.$BGCOLOR.'><div align="center"><input type="hidden" name="namelast" value="'.$row['name_last'].'"><input type="hidden" name="namefirst" value="'.$row['name_first'].'"><input type="hidden" name="countpres" value="0"><input type="hidden" name="countlab" value="'.$row['anzahl'].'"><input type="hidden" value="'.$row['encounter_nr'].'" name="encounter_nr"><input type="hidden" value="'.$row['pid'].'" name="pid"><input type="submit" value=">>"></div></td>
-								  </form>
-								</tr>';
+					   </form>
+					 </tr>';
 							}
 				    }
 	    	}
-			
-			//}//for prakash code
-			//}//for prakash code
+
+
 	    if(!$counter)
 	    	echo '<tr><td colspan="8" align="center">Nothing to do :)</td></tr>';
 	 	}
 	  else
 	  	echo '<tr><td colspan="8" align="center">Huston we have a problem. Database error :(</td></tr>';
   }
-  
-  //------------------------------------------------------------------------------  
-  
+
+  //------------------------------------------------------------------------------
+
   function ShowNewQuotation_Laboratory()
   {
   	global $db;
@@ -1937,12 +2103,20 @@ function delete_bill_element($bill_elem_number) {
 	  else
 	  	echo '<tr><td colspan="8" align="center">Huston we have a problem. Database error :(</td></tr>';
   }
-  
-  //------------------------------------------------------------------------------  
-  
+
+  //------------------------------------------------------------------------------
+
 	function ShowNewQuotationEncounter_Prescriptions($encounter_nr,&$id_array)
-  {
-  	global $db;
+    {
+
+ 	global $db, $insurancebudget;
+	if (func_num_args()>2) {
+		$IS_PATIENT_INSURED=func_get_arg(2);
+	}
+
+  	# 4 lang
+  	global $LDNotes, $LDDosage,$LDPrice,$LDInsurance,$LDPricing,$LDTSH,$LDPricing,$LDNothingtodo;
+
   	$this->debug=FALSE;
 		($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if ($this->debug) echo "<br><b>Method class_tz_billing::ShowNewQuotationEncounter_Prescriptions()</b><br>";
@@ -1952,7 +2126,7 @@ function delete_bill_element($bill_elem_number) {
     	$color_change=FALSE;
 	    while ($row=$result->FetchRow())
 	    {
-    
+
 	      if ($color_change) {
 	        $BGCOLOR='bgcolor="#ffffdd"';
 	        $color_change=FALSE;
@@ -1982,54 +2156,68 @@ function delete_bill_element($bill_elem_number) {
 					  						<td width="60" align="right"><input type="radio" value="delete" name="modepres_'.$row['nr'].'" onClick="javascript:toggle_tr(\'tr_'.$row['nr'].'\',false,\''.$row['nr'].'\');"><img align=absmiddle src="../../gui/img/common/default/delete2.gif" border=0 alt="Delete this item now!" style="filter:alpha(opacity=70)"></td>
 					  					</tr>
 					  				</table>
-					  				
-					  				
-										
+
+
+
 					  				</div>
 					  			</td>
 					  		</tr>
 					  		<tr bgcolor="#ffffdd" id="tr_'.$row['nr'].'" style="display: none;">
 					  			<td valign="top">
-					  				Notes:<br>
+					  				'.$LDNotes.'<br>
 					  				<textarea rows="3" cols="22" name="notes_'.$row['nr'].'">'.$row['notes'].'</textarea>
 					  			</td>
 					  			<td valign="top">
 					  				<table border="0" cellpadding="0" width="200">
 					  					<tr>
-					  						<td width="100">Price:</td>
-					  						<td align="right"><input type="hidden" name="showprice_'.$row['nr'].'" id="showprice_'.$row['nr'].'" value="'.$row['price'].'">'.$row['price'].' TSH</td>
+					  						<td width="100">'.$LDPrice.'</td>
+					  						<td align="right"><input type="hidden" name="showprice_'.$row['nr'].'" id="showprice_'.$row['nr'].'" value="'.$row['price'].'">'.$row['price'].' '.$LDTSH.' </td>
 					  					</tr>
 					  					<tr>
-					  						<td>Dosage:</td>
+					  						<td>'.$LDDosage.'</td>
 					  						<td align="right"><input onkeyup="calc_article(\''.$row['nr'].'\');" type="text" size="4" value="'.$row['dosage'].'" name="dosage_'.$row['nr'].'"></td>
-					  					</tr>
+					  					</tr>';
+									if ($IS_PATIENT_INSURED){
+									echo '
 					  					<tr>
-					  						<td>Insurance:</td>
-					  						<td align="right"><input onkeyup="calc_article(\''.$row['nr'].'\')" type="text" size="4" value="0" name="insurance_'.$row['nr'].'"></td>
-					  					</tr>
+					  						<td>'.$LDInsurance.'</td>
+					  						<td align="right"><input onkeyup="calc_article(\''.$row['nr'].'\')" type="text" size="4" value="'.($row['dosage']*$row['price']).'" name="insurance_'.$row['nr'].'"></td>
+					  					</tr>';
+									}
+									echo '
 					  				</table>
 					  			</td>
 					  			<td valign="top">
-					  				<u>Pricing:</u><br>
+					  				<u>'.$LDPricing.'</u><br>
 					  				<div  id="div_'.$row['nr'].'"></div>
 					  			</td>
 					  		</tr>
 					  	</table>
 					  </td>
 					</tr>';
-					
+
 	    }
 	 	}
 	  else
-	  	echo '<tr><td colspan="8">Nothing to do :)</td></tr>';
+	  	echo '<tr><td colspan="8">'.$LDNothingtodo.'</td></tr>';
   }
-  //------------------------------------------------------------------------------  
-  
+
+
+
+  //------------------------------------------------------------------------------
+
 	function ShowNewQuotationEncounter_Laboratory($encounter_nr, &$id_array)
   {
-  	global $db,$root_path;
+  	global $db,$root_path, $insurancebudget;
+  	global $LDInsurance,$LDPricing,$LDPricing;
+
+	if (func_num_args()>2) {
+		$IS_PATIENT_INSURED=func_get_arg(2);
+	}
+
+
   	$this->debug=FALSE;
-		($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+	($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if ($this->debug) echo "<br><b>Method class_tz_billing::ShowNewQuotationEncounter_Laboratory()</b><br>";
     $result = $this->GetNewQuotation_Laboratory($encounter_nr);
     if($result)
@@ -2037,7 +2225,7 @@ function delete_bill_element($bill_elem_number) {
     	$color_change=FALSE;
 	    while ($row=$result->FetchRow())
 	    {
-    
+
 	      if ($color_change) {
 	        $BGCOLOR='bgcolor="#ffffdd"';
 	        $color_change=FALSE;
@@ -2053,7 +2241,7 @@ function delete_bill_element($bill_elem_number) {
 				require_once($root_path.'include/care_api_classes/class_lab.php');
 				if(!isset($lab_obj)) $lab_obj=new Lab($encounter_nr);
 
-				
+
 	      echo '
           <tr>
 					  <td colspan=8>
@@ -2063,7 +2251,7 @@ function delete_bill_element($bill_elem_number) {
 					  				<div align="left">'.substr($row['modify_time'],0,4).'-'.substr($row['modify_time'],5,2).'-'.substr($row['modify_time'],8,2).'</div>
 					  			</td>
 					  			<td width="200">
-					  				<div align="center">'; 
+					  				<div align="center">';
 					  				$sum=0;
 					  				$desc=false;
 					  				$pricelist=false;
@@ -2073,9 +2261,9 @@ function delete_bill_element($bill_elem_number) {
 											$desc .=$labrow['name'].', ';
 											$pricelist.= $labrow['name'].': '.$labrow['price'].'<br>';
 											$sum += $labrow['price'];
-											
+
 										}
-					  				
+
 					  				echo $desc.'</div>
 					  			</td width="200">
 					  			<td>
@@ -2087,9 +2275,9 @@ function delete_bill_element($bill_elem_number) {
 					  						<td width="60" align="right"><input type="radio" value="delete" name="modelab_'.$row['batch_nr'].'" onClick="javascript:toggle_tr(\'tr_'.$row['batch_nr'].'\',false,\''.$row['batch_nr'].'\');"><img align=absmiddle src="../../gui/img/common/default/delete2.gif" border=0 alt="Delete this item now!" style="filter:alpha(opacity=70)"></td>
 					  					</tr>
 					  				</table>
-					  				
-					  				
-										
+
+
+
 					  				</div>
 					  			</td>
 					  		</tr>
@@ -2102,24 +2290,27 @@ function delete_bill_element($bill_elem_number) {
 					  					<tr>
 					  						<td width="100">Price:</td>
 					  						<td align="right"><input type="hidden" id="showprice_'.$row['nr'].'" name="showprice_'.$row['batch_nr'].'" value="'.$sum.'">'.$sum.' TSH<input onChange="calc_article(\''.$row['batch_nr'].'\');" type="hidden" value="1" name="dosage_'.$row['batch_nr'].'"></td>
-					  					</tr>
+					  					</tr>';
+
+									if ($IS_PATIENT_INSURED) echo '
 					  					<tr>
-					  						<td>Insurance:</td>
-					  						<td align="right"><input onkeyup="calc_article(\''.$row['batch_nr'].'\')" type="text" size="4" value="0" name="insurance_'.$row['batch_nr'].'"> TSH</td>
-					  					</tr>
+					  						<td>'.$LDInsurance.'</td>
+					  						<td align="right"><input onkeyup="calc_article(\''.$row['batch_nr'].'\')" type="text" size="4" value='.$sum.' name="insurance_'.$row['batch_nr'].'"> TSH</td>
+					  					</tr>';
+									echo '
 					  				</table>
 					  			</td>
 					  			<td valign="top">
-					  				<u>Pricing:</u><br>
+					  				<u>'.$LDPricing.'</u><br>
 					  				<div  id="div_'.$row['batch_nr'].'"></div>
 					  			</td>
 					  		</tr>
 					  	</table>
 					  </td>
 					</tr>';
-				
-				
-				
+
+
+
 /*					echo '
           <tr>
 					  <td '.$BGCOLOR.'><div align="center">'.$row['modify_time'].'</div></td>
@@ -2128,17 +2319,39 @@ function delete_bill_element($bill_elem_number) {
 					  <td '.$BGCOLOR.'><div align="center"><input checked type="radio" value="ignore" name="modelab_'.$row['batch_nr'].'"></div></td>
 						<td '.$BGCOLOR.'><div align="center"><input type="radio" value="delete" name="modelab_'.$row['batch_nr'].'"></div></td>
 					</tr>';
-					
+
 					*/
 					$id_array['pressum_'.$row['batch_nr']]= true;
 	    }
 	 	}
 	  else
-	  	echo '<tr><td colspan="5">Nothing to do :)</td></tr>';
+	  	echo '<tr><td colspan="5">'.$LDPricing.'</td></tr>';
   }
 
+function new_reg($encounter,$reg,$prescriber)
+	{
+	global $db;
+  	$debug=FALSE;
+  	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+
+
+  	  $this->sql="SELECT `item_id`, `item_description`, `unit_price` FROM care_tz_drugsandservices where item_description='".$reg."'";
+    $this->request=$db->Execute($this->sql);
+    while ($this->res=$this->request->FetchRow()) {
+
+     $item_id=$this->res['item_id'];
+      $item_description=$this->res['item_description'];
+      $unit_price=$this->res['unit_price'];
+
+
+  		$this->sql="insert into care_encounter_prescription(encounter_nr,article,article_item_number,price,prescribe_date,prescriber,history,modify_time,dosage)values('".$encounter."','".$item_description."','".$item_id."','".$unit_price."','".date('Y-m-d')."','".$prescriber."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."','1')";
+  		#$this->sql="insert into care_encounter_prescription(encounter_nr)values('".$encounter."')";
+  		$db->Execute($this->sql);
+    }
+  return TRUE;
+	}
 }
 
 
-	
+
 ?>

@@ -13,19 +13,25 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 //define('NO_2LEVEL_CHK',1);
+$lang_tables[]='billing.php';
+$lang_tables[]='aufnahme.php';
 require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
 $insurance_tz = New Insurance_tz();
 if($mode=='insert')
 {
 	//Error checking
-	if(strlen(trim($name))<3) $error['name'] = true;
-	if(strlen(trim($contact))<3) $error['contact'] = true;
-	if(!$insurance) $error['insurance'] = true;
+	if(strlen(trim($name))<1) $error['name'] = true;
+	if(strlen(trim($contact))<1) $error['contact'] = true;
+	if(!$insurance && $invoice_flag!='on') $error['insurance'] = true;
 	if(!$error)
 	{
-		if($insurance_tz->InsertNewInsuranceCompany($_POST))
-			header("Location: insurance_company_tz.php");
+		$newid = $insurance_tz->InsertNewInsuranceCompany($_POST);
+		if($newid)
+			if($sitetarget=='contract')
+				header("Location: insurance_company_tz_contracts_new.php?company_id=".$newid);
+			else
+				header("Location: insurance_company_tz.php");
 	}
 }
 

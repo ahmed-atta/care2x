@@ -13,6 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 define('NO_2LEVEL_CHK',1);
+
 require($root_path.'include/inc_front_chain_lang.php');
 
 

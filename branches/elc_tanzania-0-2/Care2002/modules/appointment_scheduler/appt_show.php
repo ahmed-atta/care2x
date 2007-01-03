@@ -12,6 +12,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 $lang_tables=array('date_time.php','departments.php','actions.php','prompt.php');
 define('LANG_FILE','aufnahme.php');
+
 //define('NO_2LEVEL_CHK',1);
 //define('NO_CHAIN',1);
 $local_user='aufnahme_user';
@@ -121,7 +122,7 @@ $img_female=createComIcon($root_path,'spf.gif','0','',TRUE);
  $smarty->assign('sToolbarTitle',$LDAppointments);
 
 # href for the  button
- $smarty->assign('pbHelp',"javascript:gethelp('appointment_show.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('outpatient_appointments.php','Outpatient :: Appointments')");
 
  $smarty->assign('breakfile',$breakfile);
 

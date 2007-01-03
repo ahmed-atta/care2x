@@ -156,6 +156,7 @@ class Encounter extends Notes {
 	*/
 	var $tabfields=array('encounter_nr',
 	                           'pid',
+							   
 							   'encounter_date',
 							   'encounter_class_nr',
 							   'encounter_type',
@@ -1365,7 +1366,7 @@ class Encounter extends Notes {
 		$db->debug=FALSE;
 		if ($db->debug) echo "_searchAdmissionBasicInfo is called with enc_class=".$enc_class."<br>";
 		if ($enc_class==2) {
-			$this->sql="SELECT DISTINCT p.selian_pid, rc.batch_nr, e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.selian_pid, p.sex,p.blood_group
+			$this->sql="SELECT DISTINCT p.selian_pid, rc.batch_nr,rc.send_date, e.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.selian_pid, p.sex,p.blood_group
 					FROM $this->tb_enc AS e LEFT JOIN $this->tb_person AS p ON e.pid=p.pid " .
 							"				INNER JOIN $this->tb_chemlabor as rc ON e.encounter_nr=rc.encounter_nr";
 		} else {
@@ -1391,6 +1392,7 @@ class Encounter extends Notes {
 			if ($db->debug) echo " -> we have to search in a text comparision<br>";	
 			$this->sql.=" WHERE (e.encounter_nr $sql_LIKE '$key%'
 						OR p.pid $sql_LIKE '$key%'
+						OR p.selian_pid $sql_LIKE '$key%'
 						OR p.name_last $sql_LIKE '$key%'
 						OR p.name_first $sql_LIKE '$key%'
 						OR p.date_birth $sql_LIKE '$key%'
@@ -1729,7 +1731,6 @@ class Encounter extends Notes {
 	function assignInDept($enr,$loc_nr,$group_nr,$date,$time){
 		
 		if($this->_setLocation($enr,1,$loc_nr,$group_nr,$date,$time)){ # loc. type 1 = department
-			//echo 'TEST';
 			return $this->setCurrentDeptInDept($enr,$loc_nr);
 		}
 	}
@@ -2315,13 +2316,13 @@ class Encounter extends Notes {
 	* @param int Department number, if empty all departments will be searched
 	* @return mixed adodb record object or boolean
 	*/
-	function OutPatientsBasic($dept_nr=0){
+	function OutPatientsBasic($sort,$dept_nr=0){
 		global $db;
-		//$db->debug=1;
+		$db->debug=0;
 		if($dept_nr) $cond="e.current_dept_nr=$dept_nr AND";
 			else $cond='';
 			//$cond='';
-		$this->sql="SELECT e.encounter_nr, e.encounter_date, e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex, p.photo_filename,
+		$this->sql="SELECT e.encounter_nr, e.encounter_date, e.pid,e.insurance_class_nr,p.selian_pid,p.name_last,p.name_first,p.date_birth,p.sex, p.photo_filename,
 									a.date, a.time,a.urgency, i.LD_var AS \"LD_var\",i.name AS insurance_name,
 									n.nr AS notes
 							FROM $this->tb_enc AS e  
@@ -2332,7 +2333,7 @@ class Encounter extends Notes {
 							WHERE $cond e.encounter_class_nr=2 AND
 									(e.is_discharged='' OR e.is_discharged=0)  AND
 									e.in_dept<>'' AND e.in_dept<>0 AND e.status NOT IN ($this->dead_stat)
-							ORDER BY name_last,p.name_first ASC";
+							ORDER BY $sort ASC";
 							/*							GROUP BY e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex,
 							p.photo_filename,a.date, a.time,a.urgency,i.LD_var,i.name, n.nr*/
 							
@@ -2374,7 +2375,7 @@ class Encounter extends Notes {
 		if($dept_nr) $cond="AND current_dept_nr='$dept_nr'";
 			else $cond='';
 		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, e.current_dept_nr,
-									p.pid, p.name_last, p.name_first, p.date_birth, p.sex, 
+									p.pid, p.name_last, p.name_first, p.date_birth, p.sex,p.selian_pid, 
 									d.nr AS dept_nr, d.name_short, d.LD_var AS \"dept_LDvar\"
 				FROM $this->tb_enc AS e
 					LEFT JOIN $this->tb_person AS p ON e.pid=p.pid

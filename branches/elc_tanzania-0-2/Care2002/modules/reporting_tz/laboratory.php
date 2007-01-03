@@ -11,6 +11,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 
+$lang_tables[]='date_time.php';
+$lang_tables[]='reporting.php';
+require($root_path.'include/inc_front_chain_lang.php');
 
 #Load and create paginator object
 require_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -39,7 +42,7 @@ if (empty($_GET['printout'])) {
 		$end_timeframe = mktime (0,0,0,$_POST['month']+1, 0, $_POST['year']);
 	}
 } else  {
-	$PRINTOUT=TRUE;
+	$PRINTOUT=FALSE;
 } // end of if (empty($_GET['printout']))
 
 if (empty($_POST['group_id']) && empty($_GET['group_id'])) {
@@ -61,13 +64,25 @@ $rep_obj = new selianreport();
 $lab_obj=new Lab();
 $db->debug=FALSE;
 
+
 $sql="CREATE TEMPORARY TABLE tmp_laboratory TYPE=HEAP (SELECT
+  care_tz_laboratory_tests.id as GroupID,
+  care_tz_laboratory_tests.name as GroupName,
+  care_tz_laboratory_param.id as TestID,
+  care_tz_laboratory_param.shortname as TestName,
+  care_tz_laboratory_param.name as FullTestName		
+FROM care_tz_laboratory_tests
+INNER JOIN care_tz_laboratory_param ON care_tz_laboratory_param.group_id=care_tz_laboratory_tests.id WHERE is_enabled=1)";
+
+/*
+$sql="CREATE TABLE tmp_laboratory TYPE=MyIsam (SELECT
   care_tz_laboratory_tests.id as GroupID,
   care_tz_laboratory_tests.name as GroupName,
   care_tz_laboratory_param.id as TestID,
   care_tz_laboratory_param.shortname as TestName
 FROM care_tz_laboratory_tests
-INNER JOIN care_tz_laboratory_param ON care_tz_laboratory_param.group_id=care_tz_laboratory_tests.id WHERE is_enabled=1)"; 
+INNER JOIN care_tz_laboratory_param ON care_tz_laboratory_param.group_id=care_tz_laboratory_tests.id WHERE is_enabled=1)";
+*/ 
 $db->Execute($sql);
 
 $sql="CREATE TEMPORARY TABLE tmp_laboratory_tests (TestID INT NOT NULL, is_positive INT NOT NULL, date INT NOT NULL) TYPE=HEAP ";
@@ -83,6 +98,7 @@ while (list($u,$v)=each($row)){
 	//echo "array a:"; print_r($a); echo "<br>";
 	//echo "array b:"; print_r($b); echo "<br>";
 	while (list($au, $av) = each($a)) {
+		
 		if (strpos($av,'+')===0)
 			$sql="INSERT INTO tmp_laboratory_tests (TestID,is_positive, date) VALUES (".$au.",1,".$v['date'].")";
 		else 
@@ -139,14 +155,19 @@ function DisplayLaboratoryTableHead($group_id) {
 		$table_head .= "<td>day</td>\n";
 	else 
 		$table_head .= "<td bgcolor=\"#CC9933\">day</td>\n";
-	$sql_tests = "SELECT TestID, TestName FROM tmp_laboratory WHERE GroupID=$group_id ORDER BY TestID";
+	$sql_tests = "SELECT TestID, TestName, FullTestName FROM tmp_laboratory WHERE GroupID=$group_id ORDER BY TestID";
 	$db_prt=$db->Execute($sql_tests);
 	$db_row=$db_prt->GetArray();
 	while (list($u,$v)=each($db_row)) {
-		if ($PRINTOUT)
-			$table_head .= "<td id=\"".$v['TestID']."\">".$v['TestName']."</td>\n" ;
+		if (empty($v['TestName']))
+			$testname=$v['FullTestName'];
 		else
-			$table_head .= "<td bgcolor=\"#CC9933\" id=\"".$v['TestID']."\">".$v['TestName']."</td>\n" ;
+			$testname=$v['TestName'];
+			
+		if ($PRINTOUT)
+			$table_head .= "<td id=\"".$v['TestID']."\">".$testname."</td>\n" ;
+		else
+			$table_head .= "<td bgcolor=\"#CC9933\" id=\"".$v['TestID']."\">".$testname."</td>\n" ;
 	}
 	
 	echo $table_head;
@@ -187,6 +208,7 @@ function NumberOfPositiveTests($TestID,$day_as_timestamp) {
 function NumberOfTestsOfMonth($TestID,$start_time) {
 	global $db;
 	$debug=FALSE;
+	if (empty($TestID)) return "-1";
 	$end_time = mktime(0,0,0,date("n",$start_time)+1,1,date("Y",$start_time))-1;
 	// getting the day: start_time_frame plus day is what we need:
 	if ($debug) echo "Looking for test $TestID by time range: day: ".date("d.m.y",$start_time)." starttime: ".date("d.m.y :: G:i:s",$start_time)." endtime: ".date("d.m.y :: G:i:s",$end_time)."<br>";
@@ -229,8 +251,10 @@ function _get_requested_day($start_time_frame, $day) {
 function DisplayLaboratoryTestSummary($group_id, $start_time_frame, $end_time_frame) {
 	global $db;
 	global $PRINTOUT;
+	global $LDShowentriesinthetimeof, $LDtill;
+	
 	$table ="<tr>\n";
-	echo "Show entries in the time of: <b>".date("F j, Y",$start_time_frame)."</b> till <b>".date("F j, Y",$end_time_frame)."</b><br>";
+	echo $LDShowentriesinthetimeof." <b>".date("F j, Y",$start_time_frame)."</b> ".$LDtill." <b>".date("F j, Y",$end_time_frame)."</b><br>";
 
 	$first_day_of_req_month = date ("d",$start_time_frame);
 	$last_day_of_req_month = date ("d",$end_time_frame);
@@ -253,13 +277,21 @@ function DisplayLaboratoryTestSummary($group_id, $start_time_frame, $end_time_fr
 			$table .= "<td bgcolor=\"#ffffaa\">".date("j F Y",_get_requested_day($start_time_frame, $day-1))."</td>\n";
 			
 		$sql = "SELECT TestID FROM tmp_laboratory WHERE GroupID=".$group_id;
+		
 		$db_ptr=$db->Execute($sql);
 		$arr_ret = $db_ptr -> GetArray();
 		while (list($u,$v)=each($arr_ret)) {
-			$number_of_hits = NumberOfTests($v['TestID'],_get_requested_day($start_time_frame, $day-1));
+			if (empty($v['TestID'])) {
+				$number_of_hits = "-1";
+			} else {
+				$number_of_hits = NumberOfTests($v['TestID'],_get_requested_day($start_time_frame, $day-1));
+			}
 			$amount_string = "0";
 			if ($number_of_hits>0)
 				$amount_string = "<b>$number_of_hits</b>";
+			else
+				$amount_string = "0";
+				
 			if ($current_day > time())
 				if ($PRINTOUT) 
 					$table .= "<td id=\"".$v['TestID']."\" align=\"center\">--</td>\n";
@@ -272,7 +304,6 @@ function DisplayLaboratoryTestSummary($group_id, $start_time_frame, $end_time_fr
 	}
 		
 	echo $table;
-	
 }
 
 function DisplayResultRow($group_id, $start_time_frame, $end_time_frame) {
@@ -300,10 +331,8 @@ function DisplayResultRow($group_id, $start_time_frame, $end_time_frame) {
 	$table .="</tr>\n";
 		
 	echo $table;
+	
 }
-
-
-
 
 require_once('include/inc_timeframe.php');
 

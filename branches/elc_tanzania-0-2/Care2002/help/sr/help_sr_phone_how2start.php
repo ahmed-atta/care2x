@@ -15,7 +15,7 @@ switch($x1)
 	<b>Step 1</b>
 	<ul> Click the button <img <?php echo createLDImgSrc('../','such-gray.gif','0') ?>>.
 	</ul>
-	<?php endif ?>
+	<?php endif;?>
 <b>Step <?php if($src=="newphone") print "2"; else print "1"; ?></b>
 
 <ul> Enter  in the "<span style="background-color:yellow" >Enter search keyword.</span>" field either a full information or a few letters, like for example the ward's or department's code, a name, or Given name,
@@ -32,12 +32,12 @@ switch($x1)
 <b>Step <?php if($src=="newphone") print "4"; else print "3"; ?></b>
 <ul> If the search finds result(s), a list will be displayed.<p>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1=="dir") : ?>
 <b>Step 1</b>
 <ul> Click the button <img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1=="newphone") : ?>
 	<?php if($src=="search") : ?>
 <b>Step 1</b>
@@ -47,10 +47,10 @@ switch($x1)
 <ul> If you have logged in before and you have an access right for this function, the 
 		entry form for new phone information  will appear on the main frame.<br>
 		Otherwise, if you are not logged in, you will be required to enter your username and password. <p>
-	<?php endif ?>
+	<?php endif;?>
 		Enter your username and password and click the button <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
 		
-</ul><?php endif ?>
+</ul><?php endif;?>
 
 <b>Note</b>
 <ul> If you decide to cancel 

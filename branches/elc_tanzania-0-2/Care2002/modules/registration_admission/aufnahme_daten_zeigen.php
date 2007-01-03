@@ -4,6 +4,7 @@
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 
+
 /*
 CARE2X Integrated Information System beta 2.0.1 - 2004-07-04 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
@@ -21,6 +22,9 @@ require_once($root_path.'include/care_api_classes/class_person.php');
 require_once($root_path.'include/care_api_classes/class_insurance.php');
 require_once($root_path.'include/care_api_classes/class_ward.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+
+
 
 if(!session_is_registered('sess_parent_mod')) session_register('sess_parent_mod');
 
@@ -153,6 +157,7 @@ $dbtable='care_encounter';
 
 	include_once($root_path.'include/inc_date_format_functions.php');
         
+      
 	/* Update History */
 	if(!$newdata) $encounter_obj->setHistorySeen($HTTP_SESSION_VARS['sess_user_name'],$encounter_nr);
 	/* Get insurance firm name*/
@@ -174,8 +179,13 @@ $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 /* Prepare the photo filename */
 require_once($root_path.'include/inc_photo_filename_resolve.php');
+$user=$HTTP_COOKIE_VARS[$local_user.$sid];
 
-# Start Smarty templating here
+//billing
+$bill_obj = new Bill;
+if($referrer_dr!='') $bill_obj->new_reg($encounter_nr,$referrer_dr,$user);
+ if($referrer_recom_therapy!='') $bill_obj->new_reg($encounter_nr,$referrer_recom_therapy,$user);
+ # Start Smarty templating here
  /**
  * LOAD Smarty
  */
@@ -189,7 +199,7 @@ require_once($root_path.'include/inc_photo_filename_resolve.php');
  $smarty->assign('sToolbarTitle',$LDPatientData.' ('.$encounter_nr.')');
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('admission_how2new.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('registration_overview.php','Person Registration :: Overview')");
 
  $smarty->assign('breakfile',$breakfile);
 
@@ -197,7 +207,7 @@ require_once($root_path.'include/inc_photo_filename_resolve.php');
  $smarty->assign('title',$LDPatientData.' ('.$encounter_nr.')');
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('admission_show.php','$from')");
+ $smarty->assign('pbHelp',"javascript:gethelp('registration_overview.php','Person Registration :: Overview')");
 
  # Hide the return button
  $smarty->assign('pbBack',FALSE);
@@ -342,9 +352,10 @@ if($encounter_class_nr==1){
 
 $smarty->assign('LDDiagnosis',$LDDiagnosis);
 $smarty->assign('referrer_diagnosis',$referrer_diagnosis);
-$smarty->assign('LDRecBy',$LDRecBy);
+$smarty->assign('LDRecBy',$LDReg);
 $smarty->assign('referrer_dr',$referrer_dr);
-$smarty->assign('LDTherapy',$LDTherapy);
+#$smarty->assign('LDTherapy',$LDReg);
+$smarty->assign('LDTherapy',$LDCon);
 $smarty->assign('referrer_recom_therapy',$referrer_recom_therapy);
 $smarty->assign('LDSpecials',$LDSpecials);
 $smarty->assign('referrer_notes',$referrer_notes);

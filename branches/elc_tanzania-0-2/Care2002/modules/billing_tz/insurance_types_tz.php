@@ -13,7 +13,10 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 //define('NO_2LEVEL_CHK',1);
+define('LANG_FILE','billing.php');
+$lang_tables[]='aufnahme.php';
 require($root_path.'include/inc_front_chain_lang.php');
+
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
 $insurance_tz = New Insurance_tz();
 require ("gui/gui_insurance_types_tz.php");

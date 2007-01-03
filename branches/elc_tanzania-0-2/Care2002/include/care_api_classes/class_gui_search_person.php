@@ -310,7 +310,7 @@ class GuiSearchPerson {
 				$this->smarty->assign('sJSGetHelp',$sTemp);
 			ob_end_clean();
 
-			$this->smarty->assign('LDTipsTricks','<a href="javascript:gethelp(\'person_search_tips.php\')">'.$LDTipsTricks.'</a>');
+			$this->smarty->assign('LDTipsTricks','<a href="javascript:gethelp(\'tips_and_tricks.php\')">'.$LDTipsTricks.'</a>');
 		}
 
 		#

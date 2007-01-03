@@ -118,7 +118,7 @@
 		o nome, ou o sobrenome ou a data de admissão.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 <b>Nota</b>
 <ul> Se você decidir cancelar a pesquisa clique no botão <input type="button" value="Cancelar">.
 </ul>

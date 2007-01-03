@@ -33,7 +33,7 @@ class Prescription extends Core {
 	/**
 	* Table for drugs and supplies
 	*/
-	var $tb_drug_list='care_tz_druglist';
+	var $tb_drugsandservices='care_tz_drugsandservices';
 	/**#@-*/
 
 	/**#@+
@@ -215,15 +215,16 @@ class Prescription extends Core {
   	  global $db;
   	  if($is_enabled) $query = " AND ".$is_enabled." = 1";
   	  else $query = "";
-	    $debug = FALSE;
+	    $debug = false;
 	    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 	    
-  	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drug_list WHERE
+  	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drugsandservices WHERE
   	                  	 purchasing_class = '$class'
   	                  	 $query
   	                  	 ORDER BY item_description";
+  
   	  /* else {
-  	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drug_list WHERE
+  	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drugsandservices WHERE
   	                  	 purchasing_class = '$class' ORDER BY item_description";
   	  }*/
   	  
@@ -270,7 +271,7 @@ class Prescription extends Core {
      ($debug)?$db->debug=TRUE:$db->debug=FALSE;
      $js_command = '<script language="javascript">';
       foreach($items as $item_no) {
-  	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drug_list WHERE item_id = '$item_no' ";
+  	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drugsandservices WHERE item_id = '$item_no' ";
   	    if ($this->result=$db->Execute($this->sql)) {
     		    if ($this->result->RecordCount()) {
     		        $this->item_array = $this->result->GetArray();
@@ -303,7 +304,7 @@ class Prescription extends Core {
     global $db;
     $debug=FALSE;
     ($debug)?$db->debug=TRUE:$db->debug=FALSE;
-    $this->sql="SELECT item_description as description FROM $this->tb_drug_list WHERE item_id = '$item_number' ";
+    $this->sql="SELECT item_description as description FROM $this->tb_drugsandservices WHERE item_id = '$item_number' ";
     if ($this->result=$db->Execute($this->sql)) {
 		    if ($this->result->RecordCount()) {
 		        $this->item_array = $this->result->GetArray();
@@ -322,7 +323,7 @@ class Prescription extends Core {
     global $db;
     $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    $this->sql="SELECT unit_price as price FROM $this->tb_drug_list WHERE item_id = '$item_number' ";
+    $this->sql="SELECT unit_price as price FROM $this->tb_drugsandservices WHERE item_id = '$item_number' ";
     if ($this->result=$db->Execute($this->sql)) {
 		    if ($this->result->RecordCount()) {
 		        $this->item_array = $this->result->GetArray();
@@ -341,7 +342,7 @@ class Prescription extends Core {
     global $db;
     $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    $this->sql="SELECT purchasing_class FROM $this->tb_drug_list WHERE item_id = '$item_number' ";
+    $this->sql="SELECT purchasing_class FROM $this->tb_drugsandservices WHERE item_id = '$item_number' ";
     if ($this->result=$db->Execute($this->sql)) {
 		    if ($this->result->RecordCount()) {
 		        $this->item_array = $this->result->GetArray();

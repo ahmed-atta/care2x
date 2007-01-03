@@ -8,7 +8,10 @@ $LDClose='Close';
 $LDSeeLabData='Search and display patient\'s laboratory data.';
 $LDSeeData='Display data';
 $LDEnterLabData='Enter patient\'s laboratory data';
+$LDEditLabData='Edit patient\'s laboratory data';
 $LDNewData='Enter new data';
+$LDEditData='Edit laboratory folder';
+$LDEditData='Edit Results';
 $LDEnterPrioParams='Set priority parameters';
 $LDPrioParams='Priority parameters';
 $LDEnterNorms='Set normal range';
@@ -17,8 +20,8 @@ $LDOtherOptions='Other options';
 $LDOptions='Options';
 $LDMemo='Read or compose a memo';
 $LDTitleMemo='Memo';
-$LDfieldname=array('Admission-Nr.','Family name','Name','Birthdate');
-$LDSearchWordPrompt='Enter a search keyword, for example: a family name, a name, a birthdate, etc.';
+$LDfieldname=array('Admission-Nr.','Surname/Ukoo','Name','Birthdate');
+$LDSearchWordPrompt='Enter a search keyword, for example: a Surname/Ukoo, a name, a birthdate, etc.';
 $LDEnterData='Click to enter data';
 $LDClk2See='Click to see data';
 $LDFoundPatient='The search found <b>~nr~</b> patients';
@@ -27,9 +30,10 @@ $LDNewSearch='New search';
 
 $LDCaseNr='Admission-Nr.';
 $LDLabReport='Lab report';
-$LDLastName='Family name';
+$LDLastName='Surname/Ukoo';
 $LDName='Name';
 $LDBday='Birthdate';
+
 $LDNoLabReport='No lab report available for';
 $LDParameter='Parameter';
 $LDNormalValue='Normal range';
@@ -91,7 +95,7 @@ $LDNewFormOtherPatient='Create a test request for <b>another</b> patient';
 $LDSearchPatient='Search patient';
 $LDSearchFound='~nr~ patients were found.';
 /* 2002-09-04 EL */		
-$LDTestRequestFor='Request for ';
+$LDTestRequestFor='Request for';
 $LDTestType=array('chemlabor'=>'chemical laboratory test',
                               'patho'=>'pathological test',
 								 'baclabor'=>'bacteriological test',
@@ -130,4 +134,10 @@ $LDAdd_label='auxiliary label';
 $LDNewParam='New parameter';
 $LDis_enabled='Show/Hide Parameter';
 $LDTSH='TSH (Ex: 1234,56)';
+#2006-09-13 d.r from merotech
+$LDBatchNumber='Batch number';
+$LDSelianFileNr='Selian File no.';
+$LDDateOfTestRequest='Date of test request';
+$LDInsertNewParameter='Insert new Parameter (click edit)';
+
 ?>

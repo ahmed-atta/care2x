@@ -9,7 +9,7 @@
 
 <font face="Verdana, Arial" size=3>
 <b>
-<?php echo $src ?>
+<?php echo $src?>
 <p><font color="#990000">What can I do here?</font></b><p>
 <font face="Verdana, Arial" size=2>
 This is a typical submenu. The submenu is generally arranged into three columns. 

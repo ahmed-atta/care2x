@@ -116,7 +116,7 @@ if($enc_obj->loadEncounterData($pn)){
  $smarty->assign('pbBack',FALSE);
 
 # href for the  button
- $smarty->assign('pbHelp',"javascript:gethelp('outpatient_discharge.php','discharge','','$station','$LDReleasePatient')");
+ $smarty->assign('pbHelp',"javascript:gethelp('discharge_patient.php','Discharge Patient','','$station','$LDReleasePatient')");
 
  $smarty->assign('breakfile',$breakfile);
 
@@ -234,14 +234,14 @@ $smarty->assign('LDDate',$LDDate);
 
 	$obj_diag = New Diagnostics;
 	$case_arr = $obj_diag->GetAllCasesFromPIDbyDate($enc_obj->PID());
-	$smarty->assign('LDNotes','Last Diagnosis');
+	$smarty->assign('LDNotes',$LDLastDiagnosis);
 	while(list($x,$v) = each($case_arr))
 	{
 		$case_data = $obj_diag->GetCase($x);
 		$case_list = $case_list.'<b>'.date('Y-m-d',$case_data['timestamp']).':</b> '.$v.' - '.$obj_diag->get_icd10_description_from_code($v).'<br>';
 		if($casecount++>3) break;
 	}
-	if(!$case_list) $case_list = '--- NO DIAGNOSIS AVAILABLE ---';
+	if(!$case_list) $case_list = $LDNoDiagnosesAvailable;
 	$smarty->assign('diagnosis',nl2br($case_list));
 
 	$smarty->assign('LDNurse',$LDNurse);
@@ -251,7 +251,7 @@ $smarty->assign('LDDate',$LDDate);
 	if(!(($mode=='release')&&($released))) {
 
 		$smarty->assign('bShowValidator',TRUE);
-		$smarty->assign('pbSubmit','<input type="submit" value="'.$LDRelease.'">');
+		$smarty->assign('pbSubmit','<input type="submit" style="height:35;width:100" value="'.$LDRelease.'" >');
 		$smarty->assign('sValidatorCheckBox','<input type="checkbox" name="sure" value="1">');
 		$smarty->assign('LDYesSure',$LDYesSure);
 	}

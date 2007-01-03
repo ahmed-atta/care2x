@@ -171,6 +171,7 @@ class Notes extends Core {
 	*/			
 	function _getNotes($cond,$order='ORDER BY date,time DESC'){
 	    global $db;
+	    $db->debug=FALSE;
 		$this->sql="SELECT * FROM $this->tb_notes WHERE $cond $order";
 		//echo $this->sql;
 	    if ($this->result=$db->Execute($this->sql)) {

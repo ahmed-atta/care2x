@@ -136,8 +136,8 @@ function checkForm(v) {
 <td colspan=3><img <?php echo createLDImgSrc($root_path,'such-b.gif') ?>></td>
 </tr>
 <tr >
-<td bgcolor=#333399 colspan=3>
-&nbsp;
+<td bgcolor=#333399 colspan=3>&nbsp;
+
 </td>
 </tr>
 <tr bgcolor="#DDE1EC" >
@@ -159,7 +159,7 @@ function checkForm(v) {
 <input type=hidden name="lang" value=<?php echo $lang ?>>
 <input type=hidden name="editmode" value=<?php echo $editmode ?>>
 <INPUT type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="javascript:gethelp('lab.php','search','<?php echo $mode ?>','<?php echo $linecount ?>','<?php echo $datafound ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>></a>
+<a href="javascript:gethelp('search_patient.php','Laboratories :: Search Patient','<?php echo $mode ?>','<?php echo $linecount ?>','<?php echo $datafound ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>></a>
 </FORM>
 <p>
 <?php 
@@ -191,9 +191,9 @@ if($linecount){
      <td><b>
 	  <?php echo $pagen->makeSortLink($LDCaseNr,'encounter_nr',$oitem,$odir,$append);  ?></b></td>
      <td><b>
-	  <?php echo $pagen->makeSortLink('Batch number','batch_nr',$oitem,$odir,$append);  ?></b></td>
+	  <?php echo $pagen->makeSortLink($LDBatchNumber,'batch_nr',$oitem,$odir,$append);  ?></b></td>
      <td><b>
-	  <?php echo $pagen->makeSortLink('Selian File no.','selian_pid',$oitem,$odir,$append);  ?></b></td>
+	  <?php echo $pagen->makeSortLink($LDSelianFileNr,'selian_pid',$oitem,$odir,$append);  ?></b></td>
 	  
       <td ><b>
 	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
@@ -203,6 +203,8 @@ if($linecount){
 	  <?php echo $pagen->makeSortLink($LDName,'name_first',$oitem,$odir,$append);  ?></b></td>
       <td><b>
 	  <?php echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$append);  ?></b></td>
+	  <td><b>
+	  <?php echo $pagen->makeSortLink($LDDateOfTestRequest,'send_date',$oitem,$odir,$append);  ?></b></td>
     	<td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>" align=center><font face=arial size=2 color="#ffffff"><b><?php echo $LDSelect; ?></td>
 	</tr>
 
@@ -264,7 +266,10 @@ if($linecount){
 			echo '&nbsp;'.formatDate2Local($zeile['date_birth'],$date_format);
 			echo '</td>';	
 						
-						
+					echo '</td>
+					<td>';
+			echo '&nbsp;'.formatDate2Local($zeile['send_date'],$date_format);
+			echo '</td>';	
 			#  if mode is edit, create the button linked to labor_data_check_arch.php 
 			#  if mode is not edit, create button linked to labor_datalist_noedit.php (read only list)
 
@@ -272,17 +277,18 @@ if($linecount){
 				<td>&nbsp';
 						
 			if($editmode){
-				
-				echo'<a href="labor_datainput.php'.URL_APPEND.'&mode=edit&job_id='.$zeile['batch_nr'].'&encounter_nr='.$zeile['encounter_nr'].'&update=1"  title="'.$LDEnterData.'">
-					<button onClick="javascript:window.location.href=\'labor_data_check_arch.php'.URL_REDIRECT_APPEND.'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1\'"><img '.createComIcon($root_path,'play_one.gif','0','absmiddle',FALSE).' <font size=1> ';
-/*
-				echo'<a href="labor_data_check_arch.php'.URL_APPEND.'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1"  title="'.$LDEnterData.'">
-					<button onClick="javascript:window.location.href=\'labor_data_check_arch.php'.URL_REDIRECT_APPEND.'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1\'"><img '.createComIcon($root_path,'update2.gif','0','absmiddle',FALSE).' alt="'.$LDEnterData.'"><font size=1> '.$LDNewData;
-*/
+				echo'<a href="labor_datainput.php?sid='.session_id().'&job_id='.$zeile['batch_nr'].'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1"  title="'.$LDEnterData.'">
+					<img '.createComIcon($root_path,'play_one.gif','0','absmiddle',FALSE).' </a> ';
 			}else{
 				echo'
 					<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$zeile['encounter_nr'].'&noexpand=1&nostat=1&user_origin=lab"  title="'.$LDClk2See.'">
 					<button onClick="javascript:window.location.href=\'labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$zeile['encounter_nr'].'&noexpand=1&nostat=1&user_origin=lab\'"><img '.createComIcon($root_path,'update2.gif','0','absmiddle',FALSE).' alt="'.$LDClk2See.'"><font size=1> '.$LDLabReport;
+
+				/*
+				echo'
+					<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$zeile['encounter_nr'].'&noexpand=1&nostat=1&user_origin=lab"  title="'.$LDClk2See.'">
+					<button onClick="javascript:window.location.href=\'labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$zeile['encounter_nr'].'&noexpand=1&nostat=1&user_origin=lab\'"><img '.createComIcon($root_path,'update2.gif','0','absmiddle',FALSE).' alt="'.$LDClk2See.'"><font size=1> '.$LDLabReport;
+			   */
 			}
 						
 			echo '</font></button></a>&nbsp;

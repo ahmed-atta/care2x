@@ -141,7 +141,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('request_search.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('laboratory_testrequest.php','Laboratories :: Test Request','lab')");
 
  # href for close button
  if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $smarty->assign('breakfile',$root_path.'main/startframe.php'.URL_APPEND);

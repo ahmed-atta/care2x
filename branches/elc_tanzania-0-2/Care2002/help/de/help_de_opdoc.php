@@ -76,7 +76,7 @@ Wie erstelle ich ein neues Dokument?</b>
 <ul>  Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <?php if($x1=="update") : ?>
 
@@ -91,7 +91,7 @@ Wie bearbeite bzw. aktualisiere ich das Dokument?</b>
 <ul>       	
  Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if(($x1=="dummy")||($x1=="")|| ($x1=='search')) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie erstelle ich ein neues Dokument?</b>
@@ -108,8 +108,8 @@ Wie erstelle ich ein neues Dokument?</b>
 	eingeben.<br> 
  	<b>Schritt 4: </b>Um das Dokument zu speichern, klickt den <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> Knopf an .<br> 
 	</ul>
-	<?php endif ?>
-<?php endif ?>
+	<?php endif;?>
+<?php endif;?>
 
 
 
@@ -133,7 +133,7 @@ Wie finde ich ein Dokument von einem Patient?</b>
 <ul>       	
  Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="match")&&($x2>0)) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -154,7 +154,7 @@ Wie suche ich weiter?</b>
 <ul>       	
  Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="select")&&($x2==1)) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -176,8 +176,8 @@ Wie suche ich weiter?</b>
  Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 
 <?php if($src=="arch") : ?>
 	<?php if(($x1=="dummy")||($x1=="?")||($x1=="")) : ?>
@@ -284,7 +284,7 @@ Wenn die Suche ein einziges Ergebnis findet werden die Daten sofort gezeigt.<br>
 <ul>       	
  Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="search")&&($x2>0)) : ?>
 
 	
@@ -304,7 +304,7 @@ Wie suche ich weiter?</b>
 <ul>       	
  Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="select")&&($x2==1)) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -324,8 +324,8 @@ Wie suche ich weiter?</b>
  Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 
 </form>
 

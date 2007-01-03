@@ -33,7 +33,7 @@ switch($x1)
 ?> border="0">. 
 </ul>
 <b>Langkah 2</b> 
-<?php endif ?>
+<?php endif;?>
 <ul> Jika anda telah login sebelumnya dan anda mempunyai hak akses untuk fungsi ini,
 <?php switch($x1)
 	{
@@ -49,4 +49,4 @@ Jika anda  memutuskan untuk membatalkan klik tombol  <img <?php echo createLDImg
 
 
 </form>
-<?php endif ?>
+<?php endif;?>

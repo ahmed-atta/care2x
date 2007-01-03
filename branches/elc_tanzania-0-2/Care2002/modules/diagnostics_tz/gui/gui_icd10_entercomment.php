@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Enter comment</title>
+<title><?php echo $LDEnterComment; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link href="../../css/themes/default/default.css" rel="stylesheet" type="text/css">
 <script language="javascript" src="../../js/check_diagnostics_form.js"></script>
@@ -19,7 +19,7 @@ function openpopup(URL,target,content,id)
 <table width="100%" border="0">
  <tr valign=top>
   <td bgcolor="#99ccff" >
-    &nbsp;&nbsp;<font color="#330066">Comment: <?php echo $headline; ?></font></td>
+    &nbsp;&nbsp;<font color="#330066"><?php echo $LDComment; ?> <?php echo $headline; ?></font></td>
  </tr>
   <tr>
     <td>
@@ -27,23 +27,23 @@ function openpopup(URL,target,content,id)
           <tr> 
             <td width="100%" bgcolor="#CAD3EC"><table width="300" border="0">
               <tr>
-                <td>PID</td>
+                <td><?php echo $LDPID; ?></td>
                 <td>12/34/56/78</td>
               </tr>
               <tr>
-                <td>Hospital file nr</td>
+                <td><?php echo $LDHospitalFileNr; ?></td>
                 <td>123456</td>
               </tr>
               <tr>
-                <td>Last name</td>
+                <td><?php echo $LDLastName; ?></td>
                 <td>Shiyanda</td>
               </tr>
               <tr>
-                <td>First name</td>
+                <td><?php echo $LDFirstName; ?></td>
                 <td>Yanda</td>
               </tr>
               <tr>
-                <td>Birth</td>
+                <td><?php echo $LDBirt; ?></td>
                 <td>24.12.1970</td>
               </tr>
             </table></td>
@@ -53,7 +53,7 @@ function openpopup(URL,target,content,id)
 <form action="" method="post" name="comment_form">
 <table width="100%" border="0" cellpadding="1" cellspacing="1">
           <tr bgcolor="#99ccff">
-            <td width="100%" colspan="2">Please enter your comment concerning the above diagnose:</td>
+            <td width="100%" colspan="2"><?php echo $LDPleaseEnterCommen; ?></td>
           </tr>
           <tr bgcolor="#CAD3EC">
             <td colspan="2"><textarea name="comment" cols="56" rows="5"></textarea>

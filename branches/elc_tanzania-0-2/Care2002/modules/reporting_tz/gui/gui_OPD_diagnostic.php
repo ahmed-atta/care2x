@@ -3,24 +3,24 @@
 if ($PRINTOUT) {
 echo '<head>
 <script language="javascript"> this.window.print(); </script>
-<title>OPD Summary</title>
+<title>'.$LDOPDSummary.'</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>';
 echo '<html><body>';
 ?>
 <DIV align="center">
-	<h1>OPD Diagnostic Report for <?php echo date('F Y',$start);?></h1>
-	<p>Creation time: <?php echo date("F j, Y, g:i a");?></p>
+	<h1><?php echo $LDPDDiagnosticReport; ?><?php echo date('F Y',$start);?></h1>
+	<p><?php echo $LDCreationTime; ?><?php echo date("F j, Y, g:i a");?></p>
 </DIV>
   <br><br>
 			<form name="form1" method="post" action="">
 
                           <table width="600" border="1" cellspacing="0" cellpadding="0" align="center">
                             <tr>
-                              <td width="80" scope="col">Diagnostic Code </td>
-                              <td width="300" scope="col">Diagnostic Full Name </td>
-                              <td colspan="2" scope="col">Age</td>
-                              <td colspan="2" scope="col">Sex (male/female) </td>
+                              <td width="80" scope="col"><?php echo $LDDiagnosticCode; ?></td>
+                              <td width="300" scope="col"><?php echo $LDDiagnosticFullName; ?></td>
+                              <td colspan="2" scope="col"><?php echo $LDAge; ?></td>
+                              <td colspan="2" scope="col"><?php echo $LDsex; ?></td>
                               <td width="100" scope="col">Total</td>
                             </tr>
                             <tr>
@@ -28,8 +28,8 @@ echo '<html><body>';
                               <td>&nbsp;</td>
                               <td width="50">&lt; 5 </td>
                               <td width="50">&gt; 5 </td>
-                              <td>male</td>
-                              <td>female</td>
+                              <td><?php echo $LDmale; ?></td>
+                              <td><?php echo $LDfemale; ?></td>
                               <td>&nbsp;</td>
                             </tr>                   
 <?php
@@ -47,7 +47,7 @@ exit();
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
- <TITLE> Reporting Module </TITLE>
+ <TITLE><?php echo $LDReportingModule; ?></TITLE>
  <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
  <meta name="Author" content="Robert Meggle">
  <meta name="Generator" content="various: Quanta, AceHTML 4 Freeware, NuSphere, PHP Coder">
@@ -108,10 +108,10 @@ function popPic(pid,nm){
 			 <table cellspacing="0"  class="titlebar" border=0>
  <tr valign=top  class="titlebar" >
   <td width="202" bgcolor="#99ccff" >
-    &nbsp;&nbsp;<font color="#330066">Reporting::OPD Diagnostic </font></td>
+    &nbsp;&nbsp;<font color="#330066"><?php echo $LDReportingOPDDiagnostic; ?></font></td>
   <td width="408" align=right bgcolor="#99ccff">
    <a href="javascript: history.back();"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a>
-   <a href="javascript:gethelp('submenu1.php','Pharmacy Databank')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
+   <a href="javascript:gethelp('reporting_overview.php','Reporting :: Overview')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
    <a href="<?php echo $root_path;?>modules/reporting_tz/reporting_main_menu.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  
   </td>
  </tr>
@@ -133,19 +133,19 @@ function popPic(pid,nm){
 						  <br>
                           <table width="600" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor=#ffffdd>
                             <tr>
-                              <td width="80" bgcolor="#ffffdd" scope="col">ICD-10 Code </td>
-                              <td width="300" bgcolor="#ffffdd" scope="col">Diagnostic Full Name </td>
-                              <td colspan="2" bgcolor="#ffffdd" scope="col">Age</td>
-                              <td colspan="2" bgcolor="#ffffdd" scope="col">Sex (male/female) </td>
-                              <td width="100" bgcolor="#ffffdd" scope="col">Total</td>
+                              <td width="80" bgcolor="#ffffdd" scope="col"><?php echo $LDICD10Code; ?></td>
+                              <td width="300" bgcolor="#ffffdd" scope="col"><?php echo $LDDiagnosticFullName; ?></td>
+                              <td colspan="2" bgcolor="#ffffdd" scope="col"><?php echo $LDAge; ?></td>
+                              <td colspan="2" bgcolor="#ffffdd" scope="col"><?php echo $LDsex; ?></td>
+                              <td width="100" bgcolor="#ffffdd" scope="col"><?php echo $LDtotal; ?></td>
                             </tr>
                             <tr>
                               <td bgcolor="#ffffdd">&nbsp;</td>
                               <td bgcolor="#ffffdd">&nbsp;</td>
                               <td width="50" bgcolor="#ffffdd">&lt; 5 </td>
                               <td width="50" bgcolor="#ffffdd">&gt; 5 </td>
-                              <td bgcolor="#ffffdd">male</td>
-                              <td bgcolor="#ffffdd">female</td>
+                              <td bgcolor="#ffffdd"><?php echo $LDmale; ?></td>
+                              <td bgcolor="#ffffdd"><?php echo $LDfemale; ?></td>
                               <td bgcolor="#ffffdd">&nbsp;</td>
                             </tr>                   
 <?php

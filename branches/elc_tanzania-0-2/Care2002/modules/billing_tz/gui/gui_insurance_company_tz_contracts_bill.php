@@ -70,9 +70,10 @@ function closewin()
 	<tr>
 		<td bgcolor=#ffffff valign=top>
 				<?php echo $updated;
-				$insurance_tz->ShowMemberBillsOfContract($id); ?>
+				$_SESSION['balance'] = $insurance_tz->ShowMemberBillsOfContract($id);
+				?>
 			<p>
-			<a href="javascript:window.print()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a href="javascript:window.close()"><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
+			<a href="?id=<?php echo $_GET['id'].'&todo=balancecontractnow'; ?>"><img src="../../gui/img/control/default/en/en_balance_contract_now.gif" border=0 height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a href="javascript:window.print()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a href="javascript:window.close()"><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
 
 			<p>
 			</blockquote>									

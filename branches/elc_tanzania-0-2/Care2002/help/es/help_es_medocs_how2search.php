@@ -31,12 +31,12 @@
       a él, o el apellido, el número de documento, la hora, etc. </font>
   </ul>
   <font size="2">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1>1) : ?>
   Para ver el documento medocs del paciente que busca, dé clic en el botón <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> 
   correspondiente a él, o el apellido, el número de documento, la hora, etc.</font></font> 
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if(($src!="?")&&($x1=="1")) : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Deseo 
     actualizar el documento</b></font></font> 
@@ -47,7 +47,7 @@
     . </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <b>Nota</b> </font><font face="Verdana, Arial, Helvetica, sans-serif">
   <ul>
     <font size="2"> Si usted decide cancelar la búsqueda, dé clic en el botón 

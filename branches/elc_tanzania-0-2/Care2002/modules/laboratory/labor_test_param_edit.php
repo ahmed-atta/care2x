@@ -1,5 +1,4 @@
 <?php
-
 define('ROW_MAX',15); # define here the maximum number of rows for displaying the parameters
 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
@@ -17,7 +16,6 @@ $lang_tables=array('chemlab_groups.php','chemlab_params.php');
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-
 $thisfile=basename(__FILE__);
 
 //$db->debug=true;
@@ -155,7 +153,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
  ?>
  </STRONG></FONT>
 </td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab_param_edit.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab_test_parameters.php','Laboratories :: Test Parameters')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr align="center">
 <td  bgcolor=#dde1ec colspan=2>
@@ -274,17 +272,12 @@ if($tp){
 
 </td>
 </tr>
-
 </table>
-
 </form>
-
 </FONT>
 <p>
 </td>
-
 </tr>
 </table>        
-
 </BODY>
 </HTML>

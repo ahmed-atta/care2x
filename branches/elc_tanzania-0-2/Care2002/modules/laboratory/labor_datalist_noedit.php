@@ -18,6 +18,8 @@ require($root_path.'include/inc_environment_global.php');
 $lang_tables=array('chemlab_groups.php','chemlab_params.php','prompt.php');
 define('LANG_FILE','lab.php');
 define('NO_2LEVEL_CHK',1);
+
+
 require_once($root_path.'include/inc_front_chain_lang.php');
 if(!isset($user_origin)) $user_origin='';
 if($user_origin=='lab'||$user_origin=='lab_mgmt'){
@@ -102,7 +104,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
  $smarty->assign('sToolbarTitle',"$LDLabReport $station");
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('lab_list.php','','','','$LDLabReport')");
+ $smarty->assign('pbHelp',"javascript:gethelp('patientcharts_lab_report.php','Laboratories :: Lab report','','','$LDLabReport')");
 
  # hide return  button
  $smarty->assign('pbBack',FALSE);

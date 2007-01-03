@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
- <TITLE>Diagnostics (ICD-10) Databank Search - </TITLE>
+ <TITLE><?php echo $LDDiagnosticsICD10DBSearch; ?> - </TITLE>
 <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
 <meta name="Author" content="Robert Meggle">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -50,10 +50,10 @@ A:visited:hover {color: #cc0033;}
 		<td  valign="top" align="middle" height="35">
 			 <table cellspacing="0"  class="titlebar" border=0>
           <tr valign=top  class="titlebar" >
-            <td bgcolor="#99ccff" > &nbsp;&nbsp;<font color="#330066">Diagnosis (ICD-10) Databank Search</font> </td>
+            <td bgcolor="#99ccff" > &nbsp;&nbsp;<font color="#330066"><?php echo $LDDiagnosticsICD10DBSearch; ?></font> </td>
             <td bgcolor="#99ccff" align=right>
               <a href="javascript:window.history.back()"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a>
-              <a href="javascript:gethelp('products_db.php','search','','pharma')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
+              <a href="javascript:gethelp('diagnoses.php','Patient&acute;s chart folder :: Diagnoses','','pharma')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
               <a href="pharmacy_tz_product_catalog.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  
             </td>
           </tr>
@@ -68,11 +68,11 @@ A:visited:hover {color: #cc0033;}
             <table border=0 cellspacing=2 cellpadding=3>
               <tr bgcolor=#ffffdd> 
                 <td colspan=2> 
-                  <FONT color="#800000">Enter a search keyword, for example: a diagnosis or an ICD-10 key.</font> <br> <p> 
+                  <FONT color="#800000"><?php echo $LDEnterSearchKeyword; ?></font> <br> <p> 
                 </td>
               </tr>
               <tr bgcolor=#ffffdd> 
-                <td width="146" align=right>Search keyword:</td>
+                <td width="146" align=right><?php echo $LDSearchKeyword; ?></td>
                 <td width="500"> <input type="text" name="keyword" value="<?php echo $keyword;?>" size=40 maxlength=40> 
                 </td>
               </tr>
@@ -87,13 +87,12 @@ A:visited:hover {color: #cc0033;}
           </form>
           
           <?php if ($number_of_search_results>0) { ?>
-          <p>I´ve found <?php echo $number_of_search_results;?> records that could 
-            fit, here the top 10 Search Results:</p>
+          <p><?php echo $LDIfound; ?> <?php echo $number_of_search_results;?> <?php echo $LDRecordsThatCouldFit; ?></p>
           <table width="70%" border="0" bgcolor=#ffffdd align="center">
             <tr> 
-              <td width="13%">ICD - 10</td>
-              <td width="38%">diagnosis description</td>
-              <td width="7%">select</td>
+              <td width="13%"><?php echo $LDICD10; ?></td>
+              <td width="38%"><?php echo $LDdiagnosisdesc; ?></td>
+              <td width="7%"><?php echo $LDselect; ?></td>
             </tr>
             <tr> 
               <td>&nbsp;</td>
@@ -105,7 +104,7 @@ A:visited:hover {color: #cc0033;}
             ?>
           </table>
           <?php } else { ?>
-          <p> Sorry, no items in the database for search keyword <?php echo $keyword;?>. 
+          <p> <?php echo $LDSorryNoItems; ?> <?php echo $keyword;?>. 
           </p>
           <?php } ?>
           <hr>

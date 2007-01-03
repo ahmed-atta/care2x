@@ -118,7 +118,7 @@
 		the name, or the Family name or the admission date.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 <b>Note</b>
 <ul> If you decide to cancel research  click the button <input type="button" value="Cancel">.
 </ul>

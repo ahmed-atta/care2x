@@ -5,8 +5,8 @@
 */
 
 /**
-*  selian reporting methods. 
-*  Note this class should be instantiated only after a "$db" adodb  connector object
+* selian reporting methods. 
+* Note this class should be instantiated only after a "$db" adodb  connector object
 * has been established by an adodb instance
 * @author Robert Meggle (www.MEROTECH.de: meggle@merotech.de)
 * @version beta 0.0.1
@@ -54,22 +54,23 @@ class selianreport extends report {
 	function Display_OPD_Diagnostic($start,$end) {
 	global $db;
 	global $PRINTOUT;
+	global $LDNoDiagnosticsResults;
 	$rep_obj = new selianreport();
-
-	$sql_timeframe = " WHERE ( timestamp>=".$start." AND timestamp<=".$end.") ";
+	$debug=FALSE;
+	($debug)?$db->debug=TRUE:$db->debug=FALSE;
+	$sql_timeframe = "  ( timestamp>=".$start." AND timestamp<=".$end.") ";
 
 	$tmp_tbl_OPD_diagnostic = $rep_obj -> SetReportingLink('care_person','pid', 'care_tz_diagnosis','PID');
 	
 	// get the Diagnostic-Codes, Diagnostic-full-name and total out of this table:
 	$sql = "SELECT ICD_10_code, ICD_10_description, UNIX_TIMESTAMP(date_birth) as date_birth
-				FROM $tmp_tbl_OPD_diagnostic $sql_timeframe
-				group by ICD_10_code
-				HAVING date_birth>0";
+				FROM $tmp_tbl_OPD_diagnostic WHERE $sql_timeframe
+				group by ICD_10_code";
 	
 	if ($rs_ptr = $db->Execute($sql))
 		$res_array = $rs_ptr->GetArray();
 	
-	if (!$res_array) echo "<font color=\"red\">no diagnostics results for this time...</font><br><br>";
+	if (!$res_array) echo "<font color=\"red\">".$LDNoDiagnosticsResults."</font><br><br>";
 	
 	$SHOW_COLORS = $printout ? TRUE : FALSE;  
 	$bg_col_marker=TRUE;
@@ -95,7 +96,7 @@ class selianreport extends report {
 		
 		
 		$sql = "SELECT count(date_birth) as total From $tmp_tbl_OPD_diagnostic WHERE 
-			    	ICD_10_code='".$icd_10_code."'";
+			    	ICD_10_code='".$icd_10_code."' AND $sql_timeframe";
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$total = $row['total'];
@@ -105,7 +106,7 @@ class selianreport extends report {
 		$sql = "SELECT count(date_birth) as total_under_age From $tmp_tbl_OPD_diagnostic WHERE 
 					UNIX_TIMESTAMP(date_birth) <= (now() - DATE_SUB(UNIX_TIMESTAMP(date_birth), INTERVAL 5 year))
 			    AND 
-			    	ICD_10_code='".$icd_10_code."'";
+			    	ICD_10_code='".$icd_10_code."' AND $sql_timeframe";
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$total_under_age =  $row['total_under_age'];
@@ -123,7 +124,7 @@ class selianreport extends report {
 		$sql = "SELECT count(date_birth) as total_female From $tmp_tbl_OPD_diagnostic WHERE 
 					sex='f'
 			    AND 
-			    	ICD_10_code='".$icd_10_code."'";
+			    	ICD_10_code='".$icd_10_code."' AND $sql_timeframe";
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$total_female =  $row['total_female'];
@@ -131,7 +132,7 @@ class selianreport extends report {
 		$sql = "SELECT count(date_birth) as total_male From $tmp_tbl_OPD_diagnostic WHERE 
 					sex='m'
 			    AND 
-			    	ICD_10_code='".$icd_10_code."'";
+			    	ICD_10_code='".$icd_10_code."' AND $sql_timeframe";
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$total_male =  $row['total_male'];
@@ -149,8 +150,8 @@ class selianreport extends report {
 	//------------------------------------------------------------------------------------------------------------------------
 	
 	function Display_OPD_Summary($start,$end) {
-
 		global $db;
+		
 		$WITH_TIMEFRAME=FALSE;
 		
 		if (func_num_args()) {
@@ -166,7 +167,8 @@ class selianreport extends report {
 		$tmp_tbl_OPD_summary = $rep_obj -> SetReportingLink('care_person','pid', 'care_tz_diagnosis','PID');		
 		//$tmp_tbl_allpatients = $rep_obj -> SetReportingTable('care_person');
 		
-		
+		$debug=FALSE; 
+		($debug)?$db->debug=TRUE:$db->debug=FALSE;		
 
 		$arr_ret['return']['underage'];
 		$arr_ret['return']['adult'];
@@ -442,42 +444,45 @@ class selianreport extends report {
 	//--
     function DisplayBillingTableHead(){
     	global $PRINTOUT;
+    	global $LDDailyFinancialRecordOPD,$LDDate,$LDInvoice,$LDFileTSH,$LDMatTSH,$LDLabTSH,
+    	       $LDXRayTSH,$LDDawaTSH,$LDProcSurgTSH,$LDDressTSH,$LDMengTSH,$LDJumlaTSH;
+    	       
 		// Table definition will be organized by the variable $table_head from here:
 		
 		// headline:
 		$table_head = "<tr>\n";
 		if (!$PRINTOUT)
-			$table_head .= "<td bgcolor=\"#ffffaa\" colspan=\"11\" align=\"center\">Daily Financial Record OPD</td>\n";
+			$table_head .= "<td bgcolor=\"#ffffaa\" colspan=\"11\" align=\"center\">".$LDDailyFinancialRecordOPD."</td>\n";
 		else
-			$table_head .= "<td colspan=\"11\" align=\"center\">Daily Financial Record OPD</td>\n";
+			$table_head .= "<td colspan=\"11\" align=\"center\">".$LDDailyFinancialRecordOPD."</td>\n";
 		$table_head.="</tr>\n";
 		
 		$table_head.="<tr>\n";
 		if (!$PRINTOUT) {
-			$table_head .= "<td bgcolor=\"#CC9933\">Date</td>\n";
-			$table_head .= "<td bgcolor=\"#CC9933\">Invoice</td>\n" ;
-			$table_head .= "<td bgcolor=\"#CC9933\">File(TSH)</td>\n" ;
-			$table_head .= "<td bgcolor=\"#CC9933\">Mat(TSH)</td>\n" ;
-			$table_head .= "<td bgcolor=\"#CC9933\">Lab(TSH)</td>\n" ;
-			$table_head .= "<td bgcolor=\"#CC9933\">X-Ray(TSH)</td>\n" ;
-			$table_head .= "<td bgcolor=\"#CC9933\">Dawa(TSH)</td>\n" ;
-			$table_head .= "<td bgcolor=\"#CC9933\">Proc/Surg(TSH)</td>\n" ;
-			$table_head .= "<td bgcolor=\"#CC9933\">Dress(TSH)</td>\n" ;
-			$table_head .= "<td bgcolor=\"#CC9933\">Meng(TSH)</td>\n" ;
-			$table_head .= "<td bgcolor=\"#CC9933\">Jumla(TSH)</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDDate."</td>\n";
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDInvoice."/td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDFileTSH."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDMatTSH."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDLabTSH."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDXRayTSH."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDDawaTSH."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDProcSurgTSH."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDDressTSH."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDMengTSH."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDJumlaTSH."</td>\n" ;
 			$table_head.="</tr>\n";
 		} else {
-			$table_head .= "<td>Date</td>\n";
-			$table_head .= "<td>Invoice</td>\n" ;
-			$table_head .= "<td>File(TSH)</td>\n" ;
-			$table_head .= "<td>Mat(TSH)</td>\n" ;
-			$table_head .= "<td>Lab(TSH)</td>\n" ;
-			$table_head .= "<td>X-Ray(TSH)</td>\n" ;
-			$table_head .= "<td>Dawa(TSH)</td>\n" ;
-			$table_head .= "<td>Proc/Surg(TSH)</td>\n" ;
-			$table_head .= "<td>Dress(TSH)</td>\n" ;
-			$table_head .= "<td>Meng(TSH)</td>\n" ;
-			$table_head .= "<td>Jumla(TSH)</td>\n" ;
+			$table_head .= "<td>".$LDDate."Date</td>\n";
+			$table_head .= "<td>".$LDInvoice."Invoice</td>\n" ;
+			$table_head .= "<td>".$LDFileTSH."File(TSH)</td>\n" ;
+			$table_head .= "<td>".$LDMatTSH."Mat(TSH)</td>\n" ;
+			$table_head .= "<td>".$LDLabTSH."Lab(TSH)</td>\n" ;
+			$table_head .= "<td>".$LDXRayTSH."X-Ray(TSH)</td>\n" ;
+			$table_head .= "<td>".$LDDawaTSH."Dawa(TSH)</td>\n" ;
+			$table_head .= "<td>".$LDProcSurgTSH."Proc/Surg(TSH)</td>\n" ;
+			$table_head .= "<td>".$LDDressTSH."Dress(TSH)</td>\n" ;
+			$table_head .= "<td>".$LDMengTSH."Meng(TSH)</td>\n" ;
+			$table_head .= "<td>".$LDJumlaTSH."Jumla(TSH)</td>\n" ;
 			$table_head.="</tr>\n";
 		}
 		echo $table_head;    	
@@ -511,51 +516,56 @@ class selianreport extends report {
 			if ($debug) echo date("d.m.y",$curr_day_end)."<br>";
 
 		global $db;
+		global $LDInvoice,$LDfile,$LDmat,$LDlab,$LDxray,$LDdawa,$LDsurg,$LDdress,$LDmeng,$LDjumla;
 		
 		($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 		$sql="SELECT SUM(price*amount) as RetVal FROM tmp_billing_master  ";
 		switch ($filter) {
 			case "invoice":
-				if ($debug) echo "invoice<br>";
+				if ($debug) echo $LDInvoice."<br>";
 				$sql="SELECT count(nr) as RetVal FROM care_tz_billing_archive where $curr_day_start <=first_date AND $curr_day_end>=first_date";
 				break;
 			case "file": //new patients
 				// new patient: all the patients what got the service item R01
+
 				if ($debug) echo "file<br>";
-				$sql_filter="WHERE purchasing_class='mems_service' AND item_number='R01' AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
+				$sql_filter="WHERE purchasing_class='service' AND item_number='R01' AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
 				break;
-			case "mat": //returns
-				if ($debug) echo "mat<br>";
-				// returns: all patients, what got the service item R02
-				$sql_filter="WHERE purchasing_class='mems_service' AND item_number='R02' AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
+			case "mat": //Consultation
+				if ($debug) echo $LDmat."<br>";
+				
+				$sql_filter="WHERE purchasing_class='service' AND item_number<>'R01' AND item_number<>'R02' AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
+
 				break;
 			case "lab":
-				if ($debug) echo "lab<br>";
+				if ($debug) echo $LDlab."<br>";
 				// start und ende timeframe fehlt noch!
 				$sql="SELECT SUM(price) as RetVal FROM care_tz_billing_archive_elem WHERE prescriptions_nr=0 AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
 				break;
 			case "xray":
 				if ($debug) echo "xray<br>";
-				$sql_filter="WHERE purchasing_class='mems_xray' AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
+				$sql_filter="WHERE purchasing_class='xray' AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
 				break;
 			case "dawa":
 				if ($debug) echo "dawa<br>";
-				$sql_filter="WHERE purchasing_class='mems_supplies' OR purchasing_class='mems_supplies_laboratory' OR purchasing_class='mems_special_others_list' OR purchasing_class='mems_drug_list' AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
+				$sql_filter="WHERE purchasing_class='supplies' OR purchasing_class='supplies_laboratory' OR purchasing_class='special_others_list' OR purchasing_class='drug_list' AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
 				break;
 			case "surg":
 				if ($debug) echo "surg<br>";
-				$sql_filter="WHERE ( purchasing_class='mems_bigop' OR purchasing_class='mems_smallop') and (item_number<>'P31' AND item_number<>'P32') AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
+				$sql_filter="WHERE ( purchasing_class='bigop' OR purchasing_class='smallop') and (item_number<>'P31' AND item_number<>'P32') AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
 				break;
 			case "dress":
 				if ($debug) echo "dress<br>";
-				$sql_filter="WHERE purchasing_class='mems_smallop' AND $curr_day_start <=date_change AND $curr_day_end>=date_change and (item_number='P31' OR item_number='P32')";
+				$sql_filter="WHERE purchasing_class='smallop' AND $curr_day_start <=date_change AND $curr_day_end>=date_change and (item_number='P31' OR item_number='P32')";
 				break;
-			case "meng":
+			case "meng"://returns
+			// returns: all patients, what got the service item R02
 				if ($debug) echo "meng<br>";
-				$sql_filter="WHERE purchasing_class='mems_service' AND item_number<>'R01' AND item_number<>'R02' AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
+				
+   				$sql_filter="WHERE purchasing_class='service' AND item_number='R02' AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
 				break;
 			case "jumla":
-				if ($debug) echo "jumla<br>";
+				if ($debug) echo $LDjumla."<br>";
 				$sql_filter="WHERE $curr_day_start <=date_change AND $curr_day_end>=date_change"; // count of all
 				break;
 			default:
@@ -598,15 +608,15 @@ class selianreport extends report {
 				  care_tz_billing_archive_elem.amount,
 				  care_tz_billing_archive_elem.price,
 				  care_tz_billing_archive_elem.description,		
-				  care_tz_druglist.purchasing_class,
-				  care_tz_druglist.item_number,				  		
+				  care_tz_drugsandservices.purchasing_class,
+				  care_tz_drugsandservices.item_number,				  		
           		  care_encounter.encounter_nr,
           		  care_encounter.pid
 				from care_tz_billing_archive
-				INNER JOIN care_tz_billing_archive_elem ON care_tz_billing_archive_elem.nr=care_tz_billing_archive.nr
+				INNER JOIN care_tz_billing_archive_elem on care_tz_billing_archive.nr=care_tz_billing_archive_elem.nr		
 				INNER JOIN care_encounter_prescription on care_encounter_prescription.bill_number=care_tz_billing_archive_elem.nr
 				                                          and care_encounter_prescription.nr=care_tz_billing_archive_elem.prescriptions_nr
-				INNER JOIN care_tz_druglist ON care_tz_druglist.item_id = care_encounter_prescription.article_item_number
+				INNER JOIN care_tz_drugsandservices ON care_tz_drugsandservices.item_id = care_encounter_prescription.article_item_number
 				INNER JOIN care_encounter ON care_encounter.encounter_nr=care_tz_billing_archive.encounter_nr
 				WHERE care_tz_billing_archive_elem.date_change>='".$start_timeframe."' AND care_tz_billing_archive_elem.date_change<='".$end_timeframe."')";
 		if ($db_ptr = $db->Execute($sql_s))
@@ -619,11 +629,12 @@ class selianreport extends report {
 	function DisplayBillingTestSummary($start_timeframe, $end_timeframe){
 		global $db;
 		global $PRINTOUT; 
+		global $LDLookingforFinancialReports,$LDstarttime,$LDendtime;
 		$first_day_of_req_month=0;
 		$last_day_of_req_month=0;
 		$end_timeframe += (24*60*60-1);
 		$this->_Create_financial_tmp_master_table($start_timeframe, $end_timeframe);
-		echo "Looking for Financial Reports by time range: starttime: ".date("d.m.y :: G:i:s",$start_timeframe)." endtime: ".date("d.m.y :: G:i:s",$end_timeframe)."<br>";
+		echo $LDLookingforFinancialReports.": ".$LDstarttime.": ".date("d.m.y :: G:i:s",$start_timeframe)." ".$LDendtime.": ".date("d.m.y :: G:i:s",$end_timeframe)."<br>";
 		
 		$first_day_of_req_month = date ("d",$start_timeframe);
 		$last_day_of_req_month = date ("d",$end_timeframe);
@@ -685,17 +696,18 @@ class selianreport extends report {
     function DisplayCompanyTableHead(){
 		// Table definition will be organized by the variable $table_head from here:
 		
+		global $LDCompanyReportInsurance,$LDNameofemployee,$LDSelianfilenumber,$LDDateofcontract,$LDValidto,$LDPrice;
 		// headline:
 		$table_head = "<tr>\n";
-		$table_head .= "<td bgcolor=\"#ffffaa\" colspan=\"11\" align=\"center\">Company Report (Insurance)</td>\n";
+		$table_head .= "<td bgcolor=\"#ffffaa\" colspan=\"11\" align=\"center\">".$LDCompanyReportInsurance."Company Report (Insurance)</td>\n";
 		$table_head.="</tr>\n";
 		
 		$table_head.="<tr>\n";
-		$table_head .= "<td bgcolor=\"#CC9933\">Name of employee</td>\n";
-		$table_head .= "<td bgcolor=\"#CC9933\">Selian filenumber</td>\n" ;
-		$table_head .= "<td bgcolor=\"#CC9933\">Date of contract</td>\n" ;
-		$table_head .= "<td bgcolor=\"#CC9933\">Valid to</td>\n" ;
-		$table_head .= "<td bgcolor=\"#CC9933\">Price</td>\n" ;
+		$table_head .= "<td bgcolor=\"#CC9933\">".$LDNameofemployee."</td>\n";
+		$table_head .= "<td bgcolor=\"#CC9933\">".$LDSelianfilenumber."</td>\n" ;
+		$table_head .= "<td bgcolor=\"#CC9933\">".$LDDateofcontract."</td>\n" ;
+		$table_head .= "<td bgcolor=\"#CC9933\">".$LDValidto."</td>\n" ;
+		$table_head .= "<td bgcolor=\"#CC9933\">".$LDPrice."</td>\n" ;
 		$table_head.="</tr>\n";
 		echo $table_head;    	
     	
@@ -712,27 +724,28 @@ class selianreport extends report {
 	
 	function DisplayPharmacyTableHead(){
 		global $PRINTOUT; 
+		global $LDPharmacyReportwithoutstockinfo,$LDDrugName,$LDAmountofDrugsused,$LDCostofdrugsused,$LDUnitPrice;
 		
 		$table_head = "<tr>\n";
 		if (!$PRINTOUT) 
-			$table_head .= "<td bgcolor=\"#ffffaa\"  colspan=\"11\" align=\"center\">Pharmacy Report (Without stock informations)</td>\n";
+			$table_head .= "<td bgcolor=\"#ffffaa\"  colspan=\"11\" align=\"center\">".$LDPharmacyReportwithoutstockinfo."</td>\n";
 		else
-			$table_head .= "<td colspan=\"11\" align=\"center\">Pharmacy Report (Without stock informations)</td>\n";
+			$table_head .= "<td colspan=\"11\" align=\"center\">".$LDPharmacyReportwithoutstockinfo."</td>\n";
 		$table_head.="</tr>\n";
 		
 		if (!$PRINTOUT) { 
 			$table_head.="<tr>\n";
-			$table_head .= "<td bgcolor=\"#CC9933\">Name of the drug</td>\n";
-			$table_head .= "<td bgcolor=\"#CC9933\">amount of drugs used</td>\n" ;
-			$table_head .= "<td bgcolor=\"#CC9933\">cost of drugs used</td>\n" ;
-			$table_head .= "<td bgcolor=\"#CC9933\">Unit Price</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDDrugName."</td>\n";
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDAmountofDrugsused."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDCostofdrugsused."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDUnitPrice."</td>\n" ;
 			$table_head.="</tr>\n";
 		} else {
 			$table_head.="<tr>\n";
-			$table_head .= "<td>Name of the drug</td>\n";
-			$table_head .= "<td>amount of drugs used</td>\n" ;
-			$table_head .= "<td>cost of drugs used</td>\n" ;
-			$table_head .= "<td>Unit Price</td>\n" ;
+			$table_head .= "<td>".$LDDrugName."</td>\n";
+			$table_head .= "<td>".$LDAmountofDrugsused."d</td>\n" ;
+			$table_head .= "<td>".$LDCostofdrugsused."</td>\n" ;
+			$table_head .= "<td>".$LDUnitPrice."</td>\n" ;
 			$table_head.="</tr>\n";
 		}
 		echo $table_head;		
@@ -768,6 +781,7 @@ class selianreport extends report {
 	function DisplayPharmacyResultRows($start_timeframe, $end_timeframe){
 		global $db;
 		global $PRINTOUT;
+		global $LDLookingforPharmacyReports,$LDstarttime,$LDendtime,$LDNothinginList,$LDNA,$LDtotal;
 		$debug=FALSE;
 		($debug)?$db->debug=TRUE:$db->debug=FALSE;
 
@@ -783,7 +797,7 @@ class selianreport extends report {
 		
 		$this->_Create_financial_tmp_master_table($start_timeframe,$end_timeframe);
 		echo "Looking for Pharmacy Reports by time range: starttime: ".date("d.m.y :: G:i:s",$start_timeframe)." endtime: ".date("d.m.y :: G:i:s",$end_timeframe)."<br><br><br>";
-		$sql="SELECT item_number, description, price FROM tmp_billing_master WHERE purchasing_class='mems_drug_list' GROUP BY item_number, price";
+		$sql="SELECT item_number, description, price FROM tmp_billing_master WHERE purchasing_class='drug_list' GROUP BY item_number, price";
 		$rs_ptr=$db->Execute($sql);
 		$table="";
 		if ($res_array = $rs_ptr->GetArray()) {
@@ -822,7 +836,7 @@ class selianreport extends report {
 				$table .= "<tr bgcolor=$bg_color>\n";
 							 
 				$table.="<td>\n";
-				$table.="  Nothing in list";
+				$table.="  ".$LDNothinginList;
 				$table.="</td>\n";
 				
 				$table.="<td>\n";
@@ -830,11 +844,11 @@ class selianreport extends report {
 				$table.="</td>\n";
 				
 				$table.="<td>\n";
-				$table.="N/A";
+				$table.=$LDNA;
 				$table.="</td>\n";
 				
 				$table.="<td>\n";
-				$table.="N/A";
+				$table.=$LDNA;
 				$table.="</td>\n";
 	
 				$table.="</tr>\n";			
@@ -842,7 +856,7 @@ class selianreport extends report {
 		$table .= "<tr bgcolor=$bg_color>\n";
 					 
 		$table.="<td align=\"right\">\n";
-		$table.="<b>TOTAL &sum;</b>";
+		$table.="<b>".$LDtotal." &sum;</b>";
 		$table.="</td>\n";
 		
 		$table.="<td>\n";
@@ -862,6 +876,33 @@ class selianreport extends report {
 				
 		echo $table;
 	}
+
+  function SetReportingLink_OPDAdmission($tbl1,$tbl1_key,$tbl1_key1, $tbl2,$tbl2_key,$tbl2_key1) {
+    global $db;
+    if ($this->debug) echo "class_report::SetReportingLink($tbl1,$tbl1_key, $tbl2,$tbl2_key)<br>";
+	// enlarge the max_tmp_table_size to the maximum what we can use:
+	$this->Transact("SET @@max_heap_table_size=4294967296");    
+    if ( ! (empty($tbl1) || empty($tbl1_key) || empty($tbl1_key1) || empty($tbl2) || empty($tbl2_key) || empty($tbl2_key1)) ) {
+      
+      // For a given existing table from the database, we need more specific informations in the alias field
+      
+      // check it for table 1:
+      $result_fields_tbl1 = $this->_SetColumnNamesAsString($tbl1,$this->GetFieldnames($tbl1));
+      // check it for table 2:
+      $result_fields_tbl2 = $this->_SetColumnNamesAsString($tbl2,$this->GetFieldnames($tbl2));
+
+      // There are no TEXT nor BLOBS in TEMPORARY tables allowed: Clean it:      
+      $result_fields = $this->_ColumnNames($tbl1,$result_fields_tbl1,$tbl2,$result_fields_tbl2);
+
+      $this->setTable($this->tmp_tbl_name.=time());
+      $this->sql="CREATE TEMPORARY TABLE $this->coretable TYPE=HEAP SELECT $result_fields FROM $tbl1 INNER JOIN $tbl2 ON $tbl1.$tbl1_key=$tbl2.$tbl2_key and date_format( $tbl1.$tbl1_key1, '%d.%m.%y' )=date_format( $tbl2.$tbl2_key1, '%d.%m.%y' ) ";
+      return ($this->Transact($this->sql)) ? $this->coretable : FALSE;
+    } else {
+      return FALSE;
+    }
+  }
+
+
 }
 
 ?>

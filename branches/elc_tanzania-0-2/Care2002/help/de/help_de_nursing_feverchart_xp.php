@@ -26,7 +26,7 @@ Wie kann ich Temperatur und Blutdruck eingeben?</b></font>
 		<b>Schritt 4: </b>Wenn Sie einen Fehler korrigieren möchten klickt die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 5: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="diet") : ?>
 
 <a name="diet"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
@@ -37,7 +37,7 @@ Wie kann ich einen Kostplan eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="allergy") : ?>
 <a name="allergy"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Wie kann ich Information über Allergie eingeben?</b></font>
@@ -49,7 +49,7 @@ Wie kann ich Information über Allergie eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="diag_ther") : ?>
 <a name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Wie kann ich die Hauptdiagnose bzw. Therapie eingeben?</b></font>
@@ -61,7 +61,7 @@ Wie kann ich die Hauptdiagnose bzw. Therapie eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="diag_ther_dailyreport") : ?>
 <a name="daydiag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Wie kann ich tägliche Information über Diagnose oder Therapieplan eingeben?</b></font>
@@ -73,7 +73,7 @@ Wie kann ich tägliche Information über Diagnose oder Therapieplan eingeben?</b><
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="xdiag_specials") : ?>
 <a name="extra"><a name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a></a>
 Wie kann ich Besonderheiten oder Nebendiagnose eingeben?</b></font>
@@ -85,7 +85,7 @@ Wie kann ich Besonderheiten oder Nebendiagnose eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klickt die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="kg_atg_etc") : ?>
 <a name="pt"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Wie kann ich tägliche Information über PT, ATG, usw eingeben?</b></font>
@@ -97,7 +97,7 @@ Wie kann ich tägliche Information über PT, ATG, usw eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="anticoag") : ?>
 <a name="coag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Wie kann ich Antikoagulant(ien) eingeben?</b></font>
@@ -109,7 +109,7 @@ Wie kann ich Antikoagulant(ien) eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="anticoag_dailydose") : ?>
 <a name="daycoag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Wie kann ich tägliche Information über Antikoagulant(ien) und deren Verabreichung eingeben?</b></font>
@@ -119,7 +119,7 @@ Wie kann ich tägliche Information über Antikoagulant(ien) und deren Verabreichun
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="lot_mat_etc") : ?>
 <a name="lot"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Wie kann ich Angaben eingeben?</b></font>
@@ -131,7 +131,7 @@ Wie kann ich Angaben eingeben?</b></font>
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="medication") : ?>
 <a name="med"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Wie kann ich Medikamente und deren Dosierungsplan eingeben?</b></font>
@@ -153,7 +153,7 @@ Wie kann ich Medikamente und deren Dosierungsplan eingeben?</b></font>
 		<b>Schritt 6: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 7: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="medication_dailydose") : ?>
 	<?php if($x2) : ?>
 
@@ -192,8 +192,8 @@ Es heisst "Es gibt noch keine Medikamente". Was soll ich tun?</b></font>
 		<b>Schritt 9: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 10: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-	<?php endif ?>
-<?php endif ?>
+	<?php endif;?>
+<?php endif;?>
 <?php if($src=="iv_needle") : ?>
 <a name="iv"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Wie kann ich tägliche Information über i.v. Medikamente und deren Dosierung bzw. Verabreichung eingeben?</b></font>
@@ -204,7 +204,7 @@ Wie kann ich tägliche Information über i.v. Medikamente und deren Dosierung bzw.
 		<b>Schritt 3: </b>Wenn Sie einen Fehler korrigieren möchten klicken Sie die fehlerhafte Daten an, gibt das richtige ein und speichere erneut ab.<br>
 		<b>Schritt 4: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an um das Fenster zu schliessen und in die Kurve zurück zu gehen.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 </form>
 

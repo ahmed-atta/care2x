@@ -46,7 +46,7 @@ Como exibir o filme de Raio X do paciente em tela inteira?</b>
 <ul>       	
  Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 </form>

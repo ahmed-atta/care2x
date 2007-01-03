@@ -15,7 +15,7 @@
 <b>Note</b>
 <ul><?php if($x1==1) : ?> If the search finds a single result, the complete document will be displayed immediately.<br>
 		However, if the search finds several results, a list will be displayed.<br>
-		<?php endif ?>
+		<?php endif;?>
 		To see the information for the patient you are looking for, click either the button <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> corresponding to it, or
 		the name, or the Family name or the admission date.
 </ul>
@@ -110,7 +110,7 @@
 		the name, or the Family name or the admission date.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 <b>Note</b>
 <ul> If you decide to cancel research  click the button <input type="button" value="Close">.
 </ul>

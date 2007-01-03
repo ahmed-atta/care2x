@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
- <TITLE>Pharmacy Databank Search - </TITLE>
+ <TITLE><?php echo $LDPharmacyDBSearch; ?> - </TITLE>
 <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
 <meta name="Author" content="Elpidio Latorilla">
 <meta name="Generator" content="various: Quanta, AceHTML 4 Freeware, NuSphere, PHP Coder">
@@ -69,11 +69,11 @@ function pruf(d)
 			 <table cellspacing="0"  class="titlebar" border=0>
  <tr valign=top  class="titlebar" >
   <td bgcolor="#99ccff" >
-    &nbsp;&nbsp;<font color="#330066">Pharmacy Databank Search</font>
+    &nbsp;&nbsp;<font color="#330066"><?php echo $LDPharmacyDBSearch; ?></font>
        </td>
   <td bgcolor="#99ccff" align=right><a
    href="javascript:window.history.back()"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a><a
-   href="javascript:gethelp('products_db.php','search','','pharma')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
+   href="javascript:gethelp('pharmacy_product_edit.php','Pharmacy :: My Product Catalog :: Search')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
    href="pharmacy_tz_product_catalog.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
 
  </tr>
@@ -87,12 +87,10 @@ function pruf(d)
           <form action="pharmacy_tz_search.php" method="get" name="suchform" onSubmit="return pruf(this)">
             <table border=0 cellspacing=2 cellpadding=3>
               <tr bgcolor=#ffffdd> 
-                <td colspan=2> <FONT color="#800000">Enter a search keyword, for 
-                  example: an order number, a product number, or a product name, 
-                  etc.</font> <br> <p> </td>
+                <td colspan=2> <FONT color="#800000"><?php echo $LDSearchWordPrompt; ?></font> <br> <p> </td>
               </tr>
               <tr bgcolor=#ffffdd> 
-                <td align=right>Search keyword:</td>
+                <td align=right><?php echo $LDSearchKeyword; ?></td>
                 <td> <input type="text" name="keyword" value="<?php echo $keyword;?>" size=40 maxlength=40> 
                 </td>
               </tr>
@@ -103,18 +101,17 @@ function pruf(d)
             </table>
           </form>
           <?php if ($number_of_search_results>0) { ?>
-          <p>I´ve found <?php echo $number_of_search_results;?> records that could 
-            fit, here the top 10 Search Results:</p>
+          <p><?php echo $LDFound; ?> <?php echo $number_of_search_results;?><?php echo $LDRecordsThatFit; ?> </p>
           <table width="70%" border="0" bgcolor=#ffffdd align="center">
             <tr> 
-              <td width="10%">item number</td>
-              <td width="30%">item description</td>
-              <td width="10%">item classification</td>
-              <td width="8%">unit price (TSH)</td>
-              <td width="5%">hit match (%)</td>
-              <td width="5%">show</td>
-              <td width="5%">edit</td>
-              <td width="5%">delete</td>
+              <td width="10%"><?php echo $LDItemNumber; ?>i</td>
+              <td width="30%"><?php echo $LDItemDesc; ?></td>
+              <td width="10%"><?php echo $LDItemClass; ?>n</td>
+              <td width="8%"><?php echo $LDUnitPrice; ?></td>
+              <td width="5%"><?php echo $LDHitMatch; ?></td>
+              <td width="5%"><?php echo $LDShow; ?></td>
+              <td width="5%"><?php echo $LDEdit; ?></td>
+              <td width="5%"><?php echo $LDdelete; ?></td>
             </tr>
             <tr> 
               <td>&nbsp;</td>
@@ -131,7 +128,7 @@ function pruf(d)
             ?>
           </table>
           <?php } else { ?>
-          <p> Sorry, no items in the database for search keyword <?php echo $keyword;?>. 
+          <p><?php echo $LDSorryNoItems; ?>  <?php echo $keyword;?>. 
           </p>
           <?php } ?>
           <hr>

@@ -1,7 +1,7 @@
 <?php
 # Prepare title
 
-$sTitle="$LDPersonnelManagement :: $LDNewEmployee ";
+$sTitle="$LDPersonnelManagement&nbsp;%3A%3A&nbsp;$LDNewEmployee ";
 if($full_nr) $sTitle=$sTitle.$full_pnr;
 
 # Start Smarty templating here

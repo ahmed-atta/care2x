@@ -27,7 +27,7 @@ $LDEmergencyAmbulatory='Emergency Ambulatory';
 $LDInternalMedicineAmbulatory='Internal Medicine Ambulatory';
 $LDSonography='Sonography';
 $LDNuclearDiagnostics='Nuclear Diagnostics';
-$LDRadiology='Radiology';
+$LDPediatric='Pediatric clinic';
 $LDOncology='Oncology';
 $LDNeonatal='Neonatal';
 $LDCentralLaboratory='Central Laboratory';
@@ -55,4 +55,8 @@ $LDClinic='Clinic';
 $LDPlsNameFormal='Please enter the formal name';
 $LDPlsDeptID='Please enter the department\'s ID';
 $LDPlsSelectType='Please select the type';
+#2006-09-13 d.r. from merotech
+$LDARVClinic='ARV Clinic';
+$LDDentalClinic='Dental Clinic';
+$LDGeneralOutpatientClinic='General Outpatient Clinic';
 ?>

@@ -138,7 +138,7 @@ eval("echo $TP_sickform;");
 <input type="hidden" name="target" value="<?php echo $target; ?>">
 <!-- <input type="submit" <?php echo createLDImgSrc($root_path,'ok.gif','0','absmiddle'); ?> >            
  -->
-<input type="submit"  value="go"> 
+<input type="submit"  value="<?php echo $LDGo ?>"> 
 </form>
 <?php
 }else{

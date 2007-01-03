@@ -6,7 +6,7 @@
 */
 require_once($root_path.'include/care_api_classes/class_core.php');
 /**
-*  Person methods. 
+*  Person methods.
 *
 * Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
@@ -174,7 +174,7 @@ class Person extends Core {
 	function setPID($pid) {
 	    $this->pid=$pid;
 	}
-	
+
 	/**
 	* Resolves the PID number to used in the methods.
 	* @access public
@@ -225,7 +225,7 @@ class Person extends Core {
 			} else { return false; }
 		} else { return false; }
 	}
-	
+
 	function GetNewSelianFileNumber(){
 		global $db;
 		// Patch for db where the pid does not start with the predefined init
@@ -237,6 +237,17 @@ class Person extends Core {
 			} else { return false; }
 		} else { return false; }
 	}
+
+	function GetPidFromEncounter($encounter_nr) {
+		global $db;
+		//$db->debug=TRUE;
+		$this->sql="SELECT pid FROM care_encounter where encounter_nr=".$encounter_nr;
+		if($this->result=$db->Execute($this->sql)){
+			if($this->row=$this->result->FetchRow()){
+				return ($this->row['pid']);
+			} else { return false; }
+		} else { return false; }
+	}
 	/**
 	* Prepares the internal buffer array for insertion routine.
 	* @access private
@@ -245,14 +256,14 @@ class Person extends Core {
         global $HTTP_POST_VARS;
 		$x='';
 		$v='';
-				
+
 		$this->data_array=NULL;
 		if(!isset($HTTP_POST_VARS['create_time'])||empty($HTTP_POST_VARS['create_time'])) $HTTP_POST_VARS['create_time']=date('YmdHis');
 		while(list($x,$v)=each($this->elems_array)) {
 	    	if(isset($HTTP_POST_VARS[$v])&&!empty($HTTP_POST_VARS[$v])) $this->data_array[$v]=$HTTP_POST_VARS[$v];
-	    	
+
 	    }
-    }	
+    }
 	/**
 	* Database transaction. Uses the adodb transaction method.
 	* @access private
@@ -260,7 +271,6 @@ class Person extends Core {
 	function Transact($sql='') {
 
 	    global $db;
-	    //$db->debug=true;
         if(!empty($sql)) $this->sql=$sql;
 
         $db->BeginTrans();
@@ -272,7 +282,7 @@ class Person extends Core {
 	        $db->RollbackTrans();
 			return false;
 	    }
-    }	
+    }
 	/**
 	* Inserts the data into the care_person table.
 	* @access private
@@ -294,7 +304,7 @@ class Person extends Core {
 		  	}
 		  	else
 		  	{
-		  		$ins_cat = $v;	
+		  		$ins_cat = $v;
 		  	}
 		}
 		if($ins_cat) $ins_value=', 1';
@@ -309,19 +319,19 @@ class Person extends Core {
 		elseif($ins_cat=="friedkin")
 		{
 			$ins_index=", insurance_friedkin";
-		}		
+		}
 		elseif($ins_cat=="selian")
 		{
 			$ins_index=", insurance_selian_stuff";
 		}
 		$index=substr_replace($index,'',(strlen($index))-1);
 		$values=substr_replace($values,'',(strlen($values))-1);
-		
+
 		$pid_counter_min = PID_PREFIX*1000000+1;
 		$pid_counter_max = $pid_counter_min+999999;
-		
+
 		$SQLStatement = "SELECT max(pid) AS pid FROM care_person WHERE pid >=".$pid_counter_min." AND pid <=".$pid_counter_max;
-		
+
 		$rs = $db->Execute($SQLStatement);
 		if ($db_pid = $rs->FetchRow())
 		{
@@ -338,7 +348,7 @@ class Person extends Core {
 		{
 				$insert_pid = $pid_counter_min;
 		}
-		
+
 		$this->sql="INSERT INTO $this->tb_person (".$index.$ins_index.") VALUES (".$values.$ins_value.")";
 		return $this->Transact();
 	}
@@ -358,11 +368,11 @@ class Person extends Core {
 	}
 
 /*    function updateDataFromArray(&$array,$item_nr='') {
-	    
+
 		$x='';
 		$v='';
 		$sql='';
-		
+
 		if(!is_array($array)) return false;
 		if(empty($item_nr)||!is_numeric($item_nr)) return false;
 		while(list($x,$v)=each($array)) {
@@ -370,9 +380,9 @@ class Person extends Core {
 		    	else $sql.="$x='$v',";
 		}
 		$sql=substr_replace($sql,'',(strlen($sql))-1);
-		
+
         $this->sql="UPDATE $this->tb_person SET $sql WHERE pid=$item_nr";
-		
+
 		return $this->Transact();
 	}
 */
@@ -393,18 +403,17 @@ class Person extends Core {
 	    global $db;
 	    $db->debug=FALSE;
 		if(!$this->internResolvePID($pid)) return false;
-	    $this->sql="SELECT p.*, citizenship AS addr_citytown_name,ethnic.name AS ethnic_orig_txt, tribe.tribe_name, religion.name as religion 
+	    $this->sql="SELECT p.*, citizenship AS addr_citytown_name,ethnic.name AS ethnic_orig_txt, tribe.tribe_name, religion.name as religion
 					FROM $this->tb_person AS p
-					
+
 					LEFT JOIN care_tz_tribes AS tribe ON p.name_maiden=tribe.tribe_id
 					LEFT JOIN care_tz_religion AS religion ON p.religion=religion.nr
 					LEFT JOIN  $this->tb_ethnic_orig AS ethnic ON p.ethnic_orig=ethnic.nr
 					WHERE p.pid='$this->pid' ";
         $this->result=$db->Execute($this->sql);
         if($this->result->RecordCount()) {
-        	//echo "Hallo Welt";
             if($this->result->RecordCount()) {
-				 return $this->result;	 
+				 return $this->result;
 			} else { return false; }
 		} else { return false; }
 	}
@@ -424,11 +433,11 @@ class Person extends Core {
 		 $x='';
 		 $v='';
 		if(!$this->internResolvePID($pid)) return false;
-		
-	    $this->sql="SELECT p.* , addr.name AS citytown 
+
+	    $this->sql="SELECT p.* , addr.name AS citytown
 					FROM $this->tb_person AS p LEFT JOIN $this->tb_citytown AS addr ON p.addr_citytown_nr=addr.nr
 					WHERE p.pid=$this->pid";
-        
+
         	if($this->result=$db->Execute($this->sql)) {
 
 			if($this->result->RecordCount()) {
@@ -436,8 +445,8 @@ class Person extends Core {
 			} else { return false; }
 		} else { return false; }
 	}
-	
-	
+
+
 	/**
 	* Gets a particular registration item based on its PID number.
 	*
@@ -478,13 +487,13 @@ class Person extends Core {
 	*/
 	function getValueByList($list,$pid='') {
 	    global $db;
-	
+
 		if(empty($list)) return false;
 		if(!$this->internResolvePID($pid)) return false;
 		$this->sql="SELECT $list FROM $this->tb_person WHERE pid=$this->pid";
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
-				$this->person=$this->result->FetchRow();	 
+				$this->person=$this->result->FetchRow();
 				return $this->person;
 			} else { return false; }
 		} else { return false; }
@@ -502,13 +511,13 @@ class Person extends Core {
 	*/
 	function preloadPersonInfo($pid) {
 	    global $db;
-	    
+
 		if(!$this->internResolvePID($pid)) return false;
 		$this->sql="SELECT * FROM $this->tb_person WHERE pid=$this->pid";
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
-				 $this->person=$this->result->FetchRow();	
-				 $this->is_preloaded=true; 
+				 $this->person=$this->result->FetchRow();
+				 $this->is_preloaded=true;
 				 return true;
 			} else { return false; }
 		} else { return false; }
@@ -838,11 +847,11 @@ class Person extends Core {
 	    global $db;
 		if(!$this->is_preloaded) $this->sql="SELECT name FROM $this->tb_citytown WHERE nr=$code_nr";
             else $this->sql="SELECT name FROM $this->tb_citytown WHERE nr=".$this->CityTownCode();
-			
+
 		//echo $this->sql;exit;
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
-				 $this->row=$this->result->FetchRow();	 
+				 $this->row=$this->result->FetchRow();
 				 return $this->row['name'];
 			} else { return false; }
 		} else { return false; }
@@ -941,7 +950,7 @@ class Person extends Core {
 	* @access public
 	* @param string Search keyword
 	* @param string Sort by the item name, default = name_last (last/family name)
-	* @param string Sort direction, default = ASC (ascending)
+	*ï¿½@param string Sort direction, default = ASC (ascending)
 	* @return mixed integer or boolean
 	*/
 	function Persons($searchkey='',$order_item='name_last',$order_dir='ASC'){
@@ -958,7 +967,7 @@ class Person extends Core {
 			if(empty($order_dir)) $order_dir='ASC';
 			$this->is_nr=false;
 		}
-		
+
 		return $this->SearchSelect($searchkey,'','',$order_item,$order_dir);
 /*
 		$this->sql="SELECT pid, name_last, name_first, date_birth, sex FROM $this->tb_person WHERE status NOT IN ($this->dead_stat) ";
@@ -976,7 +985,7 @@ class Person extends Core {
 */
 	}
 	/**
-	* Searches and returns a block list of persons based on search key. 
+	* Searches and returns a block list of persons based on search key.
 	*
 	* The following can be set:
 	* - maximum number of rows in the returned list
@@ -999,7 +1008,7 @@ class Person extends Core {
 	* @access public
 	* @param string Search keyword
 	* @param string Sort by the item name, default = name_last (last/family name)
-	* @param string Sort direction, default = ASC (ascending)
+	*ï¿½@param string Sort direction, default = ASC (ascending)
 	* @return mixed integer or boolean
 	*/
 	function SearchCount()
@@ -1008,7 +1017,7 @@ class Person extends Core {
 	}
 	function SearchSelect($searchkey='',$maxcount=100,$offset=0,$oitem='name_last',$odir='ASC',$fname=FALSE){
 		global $db, $sql_LIKE, $root_path;
-		$db->debug=false;
+		$db->debug=FALSE;
 		if(empty($maxcount)) $maxcount=100;
 		if($searchkey=='*') $maxcount=100000000;
 		if(empty($offset)) $offset=0;
@@ -1063,7 +1072,7 @@ class Person extends Core {
 			}
 			# Check the size of the comp
 			if(sizeof($comp)>1){
-			
+
 				$sql2=" WHERE (name_last $sql_LIKE '".strtr($ln,'+',' ')."%' AND name_first $sql_LIKE '".strtr($fn,'+',' ')."%')";
 				if(!empty($bd)){
 					$DOB=@formatDate2STD($bd,$date_format);
@@ -1101,7 +1110,7 @@ class Person extends Core {
 
 
 		$this->buffer=$this->tb_person.$sql2;
-		
+
 		# Save the query in buffer for pagination
 		//$this->buffer=$fromwhere;
 		//$sql2.=' AND status NOT IN ("void","hidden","deleted","inactive")  ORDER BY '.$oitem.' '.$odir;
@@ -1139,7 +1148,7 @@ class Person extends Core {
 	}
 	/**
 	* Sets death information.
-	* 
+	*
 	* The data must be passed by reference with associative array.
 	* Data array must have the following index keys.
 	* - 'death_date' = date of death
@@ -1173,7 +1182,7 @@ class Person extends Core {
 		if(!$oid) return false;
 		else return $this->postgre_Insert_ID($this->tb_person,'pid',$oid);
 	}
-	
+
 	/**
 	* returns basic data of living person(s) based on family name, first name & b-day
 	*
@@ -1208,7 +1217,7 @@ class Person extends Core {
 		if(empty($pid)||empty($fn)) return false;
 		if(!$this->internResolvePID($pid)) return false;
 
-		 $this->sql="UPDATE $this->tb_person SET photo_filename='$fn', 
+		 $this->sql="UPDATE $this->tb_person SET photo_filename='$fn',
 		 			history=".$this->ConcatHistory("\nPhoto set ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name'])." WHERE pid=$this->pid";
 		return $this->Transact($this->sql);
 	}
@@ -1220,11 +1229,11 @@ class Person extends Core {
 			{
 				$pid_zero.='0';
 			}
-									
+
 		}
 		$altered_pid = chunk_split($pid_zero.$pid, 2, '/');
 		return substr($altered_pid,0,strlen($altered_pid)-1);
-					
+
 	}
 }
 ?>

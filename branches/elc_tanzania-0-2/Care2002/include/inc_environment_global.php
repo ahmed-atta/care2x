@@ -5,7 +5,7 @@
 define('IS_TANZANIAN',true); 	// If TRUE use tanzanian modifications, else use standard care2x
 define('PID_PREFIX',00);		 	// Prefix for filenumbers (xx/00/00/01) Ex: 20/00/00/01
 
-
+define('CURRENT_STOCK_ID', 1);
 
 
 #
@@ -120,16 +120,16 @@ if(!defined('NOSTART_SESSION')||(defined('NOSTART_SESSION')&&!NOSTART_SESSION)){
 #
 
 if (ini_get('session.use_trans_sid')!=1) {
-    define('URL_APPEND', '?sid='.session_id().'&lang='.$lang);
+    define('URL_APPEND', '?sid='.session_id().'&lang=en');
 	$not_trans_id=true;
 } else {
 	# Patch to avoid missing constant
-	 define('URL_APPEND', '?sid='.session_id().'&ntid=false&lang='.$lang);
+	 define('URL_APPEND', '?sid='.session_id().'&ntid=false&lang=en');
 	//define('URL_APPEND','?lang='.$lang);
 	$not_trans_id=false;
 }
 
-define('URL_REDIRECT_APPEND','?sid='.session_id().'&lang='.$lang);
+define('URL_REDIRECT_APPEND','?sid='.session_id().'&lang=en');
 
 #
 # Page generation time start

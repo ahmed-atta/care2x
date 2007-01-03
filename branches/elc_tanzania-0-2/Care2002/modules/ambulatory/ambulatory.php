@@ -15,6 +15,7 @@ $lang_tables=array('departments.php');
 define('LANG_FILE','ambulatory.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
+
 // reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
 
@@ -43,7 +44,7 @@ $medical_depts=&$dept_obj->getAllMedical();
  $smarty->assign('sToolbarTitle',$LDAmbulatory);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDAmbulatory')");
+ $smarty->assign('pbHelp',"javascript:gethelp('outpatient_overview.php','Outpatient :: Overview')");
 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
@@ -58,8 +59,8 @@ $medical_depts=&$dept_obj->getAllMedical();
  if($cfg['icons'] != 'no_icon') {
 	$smarty->assign('sApptIcon','<img '.createComIcon($root_path,'icon-date-hour.gif','0').'>');
 	$smarty->assign('sOutPatientIcon','<img '.createComIcon($root_path,'forums.gif','0').'>');
-	$smarty->assign('sPendReqIcon','<img '.createComIcon($root_path,'waiting.gif','0').'>');
-	$smarty->assign('sNewsIcon','<img '.createComIcon($root_path,'bubble2.gif','0').'>');
+	//$smarty->assign('sPendReqIcon','<img '.createComIcon($root_path,'waiting.gif','0').'>');
+	//$smarty->assign('sNewsIcon','<img '.createComIcon($root_path,'bubble2.gif','0').'>');
 }
 
  # Assign the text
@@ -67,8 +68,8 @@ $medical_depts=&$dept_obj->getAllMedical();
  $smarty->assign('LDSelectDept',$LDSelectDept);
  $smarty->assign('LDAppointmentsTxt',$LDAppointmentsTxt);
  $smarty->assign('LDPWListTxt',$LDPWListTxt);
- $smarty->assign('LDPendingRequestTxt',$LDPendingRequestTxt);
- $smarty->assign('LDNewsTxt',$LDNewsTxt);
+// $smarty->assign('LDPendingRequestTxt',$LDPendingRequestTxt);
+ //$smarty->assign('LDNewsTxt',$LDNewsTxt);
  
  # Collect extra javascript
 
@@ -90,10 +91,11 @@ function goDept(t) {
 
 	$smarty->append('JavaScript',$sTemp);
 
- # Prepare select options
+# Prepare select options
 
 $TP_SELECT_BLOCK='<select name="dept_nr" size="1"><option value=""></option>';
 $later_depts = $medical_depts;
+
 while(list($x,$v)=each($medical_depts)){
 	$TP_SELECT_BLOCK.='
 	<option value="'.$v['nr'].'">';
@@ -103,6 +105,8 @@ while(list($x,$v)=each($medical_depts)){
 	$TP_SELECT_BLOCK.='</option>';
 }
 $TP_SELECT_BLOCK.='</select>';
+
+
 #Prepare hidden inputs
 $TP_HIDDENS='';
 reset($medical_depts);
@@ -130,13 +134,19 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
 
  $smarty->assign('TP_HREF_APPT1','<a href="javascript:goDept(\''.$root_path.'modules/appointment_scheduler/appt_main_pass.php\')">'.$LDAppointments.'</a>');
  $smarty->assign('TP_HREF_PWL1','<a href="javascript:goDept(\'amb_clinic_patients_pass.php\')">'.$LDOutpatientClinic.'</a>');
- $smarty->assign('TP_HREF_PREQ1','<a href="javascript:goDept(\''.$root_path.'modules/laboratory/labor_test_request_pass.php\')">'.$LDPendingRequest.'</a>');
- $smarty->assign('TP_HREF_NEWS1','<a href="javascript:goDept(\''.$root_path.'modules/news/newscolumns.php\')">'.$LDNews.'</a>');
+// $smarty->assign('TP_HREF_PREQ1','<a href="javascript:goDept(\''.$root_path.'modules/laboratory/labor_test_request_pass.php\')">'.$LDPendingRequest.'</a>');
+ //$smarty->assign('TP_HREF_NEWS1','<a href="javascript:goDept(\''.$root_path.'modules/news/newscolumns.php\')">'.$LDNews.'</a>');
 while(list($x,$v)=each($later_depts)){
- $smarty->assign('sBlockTitle',$v['name_formal']);
- $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=".$v['nr']."&dept_nr=".$v['nr']."&user_origin=amb&dept=".strtr($v['name_formal'],' ','+')."\">".$v['name_formal']."</a>");
+
+//d.r from merotech: use of language file for department
+ $buffer2=$v['LD_var'];
+	if(isset($$buffer2)&&!empty($$buffer2)) $dep_clinic=$$buffer2;
+		else $dep_clinic= $v['name_formal'];
+//	
+ $smarty->assign('sBlockTitle',$dep_clinic);
+ $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=".$v['nr']."&dept_nr=".$v['nr']."&user_origin=amb&dept=".strtr($v['name_formal'],' ','+')."\">".$dep_clinic."</a>");
  $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=".$v['nr']."&dept=".strtr($v['name_formal'],' ','+')."\">$LDOutpatientClinic</a>");
- $smarty->assign('sPendReqLink',"<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=".$v['nr']."&user_origin=amb\">$LDPendingRequest</a>");
+ //$smarty->assign('sPendReqLink',"<a href=\"".$root_path."modules/laboratory/labor_test_request_pass.php".URL_APPEND."&target=generic&subtarget=".$v['nr']."&user_origin=amb\">$LDPendingRequest</a>");
  $sTemp='';
  ob_start();
  		$smarty->display('ambulatory/submenu_dept.tpl');

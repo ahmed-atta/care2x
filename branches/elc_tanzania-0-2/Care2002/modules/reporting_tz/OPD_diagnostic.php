@@ -26,5 +26,8 @@ if ($_GET['printout']) {
 	$end = mktime (0,0,0,$month+1, 1, $year);
 }
 
+$lang_tables[]='reporting.php';
+$lang_tables[]='date_time.php';
+require($root_path.'include/inc_front_chain_lang.php');
 require_once('gui/gui_OPD_diagnostic.php');
 ?>

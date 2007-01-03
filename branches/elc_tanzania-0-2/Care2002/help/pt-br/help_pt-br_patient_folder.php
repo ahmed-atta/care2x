@@ -77,7 +77,7 @@ Qual é a função desta caixa de seleção  </b>	<select name="d"><option value="">S
 		<b>Passo 2: </b>Clique na clínica escolhida, departamento, ou teste diagnostico.<br>
 		<b>Passo 3: </b>O formulário de requisição será automaticamente aberto.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="labor") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>Não há relatório de laboratório disponível no momento. </b></font>
@@ -86,7 +86,7 @@ Qual é a função desta caixa de seleção  </b>	<select name="d"><option value="">S
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Como fechar a pasta de dados do paciente? </b></font>
 <ul> <b>Nota: </b>Se você decidir fechar, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle">.</ul>
 
-<?php endif ?>
+<?php endif;?>
 
 </form>
 

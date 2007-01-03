@@ -1,7 +1,7 @@
 <?php
 $LDHome='Home';
-$LDPatient='Patient';
-$LDAdmission='Admission';
+$LDPatient='Registration';
+$LDAdmission='Archive';
 $LDAmbulatory='Outpatient';
 $LDInpatient='Inpatient';
 $LDMedocs='Medocs';
@@ -21,6 +21,8 @@ $LDSpecials='Special Tools';
 $LDLogin='Login';
 $LDLogout='Logout';
 $LDAppointments='Appointments';
+$LDBilling='Billing';
+$LDreporting='Reporting';
 
 $VersionChgTarget='_top';
 $LDLanguage='Language';
@@ -45,4 +47,7 @@ $LDDutch='Dutch';
 $LDPerson='Person';
 # 2003-09-05 EL
 $LDUser='User';
+$LDTitle='Menu - Care2x';
+# 2006-09-18 d.r from merotech
+$LDMenu='Menu';
 ?>

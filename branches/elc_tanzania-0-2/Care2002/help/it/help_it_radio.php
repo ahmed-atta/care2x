@@ -40,5 +40,5 @@ Come visualizzare una lastra a grandezza normale?</b>
 <ul>       	
 Per chiudere, premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 </form>

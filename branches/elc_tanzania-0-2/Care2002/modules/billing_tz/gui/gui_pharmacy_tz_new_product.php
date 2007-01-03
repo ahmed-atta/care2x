@@ -108,10 +108,10 @@ A:visited:hover {color: #cc0033;}
                 <td align=right width=27>&nbsp;</td>
                 <td align=right width=206>item classificatoion </td>
                 <td><select name="select">
-                    <option value="mems_drug_list" selected>drug</option>
-                    <option value="mems_supplies">supplies</option>
-                    <option value="mems_supplies_laboratory">supplies Laboratory</option>
-                    <option value="mems_special_others_list">special others</option>
+                    <option value="drug_list" selected>drug</option>
+                    <option value="supplies">supplies</option>
+                    <option value="supplies_laboratory">supplies Laboratory</option>
+                    <option value="special_others_list">special others</option>
                   </select></td>
               </tr>
               <tr> 

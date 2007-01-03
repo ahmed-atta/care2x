@@ -20,4 +20,8 @@ $LDPWListTxt='Today\'s admitted patients in the clinic';
 $LDOutpatientClinic='Outpatient clinic';
 $LDGeneralAmbulatory='General Ambulatory';
 $LDAmbulatory='Ambulatory';
+$LDAdmissionDate='Admission Date';
+# 2006-09-15 d.r. from merotech
+$LDDischargePatients='Discharge patients';
+
 ?>

@@ -162,7 +162,7 @@ Ich habe versucht ohne Ergebnis den <input type="button" value="Entlassen"> Knop
 </ul>
   <b>Achtung! </b> Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.</ul>
 
-<?php endif ?>
+<?php endif;?>
 <?php if(($src!="assign")&&($src!="remarks")&&($src!="discharge")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
 <font color="#990000"><b>Was bedeutet dies "<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Gesperrt</font> </span>" ? </b></font>
@@ -170,7 +170,7 @@ Ich habe versucht ohne Ergebnis den <input type="button" value="Entlassen"> Knop
 			wenn Sie nach einer Bestätigung gefragt werden.<p>
  <b>Achtung! </b>Abhängig von der Version des Programms, eine Bettsperre aufzuheben könnte die Angabe eines Passworts erfordern.</ul>
 
-<?php endif ?>
+<?php endif;?>
 
 </form>
 

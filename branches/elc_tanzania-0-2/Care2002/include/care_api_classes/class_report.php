@@ -285,6 +285,7 @@ class report extends core {
   */
   function SetReportingLink($tbl1,$tbl1_key, $tbl2,$tbl2_key) {
     global $db;
+    $this->debug=FALSE;
     if ($this->debug) echo "class_report::SetReportingLink($tbl1,$tbl1_key, $tbl2,$tbl2_key)<br>";
 	// enlarge the max_tmp_table_size to the maximum what we can use:
 	$this->Transact("SET @@max_heap_table_size=4294967296");    
@@ -307,6 +308,9 @@ class report extends core {
       return FALSE;
     }
   }
+  
+  
+  
   
   /**
   * This public method will give back the number of rows given by the table $tbl

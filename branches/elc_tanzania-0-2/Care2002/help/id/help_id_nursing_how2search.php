@@ -49,7 +49,7 @@ switch($x2)
   <ul>
     Jika anda memutuskan untuk membatalkan pencarian klik tombol <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
   </ul>
-  <?php endif ?>
+  <?php endif;?>
 <b>Langkah <?php if($x1) print "1"; else print "5"; ?></b>
   <ul>
     klik tombol <img <?php echo createComIcon('../','bul_arrowblusm.gif','0') ?>>, 
@@ -58,7 +58,7 @@ switch($x2)
       <b>Catatan:</b> daftar tidak bisa diedit "mode baca saja". Jika anda mencoba 
       untuk membuka folder data pasien dengan mengklik namanya, anda akan dihadapkan 
       pada prompt untuk memasukkan username dan password anda. 
-      <?php endif ?>
+      <?php endif;?>
       <?php if($x2=="quick") : ?>
       <?php if($x1) : ?>
       <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
@@ -103,12 +103,12 @@ switch($x2)
     untuk hari tersebut.<br>
   </ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 <b>Catatan</b>
   <ul>
     Jika anda memutuskan untuk menutup Tinjauan cepat, klik tombol <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. 
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x2=="arch") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bagaimana 
   cara menampilkan Tinjauan cepat penginap sebelumnya menggunakan arsip?</b> </font> 
@@ -128,7 +128,7 @@ switch($x2)
     </p>
   </ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 
 
 </form>

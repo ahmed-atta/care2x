@@ -132,4 +132,6 @@ $LDRedList='Red List';
 #2003-11-22 EL
 $LDAdvancedSearch='Advanced search';
 $LDNewPerson='Register new person';
+#d.r from merotech
+$LDUseDemo='use: demo';
 ?>

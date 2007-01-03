@@ -165,7 +165,7 @@ class NursingNotes extends Notes {
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
 	*/			
-	function getDailyWardNotes($enr){
+	function getDailyWardNotes($enr,$pid){
 		if($this->_getNotes("type_nr=6 AND encounter_nr=$enr","ORDER BY date,time")){
 			return $this->result;
 		}else{

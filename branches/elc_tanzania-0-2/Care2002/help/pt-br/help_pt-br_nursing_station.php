@@ -168,7 +168,7 @@ Como bloquear uma cama?</b></font>
 </ul>
   <b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.</ul>
   
-<?php endif ?>
+<?php endif;?>
 
 <?php if(($src!="assign")&&($src!="remarks")&&($src!="discharge")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>O que significa "<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Bloqueado</font> </span>" ? </b></font>
@@ -176,7 +176,7 @@ Como bloquear uma cama?</b></font>
 			quando for perguntado por confirmação.<br>
  <b>Nota: </b>Dependendo da configuração da versão do programa ou configurações de setup, para desfazer o bloqueamento de uma cama pode ser necessário uma senha.</ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <a name="pic"></a>
 <font face="Verdana, Arial" size=2>

@@ -327,7 +327,7 @@ I tried clicking the <input type="button" value="discharge"> button, but there i
 </ul>
   <b>Note: </b>If you want to cancel, click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.</ul>
 
-<?php endif ?>
+<?php endif;?>
 
 </form>
 

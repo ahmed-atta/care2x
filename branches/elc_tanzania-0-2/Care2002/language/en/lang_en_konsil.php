@@ -268,4 +268,15 @@ $LDBacLabTestType=array(_tx_special_body_material_=>'S.body.m.',
 										_tx_gram_dye_=>'Gram.stain',
 										_tx_pharma_material_=>'Pharm.mat.',
 										_tx_go_dye_=>'GO-stain');
+# 2006-09-13 d.r. from merotech
+$LDLabRequestNotBilled='This laboratory request is not yet billed!';
+$LDLabRequestBilled='This laboratory request is already billed. Billnumber:';
+$LDSelianFileNr='Selian File Nr.:';
+$LDBatchFileNr='Batch File Nr.:';
+$LDSurnameUkoo='Surname/Ukoo:';
+$LDFirstName='First Name:';
+$LDBirthdate='date of birth:';
+$LDSex='sex:';
+$LDSystemPID='System PID:';
+
 ?>

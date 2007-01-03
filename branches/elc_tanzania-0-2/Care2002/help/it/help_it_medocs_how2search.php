@@ -20,16 +20,16 @@ Se ne vengono trovati più di uno, apparirà una lista per la selezione..<p>
 Per visualizzare i documenti del paziente desiderato, selezionare il bottone <img <?php echo createComIcon('../','r_arrowgrnsm.gif') ?>> corrispondente,
 oppure il cognome, il codice del documento o la data.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1>1) : ?>
 Per visualizzare i documenti del paziente desiderato, selezionare il bottone <img <?php echo createComIcon('../','r_arrowgrnsm.gif') ?>> corrispondente,
 oppure il cognome, il codice del documento o la data.
-<?php endif ?>
+<?php endif;?>
 <?php if(($src!="?")&&($x1=="1")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Desidero aggiornare il documento</b></font>
 <ul> Per aggiornare il documento visualizzato, selezionare il bottone <input type="button" value="Update data">.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <b>Nota</b>
 <ul> Per annullare la ricerca, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>

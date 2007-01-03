@@ -1,4 +1,4 @@
-<?php
+ l<?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 
@@ -13,16 +13,36 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 //define('NO_2LEVEL_CHK',1);
-
+$lang_tables[]='billing.php';
+$lang_tables[]='aufnahme.php';
 require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
 $insurance_tz = New Insurance_tz();
+$this_insurance = $insurance_tz->GetInsuranceAsArray($id);
+
+if (is_array($insurance_tz->GetContractsForCompanyAsArray($id)))
+	$SHOW_ADDMEMBER_BUTTON=TRUE;
+else
+	$SHOW_ADDMEMBER_BUTTON=FALSE;
+/*
+ *  NOTE: For this script is $id = company ID
+ */
+
 if($mode=="updateflags")
 {
+	//Error checking
+	if(strlen(trim($name))<3) $error['name'] = true;
+	if(strlen(trim($contact))<3) $error['contact'] = true;
+	//if(!$insurance) $error['insurance'] = true;
+	if(!$error)
+	{
+		$insurance_tz->UpdateInsuranceCompany($_POST);
+	}
+	$this_insurance = $_POST;
 	while(list($x,$v) = each($HTTP_POST_VARS))
 	{
 		if(strstr($x,"cancel_"))
-		{	
+		{
 			$cancel_id = substr(strrchr($x,"_"),1);
 			if($v=="yes")
 				$insurance_tz->CancelContractForPID($cancel_id);
@@ -38,9 +58,8 @@ if($mode=="updateflags")
 				$insurance_tz->CancelPaymentForContract($cancel_id);
 		}
 	}
-	$updated = 'Last updated: '.strftime('%c');
+	$updated = $LDLastUpdated.' '.strftime('%c').'<br>';
 }
-
 require ("gui/gui_insurance_company_tz_contracts.php");
 
 ?>

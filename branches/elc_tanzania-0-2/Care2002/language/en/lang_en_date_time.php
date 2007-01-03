@@ -26,4 +26,9 @@ $LD_ddpMMpyyyy='dd.mm.yyyy';
 $LD_yyyyhMMhdd='yyyy-mm-dd';
 $LD_MMsddsyyyy='mm/dd/yyyy';
 $LD_ddsMMsyyyy='dd/mm/yyyy';
+#d.r. from merotech
+$LDMonth='Month';
+$LDYear='Year';
+$LDShow='Show';
+
 ?>

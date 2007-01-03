@@ -126,7 +126,7 @@
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="labor") : ?>
   <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>No 
   existe un reporte de laboratorio disponible al momento. </b></font></font> 
@@ -144,7 +144,7 @@
     cerrar esta ventana, dé clic en el botón <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle">.</font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   </font> 
 </form>
 

@@ -128,7 +128,7 @@ if($data_entry){
 }
 */
 if($data_entry) {
-  $TP_DRG="<a href=\"../diagnostics_tz/icd10_quicklist.php".URL_REDIRECT_APPEND."&sid=".$sid."&encounter=".$HTTP_SESSION_VARS['sess_en']."&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=false&backpath_diag=".urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&encounter_nr='.$encounter_nr)."\">Diagnoses</a>";
+  $TP_DRG="<a href=\"../diagnostics_tz/icd10_quicklist.php".URL_REDIRECT_APPEND."&sid=".$sid."&encounter=".$HTTP_SESSION_VARS['sess_en']."&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=false&backpath_diag=".urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&encounter_nr='.$encounter_nr)."\">$LDDiagnoses</a>";
 }else{
 	$TP_DRG="<font color='#333333'>Diagnoses</font>";
 }

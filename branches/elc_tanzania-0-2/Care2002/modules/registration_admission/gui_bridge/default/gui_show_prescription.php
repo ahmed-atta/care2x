@@ -1,4 +1,5 @@
 <table border=0 cellpadding=4 cellspacing=1 width=100% class="frame">
+
 <?php
 $toggle=0;
 
@@ -65,12 +66,12 @@ while($row=$result->FetchRow()){
   	}
   	elseif($row['bill_number']>0)
   	{
-  		echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)"> <font color=green>Already billed! See bill number '.$row['bill_number'].'</font>';
-  		if($amount>0) echo '<br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)"> <font color="red">The dosage has been changed by the billing officer.</font>';
+  		echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)"> <font color=green>'.$LDAlreadyBilled.' '.$row['bill_number'].'</font>';
+  		if($amount>0) echo '<br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)"> <font color="red">'.$LDTheDrugDosagehasChanged.'</font>';
   	}
   	elseif($notbilledyet)
   	{
-  		echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"> <font color=red>This prescription item is not yet billed!</font>';
+  		echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"> <font color=red>'.$LDPrescriptionNotBilled.'</font>';
   	}
   	?>    
     </td>
@@ -80,7 +81,7 @@ while($row=$result->FetchRow()){
   		echo '<font color="#D4D4D4">edit</font>';
   	}
   	else
-    echo '<a href="'.$thisfile.URL_APPEND.'&mode=edit&nr='.$row['nr'].'&show=insert&backpath='.urlencode($backpath).'&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">edit</a>'
+    echo '<a href="'.$thisfile.URL_APPEND.'&mode=edit&nr='.$row['nr'].'&show=insert&backpath='.urlencode($backpath).'&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">'.$LDEdit.'</a>'
     
     ?>
     </td><td><FONT SIZE=-1  FACE="Arial"><?php echo $row['order_nr']; ?></td>
@@ -91,10 +92,10 @@ while($row=$result->FetchRow()){
     <td><FONT SIZE=-1  FACE="Arial"><?php
     if($row['is_disabled'] || $row['bill_number']>0)
   	{
-  		echo '<font color="#D4D4D4">delete</font>';
+  		echo '<font color="#D4D4D4">'.$LDdelete.'</font>';
   	}
   	else
-      echo '<a href="'.$thisfile.URL_APPEND.'&mode=delete&nr='.$row['nr'].'&show=insert&backpath='.urlencode($backpath).'&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">delete</a>' ?>
+      echo '<a href="'.$thisfile.URL_APPEND.'&mode=delete&nr='.$row['nr'].'&show=insert&backpath='.urlencode($backpath).'&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">'.$LDdelete.'</a>' ?>
     </td>
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['prescriber']; ?></td>
   </tr>

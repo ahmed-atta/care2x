@@ -56,6 +56,9 @@ function logentry(&$userid,$key,$report,&$remark1,&$remark2)
 
 if($dblink_ok) 
 {*/	
+$debug=FALSE;
+($debug)?$db->debug=TRUE:$db->debug=FALSE;
+
     $sql='SELECT name, login_id, password, permission, lockflag FROM care_users WHERE login_id=\''.addslashes($userid).'\'';
 
 	if($ergebnis=$db->Execute($sql))

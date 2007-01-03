@@ -13,39 +13,39 @@ if (!empty($show)) {
   // The $show-Value comes from the input-type button and will be send by javascript (check_prescriptions.js)
   if ($show=='Drug List') {
       $activated_tab='druglist';
-      $db_drug_filter='mems_drug_list';
+      $db_drug_filter='drug_list';
     }
   if ($show=='Supplies') {
       $activated_tab='Supplies';
-      $db_drug_filter='mems_supplies'; 
+      $db_drug_filter='supplies'; 
     }
   if ($show=='Supplies-Lab') {
       $activated_tab='supplies-lab';
-      $db_drug_filter='mems_supplies_laboratory';
+      $db_drug_filter='supplies_laboratory';
     }
   if ($show=='Special Others') {
       $activated_tab='special-others';
-      $db_drug_filter='mems_special_others_list';
+      $db_drug_filter='special_others_list';
     }
   if ($show=='xray') {
       $activated_tab='xray';
-      $db_drug_filter='mems_xray';
+      $db_drug_filter='xray';
     }
   if ($show=='service') {
       $activated_tab='service';
-      $db_drug_filter='mems_service';
+      $db_drug_filter='service';
     }
   if ($show=='dental') {
       $activated_tab='dental';
-      $db_drug_filter='mems_dental';
+      $db_drug_filter='dental';
     }
   if ($show=='smallop') {
       $activated_tab='smallop';
-      $db_drug_filter='mems_smallop';
+      $db_drug_filter='smallop';
     }
   if ($show=='bigop') {
       $activated_tab='bigop';
-      $db_drug_filter='mems_bigop';
+      $db_drug_filter='bigop';
     }
   
 

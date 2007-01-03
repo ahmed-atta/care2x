@@ -40,7 +40,7 @@ $dept_count=$dept_obj->LastRecordCount();
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('transfer_clinic_select.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('outpatient_transfer.php','Outpatient Clinic :: Transfer')");
 
  # href for close button
  $smarty->assign('breakfile',"javascript:window.close();");

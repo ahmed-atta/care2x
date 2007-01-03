@@ -32,7 +32,7 @@ switch($x1)
 ?>" border="0">. </font>
 </ul>
 <font size="2"><b>Paso 2</b> 
-<?php endif ?>
+<?php endif;?>
 <ul>
   Si usted ha ingresado su nombre y contraseña previamente y tiene permiso para 
   ver esta función, aparecerá el 
@@ -48,5 +48,5 @@ switch($x1)
   <p> Escriba su nombre y contraseña y dé clic en el botón <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.
   <p> Si usted decide cancelar, dé clic en el botón <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
 </ul></form>
-<?php endif ?>
+<?php endif;?>
 </font></font>

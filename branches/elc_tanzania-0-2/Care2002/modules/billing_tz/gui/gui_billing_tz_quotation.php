@@ -3,7 +3,7 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
- <TITLE>New Quotations(<?php echo $enc_obj->ShowPID($batch_nr); ?>) - </TITLE>
+ <TITLE><?php echo $LDNewQuotation; ?>(<?php echo $enc_obj->ShowPID($batch_nr); ?>) - </TITLE>
  <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
  <meta name="Author" content="Robert Meggle">
  <meta name="Generator" content="various: Quanta, AceHTML 4 Freeware, NuSphere, PHP Coder">
@@ -53,10 +53,10 @@ A:visited:hover {color: #cc0033;}
 
 <table width=100% border=0 cellspacing=0 height=100%>
   <tr valign=top  class="titlebar" > 
-    <td bgcolor="#99ccff" > &nbsp;&nbsp;<font color="#330066">Create new quotations
+    <td bgcolor="#99ccff" > &nbsp;&nbsp;<font color="#330066"><?php echo $LDCreatenewquotation; ?>
       </font>
     </td>
-    <td bgcolor="#99ccff" align=left> <a href="javascript:gethelp('billing.php','quotation','overview')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a> 
+    <td bgcolor="#99ccff" align=left> <a href="javascript:gethelp('billing_create.php','Billing :: Create Quotation')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a> 
       <a href="billing_tz.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a> 
     </td>
   </tr>
@@ -70,14 +70,14 @@ A:visited:hover {color: #cc0033;}
 			  <center><?php echo $message; ?></center>
 				<table width="80%" border="0" align="center">
               <tr>
-					  <td bgcolor=#ffffdd><div align="center">Date</div></td>
-					  <td bgcolor=#ffffdd><div align="center">Admission-Nr</div></td>
-					  <td bgcolor=#ffffdd><div align="center">PID</div></td>
-					  <td bgcolor=#ffffdd><div align="center">Hospital file nr</div></td>
-					  <td bgcolor=#ffffdd><div align="center">Patient Name</div></td>
-					  <td bgcolor=#ffffdd><div align="center">Birth</div></td>
-						<td bgcolor=#ffffdd><div align="center">Count</div></td>
-					  <td bgcolor=#ffffdd><div align="center">OK</div></td>
+					  <td bgcolor=#ffffdd><div align="center"><?php echo $LDDate; ?></div></td>
+					  <td bgcolor=#ffffdd><div align="center"><?php echo $LDAdmissionNr; ?></div></td>
+					  <td bgcolor=#ffffdd><div align="center"><?php echo $LDPID; ?></div></td>
+					  <td bgcolor=#ffffdd><div align="center"><?php echo $LDHospitalfileNR; ?></div></td>
+					  <td bgcolor=#ffffdd><div align="center"><?php echo $LDPatientName; ?></div></td>
+					  <td bgcolor=#ffffdd><div align="center"><?php echo $LDBirth; ?></div></td>
+					  <td bgcolor=#ffffdd><div align="center"><?php echo $LDCount; ?></div></td>
+					  <td bgcolor=#ffffdd><div align="center"><?php echo $LDOK; ?></div></td>
 					  
 					</tr>
 					<?php $bill_obj->ShowNewQuotations(); ?>

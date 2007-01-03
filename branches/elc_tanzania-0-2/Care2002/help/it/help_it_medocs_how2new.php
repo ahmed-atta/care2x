@@ -31,19 +31,19 @@
 <b>3</b>
 <ul> Se la ricerca trova un solo risultato, apparirà una pagina con i dati fondamentali del paziente.
 Se invece la ricerca trova più risultati, apparirà un elenco.
-<?php endif ?>
+<?php endif;?>
 <?php if(($src=="?")||($x1>1)) : ?>
  <br>Per inserire documenti di un paziente nella lista,
 		selezionare il bottone <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> corrispondente, oppure
 		il cognome, il nome, il codice paziente, o la data di accettazione.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="?") : ?>
 <b>4</b>
-<?php endif ?>
+<?php endif;?>
 <?php if(($src!="?")&&($x1==1)) : ?>
 <b>1</b>
-<?php endif ?>
+<?php endif;?>
 <?php if(($x1=="1")||($src=="?")) : ?>
 <ul> Una volta che è apparso il modulo con i dati paziente, è possibile: 
 		<Ul type="disc">		
@@ -64,7 +64,7 @@ Se invece la ricerca trova più risultati, apparirà un elenco.
 <b><?php if($src!="?") print "2"; else print "5"; ?></b>
 <ul> Selezionare il bottone <input type="button" value="Salva"> per salvare il documento.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <b>Nota</b>
 <ul> Per cancellare il documento selezionare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>

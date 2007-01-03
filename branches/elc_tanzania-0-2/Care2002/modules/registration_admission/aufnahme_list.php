@@ -81,7 +81,7 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 	}else{
 
 
-		$select="SELECT p.name_last,p.name_first,p.date_birth,p.addr_zip, p.sex,e.encounter_nr,e.encounter_class_nr,e.is_discharged,e.encounter_date FROM ";
+		$select="SELECT p.selian_pid,p.name_last,p.name_first,p.date_birth,p.addr_zip, p.sex,e.encounter_nr,e.encounter_class_nr,e.is_discharged,e.encounter_date FROM ";
 
 		$where=''; 		# ANDed where condition
 		$orwhere='';	# ORed where condition

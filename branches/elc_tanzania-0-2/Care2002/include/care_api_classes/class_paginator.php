@@ -256,5 +256,9 @@ class Paginator {
 	function setSortDirection($dir){
 		$this->sort_dir=$dir;
 	}
+
+
 }
+
+
 ?>

@@ -1,3 +1,6 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+   "http://www.w3.org/TR/html4/frameset.dtd">
+
 <?php 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
  // globalize POST, GET, & COOKIE  vars
@@ -6,6 +9,7 @@ require_once($root_path.'include/inc_environment_global.php');
 require_once($root_path.'include/inc_charset_fx.php') // load the charset functions
 ?>
 <?php html_rtl($lang); ?>
+
 <head>
 <?php echo setCharSet(); ?>
 <title>?</title>

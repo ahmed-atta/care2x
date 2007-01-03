@@ -10,17 +10,17 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('pharmacy.php','actions.php');
+$lang_tables=array('reporting.php','actions.php');
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['pharma'];
+$allowedarea=&$allow_area['reporting'];
 $append=URL_REDIRECT_APPEND;
 $fileforward='reporting_main_menu.php'.$append;
-$lognow='Pharmacy login ok';
+$lognow='Reporting login ok';
 
 $thisfile=basename(__FILE__);
 
@@ -46,7 +46,7 @@ require($root_path.'include/inc_passcheck_head.php');
 
 <P>
 <?php
-$buf=$LDPharmacy.' :: '.$LDLogin;
+$buf=$LDReporting.' :: '.$LDLogin;
 echo '
 <script language=javascript>
 <!--

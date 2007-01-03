@@ -14,23 +14,27 @@ require($root_path.'include/inc_environment_global.php');
 
 //define('NO_2LEVEL_CHK',1);
 $thisfile=basename(__FILE__);
+$lang_tables[]='billing.php';
+$lang_tables[]='aufnahme.php';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 $person_obj = New Person();
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
 $insurance_tz = New Insurance_tz();
+
+
+
 if($mode=='update')
 {
-	if($insurance)
-	{
+	if($insurance) 	{
 		$insurance_tz->UpdateContractsArray($_POST);
 		header("Location: insurance_members_tz.php?company_id=".$insurance);
-	}	
+	}
 }
 if(is_array($item_no))
 {
 	$counter=0;
-	
+
 	while(list($x,$v) = each($item_no))
 	{
 		$contract = $insurance_tz->CheckForValidContract($v,0,$company_id);

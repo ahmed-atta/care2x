@@ -244,7 +244,7 @@ $fr=strtolower(str_replace('.','-',($result['encounter_nr'].'_'.$result['name_la
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('patient_folder.php','$nodoc','','$station','Main folder')");
+ $smarty->assign('pbHelp',"javascript:gethelp('patient_charts.php','Patient&acute;s chart folder :: Overview','','$station','Main folder')");
 
  # href for close button
  $smarty->assign('breakfile','javascript:window.close()');
@@ -499,12 +499,12 @@ function rx(){
     // RM: Original DRG-Button:
 		//echo '<input type="button" onClick="javascript:openDRGComposite()" value="'.$LDDRG.'">';
 		// RM: Customized Diagnostic button:
-		echo '<input type="button" onClick="window.location.href=\''.$root_path.'modules/diagnostics_tz/icd10_quicklist.php?sid='.$sid.'&encounter='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=true&backpath_diag='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn).'\'" value="Diagnoses"><br>';
+		echo '<input type="button" onClick="window.location.href=\''.$root_path.'modules/diagnostics_tz/icd10_quicklist.php?sid='.$sid.'&encounter='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=true&backpath_diag='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn).'\'" value="'.$LDDiagnoses.'"><br>';
 		
 		echo '
-		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/nursing/nursing-station-patientdaten-doconsil-chemlabor.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&target=chemlabor&noresize=1&edit='.$edit.'\'" value="Lab requests">
+		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/nursing/nursing-station-patientdaten-doconsil-chemlabor.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&target=chemlabor&noresize=1&edit='.$edit.'\'" value="'.$LDLabRequest.'">
 		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.$LDLabReports.'">
-		<input type="button" onClick="window.location.href=\''.$root_path.'modules/registration_admission/show_prescription.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&pn='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1&backpath='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn).'\'" value="Prescriptions">';
+		<input type="button" onClick="window.location.href=\''.$root_path.'modules/registration_admission/show_prescription.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&pn='.$pn.'&lang=en&ntid=false&externalcall=true&help_site=patient_charts&target=search&1=1&backpath='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn).'\'" value="'.$LDPrescriptions.'">';
 		
 		
 		/* Create the select  menu in edit mode */
@@ -733,7 +733,8 @@ if($edit){
 <input type="hidden" name="rose_23" value="<?php echo $event['rose_23'] ?>">
 <input type="hidden" name="rose_24" value="<?php echo $event['rose_24'] ?>">
 <input type="hidden" name="mode" value="save_event_changes">
-<input type="submit" value="<?php echo $LDSaveChanges ?>">
+<!-- dony by d.r. from merotech
+<input type="submit" value="<?php echo $LDSaveChanges ?>">-->
 <?php
 }
 

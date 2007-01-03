@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
- <TITLE> billing :: insurance </TITLE>
+ <TITLE> <?php echo $LDBillingInsurance; ?> </TITLE>
  <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
 <meta name="Author" content="Robert Meggle">
 <meta name="Generator" content="various: Quanta, AceHTML 4 Freeware, NuSphere, PHP Coder">
@@ -59,13 +59,14 @@ function closewin()
 			 <table cellspacing="0"  class="titlebar" border=0>
           <tr valign=top  class="titlebar" >
             <td bgcolor="#99ccff" >
-                &nbsp;&nbsp;<font color="#330066">Edit insurance types</font>
+                &nbsp;&nbsp;<font color="#330066"><?php echo $LDEditInsuranceTypes; ?></font>
 
        </td>
-  <td bgcolor="#99ccff" align=right><a
-   href="javascript:window.history.back()"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a><a
-   href="javascript:gethelp('submenu1.php','Pharmacy')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
-   href="insurance_tz.php?ntid=false&lang=$lang" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
+  <td bgcolor="#99ccff" align="right">
+   <a href="javascript:window.history.back()"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a>
+   <a href="javascript:gethelp('insurance_type_edit.php','Insurance types :: Edit insurance type')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
+   <a href="insurance_tz.php?ntid=false&lang=$lang" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  
+   </td>
  </tr>
  </table>		</td>
 	</tr>
@@ -75,23 +76,23 @@ function closewin()
 				<form method="POST">
 				<table border="0" cellpadding="2" cellspacing="0">
 					<tr bgcolor=ffffaa>
-						<td><?php $insurance_tz->ShowRedIfError('Name',$error['name']);?>:</td>
+						<td><?php $insurance_tz->ShowRedIfError($LDName,$error['name']);?>:</td>
 						<td><input type="text" name="name" size=30 value="<?php echo $this_insurance['name']; ?>"></td>
 					</tr>
 					<tr bgcolor=ffffee>
-						<td><?php $insurance_tz->ShowRedIfError('Ceiling',$error['ceiling']);?>:</td>
+						<td><?php $insurance_tz->ShowRedIfError($LDCeiling,$error['ceiling']);?>:</td>
 						<td><input type="text" name="ceiling" size=30 value="<?php echo $this_insurance['ceiling']; ?>"></td>
 					</tr>
 					<tr bgcolor=ffffee>
-						<td><?php $insurance_tz->ShowRedIfError('Prepaid amount',$error['prepaid_amount']);?>:</td>
+						<td><?php $insurance_tz->ShowRedIfError($LDPrepaidamount,$error['prepaid_amount']);?>:</td>
 						<td><input type="text" name="prepaid_amount" size=30 value="<?php echo $this_insurance['prepaid_amount']; ?>"></td>
 					</tr>
 					<tr bgcolor=ffffaa>
-						<td><?php $insurance_tz->ShowRedIfError('Disable',false);?>:</td>
-						<td><input type="checkbox" name="is_disabled" size=30 value="1" <?php if($this_insurance['is_disabled']>0) echo 'checked'; ?>> Disable this plan</td>
+						<td><?php $insurance_tz->ShowRedIfError($LDDisable,false);?>:</td>
+						<td><input type="checkbox" name="is_disabled" size=30 value="1" <?php if($this_insurance['is_disabled']>0) echo 'checked'; ?>> <?php echo $LDDisableThisPlan; ?></td>
 					</tr>
 					<tr bgcolor=ffffee>
-						<td>Finish:</td>
+						<td><?php echo $LDFinisch; ?></td>
 						<td><input type="hidden" name="id" value="<?php echo $id; ?>"><input type="hidden" name="mode" value="update"><input type="submit" value="Submit"></td>
 					</tr>
 				</table>

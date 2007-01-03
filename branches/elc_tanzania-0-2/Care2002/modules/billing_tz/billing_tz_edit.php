@@ -10,16 +10,31 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+$lang_tables[]='billing.php';
+$lang_tables[]='aufnahme.php';
+require($root_path.'include/inc_front_chain_lang.php');
+
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
 $enc_obj=new Encounter;
 $bill_obj = new Bill;
+$insurance_tz = new Insurance_tz;
 $debug = FALSE;
 
 if ($debug) {
   echo $pn."<br>";
   echo $prescription_date."<br>";
-  
+  echo "description:$description<br>";
+  echo "price$price<br>";
+  echo "amount:$amount<br>";
+  echo "payment_status:$payment_status<br>";
+  echo "bill_elem_number: $bill_elem_number<br>";
+  echo "batch_nr:$batch_nr<br>";
+  echo "specific_mode:$specific_mode<br>";
+  echo "payment-status".$payment_status."<br>";
+  echo "mode:".$mode."<br>";
+  echo $_POST['insurance']."<br>";
 }
 
 if ($mode=="edit_elem") {
@@ -41,17 +56,16 @@ if ($mode=="modfication") {
     $is_paid=1;
   else
     $is_paid=0;
-  
+
   if ($specific_mode=="update")
     $bill_obj->update_bill_element($bill_elem_number, $is_paid, $amount, $price, $description);
   if ($specific_mode=="delete")
-    $bill_obj->delete_bill_element($bill_elem_number);  
+    $bill_obj->delete_bill_element($bill_elem_number);
 }
 if($mode=="allpaid")
 {
 	$bill_obj->update_bill_element_allpaid($bill_nr, 1);
 }
-
 require ("gui/gui_billing_tz_edit.php");
 
 ?>

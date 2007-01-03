@@ -310,7 +310,7 @@ define('_BATCH_NR_INIT_',30000000);
  $smarty->assign('sToolbarTitle', "$LDDiagnosticTest :: $formtitle");
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('request_baclabor.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('request_diagnostic_test_bact_lab.php','Request diagnostic test :: Bacteriological Laboratory')");
 
  # hide return  button
  $smarty->assign('pbBack',FALSE);

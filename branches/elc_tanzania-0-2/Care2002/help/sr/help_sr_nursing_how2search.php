@@ -36,14 +36,14 @@ switch($x2)
 </ul>
 <b>Note</b>
 <ul> If you decide to cancel search click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
-</ul><?php endif ?>
+</ul><?php endif;?>
 <b>Step <?php if($x1) print "1"; else print "5"; ?></b><ul>Click the button <img <?php echo createComIcon('../','bul_arrowblusm.gif','0') ?>>,
  or the date, or the ward to display the ward's occupancy list.
 <p><b>Note:</b> The search keyword will be highlighted in the list.
 <br><b>Note:</b> The list is not editable "read only mode". If you attempt to open the patient's data folder by clicking on its name, you will be prompted to
 enter your username and password.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -88,10 +88,10 @@ How to display previous occupancy quickviews using the archive?</b>
  	<b>Step 3: </b>Click on a date in the calendar to display the occupancy quickview for that day.<br>
 	</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 <b>Note</b>
 <ul> If you decide to close the quickview click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
-</ul><?php endif ?>
+</ul><?php endif;?>
 
 <?php if($x2=="arch") : ?>
 
@@ -111,7 +111,7 @@ How to change the guide calendar's month?</b>
 								Click as many times as needed until the desired month is displayed.<br>
 	</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 
 
 </form>

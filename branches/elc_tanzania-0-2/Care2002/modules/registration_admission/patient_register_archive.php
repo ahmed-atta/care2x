@@ -283,7 +283,7 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 
  $smarty->assign('sOnLoadJs','onLoad="if (window.focus) window.focus();"');
 
- $smarty->assign('pbHelp',"javascript:gethelp('person_archive.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('registration_overview.php','Person Registration :: Overview')");
 
  $smarty->assign('pbBack',FALSE);
 

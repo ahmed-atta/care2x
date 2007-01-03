@@ -33,7 +33,7 @@ switch($x1)
 		
 </ul>
 <b>2</b>
-<?php endif ?>
+<?php endif;?>
 <ul> Se si è fatto login precedentemente e si hanno i diritti di accesso sufficienti, nella
 finestra principale apparirà
 <?php switch($x1)
@@ -48,4 +48,4 @@ finestra principale apparirà
 		Per annullare selezionare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>
 </form>
-<?php endif ?>
+<?php endif;?>

@@ -33,7 +33,7 @@ switch($x1)
 		
 </ul>
 <b>Step 2</b>
-<?php endif ?>
+<?php endif;?>
 <ul> Se si è fatto il login ed i diritti di accesso sono sufficienti, le funzioni 
 <?php switch($x1)
 	{
@@ -47,4 +47,4 @@ switch($x1)
 		Per annullare, selezionare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>
 </form>
-<?php endif ?>
+<?php endif;?>

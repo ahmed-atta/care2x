@@ -38,7 +38,7 @@ angemeldet ist wird die standard Station gezeigt. Sperren von Betten erfordert e
 <ul> Mit dieser Option können Sie Zugangsberechtigungen für eine bestimmte Station erstellen, sperren, ändern, löschen, oder freigeben. Die erstellte
 Zugangsberechtigung sind  nur innerhalb der Station berechtigt.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="new") : ?>
 
@@ -72,7 +72,7 @@ Kann ich die Bettenmarkierung einstellen?</b>
 <b>Achtung!</b>
 <ul>Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.
 </ul>
-<?php endif ?>
+<?php endif;?>
 	
 <?php if($src=="show") : ?>
 	<?php if($x1=="1") : ?>
@@ -111,8 +111,8 @@ Wozu schliesst man eine Station vorübergehend?</b>
 	z.B. Renovierung, Reparaturarbeiten, Dekontamination, Desinfektion, usw.
 
 	</ul>
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 
 
 <?php if($src=="") : ?>
@@ -127,7 +127,7 @@ Wie wähle ich eine Station zum Anzeigen aus?</b>
 <ul> Wenn Sie abbrechen wollen, click den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> an.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 
 </form>

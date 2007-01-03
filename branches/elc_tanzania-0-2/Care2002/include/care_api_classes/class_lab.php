@@ -52,6 +52,7 @@ class Lab extends Encounter {
 	*/
 	var $fld_find_chemlab=array(
 				'batch_nr',
+				'send_date',
 				'encounter_nr',
 				'test_date',
 				'test_time',
@@ -194,7 +195,7 @@ class Lab extends Encounter {
 
 	function BatchNr($enc_nr,$job_id,$grp_id){
 	    global $db;
-		$this->sql="SELECT batch_nr FROM $this->tb_find_chemlab WHERE encounter_nr='$enc_nr' AND job_id='$job_id' AND group_id='$grp_id'";
+		$this->sql="SELECT batch_nr,send_date FROM $this->tb_find_chemlab WHERE encounter_nr='$enc_nr' AND job_id='$job_id' AND group_id='$grp_id'";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->result->RecordCount()) {
 				$row=$this->result->FetchRow();
@@ -312,6 +313,8 @@ class Lab extends Encounter {
 	}
 	
 	function GetTestsToDo($id=''){
+		$this->debug=FALSE;
+		if ($this->debug) echo "calling function GetTestsToDo($id)<br>";
 		global $db;
 		if(empty($id)) $cond='';
 			else $cond="batch_nr='$id'";
@@ -370,6 +373,9 @@ class Lab extends Encounter {
 	*/
 	function TestGroups(){
 		global $db;
+		$this->debug=FALSE;
+		$this->debug==TRUE ? $db->debug=TRUE : $db->debug=FALSE;
+		if ($this->debug) echo "TestGroups()<br>";
 		$this->sql="SELECT * FROM $this->tb_test_group WHERE parent=-1 AND is_enabled=1 ORDER BY name";
 		if($this->tgroups=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->tgroups->RecordCount()) {
@@ -474,7 +480,7 @@ class Lab extends Encounter {
 		$debug=FALSE;
 		($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 		if(empty($key)) return FALSE;
-		$this->sql="SELECT f.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
+		$this->sql="SELECT f.encounter_nr,f.send_date, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
 				FROM $this->tb_find_chemlab AS f 
 				LEFT JOIN $this->tb_enc AS e ON e.encounter_nr = f.encounter_nr 
 				LEFT JOIN $this->tb_person AS p ON p.pid = e.pid";

@@ -1,3 +1,4 @@
+
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
@@ -205,7 +206,7 @@ if($batchrows) $sTitle = $sTitle." (".$batch_nr.")";
  $smarty->assign('sToolbarTitle',$sTitle);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('pending_chemlab.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('lab_pending_requests.php','Laboratories :: Pending Requests')");
 
  # hide return  button
  $smarty->assign('pbBack',FALSE);
@@ -220,6 +221,10 @@ if($batchrows) $sTitle = $sTitle." (".$batch_nr.")";
  # collect extra javascript code
  ob_start();
 ?>
+<html>
+<head>
+
+</head>
 
 <style type="text/css">
 .lab {font-family: arial; font-size: 9; color:purple;}
@@ -355,9 +360,9 @@ require_once($root_path.'include/care_api_classes/class_tz_billing.php');
 $bill_obj = new Bill;
 $bill_number = $bill_obj->GetBillByBatchNr($batch_nr);
 if($bill_number['bill_number']>0)
-	echo '<br><br><font color="green">This laboratory request is already billed. Billnumber: '.$bill_number['bill_number'].'</font><br><br>';
+	echo '<br><br><font color="green">'.$LDLabRequestBilled.' '.$bill_number['bill_number'].'</font><br><br>';
 else
-	echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 alt="" style="filter:alpha(opacity=70)"> <font color="red">This laboratory request is not yet billed!</font> <img src="../../gui/img/common/default/warn.gif" border=0 alt="" style="filter:alpha(opacity=70)"><br><br>';
+	echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 alt="" style="filter:alpha(opacity=70)"> <font color="red">'.$LDLabRequestNotBilled.'</font> <img src="../../gui/img/common/default/warn.gif" border=0 alt="" style="filter:alpha(opacity=70)"><br><br>';
 
 require_once($root_path.'include/inc_test_request_printout_chemlabor.php');
 ?>
@@ -365,6 +370,7 @@ require_once($root_path.'include/inc_test_request_printout_chemlabor.php');
      <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
      <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enterresults.gif','0','absmiddle') ?> alt="<?php echo $LDEnterResult ?>"></a>
      <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
+	 <a href="labor_test_request_pass.php"><img src="../../gui/img/common/default/newrequest_tz.gif" border=0 alt="" ></a>
 
 		</td>
 	</tr>

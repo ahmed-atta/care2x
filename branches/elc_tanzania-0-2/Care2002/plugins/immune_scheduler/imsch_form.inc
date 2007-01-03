@@ -4,26 +4,23 @@
 <table border="2" cellspacing="5" style="border-collapse: collapse" bordercolor="#FFFFFF" width="500" bordercolorlight="#CCCCCC" bordercolordark="#C0C0C0" bgcolor="#FFFFFF" cellpadding="0">
   <tr>
     <td width="100%" bgcolor="#CCCCCC">
-    <p align="center"><i><font face="Verdana" color="#FF0000">Immunisation 
-    Schedule</font></i></td>
+    <p align="center"><i><font face="Verdana" color="#FF0000"><?php echo $LDImmunisationSchedule; ?></font></i></td>
   </tr>
   <tr>
     <td width="100%">
     <table border="2" cellspacing="4" style="border-collapse: collapse" bordercolor="#FFFFFF" width="100%" bordercolorlight="#CCCCCC" bordercolordark="#808080" bgcolor="#C0C0C0" cellpadding="0">
       <tr>
         <td width="50%" bgcolor="#CCCCCC">
-        <p align="right"><b><font face="Verdana" size="2" color="#0000FF">Your 
-        child is a</font></b></td>
+        <p align="right"><b><font face="Verdana" size="2" color="#0000FF"><?php echo $LDYourChildIs; ?></font></b></td>
         <td width="50%" bgcolor="#CCCCCC">
           <select size="1" name="TheSex">
-          <option value="1">Male</option>
-          <option value="2">Female</option>
+          <option value="1"><?php echo $LDMale; ?></option>
+          <option value="2"><?php echo $LDFemal; ?></option>
           </select></td>
       </tr>
       <tr>
         <td width="50%" bgcolor="#CCCCCC">
-        <p align="right"><b><font face="Verdana" size="2" color="#0000FF">Your 
-        child's birthdate is</font></b></td>
+        <p align="right"><b><font face="Verdana" size="2" color="#0000FF"><?php echo $LDChildsBirthdate; ?></font></b></td>
         <td width="50%" bgcolor="#CCCCCC">
           <font face="Verdana">&nbsp;<select size="1" name="TheDay">
           <option selected>01</option>
@@ -58,18 +55,18 @@
           <option>30</option>
           <option>31</option>
           </select><font size="2">/</font><select size="1" name="TheMonth">
-          <option value="01" selected>January</option>
-          <option value="02">February</option>
-          <option value="03">March</option>
-          <option value="04">April</option>
-          <option value="05">May</option>
-          <option value="06">June</option>
-          <option value="07">July</option>
-          <option value="08">August</option>
-          <option value="09">September</option>
-          <option value="10">October</option>
-          <option value="11">November</option>
-          <option value="12">December</option>
+          <option value="01" selected><?php echo $LDMonthFullName[1]; ?></option>
+          <option value="02"><?php echo $LDMonthFullName[2]; ?></option>
+          <option value="03"><?php echo $LDMonthFullName[3]; ?></option>
+          <option value="04"><?php echo $LDMonthFullName[4]; ?></option>
+          <option value="05"><?php echo $LDMonthFullName[5]; ?></option>
+          <option value="06"><?php echo $LDMonthFullName[6]; ?></option>
+          <option value="07"><?php echo $LDMonthFullName[7]; ?></option>
+          <option value="08"><?php echo $LDMonthFullName[8]; ?></option>
+          <option value="09"><?php echo $LDMonthFullName[9]; ?></option>
+          <option value="10"><?php echo $LDMonthFullName[10]; ?></option>
+          <option value="11"><?php echo $LDMonthFullName[11]; ?></option>
+          <option value="12"><?php echo $LDMonthFullName[12]; ?></option>
           </select><font size="2">/</font><select size="1" name="TheYear">
           <option>1990</option>
           <option>1991</option>
@@ -85,7 +82,7 @@
           <option>2001</option>
           <option>2002</option>
           <option>2003</option>
-          <option selected>2004</option>
+          <option>2004</option>
           <option>2005</option>
           <option>2006</option>
           <option>2007</option>
@@ -104,7 +101,7 @@
   </tr>
   <tr>
     <td width="100%" bgcolor="#C0C0C0">
-    <p align="center"><button name="calculate" type="submit"><font face="Verdana">Calculate</font></button>
+    <p align="center"><button name="calculate" type="submit"><font face="Verdana"><?php echo $LDCalculate; ?></font></button>
     </td>
   </tr>
   <tr>

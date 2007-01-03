@@ -115,7 +115,7 @@ If the search finds a single result, the complete document will be displayed imm
 <ul>       	
  If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="search"||$x1='paginate')&&($x2>0)) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -146,7 +146,7 @@ How to continue searching in the archives?</b>
 <ul>       	
  If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="select"||$x1='paginate')&&($x2==1)) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -167,8 +167,8 @@ How to continue searching in the archives?</b>
  If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 
 </form>
 

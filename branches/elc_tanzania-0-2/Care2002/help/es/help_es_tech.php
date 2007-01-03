@@ -66,7 +66,7 @@ switch($src)
     el botón <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. </font> 
   </ul>
   <font size="2"> </font><font face="Verdana, Arial" size=2><font face="Verdana, Arial, Helvetica, sans-serif"><font size="2">
-  <?php endif ?>
+  <?php endif;?>
   </font></font></font><font size="2"> 
   <?php if($src=="report") : ?>
   </font></font> 
@@ -108,7 +108,7 @@ switch($src)
     el botón <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. </font> 
   </ul>
   <font size="2"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="queries") : ?>
   </font></font> 
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
@@ -160,7 +160,7 @@ switch($src)
     en el botón <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. </font> 
   </ul>
   <font size="2"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="arch") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Cómo se leen los reportes técnicos?</b></font></font></font> 
@@ -223,7 +223,7 @@ switch($src)
     <p> 
   </ul>
   </font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="showarch") : ?>
   <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> 
   Marcando el reporte como leído.</b></font></font> 
@@ -257,7 +257,7 @@ switch($src)
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="dutydoc") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Cómo se documentan las labores hechas durante las horas de trabajo?</b></font></font> 
@@ -335,7 +335,7 @@ switch($src)
     usted ha terminado, dé clic en el botón <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. 
     </font><br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 </form>
 </body>

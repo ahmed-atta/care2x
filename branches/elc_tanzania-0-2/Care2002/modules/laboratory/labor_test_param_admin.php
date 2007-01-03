@@ -64,7 +64,7 @@ $breakfile="labor.php".URL_APPEND;
  $smarty->assign('sToolbarTitle',$LDTestParameters);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('lab_param_config.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('lab_test_parameters.php','Laboratories :: Test Parameters')");
 
  # hide return  button
  $smarty->assign('pbBack',FALSE);
@@ -170,7 +170,7 @@ if(is_object($tparams)){
  }
 	echo '
 	<tr class="'.$bgc.'">
-	<td colspan="10"><nobr>Insert new Parameter (click edit)</nobr></td>
+	<td colspan="10"><nobr>'.$LDInsertNewParameter.'</nobr></td>
 			<td>
 			<a href="javascript:editParam(0)"><img '.createLDImgSrc($root_path,'edit_sm.gif','0').'></a>
 			</td>';

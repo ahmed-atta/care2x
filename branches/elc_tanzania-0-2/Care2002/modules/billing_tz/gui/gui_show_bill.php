@@ -2,7 +2,7 @@
 <html>
 <head>
 <script language="javascript"> this.window.print(); </script>
-<title>Bill no. <?php echo $bill_number;?></title>
+<title><?php echo $TXT['BillNo']; ?> <?php echo $bill_number;?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
 

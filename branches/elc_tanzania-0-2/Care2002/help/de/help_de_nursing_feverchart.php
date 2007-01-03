@@ -237,7 +237,7 @@ Wie kann ich tägliche Information über i.v. Medikamente und deren Dosierung bzw.
 </ul>
 
 
-<?php endif ?>
+<?php endif;?>
 
 </form>
 

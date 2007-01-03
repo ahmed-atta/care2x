@@ -48,7 +48,7 @@ m.config.useCookies=false;
 <?php
 
   //$jsTemp = '<script type="javascript">';
-  echo "\n m.add(0,-1,'<b>Menu</b>','','','','img/trash.gif','../gui/img/common/default/address_book2.gif');\n";
+  echo "\n m.add(0,-1,'<b>".$LDMenu."</b>','','','','img/trash.gif','../gui/img/common/default/address_book2.gif');\n";
   //echo "</script>\n";
   $my_ebene=0; $p_last=0; $p_akt=0; $ip=0; $i=0; $j=1;
 	while($menu=$result1->FetchRow()){

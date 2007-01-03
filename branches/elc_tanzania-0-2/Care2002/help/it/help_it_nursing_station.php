@@ -144,12 +144,12 @@ Ho provato a selezionare il bottone <input type="button" value="discharge">, ma 
 		<b>1: </b>Selezionare la casella se non lo è già.<p>
 </ul>
   <b>Nota: </b>Se si desidera annullare, selezionare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0 align="absmiddle">.</ul>
-<?php endif ?>
+<?php endif;?>
 <?php if(($src!="assign")&&($src!="remarks")&&($src!="discharge")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Cosa significa "<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Bloccato</font> </span>"? </b></font>
 <ul> <b>Nota: </b>Significa che il letto è bloccato e non può essere assegnato. Per sbloccarlo, selezionare "<span style="background-color:yellow" ><font color="#0000ff">Bloccato</font></span>" e premere &nbsp;<button>OK</button>
 			per confermare.<br>
  <b>Nota: </b>A seconda della versione del software e della configurazione, potrebbe servire una password
  per sbloccare il letto.</ul>
-<?php endif ?>
+<?php endif;?>
 </form>

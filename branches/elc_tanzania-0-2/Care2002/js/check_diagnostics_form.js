@@ -148,7 +148,7 @@ function submit_form(reference, t, session, todo) {
 	  if (destination_obj.length > 0)
 	    for (var i=0 ; i<destination_obj.length; i++ )
 	    	if(destination_obj.options[i].value!=-1)
-	      	parameters+="&item_no["+i+"]="+destination_obj.options[i].value;
+	      	parameters+="&item_no["+i+"]="+destination_obj.options[i].value;	
   }
   catch(E){}
   window.location.href=t+"?"+session+"&"+parameters;

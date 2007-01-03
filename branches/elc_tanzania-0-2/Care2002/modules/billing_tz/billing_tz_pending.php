@@ -10,10 +10,18 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
+$lang_tables[]='billing.php';
+$lang_tables[]='aufnahme.php';
+
+require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
+
 $enc_obj=new Encounter;
 $bill_obj = new Bill;
+$insurance_tz = new Insurance_tz;
 
 $debug = false;
 ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
@@ -75,7 +83,7 @@ elseif (false)		//Modified for debugging reasons: original was else { }
   
       
       if ($debug) echo "---------------------------------------------------------------------------------<br>";
-      if ($debug) echo "<b>Encounter Number: $encounter_nr</b><br>";
+      if ($debug) echo "<b>'.$LDEncounterNumber.' $encounter_nr</b><br>";
       
       //----------------------------------------------------------------------------------------------  						
   
@@ -86,7 +94,7 @@ elseif (false)		//Modified for debugging reasons: original was else { }
 
       if ($bill_obj->PendingBillObjects($encounter_nr)) {
         
-        if ($debug) echo "There are might pending bills for encounter nr. ".$encounter_nr."<br>";
+        if ($debug) echo $LDPendingBillsforEncounterNr." ".$encounter_nr."<br>";
         
         // There are pending objects => There are entries in the module-tables
         // that are not listened in the billing list
@@ -98,16 +106,16 @@ elseif (false)		//Modified for debugging reasons: original was else { }
         if ($bill_obj->CheckForPendingBill($encounter_nr)) {
         
           // There is a pending bill for this encounter and we can append all items to it
-          if ($debug) echo "there is a pending bill there, if we have to add, we can append to it<br>";
+          if ($debug) echo "'.$LDPendingBillAdd.'<br>";
   
           $bill_number = $bill_obj->GetBill($encounter_nr);
   
-          if ($debug) echo "our bill number is:".$bill_number."<br>";
+          if ($debug) echo "'.$LDOurBillNumberIs.'".$bill_number."<br>";
           
         } else {
         
           // There is no pending bill availabe for this encounter, we have to create it
-          if ($debug) echo "no pending bill for this encounter->we create one<br>";
+          if ($debug) echo $LDNoPendingBillCreate;
   
           $bill_number = $bill_obj->CreateNewBill($encounter_nr);
         }
@@ -135,6 +143,7 @@ else
   }
   elseif(empty($pid) && !empty($batch_nr))
   	$pid = $batch_nr;
+  
   require ("gui/gui_billing_tz_pending.php");
 }
 ?>

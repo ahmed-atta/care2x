@@ -12,7 +12,7 @@
 <b>重新开始新病人入院手续</b>
 <ul> 如果您想重新开始新入院手续,请击打以下按钮 <input type="button" value="回到入院手续">.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <b>注意</b>
 <ul> 如果您完成了,请击打以下按钮 <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 		

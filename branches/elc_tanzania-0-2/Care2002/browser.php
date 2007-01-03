@@ -1,4 +1,4 @@
-<? require("language/$lang/lang_".$lang."_startframe.php"); ?>
+<?PHP require("language/$lang/lang_".$lang."_startframe.php"); ?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -27,7 +27,7 @@
 <p><br><p><br>
 <A HREF="<?="index.php?lang=$lang&egal=1" ?>"><u><?=$LDGoAheadEgal ?></u></A>
 	
-<? endif ?>
+<? endif; ?>
 </font>
 </center>
 </BODY>

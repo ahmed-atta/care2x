@@ -82,7 +82,7 @@ if($nexttime)
 	$prescriptionitem['dosage']="";
 	$nexttime=false;
 }
-if($class=='mems_supplies' || $class=='mems_drug_list' || $class=='mems_special_others_list' || $class=='mems_supplies_laboratory')
+if($class=='supplies' || $class=='drug_list' || $class=='special_others_list' || $class=='supplies_laboratory')
 {
 	$caption_dosage = 'Total dose';
 }

@@ -270,7 +270,7 @@ if($saved || $row['test_date']) $std_date=$row['test_date'];
  $smarty->assign('sToolbarTitle',$sTitle);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('lab.php','input','main','$job_id')");
+ $smarty->assign('pbHelp',"javascript:gethelp('lab_report_edit.php','Laboratories :: Lab Report Edit','main','$job_id')");
 
  # hide return  button
  $smarty->assign('pbBack',FALSE);
@@ -582,4 +582,5 @@ $smarty->assign('LDImDone',"<a href=\"Javascript:gethelp('lab.php','input','done
  * show Template
  */
  $smarty->display('common/mainframe.tpl');
+
 ?>

@@ -5,12 +5,12 @@
 /*
 # Plug-in name that is displayed on the menu or submenu pages
 */
-$sPluginName = 'Immunization Scheduler';
+$sPluginName = $LDImmunizationScheduler;
 
 /*
 # Plug-in description that is displayed on some format of menu pages or as context sensitive info
 */
-$sPluginDescription = 'Automatic immunization scheduler based on standard sets of immunization regulations';
+$sPluginDescription = $LDAutomaticImmunizationText;
 
 /*
 # Plug-in start script or URL. This will be started when the user clicks on the

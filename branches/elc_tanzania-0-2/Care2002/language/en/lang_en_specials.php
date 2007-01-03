@@ -263,4 +263,16 @@ $LDMainMenuTree = 'Main Menu Styles';
 $LDMainMenuTreeTxt = 'Select the main menu style';
 $LDStyle = 'Style';
 $LDRefreshBrowser = 'Refresh your browser to see the change(s)';
+# 2006-09-14 d.r. from merotech
+$LDImmunizationScheduler='Immunization Scheduler';
+$LDAutomaticImmunizationText='Automatic immunization scheduler based on standard sets of immunization regulations';
+$LDIPathDemo='iPath demo';
+$LDIPathText='A well featured, useful collaborative telemedicine and diagnostics system';
+$LDVitalCalc='VitalS Calculator';
+$LDVitalStatisticCalc='Vital Statistics Calculator';
+
+
+
+
+
 ?>

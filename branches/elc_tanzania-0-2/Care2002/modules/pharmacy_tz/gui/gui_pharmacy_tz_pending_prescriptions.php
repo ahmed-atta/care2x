@@ -61,8 +61,7 @@ A:visited:hover {color: #cc0033;}
 		<td  valign="top" align="middle" height="35">
 			 <table cellspacing="0"  class="titlebar" border=0 cellpadding="0" cellspacing="0">
  <tr valign=top  class="titlebar" >
-            <td bgcolor="#99ccff" ><font color="#330066">Pending 
-              Prescriptions (<?php echo $enc_obj->ShowPID($batch_nr); ?>)</font> </td>
+            <td bgcolor="#99ccff" ><font color="#330066"><?php echo $LDPendingPresc; ?> (<?php echo $enc_obj->ShowPID($batch_nr); ?>)</font> </td>
   <td bgcolor="#99ccff" align=right>
   <?php
   if ($comming_from=="pharmacy")
@@ -87,7 +86,7 @@ A:visited:hover {color: #cc0033;}
 <?php	
 
 if ($back_path!='billing' || $comming_from=='pharmacy') {
-	echo '<a href="'.URL_APPEND.'&target=search&task=newprescription&back_path='.$back_path.'&pharmacy=yes">Create new Prescription</a>';
+	echo '<a href="'.URL_APPEND.'&target=search&task=newprescription&back_path='.$back_path.'&pharmacy=yes"><img src="../../gui/img/common/default/createnewpres_tz.gif" border=0 align="absmiddle"  alt="Create new Prescription"></a>';
   	require($root_path.'include/inc_pharmacy_pending_lister_fx.php');
 } 
   
@@ -122,7 +121,7 @@ if ($back_path!='billing' || $comming_from=='pharmacy') {
                   	}
                   	else
                   	{
-                    	echo '<iframe name="prescription" src="'.$root_path.'/modules/registration_admission/show_prescription.php?prescription_date='.$prescription_date.'&externalcall=TRUE&disablebuttons=true&target=search&pn='.$pn.'&back_path='.$back_path.'&sid='.$sid.'" width="100%" height="94%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
+                    	echo '<iframe name="prescription" src="'.$root_path.'/modules/registration_admission/show_prescription.php?prescription_date='.$prescription_date.'&externalcall=TRUE&disablebuttons=true&target=search&pn='.$pn.'&back_path='.$back_path.'&sid='.$sid.'&help_site='.$comming_from.'" width="100%" height="94%" align="left" marginheight="0" marginwidth="0" hspace="0" vspace="0" scrolling="auto" frameborder="0" noresize></iframe> ';
                   	}
                     
                   }

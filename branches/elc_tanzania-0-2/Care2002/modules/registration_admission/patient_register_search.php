@@ -46,7 +46,7 @@ $thisfile=basename(__FILE__);
  $smarty->assign('sToolbarTitle',$LDPatientRegister." - ".$LDSearch);
 
  # Added for the common header top block
- $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDPatientRegister." - ".$LDSearch')");
+ $smarty->assign('pbHelp',"javascript:gethelp('registration_overview.php','Person Registration :: Overview')");
 
  $smarty->assign('breakfile',$breakfile);
 
@@ -55,7 +55,7 @@ $thisfile=basename(__FILE__);
 
  $smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.select()"');
 
- $smarty->assign('pbHelp',"javascript:gethelp('person_how2search.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('registration_overview.php','Person Registration :: Overview')");
 
  $smarty->assign('pbBack',FALSE);
  #

@@ -250,7 +250,7 @@ $enc_obj=new Encounter;
  }
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('request_blood.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('request_diagnostic_test_blood.php','Request diagnostic test :: Blood Bank')");
 
  # hide return button
  $smarty->assign('pbBack',FALSE);

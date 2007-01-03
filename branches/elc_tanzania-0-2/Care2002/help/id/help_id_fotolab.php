@@ -81,7 +81,7 @@
     <b>Tidak. </b>dalam versi ini, anda tidak dapat melakukan penyimpanan foto 
     yang tidak memiliki nomor pasien atau kasus yang valid.<br>
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="maindata") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bagaimana 
   cara mencari data pasien?</b> </font> 
@@ -113,7 +113,7 @@
   </ul>
 <br>
 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="save") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>><font color="#990000"><b>Saya 
   ingin menempatkan foto tambahan dari pasien yang sama. Bagaimana cara melakukannya?</b> </font> 
@@ -140,7 +140,7 @@
     <input type="button" value="Go">
     .<br>
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="init") : ?>
   <?php if($x1=="") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
@@ -154,7 +154,7 @@
     <b>Langkah 3: </b>Kolom masukan untuk foto akan muncul. Klik tombol "Bantuan" 
     untuk instruksi Lebih Lanjut.<br>
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="save") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Hak Akses baru sekarang telah tersimpan, bagaimana cara membuat yang lain?</b> 
@@ -176,7 +176,7 @@
     .<br>
     <b>Langkah 2: </b>daftar Hak Akses yang telah ada akan ditampilkan<br>
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="list") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Apa 
   kegunaan tombol <img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> 
@@ -227,7 +227,7 @@
     Klik Opsi "<span style="background-color:yellow" > D </span>" Berkait dengan 
     pengguna.<br>
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="update") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Bagaimana cara mengedit Hak Akses?</b> </font> 
@@ -244,7 +244,7 @@
     <input type="button" value="Batalkan" name="button">
     .<br>
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="delete") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Bagaimana Cara menghapus Hak Akses?</b> </font> 
@@ -262,7 +262,7 @@
     <input type="button" value="Tidak, Kembali">
     .<br>
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="lock") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Bagaimana cara 
@@ -286,8 +286,8 @@
     .<br>
 </ul>
 	
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 
 	</form>
 

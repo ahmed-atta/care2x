@@ -10,14 +10,19 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+define('LANG_FILE','billing.php');
+require($root_path.'include/inc_front_chain_lang.php');
+
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+
 $enc_obj=new Encounter;
 $bill_obj = new Bill;
 
 $debug = FALSE;
 ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-  		
+  
+ // require($root_path.'modules/registration_admission/aufnahme_daten_such.php');		
   require ("gui/gui_billing_tz_archive.php");
 
 ?>

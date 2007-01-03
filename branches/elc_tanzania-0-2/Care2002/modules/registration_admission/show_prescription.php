@@ -11,14 +11,18 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-
+$lang_tables[]='aufnahme.php';
+$lang_tables[]='pharmacy.php';
+require($root_path.'include/inc_front_chain_lang.php');
 
 // If this side is called by an external cross link, this will be stored into a session variable:
 //echo $externalcall."....".$target;exit();
   
-$debug=FALSE;
+$debug=false;
 ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 if ($debug) {
+	if (!empty($back_path)) $backpath=$back_path;
+	
 	echo "file: show_prescription<br>";
     if (!isset($externalcall))
       echo "internal call<br>";
@@ -77,9 +81,6 @@ if (isset($pn)) {
 
 require('./include/init_show.php');
 
-
-
-
 if($parent_admit){
     $sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr
 		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." 
@@ -90,8 +91,8 @@ if($parent_admit){
 		ORDER BY pr.modify_time DESC";
 }else{
 	$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr
-		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr 
-		ORDER BY pr.modify_time DESC";
+		  WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr 
+		  ORDER BY pr.modify_time DESC";
 }
 
 if($result=$db->Execute($sql)){
@@ -105,7 +106,6 @@ $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 
-
 
 
 /* Load GUI page */

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
- <TITLE> billing :: insurance </TITLE>
+ <TITLE> <?php echo $LDBillingInsurance; ?></TITLE>
  <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
 <meta name="Author" content="Robert Meggle">
 <meta name="Generator" content="various: Quanta, AceHTML 4 Freeware, NuSphere, PHP Coder">
@@ -59,12 +59,12 @@ function closewin()
 			 <table cellspacing="0"  class="titlebar" border=0>
           <tr valign=top  class="titlebar" >
             <td bgcolor="#99ccff" >
-                &nbsp;&nbsp;<font color="#330066">Insurance - Main Menu</font>
+                &nbsp;&nbsp;<font color="#330066"><?php echo $LDInsuranceMenu; ?></font>
 
        </td>
   <td bgcolor="#99ccff" align=right><a
    href="javascript:window.history.back()"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a><a
-   href="javascript:gethelp('submenu1.php','Pharmacy')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
+   href="javascript:gethelp('insurance_menu.php','Insurance Management :: Main Menu')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
    href="billing_tz.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
  </tr>
  </table>		</td>
@@ -83,18 +83,18 @@ function closewin()
                     <TBODY class="submenu">
                       <TR> 
                         <td align=center><img src="../../gui/img/common/default/pdata.gif" border=0></td>
-                        <TD class="submenu_item"><nobr><a href="insurance_company_tz.php">Administrate Companies</a></nobr></TD>
-                        <TD>Manage companies and their contracts</TD>
+                        <TD class="submenu_item"><nobr><a href="insurance_company_tz.php"><?php echo $LDAdministrativeCompanies; ?></a></nobr></TD>
+                        <TD><?php echo $LDManageCompanies; ?></TD>
                       </tr>
                       <TR> 
                         <td align=center><img src="../../gui/img/common/default/comments.gif" border=0></td>
-                        <TD class="submenu_item"><nobr><a href="insurance_types_tz.php">Administrate insurance types</a></nobr></TD>
-                        <TD>Add, edit or remove different types of insurances</TD>
+                        <TD class="submenu_item"><nobr><a href="insurance_types_tz.php"><?php echo $LDAdministrativeinsurancetypes; ?></a></nobr></TD>
+                        <TD><?php echo $LDaddeditremoveinsurance; ?></TD>
                       </tr>
                       <TR> 
                         <td align=center><img src="../../gui/img/common/default/new_group.gif" border=0></td>
-                        <TD class="submenu_item"><nobr><a href="insurance_members_tz.php">Members</a></nobr></TD>
-                        <TD>Add or remove employees and designated members</TD>
+                        <TD class="submenu_item"><nobr><a href="insurance_members_tz.php"><?php echo $LDmembers; ?></a></nobr></TD>
+                        <TD><?php echo $LDaddremoveemployees; ?></TD>
                       </tr>
 
 
@@ -104,9 +104,9 @@ function closewin()
 
                       <TR> 
                         <td height="26" align=center><img src="../../gui/img/common/default/report.jpg" border=0 width="20" height="20"></td>
-                        <TD class="submenu_item"><nobr><a href="<?php echo $root_path;?>modules/reporting_tz/insurance_reports.php?back_path=billing">Insurance Reports</a></nobr></TD>
+                        <TD class="submenu_item"><nobr><a href="insurance_reports.php?back_path=billing"><?php echo $LDInsuranceReports; ?></a></nobr></TD>
 
-                        <TD>Insurance reporting</TD>
+                        <TD><?php echo $LDInsuranceReporting; ?></TD>
                       </tr>
 
                       <TR  height=1> 

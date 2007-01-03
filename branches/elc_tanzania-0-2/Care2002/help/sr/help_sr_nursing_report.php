@@ -66,7 +66,7 @@ NOTE:</b></font>
 <ul> 
 	You can also enter both the <?php if($x1=="docs") print "physician orders and inquiries to the physician"; else print "nursing and effectivity report"; ?> at the same time.</ul>
 
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="diagnosis") : ?>
 <a name="extra"><a name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a></a>
 How to display a diagnostic report?</b></font>
@@ -75,7 +75,7 @@ How to display a diagnostic report?</b></font>
   		<b>Note: </b>The first report on the list will be displayed immediately.<p>
 	<b>Step 1: </b>Click on the short note of the diagnostic report you wish to display.<br>	
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="kg_atg_etc") : ?>
 <a name="pt"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 How to enter  information on daily physical therapy (PT), anti-thrombosis gymnastic (Atg), etc.?</b></font>
@@ -88,14 +88,14 @@ How to enter  information on daily physical therapy (PT), anti-thrombosis gymnas
 		<b>Step 4: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="fotos") : ?>
 <a name="coag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 How to preview a photo?</b></font>
 <ul> 
 	<b>Step 1: </b>Click on a thumbnail on the left frame. The full size image will be displayed on the right frame including the shot date and shot number.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="anticoag_dailydose") : ?>
 <a name="daycoag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 How to enter information on daily anticoagulant application?</b></font>
@@ -107,7 +107,7 @@ How to enter information on daily anticoagulant application?</b></font>
 		<b>Step 4: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="lot_mat_etc") : ?>
 <a name="lot"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 How to enter notes on implants, LOT nr, charge nr, etc?</b></font>
@@ -120,7 +120,7 @@ How to enter notes on implants, LOT nr, charge nr, etc?</b></font>
 		<b>Step 4: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="medication") : ?>
 <a name="med"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 How to enter  medication and dosage plan?</b></font>
@@ -143,7 +143,7 @@ How to enter  medication and dosage plan?</b></font>
 		<b>Step 7: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="medication_dailydose") : ?>
 	<?php if($x2) : ?>
 
@@ -183,8 +183,8 @@ It says "There is no medication yet". What should I do?</b></font>
 		<b>Step 9: </b>If you want to correct any errors, click on the erroneous data and replace it with the correct one and save again.<br>
 		<b>Step 10: </b>If you are finished, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> to close the window and go back to the chart.<br>
 </ul>
-	<?php endif ?>
-<?php endif ?>
+	<?php endif;?>
+<?php endif;?>
 <?php if($src=="iv_needle") : ?>
 <a name="iv"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 How to enter information on daily intravenous medication application and dosage?</b></font>
@@ -197,7 +197,7 @@ How to enter information on daily intravenous medication application and dosage?
 		
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 </form>
 
