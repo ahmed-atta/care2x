@@ -205,9 +205,8 @@ function getinfo(pn){
 ?>
 	}
 function getARV(pid) {
-	urlholder="<?php echo $root_path ?>modules/arv/arv_pass.php<?php echo URL_REDIRECT_APPEND; ?>&pid="+pid;
-	patientwin=window.open(urlholder,"arv","menubar=no,resizable=yes,scrollbars=yes");
-	patientwin.moveTo(0,0);
+	urlholder="<?php echo $root_path ?>modules/arv/arv_menu.php<?php echo URL_REDIRECT_APPEND; ?>&pid="+pid;
+	patientwin=window.open(urlholder,"arv","menubar=no,resizable=yes,scrollbars=yes")
 	patientwin.resizeTo(screen.availWidth,screen.availHeight);
 	patientwin.focus();
 }

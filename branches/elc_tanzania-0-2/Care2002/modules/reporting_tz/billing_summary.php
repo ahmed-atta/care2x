@@ -19,9 +19,9 @@ require_once('include/inc_timeframe.php');
  */
  $debug=FALSE;
  $PRINTOUT=FALSE;
-if (empty($_GET['printout'])) { 
+if (empty($_GET['printout'])) {
 	if (empty($_POST['month']) && empty($_POST['year'])) {
-			if ($debug) echo "no time value is set, we´re using now the current month<br>";	
+			if ($debug) echo "no time value is set, we're using now the current month<br>";
 			$month=date("n",time());
 			$year=date("Y",time());
 			$start_timeframe = mktime (0,0,0,$month, 1, $year);
@@ -30,7 +30,7 @@ if (empty($_GET['printout'])) {
 			if ($debug) echo "Getting an new time range...<br>";
 			$start_timeframe = mktime (0,0,0,$_POST['month'], 1, $_POST['year']);
 			$end_timeframe = mktime (0,0,0,$_POST['month']+1, 0, $_POST['year']);
-		
+
 	} // end of if (empty($_POST['month']) && empty($_POST['year']))
 } else {
 	$PRINTOUT=TRUE;

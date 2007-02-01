@@ -8,7 +8,7 @@
  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
   	<script language="javascript" >
-<!-- 
+<!--
 function gethelp(x,s,x1,x2,x3,x4)
 {
 	if (!x) x="";
@@ -17,7 +17,7 @@ function gethelp(x,s,x1,x2,x3,x4)
 	window.helpwin.moveTo(0,0);
 }
 // -->
-</script> 
+</script>
 <link rel="stylesheet" href="../../css/themes/default/default.css" type="text/css">
 <script language="javascript" src="../../js/hilitebu.js"></script>
 
@@ -49,7 +49,7 @@ function closewin()
 </script>
 
 
- 
+
 </HEAD>
 <BODY bgcolor=#ffffff link=#000066 alink=#cc0000 vlink=#000066  >
 <table width=100% border=0 cellspacing=0 height=100%>
@@ -72,17 +72,23 @@ function closewin()
 
 	<tr>
 		<td bgcolor=#ffffff valign=top>
-				<?php $insurance_tz->ShowInsuranceList(false); ?>
+				<!-- Section if all companies (also hidden ones) should be visible or not -->
+				<form method="post" name="ShowAllForm">
+					<?php echo $LDShowAllQuestion;?>
+					<input type="checkbox" name="ShowHiddenCompanies" Value="1" OnClick="document.ShowAllForm.submit();" <?if ($_POST['ShowHiddenCompanies']) echo "checked"?>>
+				</form>
+				<!-- End of Section to show all companies -->
+				<?php $insurance_tz->ShowInsuranceList(false,$_POST['ShowHiddenCompanies']); ?>
 			<p>
 			<a href="insurance_company_tz_new.php"><?php echo $LDInsertCompany; ?></a>
 			<p>
 			<a href="insurance_tz.php?ntid=false&lang=$lang"><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
 
 			<p>
-			</blockquote>									
+			</blockquote>
 		</td>
 	</tr>
-	
+
 		<tr valign=top >
 		<td bgcolor=#cccccc>
 							<table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#cfcfcf">
@@ -104,7 +110,7 @@ function openCreditsWindow() {
 //  Script End -->
 </script>
 
-	
+
  <a href="http://www.care2x.org" target=_new>CARE2X 2nd Generation pre-deployment 2.0.2</a> :: <a href="../../legal_gnu_gpl.htm" target=_new> License</a> ::
  <a href=mailto:info@care2x.org>Contact</???a>  :: <a href="../../language/en/en_privacy.htm" target="pp"> Our Privacy Policy </a> ::
  <a href="../../docs/show_legal.php?lang=$lang" target="lgl"> Legal </a> ::
@@ -123,7 +129,7 @@ function openCreditsWindow() {
 					</td>
 
 	</tr>
-	
+
 	</tbody>
  </table>
 

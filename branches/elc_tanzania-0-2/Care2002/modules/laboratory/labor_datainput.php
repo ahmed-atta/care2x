@@ -7,7 +7,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
+* elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -19,7 +19,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $debug=FALSE;
 ($debug)? $db->debug=true: $db->debug=FALSE;
 
-if(!$encounter_nr) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
+if(!$encounter_nr) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;};
 
 if(!isset($user_origin)||empty($user_origin)) $user_origin='lab';
 
@@ -41,10 +41,10 @@ $thisfile='labor_datainput.php';
 require_once($root_path.'include/care_api_classes/class_lab.php');
 $lab_obj=new Lab($encounter_nr);
 
-require($root_path.'include/inc_labor_param_group.php');			
+require($root_path.'include/inc_labor_param_group.php');
 if(!isset($parameterselect)||$parameterselect=='') $parameterselect='all';
 if($parameterselect == 'all')
-{ 
+{
 	if($result_tests = $lab_obj->GetTestsToDo($job_id))
 		if($row_tests = $result_tests->FetchRow())
 		{
@@ -64,7 +64,7 @@ if($parameterselect == 'all')
 	{
 		while($g=$groups->FetchRow()){
 				$parameters[$g['id']] = $g['name'];
-	
+
 		}
 	}
 	$paramname=&$parametergruppe[$parameterselect];
@@ -73,7 +73,7 @@ if($parameterselect == 'all')
 
 # Load the date formatter
 include_once($root_path.'include/inc_date_format_functions.php');
-    
+
 if($mode=='save'){
 	//$nbuf=array();
 	# Prepare parameter values and serialize
@@ -83,7 +83,7 @@ if($mode=='save'){
 			$whichgroup = $lab_obj->TestGroupByID($x);
 		 	$nbuf[$whichgroup['parent']][$x]=$HTTP_POST_VARS['_task'.$x.'_'];
 		 	$addbuf[$whichgroup['parent']][$x]=$HTTP_POST_VARS['_add'.$x.'_'];
-		 	
+
 		}
 		else
 		{
@@ -94,7 +94,7 @@ if($mode=='save'){
 		}
 	}
 	if ($debug) echo "starting reading the array nbuf<br>";
-	while(list($x,$v) = each($nbuf)) { 
+	while(list($x,$v) = each($nbuf)) {
 
 		$dbuf['group_id']=$x;
 		$dbuf['serial_value']=serialize($v);
@@ -122,17 +122,17 @@ if($mode=='save'){
 		if($allow_update){
 			$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 			$dbuf['modify_time']=date('YmdHis');
-	
+
 			# Recheck the date, ! bug pat	$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];ch
 			if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
-		
+
 			$lab_obj->setDataArray($dbuf);
 			# set update pointer
 			$lab_obj->setWhereCondition("batch_nr='$batch_nr'");
 			if($lab_obj->updateDataFromInternalArray($batch_nr)){
 				$saved=true;
 			}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
-		
+
 		}else{
 			# Hide old job record if it exists
 			$lab_obj->hideResultIfExists($encounter_nr,$job_id,$parameterselect);
@@ -144,7 +144,7 @@ if($mode=='save'){
 				$dbuf['test_date']=formatDate2STD($HTTP_POST_VARS['test_date'],$date_format);
 			}
 			$dbuf['test_time']=date('H:i:s');
-			
+
 			$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 			$dbuf['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
 			$dbuf['create_time']=date('YmdHis');
@@ -155,34 +155,35 @@ if($mode=='save'){
 				$pk_nr=$db->Insert_ID();
 	            $batch_nr=$lab_obj->LastInsertPK('batch_nr',$pk_nr);
 				$saved=true;
-			}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}	
+			}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
 		}
-	} 
+	}
 
 	# If save successful, jump to display values
 	if($saved){
 		include_once($root_path.'include/inc_visual_signalling_fx.php');
-		# Set the visual signal 
-		setEventSignalColor($encounter_nr,SIGNAL_COLOR_DIAGNOSTICS_REPORT);							
-		header("location:$thisfile?sid=$sid&lang=$lang&saved=1&batch_nr=$batch_nr&encounter_nr=$encounter_nr&job_id=$job_id&parameterselect=$parameterselect&allow_update=1&user_origin=$user_origin&tickerror=$tickerror");
+		# Set the visual signal
+		setEventSignalColor($encounter_nr,SIGNAL_COLOR_DIAGNOSTICS_REPORT);
+		//header("location:$thisfile?sid=$sid&lang=$lang&saved=1&batch_nr=$batch_nr&encounter_nr=$encounter_nr&job_id=$job_id&parameterselect=$parameterselect&allow_update=1&user_origin=$user_origin&tickerror=$tickerror");
+		header("location:labor_test_request_admin_chemlabor.php?sid=$sid");
 	}
 
 # end of if(mode==save)
-} else { #If mode is not "save" then get the basic personal data 
+} else { #If mode is not "save" then get the basic personal data
 
 if ($debug) echo "mode is not save then get the basic personal data<br>";
 	# If parameter group has changed do not allow update
 //	 if(isset($changegroup) && $changegroup){
 //	 	$allow_update=FALSE;
 //	}
-	
+
 	# Create encounter object
 	//include_once($root_path.'include/care_api_classes/class_encounter.php');
 	$enc_obj=new Encounter($encounter_nr);
 	if($encounter=&$enc_obj->getBasic4Data($encounter_nr)){
 		$patient=$encounter->FetchRow();
 	}
-	
+
 	# If previously saved, get the values
 	$pdata=array();
 	$adddata=array();
@@ -210,22 +211,22 @@ if ($debug) echo "mode is not save then get the basic personal data<br>";
 			}
 		}
 	}
-	
-	if(!$resultcounter) { 
+
+	if(!$resultcounter) {
 		# disallow update if group does not exist yet
 		$allow_update=false;
 	}
 
 //echo $lab_obj->getLastQuery();
-			
+
 
 
 	# Set the return file
 	if(isset($job_id)&&$job_id){
 		switch($user_origin){
-			case 'lab_mgmt':  $breakfile="labor_test_request_admin_chemlabor.php".URL_APPEND."&pn=$encounter_nr&batch_nr=$job_id&user_origin=lab"; 
+			case 'lab_mgmt':  $breakfile="labor_test_request_admin_chemlabor.php".URL_APPEND."&pn=$encounter_nr&batch_nr=$job_id&user_origin=lab";
 					break;
-			default: 
+			default:
 				//$breakfile="labor_data_check_arch.php".URL_APPEND."&versand=1&encounter_nr=$encounter_nr";
 				$breakfile="labor.php";
 		}
@@ -238,7 +239,7 @@ if ($debug) echo "mode is not save then get the basic personal data<br>";
 	# Get the test test groups
 	$tgroups=&$lab_obj->TestGroups();
 	# Get the test parameter values
-	if($parameterselect != 'all') { 
+	if($parameterselect != 'all') {
 		$tparams=$lab_obj->TestParams($parameterselect);
 		while($tp=$tparams->FetchRow()) {
 			$testarray[$counter++] = $tp;
@@ -292,7 +293,7 @@ if($saved || $row['test_date']) $std_date=$row['test_date'];
 </style>
 
 <script language="javascript" name="j1">
-<!--        
+<!--
 function pruf(d)
 {
 	if(!d.job_id.value)
@@ -310,7 +311,7 @@ function pruf(d)
 				}
 				else return true;
 			}
-		} 
+		}
 }
 function chkselect(d)
 {
@@ -328,7 +329,7 @@ function labReport(){
 <script language="javascript" src="<?php echo $root_path ?>js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
-<?php 
+<?php
 
 $sTemp = ob_get_contents();
 ob_end_clean();
@@ -377,7 +378,7 @@ $smarty->assign('sFormAction',$thisfile);
 ob_start();
 ?>
 
-<?php 
+<?php
 
 if($tickerror>0) : ?>
 <tr bgcolor=#ffffee>
@@ -390,7 +391,7 @@ An error occured! Please be sure to insert valid values and also fill out the te
 <?php endif; ?>
 
 
-<?php 
+<?php
 $paramnum=sizeof($parameters);
 $pcols=ceil($paramnum/ROW_MAX);
 
@@ -404,7 +405,7 @@ echo '
 
 echo '
 	</tr>';
-	
+
 echo '
 ';
 $rowlimit=0;
@@ -413,7 +414,7 @@ if($testarray)
 {
 $teststodo=&$lab_obj->GetTestsToDo($job_id);
 if($t=$teststodo->FetchRow()){
-		
+
 		parse_str($t['parameters'],$tests);
 		while(list($x,$v)=each($tests))
 		{
@@ -468,7 +469,7 @@ if($tp['is_enabled']==1)
 		// back, then please go to the file labor_test_param_edit.php
 		if($tp['add_type']=="checkbox")
 		{
-			echo 'value="check"';			
+			echo 'value="check"';
 			if($adddata[$tp['id']])
 			{
 				echo ' checked ';
@@ -478,7 +479,7 @@ if($tp['is_enabled']==1)
 		{
 			echo 'value="'.$adddata[$tp['id']].'"';
 		}
-		echo '>'; 
+		echo '>';
 	}
 	echo '</td>';
 	$rowlimit++;
@@ -495,10 +496,10 @@ else
 echo '<tr><td colspan="2">'.$LDNoParams.'</td></tr>';
 }
  # Assign parameter output
- 
+
  $sTemp = ob_get_contents();
  ob_end_clean();
- 
+
  $smarty->assign('sParameters',$sTemp);
 
 # Collect hidden inputs for the parameters form

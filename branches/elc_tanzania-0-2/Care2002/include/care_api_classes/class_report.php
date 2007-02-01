@@ -38,8 +38,7 @@ class report extends core {
     global $db;
     $this->debug=FALSE; 
     $this->debug==TRUE ? $db->debug=TRUE : $db->debug=FALSE;
-
-	}	
+  }	
 
   /**
   * The fieldnames must be named seperated by commatas within the common SQL syntax. This private method will serve it.
@@ -267,12 +266,10 @@ class report extends core {
       return FALSE;
     }     
   }
-  
-  
-  
+ 
   /**
   * This is the function what will be mostely used.
-  * You can call this publich method in three different ways, it will always give back an temporary table. 
+  * You can call this public method in three different ways, it will always give back an temporary table. 
   * case1. Call without any destination table.
   *        e.g. $result = $rep_obj -> SetReportingTable();
   *        in $result is now stored an TEMPORARY table with one primay index field.
@@ -308,9 +305,6 @@ class report extends core {
       return FALSE;
     }
   }
-  
-  
-  
   
   /**
   * This public method will give back the number of rows given by the table $tbl

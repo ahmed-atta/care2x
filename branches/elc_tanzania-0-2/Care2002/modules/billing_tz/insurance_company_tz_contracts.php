@@ -1,4 +1,4 @@
- l<?php
+<?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 
@@ -11,6 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
 
 //define('NO_2LEVEL_CHK',1);
 $lang_tables[]='billing.php';
@@ -37,6 +38,8 @@ if($mode=="updateflags")
 	if(!$error)
 	{
 		$insurance_tz->UpdateInsuranceCompany($_POST);
+		header("Location: ./insurance_company_tz.php");
+		exit();
 	}
 	$this_insurance = $_POST;
 	while(list($x,$v) = each($HTTP_POST_VARS))
@@ -59,6 +62,7 @@ if($mode=="updateflags")
 		}
 	}
 	$updated = $LDLastUpdated.' '.strftime('%c').'<br>';
+
 }
 require ("gui/gui_insurance_company_tz_contracts.php");
 

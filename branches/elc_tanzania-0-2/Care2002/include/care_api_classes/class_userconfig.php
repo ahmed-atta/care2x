@@ -3,7 +3,7 @@
 * @package care_api
 */
 /**
-*  User configuration methods. 
+*  User configuration methods.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
 * @version beta 2.0.1
@@ -55,11 +55,11 @@ class UserConfig {
 	*/
 	var $ok;
 	/**#@-*/
-	
+
 	/**
 	* Does SQL transaction. Uses the adodb transaction routine.
 	* @access private
-	* @param string 
+	* @param string
 	* @return boolean
 	*/
 	function Transact($sql=''){
@@ -74,7 +74,7 @@ class UserConfig {
 	        $db->RollbackTrans();
 			return FALSE;
 	    }
-    }	
+    }
 	/**
 	* Loads the default configuration data.
 	*
@@ -106,9 +106,9 @@ class UserConfig {
 	*/
 	function getConfig($user_id='default'){
 	    global $db;
-	
+
 		if(empty($user_id)) return $this->_getDefault();
-		
+
 	    if ($this->result=$db->Execute("SELECT serial_config_data FROM $this->tb WHERE user_id='$user_id'")) {
 		    if ($this->result->RecordCount()) {
 		        $this->row=$this->result->FetchRow();
@@ -130,9 +130,9 @@ class UserConfig {
 	*/
 	function exists($user_id='') {
 	    global $db;
-	
+
 		if(empty($user_id)) return FALSE;
-		
+
 	    if ($this->result=$db->Execute("SELECT user_id FROM $this->tb WHERE user_id='$user_id'")) {
 		    if ($this->result->RecordCount()) {
 				return TRUE;
@@ -150,7 +150,7 @@ class UserConfig {
 	*/
 	function saveConfig($user_id='default',&$data) {
 		global $db;
-	    
+
 		if(empty($data)) return FALSE;
 
 		$this->buffer=serialize($data);
@@ -172,18 +172,18 @@ class UserConfig {
 	*/
 	function replaceItem($user_id='default',$type='',$value='') {
 	    global $db;
-	    
+
 		if(empty($type)||empty($value)) return FALSE;
-		
+
 		$this->buffer=$this->getConfig($user_id);
-		
+
 		if($this->buffer!=FALSE)  {
 		    $this->buffer[$type]=$value;
 			if($this->saveConfig($user_id,$this->buffer)) return TRUE;
 			   else return FALSE;
 		}else{
 		    return FALSE;
-		}	         
+		}
 	}
 	/**
 	* Checks if the configuration data is successfully preloaded.

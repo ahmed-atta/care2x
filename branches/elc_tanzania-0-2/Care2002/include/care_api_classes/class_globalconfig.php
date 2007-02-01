@@ -135,9 +135,9 @@ class GlobalConfig  extends Core{
 	* @return boolean
 	*/
 	function saveConfigArray(&$data_array,$filter='',$numeric=FALSE,$def_value='',$addslash=FALSE) {
-
+	   
 		if(!is_array($data_array)||empty($filter)) return FALSE;
-		
+		#var_dump($data_array);
 		while(list($x,$v)=each($data_array)){
 			# If index name fits in filter save the value
 			if(stristr($x,$filter)){

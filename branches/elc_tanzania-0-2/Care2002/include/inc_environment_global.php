@@ -42,7 +42,7 @@ define('NODATE_ORACLE','0001-01-01');
 define('NODATE_DEFAULT','0000-00-00');
 
 #
-# Admission module´s extended tabs. Care2x >= 2.0.2
+# Admission moduleï¿½s extended tabs. Care2x >= 2.0.2
 # Define to TRUE for extended tabs mode
 #
 define('ADMISSION_EXT_TABS',FALSE);
@@ -56,6 +56,8 @@ $template_theme='biju';
 #
 # Set the template path
 #
+if ($_GET['root_path'] || $_POST['root_path']) die();
+//require('roots.php');
 $template_path=$root_path.'gui/html_template/';
 
 #
@@ -77,7 +79,7 @@ require_once($root_path.'include/inc_vars_resolve.php');
 if(!defined('LANG_DEFAULT')) define ('LANG_DEFAULT','en');
 
 #
-# Establish db connection 
+# Establish db connection
 #
 require_once($root_path.'include/inc_db_makelink.php');
 

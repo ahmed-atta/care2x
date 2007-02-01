@@ -351,6 +351,7 @@ class Insurance_tz extends Core {
                   care_tz_company.end_date,
                   care_tz_company.invoice_flag,
                   care_tz_company.credit_preselection_flag,
+                  care_tz_company.hide_company_flag,
                   care_tz_insurance.plan as insurance
                 FROM care_tz_company
                   LEFT JOIN care_tz_insurance ON care_tz_insurance.company_id=care_tz_company.id
@@ -367,6 +368,7 @@ class Insurance_tz extends Core {
                   care_tz_company.end_date,
                   care_tz_company.invoice_flag,
                   care_tz_company.credit_preselection_flag,
+				  care_tz_company.hide_company_flag,
                   care_tz_insurance_types.name as InsuranceName,
                   care_tz_insurance.plan as insurance
                 FROM care_tz_company
@@ -558,10 +560,9 @@ class Insurance_tz extends Core {
 
 	function UpdateInsuranceCompany($dataarray){
     global $db;
-
+	$debug=FALSE;
     if(!$dataarray) return false;
-    $debug=false;
-    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if($dataarray['invoice_flag']) $invoice=1; else $invoice=0;
     if($dataarray['credit_preselection_flag']) $credit=1; else $credit=0;
     if($dataarray['hide_company_flag']) $hide=1; else $hide=0;
@@ -820,13 +821,16 @@ class Insurance_tz extends Core {
 
 //------------------------------------------------------------------------------
 
-  function ShowInsuranceList($mode) {
+  function ShowInsuranceList($mode,$SHOWALL) {
   global $LDID,$LDCompanyName,$LDCompanyName,$LDOptions;
     /**
     * Returns TRUE if this item number still exists in the database
     */
-
+	$bg="";
+	$ADDITIONALLY_INFO="";
+	$SHOWIT=FALSE;
     $this->insurance_array = $this->GetAllInsurancesAsArray(FALSE, FALSE);
+    //[hide_company_flag]
     echo '<table border="0" cellpadding="2" cellspacing="0">
     <tr bgcolor=#ffff66>
     	<td align="center" width="30">'.$LDID.'</td>
@@ -835,26 +839,45 @@ class Insurance_tz extends Core {
     </tr>
 
     ';
-    while(list($x,$v) = each($this->insurance_array))
-    {
-    	if($bg=="#ffffaa")
-    		$bg="#ffffdd";
-    	else
-    		$bg="#ffffaa";
-      echo '
-      <tr bgcolor='.$bg.'>
-      	<td>'.$v['id'].'</td>
-      	<td>'.$v['name'].'</td>';
 
-	if($mode=='report')
-		echo '
-      <td><div align="center"><a href="insurance_reports_company_contracts.php?id='.$v['id'].'"><img src="../../gui/img/common/default/documents.gif" als="Show contracts" width="16" height="16" border="0"></a></td></tr>
-      </tr>';
-	else
-		echo '
-      <td><div align="center"><a href="insurance_company_tz_contracts.php?id='.$v['id'].'"><img src="../../gui/img/common/default/documents.gif" als="Show contracts" width="16" height="16" border="0"></a></td>
-      </tr>';
-  	}
+    while(list($x,$v) = each($this->insurance_array)) {
+      // Do we have to show also the hidden companies?
+
+      if ($SHOWALL==1) {
+		$SHOWIT = TRUE;
+      } else if ( ($SHOWALL==0 && $v['hide_company_flag']==1) ) {
+    	$SHOWIT = FALSE;
+      } else {
+		$SHOWIT = TRUE;
+      }
+      //echo $v['name'].":Show all is set to: $SHOWALL and hide_company_flag is set to ".$v['hide_company_flag']."-> SHOWIT is set to $SHOWIT<br>";
+      if ( $SHOWIT )	{
+
+      	  if ($v['hide_company_flag']) {
+      	  	$ADDITIONALLY_INFO="<i>hidden</i>";
+      	  } else {
+      	  	$ADDITIONALLY_INFO="";
+      	  }
+
+	 	  if($bg=="#ffffaa")
+				$bg="#ffffdd";
+		  else
+				$bg="#ffffaa";
+		  echo '
+		  <tr bgcolor='.$bg.'>
+		  	<td>'.$v['id'].'</td>
+		  	<td>'.$v['name'].'</td>';
+
+				if($mode=='report')
+					echo '
+			      <td><div align="center"><a href="insurance_reports_company_contracts.php?id='.$v['id'].'"><img src="../../gui/img/common/default/documents.gif" alt="Show contracts" width="16" height="16" border="0"></a></td></tr>
+			      </tr>';
+				else
+					echo '
+			      <td><div align="center"><a href="insurance_company_tz_contracts.php?id='.$v['id'].'"><img src="../../gui/img/common/default/documents.gif" alt="Show contracts" width="16" height="16" border="0"></a>'.$ADDITIONALLY_INFO.'</td>
+			      </tr>';
+      } // end of if
+  	} // end of while
   	echo '</table>';
     return true;
   }

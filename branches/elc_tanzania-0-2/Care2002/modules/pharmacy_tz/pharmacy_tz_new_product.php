@@ -27,7 +27,7 @@ $lang_tables[]='pharmacy.php';
 define('NO_2LEVEL_CHK',1);
 require($root_path.'include/inc_front_chain_lang.php');
 
-$debug=false;
+$debug=true;
 
 if ($debug) {
   echo "debugging mode is ON<br>";
@@ -38,7 +38,6 @@ if ($debug) {
   }
 
   print_debug_info ("mode",$mode);
-
   print_debug_info("Peadric check box", $is_peadric);
   print_debug_info("Adult check box", $is_adult);
   print_debug_info("Other check box", $is_other);
@@ -202,10 +201,11 @@ if ( !empty($mode) && !$ERROR ) {
   if ($mode=="delete") {
     if ($product_obj -> item_number_exists ($selian_item_number)) {
       // The item still exists in the database!
-      $product_obj->delete_item();
+      $product_obj->delete_item($selian_item_number);
       $MSG.="Item with code \"".$selian_item_number."\" is deleted now<br>";
     } else {
       // This is a new item
+    
       // There is no item with such an item number in the database
       $ERROR_MSG.="Something is wrong, the item code \"".$selian_item_number."\" is not available in the database! <br>";
       $ERROR_SELIAN_ITEM_NUMBER = TRUE;

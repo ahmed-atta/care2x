@@ -59,10 +59,10 @@ A:visited:hover {color: #cc0033;}
 
 <font class="warnprompt">  
                               <?php if ($ERROR) echo $ERROR_MSG?><br> 
-                              <?php if ($DELETE_FORM) echo "WARNING! If you press OK, this item with code \"".$selian_item_number."\" will be deletet!<br>"?>
+                              <?php if ($DELETE_FORM) echo "WARNING! If you press OK, this item with code \"".$selian_item_number."\" will be deleted!<br>"?>
 </font>
 
-<form ENCTYPE="multipart/form-data" action="pharmacy_tz_new_product.php" method="post" name="inputform">
+<form ENCTYPE="multipart/form-data" action="pharmacy_tz_new_product.php" method="get" name="inputform">
 
 	
 	      <table border=0 cellspacing=1 cellpadding=3>
@@ -171,7 +171,8 @@ A:visited:hover {color: #cc0033;}
                             </select> 
                         <?php } ?>   
                 <?php } ?>                        
-				        <input type="hidden" name="lang" value="en">                
+				        <input type="hidden" name="lang" value="en">   
+				        <input type="hidden" name="selian_item_number" value="<?PHP echo $selian_item_number;?>"  size=20 maxlength=20>             
                 <input type="submit" value="<?php echo $LDOK; ?>">
                 </td>
               </tr>

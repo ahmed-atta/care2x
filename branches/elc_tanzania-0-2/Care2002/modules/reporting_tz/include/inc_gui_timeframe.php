@@ -15,7 +15,7 @@
 				                </select>
 					        </label>
 	                        <label><?php echo $LDYear; ?>
-	                        <select name="year">
+	                        <select name="year" size="1">
 							<option <?php if ($ARR_SELECT_YEAR[$curr_year]) echo "selected";?> value="<?php echo $ARR_YEAR[$curr_year];?>"> <?php echo $ARR_YEAR[$curr_year];?></option>
 							<option <?php if ($ARR_SELECT_YEAR[$curr_year-1]) echo "selected";?> value="<?php echo $ARR_YEAR[$curr_year-1];?>"> <?php echo $ARR_YEAR[$curr_year-1];?></option>
 							<option <?php if ($ARR_SELECT_YEAR[$curr_year-2]) echo "selected";?> value="<?php echo $ARR_YEAR[$curr_year-2];?>"> <?php echo $ARR_YEAR[$curr_year-2];?></option>

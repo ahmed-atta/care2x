@@ -264,6 +264,7 @@ $LDSummary='Summary';
 $LDNoCompanyCredit='[no company credit]';
 $LDNoPendingBills='No pending bills available';
 $LDTSH='TSH';
+$LDShowAllQuestion='Some Companies could be on status hidden. Click here to show all:';
 
 $LDContractStartEnd='Contract (Start/End):';
 $LDCancelContract='Cancel contract';
@@ -303,7 +304,7 @@ $LDTotalSum='TOTAL SUM:';
 $LDCity='City:';
 $LDNothingToDo='Nothing todo for';
 $LDTranferPendingBillArchive='To transfere this pending bill into the archive:';
-$LDDone='It´s done! Move the form to the archive';
+$LDDone='Itï¿½s done! Move the form to the archive';
 $LDPrescriptionOther='Prescriptions/Other';
 
 $LDEncounterNumber='Encounter Number:';

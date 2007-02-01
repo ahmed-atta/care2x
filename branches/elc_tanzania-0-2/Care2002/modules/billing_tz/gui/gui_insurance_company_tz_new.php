@@ -8,7 +8,7 @@
  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
   	<script language="javascript" >
-<!-- 
+<!--
 function gethelp(x,s,x1,x2,x3,x4)
 {
 	if (!x) x="";
@@ -17,7 +17,7 @@ function gethelp(x,s,x1,x2,x3,x4)
 	window.helpwin.moveTo(0,0);
 }
 // -->
-</script> 
+</script>
 <link rel="stylesheet" href="../../css/themes/default/default.css" type="text/css">
 <script language="javascript" src="../../js/hilitebu.js"></script>
 
@@ -49,7 +49,7 @@ function closewin()
 </script>
 
 
- 
+
 </HEAD>
 <BODY bgcolor=#ffffff link=#000066 alink=#cc0000 vlink=#000066  >
 <table width=100% border=0 cellspacing=0 height=100%>
@@ -90,7 +90,7 @@ function closewin()
 					<td><?php $insurance_tz->ShowRedIfError(''.$LDInsurancePreselection.'',$error['insurance']);?>:</td>
 					<td><?php $insurance_tz->ShowInsuranceTypesDropDown('insurance',$_POST['insurance'],'WITH_EMPTY_FIRST_FIELD'); ?></td>
 					<td><input type="checkbox" name="invoice_flag" <?php if($_POST['invoice_flag']) echo 'checked'; ?>> <?php echo $LDPaybyInvoice; ?></td>
-					<td><input type="hidden" name="sitetarget" value="menu"><input type="hidden" name="mode" value="insert"><input type="checkbox" name="credit_preselection_flag" <?php if($_POST['credit_preselection_flag']) echo 'checked'; ?>> <?php echo $LDGetsCompanyCredit; ?></td>
+					<td><input type="hidden" name="sitetarget" value="menu"><input type="hidden" name="mode" value="insert"><input type="checkbox" name="credit_preselection_flag" checked  <?php if($_POST['credit_preselection_flag']) echo 'checked'; ?>> <?php echo $LDGetsCompanyCredit; ?></td>
 				</tr>
 				<tr bgcolor=ffffee>
 					<td colspan="2"><input type="button" onClick="document.forms[0].sitetarget.value='menu'; document.forms[0].submit();" value="<?php echo $LDCreateCompanyGoBack; ?>"></td>
@@ -107,10 +107,10 @@ function closewin()
 			<a href="../../main/startframe.php?ntid=false&lang=$lang"><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
 
 			<p>
-			</blockquote>									
+			</blockquote>
 		</td>
 	</tr>
-	
+
 		<tr valign=top >
 		<td bgcolor=#cccccc>
 							<table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#cfcfcf">
@@ -132,7 +132,7 @@ function openCreditsWindow() {
 //  Script End -->
 </script>
 
-	
+
  <a href="http://www.care2x.org" target=_new>CARE2X 2nd Generation pre-deployment 2.0.2</a> :: <a href="../../legal_gnu_gpl.htm" target=_new> License</a> ::
  <a href=mailto:info@care2x.org>Contact</???a>  :: <a href="../../language/en/en_privacy.htm" target="pp"> Our Privacy Policy </a> ::
  <a href="../../docs/show_legal.php?lang=$lang" target="lgl"> Legal </a> ::
@@ -151,7 +151,7 @@ function openCreditsWindow() {
 					</td>
 
 	</tr>
-	
+
 	</tbody>
  </table>
 

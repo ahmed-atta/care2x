@@ -5,7 +5,7 @@
 */
 
 /**
-* selian reporting methods. 
+* selian reporting methods.
 * Note this class should be instantiated only after a "$db" adodb  connector object
 * has been established by an adodb instance
 * @author Robert Meggle (www.MEROTECH.de: meggle@merotech.de)
@@ -15,7 +15,7 @@
 */
 
 /**
-* Include the class_report if it´s not done so far...
+* Include the class_report if itï¿½s not done so far...
 */
 require_once($root_path.'include/care_api_classes/class_report.php');
 
@@ -23,7 +23,7 @@ require_once($root_path.'include/care_api_classes/class_report.php');
 * Class and its members..
 */
 class selianreport extends report {
-  
+
   /**
   * constructor
   */
@@ -31,26 +31,26 @@ class selianreport extends report {
     global $db;
     $this->debug=FALSE;
     $this->debug==TRUE ? $db->debug=TRUE : $db->debug=FALSE;
-	}    
-	
+	}
+
 	function GetPIDOfLaspedContract($days='') {
 	  global $db;
     $rep_obj = new report();
     $tmp_reporting_table_1 = $rep_obj -> SetReportingLink('care_tz_insurance','PID','care_person','pid');
     $tmp_reporting_table_2 = $rep_obj -> TMP_GroupBy($tmp_reporting_table_1,'care_tz_insurance_PID');
     $rep_obj -> DisconnectReportingTable($tmp_reporting_table_1);
-    
+
     $now = time();
     $seconds = $days * 24 * 60;
     $asked_time = $now-$seconds;
-    
+
     $this->setTable($tmp_reporting_table_2);
     $this->sql="SELECT selian_pid, date_reg, name_first, name_2, name_3, name_middle, name_last, name_maiden, name_others FROM $this->coretable WHERE end_date < $asked_time";
     $mysql_ptr = $db->Execute($this->sql);
 	}
-	
+
 	//------------------------------------------------------------------------------------------------------------------------
-	
+
 	function Display_OPD_Diagnostic($start,$end) {
 	global $db;
 	global $PRINTOUT;
@@ -61,27 +61,27 @@ class selianreport extends report {
 	$sql_timeframe = "  ( timestamp>=".$start." AND timestamp<=".$end.") ";
 
 	$tmp_tbl_OPD_diagnostic = $rep_obj -> SetReportingLink('care_person','pid', 'care_tz_diagnosis','PID');
-	
+
 	// get the Diagnostic-Codes, Diagnostic-full-name and total out of this table:
 	$sql = "SELECT ICD_10_code, ICD_10_description, UNIX_TIMESTAMP(date_birth) as date_birth
 				FROM $tmp_tbl_OPD_diagnostic WHERE $sql_timeframe
 				group by ICD_10_code";
-	
+
 	if ($rs_ptr = $db->Execute($sql))
 		$res_array = $rs_ptr->GetArray();
-	
+
 	if (!$res_array) echo "<font color=\"red\">".$LDNoDiagnosticsResults."</font><br><br>";
-	
-	$SHOW_COLORS = $printout ? TRUE : FALSE;  
+
+	$SHOW_COLORS = $printout ? TRUE : FALSE;
 	$bg_col_marker=TRUE;
-	
+
 	while (list ($i,$v)=each($res_array)) {
 		if ($SHOW_COLORS) {
 			if ($bg_col_marker) {
-				echo "<tr bgcolor=#ffffaa>";	
+				echo "<tr bgcolor=#ffffaa>";
 				$bg_col_marker = FALSE;
 			} else {
-				echo "<tr bgcolor=#ffffdd>";	
+				echo "<tr bgcolor=#ffffdd>";
 				$bg_col_marker = TRUE;
 			}
 		}
@@ -89,54 +89,54 @@ class selianreport extends report {
 		$icd_10_description = $v['ICD_10_description'];
 		echo "<td>$icd_10_code</td>";
 		echo "<td>$icd_10_description</td>";
-		
+
 		/**
 		 * Amount by age
 		 */
-		
-		
-		$sql = "SELECT count(date_birth) as total From $tmp_tbl_OPD_diagnostic WHERE 
+
+
+		$sql = "SELECT count(date_birth) as total From $tmp_tbl_OPD_diagnostic WHERE
 			    	ICD_10_code='".$icd_10_code."' AND $sql_timeframe";
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$total = $row['total'];
-		
-		
-		
-		$sql = "SELECT count(date_birth) as total_under_age From $tmp_tbl_OPD_diagnostic WHERE 
+
+
+
+		$sql = "SELECT count(date_birth) as total_under_age From $tmp_tbl_OPD_diagnostic WHERE
 					UNIX_TIMESTAMP(date_birth) <= (now() - DATE_SUB(UNIX_TIMESTAMP(date_birth), INTERVAL 5 year))
-			    AND 
+			    AND
 			    	ICD_10_code='".$icd_10_code."' AND $sql_timeframe";
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$total_under_age =  $row['total_under_age'];
-		
+
 		$total_over_age = $total - $total_under_age;
-		
+
 		echo "<td>$total_under_age</td>";
 		echo "<td>$total_over_age</td>";
-		
-	
+
+
 		/**
 		 * Amount by sex
 		 */
-		
-		$sql = "SELECT count(date_birth) as total_female From $tmp_tbl_OPD_diagnostic WHERE 
+
+		$sql = "SELECT count(date_birth) as total_female From $tmp_tbl_OPD_diagnostic WHERE
 					sex='f'
-			    AND 
+			    AND
 			    	ICD_10_code='".$icd_10_code."' AND $sql_timeframe";
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$total_female =  $row['total_female'];
-		
-		$sql = "SELECT count(date_birth) as total_male From $tmp_tbl_OPD_diagnostic WHERE 
+
+		$sql = "SELECT count(date_birth) as total_male From $tmp_tbl_OPD_diagnostic WHERE
 					sex='m'
-			    AND 
+			    AND
 			    	ICD_10_code='".$icd_10_code."' AND $sql_timeframe";
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$total_male =  $row['total_male'];
-		
+
 		echo '<td width="69">'.$total_male.'</td>';
 		echo '<td width="69">'.$total_female.'</td>';
 		echo '<td>'.$total.'</td>';
@@ -145,62 +145,62 @@ class selianreport extends report {
 		$rep_obj->DisconnectReportingTable($tmp_tbl_OPD_diagnostic);
 		return 1;
 	}
-	
-	
+
+
 	//------------------------------------------------------------------------------------------------------------------------
-	
+
 	function Display_OPD_Summary($start,$end) {
 		global $db;
-		
+
 		$WITH_TIMEFRAME=FALSE;
-		
+
 		if (func_num_args()) {
-			
+
 			$start=func_get_arg(0);
-			$end=func_get_arg(1);	
+			$end=func_get_arg(1);
 			$WITH_TIMEFRAME=TRUE;
 		}
-		
-						
+
+
 		$rep_obj = new selianreport();
-		
-		$tmp_tbl_OPD_summary = $rep_obj -> SetReportingLink('care_person','pid', 'care_tz_diagnosis','PID');		
+
+		$tmp_tbl_OPD_summary = $rep_obj -> SetReportingLink('care_person','pid', 'care_tz_diagnosis','PID');
 		//$tmp_tbl_allpatients = $rep_obj -> SetReportingTable('care_person');
-		
-		$debug=FALSE; 
-		($debug)?$db->debug=TRUE:$db->debug=FALSE;		
+
+		$debug=FALSE;
+		($debug)?$db->debug=TRUE:$db->debug=FALSE;
 
 		$arr_ret['return']['underage'];
 		$arr_ret['return']['adult'];
 		$arr_ret['return']['male'];
 		$arr_ret['return']['female'];
 		$arr_ret['return']['total'];
-		
+
 		$arr_ret['NewRegistration']['underage'];
 		$arr_ret['NewRegistration']['adult'];
 		$arr_ret['NewRegistration']['male'];
 		$arr_ret['NewRegistration']['female'];
 		$arr_ret['NewRegistration']['total'];
-		
+
 		$arr_ret['Total']['underage'];
 		$arr_ret['Total']['adult'];
 		$arr_ret['Total']['male'];
 		$arr_ret['Total']['female'];
 		$arr_ret['Total']['total'];
-		
+
 		$arr_ret['Total_Pedriatics']['underage'];
-		
+
 		$arr_ret['revisit']['underage'];
 		$arr_ret['revisit']['adult'];
 		$arr_ret['revisit']['male'];
 		$arr_ret['revisit']['female'];
 		$arr_ret['revisit']['total'];
-		
+
 		/****************************************************************************************************
-		 *  Revisit´s under 5
+		 *  Revisitï¿½s under 5
 		 */
-		
-		$sql = "SELECT count(*) AS return_underage FROM $tmp_tbl_OPD_summary 
+
+		$sql = "SELECT count(*) AS return_underage FROM $tmp_tbl_OPD_summary
 					   WHERE type='new' AND UNIX_TIMESTAMP(date_birth) > (UNIX_TIMESTAMP(DATE_SUB(CURDATE(), INTERVAL 5 year))) ";
 		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
 		$rs_ptr = $db->Execute($sql);
@@ -210,216 +210,216 @@ class selianreport extends report {
 		/**
 		 * Total revisits
 		 */
-		$sql = "SELECT count(*) AS total FROM $tmp_tbl_OPD_summary 
+		$sql = "SELECT count(*) AS total FROM $tmp_tbl_OPD_summary
 					   WHERE type='new'";
-		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";					   
-	
+		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$arr_ret['return']['total'] =  $row['total'];
-		
+
 		/**
-		 * Revist´s over 5
+		 * Revistï¿½s over 5
 		 */
 		$arr_ret['return']['adult'] = $arr_ret['return']['total'] - $arr_ret['return']['underage'];
-		
+
 		/**
-		 * Total male revisits 
+		 * Total male revisits
 		 */
-		$sql = "SELECT count(*) AS male FROM $tmp_tbl_OPD_summary 
+		$sql = "SELECT count(*) AS male FROM $tmp_tbl_OPD_summary
 					   WHERE type='new' and sex='m'";
-		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";			   
-	
+		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$arr_ret['return']['male'] =  $row['male'];
-		
+
 		/**
-		 * Total female revisits 
+		 * Total female revisits
 		 */
-		$sql = "SELECT count(*) AS female FROM $tmp_tbl_OPD_summary 
+		$sql = "SELECT count(*) AS female FROM $tmp_tbl_OPD_summary
 					   WHERE type='new' and sex='f'";
-		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";			   
-	
+		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$arr_ret['return']['female'] =  $row['female'];
-		
+
 
 		/****************************************************************************************************
-		 *  New Registration´s under 5
+		 *  New Registrationï¿½s under 5
 		 */
-		
-		$sql = "SELECT count(*) AS return_underage FROM $tmp_tbl_OPD_summary 
+
+		$sql = "SELECT count(*) AS return_underage FROM $tmp_tbl_OPD_summary
 					   WHERE type='new patient' AND UNIX_TIMESTAMP(date_birth) > (UNIX_TIMESTAMP(DATE_SUB(CURDATE(), INTERVAL 5 year)))";
-		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";					   
-	
+		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$arr_ret['NewRegistration']['underage'] =  $row['return_underage'];
-		
+
 		/**
 		 * Total New Registration
 		 */
-		$sql = "SELECT count(*) AS Total FROM $tmp_tbl_OPD_summary 
+		$sql = "SELECT count(*) AS Total FROM $tmp_tbl_OPD_summary
 					   WHERE type='new patient' ";
-		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";			   
-	
+		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$arr_ret['NewRegistration']['total'] =  $row['Total'];
-		
+
 		/**
-		 * New Registration´s over 5
+		 * New Registrationï¿½s over 5
 		 */
 		$arr_ret['NewRegistration']['adult'] = $arr_ret['NewRegistration']['total'] - $arr_ret['NewRegistration']['underage'];
 
 		/**
 		 * Total male New Registration
 		 */
-		$sql = "SELECT count(*) AS male FROM $tmp_tbl_OPD_summary 
+		$sql = "SELECT count(*) AS male FROM $tmp_tbl_OPD_summary
 					   WHERE type='new patient' and sex='m'";
-		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";			   
-	
+		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$arr_ret['NewRegistration']['male'] =  $row['male'];
-	
+
 		/**
 		 * Total female New Registration
 		 */
-		$sql = "SELECT count(*) AS female FROM $tmp_tbl_OPD_summary 
+		$sql = "SELECT count(*) AS female FROM $tmp_tbl_OPD_summary
 					   WHERE type='new patient'  and sex='f'";
-		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";			   
-	
+		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$arr_ret['NewRegistration']['female'] =  $row['female'];
 
 		/****************************************************************************************************
-		 *  Total Registration´s under 5
+		 *  Total Registrationï¿½s under 5
 		 */
-		
-		$sql = "SELECT count(*) AS Total_underage FROM $tmp_tbl_OPD_summary 
+
+		$sql = "SELECT count(*) AS Total_underage FROM $tmp_tbl_OPD_summary
 					   WHERE UNIX_TIMESTAMP(date_birth) > (UNIX_TIMESTAMP(DATE_SUB(CURDATE(), INTERVAL 5 year)))";
-		if ($WITH_TIMEFRAME) $sql.=" AND (timestamp>=".$start." AND timestamp<=".$end.")";					   
-	
+		if ($WITH_TIMEFRAME) $sql.=" AND (timestamp>=".$start." AND timestamp<=".$end.")";
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$arr_ret['Total']['underage'] =  $row['Total_underage'];
-		
+
 		/**
 		 * Total New Registration
 		 */
 		$sql = "SELECT count(*) AS Total FROM $tmp_tbl_OPD_summary ";
 		if ($WITH_TIMEFRAME) $sql.=" WHERE ( timestamp>=".$start." AND timestamp<=".$end.")";
-	
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$arr_ret['Total']['total'] =  $row['Total'];
-		
+
 		/**
-		 * New Registration´s over 5
+		 * New Registrationï¿½s over 5
 		 */
 		$arr_ret['Total']['adult'] = $arr_ret['Total']['total'] - $arr_ret['Total']['underage'];
 
 		/**
 		 * Total male New Registration
 		 */
-		$sql = "SELECT count(*) AS Total_male FROM $tmp_tbl_OPD_summary 
+		$sql = "SELECT count(*) AS Total_male FROM $tmp_tbl_OPD_summary
 					   WHERE sex='m'";
-		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";			   
-	
+		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$arr_ret['Total']['male'] =  $row['Total_male'];
-	
+
 		/**
 		 * Total female New Registration
 		 */
-		$sql = "SELECT count(*) AS Total_female FROM $tmp_tbl_OPD_summary 
+		$sql = "SELECT count(*) AS Total_female FROM $tmp_tbl_OPD_summary
 					   WHERE sex='f'";
-		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";					   
-	
+		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
-		$arr_ret['Total']['female'] =  $row['Total_female'];		
-		
+		$arr_ret['Total']['female'] =  $row['Total_female'];
+
 		/**
 		 * **************************************************************************************************
 		 * Total Pedriatics
 		 */
-		$sql = "SELECT count(*) AS Total_underage FROM $tmp_tbl_OPD_summary 
+		$sql = "SELECT count(*) AS Total_underage FROM $tmp_tbl_OPD_summary
 					   WHERE UNIX_TIMESTAMP(date_birth) > (UNIX_TIMESTAMP(DATE_SUB(CURDATE(), INTERVAL 5 year)))";
-		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";			   
-	
+		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
-		$arr_ret['Total_Pedriatics']['underage'] =  $row['Total_underage'];		
+		$arr_ret['Total_Pedriatics']['underage'] =  $row['Total_underage'];
 
 		/****************************************************************************************************
 		 *  Views for the same reasons:
 		 */
-		
-		$sql = "SELECT count(*) AS return_underage FROM $tmp_tbl_OPD_summary 
+
+		$sql = "SELECT count(*) AS return_underage FROM $tmp_tbl_OPD_summary
 					   WHERE type='revisit' AND UNIX_TIMESTAMP(date_birth) > (UNIX_TIMESTAMP(DATE_SUB(CURDATE(), INTERVAL 5 year)))
 		       ";
 		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
-			       
-	
+
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$arr_ret['revisit']['underage'] = (empty($row['return_underage'])) ? 0 : $row['return_underage'];
 		//$arr_ret['revisit']['underage'] =  $row['return_underage'];
-		
+
 		/**
 		 * Total revisits
 		 */
-		$sql = "SELECT count(*) AS total FROM $tmp_tbl_OPD_summary 
+		$sql = "SELECT count(*) AS total FROM $tmp_tbl_OPD_summary
 					   WHERE type='revisit'";
-		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";			   
-		$sql .= " GROUP BY ICD_10_code";						   
-			    
-	
+		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
+		$sql .= " GROUP BY ICD_10_code";
+
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$arr_ret['revisit']['total'] =  (empty($row['total']))? 0 : $row['total'];
-		
+
 		/**
-		 * Revist´s over 5
+		 * Revistï¿½s over 5
 		 */
 		$arr_ret['revisit']['adult'] = $arr_ret['revisit']['total'] - $arr_ret['revisit']['underage'];
-		
-		/**
-		 * Total male revisits 
-		 */
-		$sql = "SELECT count(*) AS male FROM $tmp_tbl_OPD_summary 
-					   WHERE type='revisit' and sex='m'";
-		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";			   
-		$sql .= " GROUP BY ICD_10_code";						   
 
-	
+		/**
+		 * Total male revisits
+		 */
+		$sql = "SELECT count(*) AS male FROM $tmp_tbl_OPD_summary
+					   WHERE type='revisit' and sex='m'";
+		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
+		$sql .= " GROUP BY ICD_10_code";
+
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
 		$arr_ret['revisit']['male'] =  (empty($row['male'])) ? 0 : $row['male'];
-		
+
 		/**
-		 * Total female revisits 
+		 * Total female revisits
 		 */
-		$sql = "SELECT count(*) AS female FROM $tmp_tbl_OPD_summary 
+		$sql = "SELECT count(*) AS female FROM $tmp_tbl_OPD_summary
 					   WHERE type='revisit' and sex='f'";
-		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";					   
-		$sql .= " GROUP BY ICD_10_code";						   
-				
-	
+		if ($WITH_TIMEFRAME) $sql.=" AND ( timestamp>=".$start." AND timestamp<=".$end.")";
+		$sql .= " GROUP BY ICD_10_code";
+
+
 		$rs_ptr = $db->Execute($sql);
 		$row=$rs_ptr->FetchRow();
-		$arr_ret['revisit']['female'] =  (empty($row['female'])) ? 0 : $row['female'];		
-		
-	$rep_obj->DisconnectReportingTable($tmp_tbl_OPD_summary);	
-	
+		$arr_ret['revisit']['female'] =  (empty($row['female'])) ? 0 : $row['female'];
+
+	$rep_obj->DisconnectReportingTable($tmp_tbl_OPD_summary);
+
 	return $arr_ret;
-	
+
 	}
 
 	//------------------------------------------------------------------------------------------------------------------------
@@ -427,14 +427,14 @@ class selianreport extends report {
 	 * Laboratory-Section
 	 */
 	//------------------------------------------------------------------------------------------------------------------------
-	
+
 	function GetAllLaboratorySections() {
-		
+
 	}
-	
+
 	//------------------------------------------------------------------------------------------------------------------------
 	function Display_Billing_Summary() {
-		
+
 	}
 
 	//------------------------------------------------------------------------------------------------------------------------
@@ -446,9 +446,9 @@ class selianreport extends report {
     	global $PRINTOUT;
     	global $LDDailyFinancialRecordOPD,$LDDate,$LDInvoice,$LDFileTSH,$LDMatTSH,$LDLabTSH,
     	       $LDXRayTSH,$LDDawaTSH,$LDProcSurgTSH,$LDDressTSH,$LDMengTSH,$LDJumlaTSH;
-    	       
+
 		// Table definition will be organized by the variable $table_head from here:
-		
+
 		// headline:
 		$table_head = "<tr>\n";
 		if (!$PRINTOUT)
@@ -456,7 +456,7 @@ class selianreport extends report {
 		else
 			$table_head .= "<td colspan=\"11\" align=\"center\">".$LDDailyFinancialRecordOPD."</td>\n";
 		$table_head.="</tr>\n";
-		
+
 		$table_head.="<tr>\n";
 		if (!$PRINTOUT) {
 			$table_head .= "<td bgcolor=\"#CC9933\">".$LDDate."</td>\n";
@@ -485,19 +485,19 @@ class selianreport extends report {
 			$table_head .= "<td>".$LDJumlaTSH."Jumla(TSH)</td>\n" ;
 			$table_head.="</tr>\n";
 		}
-		echo $table_head;    	
-    	
+		echo $table_head;
+
     }
 
 	function _get_requested_day($start_time_frame, $day) {
 		/**
 		 * Private function: getting the exact date, beginning with start_time_frame (UNIX timestamp)
-		 * adding the value given in the variable "day" 
+		 * adding the value given in the variable "day"
 		 * Return value is an UNIX-Timestamp
 		 */
 		 $sec_to_add = $day * 24 * 60 * 60;
 		 return $requested_day = $start_time_frame + $sec_to_add;
-	}	
+	}
 
 	function _get_amount_of($start_timeframe,$day,$filter,$total_summary) {
 		$sql_filter="";
@@ -517,7 +517,7 @@ class selianreport extends report {
 
 		global $db;
 		global $LDInvoice,$LDfile,$LDmat,$LDlab,$LDxray,$LDdawa,$LDsurg,$LDdress,$LDmeng,$LDjumla;
-		
+
 		($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 		$sql="SELECT SUM(price*amount) as RetVal FROM tmp_billing_master  ";
 		switch ($filter) {
@@ -533,7 +533,7 @@ class selianreport extends report {
 				break;
 			case "mat": //Consultation
 				if ($debug) echo $LDmat."<br>";
-				
+
 				$sql_filter="WHERE purchasing_class='service' AND item_number<>'R01' AND item_number<>'R02' AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
 
 				break;
@@ -561,7 +561,7 @@ class selianreport extends report {
 			case "meng"://returns
 			// returns: all patients, what got the service item R02
 				if ($debug) echo "meng<br>";
-				
+
    				$sql_filter="WHERE purchasing_class='service' AND item_number='R02' AND $curr_day_start <=date_change AND $curr_day_end>=date_change";
 				break;
 			case "jumla":
@@ -570,7 +570,7 @@ class selianreport extends report {
 				break;
 			default:
 				return FALSE;
-			
+
 		}
 		$db_obj = $db->Execute($sql.$sql_filter);
 		$row=$db_obj->FetchRow();
@@ -581,9 +581,9 @@ class selianreport extends report {
 			$row_jumla=$db_obj_jumla->FetchRow();
 			if ($jumla_lab=$row_jumla['RetVal'])
 				$return_value +=$jumla_lab;
-			
+
 		}
-		
+
 
 		if ($return_value) {
 			return number_format($return_value,0,'.',',');
@@ -607,13 +607,13 @@ class selianreport extends report {
 				  care_tz_billing_archive_elem.is_paid,
 				  care_tz_billing_archive_elem.amount,
 				  care_tz_billing_archive_elem.price,
-				  care_tz_billing_archive_elem.description,		
+				  care_tz_billing_archive_elem.description,
 				  care_tz_drugsandservices.purchasing_class,
-				  care_tz_drugsandservices.item_number,				  		
+				  care_tz_drugsandservices.item_number,
           		  care_encounter.encounter_nr,
           		  care_encounter.pid
 				from care_tz_billing_archive
-				INNER JOIN care_tz_billing_archive_elem on care_tz_billing_archive.nr=care_tz_billing_archive_elem.nr		
+				INNER JOIN care_tz_billing_archive_elem on care_tz_billing_archive.nr=care_tz_billing_archive_elem.nr
 				INNER JOIN care_encounter_prescription on care_encounter_prescription.bill_number=care_tz_billing_archive_elem.nr
 				                                          and care_encounter_prescription.nr=care_tz_billing_archive_elem.prescriptions_nr
 				INNER JOIN care_tz_drugsandservices ON care_tz_drugsandservices.item_id = care_encounter_prescription.article_item_number
@@ -623,19 +623,19 @@ class selianreport extends report {
 			return TRUE;
 		else
 			return FALSE;
-		
+
 	}
 
 	function DisplayBillingTestSummary($start_timeframe, $end_timeframe){
 		global $db;
-		global $PRINTOUT; 
+		global $PRINTOUT;
 		global $LDLookingforFinancialReports,$LDstarttime,$LDendtime;
 		$first_day_of_req_month=0;
 		$last_day_of_req_month=0;
 		$end_timeframe += (24*60*60-1);
 		$this->_Create_financial_tmp_master_table($start_timeframe, $end_timeframe);
 		echo $LDLookingforFinancialReports.": ".$LDstarttime.": ".date("d.m.y :: G:i:s",$start_timeframe)." ".$LDendtime.": ".date("d.m.y :: G:i:s",$end_timeframe)."<br>";
-		
+
 		$first_day_of_req_month = date ("d",$start_timeframe);
 		$last_day_of_req_month = date ("d",$end_timeframe);
 		$table.="<tr>\n";
@@ -651,7 +651,7 @@ class selianreport extends report {
 					$italic_tag_open="";
 					$italic_tag_close="";
 				} // end of if ($current_day > time())
-				
+
 				$table .= "<td bgcolor=\"$bg_color\" align=\"right\">".$italic_tag_open.date("j F Y",$this->_get_requested_day($start_timeframe, $day-1, FALSE)).$italic_tag_close."</td>\n";
 				$table .= "<td bgcolor=\"$bg_color\" align=\"right\">".$italic_tag_open.$this->_get_amount_of($start_timeframe,$day,"invoice", FALSE).$italic_tag_close."</td>\n";
 				$table .= "<td bgcolor=\"$bg_color\" align=\"right\">".$italic_tag_open.$this->_get_amount_of($start_timeframe,$day,"file", FALSE).$italic_tag_close."</td>\n";
@@ -663,7 +663,7 @@ class selianreport extends report {
 				$table .= "<td bgcolor=\"$bg_color\" align=\"right\">".$italic_tag_open.$this->_get_amount_of($start_timeframe,$day,"dress", FALSE).$italic_tag_close."</td>\n";
 				$table .= "<td bgcolor=\"$bg_color\" align=\"right\">".$italic_tag_open.$this->_get_amount_of($start_timeframe,$day,"meng", FALSE).$italic_tag_close."</td>\n";
 				$table .= "<td bgcolor=\"$bg_color\" align=\"right\">".$italic_tag_open.$this->_get_amount_of($start_timeframe,$day,"jumla", FALSE).$italic_tag_close."</td>\n";
-				
+
 				$table.="</tr>\n";
 		}
 		$table.="<tr>\n";
@@ -679,14 +679,14 @@ class selianreport extends report {
 		$table .= "<td bgcolor=\"$bg_color\" align=\"right\">".$italic_tag_open.$this->_get_amount_of($start_timeframe,1,"dress", TRUE).$italic_tag_close."</td>\n";
 		$table .= "<td bgcolor=\"$bg_color\" align=\"right\">".$italic_tag_open.$this->_get_amount_of($start_timeframe,1,"meng", TRUE).$italic_tag_close."</td>\n";
 		$table .= "<td bgcolor=\"$bg_color\" align=\"right\">".$italic_tag_open.$this->_get_amount_of($start_timeframe,1,"jumla", TRUE).$italic_tag_close."</td>\n";
-		
-		$table.="</tr>\n";		
+
 		$table.="</tr>\n";
-		echo $table;				
+		$table.="</tr>\n";
+		echo $table;
 	}
   	function DisplayBillingResultRows($start_timeframe, $end_timeframe){
-  		
-  	}	
+
+  	}
 
 	//------------------------------------------------------------------------------------------------------------------------
 	/**
@@ -695,13 +695,13 @@ class selianreport extends report {
 	//--
     function DisplayCompanyTableHead(){
 		// Table definition will be organized by the variable $table_head from here:
-		
+
 		global $LDCompanyReportInsurance,$LDNameofemployee,$LDSelianfilenumber,$LDDateofcontract,$LDValidto,$LDPrice;
 		// headline:
 		$table_head = "<tr>\n";
 		$table_head .= "<td bgcolor=\"#ffffaa\" colspan=\"11\" align=\"center\">".$LDCompanyReportInsurance."Company Report (Insurance)</td>\n";
 		$table_head.="</tr>\n";
-		
+
 		$table_head.="<tr>\n";
 		$table_head .= "<td bgcolor=\"#CC9933\">".$LDNameofemployee."</td>\n";
 		$table_head .= "<td bgcolor=\"#CC9933\">".$LDSelianfilenumber."</td>\n" ;
@@ -709,31 +709,31 @@ class selianreport extends report {
 		$table_head .= "<td bgcolor=\"#CC9933\">".$LDValidto."</td>\n" ;
 		$table_head .= "<td bgcolor=\"#CC9933\">".$LDPrice."</td>\n" ;
 		$table_head.="</tr>\n";
-		echo $table_head;    	
-    	
+		echo $table_head;
+
     }
 
 	function DisplayCompanyTestSummary($start_timeframe, $end_timeframe){}
-	function DisplayCompanyResultRows($start_timeframe, $end_timeframe){}	
+	function DisplayCompanyResultRows($start_timeframe, $end_timeframe){}
 
 	//------------------------------------------------------------------------------------------------------------------------
 	/**
 	 * Pharmacy Section
 	 */
 	//--
-	
+
 	function DisplayPharmacyTableHead(){
-		global $PRINTOUT; 
+		global $PRINTOUT;
 		global $LDPharmacyReportwithoutstockinfo,$LDDrugName,$LDAmountofDrugsused,$LDCostofdrugsused,$LDUnitPrice;
-		
+
 		$table_head = "<tr>\n";
-		if (!$PRINTOUT) 
+		if (!$PRINTOUT)
 			$table_head .= "<td bgcolor=\"#ffffaa\"  colspan=\"11\" align=\"center\">".$LDPharmacyReportwithoutstockinfo."</td>\n";
 		else
 			$table_head .= "<td colspan=\"11\" align=\"center\">".$LDPharmacyReportwithoutstockinfo."</td>\n";
 		$table_head.="</tr>\n";
-		
-		if (!$PRINTOUT) { 
+
+		if (!$PRINTOUT) {
 			$table_head.="<tr>\n";
 			$table_head .= "<td bgcolor=\"#CC9933\">".$LDDrugName."</td>\n";
 			$table_head .= "<td bgcolor=\"#CC9933\">".$LDAmountofDrugsused."</td>\n" ;
@@ -748,7 +748,7 @@ class selianreport extends report {
 			$table_head .= "<td>".$LDUnitPrice."</td>\n" ;
 			$table_head.="</tr>\n";
 		}
-		echo $table_head;		
+		echo $table_head;
 	}
 
 
@@ -767,15 +767,15 @@ class selianreport extends report {
 		$res_row=$res_ptr->FetchRow();
 		$return_value=$res_row['RetVal'];
 		return (!empty($return_value))?$res_row['RetVal']:"&nbsp;";
-	}	
-	
+	}
+
 	function _GetSumOfCostsDrugs($item_number) {
 		global $db;
 		$sql="SELECT SUM(amount*price) as RetVal FROM tmp_billing_master WHERE item_number='".$item_number."'";
 		$res_ptr=$db->Execute($sql);
 		$res_row=$res_ptr->FetchRow();
 		return $res_row['RetVal'];
-	}	
+	}
 
 
 	function DisplayPharmacyResultRows($start_timeframe, $end_timeframe){
@@ -794,16 +794,16 @@ class selianreport extends report {
 			$bg_color_2="";
 		}
 		$bg_color_swich=FALSE;
-		
+
 		$this->_Create_financial_tmp_master_table($start_timeframe,$end_timeframe);
 		echo "Looking for Pharmacy Reports by time range: starttime: ".date("d.m.y :: G:i:s",$start_timeframe)." endtime: ".date("d.m.y :: G:i:s",$end_timeframe)."<br><br><br>";
 		$sql="SELECT item_number, description, price FROM tmp_billing_master WHERE purchasing_class='drug_list' GROUP BY item_number, price";
 		$rs_ptr=$db->Execute($sql);
 		$table="";
 		if ($res_array = $rs_ptr->GetArray()) {
-			
+
 			while (list($u,$v)=each($res_array)) {
-						
+
 				if ($bg_color_swich) {
 					$bg_color=$bg_color_1;
 					$bg_color_swich=FALSE;
@@ -811,54 +811,54 @@ class selianreport extends report {
 					$bg_color=$bg_color_2;
 					$bg_color_swich=TRUE;
 				} // end of if ($bg_color_swich)
-				
+
 				$table .= "<tr bgcolor=$bg_color>\n";
-							 
+
 				$table.="<td>\n";
 				$table.="  ".$v['description'];
 				$table.="</td>\n";
-				
+
 				$table.="<td align=\"right\">\n";
 				$table.="  ".$this->_GetSumOfAmoutDrugs($v['item_number']);
 				$table.="</td>\n";
-				
+
 				$table.="<td align=\"right\">\n";
 				$table.="  ".number_format($this->_GetSumOfCostsDrugs($v['item_number']), 0, '.', ',');
 				$table.="</td>\n";
-				
+
 				$table.="<td align=\"right\">\n";
 				$table.="  ".$v['price'];
 				$table.="</td>\n";
-	
+
 				$table.="</tr>\n";
 			} // end of while (list($u,$v)=each($res_array))
 		} else {
 				$table .= "<tr bgcolor=$bg_color>\n";
-							 
+
 				$table.="<td>\n";
 				$table.="  ".$LDNothinginList;
 				$table.="</td>\n";
-				
+
 				$table.="<td>\n";
 				$table.="N/A";
 				$table.="</td>\n";
-				
+
 				$table.="<td>\n";
 				$table.=$LDNA;
 				$table.="</td>\n";
-				
+
 				$table.="<td>\n";
 				$table.=$LDNA;
 				$table.="</td>\n";
-	
-				$table.="</tr>\n";			
+
+				$table.="</tr>\n";
 		} // End of if ($res_array = $rs_ptr->GetArray())
 		$table .= "<tr bgcolor=$bg_color>\n";
-					 
+
 		$table.="<td align=\"right\">\n";
 		$table.="<b>".$LDtotal." &sum;</b>";
 		$table.="</td>\n";
-		
+
 		$table.="<td>\n";
 		$table.=" &nbsp;";
 		$table.="</td>\n";
@@ -866,14 +866,14 @@ class selianreport extends report {
 		$table.="<td align=\"right\">\n";
 		$table.="  <b>".number_format($this->_GetTotalSumOfCostsDrugs(),0,'.',',')."</b>";
 		$table.="</td>\n";
-		
+
 		$table.="<td>\n";
 		$table.=" &nbsp;";
 		$table.="</td>\n";
-		
+
 		$table.="</tr>\n";
-		
-				
+
+
 		echo $table;
 	}
 
@@ -881,17 +881,17 @@ class selianreport extends report {
     global $db;
     if ($this->debug) echo "class_report::SetReportingLink($tbl1,$tbl1_key, $tbl2,$tbl2_key)<br>";
 	// enlarge the max_tmp_table_size to the maximum what we can use:
-	$this->Transact("SET @@max_heap_table_size=4294967296");    
+	$this->Transact("SET @@max_heap_table_size=4294967296");
     if ( ! (empty($tbl1) || empty($tbl1_key) || empty($tbl1_key1) || empty($tbl2) || empty($tbl2_key) || empty($tbl2_key1)) ) {
-      
+
       // For a given existing table from the database, we need more specific informations in the alias field
-      
+
       // check it for table 1:
       $result_fields_tbl1 = $this->_SetColumnNamesAsString($tbl1,$this->GetFieldnames($tbl1));
       // check it for table 2:
       $result_fields_tbl2 = $this->_SetColumnNamesAsString($tbl2,$this->GetFieldnames($tbl2));
 
-      // There are no TEXT nor BLOBS in TEMPORARY tables allowed: Clean it:      
+      // There are no TEXT nor BLOBS in TEMPORARY tables allowed: Clean it:
       $result_fields = $this->_ColumnNames($tbl1,$result_fields_tbl1,$tbl2,$result_fields_tbl2);
 
       $this->setTable($this->tmp_tbl_name.=time());
