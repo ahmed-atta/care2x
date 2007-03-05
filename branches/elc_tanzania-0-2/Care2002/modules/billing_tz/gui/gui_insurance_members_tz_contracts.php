@@ -51,7 +51,7 @@ function show_contract_popup(company,pid)
     </td>
  </tr>
   <tr>
-    <td><form name="insurance" method="post">
+    <td><form name="insurance" method="post" OnChange="submit();">
     <input type="hidden" name="mode" value="update">
     <input type="hidden" name="insurance" value="<?php echo $company_id; ?>">
 	<table width="100%" border="0" bgcolor="#CAD3EC" cellpadding="1" cellspacing="1">
@@ -67,7 +67,7 @@ function show_contract_popup(company,pid)
             <td align="center">
             	<table border="0" cellpadding="0" cellspacing="0" align="center" width="435">
             		<tr>
-									<td align="center"><input type="image" src="../../gui/img/control/default/en/en_im_finished.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)"></td>
+									<td align="center"><input type="image" name="todo" value="finish" src="../../gui/img/control/default/en/en_im_finished.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)"></td>
                 </tr>
                </table>
 			       </td>

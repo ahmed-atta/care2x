@@ -203,6 +203,8 @@ $LDDosage='Dosage:';
 $LDInsurance='Insurance:';
 $LDPricing='Pricing:';
 $LDNothingtodo='Nothing to do :)';
+#rm from Merotech
+$LDPrepaid_Amount='Prepaid Amount';
 
 $LDPendingTestRequest='Pending Test Request';
 $LDBatchFileNr='Batch file no.';

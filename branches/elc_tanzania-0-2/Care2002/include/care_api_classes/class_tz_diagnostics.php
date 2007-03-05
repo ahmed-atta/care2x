@@ -41,6 +41,7 @@ class Diagnostics extends Encounter {
   var $tbl_diagnosis_comment = "comment";
   var $tbl_diagnosis_type = "type";
   var $tbl_diagnosis_doctor_name = "doctor_name";
+  var $counter;
 
   // The description field as an array, splitted off to an array of each word:
   //var $arr_tbl_col_content=array();
@@ -578,7 +579,7 @@ class Diagnostics extends Encounter {
     return true;
   }
   //------------------------------------------------------------------------------
-  function Display_Selected_Elements($array){
+  function Display_Selected_Elements($array){ echo "Hallo Welt";
     if (empty($array))
       return FALSE;
     while (list($x,$v) = each($array)) {

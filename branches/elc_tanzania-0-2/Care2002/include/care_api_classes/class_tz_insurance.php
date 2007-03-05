@@ -27,7 +27,7 @@ class Insurance_tz extends Core {
 									'end_date');
   var $result;
   var $rs_fuzziness;
-
+  var $pid;
 
   // Constructor
   function Insurance_tz() {
@@ -301,7 +301,7 @@ class Insurance_tz extends Core {
     global $db;
     $debug=false;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    $this->sql="SELECT id, name, ceiling, prepaid_amount, is_disabled FROM care_tz_insurance_types ORDER BY id ASC";
+    $this->sql="SELECT id, name, ceiling, is_disabled FROM care_tz_insurance_types ORDER BY id ASC";
     $this->result = $db->Execute($this->sql);
     $counter=0;
     while($this->row = $this->result->FetchRow())
@@ -335,8 +335,6 @@ class Insurance_tz extends Core {
 	function GetInsuranceAsArray($id){
     global $db;
     if(!$id || !is_numeric($id)) return false;
-
-    $debug=TRUE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if ($this->is_company_just_invoiced($id)) {
     	# This company does not have a ceiling, does not have any entry what allocates to care_tz_insurance_types.
@@ -352,6 +350,7 @@ class Insurance_tz extends Core {
                   care_tz_company.invoice_flag,
                   care_tz_company.credit_preselection_flag,
                   care_tz_company.hide_company_flag,
+                  care_tz_company.prepaid_amount,
                   care_tz_insurance.plan as insurance
                 FROM care_tz_company
                   LEFT JOIN care_tz_insurance ON care_tz_insurance.company_id=care_tz_company.id
@@ -369,6 +368,7 @@ class Insurance_tz extends Core {
                   care_tz_company.invoice_flag,
                   care_tz_company.credit_preselection_flag,
 				  care_tz_company.hide_company_flag,
+				  care_tz_company.prepaid_amount,
                   care_tz_insurance_types.name as InsuranceName,
                   care_tz_insurance.plan as insurance
                 FROM care_tz_company
@@ -377,12 +377,37 @@ class Insurance_tz extends Core {
                 WHERE care_tz_company.id=$id";
     }
     $this->result = $db->Execute($this->sql);
+    //echo $this->sql;
     if($this->row = $this->result->FetchRow())
     {
     	return $this->row;
   	}
   	return false;
 	}
+
+  // -----------------------------------------------------------------------------
+
+	function GetPlanForPID($pid) {
+		/*
+		 * Getting the correspodending plan for a specific PID. If there is no plan, it will return FALSE
+		 */
+    global $db;
+    if(!$pid) return false;
+    $debug=FALSE;
+    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    $this->sql="SELECT plan FROM care_tz_insurance where PID=10000000 limit 0,1";
+    $this->result = $db->Execute($this->sql);
+    if($this->result)
+    {
+	    if($this->row = $this->result->FetchRow())
+	    {
+	    	return $this->row;
+	    }
+	  }
+  	return FALSE;
+	}
+
+
 
   // -----------------------------------------------------------------------------
 
@@ -573,7 +598,8 @@ class Insurance_tz extends Core {
     	city='".$dataarray['city']."',
     	invoice_flag='".$invoice."',
     	credit_preselection_flag='".$credit."',
-    	hide_company_flag='".$hide."'
+    	hide_company_flag='".$hide."',
+        prepaid_amount='".$dataarray['prepaid_amount']."'
     	WHERE id=".$dataarray['id'];
     $this->result = $db->Execute($this->sql);
     $this->sql="UPDATE care_tz_insurance SET
@@ -594,7 +620,6 @@ class Insurance_tz extends Core {
     $this->sql="UPDATE care_tz_insurance_types SET
     	name='".$dataarray['name']."',
     	ceiling='".$dataarray['ceiling']."',
-    	prepaid_amount='".$dataarray['prepaid_amount']."',
     	is_disabled='".$dataarray['is_disabled']."'
     	WHERE id=".$dataarray['id'];
     $this->result = $db->Execute($this->sql);
@@ -612,7 +637,6 @@ class Insurance_tz extends Core {
     $this->sql="INSERT INTO care_tz_insurance_types SET
     	name='".$dataarray['name']."',
     	ceiling='".$dataarray['ceiling']."',
-    	prepaid_amount='".$dataarray['prepaid_amount']."',
     	is_disabled='".$dataarray['is_disabled']."'";
     $this->result = $db->Execute($this->sql);
   	return true;
@@ -625,6 +649,13 @@ class Insurance_tz extends Core {
 
     $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+
+	// Check up if this person is somehow in that database...
+	$this->sql = "SELECT * FROM care_tz_insurance WHERE PID=$pid AND parent=$parent";
+	$this->result = $db->Execute($this->sql);
+	if ($this->result->RecordCount()>0)
+		return FALSE; // Yes, this person is still contracted, don't do that again!
+
 
     if($companycredit) $companycredit=1; else $companycredit=0;
     $this->sql="INSERT INTO care_tz_insurance SET
@@ -652,20 +683,20 @@ class Insurance_tz extends Core {
     $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
     $temparray = $dataarray;
-    if($debug) var_dump($dataarray);
+    //if($debug) var_dump($dataarray);
     while(list($x,$v) = each($dataarray))
     {
-    	if($debug) echo '('.$x.') ';
+    	//if($debug) echo '<br>('.$x.') ';
     	if(strstr($x,"this_"))
     	{
     		$currentpid = substr(strstr($x,"this_"),5);
     		if($temparray['this_'.$currentpid]=="conclude" && $temparray['action_'.$currentpid]=="conclude")
-    		{
+    		{ if ($debug) echo "conclude";
     			$parent = $this->GetInsuranceIDByCompanyID($temparray['insurance']);
     			$this->ConcludeContractForPID($currentpid, $parent['id'], $temparray['insurance'], $temparray['startup_'.$currentpid], $temparray['plan_'.$currentpid], $temparray['credit_preselection_flag_'.$currentpid]);
     		}
     		elseif($temparray['this_'.$currentpid]=="cancel" && $temparray['action_'.$currentpid]=="cancel")
-    		{
+    		{ if ($debug) echo "cancel";
     			if($this->CancelContractForPID($temparray['contract_'.$currentpid]))
     				$status['cancel']++;
     			$this->SetContractPlanForPID($temparray['contract_'.$currentpid],$temparray['plan_'.$currentpid]);
@@ -673,7 +704,7 @@ class Insurance_tz extends Core {
     				$this->SetContractStartupsubstractionForPID($temparray['contract_'.$currentpid],$temparray['startup_'.$currentpid]);
     		}
     		elseif($temparray['this_'.$currentpid]=="cancel" && !$temparray['action_'.$currentpid])
-    		{
+    		{ if ($debug) echo "weiss net";
     			if($this->EnableContractForPID($temparray['contract_'.$currentpid]))
     				$status['enable']++;
     			//$this->SetContractPlanForPID($temparray['contract_'.$currentpid],$temparray['plan_'.$currentpid]);
@@ -681,7 +712,7 @@ class Insurance_tz extends Core {
     				$this->SetContractStartupsubstractionForPID($temparray['contract_'.$currentpid],$temparray['startup_'.$currentpid]);
     		}
     	}
-    	if($debug) echo $currentpid.' - ';
+    	//if($debug) echo $currentpid.' - ';
   	}
   	if($debug) echo $status['cancel'].' ---- '.$status['enable'];
   	return true;
@@ -754,7 +785,7 @@ class Insurance_tz extends Core {
   function SetContractPlanForPID($id,$value){
     global $db;
     if(!$id) return false;
-    $debug=false;
+    $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
     $this->sql="UPDATE care_tz_insurance SET
     	plan=".$value."
@@ -781,42 +812,27 @@ class Insurance_tz extends Core {
 
   //------------------------------------------------------------------------------
 
-  // Wrappers:
-  function Display_Selected_Elements($array,$company_id){
+  function ShowListOfContractedMembers($company_id) {
+  	global $db;
   	global $person_obj;
-	$debug=FALSE;
-	if ($debug) {
-		echo "Calling: Display_Selected_Elements($array,$company_id)<br>";
-	}
-    while (list($x,$v) = each($array)) {
-		if ($debug)  "array value:$v<br>";
-    	$result = $person_obj->getAllInfoObject($v);
-    	if($person = $result->FetchRow())
-    	{
-      	echo "<option value=\"".$v."\">".$person['selian_pid']." - ".$person['name_last'].", ".$person['name_first']." (".$person['date_birth'].")</option>\n";
-    	}
-      $counter++;
-    }
-    if($counter<1)
-    {
+    $this->debug=FALSE;
+    ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
-    		if ($debug) echo "variable counter is less than 1<br>";
-	  	    $contractarray = $this->GetContractsForCompanyAsArray($company_id);
-			$members = $this->GetMembersOfContractID($contractarray[0]['id']);
-			if ($debug) echo "Contract-array is:"; if ($debug) print_r($contractarray);if ($debug) echo "<br>";
-			if ($debug) echo "Members:"; if ($debug) print_r($members);if ($debug) echo "<br>";
-			while(list($x,$v) = each($members))
-			{
+	if (!$company_id) return FALSE;
 
-	    	$result = $person_obj->getAllInfoObject($v['PID']);
-	    	if($person = $result->FetchRow())
-	    	{
-	    		if($v['cancel_flag']==0)
-	      		echo "<option value=\"".$person['pid']."\">".$person['selian_pid']." - ".$person['name_last'].", ".$person['name_first']." (".$person['date_birth'].")</option>\n";
+	$this->sql="SELECT PID FROM care_tz_insurance WHERE PID>0 and cancel_flag=0 and company_id=$company_id";
+    if ($this->result = $db->Execute($this->sql)) {
+    	if ($this->debug) echo "We have hits!";
+
+	    while($this->row = $this->result->FetchRow()) {
+	   		if ($this->debug) echo $this->row['PID']." ";
+	   		$result=$person_obj->getAllInfoObject($this->row['PID']);
+	    	if($person = $result->FetchRow()) {
+	      	 echo "<option value=\"".$this->row['PID']."\">".$person['selian_pid']." - ".$person['name_last'].", ".$person['name_first']." (".$person['date_birth'].")</option>\n";
 	    	}
-			}
-
-  	}
+	  	}
+    } // end of while
+  	return FALSE;
   }
 
 //------------------------------------------------------------------------------
@@ -1104,7 +1120,6 @@ class Insurance_tz extends Core {
 
 	      //$plan = (!$this->is_company_just_invoiced($v['id'])) ? $v['name'] : $LDPaybyInvoice;
 	      $plan = $this->getPlanOfContractAsString($v['id']);
-
 	      echo '
 	      <tr bgcolor='.$bg.'>
 	      	<td>'.$v['id'].'</td>
@@ -1305,8 +1320,7 @@ class Insurance_tz extends Core {
     	<td align="center" width="30">'.$LDID.'</td>
     	<td align="center" width="240">'.$LDInsurancetype.'</td>
     	<td align="center" width="70">'.$LDCeiling.'</td>
-    	<td align="center" width="125">'.$LDPrepaidamount.'</td>
-			<td colspan="2" align="center" width="50">'.$LDOptions.'</td>
+		<td colspan="2" align="center" width="50">'.$LDOptions.'</td>
     </tr>
 
     ';
@@ -1324,7 +1338,6 @@ class Insurance_tz extends Core {
       	<td>'.$v['id'].'</td>
       	<td>'.$v['name'].' '.$disabled.'</td>
       	<td align="center">'.$v['ceiling'].' TSH</td>
-      	<td align="center">'.$v['prepaid_amount'].' TSH</td>
       <td><div align="center"><a href="insurance_types_tz_edit.php?id='.$v['id'].'"><img src="../../gui/img/common/default/hammer.gif" alt="Edit" width="16" height="16" border="0"></a></td>
       </tr>';
   	}
@@ -1337,21 +1350,29 @@ class Insurance_tz extends Core {
   //------------------------------------------------------------------------------
   function ShowInsuranceTypesDropDown($name,$selected,$FLAG) {
     /**
-    * Returns TRUE if this item number still exists in the database
+    * Print out (HTML) an drop down list of possible insurance plans (with selection by default given parameter from database)
     */
+	$arr_name_informations = explode ("_", $name);
+	$this->pid=$arr_name_informations[1];
 
     $this->insurancetype_array = $this->GetInsuranceTypesAsArray();
+	// $this->insurancetype_array[0] is the given name parameter (temporary)
+	// $this->insurancetype_array[1] is PID number
+	$this->Plan_ID=$this->insurancetype_array[1][0];
+
     echo '<select name="'.$name.'">';
 
     if ($FLAG=='WITH_EMPTY_FIRST_FIELD')
     	echo '<option value="-1"></option>';
+
+	$plan_id = $this->GetPlanForPID($this->Plan_ID);
 
     while(list($x,$v) = each($this->insurancetype_array))
     {
     		if($v['is_disabled']==0)
     		{
       	echo '<option ';
-      	if($v['id']==$selected) echo ' selected ';
+      	if($v['id']==$this->Plan_ID) echo ' selected ';
       	echo ' value="'.$v['id'].'">'.$v['name'].' ('.$v['ceiling'].')</option>';
       	}
   	}
@@ -1417,10 +1438,7 @@ class Insurance_tz extends Core {
     echo '<script language="JavaScript">';
 		require($root_path.'include/inc_checkdate_lang.php');
     echo '</script>';
-/*    echo '<script language="javascript" src="'.$root_path.'js/setdatetime.js"></script>';
-    echo '<script language="javascript" src="'.$root_path.'js/checkdate.js"></script>';
-    echo '<script language="javascript" src="'.$root_path.'js/dtpick_care2x.js"></script>';
-*/
+
     echo '<table border="0" cellpadding="1" cellspacing="1" width="850">';
 	$insurance_masterfile = $this->GetInsuranceAsArray($company_id);
     $allcontracts = $this->GetInsuranceContractsAsArray($selected_insurance,false,0);
@@ -1450,8 +1468,8 @@ class Insurance_tz extends Core {
 								$this->ShowInsuranceTypesDropDown('plan_'.$v['PID'],$contractarray['plan']);
 
 							if (!$this->is_company_just_invoiced($company_id) ) {
-								echo '<input type="text" value="'.$v['Contract']['ceiling_startup_subtraction'].'" name="startup_'.$v['PID'].'"><br><input type="checkbox" value="1" name="credit_preselection_flag_'.$v['PID'].'" ';
-								if($insurance_masterfile['credit_preselection_flag']) echo 'checked'; echo '> '.$LDGetsCredit.'</td></tr>';
+								//echo '<input type="text" value="'.$v['Contract']['ceiling_startup_subtraction'].'" name="startup_'.$v['PID'].'"><br><input type="checkbox" value="1" name="credit_preselection_flag_'.$v['PID'].'" ';
+								//if($insurance_masterfile['credit_preselection_flag']) echo 'checked'; echo '> '.$LDGetsCredit.'</td></tr>';
 							} else {
 								echo $LDGetsCredit.'</td></tr>';
 							}
@@ -1562,7 +1580,7 @@ class Insurance_tz extends Core {
     	if ($this->row['plan']==-1) {
     		$this->return_value="by invoice";
     	} else {
-    		$this->return_value=$thios->row['name'];
+    		$this->return_value=$this->row['name'];
     	}
     }
     return $this->return_value;

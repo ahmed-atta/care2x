@@ -24,8 +24,8 @@
     </td>
  </tr>
   <tr>
-    <td> 
-   
+    <td>
+
     <!-- File name -->
     <form action="" method="post" enctype="multipart/form-data" name="evaluate">
     <fieldset class="options">
@@ -33,15 +33,12 @@
 
         <div>
 	        <label for="input_import_file">File</label>
-	        <input style="margin: 5px" size="100" type="file" value="C:\" name="import_file" id="input_import_file" />
-        </div>   
+	        <input style="margin: 5px" size="100" type="file" value="druglist" name="import_file" id="input_import_file" />
+        </div>
  	</fieldset>
- 	<input type="submit" value="evaluate" id="evaluate" name="evaluate" /> 
+ 	<input type="submit" value="evaluate" id="evaluate" name="evaluate" />
   	</form>
-  	<?php 
-  		echo $_POST['evaluate']."<br>";
-  		echo $_FILES["import_file"]["name"];  		 
-  	?>
+
 	</td>
   </tr>
 </table>

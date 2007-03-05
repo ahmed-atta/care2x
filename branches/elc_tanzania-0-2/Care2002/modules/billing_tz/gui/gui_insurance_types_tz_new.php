@@ -8,7 +8,7 @@
  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
   	<script language="javascript" >
-<!-- 
+<!--
 function gethelp(x,s,x1,x2,x3,x4)
 {
 	if (!x) x="";
@@ -17,7 +17,7 @@ function gethelp(x,s,x1,x2,x3,x4)
 	window.helpwin.moveTo(0,0);
 }
 // -->
-</script> 
+</script>
 <link rel="stylesheet" href="../../css/themes/default/default.css" type="text/css">
 <script language="javascript" src="../../js/hilitebu.js"></script>
 
@@ -49,7 +49,7 @@ function closewin()
 </script>
 
 
- 
+
 </HEAD>
 <BODY bgcolor=#ffffff link=#000066 alink=#cc0000 vlink=#000066  >
 <table width=100% border=0 cellspacing=0 height=100%>
@@ -83,19 +83,15 @@ function closewin()
 						<td><input type="text" name="ceiling" size=30 value="<?php echo $this_insurance['ceiling']; ?>"></td>
 					</tr>
 					<tr bgcolor=ffffee>
-						<td><?php $insurance_tz->ShowRedIfError($LDPrepaidamount,$error['prepaid_amount']);?>:</td>
-						<td><input type="text" name="prepaid_amount" size=30 value="<?php echo $this_insurance['prepaid_amount']; ?>"></td>
-					</tr>
-					<tr bgcolor=ffffee>
 						<td><?php echo $LDFinisch; ?></td>
 						<td><input type="hidden" name="id" value="<?php echo $id; ?>"><input type="hidden" name="mode" value="insert"><input type="submit" value="Submit"></td>
 					</tr>
 				</table>
 				</form>
-				</TD>								
+				</TD>
 		</td>
 	</tr>
-	
+
 		<tr valign=top >
 		<td bgcolor=#cccccc>
 							<table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#cfcfcf">
@@ -117,7 +113,7 @@ function openCreditsWindow() {
 //  Script End -->
 </script>
 
-	
+
  <a href="http://www.care2x.org" target=_new>CARE2X 2nd Generation pre-deployment 2.0.2</a> :: <a href="../../legal_gnu_gpl.htm" target=_new> License</a> ::
  <a href=mailto:info@care2x.org>Contact</???a>  :: <a href="../../language/en/en_privacy.htm" target="pp"> Our Privacy Policy </a> ::
  <a href="../../docs/show_legal.php?lang=$lang" target="lgl"> Legal </a> ::
@@ -136,7 +132,7 @@ function openCreditsWindow() {
 					</td>
 
 	</tr>
-	
+
 	</tbody>
  </table>
 

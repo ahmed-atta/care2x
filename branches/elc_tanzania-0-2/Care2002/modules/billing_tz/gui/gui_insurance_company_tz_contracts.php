@@ -97,11 +97,18 @@ function closewin()
 					<td><input type="checkbox" name="credit_preselection_flag" <?php if($this_insurance['credit_preselection_flag']) echo 'checked'; ?>><?php echo $LDGetsCompanyCredit; ?> </td>
 				</tr>
 				<tr bgcolor=ffffee>
+					<td><?php $insurance_tz->ShowRedIfError(''.$LDPrepaid_Amount.'',$error['hide_prepaid_amount']);?>:</td>
+					<td><input type="text" name="prepaid_amount" size=25 value="<?php echo $this_insurance['prepaid_amount']; ?>">&nbsp; <?php echo $LDTSH;?></td>
 					<td><?php $insurance_tz->ShowRedIfError(''.$LDHideCompany.'',$error['hide_company_flag']);?>:</td>
 					<td><input type="checkbox" name="hide_company_flag" <?php if($this_insurance['hide_company_flag']) echo 'checked'; ?>><?php echo $LDYes; ?> </td>
+				</tr>
+				<tr bgcolor=ffffaa>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
+
 			</table>
 		</td>
 	</tr>

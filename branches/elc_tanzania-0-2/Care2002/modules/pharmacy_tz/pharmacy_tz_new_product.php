@@ -27,7 +27,7 @@ $lang_tables[]='pharmacy.php';
 define('NO_2LEVEL_CHK',1);
 require($root_path.'include/inc_front_chain_lang.php');
 
-$debug=true;
+$debug=FALSE;
 
 if ($debug) {
   echo "debugging mode is ON<br>";

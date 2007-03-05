@@ -4,6 +4,7 @@
 <head>
 <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="Author" content="Dorothea Reichert">
 <title>AIDS defining events</title>
 <link rel="stylesheet" href="../../css/themes/default/default.css" type="text/css">
 <style type="text/css">
@@ -12,7 +13,15 @@
 -->
 </style>
 <script language="JavaScript" type="text/JavaScript">
-<!--
+<!--	
+	function gethelp(x,s,x1,x2,x3,x4)
+	{
+		if (!x) x="";
+		urlholder="../../main/help-router.php<?php echo URL_APPEND; ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4;
+		helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
+		window.helpwin.moveTo(0,0);
+	}
+
 	function check_existance(itemdescription , source_obj , destination_obj) {
 	// (c) by Merotech (RM) 2005
 		for(var i=0;i<destination_obj.length;i++) {
@@ -111,7 +120,7 @@
     &nbsp;&nbsp;<font color="#330066">AIDS defining events</font>
   </td>
   <td bgcolor="#99ccff" align=right><a
-   href=""><img src="../../gui/img/control/blue_aqua/en/en_hilfe-r.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
+   href="javascript:gethelp('arv_aids_def_events.php','AIDS defining events')"><img src="../../gui/img/control/blue_aqua/en/en_hilfe-r.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
    href="<?php echo $root_path.$breakfile.URL_APPEND.$querystring?>" ><img src="../../gui/img/control/blue_aqua/en/en_cancel.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>     </td>
  </tr>
 </table>

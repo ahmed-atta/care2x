@@ -103,7 +103,8 @@ function gethelp(x,s,x1,x2,x3,x4)
 									<!-- dynamically managed content -->
 									<!-- show here who will be added or those who are still assigned to the company -->
 									<?php
-										$insurance_tz->Display_Selected_Elements($item_no,$company_id);
+										//$insurance_tz->Display_Selected_Elements($item_no,$company_id);
+										$insurance_tz->ShowListOfContractedMembers($company_id);
 									?>
 									<!-- dynamically managed content -->
 

@@ -24,9 +24,13 @@
 	 	Click here to get a patient’s admission data.
 	 	<br>
 	 	<span class="bold" >Option 4:</span> 
+	 	If you are in the ARV Clinic, click here to enter the ARV menu. An grey colored icon means that a patient is already registered for the ARV programme. If the 
+	 	icon is red the patient is not yet admitted to the ARV programme.
+	 	<br>
+	 	<span class="bold" >Option 5:</span> 
 	 	Click here to get a patient’s chart folder.
 	 	<br>
-	 	<span class="bold" >Option 5:</span>
+	 	<span class="bold" >Option 6:</span>
 	 	Click here to write or read notes on the patient. Follow the instructions: 
 	 	<br/>
 	 	<img src="<?php echo $root_path; ?>/help/en/img/en_arrow.jpg" id="arrow" alt="" width=16 height=14>
@@ -42,7 +46,7 @@
 	 	How to transfer a patient?
 	 	</a>
 	 	<br/>
-	 	<img src="<?php echo $root_path; ?>/help/en/img/en_outpatient_clinic_list.png" alt="" id="screenshot" width=607 height=140>
+	 	<img src="<?php echo $root_path; ?>/help/en/img/en_outpatient_patient_list.png" alt="" id="screenshot" width=600 height=191>
  	</p>
  	<h2><img src="<?php echo $root_path; ?>/gui/img/common/default/frage.gif" alt="" width=15 height=15> What do these coloured bars <img src="<?php echo $root_path; ?>help/en/img/en_sbars.png" alt="" width=98 height=23> mean?</h2>
  	<p>

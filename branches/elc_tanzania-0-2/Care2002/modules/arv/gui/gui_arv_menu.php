@@ -4,6 +4,7 @@
 <TITLE>ARV menu</TITLE>
 <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="Author" content="Dorothea Reichert">
 <script language="javascript" >
 <!-- 
 function openCreditsWindow() {
@@ -12,6 +13,15 @@ function openCreditsWindow() {
 	creditswin=window.open(urlholder,"creditswin","width=500,height=600,menubar=no,resizable=yes,scrollbars=yes");
 
 }
+
+function gethelp(x,s,x1,x2,x3,x4)
+{
+	if (!x) x="";
+	urlholder="../../main/help-router.php<?php echo URL_APPEND; ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4;
+	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
+	window.helpwin.moveTo(0,0);
+}
+
 //-->
 </script> 
 <link rel="stylesheet" href="../../css/themes/default/default.css" type="text/css">
@@ -25,7 +35,11 @@ A:visited {color: #000066;}
 A:visited:active {color: #cc0000;}
 A:visited:hover {color: #cc0033;}
 </style>
-
+<?php
+	if (ARV_case::is_arv_admitted($_GET['pid'])) 
+	{$mode="edit";}
+	else {$mode="new";}
+?>
 </HEAD>
 <BODY bgcolor=#ffffff link=#000066 alink=#cc0000 vlink=#000066  >
 <table width=100% border=0 cellspacing=0 height=100%>
@@ -37,7 +51,7 @@ A:visited:hover {color: #cc0033;}
   						<td bgcolor="#99ccff" >&nbsp;&nbsp;<font color="#330066">NATIONAL CARE AND TREATMENT PROGRAM</font>
        					</td>
   						<td bgcolor="#99ccff" align=right><a
-  							 href=""><img src="../../gui/img/control/blue_aqua/en/en_hilfe-r.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
+  							 href="javascript:gethelp('arv_menu.php','ARV Menu','<?php echo $mode; ?>')"><img src="../../gui/img/control/blue_aqua/en/en_hilfe-r.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
   							 href="<?php echo $root_path.$breakfile.URL_APPEND.$add_breakfile; ?>" ><img src="../../gui/img/control/blue_aqua/en/en_cancel.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
  					</tr>
  				</table>				
@@ -52,22 +66,22 @@ A:visited:hover {color: #cc0033;}
 						<TD>
 							<TABLE cellSpacing=1 cellPadding=3 width=600>
                    				<?php
-									if (ARV_case::is_arv_admitted($_GET['pid'])) {
+									if ($mode=="edit") {
 								?>
 				    			<TBODY class="submenu">
 				      				<TR> 
 				        				<td align=center><img src="../../gui/img/common/default/showdata.gif" border=0></td>
-				       					<TD class="submenu_item"><nobr><a href="arv_case.php<?php echo URL_APPEND ?>&pid=<?php echo $_GET['pid']?>&mode=edit" target="_parent">Edit ARV Patient</a></nobr></TD>
+				       					<TD class="submenu_item"><nobr><a href="arv_case.php<?php echo URL_APPEND ?>&encounter_nr=<?php echo $_GET['encounter_nr']; ?>&pid=<?php echo $_GET['pid']?>&mode=edit" target="_parent">Edit ARV Patient</a></nobr></TD>
 				        				<TD>Edit Patient's ARV Registration data</TD>
 				      				</tr>
 				      				<TR> 
 				        				<td align=center><img src="../../gui/img/common/default/new_group.gif" border=0></td>
-				        				<TD class="submenu_item"><nobr><a href="arv_visit.php<?php echo URL_APPEND ?>&pid=<?php echo $_GET['pid']?>&mode=new" target="_parent">New Visit</a></nobr></TD>
+				        				<TD class="submenu_item"><nobr><a href="arv_visit.php<?php echo URL_APPEND ?>&encounter_nr=<?php echo $_GET['encounter_nr']; ?>&pid=<?php echo $_GET['pid']?>&mode=new" target="_parent">New Visit</a></nobr></TD>
 				        				<TD>Insert data of a new arv visit</TD>
 				     				</tr>
 				      				<TR> 
 				        				<td height="26" align=center><img src="../../gui/img/common/default/pdata.gif" border=0 width="16" height="16"></td>
-				        				<TD class="submenu_item"><nobr><a href="arv_overview.php<?php echo URL_APPEND ?>&pid=<?php echo $_GET['pid']?>" target="_parent">Show ARV Data</a></nobr></TD>
+				        				<TD class="submenu_item"><nobr><a href="arv_overview.php<?php echo URL_APPEND ?>&encounter_nr=<?php echo $_GET['encounter_nr']; ?>&pid=<?php echo $_GET['pid']?>" target="_parent">Show ARV Data</a></nobr></TD>
 				        				<TD>Get an overview over patient's ARV data</TD>
 				      				</tr>
 				      				<TR  height=1> 

@@ -5,8 +5,18 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 require($root_path.'include/inc_front_chain_lang.php');
 require($root_path.'include/inc_date_format_functions.php');
-require_once($root_path.'include/care_api_classes/class_arv_case.php');
+require_once($root_path.'include/care_api_classes/class_tz_arv_case.php');
 //------------------------------------------------------------------------------------------------------
+/**
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* GNU General Public License
+* Copyright 2007 Dorothea Reichert based on the development of Elpidio Latorilla (2002,2003,2004,2005)
+* elpidio@care2x.org, meggle@merotech.de
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+//------------------------------------------------------------------------------------------------------
+
 $debug=false;
 $breakfile="modules/arv/arv_menu.php";
 $filename="arv_menu.php";
@@ -22,6 +32,7 @@ if(!$o_arv_case->isOk()) {
 	die();
 } 
 $facility_data=$o_arv_case->getFacilityInfo();
+$mode=="new" ? $src='New ARV Patient' : $src='Edit ARV Patient';
 //------------------------------------------------------------------------------------------------------
 $defaults = array(
     'arv_pid' => '',

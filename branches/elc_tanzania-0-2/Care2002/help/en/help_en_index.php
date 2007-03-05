@@ -59,6 +59,16 @@ require_once($root_path.'include/inc_charset_fx.php') // load the charset functi
 			d.add(19,17,'Appointments',link_path + 'outpatient_appointments.php&src=Outpatient :: Appointments');
 			d.add(20,17,'Outpatient Clinic','','','',image_path + 'disc_unrd.gif',image_path + 'disc_unrd.gif');
 				d.add(40,20,'Outpatien Clinic Overview',link_path + 'outpatient_clinic.php&src=Outpatient Clinic');
+				d.add(81,20,'ARV Clinic','','','',image_path + 'ball_gray.png',image_path + 'ball_gray.png');
+					d.add(82,81,'ARV Menu',link_path + 'arv_menu.php&src=ARV Menu&x1=menu');
+					d.add(83,81,'New ARV Patient',link_path + 'arv_registration.php&src=New ARV Patient&x1=new');
+					d.add(84,81,'Edit ARV Patient',link_path + 'arv_registration.php&src=Edit ARV Patient&x1=edit');
+					d.add(85,81,'New Visit',link_path + 'arv_visit.php&src=New Visit');
+					d.add(86,84,'New Visit',link_path + 'arv_visit.php&src=New Visit');
+					d.add(87,84,'Edit Visit',link_path + 'arv_visit.php&src=Edit Visit');
+					d.add(88,84,'AIDS def events',link_path + 'arv_aids_def_events.php?src=Aids defining events');
+					d.add(89,84,'ARV reasons',link_path + 'arv_status_reason.php?src=ARV Status Reason');
+					d.add(90,81,'ARV Overview',link_path + 'arv_overview.php&src=ARV Overview');
 				d.add(21,20,'Patient&acute;s chart folder','','','',image_path + 'open.gif',image_path + 'open.gif');
 					d.add(22,21,'Overview',link_path + 'patient_charts.php&src=Patient&acute;s chart folder :: Overview');
 					d.add(23,21,'Consultation Report',link_path + 'consultation_reports.php&src=Patient&acute;s chart folder :: Consultation report');
@@ -112,7 +122,16 @@ require_once($root_path.'include/inc_charset_fx.php') // load the charset functi
 				d.add(67,63,'Insurance Reports menu',link_path + 'insurance_reports_menu.php&src=Insurance Reports :: Menu');
 				d.add(80,63,'Reports Overview',link_path + 'insurance_reports_companies.php&src=Insurance Reports :: Company Overview');
 		
-		d.add(68,0,'Reporting',link_path + 'reporting_overview.php&src=Reporting :: Overview','','',image_path + 'eyeglass.gif');
+		d.add(68,0,'Reporting','','','',image_path + 'eyeglass.gif',image_path + 'eyeglass.gif');
+			d.add(91,68,'Reporting',link_path + 'reporting_overview.php&src=Reporting :: Overview','','',image_path + 'eyeglass.gif');
+			d.add(92,68,'ARV-Reporting','','','',image_path + 'ball_gray.png',image_path + 'ball_gray.png');
+				d.add(93,92,'Reporting',link_path + 'arv_reporting_quarterly.php&src=Quarterly, Facility-Based HIV Care/ART Reporting Form');
+				d.add(94,92,'Reporting',link_path + 'arv_reporting_quarterly_r1.php&src=Report 1: HIV Palliative Care');
+				d.add(95,92,'Reporting',link_path + 'arv_reporting_quarterly_r2.php&src=Report 2: ART Care');
+				d.add(96,92,'Reporting',link_path + 'arv_reporting_quarterly_r4.php&src=Report 4: Cohort analyses');
+				d.add(97,92,'Reporting',link_path + 'arv_reporting_quarterly_r6.php&src=Report 6: Patients stop ARV');
+				d.add(98,92,'Reporting',link_path + 'arv_reporting_overview.php&src=Patients Overview');
+				d.add(99,92,'Reporting',link_path + 'arv_reporting_cstatistics.php&src=C-Statistics-Patients');
 		
 		//d.add(69,0,'System Admin','','','','<?php echo $root_path?>gui/img/common/default/sections.gif','<?php echo $root_path?>gui/img/common/default/sections.gif');
 		//d.add(70,0,'Special Tools','','','','<?php echo $root_path?>gui/img/common/default/settings_tree.gif','<?php echo $root_path?>gui/img/common/default/settings_tree.gif');

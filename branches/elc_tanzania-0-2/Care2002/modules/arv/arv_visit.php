@@ -6,9 +6,18 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 require($root_path.'include/inc_date_format_functions.php');
 require($root_path.'include/inc_front_chain_lang.php');
-require($root_path.'include/care_api_classes/class_arv_case.php');
-require_once($root_path.'include/care_api_classes/class_arv_visit.php');
+require($root_path.'include/care_api_classes/class_tz_arv_case.php');
+require_once($root_path.'include/care_api_classes/class_tz_arv_visit.php');
 //-------------------------------------------------------------------------------------------------------
+/**
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* GNU General Public License
+* Copyright 2007 Dorothea Reichert based on the development of Elpidio Latorilla (2002,2003,2004,2005)
+* elpidio@care2x.org, meggle@merotech.de
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
+//-------------------------------------------------------------------------------------------------------------------------------------
 $breakfile="modules/arv/arv_menu.php";
 $add_breakfile="&pid=".$_GET['pid'];
 $host  = $_SERVER['HTTP_HOST'];
@@ -16,7 +25,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 //-------------------------------------------------------------------------------------------------------
 $o_arv_case=&new ARV_case($_GET['pid']);
 $o_arv_case->getPatientARVData();
-$o_arv_visit=&new ARV_visit($o_arv_case->CurrentEncounter($_GET['pid']),$o_arv_case->getARVcaseID(),$_GET['arv_visit_id']);
+$o_arv_visit=&new ARV_visit($_GET['encounter_nr'],$o_arv_case->getARVcaseID(),$_GET['arv_visit_id']);
 
 $defaults = array (
     'weight' => '',
@@ -37,6 +46,7 @@ $o_arv_case->set_rule('weight','rule_decimal');
 
 if(!isset($_GET['arv_data'])) {
 	if (($_GET['mode']=='edit')) {
+		$src="Edit patient&acute;s visit data";
 		$visit_data=$o_arv_visit->get_visit_data();
 		$a_item_no_data=$o_arv_visit->get_aidsdef_events();
 		$r_item_no_data=$o_arv_visit->get_arv_status_reasons();
@@ -52,6 +62,7 @@ if(!isset($_GET['arv_data'])) {
 		$_GET['arv_data']['create_time']=formatDate2Local(date('Y-m-d',$_GET['arv_data']['create_time']),$date_format,null,null);
 	}
 	else {
+		$src="New Visit";
 		$_GET['arv_data']=$defaults;
 	}
 }

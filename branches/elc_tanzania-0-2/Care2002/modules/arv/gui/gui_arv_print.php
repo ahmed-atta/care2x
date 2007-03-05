@@ -4,6 +4,7 @@
 <head>
 <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="Author" content="Dorothea Reichert">
 <title>ARV Print</title>
 <style type="text/css">
 <!--
@@ -106,7 +107,7 @@ td {
   </tr>
   <tr>
     <td class="sonstiges"><div align="right">Codes for arv therapy: </div></td>
-    <td><?php echo $o_arv_visit->display_ARV_codes() ;?></td>
+    <td><?php echo $o_arv_visit->displaySelectedARVDrugs_String() ;?></td>
   </tr>
   <tr>
     <td class="sonstiges"><div align="right">ARV Status:</div></td>

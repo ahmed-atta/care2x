@@ -4,11 +4,19 @@
 <head>
 <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="Author" content="Dorothea Reichert">
 <script language="JavaScript" type="text/JavaScript">
 <!--
+function gethelp(x,s,x1,x2,x3,x4)
+{
+	if (!x) x="";
+	urlholder="../../main/help-router.php<?php echo URL_APPEND; ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4;
+	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
+	window.helpwin.moveTo(0,0);
+}
 //-->
 </script>
-<title>ARV visit</title>  
+<title>ARV visit</title>
 <link rel="stylesheet" href="../../css/themes/default/default.css" type="text/css">
 <style type="text/css">
 <!--
@@ -27,12 +35,12 @@
 textarea, input{
 	font-family: verdana, arial, tahoma,sans-serif;
     font-size: 14px;
-    margin-left:10px 
+    margin-left:10px
 }
 
 input[type=submit] {
     font-size:12px;
-	background-color:#F0F5FF; 
+	background-color:#F0F5FF;
 	color:#330066;
 	font-weight:bold;
 }
@@ -72,14 +80,14 @@ td > table {
  <tr valign=top  class="titlebar" >
   <td bgcolor="#99ccff">&nbsp;&nbsp;<font color="#330066">Patient Record Form</font></td>
   <td bgcolor="#99ccff" align=right><a
-   href="javascript:gethelp('outpatient_overview.php','Outpatient :: Overview')"><img src="../../gui/img/control/blue_aqua/en/en_hilfe-r.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
+   href="javascript:gethelp('arv_visit.php','<?php echo $src; ?>')"><img src="../../gui/img/control/blue_aqua/en/en_hilfe-r.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
    href="<?php echo $root_path.$breakfile.URL_APPEND.$add_breakfile?>" ><img src="../../gui/img/control/blue_aqua/en/en_cancel.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>     </td>
  </tr>
 </table>
-<?php 
+<?php
 
 	echo $o_arv_visit->get_Error_message('db');
-	echo $o_arv_case->displayARVData(); 
+	echo $o_arv_case->displayARVData();
 ?>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET" name="arv_visit">
 <table class="mainTable">
@@ -119,7 +127,7 @@ td > table {
 				}
 				?>
 			</td>
-		</tr> 
+		</tr>
 		<tr  height="23px" bgcolor="#F0F5FF">
 			<td valign="top" class="leftTable" align="right"><div class="label">Cotrimoxazole:</div></td>
 			<td valign="top" align="left">
@@ -183,7 +191,7 @@ td > table {
 		<tr height="25px" bgcolor="#F0F5FF">
 			<td valign="top" class="leftTable" align="right">Codes for ARV Therapie:</td>
 			<td><?php echo $o_arv_visit->displaySelectedARVDrugs_table()?></td>
-		<tr height="23px" bgcolor="#F0F5FF">	
+		<tr height="23px" bgcolor="#F0F5FF">
 
 			<td valign="top" class="leftTable" align="right"><div class="label">ARV status:</div></td>
 			<td valign="top" align="left">
@@ -241,7 +249,7 @@ td > table {
 			<td  valign="bottom" align="left">
 				<input name="submit" value="submit" type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>>
 			</td>
-		</tr>	
+		</tr>
 </table>
 <input type="hidden" name="pid" value="<?php echo $_GET['pid']?>" />
 		<input type="hidden" name="mode" value="<?php echo $_GET['mode']?>" />
@@ -255,6 +263,7 @@ td > table {
 			}
 		?>
 		<input type="hidden" name="arv_data[create_time]" value="<?php echo $_GET['arv_data']['create_time']; ?>" />
+		<input type="hidden" name="encounter_nr" value="<?php echo $_GET['encounter_nr']?>" />
 	</form>
 </body>
 </html>

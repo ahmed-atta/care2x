@@ -8,7 +8,7 @@
  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
   	<script language="javascript" >
-<!-- 
+<!--
 function gethelp(x,s,x1,x2,x3,x4)
 {
 	if (!x) x="";
@@ -17,7 +17,7 @@ function gethelp(x,s,x1,x2,x3,x4)
 	window.helpwin.moveTo(0,0);
 }
 // -->
-</script> 
+</script>
 <link rel="stylesheet" href="../../css/themes/default/default.css" type="text/css">
 <script language="javascript" src="../../js/hilitebu.js"></script>
 
@@ -49,7 +49,7 @@ function closewin()
 </script>
 
 
- 
+
 </HEAD>
 <BODY bgcolor=#ffffff link=#000066 alink=#cc0000 vlink=#000066  >
 <table width=100% border=0 cellspacing=0 height=100%>
@@ -65,7 +65,7 @@ function closewin()
   <td bgcolor="#99ccff" align="right">
    <a href="javascript:window.history.back()"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a>
    <a href="javascript:gethelp('insurance_type_edit.php','Insurance types :: Edit insurance type')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
-   <a href="insurance_tz.php?ntid=false&lang=$lang" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  
+   <a href="insurance_tz.php?ntid=false&lang=$lang" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
    </td>
  </tr>
  </table>		</td>
@@ -83,10 +83,6 @@ function closewin()
 						<td><?php $insurance_tz->ShowRedIfError($LDCeiling,$error['ceiling']);?>:</td>
 						<td><input type="text" name="ceiling" size=30 value="<?php echo $this_insurance['ceiling']; ?>"></td>
 					</tr>
-					<tr bgcolor=ffffee>
-						<td><?php $insurance_tz->ShowRedIfError($LDPrepaidamount,$error['prepaid_amount']);?>:</td>
-						<td><input type="text" name="prepaid_amount" size=30 value="<?php echo $this_insurance['prepaid_amount']; ?>"></td>
-					</tr>
 					<tr bgcolor=ffffaa>
 						<td><?php $insurance_tz->ShowRedIfError($LDDisable,false);?>:</td>
 						<td><input type="checkbox" name="is_disabled" size=30 value="1" <?php if($this_insurance['is_disabled']>0) echo 'checked'; ?>> <?php echo $LDDisableThisPlan; ?></td>
@@ -97,10 +93,10 @@ function closewin()
 					</tr>
 				</table>
 				</form>
-				</TD>								
+				</TD>
 		</td>
 	</tr>
-	
+
 		<tr valign=top >
 		<td bgcolor=#cccccc>
 							<table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#cfcfcf">
@@ -122,7 +118,7 @@ function openCreditsWindow() {
 //  Script End -->
 </script>
 
-	
+
  <a href="http://www.care2x.org" target=_new>CARE2X 2nd Generation pre-deployment 2.0.2</a> :: <a href="../../legal_gnu_gpl.htm" target=_new> License</a> ::
  <a href=mailto:info@care2x.org>Contact</???a>  :: <a href="../../language/en/en_privacy.htm" target="pp"> Our Privacy Policy </a> ::
  <a href="../../docs/show_legal.php?lang=$lang" target="lgl"> Legal </a> ::
@@ -141,7 +137,7 @@ function openCreditsWindow() {
 					</td>
 
 	</tr>
-	
+
 	</tbody>
  </table>
 

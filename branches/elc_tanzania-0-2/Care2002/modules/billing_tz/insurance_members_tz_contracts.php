@@ -22,7 +22,8 @@ $person_obj = New Person();
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
 $insurance_tz = New Insurance_tz();
 
-
+//echo $todo; //if dodo==finish, let the user go out of that screen!
+//echo $mode; //if mode==update, make the updates to the datasets and let the user see what he has done/changed
 
 if($mode=='update')
 {

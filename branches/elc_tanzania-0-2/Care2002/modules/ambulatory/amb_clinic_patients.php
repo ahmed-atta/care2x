@@ -65,7 +65,7 @@ $HTTP_SESSION_VARS['sess_user_origin']='amb';
 # Load date formatter 
 require_once($root_path.'include/inc_date_format_functions.php');
 
-require_once($root_path.'include/care_api_classes/class_arv_case.php');
+require_once($root_path.'include/care_api_classes/class_tz_arv_case.php');
 
 if(($mode=='')||($mode=='fresh')){
 
@@ -204,8 +204,8 @@ function getinfo(pn){
 	window.location.href=\'nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$station.'\'';*/
 ?>
 	}
-function getARV(pid) {
-	urlholder="<?php echo $root_path ?>modules/arv/arv_menu.php<?php echo URL_REDIRECT_APPEND; ?>&pid="+pid;
+function getARV(pid,encounter_nr) {
+	urlholder="<?php echo $root_path ?>modules/arv/arv_menu.php<?php echo URL_REDIRECT_APPEND; ?>&pid="+pid+"&encounter_nr="+encounter_nr;
 	patientwin=window.open(urlholder,"arv","menubar=no,resizable=yes,scrollbars=yes")
 	patientwin.resizeTo(screen.availWidth,screen.availHeight);
 	patientwin.focus();
@@ -426,12 +426,10 @@ if($rows){
 				if ($dept_nr==42)
 				{
 					if(ARV_case::is_arv_admitted($patient['pid'])){
-						#$temp_image="<a href=\"".$root_path."modules/arv/arv_pass.php".URL_REDIRECT_APPEND."&pid=".$patient['pid']."\"><img ".createComIcon($root_path,'ball_gray.png','0','',TRUE)." alt=\"inARV\"></a>";
-						$temp_image="<a href=\"javascript:getARV('".$patient['pid']."')\"><img ".createComIcon($root_path,'ball_gray.png','0','',TRUE)." alt=\"inARV\"></a>";
+						$temp_image="<a href=\"javascript:getARV('".$patient['pid']."','".$patient['encounter_nr']."')\"><img ".createComIcon($root_path,'ball_gray.png','0','',TRUE)." alt=\"inARV\"></a>";
 					}
 					else {
-						#$temp_image="<a href=\"".$root_path."modules/arv/arv_pass.php".URL_REDIRECT_APPEND."&pid=".$patient['pid']."\"><img ".createComIcon($root_path,'ball_red.png','0','',TRUE)." alt=\"not_inARV\"></a>";
-						$temp_image="<a href=\"javascript:getARV('".$patient['pid']."')\"><img ".createComIcon($root_path,'ball_red.png','0','',TRUE)." alt=\"not_inARV\"></a>";
+						$temp_image="<a href=\"javascript:getARV('".$patient['pid']."','".$patient['encounter_nr']."')\"><img ".createComIcon($root_path,'ball_red.png','0','',TRUE)." alt=\"not_inARV\"></a>";
 					}
 				}
 				

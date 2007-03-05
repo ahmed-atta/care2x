@@ -33,11 +33,19 @@ A:visited:hover {color: #cc0033;}
 </style>
 <script language="JavaScript">
 <!--
+
 function popPic(pid,nm){
 
  if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=<?php echo sid;?>&lang=$lang&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
 
 }
+function getARV(path) {
+	urlholder="<?php echo $root_path ?>"+path+"<?php echo URL_REDIRECT_APPEND; ?>";
+	patientwin=window.open(urlholder,"arv","menubar=no,resizable=yes,scrollbars=yes");
+	patientwin.resizeTo(screen.availWidth,screen.availHeight);
+	patientwin.focus();
+}
+
 // -->
 </script>
 
@@ -131,6 +139,22 @@ function popPic(pid,nm){
                   <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
                   <td class="submenu_item"><a href="reporting_xray.php"><?php echo $LDRadiologyReport; ?></a></td>
                   <td><?php echo $LDMonthlyRadiologyReport; ?></td>
+                </tr>
+                <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="javascript:getARV('modules/arv/arv_reporting_quarterly.php')">HIV Care Reporting</a></td>
+                  <td>Quarterly Facility Based Reporting</td>
+                </tr>
+                 <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="javascript:getARV('modules/arv/arv_reporting_overview.php')">HIV Overview</a></td>
+                  <td>Patient Data Overview</td>
+                </tr>
+                </tr>
+                 <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="javascript:getARV('modules/arv/arv_reporting_cstatistics.php')">HIV C-Statistics</a></td>
+                  <td>C-Statistics Overview</td>
                 </tr>
               </tbody>
             </table></TD>
