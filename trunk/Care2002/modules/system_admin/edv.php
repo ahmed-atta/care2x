@@ -56,27 +56,27 @@ $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
  # Window bar title
  $smarty->assign('title',$LDEDP);
 
- # Prepare the submenu icons
+ # Prepare the submenu icons. cleaned up menu from doubled links Claudio Torbinio 
 
  $aSubMenuIcon=array(createComIcon($root_path,'lockfolder.gif','0'),
-										createComIcon($root_path,'storage.gif','0'),
-										createComIcon($root_path,'pers_tree.gif','0'),
+										#createComIcon($root_path,'storage.gif','0'),
+										#createComIcon($root_path,'pers_tree.gif','0'),
 										createComIcon($root_path,'bubble.gif','0')
 										);
 
-# Prepare the submenu item descriptions
+# Prepare the submenu item descriptions. cleaned up menu from doubled links Claudio Torbinio 
 
 $aSubMenuText=array($LDManageAccessTxt,
-										$LDSqlDbTxt,
-										$LDSysOpLoginTxt,
+										#$LDSqlDbTxt,
+										#$LDSysOpLoginTxt,
 										$LDNewsTxt
 										);
 
-# Prepare the submenu item links indexed by their template tags
+# Prepare the submenu item links indexed by their template tags. cleaned up menu from doubled links Claudio Torbinio 
 
 $aSubMenuItem=array('LDQViewTxt' => '<a href="edv-main-pass.php'.URL_APPEND.'&target=adminlogin">'.$LDManageAccess.'</a>',
-										'LDDutyPlanTxt' => '<a href="edv-main-pass.php'.URL_APPEND.'&target=sqldb">'.$LDSqlDb.'</a>',
-										'LDDocsForumTxt' => '<a href="edv-main-pass.php'.URL_APPEND.'&target=adminlogin">'.$LDSysOpLogin.'</a>',
+										#'LDDutyPlanTxt' => '<a href="edv-main-pass.php'.URL_APPEND.'&target=sqldb">'.$LDSqlDb.'</a>',
+										#'LDDocsForumTxt' => '<a href="edv-main-pass.php'.URL_APPEND.'&target=adminlogin">'.$LDSysOpLogin.'</a>',
 										'LDNewsTxt' => '<a href="'.$root_path.'modules/news/newscolumns.php'.URL_APPEND.'&dept_nr=27">'.$LDNews.'</a>',
 										);
 
