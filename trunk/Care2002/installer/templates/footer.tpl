@@ -19,16 +19,16 @@
 		<table width="100%" border=0 cellpadding=0 cellspacing=0>
 			<tr>
 				<td>
+					<p align="center">
 					<a href="http://www.care2x.org/">Care2x Home</a> :: 
 					<a href="http://www.care2x.org/wiki/">Wiki</a> :: 
 					<a href="http://sourceforge.net/mailarchive/forum.php?forum_id=11772">Mailing List</a> :: 
-					<a href="http://sourceforge.net/projects/care2002/">SF.net Project</a>
-					<br>
-					Copyright 2002-2006 Elpidio Latorilla
+					<a href="http://sourceforge.net/projects/care2002/">SF.net Project</a>&nbsp; 
+                    //
+					Copyright 2002-2007 Elpidio Latorilla
 				</td>
 				<td align="right" valign="bottom">
-					Based on <a href="http://www.mirrormed.org">MirrorMed</a> installer
-				</td>
+					&nbsp;</td>
 			</tr>
 		</table>
 	</div>

@@ -1563,6 +1563,22 @@ CREATE TABLE "care_icd10_pt_br" (
 	"extra_subclass" text
 );
 
+
+CREATE TABLE "care_icd10_it" (
+	"diagnosis_code" character varying(12),
+	"description" text,
+	"class_sub" character varying(5),
+	"type" character varying(10),
+	"inclusive" text,
+	"exclusive" text,
+	"notes" text,
+	"std_code" character(1),
+	"sub_level" smallint DEFAULT '0',
+	"remarks" text,
+	"extra_codes" text,
+	"extra_subclass" text
+);
+
 --
 -- TOC Entry ID 252 (OID 19088)
 --
