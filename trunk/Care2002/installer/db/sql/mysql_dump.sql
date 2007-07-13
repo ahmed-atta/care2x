@@ -1253,6 +1253,77 @@ CREATE TABLE care_encounter_sickconfirm (
    PRIMARY KEY (nr)
 );
 
+
+#----------------------------------------------------------
+# begin of new chart
+
+DROP TABLE IF EXISTS `care_encounter_custom_ddc`;
+CREATE TABLE IF NOT EXISTS `care_encounter_custom_ddc` (
+  `nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) NOT NULL,
+  `indatetime` datetime NOT NULL,
+  `urinesugar` varchar(35) NOT NULL,
+  `acetone` varchar(35) NOT NULL,
+  `bloodsugar` decimal(10,2) NOT NULL,
+  `tablets` varchar(35) NOT NULL,
+  `insulin` decimal(10,2) NOT NULL,
+  `createid` varchar(64) NOT NULL,
+  `createtime` timestamp NOT NULL,
+  PRIMARY KEY  (`nr`)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS `care_encounter_custom_inout`;
+CREATE TABLE IF NOT EXISTS `care_encounter_custom_inout` (
+  `nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) NOT NULL,
+  `indatetime` datetime NOT NULL,
+  `pint` decimal(10,2) NOT NULL,
+  `solution` varchar(32) NOT NULL,
+  `solutionamount` decimal(10,2) NOT NULL,
+  `initial` varchar(6) NOT NULL,
+  `oralfluid` varchar(32) NOT NULL,
+  `oralfluidamount` decimal(10,2) NOT NULL,
+  `urinetime` time NOT NULL,
+  `urineamount` decimal(10,2) NOT NULL,
+  `rta` decimal(10,2) NOT NULL,
+  `drain` decimal(10,2) NOT NULL,
+  `createid` varchar(64) NOT NULL,
+  `createtime` timestamp NOT NULL,
+  PRIMARY KEY  (`nr`)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS `care_encounter_custom_noc`;
+CREATE TABLE IF NOT EXISTS `care_encounter_custom_noc` (
+  `nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) NOT NULL,
+  `indatetime` datetime NOT NULL,
+  `verbal` tinyint(1) NOT NULL,
+  `moton` tinyint(1) NOT NULL,
+  `eyes` tinyint(1) NOT NULL,
+  `createid` varchar(64) NOT NULL,
+  `createtime` timestamp NOT NULL,
+  PRIMARY KEY  (`nr`)
+) TYPE=MyISAM ;
+
+
+DROP TABLE IF EXISTS `care_encounter_custom_tc`;
+CREATE TABLE IF NOT EXISTS `care_encounter_custom_tc` (
+  `nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) NOT NULL,
+  `createid` varchar(64) NOT NULL,
+  `createtime` timestamp NOT NULL,
+  `indatetime` datetime NOT NULL,
+  `time` time NOT NULL,
+  `position` varchar(32) NOT NULL,
+  PRIMARY KEY  (`nr`)
+) TYPE=MyISAM ;
+
+
+#----------------------------------------------------------
+# end of new chart
+
 # --------------------------------------------------------
 
 #

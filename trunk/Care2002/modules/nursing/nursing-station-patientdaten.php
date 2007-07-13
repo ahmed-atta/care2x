@@ -7,6 +7,15 @@ $lang_tables[]='departments.php';
 define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
+
+/**
+Load custom file - note that by default we will assume english
+**/
+
+$custom_lang_file = $root_path."language/".$lang.'/lang_'.$lang.'_custom.php';
+include($custom_lang_file);
+
+
 /**
 * If the script call comes from the op module replace the user cookie with the user info from op module
 */
@@ -409,7 +418,7 @@ ob_start();
 
 ?>
 
-<ul><p><br>
+<ul>
 
  <form  method="post" name="patient_folder" onSubmit="return isColorBarUpdated()">
  
@@ -488,19 +497,34 @@ function rx(){
 		echo '</td></nobr>
 		</tr>
 		<tr bgcolor="#696969" ><td colspan="3" ><nobr>
-		<input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-kurve.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'"><input 
-		type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-pbericht.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDNursingReport.'"><input 
-		type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-todo.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDDocsPrescription.'"><input 
-		type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'main/diagnostics-report-start.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'&header='.$result['name_last'].',+'.$result['name_first'].'+'.formatDate2Local($result['date_birth'],$date_format).'\'" value="'.$LDReports.'"><br>
+		<table cellpadding=0 width=100%>
+		<tr><td bgcolor=333333><font color=white><b>Charts<b></font></td></tr>
+		<tr><td>
+		<table cellpadding=3><tr><td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-inout.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$IO_title.'"></td>
+		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-ddc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$DDC_title.'"></td>
+		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-kurve.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'"></td>
+		</tr>
+		<tr><td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-tc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$TC_title.'"></td>
+		<td colspan=2><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-noc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$NOC_title.'"></td>
+		</tr></table>
+		</td></tr>
+		<tr><td bgcolor=333333><font color=white><b>Reports<b></font></td></tr>
+		<tr><td>
+		<table cellpadding=3><tr>
+		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-pbericht.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDNursingReport.'"></td>
+		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'main/diagnostics-report-start.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'&header='.$result['name_last'].',+'.$result['name_first'].'+'.formatDate2Local($result['date_birth'],$date_format).'\'" value="'.$LDReports.'"></td>
 		';
+		echo '<td><input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.$LDLabReports.'"></td>';
+		
 		//<input type="button" value="'.$LDRootData.'"><input 
 		//type="button" value="'.$LDNursingPlan.'">
+		echo '</tr></table></td></tr>';
+		echo '<tr><td bgcolor=333333><font color=white><b>Other<b></font></td></tr>';
+		echo '<tr><td><table cellpadding=3><tr><td>';
 		echo '<input 
-		type="button" onClick="javascript:openDRGComposite()" value="'.$LDDRG.'">';
-		
-		echo '<input 
-		type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.$LDLabReports.'"><input 
-		type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'modules/fotolab/fotos-start.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'">';
+		type="button" onClick="javascript:openDRGComposite()" value="'.$LDDRG.'"></td><td>';
+		echo '<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-todo.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDDocsPrescription.'"></td>';
+		echo '<td><input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'modules/fotolab/fotos-start.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'"></td></tr></table></td></tr></table>';
 		
 		
 		/* Create the select  menu in edit mode */
@@ -520,7 +544,7 @@ function rx(){
 */
 		if($edit){
 		
-			echo '<select 
+			echo '<table cellpadding=3><tr><td><select 
 			name="konsiltyp" size="1" onChange=makekonsil(this.value)>
 			<option value="">'.$LDChkUpRequests.'</option>';
 
@@ -535,7 +559,7 @@ function rx(){
 				echo '</option>';
 			}
 			echo '
-			</select>';
+			</select></td></tr></table>';
 		}
 		
 		/* Create frames witht the skins */
