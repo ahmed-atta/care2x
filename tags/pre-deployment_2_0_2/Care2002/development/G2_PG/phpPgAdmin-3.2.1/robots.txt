@@ -1,8 +1,0 @@
-# Prevent web robots from indexing your phpPgAdmin installation
-# See: http://www.searchengineworld.com/robots/robots_tutorial.htm
-#
-# $Id$
-
-User-agent: *
-Disallow:   /
-
