@@ -19,32 +19,32 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
-$title = "Simple Invoices";//1
+$title = "Fatturazione";//1
 
 $LANG['about'] = "About";//1
-$LANG['account_info'] = "Account Info";//1
-$LANG['actions'] = "Actions";//1
-$LANG['add_biller'] = "Add Biller";//1
-$LANG['add_customer'] = "Add Customer";//1
-$LANG['add_invoice_preference'] = "Add Bill Preference";//1
-$LANG['add_new_biller'] = "Add New Biller";//1
-$LANG['add_new_invoice'] = "Add New Bill";//1
-$LANG['add_new_payment_type'] = "Add New payment Type";//1
-$LANG['add_new_preference'] = "Add New Bill Preference";//1
-$LANG['add_new_product'] = "Add New Product";//1
-$LANG['add_new_tax_rate'] = "Add New Tax Rate";//1
-$LANG['add_payment_type'] = "Add Payment Type";//1
-$LANG['add_product'] = "Add Product";//1
-$LANG['add_tax_rate'] = "Add Tax Rate";//1
-$LANG['address'] = "Address";//1
-$LANG['address_city'] = "Address: City";//1
-$LANG['address_country'] = "Address: Country";//1
-$LANG['address_state'] = "Address: State";//1
-$LANG['address_street'] = "Address: Street";//1
-$LANG['address_zip'] = "Address: Zip";//1
-$LANG['age'] = "Age";//1
+$LANG['account_info'] = "Informazioni Account";//1
+$LANG['actions'] = "Azioni";//1
+$LANG['add_biller'] = "Aggiungi Cliente";//1
+$LANG['add_customer'] = "Aggiungi Customer";//1
+$LANG['add_invoice_preference'] = "Aggiungi Preferenze pagamento";//1
+$LANG['add_new_biller'] = "Aggiungi Conto";//1
+$LANG['add_new_invoice'] = "Aggiungi Conto";//1
+$LANG['add_new_payment_type'] = "Aggiungi Pagamento";//1
+$LANG['add_new_preference'] = "Aggiungi preferenze di pagamento";//1
+$LANG['add_new_product'] = "Aggiungi Prodotto";//1
+$LANG['add_new_tax_rate'] = "Aggiungi Iva";//1
+$LANG['add_payment_type'] = "Aggiungi preferenze di pagamento";//1
+$LANG['add_product'] = "Aggiungi Prodotto";//1
+$LANG['add_tax_rate'] = "Aggiungi Ivae";//1
+$LANG['address'] = "Indirizzo";//1
+$LANG['address_city'] = "Indirizzo: Citta'";//1
+$LANG['address_country'] = "Indirizzo: Nazione";//1
+$LANG['address_state'] = "Indirizzo: Provincia";//1
+$LANG['address_street'] = "Indirizzo: Via";//1
+$LANG['address_zip'] = "Indirizzo: CAP";//1
+$LANG['age'] = "Eta'";//1
 $LANG['aging'] = "Aging";//1
-$LANG['amount'] = "Amount";//1
+$LANG['amount'] = "Ammontare";//1
 $LANG['attention_short'] = "Attn.";//1
 $LANG['backup_database'] = "Backup Database";//1
 $LANG['biller'] = "Biller";//1
