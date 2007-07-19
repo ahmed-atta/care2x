@@ -178,7 +178,7 @@ $LDSeparated='Separated';
 $LDCellPhone='Cellphone';
 $LDFax='Fax';
 $LDEmail='Email';
-$LDZipCode='Hospital file nr';
+$LDZipCode='P.O. Box';
 $LDPhoto='Photo';
 /* 2002-12-02 EL*/
 $LDPatientRegisterTxt='Register patient, search registrations, archive research';

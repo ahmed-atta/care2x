@@ -22,7 +22,7 @@ if($mode=='insert')
 {
 	//Error checking
 	if(strlen(trim($name))<3) $error['name'] = true;
-	if(strlen(trim($ceiling))<3 || !is_numeric($ceiling)) $error['ceiling'] = true;
+	if(!is_numeric($ceiling)) $error['ceiling'] = true;
 	if(!$error)
 	{
 		if($insurance_tz->InsertInsuranceType($_POST))

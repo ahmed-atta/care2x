@@ -206,7 +206,6 @@ class Core {
 	function _prepSaveArray(){
 		$x='';
 		$v='';
-		//print_r($this->ref_array);
 		while(list($x,$v)=each($this->ref_array)) {
 
 			if(isset($this->data_array[$v])&&($this->data_array[$v]!='')) {
@@ -229,7 +228,7 @@ class Core {
 	function insertDataFromInternalArray() {
 		//$this->data_array=NULL;
 		$this->_prepSaveArray();
-		
+	    
 		# Check if  "create_time" key has a value, if no, create a new value
 		//if(!isset($this->buffer_array['create_time'])||empty($this->buffer_array['create_time'])) $this->buffer_array['create_time']=date('YmdHis');
 		//print_r($this->buffer_array);
@@ -696,7 +695,7 @@ class Core {
 		*/
 		//if(!$string) return 0;
 		$error=0;
-		$forbidden_chars="abcdefghijklmnopqrstuvwxyz!\"§$%&/()=?ß\\- ";
+		$forbidden_chars="abcdefghijklmnopqrstuvwxyz!\"ï¿½$%&/()=?ï¿½\\- ";
 		
 		$forbidden_chars_array = $this->_str_split($forbidden_chars,1);
 		$string_array = $this->_str_split(strtolower(trim($string)));

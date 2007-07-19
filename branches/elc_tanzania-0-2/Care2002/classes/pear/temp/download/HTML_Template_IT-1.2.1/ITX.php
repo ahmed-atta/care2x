@@ -15,7 +15,7 @@
 // |         Pierre-Alain Joye <pajoye@php.net>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: ITX.php,v 1.1 2006/11/29 09:34:09 dorothea Exp $
+// $Id: ITX.php,v 1.2 2007/07/12 16:26:23 robert Exp $
 //
 
 require_once 'HTML/Template/IT.php';
@@ -35,7 +35,7 @@ require_once 'HTML/Template/IT_Error.php';
 *
 * @author   Ulf Wendel <uw@netuse.de>
 * @access   public
-* @version  $Id: ITX.php,v 1.1 2006/11/29 09:34:09 dorothea Exp $
+* @version  $Id: ITX.php,v 1.2 2007/07/12 16:26:23 robert Exp $
 * @package  HTML_Template_IT
 */
 class HTML_Template_ITX extends HTML_Template_IT
@@ -194,7 +194,7 @@ class HTML_Template_ITX extends HTML_Template_IT
             $this->blockdata[$block] = $blockdata;
         }
 
-        // old TODO - I'm not sure if we need this
+        //  I'm not sure if we need this
         // update caches
 
         return true;

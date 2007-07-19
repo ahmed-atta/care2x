@@ -27,19 +27,52 @@ function gethelp(x,s,x1,x2,x3,x4)
 <script language="javascript" src="../../js/hilitebu.js"></script>
 
 <STYLE TYPE="text/css">
+<!--
+	.table_content {
+	            border: 1px solid #000000;
+	}
+	
+	.tr_content {
+		        border: 1px solid #000000;
+	}
+	
+	.td_content {
+	background-color: #CC9933;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	}
+p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+}
+	
+	.headline {
+	            background-color: #CC9933;
+	            border-top-width: 1px;
+	            border-right-width: 1px;
+	            border-bottom-width: 1px;
+	            border-left-width: 1px;
+	            border-top-style: solid;
+	            border-right-style: solid;
+	            border-bottom-style: solid;
+	            border-left-style: solid;
+	}
 A:link  {color: #000066;}
 A:hover {color: #cc0033;}
 A:active {color: #cc0000;}
 A:visited {color: #000066;}
 A:visited:active {color: #cc0000;}
 A:visited:hover {color: #cc0033;}
-</style>
-
-  	
-<style type="text/css">
 .lab {font-family: arial; font-size: 9; color:purple;}
 .lmargin {margin-left: 5;}
 .billing_topic {font-family: arial; font-size: 12; color:black;}
+-->
 </style>
 
 <script language="JavaScript" src="<?php echo $root_path;?>js/cross.js"></script>
@@ -52,25 +85,20 @@ A:visited:hover {color: #cc0033;}
 <BODY bgcolor="#ffffff" link="#000066" alink="#cc0000" vlink="#000066" onload="setBallon('BallonTip');" >
 <table width=100% border=0 cellspacing=0 height=100%>
 <tbody class="main">
-	<tr>
-
-		<td  valign="top" align="middle" height="35">
-			 <table cellspacing="0"  class="titlebar" border=0>
- <tr valign=top  class="titlebar" >
-            <td bgcolor="#99ccff" > &nbsp;&nbsp;<font color="#330066"><?php echo $LDPendingBills; ?>
+  <tr>
+	<td  valign="top" align="middle" height="35">
+	 <table cellspacing="0"  class="titlebar" border=0>
+ 		<tr valign=top  class="titlebar" >
+          <td bgcolor="#99ccff" > &nbsp;&nbsp;<font color="#330066"><?php echo $LDPendingBills; ?>
                (<?php echo $encoded_batch_number=$enc_obj->ShowPID($batch_nr); ?>)</font> </td>
-  <td bgcolor="#99ccff" align=left>
-  	<a href="javascript:gethelp('billing_pendingbills.php','Billing :: Pending Bills')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
-   	<a href="billing_tz.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  
-	
-  </td>
- </tr>
-
- </table>		
-         
-      </td>
+  		  <td bgcolor="#99ccff" align=left>
+  				<a href="javascript:gethelp('billing_pendingbills.php','Billing :: Pending Bills')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
+   				<a href="billing_tz.php" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  
+		  </td>
+ 		</tr>
+	 </table>		
+    </td>
 	</tr>
-
 	<tr>
 		<td bgcolor=#ffffff valign=top>
 		

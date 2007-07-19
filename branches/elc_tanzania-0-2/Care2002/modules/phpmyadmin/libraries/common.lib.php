@@ -1044,8 +1044,6 @@ h1    {font-family: sans-serif; font-size: large; font-weight: bold}
                                     reset($uva_mydbs);
                                     while (list($uva_matchpattern, $uva_value) = each($uva_mydbs)) {
                                         // loic1: fixed bad regexp
-                                        // TODO: db names may contain characters
-                                        //       that are regexp instructions
                                         $re        = '(^|(\\\\\\\\)+|[^\])';
                                         $uva_regex = ereg_replace($re . '%', '\\1.*', ereg_replace($re . '_', '\\1.{1}', $uva_matchpattern));
                                         // Fixed db name matching

@@ -1,5 +1,4 @@
 <?php
-
 $returnfile=$HTTP_SESSION_VARS['sess_file_return'];
 
 $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
@@ -7,9 +6,9 @@ $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 if (empty($externalcall))
   $breakfile='javascript:window.close()';
 else
-  if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) 
+  if($HTTP_COOKIE_VARS["ck_login_logged".$sid])
     $breakfile = $root_path."main/startframe.php".URL_APPEND;
-  else 
+  else
     $breakfile = $breakfile.URL_APPEND."&target=entry";
 if($backpath)
 	$breakfile = urldecode($backpath);
@@ -17,22 +16,22 @@ elseif($back_path) {
 	$backpath=$back_path; // Just an ugly workaround! Sometimes back_path instead of backpath is used!
 	$breakfile = urldecode($backpath);
 }
-$debug=false;
+$debug=FALSE;
 if ($debug) {
 	echo "file: gui_show.php<br>";
     if (!isset($externalcall))
       echo "internal call<br>";
     else
       echo "external call<br>";
-    
+
     echo "mode=".$mode."<br>";
-    
+
 		echo "show=".$show."<br>";
-		
+
     echo "nr=".$nr."<br>";
-    
+
     echo "breakfile: ".$breakfile."<br>";
-    
+
     echo "pid:".$pid;
 }
 # Start Smarty templating here
@@ -44,7 +43,7 @@ if ($debug) {
 
  require_once($root_path.'gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('common');
- 
+
 if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
 	else $sTitleNr = ($HTTP_SESSION_VARS['sess_full_pid']);
 
@@ -52,13 +51,13 @@ if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
 # Title in the toolbar
  if (!empty($externalcall))
     $smarty->assign('sToolbarTitle',$sTitleNr);
- else 
+ else
   $smarty->assign('sToolbarTitle',"$page_title ($sTitleNr)");
- 
+
  if ($disablebuttons) $smarty->assign('disableButton',true);
 
  # href for help button
- 
+
  if ($breakfile=="billing") {
  	$help_site="billing";
  }
@@ -91,7 +90,7 @@ ob_start();
 ?>
 
 <script  language="javascript">
-<!-- 
+<!--
 
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 
@@ -108,7 +107,7 @@ function popRecordHistory(table,pid) {
 <script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 
-<?php 
+<?php
 
 if (isset($printout))
   echo '<script language="javascript"> this.window.print(); </script>';
@@ -145,9 +144,9 @@ if($parent_admit&&$is_discharged){
 		else $smarty->assign('sDischarged',$LDPatientIsDischarged);
 }
 
-if($parent_admit) 
+if($parent_admit)
   $smarty->assign('LDCaseNr',$LDAdmitNr);
-else 
+else
   $smarty->assign('LDCaseNr',$LDFileNr.':');
 
 if($parent_admit) $smarty->assign('sEncNrPID',$selian_pid);
@@ -199,7 +198,7 @@ if($death_date && $death_date != DBF_NODATE){
 		$smarty->assign('name_middle',$name_middle);
 		$iRowSpan++;
 	}
-		
+
 $smarty->assign('sRowSpan',"rowspan=\"$iRowSpan\"");
 
 $smarty->assign('LDBday',$LDBday);
@@ -226,7 +225,7 @@ if (empty($externalcall))
 	if($parent_admit)  include('./gui_bridge/default/gui_patient_encounter_showdata_options.php');
 		else include('./gui_bridge/default/gui_patient_reg_options.php');
 	$sTemp = ob_get_contents();
-	
+
 ob_end_clean();
 
 $smarty->assign('sOptionsMenu',$sTemp);
@@ -244,62 +243,62 @@ if($mode=='show' /*&& !isset($externalcall) */){
 		//echo 'gui_'.$thisfile;
 		include('./gui_bridge/default/gui_'.$thisfile);
 		$sTemp = ob_get_contents();
-     
+
       $smarty->assign('bShowNoRecord',TRUE);
-      if (!isset($printout)) 
+      if (!isset($printout))
         $smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
-      
-      if (!empty($externalcall)) {     
+
+      if (!empty($externalcall)) {
         if (!isset($printout)) {
           $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&help_site='.$help_site.'&externalcall='.$externalcall.'&backpath='.urlencode($backpath).'"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
         }
       } else
         $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
-      
-			
+
+
 		ob_end_clean();
 	  $smarty->assign('sOptionBlock',$sTemp);
 
 	}else{
       if (!empty($externalcall)) {
-      	
+
 	        if (!isset($printout)) {
-	        	
+
 	          	$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&mode=new&help_site&externalcall='.$externalcall.'&backpath='.urlencode($backpath).'"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
 
 	        } else {
-	        	
+
 	        	$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
-	        
+
 	        }
-      
+
       }
-      
+
   	  $smarty->assign('bShowNoRecord',TRUE);
 	  $smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>');
 	  $smarty->assign('norecordyet',$norecordyet);
 	  if($parent_admit && !$is_discharged && $thisfile!='show_diagnostics_result.php'){
 
 	  	  $smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
-		  
-	      if (!empty($externalcall))      
+
+	      if (!empty($externalcall))
 	        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&mode=new&help_site&externalcall='.$externalcall.'"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
 	      else
 	        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&mode=new&help_site"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
-	        
+
  	  }else{
 	  		if(file_exists('./gui_bridge/default/gui_person_createnew_'.$thisfile)) include('./gui_bridge/default/gui_person_createnew_'.$thisfile);
 	  	}
 	}
-	
+
 }else {
 	# Buffer the option input block
-	ob_start();	   
+	ob_start();
 	   // witch tab sould be activated at first:
 	   //set here "druglist", "Supplies", "supplies-lab", "special-others" if you want.
-	   $activated_tab = "druglist"; 
+	   $activated_tab = "druglist";
 	   // (by Merotech(RM): Here the main prescription-table-content will be loaded: ;
-	   
+
 	  if ($debug) echo  './gui_bridge/default/gui_input_'.$thisfile;
 	  include('./gui_bridge/default/gui_input_'.$thisfile);
 
@@ -321,7 +320,7 @@ if (empty($externalcall))
 	# Get buffer contents and stop buffering
 
 	$sTemp= ob_get_contents();
-	
+
 ob_end_clean();
 
 $smarty->assign('sBottomControls',$sTemp);

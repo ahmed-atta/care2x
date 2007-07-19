@@ -92,7 +92,7 @@ while($test_request=$requests->FetchRow())
 	    
 			if($test_request['batch_nr']) 
 			{ 
-					echo $enc_obj->showPID($test_request['batch_nr']); 
+					echo $test_request['selian_pid'].'/'.$test_request['name_first']."/ ".$test_request['name_last']; 
 			} 
 	    echo " ".$test_request['room_nr']."</a><br>";
    }
@@ -101,7 +101,7 @@ while($test_request=$requests->FetchRow())
         echo "<img ".createComIcon($root_path,'redpfeil.gif','0','',TRUE)."> <FONT size=1 color=\"red\">";
 			if($test_request['batch_nr']) 
 			{
-					echo $enc_obj->showPID($test_request['batch_nr']); 
+					echo $test_request['selian_pid'];  
 			} 
 	echo " ".$test_request['room_nr']."</font><br>";
         $track_item=$tracker;

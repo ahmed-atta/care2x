@@ -264,25 +264,7 @@ class Person extends Core {
 
 	    }
     }
-	/**
-	* Database transaction. Uses the adodb transaction method.
-	* @access private
-	*/
-	function Transact($sql='') {
 
-	    global $db;
-        if(!empty($sql)) $this->sql=$sql;
-
-        $db->BeginTrans();
-        $this->ok=$db->Execute($this->sql);
-        if($this->ok) {
-            $db->CommitTrans();
-			return true;
-        } else {echo 'DEBUG: '.$this->sql;
-	        $db->RollbackTrans();
-			return false;
-	    }
-    }
 	/**
 	* Inserts the data into the care_person table.
 	* @access private
@@ -361,6 +343,7 @@ class Person extends Core {
 	*/
 	function insertDataFromInternalArray() {
 	    //$this->data_array=NULL;
+	    
 		$this->prepInsertArray();
 		# Check if  "create_time" key has a value, if no, create a new value
 		if(!isset($this->buffer_array['create_time'])||empty($this->buffer_array['create_time'])) $this->buffer_array['create_time']=date('YmdHis');

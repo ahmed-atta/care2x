@@ -51,7 +51,7 @@ function show_contract_popup(company,pid)
     </td>
  </tr>
   <tr>
-    <td><form name="insurance" method="post" OnChange="submit();">
+    <td><form name="insurance" method="post" >
     <input type="hidden" name="mode" value="update">
     <input type="hidden" name="insurance" value="<?php echo $company_id; ?>">
 	<table width="100%" border="0" bgcolor="#CAD3EC" cellpadding="1" cellspacing="1">

@@ -293,10 +293,7 @@ if (isset($new_name) && trim($new_name) != '') {
                 unset($tb_rs);
             }
             
-            // garvin: [TODO] Can't get moving PDFs the right way. The page numbers always
-            // get screwed up independently from duplication because the numbers do not
-            // seem to be stored on a per-database basis. Would the author of pdf support
-            // please have a look at it?
+
 
             if ($cfgRelation['pdfwork']) {
                 $table_query = 'UPDATE ' . PMA_backquote($cfgRelation['table_coords'])
@@ -379,23 +376,6 @@ if (isset($new_name) && trim($new_name) != '') {
                 $new_fields = array('foreign_db' => $target_db, 'foreign_table' => $new_name);
                 PMA_duplicate_table('relwork', 'relation', $get_fields, $where_fields, $new_fields);
         
-                // garvin: [TODO] Can't get duplicating PDFs the right way. The page numbers always
-                // get screwed up independently from duplication because the numbers do not
-                // seem to be stored on a per-database basis. Would the author of pdf support
-                // please have a look at it?
-                /*
-                $get_fields = array('page_descr');
-                $where_fields = array('db_name' => $db);
-                $new_fields = array('db_name' => $target_db);
-                $last_id = PMA_duplicate_table('pdfwork', 'pdf_pages', $get_fields, $where_fields, $new_fields);
-
-                if (isset($last_id) && $last_id >= 0) {
-                    $get_fields = array('x', 'y');
-                    $where_fields = array('db_name' => $db, 'table_name' => $table);
-                    $new_fields = array('db_name' => $target_db, 'table_name' => $new_name, 'pdf_page_number' => $last_id);
-                    PMA_duplicate_table('pdfwork', 'table_coords', $get_fields, $where_fields, $new_fields);
-                }
-                */
             }
         }
 

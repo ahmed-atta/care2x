@@ -320,7 +320,7 @@ if(!isset($edit)) $edit=FALSE;
  $smarty->assign('pbBack',FALSE);
 
  # href for close button
- $smarty->assign('breakfile',$breakfile);
+ $smarty->assign('breakfile',"javascript:window.close()");
 
  # Window bar title
  $smarty->assign('sWindowTitle', "$LDDiagnosticTest :: $LDCentralLab");

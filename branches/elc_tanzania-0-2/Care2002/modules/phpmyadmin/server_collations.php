@@ -27,7 +27,6 @@ echo '<h2>' . "\n"
  * Checks the MySQL version
  */
 if (PMA_MYSQL_INT_VERSION < 40100) {
-    // TODO: Some nice Message :-)
     include('./footer.inc.php');
     exit;
 }

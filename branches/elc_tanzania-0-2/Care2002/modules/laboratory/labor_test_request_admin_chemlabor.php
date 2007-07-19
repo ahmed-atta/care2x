@@ -212,7 +212,7 @@ if($batchrows) $sTitle = $sTitle." (".$batch_nr.")";
  $smarty->assign('pbBack',FALSE);
 
  # href for close button
- $smarty->assign('breakfile',$breakfile);
+ $smarty->assign('breakfile',"javascript:window.close()");
 
  # Window bar title
  $smarty->assign('sWindowTitle',$sTitle);

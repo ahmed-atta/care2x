@@ -26,7 +26,7 @@ if (!defined('PMA_DISPLAY_TBL_LIB_INCLUDED')) {
      *     the "display printable view" option.
      *     Of course '0'/'1' means the feature won't/will be enabled.
      *
-     * @param   string   the synthetic value for display_mode (see §1 a few
+     * @param   string   the synthetic value for display_mode (see ï¿½1 a few
      *                   lines above for explanations)
      * @param   integer  the total number of rows returned by the sql query
      *                   without any programmatically appended "LIMIT" clause
@@ -94,7 +94,7 @@ if (!defined('PMA_DISPLAY_TBL_LIB_INCLUDED')) {
             }
             // 2.2 Statement is a "SHOW..."
             else if ($GLOBALS['is_show']) {
-                // 2.2.1 TODO : defines edit/delete links depending on show statement
+
                 $tmp = eregi('^SHOW[[:space:]]+(VARIABLES|(FULL[[:space:]]+)?PROCESSLIST|STATUS|TABLE|GRANTS|CREATE|LOGS)', $GLOBALS['sql_query'], $which);
                 if (strpos(' ' . strtoupper($which[1]), 'PROCESSLIST') > 0) {
                     $do_display['edit_lnk'] = 'nn'; // no edit link
@@ -129,8 +129,7 @@ if (!defined('PMA_DISPLAY_TBL_LIB_INCLUDED')) {
                         && ($fields_meta[$i]->table == '' || $fields_meta[$i]->table != $prev_table)) {
                         $do_display['edit_lnk'] = 'nn'; // don't display links
                         $do_display['del_lnk']  = 'nn';
-                        // TODO: May be problematic with same fields names in
-                        //       two joined table.
+
                         // $do_display['sort_lnk'] = (string) '0';
                         $do_display['ins_row']  = (string) '0';
                         if ($do_display['text_btn'] == '1') {

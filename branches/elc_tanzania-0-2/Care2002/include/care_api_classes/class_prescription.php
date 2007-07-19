@@ -215,7 +215,7 @@ class Prescription extends Core {
   	  global $db;
   	  if($is_enabled) $query = " AND ".$is_enabled." = 1";
   	  else $query = "";
-	    $debug = false;
+	    $debug = FALSE;
 	    ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 	    
   	    $this->sql="SELECT item_id as drug_id, item_description as description FROM $this->tb_drugsandservices WHERE

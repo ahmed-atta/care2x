@@ -177,7 +177,6 @@ if ($abort == FALSE) {
         $selected_cnt = count($selected);
     }
 
-    // TODO: optimize in case of multiple fields to modify
     for ($i = 0; $i < $selected_cnt; $i++) {
         if (!empty($submit_mult)) {
             $field = PMA_sqlAddslashes(urldecode($selected[$i]), TRUE);

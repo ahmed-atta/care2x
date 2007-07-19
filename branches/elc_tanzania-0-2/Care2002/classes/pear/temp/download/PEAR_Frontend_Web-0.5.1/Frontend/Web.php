@@ -16,7 +16,7 @@
   | Author: Christian Dickmann <dickmann@php.net>                        |
   +----------------------------------------------------------------------+
 
-  $Id: Web.php,v 1.1 2006/11/29 09:34:10 dorothea Exp $
+  $Id: Web.php,v 1.2 2007/07/12 16:26:23 robert Exp $
 */
 
 require_once "PEAR/Frontend.php";
@@ -785,7 +785,6 @@ class PEAR_Frontend_Web extends PEAR_Frontend
                     $this->_savedOutput[] = $_SESSION['_PEAR_Frontend_Web_SavedOutput'][] = $data;
                     break;
                 }
-                /* TODO: figure out a sane way to manage the inconsisten new error msg */
                 if (!is_array($data)) {
 		            echo $data;
                 }

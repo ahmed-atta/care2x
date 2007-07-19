@@ -16,7 +16,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2006 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: Builder.php,v 1.1 2006/11/29 09:34:08 dorothea Exp $
+ * @version    CVS: $Id: Builder.php,v 1.2 2007/07/12 16:26:23 robert Exp $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 0.1
  */
@@ -102,7 +102,6 @@ class PEAR_Builder extends PEAR_Common
         if (!@is_file("$dir/$dsp")) {
             return $this->raiseError("The DSP $dsp does not exist.");
         }
-        // XXX TODO: make release build type configurable
         $command = 'msdev '.$dsp.' /MAKE "'.$info['package']. ' - Release"';
 
         $this->current_callback = $callback;

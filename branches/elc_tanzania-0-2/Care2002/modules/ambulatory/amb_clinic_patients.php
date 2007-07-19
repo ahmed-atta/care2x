@@ -205,7 +205,7 @@ function getinfo(pn){
 ?>
 	}
 function getARV(pid,encounter_nr) {
-	urlholder="<?php echo $root_path ?>modules/arv/arv_menu.php<?php echo URL_REDIRECT_APPEND; ?>&pid="+pid+"&encounter_nr="+encounter_nr;
+	urlholder="<?php echo $root_path ?>modules/arv_2/arv_menu.php<?php echo URL_REDIRECT_APPEND; ?>&pid="+pid+"&encounter_nr="+encounter_nr;
 	patientwin=window.open(urlholder,"arv","menubar=no,resizable=yes,scrollbars=yes")
 	patientwin.resizeTo(screen.availWidth,screen.availHeight);
 	patientwin.focus();

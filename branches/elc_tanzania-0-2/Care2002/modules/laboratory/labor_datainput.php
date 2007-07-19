@@ -77,21 +77,29 @@ include_once($root_path.'include/inc_date_format_functions.php');
 if($mode=='save'){
 	//$nbuf=array();
 	# Prepare parameter values and serialize
+	//echo print_r($parameters);
 	while(list($x,$v)=each($parameters))
 	{
-		if(isset($HTTP_POST_VARS['_task'.$x.'_'])&&!empty($HTTP_POST_VARS['_task'.$x.'_'])){
+	
+		
+		if(isset($HTTP_POST_VARS['_task'.$x.'_'])&&!empty($HTTP_POST_VARS['_task'.$x.'_']) ){
 			$whichgroup = $lab_obj->TestGroupByID($x);
 		 	$nbuf[$whichgroup['parent']][$x]=$HTTP_POST_VARS['_task'.$x.'_'];
-		 	$addbuf[$whichgroup['parent']][$x]=$HTTP_POST_VARS['_add'.$x.'_'];
-
+		    $addbuf[$whichgroup['parent']][$x]=$HTTP_POST_VARS['_add'.$x.'_'];
+		
 		}
 		else
 		{
+			
 			if(isset($HTTP_POST_VARS['_add'.$x.'_'])&& !empty($HTTP_POST_VARS['_add'.$x.'_'])){
 				$nbuf = false;
 				$tickerror++;
+				
 			}
+				//echo '<b><font color="red">select positive/negative option for the test to save the result</font> </br>';
 		}
+		
+		
 	}
 	if ($debug) echo "starting reading the array nbuf<br>";
 	while(list($x,$v) = each($nbuf)) {
@@ -313,6 +321,21 @@ function pruf(d)
 			}
 		}
 }
+
+function posneg(f)
+{
+	//if(d."<?php echo $adddata[$tp['id']] ?>[0].checked || d."<?php echo $adddata[$tp['id']] ?>"[1].checked)
+	//{
+	// alert(<?php echo $HTTP_POST_VARS['_add'.$x.'_'] ;?>);
+	//return false;
+	//}
+   //else return true;
+   
+}
+
+
+
+
 function chkselect(d)
 {
  	if(d.parameterselect.value=="<?php echo $parameterselect ?>"){
@@ -360,7 +383,7 @@ $smarty->assign('sBday',formatDate2Local($patient['date_birth'],$date_format));
 
 $smarty->assign('sParamGroup',strtr($parametergruppe[$parameterselect],"_","-"));
 
-$smarty->assign('pbSave','<input  type="image" '.createLDImgSrc($root_path,'update.gif','0').'>');
+$smarty->assign('pbSave','<input  type="image" '.createLDImgSrc($root_path,'send.gif','0').' >');
 $smarty->assign('pbShowReport','<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&noexpand=1&from=input&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&nostat=1&user_origin='.$user_origin.'"><img '.createLDImgSrc($root_path,'showreport.gif','0','absmiddle').' alt="'.$LDClk2See.'"></a>');
 
 if($saved || $update) $sCancelBut='<img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'>';
@@ -467,10 +490,27 @@ if($tp['is_enabled']==1)
 		echo '<input type="'.$tp['add_type'].'" name="_add'.$tp['id'].'_" ';
 		// is still given, but not longer possible that this can occure. If you want it
 		// back, then please go to the file labor_test_param_edit.php
-		if($tp['add_type']=="checkbox")
+		if($tp['add_type']=="radio")
 		{
 			echo 'value="check"';
 			if($adddata[$tp['id']])
+			{
+				echo ' checked ';
+			}
+		}
+		else
+		{
+			echo 'value="'.$adddata[$tp['id']].'"';
+		}
+		echo '>';
+		if($tp['add_label']) echo 'Negative'.':';
+		echo '<input type="'.$tp['add_type'].'" name="_add'.$tp['id'].'_" ';
+		// is still given, but not longer possible that this can occure. If you want it
+		// back, then please go to the file labor_test_param_edit.php
+		if($tp['add_type']=="radio")
+		{
+			echo 'value="neg"';
+			if($adddata[$tp['id']]=="neg")
 			{
 				echo ' checked ';
 			}

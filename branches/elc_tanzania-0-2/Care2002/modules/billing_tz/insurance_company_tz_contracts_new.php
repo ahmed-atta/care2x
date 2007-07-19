@@ -26,7 +26,7 @@ if($mode=="new")
  	{
  		$insurance_tz->CreateInsuranceContract($company_id, $plan, $start_timestamp, $end_timestamp);
  		header("Location: insurance_company_tz_contracts.php?id=".$company_id);
- 		
+
 	}
 	else
 	{

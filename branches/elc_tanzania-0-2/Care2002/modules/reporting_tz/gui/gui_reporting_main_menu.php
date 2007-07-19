@@ -100,18 +100,31 @@ function getARV(path) {
                   <td class="submenu_item"><a href="OPD_infections.php"><?php echo $LDOPDInfectionsSummary; ?></a></td>
                   <td>&nbsp;</td>
                 </tr>
+                 <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="mtuha_icd10.php"><?php echo 'Mtuha-ICD10-Summary'; ?></a></td>
+                  <td>&nbsp;</td>
+                </tr>
                 <tr>
                   <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-                  <td class="submenu_item"><a href="OPD_Admissions.php"><?php echo $LDOPDAdmissionSummary; ?>
+                  <td class="submenu_item"><a href="OPD_Admissions.php"><?php echo 'OPD Admission Summary'; ?>
                     </a></td>
                   <td><?php echo $LDOPDAdmissionReport; ?></td>
                 </tr>
+				<tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="OPD_Department_Admissions.php"><?php echo 'OPDAdmissionDepartmentSummary'; ?>
+                    </a></td>
+                  <td><?php echo '  OPD Admissions Department Summary Report'; ?></td>
+                </tr>
+				
 
-                <tr>
+
+               <!-- <tr>
                   <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
                   <td class="submenu_item"><a href="OPD_total_summary.php"><?php echo $LDClinicSummary; ?></a> </td>
                   <td><?php echo $LDAllvisitsClinic; ?></td>
-                </tr>
+                </tr> -->
 
                 <tr>
                   <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
@@ -124,7 +137,21 @@ function getARV(path) {
                   <td class="submenu_item"><a href="billing_summary.php"><?php echo $LDFinancialReport; ?></a></td>
                   <td><?php echo $LDDailyFinancialRecord; ?></td>
                 </tr>
+                
+                <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="cash_billing_summary.php"><?php echo 'CashReport'; ?></a></td>
+                  <td><?php echo 'Daily Cash Collection Report'; ?></td>
+                </tr>
 
+                <!--<tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="company_billing_summary.php"><?php echo 'CompanyFinancialReport'; ?></a></td>
+                  <td><?php echo 'Daily Financial Record listened of a specific Companies'; ?></td>
+                </tr>-->
+                
+                
+                
                 <tr>
                   <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
                   <td class="submenu_item"><a href="reporting_pharmacy.php"><?php echo $LDPharmacyReport; ?></a></td>

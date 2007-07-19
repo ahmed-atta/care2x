@@ -153,8 +153,7 @@ if (!empty($prev_sql_query)) {
 if (!$cfg['AllowUserDropDatabase']
     && eregi('DROP[[:space:]]+(IF EXISTS[[:space:]]+)?DATABASE ', $sql_query)) {
     // Checks if the user is a Superuser
-    // TODO: set a global variable with this information
-    // loic1: optimized query
+
     $result = @PMA_mysql_query('USE mysql');
     if (PMA_mysql_error()) {
         include('./header.inc.php');

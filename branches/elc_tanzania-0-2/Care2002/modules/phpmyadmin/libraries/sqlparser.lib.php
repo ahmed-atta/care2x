@@ -429,9 +429,6 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
                         } else if (($last == '-') || ($last == '+') || ($last == '!')) {
                             $count2--;
                             $punct_data = $GLOBALS['PMA_substr']($sql, $count1, $count2 - $count1);
-                        // TODO: for negation operator, split in 2 tokens ?
-                        // "select x&~1 from t"
-                        // becomes "select x & ~ 1 from t" ?
 
                         } else if ($last != '~') {
                             $debugstr =  $GLOBALS['strSQPBugUnknownPunctuation'] . ' @ ' . ($count1+1) . "\n"
@@ -449,9 +446,6 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
                 if (PMA_STR_isSqlIdentifier($c, FALSE) || ($c == '@')) {
                     $count2 ++;
 
-                    //TODO: a @ can also be present in expressions like
-                    // FROM 'user'@'%'
-                    // in this case, the @ is wrongly marked as alpha_variable
 
                     $is_sql_variable         = ($c == '@');
                     $is_digit                = (!$is_sql_variable) && PMA_STR_isDigit($c);
@@ -582,7 +576,7 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
                   $t_suffix = '_columnType';
 
                   // Temporary fix for BUG #621357
-                  //TODO FIX PROPERLY NEEDS OVERHAUL OF SQL TOKENIZER
+
                   if ($d_cur_upper == 'SET' && $t_next != 'punct_bracket_open_round') {
                     $t_suffix = '_reservedWord';
                   }
@@ -757,21 +751,6 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
      * insert a SQL_CALC_FOUND_ROWS.
      */
 
-            // must be sorted
-            // TODO: current logic checks for only one word, so I put only the
-            // first word of the reserved expressions that end a table ref;
-            // maybe this is not ok (the first word might mean something else)
-    //        $words_ending_table_ref = array(
-    //            'FOR UPDATE',
-    //            'GROUP BY',
-    //            'HAVING',
-    //            'LIMIT',
-    //            'LOCK IN SHARE MODE',
-    //            'ORDER BY',
-    //            'PROCEDURE',
-    //            'UNION',
-    //            'WHERE'
-    //        );
             $words_ending_table_ref = array(
                 'FOR',
                 'GROUP',
@@ -831,8 +810,6 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
                     } // end if (type == punct_queryend)
                 } // end if ($seek_queryend)
 
-                // TODO: when we find a UNION, should we split
-                // in another subresult?
                 if ($arr[$i]['type'] == 'punct_queryend') {
                     $result[]  = $subresult;
                     $subresult = $subresult_empty;
@@ -879,7 +856,6 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
 
                     // upper once
                     $upper_data = strtoupper($arr[$i]['data']);
-                    //TODO: reset for each query?
 
                     if ($upper_data == 'SELECT') {
                         $seen_from = FALSE;
@@ -910,8 +886,6 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
                             $identifier = $arr[$i]['data'];
                             break;
 
-                    //TODO: check embedded double quotes or backticks?
-                    // and/or remove just the first and last character?
                         case 'quote_backtick':
                             $identifier = str_replace('`','',$arr[$i]['data']);
                             break;
@@ -961,7 +935,6 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
                     continue;
                 } // end if (punct_qualifier)
 
-                // TODO: check if 3 identifiers following one another -> error
 
                 //    s a v e    a    s e l e c t    e x p r
                 // finding a list separator or FROM
@@ -1016,7 +989,6 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
                     } // end if ($size_chain > 2)
                     unset($chain);
 
-                    // TODO: explain this:
                     if (($arr[$i]['type'] == 'alpha_reservedWord')
                      && ($upper_data != 'FROM')) {
                         $previous_was_identifier = TRUE;
@@ -1025,15 +997,6 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
                 } // end if (save a select expr)
 
 
-                //======================================
-                //    s a v e    a    t a b l e    r e f
-                //======================================
-
-                // maybe we just saw the end of table refs
-                // but the last table ref has to be saved
-                // or we are at the last token (TODO: there could be another
-                // query after this one)
-                // or we just got a reserved word
 
                 if (isset($chain) && $seen_from && $save_table_ref
                  && ($arr[$i]['type'] == 'punct_listsep'
@@ -1124,8 +1087,6 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
                    $save_table_ref = TRUE;
                } // end if (data == JOIN)
 
-               // no need to check the end of table ref if we already did
-               // TODO: maybe add "&& $seen_from"
                if (!$seen_end_of_table_ref) {
                    // if this is the last token, it implies that we have
                    // seen the end of table references
@@ -1212,7 +1173,6 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
                //
                // this code is not used for confirmations coming from functions.js
 
-               // TODO: check for punct_queryend
 
                if ($arr[$i]['type'] == 'alpha_reservedWord') {
                    $upper_data = strtoupper($arr[$i]['data']);
@@ -1490,9 +1450,6 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
 
             $class     .= 'syntax_' . $arr['type'];
 
-            //TODO: check why adding a "\n" after the </span> would cause extra
-            //      blanks to be displayed:
-            //      SELECT p . person_name
 
             return '<span class="' . $class . '">' . htmlspecialchars($arr['data']) . '</span>';
         } // end of the "PMA_SQP_formatHtml_colorize()" function
@@ -1797,7 +1754,6 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
                     case 'digit_integer':
                     case 'digit_float':
                     case 'digit_hex':
-                        //TODO: could there be other types preceding a digit?
                         if ($typearr[1] == 'alpha_reservedWord') {
                             $after .= ' ';
                         }
@@ -1932,7 +1888,7 @@ if (!defined('PMA_SQP_LIB_INCLUDED')) {
         function PMA_SQP_formatText($arr)
         {
             /**
-             * TODO WRITE THIS!
+             * WRITE THIS!
              */
              return PMA_SQP_formatNone($arr);
         } // end of the "PMA_SQP_formatText()" function

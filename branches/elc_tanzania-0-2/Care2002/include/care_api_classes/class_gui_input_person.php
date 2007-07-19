@@ -853,7 +853,10 @@ if(!$no_tribe)
 			</td>
 			</tr>
 
-
+			
+			
+			
+			
 			<tr>
 			<td class="reg_item">
 				<FONT SIZE=-1  FACE="Arial"><?php if ($errortown) echo "<font color=red>"; ?>* <?php echo $LDTownCity ?>:

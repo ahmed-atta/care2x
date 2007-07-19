@@ -5,7 +5,6 @@
 
 /**
  * Gets some core libraries and diplays a top message if required
- * TODO: The included script aren't yet xhtml1.0 compliant
  */
 require('./grab_globals.inc.php3');
 require('./header.inc.php3');
@@ -266,7 +265,6 @@ if ($server > 0
 <?php
 /**
  * Displays the footer
- * TODO: The included script aren't yet xhtml1.0 compliant
  */
 require('./footer.inc.php3');
 ?>

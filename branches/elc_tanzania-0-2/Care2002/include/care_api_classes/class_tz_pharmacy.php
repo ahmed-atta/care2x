@@ -1,4 +1,9 @@
 <?php
+/*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
+if (eregi('class_tz_pharmacy.php',$PHP_SELF))
+	die('<meta http-equiv="refresh" content="0; url=../">');
+/*------end------*/
+
 require_once($root_path.'include/care_api_classes/class_core.php');
 
 
@@ -18,6 +23,8 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 class Product extends Core {
   
   var $tbl_product_items='care_tz_drugsandservices';
+  var $tbl_pricedefinition='care_tz_drugsandservices_description';
+  
   var $tbl_temp="tmp_search_results";
   var $fields_tbl_product=array(
 	                            'item_number',
@@ -28,7 +35,19 @@ class Product extends Core {
 								'item_description',
 								'item_full_description',
 								'purchasing_class',
-								'unit_price');  
+								'unit_price',
+								'unit_price_1',
+								'unit_price_2',
+								'unit_price_3');
+							
+  var $fields_tbl_price=array (
+  								'Fieldname',
+  								'ShowDescription',
+  								'FullDescription',
+  								'is_insurance_price',
+  								'last_change',
+  								'UID'
+  );
   var $result;
   var $rs_fuzziness;
   
@@ -50,6 +69,13 @@ class Product extends Core {
 		$this->setTable($this->tbl_product_items);
 		$this->setRefArray($this->fields_tbl_product);
 	}  
+
+  // -----------------------------------------------------------------------------
+	function usePriceDescriptionTable(){
+		$this->setTable($this->tbl_pricedefinition);
+		$this->setRefArray($this->fields_tbl_price);
+	}  
+
   
   //------------------------------------------------------------------------------
   
@@ -84,33 +110,81 @@ class Product extends Core {
   	global $dbtype;
   	$x='';
   	$v='';
-  	$elems='';
+  	$elems=''; 
   	if($dbtype=='postgres7'||$dbtype=='postgres') $concatfx='||';
   		else $concatfx='concat';
-  	if(empty($array)) return FALSE;
-  	if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
+  	
+  	if(empty($array)) return FALSE; 
+  	
+  	if ($isnum)
+  	  if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
+  	else 
+  	  if(empty($item_nr)) return FALSE;
+  	 
   	while(list($x,$v)=each($array)) {
   
   	if(stristr($v,$concatfx)||stristr($v,'null')) $elems.="$x= $v,";
   	    else $elems.="$x='$v',";
   	}
   	# Bug fix. Reset array.
-  	reset($array);
+  	reset($array); 
   	//echo strlen($elems)." leng<br>";
   	$elems=substr_replace($elems,'',(strlen($elems))-1);
   	$this->where="item_id='$item_nr'";
         $this->sql="UPDATE $this->coretable SET $elems WHERE $this->where";
   	# Bug fix. Reset the condition variable to prevent affecting subsequent update calls. 
-  	$this->where=''; 
+  	//$this->where=''; 
+  	//echo $this->sql.'<br>';
+  	return $this->Transact();
+  }  
+
+  // Private update class:
+  function _updatePricingDataFromArray(&$array,$field_nr='',$isnum=TRUE) {
+  	global $dbtype;
+  	$x='';
+  	$v='';
+  	$elems=''; 
+  	if($dbtype=='postgres7'||$dbtype=='postgres') $concatfx='||';
+  		else $concatfx='concat';
+  	
+  	if(empty($array)) return FALSE; 
+  	
+  	if ($isnum)
+  	  if(empty($field_nr)||($isnum&&!is_numeric($field_nr))) return FALSE;
+  	else 
+  	  if(empty($field_nr)) return FALSE;
+  	 
+  	while(list($x,$v)=each($array)) {
+  
+  	if(stristr($v,$concatfx)||stristr($v,'null')) $elems.="$x= $v,";
+  	    else $elems.="$x='$v',";
+  	}
+  	# Bug fix. Reset array.
+  	reset($array); 
+  	//echo strlen($elems)." leng<br>";
+  	$elems=substr_replace($elems,'',(strlen($elems))-1);
+  	$this->where="Fieldname='$field_nr'";
+        $this->sql="UPDATE $this->coretable SET $elems WHERE $this->where";
+  	# Bug fix. Reset the condition variable to prevent affecting subsequent update calls. 
+  	//$this->where=''; 
   	//echo $this->sql.'<br>';
   	return $this->Transact();
   }  
   
   // Public update class:
   function updatePharmacyDataFromInternalArray($item_nr='',$isnum=TRUE) {
-		if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
+		//if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
+		if(empty($item_nr)) return FALSE;
 	    $this->_prepSaveArray();
 		return $this->_updatePharmacyDataFromArray($this->buffer_array,$item_nr,$isnum);
+	}
+
+  // Public update class:
+  function updatePricingDataFromInternalArray($item_nr='',$isnum=TRUE) {
+		//if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
+		if(empty($item_nr)) return FALSE;
+	    $this->_prepSaveArray(); 
+		return $this->_updatePricingDataFromArray($this->data_array,$item_nr,$isnum);
 	}
   
   //------------------------------------------------------------------------------
@@ -445,7 +519,7 @@ class Product extends Core {
     }
     return "N/A";
   }
-
+  
   function get_selians_item_price($item_id){
     global $db;
     $this->sql="SELECT unit_price FROM care_tz_drugsandservices WHERE item_id='".$item_id."'";
@@ -455,7 +529,65 @@ class Product extends Core {
       return $this->elem[0];
     }
     return "N/A";
-  }
+  }  
+
+  function get_selians_item_alt_price($item_id, $NUMBER){
+  	/*
+  	 * Getting the alternative price informations. Give the "NUMBER" parameter as follow:
+  	 * $NUMBER = 0 -> column: unit_price
+  	 * $NUMBER = 1 -> column: unit_price_1
+  	 * $NUMBER = 2 -> column: unit_price_2
+  	 * $NUMBER = 3 -> column: unit_price_3
+  	 * Robert Meggle :: meggle@merotech.de (July 2007)
+  	 */
+  	global $db;
+  	if (($NUMBER <0 || $NUMBER >3) || empty($item_id))
+  		return FALSE;
+    $field = array ('unit_price','unit_price_1','unit_price_2', 'unit_price_3');
+    $this->sql="SELECT ".$field[$NUMBER]." FROM care_tz_drugsandservices WHERE item_id='".$item_id."'";
+    $this->rs = $db->Execute($this->sql);
+    if ($this->rs->RecordCount()) {
+      $this->elem = $this->rs->FetchRow();
+      return $this->elem[0];
+    }
+    return "N/A";
+  }  
+
+  function get_all_prices($item_id){
+    global $db;
+    $return_string=""; // local variable of this method declared here
+    
+    $this->sql="SELECT unit_price, unit_price_1, unit_price_2, unit_price_3 FROM care_tz_drugsandservices WHERE item_id='".$item_id."'";
+    $this->rs = $db->Execute($this->sql);
+    if ($this->rs->RecordCount()) {
+      $this->elem = $this->rs->FetchRow();
+      $return_string=number_format($this->elem[0],0,'.',',');
+      if (!empty($this->elem[1]) || !empty($this->elem[2]) || !empty($this->elem[3] )) {
+      	// Is there at least one more price given, then show it on a string
+      	
+      	$return_string .= "/";
+        
+      	if (!empty($this->elem[1]))
+      		$return_string .= number_format($this->elem[1],0,'.',',')."/";
+      	else
+      		$return_string .= "-"."/";
+        
+      	if (!empty($this->elem[2]))
+      		$return_string .= number_format($this->elem[2],0,'.',',')."/";
+      	else
+      		$return_string .= "-"."/";
+		
+      	if (!empty($this->elem[3]))
+      		$return_string .= number_format($this->elem[3],0,'.',',')."/";
+      	else
+      		$return_string .= "-"."/";
+      	
+      }	  
+      return $return_string;
+    }
+    return "N/A";
+  }  
+  
 }
 
 ?>

@@ -21,7 +21,7 @@
 
 	// NOTE: This is a quick hack!
 	if (isset($_POST['explain']) && isset($_POST['query'])) {
-		// TODO: Is there a generic (non PostgreSQL specific) way to do this
+
 		$_POST['query'] = 'EXPLAIN ' . $_POST['query'];
 	}
 	

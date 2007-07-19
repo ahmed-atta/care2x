@@ -4,6 +4,8 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_core.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 
+
+
 /**
 *  Billing methods for tanzania (the product-module is completely rewritten by Robert Meggle.
 *
@@ -71,7 +73,7 @@ class Bill extends Encounter {
   var $medical_item_name;
   var $medical_item_amount;
   var $item_number;
-
+	var $user_id;
 
   //------------------------------------------------------------------------------
 
@@ -506,7 +508,32 @@ class Bill extends Encounter {
 			}
 		}
   } // end of function GetPriceOfItem($item_number)
+  
+  function GetAlternativePriceOfItem($item_number) {
+  	/*
+  	 * TODO: finish up this method and bring it to the gui page
+  	 * TODO: return value is a 3d array (also including what is now the insurance price)
+  	 */
+  	global $db;
+  	$debug=TRUE;
+  	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+  	$this->sql="SELECT unit_price_1, unit_price_2, unit_price_3 FROM $this->tb_drugsandservices WHERE item_id = '$item_number' ";
+	if ($this->result=$db->Execute($this->sql)) {
+		    if ($this->result->RecordCount()) {
+		        $this->item_array = $this->result->GetArray();
+		          while (list($x,$v)=each($this->item_array)) {
+                $db->debug=FALSE;
+		            return $v['price'];
+		          }
+			} else {
+			  $db->debug=FALSE;
+				return false;
+			}
+	}  	
+  }
+  
 
+  
   //------------------------------------------------------------------------------
 
   function GetNameOfItem($item_number) {
@@ -626,6 +653,9 @@ class Bill extends Encounter {
 	}
 
 	//------------------------------------------------------------------------------
+
+
+
 
 
   function GetElemsOfBillByPrescriptionNr($nr) {
@@ -756,6 +786,12 @@ class Bill extends Encounter {
 
 	function DisplayBillHeadline($bill_nr, $batch_nr) {
 	  global $LDBatchFileNr,$LDEncounterNr,$LDLastName,$LDFirstName,$LDBday,$LDSex,$LDBillNumber;
+	  
+	  // Maybe optional parameter given to this funciton: Is it a print-out-page or not (For table resize)
+	  if (func_num_args()>2)
+	    $printout=func_get_arg (2);
+	  
+	  
 	  $enc_obj = New Encounter;
 	  $encoded_batch_number = $enc_obj->ShowPID($batch_nr);
 	  $enc_number = $enc_obj->GetEncounterFromBatchNumber($batch_nr);
@@ -767,45 +803,53 @@ class Bill extends Encounter {
 	    // Load the encounter data:
 	    $enc_data = $enc_obj->loadEncounterData($enc_number);
 
-  	  echo '
-  	  <table border="0" cellspacing=1 cellpadding=0 width="50%">
-  				<tr>
-  					<td class="adm_item"><b>'.$LDBatchFileNr.'</b></td>
-  					<td class="adm_item"><b>'.$encoded_batch_number.'</b></td>
-  					<td rowspan="7">&nbsp;<td>
+  	  echo ($printout) ? '<table width="200"  border="0" cellspacing=1 cellpadding=0 >' : '<table width="600"  border="0" cellspacing=1 cellpadding=0 >';
+  	  
+  	  echo '	<tr>
+  					<td class="td_content"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4"><b>'.$LDBatchFileNr.'</b></font></span></span></td>
+  					<td class="td_content"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$encoded_batch_number.'</font></span></span></b></td>
+  					<td rowspan="7"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">&nbsp;<td>
   				</tr>
   				<tr>
-  					<td class="adm_item">'.$LDEncounterNr.'</td>
-  					<td bgcolor="#ffffee" class="vi_data"><b>'.$enc_number.'</b></td>
+  					<td class="td_content"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$LDEncounterNr.'</font></span></span></td>
+  					<td bgcolor="#ffffee" class="vi_data"><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$enc_number.'</font></span></span></b></td>
   				</tr>
   				<tr>
-  					<td class="adm_item">'.$LDLastName.':</td>
-  					<td bgcolor="#ffffee" class="vi_data"><b>'.$enc_obj->LastName($enc_number).'</b></td>
+  					<td class="td_content"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$LDLastName.':</font></span></span></td>
+  					<td bgcolor="#ffffee" class="vi_data"><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$enc_obj->LastName($enc_number).'</font></span></span></b></td>
   				</tr>
   				<tr>
-  					<td class="adm_item">'.$LDFirstName.':</td>
-  					<td bgcolor="#ffffee" class="vi_data">'.$enc_obj->FirstName($enc_number).'</td>
+  					<td class="td_content"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$LDFirstName.':</font></span></span></td>
+  					<td bgcolor="#ffffee" class="vi_data"><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$enc_obj->FirstName($enc_number).'</font></span></span></td>
   				</tr>
   				<tr>
-  					<td class="adm_item">'.$LDBday.':</td>
-  					<td bgcolor="#ffffee" class="vi_data">'.$enc_obj->BirthDate($enc_number).'</td>
+  					<td class="td_content"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$LDBday.':</font></span></span></td>
+  					<td bgcolor="#ffffee" class="vi_data"><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$enc_obj->BirthDate($enc_number).'</font></span></span></td>
   				</tr>
   				<tr>
-  					<td class="adm_item">'.$LDSex.':</td>
-  					<td class="adm_input">'.$enc_obj->Sex($enc_number).'</td>
+  					<td class="td_content"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$LDSex.':</font></span></span></td>
+  					<td class="adm_input"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$enc_obj->Sex($enc_number).'</font></span></span></td>
   				</tr>
   				<tr>
-  					<td class="adm_item"><b>'.$LDBillNumber.'</b></td>
-  					<td class="adm_item"><b>'.$bill_nr.'</b></td>
+  					<td class="td_content"><b><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$LDBillNumber.'</font></span></span></b></td>
+  					<td class="td_content"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$bill_nr.'</font></span></span></b></td>
   				</tr>
+		<tr>
 
-  		</table>';
+
+
+
+  				</table>';
       return TRUE;
     }
   return FALSE;
 	}
 
 	//------------------------------------------------------------------------------
+
+
+
+
 
 	function DisplayArchivedLaboratoryBill($bill_nr,$edit_fields) {
 
@@ -814,11 +858,11 @@ class Bill extends Encounter {
     $sum_price=0;
 
   	echo '
-  	<table width="800" border="1">
+  	<table width="200" border="1">
   			<tr>
-  				<td valign="top" width="100">
-					<p class="billing_topic"><br>'.$LDLaboratory.'</p>
-				</td>
+  				<!--<td  valign="top" >
+					<p class="billing_topic"><br><span style="font-family:&quot;20 cpi&quot;"><font size="-2">'.$LDLaboratory.'</font></span></span></p>
+				</td>-->
 				<td>';
 
       			$billelems=$this->GetElemsOfArchivedBill($bill_nr,"laboratory");
@@ -826,12 +870,12 @@ class Bill extends Encounter {
       			echo '
       			<table width="100%" height="100%">
 	      			<tr>
-	      			  <td><b>Position Nr.</b></td>
-	      				<td><b>'.$LDArticle.'</b></td>
-	      				<td><b>'.$LDPrice.'</b></td>
-	      				<td><b>'.$LDAmount.'</b></td>' .
-	      				'<td><b>'.$LDPaidbyInsurance.'</b></td>
-	      				<td><b>'.$LDpartSum.'</b></td>
+	      			  <td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1">Position Nr.</font></span></span></td>
+	      				<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDArticle.'</font></span></span></td>
+	      				<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDPrice.'</font></span></span></td>
+	      				<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDAmount.'</font></span></span></td>' .
+	      				'<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDPaidbyInsurance.'</font></span></span></td>
+	      				<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDpartSum.'</font></span></span></td>
 	      			</tr>';
 
       			while($bill_elems_row=$billelems->FetchRow())
@@ -850,15 +894,15 @@ class Bill extends Encounter {
       				$sum += $part_sum;
       				echo '
       				<tr>
-      				  <td width="100">'.$pos_nr.'</td>
-        				<td width="200">'.$this->chemlab_testname.'</td>
-        				<td width="100">'.$this->price.'</td>
-        				<td width="100">'.$bill_elems_row['amount'].'</td>' .
-        				'<td width="100">';
+      				  <td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$pos_nr.'</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$this->chemlab_testname.'</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$this->price.'</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$bill_elems_row['amount'].'</font></span></span></td>' .
+        				'<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1">';
 						if($bill_elems_row['balanced_insurance']>0) echo number_format($bill_elems_row['balanced_insurance'],2,',','.');
         				else echo '0,00';
-						echo '</td>
-        				<td width="100">'.number_format($part_sum,2,',','.').'</td>
+						echo '</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.number_format($part_sum,2,',','.').'</font></span></span></td>
         			</tr>';
 
       			}
@@ -877,8 +921,8 @@ class Bill extends Encounter {
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      			  <td><i>'.$LDtotalamount.'</i></td>
-      			  <td><i>'.number_format($sum,2,',','.').'</i> </td>
+      			  <td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1"><i>'.$LDtotalamount.'</font></span></span></i></td>
+      			  <td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="1"><i>'.number_format($sum,2,',','.').'</font></span></span></i> </td>
 				</tr>
       			<tr>
       			  <td>&nbsp;</td>
@@ -903,13 +947,18 @@ class Bill extends Encounter {
 	global $root_path, $billnr, $batch_nr;
 	global $LDPositionNr,$LDArticle,$LDPrice,$LDAmount,$LDPaidbyInsurance,$LDpartSum,$LDtotalamount,$LDLaboratory;
     $sum_price=0;
+	
+	// Maybe optional parameter given to this funciton: Is it a print-out-page or not (For table resize)
+	  if (func_num_args()>2)
+	    $printout=func_get_arg (2);
 
+	echo ($printout) ? '<table width="200" border="1">' : '<table width="600" border="0" class="table_content">';
   	echo '
-  	<table width="800" border="1">
+  	
   			<tr>
-  				<td valign="top" width="100">
-					<p class="billing_topic"><br>'.$LDLaboratory.'</p>
-				</td>
+  				<!--<td valign="top" width="100">
+					<p class="billing_topic"><br><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-2">'.$LDLaboratory.'</font></span></span></p>
+				</td>-->
 				<td>';
 
       			$billelems=$this->GetElemsOfBill($bill_nr,"laboratory");
@@ -917,12 +966,12 @@ class Bill extends Encounter {
       			echo '
       			<table width="100%" height="100%">
 	      			<tr>
-	      			  <td><b>'.$LDPositionNr.'</b></td>
-	      				<td><b>'.$LDArticle.'</b></td>
-	      				<td><b>'.$LDPrice.'</b></td>
-	      				<td><b>'.$LDAmount.'</b></td>' .
-	      				'<td><b>'.$LDPaidbyInsurance.'</b></td>
-	      				<td><b>'.$LDpartSum.'</b></td>
+	      			  <td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">'.$LDPositionNr.'</font></span></span></b></td>
+	      				<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">'.$LDArticle.'</font></span></span></b></td>
+	      				<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">'.$LDPrice.'</font></span></span></b></td>
+	      				<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">'.$LDAmount.'</font></span></span></b></td>' .
+	      				'<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">'.$LDPaidbyInsurance.'</font></span></span></b></td>
+	      				<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">'.$LDpartSum.'</font></span></span></b></td>
 	      			</tr>';
 
       			while($bill_elems_row=$billelems->FetchRow())
@@ -942,12 +991,12 @@ class Bill extends Encounter {
       				$sum += $part_sum;
       				echo '
       				<tr>
-      				  <td width="100">'.$pos_nr.'</td>
-        				<td width="200">'.$this->chemlab_testname.'</td>
-        				<td width="100">'.$this->price.'</td>
-        				<td width="100">'.$bill_elems_row['amount'].'</td>
-        				<td width="100">&nbsp;</td>
-        				<td width="100">'.number_format($part_sum,2,',','.').'</td>
+      				  <td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">'.$pos_nr.'</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">'.$this->chemlab_testname.'</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">'.$this->price.'</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">'.$bill_elems_row['amount'].'</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">&nbsp;</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">'.number_format($part_sum,2,',','.').'</font></span></span></td>
         			</tr>';
 
       			}
@@ -958,12 +1007,12 @@ class Bill extends Encounter {
 					$pos_nr += 1;
       				echo '
       				<tr>
-      				  <td width="100">'.$pos_nr.'</td>
-        				<td width="200">-/-</td>
-        				<td width="100">-/-</td>
-        				<td width="100">-/-</td>
-        				<td width="100">'.number_format($insurance_used,2,',','.').'</td>
-        				<td width="100">'.number_format($insurance_used*-1,2,',','.').'</td>
+      				  <td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-2">'.$pos_nr.'</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-2">-/-</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-2">-/-</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-2">-/-</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-2">'.number_format($insurance_used,2,',','.').'</font></span></span></td>
+        				<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-2">'.number_format($insurance_used*-1,2,',','.').'</font></span></span></td>
         			</tr>';
 
       			}
@@ -982,8 +1031,8 @@ class Bill extends Encounter {
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>
-      			  <td><i>'.$LDtotalamount.'</i></td>
-      			  <td><i>'.number_format($sum,2,',','.').'</i> </td>
+      			  <td><i><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">'.$LDtotalamount.'</font></span></span></i></td>
+      			  <td><i><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="2">'.number_format($sum,2,',','.').'</font></span></span></i> </td>
 				</tr>
       			<tr>
       			  <td>&nbsp;</td>
@@ -1002,6 +1051,51 @@ class Bill extends Encounter {
 
 	//------------------------------------------------------------------------------
 
+
+function DisplayCompanyLaboratoryBill($bill_nr,$edit_fields) {
+
+	global $root_path, $billnr, $batch_nr;
+	global $LDPositionNr,$LDArticle,$LDPrice,$LDAmount,$LDPaidbyInsurance,$LDpartSum,$LDtotalamount,$LDLaboratory;
+    $sum_price=0;
+
+
+      			$billelems=$this->GetElemsOfBill($bill_nr,"laboratory");
+      			//echo "edit fields is set to:".$edit_fields;
+
+      			while($bill_elems_row=$billelems->FetchRow())
+      			{
+      				$pos_nr+=1;
+      				$insurance_id=$bill_elems_row['insurance_id']; // could be used later to display name of company
+      				$insurance_used +=$bill_elems_row['balanced_insurance'];
+      				if($bill_elems_row['is_labtest']==1)
+      				{
+      				  $this->tbl_bill_elem_ID=$bill_elems_row['ID'];
+      					$this->chemlab_testname=$bill_elems_row['description'];
+      					$this->price=$bill_elems_row['price'];
+      					if (empty($this->price)) $this->price="0,00";
+
+      				}
+      				$part_sum = ($this->price*$bill_elems_row['amount']);
+      				$sum += $part_sum;
+
+      				$insurance_amt +=$bill_elems_row['balanced_insurance'];
+      			}
+      			//$sum -= $insurance_used;
+      			if($insurance_used) {
+      				echo "Hallo";
+
+					$pos_nr += 1;
+
+      			}
+//if($sum==0)$sum=$insurance_amt;
+    return $sum;
+	}
+
+	//------------------------------------------------------------------------------
+
+
+
+
 	function DisplayArchivedPrescriptionBill($bill_nr, $edit_fields){
 
 	global $root_path, $billnr, $batch_nr;
@@ -1009,24 +1103,24 @@ class Bill extends Encounter {
 	       $LDPrescriptionOther;
 
   	echo '
-  	<table width="800" border="1">
+  	<table width="200" border="1">
   			<tr>
-  				<td valign="top" width="100">
+  			<!--	<td valign="top" >
   					<p class="billing_topic"><br>'.$LDPrescriptionOther.'</p>
-  				</td>
+  				</td>-->
   				<td>';
 
       			$billelems=$this->GetElemsOfArchivedBill($bill_nr,"prescriptions");
 
       			echo '
-      			<table width="100%" height="100%" border="0">
+      			<table border="0">
       			<tr>
-      			  <td><b>'.$LDPositionNr.'</b></td>
-      				<td><b>'.$LDArticle.'</b></td>
-      				<td><b>'.$LDPrice.'</b></td>
-      				<td><b>'.$LDAmount.'</b></td>
-      				<td><b>'.$LDPaidbyInsurance.'</b></td>
-      				<td><b>'.$LDpartSum.'</b></td>
+      			  <td><b><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDPositionNr.'</font></span></span></b></td>
+      				<td><b><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDArticle.'</font></span></span></b></td>
+      				<td><b><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDPrice.'</font></span></span></b></td>
+      				<td><b><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDAmount.'</font></span></span></b></td>
+      				<td><b><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDPaidbyInsurance.'</font></span></span></b></td>
+      				<td><b><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDpartSum.'</font></span></span></b></td>
 				</tr>';
 
       			while($bill_elems_row=$billelems->FetchRow())
@@ -1043,15 +1137,15 @@ class Bill extends Encounter {
       				$sum += $part_sum;
       				echo '
       				<tr>
-      				  <td width="100">'.$pos_nr.'</td>
-        				<td width="200">'.$desc.'</td>
-        				<td width="50">'.$price.'</td>
-        				<td width="50">'.$bill_elems_row['amount'].'</td>' .
-        				'<td width="100">';
+      				  <td ><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$pos_nr.'</font></span></span></td>
+        				<td ><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$desc.'</font></span></span></td>
+        				<td ><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$price.'</font></span></span></td>
+        				<td ><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$bill_elems_row['amount'].'</font></span></span></td>' .
+        				'<td ><span style="font-family:&quot;20 cpi&quot;"><font size="-1">';
 						if($bill_elems_row['balanced_insurance']>0) echo number_format($bill_elems_row['balanced_insurance'],2,',','.');
         				else echo '0,00';
-						echo '</td>
-        				<td width="100">'.number_format($part_sum,2,',','.').'</td>
+						echo '</font></span></span></td>
+        				<td ><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.number_format($part_sum,2,',','.').'</font></span></span></td>
 					</tr>';
 
       			}
@@ -1069,8 +1163,8 @@ class Bill extends Encounter {
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>' .
       			  '<td>&nbsp;</td>
-      				<td><i>'.$LDtotalamount.'</i></td>
-      				<td><i>'.number_format($sum,2,',','.').'</i> </td>
+      				<td><i><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDtotalamount.'</font></span></span></i></td>
+      				<td><i><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.number_format($sum,2,',','.').'</font></span></span></i> </td>
       			</tr>
       			<tr>
       			  <td>&nbsp;</td>
@@ -1095,25 +1189,30 @@ class Bill extends Encounter {
 	global $root_path, $billnr, $batch_nr;
 	global $LDPositionNr,$LDArticle,$LDPrice,$LDAmount,$LDpartSum,$LDPaidbyInsurance,
 	       $LDPrescriptionOther;
+
+	// Maybe optional parameter given to this funciton: Is it a print-out-page or not (For table resize)
+	if (func_num_args()>2)
+	  $printout=func_get_arg (2);
+	       
 	$this->debug = TRUE;
+  	echo ($printout) ? '<table width="200" border="1">':'<table width="600" border="0" class="table_content">';
   	echo '
-  	<table width="800" border="1">
   			<tr>
-  				<td valign="top" width="100">
-  					<p class="billing_topic"><br>'.$LDPrescriptionOther.'</p>
-  				</td>
+  				<!--<td valign="top" >
+  					<p class="billing_topic"><br><span style="font-family:&quot;20 cpi&quot;"><font size="-2">'.$LDPrescriptionOther.'</font></span></span></p>
+  				</td>-->
   				<td>';
 
       			$billelems=$this->GetElemsOfBill($bill_nr,"prescriptions");
       			echo '
-      			<table width="100%" height="100%" border="0">
+      			<table  border="0">
       			<tr>
-      			  <td><b>'.$LDPositionNr.'</b></td>
-      				<td><b>'.$LDArticle.'</b></td>
-      				<td><b>'.$LDPrice.'</b></td>
-      				<td><b>'.$LDAmount.'</b></td>
-      				<td><b>'.$LDPaidbyInsurance.'</b></td>
-      				<td><b>'.$LDpartSum.'</b></td>
+      			  <td><b><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDPositionNr.'</font></span></span></td>
+      				<td><b><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDArticle.'</font></span></span></td>
+      				<td><b><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDPrice.'</font></span></span></td>
+      				<td><b><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDAmount.'</font></span></span></td>
+      				<td><b><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDPaidbyInsurance.'</font></span></span></td>
+      				<td><b><span style="font-family:&quot;20 cpi&quot;"><font size="1">'.$LDpartSum.'</font></span></span></td>
 				</tr>';
 
       			while($bill_elems_row=$billelems->FetchRow())
@@ -1131,17 +1230,17 @@ class Bill extends Encounter {
       				$sum += $part_sum;
       				echo '
       				<tr>
-      				  <td width="100">'.$pos_nr.'</td>
-        				<td width="200">'.$desc.'</td>
-        				<td width="50">'.$price.'</td>
-        				<td width="50">'.$bill_elems_row['amount'].'</td>' .
-        				'<td width="100">';
+      				  <td ><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$pos_nr.'</font></span></span></td>
+        				<td ><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$desc.'</font></span></span></td>
+        				<td ><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$price.'</font></span></span></td>
+        				<td ><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$bill_elems_row['amount'].'</font></span></span></td>' .
+        				'<td ><span style="font-family:&quot;20 cpi&quot;"><font size="-1">';
 						if($bill_elems_row['balanced_insurance']>0)
 							echo number_format($bill_elems_row['balanced_insurance'],2,',','.');
         				else
         					echo '0,00';
-						echo '</td>
-        				<td width="100">'.number_format($part_sum,2,',','.').'</td>
+						echo '</font></span></span></td>
+        				<td ><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.number_format($part_sum,2,',','.').'</font></span></span></td>
 					</tr>';
 
       			}
@@ -1160,8 +1259,8 @@ class Bill extends Encounter {
       			  <td>&nbsp;</td>
       			  <td>&nbsp;</td>' .
       			  '<td>&nbsp;</td>
-      				<td><i>total amount:</i></td>
-      				<td><i>'.number_format($sum,2,',','.').'</i> </td>
+      				<td><i><span style="font-family:&quot;20 cpi&quot;"><font size="-1">total amount:</font></span></span></i></td>
+      				<td><i><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.number_format($sum,2,',','.').'</font></span></span></i> </td>
       			</tr>
       			<tr>
       			  <td>&nbsp;</td>
@@ -1181,6 +1280,128 @@ class Bill extends Encounter {
 
 
 //------------------------------------------------------------------------------
+
+function DisplayCompanyPrescriptionBill($bill_nr, $edit_fields){
+
+	global $root_path, $billnr, $batch_nr;
+	global $LDPositionNr,$LDArticle,$LDPrice,$LDAmount,$LDpartSum,$LDPaidbyInsurance,
+	       $LDPrescriptionOther;
+	       global $db;
+	$this->debug = TRUE;
+
+      			$billelems=$this->GetElemsOfBill($bill_nr,"prescriptions");
+
+      			while($bill_elems_row=$billelems->FetchRow())
+      			{
+      				$insurance_used += $bill_elems_row['balanced_insurance'];
+      				$pos_nr+=1;
+      				if($bill_elems_row['is_medicine']==1)
+      				{
+      					$this->tbl_bill_elem_ID=$bill_elems_row['ID'];
+      					 $desc = $bill_elems_row['description'];
+      					$price = $bill_elems_row['price'];
+      				 $sql="select distinct(purchasing_class) from care_tz_drugsandservices where item_description='$desc'";
+				    $result=$db->Execute($sql);
+				    $purchasing_class_row=$result->FetchRow();
+					 $purchasing_class=$purchasing_class_row['purchasing_class'];
+				    switch($purchasing_class)
+				    {
+				    	case "xray":
+						$xray_amt += $price*$bill_elems_row['amount'];
+						break;
+						case "smallop":
+						$dress_amt += $price*$bill_elems_row['amount'];
+						break;
+						case "bigop":
+						$surgery_amt += $price*$bill_elems_row['amount'];
+						break;
+						case "dental":
+						$dental_amt += $price*$bill_elems_row['amount'];
+						break;
+						case "drug_list":
+						$drug_amt1 += $price*$bill_elems_row['amount'];
+						break;
+						case "special_others_list":
+						$drug_amt2 += $price*$bill_elems_row['amount'];
+						break;
+						case "supplies":
+						$drug_amt3 += $price*$bill_elems_row['amount'];
+						break;
+						case "service":
+						$service_amt += $price*$bill_elems_row['amount'];
+						break;
+						default:
+							$others_amt += $price*$bill_elems_row['amount'];
+							//return FALSE;
+				    }
+
+      				}
+      				$part_sum = ($price*$bill_elems_row['amount'])-$bill_elems_row['balanced_insurance'];
+      				if($this->debug) '+'.$price.'*'.$bill_elems_row['amount'].'-'.$bill_elems_row['balanced_insurance'];
+      				$sum += $part_sum;
+
+						 //$insurance_amt +=$bill_elems_row['balanced_insurance'];
+
+      			}
+      			//$sum -= $bill_elems_row['balanced_insurance'];
+			//$total_laboratory = $this->DisplayCompanyLaboratoryBill($bills['nr'],$edit_fields);
+				//echo $insurance_amt;
+				$drug_amt=$drug_amt1+$drug_amt2+$drug_amt3;
+
+
+
+				$billelems=$this->GetElemsOfBill($bill_nr,"laboratory");
+      			//echo "edit fields is set to:".$edit_fields;
+
+      			while($bill_elems_row=$billelems->FetchRow())
+      			{
+      				$pos_nr+=1;
+      				$insurance_id=$bill_elems_row['insurance_id']; // could be used later to display name of company
+      				$insurance_used_lab +=$bill_elems_row['balanced_insurance'];
+      				if($bill_elems_row['is_labtest']==1)
+      				{
+      				  $this->tbl_bill_elem_ID=$bill_elems_row['ID'];
+      					$this->chemlab_testname=$bill_elems_row['description'];
+      					$this->price=$bill_elems_row['price'];
+      					if (empty($this->price)) $this->price="0,00";
+
+      				}
+      				$part_sum = ($this->price*$bill_elems_row['amount']);
+      				$sum_lab += $part_sum;
+
+      				$insurance_amt +=$bill_elems_row['balanced_insurance'];
+      			}
+      			$sum_lab -= $insurance_used_lab;
+
+		if($sum_lab==0)$sum_lab=$insurance_amt;
+
+
+				$sum=$drug_amt+$others_amt+$service_amt+$dental_amt+$surgery_amt+$dress_amt+$xray_amt;
+				$total_amt=$sum_lab+$drug_amt+$others_amt+$service_amt+$dental_amt+$surgery_amt+$dress_amt+$xray_amt;
+
+
+				echo '<table border="2">
+
+  		<tr>
+  				<td>Service(TSH)</td><td>Lab(TSH)</td><td>X-Ray(TSH)</td><td>Dawa(TSH)</td><td>Proc/Surg(TSH)</td><td>Dress(TSH)</td><td>Dental(TSH)</td><td>Others(TSH)</td><td>Total(TSH)</td>
+		</tr>
+
+  			<tr>
+  				<td>'.number_format(($service_amt),2,',','.').'</td><td>'.number_format(($sum_lab),2,',','.').'</td><td>'.number_format(($xray_amt),2,',','.').'</td><td>'.number_format(($drug_amt),2,',','.').'</td><td>'.number_format(($surgery_amt),2,',','.').'</td><td>'.number_format(($dress_amt),2,',','.').'</td><td>'.number_format(($dental_amt),2,',','.').'</td><td>'.number_format(($others_amt),2,',','.').'</td><td>'.number_format(($total_amt),2,',','.').'</td>
+		</tr>
+
+  	  				</table>';
+
+
+
+	  return $sum;
+	}
+
+
+//------------------------------------------------------------------------------
+
+
+
 
 function EditBillElement($id) {
   global $root_path, $db;
@@ -1393,7 +1614,7 @@ function delete_bill_element($bill_elem_number) {
 		global $db, $user_origin;
 
 	  	echo '
-	  	<table width="800" border="1">';
+	  	<table width="200"  border="1">';
   		$billnumbers=$this->GetArchivedBill($specific_bill);
   		if ($billnumbers)
     		while($bills=$billnumbers->FetchRow())
@@ -1423,10 +1644,10 @@ function delete_bill_element($bill_elem_number) {
 				}
   				echo '
   					<tr>
-  						<td>';
+  						<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">';
   						$this->DisplayBillHeadline($bills['nr'], $batch_nr);
   						echo '
-  						</td>
+  						</font></span></span></td>
   					</tr>';
     			$sum_to_pay =0;
     			$sum = 0;
@@ -1436,10 +1657,10 @@ function delete_bill_element($bill_elem_number) {
   				{
 	  	  			echo '
 	  	  			<tr>
-	  	  				<td valign="top">';
+	  	  				<td valign="top"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">';
 	  	  					$total_laboratory = $this->DisplayArchivedLaboratoryBill($bills['nr'],$edit_fields);
 		  	      		echo '
-		  	      		</td>
+		  	      		</font></span></span></td>
 		  	      	</tr>';
 	        	}
 	        	$billelems=$this->GetElemsOfArchivedBill($bills['nr'],"prescriptions");
@@ -1447,55 +1668,55 @@ function delete_bill_element($bill_elem_number) {
   				{
   					echo '
 	  	  			<tr>
-	  	  				<td valign="top">';
+	  	  				<td valign="top"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">';
 	  	  					$total_prescription = $this->DisplayArchivedPrescriptionBill($bills['nr'],$edit_fields);
 		  	      		echo '
-		  	      		</td>
+		  	      		</font></span></span></td>
 		  	      	</tr>';
 	        	}
 	        	if($insurancebudget<0)
 	        	{
-	        		echo '<tr><td><table border="1" width="800"><tr><td width="105">'.$LDInsurance.'</td><td><table width="678" border="0" align="right"><tr>
-	        				<td align="right" width="408">'.$LDOldBudget.'</td>
-	        				<td colspan="2">
+	        		echo '<tr><td><table border="1" ><tr><td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDInsurance.'</font></span></span></td><td><table  border="0" align="right"><tr>
+	        				<td align="right" ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDOldBudget.'</font></span></span></td>
+	        				<td colspan="2"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">
 	        					'.number_format(($insurancebudget+$used_budget),2,',','.').'
-	        				</td>
+	        				</font></span></span></td>
 	        			  </tr>
 	        			  <tr>
-	        				<td align="right">'.$LDUsedBudget.'</td>
-	        				<td colspan="2">
+	        				<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDUsedBudget.'</font></span></span></td>
+	        				<td colspan="2"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">
 	        					'.number_format(($used_budget),2,',','.').'
-	        				</td>
+	        				</font></span></span></td>
 	        			  </tr>
 	        			  <tr>
-	        				<td align="right">'.$LDOverdrawnBudget.'</td>
+	        				<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDOverdrawnBudget.'</font></span></span></td>
 	        				<td colspan="2">
-	        					<font color="FF0000">'.number_format(($insurancebudget),2,',','.').'</font>
+	        					<font color="FF0000"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.number_format(($insurancebudget),2,',','.').'</font></span></span></font>
 	        				</td>
 	        			  </tr>';
 	        		$contract = $insurance_tz->CheckForValidContract($batch_nr,0,$insurance_tz->GetCompanyFromPID($batch_nr));
 	        		if($contract['gets_company_credit'])
 	        		{
 	        			  echo '<tr>
-	        				<td align="right">'.$LDCompanyCredit.'</td>
-	        				<td colspan="2">
+	        				<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDCompanyCredit.'</font></span></span></td>
+	        				<td colspan="2"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">
 	        					'.number_format(($insurancebudget*-1),2,',','.').'
-	        				</td>
+	        				</font></span></span></td>
 	        			  </tr>';
 	        		}
 	        		else
 	        		{
 	        			  echo '<tr>
-	        				<td align="right">'.$LDOverdrawnPayment.'</td>
-	        				<td width="150">'.$LDNoCompanyCredit.'</td><td>
-	        					<i>'.number_format(($insurancebudget*-1),2,',','.').'<br>
+	        				<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDOverdrawnPayment.'</font></span></span></td>
+	        				<td width="150"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDNoCompanyCredit.'</font></span></span></td><td>
+	        					<i>'.number_format(($insurancebudget*-1),2,',','.').'</font></span></span><br>
 	        					----------</i>
 	        				</td>
-	        			  </tr>';
+	        			  </tr><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">';
 	        			  $sum_to_pay += $insurancebudget*-1;
 
 	        		}
-	        		echo '</table></td></tr></td></tr></table>';
+	        		echo '</font></span></span></table></td></tr></td></tr></table>';
 	  	      		echo '
 	  	      		</td>
 	  	      		</tr>';
@@ -1505,46 +1726,46 @@ function delete_bill_element($bill_elem_number) {
 				echo '
 				<tr>
 					<td>
-						<table width="800" border="1">
+						<table  border="1">
 							<tr>
-								<td width="100">'.$LDSummary.'</td>
+								<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="3">'.$LDSummary.'</font></span></span></td>
 								<td>
-									<table border="0" width="685">
+									<table border="0">
 										<tr>
-											<td align="right">
+											<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="3">
 												'.$LDLabTotal.'
-											</td>
-											<td width="105">
+											</font></span></span></td>
+											<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">
 												'.number_format(($total_laboratory),2,',','.').'
-											</td>
+											</font></span></span></td>
 										</tr>
 										<tr>
-											<td align="right">
+											<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="3">
 												'.$LDPrescTotal.'
-											</td>
-											<td>
+											</font></span></span></td>
+											<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">
 												'.number_format(($total_prescription),2,',','.').'
-											</td>
+											</font></span></span></td>
 										</tr>
 										<tr>
-											<td align="right">
+											<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="3">
 												'.$LDInsuranceTotal.'
-											</td>
-											<td>
+											</font></span></span></td>
+											<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="3">
 												';
 												if($insurancebudget<0) echo number_format(($insurancebudget*-1),2,',','.');
 												else echo '0,00';
 												echo '
-											</td>
+											</font></span></span></td>
 										</tr>
 										<tr>
 											<td align="right">
-												<b>'.$LDSumtopay.'</b>
+												<b><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="3">'.$LDSumtopay.'</font></span></span></b>
 											</td>
-											<td><b><font color="#FF0000">
+											<td><b><font color="#FF0000"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="3">
 												'.number_format(($sum_to_pay),2,',','.').'</font><br>
 												=======</b>
-											</td>
+											</font></span></span></td>
 										</tr>
 									</table>
 								</td>
@@ -1559,6 +1780,250 @@ function delete_bill_element($bill_elem_number) {
 //------------------------------------------------------------------------------
 
 	function DisplayBills($batch_nr, $specific_bill, $edit_fields) {
+	  global $insurancebudget, $used_budget, $ceiling, $insurance_tz, $bill_obj;
+	  global $LDInsurance,$LDOldBudget,$LDUsedBudget,$LDOverdrawnBudget,$LDOverdrawnPayment,
+  		  	 $LDNoCompanyCredit,$LDCompanyCredit,$LDLabTotal,$LDPrescTotal,$LDSumtopay,
+  		  	 $LDInsuranceTotal,$LDSummary,$LDNoPendingBills,$LDTranferPendingBillArchive,$LDDone;
+	 $this->debug=FALSE;
+	  if (func_num_args()>3)
+	    $printout=func_get_arg (3);
+		/*
+			This function displays a complete table containing the bill(s) of a batch_nr
+			$specific_bill = 0 -> Show all bills for this batch_nr
+			$specifig_bill != 0 -> Shows only bill[specific_bill]
+			$edif_fields = 0 -> (default)
+			$edit_fields != 0 -> All values editable
+		*/
+		global $db, $user_origin;
+
+	  	echo ($printout) ? '<table width="200"  border="1">' : '<table width="600"  border="0" class="table_content">';
+  		if($specific_bill>0)
+  		{
+  			$billnumbers=$this->VerifyBill($specific_bill);
+  		}
+  		else
+  		{
+  			$billnumbers=$this->GetBillNumbersFromPID($batch_nr);
+  		}
+  		if ($billnumbers) {
+    		while($bills=$billnumbers->FetchRow())
+    		{
+
+    			$ALL_PAID_BY_INSURANCE=FALSE;
+				$bill_timestamp = $bill_obj->GetBillTimestamp($bills['nr']);
+				$matchingContract = $insurance_tz->GetContractMemberFromTimestamp($batch_nr,$bill_timestamp);
+				$matchingBills = $bill_obj->GetBillCostSummaryInTimeframe($batch_nr, $matchingContract['start_date'], $bill_timestamp);
+				$ceiling = $matchingContract['Member']['ceiling']-$matchingContract['Member']['ceiling_startup_subtraction'];
+				$used_budget = array_sum($matchingBills);
+				$insurancebudget = $ceiling-$used_budget;
+				$this->debug=FALSE;
+
+				if ($this->debug) {
+					echo "ceiling = $ceuling<br> ";
+					echo "used_budget = $used_budget<br> ";
+					echo "insurancebudget = $insurancebudget<br> ";
+					print_r  ($matchingContract);
+				}
+				if (!is_array($matchingContract['Member']) && $matchingContract['company_id']>0) {
+					if ($this->debug) echo "<br><b>there is no ceiling but insured</b><br>";
+					$used_budget=0;
+					$insurancebudget=1; // must be greater than 0 (workaround, see below)
+					$ALL_PAID_BY_INSURANCE=TRUE;
+				}
+
+				if ($printout==FALSE) {
+						//Java script for print out the bill
+					// We have to place it here, because here is one place where we have the bill number what is
+					// definetly displayed on the user-screen
+					echo '<script language="javascript" >
+				      <!--
+				      function printOut_'.$bills['nr'].'()
+				      {
+				      	urlholder="show_bill.php?bill_number='.$bills['nr'].'&batch_nr='.$batch_nr.'&printout=TRUE";
+				      	testprintout=window.open(urlholder,"printout","width=380,height=600,menubar=no,resizable=yes,scrollbars=yes");
+
+				      }
+				      function printOut1_'.$bills['nr'].'()
+				      {
+				      	urlholder="show_company_bill.php?bill_number='.$bills['nr'].'&batch_nr='.$batch_nr.'&printout=TRUE";
+				      	testprintout=window.open(urlholder,"printout","width=380,height=600,menubar=no,resizable=yes,scrollbars=yes");
+
+				      }
+
+				      // -->
+				      </script>
+				      ';
+				}
+  				echo '
+  					<tr>
+  						<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">';
+  						$this->DisplayBillHeadline($bills['nr'], $batch_nr, $printout);
+  						echo '
+  						</font></span></span></td>
+  					</tr>';
+    			$sum_to_pay =0;
+    			$sum = 0;
+
+    			$billelems=$this->GetElemsOfBill($bills['nr'],"laboratory");
+  				if($bill_elems_row=$billelems->FetchRow())
+  				{
+	  	  			echo '
+	  	  			<tr>
+	  	  				<td valign="top"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">';
+	  	  					$total_laboratory = $this->DisplayLaboratoryBill($bills['nr'],$edit_fields, $printout);
+		  	      		echo '
+		  	      		</font></span></span></td>
+		  	      	</tr>';
+	        	}
+	        	$billelems=$this->GetElemsOfBill($bills['nr'],"prescriptions");
+  				if($bill_elems_row=$billelems->FetchRow())
+  				{
+  					echo '
+	  	  			<tr>
+	  	  				<td valign="top"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">';
+	  	  					$total_prescription = $this->DisplayPrescriptionBill($bills['nr'],$edit_fields, $printout);
+		  	      		echo '
+		  	      		</font></span></span></td>
+		  	      	</tr>';
+	        	}
+	        	if($insurancebudget<0) 	{
+	        		echo '<tr><td><table border="1" ><tr><td >#<span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDInsurance.'</font></span></span></td><td><table  border="0" align="right"><tr>
+	        				<td align="right" ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDOldBudget.'</font></span></span></td>
+	        				<td colspan="2"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">
+	        					'.number_format(($insurancebudget+$used_budget),2,',','.').'
+	        				</font></span></span></td>
+	        			  </tr>
+	        			  <tr>
+	        				<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDOldBudget.'</font></span></span></td>
+	        				<td colspan="2"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">
+	        					'.number_format(($used_budget),2,',','.').'
+	        				</font></span></span></td>
+	        			  </tr>
+	        			  <tr>
+	        				<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDOverdrawnBudget.'</font></span></span></td>
+	        				<td colspan="2">
+	        					<font color="FF0000"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.number_format(($insurancebudget),2,',','.').'</font></span></span></font>
+	        				</td>
+	        			  </tr>';
+	        		$contract = $insurance_tz->CheckForValidContract($batch_nr,0,$insurance_tz->GetCompanyFromPID($batch_nr));
+	        		if($contract['gets_company_credit'])
+	        		{
+	        			  echo '<tr>
+	        				<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDCompanyCredit.'</font></span></span></td>
+	        				<td colspan="2"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">
+	        					'.number_format(($insurancebudget*-1),2,',','.').'
+	        				</font></span></span></td>
+	        			  </tr>';
+	        		}
+	        		else
+	        		{
+	        			  echo '<tr>
+	        				<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDOverdrawnPayment.'</font></span></span></td>
+	        				<td width="150"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.$LDNoCompanyCredit.'</font></span></span></td><td>
+	        					<i><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="-1">'.number_format(($insurancebudget*-1),2,',','.').'<br>
+	        					----------</i>
+	        				</font></span></span></td>
+	        			  </tr>';
+	        			  $sum_to_pay += $insurancebudget*-1;
+
+	        		}
+	        		echo '</table></td></tr></td></tr></table>';
+	  	      		echo '
+	  	      		</td>
+	  	      		</tr>';
+        		}
+
+
+        		$sum_to_pay += $total_laboratory;
+        		$sum_to_pay += $total_prescription;
+				echo '
+				<tr>
+					<td>';
+						echo ($printout) ? '<table  border="1" align="right">' : '<table  border="0" align="right" class="headline">';
+						echo '<tr>
+								<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$LDSummary.'</font></span></span></td>
+								<td>
+									<table border="0" >
+										<tr>
+											<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">
+												'.$LDLabTotal.'
+											</font></span></span></td>
+											<td ><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">
+												'.number_format(($total_laboratory),2,',','.').'
+											</font></span></span></td>
+										</tr>
+										<tr>
+											<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">
+												'.$LDPrescTotal.'
+											</font></span></span></td>
+											<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">
+												'.number_format(($total_prescription),2,',','.').'
+											</font></span></span></td>
+										</tr>
+										<tr>
+											<td align="right"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">
+												'.$LDInsuranceTotal.'
+											</font></span></span></td>
+											<td><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">
+												';
+												if($insurancebudget<0)
+													echo number_format(($insurancebudget*-1),2,',','.');
+												elseif ($ALL_PAID_BY_INSURANCE)
+													echo number_format((($total_laboratory+$total_prescription)*-1),2,',','.');
+												else echo '0,00';
+												echo '
+											</font></span></span></td>
+										</tr>
+										<tr>
+											<td align="right">
+												<span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$LDSumtopay.'</b>
+											</font></span></span></td>
+											<td><font color="#FF0000"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">
+												'.number_format(($sum_to_pay),2,',','.').'</font></span></span></font><br>
+												=======</b>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>';
+	        	// is there the edit_fields flag set, then there should be finished the formular with the submit button.
+	        	// If not, then show the three kinds of the main folder.
+	        	echo '
+	  			    <tr>
+	  			  		<td>';
+				$show_printout_button = TRUE;
+				$show_done_button=TRUE;
+				$show_edit_button=TRUE;
+				$enc_obj = New Encounter;
+				$encounter_nr = $enc_obj->GetEncounterFromBatchNumber($batch_nr);
+		     	if ($printout==FALSE)
+		     	{
+					 if ($show_printout_button) echo '<a href="javascript:printOut_'.$bills['nr'].'()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a> ';
+					   if ($show_printout_button) echo '<input type="button" value="CompanyBill" onclick="javascript:printOut1_'.$bills['nr'].'()">';
+					 if ($edit_fields) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif"> &nbsp;&nbsp;&nbsp; '.$LDTranferPendingBillArchive.' <a href="billing_tz_pending.php?&mode=done&user_origin='.$user_origin.'&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="'.$LDDone.'"></a>&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif">';
+					 if (!$edit_fields) echo '<a href="billing_tz_edit.php?batch_nr='.$batch_nr.'&billnr='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_auswahl2.gif" border=0 align="absmiddle" width="120" height="24"></a>';
+				}
+	         	echo '</td>
+	  			  	</tr>';
+    		}
+    	}
+    	else
+    	{
+    	  echo '<br><br><tr><td><div align="center"><h1>'.$LDNoPendingBills.'</h1><div></td></tr>';
+      	}
+	  	echo'
+
+	  	</table>';
+	  //if($edit_fields) echo '<form method=post action="#" name="edit_bill">';
+	}
+
+	//------------------------------------------------------------------------------
+
+
+function DisplayCompanyBills($batch_nr, $specific_bill, $edit_fields) {
 	  global $insurancebudget, $used_budget, $ceiling, $insurance_tz, $bill_obj;
 	  global $LDInsurance,$LDOldBudget,$LDUsedBudget,$LDOverdrawnBudget,$LDOverdrawnPayment,
   		  	 $LDNoCompanyCredit,$LDCompanyCredit,$LDLabTotal,$LDPrescTotal,$LDSumtopay,
@@ -1623,6 +2088,13 @@ function delete_bill_element($bill_elem_number) {
 				      	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
 
 				      }
+				      function printOut1_'.$bills['nr'].'()
+				      {
+				      	urlholder="show_bill.php?bill_number='.$bills['nr'].'&batch_nr='.$batch_nr.'&printout=TRUE";
+				      	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
+
+				      }
+
 				      // -->
 				      </script>
 				      ';
@@ -1640,10 +2112,11 @@ function delete_bill_element($bill_elem_number) {
     			$billelems=$this->GetElemsOfBill($bills['nr'],"laboratory");
   				if($bill_elems_row=$billelems->FetchRow())
   				{
+
 	  	  			echo '
 	  	  			<tr>
 	  	  				<td valign="top">';
-	  	  					$total_laboratory = $this->DisplayLaboratoryBill($bills['nr'],$edit_fields);
+	  	  					$total_laboratory = $this->DisplayCompanyLaboratoryBill($bills['nr'],$edit_fields);
 		  	      		echo '
 		  	      		</td>
 		  	      	</tr>';
@@ -1654,7 +2127,7 @@ function delete_bill_element($bill_elem_number) {
   					echo '
 	  	  			<tr>
 	  	  				<td valign="top">';
-	  	  					$total_prescription = $this->DisplayPrescriptionBill($bills['nr'],$edit_fields);
+	  	  					$total_prescription = $this->DisplayCompanyPrescriptionBill($bills['nr'],$edit_fields);
 		  	      		echo '
 		  	      		</td>
 		  	      	</tr>';
@@ -1709,10 +2182,27 @@ function delete_bill_element($bill_elem_number) {
 
         		$sum_to_pay += $total_laboratory;
         		$sum_to_pay += $total_prescription;
+
+
+        		if($total_prescription==0)
+        		{
+        			 echo '<table border="2">
+
+  		<tr>
+  				<td>Service(TSH)</td><td>Lab(TSH)</td><td>X-Ray(TSH)</td><td>Dawa(TSH)</td><td>Proc/Surg(TSH)</td><td>Dress(TSH)</td><td>Dental(TSH)</td><td>Others(TSH)</td><td>Total(TSH)</td>
+		</tr>
+
+  			<tr>
+  				<td>'.number_format(($service_amt),2,',','.').'</td><td>'.number_format(($total_laboratory),2,',','.').'</td><td>'.number_format(($xray_amt),2,',','.').'</td><td>'.number_format(($drug_amt),2,',','.').'</td><td>'.number_format(($surgery_amt),2,',','.').'</td><td>'.number_format(($dress_amt),2,',','.').'</td><td>'.number_format(($dental_amt),2,',','.').'</td><td>'.number_format(($others_amt),2,',','.').'</td><td>'.number_format(($total_laboratory),2,',','.').'</td>
+		</tr>
+
+  	  				</table>';
+        		}
+
 				echo '
 				<tr>
 					<td>
-						<table width="800" border="1">
+						<!--<table width="400" border="1">
 							<tr>
 								<td width="100">'.$LDSummary.'</td>
 								<td>
@@ -1759,8 +2249,9 @@ function delete_bill_element($bill_elem_number) {
 									</table>
 								</td>
 							</tr>
-						</table>
+						</table>-->
 					</td>
+						<tr><td>Patient Sign:.........................</td></tr>
 				</tr>';
 	        	// is there the edit_fields flag set, then there should be finished the formular with the submit button.
 	        	// If not, then show the three kinds of the main folder.
@@ -1775,6 +2266,7 @@ function delete_bill_element($bill_elem_number) {
 		     	if ($printout==FALSE)
 		     	{
 					 if (!$show_printout_button) echo '<a href="javascript:printOut_'.$bills['nr'].'()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a> ';
+					   if (!$show_printout_button) echo '<input type="button" value="CompanyBill" onclick="javascript:printOut1_'.$bills['nr'].'()">';
 					 if ($edit_fields) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif"> &nbsp;&nbsp;&nbsp; '.$LDTranferPendingBillArchive.' <a href="billing_tz_pending.php?&mode=done&user_origin='.$user_origin.'&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="'.$LDDone.'"></a>&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif">';
 					 if (!$edit_fields) echo '<a href="billing_tz_edit.php?batch_nr='.$batch_nr.'&billnr='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_auswahl2.gif" border=0 align="absmiddle" width="120" height="24"></a>';
 				}
@@ -1794,8 +2286,19 @@ function delete_bill_element($bill_elem_number) {
 
 	//------------------------------------------------------------------------------
 
+
+
+
+
+
+
+
+
+
+
 	function ArchiveBill($bill_number) {
 	  global $db;
+	  global $user_id,$sid,$local_user;
 	  $debug=FALSE;
 	  if ($debug) echo "<b>class_tz_billing::ArchiveBill($bill_number)</b><br>";
 	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
@@ -1812,6 +2315,15 @@ function delete_bill_element($bill_elem_number) {
                       (`nr`,`date_change`, `is_labtest`, `is_medicine`, `is_comment`, `is_paid`, `amount`, `price`, `balanced_insurance`, `insurance_id`, `description`, `item_number`, `prescriptions_nr`)
                   SELECT `nr`,`date_change`, `is_labtest`, `is_medicine`, `is_comment`, 1, `amount`, `price`, `balanced_insurance`, `insurance_id`, `description`, `item_number`, `prescriptions_nr` FROM care_tz_billing_elem WHERE `nr`=".$bill_number;
     $this->result=$db->Execute($this->sql);
+
+
+		
+	
+    $user_id=$_SESSION['sess_user_name'];
+
+
+	$this->sql = "UPDATE care_tz_billing_archive_elem SET user_id='$user_id' WHERE nr=".$bill_number;
+      $db->Execute($this->sql);
 
     if ($db->Insert_ID())
       $CARE_TZ_BILLING_ELEM_ARCHIVED=TRUE;
@@ -2006,14 +2518,14 @@ function delete_bill_element($bill_elem_number) {
 					echo '
           <tr>
           	<form method="POST" action="billing_tz_quotation_create.php">
-					  <td '.$BGCOLOR.'><div align="center">'.$row['prescribe_date'].'</div></td>
-					  <td '.$BGCOLOR.'><div align="center">'.$row['encounter_nr'].'</div></td>
-					  <td '.$BGCOLOR.'><div align="center">'.$this->ShowPID($row['pid']).'</div></td>
-					  <td '.$BGCOLOR.'><div align="center">'.$row['selian_pid'].'</div></td>
-					  <td '.$BGCOLOR.'><div align="center">'.$row['name_last'].', '.$row['name_first'].'</div></td>
-					  <td '.$BGCOLOR.'><div align="center">'.$row['date_birth'].'</div></td>
-					  <td '.$BGCOLOR.'><div align="center">'.$row['anzahl'].' pres.<br>'.$labinfo['anzahl'].' req.</div></td>
-					  <td '.$BGCOLOR.'><div align="center"><input type="hidden" name="namelast" value="'.$row['name_last'].'"><input type="hidden" name="namefirst" value="'.$row['name_first'].'"><input type="hidden" name="countpres" value="'.$row['anzahl'].'"><input type="hidden" name="countlab" value="'.$labinfo['anzahl'].'"><input type="hidden" value="'.$row['encounter_nr'].'" name="encounter_nr"><input type="hidden" value="'.$row['pid'].'" name="pid"><input type="submit" value=">>"></div></td>
+					  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['prescribe_date'].'</div></td>
+					  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['encounter_nr'].'</div></td>
+					  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$this->ShowPID($row['pid']).'</div></td>
+					  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['selian_pid'].'</div></td>
+					  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['name_last'].', '.$row['name_first'].'</div></td>
+					  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['date_birth'].'</div></td>
+					  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['anzahl'].' pres.<br>'.$labinfo['anzahl'].' req.</div></td>
+					  <td '.$BGCOLOR.' class="td_content"><div align="center"><input type="hidden" name="namelast" value="'.$row['name_last'].'"><input type="hidden" name="namefirst" value="'.$row['name_first'].'"><input type="hidden" name="countpres" value="'.$row['anzahl'].'"><input type="hidden" name="countlab" value="'.$labinfo['anzahl'].'"><input type="hidden" value="'.$row['encounter_nr'].'" name="encounter_nr"><input type="hidden" value="'.$row['pid'].'" name="pid"><input type="submit" value=">>"></div></td>
 					  </form>
 					</tr>';
 				$alreadyshown[$row['encounter_nr']] = $row['encounter_nr'];
@@ -2039,14 +2551,14 @@ function delete_bill_element($bill_elem_number) {
 								echo '
 			          <tr>
 			          	<form method="POST" action="billing_tz_quotation_create.php">
-								  <td '.$BGCOLOR.'><div align="center">'.substr($row['modify_time'],0,10).'</div></td>
-								  <td '.$BGCOLOR.'><div align="center">'.$row['encounter_nr'].'</div></td>
-								  <td '.$BGCOLOR.'><div align="center">'.$this->ShowPID($row['pid']).'</div></td>
-								  <td '.$BGCOLOR.'><div align="center">'.$row['selian_pid'].'</div></td>
-								  <td '.$BGCOLOR.'><div align="center">'.$row['name_last'].', '.$row['name_first'].'</div></td>
-								  <td '.$BGCOLOR.'><div align="center">'.$row['date_birth'].'</div></td>
-								  <td '.$BGCOLOR.'><div align="center">0 pres.<br>'.$row['anzahl'].' req.</div></td>
-								  <td '.$BGCOLOR.'><div align="center"><input type="hidden" name="namelast" value="'.$row['name_last'].'"><input type="hidden" name="namefirst" value="'.$row['name_first'].'"><input type="hidden" name="countpres" value="0"><input type="hidden" name="countlab" value="'.$row['anzahl'].'"><input type="hidden" value="'.$row['encounter_nr'].'" name="encounter_nr"><input type="hidden" value="'.$row['pid'].'" name="pid"><input type="submit" value=">>"></div></td>
+								  <td '.$BGCOLOR.' class="td_content"><div align="center">'.substr($row['modify_time'],0,10).'</div></td>
+								  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['encounter_nr'].'</div></td>
+								  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$this->ShowPID($row['pid']).'</div></td>
+								  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['selian_pid'].'</div></td>
+								  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['name_last'].', '.$row['name_first'].'</div></td>
+								  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['date_birth'].'</div></td>
+								  <td '.$BGCOLOR.' class="td_content"><div align="center">0 pres.<br>'.$row['anzahl'].' req.</div></td>
+								  <td '.$BGCOLOR.' class="td_content"><div align="center"><input type="hidden" name="namelast" value="'.$row['name_last'].'"><input type="hidden" name="namefirst" value="'.$row['name_first'].'"><input type="hidden" name="countpres" value="0"><input type="hidden" name="countlab" value="'.$row['anzahl'].'"><input type="hidden" value="'.$row['encounter_nr'].'" name="encounter_nr"><input type="hidden" value="'.$row['pid'].'" name="pid"><input type="submit" value=">>"></div></td>
 					   </form>
 					 </tr>';
 							}
@@ -2171,7 +2683,8 @@ function delete_bill_element($bill_elem_number) {
 					  				<table border="0" cellpadding="0" width="200">
 					  					<tr>
 					  						<td width="100">'.$LDPrice.'</td>
-					  						<td align="right"><input type="hidden" name="showprice_'.$row['nr'].'" id="showprice_'.$row['nr'].'" value="'.$row['price'].'">'.$row['price'].' '.$LDTSH.' </td>
+					  						<td align="right"><input type="hidden" name="showprice_'.$row['nr'].'" id="showprice_'.$row['nr'].'" value="'.$row['price'].'">'.$row['price'].' '.$LDTSH.' ' .
+					  								'<br><!--<a href="#" onClick="javascript:calc_article(\'555\');">0815</a>--></td>
 					  					</tr>
 					  					<tr>
 					  						<td>'.$LDDosage.'</td>
@@ -2350,6 +2863,9 @@ function new_reg($encounter,$reg,$prescriber)
     }
   return TRUE;
 	}
+
+//-------------------------------------
+
 }
 
 

@@ -84,6 +84,12 @@ function popPic(pid,nm){
 
 	<TD><?php echo $LDEnterNewPharmacyProduct; ?></TD>
 </tr>
+<TR>
+	<td align=center><img src="../../gui/img/common/default/settings_tree.gif" border=0 width="16" height="17"></td>
+	<TD class="submenu_item"><nobr><a href="edit_pricesettings.php"><?php echo $LDAdminSellingPrice; ?></a></nobr></TD>
+
+	<TD><?php echo $LDAdminSellingPriceDescription; ?></TD>
+</tr>
 
 <TR  height=1>
 	<TD colSpan=3 class="vspace"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>

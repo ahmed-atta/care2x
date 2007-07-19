@@ -37,7 +37,7 @@ if($task=="insert")
 	$deletecounter=0;
 
 	while(list($x,$v) = each($_POST))
-	{
+	{//echo $_POST['price_'.$prescriptions_nr]; die();
 
 		if ($debug) echo "looking for:".$x."<br>";
 

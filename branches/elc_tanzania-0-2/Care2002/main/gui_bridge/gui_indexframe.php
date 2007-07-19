@@ -53,7 +53,7 @@ function checkIfChanged(lang)
 }
 </script>
 </HEAD>
- 
+
  <?php
  # Prepare values for body template
 if($boot || $_chg_lang_){
@@ -102,7 +102,7 @@ if($GLOBALCONFIG['language_single']<>1){
 <form action="#" onSubmit="return checkIfChanged(this.lang.value)">
 <hr>
 <?php echo $LDLanguage ?><br>
- <select name="lang"> 
+ <select name="lang">
 <?php
 
 require($root_path.'include/care_api_classes/class_language.php');

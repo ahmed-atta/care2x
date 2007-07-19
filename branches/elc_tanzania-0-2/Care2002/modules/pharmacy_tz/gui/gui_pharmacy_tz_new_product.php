@@ -23,12 +23,54 @@ function gethelp(x,s,x1,x2,x3,x4)
 <script language="javascript" src="../../js/hilitebu.js"></script>
 
 <STYLE TYPE="text/css">
+<!-- 
 A:link  {color: #000066;}
 A:hover {color: #cc0033;}
 A:active {color: #cc0000;}
 A:visited {color: #000066;}
 A:visited:active {color: #cc0000;}
 A:visited:hover {color: #cc0033;}
+.product_table {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+}
+
+// .class_classification {
+}
+.classification {
+	font-family: Arial, Helvetica, sans-serif;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: none;
+	border-right-style: dotted;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+.product_price {
+	font-family: Arial, Helvetica, sans-serif;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: dotted;
+	border-right-style: none;
+	border-bottom-style: dotted;
+	border-left-style: none;
+}
+-->
 </style>
 
 </HEAD>
@@ -65,31 +107,32 @@ A:visited:hover {color: #cc0033;}
 <form ENCTYPE="multipart/form-data" action="pharmacy_tz_new_product.php" method="get" name="inputform">
 
 	
-	      <table border=0 cellspacing=1 cellpadding=3>
+	      <table border=0 cellspacing=1 cellpadding=3 class="product_table">
             <tbody class="submenu">
               <tr> 
                 <td align=right width=103><?php echo $LDPediatric; ?> </td>
-                <td align=right width=27 class="prompt">
+                <td align=right width=30 class="classification">
                 <input type="checkbox" name="is_peadric" <?php if (!empty($is_peadric)) echo "checked";?> <?php echo $html_disabler;?>></td>
-                <td align=right width=206 >
+                <td align=right width=32 >&nbsp;</td>
+                <td align=right width=145 >
                                            <?php if ($ERROR_SELIAN_ITEM_NUMBER) echo '<font color="red">';?>
                                               <?php echo $LDSelianItemNumber; ?>
-                                           <?php if ($ERROR_SELIAN_ITEM_NUMBER) echo '</font>';?>
-                </td>
-                <td width="349"><input type="text" name="selian_item_number" value="<?PHP echo $selian_item_number;?>" <?php echo $html_disabler;?> size=20 maxlength=20></td>
-                <td width="12" rowspan=15 valign=top> <br>
-                </td>
+                                           <?php if ($ERROR_SELIAN_ITEM_NUMBER) echo '</font>';?>                </td>
+                <td width="594"><input type="text" name="selian_item_number" value="<?PHP echo $selian_item_number;?>" <?php echo $html_disabler;?> size=20 maxlength=20></td>
+                <td width="7" rowspan=16 valign=top> <br>                </td>
               </tr>
               <tr> 
                 <td align=right width=103><?php echo $LDAdultList; ?></td>
-                <td align=right width=27><input type="checkbox" name="is_adult" <?php if (!empty($is_adult)) echo "checked";?> <?php echo $html_disabler;?>></td>
-                <td align=right width=206><?php echo $LDPackSize; ?></td>
+                <td width=30 align=right class="classification"><input type="checkbox" name="is_adult" <?php if (!empty($is_adult)) echo "checked";?> <?php echo $html_disabler;?>></td>
+                <td align=right width=32>&nbsp;</td>
+                <td align=right width=145><?php echo $LDPackSize; ?></td>
                 <td><input type="text" name="pack_size" value="<?php echo $pack_size;?>" <?php echo $html_disabler;?> size=40 maxlength=40>
                   <?php echo $LDForAddInformation; ?></td>
               </tr>
               <tr> 
                 <td align=right><?php echo $LDOther; ?></td>
-                <td align=right><input type="checkbox" name="is_other" <?php if (!empty($is_other)) echo "checked";?> <?php echo $html_disabler;?>></td>
+                <td align=right class="classification"><input type="checkbox" name="is_other" <?php if (!empty($is_other)) echo "checked";?> <?php echo $html_disabler;?>></td>
+                <td align=right>&nbsp;</td>
                 <td align=right>
                                           <?php if ($ERROR_SELIANS_ITEM_DESCRIPTION) echo '<font color="red">';?>
                                             <?php echo $LDSeliansItemDesc; ?></td>
@@ -98,32 +141,24 @@ A:visited:hover {color: #cc0033;}
                   <?php echo $LDWilBeShown; ?></td>
               </tr>
               <tr> 
-                <td align=right width=103>ARV Drug<?php //echo $LDConsumable; ?></td>
-                <td align=right width=27><input type="checkbox" name="is_consumable" <?php if (!empty($is_consumable)) echo "checked";?> <?php echo $html_disabler;?>></td>
-                <td align=right width=206> <?php echo $LDSeliansPriceItem; ?></td>
-                <td><input type="text" name="selians_item_price" value="<?php echo $selians_item_price;?>" <?php echo $html_disabler;?> size=20 maxlength=40>
-                  <?php echo $LDTSHeg; ?></td>
+                <td align=right width=103><?php echo $LDARVDrug; ?></td>
+                <td width=30 align=right class="classification"><input type="checkbox" name="is_consumable" <?php if (!empty($is_consumable)) echo "checked";?> <?php echo $html_disabler;?>></td>
+                <td align=right width=32>&nbsp;</td>
+                <td width=145 align=right class="product_price"><p><?php echo $LDFullDescItem; ?></p>
+                <p><?php echo $LDJustForInternalUse; ?></p></td>
+                <td class="product_price"><textarea name="items_full_description" cols=35 rows=4 <?php echo $html_disabler;?>><?php echo $items_full_description?></textarea></td>
               </tr>
               <tr> 
                 <td align=right width=103>&nbsp;</td>
-                <td align=right width=27>&nbsp;</td>
-                <td align=right width=206><p><?php echo $LDFullDescItem; ?></p>
-                  <p><?php echo $LDJustForInternalUse; ?></p></td>
-                <td><textarea name="items_full_description" cols=35 rows=4 <?php echo $html_disabler;?>><?php echo $items_full_description?></textarea></td>
-              </tr>
-
-              <tr> 
-                <td align=right width=103>&nbsp;</td>
-                <td align=right width=27>&nbsp;</td>
-                <td align=right width=206><?php echo $LDItemClassification; ?></td>
-                <td>
-                <?php 
+                <td width=30 align=right class="classification">&nbsp;</td>
+                <td align=right width=32>&nbsp;</td>
+                <td align=right width=145><p><?php echo $LDItemClassification; ?></p>                  </td>
+                <td><?php 
                 
                 if ($html_disabler) {
                           echo $item_classification; 
                       } else { ?>
-                <select name="item_classification">
-
+                  <select name="item_classification">
                     <option value="drug_list" <?PHP if ($item_classification=="drug") echo "selected";?>>drug</option>
                     <option value="supplies" <?PHP if ($item_classification=="supplies") echo "selected";?>>supplies</option>
                     <option value="supplies_laboratory" <?PHP if ($item_classification=="supplies lab.") echo "selected";?>>supplies Laboratory</option>
@@ -133,14 +168,40 @@ A:visited:hover {color: #cc0033;}
                     <option value="dental" <?PHP if ($item_classification=="dental services") echo "selected";?>>dental services</option>
                     <option value="smallop" <?PHP if ($item_classification=="small op") echo "selected";?>>small op</option>
                     <option value="bigop" <?PHP if ($item_classification=="big op") echo "selected";?>>major op</option>
-                </select>
-                <?php } ?>
-                </td>
+                  </select>
+                  <?php } ?></td>
+              </tr>
+
+              <tr>
+                <td align=right>&nbsp;</td>
+                <td align=right class="classification">&nbsp;</td>
+                <td align=right>&nbsp;</td>
+                <td align=right>&nbsp;</td>
+                <td>&nbsp;</td>
               </tr>
               <tr> 
                 <td align=right width=103>&nbsp;</td>
-                <td align=right width=27>&nbsp;</td>
-                <td align=right width=206>&nbsp;</td>
+                <td width=30 align=right class="classification">&nbsp;</td>
+                <td align=right width=32>&nbsp;</td>
+                <td align=right class="product_price"><?php echo $LDSeliansPriceItem; ?></td>
+                <td class="product_price"><p>
+                    <input type="text" name="selians_item_price" value="<?php echo $selians_item_price;?>" <?php echo $html_disabler;?> size=20 maxlength=40>
+                    <?php echo $short_1; ?></p>
+                    <p>
+                      <input type="text" name="selians_item_price_1" value="<?php echo $selians_item_price_1;?>" <?php echo $html_disabler;?> size=20 maxlength=40>
+                      <?php echo $short_2; ?></p>
+                  <p>
+                      <input type="text" name="selians_item_price_2" value="<?php echo $selians_item_price_2;?>" <?php echo $html_disabler;?> size=20 maxlength=40>
+                      <?php echo $short_3; ?></p>
+                  <p>
+                      <input type="text" name="selians_item_price_3" value="<?php echo $selians_item_price_3;?>" <?php echo $html_disabler;?> size=20 maxlength=40>
+                      <?php echo $short_4; ?></p></td>
+              </tr>
+              <tr> 
+                <td align=right width=103>&nbsp;</td>
+                <td width=30 align=right class="classification">&nbsp;</td>
+                <td align=right width=32>&nbsp;</td>
+                <td align=right width=145>&nbsp;</td>
                 <td align=right>
                 
                 <?php if ($GO_BACK_TO_SEARCH)
@@ -172,9 +233,8 @@ A:visited:hover {color: #cc0033;}
                         <?php } ?>   
                 <?php } ?>                        
 				        <input type="hidden" name="lang" value="en">   
-				        <input type="hidden" name="selian_item_number" value="<?PHP echo $selian_item_number;?>"  size=20 maxlength=20>             
-                <input type="submit" value="<?php echo $LDOK; ?>">
-                </td>
+				                    
+                <input type="submit" value="<?php echo $LDOK; ?>">                </td>
               </tr>
             </tbody>
           </table>

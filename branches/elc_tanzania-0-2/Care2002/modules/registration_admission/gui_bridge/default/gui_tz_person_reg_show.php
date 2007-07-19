@@ -81,7 +81,6 @@ require('./gui_bridge/default/gui_tz_tabs_patreg.php');
 <p>
 
 <?php if (!$newdata) { ?>
-
 <?php
 	 if($target=="search") $newsearchfile='patient_register_search.php'.URL_APPEND;
     	else $newsearchfile='patient_register_archive.php'.URL_APPEND;

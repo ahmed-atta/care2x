@@ -23,7 +23,6 @@ if (isset($sql_query)) {
     // because the LIMIT clause may come from us (sql.php, sql_limit_to_append
     // or may come from the user.
     // Then, the limits set in the form will be added.
-    // TODO: do we need some other parts here, like PROCEDURE or FOR UPDATE?
 
     $parsed_sql = PMA_SQP_parse($sql_query);
     $analyzed_sql = PMA_SQP_analyze($parsed_sql);
@@ -51,7 +50,6 @@ if (isset($sql_query)) {
         $sql_query .= ' ORDER BY ' . $analyzed_sql[0]['order_by_clause'];
     }
 
-    // TODO: can we avoid reparsing the query here?
     PMA_showMessage($GLOBALS['strSQLQuery']);
 }
 

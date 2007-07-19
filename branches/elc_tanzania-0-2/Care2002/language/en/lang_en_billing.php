@@ -247,11 +247,24 @@ $LDMemberManagement='Insurance Companys - Member Management';
 $LDSelectInsurance='Please select an insurance company to manage its members:';
 $LDSearch='Search for family name, PID or Selian file nr:';
 $LDbillinginsurancereports='billing :: insurance :: reports';
+
+# rm: Insurance Report output starts here:
+
+$LDReportPrepaidAmount='Prepaid Report';
+$LDReportPrepaidAmountContent='Check the prepaid amount each Companies';
+$LDReportsCeiling='Ceiling';
+$LDReportsCeilingContent='Monthly report of the used ceiling';
+$LDRepoortsInvoicedCompanies='Full Service';
+$LDRepoortsInvoicedCompaniesContent='Report for Services >pay by invoice<';
+
+
 $LDInsuranceReports='Insurance - Reports';
 $LDCompaniesContracts='Companies, Contracts';
 $LDShowCompaniescontractsmembers='Show all companies, their contracts and its members';
 $LDInsuranceReportsOverview='Insurance Reports - Company overview';
 $LDCalculateTotalSum='Calculate total sum';
+
+
 $LDResetFields='Reset fields';
 $LDFinished='I\'m finished';
 $LDSelect='Select';
@@ -306,7 +319,7 @@ $LDTotalSum='TOTAL SUM:';
 $LDCity='City:';
 $LDNothingToDo='Nothing todo for';
 $LDTranferPendingBillArchive='To transfere this pending bill into the archive:';
-$LDDone='It�s done! Move the form to the archive';
+$LDDone='It\'s done! Move the form to the archive';
 $LDPrescriptionOther='Prescriptions/Other';
 
 $LDEncounterNumber='Encounter Number:';

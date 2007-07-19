@@ -57,8 +57,6 @@ if (!defined('PMA_CHK_DROP')
     && !$cfg['AllowUserDropDatabase']
     && eregi('DROP[[:space:]]+DATABASE[[:space:]]+', $sql_query)) {
     // Checks if the user is a Superuser
-    // TODO: set a global variable with this information
-    // loic1: optimized query
     $result = @PMA_mysql_query('USE mysql');
     if (PMA_mysql_error()) {
         include('./header.inc.php');
@@ -108,10 +106,6 @@ $is_select = isset($analyzed_sql[0]['queryflags']['select_from']);
 // db and table name may be enclosed with backquotes, db is optionnal,
 // query may contain aliases.
 
-// (TODO: if there are more than one table name in the Select:
-// - do not extract the first table name
-// - do not show a table name in the page header
-// - do not display the sub-pages links)
 
 if ($is_select) {
     $prev_db = $db;
@@ -243,8 +237,6 @@ else {
     //              appending in queries like
     //                "SELECT COUNT(...) FROM ... GROUP BY ..."
 
-    // TODO: detect all this with the parser, to avoid problems finding
-    // those strings in comments or backquoted identifiers
 
     $is_explain = $is_count = $is_export = $is_delete = $is_insert = $is_affected = $is_show = $is_maint = $is_analyse = $is_group = $is_func = FALSE;
     if ($is_select) { // see line 141
@@ -310,7 +302,7 @@ else {
         $num_rows = 0;
     }
     else {
-        // garvin: Measure query time. TODO-Item http://sourceforge.net/tracker/index.php?func=detail&aid=571934&group_id=23067&atid=377411
+        // garvin: Measure query time. -Item http://sourceforge.net/tracker/index.php?func=detail&aid=571934&group_id=23067&atid=377411
         list($usec, $sec) = explode(' ',microtime());
         $querytime_before = ((float)$usec + (float)$sec);
 
@@ -390,7 +382,6 @@ else {
                 } else { // n o t   " j u s t   b r o w s i n g "
 
                     if (PMA_MYSQL_INT_VERSION < 40000) {
-                        // TODO: detect DISTINCT in the parser 
                         if (eregi('DISTINCT(.*)', $sql_query)) {
                             $count_what = 'DISTINCT ' . $analyzed_sql[0]['select_expr_clause'];
                         } else {
@@ -470,9 +461,7 @@ else {
                                 // there are some cases where the generated
                                 // count_query (for MySQL 3) is wrong,
                                 // so we get here.
-                                //TODO: use a big unlimited query to get
-                                // the correct number of rows (depending
-                                // on a config variable?)
+
                                 $unlim_num_rows = 0;
                             }
                         }

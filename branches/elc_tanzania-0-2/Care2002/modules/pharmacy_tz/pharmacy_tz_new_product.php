@@ -21,6 +21,7 @@ require($root_path.'include/care_api_classes/class_tz_pharmacy.php');
 * Copyright 2005 Robert Meggle based on the development of Elpidio Latorilla (2002,2003,2004,2005)
 * elpidio@care2x.org, meggle@merotech.de
 * Updated by: Alexander Irro - alexander.irro@merotech.de
+* Updated by: Robert Meggle - meggle@merotech.de
 * See the file "copy_notice.txt" for the licence notice
 */
 $lang_tables[]='pharmacy.php';
@@ -54,6 +55,33 @@ if ($debug) {
 // Endable db-debugging if variable debug is true
 ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
+
+$product_obj = new Product();
+$product_obj->usePriceDescriptionTable();
+
+/*
+ * Seciton to read out the Configuration of price accounts
+ */
+$allItems=$product_obj->getAllDataObject();
+
+$index=0; 
+while($row=$allItems->FetchRow()){
+	$short[$index] = $row['ShowDescription'];
+	$long[$index] = $row['FullDescription']; 
+	$is_insurance[$index] = $row['is_insurance_price']; 
+	$timestamp=$row['last_change'];
+	$user=$row['UID'];
+	$index ++;
+	
+}
+// quite navie, but's working:
+$short_1=$short[0]; $long_1=$long[0]; $is_insured_1 = $is_insurance[0];
+$short_2=$short[1]; $long_2=$long[1]; $is_insured_2 = $is_insurance[1];
+$short_3=$short[2]; $long_3=$long[2]; $is_insured_3 = $is_insurance[2];
+$short_4=$short[3]; $long_4=$long[3]; $is_insured_4 = $is_insurance[3];
+
+
+
 //------------------------------------------------------------------------------
 
 /**
@@ -69,7 +97,7 @@ if ($debug) {
 // Check form values if variable mode is set to "insert"
 
 
-$product_obj = new Product();
+
 
 //------------------------------------------------------------------------------
 
@@ -78,7 +106,8 @@ if (!empty($mode)) {
   if ( ($mode!="show") && ($mode!="edit") && ($mode!="erase") && (!$GO_BACK_TO_SEARCH)) { // show or edit are external calls of this site
 
     if ($product_obj->check_form_variable($selian_item_number)) {
-      $ERROR=TRUE;
+      if ($debug) echo "ERROR: <b>Selian item Number is empty</b>";
+      $ERROR=TRUE; print_r($_GET);
       $ERROR_SELIAN_ITEM_NUMBER = TRUE;
     }
     if ($mode=="insert") {
@@ -104,7 +133,11 @@ if (!empty($mode)) {
       $selians_item_description   = $product_obj->get_selians_item_description($item_id);
       $items_full_description     = $product_obj->get_items_full_description($item_id);
       $item_classification        = $product_obj->get_item_classification($item_id);
-      $selians_item_price         = $product_obj->get_selians_item_price($item_id);
+      //$selians_item_price         = $product_obj->get_selians_item_price($item_id);
+      $selians_item_price         = $product_obj->get_selians_item_alt_price($item_id,0);
+      $selians_item_price_1       = $product_obj->get_selians_item_alt_price($item_id,1);
+      $selians_item_price_2       = $product_obj->get_selians_item_alt_price($item_id,2);
+      $selians_item_price_3       = $product_obj->get_selians_item_alt_price($item_id,3);
     }
   }
 
@@ -143,6 +176,11 @@ if ( !empty($mode) && !$ERROR ) {
   (empty($is_adult))      ? $is_adult = "0"      : $is_adult = "1";
   (empty($is_other))      ? $is_other = "0"      : $is_other = "1";
   (empty($is_consumable)) ? $is_consumable = "0" : $is_consumable = "1";
+  
+  if (empty($selians_item_price)) $selians_item_price="0";
+  if (empty($selians_item_price_1)) $selians_item_price_1="0";
+  if (empty($selians_item_price_2)) $selians_item_price_2="0";
+  if (empty($selians_item_price_3)) $selians_item_price_3="0";
 
   $db_buffer = array();
   $db_buffer['is_pediatric']            = $is_peadric;
@@ -153,7 +191,11 @@ if ( !empty($mode) && !$ERROR ) {
   $db_buffer['item_description']        = $selians_item_description;
   $db_buffer['item_full_description']   = $items_full_description;
   $db_buffer['purchasing_class']        = $item_classification;
+  
   $db_buffer['unit_price']              = $selians_item_price;
+  $db_buffer['unit_price_1']            = $selians_item_price_1;
+  $db_buffer['unit_price_2']            = $selians_item_price_2;
+  $db_buffer['unit_price_3']            = $selians_item_price_3;
   $product_obj->useProductTable();
 
 
@@ -182,6 +224,7 @@ if ( !empty($mode) && !$ERROR ) {
     if ($debug) echo "current mode is update!<br>";
     if ($product_obj -> item_number_exists ($selian_item_number)) {
       // The item still exists in the database!
+      if ($debug) { echo "Database fields are:"; print_r($db_buffer); } 
       $product_obj->setDataArray($db_buffer);
       $product_obj->updatePharmacyDataFromInternalArray($item_id,FALSE);
       $MSG.="Item with code \"".$selian_item_number."\" is now updated<br>";

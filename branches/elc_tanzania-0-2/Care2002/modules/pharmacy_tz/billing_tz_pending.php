@@ -46,18 +46,7 @@ if ($mode=="done" && isset($pn) && isset($prescription_date)) {
 	if(!$mode) /* Get the pending test requests */
 	{
 						
-						/**
-						TODO FÜR ROBERT: Überprüfung auf Datensätze in request_chemlabor die NICHT in care_tz_billing sind!
-						Momentan werden alle Datensätze vorher gelöscht und neu geschrieben um INNER JOIN-Abfrage zu umgehen
-						und korrekte Testergebnisse zu erhalten.
-						
-						Vorgehensweise:
-						1. Lese alle NICHT enthaltenen Encounters ein (bereits in billing existierende werden an dieser Stelle ignoriert)
-						2. Analysiere alle Tasks und befülle den Array (erledigt)
-						3. Schreibe den Array in die billing-Tabellen (erledigt)
-						4. Ergebnis: Aktualisierte Billing-Tabelle die alle noch nicht (vollständig) bezahlten Rechnungen enthält,
-							 die weiter bearbeitet, angezeigt und bezahlt werden können.
-						**/
+
 						
 						
 						$sql_bill="DELETE FROM care_tz_billing";
@@ -131,7 +120,7 @@ if ($mode=="done" && isset($pn) && isset($prescription_date)) {
 
 						
 					}
-					// ENDE DER ÜBERPRÜFUNG UND EINTRAGUNG
+					// ENDE DER ï¿½BERPRï¿½FUNG UND EINTRAGUNG
 
 						
 				}

@@ -5,6 +5,6 @@ require($root_path.'include/inc_environment_global.php');
 //$HTTP_SESSION_VARS['sess_path_referer']=str_replace($doc_root.'/','',__FILE__);
 //echo __FILE__;
 
-header("Location:".$root_path."modules/news/start_page.php?sid=$sid&lang=$lang");
+header("Location:".$root_path."main/login.php?");
 exit;
 ?>

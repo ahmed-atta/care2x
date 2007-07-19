@@ -16,7 +16,7 @@
  * @author     Gregory Beaver <cellog@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: Guess.php,v 1.1 2006/11/29 09:34:10 dorothea Exp $
+ * @version    CVS: $Id: Guess.php,v 1.2 2007/07/12 16:26:23 robert Exp $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since PEAR 0.1
  */
@@ -78,9 +78,6 @@
 
 // }}}
 
-/* TODO:
- * - define endianness, to allow matchSignature("bigend") etc.
- */
 
 /**
  * Retrieves information about the current operating system

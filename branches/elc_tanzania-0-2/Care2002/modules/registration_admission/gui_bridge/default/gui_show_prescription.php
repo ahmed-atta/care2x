@@ -41,7 +41,7 @@ while($row=$result->FetchRow()){
   <tr bgcolor="<?php echo $bgc; ?>" valign="top">
     <td><FONT SIZE=-1  FACE="Arial"><?php echo @formatDate2Local($row['prescribe_date'],$date_format); ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['article']; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial" color="#006600"><?php 
+    <td><FONT SIZE=-1  FACE="Arial" color="#006600"><?php
     if($amount>0)
     {
     	echo '<s>'.$row['dosage'].'</s> '.$amount;
@@ -50,16 +50,16 @@ while($row=$result->FetchRow()){
   	{
     	echo $row['dosage'];
     }
-    
+
     ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['application_type_nr']; ?></td>
   </tr>
   <tr bgcolor="<?php echo $bgc; ?>" valign="top">
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $full_en; ?></td>
     <td rowspan=2><FONT SIZE=-1  FACE="Arial"><?php echo $row['notes']; ?>
-    
+
 <?php
- 
+
     if($row['is_disabled'])
     {
     	echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"> <font color=red>'.$row['is_disabled'].'</font>';
@@ -73,16 +73,16 @@ while($row=$result->FetchRow()){
   	{
   		echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"> <font color=red>'.$LDPrescriptionNotBilled.'</font>';
   	}
-  	?>    
+  	?>
     </td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php 
+    <td><FONT SIZE=-1  FACE="Arial"><?php
     if($row['is_disabled'] || $row['bill_number']>0)
   	{
   		echo '<font color="#D4D4D4">edit</font>';
   	}
   	else
     echo '<a href="'.$thisfile.URL_APPEND.'&mode=edit&nr='.$row['nr'].'&show=insert&backpath='.urlencode($backpath).'&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">'.$LDEdit.'</a>'
-    
+
     ?>
     </td><td><FONT SIZE=-1  FACE="Arial"><?php echo $row['order_nr']; ?></td>
   </tr>
@@ -110,7 +110,7 @@ if($parent_admit&&!$is_discharged) {
 ?>
 <p>
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
-<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new'; ?>"> 
+<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new'; ?>">
 <?php echo $LDEnterNewRecord; ?>
 </a>
 <?php

@@ -33,6 +33,7 @@ require_once($root_path.'include/care_api_classes/class_insurance.php');
 require_once($root_path.'include/care_api_classes/class_ward.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/care_api_classes/class_tz_billing.php');
 
 $thisfile=basename(__FILE__);
 if($origin=='patreg_reg') $breakfile = 'patient_register_show.php'.URL_APPEND.'&pid='.$pid;
@@ -312,6 +313,7 @@ if($pid!='' || $encounter_nr!=''){
 		include_once($root_path.'include/care_api_classes/class_department.php');
 		$dept_obj=new Department;
 		$all_meds=&$dept_obj->getAllMedicalObject();
+		
 	}
        
 	$person_obj->setPID($pid);
@@ -638,20 +640,70 @@ if(!isset($pid) || !$pid){
 				$smarty->assign('sDeptInput',$sTemp);
 			} // End of if no encounter nr
 
-			$smarty->assign('LDDiagnosis',$LDDiagnosis);
+			$smarty->assign('LDDiagnosis',$LDDiagnosis);			
 			$smarty->assign('referrer_diagnosis','<input name="referrer_diagnosis" type="text" size="60" value="'.$referrer_diagnosis.'">');
 			
 			
 			//$smarty->assign('LDTherapy',$LDTherapy);
 			//$smarty->assign('referrer_recom_therapy','<input name="referrer_recom_therapy" type="text" size="60" value="'.$referrer_recom_therapy.'">');
 			$smarty->assign('LDTherapy',$LDCon);
-			$smarty->assign('referrer_recom_therapy','<select name="referrer_recom_therapy" ><option></option><option value="Consultation 4000">Consultation 4000</option><option value="Consultation 7500">Consultation 7500</option><option value="Consultation 10000">Consultation 10000</option><option value="Consultation - Eye">Consultation - Eye</option><option value="Consultation - Specialty Clinic">Consultation - Specialty Clinic</option></select>');
+			
+			$cTemp = $cTemp.'<select name="referrer_recom_therapy">
+							<option value=""></option>';
+							
+				
+						$sql_con="SELECT  item_full_description FROM care_tz_drugsandservices WHERE  item_number LIKE '%C%'";
+			  			$db_con = $db->Execute($sql_con);
+						while($conrow=$db_con->FetchRow()){
+							$cTemp = $cTemp.'
+								<option value="'.$conrow['item_full_description'].'" ';
+							
+							$cTemp = $cTemp.'>';
+							//if($$deptrow['LD_var']!='') $rTemp = $rTemp.$$deptrow['LD_var'];
+								//else
+								 $cTemp = $cTemp.$conrow['item_full_description'];
+									$cTemp = $cTemp.'</option>';
+						}
+				
+					$cTemp = $cTemp.'</select>';
+				
+				$smarty->assign('referrer_recom_therapy',$cTemp);
+			
+			//$smarty->assign('referrer_recom_therapy','<select name="referrer_recom_therapy" ><option></option><option value="Consultation 4000">Consultation 4000</option><option value="Consultation 7500">Consultation 7500</option><option value="Consultation 10000">Consultation 10000</option><option value="Consultation - Eye">Consultation - Eye</option><option value="Consultation - Specialty Clinic">Consultation - Specialty Clinic</option></select>');
 			
 			//$smarty->assign('LDRecBy',$LDRecBy);
 			//$smarty->assign('referrer_dr','<input name="referrer_dr" type="text" size="60" value="'.$referrer_dr.'">');
 			
 			$smarty->assign('LDRecBy',$LDReg);
-			$smarty->assign('referrer_dr','<select name="referrer_dr"><option></option><option value="Registration - New 1000Tsh">Registration - New 1000Tsh</option><option value="Registration - return 0 Tsh">Registration - return 0 Tsh</option></select>');
+			
+			$rTemp = $rTemp.'<select name="referrer_dr">
+							<option value=""></option>';
+							
+				
+						$sql_reg="SELECT  item_full_description FROM care_tz_drugsandservices WHERE  item_number LIKE '%R%'";
+			  			$db_reg = $db->Execute($sql_reg);
+						while($regrow=$db_reg->FetchRow()){
+							$rTemp = $rTemp.'
+								<option value="'.$regrow['item_full_description'].'" ';
+							
+							$rTemp = $rTemp.'>';
+							//if($$deptrow['LD_var']!='') $rTemp = $rTemp.$$deptrow['LD_var'];
+								//else
+								 $rTemp = $rTemp.$regrow['item_full_description'];
+									$rTemp = $rTemp.'</option>';
+						}
+				
+					$rTemp = $rTemp.'</select>';
+				
+				$smarty->assign('referrer_dr',$rTemp);
+			
+					
+					
+					
+				
+			
+			
+			
 			
 			$smarty->assign('LDSpecials',$LDSpecials);
 			$smarty->assign('referrer_notes','<input name="referrer_notes" type="text" size="60" value="'.$referrer_notes.'">');

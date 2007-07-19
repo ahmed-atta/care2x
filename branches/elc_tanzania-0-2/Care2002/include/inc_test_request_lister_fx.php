@@ -101,11 +101,11 @@ while($test_request=$requests->FetchRow())
 			{
 				if(IS_TANZANIAN) 
 				{
-					echo $enc_obj->showPID($test_request['pid']); 
-				}
-				else 
-				{
-					echo $test_request['pid'];
+					//echo $enc_obj->showPID($test_request['selian_pid']); 
+				//}
+				//else 
+				//{
+					echo $test_request['selian_pid'].'/'.$test_request['name_first']." ".$test_request['name_last'];
 				}
 			} 
 	echo " ".$test_request['room_nr']."</a><br>";
@@ -117,11 +117,11 @@ while($test_request=$requests->FetchRow())
 			{
 				if(IS_TANZANIAN) 
 				{
-					echo $enc_obj->showPID($test_request['pid']); 
-				}
-				else 
-				{
-					echo $test_request['pid'];
+				//	echo $enc_obj->showPID($test_request['selian_pid']); 
+				//}
+				//else 
+				//{
+					echo $test_request['selian_pid'];
 				}
 			} 
 	echo " ".$test_request['room_nr']."</font><br>";

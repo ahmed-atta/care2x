@@ -338,8 +338,7 @@ if (!isset($is_inside_querywindow) || (isset($is_inside_querywindow) && $is_insi
             <input type="submit" name="SQL" value="<?php echo $strGo; ?>" />
 <?php
         } else {
-            // TODO: Add a more complete warning that no items (like for file import) where found.
-            //       (After 2.5.2 release!)
+
             echo $strWebServerUploadDirectoryError;
         }
 }

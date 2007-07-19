@@ -29,6 +29,7 @@ $LDForAddInformation='(for add. information)';
 $LDSeliansItemDesc='Selian&acute;s item description:';
 $LDWilBeShown='(will be shown)';
 $LDConsumable='Consumable';
+$LDARVDrug='ARV Drug';
 $LDSeliansPriceItem='Selian&acute;s Price of this item:';
 $LDTSHeg='TSH (e.g. 1200,00 or 1200)';
 $LDFullDescItem='Full description of this item';
@@ -54,7 +55,7 @@ $LDPharmacyDBSearch='Pharmacy Databank Search';
 $LDSearchWordPrompt='Enter a search keyword, for example: an order number, a product number, or a product name, etc.';
 $LDSearchKeyword='Search keyword:';
 $LDRecordsThatFit='records that could fit, here the top 10 Search Results:';
-$LDFound='I´ve found';
+$LDFound='Iï¿½ve found';
 $LDItemNumber='item number';
 $LDItemDesc='item description';
 $LDItemClass='item classification';
@@ -75,5 +76,24 @@ $LDPrescribe='Prescribe!';
 $LDdel='del';
 $LDadd='add';
 $LDOK='OK';
+$LDAdminSellingPrice='Price-Accounting';
+$LDAdminSellingPriceDescription='Configuration of price accounts';
 
+$LDPrice_fieldNo="Pricefield no.";
+$LDPrice_ShortDescription="Short Description";
+$LDPrice_LongDescription="long description (not shown)"; 
+$LDPrice_IsInsurance="Is Insurance Price?";
+
+$LDLegend_Field="Field";
+$LDLegend_Comment="Comment";
+$LDComment_1="There are up to 4 different price descriptions possible";
+$LDComment_2="This description will be shown at administration and billing officer site ";
+$LDComment_3="This field will give a fully description (documentation) ";
+$LDComment_4="Select here what price is attached to insured patients ";
+
+$LDDetail='Detail';
+$LDDetail_headline='Interesting details';
+$LDDetail_Information='Information';
+$LDDetail_Last_Change='Last Change';
+$LDDetail_information='User who did it';
 ?>

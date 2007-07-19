@@ -1,22 +1,36 @@
 <?php
 require_once($root_path.'include/care_api_classes/class_prescription.php');
 if(!isset($pres_obj)) $pres_obj=new Prescription;
+require_once($root_path.'include/care_api_classes/class_person.php');
+$person_obj = new Person;
+if (empty($encounter_nr) and !empty($pid))
+	$encounter_nr = $person_obj->CurrentEncounter($pid);
+
 $debug=FALSE;
 if ($debug) {
+	if (!empty($back_path)) $backpath=$back_path;
+
+	echo "file: show_prescription<br>";
     if (!isset($externalcall))
       echo "internal call<br>";
     else
       echo "external call<br>";
-    
+
     echo "mode=".$mode."<br>";
-    
+
 		echo "show=".$show."<br>";
-		
+
     echo "nr=".$nr."<br>";
-    
+
     echo "breakfile: ".$breakfile."<br>";
-    
-    echo "pid:".$pid;
+
+    echo "backpath: ".$backpath."<br>";
+
+    echo "pid:".$pid."<br>";
+
+    echo "encounter_nr:".$encounter_nr."<br>";
+
+    echo "Session-ecnounter_nr: ".$HTTP_SESSION_VARS['sess_en'];
 }
 $pres_types=$pres_obj->getPrescriptionTypes();
 
@@ -26,7 +40,7 @@ $pres_types=$pres_obj->getPrescriptionTypes();
 function chkform(d) {
 	if(isNaN(d.value))
 	{
-		alert("Please enter a valid numeric value format like '1234', '2' or '2.5'");	
+		alert("Please enter a valid numeric value format like '1234', '2' or '2.5'");
 		d.focus();
 	}
 /*
@@ -61,7 +75,7 @@ function chkform(d) {
 <input type="hidden" name="backpath" value="<?php echo $backpath; ?>">
 <?PHP
 
- 
+
 
 if(!$nr)
 {
@@ -95,7 +109,7 @@ else
 ?>
 <font class="adm_div"><?php echo $pres_obj->GetNameOfItem($item_array[$i]); ?></font>
  <table border=0 cellpadding=2 width=100%>
-  
+
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $caption_dosage; ?></td>
      <td><input type="text" name="arr_dosage[<?PHP echo $i; ?>]" size=50 maxlength=60 value="<?php echo $prescriptionitem['dosage'];?>" onBlur="chkform(this)"></td>
@@ -135,7 +149,7 @@ else
 
 
         <?
-        if (isset($externalcall)) {      
+        if (isset($externalcall)) {
         ?>
           <input type="hidden" name="externalcall" value="<?php echo $externalcall;?>">
         <?}?>
@@ -147,17 +161,19 @@ else
 
 <?php
 /**
-* Second part: Show all prescriptions for this encounter no. since now. 
+* Second part: Show all prescriptions for this encounter no. since now.
 */
 ?>
 
 <table border=0 cellpadding=4 cellspacing=1 width=100% class="frame">
 <?php
-$toggle=0;
+$toggle=TRUE;
 while($row=$result->FetchRow()){
 	if($toggle) $bgc='#f3f3f3';
 		else $bgc='#fefefe';
-	$toggle=!$toggle;
+	if ($toggle)
+		$toggle=FALSE;
+	else $toggle=TRUE;
 
 	if($row['encounter_class_nr']==1) $full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']; // inpatient admission
 		else $full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']; // outpatient admission

@@ -8,8 +8,7 @@ require('./libraries/grab_globals.lib.php');
 require('./libraries/common.lib.php');
 
 // Gets the default font sizes
-// garvin: TODO: Should be optimized to not include the whole common.lib.php bunch
-// but only functions used to determine browser heritage.
+
 PMA_setFontSizes();
 
 $ctype = 'css';

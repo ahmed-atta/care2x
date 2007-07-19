@@ -23,38 +23,6 @@ $person_obj = New Person();
 $id=$_GET['id'];
 $this_insurance = $insurance_tz->GetInsuranceAsArray($id);
 
-if($mode=="updateflags")
-{
-	//Error checking
-	if(strlen(trim($name))<3) $error['name'] = true;
-	if(strlen(trim($contact))<3) $error['contact'] = true;
-	if(!$insurance) $error['insurance'] = true;
-	if(!$error)
-	{ 
-		$insurance_tz->UpdateInsuranceCompany($_POST);
-	}
-	$this_insurance = $_POST;
-	while(list($x,$v) = each($HTTP_POST_VARS))
-	{
-		if(strstr($x,"cancel_"))
-		{	
-			$cancel_id = substr(strrchr($x,"_"),1);
-			if($v=="yes")
-				$insurance_tz->CancelContractForPID($cancel_id);
-			else
-				$insurance_tz->EnableContractForPID($cancel_id);
-		}
-		elseif(strstr($x,"paid_"))
-		{
-			$paid_id = substr(strrchr($x,"_"),1);
-			if($v=="yes")
-				$insurance_tz->EnablePaymentForContract($cancel_id);
-			else
-				$insurance_tz->CancelPaymentForContract($cancel_id);
-		}
-	}
-	$updated = 'Last updated: '.strftime('%c').'<br>';
-}
 require ("gui/gui_insurance_reports_company_contracts.php");
 
 ?>

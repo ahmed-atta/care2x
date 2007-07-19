@@ -39,12 +39,30 @@ class Insurance_tz extends Core {
 
 
   function CheckForValidContract($PID,$timestamp=0,$company_id=0) {
+  	/*
+  	 * Retruns -2 when this person is contracted to another company!
+  	 */
+
     global $db;
     $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if($timestamp==0) $timestamp = time();
-    if (empty($company_id))
-      $company_id = $this->GetCompanyFromPID($PID);
+    if ($debug) {
+    	echo "check for $PID for Company-ID $company_id <br>";
+    	echo "Is there a company for $PID: ".$this->GetCompanyFromPID($PID)."<br>";
+    }
+
+	//$db_company is the (possible) company for this PID what comes out of database. Could be empty or the Id of the company.
+	$db_company=$this->GetCompanyFromPID($PID);
+
+    if (empty($company_id)) {
+      $company_id = $db_company;
+    } else {
+        // Check if the company_id (as parameter) is the same like what we have in the database:
+    	if ( ($company_id <> $db_company) && (!empty($db_company))) {
+    			return -2;
+    		}
+    }
     if ($debug) echo "CheckForValidContract::GetCompanyFromPID returns: ".$company_id."<br>";
     $contractarray = $this->GetActualContractForCompanyAsArray($company_id);
     //echo $contractarray['start_date']."<".$timestamp." && ".$contractarray['end_date'].">".$timestamp;
@@ -52,10 +70,11 @@ class Insurance_tz extends Core {
 	  {
 	    $this->sql="SELECT i.*, it.ceiling FROM care_tz_insurance i, care_tz_insurance_types it WHERE company_id=".$company_id." AND PID=".$PID." AND parent= ".$contractarray['id']." AND cancel_flag=0 AND it.id = i.plan ORDER BY i.id DESC LIMIT 1";
 	    $this->result = $db->Execute($this->sql);
+	    if ($debug) echo $this->sql;
 	    if($this->result)
 		    if($this->row = $this->result->FetchRow())
 		    {
-		    	$this->row['is_valid']=true;
+		    	$this->row['is_valid']=TRUE;
 		    	$this->row['contract_start_date'] = $contractarray['start_date'];
 		    	$this->row['contract_end_date'] = $contractarray['end_date'];
 		    	return $this->row;
@@ -83,9 +102,17 @@ class Insurance_tz extends Core {
 
   function GetCompanyFromPID($PID) {
     global $db;
+    if (!$PID) return FALSE;
     $debug=FALSE;
+    $company_id=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-  	return $this->GetCompanyFromParent($PID,true);
+    $this->sql="SELECT company_id FROM care_tz_insurance WHERE PID=$PID ORDER BY id DESC LIMIT 1";
+    $this->result = $db->Execute($this->sql);
+    if($this->row = $this->result->FetchRow()) {
+    	$company_id=$this->row['company_id'];
+  	}
+	return $company_id;
+
   }
 
   // -----------------------------------------------------------------------------
@@ -191,10 +218,10 @@ class Insurance_tz extends Core {
     if ($debug) echo $this->sql;
     $this->result = $db->Execute($this->sql);
     $counter=0;
-    while($this->row = $this->result->FetchRow())
-    {
-    	$return[$counter++] = $this->row;
-  	}
+    if ($this->result)
+	    while($this->row = $this->result->FetchRow()) {
+	    	$return[$counter++] = $this->row;
+	  	}
   	return $return;
   }
 
@@ -318,7 +345,7 @@ class Insurance_tz extends Core {
     $debug=FALSE;
 
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    $this->sql="SELECT id, name, ceiling, prepaid_amount, is_disabled FROM care_tz_insurance_types WHERE id=".$id;
+    $this->sql="SELECT id, name, ceiling, is_disabled FROM care_tz_insurance_types WHERE id=".$id;
     $this->result = $db->Execute($this->sql);
 
     if($this->row = $this->result->FetchRow())
@@ -335,7 +362,8 @@ class Insurance_tz extends Core {
 	function GetInsuranceAsArray($id){
     global $db;
     if(!$id || !is_numeric($id)) return false;
-    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    $this->debug=FALSE;
+    ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if ($this->is_company_just_invoiced($id)) {
     	# This company does not have a ceiling, does not have any entry what allocates to care_tz_insurance_types.
     	# so there is no need to join this table.
@@ -376,12 +404,14 @@ class Insurance_tz extends Core {
                   LEFT JOIN care_tz_insurance_types ON care_tz_insurance_types.id=care_tz_insurance.plan
                 WHERE care_tz_company.id=$id";
     }
-    $this->result = $db->Execute($this->sql);
-    //echo $this->sql;
-    if($this->row = $this->result->FetchRow())
-    {
-    	return $this->row;
-  	}
+    if ($this->debug) echo $this->sql;
+    if ( $this->result = $db->Execute($this->sql))
+    	if($this->row = $this->result->FetchRow())  {
+    		return $this->row;
+  		}
+
+  	// anyway, when the script is comming to this line, there is something wrong
+  	// and we have to say that there was an error...
   	return false;
 	}
 
@@ -395,13 +425,13 @@ class Insurance_tz extends Core {
     if(!$pid) return false;
     $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-    $this->sql="SELECT plan FROM care_tz_insurance where PID=10000000 limit 0,1";
+    $this->sql="SELECT plan FROM care_tz_insurance where PID=$pid limit 0,1";
     $this->result = $db->Execute($this->sql);
     if($this->result)
     {
 	    if($this->row = $this->result->FetchRow())
 	    {
-	    	return $this->row;
+	    	return $this->row['plan'];
 	    }
 	  }
   	return FALSE;
@@ -653,23 +683,38 @@ class Insurance_tz extends Core {
 	// Check up if this person is somehow in that database...
 	$this->sql = "SELECT * FROM care_tz_insurance WHERE PID=$pid AND parent=$parent";
 	$this->result = $db->Execute($this->sql);
-	if ($this->result->RecordCount()>0)
-		return FALSE; // Yes, this person is still contracted, don't do that again!
 
+	if($companycredit) $companycredit=1; else $companycredit=0;
 
-    if($companycredit) $companycredit=1; else $companycredit=0;
-    $this->sql="INSERT INTO care_tz_insurance SET
-    	parent='".$parent."',
-    	company_id='".$company_id."',
-    	company_parent=0,
-    	PID='".$pid."',
-    	ceiling_startup_subtraction='".$startup_subtraction."',
-    	gets_company_credit='".$companycredit."',
-    	plan='".$plan."',
-    	start_date='0',
-    	end_date='0',
-    	timestamp='".time()."',
-    	cancel_flag=0";
+	if ($this->result->RecordCount()>0) {
+		if ($debug) $this->GetCompanyFromPID($pid);
+
+	    $this->sql="UPDATE care_tz_insurance SET
+	    	parent='".$parent."',
+	    	company_id='".$company_id."',
+	    	company_parent=0,
+	    	ceiling_startup_subtraction='".$startup_subtraction."',
+	    	gets_company_credit='".$companycredit."',
+	    	plan='".$plan."',
+	    	start_date='0',
+	    	end_date='0',
+	    	timestamp='".time()."',
+	    	cancel_flag=0 WHERE PID='".$pid."' AND parent='".$parent."'";
+	} else {
+
+	    $this->sql="INSERT INTO care_tz_insurance SET
+	    	parent='".$parent."',
+	    	company_id='".$company_id."',
+	    	company_parent=0,
+	    	PID='".$pid."',
+	    	ceiling_startup_subtraction='".$startup_subtraction."',
+	    	gets_company_credit='".$companycredit."',
+	    	plan='".$plan."',
+	    	start_date='0',
+	    	end_date='0',
+	    	timestamp='".time()."',
+	    	cancel_flag=0";
+	}
     $this->result = $db->Execute($this->sql);
   	return true;
 	}
@@ -913,43 +958,43 @@ class Insurance_tz extends Core {
     $this->contractmembers = $this->GetMembersOfContractID($contract_id);
     $this->contract = $this->GetContractsByIDAsArray($contract_id);
     $this->company = $this->GetInsuranceAsArray($this->GetCompanyIDFromContract($contract_id));
-    if($show_company_info)
-    {
-    echo '
-	<table border="0" cellpadding="2" cellspacing="1">
-	<tr bgcolor="#FFBD72">
-      	<td width="120">'.$LDContractID.' '.$this->contract['id'].'</td>
-      	<td width="190">'.$LDPlan.' '.$this->contract['name'].'</td>
-      	<td width="118">'.$LDTimeframe.'</td>
-      	<td width="90" align="center">'.date("d.m.y", $this->contract['start_date']).'</td>
-      	<td width="10">-</td>
-      	<td width="80" align="center">'.date("d.m.y", $this->contract['end_date']).'</td>
-	</tr>
-	</table>
-	<table border="0" cellpadding="2" cellspacing="1">
-		<tr bgcolor=ffffaa>
-			<td width="120">'.$LDCompanyName.'</td>
-			<td width="190">'.$this->company['name'].'</td>
-			<td width="118">'.$LDCity.'</td>
-			<td width="190">'.$this->company['city'].'</td>
+
+    if($show_company_info) {
+	    echo '
+		<table border="0" cellpadding="2" cellspacing="1">
+		<tr bgcolor="#FFBD72">
+	      	<td width="120">'.$LDContractID.' '.$this->contract['id'].'</td>
+	      	<td width="190">'.$LDPlan.' '.$this->contract['name'].'</td>
+	      	<td width="118">'.$LDTimeframe.'</td>
+	      	<td width="90" align="center">'.date("d.m.y", $this->contract['start_date']).'</td>
+	      	<td width="10">-</td>
+	      	<td width="80" align="center">'.date("d.m.y", $this->contract['end_date']).'</td>
 		</tr>
-		<tr bgcolor=ffffee>
-			<td>'.$LDContractPerson.':</td>
-			<td>'.$this->company['contact'].'</td>
-			<td>'.$LDInsurancetype.'</td>
-			<td>'.$this->company['insurance'].'</td>
-		</tr>
-		<tr bgcolor=ffffaa>
-			<td>'.$LDPOBOX.'</td>
-			<td>'.$this->company['po_box'].'</td>
-			<td>'.$LDPaybyInvoice.'</td>
-			<td>';
-			if($this->company['invoice_flag']) echo $LDYes; else echo $LDNo;
-			if($this->company['credit_preselection_flag']) echo $LDYes; else echo $LDNo;
-		echo '</td>
-		</tr>
-	</table><p>
-	<b>Member list:</b>';
+		</table>
+		<table border="0" cellpadding="2" cellspacing="1">
+			<tr bgcolor=ffffaa>
+				<td width="120">'.$LDCompanyName.'</td>
+				<td width="190">'.$this->company['name'].'</td>
+				<td width="118">'.$LDCity.'</td>
+				<td width="190">'.$this->company['city'].'</td>
+			</tr>
+			<tr bgcolor=ffffee>
+				<td>'.$LDContractPerson.':</td>
+				<td>'.$this->company['contact'].'</td>
+				<td>'.$LDInsurancetype.'</td>
+				<td>'.$this->company['insurance'].'</td>
+			</tr>
+			<tr bgcolor=ffffaa>
+				<td>'.$LDPOBOX.'</td>
+				<td>'.$this->company['po_box'].'</td>
+				<td>'.$LDPaybyInvoice.'</td>
+				<td>';
+				if($this->company['invoice_flag']) echo $LDYes; else echo $LDNo;
+				if($this->company['credit_preselection_flag']) echo $LDYes; else echo $LDNo;
+			echo '</td>
+			</tr>
+		</table><p>
+		<b>Member list:</b>';
     }
 	echo '
     <table border="0" cellpadding="2" cellspacing="1">
@@ -1167,58 +1212,54 @@ class Insurance_tz extends Core {
 
     </tr>
     ';
-    if(is_array($this->contract_array))
-	    while(list($x,$v) = each($this->contract_array))
-	    {
-	    	if($bg=="#ffffaa")
-	    		$bg="#ffffdd";
-	    	else
-	    		$bg="#ffffaa";
+    if(is_array($this->contract_array)) {
+	    while(list($x,$v) = each($this->contract_array)) {
+
+	    	// switch background color
+	    	($bg=="#ffffaa") ? $bg="#ffffdd" : $bg="#ffffaa";
+
 	    	if($v['start_date']< time() && $v['end_date'] > time()) $bg='#FFBD72';
 	    	if($v['cancel_flag']) $bg='#DBDBDB';
-	    	if($v['cancel_flag'])
-	    	{
+
+	    	if($v['cancel_flag']) {
 	    		$cancel_flag_yes = $LDYes;
 	    		$cancel_flag_no = false;
-	    	}
-	    	else
-	    	{
+	    	} else {
 	    		$cancel_flag_yes= false;
 	    		$cancel_flag_no = $LDNo;
 	    	}
-	    	if($v['paid_flag'])
-	    	{
+
+	    	if($v['paid_flag']) {
 	    		$paid_flag_yes = $LDYes;
 	    		$paid_flag_no = false;
-	    	}
-	    	else
-	    	{
+	    	} else {
 	    		$paid_flag_yes= false;
 	    		$paid_flag_no = $LDNo;
 	    	}
-	      echo '
-	      <tr bgcolor='.$bg.'>
-	      	<td>'.$v['id'].'</td>
-	      	<td>'.$v['name'].'</td>
-	      	<td align="center">'.date("d.m.y", $v['start_date']).'</td>
-	      	<td>-</td>
-	      	<td align="center">'.date("d.m.y", $v['end_date']).'</td>
-	      <td><div align="center">'.$cancel_flag_yes.$cancel_flag_no.'</td>
-	      <td><div align="center">'.$paid_flag_yes.$paid_flag_no.'</td>
 
-	      </tr>
-		<tr>
-			<td>&nbsp;</td><td colspan="6">';
-			$this->ShowMemberBillsOfContract($v['id'], false);
-			echo '</td>
-		</tr>';
-	  	}
-	else
+  	        echo '
+		      	<tr bgcolor='.$bg.'>
+		      		<td>'.$v['id'].'</td>
+		      		<td>'.$v['name'].'</td>
+		      		<td align="center">'.date("d.m.y", $v['start_date']).'</td>
+		      		<td>-</td>
+		      		<td align="center">'.date("d.m.y", $v['end_date']).'</td>
+		      		<td><div align="center">'.$cancel_flag_yes.$cancel_flag_no.'</td>
+		      		<td><div align="center">'.$paid_flag_yes.$paid_flag_no.'</td>
+		        </tr>
+			    <tr>
+					<td>&nbsp;</td><td colspan="6">';
+						$this->ShowMemberBillsOfContract($v['id'], false);
+				echo '</td>
+				</tr>';
+	    } // end of while(list($x,$v) = each($this->contract_array))
+	} else {
 		echo '
 	      <tr bgcolor=#ffffaa>
 	      	<td colspan="9" align="center">'.$LDNoContractsFound.'(</td>
 
 	      </tr>';
+	} // End of if(is_array($this->contract_array))
   	echo '</table>
   	';
     return true;
@@ -1358,22 +1399,20 @@ class Insurance_tz extends Core {
     $this->insurancetype_array = $this->GetInsuranceTypesAsArray();
 	// $this->insurancetype_array[0] is the given name parameter (temporary)
 	// $this->insurancetype_array[1] is PID number
-	$this->Plan_ID=$this->insurancetype_array[1][0];
-
+	//$this->Plan_ID=$this->insurancetype_array[1][0];
     echo '<select name="'.$name.'">';
 
     if ($FLAG=='WITH_EMPTY_FIRST_FIELD')
     	echo '<option value="-1"></option>';
 
-	$plan_id = $this->GetPlanForPID($this->Plan_ID);
+	$this->Plan_id = $this->GetPlanForPID($this->pid);
 
     while(list($x,$v) = each($this->insurancetype_array))
     {
-    		if($v['is_disabled']==0)
-    		{
-      	echo '<option ';
-      	if($v['id']==$this->Plan_ID) echo ' selected ';
-      	echo ' value="'.$v['id'].'">'.$v['name'].' ('.$v['ceiling'].')</option>';
+    	if($v['is_disabled']==0) {
+	      	echo '<option ';
+	      	if($v['id']==$this->Plan_id) echo ' selected ';
+	      	echo ' value="'.$v['id'].'">'.$v['name'].' ('.$v['ceiling'].')</option>';
       	}
   	}
   	echo '</select>';
@@ -1458,7 +1497,7 @@ class Insurance_tz extends Core {
 		    		if($v['Contract']['gets_company_credit']) $credit='Yes'; else $credit='No';
 		    		unset($allcontracts[$v['PID']]);
 
-		    		if(!is_array($v['Contract']))		//New Contract
+		    		if(!is_array($v['Contract']) and $v['Contract']!=-2)		//New Contract
 		    		{
 							echo '<tr bgcolor="ffffaa"><td>'.$person['name_last'].', '.$person['name_first'].' (Selian file nr: '.$person['selian_pid'].')</td><td>'.$LDAction.'</td><td>'.$LDPlanSubstraction.'</td></tr>
 							<tr bgcolor="ffffdd"><td>'.$LDContractStartEnd.'<br><input type="hidden" name="this_'.$v['PID'].'" value="conclude">'.date("m/d/Y",$contractarray['start_date']).' - '.date("m/d/Y",$contractarray['end_date']).'</td><td><input type="hidden" name="this_'.$v['PID'].'" value="conclude">
@@ -1486,7 +1525,7 @@ class Insurance_tz extends Core {
 				    		<td colspan="3"><table border="0" bgcolor="FFFF00" width="100%">
 				    		<tr><td><img src="'.$root_path.'gui/img/common/default/level_7.gif" height="15" align="absmiddle"></td><td align="center">'.$LDPersonNoValidContract.'<br><b>'.$other_insurance['name'].'</b><br>'.$LDDeactivatePersonContract.'Please deactivate the persons contract there first!</td><td><img src="'.$root_path.'gui/img/common/default/level_7.gif" height="15" align="absmiddle"></td></tr></table></td></tr>';
 				    	}
-				    	else // No its not, he is a valid member of this company
+				    	else // No its not, pid is member of this company
 				    	{
 				    		if($v['Contract']['ceiling_startup_subtraction']) $startupsubstraction=$v['Contract']['ceiling_startup_subtraction'];
 				    		else $startupsubstraction=0;
@@ -1502,8 +1541,12 @@ class Insurance_tz extends Core {
 
 				    	}
 				  	}
-				  	else
-				  	{
+				  	elseif($v['Contract']==-2) { // contracted to another company!
+							echo '<tr bgcolor="ffffaa"><td><i>'.$person['name_last'].', '.$person['name_first'].' (Selian file nr: '.$person['selian_pid'].')</td><td>'.$LDAction.'</td><td>'.$LDPlanSubstraction.'<i></td></tr>
+							<tr bgcolor="ffffdd"><td><font color="red"> this person is a member of another company</font></td><td>--</td>
+							<td align="center">--</td></tr>';
+
+				  	} else {
 				  		echo 'No Data ...';
 				  	}
 				}
@@ -1517,7 +1560,9 @@ class Insurance_tz extends Core {
 
   	while(list($x,$v) = each($allcontracts))   	{
 			$result = $person_obj->getAllInfoObject($v['PID']);
-			$person = $result->FetchRow();
+			if ($result)
+				$person = $result->FetchRow(); // Just if there are results, there should be a FetchRow()...
+
 			if ($this->is_contract_cancelled($v['PID']))
 				$cancel_string="checked";
 			else
@@ -1525,7 +1570,7 @@ class Insurance_tz extends Core {
 			echo '<tr bgcolor="ffffaa"><td><img src="'.$root_path.'gui/img/common/default/lock.gif" height="15" align="absmiddle"><input type="hidden" name="this_'.$v['PID'].'" value="cancel">'.$person['name_last'].', '.$person['name_first'].' (Selian file nr: '.$person['selian_pid'].')</td><td>'.$LDStatus.'</td><td>'.$LDPlanSubstraction.'</td></tr>';
 
     		echo '<tr bgcolor="ffffdd"><td>'.$LDContractStartEnd.'<br>'.date('m/d/Y',$contractarray['start_date']).' - '.date('m/d/Y',$contractarray['end_date']).'
-    		</td><td><input type="hidden" name="contract_'.$v['PID'].'" value="'.$v['id'].'"><input type="checkbox" name="action_'.$v['PID'].'" '.$cancel_string.' value="cancel"> Cancel contract</td><td align="center">'; $this->ShowInsuranceTypesDropDown('plan_'.$v['PID'],$v['plan']); echo '<input typ="text" value="'.$v['ceiling_startup_subtraction'].'" name="startup_'.$v['PID'].'"></td></tr>';
+    		</td><td><input type="hidden" name="contract_'.$v['PID'].'" value="'.$v['id'].'"><input type="checkbox" name="action_'.$v['PID'].'" '.$cancel_string.' value="cancel"> Cancel contract</td><td align="center">'; $this->ShowInsuranceTypesDropDown('plan_'.$v['PID'],$v['plan']); echo '</td></tr>';
   	}
   	  	echo '</table>';
     return true;
@@ -1587,6 +1632,33 @@ class Insurance_tz extends Core {
   }
 
   //------------------------------------------------------------------------------
+  function GetPlanOfCompanyIDAsString($company_id) {
+  	/*
+  	 * Return the ID of the specific plan of this company.
+  	 * Note: According to specification (Feb 06): -1 as return -> No Plan -> Poor People fund!
+  	 *
+  	 */
+	global $db;
+  	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+  	$this->sql="SELECT
+  					plan, name
+				FROM care_tz_insurance
+				LEFT JOIN care_tz_insurance_types
+					ON care_tz_insurance.plan=care_tz_insurance_types.id
+						where care_tz_insurance.company_id=".$company_id;
+	$result = $db->Execute($this->sql);
+    if($row = $result->FetchRow()) {
+    	if ($row['plan']==-1) {
+    		$return_value="by invoice";
+    	} else {
+    		$return_value=$this->row['name'];
+    	}
+    }
+    return $return_value;
+
+  }
+
+  //------------------------------------------------------------------------------
 
   function is_company_just_invoiced($company_id) {
   	/*
@@ -1608,6 +1680,23 @@ class Insurance_tz extends Core {
     }
     if ($debug) echo "return value of is_company_just_invoiced($company_id) is: $this->return_value";
   	return $this->return_value;
+  }
+
+  function is_poor_people_company($company_id) {
+  	/*
+  	 * RETURN TRUE if this is a company for poor people (plan==-1)
+  	 */
+  	 global $db;
+  	 $sql="SELECT plan FROM care_tz_insurance WHERE company_id=$company_id";
+  	 $result=$db->Execute($sql);
+  	 if ($row=$result->FetchRow()) {
+  	 	if ($row['plan']=="-1") {
+  	 		return TRUE;
+  	 	} else {
+  	 		return FALSE;
+  	 	}
+  	 }
+  	 return FALSE;
   }
 
   //------------------------------------------------------------------------------
@@ -1658,10 +1747,10 @@ class Insurance_tz extends Core {
 		$this->sql="SELECT * from care_tz_insurance where PID=$pid and cancel_flag=1";
 		$this->result = $db->Execute($this->sql);
 		if($this->result->RecordCount()>0) {
-				echo "is_contract_cancelled($pid): yes";
+				if ($debug) echo "is_contract_cancelled($pid): yes";
 		  		return TRUE;
 			} else {
-				echo "is_contract_cancelled($pid): no";
+				if ($debug) echo "is_contract_cancelled($pid): no";
 		  		return FALSE;
 			 }
 		}
@@ -1699,7 +1788,263 @@ class Insurance_tz extends Core {
 	    }
 		return true;
 	}
+	//------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------
+
+	function GetNumberOfMembers($company_id,$year=0) {
+	/*
+	 * Funciton to get the number of Members attached to one company. Retruns either 0 or the number...
+	 */
+
+	  	global $db;
+		$return_value=0; // Standard return of this method...
+
+	  	if (empty($year)) $year=date("Y"); // if no year is given, take the current year
+
+		$start_timeframe=mktime(0,0,1,1,1,$year); //echo date("D M j G:i:s T Y",$start_timeframe)."<br>";
+		$end_timeframe=mktime(0,0,0,12,31,$year);
+
+		//$this->debug = FALSE;
+
+		($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+
+		$sql="SELECT count(*) as NumberOfMembers FROM care_tz_insurance where company_id=".$company_id." and cancel_flag=0 and timestamp>=$start_timeframe AND timestamp<=$end_timeframe and (parent<>-1 OR plan=-1)";
+		//echo $sql;
+		if ($result=$db->Execute($sql)) {
+			$row=$result->FetchRow();
+			$NumberOfMembers = $row['NumberOfMembers'];
+			return $return_vlaue=$NumberOfMembers;
+		} // end of if ($result=$db->Execute($sql))
+
+	  	return $return_value;
+	  } // end of function GetNumberOfMembers
+
 	 //------------------------------------------------------------------------------
+
+	 function GetCompanylistWithValidContracts(){
+
+	  	global $db;
+
+	  	if (empty($year)) $year=date("Y"); // if no year is given, take the current year
+
+		$start_timeframe=mktime(0,0,1,1,1,$year); //echo date("D M j G:i:s T Y",$start_timeframe)."<br>";
+		$end_timeframe=mktime(0,0,0,12,31,$year);
+		$return_value[]="id"; // first value is a dummy entry, makes our live later much more easier (array_search behaviour)
+		//$this->debug = TRUE;
+
+		($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+
+		$sql="SELECT company_id FROM care_tz_insurance where parent=-1 and cancel_flag=0 and timestamp>=$start_timeframe AND timestamp<=$end_timeframe";
+		if ($result=$db->Execute($sql)) {
+			$row=$result->FetchRow();
+			$return_value[] = $row['company_id'];
+		} // end of if ($result=$db->Execute($sql))
+
+	  	return (is_array($return_value)) ? $return_value : FALSE;
+
+	 } // end of function GetCompanylistWithValidContracts()
+
+	//------------------------------------------------------------------------------
+
+	 function GetMaximumCeilingForCompany($company_id, $year) {
+	 	/*
+	 	 * company_id brings us the company out of the table care_tz_insurance - add the year of it then you have the
+	 	 * ID of the contract. Next you can have the all members attached to this contract-id.
+	 	 */
+		global $db;
+
+	  	if (empty($year)) $year=date("Y"); // if no year is given, take the current year
+
+		$start_timeframe=mktime(0,0,1,1,1,$year); //echo date("D M j G:i:s T Y",$start_timeframe)."<br>";
+		$end_timeframe=mktime(0,0,0,12,31,$year);
+		//$this->debug = TRUE;
+
+		// first section: Get the contract ID:
+
+		($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+
+		$sql="SELECT id as contract_id FROM care_tz_insurance where parent=-1 and cancel_flag=0 and timestamp>=$start_timeframe AND timestamp<=$end_timeframe";
+		if ($result=$db->Execute($sql)) {
+
+			$row=$result->FetchRow();
+			$contract_id = $row['contract_id'];
+
+		} else {
+
+			return -1; // no entry -> retrun with error code!
+
+		} // end of if ($result=$db->Execute($sql))
+
+
+		// Now we have to look for the members of that contract-id - build a total amount of it's ceiling (depend on the plan)
+		$sql = "SELECT
+					sum(types.ceiling) as MaximumCeiling
+				FROM care_tz_insurance contract
+					INNER JOIN care_tz_insurance_types types
+						on contract.plan=types.id
+				WHERE contract.parent = $company_id";
+
+		if ($result=$db->Execute($sql)) {
+
+			$row=$result->FetchRow();
+			return $row['MaximumCeiling'];
+
+		} else {
+
+			return -1; // no entry -> retrun with error code!
+
+		} // end of if ($result=$db->Execute($sql))
+
+	 } // end of function GetMaximumCeilingForCompany($company_id, $year)
+
+	//------------------------------------------------------------------------------
+
+
+
+	//------------------------------------------------------------------------------
+
+	function GetUsedAmountForCompany($company_id, $year) {
+		global $db;
+
+	  	if (empty($year)) $year=date("Y"); // if no year is given, take the current year
+
+		$start_timeframe=mktime(0,0,1,1,1,$year); //echo date("D M j G:i:s T Y",$start_timeframe)."<br>";
+		$end_timeframe=mktime(0,0,0,12,31,$year);
+		//$this->debug = TRUE;
+
+		// first section: Get the contract ID:
+
+		($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+
+		$sql = "SELECT
+					sum(bill_elements.balanced_insurance) as FundUsed
+				FROM care_tz_billing_archive bill
+					INNER JOIN care_tz_billing_archive_elem bill_elements
+						ON bill_elements.nr=bill.id
+						AND bill_elements.date_change>=$start_timeframe
+						AND bill_elements.date_change<=$end_timeframe
+					INNER JOIN care_encounter encounter
+						ON encounter.encounter_nr=bill.encounter_nr
+					INNER JOIN care_tz_insurance insurance
+						ON insurance.PID=encounter.PID
+						AND insurance.company_id=$company_id";
+
+		if ($result=$db->Execute($sql)) {
+
+			$row=$result->FetchRow();
+			return $row['FundUsed'];
+
+		} else {
+
+			return -1; // no entry -> retrun with error code!
+
+		} // end of if ($result=$db->Execute($sql))
+
+	} // end of function GetUsedAmountForCompany($company_id, $year)
+
+	function GetMembersOfCompany($company_id, $year) {
+		global $db;
+
+	  	if (empty($year)) $year=date("Y"); // if no year is given, take the current year
+
+		$start_timeframe=mktime(0,0,1,1,1,$year); //echo date("D M j G:i:s T Y",$start_timeframe)."<br>";
+		$end_timeframe=mktime(0,0,0,12,31,$year);
+		$this->debug = FALSE;
+		($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+
+		// is this a company who is getting all invoiced?
+		if ($this->GetPlanOfCompanyIDAsString($company_id)=="by invoice") {
+
+			// just the sum:
+			$sql="select
+					'' AS firstname,
+					'' AS lastname,
+					count(persons.selian_pid) AS HospitalPID,
+					sum(bill_elements.price) AS ToalUsedAmount,
+					sum(bill_elements.balanced_insurance) AS TotalUsedInsurance,
+					'' AS CompanyID,
+					'' AS Ceiling
+				FROM care_tz_billing_archive_elem bill_elements
+					INNER JOIN  care_tz_billing_archive bill
+						ON bill.nr=bill_elements.nr
+					INNER JOIN care_encounter encounter
+						ON encounter.encounter_nr=bill.encounter_nr
+					INNER JOIN care_person as persons
+						ON persons.pid=encounter.pid
+				WHERE
+					bill_elements.date_change>=$start_timeframe AND bill_elements.date_change<=$end_timeframe
+					AND bill_elements.insurance_id=$company_id";
+
+			// Including names:
+//			$sql="select
+//					persons.name_first AS firstname,
+//					persons.name_last AS lastname,
+//					persons.selian_pid AS HospitalPID,
+//					sum(bill_elements.price) AS ToalUsedAmount,
+//					sum(bill_elements.balanced_insurance) AS TotalUsedInsurance
+//				FROM care_tz_billing_archive_elem bill_elements
+//					INNER JOIN  care_tz_billing_archive bill
+//						ON bill.nr=bill_elements.nr
+//					INNER JOIN care_encounter encounter
+//						ON encounter.encounter_nr=bill.encounter_nr
+//					INNER JOIN care_person as persons
+//						ON persons.pid=encounter.pid
+//				WHERE
+//					bill_elements.date_change>=$start_timeframe AND bill_elements.date_change<=$end_timeframe
+//					AND bill_elements.insurance_id=$company_id
+//
+//				GROUP BY persons.pid
+//				";
+
+		} else {
+
+			$sql="select
+						persons.name_first AS firstname,
+						persons.name_last AS lastname,
+						persons.selian_pid AS HospitalPID,
+						sum(bill_elements.price) AS ToalUsedAmount,
+						sum(bill_elements.balanced_insurance) AS TotalUsedInsurance,
+						plan.ceiling AS Ceiling
+					from care_tz_insurance insurance
+
+						INNER JOIN care_person as persons
+							ON persons.pid=insurance.PID
+						LEFT JOIN care_encounter encounter
+							ON encounter.pid=insurance.PID
+						LEFT JOIN  care_tz_billing_archive bill
+							ON bill.encounter_nr=encounter.encounter_nr
+						LEFT JOIN care_tz_billing_archive_elem bill_elements
+							ON bill_elements.nr=bill.nr
+							AND bill_elements.date_change>=$start_timeframe
+							AND bill_elements.date_change<=$end_timeframe
+						LEFT JOIN care_tz_insurance_types plan
+							ON insurance.plan=plan.id
+					where insurance.company_id=$company_id
+					GROUP BY persons.pid ";
+
+		} // end of if ($this->GetPlanOfCompanyIDAsString($company_id)=="by invoice")
+
+		$array_index=0;
+		if ($result=$db->Execute($sql)) {
+
+			while ($row=$result->FetchRow()) {
+
+				$res_array[$array_index][]=$row['firstname'];
+				$res_array[$array_index][]=$row['lastname'];
+				$res_array[$array_index][]=$row['HospitalPID'];
+				$res_array[$array_index][]=$row['ToalUsedAmount'];
+				$res_array[$array_index][]=$row['TotalUsedInsurance'];
+				$res_array[$array_index][]=$row['Ceiling'];
+
+				$array_index ++;
+
+			} //end of while ($row=$result->FetchRow())
+
+		} // end of if ($result=$db->Execute($sql))
+		return $res_array;
+	} // end of function GetMembersOfCompany($company_id, $year)
 
 }
 

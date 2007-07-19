@@ -2,37 +2,37 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-$debug=false;
+$debug=FALSE;
 if ($debug) {
     if (!isset($externalcall))
       echo "internal call<br>";
     else
       echo "external call<br>";
-    
+
     echo "mode=".$mode."<br>";
-    
+
 		echo "show=".$show."<br>";
-		
+
     echo "nr=".$nr."<br>";
-    
+
     echo "breakfile: ".$breakfile."<br>";
     echo "Back path: ".$back_path."<br>";
     echo "Pharmacy: ".$pharmacy."<br>";
-    
+
     echo "pid:".$pid;
 }
 /**
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
+* elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
 # In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
-define('MAX_BLOCK_ROWS',30); 
+define('MAX_BLOCK_ROWS',30);
 
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
@@ -59,7 +59,7 @@ if(isset($fwd_nr)&&$fwd_nr&&is_numeric($fwd_nr)){
 
 if(!isset($mode)) $mode='';
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode=='paginate'){
 	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 }else{
@@ -74,17 +74,17 @@ require_once($root_path.'include/care_api_classes/class_paginator.php');
 $pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
 
 if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($searchkey)){
-	
+
 	include_once($root_path.'include/inc_date_format_functions.php');
-	
+
 	//$db->debug=true;
 
 	if($mode!='paginate'){
 		$HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
-	}	
+	}
 		# convert * and ? to % and &
 		$searchkey=strtr($searchkey,'*?','%_');
-		
+
 		$GLOBAL_CONFIG=array();
 		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -93,18 +93,18 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 		$glob_obj->getConfig('pagin_patient_search_max_block_rows');
 		if(empty($GLOBAL_CONFIG['pagin_patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
 			else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_patient_search_max_block_rows']);
-		
+
 	   	$searchkey=trim($searchkey);
 		$suchwort=$searchkey;
-		
+
 		if(is_numeric($suchwort)) {
 
             $suchwort=(int) $suchwort;
 			$numeric=1;
-			
-			if(empty($oitem)) $oitem='encounter_nr';			
+
+			if(empty($oitem)) $oitem='encounter_nr';
 			if(empty($odir)) $odir='DESC'; # default, latest pid at top
-			
+
 			$sql2=" WHERE ( enc.encounter_nr='$suchwort'  OR enc.encounter_nr $sql_LIKE '%.$suchwort' OR reg.selian_pid='$suchwort' )";
 	    } else {
 			# Try to detect if searchkey is composite of first name + last name
@@ -113,7 +113,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			}else{
 				$lastnamefirst=FALSE;
 			}
-			
+
 			$searchkey=strtr($searchkey,',',' ');
 			$cbuffer=explode(' ',$searchkey);
 
@@ -122,7 +122,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 				$cbuffer[$x]=trim($cbuffer[$x]);
 				if($cbuffer[$x]!='') $comp[]=$cbuffer[$x];
 			}
-			
+
 			# Arrange the values, ln= lastname, fn=first name, bd = birthday
 			if($lastnamefirst){
 				$fn=$comp[1];
@@ -133,24 +133,24 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 				$ln=$comp[1];
 				$bd=$comp[2];
 			}
-			
-			if(empty($oitem)) $oitem='name_last';			
-			
+
+			if(empty($oitem)) $oitem='name_last';
+
 			# Check the size of the comp
 			if(sizeof($comp)>1){
 				$sql2=" WHERE ( reg.name_last $sql_LIKE '".strtr($ln,'+',' ')."%'
 			                		AND reg.name_first $sql_LIKE '".strtr($fn,'+',' ')."%')";
-				if($bd){ 
+				if($bd){
 					$stddate=formatDate2STD($bd,$date_format);
 					if(!empty($stddate)){
 						$sql2.=" AND (reg.date_birth = '$stddate' OR reg.date_birth $sql_LIKE '%$bd%')";
 					}
 				}
-					
+
 				if(empty($odir)) $odir='DESC'; # default, latest birth at top
-		
+
 			}else{
-			
+
 				$sql2=" WHERE (reg.name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%'
 			                		OR reg.name_first $sql_LIKE '".strtr($suchwort,'+',' ')."%'";
 				$bufdate=formatDate2STD($suchwort,$date_format);
@@ -176,13 +176,15 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			$sql='SELECT enc.encounter_nr, enc.encounter_class_nr, enc.is_discharged,
 								reg.pid, reg.name_last, reg.name_first, reg.date_birth, reg.selian_pid,reg.sex, reg.selian_pid '.$dbtable.$sql2;
 
+			// echo $sql;
+
 			if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pagen->BlockStartIndex()))
        		{
-				if ($linecount=$ergebnis->RecordCount()) 
+				if ($linecount=$ergebnis->RecordCount())
 				{
 					// $pharmacy is delivered searching patients from pharmacy-module (cross link)
-					// This is empty when it is not defined. 
-					
+					// This is empty when it is not defined.
+
 					if(($linecount==1)&&$numeric&&$mode=='search')
 					{
 						$zeile=$ergebnis->FetchRow();
@@ -197,9 +199,9 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 							exit;
 						}
 					}
-					
+
 					$pagen->setTotalBlockCount($linecount);
-					
+
 					# If more than one count all available
 					if(isset($totalcount)&&$totalcount){
 						$pagen->setTotalDataCount($totalcount);
@@ -224,7 +226,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 					$pagen->setSortItem($oitem);
 					$pagen->setSortDirection($odir);
 				}
-				
+
 			}
 			 else {echo "<p>".$sql."<p>$LDDbNoRead";};
 }
@@ -318,7 +320,7 @@ $smarty->assign('sHiddenInputs','<input type="image" '.createLDImgSrc($root_path
 $smarty->assign('sCancelButton','<a href="patient.php'.URL_APPEND.'&target=search"><img '.createLDImgSrc($root_path,'cancel.gif','0').'></a>');
 
 if($mode=='search'||$mode=='paginate'){
-	
+
 	if ($linecount) $smarty->assign('LDSearchFound',str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.');
 		else $smarty->assign('LDSearchFound',str_replace('~nr~','0',$LDSearchFound));
 
@@ -382,7 +384,7 @@ if($mode=='search'||$mode=='paginate'){
 			{
 				$sTarget = "<a href=\"aufnahme_daten_zeigen.php".URL_APPEND."&from=such&encounter_nr=$full_en&target=search\">";
 			}
-			
+
 			$sTarget=$sTarget.'<img '.$img_options.' title="'.$LDShowData.'"></a>';
 			$smarty->assign('sOptions',$sTarget);
 
