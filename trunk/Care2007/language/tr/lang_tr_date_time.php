@@ -1,0 +1,29 @@
+<?php
+/* 2003-04-05 EL*/
+$LDMonthFullName=array('','Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık');
+$LDMonthShortName=array('','Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara');
+$LDDayFullName=array('Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi','Pazar');
+$LDDayShortName=array('Pzt','Sal','Çar','Per','Cum','Cts','Paz');
+$LDDate='Tarih';
+$LDTime='Zaman';
+$LDHour='Saat';
+$LDHours='Saat';
+$LDMinute='Dakika';
+$LDMinutes='Dakika';
+$LDSecond='Saniye';
+$LDSeconds='Saniye';
+$LDmillisecond='milisaniye';
+$LDmilliseconds='milisaniye';
+$LDmicrosecond='mikrosaniye';
+$LDmicroseconds='mikrosaniye';
+$LDDay='Gün';
+$LDWeek='Hafta';
+$LDNoon='Öğle';
+$LDEvening='Akşam';
+$LDNight='Gece';
+#2003-11-11 EL
+$LD_ddpMMpyyyy='gg.aa.yyyy';
+$LD_yyyyhMMhdd='yyyy-aa-gg';
+$LD_MMsddsyyyy='aa/gg/yyyy';
+$LD_ddsMMsyyyy='gg/aa/yyyy';
+?>

@@ -1,0 +1,41 @@
+<?php
+/* 2003-04-27 EL */
+$LDInsuranceCo='Sigorta Şirketi';
+$LDInsuranceCoName='Sigorta şirketi adı';
+$LDInsuranceCoID='Sigorta şirketi kimliği';
+$LDMainPhoneNr='Telefon No.'; 
+$LDMainFaxNr='Faks No.';
+$LDAuxPhoneNr='Telefon No. (diğer)'; 
+$LDAuxFaxNr='Faks No. (diğer)';
+$LDAddress='Ana Adres';
+$LDEmailAddress='Eposta Adresi';
+$LDMailingAddress='Posta Adresi';
+$LDBillingAddress='Fatura Adresi';
+$LDContactPerson='Temas kurulacak kişi';
+$LDContactPersonPhoneNr='Temas kurulacak kişinin telefon no.';
+$LDContactPersonFaxNr='Temas kurulacak kişinin faks no.';
+$LDContactPersonEmailAddr='Temas kurulacak kişinin Eposta Adresi.';
+$LDPlsEnterInfo='Lütfen bilgiyi giriniz';
+$LDAlertFirmID='Sigorta şirketinin kimliği eksik!';
+$LDAlertFirmName='Sigorta şirketinin ismi eksik!';
+$LDAlertBillingAddress='Fatura adresi eksik!';
+$LDAlertMailingAddress='Posta adresi eksik!';
+$LDEnterAllFields='Lütfen  <font color="red"><b>*</b></font> işaretli tüm alanları doldurunuz';
+$LDFirmID='Firma kimliği';
+$LDNeedEmptyFormPls='Boş bir form istiyorum, lütfen.';
+$LDData='Veri';
+$LDNewData='Yeni veri';
+$LDUpdateData='veriyi güncelle';
+$LDListAll='Tümünü listele';
+$LDFirmExists='Sigorta şirketinin kimliği veri tabanında var.';
+$LDDataNoSave='Girilen bilgi kaydedilemiyor.';
+$LDPlsChangeFirmID='Lütfen bir başka şirket kimliği giriniz';
+$LDFirmInfoSaved='Firma bilgisi başarı ile kaydedildi.';
+$LDPlsCheckData='Lütfen bilgiyi kontrol ediniz.';
+$LDManager='Yönetici';
+$LDNewDataTxt='Yeni sigorta firması verilerini gir.';
+$LDListAllTxt='Tüm kayıtlı sigorta şirketlerini listele';
+$LDSearch='Ara';
+$LDSearchTxt='Bir sigorta şirketi ara';
+$LDSearchPrompt='Lütfen bir şirketin adını, kimliğini, veya email adresini giriniz';
+?>
