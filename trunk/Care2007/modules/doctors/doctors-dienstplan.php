@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -14,7 +14,7 @@ $lang_tables[]='departments.php';
 define('LANG_FILE','doctors.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-
+///$db->debug=true;
 setcookie(username,"");
 setcookie(ck_plan,"1");
 if($dept=="") $dept="plast";

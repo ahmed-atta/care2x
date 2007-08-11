@@ -3,9 +3,9 @@
  require('./roots.php');
  require($root_path.'include/inc_environment_global.php');
  /**
- * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+ * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
  * GNU General Public License
- * Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+ * Copyright 2002,2003,2004,2005 Elpidio Latorilla
  * elpidio@care2x.org, 
  *
  * See the file "copy_notice.txt" for the licence notice
@@ -44,28 +44,36 @@
 
  if($s_date==date('Y-m-d')) $is_today=true;
 	else $is_today=false;
-	
-//$db->debug=1;
-
- $dbtable='care_ward';
+///$db->debug=1;
+$dbtable='care_ward';
 
   /* Load date formatter */
   include_once($root_path.'include/inc_date_format_functions.php');
 	
-	# Get the wardsï¿½ info
+	# Get the wards´ info
     $sql="SELECT nr,ward_id,name,room_nr_start,room_nr_end	
 				FROM $dbtable
 				WHERE is_temp_closed IN ('',0) 
 							AND status NOT IN ('hide','delete','void','inactive') 
-							AND date_create<='$s_date' 
-				ORDER BY nr";
+							AND date_create<='$s_date' ";
+    //gjergji - show only info on my departement
+	if(isset($HTTP_SESSION_VARS['department_nr']) && !empty($HTTP_SESSION_VARS['department_nr']) ) {
+		$sql.=" AND ( ";
+		while (list($key, $val) = each($HTTP_SESSION_VARS['department_nr'])) {
+			$tmp .= "dept_nr = " . $val . " OR ";
+
+		}
+		$sql .= substr($tmp,0,-4) ;
+		$sql .= " ) "	;
+    }
+		$sql .=	" ORDER BY nr";
 		//echo $sql.'<p>';
 	if($wards=$db->Execute($sql)){
 		$rows=$wards->RecordCount();
 	}else{echo "$sql<br>$LDDbNoRead";}
 
 
-	# Get the roomsï¿½ info
+	# Get the rooms´ info
   $sql="SELECT SUM(r.nr_of_beds) AS maxbed
 			FROM $dbtable AS w LEFT JOIN care_room AS r   ON r.ward_nr=w.nr
 			WHERE w.is_temp_closed IN ('',0)
@@ -78,7 +86,7 @@
 		$roomcount=$rooms->RecordCount();
 	}else{echo "$sql<br>$LDDbNoRead";}
 
-	# Get the todayï¿½s occupancy
+	# Get the today´s occupancy
   $sql="SELECT  COUNT(l.location_nr) AS maxoccbed, w.nr AS ward_nr
           FROM $dbtable AS w
      LEFT JOIN care_encounter_location AS l ON l.group_nr=w.nr AND l.type_nr=5 ";

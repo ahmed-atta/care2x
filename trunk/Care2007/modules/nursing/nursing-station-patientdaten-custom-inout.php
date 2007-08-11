@@ -284,8 +284,8 @@ echo '<font size="7">'.$IO_title.' <p><font size=2>';
 </div></td></tr>
 <?php
 echo '	<tr bgcolor="#99ccff">
-		<td colspan=10><div class=fva2_ml10><font color="#000099"><b>Intake</b></div></td>
-		<td colspan=6><div class=fva2_ml10><font color="#000099"><b>Output</b></div></td>
+		<td colspan=10><div class=fva2_ml10><font color="#000099"><b>Hyrjet</b></div></td>
+		<td colspan=6><div class=fva2_ml10><font color="#000099"><b>Daljet</b></div></td>
 		</tr>';
 echo '	<tr bgcolor="#99ccff">
 		<td colspan=10><div class=fva2_ml10></div></td>
@@ -294,21 +294,21 @@ echo '	<tr bgcolor="#99ccff">
 		</tr>';	
 
 echo '	<tr bgcolor="#99ccff">
-		<td><div class=fva2_ml3><b>Date</b></div></td>
-		<td><div class=fva2_ml3><b>Time</b></div></td>
-		<td><div class=fva2_ml3><b>No of Pint</b></div></td>
-		<td><div class=fva2_ml3><b>Solution</b></div></td>
-		<td><div class=fva2_ml3><b>Amount</b></div></td>
-		<td><div class=fva2_ml3><b>Total</b></div></td>
-		<td><div class=fva2_ml3><b>Initial</b></div></td>
-		<td><div class=fva2_ml3><b>Oral Fluid</b></div></td>
-		<td><div class=fva2_ml3><b>Amount</b></div></td>
-		<td><div class=fva2_ml3><b>Total</b></div></td>
-		<td><div class=fva2_ml3><b>Time</b></div></td>
-		<td><div class=fva2_ml3><b>Amount</b></div></td>
+		<td><div class=fva2_ml3><b>Data</b></div></td>
+		<td><div class=fva2_ml3><b>Ora</b></div></td>
+		<td><div class=fva2_ml3><b>Nr. Flak.</b></div></td>
+		<td><div class=fva2_ml3><b>Solucion</b></div></td>
+		<td><div class=fva2_ml3><b>Sasia</b></div></td>
+		<td><div class=fva2_ml3><b>Totali</b></div></td>
+		<td><div class=fva2_ml3><b>Fillestar</b></div></td>
+		<td><div class=fva2_ml3><b>Likide orale</b></div></td>
+		<td><div class=fva2_ml3><b>Saisa</b></div></td>
+		<td><div class=fva2_ml3><b>Totali</b></div></td>
+		<td><div class=fva2_ml3><b>Ora</b></div></td>
+		<td><div class=fva2_ml3><b>Saisa</b></div></td>
 		<td><div class=fva2_ml3><b>RTA</b></div></td>
-		<td><div class=fva2_ml3><b>Drain</b></div></td>
-		<td><div class=fva2_ml3><b>Total</b></div></td>
+		<td><div class=fva2_ml3><b>Humbje</b></div></td>
+		<td><div class=fva2_ml3><b>Totali</b></div></td>
 		<td></td>
 		</tr>';	
 		
@@ -396,7 +396,7 @@ while ($iod=mysql_fetch_assoc($res)) {
 		<td><div class=fva2_ml3 id="id_<?=$iod['nr']?>_rta"><?=$iod['rta']?></div></td>
 		<td><div class=fva2_ml3 id="id_<?=$iod['nr']?>_drain"><?=$iod['drain']?></div></td>
 		<td align=right><div class=fva2_ml3><?=$urinetotal?></div></td>
-		<td><div class=fva2_ml3><a href='#' OnClick=Edit('<?=$iod['nr']?>')><span style='background-color:#FFFF00'>&nbsp;EDIT&nbsp;</span></a></div></td>
+		<td><div class=fva2_ml3><a href='#' OnClick=Edit('<?=$iod['nr']?>')><span style='background-color:#FFFF00'>NDRYSHO</span></a></div></td>
 	</tr>	
 	
 		<?
@@ -457,42 +457,42 @@ if($edit) {
 		<input type=text size=4 maxlength=5 name="indatetime_time" id="indatetime_time"  value="<?php echo date('H:i'); ?>" onKeyUp=setTime(this,'<?php echo $lang ?>') onFocus=this.select()><br>
 		</td>
 		
-		<td valign="top">No. of Pint:<br>
+		<td valign="top">Nr. Flac:<br>
 		<input type=text size=5 maxlength=6 name="pint"  id="pint" value="<?if (!($saved)) echo $_POST['pint']?>">
 		</td>
-		<td valign="top">Solution:<br>
+		<td valign="top">Solucion:<br>
 		<input type=text size=10 maxlength=32 name="solution"  id="solution" value="<?if (!($saved)) echo $_POST['solution']?>">
 		</td>
-		<td valign="top">Amount:<br>
+		<td valign="top">Sasia:<br>
 		<input type=text size=5 maxlength=6 name="solutionamount"  id="solutionamount" value="<?if (!($saved)) echo $_POST['solutionamount']?>">
 		</td>
 			<td></td>
-		<td valign="top">Initial:<br>
+		<td valign="top">Fillestar:<br>
 		<input type=text size=5 maxlength=6 name="initial"  id="initial" value="<?if (!($saved)) echo $_POST['initial']?>">
 		</td>
-		<td valign="top">Oral Fluid:<br>
+		<td valign="top">Likide orale:<br>
 		<input type=text size=10 maxlength=32 name="oralfluid"  id="oralfluid" value="<?if (!($saved)) echo $_POST['oralfluid']?>">
 		</td>
-		<td valign="top">Amount:<br>
+		<td valign="top">Sasia:<br>
 		<input type=text size=5 maxlength=6 name="oralfluidamount"  id="oralfluidamount" value="<?if (!($saved)) echo $_POST['oralfluidamount']?>">
 		</td>	
 			<td></td>
-		<td valign="top">Time:<br>
+		<td valign="top">Ora:<br>
 		<input type=text size=5 maxlength=5 name="urinetime"  id="urinetime" value="<?if (!($saved)) echo $_POST['urinetime']?>">
 		</td>
-		<td valign="top">Amount:<br>
+		<td valign="top">Sasia:<br>
 		<input type=text size=5 maxlength=6 name="urineamount"  id="urineamount" value="<?if (!($saved)) echo $_POST['urineamount']?>">
 		</td>
 		<td valign="top"> RTA:<br>
 		<input type=text size=5 maxlength=6 name="rta"  id="rta" value="<?if (!($saved)) echo $_POST['rta']?>">
 		</td>
-		<td valign="top">Drain:<br>
+		<td valign="top">Humbje:<br>
 		<input type=text size=5 maxlength=6 name="drain"  id="drain" value="<?if (!($saved)) echo $_POST['drain']?>">
 		</td><td colspan=2 align=center><a <?
 			
 			echo 'href=\'nursing-station-patientdaten-custom-inout.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'';
 			
-			?>> <span style="background-color:#FFFF00"> CLEAR </span> </a></td>
+			?>> <span style="background-color:#FFFF00"> PASTRO </span> </a></td>
 		</tr>
 		
 <?php

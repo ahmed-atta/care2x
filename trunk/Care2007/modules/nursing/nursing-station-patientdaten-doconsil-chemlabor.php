@@ -11,13 +11,15 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-
+///$db->debug=true;
 /**
 * Funtion prepareTestElemenst() will process the POST vars containg the test elements
 * and other variables: sampling day & sampling time
 * return: 1= if  test element(s) set, (paramlist is not empty), 
 * return: 0 = if no test element set, (paramlist empty)
 */
+
+
 function prepareTestElements()
 {
     global $HTTP_POST_VARS, $paramlist, $sday, $sample_time;
@@ -125,27 +127,17 @@ define('_BATCH_NR_INIT_',10000000);
 */
 						
 /* Here begins the real work */
+include_once($root_path.'include/care_api_classes/class_lab.php');
+$lab_obj = new Lab;
 
- /* Check for the patietn number = $pn. If available get the patients data, otherwise set edit to 0 */
+/* Check for the patietn number = $pn. If available get the patients data, otherwise set edit to 0 */
 if(isset($pn)&&$pn) {	
     include_once($root_path.'include/care_api_classes/class_encounter.php');
 	$enc_obj=new Encounter;
 	
 	if($enc_obj->loadEncounterData($pn)){
 		$edit=true;
-/*		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-		$GLOBAL_CONFIG=array();
-		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-		$glob_obj->getConfig('patient_%');	
-		switch ($enc_obj->EncounterClass())
-		{
-		    case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		                   break;
-			case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-							break;
-			default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		}	
-*/		$full_en=$pn;					
+		$full_en=$pn;					
 		$HTTP_SESSION_VARS['sess_en']=$pn;	
 		$HTTP_SESSION_VARS['sess_full_en']=$full_en;	
 		
@@ -178,6 +170,7 @@ if(isset($pn)&&$pn) {
 								$data['sample_time']=$sample_time;
 								$data['sample_weekday']=$sday;
 								$data['status']=$status;
+								$data['urgent']=$urgent;
 								$data['history']="Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 								$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 								$data['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
@@ -211,6 +204,7 @@ if(isset($pn)&&$pn) {
 								$data['sample_time']=$sample_time;
 								$data['sample_weekday']=$sday;
 								$data['status']=$status;
+								$data['urgent']=$urgent;
 								$data['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
 								$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 								$diag_obj->setDataArray($data);
@@ -228,9 +222,8 @@ if(isset($pn)&&$pn) {
 								      echo "<p>$sql<p>$LDDbNoSave"; 
 								      $mode="";
 								   }
-								  
 		                        } //end of prepareTestElements()
-								
+	
 								break; // end of case 'save'
 								
 								
@@ -352,6 +345,20 @@ function loadM(fn){
 	form_name=fn;
 }
 
+function selectAllParams(group_id) {
+	var r = document.getElementById('table_param');
+	var rA = r.getElementsByTagName('*');
+	var x,i = 0;
+	while(x = rA[i++]){
+		if(a = x.id) {
+			param = a.substr(-(group_id.length),group_id.length);
+			if( param == group_id) {
+				setM(a);
+			}
+		}
+	}
+}
+
 function setM(m){
     eval("marker=document.images."+m);
 	eval("element=document."+form_name+"."+m);
@@ -359,11 +366,11 @@ function setM(m){
     if(marker.src!=mFilled.src)	{
 	   marker.src=mFilled.src;
 	   element.value='1';
-	  // alert(element.name+element.value);
+	   //alert(element.name+element.value);
 	}else{
 	    marker.src=mBlank.src;
 		element.value='0';
-	  // alert(element.name+element.value);
+	   //alert(element.name+element.value);
 	 }
 }
 
@@ -754,6 +761,41 @@ require($root_path.'include/inc_test_request_controls.php');
 	}
 	?>
    </tr>
+   <!-- urgjente -->   
+<tr align="center"  colspan=4>
+   <td ><font size=1 face="arial" >&nbsp;</td>
+   <td colspan="3"><font size=1 face="verdana,arial" color= "#990000">Urgjente</td>
+   <td><font size=1 face="arial" color= "purple">&nbsp;</td>
+   <td ><font size=1 face="arial" color= "purple"></td>
+   <?php
+			echo '
+			          <td '.$tdbgcolor.'>';
+			if($edit) echo '<a href="javascript:setM(\'urgent\')">';
+			if($edit_form||$read_form)
+			{
+			   if($stored_request['urgent'])
+			   {
+			      echo '<img src="f.gif"';
+				  $inp_v=1;
+				}
+				else
+				{
+				  echo '<img src="b.gif"';
+				}
+			}
+			else
+			{
+			   echo '<img src="b.gif"';
+			}
+			
+			echo ' border=0 width=18 height=6 id="urgent">';			
+			if($edit) echo '</a><input type="hidden" name="urgent" value="'.$stored_request['urgent'].'">';
+			'</td>';
+
+   ?>
+   <td colspan=8><font size=1 face="arial" color= "purple"></td>
+ </tr>   
+<!-- end urgjente   -->
  </table>
  </div>
 </td>
@@ -879,163 +921,59 @@ for($n=0;$n<8;$n++)
 	
 <!--  The test parameters begin  -->
 	
-<table border=0 cellpadding=0 cellspacing=0 width=745 bgcolor="<?php echo $bgc1 ?>">
+<table border=0 cellpadding=0 cellspacing=0 width=745 id=table_param bgcolor="<?php echo $bgc1 ?>">
  <?php
 
-# Start buffering the output
 ob_start();
+for($i=0;$i<=$max_row;$i++) {
+	echo '<tr class="lab">';
+	for($j=0;$j<=$column;$j++) {	
+			if($LD_Elements[$j][$i]['type']=='top') {
+				echo '<td bgcolor="#ee6666" colspan="2" onclick="selectAllParams(\''.$LD_Elements[$j][$i]['id'].'\');"><font color="white" style="cursor : pointer;">&nbsp;<b>'.$LD_Elements[$j][$i]['value'].'</b></font></td>';
+				//echo $lab_obj->getGroupParams($LD_Elements[$j][$i]['id']) . "<br>";
 
-    $tdcount=0; /* $tdcount limits the number of  columns (7) for test elements */
-
-    while(list($x,$v)=each($LD_Elements))
-	{
-
-	  if(!$tdcount) echo '
-	  <tr class="lab">';
-	  
-	   /* If test element is part of emergency program change bgcolor */
-
-	   if(strpos($x,"_emx_")!==FALSE) $tdbgcolor='bgcolor="#f9def9"'; else  $tdbgcolor="";
-
-	  if(strpos($x,"tx_")!==FALSE)
-	  {
-	    echo '
-		                  <td bgcolor="#ee6666" width=104 colspan=2><font color="white">&nbsp;<b>'.$v.'</b></font></td>';
-	  }
-	  else
-	  {
-		 
-		 $inp_v=0; /* Initialize input value to 0 */
-
-	     if(strpos($x,"_x_")!==FALSE) /* Check if the element has two marker fields */
-		 {
-		    $elem_index=explode("_x_",$x);
-			
-			/* The first marker field on the left */
-	        echo '
-			         <td '.$tdbgcolor.'>';
-		    if($edit) echo '<a href="javascript:setM(\''.$elem_index[0].'\')">';
-			if($edit_form||$read_form)
-			{
-			   if($stored_param[$elem_index[0]])
-			   {
-			      echo '<img src="f.gif"';
-				  $inp_v=1;
-				}
-				else
-				{
-				  echo '<img src="b.gif"';
+			} else {
+				if($LD_Elements[$j][$i]['value']) {
+					echo '<td>';
+					if($edit) {
+						echo '<input type="hidden" name="'.$LD_Elements[$j][$i]['id'].'" value="0">
+						<a href="javascript:setM(\''.$LD_Elements[$j][$i]['id'].'\')">';
+					}
+					if($LD_Elements[$j][$i]['is_set']) {
+						echo '<img src="f.gif" border=0 width=18 height=6 id="'.$LD_Elements[$j][$i]['id'].'">';
+					} else {
+						echo '<img src="b.gif" border=0 width=18 height=6 id="'.$LD_Elements[$j][$i]['id'].'">';
+					} if($edit) {
+						echo '</a>';
+					}
+					echo '</td><td>';
+					if($edit) echo '<a href="javascript:setM(\''.$LD_Elements[$j][$i]['id'].'\')">'.$LD_Elements[$j][$i]['value'].'</a>';
+					else echo $LD_Elements[$j][$i]['value'];
+					echo '</td>';
+				} else {
+					echo '<td colspan=2>&nbsp;</td>';
 				}
 			}
-			else
-			{
-			   echo '<img src="b.gif"';
-			}
-			
-			echo ' border=0 width=18 height=6 id="'.$elem_index[0].'">';
-			
-			if($edit) echo '</a><input type="hidden" name="'.$elem_index[0].'" value="'.$inp_v.'">';
-			
-			/* The second marker field on the right */
-			echo $v.'</td>
-			         <td align="right" '.$tdbgcolor.'>';
-			if($edit) echo '<a href="javascript:setM(\''.$elem_index[1].'\')">';
-			
-			$inp_v=0;
-			
-			if($edit_form||$read_form)
-			{
-			   if($stored_param[$elem_index[1]])
-			   {
-			      echo '<img src="f.gif"';
-				  $inp_v=1;
-				}
-				else
-				{
-				  echo '<img src="b.gif"';
-				}
-			}
-			else
-			{
-			   echo '<img src="b.gif"';
-			}
-			
-			echo ' border=0 width=18 height=6 id="'.$elem_index[1].'">';
-			
-			if($edit) echo '</a><input type="hidden" name="'.$elem_index[1].'" value="'.$inp_v.'">';
-			echo '</td>';
-		 }
-		 else 
-		 { 
-		    /* Other wise when the element has a single marker field */
-			echo '
-			          <td '.$tdbgcolor.'>';
-			if($edit) echo '<a href="javascript:setM(\''.$x.'\')">';
-			if($edit_form||$read_form)
-			{
-			   if($stored_param[$x])
-			   {
-			      echo '<img src="f.gif"';
-				  $inp_v=1;
-				}
-				else
-				{
-				  echo '<img src="b.gif"';
-				}
-			}
-			else
-			{
-			   echo '<img src="b.gif"';
-			}
-			
-			echo ' border=0 width=18 height=6 id="'.$x.'">';
-			
-			if($edit) echo '</a><input type="hidden" name="'.$x.'" value="'.$inp_v.'">';
-			echo $v.'</td>';
-			
-		   /* Check for the code of telephone then show telephone icon*/
-
-		   if(strpos($x,"_telx_")!==FALSE)
-		   {
-		      echo '
-			          <td align="right" '.$tdbgcolor.'><img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle',TRUE).'></td>';
-	        }
-			else
-			{ 
-		      echo '
-			          <td '.$tdbgcolor.'></td>';
-		    }
-		 }
-	   }
-	  
-	  if($tdcount==6)
-	  {
-	     echo '
-		 </tr>
-		 <tr>';
-		 $tdcount=0;
-		 
-		 for ($i=0;$i<6;$i++)   echo '<td bgcolor="#ffcccc" colspan=2 width=104><img src="p.gif"  width=1 height=1></td><td width=2></td>';
-		   echo '<td bgcolor="#ffcccc" colspan=2 width=104><img src="p.gif"  width=1 height=1></td>';
-		 echo '
-		 </tr>';
-	   }
-	   else
-	  {
-	     echo '<td bgcolor="white" width=2><img src="p.gif" width=2 height=1></td>';
-		 $tdcount++;
-	   }
 	}
+	echo '</tr><tr>';
+	if($i<$max_row) {
+  		for($k=0;$k<=$column;$k++) {
+  			echo '<td bgcolor="#ffcccc" colspan=2><img src="p.gif"  width=1 height=1></td>';
+  	}
+  	echo '</tr>';
+	}
+}
+
 //$sTemp=ob_get_contents();
 ob_end_flush();
 //echo $sTemp;
 ?>
   <tr>
-    <td colspan=9><input type="text" name="doctor_sign" size=40 maxlength=40 value="<?php if($edit_form||$read_form) echo stripslashes($stored_request['doctor_sign']); ?>"></td>
-    <td colspan=11><input type="text" name="notes" size=65 maxlength=60 value="<?php if($edit_form||$read_form) echo stripslashes($stored_request['notes']); ?>"></td>
+    <td colspan=5 align="left"><input type="text" name="doctor_sign" size=50 maxlength=50 value="<?php if($edit_form||$read_form) echo stripslashes($stored_request['doctor_sign']); ?>"></td>
+    <td colspan=5 align="right"><input type="text" name="notes" size=50 maxlength=50 value="<?php if($edit_form||$read_form) echo stripslashes($stored_request['notes']); ?>"></td>
   </tr>
   <tr>
-    <td colspan=20><font size=2 face="verdana,arial" color="purple">&nbsp;<?php echo $LDEmergencyProgram.' &nbsp;&nbsp;&nbsp;<img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle',TRUE).'> '.$LDPhoneOrder ?></td>
+    <td colspan=10><font size=2 face="verdana,arial" color="purple">&nbsp;<?php echo $LDEmergencyProgram.' &nbsp;&nbsp;&nbsp;<img '.createComIcon($root_path,'violet_phone.gif','0','absmiddle',TRUE).'> '.$LDPhoneOrder ?></td>
   </tr>
 
 </table><!-- End of the main table holding the form -->

@@ -3,15 +3,6 @@
  require('./roots.php');
  require($root_path.'include/inc_environment_global.php');
 
- /**
- * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
- * GNU General Public License
- * Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
- * elpidio@care2x.org, 
- *
- * See the file "copy_notice.txt" for the licence notice
- */
-
  define('LANG_FILE','nursing.php');
  define('NO_2LEVEL_CHK',1);
  require_once($root_path.'include/inc_front_chain_lang.php');
@@ -21,12 +12,12 @@
 
  $toggler=0;
  $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
-
+///$db->debug=true;
  require_once($root_path.'include/care_api_classes/class_ward.php');
  // Load the wards info 
  $ward_obj=new Ward;
  $items='nr,ward_id,name';
- $ward_info=&$ward_obj->getAllWardsItemsObject($items);
+ $ward_info=&$ward_obj->getAllWardsItemsObject($items, $HTTP_SESSION_VARS['department_nr']);
 
  $HTTP_SESSION_VARS['sess_file_return']=$top_dir.basename(__FILE__);
  /* Set this file as the referer */

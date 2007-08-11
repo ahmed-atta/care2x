@@ -94,10 +94,10 @@ else
          case 'baclabor':
 		 	$formtitle = $LDBacteriologicalLaboratory;
 			$bgc1='#fff3f3';
-                                   /* Load additional language table */
-                                  if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php')) include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php');
-                                      else include_once($root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_baclabor.php');
-		                           break;
+            /* Load additional language table */
+            if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php')) include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php');
+              else include_once($root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_baclabor.php');
+            break;
          default:  $bgc1='#ffffff';
 			           break;
     }
@@ -168,7 +168,6 @@ if(isset($pn)&&$pn) {
 							   
 							    if(isset($stored_request['parameters']))
 							   {
-							      //echo $stored_request['parameters'];
    						          parse_str($stored_request['parameters'],$stored_param);
                                }
 							   

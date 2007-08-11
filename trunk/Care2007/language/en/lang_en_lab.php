@@ -1,124 +1,146 @@
 <?php
-$LDLab='Laboratories';
-$LDMedLab='Medical laboratory';
-$LDPathLab='Pathological laboratory';
-$LDBacLab='Bacteriological laboratory';
-$LDClose='Close';
-$LDSeeLabData='Search and display patient\'s laboratory data.';
-$LDSeeData='Display data';
-$LDEnterLabData='Enter patient\'s laboratory data';
-$LDNewData='Enter new data';
-$LDEnterPrioParams='Set priority parameters';
-$LDPrioParams='Priority parameters';
-$LDEnterNorms='Set normal range';
-$LDNorms='Normal range';
-$LDOtherOptions='Other options';
-$LDOptions='Options';
-$LDMemo='Read or compose a memo';
-$LDTitleMemo='Memo';
-$LDfieldname=array('Patient nr.','Family name','Name','Birthdate');
-$LDSearchWordPrompt='Enter a search keyword, for example: a family name, a name, a birthdate, etc.';
-$LDEnterData='Click to enter data';
-$LDClk2See='Click to see data';
-$LDFoundPatient='The search found <b>~nr~</b> patients';
-$LDWildCards='What are wildcards and how to use them';
-$LDNewSearch='New search';
 
-$LDCaseNr='Patient nr.';
-$LDLabReport='Lab report';
-$LDLastName='Family name';
-$LDName='Name';
-$LDBday='Birthdate';
-$LDNoLabReport='No lab report available for';
-$LDParameter='Parameter';
-$LDNormalValue='Normal range';
-$LDOClock='Hour';
-$LDClk2Graph='Click to show the graphical display';
-$LDClk2SelectAll='Click to select or deselect all for graphical display';
-$LDGraph='Graph';
-$LDBack='Go back';
-$LDReportFound='The following is a lab report for patient number  ';
-$LDReportFoundMany='The following are lab reports for patient number  ';
-$LDIfWantEdit='If you want to edit the report, click on the arrow button.';
-$LDIfWantEditMany='If you want to edit one of them, click on its arrow button.';
+$LDLab='Laboratore';
+$LDMedLab='Laborator mjekesor';
+$LDPathLab='Anatomi Patologjike';
+$LDBacLab='Laboratori i analizave histopatologjike';
+$LDClose='Mbyll';
+$LDSeeLabData='Kerko dhe shfaq te dhenat e laboratorit te pacientit.';
+$LDSeeData='Shfaq te dhenat';
+$LDEnterLabData='Shkruaj te dhenat e laboratorit te pacientit';
+$LDNewData='Shkruaj te dhena te reja';
+$LDEnterPrioParams='Shkruaj parametrat e perparesise';
+$LDPrioParams='Parametrat e perparesise';
+$LDEnterNorms='Shkruani fushe normale';
+$LDNorms='Fushe normale';
+$LDOtherOptions='Opsione te tjera';
+$LDOptions='Opsione';
+$LDMemo='Lexo ose krijo nje kujtese';
+$LDTitleMemo='Kujtese';
 
-$LDJobIdNr='Batch nr.';
-$LDExamDate='Examination date';
-$LDOn='On';
-$LDAt='At';
-$LDClk2Edit='Click to edit this report';
+$LDfieldname=array('Kodi i pacientit','Mbiemer','Emer','Datelindja');
+$LDSearchWordPrompt='Shkruani nje celes kerkimi, per shembull nje mbiemer, nje emer, nje datelindje, etj.';
+$LDEnterData='Selektoni per te shkruar te dhenat';
+$LDClk2See='Selektoni per te pare te dhenat';
+$LDFoundPatient='Kerkimi ka gjetur <b>~nr~</b> pacienta';
+$LDWildCards='cfare jane germat yll dhe si t\'i perdorim';
+$LDNewSearch='Kerkim i ri';
 
-$LDNewJob='I want to create a new lab report!';
-$LDNew='New';
-$LDEdit='Edit';
-$LDCreate='Create';
-$LDParamGroup='Parameter group';
-$LDSelectParamGroup='Select parameter group';
-$LDValue='Value';
+$LDCaseNr='Kodi i pacientit';
+$LDLabReport='Raporti i laboratorit';
+$LDLastName='Mbiemer';
+$LDName='Emer';
+$LDBday='Datelindja';
+$LDNoLabReport='Asnje raport i gatshem per';
+$LDParameter='Parametra';
+$LDNormalValue='Fushe normale';
+$LDOClock='Ora';
+$LDClk2Graph='Selektoni per te pare grafiket';
+$LDClk2SelectAll='Selektoni o c\'selektoni te gjithe grafiket';
+$LDGraph='Grafik';
+$LDBack='Kthehu';
+$LDReportFound='Raporti i laboratorit per pacientin numer  ';
+$LDReportFoundMany='Raporte te laboratorit per pacientin numer  ';
+$LDIfWantEdit='Nese deshironi te modifikoni raportin, selektoni butonin shigjete.';
+$LDIfWantEditMany='Nese deshironi te ndryshoni nje raport, selektoni butonin e tij shigjete.';
 
-$LDParamNoSee='The parameter I need is not displayed!';
-$LDOnlyPair='I need to enter only a few values!';
-$LDHow2Save='How should I save the values?';
-$LDWrongValueHow='I saved a wrong value. How can I correct that?';
-$LDVal2Note='I need to enter a note instead of value. How to do that?';
-$LDImDone='I\'m done. What now?';
-$LDAlertJobId='Enter the batch number first!';
-$LDAlertTestDate='Enter the examination date first!';
+$LDJobIdNr='Nr. analiza';
+$LDExamDate='Data e analizave';
+$LDOn='i';
+$LDAt='me';
+$LDClk2Edit='Selektoni per te modifikuar raportin';
+
+$LDNewJob='Deshiroj te krijoj nje raport te ri laboratorik';
+$LDNew='I ri';
+$LDEdit='Modifiko';
+$LDCreate='Krijo';
+$LDParamGroup='Grup parametrash';
+$LDSelectParamGroup='Perzgjidhni grupin e parametrave';
+$LDValue='Vlere';
+
+$LDParamNoSee='Nuk shoh parametrin qe me sherben';
+$LDOnlyPair='Duhet te shkruaj vetem pak parametra';
+$LDHow2Save='Si mund te ruaj vlerat?';
+$LDWrongValueHow='Kam ruajtur nje vlere te gabuar: a mund ta korrigjoj??';
+$LDVal2Note='A mund te shkruaj nje shenim ne vend te nje vlere?';
+$LDImDone='Kam perfunduar: po tani?';
+$LDAlertJobId='Shkruani ne fillim numrin e batch';
+$LDAlertTestDate='Shkruani ne fillim daten e \'analizave';
 
 /* 2002-09-01 EL */
-$LDTestRequest='Test Request';
-$LDFillUpSend='Fill up and send request form for ';
-$LDTestRequestPathoTxt=$LDFillUpSend.'pathology/histology test';
-$LDTestRequestBacterioTxt=$LDFillUpSend.'bacteriological test';
-$LDTestRequestChemLabTxt=$LDFillUpSend.'chemical laboratory test';
-$LDBloodBank='Blood bank';
-$LDBloodRequest='Blood Request';
-$LDBloodRequestTxt=$LDFillUpSend.'blood products';
+$LDTestRequest='Kerkesa e analizes';
+$LDFillUpSend='Plotesoni dhe dergoni formularin per ';
+$LDTestRequestPathoTxt=$LDFillUpSend.'analiza patologjike/histologjike';
+$LDTestRequestBacterioTxt=$LDFillUpSend.'analiza histopatologjike';
+$LDTestRequestChemLabTxt=$LDFillUpSend.'analiza te laboratorit kimik';
+$LDBloodBank='Qendra e transfuzionit te gjakut';
+$LDBloodRequest='Kerkese gjaku';
+$LDBloodRequestTxt=$LDFillUpSend.'Rezerva gjaku';	
 
-$LDRequestSent['insert']='The test request was sent. ';
-$LDFormSaved['insert']='The form was saved (not yet sent).';
-$LDRequestSent['update']='The update test request was sent. ';
-$LDFormSaved['update']='The updated test was saved (not yet sent).';
-$LDWhatToDo=' What do you want to do now?';
+$LDRequestSent['insert']='Kerkese analizash e derguar. ';
+$LDFormSaved['insert']='Formulari eshte ruajtur por nuk eshte ende derguar';
+$LDRequestSent['update']='Kerkesa e ri rregullimit te analizave eshte derguar';
+$LDFormSaved['update']='Analiza e ri rregulluar eshte ruajtur por nuk eshte ende derguar';
+$LDWhatToDo=' cfare deshironi te beni tani?';
 
-$LDNewFormSamePatient='Create a new test request for the <b>same</b> patient';
-$LDEditForm='Edit the same test request';
-$LDEndTestRequest='I\'m finished.';
-$LDNewFormOtherPatient='Create a test request for <b>another</b> patient';
+$LDNewFormSamePatient='Krijo nje kerkese te re analizash per <b>te njejtin</b> pacient';
+$LDEditForm='Modifiko te njejten kerkese analizash';
+$LDEndTestRequest='Kam perfunduar.';
+$LDNewFormOtherPatient='Krijo nje kerkese te re analizash per <b>nje tjeter</b> pacient';
 
-/* 2002-09-03 EL */							  
-$LDSearchPatient='Search patient';
-$LDSearchFound='~nr~ patients were found.';
-/* 2002-09-04 EL */		
-$LDTestRequestFor='Request for ';
-$LDTestType=array('chemlabor'=>'chemical laboratory test',
-                              'patho'=>'pathological test',
-								 'baclabor'=>'bacteriological test',
-								 'radio'=>'radiological test',
-								 'blood'=>'blood product',
-								 'radio'=>'radiology');
-/* 2002-09-10 EL */
-$LDTestReception='Pending Request';
-$LDTestReceptionTxt='Receive & process requests, write results/findings/diagnoses';
-/* 2002-09-15 EL */
-$LDPrintForm='Print the request form';
+ /* 2002-09-03 EL */         
+$LDSearchPatient='Kerkim pacienti';
+$LDSearchFound='Kerkimi ka gjetur ~nr~ pacienta.';
+ /* 2002-09-04 EL */  
+$LDTestRequestFor='Kerkimi per ';
+$LDTestType=array('chemlabor'=>'analiza te laboratorit kimik',
+                                    'patho'=>'analiza anatomopatologjike',
+         'baclabor'=>'analiza histopatologjike',
+         'blood'     =>'gjak',
+		 'radio'=>'analiza te radiologjikeve');
+ /* 2002-09-10 EL */
+$LDTestReception='Kerkese ne vijim';
+$LDTestReceptionTxt='Per te marre dhe perpunuar kerkesat e analizave, shkruani rezultatet/diagnozat';
+ /* 2002-09-15 EL */
+$LDPrintForm='Printo formularin e kerkeses';
+ 
+ /* 2002-09-21 EL */
+$LDInitFindings='Perfundime fillestare';
+$LDCurrentFindings='Perfundime aktuale';
+$LDFinalFindings='Perfundime finale';
 
-/* 2002-09-21 EL */
-$LDInitFindings='Initial findings';
-$LDCurrentFindings='Current findings';
-$LDFinalFindings='Final findings';
-$LDFillLabOnly='For lab use only';
+$LDFillLabOnly='Vetem per perdorim laboratorik';
 $LDLEN='LEN';  /* Lab entry number */
 /*2003-07-11 EL*/
-$LDAdministration='Administration';
-$LDTestParameters='Test parameters';
-$LDTestParametersTxt='Enter or edit units or measure, values,  range, limits, etc.';
-$LDMsrUnit='Msr. Unit';
-$LDMedian='Median';
-$LDUpperBound='Upper boundary';
-$LDLowerBound='Lower boundary';
-$LDUpperCritical='Upper critical';
-$LDLowerCritical='Lower critical';
-$LDUpperToxic='Upper toxic';
-$LDLowerToxic='Lower toxic';
+$LDAdministration='Drejtoria';
+$LDTestParameters='Parametrat e analizave';
+$LDTestParametersTxt='Shkruani ose modifikoni njesite e mases, vlerat, kufinjte, etj.';
+$LDMsrUnit='Njesite matese';
+$LDMedian='Mesatare';
+$LDUpperBound='Kufi i lar.';
+$LDLowerBound='Kufi i ulet';
+$LDUpperCritical='Vlere kritike e lar.';
+$LDLowerCritical='Vlerer kritike e ulet';
+$LDUpperToxic='Vlere toksike e lar.';
+$LDLowerToxic='Vlere toksike e ulet';
+/* 2007-07-22 Gjergj Sheldija*/
+$LDShowParam='Shfaq/Fshesh Param';
+$LDHide='Fsheh';
+$LDDelete='Fshij';
+$LDShow='Trego';
+$LDMale='Meshkuj';
+$LDFemales='Femra';
+$LD01Moth='0-1 muaj';
+$LD112Month='1-12 muaj';
+$LD114Years='1-14 vjec';
+$LDID='Param ID';
+$LDMethod='Metoda';
+$LDGroup='Grupi';
+$LDTestGroups='Grupet e analizave';
+$LDTestGroupsTxt='Krijo / Ndrysho grupet e analizave';
+$LDHiddenParams='Parametrat ne te gjelber jane te fshehur';
+$LDDeletedParams='Parametrat ne te kuqe jane te fshire';
+$LDHiddenGroups='Grupet ne te gjelber jane te fshehur';
+$LDDeletedGroups='Grupet ne te kuqe jane te fshire';
+$LDUrgent='Urgjente';
 ?>

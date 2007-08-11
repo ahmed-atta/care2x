@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * , elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -25,7 +25,7 @@ if($pyear=='') $pyear=date('Y');
 $t_date=$pday.'.'.$pmonth.'.'.$pyear;
 
 $dept_obj=new Department;
-
+///$db->debug=true;
 $deptarray=$dept_obj->getAllNoCondition('name_formal');
 
 # Start Smarty templating here
@@ -93,8 +93,8 @@ ob_start();
 while(list($x,$v)=each($deptarray)){
 ?>
   <tr>
-<!-- 	<td bgcolor="#e9e9e9"><img <?php echo createComIcon($root_path,'arrow_blueW.gif','0'); ?>></td>
- -->    
+	<td bgcolor="#e9e9e9"><img <?php echo createComIcon($root_path,'arrow_blueW.gif','0'); ?>></td>
+    
  	<td class=pblock  bgColor="#eeeeee"><a href="dept_info.php<?php echo URL_APPEND."&dept_nr=".$v['nr']; ?>">
 	<?php 
 		if(isset($$v['LD_var'])&&$$v['LD_var']) echo $$v['LD_var'];

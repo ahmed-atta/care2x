@@ -128,7 +128,6 @@ $enc_obj=new Encounter;
 				if($editable_rows=$ergebnis->RecordCount()){
 
 					$stored_request=$ergebnis->FetchRow();
-
 					//echo $stored_request['parameters'];
 					parse_str($stored_request['parameters'],$stored_param);
 					$edit_form=1;
@@ -240,6 +239,7 @@ function sendLater()
    document.form_test_request.status.value="draft";
    if(chkForm(document.form_test_request)) document.form_test_request.submit(); 
 }
+
 
 <?php
 }

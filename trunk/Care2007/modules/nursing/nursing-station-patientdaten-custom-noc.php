@@ -326,30 +326,30 @@ echo '<font size="7">'.$NOC_title.' <p><font size=2>';
 		
 		<?
 			
-		$row_top.="<tr bgcolor='#99ccff'><td></td><td><b>Time & Score</b></td>";
+		$row_top.="<tr bgcolor='#99ccff'><td></td><td><b>Ora & Vlera</b></td>";
 		$time_top.="<tr bgcolor='#99ccff'><td></td><td></td>";
-		$row_verbal.="<tr bgcolor='#00ccff'><td><b>Verbal Response</b></td><td></td>";
-		$row_verbal_5.="<tr bgcolor='#99ccff'><td>Oriented</td><td align=center>5</td>";
-		$row_verbal_4.="<tr bgcolor='#99ccff'><td>Confused</td><td align=center>4</td>";
-		$row_verbal_3.="<tr bgcolor='#99ccff'><td>In appropriate words</td><td align=center>3</td>";
-		$row_verbal_2.="<tr bgcolor='#99ccff'><td>In comprehensive sound</td><td align=center>2</td>";
-		$row_verbal_1.="<tr bgcolor='#99ccff'><td>None</td><td align=center>1</td>";
-		$row_verbal_t.="<tr bgcolor='#99ccff'><td><b>Total</b></td><td align=right><b><span id='verbal_total'></span></b></td>";
-		$row_moton.="<tr bgcolor='#00ccff'><td><b>Moton Response</b></td><td></td>";
-		$row_moton_6.="<tr bgcolor='#99ccff'><td>Obey command</td><td align=center>6</td>";
-		$row_moton_5.="<tr bgcolor='#99ccff'><td>Localaise (Pain)</td><td align=center>5</td>";
-		$row_moton_4.="<tr bgcolor='#99ccff'><td>Withdrawl (Pain)</td><td align=center>4</td>";
-		$row_moton_3.="<tr bgcolor='#99ccff'><td>Flexion (Pain)</td><td align=center>3</td>";
-		$row_moton_2.="<tr bgcolor='#99ccff'><td>Extension (Pain)</td><td align=center>2</td>";
-		$row_moton_1.="<tr bgcolor='#99ccff'><td>None</td><td align=center>1</td>";
-		$row_moton_t.="<tr bgcolor='#99ccff'><td><b>Total</b></td><td align=right><b><span id='moton_total'></span></b></td>";
-		$row_eyes.="<tr bgcolor='#22ccff'><td><b>Eyes opening</b></td><td></td>";
-		$row_eyes_4.="<tr bgcolor='#99ccff'><td>To spontaneous</td><td align=center>4</td>";
-		$row_eyes_3.="<tr bgcolor='#99ccff'><td>To voice</td><td align=center>3</td>";
-		$row_eyes_2.="<tr bgcolor='#99ccff'><td>To pain</td><td align=center>2</td>";
-		$row_eyes_1.="<tr bgcolor='#99ccff'><td>None</td><td align=center>1</td>";
-		$row_eyes_t.="<tr bgcolor='#99ccff'><td><b>Total</b></td><td align=right><b><span id='eyes_total'></span></b></td>";
-		$row_eyes_st.="<tr bgcolor='#99ccff'><td><b><u>Score Total</u></b></td><td align=right><b><span id='score_total'></span></b></td>";
+		$row_verbal.="<tr bgcolor='#00ccff'><td><b>Pergjigja Verbale </b></td><td></td>";
+		$row_verbal_5.="<tr bgcolor='#99ccff'><td>Orientuar</td><td align=center>5</td>";
+		$row_verbal_4.="<tr bgcolor='#99ccff'><td>Konfuze</td><td align=center>4</td>";
+		$row_verbal_3.="<tr bgcolor='#99ccff'><td>Palidhje</td><td align=center>3</td>";
+		$row_verbal_2.="<tr bgcolor='#99ccff'><td>Pakuptueshme</td><td align=center>2</td>";
+		$row_verbal_1.="<tr bgcolor='#99ccff'><td>Asnje pergjigje</td><td align=center>1</td>";
+		$row_verbal_t.="<tr bgcolor='#99ccff'><td><b>Totali</b></td><td align=right><b><span id='verbal_total'></span></b></td>";
+		$row_moton.="<tr bgcolor='#00ccff'><td><b>Pergjigja motore</b></td><td></td>";
+		$row_moton_6.="<tr bgcolor='#99ccff'><td>Bindet</td><td align=center>6</td>";
+		$row_moton_5.="<tr bgcolor='#99ccff'><td>Lokalizon dhimbjen</td><td align=center>5</td>";
+		$row_moton_4.="<tr bgcolor='#99ccff'><td>Largohet dhimbjes</td><td align=center>4</td>";
+		$row_moton_3.="<tr bgcolor='#99ccff'><td>Hipertoni fleksore</td><td align=center>3</td>";
+		$row_moton_2.="<tr bgcolor='#99ccff'><td>Hipertoni ekstensore</td><td align=center>2</td>";
+		$row_moton_1.="<tr bgcolor='#99ccff'><td>Asnje pergjigje</td><td align=center>1</td>";
+		$row_moton_t.="<tr bgcolor='#99ccff'><td><b>Totali</b></td><td align=right><b><span id='moton_total'></span></b></td>";
+		$row_eyes.="<tr bgcolor='#22ccff'><td><b>Hapja e syve</b></td><td></td>";
+		$row_eyes_4.="<tr bgcolor='#99ccff'><td>Spontane</td><td align=center>4</td>";
+		$row_eyes_3.="<tr bgcolor='#99ccff'><td>Ndaj thirrjes verbale</td><td align=center>3</td>";
+		$row_eyes_2.="<tr bgcolor='#99ccff'><td>Ndja stimulit te dhimbshem</td><td align=center>2</td>";
+		$row_eyes_1.="<tr bgcolor='#99ccff'><td>Syte nuk hapen</td><td align=center>1</td>";
+		$row_eyes_t.="<tr bgcolor='#99ccff'><td><b>Totali</b></td><td align=right><b><span id='eyes_total'></span></b></td>";
+		$row_eyes_st.="<tr bgcolor='#99ccff'><td><b><u>Totali vlere</u></b></td><td align=right><b><span id='score_total'></span></b></td>";
 		
 		
 $res=mysql_query("select * from care_encounter_custom_noc where encounter_nr = '".$pn."'");
@@ -362,31 +362,31 @@ while ($iod=mysql_fetch_assoc($res)) {
 
 
 		
-		$row_top.="<td align=center><a href='#' OnClick=Edit('".$iod['nr']."')><span style='background-color:#FFFF00'>&nbsp;EDIT&nbsp;</span></a></td>";
+		$row_top.="<td align=center><a href='#' OnClick=Edit('".$iod['nr']."')><span style='background-color:#FFFF00'>NDRYSHO</span></a></td>";
 		$time_top.="<td>";
 		$time_top.="<span id='id_".$iod['nr']."_indatetime_date'>".date("d/m/Y",strtotime($iod['indatetime']))."</span><br><br>";
 		$time_top.="<span id='id_".$iod['nr']."_indatetime_time'>".date("H:i",strtotime($iod['indatetime']))."</span>";
 		$time_top.="</td>";
 		$row_verbal.="<td></td>";
-		$row_verbal_5.="<td align=center>".(($iod['verbal'] == 5) ? 'Yes' : '')."</td>";
-		$row_verbal_4.="<td align=center>".(($iod['verbal'] == 4) ? 'Yes' : '')."</td>";
-		$row_verbal_3.="<td align=center>".(($iod['verbal'] == 3) ? 'Yes' : '')."</td>";
-		$row_verbal_2.="<td align=center>".(($iod['verbal'] == 2) ? 'Yes' : '')."</td>";
-		$row_verbal_1.="<td align=center>".(($iod['verbal'] == 1) ? 'Yes' : '')."</td>";
+		$row_verbal_5.="<td align=center>".(($iod['verbal'] == 5) ? 'Po' : '')."</td>";
+		$row_verbal_4.="<td align=center>".(($iod['verbal'] == 4) ? 'Po' : '')."</td>";
+		$row_verbal_3.="<td align=center>".(($iod['verbal'] == 3) ? 'Po' : '')."</td>";
+		$row_verbal_2.="<td align=center>".(($iod['verbal'] == 2) ? 'Po' : '')."</td>";
+		$row_verbal_1.="<td align=center>".(($iod['verbal'] == 1) ? 'Po' : '')."</td>";
 		$row_verbal_t.="<td align=right><b>".$iod['verbal']."</b></td>";
 		$row_moton.="<td></td>";
-		$row_moton_6.="<td align=center>".(($iod['moton'] == 6) ? 'Yes' : '')."</td>";
-		$row_moton_5.="<td align=center>".(($iod['moton'] == 5) ? 'Yes' : '')."</td>";
-		$row_moton_4.="<td align=center>".(($iod['moton'] == 4) ? 'Yes' : '')."</td>";
-		$row_moton_3.="<td align=center>".(($iod['moton'] == 3) ? 'Yes' : '')."</td>";
-		$row_moton_2.="<td align=center>".(($iod['moton'] == 2) ? 'Yes' : '')."</td>";
-		$row_moton_1.="<td align=center>".(($iod['moton'] == 1) ? 'Yes' : '')."</td>";
+		$row_moton_6.="<td align=center>".(($iod['moton'] == 6) ? 'Po' : '')."</td>";
+		$row_moton_5.="<td align=center>".(($iod['moton'] == 5) ? 'Po' : '')."</td>";
+		$row_moton_4.="<td align=center>".(($iod['moton'] == 4) ? 'Po' : '')."</td>";
+		$row_moton_3.="<td align=center>".(($iod['moton'] == 3) ? 'Po' : '')."</td>";
+		$row_moton_2.="<td align=center>".(($iod['moton'] == 2) ? 'Po' : '')."</td>";
+		$row_moton_1.="<td align=center>".(($iod['moton'] == 1) ? 'Po' : '')."</td>";
 		$row_moton_t.="<td align=right><b>".$iod['moton']."</b></td>";
 		$row_eyes.="<td></td>";
-		$row_eyes_4.="<td align=center>".(($iod['eyes'] == 4) ? 'Yes' : '')."</td>";
-		$row_eyes_3.="<td align=center>".(($iod['eyes'] == 3) ? 'Yes' : '')."</td>";
-		$row_eyes_2.="<td align=center>".(($iod['eyes'] == 2) ? 'Yes' : '')."</td>";
-		$row_eyes_1.="<td align=center>".(($iod['eyes'] == 1) ? 'Yes' : '')."</td>";
+		$row_eyes_4.="<td align=center>".(($iod['eyes'] == 4) ? 'Po' : '')."</td>";
+		$row_eyes_3.="<td align=center>".(($iod['eyes'] == 3) ? 'Po' : '')."</td>";
+		$row_eyes_2.="<td align=center>".(($iod['eyes'] == 2) ? 'Po' : '')."</td>";
+		$row_eyes_1.="<td align=center>".(($iod['eyes'] == 1) ? 'Po' : '')."</td>";
 		$row_eyes_t.="<td align=right><b>".$iod['eyes']."</b></td>";
 		$row_eyes_st.="<td align=right><b>".($iod['verbal']+$iod['moton']+$iod['eyes'])."/15</b></td>";
 		$vars.="<input type=hidden id='id_".$iod['nr']."_verbal' value='".$iod['verbal']."'>";
@@ -444,7 +444,7 @@ for ($extra=1;$extra<=$extracols;$extra++) {
 if($edit) { 
 	
 		$row_top.="<td align=center><a href='nursing-station-patientdaten-custom-noc.php".URL_REDIRECT_APPEND."&station=".$station."&pn=".$pn."&edit=".$edit."'>";
-		$row_top.="<span style='background-color:#FFFF00'> CLEAR </span> </a></td>";
+		$row_top.="<span style='background-color:#FFFF00'> PASTRO </span> </a></td>";
 		$time_top.="<td>";
 		$time_top.=$LDDate.":<br><table><tr><td><input type=text size=10 maxlength=10 name=indatetime_date id=indatetime_date value='".formatDate2Local(date('Y-m-d'),$date_format)."' onBlur='IsValidDate(this,'".$date_format."' onFocus='this.select()' value='";
 		if(!$saved) $time_top.="$dateput";

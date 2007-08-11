@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * , elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -25,6 +25,7 @@ if(empty($HTTP_COOKIE_VARS[$local_user.$sid])){
     $edit=0;
 	include($root_path."language/".$lang."/lang_".$lang."_".LANG_FILE);
 }
+
 
 # Set default values if not available from url
 if (!isset($station)||empty($station)) { $station=$HTTP_SESSION_VARS['sess_nursing_station'];} # Default station must be set here !!
@@ -67,7 +68,7 @@ if(($mode=='')||($mode=='fresh')){
 		}else{
 			$room_ok=false;
 		}
-		# GEt the number of beds
+		# Get the number of beds
 		$nr_beds=$ward_obj->countBeds($ward_nr);
 		# Get ward patients
 		if($is_today) $patients_obj=&$ward_obj->getDayWardOccupants($ward_nr);
@@ -175,7 +176,6 @@ if(($mode=='')||($mode=='fresh')){
  ob_start();
 
 ?>
-
 <script language="javascript">
 <!--
   var urlholder;
@@ -201,6 +201,20 @@ function getrem(pn){
 	urlholder="nursing-station-remarks.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&dept_nr=$ward_nr&location_nr=$ward_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
 	patientwin=window.open(urlholder,pn,"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
 	}
+
+// Codice aggiunto per il foglio di anamnesi
+function yellow(pn){
+	urlholder="foglioanamnesi.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&dept_nr=$ward_nr&location_nr=$ward_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
+	patientwin=window.open(urlholder,pn,"width=1000,height=600,menubar=no,resizable=yes,scrollbars=yes");
+	}
+//
+
+// Codice aggiunto per il foglio di esame obiettivo
+function target(pn){
+	urlholder="fogliotarget.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&dept_nr=$ward_nr&location_nr=$ward_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
+	patientwin=window.open(urlholder,pn,"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
+	}
+//
 	
 function indata(room,bed)
 {
@@ -379,6 +393,8 @@ if($ward_ok){
 			$smarty->assign('sPatNr','');
 			$smarty->assign('sAdmitDataIcon','');
 			$smarty->assign('sChartFolderIcon','');
+			$smarty->assign('sYellowPaper','');
+			$smarty->assign('sTarget','');
 			$smarty->assign('sNotesIcon','');
 			$smarty->assign('sTransferIcon','');
 			$smarty->assign('sDischargeIcon','');
@@ -537,6 +553,13 @@ if($ward_ok){
 						else $sBuffer = $sBuffer.createComIcon($root_path,'bubble2.gif','0','',TRUE);
 					$sBuffer = $sBuffer.' alt="'.$LDNoticeRW.'"></a>';
 
+					// Aggiunta codice per il foglio di anamnesi e per l'esame obiettivo'
+					
+					$smarty->assign('sYellowPaper','<a href="javascript:yellow(\''.$bed['encounter_nr'].'\')"><img '.createComIcon($root_path,'yellowlist.gif','0','',TRUE).' alt="'.$LDYellowPaper.'"></a>');
+					$smarty->assign('sTarget','<a href="javascript:target(\''.$bed['encounter_nr'].'\')"><img '.createComIcon($root_path,'articles.gif','0','',TRUE).' alt="'.$LDTarget.'"></a>');
+					
+					//
+
 					$smarty->assign('sNotesIcon',$sBuffer);
 
 					$smarty->assign('sTransferIcon','<a href="javascript:Transfer(\''.$bed['encounter_nr'].'\')"><img '.createComIcon($root_path,'xchange.gif','0','',TRUE).' alt="'.$LDTransferPatient.'"></a>');
@@ -616,6 +639,8 @@ if($ward_ok){
 	if($edit&&$patients_ok){
 		$TP_Legend1_BLOCK.= '&nbsp;<img '.createComIcon($root_path,'pdata.gif','0','absmiddle',TRUE).'> <b>'.$LDAdmissionData.'</b><br>
 		&nbsp;<img '.createComIcon($root_path,'open.gif','0','absmiddle',TRUE).'> <b>'.$LDOpenFile.'</b><br>
+		&nbsp;<img '.createComIcon($root_path,'yellowlist.gif','0','absmiddle',TRUE).'> <b>'.$LDYellowPaper.'</b><br>
+		&nbsp;<img '.createComIcon($root_path,'articles.gif','0','absmiddle',TRUE).'> <b>'.$LDTarget.'</b><br>		
 		&nbsp;<img '.createComIcon($root_path,'bubble2.gif','0','absmiddle',TRUE).'> <b>'.$LDNotesEmpty.'</b><br>
 		&nbsp;<img '.createComIcon($root_path,'bubble3.gif','0','absmiddle',TRUE).'> <b>'.$LDNotes.'</b><br>
 		&nbsp;<nobr><img '.createComIcon($root_path,'xchange.gif','0','absmiddle',TRUE).'> <b>'.$LDTransferPatient.'</b></nobr><br>

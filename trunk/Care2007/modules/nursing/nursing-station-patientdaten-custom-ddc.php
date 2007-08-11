@@ -276,13 +276,13 @@ echo '<font size="7">'.$DDC_title.' <p><font size=2>';
 
 
 echo '	<tr bgcolor="#99ccff">
-		<td><div class=fva2_ml3><b>Date</b></div></td>
-		<td><div class=fva2_ml3><b>Time</b></div></td>
-		<td><div class=fva2_ml3><b>Urine Sugar</b></div></td>
+		<td><div class=fva2_ml3><b>Data</b></div></td>
+		<td><div class=fva2_ml3><b>Ora</b></div></td>
+		<td><div class=fva2_ml3><b>Glukozoria</b></div></td>
 		<td><div class=fva2_ml3><b>Acetone</b></div></td>
-		<td><div class=fva2_ml3><b>Blood Sugar</b></div></td>
-		<td><div class=fva2_ml3><b>Tablets</b></div></td>
-		<td><div class=fva2_ml3><b>Insulin</b></div></td>
+		<td><div class=fva2_ml3><b>Glicemia</b></div></td>
+		<td><div class=fva2_ml3><b>Tableta</b></div></td>
+		<td><div class=fva2_ml3><b>Insuline</b></div></td>
 		<td></td>
 		</tr>';	
 		
@@ -344,7 +344,7 @@ while ($iod=mysql_fetch_assoc($res)) {
 		<td align=right><div class=fva2_ml3 id="id_<?=$iod['nr']?>_bloodsugar"><?=$iod['bloodsugar']?></div></td>
 		<td><div class=fva2_ml3 id="id_<?=$iod['nr']?>_tablets"><?=$iod['tablets']?></div></td>
 		<td align=right><div class=fva2_ml3 id="id_<?=$iod['nr']?>_insulin"><?=$iod['insulin']?></div></td>
-		<td align=center><div class=fva2_ml3><a href='#' OnClick=Edit('<?=$iod['nr']?>')><span style='background-color:#FFFF00'> EDIT </span></a></div></td>
+		<td align=center><div class=fva2_ml3><a href='#' OnClick=Edit('<?=$iod['nr']?>')><span style='background-color:#FFFF00'> NDRYSHO </span></a></div></td>
 	</tr>	
 	
 		<?
@@ -398,26 +398,26 @@ if($edit) {
 		<input type=text size=4 maxlength=5 name="indatetime_time" id="indatetime_time"  value="<?php echo date('H:i'); ?>" onKeyUp=setTime(this,'<?php echo $lang ?>') onFocus=this.select()><br>
 		</td>
 		
-		<td valign="top">Urine Sugar:<br>
+		<td valign="top">Glukozuria:<br>
 		<input type=text size=15 maxlength=35 name="urinesugar"  id="urinesugar" value="<?if (!($saved)) echo $_POST['urinesugar']?>">
 		</td>
 		<td valign="top">Acetone:<br>
 		<input type=text size=15 maxlength=35 name="acetone"  id="acetone" value="<?if (!($saved)) echo $_POST['acetone']?>">
 		</td>
-		<td valign="top">Blood Sugar:<br>
+		<td valign="top">Glicemia:<br>
 		<input type=text size=10 maxlength=6 name="bloodsugar"  id="bloodsugar" value="<?if (!($saved)) echo $_POST['bloodsugar']?>">
 		</td>
-		<td valign="top">Tablets:<br>
+		<td valign="top">Tableta:<br>
 		<input type=text size=15 maxlength=35 name="tablets"  id="tablets" value="<?if (!($saved)) echo $_POST['tablets']?>">
 		</td>
-		<td valign="top">Insulin:<br>
+		<td valign="top">Insuline:<br>
 		<input type=text size=10 maxlength=6 name="insulin"  id="insulin" value="<?if (!($saved)) echo $_POST['insulin']?>">
 		</td>
 	<td align=center><a <?
 			
 			echo 'href=\'nursing-station-patientdaten-custom-ddc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'';
 			
-			?>> <span style="background-color:#FFFF00"> CLEAR </span> </a></td>
+			?>> <span style="background-color:#FFFF00"> PASTRO </span> </a></td>
 		</tr>
 		
 <?php

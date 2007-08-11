@@ -3,14 +3,14 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-
+///$db->debug=1;
 $lang_tables[]='search.php';
 define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
@@ -32,7 +32,7 @@ if($mode=='such'||$mode=='paginate')
 	$tb_location='care_encounter_location';
 	$tb_ward='care_ward';
 
-	# Initialize pageï¿½s control variables
+	# Initialize page´s control variables
 	if($mode=='paginate'){
 		$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 	}else{
@@ -88,7 +88,16 @@ if($mode=='such'||$mode=='paginate')
 	}
 	
 	$cond.=" AND l.encounter_nr=e.encounter_nr";
-	
+	//gjergji - show patient info of other departements
+	if(isset($HTTP_SESSION_VARS['department_nr']) && $HTTP_SESSION_VARS['department_nr'] != '0' ) {
+		$cond.=" AND ( ";
+		while (list($key, $val) = each($HTTP_SESSION_VARS['department_nr'])) {
+			$tmp .= "w.dept_nr = " . $val . " OR ";
+
+		}
+		$cond .= substr($tmp,0,-4) ;
+		$cond .= " ) "	;
+	}
 	if(!$arch) $cond.=" AND e.is_discharged IN ('',0) AND p.pid=e.pid ";
 	
 	$gbuf="l.location_nr,p.name_last, p.name_first,p.date_birth,

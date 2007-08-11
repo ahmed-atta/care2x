@@ -25,6 +25,11 @@ $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 $returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
 $HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 
+//gjergji : load the department list
+require_once($root_path.'include/care_api_classes/class_department.php');
+$dept_obj=new Department;
+$deptarray=$dept_obj->getAllActiveSort('name_formal');
+
 $edit=0;
 $error=0;
 
@@ -36,6 +41,7 @@ if(!isset($userid)) $userid='';
 if(!isset($errorpass)) $errorpass='';
 if(!isset($pass)) $pass='';
 if(!isset($errorbereich)) $errorbereich='';
+if(!isset($dept_nr)) $dept_nr='0';
 
 if($mode!= ''){
     if($mode!='edit' && $mode!='update' && $mode!='data_saved'){
@@ -65,7 +71,6 @@ if($mode!= ''){
 			   
 	        if($HTTP_POST_VARS[$x] != '') $p_areas.=$v.' ';
 	     }
-		  
 	     /* If permission area is available, save it */
 	      if($p_areas != '')
 	      {   
@@ -82,6 +87,7 @@ if($mode!= ''){
 						   personell_nr,
 						   s_date,
 						   s_time,
+						   dept_nr,
 						   status,
 						   modify_id,
 						   create_id,
@@ -96,6 +102,7 @@ if($mode!= ''){
 						   '".((int)$personell_nr)."',
 						   '".date('Y-m-d')."',
 						   '".date('H:i:s')."',
+						   '".serialize($dept_nr)."',
 						   'normal',
 						   '',
 						   '".$HTTP_SESSION_VARS['sess_user_name']."',
@@ -103,8 +110,8 @@ if($mode!= ''){
 						 )";
 
 		      } else {
-
-		           $sql="UPDATE care_users SET permission='$p_areas', modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."'  WHERE login_id='$userid'";
+		      	   $dept_nr=serialize($dept_nr);
+		           $sql="UPDATE care_users SET permission='$p_areas', dept_nr='$dept_nr' ,modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."'  WHERE login_id='$userid'";
 		       }
 
 			   /* Do the query */
@@ -133,7 +140,7 @@ if($mode!= ''){
 
 	    if($mode=='edit' || $mode=='data_saved' || $edit) {
         
-		    $sql="SELECT name, login_id, permission FROM care_users WHERE login_id='$userid'";
+		    $sql="SELECT name, login_id, permission, dept_nr FROM care_users WHERE login_id='$userid'";
 
 		    if($ergebnis=$db->Execute($sql)) {
             
@@ -173,9 +180,11 @@ if($mode!= ''){
  $smarty->assign('sWindowTitle',$LDManageAccess);
  
  # Buffer page output
- 
- ob_start();
 
+ ob_start();
+ //start tabbs
+ echo '<script src="../../js/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+<link href="../../js/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />';
 ?>
 
 <ul>
@@ -332,7 +341,13 @@ else { echo $LDAllowedArea;} ?>
 
 <tr bgcolor="#dddddd">
 <td  colspan=3>
-
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    <li class="TabbedPanelsTab" tabindex="0"><?php echo $LDAllowedArea ?></li>
+    <li class="TabbedPanelsTab" tabindex="0"><?php echo $LDOwnerDept ?></li>
+  </ul>
+    <div class="TabbedPanelsContentGroup">
+    <div class="TabbedPanelsContent">
 <table border=0 cellspacing=0 width=100%>
 
 <!--  The list of the permissible areas are displayed here  -->
@@ -402,7 +417,41 @@ while (list($x,$v)=each($area_opt))
 ?>
 
 </table>
-
+</div>
+<!-- begin dept list -->
+<div class="TabbedPanelsContent">
+<table border=0 cellpadding=3>
+  <tr class="wardlisttitlerow">
+<!-- 	<td bgcolor="#e9e9e9"></td>
+ -->    <td class=pblock align=center><?php echo $LDDept ?></td>
+ </tr> 
+<?php
+while(list($x,$dept)=each($deptarray)){
+	$actualDept = unserialize($user['dept_nr']);
+?>
+  <tr>
+   <td class=pblock  bgColor="#eeeeee">
+   	<input type="checkbox" name="dept_nr[]" id="<?php echo $dept['nr'] ?>" value="<?php echo $dept['nr']?>" <?php if( in_array($dept['nr'],$actualDept)) echo 'checked' ?>>
+ <?php 
+		if(isset($$dept['LD_var'])&&!empty($$dept['LD_var'])) echo $$dept['LD_var'];
+				else echo $dept['name_formal'];
+ ?>
+</td>
+ </tr> 
+<?php
+}
+ ?>
+ 
+</table>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+<?php
+echo 'var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");'
+?>
+</script>
+<!-- end dept list -->
 </td>
 </tr>
 
