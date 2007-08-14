@@ -12,13 +12,13 @@ $dbpassword='';
 $dbhost='localhost';
 
 # First key used for simple chaining protection of scripts
-$key='20582455478740';
+$key='8.67644802691E+013';
 
 # Second key used for accessing modules
-$key_2level='3047469022224';
+$key_2level='576629223688';
 
 # 3rd key for encrypting cookie information
-$key_login='8038229017362';
+$key_login='2.3791562392E+012';
 
 # Main host address or domain
 $main_domain='localhost';
