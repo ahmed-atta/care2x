@@ -14,20 +14,8 @@
 					{{include file='common/submenu_row_spacer.tpl'}}
 					{{$LDPhotoLab}}
 					{{include file='common/submenu_row_spacer.tpl'}}
-					{{$LDStandbyDuty}}
-					{{include file='common/submenu_row_spacer.tpl'}}
 					{{$LDCalendar}}
 					{{include file='common/submenu_row_spacer.tpl'}}
-					{{$LDNews}}
-					{{include file='common/submenu_row_spacer.tpl'}}
-					{{$LDCalc}}
-					{{include file='common/submenu_row_spacer.tpl'}}
-
-					{{if $bShowClock}}
-						{{$LDClock}}
-						{{include file='common/submenu_row_spacer.tpl'}}
-					{{/if}}
-
 					{{$LDUserConfigOpt}}
 					{{include file='common/submenu_row_spacer.tpl'}}
 					{{$LDAccessPw}}
