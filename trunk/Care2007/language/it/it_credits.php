@@ -16,6 +16,27 @@ require_once($root_path.'include/inc_environment_global.php');
         <TBODY>
         <TR>
           <TD><IMG height=15
+             src="../../gui/img/common/default/pixel.gif"
+             width=5 border=0></TD></TR>
+        <TR>
+          <TD vAlign=top><font face="verdana,arial" size=2>
+			<P><img src="../../fotos/credits/claudio_torbinio.jpg" border=0  align=right vspace=10>
+			<b>Claudio Giulio Torbinio (IT)</b>
+			<p>
+			Translation of Care2x to Italian<br>
+			
+			<p>Claudio is an IT analyst with Bachelor degree, and a nurse with Phd degree.
+			He is 41 years old and has worked over care2x since 2004.
+			He has improved the Italian translation of Care2x.
+			Claudio is creating a module for the Nursing process (like a DRG).
+			He works together with an Italian commitee for Italian translation of ICD10 and OPS-301.
+			<P><a href="mailto:claudiogiulio@email.it"><u>Si puo' contattare Claudio Giulio Torbinio qui.</u></a>
+</TD></TR></TBODY></TABLE>
+<hr>
+<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
+        <TBODY>
+        <TR>
+          <TD><IMG height=15
             src="../../gui/img/common/default/pixel.gif"
             width=5 border=0></TD></TR>
         <TR>
@@ -53,27 +74,7 @@ Ha deciso di unirsi attivamente alla causa dell'Open Source in quanto
 
 			<P><a href="mailto:kalbun@inwind.it"><u>Si pu� contattare Giuseppe Scarpi qui.</u></a>
 </TD></TR></TBODY></TABLE>
-<hr>
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
-        <TBODY>
-        <TR>
-          <TD><IMG height=15
-             src="../../gui/img/common/default/pixel.gif"
-             width=5 border=0></TD></TR>
-        <TR>
-          <TD vAlign=top><font face="verdana,arial" size=2>
-			<P><img src="../../fotos/credits/claudio_torbinio.jpg" border=0  align=right vspace=10>
-			<b>Claudio Giulio Torbinio (IT)</b>
-			<p>
-			Translation of Care2x to Italian<br>
-			
-			<p>Claudio is an IT analyst with Bachelor degree, and a nurse with Phd degree.
-			He is 41 years old and has worked over care2x since 2004.
-			He has improved the Italian translation of Care2x.
-			Claudio is creating a module for the Nursing process (like a DRG).
-			He works together with an Italian commitee for Italian translation of ICD10 and OPS-301.
-			<P><a href="mailto:claudiogiulio@email.it"><u>Si pu� contattare Claudio Giulio Torbinio qui.</u></a>
-</TD></TR></TBODY></TABLE>
+
 <hr>
 <TABLE cellSpacing=0 cellPadding=0 border=0 width=100%>
         <TBODY>
