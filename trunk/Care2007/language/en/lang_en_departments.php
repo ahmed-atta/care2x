@@ -35,28 +35,28 @@ $LDTechnicalMaintenance='Mirembajtje teknike';
 $LDITDepartment='Administrator';
 $LDGeneralAmbulatory='Ambulator';
 $LDBloodBank='Qendra e trasfuzionit te gjakut';*/
-$LDAdmission='Shtrim';
-$LDHeadline='Titull';
-$LDHeadlines='Titull';
-$LDManagement='Drejtori';
-$LDHealthTips='Sugjerime Mjekesore';
-$LDAdmission='Shtrim';
-$LDNursing='Infermeri';
+$LDAdmission='Admission';
+$LDHeadline='Headline';
+$LDHeadlines='Headlines';
+$LDManagement='Management';
+$LDHealthTips='Health tips';
+$LDAdmission='Admission';
+$LDNursing='Nursing';
 /* 2003-04-27 EL */
-$LDMedical='Mjek';
-$LDSupport='Ndihmes';
-$LDNews='Te reja';
-$LDDepartment='Repart';
-$LDPressRelations='Marredhenie me publikun';
+$LDMedical='MEdical';
+$LDSupport='Support';
+$LDNews='News';
+$LDDepartment='Department';
+$LDPressRelations='Press Relations';
 /* 2003-05-19 EL */
-$LDSelectDept='Zgjidh nje repart';
+$LDSelectDept='Select a Department';
 /*2003-06-15 EL*/
-$LDPlsSelectDept='Ju lutem zgjidhni nje repart';
-$LD_AllMedicalDept='____Te gjithe repartet mjekesore_____';
-$LDClinic='Klinik';
+$LDPlsSelectDept='Please Select a Department';
+$LD_AllMedicalDept='____All Medical Departments_____';
+$LDClinic='Clinic';
 
 #2003-10-23 EL
-$LDPlsNameFormal='Shkruani emrin e rregullt';
-$LDPlsDeptID='Shkruani kodin e repartit';
-$LDPlsSelectType='Shkruani llojin';
+$LDPlsNameFormal='Please write the Formal Name';
+$LDPlsDeptID='Please write the Department ID';
+$LDPlsSelectType='Please select the type';
 ?>

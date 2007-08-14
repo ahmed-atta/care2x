@@ -1,420 +1,407 @@
 <?php
 #        IMPORTANT!        All words or characters inclosed with ~ ~ must not be changed.
-$LDNursing='Per infermieret';
-$LDStation='Pavijon';
+$LDNursing='Nursing';
+$LDStation='Ward';
 
-$LDQuickView='Pamje e pergjithshme';
-$LDSearchPatient='Kerko nje pacient';
-$LDArchive='Arkiv';
-$LDStationMan='Administrim pavijonesh';
+$LDQuickView='Quick view';
+$LDSearchPatient='Search a patient';
+$LDArchive='Archive';
+$LDStationMan='Ward management';
 $LDNews='News';
-$LDMemo='Kujtese';
-$LDNursingForum='Forum personal i infermierise';
-$LDNursingStations='Vendndodhja e infermierise';
+$LDMemo='Memo';
+$LDNursingForum='Nursing forum';
+$LDNursingStations='Nursing wards';
 
-$LDQuickViewTxt='Paraqitja e shpejte e zenies se shtreterve.';
-$LDSearchPatientTxt='Kerkim i nje pacienti te shtruar ne pavijon.';
-$LDArchiveTxt='Kerkim ne arkivin e pavijonit.';
-$LDStationManTxt='Caktoni nje pavijon, shkruani parametrat si numrin e shtreterve, numrin personal, etj.';
-$LDNewsTxt='Lexoni, krijoni ose modifikoni nje news.';
-$LDMemoTxt='Lexoni, krijoni ose modifikoni nje kujtese.';
-$LDNursingForumTxt='Nje forum diskutimi mbi profesionin e infermierit.';
-$LDNursingStationsTxt='Zenia e shtreterve, grafiket e pacienteve, foto, etj.';
+$LDQuickViewTxt='Quick view of today\'s occupancy of the nursing wards.';
+$LDSearchPatientTxt='Search the wards for an admitted patient.';
+$LDArchiveTxt='Research in the wards\' archived files.';
+$LDStationManTxt='Create a ward, initialize parameters like number of beds, personnel, etc.';
+$LDNewsTxt='Read, compose, or edit a news article.';
+$LDMemoTxt='Read, compose, or edit a memo.';
+$LDNursingForumTxt='Discussions forum about nursing.';
+$LDNursingStationsTxt='Occupancy, patient\' charts, photos, etc.';
 
-$LDCloseBack2Main='Mbyllni dhe kthehuni tek paqja e pare';
-$LDOld='I vjeter';
-$LDTodays='I sotem';
-$LDOccupancy='Zenia e shtreterve';
-$LDBedNr='Numri i shtreterve';
-$LDOptions='Opsione';
-$LDFreeBed='I lire';
+$LDCloseBack2Main='Close and go back to start page';
+$LDOld='Old';
+$LDTodays='Today\'s';
+$LDOccupancy='Occupancy';
+$LDBedNr='No. of beds';
+$LDOptions='Options';
+$LDFreeBed='Unoccupied';
 
-$LDNoOcc='Lista e zenies se shtreterve te sotem nuk eshte e disponueshme!';
-$LDClk2Archive='Selektoni per te hyre ne arkiv.';
-$LDNrUnocc='Numri i shtreterve te lire';
-$LDEditStation='Modifiko te dhenat data in ward ~station~';
-$LDSearchKeyword='Celes kerkimi';
-$LDWasFound='gjetur ne ~rows~ listat e zenies se shtreterve!';
-$LDPlsClk='Perzgjidhni ato qe deshironi.';
-$LDMoreFunctions='Funksione te tjera';
-$LDSrcKeyword='Celes kerkimi';
-$LDSearchArchive='Perfshij arkivin ne kerkim.';
-$LDSearchPrompt='Vendosni nje kriter kerkimi.<br>        Per shembull nje emer, nje mbiemer, etj.';
-$LDSearch='Kerkim';
-$LDCancel='Anullo';
-$LDHow2Search='Ndihme! Si mund te gjej nje pacient?';
-$LDClk2Show='Selektoni per te pare te dhenat';
-$LDDate='Data';
-$LDClockTime='Ora';
+$LDNoOcc='The occupancy list is not available!';
+$LDClk2Archive='Click this to go to archive.';
+$LDNrUnocc='Number of unoccupied beds';
+$LDEditStation='Edit data in ward ~station~';
+$LDSearchKeyword='The search keyword';
+$LDWasFound='was found in ~rows~ occupancy lists!';
+$LDPlsClk='Please click the right one.';
+$LDMoreFunctions='More functions';
+$LDSrcKeyword='Search keyword';
+$LDSearchArchive='Include archive in search.';
+$LDSearchPrompt='Please enter a search keyword.<br>	For example: a name, a Given name, or both, etc.';
+$LDSearch='Search';
+$LDCancel='Cancel';
+$LDHow2Search='Help! How can I find a patient?';
+$LDClk2Show='Click to show data';
+$LDDate='Date';
+$LDClockTime='Time';
 
-$LDClkDate='Perzgjidhni daten qe deshironi.';
+$LDClkDate='Click the desired date.';
 
-$monat=array('Janar',
-                                        'Shkurt',
-                                        'Mars',
-                                        'Prill',
-                                        'Maj',
-                                        'Qershor',
-                                        'Korrik',
-                                        'Gusht',
-                                        'Shtator',
-                                        'Tetor',
-                                        'Nentor',
-                                        'Dhjetor'
-                                        );
+$monat=array('January',
+					'February',
+					'March',
+					'April',
+					'May',
+					'June',
+					'July',
+					'August',
+					'September',
+					'October',
+					'November',
+					'December'
+					);
 $tage=array(
-                                        'D',
-                                        'H',
-                                        'M',
-                                        'M',
-                                        'E',
-                                        'P',
-                                        'Sh'
-                                        );
+					'Su',
+					'Mo',
+					'Tu',
+					'We',
+					'Th',
+					'Fr',
+					'Sa'
+					);
+					
+$LDDay='Day';					
+$LDMonth='Month';
+$LDYear='Year';
 
-$LDDay='Dite';
-$LDMonth='Muaj';
-$LDYear='Vit';
-
-$LDDirectSelect='Perzgjedhje e drejteperdrejte';
-$LDPlusYear='Viti i ardhshem';
-$LDMinusYear='Viti i meparshem';
-$LDGo='FILLO';
-$LDLastMonth='Muaji i kaluar';
-$LDNextMonth='Muaji i ardhshem';
-$LDNursingManage='Administrim pavijonesh';
-$LDShowStationDataTxt='&nbsp;Shfaq, modifiko, krijo, <br> &nbsp;pershkrim, numri i shtreterve<br>        &nbsp;etc.';
-$LDLockBedTxt='&nbsp;ose liro nje shtrat';
-$LDAccessRightsTxt='&nbsp;Krijo, blloko, modifiko,<br>&nbsp;aktivizo, fshij, etj.';
-$LDShowStationData='Profili i pavijonit';
-$LDLockBed='Cakto nje shtrat';
-$LDAccessRights='Te drejta hyrjeje';
-$LDProfile='Profil';
-$LDCreate='Krijo';
-$LDNewStation='Pavijon i ri';
-$LDDescription='Pershkrim';
-$LDDept='Departament';
-$LDRoom1Nr='Numri i dhomes se pare';
-$LDRoom2Nr='Numri i dhomes se fundit';
-$LDRoomPrefix='Prefiksi i dhomes';
-$LDNrBeds='Numri i shtreterve ne nje dhome';
-$LDMaxBeds='Numri maksimal i dhomes';
-$LDMaxBeds='Sasia e shtreterve te gatshem';
-$LDBed1Prefix='Prefiksi per shtratin e pare';
-$LDBed2Prefix='Prefiksi per shtratin e dyte';
-$LDHeadNurse='Koordinator';
-$LDHeadNurse2='Ndihmes';
-$LDNurses='Infermiere';
-$LDCreateStation='Krijo pavijon';
-$LDEnterAllFields ='Fushat e identifikuara nga <font color=#ff0000><b>*</b></font> duhen plotesuar.';
-$LDPlsSelect='Zgjidhni nje repart';
-$LDStationExists='Pavijoni ~station~ tashme ekziston!';
-$LDAlertIncomplete='Mungojne disa te dhena: ju lutem shkruajini.';
-$LDAlertRoomNr='Numri i dhomes se fundit duhet te jete me i MADH se numri i dhomes se pare!';
-$LDExistStations='Pavijone ekzistuese. Zgjidhni ate qe deshironi.';
-$LDOtherStations='Pavijone te tjera';
-$LDEditProfilo='Modifiko profilin e pavijonit';
-$LDCreatedOn='Krijuar me:';
-$LDCreatedBy='Krijuar nga:';
+$LDDirectSelect='Direct selection';
+$LDPlusYear='Add one year';
+$LDMinusYear='Minus one year';
+$LDGo='GO';
+$LDLastMonth='Last month';
+$LDNextMonth='Next month';
+$LDNursingManage='Ward management';
+$LDShowStationDataTxt='&nbsp;Show, edit, create, <br> &nbsp;description, number of beds<br>	&nbsp;etc.';
+$LDLockBedTxt='&nbsp;or free a bed';
+$LDAccessRightsTxt='&nbsp;Create, lock, change,<br>&nbsp;activate, delete, usw.';
+$LDShowStationData='Wards\' profile data';
+$LDLockBed='Lock a bed';
+$LDAccessRights='Access rights';
+$LDProfile='Profile';
+$LDCreate='Create';
+$LDNewStation='New ward';
+$LDDescription='Description';
+$LDDept='Department';
+$LDRoom1Nr='Room number of the first room';
+$LDRoom2Nr='Room number of the last room';
+$LDRoomPrefix='Room prefix';
+$LDNrBeds='Number of beds in a room';
+$LDMaxBeds='Total number of available beds';
+$LDBed1Prefix='Prefix for the first bed';
+$LDBed2Prefix='Prefix for the second bed';
+$LDHeadNurse='Head nurse';
+$LDHeadNurse2='Assistant head nurse';
+$LDNurses='Nurses';
+$LDCreateStation='Create the ward';
+$LDEnterAllFields ='The fields marked with <font color=#ff0000><b>*</b></font> must be filled.';
+$LDPlsSelect='Please select a department';
+$LDStationExists='The ward ~station~ exists already! Please use another ward\'s name.';
+$LDAlertIncomplete='Some information are missing. Please fill in the important information.';
+$LDAlertRoomNr='The number of the last room MUST BE HIGHER than the number of the first room!';
+$LDExistStations='Existing wards. Please click the desired one.';
+$LDOtherStations='Other wards';
+$LDEditProfile='Edit ward\'s profile';
+$LDCreatedOn='Created on:';
+$LDCreatedBy='Created by:';
 
 /**********do not change the ~station~ **************************/
-$LDTemplateMissing='Modeli per pavijonin ~station~ nuk ekziston!';
-$LDNoOrigData='Te dhenat fillestare nuk jane gjetur!';
+$LDTemplateMissing='Template for ward ~station~ missing!';
+$LDNoOrigData='Original data not found!';
 
-$LDShowLastList='Shfaq listen e fundit te zenies se shtreterve.';
-$LDNoListYet='Lista e sotme ende nuk ekziston!';
-$LDLastList='Lista e fundit e zenies se shtreterve.';
-$LDNotToday='(Jo e sotme!!)';
-$LDFromYesterday='(Lista e djeshme!!)';
+$LDShowLastList='Show last occupancy list.';
+$LDNoListYet='Today\'s list is not yet created!';
+$LDLastList='Last occupancy list.';
+$LDNotToday='(Not today!!)';
+$LDFromYesterday='(Yesterday\'s list!!)';
 /**********do not change the ~nr~ **************************/
-$LDListFrom='Kjo liste eshte e ~nr~ diteve me pare.';
-$LDCopyAnyway='Kopjoje gjithsesi si liste te sotme.';
-$LDTakeoverList='Kopjoje si liste te sotme.';
-$LDDoNotCopy='Mos e kopjo dhe krijo nje te re.';
-$LDOldList='Kjo eshte nje liste e vjeter!';
-$LDQuickInformer='Te dhena te shpejta';
-$LDAttention='Kujdes';
-$LDOccupied='I zene';
-$LDFree='I lire';
-$LDLocked='I caktuar';
-$LDDutyDoctor='<b>Mjek</b> (ne sherbim)';
+$LDListFrom='This list is already ~nr~ day(s) old.';
+$LDCopyAnyway='Copy this list for today anyway.';
+$LDTakeoverList='Copy this list for today.';
+$LDDoNotCopy='Do not copy this! Create a new list.';
+$LDOldList='This is an old list!';
+$LDQuickInformer='Quick Informer';
+$LDAttention='Attention!';
+$LDOccupied='Occupied';
+$LDFree='Free';
+$LDLocked='Locked';
+$LDDutyDoctor='<b>Doctor</b> (on Duty)';
 $LDShortMale='M';
 $LDShortFemale='F';
-$LDLegend='Legenda';
+$LDLegend='Legend';
 
-$LDOpenFile='Hap te dhenat';
-$LDNotesEmpty='Shenim bosh';
-$LDNotes='Shenim';
-$LDRelease='Nxjerr nga spitali';
-$LDFreeOccupy='Liro/Zer';
-$LDMale='Mashkull';
-$LDFemale='Femer';
+$LDOpenFile='Open charts';
+$LDNotesEmpty='Empty notice';
+$LDNotes='Notes';
+$LDRelease='Discharge';
+$LDFreeOccupy='Free/Occupy';
+$LDMale='Male';
+$LDFemale='Female';
 /**********do not change the ~station~ **************************/
-$LDNoInit='Pavijoni ~station~ duhet te inizializzata!';
-$LDIfInit='Per te inizializzare pavijonin, selektoni ketu.';
-$LDShowPatData='Hap arkivin e te dhenave te pacientit';
-$LDReleasePatient='Nxjerr pacientin nga spitali';
-$LDNoticeRW='Lexo ose shkruaj shenime';
-$LDInfoUnlock='Lexo info ose zhblloko';
+$LDNoInit='The ward ~station~ is not yet initialized!';
+$LDIfInit='To initialize the ward, please click here.';
+$LDShowPatData='Open patient\'s charts folder';
+$LDReleasePatient='Discharge patient';
+$LDNoticeRW='Read or write notice';
+$LDInfoUnlock='Read info or unlock';
 $LDPatListElements=array(
-                                                                                'Dhoma',
-                                                                                'Shtrati',
-                                                                                'Mbiemer, Emer',
-                                                                                'Datelindja',
-                                                                                'Kodi i pacientit',
-                                                                                'Sigurim shoqeror',
-                                                                                'Opsione'
-                                                                                );
-/**********do not change the \'+b+\' e \'+r+\' **************************/
-$LDConfirmUnlock='Deshironi me te vertete te lironi shtratin \'+b+\' e dhomes \'+r+\' ?';
-/**********do not change the \'+t+\' \'+n+\' e \'+r+b+\' **************************/
-$LDConfirmDelete='Deshironi me te vertete te fshini \'+t+\' \'+n+\' nga dhoma \'+r+b+\'?';
-$LDConfirmLock='Deshironi me te vertete te bllokoni kete shtrat?';
-$LDClk2Occupy='Selektoni per te zene shtratin';
+										'Room',
+										'Bed',
+										'Family name, Name',
+										'Birthdate',
+										'Patient nr.',
+										'Insurance',
+										'Options'
+										);
+/********** NOTE: !! do not change the \'+b+\' and \'+r+\'  !! **************************/
+$LDConfirmUnlock='Do you really want to unlock the \'+b+\' bed in room \'+r+\' ?';							
+/********** NOTE: !! do not change the \'+t+\' \'+n+\' and \'+r+b+\'  **************************/
+$LDConfirmDelete='Do you really want to delete \'+t+\' \'+n+\' from room \'+r+b+\'?';
+$LDConfirmLock='Do you really want to lock this bed?';
+$LDClk2Occupy='Click to occupy this bed';
 /*$LDInsurance=array(
-                                                                x=>'Vetngarkim',
-                                                                privat=>'Privat',
-                                                                kasse=>'I pergjithshem'
-                                                                );
+								'x'=>'Self pay',
+								'privat'=>'Private',
+								'kasse'=>'General'
+								);
 */
-$LDSave='Ruaj';
-$LDNurse='Infermier';
-$LDYesSure='Po, nxjerr pacientin nga spitali.';
-$LDFtpAttempted='Perpjekja per t\'u lidhur me serverin FTP ka deshtuar:<br>mund te jete i zene ose jo i disponueshem.
-                                                        Nese problemi vazhdon per disa kohe, kontaktoni me CED.';
-$LDFtpNoLink='Identifikim FTP i deshtuar';
-$LDJustReleased='Pacienti eshte nxjerre nga spitali. Selekto \'Mbyll\' per te vazhduar.';
-$LDReleaseType='Lloji i nxjerrjes nga spitali';
-$LDRegularRelease='Nxjerrje nga spitali normale';
-$LDSelfRelease='Paciente ka dashur te dale nga spitali';
-$LDEmRelease='Nxjerrje nga spitali per emergjence/urgjence';
-$LDAlertNoName='Shkruani emrin tuaj.';
-$LDAlertNoDate='Shkruani te dhenat ne formatin: dd.mm.VVVV.';
-$LDAlertNoTime='Shkruani orarin ne formatin: OO.mm.';
-$LDPatDataFolder='Kartela e te dhenave te pacientit';
+$LDSave='Save';
+$LDNurse='Nurse';
+$LDYesSure='Yes, I\'m sure. Discharge the patient.';
+$LDFtpAttempted='Attempted to connect to the FTP server.<br>The FTP server may be down or busy. If this problem persists for a long time, contact the EDP dept.';
+$LDFtpNoLink='FTP login failed';
+$LDJustReleased='The patient was discharged. Click \'Close\' to go back to ward\'s occupancy list.';
+$LDReleaseType='Discharge type';
+$LDRegularRelease='Regular discharge';
+$LDSelfRelease='Patient left hospital on his own will';
+$LDEmRelease='Emergency discharge';
+$LDAlertNoName='Please enter your name.';
+$LDAlertNoDate='Enter the date in this format:';
+$LDAlertNoTime='Enter the time in the ff: format: HH.mm.';
+$LDPatDataFolder='Patient\'s charts folder';
 
-$LDClose='Mbyll';
-$LDHelp='Ndihme';
+$LDClose='Close';
+$LDHelp='Help';
 $LDReset='Reset';
 
-$LDNoLabReport='Asnje raport mjekesor i laboratorit i disponueshem!';
-$LDFeverCurve='Grafike dhe terapi';
-//$LDNursingReport='Raport mjekesor infermieristik';
-$LDNursingReport='Kartela Infermierore';
-$LDDocsPrescription='Udhezime mjekesore';
-//$LDNursingPlan='Plani pers. infermieristik';
-$LDNursingPlan='Plani pers. inferm.';
-$LDRootData='Te dhena themelore';
-$LDReports='Raporte mjekesore';
-//$LDReports='Raporte mjekesore te laboratorit';
-$LDLabReports='Raporte mjekesore te labor.';
-//$LDLabReports='Raporte mjekesore te laboratorit';
-$LDPhotos='Pamje diagnostike';
-$LDChkUpRequests='Kerkim analizash';
-$LDPleaseSelect='Zgjidhni tipin e analizave diagnostike qe kerkoni';
-$LDSetColorRider='Selektoni per te caktuar ose anulluar kodin e ngjyres';
-$LDDiet='Dieta';
-$LDBackDay='Kthehu prapa nje dite. (butoni i djathte per te vendosur nje date)';
-$LDFwdDay='Ec perpara nje dite. (butoni i djathte per te vendosur nje date)';
-$LDClk2PlanDiet='Selektoni dieten per kete dite';
+$LDNoLabReport='No lab reports available!';
+$LDFeverCurve='Fever chart';
+$LDNursingReport='Nursing report';
+$LDDocsPrescription='Physician\'s orders';
+$LDNursingPlan='Nursing plan';
+$LDRootData='Root data';
+$LDReports='Diagnostic reports';
+$LDLabReports='Lab reports';
+$LDPhotos='Photos';
+$LDChkUpRequests='Test request';
+$LDPleaseSelect='Select diagnostic test request';
+$LDSetColorRider='Click to set or reset color rider';
+$LDDiet='Diet plan';
+$LDBackDay='Move back 1 day. (right click to enter any date)';
+$LDFwdDay='Move forward 1 day. (right click to enter any date)';
+$LDClk2PlanDiet='Click to plan the diet for this day';
 
-$LDAllergy='Alergji';
-$LDDiagnosisTherapy='Diagnoze / Terapi';
-$LDBpTemp='Temperature/Presion arterial';
-$LDPtAtgEtc='Urinimi dhe jashteqitja';
-$LDAntiCoag='Antikoagulant';
-$LDExtraNotes='Shenime';
-$LDMedication='Terapi';
-$LDIvPort='Injeksione';
-$LDPtAtgEtcTxt='Urinimi dhe jashteqitja';
-$LDExtraNotesTxt='Shenime, LOT, etj.';
+$LDAllergy='Allergy';
+$LDDiagnosisTherapy='Diagnosis / Therapy';
+$LDBpTemp='Temperature/Blood pressure';
+$LDPtAtgEtc='PT,Atg,etc';
+$LDAntiCoag='Anticoagulant(s)';
+$LDExtraNotes='Notes';
+$LDMedication='Medication';
+$LDIvPort='Intravenous';
+$LDPtAtgEtcTxt='Physical therapy, Anti thrombosis, etc.';
+$LDExtraNotesTxt='Notes, LOT, Charge nr., etc.';
 
-$LDBp='Presion arterial';
+$LDBp='Blood pressure';
 $LDTemp='Temperature';
 
-$LDClk2Enter='Selektoni per te shkruar ~tagword~';
-$LDClk2EnterDaily='Selektoni per te shkruar ~tagword~ per kete dite';
-$LDSpecialsExtra='Shenime, diagnoza plotesuese';
-$LDClk2PlanDaily='Selektoni per te shkruar ~tagword~ per kete dite';
-$LDInputWin='Dritarja e input-it';
+$LDClk2Enter='Click to enter ~tagword~';
+$LDClk2EnterDaily='Click to enter ~tagword~ for this day';
+$LDSpecialsExtra='Notes, extra diagnoses';
+$LDClk2PlanDaily='Click to plan ~tagword~ for this day';
+$LDInputWin='Input window';
 $LDFullDayName=array(
-                                                                        'E diel',
-                                                                        'E hene',
-                                                                        'E marte',
-                                                                        'E merkure',
-                                                                        'E enjte',
-                                                                        'E premte',
-                                                                        'E shtune',
-                                                                        'E diel',
-                                                                        'E hene',
-                                                                        'E marte',
-                                                                        'E merkure',
-                                                                        'E enjte',
-                                                                        'E premte',
-                                                                        'E shtune',
-                                                                        'E diel'
-                                                                        );
-$LDCurrentEntry='ILAC DHE DOZIM';
-$LDEntryPrompt='Shkruani ketu te dhenat e reja';
-$LDConfirmSetDate='Deshironi te impostoni \'+dayID+\' ?';
-$LDStartDate='data fillestare';
-$LDEndDate='data perfundimtare';
-$LDShowCurveDate='Shfaq kuren ne pjesen e meposhtme';
-$LDDailyDiagTher='Glicemi - Insuline U.I.';
-$LDAntiCoagTxt='Antikoagulant - raport ditore';
-$LDSFormatPrompt='Shkruani ketu te dhenat e reja ose modifikoni ato ekzistuese:<br><font size=1 > maksimumi 16 karaktere.</font>';
-$LDDosage='Orari i planifikuar i dhenies';
-$LDColorMark='Thekso me';
-$LDNormal='E ndryshme';
-$LDAntibiotic='Orale';
-$LDDialytic='Intramuskul';
-$LDHemolytic='Nen lekure';
-$LDIntravenous='Intravenoze';
-$LDTodaysReport='Administruar, ora';
-$LDNoMedicineYet='Nuk ka akoma medikamente!';
-$LDEffectReport='Raporti mbi efikasitetin';
-$LDFrom='Nga';
-$LDTo='';
-$LDPage='Faqja';
-$LDSignature='Firma';
-$LDInsertSymbol='Shkruani kete simbol ne fillim.';
-$LDInsertDate='Shkruani daten e sotem';
-$LDInsertTimeNow='Shkruani oren';
-$LDSpecialNotice='Shenime te vecanta';
-$LDAddendum='Te dhena plotesuese';
-$LDDiagnosticReport='Raport mjekesore diagnostik';
-$LDDoctor='Mjek';
+									'Sunday',
+									'Monday',
+									'Tuesday',
+									'Wednesday',
+									'Thursday',
+									'Friday',
+									'Saturday',
+									'Sunday',
+									'Monday',
+									'Tuesday',
+									'Wednesday',
+									'Thursday',
+									'Friday',
+									'Saturday',
+									'Sunday'
+									);
+$LDCurrentEntry='Current entries';
+$LDEntryPrompt='Please enter the new information here';
+$LDConfirmSetDate='Do you want to set the "+dayID+" ?';
+$LDStartDate='Start date';
+$LDEndDate='End date';
+$LDShowCurveDate='Show the curve with the following';
+$LDDailyDiagTher='Therapy, report, nursingplan, etc.';
+$LDAntiCoagTxt='Anticoagulants - daily report';
+$LDSFormatPrompt='Enter the new information here or edit the current entries:<br><font size=1 > Maximum 16 characters.</font>';
+$LDDosage='Dosage';
+$LDColorMark='Color mark with';
+$LDNormal='Normal';
+$LDAntibiotic='Antibiotic';
+$LDDialytic='Dialytic';
+$LDHemolytic='Hemolytic';
+$LDIntravenous='Intravenous';
+$LDTodaysReport='Today\'s report';
+$LDNoMedicineYet='There is no medication yet!';
+$LDEffectReport='Effectivity report';
+$LDFrom='From';
+$LDTo='to';
+$LDPage='Page';
+$LDSignature='Sign';
+$LDInsertSymbol='Place this symbol at the start.';
+$LDInsertDate='Insert today\'s date';
+$LDInsertTimeNow='Insert the time now';
+$LDSpecialNotice='Special notice';
+$LDAddendum='Additional information';
+$LDDiagnosticReport='Diagnostic report';
+$LDDoctor='Doctor';
 $LDPassword='Password';
-$LDCallBackPhone='Per te dhenat telefonike';
+$LDCallBackPhone='For inquiries call';
 
-$LDPicShots='Fotografi';
-$LDClk2Preview='Selektoni per paraqitjen';
-$LDPreview='Paraqitje';
-$LDShotDate='Data e fotografise';
-$LDShotNr='Fotografia nr.';
+$LDPicShots='Shots';
+$LDClk2Preview='Click to preview';
+$LDPreview='Preview';
+$LDShotDate='Shot date';
+$LDShotNr='Shot nr.';
 
-$LDLastName='Mbiemer';
-$LDName='Emer';
-$LDBirthDate='Datelindja';
-$LDLockThisBed='Blloko kete shtrat';
-$LDClk2LockBed='Selekto per te bllokuar kete shtrat';
-$LDAssignOcc='Cakto personin qe ze shtratin';
-$LDSearchFound='Kerkimi ka gjetur <font color=red><b>~nr~</b></font> pacienta.';
-$LDAssign2Bed='Cakto kete pacient si zenes te shtratit';
-$LDSend='Dergo';
-$LDSendLater='Dergo me vone';
-$LDReqTest='Analize diagnostike e kerkuar';
-$LDSpeedTest='Analize urgjente.';
-$LDDiagnosticTest='Kerko analizen diagnostike';
-$LDRelayResult='Raporto diagnozat ne numrin';
+$LDLastName='Family name';
+$LDName='Name';
+$LDBirthDate='Birthdate';
+$LDLockThisBed='Lock this bed';
+$LDClk2LockBed='Click to lock this bed';
+$LDAssignOcc='Assign occupant';
+$LDSearchFound='Search found <font color=red><b>~nr~</b></font> patients.';
+$LDAssign2Bed='Assign this patient as occupant';
+$LDSend='Send';
+$LDSendLater='Send later';
+$LDReqTest='Requested diagnostic test';
+$LDSpeedTest='Urgent test.';
+$LDDiagnosticTest='Request diagnostic test';
+$LDRelayResult='Relay diagnosis at Phone/Beeper';
 $LDSpeedCut='Express cut.';
-$LDClk4Phone='Selekto per te shfaqur numrin e telefonit/cercapersone';
-$LDHour='Ora';
+$LDClk4Phone='Click to show Phone/Beeper info';
+$LDHour='Hour';
 
-$LDClkHere='Selekto ketu';
+$LDClkHere='Please click here.';
 
-$LDNoOccList='Nuk ka lista te meparshme';
-$LDFromWard='per pavijonet';
-$LDWithinLast='gjate te fundit ';
-$LDDays=' dite.';
+$LDNoOccList='There is no available past';
+$LDFromWard='list from ward ';
+$LDWithinLast='within the last ';
+$LDDays=' days.';
 $LDAvailable='';
 
-$LDQueries='Pyetje Mjekut';
-$LDChangeWard='Modifikim pavijoni';
-$LDChangeBed='Modifikim shtrati';
+$LDQueries='Inquiries to the Physician';
+$LDChangeWard='Change of ward';
+$LDChangeBed='Change of bed';
+$LDPatientDied='Death of patient';
 
-$LDPatientDied='Vdekje e pacientit';
+$LDFollowing='following';
+$LDErrorDuplicateBed='Error: Duplicate bed occupancy record in table nursing_station_patients';
+$LDNoFound='Search found no patient.';
 
-$LDFollowing='pasues';
-$LDErrorDuplicateBed='Errore: shtrat i zene ne tabelen nursing_station_patients';
-$LDNoFound='Asnje pacient i gjetur.';
-
-$LDNoWardsYet='Nuk ka ende pavijone.';
-$LDClk2CreateWard='Per te krijuar nje, selektoni ketu.';
-
+$LDNoWardsYet='There are no nursing wards yet.';
+$LDClk2CreateWard='To create a ward, please click here.';
 /* 2002-10-12 EL */
-$LDToCreateNewList='Per te krijuar nje liste te re';
-$LD_ddpMMpyyyy='dd.mm.vvvv';
-$LD_yyyyhMMhdd='vvvv-mm-dd';
-$LD_MMsddsyyyy='mm/dd/vvvv';
+$LDToCreateNewList='To create a new list';
+$LD_ddpMMpyyyy='dd.mm.yyyy';
+$LD_yyyyhMMhdd='yyyy-mm-dd';
+$LD_MMsddsyyyy='mm/dd/yyyy';
 /* 2002-10-23 EL*/
-$LDQueryDoctor='Kerkesa mjekut';
-$LDDoctorInfo='Kerkesa nga mjeku';
-$LDDiagnosticsReport='Diagnoza te arritura';
-$LDInfusionTherapy='Program/terapi infuzioni';
-$LDMonitorFluidDischarge='Kontrolli i shkarkimit te lengjeve';
-$LDBloodProgram='Analize/trasfuzion gjaku';
-$LDVitalStatistics='Parametra jetesore';
-$LDAntibioticsProgram='Program/terapi antibiotikesh';
-$LDAnticoagProgram='Antikoagulant';
-$LDSpecialCare='Kura te vecanta, parametra statistike';
-$LDTestConsultRequested='Analiza/konsultime te kerkuara';
-$LDNurseReport='Raport infermieristik (i ri)';
-$LDDaily='Ditore';
-$LDSaveChanges='Ruaj modifikimet';
+$LDQueryDoctor='Query to doctor';
+$LDDoctorInfo='Doctor\'s info, instructions';
+$LDDiagnosticsReport='Diagnostics report arrived';
+$LDInfusionTherapy='Infusion therapy/program';
+$LDMonitorFluidDischarge='Fluids discharge/Diuretic';
+$LDBloodProgram='Blood sample/transfusion';
+$LDVitalStatistics='Vital statistics';
+$LDAntibioticsProgram='Antibiotics therapy/program';
+$LDAnticoagProgram='Anticoagulants';
+$LDSpecialCare='Special care, vital statistics';
+$LDTestConsultRequested='Test/Consult requested';
+$LDNurseReport='New nurse report';
+$LDDaily='Daily';
+$LDSaveChanges='Save changes';
 /* 2002-12-07*/
-$LDNoDiagReport='Asnje diagnoze e gatshme.';
+$LDNoDiagReport='No diagnostic report available.';
 /* 2003-03-23 EL */
-$LDNursesList='Lista e personelit infermiermieror';
-$LDNursesListTxt='Shfaq, krijo dhe modifiko listen e infermiereve';
+$LDNursesList='Nurses\' List';
+$LDNursesListTxt='List, View, Create, & Edit Nurses\' List';
 /* 2003-04-18 */
-$LDInsurance='Ngarkim i pjesshem Sig.Sh.';
-$LDPrivate='Ngarkim i plote Sig.Sh.';
-$LDSelfPay='Vetngarkim';
+$LDInsurance='Health Fund';
+$LDPrivate='Private';
+$LDSelfPay='Self pay';
 /* 2003-04-21 EL */
-$LDRoom='Dhoma';
-$LDAdm_Nr='Nr. pran.';
-$LDStatus='Gjendja';
-$LDInWard='ne pavijonin';
+$LDRoom='Room';
+$LDAdm_Nr='Adm.Nr.';
+$LDStatus='Status';
+$LDInWard='In Ward';
 /* 2003-04-23 EL */
-$LDWard_ID='kodi i pavijonit';
-$LDNoSpecChars='Nuk mund te shkruhen karaktere te vecanta';
+$LDWard_ID='Ward ID';
+$LDNoSpecChars='No special characters allowed';
 /* 2003-04-24 EL*/
-$LDTemporaryCloseWard='Mbyll perkohesisht pavijonin';
-$LDIrreversiblyCloseWard='Mbyll perfundimisht pavijonin';
-$LDSureTemporaryClose='Deshironi me te vertete te mbyllni pavijonin?';
-$LDSureIrreversibleClose='Deshironi me te vertete te mbyllni pavijonin ne menyre te PAKTHYESHME?';
+$LDTemporaryCloseWard='Temporarily close this ward';
+$LDIrreversiblyCloseWard='Irreversibly close this ward';
+$LDSureTemporaryClose='Are you sure you want to close this ward temporarily?';
+$LDSureIrreversibleClose='Are you sure you want to close this ward IRREVERSIBLY ?';
 /* Do not translate the ~str~ , it will be replaced with the ward's name by the program */
-$LDWardNoClose='Pavijoni ~str~ nuk mund te mbyllet sepse nuk ka ende paciente.<br>Nxjerr ose sposto pacientet perpara se te riprovoni.';
-$LDBackToWardProfile='Kthehuni tek profili i pavijonit';
-$LDShowWardOccupancy='Shfaq listen e zenies se shtreterve te pavijonit';
-$LDTemporaryClosed='Perkohesisht i mbyllur';
-$LDReopenWard='Rihap pavijonin';
-$LDSureReopenWard='Deshironi me te vertete te hapni perseri pavijonin?';
-$LDShortDescription='Pershkrim i shkurter';
-$LDRoomShortDescription='Pershkrim i shkurte i salles';
-$LDRoomNotCreated='Nuk ka ende salla';
+$LDWardNoClose='The ~str~ ward  cannot be closed because patients are still admitted.<br>You need to discharge all patients from the ward before closing it.';
+$LDBackToWardProfile='To go back to ward\'s profile';
+$LDShowWardOccupancy='To display the ward\'s occupancy list';
+$LDTemporaryClosed='Temporary closed';
+$LDReopenWard='Reopen this ward';
+$LDSureReopenWard='Are you sure you want to reopen this ward?';
+$LDShortDescription='Short description';
+$LDRoomShortDescription='Room\'s short description';
+$LDRoomNotCreated='Rooms not yet created';
 /* 2003-05-10 EL */
-$LDChangeRoom='Ndryshim salle';
+$LDChangeRoom='Change of room';
 /*2003-06-14 EL*/
-$LDNrOfBedsRoom='Num. i shtreterve te dhomes';
-$LDIsNotANumber='Nuk eshte nje numer i vlefshem';
-$LDWaitingList='Lista e\'pritjes';
-$LDShowAll='Shfaq te gjitha'; # <= Pls. keep translation very short
-$LDShowWardOnly='Shfaq pavijonin'; # <= Pls. keep translation very short
-$LDTransferToBed='Transfero ne nje shtrat tjeter ne kete pavijon';
-$LDTransferToWard='Transfero ne nje pavijon tjeter';
-$LDShowBeds='Shfaq shtreterit';
-$LDTransferPatient='Transferim pacienti';
-$LDYellowPaper='Anamneza';
-$LDTarget='Ekzaminimi Objektiv';
+$LDNrOfBedsRoom='The nr. of beds of room';
+$LDIsNotANumber='is not a valid number';
+$LDWaitingList='Waiting list';
+$LDShowAll='Show all'; # <= Pls. keep translation very short
+$LDShowWardOnly='Show ward only'; # <= Pls. keep translation very short
+$LDTransferToBed='Transfer to another bed in this ward';
+$LDTransferToWard='Transfer to another ward';
+$LDShowBeds='Show beds';
+$LDTransferPatient='Transfer patient';
+$LDYellowPaper='Yellow paper';
+$LDTarget='Target';
 $LDDRG='DRG';
-$LDFinanceType='Lloji i pageses';
+$LDFinanceType='Insurance';
 #2003-08-02 EL
-$LDOutToInpatient='Ndrysho gjendjen e shtrimit te pacientit te shtruara';
-$LDTransferClinic='Transferim ne kliniken ose departementin';
-$LDClinic='Klinika';
-$LDOwnPatient='Qe i perkasin pacientit';
-$LDNonOwnPatient='Qe nuk i perkasin pacientit';
+$LDOutToInpatient='Change admission status to inpatient';
+$LDTransferClinic='Transfer to clinic or department';
+$LDClinic='Clinic';
+$LDOwnPatient='This ward\'s patient';
+$LDNonOwnPatient='Not this ward\'s patient';
 # 2003-08-04 EL
-$LDShowClinicOnly='Vetem kete klinike';
+$LDShowClinicOnly='This clinic only';
 # 2003-09-16 EL
-$LDAdmissionData='Te dhena per shtrimin';
-$LDShowPhoto='Shfaq fotografi';
-$LDOpenWardManagement='Pavijone/reparte te hapura per \'administrim';
-/* Gjergj Sheldija 11.08.2007 */
-$IO_title='Bilanci Hidrik';
-$DDC_title='Terapia Diabetike';
-$TC_title='Pozita dhe Levizshmeria';
-$NOC_title='Glasgow Coma Scale';
+$LDAdmissionData='Admission data';
+$LDShowPhoto='Show photo';
+$LDOpenWardManagement='Open ward for administration';
 ?>

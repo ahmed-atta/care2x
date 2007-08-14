@@ -1,8 +1,8 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 $LDDiagnosticTest='Diagnostic Test Order';
-$LDHospitalName='Jorgji Karamitri';
-$LDCentralLab='Laboratori Kryesor';
+$LDHospitalName='Central Hospital';
+$LDCentralLab='Central Laboratory';
 $LDLabel='Label';
 $LDRoomNr='Room-Nr.';
 $LDSamplingTime='Sampling Time';
@@ -50,14 +50,14 @@ $LDEmergencyProgram='The violet shaded fields belong to emergency program';
 $LDPhoneOrder=' = must be confirmed by phone';
 /* 2002-09-03 EL */							  
 $LDSearchPatient='Search patient';
-$LDPlsSelectPatientFirst='Ju lutemi kerkoni perpara emrin e pacientit.';
+$LDPlsSelectPatientFirst='Please search for the patient first.';
 /* 2002-09-11 EL */
 $LDPendingTestRequest='Pending Test Request';
 /* 2002-10-14 EL */
 $LDDone='It\'s done! Move the form to the archive';
 
 
-
+/gjergji
 //used to calculate the max_rows per column
 $SQLStatementNum = "SELECT id,name,status FROM care_test_param WHERE status NOT IN ('deleted','hidden') ORDER BY name"; 
 $rowNum = $db->Execute($SQLStatementNum);
@@ -69,29 +69,32 @@ $max_row = round($numRows / 7);
 $SQLStatement = "SELECT id , name FROM care_test_param WHERE group_id = -1 AND status NOT IN ('deleted','hidden') ORDER BY sort_nr";
 $top_rs = $db->Execute($SQLStatement);
 
-
-$column=0;
-$row=-1;
-while ($categories = $top_rs->FetchRow()) {
-	$row++;
-	if($row>=$max_row) {
-		$column++;
-		$row=0;
-	}
-	$LD_Elements[$column][$row]['type'] = 'top';
-	$LD_Elements[$column][$row]['value'] = strtoupper($categories['name']);
-	$LD_Elements[$column][$row]['id'] = $categories['id'];
-	$SQLStatementParam = "SELECT id,name,status FROM care_test_param WHERE group_id = '".$categories['id']."' AND status NOT IN ('deleted','hidden') ORDER BY name"; 
-	$row_rs = $db->Execute($SQLStatementParam);
-	while ($parameters = $row_rs->FetchRow()) {
+if(!empty($top_rs) && isset($top_rs)) {
+	$column=0;
+	$row=-1;
+	while ($categories = $top_rs->FetchRow()) {
 		$row++;
 		if($row>=$max_row) {
 			$column++;
 			$row=0;
 		}
-	$LD_Elements[$column][$row]['type'] = 'normal';
-	$LD_Elements[$column][$row]['value'] = $parameters['name'];
-	$LD_Elements[$column][$row]['id'] = $parameters['id'];
+		$LD_Elements[$column][$row]['type'] = 'top';
+		$LD_Elements[$column][$row]['value'] = strtoupper($categories['name']);
+		$LD_Elements[$column][$row]['id'] = $categories['id'];
+		$SQLStatementParam = "SELECT id,name,status FROM care_test_param WHERE group_id = '".$categories['id']."' AND status NOT IN ('deleted','hidden') ORDER BY name"; 
+		$row_rs = $db->Execute($SQLStatementParam);
+		if(!empty($row_rs) && isset($row_rs)) {
+			while ($parameters = $row_rs->FetchRow()) {
+				$row++;
+				if($row>=$max_row) {
+					$column++;
+					$row=0;
+				}
+			$LD_Elements[$column][$row]['type'] = 'normal';
+			$LD_Elements[$column][$row]['value'] = $parameters['name'];
+			$LD_Elements[$column][$row]['id'] = $parameters['id'];
+			}
+		}
 	}
 }
 ?>

@@ -404,10 +404,10 @@ $mark_v_offset=1; /* Vertical offset of the marking blocks */
 	
 	/* Now Create the form elements */
 
-  $tdcount=0; /* $tdcount limits the number of  columns (7) for test elements */
+  //$tdcount=0; /* $tdcount limits the number of  columns (7) for test elements */
   
   $sy=$top_border+($vdiv*16); /* Set the first row's y-dim */
-  $tdcount=0;
+ // $tdcount=0;
   $sx=$left_border;
   for($i=0;$i<=$max_row;$i++) {
 	if($i>$max_row) $len=5; else $len=6;  
