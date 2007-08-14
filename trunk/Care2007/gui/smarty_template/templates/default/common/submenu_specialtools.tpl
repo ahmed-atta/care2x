@@ -7,8 +7,6 @@
  				<TBODY class="submenu">
 					{{$LDPlugins}}
 					{{include file='common/submenu_row_spacer.tpl'}}
-					{{$LDBilling}}
-					{{include file='common/submenu_row_spacer.tpl'}}
 					{{$LDPersonellMngmnt}}
 					{{include file='common/submenu_row_spacer.tpl'}}
 					{{$LDInsuranceCoMngr}}
