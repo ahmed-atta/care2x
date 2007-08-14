@@ -5,7 +5,6 @@
 		<TD>
 			<TABLE cellSpacing=1 cellPadding=3>
  				<TBODY class="submenu">
-					{{$LDPlugins}}
 					{{include file='common/submenu_row_spacer.tpl'}}
 					{{$LDPersonellMngmnt}}
 					{{include file='common/submenu_row_spacer.tpl'}}
@@ -14,8 +13,6 @@
 					{{$LDAddressMngr}}
 					{{include file='common/submenu_row_spacer.tpl'}}
 					{{$LDPhotoLab}}
-					{{include file='common/submenu_row_spacer.tpl'}}
-					{{$LDWebCam}}
 					{{include file='common/submenu_row_spacer.tpl'}}
 					{{$LDStandbyDuty}}
 					{{include file='common/submenu_row_spacer.tpl'}}
@@ -35,8 +32,7 @@
 					{{include file='common/submenu_row_spacer.tpl'}}
 					{{$LDAccessPw}}
 					{{include file='common/submenu_row_spacer.tpl'}}
-					{{$LDNewsgroup}}
-
+					
 				</TBODY>
 			</TABLE>
 		</TD>
