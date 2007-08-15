@@ -30,17 +30,9 @@
 		</td>
 	</tr>
 	
-	{{if $sCopyright}}
-	<tr valign=top >
-		<td bgcolor={{$bot_bgcolor}}>
-			{{if not $bHideCopyright}}
-				{{include file="common/copyright.tpl"}}
-			{{/if}}
-		</td>
-	</tr>
-	{{/if}}
+
 
 	</tbody>
  </table>
 
-{{include file="common/footer.tpl"}}
+
