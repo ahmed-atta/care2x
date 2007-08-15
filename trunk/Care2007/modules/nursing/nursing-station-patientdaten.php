@@ -498,7 +498,7 @@ function rx(){
 		</tr>
 		<tr bgcolor="#696969" ><td colspan="3" ><nobr>
 		<table cellpadding=0 width=100%>
-		<tr><td bgcolor=333333><font color=white><b>Grafiket<b></font></td></tr>
+		<tr><td bgcolor=333333><font color=white><b>Charts<b></font></td></tr>
 		<tr><td>
 		<table cellpadding=3><tr><td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-inout.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$IO_title.'"></td>
 		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-ddc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$DDC_title.'"></td>
@@ -542,8 +542,9 @@ function rx(){
 			</select>';
 		}
 */
-		if($edit){		
-			echo '<table cellpadding=3><tr><td><select
+		if($edit){
+		
+			echo '<table cellpadding=3><tr><td><select 
 			name="konsiltyp" size="1" onChange=makekonsil(this.value)>
 			<option value="">'.$LDChkUpRequests.'</option>';
 
