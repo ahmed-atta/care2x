@@ -4,6 +4,7 @@ require_once realpath(dirname(__FILE__)).'/Installer.php';
 $smarty = new InstallerSmarty();
 
 $GLOBALS['INSTALLER']['SMARTY'] =& $smarty;
+
 $output = '';
 if (!isset($run_output)) {
 	$run_output = '';

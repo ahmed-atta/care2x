@@ -21,11 +21,11 @@ class PHPMagicQuotes extends BaseTest{
 			$this->result = INSTALLER_TEST_FAIL;
 			return $this->result;
 		}
-	}
+	} 
 	
 	function perform(){	
 	
-		if(get_magic_quotes_gpc()=="1"){
+		if(get_magic_quotes_gpc() == 1){
 			$actual_state="On";
 		}else{
 			$actual_state="Off";

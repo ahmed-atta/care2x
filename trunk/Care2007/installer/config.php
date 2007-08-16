@@ -75,7 +75,7 @@ $version_detection_class = 'VersionCheck';
 /*
  * Writable directory for smarty compile dir
  */
-$writable_dir = '/tmp';
+$writable_dir = 'c:\tmp';
 if (!file_exists($writable_dir)) {
 	$writable_dir = realpath(dirname(__FILE__).'/tmp');
 }
@@ -83,6 +83,6 @@ if (!file_exists($writable_dir)) {
 /*
  * Template directory
  */
-//$template_dir = realpath(dirname(__FILE__)).'/templates';
+$template_dir = realpath(dirname(__FILE__)).'/templates';
 
 ?>
