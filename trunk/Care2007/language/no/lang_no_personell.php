@@ -1,5 +1,5 @@
 <?php
-LDPlsFindPersonFirst='Please find the person first';
+$LDPlsFindPersonFirst='Please find the person first';
 $LDSearchPersonell='Search a personnel';
 $LDPersonRegister='Person Registration';
 $LDShortID='Short ID';

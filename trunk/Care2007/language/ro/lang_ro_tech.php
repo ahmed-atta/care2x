@@ -18,7 +18,7 @@ $LDRepabotActivateTxt='Sistem de receptie automata a cererilor de interventie';
 $LDRepairReport='Raport reparatie';
 $LDRepairReportTxt='Report final reparatie.';
 $LDReportsArchive='Arhiva repoarte';
-$LDReportsArchiveTxt='Cautare in arhiva repoarte tehnice'
+$LDReportsArchiveTxt='Cautare in arhiva repoarte tehnice';
 #'Research in the technical reports archives';
 $LDQuestions='Cereri , Intrebari';
 #'Inquiry, Questions';
@@ -152,7 +152,7 @@ $LDInfoCat=array(
 						'Sistemul telefonic',
 						'Apa, Auxiliare'
 						);
-$LDNoFound='Nu am gasit nimic corespunzator cheii de cautare. <br>Incercati va rog din nou introducand mai multa informatie.'
+$LDNoFound='Nu am gasit nimic corespunzator cheii de cautare. <br>Incercati va rog din nou introducand mai multa informatie.';
 #'I found nothing that corresponds to the search keyword. <br>Please try it again and enter some more information.';
 /* 2003-02-11*/
 $LDCancel='Abandon';

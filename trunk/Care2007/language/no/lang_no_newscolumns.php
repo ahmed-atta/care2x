@@ -122,6 +122,6 @@ $LDArticle='Artikkel';
 $LDWrittenOn='På';
 $LDWrittenBy='Skrevet av';
 $LDNewsDummy=array(1=>'første',2=>'andre',3=>'tredje',4=>'fjerde');
-$LDClk2Compose='Klik her for å skrive...'
+$LDClk2Compose='Klik her for å skrive...';
 $LDClk2Write='Click here to start the editor';
 ?>
