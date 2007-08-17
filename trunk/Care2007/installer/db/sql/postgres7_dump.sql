@@ -5456,7 +5456,6 @@ INSERT INTO "care_menu_main" VALUES (13,82,'Directory','LDDirectory','modules/ph
 INSERT INTO "care_menu_main" VALUES (14,70,'Tech Support','LDTechSupport','modules/tech/technik.php',1,'','','20030922232015','0');
 INSERT INTO "care_menu_main" VALUES (15,72,'System Admin','LDEDP','modules/system_admin/edv.php',1,'','','20030922232015','0');
 INSERT INTO "care_menu_main" VALUES (16,75,'Intranet Email','LDIntraEmail','modules/intranet_email/intra-email-pass.php',1,'','','20030922232015','0');
-INSERT INTO "care_menu_main" VALUES (17,80,'Internet Email','LDInterEmail','modules/nocc/index.php',1,'','','20030922232015','0');
 INSERT INTO "care_menu_main" VALUES (18,85,'Special Tools','LDSpecials','main/spediens.php',1,'','','20030922232015','0');
 INSERT INTO "care_menu_main" VALUES (19,99,'Login','LDLogin','main/login.php',1,'','','20030922232015','0');
 INSERT INTO "care_menu_main" VALUES (20,7,'Appointments','LDAppointments','modules/appointment_scheduler/appt_main_pass.php',1,'','','20030922232015','20030405000145');

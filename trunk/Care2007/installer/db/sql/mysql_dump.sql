@@ -3841,11 +3841,10 @@ INSERT INTO care_menu_main VALUES ('10', '50', 'Radiology', 'LDRadiology', 'modu
 INSERT INTO care_menu_main VALUES ('11', '55', 'Pharmacy', 'LDPharmacy', 'modules/pharmacy/apotheke.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('12', '60', 'Medical Depot', 'LDMedDepot', 'modules/med_depot/medlager.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('13', '65', 'Directory', 'LDDirectory', 'modules/phone_directory/phone.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('14', '70', 'Billing', 'LDBilling', 'modules/simpleinvoices/index.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('15', '75', 'Tech Support', 'LDTechSupport', 'modules/tech/technik.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('16', '80', 'System Admin', 'LDEDP', 'modules/system_admin/edv.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('17', '85', 'Intranet Email', 'LDIntraEmail', 'modules/intranet_email/intra-email-pass.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('18', '90', 'Special Tools', 'LDSpecials', 'main/spediens.php', '1', '', '', 20030922232015, 00000000000000);
+INSERT INTO care_menu_main VALUES ('14', '70', 'Tech Support', 'LDTechSupport', 'modules/tech/technik.php', '1', '', '', 20030922232015, 00000000000000);
+INSERT INTO care_menu_main VALUES ('15', '72', 'System Admin', 'LDEDP', 'modules/system_admin/edv.php', '1', '', '', 20030922232015, 00000000000000);
+INSERT INTO care_menu_main VALUES ('16', '75', 'Intranet Email', 'LDIntraEmail', 'modules/intranet_email/intra-email-pass.php', '1', '', '', 20030922232015, 00000000000000);
+INSERT INTO care_menu_main VALUES ('18', '85', 'Special Tools', 'LDSpecials', 'main/spediens.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('19', '90', 'Login', 'LDLogin', 'main/login.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('20', '7', 'Appointments', 'LDAppointments', 'modules/appointment_scheduler/appt_main_pass.php', '1', '',  '', 20030922232015, 20030405000145);
 
@@ -4604,93 +4603,10 @@ INSERT INTO care_unit_measurement VALUES (15, 5, 'celsius', 'Celsius', 'LDCelsiu
 INSERT INTO care_unit_measurement VALUES (16, 1, 'dl', 'deciliter', 'LDDeciliter', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_unit_measurement VALUES (17, 1, 'cl', 'centiliter', 'LDCentiliter', 'metric', 0, '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_unit_measurement VALUES (18, 1, 'µl', 'microliter', 'LDMicroliter', 'metric', 0, '', '', 00000000000000, '', 00000000000000);
-#--------------------------
-DROP TABLE IF EXISTS `care_users`;
 
-CREATE TABLE `care_users` (
-  `name` varchar(60) collate latin1_general_ci NOT NULL,
-  `login_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `password` varchar(255) collate latin1_general_ci default NULL,
-  `personell_nr` int(10) unsigned NOT NULL default '0',
-  `lockflag` tinyint(3) unsigned default '0',
-  `permission` text collate latin1_general_ci NOT NULL,
-  `exc` tinyint(1) NOT NULL default '0',
-  `s_date` date NOT NULL default '0000-00-00',
-  `s_time` time NOT NULL default '00:00:00',
-  `expire_date` date NOT NULL default '0000-00-00',
-  `expire_time` time NOT NULL default '00:00:00',
-  `dept_nr` text collate latin1_general_ci NOT NULL COMMENT 'the department in wich the user is allowed to enter / view',
-  `status` varchar(15) collate latin1_general_ci NOT NULL,
-  `history` text collate latin1_general_ci NOT NULL,
-  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (`login_id`),
-  KEY `login_id` (`login_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
-
-
-
-
-CREATE TABLE `care_yellow_paper` (
-  `encounter_nr` bigint(20) NOT NULL,
-  `personell_name` varchar(20) collate latin1_general_ci default NULL,
-  `location_id` varchar(20) collate latin1_general_ci default NULL,
-  `history` text collate latin1_general_ci,
-  `create_id` varchar(20) collate latin1_general_ci default NULL,
-  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
-  `sunto_anamnestico` text collate latin1_general_ci,
-  `stato_presente` text collate latin1_general_ci,
-  `altezza` double(15,3) default NULL,
-  `peso` double(15,3) default NULL,
-  `norm` varchar(20) collate latin1_general_ci default NULL,
-  `dati_urine` varchar(20) collate latin1_general_ci default NULL,
-  `dati_sangue` varchar(20) collate latin1_general_ci default NULL,
-  `dati_altro` varchar(20) collate latin1_general_ci default NULL,
-  `diagnosi` text collate latin1_general_ci,
-  `terapia` text collate latin1_general_ci,
-  `padre` text collate latin1_general_ci,
-  `madre` text collate latin1_general_ci,
-  `fratelli` text collate latin1_general_ci,
-  `coniuge` text collate latin1_general_ci,
-  `figli` text collate latin1_general_ci,
-  `paesi_esteri` text collate latin1_general_ci,
-  `abitazione` text collate latin1_general_ci,
-  `lavoro_pregresso` text collate latin1_general_ci,
-  `lavoro_presente` text collate latin1_general_ci,
-  `lavoro_attuale` text collate latin1_general_ci,
-  `ambiente_lavoro` text collate latin1_general_ci,
-  `gas_lavoro` text collate latin1_general_ci,
-  `tossiche_lavoro` text collate latin1_general_ci,
-  `conviventi` text collate latin1_general_ci,
-  `prematuro` varchar(4) collate latin1_general_ci default NULL,
-  `eutocico` varchar(4) collate latin1_general_ci default NULL,
-  `fisiologici_normali` varchar(4) collate latin1_general_ci default NULL,
-  `fisiologici_tardivi` varchar(4) collate latin1_general_ci default NULL,
-  `mestruazione` text collate latin1_general_ci,
-  `gravidanze` text collate latin1_general_ci,
-  `militare` text collate latin1_general_ci,
-  `alcolici` varchar(20) collate latin1_general_ci default NULL,
-  `caffe` varchar(20) collate latin1_general_ci default NULL,
-  `fumo` varchar(20) collate latin1_general_ci default NULL,
-  `droghe` varchar(20) collate latin1_general_ci default NULL,
-  `sete` varchar(20) collate latin1_general_ci default NULL,
-  `alvo` varchar(20) collate latin1_general_ci default NULL,
-  `diuresi` varchar(20) collate latin1_general_ci default NULL,
-  `anamnesi_remota` text collate latin1_general_ci,
-  `anamnesi_prossima` text collate latin1_general_ci,
-  `nr` bigint(20) NOT NULL auto_increment,
-  `modify_id` text collate latin1_general_ci,
-  `modify_time` timestamp NOT NULL default '0000-00-00 00:00:00' on update CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`nr`),
-  UNIQUE KEY `nr` (`nr`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
-#--------------------------
-# added charts begin
-#--------------------------
+#
+# begin new chart 07/28/2007
+#
 
 DROP TABLE IF EXISTS `care_encounter_custom_ddc`;
 CREATE TABLE IF NOT EXISTS `care_encounter_custom_ddc` (
@@ -4754,11 +4670,9 @@ CREATE TABLE IF NOT EXISTS `care_encounter_custom_tc` (
   `position` varchar(32) NOT NULL,
   PRIMARY KEY  (`nr`)
 ) TYPE=MyISAM ;
-
-#--------------------------
-# added charts end
-#--------------------------
-
+#
+# end new chart 07/28/2007
+#
 
 #
 # Dumping data for table care_version
