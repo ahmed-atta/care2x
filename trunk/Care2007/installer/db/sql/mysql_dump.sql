@@ -4631,61 +4631,8 @@ CREATE TABLE `care_users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 
-DROP TABLE IF EXISTS `care_test_param`;
 
-CREATE TABLE `care_test_param` (
-  `nr` smallint(5) unsigned NOT NULL auto_increment,
-  `group_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `name` varchar(35) collate latin1_general_ci NOT NULL,
-  `id` varchar(50) collate latin1_general_ci NOT NULL,
-  `sort_nr` tinyint(4) NOT NULL default '0',
-  `msr_unit` varchar(15) collate latin1_general_ci NOT NULL,
-  `status` varchar(25) collate latin1_general_ci NOT NULL,
-  `median` varchar(20) collate latin1_general_ci default NULL COMMENT 'for males',
-  `hi_bound` varchar(20) collate latin1_general_ci default NULL,
-  `lo_bound` varchar(20) collate latin1_general_ci default NULL,
-  `hi_critical` varchar(20) collate latin1_general_ci default NULL,
-  `lo_critical` varchar(20) collate latin1_general_ci default NULL,
-  `hi_toxic` varchar(20) collate latin1_general_ci default NULL,
-  `lo_toxic` varchar(20) collate latin1_general_ci default NULL,
-  `median_f` varchar(20) collate latin1_general_ci default NULL COMMENT '_ f for females',
-  `hi_bound_f` varchar(20) collate latin1_general_ci default NULL,
-  `lo_bound_f` varchar(20) collate latin1_general_ci default NULL,
-  `hi_critical_f` varchar(20) collate latin1_general_ci default NULL,
-  `lo_critical_f` varchar(20) collate latin1_general_ci default NULL,
-  `hi_toxic_f` varchar(20) collate latin1_general_ci default NULL,
-  `lo_toxic_f` varchar(20) collate latin1_general_ci default NULL,
-  `median_n` varchar(20) collate latin1_general_ci default NULL COMMENT '_n for neonatal from 0 to 1 month',
-  `hi_bound_n` varchar(20) collate latin1_general_ci default NULL,
-  `lo_bound_n` varchar(20) collate latin1_general_ci default NULL,
-  `hi_critical_n` varchar(20) collate latin1_general_ci default NULL,
-  `lo_critical_n` varchar(20) collate latin1_general_ci default NULL,
-  `hi_toxic_n` varchar(20) collate latin1_general_ci default NULL,
-  `lo_toxic_n` varchar(20) collate latin1_general_ci default NULL,
-  `median_y` varchar(20) collate latin1_general_ci default NULL COMMENT '_y for children form 1 month to 12 months',
-  `hi_bound_y` varchar(20) collate latin1_general_ci default NULL,
-  `lo_bound_y` varchar(20) collate latin1_general_ci default NULL,
-  `hi_critical_y` varchar(20) collate latin1_general_ci default NULL,
-  `lo_critical_y` varchar(20) collate latin1_general_ci default NULL,
-  `hi_toxic_y` varchar(20) collate latin1_general_ci default NULL,
-  `lo_toxic_y` varchar(20) collate latin1_general_ci default NULL,
-  `median_c` varchar(20) collate latin1_general_ci default NULL COMMENT '_c for children form 1 to 14 years',
-  `hi_bound_c` varchar(20) collate latin1_general_ci default NULL,
-  `lo_bound_c` varchar(20) collate latin1_general_ci default NULL,
-  `hi_critical_c` varchar(20) collate latin1_general_ci default NULL,
-  `lo_critical_c` varchar(20) collate latin1_general_ci default NULL,
-  `hi_toxic_c` varchar(20) collate latin1_general_ci default NULL,
-  `lo_toxic_c` varchar(20) collate latin1_general_ci default NULL,
-  `method` varchar(255) collate latin1_general_ci default NULL,
-  `history` text collate latin1_general_ci NOT NULL,
-  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (`nr`,`group_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=665 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
-DROP TABLE IF EXISTS `care_test_groups`;
 
 CREATE TABLE `care_yellow_paper` (
   `encounter_nr` bigint(20) NOT NULL,
