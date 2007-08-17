@@ -9,17 +9,17 @@ $_a_1_admissionwrite = 'Accettazione pazienti, lettura e scrittura';
 $_a_2_admissionread =  'Accettazione pazienti sola lettura';
 
 // Group start
-$title2 = 'Postazioni infermieri';
-$_a_1_nursingstationallwrite = 'Postazioni infermieri lettura e scrittura';
-$_a_2_nursingstationallread =  'Postazioni infermieri sola lettura';
-$_a_1_nursingdutyplanwrite = 'Postazioni infermieri planning lettura e scrittura';
-$_a_2_nursingdutyplanread =  'Postazioni infermieri planning sola lettura';
+$title2 = 'Presidio Infermieristico';
+$_a_1_nursingstationallwrite = 'Presidio Infermieristico lettura e scrittura';
+$_a_2_nursingstationallread =  'Presidio Infermieristico sola lettura';
+$_a_1_nursingdutyplanwrite = 'Presidio Infermieristico planning lettura e scrittura';
+$_a_2_nursingdutyplanread =  'Presidio Infermieristico planning sola lettura';
 // Group start
 $title3 = 'Test, Diagnostica e Consulenze';
-$_a_1_diagnosticsresultwrite = 'Diagnostics results read  & write';
-$_a_3_diagnosticsresultread = 'Diagnostics results sola lettura';
-$_a_2_diagnosticsreceptionwrite = 'Diagnostics Request reception, lettura e scrittura';
-$_a_3_diagnosticsrequest = 'Diagnostics Request, request only';
+$_a_1_diagnosticsresultwrite = 'Diagnostica lettura e scrittura';
+$_a_3_diagnosticsresultread = 'Diagnostica sola lettura';
+$_a_2_diagnosticsreceptionwrite = 'Richieste Diagnostica, lettura e scrittura';
+$_a_3_diagnosticsrequest = 'Richieste Diagnostica, sola lettura';
 
 // Group start
 $title4 = 'Laboratorio';
@@ -27,17 +27,17 @@ $_a_1_labresultswrite = 'Laboratorio lettura e scrittura';
 $_a_2_labresultsread = 'Laboratorio sola lettura';
 
 // Group start
-$title5 = 'Operating Room';
-$_a_1_opdoctorallwrite = 'All OP docs (surgeon) lettura e scrittura';
-$_a_2_opnurseallwrite = 'All OP nursing docs lettura e scrittura';
-$_a_3_opnurseallread = 'All OP sola lettura';
-$_a_1_opnursedutyplanwrite = 'OP Nurses\' duty plan lettura e scrittura';
-$_a_2_opnursedutyplanread = 'OP Nurses\' duty plan sola lettura';
+$title5 = 'Blocco Operatorio';
+$_a_1_opdoctorallwrite = 'Blocco Operatorio lettura e scrittura';
+$_a_2_opnurseallwrite = 'Blocco Operatorio infermieri lettura e scrittura';
+$_a_3_opnurseallread = 'Blocco Operatorio sola lettura';
+$_a_1_opnursedutyplanwrite = 'Blocco Operatorio infermieri planning lettura e scrittura';
+$_a_2_opnursedutyplanread = 'Blocco Operatorio infermieri planning sola lettura';
 
 // Group start
-$title6 = 'Radiology';
-$_a_1_radiowrite = 'Radiology display, diagnosis lettura e scrittura';
-$_a_2_radioread = 'Radiology display  only, diagnosis sola lettura';
+$title6 = 'Radiologia';
+$_a_1_radiowrite = 'Radiologia, diagnosi lettura e scrittura';
+$_a_2_radioread = 'Radiologia, diagnosi sola lettura';
 
 // Group start
 $title7 = 'Medocs';
@@ -45,39 +45,39 @@ $_a_1_medocswrite = 'Medocs lettura e scrittura';
 $_a_2_medocsread = 'Medocs sola lettura';
 
 // Group start
-$title8 = 'Pharmacy';
-$_a_1_pharmadbadmin = 'Pharmacy database admin';
-$_a_2_pharmareception = 'Pharmacy Orderbot activate, receive and process orders';
-$_a_3_pharmaorder = 'Pharmacy send order and sola lettura';
-$_a_4_pharmaread = 'Pharmacy read order only, no send';
+$title8 = 'Farmacia';
+$_a_1_pharmadbadmin = 'Amministrazione Farmacia';
+$_a_2_pharmareception = 'Farmacia, recevi e invia ordini';
+$_a_3_pharmaorder = 'Farmacia invia ordini e sola lettura';
+$_a_4_pharmaread = 'Farmacia sola lettura';
 
 // Group start
-$title9 = 'Medical Depot';
-$_a_1_meddepotdbadmin = 'Medical Depot database admin';
-$_a_2_meddepotreception = 'Medical Depot Medibot activate, receive and process orders';
-$_a_3_meddepotorder = 'Medical Depot send order and sola lettura';
-$_a_4_meddepotread = 'Medical Depot read order only, no send';
+$title9 = 'Deposito Materiali';
+$_a_1_meddepotdbadmin = 'Amministrazione Deposito Materiali';
+$_a_2_meddepotreception = 'Deposito Materiali, recevi e invia ordini';
+$_a_3_meddepotorder = 'Deposito Materiali invia ordini e sola lettura';
+$_a_4_meddepotread = 'Deposito Materiali sola lettura';
 
 // Group start
-$title_docs = 'Doctors';
-$_a_1_doctorsdutyplanwrite = 'Doctors\' duty plan lettura e scrittura';
-$_a_2_doctorsdutyplanread = 'Doctors\' duty plan sola lettura';
+$title_docs = 'Medici';
+$_a_1_doctorsdutyplanwrite = 'Medici planning lettura e scrittura';
+$_a_2_doctorsdutyplanread = 'Medici planning sola lettura';
 
 // Group start
-$title_foto = 'Photo Studio';
-$_a_1_photowrite = 'Photos upload, read and write';
-$_a_2_photoread = 'Photos display & sola lettura';
+$title_foto = 'Foto Studio';
+$_a_1_photowrite = 'Foto Studio, lettura e scrittura';
+$_a_2_photoread = 'Foto Studio, sola lettura';
 
 // Group start
-$title_tech = 'Technical support';
-$_a_1_techreception = 'Qbot & Repabot activate, receive, read and write';
+$title_tech = 'Supporto tecnico';
+$_a_1_techreception = 'Qbot & Repabot attivi, recevi, lettura e scrittura';
 
 // Group start
-$title_pdo = 'Personell Duty Organizer';
-$_a_1_timestampallwrite = 'Personell timestamp (all areas) manage, lettura e scrittura';
-$_a_2_timestampallread = 'Personell timestamp sola lettura';
-$_a_1_dutyplanallwrite = 'Personell Duty/Leave plan (all areas) manage, lettura e scrittura';
-$_a_2_dutyplanallread = 'Personell Duty/Leave plan sola lettura';
+$title_pdo = 'Turni personale';
+$_a_1_timestampallwrite = 'Turni personale, lettura e scrittura';
+$_a_2_timestampallread = 'Turni personale sola lettura';
+$_a_1_dutyplanallwrite = 'Turni personale/ferie plan (all areas) manage, lettura e scrittura';
+$_a_2_dutyplanallread = 'Turni personale/ferie plan sola lettura';
 
 // Group start
 $title_bill = 'Billing';
@@ -92,16 +92,16 @@ $_a_3_billlabread = 'Billing (laboratory) sola lettura';
 
 // Group start
 $title_news = 'News';
-$_a_1_newsallwrite = 'News (all areas) write';
-$_a_2_newscafewrite = 'Cafe news, menu, prices write';
-$_a_2_newsallmoderatedwrite = 'News (all areas, except menu & prices) moderated write';
+$_a_1_newsallwrite = 'Scrivi News';
+$_a_2_newscafewrite = 'Scrivi Cafe news, menu, prezzi';
+$_a_2_newsallmoderatedwrite = 'News (Tutte le aree, menu, prezzi) scrivi';
 
 // Group start
-$title_dir = 'Telephone Directory';
-$_a_1_teldirwrite = 'Telephone & Beeper information write';
+$title_dir = 'Elenco telefonico';
+$_a_1_teldirwrite = 'Gestione completa';
 
 // Group start
 $title_hxpserver = 'HXP Server';
-$_a_1_hxpserver = 'HXP Server access';
+$_a_1_hxpserver = 'Accesso HXP Server';
 
 ?>

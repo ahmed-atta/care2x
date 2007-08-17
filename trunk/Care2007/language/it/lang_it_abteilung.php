@@ -9,7 +9,7 @@ $LDDayTxt='Giorno';
 $dept=array('Medicina generale',
 					'Chirurgia di emergenza',
 					'Chirurgia plastica',
-					'ENT',
+					'Otorinolaringoiatria',
 					'Oftalmologia',
 					'Anatomia Patologica',
 					'Ginecologia',
@@ -17,14 +17,14 @@ $dept=array('Medicina generale',
 					'Medicina interna',
 					'Oncologia',
 					'Servizi tecnici',
-					'Intermediate Care Unit',
+					'Terapia Semiintensiva',
 					'Terapia intensiva',
 					'Laboratorio clinico',
 					'Pronto Soccorso',
-					'Day hospital generale',
-					'Sonografia',
-					'Diagnostica nucleare',
-					'Day hospital di medicina interna');
+					'Day hospital oncologie',
+					'Radiologia',
+					'Medicina nucleare',
+					'Day hospital');
 					
 					
 $target=array('dept_generalsurgery',
@@ -48,7 +48,7 @@ $target=array('dept_generalsurgery',
 					'inmed');
 					
 
-$LDBackTxt='Back';
+$LDBackTxt='Indietro';
 
 $LDOpenDays=array('Lunedì',
 					'Martedì',
