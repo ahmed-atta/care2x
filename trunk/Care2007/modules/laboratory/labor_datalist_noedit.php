@@ -13,17 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-//gjergji :
-//data diff for the dob
-function dateDiff($dformat, $endDate, $beginDate){
-	$date_parts1=explode($dformat, $beginDate);
-	$date_parts2=explode($dformat, $endDate);
-	$start_date=gregoriantojd($date_parts1[1], $date_parts1[2], $date_parts1[0]);
-	$end_date=gregoriantojd($date_parts2[1], $date_parts2[2], $date_parts2[0]);
-	return $end_date - $start_date;
-}
-
-//$lang_tables=array('chemlab_groups.php','chemlab_params.php','prompt.php');
+$lang_tables=array('chemlab_groups.php','chemlab_params.php','prompt.php');
 define('LANG_FILE','lab.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -77,11 +67,11 @@ if($encounter=&$enc_obj->getBasic4Data($encounter_nr)) {
 		//$cache=''; # empty to force redraw
 		if(empty($cache)){
 
-			//include($root_path.'include/inc_labor_param_group.php');
+			include($root_path.'include/inc_labor_param_group.php');
 						
-			//if(!isset($parameterselect)||empty($parameterselect)) $parameterselect='priority';
+			if(!isset($parameterselect)||empty($parameterselect)) $parameterselect='priority';
 
-			//$parameters=$paralistarray[$parameterselect];					
+			$parameters=$paralistarray[$parameterselect];					
 			//$paramname=$parametergruppe[$parameterselect];
 			# Merge the records to common date key
 			$records=array();
@@ -89,11 +79,12 @@ if($encounter=&$enc_obj->getBasic4Data($encounter_nr)) {
 			while($buffer=&$recs->FetchRow()){
 				//$records[$buffer['job_id']]=&$buffer;
 				# Prepare the values
-				$records[$buffer['job_id']]=&unserialize($buffer['serial_value']);
+				$records[$buffer['job_id']][$buffer['group_id']]=&unserialize($buffer['serial_value']);
 				$tdate[$buffer['job_id']]=&$buffer['test_date'];
-				$ttime[$buffer['job_id']]=&$buffer['test_time'];				
+				$ttime[$buffer['job_id']]=&$buffer['test_time'];
 			}
 		}
+		
 	}else{
 		if($nostat) header("location:".$root_path."modules/laboratory/labor-nodatafound.php".URL_REDIRECT_APPEND."&user_origin=$user_origin&ln=".strtr($patient['name_last'],' ','+')."&fn=".strtr($patient['name_first'],' ','+')."&bd=".formatDate2Local($patient['date_birth'],$date_format)."&encounter_nr=$encounter_nr&nodoc=labor&job_id=$job_id&parameterselect=$parameterselect&allow_update=$allow_update&from=$from");
 		 	else header("location:".$root_path."modules/nursing/nursing-station-patientdaten-nolabreport.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$encounter_nr&nodoc=labor&user_origin=$user_origin");
@@ -187,7 +178,6 @@ function prep2submit(){
 		 }
 	}
 	if(d.params.value!=''){
-		//alert(d.params.value);
 		d.submit();
 	}else{
 		alert("<?php echo $LDCheckParamFirst ?>");
@@ -207,7 +197,7 @@ $smarty->append('JavaScript',$sTemp);
 $smarty->assign('LDCaseNr',$LDCaseNr);
 $smarty->assign('LDLastName',$LDLastName);
 $smarty->assign('LDName',$LDName);
-$smarty->assign('LDBday',$LDBday);
+$smarty->assign('LDBday',LDBday);
 
 # Assign patient basic data
 $smarty->assign('encounter_nr',$encounter_nr);
@@ -230,6 +220,7 @@ if(empty($cache)){
 
 	# Get the number of colums
 	$cols=sizeof($records);
+
 	$cache= '
 		<tr bgcolor="#dd0000" >
 		<td class="va12_n"><font color="#ffffff"> &nbsp;<b>'.$LDParameter.'</b>
@@ -265,69 +256,33 @@ if(empty($cache)){
 		</tr>';
 
 	# Display the values
-$tracker=0;
-$ptrack=0;
-$displayedParam=array();
-while (list($job_id,$parametrat)=each($records)) {
+	$tracker=0;
+	$ptrack=0;
+
+	while(list($group_id,$param_group)=each($paralistarray)){
+	
 		$grpflag=true;
-		while(list($param,$pname)=each($parametrat)){
+
+		while(list($param,$pname)=each($param_group)){
+
 			$flag=false;
+
 			$txt='';
-			$param_name = $lab_obj->TestParamsDetails($param);
+
 			# Reset the array
 			reset($tdate);
 			while(list($jid,$xval)=each($tdate)){
+
 				$txt.= '
 				<td class="j">&nbsp;';
-				if(!empty($records[$jid][$param])) {
-					$dobDiff = dateDiff("-", date("Y-m-d"), $patient['date_birth']);
-					switch ($dobDiff) {
-					case ( ($dobDiff >= 1) and ($dobDiff <= 30 ) ) :
-							if($tp[$param]['hi_bound_n']&&$records[$jid][$param]>$tp[$param]['hi_bound_n']){
-								$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($records[$jid][$param]).'</font>';
-							}elseif($records[$jid][$param]<$tp[$param]['lo_bound_n']){
-								$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($records[$jid][$param]).'</font>';
-							}else{
-								$txt.=htmlspecialchars($records[$jid][$param]);
-							}
-							break;
-					case ( ($dobDiff >= 31) and ($dobDiff <= 360 ) ) :
-							if($tp[$param]['hi_bound_y']&&$records[$jid][$param]>$tp[$param]['hi_bound_y']){
-								$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($records[$jid][$param]).'</font>';
-							}elseif($records[$jid][$param]<$tp[$param]['lo_bound_y']){
-								$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($records[$jid][$param]).'</font>';
-							}else{
-								$txt.=htmlspecialchars($records[$jid][$param]);
-							}
-							break;
-					case ( $dobDiff >= 361) and ($dobDiff <= 5040 ) :
-							if($tp[$param]['hi_bound_c']&&$records[$jid][$param]>$tp[$param]['hi_bound_c']){
-								$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($records[$jid][$param]).'</font>';
-							}elseif($records[$jid][$param]<$tp[$param]['lo_bound_c']){
-								$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($records[$jid][$param]).'</font>';
-							}else{
-								$txt.=htmlspecialchars($records[$jid][$param]);
-							}
-							break;	
-					case $dobDiff > 5040 :
-						if($patient['sex']=='m')
-							if($tp[$param]['hi_bound']&&$records[$jid][$param]>$tp[$param]['hi_bound']){
-								$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($records[$jid][$param]).'</font>';
-							}elseif($records[$jid][$param]<$tp[$param]['lo_bound']){
-								$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($records[$jid][$param]).'</font>';
-							}else{
-								$txt.=htmlspecialchars($records[$jid][$param]);
-							}	
-						elseif($patient['sex']=='f')	
-							if($tp[$param]['hi_bound_f']&&$records[$jid][$param]>$tp[$param]['hi_bound_f']){
-								$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($records[$jid][$param]).'</font>';
-							}elseif($records[$jid][$param]<$tp[$param]['lo_bound_f']){
-								$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($records[$jid][$param]).'</font>';
-							}else{
-								$txt.=htmlspecialchars($records[$jid][$param]);
-							}																				
-							break;
-					}							
+				if(!empty($records[$jid][$group_id][$param])) {
+					if($tp[$param]['hi_bound']&&$records[$jid][$group_id][$param]>$tp[$param]['hi_bound']){
+						$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($records[$jid][$group_id][$param]).'</font>';
+					}elseif($records[$jid][$group_id][$param]<$tp[$param]['lo_bound']){
+						$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($records[$jid][$group_id][$param]).'</font>';
+					}else{
+						$txt.=htmlspecialchars($records[$jid][$group_id][$param]);
+					}
 					$flag=true;
 				}
 				$txt.='&nbsp;</td>';
@@ -345,50 +300,28 @@ while (list($job_id,$parametrat)=each($records)) {
 				# Create the front colum boxes
 				//$txx='<tr bgcolor=';
 				//if($toggle) { $txx.= '"#ffdddd"';}else { $txx.= '"#ffeeee"';}
-				if(!in_array($param_name['id'],$displayedParam)) {
-					//gjergji : stupid idea for dealing with doubled values to show
-					$displayedParam[$ptrack]=$param_name['id'];
-					$txx='<tr class=';
-					if($toggle) { $txx.= '"wardlistrow1"';}else { $txx.= '"wardlistrow2"';}
-					$txx.= '>
-					<td class="va12_n"> &nbsp;<nobr><a href="#">'.$param_name['name'].'</a></nobr>
-					</td>
-					<td class="a10_b" >&nbsp;';
-				//gjergji : find the values i want to show
-/*				$dobDiff = dateDiff("-", date("Y-m-d"), $patient['date_birth']);
-				switch ($dobDiff) {
-					case ( ($dobDiff >= 1) and ($dobDiff <= 30 ) ) :
-						if($param_name['lo_bound_n']&&$param_name['hi_bound_n']) $txt.=$param_name['hi_bound_n'].'<p><br>&nbsp;'.$param_name['lo_bound_n'];
-						break;
-					case ( ($dobDiff >= 31) and ($dobDiff <= 360 ) ) :
-						if($param_name['lo_bound__y']&&$param_name['hi_bound_y']) $txt.=$param_name['hi_bound_y'].'<p><br>&nbsp;'.$param_name['lo_bound_y'];
-						break;
-					case ( $dobDiff >= 361) and ($dobDiff <= 5040 ) :
-						if($param_name['lo_bound_c']&&$param_name['hi_bound_c']) $txt.=$param_name['hi_bound_c'].'<p><br>&nbsp;'.$param_name['lo_bound_c'];
-						break;
-					case $dobDiff > 5040 :
-						if($patient['sex']=='m')
-							if($param_name['lo_bound']&&$param_name['hi_bound']) $txt.=$param_name['hi_bound'].'<p><br>&nbsp;'.$param_name['lo_bound'];
-						elseif($patient['sex']=='f')
-							if($param_name['lo_bound_f']&&$param_name['hi_bound_f']) $txt.=$param_name['hi_bound_f'].'<p><br>&nbsp;'.$param_name['lo_bound_f'];	
-						break;
-				}*/						
-					//if($param_name['lo_bound']&&$param_name['hi_bound']) $txx.=$param_name['lo_bound'].' - '.$param_name['hi_bound'];
-					$txx.='</td>
-					<td class="a10_b" >&nbsp;'.$param_name['msr_unit'].'</td>';
-					# Print the final row
-	
-					$cache.=$txx.$txt.'<td>
-					<input type="checkbox" name="tk" value="'.$param_name['id'].'">
-					</td></tr>';
-					//gjergji : had to move it here, or it will have a wrong value
-					$ptrack++;
-					$tracker++;
-					$toggle=!$toggle;					
-				}
+				$txx='<tr class=';
+				if($toggle) { $txx.= '"wardlistrow1"';}else { $txx.= '"wardlistrow2"';}
+				$txx.= '>
+				<td class="va12_n"> &nbsp;<nobr><a href="#">'.$pname.'</a></nobr>
+				</td>
+				<td class="a10_b" >&nbsp;';
+				if($tp[$param]['lo_bound']&&$tp[$param]['hi_bound']) $txx.=$tp[$param]['lo_bound'].' - '.$tp[$param]['hi_bound'];
+				$txx.='</td>
+				<td class="a10_b" >&nbsp;'.$tp[$param]['msr_unit'].'</td>';
+				# Print the final row
+
+				$cache.=$txx.$txt.'<td>
+				<input type="checkbox" name="tk" value="'.$tracker.'">
+				</td></tr>';
+
+
+				$ptrack++;
+				$toggle=!$toggle;
 			}
+			$tracker++;
 		}
-}
+	}
 	$cache.='
 		<input type="hidden" name="colsize" value="'.$cols.'">
 		<input type="hidden" name="params" value="">

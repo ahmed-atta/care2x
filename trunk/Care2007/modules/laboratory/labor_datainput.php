@@ -1,5 +1,5 @@
 <?php
-define('ROW_MAX',2); # define here the maximum number of rows for displaying the parameters
+define('ROW_MAX',15); # define here the maximum number of rows for displaying the parameters
 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
@@ -12,11 +12,11 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-//$lang_tables=array('chemlab_groups.php','chemlab_params.php');
+$lang_tables=array('chemlab_groups.php','chemlab_params.php');
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-
+//$db->debug=true;
 if(!$encounter_nr) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 
 if(!isset($user_origin)||empty($user_origin)) $user_origin='lab';
@@ -25,13 +25,20 @@ if(!isset($user_origin)||empty($user_origin)) $user_origin='lab';
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $encounter=new Encounter($encounter_nr);
 
-///$db->debug=1;
+//$db->debug=1;
 
 $thisfile='labor_datainput.php';
 
 # Create lab object
 require_once($root_path.'include/care_api_classes/class_lab.php');
 $lab_obj=new Lab($encounter_nr);
+
+require($root_path.'include/inc_labor_param_group.php');
+						
+if(!isset($parameterselect)||$parameterselect=='') $parameterselect='priority';
+
+$parameters=&$paralistarray[$parameterselect];
+$paramname=&$parametergruppe[$parameterselect];
 
 # Load the date formatter
 include_once($root_path.'include/inc_date_format_functions.php');
@@ -40,23 +47,17 @@ if($mode=='save'){
 	
 	$nbuf=array();
 	# Prepare parameter values and serialize
-	//gjergji :
-	// chaged the serialization for the lab 
-	while (list($z,$y)=each($HTTP_POST_VARS)) {
-		
-		if($result_tests = $lab_obj->GetTestsToDo($job_id))
-			while($row_tests = $result_tests->FetchRow())	{
-				parse_str($row_tests['parameters'], $arr_tasks);
-				if(isset($arr_tasks[$z])&&!empty($arr_tasks[$z])){
-				 	$nbuf[$z]=$y;
-				}
+	while(list($x,$v)=each($parameters))
+	{
+		if(isset($HTTP_POST_VARS[$x])&&!empty($HTTP_POST_VARS[$x])){
+		 $nbuf[$x]=$HTTP_POST_VARS[$x];
 		}
 	}
-
 	$dbuf['group_id']=$parameterselect;
 	$dbuf['serial_value']=serialize($nbuf);
 	$dbuf['job_id']=$job_id;
 	$dbuf['encounter_nr']=$encounter_nr;
+	//$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 	if($allow_update){
 		
 		$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
@@ -108,6 +109,11 @@ if($mode=='save'){
 	}
 # end of if(mode==save)
 } else { #If mode is not "save" then get the basic personal data 
+
+	# If parameter group has changed do not allow update
+//	 if(isset($changegroup) && $changegroup){
+//	 	$allow_update=FALSE;
+//	}
 	
 	# Create encounter object
 	//include_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -135,11 +141,9 @@ if($mode=='save'){
 	//echo $lab_obj->getLastQuery();
 			
 	# Get the test test groups
-	$tgroups=&$lab_obj->TestActiveGroups();
+	$tgroups=&$lab_obj->TestGroups();
 	# Get the test parameter values
-	//gjergji : take all the params for this group...
-	//$tparams=&$lab_obj->TestParams($parameterselect);
-	$tparams=&$lab_obj->TestParams();
+	$tparams=&$lab_obj->TestParams($parameterselect);
 
 	# Set the return file
 	if(isset($job_id)&&$job_id){
@@ -243,7 +247,7 @@ $smarty->append('JavaScript',$sTemp);
 $smarty->assign('LDCaseNr',$LDCaseNr);
 $smarty->assign('LDLastName',$LDLastName);
 $smarty->assign('LDName',$LDName);
-$smarty->assign('LDBday',$LDBday);
+$smarty->assign('LDBday',LDBday);
 $smarty->assign('LDJobIdNr',$LDJobIdNr);
 $smarty->assign('LDExamDate',$LDExamDate);
 
@@ -303,7 +307,7 @@ Information<?php if ($errornum>1) echo "en"; ?>!
 <?php 
 $paramnum=sizeof($parameters);
 
-$pcols=ROW_MAX;
+$pcols=ceil($paramnum/ROW_MAX);
 
 echo '<tr>';
 
@@ -320,38 +324,33 @@ echo '
 <tr>';
 $rowlimit=0;
 //$count=$paramnum;
-//gjergji : show only the needed params
 while($tp=$tparams->FetchRow()){
-	if($result_tests = $lab_obj->GetTestsToDo($job_id))
-		if($row_tests = $result_tests->FetchRow())	{
-			parse_str($row_tests['parameters'], $arr_tasks);
-			if(isset($arr_tasks[$tp['id']]) && !empty($arr_tasks[$tp['id']])) {
 
-						echo '<td';
-						echo ' bgcolor="#ffffee" class="a10_b"><nobr>&nbsp;<b>';
-						echo $tp['name'];
-						echo '</b>&nbsp;</nobr>';
-						echo '</td>
-								<td class="a10_b">';
-					
-						echo '<input name="'.$tp['id'].'" type="text" size="8" ';
-					
-						echo 'value="';
-						if(isset($pdata[$tp['id']])&&!empty($pdata[$tp['id']])) echo trim($pdata[$tp['id']]);
-					
-						echo '">'.$tp['msr_unit'].'&nbsp;
-								</td>';
-					
-						$rowlimit++;
-						if($rowlimit==$pcols){
-							echo '
-							</tr><tr>';
-							$rowlimit=0;
-						}
-						else $arr_tasks[$row_tests['id']];
-			}
+	echo '<td';
 
-		}
+	echo ' bgcolor="#ffffee" class="a10_b"><nobr>&nbsp;<b>';
+	if(isset($parameters[$tp['id']])&&!empty($parameters[$tp['id']])) echo $parameters[$tp['id']];
+		else echo $tp['name'];
+	
+	echo '</b>&nbsp;</nobr>';
+
+	echo '</td>
+			<td class="a10_b">';
+
+	echo '<input name="'.$tp['id'].'" type="text" size="8" ';
+
+	echo 'value="';
+	if(isset($pdata[$tp['id']])&&!empty($pdata[$tp['id']])) echo trim($pdata[$tp['id']]);
+
+	echo '">'.$tp['msr_unit'].'&nbsp;
+			</td>';
+
+	$rowlimit++;
+	if($rowlimit==$pcols){
+		echo '
+		</tr><tr>';
+		$rowlimit=0;
+	}
  }
  
  # Assign parameter output
