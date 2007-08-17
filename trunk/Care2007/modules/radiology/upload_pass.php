@@ -27,7 +27,7 @@ switch($target){
 						$buf=$LDUploadDicom; 
 						$errbuf=$LDUploadDicom;
 						break;
-	case 'view: $fileforward='view_person_search.php'.$append; 
+	case 'view': $fileforward='view_person_search.php'.$append; 
 					$lognote='Dicom view ok';
 						$buf=$LDViewDicom; 
 						$errbuf=$LDViewDicom;

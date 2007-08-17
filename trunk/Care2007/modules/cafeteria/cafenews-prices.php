@@ -109,7 +109,7 @@ echo '
 	</td>
   </tr>
 </table>
-<?php endif ?> 
+<?php endif; ?> 
 
  <p><br><a href="<?php echo $returnfile ?>"><img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?> align=absmiddle> <?php echo $LDBack2CafeNews ?></a>
 </body>

@@ -113,7 +113,7 @@ if(!$currency_short||!$currency_long)
   </tr>
 </table>
 <hr>
-<?php endif ?>
+<?php endif; ?>
 
 <?php echo $LDProdGroup ?>: <FONT  SIZE=3 COLOR="#000099"><?php echo $groupname; ?><font>
 <p>
@@ -144,7 +144,7 @@ for($i=0;$i<$maxitem;$i++) {
  <td><p><br>
  <?php if($mode!='saveok') : ?>
 	<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
- <?php endif ?>
+ <?php endif; ?>
 <input type="image" <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>
   </td>  <td align=right><p><br>
 	<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>

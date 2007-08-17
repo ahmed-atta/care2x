@@ -62,7 +62,7 @@ if(is_object($OR_info)){
 
 <img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><font class="prompt">
 <b><?php echo str_replace("~station~",strtoupper($station),$LDStationExists) ?></b></font><p>
-<?php endif ?>
+<?php endif; ?>
 <?php echo $LDEnterAllFields ?>
 
 <form action="or_new.php" method="post" name="newstat">

@@ -320,7 +320,7 @@ if ($regError) echo $regError;
 </form>
  
 
-<?php endif ?>
+<?php endif; ?>
 <?php if (!$newuser)echo '
 <p><br>
 <a href="'.$thisfile.''.URL_APPEND.'&newuser=1">'.$LDNewReg.' <img '.createComIcon($root_path,'bul_arrowgrnsm.gif','0','bottom').'></a>

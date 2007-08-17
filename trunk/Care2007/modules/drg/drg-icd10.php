@@ -120,7 +120,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
  <script language="javascript" >
 //window.parent.opener.location.href='<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=saveok&enc_nr=$pn&edit=$edit&op_nr=$opnr&dept_nr=$dept_nr&saal=$oprm&pyear=$y&pmonth=$m&pday=$d" ?>';
 </script>
-<?php endif ?>
+<?php endif; ?>
 </HEAD>
 
 <BODY 
@@ -138,7 +138,7 @@ else  echo 'topmargin=2 marginheight=2';
 <!--  <input type="button" value="<?php echo $LDSearch4ICD10 ?>" onClick="javascript:openICDsearch('','0')">&nbsp;
  <input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openICDsearch('','0')">
  -->
-<?php endif ?>
+<?php endif; ?>
 <table border=0 width=100%>
   <tr>
     <td width=100% valign="top">
@@ -152,7 +152,7 @@ else  echo 'topmargin=2 marginheight=2';
  		<td><font size=2 color=#ffffff><b><?php echo $LDBy ?></b></td>
 <?php if($display=="composite") : ?>
  		<td><font size=2 color=#ffffff>&nbsp;</td>
-<?php endif ?>
+<?php endif; ?>
     	</tr>
 
 <?php

@@ -456,7 +456,7 @@ echo'
 <input type="hidden" name="nx" value="">
 
 </form>
-<?php endif ?>
+<?php endif; ?>
 
 <div align=right>
 &nbsp;&nbsp;

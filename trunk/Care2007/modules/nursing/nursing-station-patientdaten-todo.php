@@ -370,7 +370,7 @@ if($cnt){
 		<td valign="top"><?php echo $LDSignature ?>:<br><input type=text size="3" name="author2" onFocus=this.select() value="<?php if(!$saved) echo $author2; ?>">
 		</td>
 		</tr>
-<?php endif ?>
+<?php endif; ?>
 		</table>
 
 <p>
@@ -381,12 +381,12 @@ if($cnt){
 <td >
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> width=99 height=24 alt="<?php echo $LDSave ?>">
 </td>
-<?php endif ?>
+<?php endif; ?>
 <td>
 <!-- <?php if($edit) : ?>
 <a href="javascript:resetinput()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?>  width=156 height=24 alt="<?php echo $LDReset ?>"></a>
 &nbsp;&nbsp;
-<?php endif ?> -->
+<?php endif; ?> -->
 
 <!-- Uncomment the following line if you want to show the cancel button at the bottom of the page -->
 <!--<a href="<?php //echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>-->

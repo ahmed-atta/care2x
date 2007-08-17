@@ -75,7 +75,7 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <?php if($artopt!=2) : ?>
     <td valign=top><img <?php echo createLDImgSrc($root_path,'x-blank.gif','0') ?> id="headpic"><br>
   </td>
-<?php endif ?>
+<?php endif; ?>
     <td class="submenu" colspan=2><FONT color="#0000cc" size=3><b><?php echo $LDTitleTag ?>:</b><br>
 	<font size=1><?php echo $LDTitleMaxNote ?><br>
 	<input type="text" name="newstitle" size=50 maxlength=255><br>
@@ -105,18 +105,18 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <?php if($artopt==2) : ?>
     <td valign=top><img <?php echo createLDImgSrc($root_path,'x-blank.gif','0') ?> id="headpic" ><br>
   </td>
-<?php endif ?>
+<?php endif; ?>
   </tr>
   <tr>
 <?php if($artopt!=2) : ?>
     <td align=right >
 	<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
   </td>
-<?php endif ?>
+<?php endif; ?>
     <td >
 <?php if($artopt==2) : ?>
 	<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
-<?php endif ?>
+<?php endif; ?>
 <input type="image" <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>
   </td>
     <td>
@@ -125,7 +125,7 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <?php if($artopt==2) : ?>
     <td align=right >&nbsp;
   </td>
-<?php endif ?>
+<?php endif; ?>
   </tr>
 </table>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">

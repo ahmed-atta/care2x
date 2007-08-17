@@ -603,7 +603,7 @@ if(!$patientfound) echo 'document.oppflegepatinfo.enc_nr.focus();';
 <font size=1>
 <?php if($op_nr) : ?>
 	<?php echo $LDOpNr ?> <FONT SIZE="3" ><b> <?php echo $op_nr; ?> </b></FONT>
-<?php endif ?>
+<?php endif; ?>
 
 <?php echo $LDDate ?>: 
 
@@ -905,7 +905,7 @@ if($datafound)
 	?>
 <?php else : ?>
 	<?php echo "$LDAna<p>$LDAnaDoc" ?>
-<?php endif ?>
+<?php endif;; ?>
 
 	<p>
 
@@ -941,12 +941,12 @@ if($datafound)
 	<br><INPUT NAME="cut_time" TYPE="text" VALUE="<?php echo strtr($ccbuf['s'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
 	<?php else : ?>
 	<p>
-	<?php endif ?>
+	<?php endif; ?>
 	<BR>
 	<?php echo $LDOpClose ?>:
 	<?php if($datafound) : ?>
 	<br><INPUT NAME="close_time" TYPE="text" VALUE="<?php echo strtr($ccbuf['e'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
-	<?php endif ?>
+	<?php endif; ?>
 </td>
 <td><font  size=1 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 	<?php echo $LDOpInFull ?>:
@@ -954,12 +954,12 @@ if($datafound)
 	<br><INPUT NAME="entry_time" TYPE="text" VALUE="<?php echo strtr($eobuf['s'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
 	<?php else : ?>
 	<p>
-	<?php endif ?>
+	<?php endif; ?>
 	<BR>
 	<?php echo $LDOpOutFull ?>:
 	<?php if($datafound) : ?>
 	<br><INPUT NAME="exit_time" TYPE="text" VALUE="<?php echo strtr($eobuf['e'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
-	<?php endif ?>
+	<?php endif; ?>
 </td>
 </tr>
 </table>

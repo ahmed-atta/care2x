@@ -70,9 +70,9 @@ function chkForm(d)
 	}
 }
 </script>
-<?php endif ?>
+<?php endif; ?>
 
-<?php if($cfg['dhtml']) include("/include/inc_css_a_hilitebu.php"); ?>
+<?php if($cfg['dhtml']) include($root_path."include/inc_css_a_hilitebu.php"); ?>
 
 <SCRIPT LANGUAGE="javascript" >
 function chkRadioButton(e){
@@ -93,10 +93,10 @@ function chkRadioButton(e){
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
     <td colspan=2><FONT  SIZE=4 COLOR="#000066">
 <?php if ($rows) : ?>
-			<?php echo $LDMarkGroup ?>
+			<?php echo $LDMarkGroup; ?>
 <?php else : ?>
-			<?php echo $LDCreateGroupPrompt ?>
-<?php endif ?>
+			<?php echo $LDCreateGroupPrompt; ?>
+<?php endif ;?>
 	</td>
   </tr>
 <?php if($rows)

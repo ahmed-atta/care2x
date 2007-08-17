@@ -207,7 +207,7 @@ if($item_no) echo $LDPlsEnterUpdate; else echo $LDPlsAddCurrency;
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 <?php if($item_no) : ?>
 <a href="<?php echo $thisfile.''.URL_APPEND.'&from='.$from ?>"><img <?php echo createLDImgSrc($root_path,'newcurrency.gif','0') ?>></a>
-<?php endif ?>
+<?php endif; ?>
 <input type="hidden" name="sid" value="<?php echo $sid;?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="item_no" value="<?php echo $item_no; ?>">

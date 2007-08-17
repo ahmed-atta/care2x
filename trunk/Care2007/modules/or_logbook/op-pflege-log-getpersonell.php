@@ -181,7 +181,7 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 	</td> 
 
   </tr>	
-<?php endif ?>
+<?php endif; ?>
 
 
   		<tr>
