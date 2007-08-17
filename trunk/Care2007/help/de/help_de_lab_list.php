@@ -28,12 +28,12 @@ Wie kann ich die Auswahl rücksetzen?</b>
 <ul>      
 		<b>Schritt 1: </b>Klickt den <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?> border=0> Knopf noch einmal.<br>
 </ul>
-<?php endif ?>
+<?php endif; ?>
 <?php if($src=="graph") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>>
  <font color="#990000"><b>Wie komme ich zur Liste von Labortestwerte ohne graphische Darstellung zurück? </b></font>
 <ul>Klickt den <img <?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?>> Knopf an.</ul>
-<?php endif ?>
+<?php endif; ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>>
  <font color="#990000"><b>Wie schliesse ich den <?php echo $x3 ?>? </b></font>

@@ -76,7 +76,7 @@ Bu seçim kutusunun işlevi nedir </b>	<select name="d"><option value="">Tetkik 
 		<b>Adım 2: </b>Seçilen klinik, bölüm veya tetkiki tıklayınız.<br>
 		<b>Adım 3: </b>İstem formu otomatik olarak açılır.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="labor") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>Şu anda tetkik sonucu yok. </b></font>
@@ -85,6 +85,6 @@ Bu seçim kutusunun işlevi nedir </b>	<select name="d"><option value="">Tetkik 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Hastanın dosyası nasıl kapatılır? </b></font>
 <ul> <b>Uyarı: </b>Eğer kapatmak ister iseniz,  <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> düğmesini tıklayınız.</ul>
 
-<?php endif ?>
+<?php endif;?>
 
 </form>

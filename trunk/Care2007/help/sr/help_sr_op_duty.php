@@ -49,7 +49,7 @@ person on the list. A small pop-up window will appear showing relevant informati
 <li><b>Duty plan</b> :<ul>Clickable icon. Link to the department's duty plan for the whole month. Click the icon&nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Show</font></button>
 			if you want to open the duty plan for the whole month and evetually create or edit the duty plan.</ul>
 
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="show") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to create a new duty plan for the displayed month</b></font>
@@ -80,7 +80,7 @@ person on the list. A small pop-up window will appear showing relevant informati
 <b>Note</b>
 <ul> If you decide to close the duty plan  click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="plan") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -112,7 +112,7 @@ I want to delete a name on the duty plan</b></font>
 <ul> <b>Step 1: </b>If you are finished, click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> button. <br>
 </ul>
 </font>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="personlist") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 The displayed department is wrong. I want to change to the right department.</b></font>
@@ -136,7 +136,7 @@ I want to delete a name on the list</b></font>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I have saved the list and wish to close it, what should I do? </b></font>
 <ul> <b>Step 1: </b>If you are finished, click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> button. <br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="dutydoc") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to document a work done during duty hours?</b></font>
@@ -162,7 +162,7 @@ How to document a work done during duty hours?</b></font>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I have saved the document and wish to close it, what should I do? </b></font>
 <ul> <b>Step 1: </b>If you are finished, click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> button. <br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 </form>
 </body>

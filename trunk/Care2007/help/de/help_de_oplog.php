@@ -114,7 +114,7 @@ Der <?php echo ucfirst($person) ?> ist nicht in der "Schnellauswahlliste". Wie t
 <ul>       	
 Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="time") : ?>
 	<?php if($x1=="entry_out") : ?>
@@ -130,7 +130,7 @@ Wie trage ich die Ein- bzw. Ausschleussezeiten ein?</b>
  	<b>Achtung! </b>Sie können mehrere Zeitangaben eintragen bevor Sie die Daten speichern.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="cut_close") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich die Schnitt- bzw. Nahtzeiten ein?</b>
@@ -144,7 +144,7 @@ Wie trage ich die Schnitt- bzw. Nahtzeiten ein?</b>
  	<b>Achtung! </b>Sie können mehrere Zeitangaben eintragen bevor Sie die Daten speichern.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="wait_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich die Wartezeiten (Leerlauf) ein?</b>
@@ -159,7 +159,7 @@ Wie trage ich die Wartezeiten (Leerlauf) ein?</b>
  	<b>Achtung! </b>Sie können mehrere Zeitangaben eintragen und Gründen auswählen bevor Sie die Daten speichern.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="bandage_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich die Gipszeiten ein?</b>
@@ -173,7 +173,7 @@ Wie trage ich die Gipszeiten ein?</b>
  	<b>Achtung! </b>Sie können mehrere Zeitangaben eintragen bevor Sie die Daten speichern.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="repos_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie trage ich die Repositionszeiten ein?</b>
@@ -187,7 +187,7 @@ Wie trage ich die Repositionszeiten ein?</b>
  	<b>Achtung! </b>Sie können mehrere Zeitangaben eintragen bevor Sie die Daten speichern.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie speichere ich die Zeitangaben?</b>
 </font>
@@ -210,7 +210,7 @@ Wie speichere ich die Zeitangaben?</b>
 <ul>       	
 Wenn Sie abbrechen möchten klicken Sie den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="create") : ?>
@@ -279,7 +279,7 @@ Wie kann ich die OP Dokumente von anderen Tagen zeigen lassen?</b>
 
 <hr>
 
-	<?php endif ?>
+	<?php endif;?>
 	
 	<?php if($x2=="material") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -330,7 +330,7 @@ Wie lasse ich das OP Logbuch zeigen?</b>
  	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > <img <?php echo createComIcon('../','manfldr.gif','0') ?>> Logbuch einblenden. </span>" an.<br> 
 </ul>
 <hr>
-	<?php endif ?>
+	<?php endif;?>
 
 	<?php if(($x1=="")||($x1=="fresh")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -490,9 +490,9 @@ Wie starte ich ein neues Dokument für eine neue OP?</b>
 <b>Achtung!</b>
 <ul> Wenn Sie schliessen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 
 
 
@@ -514,7 +514,7 @@ Wie finde ich ein OP Dokument von einem Patient?</b>
 	OP Dokument zu sehen.<p> 
 	</ul>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="search")&&($x3!="1")) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -524,7 +524,7 @@ Wie wähle ich ein Dokument zum sehen aus?</b>
  	<b>Achtung! </b> Klickt den Namen von dem Patient an.<p> 
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="get")||($x3=="1")) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -541,7 +541,7 @@ Wie öffne ich die Patientenmappe?</b>
  	<b>Schritt 1: </b>Klicken Sie den <img <?php echo createComIcon('../','info3.gif','0') ?>> Knopf vor der Fallnummer an.<br>
  	<b>Schritt 2: </b>Die Patientenmappe öffnet sich<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie suche ich weiter?</b>
 </font>
@@ -554,21 +554,21 @@ Wie suche ich weiter?</b>
 <ul>       	
 <ul> Wenn Sie schliessen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="arch") : ?>
 	<?php if($x2=="1") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Achtung! Die letzte Eintragung im OP Logbuch.</b></font> 
 <ul>  Jedes mal wenn Sie ins Archiv gehen, werden die letzte Eintragungen sofort angezeigt.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if(($x3=="")&&($x1!="0")) : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Keine OP an diesem Tag.</b></font> 
 <ul>       	
 Klicken Sie die "Optionen" an um das Optionfenster zu öffnen.<br>
 Klicken Sie die "Suchen" an um in den Suchmodus zu gehen.</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 	
 
 
@@ -613,7 +613,7 @@ Wie öffne ich die Patientenmappe?</b>
  	<b>Schritt 1: </b>Klicken Sie den <img <?php echo createComIcon('../','info3.gif','0') ?>> Knopf vor der Fallnummer an.<br>
  	<b>Schritt 2: </b>Die Patientenmappe öffnet sich<br>
 	</ul>
-	<?php endif ?>
+	<?php endif;?>
 	
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
@@ -621,7 +621,7 @@ Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','canc
 </ul>
 
 
-	<?php endif ?>
+	<?php endif;?>
 
 
 </form>

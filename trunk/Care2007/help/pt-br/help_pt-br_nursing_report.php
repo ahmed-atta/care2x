@@ -66,7 +66,7 @@ Nota:</b></font>
 <ul> 
 	Você pode tambem entrar com ambos <?php if($x1=="docs") print "ordens médicas e perguntas ao médico"; else print "enfermagem e relatório de efetividade"; ?> ao mesmo tempo.</ul>
 
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="diagnosis") : ?>
 <a name="extra"><a name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a></a>
 Como exibir um relatório de diagnóstico?</b></font>
@@ -75,7 +75,7 @@ Como exibir um relatório de diagnóstico?</b></font>
   		<b>Nota: </b>O primeiro relatório da lista será exibido imediatamente.<p>
 	<b>Passo 1: </b>Clique na breve nota do relatório de diagnóstico que você quer exibir.<br>	
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="kg_atg_etc") : ?>
 <a name="pt"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Como entrar com informação sobre a terapia física diária (PT), ginástica anti-trombose (Atg), etc.?</b></font>
@@ -88,14 +88,14 @@ Como entrar com informação sobre a terapia física diária (PT), ginástica anti-tr
 		<b>Passo 4: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="fotos") : ?>
 <a name="coag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Como visualizar uma foto?</b></font>
 <ul> 
 	<b>Passo 1: </b>Clique na miniatura no quadro a esquerda. A imagem em tamanho integral será exibida no quadro a direita incluindo a data de tomada e o número da foto.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="anticoag_dailydose") : ?>
 <a name="daycoag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Como entrar com informação sobre a aplicação diária de anticoagulantes?</b></font>
@@ -107,7 +107,7 @@ Como entrar com informação sobre a aplicação diária de anticoagulantes?</b></fon
 		<b>Passo 4: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="lot_mat_etc") : ?>
 <a name="lot"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Como entrar com Notas sobre implantes, no. LOT, no. débito, etc?</b></font>
@@ -120,7 +120,7 @@ Como entrar com Notas sobre implantes, no. LOT, no. débito, etc?</b></font>
 		<b>Passo 4: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="medication") : ?>
 <a name="med"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Como entrar com a medicação e plano de dosagem?</b></font>
@@ -143,7 +143,7 @@ Como entrar com a medicação e plano de dosagem?</b></font>
 		<b>Passo 7: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="medication_dailydose") : ?>
 	<?php if($x2) : ?>
 
@@ -183,8 +183,8 @@ Aparece "Não há medicação ainda". O que devo fazer?</b></font>
 		<b>Passo 9: </b>Se você quiser corrigir quaisquer erros, clique nos dados errados e substitua com os corretos e salve novamente.<br>
 		<b>Passo 10: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> para fechar a janela e voltar ao gráfico.<br>
 </ul>
-	<?php endif ?>
-<?php endif ?>
+	<?php endif;?>
+<?php endif;?>
 <?php if($src=="iv_needle") : ?>
 <a name="iv"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Como entrar com a informação diária de aplicação e dosagem de medicação intravenosa?</b></font>
@@ -197,7 +197,7 @@ Como entrar com a informação diária de aplicação e dosagem de medicação intraven
 		
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 </form>
 

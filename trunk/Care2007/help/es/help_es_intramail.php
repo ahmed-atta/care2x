@@ -68,7 +68,7 @@ Correo de la Intranet
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="1") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Cómo registrarse?</b> </font></font> 
@@ -99,8 +99,8 @@ Correo de la Intranet
       </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
-  <?php endif ?>
+  <?php endif;?>
+  <?php endif;?>
   <?php if($src=="mail") : ?>
   <?php if($x1=="listmail") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
@@ -147,7 +147,7 @@ Correo de la Intranet
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="compose") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Cómo escribo un nuevo mensaje?</b> </font></font> 
@@ -231,7 +231,7 @@ Correo de la Intranet
       </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($x1=="sendmail")&&($x3=="1")) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Cómo escribir un nuevo mensaje?</b> </font></font> 
@@ -241,8 +241,8 @@ Correo de la Intranet
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
-  <?php endif ?>
+  <?php endif;?>
+  <?php endif;?>
   <?php if($src=="read") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Cómo imprimo el mensaje?</b> </font></font> 
@@ -298,7 +298,7 @@ Correo de la Intranet
       almacenados en la papelera de reciclaje. </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="address") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Cómo agregar una dirección de correo a la Libreta de direcciones?</b> </font></font> 
@@ -342,7 +342,7 @@ Correo de la Intranet
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> 
   Nota:</b> </font></font> 
   <ul>

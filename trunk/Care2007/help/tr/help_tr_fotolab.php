@@ -49,7 +49,7 @@ Yüklenecek resim sayısı nasıl değiştirilir?</b>
  	<b>Adım 2:</b>"Git" i tıklayınız.<p>
 </ul>
 
-<?php endif ?>	
+<?php endif;?>	
 
 <?php if($src=="maindata") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -65,7 +65,7 @@ Bir hastanın bilgileri nasıl bulunur?</b>
  	<img <?php echo createComIcon('../','warn.gif','0') ?>><b> Uyarı! </b>Fotoğraflardan biri ya da birkaçının farklı çekim tarihleri var ise o tarihi ilgili fotoğrafın  "Çekim tarihi" alanına giriniz. Bunu ancak 5. adımdan sonra yapabilirsiniz.<p>
 </ul>
 	
-	<?php endif ?>	
+	<?php endif;?>	
 <?php if($src=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Aynı hastanın başka fotoğraflarını da kaydetmek istiyorum. Nasıl yapılır?</b>
@@ -83,7 +83,7 @@ Bir başka hastanın resimlerini kaydetmek istiyorum. Nasıl yapılır?</b>
  	<b>Adım 2: </b> <input type="button" value="Git"> düğmesini tıklayınız.<br>
 </ul>
 
-	<?php endif ?>	
+	<?php endif;?>	
 	
 
 

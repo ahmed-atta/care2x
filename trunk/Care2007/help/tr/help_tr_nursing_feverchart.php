@@ -327,7 +327,7 @@ Hasta nasıl çıkarılır?</b></font>
 </ul>
   <b>Uyarı: </b>İptal etmek ister iseniz, <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle"> düğmesini tıklayınız.</ul>
 
-<?php endif ?>
+<?php endif;?>
 
 </form>
 

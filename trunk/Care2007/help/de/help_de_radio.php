@@ -58,7 +58,7 @@ Wie kann ich das Röntgenbild in voller Große zeigen lassen?</b>
 <ul>       	
  Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 </form>
 

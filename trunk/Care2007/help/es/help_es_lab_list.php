@@ -35,7 +35,7 @@
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="graph") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>�Cómo 
   retorno a los resultados de las pruebas sin las tablas gráficas? </b></font></font> 
@@ -44,7 +44,7 @@
     regresar, dé clic en el botón <img <?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?>>.</font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>�Cómo 
   cierro la ventana de laboratorio?<?php echo $x3 ?>? </b></font></font> 
   <ul>

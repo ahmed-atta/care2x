@@ -12,7 +12,7 @@
 <b>Untuk memulai sebuah penerimaan(=Admission) terhadap seorang pasien baru </b>
 <ul> Jika anda memulai penerimaan baru klik button  <input type="button" value="Kembali untuk penerimaan">.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <b>catatan</b>
 <ul> Jika anda telah selesai klik tombol <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 		

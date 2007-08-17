@@ -45,7 +45,7 @@ if($src=="search")
   <ul>
     Jika anda memutuskan untuk menutup, klik tombol <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. 
   </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 </form>

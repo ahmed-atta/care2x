@@ -73,12 +73,12 @@ Qual'è la funzione del riquadro di selezione </b>	<select name="d"><option value
 	<b>2: </b>Selezionare la clinica, il reparto o il test diagnostico.<br>
 	<b>3: </b>A questo punto apparirà il modulo di richiesta.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="labor") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>Al momento non ci sono report di laboratorio.</b></font>
 <ul> Premere il bottone <input type="button" value="OK"> per tornare alla cartella dati paziente.</ul>
 <?php else  : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Come fare a: chiudere la cartella dati? </b></font>
 <ul> <b>Nota: </b>Per chiudere, premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle">.</ul>
-<?php endif ?>
+<?php endif;?>
 </form>

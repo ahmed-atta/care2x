@@ -5,9 +5,6 @@
 <?php
 if(!$src){
 ?>
-<?php
-}else{
-?>
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> </a><strong><font color="990000" size="2" face="Verdana, Arial, Helvetica, sans-serif">La 
 etiqueta del paciente no esta adjunta. &iquest;Que hacer?</font></strong>
 

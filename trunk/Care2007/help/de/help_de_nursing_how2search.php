@@ -40,7 +40,7 @@ Geben Sie in das Feld "<span style="background-color:yellow" >Bitte ein Stichwor
 </ul>
 <b>Achtung!</b>
 <ul>  Falls Sie abbrechen möchten den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.
-</ul><?php endif ?>
+</ul><?php endif;?>
 <b>Schritt <?php if($x1) print "1"; else print "5"; ?></b>
 <ul>Um die Belegungsliste zu sehen, den <img <?php echo createComIcon('../','bul_arrowblusm.gif','0') ?>>,
 oder das Datum, oder den Stationsnamen anklicken.
@@ -48,7 +48,7 @@ oder das Datum, oder den Stationsnamen anklicken.
 <br><b>Achtung!</b> Die Belegungsliste is nur zum sehen. Sie lässt sich nicht bearbeiten. Wenn Sie trotzdem versuchen die Liste zu bearbeiten werden Sie nach Ihrem 
 Benutzername und Passwort gefragt.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -85,10 +85,10 @@ Wie lassen sich die alte Belegungslisten über das Archiv zeigen?</b>
  	<b>Schritt 3: </b>Klicken Sie das Datum im Kalender um die Belegungslisten von diesem Tag zu sehen.<br>
 	</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 <b>Achtung!</b>
 <ul> Falls Sie die Schnellsicht schliessen möchten den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> anklicken.
-</ul><?php endif ?>
+</ul><?php endif;?>
 
 <?php if($x2=="arch") : ?>
 
@@ -108,7 +108,7 @@ Wie kann ich den Monat des Leitkalenders wechseln?</b>
 								Klicken Sie so oft wie nötig bis der gewünschte Monat angezeigt ist.<br>
 	</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 
 
 </form>

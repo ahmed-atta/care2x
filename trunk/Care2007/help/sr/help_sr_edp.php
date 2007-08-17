@@ -59,7 +59,7 @@ I am finished entering all relevant information. How to save it?</b>
 <ul>       	
  	<b>Step 1: </b>Click the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 The new access right is now saved. How to create another access right?</b>
@@ -77,7 +77,7 @@ I want to see the list of the existing access rights. How to do it?</b>
  	<b>Step 2: </b>The existing access rights will be listed<br>
 </ul>
 	
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="list") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 What do the buttons <img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> and <img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> mean?</b>
@@ -120,7 +120,7 @@ How to delete an access right?</b>
  	Click the option "<span style="background-color:yellow" > D </span>" corresponding to the user.<br>
 </ul>
 
-	<?php endif ?>	
+	<?php endif;?>	
 	
 	<?php if($x1=="update") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -137,7 +137,7 @@ Note:</b>
  	If you decide not to edit click the <img <?php echo createLDImgSrc('../','cancel.gif','0','absmiddle') ?>>  button.<br>
 </ul>
 	
-	<?php endif ?>		
+	<?php endif;?>		
 	<?php if($x1=="delete") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to delete an access right?</b>
@@ -153,7 +153,7 @@ Note:</b>
  	If you decide not to delete click the button <input type="button" value="No. Go back.">.<br>
 </ul>
 	
-	<?php endif ?>		
+	<?php endif;?>		
 	
 	<?php if($x1=="lock") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -170,8 +170,8 @@ Note:</b>
  	If you decide not to <?php if($x2=="0") print "lock"; else print "unlock"; ?> click the button <input type="button" value="No. Go back.">.<br>
 </ul>
 	
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 
 	</form>
 

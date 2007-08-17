@@ -12,7 +12,7 @@
 <b>Per iniziare l'accettazione di un nuovo paziente</b>
 <ul> Per iniziare un'accettazione selezionare il bottone <input type="button" value="Tornare all'accettazione">.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <b>Note</b>
 <ul> Alla fine, selezionare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>

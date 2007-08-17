@@ -33,7 +33,7 @@ switch($x1)
 ?>" border="0">. </font> 
 </ul>
 <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Paso 2</b> 
-<?php endif ?>
+<?php endif;?>
 </font> 
 <ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted ya ingresó 
@@ -54,4 +54,4 @@ switch($x1)
 
 
 </form>
-<?php endif ?>
+<?php endif;?>

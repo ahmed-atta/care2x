@@ -46,7 +46,7 @@ Onarım servisine nasıl istem gönderilir?</b></font>
 <b>Uyarı</b>
 <ul> Eğer istem formunu kapatmak isterseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="report") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -62,7 +62,7 @@ Onarım tamamlandığı nasıl bildirilir?</b></font>
 <b>Uyarı</b>
 <ul> Formu kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="queries") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -83,7 +83,7 @@ Daha önceki sorularımı ve teknik bölümün yanıtlarını nasıl görebiliri
 <b>Uyarı</b>
 <ul> Soruyu kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="arch") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -107,7 +107,7 @@ Belirli teknik raporlar nasıl aranır?</b></font>
 
 </ul>
 </font>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="showarch") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Raporun okundu olarak işaretlenmesi.</b></font>
@@ -122,7 +122,7 @@ Raporun yazdırılması.</b></font>
 Arşiv aramasının başına nasıl geri gidilir?</b></font>
 <ul> <b>Adım 1: </b> <input type="button" value="<< Geri git"> düğmesini tıklayınız.<p>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="dutydoc") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Nöbet saatinde yapılmış bir iş nasıl belgelendirilir?</b></font>
@@ -148,7 +148,7 @@ Nöbet saatinde yapılmış bir iş nasıl belgelendirilir?</b></font>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belgeyi kayıt ettim ve kapatmak istiyorum. Ne yapmalıyım? </b></font>
 <ul> <b>Adım 1: </b>İşiniz bitti ise <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız. <br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 </form>
 </body>

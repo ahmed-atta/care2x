@@ -54,7 +54,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 			 anklicken wenn Sie den Dienstplan aktualisieren bzw. erstellen oder ändern möchten.</ul>
 
 
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="show") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ich möchte einen neuen Dienstplan für diesen Monat erstellen.</b></font>
@@ -83,7 +83,7 @@ Wenn Sie sich vorher angemeldet haben und ein Zugangsrecht in dieser Funktion ha
 <b>Achtung!</b>
 <ul> Falls Sie den Dienstplan schliessen möchten den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> anklicken.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="plan") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -116,7 +116,7 @@ Ich möchte eine Schwester bzw. einen Pfleger aus dem Dienstplan entfernen. Wie g
 </ul>
 
 </font>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="personlist") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -142,7 +142,7 @@ Ich möchte einen Namen aus der Liste entfernen. Wie geht das?</b></font>
 <ul> <b>Schritt 1: </b>Wenn Sie fertig sind den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf anklicken. <br>
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="dutydoc") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie dokumentiere ich die Arbeitsleistung im Dienst?</b></font>
@@ -170,7 +170,7 @@ Wie dokumentiere ich die Arbeitsleistung im Dienst?</b></font>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ich habe das Dokument gespeichert. Was mache ich jetzt? </b></font>
 <ul> <b>Schritt 1: </b>Wenn Sie fertig sind klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an. <br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 </form>
 </body>

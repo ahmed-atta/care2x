@@ -36,14 +36,14 @@ switch($x2)
 </ul>
 <b>Nota</b>
 <ul> Per annullare la ricerca premere il bottone <img <?php echo createLDImgSrc('../','cancel.gif','absmiddle') ?>>.
-</ul><?php endif ?>
+</ul><?php endif;?>
 <b><?php if($x1) print '1'; else print '5'; ?></b><ul>Premere il bottone <img <?php echo createComIcon('../','bul_arrowblusm.gif','absmiddle') ?>>,
  o la data , o il padiglione per mostrare la lista di occupazione.
 <p><b>Nota:</b> nella lista la chiave di ricerca apparirà evidenziata.
 <br><b>Nota:</b> La lista non è modificabile: se si tenta di aprire la cartella dati di un paziente selezionando il nome,
  sarà richiesto di inserire username e password.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x2=='quick') : ?>
 	<?php if($x1) : ?>
 <img <?php echo createComIcon('../','frage.gif','absmiddle') ?>> <font color='#990000'><b>
@@ -78,10 +78,10 @@ Come fare a: Mostrare la precedente lista di occupazione tramite l'archivio?</b>
  	<b>2: </b>Apparirà un calendario.<br>
  	<b>3: </b>Selezionare dal calendario la data per la quale si vuole vedere la lista di occupazione.<br>
 	</ul>
-	<?php endif ?>
+	<?php endif;?>
 <b>Nota</b>
 <ul> Per chiudere premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','absmiddle') ?>>.
-</ul><?php endif ?>
+</ul><?php endif;?>
 <?php if($x2=='arch') : ?>
 <img <?php echo createComIcon('../','frage.gif','absmiddle') ?>> <font color='#990000'><b>
 Come fare a: Mostrare la precedente lista di occupazione tramite l'archivio?</b>
@@ -98,5 +98,5 @@ Come fare a: cambiare il mese del calendario?</b>
  	<b>2: </b>Per passare al mese precedente, il nome nell'angolo in alto a sinistra del calendario.
 								Ripetere l'operazione fino a quando il mese desiderato non appare.<br>
 	</ul>
-	<?php endif ?>
+	<?php endif;?>
 </form>

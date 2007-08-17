@@ -12,7 +12,7 @@
 <b>Para iniciar uma nova admissão de um novo paciente</b>
 <ul> Se você quiser iniciar uma nova admissão clique no botão <input type="button" value="Voltar à admissão">.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <b>Nota</b>
 <ul> Se você tiver terminado, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 		

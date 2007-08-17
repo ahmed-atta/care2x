@@ -53,7 +53,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($x1=="save") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
     Cómo ingreso un producto nuevo en la base de datos?</b> </font></font> 
@@ -86,7 +86,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($x1=="update") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
     Deseo hacer cambios al producto que al momento estoy viendo. Cómo lo hago?</b> 
@@ -103,8 +103,8 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
         </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
-    <?php endif ?>
+    <?php endif;?>
+    <?php endif;?>
     <?php if($src=="search") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
     Cómo busco un producto?</b> </font></font> 
@@ -137,7 +137,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($x1=="multiple") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
     Deseo ver la lista previa de artículos hallados. Qué debo hacer?</b> </font></font> 
@@ -149,7 +149,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> 
     Nota:</b></font></font> 
     <ul>
@@ -158,7 +158,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($src=="mng") : ?>
     <?php if(($x3=="1")) : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
@@ -172,7 +172,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($x1=="multiple") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
     Cómo hago cambios al producto que estoy viendo en este momento?</b> </font></font> 
@@ -218,7 +218,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
     Cómo administrar un producto en la base de datos?</b> </font></font> 
     <ul>
@@ -249,7 +249,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> 
     Nota:</b></font></font> 
     <ul>
@@ -258,7 +258,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($src=="delete") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
     ¿Como remover un artículo de la lista?</b> </font></font> 
@@ -287,7 +287,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
       </font> 
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($src=="report") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
     ¿Como escribo un reporte?</b> </font></font> 
@@ -313,7 +313,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     </font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted decide 
     cerrar esta ventana dé clic al botón</font><img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. 
   </ul> 
-  <?php endif ?>
+  <?php endif;?>
   </font> 
 </form>
 

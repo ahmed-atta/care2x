@@ -209,7 +209,7 @@ Come fare a salvare le informazioni?</b>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>Per annullare selezionare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="create") : ?>
 	<?php if($x1=="logmain") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -271,7 +271,7 @@ Come fare a: visualizzare le registrazioni di un giorno differente da quello att
 	Selezionare il link fino a quando non appare il giorno desiderato.<br>
 </ul>
 <hr>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x2=="material") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a registrare il materiale usato durante l'operazione?</b>
@@ -319,7 +319,7 @@ Come fare a: visualizzare di nuovo il registro principale?</b>
  	<b>1: </b>Selezionare il link "<span style="background-color:yellow" > <img <?php echo createComIcon('../','manfldr.gif','0') ?>> Visualizza registro. </span>".<br> 
 </ul>
 <hr>
-	<?php endif ?>
+	<?php endif;?>
 
 	<?php if(($x1=="")||($x1=="fresh")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -468,8 +468,8 @@ Come iniziare una nuova registrazione</b>
 <b>Nota</b>
 <ul>Per chiudere, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 <?php if($src=="search") : ?>
 	<?php if(($x1=="fresh")||($x1=="")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -485,7 +485,7 @@ Come fare a: cercare i documenti di un certo paziente?</b>
 	Selezionare il cognome del paziente per visualizzare i suoi documenti.<p> 
 	</ul>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="search")&&($x3!="1")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: selezionare uno specifico documento da visualizzare?</b>
@@ -494,7 +494,7 @@ Come fare a: selezionare uno specifico documento da visualizzare?</b>
  	<b>Nota: </b> Selezionare il cognome del paziente per visualizzare i suoi documenti.<p> 
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="get")||($x3=="1")) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -512,7 +512,7 @@ Come fare a: aprire la cartella dati di un paziente?</b>
  	<b>2: </b>Apparirà la cartella dei dati paziente. Selezionare il tasto "Aiuto" nella finestra per altre istruzioni.<p> 
 	</ul>
 
-<?php endif ?>
+<?php endif;?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: continuare la ricerca?</b>
 </font>
@@ -524,19 +524,19 @@ Come fare a: continuare la ricerca?</b>
 <ul>       	
  Per chiudere selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="arch") : ?>
 	<?php if($x2=="1") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota: ultime registrazioni inserite</b></font> 
 <ul>Ogni volta che si ritorna all'archivio, le ultime operazioni registrate appariranno immediatamente.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if(($x3=="")&&($x1!="0")) : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Non ci sono operazioni in questo giorno.</b></font> 
 <ul>       	
 Selezionare "Opzioni" per aprire la finestra opzioni.<br>
 Selezionare "Ricerca" per passare al modo ricerca.</ul>
-	<?php endif ?>
+	<?php endif;?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
 <font color="#990000"><b>Desidero visualizzare le registrazioni di un altro giorno.</b></font>
 <ul> <b>Per il giorno precedente: </b>Selezionare il link "<span style="background-color:yellow" > Giorno precedente </span>" nella colonna in alto a sinistra. 
@@ -574,10 +574,10 @@ Come fare a: aprire la cartella dati di un paziente?</b>
  	<b>1: </b>Selezionare <img src="../img/info2.gif" border=0> a sinistra del codice paziente.<br>
  	<b>2: </b>Apparirà la cartella dei dati paziente. Selezionare il tasto "Aiuto" nella finestra per altre istruzioni.<p> 
 	</ul>
-	<?php endif ?>
+	<?php endif;?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
  Per annullare selezionare il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 </form>

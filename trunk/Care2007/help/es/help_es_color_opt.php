@@ -56,7 +56,7 @@ de color
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="ext") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Como seleccionar el color de enlace activo?</b> </font></font> 
@@ -92,7 +92,7 @@ de color
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   </font> 
 </form>
 

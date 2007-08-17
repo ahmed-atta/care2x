@@ -265,7 +265,7 @@
     correspondiente, o el nombre, o el apellido, o la fecha de admisión. </font>
   </ul>
   <font size="2">
-  <?php endif ?>
+  <?php endif;?>
   <b>Nota</b> </font>
   <ul>
     <font size="2"> Si desea cerrar esta ventana, haga click en el botón 

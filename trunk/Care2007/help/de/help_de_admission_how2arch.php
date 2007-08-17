@@ -121,7 +121,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 		den Namen, oder den Familiennamen, oder das Aufnahmedatum anklicken.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 <b>Achtung!</b>
 <ul> Falls Sie die Recherche abbrechen möchten, den <input type="button" value="Abbrechen"> anklicken.
 </ul>

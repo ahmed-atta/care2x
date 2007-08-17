@@ -31,12 +31,12 @@ iserire il dipartimento, il nome o il cognome.
 <b><?php if($src=="newphone") echo "4"; else echo "3"; ?></b>
 <ul> Se la ricerca trova dei dati, apparirà un elenco.<p>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1=="dir") : ?>
 <b>1</b>
 <ul> Selezionare il bottone <img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1=="newphone") : ?>
 	<?php if($src=="search") { ?>
 <b>1</b>
@@ -49,7 +49,7 @@ telefono.<br>
 		Se invece non si è ancora effettuato il login, verrà richiesto di inserire username e password. <p>
 	<?php } ?>
 		Inserire username e password, poi selezionare il bottone <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
-</ul><?php endif ?>
+</ul><?php endif;?>
 <b>Nota</b>
 <ul> Per 
 <?php

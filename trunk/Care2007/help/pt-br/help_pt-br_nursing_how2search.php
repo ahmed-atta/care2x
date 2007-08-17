@@ -36,14 +36,14 @@ switch($x2)
 </ul>
 <b>Nota</b>
 <ul> Se você decidir cancelar a pesquisa clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
-</ul><?php endif ?>
+</ul><?php endif;?>
 <b>Passo <?php if($x1) print "1"; else print "5"; ?></b><ul>clique no botão <img <?php echo createComIcon('../','bul_arrowblusm.gif','0') ?>>,
  ou na data, ou na ala para exibir a lista de ocupação da ala.
 <p><b>Nota:</b> A palavra chave de pesquisa estará grifada na lista.
 <br><b>Nota:</b> A lista não pode ser editada; está em modo de "somente leitura". Se você tentar abrir o arquivo de dados do paciente clicando em seu nome, você será avisado para
 entrar com seu nome de usuário e senha.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -87,10 +87,10 @@ Como mostrar visões rápidas de uma ocupação anterior usando o arquivo?</b>
  	<b>Passo 3: </b>Clique em uma data do calendário para que uma visão rápida da ocupação daquele dia seja mostrada.<br>
 	</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 <b>Nota</b>
 <ul> Se você decidir fecha a Visão rápida clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
-</ul><?php endif ?>
+</ul><?php endif;?>
 
 <?php if($x2=="arch") : ?>
 
@@ -110,7 +110,7 @@ Como mudar o mes do calendário guia?</b>
 								Clique quantas vezes for necessário até que o mes desejado seja mostrado.<br>
 	</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 
 
 </form>

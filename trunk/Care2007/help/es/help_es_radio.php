@@ -58,7 +58,7 @@ if($src=="search")
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   </font> 
 </form>
 

@@ -53,7 +53,7 @@ Non ho ancora un indirizzo di posta, come faccio a procurarmene uno?</b>
 	il modulo di registrazione.<br>
  	<b>2: </b>Premere il bottone "Aiuto" una volta per avere altre istruzioni.<br>
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 	<?php if($x1=="1") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a registrarsi?</b>
@@ -71,8 +71,8 @@ Come fare a registrarsi?</b>
  	<b>6: </b>Per controllo, inserire di nuovo la password nel campo "<span style="background-color:yellow" > Ripetere password: </span>".<br>
  	<b>3: </b>Selezionare il bottone <input type="button" value="Registra">.<br>
 </ul>
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 <?php if($src=="mail") : ?>
 <?php if($x1=="listmail") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -107,7 +107,7 @@ Come fare a scrivere una nuova mail?</b>
 <ul>       	
  	<b>1: </b>Selezionare il link "<span style="background-color:yellow" > New Email </span>".<br>
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 	<?php if($x1=="compose") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a scrivere una nuova mail?</b>
@@ -156,7 +156,7 @@ Come funziona "Quick address"?</b>
  	<b>2: </b>A questo punto selezionare uno degli indirizzi della "Quick address": esso sarà
  	eliminato e sostituito con il nuovo valore.<br>
 </ul>
-<?php endif ?>		
+<?php endif;?>		
 <?php if(($x1=="sendmail")&&($x3=="1")) : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a scrivere una nuova mail?</b>
@@ -164,8 +164,8 @@ Come fare a scrivere una nuova mail?</b>
 <ul>       	
  	<b>1: </b>Selezionare il link "<span style="background-color:yellow" > Nuova mail </span>".<br>
 </ul>
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 <?php if($src=="read") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a stampare una mail?</b>
@@ -203,7 +203,7 @@ Come fare a cancellare una mail?</b>
  	<b>3: </b>Selezionare il bottone <input type="button" value="OK"> per cancellare la mail.<p>
 	<b>Nota:</b> Le mail cancellate dalla cartella "In arrivo" sono temporaneamente messe nel "Cestino".
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 <?php if($src=="address") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare ad aggiungere un indirizzo alla rubrica?</b>
@@ -229,7 +229,7 @@ Come fare a rimuovere un indirizzo dalla rubrica?</b>
  	<b>3: </b>Prima della cancellazione, sarà chiesta conferma.<br>
  	<b>4: </b>Selezionare il bottone <input type="button" value="OK"> per cancellare l'indirizzo.<p>
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Nota:</b>
 </font>

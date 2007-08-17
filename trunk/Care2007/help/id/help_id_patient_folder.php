@@ -77,7 +77,7 @@ Apa fungsi kotak pemilih ini</b><select name="d"><option value="">Pilih perminta
 		<b>Langkah 2: </b>Klik di klinik terpilih, departemen, atau tes diagnostik.<br>
 		<b>Langkah 3: </b>Form permintaan akan dibuka secara otomatis.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="labor") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>Tidak ada laporan laboratorium yang tersedia saat ini. </b></font>
@@ -86,7 +86,7 @@ Apa fungsi kotak pemilih ini</b><select name="d"><option value="">Pilih perminta
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bagaimana cara menutup folder data pasien? </b></font>
 <ul> <b>Catatan: </b>Jika anda ingin menutup, Klik tombol <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle">.</ul>
 
-<?php endif ?>
+<?php endif;?>
 
 </form>
 

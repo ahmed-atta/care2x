@@ -41,22 +41,22 @@ pasien di medocs</b></font>
     Jika Pencarian menemukan hasil tunggal, sebuah form dokumen baru dengan data 
     dasar pasien akan ditampilkan. Jika bagaimanapun juga, pencarian menemukan 
     beberapa hasil, sebuah daftar akan ditampilkan.. 
-    <?php endif ?>
+    <?php endif;?>
     <?php if(($src=="?")||($x1>1)) : ?>
     <br>
     Untuk medokumentasikan pasien yang ada di dalam daftar, Klik tombol <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> 
     yang berhubungan dengannya, atau nama keluarga, atau nama pemberian(nama belakang), 
     atau nomor pasien, atau tanggal masuk(izin). 
   </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="?") : ?>
 <b>Langkah 4</b>
-<?php endif ?>
+<?php endif;?>
 
 <?php if(($src!="?")&&($x1==1)) : ?>
 <b>Langkah 1</b>
-<?php endif ?>
+<?php endif;?>
 <?php if(($x1=="1")||($src=="?")) : ?>
   <ul>
     Sekali sebuah form dokumen dengan data pasien ditampilkan, anda bisa melakukan 
@@ -97,7 +97,7 @@ pasien di medocs</b></font>
     <input type="button" value="Save">
     untuk menyimpan dokumen. 
   </ul>
-<?php endif ?>
+<?php endif;?>
 <b>Catatan</b>
   <ul>
     Jika anda memutuskan untuk membatalkan dokumentasi. Klik tombol <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 

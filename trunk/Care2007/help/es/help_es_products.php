@@ -101,7 +101,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="how2") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Como hago un pedido de 
@@ -264,7 +264,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="head") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Como pedir 
@@ -296,7 +296,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="catalog") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   �Cómo poner un artículo en la canasta (lista de pedido)? </b> </font></font> 
@@ -365,7 +365,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="orderlist") : ?>
   <?php if($x1=="0") : ?>
   <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> 
@@ -462,8 +462,8 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     y editar la lista</span>" regresar a la lista de pedido. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
-  <?php endif ?>
+  <?php endif;?>
+  <?php endif;?>
   <?php if($src=="final") : ?>
   <?php if($x1=="1") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
@@ -522,8 +522,8 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     editar la lista</span>" para regresar al pedido. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
-  <?php endif ?>
+  <?php endif;?>
+  <?php endif;?>
   <!-- ++++++++++++++++++++++++++++++++++ archive +++++++++++++++++++++++++++++++++++++++++++ -->
   <?php if($src=="arch") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Quiero 
@@ -575,7 +575,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="archshow") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Quiero ver más información sobre algun artículo en ese pedido. �Qué debo hacer?</b> 
@@ -630,7 +630,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="db") : ?>
   <?php if($x1=="") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
@@ -663,7 +663,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="save") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Cómo ingreso un producto nuevo en la base de datos?</b> </font></font> 
@@ -695,7 +695,7 @@ if($x2=="pharma") print "Farmacia - "; else print "Insumos médicos - ";
     </font><font face="Verdana, Arial, Helvetica, sans-serif"> </font> 
   </ul>
 	
-	<?php endif ?>	
-<?php endif ?>	
+	<?php endif;?>	
+<?php endif;?>	
 </form>
 

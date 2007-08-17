@@ -59,7 +59,7 @@ Henüz bir adresim yok. Nasıl yeni bir adres alabilirim?</b>
  	<b>Adım 1: </b> Kayıt formu açmak için "<span style="background-color:yellow" > Yeni kullanıcı buradan kayıt olabilir. <img <?php echo createComIcon('../','bul_arrowgrnsm.gif','0') ?>> </span>" bağlantısını tıklayınız.<br>
  	<b>Adım 2: </b>Daha çok bilgi için kayıt formundaki "Yardım" düğmesini tıklayabilirsiniz.<br>
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 	<?php if($x1=="1") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Nasıl kayıt olunur?</b>
@@ -78,8 +78,8 @@ Nasıl kayıt olunur?</b>
  	<b>Adım 7: </b>Kayıt olmak için <input type="button" value="Register"> düğmesini tıklayınız.<br>
 </ul>
 
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 
 <?php if($src=="mail") : ?>
 <?php if($x1=="listmail") : ?>
@@ -116,7 +116,7 @@ Yeni bir posta nasıl yazılır?</b>
 <ul>       	
  	<b>Adım 1: </b> "<span style="background-color:yellow" > Yeni Email </span>" bağlantısını tıklayınız.<br>
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 	<?php if($x1=="compose") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Yeni  mail nasıl yazılır?</b>
@@ -163,7 +163,7 @@ Bu "çabuk adres" de nedir?</b>
  	<b>Adım 2: </b>"Çabuk adres" listesindeki adrese tıklayınız. Bu adres otomatik olarak daha önce tıkladığınız giriş alanına kopyalanır.<br>
 </ul>
 
-	<?php endif ?>		
+	<?php endif;?>		
 <?php if(($x1=="sendmail")&&($x3=="1")) : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Yeni bir email nasıl yazılır?</b>
@@ -171,8 +171,8 @@ Yeni bir email nasıl yazılır?</b>
 <ul>       	
  	<b>Adım 1: </b>"<span style="background-color:yellow" > Yeni Email </span>" linkini tıklayınız.<br>
 </ul>
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 
 
 <?php if($src=="read") : ?>
@@ -211,7 +211,7 @@ Email nasıl silinir?</b>
  	<b>Adım 3: </b>Emaili sonunda silmak için  <input type="button" value="Tamam"> düğmesini tıklayınız.<p>
 	<b>Uyarı:</b> "Gelen kutusu"ndan silinmiş emailler geçici olarak "silinmiş ögeler"de depolanırlar.
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 	
 <?php if($src=="address") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -238,7 +238,7 @@ Adres defterinden bir email adresi nasıl silinir?</b>
  	<b>Adım 3: </b>Gerçekten silmeyi isteyip istemediğiniz sorulacak.<br>
  	<b>Adım 4: </b>Adresi sonunda silmek için <input type="button" value="Tamam"> düğmesini tıklayınız.<p>
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Uyarı:</b>

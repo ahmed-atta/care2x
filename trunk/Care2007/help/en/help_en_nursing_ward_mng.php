@@ -32,7 +32,7 @@ default ward will displayed. Locking a bed requires a valid password with access
 <ul> In this option you can create, edit, lock, or delete access rights for a particular ward. All the access rights created will have an 
 access only in that particular ward.
 </ul>
-<?php endif ?>
+<?php endif; ?>
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -68,10 +68,10 @@ How to display previous occupancy quickviews using the archive?</b>
  	<b>Step 3: </b>Click on a date in the calendar to display the occupancy quickview for that day.<br>
 	</ul>
 	
-	<?php endif ?>
+	<?php endif; ?>
 <b>Note</b>
 <ul> If you decide to close the quickview click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
-</ul><?php endif ?>
+</ul><?php endif; ?>
 
 <?php if($src=="new") : ?>
 
@@ -107,7 +107,7 @@ Can I set the prefix (or id) for a bed?</b>
 <b>Note</b>
 <ul> If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif; ?>
 	
 <?php if($src=="show") : ?>
 	<?php if($x1=="1") : ?>
@@ -150,8 +150,8 @@ What's the purpose of "closing the ward temporarily" ?</b>
 <ul> If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif; ?>
+<?php endif; ?>
 
 
 <?php if($src=="") : ?>
@@ -166,7 +166,7 @@ How to select a ward for viewing its profile?</b>
 <ul> If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
 
-<?php endif ?>
+<?php endif; ?>
 
 
 </form>

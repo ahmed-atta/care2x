@@ -44,7 +44,7 @@ Bagaimana cara memilih Warna Teks?</b>
     <input type="button" value="Opsi Warna Extended">
     untuk mengubah ke opsi warna extended.<br>
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="ext") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Bagaimana cara memilih warna link aktiv?</b> </font> 
@@ -73,6 +73,6 @@ Bagaimana cara memilih Warna Teks?</b>
  	<b>Langkah 5: </b>Jika anda selesai, Klik tombol <input type="button" value="OK">.<br>
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 	</form>
 

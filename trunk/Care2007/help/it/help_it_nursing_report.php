@@ -65,7 +65,7 @@ Come fare a: inserire <?php if($x1=="docs") print "una domanda per il medico"; e
 Nota:</b></font>
 <ul> 
 	E' anche possibile inserire <?php if($x1=="docs") print "sia prescrizioni mediche che domande per il medico"; else print "i rapporti sia infermieristico che sull'efficacia terapeutica"; ?>.</ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="diagnosis") : ?>
 <un name="extra"><un name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a></a>
 Come fare a: visualizzare un rapporto diagnostico?</b></font>
@@ -74,7 +74,7 @@ Come fare a: visualizzare un rapporto diagnostico?</b></font>
   		<b>Nota: </b>Il primo report della lista sarà mostrato subito.<p>
 	<b>1: </b>Selezionare la nota relativa al report che si vuole vedere.<br>	
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="kg_atg_etc") : ?>
 <un name="pt"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire informazioni su terapia fisica giornaliera, ginnastica anti-trombosi, etc.?</b></font>
@@ -87,14 +87,14 @@ Come fare a: inserire informazioni su terapia fisica giornaliera, ginnastica ant
 		<b>4: </b>Alla fine, premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="fotos") : ?>
 <un name="coag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: vedere una foto in anteprima?</b></font>
 <ul> 
 	<b>1: </b>Selezionare una delle piccole immagini nel riquadro a sinistra: a destra apparirà l'immagine a dimensione piena, completa di data e numero della foto.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="anticoag_dailydose") : ?>
 <un name="daycoag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire informazioni su terapia anticoagulatoria giornaliera?</b></font>
@@ -105,7 +105,7 @@ Come fare a: inserire informazioni su terapia anticoagulatoria giornaliera?</b><
 		<b>3: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>4: </b>Alla fine, premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="lot_mat_etc") : ?>
 <un name="lot"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire note on implants, LOT nr, charge nr, etc?</b></font>
@@ -117,7 +117,7 @@ Come fare a: inserire note on implants, LOT nr, charge nr, etc?</b></font>
 		<b>3: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>4: </b>Alla fine, premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="medication") : ?>
 <un name="med"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire medicinali e piani di dosaggio?</b></font>
@@ -139,7 +139,7 @@ Come fare a: inserire medicinali e piani di dosaggio?</b></font>
 		<b>6: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>7: </b>Alla fine, premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="medication_dailydose") : ?>
 	<?php if($x2) : ?>
 <un name="daymed"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
@@ -177,8 +177,8 @@ Dice "Non c'è ancora un medicinale". Che devo fare?</b></font>
 		<b>9: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>10: </b>Alla fine, premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-	<?php endif ?>
-<?php endif ?>
+	<?php endif;?>
+<?php endif;?>
 <?php if($src=="iv_needle") : ?>
 <un name="iv"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Come fare a: inserire informazioni su somministrazione e dosaggio di medicinali via endovenosa?</b></font>
@@ -189,5 +189,5 @@ Come fare a: inserire informazioni su somministrazione e dosaggio di medicinali 
 		<b>3: </b>Se si desidera correggere un errore, selezionare i dati sbagliati e sostituirli con quelli giusti, poi salvare.<br>
 		<b>4: </b>Alla fine, premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> per chiudere la finestra e tornare al grafico.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 </form>

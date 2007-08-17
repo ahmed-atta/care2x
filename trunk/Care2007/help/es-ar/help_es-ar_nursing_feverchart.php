@@ -597,7 +597,7 @@
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota: </b>Si 
   desea cancelar, dé clic al botón<img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.</ul> 
-  <?php endif ?>
+  <?php endif;?>
   </font> 
 </form>
 

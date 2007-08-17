@@ -40,7 +40,7 @@ Come scegliere i colori dei link?</b>
 <ul>       	
  	<b>5: </b>Selezionare il bottone <input type="button" value="Opzioni estese colore"> per passare alla selezione estesa dei colori.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="ext") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -65,5 +65,5 @@ Come scegliere il colore dei link puntati dal mouse?</b>
  	<b>4: </b>Selezionare sul bottone <input type="button" value="Applica"> per confermare.<br>
  	<b>5: </b>Al termine, premere il bottone <input type="button" value="OK">.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 </form>

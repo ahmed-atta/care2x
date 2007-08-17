@@ -165,7 +165,7 @@
     a la vez. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="diagnosis") : ?>
   <a name="extra"></a><a name="extra"></a></b><a name="extra"></a><a name="extra"></a><a name="extra"></a><a name="extra"></a><a name="extra"></a></font><font face="Verdana, Arial, Helvetica, sans-serif"><a name="extra"><a name="diag"><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b><img <?php echo createComIcon('../','frage.gif','0') ?>> 
   </font></a></a><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b> 
@@ -181,7 +181,7 @@
       </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="kg_atg_etc") : ?>
   <a name="pt"><img <?php echo createComIcon('../','frage.gif','0') ?>> </a></font><font color="990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>¿Como 
   ingresar la información </strong></font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><font color="990000"><strong>diaria</strong></font></font><font color="990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong> 
@@ -202,7 +202,7 @@
     para cerrar la ventana y volver a la gráfica. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="fotos") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="990000"><strong>¿Como 
   previsualizar una foto? </strong></font></font> 
@@ -213,7 +213,7 @@
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="anticoag_dailydose") : ?>
   <a name="daycoag"><img <?php echo createComIcon('../','frage.gif','0') ?>> </a><font color="990000"><strong>¿Como 
   ingresar la información de la aplicación de anticoagulantes diarios?</strong></font></font> 
@@ -232,7 +232,7 @@
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
   </font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="lot_mat_etc") : ?>
   <a name="lot"><img <?php echo createComIcon('../','frage.gif','0') ?>> </a><font color="990000"><strong>&iquest;Como 
   ingresar notas en implantes, Número de lote,Número de cargo, etc?</strong></font></font> 
@@ -253,7 +253,7 @@
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
   </font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="medication") : ?>
   <a name="med"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b><font color="990000"><strong>&iquest;</strong></font></a><strong><font color="990000">Como 
   ingresar indicaciones de medicamentos y dosis?</font></strong></font> 
@@ -289,7 +289,7 @@
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
   </font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="medication_dailydose") : ?>
   <?php if($x2) : ?>
   <a name="daymed"><img <?php echo createComIcon('../','frage.gif','0') ?>> </a><a name="med"><font color="990000"><strong>&iquest;</strong></font></a><strong><font color="990000">Como 
@@ -351,8 +351,8 @@
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
   </font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
-  <?php endif ?>
+  <?php endif;?>
+  <?php endif;?>
   <?php if($src=="iv_needle") : ?>
   <a name="iv"><img <?php echo createComIcon('../','frage.gif','0') ?>> </a><a name="med"><font color="990000"><strong>&iquest;</strong></font></a><strong><font color="990000">Como 
   ingresar la indicaci&oacute;n diaria de medicamentos intravenosos, su aplicaci&oacute;n 
@@ -371,7 +371,7 @@
     para cerrar la ventana y volver a la gráfica. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   </font> 
 </form>
 

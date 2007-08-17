@@ -16,7 +16,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <font size=3 color="#0000cc"><b>Einen neuen Patient aufnehmen</b></font>
 <ul> Falls Sie einen neuen Patien aufnehmen möchten, den <input type="button" value="Zurück zur Aufnahme"> anklicken.
 </ul>
-<?php endif ?>
+<?php endif; ?>
 <b>Achtung!</b>
 <ul> Wenn Sie fertig sind den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> anklicken.
 		

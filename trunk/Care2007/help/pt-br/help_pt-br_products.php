@@ -78,7 +78,7 @@ Como remover um artigo da lista do catálogo?</b>
  	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> do artigo.<br>
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="how2") : ?>
 
@@ -168,7 +168,7 @@ Desejo criar uma nova lista de pedidos. O que devo fazer?</b>
 <ul>       	
  Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="head") : ?>
@@ -191,7 +191,7 @@ Como solicitar <?php if($x2=="pharma") print "produtos farmaceuticos";
 <ul>       	
  Se você decidir fechar, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="catalog") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -236,7 +236,7 @@ Como remover um artigo da lista do catálogo?</b>
  	<b>Passo 1: </b>Clique no botão <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> do artigo.<br>
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="orderlist") : ?>
 	<?php if($x1=="0") : ?>
@@ -296,9 +296,9 @@ Todos os artigos que necessito estão no cesto agora. O que devo fazer a seguir?<
 <ul>       	
  Se você decidir cancelar o envio da lista de pedidos, clique no link "<span style="background-color:yellow" > << Voltar e editar a lista </span>" para voltar para a lista de pedidos.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="final") : ?>
@@ -330,9 +330,9 @@ Como enviar a lista de pedidos final?</b>
 <ul>       	
  Se você decidir cancelar a lista de pedidos, clique no link "<span style="background-color:yellow" > << Voltar e editar a lista </span>" para voltar à lista de pedidos.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 <!-- ++++++++++++++++++++++++++++++++++ archive +++++++++++++++++++++++++++++++++++++++++++ -->
 <?php if($src=="arch") : ?>
 
@@ -364,7 +364,7 @@ Como enviar a lista de pedidos final?</b>
 </ul>
 
 
-	<?php endif ?>
+	<?php endif;?>
 	
 <?php if($src=="archshow") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -394,7 +394,7 @@ Desejo ver a lista dos pedidos arquivados novamente. O que devo fazer?</b>
 <b>Passo 3: </b>Clique no botão <input type="button" value="Pesquisar"> para encontrar o artigo.<br>
  	<b>Passo 4: </b>Se a pesquisa encontrar o pedido ou pedidos que aproximam-se a palavra-chave, uma lista será exibida.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	
 
 <?php if($src=="db") : ?>
@@ -418,7 +418,7 @@ Finalizei a entrada de todas as informações disponíveis. Como salvar?</b>
 <ul>       	
  	<b>Passo 1: </b>Clique no botão <input type="button" value="Salvar">.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como inserir um novo produto no banco de dados?</b>
@@ -439,7 +439,7 @@ Desejo editar o produto que está atualmente sendo exibido. Como fazer isso?</b>
  	<b>Passo 4: </b>Clique no botão <input type="button" value="Save"> para salvar a nova informação.<br>
 </ul>
 	
-	<?php endif ?>	
-<?php endif ?>	
+	<?php endif;?>	
+<?php endif;?>	
 </form>
 

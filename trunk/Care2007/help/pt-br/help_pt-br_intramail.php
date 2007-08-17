@@ -60,7 +60,7 @@ Eu ainda não tenho endereço. Como consigo um endereço?</b>
 	formulário de registro.<br>
  	<b>Passo 2: </b>Para maiores instruções, clique no botão "Ajuda" após o formulário de registro ter sido mostrado.<br>
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 	<?php if($x1=="1") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como se registrar?</b>
@@ -79,8 +79,8 @@ Como se registrar?</b>
  	<b>Passo 7: </b>Clique no botão <input type="button" value="Registre"> para se registrar.<br>
 </ul>
 
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 
 <?php if($src=="mail") : ?>
 <?php if($x1=="listmail") : ?>
@@ -117,7 +117,7 @@ Como compor ou escrever uma nova mensagem?</b>
 <ul>       	
  	<b>Passo 1: </b>Clique no link "<span style="background-color:yellow" > Novo Email </span>".<br>
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 	<?php if($x1=="compose") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como escrever uma nova mensagem?</b>
@@ -166,7 +166,7 @@ Como é que funciona o "Endereço rápido" ?</b>
  	<b>Passo 2: </b>Clique no botão Endereço na lista do "Endereço rápido" . Este endereço será copiado para o campo de entrada que você clicou previamente.<br>
 </ul>
 
-	<?php endif ?>		
+	<?php endif;?>		
 <?php if(($x1=="sendmail")&&($x3=="1")) : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como compor ou escrever uma nova mensagem?</b>
@@ -174,8 +174,8 @@ Como compor ou escrever uma nova mensagem?</b>
 <ul>       	
  	<b>Passo 1: </b>Clique no link do botão  "<span style="background-color:yellow" > Novo Email </span>".<br>
 </ul>
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 
 
 <?php if($src=="read") : ?>
@@ -214,7 +214,7 @@ Como apagar uma mensagem?</b>
  	<b>Passo 3: </b>Clique no botão <input type="button" value="OK"> para finalmente apagar a mensagem.<p>
 	<b>Note:</b> Mensagens que são apagadas do arquivo da "Caixa de entrada"  ficam temporariamente armazenados no arquivo "Reciclar" .
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 	
 <?php if($src=="endereço") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -241,7 +241,7 @@ Como remover um endereço de email do livro de endereços?</b>
  	<b>Passo 3: </b>Você será perguntado se você realmente quer apagar o endereço.<br>
  	<b>Passo 4: </b>Clique no botão <input type="button" value="OK"> para finalmente remover o endereço.<p>
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Nota:</b>

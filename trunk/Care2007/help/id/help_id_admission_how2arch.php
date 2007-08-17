@@ -142,7 +142,7 @@ pencarian di Arsip</b></font>
 		the name, or the Family name or the admission date.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 <b>Catatan</b>
 <ul> If you decide to cancel research  Klik tombol 
     <input type="button" value="Batal">

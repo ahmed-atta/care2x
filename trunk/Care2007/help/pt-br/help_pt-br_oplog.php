@@ -119,7 +119,7 @@ Como inserir <?php echo $person ?> através da lista de seleção rápida?</b>
 <ul>       	
  Se você decidir cancelar clique no botão<img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="time") : ?>
 	<?php if($x1=="entry_out") : ?>
@@ -135,7 +135,7 @@ Como documentar os tempos de entrada e saída?</b>
  	<b>Nota: </b>Você pode inserir diversos tempos de entrada e saída todos de uma vez antes de salvar a informação.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="cut_close") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como documentar tempos de corte e sutura?</b>
@@ -149,7 +149,7 @@ Como documentar tempos de corte e sutura?</b>
  	<b>Nota: </b>Você pode inserir diversos tempos de corte e sutura todos juntos antes de salvar a informação.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="wait_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como documentar tempo de espera (aguardando)?</b>
@@ -164,7 +164,7 @@ Como documentar tempo de espera (aguardando)?</b>
  	<b>Nota: </b>Você pode inserir diversos tempos de início e fim e razões todos juntos antes de salvar a informação.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="bandage_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como documentar tempos de engessamento?</b>
@@ -178,7 +178,7 @@ Como documentar tempos de engessamento?</b>
  	<b>Note: </b>Você pode inserir diversos tempos de início e fim e razões todos juntos antes de salvar a informação.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="repos_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como documentar tempos de reposição?</b>
@@ -192,7 +192,7 @@ Como documentar tempos de reposição?</b>
  	<b>Note: </b>Você pode inserir diversos tempos de início e fim e razões todos juntos antes de salvar a informação.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como salvar a informação?</b>
 </font>
@@ -214,7 +214,7 @@ Como salvar a informação?</b>
 <ul>       	
  Se você decidir cancelar clique no botão<img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="create") : ?>
@@ -281,7 +281,7 @@ Como exibir os registros de entrada de um  dia que não está sendo exibido?</b>
 
 <hr>
 
-	<?php endif ?>
+	<?php endif;?>
 	
 	<?php if($x2=="material") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -330,7 +330,7 @@ Como exibir o livro de registros principal novamente?</b>
  	<b>Passo 1: </b>Clique no link "<span style="background-color:yellow" > <img <?php echo createComIcon('../','manfldr.gif','0') ?>> Mostrar Livro de Registros. </span>" .<br> 
 </ul>
 <hr>
-	<?php endif ?>
+	<?php endif;?>
 
 	<?php if(($x1=="")||($x1=="fresh")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -485,9 +485,9 @@ Como iniciar um novo registro de documento?</b>
 <b>Nota</b>
 <ul> Se você decidir fechar, clique no botão<img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 
 
 
@@ -508,7 +508,7 @@ Como pesquisar por um documento de um paciente em particular?</b>
 	Clique no nome de família do paciente para exibir seus documentos.<p> 
 	</ul>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="search")&&($x3!="1")) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -518,7 +518,7 @@ Como selecionar um documento particular para exibir?</b>
  	<b>Nota: </b> Clique no nome de família do paciente para exibir seus documentos.<p> 
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="get")||($x3=="1")) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -536,7 +536,7 @@ Como abrir a pasta de dados do paciente?</b>
  	<b>Passo 2: </b>A pasta de dados do paciente irá aparecer. Clique no botão "Ajuda" na janela se você necessita mais instruções.<p> 
 	</ul>
 
-<?php endif ?>
+<?php endif;?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como continuar pesquisando?</b>
 </font>
@@ -549,21 +549,21 @@ Como continuar pesquisando?</b>
 <ul>       	
  Se você decidir fechar clique no botão<img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="arch") : ?>
 	<?php if($x2=="1") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota: últimas entradas de registro</b></font> 
 <ul>  Cada vez que você trocar de arquivo, as últimas operações registradas serão exibidas imediatamente.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if(($x3=="")&&($x1!="0")) : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nenhuma operação feita neste dia.</b></font> 
 <ul>       	
 Clique em "Opções" para abrir a caixa de opções.<br>
 Clique em "Pesquisa" para trocar para o modo de pesquisa.</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 	
 
 
@@ -605,7 +605,7 @@ Como abrir a pasta de dados do paciente?</b>
  	<b>Passo 1: </b>Clique no botão <img src="../img/info2.gif" border=0> na esquerda do númenro do paciente.<br>
  	<b>Passo 2: </b>A pasta de dados do paciente irá abrir. Clique no botão "Ajuda" na janela se você necessita mais instruções.<p> 
 	</ul>
-	<?php endif ?>
+	<?php endif;?>
 	
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
@@ -613,7 +613,7 @@ Como abrir a pasta de dados do paciente?</b>
 </ul>
 
 
-	<?php endif ?>
+	<?php endif;?>
 
 
 </form>

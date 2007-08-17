@@ -134,7 +134,7 @@ Come inserire <?php echo $person ?> tramite la lista di selezione rapida?</b>
  
 </ul><img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>Premere <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0> per annullare l'operazione.</ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="time") : ?>
 	<?php if($x1=="entry_out") : ?>
@@ -150,7 +150,7 @@ Come documentare gli orari di inizio e fine?</b>
  	<b>Nota: </b>E' possibile inserire più orari di inizio e fine e salvare tutto in una volta.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="cut_close") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come documentare tempi di taglio e sutura?</b>
@@ -164,7 +164,7 @@ Come documentare tempi di taglio e sutura?</b>
  	<b>Nota: </b>E' possibile inserire più orari di taglio e sutura e salvare tutto in una volta.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="wait_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come documentare il tempo di attesa?</b>
@@ -179,7 +179,7 @@ Come documentare il tempo di attesa?</b>
  	<b>Nota: </b>E' possibile inserire più tempi iniziali, finali e ragioni e salvare tutto in una volta.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="bandage_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come documentare i tempi di fasciatura?</b>
@@ -193,7 +193,7 @@ Come documentare i tempi di fasciatura?</b>
  	<b>Nota: </b>E' possibile inserire più tempi iniziali e finali e salvare tutto in una volta.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="repos_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come documentare tempi di riposizionamento?</b>
@@ -207,7 +207,7 @@ Come documentare tempi di riposizionamento?</b>
  	<b>Nota: </b>E' possibile inserire più orari di inizio e fine e salvare tutto in una volta.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come salvare le informazioni?</b>
 </font>
@@ -227,7 +227,7 @@ Come salvare le informazioni?</b>
 </ul>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>Premere <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0> per annullare l'operazione.</ul>
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="create") : ?>
@@ -296,7 +296,7 @@ Come visualizzare il registro per un giorno diverso da quello mostrato in questo
 
 <hr>
 
-	<?php endif ?>
+	<?php endif;?>
 	
 	<?php if($x2=="material") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -343,7 +343,7 @@ Come tornare al registro principale?</b>
  	<b>1: </b>selezionare il link "<span style="background-color:yellow" > <img <?php echo createComIcon('../','manfldr.gif','0') ?>> Registro </span>".<br> 
 </ul>
 <hr>
-	<?php endif ?>
+	<?php endif;?>
 
 	<?php if(($x1=="")||($x1=="fresh")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -494,8 +494,8 @@ Come iniziare una nuova registrazione</b>
 <b>Nota</b>
 <ul>Per chiudere, selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
-<?php endif ?>
+	<?php endif;?>
+<?php endif;?>
 <?php if($src=="search") : ?>
 <?php if(($x2!="")&&($x2!="0")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -507,12 +507,12 @@ Come selezionare il paziente di cui voglio <?php if($x1=="edit") print "modifica
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come continuare la ricerca?</b>
 </font>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if(($x2=="")||($x2=="0")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come cercare un paziente?</b>
 </font>
-	<?php endif ?>
+	<?php endif;?>
 	<ul>       	
  	<b>1: </b>Inserire il nome o il cognome o la data di nascita (o le prime lettere che lo compongono) nel campo 
 	"<span style="background-color:yellow" > Inserire una parola chiave <input type="text" name="m" size=20 maxlength=20> </span>". <br>
@@ -522,25 +522,25 @@ Come cercare un paziente?</b>
 	</ul>
 	<?php if(($x2=="")||($x2=="0")) : ?>
  	<b>3: </b>selezionare il bottone &nbsp;<button><img <?php echo createComIcon('../','update2.gif','0') ?>> <font size=1>Referti lab</font></button> corrispondenti al paziente di cui si vuole <?php if($x1=="edit") print "modificare"; else print "visualizzare"; ?> il referto.<p> 
-	<?php endif ?>
+	<?php endif;?>
 </ul>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
  <ul>Premere <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0> per annullare l'operazione.</ul>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="arch") : ?>
 	<?php if($x2=="1") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota sulle ultime voci inserite nel registro</b></font> 
 <ul>  Ogni volta che si passa ad un archivio, le ultime operazioni inserite diventano immediatamente visibili.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if(($x3=="")&&($x1!="0")) : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nessuna operazione in questo giorno.</b></font> 
 <ul>       	
 selezionare "Opzioni" per aprire la finestra delle opzioni.<br>
 selezionare "Ricerca" per passare al modo ricerca.</ul>
-	<?php endif ?>
+	<?php endif;?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
 <font color="#990000"><b>Voglio visualizzare le registrazioni per un giorno differente.</b></font>
  	<b>Giorni precedenti:</b> selezionare il link "<span style="background-color:yellow" > Precedente </span>" nell'angolo in alto a sinistra della tabella.<br>
@@ -570,12 +570,12 @@ Come aprire la cartella di un paziente</b>
  	<b>1: </b>selezionare il bottone <img src="../img/info2.gif" border=0> a sinistra del codice paziente.<br>
  	<b>2: </b>Apparirà la cartella dei dati paziente. Se occorre selezionare il bottone "Aiuto" per altre istruzioni.<p> 
 	</ul>
-	<?php endif ?>
+	<?php endif;?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
 <ul>Premere <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0> per annullare l'operazione.</ul>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if($src=="input") : ?>
 	<?php if($x1=="main") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -594,7 +594,7 @@ Come inserire i risultati di un test</b>
 		?>: </b> Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare i valori.<p> 
  	<b>Nota: </b>Dopo il salvataggio, per chiudere selezionare <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if($x1=="few") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ho solo alcuni dei valori: come fare?</b>
@@ -604,7 +604,7 @@ Ho solo alcuni dei valori: come fare?</b>
  	<b>2: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare.<p> 
  	<b>Nota: </b>Dopo il salvataggio, per chiudere selezionare <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="param") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 I parametri che mi servono non sono mostrati: come faccio a passare al gruppo giusto?</b>
@@ -614,7 +614,7 @@ I parametri che mi servono non sono mostrati: come faccio a passare al gruppo gi
      <option value="Parametri esempio"> Parametri esempio</option> </select> </span>"</nobr>.<p> 
  	<b>2: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','auswahl2.gif','0') ?>> per passare al gruppo di parametri scelto.<p> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="save") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come salvare i valori?</b>
@@ -623,7 +623,7 @@ Come salvare i valori?</b>
  	<b>1: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare.<p> 
  	<b>Nota: </b>Dopo il salvataggio, per chiudere selezionare <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="correct") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ho salvato un valore sbagliato: posso correggerlo?</b>
@@ -633,7 +633,7 @@ Ho salvato un valore sbagliato: posso correggerlo?</b>
  	<b>2: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare il valore giusto.<p> 
  	<b>Nota: </b>Dopo il salvataggio, per chiudere selezionare <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="note") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ho bisogno di inserire una nota invece di un valore: come faccio?</b>
@@ -643,7 +643,7 @@ Ho bisogno di inserire una nota invece di un valore: come faccio?</b>
  	<b>2: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare la nota.<p> 
  	<b>Nota: </b>Dopo il salvataggio, per chiudere selezionare <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="done") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ho finito. E ora?</b>
@@ -652,10 +652,10 @@ Ho finito. E ora?</b>
  	Selezionare il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> per salvare tutti i valori.<p> 
  	<b>Nota: </b>Selezionare il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
  <ul>Premere <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0> per annullare l'operazione.</ul>
 </ul>
-<?php endif ?>
+<?php endif;?>
 </form>

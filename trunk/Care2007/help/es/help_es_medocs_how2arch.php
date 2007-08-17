@@ -31,7 +31,7 @@
     Si la búsqueda halla un solo resultado, el documento completo se mostrará 
     inmediatamente.<br>
     Sin embargo, si la búsqueda halla varios resultados, aparecerá un listado.<br>
-    <?php endif ?>
+    <?php endif;?>
     Para ver la información del paciente que está buscando, dé clic, ya sea al 
     botón <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> correspondiente 
     a él, o al apellido, al nombre o a la fecha de admisión. </font> 
@@ -246,7 +246,7 @@
     correspondiente, o al apellido, al nombre o a la fecha de admisión. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <b>Nota</b> </font> 
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si decide cancelar 

@@ -78,7 +78,7 @@ Bir malzeme katalog listesinden nasıl çıkarılır?</b>
  	<b>Adım 1: </b>Malzemenin <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> düğmesini tıklayınız.<br>
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="how2") : ?>
 
@@ -168,7 +168,7 @@ Yeni bir istem listesi oluşturmak istiyorum. Ne yapmalıyım?</b>
 <ul>       	
  Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="head") : ?>
@@ -199,7 +199,7 @@ Yeni bir istem listesi oluşturmak istiyorum. Ne yapmalıyım?</b>
 <ul>       	
  Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="catalog") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -243,7 +243,7 @@ Bir malzeme katalog listesinden nasıl silinir?</b>
  	<b>Adım 1: </b>Malzemenin <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> düğmesine tıklayınız.<br>
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="orderlist") : ?>
 	<?php if($x1=="0") : ?>
@@ -302,9 +302,9 @@ Gereksindiğim tüm malzemeler şimdi sepette. Sonra ne yapmalıyım?</b>
 <ul>       	
  İstem listesini göndermeyi iptal etmeye karar verir iseniz, "<span style="background-color:yellow" > Geri git ve listeyi düzenle </span>" bağlantısını tıklayınız.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="final") : ?>
@@ -336,9 +336,9 @@ Sonlandırılmış istem listesi nasıl gönderilir?</b>
 <ul>       	
  İstem listesini göndermeyi iptal etmeye karar verir iseniz, "<span style="background-color:yellow" > Geri git ve listeyi düzenle </span>" bağlantısını tıklayınız.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 <!-- ++++++++++++++++++++++++++++++++++ archive ++++++++Çeviren Op. Dr. Bülent Potur ++++++++++++++ -->
 <?php if($src=="arch") : ?>
 
@@ -370,7 +370,7 @@ Sonlandırılmış istem listesi nasıl gönderilir?</b>
 </ul>
 
 
-	<?php endif ?>
+	<?php endif;?>
 	
 <?php if($src=="archshow") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -400,7 +400,7 @@ Tekrar arşivdeki istemlerin listesini görmek istiyorum. Ne yapmalıyım?</b>
 <b>Adım 3: </b>Malzemeyi bulmak için <input type="button" value="Ara"> düğmesini tıklayınız.<br>
  	<b>Adım 4: </b>Arama aranan anahtar sözcüğe yaklaşık bir sonuç bulur ise bir liste görüntülenir.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	
 
 <?php if($src=="db") : ?>
@@ -424,7 +424,7 @@ Bulunan tüm ürün bilgisini girmeyi bitirdim. Nasıl kayıt edilir?</b>
 <ul>       	
  	<b>Adım 1: </b> <input type="button" value="Kaydet"> düğmesini tıklayınıız.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Yeni bir ürün bilgi bankasına nasıl girilir?</b>
@@ -445,7 +445,7 @@ Görüntülenen ürünün bilgisini düzenlemek istiyorum. Nasıl yapılır?</b>
  	<b>Adım 4: </b>Yeni bilgiyi kayıt etmek için  <input type="button" value="Kaydet"> düğmesini tıklayınız.<br>
 </ul>
 	
-	<?php endif ?>	
-<?php endif ?>	
+	<?php endif;?>	
+<?php endif;?>	
 </form>
 

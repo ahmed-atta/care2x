@@ -93,7 +93,7 @@
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="maindata") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Como encontrar los datos del paciente?</b> </font></font> 
@@ -129,7 +129,7 @@
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="save") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Como archivar fotos adicionales del mismo paciente?</b> </font></font> 
@@ -157,7 +157,7 @@
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="init") : ?>
   <?php if($x1=="") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
@@ -173,7 +173,7 @@
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="save") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   El nuevo derecho de acceso se salvÃ³. ¿Como crear otro derecho de accesot?</b> 
@@ -200,7 +200,7 @@
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="list") : ?>
   </font><font face="Verdana, Arial, Helvetica, sans-serif">
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
@@ -264,7 +264,7 @@
       </ul>
     </ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($x1=="update") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> 
     <font color="#990000"><b> Â¿Como editar algun derecho de acceso?</b> 
@@ -290,7 +290,7 @@
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="lock") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Como borrar los derechos de acceso?</b> </font></font> 
@@ -310,8 +310,8 @@
     <input type="button" value="Cancelar">
     .</font><br>
 	</ul>
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 
 	</form>
 

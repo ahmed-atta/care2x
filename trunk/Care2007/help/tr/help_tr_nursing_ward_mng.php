@@ -30,7 +30,7 @@ switch($src)
 <b>Erişim hakları</b>
 <ul> Bu seçenekte belirli bir servis için erişim hakları oluşturabilir, düzenleyebilir, kilitleyebilir veya silebilirsiniz. Oluşturulan tüm erişim hakları sadece o belirli servis için geçerli olur.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -66,10 +66,10 @@ Arşiv kullanılarak önceki yatan hasta listelerine hızlı bakışlar nasıl g
  	<b>Adım 3: </b>Rehber takvimde bir günün tarihini tıklayarak o günkü yatan hasta listesini hızlı bakış olarak izleyebilirsiniz.<br>
 	</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 <b>Uyarı</b>
 <ul> Hızlı bakışı kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
-</ul><?php endif ?>
+</ul><?php endif;?>
 
 <?php if($src=="new") : ?>
 
@@ -105,7 +105,7 @@ Bir yatağın ön ek (veya kimliği) ini düzenleyebilir miyim?</b>
 <b>Uyarı</b>
 <ul> Eğer iptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 	
 <?php if($src=="show") : ?>
 	<?php if($x1=="1") : ?>
@@ -147,8 +147,8 @@ Bir servisi "geçici olarak kapatma" nın amacı nedir?</b>
 <ul> İptal etmek ister iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 
 
 <?php if($src=="") : ?>
@@ -163,7 +163,7 @@ Bir servis profilini görmek için nasıl seçilir?</b>
 <ul> İptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 
 </form>

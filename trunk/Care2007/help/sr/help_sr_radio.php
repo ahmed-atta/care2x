@@ -46,7 +46,7 @@ How to display patient's xray film in full view?</b>
 <ul>       	
  If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 </form>

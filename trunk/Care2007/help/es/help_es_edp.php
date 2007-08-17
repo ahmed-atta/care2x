@@ -62,7 +62,7 @@ de datos
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="save") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   El nuevo acceso está salvado ahora. �Como creo otro acceso?</b> </font></font> 
@@ -87,7 +87,7 @@ de datos
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="list") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Los botones <img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> 
@@ -147,7 +147,7 @@ de datos
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="update") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Como editar algun derecho de acceso?</b> </font></font> 
@@ -169,7 +169,7 @@ de datos
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="delete") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   �Como borrar los derechos de acceso?</b> </font></font> 
@@ -191,7 +191,7 @@ de datos
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="lock") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
   <font color="#990000"><b> ¿Cómo 
@@ -217,8 +217,8 @@ de datos
     .</font><br>
 </ul>
 	
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 
 	</form>
 

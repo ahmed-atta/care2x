@@ -159,7 +159,7 @@ Belirli bir hastanın bir belgesi nasıl aranır?</b>
 <ul>       	
  Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="match"||$x1=='paginate')&&($x2>0)) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -191,7 +191,7 @@ Aramaya nasıl devam edilir?</b>
 <ul>       	
  Kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="select")&&($x2==1)) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -212,8 +212,8 @@ Aramaya nasıl devam edilir?</b>
  Kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 
 <?php if($src=="arch") : ?>
 	<?php if(($x1=="dummy")||($x1=="?")||($x1=="")) : ?>
@@ -308,7 +308,7 @@ Arama bir tek sonuç bulur ise, tüm belge derhal görüntülenir.<br>
 <ul>       	
  Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="search")&&($x2>1)) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -327,7 +327,7 @@ Arşivde aramaya nasıl devam edilir?</b>
 <ul>       	
  Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="select")&&($x2==1)) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -348,8 +348,8 @@ Arşivlerde aramaya nasıl devam edilir?</b>
  Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 
 </form>
 

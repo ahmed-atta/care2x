@@ -15,7 +15,7 @@ switch($x1)
 	<b>Schritt 1</b>
 	<ul> Klicken Sie auf <img <?php echo createLDImgSrc('../','such-gray.gif','0') ?>>.
 	</ul>
-	<?php endif ?>
+	<?php endif;?>
 <b>Schritt <?php if($src=="newphone") print "2"; else print "1"; ?></b>
 
 <ul> Geben Sie im Suchfeld "<span style="background-color:yellow" >Hier Suchkriterien eingeben</span>" entweder
@@ -33,12 +33,12 @@ Vornamen, oder die Raumnummer ein.
 <b>Schritt <?php if($src=="newphone") print "4"; else print "3"; ?></b>
 <ul> Wenn die Suche erfolgreich ist, wird eine Ergebnisliste angezeigt.<p>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1=="dir") : ?>
 <b>Schritt 1</b>
 <ul> Klicken Sie auf <img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1=="newphone") : ?>
 	<?php if($src=="search") : ?>
 <b>Schritt 1</b>
@@ -49,10 +49,10 @@ Vornamen, oder die Raumnummer ein.
 neue Telefon-Informationen angezeigt.<br>
 	Ansonsten, wenn Sie nicht eingeloggt sind, erscheint eine Eingabeaufforderung für Ihren Benutzernamen und
 	Ihr Passwort. <p>
-	<?php endif ?>
+	<?php endif;?>
 		Geben Sie Benutzernamen und Passwort ein und klicken Sie auf <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
 
-</ul><?php endif ?>
+</ul><?php endif;?>
 
 <b>Anmerkung</b>
 <ul> Zum Abbrechen

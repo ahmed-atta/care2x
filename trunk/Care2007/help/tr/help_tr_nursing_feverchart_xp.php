@@ -24,7 +24,7 @@ Derece veya kan basıncı nasıl girilir?</b></font>
 		<b>Adım 5: </b>İşiniz bitti ise, pencereyi kapatıp çizelgeye geri dönmek için  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="diet") : ?>
 
 <a name="diet"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
@@ -36,7 +36,7 @@ Diyet planı nasıl girilir?</b></font>
 		<b>Adım 4: </b>İşiniz bitti ise , pencereyi kapatıp çizelgeye geri dönmek için <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="allergy") : ?>
 <a name="allergy"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Allerji bilgisi nasıl girilir?</b></font>
@@ -49,7 +49,7 @@ Allerji bilgisi nasıl girilir?</b></font>
 		<b>Adım 4: </b>İşiniz bitti ise , pencereyi kapatıp çizelgeye geri dönmek için <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="diag_ther") : ?>
 <a name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Ana tanı ve/veya tedavi nasıl girilir?</b></font>
@@ -62,7 +62,7 @@ Ana tanı ve/veya tedavi nasıl girilir?</b></font>
 		<b>Adım 4: </b>İşiniz bitti ise, pencereyi kapatıp çizelgeye geri dönmek için <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="diag_ther_dailyreport") : ?>
 <a name="daydiag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Günlük tanı veya tedavi planı nasıl girilir?</b></font>
@@ -75,7 +75,7 @@ Günlük tanı veya tedavi planı nasıl girilir?</b></font>
 		<b>Adım 4: </b>İşiniz bitti ise pencereyi kapatıp çizelgeye geri dönmek için <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="xdiag_specials") : ?>
 <a name="extra"><a name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a></a>
 Notlar, ek tanılar nasıl girilir?</b></font>
@@ -88,7 +88,7 @@ Notlar, ek tanılar nasıl girilir?</b></font>
 		<b>Adım 4: </b>İşiniz bitti ise pencereyi kapatıp çizelgeye geri dönmek için <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="kg_atg_etc") : ?>
 <a name="pt"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Günlük fizik tedavi,(PT), Antitromboz jimnastiği (Atg), vs. bilgisi nasıl girilir?</b></font>
@@ -101,7 +101,7 @@ Günlük fizik tedavi,(PT), Antitromboz jimnastiği (Atg), vs. bilgisi nasıl gi
 		<b>Adım 4: </b>İşiniz bitti ise pencereyi kapatıp çizelgeye geri dönmek için <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="anticoag") : ?>
 <a name="coag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Antikoagülanlar nasıl girilir?</b></font>
@@ -114,7 +114,7 @@ Antikoagülanlar nasıl girilir?</b></font>
 		<b>Adım 4: </b>İşiniz bitti ise pencereyi kapatıp çizelgeye geri dönmek için <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="anticoag_dailydose") : ?>
 <a name="daycoag"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Günlük antikoagülan uygulaması bilgisi nasıl girilir?</b></font>
@@ -126,7 +126,7 @@ Günlük antikoagülan uygulaması bilgisi nasıl girilir?</b></font>
 		<b>Adım 4: </b>İşiniz bitti ise pencereyi kapatıp çizelgeye geri dönmek için <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="lot_mat_etc") : ?>
 <a name="lot"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 İmplantlar, küme no, sipariş no vs. notları nasıl girilir?</b></font>
@@ -139,7 +139,7 @@ Günlük antikoagülan uygulaması bilgisi nasıl girilir?</b></font>
 		<b>Adım 4: </b>İşiniz bitti ise pencereyi kapatıp çizelgeye geri dönmek için <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="medication") : ?>
 <a name="med"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 İlaç ve doz planı nasıl girilir?</b></font>
@@ -162,7 +162,7 @@ Günlük antikoagülan uygulaması bilgisi nasıl girilir?</b></font>
 		<b>Adım 7: </b>İşiniz bitti ise pencereyi kapatıp çizelgeye geri dönmek için <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 		
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="medication_dailydose") : ?>
 	<?php if($x2) : ?>
 
@@ -202,8 +202,8 @@ Günlük ilaç uygulama ve dozaj bilgisi nasıl girilir?</b></font>
 		<b>Adım 9: </b>Her hangi bir yanlışı düzeltmek ister iseniz, yanlış bilgilerin üzerine tıklayınız, doğruları ile değiştiriniz ve tekrar kaydediniz. <br>
 		<b>Adım 10: </b>İşiniz bitti ise pencereyi kapatıp çizelgeye geri dönmek için <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 </ul>
-	<?php endif ?>
-<?php endif ?>
+	<?php endif;?>
+<?php endif;?>
 <?php if($src=="iv_needle") : ?>
 <a name="iv"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
 Günlük intravenöz ilaç uygulaması ve dozaj nasıl girilir?</b></font>
@@ -216,7 +216,7 @@ Günlük intravenöz ilaç uygulaması ve dozaj nasıl girilir?</b></font>
 		
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 </form>
 

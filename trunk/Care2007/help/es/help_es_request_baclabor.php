@@ -5,9 +5,6 @@
 <?php
 if(!$src){
 ?>
-<?php
-}else{
-?>
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> </a><strong><font color="990000" size="2" face="Verdana, Arial, Helvetica, sans-serif">La 
 etiqueta del paciente no esta adjunta. ¿Que hacer?</font></strong>
 
@@ -28,7 +25,7 @@ etiqueta del paciente no esta adjunta. ¿Que hacer?</font></strong>
 </ul>
 <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
 <?php
-}else{
+} else {
 ?>
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> </a> <font color="990000"><strong>¿Como 
 seleccionar una prueba de laboratorio?</strong></font> </font> 

@@ -136,7 +136,7 @@ How to enter <?php echo $person ?> via quick select list?</b>
 <ul>       	
  If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif; ?>
 
 <?php if($src=="time") : ?>
 	<?php if($x1=="entry_out") : ?>
@@ -152,7 +152,7 @@ How to document the entry and exit times?</b>
  	<b>Note: </b>You can enter several entry and exit times all at once before you save the information.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif; ?>
 	<?php if($x1=="cut_close") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to document cut and suture times?</b>
@@ -166,7 +166,7 @@ How to document cut and suture times?</b>
  	<b>Note: </b>You can enter several cut and suture times all at once before you save the information.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif; ?>
 	<?php if($x1=="wait_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to document idle (waiting) times?</b>
@@ -181,7 +181,7 @@ How to document idle (waiting) times?</b>
  	<b>Note: </b>You can enter several start, end times, and reasons all at once before you save the information.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif; ?>
 	<?php if($x1=="bandage_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to document plaster cast times?</b>
@@ -195,7 +195,7 @@ How to document plaster cast times?</b>
  	<b>Note: </b>You can enter several start and end times all at once before you save the information.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif; ?>
 	<?php if($x1=="repos_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to document reposition times?</b>
@@ -209,7 +209,7 @@ How to document reposition times?</b>
  	<b>Note: </b>You can enter several start and end times all at once before you save the information.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif; ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to save the information?</b>
 </font>
@@ -231,7 +231,7 @@ How to save the information?</b>
 <ul>       	
  If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif; ?>
 
 
 <?php if($src=="create") : ?>
@@ -299,7 +299,7 @@ How to display the log entries of a certain day other than the one currently dis
 
 <hr>
 
-	<?php endif ?>
+	<?php endif; ?>
 	
 	<?php if($x2=="material") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -348,7 +348,7 @@ How to display the main logbook back again?</b>
  	<b>Step 1: </b>Click the "<span style="background-color:yellow" > <img <?php echo createComIcon('../','manfldr.gif','0') ?>> Show logbook. </span>" link.<br> 
 </ul>
 <hr>
-	<?php endif ?>
+	<?php endif; ?>
 
 	<?php if(($x1=="")||($x1=="fresh")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -503,9 +503,9 @@ How to start a new log document?</b>
 <b>Note</b>
 <ul> If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif; ?>
 
-<?php endif ?>
+<?php endif; ?>
 
 
 
@@ -521,12 +521,12 @@ How to select a particular patient whose lab report I want to <?php if($x1=="edi
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to continue searching?</b>
 </font>
-	<?php endif ?>
+	<?php endif; ?>
 	<?php if(($x2=="")||($x2=="0")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to search for a  patient?</b>
 </font>
-	<?php endif ?>
+	<?php endif; ?>
 	
 	<ul>       	
  	<b>Step 1: </b>Enter either a complete information or the first few letters of the patient's family name, 
@@ -537,28 +537,28 @@ How to search for a  patient?</b>
 	</ul>
 	<?php if(($x2=="")||($x2=="0")) : ?>
  	<b>Step 3: </b>Click the button&nbsp;<button><img <?php echo createComIcon('../','update2.gif','0') ?>> <font size=1>Lab report</font></button> corresponding to the patient whose lab report you want to  <?php if($x1=="edit") print "edit"; else print "see"; ?>.<p> 
-	<?php endif ?>
+	<?php endif; ?>
 </ul>
 
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
  If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif; ?>
 
 <?php if($src=="arch") : ?>
 	<?php if($x2=="1") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note: Latest log entry (entries)</b></font> 
 <ul>  Every time you switch over to the archive, the last logged operations will be displayed immediately.
 </ul>
-	<?php endif ?>
+	<?php endif; ?>
 	<?php if(($x3=="")&&($x1!="0")) : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> No operation done on this day.</b></font> 
 <ul>       	
 Click the "Options" to open the option box.<br>
 Click the "Search" to switch over to search mode.</ul>
 	
-	<?php endif ?>
+	<?php endif; ?>
 	
 
 
@@ -602,7 +602,7 @@ How to open the patient's data folder?</b>
  	<b>Step 1: </b>Click the <img src="../img/info2.gif" border=0> button on the left of the patient number.<br>
  	<b>Step 2: </b>The patient's data folder will pop up. Click the "Help" button in the window if you need further instructions.<p> 
 	</ul>
-	<?php endif ?>
+	<?php endif; ?>
 	
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
@@ -610,7 +610,7 @@ How to open the patient's data folder?</b>
 </ul>
 
 
-	<?php endif ?>
+	<?php endif; ?>
 
 <?php if($src=="input") : ?>
 	<?php if($x1=="main") : ?>
@@ -634,7 +634,7 @@ How to enter test results values?</b>
 		?>: </b> Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the values.<p> 
  	<b>Note: </b>After you have saved the values and you want to close,<br> click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif; ?>
 <?php if($x1=="few") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -645,7 +645,7 @@ I need to enter only a few values! How to do it?</b>
  	<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the parameter values.<p> 
  	<b>Note: </b>If you are finished entering all parameter values and you want to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif; ?>
 	<?php if($x1=="param") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -656,7 +656,7 @@ The parameter I need is not displayed! How to switch to the right parameter grou
      <option value="Sample parameter"> Sample parameter</option> </select> </span>"</nobr> selection box.<p> 
  	<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','auswahl2.gif','0') ?>> to switch over to the selected parameter group.<p> 
 </ul>
-	<?php endif ?>
+	<?php endif; ?>
 	<?php if($x1=="save") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -666,7 +666,7 @@ How should I save the values?</b>
  	<b>Step 1: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the parameter values.<p> 
  	<b>Note: </b>After you have saved the values and you want to close,<br> click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif; ?>
 	<?php if($x1=="correct") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -677,7 +677,7 @@ I have saved a wrong value. How can I correct that?</b>
  	<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the correct value.<p> 
  	<b>Note: </b>After you have saved the values and you want to close,<br> click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif; ?>
 	<?php if($x1=="note") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -688,7 +688,7 @@ I need to enter a note instead of a value. How to do that?</b>
  	<b>Step 2: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save the note.<p> 
  	<b>Note: </b>After you have saved and you want to close,<br> click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif; ?>
 	<?php if($x1=="done") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -698,13 +698,13 @@ I'm done. What now?</b>
  	<b>Step 1: </b>Click the button <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> to save all values.<p> 
  	<b>Note: </b>Click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif; ?>
 	
 
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
  If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif; ?>
 </form>
 

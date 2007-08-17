@@ -135,7 +135,7 @@ Hızlı seçim listesi <?php echo $person ?> yolu ile nasıl girilirt?</b>
 <ul>       	
  İptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="time") : ?>
 	<?php if($x1=="entry_out") : ?>
@@ -151,7 +151,7 @@ Giriş ve çıkış zamanları nasıl belgelendirilir?</b>
  	<b>Uyarı: </b>Bilgiyi kayıt etmeden önce birkaç giriş ve çıkış zamanını aynı anda kayıt edebilirsiniz.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="cut_close") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Kesi ve sütür süreleri nasıl belgelendirilir?</b>
@@ -165,7 +165,7 @@ Kesi ve sütür süreleri nasıl belgelendirilir?</b>
 	<b>Uyarı: </b>Bilgiyi kayıt etmeden önce birkaç kesi ve sütür zamanını aynı anda kayıt edebilirsiniz.<p>
 </ul>
  	
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="wait_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Boş (bekleme) süresi nasıl belgelendirilir?</b>
@@ -181,7 +181,7 @@ Boş (bekleme) süresi nasıl belgelendirilir?</b>
  	<b>Uyarı: </b>Bilgiyi kayıt etmeden önce birkaç başlama ve bitme saatini ve sebeplerini aynı anda kayıt edebilirsiniz.<p>
 </ul>
  
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="bandage_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Alçı ve pansuman süreleri nasıl belgelendirilir?</b>
@@ -197,7 +197,7 @@ Alçı ve pansuman süreleri nasıl belgelendirilir?</b>
  	
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="repos_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Repozisyon süresi nasıl belgelendirilir?</b>
@@ -212,7 +212,7 @@ Repozisyon süresi nasıl belgelendirilir?</b>
  	
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Bilgi nasıl kayıt edilir?</b>
 </font>
@@ -233,7 +233,7 @@ Bilgi nasıl kayıt edilir?</b>
 <ul>       	
  İptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="create") : ?>
@@ -300,7 +300,7 @@ while(list($x,$v)=each($Or2Dept))
 
 <hr>
 
-	<?php endif ?>
+	<?php endif;?>
 	
 	<?php if($x2=="material") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -349,7 +349,7 @@ Ana kayıt kütüğü geri tekrar nasıl görüntülenir?</b>
  	<b>Adım 1: </b> "<span style="background-color:yellow" > <img <?php echo createComIcon('../','manfldr.gif','0') ?>> Kayıt kütüğünü göster. </span>" bağlantısını tıklayınız.<br> 
 </ul>
 <hr>
-	<?php endif ?>
+	<?php endif;?>
 
 	<?php if(($x1=="")||($x1=="fresh")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -507,9 +507,9 @@ Yeni bir kütük belgesine nasıl başlanır?</b>
 <b>Uyarı</b>
 <ul> Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 
 
 
@@ -525,12 +525,12 @@ Raporunu <?php if($x1=="edit") print "düzenlemek"; else print "görmek"; ?> ist
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Aramaya nasıl devam edilir?</b>
 </font>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if(($x2=="")||($x2=="0")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Bir hasta nasıl aranır?</b>
 </font>
-	<?php endif ?>
+	<?php endif;?>
 	
 	<ul>       	
  	<b>Adım 1: </b>Bir hastanın soyad, veya  ad, veya  doğum tarihi bilgisinin ya tamamını veya birkaç harfini  "<span style="background-color:yellow" > Aranacak anahtar sözcüğü giriniz. <input type="text" name="m" size=20 maxlength=20> </span>" alanına yazınız. <br>
@@ -540,28 +540,28 @@ Bir hasta nasıl aranır?</b>
 	</ul>
 	<?php if(($x2=="")||($x2=="0")) : ?>
  	<b>Adım 3: </b>Laboratuvar raporunu  <?php if($x1=="edit") print "düzenlemek"; else print "görmek"; ?> istediğiniz hastanın &nbsp;<button><img <?php echo createComIcon('../','update2.gif','0') ?>> <font size=1>Lab raporu</font></button> düğmesini tıklayınız.<p> 
-	<?php endif ?>
+	<?php endif;?>
 </ul>
 
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı: </b></font> 
 <ul>       	
  İptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="arch") : ?>
 	<?php if($x2=="1") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı: Son kütük kayıdı (kayıtları) </b></font> 
 <ul>  Arşive her girdiğinizde son kaydedilen ameliyatlar derhal görüntülenir.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if(($x3=="")&&($x1!="0")) : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Bu gün hiç ameliyat yapılmadı. </b></font> 
 <ul>       	
 Seçenek kutusunu açmak için "Seçenekler" i tıklayınız.<br>
 Arama moduna geçmek için "Ara" yı tıklayınız.</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 	
 
 
@@ -605,7 +605,7 @@ Hastanın veri klasörü nasıl açılır?</b>
  	<b>Adım 1: </b>Hasta numarasının solundaki  <img src="../img/info2.gif" border=0> düğmesini tıklayınız.<br>
  	<b>Adım 2: </b>Hastanın veri klasörü açılır. Daha fazla bilgiye gereksiniminiz olur ise açılan penceredeki "Yardım" düğmesini tıklayınız.<p> 
 	</ul>
-	<?php endif ?>
+	<?php endif;?>
 	
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
@@ -613,7 +613,7 @@ Hastanın veri klasörü nasıl açılır?</b>
 </ul>
 
 
-	<?php endif ?>
+	<?php endif;?>
 
 <?php if($src=="input") : ?>
 	<?php if($x1=="main") : ?>
@@ -637,7 +637,7 @@ Sonuç değerleri nasıl girilir?</b>
 		?>: </b> Değerleri kayıt etmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p> 
  	<b>Uyarı: </b>Değerleri kaydettikten sonra kapatmak ister iseniz,<br>  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if($x1=="few") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -648,7 +648,7 @@ Yalnızca birkaç değer girmem gerekiyor! Nasıl yapılır?</b>
  	<b>Adım 2: </b>Parametre değerlerini kayıt etmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p> 
  	<b>Uyarı: </b>Parametre değerlerini girmeyi bitirdi iseniz ve kapatmak istiyor iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="param") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -659,7 +659,7 @@ Yalnızca birkaç değer girmem gerekiyor! Nasıl yapılır?</b>
      <option value="Sample parameter"> Örnek parametre</option> </select> </span>"</nobr> seçim kutusundan seçiniz.<p> 
  	<b>Adım 2: </b>Seçilen parametre grubuna geçmek için <img <?php echo createLDImgSrc('../','auswahl2.gif','0') ?>> düğmesini tıklayınız.<p> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="save") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -669,7 +669,7 @@ Değerleri nasıl kayıt etmeliyim?</b>
  	<b>Adım 1: </b>Parametre değerlerini kayıt etmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p> 
  	<b>Uyarı: </b>Değerleri kaydettikten sonra kapatmak için,<br>  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="correct") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -680,7 +680,7 @@ Yanlış bir değer kayıt ettim. Nasıl düzeltirim?</b>
  	<b>Adım 2: </b>Doğru değeri kayıt etmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p> 
  	<b>Uyarı: </b>Değerleri kaydettikten sonra kapatmak için,<br>  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="note") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -691,7 +691,7 @@ Bir değer yerine bir not girmek istiyorum. Nasıl yapılır?</b>
  	<b>Adım 2: </b>Notu kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p> 
  	<b>Uyarı: </b>Kaydettikten sonra kapatmak için,<br>  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="done") : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -701,13 +701,13 @@ Bir değer yerine bir not girmek istiyorum. Nasıl yapılır?</b>
  	<b>Adım 1: </b>Tüm değerleri kayıt etmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p> 
  	<b>Uyarı: </b> <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.<br> 
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	
 
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
  İptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 </form>
 

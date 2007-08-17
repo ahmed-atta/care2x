@@ -49,7 +49,7 @@ Ich habe alle Information eingegeben. Wie kann ich sie speichern?</b>
 <ul>       	
  	<b>Schritt 1: </b>Klickt den <input type="button" value="Speichern"> Knopf an.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie gebe ich ein neues Produkt in die Datenbank ein?</b>
@@ -70,7 +70,7 @@ Wie kann ich die Information des Produkts bearbeiten bzw. aktualisieren?</b>
  	<b>Schritt 4: </b>Klickt den <input type="button" value="Speichern"> Knopf an um die aktuelle Änderung zu speichern.<br>
 </ul>
 	
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="update") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie kann ich die Information des Produkts bearbeiten bzw. aktualisieren?</b>
@@ -80,8 +80,8 @@ Wie kann ich die Information des Produkts bearbeiten bzw. aktualisieren?</b>
  	<b>Schritt 2: </b>Geben Sie die aktuelle Information in das entsprechende Feld ein.<p>
  	<b>Schritt 3: </b>Klickt den <input type="button" value="Speichern"> Knopf an um die aktuelle Änderung zu speichern.<br>
 </ul>
-	<?php endif ?>	
-<?php endif ?>	
+	<?php endif;?>	
+<?php endif;?>	
 
 <?php if($src=="search") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -102,7 +102,7 @@ Mehrere Artikel sind aufgelistet. Wie kann ich die komplette Information eines A
 <ul>       	
  	<b>Schritt 1: </b>Klickt entweder den Namen des Artikels oder das Symbol <img <?php echo createComIcon('../','info3.gif','0') ?>> an.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="multiple") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ich möchte die leztet Liste der Artikel noch mal sehen. Was soll ich tun?</b>
@@ -110,13 +110,13 @@ Ich möchte die leztet Liste der Artikel noch mal sehen. Was soll ich tun?</b>
 <ul>       	
  	<b>Schritt 1: </b>Klickt den <input type="button" value="Zurück"> Knopf an.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
 Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> Knopf an.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="mng") : ?>
 	<?php if(($x3=="1")&&($x1!="multiple")) : ?>
@@ -127,7 +127,7 @@ Wie bearbeite ich die Information eines Produkts?</b>
  	<b>Schritt 1: </b>Bearbeite die Information.<br>
  	<b>Schritt 2: </b>Klickt den <input type="button" value="Speichern"> Knopf an um die aktuelle Änderung zu speichern.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
 	<?php if($x1=="multiple") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -154,7 +154,7 @@ Ich möchte das Produkt NICHT aus der Datenbank entfernen. Was soll ich jetzt tun
 <ul>       	
  	<b>Schritt 1: </b>Klickt die Option "<span style="background-color:yellow" > << Nein, zurück </span>" an.<br>
 </ul>	
-<?php endif ?>
+<?php endif;?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie verwalte ich ein Produkt in der Datenbank?</b>
 </font>
@@ -173,12 +173,12 @@ Mehrere Artikel sind aufgelistet. Wie kann ich die komplette Information eines A
 <ul>       	
  	<b>Schritt 1: </b>Klickt entweder den Namen des Artikels oder das Symbol <img <?php echo createComIcon('../','info3.gif','0') ?>> an.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Achtung!</b></font> 
 <ul>       	
 Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 
@@ -204,7 +204,7 @@ Ich möchte das Produkt NICHT aus der Datenbank entfernen. Was soll ich jetzt tun
 Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> Knopf an.
 </ul>
 
-<?php endif ?>	
+<?php endif;?>	
 
 <?php if($src=="report") : ?>
 
@@ -224,6 +224,6 @@ Wie schreibe ich einen Bericht?</b>
        	
 Wenn Sie abbrechen bzw. beenden möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>	
+<?php endif;?>	
 </form>
 

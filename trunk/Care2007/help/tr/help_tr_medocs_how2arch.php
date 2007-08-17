@@ -15,7 +15,7 @@
 <b>Uyarı</b>
 <ul><?php if($x1==1) : ?> Eğer arama bir tek sonuç bulur ise belgenin tümü derhal görüntülenir.<br>
 		Ancak, arama birkaç sonuç bulur ise, bir liste görüntülenir.<br>
-		<?php endif ?>
+		<?php endif;?>
 		Aradığınız hastanın bilgisini görmek için,  ya ilgili <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> düğmesini veya ad, veya soyad, veya kabul tarihini tıklayınız.
 </ul>
 <b>Uyarı</b>
@@ -109,7 +109,7 @@
 		Aradığınız hastanın belgesini açmak için, ya ilgili  <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> düğmesini, veya ad, soyad veya kabul tarihini tıklayınız.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 <b>Uyarı</b>
 <ul> Aramayı iptal etmek ister iseniz  <input type="button" value="Kapat"> düğmesini tıklayınız.
 </ul>

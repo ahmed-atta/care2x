@@ -45,7 +45,7 @@ Bir hastanın röntgen filmi tam büyüklükte nasıl izlenir?</b>
 <ul>       	
  Eğer kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 </form>

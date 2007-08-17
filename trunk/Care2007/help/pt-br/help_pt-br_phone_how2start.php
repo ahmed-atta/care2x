@@ -15,7 +15,7 @@ switch($x1)
 	<b>Passo 1</b>
 	<ul> Clique no botão <img <?php echo createLDImgSrc('../','such-gray.gif','0') ?>>.
 	</ul>
-	<?php endif ?>
+	<?php endif;?>
 <b>Passo <?php if($src=="newphone") print "2"; else print "1"; ?></b>
 
 <ul> Insira o campo "<span style="background-color:yellow" >Insira a palavra chave.</span>" com uma informação completa ou algumas letras, como por exemplo o hospital ou código do departamento, nome de família, ou primeiro nome,
@@ -32,12 +32,12 @@ switch($x1)
 <b>Passo <?php if($src=="newphone") print "4"; else print "3"; ?></b>
 <ul> Se a pesquisa encontrar resultado(s), uma lista será exibida.<p>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1=="dir") : ?>
 <b>Passo 1</b>
 <ul> Clique no botão <img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1=="newphone") : ?>
 	<?php if($src=="search") : ?>
 <b>Step 1</b>
@@ -47,10 +47,10 @@ switch($x1)
 <ul> Se você estiver logado anteriormente a tem um direito de acesso para esta função, o formulário de entrada para uma 
 		nova informação de telefone irá aparecer no quadro principal.<br>
 		De outra forma, se você não estiver logado, você será requisitado a inserir seu nome de usuário e senha. <p>
-	<?php endif ?>
+	<?php endif;?>
 		Insira seu nome de usuário e senha e clique no botão <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
 		
-</ul><?php endif ?>
+</ul><?php endif;?>
 
 <b>Nota</b>
 <ul> Se você decidir cancelar 

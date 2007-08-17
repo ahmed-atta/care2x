@@ -18,7 +18,7 @@ switch($x1)
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <b>Paso 
   <?php if($src=="newphone") print "2"; else print "1"; ?>
   </b> 
@@ -50,13 +50,13 @@ switch($x1)
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="dir") : ?>
   <b>Paso 1</b> 
   </font><font face="Verdana, Arial, Helvetica, sans-serif"><ul><font size="2">
     dé clic al botón <img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?>>. 
   </font></ul>
-  <font size="2"><?php endif ?>
+  <font size="2"><?php endif;?>
   <?php if($x1=="newphone") : ?>
   <?php if($src=="search") : ?>
   <b>Paso 1</b> 
@@ -71,12 +71,12 @@ switch($x1)
     De otro modo, si usted no ha ingresado, se le pedirá que escriba su nombre 
     y contraseña. </font>
     <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-      <?php endif ?>
+      <?php endif;?>
       Escriba su nombre y contraseña y dé clic en el botón <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.</font>
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <b>Nota</b> </font>
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted desea cerrar 

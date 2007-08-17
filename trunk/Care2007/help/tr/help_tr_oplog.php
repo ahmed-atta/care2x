@@ -118,7 +118,7 @@ Hızlı seçim listesi ile <?php echo $person ?> nasıl girilir?</b>
 <ul>       	
  İptal etmeye karar verirseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="time") : ?>
 	<?php if($x1=="entry_out") : ?>
@@ -134,7 +134,7 @@ Giriş ve çıkış zamanları nasıl belgelendirilir?</b>
  	<b>Uyarı: </b>Bilgiyi kayıt etmeden önce birkaç giriş ve çıkış saatini birden girebilirsiniz.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="cut_close") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Kesi ve sütür saatleri nasıl belgelendirilir?</b>
@@ -148,7 +148,7 @@ Kesi ve sütür saatleri nasıl belgelendirilir?</b>
  	<b>Uyarı: </b>Bilgiyi kayıt etmeden önce birkaç kesi ve sütür saatini birden girebilirsiniz..<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="wait_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Boş (bekleme) zamanları nasıl belgelendirilir?</b>
@@ -163,7 +163,7 @@ Boş (bekleme) zamanları nasıl belgelendirilir?</b>
  	<b>Uyarı: </b>Bilgiyi kayıt etmeden önce birkaç başlama, bitiş saati ve sebepleri birden girebilirsiniz.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="bandage_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Alçı ve atel zamanları nasıl belgelendirilir?</b>
@@ -177,7 +177,7 @@ Alçı ve atel zamanları nasıl belgelendirilir?</b>
  	<b>Uyarı: </b>Bilgiyi kayıt etmeden önce birkaç başlama, bitiş saati birden girebilirsiniz.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="repos_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Repozisyon zamanları nasıl belgelendirilir?</b>
@@ -191,7 +191,7 @@ Repozisyon zamanları nasıl belgelendirilir?</b>
  	<b>Uyarı: </b>Bilgiyi kayıt etmeden önce birkaç başlama, bitiş saati birden girebilirsiniz.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Bilgi nasıl kayıt edilir?</b>
 </font>
@@ -212,7 +212,7 @@ Bilgi nasıl kayıt edilir?</b>
 <ul>       	
  İptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="create") : ?>
@@ -279,7 +279,7 @@ Halen gösterilenin dışında belirli bir günün kütük kayıtları nasıl g�
 
 <hr>
 
-	<?php endif ?>
+	<?php endif;?>
 	
 	<?php if($x2=="material") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -328,7 +328,7 @@ Ana kütük geri nasıl görüntülenir?</b>
  	<b>Adım 1: </b> "<span style="background-color:yellow" > <img <?php echo createComIcon('../','manfldr.gif','0') ?>> Kütük kayıdını göster. </span>" bağlantısını tıklayınız.<br> 
 </ul>
 <hr>
-	<?php endif ?>
+	<?php endif;?>
 
 	<?php if(($x1=="")||($x1=="fresh")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -482,9 +482,9 @@ Yeni bir kütük belgesine nasıl başlanır?</b>
 <b>Uyarı</b>
 <ul> Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 
 
 
@@ -504,7 +504,7 @@ Belirli bir hastanın belgesi nasıl araştırılır?</b>
 	Belgesini görüntülemek için hastanın soyadını tıklayınız.<p> 
 	</ul>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="search")&&($x3!="1")) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -514,7 +514,7 @@ Belirli belge görüntülenmek üzere nasıl seçilir?</b>
  	<b>Uyarı: </b> Belgesini görüntülemek için hastanın soyadını tıklayız.<p> 
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="get")||($x3=="1")) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -532,7 +532,7 @@ Hastanın belge klasörü nasıl açılır?</b>
  	<b>Adım 2: </b>Hastanın belge klasörü açılır. Daha fazla bilgiye gereksiniminiz olur ise pencere içerisindeki "Yardım" düğmesini tıklayınız.<p> 
 	</ul>
 
-<?php endif ?>
+<?php endif;?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Aramaya nasıl devam edilir?</b>
 </font>
@@ -544,21 +544,21 @@ Aramaya nasıl devam edilir?</b>
 <ul>       	
  Kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="arch") : ?>
 	<?php if($x2=="1") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı: Son kütük girdileri</b></font> 
 <ul>  Arşive her girişinizde, son tütüğe alınmış amaliyatlar derhal görüntülenir.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if(($x3=="")&&($x1!="0")) : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Bu tarihte hiç ameliyat yapılmadı.</b></font> 
 <ul>       	
 Seçenekler kutusundan "Seçenekler" i tıklayınız.<br>
 Arama moduna geçmek için "Ara" yı tıklayınız.</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 	
 
 
@@ -600,7 +600,7 @@ Hastanın veri klasörü nasıl açılır?</b>
  	<b>Adım 1: </b>Hastanın protokol numarasının solundaki  <img <?php echo createComIcon('../','info3.gif','0') ?>> düğmesini tıklayınız.<br>
  	<b>Adım 2: </b>Hastanın bilgi klasörü açılır. Daha fazla açıklamaya gereksinim duyar iseniz "Yardım" düğmesini tıklayınız.<p> 
 	</ul>
-	<?php endif ?>
+	<?php endif;?>
 	
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
@@ -608,7 +608,7 @@ Hastanın veri klasörü nasıl açılır?</b>
 </ul>
 
 
-	<?php endif ?>
+	<?php endif;?>
 
 
 </form>

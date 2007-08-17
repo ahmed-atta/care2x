@@ -78,7 +78,7 @@ How to remove an article from the catalog list?</b>
  	<b>Step 1: </b>Click the button <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> of the article.<br>
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="how2") : ?>
 
@@ -169,7 +169,7 @@ I want to create a new order list. What should I do?</b>
 <ul>       	
  If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="head") : ?>
@@ -192,7 +192,7 @@ How to order <?php if($x2=="pharma") print "pharmaceutical products";
 <ul>       	
  If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="catalog") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -236,7 +236,7 @@ How to remove an article from the catalog list?</b>
  	<b>Step 1: </b>Click the button <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> of the article.<br>
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="orderlist") : ?>
 	<?php if($x1=="0") : ?>
@@ -296,9 +296,9 @@ All the articles I need are in the basket now. What should I do next?</b>
 <ul>       	
  If you decide to cancel sending of the order list, click the link "<span style="background-color:yellow" > << Go back and edit list </span>" to go back to the order list.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="final") : ?>
@@ -330,9 +330,9 @@ How to send the final order list?</b>
 <ul>       	
  If you decide to cancel sending of the order list, click the link "<span style="background-color:yellow" > << Go back and edit list </span>" to go back to the order list.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 <!-- ++++++++++++++++++++++++++++++++++ archive +++++++++++++++++++++++++++++++++++++++++++ -->
 <?php if($src=="arch") : ?>
 
@@ -364,7 +364,7 @@ How to send the final order list?</b>
 </ul>
 
 
-	<?php endif ?>
+	<?php endif;?>
 	
 <?php if($src=="archshow") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -394,7 +394,7 @@ I want to see the list of archived orders again. What should I do?</b>
 <b>Step 3: </b>Click the button <input type="button" value="Search"> to find the article.<br>
  	<b>Step 4: </b>If the search finds the order  or orders that approximate the search keyword, a list will be displayed.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	
 
 <?php if($src=="db") : ?>
@@ -418,7 +418,7 @@ I am finished entering all available product information. How to save it?</b>
 <ul>       	
  	<b>Step 1: </b>Click the button <input type="button" value="Save">.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to enter a new product into the databank?</b>
@@ -439,7 +439,7 @@ I want to edit the product that is currently displayed How to do it?</b>
  	<b>Step 4: </b>Click the button <input type="button" value="Save"> to save the new information.<br>
 </ul>
 	
-	<?php endif ?>	
-<?php endif ?>	
+	<?php endif;?>	
+<?php endif;?>	
 </form>
 

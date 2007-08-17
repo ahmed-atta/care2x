@@ -7,7 +7,7 @@ switch($src)
 						break;
 	case "new": print  " - Crear un nuevo pabellón";
 						break;
-	case "arch": print "Estación de enfermería - Archivo
+	case "arch": print "Estación de enfermería - Archivo";
 }
  ?>
 </b></font> 
@@ -36,7 +36,7 @@ switch($src)
     para un pabellón en particular. Todos los derechos de acceso serán permitidos 
     solamente ese pabellón en particular. 
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x2=="quick") : ?>
   <?php if($x1) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
@@ -87,10 +87,10 @@ switch($src)
     </font> 
   </ul>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <b>Nota </b>Si usted decide cerrar la vista r&aacute;pida dé clic al botón</font><font size="2"><img <?php echo createLDImgSrc('../','close2.gif','0') ?>></font></p>
   <p><font size="2">. </font> <font face="Verdana, Arial, Helvetica, sans-serif"><font size="2"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if($src=="new") : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
     &iquest;Como crear una nueva sala?</b> </font></font></font> </p>
@@ -150,7 +150,7 @@ switch($src)
     Si usted decide cerrar esta ventana dé clic al botón<img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
   </font></ul>
   <font size="2"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="show") : ?>
   <?php if($x1=="1") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
@@ -199,8 +199,8 @@ switch($src)
     Si usted decide cerrar esta ventana dé clic al botón<img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
   </font></ul>
   <font size="2"> 
-  <?php endif ?>
-  <?php endif ?>
+  <?php endif;?>
+  <?php endif;?>
   <?php if($src=="") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   &iquest;Como seleccionar una sala para editar su perfil?</b> </font></font></font> 
@@ -213,7 +213,7 @@ switch($src)
   </font><font face="Verdana, Arial, Helvetica, sans-serif"><ul><font size="2">
     Si usted decide cerrar esta ventana dé clic al botón<img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
   </font></ul>
-  <font size="2"><?php endif ?>
+  <font size="2"><?php endif;?>
   </font></font> 
 </form>
 

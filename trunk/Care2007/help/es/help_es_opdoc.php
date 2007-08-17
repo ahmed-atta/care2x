@@ -72,7 +72,7 @@ if($src=="arch")
     </font>
   </ul>
   <font size="2">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="update") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> </font></font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><font color="#990000"><b>¿Como 
   actualizar o editar el documento mostrado?</b></font></font> 
@@ -96,7 +96,7 @@ if($src=="arch")
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="dummy") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Como crear un nuevo documento?</b></font></font> 
@@ -127,8 +127,8 @@ if($src=="arch")
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
-  <?php endif ?>
+  <?php endif;?>
+  <?php endif;?>
   <?php if($src=="search") : ?>
   <?php if(($x1=="dummy")||($x1=="")) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>¿Como 
@@ -159,7 +159,7 @@ if($src=="arch")
     <font color="#990000"><b> Nota:</b></font>Si usted decide cerrar dé clic al 
     botón<img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.</font></p>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if(($x1=="match")&&($x2>0)) : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>¿Como 
     mostrar un documento en particular?</b> </font></font> </p>
@@ -188,7 +188,7 @@ if($src=="arch")
     <font color="#990000"><b> Nota:</b></font>Si usted decide cerrar dé clic al 
     botón<img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.</font></p>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <?php if(($x1=="select")&&($x2==1)) : ?>
     <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>¿Como 
     actualizar o editar el documento mostrado?</b></font></font> </p>
@@ -210,8 +210,8 @@ if($src=="arch")
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
-  <?php endif ?>
+  <?php endif;?>
+  <?php endif;?>
   <?php if($src=="arch") : ?>
   <?php if(($x1=="dummy")||($x1=="?")||($x1=="")) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> 
@@ -425,7 +425,7 @@ if($src=="arch")
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($x1=="search")&&($x2>0)) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Como 
   seleccionar para ser desplegado un documento en particular archivado ?</b> </font></font> 
@@ -450,7 +450,7 @@ if($src=="arch")
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($x1=="select")&&($x2==1)) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>¿Como 
   actualizar o editar el documento mostrado?</b> </font></font> 
@@ -481,8 +481,8 @@ if($src=="arch")
     </font> 
   </ul>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 
 </form>
 

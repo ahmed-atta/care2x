@@ -49,7 +49,7 @@ pessoa sa lista. Uma janela aparecerá mostrando infromação relevante.</ul><p>
 <li><b>Plano de trabalho</b> :<ul>Ícone clicável. Faz o link ao plano de trabalho do departamento para o mes inteiro. Clique no ícone&nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Show</font></button>
 			se você quiser abrir o plano de trabalho para o mes inteiro e eventualmente criar ou editar o plano de trabalho.</ul>
 
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="show") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu quero criar um novo plano de trabalho para o mes que está sendo exibido</b></font>
@@ -80,7 +80,7 @@ pessoa sa lista. Uma janela aparecerá mostrando infromação relevante.</ul><p>
 <b>Nota</b>
 <ul> Se você decidir fechar o plano de trabalho  clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="plan") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -112,7 +112,7 @@ Eu quero apagar um nome do plano de trabalho</b></font>
 <ul> <b>Passo 1: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> . <br>
 </ul>
 </font>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="personlist") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 O departamento exibido está errado. Eu quero mudar para o departamento certo.</b></font>
@@ -136,7 +136,7 @@ Eu quero apagar um nome da lista</b></font>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu salvei a lista e quero fechá-la,o que devo fazer? </b></font>
 <ul> <b>Passo 1: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> . <br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="dutydoc") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como documentar um trabalho feito durante o horário de plantão?</b></font>
@@ -163,7 +163,7 @@ Como documentar um trabalho feito durante o horário de plantão?</b></font>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Eu salvei o documento e quero fechá-lo, o que devo fazer? </b></font>
 <ul> <b>Passo 1: </b>Se você terminou, clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> . <br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 </form>
 </body>

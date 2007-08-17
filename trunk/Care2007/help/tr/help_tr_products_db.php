@@ -44,7 +44,7 @@ Bilgi bankasına yeni bir ürün nasıl girilir?</b>
 <ul>       	
  	<b>Adım 1: </b><input type="button" value="Kaydet"> düğmesini tıklayınız.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Yeni bir ürün bilgi bankasına nasıl girilir?</b>
@@ -65,7 +65,7 @@ Yeni bir ürün bilgi bankasına nasıl girilir?</b>
  	<b>Adım 4: </b>Yeni bilgiyi kayıt etmek için <input type="button" value="Kaydet"> düğmesini tıklayınız.<br>
 </ul>
 	
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="update") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Halen görüntülenen ürünü düzenlemek istiyorum. Nasıl yapılır?</b>
@@ -75,8 +75,8 @@ Halen görüntülenen ürünü düzenlemek istiyorum. Nasıl yapılır?</b>
  	<b>Adım 2: </b>Yeni bilgiyi uygun giriş alanına yazınız.<p>
  	<b>Adım 3: </b>Yeni bilgiyi kayıt etmek için  <input type="button" value="Kaydet"> düğmesini tıklayınız.<br>
 </ul>
-	<?php endif ?>	
-<?php endif ?>	
+	<?php endif;?>	
+<?php endif;?>	
 
 <?php if($src=="search") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -95,7 +95,7 @@ Birkaç ürün listelendi. Belirli bir malzemenin bilgisi nasıl görülür?</b>
 <ul>       	
  	<b>Adım 1: </b>Ya <img <?php echo createComIcon('../','info3.gif','0') ?>> düğmesini veya malzemenin ismini tıklayınız.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="multiple") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Önceki malzeme listesini görmek istiyorum. Nasıl yaparım?</b>
@@ -103,13 +103,13 @@ Birkaç ürün listelendi. Belirli bir malzemenin bilgisi nasıl görülür?</b>
 <ul>       	
  	<b>Adım 1: </b> <input type="button" value="Geri git"> düğmesini tıklayınız.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
  İptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="mng") : ?>
 	<?php if(($x3=="1")) : ?>
@@ -120,7 +120,7 @@ Birkaç ürün listelendi. Belirli bir malzemenin bilgisi nasıl görülür?</b>
  	<b>Adım 1: </b>Yeni ürün bilgisini düzenleyiniz.<br>
  	<b>Adım 2: </b>Yeni bilgiyi kayıt etmek için  <input type="button" value="Kaydet"> düğmesini tıklayınız.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
 	<?php if($x1=="multiple") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -147,7 +147,7 @@ Halen görüntülenen ürün nasıl silinir?</b>
 <ul>       	
  	<b>Adım 1: </b> "<span style="background-color:yellow" > Hayır, silme. Geri git </span>" bağlantısını tıklayınız.<br>
 </ul>	
-<?php endif ?>
+<?php endif;?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Bilgi bankasındaki bir ürün nasıl düzenlenir?</b>
 </font>
@@ -164,12 +164,12 @@ Birkaç malzeme listelendi. Belirli bir malzemenin bilgisi nasıl görünür?</b
 <ul>       	
  	<b>Adım 1: </b> Ya  <img <?php echo createComIcon('../','info3.gif','0') ?>> düğmesini veya malzemenin ismini tıklayınız.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
  İptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 
@@ -194,7 +194,7 @@ Birkaç malzeme listelendi. Belirli bir malzemenin bilgisi nasıl görünür?</b
  İptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
-<?php endif ?>	
+<?php endif;?>	
 
 <?php if($src=="report") : ?>
 
@@ -214,7 +214,7 @@ Bir rapor nasıl yazılır?</b>
        	
 İptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>	
+<?php endif;?>	
 
 </form>
 

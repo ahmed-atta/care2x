@@ -39,7 +39,7 @@ Ho finito di inserire le informazioni che avevo. Come fare a salvarle?</b>
 <ul>       	
  	<b>1: </b>Premere il bottone <input type="button" value="Salva">.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: inserire un nuovo prodotto in banca dati?</b>
@@ -59,8 +59,8 @@ Desidero modificare il prodotto attualmente visualizzato: come fare?</b>
  	<b>3: </b>Modificare i dati.<br>
  	<b>4: </b>Premere il bottone <input type="button" value="Salva"> per salvare i nuovi dati.<br>
 </ul>
-	<?php endif ?>	
-<?php endif ?>	
+	<?php endif;?>	
+<?php endif;?>	
 <?php if($src=="search") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: search un prodotto?</b>
@@ -79,7 +79,7 @@ Come fare a vedere informazioni su uno specifico articolo di una lista?</b>
 <ul>       	
  	<b>1: </b>Selezionare o il bottone <img <?php echo createComIcon('../','info3.gif','0') ?>> o il nome.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="multiple") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Desidero vedere la precedente lista di articoli. Che devo fare?</b>
@@ -87,12 +87,12 @@ Desidero vedere la precedente lista di articoli. Che devo fare?</b>
 <ul>       	
  	<b>1: </b>Premere il bottone <input type="button" value="Indietro">.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
  Per annullare premere il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="mng") : ?>
 	<?php if(($x3=="1")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -102,7 +102,7 @@ Come fare a: modificare le informazioni sul prodotto?</b>
  	<b>1: </b>Modificare i dati del prodotto.<br>
  	<b>2: </b>Premere il bottone <input type="button" value="Salva"> per salvare i nuovi dati.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="multiple") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Desidero modificare il prodotto attualmente visualizzato: come fare?</b>
@@ -128,7 +128,7 @@ Non voglio cancellare le informazioni sul prodotto: che devo fare?</b>
 <ul>       	
  	<b>1: </b>Selezionare il link "<span style="background-color:yellow" > << No, non cancellare. Indietro </span>".<br>
 </ul>	
-<?php endif ?>
+<?php endif;?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: gestire un prodotto in banca dati?</b>
 </font>
@@ -146,12 +146,12 @@ La lista contiene più articoli: come fare a visualizzarne uno in particolare?</b
 <ul>       	
  	<b>1: </b>Selezionare o il bottone <img <?php echo createComIcon('../','info3.gif','0') ?>> o il nome.<br>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Nota:</b></font> 
 <ul>       	
  Per annullare premere il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="cancellare") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Desidero rimuovere il prodotto dalla banca dati. Che devo fare?</b>
@@ -170,7 +170,7 @@ Non voglio cancellare le informazioni sul prodotto: che devo fare?</b>
 <ul>       	
  Per annullare premere il bottone <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>	
+<?php endif;?>	
 <?php if($src=="report") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: scrivere un report?</b>
@@ -185,5 +185,5 @@ Come fare a: scrivere un report?</b>
        	
 Per annullare o terminare premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>	
+<?php endif;?>	
 </form>

@@ -15,7 +15,7 @@
 <b>Note</b>
 <ul><?php if($x1==1) : ?> Se a pesquisa retornar um resultado,  o documento completo será exibido imediatamente.<br>
 		Entretanto, se a pesquisa retornar vários resultados, uma lista será mostrada.<br>
-		<?php endif ?>
+		<?php endif;?>
 		Para ver a informação para o paciente que você está procurando, clique ou o botão <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> correspondente a ele, ou
 		o nome, ou o sobrenome ou a data de admissão.
 </ul>
@@ -110,7 +110,7 @@
 		no nome, sobrenome ou data de admissão.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 <b>Nota</b>
 <ul> Se você decidir cancelar a pesquisa clique no botão <input type="button" value="Fechar">.
 </ul>

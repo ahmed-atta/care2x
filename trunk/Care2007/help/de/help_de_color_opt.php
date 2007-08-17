@@ -43,7 +43,7 @@ Wie stelle ich die Farben für "hover" und "link" ein?</b>
 <ul>       	
  	<b>Schritt 5: </b>Klickt den <input type="button" value="Erweiterte Farbenoptionen"> Knopf an um den erweiterten Modus zu starten.<br>
 </ul>
-<?php endif ?>
+<?php endif; ?>
 
 <?php if($src=="ext") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -69,6 +69,6 @@ Wie stelle ich die Farbe für "hover" ein?</b>
  	<b>Schritt 5: </b>Wenn Sie fertig sind klickt den <input type="button" value="OK"> Knopf an.<br>
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 	</form>
 

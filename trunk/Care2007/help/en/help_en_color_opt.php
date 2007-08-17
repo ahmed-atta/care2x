@@ -40,7 +40,7 @@ How to select the hover and link colors?</b>
 <ul>       	
  	<b>Step 5: </b>Click the <input type="button" value="Extended color options"> to switch over to extended color options.<br>
 </ul>
-<?php endif ?>
+<?php endif; ?>
 
 <?php if($src=="ext") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -66,6 +66,6 @@ How to select the hover link color?</b>
  	<b>Step 5: </b>If you are finished, click the <input type="button" value="OK"> button.<br>
 </ul>
 
-<?php endif ?>
+<?php endif; ?>
 	</form>
 

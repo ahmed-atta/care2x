@@ -35,21 +35,21 @@
 <b>Adım 3</b>
 <ul> Arama sonucu bir tek sonuç bulunur ise hastanın temel bilgileri ile yeni bir form görüntülenir.
 		Eğer birkaç sonuç bulunur ise, bir liste görüntülenir.
-<?php endif ?>
+<?php endif;?>
 
 <?php if(($src=="?")||($x1>1)) : ?>
 
  <br>Listedeki bir hastanın belgesini oluşturmak için ya ilgili  <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> düğmesini, veya soyad, veya ad, veya protokol numarası, veya kabul tarihini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="?") : ?>
 <b>Adım 4</b>
-<?php endif ?>
+<?php endif;?>
 
 <?php if(($src!="?")&&($x1==1)) : ?>
 <b>Adım 1</b>
-<?php endif ?>
+<?php endif;?>
 <?php if(($x1=="1")||($src=="?")) : ?>
 <ul> Hastanın bilgileri ile yeni bir form görüntülendiğinde şunları yapabilirsiniz: 
 		<Ul type="disc">		
@@ -70,7 +70,7 @@
 <b>Adım <?php if($src!="?") print "2"; else print "5"; ?></b>
 <ul> Belgeyi kaydetmek için <input type="button" value="Kaydet"> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <b>Uyarı</b>
 <ul> Belgeyi iptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 		

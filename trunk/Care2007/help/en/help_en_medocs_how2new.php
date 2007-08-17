@@ -36,7 +36,7 @@
 <b>Step 3</b>
 <ul> If the search finds a single result, a new document form with the patient's basic data will be displayed.
 		If however, the search finds several results, a list will be displayed.
-<?php endif ?>
+<?php endif; ?>
 
 <?php if(($src=="?")||($x1>1)) : ?>
 
@@ -44,15 +44,15 @@
 		click either the button <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> corresponding to it, or
 		the Family name, or the Given name, or the patient's number, or the admission date.
 </ul>
-<?php endif ?>
+<?php endif; ?>
 
 <?php if($src=="?") : ?>
 <b>Step 4</b>
-<?php endif ?>
+<?php endif; ?>
 
 <?php if(($src!="?")&&($x1==1)) : ?>
 <b>Step 1</b>
-<?php endif ?>
+<?php endif; ?>
 <?php if(($x1=="1")||($src=="?")) : ?>
 <ul> Once a new document form with patient's data is displayed, you can do the following: 
 		<Ul type="disc">		
@@ -73,7 +73,7 @@
 <b>Step <?php if($src!="?") print "2"; else print "5"; ?></b>
 <ul> Click the button <input type="button" value="Save"> to save the document.
 </ul>
-<?php endif ?>
+<?php endif; ?>
 <b>Note</b>
 <ul> If you decide to cancel the document click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 		

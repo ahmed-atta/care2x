@@ -46,7 +46,7 @@ How to send a request for repair service?</b></font>
 <b>Note</b>
 <ul> If you decide to close the request form click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="report") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -62,7 +62,7 @@ How to report a done repair service?</b></font>
 <b>Note</b>
 <ul> If you decide to close the request form click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="queries") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -84,7 +84,7 @@ How to see my previous inquries and the technical department's replies to them?<
 <b>Note</b>
 <ul> If you decide to close the inquriy form click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="arch") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -109,7 +109,7 @@ How to search for particular technical reports?</b></font>
 
 </ul>
 </font>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="showarch") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Marking the report as read.</b></font>
@@ -125,7 +125,7 @@ Printing the report.</b></font>
 How to go back to the start of archive search?</b></font>
 <ul> <b>Step 1: </b>Click the button <input type="button" value="<< Go back">.<p>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="dutydoc") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to document a work done during duty hours?</b></font>
@@ -151,7 +151,7 @@ How to document a work done during duty hours?</b></font>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I have saved the document and wish to close it, what should I do? </b></font>
 <ul> <b>Step 1: </b>If you are finished, click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> button. <br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 </form>
 </body>

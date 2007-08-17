@@ -53,7 +53,7 @@ switch($x2)
   </font><font face="Verdana, Arial, Helvetica, sans-serif"><ul><font size="2">
     Si usted decide cerrar la ventana de búsqueda, dé clic en el botón <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
   </font></ul>
-  <font size="2"><?php endif ?>
+  <font size="2"><?php endif;?>
   <b>Paso 
   <?php if($x1) print "1"; else print "5"; ?>
   </b>
@@ -66,7 +66,7 @@ switch($x2)
       Si usted intenta abrir la carpeta que tiene los datos del paciente, mediante 
       un clic en el nombre, se le solicitará que escriba su nombre y contraseña. 
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x2=="quick") : ?>
   <?php if($x1) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
@@ -117,12 +117,12 @@ switch($x2)
     </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   <b>Nota</b> 
   </font><font face="Verdana, Arial, Helvetica, sans-serif"><ul><font size="2">
     Si usted decide cerrar la ventana de vista rápida, dé clic al botón <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>. 
   </font></ul>
-  <font size="2"><?php endif ?>
+  <font size="2"><?php endif;?>
   <?php if($x2=="arch") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   �Cómo solicito vistas rápidas de ocupación previa usando el archivo?</b> </font></font></font> 
@@ -146,7 +146,7 @@ switch($x2)
       </font>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-  <?php endif ?>
+  <?php endif;?>
   </font> 
 </form>
 

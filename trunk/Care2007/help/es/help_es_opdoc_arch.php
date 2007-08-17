@@ -237,7 +237,7 @@ if($src=="arch")
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($x1=="search"||$x1='paginate')&&($x2>0)) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   Como seleccionar para ser desplegado un documento </b></font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><font color="#990000"><b>en 
@@ -279,7 +279,7 @@ if($src=="arch")
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($x1=="select"||$x1='paginate')&&($x2==1)) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Como actualizar o editar el documento mostrado?</b> </font></font> 
@@ -311,8 +311,8 @@ if($src=="arch")
     </font> 
   </ul>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 
 </form>
 

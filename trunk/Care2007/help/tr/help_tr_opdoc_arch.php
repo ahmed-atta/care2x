@@ -113,7 +113,7 @@ Eğer arama bir tek sonuç bulur ise, belgenin tamamı derhal görüntülenir.<b
 <ul>       	
  Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="search"||$x1='paginate')&&($x2>0)) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -144,7 +144,7 @@ Arşivde aramaya nasıl devam edilir?</b>
 <ul>       	
  Kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="select"||$x1='paginate')&&($x2==1)) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -165,8 +165,8 @@ Arşivlerde aramaya nasıl devam edilir?</b>
  Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 
 </form>
 

@@ -34,7 +34,7 @@ switch($x1)
 		
 </ul>
 <b>Passo 2</b>
-<?php endif ?>
+<?php endif;?>
 <ul> Se você estiver logado e com direito de acesso para esta função, o 
 <?php switch($x1)
 	{
@@ -51,4 +51,4 @@ switch($x1)
 
 
 </form>
-<?php endif ?>
+<?php endif;?>

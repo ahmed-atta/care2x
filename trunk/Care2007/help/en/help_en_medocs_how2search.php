@@ -21,16 +21,16 @@
 		To see the medocs document of the patient you are looking for, click the button <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> corresponding to it, or
 		the Family name, or the document number, or time.
 </ul>
-<?php endif ?>
+<?php endif; ?>
 <?php if($x1>1) : ?>
 		To see the medocs document of the patient you are looking for, click the button <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> corresponding to it, or
 		the Family name, or the document number, or time.<p>
-<?php endif ?>
+<?php endif; ?>
 <?php if(($src!="?")&&($x1=="1")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>I want to update the document</b></font>
 <ul> If you want to update the displayed document, click the button <input type="button" value="Update data">.
 </ul>
-<?php endif ?>
+<?php endif; ?>
 <b>Note</b>
 <ul> If you decide to cancel search click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>

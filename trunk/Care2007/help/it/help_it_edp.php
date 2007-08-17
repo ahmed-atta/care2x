@@ -50,7 +50,7 @@ Ho finito di inserire le informazioni necessarie. Come fare a salvare?</b>
 <ul>       	
  	<b>1: </b>Premere il bottone <input type="button" value="Salva">.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Ho salvato i nuovi diritti di accesso: come fare a crearne altri?</b>
@@ -67,7 +67,7 @@ Desidero vedere the lista dei privilegi di accesso esistenti. Come fare?</b>
  	<b>1: </b>Premere il bottone <input type="button" value="Lista privilegi di accesso">.<br>
 </ul>
 
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="list") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 What do the buttons <img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> e <img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> mean?</b>
@@ -109,7 +109,7 @@ Come fare a: rimuovere i diritti di accesso?</b>
 <ul>       	
  	Scegliere l'opzione "<span style="background-color:yellow" > R </span>" corrispondente all'utente.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="update") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: modificare i diritti di accesso?</b>
@@ -124,7 +124,7 @@ Nota:</b>
 <ul>       	
  	E' possibile annullare le modifiche premendo il bottone <input type="button" value="Annulla">.<br>
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 	<?php if($x1=="cancellare") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: rimuovere i diritti di accesso?</b>
@@ -139,7 +139,7 @@ Nota:</b>
 <ul>       	
  	E' possibile annullare le modifiche premendo il bottone <input type="button" value="No. Indietro.">.<br>
 </ul>
-	<?php endif ?>		
+	<?php endif;?>		
 	<?php if($x1=="lock") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: <?php if($x2=="0") print "bloccare"; else print "sbloccare"; ?> i diritti di accesso?</b>
@@ -155,6 +155,6 @@ Nota:</b>
  	E' possibile annullare <?php if($x2=="0") print "il blocco"; else print "lo sblocco"; ?> selezionando il bottone <input type="button" value="No. Indietro.">.<br>
 </ul>
 	
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 </form>

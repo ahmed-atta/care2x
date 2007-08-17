@@ -36,12 +36,12 @@ switch($x2)
 </ul>
 <b>Uyarı</b>
 <ul> Aramayı iptal etmek ister iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
-</ul><?php endif ?>
+</ul><?php endif;?>
 <b>Adım <?php if($x1) print "1"; else print "5"; ?></b><ul>Servis yatan hasta listesini görmek için ya <img <?php echo createComIcon('../','bul_arrowblusm.gif','0') ?>> düğmesini, veya tarih veya servisi tıklayınız.
 <p><b>Uyarı:</b> Aranan sözcük listede belirginleştirilmiş olarak görüntülenir. 
 <br><b>Uyarı:</b> Liste "salt okunur" moddadır, düzenlenemez. Eğer hastanın ismini tıklayarak bilgileri klasörünü açmak ister iseniz kullanıcı adı ve parolanız sorulur.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -86,10 +86,10 @@ Arşiv kullanılarak önceki yatan hasta listeleri hızlı bakış olarak nasıl
  	<b>Adım 3: </b>O günün yatan hasta listesini görüntülemek için takvimdeki bir tarihi tıklayınız.<br>
 	</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 <b>Uyarı</b>
 <ul> Hızlı bakış penceresini kapatmak ister iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
-</ul><?php endif ?>
+</ul><?php endif;?>
 
 <?php if($x2=="arch") : ?>
 
@@ -109,7 +109,7 @@ Rehber takvimdeki ay nasıl değiştirilir?</b>
 								İstenen ay görüntüleninceye kadar ne kadar gerekirse o kadar tıklayınız.<br>
 	</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 
 
 </form>

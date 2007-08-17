@@ -38,7 +38,7 @@ switch($src)
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="dir") : ?>
   <b>Paso 1</b> </font><font face="Verdana, Arial, Helvetica, sans-serif">
   <ul>
@@ -46,7 +46,7 @@ switch($src)
     </font>
   </ul>
   <font size="2">
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="newphone") : ?>
   <b>Paso 1</b> 
   <ul>
@@ -63,7 +63,7 @@ switch($src)
     <p> Si usted decide cerrar esta ventana, dé clic en el botón <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>. 
   </ul>
   </font></font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <b>Nota</b> </font><font face="Verdana, Arial, Helvetica, sans-serif">
   <ul>
     <font size="2"> Si usted decide cerrar la ventana de búsqueda, dé clic en 

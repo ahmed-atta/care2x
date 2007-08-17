@@ -162,7 +162,7 @@ Como pesquisar por um documento de um paciente em particular?</b>
 <ul>       	
  Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="match"||$x1=='paginate')&&($x2>0)) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -195,7 +195,7 @@ Como continuar pesquisando?</b>
 <ul>       	
  Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="select")&&($x2==1)) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -217,8 +217,8 @@ Como continuar pesquisando?</b>
  Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 
 <?php if($src=="arch") : ?>
 	<?php if(($x1=="dummy")||($x1=="?")||($x1=="")) : ?>
@@ -314,7 +314,7 @@ Se a pesquisa encontrar um resultado único, o documento completo será exibido im
 <ul>       	
  Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="search")&&($x2>1)) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -333,7 +333,7 @@ Como continuar pesquisando arquivos?</b>
 <ul>       	
  Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="select")&&($x2==1)) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -354,8 +354,8 @@ Como continuar pesquisando nos arquivos?</b>
  Se você decidir fechar clique no botão <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 
 </form>
 

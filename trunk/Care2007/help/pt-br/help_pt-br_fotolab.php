@@ -49,7 +49,7 @@ Como mudar o número de imagens para fazer o upload?</b>
  	<b>Passo 2:</b> Clique "OK" <p>
 </ul>
 
-<?php endif ?>	
+<?php endif;?>	
 
 <?php if($src=="maindata") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -65,7 +65,7 @@ Como encontrar os dados de um paciente?</b>
  	<img <?php echo createComIcon('../','warn.gif','0') ?>><b> Nota! </b>Se uma ou algumas fotos devem ter uma data diferente, entre com esta data no campo "Data de foto" da foto correspondente. Você somente pode fazer isto após ter concluido o passo 5.<p>
 </ul>
 	
-	<?php endif ?>	
+	<?php endif;?>	
 <?php if($src=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Eu quero armazenar fotos adicionais do mesmo paciente. Como fazer?</b>
@@ -83,7 +83,7 @@ Eu quero armazenar fotos de outro paciente. Como fazer?</b>
  	<b>Passo 2: </b>Clique no botão <input type="button" value="OK">.<br>
 </ul>
 
-	<?php endif ?>	
+	<?php endif;?>	
 	
 
 

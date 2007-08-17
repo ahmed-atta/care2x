@@ -33,7 +33,7 @@ switch($x1)
 		
 </ul>
 <b>Passo 2</b>
-<?php endif ?>
+<?php endif;?>
 <ul> Se você já estiver logado e tiver direito de acesso a esta função, o 
 <?php switch($x1)
 	{
@@ -41,13 +41,14 @@ switch($x1)
 		case "search": print 'campo de pesquisa '; break;
 		case "archiv": print 'campo de pesquisa de arquivo'; break;
 	}
-?>  aparecerá na tela principal.<br>
-		De outra forma, se você não estiver logado, haverá a necessidade de entrar com o usuário e senha. <p>
-		Entre com seu usuário e senha e clique no botão <img <?php echo createLDImgSrc('../','continue.gif','0) ?>>.<p>
-		Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
-		
+  echo 'aparecerá na tela principal.<br>';
+  echo 'De outra forma, se você não estive logado, haverá a necessidade de entrar com o usuário e senha. <p>';
+  echo 'Entre com seu usuário e senha e clique no botão <img=';
+  createLDImgSrc('../','continue.gif','0'); ?> ><p>
+		Se você decidir cancelar clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0'); ?> >.
+?>		
 </ul>
 
 
 </form>
-<?php endif ?>
+<?php endif;?>

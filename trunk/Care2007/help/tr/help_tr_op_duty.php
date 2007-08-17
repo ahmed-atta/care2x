@@ -48,7 +48,7 @@
 <li><b>Nöbet planı</b> :<ul>Tıklanabilir simge. Bölümün bütün aylık nöbet planına bağlantı. Tüm ayın nöbet planını açmak sonrada oluşturmak veya düzenlemek ister iseniz&nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Göster</font></button>
 			simgesini tıklayınız.</ul>
 
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="show") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Görüntülenen ay için yeni bir nöbet planı oluşturmak istiyorum</b></font>
@@ -78,7 +78,7 @@
 <b>Uyarı</b>
 <ul> Nöbet planını kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="plan") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -110,7 +110,7 @@ Nöbet planında bir ismi silmek istiyorum</b></font>
 <ul> <b>Adım 1: </b>İşiniz bitti ise, <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız. <br>
 </ul>
 </font>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="personlist") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Görüntülenen bölüm yanlış. Doğru bölüme değiştirmek istiyorum.</b></font>
@@ -134,7 +134,7 @@ Listede bir ismi silmek istiyorum</b></font>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Listeyi kayıt ettim, kapatmak istiyorum, ne yapmalıyım? </b></font>
 <ul> <b>Adım 1: </b>İşiniz bitti ise, <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız. <br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="dutydoc") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Nöbet saatlerinde yapılan bir iş nasıl belgelendirilir?</b></font>
@@ -160,7 +160,7 @@ Nöbet saatlerinde yapılan bir iş nasıl belgelendirilir?</b></font>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belgeyi kayıt ettim ve kapatmak istiyorum. Ne yapmalıyım? </b></font>
 <ul> <b>Adım 1: </b>İşiniz bitti ise,  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız. <br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 </form>
 </body>

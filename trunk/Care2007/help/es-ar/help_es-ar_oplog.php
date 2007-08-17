@@ -140,7 +140,7 @@ if($src=="arch")
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="time") : ?>
   <?php if($x1=="entry_out") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
@@ -167,7 +167,7 @@ if($src=="arch")
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="cut_close") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Como documentar la hora de corte y sutura?</b> </font></font> 
@@ -194,7 +194,7 @@ if($src=="arch")
     </ul>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="wait_time") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Como documentar tiempos de espera (tiempo muerto)?</b> </font></font> 
@@ -219,7 +219,7 @@ if($src=="arch")
     </ul>
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="bandage_time") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Como documentar tiempos de vendaje?</b> </font></font> 
@@ -239,7 +239,7 @@ if($src=="arch")
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x1=="repos_time") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   ¿Como documentar tiempos de reposici&oacute;n?</b> </font></font> 
@@ -259,7 +259,7 @@ if($src=="arch")
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   &iquest;Como salvar la informaci&oacute;n?</b> </font></font> 
   <ul>
@@ -294,7 +294,7 @@ if($src=="arch")
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="create") : ?>
   <?php if($x1=="logmain") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
@@ -375,7 +375,7 @@ while(list($x,$v)=each($Or2Dept))
   </ul>
   <hr>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($x2=="material") : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   &iquest;Como documentar el material usado para la operaci&oacute;n?</b> </font></font> 
@@ -463,7 +463,7 @@ while(list($x,$v)=each($Or2Dept))
   </ul>
   <hr>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($x1=="")||($x1=="fresh")) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   &iquest;Cómo empezar un documento de registro para una operaci&oacute;n?</b> 
@@ -712,8 +712,8 @@ while(list($x,$v)=each($Or2Dept))
     </font> 
   </ul>
   <font size="2">
-  <?php endif ?>
-  <?php endif ?>
+  <?php endif;?>
+  <?php endif;?>
   <?php if($src=="search") : ?>
   <?php if(($x1=="fresh")||($x1=="")) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
@@ -738,7 +738,7 @@ while(list($x,$v)=each($Or2Dept))
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($x1=="search")&&($x3!="1")) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   &iquest;Como mostrar un documento en particular?</b> </font></font> 
@@ -748,7 +748,7 @@ while(list($x,$v)=each($Or2Dept))
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($x1=="get")||($x3=="1")) : ?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   &iquest;Como actualizar o editar el documento que est&aacute; viendo?</b> </font></font> 
@@ -773,7 +773,7 @@ while(list($x,$v)=each($Or2Dept))
     <p> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b> 
   &iquest;Como continuar buscando?</b> </font></font> 
   <ul>
@@ -796,7 +796,7 @@ while(list($x,$v)=each($Or2Dept))
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="arch") : ?>
   <?php if($x2=="1") : ?>
   <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> 
@@ -807,7 +807,7 @@ while(list($x,$v)=each($Or2Dept))
     registradas. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($x3=="")&&($x1!="0")) : ?>
   <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> 
   No hay operaciones para este dia.</b></font></font> 
@@ -817,7 +817,7 @@ while(list($x,$v)=each($Or2Dept))
     Dé clic al bot&oacute;n "Buscar" para cambiar a modo de b&uacute;squeda. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   </font> 
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img <?php echo createComIcon('../','frage.gif','0') ?>> 
     <font color="#990000"><b>Quiero ver entradas de registro archivadas otro d&iacute;a.</b></font></font> 
@@ -883,7 +883,7 @@ while(list($x,$v)=each($Or2Dept))
     al bot&oacute;n de &quot;Ayuda&quot; para m&aacute;s instrucciones. </font> 
   </ul>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> 
     Nota:</b></font></font> 
   <ul>
@@ -893,7 +893,7 @@ while(list($x,$v)=each($Or2Dept))
   </ul>
 
 
-	<?php endif ?>
+	<?php endif;?>
 
 
 </form>

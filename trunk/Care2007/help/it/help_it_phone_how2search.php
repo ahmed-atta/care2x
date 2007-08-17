@@ -5,7 +5,7 @@
 switch($src)
 {
  	case "search": print 'cercare un numero di telefono'; break;
-	case "dir": print 'aprire tutto l''elenco';break;
+	case "dir": print 'aprire tutto ´elenco';break;
 	case "newphone": print 'inserire un nuovo numero';break;
  }
  ?></b></font>
@@ -26,11 +26,11 @@ switch($src)
 <b>3:</b>
 <ul> Se la ricerca da esito positivo, i risultati appariranno in un elenco.<p>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="dir") : ?>
 <ul> Selezionare il bottone <img <?php echo createLDImgSrc('../','phonedir-gray.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="newphone") : ?>
 <b>1:</b>
 <ul> Selezionare il bottone <img <?php echo createLDImgSrc('../','newdata.gif','0') ?>>.
@@ -41,7 +41,7 @@ switch($src)
 		Se invece non si è ancora effettuato il login, verrà richiesto di inserire username e password. <p>
 		Inserire i propri dati e premere il bottone <img <?php echo createLDImgSrc('../','continue.gif','0') ?>>.<p>
 		Per annullare l'operazione, premere <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
-</ul><?php endif ?>
+</ul><?php endif;?>
 <b>Nota</b>
 <ul> Per annullare l'operazione di ricerca, premere <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> border=0>.
 </ul>

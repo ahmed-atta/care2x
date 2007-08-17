@@ -40,7 +40,7 @@ Como selecionar a cobertura e as cores dos links?</b>
 <ul>       	
  	<b>Passo 5: </b>Clique no <input type="button" value="Opções extendidas de cores"> para ir à opção de cores ampliada.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="ext") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -66,6 +66,6 @@ Como selecionar a cor do link da cobertura?</b>
  	<b>Passo 5: </b>Se você terminou, clique no botão <input type="button" value="OK"> .<br>
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 	</form>
 

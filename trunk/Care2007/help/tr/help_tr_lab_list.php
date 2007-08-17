@@ -26,11 +26,11 @@ Tüm parametreler seçimden nasıl çıkarılır?</b>
 <ul>      
 		<b>Adım 1: </b>Tüm parametreleri seçimden çıkartmak için <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?> border=0> düğmesini bir kez daha tıklayınız.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="graph") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Grafik çizelgeler olmadan tetkik sonuçlarına nasıl gidilir? </b></font>
 <ul> <b>Uyarı: </b>Eğer geri gitmek isterseniz <img <?php echo createLDImgSrc('../','back2.gif','0','absmiddle') ?>> düğmesini tıklayınız.</ul>
-<?php endif ?>
+<?php endif;?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Laboratuvar nasıl kapatılır <?php echo $x3 ?>? </b></font>
 <ul> <b>Uyarı: </b>Kapatmak ister iseniz,  <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> düğmesini tıklayınıız.</ul>

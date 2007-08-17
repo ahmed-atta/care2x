@@ -50,20 +50,20 @@ en medocs?</b></font>
     Si la búsqueda halla un solo resultado, aparecerá un nuevo formulario con 
     los datos básicos del paciente. Por el contrario, si la búsqueda halla varios 
     resultados, aparecerá una lista con los resultados. 
-    <?php endif ?>
+    <?php endif;?>
     <?php if(($src=="?")||($x1>1)) : ?>
     <br>
     Para documentar un paciente de la lista, dé clic ya sea en el botón <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> 
     correspondiente a él, o el apellido, nombre o el número de identificación 
     del paciente, o la fecha de admisión. 
   </font></ul>
-  <font size="2"><?php endif ?>
+  <font size="2"><?php endif;?>
   <?php if($src=="?") : ?>
   <b>Paso 4</b> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($src!="?")&&($x1==1)) : ?>
   <b>Paso 1</b> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if(($x1=="1")||($src=="?")) : ?>
   </font></font>
   <ul>
@@ -114,7 +114,7 @@ en medocs?</b></font>
     <input type="button" value="Guardar">
     para guardar el documento. 
   </ul>
-  <?php endif ?>
+  <?php endif;?>
   <b>Nota</b> </font></font>
   <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted decide cerrar 

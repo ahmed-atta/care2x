@@ -12,7 +12,7 @@
 <b>Yeni bir hasta için yeni kabul başlatmak</b>
 <ul> Eğer yeni bir kabul işemi başlatmak isterseniz  <input type="button" value="Kabule geri "> düğmesini tıklatınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <b>Uyarı</b>
 <ul> Eğer işiniz bitti ise <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklatınız.
 		

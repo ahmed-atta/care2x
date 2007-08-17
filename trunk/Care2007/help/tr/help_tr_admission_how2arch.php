@@ -112,7 +112,7 @@
 		Aradığınız hasta ile ilgili bilgiyi görmak için hastanın <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> düğmesini, veya ad, soyad, veya kabul tarihini tıklayınız.
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 <b>Uyarı</b>
 <ul> Aramayı iptal etmek isterseniz <input type="button" value="Cancel"> düğmesini tıklayınız.
 </ul>

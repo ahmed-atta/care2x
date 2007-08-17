@@ -20,15 +20,15 @@
 		Ancak birkaç sonuç bulunur ise, bir liste görüntülenir.<p>
 		Aradığınız hastanın tıbbi belgesini görmek için ilgili  <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> düğmesini ya da soyad, belge numarası veya zamanı tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1>1) : ?>
 		Aradığınız hastanın tıbbi belgesini görmek için ilgili  <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> düğmesini ya da soyad, belge numarası veya zamanı tıklayınız.<p>
-<?php endif ?>
+<?php endif;?>
 <?php if(($src!="?")&&($x1=="1")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belgeyi güncellemek istiyorum</b></font>
 <ul> Görünen belgeyi güncellemek ister iseniz, <input type="button" value="Verileri güncelle"> düğmesini tıklayınız.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <b>Uyarı</b>
 <ul> Eğer aramayı iptal etmek isterseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>

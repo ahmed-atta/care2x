@@ -327,7 +327,7 @@ Eu tentei, clicando no botão <input type="button" value="libere"> , mas não há r
 </ul>
   <b>Nota: </b>Se você quiser cancelar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.</ul>
 
-<?php endif ?>
+<?php endif;?>
 
 </form>
 

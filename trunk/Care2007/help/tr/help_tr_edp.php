@@ -59,7 +59,7 @@ Tüm ilgili bilgileri girmeyi bitirdim. Nasıl kaydederim?</b>
 <ul>       	
  	<b>Adım 1: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Şimdi yeni erişim hakkı kaydedildi. Bir başka erişim hakkı daha nasıl oluşturulur?</b>
@@ -77,7 +77,7 @@ Daha önceden verilmiş erişim haklarının listesini görmek istiyorum. Nasıl
  	<b>Adım 2: </b>Güncel erişim hakları listelenir<br>
 </ul>
 	
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="list") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 <img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> ve <img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> düğmelerinin anlamı ne?</b>
@@ -120,7 +120,7 @@ Bir erişim hakkı nasıl silinir?</b>
  	Kullanıcı ile ilgili  "<span style="background-color:yellow" > D </span>" seçeneğini tıklayınız.<br>
 </ul>
 
-	<?php endif ?>	
+	<?php endif;?>	
 	
 	<?php if($x1=="update") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -137,7 +137,7 @@ Uyarı:</b>
  	Eğer düzenlememeye karar verirseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0','absmiddle') ?>>  düğmesini tıklayınız.<br>
 </ul>
 	
-	<?php endif ?>		
+	<?php endif;?>		
 	<?php if($x1=="delete") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Bir erişim hakkı nasıl silinir?</b>
@@ -153,7 +153,7 @@ Uyarı:</b>
  	Silmemeye karar verir iseniz <input type="button" value="Hayır Geri."> düğmesini tıklayınız.<br>
 </ul>
 	
-	<?php endif ?>		
+	<?php endif;?>		
 	
 	<?php if($x1=="lock") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -170,8 +170,8 @@ Uyarı:</b>
  	Eğer <?php if($x2=="0") print "kilitlemeye"; else print "çözmemeye"; ?> karar verirseniz <input type="button" value="Hayır. Geri."> düğmesini tıklayınız.<br>
 </ul>
 	
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 
 	</form>
 

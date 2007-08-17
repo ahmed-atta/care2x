@@ -119,7 +119,7 @@ How to enter <?php echo $person ?> via quick select list?</b>
 <ul>       	
  If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="time") : ?>
 	<?php if($x1=="entry_out") : ?>
@@ -135,7 +135,7 @@ How to document the entry and exit times?</b>
  	<b>Note: </b>You can enter several entry and exit times all at once before you save the information.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="cut_close") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to document cut and suture times?</b>
@@ -149,7 +149,7 @@ How to document cut and suture times?</b>
  	<b>Note: </b>You can enter several cut and suture times all at once before you save the information.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="wait_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to document idle (waiting) times?</b>
@@ -164,7 +164,7 @@ How to document idle (waiting) times?</b>
  	<b>Note: </b>You can enter several start, end times, and reasons all at once before you save the information.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="bandage_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to document plaster cast times?</b>
@@ -178,7 +178,7 @@ How to document plaster cast times?</b>
  	<b>Note: </b>You can enter several start and end times all at once before you save the information.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<?php if($x1=="repos_time") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to document reposition times?</b>
@@ -192,7 +192,7 @@ How to document reposition times?</b>
  	<b>Note: </b>You can enter several start and end times all at once before you save the information.<p>
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to save the information?</b>
 </font>
@@ -214,7 +214,7 @@ How to save the information?</b>
 <ul>       	
  If you decide to cancel click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 
 <?php if($src=="create") : ?>
@@ -282,7 +282,7 @@ How to display the log entries of a certain day other than the one currently dis
 
 <hr>
 
-	<?php endif ?>
+	<?php endif;?>
 	
 	<?php if($x2=="material") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -331,7 +331,7 @@ How to display the main logbook back again?</b>
  	<b>Step 1: </b>Click the "<span style="background-color:yellow" > <img <?php echo createComIcon('../','manfldr.gif','0') ?>> Show logbook. </span>" link.<br> 
 </ul>
 <hr>
-	<?php endif ?>
+	<?php endif;?>
 
 	<?php if(($x1=="")||($x1=="fresh")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -486,9 +486,9 @@ How to start a new log document?</b>
 <b>Note</b>
 <ul> If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 
-<?php endif ?>
+<?php endif;?>
 
 
 
@@ -509,7 +509,7 @@ How to search for a document of a particular patient?</b>
 	Click on the patient's family name to display its document.<p> 
 	</ul>
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="search")&&($x3!="1")) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -519,7 +519,7 @@ How to select a particular document for display?</b>
  	<b>Note: </b> Click on the patient's family name to display its document.<p> 
 </ul>
 
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="get")||($x3=="1")) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -537,7 +537,7 @@ How to open the patient's data folder?</b>
  	<b>Step 2: </b>The patient's data folder will pop up. Click the "Help" button in the window if you need further instructions.<p> 
 	</ul>
 
-<?php endif ?>
+<?php endif;?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 How to continue searching?</b>
 </font>
@@ -549,21 +549,21 @@ How to continue searching?</b>
 <ul>       	
  If you decide to close click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="arch") : ?>
 	<?php if($x2=="1") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note: Latest log entry (entries)</b></font> 
 <ul>  Every time you switch over to the archive, the last logged operations will be displayed immediately.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 	<?php if(($x3=="")&&($x1!="0")) : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> No operation done on this day.</b></font> 
 <ul>       	
 Click the "Options" to open the option box.<br>
 Click the "Search" to switch over to search mode.</ul>
 	
-	<?php endif ?>
+	<?php endif;?>
 	
 
 
@@ -605,7 +605,7 @@ How to open the patient's data folder?</b>
  	<b>Step 1: </b>Click the <img <?php echo createComIcon('../','info3.gif','0') ?>> button on the left of the patient number.<br>
  	<b>Step 2: </b>The patient's data folder will pop up. Click the "Help" button in the window if you need further instructions.<p> 
 	</ul>
-	<?php endif ?>
+	<?php endif;?>
 	
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b></font> 
 <ul>       	
@@ -613,7 +613,7 @@ How to open the patient's data folder?</b>
 </ul>
 
 
-	<?php endif ?>
+	<?php endif;?>
 
 
 </form>

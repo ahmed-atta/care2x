@@ -389,7 +389,7 @@ How to admit a patient from the waiting list?</b></font>
   <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Nota: </b>Si 
     desea cancelar, dé clic al botón<img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle">.</ul></font></p>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-    <?php endif ?>
+    <?php endif;?>
     </font></p>
   <p> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
     <?php if(($src!="assign")&&($src!="remarks")&&($src!="discharge")) : ?>
@@ -405,7 +405,7 @@ How to admit a patient from the waiting list?</b></font>
     para desbloquear una cama requiere contraseña. </font> 
 </ul>
 
-<?php endif ?>
+<?php endif;?>
 <a name="pic"></a>
 <font face="Verdana, Arial" size=2>
 <b>

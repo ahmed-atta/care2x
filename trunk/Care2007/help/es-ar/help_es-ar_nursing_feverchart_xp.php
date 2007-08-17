@@ -44,7 +44,7 @@
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="diet") : ?>
   <a name="diet"><img <?php echo createComIcon('../','frage.gif','0') ?>> </a><font color="990000"><strong>¿Como 
   ingresar un plan de dieta? </strong></font></font> 
@@ -63,7 +63,7 @@
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="allergy") : ?>
   <a name="allergy"><img <?php echo createComIcon('../','frage.gif','0') ?>></a><font color="990000"><strong>¿Como 
   ingresar información de Alergias?</b></strong></font></font> <strong></strong> </font> 
@@ -84,7 +84,7 @@
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="diag_ther") : ?>
   <a name="diag"><img <?php echo createComIcon('../','frage.gif','0') ?>></a><font color="990000"><strong>¿Como 
   ingresar el diagnostico principal y/o terapia?</strong></font></font> 
@@ -105,7 +105,7 @@
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="diag_ther_dailyreport") : ?>
   <a name="daydiag"><img <?php echo createComIcon('../','frage.gif','0') ?>></a><font color="990000"><strong>¿Como 
   ingresar la información diaria de diagnosticos o plan de terapia? </strong></font></font> 
@@ -125,7 +125,7 @@
     para cerrar la ventana y volver a la gráfica. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="xdiag_specials") : ?>
   <a name="extra"></a></font><font face="Verdana, Arial, Helvetica, sans-serif"><a name="extra"><a name="diag"><font size="2"><img <?php echo createComIcon('../','frage.gif','0') ?>></font></a></a></font><font color="990000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>¿Como 
   escribir Notas o diagnosticos Extras?</strong></font> 
@@ -145,7 +145,7 @@
     para cerrar la ventana y volver a la gráfica. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="kg_atg_etc") : ?>
   <a name="pt"><img <?php echo createComIcon('../','frage.gif','0') ?>></a><font color="990000"><strong>¿Como 
   ingresar la información </strong></font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><font color="990000"><strong>diaria</strong></font></font><font color="990000"><strong> 
@@ -166,7 +166,7 @@
     para cerrar la ventana y volver a la gráfica. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="anticoag") : ?>
   <a name="coag"><img <?php echo createComIcon('../','frage.gif','0') ?>></a><font color="990000"><strong>&iquest;Como 
   indicar Anticoagulantes?</b></strong></font></font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"></font> </font> 
@@ -186,7 +186,7 @@
     para cerrar la ventana y volver a la gráfica. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="anticoag_dailydose") : ?>
   <a name="daycoag"><img <?php echo createComIcon('../','frage.gif','0') ?>></a><font color="990000"><strong>¿Como 
   ingresar la información de la aplicación de anticoagulantes diarios?</strong></font></font> 
@@ -204,7 +204,7 @@
     para cerrar la ventana y volver a la gráfica. </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="lot_mat_etc") : ?>
   <a name="lot"><img <?php echo createComIcon('../','frage.gif','0') ?>></a><font color="990000"><strong>&iquest;Como 
   ingresar notas en implantes, Número de lote,Número de cargo, etc?</strong></font></font> 
@@ -225,7 +225,7 @@
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="medication") : ?>
   <a name="med"><img <?php echo createComIcon('../','frage.gif','0') ?>><font color="990000"><strong>&iquest;</strong></font></a><strong><font color="990000">Como 
   ingresar indicaciones de medicamentos y dosis?</b></font></strong></font> </font> 
@@ -261,7 +261,7 @@
     </font> 
   </ul>
   <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-  <?php endif ?>
+  <?php endif;?>
   <?php if($src=="medication_dailydose") : ?>
   <?php if($x2) : ?>
   <a name="daymed"><img <?php echo createComIcon('../','frage.gif','0') ?>></a><a name="med"><font color="990000"><strong>&iquest;</strong></font></a><strong><font color="990000">Como 
@@ -322,8 +322,8 @@
     <b>Paso 10: </b>Si ha terminado, dé clic al botón <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> 
     para cerrar la ventana y volver a la gráfica.</font><br>
   </ul>
-  <?php endif ?>
-  <?php endif ?>
+  <?php endif;?>
+  <?php endif;?>
   <?php if($src=="iv_needle") : ?>
   <a name="iv"><img <?php echo createComIcon('../','frage.gif','0') ?>> </a><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><a name="med"><font color="990000"><strong>&iquest;</strong></font></a><strong><font color="990000">Como 
   ingresar la indicaci&oacute;n diaria de medicamentos intravenosos, su aplicaci&oacute;n 
@@ -341,6 +341,6 @@
     <b>Paso 4: </b>Si ha terminado, dé clic al botón <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> 
     para cerrar la ventana y volver a la gráfica. </font> 
   </ul>
-  <?php endif ?>
+  <?php endif;?>
 </form>
 

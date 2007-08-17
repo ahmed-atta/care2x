@@ -77,7 +77,7 @@ What is the function of this selection box </b>	<select name="d"><option value="
 		<b>Step 2: </b>Click on the chosen clinic, department, or diagnostic test.<br>
 		<b>Step 3: </b>The request form will be automatically opened.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="labor") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>There is no laboratory report available at the moment. </b></font>
@@ -86,7 +86,7 @@ What is the function of this selection box </b>	<select name="d"><option value="
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>How to close the patient's data folder? </b></font>
 <ul> <b>Note: </b>If you want to close, click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle">.</ul>
 
-<?php endif ?>
+<?php endif;?>
 
 </form>
 

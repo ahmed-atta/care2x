@@ -49,7 +49,7 @@ Wie kann ich eine Reparaturanforderung erstellen?</b></font>
 <b>Achtung!</b>
 <ul>Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="report") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -65,7 +65,7 @@ Wie berichte ich eine erledigte Reparaturarbeit?</b></font>
 <b>Achtung!</b>
 <ul>Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="queries") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -86,7 +86,7 @@ Wie kann ich meine letzte Anfragen sehen und die Antwort von der Technik?</b></f
 <b>Achtung!</b>
 <ul>Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="arch") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -112,7 +112,7 @@ Wie finde ich einen bestimmten Bericht?</b></font>
 
 </ul>
 </font>
-<?php endif ?>
+<?php endif;?>
 <?php if($src=="showarch") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
 Ein Bericht als "gesehen" markieren.</b></font>
@@ -127,7 +127,7 @@ Den Bericht ausdrucken.</b></font>
 Wie komme ich zum Suchen im Archiv zurück?</b></font>
 <ul> <b>Schritt 1: </b>Klickt den  <input type="button" value="<< Zurück"> Knopf an.<p>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 </form>
 </body>

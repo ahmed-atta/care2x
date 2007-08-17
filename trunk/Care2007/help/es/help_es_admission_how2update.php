@@ -27,7 +27,7 @@
   </ul>
   </font></font>
 <p><font face="Verdana, Arial, Helvetica, sans-serif"> <font size="2"> 
-    <?php endif ?>
+    <?php endif;?>
     <b>Nota</b> </font></font> </p>
 <ul>
     <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> Si usted desea volver 

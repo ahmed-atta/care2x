@@ -36,7 +36,7 @@
 <b>Passo 3</b>
 <ul> Se a pesquisa retornar um único resultado, um formulário com os dados básicos do paciente será exibido.
 		Entretanto, se a pesquisa retornar vários resultados, uma lista será mostrada.
-<?php endif ?>
+<?php endif;?>
 
 <?php if(($src=="?")||($x1>1)) : ?>
 
@@ -44,15 +44,15 @@
 		Clique ou no botão <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> correspondente a ele, ou
 		no sobrenome, ou nome, ou número do paciente, ou data de admissão.
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="?") : ?>
 <b>Passo 4</b>
-<?php endif ?>
+<?php endif;?>
 
 <?php if(($src!="?")&&($x1==1)) : ?>
 <b>Passo 1</b>
-<?php endif ?>
+<?php endif;?>
 <?php if(($x1=="1")||($src=="?")) : ?>
 <ul> Uma vez que um novo formulário com os dados do paciente esteja exibido, você pode fazer o seguinte: 
 		<Ul type="disc">		
@@ -73,7 +73,7 @@
 <b>Passo <?php if($src!="?") print "2"; else print "5"; ?></b>
 <ul> Clique no botão <input type="button" value="Salvar"> para salvar o documento.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <b>Nota</b>
 <ul> Se você decidir cancelar o documento clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
 		

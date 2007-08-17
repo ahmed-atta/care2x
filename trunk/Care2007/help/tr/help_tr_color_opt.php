@@ -40,7 +40,7 @@ Bağlantı renkleri nasıl seçilir?</b>
 <ul>       	
  	<b>Adım 5: </b>İleri renk seçeneklerini görmek için <input type="button" value="İleri renk seçenekleri"> düğmesini tıklayınız.<br>
 </ul>
-<?php endif ?>
+<?php endif;?>
 
 <?php if($src=="ext") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -65,6 +65,6 @@ Hover bağlantı rengi nasıl seçilir?</b>
 </ul>
 
 
-<?php endif ?>
+<?php endif;?>
 	</form>
 

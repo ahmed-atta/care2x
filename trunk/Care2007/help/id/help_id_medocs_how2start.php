@@ -32,7 +32,7 @@ switch($x1)
 ?>" border="0">. 
 </ul>
 <b>Langkah 2</b> 
-<?php endif ?>
+<?php endif;?>
 <ul> Jika anda telah login sebelumnya dan anda mempunyai hak akses untuk fungsi ini,
 <?php switch($x1)
 	{
@@ -48,4 +48,4 @@ switch($x1)
 
 
 </form>
-<?php endif ?>
+<?php endif;?>

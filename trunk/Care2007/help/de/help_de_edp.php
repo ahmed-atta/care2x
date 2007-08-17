@@ -54,7 +54,7 @@ Ich bin fertig. Wie kann ich die Daten speichern?</b>
 <ul>       	
  	<b>Schritt 1: </b>Klickt den  <input type="button" value="Speichern"> Knopf an.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif; ?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Die Zugangsberechtigung is jetzt gespeichert. Wie erschaffe ich eine neue?</b>
@@ -72,7 +72,7 @@ Wie kann ich alle Zugangsberechtigungen aufgelistet sehen?</b>
  	<b>Schritt 2: </b>Alle Zugangsberechtigungen werden gezeigt.<br>
 </ul>
 	
-	<?php endif ?>	
+	<?php endif; ?>	
 	<?php if($x1=="list") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Was bedeuten die beiden Knöpfe <img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> und <img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> ?</b>
@@ -115,7 +115,7 @@ Wie kann ich die Zugangsberechtigung löschen?</b>
  	Klickt die Option "<span style="background-color:yellow" > L </span>" an.<br>
 </ul>
 
-	<?php endif ?>	
+	<?php endif; ?>	
 	
 	<?php if($x1=="update") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -132,7 +132,7 @@ Achtung!</b>
  	Wenn Sie nicht bearbeiten möchten klicken Sie den <input type="button" value="Abbrechen"> Knopf an.<br>
 </ul>
 	
-	<?php endif ?>		
+	<?php endif; ?>		
 	<?php if($x1=="delete") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie lösche ich eine Zugangsberechtigung?</b>
@@ -148,7 +148,7 @@ Achtung!</b>
  	Wenn Sie nicht löschen möchten klicken Sie den <input type="button" value="Nein. Zurück."> Knopf an.<br>
 </ul>
 	
-	<?php endif ?>		
+	<?php endif; ?>		
 	
 	<?php if($x1=="lock") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -166,8 +166,8 @@ Achtung!</b>
 	 klicken Sie den  <input type="button" value="Nein. Zurück."> Knopf an.<br>
 </ul>
 	
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif; ?>		
+<?php endif;?>	
 
 	</form>
 

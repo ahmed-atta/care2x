@@ -59,7 +59,7 @@ Eu terminei de entrar com todas as informações relevantes. Como salvo?</b>
 <ul>       	
  	<b>Passo 1: </b>Clique no botão <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> .<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 O novo direito de acesso está salvo agora. Como criar outro direito de acesso?</b>
@@ -77,7 +77,7 @@ Eu quero ver a lista dos direitos de acesso existentes. Como é que eu faço?</b>
  	<b>Passo 2: </b>Os direitos de acesso atuais serão listados<br>
 </ul>
 	
-	<?php endif ?>	
+	<?php endif;?>	
 	<?php if($x1=="list") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 O que significam os botões <img <?php echo createComIcon('../','padlock.gif','0','absmiddle') ?>> e <img <?php echo createComIcon('../','arrow-gr.gif','0','absmiddle') ?>> ?</b>
@@ -120,7 +120,7 @@ Como apagar um direito de acesso?</b>
  	Clique na opção "<span style="background-color:yellow" > D </span>" correspondente ao usuário.<br>
 </ul>
 
-	<?php endif ?>	
+	<?php endif;?>	
 	
 	<?php if($x1=="update") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -137,7 +137,7 @@ Nota:</b>
  	Se você decidir não editar, clique no botão <img <?php echo createLDImgSrc('../','cancel.gif','0','absmiddle') ?>>  .<br>
 </ul>
 	
-	<?php endif ?>		
+	<?php endif;?>		
 	<?php if($x1=="delete") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Como deletar um direito de acesso?</b>
@@ -153,7 +153,7 @@ Nota:</b>
  	Se você decidir não apagar clique no botão <input type="button" value="Não. Volte.">.<br>
 </ul>
 	
-	<?php endif ?>		
+	<?php endif;?>		
 	
 	<?php if($x1=="lock") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -170,8 +170,8 @@ Note:</b>
  	Se você decidir não <?php if($x2=="0") print "bloquear"; else print "lliberar"; ?> clique no botão <input type="button" value="Não. Volte.">.<br>
 </ul>
 	
-	<?php endif ?>		
-<?php endif ?>	
+	<?php endif;?>		
+<?php endif;?>	
 
 	</form>
 

@@ -53,7 +53,7 @@ Non riesco a trovare il paziente tramite il codice: non posso inserire semplicem
 <ul>       	
  	<b>No. </b>In questa versione del programma, è possibile salvare le foto di un paziente solo se esiste un codice valido.<br>
 </ul>
-<?php endif ?>	
+<?php endif;?>	
 <?php if($src=="maindata") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: trovare i dati paziente?</b>
@@ -75,7 +75,7 @@ Non riesco a trovare il paziente tramite il codice: non posso inserire semplicem
  	<b>No. </b>In questa versione del programma, è possibile salvare le foto di un paziente solo se esiste un codice valido.<br>
 </ul>
 
-	<?php endif ?>	
+	<?php endif;?>	
 <?php if($src=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a salvare ulteriori foto dello stesso paziente?</b>
@@ -91,7 +91,7 @@ Come fare a salvare foto di un altro paziente?</b>
 	<b>1: </b>Inserire il numero di foto da memorizzare nel campo <nobr>"<input type="text" name="g" size=3 maxlength=2> foto aggiuntive dello <span style="background-color:yellow" > stesso paziente. </span>"</nobr>.<br>
  	<b>2: </b>Premere il bottone <input type="button" value="OK">.<br>
 </ul>
-	<?php endif ?>	
+	<?php endif;?>	
 <?php if($src=="init") : ?>
 	<?php if($x1=="") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -102,6 +102,6 @@ Come fare a salvare le foto in banca dati?</b>
  	<b>2: </b>Premere il bottone <input type="button" value="OK Continua...">.<br>
  	<b>3: </b>Apparirà il modulo di inserimento foto. Premere il bottone "Aiuto" per altre istruzioni.<br>
 </ul>
-	<?php endif ?>	
-<?php endif ?>	
+	<?php endif;?>	
+<?php endif;?>	
 	</form>

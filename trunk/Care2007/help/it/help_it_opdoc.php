@@ -66,7 +66,7 @@ Come fare a: creare un nuovo documento?</b>
 <b>Nota</b>
 <ul> Per chiudere premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1=="update") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: modificare il documento corrente?</b>
@@ -79,7 +79,7 @@ Come fare a: modificare il documento corrente?</b>
 <ul>       	
  Per chiudere premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
+<?php endif;?>
 <?php if($x1=="dummy") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: creare un nuovo documento?</b>
@@ -96,8 +96,8 @@ Come fare a: creare un nuovo documento?</b>
  	informazioni aggiuntive nei campi appropriati.<br> 
  	<b>4: </b>Per salvare il documento, premere il bottone <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> .<br> 
 	</ul>
-	<?php endif ?>
-<?php endif ?>
+	<?php endif;?>
+<?php endif;?>
 <?php if($src=="search") : ?>
 	<?php if(($x1=="dummy")||($x1=="")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -116,7 +116,7 @@ Come fare a: cercare il documento per un determinato paziente?</b>
 <ul>       	
  Per chiudere premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="match")&&($x2>0)) : ?>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
@@ -137,7 +137,7 @@ Come fare a: continuare la ricerca?</b>
 <ul>       	
  Per chiudere premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="select")&&($x2==1)) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: modificare il documento corrente?</b>
@@ -157,8 +157,8 @@ Come fare a: continuare la ricerca?</b>
 <ul>       	
  Per chiudere premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 <?php if($src=="arch") : ?>
 	<?php if(($x1=="dummy")||($x1=="?")||($x1=="")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Desidero l'elenco di tutti i documenti delle operazioni fatte in una certa data</b></font>
@@ -253,7 +253,7 @@ una frase o un insieme di lettere. <br>
 <ul>       	
  Per chiudere premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="search")&&($x2>0)) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: visualizzare un determinato documento?</b>
@@ -271,7 +271,7 @@ Come fare a: continuare la ricerca negli archivi?</b>
 <ul>       	
  Per chiudere premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-	<?php endif ?>
+	<?php endif;?>
 <?php if(($x1=="select")&&($x2==1)) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Come fare a: modificare il documento visualizzato?</b>
@@ -289,6 +289,6 @@ Come fare a: continuare la ricerca in archivio?</b>
 <ul>       	
  Per chiudere premere il bottone <img <?php echo createLDImgSrc('../','close2.gif','0') ?>>.
 </ul>
-<?php endif ?>
-<?php endif ?>
+<?php endif;?>
+<?php endif;?>
 </form>
