@@ -1,6 +1,4 @@
 <?php
-session_start();
-session_destroy();
 require_once realpath(dirname(__FILE__)).'/Installer.php';
 
 $smarty = new InstallerSmarty();
