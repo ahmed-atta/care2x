@@ -4674,6 +4674,71 @@ CREATE TABLE IF NOT EXISTS `care_encounter_custom_tc` (
 # end new chart 07/28/2007
 #
 
+-- 
+-- Struttura della tabella `care_yellow_paper`
+-- 
+
+DROP TABLE IF EXISTS `care_yellow_paper`;
+CREATE TABLE `care_yellow_paper` (
+  `encounter_nr` bigint(20) NOT NULL,
+  `personell_name` varchar(20) collate latin1_general_ci default NULL,
+  `location_id` varchar(20) collate latin1_general_ci default NULL,
+  `history` text collate latin1_general_ci,
+  `create_id` varchar(20) collate latin1_general_ci default NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `sunto_anamnestico` text collate latin1_general_ci,
+  `stato_presente` text collate latin1_general_ci,
+  `altezza` double(15,3) default NULL,
+  `peso` double(15,3) default NULL,
+  `norm` varchar(20) collate latin1_general_ci default NULL,
+  `dati_urine` varchar(20) collate latin1_general_ci default NULL,
+  `dati_sangue` varchar(20) collate latin1_general_ci default NULL,
+  `dati_altro` varchar(20) collate latin1_general_ci default NULL,
+  `diagnosi` text collate latin1_general_ci,
+  `terapia` text collate latin1_general_ci,
+  `padre` text collate latin1_general_ci,
+  `madre` text collate latin1_general_ci,
+  `fratelli` text collate latin1_general_ci,
+  `coniuge` text collate latin1_general_ci,
+  `figli` text collate latin1_general_ci,
+  `paesi_esteri` text collate latin1_general_ci,
+  `abitazione` text collate latin1_general_ci,
+  `lavoro_pregresso` text collate latin1_general_ci,
+  `lavoro_presente` text collate latin1_general_ci,
+  `lavoro_attuale` text collate latin1_general_ci,
+  `ambiente_lavoro` text collate latin1_general_ci,
+  `gas_lavoro` text collate latin1_general_ci,
+  `tossiche_lavoro` text collate latin1_general_ci,
+  `conviventi` text collate latin1_general_ci,
+  `prematuro` varchar(4) collate latin1_general_ci default NULL,
+  `eutocico` varchar(4) collate latin1_general_ci default NULL,
+  `fisiologici_normali` varchar(4) collate latin1_general_ci default NULL,
+  `fisiologici_tardivi` varchar(4) collate latin1_general_ci default NULL,
+  `mestruazione` text collate latin1_general_ci,
+  `gravidanze` text collate latin1_general_ci,
+  `militare` text collate latin1_general_ci,
+  `alcolici` varchar(20) collate latin1_general_ci default NULL,
+  `caffe` varchar(20) collate latin1_general_ci default NULL,
+  `fumo` varchar(20) collate latin1_general_ci default NULL,
+  `droghe` varchar(20) collate latin1_general_ci default NULL,
+  `sete` varchar(20) collate latin1_general_ci default NULL,
+  `alvo` varchar(20) collate latin1_general_ci default NULL,
+  `diuresi` varchar(20) collate latin1_general_ci default NULL,
+  `anamnesi_remota` text collate latin1_general_ci,
+  `anamnesi_prossima` text collate latin1_general_ci,
+  `nr` bigint(20) NOT NULL auto_increment,
+  `modify_id` text collate latin1_general_ci,
+  `modify_time` timestamp NOT NULL default '0000-00-00 00:00:00' on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`nr`),
+  UNIQUE KEY `nr` (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
+
+-- 
+-- Dump dei dati per la tabella `care_yellow_paper`
+-- 
+
+
+
 #
 # Dumping data for table care_version
 #
