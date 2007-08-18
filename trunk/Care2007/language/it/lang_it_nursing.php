@@ -144,6 +144,8 @@ $LDShortFemale='F';
 $LDLegend='Legenda';
 
 $LDOpenFile='Apri dati';
+$LDYellowPaper='Anamnesi';
+$LDTarget='Obiettivo';
 $LDNotesEmpty='Nota vuota';
 $LDNotes='Nota';
 $LDRelease='Dimetti';
