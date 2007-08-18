@@ -536,4 +536,4 @@ $smarty->assign('sMainFrameBlockData',$sTemp);
  */
  $smarty->display('common/mainframe.tpl');
 
-}?>
+?>
