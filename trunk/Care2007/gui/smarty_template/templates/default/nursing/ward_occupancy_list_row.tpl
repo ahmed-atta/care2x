@@ -9,12 +9,14 @@
  {{/if}}
 		<td>{{$sMiniColorBars}}</td>
 		<td>&nbsp;{{$sRoom}}</td>
-		<td>&nbsp;{{$sBed}} {{$sBedIcon}}</td>
+		<td>&nbsp;{{$sBed}} {{$sBedIcon}} {{$sNotesIcon}}</td>
 		<td>&nbsp;{{$sTitle}} {{$sFamilyName}}{{$cComma}} {{$sName}}</td>
 		<td>&nbsp;{{$sBirthDate}}</td>
 		<td>&nbsp;{{$sPatNr}}</td>
 		<td>&nbsp;{{$sInsuranceType}}</td>
-		<td>&nbsp;{{$sYellowPaper}} {{$sAdmitDataIcon}} {{$sChartFolderIcon}} {{$sNotesIcon}} {{$sTransferIcon}} {{$sDischargeIcon}}</td>
+		<td>&nbsp;{{$sYellowPaper}} {{$LDTarget}} {{$sChartFolderIcon}}<br>
+		{{$sAdmitDataIcon}} {{$sTransferIcon}} {{$sDischargeIcon}}
+		</td>
 		</tr>
 		<tr>
 		<td colspan="8" class="thinrow_vspacer">{{$sOnePixel}}</td>
