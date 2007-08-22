@@ -14,7 +14,7 @@
 		<td>&nbsp;{{$sBirthDate}}</td>
 		<td>&nbsp;{{$sPatNr}}</td>
 		<td>&nbsp;{{$sInsuranceType}}</td>
-		<td>&nbsp;{{$sYellowPaper}} {{$LDTarget}} {{$sChartFolderIcon}}<br>
+		<td>&nbsp;{{$sYellowPaper}} {{$sTarget}} {{$sChartFolderIcon}}<br>
 		{{$sAdmitDataIcon}} {{$sTransferIcon}} {{$sDischargeIcon}}
 		</td>
 		</tr>
