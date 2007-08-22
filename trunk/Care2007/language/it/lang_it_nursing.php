@@ -145,7 +145,7 @@ $LDLegend='Legenda';
 
 $LDOpenFile='Apri dati';
 $LDYellowPaper='Anamnesi';
-$LDTarget='Obiettivo';
+$LDTarget='Esame obiettivo';
 $LDNotesEmpty='Nota vuota';
 $LDNotes='Nota';
 $LDRelease='Dimetti';
