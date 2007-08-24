@@ -4737,6 +4737,104 @@ CREATE TABLE `care_yellow_paper` (
 -- Dump dei dati per la tabella `care_yellow_paper`
 -- 
 
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+-- 
+-- Database: `imed`
+-- 
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `care_target_test`
+-- 
+
+CREATE TABLE `care_target_test` (
+  `nr` varchar(20) collate latin1_general_ci NOT NULL,
+  `encounter_nr` varchar(20) collate latin1_general_ci NOT NULL,
+  `personell_nr` varchar(20) collate latin1_general_ci NOT NULL,
+  `personell_name` varchar(255) collate latin1_general_ci default NULL,
+  `location_id` varchar(20) collate latin1_general_ci NOT NULL,
+  `history` varchar(255) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(255) collate latin1_general_ci NOT NULL,
+  `modify_time` varchar(255) collate latin1_general_ci NOT NULL,
+  `create_id` varchar(255) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `tipo_costituzionale` varchar(255) collate latin1_general_ci default NULL,
+  `condizioni_generali` varchar(255) collate latin1_general_ci default NULL,
+  `stato_nutrizione` varchar(255) collate latin1_general_ci default NULL,
+  `decubito` varchar(255) collate latin1_general_ci default NULL,
+  `psiche` varchar(255) collate latin1_general_ci default NULL,
+  `cute` varchar(255) collate latin1_general_ci default NULL,
+  `descrizione_mucose` varchar(255) collate latin1_general_ci default NULL,
+  `annessi_cutanei` varchar(255) collate latin1_general_ci default NULL,
+  `edemi` varchar(255) collate latin1_general_ci default NULL,
+  `sottocutaneo_descrizione` varchar(255) collate latin1_general_ci default NULL,
+  `temperatura` varchar(255) collate latin1_general_ci default NULL,
+  `polso_battiti` varchar(255) collate latin1_general_ci default NULL,
+  `polso` varchar(255) collate latin1_general_ci default NULL,
+  `pressione_max` varchar(255) collate latin1_general_ci default NULL,
+  `pressione_min` varchar(255) collate latin1_general_ci default NULL,
+  `linfoghiandolare_descrizione` varchar(255) collate latin1_general_ci default NULL,
+  `capo_descrizione` varchar(255) collate latin1_general_ci default NULL,
+  `globi_oculari` varchar(255) collate latin1_general_ci default NULL,
+  `sclere_descrizione` varchar(255) collate latin1_general_ci default NULL,
+  `pupille` varchar(255) collate latin1_general_ci default NULL,
+  `riflesso_corneale` varchar(255) collate latin1_general_ci default NULL,
+  `orecchie` varchar(255) collate latin1_general_ci default NULL,
+  `naso` varchar(255) collate latin1_general_ci default NULL,
+  `cavo_orofaringeo` varchar(255) collate latin1_general_ci default NULL,
+  `lingua` varchar(255) collate latin1_general_ci default NULL,
+  `dentatura` varchar(255) collate latin1_general_ci default NULL,
+  `tonsille` varchar(255) collate latin1_general_ci default NULL,
+  `collo_forma` varchar(255) collate latin1_general_ci default NULL,
+  `mobilita` varchar(255) collate latin1_general_ci default NULL,
+  `atteggiamento` varchar(255) collate latin1_general_ci default NULL,
+  `giugulari_turgide` varchar(255) collate latin1_general_ci default NULL,
+  `tiroide_normale` varchar(255) collate latin1_general_ci default NULL,
+  `collo_descrizione` varchar(255) collate latin1_general_ci default NULL,
+  `mammelle` varchar(255) collate latin1_general_ci default NULL,
+  `torace_forma` varchar(255) collate latin1_general_ci default NULL,
+  `reperti_torace` varchar(255) collate latin1_general_ci default NULL,
+  `ispezione_respiratoria` varchar(255) collate latin1_general_ci default NULL,
+  `palpazione_respiratoria` varchar(255) collate latin1_general_ci default NULL,
+  `percussione_respiratoria` varchar(255) collate latin1_general_ci default NULL,
+  `ascoltazione_respiratoria` varchar(255) collate latin1_general_ci default NULL,
+  `reperti_respiratoria` varchar(255) collate latin1_general_ci default NULL,
+  `fegato_descrizione` varchar(255) collate latin1_general_ci default NULL,
+  `epatomegalia` varchar(255) collate latin1_general_ci default NULL,
+  `murphy` varchar(255) collate latin1_general_ci default NULL,
+  `colecisti_palpabile` varchar(255) collate latin1_general_ci default NULL,
+  `reperti_fegato` varchar(255) collate latin1_general_ci default NULL,
+  `milza_descrizione` varchar(255) collate latin1_general_ci default NULL,
+  `reperti_milza` varchar(255) collate latin1_general_ci default NULL,
+  `urogenitale_descrizione` varchar(255) collate latin1_general_ci default NULL,
+  `esplorazione_vaginale` varchar(255) collate latin1_general_ci default NULL,
+  `reperti_genitale` varchar(255) collate latin1_general_ci default NULL,
+  `osteoarticolare_descrizione` varchar(255) collate latin1_general_ci default NULL,
+  `muscolare_descrizione` varchar(255) collate latin1_general_ci default NULL,
+  `reperti_muscolare` varchar(255) collate latin1_general_ci default NULL,
+  `nervoso_descrizione` varchar(255) collate latin1_general_ci default NULL,
+  `nervi_cranici` varchar(255) collate latin1_general_ci default NULL,
+  `riflessi_superficiali` varchar(255) collate latin1_general_ci default NULL,
+  `reperti_nervoso` varchar(255) collate latin1_general_ci default NULL,
+  `ispezione_cuore` varchar(255) collate latin1_general_ci default NULL,
+  `palpazione_cuore` varchar(255) collate latin1_general_ci default NULL,
+  `percussione_cuore` varchar(255) collate latin1_general_ci default NULL,
+  `ascoltazione_cuore` varchar(255) collate latin1_general_ci default NULL,
+  `reperti_cuore` varchar(255) collate latin1_general_ci default NULL,
+  `vasi_periferici_descrizione` varchar(255) collate latin1_general_ci default NULL,
+  `arterie` varchar(255) collate latin1_general_ci default NULL,
+  `vene` varchar(255) collate latin1_general_ci default NULL,
+  `reperti_vasi` varchar(255) collate latin1_general_ci default NULL,
+  `addome_descrizione` varchar(255) collate latin1_general_ci default NULL,
+  `addome_ispezione` varchar(255) collate latin1_general_ci default NULL,
+  `addome_palpazione` varchar(255) collate latin1_general_ci default NULL,
+  `addome_percussione` varchar(255) collate latin1_general_ci default NULL,
+  `addome_ascoltazione` varchar(255) collate latin1_general_ci default NULL,
+  `rettale` varchar(255) collate latin1_general_ci default NULL,
+  `reperti_addome` varchar(255) collate latin1_general_ci default NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 
 #
