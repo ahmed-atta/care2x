@@ -162,7 +162,7 @@ if(isset($mode)&&($mode=='save')){
 
  $smarty->assign('sSubmitFormButton','<input type="submit" value="'.$LDSave.'">');
  $smarty->assign('sNoChangeButton','<input type="button" value="'.$LDNoChange.'" onClick="window.location.href=\'startframe.php'.URL_REDIRECT_APPEND.'\'">');
- $smarty->assign('sCancelButton','<a href="startframe.php'.URL_APPEND.'"><img '.createLDImgSrc($root_path,'close2.gif','0','top').'  alt="'.$LDClose.'"></a>');
+ 
 
  #
  # Prepare the hidden inputs
