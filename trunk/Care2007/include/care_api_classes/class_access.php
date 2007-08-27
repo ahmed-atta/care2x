@@ -29,11 +29,6 @@ class Access extends Core {
 	*/
 	var $allowedareas=array();
 	/**
-	* Allowed department id
-	* @var int
-	*/
-	var $dept_nr;
-	/**
 	* User's registration status.
 	* FALSE = unknown.
 	* TRUE = known.
@@ -125,7 +120,7 @@ class Access extends Core {
 			if(!empty($this->pw)) $pw=$this->pw;
 				else return FALSE;
 		}
-		$this->sql="SELECT name,login_id,password, permission, lockflag, dept_nr FROM $this->tb_user WHERE login_id ='".addslashes($login)."'";
+		$this->sql="SELECT name,login_id,password, permission, lockflag FROM $this->tb_user WHERE login_id ='".addslashes($login)."'";
 		if ($result=$db->Execute($this->sql)) {
 		    if ($this->rec_count=$result->RecordCount()) {
 		       $this->user=$result->FetchRow();
@@ -203,15 +198,6 @@ class Access extends Core {
 	function PermissionAreas(){
 		return $this->user['permission'];
 	}
-	/**
-	* Returns the permission dept of the user. No interpretation is returned.
-	* Use only after the access data was loaded by the constructor or loadAccess() method.
-	* @access public
-	* @return string
-	*/
-	function PermittedDepartment(){
-		return unserialize($this->user['dept_nr']);
-	}	
 	/**
 	* Checks if the user is permitted in a given protected area.
 	*
