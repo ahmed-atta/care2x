@@ -3,9 +3,9 @@
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -53,8 +53,6 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 		{
 			$HTTP_SESSION_VARS['sess_login_userid']=$user->LoginName();
 			$HTTP_SESSION_VARS['sess_login_username']=$user->Name();
-			//gjergji - modified to let each user access it's own ward
-			$HTTP_SESSION_VARS['department_nr']=$user->PermittedDepartment();
 			# Init the crypt object, encrypt the password, and store in cookie
     			$enc_login = new Crypt_HCEMD5($key_login,makeRand());
 

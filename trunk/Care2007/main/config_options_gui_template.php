@@ -74,7 +74,7 @@ ob_start();
 
  <?php if($rows) : ?>
 <script language="javascript" src="<?php echo $root_path; ?>js/check_menu_item_same_item.js"></script>
-<?php endif; ?>
+<?php endif ?>
 
 <script language="javascript">
 <!-- Script Begin

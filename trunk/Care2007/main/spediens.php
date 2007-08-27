@@ -57,6 +57,7 @@ $HTTP_SESSION_VARS['sess_dept_nr']=0; // reset the department number used in the
  # Prepare the submenu icons
 
  $aSubMenuIcon=array(createComIcon($root_path,'notepad.gif','0'),
+										createComIcon($root_path,'dollarsign.gif','0'),
 										createComIcon($root_path,'man-gr.gif','0'),
 										createComIcon($root_path,'lockfolder.gif','0'),
 										createComIcon($root_path,'home2.gif','0'),
@@ -74,6 +75,7 @@ $HTTP_SESSION_VARS['sess_dept_nr']=0; // reset the department number used in the
 # Prepare the submenu item descriptions
 
 $aSubMenuText=array($LDPluginsTxt,
+										$LDBillingTxt,
 										$LDPersonellMngmntTxt,
 										$LDInsuranceCoMngrTxt,
 										$LDAddressMngrTxt,
@@ -91,6 +93,7 @@ $aSubMenuText=array($LDPluginsTxt,
 # Prepare the submenu item links indexed by their template tags
 
 $aSubMenuItem=array('LDPlugins' => '<a href="'.$root_path.'plugins/plugins.php'.URL_APPEND.'">'.$LDPlugins.'</a>',
+										'LDBilling' => '<a href="'.$root_path.'modules/ecombill/ecombill_pass.php'.URL_APPEND.'">'. $LDBilling.'</a>',
 										'LDPersonellMngmnt' => '<a href="'.$root_path.'modules/personell_admin/personell_admin_pass.php'.URL_APPEND.'&retpath=spec&target=personell_reg">'.$LDPersonellMngmnt.'</a>',
 										'LDInsuranceCoMngr' => '<a href="'.$root_path.'modules/insurance_co/insurance_co_manage_pass.php'.URL_APPEND.'">'. $LDInsuranceCoMngr.'</a>',
 										'LDAddressMngr' => '<a href="'.$root_path.'modules/address/address_manage_pass.php'.URL_APPEND.'">'. $LDAddressMngr.'</a>',
