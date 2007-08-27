@@ -4841,4 +4841,4 @@ CREATE TABLE `care_target_test` (
 # Dumping data for table care_version
 #
 
-INSERT INTO care_version VALUES ('CARE2X', 'beta', '2.0.0', '1.0', '2004-05-14', '00:00:00', 'Elpidio Latorilla');
+INSERT INTO care_version VALUES ('CARE2X', 'beta', '2.0.0', '6052', '2004-05-14', '00:00:00', 'Claudio Giulio Torbinio');

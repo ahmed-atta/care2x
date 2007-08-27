@@ -70,7 +70,6 @@ class SQLOptions extends SQLFile {
 		foreach($sql_commands as $sql_command_set) {
 			if (!is_null($sql_command_set)) {
 				foreach($sql_command_set as $sql_statement) {
-					$this->result_message =$sql_statement['query'];
 					@$ok = $db->Execute($sql_statement['query']);
 					if (!$ok) {
 						$this->result_message = "Error running SQL query: <BR>\n".$sql_statement['query']."<BR>\n".$db->ErrorMsg();
@@ -107,7 +106,7 @@ class SQLOptions extends SQLFile {
 			return FALSE;
 		}else{
 
-		$this->file_list = array();
+			$this->file_list = array();
          foreach($this->params['files'] as $file){
             if(is_dir($file)) {
                $d = dir($file);
@@ -130,19 +129,18 @@ class SQLOptions extends SQLFile {
 
 	function getHTML($smarty){
 		if($this->prepareParameters() === FALSE){
-			$this->result = INSTALLER_ACTION_FAIL;
-      		return $this->result;
-    	}
-
+                        $this->result = INSTALLER_ACTION_FAIL;
+                        return $this->result;
+                }
 		$smarty->assign("files",$this->file_list);	
 		$smarty->assign("loop",$this->loop);
 		$smarty->assign_by_ref('ACTION', $this);
-    	if ($this->loop == 3) {
+                if ($this->loop == 3) {
 			$es =& $GLOBALS['INSTALLER']['SMARTY'];
-      		$es->assign('HEADER_EXTRAS','<META HTTP-EQUIV=Refresh CONTENT="2; URL=install.php?save_action=true">');
+                	$es->assign('HEADER_EXTRAS','<META HTTP-EQUIV=Refresh CONTENT="2; URL=install.php?save_action=true">');
 		}
-    	return $smarty->fetch(Installer::getTemplatePath('action_sql_options.tpl'));
-  	}
+                return $smarty->fetch(Installer::getTemplatePath('action_sql_options.tpl'));
+        }
 
 	function dataSubmitted(){
                 if (isset($_POST['install_sql_done'])) {
@@ -151,15 +149,8 @@ class SQLOptions extends SQLFile {
 		}
 		else if (isset($_POST['install_sql'])) {
 			if (isset($_POST['optfile'])) {
-						//gjergji : fixed problem with magic_quotes on on windows...
-						if (get_magic_quotes_gpc() == 1 ){
-							if (!empty($_GET))    { $_GET    = strip_magic_quotes($_GET);    }
-							if (!empty($_POST))   { $_POST   = strip_magic_quotes($_POST);   }
-							if (!empty($_COOKIE)) { $_COOKIE = strip_magic_quotes($_COOKIE); }
-					}
 				if (array_search($_POST['optfile'], $this->file_list)) {
 					$this->file = $_POST['optfile'];
-					
 					$this->result = INSTALLER_ACTION_FAIL;
 					$this->result_message = "Installing File.";
 					return $this->result;

@@ -32,7 +32,7 @@ $version->addSeparator('');
 $version->addTest('PHPVersionOver', array('4.3.0'));
 $version->addTest('PHPVersionUnder', array('5.0.0'));
 //$version->addTest('PHPMemory', array('8M'));
-$version->addTest('PHPMagicQuotes', array('Off'));
+//$version->addTest('PHPMagicQuotes', array('Off'));
 //$version->addTest('PHPRegisterGlobals', array('Off'));
 $version->addTest('PHPDBExtension', array('type_field' => 'db_type'));
 $version->addTest('PHPExtension', array('calendar', 'gd'));
