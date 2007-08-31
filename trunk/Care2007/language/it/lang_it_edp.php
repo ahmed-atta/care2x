@@ -337,4 +337,5 @@ $LDClkNextNr='Clicca per passare al successivo numero';
 $LDOPTable='Tabella OP';
 
 $LDWelcome='Benvenuto';
+$LDNursingManage='Gestione reparti';
 ?>
