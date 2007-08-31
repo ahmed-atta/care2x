@@ -24,6 +24,7 @@ $LDNew='Nuovo';
 $LDEdit='Modifica';
 $LDCreate='Crea';
 $LDValue='Valore';
+$LDProfile='Profilo';
 
 $LDNews='News';
 $LDNewsTxt='Leggere o scrivere le news del CED';
