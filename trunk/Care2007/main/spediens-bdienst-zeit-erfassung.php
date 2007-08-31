@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -299,7 +299,7 @@ function isnum(val,idx)
 			}
 			
 			
-//			alert("Zeitangabe ist ungï¿½ltig! (ausserhalb des 24H Zeitrahmens)");
+//			alert("Zeitangabe ist ungültig! (ausserhalb des 24H Zeitrahmens)");
 	
 		}
 		switch(v3.length)
@@ -397,10 +397,6 @@ function isgdatum(val,idx)
 //-->
 </script>
 
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -429,7 +425,11 @@ for ($i=0;$i<sizeof($LDDutyElements);$i++){
 
 <?php
 $entries=sizeof($content)+2; $toggle=0;
-
+//gjergji : new calendar
+require_once ('../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+//end : gjergji
 for ($i=0;$i<$entries;$i++)
 {
 echo '
@@ -439,15 +439,10 @@ $toggle=!$toggle;
 echo '>
 <td rowspan=2 valign=top>';
 	
-if($content[$i]['date'])
-echo formatDate2Local($content[$i]['date'],$date_format).'<input type="hidden" name="date'.$i.'" value="'.$content[$i]['date'].'">';
- else echo'
-	<input type=text name="date'.$i.'" size=9 maxlength=10 value="" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
-?>
-  	<a href="javascript:show_calendar('reportform.date<?php echo $i ?>','<?php echo $date_format ?>')">
-	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
-<?php
-	
+//gjergji : new calendar
+echo $calendar->show_calendar($calendar,$date_format,'date'.$i,$content[$i]['date']);	
+//end : gjergji
+
 echo '
 </td>
 <td>
