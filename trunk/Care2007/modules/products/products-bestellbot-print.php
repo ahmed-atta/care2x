@@ -2,15 +2,6 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-/**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
-* GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
-* elpidio@care2x.org, 
-*
-* See the file "copy_notice.txt" for the licence notice
-*/
-
 # Check if register globals is "on" 
 /*$reg_glob_ini=ini_get('register_globals');
 
@@ -97,9 +88,81 @@ if($order_nr&&$dept_nr){
 						$stat2seen=true;
 					}
 					else { echo "$LDDbNoUpdate<br>$sql"; }
-					break;
+					//begin : gjergji
+					//azhornimi i te dhanave ne db - care_med_products_main - pcs
+					//marr variablen me pa cilen table me azhornue
+					switch($cat)
+					{
+						case 'pharma':	
+												$title="$LDPharmacy - $LDOrderBotActivate $LDAck";
+												$dbtableupdate='care_pharma_products_main_sub';
+												$dbhistorik='care_pharma_products_main_historik';
+												break;
+						case 'medlager':
+												$title="$LDMedDepot - $LDOrderBotActivate $LDAck";
+												$dbtableupdate='care_med_products_main_sub';
+												$tableupdatepharmacy='care_pharma_products_main_sub';
+												$dbhistorik='care_med_products_main_historik';												
+												break;
+						default:   {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
+					}
 
-			case 'archive':
+
+					//mizuko:azhornoj gjendjen ne farmaci/depo
+					$artikeln=explode(' ',$content['articles']);
+					for($n=0;$n<sizeof($artikeln);$n++)	{
+						parse_str($artikeln[$n],$r);
+						if($cat == 'pharma') {
+							$sql = "UPDATE $dbtableupdate SET pcs = pcs - " . $r[pcs] . " WHERE id = '".$r['idsub']. "'";
+						}else{
+							$sql = "UPDATE $dbtableupdate SET pcs = pcs - " . $r[pcs] . " WHERE id = '".$r['idsub']. "'";	
+						}
+							if($ergebnis=$core->Transact($sql)){
+								$status=""; 
+								$stat2seen=true;
+							}
+							else { echo "$LDDbNoUpdate<br>$sql"; }
+				 	}
+					//end:mizuko
+					
+				 	//mizuko:azhornoj farmacine nqs kam marre ne depo
+				 	if($cat=='medlager'){
+						$artikeln=explode(' ',$content['articles']);
+						for($n=0;$n<sizeof($artikeln);$n++)	{
+							parse_str($artikeln[$n],$r);
+							$dstmp = explode('/',$r['skadenca']);
+							$data_skadence = $dstmp[2] . '-' . $dstmp[1] . '-' . $dstmp[0];						
+							$sqlpharmacy = "";	
+							$sqlpharmacy = "INSERT INTO $tableupdatepharmacy(pcs,skadenca,cmimi,bestellnum,idcare_pharma) VALUES (" . $r[pcs] . ",'". $r['skadenca']. "','". $r['cmimi']. "','".$r['bestellnum']. "','" . $dept_nr . "')";
+								if($ergebnis=$core->Transact($sqlpharmacy)){
+									$status=""; 
+									$stat2seen=true;
+								}else { echo "$LDDbNoUpdate<br>$sqlpharmacy"; }
+							
+					 	}
+				 	}				 	
+				 	// end : mizuko
+
+					//mizuko:ruej te dhanat te pharma/med_historik - historiku
+					$artikeln=explode(' ',$content['articles']);
+					for($n=0;$n<sizeof($artikeln);$n++)	{
+						parse_str($artikeln[$n],$r);
+						if($cat == 'pharma') {
+							$sql = "INSERT INTO $dbhistorik(id_repart, data, nr_fature, medikament, sasia, cmimi, vlera, date_skadence, id_sub) ";
+							$sql .= "values ( " . $dept_nr. ",'" . $content['order_date'] . "'," . $order_nr . "," . $r['bestellnum'] . "," . $r[pcs] . ",". $r['cmimi'] . "," . $r['pcs'] * $r['cmimi'] . ",'" . $r['skadenca'] . "'," . $r['idsub']. ")";
+						} else {
+							$sql = "INSERT INTO $dbhistorik(id_farmaci, data, nr_fature, medikament, sasia, cmimi, vlera, date_skadence, id_sub) ";
+							$sql .= "values ( " . $dept_nr. ",'" . $content['order_date'] . "'," . $order_nr . "," . $r['bestellnum'] . "," . $r[pcs] . ",". $r['cmimi'] . "," . $r['pcs'] * $r['cmimi'] . ",'" . $r['skadenca'] . "'," . $r['idsub']. ")";
+						}
+						if($ergebnis=$core->Transact($sql)){
+								$status=""; 
+								$stat2seen=true;
+						}
+						else { echo "$LDDbNoUpdate<br>$sql"; }
+				 	}
+				 	//end:mizuko	
+				 	break;				 	
+		case 'archive':
 			
 			   	    $history_txt=" by ".$clerk." on ".date('Y-m-d H:i:s')."\n\r";
 			
@@ -184,7 +247,7 @@ $tog=1;
 
 echo '<p>
 		<font face="Verdana, Arial" size=2 >
-		'.$LDOrderNr.' '.$order_nr.'<p>'.$dept->FormalName($dept_nr).'</font><br>
+		'.$LDOrderNrBrendshem.' '.$order_nr.'<p>'.$dept->FormalName($dept_nr).'</font><br>
 		<font face="Arial" size=2> '.$LDListindex[2].': ';
 		echo formatDate2Local($content['order_date'],$date_format);
 
@@ -201,30 +264,35 @@ echo '<p>
 	echo '</tr>';	
 
 $i=1;
+$totali=0;
 $artikeln=explode(' ',$content['articles']);
-for($n=0;$n<sizeof($artikeln);$n++)
- 	{
-	
+for($n=0;$n<sizeof($artikeln);$n++)	{
 	parse_str($artikeln[$n],$r);
-	if($tog)
-	{ echo '<tr bgcolor="#ffffff">'; $tog=0; }else{ echo '<tr bgcolor="#ffffff">'; $tog=1; }
+	if($tog){ echo '<tr bgcolor="#ffffff">'; $tog=0; }else{ echo '<tr bgcolor="#ffffff">'; $tog=1; }
 	echo'
 				<td>';
 	echo'	
 				<font face=Arial size=2 >'.$i.'</td>
 				<td><font face=Verdana,Arial size=2> &nbsp;'.$r['artikelname'].' &nbsp;</td>
-				 <td><font face=Verdana,Arial size=2>'.$r[pcs].'</td>
-					<td ><font face=Verdana,Arial size=2><nobr>X '.$r['proorder'].'</nobr></td>
-			<td><font face=Verdana,Arial size=2> &nbsp;'.$r['bestellnum'].'</td>
-				</tr>';
+				<td><font face=Verdana,Arial size=2>'.$r['pcs'].'</td>
+				<td ><font face=Verdana,Arial size=2><nobr>X '.$r['proorder'].'</nobr></td>
+				<td><font face=Verdana,Arial size=2> &nbsp;'.$r['doza'].'</td>
+				<td><font face=Verdana,Arial size=2> &nbsp;'.$r['njesia'].'</td>
+				<td><font face=Verdana,Arial size=2> &nbsp;'.$r['cmimi'].'</td>
+				<td><font face=Verdana,Arial size=2> &nbsp;'.$r['cmimi'] * $r['pcs'] .'</td>
+				<td><font face=Verdana,Arial size=2> &nbsp;'.$r['skadenca'].'</td>
+				<td><font face=Verdana,Arial size=2> &nbsp;'.$r['bestellnum'].'</td>
+			</tr>';
 	$i++;
-
+	$totali = $totali + $r['cmimi'] * $r['pcs'];
  	}
-	echo '</table></td></tr></table>';
+	echo "<tr bgcolor=\"#ffffff\"><td colspan=10>&nbsp;</td></tr>";
+	echo "<tr bgcolor=\"#ffffff\"><td colspan=6></td><td><b>Totali : </b></td><td><b>".$totali."</b></td><td colspan=2><b> Lek</b></td></tr>";
+ 	echo '</table></td></tr></table>';
 	if($content[priority]=='urgent') echo "::::::::::::::::::::  $LDUrgent $LDUrgent $LDUrgent ::::::::::::::::::::::::";
 	echo'
 			<p>
-			'.$LDCreatedBy.': '.$content[modify_id].'<p><hr>';
+			'.$LDCreatedBy.': '.$content[create_id].'<p><hr>';
 			
 	switch($status)
 	{

@@ -228,9 +228,6 @@ function printOut()
 
 //-->
 </script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 <?php
 
 $sTemp = ob_get_contents();
@@ -382,21 +379,14 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 		 <?php echo $LDXrayTechnician ?>&nbsp;
         <input type="text" name="mtr" value="<?php if($read_form && $stored_request['mtr']) echo $stored_request['mtr']; ?>" size=25 maxlength=35> 
 		<?php echo $LDDate ?>&nbsp;
-
-		<input type="text" name="xray_date" 
-		value="<?php 
-		
-		            if($read_form && $stored_request['xray_date'] != DBF_NODATE)
-					{
-					  echo formatDate2Local($stored_request['xray_date'],$date_format);
-					}
-					else
-					{
-					  echo formatDate2Local(date('Y-m-d'),$date_format);
-					}
-				  ?>" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
-		  	<a href="javascript:show_calendar('form_test_request.xray_date','<?php echo $date_format ?>')">
-			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+		<?php
+			//gjergji : new calendar
+			require_once ('../../js/jscalendar/calendar.php');
+			$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+			$calendar->load_files();
+			echo $calendar->show_calendar($calendar,$date_format,'xray_date',$stored_request['xray_date']);
+			//end : gjergji	
+		?>
 		</nobr>
 	  </div>
     </tr>	
@@ -410,21 +400,12 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2 align="right"><div class=fva2_ml10><font color="#000099">
 		 <?php echo $LDDate ?>
-        <input type="text" name="results_date" 
-		value="<?php 
-		            if($read_form && $stored_request['results_date']!=DBF_NODATE)
-					{
-					  echo formatDate2Local($stored_request['results_date'],$date_format); 
-					}
-					else
-					{
-					  echo formatDate2Local(date('Y-m-d'),$date_format);
-					}
-				  ?>" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 
-		  	<a href="javascript:show_calendar('form_test_request.results_date','<?php echo $date_format ?>')">
-			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
-
+		<?php
+			//gjergji : new calendar
+			echo $calendar->show_calendar($calendar,$date_format,'results_date',$stored_request['results_date']);
+			//end : gjergji	
+		?>
 				  
   <?php echo $LDReportingDoc ?>
         <input type="text" name="results_doctor" value="<?php if($read_form && $stored_request['results_doctor']) echo $stored_request['results_doctor']; ?>" size=35 maxlength=35> 

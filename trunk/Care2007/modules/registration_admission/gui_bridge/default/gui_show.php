@@ -56,11 +56,6 @@ function popRecordHistory(table,pid) {
 }
 -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php 
 if($parent_admit) include($root_path.'include/inc_js_barcode_wristband_popwin.php');
 
@@ -199,7 +194,7 @@ if($mode=='show'){
 
 	# Buffer the option input block
 	ob_start();
-		 include('./gui_bridge/default/gui_input_'.$thisfile);
+		include('./gui_bridge/default/gui_input_'.$thisfile);
 		$sTemp = ob_get_contents();
 	ob_end_clean();
 	$smarty->assign('sOptionBlock',$sTemp);

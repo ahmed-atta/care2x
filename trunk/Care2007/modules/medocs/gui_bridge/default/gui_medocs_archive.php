@@ -36,11 +36,6 @@ function popSearchWin(target,obj_val,obj_name) {
 
 -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-
 <?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');

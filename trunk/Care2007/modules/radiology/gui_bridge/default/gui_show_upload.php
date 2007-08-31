@@ -1,5 +1,4 @@
 <?php
-
 $returnfile=$HTTP_SESSION_VARS['sess_file_return'];
 
 # Start Smarty templating here
@@ -118,9 +117,6 @@ dicomwin<?php echo $sid ?>=window.open("dicom_launch_single.php<?php echo URL_RE
 
 </script>
 
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dicom.js"></script>
 
 <?php 

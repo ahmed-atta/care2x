@@ -242,11 +242,6 @@ function endhilite(d){
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -444,12 +439,14 @@ if($edit) {
 		<input type=hidden name=editid id=editid value="">
 	
         <td valign="top"><?php echo $LDDate ?>:<br>
-		<input type=text size=10 maxlength=10 name="indatetime_date" id="indatetime_date" value="<?php echo formatDate2Local(date('Y-m-d'),$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onFocus="this.select()" value="<?php if(!$saved) echo $dateput; ?>" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
-<a href="javascript:show_calendar('berichtform.indatetime_date','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a><font size=1 face="arial">[<?php
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer;
- ?>]</font>
+		<?php
+			//gjergji : new calendar
+			require_once ('../../js/jscalendar/calendar.php');
+			$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+			$calendar->load_files();
+  			echo $calendar->show_calendar($calendar,$date_format,'indatetime_date');
+			//end : gjergji  
+ 		?>
 	
          </td>
 		 
@@ -495,6 +492,9 @@ if($edit) {
 			?>> <span style="background-color:#FFFF00"> <?php echo $LDCLEAR ?> </span> </a></td>
 		</tr>
 		
+<?php
+} 
+?>
 		</table>
 
 <p>

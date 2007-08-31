@@ -249,10 +249,6 @@ function printOut(){
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 //-->
 </script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -586,15 +582,24 @@ if($edit  || $read_form){
            <td><input type="text" name="x_test_2_count" size=5 maxlength=5 <?php  if($stored_request['x_test_2_count']) echo 'value="'.$stored_request['x_test_2_count'].'"'; ?>></td>
            <td><input type="text" name="x_test_2_price" size=7 maxlength=7 <?php  echo 'value="'.$stored_request['x_test_2_price'].'"'; ?>></td>
            <td>&nbsp;<font size=1 face="arial"><?php echo $LDBookedOn ?></td>
-           <td><input type="text" name="mainlog_date" size=8 maxlength=10  value="<?php  if($stored_request['mainlog_date']!=DBF_NODATE) echo formatDate2Local($stored_request['mainlog_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-		   <a href="javascript:show_calendar('form_test_request.mainlog_date','<?php echo $date_format ?>')">
-			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
+           <td>
+			<?php
+					//gjergji : new calendar
+					require_once ('../../js/jscalendar/calendar.php');
+					$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+					$calendar->load_files();
+					echo $calendar->show_calendar($calendar,$date_format,'mainlog_date',$stored_request['mainlog_date']);
+					//end gjergji
+			?>
 		   </td>
            <td>&nbsp;<font size=1 face="arial"><?php echo $LDDate ?></td>
-           <td><input type="text" name="lab_date" size=8 maxlength=10  value="<?php  if($stored_request['lab_date']!=DBF_NODATE) echo formatDate2Local($stored_request['lab_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')"   onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-		   <a href="javascript:show_calendar('form_test_request.lab_date','<?php echo $date_format ?>')">
-			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
-		   </td>
+           <td>
+			<?php
+					//gjergji : new calendar
+					echo $calendar->show_calendar($calendar,$date_format,'mainlog_date',$stored_request['lab_date']);
+					//end gjergji
+			?>
+		   </td>		   
          </tr>
          <tr bgcolor="<?php echo $bgc1 ?>">
            <td><input type="text" name="x_test_3_code" size=4 maxlength=4 <?php  if($stored_request['x_test_3_code']) echo 'value="'.$stored_request['x_test_3_code'].'"'; ?>></td>

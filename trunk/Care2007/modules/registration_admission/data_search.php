@@ -35,7 +35,7 @@ $searchprompt=$LDEnterSearchKeyword;
 $quicklistmaxnr=10; // The maximum number of quicklist popular items
 
 # Uncomment the following to debug the sql queries
-//$db->debug=1;
+$db->debug=1;
 
 $sql='';
 

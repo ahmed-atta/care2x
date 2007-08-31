@@ -38,14 +38,15 @@ function popRecordHistory(table,pid) {
 
 -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php 
 require($root_path.'include/inc_js_gethelp.php'); 
 require($root_path.'include/inc_css_a_hilitebu.php');
+
+//gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+//end : gjergji
 ?>
 
 </HEAD>
@@ -183,107 +184,108 @@ createTR($LDNameOthers,$name_others);
 <?php
 if($mode=='show'){
 	if($rows){
-		$bgimg='tableHeaderbg3.gif';
-		$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
-?>
-</table>
-<table border=0 cellpadding=4 cellspacing=1 width=100%>
-  <tr bgcolor="#f6f6f6">
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDiagnosis; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTherapy; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDetails; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDBy; ?></td>
-  </tr>
-<?php
-$toggle=0;
-while($row=$result->FetchRow()){
-	if($toggle) $bgc='#efefef';
-		else $bgc='#f0f0f0';
-	$toggle=!$toggle;
-?>
-
-
-  <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
-    <td><FONT SIZE=-1  FACE="Arial"><?php if(!empty($row['date'])) echo @formatDate2Local($row['date'],$date_format); else echo '?'; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['diagnosis'])) echo substr($row['diagnosis'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>
-	<?php
-		if(!empty($row['short_notes'])) echo '[ '.$row['short_notes'].' ]';
-	?>
-	</td>
-    <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['therapy'])) echo substr($row['therapy'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>
-
-	</td>    <td align="center"><a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr']; ?>"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
-  </tr>
-
-<?php
-}
-?>
-</table>
-
-<?php	
+			$bgimg='tableHeaderbg3.gif';
+			$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
+		?>
+		</table>
+		<table border=0 cellpadding=4 cellspacing=1 width=100%>
+		  <tr bgcolor="#f6f6f6">
+		    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
+		    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDiagnosis; ?></td>
+		    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDTherapy; ?></td>
+		    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDetails; ?></td>
+		    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDBy; ?></td>
+		  </tr>
+		<?php
+			$toggle=0;
+			while($row=$result->FetchRow()){
+				if($toggle) $bgc='#efefef';
+					else $bgc='#f0f0f0';
+				$toggle=!$toggle;
+			?>
+			
+			
+			  <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
+			    <td><FONT SIZE=-1  FACE="Arial"><?php if(!empty($row['date'])) echo @formatDate2Local($row['date'],$date_format); else echo '?'; ?></td>
+			    <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['diagnosis'])) echo substr($row['diagnosis'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>
+				<?php
+					if(!empty($row['short_notes'])) echo '[ '.$row['short_notes'].' ]';
+				?>
+				</td>
+			    <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['therapy'])) echo substr($row['therapy'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>
+			
+				</td>    <td align="center"><a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr']; ?>"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a></td>
+			    <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
+			  </tr>
+			
+			<?php
+			}
+		?>
+		</table>
+		
+		<?php	
 	}else{
-?>
-</table>
-<table border=0>
-  <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
-    <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b>
-	<?php 
-		echo $norecordyet;
-	?></b></font></td>
-  </tr>
-</table>
-<?php
+		?>
+		</table>
+		<table border=0>
+		  <tr>
+		    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
+		    <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b>
+			<?php 
+				echo $norecordyet;
+			?></b></font></td>
+		  </tr>
+		</table>
+		<?php
 	}
 }elseif($mode=='details'){
 
-$TP_aux_notes=nl2br($row['aux_notes']);
-
-if(stristr($row['short_notes'],'got_medical_advice')) $TP_YesNo=$LDYes; 
-	else $TP_YesNo=$LDNo; 
+	$TP_aux_notes=nl2br($row['aux_notes']);
 	
-$TP_diagnosis=nl2br($row['diagnosis']);
-$TP_therapy=nl2br($row['therapy']);
-$TP_date=formatDate2Local($row['date'],$date_format);
-$TP_personell_name=$row['personell_name'];
-# Load and output the template 
-$TP_form=$TP_obj->load('medocs/tp_medocs_showdata.htm');
-eval("echo $TP_form;");
-
-# Create a new form
-}else {
-?>
-<form method="post" name="entryform">
-<?php 
-
-	$TP_date_validate='value="'.formatDate2Local(date('Y-m-d'),$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')"';
-	$TP_href_date="javascript:show_calendar('entryform.date','".$date_format."')";
-
-	$dfbuffer="LD_".strtr($date_format,".-/","phs");
-	$TP_date_format=$$dfbuffer;
-
-	$TP_img_calendar=createComIcon($root_path,'show-calendar.gif','0','absmiddle');
-	$TP_user_name=$HTTP_SESSION_VARS['sess_user_name'];
+	if(stristr($row['short_notes'],'marre_keshille_mjekesore')) $TP_YesNo=$LDYes; 
+		else $TP_YesNo=$LDNo; 
+		
+	$TP_diagnosis=nl2br($row['diagnosis']);
+	$TP_therapy=nl2br($row['therapy']);
+	$TP_date=formatDate2Local($row['date'],$date_format);
+	$TP_personell_name=$row['personell_name'];
 	# Load and output the template 
-	$TP_form=$TP_obj->load('medocs/tp_medocs_newform.htm');
+	$TP_form=$TP_obj->load('medocs/tp_medocs_showdata.htm');
 	eval("echo $TP_form;");
-?>
-<input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
-<input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
-<input type="hidden" name="modify_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
-<input type="hidden" name="create_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
-<input type="hidden" name="create_time" value="null">
-<input type="hidden" name="mode" value="create">
-<input type="hidden" name="target" value="<?php echo $target; ?>">
-<input type="hidden" name="edit" value="<?php echo $edit; ?>">
-<input type="hidden" name="is_discharged" value="<?php echo $is_discharged; ?>">
-<input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $HTTP_SESSION_VARS['sess_user_name']."\n"; ?>">
-<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>
-
-</form>
-<?php
+	
+	# Create a new form
+}else {
+	?>
+	<form method="post" name="entryform">
+	<?php 
+	
+		$TP_date_validate='value="'.formatDate2Local(date('Y-m-d'),$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')"';
+		$TP_href_date="javascript:show_calendar('entryform.date','".$date_format."')";
+	
+		$dfbuffer="LD_".strtr($date_format,".-/","phs");
+		$TP_date_format=$$dfbuffer;
+	
+		$TP_img_calendar=createComIcon($root_path,'show-calendar.gif','0','absmiddle');
+		
+		$TP_user_name=$HTTP_SESSION_VARS['sess_user_name'];
+		# Load and output the template 
+		$TP_form=$TP_obj->load('medocs/tp_medocs_newform.htm');
+		eval("echo $TP_form;");
+	?>
+	<input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
+	<input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
+	<input type="hidden" name="modify_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
+	<input type="hidden" name="create_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
+	<input type="hidden" name="create_time" value="null">
+	<input type="hidden" name="mode" value="create">
+	<input type="hidden" name="target" value="<?php echo $target; ?>">
+	<input type="hidden" name="edit" value="<?php echo $edit; ?>">
+	<input type="hidden" name="is_discharged" value="<?php echo $is_discharged; ?>">
+	<input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $HTTP_SESSION_VARS['sess_user_name']."\n"; ?>">
+	<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>
+	
+	</form>
+	<?php
 } 
 
 if(($mode=='show'||$mode=='details')&&!$is_discharged){

@@ -8,7 +8,7 @@ $HTTP_SESSION_VARS['sess_file_return']=$thisfile;
 
 function createTR($ld_text, $input_val, $colspan = 1)
 {
-    global $toggle, $root_path;
+	global $toggle, $root_path;
 ?>
 
 <tr>
@@ -23,12 +23,12 @@ $toggle=!$toggle;
 }
 
 echo StdHeader();
-echo setCharSet(); 
+echo setCharSet();
 ?>
  <TITLE><?php echo $title ?></TITLE>
 
 <script  language="javascript">
-<!-- 
+<!--
 
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 
@@ -39,16 +39,9 @@ function popRecordHistory(table,pid) {
 
 -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-
-
-
 <?php 
 if($parent_admit) include($root_path.'include/inc_js_barcode_wristband_popwin.php');
-require($root_path.'include/inc_js_gethelp.php'); 
+require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 
@@ -67,14 +60,14 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <font size=+2>(
 <?php 
 if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']);
-	else echo ($HTTP_SESSION_VARS['sess_full_pid']);
+else echo ($HTTP_SESSION_VARS['sess_full_pid']);
 ?>)</font></FONT>
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="<?php echo $returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>" ><img 
 <?php echo createLDImgSrc($root_path,'back2.gif','0'); ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>><a href="javascript:gethelp('admission_how2new.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
+if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang;
 	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
@@ -82,8 +75,8 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&
 <?php
 /* Create the tabs */
 if($parent_admit) {
-$tab_bot_line='#66ee66';
-require('./gui_bridge/default/gui_tabs_medocs.php');
+	$tab_bot_line='#66ee66';
+	require('./gui_bridge/default/gui_tabs_medocs.php');
 
 }else{
 	$tab_bot_line='#66ee66';
@@ -106,13 +99,13 @@ require('./gui_bridge/default/gui_tabs_medocs.php');
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
 <?php 
 if($parent_admit) echo $LDAdmitNr;
-	else echo $LDRegistrationNr;
+else echo $LDRegistrationNr;
 ?>
 </td>
 <td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000">
 <?php 
 if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']) ;
-	else echo ($HTTP_SESSION_VARS['sess_full_pid']) 
+else echo ($HTTP_SESSION_VARS['sess_full_pid'])
 ?>
 </td>
 
@@ -146,27 +139,27 @@ if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']) ;
 
 if (!$GLOBAL_CONFIG['person_name_2_hide'])
 {
-createTR($LDName2,$name_2);
+	createTR($LDName2,$name_2);
 }
 
 if (!$GLOBAL_CONFIG['person_name_3_hide'])
 {
-createTR( $LDName3,$name_3);
+	createTR( $LDName3,$name_3);
 }
 
 if (!$GLOBAL_CONFIG['person_name_middle_hide'])
 {
-createTR($LDNameMid,$name_middle);
+	createTR($LDNameMid,$name_middle);
 }
 
 if (!$GLOBAL_CONFIG['person_name_maiden_hide'])
 {
-createTR($LDNameMaiden,$name_maiden);
+	createTR($LDNameMaiden,$name_maiden);
 }
 
 if (!$GLOBAL_CONFIG['person_name_others_hide'])
 {
-createTR($LDNameOthers,$name_others);
+	createTR($LDNameOthers,$name_others);
 }
 ?>
 
@@ -202,14 +195,14 @@ createTR($LDNameOthers,$name_others);
 if($mode=='show'){
 
 	if($parent_admit) $bgimg='tableHeaderbg3.gif';
-		else $bgimg='tableHeader_gr.gif';
-	
+	else $bgimg='tableHeader_gr.gif';
+
 	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 
 	if($rows){
 
-	  @ include('./gui_bridge/default/gui_'.$thisfile);
-	
+		@ include('./gui_bridge/default/gui_'.$thisfile);
+
 	}else{
 ?>
 <table border=0>
@@ -217,7 +210,7 @@ if($mode=='show'){
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
     <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b>
 	<?php 
-		echo $norecordyet;
+	echo $norecordyet;
 	?></b></font></td>
   </tr>
 </table>
@@ -225,7 +218,7 @@ if($mode=='show'){
 	}
 }else {
 	@ include('./gui_bridge/default/gui_input_'.$thisfile);
-} 
+}
 ?>
 </td>
 </tr>
@@ -248,8 +241,8 @@ if($mode=='show'){
 <p>
 <a href="
 <?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php'.URL_APPEND;
-	else echo $breakfile.URL_APPEND;
-	echo "";
+else echo $breakfile.URL_APPEND;
+echo ;
 ?>
 "><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 </ul>

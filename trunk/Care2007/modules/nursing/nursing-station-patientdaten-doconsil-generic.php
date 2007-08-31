@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * , elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -309,9 +309,6 @@ function printOut()
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 //-->
 </script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 <?php
 
 $sTemp = ob_get_contents();
@@ -441,15 +438,14 @@ elseif(!$read_form && !$no_proc_assist)
 
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td ><div class=fva2_ml10><font color="#000099">
-		 <?php echo $LDDate ?>:
-		<input type="text" name="send_date" 
-		  value="<?php if($edit_form || $read_form) echo formatDate2Local($stored_request['send_date'],$date_format); 
-		                         else echo formatDate2Local(date('Y-m-d'),$date_format); 
-					?>"
-		   size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-		<a href="javascript:show_calendar('form_test_request.send_date','<?php echo $date_format ?>')">
- 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a>
-
+		 <?php echo $LDDate . ":";
+				//gjergji : new calendar
+				require_once ('../../js/jscalendar/calendar.php');
+				$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+				$calendar->load_files();
+	  			echo $calendar->show_calendar($calendar,$date_format,'send_date',$stored_request['send_date']);
+				//end : gjergji  
+ 			?>
   </div></td>
 			<td align="right"><div class=fva2_ml10><font color="#000099">
 		<?php echo $LDDoctor ?>

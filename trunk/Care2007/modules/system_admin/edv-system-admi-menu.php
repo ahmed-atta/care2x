@@ -3,9 +3,9 @@
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -143,7 +143,19 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <a href="<?php echo $root_path; ?>modules/dept_admin/dept_list.php<?php echo URL_APPEND; ?>" target="SYSADMIN_WFRAME"><?php echo $LDList ?></a><br>
 	&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <a href="<?php echo $root_path; ?>modules/dept_admin/dept_list_config.php<?php echo URL_APPEND; ?>" target="SYSADMIN_WFRAME"><?php echo $LDConfigOptions ?></a>
 	</td>
+  </tr> 
+  <!-- gjergji new ward management -->
+  <tr>
+	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDNursingManage ?></b> </FONT></td>
   </tr>
+  <tr>
+	<td bgcolor="#ffffff" valign="top">
+	<FONT  color="#0000cc" FACE="verdana,arial" size=2>
+	&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <a href="<?php echo $root_path; ?>modules/nursing/nursing-station-new.php<?php echo URL_APPEND; ?>" target="SYSADMIN_WFRAME"><?php echo $LDCreate ?></a><br>
+	&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <a href="<?php echo $root_path; ?>modules/nursing/nursing-station-info.php<?php echo URL_APPEND; ?>" target="SYSADMIN_WFRAME"><?php echo $LDProfile ?></a><br>
+	</td>
+  </tr>
+<!-- end : gjergji -->  
   <tr>
 	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDORAdmin ?></b> </FONT></td>
   </tr>
@@ -154,7 +166,16 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <a href="<?php echo $root_path; ?>modules/or_admin/or_list_config.php<?php echo URL_APPEND; ?>" target="SYSADMIN_WFRAME"><?php echo $LDListConfig ?></a>
 	</td>
   </tr>
-
+<tr>
+	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDDatabase ?></b> </FONT></td>
+  </tr>
+  <tr>
+ 	<td bgcolor="#ffffff"><FONT  color="#0000cc" FACE="verdana,arial" size=2>&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> 
+	<a href="../<?php echo $strDbAdminUrl ?>/index.php?sid=<?php echo $sid."&lang=$lang" ?>" target="SYSADMIN_WFRAME"><?php  echo $strDbAdminItem ?>
+	</a></FONT></td>
+<!--  	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><a href="phpmyadmin-start.php?sid=<?php echo $sid."&lang=$lang" ?>"><?php echo $LDMySQLManage ?></a></b> </FONT></td>
+ -->  
+  </tr>
 
 <!--  
   <tr>

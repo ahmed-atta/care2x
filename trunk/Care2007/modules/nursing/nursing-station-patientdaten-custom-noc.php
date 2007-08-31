@@ -226,9 +226,6 @@ function endhilite(d){
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 -->
 </script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 <?php
 
 $sTemp = ob_get_contents();
@@ -355,12 +352,13 @@ if($edit) {
 		$row_top.="<td align=center><a href='nursing-station-patientdaten-custom-noc.php".URL_REDIRECT_APPEND."&station=".$station."&pn=".$pn."&edit=".$edit."'>";
 		$row_top.="<span style='background-color:#FFFF00'> ".$LDCLEAR." </span> </a></td>";
 		$time_top.="<td>";
-		$time_top.=$LDDate.":<br><table><tr><td><input type=text size=10 maxlength=10 name=indatetime_date id=indatetime_date value='".formatDate2Local(date('Y-m-d'),$date_format)."' onBlur='IsValidDate(this,'".$date_format."' onFocus='this.select()' value='";
-		if(!$saved) $time_top.="$dateput";
-		$time_top.=" onKeyUp=\"setDate(this,'".$date_format."','".$lang."')\"></td><td>
-		<a href=\"javascript:show_calendar('berichtform.indatetime_date','".$date_format."')\">
-		<img ".createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE)." ></a><font size=1 face='arial'><";
-		$dfbuffer="LD_".strtr($date_format,".-/","phs");
+		$time_top.=$LDDate.":<br><table><tr><td>";
+		//gjergji : new calendar
+		require_once ('../../js/jscalendar/calendar.php');
+		$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+		$calendar->load_files();
+			$dfbuffer = $calendar->show_calendar($calendar,$date_format,'indatetime_date');
+		//end : gjergji  
 		$time_top.="$dfbuffer";
 		$time_top.="</font></td></tr></table>".
 		$LDClockTime.":<br>";

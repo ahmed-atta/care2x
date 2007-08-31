@@ -232,7 +232,7 @@ function hsm(){
 	}
 }
 var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu='';
-<?php endif; ?>
+<?php endif ?>
 // -->
 </SCRIPT>
 

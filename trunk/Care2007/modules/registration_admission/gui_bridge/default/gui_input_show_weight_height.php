@@ -54,8 +54,16 @@ function chkform(d) {
  <table border=0 cellpadding=2 width=100%>
    <tr bgcolor="#f6f6f6">
      <td><font color=red>*</font><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-     <td colspan=3><input type="text" name="msr_date" size=10 maxlength=10  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-	 <a href="javascript:show_calendar('wtht_form.msr_date','<?php echo $date_format; ?>')"><img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a>
+     <td colspan=3>
+	 	<?php
+			//gjergji : new calendar
+			require_once ('../../js/jscalendar/calendar.php');
+			$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+			$calendar->load_files();
+			
+			echo $calendar->show_calendar($calendar,$date_format,'msr_date');
+			//gjergji : end
+		?> 	
 	 </td>
    </tr>
 <!--    <tr bgcolor="#f6f6f6">

@@ -13,9 +13,9 @@ switch($HTTP_SESSION_VARS['sess_dicom_viewer']){
 				# Default viewer
 }
 
-/*** CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+/*** CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file 'copy_notice.txt' for the licence notice
@@ -64,13 +64,13 @@ if(isset($pop_only)&&$pop_only){
 <?php
 }else{
 ?>
-<a href="javascript:history.back()"><font size=1>&nbsp;<< <?php echo $LDBack ?></font></a>
+<a href="upload.php<?php echo URL_APPEND."&saved=1&mode=show&pid=$pid&nr=$img_nr"; ?>"><font size=1>&nbsp;<< <?php echo $LDBack ?></font></a>
 <?php
 }
 ?></font>
 <br>
 <APPLET
-  CODEBASE = "./applets/nagoya"
+  CODEBASE = "."
   CODE = "dicomviewer.Viewer.class"
   NAME = "Viewer.java"
   WIDTH = 100%
@@ -81,8 +81,8 @@ if(isset($pop_only)&&$pop_only){
 <PARAM NAME = "tmpSize" VALUE = "1">
 <PARAM NAME = "NUM" VALUE = "1">
 <PARAM NAME = "currentNo" VALUE = "0">
-<PARAM NAME = "dicURL" VALUE = "http://<?php echo $main_domain ?>/<?php echo $top_dir ?>applets/nagoya/dicomviewer/Dicom.dic">
-<PARAM NAME = "imgURL0" VALUE = "http://<?php echo "$main_domain/$dicom_img_localpath$pid/$img_nr/$fn" ?>">
+<PARAM NAME = "dicURL" VALUE = "http://<?php echo $main_domain ?>/imed/<?php echo $top_dir ?>dicomviewer/Dicom.dic">
+<PARAM NAME = "imgURL0" VALUE = "http://<?php echo "$main_domain/imed/$dicom_img_localpath$pid/$img_nr/$fn" ?>">
 </APPLET>  
 </BODY>
 </HTML> 

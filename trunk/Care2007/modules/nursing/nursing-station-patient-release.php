@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * , elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -158,11 +158,6 @@ function pruf(d){
 
 //-->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 	$sTemp = ob_get_contents();
@@ -184,13 +179,20 @@ if($patient_ok){
 	$smarty->assign('LDLocation',$LDPatListElements[0]);
 	$smarty->assign('sLocation',$rm.strtoupper(chr($bd+96)));
 	$smarty->assign('LDDate',$LDDate);
-
+	
+	//gjergji : new calendar
+	require_once ('../../js/jscalendar/calendar.php');
+	$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+	$calendar->load_files();
+	//end gjergji
+	
 	if($released){
 		$smarty->assign('released',TRUE);
 		$smarty->assign('x_date',nl2br($x_date));
 	}else{
-		$smarty->assign('sDateInput','<input type="text" name="x_date" size=12 maxlength=10 value="'.formatdate2Local(date('Y-m-d'),$date_format).'"  onBlur="IsValidDate(this,\''.$date_format.'\')"  onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">');
-		$smarty->assign('sDateMiniCalendar',"<a href=\"javascript:show_calendar('discform.x_date','$date_format')\"><img ".createComIcon($root_path,'show-calendar.gif','0','top')."></a>");
+		//gjergji : new calendar
+		$smarty->assign('sDateMiniCalendar',$calendar->show_calendar($calendar,$date_format,'x_date'));
+		//end gjergji
 	}
 	$smarty->assign('LDClockTime',$LDClockTime);
 

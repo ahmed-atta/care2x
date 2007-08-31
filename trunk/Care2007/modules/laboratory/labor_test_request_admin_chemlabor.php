@@ -128,7 +128,6 @@ $enc_obj=new Encounter;
 				if($editable_rows=$ergebnis->RecordCount()){
 
 					$stored_request=$ergebnis->FetchRow();
-
 					//echo $stored_request['parameters'];
 					parse_str($stored_request['parameters'],$stored_param);
 					$edit_form=1;
@@ -241,6 +240,7 @@ function sendLater()
    if(chkForm(document.form_test_request)) document.form_test_request.submit(); 
 }
 
+
 <?php
 }
 ?>
@@ -256,9 +256,6 @@ function printOut()
 
 //-->
 </script>
-<script language="javascript" src="../js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -110,10 +110,6 @@ function chkform(d)
 // -->
 </script>
 
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -150,36 +146,29 @@ ob_start();
 <font size=1 color="#cc0000">
 <?php if($nopatdata) echo '
 	<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').'> <font size=2>'.$LDAlertNoPatientData.'<br></font>';
+//gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+//end : gjergji
 ?>
 <form ENCTYPE="multipart/form-data"  action="fotolab-pic-save.php" method="post"  name="srcform" onSubmit="return chkform(this)">
 <INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="2000000">
 <?php 
 /* Load the common icons*/
 $img_cam=createComIcon($root_path,'lilcamera.gif','0');
-
-for ($i=0;$i<$maxpic;$i++)
-{
-/* echo $LDShotDate.'
-<input type="text" name="sdate'.$i.'" size=12 maxlength=12 onFocus="this.select();previewpic(document.srcform.picfile'.$i.'.value)"  onKeyUp=setDate(this)>
- '.$LDNr.' 
- <input type="text" name="nr'.$i.'" size=4 maxlength=4 onFocus="previewpic(document.srcform.picfile'.$i.'.value)" value="'.($i+1+$lastnr).'" >
-<input type="file" name="picfile'.$i.'" size="30" onFocus="previewpic(this.value)" >  
-<a href="javascript:previewpic(document.srcform.picfile'.$i.'.value)" title="'.$LDPreview.'">
-<img '.$img_cam.'></a>     
-<hr>
-';*/
- echo $LDShotDate.'
-<input type="text" name="sdate'.$i.'" size=12 maxlength=12 onFocus="this.select();previewpic(document.srcform.picfile'.$i.'.value)"  onBlur="IsValidDate(this,\''.$date_format.'\')"   onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
- 
-echo '&nbsp;<a href="javascript:show_calendar(\'srcform.sdate'.$i.'\',\''.$date_format.'\')"><img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle').'></a>';
-
-echo '&nbsp;&nbsp;'.$LDNr.' 
- <input type="text" name="nr'.$i.'" size=4 maxlength=4 onFocus="previewpic(document.srcform.picfile'.$i.'.value)" value="'.($i+1+$lastnr).'" >
-<input type="file" name="picfile'.$i.'" size="30" onFocus="previewpic(this.value)" >  
-<a href="javascript:previewpic(document.srcform.picfile'.$i.'.value)" title="'.$LDPreview.'">
-<img '.$img_cam.'></a>     
-<hr>
-';
+for ($i=0;$i<$maxpic;$i++) {
+	 echo $LDShotDate;
+	 //gjergji : new date
+	 echo $calendar->show_calendar($calendar,$date_format,'sdate'.$i);	
+	 //end : gjergji
+	echo '&nbsp;&nbsp;'.$LDNr.' 
+	 <input type="text" name="nr'.$i.'" size=4 maxlength=4 onFocus="previewpic(document.srcform.picfile'.$i.'.value)" value="'.($i+1+$lastnr).'" >
+	<input type="file" name="picfile'.$i.'" size="30" onFocus="previewpic(this.value)" >  
+	<a href="javascript:previewpic(document.srcform.picfile'.$i.'.value)" title="'.$LDPreview.'">
+	<img '.$img_cam.'></a>     
+	<hr>
+	';
 }
 
 ?>

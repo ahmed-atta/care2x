@@ -262,11 +262,6 @@ function printOut()
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 //-->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -331,13 +326,14 @@ if (($stored_request['result']!='') && $stored_request['status']!='done')
 	
 	if($stored_request['result']) $TP_result=stripslashes($stored_request['result']);
 		else $TP_result='';
-	$TP_report_date='<input type="text" name="result_date" value="';
-	if($stored_request['result_date'] != DBF_NODATE) $TP_report_date.=formatDate2Local($stored_request['result_date'],$date_format).'"';
-		else $TP_report_date.=formatDate2Local(date('Y-m-d'),$date_format).'"'; 
-	$TP_report_date.=' size=10 maxlength=10 onFocus="this.select()" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">';
+	//gjergji : new calendar
+	require_once ('../../js/jscalendar/calendar.php');
+	$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+	$calendar->load_files();
+
+	echo $calendar->show_calendar($calendar,$date_format,'result_date',$stored_request['result_date']);
+	//end : gjergji	
 	
-	$TP_calendar_2='<a href="javascript:show_calendar(\'form_test_request.result_date\',\''.$date_format.'\')"><img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE).'></a>';
-  	
 	$TP_result_doctor_x='';
 	if($stored_request['result_doctor']) $TP_result_doctor=stripslashes($stored_request['result_doctor']);
 		else $TP_result_doctor='';

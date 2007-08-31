@@ -3,9 +3,9 @@
 require('./roots.php');
 require($root_path.'/include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -131,13 +131,12 @@ function show_order(d,D,t,r,i)
 
 // -->
 </script> 
-
-<script language="javascript" src="/js/setdatetime.js"></script>
-<script language="javascript" src="/js/checkdate.js" type="text/javascript"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
-
+//gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+//end : gjergji
 $sTemp = ob_get_contents();
 ob_end_clean();
 $smarty->append('JavaScript',$sTemp);
@@ -168,13 +167,12 @@ ob_start();
     </tr>
     <tr bgcolor=#ffffdd>
       <td align=right><?php echo "$LDDate $LDFrom" ?>:</td>
-      <td><input type="text" name="sdate" size=10 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-	  		<a href="javascript:show_calendar('suchform.sdate','<?php echo $date_format ?>')">
-			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
-  
-	  <?php echo $LDTo ?>&nbsp;<input type="text" name="edate" size=10 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-   			<a href="javascript:show_calendar('suchform.edate','<?php echo $date_format ?>')">
-			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+      <td>	
+			  <?php   //gjergji : new calendar
+					  echo $calendar->show_calendar($calendar,$date_format,'sdate'); 
+					  echo $calendar->show_calendar($calendar,$date_format,'edate');
+					  //end : gjergji
+			  ?>			
          </td>
     </tr>
 
@@ -255,7 +253,7 @@ ob_start();
                    				<input type="hidden" name="nrows" value="'.$nrows.'">
                        			<input type="hidden" name="sid" value="'.$sid.'">           
                        			<input type="hidden" name="lang" value="'.$lang.'">           
-								<input type="submit" value="&lt;&lt; Zur�ck">
+								<input type="submit" value="&lt;&lt; Prapa">
 								</form>';
 		echo "</td><td align=right>";
 		
@@ -291,7 +289,7 @@ if($ofset) echo '	<form name=back action='.$thisfile.' method=post>
                    				<input type="hidden" name="nrows" value="'.$nrows.'">
                        			<input type="hidden" name="sid" value="'.$sid.'">           
                        			<input type="hidden" name="lang" value="'.$lang.'">           
-								<input type="submit" value="&lt;&lt; Zur�ck">
+								<input type="submit" value="&lt;&lt; Prapa">
 								</form>';
 							
 if($mode=='search') echo '

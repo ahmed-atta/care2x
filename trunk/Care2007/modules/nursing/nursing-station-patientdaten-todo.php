@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * , elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -195,11 +195,6 @@ require($root_path.'include/inc_checkdate_lang.php');
 
 //-->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -324,12 +319,16 @@ if($cnt){
 		</td>
  -->		
         <td valign="top"><?php echo $LDDate ?>:<br>
-		<input type=text size=10 maxlength=10  name="dateput" value="<?php echo formatDate2Local(date('Y-m-d'),$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')" onFocus=this.select() value="<?php if(!$saved) echo $dateput; ?>"><br>
-<a href="javascript:show_calendar('berichtform.dateput','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a><font size=1 face="arial">[<?php
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer;
- ?>]</font>
+		<?php
+		//gjergji : new calendar
+		require_once ('../../js/jscalendar/calendar.php');
+		$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+		$calendar->load_files();
+		//end : gjergji
+		
+		echo $calendar->show_calendar($calendar,$date_format,'dateput');
+		//end gjergji
+		?></font>
 
 <!-- 		<a href="javascript:document.berichtform.dateput.value='h';setDate(document.berichtform.dateput);"><img <?php echo createComIcon($root_path,'arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
  -->		
@@ -341,8 +340,8 @@ if($cnt){
 		<td><?php echo $LDDocsPrescription ?>:<br>&nbsp;<textarea rows="4" cols="25" name="berichtput"><?php if(!$saved) echo $berichtput; ?></textarea><br>
 		<input type="checkbox" name="warn" <?php if((!$saved)&&($warn)) echo "checked"; ?> value="warn"> <img <?php echo createComIcon($root_path,'warn.gif','0','top',TRUE) ?>>
 		 <font size=1 face=arial><?php echo $LDInsertSymbol ?><br>
-		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput)"><img <?php echo createLDImgSrc($root_path,'hilite-s.gif','0','',TRUE) ?>></a>
-		<a href="javascript:endhilite(document.berichtform.berichtput)"><img <?php echo createLDImgSrc($root_path,'hilite-e.gif','0','',TRUE) ?>></a>
+		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'hilite-s.gif','0','',TRUE) ?>></a>
+		<a href="javascript:endhilite(document.berichtform.berichtput)"><img <?php echo createComIcon($root_path,'hilite-e.gif','0','',TRUE) ?>></a>
 		</td>
 		<td valign="top"><?php echo $LDSignature ?>:<br><input type=text size="3" name="author" onFocus=this.select() value="<?php if(!$saved) echo $author; ?>">
 		</td>
@@ -351,12 +350,12 @@ if($cnt){
 		</td>
  -->		
 		<td valign="top"><?php echo $LDDate ?>:<br>
-		<input type=text size=10 maxlength=10  name="dateput2" value="<?php echo formatDate2Local(date('Y-m-d'),$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onFocus="this.select()" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
-		<a href="javascript:show_calendar('berichtform.dateput2','<?php echo $date_format ?>')">
- 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a><font size=1 face="arial">[<?php
-		$dfbuffer="LD_".strtr($date_format,".-/","phs");
-		echo $$dfbuffer;
-		?>]</font>
+		<?php
+		//gjergji : new calendar
+		echo $calendar->show_calendar($calendar,$date_format,'dateput2');
+		//end gjergji
+		?>
+</font>
 
 <!-- 		<a href="javascript:document.berichtform.dateput2.value='h';setDate(document.berichtform.dateput2);"><img <?php echo createComIcon($root_path,'arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
  -->		
@@ -364,13 +363,13 @@ if($cnt){
 		<td><?php echo $LDQueries ?>:<br>&nbsp;<textarea rows="4" cols="25"  name="berichtput2"><?php if(!$saved) echo $berichtput2; ?></textarea><br>
 		<input type="checkbox" name="warn2" <?php if((!$saved)&&($warn2)) echo "checked"; ?> value="warn"> <img <?php echo createComIcon($root_path,'warn.gif','0','top',TRUE) ?>>
 		<font size=1 face=arial><?php echo $LDInsertSymbol ?><br>
-		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput2)"><img <?php echo createLDImgSrc($root_path,'hilite-s.gif','0','',TRUE) ?>></a>
-		<a href="javascript:endhilite(document.berichtform.berichtput2)"><img <?php echo createLDImgSrc($root_path,'hilite-e.gif','0','',TRUE) ?>></a>
+		 &nbsp;<a href="javascript:sethilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'hilite-s.gif','0','',TRUE) ?>></a>
+		<a href="javascript:endhilite(document.berichtform.berichtput2)"><img <?php echo createComIcon($root_path,'hilite-e.gif','0','',TRUE) ?>></a>
 		</td>
 		<td valign="top"><?php echo $LDSignature ?>:<br><input type=text size="3" name="author2" onFocus=this.select() value="<?php if(!$saved) echo $author2; ?>">
 		</td>
 		</tr>
-<?php endif; ?>
+<?php endif ?>
 		</table>
 
 <p>
@@ -381,12 +380,12 @@ if($cnt){
 <td >
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> width=99 height=24 alt="<?php echo $LDSave ?>">
 </td>
-<?php endif; ?>
+<?php endif ?>
 <td>
 <!-- <?php if($edit) : ?>
 <a href="javascript:resetinput()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?>  width=156 height=24 alt="<?php echo $LDReset ?>"></a>
 &nbsp;&nbsp;
-<?php endif; ?> -->
+<?php endif ?> -->
 
 <!-- Uncomment the following line if you want to show the cancel button at the bottom of the page -->
 <!--<a href="<?php //echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>-->

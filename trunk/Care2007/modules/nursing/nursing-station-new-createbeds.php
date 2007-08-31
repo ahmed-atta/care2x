@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -14,7 +14,7 @@ require($root_path.'include/inc_environment_global.php');
 define('DEFAULT_NR_OF_BEDS',2); // Define here the default number of beds if the bed value is empty or 0
 
 define('LANG_FILE','nursing.php');
-$local_user='ck_pflege_user';
+$local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
@@ -51,7 +51,10 @@ if(isset($mode)&&$mode=='save_beds'){
 	}
 	
 	if($saved_ok){
-		header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&ward_nr=$ward_nr&retpath=ward_mng");
+		//gjergji : commented it out for the changing of the magament
+		//header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&ward_nr=$ward_nr&retpath=ward_mng");
+		header("location:nursing-station-info.php".URL_REDIRECT_APPEND."&edit=0&mode=show&ward_id=$station&ward_nr=$ward_nr");
+		//end : gjergji
 		exit;
 	}else{
 		echo $ward_obj->getLastQuery();

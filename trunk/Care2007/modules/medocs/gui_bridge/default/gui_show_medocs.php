@@ -53,11 +53,6 @@ function popRecordHistory(table,pid) {
 
 -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php 
 
 $sTemp = ob_get_contents();
@@ -135,7 +130,7 @@ if($blood_group){
 }
 
 $smarty->assign('LDDate',$LDDate);
-$smarty->assign('LDDiagnosis',$LDDiagnosis);
+$smarty->assign('LDDiagnosis',$LDDiagnosisMedocs);
 $smarty->assign('LDTherapy',$LDTherapy);
 $smarty->assign('LDDetails',$LDDetails);
 $smarty->assign('LDBy',$LDBy);
@@ -202,7 +197,7 @@ if($mode=='show'){
 	
 	$smarty->assign('sExtraInfo',nl2br($row['aux_notes']));
 
-	if(stristr($row['short_notes'],'got_medical_advice')) $smarty->assign('sYesNo',$LDYes);
+	if(stristr($row['short_notes'],'marre_keshille_mjekesore')) $smarty->assign('sYesNo',$LDYes);
 		else $smarty->assign('sYesNo',$LDNo);
 	
 	$smarty->assign('sDiagnosis',nl2br($row['diagnosis']));
@@ -268,18 +263,15 @@ function chkForm(d) {
 	ob_end_clean();
 
 	$smarty->assign('sDocsJavaScript',$sTemp);
-
-	$smarty->assign('sDateValidateJs','value="'.@formatDate2Local(date('Y-m-d'),$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')"');
-	
-	$smarty->assign('sYesRadio',"<input type='radio' name='short_notes' value='got_medical_advice'>");
+	$smarty->assign('sYesRadio',"<input type='radio' name='short_notes' value='marre_keshille_mjekesore'>");
 	$smarty->assign('sNoRadio',"<input type='radio' name='short_notes' value=''>");
-	$TP_href_date="javascript:show_calendar('entryform.date','".$date_format."')";
-	$dfbuffer="LD_".strtr($date_format,".-/","phs");
-	$TP_date_format=$$dfbuffer;
-	$TP_img_calendar='<img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle').'>';
-	
-	$smarty->assign('sDateMiniCalendar','<a href="'.$TP_href_date.'">'.$TP_img_calendar.'</a> <font size=1>['.$TP_date_format.']</font>');
 
+	//gjergji : new calendar
+	require_once ('../../js/jscalendar/calendar.php');
+	$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+	$calendar->load_files();
+	$smarty->assign('sDateMiniCalendar',$calendar->show_calendar($calendar,$date_format,'date'));
+	//end gjergji
 	$smarty->assign('TP_user_name',$HTTP_SESSION_VARS['sess_user_name']);
 
 	# Collect hidden inputs

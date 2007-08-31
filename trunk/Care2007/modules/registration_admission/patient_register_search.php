@@ -10,7 +10,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-
+///$db->debug=1;
 # The language table
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';

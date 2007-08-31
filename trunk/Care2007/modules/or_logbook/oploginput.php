@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
@@ -50,7 +50,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 # Consider search and paginate modes separately
 if($mode=='search'||$mode=='paginate'){
 
-		# Initialize pageï¿½s control variables
+		# Initialize page´s control variables
 		if($mode=='paginate'){
 			$sk=$HTTP_SESSION_VARS['sess_searchkey'];
 			//$searchkey='USE_SESSION_SEARCHKEY';
@@ -404,7 +404,7 @@ function isnum(val,idx)
 			}
 			
 			
-//			alert("Zeitangabe ist ungï¿½ltig! (ausserhalb des 24H Zeitrahmens)");
+//			alert("Zeitangabe ist ungültig! (ausserhalb des 24H Zeitrahmens)");
 	
 		}
 		switch(v3.length)
@@ -603,7 +603,7 @@ if(!$patientfound) echo 'document.oppflegepatinfo.enc_nr.focus();';
 <font size=1>
 <?php if($op_nr) : ?>
 	<?php echo $LDOpNr ?> <FONT SIZE="3" ><b> <?php echo $op_nr; ?> </b></FONT>
-<?php endif; ?>
+<?php endif ?>
 
 <?php echo $LDDate ?>: 
 
@@ -905,7 +905,7 @@ if($datafound)
 	?>
 <?php else : ?>
 	<?php echo "$LDAna<p>$LDAnaDoc" ?>
-<?php endif;; ?>
+<?php endif ?>
 
 	<p>
 
@@ -941,12 +941,12 @@ if($datafound)
 	<br><INPUT NAME="cut_time" TYPE="text" VALUE="<?php echo strtr($ccbuf['s'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
 	<?php else : ?>
 	<p>
-	<?php endif; ?>
+	<?php endif ?>
 	<BR>
 	<?php echo $LDOpClose ?>:
 	<?php if($datafound) : ?>
 	<br><INPUT NAME="close_time" TYPE="text" VALUE="<?php echo strtr($ccbuf['e'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
-	<?php endif; ?>
+	<?php endif ?>
 </td>
 <td><font  size=1 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 	<?php echo $LDOpInFull ?>:
@@ -954,12 +954,12 @@ if($datafound)
 	<br><INPUT NAME="entry_time" TYPE="text" VALUE="<?php echo strtr($eobuf['s'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
 	<?php else : ?>
 	<p>
-	<?php endif; ?>
+	<?php endif ?>
 	<BR>
 	<?php echo $LDOpOutFull ?>:
 	<?php if($datafound) : ?>
 	<br><INPUT NAME="exit_time" TYPE="text" VALUE="<?php echo strtr($eobuf['e'],':','.'); ?>" SIZE="6" onKeyUp="isnum(this.value,this.name)">
-	<?php endif; ?>
+	<?php endif ?>
 </td>
 </tr>
 </table>

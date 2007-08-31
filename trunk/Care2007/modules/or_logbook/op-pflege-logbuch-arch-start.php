@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -21,6 +21,12 @@ if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Lo
 
 /* Load the date formatter */
 require_once($root_path.'include/inc_date_format_functions.php');
+
+//gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+//end : gjergji
 
 # Check the calendar date
 if(isset($sdate)&&!empty($sdate)){
@@ -257,10 +263,6 @@ function getinfo(pid,pdata){
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 // -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
 <STYLE TYPE="text/css">
 div.cats{
@@ -548,9 +550,11 @@ echo '
 				}
 				?>
 			</select>
-			<input type="text" name="sdate" size=8 maxlength=10 value="<?php if($thisday) echo formatDate2Local($thisday,$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-	 	 <a href="javascript:show_calendar('chgdept.sdate','<?php echo $date_format; ?>')"><img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
-   
+			<?php
+			//gjergji : new calendar 
+			echo $calendar->show_calendar($calendar,$date_format,'sdate',$thisday);	
+			//end : gjergji
+			?>   
 			</nobr>
 <input type="submit" value="<?php echo $LDChange ?>">
 

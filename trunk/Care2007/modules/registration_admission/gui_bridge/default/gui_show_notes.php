@@ -47,7 +47,6 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfilen = $root_path."main/sta
  # href for the return button
  $smarty->assign('pbBack',$returnfile.URL_APPEND.$retbuf.'&target='.$target.'&mode=show&type_nr='.$type_nr);
 
-
 /**
 * Helper function to generate rows
 */
@@ -90,11 +89,13 @@ function popNotesDetails(n,t) {
 
 -->
 </script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
+	//gjergji : new calendar
+	require_once ('../../js/jscalendar/calendar.php');
+	$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+	$calendar->load_files();
+	//end : gjergji
+
 
 if($parent_admit) include($root_path.'include/inc_js_barcode_wristband_popwin.php');
 
@@ -308,16 +309,10 @@ function chkform(d) {
 	
 	$smarty->assign('sFormJavaScript',$sTemp);
 
-	$smarty->assign('sDateInput','<input type="text" name="date" size=10 maxlength=10 onFocus="this.select()"  onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">');
+	//gjergji : new calendar
+	$smarty->assign('sDateMiniCalendar',$calendar->show_calendar($calendar,$date_format,'date'));
+	//end : gjergji
 	
-	$sTemp = '<a href="javascript:show_calendar(\'notes_form.date\',\''.$date_format.'\')">
- 						<img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE).'></a>
- 						<font size=1>[';
-	$dfbuffer="LD_".strtr($date_format,".-/","phs");
-	$sTemp = $sTemp.$$dfbuffer.'] </font>';
-
-	$smarty->assign('sDateMiniCalendar',$sTemp);
-
 	$smarty->assign('LDNotes',$LDApplication.' '.$LDNotes);
 	$smarty->assign('sNotesInput','<textarea name="notes" cols=40 rows=8 wrap="virtual"></textarea>');
 	$smarty->assign('LDShortNotes',$LDShortNotes);

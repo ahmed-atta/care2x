@@ -2,14 +2,6 @@
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-/**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
-* GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
-* elpidio@care2x.org, 
-*
-* See the file "copy_notice.txt" for the licence notice
-*/
 define('LANG_FILE','products.php');
 $local_user='ck_prod_db_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -17,7 +9,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_product.php');
 $product_obj=new Product;
 
-//$db->debug=1;
+///$db->debug=1;
 
 switch($cat)
 {
@@ -103,6 +95,7 @@ if($update&&(!$updateok)&&($mode=='save')) $smarty->assign('sNoSave',$LDDataNoSa
  $smarty->assign('LDGeneric',$LDGeneric);
  $smarty->assign('LDDescription',$LDDescription);
  $smarty->assign('LDPacking',$LDPacking);
+ $smarty->assign('LDDoza',$LDDoza);
  $smarty->assign('LDCAVE',$LDCAVE);
  $smarty->assign('LDCategory',$LDCategory);
  $smarty->assign('LDMinOrder',$LDMinOrder);
@@ -110,6 +103,7 @@ if($update&&(!$updateok)&&($mode=='save')) $smarty->assign('sNoSave',$LDDataNoSa
  $smarty->assign('LDPcsProOrder',$LDPcsProOrder);
  $smarty->assign('LDIndustrialNr',$LDIndustrialNr);
  $smarty->assign('LDLicenseNr',$LDLicenseNr);
+ $smarty->assign('LDMinPieces',$LDMinPieces);
  $smarty->assign('LDPicFile',$LDPicFile);
 
  # Assign the preview picture
@@ -131,6 +125,7 @@ if ($saveok){
 	$smarty->assign('sGenericInput',$generic.'<input type="hidden" name="generic" value="'.$generic.'">');
 	$smarty->assign('sDescriptionInput',nl2br($besc).'<input type="hidden" name="besc" value="'.$besc.'">');
 	$smarty->assign('sPackingInput',$pack.'<input type="hidden" name="pack" value="'.$pack.'">');
+	$smarty->assign('sDozaInput',$doza.'<input type="hidden" name="doza" value="'.$doza.'">');
 	$smarty->assign('sCAVEInput',$caveflag.'<input type="hidden" name="caveflag" value="'.$caveflag.'">');
 	$smarty->assign('sCategoryInput',$medgroup.'<input type="hidden" name="medgroup" value="'.$medgroup.'">');
 	$smarty->assign('sMinOrderInput',$minorder.'<input type="hidden" name="minorder" value="'.$minorder.'">');
@@ -138,12 +133,14 @@ if ($saveok){
 	$smarty->assign('sPcsProOrderInput',$proorder.'<input type="hidden" name="proorder" value="'.$proorder.'">');
 	$smarty->assign('sIndustrialNrInput',$artnum.'<input type="hidden" name="artnum" value="'.$artnum.'">');
 	$smarty->assign('sLicenseNrInput',$indusnum.'<input type="hidden" name="indusnum" value="'.$indusnum.'">');
+	$smarty->assign('sMinPiecesInput',$minpcs.'<input type="hidden" name="minpcs" value="'.$minpcs.'">');	
 	$smarty->assign('sPicFileInput',$picfilename.'<input type="hidden" name="bild" value="'.$picfilename.'">');
 }else{
 	$smarty->assign('sArticleNameInput','<input type="text" name="artname" value="'.$artname.'" size=40 maxlength=40>');
 	$smarty->assign('sGenericInput','<input type="text" name="generic" value="'.$generic.'" size=40 maxlength=60>');
 	$smarty->assign('sDescriptionInput','<textarea name="besc" cols=35 rows=4>'.$besc.'</textarea>');
 	$smarty->assign('sPackingInput','<input type="text" name="pack" value="'.$pack.'"  size=40 maxlength=40>');
+	$smarty->assign('sDozaInput','<input type="text" name="doza" value="'.$doza.'"  size=40 maxlength=40>');
 	$smarty->assign('sCAVEInput','<input type="text" name="caveflag" value="'.$caveflag.'" size=40 maxlength=80>');
 	$smarty->assign('sCategoryInput','<input type="text" name="medgroup" value="'.$medgroup.'" size=20 maxlength=40>');
 	$smarty->assign('sMinOrderInput','<input type="text" name="minorder" value="'.$minorder.'" size=20 maxlength=9>');
@@ -151,6 +148,7 @@ if ($saveok){
 	$smarty->assign('sPcsProOrderInput','<input type="text" name="proorder" value="'.$proorder.'" size=20 maxlength=40>');
 	$smarty->assign('sIndustrialNrInput','<input type="text" name="artnum" value="'.$artnum.'" size=20 maxlength=20>');
 	$smarty->assign('sLicenseNrInput','<input type="text" name="indusnum" value="'.$indusnum.'" size=20 maxlength=20>');
+	$smarty->assign('sMinPiecesInput','<input type="text" name="minpcs" value="'.$minpcs.'" size=20 maxlength=20>');	
 	$smarty->assign('sPicFileInput','<input type="file" name="bild" onChange="getfilepath(this)">');
 
 	$smarty->assign('LDReset','<input type="reset" value="'.$LDReset.'" onClick="document.inputform.bestellnum.focus()" >');

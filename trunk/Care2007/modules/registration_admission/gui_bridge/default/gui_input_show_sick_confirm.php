@@ -56,27 +56,21 @@ if($insurance){
 	$TP_enc_insurance_subarea=$insurance['sub_area']; 
 }
 
-$TP_date_birth=formatDate2Local($date_birth,$date_format);
+
 $TP_dept_sigstamp=nl2br($dept_sigstamp); 
 $TP_care_logo=createLogo($root_path,'care_logo.gif','0','right');
+$TP_date_birth=formatDate2Local($date_birth,$date_format);
 
-$date_checker='onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')"';
+//gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
 
-$TP_date_end='<input type="text" name="date_end" size=10 maxlength=10 '.$date_checker.'>';
-$TP_href_des='<a href="javascript:show_calendar(\'sickform.date_end\',\''.$date_format.'\')">';
-$TP_date_start='<input type="text" name="date_start" size=10 maxlength=10 '.$date_checker.'>';
-$TP_href_dss='<a href="javascript:show_calendar(\'sickform.date_start\',\''.$date_format.'\')">';
-$TP_date_confirm='<input type="text" name="date_confirm" size=10 maxlength=10 '.$date_checker.'>';
-$TP_href_dcs='<a href="javascript:show_calendar(\'sickform.date_confirm\',\''.$date_format.'\')">';
-$TP_href_end='</a>';
-
-
-$TP_img_calendar='<img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE).'>';
-
-$dfbuffer="LD_".strtr($date_format,".-/","phs");
-$TP_date_format=$$dfbuffer;
-
-
+$TP_date_end= $calendar->show_calendar($calendar,$date_format,'date_end');
+$TP_date_start= $calendar->show_calendar($calendar,$date_format,'date_start');
+$TP_date_confirm= $calendar->show_calendar($calendar,$date_format,'date_confirm');
+//gjergji : end
+		 	
 $TP_diagnosis='<textarea name="diagnosis" cols=40 rows=5 wrap="physical"></textarea>';
 
 # Signature stamp of the department

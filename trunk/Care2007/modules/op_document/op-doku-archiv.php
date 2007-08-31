@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -58,7 +58,7 @@ $patientselected=FALSE;
 
 function clean_it(&$d)
 {
-	$d=strtr($d,"ï¿½!ï¿½$&/()=?`ï¿½+'#{}[]\^","~~~~~~~~~~~~~~~~~~~~~");
+	$d=strtr($d,"°!§$&/()=?`´+'#{}[]\^","~~~~~~~~~~~~~~~~~~~~~");
 	$d=str_replace("\"","~",$d);   //"
 	$d=str_replace("~","",$d);
 	return trim($d);
@@ -69,7 +69,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
     
 
 if($mode=='search'||$mode=='paginate'){
-	# Initialize pageï¿½s control variables
+	# Initialize page´s control variables
 	if($mode!='paginate'){
 		# Reset paginator variables
 		$pgx=0;
@@ -308,11 +308,6 @@ require($root_path.'include/inc_checkdate_lang.php');
 
 // -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php 
 
 $sTemp = ob_get_contents();
@@ -464,20 +459,14 @@ $append="&dept_nr=$dept_nr&target=archiv&all_depts=$all_depts";
 </td>
 <td>
 <?php
+//gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+//end : gjergji
 
-	if($mode=="select"){
-    	echo '<font color="#800000">'.formatDate2Local($row['op_date'],$date_format); 
-	}else{
- 	   echo '
- 	<input name="op_date" type="text" size="14" onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
-?>
-   	<a href="javascript:show_calendar('opdoc.op_date','<?php echo $date_format ?>')">
-	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a>
-<?php
-	echo ' [';
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer.' ]';
-}
+echo $calendar->show_calendar($calendar,$date_format,'op_date',$row['op_date']);
+
 ?>
  
 <font color="#000000">&nbsp; &nbsp;<?php echo $LDOperator ?>:
@@ -529,19 +518,11 @@ $append="&dept_nr=$dept_nr&target=archiv&all_depts=$all_depts";
 </td>
 <td>
 <?php 
-
+//echo $calendar->show_calendar($calendar,$date_format,'gebdatum',$enc_obj->BirthDate());
 if($mode=="select") {
     echo '<font color="#000099">'.formatDate2Local($enc_obj->BirthDate(),$date_format); 
 }else{
-   echo '<input name="gebdatum" type="text" size="14" onBlur="IsValidDate(this,\''.$date_format.'\')"  onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
-?>
-   	<a href="javascript:show_calendar('opdoc.gebdatum','<?php echo $date_format ?>')">
-	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a>
-<?php
-	echo ' [ ';
-
-   $dfbuffer="LD_".strtr($date_format,".-/","phs");
-   echo $$dfbuffer.' ]';
+  echo $calendar->show_calendar($calendar,$date_format,'gebdatum',$enc_obj->BirthDate());
 }
 ?> 
 

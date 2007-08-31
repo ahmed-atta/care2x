@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * , elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -347,10 +347,6 @@ function printOut()
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 //-->
 </script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -547,9 +543,15 @@ if($edit){
      </tr>
      <tr>
        <td><div class=fva2b_ml10><b><font color="red" face="verdana" size=2>*</font></b><font size=1><?php echo $LDTransfusionDate ?></font></div></td>
-       <td><input type="text" name="transfusion_date" size=20 maxlength=10  value="<?php  if($mode=='edit') echo formatDate2Local($stored_request['transfusion_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-	   <a href="javascript:show_calendar('form_test_request.transfusion_date','<?php echo $date_format ?>')">
- 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
+       <td>
+ 			<?php
+				//gjergji : new calendar
+				require_once ('../../js/jscalendar/calendar.php');
+				$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+				$calendar->load_files();
+	  			echo $calendar->show_calendar($calendar,$date_format,'transfusion_date',$stored_request['transfusion_date']);
+				//end : gjergji  
+ 			?>
 	   </td>
      </tr>
      <tr>
@@ -563,9 +565,12 @@ if($edit){
      </tr>
      <tr>
        <td align="right"><div class=fva2b_ml10><b><font color="red" face="verdana" size=2>*</font></b><font size=1><?php echo $LDDate ?>:&nbsp;</font></div></td>
-       <td><input type="text" name="send_date" size=20 maxlength=10  value="<?php  if($mode=="edit") echo formatDate2Local($stored_request['send_date'],$date_format); else echo formatDate2Local(date("Y-m-d"),$date_format) ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-	   	   <a href="javascript:show_calendar('form_test_request.send_date','<?php echo $date_format ?>')">
- 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
+       <td>
+ 			<?php
+				//gjergji : new calendar
+	  			echo $calendar->show_calendar($calendar,$date_format,'send_date',$stored_request['send_date']);
+				//end : gjergji  
+ 			?> 		
 		</td>
      </tr>
      <tr>

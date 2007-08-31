@@ -70,11 +70,6 @@ function settitle(d)
 
 -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-
 <?php 
 
 $sTemp = ob_get_contents();

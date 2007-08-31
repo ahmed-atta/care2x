@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -24,6 +24,12 @@ $returnfile='cafenews-edit-select-art.php'.URL_APPEND;
 
 /* Load the date formatter */
 require_once($root_path.'include/inc_date_format_functions.php');
+
+//gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+//end : gjergji
 
 $title=$HTTP_SESSION_VARS['sess_title'];
 ?>
@@ -55,11 +61,6 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <script language="javascript"  type="text/javascript" src="<?php echo $root_path.'js/html_editor/'; ?>dialog.js"></script>
 <style type="text/css">@import url("<?php echo $root_path.'js/html_editor/'; ?>htmlarea.css")</style>
 
-
-<script language="javascript" src="<?php echo $root_path ?>js/checkdate.js" type="text/javascript"></script>
-<script language="javascript" src="<?php echo $root_path ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php require($root_path.'include/inc_css_a_hilitebu.php'); ?>
 
 </head>
@@ -75,7 +76,7 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <?php if($artopt!=2) : ?>
     <td valign=top><img <?php echo createLDImgSrc($root_path,'x-blank.gif','0') ?> id="headpic"><br>
   </td>
-<?php endif; ?>
+<?php endif ?>
     <td class="submenu" colspan=2><FONT color="#0000cc" size=3><b><?php echo $LDTitleTag ?>:</b><br>
 	<font size=1><?php echo $LDTitleMaxNote ?><br>
 	<input type="text" name="newstitle" size=50 maxlength=255><br>
@@ -94,29 +95,27 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
   	<FONT color="#0000cc" size=2><b><?php echo $LDAuthor ?>:</b><br>
 	<input type="text" name="author" size=30 maxlength=40><br>
   	<FONT color="#0000cc" size=2><b><?php echo $LDPublishDate ?>:</b><br>
-	<!-- <input type="text" name="publishdate" size=10 maxlength=10 onKeyUp="setDate(this)"> -->
- 	<input type="text" name="publishdate" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-  	<a href="javascript:show_calendar('selectform.publishdate','<?php echo $date_format ?>')">
-	<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
-  [<?php   
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer; ?>]
+<?php
+//gjergji : new calendar
+echo $calendar->show_calendar($calendar,$date_format,'publishdate');
+//end gjergji
+ ?>
 </td>
 <?php if($artopt==2) : ?>
     <td valign=top><img <?php echo createLDImgSrc($root_path,'x-blank.gif','0') ?> id="headpic" ><br>
   </td>
-<?php endif; ?>
+<?php endif ?>
   </tr>
   <tr>
 <?php if($artopt!=2) : ?>
     <td align=right >
 	<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
   </td>
-<?php endif; ?>
+<?php endif ?>
     <td >
 <?php if($artopt==2) : ?>
 	<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
-<?php endif; ?>
+<?php endif ?>
 <input type="image" <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>
   </td>
     <td>
@@ -125,7 +124,7 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <?php if($artopt==2) : ?>
     <td align=right >&nbsp;
   </td>
-<?php endif; ?>
+<?php endif ?>
   </tr>
 </table>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">

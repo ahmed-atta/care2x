@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -113,7 +113,7 @@ if(!empty($mode)&&!$inputerror){
 		}
 		case 'select':
 		{
-			# Get departmentï¿½s information
+			# Get department´s information
 			if(isset($nr)&&$nr){
 				$OR_Info=$OR_obj->ORRecordInfo($nr);
 			}elseif(isset($OR_nr)&&$OR_nr){
@@ -199,15 +199,19 @@ function chkForm(d){
 function newORnr(){
 	document.newstat.room_nr.value="<?php echo $newORnr ?>";
 }
-<?php require($root_path.'include/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/inc_checkdate_lang.php'); 
+
+?>
 
 // -->
 </script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
+
+//gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+//end : gjergji
 
 $sTemp = ob_get_contents();
 ob_end_clean();
@@ -276,27 +280,21 @@ echo $LDEnterInfo;
     <td align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b><?php echo $LDDateCreation; ?>: </td>
     <td bgColor="#f9f9f9">
 	<?php
+		
 		if($mode=='select'||$mode=='update'){
 			echo '<input type="hidden" name="date_create" value="'.$date_create.'">';
 			echo formatDate2Local($date_create,$date_format);
 		}else{
-	?>
-	<input type="text" name="date_create" size=10 maxlength=10  
-	 	 value="<?php
 		 	if(isset($inputerror) && $inputerror){
-				echo $date_create;
+				//gjergji : new calendar
+		 		echo $calendar->show_calendar($calendar,$date_format,'date_create',$date_create);	
+		 		//end : gjergji
 			}else{
-		  		if(!isset($date_create)||empty($date_create)) $date_create=date('Y-m-d');
-				echo formatDate2Local($date_create,$date_format);
+				//gjergji : new calendar
+				echo $calendar->show_calendar($calendar,$date_format,'date_create');	
+				//end : gjergji
 			}
-		?>" 
-	 	onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-		<a href="javascript:show_calendar('newstat.date_create','<?php echo $date_format ?>')">
- 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
- 		<font size=1>[ <?php   
- 		$dfbuffer="LD_".strtr($date_format,".-/","phs");
-  		echo $$dfbuffer;
- 		?> ] </font>
+		?>  </font>
 	<?php
 	}
 	?>

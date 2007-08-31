@@ -255,11 +255,6 @@ function endhilite(d){
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -409,11 +404,16 @@ $tc++;
 <td>
 
 <?=$LDDate?><br>
-<table><tr><td><input type=text size=10 maxlength=10 name=indatetime_date id=indatetime_date value='<?=formatDate2Local(date('Y-m-d'),$date_format)?>' onBlur="IsValidDate(this,'<?=$date_format?>')" onFocus='this.select()' 
-value='<?	if(!$saved)  echo "$dateput"; ?>
-onKeyUp="setDate(this,'".$date_format."','".$lang."')">
-</td><td><a href="javascript:show_calendar('berichtform.indatetime_date','<?=$date_format?>')">
-<img <?=createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE)?>></a></td>
+<table><tr><td>
+		<?php
+			//gjergji : new calendar
+			require_once ('../../js/jscalendar/calendar.php');
+			$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+			$calendar->load_files();
+  			echo $calendar->show_calendar($calendar,$date_format,'indatetime_date');
+			//end : gjergji  
+ 		?>
+</td>
 </tr></table>
 
 </td>

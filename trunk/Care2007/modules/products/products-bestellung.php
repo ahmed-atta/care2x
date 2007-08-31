@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -23,7 +23,9 @@ if(!isset($dept_nr)||!$dept_nr){
 			#
 			# Bug patch for Mozilla, I know its not automatic but Mozilla seems to have problems with two consecutive header redirects
 			#
-			require($root_path.'include/inc_mozillapatch_redirect.php');
+			//gjergji : me duhet me ba 2 mozilla redirect per arsye te stringave
+			if( $cat == 'pharma' ) 	require($root_path.'include/inc_mozillapatch_redirect.php');
+			else require($root_path.'include/inc_mozillapatch_depo_redirect.php');
 		}else{
 			header("Location:select_dept.php".URL_REDIRECT_APPEND."&cat=$cat&target=entry&retpath=$retpath");
 		}
@@ -33,7 +35,7 @@ if(!isset($dept_nr)||!$dept_nr){
 
 //$db->debug=1;
 /**
-* if order nr is not available,   get the highest item number in the db and add 1
+* if order nr is not available, get the highest item number in the db and add 1
 */
 
 if(!isset($order_nr) || !$order_nr)
@@ -41,22 +43,27 @@ if(!isset($order_nr) || !$order_nr)
 
     if($cat=='pharma') 
     {
- 	    $dbtable='care_pharma_orderlist';
+ 	    $dbtable='\'care_pharma_orderlist\'';
      }
     else
     {
- 	    $dbtable='care_med_orderlist';
+ 	    $dbtable='\'care_med_orderlist\'';
      }
  
 
 	//$sql="SELECT order_nr FROM $dbtable ORDER BY order_nr DESC";
-	$sql="SELECT MAX(order_nr) AS order_nr FROM $dbtable";
-    // if($ergebnis=$db->SelectLimit($sql,1)){
+	//mizuko:16.01.2007
+	//bug with getting the max order_nr...patched for mysql 5.x
+	//don't know if it works on postgres :(
+	//$sql="SELECT MAX(order_nr) AS order_nr FROM $dbtable";
+	$sql="SHOW TABLE STATUS FROM $dbname WHERE Name LIKE $dbtable";
+    //end:mizuko
+	// if($ergebnis=$db->SelectLimit($sql,1)){
      if($ergebnis=$db->Execute($sql)){
 		//reset result
 		if ($rows=$ergebnis->RecordCount())	{
 			$content=$ergebnis->FetchRow();
-			$order_nr=$content['order_nr'] + 1;
+			$order_nr=$content['Auto_increment'];
 		}else{
 			$order_nr=1;
 		} 

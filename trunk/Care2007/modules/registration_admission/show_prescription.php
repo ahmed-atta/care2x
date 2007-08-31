@@ -11,7 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 
-//$db->debug=1;
+///$db->debug=1;
 
 $thisfile=basename(__FILE__);
 if(!isset($mode)){

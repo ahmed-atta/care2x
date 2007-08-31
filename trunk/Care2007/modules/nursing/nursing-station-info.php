@@ -3,17 +3,17 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','nursing.php');
-$local_user='ck_pflege_user';
+$local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-
+///$db->debug = true;
 $thisfile=basename(__FILE__);
 /* Load the ward object */
 require_once($root_path.'include/care_api_classes/class_ward.php');
@@ -84,7 +84,7 @@ $rows=0;
 					}
 					
 					case 're_open':	
-					{
+					{	
 						$ward_obj->reOpenWard($ward_nr);
 					}
 				}
@@ -105,7 +105,7 @@ $rows=0;
 					$ward=$wards->FetchRow();
 					# globalize ward values
 					extract($ward);
-					# Get wardï¿½s active rooms info
+					# Get ward´s active rooms info
 					$rooms=&$ward_obj->getAllActiveRoomsInfo($ward['nr']);
 				}else{
 					$rooms=$ward_obj->countCreatedRooms();

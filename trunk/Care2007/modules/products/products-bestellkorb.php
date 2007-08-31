@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -51,8 +51,7 @@ $product_obj=new Product;
 if($mode!=''){
 			$sql="SELECT * FROM $dbtable
 							WHERE order_nr='$order_nr'
-							AND dept_nr='$dept_nr'";
-							
+							AND dept_nr='$dept_nr'";				
         	if($ergebnis=$db->Execute($sql))
 			{
 				$rows=$ergebnis->RecordCount();
@@ -103,47 +102,108 @@ if($mode!=''){
 
 			// set main pharma db table
 			
-			if($cat=='pharma') $dbtable='care_pharma_products_main'; 
-				else $dbtable='care_med_products_main'; 
-				
-			for($i=1;$i<=$maxcount;$i++)
-			{
-					$o='order'.$i; 
-					if(!$$o) continue;
-					$b='bestellnum'.$i; 
-					// get the needed info from the main pharma db
-					$sql="SELECT artikelname, minorder, maxorder, proorder FROM $dbtable WHERE bestellnum='".$$b."'";
-        			if($ergeb=$db->Execute($sql))
-					{
-						$result=$ergeb->FetchRow();
-							$a='artikelname'.$i;
-							$$a=str_replace('&','%26',strtr($result['artikelname'],' ','+')); 
-							$mi='minorder'.$i;
-							$$mi=$result['minorder'];
-							$mx='maxorder'.$i;
-							$$mx=$result['maxorder'];
-							$po='porder'.$i;
-							$$po=$result['proorder'];
-					}else { echo "$sql<br>$LDDbNoRead<br>"; } 
+			if($cat=='pharma') {
+				$dbtable='care_pharma_products_main'; 
+				$dbtablesub='care_pharma_products_main_sub';
+			} else {
+				$dbtable='care_med_products_main'; 
+				$dbtablesub='care_med_products_main_sub';
 			}
-			
-		    if($rows) $tart=$content['articles']; else $tart="";
-		    
-			for ($i=1;$i<=$maxcount;$i++)
-			{
-				$o='order'.$i; 
-				if(!$$o) continue;
-				$b='bestellnum'.$i; 
-				$a='artikelname'.$i;
-				$po='porder'.$i;
-				$pc='p'.$i;
-				$tart.=' bestellnum='.$$b.'&artikelname='.$$a.'&pcs='.$$pc.'&minorder='.$$mi.'&maxorder='.$$mx.'&proorder='.$$po; // append new bestellnum to articles
-				$tart=trim($tart);
-				//echo $tart;
-			}
-			
+/*			//mizuko: if the request is comming from the ward do it the usual way
+			if($cat=='pharma'){
+					for($i=1;$i<=$maxcount;$i++){
+							$o='order'.$i; 
+							if(!$$o) continue;
+							$b='bestellnum'.$i; 
+							// get the needed info from the main pharma db
+							$sql="SELECT artikelname, minorder, maxorder, proorder, skadenca, doza, packing, cmimi FROM $dbtable WHERE bestellnum='".$$b."'";
+		        			if($ergeb=$db->Execute($sql)){
+								$result=$ergeb->FetchRow();
+									$a='artikelname'.$i;
+									$$a=str_replace('&','%26',strtr($result['artikelname'],' ','+')); 
+									$mi='minorder'.$i;
+									$$mi=$result['minorder'];
+									$mx='maxorder'.$i;
+									$$mx=$result['maxorder'];
+									$po='porder'.$i;
+									$$po=$result['proorder'];
+									$doza='doz'.$i;
+									$$doza=str_replace(' ', '',$result['doza'] );							
+									$packing='pack'.$i;
+									$$packing=$result['packing'];
+									$skadenca='skadenca'.$i;
+									$$skadenca=$result['skadenca'];
+									$cmimi='cmimi'.$i;
+									$$cmimi=$result['cmimi'];							
+							}else { echo "$sql<br>$LDDbNoRead<br>"; } 
+					}
+					
+				    if($rows) $tart=$content['articles']; else $tart="";
+					for ($i=1;$i<=$maxcount;$i++){
+						$o='order'.$i; 
+						if(!$$o) continue;
+						$b='bestellnum'.$i; 
+						$a='artikelname'.$i;
+						$po='porder'.$i;
+						$pc='p'.$i;
+						$ska='skadenca'.$i;
+						$doz='doz'.$i;
+						$pack='pack'.$i;
+						$cmi='cmimi'.$i;
+						$tart.=' bestellnum='.$$b.'&artikelname='.$$a.'&pcs='.$$pc.'&minorder='.$$mi.'&maxorder='.$$mx.'&proorder='.$$po.'&skadenca='.$$ska.'&doza='.$$doz.'&njesia='.$$pack.'&cmimi='.$$cmi; // append new bestellnum to articles
+						$tart=trim($tart);
+					}
+			} else {*/
+
+					for($i=1;$i<=$maxcount;$i++){
+							$o='order'.$i; 
+							if(!$$o) continue;
+							$b='bestellnum'.$i; 
+							$s='idsub'.$i;
+							$sql  ="SELECT artikelname, minorder, maxorder, proorder, doza, packing, $dbtablesub.skadenca, $dbtablesub.cmimi,$dbtablesub.id ";
+							$sql .="FROM $dbtable inner join $dbtablesub on $dbtable.bestellnum = $dbtablesub.bestellnum ";
+							$sql .="WHERE $dbtable.bestellnum='".$$b."' AND $dbtablesub.pcs > 0 AND $dbtablesub.id = '" . $$s . "'";
+		        			if($ergeb=$db->Execute($sql)){
+								$result=$ergeb->FetchRow();
+									$a='artikelname'.$i;
+									$$a=str_replace('&','%26',strtr($result['artikelname'],' ','+')); 
+									$mi='minorder'.$i;
+									$$mi=$result['minorder'];
+									$mx='maxorder'.$i;
+									$$mx=$result['maxorder'];
+									$po='porder'.$i;
+									$$po=$result['proorder'];
+									$doza='doz'.$i;
+									$$doza=str_replace(' ', '',$result['doza'] );							
+									$packing='pack'.$i;
+									$$packing=$result['packing'];
+									$skadenca='skadenca'.$i;
+									$$skadenca=$result['skadenca'];
+									$cmimi='cmimi'.$i;
+									$$cmimi=$result['cmimi'];	
+									$idsub='id'.$i;
+									$$idsub=$result['id'];
+							}else { echo "$sql<br>$LDDbNoRead<br>"; } 
+					}
+					
+				    if($rows) $tart=$content['articles']; else $tart="";
+					for ($i=1;$i<=$maxcount;$i++){
+						$o='order'.$i; 
+						if(!$$o) continue;
+						$b='bestellnum'.$i; 
+						$a='artikelname'.$i;
+						$po='porder'.$i;
+						$pc='p'.$i;
+						$ska='skadenca'.$i;
+						$doz='doz'.$i;
+						$pack='pack'.$i;
+						$cmi='cmimi'.$i;
+						$sub='id'.$i;
+						$tart.=' bestellnum='.$$b.'&artikelname='.$$a.'&pcs='.$$pc.'&minorder='.$$mi.'&maxorder='.$$mx.'&proorder='.$$po.'&skadenca='.$$ska.'&doza='.$$doz.'&njesia='.$$pack.'&cmimi='.$$cmi.'&idsub='.$$sub; // append new bestellnum to articles
+						$tart=trim($tart);
+					}
+			//}
 		    $saveok=false;
-		
 		    //save actual data to  catalog
 		    if($cat=='pharma') $dbtable='care_pharma_orderlist';
 			    else $dbtable='care_med_orderlist';
@@ -179,7 +239,7 @@ if($mode!=''){
 			}
         		if($ergebnis=$product_obj->Transact($sql))
 				{
-				    // echo $sql;
+				     //echo $sql;
 					if(!$rows){
 						$oid=$db->Insert_ID(); // if the last action was insert get the last id
 						$product_obj->coretable=$dbtable;
@@ -223,7 +283,6 @@ if($ergebnis=$db->Execute($sql)){
 		} // if sent_stamp or validator filled then reject this data
 	}
 }else{ echo "$LDDbNoRead<br>$sql"; } 
-//echo $sql;
 
 	 
 # Load common icon images
@@ -242,8 +301,11 @@ function popinfo(b)
 {
 	urlholder="products-bestellkatalog-popinfo.php?sid=<?php echo "$sid&lang=$lang&userck=$userck"; ?>&keyword="+b+"&mode=search&cat=<?php echo $cat ?>";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
-	}
+}
 
+function resize() {
+	parent.document.getElementById("products").cols = "60%,20%";
+}
 </script>
 
 <script language="javascript" src="../js/products_validate_order_num.js"></script>
@@ -262,8 +324,12 @@ switch($mode)
 echo "bgcolor=".$cfg['body_bgcolor']; if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 <?php // foreach($argv as $v) echo "$v<br>"; ?>
 
-<a href="javascript:gethelp('products.php','orderlist','<?php echo $rows ?>','<?php echo $cat ?>')"><img <?php echo createComIcon($root_path,'frage.gif','0','right') ?> alt="<?php echo $LDOpenHelp ?>"></a>
-<font size=2 face="verdana,arial">
+<table><tr><td>
+<a href="javascript:gethelp('products.php','catalog','','<?php echo $cat ?>')"><img <?php echo createComIcon($root_path,'frage.gif','0','right') ?> alt="<?php echo 
+$LDOpenHelp ?>"></a>
+</td><td>
+<a href="javascript:resize()"><img <?php echo createComIcon($root_path,'r_arrowgrnsm.gif','0'); ?> alt="Zgjero"></a>
+</td></tr></table><font size=2 face="verdana,arial">
 <?php 
 $buff=$dept_obj->LDvar($dept_nr);
 if(isset($$buff)&&!empty($$buff)) echo $$buff;
@@ -281,7 +347,6 @@ echo '<form name=actlist>
 		<font size=1> ('.$LDOn.': ';
 		
 		echo formatDate2Local($content['order_date'],$date_format);
-
 		echo ' '.$LDTime.': '.str_replace('24','00',convertTimeToLocal($content['order_time'])).')</font>
 		<table border=0 cellspacing=1 cellpadding=3 width="100%">
   		<tr class="wardlisttitlerow">';

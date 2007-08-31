@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -210,7 +210,12 @@ for($n=0;$n<sizeof($artikeln);$n++)
 				<td><font face=Verdana,Arial size=1>'.$r[artikelname].'</td>
 				 <td><font face=Verdana,Arial size=1>'.$r[pcs].'</td>
 					<td ><font face=Verdana,Arial size=1><nobr>X '.$r[proorder].'</nobr></td>
-			<td><font face=Verdana,Arial size=1>'.$r[bestellnum].'</td>
+					<td><font face=Verdana,Arial size=1>'.$r[doza].'</td>
+					<td><font face=Verdana,Arial size=1>'.$r[njesia].'</td>					
+					<td><font face=Verdana,Arial size=1>'.$r[cmimi].'</td>									
+					<td><font face=Verdana,Arial size=1>'.$r[cmimi] * $r[pcs].'</td>									
+					<td><font face=Verdana,Arial size=1>'.$r[skadenca].'</td>										
+					<td><font face=Verdana,Arial size=1>'.$r[bestellnum].'</td>
 				</tr>';
 	$i++;
  	}
@@ -247,7 +252,7 @@ for($n=0;$n<sizeof($artikeln);$n++)
 			<input type="hidden" name="userck" value="'.$userck.'">
 			<input type="hidden" name="mode" value="send">
    			<p>
-			<input type="submit" value="'.$LDSendOrder.'">   
+			<input type="submit" value="'.$LDSendOrderDepo.'">   
    			</form></font><p>
 			<font face=Verdana,Arial size=2>
 			<a href="products-bestellkorb.php'.URL_APPEND.'&cat='.$cat.'&dept_nr='.$dept_nr.'&order_nr='.$order_nr.'&userck='.$userck.'" ><< '.$LDBack2Edit.'</a></font>

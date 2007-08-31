@@ -34,10 +34,6 @@ function popSearchWin(target,obj_val,obj_name) {
 
 -->
 </script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -208,21 +204,29 @@ createTR( 'user_id', $LDRegBy,$user_id);
 <td class="reg_item"><?php echo $LDRegDate ?>:
 </td>
 <td class="reg_input">
-<input name="date_start" type="text" size=10 maxlength=10   value="<?php if(!empty($date_start)) echo @formatDate2Local($date_start,$date_format);  ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
- <a href="javascript:show_calendar('aufnahmeform.date_start','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
- <font size=1>[ <?php   
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer;
- ?> ] </font>
+ <?php
+ //gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+
+
+if(!empty($date_start))
+	echo $calendar->show_calendar($calendar,$date_format,'date_start',$date_start);
+else 
+	echo $calendar->show_calendar($calendar,$date_format,'date_start');
+//end : gjergji
+?>
 </td>
-<td class="reg_input"><nobr><?php echo $LDTo ?>: <input name="date_end" type="text" size=10 maxlength=10  value="<?php if(!empty($date_end))  echo @formatDate2Local($date_end,$date_format);  ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
- <a href="javascript:show_calendar('aufnahmeform.date_end','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
- <font size=1>[ <?php   
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer;
- ?> ] </font>
+<td class="reg_input"><nobr><?php echo $LDTo ?>: 
+<?php
+//gjergji : new calendar
+if(!empty($date_end))
+	echo $calendar->show_calendar($calendar,$date_format,'date_end',$date_end);
+else 
+	echo $calendar->show_calendar($calendar,$date_format,'date_end');
+//end : gjergji
+?>
 </nobr></td>
 </tr>
 
@@ -274,14 +278,14 @@ if(!isset($addr_city_town)) $addr_city_town='';
 <td class="reg_item"><?php echo $LDBday ?>:
 </td>
 <td class="reg_input">
-<input name="date_birth" type="text" size="15" maxlength=10 value="<?php  if(!empty($date_birth))  echo @formatDate2Local($date_birth,$date_format);  ?>"
- onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
-<a href="javascript:show_calendar('aufnahmeform.date_birth','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
- <font size=1>[ <?php   
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer;
- ?> ] </font>
+ <?php
+//gjergji : new calendar
+if(!empty($date_birth))
+	echo $calendar->show_calendar($calendar,$date_format,'date_birth',$date_birth);
+else 
+	echo $calendar->show_calendar($calendar,$date_format,'date_birth');
+//end : gjergji
+?>
 </td>
 <td colspan=2 class="reg_input"><?php echo $LDSex ?>: <input name="sex" type="radio" value="m"><?php echo $LDMale ?>&nbsp;&nbsp;
 <input name="sex" type="radio" value="f"><?php echo $LDFemale ?>

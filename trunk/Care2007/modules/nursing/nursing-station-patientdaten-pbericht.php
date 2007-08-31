@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * , elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -201,11 +201,6 @@ function endhilite(d){
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -323,18 +318,18 @@ if($edit) {
 		</tr>
 		
 		<tr bgcolor="#99ccff">
-<!-- 		<td valign="top"><?php echo $LDDate ?>:<br>
-		<input type=text size="8" name="dateput" onKeyUp=setDate(this) onFocus=this.select() value="<?php if(!$saved) echo $dateput; ?>"><br>
-		<a href="javascript:document.berichtform.dateput.value='h';setDate(document.berichtform.dateput);"><img <?php echo createComIcon($root_path,'arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
-		</td>
- -->		
-        <td valign="top"><?php echo $LDDate ?>:<br>
-		<input type=text size=10 maxlength=10 name="dateput" value="<?php echo formatDate2Local(date('Y-m-d'),$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onFocus="this.select()" value="<?php if(!$saved) echo $dateput; ?>" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
-<a href="javascript:show_calendar('berichtform.dateput','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a><font size=1 face="arial">[<?php
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer;
- ?>]</font>
+		<td valign="top"><?php echo $LDDate ?>:<br>
+<?php
+		//gjergji : new calendar
+		require_once ('../../js/jscalendar/calendar.php');
+		$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+		$calendar->load_files();
+		//end : gjergji
+		
+		echo $calendar->show_calendar($calendar,$date_format,'dateput');
+		//end gjergji
+?>
+</font>
 
 <!-- 		<a href="javascript:document.berichtform.dateput.value='h';setDate(document.berichtform.dateput);"><img <?php echo createComIcon($root_path,'arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
  -->		
@@ -361,12 +356,11 @@ if($edit) {
 		</td>
  -->		
 		<td valign="top"><?php echo $LDDate ?>:<br>
-		<input type=text size=10 maxlength=10 name="dateput2" value="<?php echo formatDate2Local(date('Y-m-d'),$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onFocus="this.select()" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
-<a href="javascript:show_calendar('berichtform.dateput2','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a><font size=1 face="arial">[<?php
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer;
- ?>]</font>
+		<?php
+		echo $calendar->show_calendar($calendar,$date_format,'dateput2');
+		//end gjergji
+		?>
+</font>
 
 <!-- 		<a href="javascript:document.berichtform.dateput2.value='h';setDate(document.berichtform.dateput2);"><img <?php echo createComIcon($root_path,'arrow-t.gif','0') ?> alt="<?php echo $LDInsertDate ?>"></a>
  -->		
@@ -396,12 +390,12 @@ if($edit) {
 <td>
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> width=99 height=24 alt="<?php echo $LDSave ?>">
 </td>
-<?php endif; ?>
+<?php endif ?>
 <td>
 <!-- <?php if($edit) : ?>
 <a href="javascript:resetinput()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?>  width=156 height=24 alt="<?php echo $LDReset ?>"></a>
 &nbsp;&nbsp;
-<?php endif; ?> -->
+<?php endif ?> -->
 
 <!-- Uncomment the following line if you want to show the cancel button at the bottom of the page -->
 <!--<a href="<?php //echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>-->

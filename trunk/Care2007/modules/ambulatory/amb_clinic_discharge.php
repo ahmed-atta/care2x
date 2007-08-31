@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -157,10 +157,6 @@ function pruf(d)
 //-->
 </script>
 
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 	$sTemp = ob_get_contents();
@@ -179,13 +175,18 @@ $smarty->assign('img_source','<img '.$img_source.' align="top">');
 $smarty->assign('LDLocation',"$LDClinic/$LDDept");
 $smarty->assign('sLocation',$dept);
 $smarty->assign('LDDate',$LDDate);
-
+//gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+//end gjergji
 	if($released){
 		$smarty->assign('released',TRUE);
 		$smarty->assign('x_date',nl2br($x_date));
 	}else{
-		$smarty->assign('sDateInput','<input type="text" name="x_date" size=12 maxlength=10 value="'.formatdate2Local(date('Y-m-d'),$date_format).'"  onBlur="IsValidDate(this,\''.$date_format.'\')"  onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">');
-		$smarty->assign('sDateMiniCalendar',"<a href=\"javascript:show_calendar('discform.x_date','$date_format')\"><img ".createComIcon($root_path,'show-calendar.gif','0','top')."></a>");
+		//gjergji : new calendar
+		$smarty->assign('sDateMiniCalendar',$calendar->show_calendar($calendar,$date_format,'x_date'));
+		//end gjergji
 	}
 	$smarty->assign('LDClockTime',$LDClockTime);
 

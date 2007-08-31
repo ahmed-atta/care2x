@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * , elpidio@care2x.org
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -325,10 +325,6 @@ function printOut()
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 //-->
 </script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -513,14 +509,14 @@ if($edit){
  $smarty->assign('val_gyn_contraceptive',$tpbuffer);
 
  $smarty->assign('LDOpDate',$LDOpDate);
- $tpbuffer='<input type="text" name="op_date"  value="';
- if($mode=="edit") $tpbuffer.= formatDate2Local($stored_request['op_date'],$date_format).'"';
- 	else $tpbuffer.= formatDate2Local(date('Y-m-d'),$date_format).'" size=10 maxlength=10 onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')"';
- $smarty->assign('inputOpDate',$tpbuffer.'>');
  
- $smarty->assign('gifOpCalendar',"<a href=\"javascript:show_calendar('form_test_request.op_date','$date_format')\">
- 		<img ".createComIcon($root_path,'show-calendar.gif','0','absmiddle')."></a>");
-
+	//gjergji : new calendar
+	require_once ('../../js/jscalendar/calendar.php');
+	$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+	$calendar->load_files();
+	$smarty->assign('inputOpDate',$calendar->show_calendar($calendar,$date_format,'op_date',$stored_request['op_date']));
+	//end : gjergji
+	
   $smarty->assign('LDDoctor',$LDDoctor);
   $smarty->assign('LDDept',$LDDept);
   if($mode=="edit") $smarty->assign('val_doctor_sign',stripslashes($stored_request['doctor_sign']));

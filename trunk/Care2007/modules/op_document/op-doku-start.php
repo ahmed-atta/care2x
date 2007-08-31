@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -145,7 +145,7 @@ if($mode=='save')
 	
 	if($mode=='search'||$mode=='paginate'){	# Filter the search and paginate modes
 
-		# Initialize pageï¿½s control variables
+		# Initialize page´s control variables
 		if($mode=='paginate'){
 			$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 			//$searchkey='USE_SESSION_SEARCHKEY';
@@ -481,11 +481,6 @@ function chkForm(d){
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 //-->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -651,23 +646,18 @@ $bg_img=$root_path.'gui/img/common/default/tableHeaderbg3.gif';
 
 <?php 
 
+//gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+//end : gjergji
+
 if($mode=='saveok'){
    echo '<b>'.formatDate2Local($opdoc['op_date'],$date_format).'</b>'; 
 }else{
-    echo '<input name="op_date" type="text" size="10" maxlength=10 value="';
-	if($err_data){
-       echo $op_date;
-	}else{	  
-	     echo  formatDate2Local(date('Y-m-d'),$date_format);
-     }
-
-	echo '"  onBlur="IsValidDate(this,\''.$date_format.'\')"  onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
-?>
- 	 <a href="javascript:show_calendar('opdoc.op_date','<?php echo $date_format; ?>')"><img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
-<?php
-	echo ' ['; 
-    $dfbuffer="LD_".strtr($date_format,".-/","phs");
-    echo $$dfbuffer.']';  
+	//gjergji : new calendar
+	echo $calendar->show_calendar($calendar,$date_format,'op_date');	
+	//end : gjergji 
 }
   
 

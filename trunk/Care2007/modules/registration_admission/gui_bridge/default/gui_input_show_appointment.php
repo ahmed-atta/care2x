@@ -34,20 +34,15 @@ if($bPastDateError) echo '<font class="warnprompt">'.$LDInvalidDate.' '.$LDNoPas
  <table border=0 cellpadding=2 width=100%>
    <tr bgcolor="#f6f6f6">
      <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDate; ?></td>
-     <td><input type="text" name="date" size=10 maxlength=10  
-	 	 value="<?php
-         if(!empty($date)&&($date!=$dbf_nodate)){
-             if($error) echo $date;
-					elseif($mode!='update') echo @formatDate2Local($date,$date_format);
-         }
-          ?>"
-	 	onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-		<a href="javascript:show_calendar('appt_form.date','<?php echo $date_format ?>')">
- 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a> 
- 		<font size=1>[ <?php   
- 		$dfbuffer="LD_".strtr($date_format,".-/","phs");
-  		echo $$dfbuffer;
- 		?> ] </font>
+     <td>
+		<?php
+			//gjergji : new calendar
+			require_once ('../../js/jscalendar/calendar.php');
+			$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+			$calendar->load_files();
+			
+			echo $calendar->show_calendar($calendar,$date_format,'date',$date);
+		?> 		
 		</td>
    </tr>
    <tr bgcolor="#f6f6f6">

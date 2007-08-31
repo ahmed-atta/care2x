@@ -4,6 +4,12 @@
 $sTitle="$LDPersonnelManagement :: $LDNewEmployee ";
 if($full_nr) $sTitle=$sTitle.$full_pnr;
 
+//gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+//end : gjergji
+
 # Start Smarty templating here
  /**
  * LOAD Smarty
@@ -62,11 +68,6 @@ function chkForm(d){
 
 -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -303,27 +304,25 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <tr>
 <td class="adm_item"><?php echo $LDDateJoin; ?>:
 </td>
-<td colspan=2 class="adm_input"><input name="date_join" type="text"  size="12" maxlength=10  value="<?php  if(isset($date_join)&&$date_join!=DBF_NODATE)   echo formatDate2Local($date_join,$date_format); ?>" 
- onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-<a href="javascript:show_calendar('aufnahmeform.date_join','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
- <font size=1>[ <?php   
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer;
- ?> ] </font>
+<td colspan=2 class="adm_input">
+<?php
+//gjergji : new calendar
+echo $calendar->show_calendar($calendar,$date_format,'date_join',$date_join);	
+//end : gjergji
+  ?> 
+  </font>
 </td>
 </tr>
 <tr>
 <td class="adm_item"><?php echo $LDDateExit ?>:
 </td>
-<td colspan=2 class="adm_input"><input name="date_exit" type="text"  size="12" maxlength=10  value="<?php if(isset($date_exit)&&$date_exit!=DBF_NODATE)   echo formatDate2Local($date_exit,$date_format); ?>" 
- onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-<a href="javascript:show_calendar('aufnahmeform.date_exit','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
- <font size=1>[ <?php   
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer;
- ?> ] </font>
+<td colspan=2 class="adm_input">
+<?php
+//gjergji : new calendar
+echo $calendar->show_calendar($calendar,$date_format,'date_exit',$date_exit);	
+//end : gjergji
+  ?>  
+  </font>
 </td>
 </tr>
 <tr>
@@ -335,27 +334,25 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <tr>
 <td class="adm_item"><?php echo $LDContractStart ?>:
 </td>
-<td colspan=2 class="adm_input"><input name="contract_start" type="text"  size="12" maxlength=10  value="<?php  if(isset($contract_start)&&$contract_start!=DBF_NODATE)   echo formatDate2Local($contract_start,$date_format); ?>" 
- onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-<a href="javascript:show_calendar('aufnahmeform.contract_start','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
- <font size=1>[ <?php   
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer;
- ?> ] </font>
+<td colspan=2 class="adm_input">
+<?php
+//gjergji : new calendar
+echo $calendar->show_calendar($calendar,$date_format,'contract_start',$contract_start);	
+//end : gjergji
+?>  
+</font>
  </td>
 </tr>
 <tr>
 <td class="adm_item"><?php echo $LDContractEnd ?>:
 </td>
-<td colspan=2 class="adm_input"><input name="contract_end" type="text" size="12" maxlength=10 value="<?php  if(isset($contract_end)&&$contract_end!=DBF_NODATE)   echo formatDate2Local($contract_end,$date_format); ?>" 
- onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-<a href="javascript:show_calendar('aufnahmeform.contract_end','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
- <font size=1>[ <?php   
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer;
- ?> ] </font></td>
+<td colspan=2 class="adm_input">
+<?php
+//gjergji : new calendar
+echo $calendar->show_calendar($calendar,$date_format,'contract_end',$contract_end);	
+//end : gjergji
+?>  
+</font></td>
 </tr>
 <tr>
 <td class="adm_item"><?php echo $LDPayClass ?>:

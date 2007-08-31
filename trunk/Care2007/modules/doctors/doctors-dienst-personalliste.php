@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -82,7 +82,7 @@ if(!empty($ipath)){
 
 $append='&retpath='.$retpath.'&ipath='.$ipath;
 
-# Initialize pageï¿½s control variables
+# Initialize page´s control variables
 if($mode=='paginate'){
 	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
@@ -195,10 +195,6 @@ function deleteItem(nr){
 <script language="javascript">
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
 
 <?php
  

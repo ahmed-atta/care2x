@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -14,7 +14,6 @@ $lang_tables=array('departments.php');
 define('LANG_FILE','prompt.php');
 $local_user='ck_prod_order_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-
 
 switch($HTTP_SESSION_VARS['sess_user_origin'])
 {
@@ -38,9 +37,20 @@ $datum=date('d.m.Y');
 # Load the medical department list
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
-$dept=$dept_obj->getAllMedical();
 
-$title=$LDSelectDept;
+//begin:gjergji 
+//marr vetem farmacite nqs jam depo
+//perndryshe shof tane repartet
+if($cat=='medlager') 
+		$dept=$dept_obj->getAllPharmacy();
+elseif($cat=='pharma') 
+		$dept=$dept_obj->getAllMedical();
+//end:gjergji
+
+if($cat=='medlager')
+	$title=$LDSelectPharma;
+elseif($cat=='pharma') 
+	$title=$LDSelectDept;
 # Set forward file
 switch($target){
 	case 'catalog': $fileforward=$root_path."modules/products/products-bestellkatalog-edit.php".URL_APPEND."&cat=$cat";
@@ -72,7 +82,10 @@ switch($target){
  $smarty->assign('sWindowTitle',$title);
 
 $smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
-$smarty->assign('LDPlsSelectDept',$LDPlsSelectDept);
+if($cat=='medlager')
+	$smarty->assign('LDPlsSelectDept',$LDPlsSelectFarma);
+elseif($cat=='pharma') 
+	$smarty->assign('LDPlsSelectDept',$LDPlsSelectDept);
 
  # Buffer department rows output
  ob_start();

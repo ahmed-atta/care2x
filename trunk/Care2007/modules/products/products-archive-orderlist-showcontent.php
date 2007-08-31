@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -180,8 +180,8 @@ if($rows>0){
 	echo '</td>
 		<td>'.formatDate2Local($content['order_date'],$date_format).'</td>
 		<td >'.convertTimeToLocal($content['order_time']).'</td>
-		<td>'.$content['modify_id'].'</td>
-		<td>'.substr($content['validator'],0,strpos($content['validator'],'@')).'</td>
+		<td>'.$content['create_id'].'</td>
+		<td>'.$content['validator'].'</td>
 		<td>'.formatDate2Local($content['sent_datetime'],$date_format).'</td>
 		<td>'.convertTimeToLocal(formatDate2Local($content['sent_datetime'],$date_format,0,1)).'</td>
 		<td>'.$content['priority'].'</td>
@@ -224,7 +224,12 @@ if($rows>0){
 					<td>'.$r['artikelname'].'</td>
 					<td>'.$r['pcs'].'</td>
 					<td ><nobr>X '.$r['proorder'].'</nobr></td>
-					<td>'.$r['bestellnum'].'</td>';
+					<td>'.$r['doza'].'</td>
+					<td>'.$r['njesia'].'</td>		
+					<td>'.$r['cmimi'].'</td>		
+					<td>'.$r['cmimi'] * $r['pcs'].'</td>	
+					<td>'.$r['skadenca'] .'</td>
+					<td>'.$r['bestellnum'].'</td>';		
 					echo '<td><a href="javascript:popinfo(\''.$r['bestellnum'].'\')" ><img '.$img_info.' alt="'.$LDOpenInfo.$r['artikelname'].'"></a></td>
 				</tr>';
 		$i++;
