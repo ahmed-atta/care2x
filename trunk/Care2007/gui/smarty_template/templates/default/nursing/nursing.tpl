@@ -30,10 +30,6 @@
 
 					{{include file="common/submenu_row_spacer.tpl"}}
 
-					{{$LDStationMan}}
-
-					{{include file="common/submenu_row_spacer.tpl"}}
-
 					{{$LDNursesList}}
 
 					{{include file="common/submenu_row_spacer.tpl"}}
