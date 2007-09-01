@@ -13,20 +13,22 @@ if($edit || $read_form){
  $smarty->assign('LDImmuneHistoChem',$LDImmuneHistoChem);
  $smarty->assign('LDHormoneReceptors',$LDHormoneReceptors);
  $smarty->assign('LDSpecials',$LDSpecials);
-
+//gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+//end gjergji
  # Collect buffer output
  ob_start();
 
  if($printmode){
 	if($stored_request['entry_date']!=DBF_NODATE) $smarty->assign('entry_date', formatDate2Local($stored_request['entry_date'],$date_format));
-}else{
+ }else{
 
 	if($stored_request['status']=='pending'){
-		$smarty->assign("miniCalendar","<a href=\"javascript:show_calendar('form_test_request.entry_date','$date_format')\"><img ".createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE)."></a>");
-		$tpbuffer='<input type="text" name="entry_date" size=10 maxlength=10  onBlur="IsValidDate(this,\''.$date_format.'\')" onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')" value="';
-		if($stored_request['entry_date'] && $stored_request['entry_date']!=DBF_NODATE) $tpbuffer.= @formatDate2Local($stored_request['entry_date'],$date_format).'" onBlur="IsValidDate(this,\''.$date_format.'\')';
-			else $tpbuffer.= @formatDate2Local(date('Y-m-d'),$date_format);
-		$smarty->assign('entry_date',$tpbuffer.'">');
+		//gjergji : new calendar
+		$smarty->assign('entry_date',$calendar->show_calendar($calendar,$date_format,'entry_date',$stored_request['entry_date']));
+		//end gjergji
 	}else{
 		$smarty->assign('entry_date',@formatDate2Local($stored_request['entry_date'],$date_format));
 	}

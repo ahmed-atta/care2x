@@ -108,18 +108,18 @@ function createInputBlock($param, $value){
 		 <?php echo $LDDate ?>:
 		 <?php
 
-	         if($stored_findings['findings_date']) $fdate=formatDate2Local($stored_findings['findings_date'],$date_format);
-				      else $fdate=formatDate2Local(date('Y-m-d'),$date_format);
-
 		     //$fdate=formatDate2Local($stored_findings['findings_date'],$date_format);
 
-			createInputBlock('findings_date',$fdate);
+			//createInputBlock('findings_date',$fdate);
 
 			if($edit){
-		  ?>
-		  	<a href="javascript:show_calendar('form_test_request.findings_date','<?php echo $date_format ?>')">
-			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
-		  <?php
+				//gjergji : new calendar
+				require_once ('../../js/jscalendar/calendar.php');
+				$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+				$calendar->load_files();
+		
+				echo $calendar->show_calendar($calendar,$date_format,'findings_date',$stored_findings['findings_date']);
+				//end gjergji
 		  }
 		  ?>
             </div></td>

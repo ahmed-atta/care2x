@@ -649,14 +649,15 @@ for($n=0;$n<8;$n++)
 	
     if($edit_findings)
 	 {
-	    echo '&nbsp;<input type="text" name="rec_date" size=10 maxlength=10 value="';
-	    if($stored_findings['rec_date'] && $stored_findings['rec_date']!='0000-00-00') echo formatDate2Local($stored_findings['rec_date'],$date_format);
-		  else echo formatDate2Local(date('Y-m-d'),$date_format);
-		echo '" onBlur="IsValidDate(this,\''.$date_format.'\')"  onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
-	?>
-		<a href="javascript:show_calendar('form_test_request.rec_date','<?php echo $date_format ?>')">
-		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
-	<?php
+	    if($stored_findings['rec_date'] && $stored_findings['rec_date']!='0000-00-00') $dateRec = formatDate2Local($stored_findings['rec_date'],$date_format);
+		  else $dateRec = formatDate2Local(date('Y-m-d'),$date_format);
+		//gjergji : new calendar
+		require_once ('../../js/jscalendar/calendar.php');
+		$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+		$calendar->load_files();
+
+		echo $calendar->show_calendar($calendar,$date_format,'rec_date',$dateRec);
+		//end gjergji
 	 }
 	 else
 	 {

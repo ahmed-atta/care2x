@@ -185,10 +185,10 @@ class Core {
 	function _prepSaveArray(){
 		$x='';
 		$v='';
-
-		while(list($x,$v)=each($this->ref_array)) {
-
-			if(isset($this->data_array[$v])&&($this->data_array[$v]!='')) {
+		while(list($x,$v)=each($this->ref_array)) {	
+			// Gjergj Sheldija : 
+			// deleted && ($this->data_array[$v]!='') gives me errors when var value == 0		
+			if(isset($this->data_array[$v]) ) {
 				$this->buffer_array[$v]=$this->data_array[$v];
 				if($v=='create_time' && $this->data['create_time']!='') $this->buffer_array[$v] = date('YmdHis');
 			}
@@ -234,7 +234,6 @@ class Core {
 	function getAllItemsObject(&$items) {
 		global $db;
 		$this->sql="SELECT $items  FROM $this->coretable";
-        	//echo $this->sql;
         	if($this->res['gaio']=$db->Execute($this->sql)) {
 			if($this->rec_count=$this->res['gaio']->RecordCount()) {
 				 return $this->res['gaio'];
@@ -260,7 +259,6 @@ class Core {
 	function getAllDataObject() {
 	    global $db;
 	    $this->sql="SELECT *  FROM $this->coretable";
-        //echo $this->sql;
         if($this->res['gado']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['gado']->RecordCount()) {
 				 return $this->res['gado'];	 
@@ -289,7 +287,6 @@ class Core {
 	function getAllItemsArray(&$items) {
 	    global $db;
 	    $this->sql="SELECT $items  FROM $this->coretable";
-        //echo $this->sql;
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
 				 //while($this->ref_array=$this->result->FetchRow());
@@ -317,7 +314,6 @@ class Core {
 	function getAllDataArray() {
 	    global $db;
 	    $this->sql="SELECT *  FROM $this->coretable";
-        //echo $this->sql;
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
 				 while($this->ref_array=$this->result->FetchRow());
@@ -335,25 +331,27 @@ class Core {
 	* @return boolean
 	*/	
    function insertDataFromArray(&$array) {
-		global $dbtype;
+   		global $dbtype;
 		$x='';
 		$v='';
 		$index='';
 		$values='';
+		//mizuko : bug for concat  when inserting...
+		if($dbtype=='postgres7'||$dbtype=='postgres') $concatfx='||';
+			else $concatfx='concat';		
 		if(!is_array($array)){ return FALSE;}
 		while(list($x,$v)=each($array)) {
 			# use backquoting for mysql and no-quoting for other dbs 
 			if ($dbtype=='mysql') $index.="`$x`,";
 				else $index.="$x,";
 				
-			if(stristr($v,'null')) $values.='NULL,';
+			if(stristr($v,$concatfx)||stristr($v,'null')) $values.=" $v,";
 				else $values.="'$v',";
-		}
+		}		
 		reset($array);
 		$index=substr_replace($index,'',(strlen($index))-1);
 		$values=substr_replace($values,'',(strlen($values))-1);
-        $this->sql="INSERT INTO $this->coretable ($index) VALUES ($values)";		
-		//echo $this->sql;//exit;
+		$this->sql="INSERT INTO $this->coretable ($index) VALUES ($values)";
 		reset($array);
 		return $this->Transact();
 	}
@@ -369,16 +367,15 @@ class Core {
 	* @return boolean
 	*/
     function updateDataFromArray(&$array,$item_nr='',$isnum=TRUE) {
-    	global $dbtype;
+    	global $dbtype;	
 		$x='';
 		$v='';
 		$elems='';
 		if($dbtype=='postgres7'||$dbtype=='postgres') $concatfx='||';
 			else $concatfx='concat';
 		if(empty($array)) return FALSE;
-		if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
+		if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;			
 		while(list($x,$v)=each($array)) {
-
 			# use backquoting for mysql and no-quoting for other dbs. 
 			if ($dbtype=='mysql') $elems.="`$x`=";
 				else $elems.="$x=";
@@ -388,13 +385,12 @@ class Core {
 		}
 		# Bug fix. Reset array.
 		reset($array);
-		//echo strlen($elems)." leng<br>";
+
 		$elems=substr_replace($elems,'',(strlen($elems))-1);
 		if(empty($this->where)) $this->where="nr=$item_nr";
         $this->sql="UPDATE $this->coretable SET $elems WHERE $this->where";
 		# Bug fix. Reset the condition variable to prevent affecting subsequent update calls. 
 		$this->where=''; 
-		//echo $this->sql.'<br>';
 		return $this->Transact();
 	}
 	/**
@@ -410,7 +406,7 @@ class Core {
 	*/
     function updateDataFromInternalArray($item_nr='',$isnum=TRUE) {
 		if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
-	    $this->_prepSaveArray();
+	    $this->_prepSaveArray();	    
 		return $this->updateDataFromArray($this->buffer_array,$item_nr,$isnum);
 	}
 	/**

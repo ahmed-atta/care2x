@@ -68,7 +68,6 @@ class Ward extends Encounter {
 									'dept_nr',
 									'room_nr_start',
 									'room_nr_end',
-									'maxbed',
 									'roomprefix',
 									'status',
 									'history',
@@ -129,10 +128,21 @@ class Ward extends Encounter {
 	* @access public
 	* @param string Field names of items to be fetched
 	* @return mixed adodb record object or boolean
+	* @author Gjergj Sheldija
 	*/
-	function getAllWardsItemsObject(&$items) {
+	function getAllWardsItemsObject(&$items, $dept_nr='0') {
 	    global $db;
 	    $this->sql="SELECT $items  FROM $this->tb_ward WHERE status NOT IN ($this->dead_stat)";
+	    //gjergji - show only info on my departement
+		if(isset($dept_nr) && !empty($dept_nr) ) {
+			$this->sql.=" AND ( ";
+			while (list($key, $val) = each($dept_nr)) {
+				$tmp .= "dept_nr = " . $val . " OR ";
+	
+			}
+			$this->sql .= substr($tmp,0,-4) ;
+			$this->sql .= " ) "	;
+	    }
         //echo $this->sql;
         if($this->res['gawio']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['gawio']->RecordCount()) {
@@ -503,10 +513,10 @@ class Ward extends Encounter {
 			$action='Closed temporary';
 		}else{
 			$action='Reopened';
-		}
+		} 
 		$data['history']="CONCAT(history,'$action: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
 		$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array=$data;
+		$this->data_array=$data;		
 		return $this->updateDataFromInternalArray($nr);
 	}
 	/**

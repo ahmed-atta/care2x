@@ -479,10 +479,12 @@ class GuiInputPerson {
 ?>
 		-->
 		</script>
-		<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-		<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-		<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 <?php
+		//gjergji : new calendar
+		require_once ('../../js/jscalendar/calendar.php');
+		$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+		$calendar->load_files();
+		//end : gjergji
 		$sTemp = ob_get_contents();
 		ob_end_clean();
 		
@@ -608,29 +610,22 @@ class GuiInputPerson {
 
 		if ($errordatebirth) $this->smarty->assign('LDBday',"<font color=red>* $LDBday</font>:");
 			else $this->smarty->assign('LDBday',"<font color=red>*</font> $LDBday:");
-
-		if($date_birth){
+			
+		//gjergji : new calendar
+/*		if($date_birth){
 			if($mode=='save'||$error||$error_person_exists) $sBdayBuffer = $date_birth;
 				else $sBdayBuffer = formatDate2Local($date_birth,$date_format);
-		}
+		}*/
 		# Uncomment the following when the current date must be inserted
 		# automatically at the start of each document
 		/*else{
 			$sBdayBuffer = formatDate2Local(date('Y-m-d'),$date_format);
 		}*/
-
-		$sDateJS= 'onFocus="this.select();"
-				onBlur="IsValidDate(this,\''.$date_format.'\')"
-				onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\')">
-				<a href="javascript:show_calendar(\'aufnahmeform.date_birth\',\''.$date_format.'\')">
-				<img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle').'></a>
-				<font size=1>[';
-
-		$dfbuffer="LD_".strtr($date_format,".-/","phs");
-		$sDateJS = $sDateJS.$$dfbuffer.']';
-
-		$this->smarty->assign('sBdayInput','<input name="date_birth" type="text" size="15" maxlength=10 value="'.$sBdayBuffer.'" '.$sDateJS);
-
+		
+		//gjergji : new calendar
+		$this->smarty->assign('sBdayInput',$calendar->show_calendar($calendar,$date_format,'date_birth',$date_birth));
+		//end gjergji
+		
 		if ($errorsex) $this->smarty->assign('LDSex', "<font color=#ff0000>* $LDSex</font>:");
 			else $this->smarty->assign('LDSex', "<font color=#ff0000>*</font> $LDSex:");
 
