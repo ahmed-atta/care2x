@@ -9,36 +9,36 @@ Radyoloji - Dicom arama
 
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir hastanÄ±n dicom resmi nasÄ±l aranÄ±r?</b>
+Bir hastanın dicom resmi nasıl aranır?</b>
 </font>
 	
 	<ul>       	
- 	<b>AdÄ±m 1: </b>HastanÄ±n ad, soyad, protokol numarasÄ±nÄ± veya birkaÃ§ harfini ilgili arama alanÄ±na giriniz. <br>
- 	<b>AdÄ±m 2: </b>HastanÄ±n dicom resimlerini aramaya baÅŸlamak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p> 
+ 	<b>Adım 1: </b>Hastanın ad, soyad, protokol numarasını veya birkaç harfini ilgili arama alanına giriniz. <br>
+ 	<b>Adım 2: </b>Hastanın dicom resimlerini aramaya başlamak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düğmesini tıklayınız.<p> 
 <ul>       	
- 	<b>UyarÄ±: </b>Joker harf olarak % veya * kullanabilirsiniz. <p>
- 	<b>UyarÄ±: </b>EÄŸer arama bir sonuÃ§ verir ise, bir resim listesi gÃ¶rÃ¼nÃ¼r. <p>
+ 	<b>Uyarı: </b>Joker harf olarak % veya * kullanabilirsiniz. <p>
+ 	<b>Uyarı: </b>Eğer arama bir sonuç verir ise, bir resim listesi görünür. <p>
 	</ul>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Resimler nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b>
+Resimler nasıl görüntülenir?</b>
 </font>
 	<ul>       	
- 	<b>AdÄ±m: </b> Resmi aynÄ± pencerede gÃ¶rÃ¼ntÃ¼lemek iÃ§in (tarayÄ±cÄ±dan tarayÄ±cÄ±ya deÄŸiÅŸebilir)  <img <?php echo createComIcon('../','torso.gif','0','absmiddle') ?>>  simgesine tÄ±klayÄ±nÄ±z.<p>
+ 	<b>Adım: </b> Resmi aynı pencerede görüntülemek için (tarayıcıdan tarayıcıya değişebilir)  <img <?php echo createComIcon('../','torso.gif','0','absmiddle') ?>>  simgesine tıklayınız.<p>
 	<img src="../help/tr/img/tr_dicom_in.png" border=0 width=314 height=90>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Resim ek bir pencerede nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b>
+Resim ek bir pencerede nasıl görüntülenir?</b>
 </font>
 	<ul>       	
- 	<b>AdÄ±m: </b> Resmi ayrÄ± pencerede aÃ§mak iÃ§in <img <?php echo createComIcon('../','torso_win.gif','0','absmiddle') ?>>  simgesini tÄ±klayÄ±nÄ±z.<p>
+ 	<b>Adım: </b> Resmi ayrı pencerede açmak için <img <?php echo createComIcon('../','torso_win.gif','0','absmiddle') ?>>  simgesini tıklayınız.<p>
 	<img src="../help/tr/img/tr_dicom_ex.png" border=0 width=314 height=90>
 </ul>
 
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
- Kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> simgesini  tÄ±klayÄ±nÄ±z.
+ Kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> simgesini  tıklayınız.
 </ul>
 
 

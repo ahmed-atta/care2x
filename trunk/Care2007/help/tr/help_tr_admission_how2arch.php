@@ -1,120 +1,120 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>ArÅŸiv nasÄ±l aranÄ±r</b></font>
+<b>Arşiv nasıl aranır</b></font>
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 
 <?php if($src=="select") : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>GÃ¶rÃ¼nen bilgileri gÃ¼ncellemek istiyorum</b></font>
-<ul> <b>AdÄ±m : </b>Bilgileri dÃ¼zenlemeye baÅŸlamak iÃ§in <input type="button" value="Bilgi gÃ¼ncelle"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Görünen bilgileri güncellemek istiyorum</b></font>
+<ul> <b>Adım : </b>Bilgileri düzenlemeye başlamak için <input type="button" value="Bilgi güncelle"> düğmesini tıklayınız.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>ArÅŸivde yeni bir arama baÅŸlatmak istiyorum</b></font>
-<ul> <b>AdÄ±m : </b>Yeni bir arama baÅŸlatmak iÃ§in <input type="button" value="ArÅŸivde yeni arama"> dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Arşivde yeni bir arama başlatmak istiyorum</b></font>
+<ul> <b>Adım : </b>Yeni bir arama başlatmak için <input type="button" value="Arşivde yeni arama"> düğmesini tıklatınız.<br>
 </ul>
 <?php elseif($src=="Ara") : ?>
-<b>UyarÄ±</b>
-<ul> EÄŸer aramada tek bir sonuÃ§ bulunur ise, bilginin tamamÄ± derhal gÃ¶sterilir.<br>
-		EÄŸer, aramada bir kaÃ§ sonuÃ§ bulunur ise, bir liste gÃ¶rÃ¼ntÃ¼lenir.<br>
-		AradÄ±ÄŸÄ±nÄ±z hastanÄ±n bilgilerini gÃ¶rmek iÃ§in ya ilgili  <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> simgesine ya da ad, soyad, veya kabul tarihi Ã¼zerine tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Eğer aramada tek bir sonuç bulunur ise, bilginin tamamı derhal gösterilir.<br>
+		Eğer, aramada bir kaç sonuç bulunur ise, bir liste görüntülenir.<br>
+		Aradığınız hastanın bilgilerini görmek için ya ilgili  <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> simgesine ya da ad, soyad, veya kabul tarihi üzerine tıklayınız.
 </ul>
-<b>UyarÄ±</b>
-<ul> EÄŸer yeni bir arama baÅŸlatmak isterseniz  <input type="button" value="ArÅŸivde yeni arama"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Eğer yeni bir arama başlatmak isterseniz  <input type="button" value="Arşivde yeni arama"> düğmesini tıklayınız.
 </ul>
 <?php else : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>BugÃ¼n kabul edilen tÃ¼m hastalarÄ± listelemek istiyorum</b></font>
-<ul> <b>AdÄ±m 1: </b>BugÃ¼nÃ¼n tarihini "Kabul tarihi: Åu tarihten itibaren:" alanÄ±na giriniz. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bugün kabul edilen tüm hastaları listelemek istiyorum</b></font>
+<ul> <b>Adım 1: </b>Bugünün tarihini "Kabul tarihi: Şu tarihten itibaren:" alanına giriniz. <br>
 		<ul><font size=1 color="#000099">
-		<b>Ä°p ucu:</b> Otomatik olarak bugÃ¼nÃ¼n tarihinin girilmesi iÃ§in  "B" veya "T" girebilirsiniz.<br>
+		<b>İp ucu:</b> Otomatik olarak bugünün tarihinin girilmesi için  "B" veya "T" girebilirsiniz.<br>
 		</font>
-		</ul><b>AdÄ±m 2: </b>"ye kadar:" alanÄ±nÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
-		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in  <input type="button" value="ARA">  dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z.<br>
+		</ul><b>Adım 2: </b>"ye kadar:" alanını boş bırakınız.<br>
+		<b>Adım 3: </b>Aramayı başlatmak için  <input type="button" value="ARA">  düğmesine tıklayınız.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ä°ki tarih arasÄ±nda kaydedilmiÅŸ tÃ¼m hastalarÄ± listelemek istiyorum</b></font>
-<ul> <b>AdÄ±m 1: </b>BaÅŸlangÄ±Ã§ tarihini "Kabul tarihi: Åu tarihten itibaren:" alanÄ±na giriniz. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>İki tarih arasında kaydedilmiş tüm hastaları listelemek istiyorum</b></font>
+<ul> <b>Adım 1: </b>Başlangıç tarihini "Kabul tarihi: Şu tarihten itibaren:" alanına giriniz. <br>
 		<ul><font size=1 color="#000099">
-		<b>Ä°pucu:</b> BugÃ¼nkÃ¼ tarihin otomatik olarak yazÄ±lmasÄ± iÃ§in  "B" veya "T" giriniz.<br>
-		<b>Ä°pucu:</b> DÃ¼nkÃ¼ tarihin otomatik yazÄ±lmasÄ± iÃ§in  "D" veya  "Y" giriniz.<br>
+		<b>İpucu:</b> Bugünkü tarihin otomatik olarak yazılması için  "B" veya "T" giriniz.<br>
+		<b>İpucu:</b> Dünkü tarihin otomatik yazılması için  "D" veya  "Y" giriniz.<br>
 		</font>
-		</ul><b>AdÄ±m 2: </b>BitiÅŸ tarihini "ÅŸu tarihe kadar:" alanÄ±na giriniz.<br>
-		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in <input type="button" value="ARA">  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+		</ul><b>Adım 2: </b>Bitiş tarihini "şu tarihe kadar:" alanına giriniz.<br>
+		<b>Adım 3: </b>Aramayı başlatmak için <input type="button" value="ARA">  düğmesini tıklayınız.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Kabul edilmiÅŸ tÃ¼m erkek hastalarÄ± listelemek istiyorum</b></font>
-<ul> <b>AdÄ±m 1: </b> "Cinsiyet <input type="radio" name="r" value="1"> seÃ§enek dÃ¼ÄŸmesinden erkek seÃ§iniz". <br>
-		<b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
-		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in <input type="button" value="ARA">  dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Kabul edilmiş tüm erkek hastaları listelemek istiyorum</b></font>
+<ul> <b>Adım 1: </b> "Cinsiyet <input type="radio" name="r" value="1"> seçenek düğmesinden erkek seçiniz". <br>
+		<b>Adım 2: </b>Tüm diğer alanları boş bırakınız.<br>
+		<b>Adım 3: </b>Aramayı başlatmak için <input type="button" value="ARA">  düğmesini tıklatınız.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Kabul edilmiÅŸ tÃ¼m kadÄ±n hastalarÄ± listelemek istiyorum</b></font>
-<ul> <b>AdÄ±m 1: </b> "Cinsiyet <input type="radio" name="r" value="1"> seÃ§enek dÃ¼ÄŸmesinden KadÄ±n seÃ§iniz". <br>
-		<b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
-		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in <input type="button" value="ARA">  dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Kabul edilmiş tüm kadın hastaları listelemek istiyorum</b></font>
+<ul> <b>Adım 1: </b> "Cinsiyet <input type="radio" name="r" value="1"> seçenek düğmesinden Kadın seçiniz". <br>
+		<b>Adım 2: </b>Tüm diğer alanları boş bırakınız.<br>
+		<b>Adım 3: </b>Aramayı başlatmak için <input type="button" value="ARA">  düğmesini tıklatınız.<br>
 </ul>
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>PolikliniÄŸe kabul edilmiÅŸ tÃ¼m hastalarÄ± listelemek istiyorum </b></font>
-<ul> <b>AdÄ±m 1: </b>SeÃ§enek dÃ¼ÄŸmesinden "<input type="radio" name="r" value="1">Ayaktan" seÃ§iniz. <br>
-		<b>AdÄ±m 2 : </b>DiÄŸer alanlarÄ±n hepsini boÅŸ bÄ±rakÄ±nÄ±z.<br>
-		<b>AdÄ±m 3: </b>Aramaya baÅŸlamak iÃ§in <input type="button" value="ARA">  dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Polikliniğe kabul edilmiş tüm hastaları listelemek istiyorum </b></font>
+<ul> <b>Adım 1: </b>Seçenek düğmesinden "<input type="radio" name="r" value="1">Ayaktan" seçiniz. <br>
+		<b>Adım 2 : </b>Diğer alanların hepsini boş bırakınız.<br>
+		<b>Adım 3: </b>Aramaya başlamak için <input type="button" value="ARA">  düğmesine tıklayınız.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>TÃ¼m yatan hastalarÄ± aramak istiyorum</b></font>
-<ul> <b>AdÄ±m 1: </b> "<input type="radio" name="r" value="1">Yatan" dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z. <br>
-		<b>AdÄ±m 2: </b>DiÄŸer tÃ¼m alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
-		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in  <input type="button" value="ARA">  dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Tüm yatan hastaları aramak istiyorum</b></font>
+<ul> <b>Adım 1: </b> "<input type="radio" name="r" value="1">Yatan" düğmesine tıklayınız. <br>
+		<b>Adım 2: </b>Diğer tüm alanları boş bırakınız.<br>
+		<b>Adım 3: </b>Aramayı başlatmak için  <input type="button" value="ARA">  düğmesini tıklatınız.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ãœcretli hastalarÄ± listelemek istiyorum </b></font>
-<ul> <b>AdÄ±m 1: </b>"<input type="radio" name="r" value="1">Ãœcretli" dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
-		<b>AdÄ±m 2: </b>DiÄŸer tÃ¼m alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
-		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in  <input type="button" value="ARA">  dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ücretli hastaları listelemek istiyorum </b></font>
+<ul> <b>Adım 1: </b>"<input type="radio" name="r" value="1">Ücretli" düğmesini tıklayınız. <br>
+		<b>Adım 2: </b>Diğer tüm alanları boş bırakınız.<br>
+		<b>Adım 3: </b>Aramayı başlatmak için  <input type="button" value="ARA">  düğmesini tıklatınız.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Ã–zel sigortalÄ± tÃ¼m hastalarÄ± listelemek istiyorum </b></font>
-<ul> <b>AdÄ±m 1: </b>"<input type="radio" name="r" value="1">Ã–zel" dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
-		<b>AdÄ±m 2: </b>DiÄŸer tÃ¼m alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
-		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in  <input type="button" value="ARA">  dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Özel sigortalı tüm hastaları listelemek istiyorum </b></font>
+<ul> <b>Adım 1: </b>"<input type="radio" name="r" value="1">Özel" düğmesini tıklayınız. <br>
+		<b>Adım 2: </b>Diğer tüm alanları boş bırakınız.<br>
+		<b>Adım 3: </b>Aramayı başlatmak için  <input type="button" value="ARA">  düğmesini tıklatınız.<br>
 </ul>
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>TÃ¼m genel saÄŸlÄ±k sigortalÄ± hastalarÄ± listelemek istiyorum </b></font>
-<ul> <b>AdÄ±m 1: </b>"<input type="radio" name="r" value="1">Genel" dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
-		<b>AdÄ±m 2: </b>DiÄŸer tÃ¼m alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
-		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in  <input type="button" value="ARA">  dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Tüm genel sağlık sigortalı hastaları listelemek istiyorum </b></font>
+<ul> <b>Adım 1: </b>"<input type="radio" name="r" value="1">Genel" düğmesini tıklayınız. <br>
+		<b>Adım 2: </b>Diğer tüm alanları boş bırakınız.<br>
+		<b>Adım 3: </b>Aramayı başlatmak için  <input type="button" value="ARA">  düğmesini tıklatınız.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir anahtar sÃ¶zcÃ¼klÃ¼ tÃ¼m hastalarÄ± aramak istiyorum.</b></font>
-<ul> <b>AdÄ±m 1: </b>Ä°lgili alana anahtar sÃ¶zcÃ¼ÄŸÃ¼ giriniz. TÃ¼m bir sÃ¶zcÃ¼k veya bitkaÃ§ harf olabilir. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir anahtar sözcüklü tüm hastaları aramak istiyorum.</b></font>
+<ul> <b>Adım 1: </b>İlgili alana anahtar sözcüğü giriniz. Tüm bir sözcük veya bitkaç harf olabilir. <br>
 		<ul><font size=1 color="#000099" >
-		<b>Ã–rnek:</b> TanÄ± anahtar sÃ¶zcÃ¼ÄŸÃ¼ iÃ§in "TanÄ±" alanÄ±na giriniz.<br>
-		<b>Ã–rnek:</b> GÃ¶nderen anahtar sÃ¶zcÃ¼ÄŸÃ¼ iÃ§in "GÃ¶nderen" alanÄ±na giriniz.<br>
-		<b>Ã–rnek:</b> Tedavi anahtar sÃ¶zcÃ¼ÄŸÃ¼ iÃ§in "Ã–nerilen tedavi" alanÄ±na giriniz.<br>
-		<b>Ã–rnek:</b> Ã–zel notlar anahtar sÃ¶zcÃ¼ÄŸÃ¼ iÃ§in "Ã–zel notlar" alanÄ±na giriniz.<br>
+		<b>Örnek:</b> Tanı anahtar sözcüğü için "Tanı" alanına giriniz.<br>
+		<b>Örnek:</b> Gönderen anahtar sözcüğü için "Gönderen" alanına giriniz.<br>
+		<b>Örnek:</b> Tedavi anahtar sözcüğü için "Önerilen tedavi" alanına giriniz.<br>
+		<b>Örnek:</b> Özel notlar anahtar sözcüğü için "Özel notlar" alanına giriniz.<br>
 		</font>
-		</ul><b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±Ä±z.<br>
-		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in <input type="button" value="ARA">  dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<br>
+		</ul><b>Adım 2: </b>Tüm diğer alanları boş bırakınıız.<br>
+		<b>Adım 3: </b>Aramayı başlatmak için <input type="button" value="ARA">  düğmesini tıklatınız.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belli anahtar sÃ¶zcÃ¼kleri olan belirli bir hastayÄ± arÄ±yorum</b></font>
-<ul> <b>AdÄ±m 1: </b>Ä°lgili alana anahtar sÃ¶zcÃ¼ÄŸÃ¼ giriniz. Tam bir sÃ¶zcÃ¼k ya da birkaÃ§ harf olabilir. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belli anahtar sözcükleri olan belirli bir hastayı arıyorum</b></font>
+<ul> <b>Adım 1: </b>İlgili alana anahtar sözcüğü giriniz. Tam bir sözcük ya da birkaç harf olabilir. <br>
 		<ul><font size=1 color="#000099" >
-		<b>AÅŸaÄŸÄ±daki alanlar bir anahtar sÃ¶zcÃ¼k ile doldurulabilir:</b>
-		<br> Protokol numarasÄ±
+		<b>Aşağıdaki alanlar bir anahtar sözcük ile doldurulabilir:</b>
+		<br> Protokol numarası
 		<br> Soyad
 		<br> Ad
-		<br> DoÄŸum tarihi
+		<br> Doğum tarihi
 		<br> Adres
 		</font>
-		</ul><b>AdÄ±m 2: </b>TÃ¼m diÄŸer alanlarÄ± boÅŸ bÄ±rakÄ±nÄ±z.<br>
-		<b>AdÄ±m 3: </b>AramayÄ± baÅŸlatmak iÃ§in <input type="button" value="ARA">  dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<br>
+		</ul><b>Adım 2: </b>Tüm diğer alanları boş bırakınız.<br>
+		<b>Adım 3: </b>Aramayı başlatmak için <input type="button" value="ARA">  düğmesini tıklatınız.<br>
 </ul>
-<b>UyarÄ±</b>
-<ul> BirkaÃ§ arama koÅŸulunu birlikte kullanabilirsiniz. Ã–rnek olarak: 10.12.1999 tarihi ile 24.01.2000 tarihleri arasÄ±nda kabul edilmiÅŸ tÃ¼m ERKEK hastalarÄ± listelemek isterseniz:<p>
-		<b>AdÄ±m 1: </b>"Kabul tarihi den itibaren" alanÄ±na "10.12.1999" giriniz. <br>
-		<b>AdÄ±m 2: </b>"Ye kadar:" alanÄ±na "24.01.2000 giriniz.<br>
-		<b>AdÄ±m 3: </b>Cinsiyet seÃ§imi dÃ¼ÄŸmesinden "Cinsiyet <input type="radio" name="r" value="1">male" erkek seÃ§iniz. <br>
-		<b>AdÄ±m 4: </b>AramayÄ± baÅŸlatmak iÃ§in  <input type="button" value="ARA">  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+<b>Uyarı</b>
+<ul> Birkaç arama koşulunu birlikte kullanabilirsiniz. Örnek olarak: 10.12.1999 tarihi ile 24.01.2000 tarihleri arasında kabul edilmiş tüm ERKEK hastaları listelemek isterseniz:<p>
+		<b>Adım 1: </b>"Kabul tarihi den itibaren" alanına "10.12.1999" giriniz. <br>
+		<b>Adım 2: </b>"Ye kadar:" alanına "24.01.2000 giriniz.<br>
+		<b>Adım 3: </b>Cinsiyet seçimi düğmesinden "Cinsiyet <input type="radio" name="r" value="1">male" erkek seçiniz. <br>
+		<b>Adım 4: </b>Aramayı başlatmak için  <input type="button" value="ARA">  düğmesini tıklayınız.<br>
 </ul>
-<b>UyarÄ±</b>
-<ul> Arama tek bir kayÄ±t bulur ise o kayÄ±tla ilgili bÃ¼tÃ¼n bilgi derhal gÃ¶rÃ¼ntÃ¼lenir.<br>
-		Ancak arama birkaÃ§ sonuÃ§ bulur ise, bir liste gÃ¶rÃ¼ntÃ¼lenir.<br>
-		AradÄ±ÄŸÄ±nÄ±z hasta ile ilgili bilgiyi gÃ¶rmak iÃ§in hastanÄ±n <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> dÃ¼ÄŸmesini, veya ad, soyad, veya kabul tarihini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Arama tek bir kayıt bulur ise o kayıtla ilgili bütün bilgi derhal görüntülenir.<br>
+		Ancak arama birkaç sonuç bulur ise, bir liste görüntülenir.<br>
+		Aradığınız hasta ile ilgili bilgiyi görmak için hastanın <img <?php echo createComIcon('../','r_arrowgrnsm.gif','0') ?>> düğmesini, veya ad, soyad, veya kabul tarihini tıklayınız.
 </ul>
 
-<?php endif;?>
-<b>UyarÄ±</b>
-<ul> AramayÄ± iptal etmek isterseniz <input type="button" value="Cancel"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<?php endif ?>
+<b>Uyarı</b>
+<ul> Aramayı iptal etmek isterseniz <input type="button" value="Cancel"> düğmesini tıklayınız.
 </ul>
 </form>
 

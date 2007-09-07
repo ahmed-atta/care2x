@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <title>CARE 2X</title>
 
 </head>
@@ -12,16 +12,16 @@
 <blockquote><font face="Verdana, Arial" size=2>
 <img <?php echo createComIcon('../','butft2_d.gif') ?>><p>
 <b>Care 2X'i <br>
-KullanÄ±r iken ilk adÄ±mlar</b><p>
-Care 2X in, internet veya intranetin gÃ¼cÃ¼ ile saÄŸlÄ±k Ã¶rgÃ¼tÃ¼nÃ¼zdeki her Ã§eÅŸit bilgiyi bulabilir ve iÅŸleyebilirsiniz. BasitÃ§e sol taraftaki  "Online Manual" Ä± tÄ±klayÄ±nÄ±z sisteminiz ve Care2X ile kolayca Ã§alÄ±ÅŸmanÄ±zÄ± saÄŸlayacak bilgilere ulaÅŸacaksÄ±nÄ±z.(Bu site Ä°ngilizcedir)
+Kullanır iken ilk adımlar</b><p>
+Care 2X in, internet veya intranetin gücü ile sağlık örgütünüzdeki her çeşit bilgiyi bulabilir ve işleyebilirsiniz. Basitçe sol taraftaki  "Online Manual" ı tıklayınız sisteminiz ve Care2X ile kolayca çalışmanızı sağlayacak bilgilere ulaşacaksınız.(Bu site İngilizcedir)
 <p>
-<a href="../help/tr/help_tr_basic_usage.php"><u>Temel kullanÄ±m</u></a><br>
+<a href="../help/tr/help_tr_basic_usage.php"><u>Temel kullanım</u></a><br>
 <p>
-<a href="../help/tr/help_tr_setpermit.php"><u>EriÅŸim haklarÄ±nÄ±n dÃ¼zenlenmesi</u></a><p>
+<a href="../help/tr/help_tr_setpermit.php"><u>Erişim haklarının düzenlenmesi</u></a><p>
 <p>
-<a href="../help/tr/help_tr_onlineman.php"><u>On line el kitabÄ± nasÄ±l kullanÄ±lÄ±r</u></a><p>
-<a href="http://care2x.org/index.php?lang=<?php echo $lang ?>"><u> CARE 2X projesi hakkÄ±nda bilgiler.</u></a> ( internet eriÅŸimi gerekir)<br>
-Care 2X projesine yeni iseniz, burada gerekli bazÄ± bilgileri bulabilirsiniz. 
+<a href="../help/tr/help_tr_onlineman.php"><u>On line el kitabı nasıl kullanılır</u></a><p>
+<a href="http://care2x.org/index.php?lang=<?php echo $lang ?>"><u> CARE 2X projesi hakkında bilgiler.</u></a> ( internet erişimi gerekir)<br>
+Care 2X projesine yeni iseniz, burada gerekli bazı bilgileri bulabilirsiniz. 
 <!-- <p>
 <a href="#"><u>Introduction to CARE 2002</u></a><br>
 <a href="#"><u>Learning how to do the job faster and easier using CARE 2002</u></a><br>

@@ -1,32 +1,32 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>ArÅŸiv kullanÄ±larak bilgi nasÄ±l araÅŸtÄ±rÄ±lÄ±r?</b></font>
+<b>Arşiv kullanılarak bilgi nasıl araştırılır?</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<b>AdÄ±m 1</b>
+<b>Adım 1</b>
 
-<ul> Kabul edilmiÅŸ bir hastanÄ±n adÄ±, veya soyadÄ±, veya hasta kabul numarasÄ±nÄ±n ya tam ya da birkaÃ§ harflik kÄ±smÄ±nÄ± giriniz.
-		<p>Ã–rnek 1: "21000012" veya "12" giriniz.
-		<br>Ã–rnek 2:  "Ceren" veya "cer" giriniz.
-		<br>Ã–rnek 3:  "Aydemir" veya "Ayd" giriniz.
+<ul> Kabul edilmiş bir hastanın adı, veya soyadı, veya hasta kabul numarasının ya tam ya da birkaç harflik kısmını giriniz.
+		<p>Örnek 1: "21000012" veya "12" giriniz.
+		<br>Örnek 2:  "Ceren" veya "cer" giriniz.
+		<br>Örnek 3:  "Aydemir" veya "Ayd" giriniz.
 		
 <p>
-	UyarÄ±: AramanÄ±zÄ± daraltmak iÃ§in birkaÃ§ bilgiyi birlikte kullanabilirsiniz. 
+	Uyarı: Aramanızı daraltmak için birkaç bilgiyi birlikte kullanabilirsiniz. 
 	<p>
-	Ã–rnek olarak: Cinsiyet ve oda sÄ±nÄ±fÄ±nÄ± seÃ§iniz.
+	Örnek olarak: Cinsiyet ve oda sınıfını seçiniz.
 	<br>
 	<img src="../help/tr/img/tr_admission_arch.png" border=0 width=529 height=105>
 </ul>
-<b>AdÄ±m 2</b>
-<ul> AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+<b>Adım 2</b>
+<ul> Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>>  düğmesini tıklayınız.<p>
 </ul>
-<b>AdÄ±m 3</b>
-<ul> EÄŸer arama bir sonuÃ§ ya da sonuÃ§lar bulur ise bir liste gÃ¶rÃ¼nÃ¼r.<br>
-		AradÄ±ÄŸÄ±nÄ±z hastanÄ±n kabul bilgilerini gÃ¶rmek iÃ§in ismine, soy ismine, cinsiyet simgesine <img <?php echo createComIcon('../','spf.gif','0') ?>> ya da kabul tarihine tÄ±klayabilirsiniz.
+<b>Adım 3</b>
+<ul> Eğer arama bir sonuç ya da sonuçlar bulur ise bir liste görünür.<br>
+		Aradığınız hastanın kabul bilgilerini görmek için ismine, soy ismine, cinsiyet simgesine <img <?php echo createComIcon('../','spf.gif','0') ?>> ya da kabul tarihine tıklayabilirsiniz.
 </ul>
 
-<b>UyarÄ±</b>
-<ul> EÄŸer aramayÄ± iptal etmek isterseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Eğer aramayı iptal etmek isterseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 

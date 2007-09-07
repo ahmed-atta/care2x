@@ -1,36 +1,36 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-Test parametreleri - DÃ¼zenleme
+Test parametreleri - Düzenleme
 </b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir parametre nasÄ±l girilir veya dÃ¼zenlenir?</b>
+Bir parametre nasıl girilir veya düzenlenir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1:</b> Parametre deÄŸerlerini giriniz veya dÃ¼zeltiniz.<p> 
- 	<b>AdÄ±m 2: </b><img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p> 
+ 	<b>Adım 1:</b> Parametre değerlerini giriniz veya düzeltiniz.<p> 
+ 	<b>Adım 2: </b><img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p> 
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-AÅŸaÄŸÄ±dakilerin anlamÄ± nedir?</b>
+Aşağıdakilerin anlamı nedir?</b>
 </font>
 <ul>       	
- 	<b>Ã–lÃ§. birimi:</b> Ã–lÃ§Ã¼ birimi yani cm3 (santimetrekÃ¼p), ml (milimetre), ppm (milyonda partikÃ¼l), vs.<p> 
- 	<b>Ortalama: </b> Ortalama normal deÄŸer.<p> 
- 	<b>Ãœst sÄ±nÄ±r: </b> Normal daÄŸÄ±lÄ±mÄ±n Ã¼st sÄ±nÄ±rÄ±.<p> 
-  	<b>Alt sÄ±nÄ±r: </b> Normal daÄŸÄ±lÄ±mÄ±n alt sÄ±nÄ±rÄ±.<p> 
- 	<b>Ãœst kritik: </b> Kritik deÄŸerin baÅŸladÄ±ÄŸÄ± Ã¼st deÄŸer.<p> 
- 	<b>Alt kritik: </b> Kritik deÄŸerin baÅŸladÄ±ÄŸÄ± alt deÄŸer.<p> 
- 	<b>Ãœst toksik: </b> Toksik/Ã¶lÃ¼mcÃ¼l sÄ±nÄ±rÄ±n baÅŸladÄ±ÄŸÄ± Ã¼st deÄŸer.<p> 
- 	<b>Alt toksik: </b> Toksik/Ã¶lÃ¼mcÃ¼l sÄ±nÄ±rÄ±n baÅŸladÄ±ÄŸÄ± alt deÄŸer.<p> 
+ 	<b>Ölç. birimi:</b> Ölçü birimi yani cm3 (santimetreküp), ml (milimetre), ppm (milyonda partikül), vs.<p> 
+ 	<b>Ortalama: </b> Ortalama normal değer.<p> 
+ 	<b>Üst sınır: </b> Normal dağılımın üst sınırı.<p> 
+  	<b>Alt sınır: </b> Normal dağılımın alt sınırı.<p> 
+ 	<b>Üst kritik: </b> Kritik değerin başladığı üst değer.<p> 
+ 	<b>Alt kritik: </b> Kritik değerin başladığı alt değer.<p> 
+ 	<b>Üst toksik: </b> Toksik/ölümcül sınırın başladığı üst değer.<p> 
+ 	<b>Alt toksik: </b> Toksik/ölümcül sınırın başladığı alt değer.<p> 
 </ul>
 
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
- EÄŸer iptal etmeye karar verirseniz veya deÄŸerleri dÃ¼zenlemeyi bitirdiyseniz,  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+ Eğer iptal etmeye karar verirseniz veya değerleri düzenlemeyi bitirdiyseniz,  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 </form>

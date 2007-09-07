@@ -4,13 +4,13 @@ Fotolab -
 <?php
 	switch($src)
 	{
-	case "init": print "BaÅŸlatÄ±lÄ±yor";
+	case "init": print "Başlatılıyor";
 												break;
-	case "input": print "YÃ¼klenecek resimler seÃ§iliyor";
+	case "input": print "Yüklenecek resimler seçiliyor";
 												break;
 	case "maindata": print "Hasta bilgileri";
 												break;
-	case "save": print "FotoÄŸraflar kaydedildi";
+	case "save": print "Fotoğraflar kaydedildi";
 												break;
 
 	}
@@ -21,69 +21,69 @@ Fotolab -
 <form action="#" >
 <?php if($src=="input") : ?>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-GiriÅŸ yapÄ±lacak alanlar gÃ¶rÃ¼ntÃ¼leniyor. Resim dosyalarÄ± nasÄ±l seÃ§ilecek?</b>
+Giriş yapılacak alanlar görüntüleniyor. Resim dosyaları nasıl seçilecek?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Kaydetmek istediÄŸiniz fotoÄŸrafÄ±n dosyasÄ±nÄ± bulmak iÃ§in  <input type="button" value="Tara..."> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>Bir "Dosya seÃ§" penceresi aÃ§Ä±lÄ±r. Ä°stediÄŸiniz dosyayÄ± seÃ§ip "AÃ§" Ä± tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 3: </b>EÄŸer seÃ§tiÄŸiniz geÃ§erli bir grafik dosyasÄ± ise resim Ã¶n izleme halinde Ã¼st saÄŸ kÃ¶ÅŸede izlenebilir. (Sadece MSIE  tarayÄ±cÄ±sÄ±nda) Olmazsa 1. ve 2. adÄ±mÄ± tekrarlayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 4: </b>Bu fotoÄŸrafÄ±n Ã§ekildiÄŸi tarihi  "<span style="background-color:yellow" > Ã‡ekim tarihi </span>" alanÄ±na giriniz.<p>
+ 	<b>Adım 1: </b>Kaydetmek istediğiniz fotoğrafın dosyasını bulmak için  <input type="button" value="Tara..."> düğmesini tıklayınız.<br>
+ 	<b>Adım 2: </b>Bir "Dosya seç" penceresi açılır. İstediğiniz dosyayı seçip "Aç" ı tıklayınız.<br>
+ 	<b>Adım 3: </b>Eğer seçtiğiniz geçerli bir grafik dosyası ise resim ön izleme halinde üst sağ köşede izlenebilir. (Sadece MSIE  tarayıcısında) Olmazsa 1. ve 2. adımı tekrarlayınız.<br>
+ 	<b>Adım 4: </b>Bu fotoğrafın çekildiği tarihi  "<span style="background-color:yellow" > Çekim tarihi </span>" alanına giriniz.<p>
  	
 
-	<b>AdÄ±m 5: </b>FotoÄŸraf sayÄ±sÄ±nÄ± "<span style="background-color:yellow" > SayÄ± </span>" alanÄ±na giriniz.<p>
+	<b>Adım 5: </b>Fotoğraf sayısını "<span style="background-color:yellow" > Sayı </span>" alanına giriniz.<p>
 	
  	
 </ul>
 		<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-FotoÄŸrafÄ±n Ã¶n izlemesi nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b>
+Fotoğrafın ön izlemesi nasıl görüntülenir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>FotoÄŸrafÄ±n ilgili <img <?php echo createComIcon('../','lilcamera.gif','0') ?>> dÃ¼ÄŸmesi tÄ±klanÄ±r.<br>
+ 	<b>Adım 1: </b>Fotoğrafın ilgili <img <?php echo createComIcon('../','lilcamera.gif','0') ?>> düğmesi tıklanır.<br>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-YÃ¼klenecek resim sayÄ±sÄ± nasÄ±l deÄŸiÅŸtirilir?</b>
+Yüklenecek resim sayısı nasıl değiştirilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1:</b> YÃ¼klemek istediÄŸiniz sayÄ±yÄ±  " <input type="text" name="v" size=4 maxlength=4> resim yÃ¼klemek istiyorum " alanÄ±na giriniz.<p>
- 	<b>AdÄ±m 2:</b>"Git" i tÄ±klayÄ±nÄ±z.<p>
+ 	<b>Adım 1:</b> Yüklemek istediğiniz sayıyı  " <input type="text" name="v" size=4 maxlength=4> resim yüklemek istiyorum " alanına giriniz.<p>
+ 	<b>Adım 2:</b>"Git" i tıklayınız.<p>
 </ul>
 
-<?php endif;?>	
+<?php endif ?>	
 
 <?php if($src=="maindata") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir hastanÄ±n bilgileri nasÄ±l bulunur?</b>
+Bir hastanın bilgileri nasıl bulunur?</b>
 </font>
 <ul>	
-	<b>AdÄ±m 1: </b>HastanÄ±n protokol numarasÄ±nÄ± "<span style="background-color:yellow" > Protokol numarasÄ± </span>" alanÄ±na giriniz.<br>
- 	<b>AdÄ±m 2: </b>HastayÄ± bulmak iÃ§in <input type="button" value="Ara"> dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<br>
- 	<b>AdÄ±m 3: </b>Hasta bulunduÄŸu zaman ilgili alanlarda temel bilgileri gÃ¶rÃ¼ntÃ¼lenir.<br>
- 	<b>AdÄ±m 4: </b>FotoÄŸraflarÄ±n hepsi ya da Ã§oÄŸu aynÄ± tarihte Ã§ekilmiÅŸ ise, o tarihi  <nobr>"<span style="background-color:yellow" > Ã‡ekim tarihi</span>"</nobr> alanÄ±na giriniz.<br>
- 	<b>AdÄ±m 5: </b>Bu tarihi tÃ¼m fotoÄŸraflar iÃ§in ayarlamak isterseniz  <img <?php echo createComIcon('../','preset-add.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. Bu tarih otomatik olarak 
-	sol penceredeki  "Ã‡ekim tarihi" alanlarÄ±nda gÃ¶rÃ¼lecektir.<p>
- 	<img <?php echo createComIcon('../','warn.gif','0') ?>><b> UyarÄ±! </b>FotoÄŸraflardan biri ya da birkaÃ§Ä±nÄ±n farklÄ± Ã§ekim tarihleri var ise o tarihi ilgili fotoÄŸrafÄ±n  "Ã‡ekim tarihi" alanÄ±na giriniz. Bunu ancak 5. adÄ±mdan sonra yapabilirsiniz.<p>
+	<b>Adım 1: </b>Hastanın protokol numarasını "<span style="background-color:yellow" > Protokol numarası </span>" alanına giriniz.<br>
+ 	<b>Adım 2: </b>Hastayı bulmak için <input type="button" value="Ara"> düğmesini tıklatınız.<br>
+ 	<b>Adım 3: </b>Hasta bulunduğu zaman ilgili alanlarda temel bilgileri görüntülenir.<br>
+ 	<b>Adım 4: </b>Fotoğrafların hepsi ya da çoğu aynı tarihte çekilmiş ise, o tarihi  <nobr>"<span style="background-color:yellow" > Çekim tarihi</span>"</nobr> alanına giriniz.<br>
+ 	<b>Adım 5: </b>Bu tarihi tüm fotoğraflar için ayarlamak isterseniz  <img <?php echo createComIcon('../','preset-add.gif','0') ?>> düğmesini tıklayınız. Bu tarih otomatik olarak 
+	sol penceredeki  "Çekim tarihi" alanlarında görülecektir.<p>
+ 	<img <?php echo createComIcon('../','warn.gif','0') ?>><b> Uyarı! </b>Fotoğraflardan biri ya da birkaçının farklı çekim tarihleri var ise o tarihi ilgili fotoğrafın  "Çekim tarihi" alanına giriniz. Bunu ancak 5. adımdan sonra yapabilirsiniz.<p>
 </ul>
 	
-	<?php endif;?>	
+	<?php endif ?>	
 <?php if($src=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-AynÄ± hastanÄ±n baÅŸka fotoÄŸraflarÄ±nÄ± da kaydetmek istiyorum. NasÄ±l yapÄ±lÄ±r?</b>
+Aynı hastanın başka fotoğraflarını da kaydetmek istiyorum. Nasıl yapılır?</b>
 </font>
 <ul>	
-	<b>AdÄ±m 1: </b>Kaydetmek istediÄŸiniz fotoÄŸraflarÄ±n sayÄ±sÄ±nÄ± <nobr>"AynÄ± hastanÄ±n ek <input type="text" name="g" size=3 maxlength=2> fotoÄŸrafÄ± <span style="background-color:yellow" > . </span>"</nobr> alanÄ±na giriniz.<br>
- 	<b>AdÄ±m 2: </b><input type="button" value="Git"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+	<b>Adım 1: </b>Kaydetmek istediğiniz fotoğrafların sayısını <nobr>"Aynı hastanın ek <input type="text" name="g" size=3 maxlength=2> fotoğrafı <span style="background-color:yellow" > . </span>"</nobr> alanına giriniz.<br>
+ 	<b>Adım 2: </b><input type="button" value="Git"> düğmesini tıklayınız.<br>
 </ul>
 
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir baÅŸka hastanÄ±n resimlerini kaydetmek istiyorum. NasÄ±l yapÄ±lÄ±r?</b>
+Bir başka hastanın resimlerini kaydetmek istiyorum. Nasıl yapılır?</b>
 </font>
 <ul>	
-	<b>AdÄ±m 1: </b>Kaydetmek istediÄŸiniz fotoÄŸraflarÄ±n sayÄ±sÄ±nÄ± bir baÅŸka hastanÄ±n <nobr>" <input type="text" name="g" size=3 maxlength=2> fotoÄŸrafÄ± <span style="background-color:yellow" >  </span>"</nobr> alanÄ±na giriniz.<br>
- 	<b>AdÄ±m 2: </b> <input type="button" value="Git"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+	<b>Adım 1: </b>Kaydetmek istediğiniz fotoğrafların sayısını bir başka hastanın <nobr>" <input type="text" name="g" size=3 maxlength=2> fotoğrafı <span style="background-color:yellow" >  </span>"</nobr> alanına giriniz.<br>
+ 	<b>Adım 2: </b> <input type="button" value="Git"> düğmesini tıklayınız.<br>
 </ul>
 
-	<?php endif;?>	
+	<?php endif ?>	
 	
 
 

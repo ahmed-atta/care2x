@@ -13,15 +13,15 @@
 <?php
 	switch($src)
 	{
-		case "show": print "HemÅŸire nÃ¶betleri - NÃ¶bet planÄ±";
+		case "show": print "Hemşire nöbetleri - Nöbet planı";
 							break;
-		case "quick": print "HemÅŸire nÃ¶betleri - HÄ±zlÄ± bakÄ±ÅŸ";
+		case "quick": print "Hemşire nöbetleri - Hızlı bakış";
 							break;
-		case "plan": print "HemÅŸire nÃ¶betleri - NÃ¶bet planÄ± oluÅŸtur";
+		case "plan": print "Hemşire nöbetleri - Nöbet planı oluştur";
 							break;
-		case "personlist": print "Personel listesi oluÅŸtur";
+		case "personlist": print "Personel listesi oluştur";
 							break;
-		case "dutydoc": print "HemÅŸire nÃ¶betleri - Ä°cap nÃ¶betlerinde yapÄ±lan iÅŸin belgelendirilmesi";
+		case "dutydoc": print "Hemşire nöbetleri - İcap nöbetlerinde yapılan işin belgelendirilmesi";
 							break;
 	}
 ?>
@@ -32,135 +32,135 @@
 <?php if($src=="quick") : ?>
 <p><font color="#990000" face="Verdana, Arial">Burada ne yapabilirim?</font></b><p>
 <font face="Verdana, Arial" size=2>
-<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> NÃ¶betÃ§i hemÅŸireler hakkÄ±nda (varsa) ek bilgi almak.</b>
-<ul>Ek bilgiyi gÃ¶rmek iÃ§in, listedeki kiÅŸinin  <span style="background-color:yellow" >ismi</span> Ã¼zerine tÄ±klayÄ±nÄ±z. KÃ¼Ã§Ã¼k bir pencere aÃ§Ä±lÄ±r, ilgili bilgiler gÃ¶rÃ¼nÃ¼r.</ul><p>
-<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> TÃ¼m ayÄ±n nÃ¶bet planÄ±nÄ± gÃ¶rmek.</b>
-<ul>TÃ¼m ayÄ±n nÃ¶bet planÄ±nÄ± gÃ¶rÃ¼ntÃ¼lemek iÃ§in, ilgili &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>GÃ¶ster</font></button> simgesini tÄ±klayÄ±nÄ±z.<br>
-			NÃ¶bet planÄ± gÃ¶rÃ¼ntÃ¼lenir.</ul><p>
+<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> Nöbetçi hemşireler hakkında (varsa) ek bilgi almak.</b>
+<ul>Ek bilgiyi görmek için, listedeki kişinin  <span style="background-color:yellow" >ismi</span> üzerine tıklayınız. Küçük bir pencere açılır, ilgili bilgiler görünür.</ul><p>
+<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> Tüm ayın nöbet planını görmek.</b>
+<ul>Tüm ayın nöbet planını görüntülemek için, ilgili &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Göster</font></button> simgesini tıklayınız.<br>
+			Nöbet planı görüntülenir.</ul><p>
 <font face="Verdana, Arial" size=3 color="#990000">
-<p><b>HÄ±zlÄ± bakÄ±ÅŸ gÃ¶rÃ¼ntÃ¼sÃ¼ neyi gÃ¶stermek istiyor?</b></font></b><p>
+<p><b>Hızlı bakış görüntüsü neyi göstermek istiyor?</b></font></b><p>
 <font face="Verdana, Arial" size=2>
-</b><li><b>Ameliyathane BÃ¶lÃ¼m</b> :<ul>Ä°capÃ§Ä± ve/veya nÃ¶betÃ§i doktor/cerrahlarÄ± bulunan bÃ¶lÃ¼mlerin listesi.</ul><p>
-<li><b>Ä°capÃ§Ä± </b> :<ul>Ä°cap nÃ¶betÃ§isi hemÅŸire.</ul><p>
-<li><b>Ã‡aÄŸrÄ±/Telefon</b> :<ul>Ä°cap nÃ¶betindeki hemÅŸirenin telefon ve Ã§aÄŸrÄ± bilgisi.</ul>
-<li><b>NÃ¶betÃ§i </b> :<ul>NÃ¶betÃ§i hemÅŸire.</ul><p>
-<li><b>Ã‡aÄŸrÄ±/Telefon</b> :<ul>NÃ¶betÃ§inin Ã§aÄŸrÄ± ve telefon bilgisi.</ul><p>
-<li><b>NÃ¶bet planÄ±</b> :<ul>TÄ±klanabilir simge. BÃ¶lÃ¼mÃ¼n bÃ¼tÃ¼n aylÄ±k nÃ¶bet planÄ±na baÄŸlantÄ±. TÃ¼m ayÄ±n nÃ¶bet planÄ±nÄ± aÃ§mak sonrada oluÅŸturmak veya dÃ¼zenlemek ister iseniz&nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>GÃ¶ster</font></button>
-			simgesini tÄ±klayÄ±nÄ±z.</ul>
+</b><li><b>Ameliyathane Bölüm</b> :<ul>İcapçı ve/veya nöbetçi doktor/cerrahları bulunan bölümlerin listesi.</ul><p>
+<li><b>İcapçı </b> :<ul>İcap nöbetçisi hemşire.</ul><p>
+<li><b>Çağrı/Telefon</b> :<ul>İcap nöbetindeki hemşirenin telefon ve çağrı bilgisi.</ul>
+<li><b>Nöbetçi </b> :<ul>Nöbetçi hemşire.</ul><p>
+<li><b>Çağrı/Telefon</b> :<ul>Nöbetçinin çağrı ve telefon bilgisi.</ul><p>
+<li><b>Nöbet planı</b> :<ul>Tıklanabilir simge. Bölümün bütün aylık nöbet planına bağlantı. Tüm ayın nöbet planını açmak sonrada oluşturmak veya düzenlemek ister iseniz&nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Göster</font></button>
+			simgesini tıklayınız.</ul>
 
-<?php endif;?>
+<?php endif ?>
 <?php if($src=="show") : ?>
 <p>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>GÃ¶rÃ¼ntÃ¼lenen ay iÃ§in yeni bir nÃ¶bet planÄ± oluÅŸturmak istiyorum</b></font>
-<ul> <b>AdÄ±m 1: </b> <img <?php echo createLDImgSrc('../','newplan.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Görüntülenen ay için yeni bir nöbet planı oluşturmak istiyorum</b></font>
+<ul> <b>Adım 1: </b> <img <?php echo createLDImgSrc('../','newplan.gif','0') ?>> düğmesini tıklayınız.<br>
 </ul>
-<ul><b>AdÄ±m 2:</b>
- Daha Ã¶nce giriÅŸ yaptÄ± iseniz ve iÅŸleve eriÅŸim hakkÄ±nÄ±z var ise, ana Ã§erÃ§evede nÃ¶bet planÄ±nÄ± dÃ¼zenlemek iÃ§in dÃ¼zenleme modu gÃ¶rÃ¼ntÃ¼lenir.<br>
-		Yoksa, giriÅŸ yapmamÄ±ÅŸ iseniz, kullanÄ±cÄ± adÄ± ve ÅŸifreniz sorulur. <p>
-		KullanÄ±cÄ± adÄ± ve ÅŸifrenizi giriniz ve  <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
-		Ä°ptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<ul><b>Adım 2:</b>
+ Daha önce giriş yaptı iseniz ve işleve erişim hakkınız var ise, ana çerçevede nöbet planını düzenlemek için düzenleme modu görüntülenir.<br>
+		Yoksa, giriş yapmamış iseniz, kullanıcı adı ve şifreniz sorulur. <p>
+		Kullanıcı adı ve şifrenizi giriniz ve  <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> düğmesini tıklayınız.<p>
+		İptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir ay iÃ§in liste yapmak istiyorum fakagÃ¶rÃ¼ntÃ¼lenen liste bir baÅŸka ayÄ±n.</b></font>
-<ul> <b>AdÄ±m 1: </b>Ä°stediÄŸiniz aya ulaÅŸÄ±ncaya deÄŸin tÄ±klanabilir "Ay" a tekrar tekrar tÄ±klayÄ±nÄ±z. <br>
-								AyÄ± ilerletmek iÃ§in saÄŸdaki "ay" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
-								AyÄ± geri almak iÃ§in soldaki "ay" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
-		<b>AdÄ±m 2: </b>Bir nÃ¶bet planÄ± oluÅŸturmak konusundaki Ã¶nceki yÃ¶nergeleri izleyiniz.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belirli bir ay için liste yapmak istiyorum fakagörüntülenen liste bir başka ayın.</b></font>
+<ul> <b>Adım 1: </b>İstediğiniz aya ulaşıncaya değin tıklanabilir "Ay" a tekrar tekrar tıklayınız. <br>
+								Ayı ilerletmek için sağdaki "ay" bağlantısını tıklayınız.<br>
+								Ayı geri almak için soldaki "ay" bağlantısını tıklayınız.<br>
+		<b>Adım 2: </b>Bir nöbet planı oluşturmak konusundaki önceki yönergeleri izleyiniz.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>HÄ±zlÄ± bakÄ±ÅŸa geri gitmek istiyorum </b></font>
-<ul> <b>AdÄ±m 1: </b> <img <?php echo createLDImgSrc('../','close2.gif','0') ?> > simgesini tÄ±klayÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Hızlı bakışa geri gitmek istiyorum </b></font>
+<ul> <b>Adım 1: </b> <img <?php echo createLDImgSrc('../','close2.gif','0') ?> > simgesini tıklayınız.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>NÃ¶betÃ§i hemÅŸirelerin telefon ve Ã§aÄŸrÄ± numaralarÄ±nÄ± gÃ¶rmek istiyorum </b></font>
-<ul> <b>AdÄ±m 1: </b><span style="background-color:yellow" >KiÅŸinin ismini tÄ±klayÄ±nÄ±z</span>.  Ä°lgili bilgiyi gÃ¶steren kÃ¼Ã§Ã¼k bir pencere aÃ§Ä±lÄ±r.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Nöbetçi hemşirelerin telefon ve çağrı numaralarını görmek istiyorum </b></font>
+<ul> <b>Adım 1: </b><span style="background-color:yellow" >Kişinin ismini tıklayınız</span>.  İlgili bilgiyi gösteren küçük bir pencere açılır.<br>
 </ul>
 
 
-<b>UyarÄ±</b>
-<ul> NÃ¶bet planÄ±nÄ± kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Nöbet planını kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif;?>
+<?php endif ?>
 <?php if($src=="plan") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-HemÅŸireler listesini kullanarak bir hemÅŸireyi nÃ¶bet iÃ§in planlamak istiyorum</b></font>
-<ul> <b>AdÄ±m 1: </b>HemÅŸireler listesini aÃ§mak iÃ§in seÃ§ilen gÃ¼nÃ¼n  &nbsp;<button><img <?php echo createComIcon('../','patdata.gif','0') ?>></button> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
-			HemÅŸireler listesini gÃ¶steren kÃ¼Ã§Ã¼k bir pencere aÃ§Ä±lÄ±r.<br>
+Hemşireler listesini kullanarak bir hemşireyi nöbet için planlamak istiyorum</b></font>
+<ul> <b>Adım 1: </b>Hemşireler listesini açmak için seçilen günün  &nbsp;<button><img <?php echo createComIcon('../','patdata.gif','0') ?>></button> düğmesini tıklayınız. <br>
+			Hemşireler listesini gösteren küçük bir pencere açılır.<br>
 			<ul type=disc>
-			<li>Ä°capÃ§Ä± nÃ¶beti yzamak iÃ§in sol "icapÃ§Ä±" sÃ¼tunundaki simgeyi tÄ±klayÄ±nÄ±z.<br>
-			<li>NÃ¶bet yazmak iÃ§in saÄŸdaki "nÃ¶bet" sÃ¼tunundaki simgeyi tÄ±klayÄ±nÄ±z.
+			<li>İcapçı nöbeti yzamak için sol "icapçı" sütunundaki simgeyi tıklayınız.<br>
+			<li>Nöbet yazmak için sağdaki "nöbet" sütunundaki simgeyi tıklayınız.
 			</ul>
-		<b>AdÄ±m 2: </b>NÃ¶bet planÄ±na kopyalamak iÃ§in <span style="background-color:yellow" >hemÅŸirenin ismini tÄ±klayÄ±nÄ±z</span> .<br>
-		<b>AdÄ±m 3: </b>YanlÄ±ÅŸ isme tÄ±kladÄ± iseniz, ikinci adÄ±mÄ± tekrarlayÄ±p doÄŸru ismi tÄ±klayÄ±nÄ±z.<br>
-		<b>AdÄ±m 4: </b>Ä°ÅŸiniz bitti ise, hemÅŸire listesi penceresindeki <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±kayÄ±nÄ±z.<br>
+		<b>Adım 2: </b>Nöbet planına kopyalamak için <span style="background-color:yellow" >hemşirenin ismini tıklayınız</span> .<br>
+		<b>Adım 3: </b>Yanlış isme tıkladı iseniz, ikinci adımı tekrarlayıp doğru ismi tıklayınız.<br>
+		<b>Adım 4: </b>İşiniz bitti ise, hemşire listesi penceresindeki <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıkayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-NÃ¶bet listesine hemÅŸirenin adÄ±nÄ± el ile girmek istiyorum</b></font>
-<ul> <b>AdÄ±m 1: </b>SeÃ§ilen gÃ¼nÃ¼n metin giriÅŸ alanÄ±nÄ± "<input type="text" name="t" size=11 maxlength=4 >" tÄ±klayÄ±nÄ±z.<br>
-		<b>AdÄ±m 2: </b>HemÅŸirenin adÄ±nÄ± el ile yazÄ±nÄ±z<br>
+Nöbet listesine hemşirenin adını el ile girmek istiyorum</b></font>
+<ul> <b>Adım 1: </b>Seçilen günün metin giriş alanını "<input type="text" name="t" size=11 maxlength=4 >" tıklayınız.<br>
+		<b>Adım 2: </b>Hemşirenin adını el ile yazınız<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-NÃ¶bet planÄ±nda bir ismi silmek istiyorum</b></font>
-<ul> <b>AdÄ±m 1: </b>Silinecek ismin metin giriÅŸ alanÄ±na "<input type="text" name="t" size=11 maxlength=4 value="Name">" tÄ±klayÄ±nÄ±z.<br>
-		<b>AdÄ±m 2: </b>Ä°smi klavyenin geri veya delete tuÅŸunu kullanarak siliniz.<br>
+Nöbet planında bir ismi silmek istiyorum</b></font>
+<ul> <b>Adım 1: </b>Silinecek ismin metin giriş alanına "<input type="text" name="t" size=11 maxlength=4 value="Name">" tıklayınız.<br>
+		<b>Adım 2: </b>İsmi klavyenin geri veya delete tuşunu kullanarak siliniz.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>NÃ¶bet planÄ±nÄ± kayÄ±t etmek istiyorum</b></font>
-<ul> <b>AdÄ±m 1: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Nöbet planını kayıt etmek istiyorum</b></font>
+<ul> <b>Adım 1: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>PlanÄ± kayÄ±t ettim ve planlamayÄ± sonlandÄ±rmak istiyorum, ne yapmalÄ±yÄ±m? </b></font>
-<ul> <b>AdÄ±m 1: </b>Ä°ÅŸiniz bitti ise, <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Planı kayıt ettim ve planlamayı sonlandırmak istiyorum, ne yapmalıyım? </b></font>
+<ul> <b>Adım 1: </b>İşiniz bitti ise, <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız. <br>
 </ul>
 </font>
-<?php endif;?>
+<?php endif ?>
 <?php if($src=="personlist") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-GÃ¶rÃ¼ntÃ¼lenen bÃ¶lÃ¼m yanlÄ±ÅŸ. DoÄŸru bÃ¶lÃ¼me deÄŸiÅŸtirmek istiyorum.</b></font>
-<ul> <b>AdÄ±m 1: </b>BÃ¶lÃ¼mÃ¼ <nobr>"<span style="background-color:yellow" >BÃ¶lÃ¼mÃ¼ veya ameliyathaneyi deÄŸiÅŸtir: </span><select name="s">
-                                                                     	<option value="Ã–rnek bÃ¶lÃ¼m 1" selected> Ã–rnek bÃ¶lÃ¼m 1</option>
-                                                                     	<option value="Ã–rnek bÃ¶lÃ¼m 2"> Ã–rnek bÃ¶lÃ¼m 2</option>
-                                                                     	<option value="Ã–rnek bÃ¶lÃ¼m 3"> Ã–rnek bÃ¶lÃ¼m 3</option>
-                                                                     	<option value="Ã–rnek bÃ¶lÃ¼m 4"> Ã–rnek bÃ¶lÃ¼m 4</option>
-                                                                     </select>"</nobr> alanÄ±ndan seÃ§iniz.
+Görüntülenen bölüm yanlış. Doğru bölüme değiştirmek istiyorum.</b></font>
+<ul> <b>Adım 1: </b>Bölümü <nobr>"<span style="background-color:yellow" >Bölümü veya ameliyathaneyi değiştir: </span><select name="s">
+                                                                     	<option value="Örnek bölüm 1" selected> Örnek bölüm 1</option>
+                                                                     	<option value="Örnek bölüm 2"> Örnek bölüm 2</option>
+                                                                     	<option value="Örnek bölüm 3"> Örnek bölüm 3</option>
+                                                                     	<option value="Örnek bölüm 4"> Örnek bölüm 4</option>
+                                                                     </select>"</nobr> alanından seçiniz.
                                                                      <br>
-		<b>AdÄ±m 2: </b>SeÃ§ilen bÃ¶lÃ¼mÃ¼ deÄŸiÅŸtirmek iÃ§in <input type="button" value="DeÄŸiÅŸtir"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+		<b>Adım 2: </b>Seçilen bölümü değiştirmek için <input type="button" value="Değiştir"> düğmesini tıklayınız.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Listede bir ismi silmek istiyorum</b></font>
-<ul> <b>AdÄ±m 1: </b>Silinecek ismin metin giriÅŸ alanÄ±na  "<input type="text" name="t" size=11 maxlength=4 value="Ä°sim">" tÄ±klayÄ±nÄ±z.<br>
-		<b>AdÄ±m 2: </b>Ä°smi klavyenin geri veya sil tuÅŸlarÄ±nÄ± kullanarak el ile siliniz.<br>
+<ul> <b>Adım 1: </b>Silinecek ismin metin giriş alanına  "<input type="text" name="t" size=11 maxlength=4 value="İsim">" tıklayınız.<br>
+		<b>Adım 2: </b>İsmi klavyenin geri veya sil tuşlarını kullanarak el ile siliniz.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Personel listesini kayÄ±t etmek istiyorum</b></font>
-<ul> <b>AdÄ±m 1: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Personel listesini kayıt etmek istiyorum</b></font>
+<ul> <b>Adım 1: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Listeyi kayÄ±t ettim, kapatmak istiyorum, ne yapmalÄ±yÄ±m? </b></font>
-<ul> <b>AdÄ±m 1: </b>Ä°ÅŸiniz bitti ise, <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Listeyi kayıt ettim, kapatmak istiyorum, ne yapmalıyım? </b></font>
+<ul> <b>Adım 1: </b>İşiniz bitti ise, <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız. <br>
 </ul>
-<?php endif;?>
+<?php endif ?>
 <?php if($src=="dutydoc") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-NÃ¶bet saatlerinde yapÄ±lan bir iÅŸ nasÄ±l belgelendirilir?</b></font>
-<ul> <b>AdÄ±m 1: </b>Tarihi "Tarih <input type="text" name="d" size=10 maxlength=10> " alanÄ±na giriniz.<p>
-	<ul> <b>Ä°pucu: </b>BugÃ¼nÃ¼n tarihini otomatik olarak girmek iÃ§in  "t" veya "T" (TODAY=bugÃ¼n anlamÄ±nda) giriniz.<br>
-		<b>Ä°pucu: </b>DÃ¼nkÃ¼ tarihi utomatik olarak girmek iÃ§in "y" veya "Y" (YESTERDAY=DÃ¼n anlamÄ±nda) giriniz.<p>
+Nöbet saatlerinde yapılan bir iş nasıl belgelendirilir?</b></font>
+<ul> <b>Adım 1: </b>Tarihi "Tarih <input type="text" name="d" size=10 maxlength=10> " alanına giriniz.<p>
+	<ul> <b>İpucu: </b>Bugünün tarihini otomatik olarak girmek için  "t" veya "T" (TODAY=bugün anlamında) giriniz.<br>
+		<b>İpucu: </b>Dünkü tarihi utomatik olarak girmek için "y" veya "Y" (YESTERDAY=Dün anlamında) giriniz.<p>
 		</ul>
-		<b>AdÄ±m 2: </b>NÃ¶betÃ§i hemÅŸirenin adÄ±nÄ±  <nobr>"<span style="background-color:yellow" > Soyad, ad <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanÄ±na giriniz.<br>
- <b>AdÄ±m 3: </b>Ä°ÅŸin baÅŸlangÄ±Ã§ zamanÄ±nÄ±  "<span style="background-color:yellow" > baÅŸlama saati <input type="text" name="d" size=5 maxlength=5> </span>" alanÄ±na giriniz.<br>
- <b>AdÄ±m 4: </b>Ä°ÅŸin birme saatini "<span style="background-color:yellow" > bitiÅŸ saati <input type="text" name="d" size=5 maxlength=5> </span>" alanÄ±na giriniz.<p>
-	<ul> <b>Ä°pucu: </b>Åu andaki saati otomatik olarak girmek iÃ§in "n" veya "N" (NOW=ÅŸimdi anlamÄ±nda) giriniz.<p>
+		<b>Adım 2: </b>Nöbetçi hemşirenin adını  <nobr>"<span style="background-color:yellow" > Soyad, ad <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanına giriniz.<br>
+ <b>Adım 3: </b>İşin başlangıç zamanını  "<span style="background-color:yellow" > başlama saati <input type="text" name="d" size=5 maxlength=5> </span>" alanına giriniz.<br>
+ <b>Adım 4: </b>İşin birme saatini "<span style="background-color:yellow" > bitiş saati <input type="text" name="d" size=5 maxlength=5> </span>" alanına giriniz.<p>
+	<ul> <b>İpucu: </b>Şu andaki saati otomatik olarak girmek için "n" veya "N" (NOW=şimdi anlamında) giriniz.<p>
 		</ul>
- <b>AdÄ±m 5: </b>Ameliyathane numarasÄ±nÄ±  "<span style="background-color:yellow" > Ameliyathane No <input type="text" name="d" size=5 maxlength=5> </span>" alanÄ±na giriniz.<br>
- <b>AdÄ±m 6: </b>TanÄ±, tedavi veya ameliyatÄ±  <nobr>"<span style="background-color:yellow" > TanÄ±/Tedavi <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanÄ±na giriniz.<br>
- <b>AdÄ±m 7: </b>Ä°cap hemÅŸiresinin ismini <nobr>"<span style="background-color:yellow" > Ä°cap: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanÄ±na giriniz.<br>
- <b>AdÄ±m 8: </b>NÃ¶betÃ§i hemÅŸirenin adÄ±nÄ± <nobr>"<span style="background-color:yellow" > NÃ¶betÃ§i: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanÄ±na giriniz.<br>
- <b>AdÄ±m 1: </b>Belgeyi kayÄ±t etmek iÃ§in <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
+ <b>Adım 5: </b>Ameliyathane numarasını  "<span style="background-color:yellow" > Ameliyathane No <input type="text" name="d" size=5 maxlength=5> </span>" alanına giriniz.<br>
+ <b>Adım 6: </b>Tanı, tedavi veya ameliyatı  <nobr>"<span style="background-color:yellow" > Tanı/Tedavi <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanına giriniz.<br>
+ <b>Adım 7: </b>İcap hemşiresinin ismini <nobr>"<span style="background-color:yellow" > İcap: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanına giriniz.<br>
+ <b>Adım 8: </b>Nöbetçi hemşirenin adını <nobr>"<span style="background-color:yellow" > Nöbetçi: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanına giriniz.<br>
+ <b>Adım 1: </b>Belgeyi kayıt etmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız. <br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belge listesi nasÄ±l yazdÄ±rÄ±lÄ±r?</b></font>
-<ul> <b>AdÄ±m 1: </b> <img <?php echo createLDImgSrc('../','printout.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. YazdÄ±rma penceresi aÃ§Ä±lÄ±r.<br>
-	<b>AdÄ±m 2: </b>Pencereyi yazdÄ±rma yÃ¶nergelerini izleyiniz.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belge listesi nasıl yazdırılır?</b></font>
+<ul> <b>Adım 1: </b> <img <?php echo createLDImgSrc('../','printout.gif','0') ?>>  düğmesini tıklayınız. Yazdırma penceresi açılır.<br>
+	<b>Adım 2: </b>Pencereyi yazdırma yönergelerini izleyiniz.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belgeyi kayÄ±t ettim ve kapatmak istiyorum. Ne yapmalÄ±yÄ±m? </b></font>
-<ul> <b>AdÄ±m 1: </b>Ä°ÅŸiniz bitti ise,  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belgeyi kayıt ettim ve kapatmak istiyorum. Ne yapmalıyım? </b></font>
+<ul> <b>Adım 1: </b>İşiniz bitti ise,  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız. <br>
 </ul>
-<?php endif;?>
+<?php endif ?>
 
 </form>
 </body>

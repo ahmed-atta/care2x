@@ -1,57 +1,57 @@
 <font size=2 face="verdana,arial" >
 <a name="preview"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bir resim nasÄ±l izlenir?</b></font>
+Bir resim nasıl izlenir?</b></font>
 <ul> 
-	<b>AdÄ±m: </b>Sol penceredeki kÃ¼Ã§Ã¼k resme tÄ±klayÄ±nÄ±z. SaÄŸ pencerede resim tam bÃ¼yÃ¼klÃ¼kte, Ã§ekiliÅŸ tarihi ve Ã§ekiliÅŸ numarasÄ± ile birlikte gÃ¶rÃ¼nÃ¼r.<br>
+	<b>Adım: </b>Sol penceredeki küçük resme tıklayınız. Sağ pencerede resim tam büyüklükte, çekiliş tarihi ve çekiliş numarası ile birlikte görünür.<br>
 </ul>
 
 <a name="remark"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bir resim Ã¼zerine notlar veya tanÄ±sal bir rapor nasÄ±l yazÄ±lÄ±r?</b></font>
+Bir resim üzerine notlar veya tanısal bir rapor nasıl yazılır?</b></font>
 <ul>
-	<b>AdÄ±m 1: </b>NotlarÄ±nÄ±zÄ± veya raporunuzu resmin hemen altÄ±ndaki metin kutusuna yazÄ±nÄ±z.<br>
-	<b>AdÄ±m 2: </b>Kaydetmek iÃ§in <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+	<b>Adım 1: </b>Notlarınızı veya raporunuzu resmin hemen altındaki metin kutusuna yazınız.<br>
+	<b>Adım 2: </b>Kaydetmek için <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<br>
 </ul>
 
 <a name="zoomin"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Resim orijinalin kÃ¼Ã§Ã¼ltÃ¼lmÃ¼ÅŸ bir kopyasÄ± gibi duruyor. Orijinal bÃ¼yÃ¼klÃ¼ÄŸÃ¼nde izleyemez miyiz?</b></font>
+Resim orijinalin küçültülmüş bir kopyası gibi duruyor. Orijinal büyüklüğünde izleyemez miyiz?</b></font>
 <ul>
-	<b>Evet: </b>Orijinal bÃ¼yÃ¼klÃ¼ÄŸÃ¼nde izlemek iÃ§in resmin Ã¼zerine tÄ±klayÄ±nÄ±z.
+	<b>Evet: </b>Orijinal büyüklüğünde izlemek için resmin üzerine tıklayınız.
 </ul>
 
 <a name="zoomin"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Resmi kÃ¼Ã§Ã¼ltÃ¼lmÃ¼ÅŸ olarak izleyebilir miyim?</b></font>
+Resmi küçültülmüş olarak izleyebilir miyim?</b></font>
 <ul>
-	<b>Evet: </b>KÃ¼Ã§Ã¼ltÃ¼lmÃ¼ÅŸ olarak izlemek iÃ§in resmin Ã¼zerine tekrar tÄ±klayÄ±nÄ±z.
+	<b>Evet: </b>Küçültülmüş olarak izlemek için resmin üzerine tekrar tıklayınız.
 </ul>
 
 
 <a name="show_panel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Resmin sol Ã¼stÃ¼ndeki "Kontrol panelini gÃ¶ster" seÃ§eneÄŸi nedir?</b></font>
+Resmin sol üstündeki "Kontrol panelini göster" seçeneği nedir?</b></font>
 <blockquote>
-	Bu seÃ§enek resmi dÃ¼zenlemek iÃ§in java kontrol dÃ¼ÄŸmelerini etkinleÅŸtirir.<p>
-	<b>Kontrol iÅŸlevleri: </b>
-	<li><font color="blue">Reset</font>: Resmi orijinal haline Ã§evirir</li>
-	<li><font color="blue">Flip</font>: Resmi dÃ¼ÅŸey olarak 180Â° Ã§evirir. (DÃ¼ÅŸey aynalama)</li>
-	<li><font color="blue">Invert</font>: Resmin renklerini ters Ã§evirir</li>
-	<li><font color="blue">Lighten</font>: Resmi parlaklaÅŸtÄ±rÄ±r</li>
-	<li><font color="blue">Darken</font>: Resmi koyulaÅŸtÄ±rÄ±r</li>
-	<li><font color="blue">Rotate</font>: Resmi saat yÃ¶nÃ¼nde (saÄŸa) 30 derece dÃ¶ndÃ¼rÃ¼r</li>
-	<li><font color="blue">Zoom in</font>: YakÄ±nlaÅŸtÄ±rÄ±r</li>
-	<li><font color="blue">Zoom out</font>: UzaklaÅŸtÄ±rÄ±r</li>
+	Bu seçenek resmi düzenlemek için java kontrol düğmelerini etkinleştirir.<p>
+	<b>Kontrol işlevleri: </b>
+	<li><font color="blue">Reset</font>: Resmi orijinal haline çevirir</li>
+	<li><font color="blue">Flip</font>: Resmi düşey olarak 180° çevirir. (Düşey aynalama)</li>
+	<li><font color="blue">Invert</font>: Resmin renklerini ters çevirir</li>
+	<li><font color="blue">Lighten</font>: Resmi parlaklaştırır</li>
+	<li><font color="blue">Darken</font>: Resmi koyulaştırır</li>
+	<li><font color="blue">Rotate</font>: Resmi saat yönünde (sağa) 30 derece döndürür</li>
+	<li><font color="blue">Zoom in</font>: Yakınlaştırır</li>
+	<li><font color="blue">Zoom out</font>: Uzaklaştırır</li>
 	<li><font color="blue">Threshold</font>: Rengi ortalamaya ayarlar</li>
-	<li><font color="blue">Smooth</font>: Resmi yumuÅŸatÄ±r</li>
-	<li><font color="blue">Sharpen</font>: Resmi keskinleÅŸtirir</li>
-	<li><font color="blue">Find edges</font>: KenarlarÄ±nÄ± bulur</li>
+	<li><font color="blue">Smooth</font>: Resmi yumuşatır</li>
+	<li><font color="blue">Sharpen</font>: Resmi keskinleştirir</li>
+	<li><font color="blue">Find edges</font>: Kenarlarını bulur</li>
 </blockquote>
 
 <a name="edit_imagej"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Resmin Ã¼st kÄ±smÄ±ndaki  "Resmi ImageJ ile dÃ¼zenle" seÃ§eneÄŸi nedir?</b></font>
+Resmin üst kısmındaki  "Resmi ImageJ ile düzenle" seçeneği nedir?</b></font>
 <blockquote>
-	Bu seÃ§enek, gÃ¼Ã§lÃ¼ ve pek Ã§ok Ã¶zellikli bir resim iÅŸlemci olan  java eklentisi ImageJ yi etkinleÅŸtirir.<p> Bu seÃ§enek etkinleÅŸtiÄŸinde ImageJ Ã§alÄ±ÅŸÄ±r, resim dÃ¼zenlenmek Ã¼zere yeni bir pencerede aÃ§Ä±lÄ±r.
+	Bu seçenek, güçlü ve pek çok özellikli bir resim işlemci olan  java eklentisi ImageJ yi etkinleştirir.<p> Bu seçenek etkinleştiğinde ImageJ çalışır, resim düzenlenmek üzere yeni bir pencerede açılır.
 </blockquote>
 
 <a name="imagej_save"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Resmi ImageJ ile dÃ¼zenleyip kayÄ±t edebilir miyim?</b></font>
+Resmi ImageJ ile düzenleyip kayıt edebilir miyim?</b></font>
 <blockquote>
-	Evet, FAKAT dÃ¼zenlediÄŸiniz resmi sadece kendi bilgisayarÄ±nÄ±zÄ±n hard diski veya disketine kayÄ±t edebilirsiniz.
+	Evet, FAKAT düzenlediğiniz resmi sadece kendi bilgisayarınızın hard diski veya disketine kayıt edebilirsiniz.
 </blockquote>

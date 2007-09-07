@@ -1,24 +1,24 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Adres YÃ¶neticisi</b></font>
+<b>Adres Yöneticisi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Yeni adres bilgisi nasÄ±l girilir?</b></font>
+Yeni adres bilgisi nasıl girilir?</b></font>
 <ul> 
-	<b>AdÄ±m: </b> "<font color=#000080><b>Yeni bilgi</b></font>" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<p>
+	<b>Adım: </b> "<font color=#000080><b>Yeni bilgi</b></font>" yazısını tıklayınız.<p>
 </ul>
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-TÃ¼m adresler nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b></font>
+Tüm adresler nasıl görüntülenir?</b></font>
 <ul> 
-	<b>AdÄ±m: </b> "<font color=#000080><b>Hepsini listele</b></font>" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<p>
+	<b>Adım: </b> "<font color=#000080><b>Hepsini listele</b></font>" yazısını tıklayınız.<p>
 </ul>
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Adres nasÄ±l aranÄ±r?</b></font>
+Adres nasıl aranır?</b></font>
 <ul> 
-	<b>AdÄ±m: </b> "<font color=#000080><b>Ara</b></font>" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<p>
+	<b>Adım: </b> "<font color=#000080><b>Ara</b></font>" yazısını tıklayınız.<p>
 </ul>
 

@@ -3,26 +3,26 @@
 
 <p><font size=2 face="verdana,arial" >
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir hasta nasÄ±l Ã§Ä±karÄ±lÄ±r?</b></font>
+Bir hasta nasıl çıkarılır?</b></font>
 <ul> 
-<b>AdÄ±m 1: </b>DoÄŸru Ã§Ä±kma tarih ve zamanÄ±nÄ± girdiÄŸinizden emin olunuz.<br>
-<b>AdÄ±m 2: </b>Ã‡Ä±kma Ã§eÅŸidini ilgili dÃ¼ÄŸmesine tÄ±klayarak seÃ§iniz<br>
+<b>Adım 1: </b>Doğru çıkma tarih ve zamanını girdiğinizden emin olunuz.<br>
+<b>Adım 2: </b>Çıkma çeşidini ilgili düğmesine tıklayarak seçiniz<br>
 	<ul><br>
 		
 		<img src="../help/tr/img/tr_discharge_types.png" border=0 width=366 height=167>
 		
 	</ul>
 	<p>
-		<b>AdÄ±m 3: </b>Var ise Ã§Ä±kÄ±ÅŸ hakkÄ±nda ilave uyarÄ± ve notlarÄ± "<span style="background-color:yellow" > UyarÄ±: </span>" alanÄ±na giriniz. <br>
-		<b>AdÄ±m 4: </b>EÄŸer alan boÅŸ ise isminizi  "<span style="background-color:yellow" > HemÅŸire: <input type="text" name="a" size=20 maxlength=20></span>" alanÄ±na yazÄ±nÄ±z. <br>
-		<b>AdÄ±m 5: </b>" <span style="background-color:yellow" ><input type="checkbox" name="d" value="d"> Evet, eminim. HastayÄ± Ã§Ä±kar. </span>" kutusunu iÅŸaretleyiniz. <br>
-		<b>AdÄ±m 6: </b>HastayÄ± Ã§Ä±karmak iÃ§in <input type="button" value="Ã§Ä±kar"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
-		<b>AdÄ±m 7: </b>Servis listesine geri dÃ¶nmek iÃ§in  <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+		<b>Adım 3: </b>Var ise çıkış hakkında ilave uyarı ve notları "<span style="background-color:yellow" > Uyarı: </span>" alanına giriniz. <br>
+		<b>Adım 4: </b>Eğer alan boş ise isminizi  "<span style="background-color:yellow" > Hemşire: <input type="text" name="a" size=20 maxlength=20></span>" alanına yazınız. <br>
+		<b>Adım 5: </b>" <span style="background-color:yellow" ><input type="checkbox" name="d" value="d"> Evet, eminim. Hastayı çıkar. </span>" kutusunu işaretleyiniz. <br>
+		<b>Adım 6: </b>Hastayı çıkarmak için <input type="button" value="çıkar"> düğmesini tıklayınız.<p>
+		<b>Adım 7: </b>Servis listesine geri dönmek için  <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> düğmesini tıklayınız.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
- <input type="button" value="Ã§Ä±kar"> dÃ¼ÄŸmesini tÄ±klamayÄ± denedim, fakat hiÃ§bir yanÄ±t yoktu. Neden?</b></font>
-<ul> <b>UyarÄ±: </b>AÅŸaÄŸÄ±daki kutu iÅŸaretlenmeli ve ÅŸÃ¶yle gÃ¶rÃ¼nmelidir: <br>
- " <span style="background-color:yellow" ><input type="checkbox" name="d" value="d" checked> Evet, eminim. HastayÄ± Ã§Ä±kar.. </span>". <p>
-		<b>AdÄ±m 1: </b>Ä°ÅŸaretlenmemiÅŸ ise kutuyu iÅŸaretle.<p>
+ <input type="button" value="çıkar"> düğmesini tıklamayı denedim, fakat hiçbir yanıt yoktu. Neden?</b></font>
+<ul> <b>Uyarı: </b>Aşağıdaki kutu işaretlenmeli ve şöyle görünmelidir: <br>
+ " <span style="background-color:yellow" ><input type="checkbox" name="d" value="d" checked> Evet, eminim. Hastayı çıkar.. </span>". <p>
+		<b>Adım 1: </b>İşaretlenmemiş ise kutuyu işaretle.<p>
 </ul>
-  <b>UyarÄ±: </b>Ä°ptal etmek isterseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.</ul>
+  <b>Uyarı: </b>İptal etmek isterseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle"> düğmesini tıklayınız.</ul>

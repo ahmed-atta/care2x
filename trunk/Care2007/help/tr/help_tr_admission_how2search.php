@@ -1,28 +1,28 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bir hasta nasÄ±l aranÄ±r?</b></font>
+<b>Bir hasta nasıl aranır?</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<b>AdÄ±m 1</b>
+<b>Adım 1</b>
 
-<ul> Ad, soyad, protokol numarasÄ± gibi hastanÄ±n bilgilerinden ya tamamÄ±nÄ± ya da bir kaÃ§ harfini giriniz.
+<ul> Ad, soyad, protokol numarası gibi hastanın bilgilerinden ya tamamını ya da bir kaç harfini giriniz.
 		
-		<p>Ã–rnek 1: "21000012" veya "12" giriniz.
-		<br>Ã–rnek 2: "Muammer" veya "mua" giriniz.
-		<br>Ã–rnek 3: "Potur" veya "Pot" giriniz.
+		<p>Örnek 1: "21000012" veya "12" giriniz.
+		<br>Örnek 2: "Muammer" veya "mua" giriniz.
+		<br>Örnek 3: "Potur" veya "Pot" giriniz.
 	<p>
-	Joker harf olarak <font color=#ff0000>%</font> ve <font color=#ff0000>*</font> iÅŸaretlerini de kullanabilirsiniz.
+	Joker harf olarak <font color=#ff0000>%</font> ve <font color=#ff0000>*</font> işaretlerini de kullanabilirsiniz.
 </ul>
-<b>AdÄ±m 2</b>
-<ul> AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayabilirsiniz.<p>
+<b>Adım 2</b>
+<ul> Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düğmesini tıklayabilirsiniz.<p>
 </ul>
-<b>AdÄ±m 3</b>
-<ul> Arama sonuÃ§ verirse bir liste gÃ¶rÃ¼nÃ¼r.<br>
-		AradÄ±ÄŸÄ±nÄ±z hastanÄ±n kayÄ±t bilgilerini gÃ¶rmek iÃ§in, yanÄ±ndaki  <img <?php echo createComIcon('../','pdata.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.
+<b>Adım 3</b>
+<ul> Arama sonuç verirse bir liste görünür.<br>
+		Aradığınız hastanın kayıt bilgilerini görmek için, yanındaki  <img <?php echo createComIcon('../','pdata.gif','0') ?>> düğmesini tıklatınız.
 </ul>
 <br>
-<b>UyarÄ±</b>
-<ul> EÄŸer aramayÄ± iptal etmek isterseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Eğer aramayı iptal etmek isterseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 

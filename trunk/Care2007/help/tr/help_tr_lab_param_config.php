@@ -1,27 +1,27 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-Test parametreleri - DÃ¼zenleme
+Test parametreleri - Düzenleme
 </b></font>
 <p><font size=2 face="verdana,arial" >
 <form action="#" >
 
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir parametre nasÄ±l girilir veya dÃ¼zenlenir?</b>
+Bir parametre nasıl girilir veya düzenlenir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b> <img <?php echo createLDImgSrc('../','edit_sm.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. DÃ¼zenleyici formunda bir pencere aÃ§Ä±lÄ±r.<p> 
-	Ã–rnek pencere:<br>
+ 	<b>Adım 1: </b> <img <?php echo createLDImgSrc('../','edit_sm.gif','0') ?>> düğmesini tıklayınız. Düzenleyici formunda bir pencere açılır.<p> 
+	Örnek pencere:<br>
 	<img src="../help/tr/img/tr_lab_param_config.png" border=0 width=321 height=311><p> 
- 	<b>AdÄ±m 2:</b> Parametre deÄŸerlerini giriniz veya dÃ¼zenleyiniz.<p> 
- 	<b>AdÄ±m 3: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p> 
+ 	<b>Adım 2:</b> Parametre değerlerini giriniz veya düzenleyiniz.<p> 
+ 	<b>Adım 3: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p> 
 </ul>
 
 	
 
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
- Ä°ptal etmeye karar verirseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+ İptal etmeye karar verirseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 </form>

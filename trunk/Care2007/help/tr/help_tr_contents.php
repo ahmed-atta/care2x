@@ -1,6 +1,6 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <title></title>
 </head>
 <body><font face="Verdana" size=2>
@@ -10,22 +10,22 @@ Adresler<br>
 Randevular<br>
 Muhasebe<br>
 Hasta kabul<br>
-Hasta Ã‡izelgeleri<br>
-BÃ¶lÃ¼m YÃ¶netimi<br>
-TanÄ±lar, Ä°ÅŸlemler ve & TÄ°G (TanÄ±yla Ä°lgili Gruplar)<br>
+Hasta Çizelgeleri<br>
+Bölüm Yönetimi<br>
+Tanılar, İşlemler ve & TİG (Tanıyla İlgili Gruplar)<br>
 Dicom Resimleri<br>
-NÃ¶bet PlanÄ± YÃ¶netimi - Doktorlar<br>
-NÃ¶bet PlanÄ± YÃ¶netimi - HemÅŸireler<br>
-EMR<br> Electronik TÄ±bbi KayÄ±tlar
+Nöbet Planı Yönetimi - Doktorlar<br>
+Nöbet Planı Yönetimi - Hemşireler<br>
+EMR<br> Electronik Tıbbi Kayıtlar
 Sigorta<br>
-TÄ±bbi Depo<br>
-HemÅŸireler<br>
+Tıbbi Depo<br>
+Hemşireler<br>
 Servisler<br>
 Poliklinikler<br>
 Eczane<br>
 Hekimler ve Cerrahlar<br>
-KiÅŸi kaydÄ±<br>
-Personel YÃ¶netimi<br>
+Kişi kaydı<br>
+Personel Yönetimi<br>
 Radyoloji<br>
 Telefon Rehberi<br>
 </font>

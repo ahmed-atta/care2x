@@ -1,29 +1,29 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Ana menÃ¼nÃ¼n dÃ¼zenlenmesi</b></font>
+<b>Ana menünün düzenlenmesi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bir menÃ¼ kalemi nasÄ±l gizlenir ya da gÃ¶rÃ¼ntÃ¼lenir?</b></font>
+Bir menü kalemi nasıl gizlenir ya da görüntülenir?</b></font>
 <ul> 
-	<b>AdÄ±m 1: </b>Bir menÃ¼ kalemini gÃ¶rÃ¼nmez yapmak iÃ§in yanÄ±ndaki "gÃ¶rÃ¼nÃ¼r" kutusunun iÅŸaretini kaldÄ±rÄ±nÄ±z.<p>
-	<b>Veya: </b>GÃ¶rÃ¼nÃ¼r yapmak iÃ§in yanÄ±ndaki "gÃ¶rÃ¼nÃ¼r" kutusunu iÅŸaretleyiniz.<p>
-	<b>AdÄ±m 2: </b>Sonra <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
-	<b>UyarÄ±: </b>Ã–n tanÄ±mlÄ± olarak tÃ¼m menÃ¼ kalemleri gÃ¶rÃ¼nÃ¼r durumdadÄ±r.<p>
-	<b>UyarÄ±: </b> Åu kalemler gizlenemez:
+	<b>Adım 1: </b>Bir menü kalemini görünmez yapmak için yanındaki "görünür" kutusunun işaretini kaldırınız.<p>
+	<b>Veya: </b>Görünür yapmak için yanındaki "görünür" kutusunu işaretleyiniz.<p>
+	<b>Adım 2: </b>Sonra <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p>
+	<b>Uyarı: </b>Ön tanımlı olarak tüm menü kalemleri görünür durumdadır.<p>
+	<b>Uyarı: </b> Şu kalemler gizlenemez:
 	<ul>
-	Sistem YÃ¶netimi<br>
-	GiriÅŸ/Ã‡Ä±kÄ±ÅŸ
+	Sistem Yönetimi<br>
+	Giriş/Çıkış
 	</ul>
 </ul>
 
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-MenÃ¼ kalemleri nasÄ±l tekrar dÃ¼zenlenir?</b></font>
+Menü kalemleri nasıl tekrar düzenlenir?</b></font>
 <ul> 
-	<b>AdÄ±m 1: </b>MenÃ¼ kalemlerinin "SÄ±ra no. deÄŸerini dÃ¼zenleyiniz".<p>
-	<b>UyarÄ±: </b>AralÄ±klar arasÄ± deÄŸer 5 ten az olmasÄ±n ki ilerideki tekrar dÃ¼zenlemeler kolay olsun.<p>
-	<b>AdÄ±m 2: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+	<b>Adım 1: </b>Menü kalemlerinin "Sıra no. değerini düzenleyiniz".<p>
+	<b>Uyarı: </b>Aralıklar arası değer 5 ten az olmasın ki ilerideki tekrar düzenlemeler kolay olsun.<p>
+	<b>Adım 2: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p>
 </ul>
 

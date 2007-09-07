@@ -6,14 +6,14 @@
 
 <form>
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tam adres bilgisi nasÄ±l gÃ¶sterilir?</b></font>
+Tam adres bilgisi nasıl gösterilir?</b></font>
 <ul> 
-	<b>AdÄ±m: </b>Adresi tÄ±klayÄ±nÄ±z.
+	<b>Adım: </b>Adresi tıklayınız.
 </ul>
 
 
 <b><img <?php echo createComIcon('../','warn.gif','0') ?>> Dikkat</b>
-<ul> EÄŸer iÅŸiniz bitti ise veya iptal etmeye karar verdi iseniz <img <?php  print createLDImgSrc('../','cancel.gif','0'); ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<ul> Eğer işiniz bitti ise veya iptal etmeye karar verdi iseniz <img <?php  print createLDImgSrc('../','cancel.gif','0'); ?>> düğmesini tıklayınız.
 </ul>
 
 </form>

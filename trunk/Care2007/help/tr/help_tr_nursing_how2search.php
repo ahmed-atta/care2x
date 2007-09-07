@@ -3,113 +3,113 @@
 <?php
 switch($x2)
 {
-	case "search": print "NasÄ±l "; 
- 						if($x1) print 'bir anahtar sÃ¶zcÃ¼k bulunduÄŸunda servis yatan hasta listesi gÃ¶sterilir';
-						else  print 'bir hasta aranÄ±r';
+	case "search": print "Nasıl "; 
+ 						if($x1) print 'bir anahtar sözcük bulunduğunda servis yatan hasta listesi gösterilir';
+						else  print 'bir hasta aranır';
 						break;
-	case "quick": print  "BugÃ¼nkÃ¼ servis yatan hasta listesi hÄ±zlÄ± bakÄ±ÅŸ";
+	case "quick": print  "Bugünkü servis yatan hasta listesi hızlı bakış";
 						break;
-	case "arch": print "Servisler arÅŸivi";
+	case "arch": print "Servisler arşivi";
 }
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 <?php if($x2=="search") : ?>
 <?php if(!$x1) : ?>
-<b>AdÄ±m 1</b>
+<b>Adım 1</b>
 
-<ul>  "<span style="background-color:yellow" >LÃ¼tfen aranacak bir anahtar sÃ¶zcÃ¼k giriniz.</span>" 
-	alanÄ±na bir ad veya soyadÄ±n tamamÄ±nÄ± veya ilk birkaÃ§ harfini giriniz.
-		<ul type=disc><li>Ã–rnek 1:  "GÃ¼rcan" veya "gÃ¼r" giriniz.
-		<li>Ã–rnek 2: "Potur" veya "Pot" giriniz.
-		<li>Ã–rnek 3: "Potur, GÃ¼rcan" giriniz.
+<ul>  "<span style="background-color:yellow" >Lütfen aranacak bir anahtar sözcük giriniz.</span>" 
+	alanına bir ad veya soyadın tamamını veya ilk birkaç harfini giriniz.
+		<ul type=disc><li>Örnek 1:  "Gürcan" veya "gür" giriniz.
+		<li>Örnek 2: "Potur" veya "Pot" giriniz.
+		<li>Örnek 3: "Potur, Gürcan" giriniz.
 	</ul>	
 </ul>
-<b>AdÄ±m 2</b>
-<ul> AramayÄ± baÅŸlatmak iÃ§in <input type="button" value="Ara"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+<b>Adım 2</b>
+<ul> Aramayı başlatmak için <input type="button" value="Ara"> düğmesini tıklayınız.<p>
 </ul>
-<b>AdÄ±m 3</b>
-<ul> EÄŸer arama bir sonuÃ§ bulur ise, anahtar sÃ¶zcÃ¼ÄŸÃ¼n bulunduÄŸu yatan hasta listesi gÃ¶rÃ¼ntÃ¼lenir.<p>
+<b>Adım 3</b>
+<ul> Eğer arama bir sonuç bulur ise, anahtar sözcüğün bulunduğu yatan hasta listesi görüntülenir.<p>
 </ul>
-<b>AdÄ±m 4</b>
-<ul> EÄŸer arama birkaÃ§ sonuÃ§ bulur ise, sonuÃ§lar listesi gÃ¶rÃ¼ntÃ¼lenir.<p>
+<b>Adım 4</b>
+<ul> Eğer arama birkaç sonuç bulur ise, sonuçlar listesi görüntülenir.<p>
 </ul>
-<b>UyarÄ±</b>
-<ul> AramayÄ± iptal etmek ister iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
-</ul><?php endif;?>
-<b>AdÄ±m <?php if($x1) print "1"; else print "5"; ?></b><ul>Servis yatan hasta listesini gÃ¶rmek iÃ§in ya <img <?php echo createComIcon('../','bul_arrowblusm.gif','0') ?>> dÃ¼ÄŸmesini, veya tarih veya servisi tÄ±klayÄ±nÄ±z.
-<p><b>UyarÄ±:</b> Aranan sÃ¶zcÃ¼k listede belirginleÅŸtirilmiÅŸ olarak gÃ¶rÃ¼ntÃ¼lenir. 
-<br><b>UyarÄ±:</b> Liste "salt okunur" moddadÄ±r, dÃ¼zenlenemez. EÄŸer hastanÄ±n ismini tÄ±klayarak bilgileri klasÃ¶rÃ¼nÃ¼ aÃ§mak ister iseniz kullanÄ±cÄ± adÄ± ve parolanÄ±z sorulur.
+<b>Uyarı</b>
+<ul> Aramayı iptal etmek ister iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
+</ul><?php endif ?>
+<b>Adım <?php if($x1) print "1"; else print "5"; ?></b><ul>Servis yatan hasta listesini görmek için ya <img <?php echo createComIcon('../','bul_arrowblusm.gif','0') ?>> düğmesini, veya tarih veya servisi tıklayınız.
+<p><b>Uyarı:</b> Aranan sözcük listede belirginleştirilmiş olarak görüntülenir. 
+<br><b>Uyarı:</b> Liste "salt okunur" moddadır, düzenlenemez. Eğer hastanın ismini tıklayarak bilgileri klasörünü açmak ister iseniz kullanıcı adı ve parolanız sorulur.
 </ul>
-<?php endif;?>
+<?php endif ?>
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-DiÄŸer gÃ¼nlerin yatan hasta listeleri nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b>
+Diğer günlerin yatan hasta listeleri nasıl görüntülenir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m: </b>Mini takvimde tarihi tÄ±klayÄ±nÄ±z.<p>
+ 	<b>Adım: </b>Mini takvimde tarihi tıklayınız.<p>
 	<img src="../help/tr/img/tr_mini_calendar_php.png" border=0 width=223 height=133><p>
-	<b>UyarÄ±: </b>GÃ¶rÃ¼ntÃ¼lenen eski hasta listesi "salt okunur" dur. Hasta bilgisini deÄŸiÅŸtiremez ve dÃ¼zenleyemezsiniz.<br>
+	<b>Uyarı: </b>Görüntülenen eski hasta listesi "salt okunur" dur. Hasta bilgisini değiştiremez ve düzenleyemezsiniz.<br>
 	</ul>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Servis yatan hasta listesi nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b>
+Servis yatan hasta listesi nasıl görüntülenir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Sol sÃ¼tundaki servis kimliÄŸi ya da ismini tÄ±klayÄ±nÄ±z.<br>
-	<b>UyarÄ±: </b>GÃ¶rÃ¼ntÃ¼lenen hasta listesi "salt okunur" dur. Hasta bilgisini deÄŸiÅŸtiremez ve dÃ¼zenleyemezsiniz.<br>
+ 	<b>Adım 1: </b>Sol sütundaki servis kimliği ya da ismini tıklayınız.<br>
+	<b>Uyarı: </b>Görüntülenen hasta listesi "salt okunur" dur. Hasta bilgisini değiştiremez ve düzenleyemezsiniz.<br>
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Servis yatan hasta listesi dÃ¼zenlemek veya gÃ¼ncellemek Ã¼zere nasÄ±l gÃ¶sterilir?</b>
+Servis yatan hasta listesi düzenlemek veya güncellemek üzere nasıl gösterilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>SeÃ§ilen servisin ilgili  <img <?php echo createComIcon('../','statbel2.gif','0') ?>> simgesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>Daha Ã¶nce giriÅŸ yaptÄ± iseniz, ve iÅŸleve eriÅŸim hakkÄ±nÄ±z bulunuyor ise, yatan hasta listesi derhal gÃ¶rÃ¼ntÃ¼lenir.<br>
-		Aksi halde, kullanÄ±cÄ± adÄ± ve ÅŸifrenizi girmeniz istenir.<br>
- 	<b>AdÄ±m 3: </b>Sorulur ise, kullanÄ±cÄ± adÄ± ve ÅŸifrenizi giriniz.<br>
- 	<b>AdÄ±m 4: </b> <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 5: </b>Ä°ÅŸleve eriÅŸim hakkÄ±nÄ±z var ise, yatan hasta listesi gÃ¶rÃ¼ntÃ¼lenir.<br>
-	<b>UyarÄ±: </b>GÃ¶rÃ¼ntÃ¼lenen yatan hasta listesi "dÃ¼zenlenebilir" haldedir. Hasta bilgilerini dÃ¼zenleme veya gÃ¼ncelleme seÃ§enekleri gÃ¶rÃ¼ntÃ¼lenir.
-		HastalarÄ±n bilgi klasÃ¶rlerini de dÃ¼zenlemek iÃ§in aÃ§abilirsiniz.<br>
+ 	<b>Adım 1: </b>Seçilen servisin ilgili  <img <?php echo createComIcon('../','statbel2.gif','0') ?>> simgesini tıklayınız.<br>
+ 	<b>Adım 2: </b>Daha önce giriş yaptı iseniz, ve işleve erişim hakkınız bulunuyor ise, yatan hasta listesi derhal görüntülenir.<br>
+		Aksi halde, kullanıcı adı ve şifrenizi girmeniz istenir.<br>
+ 	<b>Adım 3: </b>Sorulur ise, kullanıcı adı ve şifrenizi giriniz.<br>
+ 	<b>Adım 4: </b> <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> düğmesini tıklayınız.<br>
+ 	<b>Adım 5: </b>İşleve erişim hakkınız var ise, yatan hasta listesi görüntülenir.<br>
+	<b>Uyarı: </b>Görüntülenen yatan hasta listesi "düzenlenebilir" haldedir. Hasta bilgilerini düzenleme veya güncelleme seçenekleri görüntülenir.
+		Hastaların bilgi klasörlerini de düzenlemek için açabilirsiniz.<br>
 	</ul>
 	<?php else : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Åu anda yatan hasta listesi oluÅŸturulmamÄ±ÅŸ</b>
+Şu anda yatan hasta listesi oluşturulmamış</b>
 </font><p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-ArÅŸiv kullanÄ±larak Ã¶nceki yatan hasta listeleri hÄ±zlÄ± bakÄ±ÅŸ olarak nasÄ±l izlenir?</b>
+Arşiv kullanılarak önceki yatan hasta listeleri hızlı bakış olarak nasıl izlenir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b> "<span style="background-color:yellow" > ArÅŸive gitmek iÃ§in burayÄ± tÄ±klayÄ±nÄ±z <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> </span>" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>Bir rehber takvim gÃ¶rÃ¼ntÃ¼lenir.<br>
- 	<b>AdÄ±m 3: </b>O gÃ¼nÃ¼n yatan hasta listesini gÃ¶rÃ¼ntÃ¼lemek iÃ§in takvimdeki bir tarihi tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b> "<span style="background-color:yellow" > Arşive gitmek için burayı tıklayınız <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> </span>" yazısını tıklayınız.<br>
+ 	<b>Adım 2: </b>Bir rehber takvim görüntülenir.<br>
+ 	<b>Adım 3: </b>O günün yatan hasta listesini görüntülemek için takvimdeki bir tarihi tıklayınız.<br>
 	</ul>
 	
-	<?php endif;?>
-<b>UyarÄ±</b>
-<ul> HÄ±zlÄ± bakÄ±ÅŸ penceresini kapatmak ister iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
-</ul><?php endif;?>
+	<?php endif ?>
+<b>Uyarı</b>
+<ul> Hızlı bakış penceresini kapatmak ister iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
+</ul><?php endif ?>
 
 <?php if($x2=="arch") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-ArÅŸiv kullanÄ±larak Ã¶nceki yatan hasta listeleri hÄ±zlÄ± bakÄ±ÅŸta nasÄ±l izlenir?</b>
+Arşiv kullanılarak önceki yatan hasta listeleri hızlı bakışta nasıl izlenir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>O gÃ¼nÃ¼n yatan hastalarÄ±na hÄ±zlÄ± bakÄ±ÅŸ iÃ§in takvimdeki bir tarihi tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>O günün yatan hastalarına hızlı bakış için takvimdeki bir tarihi tıklayınız.<br>
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Rehber takvimdeki ay nasÄ±l deÄŸiÅŸtirilir?</b>
+Rehber takvimdeki ay nasıl değiştirilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Sonraki ayÄ± gÃ¶stermek iÃ§in, rehber takvimin Ã¼st SAÄ kÃ¶ÅŸesindeki ay ismini tÄ±klayÄ±nÄ±z
-								Ä°stenen ay gÃ¶rÃ¼ntÃ¼leninceye kadar ne kadar gerekirse o kadar tÄ±klayÄ±nÄ±z.<p>
- 	<b>AdÄ±m 2: </b>Ã–nceki ayÄ± gÃ¶rÃ¼ntÃ¼lemek iÃ§in, rehber takvimin SOL Ã¼st kÃ¶ÅŸesindeki ay ismini tÄ±klayÄ±nÄ±z.
-								Ä°stenen ay gÃ¶rÃ¼ntÃ¼leninceye kadar ne kadar gerekirse o kadar tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Sonraki ayı göstermek için, rehber takvimin üst SAĞ köşesindeki ay ismini tıklayınız
+								İstenen ay görüntüleninceye kadar ne kadar gerekirse o kadar tıklayınız.<p>
+ 	<b>Adım 2: </b>Önceki ayı görüntülemek için, rehber takvimin SOL üst köşesindeki ay ismini tıklayınız.
+								İstenen ay görüntüleninceye kadar ne kadar gerekirse o kadar tıklayınız.<br>
 	</ul>
 	
-	<?php endif;?>
+	<?php endif ?>
 
 
 </form>

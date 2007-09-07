@@ -1,17 +1,17 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>TÄ±bbi belgeler - HastanÄ±n bulunmasÄ±</b></font>
+<b>Tıbbi belgeler - Hastanın bulunması</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Yeni bir tÄ±bbi belge nasÄ±l oluÅŸturulur?</b></font>
+Yeni bir tıbbi belge nasıl oluşturulur?</b></font>
 <ul> 
 
-	<b>AdÄ±m 1: </b>EÄŸer hasta listede gÃ¶rÃ¼lÃ¼yor ise, <img <?php echo createComIcon('../','statbel2.gif','0') ?>> simgesini tÄ±klayarak tÄ±bbi belgeleri gÃ¶rÃ¼ntÃ¼lenebilir.<p>
-	<b>AdÄ±m 3: </b>Yeni bir form oluÅŸturmak iÃ§in "Yeni kayÄ±t gir" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<p>
-	<b>AdÄ±m 4: </b>Var ise "Ek bilgiler" i yazÄ±nÄ±z.<p>
-	<b>AdÄ±m 5: </b>HastanÄ±n aldÄ±ÄŸÄ± tÄ±bbi danÄ±ÅŸmanlÄ±k iÃ§in uygun seÃ§eneÄŸi iÅŸaretleyiniz.<p>
-	<b>AdÄ±m 6: </b>TanÄ±larÄ± metin halinde yazÄ±nÄ±z.<p>
-	<b>AdÄ±m 7: </b>Tedavileri metin halinde yazÄ±nÄ±z.<p>
+	<b>Adım 1: </b>Eğer hasta listede görülüyor ise, <img <?php echo createComIcon('../','statbel2.gif','0') ?>> simgesini tıklayarak tıbbi belgeleri görüntülenebilir.<p>
+	<b>Adım 3: </b>Yeni bir form oluşturmak için "Yeni kayıt gir" yazısını tıklayınız.<p>
+	<b>Adım 4: </b>Var ise "Ek bilgiler" i yazınız.<p>
+	<b>Adım 5: </b>Hastanın aldığı tıbbi danışmanlık için uygun seçeneği işaretleyiniz.<p>
+	<b>Adım 6: </b>Tanıları metin halinde yazınız.<p>
+	<b>Adım 7: </b>Tedavileri metin halinde yazınız.<p>
 </ul>
 
 

@@ -1,20 +1,20 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Zaman aÅŸÄ±mÄ± sÃ¼resinin dÃ¼zenlenmesi</b></font>
+<b>Zaman aşımı süresinin düzenlenmesi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 <form>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Zaman aÅŸÄ±mÄ± iÅŸlevi nasÄ±l etkinleÅŸtirilir ya da etkisizleÅŸtirilir?</b></font>
+Zaman aşımı işlevi nasıl etkinleştirilir ya da etkisizleştirilir?</b></font>
 <ul> 
-	<b>AdÄ±m 1: </b>Zaman aÅŸÄ±mÄ± iÅŸlevini etkinleÅŸtirmek iÃ§in  	<input type="radio" name="d" value="1"> "Evet" dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
-	<b>Veya: </b>Ä°ÅŸlevi etkisizleÅŸtirmek iÃ§in  <input type="radio" name="x" value="1"> "HayÄ±r" dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+	<b>Adım 1: </b>Zaman aşımı işlevini etkinleştirmek için  	<input type="radio" name="d" value="1"> "Evet" düğmesini tıklayınız.<p>
+	<b>Veya: </b>İşlevi etkisizleştirmek için  <input type="radio" name="x" value="1"> "Hayır" düğmesini tıklayınız.<p>
 </ul>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Zaman aÅŸÄ±mÄ± sÃ¼resi nasÄ±l ayarlanÄ±r?</b></font>
+Zaman aşımı süresi nasıl ayarlanır?</b></font>
 <ul> 
-	<b>AdÄ±m 1: </b>Uygun alanlara saat, dakika, veya saniye cinsinden sÃ¼reyi giriniz. UyarÄ±: EÄŸer girdiÄŸiniz deÄŸer geÃ§ersiz ise sistem Ã¶n tanÄ±mlÄ± azami sÃ¼reyi kabul eder.<p>
-	<b>AdÄ±m 2: </b>  <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+	<b>Adım 1: </b>Uygun alanlara saat, dakika, veya saniye cinsinden süreyi giriniz. Uyarı: Eğer girdiğiniz değer geçersiz ise sistem ön tanımlı azami süreyi kabul eder.<p>
+	<b>Adım 2: </b>  <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 </form>
 

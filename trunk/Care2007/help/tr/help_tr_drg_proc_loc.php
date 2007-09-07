@@ -1,21 +1,21 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>TÄ°G - Ä°ÅŸlem - Yeri</b></font>
+<b>TİG - İşlem - Yeri</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 <font size=2 face="verdana,arial" >
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Ä°ÅŸlem yeri nasÄ±l ayarlanÄ±r?</b></font>
+İşlem yeri nasıl ayarlanır?</b></font>
 <ul> 
-	<b>AdÄ±m 1: </b>Ä°ÅŸlem ile ilgili "yer" seÃ§im kutusunu tÄ±klayÄ±nÄ±z.<p>
-	<b>AdÄ±m 2: </b>Listeden yeri seÃ§ip tÄ±klayÄ±nÄ±z.<p>
+	<b>Adım 1: </b>İşlem ile ilgili "yer" seçim kutusunu tıklayınız.<p>
+	<b>Adım 2: </b>Listeden yeri seçip tıklayınız.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Yerler nelerdir?</b></font>
 <ul> 
-	SaÄŸ (R)<br>
+	Sağ (R)<br>
 	Sol (L)<br>
-	Ä°kisi (B)
+	İkisi (B)
 </ul>
 
 

@@ -1,94 +1,94 @@
 <img src="../help/tr/img/tr_admission_options.png" border=0 width=194 height=387 align="right">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Kabul seÃ§enekleri</b></font>
+<b>Kabul seçenekleri</b></font>
 
 <p><font size=2 face="verdana,arial" >
 
 <font color="#990000"><b>
-Ä°ÅŸ gÃ¶remezlik onayÄ±</b></font>
+İş göremezlik onayı</b></font>
 <ul> 
-Form oluÅŸturmak veya izlemek.<p>
+Form oluşturmak veya izlemek.<p>
 </ul>
 
 <font color="#990000"><b>
-Hasta dosyasÄ±</b></font>
+Hasta dosyası</b></font>
 <ul> 
-Åu kayÄ±tlarÄ± aÃ§ar:
-<li> derece kÃ¢ÄŸÄ±dÄ±
-<li> hemÅŸire gÃ¶zlemi
+Şu kayıtları açar:
+<li> derece kâğıdı
+<li> hemşire gözlemi
 <li> doktor orderlari
-<li> tetkik sonuÃ§larÄ±
-<li> TÄ°G birleÅŸik modÃ¼lÃ¼
-<li> laboratuvar sonuÃ§larÄ±
-<li> vizit resim ve fotoÄŸraflarÄ±
-<li> tetkik istemi oluÅŸturucusu
+<li> tetkik sonuçları
+<li> TİG birleşik modülü
+<li> laboratuvar sonuçları
+<li> vizit resim ve fotoğrafları
+<li> tetkik istemi oluşturucusu
 </ul>
 
 <font color="#990000"><b>
-Tetkik sonuÃ§larÄ±</b></font>
+Tetkik sonuçları</b></font>
 <ul> 
-Vizit sÄ±rasÄ±nda bulunan tÃ¼m tetkik sonuÃ§ ve raporlarÄ±nÄ± listeler.
+Vizit sırasında bulunan tüm tetkik sonuç ve raporlarını listeler.
 </ul>
 
 <font color="#990000"><b>
-TÄ±bbi belgeler</b></font>
+Tıbbi belgeler</b></font>
 <ul> 
-Bu vizit iÃ§in tÄ±bbi belgeler modÃ¼lÃ¼nÃ¼ baÅŸlatÄ±r.
+Bu vizit için tıbbi belgeler modülünü başlatır.
 </ul>
 
 <font color="#990000"><b>
-TÄ°G (birleÅŸik)</b></font>
+TİG (birleşik)</b></font>
 <ul> 
-Bu vizit iÃ§in  TÄ°G modÃ¼lÃ¼nÃ¼ baÅŸlatÄ±r.
+Bu vizit için  TİG modülünü başlatır.
 </ul>
 
-<font color="#990000"><b>ReÃ§eteler</b></font>
+<font color="#990000"><b>Reçeteler</b></font>
 <ul> 
-ReÃ§eteleri gÃ¶rmek veya yeni yazmak.
+Reçeteleri görmek veya yeni yazmak.
 </ul>
 
 <font color="#990000"><b>Notlar ve & Raporlar</b></font>
 <ul> 
-Kabul Ã¶ykÃ¼sÃ¼ ya da Ã§Ä±kÄ±ÅŸ Ã¶zeti gibi Ã§eÅŸitli not ve raporlarÄ± gÃ¶rmek veya yeni yazmak.
+Kabul öyküsü ya da çıkış özeti gibi çeşitli not ve raporları görmek veya yeni yazmak.
 </ul>
 
-<font color="#990000"><b>BaÄŸÄ±ÅŸÄ±klama</b></font>
+<font color="#990000"><b>Bağışıklama</b></font>
 <ul> 
-BaÄŸÄ±ÅŸÄ±klama bilgisini gÃ¶rmek veya dÃ¼zenlemek.
+Bağışıklama bilgisini görmek veya düzenlemek.
 </ul>
 
-<font color="#990000"><b>Ã–lÃ§Ã¼ler</b></font>
+<font color="#990000"><b>Ölçüler</b></font>
 <ul> 
-AÄŸÄ±rlÄ±k, boy ve baÅŸ Ã§evresi Ã¶lÃ§Ã¼lerini izlemek veya girmek.
+Ağırlık, boy ve baş çevresi ölçülerini izlemek veya girmek.
 </ul>
 
 
 <font color="#990000"><b>Gebelik</b></font>
 <ul> 
-Gebelik bilgilerini izlemek veya girmek (kadÄ±nlar iÃ§in).
+Gebelik bilgilerini izlemek veya girmek (kadınlar için).
 </ul>
 
-<font color="#990000"><b>DoÄŸum ayrÄ±ntÄ±larÄ±</b></font>
+<font color="#990000"><b>Doğum ayrıntıları</b></font>
 <ul> 
-DoÄŸum ayrÄ±ntÄ±larÄ± bilgilerini izlemek veya girmek.
+Doğum ayrıntıları bilgilerini izlemek veya girmek.
 </ul>
 
-<font color="#990000"><b>KiÅŸi kaydÄ±nÄ± gÃ¶ster</b></font>
+<font color="#990000"><b>Kişi kaydını göster</b></font>
 <ul> 
-KiÅŸinin kayÄ±t bilgilerini gÃ¶stermek.
+Kişinin kayıt bilgilerini göstermek.
 </ul>
 
-<font color="#990000"><b>KiÅŸi kaydÄ± gÃ¼ncelle</b></font>
+<font color="#990000"><b>Kişi kaydı güncelle</b></font>
 <ul> 
-KiÅŸinin kayÄ±t bilgilerini dÃ¼zenlemek veya gÃ¼ncellemek.
+Kişinin kayıt bilgilerini düzenlemek veya güncellemek.
 </ul>
 
-<font color="#990000"><b>DB kaydÄ± Ã¶ykÃ¼sÃ¼</b></font>
+<font color="#990000"><b>DB kaydı öyküsü</b></font>
 <ul> 
-Veri bankasÄ±ndaki kabul kaydÄ±nÄ±n Ã¶ykÃ¼sÃ¼nÃ¼n izlendiÄŸi aÃ§Ä±lÄ±r pencere.
+Veri bankasındaki kabul kaydının öyküsünün izlendiği açılır pencere.
 </ul>
 
-<font color="#990000"><b>Bu kabulÃ¼ iptal et</b></font>
+<font color="#990000"><b>Bu kabulü iptal et</b></font>
 <ul> 
-KabulÃ¼ iptal eder. Ancak sadece hasta bir poliklinik ya da servise kabul edilmemiÅŸse mÃ¼mkÃ¼ndÃ¼r.
+Kabulü iptal eder. Ancak sadece hasta bir poliklinik ya da servise kabul edilmemişse mümkündür.
 </ul>

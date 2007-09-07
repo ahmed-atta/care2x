@@ -1,32 +1,32 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
 <?php
-if($x2=="pharma") print "Eczane - "; else print "TÄ±bbi ambar - ";
+if($x2=="pharma") print "Eczane - "; else print "Tıbbi ambar - ";
 	switch($src)
 	{
-	case "head": if($x2=="pharma") print "FarmasÃ¶tik Ã¼rÃ¼nlerin istemi"; 
-						else print "ÃœrÃ¼nlerin istemi";
+	case "head": if($x2=="pharma") print "Farmasötik ürünlerin istemi"; 
+						else print "Ürünlerin istemi";
 						break;
-	case "catalog": print "Ä°stem kataloÄŸu";
+	case "catalog": print "İstem kataloğu";
 						break;
-	case "orderlist": print "Ä°stem sepeti ( istem listesi )";
+	case "orderlist": print "İstem sepeti ( istem listesi )";
 						break;
 	case "final": print "Son istem listesi";
 						break;
-	case "maincat": print "Ä°stem kataloÄŸu";
+	case "maincat": print "İstem kataloğu";
 						break;
-	case "arch": print "Ä°stem arÅŸivi";
+	case "arch": print "İstem arşivi";
 						break;
-	case "archshow": print "Ä°stem arÅŸivi";
+	case "archshow": print "İstem arşivi";
 						break;
 	case "db": switch($x3)
 					{
-						case "input": print "Veri bankasÄ±na yeni Ã¼rÃ¼n giriÅŸi";
+						case "input": print "Veri bankasına yeni ürün girişi";
 						break;
 					}
 					break;
-	case "how2":print "NasÄ±l istem yapmalÄ± ";
-						  if($x2=="pharma") print "farmasÃ¶tik Ã¼rÃ¼nler"; else print "Ã¼rÃ¼nler";
+	case "how2":print "Nasıl istem yapmalı ";
+						  if($x2=="pharma") print "farmasötik ürünler"; else print "ürünler";
 	}
 
 
@@ -36,416 +36,416 @@ if($x2=="pharma") print "Eczane - "; else print "TÄ±bbi ambar - ";
 <?php if($src=="maincat") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yeni bir kalem malzeme istem kataloÄŸuna nasÄ±l eklenir?</b>
+Yeni bir kalem malzeme istem kataloğuna nasıl eklenir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Ã–nce malzemeyi bulmalÄ±sÄ±nÄ±z.  Malzemenin marka ismi, jenerik ismi, sipariÅŸ numarasÄ± vb bilgisinin ya tamamÄ±nÄ± ya da birkaÃ§ harfini 
-				<nobr><span style="background-color:yellow" >" Bir anahtar sÃ¶zcÃ¼k ara: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> alanÄ±na giriniz.<br>
- 	<b>AdÄ±m 2: </b>Malzemeyi bulmak iÃ§in  <input type="button" value="Malzemeyi bul"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 3: </b>Arama sonunda anahtar sÃ¶zcÃ¼ÄŸÃ¼n tam karÅŸÄ±lÄ±ÄŸÄ± bulunur ise , malzemenin ayrÄ±ntÄ±lÄ± bir tanÄ±mÄ± gÃ¶rÃ¼ntÃ¼lenir. <br>
- 	<b>AdÄ±m 4: </b>Malzemeyi kataloÄŸa eklemek iÃ§in <input type="button" value="Bu malzemeyi kataloÄŸa koy"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
- 	<b>UyarÄ±: </b>Bu malzemeyi kataloÄŸa koymak istemez iseniz, bir baÅŸka malzemeyi aramaya devam ediniz.<br>
+ 	<b>Adım 1: </b>Önce malzemeyi bulmalısınız.  Malzemenin marka ismi, jenerik ismi, sipariş numarası vb bilgisinin ya tamamını ya da birkaç harfini 
+				<nobr><span style="background-color:yellow" >" Bir anahtar sözcük ara: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> alanına giriniz.<br>
+ 	<b>Adım 2: </b>Malzemeyi bulmak için  <input type="button" value="Malzemeyi bul"> düğmesini tıklayınız.<br>
+ 	<b>Adım 3: </b>Arama sonunda anahtar sözcüğün tam karşılığı bulunur ise , malzemenin ayrıntılı bir tanımı görüntülenir. <br>
+ 	<b>Adım 4: </b>Malzemeyi kataloğa eklemek için <input type="button" value="Bu malzemeyi kataloğa koy"> düğmesini tıklayınız.<p>
+ 	<b>Uyarı: </b>Bu malzemeyi kataloğa koymak istemez iseniz, bir başka malzemeyi aramaya devam ediniz.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Aramaya nasÄ±l devam edilir?</b>
+Aramaya nasıl devam edilir?</b>
 </font>
 <ul>       	
- 	YukarÄ±da malzemeyi bulmak iÃ§in belirtilen yÃ¶nergeyi izleyiniz.<br>
+ 	Yukarıda malzemeyi bulmak için belirtilen yönergeyi izleyiniz.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Arama benim anahtar sÃ¶zcÃ¼ÄŸÃ¼me yakÄ±n birkaÃ§ sonuÃ§ buldu. Ne yapmalÄ±yÄ±m?</b>
+Arama benim anahtar sözcüğüme yakın birkaç sonuç buldu. Ne yapmalıyım?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Arama anahtar sÃ¶zcÃ¼ÄŸe yakÄ±n bir veya birkaÃ§ malzeme bulur ise, bir liste gÃ¶rÃ¼ntÃ¼lenir..<br>
- 	<b>AdÄ±m 2: </b><img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>> DÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. Malzeme katalog listesine eklenir.<br>
- 	<b>AdÄ±m 3: </b>Malzeme hakkÄ±ndaki tam bilgiyi gÃ¶rmek ister iseniz, ya ismini veya dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z <img <?php echo createComIcon('../','info3.gif','0') ?>>.<br>
- 	<b>AdÄ±m 4: </b>Malzemenin tam bilgisi gÃ¶rÃ¼ntÃ¼lenir.<br>
- 	<b>AdÄ±m 5: </b> <input type="button" value="Bu malzemeyi kataloÄŸa koy"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+ 	<b>Adım 1: </b>Arama anahtar sözcüğe yakın bir veya birkaç malzeme bulur ise, bir liste görüntülenir..<br>
+ 	<b>Adım 2: </b><img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>> Düğmesini tıklayınız. Malzeme katalog listesine eklenir.<br>
+ 	<b>Adım 3: </b>Malzeme hakkındaki tam bilgiyi görmek ister iseniz, ya ismini veya düğmesini tıklayınız <img <?php echo createComIcon('../','info3.gif','0') ?>>.<br>
+ 	<b>Adım 4: </b>Malzemenin tam bilgisi görüntülenir.<br>
+ 	<b>Adım 5: </b> <input type="button" value="Bu malzemeyi kataloğa koy"> düğmesini tıklayınız.<p>
 </ul>
 	
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Malzeme hakkÄ±nda daha fazla bilgi gÃ¶rmek istiyorum. Ne yapmalÄ±yÄ±m?</b>
+Malzeme hakkında daha fazla bilgi görmek istiyorum. Ne yapmalıyım?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Ya malzemenin ismini ya da  <img <?php echo createComIcon('../','info3.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>ÃœrÃ¼nÃ¼n tam bilgisi gÃ¶rÃ¼ntÃ¼lenir.<br>
+ 	<b>Adım 1: </b>Ya malzemenin ismini ya da  <img <?php echo createComIcon('../','info3.gif','0') ?>> düğmesini tıklayınız.<br>
+ 	<b>Adım 2: </b>Ürünün tam bilgisi görüntülenir.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir malzeme katalog listesinden nasÄ±l Ã§Ä±karÄ±lÄ±r?</b>
+Bir malzeme katalog listesinden nasıl çıkarılır?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Malzemenin <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Malzemenin <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> düğmesini tıklayınız.<br>
 </ul>
 
-<?php endif;?>
+<?php endif ?>
 
 <?php if($src=="how2") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
- <?php if($x2=="pharma") print "FarmasÃ¶tik Ã¼rÃ¼nler"; else print "TÄ±bbi ambardan Ã¼rÃ¼nler"; ?>   nasÄ±l istem yapÄ±lÄ±r?
+ <?php if($x2=="pharma") print "Farmasötik ürünler"; else print "Tıbbi ambardan ürünler"; ?>   nasıl istem yapılır?
 </b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Ä°steme geÃ§mek iÃ§in menÃ¼den  "<span style="background-color:yellow" > <img <?php echo createComIcon('../','bestell.gif','0') ?>> Ä°stem </span>" seÃ§eneÄŸini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>Daha Ã¶nce giriÅŸ yaptÄ± iseniz, istem sepeti ve istem kataloÄŸu gÃ¶rÃ¼ntÃ¼lenir. Daha Ã¶nce giriÅŸ yapmadÄ± iseniz kullanÄ±cÄ± adÄ± ve ÅŸifre sorulur.<br>
+ 	<b>Adım 1: </b>İsteme geçmek için menüden  "<span style="background-color:yellow" > <img <?php echo createComIcon('../','bestell.gif','0') ?>> İstem </span>" seçeneğini tıklayınız.<br>
+ 	<b>Adım 2: </b>Daha önce giriş yaptı iseniz, istem sepeti ve istem kataloğu görüntülenir. Daha önce giriş yapmadı iseniz kullanıcı adı ve şifre sorulur.<br>
 
- 	<b>AdÄ±m 3: </b>EÄŸer sorulur ise, kullanÄ±cÄ± adÄ± ve ÅŸifrenizi giriniz. <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 4: </b>Bir istem listesi oluÅŸturmaya baÅŸlayÄ±nÄ±z. SaÄŸ Ã§erÃ§evede bÃ¶lÃ¼m, servis veya ameliyathaneniz iÃ§in istem kataloÄŸunu gÃ¶receksiniz. <p>
- 	<b>AdÄ±m 5: </b>Gereksiniminiz olan malzeme katalog listesinde ise, sol Ã§erÃ§evedeki sepete (istem listesine) malzemeden <b>bir adet</b> koymak iÃ§in  <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z.<p>
+ 	<b>Adım 3: </b>Eğer sorulur ise, kullanıcı adı ve şifrenizi giriniz. <img <?php echo createLDImgSrc('../','continue.gif','0') ?>> düğmesini tıklayınız.<br>
+ 	<b>Adım 4: </b>Bir istem listesi oluşturmaya başlayınız. Sağ çerçevede bölüm, servis veya ameliyathaneniz için istem kataloğunu göreceksiniz. <p>
+ 	<b>Adım 5: </b>Gereksiniminiz olan malzeme katalog listesinde ise, sol çerçevedeki sepete (istem listesine) malzemeden <b>bir adet</b> koymak için  <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> düğmesine tıklayınız.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Ä°stem sepetine bir malzemeden birden fazla sayÄ±da koymak istiyorum. NasÄ±l yapÄ±lÄ±r?</b>
+İstem sepetine bir malzemeden birden fazla sayıda koymak istiyorum. Nasıl yapılır?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>SeÃ§mek iÃ§in ilgili malzemenin <input type="checkbox" name="a" value="a" checked> seÃ§im dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>Malzemenin ilgili  " Pcs. <input type="text" name="d" size=2 maxlength=2> " alanÄ±na parÃ§a sayÄ±sÄ±nÄ± giriniz.<br>
- 	<b>AdÄ±m 3: </b>Malzemeyi sepete (istem listesine) koymak iÃ§in <input type="button" value="Sepete koy"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Seçmek için ilgili malzemenin <input type="checkbox" name="a" value="a" checked> seçim düğmesini tıklayınız.<br>
+ 	<b>Adım 2: </b>Malzemenin ilgili  " Pcs. <input type="text" name="d" size=2 maxlength=2> " alanına parça sayısını giriniz.<br>
+ 	<b>Adım 3: </b>Malzemeyi sepete (istem listesine) koymak için <input type="button" value="Sepete koy"> düğmesini tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Gereksinimim olan malzeme katalog listesinde yok. Ne yapmalÄ±yÄ±m?</b>
+Gereksinimim olan malzeme katalog listesinde yok. Ne yapmalıyım?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Malzemeyi bulmalÄ±sÄ±nÄ±z. Malzemenin marka adÄ±, jenerik adÄ±, sipariÅŸ numarasÄ± vb bilgisinin ya tamamÄ±nÄ± ya da baÅŸtan birkaÃ§ harfini 
-				<nobr><span style="background-color:yellow" >" Aranan anahtar sÃ¶zcÃ¼k: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> alanÄ±na giriniz.<br>
- 	<b>AdÄ±m 2: </b>Malzemeyi bulmak iÃ§in <input type="button" value="Malzemeyi bul"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 3: </b>Arama malzemeyi veya aranan anahtar sÃ¶zcÃ¼ÄŸe yakÄ±n bir malzemeyi  bulur ise bir liste gÃ¶rÃ¼ntÃ¼lenir. <br>
- 	<b>AdÄ±m 4: </b>Ä°stem sepetine malzemenin bir adedini koymak ister iseniz, <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. Malzeme sepete konulur ve aynÄ±sÄ± katalog listesine de eklenir.<br>
- 	<b>AdÄ±m 5: </b>Malzemeyi sadece katalog listesine eklemek ister iseniz <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Malzemeyi bulmalısınız. Malzemenin marka adı, jenerik adı, sipariş numarası vb bilgisinin ya tamamını ya da baştan birkaç harfini 
+				<nobr><span style="background-color:yellow" >" Aranan anahtar sözcük: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> alanına giriniz.<br>
+ 	<b>Adım 2: </b>Malzemeyi bulmak için <input type="button" value="Malzemeyi bul"> düğmesini tıklayınız.<br>
+ 	<b>Adım 3: </b>Arama malzemeyi veya aranan anahtar sözcüğe yakın bir malzemeyi  bulur ise bir liste görüntülenir. <br>
+ 	<b>Adım 4: </b>İstem sepetine malzemenin bir adedini koymak ister iseniz, <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> düğmesini tıklayınız. Malzeme sepete konulur ve aynısı katalog listesine de eklenir.<br>
+ 	<b>Adım 5: </b>Malzemeyi sadece katalog listesine eklemek ister iseniz <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>> düğmesini tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Malzeme hakkÄ±nda daha fazla bilgi gÃ¶rmek istiyorum. Ne yapmalÄ±yÄ±m?</b>
+Malzeme hakkında daha fazla bilgi görmek istiyorum. Ne yapmalıyım?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Ya malzemenin ismini veya  <img <?php echo createComIcon('../','info3.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>ÃœrÃ¼n hakkÄ±nda tÃ¼m bilgileri gÃ¶steren bir pencere aÃ§Ä±lÄ±r.<br>
+ 	<b>Adım 1: </b>Ya malzemenin ismini veya  <img <?php echo createComIcon('../','info3.gif','0') ?>> düğmesini tıklayınız.<br>
+ 	<b>Adım 2: </b>Ürün hakkında tüm bilgileri gösteren bir pencere açılır.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Katalog listesinden bir Ã¼rÃ¼n nasÄ±l silinir?</b>
+Katalog listesinden bir ürün nasıl silinir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Malzemenin <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Malzemenin <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> düğmesini tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Ä°stem sepetindeki parÃ§a sayÄ±sÄ±nÄ± deÄŸiÅŸtirebilir miyim?
+İstem sepetindeki parça sayısını değiştirebilir miyim?
 </b>
 </font>
 <ul>       	
- 	<b>Evet.</b> Ä°stem listesini sonlandÄ±rmadan Ã¶nce sadece parÃ§a sayÄ±sÄ± girdilerini dÃ¼zenlemeniz yeterli olur.
+ 	<b>Evet.</b> İstem listesini sonlandırmadan önce sadece parça sayısı girdilerini düzenlemeniz yeterli olur.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Gereksinimim olan tÃ¼m malzemeler ÅŸimdi sepette. Sonra ne yapmalÄ±yÄ±m?</b>
+Gereksinimim olan tüm malzemeler şimdi sepette. Sonra ne yapmalıyım?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Ä°stem listesini  <?php if($x2=="pharma") print "eczaneye"; else print "tÄ±bbi ambara"; ?> gÃ¶nderebilirsiniz. <br>Ä°ÅŸleme baÅŸlamak iÃ§in <input type="button" value="Ä°stem listesini sonlandÄ±r"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>Ä°stem listesi tekrar gÃ¶rÃ¼ntÃ¼lenir. Ä°sminizi<nobr>"<span style="background-color:yellow" > OluÅŸturan <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanÄ±na giriniz.<br>
- 	<b>AdÄ±m 3: </b>Ä°stemin Ã¶ncelik durumunu "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Acil<input type="radio" name="x" > </span>" arasÄ±ndan seÃ§iniz. Uygun kutuyu iÅŸaretleyiniz.<br>
- 	<b>AdÄ±m 4: </b>Onaylayan (doktor veya cerrah) ismini <nobr>"<span style="background-color:yellow" > Onaylayan <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanÄ±na girmelidir.<br>
- 	<b>AdÄ±m 5: </b>Onaylayan (doktor veya cerrah) ÅŸifresini <nobr>"<span style="background-color:yellow" > Åifre: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanÄ±na girmelidir.<br>
- 	<b>AdÄ±m 6: </b>Ä°stem listesini gÃ¶ndermek iÃ§in  <input type="button" value="Bu istem listesini <?php if($x2=="pharma") print "eczaneye"; else print "tÄ±bbi ambara"; ?> gÃ¶nder."> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>İstem listesini  <?php if($x2=="pharma") print "eczaneye"; else print "tıbbi ambara"; ?> gönderebilirsiniz. <br>İşleme başlamak için <input type="button" value="İstem listesini sonlandır"> düğmesini tıklayınız.<br>
+ 	<b>Adım 2: </b>İstem listesi tekrar görüntülenir. İsminizi<nobr>"<span style="background-color:yellow" > Oluşturan <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanına giriniz.<br>
+ 	<b>Adım 3: </b>İstemin öncelik durumunu "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Acil<input type="radio" name="x" > </span>" arasından seçiniz. Uygun kutuyu işaretleyiniz.<br>
+ 	<b>Adım 4: </b>Onaylayan (doktor veya cerrah) ismini <nobr>"<span style="background-color:yellow" > Onaylayan <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanına girmelidir.<br>
+ 	<b>Adım 5: </b>Onaylayan (doktor veya cerrah) şifresini <nobr>"<span style="background-color:yellow" > Şifre: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanına girmelidir.<br>
+ 	<b>Adım 6: </b>İstem listesini göndermek için  <input type="button" value="Bu istem listesini <?php if($x2=="pharma") print "eczaneye"; else print "tıbbi ambara"; ?> gönder."> düğmesini tıklayınız.<br>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
- Ä°stem listesini gÃ¶ndermeyi iptal etmeye karar verir iseniz, istem listesine geri gitmek iÃ§in  "<span style="background-color:yellow" > Geri ve listeyi dÃ¼zenle </span>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.
+ İstem listesini göndermeyi iptal etmeye karar verir iseniz, istem listesine geri gitmek için  "<span style="background-color:yellow" > Geri ve listeyi düzenle </span>" bağlantısını tıklayınız.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Åimdi istem vermeyi sonlandÄ±rmak istiyorum. Ne yapmalÄ±yÄ±m?</b>
+Şimdi istem vermeyi sonlandırmak istiyorum. Ne yapmalıyım?</b>
 </font>
 <ul>     
- 	<b>AdÄ±m 1: </b> <?php if($x2=="pharma") print "Eczane"; else print "TÄ±bbi ambar"; ?> alt menÃ¼sÃ¼ne geri gitmek iÃ§in  "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> Ä°stem son </span>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b> <?php if($x2=="pharma") print "Eczane"; else print "Tıbbi ambar"; ?> alt menüsüne geri gitmek için  "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> İstem son </span>" bağlantısını tıklayınız.<br>
 </ul>	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yeni bir istem listesi oluÅŸturmak istiyorum. Ne yapmalÄ±yÄ±m?</b>
+Yeni bir istem listesi oluşturmak istiyorum. Ne yapmalıyım?</b>
 </font>
 <ul>     
- 	<b>AdÄ±m 1: </b>BoÅŸ bir istem sepeti oluÅŸturmak iÃ§in  "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> Yeni bir istem listesi baÅŸlat </span>"  baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Boş bir istem sepeti oluşturmak için  "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> Yeni bir istem listesi başlat </span>"  bağlantısını tıklayınız.<br>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
- Ä°stem sepeti veya katalog listesi hakkÄ±nda pencere iÃ§erisindeki  <img <?php echo createComIcon('../','frage.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayarak ayrÄ±ntÄ±lÄ± bilgi alabilirsiniz.
+ İstem sepeti veya katalog listesi hakkında pencere içerisindeki  <img <?php echo createComIcon('../','frage.gif','0') ?>> düğmesini tıklayarak ayrıntılı bilgi alabilirsiniz.
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
- Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+ Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif;?>
+<?php endif ?>
 
 
 <?php if($src=="head") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-<?php if($x2=="pharma") print "FarmasÃ¶tik Ã¼rÃ¼nler"; 
-						else print "TÄ±bbi ambardan Ã¼rÃ¼nler"; ?> nasÄ±l istem yapÄ±lÄ±r?
+<?php if($x2=="pharma") print "Farmasötik ürünler"; 
+						else print "Tıbbi ambardan ürünler"; ?> nasıl istem yapılır?
 </b>
 </font>
 <ul>       	
 
- 	<b>AdÄ±m 1: </b>Ã–nce istem listesi oluÅŸturunuz. SaÄŸ Ã§erÃ§evede bÃ¶lÃ¼m, servis veya ameliyathaneniz iÃ§in istem kataloÄŸunu gÃ¶receksiniz. <p>
- 	<b>AdÄ±m 2: </b>Gereksiniminiz olan malzeme katalog listesinde ise, sol Ã§erÃ§evedeki sepete (istem listesine) malzemeden <b>bir adet</b> koymak iÃ§in  <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z.<p>
+ 	<b>Adım 1: </b>Önce istem listesi oluşturunuz. Sağ çerçevede bölüm, servis veya ameliyathaneniz için istem kataloğunu göreceksiniz. <p>
+ 	<b>Adım 2: </b>Gereksiniminiz olan malzeme katalog listesinde ise, sol çerçevedeki sepete (istem listesine) malzemeden <b>bir adet</b> koymak için  <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> düğmesine tıklayınız.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Ä°stem sepetine bir malzemeden birden fazla sayÄ±da koymak istiyorum. NasÄ±l yapÄ±lÄ±r?</b>
+İstem sepetine bir malzemeden birden fazla sayıda koymak istiyorum. Nasıl yapılır?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>SeÃ§mek iÃ§in ilgili malzemenin <input type="checkbox" name="a" value="a" checked> seÃ§im dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>Malzemenin ilgili  " Pcs. <input type="text" name="d" size=2 maxlength=2> " alanÄ±na parÃ§a sayÄ±sÄ±nÄ± giriniz.<br>
- 	<b>AdÄ±m 3: </b>Malzemeyi sepete (istem listesine) koymak iÃ§in <input type="button" value="Sepete koy"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Seçmek için ilgili malzemenin <input type="checkbox" name="a" value="a" checked> seçim düğmesini tıklayınız.<br>
+ 	<b>Adım 2: </b>Malzemenin ilgili  " Pcs. <input type="text" name="d" size=2 maxlength=2> " alanına parça sayısını giriniz.<br>
+ 	<b>Adım 3: </b>Malzemeyi sepete (istem listesine) koymak için <input type="button" value="Sepete koy"> düğmesini tıklayınız.<br>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
- Pencere iÃ§erisinde <img <?php echo createComIcon('../','frage.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayarak istem sepeti veya katalog listesi hakkÄ±nda ayrÄ±ntÄ±lÄ± bilgi edinebilirsiniz.
+ Pencere içerisinde <img <?php echo createComIcon('../','frage.gif','0') ?>> düğmesini tıklayarak istem sepeti veya katalog listesi hakkında ayrıntılı bilgi edinebilirsiniz.
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
- Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+ Kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif;?>
+<?php endif ?>
 
 <?php if($src=="catalog") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir malzeme sepete (istem listesine) nasÄ±l konur?
+Bir malzeme sepete (istem listesine) nasıl konur?
 </b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Ä°htiyacÄ±nÄ±z olan malzeme katalog listesinde ise malzemeden <b>bir kalem</b> sol Ã§erÃ§evedeki istem listesine (sepet) koymak iÃ§in  <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z.<p>
+ 	<b>Adım 1: </b>İhtiyacınız olan malzeme katalog listesinde ise malzemeden <b>bir kalem</b> sol çerçevedeki istem listesine (sepet) koymak için  <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> düğmesine tıklayınız.<p>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Ä°stem sepetine bir Ã¼rÃ¼nden birden fazla sayÄ±da koymak istiyorum. NasÄ±l yapÄ±lÄ±r?</b>
+İstem sepetine bir üründen birden fazla sayıda koymak istiyorum. Nasıl yapılır?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>SeÃ§mek iÃ§in malzemeye karÅŸÄ±lÄ±k gelen <input type="checkbox" name="a" value="a" checked> seÃ§me dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>ParÃ§a sayÄ±sÄ±nÄ±  malzemenin ilgili " parÃ§a <input type="text" name="d" size=2 maxlength=2> " alanÄ±na giriniz.<br>
- 	<b>AdÄ±m 3: </b>Malzemeyi sepete (istem listesine) koymak iÃ§in  <input type="button" value="Sepete koy"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Seçmek için malzemeye karşılık gelen <input type="checkbox" name="a" value="a" checked> seçme düğmesini tıklayınız.<br>
+ 	<b>Adım 2: </b>Parça sayısını  malzemenin ilgili " parça <input type="text" name="d" size=2 maxlength=2> " alanına giriniz.<br>
+ 	<b>Adım 3: </b>Malzemeyi sepete (istem listesine) koymak için  <input type="button" value="Sepete koy"> düğmesini tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-GereksindiÄŸim malzeme katalog listesinde yok. Ne yapmalÄ±yÄ±m?</b>
+Gereksindiğim malzeme katalog listesinde yok. Ne yapmalıyım?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Malzemeyi bulmalÄ±sÄ±nÄ±z. Malzemenin marka, veya jenerik isim, veya sipariÅŸ numarasÄ± bilgisinin ya tamamÄ±nÄ± veya birkaÃ§ harfini  
-				<nobr><span style="background-color:yellow" >" Aranacak anahtar sÃ¶zcÃ¼k: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> alanÄ±na giriniz.<br>
- 	<b>AdÄ±m 2: </b>Malzemeyi bulmak iÃ§in  <input type="button" value="Malzemeyi bul"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 3: </b>Arama malzemeyi bulur ise veya arama anahtar sÃ¶zcÃ¼ÄŸÃ¼ne yakÄ±n bir Ã¼rÃ¼n bulunur ise bir liste gÃ¶rÃ¼ntÃ¼lenir.<br>
- 	<b>AdÄ±m 4: </b>EÄŸer malzemeden bir parÃ§a istem sepetine koymak ister iseniz  <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z. Malzeme sepete konur ve aynÄ± zamanda katalog listesine eklenir.<br>
- 	<b>AdÄ±m 5: </b>Malzemeyi sadece katalog listesine eklemek ister iseniz, <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Malzemeyi bulmalısınız. Malzemenin marka, veya jenerik isim, veya sipariş numarası bilgisinin ya tamamını veya birkaç harfini  
+				<nobr><span style="background-color:yellow" >" Aranacak anahtar sözcük: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> alanına giriniz.<br>
+ 	<b>Adım 2: </b>Malzemeyi bulmak için  <input type="button" value="Malzemeyi bul"> düğmesini tıklayınız.<br>
+ 	<b>Adım 3: </b>Arama malzemeyi bulur ise veya arama anahtar sözcüğüne yakın bir ürün bulunur ise bir liste görüntülenir.<br>
+ 	<b>Adım 4: </b>Eğer malzemeden bir parça istem sepetine koymak ister iseniz  <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> düğmesine tıklayınız. Malzeme sepete konur ve aynı zamanda katalog listesine eklenir.<br>
+ 	<b>Adım 5: </b>Malzemeyi sadece katalog listesine eklemek ister iseniz, <img <?php echo createComIcon('../','dwnarrowgrnlrg.gif','0') ?>> düğmesini tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Malzeme hakkÄ±nda daha fazla bilgi gÃ¶rmek istiyorum. Ne yapmalÄ±yÄ±m?</b>
+Malzeme hakkında daha fazla bilgi görmek istiyorum. Ne yapmalıyım?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Ya  <img <?php echo createComIcon('../','info3.gif','0') ?>> dÃ¼ÄŸmesini veya malzemenin ismini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>Malzeme hakkÄ±ndaki tÃ¼m bilgileri gÃ¶steren bir pencere aÃ§Ä±lÄ±r.<br>
+ 	<b>Adım 1: </b>Ya  <img <?php echo createComIcon('../','info3.gif','0') ?>> düğmesini veya malzemenin ismini tıklayınız.<br>
+ 	<b>Adım 2: </b>Malzeme hakkındaki tüm bilgileri gösteren bir pencere açılır.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir malzeme katalog listesinden nasÄ±l silinir?</b>
+Bir malzeme katalog listesinden nasıl silinir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Malzemenin <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Malzemenin <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> düğmesine tıklayınız.<br>
 </ul>
 
-<?php endif;?>
+<?php endif ?>
 
 <?php if($src=="orderlist") : ?>
 	<?php if($x1=="0") : ?>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
- Halen sepet boÅŸ.<p>
- Bir istem listesi oluÅŸturmak iÃ§in, gereksiniminiz olan malzemeyi saÄŸ Ã§erÃ§evedeki katalog listesinden seÃ§ip sepete koyunuz.
+ Halen sepet boş.<p>
+ Bir istem listesi oluşturmak için, gereksiniminiz olan malzemeyi sağ çerçevedeki katalog listesinden seçip sepete koyunuz.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Malzeme sepete (istem listesine) nasÄ±l konulur?
+Malzeme sepete (istem listesine) nasıl konulur?
 </b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Gereksiniminiz olan malzeme katalog listesinde ise, malzemeden <b>bir adet</b> istem listesine (sepete) koymak iÃ§in  <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br> Ä°stem listesi otomatik olarak soldaki sepet Ã§erÃ§evesinde gÃ¶rÃ¼ntÃ¼lenir.<p>
+ 	<b>Adım 1: </b>Gereksiniminiz olan malzeme katalog listesinde ise, malzemeden <b>bir adet</b> istem listesine (sepete) koymak için  <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> düğmesini tıklayınız.<br> İstem listesi otomatik olarak soldaki sepet çerçevesinde görüntülenir.<p>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
- Katalog listesinden sepete malzemelerin aranmasÄ±, seÃ§ilmesi ve konulmasÄ± konusunda ayrÄ±ntÄ±lÄ± bilgi iÃ§in saÄŸdaki istem katalog Ã§erÃ§evesi iÃ§erisindeki  <img <?php echo createComIcon('../','frage.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+ Katalog listesinden sepete malzemelerin aranması, seçilmesi ve konulması konusunda ayrıntılı bilgi için sağdaki istem katalog çerçevesi içerisindeki  <img <?php echo createComIcon('../','frage.gif','0') ?>> düğmesini tıklayınız.<p>
 </ul>
 
 	<?php else : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Ä°stem sepetindeki parÃ§a sayÄ±sÄ±nÄ± deÄŸiÅŸtirebilir miyim?
+İstem sepetindeki parça sayısını değiştirebilir miyim?
 </b>
 </font>
 <ul>       	
- 	<b>Evet.</b> Ä°stem listesini sonlandÄ±rmadan Ã¶nce parÃ§a sayÄ±sÄ± girdisini deÄŸiÅŸtirmeniz yeterli.
+ 	<b>Evet.</b> İstem listesini sonlandırmadan önce parça sayısı girdisini değiştirmeniz yeterli.
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Malzeme konusunda daha fazla bilgi gÃ¶rmek istiyorum. Ne yapmalÄ±yÄ±m?</b>
+Malzeme konusunda daha fazla bilgi görmek istiyorum. Ne yapmalıyım?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Malzemenin <img <?php echo createComIcon('../','info3.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>ÃœrÃ¼n hakkÄ±ndaki tÃ¼m bilgileri gÃ¶steren bir pencere aÃ§Ä±lÄ±r.<br>
+ 	<b>Adım 1: </b>Malzemenin <img <?php echo createComIcon('../','info3.gif','0') ?>> düğmesini tıklayınız.<br>
+ 	<b>Adım 2: </b>Ürün hakkındaki tüm bilgileri gösteren bir pencere açılır.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir malzeme sepetten nasÄ±l Ã§Ä±karÄ±lÄ±r?</b>
+Bir malzeme sepetten nasıl çıkarılır?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Malzemenin  <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Malzemenin  <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> düğmesini tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-GereksindiÄŸim tÃ¼m malzemeler ÅŸimdi sepette. Sonra ne yapmalÄ±yÄ±m?</b>
+Gereksindiğim tüm malzemeler şimdi sepette. Sonra ne yapmalıyım?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Ä°stem listesini eczaneye gÃ¶nderebilirsiniz. <br>Ä°ÅŸlemi baÅŸlatmak iÃ§in  <input type="button" value="Ä°stem listesini sonlandÄ±r"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>Ä°stem listesi tekrar gÃ¶rÃ¼ntÃ¼lenir. Ä°sminizi <nobr>"<span style="background-color:yellow" > OluÅŸturan <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanÄ±na yazÄ±nÄ±z.<br>
- 	<b>AdÄ±m 3: </b>Ä°stemin Ã¶ncelik durumunu  "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Acil<input type="radio" name="x" > </span>" arasÄ±ndan seÃ§iniz. Uygun seÃ§im kutusunu iÅŸaretleyiniz.<br>
- 	<b>AdÄ±m 4: </b>Onaylayan (doktor veya cerrah) ismini <nobr>"<span style="background-color:yellow" > Onaylayan <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanÄ±na girmelidir.<br>
- 	<b>AdÄ±m 5: </b>Onaylayan (doktor veya cerrah) ÅŸifresini <nobr>"<span style="background-color:yellow" > Åifre: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanÄ±na girmelidir.<br>
- 	<b>AdÄ±m 6: </b>Ä°stem listesini gÃ¶ndermek iÃ§in  <input type="button" value="Bu istem listesini eczaneye gÃ¶nder"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>İstem listesini eczaneye gönderebilirsiniz. <br>İşlemi başlatmak için  <input type="button" value="İstem listesini sonlandır"> düğmesini tıklayınız.<br>
+ 	<b>Adım 2: </b>İstem listesi tekrar görüntülenir. İsminizi <nobr>"<span style="background-color:yellow" > Oluşturan <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanına yazınız.<br>
+ 	<b>Adım 3: </b>İstemin öncelik durumunu  "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Acil<input type="radio" name="x" > </span>" arasından seçiniz. Uygun seçim kutusunu işaretleyiniz.<br>
+ 	<b>Adım 4: </b>Onaylayan (doktor veya cerrah) ismini <nobr>"<span style="background-color:yellow" > Onaylayan <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanına girmelidir.<br>
+ 	<b>Adım 5: </b>Onaylayan (doktor veya cerrah) şifresini <nobr>"<span style="background-color:yellow" > Şifre: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanına girmelidir.<br>
+ 	<b>Adım 6: </b>İstem listesini göndermek için  <input type="button" value="Bu istem listesini eczaneye gönder"> düğmesini tıklayınız.<br>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
- Ä°stem listesini gÃ¶ndermeyi iptal etmeye karar verir iseniz, "<span style="background-color:yellow" > Geri git ve listeyi dÃ¼zenle </span>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.
+ İstem listesini göndermeyi iptal etmeye karar verir iseniz, "<span style="background-color:yellow" > Geri git ve listeyi düzenle </span>" bağlantısını tıklayınız.
 </ul>
-	<?php endif;?>
+	<?php endif ?>
 
-<?php endif;?>
+<?php endif ?>
 
 
 <?php if($src=="final") : ?>
 	<?php if($x1=="1") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Ä°stemi sonlandÄ±rmak istiyorum. Ne yapmalÄ±yÄ±m?</b>
+İstemi sonlandırmak istiyorum. Ne yapmalıyım?</b>
 </font>
 <ul>     
- 	<b>AdÄ±m 1: </b>Eczane alt menÃ¼sÃ¼ne geri dÃ¶nmek iÃ§in  "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> Ä°stem sonu </span>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Eczane alt menüsüne geri dönmek için  "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> İstem sonu </span>" bağlantısını tıklayınız.<br>
 </ul>	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yeni bir istem listesi oluÅŸturmak istiyorum. Ne yapmalÄ±yÄ±m?</b>
+Yeni bir istem listesi oluşturmak istiyorum. Ne yapmalıyım?</b>
 </font>
 <ul>     
- 	<b>AdÄ±m 1: </b>BoÅŸ bir istem sepeti oluÅŸturmak iÃ§in "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> Yeni bir istem listesi baÅŸlat </span>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Boş bir istem sepeti oluşturmak için "<span style="background-color:yellow" > <img <?php echo createComIcon('../','arrow-blu.gif','0') ?>> Yeni bir istem listesi başlat </span>" bağlantısını tıklayınız.<br>
 </ul>		<?php else : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-SonlandÄ±rÄ±lmÄ±ÅŸ istem listesi nasÄ±l gÃ¶nderilir?</b>
+Sonlandırılmış istem listesi nasıl gönderilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Ä°sminizi <nobr>"<span style="background-color:yellow" > OluÅŸturan <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanÄ±na yazÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>Ä°stemin Ã¶ncelik durumunu  "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Acil<input type="radio" name="x" > </span>" arasÄ±ndan seÃ§iniz. Uygun seÃ§im kutusunu iÅŸaretleyiniz.<br>
- 	<b>AdÄ±m 3: </b>Onaylayan (doktor veya cerrah) ismini <nobr>"<span style="background-color:yellow" > Onaylayan <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanÄ±na girmelidir.<br>
- 	<b>AdÄ±m 4: </b>Onaylayan (doktor veya cerrah) ÅŸifresini <nobr>"<span style="background-color:yellow" > Åifre: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanÄ±na girmelidir.<br>
- 	<b>AdÄ±m 5: </b>Ä°stem listesini gÃ¶ndermek iÃ§in  <input type="button" value="Bu istem listesini eczaneye gÃ¶nder"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>İsminizi <nobr>"<span style="background-color:yellow" > Oluşturan <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanına yazınız.<br>
+ 	<b>Adım 2: </b>İstemin öncelik durumunu  "<span style="background-color:yellow" > Normal<input type="radio" name="x" value="s" checked> Acil<input type="radio" name="x" > </span>" arasından seçiniz. Uygun seçim kutusunu işaretleyiniz.<br>
+ 	<b>Adım 3: </b>Onaylayan (doktor veya cerrah) ismini <nobr>"<span style="background-color:yellow" > Onaylayan <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanına girmelidir.<br>
+ 	<b>Adım 4: </b>Onaylayan (doktor veya cerrah) şifresini <nobr>"<span style="background-color:yellow" > Şifre: <input type="text" name="c" size=15 maxlength=10> </span>"</nobr> alanına girmelidir.<br>
+ 	<b>Adım 5: </b>İstem listesini göndermek için  <input type="button" value="Bu istem listesini eczaneye gönder"> düğmesini tıklayınız.<br>
 </ul>
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
- Ä°stem listesini gÃ¶ndermeyi iptal etmeye karar verir iseniz, "<span style="background-color:yellow" > Geri git ve listeyi dÃ¼zenle </span>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.
+ İstem listesini göndermeyi iptal etmeye karar verir iseniz, "<span style="background-color:yellow" > Geri git ve listeyi düzenle </span>" bağlantısını tıklayınız.
 </ul>
-	<?php endif;?>
+	<?php endif ?>
 
-<?php endif;?>
-<!-- ++++++++++++++++++++++++++++++++++ archive ++++++++Ã‡eviren Op. Dr. BÃ¼lent Potur ++++++++++++++ -->
+<?php endif ?>
+<!-- ++++++++++++++++++++++++++++++++++ archive ++++++++Çeviren Op. Dr. Bülent Potur ++++++++++++++ -->
 <?php if($src=="arch") : ?>
 
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>ArÅŸivdeki istem listelerini gÃ¶rmek istiyorum.</b></font>
-<ul>  	<b>AdÄ±m 1: </b> BÃ¶lÃ¼m adÄ±, kÄ±saltmasÄ±, istem tarihi, Ã¶ncelik ("acil") bilgilerinin tamamÄ±nÄ± vaya ilk birkaÃ§ harfini 
-				<nobr><span style="background-color:yellow" >" Aranacak anahtar sÃ¶zcÃ¼k: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> alanÄ±na giriniz.<br>
- 	<b>AdÄ±m 2: </b>Arama kategorilerine gÃ¶re izleyen kutularÄ± seÃ§iniz veya seÃ§imden Ã§Ä±karÄ±nÄ±z:
+<font color="#990000"><b>Arşivdeki istem listelerini görmek istiyorum.</b></font>
+<ul>  	<b>Adım 1: </b> Bölüm adı, kısaltması, istem tarihi, öncelik ("acil") bilgilerinin tamamını vaya ilk birkaç harfini 
+				<nobr><span style="background-color:yellow" >" Aranacak anahtar sözcük: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> alanına giriniz.<br>
+ 	<b>Adım 2: </b>Arama kategorilerine göre izleyen kutuları seçiniz veya seçimden çıkarınız:
 <ul> 	
   	<input type="checkbox" name="d" checked> Tarih<br>
-	<input type="checkbox" name="d" checked> BÃ¶lÃ¼m<br>
-  	<input type="checkbox" name="d" checked> Ã–ncelik<br>
-	Ã–n seÃ§imli olarak kutularÄ±n Ã¼Ã§Ã¼ de seÃ§ilir ve arama her Ã¼Ã§ kategoride yapÄ±lÄ±r. Bir kategoriyi dÄ±ÅŸarÄ±da tutmak ister iseniz kutusuna tÄ±klayÄ±p seÃ§imden Ã§Ä±karÄ±nÄ±z.
+	<input type="checkbox" name="d" checked> Bölüm<br>
+  	<input type="checkbox" name="d" checked> Öncelik<br>
+	Ön seçimli olarak kutuların üçü de seçilir ve arama her üç kategoride yapılır. Bir kategoriyi dışarıda tutmak ister iseniz kutusuna tıklayıp seçimden çıkarınız.
 </ul> 	
-<b>AdÄ±m 3: </b>Malzemeyi bulmak iÃ§in <input type="button" value="Ara"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 4: </b>Arama aranan anahtar sÃ¶zcÃ¼ÄŸe yaklaÅŸÄ±k bir sonuÃ§ bulur ise bir liste gÃ¶rÃ¼ntÃ¼lenir. .<br>
- 	<b>AdÄ±m 5: </b>Ä°stemin liste dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>. Ä°stemin ayrÄ±ntÄ±larÄ± gÃ¶rÃ¼ntÃ¼lenir<br>
+<b>Adım 3: </b>Malzemeyi bulmak için <input type="button" value="Ara"> düğmesini tıklayınız.<br>
+ 	<b>Adım 4: </b>Arama aranan anahtar sözcüğe yaklaşık bir sonuç bulur ise bir liste görüntülenir. .<br>
+ 	<b>Adım 5: </b>İstemin liste düğmesini tıklayınız <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>. İstemin ayrıntıları görüntülenir<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>BirkaÃ§ istem listelendi. Belirli bir istem nasÄ±l gÃ¶rÃ¼lÃ¼r?</b></font>
+<font color="#990000"><b>Birkaç istem listelendi. Belirli bir istem nasıl görülür?</b></font>
 <ul>  	
- 	<b>AdÄ±m 1: </b>Ä°stemin dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>. Ä°stemin ayrÄ±ntÄ±larÄ± gÃ¶rÃ¼ntÃ¼lenir<br>
+ 	<b>Adım 1: </b>İstemin düğmesini tıklayınız <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>. İstemin ayrıntıları görüntülenir<br>
 </ul>
 
-<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> UyarÄ±:</b></font> 
+<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Uyarı:</b></font> 
 <ul>       	
- AramayÄ± sonlandÄ±rÄ±p kapatmaya karar verir iseniz, <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+ Aramayı sonlandırıp kapatmaya karar verir iseniz, <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 
-	<?php endif;?>
+	<?php endif ?>
 	
 <?php if($src=="archshow") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Ä°stem listesindeki bir malzeme hakkÄ±nda daha fazla bilgi gÃ¶rmek istiyorum. Ne yapmalÄ±yÄ±m?</b>
+İstem listesindeki bir malzeme hakkında daha fazla bilgi görmek istiyorum. Ne yapmalıyım?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Malzemenin <img <?php echo createComIcon('../','info3.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>ÃœrÃ¼n hakkÄ±ndaki tÃ¼m bilgileri gÃ¶steren bir pencere aÃ§Ä±lÄ±r.<br>
+ 	<b>Adım 1: </b>Malzemenin <img <?php echo createComIcon('../','info3.gif','0') ?>> düğmesini tıklayınız.<br>
+ 	<b>Adım 2: </b>Ürün hakkındaki tüm bilgileri gösteren bir pencere açılır.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Tekrar arÅŸivdeki istemlerin listesini gÃ¶rmek istiyorum. Ne yapmalÄ±yÄ±m?</b>
+Tekrar arşivdeki istemlerin listesini görmek istiyorum. Ne yapmalıyım?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b> <img <?php echo createLDImgSrc('../','back2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b> <img <?php echo createLDImgSrc('../','back2.gif','0') ?>> düğmesini tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>ArÅŸivdeki istem listesinde yeni bir arama yapmak istiyorum. Ne yapmalÄ±yÄ±m?</b></font>
-<ul>  	<b>AdÄ±m 1: </b> BÃ¶lÃ¼m adÄ±, kÄ±saltmasÄ±, istem tarihi, Ã¶ncelik ("acil") bilgilerinin tamamÄ±nÄ± vaya ilk birkaÃ§ harfini 
-				<nobr><span style="background-color:yellow" >" Aranacak anahtar sÃ¶zcÃ¼k: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> alanÄ±na giriniz.<br>
- 	<b>AdÄ±m 2: </b>Arama kategorilerine gÃ¶re izleyen kutularÄ± seÃ§iniz veya seÃ§imden Ã§Ä±karÄ±nÄ±z:
+<font color="#990000"><b>Arşivdeki istem listesinde yeni bir arama yapmak istiyorum. Ne yapmalıyım?</b></font>
+<ul>  	<b>Adım 1: </b> Bölüm adı, kısaltması, istem tarihi, öncelik ("acil") bilgilerinin tamamını vaya ilk birkaç harfini 
+				<nobr><span style="background-color:yellow" >" Aranacak anahtar sözcük: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> alanına giriniz.<br>
+ 	<b>Adım 2: </b>Arama kategorilerine göre izleyen kutuları seçiniz veya seçimden çıkarınız:
 <ul> 	
   	<input type="checkbox" name="d" checked> Tarih<br>
-	<input type="checkbox" name="d" checked> BÃ¶lÃ¼m<br>
-  	<input type="checkbox" name="d" checked> Ã–ncelik<br>
-	Ã–n seÃ§imli olarak kutularÄ±n Ã¼Ã§Ã¼ de seÃ§ilir ve arama her Ã¼Ã§ kategoride yapÄ±lÄ±r. Bir kategoriyi dÄ±ÅŸarÄ±da tutmak ister iseniz kutusuna tÄ±klayÄ±p seÃ§imden Ã§Ä±karÄ±nÄ±z.
+	<input type="checkbox" name="d" checked> Bölüm<br>
+  	<input type="checkbox" name="d" checked> Öncelik<br>
+	Ön seçimli olarak kutuların üçü de seçilir ve arama her üç kategoride yapılır. Bir kategoriyi dışarıda tutmak ister iseniz kutusuna tıklayıp seçimden çıkarınız.
 </ul> 	
-<b>AdÄ±m 3: </b>Malzemeyi bulmak iÃ§in <input type="button" value="Ara"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 4: </b>Arama aranan anahtar sÃ¶zcÃ¼ÄŸe yaklaÅŸÄ±k bir sonuÃ§ bulur ise bir liste gÃ¶rÃ¼ntÃ¼lenir.<br>
+<b>Adım 3: </b>Malzemeyi bulmak için <input type="button" value="Ara"> düğmesini tıklayınız.<br>
+ 	<b>Adım 4: </b>Arama aranan anahtar sözcüğe yaklaşık bir sonuç bulur ise bir liste görüntülenir.<br>
 </ul>
-	<?php endif;?>	
+	<?php endif ?>	
 	
 
 <?php if($src=="db") : ?>
 	<?php if($x1=="") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bilgi bankasÄ±na bir Ã¼rÃ¼n nasÄ±l girilir?</b>
+Bilgi bankasına bir ürün nasıl girilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Ã–nce Ã¼rÃ¼n hakkÄ±nda bulunan tÃ¼m bilgileri ilgili giriÅŸ alanlarÄ±na giriniz.<br>
+ 	<b>Adım 1: </b>Önce ürün hakkında bulunan tüm bilgileri ilgili giriş alanlarına giriniz.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-ÃœrÃ¼nÃ¼n bir resmini seÃ§mek istiyorum. NasÄ±l yapÄ±lÄ±r?</b>
+Ürünün bir resmini seçmek istiyorum. Nasıl yapılır?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>"<span style="background-color:yellow" > Resim dosyasÄ± </span>" alanÄ±ndaki <input type="button" value="AraÅŸtÄ±r..."> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
- 	<b>AdÄ±m 2: </b>Bir doaya seÃ§mek iÃ§in kÃ¼Ã§Ã¼k bir pencere aÃ§Ä±lÄ±r. Ä°stediÄŸiniz resim dosyasÄ±nÄ± seÃ§iniz ve "Tamam" Ä± tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>"<span style="background-color:yellow" > Resim dosyası </span>" alanındaki <input type="button" value="Araştır..."> düğmesini tıklayınız. <br>
+ 	<b>Adım 2: </b>Bir doaya seçmek için küçük bir pencere açılır. İstediğiniz resim dosyasını seçiniz ve "Tamam" ı tıklayınız.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bulunan tÃ¼m Ã¼rÃ¼n bilgisini girmeyi bitirdim. NasÄ±l kayÄ±t edilir?</b>
+Bulunan tüm ürün bilgisini girmeyi bitirdim. Nasıl kayıt edilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b> <input type="button" value="Kaydet"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±Ä±z.<br>
+ 	<b>Adım 1: </b> <input type="button" value="Kaydet"> düğmesini tıklayınıız.<br>
 </ul>
-	<?php endif;?>	
+	<?php endif ?>	
 	<?php if($x1=="save") : ?>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yeni bir Ã¼rÃ¼n bilgi bankasÄ±na nasÄ±l girilir?</b>
+Yeni bir ürün bilgi bankasına nasıl girilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b><input type="button" value="Yeni Ã¼rÃ¼n"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>GiriÅŸ formu gÃ¶rÃ¼ntÃ¼lenir.<br>
- 	<b>AdÄ±m 3: </b>Yeni Ã¼rÃ¼nÃ¼b bilgilerini giriniz.<br>
- 	<b>AdÄ±m 4: </b>Bilgiyi kayÄ±t etmek iÃ§in  <input type="button" value="Kaydet"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b><input type="button" value="Yeni ürün"> düğmesini tıklayınız.<br>
+ 	<b>Adım 2: </b>Giriş formu görüntülenir.<br>
+ 	<b>Adım 3: </b>Yeni ürünüb bilgilerini giriniz.<br>
+ 	<b>Adım 4: </b>Bilgiyi kayıt etmek için  <input type="button" value="Kaydet"> düğmesini tıklayınız.<br>
 </ul>
 	<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-GÃ¶rÃ¼ntÃ¼lenen Ã¼rÃ¼nÃ¼n bilgisini dÃ¼zenlemek istiyorum. NasÄ±l yapÄ±lÄ±r?</b>
+Görüntülenen ürünün bilgisini düzenlemek istiyorum. Nasıl yapılır?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b> <input type="button" value="GÃ¼ncelle veya dÃ¼zenle"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>ÃœrÃ¼n bilgisi dÃ¼zenleme formuna otomatik olarak girilir.<br>
- 	<b>AdÄ±m 3: </b>Bilgiyi dÃ¼zenleyiniz.<br>
- 	<b>AdÄ±m 4: </b>Yeni bilgiyi kayÄ±t etmek iÃ§in  <input type="button" value="Kaydet"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b> <input type="button" value="Güncelle veya düzenle"> düğmesini tıklayınız.<br>
+ 	<b>Adım 2: </b>Ürün bilgisi düzenleme formuna otomatik olarak girilir.<br>
+ 	<b>Adım 3: </b>Bilgiyi düzenleyiniz.<br>
+ 	<b>Adım 4: </b>Yeni bilgiyi kayıt etmek için  <input type="button" value="Kaydet"> düğmesini tıklayınız.<br>
 </ul>
 	
-	<?php endif;?>	
-<?php endif;?>	
+	<?php endif ?>	
+<?php endif ?>	
 </form>
 

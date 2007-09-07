@@ -1,31 +1,31 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bir adres nasÄ±l aranÄ±r</b></font>
+<b>Bir adres nasıl aranır</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<b>AdÄ±m 1</b>
+<b>Adım 1</b>
 
-<ul> Adres bilgisini ya tam olarak ya da birkaÃ§ harfini giriniz, Ã¶rneÄŸin isim, ISO Ã¼lke kodu gibi ya da UNECE yer kodu gibi.
-		<p>Ã–rnek 1: "Ankara" veya "ank" giriniz.
-		<br>Ã–rnek 2: "AZ" veya "az" giriniz (Azarbeycan anlamÄ±nda).
-		<br>Ã–rnek 3: "123" giriniz.
+<ul> Adres bilgisini ya tam olarak ya da birkaç harfini giriniz, örneğin isim, ISO ülke kodu gibi ya da UNECE yer kodu gibi.
+		<p>Örnek 1: "Ankara" veya "ank" giriniz.
+		<br>Örnek 2: "AZ" veya "az" giriniz (Azarbeycan anlamında).
+		<br>Örnek 3: "123" giriniz.
 	<p>
-	Dikkat:  % veya * iÅŸaretlerini joker harf olarak kullanabilirsiniz.
+	Dikkat:  % veya * işaretlerini joker harf olarak kullanabilirsiniz.
 		
 </ul>
-<b>AdÄ±m 2</b>
-<ul> AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<p>
+<b>Adım 2</b>
+<ul> Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düğmesini tıklatınız.<p>
 </ul>
-<b>AdÄ±m 3</b>
-<ul> Arama sonunda bir sonuÃ§ ya da sonuÃ§lar bulunur ise bir liste gÃ¶rÃ¼nÃ¼r. <br>
-		AradÄ±ÄŸÄ±nÄ±z adres hakkÄ±ndaki tÃ¼m bilgilere ulaÅŸmak iÃ§in ismi Ã¼zerine tÄ±klayÄ±nÄ±z.
-</ul>
-
-<b>UyarÄ±</b>
-<ul> EÄŸer o yerin web sitesini ziyaret etmek isterseniz (eÄŸer var ise) url adresini tÄ±klayÄ±nÄ±z. 
+<b>Adım 3</b>
+<ul> Arama sonunda bir sonuç ya da sonuçlar bulunur ise bir liste görünür. <br>
+		Aradığınız adres hakkındaki tüm bilgilere ulaşmak için ismi üzerine tıklayınız.
 </ul>
 
-<b>UyarÄ±</b>
-<ul> EÄŸer aramayÄ± iptal etmek isterseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Eğer o yerin web sitesini ziyaret etmek isterseniz (eğer var ise) url adresini tıklayınız. 
+</ul>
+
+<b>Uyarı</b>
+<ul> Eğer aramayı iptal etmek isterseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 </form>

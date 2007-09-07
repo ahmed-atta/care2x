@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <title></title>
 
 </head>
@@ -9,23 +9,23 @@
 
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-NÃ¶betÃ§i Hekim/Cerrah - HÄ±zlÄ± bakÄ±ÅŸ</font>
+Nöbetçi Hekim/Cerrah - Hızlı bakış</font>
 <p><font color="#990000" face="Verdana, Arial">Burada ne yapabilirim?</font></b><p>
 <font face="Verdana, Arial" size=2>
-<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> NÃ¶betÃ§i hekim/cerrah hakkÄ±nda (eÄŸer var ise) ek bilgi alÄ±nabilir..</b>
-<ul>Ek bilgiyi gÃ¶rmek iÃ§in , listedeki kiÅŸinin <span style="background-color:yellow" >ismi Ã¼zerine</span> tÄ±klayÄ±nÄ±z. KÃ¼Ã§Ã¼k bir pencere aÃ§Ä±lÄ±r ilgili bilgiler gÃ¶rÃ¼nÃ¼r.</ul><p>
-<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> TÃ¼m ayÄ± gÃ¶rmek iÃ§in nÃ¶bet listesine bakÄ±nÄ±z.</b>
-<ul>TÃ¼m ayÄ±n nÃ¶bet listesini gÃ¶rmek iÃ§in ilgili simgeyi tÄ±klayÄ±nÄ±z &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>GÃ¶ster</font></button>.<br>
-			NÃ¶bet listesi gÃ¶rÃ¼nÃ¼r.</ul><p>
+<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> Nöbetçi hekim/cerrah hakkında (eğer var ise) ek bilgi alınabilir..</b>
+<ul>Ek bilgiyi görmek için , listedeki kişinin <span style="background-color:yellow" >ismi üzerine</span> tıklayınız. Küçük bir pencere açılır ilgili bilgiler görünür.</ul><p>
+<img <?php echo createComIcon('../','update.gif','0','absmiddle') ?>><b> Tüm ayı görmek için nöbet listesine bakınız.</b>
+<ul>Tüm ayın nöbet listesini görmek için ilgili simgeyi tıklayınız &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Göster</font></button>.<br>
+			Nöbet listesi görünür.</ul><p>
 <font face="Verdana, Arial" size=3 color="#990000">
-<p><b>HÄ±zlÄ± bakÄ±ÅŸ neyi gÃ¶stermek istiyor?</b></font></b><p>
+<p><b>Hızlı bakış neyi göstermek istiyor?</b></font></b><p>
 <font face="Verdana, Arial" size=2>
-</b><li><b>BÃ¶lÃ¼m</b> :<ul>NÃ¶betÃ§i ya da icap nÃ¶betÃ§isi bulunan bÃ¶lÃ¼mlerin listesi.</ul><p>
-<li><b>Hekim/Cerrah 1</b> :<ul>NÃ¶betÃ§i olan hekim/cerrah.</ul><p>
-<li><b>Ã‡aÄŸrÄ±/Telefon</b> :<ul>Hekim/cerrahÄ±n Ã§aÄŸrÄ± ve telefon bilgisi.</ul>
-<li><b>Hekim/Cerrah 2</b> :<ul>Ä°cap nÃ¶betÃ§isi hekim/cerrah.</ul><p>
-<li><b>Ã‡aÄŸrÄ±/Telefon</b> :<ul>Hekim/CerrahÄ±n Ã§aÄŸrÄ± ve telefon bilgisi.</ul><p>
-<li><b>NÃ¶bet planÄ±</b> :<ul>TÄ±klanabilir simge. BÃ¶lÃ¼mÃ¼n bÃ¼tÃ¼n ay iÃ§in nÃ¶bet planÄ±na baÄŸlantÄ±. EÄŸer bÃ¼tÃ¼n ayÄ±n nÃ¶bet planÄ±nÄ± gÃ¶rmek, nÃ¶bet planÄ± dÃ¼zenlemek ya da oluÅŸturmak ister iseniz &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>GÃ¶ster</font></button> dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z.</ul>
+</b><li><b>Bölüm</b> :<ul>Nöbetçi ya da icap nöbetçisi bulunan bölümlerin listesi.</ul><p>
+<li><b>Hekim/Cerrah 1</b> :<ul>Nöbetçi olan hekim/cerrah.</ul><p>
+<li><b>Çağrı/Telefon</b> :<ul>Hekim/cerrahın çağrı ve telefon bilgisi.</ul>
+<li><b>Hekim/Cerrah 2</b> :<ul>İcap nöbetçisi hekim/cerrah.</ul><p>
+<li><b>Çağrı/Telefon</b> :<ul>Hekim/Cerrahın çağrı ve telefon bilgisi.</ul><p>
+<li><b>Nöbet planı</b> :<ul>Tıklanabilir simge. Bölümün bütün ay için nöbet planına bağlantı. Eğer bütün ayın nöbet planını görmek, nöbet planı düzenlemek ya da oluşturmak ister iseniz &nbsp;<button><img <?php echo createComIcon('../','new_address.gif','0','absmiddle') ?>> <font size=1>Göster</font></button> düğmesine tıklayınız.</ul>
 
 
 

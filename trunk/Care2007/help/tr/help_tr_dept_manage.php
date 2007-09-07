@@ -1,24 +1,24 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>BÃ¶lÃ¼m yÃ¶netimi</b></font>
+<b>Bölüm yönetimi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Yeni bir bÃ¶lÃ¼m nasÄ±l oluÅŸturulur?</b></font>
+Yeni bir bölüm nasıl oluşturulur?</b></font>
 <ul> 
-	<b>AdÄ±m: </b> "<font color=#000080><b>OluÅŸtur</b></font>" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<p>
+	<b>Adım: </b> "<font color=#000080><b>Oluştur</b></font>" yazısını tıklayınız.<p>
 </ul>
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-BÃ¶lÃ¼m Ã¶zellikleri nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b></font>
+Bölüm özellikleri nasıl görüntülenir?</b></font>
 <ul> 
-	<b>AdÄ±m: </b> "<font color=#000080><b>BÃ¶lÃ¼m Ã¶zellikleri</b></font>" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<p>
+	<b>Adım: </b> "<font color=#000080><b>Bölüm özellikleri</b></font>" yazısını tıklayınız.<p>
 </ul>
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-BÃ¶lÃ¼mler nasÄ±l yÃ¶netilir?</b></font>
+Bölümler nasıl yönetilir?</b></font>
 <ul> 
-	<b>AdÄ±m: </b> "<font color=#000080><b>DÃ¼zenleme seÃ§enekleri</b></font>" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<p>
+	<b>Adım: </b> "<font color=#000080><b>Düzenleme seçenekleri</b></font>" yazısını tıklayınız.<p>
 </ul>
 

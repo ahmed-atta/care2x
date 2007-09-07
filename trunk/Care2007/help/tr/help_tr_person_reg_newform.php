@@ -1,42 +1,42 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Yeni bir kiÅŸi nasÄ±l kayÄ±t edilir?</b></font>
+<b>Yeni bir kişi nasıl kayıt edilir?</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<b>AdÄ±m 1</b>
+<b>Adım 1</b>
 
-<ul> KiÅŸinin bilgilerini giriniz.<br>
-		En Ã¶nemlileri soyad, ad, doÄŸum tarihi, cinsiyet, kan grubu, adresi, kabul tipi, fotoÄŸrafÄ± ve sigorta tipidir..
+<ul> Kişinin bilgilerini giriniz.<br>
+		En önemlileri soyad, ad, doğum tarihi, cinsiyet, kan grubu, adresi, kabul tipi, fotoğrafı ve sigorta tipidir..
 		
 </ul>
-<b>AdÄ±m 2</b>
+<b>Adım 2</b>
 
-<ul> Bilgileri kaydetmek isterseniz <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
-		GirdiÄŸiniz bilgilerin tÃ¼mÃ¼nÃ¼ silmek iÃ§in  <img <?php echo createLDImgSrc('../','reset.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<ul> Bilgileri kaydetmek isterseniz <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p>
+		Girdiğiniz bilgilerin tümünü silmek için  <img <?php echo createLDImgSrc('../','reset.gif','0') ?>> düğmesini tıklayınız.
 		
 </ul>
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bir kiÅŸinin fotoÄŸrafÄ± nasÄ±l eklenir?</b></font>
+<b>Bir kişinin fotoğrafı nasıl eklenir?</b></font>
 <p>
-<b>AdÄ±m 1</b>
+<b>Adım 1</b>
 
-<ul> Resim Ã¶n izleme yerinin altÄ±ndaki "AraÅŸtÄ±r" dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. Bir dosya arama penceresi aÃ§Ä±lÄ±r.<br>
+<ul> Resim ön izleme yerinin altındaki "Araştır" düğmesini tıklayınız. Bir dosya arama penceresi açılır.<br>
 </ul>
-<b>AdÄ±m 2</b>
+<b>Adım 2</b>
 
-<ul> Gerekli resim dosyasÄ±nÄ± bulup seÃ§iniz.
+<ul> Gerekli resim dosyasını bulup seçiniz.
 </ul>
 
 <p>
-<b>UyarÄ±</b>
+<b>Uyarı</b>
 
-<ul> Ã–nemli bir bilgi eksik ise, kÃ¼Ã§Ã¼k bir pencere aÃ§Ä±lÄ±r ve gerekli bilgiyi girmeniz istenir.
-		Bazen girdikleriniz tekrar gÃ¶rÃ¼ntÃ¼lenir ve kÄ±rmÄ±zÄ± ile iÅŸaretli alanlardaki bilgileri girmeniz istenir. Sonra tam bilgileri kaydetmek iÃ§in  <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+<ul> Önemli bir bilgi eksik ise, küçük bir pencere açılır ve gerekli bilgiyi girmeniz istenir.
+		Bazen girdikleriniz tekrar görüntülenir ve kırmızı ile işaretli alanlardaki bilgileri girmeniz istenir. Sonra tam bilgileri kaydetmek için  <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p>
 </ul>
-<b>UyarÄ±</b>
-<ul> EÄŸer tam olmayan bir bilgiyi kaydetmek ister iseniz <input type="button" value="Yine de kaydet"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Eğer tam olmayan bir bilgiyi kaydetmek ister iseniz <input type="button" value="Yine de kaydet"> düğmesini tıklayınız.
 </ul>
-<b>UyarÄ±</b>
-<ul> KaydÄ± iptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Kaydı iptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 		
 </ul>
 

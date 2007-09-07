@@ -1,14 +1,14 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Personel yÃ¶neticisi</b></font>
+<b>Personel yöneticisi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 <form>
 <font size=2 face="verdana,arial" >
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bir Ã§alÄ±ÅŸanÄ±n sicil bilgileri nasÄ±l gÃ¶sterilir?</b></font>
+Bir çalýþanýn sicil bilgileri nasýl gösterilir?</b></font>
 <ul> 
-	<b>AdÄ±m :</b> <img <?php echo createComIcon('../','statbel2.gif','0') ?>> simgesini tÄ±klayÄ±nÄ±z.
+	<b>Adým :</b> <img <?php echo createComIcon('../','statbel2.gif','0') ?>> simgesini týklayýnýz.
 </ul>
 
 

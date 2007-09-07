@@ -10,26 +10,26 @@ if($x2=='show'||$src=='sickness'){
 	
 ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>KayÄ±t bilgisi nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b></font>
+<font color="#990000"><b>Kayıt bilgisi nasıl görüntülenir?</b></font>
 <ul> 
-<b>AdÄ±m: </b>   <img <?php echo createLDImgSrc('../','reg_data.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+<b>Adım: </b>   <img <?php echo createLDImgSrc('../','reg_data.gif','0') ?>> düğmesini tıklayınız.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>Kabul bilgisi nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b></font>
+<font color="#990000"><b>Kabul bilgisi nasıl görüntülenir?</b></font>
 <ul> 
-<b>AdÄ±m: </b>   <img <?php echo createLDImgSrc('../','admission_data.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
-<b>UyarÄ±: </b> Bu dÃ¼ÄŸme ancak hasta ÅŸu anda yatan hasta ya da poliklinik hastasÄ± olarak kabul edilmiÅŸ durumda ise gÃ¶rÃ¼ntÃ¼lenir.<p>
+<b>Adım: </b>   <img <?php echo createLDImgSrc('../','admission_data.gif','0') ?>> düğmesini tıklayınız.<p>
+<b>Uyarı: </b> Bu düğme ancak hasta şu anda yatan hasta ya da poliklinik hastası olarak kabul edilmiş durumda ise görüntülenir.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>Rapor nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b></font>
+<font color="#990000"><b>Rapor nasıl görüntülenir?</b></font>
 <ul> 
-<b>AdÄ±m: </b> <img <?php echo createComIcon('../','info3.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
-<b>UyarÄ±: </b> Bu dÃ¼ÄŸme ancak rapor bilgisi Ã¶n izleme listesinde tamamen gÃ¶rÃ¼ntÃ¼lenmedi ide gÃ¶rÃ¼nÃ¼r.<p>
+<b>Adım: </b> <img <?php echo createComIcon('../','info3.gif','0') ?>> düğmesini tıklayınız.<p>
+<b>Uyarı: </b> Bu düğme ancak rapor bilgisi ön izleme listesinde tamamen görüntülenmedi ide görünür.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>Raporun PDF belgesi nasÄ±l oluÅŸturulur?</b></font>
+<font color="#990000"><b>Raporun PDF belgesi nasıl oluşturulur?</b></font>
 <ul> 
-<b>AdÄ±m: </b>   <img <?php echo createComIcon('../','pdf_icon.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+<b>Adım: </b>   <img <?php echo createComIcon('../','pdf_icon.gif','0') ?>> düğmesini tıklayınız.<p>
 </ul>
 
 <?php
@@ -38,20 +38,20 @@ if($x2=='show'||$src=='sickness'){
 		if($src=='sickness'){	
 ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>BÃ¶lÃ¼m nasÄ±l deÄŸiÅŸtirilir?</b></font>
+<font color="#990000"><b>Bölüm nasıl değiştirilir?</b></font>
 <ul> 
-<b>AdÄ±m 1: </b> " <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> Form oluÅŸtur" seÃ§im kutusundan bÃ¶lÃ¼mÃ¼ seÃ§iniz.<p>
-<b>AdÄ±m 2: </b> "Git" i tÄ±klayÄ±nÄ±z.<p>
+<b>Adım 1: </b> " <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> Form oluştur" seçim kutusundan bölümü seçiniz.<p>
+<b>Adım 2: </b> "Git" i tıklayınız.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>Onay nasÄ±l kaydedilir?</b></font>
+<font color="#990000"><b>Onay nasıl kaydedilir?</b></font>
 <ul> 
-<b>AdÄ±m: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+<b>Adım: </b> <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>Onay nasÄ±l yazdÄ±rÄ±lÄ±r?</b></font>
+<font color="#990000"><b>Onay nasıl yazdırılır?</b></font>
 <ul> 
-<b>AdÄ±m: </b> <img <?php echo createLDImgSrc('../','printout.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+<b>Adım: </b> <img <?php echo createLDImgSrc('../','printout.gif','0') ?>> düğmesini tıklayınız.<p>
 </ul>
 
 <?php
@@ -59,32 +59,32 @@ if($x2=='show'||$src=='sickness'){
 ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>HenÃ¼z kayÄ±tlÄ± bilgi yok. Yeni bilgi nasÄ±l girilir?</b></font>
+<font color="#990000"><b>Henüz kayıtlı bilgi yok. Yeni bilgi nasıl girilir?</b></font>
 <ul> 
-<b>UyarÄ±: </b> Yeni tetkik sonuÃ§larÄ± veya raporlar yalnÄ±zca uygun laboratuvar veya tetkik modÃ¼llerinden girilebilir. Kabul modÃ¼lÃ¼ "salt okunur" moddadÄ±r.<p>
+<b>Uyarı: </b> Yeni tetkik sonuçları veya raporlar yalnızca uygun laboratuvar veya tetkik modüllerinden girilebilir. Kabul modülü "salt okunur" moddadır.<p>
 </ul>
 <?php
 		}elseif($src=='notes'){
 ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>HenÃ¼z yeni bilgi yok. Yeni bilgi nasÄ±l girilir?</b></font>
+<font color="#990000"><b>Henüz yeni bilgi yok. Yeni bilgi nasıl girilir?</b></font>
 <ul> 
-<b>AdÄ±m: </b> " <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> <font color=#0000ff><b>Yeni kayÄ±t gir</b></font>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<p>
+<b>Adım: </b> " <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> <font color=#0000ff><b>Yeni kayıt gir</b></font>" bağlantısını tıklayınız.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>SeÃ§enekler menÃ¼sÃ¼ geri nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b></font>
+<font color="#990000"><b>Seçenekler menüsü geri nasıl görüntülenir?</b></font>
 <ul> 
-<b>AdÄ±m: </b> " <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> <font color=#0000ff><b>SeÃ§eneklere geri</b></font>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<p>
+<b>Adım: </b> " <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> <font color=#0000ff><b>Seçeneklere geri</b></font>" bağlantısını tıklayınız.<p>
 </ul>
 
 <?php
 		}else{
 ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>HenÃ¼z kayÄ±tlÄ± bilgi yok. Yeni bilgi nasÄ±l girilir?</b></font>
+<font color="#990000"><b>Henüz kayıtlı bilgi yok. Yeni bilgi nasıl girilir?</b></font>
 <ul> 
-<b>AdÄ±m: </b> " <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> <font color=#0000ff>Yeni kayÄ±t gir</font>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<p>
+<b>Adım: </b> " <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> <font color=#0000ff>Yeni kayıt gir</font>" bağlantısını tıklayınız.<p>
 </ul>
 
 <?php 
@@ -93,20 +93,20 @@ if($x2=='show'||$src=='sickness'){
 }else{
 ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>KayÄ±t nasÄ±l oluÅŸturulur?</b></font>
+<font color="#990000"><b>Kayıt nasıl oluşturulur?</b></font>
 
 <ul> 
-<b>AdÄ±m: </b> Bilgiyi giriniz, sonra <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Adım: </b> Bilgiyi giriniz, sonra <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>>  düğmesini tıklayınız.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> 
-<font color="#990000"><b>Tarih nasÄ±l girilir?</b></font>
+<font color="#990000"><b>Tarih nasıl girilir?</b></font>
 <ul> 
-<b>AdÄ±m 1: </b> <img <?php echo createComIcon('../','show-calendar.gif','0') ?>>  simgesini tÄ±klayÄ±nÄ±z, bir mini takvim aÃ§Ä±lÄ±r.<p>
+<b>Adım 1: </b> <img <?php echo createComIcon('../','show-calendar.gif','0') ?>>  simgesini tıklayınız, bir mini takvim açılır.<p>
 <img src="../help/tr/img/tr_date_select.png"><p>
-<b>AdÄ±m 2: </b> Mini takvimde tarihi tÄ±klayÄ±nÄ±z.<p>
+<b>Adım 2: </b> Mini takvimde tarihi tıklayınız.<p>
 <img src="../help/tr/img/tr_mini_calendar.png"><p>
-<b>Veya: </b> BugÃ¼nÃ¼ girmek iÃ§in, tarih alanÄ±na  "t" veya "T" giriniz. BugÃ¼nÃ¼n tarihi otomatik olarak eklenir.<p>
-<b>Veya: </b> DÃ¼nkÃ¼ tarihi girmek iÃ§in, tarih alanÄ±na  "y" veya "Y" giriniz. DÃ¼nkÃ¼ tarih otomatik olarak eklenir.<p>
+<b>Veya: </b> Bugünü girmek için, tarih alanına  "t" veya "T" giriniz. Bugünün tarihi otomatik olarak eklenir.<p>
+<b>Veya: </b> Dünkü tarihi girmek için, tarih alanına  "y" veya "Y" giriniz. Dünkü tarih otomatik olarak eklenir.<p>
 
 </ul>
 <?php 

@@ -1,14 +1,14 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Kontrol dÃ¼ÄŸme ve resim temalarÄ±nÄ±n dÃ¼zenlenmesi</b></font>
+<b>Kontrol düğme ve resim temalarının düzenlenmesi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tema nasÄ±l deÄŸiÅŸtirilir?</b></font>
+Tema nasıl değiştirilir?</b></font>
 <ul> 
-	<b>AdÄ±m 1: </b>TemayÄ± seÃ§meli kutudan seÃ§iniz.<p>
-	<b>AdÄ±m 2: </b>Yeni temayÄ±  <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesine tÄ±klayarak etkinleÅŸtiriniz.<p>
+	<b>Adım 1: </b>Temayı seçmeli kutudan seçiniz.<p>
+	<b>Adım 2: </b>Yeni temayı  <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesine tıklayarak etkinleştiriniz.<p>
 </ul>
 
 

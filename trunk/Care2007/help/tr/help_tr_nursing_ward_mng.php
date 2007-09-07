@@ -1,169 +1,169 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <font face="Verdana, Arial" size=3 color="#0000cc">
 <b>
-Servis YÃ¶netimi 
+Servis Yönetimi 
 <?php
 switch($src)
 {
 	case "main": print "";
 						break;
-	case "new": print  " - Yeni bir servis oluÅŸtur";
+	case "new": print  " - Yeni bir servis oluştur";
 						break;
-	case "arch": print "Servisler - ArÅŸiv";
+	case "arch": print "Servisler - Arşiv";
 }
  ?></b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 <?php if($src=="main") : ?>
 
-<b>OluÅŸtur</b>
+<b>Oluştur</b>
 
-<ul>Yeni bir servis oluÅŸturmak iÃ§in, bu seÃ§eneÄŸi tÄ±klayÄ±nÄ±z. 
+<ul>Yeni bir servis oluşturmak için, bu seçeneği tıklayınız. 
 	</ul>	
 </ul>
 <b>Servisin profil verileri</b>
-<ul>Bu seÃ§enek servisin profil ve diÄŸer ilgili bilgilerini gÃ¶sterir.
+<ul>Bu seçenek servisin profil ve diğer ilgili bilgilerini gösterir.
 </ul>
-<b>Bir yataÄŸÄ± kilitle</b>
-<ul>Bir yataÄŸÄ± ya da birkaÃ§ yataÄŸÄ± birden kilitlemek ister iseniz, bu seÃ§eneÄŸi tÄ±klayÄ±nÄ±z. Girilen servis gÃ¶rÃ¼ntÃ¼lenir, yok ise Ã¶n seÃ§imli servis gÃ¶rÃ¼ntÃ¼lenir. Yatak kilitleme iÃ§in geÃ§erli bir ÅŸifre ve bu Ã¶zelliÄŸe eriÅŸim hakkÄ± gerekir.
+<b>Bir yatağı kilitle</b>
+<ul>Bir yatağı ya da birkaç yatağı birden kilitlemek ister iseniz, bu seçeneği tıklayınız. Girilen servis görüntülenir, yok ise ön seçimli servis görüntülenir. Yatak kilitleme için geçerli bir şifre ve bu özelliğe erişim hakkı gerekir.
 </ul>
-<b>EriÅŸim haklarÄ±</b>
-<ul> Bu seÃ§enekte belirli bir servis iÃ§in eriÅŸim haklarÄ± oluÅŸturabilir, dÃ¼zenleyebilir, kilitleyebilir veya silebilirsiniz. OluÅŸturulan tÃ¼m eriÅŸim haklarÄ± sadece o belirli servis iÃ§in geÃ§erli olur.
+<b>Erişim hakları</b>
+<ul> Bu seçenekte belirli bir servis için erişim hakları oluşturabilir, düzenleyebilir, kilitleyebilir veya silebilirsiniz. Oluşturulan tüm erişim hakları sadece o belirli servis için geçerli olur.
 </ul>
-<?php endif;?>
+<?php endif ?>
 <?php if($x2=="quick") : ?>
 	<?php if($x1) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir servisin yatan hasta listesi nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b>
+Bir servisin yatan hasta listesi nasıl görüntülenir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Sol sÃ¼tunda servisin ismi ya da kimliÄŸini tÄ±klayÄ±nÄ±z.<br>
-	<b>UyarÄ±: </b>GÃ¶rÃ¼ntÃ¼lenen yatan hasta listesi "salt okunur" dur. HastalarÄ±n bilgilerini deÄŸiÅŸtiremez veya dÃ¼zenleyemezsiniz.<br>
+ 	<b>Adım 1: </b>Sol sütunda servisin ismi ya da kimliğini tıklayınız.<br>
+	<b>Uyarı: </b>Görüntülenen yatan hasta listesi "salt okunur" dur. Hastaların bilgilerini değiştiremez veya düzenleyemezsiniz.<br>
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Servisin yatan hasta listesi dÃ¼zenlemek veya gÃ¼ncellemek iÃ§in nasÄ±l gÃ¶sterilebilir?</b>
+Servisin yatan hasta listesi düzenlemek veya güncellemek için nasıl gösterilebilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>SeÃ§ilen servisin ilgili <img <?php echo createComIcon('../','statbel2.gif','0') ?>> simgesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>Daha Ã¶nce giriÅŸ yaptÄ± iseniz ve iÅŸleve eriÅŸim hakkÄ±nÄ±z var ise, yatan hasta listesi derhal gÃ¶rÃ¼nÃ¼r.<br>
-		Aksi halde,  kullanÄ±cÄ± adÄ± ve ÅŸifreniz sorulur.<br>
- 	<b>AdÄ±m 3: </b>Sorulur ise, kullanÄ±cÄ± adÄ± ve ÅŸifrenizi giriniz.<br>
- 	<b>AdÄ±m 4: </b> <input type="button" value="Devam..."> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 5: </b>Ä°ÅŸleve eriÅŸim hakkÄ±nÄ±z var ise, yatan hasta listesi gÃ¶rÃ¼ntÃ¼lenir. <br>
-	<b>UyarÄ±: </b>GÃ¶rÃ¼ntÃ¼lenen yatan hasta listesi "dÃ¼zenlenebilir" durumdadÄ±r. HastalarÄ±n bilgilerini dÃ¼zenleme veya gÃ¼ncelleme seÃ§enekleri de gÃ¶rÃ¼ntÃ¼lenir.
-		AynÄ± zamanda dÃ¼zenlemek iÃ§in hastalarÄ±n veri klasÃ¶rÃ¼nÃ¼ de aÃ§abilirsiniz.<br>
+ 	<b>Adım 1: </b>Seçilen servisin ilgili <img <?php echo createComIcon('../','statbel2.gif','0') ?>> simgesini tıklayınız.<br>
+ 	<b>Adım 2: </b>Daha önce giriş yaptı iseniz ve işleve erişim hakkınız var ise, yatan hasta listesi derhal görünür.<br>
+		Aksi halde,  kullanıcı adı ve şifreniz sorulur.<br>
+ 	<b>Adım 3: </b>Sorulur ise, kullanıcı adı ve şifrenizi giriniz.<br>
+ 	<b>Adım 4: </b> <input type="button" value="Devam..."> düğmesini tıklayınız.<br>
+ 	<b>Adım 5: </b>İşleve erişim hakkınız var ise, yatan hasta listesi görüntülenir. <br>
+	<b>Uyarı: </b>Görüntülenen yatan hasta listesi "düzenlenebilir" durumdadır. Hastaların bilgilerini düzenleme veya güncelleme seçenekleri de görüntülenir.
+		Aynı zamanda düzenlemek için hastaların veri klasörünü de açabilirsiniz.<br>
 	</ul>
 	<?php else : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Åu anda yatan hasta listesi yok!</b>
+Şu anda yatan hasta listesi yok!</b>
 </font><p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-ArÅŸiv kullanÄ±larak Ã¶nceki yatan hasta listelerine hÄ±zlÄ± bakÄ±ÅŸlar nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b>
+Arşiv kullanılarak önceki yatan hasta listelerine hızlı bakışlar nasıl görüntülenir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b> "<span style="background-color:yellow" > ArÅŸive gitmek iÃ§in bunu tÄ±klayÄ±nÄ±z <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> </span>" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
- 	<b>AdÄ±m 2: </b>Bir rehber takvim gÃ¶rÃ¼ntÃ¼lenir.<br>
- 	<b>AdÄ±m 3: </b>Rehber takvimde bir gÃ¼nÃ¼n tarihini tÄ±klayarak o gÃ¼nkÃ¼ yatan hasta listesini hÄ±zlÄ± bakÄ±ÅŸ olarak izleyebilirsiniz.<br>
+ 	<b>Adım 1: </b> "<span style="background-color:yellow" > Arşive gitmek için bunu tıklayınız <img <?php echo createComIcon('../','bul_arrowgrnlrg.gif','0') ?>> </span>" yazısını tıklayınız.<br>
+ 	<b>Adım 2: </b>Bir rehber takvim görüntülenir.<br>
+ 	<b>Adım 3: </b>Rehber takvimde bir günün tarihini tıklayarak o günkü yatan hasta listesini hızlı bakış olarak izleyebilirsiniz.<br>
 	</ul>
 	
-	<?php endif;?>
-<b>UyarÄ±</b>
-<ul> HÄ±zlÄ± bakÄ±ÅŸÄ± kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
-</ul><?php endif;?>
+	<?php endif ?>
+<b>Uyarı</b>
+<ul> Hızlı bakışı kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
+</ul><?php endif ?>
 
 <?php if($src=="new") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yeni bir servis nasÄ±l oluÅŸturulur?</b>
+Yeni bir servis nasıl oluşturulur?</b>
 </font>
 <ul>
- 	<b>AdÄ±m 1: </b>Servisin resmi adÄ±nÄ± "<span style="background-color:yellow" > Servis: </span>" alanÄ±na giriniz.<br>
- 	<b>AdÄ±m 2: </b>Servisin kimliÄŸini (kÄ±sa olmalÄ± ve Ã¶zel karakterler iÃ§ermemeli)  "<span style="background-color:yellow" > Servis KimliÄŸi: </span>" alanÄ±na giriniz.<br>
- 	<b>AdÄ±m 3: </b>Servisin ait olduÄŸu klinik veya bÃ¶lÃ¼mÃ¼  "<span style="background-color:yellow" > BÃ¶lÃ¼m: </span>" seÃ§me alanÄ±ndan seÃ§iniz.<br>
- 	<b>AdÄ±m 4: </b>Servisin tanÄ±mÄ± ve diÄŸer bilgileri  "<span style="background-color:yellow" > TanÄ±m: </span>" alanÄ±na yazÄ±nÄ±z.<br>
- 	<b>AdÄ±m 5: </b>Servisin ilk odasÄ±nÄ±n numarasÄ±nÄ±  "<span style="background-color:yellow" > Ä°lk odanÄ±n oda numarasÄ±: </span>" alanÄ±na yazÄ±nÄ±z.<br>
- 	<b>AdÄ±m 6: </b>Son odanÄ±n numarasÄ±nÄ±  "<span style="background-color:yellow" > Son odanÄ±n numarasÄ±: </span>" alanÄ±na yazÄ±nÄ±z.<br>
- 	<b>AdÄ±m 7: </b>Oda Ã¶n ekini  "<span style="background-color:yellow" > Oda Ã¶n eki: </span>" alanÄ±na yazÄ±nÄ±z.<br>
- 	<b>AdÄ±m 8: </b>Servisi oluÅŸturmak iÃ§in <input type="button" value="Servisi oluÅŸtur"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Servisin resmi adını "<span style="background-color:yellow" > Servis: </span>" alanına giriniz.<br>
+ 	<b>Adım 2: </b>Servisin kimliğini (kısa olmalı ve özel karakterler içermemeli)  "<span style="background-color:yellow" > Servis Kimliği: </span>" alanına giriniz.<br>
+ 	<b>Adım 3: </b>Servisin ait olduğu klinik veya bölümü  "<span style="background-color:yellow" > Bölüm: </span>" seçme alanından seçiniz.<br>
+ 	<b>Adım 4: </b>Servisin tanımı ve diğer bilgileri  "<span style="background-color:yellow" > Tanım: </span>" alanına yazınız.<br>
+ 	<b>Adım 5: </b>Servisin ilk odasının numarasını  "<span style="background-color:yellow" > İlk odanın oda numarası: </span>" alanına yazınız.<br>
+ 	<b>Adım 6: </b>Son odanın numarasını  "<span style="background-color:yellow" > Son odanın numarası: </span>" alanına yazınız.<br>
+ 	<b>Adım 7: </b>Oda ön ekini  "<span style="background-color:yellow" > Oda ön eki: </span>" alanına yazınız.<br>
+ 	<b>Adım 8: </b>Servisi oluşturmak için <input type="button" value="Servisi oluştur"> düğmesini tıklayınız.<br>
 	</ul>
-<b>UyarÄ±</b>
-<ul> Ä°ptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> İptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir odadaki yatak sayÄ±sÄ±nÄ± dÃ¼zenleyebilir miyim?</b>
+Bir odadaki yatak sayısını düzenleyebilir miyim?</b>
 </font>
 <ul>
  	<b>Evet. </b>Fakat ancak
-	<input type="button" value="Servisi oluÅŸtur"> dÃ¼ÄŸmesine tÄ±klayÄ±p servisi oluÅŸturduktan SONRA yatak sayÄ±sÄ±nÄ± girme ÅŸansÄ±nÄ±z olacaktÄ±r.<br>
+	<input type="button" value="Servisi oluştur"> düğmesine tıklayıp servisi oluşturduktan SONRA yatak sayısını girme şansınız olacaktır.<br>
 	</ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir yataÄŸÄ±n Ã¶n ek (veya kimliÄŸi) ini dÃ¼zenleyebilir miyim?</b>
+Bir yatağın ön ek (veya kimliği) ini düzenleyebilir miyim?</b>
 </font>
 <ul>       	
- 	<b>HayÄ±r. </b>ProgramÄ±n gÃ¼ncel versiyonunda bir yataÄŸÄ±n Ã¶n eki (veya kimliÄŸi) A, B, C, D vs. sabittir. DeÄŸiÅŸtiremezsiniz.<br>
+ 	<b>Hayır. </b>Programın güncel versiyonunda bir yatağın ön eki (veya kimliği) A, B, C, D vs. sabittir. Değiştiremezsiniz.<br>
 	</ul>
-<b>UyarÄ±</b>
-<ul> EÄŸer iptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Eğer iptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif;?>
+<?php endif ?>
 	
 <?php if($src=="show") : ?>
 	<?php if($x1=="1") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Servis profili nasÄ±l kayÄ±t edilir?</b>
+Servis profili nasıl kayıt edilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b> <input type="button" value="Kaydet"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b> <input type="button" value="Kaydet"> düğmesini tıklayınız.<br>
 	</ul>
-<b>UyarÄ±</b>
-<ul> Ä°ptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> İptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 	<?php else : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Åimdi gÃ¶rÃ¼ntÃ¼lenenin dÄ±ÅŸÄ±nda bir servisin profilini dÃ¼zenlemek istiyorum. Ne yapmalÄ±yÄ±m?</b>
+Şimdi görüntülenenin dışında bir servisin profilini düzenlemek istiyorum. Ne yapmalıyım?</b>
 <p>
 </font>
-	<b>UyarÄ±:</b> Bir servisin profilini basitÃ§e dÃ¼zenleyemezsiniz. Veri bÃ¼tÃ¼nlÃ¼ÄŸÃ¼nÃ¼ saÄŸlamak bakÄ±mÄ±ndan bu ÅŸekilde dizayn edilmiÅŸtir. Yeni bir servis profili oluÅŸturmak iÃ§in aÅŸaÄŸÄ±daki adÄ±mlarÄ± izleyiniz:
+	<b>Uyarı:</b> Bir servisin profilini basitçe düzenleyemezsiniz. Veri bütünlüğünü sağlamak bakımından bu şekilde dizayn edilmiştir. Yeni bir servis profili oluşturmak için aşağıdaki adımları izleyiniz:
 <ul>
 
- 	<b>AdÄ±m 1:</b>Servisin ya hastalarÄ± Ã§Ä±kararak ya da baÅŸka servislere nakil edilerek tamamen boÅŸ olmasÄ±nÄ± saÄŸlayÄ±nÄ±z.<p>
- 	<b>AdÄ±m 2:</b> Servisi kapatmak iÃ§in <input type="button" value="Bu servisi kesin olarak kapat"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
-	<b>AdÄ±m 3:</b> Servis yÃ¶netim modÃ¼lÃ¼nde "OluÅŸtur" seÃ§eneÄŸini kullanarak yeni bir servis oluÅŸturunuz.<p>
+ 	<b>Adım 1:</b>Servisin ya hastaları çıkararak ya da başka servislere nakil edilerek tamamen boş olmasını sağlayınız.<p>
+ 	<b>Adım 2:</b> Servisi kapatmak için <input type="button" value="Bu servisi kesin olarak kapat"> düğmesini tıklayınız.<p>
+	<b>Adım 3:</b> Servis yönetim modülünde "Oluştur" seçeneğini kullanarak yeni bir servis oluşturunuz.<p>
 	</ul>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir servisi "geÃ§ici olarak kapatma" nÄ±n amacÄ± nedir?</b>
+Bir servisi "geçici olarak kapatma" nın amacı nedir?</b>
 <p>
 </font>
 	<ul>
 
- 	<b>YanÄ±t:</b> Bir servis belirli bir sÃ¼re iÃ§in hasta kabul etmeyecek ise geÃ§ici olarak kapatÄ±lÄ±r. Ã–rneÄŸin tadilat, onarÄ±m, dezenfeksiyon, dekontaminasyon, vs. Ã§alÄ±ÅŸmalarÄ± nedeni ile.
+ 	<b>Yanıt:</b> Bir servis belirli bir süre için hasta kabul etmeyecek ise geçici olarak kapatılır. Örneğin tadilat, onarım, dezenfeksiyon, dekontaminasyon, vs. çalışmaları nedeni ile.
 	</ul>
 
-<b>UyarÄ±</b>
-<ul> Ä°ptal etmek ister iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> İptal etmek ister iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
-<?php endif;?>
-<?php endif;?>
+<?php endif ?>
+<?php endif ?>
 
 
 <?php if($src=="") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir servis profilini gÃ¶rmek iÃ§in nasÄ±l seÃ§ilir?</b>
+Bir servis profilini görmek için nasıl seçilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>GÃ¶rmek istediÄŸiniz servise liste Ã¼zerinde tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Görmek istediğiniz servise liste üzerinde tıklayınız.<br>
 	</ul>
-<b>UyarÄ±</b>
-<ul> Ä°ptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> İptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
-<?php endif;?>
+<?php endif ?>
 
 
 </form>

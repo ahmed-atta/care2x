@@ -6,19 +6,19 @@
 
 <form>
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Veriler nasÄ±l gÃ¼ncellenir?</b></font>
+Veriler nasıl güncellenir?</b></font>
 <ul> 
-	<b>AdÄ±m: </b> formu dÃ¼zenlemek iÃ§in <img <?php echo createLDImgSrc('../','update.gif','0') ?>> dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z.
+	<b>Adım: </b> formu düzenlemek için <img <?php echo createLDImgSrc('../','update.gif','0') ?>> düğmesine tıklayınız.
 </ul>
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-TÃ¼m adresler nasÄ±l listelenir?</b></font>
+Tüm adresler nasıl listelenir?</b></font>
 <ul> 
-	<b>AdÄ±m: </b> <img <?php echo createLDImgSrc('../','list_all.gif','0') ?>> dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z.
+	<b>Adım: </b> <img <?php echo createLDImgSrc('../','list_all.gif','0') ?>> düğmesine tıklayınız.
 </ul>
 
 <b>Dikkat</b>
-<ul> Ä°ÅŸiniz bitti ise ya da iptal etmeye karar verdi iseniz  <img <?php  print createLDImgSrc('../','cancel.gif','0'); ?>> dÃ¼ÄŸmesine tÄ±klayÄ±nÄ±z.
+<ul> İşiniz bitti ise ya da iptal etmeye karar verdi iseniz  <img <?php  print createLDImgSrc('../','cancel.gif','0'); ?>> düğmesine tıklayınız.
 </ul>
 
 </form>

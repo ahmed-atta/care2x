@@ -3,19 +3,19 @@
 <p>
 <font size=2 face="verdana,arial" >
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bir tetkik istemi nasÄ±l yapÄ±lÄ±r?</b></font>
+Bir tetkik istemi nasıl yapılır?</b></font>
 <ul> 
-	<b>AdÄ±m 1: </b>EÄŸer doktorun viziti isteniyor ise "Vizit isteniyor" kutusunu iÅŸaretleyiniz.<p>
-	<b>AdÄ±m 2: </b>EÄŸer hasta mobil ise ve klinik ya da bÃ¶lÃ¼me istenilebilecek durumde ise "Hasta istetilebilir" kutusunu iÅŸaretleyiniz.<p>
-	<b>AdÄ±m 3: </b>Ä°stenen tetkiki, bilinen tanÄ±larÄ±, sorgularÄ±, ve diÄŸer ek bilgileri giriniz.<p>
-	<b>AdÄ±m 4: </b>Ä°steyen hekimin adÄ±nÄ± giriniz.<p>
+	<b>Adım 1: </b>Eğer doktorun viziti isteniyor ise "Vizit isteniyor" kutusunu işaretleyiniz.<p>
+	<b>Adım 2: </b>Eğer hasta mobil ise ve klinik ya da bölüme istenilebilecek durumde ise "Hasta istetilebilir" kutusunu işaretleyiniz.<p>
+	<b>Adım 3: </b>İstenen tetkiki, bilinen tanıları, sorguları, ve diğer ek bilgileri giriniz.<p>
+	<b>Adım 4: </b>İsteyen hekimin adını giriniz.<p>
 </ul>
 
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tetkik istemi nasÄ±l gÃ¶nderilir?</b></font>
+Tetkik istemi nasıl gönderilir?</b></font>
 <ul> 
-	<b>AdÄ±m: </b><img <?php echo createLDImgSrc('../','abschic.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+	<b>Adım: </b><img <?php echo createLDImgSrc('../','abschic.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 

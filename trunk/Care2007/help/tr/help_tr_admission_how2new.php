@@ -1,48 +1,48 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bir hasta nasÄ±l kabul edilir</b></font>
+<b>Bir hasta nasıl kabul edilir</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<b>AdÄ±m 1</b>
+<b>Adım 1</b>
 
 <ul> 
-<font color=#ff0000>HastanÄ±n temel bilgilerinin Ã¶nceden bulunup bulunmadÄ±ÄŸÄ±nÄ± kontrol ediniz. </font>.<p>
-		 Ya hastanÄ±n tam bilgisini ya da birkaÃ§ harf giriniz Ã¶rneÄŸin ad, soyad, protokol numarasÄ± gibi. 
-		<p>Ã–rnek 1: "21000012" veya "12" giriniz.
-		<br>Ã–rnek 2: "GÃ¼rcan" veya "gÃ¼r" giriniz.
-		<br>Ã–rnek 3: "Potur" veya "pot".
+<font color=#ff0000>Hastanın temel bilgilerinin önceden bulunup bulunmadığını kontrol ediniz. </font>.<p>
+		 Ya hastanın tam bilgisini ya da birkaç harf giriniz örneğin ad, soyad, protokol numarası gibi. 
+		<p>Örnek 1: "21000012" veya "12" giriniz.
+		<br>Örnek 2: "Gürcan" veya "gür" giriniz.
+		<br>Örnek 3: "Potur" veya "pot".
 		
 </ul>
 
-<b>AdÄ±m 2</b>
-<ul> Aramaya baÅŸlamak iÃ§in  <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z. AramanÄ±z kiÅŸi arama modÃ¼lÃ¼ne yÃ¶nlendirilecektir.
+<b>Adım 2</b>
+<ul> Aramaya başlamak için  <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düğmesini tıklatınız. Aramanız kişi arama modülüne yönlendirilecektir.
 </ul>
 
-<b>AdÄ±m 3</b>
-<ul> EÄŸer arama hiÃ§bir sonuÃ§ bulamaz ise, Ã¶nce kiÅŸisel bilgileri girmeniz gerekir. KiÅŸi kaydÄ± yÃ¶nergelerini izleyiniz.
+<b>Adım 3</b>
+<ul> Eğer arama hiçbir sonuç bulamaz ise, önce kişisel bilgileri girmeniz gerekir. Kişi kaydı yönergelerini izleyiniz.
 </ul>
-<b>AdÄ±m 4</b>
-<ul> EÄŸer arama bir sonuÃ§ bulur ise listenin saÄŸÄ±ndaki   <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayarak doÄŸru kiÅŸiyi seÃ§iniz.
+<b>Adım 4</b>
+<ul> Eğer arama bir sonuç bulur ise listenin sağındaki   <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> düğmesini tıklayarak doğru kişiyi seçiniz.
 </ul>
-<b>AdÄ±m 5</b>
-<ul> Kabul formu gÃ¶rÃ¼ntÃ¼lenince ilgili tÃ¼m kabul bilgilerini giriniz.
+<b>Adım 5</b>
+<ul> Kabul formu görüntülenince ilgili tüm kabul bilgilerini giriniz.
 		
 </ul>
-<b>AdÄ±m 6</b>
+<b>Adım 6</b>
 <ul> 
-	 Kabul bilgilerini kaydetmek iÃ§in  <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+	 Kabul bilgilerini kaydetmek için  <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p>
 	
 </ul>
 
 
-<b>UyarÄ±</b>
+<b>Uyarı</b>
 
-<ul> EÄŸer bir bilgi eksik ise bilgiler tekrar gÃ¶rÃ¼ntÃ¼lenip kÄ±rmÄ±zÄ± ile iÅŸaretli alan veya alanlardaki bilgileri girmeniz istenecektir. Daha sonra tamamlanmÄ±ÅŸ bilgiyi kaydetmek iÃ§in   <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+<ul> Eğer bir bilgi eksik ise bilgiler tekrar görüntülenip kırmızı ile işaretli alan veya alanlardaki bilgileri girmeniz istenecektir. Daha sonra tamamlanmış bilgiyi kaydetmek için   <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.<p>
 </ul>
-<b>UyarÄ±</b>
-<ul> EÄŸer tam olmayan bilgiyi kaydetmek ister iseniz  <input type="button" value="Yine de kaydet"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Eğer tam olmayan bilgiyi kaydetmek ister iseniz  <input type="button" value="Yine de kaydet"> düğmesini tıklayınız.
 </ul>
 <b>Note</b>
-<ul> EÄŸer kabul iÅŸemini iptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<ul> Eğer kabul işemini iptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 		
 </ul>
 

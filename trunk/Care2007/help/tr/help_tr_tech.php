@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <title></title>
 
 </head>
@@ -15,13 +15,13 @@
 print "Teknik destek - ";	
 switch($src)
 	{
-		case "request": print "OnarÄ±m istemi";
+		case "request": print "Onarım istemi";
 							break;
-		case "report": print "OnarÄ±m servisi onarÄ±ldÄ± raporu";
+		case "report": print "Onarım servisi onarıldı raporu";
 							break;
-		case "queries": print "Soru yada sorgu gÃ¶nder";
+		case "queries": print "Soru yada sorgu gönder";
 							break;
-		case "arch": print "ArÅŸivde arama";
+		case "arch": print "Arşivde arama";
 							break;
 		case "showarch": print "Rapor";
 							break;
@@ -34,121 +34,121 @@ switch($src)
 <?php if($src=="request") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-OnarÄ±m servisine nasÄ±l istem gÃ¶nderilir?</b></font>
-<ul> <b>AdÄ±m 1: </b>ArÄ±zanÄ±n bulunduÄŸu servisi  
-<nobr>"<span style="background-color:yellow" > ArÄ±zanÄ±n yeri <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanÄ±na giriniz.<p>
-<b>AdÄ±m 2: </b>Ä°sminizi <nobr>"<span style="background-color:yellow" > Ä°steyen: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanÄ±na giriniz.<br>
- <b>AdÄ±m 3: </b>Sicil numaranÄ±zÄ±  <nobr>"<span style="background-color:yellow" > Personel no.: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanÄ±na giriniz.<br>
- <b>AdÄ±m 4: </b>OnarÄ±m bÃ¶lÃ¼mÃ¼nÃ¼n gerekirse isteminiz hakkÄ±nda sorularÄ±nÄ± sorabileceÄŸi telefon numaranÄ±zÄ± <nobr>"<span style="background-color:yellow" > Telefon no. <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanÄ±na giriniz.<p>
- <b>AdÄ±m 5: </b>ArÄ±zayÄ±  <nobr>"<span style="background-color:yellow" > LÃ¼tfen arÄ±zayÄ± betimleyiniz: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanÄ±nda kÄ±saca belirtiniz.<br>
- <b>AdÄ±m 6: </b>Ä°steminizi gÃ¶ndermek iÃ§in <img <?php echo createLDImgSrc('../','abschic.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
+Onarım servisine nasıl istem gönderilir?</b></font>
+<ul> <b>Adım 1: </b>Arızanın bulunduğu servisi  
+<nobr>"<span style="background-color:yellow" > Arızanın yeri <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanına giriniz.<p>
+<b>Adım 2: </b>İsminizi <nobr>"<span style="background-color:yellow" > İsteyen: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanına giriniz.<br>
+ <b>Adım 3: </b>Sicil numaranızı  <nobr>"<span style="background-color:yellow" > Personel no.: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanına giriniz.<br>
+ <b>Adım 4: </b>Onarım bölümünün gerekirse isteminiz hakkında sorularını sorabileceği telefon numaranızı <nobr>"<span style="background-color:yellow" > Telefon no. <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanına giriniz.<p>
+ <b>Adım 5: </b>Arızayı  <nobr>"<span style="background-color:yellow" > Lütfen arızayı betimleyiniz: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanında kısaca belirtiniz.<br>
+ <b>Adım 6: </b>İsteminizi göndermek için <img <?php echo createLDImgSrc('../','abschic.gif','0') ?>> düğmesini tıklayınız. <br>
 </ul>
-<b>UyarÄ±</b>
-<ul> EÄŸer istem formunu kapatmak isterseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Eğer istem formunu kapatmak isterseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif;?>
+<?php endif ?>
 <?php if($src=="report") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-OnarÄ±m tamamlandÄ±ÄŸÄ± nasÄ±l bildirilir?</b></font>
-<ul> <b>AdÄ±m 1: </b>ArÄ±zanÄ±n yerini 
-<nobr>"<span style="background-color:yellow" > arÄ±zanÄ±n yeri <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanÄ±na giriniz.<p>
-<b>AdÄ±m 2: </b>Ä°ÅŸ kimlik numarasÄ±nÄ± <nobr>"<span style="background-color:yellow" > Ä°ÅŸ kimlik no.: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanÄ±na giriniz.<br>
-<b>AdÄ±m 3: </b>Ä°sminizi <nobr>"<span style="background-color:yellow" > Teknisyen: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanÄ±na giriniz.<br>
- <b>AdÄ±m 4: </b>Personel sicil numaranÄ±zÄ± <nobr>"<span style="background-color:yellow" > Sicil no.: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanÄ±na giriniz.<br>
- <b>Step 5: </b>YaptÄ±ÄŸÄ±nÄ±z onarÄ±m iÅŸini <nobr>"<span style="background-color:yellow" > LÃ¼tfen yaptÄ±ÄŸÄ±nÄ±z Ä±narÄ±m iÅŸini anlatÄ±nÄ±z: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanÄ±na yazÄ±nÄ±z.<br>
- <b>Step 6: </b>Raporunuzu gÃ¶ndermek iÃ§in <input type="button" value="Raporu gÃ¶nder"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
+Onarım tamamlandığı nasıl bildirilir?</b></font>
+<ul> <b>Adım 1: </b>Arızanın yerini 
+<nobr>"<span style="background-color:yellow" > arızanın yeri <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanına giriniz.<p>
+<b>Adım 2: </b>İş kimlik numarasını <nobr>"<span style="background-color:yellow" > İş kimlik no.: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanına giriniz.<br>
+<b>Adım 3: </b>İsminizi <nobr>"<span style="background-color:yellow" > Teknisyen: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanına giriniz.<br>
+ <b>Adım 4: </b>Personel sicil numaranızı <nobr>"<span style="background-color:yellow" > Sicil no.: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanına giriniz.<br>
+ <b>Step 5: </b>Yaptığınız onarım işini <nobr>"<span style="background-color:yellow" > Lütfen yaptığınız ınarım işini anlatınız: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanına yazınız.<br>
+ <b>Step 6: </b>Raporunuzu göndermek için <input type="button" value="Raporu gönder"> düğmesini tıklayınız. <br>
 </ul>
-<b>UyarÄ±</b>
-<ul> Formu kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Formu kapatmaya karar verir iseniz <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif;?>
+<?php endif ?>
 <?php if($src=="queries") : ?>
 <p>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Teknik destek bÃ¶lÃ¼mÃ¼ne bir soru veya sorgu nasÄ±l gÃ¶nderilir?</b></font>
-<ul> <b>AdÄ±m 1: </b>Soru veya sorgunuzu <nobr>"<span style="background-color:yellow" > LÃ¼tfen sorunuzu yazÄ±nÄ±z: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanÄ±na giriniz.<br>
-<b>AdÄ±m 2: </b>AdÄ±nÄ±zÄ± <nobr>"<span style="background-color:yellow" > Ä°sim: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanÄ±na giriniz.<br>
- <b>AdÄ±m 3: </b>BÃ¶lÃ¼mÃ¼nÃ¼zÃ¼ <nobr>"<span style="background-color:yellow" > BÃ¶lÃ¼m: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanÄ±na giriniz.<br>
- <b>AdÄ±m 4: </b>Sorunuzu gÃ¶ndermek iÃ§in <input type="button" value="GÃ¶nder"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
+Teknik destek bölümüne bir soru veya sorgu nasıl gönderilir?</b></font>
+<ul> <b>Adım 1: </b>Soru veya sorgunuzu <nobr>"<span style="background-color:yellow" > Lütfen sorunuzu yazınız: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanına giriniz.<br>
+<b>Adım 2: </b>Adınızı <nobr>"<span style="background-color:yellow" > İsim: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanına giriniz.<br>
+ <b>Adım 3: </b>Bölümünüzü <nobr>"<span style="background-color:yellow" > Bölüm: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanına giriniz.<br>
+ <b>Adım 4: </b>Sorunuzu göndermek için <input type="button" value="Gönder"> düğmesini tıklayınız. <br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Daha Ã¶nceki sorularÄ±mÄ± ve teknik bÃ¶lÃ¼mÃ¼n yanÄ±tlarÄ±nÄ± nasÄ±l gÃ¶rebilirim?</b></font>
-<ul> <b>AdÄ±m 1: </b>Ã–nce giriÅŸ yapmalÄ±sÄ±nÄ±z. Ä°sminizi Ã¼st saÄŸ kÃ¶ÅŸedeki <nobr>"<span style="background-color:yellow" > kimden: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanÄ±na giriniz.<br>
- <b>AdÄ±m 2: </b><input type="button" value="GiriÅŸ"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
- <b>AdÄ±m 3: </b>Daha Ã¶nce soru gÃ¶ndermiÅŸ iseniz kÄ±sa formda listelenir.  <br>
- <b>AdÄ±m 4: </b>Sorunuz teknik bÃ¶lÃ¼mce yanÄ±tlanmÄ±ÅŸ ise, en sonda <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> simgesi gÃ¶rÃ¼ntÃ¼lenir. <br>
- <b>AdÄ±m 5: </b>Sorunuzu ve teknik bÃ¶lÃ¼mÃ¼n yanÄ±tÄ±nÄ± okumak iÃ§in Ã¼zerine tÄ±klayÄ±nÄ±z. <br>
+Daha önceki sorularımı ve teknik bölümün yanıtlarını nasıl görebilirim?</b></font>
+<ul> <b>Adım 1: </b>Önce giriş yapmalısınız. İsminizi üst sağ köşedeki <nobr>"<span style="background-color:yellow" > kimden: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> alanına giriniz.<br>
+ <b>Adım 2: </b><input type="button" value="Giriş"> düğmesini tıklayınız. <br>
+ <b>Adım 3: </b>Daha önce soru göndermiş iseniz kısa formda listelenir.  <br>
+ <b>Adım 4: </b>Sorunuz teknik bölümce yanıtlanmış ise, en sonda <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> simgesi görüntülenir. <br>
+ <b>Adım 5: </b>Sorunuzu ve teknik bölümün yanıtını okumak için üzerine tıklayınız. <br>
 </ul>
-<b>UyarÄ±</b>
-<ul> Soruyu kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Soruyu kapatmaya karar verir iseniz  <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız.
 </ul>
-<?php endif;?>
+<?php endif ?>
 <?php if($src=="arch") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Teknik raporlar nasÄ±l okunur?</b></font>
+Teknik raporlar nasıl okunur?</b></font>
 <ul> 
-		<b>UyarÄ±: </b>OkunmamÄ±ÅŸ veya yazdÄ±rÄ±lmamÄ±ÅŸ teknik raporlar derhal listelenir.<p>
-<b>AdÄ±m 1: </b>AÃ§mak istediÄŸiniz raporun <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>  dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
+		<b>Uyarı: </b>Okunmamış veya yazdırılmamış teknik raporlar derhal listelenir.<p>
+<b>Adım 1: </b>Açmak istediğiniz raporun <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>  düğmesini tıklayınız. <br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Belirli teknik raporlar nasÄ±l aranÄ±r?</b></font>
-<ul> <b>AdÄ±m 1: </b>AÅŸaÄŸÄ±da aÃ§Ä±klanan alanlara bir bilginin ya tamamÄ±nÄ± ya da ilk birkaÃ§ harfini giriniz.<br>
+Belirli teknik raporlar nasıl aranır?</b></font>
+<ul> <b>Adım 1: </b>Aşağıda açıklanan alanlara bir bilginin ya tamamını ya da ilk birkaç harfini giriniz.<br>
 	<ul type=disc> 
-	<li>Belirli bir teknisyenin yazdÄ±ÄŸÄ± raporlarÄ± bulmak ister iseniz teknisyenin ismini "<span style="background-color:yellow" > Teknisyen: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" alanÄ±na giriniz.<br>
-	<li>Belirli bir bÃ¶lÃ¼mde yapÄ±lmÄ±ÅŸ iÅŸlerin raporlarÄ±nÄ± bulmak ister iseniz, bÃ¶lÃ¼mÃ¼n adÄ±nÄ±  "<span style="background-color:yellow" > BÃ¶lÃ¼m: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" alanÄ±na giriniz.<br>
-	<li>Belirli bir tarihte yazÄ±lmÄ±ÅŸ raporlarÄ± bulmak ister iseniz  "<span style="background-color:yellow" > BaÅŸlangÄ±Ã§ tarihi: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" alanÄ±na tarihi giriniz.<br>
-	<li>Belirli bir dÃ¶nemdeki tÃ¼m raporlarÄ± bulmak ister iseniz  "<span style="background-color:yellow" > BaÅŸlangÄ±Ã§ tarihi: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" alanÄ±na baÅŸlangÄ±Ã§ tarihini, "<span style="background-color:yellow" > bitiÅŸ tarihi: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" alanÄ±na bitiÅŸ tarihini giriniz.<br>
+	<li>Belirli bir teknisyenin yazdığı raporları bulmak ister iseniz teknisyenin ismini "<span style="background-color:yellow" > Teknisyen: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" alanına giriniz.<br>
+	<li>Belirli bir bölümde yapılmış işlerin raporlarını bulmak ister iseniz, bölümün adını  "<span style="background-color:yellow" > Bölüm: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" alanına giriniz.<br>
+	<li>Belirli bir tarihte yazılmış raporları bulmak ister iseniz  "<span style="background-color:yellow" > Başlangıç tarihi: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" alanına tarihi giriniz.<br>
+	<li>Belirli bir dönemdeki tüm raporları bulmak ister iseniz  "<span style="background-color:yellow" > Başlangıç tarihi: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" alanına başlangıç tarihini, "<span style="background-color:yellow" > bitiş tarihi: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" alanına bitiş tarihini giriniz.<br>
 	</ul>
- <b>AdÄ±m 2: </b>AramayÄ± baÅŸlatmak iÃ§in  <input type="button" value="Ara"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
-<b>AdÄ±m 3: </b>SonuÃ§lar listelenir. AÃ§mak istediiniz raporun <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>  simgesini tÄ±klayÄ±nÄ±z. <br>
-	<b>UyarÄ±: </b> Teknik raporlarÄ±n <img <?php echo createComIcon('../','check-r.gif','0') ?>> ile iÅŸaretlenmiÅŸ olmasÄ± daha Ã¶nceden okunduÄŸunu ya da yazdÄ±rÄ±ldÄ±ÄŸÄ±nÄ± gÃ¶sterir.<p>
+ <b>Adım 2: </b>Aramayı başlatmak için  <input type="button" value="Ara"> düğmesini tıklayınız. <br>
+<b>Adım 3: </b>Sonuçlar listelenir. Açmak istediiniz raporun <img <?php echo createComIcon('../','uparrowgrnlrg.gif','0') ?>>  simgesini tıklayınız. <br>
+	<b>Uyarı: </b> Teknik raporların <img <?php echo createComIcon('../','check-r.gif','0') ?>> ile işaretlenmiş olması daha önceden okunduğunu ya da yazdırıldığını gösterir.<p>
 
 </ul>
 </font>
-<?php endif;?>
+<?php endif ?>
 <?php if($src=="showarch") : ?>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Raporun okundu olarak iÅŸaretlenmesi.</b></font>
-<ul> <b>AdÄ±m 1: </b> <input type="button" value=" 'Okundu' olarak iÅŸaretle"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
-	<b>UyarÄ±: </b>Bir rapor okundu olarak iÅŸaretlendiÄŸinde, her arÅŸiv aramasÄ±nÄ±n baÅŸlangÄ±cÄ±nda otomatik olarak gÃ¶rÃ¼ntÃ¼lenmez. Ancak normal arÅŸiv arama yÃ¶ntemi ile tekrar bulunabilir.<p>
+Raporun okundu olarak işaretlenmesi.</b></font>
+<ul> <b>Adım 1: </b> <input type="button" value=" 'Okundu' olarak işaretle"> düğmesini tıklayınız.<p>
+	<b>Uyarı: </b>Bir rapor okundu olarak işaretlendiğinde, her arşiv aramasının başlangıcında otomatik olarak görüntülenmez. Ancak normal arşiv arama yöntemi ile tekrar bulunabilir.<p>
 </ul>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Raporun yazdÄ±rÄ±lmasÄ±.</b></font>
-<ul> <b>AdÄ±m 1: </b> <input type="button" value="YazdÄ±r"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+Raporun yazdırılması.</b></font>
+<ul> <b>Adım 1: </b> <input type="button" value="Yazdır"> düğmesini tıklayınız.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-ArÅŸiv aramasÄ±nÄ±n baÅŸÄ±na nasÄ±l geri gidilir?</b></font>
-<ul> <b>AdÄ±m 1: </b> <input type="button" value="<< Geri git"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+Arşiv aramasının başına nasıl geri gidilir?</b></font>
+<ul> <b>Adım 1: </b> <input type="button" value="<< Geri git"> düğmesini tıklayınız.<p>
 </ul>
-<?php endif;?>
+<?php endif ?>
 <?php if($src=="dutydoc") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-NÃ¶bet saatinde yapÄ±lmÄ±ÅŸ bir iÅŸ nasÄ±l belgelendirilir?</b></font>
-<ul> <b>AdÄ±m 1: </b>Tarihi " Tarih <input type="text" name="d" size=10 maxlength=10> " alanÄ±na giriniz.<p>
-	<ul> <b>UyarÄ±: </b>BugÃ¼nÃ¼n tarihini otomatik olarak girmek iÃ§in  "t" veya  "T" (TODAY=BugÃ¼n anlamÄ±nda) giriniz.<br>
-		<b>UyarÄ±: </b>DÃ¼nkÃ¼ tarihi otomatik girmek iÃ§in  "y" veya "Y" (YESTERDAY=DÃ¼n anlamÄ±nda ) giriniz.<p>
+Nöbet saatinde yapılmış bir iş nasıl belgelendirilir?</b></font>
+<ul> <b>Adım 1: </b>Tarihi " Tarih <input type="text" name="d" size=10 maxlength=10> " alanına giriniz.<p>
+	<ul> <b>Uyarı: </b>Bugünün tarihini otomatik olarak girmek için  "t" veya  "T" (TODAY=Bugün anlamında) giriniz.<br>
+		<b>Uyarı: </b>Dünkü tarihi otomatik girmek için  "y" veya "Y" (YESTERDAY=Dün anlamında ) giriniz.<p>
 		</ul>
-		<b>AdÄ±m 2: </b>NÃ¶betÃ§i hemÅŸirenin adÄ±nÄ±  <nobr>"<span style="background-color:yellow" > Soyad, ad <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanÄ±na giriniz.<br>
- <b>AdÄ±m 3: </b>Ä°ÅŸ baÅŸlama saatini "<span style="background-color:yellow" > baÅŸlangÄ±Ã§ saati <input type="text" name="d" size=5 maxlength=5> </span>" alanÄ±na giriniz.<br>
- <b>AdÄ±m 4: </b>Ä°ÅŸ bitiÅŸ saatini "<span style="background-color:yellow" > bitiÅŸ saati <input type="text" name="d" size=5 maxlength=5> </span>" alanÄ±na giriniz.<p>
-	<ul> <b>Ä°pucu: </b>Åu anki zamanÄ± otomatik olarak girmek iÃ§in  "n" veya "N" (NOW=Åimdi anlamÄ±nda) giriniz.<p>
+		<b>Adım 2: </b>Nöbetçi hemşirenin adını  <nobr>"<span style="background-color:yellow" > Soyad, ad <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> alanına giriniz.<br>
+ <b>Adım 3: </b>İş başlama saatini "<span style="background-color:yellow" > başlangıç saati <input type="text" name="d" size=5 maxlength=5> </span>" alanına giriniz.<br>
+ <b>Adım 4: </b>İş bitiş saatini "<span style="background-color:yellow" > bitiş saati <input type="text" name="d" size=5 maxlength=5> </span>" alanına giriniz.<p>
+	<ul> <b>İpucu: </b>Şu anki zamanı otomatik olarak girmek için  "n" veya "N" (NOW=Şimdi anlamında) giriniz.<p>
 		</ul>
- <b>AdÄ±m 5: </b>Ameliyathane numarasÄ±nÄ± "<span style="background-color:yellow" > Ameliyathane <input type="text" name="d" size=5 maxlength=5> </span>" alanÄ±na giriniz.<br>
- <b>AdÄ±m 6: </b>TanÄ±, tedavi veya ameliyatÄ±  <nobr>"<span style="background-color:yellow" > TanÄ±/Tedavi <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanÄ±na giriniz.<br>
- <b>AdÄ±m 7: </b>Alet hemÅŸiresinin adÄ±nÄ± <nobr>"<span style="background-color:yellow" > Alet hemÅŸiresiÄ°capÃ§Ä±: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> field.<br>
- <b>Step 8: </b>Ä°cap nÃ¶betÃ§isi hemÅŸirenin adÄ±nÄ± <nobr>"<span style="background-color:yellow" > Ä°capÃ§Ä±: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanÄ±na gerekir ise giriniz.<br>
- <b>AdÄ±m 1: </b>Belgeyi kayÄ±t etmek iÃ§in  <input type="button" value="Kaydet"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z . <br>
+ <b>Adım 5: </b>Ameliyathane numarasını "<span style="background-color:yellow" > Ameliyathane <input type="text" name="d" size=5 maxlength=5> </span>" alanına giriniz.<br>
+ <b>Adım 6: </b>Tanı, tedavi veya ameliyatı  <nobr>"<span style="background-color:yellow" > Tanı/Tedavi <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanına giriniz.<br>
+ <b>Adım 7: </b>Alet hemşiresinin adını <nobr>"<span style="background-color:yellow" > Alet hemşiresiİcapçı: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> field.<br>
+ <b>Step 8: </b>İcap nöbetçisi hemşirenin adını <nobr>"<span style="background-color:yellow" > İcapçı: <input type="text" name="d" size=5 maxlength=5> </span>"</nobr> alanına gerekir ise giriniz.<br>
+ <b>Adım 1: </b>Belgeyi kayıt etmek için  <input type="button" value="Kaydet"> düğmesini tıklayınız . <br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belge listesi nasÄ±l yazdÄ±rÄ±lÄ±r?</b></font>
-<ul> <b>AdÄ±m 1: </b>YazdÄ±rma penceresini aÃ§mak iÃ§in <input type="button" value="YazdÄ±r"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
-	<b>AdÄ±m 2: </b>YazdÄ±rma penceresindeki yÃ¶nergeleri izleyiniz.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belge listesi nasıl yazdırılır?</b></font>
+<ul> <b>Adım 1: </b>Yazdırma penceresini açmak için <input type="button" value="Yazdır"> düğmesini tıklayınız.<br>
+	<b>Adım 2: </b>Yazdırma penceresindeki yönergeleri izleyiniz.<br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belgeyi kayÄ±t ettim ve kapatmak istiyorum. Ne yapmalÄ±yÄ±m? </b></font>
-<ul> <b>AdÄ±m 1: </b>Ä°ÅŸiniz bitti ise <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Belgeyi kayıt ettim ve kapatmak istiyorum. Ne yapmalıyım? </b></font>
+<ul> <b>Adım 1: </b>İşiniz bitti ise <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> düğmesini tıklayınız. <br>
 </ul>
-<?php endif;?>
+<?php endif ?>
 
 </form>
 </body>

@@ -1,29 +1,29 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Patoloji tetkiki iÃ§in bekleyen istemler</b></font>
+<b>Patoloji tetkiki için bekleyen istemler</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 
 <a name="stime"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bekleyen istemler nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b></font>
+Bekleyen istemler nasıl görüntülenir?</b></font>
 <ul> 
-	<b>UyarÄ±:</b> Ä°lk istem kendiliÄŸinden gÃ¶rÃ¼ntÃ¼lenir.<p>
-	<b>AdÄ±m:</b> Ä°stem formunu gÃ¶rÃ¼ntÃ¼lemek iÃ§in sol listedeki kÃ¼me numarasÄ±nÄ± tÄ±klayÄ±nÄ±z.
+	<b>Uyarı:</b> İlk istem kendiliğinden görüntülenir.<p>
+	<b>Adım:</b> İstem formunu görüntülemek için sol listedeki küme numarasını tıklayınız.
 </ul>
 </ul>
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Form nasÄ±l yazdÄ±rÄ±lÄ±r?</b></font>
+Form nasıl yazdırılır?</b></font>
 <ul> 
-	<b>AdÄ±m: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+	<b>Adım: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bulgular veya tetkik sonuÃ§larÄ± nasÄ±l girilir?</b></font>
+Bulgular veya tetkik sonuçları nasıl girilir?</b></font>
 <ul> 
-	<b>AdÄ±m 1: </b> Formun saÄŸ Ã¼st kÃ¶ÅŸesindeki alanlardaki ilk bilgileri giriniz. Zorunlu alanlar "GiriÅŸ tarihi", ve "GÃ¼nlÃ¼k numarasÄ±" dÄ±r.<p>
-	<b>AdÄ±m 2:</b>   <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.</b> <p>
-	<b>AdÄ±m 3: </b>  KayÄ±t ettikten sonra, <img <?php echo createLDImgSrc('../','enter_result.gif','0') ?>> dÃ¼ÄŸmesi gÃ¶rÃ¼nÃ¼Ã¼r.</b> <p>
-	<b>AdÄ±m 4: </b>  Formu dÃ¼zenlemek Ã¼zere aÃ§mak iÃ§in <img <?php echo createLDImgSrc('../','enter_result.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.</b> 
+	<b>Adım 1: </b> Formun sağ üst köşesindeki alanlardaki ilk bilgileri giriniz. Zorunlu alanlar "Giriş tarihi", ve "Günlük numarası" dır.<p>
+	<b>Adım 2:</b>   <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayınız.</b> <p>
+	<b>Adım 3: </b>  Kayıt ettikten sonra, <img <?php echo createLDImgSrc('../','enter_result.gif','0') ?>> düğmesi görünüür.</b> <p>
+	<b>Adım 4: </b>  Formu düzenlemek üzere açmak için <img <?php echo createLDImgSrc('../','enter_result.gif','0') ?>> düğmesini tıklayınız.</b> 
 </ul>
 

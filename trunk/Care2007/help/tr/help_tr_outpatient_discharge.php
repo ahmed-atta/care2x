@@ -3,21 +3,21 @@
 
 <p><font size=2 face="verdana,arial" >
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir hasta nasÄ±l Ã§Ä±karÄ±lÄ±r?</b></font>
+Bir hasta nasıl çıkarılır?</b></font>
 <ul> 
-<b>AdÄ±m 1: </b>Ã‡Ä±kÄ±ÅŸ tarihi ve zamanÄ±nÄ±n doÄŸru olarak girildiÄŸinden emin olunuz.<br>
-<b>AdÄ±m 2: </b>Ã‡Ä±kÄ±ÅŸ tipini ilgili dÃ¼ÄŸmeyi iÅŸaretleyerek seÃ§iniz<br>
+<b>Adım 1: </b>Çıkış tarihi ve zamanının doğru olarak girildiğinden emin olunuz.<br>
+<b>Adım 2: </b>Çıkış tipini ilgili düğmeyi işaretleyerek seçiniz<br>
 	<p>
-		<b>AdÄ±m 3: </b>Ã‡Ä±kÄ±ÅŸ hakkÄ±nda ek uyarÄ± ve notlar var ise  "<span style="background-color:yellow" > UyarÄ±: </span>" alanÄ±na yazÄ±nÄ±z. <br>
-		<b>AdÄ±m 4: </b>Ä°sminizi eÄŸer boÅŸ ise "<span style="background-color:yellow" > HemÅŸire: <input type="text" name="a" size=20 maxlength=20></span>" alanÄ±na yazÄ±nÄ±z. <br>
-		<b>AdÄ±m 5: </b> " <span style="background-color:yellow" ><input type="checkbox" name="d" value="d"> Evet, eminim hastayÄ± Ã§Ä±kar. </span>" alanÄ±nÄ± iÅŸaretleyiniz. <br>
-		<b>AdÄ±m 6: </b>HastayÄ± Ã§Ä±karmak iÃ§in <input type="button" value="Ã§Ä±kar"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
-		<b>AdÄ±m 7: </b>Servisin yeni yatan hasta listesine geri gitmek iÃ§in  <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+		<b>Adım 3: </b>Çıkış hakkında ek uyarı ve notlar var ise  "<span style="background-color:yellow" > Uyarı: </span>" alanına yazınız. <br>
+		<b>Adım 4: </b>İsminizi eğer boş ise "<span style="background-color:yellow" > Hemşire: <input type="text" name="a" size=20 maxlength=20></span>" alanına yazınız. <br>
+		<b>Adım 5: </b> " <span style="background-color:yellow" ><input type="checkbox" name="d" value="d"> Evet, eminim hastayı çıkar. </span>" alanını işaretleyiniz. <br>
+		<b>Adım 6: </b>Hastayı çıkarmak için <input type="button" value="çıkar"> düğmesini tıklayınız.<p>
+		<b>Adım 7: </b>Servisin yeni yatan hasta listesine geri gitmek için  <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> düğmesini tıklayınız.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
- <input type="button" value="Ã§Ä±kar"> dÃ¼ÄŸmesini denedim, ama yanÄ±t olmadÄ±. Neden?</b></font>
-<ul> <b>UyarÄ±: </b>Ä°zleyen kutu iÅŸaretlenmiÅŸ olmalÄ± ve ÅŸÃ¶yle gÃ¶rÃ¼nmelidir: <br>
- " <span style="background-color:yellow" ><input type="checkbox" name="d" value="d" checked> Evet, eminim. HastayÄ± Ã§Ä±kar. </span>". <p>
-		<b>AdÄ±m 1: </b>Ä°ÅŸaretlenmemiÅŸ ise onay kutusunu iÅŸaretleyiniz.<p>
+ <input type="button" value="çıkar"> düğmesini denedim, ama yanıt olmadı. Neden?</b></font>
+<ul> <b>Uyarı: </b>İzleyen kutu işaretlenmiş olmalı ve şöyle görünmelidir: <br>
+ " <span style="background-color:yellow" ><input type="checkbox" name="d" value="d" checked> Evet, eminim. Hastayı çıkar. </span>". <p>
+		<b>Adım 1: </b>İşaretlenmemiş ise onay kutusunu işaretleyiniz.<p>
 </ul>
-  <b>UyarÄ±: </b>EÄŸer iptal etmek ister iseniz,  <img <?php echo createLDImgSrc('../','canc el.gif','0') ?> align="absmiddle">dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.</ul>
+  <b>Uyarı: </b>Eğer iptal etmek ister iseniz,  <img <?php echo createLDImgSrc('../','canc el.gif','0') ?> align="absmiddle">düğmesini tıklayınız.</ul>

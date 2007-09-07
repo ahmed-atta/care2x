@@ -1,31 +1,31 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bir sigorta ÅŸirketi nasÄ±l aranÄ±r</b></font>
+<b>Bir sigorta şirketi nasıl aranır</b></font>
 <p><font size=2 face="verdana,arial" >
 <form action="#" >
-<b>AdÄ±m 1</b>
+<b>Adım 1</b>
 
-<ul> Sigorta ÅŸirketinin isim, kimlik, eposta adresi gibi tÃ¼m bilgilerini veya birkaÃ§ harfini giriniz.
-		<p>Ã–rnek 1: "3321000012" veya "3321" giriniz.
-		<br>Ã–rnek 2: "XYZ Sigorta" veya "XYZ" giriniz.
-		<br>Ã–rnek 3: "bilgi@xyz.com" veya "bilgi@x" giriniz.
+<ul> Sigorta şirketinin isim, kimlik, eposta adresi gibi tüm bilgilerini veya birkaç harfini giriniz.
+		<p>Örnek 1: "3321000012" veya "3321" giriniz.
+		<br>Örnek 2: "XYZ Sigorta" veya "XYZ" giriniz.
+		<br>Örnek 3: "bilgi@xyz.com" veya "bilgi@x" giriniz.
 	<p>
-	UyarÄ±: Joker olarak % veya * kullanabilirsiniz.
+	Uyarı: Joker olarak % veya * kullanabilirsiniz.
 		
 </ul>
-<b>AdÄ±m 2</b>
-<ul> AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+<b>Adım 2</b>
+<ul> Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düğmesini tıklayınız.<p>
 </ul>
-<b>AdÄ±m 3</b>
-<ul> EÄŸer araÅŸtÄ±rma bir sonuÃ§ ya da sonuÃ§lar bulur ise, bir liste gÃ¶rÃ¼ntÃ¼lenir.<br>
-		AradÄ±ÄŸÄ±nÄ±z sigorta ÅŸirketinin bilgisini gÃ¶rÃ¼ntÃ¼lemek iÃ§in, ismini ya da kimliÄŸini tÄ±klayÄ±nÄ±z.
-</ul>
-
-<b>UyarÄ±</b>
-<ul> Åirkete bir eposta gÃ¶ndermek ister iseniz, ÅŸirketin eposta adresine tÄ±kladÄ±ÄŸÄ±nÄ±z zaman eposta programÄ± baÅŸlatÄ±lÄ±r.
+<b>Adım 3</b>
+<ul> Eğer araştırma bir sonuç ya da sonuçlar bulur ise, bir liste görüntülenir.<br>
+		Aradığınız sigorta şirketinin bilgisini görüntülemek için, ismini ya da kimliğini tıklayınız.
 </ul>
 
-<b>UyarÄ±</b>
-<ul> AramayÄ± iptal etmek ister iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Şirkete bir eposta göndermek ister iseniz, şirketin eposta adresine tıkladığınız zaman eposta programı başlatılır.
+</ul>
+
+<b>Uyarı</b>
+<ul> Aramayı iptal etmek ister iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 </form>

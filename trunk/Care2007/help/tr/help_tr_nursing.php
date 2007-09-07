@@ -5,51 +5,51 @@ Servis
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir servis nasÄ±l kaydedilir?</b>
+Bir servis nasıl kaydedilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m: </b>Listeden servisin kimliÄŸini tÄ±klayÄ±nÄ±z.<p>
+ 	<b>Adım: </b>Listeden servisin kimliğini tıklayınız.<p>
 	<img src="../help/tr/img/tr_ward_select.png" border=0 width=317 height=144>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-TÃ¼m servislerin yatan hasta durumu nasÄ±l izlenir?</b>
+Tüm servislerin yatan hasta durumu nasıl izlenir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m: </b> "<font color=#000088><b>HÄ±zlÄ±bakÄ±ÅŸ</b></font>" Ä± tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım: </b> "<font color=#000088><b>Hızlıbakış</b></font>" ı tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yatan bir hasta nasÄ±l aranÄ±r?</b>
+Yatan bir hasta nasıl aranır?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m: </b>"<font color=#000088><b>Bir hasta ara</b></font>" yÄ± tÄ±klayÄ±nÄ±z.<br>
-</ul>
-	
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Hasta listesi nasÄ±l bulunur?</b>
-</font>
-<ul>       	
- 	<b>AdÄ±m: </b> "<font color=#000088><b>ArÅŸiv</b></font>" i tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım: </b>"<font color=#000088><b>Bir hasta ara</b></font>" yı tıklayınız.<br>
 </ul>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Yeni bir servis nasÄ±l oluÅŸturulur?</b>
+Hasta listesi nasıl bulunur?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m: </b>Alt menÃ¼yÃ¼ aÃ§mak iÃ§in "<font color=#000088><b>Servis yÃ¶netimi</b></font>"ni tÄ±klayÄ±nÄ±z .<br>
+ 	<b>Adım: </b> "<font color=#000088><b>Arşiv</b></font>" i tıklayınız.<br>
 </ul>
 	
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Servis Ã¶zellikleri nasÄ±l dÃ¼zenlenir?</b>
+Yeni bir servis nasıl oluşturulur?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m: </b>Alt menÃ¼yÃ¼ aÃ§mak iÃ§in "<font color=#000088><b>Servis yÃ¶netimi </b></font>" ni tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım: </b>Alt menüyü açmak için "<font color=#000088><b>Servis yönetimi</b></font>"ni tıklayınız .<br>
+</ul>
+	
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
+Servis özellikleri nasıl düzenlenir?</b>
+</font>
+<ul>       	
+ 	<b>Adım: </b>Alt menüyü açmak için "<font color=#000088><b>Servis yönetimi </b></font>" ni tıklayınız.<br>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-HemÅŸire listesi nasÄ±l yÃ¶netilir?</b>
+Hemşire listesi nasıl yönetilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m: </b>Alt menÃ¼yÃ¼ aÃ§mak iÃ§in "<font color=#000088><b>HemÅŸireler Listesi</b></font>"  ni tÄ±klatÄ±nÄ±z.<br>
+ 	<b>Adım: </b>Alt menüyü açmak için "<font color=#000088><b>Hemşireler Listesi</b></font>"  ni tıklatınız.<br>
 </ul>
 
 	</form>

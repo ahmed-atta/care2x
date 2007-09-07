@@ -3,30 +3,30 @@
 <form action="#" >
 <p><font size=2 face="verdana,arial" >
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bekleme listesindeki bir hasta nasÄ±l kabul edilir?</b></font>
-<ul> <b>AdÄ±m 1: </b>Bekleme listesinde hastanÄ±n ismini tÄ±klayÄ±nÄ±z.<p>
+Bekleme listesindeki bir hasta nasıl kabul edilir?</b></font>
+<ul> <b>Adım 1: </b>Bekleme listesinde hastanın ismini tıklayınız.<p>
 <img src="../help/tr/img/tr_ambulatory_waitlist.png" border=0 width=301 height=156>
                                                                      <p>
-		<b>AdÄ±m 2: </b>Servis yatan hasta listesini gÃ¶steren bir pencere aÃ§Ä±lÄ±r.<br>
-		<b>AdÄ±m 3: </b>Hastaya verilecek yataÄŸÄ±n <img <?php echo createLDImgSrc('../','assign_here.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+		<b>Adım 2: </b>Servis yatan hasta listesini gösteren bir pencere açılır.<br>
+		<b>Adım 3: </b>Hastaya verilecek yatağın <img <?php echo createLDImgSrc('../','assign_here.gif','0') ?>> düğmesini tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir yatak bir hastaya nasÄ±l verilir?</b> (Eski yÃ¶ntem)</font>
+Bir yatak bir hastaya nasıl verilir?</b> (Eski yöntem)</font>
 <ul> 
-<b>UyarÄ±: </b> Bu hastayÄ± bir servise kabul etmenin eski yÃ¶ntemidir. GÃ¼ncel yÃ¶ntem iÃ§in bekleme listesini kullanÄ±nÄ±z. YukarÄ±daki adÄ±mlara bakÄ±nÄ±z.<p>
-<b>AdÄ±m 1: </b>Ä°lgili oda numarasÄ± ve yataÄŸÄ±n <img <?php echo createComIcon('../','plus2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. 
+<b>Uyarı: </b> Bu hastayı bir servise kabul etmenin eski yöntemidir. Güncel yöntem için bekleme listesini kullanınız. Yukarıdaki adımlara bakınız.<p>
+<b>Adım 1: </b>İlgili oda numarası ve yatağın <img <?php echo createComIcon('../','plus2.gif','0') ?>> düğmesini tıklayınız. 
                                                                      <br>
-		<b>AdÄ±m 2: </b>Hasta aramak iÃ§in bir pencere aÃ§Ä±lÄ±r.<br>
-		<b>AdÄ±m 3: </b>Ã–nce Ã§eÅŸitli giriÅŸ alanlarÄ±ndan birine aranacak bir anahtar sÃ¶zcÃ¼k girerek hastayÄ± bulunuz.<br>
-		HastayÄ± ...<ul type="disc">
-		<li>protokol numarasÄ±na gÃ¶re bulmak ister iseniz <br>"<span style="background-color:yellow" >Protokol numarasÄ±:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" alanÄ±na numarayÄ± giriniz.
-		<li>soyadÄ±na gÃ¶re bulmak ister iseniz <br>"<span style="background-color:yellow" >SoyadÄ±:</span><input type="text" name="t" size=19 maxlength=10 value="Schmitt">" alanÄ±na soyadÄ±nÄ± veya soyadÄ±nÄ±n ilk birkaÃ§ harfini yazÄ±nÄ±z.
-		<li>adÄ±na gÃ¶re bulmak ister iseniz  <br>"<span style="background-color:yellow" >AdÄ±:</span><input type="text" name="t" size=19 maxlength=10 value="Peter">" alanÄ±na adÄ±nÄ± veya adÄ±nÄ±n ilk birkaÃ§ hharfini yazÄ±nÄ±z.
-		<li>doÄŸum tarihine gÃ¶re bulmak isterseniz <br>"<span style="background-color:yellow" >DoÄŸum tarihi:</span><input type="text" name="t" size=19 maxlength=10 value="10.10.1966">" alanÄ±na doÄŸum tarihini veya doÄŸum tarihinin ilk birkaÃ§ rakamÄ±nÄ± giriniz.
+		<b>Adım 2: </b>Hasta aramak için bir pencere açılır.<br>
+		<b>Adım 3: </b>Önce çeşitli giriş alanlarından birine aranacak bir anahtar sözcük girerek hastayı bulunuz.<br>
+		Hastayı ...<ul type="disc">
+		<li>protokol numarasına göre bulmak ister iseniz <br>"<span style="background-color:yellow" >Protokol numarası:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" alanına numarayı giriniz.
+		<li>soyadına göre bulmak ister iseniz <br>"<span style="background-color:yellow" >Soyadı:</span><input type="text" name="t" size=19 maxlength=10 value="Schmitt">" alanına soyadını veya soyadının ilk birkaç harfini yazınız.
+		<li>adına göre bulmak ister iseniz  <br>"<span style="background-color:yellow" >Adı:</span><input type="text" name="t" size=19 maxlength=10 value="Peter">" alanına adını veya adının ilk birkaç hharfini yazınız.
+		<li>doğum tarihine göre bulmak isterseniz <br>"<span style="background-color:yellow" >Doğum tarihi:</span><input type="text" name="t" size=19 maxlength=10 value="10.10.1966">" alanına doğum tarihini veya doğum tarihinin ilk birkaç rakamını giriniz.
 		</ul>
-		<b>AdÄ±m 4: </b>HastayÄ± aramaya baÅŸlamak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
-		<b>AdÄ±m 5: </b>EÄŸer arama hastayÄ± veya birkaÃ§ hasta bulur ise bir hasta listesi gÃ¶rÃ¼ntÃ¼lenir.<br>
-		<b>AdÄ±m 6: </b>DoÄŸru hastayÄ± seÃ§mek iÃ§in hastanÄ±n ilgili &nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+		<b>Adım 4: </b>Hastayı aramaya başlamak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düğmesini tıklayınız.<br>
+		<b>Adım 5: </b>Eğer arama hastayı veya birkaç hasta bulur ise bir hasta listesi görüntülenir.<br>
+		<b>Adım 6: </b>Doğru hastayı seçmek için hastanın ilgili &nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> düğmesini tıklayınız.<br>
 </ul>
 
 <?php if((($src=="")&&($x1=="ja"))||(($src=="fresh")&&($x1=="template"))) : ?>
@@ -35,151 +35,151 @@ Bir yatak bir hastaya nasÄ±l verilir?</b> (Eski yÃ¶ntem)</font>
 <font face="Verdana, Arial" size=2>
 <a name="open"></a>
 <b>
-<p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000">Bir hastanÄ±n Ã§izelgeleri nasÄ±l aÃ§Ä±lÄ±r?</font></b><p>
+<p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000">Bir hastanın çizelgeleri nasıl açılır?</font></b><p>
 <font face="Verdana, Arial" size=2>
 <ul>
-<b>AdÄ±m:</b> Hasta dosyasÄ±nÄ± aÃ§mak iÃ§in renkli Ã§ubuklarÄ± tÄ±klayÄ±nÄ±z...<p>
+<b>Adım:</b> Hasta dosyasını açmak için renkli çubukları tıklayınız...<p>
 <img src="../help/tr/img/tr_ambulatory_sbars.png" border=0 width=434 height=84><p>
-<b>Veya:</b> Hasta dosyasÄ±nÄ± aÃ§mak iÃ§in  <img <?php echo createComIcon($root_path,'open.gif','0'); ?>> simgesini tÄ±klayÄ±nÄ±z...<p>
+<b>Veya:</b> Hasta dosyasını açmak için  <img <?php echo createComIcon($root_path,'open.gif','0'); ?>> simgesini tıklayınız...<p>
 <img src="../help/tr/img/tr_admission_folder.png" border=0 width=456 height=92>
 </ul>
 <a name="adata"></a>
 <font face="Verdana, Arial" size=2>
 <b>
-<p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000">Bir hastanÄ±n kayÄ±t kabul bilgileri nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</font></b><p>
+<p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000">Bir hastanın kayıt kabul bilgileri nasıl görüntülenir?</font></b><p>
 <font face="Verdana, Arial" size=2>
 <ul>
-<b>AdÄ±m:</b> Kabul bilgilerini gÃ¶rÃ¼ntÃ¼ntÃ¼lemek iÃ§in <img <?php echo createComIcon($root_path,'pdata.gif','0'); ?>> simgesini tÄ±klayÄ±nÄ±z...<p>
+<b>Adım:</b> Kabul bilgilerini görüntüntülemek için <img <?php echo createComIcon($root_path,'pdata.gif','0'); ?>> simgesini tıklayınız...<p>
 <img src="../help/tr/img/tr_admission_listlink.png" border=0 width=456 height=92><p>
-<b>Veya:</b> Kabul bilgilerini gÃ¶rÃ¼ntÃ¼lemek iÃ§in hastanÄ±n soyadÄ±nÄ± tÄ±klayÄ±nÄ±z.<p>
+<b>Veya:</b> Kabul bilgilerini görüntülemek için hastanın soyadını tıklayınız.<p>
 <img src="../help/tr/img/tr_ambulatory_name.png" border=0 width=434 height=84>
 </ul>
 
 <a name="transfer"></a>
 <font face="Verdana, Arial" size=2>
 <b>
-<p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000">Bir hasta nasÄ±l nakil edilir?</font></b><p>
+<p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000">Bir hasta nasıl nakil edilir?</font></b><p>
 <font face="Verdana, Arial" size=2>
 <ul>
-<b>AdÄ±m:</b> Transfer penceresini aÃ§mak iÃ§in  <img <?php echo createComIcon($root_path,'xchange.gif','0'); ?>> simgesini tÄ±klayÄ±nÄ±z.<p>
+<b>Adım:</b> Transfer penceresini açmak için  <img <?php echo createComIcon($root_path,'xchange.gif','0'); ?>> simgesini tıklayınız.<p>
 <img src="../help/tr/img/tr_admission_transfer.png" border=0 width=456 height=92>
 </ul>
 
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir hasta servisten nasÄ±l Ã§Ä±karÄ±lÄ±r?</b></font>
-<ul> <b>AdÄ±m 1: </b>HastanÄ±n ilgili <img <?php echo createComIcon('../','bestell.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+Bir hasta servisten nasıl çıkarılır?</b></font>
+<ul> <b>Adım 1: </b>Hastanın ilgili <img <?php echo createComIcon('../','bestell.gif','0') ?>> düğmesini tıklayınız.
                                                                      <p>
 <img src="../help/tr/img/tr_admission_discharge.png" border=0 width=456 height=92><p>
-		<b>AdÄ±m 2: </b>HastanÄ±n Ã§Ä±kÄ±ÅŸ formu gÃ¶rÃ¼ntÃ¼lenir.<br>
-		<b>AdÄ±m 3: </b>HastayÄ± Ã§Ä±karacaÄŸÄ±nÄ±zdan emin iseniz, <br> 
-		"<input type="checkbox" name="g" ><span style="background-color:yellow" > Evet, eminim. HastayÄ± Ã§Ä±kar.</span>" kutusunu iÅŸaretleyiniz.<br>
-       	<b>AdÄ±m 4: </b>HastayÄ± Ã§Ä±karmak iÃ§in <input type="button" value="Ã§Ä±kar"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
-       	<b>UyarÄ±: </b>Ä°ptal etmek ister iseniz,  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. Hasta Ã§Ä±karÄ±lmaz.<br>
+		<b>Adım 2: </b>Hastanın çıkış formu görüntülenir.<br>
+		<b>Adım 3: </b>Hastayı çıkaracağınızdan emin iseniz, <br> 
+		"<input type="checkbox" name="g" ><span style="background-color:yellow" > Evet, eminim. Hastayı çıkar.</span>" kutusunu işaretleyiniz.<br>
+       	<b>Adım 4: </b>Hastayı çıkarmak için <input type="button" value="çıkar"> düğmesini tıklayınız.<p>
+       	<b>Uyarı: </b>İptal etmek ister iseniz,  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız. Hasta çıkarılmaz.<br>
 </ul>
 
 
 
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir yatak nasÄ±l kilitlenir?</b></font>
-<ul> <b>AdÄ±m 1: </b>Ä°lgili oda numarasÄ± yataÄŸÄ±n <img <?php echo createComIcon('../','plus2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+Bir yatak nasıl kilitlenir?</b></font>
+<ul> <b>Adım 1: </b>İlgili oda numarası yatağın <img <?php echo createComIcon('../','plus2.gif','0') ?>> düğmesini tıklayınız.
                                                                      <br>
-		<b>AdÄ±m 2: </b>Hasta aramak iÃ§in bir pencere aÃ§Ä±lÄ±r.<br>
-		<b>AdÄ±m 3: </b> "<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Bu yataÄŸÄ± kilitle</font> </span>" yi tÄ±klayÄ±nÄ±z.<br>
-		<b>Step 4: </b>Onay istendiÄŸinde&nbsp;<button>Tamam</button> tÄ±klayÄ±nÄ±z.<br>
+		<b>Adım 2: </b>Hasta aramak için bir pencere açılır.<br>
+		<b>Adım 3: </b> "<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Bu yatağı kilitle</font> </span>" yi tıklayınız.<br>
+		<b>Step 4: </b>Onay istendiğinde&nbsp;<button>Tamam</button> tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Listeden bir hastayÄ± silmek istiyorum</b></font>
-.<ul> <b>UyarÄ±: </b>Bir hastayÄ± basitÃ§e listeden SÄ°LEMEZSÄ°NÄ°Z. HastayÄ± kurala uygun olarak Ã§Ä±karmanÄ±z gerekir. Bunu yapmak iÃ§in, yukarÄ±da aÃ§Ä±klanan hastayÄ± servisten Ã§Ä±karma yÃ¶nergelerini izleyiniz. <br>
+Listeden bir hastayı silmek istiyorum</b></font>
+.<ul> <b>Uyarı: </b>Bir hastayı basitçe listeden SİLEMEZSİNİZ. Hastayı kurala uygun olarak çıkarmanız gerekir. Bunu yapmak için, yukarıda açıklanan hastayı servisten çıkarma yönergelerini izleyiniz. <br>
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bu  <img <?php echo createComIcon('../','s_colorbar.gif','0') ?>> renkli Ã§ubuklar ne anlama geliyor? </b></font>
-<ul> <b>UyarÄ±: </b>Bu renkli Ã§ubuklarÄ±n her biri "gÃ¶rÃ¼nÃ¼r" olduklarÄ± zaman belirli bir bilginin, bir uyarÄ±nÄ±n, bir deÄŸiÅŸikliÄŸin veya bir sorgunun vs. varlÄ±ÄŸÄ±nÄ± belirtirler.<br>
-			Her servis iÃ§in bir rengin anlamÄ± ayarlanabilir. 
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bu  <img <?php echo createComIcon('../','s_colorbar.gif','0') ?>> renkli çubuklar ne anlama geliyor? </b></font>
+<ul> <b>Uyarı: </b>Bu renkli çubukların her biri "görünür" oldukları zaman belirli bir bilginin, bir uyarının, bir değişikliğin veya bir sorgunun vs. varlığını belirtirler.<br>
+			Her servis için bir rengin anlamı ayarlanabilir. 
 </ul>
-<!-- <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bu simgenin <img <?php echo createComIcon('../','patdata.gif','0') ?>> anlamÄ± ne? </b></font>
-<ul> <b>UyarÄ±: </b>Bu hastanÄ±n veri dosyasÄ± dÃ¼ÄŸmesidir. HastanÄ±n veri dosyasÄ± klasÃ¶rÃ¼nÃ¼ gÃ¶rÃ¼ntÃ¼lemek iÃ§in, bu simgeyi tÄ±klayÄ±nÄ±z. HastanÄ±n var ise resmi, ve birkaÃ§ diÄŸer seÃ§eneÄŸi iÃ§eren hastanÄ±n temel bilgilerini gÃ¶steren bir pencere aÃ§Ä±lÄ±r.<br>
+<!-- <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bu simgenin <img <?php echo createComIcon('../','patdata.gif','0') ?>> anlamı ne? </b></font>
+<ul> <b>Uyarı: </b>Bu hastanın veri dosyası düğmesidir. Hastanın veri dosyası klasörünü görüntülemek için, bu simgeyi tıklayınız. Hastanın var ise resmi, ve birkaç diğer seçeneği içeren hastanın temel bilgilerini gösteren bir pencere açılır.<br>
 </ul> -->
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bu simgenin  <img <?php echo createComIcon('../','bubble2.gif','0') ?>> anlamÄ± nedir? </b></font>
-<ul> <b>UyarÄ±: </b>Bu Oku/Yaz uyarÄ± dÃ¼ÄŸmesidir. Bu tÄ±klandÄ±ÄŸÄ±nda hasta ile ilgili notlarÄ± okumak veya yazmak iÃ§in bir pencere aÃ§Ä±lÄ±r..<br>
-			DÃ¼z <img <?php echo createComIcon('../','bubble2.gif','0') ?>> simgenin anlamÄ± henÃ¼z hasta hakkÄ±nda yazÄ±lmÄ±ÅŸ bir not veya uyarÄ± yok demektir. Bir not veya uyarÄ± yazmak iÃ§in bu simgeyi tÄ±klayÄ±nÄ±z.
-			 <img <?php echo createComIcon('../','bubble3.gif','0') ?>> simgesi hasta hakkÄ±nda kayÄ±tlÄ± not veya uyarÄ± bulunduÄŸu anlamÄ±na gelir. Not veya uyarÄ±larÄ± okumak ya da eklemek iÃ§in bu simgeyi tÄ±klayÄ±nÄ±z.
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bu simgenin  <img <?php echo createComIcon('../','bubble2.gif','0') ?>> anlamı nedir? </b></font>
+<ul> <b>Uyarı: </b>Bu Oku/Yaz uyarı düğmesidir. Bu tıklandığında hasta ile ilgili notları okumak veya yazmak için bir pencere açılır..<br>
+			Düz <img <?php echo createComIcon('../','bubble2.gif','0') ?>> simgenin anlamı henüz hasta hakkında yazılmış bir not veya uyarı yok demektir. Bir not veya uyarı yazmak için bu simgeyi tıklayınız.
+			 <img <?php echo createComIcon('../','bubble3.gif','0') ?>> simgesi hasta hakkında kayıtlı not veya uyarı bulunduğu anlamına gelir. Not veya uyarıları okumak ya da eklemek için bu simgeyi tıklayınız.
 </ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bu simgenin <img <?php echo createComIcon('../','bestell.gif','0') ?>> anlamÄ± nedir? </b></font>
-<ul> <b>UyarÄ±: </b>Bu hasta Ã§Ä±karma dÃ¼ÄŸmesidir. Bir hastayÄ± Ã§Ä±karmak istediÄŸinizde hasta Ã§Ä±karma formunu aÃ§mak iÃ§in bunu tÄ±klayÄ±nÄ±z.<br>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bu simgenin <img <?php echo createComIcon('../','bestell.gif','0') ?>> anlamı nedir? </b></font>
+<ul> <b>Uyarı: </b>Bu hasta çıkarma düğmesidir. Bir hastayı çıkarmak istediğinizde hasta çıkarma formunu açmak için bunu tıklayınız.<br>
 </ul>
 <?php elseif(($src=="")&&($x1=="template")) : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-<span style="background-color:yellow" >HenÃ¼z bugÃ¼nÃ¼n listesi oluÅŸturulmadÄ± </span> yazar ise ne yapmalÄ±yÄ±m?</b></font>
-<ul> <b>AdÄ±m 1: </b>Son kayÄ±t edilmiÅŸ listeyi gÃ¶rmek iÃ§in <input type="button" value="Son yatan hasta listesini gÃ¶ster"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<span style="background-color:yellow" >Henüz bugünün listesi oluşturulmadı </span> yazar ise ne yapmalıyım?</b></font>
+<ul> <b>Adım 1: </b>Son kayıt edilmiş listeyi görmek için <input type="button" value="Son yatan hasta listesini göster"> düğmesini tıklayınız.
                                                                      <br>
-		<b>AdÄ±m 2: </b>Son 31 gÃ¼n iÃ§inde kayÄ±t edilmiÅŸ bir liste var ise gÃ¶rÃ¼ntÃ¼lenir.<br>
-		<b>AdÄ±m 3: </b> <input type="button" value="Bu listeyi bugÃ¼n iÃ§in yine de kopyala."> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+		<b>Adım 2: </b>Son 31 gün içinde kayıt edilmiş bir liste var ise görüntülenir.<br>
+		<b>Adım 3: </b> <input type="button" value="Bu listeyi bugün için yine de kopyala."> düğmesini tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Son yatan hasta listesini gÃ¶rmek istemiyorum. Yeni bir liste nasÄ±l oluÅŸtururum?</b></font>
-<ul> <b>AdÄ±m 1: </b>Ä°lgili oda numarasÄ± ve yataÄŸÄ±n <img <?php echo createComIcon('../','plus2.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+Son yatan hasta listesini görmek istemiyorum. Yeni bir liste nasıl oluştururum?</b></font>
+<ul> <b>Adım 1: </b>İlgili oda numarası ve yatağın <img <?php echo createComIcon('../','plus2.gif','0') ?>> düğmesini tıklayınız.
                                                                      <br>
-		<b>AdÄ±m 2: </b>Hasta aramak iÃ§in bir pencere aÃ§Ä±lÄ±Ä±r.<br>
-		<b>AdÄ±m 3: </b>Ã–nce Ã§eÅŸitli giriÅŸ alanlarÄ±ndan birine bir anahtar sÃ¶zcÃ¼k girip hastayÄ± bulunuz.<br>
-		HastayÄ±...<ul type="disc">
-		<li>protokol numarasÄ±na gÃ¶re aramak ister iseniz <br>"<span style="background-color:yellow" >Protokol no.:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" alanÄ±na protokol numarasÄ±nÄ± veya ilk birkaÃ§ rakamÄ±nÄ± yazÄ±nÄ±z.
-		<li>soyadÄ±na gÃ¶re aramak ister iseniz, soyadÄ±nÄ± veya soyadÄ±nÄ±n ilk birkaÃ§ harfini <br>"<span style="background-color:yellow" >SoyadÄ±:</span><input type="text" name="t" size=19 maxlength=10 value="Potur">" alanÄ±na yazÄ±nÄ±z.
-		<li>AdÄ±na gÃ¶re aramak ister iseniz adÄ±nÄ± veya adÄ±nÄ±n ilk birkaÃ§ harfini <br>"<span style="background-color:yellow" >AdÄ±:</span><input type="text" name="t" size=19 maxlength=10 value="Ahmet">" alanÄ±na yazÄ±nÄ±z.
-		<li>doÄŸum tarihine gÃ¶re aramak ister iseniz, doÄŸum tarihini veya ilk bir kaÃ§ rakamÄ±nÄ±  <br>"<span style="background-color:yellow" >DoÄŸum tarihi:</span><input type="text" name="t" size=19 maxlength=10 value="10.08.1946">" alanÄ±na yazÄ±nÄ±z.
+		<b>Adım 2: </b>Hasta aramak için bir pencere açılıır.<br>
+		<b>Adım 3: </b>Önce çeşitli giriş alanlarından birine bir anahtar sözcük girip hastayı bulunuz.<br>
+		Hastayı...<ul type="disc">
+		<li>protokol numarasına göre aramak ister iseniz <br>"<span style="background-color:yellow" >Protokol no.:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" alanına protokol numarasını veya ilk birkaç rakamını yazınız.
+		<li>soyadına göre aramak ister iseniz, soyadını veya soyadının ilk birkaç harfini <br>"<span style="background-color:yellow" >Soyadı:</span><input type="text" name="t" size=19 maxlength=10 value="Potur">" alanına yazınız.
+		<li>Adına göre aramak ister iseniz adını veya adının ilk birkaç harfini <br>"<span style="background-color:yellow" >Adı:</span><input type="text" name="t" size=19 maxlength=10 value="Ahmet">" alanına yazınız.
+		<li>doğum tarihine göre aramak ister iseniz, doğum tarihini veya ilk bir kaç rakamını  <br>"<span style="background-color:yellow" >Doğum tarihi:</span><input type="text" name="t" size=19 maxlength=10 value="10.08.1946">" alanına yazınız.
 		</ul>
-		<b>AdÄ±m 4: </b>HastayÄ± aramaya baÅŸlamak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
-		<b>AdÄ±m 5: </b>EÄŸer arama bir hasta veya birkaÃ§ hasta bulur ise bir hasta listesi gÃ¶rÃ¼ntÃ¼lenir.<br>
-		<b>AdÄ±m 6: </b>DoÄŸru hastayÄ± seÃ§mek iÃ§in,ilgili &nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+		<b>Adım 4: </b>Hastayı aramaya başlamak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düğmesini tıklayınız.<br>
+		<b>Adım 5: </b>Eğer arama bir hasta veya birkaç hasta bulur ise bir hasta listesi görüntülenir.<br>
+		<b>Adım 6: </b>Doğru hastayı seçmek için,ilgili &nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> düğmesini tıklayınız.<br>
 </ul>
 <?php elseif(($src=="getlast")&&($x1=="last")) : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-GÃ¶rÃ¼ntÃ¼lenen son yatan hasta listesi bugÃ¼nkÃ¼ yatan hasta listesi olarak nasÄ±l kopyalanÄ±r?</b></font>
-<ul> <b>AdÄ±m 1: </b>Son kayÄ±tlÄ± listeyi kopyalamak iÃ§in  <input type="button" value="Bu listeyi bugÃ¼n iÃ§in yine de kopyala."> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+Görüntülenen son yatan hasta listesi bugünkü yatan hasta listesi olarak nasıl kopyalanır?</b></font>
+<ul> <b>Adım 1: </b>Son kayıtlı listeyi kopyalamak için  <input type="button" value="Bu listeyi bugün için yine de kopyala."> düğmesini tıklayınız.
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Son yatan hasta listesi gÃ¶rÃ¼ntÃ¼leniyor fakat onu kopyalamak istemiyorum. Yeni bir listeye nasÄ±l baÅŸlarÄ±m? </b></font>
-<ul> <b>AdÄ±m 1: </b>Yeni liste oluÅŸturmaya baÅŸlamak iÃ§in  <input type="button" value="Bunu kopyalama! Yeni liste oluÅŸtur."> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+Son yatan hasta listesi görüntüleniyor fakat onu kopyalamak istemiyorum. Yeni bir listeye nasıl başlarım? </b></font>
+<ul> <b>Adım 1: </b>Yeni liste oluşturmaya başlamak için  <input type="button" value="Bunu kopyalama! Yeni liste oluştur."> düğmesini tıklayınız.
 </ul>
 <?php elseif($src=="assign") : ?>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir yatak bir hastaya nasÄ±l verilir?</b></font>
-<ul> <b>AdÄ±m 1: </b>Ã–nce Ã§eÅŸitli giriÅŸ alanlarÄ±ndan birine bir anahtar sÃ¶zcÃ¼k girip hastayÄ± bulunuz.<br>
-		HastayÄ±...<ul type="disc">
-		<li>protokol numarasÄ±na gÃ¶re aramak ister iseniz <br>"<span style="background-color:yellow" >Protokol no.:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" alanÄ±na protokol numarasÄ±nÄ± veya ilk birkaÃ§ rakamÄ±nÄ± yazÄ±nÄ±z.
-		<li>soyadÄ±na gÃ¶re aramak ister iseniz, soyadÄ±nÄ± veya soyadÄ±nÄ±n ilk birkaÃ§ harfini <br>"<span style="background-color:yellow" >SoyadÄ±:</span><input type="text" name="t" size=19 maxlength=10 value="Potur">" alanÄ±na yazÄ±nÄ±z.
-		<li>AdÄ±na gÃ¶re aramak ister iseniz adÄ±nÄ± veya adÄ±nÄ±n ilk birkaÃ§ harfini <br>"<span style="background-color:yellow" >AdÄ±:</span><input type="text" name="t" size=19 maxlength=10 value="Ahmet">" alanÄ±na yazÄ±nÄ±z.
-		<li>doÄŸum tarihine gÃ¶re aramak ister iseniz, doÄŸum tarihini veya ilk bir kaÃ§ rakamÄ±nÄ±  <br>"<span style="background-color:yellow" >DoÄŸum tarihi:</span><input type="text" name="t" size=19 maxlength=10 value="10.08.1946">" alanÄ±na yazÄ±nÄ±z.
+Bir yatak bir hastaya nasıl verilir?</b></font>
+<ul> <b>Adım 1: </b>Önce çeşitli giriş alanlarından birine bir anahtar sözcük girip hastayı bulunuz.<br>
+		Hastayı...<ul type="disc">
+		<li>protokol numarasına göre aramak ister iseniz <br>"<span style="background-color:yellow" >Protokol no.:</span><input type="text" name="t" size=19 maxlength=10 value="22000109">" alanına protokol numarasını veya ilk birkaç rakamını yazınız.
+		<li>soyadına göre aramak ister iseniz, soyadını veya soyadının ilk birkaç harfini <br>"<span style="background-color:yellow" >Soyadı:</span><input type="text" name="t" size=19 maxlength=10 value="Potur">" alanına yazınız.
+		<li>Adına göre aramak ister iseniz adını veya adının ilk birkaç harfini <br>"<span style="background-color:yellow" >Adı:</span><input type="text" name="t" size=19 maxlength=10 value="Ahmet">" alanına yazınız.
+		<li>doğum tarihine göre aramak ister iseniz, doğum tarihini veya ilk bir kaç rakamını  <br>"<span style="background-color:yellow" >Doğum tarihi:</span><input type="text" name="t" size=19 maxlength=10 value="10.08.1946">" alanına yazınız.
 		</ul>
-		<b>AdÄ±m 2: </b>HastayÄ± aramaya baÅŸlamak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
-		<b>AdÄ±m 3: </b>EÄŸer arama bir hasta veya birkaÃ§ hasta bulur ise bir hasta listesi gÃ¶rÃ¼ntÃ¼lenir.<br>
-		<b>AdÄ±m 4: </b>DoÄŸru hastayÄ± seÃ§mek iÃ§in,ilgili &nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+		<b>Adım 2: </b>Hastayı aramaya başlamak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düğmesini tıklayınız.<br>
+		<b>Adım 3: </b>Eğer arama bir hasta veya birkaç hasta bulur ise bir hasta listesi görüntülenir.<br>
+		<b>Adım 4: </b>Doğru hastayı seçmek için,ilgili &nbsp;<button><img <?php echo createComIcon('../','post_discussion.gif','0') ?>></button> düğmesini tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Bir yatak nasÄ±l kilitlenir?</b></font>
-<ul> <b>AdÄ±m 1: </b>"<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Bu yataÄŸÄ± kilitle</font> </span>" yazÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
-		<b>AdÄ±m 2: </b>Onay istendiÄŸi zaman &nbsp;<button>Tamam</button> Ä± tÄ±klayÄ±nÄ±z.<p>
+Bir yatak nasıl kilitlenir?</b></font>
+<ul> <b>Adım 1: </b>"<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Bu yatağı kilitle</font> </span>" yazısını tıklayınız.<br>
+		<b>Adım 2: </b>Onay istendiği zaman &nbsp;<button>Tamam</button> ı tıklayınız.<p>
 </ul>
-  <b>UyarÄ±: </b>Ä°ptal etmek ister iseniz,  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.</ul>
+  <b>Uyarı: </b>İptal etmek ister iseniz,  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?> align="absmiddle"> düğmesini tıklayınız.</ul>
   
-<?php endif;?>
+<?php endif ?>
 
 <?php if(($src!="assign")&&($src!="remarks")&&($src!="discharge")) : ?>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bu "<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Kilitli</font> </span>" simgesinin anlamÄ± nedir? </b></font>
-<ul> <b>UyarÄ±: </b>Bunun anlamÄ± yatak kilitli bir hastaya verilemez demektir. Kilidini aÃ§mak iÃ§in "<span style="background-color:yellow" ><font color="#0000ff">Kilitli</font></span>" simgesini tÄ±klayÄ±nÄ±z ve onay istenildiÄŸi zaman &nbsp;<button>Tamam</button>
-			seÃ§iniz.<br>
- <b>UyarÄ±: </b>Program versiyonuna veya kurulum ayarlarÄ±na baÄŸÄ±mlÄ± olarak, kilitli bir yataÄŸÄ±n aÃ§Ä±lmasÄ± ÅŸifre gerektirebilir.</ul>
+<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>Bu "<span style="background-color:yellow" > <img <?php echo createComIcon('../','delete2.gif','0','absmiddle') ?>> <font color="#0000ff">Kilitli</font> </span>" simgesinin anlamı nedir? </b></font>
+<ul> <b>Uyarı: </b>Bunun anlamı yatak kilitli bir hastaya verilemez demektir. Kilidini açmak için "<span style="background-color:yellow" ><font color="#0000ff">Kilitli</font></span>" simgesini tıklayınız ve onay istenildiği zaman &nbsp;<button>Tamam</button>
+			seçiniz.<br>
+ <b>Uyarı: </b>Program versiyonuna veya kurulum ayarlarına bağımlı olarak, kilitli bir yatağın açılması şifre gerektirebilir.</ul>
 
-<?php endif;?>
+<?php endif ?>
 
 <a name="pic"></a>
 <font face="Verdana, Arial" size=2>
 <b>
-<p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000">HastanÄ±n kimlik fotoÄŸrafÄ± nasÄ±l gÃ¶sterilir?</font></b><p>
+<p><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000">Hastanın kimlik fotoğrafı nasıl gösterilir?</font></b><p>
 <font face="Verdana, Arial" size=2>
 <ul>
-<b>AdÄ±m:</b> Ya  <img <?php echo createComIcon($root_path,'spf.gif','0'); ?>> veya  <img <?php echo createComIcon($root_path,'spm.gif','0'); ?>> simgesini tÄ±klayÄ±nÄ±z.<p>
+<b>Adım:</b> Ya  <img <?php echo createComIcon($root_path,'spf.gif','0'); ?>> veya  <img <?php echo createComIcon($root_path,'spm.gif','0'); ?>> simgesini tıklayınız.<p>
 <img src="../help/tr/img/tr_ambulatory_sex.png" border=0 width=434 height=84>
 </ul>
 

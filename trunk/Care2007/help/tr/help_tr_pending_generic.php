@@ -5,36 +5,36 @@
 
 
 <a name="stime"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bekleyen istemler nasÄ±l gÃ¶rÃ¼ntÃ¼lenir?</b></font>
+Bekleyen istemler nasıl görüntülenir?</b></font>
 <ul> 
-	<b>UyarÄ±:</b> Listedeki ilk istem kendiliÄŸinden gÃ¶rÃ¼nÃ¼r.<p>
-	<b>AdÄ±m:</b> Ä°stem formunu gÃ¶rÃ¼ntÃ¼lemek iÃ§in sol listedeki kÃ¼me numarasÄ±nÄ± tÄ±klayÄ±nÄ±z.
+	<b>Uyarı:</b> Listedeki ilk istem kendiliğinden görünür.<p>
+	<b>Adım:</b> İstem formunu görüntülemek için sol listedeki küme numarasını tıklayınız.
 </ul>
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Form nasÄ±l yazdÄ±rÄ±lÄ±r?</b></font>
+Form nasıl yazdırılır?</b></font>
 <ul> 
-	<b>AdÄ±m: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+	<b>Adım: </b><img <?php echo createLDImgSrc('../','printout.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tetkik sonuÃ§larÄ±, raporlar, tanÄ±lar, vs. nasÄ±l girilir?</b></font>
+Tetkik sonuçları, raporlar, tanılar, vs. nasıl girilir?</b></font>
 <ul> 
-	<b>AdÄ±m 1: </b>  "BÃ¶lÃ¼mÃ¼n Raporu" metin kutusuna yazÄ±nÄ±z.</b> <p>
-	<b>AdÄ±m 2: </b>  Hekimin ismini giriniz.</b> 
+	<b>Adım 1: </b>  "Bölümün Raporu" metin kutusuna yazınız.</b> <p>
+	<b>Adım 2: </b>  Hekimin ismini giriniz.</b> 
 </ul>
 
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-TÃ¼m rapor bilgisi girildi. Åimdi ne yapmalÄ±?</b></font>
+Tüm rapor bilgisi girildi. Şimdi ne yapmalı?</b></font>
 <ul> 
-	<b>AdÄ±m: </b>Raporu <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±p kaydediniz.
+	<b>Adım: </b>Raporu <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> düğmesini tıklayıp kaydediniz.
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Rapor kaydedildi. Sonra ne yapmalÄ±?</b></font>
+Rapor kaydedildi. Sonra ne yapmalı?</b></font>
 <ul> 
-	<b>AdÄ±m: </b>Formu arÅŸive gÃ¶ndermek, servis veya polikliniÄŸe sonucun Ã§Ä±ktÄ±ÄŸÄ±nÄ± haber vermek iÃ§in <img <?php echo createLDImgSrc('../','done.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+	<b>Adım: </b>Formu arşive göndermek, servis veya polikliniğe sonucun çıktığını haber vermek için <img <?php echo createLDImgSrc('../','done.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 

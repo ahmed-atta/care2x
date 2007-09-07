@@ -1,19 +1,19 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bir hastayÄ± arama</b></font>
+<b>Bir hastayı arama</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bir hasta nasÄ±l bulunue?</b></font>
+Bir hasta nasıl bulunue?</b></font>
 <ul> 
-	<b>AdÄ±m 1: </b>HastanÄ±n ad, soyad, protokol numarasÄ± gibi bilgilerini ya tam veya birkaÃ§ harf olarak giriniz.
-		<p>Ã–rnek 1: "21000012" veya "12" giriniz.
-		<br>Ã–rnek 2: "Potur" veya "pot" giriniz.
-		<br>Ã–rnek 3: "BÃ¼lent" veya "BÃ¼l" giriniz.<p>
-	<b>AdÄ±m 2: </b>Aramaya baÅŸlamak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z. <p>
-	<b>AdÄ±m 3: </b> Arama bir sonuÃ§ bulur ise doÄŸru ismi yanÄ±ndaki 
-	 <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayarak seÃ§iniz.
+	<b>Adım 1: </b>Hastanın ad, soyad, protokol numarası gibi bilgilerini ya tam veya birkaç harf olarak giriniz.
+		<p>Örnek 1: "21000012" veya "12" giriniz.
+		<br>Örnek 2: "Potur" veya "pot" giriniz.
+		<br>Örnek 3: "Bülent" veya "Bül" giriniz.<p>
+	<b>Adım 2: </b>Aramaya başlamak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düğmesini tıklayınız. <p>
+	<b>Adım 3: </b> Arama bir sonuç bulur ise doğru ismi yanındaki 
+	 <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> düğmesini tıklayarak seçiniz.
 </ul>
 
 

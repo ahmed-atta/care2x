@@ -5,36 +5,36 @@ Calendar
 <p><font size=2 face="verana,arial" >
 <form action="#" >
 	<img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b>
-Ä°pucu:</b>
+İpucu:</b>
 </font>
 <ul>       	
- 	Takvimdeki bir tarihi tÄ±klar iseniz, giriÅŸ yapmÄ±ÅŸ kullanÄ±cÄ± ve bÃ¶lÃ¼mÃ¼ ile ilgili birkaÃ§ seÃ§eneÄŸi iÃ§eren bir pencere aÃ§Ä±lÄ±r.<br>
+ 	Takvimdeki bir tarihi tıklar iseniz, giriş yapmış kullanıcı ve bölümü ile ilgili birkaç seçeneği içeren bir pencere açılır.<br>
 </ul>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Ã–nceki ay nasÄ±l gÃ¶sterilir?</b>
+Önceki ay nasıl gösterilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Takvimin Ã¼st sol kÃ¶ÅŸesindeki "<span style="background-color:yellow" >  Ã¶nceki ay </span>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Takvimin üst sol köşesindeki "<span style="background-color:yellow" >  önceki ay </span>" bağlantısını tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Sonraki ay nasÄ±l gÃ¶sterilir?</b>
+Sonraki ay nasıl gösterilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>Takvimin Ã¼st saÄŸ kÃ¶ÅŸesindeki  "<span style="background-color:yellow" >  sonraki ay </span>" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<br>
+ 	<b>Adım 1: </b>Takvimin üst sağ köşesindeki  "<span style="background-color:yellow" >  sonraki ay </span>" bağlantısını tıklayınız.<br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-DoÄŸrudan bir ay nasÄ±l seÃ§ilir?</b>
+Doğrudan bir ay nasıl seçilir?</b>
 </font>
 <ul>       	
- 	<b>AdÄ±m 1: </b>SeÃ§im kutusundan ayÄ± seÃ§iniz "<span style="background-color:yellow" >  Ay </span>".<br>
- 	<b>AdÄ±m 2: </b>YÄ±lÄ± "<span style="background-color:yellow" >  YÄ±l </span>" alanÄ±na giriniz.<p>
+ 	<b>Adım 1: </b>Seçim kutusundan ayı seçiniz "<span style="background-color:yellow" >  Ay </span>".<br>
+ 	<b>Adım 2: </b>Yılı "<span style="background-color:yellow" >  Yıl </span>" alanına giriniz.<p>
 	<ul>    
-	<b>Ä°p ucu:</b><br>
-		YÄ±lÄ± artÄ±rmak iÃ§in <img <?php echo createComIcon('../','varrow-u.gif','0','absmiddle') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
-		YÄ±lÄ± azaltmak iÃ§in <img <?php echo createComIcon('../','varrow-d.gif','0','absmiddle') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<br>
+	<b>İp ucu:</b><br>
+		Yılı artırmak için <img <?php echo createComIcon('../','varrow-u.gif','0','absmiddle') ?>> düğmesini tıklayınız.<br>
+		Yılı azaltmak için <img <?php echo createComIcon('../','varrow-d.gif','0','absmiddle') ?>> düğmesini tıklayınız.<br>
 	</ul>
- 	<b>AdÄ±m 3: </b> <input type="button" value="Git"> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+ 	<b>Adım 3: </b> <input type="button" value="Git"> düğmesini tıklayınız.
 </ul>
 	
 

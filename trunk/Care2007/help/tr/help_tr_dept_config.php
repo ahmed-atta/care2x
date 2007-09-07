@@ -1,28 +1,28 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>BÃ¶lÃ¼m yÃ¶netimi</b></font>
+<b>Bölüm yönetimi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 
 <font size=2 face="verdana,arial" >
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bir bÃ¶lÃ¼mÃ¼n ayrÄ±ntÄ±lÄ± bilgisi nasÄ±l gÃ¶rÃ¼lÃ¼r?</b></font>
+Bir bölümün ayrıntılı bilgisi nasıl görülür?</b></font>
 <ul> 
-	<b>AdÄ±m: </b>BÃ¶lÃ¼mÃ¼n ismini tÄ±klayÄ±nÄ±z.<p>
+	<b>Adım: </b>Bölümün ismini tıklayınız.<p>
 </ul>
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bir bÃ¶lÃ¼mÃ¼n statÃ¼sÃ¼ nasÄ±l deÄŸiÅŸtirilir?</b></font>
+Bir bölümün statüsü nasıl değiştirilir?</b></font>
 <ul>
-	<b>AdÄ±m: </b>BÃ¶lÃ¼mÃ¼n "DeÄŸiÅŸtir" baÄŸlantÄ±sÄ±nÄ± tÄ±klayÄ±nÄ±z.<p>
+	<b>Adım: </b>Bölümün "Değiştir" bağlantısını tıklayınız.<p>
 </ul>
 
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-KonfigÃ¼rasyonlarÄ± deÄŸiÅŸtirmenin Ã§abuk bir yolu var mÄ±?</b></font>
+Konfigürasyonları değiştirmenin çabuk bir yolu var mı?</b></font>
 <ul>
 	<b>EVET </b>
-	<p>BÃ¶lÃ¼mÃ¼ "etkin" den "etkin deÄŸil " ya da tersi hale getirmek iÃ§in  <font color="blue">[x]  </font> i tÄ±klayÄ±nÄ±z.
-	<p>KayÄ±dÄ± "gÃ¶rÃ¼nÃ¼r" den "gizli" hale getirmek ya da tersi iÃ§in <font color="blue">[x]  </font> i tÄ±klayÄ±nÄ±z.
+	<p>Bölümü "etkin" den "etkin değil " ya da tersi hale getirmek için  <font color="blue">[x]  </font> i tıklayınız.
+	<p>Kayıdı "görünür" den "gizli" hale getirmek ya da tersi için <font color="blue">[x]  </font> i tıklayınız.
 </ul>
 
 

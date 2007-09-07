@@ -1,29 +1,29 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bir hasta nasÄ±l aranÄ±r</b></font>
+<b>Bir hasta nasıl aranır</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<b>AdÄ±m 1</b>
+<b>Adım 1</b>
 
-<ul> HastanÄ±n ad, soyad, veya protokol numarasÄ± bilgisini ya tam  olarak ya da birkaÃ§ harf giriniz.
+<ul> Hastanın ad, soyad, veya protokol numarası bilgisini ya tam  olarak ya da birkaç harf giriniz.
 		
-		<p>Ã–rnek 1: "21000012" veya "12" giriniz.
-		<br>Ã–rnek 2: "Potur" veya "pot" giriniz.
-		<br>Ã–rnek 3: "GÃ¼rcan" veya "GÃ¼r" giriniz.
+		<p>Örnek 1: "21000012" veya "12" giriniz.
+		<br>Örnek 2: "Potur" veya "pot" giriniz.
+		<br>Örnek 3: "Gürcan" veya "Gür" giriniz.
 	<p>
-	Joker harf olarak <font color=#ff0000>%</font> ve <font color=#ff0000>*</font> iÅŸaretlerini de kullanabilirsiniz.
+	Joker harf olarak <font color=#ff0000>%</font> ve <font color=#ff0000>*</font> işaretlerini de kullanabilirsiniz.
 </ul>
-<b>AdÄ±m 2</b>
-<ul> AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klatÄ±nÄ±z.<p>
+<b>Adım 2</b>
+<ul> Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düğmesini tıklatınız.<p>
 </ul>
-<b>AdÄ±m 3</b>
-<ul> Arama bir sonuÃ§ ya da sonuÃ§lar bulur ise bir liste gÃ¶rÃ¼ntÃ¼lenir.<br>
-		AradÄ±ÄŸÄ±nÄ±z hastanÄ±n bilgisini gÃ¶rÃ¼ntÃ¼lemek iÃ§in yanÄ±ndaki   <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> simgesini tÄ±klayÄ±nÄ±z.<p>
-		AynÄ± zamanda hastanÄ±n protokol numarasÄ±, soyad veya adÄ±nÄ± da tÄ±klayabilirsiniz.
+<b>Adım 3</b>
+<ul> Arama bir sonuç ya da sonuçlar bulur ise bir liste görüntülenir.<br>
+		Aradığınız hastanın bilgisini görüntülemek için yanındaki   <img <?php echo createComIcon('../','l-arrowgrnlrg.gif','0') ?>> simgesini tıklayınız.<p>
+		Aynı zamanda hastanın protokol numarası, soyad veya adını da tıklayabilirsiniz.
 </ul>
 <br>
-<b>UyarÄ±</b>
-<ul>AramayÄ± iptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul>Aramayı iptal etmeye karar verir iseniz  <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 

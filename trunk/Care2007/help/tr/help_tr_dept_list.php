@@ -1,13 +1,13 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>BÃ¶lÃ¼m yÃ¶netimi</b></font>
+<b>Bölüm yönetimi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
 <form>
 <a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Bir bÃ¶lÃ¼m hakkÄ±nda ayrÄ±ntÄ±lÄ± bilgi nasÄ±l gÃ¶rÃ¼lÃ¼r?</b></font>
+Bir bölüm hakkında ayrıntılı bilgi nasıl görülür?</b></font>
 <ul> 
-	<b>AdÄ±m: </b>BÃ¶lÃ¼mÃ¼n ismini tÄ±klayÄ±nÄ±z.<p>
+	<b>Adım: </b>Bölümün ismini tıklayınız.<p>
 </ul>
 
 </form>

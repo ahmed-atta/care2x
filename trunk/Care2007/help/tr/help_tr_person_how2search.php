@@ -1,27 +1,27 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Bir kiÅŸi nasÄ±l aranÄ±r?</b></font>
+<b>Bir kişi nasıl aranır?</b></font>
 <p><font size=2 face="verana,arial" >
 <form action="#" >
-<b>AdÄ±m 1</b>
+<b>Adım 1</b>
 
-<ul> Bir kiÅŸinin ad, soyad, TC kimlik no gibi bilgisini ya tam veya birkaÃ§ harfini giriniz.
-		<p>Ã–rnek 1: "21000012" veya "12" giriniz.
-		<br>Ã–rnek 2: "Potur" veya "pot" giriniz.
-		<br>Ã–rnek 3: "BÃ¼lent" veya "BÃ¼l" giriniz.
+<ul> Bir kişinin ad, soyad, TC kimlik no gibi bilgisini ya tam veya birkaç harfini giriniz.
+		<p>Örnek 1: "21000012" veya "12" giriniz.
+		<br>Örnek 2: "Potur" veya "pot" giriniz.
+		<br>Örnek 3: "Bülent" veya "Bül" giriniz.
 	<p>
-	UyarÄ±: Joker olarak % veya * iÅŸaretlerini kullanabilirsiniz.
+	Uyarı: Joker olarak % veya * işaretlerini kullanabilirsiniz.
 		
 </ul>
-<b>AdÄ±m 2</b>
-<ul> AramayÄ± baÅŸlatmak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.<p>
+<b>Adım 2</b>
+<ul> Aramayı başlatmak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> düğmesini tıklayınız.<p>
 </ul>
-<b>AdÄ±m 3</b>
-<ul> Arama bir sonuÃ§ bulur ise bir liste gÃ¶rÃ¼ntÃ¼lenir.<br>
-		AradÄ±ÄŸÄ±nÄ±z kiÅŸinin kabul bilgisini gÃ¶rmek iÃ§in, ismini izleyen  <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Adım 3</b>
+<ul> Arama bir sonuç bulur ise bir liste görüntülenir.<br>
+		Aradığınız kişinin kabul bilgisini görmek için, ismini izleyen  <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
-<b>UyarÄ±</b>
-<ul> AramayÄ± iptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+<b>Uyarı</b>
+<ul> Aramayı iptal etmeye karar verir iseniz <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 

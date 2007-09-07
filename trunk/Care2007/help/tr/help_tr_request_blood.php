@@ -1,5 +1,5 @@
 <font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Kan Ã¼rÃ¼nleri istemi</b></font>
+<b>Kan ürünleri istemi</b></font>
 <p>
 <font size=2 face="verdana,arial" >
 
@@ -7,50 +7,50 @@
 if(!$src){
 ?>
 <a name="sday"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Hasta etiketi eklenmemiÅŸ. Ne yapmalÄ±yÄ±m?</b></font>
+Hasta etiketi eklenmemiş. Ne yapmalıyım?</b></font>
 <ul> 
-	<b>AdÄ±m 1: </b>HastanÄ±n ad soyad veya protokol numarasÄ± bilgisinin tamamÄ±nÄ± ya da bir kaÃ§ harfini  giriniz.
-		<p>Ã–rnek 1: "21000012" veya "12" giriniz.
-		<br>Ã–rnek 2: "Potur" veya "pot" giriniz.
-		<br>Ã–rnek 3: "BÃ¼lent" veya "BÃ¼l" giriniz.<p>
-	<b>AdÄ±m 2: </b>  Aramaya baÅŸlamak iÃ§in <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> simgesini tÄ±klayÄ±nÄ±z. <p>
-	<b>AdÄ±m 3: </b> Arama bir sonuÃ§ bulur ise listeden doÄŸru kiÅŸiyi
-	 <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayarak seÃ§iniz.
+	<b>Adım 1: </b>Hastanın ad soyad veya protokol numarası bilgisinin tamamını ya da bir kaç harfini  giriniz.
+		<p>Örnek 1: "21000012" veya "12" giriniz.
+		<br>Örnek 2: "Potur" veya "pot" giriniz.
+		<br>Örnek 3: "Bülent" veya "Bül" giriniz.<p>
+	<b>Adım 2: </b>  Aramaya başlamak için <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> simgesini tıklayınız. <p>
+	<b>Adım 3: </b> Arama bir sonuç bulur ise listeden doğru kişiyi
+	 <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> düğmesini tıklayarak seçiniz.
 </ul>
 <?php
 }else{
 ?>
 
 <a name="stime"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Ä°stem formuna ne doldurmalÄ±?</b></font>
+İstem formuna ne doldurmalı?</b></font>
 <ul> 
-	<b>DoldurulmasÄ± zorunlu alanlar:</b> 
+	<b>Doldurulması zorunlu alanlar:</b> 
 <ul> 
 	<li>Kan grubu
-	<li>Rh faktÃ¶rÃ¼
+	<li>Rh faktörü
 	<li>Kell
-	<li>Ä°stenen Ã¼rÃ¼nÃ¼n Ã¼nite sayÄ±sÄ±
-	<li>TransfÃ¼zyon tarihi
-	<li>Ä°stem tarihi
-	<li>Ä°stemden sorumlu doktorun adÄ±.
+	<li>İstenen ürünün ünite sayısı
+	<li>Transfüzyon tarihi
+	<li>İstem tarihi
+	<li>İstemden sorumlu doktorun adı.
 </ul>
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-BazÄ± deÄŸerler henÃ¼z yok. Bunlar olmadan da istemi yine de gÃ¶nderebilir miyim?</b></font>
+Bazı değerler henüz yok. Bunlar olmadan da istemi yine de gönderebilir miyim?</b></font>
 <ul> 
-	<b>UyarÄ±: </b>DeÄŸerleri henÃ¼z bulunmayan aÅŸaÄŸÄ±daki alanlara suru iÅŸareti "?" girebilirsiniz:
+	<b>Uyarı: </b>Değerleri henüz bulunmayan aşağıdaki alanlara suru işareti "?" girebilirsiniz:
 <ul> 
 	<li>Kan grubu
-	<li>Rh faktÃ¶rÃ¼
+	<li>Rh faktörü
 	<li>Kell 
 </ul>
 </ul>
 
 <a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Tetkik istemi nasÄ±l gÃ¶nderilir?</b></font>
+Tetkik istemi nasıl gönderilir?</b></font>
 <ul> 
-	<b>AdÄ±m: </b> <img <?php echo createLDImgSrc('../','abschic.gif','0') ?>> dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.
+	<b>Adım: </b> <img <?php echo createLDImgSrc('../','abschic.gif','0') ?>> düğmesini tıklayınız.
 </ul>
 
 <?php
