@@ -1,88 +1,88 @@
 <?php
 
-$title1 = 'Ä°zin verilen alanlar';
-$_a_0_all = 'TÃ¼m alanlar';
+$title1 = 'Ýzin verilen alanlar';
+$_a_0_all = 'Tüm alanlar';
 
 // Group start
 $title_adm = 'Hasta Kabul';
-$_a_1_admissionwrite = 'HastalarÄ± kabul et, oku ve yaz';
-$_a_2_admissionread =  'HastalarÄ± kabul et salt okunur';
+$_a_1_admissionwrite = 'Hastalarý kabul et, oku ve yaz';
+$_a_2_admissionread =  'Hastalarý kabul et salt okunur';
 						   
 // Group start
 $title2 = 'Servisler';
-$_a_1_nursingstationallwrite = 'TÃ¼m servisler oku ve yaz';
-$_a_2_nursingstationallread =  'TÃ¼m servis salt okunur';
-$_a_1_nursingdutyplanwrite = 'HemÅŸirelerin nÃ¶bet planÄ±  oku ve yaz';
-$_a_2_nursingdutyplanread =  'HemÅŸirelerin nÃ¶bet planÄ± salt okunur.';
+$_a_1_nursingstationallwrite = 'Tüm servisler oku ve yaz';
+$_a_2_nursingstationallread =  'Tüm servis salt okunur';
+$_a_1_nursingdutyplanwrite = 'Hemþirelerin nöbet planý  oku ve yaz';
+$_a_2_nursingdutyplanread =  'Hemþirelerin nöbet planý salt okunur.';
 // Group start
-$title3 = 'Tetkikler, KonsÃ¼ltasyonlar';
-$_a_1_diagnosticsresultwrite = 'Tetkik sonuÃ§larÄ± oku ve yaz';
-$_a_3_diagnosticsresultread = 'Tetkik sonuÃ§larÄ± salt okunur';
-$_a_2_diagnosticsreceptionwrite = 'Tetkik istem alÄ±ndÄ±sÄ± oku ve yaz';
-$_a_3_diagnosticsrequest = 'Tetkik istem alÄ±ndÄ±sÄ± salt okunur';
+$title3 = 'Tetkikler, Konsültasyonlar';
+$_a_1_diagnosticsresultwrite = 'Tetkik sonuçlarý oku ve yaz';
+$_a_3_diagnosticsresultread = 'Tetkik sonuçlarý salt okunur';
+$_a_2_diagnosticsreceptionwrite = 'Tetkik istem alýndýsý oku ve yaz';
+$_a_3_diagnosticsrequest = 'Tetkik istem alýndýsý salt okunur';
 						   
 // Group start
 $title4 = 'Laboratuvar';
-$_a_1_labresultswrite = 'Laboratuvar sonuÃ§larÄ± oku ve yaz';
-$_a_2_labresultsread = 'Laboratuvar sonuÃ§larÄ± salt okunur';
+$_a_1_labresultswrite = 'Laboratuvar sonuçlarý oku ve yaz';
+$_a_2_labresultsread = 'Laboratuvar sonuçlarý salt okunur';
 						   
 // Group start
 $title5 = 'Ameliyathane';
-$_a_1_opdoctorallwrite = 'TÃ¼m Op. Dr.ler (cerrah) oku ve yaz';
-$_a_2_opnurseallwrite = 'TÃ¼m ameliyathane hemÅŸirelik belgeleri oku ve yaz';
-$_a_3_opnurseallread = 'TÃ¼m ameliyathane salt okunur';
-$_a_1_opnursedutyplanwrite = 'Ameliyathane hemÅŸireleri nÃ¶bet planÄ± oku ve yaz';
-$_a_2_opnursedutyplanread = 'Ameliyathane hemÅŸireleri nÃ¶bet planÄ± salt okunur';
+$_a_1_opdoctorallwrite = 'Tüm Op. Dr.ler (cerrah) oku ve yaz';
+$_a_2_opnurseallwrite = 'Tüm ameliyathane hemþirelik belgeleri oku ve yaz';
+$_a_3_opnurseallread = 'Tüm ameliyathane salt okunur';
+$_a_1_opnursedutyplanwrite = 'Ameliyathane hemþireleri nöbet planý oku ve yaz';
+$_a_2_opnursedutyplanread = 'Ameliyathane hemþireleri nöbet planý salt okunur';
 						   
 // Group start
 $title6 = 'Radyoloji';
-$_a_1_radiowrite = 'Radyoloji gÃ¶rÃ¼ntÃ¼, tanÄ± oku ve yaz';
-$_a_2_radioread = 'Radyoloji yalnÄ±z gÃ¶rÃ¼ntÃ¼, tanÄ± salt okunur';
+$_a_1_radiowrite = 'Radyoloji görüntü, taný oku ve yaz';
+$_a_2_radioread = 'Radyoloji yalnýz görüntü, taný salt okunur';
 
 // Group start
-$title7 = 'TÄ±bbi Belgeler';
-$_a_1_medocswrite = 'TÄ±bbi belgeler oku ve yaz';
-$_a_2_medocsread = 'TÄ±bbi belgeler salt okunur';
+$title7 = 'Týbbi Belgeler';
+$_a_1_medocswrite = 'Týbbi belgeler oku ve yaz';
+$_a_2_medocsread = 'Týbbi belgeler salt okunur';
 						   
 // Group start
 $title8 = 'Eczane';
-$_a_1_pharmadbadmin = 'Eczane veritabanÄ± yÃ¶netimi';
-$_a_2_pharmareception = 'Ecsane Ä°stem(order) Robotu etkinleÅŸtirme, istemleri alma ve iÅŸleme';
-$_a_3_pharmaorder = 'Eczane order gÃ¶nder ve salt okunur';
-$_a_4_pharmaread = 'Eczane order salt okunur, gÃ¶ndermesiz.';
+$_a_1_pharmadbadmin = 'Eczane veritabaný yönetimi';
+$_a_2_pharmareception = 'Ecsane Ýstem(order) Robotu etkinleþtirme, istemleri alma ve iþleme';
+$_a_3_pharmaorder = 'Eczane order gönder ve salt okunur';
+$_a_4_pharmaread = 'Eczane order salt okunur, göndermesiz.';
 
 // Group start
-$title9 = 'TÄ±bbi Malzeme Deposu';
-$_a_1_meddepotdbadmin = 'TÄ±bbi Malzeme Deposu veritabanÄ± yÃ¶netimi';
-$_a_2_meddepotreception = 'TÄ±bbi depo istem robotu Medi robot etkinleÅŸtirme, istemleri alma ve iÅŸleme';
-$_a_3_meddepotorder = 'TÄ±bbi Depo istem gÃ¶nder, salt okunur';
-$_a_4_meddepotread = 'TÄ±bbi depo salt okunur, gÃ¶ndermesiz';
+$title9 = 'Týbbi Malzeme Deposu';
+$_a_1_meddepotdbadmin = 'Týbbi Malzeme Deposu veritabaný yönetimi';
+$_a_2_meddepotreception = 'Týbbi depo istem robotu Medi robot etkinleþtirme, istemleri alma ve iþleme';
+$_a_3_meddepotorder = 'Týbbi Depo istem gönder, salt okunur';
+$_a_4_meddepotread = 'Týbbi depo salt okunur, göndermesiz';
 						  
 // Group start
 $title_docs = 'Doktorlar';
-$_a_1_doctorsdutyplanwrite = 'DoktorlarÄ±n nÃ¶bet planÄ± oku ve yaz';
-$_a_2_doctorsdutyplanread = 'DoktorlarÄ±n nÃ¶bet planÄ± salt okunur';
+$_a_1_doctorsdutyplanwrite = 'Doktorlarýn nöbet planý oku ve yaz';
+$_a_2_doctorsdutyplanread = 'Doktorlarýn nöbet planý salt okunur';
 
 // Group start
-$title_foto = 'Fotograf StÃ¼dyosu';
-$_a_1_photowrite = 'FotoÄŸraflar yÃ¼kle, oku ve yaz';
-$_a_2_photoread = 'FotoÄŸraflar gÃ¶ster, salt okunur';
+$title_foto = 'Fotograf Stüdyosu';
+$_a_1_photowrite = 'Fotoðraflar yükle, oku ve yaz';
+$_a_2_photoread = 'Fotoðraflar göster, salt okunur';
 						  
 // Group start
 $title_tech = 'Teknik destek';
-$_a_1_techreception = 'Sorgu robotu Qbot ve OnarÄ±m robotu etkinleÅŸtirme, alma, oku ve yaz';
+$_a_1_techreception = 'Sorgu robotu Qbot ve Onarým robotu etkinleþtirme, alma, oku ve yaz';
 
 // Group start
-$title_pdo = 'Personel GÃ¶rev DÃ¼zenleyicisi';
-$_a_1_timestampallwrite = 'Personel zamanlayÄ±cÄ± (tÃ¼m alanlar) yÃ¶net, oku ve yaz';
-$_a_2_timestampallread = 'Personel zamanlayÄ±cÄ± salt okunur';
-$_a_1_dutyplanallwrite = 'Personel NÃ¶bet/Ä°zin planÄ± (tÃ¼m alanlar) yÃ¶net, oku ve yaz';
-$_a_2_dutyplanallread = 'Personel NÃ¶bet/Ä°zin planÄ± salt okunur';
+$title_pdo = 'Personel Görev Düzenleyicisi';
+$_a_1_timestampallwrite = 'Personel zamanlayýcý (tüm alanlar) yönet, oku ve yaz';
+$_a_2_timestampallread = 'Personel zamanlayýcý salt okunur';
+$_a_1_dutyplanallwrite = 'Personel Nöbet/Ýzin planý (tüm alanlar) yönet, oku ve yaz';
+$_a_2_dutyplanallread = 'Personel Nöbet/Ýzin planý salt okunur';
 
 // Group start
 $title_bill = 'Faturalama';
-$_a_1_billallwrite = 'Faturalama (tÃ¼m alanlar) oku ve yaz ';
-$_a_2_billallread = 'Faturalama (tÃ¼m alanlar) salt okunur';
+$_a_1_billallwrite = 'Faturalama (tüm alanlar) oku ve yaz ';
+$_a_2_billallread = 'Faturalama (tüm alanlar) salt okunur';
 $_a_2_billpharmawrite = 'Faturalama (eczane) oku ve yaz';
 $_a_3_billpharmaread = 'Faturalama (eczane) salt okunur';
 $_a_2_billserviceswrite = 'Faturalama (servisler) oku ve yaz';
@@ -92,16 +92,16 @@ $_a_3_billlabread = 'Faturalama (laboratuvar) salt okunur';
 
 // Group start
 $title_news = 'Haberler';
-$_a_1_newsallwrite = 'Haberler (tÃ¼m alanlar) yaz';
-$_a_2_newscafewrite = 'Cafe haberleri, menÃ¼, fiyatlar yaz';
-$_a_2_newsallmoderatedwrite = 'Haberler (tÃ¼m alanlar, menÃ¼ ve fiyatlar hariÃ§) modereli yaz';
+$_a_1_newsallwrite = 'Haberler (tüm alanlar) yaz';
+$_a_2_newscafewrite = 'Cafe haberleri, menü, fiyatlar yaz';
+$_a_2_newsallmoderatedwrite = 'Haberler (tüm alanlar, menü ve fiyatlar hariç) modereli yaz';
 
 // Group start
 $title_dir = 'Telefon Rehberi';
-$_a_1_teldirwrite = 'Telefon ve Ã§aÄŸrÄ± cihazÄ± bilgisi yaz';
+$_a_1_teldirwrite = 'Telefon ve çaðrý cihazý bilgisi yaz';
 
 // Group start
 $title_hxpserver = 'HXP Sunucusu';
-$_a_1_hxpserver = 'HXP Sunucu eriÅŸimi';
+$_a_1_hxpserver = 'HXP Sunucu eriþimi';
 
 ?>

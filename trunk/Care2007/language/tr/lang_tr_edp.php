@@ -1,14 +1,14 @@
 <?php
 $LDClose='Kapat';
-$LDCancel='Ä°ptal';
+$LDCancel='İptal';
 $LDResetEntry='Girilenleri sil';
 $LDSave='Kaydet';
-$LDReset='Yeniden baÅŸla';
+$LDReset='Yeniden başla';
 
-$LDEnterData='Veri girmek iÃ§in tÄ±klayÄ±nÄ±z';
-$LDClk2See='Verileri gÃ¶rmek iÃ§in tÄ±klayÄ±nÄ±z';
+$LDEnterData='Veri girmek için tıklayınız';
+$LDClk2See='Verileri görmek için tıklayınız';
 $LDFoundPatient='Arama sonucunda  <b>~nr~</b> hasta bulundu';
-$LDWildCards='Joker kartlarÄ± nedir, nasÄ±l kullanÄ±lÄ±r';
+$LDWildCards='Joker kartları nedir, nasıl kullanılır';
 $LDNewSearch='Yeni arama';
 $LDSearch='Ara';
 
@@ -16,126 +16,126 @@ $LDOClock=' saat';
 $LDContinue='Devam';
 $LDBack='Geri';
 
-$LDOn='ÃœstÃ¼nde';
+$LDOn='Üstünde';
 $LDAt='De';
-$LDClk2Edit='Bu raporu dÃ¼zenlemek iÃ§in tÄ±klayÄ±nÄ±z';
+$LDClk2Edit='Bu raporu düzenlemek için tıklayınız';
 
 $LDNew='Yeni';
-$LDEdit='DÃ¼zenle';
-$LDCreate='OluÅŸtur';
-$LDValue='DeÄŸer';
+$LDEdit='Düzenle';
+$LDCreate='Oluştur';
+$LDValue='Değer';
 
 $LDNews='Haberler';
-$LDNewsTxt='Sistem yÃ¶netimi bÃ¶lÃ¼mÃ¼ne iliÅŸkin haberleri okumak veya yazmak';
+$LDNewsTxt='Sistem yönetimi bölümüne ilişkin haberleri okumak veya yazmak';
 $LDMemo='Not';
 $LDMemoTxt='Not yazma veya okuma';
 $LDSearchPat='Hasta arama';
 $LDCategory='Kategori';
-$LDPast3Days='Son 3 gÃ¼n';
+$LDPast3Days='Son 3 gün';
 $LDPast3Months='Son 3 ay';
 $LDPastAll='Hepsi';
-$LDSelect='SeÃ§';
+$LDSelect='Seç';
 
-$LDOrderArchive='ArÅŸiv';
+$LDOrderArchive='Arşiv';
 
 
 
-$LDNoDataFound='AraÅŸtÄ±rma sonucu <font color=red><b>hiÃ§</b></font> kayÄ±t bulunmadÄ±.';
-$LDClk2SeeInfo='Tam bilgiyi gÃ¶rmek iÃ§in lÃ¼tfen  doÄŸru olanÄ± tÄ±klayÄ±nÄ±z';
+$LDNoDataFound='Araştırma sonucu <font color=red><b>hiç</b></font> kayıt bulunmadı.';
+$LDClk2SeeInfo='Tam bilgiyi görmek için lütfen  doğru olanı tıklayınız';
 /********************** Do not erase or replace the ~nr~ *****************************/
-$LDFoundNrData='AraÅŸtÄ±rma sonucu aranan sÃ¶zcÃ¼k ile ilgili <font color=red><b>~nr~</b></font> kayÄ±t bulundu.';
-$LDOpenInfo='HakkÄ±nda tam bilgileri gÃ¶ster';
+$LDFoundNrData='Araştırma sonucu aranan sözcük ile ilgili <font color=red><b>~nr~</b></font> kayıt bulundu.';
+$LDOpenInfo='Hakkında tam bilgileri göster';
 
-$LDGoodMorning='GÃ¼naydÄ±n';
-$LDGoodDay='Merhaba, sizi gÃ¶rdÃ¼ÄŸÃ¼me sevindim';
-$LDGoodEvening='Ä°yi akÅŸamlar';
+$LDGoodMorning='Günaydın';
+$LDGoodDay='Merhaba, sizi gördüğüme sevindim';
+$LDGoodEvening='İyi akşamlar';
 
 $LDDate='Tarih';
-$LDDept='BÃ¶lÃ¼m';
-$LDPrio='Ã–ncelik';
+$LDDept='Bölüm';
+$LDPrio='Öncelik';
 $LDSearchIn='Aranacak';
 
 
-$LDPlsEnterMore='LÃ¼tfen daha fazla bilgi giriniz ve tekrar deneyiniz.';
-$LDNoSingleChar='Tek bir harf dikkate alÄ±nmaz.';
+$LDPlsEnterMore='Lütfen daha fazla bilgi giriniz ve tekrar deneyiniz.';
+$LDNoSingleChar='Tek bir harf dikkate alınmaz.';
 
-$LDPlsInformDept='LÃ¼tfen ~tagword~ bÃ¶lÃ¼mÃ¼ne ve sonra sistem yÃ¶netim bÃ¶lÃ¼mÃ¼ne haber veriniz TeÅŸekkÃ¼rler.';
+$LDPlsInformDept='Lütfen ~tagword~ bölümüne ve sonra sistem yönetim bölümüne haber veriniz Teşekkürler.';
 
 $LDReports='Raporlar';
-$LDReportsTxt='RaporlarÄ± oluÅŸtur, ara, oku, vs.';
+$LDReportsTxt='Raporları oluştur, ara, oku, vs.';
 $LDInfo='Bilgi';
-$LDInfoTxt='Sistem yÃ¶netimi hakkÄ±nda bilgi arama ve okuma';
-$LDManage='YÃ¶netim';
-$LDUpdateOk='GÃ¼ncelleÅŸtirme <b>baÅŸarÄ±lÄ±</b> oldu!';
-$LDDataSaved='AÅŸaÄŸÄ±daki bilgiler baÅŸarÄ±yla kaydedildi:';
-$LDDataNoUpdate='GÃ¼ncelleÅŸtirme  <b>baÅŸarÄ±sÄ±z</b>. LÃ¼tfen girilenleri kontrol ediniz.';
-$LDDataNoSaved='Kaydetme <b>baÅŸarÄ±sÄ±z</b>. LÃ¼tfen girilenleri kontrol ediniz.';
-$LDBack2Menu='VeritabanÄ± menÃ¼sÃ¼ne geri';
-$LDPageTop='Ãœste geri.';
-$LDPreview='Ã–n izleme';
-$LDUpdateData='GÃ¼ncelle veya dÃ¼zenle';
-$LDRemoveFromDb='VeritabanÄ±ndan Ã§Ä±kar';
-$LDDataRemoved='ÃœrÃ¼n veritabanÄ±ndan Ã§Ä±karÄ±ldÄ±!';
+$LDInfoTxt='Sistem yönetimi hakkında bilgi arama ve okuma';
+$LDManage='Yönetim';
+$LDUpdateOk='Güncelleştirme <b>başarılı</b> oldu!';
+$LDDataSaved='Aşağıdaki bilgiler başarıyla kaydedildi:';
+$LDDataNoUpdate='Güncelleştirme  <b>başarısız</b>. Lütfen girilenleri kontrol ediniz.';
+$LDDataNoSaved='Kaydetme <b>başarısız</b>. Lütfen girilenleri kontrol ediniz.';
+$LDBack2Menu='Veritabanı menüsüne geri';
+$LDPageTop='Üste geri.';
+$LDPreview='Ön izleme';
+$LDUpdateData='Güncelle veya düzenle';
+$LDRemoveFromDb='Veritabanından çıkar';
+$LDDataRemoved='Ürün veritabanından çıkarıldı!';
 
-$LDConfirmDelete='GerÃ§ekten aÅŸaÄŸÄ±daki bilgileri veritabanÄ±ndan <b>silmek</b> veya     <b>Ã§Ä±karmak</b> istiyor musunuz ?';
+$LDConfirmDelete='Gerçekten aşağıdaki bilgileri veritabanından <b>silmek</b> veya     <b>çıkarmak</b> istiyor musunuz ?';
 $LDAlertDelete='<b>DIKKAT!</b> Silme geri <b>ALINAMAZ !</b> ';
-$LDNoDelete='Veri silinmesi baÅŸarÄ±sÄ±z oldu!<br>LÃ¼tfen sistem yÃ¶netimi bÃ¶lÃ¼mÃ¼ne haber veriniz.';
-$LDYesDelete='Evet, Kesinlikle eminim. EriÅŸim hakkÄ±nÄ± sil.';
-$LDNoBack='HayÄ±r. Geri.';
-$LDClk2Ack='Ä°stem listesini kabul etmek ve/veya yazdÄ±rmak iÃ§in ok dÃ¼ÄŸmesini tÄ±klayÄ±nÄ±z.';
+$LDNoDelete='Veri silinmesi başarısız oldu!<br>Lütfen sistem yönetimi bölümüne haber veriniz.';
+$LDYesDelete='Evet, Kesinlikle eminim. Erişim hakkını sil.';
+$LDNoBack='Hayır. Geri.';
+$LDClk2Ack='İstem listesini kabul etmek ve/veya yazdırmak için ok düğmesini tıklayınız.';
 $LDOK='Tamam';
-$LDManageAccess='EriÅŸim HaklarÄ±';
-$LDManageAccessTxt='DÃ¼zenle, oluÅŸtur, kilitle, sil, gÃ¼ncelle, veya deÄŸiÅŸtir, vs.';
-$LDSqlDb='SQL VeritabanÄ±';
-$LDSqlDbTxt='DoÄŸrudan SQL eriÅŸimi. <b>DÄ°KKAT</b> yalnÄ±z uzmanlar iÃ§in';
-$LDSysOpLogin='Sistem YÃ¶neticisi';
-$LDSysOpLoginTxt='Sistem yÃ¶neticisi olarak giriÅŸ';
-$LDEDP='Bilgi Ä°ÅŸlem';
-$LDNewAccess='Yeni eriÅŸim izinleri oluÅŸturma';
-$LDListActual='EriÅŸim izinlerini listeleme';
+$LDManageAccess='Erişim Hakları';
+$LDManageAccessTxt='Düzenle, oluştur, kilitle, sil, güncelle, veya değiştir, vs.';
+$LDSqlDb='SQL Veritabanı';
+$LDSqlDbTxt='Doğrudan SQL erişimi. <b>DİKKAT</b> yalnız uzmanlar için';
+$LDSysOpLogin='Sistem Yöneticisi';
+$LDSysOpLoginTxt='Sistem yöneticisi olarak giriş';
+$LDEDP='Bilgi İşlem';
+$LDNewAccess='Yeni erişim izinleri oluşturma';
+$LDListActual='Erişim izinlerini listeleme';
 $LDName='Ad';
-$LDPassword='Åifre';
-$LDUserId='KullanÄ±cÄ± adÄ± ';
-$LDArea='BÃ¶lge';
-$LDAllowedArea='Ä°zin verilen bÃ¶lgeler:';
-$LDActualAccess='GÃ¼ncel eriÅŸim izinleri';
-$LDAccessDeleted='EriÅŸim izinleri baÅŸarÄ±yla silindi.';
-$LDFfActualAccess='GÃ¼ncel eriÅŸim izinleri aÅŸaÄŸÄ±dadÄ±r.';
+$LDPassword='Şifre';
+$LDUserId='Kullanıcı adı ';
+$LDArea='Bölge';
+$LDAllowedArea='İzin verilen bölgeler:';
+$LDActualAccess='Güncel erişim izinleri';
+$LDAccessDeleted='Erişim izinleri başarıyla silindi.';
+$LDFfActualAccess='Güncel erişim izinleri aşağıdadır.';
 
 $LDAccessIndex=array(
 				'Ad',
-			 	'KullanÄ±cÄ± adÄ± ',    
-			 	'Åifre', 
+			 	'Kullanıcı adı ',    
+			 	'Şifre', 
 				'',
-			 	'Ä°zin verilen alanlar', 
+			 	'İzin verilen alanlar', 
 			 	'Tarih/Zaman', 
 			 	'Encoder', 
-			 	'SeÃ§enek'
+			 	'Seçenek'
 			 	);
-$LDChange='DeÄŸiÅŸtir:C';
+$LDChange='Değiştir:C';
 $LDInitChange='C';
 $LDLock='Kilitle:L';
 $LDInitLock='L';
-$LDUnlock='AÃ§:U';
+$LDUnlock='Aç:U';
 $LDInitUnlock='U';
 $LDDelete='Sil:D';
 $LDInitDelete='D';
-$LDUpdateRight='EriÅŸim hakkÄ±nÄ± gÃ¼ncelle';
-$LDInputError='GirdiÄŸiniz ya yanlÄ±ÅŸ ya da bazÄ± bilgiler eksik. KÄ±rmÄ±zÄ± iÅŸaretli alanlarÄ±n doldurulmasÄ± gerekiyor yoksa girdiÄŸiniz dÃ¼zeltilecek.';
-$LDAccessRight='EriÅŸim hakkÄ±';
-$LDSureLock='Bu eriÅŸim hakkÄ±nÄ± KÄ°LÄ°TLEYECEKSÄ°NÄ°Z emin misiniz?';
-$LDSureUnlock='Bu eriÅŸim hakkÄ±nÄ± AÃ‡MAK istediÄŸinizden emin misiniz?';
-$LDSureDelete='Bu eriÅŸim hakkÄ±nÄ± SÄ°LMEK istediÄŸinizden emin misiniz?';
+$LDUpdateRight='Erişim hakkını güncelle';
+$LDInputError='Girdiğiniz ya yanlış ya da bazı bilgiler eksik. Kırmızı işaretli alanların doldurulması gerekiyor yoksa girdiğiniz düzeltilecek.';
+$LDAccessRight='Erişim hakkı';
+$LDSureLock='Bu erişim hakkını KİLİTLEYECEKSİNİZ emin misiniz?';
+$LDSureUnlock='Bu erişim hakkını AÇMAK istediğinizden emin misiniz?';
+$LDSureDelete='Bu erişim hakkını SİLMEK istediğinizden emin misiniz?';
 $LDYesSure='Evet, eminim.';
-$LDKeywordPrompt='Aranacak sÃ¶zcÃ¼ÄŸÃ¼ giriniz';
-$LDSystemAdmin='Sistem YÃ¶neticisi';
-$LDMySQLManage='SQL veritabanÄ±nÄ± PHP MySQLAdmin ile yÃ¶net';
-$LDSpexFunctions='Daha fazla konfigÃ¼rasyon seÃ§enekleri';
-$LDWelcome='HoÅŸ geldiniz';
-$LDForeWord='Åu anda en Ã¼st dÃ¼zeyde eriÅŸim ayrÄ±calÄ±klarÄ±na sahipsiniz.<br>AÅŸaÄŸÄ±dakileri iÅŸlevlere hiÃ§bir kÄ±sÄ±tlama olmadan eriÅŸilebilir. <br><b>LÃ¼tfen ne yaptÄ±ÄŸÄ±nÄ±za Ã§ok dikkat ediniz.</b>';
+$LDKeywordPrompt='Aranacak sözcüğü giriniz';
+$LDSystemAdmin='Sistem Yöneticisi';
+$LDMySQLManage='SQL veritabanını PHP MySQLAdmin ile yönet';
+$LDSpexFunctions='Daha fazla konfigürasyon seçenekleri';
+$LDWelcome='Hoş geldiniz';
+$LDForeWord='Şu anda en üst düzeyde erişim ayrıcalıklarına sahipsiniz.<br>Aşağıdakileri işlevlere hiçbir kısıtlama olmadan erişilebilir. <br><b>Lütfen ne yaptığınıza çok dikkat ediniz.</b>';
 
-$LDSetDateFormat='Tarih biÃ§imini dÃ¼zenleme';
-$LDSelectDateFormat='LÃ¼tfen istenilen tarih biÃ§imini seÃ§iniz:';
+$LDSetDateFormat='Tarih biçimini düzenleme';
+$LDSelectDateFormat='Lütfen istenilen tarih biçimini seçiniz:';
 
 # Date formats
 # Add additional date formats as array element.
@@ -143,10 +143,10 @@ $LDSelectDateFormat='LÃ¼tfen istenilen tarih biÃ§imini seÃ§iniz:';
 # Do not translate $LDDateFormats 
 $LDDateFormats=array('dd.MM.yyyy','yyyy-MM-dd','MM/dd/yyyy','dd/MM/yyyy');
 
-$LDDateFormatsTxt= array('Ã–rneÄŸin: 01.10.2004 (01 Ekim 2004)',
-                                         'Ã–rneÄŸin: 2004-10-01 (2004 Ekim 01)',
-										 'Ã–rneÄŸin: 10/01/2004 (Ekim 04, 2004)',
-										 'Ã¶rneÄŸin: 01/10/2004 (01 Ekim , 2004)'
+$LDDateFormatsTxt= array('Örneğin: 01.10.2004 (01 Ekim 2004)',
+                                         'Örneğin: 2004-10-01 (2004 Ekim 01)',
+										 'Örneğin: 10/01/2004 (Ekim 04, 2004)',
+										 'örneğin: 01/10/2004 (01 Ekim , 2004)'
 										 );					 
 /**
 * The following lines must be modified according to the examples:
@@ -169,178 +169,178 @@ $LD_MMsddsyyyy='aa/gg/yyyy';
 $LD_ddsMMsyyyy='gg/aa/yyyy';
 /* END */
 
-$LDNewDateFormatSaved='ArtÄ±k yeni tarih biÃ§imi geÃ§erli.';
+$LDNewDateFormatSaved='Artık yeni tarih biçimi geçerli.';
 									
 $LDSetCurrency='Para birimini ayarlama';
-$LDNewCurrencySet='ArtÄ±k yeni para birimi geÃ§erli.';
-$LDPlsSelectCurrency='LÃ¼tfen para birimini seÃ§iniz.';
+$LDNewCurrencySet='Artık yeni para birimi geçerli.';
+$LDPlsSelectCurrency='Lütfen para birimini seçiniz.';
 $LDAddCurrency='Yeni para birimi ekleme';
-$LDPlsAddCurrency='LÃ¼tfen para birimi bilgisi giriniz. Sonra "Kaydet" i tÄ±klayÄ±nÄ±z.';
+$LDPlsAddCurrency='Lütfen para birimi bilgisi giriniz. Sonra "Kaydet" i tıklayınız.';
 $LDAddedNewCurrency='Yeni para birimi bilgisi kaydedildi.';
 $LDmain='ana';
-$LDClk2AddCurrency='Yeni para birimi girmek iÃ§in lÃ¼tfen burayÄ± tÄ±klatÄ±nÄ±z.';
-$LDCurrencyShortName='Para biriminin sembolÃ¼ :';
-$LDCurrencyLongName='Para biriminin tanÄ±mÄ±:';
+$LDClk2AddCurrency='Yeni para birimi girmek için lütfen burayı tıklatınız.';
+$LDCurrencyShortName='Para biriminin sembolü :';
+$LDCurrencyLongName='Para biriminin tanımı:';
 $LDCurrencyInfo='Ek bilgi:';
-$LDClk2SetCurrency='Ana para birimini ayarlamak iÃ§in lÃ¼tfen burayÄ± tÄ±klayÄ±nÄ±z.';
-$LDCurrencyUpdated='Para birimi bilgisi gÃ¼ncellendi.';
-$LDUpdateCurrencyInfo='Para birimi bilgisi dÃ¼zenleme';
-$LDPlsEnterUpdate='LÃ¼tfen para birimi bilgisini dÃ¼zenleyiniz. Sonra "GÃ¼ncelle" yi tÄ±klayÄ±nÄ±z.';
+$LDClk2SetCurrency='Ana para birimini ayarlamak için lütfen burayı tıklayınız.';
+$LDCurrencyUpdated='Para birimi bilgisi güncellendi.';
+$LDUpdateCurrencyInfo='Para birimi bilgisi düzenleme';
+$LDPlsEnterUpdate='Lütfen para birimi bilgisini düzenleyiniz. Sonra "Güncelle" yi tıklayınız.';
 
-$LDEditInfo='DÃ¼zenle';
+$LDEditInfo='Düzenle';
 $LDCurrencyAdmin='Para birimi';
 
 
 /* 2002-10-22 EL */
-/*Ã‡eviren Op. Dr. BÃ¼lent Potur bpotur@yahoo.com */
-$LDUserInfoSaved='KullanÄ±cÄ± eriÅŸimi baÅŸarÄ±yla oluÅŸturuldu';
-$LDUserInfoNoSave='EriÅŸim oluÅŸturulmasÄ± baÅŸarÄ±sÄ±z. LÃ¼tfen girilen bilgiyi kontrol ediniz';
-$LDNoAreas='HiÃ§bir alanÄ± seÃ§mediniz!';
-$LDUserDouble='EriÅŸim oluÅŸturma baÅŸarÄ±sÄ±z. LÃ¼tfen farklÄ± bir giriÅŸ kullanÄ±nÄ±z .';
-$LDEnterNewUser='Yeni bir kullanÄ±cÄ± eriÅŸimi oluÅŸturma';
+/*Çeviren Op. Dr. Bülent Potur bpotur@yahoo.com */
+$LDUserInfoSaved='Kullanıcı erişimi başarıyla oluşturuldu';
+$LDUserInfoNoSave='Erişim oluşturulması başarısız. Lütfen girilen bilgiyi kontrol ediniz';
+$LDNoAreas='Hiçbir alanı seçmediniz!';
+$LDUserDouble='Erişim oluşturma başarısız. Lütfen farklı bir giriş kullanınız .';
+$LDEnterNewUser='Yeni bir kullanıcı erişimi oluşturma';
 /* 2002-11-22 EL*/
-$LDDeleteCurrency='Emin misiniz? Bu para birimini gerÃ§ektem silmek mi istiyorsunuz?';
-$LDNoMainDelete='Ana para birimini silemezsiniz. \nLÃ¼tfen Ã¶nce farklÄ± bir para birimini ana para birimi olarak belirleyiniz.';
-$LDCurrencyExisting='Bu para birimi Ã¶nceden var!';
+$LDDeleteCurrency='Emin misiniz? Bu para birimini gerçektem silmek mi istiyorsunuz?';
+$LDNoMainDelete='Ana para birimini silemezsiniz. \nLütfen önce farklı bir para birimini ana para birimi olarak belirleyiniz.';
+$LDCurrencyExisting='Bu para birimi önceden var!';
 /* 2003-02-21 EL*/
-$LDMenuItem='MenÃ¼ maddesi';
-$LDOrderNr='SÄ±ralama no.';
+$LDMenuItem='Menü maddesi';
+$LDOrderNr='Sıralama no.';
 $LDStatus='Durum';
 $LDHideBy='Gizleyen:';
 $LDPath='Yolu';
-$LDVisible='GÃ¶rÃ¼nÃ¼r';
-$LDFrameResizable='Ã‡erÃ§eve boyutlandÄ±rÄ±labilir';
-$LDBorderColor='SÄ±nÄ±r rengi';
-$LDBorderWidth='SÄ±nÄ±r geniÅŸliÄŸi';
-$LDFrameWidth='Ã‡erÃ§eve geniÅŸliÄŸi';
-$LDNo='HayÄ±r';
+$LDVisible='Görünür';
+$LDFrameResizable='Çerçeve boyutlandırılabilir';
+$LDBorderColor='Sınır rengi';
+$LDBorderWidth='Sınır genişliği';
+$LDFrameWidth='Çerçeve genişliği';
+$LDNo='Hayır';
 $LDYes='Evet';
-$LDAllowMultiLang='Ã‡ok dilli seÃ§eneÄŸe izin ver';
-$LDDefaultLang='Esas dil (eÄŸer Ã§ok dile izin verilmemiÅŸse)';
+$LDAllowMultiLang='Çok dilli seçeneğe izin ver';
+$LDDefaultLang='Esas dil (eğer çok dile izin verilmemişse)';
 /* 2003-02-22 EL*/
-$LDMainMenuItems='Ana menÃ¼ maddeleri';
-$LDMainMenuDisplay='Ana menÃ¼ gÃ¶rÃ¼nÃ¼mÃ¼';
-$LDDataEntryForms='Veri giriÅŸ formlarÄ±';
-$LDControlButImg='Kontrol dÃ¼ÄŸmeleri ve resimler';
-$LDSampleButtons='Ã–rnek dÃ¼ÄŸmeler';
+$LDMainMenuItems='Ana menü maddeleri';
+$LDMainMenuDisplay='Ana menü görünümü';
+$LDDataEntryForms='Veri giriş formları';
+$LDControlButImg='Kontrol düğmeleri ve resimler';
+$LDSampleButtons='Örnek düğmeler';
 $LDTheme='Tema';
 $LDItem='Madde';
 /* 2003-02-26- EL*/
-$LDDeptAdmin='BÃ¶lÃ¼m YÃ¶netimi';
-$LDNewDept='Yeni bÃ¶lÃ¼mler oluÅŸturma ve dÃ¼zenleme';
-$LDShowDeptInfo ='BÃ¶lÃ¼m TanÄ±mlarÄ±';
-$LDShowDeptInfoTxt='Varolan etkin bÃ¶lÃ¼mlerin bilgilerini gÃ¶rÃ¼ntÃ¼leme';
-$LDConfigOptions='BiÃ§imlendirme seÃ§enekleri';
-$LDDeptConfigOptions='BÃ¶lÃ¼mleri biÃ§imlendirme, bilgilerini gÃ¼ncelleme, etkinleÅŸtirme, etkisizleÅŸtirme, gizleme, gÃ¶sterme.';
-$LDDescription='TanÄ±m';
+$LDDeptAdmin='Bölüm Yönetimi';
+$LDNewDept='Yeni bölümler oluşturma ve düzenleme';
+$LDShowDeptInfo ='Bölüm Tanımları';
+$LDShowDeptInfoTxt='Varolan etkin bölümlerin bilgilerini görüntüleme';
+$LDConfigOptions='Biçimlendirme seçenekleri';
+$LDDeptConfigOptions='Bölümleri biçimlendirme, bilgilerini güncelleme, etkinleştirme, etkisizleştirme, gizleme, gösterme.';
+$LDDescription='Tanım';
 /* 2003-023-01 EL*/
-$LDFormalName='Resmi Ä°smi';
+$LDFormalName='Resmi İsmi';
 $LDInternalID='Dahili Kimlik Kodu';
-$LDPlsSelect='LÃ¼tfen bir tanesini seÃ§iniz';
-$LDTypeDept='BÃ¶lÃ¼m Tipi';
-$LDIsSubDept='Bu bir alt bÃ¶lÃ¼m mÃ¼ ?';
-$LDParentDept='Ãœst BÃ¶lÃ¼mÃ¼';
-$LDLangVariable='Dil deÄŸiÅŸkeni';
-$LDShortName='KÄ±sa adÄ±';
-$LDAlternateName='DiÄŸer AdÄ±';
-$LDAdmitsOutpatients='PolikliniÄŸi var mÄ± ?';
-$LDAdmitsInpatients='KliniÄŸi var mÄ± ?';
-$LDBelongsToInst='Bu kuruma mÄ± ait ?';
-$LDWorkHrs='Ã‡alÄ±ÅŸma saatleri';
-$LDConsultationHrs='KonsÃ¼ltasyon saatleri';
-$LDSigLine='Ä°mza satÄ±rÄ±';
-$LDSigStampTxt='Ä°mza MÃ¼hÃ¼r YazÄ±sÄ±';
-$LDDeptLogo='BÃ¶lÃ¼m Logosu';
+$LDPlsSelect='Lütfen bir tanesini seçiniz';
+$LDTypeDept='Bölüm Tipi';
+$LDIsSubDept='Bu bir alt bölüm mü ?';
+$LDParentDept='Üst Bölümü';
+$LDLangVariable='Dil değişkeni';
+$LDShortName='Kısa adı';
+$LDAlternateName='Diğer Adı';
+$LDAdmitsOutpatients='Polikliniği var mı ?';
+$LDAdmitsInpatients='Kliniği var mı ?';
+$LDBelongsToInst='Bu kuruma mı ait ?';
+$LDWorkHrs='Çalışma saatleri';
+$LDConsultationHrs='Konsültasyon saatleri';
+$LDSigLine='İmza satırı';
+$LDSigStampTxt='İmza Mühür Yazısı';
+$LDDeptLogo='Bölüm Logosu';
 $LDHidden='Gizli';
 $LDNormal='Normal';
-$LDInactive='Ä°naktif';
+$LDInactive='İnaktif';
 $LDActive='Aktif';
-$LDDeptStatus='BÃ¶lÃ¼m durumu';
-$LDRecordStatus='KayÄ±t durumu';
+$LDDeptStatus='Bölüm durumu';
+$LDRecordStatus='Kayıt durumu';
 /* 2003-03-30 EL*/
-$LDConfigOptions='DÃ¼zenleme SeÃ§enekleri';
-$LDDoesSurgeryOp='Cerrahi ameliyatlar yapar mÄ±?';
+$LDConfigOptions='Düzenleme Seçenekleri';
+$LDDoesSurgeryOp='Cerrahi ameliyatlar yapar mı?';
 $LDList='Listele';
-$LDUpdate='GÃ¼ncelle';
+$LDUpdate='Güncelle';
 # 2003-08-03 EL
-$LDFindEmployee='Bir Ã§alÄ±ÅŸanÄ± bul';
+$LDFindEmployee='Bir çalışanı bul';
 #2003-10-27 EL
-$LDMainMenu='Ana menÃ¼';
-$LDHideShow='Gizle/gÃ¶ster';
-$LDSortOrder='sÄ±ralama Ã¶lÃ§Ã¼tÃ¼';
-$LDAdminIndex='YÃ¶netim indeksi';
-$LDUsers='KullanÄ±cÄ±lar';
-$LDCreateEditLock='OluÅŸtur, dÃ¼zenle, kilitle';
-$LDDatabase='VeritabanÄ±';
+$LDMainMenu='Ana menü';
+$LDHideShow='Gizle/göster';
+$LDSortOrder='sıralama ölçütü';
+$LDAdminIndex='Yönetim indeksi';
+$LDUsers='Kullanıcılar';
+$LDCreateEditLock='Oluştur, düzenle, kilitle';
+$LDDatabase='Veritabanı';
 $LDPhpMyAdmin='PhpMyAdmin';
 $LDGeneral='Genel';
-$LDQuickInformer='Ã–nemli bilgiler';
-$LDEnterInfo='LÃ¼tfen bilgiyi giriniz. Sonra "Kaydet" i tÄ±klayÄ±nÄ±z.';
-$LDPaginatorMaxRows='Sayfada maksimum satÄ±r sayÄ±sÄ±';
+$LDQuickInformer='Önemli bilgiler';
+$LDEnterInfo='Lütfen bilgiyi giriniz. Sonra "Kaydet" i tıklayınız.';
+$LDPaginatorMaxRows='Sayfada maksimum satır sayısı';
 
 #2003-10-28 EL
 $LDAddressList='Adres listesi';
-$LDAddressListTxt='Adres listesi adres yÃ¶netim modÃ¼lÃ¼nde gÃ¶rÃ¼ntÃ¼lendiÄŸi zaman.';
+$LDAddressListTxt='Adres listesi adres yönetim modülünde görüntülendiği zaman.';
 $LDAddressSearch='Adres arama';
-$LDAddressSearchTxt='Adres arama sonucu bir liste Ã§Ä±ktÄ±ÄŸÄ±nda';
-$LDInsuranceList='Sigorta ÅŸirket listesi';
-$LDInsuranceListTxt='Sigorta ÅŸirket listesi sigorta ÅŸirket modÃ¼lÃ¼nde gÃ¶rÃ¼ntÃ¼lendiÄŸi zaman.';
+$LDAddressSearchTxt='Adres arama sonucu bir liste çıktığında';
+$LDInsuranceList='Sigorta şirket listesi';
+$LDInsuranceListTxt='Sigorta şirket listesi sigorta şirket modülünde görüntülendiği zaman.';
 $LDInsuranceSearch='Sigorta arama';
-$LDInsuranceSearchTxt='Sigorta ÅŸirketi arama sonucu bir liste Ã§Ä±ktÄ±ÄŸÄ± zaman.';
-$LDPersonnelSearch='Ã‡alÄ±ÅŸan arama';
-$LDPersonnelSearchTxt='Ã‡alÄ±ÅŸan aramasÄ±nda bir liste Ã§Ä±ktÄ±ÄŸÄ± zaman.';
-$LDPersonnelList='Ã‡alÄ±ÅŸan listesi';
-$LDPersonnelListTxt='Ã‡alÄ±ÅŸan listesi personel yÃ¶netim modÃ¼lÃ¼nde gÃ¶rÃ¼ntÃ¼lendiÄŸi zaman.';
-$LDPersonSearch='KiÅŸi arama';
-$LDPersonSearchTxt='KiÅŸi arama sonucu bir liste Ã§Ä±ktÄ±ÄŸÄ± zaman.';
+$LDInsuranceSearchTxt='Sigorta şirketi arama sonucu bir liste çıktığı zaman.';
+$LDPersonnelSearch='Çalışan arama';
+$LDPersonnelSearchTxt='Çalışan aramasında bir liste çıktığı zaman.';
+$LDPersonnelList='Çalışan listesi';
+$LDPersonnelListTxt='Çalışan listesi personel yönetim modülünde görüntülendiği zaman.';
+$LDPersonSearch='Kişi arama';
+$LDPersonSearchTxt='Kişi arama sonucu bir liste çıktığı zaman.';
 $LDPatientSearch='Hasta arama';
-$LDPatientSearchTxt='Hasta arama sonucu bir liste Ã§Ä±ktÄ±ÄŸÄ± zaman.';
-$LDORPatientSearch='Ameliyat hastasÄ± arama';
-$LDORPatientSearchTxt='Hasta arama sonucu bir liste Ã§Ä±ktÄ±ÄŸÄ± zaman. 
-Bu deÄŸer arama yeri darlÄ±ÄŸÄ±ndan ya da ameliyat kÃ¼tÃ¼ÄŸÃ¼n modÃ¼lÃ¼nden dolayÄ± genellikle 10 satÄ±rdan azdÄ±r';
-$LDEnterMaxRows='LÃ¼tfen baÅŸarÄ±lÄ± bir arama sonrasÄ± gÃ¶rÃ¼ntÃ¼lenen maksimum satÄ±r sayÄ±sÄ±nÄ± giriniz.';
+$LDPatientSearchTxt='Hasta arama sonucu bir liste çıktığı zaman.';
+$LDORPatientSearch='Ameliyat hastası arama';
+$LDORPatientSearchTxt='Hasta arama sonucu bir liste çıktığı zaman. 
+Bu değer arama yeri darlığından ya da ameliyat kütüğün modülünden dolayı genellikle 10 satırdan azdır';
+$LDEnterMaxRows='Lütfen başarılı bir arama sonrası görüntülenen maksimum satır sayısını giriniz.';
 #2003-11-01 EL
-$LDTimeOut='Zaman aÅŸÄ±mÄ±';
-$LDTimeOutActive='Zaman aÅŸÄ±mÄ± etkin';
-$LDTimeOutTxt='Ä°ÅŸlem yapÄ±lmadan geÃ§en belirli bir sÃ¼re sonunda ÅŸifre ile korunan bÃ¶lÃ¼mler zaman aÅŸÄ±mÄ±na uÄŸrasÄ±n mÄ±? (kendi kendini kilitlesin mi?)';
-$LDTimeOutTime='GeÃ§en zaman';
-$LDTimeOutTimeTxt='Zaman aÅŸÄ±mÄ±nÄ± tetikleyen ve modÃ¼lÃ¼n kilitlenmesine yol aÃ§an iÅŸlemsiz sÃ¼re. UyarÄ± : 
-EÄŸer geÃ§ersiz deÄŸer girer iseniz sistem kendi maksimum deÄŸerlerini kulanÄ±r.';
+$LDTimeOut='Zaman aşımı';
+$LDTimeOutActive='Zaman aşımı etkin';
+$LDTimeOutTxt='İşlem yapılmadan geçen belirli bir süre sonunda şifre ile korunan bölümler zaman aşımına uğrasın mı? (kendi kendini kilitlesin mi?)';
+$LDTimeOutTime='Geçen zaman';
+$LDTimeOutTimeTxt='Zaman aşımını tetikleyen ve modülün kilitlenmesine yol açan işlemsiz süre. Uyarı : 
+Eğer geçersiz değer girer iseniz sistem kendi maksimum değerlerini kulanır.';
 #2003-11-09 EL
 $LDGUI='GUI';
-$LDNewsDisplay='Haberler gÃ¶rÃ¼nÃ¼mÃ¼';
-$LDTitleFontSize='BaÅŸlÄ±k font bÃ¼yÃ¼klÃ¼ÄŸÃ¼';
-$LDTitleFontColor='BaÅŸlÄ±k font rengi';
-$LDTitleFont='BaÅŸlÄ±k fontu';
-$LDPrefaceFontSize='Ana Ã¶zet font bÃ¼yÃ¼klÃ¼ÄŸÃ¼';
-$LDPrefaceFontColor='Ana Ã¶zet font rengi';
-$LDPrefaceFont='Ana Ã¶zet fontu';
-$LDBodyFontSize='Haber gÃ¶vdesi font bÃ¼yÃ¼klÃ¼ÄŸÃ¼';
-$LDBodyFontColor='Haber gÃ¶vdesi font rengi';
-$LDBodyFont='Haber gÃ¶vdesi fontu';
-$LDPreviewMaxlen='Haber Ã¶n izleme maksimum karakter sayÄ±sÄ±';
-$LDTitleFontBold='BaÅŸlÄ±k font yoÄŸunluÄŸu';
-$LDPrefaceFontBold='Ana Ã¶zet font yoÄŸunluÄŸu';
-$LDDisplayWidth='Haber gÃ¶rÃ¼nÃ¼m geniÅŸliÄŸi (piksel veya %)';
-$LDBold='KalÄ±n';
-$LDNoteDefault='UyarÄ±: EÄŸer geÃ§ersiz bir deÄŸer girer iseniz, sistem Ã¶n tanÄ±mlÄ± orijinal deÄŸeriyle deÄŸiÅŸtirir.';
-$LDUseDefault='Ã–n tanÄ±mlÄ± deÄŸerleri kullan';
-$LDClkPickColor='Rengi seÃ§mek iÃ§in burayÄ± tÄ±klayÄ±nÄ±z';
+$LDNewsDisplay='Haberler görünümü';
+$LDTitleFontSize='Başlık font büyüklüğü';
+$LDTitleFontColor='Başlık font rengi';
+$LDTitleFont='Başlık fontu';
+$LDPrefaceFontSize='Ana özet font büyüklüğü';
+$LDPrefaceFontColor='Ana özet font rengi';
+$LDPrefaceFont='Ana özet fontu';
+$LDBodyFontSize='Haber gövdesi font büyüklüğü';
+$LDBodyFontColor='Haber gövdesi font rengi';
+$LDBodyFont='Haber gövdesi fontu';
+$LDPreviewMaxlen='Haber ön izleme maksimum karakter sayısı';
+$LDTitleFontBold='Başlık font yoğunluğu';
+$LDPrefaceFontBold='Ana özet font yoğunluğu';
+$LDDisplayWidth='Haber görünüm genişliği (piksel veya %)';
+$LDBold='Kalın';
+$LDNoteDefault='Uyarı: Eğer geçersiz bir değer girer iseniz, sistem ön tanımlı orijinal değeriyle değiştirir.';
+$LDUseDefault='Ön tanımlı değerleri kullan';
+$LDClkPickColor='Rengi seçmek için burayı tıklayınız';
 #2003-11-11 EL
-$LDORAdmin='Ameliyathane yÃ¶netimi';
-$LDListConfig='Listele & dÃ¼zenle';
+$LDORAdmin='Ameliyathane yönetimi';
+$LDListConfig='Listele & düzenle';
 $LDOR='Ameliyathane';
 $LDORNr='Ameliyathane no';
-$LDTempClosed='GeÃ§ici olarak kapalÄ± mÄ±?';
-$LDOwnerWard='Ait olduÄŸu servis';
-$LDOwnerDept='Ait olduÄŸu bÃ¶lÃ¼m';
-$LDDateCreation='OluÅŸturma tarihi';
+$LDTempClosed='Geçici olarak kapalı mı?';
+$LDOwnerWard='Ait olduğu servis';
+$LDOwnerDept='Ait olduğu bölüm';
+$LDDateCreation='Oluşturma tarihi';
 $LDDateClose='Kapanma tarihi';
-$LDOPTableNr='Ameliyat masasÄ± sayÄ±sÄ±';
-$LDORName='Ameliyathane adÄ±';
-$LDORNrExists='Ameliyathane numarasÄ± Ã¶nceden var!';
-$LDToggle='DeÄŸiÅŸtirme';
-$LDChange='DeÄŸiÅŸtirme';
-$LDClkNextNr='Sonraki boÅŸ numarayÄ± kullanmak iÃ§in tÄ±klayÄ±nÄ±z';
-$LDOPTable='Ameliyat masasÄ±';
+$LDOPTableNr='Ameliyat masası sayısı';
+$LDORName='Ameliyathane adı';
+$LDORNrExists='Ameliyathane numarası önceden var!';
+$LDToggle='Değiştirme';
+$LDChange='Değiştirme';
+$LDClkNextNr='Sonraki boş numarayı kullanmak için tıklayınız';
+$LDOPTable='Ameliyat masası';
 ?>

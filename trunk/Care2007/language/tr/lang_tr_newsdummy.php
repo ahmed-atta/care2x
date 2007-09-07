@@ -6,8 +6,8 @@ print '
 		<BR>
 		<font size=-1 color="#000000" face="arial">
 		<b>
-		Burada '.$LDNewsDummy[$i].' haber makalesi veya bilgisi gÃ¶sterilecek.</b><p>
-			Bu alanda haberlerinizi, kÄ±sa bilgileri, notlarÄ± yayÄ±nlayabilirsiniz
-			KullanÄ±cÄ± dostu editÃ¶r ile makalenizi kolayca yazÄ±p Ã§ok kÄ±sa sÃ¼rede yayÄ±nlayabilirsiniz. EditÃ¶r yazÄ±m sÄ±rasÄ±nda size yardÄ±mcÄ± olur. Makalenizin etkisini artÄ±rmak iÃ§in bir resim de ekleyebilirsiniz.<p>
-			Åimdi makalenizi yazÄ±nÄ±z...</font><br>';
+		Burada '.$LDNewsDummy[$i].' haber makalesi veya bilgisi gösterilecek.</b><p>
+			Bu alanda haberlerinizi, kısa bilgileri, notları yayınlayabilirsiniz
+			Kullanıcı dostu editör ile makalenizi kolayca yazıp çok kısa sürede yayınlayabilirsiniz. Editör yazım sırasında size yardımcı olur. Makalenizin etkisini artırmak için bir resim de ekleyebilirsiniz.<p>
+			Şimdi makalenizi yazınız...</font><br>';
 ?>

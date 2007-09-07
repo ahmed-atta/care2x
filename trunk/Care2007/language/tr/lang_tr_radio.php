@@ -1,87 +1,84 @@
 <?php
 $LDClose='Kapat';
-$LDCancel='Ä°ptal';
+$LDCancel='Ýptal';
 $LDResetEntry='Girilenleri sil';
 $LDSave='Kaydet';
 
-$LDSearchWordPrompt='Aranacak anahtar sÃ¶zcÃ¼ÄŸÃ¼ giriniz, Ã¶rneÄŸin: bir Soyad, bir Ad veya bir doÄŸum tarihi, vs.';
-$LDEnterData='Verileri girmek iÃ§in tÄ±klayÄ±nÄ±z';
-$LDClk2See='Verileri gÃ¶rmek iÃ§in tÄ±klayÄ±nÄ±z';
+$LDSearchWordPrompt='Aranacak anahtar sözcüðü giriniz, örneðin: bir Soyad, bir Ad veya bir doðum tarihi, vs.';
+$LDEnterData='Verileri girmek için týklayýnýz';
+$LDClk2See='Verileri görmek için týklayýnýz';
 $LDFoundPatient='Arama sonucu <b>~nr~</b> hasta bulundu';
-$LDWildCards='Joker nedir nasÄ±l kullanÄ±lÄ±r';
+$LDWildCards='Joker nedir nasýl kullanýlýr';
 $LDNewSearch='Yeni arama';
 
-$LDCaseNr='Protokol no.';
+$LDCaseNr='Vizit no.';
 $LDLastName='Soyad';
 $LDName='Ad';
-$LDBday='DoÄŸum tarihi';
+$LDBday='Doðum tarihi';
 $LDOClock='saat';
 $LDBack='Geri';
 
-$LDOn='Ã¼zerinde';
+$LDOn='üzerinde';
 $LDAt='de';
-$LDClk2Edit='Bu raporu dÃ¼zenlemek iÃ§in tÄ±klayÄ±nÄ±z';
+$LDClk2Edit='Bu raporu düzenlemek için týklayýnýz';
 
 $LDNew='Yeni';
-$LDEdit='DÃ¼zenle';
-$LDCreate='OluÅŸtur';
-$LDValue='DeÄŸer';
+$LDEdit='Düzenle';
+$LDCreate='Oluþtur';
+$LDValue='Deðer';
 
 $LDRadio='Radyoloji';
-$LDXrayFilms='RÃ¶ntgen filmleri';
-$LDXrayFilmsTxt='RÃ¶ntgen filmlerini gÃ¶ster, rapor yaz veya oku vs.';
+$LDXrayFilms='Röntgen filmleri';
+$LDXrayFilmsTxt='Röntgen filmlerini göster, rapor yaz veya oku vs.';
 $LDNews='Haberler';
-$LDNewsTxt='Radyoloji bÃ¶lÃ¼mÃ¼ haberlerini oku veya yaz';
+$LDNewsTxt='Radyoloji bölümü haberlerini oku veya yaz';
 $LDMemo='Not';
 $LDMemoTxt='Not yaz veya oku';
 $LDSearchPat='Hasta arama';
 $LDCategory='Kategori';
-$LDPast3Days='Son 3 gÃ¼n';
+$LDPast3Days='Son 3 gün';
 $LDPast3Months='Son 3 ay';
 $LDPastAll='Hepsi';
-$LDSelect='SeÃ§';
-$LDShootDate='Ã‡ekim tarihi';
+$LDSelect='Seç';
+$LDShootDate='Çekim tarihi';
 $LDFullScreen='Tam ekranda izle';
-$LDEditXrayDiag='Rapor dÃ¼zenle';
-$LDReadDiag='TeÅŸhisi oku';
-$LDWriteDiag='TeÅŸhisi yaz';
-$LDPreviewReport='TeÅŸhis/Ã–n izleme';
+$LDEditXrayDiag='Rapor düzenle';
+$LDReadDiag='Tanýyý oku';
+$LDWriteDiag='Tanýyý yaz';
+$LDPreviewReport='Taný/Ön izleme';
 /* 2002-09-08 EL*/
 $LDTestRequestRadio='Tetkik istemi';
 $LDTestRequestRadioTxt='Radyolojik tetkik istemi';
 /* 2002-09-10 EL */
-$LDTestReception='Bekleyen Ä°stem';
-$LDTestReceptionTxt='Tetkik istemlerini alma ve iÅŸleme, sonuÃ§larÄ±/teÅŸhisleri yazma';
+$LDTestReception='Bekleyen Ýstem';
+$LDTestReceptionTxt='Tetkik istemlerini alma ve iþleme, sonuçlarý/tanýlarý yazma';
 # 2003-08-08 EL
 $LDDicomImages='DICOM resimleri';
-$LDDicomImagesTxt='DICOM formatÄ±ndaki resimleri izleme';
-$LDUploadDate='YÃ¼kleme Tarihi';
+$LDDicomImagesTxt='DICOM formatýndaki resimleri izleme';
+$LDUploadDate='Yükleme Tarihi';
 $LDViewImage='Burada izle';
 $LDViewInWindow='Pencerede izle';
-$LDNrImages='Kesit sayÄ±sÄ±';
+$LDNrImages='Kesit sayýsý';
 $LDDicomViewer='Dicom izleyici';
-$LDViewInFrame='Bu Ã§erÃ§evede izle';
-$LDUploadDicom='DICOM yÃ¼kle';
-$LDUploadDicomTxt='DICOM formatÄ±nda diagnostik resimler yÃ¼kle';
+$LDViewInFrame='Bu çerçevede izle';
+$LDUploadDicom='DICOM yükle';
+$LDUploadDicomTxt='DICOM formatýnda diagnostik resimler yükle';
 $LDPID='PID';
 $LDImgNumber='Resim no';
 $LDSingleImage='tek resim';
 $LDImageGroupNr='Resim grup no';
-$LDNewFileName='Yeni dosya adÄ±';
-$LDUploadNew='YÃ¼klemem gerekiyor:';
-$LDNewImageFiles='yeni resim dosyalarÄ±';
+$LDNewFileName='Yeni dosya adý';
+$LDUploadNew='Yüklemem gerekiyor:';
+$LDNewImageFiles='yeni resim dosyalarý';
 # 2003-08-09 EL
-$LDSelectViewer='GÃ¶rÃ¼ntÃ¼leyiciyi seÃ§';
-$LDSelectViewerTxt='DICOM gÃ¶rÃ¼ntÃ¼leyici programÄ± seÃ§';
-$LDCurrentViewer='GÃ¼ncel gÃ¶rÃ¼ntÃ¼leyici';
+$LDSelectViewer='Görüntüleyiciyi seç';
+$LDSelectViewerTxt='DICOM görüntüleyici programý seç';
+$LDCurrentViewer='Güncel görüntüleyici';
 $LDNagoyaTechInst='Nagoya Tech. Institute';
-$LDRAIMJAVA='RAIMJAVAÂ©';
-$LDNoImageSaved='HiÃ§bir resim kaydedilmedi!';
-$LDImageNotes='Resim notlarÄ±';
+$LDRAIMJAVA='RAIMJAVA©';
+$LDNoImageSaved='Hiçbir resim kaydedilmedi!';
+$LDImageNotes='Resim notlarý';
 #2004-08-05 EL
-$LDMissingImageFile = 'Resim dosyalarÄ± eksik!';
-#Ã‡eviren Op.Dr. BÃ¼lent Potur 4/12/2004
-#For Kaloyan Raev's new Dicom module 5/9/2006  Op.Dr. BÃ¼lent Potur
-$LDDownload='Ä°ndir'; 
-$LDFileName='Dosya adÄ±';
+$LDMissingImageFile = 'Resim dosyalarý eksik!';
+#Çeviren Op.Dr. Bülent Potur 4/12/2004
 ?>

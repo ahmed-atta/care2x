@@ -1,10 +1,10 @@
 <?php
-$LDTogglePreviewOrig='Orijinal bÃ¼yÃ¼klÃ¼ÄŸÃ¼nde gÃ¶rmek iÃ§in tÄ±klayÄ±nÄ±z';
-$LDToggleOrigPreview='KÃ¼Ã§Ã¼ltÃ¼lmÃ¼ÅŸ gÃ¶rmek iÃ§in tÄ±klayÄ±nÄ±z';
+$LDTogglePreviewOrig='Orijinal büyüklüðünde görmek için týklayýnýz';
+$LDToggleOrigPreview='Küçültülmüþ görmek için týklayýnýz';
 
 #2004-08-06 EL
 $LDHideJavaApplet = 'Kontrol panelini gizle';
-$LDShowJavaApplet = 'Kontrol panelini gÃ¶ster';
-$LDEditWithImageJ = 'Resmi ImageJ ile dÃ¼zenle';
+$LDShowJavaApplet = 'Kontrol panelini göster';
+$LDEditWithImageJ = 'Resmi ImageJ ile düzenle';
 
 ?>

@@ -1,7 +1,7 @@
 <?php
-$LDCreateAdmin='Sistem yÃ¶neticisi admin eriÅŸimi oluÅŸturmak';
-$LDLoginExists='Bu giriÅŸ/kullanÄ±cÄ± adÄ± Ã¶nceden var. LÃ¼tfen bir baÅŸka giriÅŸ/kullanÄ±cÄ± adÄ± kullanÄ±nÄ±z';
-$LDAdminOk='Sistem yÃ¶neticisi hesabÄ± oluÅŸturuldu. LÃ¼tfen root dizininden  create_admin.php script dosyasÄ±nÄ± siliniz. Yoksa Care2x Ã§alÄ±ÅŸmaz.';
-$LDDeleteWarning='Ã‡ok Ã¶nemli! BaÅŸarÄ±yla yÃ¶netici eriÅŸimini kurduktan sonra bu  create_admin.php dosyasÄ±nÄ± mutlaka silmelisiniz!';
-$LDWarning='UyarÄ±!';
+$LDCreateAdmin='Sistem yöneticisi admin eriþimi oluþturmak';
+$LDLoginExists='Bu giriþ/kullanýcý adý önceden var. Lütfen bir baþka giriþ/kullanýcý adý kullanýnýz';
+$LDAdminOk='Sistem yöneticisi hesabý oluþturuldu. Lütfen root dizininden  create_admin.php script dosyasýný siliniz. Yoksa Care2x çalýþmaz.';
+$LDDeleteWarning='Çok önemli! Baþarýyla yönetici eriþimini kurduktan sonra bu  create_admin.php dosyasýný mutlaka silmelisiniz!';
+$LDWarning='Uyarý!';
 ?>

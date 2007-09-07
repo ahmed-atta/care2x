@@ -2,63 +2,63 @@
 /* 2003-06-21 El */
 $TXT['CreateHospitalServiceItem']='Yeni hastane hizmet kalemi ekle';
 $TXT['CreateLabTestItem']='Yeni laboratuvar testi kalemi ekle';
-$TXT['EditHospitalServiceItems']='Hastane hizmet kalemlerini dÃ¼zenle';
-$TXT['EditLabTestItems']='Laboratuvar hizmet kalemlerini dÃ¼zenle';
+$TXT['EditHospitalServiceItems']='Hastane hizmet kalemlerini düzenle';
+$TXT['EditLabTestItems']='Laboratuvar hizmet kalemlerini düzenle';
 $TXT['SearchPatient']='Hasta Arama';
 $TXT['Billing']='elektronik fatura';
 
-$TXT['EnterNameHS']='Hastane hizmetinin adÄ±nÄ± giriniz';
-$TXT['EnterServiceCode']='Hizmetin Kodunu/numarasÄ±nÄ± giriniz.';
-$TXT['EnterPriceUnit']='Birim fiyatÄ±nÄ± giriniz';
+$TXT['EnterNameHS']='Hastane hizmetinin adýný giriniz';
+$TXT['EnterServiceCode']='Hizmetin Kodunu/numarasýný giriniz.';
+$TXT['EnterPriceUnit']='Birim fiyatýný giriniz';
 $TXT['EnterDiscount']='Bu hizmette izin verilen indirimi giriniz';
-$TXT['EnterValuePrice']='FiyatÄ± rakamla giriniz';
-$TXT['EnterValueDiscount']='Ä°ndirimi rakamla giriniz';
+$TXT['EnterValuePrice']='Fiyatý rakamla giriniz';
+$TXT['EnterValueDiscount']='Ýndirimi rakamla giriniz';
 $TXT['HospitalServiceItem']='Hastane Hizmet Kalemi';
-$TXT['PlsEnterFF']='LÃ¼tfen ÅŸunlarÄ± giriniz';
-$TXT['NameHS']='Hastane Hizmetinin AdÄ±';
+$TXT['PlsEnterFF']='Lütfen þunlarý giriniz';
+$TXT['NameHS']='Hastane Hizmetinin Adý';
 $TXT['TestCode']='Hizmet/Tetkik kodu/no.';
-$TXT['PriceUnit']='Birim fiyatÄ±';
-$TXT['EnterValueDiscount']='% Ä°ndirim';
-$TXT['NameLT']='Laboratuvar tetkikinin adÄ±';
+$TXT['PriceUnit']='Birim fiyatý';
+$TXT['EnterValueDiscount']='% Ýndirim';
+$TXT['NameLT']='Laboratuvar tetkikinin adý';
 $TXT['LabTestItem']='Laboratuvar tetkik kalemi';
-$TXT['NameLT']='Laboratuvar tetkikinin adÄ±';
-$TXT['Discount']='Ä°ndirim';
+$TXT['NameLT']='Laboratuvar tetkikinin adý';
+$TXT['Discount']='Ýndirim';
 $TXT['Code']='Kod';
-$TXT['Name']='Ä°sim';
-$TXT['CostPerUnit']='Birim baÅŸÄ± maliyet';
+$TXT['Name']='Ýsim';
+$TXT['CostPerUnit']='Birim baþý maliyet';
 $TXT['HospitalServiceItems']='Hastane Hizmet Kalemleri';
 $TXT['LabTestItems']='Laboratuvar Tetkik Kalemleri';
 
 /* 2003-10-19 DHC Alerts from enter_hospital_services.php  */
-$TXT['alertNameHospitalService']='Hastane hizmetinin adÄ±nÄ± giriniz';
-$TXT['alertEnterServiceCodeNo']='Hizmetin Kodunu/numarasÄ±nÄ± giriniz.';
-$TXT['alertEnterPriceperUnit']='Birim fiyatÄ±nÄ± giriniz';
+$TXT['alertNameHospitalService']='Hastane hizmetinin adýný giriniz';
+$TXT['alertEnterServiceCodeNo']='Hizmetin Kodunu/numarasýný giriniz.';
+$TXT['alertEnterPriceperUnit']='Birim fiyatýný giriniz';
 $TXT['alertEnterDiscountallowed']='Bu hizmette izin verilen indirimi giriniz(%)';
-$TXT['alertEnterNumericValueforPrice']='FiyatÄ± rakamla giriniz';
-$TXT['alertEnterNumericValueforDiscount']='Ä°ndirimi rakamla giriniz';
+$TXT['alertEnterNumericValueforPrice']='Fiyatý rakamla giriniz';
+$TXT['alertEnterNumericValueforDiscount']='Ýndirimi rakamla giriniz';
 
 /* 2003-10-19 DHC Echoes from patientbill.php  */
-$TXT['PatientName']='Hasta AdÄ±';
+$TXT['PatientName']='Hasta Adý';
 $TXT['eComBill']='elektronik fatura';
-$TXT['PatientNumber']='Hasta numarasÄ±';
-$TXT['SelectHospitalServices']='Hastane Hizmetlerini SeÃ§iniz';
-$TXT['SelectLaboratoryTests']='Laboratuvar Tetkiklerini SeÃ§iniz';
-$TXT['ViewBill']='Fatura GÃ¶rÃ¼ntÃ¼leme';
-$TXT['ViewPayment']='Ã–deme GÃ¶rÃ¼ntÃ¼leme';
-$TXT['MakeNewPayment']='Yeni Ã–deme yapma';
-$TXT['GenerateFinalBill']='Son FaturayÄ± oluÅŸturma';
-$TXT['Patienthasclearedallthebills']='Hasta tÃ¼m faturalarÄ±nÄ± Ã¶dedi';
+$TXT['PatientNumber']='Hasta numarasý';
+$TXT['SelectHospitalServices']='Hastane Hizmetlerini Seçiniz';
+$TXT['SelectLaboratoryTests']='Laboratuvar Tetkiklerini Seçiniz';
+$TXT['ViewBill']='Fatura Görüntüleme';
+$TXT['ViewPayment']='Ödeme Görüntüleme';
+$TXT['MakeNewPayment']='Yeni Ödeme yapma';
+$TXT['GenerateFinalBill']='Son Faturayý oluþturma';
+$TXT['Patienthasclearedallthebills']='Hasta tüm faturalarýný ödedi';
 
 /* 2003-10-19 DHC Echoes from select_services.php  */
-$TXT['SelectLaboratoryTests']='Laboratuvar Tetkiklerini SeÃ§iniz';
-$TXT['SelectHospitalServices']='Hastane Hizmetlerini SeÃ§iniz';
-$TXT['PleaseSelectLaboratoryTestsforthePatient']='LÃ¼tfen hastanÄ±n laboratuvar tetkiklerini seÃ§iniz';
-$TXT['PleaseSelectHospitalServicesforthePatient']='LÃ¼tfen hastaya verilen hastane hizmetlerini seÃ§iniz:';
-$TXT['TestName']='Test AdÄ±';
+$TXT['SelectLaboratoryTests']='Laboratuvar Tetkiklerini Seçiniz';
+$TXT['SelectHospitalServices']='Hastane Hizmetlerini Seçiniz';
+$TXT['PleaseSelectLaboratoryTestsforthePatient']='Lütfen hastanýn laboratuvar tetkiklerini seçiniz';
+$TXT['PleaseSelectHospitalServicesforthePatient']='Lütfen hastaya verilen hastane hizmetlerini seçiniz:';
+$TXT['TestName']='Test Adý';
 $TXT['TestCode']='Test Kodu';
-$TXT['Costperunit']='Birim fiyatÄ±';
-$TXT['NumberofUnits']='Birim sayÄ±sÄ±';
-$TXT['AddtoPatientBill']='Hasta faturasÄ±na ekle';
+$TXT['Costperunit']='Birim fiyatý';
+$TXT['NumberofUnits']='Birim sayýsý';
+$TXT['AddtoPatientBill']='Hasta faturasýna ekle';
 
 /* 2003-10-19 DHC Echoes from confirmLabtests.php  */
 $TXT['ConfirmLaboratoryTests']='Laboratuvar Tetkiklerini Onayla';
@@ -69,97 +69,97 @@ $TXT['LaboratoryTests']='Laboratuvar Tetkikleri';
 $TXT['BillNo']='Fatura No.';
 $TXT['BillDate']='Fatura Tarihi';
 $TXT['FinalBill']='Son Fatura';
-$TXT['CurrentBill']='Åžimdiki Fatura';
+$TXT['CurrentBill']='Þimdiki Fatura';
 $TXT['Bill']='Fatura';
 $TXT['GeneralInfo']='Genel bilgi';
 $TXT['PatientAddress']='Hasta adresi';
 $TXT['PatientType']='Hasta tipi';
-$TXT['DateofBirth']='DoÄŸum tarihi';
+$TXT['DateofBirth']='Doðum tarihi';
 $TXT['Sex']='Cinsiyet';
 $TXT['DateofAdmission']='Kabul tarihi';
 $TXT['BillingInformation']='Fatura Bilgisi';
-$TXT['Description']='Ä°zahat';
-$TXT['CostperUnit']='Birim fiyatÄ±';
+$TXT['Description']='Ýzahat';
+$TXT['CostperUnit']='Birim fiyatý';
 $TXT['Units']='Birim';
 $TXT['TotalCost']='Toplam maliyet';
 $TXT['ItemType']='Kalem tipi';
-$TXT['MedicalServices']='TÄ±bbi Hizmetler';
+$TXT['MedicalServices']='Týbbi Hizmetler';
 $TXT['LaboratoryTests']='Laborauvar tetkikleri';
 $TXT['Total']='Toplam';
-$TXT['TotalBillAmount']='Toplam fatura miktarÄ±';
-$TXT['OutstandingAmount']='Ã–denmemiÅŸ miktar';
-$TXT['AmountDue']='Vadesi gelmiÅŸ miktar';
+$TXT['TotalBillAmount']='Toplam fatura miktarý';
+$TXT['OutstandingAmount']='Ödenmemiþ miktar';
+$TXT['AmountDue']='Vadesi gelmiþ miktar';
 
 /* 2003-10-19 DHC Echoes from show_final_bill.php */
-$TXT['DiscountonTotalAmount']='Toplam miktar Ã¼zerinden indirim (%)';
-$TXT['AmountAfterDiscount']='Ä°ndirim sonrasÄ± miktar';
-$TXT['AmountPreviouslyReceived']='Ã–nceden alÄ±nmÄ±ÅŸ miktar';
-$TXT['AmountDue']='Vadesi gelmiÅŸ miktar';
-$TXT['CurrentPaidAmount']='Åžu anda Ã¶denen miktar';
+$TXT['DiscountonTotalAmount']='Toplam miktar üzerinden indirim (%)';
+$TXT['AmountAfterDiscount']='Ýndirim sonrasý miktar';
+$TXT['AmountPreviouslyReceived']='Önceden alýnmýþ miktar';
+$TXT['AmountDue']='Vadesi gelmiþ miktar';
+$TXT['CurrentPaidAmount']='Þu anda ödenen miktar';
 
 /* 2003-10-19 DHC Echoes from show_final_bill.php */
-/*tercÃ¼me eden Dr. BÃ¼lent Potur bpotur@yahoo.com */
-$TXT['Payments']='Ã–demeler';
-$TXT['ReceiptNumber']='Makbuz numarasÄ±';
+/*tercüme eden Dr. Bülent Potur bpotur@yahoo.com */
+$TXT['Payments']='Ödemeler';
+$TXT['ReceiptNumber']='Makbuz numarasý';
 $TXT['ReceiptDateTime']='Makbuz tarih ve saati';
-$TXT['MakeaNewPayment']='Yeni bir Ã¶deme yapma';
+$TXT['MakeaNewPayment']='Yeni bir ödeme yapma';
 
 /* 2003-10-25 DHC Echoes from patient_payment.php */
-$TXT['BillPayment']='Fatura Ã¶demesi';
+$TXT['BillPayment']='Fatura ödemesi';
 $TXT['alertEnterNumericValueforCashAmount']='Nakit miktar rakamla giriniz';
-$TXT['alertEnterNumericValueforCreditCardNo']='Kredi kartÄ± numarasÄ±nÄ± giriniz';
-$TXT['alertEnterNumericValueforCreditCardAmount']='Kredi kartÄ±ndan Ã§ekilecek miktarÄ± giriniz';
-$TXT['alertEnterNumericValueforChequeNo']='Ã‡ek numarasÄ±nÄ± giriniz';
-$TXT['alertEnterNumericValueforChequeAmount']='Ã‡ek tutarÄ±nÄ± giriniz';
-$TXT['alertPleaseSelectatleastOneModeofPayment']='LÃ¼tfen en az bir Ã§eÅŸit Ã¶deme ÅŸekli seÃ§iniz';
+$TXT['alertEnterNumericValueforCreditCardNo']='Kredi kartý numarasýný giriniz';
+$TXT['alertEnterNumericValueforCreditCardAmount']='Kredi kartýndan çekilecek miktarý giriniz';
+$TXT['alertEnterNumericValueforChequeNo']='Çek numarasýný giriniz';
+$TXT['alertEnterNumericValueforChequeAmount']='Çek tutarýný giriniz';
+$TXT['alertPleaseSelectatleastOneModeofPayment']='Lütfen en az bir çeþit ödeme þekli seçiniz';
 $TXT['PaymentReceipt']='Makbuz';
-$TXT['PaymentInformation']='Ã–deme bilgisi';
-$TXT['SelecttheModeofCurrentPayment']='Åžu anki Ã¶deme biÃ§imini seÃ§iniz';
+$TXT['PaymentInformation']='Ödeme bilgisi';
+$TXT['SelecttheModeofCurrentPayment']='Þu anki ödeme biçimini seçiniz';
 $TXT['Cash']='Nakit';
 $TXT['Amount']='Miktar';
-$TXT['Check']='Ã‡ek';
-$TXT['CreditCard']='Kredi kartÄ±';
-$TXT['CardNumber']='Kart numarasÄ±';
-$TXT['CCType']='Kredi kartÄ± tipi';
-$TXT['CheckNumber']='Ã‡ek numarasÄ±';
+$TXT['Check']='Çek';
+$TXT['CreditCard']='Kredi kartý';
+$TXT['CardNumber']='Kart numarasý';
+$TXT['CCType']='Kredi kartý tipi';
+$TXT['CheckNumber']='Çek numarasý';
 
 /* 2003-10-25 DHC Echoes from showpayment.php */
-$TXT['ModeofPayment']='Ã–deme ÅŸekli';
-$TXT['PaymentDate']='Ã–deme tarihi';
+$TXT['ModeofPayment']='Ödeme þekli';
+$TXT['PaymentDate']='Ödeme tarihi';
 
 /* 2003-11-30 DHC Echoes from edit_hospital_services.php */
-$TXT['EditLaboratoryTests']='Laboratuvar tetkiklerini dÃ¼zenle';
-$TXT['EditHospitalServices']='Hastane hizmetlerini dÃ¼zenle';
-$TXT['EditLaboratoryTestItems']='Laboratuvar tetkik kalemlerini dÃ¼zenle';
-$TXT['EditHospitalServiceItems']='Hastane hizmet kalemlerini dÃ¼zenle';
+$TXT['EditLaboratoryTests']='Laboratuvar tetkiklerini düzenle';
+$TXT['EditHospitalServices']='Hastane hizmetlerini düzenle';
+$TXT['EditLaboratoryTestItems']='Laboratuvar tetkik kalemlerini düzenle';
+$TXT['EditHospitalServiceItems']='Hastane hizmet kalemlerini düzenle';
 
 # 2003-10-14 NDHC eComBill Search.php
-$LDPatientName='Hasta adÄ±';
+$LDPatientName='Hasta adý';
 $LDeComBill='elektronik fatura';
 $LDSearch='Ara';
 
 # 2003-10-20 NDHC this line doesn't work because it's inside an "alt=".  eComBill Search.php
-$LDBillthisPatient='Bu hastanÄ±n faturasÄ±nÄ± kes';
+$LDBillthisPatient='Bu hastanýn faturasýný kes';
 
 # 2003-10-25 NDHC eComBill confirmpayment.php
-$LDBillPayment='Ã–deme';
-$LDPaymentPreview='Ã–deme Ã¶n izleme';
+$LDBillPayment='Ödeme';
+$LDPaymentPreview='Ödeme ön izleme';
 $LDGeneralInfo='Genel bilgiler';
-$LDPatientName='HastanÄ±n adÄ±';
-$LDReceiptNumber='Makbuz numarasÄ±';
-$LDPatientAddress='HastanÄ±n adresi';
+$LDPatientName='Hastanýn adý';
+$LDReceiptNumber='Makbuz numarasý';
+$LDPatientAddress='Hastanýn adresi';
 $LDBillDate='Fatura tarihi';
 $LDPatientType='Hasta tipi';
-$LDDateofBirth='DoÄŸum tarihi';
+$LDDateofBirth='Doðum tarihi';
 $LDSex='Cinsiyeti';
-$LDPatientNumber='Vizit numarasÄ±';
+$LDPatientNumber='Vizit numarasý';
 $LDDateofAdmission='Kabul tarihi';
-$LDPaymentInformation='Ã–deme bilgisi';
-$LDModeofPayment='Ã–deme ÅŸekli';
+$LDPaymentInformation='Ödeme bilgisi';
+$LDModeofPayment='Ödeme þekli';
 $LDCash='Nakit';
 $LDAmount='Miktar';
-$LDCreditCard='Kredi kartÄ±';
-$LDCheck='Ã‡ek';
-$LDCheckNumber='Ã‡ek numarasÄ±';
-$LDCardNumber='Kart numarasÄ±';
+$LDCreditCard='Kredi kartý';
+$LDCheck='Çek';
+$LDCheckNumber='Çek numarasý';
+$LDCardNumber='Kart numarasý';
 ?>

@@ -1,17 +1,17 @@
 <?php
-$LDMainTitle='CARE 2X Entegre Hastane BiliÅŸim Sistemi';
+$LDMainTitle='CARE 2X Entegre Hastane Bilişim Sistemi';
 
 /*$LDMainTitle='Marienhospital a virtual Integrated Hospital Information System in Internet';
 */
-$LDInviteAskMe='Sorgunuzu giriniz, Ã¶rneÄŸin "3 Nisaiye nin telefon numarasÄ± nedir?"';
-$LDTipsLink='Ä°p uÃ§larÄ±:';
-$LDTipsAskMe='Benzerlerini deneyiniz, Ã¶rneÄŸin "koÄŸuÅŸ" yerine "servis" yazÄ±nÄ±z.';
-$LDTipsImgAlt='En iyi sonuÃ§larÄ±n nasÄ±l alÄ±ndÄ±ÄŸÄ± konusundaki ip uÃ§larÄ± iÃ§in burayÄ± tÄ±klayÄ±nÄ±z.';
-$LDSubmitBut='Sorguyu gÃ¶nder';
+$LDInviteAskMe='Sorgunuzu giriniz, örneğin "3 Nisaiye nin telefon numarası nedir?"';
+$LDTipsLink='İp uçları:';
+$LDTipsAskMe='Benzerlerini deneyiniz, örneğin "koğuş" yerine "servis" yazınız.';
+$LDTipsImgAlt='En iyi sonuçların nasıl alındığı konusundaki ip uçları için burayı tıklayınız.';
+$LDSubmitBut='Sorguyu gönder';
 
-$LDQuickInfo='Ã–nemli Bilgiler';
+$LDQuickInfo='Önemli Bilgiler';
 $LDPhonePolice='Polis';
-$LDPhoneFire='Ä°tfaiye';
+$LDPhoneFire='İtfaiye';
 $LDAmbulance='Acil';
 $LDPhone='(Hastane) Telefonu';
 $LDFax='Faks';
@@ -19,44 +19,44 @@ $LDAddress='Adres';
 $LDEmail='Eposta';
 
 $LDOpenTimes ='Kabul Saatleri';
-$LDManagement ='YÃ¶netim';
-$LDDept ='BÃ¶lÃ¼mler';
+$LDManagement ='Yönetim';
+$LDDept ='Bölümler';
 $LDCafenews ='Kafeterya Haberleri';
 $LDAdmission ='Hasta Kabul';
 $LDExhibition ='Sergiler';
-$LDEducation ='EÄŸitim';
-$LDAdvStudies ='AraÅŸtÄ±rmalar';
+$LDEducation ='Eğitim';
+$LDAdvStudies ='Araştırmalar';
 $LDPhyTherapy ='Fizik Tedavi';
-$LDHealthTips ='SaÄŸlÄ±k bilgileri';
+$LDHealthTips ='Sağlık bilgileri';
 $LDCalendar ='Takvim';
-$LDHelp='YardÄ±m';
-$LDMore='yazÄ±nÄ±n devamÄ±';
+$LDHelp='Yardım';
+$LDMore='yazının devamı';
 
-$LDEditTitle='ManÅŸet';
-$LDNewsDummy=array(1=>'ilk',2=>'ikinci',3=>'Ã¼Ã§Ã¼ncÃ¼',4=>'dÃ¶rdÃ¼ncÃ¼');
+$LDEditTitle='Manşet';
+$LDNewsDummy=array(1=>'ilk',2=>'ikinci',3=>'üçüncü',4=>'dördüncü');
 
-$LDNoFrame='Bu sitedeki sayfalarÄ±n normal Ã§alÄ±ÅŸmasÄ± iÃ§im Ã§erÃ§eveler gerekmektedir. LÃ¼tfen uygun bir tarayÄ±cÄ± kullanÄ±nÄ±z. LÃ¼tfen Javascript i etkinleÅŸtiriniz. ve 
-						Ã§erezleri otomatik olarak kabul etme Ã¶zelliÄŸini aÃ§Ä±nÄ±z';
-						
-$LDClk2Write='Haber gÃ¶ndermek iÃ§in tÄ±klayÄ±nÄ±z';
+$LDNoFrame='Bu sitedeki sayfaların normal çalışması içim çerçeveler gerekmektedir. Lütfen uygun bir tarayıcı kullanınız. Lütfen Javascript i etkinleştiriniz. ve 
+						çerezleri otomatik olarak kabul etme özelliğini açınız';
 
-$LDAlertOldBrowser='TarayÄ±cÄ±nÄ±zÄ±n  versiyonu 5.0 dan daha eski!<br> 5.0 versiyonu veya daha yenilerini Ã¶neriyoruz. <br> Daha eski versiyonlar programda 
-								iÅŸlevsel bozukluklara yol aÃ§abilir';
-$LDAlertNoCookie='Siz ya da tarayÄ±cÄ±nÄ±z Ã§erez(ler)i reddetmiÅŸ olabilirsiniz.<br>Bu program onlara baÄŸÄ±mlÄ±. Yoksa program gereÄŸi gibi Ã§alÄ±ÅŸmaz							<br>LÃ¼tfen tarayÄ±cÄ±nÄ±zÄ±n ayarlarÄ±nÄ± Ã§erezleri otomatik kabul edecek ÅŸekilde dÃ¼zeltiniz.<br>';
-$LDClkAfter='Sonra burayÄ± tÄ±klayÄ±nÄ±z.';
-$LDGoAheadEgal='ProgramÄ± baÅŸlatmak iÃ§in burayÄ± tÄ±klatÄ±nÄ±z.';
-$LDGoAheadEgalCookie='Ã‡erezleri kabul etmek istemiyorum. Yine de programÄ± baÅŸlatÄ±n.';
-$LDCookieRef='Ã‡erezler hakkÄ±nda daha fazla bilgi edinmek isterseniz ÅŸu belgeleri okuyabilirsiniz:<br>
+$LDClk2Write='Haber göndermek için tıklayınız';
+
+$LDAlertOldBrowser='Tarayıcınızın  versiyonu 5.0 dan daha eski!<br> 5.0 versiyonu veya daha yenilerini öneriyoruz. <br> Daha eski versiyonlar programda 
+								işlevsel bozukluklara yol açabilir';
+$LDAlertNoCookie='Siz ya da tarayıcınız çerez(ler)i reddetmiş olabilirsiniz.<br>Bu program onlara bağımlı. Yoksa program gereği gibi çalışmaz							<br>Lütfen tarayıcınızın ayarlarını çerezleri otomatik kabul edecek şekilde düzeltiniz.<br>';
+$LDClkAfter='Sonra burayı tıklayınız.';
+$LDGoAheadEgal='Programı başlatmak için burayı tıklatınız.';
+$LDGoAheadEgalCookie='Çerezleri kabul etmek istemiyorum. Yine de programı başlatın.';
+$LDCookieRef='Çerezler hakkında daha fazla bilgi edinmek isterseniz şu belgeleri okuyabilirsiniz:<br>
 						<a href=\'http://www.dtp-aus.com/cookies.htm\' target=\'pp\'>A few words about Cookies (Security and the lies)</a><br>
 						<a href=\'http://www.cookiecentral.com/content.phtml?area=4&id=10\' target=\'pp\'>Cookies and Privacy FAQ</a><br>';
-$LDPrivPolicy='Gizlilik politikamÄ±zÄ± okumak isterseniz lÃ¼tfen  <a href=\'language/tr/tr_privacy.htm\' target=\'pp\'>burayÄ± tÄ±klayÄ±nÄ±z:</a>';
-$LDOurPrivPolicy='Gizlilik PolitikamÄ±z';
-$LDSubmitNews='Haber GÃ¶nderiniz';
-$LDEditNews='Online editÃ¶r ile haber gÃ¶nderiniz ya da dÃ¼zeltiniz';
+$LDPrivPolicy='Gizlilik politikamızı okumak isterseniz lütfen  <a href=\'language/tr/tr_privacy.htm\' target=\'pp\'>burayı tıklayınız:</a>';
+$LDOurPrivPolicy='Gizlilik Politikamız';
+$LDSubmitNews='Haber Gönderiniz';
+$LDEditNews='Online editör ile haber gönderiniz ya da düzeltiniz';
 /* 2002-10-17 EL */
-$LDCredits='Programda emeÄŸi geÃ§enler';
+$LDCredits='Programda emeği geçenler';
 /* 2003-05-24 EL */
 $LDPublicItems='Genel konular';
 # 2003-08-28 EL
-$LDHeadline='Care2x Hastanesi';
+$LDHeadline='Başlık';
 ?>

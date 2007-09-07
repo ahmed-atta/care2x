@@ -1,14 +1,14 @@
 <?php
 //error_reporting(E_ALL);
-$LDInitFindings='Ä°lk bulgular';
-$LDCurrentFindings='GÃ¼ncel bulgular';
+$LDInitFindings='Ýlk bulgular';
+$LDCurrentFindings='Güncel bulgular';
 $LDFinalFindings='Son bulgu';
 
-$LDFillLabOnly='Sadece laboratuvarda kullanÄ±lacak';
-$LDLEN='Lab.No';  /* LEN =  Lab giriÅŸ no */
+$LDFillLabOnly='Sadece laboratuvarda kullanýlacak';
+$LDLEN='Lab.No';  /* LEN =  Lab giriþ no */
 
 $LDDate='Tarih';
-$LDEye='GÃ¶z';
+$LDEye='Göz';
 $LDBac_1='Bact.1'; /* Note: Bact. means bacteria or pathogen */
 $LDBac_2='Bact.2';
 $LDBac_3='Bact.3';
@@ -18,7 +18,7 @@ $LDBac_III='Patho.III';
 $LDFungi='Mantar';
 $LDResistanceTestAnaerob='Resistans testi Anaerob';				
 $LDResistanceTestAerob='Resistans testi Aerob';
-$LDTestFindings='Test sonuÃ§larÄ± / Bulgular';
+$LDTestFindings='Test sonuçlarý / Bulgular';
 $LDMarkStreptocResistance='mark by streptococcus resistance';
 $LDBlockerNeg='Blocker negative';
 $LDBlockerPos='Blocker positive';
@@ -210,7 +210,7 @@ $lab_TestType = array('_lab_culture_aerob_' => 'C.aer.',
 								 '_lab_bbl_1_' => 'BBL 1',
 								 '_lab_api_1_' => 'API 1',
 								 '_lab_api_anaerob_1_' => 'API aner.1',
-								 '_lab_gram_dye_1_' => 'GramfÃ¤rb.1',
+								 '_lab_gram_dye_1_' => 'Gramfärb.1',
 								 
 								 '_lab_streptex_2_' => 'Streptex 2',
 								 '_lab_plasma_coag_2_' => 'Plasmakoag.2',
@@ -221,7 +221,7 @@ $lab_TestType = array('_lab_culture_aerob_' => 'C.aer.',
 								 '_lab_bbl_2_' => 'BBL 2',
 								 '_lab_api_2_' => 'API 2',
 								 '_lab_api_anaerob_2_' => 'API aner.2',
-								 '_lab_gram_dye_2_' => 'GramfÃ¤rb.2',
+								 '_lab_gram_dye_2_' => 'Gramfärb.2',
 								 
 								 
 								 '_lab_streptex_3_' => 'Streptex 3',
@@ -233,14 +233,14 @@ $lab_TestType = array('_lab_culture_aerob_' => 'C.aer.',
 								 '_lab_bbl_3_' => 'BBL 3',
 								 '_lab_api_3_' => 'API 3',
 								 '_lab_api_anaerob_3_' => 'API aner.3',
-								 '_lab_gram_dye_3_' => 'GramfÃ¤rb.3'
+								 '_lab_gram_dye_3_' => 'Gramfärb.3'
 								 );*/
 $lab_ResistANaerobAcro=array('PEN','AMO','AMC','MZL','PIC','IMI','CTX','CMP','TET','CLI','MTR','ERY','TEC','VAN','');
 									
 $lab_ResistAerobAcro=array('P','AMX','AMC','CC','MZ','PIP','GM','AN','CZ',
                                            'CXM','CRO','MER','OFX','SXT','U','AZ',
 										   'VA','NN','IPM','CTX','CAZ','FEP','TEC',
-										   'FF','25','E','OX','CIP','CFS','30','31','ÃŸLac.');
+										   'FF','25','E','OX','CIP','CFS','30','31','ßLac.');
 										   
 $lab_ResistAerobExtra=array('AB','MIC','NY','AC','KET','6','','',
                                             'C','NE','GM','D','OFX','K','','',
@@ -250,8 +250,8 @@ $lab_ResistAerobExtra=array('AB','MIC','NY','AC','KET','6','','',
 									  
 $lab_TestResultId_1=array('Staph.aureus', 'E.coli', 'enterob.aerogenes',
                                      'Staph.epiderm', 'E.coli hem.', 'Morganel.morganii',
-									 'Streptokokk.', 'E.coli muc.', 'HÃ¤mophilus spezies',
-									 'hÃ¤m.Streptok.', 'Proteus', 'Salmonella',
+									 'Streptokokk.', 'E.coli muc.', 'Hämophilus spezies',
+									 'häm.Streptok.', 'Proteus', 'Salmonella',
 									 'verg.Streptok.', 'Proteus indol pos.', 'Shigella',
 									 'Group A', 'Proteus indol neg.', 'aerob.Spore',
 									 'Group B', 'Pseudomonas', 'apath.Coryne',
@@ -267,9 +267,9 @@ $lab_TestResultId_1=array('Staph.aureus', 'E.coli', 'enterob.aerogenes',
 									 'Acinetob. Baumannii', 'Serrat.liquefac.', 'Stentrop.maltophl.');
 
 /*$lab_TestResultId_1=array('Staph.aureus', 'E.coli', 'enterobac aerogenes',
-                                     'Staph.epiderm', 'E.coli hÃ¤m.', 'Morganella morganii',
-									 'Streptokokk.', 'E. coli muc.', 'HÃ¤mophilus spezies',
-									 'hÃ¤m.Streptok.', 'Proteus', 'Salmonella',
+                                     'Staph.epiderm', 'E.coli häm.', 'Morganella morganii',
+									 'Streptokokk.', 'E. coli muc.', 'Hämophilus spezies',
+									 'häm.Streptok.', 'Proteus', 'Salmonella',
 									 'verg.Streptok.', 'Proteus indol pos.', 'Shigella',
 									 'Group A', 'Proteus indol neg.', 'aerobe Sporenbildner',
 									 'Group B', 'Pseudomonas', 'apath.Coryne',
@@ -285,10 +285,10 @@ $lab_TestResultId_1=array('Staph.aureus', 'E.coli', 'enterob.aerogenes',
 									 'Acinetobacter Baumannii', 'Serratia liquefaciens', 'Stenotrophomonas maltophilia');
 									 
 */									 
-$lab_TestResultId_2 = array(' 48 saat sonrasÄ± Ã¼reme yok', 'Aerobe benzeri Ã¼reme', 'Gaitada amip menfi',
-                                           '5 gÃ¼n sonrasÄ± Ã¼reme yok', '', 'Gaitada giardia negatif',
-										   '9 gÃ¼n sonrasÄ± Ã¼reme yok', 'Gram.neg.Diplococci gÃ¶rÃ¼lmedi.', 'Gaitada parazit gÃ¶rÃ¼lmedi.',
-										   'No Bact. of TPE-Group', 'GO-culture negative', 'E.Coli Ã¼remedi',
+$lab_TestResultId_2 = array(' 48 saat sonrasý üreme yok', 'Aerobe benzeri üreme', 'Gaitada amip menfi',
+                                           '5 gün sonrasý üreme yok', '', 'Gaitada giardia negatif',
+										   '9 gün sonrasý üreme yok', 'Gram.neg.Diplococci görülmedi.', 'Gaitada parazit görülmedi.',
+										   'No Bact. of TPE-Group', 'GO-culture negative', 'E.Coli üremedi',
 										   'Campylobacter.culture neg.', '', 'Liquorantigen negative',
 										   'NoG. Campylobacter.pylori', 'NoEvid.microscp.acid.Cylind.', 'EHEC negative',
 										   'Dyspepsy.Coli serolg.NoEvid', 'No growth after 7 days', '',

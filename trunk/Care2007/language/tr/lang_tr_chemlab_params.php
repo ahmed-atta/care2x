@@ -3,7 +3,7 @@
 * This are the chemical lab test groups and parameters. If you are not sure of their exact translation please leave it in the original form
 */
 $top_param=array(
-	'00q'=>'Ã‡abuk',
+	'00q'=>'Çabuk',
 	'00ptt'=>'PTT',
 	'00hb'=>'Hb',
 	'00hc'=>'Hct',
@@ -13,7 +13,7 @@ $top_param=array(
 	'00ca'=>'Kalsiyum',
 	'00na'=>'Sodyum',
 	'00k'=>'Potasyum',
-	'00sug'=>'Kan ÅŸekeri');
+	'00sug'=>'Kan þekeri');
 
 // Klinische Chemie parameter
 $klinichemie_list0=array(	
@@ -36,13 +36,13 @@ $klinichemie_list0=array(
 	'0gldh'=>'GLDH',
 	'0got'=>'GOT',
 	'0gpt'=>'GPT',
-	'0ucid'=>'Ãœrik asit',
-	'0urea'=>'Ãœre',
+	'0ucid'=>'Ürik asit',
+	'0urea'=>'Üre',
 	'0hbdh'=>'HBDH',
 	'0hdlc'=>'HDL Chol',
 	'0pot'=>'Potasyum',
 	'0cre'=>'Kreatinin',
-	'0co'=>'BakÄ±r',
+	'0co'=>'Bakýr',
 	'0lac'=>'Laktat i.P.',
 	'0ldh'=>'LDH',
 	'0ldlc'=>'LDL Chol',
@@ -53,7 +53,7 @@ $klinichemie_list0=array(
 	'0na'=>'Sodyum',
 	'0osm'=>'Osmolal.',
 	'0pho'=>'Fosfor',
-	'0glo'=>'Kan ÅŸekeri',
+	'0glo'=>'Kan þekeri',
 	'0tri'=>'Tri',
 	'0tro'=>'Troponin T' );
 
@@ -62,13 +62,13 @@ $liquor_list1=array(
 	'1stat'=>'BOS durumu',
 	'1elp'=>'BOS elelekteforez',
 	'1oli'=>'Oligoklonal IgG',
-	'1sch'=>'Reiber ÅžemasÄ±',
+	'1sch'=>'Reiber Þemasý',
 	'1a1'=>'A1');
 
 // Gerinnung parameter
 $gerinnung_list2=array(
 	'2fiby'=>'Fibrinoliz',
-	'2q'=>'Ã‡abuk',
+	'2q'=>'Çabuk',
 	'2ptt'=>'PTT',
 	'2ptz'=>'PTZ',
 	'2fibg'=>'Fibrinojen',
@@ -76,16 +76,16 @@ $gerinnung_list2=array(
 	'2fsp'=>'FSP dimer',
 	'2coag'=>'Thr.Koag.',
 	'2at3'=>'AT III',
-	'2f8'=>'FaktÃ¶r VII',
-	'2apc'=>'APC RezistansÄ±',
+	'2f8'=>'Faktör VII',
+	'2apc'=>'APC Rezistansý',
 	'2prc'=>'Protein C',
 	'2prs'=>'Protein S',
-	'2bt'=>'Kanama zamanÄ±');
+	'2bt'=>'Kanama zamaný');
 
 //Hematology parameter
 $haematologie_list3=array(
-	'3ret'=>'RetikÃ¼lositler',
-	'3mal'=>'SÄ±tma',
+	'3ret'=>'Retikülositler',
+	'3mal'=>'Sýtma',
 	'3hbe'=>'Hb Elelektroforez',
 	'3hla'=>'HLA B 27',
 	'3tab'=>'Antitrombosit AK',
@@ -93,25 +93,25 @@ $haematologie_list3=array(
 
 // Blutzucker parameter
 $blutzucker_list4=array(
-	'4bsf'=>'AÃ§lÄ±k kan ÅŸekeri',
-	'4bs9'=>'9:00 kan ÅŸekeri',
-	'4bsp'=>'Tokluk kan ÅŸekeri',
+	'4bsf'=>'Açlýk kan þekeri',
+	'4bs9'=>'9:00 kan þekeri',
+	'4bsp'=>'Tokluk kan þekeri',
 	'4bs15'=>'Bl15:00',
-	'4bs1'=>'Kan ÅŸekeri 1',
-	'4bs2'=>'Kan ÅŸekeri 2',
-	'4glo'=>'Glukoz yÃ¼kleme.',
-	'4lac'=>'Laktoz yÃ¼kleme',
+	'4bs1'=>'Kan þekeri 1',
+	'4bs2'=>'Kan þekeri 2',
+	'4glo'=>'Glukoz yükleme.',
+	'4lac'=>'Laktoz yükleme',
 	'4hba'=>'HB A1c',
 	'4fru'=>'Fruktozamin');
 
-// SÃ¤ugling parameter
+// Säugling parameter
 $saeugling_list5=array(
-	'5bil'=>'YenidoÄŸan bilirubini',
+	'5bil'=>'Yenidoðan bilirubini',
 	'5bilc'=>'Kordon bilirubini',
 	'5bild'=>'Direkt bilirubin ',
-	'5glo1'=>'YenidoÄŸan kanÄ± 1',
-	'5glo2'=>'YenidoÄŸan kanÄ± 2',
-	'5ret'=>'RetikÃ¼lositler',
+	'5glo1'=>'Yenidoðan kaný 1',
+	'5glo2'=>'Yenidoðan kaný 2',
+	'5ret'=>'Retikülositler',
 	'5b1'=>'B1');
 
 // Proteine parameter
@@ -119,20 +119,20 @@ $proteine_list6=array(
 	'6tot'=>'Total proteinler',
 	'6alb'=>'Albumin',
 	'6elp'=>'Elektroforez',
-	'6imm'=>'Ä°mmÃ¼n fiksayon',
+	'6imm'=>'Ýmmün fiksayon',
 	'6b2'=>'Beta2 Mikroglobulin.i.S',
-	'6img'=>'ImmÃ¼n globulin kant.',
+	'6img'=>'Immün globulin kant.',
 	'6ige'=>'IgE',
 	'6hap'=>'Haptoglobin',
 	'6tra'=>'Transferrin',
 	'6fer'=>'Ferritin',
-	'6coe'=>'SerÃ¼loplazmin',
+	'6coe'=>'Serüloplazmin',
 	'6alp'=>'Alfa 1 Antitripsin',
 	'6afp'=>'AFP Gebe.',
 	'6ssw'=>'Gebelik:',
 	'6mic'=>'Alfa 1 Mikroglobulin');
 
-// SchilddrÃ¼se parameter
+// Schilddrüse parameter
 $schilddruse_list7=array(
 	'7t3'=>'T3',
 	'7t4'=>'Tiroksin/T4',
@@ -142,7 +142,7 @@ $schilddruse_list7=array(
 	'7mab'=>'MAK',
 	'7trab'=>'TRAK',
 	'7glob'=>'Tireoglobulin',
-	'7thx'=>'TiroksinbaÄŸl.Glob.',
+	'7thx'=>'Tiroksinbaðl.Glob.',
 	'7ft3'=>'serbest T3',
 	'7ft4'=>'serbest T4');
 
@@ -152,15 +152,15 @@ $hormone_list8=array(
 	'8ald'=>'Aldosteron',
 	'8cal'=>'Kalsitonin',
 	'8cor'=>'Kortizol',
-	'8dcor'=>'Kortizol gÃ¼n',
+	'8dcor'=>'Kortizol gün',
 	'8fsh'=>'FSH',
 	'8gas'=>'Gastrin',
 	'8hcg'=>'HCG',
-	'8ins'=>'Ä°nsulin',
+	'8ins'=>'Ýnsulin',
 	'8cat'=>'Katekolam.i.P.',
 	'8lh'=>'LH',
-	'8osd'=>'Ã–stradiol',
-	'8osd'=>'Ã–striol',
+	'8osd'=>'Östradiol',
+	'8osd'=>'Östriol',
 	'8ssw'=>'SSW:',
 	'8par'=>'Parat hormon',
 	'8prg'=>'Progesteron',
@@ -256,7 +256,7 @@ $infektion_list14=array(
 	'14lep'=>'Leptospiria AK',
 	'14lis'=>'Listeria AK',
 	'14mas'=>'Masern AK',
-	'14mon'=>'MononÃ¼kleoz',
+	'14mon'=>'Mononükleoz',
 	'14mum'=>'Kabakulak AK',
 	'14myc'=>'Mycoplas.pneum AK',
 	'14neu'=>'Neutrop Virus AK',
@@ -264,8 +264,8 @@ $infektion_list14=array(
 	'14pi3'=>'Parainfluenza III AK',
 	'14pic'=>'Picorna Virus AK',
 	'14vric'=>'Rickettsia AK',
-	'14rot'=>'RÃ¶teln AK',
-	'14roi'=>'RÃ¶teln Immune status',
+	'14rot'=>'Röteln AK',
+	'14roi'=>'Röteln Immune status',
 	'14rsv'=>'RS Virus AK',
 	'14shi'=>'Shigella/Salm AK',
 	'14tox'=>'Toxoplasma AK',
@@ -310,7 +310,7 @@ $muttersch_list16=array(
 	'16chl'=>'Chlamyd.cult./SSW',
 	'16ssw'=>'SSW:',
 	'16dow'=>'Down Tarama',
-	'16stb'=>'Strep B Ã§abuk test',
+	'16stb'=>'Strep B çabuk test',
 	'16tpha'=>'TPHA',
 	'16hbs'=>'HBs Ag',
 	'16hiv'=>'HIV1/HIV2 AV' );
@@ -322,45 +322,45 @@ $stuhl_list17=array(
 	'17ob2'=>'Gizli kan 2',
 	'17ob3'=>'Gizli kan 3');
 
-// RaritÃ¤ten
+// Raritäten
 $raritaeten_list18=array(
 	'18rh'=>'Yetersiz H.',
 	'18re'=>'Yetersiz E.',
 	'18rs'=>'Yetersiz S.',
-	'18uri'=>'Ä°drar nadir',
+	'18uri'=>'Ýdrar nadir',
 	'18f1'=>'F1',
 	'18f2'=>'F2',
 	'18f3'=>'F3');
 
 // Urin / Spontanurin
 $urin_list19=array(
-	'19amy'=>'Ä°drar amilazÄ±',
-	'19sug'=>'Ä°drar ÅŸekeri',
+	'19amy'=>'Ýdrar amilazý',
+	'19sug'=>'Ýdrar þekeri',
 	'19pro'=>'idrarda protein',
 	'19alb'=>'idrarda albumin',
 	'19osm'=>'idrar Osmol.',
 	'19pre'=>'Gebelik testi.',
-	'19cym'=>'Ä°drarda Cytomeg.',
-	'19cyt'=>'Ä°drar sitolojisi',
+	'19cym'=>'Ýdrarda Cytomeg.',
+	'19cyt'=>'Ýdrar sitolojisi',
 	'19bj'=>'Bence Jones',
-	'19elp'=>'Ä°drar elektroforez',
-	'19bm2'=>'Ä°drarda Beta2 mikroglobulin');
+	'19elp'=>'Ýdrar elektroforez',
+	'19bm2'=>'Ýdrarda Beta2 mikroglobulin');
 
 // Sammelurin
 $sammelurin_list20=array(
-	'20adc'=>'Addis SayÄ±mÄ±',
-	'20na'=>'Ä°drarda Sodyum ',
-	'20k'=>'Ä°drarda Potass. ',
-	'20ca'=>'Ä°drarda Calcium',
-	'20pho'=>'Ä°drarda Fosfor.',
-	'20ura'=>'Ä°drarda Ãœrik asit ',
-	'20cre'=>'Ä°drarda Kreatinin ',
-	'20por'=>'Ä°drarda Porfirin',
-	'20cor'=>'Ä°drarda Kortizol ',
-	'20hyd'=>'Ä°drarda Hidroksiprolin',
-	'20cat'=>'Ä°drarda Katekolaminler',
+	'20adc'=>'Addis Sayýmý',
+	'20na'=>'Ýdrarda Sodyum ',
+	'20k'=>'Ýdrarda Potass. ',
+	'20ca'=>'Ýdrarda Calcium',
+	'20pho'=>'Ýdrarda Fosfor.',
+	'20ura'=>'Ýdrarda Ürik asit ',
+	'20cre'=>'Ýdrarda Kreatinin ',
+	'20por'=>'Ýdrarda Porfirin',
+	'20cor'=>'Ýdrarda Kortizol ',
+	'20hyd'=>'Ýdrarda Hidroksiprolin',
+	'20cat'=>'Ýdrarda Katekolaminler',
 	'20pan'=>'Pankreol.',
-	'20gam'=>'Ä°drarda Gamma Aminolabulin');
+	'20gam'=>'Ýdrarda Gamma Aminolabulin');
 
 // Sonstiges
 $sonstiges_list21=array(
@@ -368,9 +368,9 @@ $sonstiges_list21=array(
 	'21cdt'=>'CDT',
 	'21vb12'=>'Vitamin B12',
 	'21fol'=>'Folik asit',
-	'21inab'=>'Ä°nsulin AK',
-	'21iab'=>'Ä°ntrinsic AK',
-	'21sto'=>'TaÅŸ analizi',
+	'21inab'=>'Ýnsulin AK',
+	'21iab'=>'Ýntrinsic AK',
+	'21sto'=>'Taþ analizi',
 	'21ace'=>'ACE',
 	'21g1'=>'G1',
 	'21g2'=>'G2',

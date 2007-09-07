@@ -1,11 +1,11 @@
 <?php
 #2003-10-02 EL
-$LDSearchFound='Arama sonunda ilgili  <font color=red><b>~nr~</b></font> kayÄ±t bulundu.';
-$LDShowing='GÃ¶steriliyor';
+$LDSearchFound='Arama sonunda ilgili  <font color=red><b>~nr~</b></font> kayýt bulundu.';
+$LDShowing='Gösteriliyor';
 $LDTo='e kadar';
 $LDSex='Cinsiyet';
-$LDSelect='SeÃ§';
+$LDSelect='Seç';
 $LDZipCode='Posta kodu';
-$LDPlsSearchDoctor='LÃ¼tfen Ã¶nce doktoru arayÄ±nÄ±z.';
-$LDPlsSearchNurse='LÃ¼tfen Ã¶nce hemÅŸireyi arayÄ±nÄ±z.';
+$LDPlsSearchDoctor='Lütfen önce doktoru arayýnýz.';
+$LDPlsSearchNurse='Lütfen önce hemþireyi arayýnýz.';
 ?>

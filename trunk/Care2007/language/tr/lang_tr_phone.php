@@ -5,95 +5,95 @@ $fieldname=array(
 							"Telefon 1",
 							"Telefon 2",
 							"Telefon 3",
-							"Ã‡aÄŸrÄ± 1",
-							"Ã‡aÄŸrÄ± 2",
-							"Ã–zel 1",
-							"Ã–zel 2"
+							"Çaðrý 1",
+							"Çaðrý 2",
+							"Özel 1",
+							"Özel 2"
 							);
 							
 $LDPhoneDir="Telefon rehberi";
 $LDSearch="Arama";
 $LDDir="Rehber";
-$LDNewData="Yeni kayÄ±t";
+$LDNewData="Yeni kayýt";
 $LDSEARCH="ARAMA";
 
 /**************** note the " ~nr~ " must not be erased it will be replaced by the script with the number of search results ******/
-$LDPhoneFound="Arama sonucu ilgili <font color=red><b> ~nr~ </b></font> kayÄ±t bulundu.";
+$LDPhoneFound="Arama sonucu ilgili <font color=red><b> ~nr~ </b></font> kayýt bulundu.";
 
-$LDKeywordPrompt="Aranacak anahtar sÃ¶zcÃ¼ÄŸÃ¼ giriniz. Ã–rneÄŸin: Bir isim, veya bir bÃ¶lÃ¼m, veya kÄ±sa bir form, vs.";
-$LDShowDir="TÃ¼m rehberi gÃ¶ster";
-$LDNewEntry="Yeni telefon veya Ã§aÄŸrÄ± kaydÄ± gir";
+$LDKeywordPrompt="Aranacak anahtar sözcüðü giriniz. Örneðin: Bir isim, veya bir bölüm, veya kýsa bir form, vs.";
+$LDShowDir="Tüm rehberi göster";
+$LDNewEntry="Yeni telefon veya çaðrý kaydý gir";
 
 $LDExtFields=array(
 								"No.",
-								"Ãœnvan",
+								"Ünvan",
 								"Soyad",
 								"Ad",
 								"Meslek",
-								"BÃ¶lÃ¼m.1",
-								"BÃ¶lÃ¼m.2",
+								"Bölüm.1",
+								"Bölüm.2",
 				 				"Tel.1",
 								"Tel.2",
 								"Tel.3",
-								"Ã–zel 1",
-								"Ã–zel 2",
-								"Ã‡aÄŸrÄ± 1",
-								"Ã‡aÄŸrÄ± 2",
+								"Özel 1",
+								"Özel 2",
+								"Çaðrý 1",
+								"Çaðrý 2",
 								"Oda No.",
 								"Tarih",
 								"Zaman",
 								"Encoder");
 $LDEditFields=array(
 								"No.",
-								"Ãœnvan",
+								"Ünvan",
 								"Soyad",
 								"Ad",
 								"Meslek",
-								"BÃ¶lÃ¼m 1",
-								"BÃ¶lÃ¼m 2",
+								"Bölüm 1",
+								"Bölüm 2",
 				 				"Telefon (dahili) 1",
 								"Telefon (dahili) 2",
 								"Telefon (dahili) 3",
-								"Ã–zel (harici) 1",
-								"Ã–zel (harici) 2",
-								"Ã‡aÄŸrÄ± 1",
-								"Ã‡aÄŸrÄ± 2",
+								"Özel (harici) 1",
+								"Özel (harici) 2",
+								"Çaðrý 1",
+								"Çaðrý 2",
 								"Oda No.",
 								"Tarih",
 								"Zaman",
 								"Encoder");
 $LDOK=" Tamam ";
-$LDCancel="Ä°ptal";
+$LDCancel="Ýptal";
 $LDSave="Kaydet";
-$LDEdit="DÃ¼zenle";
+$LDEdit="Düzenle";
 $LDDelete="Sil";
-$LDReset="Yeni baÅŸtan";
+$LDReset="Yeni baþtan";
 $LDNewPhoneEntry="Yeni telefon bilgisi girme";
-$LDShow="GÃ¶ster";
-$LDActualDir="GÃ¼ncel rehber iÃ§eriÄŸi";
+$LDShow="Göster";
+$LDActualDir="Güncel rehber içeriði";
 $LDMoreInfo="Daha fazla rehber bilgisi";
-$LDMaxItem="Rehberdeki toplam kayÄ±t sayÄ±sÄ±";
-$LDUpdateOk="Bilgi baÅŸarÄ±yla gÃ¼ncellendi";
-$LDRows="SatÄ±r";
+$LDMaxItem="Rehberdeki toplam kayýt sayýsý";
+$LDUpdateOk="Bilgi baþarýyla güncellendi";
+$LDRows="Satýr";
 
-$LDGoodMorning="GÃ¼naydÄ±n!";
-$LDGoodDay="Merhaba! Sizi gÃ¶rdÃ¼ÄŸÃ¼me sevindim!";
-$LDGoodEvening="Ä°yi akÅŸamlar";
+$LDGoodMorning="Günaydýn!";
+$LDGoodDay="Merhaba! Sizi gördüðüme sevindim!";
+$LDGoodEvening="Ýyi akþamlar";
 
-$LDShowActualDir="GÃ¼ncel rehber kayÄ±tlarÄ±nÄ± gÃ¶ster";
+$LDShowActualDir="Güncel rehber kayýtlarýný göster";
 $LDYesDelete="Evet, sil";
-$LDNoCancel="HAYIR! Ä°PTAL";
-$LDDeleteEntry="KaydÄ± sil";
-$LDNoData="HiÃ§bir ÅŸey girmediniz. LÃ¼tfen \"Kaydet\" dÃ¼ÄŸmesini tÄ±klamadan Ã¶nce veri giriÅŸi yapÄ±nÄ±z.";
-$LDReallyDelete="GerÃ§ekten izleyen kaydÄ± silmek istiyor musunuz?";
+$LDNoCancel="HAYIR! ÝPTAL";
+$LDDeleteEntry="Kaydý sil";
+$LDNoData="Hiçbir þey girmediniz. Lütfen \"Kaydet\" düðmesini týklamadan önce veri giriþi yapýnýz.";
+$LDReallyDelete="Gerçekten izleyen kaydý silmek istiyor musunuz?";
 
-$LDHowManage="Rehber nasÄ±l yÃ¶netilir";
-$LDHow2OpenDir="Rehberin tamamÄ± nasÄ±l aÃ§Ä±lÄ±r";
-$LDHowEnter="Yeni telefon bilgisi nasÄ±l girilir";
-$LDHow2SearchPhone="Bir telefon numarasÄ± nasÄ±l aranÄ±r";
-$LDUpdate="Verileri gÃ¼ncelle";
+$LDHowManage="Rehber nasýl yönetilir";
+$LDHow2OpenDir="Rehberin tamamý nasýl açýlýr";
+$LDHowEnter="Yeni telefon bilgisi nasýl girilir";
+$LDHow2SearchPhone="Bir telefon numarasý nasýl aranýr";
+$LDUpdate="Verileri güncelle";
 
-$LDDirData="Rehberdeki  <font color=\"red\">~nr~</font> numaralÄ± kaydÄ± dÃ¼zenle";
+$LDDirData="Rehberdeki  <font color=\"red\">~nr~</font> numaralý kaydý düzenle";
 $LDTelephone='Telefon';
-$LDBeeper='Ã‡aÄŸrÄ±';
+$LDBeeper='Çaðrý';
 ?>

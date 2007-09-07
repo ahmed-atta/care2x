@@ -1,33 +1,33 @@
 <?php
-$LDSend='GÃ¶nder';
-$LDCancel='Ä°ptal';
-$LDPrint='YazdÄ±r';
+$LDSend='Gönder';
+$LDCancel='Ýptal';
+$LDPrint='Yazdýr';
 $LDStop='Dur';
 $LDContinue='Devam';
 $LDSearch='Ara';
 $LDBack='Geri';
-$LDOpen='AÃ§';
+$LDOpen='Aç';
 $LDClose='Kapat';
 
 $LDRegister='Kaydet';
-$LDRegistration='KayÄ±t';
+$LDRegistration='Kayýt';
 $LDAdmission='Kabul';
 $LDAdmit='Kabul et';
-$LDArchive='ArÅŸiv';
-$LDStart='BaÅŸla';
+$LDArchive='Arþiv';
+$LDStart='Baþla';
 $LDEnd='Bitir';
 # 2003-07-29 EL
-$LDListApptByDept='RandevularÄ± bÃ¶lÃ¼mlere gÃ¶re listele';
-$LDListApptByDoc='RandevularÄ± doktorlara gÃ¶re listele';
+$LDListApptByDept='Randevularý bölümlere göre listele';
+$LDListApptByDoc='Randevularý doktorlara göre listele';
 $LDdone='Bitti';
 $LDOk='Tamam';
-$LDSelect='SeÃ§';
+$LDSelect='Seç';
 
-$LDHelp="YardÄ±m";
-$LDCloseHelpWin="YardÄ±m penceresini kapat";
+$LDHelp="Yardým";
+$LDCloseHelpWin="Yardým penceresini kapat";
 
-$LDRefreshWindow = 'GÃ¶rÃ¼ntÃ¼yÃ¼ yenile';
+$LDRefreshWindow = 'Görüntüyü yenile';
 
 $LDNext = 'Sonraki';
-$LDPrevious = 'Ã–nceki';
+$LDPrevious = 'Önceki';
 ?>

@@ -1,16 +1,16 @@
 <?php
-$LDPageTitle='BaÄŸÄ±ÅŸÄ±klama';
+$LDPageTitle='Baðýþýklama';
 $LDType='Tipi';
-$LDName='AdÄ±';
-$LDPeriod='DÃ¶nemi';
+$LDName='Adý';
+$LDPeriod='Dönemi';
 $LDTiter='Titresi';
 $LDNote='Not';
 $LDDosage='Dozu';
-$LDMedicine='Ä°laÃ§';
+$LDMedicine='Ýlaç';
 $LDTolerance='Tolerans';
 $LDApplication='Uygulama';
-$LDUpdatedbForm='KaydÄ± gÃ¼ncelle';
-$LDNewdbForm='KayÄ±t Ekle';
-$LDDeletedbForm='KayÄ±t Sil';
-$LDSelectdbForm='KayÄ±t SeÃ§';
+$LDUpdatedbForm='Kaydý güncelle';
+$LDNewdbForm='Kayýt Ekle';
+$LDDeletedbForm='Kayýt Sil';
+$LDSelectdbForm='Kayýt Seç';
 ?>

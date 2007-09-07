@@ -1,11 +1,11 @@
 <?php
 
-$LDErrorDate="Tarih yanlÄ±ÅŸ. LÃ¼tfen doÄŸru bir tarih giriniz";
-$LDErrorDateLen="Tarih uzunluÄŸu yanlÄ±ÅŸ.";
-$LDErrorDateFormat="Tarih biÃ§imi yanlÄ±ÅŸ.";
-$LDErrorNotNumeric="YalnÄ±z rakam girmeniz gerekiyor.";
-$LDErrorYear="YÄ±l yanlÄ±ÅŸ";
-$LDErrorMonth="Ay yanlÄ±ÅŸ";
-$LDErrorDay="GÃ¼n yanlÄ±ÅŸ";
+$LDErrorDate="Tarih yanlýþ. Lütfen doðru bir tarih giriniz";
+$LDErrorDateLen="Tarih uzunluðu yanlýþ.";
+$LDErrorDateFormat="Tarih biçimi yanlýþ.";
+$LDErrorNotNumeric="Yalnýz rakam girmeniz gerekiyor.";
+$LDErrorYear="Yýl yanlýþ";
+$LDErrorMonth="Ay yanlýþ";
+$LDErrorDay="Gün yanlýþ";
 
 ?>

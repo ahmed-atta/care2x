@@ -1,6 +1,6 @@
 <?php
-$LDSickConfirm='Bu iÅŸgÃ¶remezlik raporunun bir kopyasÄ±, tanÄ±lar ve tahmini iÅŸgÃ¶remezlik gÃ¼n sayÄ±sÄ± ile birlikte, soldaki sigortacÄ±ya derhal gÃ¶nderilecektir.';
+$LDSickConfirm='Bu işgöremezlik raporunun bir kopyası, tanılar ve tahmini işgöremezlik gün sayısı ile birlikte, soldaki sigortacıya derhal gönderilecektir.';
 
-$LDPharmaPrompt='"KÄ±rmÄ±zÄ± liste" veya "vademacum" gibi bir ilaÃ§ rehberi buraya entegre edilebilir.';
-//<p> Ancak halihazÄ±r Alman yasalarÄ± bir demo uyarlamasÄ±nÄ±n entegrasyonunu yasaklamaktadÄ±r.';
+$LDPharmaPrompt='"Kırmızı liste" veya "vademacum" gibi bir ilaç rehberi buraya entegre edilebilir.';
+//<p> Ancak halihazır Alman yasaları bir demo uyarlamasının entegrasyonunu yasaklamaktadır.';
 ?>

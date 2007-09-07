@@ -1,75 +1,75 @@
 <?PHP
 
-//TÃ¼rkÃ§e deÄŸiÅŸkenler
+//Türkçe değişkenler
 $LDja="    Evet    ";
-$LDnein="  HayÄ±r  ";
+$LDnein="  Hayır  ";
 
-//Variablen fÃ¼r sub_modul_neu.php
-$LDNeuesModulanlegen = 'OluÅŸtur';
-$LD_sub_NeuesModulAnlegenTxt= "sizin Ã¶n seÃ§imleriniz ile yeni bir modÃ¼l oluÅŸturur";
+//Variablen für sub_modul_neu.php
+$LDNeuesModulanlegen = 'Oluştur';
+$LD_sub_NeuesModulAnlegenTxt= "sizin ön seçimleriniz ile yeni bir modül oluşturur";
 $LD_Hinweise="referanslar";
-$LD_HinweiseTxt="yeni modÃ¼l iÃ§erisinde bir giriÅŸ vermek iÃ§in referanslar";
+$LD_HinweiseTxt="yeni modül içerisinde bir giriş vermek için referanslar";
 
 
-//Variablen fÃ¼r edv_modul_neu.php
-$modul_titel="Yeni modÃ¼lÃ¼n baÅŸlÄ±ÄŸÄ±:";
-$menue_eintrag_ja="Standart menÃ¼ iÃ§in bir kayÄ±t yapÄ±lmalÄ± mÄ± (standart deÄŸer)?)";
-$menue_eintrag_nein="HayÄ±r teÅŸekkÃ¼rler, giriÅŸ yok. Bir alt menÃ¼ veya bir baÅŸka modÃ¼l el ile oluÅŸturulacak.";
-$modulanlegen="modÃ¼l oluÅŸtur";
-$LD_menufolge_txt1="LÃ¼tfen yeni modÃ¼lÃ¼n giriÅŸinin eklenmesini istediÄŸiniz pozisyonu seÃ§iniz.";
-$LD_menufolge_txt2="eÄŸer bir deÄŸiÅŸiklik belirtilmez ise, standart menÃ¼nÃ¼n bitiminde olacaktÄ±r.";
+//Variablen für edv_modul_neu.php
+$modul_titel="Yeni modülün başlığı:";
+$menue_eintrag_ja="Standart menü için bir kayıt yapılmalı mı (standart değer)?)";
+$menue_eintrag_nein="Hayır teşekkürler, giriş yok. Bir alt menü veya bir başka modül el ile oluşturulacak.";
+$modulanlegen="modül oluştur";
+$LD_menufolge_txt1="Lütfen yeni modülün girişinin eklenmesini istediğiniz pozisyonu seçiniz.";
+$LD_menufolge_txt2="eğer bir değişiklik belirtilmez ise, standart menünün bitiminde olacaktır.";
 $LD_automatic="otomatik";
 $LD_stelle="pozisyon";
 $LD_weiter="sonraki sayfa...";
-$LD_mit_untermenu="EÄŸer birden fazla alt menÃ¼ oluÅŸturmayÄ± planlÄ±yor iseniz bu alanÄ± iÅŸaretleyiniz, kolay geniÅŸleme Ã¶zelliÄŸinde alt menÃ¼sÃ¼ bulunan bir dosya otomatik olaral oluÅŸturulacaktÄ±r.";
+$LD_mit_untermenu="Eğer birden fazla alt menü oluşturmayı planlıyor iseniz bu alanı işaretleyiniz, kolay genişleme özelliğinde alt menüsü bulunan bir dosya otomatik olaral oluşturulacaktır.";
 
 
-//Variablen fÃ¼r edv_modul_neu_2.php
-$blank_eingabe="Ya birden fazla sÃ¶zcÃ¼k ya da boÅŸluk girdiniz. Buna izin verilmiyor. KÄ±saltÄ±lmÄ±ÅŸ tanÄ±mlamalar Ã¶neriliyor. GirdiÄŸiniz deÄŸeri deÄŸiÅŸtirmek iÃ§in \"HayÄ±r\" Ä± tÄ±klayÄ±nÄ±z.";
-$fehleingabe="ModÃ¼l isimlerinin boÅŸ bÄ±rakÄ±lmasÄ±na izin verilmiyor.";
-$kontrollmeldung_1="ModÃ¼llerin yeni ismi ÅŸu olabilir:";
+//Variablen für edv_modul_neu_2.php
+$blank_eingabe="Ya birden fazla sözcük ya da boşluk girdiniz. Buna izin verilmiyor. Kısaltılmış tanımlamalar öneriliyor. Girdiğiniz değeri değiştirmek için \"Hayır\" ı tıklayınız.";
+$fehleingabe="Modül isimlerinin boş bırakılmasına izin verilmiyor.";
+$kontrollmeldung_1="Modüllerin yeni ismi şu olabilir:";
 $kontrollmeldung_2="ismi";
-$kontrollmeldung_3="YukarÄ±da gÃ¶sterilen isim ile yeni bir modÃ¼l oluÅŸturulsun mu?";
+$kontrollmeldung_3="Yukarıda gösterilen isim ile yeni bir modül oluşturulsun mu?";
 
-//Variablen fÃ¼r edv_modul_neu_3.php
-$weiter_info="Ana dosyayÄ± oluÅŸturmak iÃ§in lÃ¼tfen  \"Devam\" a tÄ±klayÄ±nÄ±z. Biraz daha bilgi gerekli.";
-$wichtige_info=" \"Modulname\"-main-pass.php ve test_person_search.php dosyalarÄ±nÄ±n dÃ¼zenlenmesi hakkÄ±nda bazÄ± Ã¶nemli Ã¶neriler iÃ§in lÃ¼tfen burayÄ± tÄ±klayÄ±nÄ±z";
+//Variablen für edv_modul_neu_3.php
+$weiter_info="Ana dosyayı oluşturmak için lütfen  \"Devam\" a tıklayınız. Biraz daha bilgi gerekli.";
+$wichtige_info=" \"Modulname\"-main-pass.php ve test_person_search.php dosyalarının düzenlenmesi hakkında bazı önemli öneriler için lütfen burayı tıklayınız";
 
-//Variablen fÃ¼r check_patientwahl.php
-$LD_headline_frage="LÃ¼tfen seÃ§iniz. HiÃ§birÅŸey deÄŸiÅŸtirilmez ise hasta temelli bir modÃ¼l yaratÄ±lacaktÄ±r.";
-$haken_info="ModÃ¼l hasta bazlÄ±. BaÅŸlatÄ±r iken bir hasta numarasÄ± seÃ§ebilme olanaÄŸÄ±nÄ±z var.";
+//Variablen für check_patientwahl.php
+$LD_headline_frage="Lütfen seçiniz. Hiçbirşey değiştirilmez ise hasta temelli bir modül yaratılacaktır.";
+$haken_info="Modül hasta bazlı. Başlatır iken bir hasta numarası seçebilme olanağınız var.";
 
-//Variablen fÃ¼r radio_tabwahl.php
-$LD_wahl1="Ã¶nceden var olan bir tabloyu dbForm kullanarak dÃ¼zenleme (ismi aÅŸaÄŸÄ±daki alanÄ±n iÃ§erisine yazÄ±nÄ±z)";
-$LD_wahl2="CREATE TABLE komutunu gÃ¶nderiniz (Ã¶n seÃ§imli bir sorgu bir dÃ¼zenleme alanÄ±nda verilir)";
+//Variablen für radio_tabwahl.php
+$LD_wahl1="önceden var olan bir tabloyu dbForm kullanarak düzenleme (ismi aşağıdaki alanın içerisine yazınız)";
+$LD_wahl2="CREATE TABLE komutunu gönderiniz (ön seçimli bir sorgu bir düzenleme alanında verilir)";
 //$LD_wahl3=" Load a DB-designer-file into MySQL (import function)";
-$LD_wahl3="BaÅŸka deÄŸiÅŸiklik yok. ÅÄ°MDÄ° boÅŸ bir dosya oluÅŸtur.";
-$setback_fields="AlanlarÄ± geri al";
+$LD_wahl3="Başka değişiklik yok. ŞİMDİ boş bir dosya oluştur.";
+$setback_fields="Alanları geri al";
 
-//Variablen fÃ¼r radio_tabwahl.php  U N D  radio1_memofeld.php
+//Variablen für radio_tabwahl.php  U N D  radio1_memofeld.php
 $nenne_tabelle="tablonun ismini belirtiniz";
-$nenne_tabelle2="<strong>(Not alanÄ±ndaki ile aynÄ±!)</strong>";
-$nenne_suchfeld="arama alanÄ±nÄ± belirtiniz (normalde \"id\")";
-$nenne_tab_bezeichner="Tablo baÅŸlÄ±ÄŸÄ± iÃ§in bir tanÄ±m belirtiniz";
-$nenne_anzeigefeld="ara listesinde gÃ¶sterilen alan adlarÄ±nÄ± belirtiniz ( yani soyad/ad)";
-$nenne_server="veri tabanÄ± sunucusunu belirtiniz";
-$fertig="tabloyu oluÅŸtur ve modÃ¼lÃ¼ sonlandÄ±r $ModulNeuBez.";
+$nenne_tabelle2="<strong>(Not alanındaki ile aynı!)</strong>";
+$nenne_suchfeld="arama alanını belirtiniz (normalde \"id\")";
+$nenne_tab_bezeichner="Tablo başlığı için bir tanım belirtiniz";
+$nenne_anzeigefeld="ara listesinde gösterilen alan adlarını belirtiniz ( yani soyad/ad)";
+$nenne_server="veri tabanı sunucusunu belirtiniz";
+$fertig="tabloyu oluştur ve modülü sonlandır $ModulNeuBez.";
 
-//Variablen fÃ¼r radio1_memofeld.php
-$infoline="Ã–rnek tabloyu istediÄŸiniz gibi deÄŸiÅŸtiriniz.</br>";
+//Variablen für radio1_memofeld.php
+$infoline="Örnek tabloyu istediğiniz gibi değiştiriniz.</br>";
 
-//Variablen fÃ¼r editsql.php
-$sql_meldung="AÅŸaÄŸÄ±daki SQL dizgesi veritabanÄ±nÄ±zda Ã§alÄ±ÅŸtÄ±rÄ±ldÄ±.";
+//Variablen für editsql.php
+$sql_meldung="Aşağıdaki SQL dizgesi veritabanınızda çalıştırıldı.";
 
 //Variablen aus inc_datei_array.de
-$err_ida_var_fehlt="root_path veya MoulNeuBez deÄŸiÅŸkenleri boÅŸ, amaÃ§ yolak yÃ¼klenemiyor.";
-$err_keinpfad="Ara... Yolak yok. Bu inc_datei_array.php dosyasÄ±ndan kaynaklanan bir hata..";
-$err_mainpass_copy="main-pass dosyasÄ±nÄ±n kopyalanmasÄ± baÅŸarÄ±sÄ±z!";
-$err_kopieren="Kopyalama sÄ±rasÄ±nda hata oluÅŸtu ";
+$err_ida_var_fehlt="root_path veya MoulNeuBez değişkenleri boş, amaç yolak yüklenemiyor.";
+$err_keinpfad="Ara... Yolak yok. Bu inc_datei_array.php dosyasından kaynaklanan bir hata..";
+$err_mainpass_copy="main-pass dosyasının kopyalanması başarısız!";
+$err_kopieren="Kopyalama sırasında hata oluştu ";
 $err_fehlgeschlagen=" .<br/>";
 
 //Variablen aus Schlusssatz.php
-$ld_gratulation="Tebrikler <strong> $ModulNeuBez</strong> modÃ¼lÃ¼ bitti.";
+$ld_gratulation="Tebrikler <strong> $ModulNeuBez</strong> modülü bitti.";
 
 
 ?>
