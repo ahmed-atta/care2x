@@ -2645,28 +2645,57 @@ CREATE TABLE care_test_group (
 # Tabellenstruktur für Tabelle care_test_param
 #
 
-CREATE TABLE care_test_param (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   group_id varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   id varchar(10) NOT NULL,
-   msr_unit varchar(15) NOT NULL,
-   median varchar(20),
-   hi_bound varchar(20),
-   lo_bound varchar(20),
-   hi_critical varchar(20),
-   lo_critical varchar(20),
-   hi_toxic varchar(20),
-   lo_toxic varchar(20),
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr, group_id)
-);
-
+CREATE TABLE `care_test_param` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `group_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `id` varchar(50) collate latin1_general_ci NOT NULL,
+  `sort_nr` tinyint(4) NOT NULL default '0',
+  `msr_unit` varchar(15) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `median` varchar(20) collate latin1_general_ci default NULL COMMENT 'for males',
+  `hi_bound` varchar(20) collate latin1_general_ci default NULL,
+  `lo_bound` varchar(20) collate latin1_general_ci default NULL,
+  `hi_critical` varchar(20) collate latin1_general_ci default NULL,
+  `lo_critical` varchar(20) collate latin1_general_ci default NULL,
+  `hi_toxic` varchar(20) collate latin1_general_ci default NULL,
+  `lo_toxic` varchar(20) collate latin1_general_ci default NULL,
+  `median_f` varchar(20) collate latin1_general_ci default NULL COMMENT '_ f for females',
+  `hi_bound_f` varchar(20) collate latin1_general_ci default NULL,
+  `lo_bound_f` varchar(20) collate latin1_general_ci default NULL,
+  `hi_critical_f` varchar(20) collate latin1_general_ci default NULL,
+  `lo_critical_f` varchar(20) collate latin1_general_ci default NULL,
+  `hi_toxic_f` varchar(20) collate latin1_general_ci default NULL,
+  `lo_toxic_f` varchar(20) collate latin1_general_ci default NULL,
+  `median_n` varchar(20) collate latin1_general_ci default NULL COMMENT '_n for neonatal from 0 to 1 month',
+  `hi_bound_n` varchar(20) collate latin1_general_ci default NULL,
+  `lo_bound_n` varchar(20) collate latin1_general_ci default NULL,
+  `hi_critical_n` varchar(20) collate latin1_general_ci default NULL,
+  `lo_critical_n` varchar(20) collate latin1_general_ci default NULL,
+  `hi_toxic_n` varchar(20) collate latin1_general_ci default NULL,
+  `lo_toxic_n` varchar(20) collate latin1_general_ci default NULL,
+  `median_y` varchar(20) collate latin1_general_ci default NULL COMMENT '_y for children form 1 month to 12 months',
+  `hi_bound_y` varchar(20) collate latin1_general_ci default NULL,
+  `lo_bound_y` varchar(20) collate latin1_general_ci default NULL,
+  `hi_critical_y` varchar(20) collate latin1_general_ci default NULL,
+  `lo_critical_y` varchar(20) collate latin1_general_ci default NULL,
+  `hi_toxic_y` varchar(20) collate latin1_general_ci default NULL,
+  `lo_toxic_y` varchar(20) collate latin1_general_ci default NULL,
+  `median_c` varchar(20) collate latin1_general_ci default NULL COMMENT '_c for children form 1 to 14 years',
+  `hi_bound_c` varchar(20) collate latin1_general_ci default NULL,
+  `lo_bound_c` varchar(20) collate latin1_general_ci default NULL,
+  `hi_critical_c` varchar(20) collate latin1_general_ci default NULL,
+  `lo_critical_c` varchar(20) collate latin1_general_ci default NULL,
+  `hi_toxic_c` varchar(20) collate latin1_general_ci default NULL,
+  `lo_toxic_c` varchar(20) collate latin1_general_ci default NULL,
+  `method` varchar(255) collate latin1_general_ci default NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`,`group_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=665 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 # --------------------------------------------------------
 
 #
@@ -3458,28 +3487,28 @@ CREATE TABLE care_unit_measurement (
 # Tabellenstruktur für Tabelle care_users
 #
 
-CREATE TABLE care_users (
-   name varchar(60) NOT NULL,
-   login_id varchar(35) NOT NULL,
-   password varchar(255),
-   personell_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   lockflag tinyint(3) unsigned DEFAULT '0',
-   permission text NOT NULL,
-   exc tinyint(1) DEFAULT '0' NOT NULL,
-   s_date date DEFAULT '0000-00-00' NOT NULL,
-   s_time time DEFAULT '00:00:00' NOT NULL,
-   expire_date date DEFAULT '0000-00-00' NOT NULL,
-   expire_time time DEFAULT '00:00:00' NOT NULL,
-   status varchar(15) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY login_id (login_id),
-   PRIMARY KEY (login_id)
-);
-
+CREATE TABLE `care_users` (
+  `name` varchar(60) collate latin1_general_ci NOT NULL,
+  `login_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `password` varchar(255) collate latin1_general_ci default NULL,
+  `personell_nr` int(10) unsigned NOT NULL default '0',
+  `lockflag` tinyint(3) unsigned default '0',
+  `permission` text collate latin1_general_ci NOT NULL,
+  `exc` tinyint(1) NOT NULL default '0',
+  `s_date` date NOT NULL default '0000-00-00',
+  `s_time` time NOT NULL default '00:00:00',
+  `expire_date` date NOT NULL default '0000-00-00',
+  `expire_time` time NOT NULL default '00:00:00',
+  `dept_nr` text collate latin1_general_ci NOT NULL COMMENT 'the department in wich the user is allowed to enter / view',
+  `status` varchar(15) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`login_id`),
+  KEY `login_id` (`login_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 # --------------------------------------------------------
 
 #

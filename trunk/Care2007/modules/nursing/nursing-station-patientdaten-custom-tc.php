@@ -255,6 +255,11 @@ function endhilite(d){
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 -->
 </script>
+
+<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
+<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
+
 <?php
 
 $sTemp = ob_get_contents();
@@ -272,6 +277,13 @@ ob_start();
 <tr  valign="top">
 <td colspan=4 bgcolor="#99ccff"  width="50%">
 <?php
+/*echo '<div class=fva2_ml10>
+		<span style="background:yellow"><b>'.$result[patnum].'</b></span><br>
+		<b>'.$result[name].', '.$result[vorname].'</b> <br>
+		<font color=maroon>'.formatDate2Local($result[gebdatum],$date_format).'</font><font size=1> <p>
+		'.nl2br($result[address]).'<p>
+		'.$station.'&nbsp;'.$result[kasse].' '.$result[kassename].'</div>';*/
+
 echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 ?>
 </td>
@@ -366,9 +378,9 @@ list($time,$pos,$id)=split("\t",$val2);
 
 $times++;
 
-if (eregi($LDSUPINE,$pos)) {$color="#0000AA";}
-if (eregi($LDLEFTLATERAL,$pos)) {$color="#00AA00";}
-if (eregi($LDRIGHTLATERAL,$pos)) {$color="#AA0000";}
+if (eregi("SUPIN",$pos)) {$color="#0000AA";}
+if (eregi("DJATHTE",$pos)) {$color="#00AA00";}
+if (eregi("MAJTE",$pos)) {$color="#AA0000";}
 
 $tc++;
 
@@ -378,7 +390,7 @@ $tc++;
 <table height=10 width=215 bgcolor="<?=$color?>" cellpadding=5 cellspacing=0><tr><td>
 <input type=hidden id="date_<?=$tc?>" value="<?=date("d/m/Y",strtotime($var))?>">
 <span style="font-size:9px"><font color=white><b><span id="time_<?=$tc?>"><?=date("H:i",strtotime($time))?></span> <span><?=" (".date("h:i a",strtotime($time)).")"?></span></b> : <span id="pos_<?=$tc?>"><?=$pos?></span></font></font>
-</td><td align=right><span style="background-color:yellow">&nbsp;<a href="javascript:EditRecord('<?=$tc?>','<?=$id?>')"><?php echo $LDEDIT ?></a>&nbsp;</span></td></tr></table>
+</td><td align=right><span style="background-color:yellow">&nbsp;<a href="javascript:EditRecord('<?=$tc?>','<?=$id?>')">NDRYSHO</a>&nbsp;</span></td></tr></table>
 </div>
 	
 <?
@@ -404,39 +416,34 @@ $tc++;
 <td>
 
 <?=$LDDate?><br>
-<table><tr><td>
-		<?php
-			//gjergji : new calendar
-			require_once ('../../js/jscalendar/calendar.php');
-			$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
-			$calendar->load_files();
-  			echo $calendar->show_calendar($calendar,$date_format,'indatetime_date');
-			//end : gjergji  
- 		?>
-</td>
+<table><tr><td><input type=text size=10 maxlength=10 name=indatetime_date id=indatetime_date value='<?=formatDate2Local(date('Y-m-d'),$date_format)?>' onBlur="IsValidDate(this,'<?=$date_format?>')" onFocus='this.select()' 
+value='<?	if(!$saved)  echo "$dateput"; ?>
+onKeyUp="setDate(this,'".$date_format."','".$lang."')">
+</td><td><a href="javascript:show_calendar('berichtform.indatetime_date','<?=$date_format?>')">
+<img <?=createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE)?>></a></td>
 </tr></table>
 
 </td>
 
 <td>
 
-<?php echo $LDTime?><br>
+Ora<br>
 <table><tr><td><input size=10 type=text name=turntime id=turntime maxlength=5></td><td>HH:MM (13:00)</td></tr></table>
 
 </td>
 
 <td>
-<?php echo $LDPosition ?><br>
+Pozicioni<br>
 <table><tr><td><select name="pos" id="pos_sel">
-<option><?php echo $LDSUPINE ?></option>
-<option><?php echo $LDLEFTLATERAL ?></option>
-<option><?php echo $LDRIGHTLATERAL ?></option>
+<option>SUPIN</option>
+<option>DEKUBITUS LATERAL I MAJTE</option>
+<option>DEKUBITUS LATERAL I DJATHTE</option>
 </select>
 </td></tr></table>
 </td>
 
 <td>
-<a href='nursing-station-patientdaten-custom-tc.php<?=URL_REDIRECT_APPEND?>&station=<?=$station?>&pn=<?=$pn?>&edit=<?=$edit?>'><span style="background-color:yellow"><?php echo $LDEDIT ?></span></a>
+<a href='nursing-station-patientdaten-custom-tc.php<?=URL_REDIRECT_APPEND?>&station=<?=$station?>&pn=<?=$pn?>&edit=<?=$edit?>'><span style="background-color:yellow">PASTRO</span></a>
 </td>
 </tr></table>
 

@@ -68,6 +68,7 @@ class Ward extends Encounter {
 									'dept_nr',
 									'room_nr_start',
 									'room_nr_end',
+									'maxbed',
 									'roomprefix',
 									'status',
 									'history',
@@ -513,10 +514,10 @@ class Ward extends Encounter {
 			$action='Closed temporary';
 		}else{
 			$action='Reopened';
-		} 
+		}
 		$data['history']="CONCAT(history,'$action: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
 		$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array=$data;		
+		$this->data_array=$data;
 		return $this->updateDataFromInternalArray($nr);
 	}
 	/**

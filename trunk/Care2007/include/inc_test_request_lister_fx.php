@@ -4,6 +4,7 @@
 *  to show the entries in case of status != pending
 *  Used in pathology
 */
+///$db->debug=true;
 function printLabInterns($param)
 {
    global $stored_request, $date_format;
@@ -54,6 +55,14 @@ function printRadioButton($param,$value,$printout=true)
 }
 
 /* The following routine creates the list of pending requests */
+?> 
+
+<script language="javascript" src="../../js/wz_tooltip/wz_tooltip.js"></script>
+
+<?php
+
+require_once($root_path.'include/care_api_classes/class_lab.php');
+$lab_obj=new Lab();
 
 if(!isset($tracker)||!$tracker) $tracker=1;
 
@@ -62,11 +71,11 @@ if($tracker>1)
    $requests->Move($tracker-2);
    $test_request=$requests->FetchRow();
    $requests->MoveFirst();
-
 ?>
 <a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker-1); ?>"><img <?php echo createComIcon($root_path,'uparrowgrnlrg.gif','0','left',TRUE) ?> alt="<?php echo $LDPrevRequest ?>"></a>
 <?php
 }
+//mizuko : kjo asht kur kam shume analiza...bamja e listes
 if($tracker<$batchrows)
 {
    $requests->Move($tracker);
@@ -78,7 +87,7 @@ if($tracker<$batchrows)
 
 $tracker=1;
 echo "<br><br>";
-
+$bgcolor="#D3E3F6";
 $send_date="";
 
 /* Display the list of pending requests */
@@ -91,14 +100,33 @@ while($test_request=$requests->FetchRow())
   {
      echo "<FONT size=2 color=\"#990000\"><b>".formatDate2Local($buf_date,$date_format)."</b></font><br>";
 	 $send_date=$buf_date;
+	 $enc_obj->loadEncounterData($test_request['encounter_nr']);
+  	 $result=$enc_obj->encounter;
+  	 //gjergji ... urgent is available only for chamlabor
+  	 if($subtarget == trim('chemlabor') ) {
+	  	 $urgent = $lab_obj->GetTestUrgent($test_request['batch_nr']);
+	  	 $tmp = $urgent->FetchRow();
+	  	 if($tmp['urgent'] == 1) $bgcolor="red"; else $bgcolor = "#D3E3F6";
+  	 }
+  	 $info = $result['name_last']. " " . $result['name_first'] . "<br>" . $result['encounter_date'] . "<br>" . $result['pid'];
   } 
   if($batch_nr!=$test_request['batch_nr'])
   {
-        echo "<img src=\"".$root_path."gui/img/common/default/pixel.gif\" border=0 width=4 height=7> <a href=\"".$thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".$tracker."\">".$test_request['batch_nr']." ".$test_request['room_nr']."</a><br>";
+  	   	$enc_obj->loadEncounterData($test_request['encounter_nr']);
+  	   	$result=&$enc_obj->encounter;
+  	 	//gjergji ... urgent is available only for chamlabor
+  	 	if($subtarget == trim('chemlabor') ) {  	   	
+		  	$urgent = $lab_obj->GetTestUrgent($test_request['batch_nr']);
+		  	$tmp = $urgent->FetchRow();
+	  	 	if($tmp['urgent'] == 1) $bgcolor="red"; else $bgcolor = "#D3E3F6";	
+  	 	}		
+  	   	$info = $result['name_last']. " " . $result['name_first'] . "<br>" . $result['encounter_date'] . "<br>" . $result['pid'];
+        echo "<img src=\"".$root_path."gui/img/common/default/pixel.gif\" border=0 width=4 height=7> <a href=\"".$thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".$tracker."\" onmouseover=\"Tip('". $info ."',BGCOLOR,'". $bgcolor ."')\" >".$test_request['batch_nr']." ".$test_request['room_nr']."</a><br>";
    }
    else
    {
-        echo "<img ".createComIcon($root_path,'redpfeil.gif','0','',TRUE)."> <FONT size=1 color=\"red\">".$test_request['batch_nr']." ".$test_request['room_nr']."</font><br>";
+   	
+        echo "<img ".createComIcon($root_path,'redpfeil.gif','0','',TRUE)."> <FONT onmouseover=\"Tip('". $info ."',BGCOLOR,'". $bgcolor ."')\"  size=1 color=\"red\">".$test_request['batch_nr']." ".$test_request['room_nr']."</font><br>";
         $track_item=$tracker;
    }
    

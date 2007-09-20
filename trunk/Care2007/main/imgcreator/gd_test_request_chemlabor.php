@@ -324,6 +324,19 @@ $mark_v_offset=1; /* Vertical offset of the marking blocks */
 	   $sx+=$hdiv; /* advance to right */
 	}
 	
+	/*Urgent*/
+   $sy+=$vdiv; /* Advance to next row */
+   $sx=$left_border;
+    ImageString($im,1,($sx),($sy),$LDUrgent,$purple);
+   $sx=$left_border+($hdiv*4);
+   $urgent = $stored_request['urgent'];
+   if($urgent == '1') {
+   		doFilledBlock();
+   } else {
+   		doBlock();
+   }
+   /* end urgent */
+   
 	/* Write batch nr */
    $sy+=$vdiv; /* Advance to next row */
    $sx=$left_border;
@@ -333,11 +346,14 @@ $mark_v_offset=1; /* Vertical offset of the marking blocks */
 
 	/* Create the batch nr code */
 	$sy=$top_border+($vdiv*14);
+	/* Added because i fave add a row for the urgent marker */
+	$sy+=$vdiv; /* Advance to next row */
 	for($i=0,$sx=($left_border+($hdiv*10));$i<30; $i++, $sx=$sx+$hdiv)
 	{
 	    doBlock();
 	}
 
+   
 	/* Create initialization markers */
 	$sy=$top_border+$vdiv;
 	$sx=$left_border+($hdiv*30);
@@ -393,97 +409,29 @@ $mark_v_offset=1; /* Vertical offset of the marking blocks */
   $sy=$top_border+($vdiv*16); /* Set the first row's y-dim */
   $tdcount=0;
   $sx=$left_border;
-  
-   while(list($x,$v)=each($LD_Elements))
-	{
-	   
-	  if($tdcount>4) $len=5; else $len=6;
-	   
-	  if(strpos($x,"tx_")!==FALSE) /* If titel */
-	  {
-	   doTitel($v,$len); 
-	  }
-	  else
-	  {
-		 
-	     /* If test element is part of emergency program change bgcolor */
-	     if(strpos($x,"_emx_")!==FALSE)
-		 { 
-		    $bgcolor=&$light_violet; 
-		  	 doBgColor($len);
-	     }
-		 
-	     if(strpos($x,"_x_")!==FALSE) /* Check if the element has two marker fields */
-		 {
-		    $elem_index=explode("_x_",$x);
-			
-			
-			   if($stored_param[$elem_index[0]])
-			   {
-			      doFilledBlock();
+  for($i=0;$i<=$max_row;$i++) {
+	if($i>$max_row) $len=5; else $len=6;  
+	for($j=0;$j<=$column;$j++) {	
+			/* write the param group */
+			if($LD_Elements[$j][$i]['type']=='top') {
+				doTitel($LD_Elements[$j][$i]['value'],$len);
+				$sx+=($hdiv*$len); /* Move to next column */			
+			} else {
+				/* Write the item */
+	    		doWrite($LD_Elements[$j][$i]['value'],$len); 
+				if( $stored_param[$LD_Elements[$j][$i]['id']] == 1) {
+					doFilledBlock();
+				} else {
+					doBlock();
 				}
-				else
-				{
-				   doBlock();
-				}
-				
-			   $sx+=($hdiv*($len-1)); /* Move x pointer to the right */
-			   if($stored_param[$elem_index[1]])
-			   {
-			      doFilledBlock();
-				}
-				else
-				{
-				  doBlock();
-				}
-			   $sx-=($hdiv*($len-1)); /* return pointer */
-			   
-		}
-		 else 
-		 { 
-		    /* Other wise when the element has a single marker field */
-			   if($stored_param[$x])
-			   {
-			      doFilledBlock();
-				}
-				else
-				{
-				  doBlock();
-				}
-
-
-		   /* Check for the code of telephone then show telephone icon*/
-		  if(strpos($x,"_telx_")!==FALSE)
-		   {
-
-			   $sx+=($hdiv*($len-1)); /* Move x pointer to the right */
-			   
-			   showPhone();
-			   
-			   $sx-=($hdiv*($len-1)); /* return pointer */
-
-	        }
-		 }// end of else
-		 
-         /* Write the item */
-	    doWrite($v,$len); 
-		
-	   }//endof else
-	  if($tdcount==6) 
-	  {
-	      $sy+=$vdiv; /* Adjust to next row */
-		  $sx=$left_border;
-		  $tdcount=0;
-	  }
-	  else
-	  {
-	      $sx+=($hdiv*$len); /* Move to next column */
-		  $tdcount++;
-	   }
+				$sx+=($hdiv*$len); /* Move to next column */			
+			}
 	}
-	
+	$sy+=$vdiv; /* Adjust to next row */
+	$sx=$left_border;
+  }
+
 	/* Create the lower  boxes for the doctor's sign, etc. */
-	
 	$sx=1;
 	$sy=$top_border+($vdiv*66);
 	

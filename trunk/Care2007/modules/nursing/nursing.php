@@ -65,6 +65,7 @@
 										createComIcon($root_path,'eye_s.gif','0') ,
 										createComIcon($root_path,'findnew.gif','0'),
 										createComIcon($root_path,'storage.gif','0'),
+										createComIcon($root_path,'timeplan.gif','0'),
 										createComIcon($root_path,'forums.gif','0'),
 										createComIcon($root_path,'bubble.gif','0')
 										);
@@ -75,6 +76,7 @@ $aSubMenuItem = array('LDNursingStations' => $LDNursingStations." <img ".createC
 										'LDQuickView'  => "<a href=\"".$root_path."modules/nursing/nursing-schnellsicht.php".URL_APPEND."\">$LDQuickView</a>",
 										'LDSearchPatient'  => "<a href=\"".$root_path."modules/nursing/nursing-patient-such-start.php".URL_APPEND."\">$LDSearchPatient</a>",
 										'LDArchive'  => "<a href=\"".$root_path."modules/nursing/nursing-station-archiv.php".URL_APPEND."\">$LDArchive</a>",
+										'LDStationMan'  => "<a href=\"nursing-station-manage-pass.php?sid=$sid&lang=$lang\">$LDStationMan</a>",
 										'LDNursesList'  => "<a href=\"".$root_path."modules/nursing_or/nursing-or-main-pass.php".URL_APPEND."&target=setpersonal&retpath=menu\">$LDNursesList</a>",
 										'LDNews'  => "<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=36\">$LDNews</a>"
 										);
@@ -84,6 +86,7 @@ $aSubMenuText = array('',
 										$LDQuickViewTxt,
 										$LDSearchPatientTxt,
 										$LDArchiveTxt,
+										$LDStationManTxt,
 										$LDNursesListTxt,
 										$LDNewsTxt
 										);

@@ -18,7 +18,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 /* Create nursing notes object */
 require_once($root_path.'include/care_api_classes/YellowPaper.php');
 $report_obj= new YellowPaper;
-///$db->debug=true; 
+ 
 //if ($station=='') { $station='Non-department specific';  }
 if($pday=='') $pday=date('d');
 if($pmonth=='') $pmonth=date('m');
@@ -28,6 +28,7 @@ $s_date=$pyear.'-'.$pmonth.'-'.$pday;
 $thisfile=basename(__FILE__);
 			
 require_once($root_path.'include/inc_date_format_functions.php');
+
 
 if($mode=='save'){
 	# Know where we are
@@ -44,7 +45,6 @@ if($mode=='save'){
 		exit;
 	}else{echo $report_obj->getLastQuery()."<p>$LDDbNoUpdate";}
 } elseif ($mode=='update') {
-	
 	# Know where we are
 	switch($HTTP_SESSION_VARS['sess_user_origin']){
 		case 'lab': $HTTP_POST_VARS['location_type_nr']=1; # 1 =department
@@ -55,8 +55,7 @@ if($mode=='save'){
 	$HTTP_POST_VARS['location_id']=$station; 
 	if($report_obj->updateDailyWardNotes($HTTP_POST_VARS)){
 		//echo $report_obj->getLastQuery();
-		//header("Location:$thisfile".URL_REDIRECT_APPEND."&pn=$pn&station=$station&dept_nr=$dept_nr&location_nr=$location_nr&saved=1");
-		echo "<html><body><script>javascript:window.close();</script></body></html>";
+		header("Location:$thisfile".URL_REDIRECT_APPEND."&pn=$pn&station=$station&dept_nr=$dept_nr&location_nr=$location_nr&saved=1");
 		exit;
 	}else{echo $report_obj->getLastQuery()."<p>$LDDbNoUpdate";}
 }else{
@@ -107,7 +106,7 @@ if($mode=='save'){
 
 
  # OnLoad Javascript code
-  if(($mode=='save')&&($occup)||$saved) $sTemp = "window.opener.location.reload();this.close();";
+  if(($mode=='save')&&($occup)||$saved) $sTemp = "window.opener.location.reload();";
   	else $sTemp = '';
 
  $smarty->assign('sOnLoadJs','onLoad="'.$sTemp.' if (window.focus) window.focus();"');
@@ -204,7 +203,7 @@ if($occup){
  ?>
   <div id="TabbedPanels1" class="TabbedPanels">
   <ul class="TabbedPanelsTabGroup">
-    <li class="TabbedPanelsTab" tabindex="0"><b><?php echo $LDsunto_anamnestico ?></b></li>
+    <li class="TabbedPanelsTab" tabindex="0"><b>Permbledhje Anamnestike</b></li>
     <li class="TabbedPanelsTab" tabindex="0"><b>Anamneza familiare</b></li>
     <li class="TabbedPanelsTab" tabindex="0"><b>Anamneza socio-ambientale</b></li>
     <li class="TabbedPanelsTab" tabindex="0"><b>Anamneza Fiziologjike</b></li>
@@ -430,7 +429,7 @@ var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
     <input type="hidden" name="lang" value="<?php echo $lang ?>">
     <input type="hidden" name="station" value="<?php echo $station ?>">
     <input type="hidden" name="location_nr" value="<?php echo $location_nr; ?>">
-    <?php if (isset($occup)) { ?>
+    <?php if ($occup) { ?>
     <input type="hidden" name="mode" value="update">
     <input type="hidden" name="nr" value="<?php echo $row['nr'] ?>">
     <?php } else { ?>
