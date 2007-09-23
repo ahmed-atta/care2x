@@ -420,9 +420,7 @@ if($edit) {
 			?>> <span style="background-color:#FFFF00"> PASTRO </span> </a></td>
 		</tr>
 		
-<?php
-} 
-?>
+
 		</table>
 
 <p>
