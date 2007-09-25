@@ -90,6 +90,8 @@ require($root_path.'include/inc_2level_reset.php');
 
   $smarty->assign('LDTestParameters',"<a href=\"labor_test_param_edit_pass.php?sid=$sid&lang=$lang&user_origin=lab\">$LDTestParameters</a>");
   $smarty->assign('LDTestParametersTxt',$LDTestParametersTxt);
+  $smarty->assign('LDTestGroups',"<a href=\"labor_test_group_edit_pass.php?sid=$sid&lang=$lang&user_origin=lab\">$LDTestGroups</a>");
+  $smarty->assign('LDTestGroupsTxt',$LDTestGroupsTxt);
 
 # Assign the submenu to the mainframe center block
 
