@@ -109,7 +109,9 @@ $smarty->append('JavaScript',$sTemp);
 
 $sTempNew = '<a href="javascript:newParam()"><img '.createLDImgSrc($root_path,'newplan.gif','0').'></a>';	
 $paramName = &$lab_obj->getGroupName($parameterselect);
-$paramName = $paramName->fetchRow();
+if(isset($paramName) && !empty($paramName)) {
+	$paramName = $paramName->fetchRow();
+}
 # Assign elements
 $smarty->assign('sParamNew',$sTempNew);
 $smarty->assign('sParamGroup',$sTemp. $paramName['name'] );

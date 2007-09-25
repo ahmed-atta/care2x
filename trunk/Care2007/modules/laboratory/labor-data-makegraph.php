@@ -13,6 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+//$db->debug=1;
 $lang_tables=array('chemlab_groups.php','chemlab_params.php');
 define('LANG_FILE','lab.php');
 define('NO_2LEVEL_CHK',1);
@@ -42,6 +43,15 @@ require_once($root_path.'include/care_api_classes/class_lab.php');
 $enc_obj= new Encounter($encounter_nr);
 $lab_obj=new Lab($encounter_nr);
 
+//gjergji :
+//diff for the date of birth
+function dateDiff($dformat, $endDate, $beginDate){
+	$date_parts1=explode($dformat, $beginDate);
+	$date_parts2=explode($dformat, $endDate);
+	$start_date=gregoriantojd($date_parts1[1], $date_parts1[2], $date_parts1[0]);
+	$end_date=gregoriantojd($date_parts2[1], $date_parts2[2], $date_parts2[0]);
+	return $end_date - $start_date;
+}
 
 /*if($from=='station') $breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$patnum";
 	else $breakfile='labor_data_patient_such.php'.URL_APPEND;
@@ -52,7 +62,7 @@ require($root_path.'include/inc_labor_param_group.php');
 						
 if(!isset($parameterselect)||empty($parameterselect)) $parameterselect='priority';
 
-$parameters=$paralistarray[$parameterselect];					
+//$parameters=$paralistarray[$parameterselect];					
 //$paramname=$parametergruppe[$parameterselect];
 
 
@@ -76,10 +86,17 @@ if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
 		$dt=array();
 		while($buffer=$recs->FetchRow()){
 			//$records[$buffer['job_id']]=&$buffer;
-			$records[$buffer['job_id']][$buffer['group_id']]=unserialize($buffer['serial_value']);
+			$records[$buffer['job_id']]=unserialize($buffer['serial_value']);
 			$tdate[$buffer['job_id']]=&$buffer['test_date'];
 			$ttime[$buffer['job_id']]=&$buffer['test_time'];
 		}
+		//gjergji :
+		// reverse date from past to current
+		//had to use $tdatePrint for the arrayreverse to work...
+		$tdatePrint = array_reverse($tdate,true);
+		$tdate = array_reverse($tdate);
+		$ttime = array_reverse($ttime);
+		$records = array_reverse($records);
 	}else{
 		if($nostat) header("location:".$root_path."modules/laboratory/labor-nodatafound.php?sid=$sid&lang=$lang&patnum=$pn&ln=$result[name]&fn=$result[vorname]&nodoc=labor");
 		 	else header("location:".$root_path."modules/nursing/nursing-station-patientdaten-nolabreport.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&nodoc=labor&user_origin=$user_origin");
@@ -146,7 +163,6 @@ $smarty->assign('encounter_nr',$encounter_nr);
 $smarty->assign('sLastName',$patient['name_last']);
 $smarty->assign('sName',$patient['name_first']);
 $smarty->assign('sBday',formatDate2Local($patient['date_birth'],$date_format));
-
 # Buffer page output
 
 ob_start();
@@ -163,7 +179,7 @@ echo'
 	</td>
 	<td  class="j"><font color="#ffffff">&nbsp;<b>'.$LDNormalValue.'</b>&nbsp;</td>
 	<td  class="j"><font color="#ffffff">&nbsp;<b>'.$LDMsrUnit.'</b>&nbsp;</td>';
-	while(list($x,$v)=each($tdate))
+	while(list($x,$v)=each($tdatePrint))
 	echo '
 	<td class="a12_b"><font color="#ffffff">&nbsp;<b>'.formatDate2Local($v,$date_format).'<br>'.$x.'</b>&nbsp;</td>';
 	reset($tdate);
@@ -189,76 +205,102 @@ echo'
 
 # Prepare the graph values
 $tparam=explode('~',$HTTP_POST_VARS['params']);
-	   
 # Display the values
 $tracker=0;
-
-while(list($group_id,$param_group)=each($paralistarray)){
-	
+$displayedParam=array();
+while (list($job_id,$parametrat)=each($records)) {
 	$grpflag=true;
-	
-	while(list($param,$pname)=each($param_group)){
-
-		$flag=false;
-
-		# Reset the array
-		reset($tdate);
-		# Reset the sessbuf
-		$sessbuf='';
-		while(list($job_id,$xval)=each($tdate)){ 
-	
-			while(list($x,$v)=each($tparam))
-			{
-				if($v==$tracker) {
-					# Prepare the values for graph tracing
-					if($sessbuf==''){
-						if($records[$job_id][$group_id][$param]) $sessbuf.=$records[$job_id][$group_id][$param];
-							else $sessbuf.='0';
-					}else{
-						if($records[$job_id][$group_id][$param]) $sessbuf.='~'.$records[$job_id][$group_id][$param];
-							else $sessbuf.='~';
+		while(list($param,$pname)=each($parametrat)){
+			$flag=false;
+			$param_name = $lab_obj->TestParamsDetails($param);
+			# Reset the array
+			reset($tdate);
+			# Reset the sessbuf
+			$sessbuf='';		
+			while(list($job_id,$xval)=each($tdate)){ 
+				while(list($x,$v)=each($tparam)) {	
+					if($v==$param_name['id']) {
+						# Prepare the values for graph tracing
+						if($sessbuf==''){
+							if($records[$job_id][$param]) $sessbuf.=$records[$job_id][$param];
+								else $sessbuf.='0';
+						}else{
+							if($records[$job_id][$param]) $sessbuf.='~'.$records[$job_id][$param];
+								else $sessbuf.='~';
+						}
+						$flag=true;
+						$toggle=!$toggle;
 					}
-					
-					$flag=true;
-					$toggle=!$toggle;
+				}
+				reset($tparam);
+			}
+			if($flag){
+				# If parameters info not yet loaded, load now
+				if($grpflag){
+					$tparams=&$lab_obj->TestParams($group_id);
+					$grpflag=false;
+					while($tpbuf=&$tparams->FetchRow())	$tp[$tpbuf['id']]=&$tpbuf;
+				}
+				# Create the first colums boxes of a row
+				//$txt='<tr bgcolor=';
+		 		//if($toggle) { $txt.= '"#ffdddd"';}else { $txt.= '"#ffeeee"';}	 	
+				if(!in_array($param_name['id'],$displayedParam)) {
+					//gjergji : stupid idea for dealing with doubled values to show
+					$displayedParam[$ptrack]=$param_name['id'];		 			
+					$txt='<tr class=';
+			 		if($toggle) { $txt.= '"wardlistrow1"';}else { $txt.= '"wardlistrow2"';}
+					$txt.= '>
+		     		<td class="va12_n"> &nbsp;<nobr><a href="#">'.$param_name['name'].'</a></nobr> 
+					</td>
+					<td class="a10_b" >&nbsp;';
+					# gjergji : find the adeguate range limits
+					$diferenca = dateDiff("-", date("Y-m-d"), $patient['date_birth']);
+					switch ($diferenca) {
+						case ( ($diferenca >= 1) and ($diferenca <= 30 ) ) :
+							if($param_name['lo_bound_n']&&$param_name['hi_bound_n']) $txt.=$param_name['hi_bound_n'].'<p><br>&nbsp;'.$param_name['lo_bound_n'];
+							break;
+						case ( ($diferenca >= 31) and ($diferenca <= 360 ) ) :
+							if($param_name['lo_bound__y']&&$param_name['hi_bound_y']) $txt.=$param_name['hi_bound_y'].'<p><br>&nbsp;'.$param_name['lo_bound_y'];
+							break;
+						case ( $diferenca >= 361) and ($diferenca <= 5040 ) :
+							if($param_name['lo_bound_c']&&$param_name['hi_bound_c']) $txt.=$param_name['hi_bound_c'].'<p><br>&nbsp;'.$param_name['lo_bound_c'];
+							break;
+						case $diferenca > 5040 :
+							if($patient['sex']=='m')
+								if($param_name['lo_bound']&&$param_name['hi_bound']) $txt.=$param_name['hi_bound'].'<p><br>&nbsp;'.$param_name['lo_bound'];
+							elseif($patient['sex']=='f')
+								if($param_name['lo_bound_f']&&$param_name['hi_bound_f']) $txt.=$param_name['hi_bound_f'].'<p><br>&nbsp;'.$param_name['lo_bound_f'];	
+							break;
+					}	
+					# The unit of measurement
+					$txt.='</td>
+		  			<td class="a10_b" >&nbsp;'.$param_name['msr_unit'].'</td>';					
+					# do the graph
+					$diferenca = dateDiff("-", date("Y-m-d"), $patient['date_birth']);
+					switch ($diferenca) {
+						case ( ($diferenca >= 1) and ($diferenca <= 30 ) ) :
+							echo $txt.'<td colspan="'.$cols.'"><img  src="'.$root_path.'main/imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$param_name['lo_bound_n'].'&hi='.$param_name['hi_bound_n'].'&d='.$sessbuf.'" border=0>';
+							break;
+						case ( ($diferenca >= 31) and ($diferenca <= 360 ) ) :
+							echo $txt.'<td colspan="'.$cols.'"><img  src="'.$root_path.'main/imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$param_name['lo_bound_y'].'&hi='.$param_name['hi_bound_y'].'&d='.$sessbuf.'" border=0>';
+							break;
+						case ( $diferenca >= 361) and ($diferenca <= 5040 ) :
+							echo $txt.'<td colspan="'.$cols.'"><img  src="'.$root_path.'main/imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$param_name['lo_bound_c'].'&hi='.$param_name['hi_bound_c'].'&d='.$sessbuf.'" border=0>';
+							break;
+						case $diferenca > 5040 :
+							if($patient['sex']=='m')
+								echo $txt.'<td colspan="'.$cols.'"><img  src="'.$root_path.'main/imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$param_name['lo_bound'].'&hi='.$param_name['hi_bound'].'&d='.$sessbuf.'" border=0>';
+							elseif($patient['sex']=='f')
+								echo $txt.'<td colspan="'.$cols.'"><img  src="'.$root_path.'main/imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$param_name['lo_bound_f'].'&hi='.$param_name['hi_bound_f'].'&d='.$sessbuf.'" border=0>';
+							break;
+					}				
+					echo '</td></tr>';	
+					$ptrack++;		
 				}
 			}
-			reset($tparam);
-		}
-		
-		if($flag){
-			
-			# If parameters info not yet loaded, load now
-			if($grpflag){
-				$tparams=&$lab_obj->TestParams($group_id);
-				$grpflag=false;
-				while($tpbuf=&$tparams->FetchRow())	$tp[$tpbuf['id']]=&$tpbuf;
-			}
-			# Create the first colums boxes of a row
-			//$txt='<tr bgcolor=';
-	 		//if($toggle) { $txt.= '"#ffdddd"';}else { $txt.= '"#ffeeee"';}
-			$txt='<tr class=';
-	 		if($toggle) { $txt.= '"wardlistrow1"';}else { $txt.= '"wardlistrow2"';}
-			$txt.= '>
-     		<td class="va12_n"> &nbsp;<nobr><a href="#">'.$pname.'</a></nobr> 
-			</td>
-			<td class="a10_b" >&nbsp;';
-			# The normal range limits
-			if($tp[$param]['lo_bound']&&$tp[$param]['hi_bound']) $txt.=$tp[$param]['hi_bound'].'<p><br>&nbsp;'.$tp[$param]['lo_bound'];
-			# The unit of measurement
-			$txt.='</td>
-  			<td class="a10_b" >&nbsp;'.$tp[$param]['msr_unit'].'</td>';
-
-			//$txt.=$records[$job_id][$group_id][$param];
-				
-			# Print the row
-			 echo $txt.'<td colspan="'.$cols.'"><img  src="'.$root_path.'main/imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$tp[$param]['lo_bound'].'&hi='.$tp[$param]['hi_bound'].'&d='.$sessbuf.'" border=0>
-			</td></tr>';
-		}
 		$tracker++;
-	}
+		}
 }
-
 echo '
 </table>
 </form>';

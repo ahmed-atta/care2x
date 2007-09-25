@@ -14,6 +14,8 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 * @package care_api
 */
 class Lab extends Encounter {
+	
+	var $tb_req_chemlab='care_test_request_chemlabor';
 	/**
 	* Table name for test findings for chemical lab
 	* @var string
@@ -82,12 +84,44 @@ class Lab extends Encounter {
 				'lo_critical',
 				'hi_toxic',
 				'lo_toxic',
+				'median_f',
+				'hi_bound_f',
+				'lo_bound_f',
+				'hi_critical_f',
+				'lo_critical_f',
+				'hi_toxic_f',
+				'lo_toxic_f',
+				'median_n',
+				'hi_bound_n',
+				'lo_bound_n',
+				'hi_critical_n',
+				'lo_critical_n',
+				'hi_toxic_n',
+				'lo_toxic_n',
+				'median_y',
+				'hi_bound_y',
+				'lo_bound_y',
+				'hi_critica$l_y',
+				'lo_critical_y',
+				'hi_toxic_y',
+				'lo_toxic_y',	
+				'median_c',
+				'hi_bound_c',
+				'lo_bound_c',
+				'hi_critica$l_c',
+				'lo_critical_c',
+				'hi_toxic_c',
+				'lo_toxic_c',
+				'method',								
 				'status',
 				'history',
 				'modify_id',
 				'modify_time',
 				'create_id',
-				'create_time');
+				'create_time',
+				'sort_nr');
+				
+	//var $debug = true;
 	/**
 	* Constructor
 	* @param int Encounter number
@@ -224,6 +258,8 @@ class Lab extends Encounter {
 			} else {return FALSE;}
 		}else {return FALSE;}
 	}
+	
+	
 	/**
 	* Returns all test parameters belonging to a test group.
 	*
@@ -244,14 +280,146 @@ class Lab extends Encounter {
 			} else {return FALSE;}
 		}else {return FALSE;}
 	}
+	
+	/**
+	* Returns all test parameters belonging to a test group.
+	* used in the param administration module
+	* 
+	* The returned adodb record object contains rows of arrays.
+	* Each array contains the test result data with index keys as outlined in the <var>$fld_test_param</var> array.
+	* @access public
+	* @param int Test group id
+	* @return mixed adodb record object or boolean
+	*/
+	function TestParamsAdmin($group_id=''){
+		global $db;
+		if(empty($group_id)) $cond='';
+			else $cond="group_id='$group_id'";
+		$this->sql="SELECT * FROM $this->tb_test_param WHERE $cond ORDER BY name";
+		if($this->tparams=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->tparams->RecordCount()) {
+				return $this->tparams;
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}	
+	
+	/**
+	 * returns the tests of the selected patient
+	 *
+	 * @param int the $id of the batch request
+	 * @return array the parmas array
+	 */
+	function GetTestsToDo($id=''){
+		global $db;
+		if(empty($id)) $cond='';
+			else $cond="batch_nr='$id'";
+		$this->sql="SELECT parameters FROM $this->tb_req_chemlab WHERE $cond";
+		if($this->tparams=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->tparams->RecordCount()) {
+				return $this->tparams;
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}
+
+	/**
+	 * returns the stauts of a test urgent / not urgent
+	 *
+	 * @param int the $id of the encounter
+	 * @return mixed int or boolean
+	 */
+	function GetTestUrgent($id=''){
+		global $db;
+		if(empty($id)) $cond='';
+			else $cond="batch_nr='$id'";
+		$this->sql="SELECT urgent FROM $this->tb_req_chemlab WHERE $cond";
+		if($this->tparams=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->tparams->RecordCount()) {
+				return $this->tparams;
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}
+	/**
+	 * returns parameter details for a given id
+	 *
+	 * @param varchar the nr of the test $id
+	 * @return array containing the selecteg group info or nothing
+	 */
+	function TestParamsDetails($id=''){
+		global $db;
+		if(empty($id)) $cond='';
+			else $cond="WHERE id='$id'";
+		$this->sql="SELECT * FROM $this->tb_test_param $cond";
+		if($this->tparamsdetails=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->tparamsdetails->RecordCount()) {
+				return $this->tparamsdetails->FetchRow();
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}
+	/**
+	 * returns group details for a given id
+	 *
+	 * @param varchar the id of the test $id
+	 * @return array containing the selecteg group info or nothing
+	 */
+	function TestParamsGroupsDetails($id=''){
+		global $db;
+		if(empty($id)) $cond='';
+			else $cond="AND p.id='$id'";
+		$this->sql="SELECT p.*, g.is_enabled FROM $this->tb_test_param p, $this->tb_test_group g WHERE
+		p.id = g.id	$cond";
+		if($this->tparamsdetails=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->tparamsdetails->RecordCount()) {
+				return $this->tparamsdetails->FetchRow();
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}
+	/**
+	 * returns parameter details for a given nr
+	 *
+	 * @param varchar the nr of the test $nr
+	 * @return array containing the selecteg group info or nothing
+	 */
+	function TestParamsDetailsByNr($nr=''){
+		global $db;
+		if(empty($nr)) $cond='';
+			else $cond="WHERE nr='$nr'";
+			//echo "SELECT * FROM $this->tb_test_param $cond";
+		$this->sql="SELECT * FROM $this->tb_test_param $cond";
+		if($this->tparamsdetails=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->tparamsdetails->RecordCount()) {
+				return $this->tparamsdetails->FetchRow();
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}		
+	
 	/**
 	* Returns all test groups. 
+	* gjergji : changed it to get groups from params table
 	* @access public
 	* @return mixed adodb record object or boolean
 	*/
-	function TestGroups(){
+	function TestGroups($nr=''){
 		global $db;
-		$this->sql="SELECT * FROM $this->tb_test_group WHERE status NOT IN ($this->dead_stat) ORDER BY sort_nr";
+		$cond = 'WHERE group_id = \'-1\' ';
+		if(empty($nr)) $cond .='';
+			else $cond .="AND nr='$nr'";
+		$this->sql="SELECT * FROM $this->tb_test_param $cond ORDER BY sort_nr";
+		if($this->tgroups=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->tgroups->RecordCount()) {
+				return $this->tgroups;
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}
+
+	/**
+	* Returns all test groups not in dead state. 
+	* gjergji : changed it to get groups from params table
+	* @access public
+	* @return mixed adodb record object or boolean
+	*/
+	function TestActiveGroups(){
+		global $db;
+		$this->sql="SELECT * FROM $this->tb_test_param WHERE group_id = '-1' AND status NOT IN ($this->dead_stat) ORDER BY sort_nr";
 		if($this->tgroups=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->tgroups->RecordCount()) {
 				return $this->tgroups;
@@ -398,6 +566,47 @@ class Lab extends Encounter {
 		    if($buf->RecordCount()) {
 				$row=$buf->FetchRow();
 				return $row['modify_time'];
+			} else {return FALSE;}
+		}else {return FALSE;}
+	}
+	/**
+	 * moves up a test group, updating it's current sort_nr
+	 *
+	 * @param int current sort_nr $nr
+	 * @param int the new sort nr $sortnr
+	 * @return mixed interger or boolean
+	 */
+	function moveUp($nr,$sortnr) {
+		global $db;
+		$this->sql = "UPDATE $this->tb_test_param SET sort_nr = '$sortnr' WHERE nr = '$nr'";
+		return  $this->Transact();
+	}
+	
+	/**
+	 * moves down a test group, updating it's current sort_nr
+	 *
+	 * @param int current sort_nr $nr
+	 * @param int the new sort nr $sortnr
+	 * @return mixed interger or boolean
+	 */	
+	function moveDown($nr,$sortnr) {
+		global $db;
+		$this->sql = "UPDATE $this->tb_test_param SET sort_nr = '$sortnr' WHERE nr = '$nr'";
+		return  $this->Transact();
+	}
+	/**
+	* Returns the group name for the give group id. 
+	* gjergji : changed it to get groups from params table
+	* @access public
+	* @param varchar the id of the group
+	* @return array with the group name
+	*/
+	function getGroupName( $id ){
+		global $db;
+		$this->sql="SELECT name FROM $this->tb_test_param WHERE group_id = '-1' AND status NOT IN ($this->dead_stat) AND id = '$id'";
+		if($this->tgroups=$db->Execute($this->sql)){
+		    if($this->rec_count=$this->tgroups->RecordCount()) {
+				return $this->tgroups;
 			} else {return FALSE;}
 		}else {return FALSE;}
 	}

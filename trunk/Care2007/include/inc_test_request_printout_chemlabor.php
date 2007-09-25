@@ -1,3 +1,4 @@
+
 <!-- outermost table for the form -->
 <table border=0 cellpadding=1 cellspacing=0 bgcolor="#606060">
   <tr>
@@ -37,7 +38,7 @@
    </tr>
    <!-- Day row  -->
    <tr align="center">
-   <?php
+   <?php 
 	for($i=1;$i<8;$i++)
 	   echo 	 "<td><font size=1 face=\"verdana,arial\" color= \"#990000\">".$LDShortDay[$i]."</td>";
 	?>
@@ -273,6 +274,42 @@
 	}
 	?>
    </tr>
+  <!-- urgjente -->   
+<tr align="center"  colspan=4>
+   <td ><font size=1 face="arial" >&nbsp;</td>
+   <td colspan="3"><font size=1 face="verdana,arial" color= "#990000">Urgjente</td>
+   <td><font size=1 face="arial" color= "purple">&nbsp;</td>
+   <td ><font size=1 face="arial" color= "purple"></td>
+   <?php 
+			echo '
+			          <td '.$tdbgcolor.'>';
+			if($edit) echo '<a href="javascript:setM(\'urgent\')">';
+			if($edit_form||$read_form)
+			{
+			   if($stored_request['urgent'])
+			   {
+			      echo '<img src="f.gif"';
+				  $inp_v=1;
+				}
+				else
+				{
+				  echo '<img src="b.gif"';
+				}
+			}
+			else
+			{
+			   echo '<img src="b.gif"';
+			}
+			
+			echo ' border=0 width=18 height=6 id="urgent">';
+
+			if($edit) echo '</a><input type="hidden" name="urgent" value="'.$stored_request['urgent'].'">';	
+			'</td>';
+
+   ?>
+   <td colspan=8><font size=1 face="arial" color= "purple"></td>
+ </tr>   
+<!-- end urgjente   -->   
  </table>
  </div>
 </td>
@@ -399,136 +436,46 @@ for($n=0;$n<8;$n++)
 <table border=0 cellpadding=0 cellspacing=0 width=745 bgcolor="<?php echo $bgc1 ?>">
  <?php
 # Start buffering output
+
 ob_start();
- 
-    $tdcount=0; /* $tdcount limits the number of  columns (7) for test elements */
-	
-    while(list($x,$v)=each($LD_Elements))
-	{
-	  if(!$tdcount) echo '
-	  <tr class="lab">';
-	  
-	   /* If test element is part of emergency program change bgcolor */
-
-	   if(strpos($x,"_emx_")!==FALSE) $tdbgcolor='bgcolor="#f9def9"'; else  $tdbgcolor="";
-
-	  if(strpos($x,"tx_")!==FALSE)
-	  {
-	    echo '
-		                  <td bgcolor="#ee6666" width=104 colspan=2><font color="white">&nbsp;<b>'.$v.'</b></font></td>';
-	  }	 else
-	  {
-		 
-		 
-	     if(strpos($x,"_x_")!==FALSE) /* Check if the element has two marker fields */
-		 {
-		    $elem_index=explode("_x_",$x);
-			
-			/* The first marker field on the left */
-	        echo '
-			         <td '.$tdbgcolor.'>';
-			if($read_form)
-			{
-			   if($stored_param[$elem_index[0]])
-			   {
-			      echo '<img src="f.gif"';
-				}
-				else
-				{
-				  echo '<img src="b.gif"';
+for($i=0;$i<=$max_row;$i++) {
+	echo '<tr class="lab">';
+	for($j=0;$j<=$column;$j++) {
+			if($LD_Elements[$j][$i]['type']=='top') {
+				echo '<td bgcolor="#ee6666" colspan="2"><font color="white">&nbsp;<b>'.$LD_Elements[$j][$i]['value'].'</b></font></td>';
+			} else {
+				if($LD_Elements[$j][$i]['value']) {
+					echo '<td>';
+					if($edit) {
+						echo '<input type="hidden" name="'.$LD_Elements[$j][$i]['id'].'" value="0">
+						<a href="javascript:setM(\''.$LD_Elements[$j][$i]['id'].'\')">';
+					}
+					if( isset($stored_param[$LD_Elements[$j][$i]['id']]) && !empty($stored_param[$LD_Elements[$j][$i]['id']])) {
+						echo '<img src="f.gif" border=0 width=18 height=6 id="'.$LD_Elements[$j][$i]['id'].'">';
+					} else {
+						echo '<img src="b.gif" border=0 width=18 height=6 id="'.$LD_Elements[$j][$i]['id'].'">';
+					} if($edit) {
+						echo '</a>';
+					}
+					echo '</td><td>';
+					if($edit) echo '<a href="javascript:setM(\''.$LD_Elements[$j][$i]['id'].'\')">'.$LD_Elements[$j][$i]['value'].'</a>';
+					else echo $LD_Elements[$j][$i]['value'];
+					echo '</td>';
+				} else {
+					echo '<td colspan=2>&nbsp;</td>';
 				}
 			}
-			else
-			{
-			   echo '<img src="b.gif"';
-			}
-			
-			echo ' width=18 height=6>';
-			
-			
-			/* The second marker field on the right */
-			echo $v.'</td>
-			         <td align="right" '.$tdbgcolor.'>';
-			
-			
-			if($read_form)
-			{
-			   if($stored_param[$elem_index[1]])
-			   {
-			      echo '<img src="f.gif"';
-				}
-				else
-				{
-				  echo '<img src="b.gif"';
-				}
-			}
-			else
-			{
-			   echo '<img src="b.gif"';
-			}
-			
-			echo ' width=18 height=6>';
-			
-			echo '</td>';
-		 }
-		 else 
-		 { 
-		    /* Other wise when the element has a single marker field */
-			echo '
-			          <td '.$tdbgcolor.'>';
-			if($read_form)
-			{
-			   if($stored_param[$x])
-			   {
-			      echo '<img src="f.gif"';
-				}
-				else
-				{
-				  echo '<img src="b.gif"';
-				}
-			}
-			else
-			{
-			   echo '<img src="b.gif"';
-			}
-			
-			echo ' width=18 height=6>';
-			
-			echo $v.'</td>';
-			
-		   /* Check for the code of telephone then show telephone icon*/
-
-		   if(strpos($x,"_telx_")!==FALSE)
-		   {
-		      echo '
-			          <td align="right" '.$tdbgcolor.'><img '.createComIcon($root_path,'violet_phone.gif','0','',TRUE).'></td>';
-	        }
-			else
-			{ 
-		      echo '
-			          <td '.$tdbgcolor.'></td>';
-		    }
-		 }
-	   }
-	  
-	  if($tdcount==6)
-	  {
-	     echo '
-		 </tr>
-		 <tr>';
-		 $tdcount=0;
-		 
-		 for ($i=0;$i<6;$i++)   echo '<td bgcolor="#ffcccc" colspan=2 width=104><img src="p.gif"  width=1 height=1></td><td width=2></td>';
-		   echo '<td bgcolor="#ffcccc" colspan=2 width=104><img src="p.gif"  width=1 height=1></td>';
-		 echo '
-		 </tr>';
-	   }
-	   else
-	  {
-	     echo '<td bgcolor="white" width=2><img src="p.gif" width=2 height=1></td>';
-		 $tdcount++;
-	   }
 	}
+	echo '</tr><tr>';
+	if($i<$max_row) {
+	  	for($k=0;$k<=$column;$k++) {
+	  		echo '<td width=2></td><td bgcolor="#ffcccc"><img src="p.gif"  width=1 height=1></td>';
+	  	}
+  	echo '</tr>';
+	}
+}
+
+//$sTemp=ob_get_contents();
 ob_end_flush();
 ?>
   <tr>

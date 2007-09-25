@@ -76,7 +76,6 @@ if(isset($pn)&&$pn) {
      
 	   
 	 if(!isset($mode))   $mode='';
-  
 	   
 			if($enc_obj->is_loaded) 
 					{

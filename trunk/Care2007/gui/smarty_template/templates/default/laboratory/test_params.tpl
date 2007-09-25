@@ -8,9 +8,13 @@
 		&nbsp;
 		{{$sParamGroup}}
 	  </td>
+      <td style="color:white; background-color: red; font-weight:bold;" align="right">
+		&nbsp;
+		{{$sParamNew}}
+	  </td>
     </tr>
     <tr>
-      <td>
+      <td colspan=2>
 	     <table border="0" cellpadding=2 cellspacing=1>
 			<tbody>
 				<tr bgcolor="white">
@@ -27,14 +31,13 @@
 				</tr>
 				
 				{{$sTestParamsRows}}
-
 			</tbody>
 			</table>
 	  </td>
     </tr>
   </tbody>
 </table>
-
+{{$sShortHelp}}
 <form {{$sFormAction}} method=post onSubmit="return chkselect(this)" name="paramselect">
 <table>
   <tbody>

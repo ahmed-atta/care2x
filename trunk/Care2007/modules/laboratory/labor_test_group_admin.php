@@ -110,8 +110,10 @@ $smarty->assign('sFormAction',$thisfile);
 ob_start();
 echo '<form action="'. $thisfile .'" method="post" name="group_admin">';
 $toggle=0;
-$max_rows = $tgroups->NumRows();
-$array_groups = $tgroups->GetArray();
+if(isset($tgroups) && !empty($tgroups)) {
+	$max_rows = $tgroups->NumRows();
+	$array_groups = $tgroups->GetArray();
+}
 $i = 0;
 if(is_object($tgroups)){
 	for($i = 0; $i < $max_rows; $i++) {
