@@ -18,7 +18,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 /* Create nursing notes object */
 require_once($root_path.'include/care_api_classes/YellowPaper.php');
 $report_obj= new YellowPaper;
- 
+///$db->debug=true; 
 //if ($station=='') { $station='Non-department specific';  }
 if($pday=='') $pday=date('d');
 if($pmonth=='') $pmonth=date('m');
@@ -28,7 +28,6 @@ $s_date=$pyear.'-'.$pmonth.'-'.$pday;
 $thisfile=basename(__FILE__);
 			
 require_once($root_path.'include/inc_date_format_functions.php');
-
 
 if($mode=='save'){
 	# Know where we are
@@ -45,6 +44,7 @@ if($mode=='save'){
 		exit;
 	}else{echo $report_obj->getLastQuery()."<p>$LDDbNoUpdate";}
 } elseif ($mode=='update') {
+	
 	# Know where we are
 	switch($HTTP_SESSION_VARS['sess_user_origin']){
 		case 'lab': $HTTP_POST_VARS['location_type_nr']=1; # 1 =department
@@ -55,7 +55,8 @@ if($mode=='save'){
 	$HTTP_POST_VARS['location_id']=$station; 
 	if($report_obj->updateDailyWardNotes($HTTP_POST_VARS)){
 		//echo $report_obj->getLastQuery();
-		header("Location:$thisfile".URL_REDIRECT_APPEND."&pn=$pn&station=$station&dept_nr=$dept_nr&location_nr=$location_nr&saved=1");
+		//header("Location:$thisfile".URL_REDIRECT_APPEND."&pn=$pn&station=$station&dept_nr=$dept_nr&location_nr=$location_nr&saved=1");
+		echo "<html><body><script>javascript:window.close();</script></body></html>";
 		exit;
 	}else{echo $report_obj->getLastQuery()."<p>$LDDbNoUpdate";}
 }else{
@@ -106,7 +107,7 @@ if($mode=='save'){
 
 
  # OnLoad Javascript code
-  if(($mode=='save')&&($occup)||$saved) $sTemp = "window.opener.location.reload();";
+  if(($mode=='save')&&($occup)||$saved) $sTemp = "window.opener.location.reload();this.close();";
   	else $sTemp = '';
 
  $smarty->assign('sOnLoadJs','onLoad="'.$sTemp.' if (window.focus) window.focus();"');
@@ -203,12 +204,12 @@ if($occup){
  ?>
   <div id="TabbedPanels1" class="TabbedPanels">
   <ul class="TabbedPanelsTabGroup">
-    <li class="TabbedPanelsTab" tabindex="0"><b>Permbledhje Anamnestike</b></li>
-    <li class="TabbedPanelsTab" tabindex="0"><b>Anamneza familiare</b></li>
-    <li class="TabbedPanelsTab" tabindex="0"><b>Anamneza socio-ambientale</b></li>
-    <li class="TabbedPanelsTab" tabindex="0"><b>Anamneza Fiziologjike</b></li>
-    <li class="TabbedPanelsTab" tabindex="0"><b>Anamneza patologjike e hershme</b></li>
-    <li class="TabbedPanelsTab" tabindex="0"><b>Anamneza patologjike e vone</b></li>
+    <li class="TabbedPanelsTab" tabindex="0"><b>Quadro anamnestico</b></li>
+    <li class="TabbedPanelsTab" tabindex="0"><b>Anamnesi familiare</b></li>
+    <li class="TabbedPanelsTab" tabindex="0"><b>Anamnesi socio-ambientale</b></li>
+    <li class="TabbedPanelsTab" tabindex="0"><b>Anamnesi fisiologica</b></li>
+    <li class="TabbedPanelsTab" tabindex="0"><b>Anamnesi patologica prossima</b></li>
+    <li class="TabbedPanelsTab" tabindex="0"><b>Anamnesi patologica remota</b></li>
   </ul>
   <div class="TabbedPanelsContentGroup">
   <div class="TabbedPanelsContent">
@@ -216,42 +217,42 @@ if($occup){
     <textarea name="sunto_anamnestico" cols=60 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['sunto_anamnestico'] ?>
 </textarea>
     <br>
-    <b>Gjendja aktuale</b><br>
+    <b>Stato attuale</b><br>
     <table>
       <tr>
-        <td><i>Gjatesia:&nbsp;</i></td>
+        <td><i>Altezza:&nbsp;</i></td>
         <td><input type="text" name="altezza" size=10 maxlength=10 <?php if ($occup) echo "value='".$row['altezza']."'" ?>></td>
       </tr>
       <tr>
-        <td><i>Pesha:&nbsp;</i></td>
+        <td><i>Peso:&nbsp;</i></td>
         <td><input type="text" name="peso" size=10 maxlength=10 <?php if ($occup) echo "value='".$row['peso']."'" ?>></td>
       </tr>
       <tr>
-        <td><i>Sip. Trupore.:&nbsp;</i></td>
+        <td><i>Età:&nbsp;</i></td>
         <td><input type="text" name="norm" size=10 maxlength=10 <?php if ($occup) echo "value='".$row['norm']."'" ?>></td>
       </tr>
     </table>
-    <i>Simptomat dhe Shenjat</i><br>
+    <i>Sintomatologia</i><br>
     <textarea name="stato_presente" cols=60 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['stato_presente'] ?>
 </textarea>
     <br>
-    <b>Te dhenat Laboratorike</b><br>
+    <b>Dati laboratorio</b><br>
     <table>
       <tr>
         <td><i>Urine</i><br>
           <textarea name="dati_urine" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['dati_urine'] ?>
 </textarea></td>
-        <td><i>Gjaku</i><br>
+        <td><i>Sangue</i><br>
           <textarea name="dati_sangue" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['dati_sangue'] ?>
 </textarea></td>
-        <td><i>Tjeter</i><br>
+        <td><i>Altro</i><br>
           <textarea name="dati_altro" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['dati_altro'] ?>
 </textarea></td>
       </tr>
     </table>
     <table>
       <tr>
-        <td><b>Diagnoza</b><br>
+        <td><b>Diagnosi</b><br>
           <textarea name="diagnosi" cols=40 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['diagnosi'] ?>
 </textarea>
         </td>
@@ -265,24 +266,24 @@ if($occup){
     <div class="TabbedPanelsContent"> <br>
       <table>
         <tr>
-          <td><i>Semundje familjare </i><br>
+          <td><i>Malattie ereditarie </i><br>
             <textarea name="malattia_ereditarie" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['malattia_ereditarie'] ?>
 </textarea></td>
-          <td><i>Babai</i><br>
+          <td><i>Padre</i><br>
             <textarea name="padre" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['padre'] ?>
 </textarea></td>
-          <td><i>Nena</i><br>
+          <td><i>Madre</i><br>
             <textarea name="madre" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['madre'] ?>
 </textarea></td>
         </tr>
         <tr>
-          <td><i>Bashkeshorti</i><br>
+          <td><i>Coniuge, Compagno/a</i><br>
             <textarea name="coniuge" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['coniuge'] ?>
 </textarea></td>
-          <td><i>Femijet</i><br>
+          <td><i>Figli</i><br>
             <textarea name="figli" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['figli'] ?>
 </textarea></td>
-          <td><i>Vellezerit, Motrat</i><br>
+          <td><i>Fratelli, Sorelle</i><br>
             <textarea name="fratelli" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['fratelli'] ?>
 </textarea></td>
         </tr>
@@ -291,35 +292,35 @@ if($occup){
     <div class="TabbedPanelsContent"> <br>
       <table>
         <tr>
-          <td><i>Ka banuar ne vende te huaja?</i><br>
+          <td><i>Viaggi in paesi extraeuropei?</i><br>
             <textarea name="paesi_esteri" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['paesi_esteri'] ?>
 </textarea></td>
-          <td><i>Banesa</i><br>
+          <td><i>Abitazione</i><br>
             <textarea name="abitazione" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['abitazione'] ?>
 </textarea></td>
-          <td><i>Punesimi i meparshem</i><br>
+          <td><i>Attività lavorativa passata</i><br>
             <textarea name="lavoro_pregresso" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['lavoro_pregresso'] ?>
 </textarea></td>
         </tr>
         <tr>
-          <td><i>Attivit&agrave; lavorativa presente</i><br>
+          <td><i>Attività lavorativa recente</i><br>
             <textarea name="lavoro_presente" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['lavoro_presente'] ?>
 </textarea></td>
-          <td><i>Punesimi aktual</i><br>
+          <td><i>Attività lavorativa attuale</i><br>
             <textarea name="lavoro_attuale" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['lavoro_attuale'] ?>
 </textarea></td>
-          <td><i>Ambjenti i punes</i><br>
+          <td><i>Ambiente lavorativo</i><br>
             <textarea name="ambiente_lavoro" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['ambiente_lavoro'] ?>
 </textarea></td>
         </tr>
         <tr>
-          <td><i>Saturuar me gazra</i><br>
+          <td><i>Contatto con gas</i><br>
             <textarea name="gas_lavoro" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['gas_lavoro'] ?>
 </textarea></td>
-          <td><i>Ne kontakt me substanca toksike</i><br>
+          <td><i>Contatto con sostanze tossiche</i><br>
             <textarea name="tossiche_lavoro" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['tossiche_lavoro'] ?>
 </textarea></td>
-          <td><i>Personat bashkejetues</i><br>
+          <td><i>Altri agenti tossici</i><br>
             <textarea name="conviventi" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['conviventi'] ?>
 </textarea></td>
         </tr>
@@ -328,57 +329,57 @@ if($occup){
     <div class="TabbedPanelsContent"> <br>
       <table>
         <tr>
-          <td>Prematur</td>
+          <td>Nato prematuro?</td>
           <td><select name='prematuro'>
-              <option name='Jo'<?php if (($occup)&&($row['prematuro']=="Jo")) echo "selected"; ?>>Jo</option>
-              <option name='Po' <?php if (($occup)&&($row['prematuro']=="Po")) echo "selected"; ?>>Po</option>
+              <option name='Jo'<?php if (($occup)&&($row['prematuro']=="Jo")) echo "selected"; ?>>Si</option>
+              <option name='Po' <?php if (($occup)&&($row['prematuro']=="Po")) echo "selected"; ?>>No</option>
             </select></td>
-          <td>Lindje eutocike</td>
+          <td>Parto eutocico</td>
           <td><select name='eutocico'>
-              <option name='Jo' <?php if (($occup)&&($row['eutocico']=="Jo")) echo "selected"; ?>>Jo</option>
-              <option name='Po' <?php if (($occup)&&($row['eutocico']=="Po")) echo "selected"; ?>>Po</option>
+              <option name='Jo' <?php if (($occup)&&($row['eutocico']=="Jo")) echo "selected"; ?>>Si</option>
+              <option name='Po' <?php if (($occup)&&($row['eutocico']=="Po")) echo "selected"; ?>>No</option>
             </select></td>
-          <td>Aktet e para fiziologjike normale</td>
+          <td>Sviluppo neonatale normale</td>
           <td><select name='fisiologici_normali'>
-              <option name='Jo' <?php if (($occup)&&($row['fisiologici_normali']=="Jo")) echo "selected"; ?>>Jo</option>
-              <option name='Po' <?php if (($occup)&&($row['fisiologici_normali']=="Po")) echo "selected"; ?>>Po</option>
+              <option name='Jo' <?php if (($occup)&&($row['fisiologici_normali']=="Jo")) echo "selected"; ?>>Si</option>
+              <option name='Po' <?php if (($occup)&&($row['fisiologici_normali']=="Po")) echo "selected"; ?>>No</option>
             </select></td>
-          <td>Te vona</td>
+          <td>Sviluppo tardivo</td>
           <td><select name='fisiologici_tardivi'>
-              <option name='Jo' <?php if (($occup)&&($row['fisiologici_tardivi']=="Jo")) echo "selected"; ?>>Jo</option>
-              <option name='Po' <?php if (($occup)&&($row['fisiologici_tardivi']=="Po")) echo "selected"; ?>>Po</option>
+              <option name='Jo' <?php if (($occup)&&($row['fisiologici_tardivi']=="Jo")) echo "selected"; ?>>Si</option>
+              <option name='Po' <?php if (($occup)&&($row['fisiologici_tardivi']=="Po")) echo "selected"; ?>>No</option>
             </select></td>
         </tr>
         <tr>
-          <td colspan='4'><i>Menset</i><br>
+          <td colspan='4'><i>Mestruazione</i><br>
             <textarea name="mestruazione" cols=30 rows=4 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['mestruazione'] ?>
 </textarea></td>
-          <td colspan='4'><i>Shtatzanite</i><br>
+          <td colspan='4'><i>Gravidanze</i><br>
             <textarea name="gravidanze" cols=30 rows=4 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['gravidanze'] ?>
 </textarea></td>
         </tr>
         <tr>
-          <td colspan='4'><i>Sherbimi ushtarak</i><br>
+          <td colspan='4'><i>Servizio Militare</i><br>
             <textarea name="militare" cols=30 rows=4 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['militare'] ?>
 </textarea></td>
-          <td colspan='4'><i>Droga</i><br>
+          <td colspan='4'><i>Droghe</i><br>
             <textarea name="droghe" cols=30 rows=4 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['droghe'] ?>
 </textarea></td>
         </tr>
         <tr>
-          <td>Alkool</td>
+          <td>Alcool</td>
           <td><select name='alcolici'>
               <option name='Astemio' <?php if (($occup)&&($row['alcolici']=="Astemio")) echo "selected"; ?>>Astemio</option>
               <option name='Medio bevitore' <?php if (($occup)&&($row['alcolici']=="Medio bevitore")) echo "selected"; ?>>Medio bevitore</option>
               <option name='Forte bevitore' <?php if (($occup)&&($row['alcolici']=="Forte bevitore")) echo "selected"; ?>>Forte bevitore</option>
             </select></td>
-          <td>Kafe</td>
+          <td>Caffè Tè</td>
           <td><select name='caffe'>
               <option name='Non bevitore' <?php if (($occup)&&($row['caffe']=="Non bevitore")) echo "selected"; ?>>Non bevitore</option>
               <option name='Medio bevitore' <?php if (($occup)&&($row['caffe']=="Medio bevitore")) echo "selected"; ?>>Medio bevitore</option>
               <option name='Forte bevitore' <?php if (($occup)&&($row['caffe']=="Forte bevitore")) echo "selected"; ?>>Forte bevitore</option>
             </select></td>
-          <td>Duhan</td>
+          <td>Fumo</td>
           <td><select name='fumo'>
               <option name='Non fumatore' <?php if (($occup)&&($row['fumo']=="Non fumatore")) echo "selected"; ?>>Non fumatore</option>
               <option name='Medio fumatore' <?php if (($occup)&&($row['fumo']=="Medio fumatore")) echo "selected"; ?>>Medio fumatore</option>
@@ -387,20 +388,20 @@ if($occup){
             </select></td>
         </tr>
         <tr>
-          <td>Etja</td>
+          <td>Sete</td>
           <td><select name='sete'>
               <option name='Normale' <?php if (($occup)&&($row['sete']=="Normale")) echo "selected"; ?>>Normale</option>
               <option name='Ridotta' <?php if (($occup)&&($row['sete']=="Ridotta")) echo "selected"; ?>>Ridotta</option>
               <option name='Aumentata' <?php if (($occup)&&($row['sete']=="Aumentata")) echo "selected"; ?>>Aumentata</option>
             </select></td>
-          <td>Defekimi</td>
+          <td>Alvo</td>
           <td><select name='alvo'>
               <option name='Normale' <?php if (($occup)&&($row['alvo']=="Normale")) echo "selected"; ?>>Normale</option>
               <option name='Diarroico'<?php if (($occup)&&($row['alvo']=="Diarroico")) echo "selected"; ?>>Diarroico</option>
-              <option name='Stitico'>Stitico</option>
+              <option name='Stitico'<?php if (($occup)&&($row['alvo']=="Stitico")) echo "selected"; ?>>Stitico</option>
               <option name='Tenesmo' <?php if (($occup)&&($row['alvo']=="Tenesmo")) echo "selected"; ?>>Tenesmo</option>
             </select></td>
-          <td>Diureza</td>
+          <td>Diuresi</td>
           <td><select name='diuresi'>
               <option name='Normale' <?php if (($occup)&&($row['diuresi']=="Normale")) echo "selected"; ?>>Normale</option>
               <option name='Scarsa' <?php if (($occup)&&($row['diuresi']=="Scarsa")) echo "selected"; ?>>Scarsa</option>
@@ -429,7 +430,7 @@ var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
     <input type="hidden" name="lang" value="<?php echo $lang ?>">
     <input type="hidden" name="station" value="<?php echo $station ?>">
     <input type="hidden" name="location_nr" value="<?php echo $location_nr; ?>">
-    <?php if ($occup) { ?>
+    <?php if (isset($occup)) { ?>
     <input type="hidden" name="mode" value="update">
     <input type="hidden" name="nr" value="<?php echo $row['nr'] ?>">
     <?php } else { ?>
