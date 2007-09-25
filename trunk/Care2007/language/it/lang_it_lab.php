@@ -123,6 +123,26 @@ $LDUpperCritical='Valore critico sup.';
 $LDLowerCritical='Valore critico inf.';
 $LDUpperToxic='Valore tossico sup.';
 $LDLowerToxic='Valore tossico inf.';
+/* 2007-07-22 Gjergj Sheldija*/
+$LDShowParam='Parametri';
+$LDHide='Nascondi';
+$LDDelete='Cancella';
+$LDShow='Mostra';
+$LDMale='Maschi';
+$LDFemales='Femmine';
+$LD01Moth='0-1 mese';
+$LD112Month='1-12 mesi';
+$LD114Years='1-14 anni';
+$LDID='Param ID';
+$LDMethod='Metodo';
+$LDGroup='Gruppo';
+$LDTestGroups='Profili analisi';
 $LDTestGroupsTxt='Crea e modifica i profili analisi';
-$LDTestGroups='Profili analisi'
+$LDHiddenParams='Parametri in verde nascosti';
+$LDDeletedParams='Parametri in rosso cancellati';
+$LDHiddenGroups='Grouppi in verde nascost';
+$LDDeletedGroups='Grouppi in rosso cancellati';
+$LDUrgent='Urgente';
+
+
 ?>
