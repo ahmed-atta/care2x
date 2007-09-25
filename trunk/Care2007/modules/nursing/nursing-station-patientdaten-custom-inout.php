@@ -242,11 +242,6 @@ function endhilite(d){
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
-
 <?php
 
 $sTemp = ob_get_contents();
@@ -284,31 +279,31 @@ echo '<font size="7">'.$IO_title.' <p><font size=2>';
 </div></td></tr>
 <?php
 echo '	<tr bgcolor="#99ccff">
-		<td colspan=10><div class=fva2_ml10><font color="#000099"><b>Hyrjet</b></div></td>
-		<td colspan=6><div class=fva2_ml10><font color="#000099"><b>Daljet</b></div></td>
+		<td colspan=10><div class=fva2_ml10><font color="#000099"><b>'.$LDIntake.'</b></div></td>
+		<td colspan=6><div class=fva2_ml10><font color="#000099"><b>'.$LDOutput.'</b></div></td>
 		</tr>';
 echo '	<tr bgcolor="#99ccff">
 		<td colspan=10><div class=fva2_ml10></div></td>
-		<td colspan=2><div class=fva2_ml10><font color="#000000"><b>Urine</b></div></td>
+		<td colspan=2><div class=fva2_ml10><font color="#000000"><b>'.$LDUrine.'</b></div></td>
 		<td colspan=4><div class=fva2_ml10></div></td>
 		</tr>';	
 
 echo '	<tr bgcolor="#99ccff">
-		<td><div class=fva2_ml3><b>Data</b></div></td>
-		<td><div class=fva2_ml3><b>Ora</b></div></td>
-		<td><div class=fva2_ml3><b>Nr. Flak.</b></div></td>
-		<td><div class=fva2_ml3><b>Solucion</b></div></td>
-		<td><div class=fva2_ml3><b>Sasia</b></div></td>
-		<td><div class=fva2_ml3><b>Totali</b></div></td>
-		<td><div class=fva2_ml3><b>Fillestar</b></div></td>
-		<td><div class=fva2_ml3><b>Likide orale</b></div></td>
-		<td><div class=fva2_ml3><b>Saisa</b></div></td>
-		<td><div class=fva2_ml3><b>Totali</b></div></td>
-		<td><div class=fva2_ml3><b>Ora</b></div></td>
-		<td><div class=fva2_ml3><b>Saisa</b></div></td>
-		<td><div class=fva2_ml3><b>RTA</b></div></td>
-		<td><div class=fva2_ml3><b>Humbje</b></div></td>
-		<td><div class=fva2_ml3><b>Totali</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDDate.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDTime.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDNoofPint.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDSolution.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDAmount.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDTotal.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDInitial.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDOralFluid.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDAmount.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDTotal.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDTime.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDAmount.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDRTA.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDDrain.'</b></div></td>
+		<td><div class=fva2_ml3><b>'.$LDTotal.'</b></div></td>
 		<td></td>
 		</tr>';	
 		
@@ -396,7 +391,7 @@ while ($iod=mysql_fetch_assoc($res)) {
 		<td><div class=fva2_ml3 id="id_<?=$iod['nr']?>_rta"><?=$iod['rta']?></div></td>
 		<td><div class=fva2_ml3 id="id_<?=$iod['nr']?>_drain"><?=$iod['drain']?></div></td>
 		<td align=right><div class=fva2_ml3><?=$urinetotal?></div></td>
-		<td><div class=fva2_ml3><a href='#' OnClick=Edit('<?=$iod['nr']?>')><span style='background-color:#FFFF00'>NDRYSHO</span></a></div></td>
+		<td><div class=fva2_ml3><a href='#' OnClick=Edit('<?=$iod['nr']?>')><span style='background-color:#FFFF00'><?php echo $LDEDIT ?></span></a></div></td>
 	</tr>	
 	
 		<?
@@ -444,12 +439,14 @@ if($edit) {
 		<input type=hidden name=editid id=editid value="">
 	
         <td valign="top"><?php echo $LDDate ?>:<br>
-		<input type=text size=10 maxlength=10 name="indatetime_date" id="indatetime_date" value="<?php echo formatDate2Local(date('Y-m-d'),$date_format); ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onFocus="this.select()" value="<?php if(!$saved) echo $dateput; ?>" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"><br>
-<a href="javascript:show_calendar('berichtform.indatetime_date','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a><font size=1 face="arial">[<?php
- $dfbuffer="LD_".strtr($date_format,".-/","phs");
-  echo $$dfbuffer;
- ?>]</font>
+		<?php
+			//gjergji : new calendar
+			require_once ('../../js/jscalendar/calendar.php');
+			$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+			$calendar->load_files();
+  			echo $calendar->show_calendar($calendar,$date_format,'indatetime_date');
+			//end : gjergji  
+ 		?>
 	
          </td>
 		 
@@ -457,45 +454,47 @@ if($edit) {
 		<input type=text size=4 maxlength=5 name="indatetime_time" id="indatetime_time"  value="<?php echo date('H:i'); ?>" onKeyUp=setTime(this,'<?php echo $lang ?>') onFocus=this.select()><br>
 		</td>
 		
-		<td valign="top">Nr. Flac:<br>
+		<td valign="top"><?php echo $LDNoofPint ?>:<br>
 		<input type=text size=5 maxlength=6 name="pint"  id="pint" value="<?if (!($saved)) echo $_POST['pint']?>">
 		</td>
-		<td valign="top">Solucion:<br>
+		<td valign="top"><?php echo $LDSolution ?>:<br>
 		<input type=text size=10 maxlength=32 name="solution"  id="solution" value="<?if (!($saved)) echo $_POST['solution']?>">
 		</td>
-		<td valign="top">Sasia:<br>
+		<td valign="top"><?php echo $LDAmount ?>:<br>
 		<input type=text size=5 maxlength=6 name="solutionamount"  id="solutionamount" value="<?if (!($saved)) echo $_POST['solutionamount']?>">
 		</td>
 			<td></td>
-		<td valign="top">Fillestar:<br>
+		<td valign="top"><?php echo $LDInitial ?>:<br>
 		<input type=text size=5 maxlength=6 name="initial"  id="initial" value="<?if (!($saved)) echo $_POST['initial']?>">
 		</td>
-		<td valign="top">Likide orale:<br>
+		<td valign="top"><?php echo $LDOralFluid ?>:<br>
 		<input type=text size=10 maxlength=32 name="oralfluid"  id="oralfluid" value="<?if (!($saved)) echo $_POST['oralfluid']?>">
 		</td>
-		<td valign="top">Sasia:<br>
+		<td valign="top"><?php echo $LDAmount ?>:<br>
 		<input type=text size=5 maxlength=6 name="oralfluidamount"  id="oralfluidamount" value="<?if (!($saved)) echo $_POST['oralfluidamount']?>">
 		</td>	
 			<td></td>
-		<td valign="top">Ora:<br>
+		<td valign="top"><?php echo $LDTime ?>:<br>
 		<input type=text size=5 maxlength=5 name="urinetime"  id="urinetime" value="<?if (!($saved)) echo $_POST['urinetime']?>">
 		</td>
-		<td valign="top">Sasia:<br>
+		<td valign="top"><?php echo $LDAmount ?>:<br>
 		<input type=text size=5 maxlength=6 name="urineamount"  id="urineamount" value="<?if (!($saved)) echo $_POST['urineamount']?>">
 		</td>
-		<td valign="top"> RTA:<br>
+		<td valign="top"><?php echo $LDRTA ?>:<br>
 		<input type=text size=5 maxlength=6 name="rta"  id="rta" value="<?if (!($saved)) echo $_POST['rta']?>">
 		</td>
-		<td valign="top">Humbje:<br>
+		<td valign="top"><?php echo $LDDrain ?>:<br>
 		<input type=text size=5 maxlength=6 name="drain"  id="drain" value="<?if (!($saved)) echo $_POST['drain']?>">
 		</td><td colspan=2 align=center><a <?
 			
 			echo 'href=\'nursing-station-patientdaten-custom-inout.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'';
 			
-			?>> <span style="background-color:#FFFF00"> PASTRO </span> </a></td>
+			?>> <span style="background-color:#FFFF00"> <?php echo $LDCLEAR ?> </span> </a></td>
 		</tr>
 		
-
+<?php
+} 
+?>
 		</table>
 
 <p>
