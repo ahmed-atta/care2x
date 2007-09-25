@@ -123,4 +123,6 @@ $LDUpperCritical='Valore critico sup.';
 $LDLowerCritical='Valore critico inf.';
 $LDUpperToxic='Valore tossico sup.';
 $LDLowerToxic='Valore tossico inf.';
+$LDTestGroupsTxt='Crea e modifica i profili analisi';
+$LDTestGroups='Profili analisi'
 ?>
