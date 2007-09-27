@@ -57,7 +57,7 @@ $LDPendingTestRequest='Pending Test Request';
 $LDDone='It\'s done! Move the form to the archive';
 
 
-/gjergji
+//gjergji
 //used to calculate the max_rows per column
 $SQLStatementNum = "SELECT id,name,status FROM care_test_param WHERE status NOT IN ('deleted','hidden') ORDER BY name"; 
 $rowNum = $db->Execute($SQLStatementNum);
