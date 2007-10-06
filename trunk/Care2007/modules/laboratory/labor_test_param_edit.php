@@ -11,20 +11,17 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-//$lang_tables=array('chemlab_groups.php','chemlab_params.php');
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
 
-///$db->debug=true;
+$db->debug=true;
 
 # Create lab object
 require_once($root_path.'include/care_api_classes/class_lab.php');
 $lab_obj=new Lab();
-
-//require($root_path.'include/inc_labor_param_group.php');
 
 # Load the date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');
@@ -34,7 +31,7 @@ if(isset($mode) && !empty($mode)) {
 		# Save the nr	
 		if(empty($HTTP_POST_VARS['status'])) $HTTP_POST_VARS['status']=' ';
 		$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$HTTP_POST_VARS['id'] = "_" . str_replace(" ","_",strtolower($HTTP_POST_VARS['name'])) . '_' . strtolower($HTTP_POST_VARS['group_id']);
+		$HTTP_POST_VARS['id'] = "_" . str_replace(" ","_",strtolower($HTTP_POST_VARS['name'])) . '__' . strtolower($HTTP_POST_VARS['group_id']);
 		$HTTP_POST_VARS['id'] = strtolower($HTTP_POST_VARS['id']);
 		$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 		# Set to use the test params
@@ -52,7 +49,7 @@ if(isset($mode) && !empty($mode)) {
 	//  Script End -->
 	</script>
 	
-	<?php    
+	<?php   
 			exit;
 		}
 		else echo $lab_obj->getLastQuery();
@@ -64,7 +61,7 @@ if(isset($mode) && !empty($mode)) {
 		
 		if(empty($HTTP_POST_VARS['status'])) $HTTP_POST_VARS['status']=' ';
 		//gjergji : used to generate user proof param id's :)
-		$HTTP_POST_VARS['id'] = "_" . str_replace(" ","_",strtolower($HTTP_POST_VARS['name'])) . "_" . strtolower($HTTP_POST_VARS['group_id']);
+		$HTTP_POST_VARS['id'] = "_" . str_replace(" ","_",strtolower($HTTP_POST_VARS['name'])) . "__" . strtolower($HTTP_POST_VARS['group_id']);
 		$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
 		$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Created ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 		# Set to use the test params

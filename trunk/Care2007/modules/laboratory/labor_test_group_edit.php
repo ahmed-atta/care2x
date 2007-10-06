@@ -69,7 +69,6 @@ if(isset($mode) && !empty($mode)) {
 		# Set to use the test params
 		$lab_obj->useTestParams();
 		# Point to the data array
-		//print_r($HTTP_POST_VARS);
 		$lab_obj->setDataArray($HTTP_POST_VARS);	
 		if($lab_obj->insertDataFromInternalArray()){
 			
@@ -125,7 +124,6 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
 <?php
 
-/*if($newid) echo ' onLoad="document.datain.test_date.focus();" ';*/
  if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
  ?>>
 
@@ -168,11 +166,6 @@ $toggle=0;
 			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="name" size=15 maxlength=15 value="'.$tg['name'].'">&nbsp;
 			</td></tr>
 			';
-/*	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDID.'</td>
-			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="id" size=15 maxlength=50 value="'. $tg['id'] . '"';
-				if(isset($tg['id']) && !empty($tg['id'])) echo 'disabled >&nbsp';
-			echo '</td></tr>
-			';	*/
 	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDShowParam.'</td>
 			<td bgcolor="'.$bgc.'"  class="a12_b">
 			<select name="status">

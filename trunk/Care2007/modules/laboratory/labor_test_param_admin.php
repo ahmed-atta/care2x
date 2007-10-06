@@ -26,19 +26,13 @@ $thisfile=basename(__FILE__);
 require_once($root_path.'include/care_api_classes/class_lab.php');
 $lab_obj=new Lab();
 
-//require($root_path.'include/inc_labor_param_group.php');
 if(!isset($parameterselect)||$parameterselect=='') $parameterselect='priority';
-
-//$parameters=$paralistarray[$parameterselect];					
-//$paramname=$parametergruppe[$parameterselect];
 
 $pitems=array('msr_unit','median','lo_bound','hi_bound','lo_critical','hi_critical','lo_toxic','hi_toxic');
 
 # Load the date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');
     
-//echo $lab_obj->getLastQuery();
-
 # Get the test test groups
 $tgroups=&$lab_obj->TestActiveGroups();
 
@@ -46,7 +40,6 @@ $tgroups=&$lab_obj->TestActiveGroups();
 $tparams=&$lab_obj->TestParamsAdmin($parameterselect);
 $breakfile="labor.php".URL_APPEND;
 
-// echo "from table ".$linecount;
 # Start Smarty templating here
  /**
  * LOAD Smarty

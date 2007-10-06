@@ -131,8 +131,6 @@ if($mode=='save'){
 			$allow_update=false;
 		}
 	}
-	
-	//echo $lab_obj->getLastQuery();
 			
 	# Get the test test groups
 	$tgroups=&$lab_obj->TestActiveGroups();
@@ -316,45 +314,57 @@ echo '
 
 echo '
 	</tr>';
-	
-echo '
-<tr>';
-$rowlimit=0;
-//$count=$paramnum;
-//gjergji : show only the needed params
-while($tp=$tparams->FetchRow()){
-	if($result_tests = $lab_obj->GetTestsToDo($job_id))
-		if($row_tests = $result_tests->FetchRow())	{
-			parse_str($row_tests['parameters'], $arr_tasks);
-			if(isset($arr_tasks[$tp['id']]) && !empty($arr_tasks[$tp['id']])) {
 
-						echo '<td';
-						echo ' bgcolor="#ffffee" class="a10_b"><nobr>&nbsp;<b>';
-						echo $tp['name'];
-						echo '</b>&nbsp;</nobr>';
-						echo '</td>
-								<td class="a10_b">';
-					
-						echo '<input name="'.$tp['id'].'" type="text" size="8" ';
-					
-						echo 'value="';
-						if(isset($pdata[$tp['id']])&&!empty($pdata[$tp['id']])) echo trim($pdata[$tp['id']]);
-					
-						echo '">'.$tp['msr_unit'].'&nbsp;
-								</td>';
-					
-						$rowlimit++;
-						if($rowlimit==$pcols){
-							echo '
-							</tr><tr>';
-							$rowlimit=0;
-						}
-						else $arr_tasks[$row_tests['id']];
-			}
+//order the params according to groups
+$rowlimit=0;
+$requestData=array();
+if($result_tests = $lab_obj->GetTestsToDo($job_id)) {
+	if($row_tests = $result_tests->FetchRow())	{
+		parse_str($row_tests['parameters'], $arr_tasks);
+		while(list($x,$v)=each($arr_tasks)) {
+		$ext='';
+		$ext = substr(stristr($x, '__'), 2);
+		$requestData[$ext][$x] = 1;
 
 		}
- }
- 
+	}
+}
+//print_r($requestData);
+reset($requestData);
+echo '
+<tr>';
+//display them
+$collimit=0;
+while(list($group,$pm)=each($requestData)) {
+	$gName = $lab_obj->getGroupName($group ) ;
+	echo '
+	</tr><tr>';	
+	echo '<td bgcolor="#ffffee" class="a10_a"><nobr>&nbsp;<b>';
+	echo $gName->fields['name'];
+	echo '</b>&nbsp;</nobr>';
+	echo '</td>';
+	//$collimit++;	
+	while(list($pId,$not)=each($pm)) {
+		$pName = $lab_obj->TestParamsDetails($pId);
+		echo '<td bgcolor="#ffffee" class="a10_b">';
+		echo $pName['name'] . '</td>';
+		echo '<td>';
+
+			echo '<input name="'.$pId.'" type="text" size="8" ';
+			echo 'value="';
+			if(isset($pdata[$pId])&&!empty($pdata[$pId])) echo trim($pdata[$pId]);
+			echo '">';		
+
+		echo '</td>';
+		$collimit++;
+		if($collimit==8){
+			echo '
+			</tr><tr>';	
+			$collimit=0;
+		}
+	}
+}
+
  # Assign parameter output
  
  $sTemp = ob_get_contents();
@@ -367,7 +377,6 @@ while($tp=$tparams->FetchRow()){
 ob_start();
 
 ?>
-<input type=hidden name="parameterselect" value=<?php echo $parameterselect; ?>>
 <input type=hidden name="encounter_nr" value="<?php echo $encounter_nr; ?>">
 <input type=hidden name="sid" value="<?php echo $sid; ?>">
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
@@ -382,24 +391,6 @@ ob_start();
 $sTemp = ob_get_contents();
 ob_end_clean();
 $smarty->assign('sSaveParamHiddenInputs',$sTemp);
-
-# Assign parameter group selector box
-$sTemp = '<select name="parameterselect" size=1>';
-
-while($tg=$tgroups->FetchRow()){
-		$sTemp = $sTemp.'<option value="'.$tg['group_id'].'"';
-		if($parameterselect==$tg['group_id']) $sTemp = $sTemp.' selected';
-		$sTemp = $sTemp.'>';
-		if(isset($parametergruppe[$tg['group_id']])&&!empty($parametergruppe[$tg['group_id']])) $sTemp = $sTemp.$parametergruppe[$tg['group_id']];
-			else $sTemp = $sTemp.$tg['name'];
-		$sTemp = $sTemp.'</option>';
-		$sTemp = $sTemp."\n";
-}
-
-$smarty->assign('sParamGroupSelect',$sTemp.'</select>');
-
-$smarty->assign('LDSelectParamGroup',$LDSelectParamGroup);
-$smarty->assign('LDParamGroup',$LDParamGroup);
 
 # Collect hidden inputs for the parameter group selector
 ob_start();
@@ -423,7 +414,6 @@ ob_end_clean();
 
 $smarty->assign('sSelectGroupHiddenInputs',$sTemp);
 
-$smarty->assign('sSubmitSelect','<input  type="image" '.createLDImgSrc($root_path,'auswahl2.gif','0').'>');
 
 # Assign help items
 $smarty->assign('LDParamNoSee',"<a href=\"Javascript:gethelp('lab.php','input','param')\">$LDParamNoSee</a>");
