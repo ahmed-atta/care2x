@@ -3490,7 +3490,7 @@ CREATE TABLE `care_users` (
   PRIMARY KEY  (`login_id`),
   KEY `login_id` (`login_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-# --------------------------------------------------------
+
 
 #
 # Tabellenstruktur für Tabelle care_version
