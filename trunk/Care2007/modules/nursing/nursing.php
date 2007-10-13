@@ -49,9 +49,7 @@
    $sWardInfo = $sWardInfo.'</td><td>'.$stations['name'].'</td></tr>';
   }
 
- } else {
-  $sWardInfo = $LDNoWardsYet.'<br><img '.createComIcon($root_path,'redpfeil.gif','0','absmiddle').'> <a href="nursing-station-manage-pass.php'.URL_APPEND.'">'.$LDClk2CreateWard.'</a>';
- }
+ } 
 
 
  # Toolbar title
