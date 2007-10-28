@@ -91,4 +91,5 @@ $LDMain_s='P';
 $LDSupplemental='Supplementare';
 $LDSupp_s='S';
 $LDCreateNew='Inserire nuovo';
+$LDSureToCreateNewGr='Vuoi creare un nuovo gruppo?';
 ?>
