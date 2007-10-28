@@ -200,8 +200,6 @@ $toggle=0;
 </tr>
 </table>        
 <p>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
+
 </BODY>
 </HTML>
