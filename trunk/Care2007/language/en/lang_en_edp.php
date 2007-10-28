@@ -345,4 +345,7 @@ $LDOPTable='OP table';
 /* Gjergj Sheldija 11.08.2007 */
 $LDWelcome='Welcome';
 $LDClearFields='Clear fields';
+/* claudio torbinio 10.28.2007 */
+$LDNursingManage='Wards administration';
+$LDProfile='List & configure';
 ?>
