@@ -1,9 +1,9 @@
 <?php
-$LDIcd10='ICD-10';
+$LDIcd10='ICD9-CM';
 $LDOps301='OPS-301';
-$LDBack2Logbook='Tornare al logbook';
-$LDIcd10Search='Ricerca ICD-10';
-$LDSearch4ICD10='Ricerca codici per ICD-10';
+$LDBack2Logbook='Logbook';
+$LDIcd10Search='Ricerca ICD9-CM';
+$LDSearch4ICD10='Ricerca codici per ICD9-CM';
 $LDSearch4OPS301='Ricerca codici per OPS-301';
 $LDDescrizione='Descrizione';
 $LDMainAuxDiag='Principale/ausiliario';
@@ -29,15 +29,15 @@ $LDOperation='Operazione';
 $LDAlertSureDelete='Si conferma la cancellazione?';
 
 $LDAux='A';
-$LDMain='Main';
-$LDRight='Right';
-$LDLeft='Left';
-$LDBoth='Both sides';
+$LDMain='Principale';
+$LDRight='Destra';
+$LDLeft='Sinistra';
+$LDBoth='Entrambi i lati';
 
 $LDDeleteEntry='Cancella voce';
 $LDNoQuickList='La quicklist è vuota.';
 $LDClick2Search='Selezionare qui per avviare la ricerca.';
-$LDPossibleCodes='Possibili codice ICD ed OPS';
+$LDPossibleCodes='Possibili codici ICD ed OPS';
 /*2003-05-25 EL */
 $LDCategory='Categoria';
 $LDLoc='Loc.';
@@ -45,7 +45,7 @@ $LDBy='da';
 $LDMostResponsible='Responsabile principale';
 $LDAssociated='Associato';
 $LDNosocomial='Nosocomiale';
-$LDIatrogenic='Iatrogenico';
+$LDIatrogenic='Iatrogeno';
 $LDOther='Altro';
 $LDMostResp_s='R';
 $LDAssociated_s='A';
