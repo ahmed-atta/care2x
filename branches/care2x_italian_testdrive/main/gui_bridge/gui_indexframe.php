@@ -136,12 +136,6 @@ echo $langselect;
 </tr>
 </form>
 </TABLE>
-<center>
-<a href="http://www.opensource.org/" target="_blank"><img src="<?php echo $root_path ?>gui/img/common/default/osilogo.gif" border=0></a>
-</center>
-<br>
-<center><font SIZE=1 color="#6f6f6f" face="arial,verdana">
-  2002/2007 &copy; <br><a href=mailto:info@care2x.org>Elpidio Latorilla</a> <br><a href="http://www.care2x.org" target="_blank">www.care2x.org</a>
-</FONT></center>
+
 </BODY>
 </HTML>
