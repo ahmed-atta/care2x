@@ -208,22 +208,22 @@ class DRG extends Encounter{
 	* Default ICD table name. The default table must be existing in your database!
 	* @var string
 	*/
-	var $tb_icd_default='care_icd10_en';
+	var $tb_icd_default='care_icd10_it';
 	/**
 	* Default OPS table name. The default table must be existing in your database!
 	* @var string
 	*/
-	var $tb_icpm_default='care_ops301_de';
+	var $tb_icpm_default='care_ops301_it';
 	/**
 	* Language codes that have corresponding ICD tables
 	* @var string
 	*/
-	var $tb_lang_icd='en,de,pt-br,es,bs,bg,tr';
+	var $tb_lang_icd='it,en,de,pt-br,es,bs,bg,tr';
 	/**
 	* Language codes that have corresponding OPS/ICPM tables
 	* @var string
 	*/
-	var $tb_lang_icpm='de,es';
+	var $tb_lang_icpm='it,de,es';
 	/**
 	* Constructor.
 	*
