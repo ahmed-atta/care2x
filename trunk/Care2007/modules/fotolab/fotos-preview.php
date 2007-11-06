@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -40,7 +40,6 @@ if($disc_pix_mode){
 }else{
 	$final_path="$fotoserver_http$pn/";
 }
-
 if(isset($pn)&&$pn){
 	/* Create image object */
 	include_once($root_path.'include/care_api_classes/class_image.php');
@@ -123,16 +122,16 @@ list($w,$h,$t,$wh)=getImageSize($picsource); // get the size of the image
 
 if(isset($bShowImageJApplet) && $bShowImageJApplet){
 	#
-	# Set appletï¿½s dimensions
+	# Set applet´s dimensions
 	#
 	$iAppletHeight=$h + IMAGEJ_PANEL_HEIGHT;
 
 	if($w < IMAGEJ_PANEL_WIDTH_MIN ) $iAppletWidth = IMAGEJ_PANEL_WIDTH_MIN;
 		else $iAppletWidth = $w;
 
-	echo '<applet code="IJBasicViewer.class"  archive="ij.jar" width='.$iAppletWidth.' height="'.$iAppletHeight.'">
-				<param name="img" value="'.$picsource.'">
-				</applet>';
+	echo '<applet codebase="." code="ij.ImageJApplet.class"  archive="ij.jar" width='.$iAppletWidth.' height='.$iAppletHeight.'>
+				<param name=url value='.$picsource.'>
+		 </applet>';
 }else{
 
 	if(PREVIEW_SIZE<$w){
