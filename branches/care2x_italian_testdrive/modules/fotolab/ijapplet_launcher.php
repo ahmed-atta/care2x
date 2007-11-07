@@ -13,8 +13,11 @@ require($root_path.'include/inc_environment_global.php');
 
 <h2>Editing image with ImageJ</h2>
 
-<applet code="IJApplet.class" archive="ij.jar" width=0 height=0>
-<param name=url value="<?php echo "$httprotocol://$main_domain/fotos/encounter/$pn/$img"; ?>">
+<applet codebase="."
+	code="ij.ImageJApplet.class" archive="ij.jar"
+	width=750 height=550
+	security=all-permissions>
+<param name=url value=<?php echo "$httprotocol://$main_domain/fotos/encounter/$pn/$img"; ?>>
 </applet>
 
 <p>
