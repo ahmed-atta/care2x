@@ -68,7 +68,6 @@ class Ward extends Encounter {
 									'dept_nr',
 									'room_nr_start',
 									'room_nr_end',
-									'maxbed',
 									'roomprefix',
 									'status',
 									'history',
@@ -185,7 +184,6 @@ class Ward extends Encounter {
 	function getAllWardsItemsArray(&$items) {
 	    global $db;
 	    $this->sql="SELECT $items  FROM $this->tb_ward WHERE  status NOT IN ('hidden','deleted','closed','inactive')";
-        //echo $this->sql;
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
 				 return $this->result->GetArray(); 
@@ -514,10 +512,10 @@ class Ward extends Encounter {
 			$action='Closed temporary';
 		}else{
 			$action='Reopened';
-		}
+		} 
 		$data['history']="CONCAT(history,'$action: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
 		$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array=$data;
+		$this->data_array=$data;		
 		return $this->updateDataFromInternalArray($nr);
 	}
 	/**

@@ -23,6 +23,10 @@ class Prescription extends Core {
 	*/
 	var $tb='care_encounter_prescription';
 	/**
+	* Table name for prescription_sub data
+	*/
+	var $tb_sub='care_encounter_prescription_sub';
+	/**
 	* Table name for application types
 	*/
 	var $tb_app_types='care_type_application';
@@ -60,22 +64,37 @@ class Prescription extends Core {
 	* @var int
 	*/
 	var $tabfields=array('nr',
-									'encounter_nr',
-									'prescription_type_nr',
-									'article',
-									'drug_class',
-									'order_nr',
-									'dosage',
-									'application_type_nr',
-									'notes',
-									'prescribe_date',
-									'prescriber',
-									'status',
-									'history',
-									'modify_id',
-									'modify_time',
-									'create_id',
-									'create_time');
+						'encounter_nr',
+						'prescribe_date',
+						'prescriber',
+						'notes',						
+						'status',
+						'history',
+						'modify_id',
+						'modify_time',
+						'create_id',
+						'create_time');
+	/**
+	* Field names of care_encounter_prescription table
+	* @var int
+	*/
+	var $tabfields_sub=array('nr', 
+							'prescription_nr',
+							'prescription_type_nr',
+							'bestellnum',
+							'article',
+							'drug_class',
+							'dosage',
+							'admin_time',
+							'quantity',
+							'application_type_nr',
+							'sub_speed',
+							'notes_sub',
+							'color_marker',
+							'is_stopped',
+							'stop_date',
+							'status',
+							'companion');						
 	/**#@-*/
 						
 	/**
@@ -85,6 +104,25 @@ class Prescription extends Core {
 		$this->setTable($this->tb);
 		$this->setRefArray($this->tabfields);
 	}
+	
+	/**
+	* Sets the core object to point  to either care_encounter_prescription or care_encounter_prescription_sub and field names.
+	*
+	* The table is determined by the parameter content. 
+	* @access public
+	* @param string Determines the final table name 
+	* @return boolean.
+	*/
+	function usePrescription($type){
+		if($type=='prescription'){
+			$this->setTable($this->tb);
+			$this->setRefArray($this->tabfields);
+		}elseif($type=='prescription_sub'){
+			$this->setTable($this->tb_sub);
+			$this->setRefArray($this->tabfields_sub);
+		}else{return false;}
+	}
+		
 	/**
 	* Gets all prescription types returned in a 2 dimensional array.
 	*
@@ -193,6 +231,49 @@ class Prescription extends Core {
 		else {
 		    return false;
 		}
+	}
+	/**
+	* Gets all current prescription data based on the primary key.
+	* Gjergj Sheldija
+	* changed by gjergj sheldija
+	* to work with the new way of managing prescriptions
+	* @param int Encounter number
+	* @return mixed adodb record object or boolean
+	*/
+	function getAllPrescriptionById($nr){
+		global $db;
+		$this->sql="SELECT $this->tb_sub.* 
+			FROM $this->tb_sub 
+			WHERE $this->tb_sub.prescription_nr=$nr 
+				AND $this->tb_sub.is_stopped IN ('',0) ORDER BY $this->tb_sub.prescription_nr";
+		if($this->result=$db->Execute($this->sql)){
+			return $this->result;
+		}else{
+			return false;
+		}
+	}
+	/**
+	 * Updates the status of a prescription, based on the encounter nr
+	 * Gjergj Sheldija
+	 * @param int prescription number
+	 * @param string new status
+	 * @return boolean
+	 */
+	function setPrescriptionStatus($prescriptionNr,$status) {
+	    global $db;
+		if(!$prescriptionNr) return FALSE;
+		//prescription
+		$this->sql="UPDATE $this->tb 
+						SET status='$status'
+						WHERE nr=$prescriptionNr";
+		//echo $this->sql;
+		$this->Transact($this->sql);
+		//prescriprion_sub
+		$this->sql="UPDATE $this->tb_sub 
+						SET status='$status'
+						WHERE prescription_nr=$prescriptionNr";
+		return $this->Transact($this->sql);	
+		//echo $this->sql;
 	}
 	
 }

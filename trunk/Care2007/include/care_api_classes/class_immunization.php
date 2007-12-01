@@ -22,6 +22,16 @@ class Immunization extends Core {
 	*/
 	var $tb='care_encounter_immunization'; // table name
 	/**
+	* Database table for encounter's immunization data
+	* @var string
+	*/
+	var $tb='care_encounter_immunization'; // table name
+	/**
+	* Database table for immunization type data
+	* @var string
+	*/
+	var $tb_type='care_type_immunization'; // table name
+	/**
 	* Database table for appication types
 	* @var string
 	*/
@@ -51,22 +61,43 @@ class Immunization extends Core {
 	* @var array
 	*/
 	var $tabfields=array('nr',
-									'encounter_nr',
-									'date',
-									'type',
-									'medicine',
-									'dosage',
-									'application_type_nr',
-									'application_by',
-									'titer',
-									'refresh_date',
-									'notes',
-									'status',
-									'history',
-									'modify_id',
-									'modify_time',
-									'create_id',
-									'create_time');
+						'encounter_nr',
+						'date',
+						'type',
+						'medicine',
+						'dosage',
+						'application_type_nr',
+						'application_by',
+						'titer',
+						'refresh_date',
+						'notes',
+						'status',
+						'history',
+						'modify_id',
+						'modify_time',
+						'create_id',
+						'create_time');
+	/**
+	* Fieldnames of care_type_immunization table. Primary key is "nr".
+	* @var array
+	*/
+	var $tabfields_type=array('nr',
+						'type',
+						'name',
+						'LD_var',
+						'period',
+						'tolerance',
+						'dosage',
+						'medicine',
+						'titer',
+						'note',
+						'application',
+						'status',
+						'history',
+						'modify_id',
+						'modify_time',
+						'create_id',
+						'create_time');
 	/**
 	* Constructor
 	*/			
@@ -74,6 +105,14 @@ class Immunization extends Core {
 		$this->setTable($this->tb);
 		$this->setRefArray($this->tabfields);
 	}
+	/**
+	* Constructor
+	*/			
+	function ImmunizationType(){
+		$this->setTable($this->tb_type);
+		$this->setRefArray($this->tabfields_type);
+	}
+
 	/**
 	* Gets all immunization data based on passed condition.
 	*
@@ -205,5 +244,198 @@ class Immunization extends Core {
 		}
 	}
 	
-}
+	/**
+	* Inserts new insurance company's complete information in the database.
+	*
+	* The data must be passed by reference with an associative  array.
+	* The data must have the index keys as outlined in the <var>$fld_insurance</var> array.
+	*
+	* @access public
+	* @param array Insurance company data
+	* @return boolean
+	*/
+	function saveImmuInfoFromArray(&$data){
+		global $HTTP_SESSION_VARS;
+		$this->ImmunizationType();;
+		$this->data_array=$data;
+		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+		//$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['create_time']=date('YmdHis');
+		return $this->insertDataFromInternalArray();	
+	
+	}
+	/**
+	* Checks if the insurance company exists in the database based on its firm id.
+	*
+	* @access public
+	* @param string Firm id
+	* @return boolean
+	*/
+	function ImmuExists($name='') {
+	    global $db;
+	    if($name == '') return false;
+	    if($this->result=$db->Execute("SELECT name FROM $this->tb_type WHERE name='$name'")) {
+	        if($this->result->RecordCount()) {
+			    return TRUE;
+		    } else { return FALSE; }
+	   } else { return FALSE; }
+   }
+
+	/**
+	* Gets the immunization type complete information.
+	*
+	* The returned adodb record object contains  a row of array.
+	* Each array contains the company's data with index keys as outlined in the <var>$tabfields_type</var> array.
+	*
+	* @access public
+	* @param string Firm id
+	* @return mixed adodb record object or boolean
+	*/
+   function getImmuTypeInfo($immu_id) {
+       global $db;
+	   if($immu_id=='') return FALSE;
+	   $this->sql="SELECT * FROM $this->tb_type WHERE nr='$immu_id'";
+	    if($this->result=$db->Execute($this->sql)) {
+	        if($this->result->RecordCount()) {
+		        return $this->result;
+		    } else { return FALSE; }
+	   } else { return FALSE; }
+	} 
+
+	/**
+	* Updates an insurance company's information in the database.
+	*
+	* The new data must be passed by reference with an associative  array.
+	* The data must have the index keys as outlined in the <var>$fld_insurance</var> array.
+	*
+	* @access public
+	* @param int Firm id
+	* @param array Insurance company data
+	* @return boolean
+	*/
+	function updateImmuInfoFromArray($nr,&$data){
+		global $HTTP_SESSION_VARS;
+		$this->ImmunizationType();;
+		$this->data_array=$data;
+		# remove probable existing array data to avoid replacing the stored data
+		if(isset($this->data_array['nr'])) unset($this->data_array['nr']);
+		if(isset($this->data_array['create_id'])) unset($this->data_array['create_id']);
+		# Set the where condition
+		$this->where="nr='$nr'";
+		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['modify_time']=date('YmdHis');
+		##### param FALSE disables strict numeric id behaviour of the method
+		return $this->updateDataFromInternalArray($nr,FALSE);
+	}	
+
+	/**
+	* Similar to <var>getImmuTypeInfo()</var>  but returns limited rows.
+	*
+	* The returned adodb record object contains  a row of array.
+	* Each array contains the company's data with index keys as outlined in the <var>$$tabfields_type</var> array.
+	*
+	* @access public
+	* @param int Maximum number of rows returned
+	* @param int Index of first row to be returned
+	* @param string Sort field name. Defaults to "name".
+	* @param string Sort direction. Defaults to "ASC" = ascending.
+	* @return mixed adodb record object or boolean
+	*/
+	function getLimitActiveImmuInfo($len=30,$so=0,$sortby='name',$sortdir='ASC'){
+		global $db;
+		$this->sql="SELECT * FROM $this->tb_type WHERE status NOT IN ($this->dead_stat) ORDER BY $sortby $sortdir";
+	    if($this->res['glafi']=$db->SelectLimit($this->sql,$len,$so)) {
+	        if($this->rec_count=$this->res['glafi']->RecordCount()) {
+		        return $this->res['glafi'];
+		    } else { return FALSE; }
+	   } else { return FALSE; }
+   	}
+	/**
+	* Counts all active immunization types.
+	* @access public
+	* @return integer
+	*/
+	function countAllActiveImmu(){
+		global $db;
+		$this->sql="SELECT nr FROM $this->tb_type WHERE status NOT IN ($this->dead_stat)";
+	    if($buffer=$db->Execute($this->sql)) {
+	    	return $buffer->RecordCount();
+	   } else { return 0; }
+   	}
+	/**
+	* Searches for immunization types but returns limited number of rows.
+	*.
+	* @access public
+	* @param string Search keyword
+	* @param int Maximum number of rows returned, default = 30 rows
+	* @param int Start index offset, default 0 = start
+	* @param string Field name to sort, default = "name"
+	* @param string Sorting direction, default = ASC
+	* @return mixed adodb record object or boolean
+	*/
+   	function searchLimitActiveImmu($key,$len=30,$so=0,$oitem='name',$odir='ASC'){
+		global $db, $sql_LIKE;
+		if(empty($key)) return FALSE;
+		$sortby=" ORDER BY $oitem $odir";
+		$select="SELECT nr,name,period,tolerance,medicine,titer,note,dosage  FROM $this->tb_type ";
+		$append=" AND status NOT IN ($this->dead_stat) $sortby";
+		$this->sql="$select WHERE ( nr $sql_LIKE '$key%' OR name $sql_LIKE '$key%' OR medicine $sql_LIKE '$key%' ) $append";
+		if($this->res['saf']=$db->SelectLimit($this->sql,$len,$so)){
+			if($this->rec_count=$this->res['saf']->RecordCount()){
+				return $this->res['saf'];
+		    }else{	
+				$this->sql="$select WHERE ( nr $sql_LIKE '%$key' OR name $sql_LIKE '%$key' OR medicine $sql_LIKE '%$key' ) $append";
+				if($this->res['saf']=$db->SelectLimit($this->sql,$len,$so)){
+					if($this->rec_count=$this->res['saf']->RecordCount()){
+						return $this->res['saf'];
+					}else{
+						$this->sql="$select WHERE ( nr $sql_LIKE '%$key%' OR name $sql_LIKE '%$key%' OR medicine $sql_LIKE '%$key%' ) $append";
+						if($this->res['saf']=$db->SelectLimit($this->sql,$len,$so)){
+							if($this->rec_count=$this->res['saf']->RecordCount()){
+								return $this->res['saf'];
+							}else{return FALSE;}
+						}else{return FALSE;}
+					}
+				}else{return FALSE;}
+			}
+	   } else { return FALSE; }
+   	}
+
+	/**
+	* Searches similar to searchActiveImmu() but returns the resulting number of rows.
+	* 
+	* Unsuccessful search returns zero value (0).
+	* @param string Search keyword
+	* @return integer
+	*/
+   	function searchCountActiveImmu($key){
+		global $db, $sql_LIKE;
+		if(empty($key)) return FALSE;
+		$select="SELECT nr FROM $this->tb_type ";
+		$append=" AND status NOT IN ($this->dead_stat)";
+		$this->sql="$select WHERE ( nr $sql_LIKE '$key%' OR name $sql_LIKE '$key%' OR medicine $sql_LIKE '$key%' ) $append";
+		if($this->res['scaf']=$db->Execute($this->sql)){
+			if($this->rec_count=$this->res['scaf']->RecordCount()){
+				return $this->rec_count;
+			}else{	
+				$this->sql="$select WHERE ( nr $sql_LIKE '%$key' OR name $sql_LIKE '%$key' OR medicine $sql_LIKE '%$key' ) $append";
+				if($this->res['scaf']=$db->Execute($this->sql)){
+					if($this->rec_count=$this->res['scaf']->RecordCount()){
+						return $this->rec_count;
+					}else{
+						$this->sql="$select WHERE ( nr $sql_LIKE '%$key%' OR name $sql_LIKE '%$key%' OR medicine $sql_LIKE '%$key%' ) $append";
+						if($this->res['scaf']=$db->Execute($this->sql)){
+							if($this->rec_count=$this->res['scaf']->RecordCount()){
+								return $this->rec_count;
+							}else{return 0;}
+						}else{return 0;}
+					}
+				}else{return 0;}
+			}
+		}else{return 0;}
+   	}   	
+   	
+}	
 ?>

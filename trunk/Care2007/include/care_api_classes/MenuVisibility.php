@@ -34,6 +34,6 @@
  		if ($_COOKIE[$user]=='true') return true;
  		else return false;
  	}
- }
  
+ }
 ?>

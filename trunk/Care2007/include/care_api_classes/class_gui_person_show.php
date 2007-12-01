@@ -310,7 +310,7 @@ class GuiPersonShow {
 		# Set the rowspan value for the photo image <td>
 		$this->smarty->assign('sPicTdRowSpan',"rowspan=$iRowSpanCount");
 
-		$this->smarty->assign('LDBday',"$LDBday:");
+		$this->smarty->assign('LDBday',"$LDBday");
 
 		if($death_date&&$death_date!=$dbf_nodate){
 			$this->smarty->assign('sCrossImg',$sCross);
@@ -318,7 +318,7 @@ class GuiPersonShow {
 		}
 		$this->smarty->assign('sBdayInput','<div class="vi_data">'.@formatDate2Local($date_birth,$date_format).'</div>');
 		
-		$this->smarty->assign('LDSex', "$LDSex:");
+		$this->smarty->assign('LDSex', "$LDSex");
 
 		if($sex=="m") $this->smarty->assign('LDMale','<div class="vi_data">'.$LDMale.'</div>');
 			elseif($sex=="f") $this->smarty->assign('LDFemale','<div class="vi_data">'.$LDFemale.'</div>');
@@ -342,20 +342,20 @@ class GuiPersonShow {
 			$this->smarty->assign('sCSSingleInput',$sCSBuffer);
 		}
 		
-		$this->smarty->assign('LDAddress',"$LDAddress:");
+		$this->smarty->assign('LDAddress',"$LDAddress");
 
-		$this->smarty->assign('LDStreet',"$LDStreet:");
+		$this->smarty->assign('LDStreet',"$LDStreet");
 
 		$this->smarty->assign('sStreetInput',$addr_str);
 
-		$this->smarty->assign('LDStreetNr',"$LDStreetNr:");
+		$this->smarty->assign('LDStreetNr',"$LDStreetNr");
 
 		$this->smarty->assign('sStreetNrInput',$addr_str_nr);
 
-		$this->smarty->assign('LDTownCity',"$LDTownCity:");
+		$this->smarty->assign('LDTownCity',"$LDTownCity");
 		$this->smarty->assign('sTownCityInput',$addr_citytown_name);
 
-		$this->smarty->assign('LDZipCode',"$LDZipCode :");
+		$this->smarty->assign('LDZipCode',"$LDZipCode ");
 		$this->smarty->assign('sZipCodeInput',$addr_zip);
 
 		if (!$GLOBAL_CONFIG['person_insurance_hide']) {
@@ -439,7 +439,15 @@ class GuiPersonShow {
 		}else{
 			$this->smarty->assign('pretext','Invalid PID number or the data is not available from the databank! Please report this to <a  href="mailto:info@care2x.org">info@care2x.org</a>. Thank you.');
 		}
-		
+
+        /* SalvoRossitto 27/11/2007 */
+        if ($errorrelative) $this->smarty->assign('LDRelative',"<font color=red>$LDRelative</font>");
+			else $this->smarty->assign('LDRelative',"$LDRelative");
+        $this->smarty->assign('sRelativeNameLast',$this->createTR($LDLastName,$relative_name_last,35,FALSE));
+        $this->smarty->assign('sRelativeNameFirst',$this->createTR($LDFirstName,$relative_name_first,35,FALSE));
+        $this->smarty->assign('sRelativePhone',$this->createTR($LDPhone,$relative_phone,35,FALSE));
+        /* */
+  
 		# If data is to be returned only, buffer output, get the buffer contents, end and clean buffer and return contents.
 		if($this->bReturnOnly){
 			ob_start();

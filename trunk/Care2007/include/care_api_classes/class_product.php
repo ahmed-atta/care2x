@@ -24,6 +24,10 @@ class Product extends Core {
 	*/
 	var $tb_polist='care_pharma_orderlist'; 
 	/**
+	* Table name for pharmay order lists sub table
+	*/
+	var $tb_polist_sub='care_pharma_orderlist_sub'; 
+	/**
 	* Table name for pharmacy order catalog
 	*/
 	var $tb_pocat='care_pharma_ordercatalog'; 
@@ -43,6 +47,22 @@ class Product extends Core {
 	* Table name for medical depot main products
 	*/
 	var $tb_mmain='care_med_products_main';
+	/**
+	* Table name for medical depot main products administration
+	*/
+	var $tb_mmain_sub='care_med_products_main_sub';	
+	/**
+	 * Table name form pharmacy product administration
+	 */
+	var $tb_pmain_sub='care_pharma_products_main_sub';
+	/**
+	 * Table name of the encounter prescription
+	 */
+	var $tb_prescription='care_encounter_prescription';
+	/**
+	 * Table name of the encounter prescription sub
+	 */
+	var $tb_prescription_sub='care_encounter_prescription_sub';
 	/**#@-*/
 	
 	/**
@@ -50,41 +70,95 @@ class Product extends Core {
 	* @var array
 	*/
 	var $fld_ocat=array('item_no',
-								'dept_nr',
-								'hit',
-								'artikelname',
-								'bestellnum',
-								'minorder',
-								'maxorder',
-								'proorder');
+						'dept_nr',
+						'hit',
+						'artikelname',
+						'bestellnum',
+						'minorder',
+						'maxorder',
+						'proorder',
+						'furnitor_nr',
+						'sasi',
+						'cmimi',
+						'vlere',
+						'skadenca',
+						'doza',
+						'packing');
 	/**
 	* Field names of care_pharma_products_main or care_med_products_main tables
 	* @var array
 	*/
 	var $fld_prodmain=array('bestellnum',
-										'artikelnum',
-										'industrynum',
-										'artikelname',
-										'generic',
-										'description',
-										'packing',
-										'minorder',
-										'maxorder',
-										'proorder',
-										'picfile',
-										'encoder',
-										'enc_date',
-										'enc_time',
-										'lock_flag',
-										'medgroup',
-										'cave',
-										'status',
-										'history',
-										'modify_id',
-										'modify_time',
-										'create_id',
-										'create_time');
-
+							'artikelnum',
+							'industrynum',
+							'artikelname',
+							'generic',
+							'description',
+							'packing',
+							'doza',
+							'minorder',
+							'maxorder',
+							'proorder',
+							'picfile',
+							'encoder',
+							'enc_date',
+							'enc_time',
+							'lock_flag',
+							'medgroup',
+							'cave',
+							'status',
+							'history',
+							'modify_id',
+							'modify_time',
+							'create_id',
+							'create_time',
+							'magazina',
+							'minpcs');
+	/**
+	* Field names of care_med_products_main_sub
+	* @var array
+	*/
+	var $fld_prodmain_sub=array('id',
+								'pcs',
+								'skadenca',
+								'cmimi',
+								'bestellnum',
+								'idcare_furnizim',
+								'create_time');
+										
+	/**
+	* Field names of care_pharma_products_main_sub
+	* @var array
+	*/
+	var $fld_pharmamain_sub=array('id',
+									'pcs',
+									'skadenca',
+									'cmimi',
+									'bestellnum',
+									'idcare_pharma',
+									'create_time');
+	
+	/**
+	* Field names of care_encounter_prescription table
+	* @var int
+	*/
+	var $fld_presc_sub=array('nr', 
+							'prescription_nr',
+							'prescription_type_nr',
+							'bestellnum',
+							'article',
+							'drug_class',
+							'dosage',
+							'admin_time',
+							'quantity',
+							'application_type_nr',
+							'sub_speed',
+							'notes_sub',
+							'color_marker',
+							'is_stopped',
+							'stop_date',
+							'status',
+							'companion');		
 	/**
 	* Constructor
 	*/				
@@ -117,7 +191,7 @@ class Product extends Core {
 		if($type=='pharma'){
 			$this->coretable=$this->tb_pocat;
 			$this->ref_array=$this->fld_ocat;
-		}elseif($type=='medlager'){
+		}elseif($type=='medlager' or $type=='furnizim'){
 			$this->coretable=$this->tb_mocat;
 			$this->ref_array=$this->fld_ocat;
 		}else{return false;}
@@ -134,7 +208,7 @@ class Product extends Core {
 		if($type=='pharma'){
 			$this->coretable=$this->tb_pmain;
 			$this->ref_array=$this->fld_prodmain;
-		}elseif($type=='medlager'){
+		}elseif($type=='medlager' or $type='furnizim'){
 			$this->coretable=$this->tb_mmain;
 			$this->ref_array=$this->fld_prodmain;
 		}else{return false;}
@@ -152,6 +226,18 @@ class Product extends Core {
        	return $this->Transact();
 	}
 	/**
+	* Deletes an order by a furnitor.
+	* @access public
+	* @param int Order number
+	* @param string Determines the final table name 
+	* @return boolean.
+	*/
+	function DeleteOrderFurnitor($idcare_furnizim,$type){
+		//$this->useOrderList($type);
+		$this->sql="DELETE FROM care_furnizim WHERE idcare_furnizim='$idcare_furnizim'";
+		return $this->Transact();
+	}	
+	/**
 	* Returns the actual order catalog of a department.
 	*
 	* The returned adodb record object contains rows of arrays.
@@ -166,12 +252,77 @@ class Product extends Core {
 		if(empty($type)||empty($dept_nr)) return false;
 		$this->useOrderCatalog($type);
 		$this->sql="SELECT * FROM $this->coretable WHERE dept_nr='$dept_nr' ORDER BY hit DESC";
-        if($this->res['aoc']=$db->Execute($this->sql)) {
+		//$this->sql="SELECT * FROM $this->coretable INNER JOIN care_pharma_products_main AS PM ON $this->coretable.bestellnum = PM.bestellnum WHERE dept_nr='$dept_nr' AND PM.pcs > 0 ORDER BY $this->coretable.artikelname ASC";
+		if($this->res['aoc']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['aoc']->RecordCount()) {
 				return $this->res['aoc'];
 			} else { return false; }
 		} else { return false; }
 	}
+	/**
+	* Returns the actual order catalog of a pharmacy.
+	*
+	* The returned adodb record object contains rows of arrays.
+	* Each array contains catalog  data with  index keys as outlined in the <var>$fld_ocat</var> array.
+	* @access public
+	* @param int Department number
+	* @param string Determines the final table name 
+	* @return mixed adodb record object or boolean
+	*/
+	function ActualOrderCatalogPharma($type='',$bestellnum, $pharma){
+		global $db;
+		if(empty($type)||empty($bestellnum)) return false;
+		$this->useOrderCatalog($type);
+		//TODO ndryshue ci me marre simas emnit te farmacise...nuk e di a me kalon ne kete nivel
+		$this->sql="SELECT * FROM care_pharma_products_main_sub WHERE bestellnum='$bestellnum' AND pcs > 0  AND idcare_pharma = $pharma ORDER BY skadenca ASC";
+		if($this->res['aoc']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['aoc']->RecordCount()) {
+				return $this->res['aoc'];
+			} else { return false; }
+		} else { return false; }
+	}	
+	/**
+	* Returns the actual pcs for the selected product.
+	*
+	* The returned adodb record object contains rows of arrays.
+	* Each array contains catalog  data with  index keys as outlined in the <var>$fld_ocat</var> array.
+	* @access public
+	* @param int Department number
+	* @param string Determines the final table name 
+	* @return mixed adodb record object or boolean
+	*/
+	function ActualOrderCatalogProducts($type='',$bestellnum){
+		global $db;
+		if(empty($type)||empty($bestellnum)) return false;
+		$this->useOrderCatalog($type);
+		$this->sql="SELECT * FROM care_med_products_main_sub WHERE bestellnum='$bestellnum' AND pcs > 0 ORDER BY  skadenca ASC";
+		if($this->res['aoc']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['aoc']->RecordCount()) {
+				return $this->res['aoc'];
+			} else { return false; }
+		} else { return false; }
+	}	
+	/**
+	* Returns the actual order catalog of furnitor.
+	*
+	* The returned adodb record object contains rows of arrays.
+	* Each array contains catalog  data with  index keys as outlined in the <var>$fld_ocat</var> array.
+	* @access public
+	* @param int Department number
+	* @param string Determines the final table name 
+	* @return mixed adodb record object or boolean
+	*/
+	function ActualOrderCatalogFurnizim($furnitor_nr,$type=''){
+		global $db;
+		//if(empty($type)||empty($dept_nr)) return false;
+		//$this->useOrderCatalog($type);
+		$this->sql="SELECT DISTINCT * FROM care_med_ordercatalog WHERE furnitor_nr='$furnitor_nr' ORDER BY hit DESC";
+		if($this->res['aoc']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['aoc']->RecordCount()) {
+				return $this->res['aoc'];
+			} else { return false; }
+		} else { return false; }
+	}	
 	/**
 	* Saves (inserts)  an item in the order catalog.
 	*
@@ -189,6 +340,22 @@ class Product extends Core {
 		return $this->insertDataFromInternalArray();
 	}
 	/**
+	* Saves (inserts)  an item in the order catalog of the suplier.
+	*
+	* The data must be passed by reference with associative array.
+	* Data must have the index keys as outlined in the <var>$fld_ocat</var> array.
+	* @access public
+	* @param array Data to save
+	* @param string Determines the final table name 
+	* @return boolean
+	*/	
+	function SaveCatalogItemFurnizim(&$data,$type){
+		if(empty($type)) return false;
+		$this->useOrderCatalog($type);
+		$this->data_array=&$data;
+		return $this->insertDataFromInternalArray();
+	}	
+	/**
 	* Deletes a catalog item based on its item number key.
 	* @access public
 	* @param int Item number
@@ -198,7 +365,7 @@ class Product extends Core {
 	function DeleteCatalogItem($item_nr,$type){
 		if(!$item_nr||!$type) return false;
 		$this->useOrderCatalog($type);
-		$this->sql="DELETE  FROM $this->coretable WHERE item_no='$item_nr'";
+		$this->sql="DELETE FROM $this->coretable WHERE item_no='$item_nr'";
        	return $this->Transact();
 	}
 	/**
@@ -248,6 +415,51 @@ class Product extends Core {
 		} else { return false; }
 	}
 	/**
+	* Returns all orders of a suplier marked as draft or are still unsent.
+	*
+	* The returned adodb record object contains rows of arrays.
+	* Each array contains order  data with the following index keys:
+	* - order_nr = order's primary key number
+	* - furnitor_nr = suplier number      
+	* - order_date = date of ordering
+	* - order_time = time of ordering   
+	* - articles = ordered articles                
+	* - extra1 = extra notes                
+	* - extra2 = extra notes                
+	* - validator = validator's name                
+	* - ip_addr = IP address of the workstation that send the order            
+	* - priority = priority level                
+	* - status = record's status                
+	* - history = record's history                
+	* - modify_id = name of user                
+	* - modify_time = modify time stamp in yyyymmddhhMMss format              
+	* - create_id = name of use                
+	* - create_time = creation time stamp in yyyymmddhhMMss format    
+	* - sent_datetime = date and time sent in yyyy-mm-dd hh:MM:ss format              
+	* - process_datetime = date and time processed in yyyy-mm-dd hh:MM:ss format              
+
+	* @access public
+	* @param int Suplier number
+	* @param string Determines the final table name 
+	* @return mixed adodb record object or boolean
+	*/
+	function OrderDraftsFurnitor($furnitor_nr,$type){
+		global $db;
+		if(empty($type)||empty($furnitor_nr)) return false;
+		//$this->useOrderList($type);
+		$this->sql="SELECT * FROM care_furnizim
+						WHERE sent_datetime = '".DBF_NODATETIME."'
+						AND (status='draft' OR status='')
+						AND idcare_furnitor=$furnitor_nr
+						ORDER BY order_date";
+
+        if($this->res['od']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['od']->RecordCount()) {
+				return $this->res['od'];
+			} else { return false; }
+		} else { return false; }
+	}	
+	/**
 	* Returns all pending orders or orders with  "acknowledge and print" status. 
 	*
 	* These orders are marked in the table as "pending" or "ack_print".
@@ -286,6 +498,158 @@ class Product extends Core {
 				return true;
 			} else { return false; }
 		} else { return false; }
+	}
+	/**
+	* Checks if the product exists based on its name.
+	* @access public
+	* @param int Item number
+	* @param string Determines the final table name 
+	* @return boolean
+	*/
+	function ProductNameExists($artikelname='',$table=''){
+		global $db;
+		if(empty($type)||!$nr) return false;
+		$this->useProduct($type);
+		$this->sql="SELECT artikelname FROM care_med_pharma_main WHERE artikelname='$artikelname'";
+		//echo $this->sql;
+        if($buf=$db->Execute($this->sql)) {
+            if($buf->RecordCount()) {
+				return true;
+			} else { return false; }
+		} else { return false; }
+	}
+	/**
+	* Checks if the product exists based on its name.
+	* @access public
+	* @param int Item number
+	* @param string Determines the final table name 
+	* @return boolean
+	*/
+	function ProductInformation($idsub='',$type){
+		global $db;
+		if(!$idsub) return false;
+		if(!$type) return false;
+		if($type=='pharma') {
+			$tbmain = 'care_pharma_products_main';
+			$tbsub = 'care_pharma_products_main_sub';
+		} else {
+			$tbmain = 'care_med_products_main';
+			$tbsub = 'care_med_products_main_sub';			
+		}
+		$this->sql="SELECT *
+                    FROM $tbmain
+                         INNER JOIN $tbsub ON (
+                         $tbmain.bestellnum =
+                          $tbsub.bestellnum)
+                    WHERE $tbsub.id = '$idsub'";
+		//echo $this->sql;
+	    if($buf = $db->Execute($this->sql)) {
+        	if($buf->RecordCount()) {
+				return $buf->fields;
+			} else { return false; }
+		} else { return false; }
+	}
+	/**
+	 * Return the orders made by the given department
+	 *
+	 * @param int $dept_nr Department number
+	 */
+	function getWaitingDeptOrders($dept_nr) {
+		global $db;
+		if(empty($dept_nr)||!$dept_nr) return false;
+		//cleanup things a bit
+		$this->sql = "DELETE FROM $this->tb_pocat WHERE $this->tb_pocat.dept_nr = $dept_nr";
+		$db->Execute($this->sql);
+		$this->coretable=$this->tb_prescription_sub;
+		$this->ref_array=$this->fld_presc_sub;
+		$this->sql="INSERT INTO $this->tb_pocat(bestellnum, quantity, artikelname,
+                     minorder, maxorder, proorder, doza, packing, dept_nr)
+                    SELECT $this->tb_prescription_sub.bestellnum,
+                           SUM($this->tb_prescription_sub.quantity) AS quantity,
+                           $this->tb_pmain.artikelname,
+                           $this->tb_pmain.minorder,
+                           $this->tb_pmain.maxorder,
+                           $this->tb_pmain.proorder,
+                           $this->tb_pmain.doza,
+                           $this->tb_pmain.packing,
+                           care_encounter_prescription.dept_nr
+                    FROM $this->tb_pmain
+                         INNER JOIN $this->tb_prescription_sub ON (
+                         $this->tb_pmain.bestellnum = $this->tb_prescription_sub.bestellnum)
+                         INNER JOIN care_encounter_prescription ON (
+                         $this->tb_prescription_sub.prescription_nr = care_encounter_prescription.nr)
+                    WHERE care_encounter_prescription.dept_nr = $dept_nr AND $this->tb_prescription_sub.status = 'printed'
+                    GROUP BY $this->tb_prescription_sub.bestellnum,
+                             $this->tb_pmain.artikelname,
+                             $this->tb_pmain.minorder,
+                             $this->tb_pmain.maxorder,
+                             $this->tb_pmain.proorder,
+                             $this->tb_pmain.doza,
+                             $this->tb_pmain.packing,
+                             care_encounter_prescription.dept_nr
+                    ORDER BY $this->tb_prescription_sub.companion DESC";
+        if($this->res['od']=$db->Execute($this->sql)) {
+            if($this->rec_count=$this->res['od']->RecordCount()) {
+				return $this->res['od'];
+			} else { return false; }
+		} else { return false; }
+				
+	}
+	/**
+	 * function to update the prices of the medicaments on the prescription table
+	 * since i'm not so good with sql i've done a 3 step process
+	 * 1. get the actual bestellnum & the correspondin price
+	 * 2. update prescription sub with the prices
+	 * 3. update the status to 'done' in prescription
+	 *
+	 * @param int $dept_nr Department number 
+	 * @return bool true / false
+	 */
+	function updatePrescriptionPrices($dept_nr){
+		global $db;
+		$doneUpdate = false;
+		if(empty($dept_nr)||!$dept_nr) return false;
+		
+		//get the actual prices of the mediaments
+		$this->sql = "SELECT $this->tb_polist.dept_nr,
+                           $this->tb_polist.status,
+                           AVG ($this->tb_polist_sub.cmimi) AS cmimi,
+                           $this->tb_polist_sub.bestellnum
+                    FROM $this->tb_polist
+                         INNER JOIN $this->tb_polist_sub ON ($this->tb_polist.order_nr =
+                          $this->tb_polist_sub.order_nr_sub)
+                    WHERE $this->tb_polist.dept_nr = $dept_nr AND
+                          $this->tb_polist.status = 'pending'
+                    GROUP BY $this->tb_polist_sub.bestellnum";
+		if($buf = $db->Execute($this->sql)) {
+            if($this->rec_count=$buf->RecordCount()) {
+				$actualPrices = $buf;
+			} else { return false; }
+		} else { return false; } 
+		
+		//update the prices for the prescriptions
+		while($actualProduct = $actualPrices->fetchRow()) {
+			$cmimi = $actualProduct['cmimi'];
+			$bnum = $actualProduct['bestellnum'];
+			$this->sql = "UPDATE $this->tb_prescription,
+                               $this->tb_prescription_sub
+                        SET $this->tb_prescription_sub.price = $cmimi, 
+                        	$this->tb_prescription_sub.status = 'done'
+                        WHERE $this->tb_prescription.nr =
+                         $this->tb_prescription_sub.prescription_nr AND
+                              $this->tb_prescription_sub.bestellnum = $bnum AND
+                              $this->tb_prescription_sub.status = 'printed' AND
+                              $this->tb_prescription.dept_nr = $dept_nr AND
+                              $this->tb_prescription.status = 'printed'";
+			if($db->Execute($this->sql))
+				$doneUpdate = true;
+		}
+		//finaly i update the status of the actual prescriptions
+		$db->Execute("UPDATE $this->tb_prescription SET $this->tb_prescription.status = 'done' WHERE $this->tb_prescription.dept_nr = $dept_nr");
+		if($doneUpdate == true)
+			return true;
+		else
+			return false;
 	}
 }
 ?>

@@ -93,7 +93,9 @@ class Department extends Core {
 									'modify_id',
 									'modify_time',
 									'create_id',
-									'create_time');
+									'create_time',
+									'is_pharmacy',
+									'pharma_dept_nr');
 	/**
 	* Constructor
 	* @param int Department number
@@ -195,8 +197,54 @@ class Department extends Core {
 	* @return  mixed assoc array (sorted by param $sort) or boolean or adodb record object 
 	*/
 	function getAllMedical() {
-		return $this->_getalldata("type=1 AND is_inactive='0'");
+		return $this->_getalldata("type=1 AND is_inactive='0' AND is_pharmacy=0");
 	}
+	/**
+	* Gets all ACTIVE pharmacys. The result is assoc array sorted by departments formal name
+	* @access public
+	* @return  mixed assoc array (sorted by param $sort) or boolean or adodb record object 
+	*/
+	function getAllPharmacy() {
+		return $this->_getalldata("type=1 AND is_inactive='0' AND is_pharmacy=1");
+	}
+	/**
+	* Gets all information  of one pharmacy. The result is 2 dimensional associative array.
+	* @access public
+	* @param int Department number
+	* @return mixed 1 dimensional associative array or boolean
+	*/
+	function getPharmaAllInfo($nr){
+	    global $db;
+		$this->sql="SELECT name_formal FROM $this->tb WHERE nr=$nr AND is_pharmacy=1";
+	    if ($this->result=$db->Execute($this->sql)) {
+		    if ($this->result->RecordCount()) {
+		        return $this->result->FetchRow();
+			} else {
+				return FALSE;
+			}
+		} else {
+		    return FALSE;
+		}
+	}	
+	/**
+	* Gets the id of the pharmacy on wich this department can order. The result is 2 dimensional associative array.
+	* @access public
+	* @param int Department number
+	* @return mixed 1 dimensional associative array or boolean
+	*/
+	function getPharmaOfDept($nr){
+	    global $db;
+		$this->sql="SELECT pharma_dept_nr FROM $this->tb WHERE nr=$nr";
+	    if ($this->result=$db->Execute($this->sql)) {
+		    if ($this->result->RecordCount()) {
+		        return $this->result->FetchRow();
+			} else {
+				return FALSE;
+			}
+		} else {
+		    return FALSE;
+		}
+	}	
 	/**
 	* Gets all ACTIVE medical departments. The result is adodb record object sorted by departments formal name
 	* Returns adodb record object sorted by departments formal name

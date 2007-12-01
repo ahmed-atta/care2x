@@ -161,6 +161,7 @@ class Encounter extends Notes {
 							   'referrer_dept',
 							   'referrer_institution',
 							   'referrer_notes',
+                               'regional_code',
 							   'financial_class',
 							   'insurance_nr',
 							   'insurance_class_nr',
@@ -662,7 +663,7 @@ class Encounter extends Notes {
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="SELECT e.*, p.pid, p.title,p.name_last, p.name_first, p.date_birth, p.sex,
 									p.addr_str,p.addr_str_nr,p.addr_zip, p.blood_group,
-									p.photo_filename, t.name AS citytown_name,p.death_date
+									p.photo_filename, t.name AS citytown_name,p.death_date,p.sss_nr
 							FROM $this->tb_enc AS e, 
 									 $this->tb_person AS p
 									 LEFT JOIN $this->tb_citytown AS t ON p.addr_citytown_nr=t.nr

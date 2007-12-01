@@ -85,7 +85,7 @@ class GuiInputPerson {
 	function createTR($error_handler, $input_name, $ld_text, $input_val, $colspan = 1, $input_size = 35,$red=FALSE){
 
 		ob_start();
-			if ($error_handler || $red) $sBuffer="<font color=\"$this->error_fontcolor\">* $ld_text</font>";
+			if ($error_handler || $red) $sBuffer="<font color=\"$this->error_fontcolor\">$ld_text</font>";
 				else $sBuffer=$ld_text;
 			$this->smarty->assign('sItem',$sBuffer);
 			$this->smarty->assign('sColSpan2',"colspan=$colspan");
@@ -182,11 +182,11 @@ class GuiInputPerson {
 					# Get the file extension
 					$picext=$img_obj->UploadedImageMimeType();
 				}
-
+     
 				if(($update)) {
 
 					//echo formatDate2STD($geburtsdatum,$date_format);
-					$sql="UPDATE $dbtable SET
+					$sql.="UPDATE $dbtable SET
 							 title='$title',
 							 name_last='$name_last',
 							 name_first='$name_first',
@@ -461,6 +461,10 @@ class GuiInputPerson {
 				alert("<?php echo $LDPlsEnterBldgNr; ?>");
 				d.addr_str_nr.focus();
 				return false;
+           }else if(d.addr_citytown_name.value==""){
+				alert("<?php echo $LDPlsEnterCityTown; ?>");
+				d.addr_citytown_name.focus();
+				return false;
 			}else if(d.addr_zip.value==""){
 				alert("<?php echo $LDPlsEnterZip; ?>");
 				d.addr_zip.focus();
@@ -468,6 +472,10 @@ class GuiInputPerson {
 			}else if(d.user_id.value==""){
 				alert("<?php echo $LDPlsEnterFullName; ?>");
 				d.user_id.focus();
+				return false;
+           }else if(d.sss_nr.value==""){
+				alert("<?php echo $LDPlsEnterSss_nr; ?>");
+				d.sss_nr.focus();
 				return false;
 			}else{
 				return true;
@@ -578,7 +586,16 @@ class GuiInputPerson {
 		//$iRowSpanCount++;
 		$this->smarty->assign('sNameFirst',$this->createTR($errornamefirst, 'name_first', $LDFirstName,$name_first,'',35,TRUE));
 		//$iRowSpanCount++;
-		
+        
+        /* Begin SalvoRossitto 26/11/2007 */
+        if ($errorrelative) $this->smarty->assign('LDRelative',"<font color=red>$LDRelative</font>");
+			else $this->smarty->assign('LDRelative',"$LDRelative");
+        $this->smarty->assign('sRelativeNameLast',$this->createTR($errorrelativenamelast, 'relative_name_last', $LDLastName,$relative_name_last,2,35,FALSE));
+		$this->smarty->assign('sRelativeNameFirst',$this->createTR($errorrelativenamefirst, 'relative_name_first', $LDFirstName,$relative_name_first,2,35,FALSE));
+		$this->smarty->assign('sRelativePhone',$this->createTR($errorrelativephone, 'relative_phone', $LDPhone,$relative_phone,2,35,FALSE));
+        /* Begin SalvoRossitto 26/11/2007 */
+        
+        
 		if (!$GLOBAL_CONFIG['person_name_2_hide']){
 			$this->smarty->assign('sName2',$this->createTR($errorname2, 'name_2', $LDName2,$name_2));
 			$iRowSpanCount++;
@@ -608,8 +625,8 @@ class GuiInputPerson {
 		$this->smarty->assign('sPicTdRowSpan',"rowspan=$iRowSpanCount");
 
 
-		if ($errordatebirth) $this->smarty->assign('LDBday',"<font color=red>* $LDBday</font>:");
-			else $this->smarty->assign('LDBday',"<font color=red>*</font> $LDBday:");
+		if ($errordatebirth) $this->smarty->assign('LDBday',"<font color=red>$LDBday</font>");
+			else $this->smarty->assign('LDBday',"<font color=red></font> $LDBday");
 			
 		//gjergji : new calendar
 /*		if($date_birth){
@@ -626,8 +643,8 @@ class GuiInputPerson {
 		$this->smarty->assign('sBdayInput',$calendar->show_calendar($calendar,$date_format,'date_birth',$date_birth));
 		//end gjergji
 		
-		if ($errorsex) $this->smarty->assign('LDSex', "<font color=#ff0000>* $LDSex</font>:");
-			else $this->smarty->assign('LDSex', "<font color=#ff0000>*</font> $LDSex:");
+		if ($errorsex) $this->smarty->assign('LDSex', "<font color=#ff0000>$LDSex</font>:");
+			else $this->smarty->assign('LDSex', "<font color=#ff0000></font> $LDSex");
 
 		$sSexMBuffer='<input name="sex" type="radio" value="m"  ';
 		if($sex=="m") $sSexMBuffer.=' checked>';
@@ -710,26 +727,26 @@ class GuiInputPerson {
 			$this->smarty->assign('LDSeparated',$LDSeparated);
 		}
 		
-		if ($erroraddress) $this->smarty->assign('LDAddress',"<font color=red>$LDAddress</font>:");
-			else $this->smarty->assign('LDAddress',"$LDAddress:");
+		if ($erroraddress) $this->smarty->assign('LDAddress',"<font color=red>$LDAddress</font>");
+			else $this->smarty->assign('LDAddress',"$LDAddress");
 
-		if ($errorstreet) $this->smarty->assign('LDStreet',"<font color=red><font color=#ff0000>*</font> $LDStreet</font>:");
-			else $this->smarty->assign('LDStreet',"<font color=#ff0000>*</font> $LDStreet:");
+		if ($errorstreet) $this->smarty->assign('LDStreet',"<font color=red><font color=#ff0000></font> $LDStreet</font>");
+			else $this->smarty->assign('LDStreet',"<font color=#ff0000></font> $LDStreet");
 
 		$this->smarty->assign('sStreetInput','<input name="addr_str" type="text" size="35" value="'.$addr_str.'">');
 
-		if ($errorstreetnr) $this->smarty->assign('LDStreetNr',"<font color=red><font color=#ff0000>*</font> $LDStreetNr</font>:");
-				else $this->smarty->assign('LDStreetNr',"<font color=#ff0000>*</font> $LDStreetNr:");
+		if ($errorstreetnr) $this->smarty->assign('LDStreetNr',"<font color=red><font color=#ff0000></font> $LDStreetNr</font>");
+				else $this->smarty->assign('LDStreetNr',"<font color=#ff0000></font> $LDStreetNr");
 
 		$this->smarty->assign('sStreetNrInput','<input name="addr_str_nr" type="text" size="10" value="'.$addr_str_nr.'">');
 
-		if ($errortown) $this->smarty->assign('LDStreet',"<font color=red>$LDTownCity</font>:");
-			else $this->smarty->assign('LDTownCity',"$LDTownCity:");
+		if ($errortown) $this->smarty->assign('LDStreet',"<font color=red>$LDTownCity</font>");
+			else $this->smarty->assign('LDTownCity',"$LDTownCity");
 		$this->smarty->assign('sTownCityInput','<input name="addr_citytown_name" type="text" size="35" value="'.$addr_citytown_name.'">');
 		$this->smarty->assign('sTownCityMiniCalendar',"<a href=\"javascript:popSearchWin('citytown','aufnahmeform.addr_citytown_nr','aufnahmeform.addr_citytown_name')\"><img ".createComIcon($root_path,'b-write_addr.gif','0')."></a>");
 
-		 if ($errorzip) $this->smarty->assign('LDZipCode',"<font color=red><font color=#ff0000>*</font> $LDZipCode</font> :");
-		 	else  $this->smarty->assign('LDZipCode',"<font color=#ff0000>*</font> $LDZipCode :");
+		 if ($errorzip) $this->smarty->assign('LDZipCode',"<font color=red><font color=#ff0000></font> $LDZipCode</font> ");
+		 	else  $this->smarty->assign('LDZipCode',"<font color=#ff0000></font> $LDZipCode ");
 		 $this->smarty->assign('sZipCodeInput','<input name="addr_zip" type="text" size="10" value="'.$addr_zip.'">');
 
 

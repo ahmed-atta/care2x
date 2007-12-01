@@ -37,11 +37,13 @@ define('SIGNAL_COLOR_ANTIBIOTIC','green_pale');    // color to be set for signal
 define('SIGNAL_COLOR_DIURETIC','yellow_pale');             // color to be set for signalling the prescription of diuretics
 define('SIGNAL_COLOR_ANTICOAG','violet');             // color to be set for signalling the prescription of anticoagulants
 define('SIGNAL_COLOR_IV','pink');             // color to be set for signalling the prescription of anticoagulants
+//gjergji :
+//pink modified to show the hour to do the prescription
+//maybe not a good idea, but usefull :)
 
 /* ****************** Do not edit the following functions **************************/
 
-function setEventSignalColor($pn, $color, $status = SIGNAL_COLOR_LEVEL_FULL )
-{
+function setEventSignalColor($pn, $color, $status = SIGNAL_COLOR_LEVEL_FULL ) {
    	global $db,  $LDDbNoSave;
 	$nogo=false;
 	
@@ -49,14 +51,14 @@ function setEventSignalColor($pn, $color, $status = SIGNAL_COLOR_LEVEL_FULL )
 	$event_table='care_encounter_event_signaller'; 
 	
 	$sql="SELECT encounter_nr FROM $event_table WHERE encounter_nr=$pn";
-   	if($ergebnis=$db->Execute($sql))
-   	{
+   	if($ergebnis=$db->Execute($sql)) {
    		if($ergebnis->RecordCount()){
    			$sql="UPDATE $event_table SET $color ='$status' WHERE encounter_nr=$pn";
 			$db->Execute($sql);
 			if(!$db->Affected_Rows()){
    				//echo $sql;
-				$nogo=true;
+   				//gjergji : changed $nogo to false...
+				$nogo=false;
 			}
 		}else{
 			$nogo=true;
@@ -70,5 +72,18 @@ function setEventSignalColor($pn, $color, $status = SIGNAL_COLOR_LEVEL_FULL )
         $db->Execute($sql);
 	}
    //echo $sql;
+}
+
+//gjergji
+//clear all the rose bars before subbmiting the new ones
+function cleanRoseBars($pn) {
+	global $db;
+	$event_table='care_encounter_event_signaller'; 
+		
+	for($i=1;$i<=24;$i++){
+		$roseColumn = 'rose_'.$i;
+		$sql="UPDATE $event_table SET $roseColumn ='0' WHERE encounter_nr=$pn";
+		$db->Execute($sql);		
+	}
 }
 ?>

@@ -19,10 +19,20 @@ class Access extends Core {
 	*/
 	var $tb_user='care_users';
 	/**
+	* Users table name
+	* @var string
+	*/
+	var $tb_role='care_user_roles';	
+	/**
 	* Holder for user data in associative array
 	* @var array
 	*/
 	var $user=array();
+	/**
+	* Holder for role data in associative array
+	* @var array
+	*/
+	var $role=array();
 	/**
 	* Allowed areas in hieararchical order
 	* @var array
@@ -88,7 +98,16 @@ class Access extends Core {
 			return $this->loadAccess($login,$pw);
 		}
 	}
-	
+	/**
+	 * Loads the role data
+	 *
+	 * @param int $id the id of the selected role
+	 * @return boolean
+	 */
+	function roleAccess($id){
+		$this->coretable=$tb_role;
+		return $this->loadRole($id);
+	}	
 	/**
 	* Loads the user data and checks its access status. 
 	* Use if login and password were not passed during construction OR if a new access data is to be loaded using the same object instance.
@@ -139,6 +158,33 @@ class Access extends Core {
 			}
 		}else{
 			$usr_status=FALSE;
+			return FALSE;
+		}
+	}
+	/**
+	 * Loads the role Status
+	 *
+	 * @param int $id Role ID
+	 * @return boolean
+	 */
+	function loadRole($id){
+		/**
+		* @global ADODB-db-link
+		*/
+		global $db;
+		# Reset all status
+		if(empty($id)){
+			return FALSE;
+		}
+		$this->sql="SELECT role_name, id, permission FROM $this->tb_role WHERE id ='".$id."'";
+		if ($result=$db->Execute($this->sql)) {
+		    if ($this->rec_count=$result->RecordCount()) {
+		       $this->role=$result->FetchRow();
+			   return TRUE;
+			}else{
+				return FALSE;
+			}
+		}else{
 			return FALSE;
 		}
 	}
@@ -296,6 +342,53 @@ class Access extends Core {
 		}
 	}
 	/**
+	*  Checks the  data if role exists based on his id
+	*
+	* @public
+	* @param int role id
+	* @return mixed adodb record or boolean FALSE
+	*/
+	function roleExists($id){
+		global $db;
+		if(empty($id)) return FALSE;
+
+		$this->sql="SELECT * FROM care_user_roles WHERE id='".$id."'";
+
+		if ($this->res['_ud']=$db->Execute($this->sql)) {
+			if ($this->res['_ud']->RecordCount()) {
+				$this->role = $this->res['_ud']->FetchRow();
+				return TRUE;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	/**
+	*  Checks the  data if role exists based on his name
+	*
+	* @public
+	* @param int role name
+	* @return mixed adodb record or boolean FALSE
+	*/
+	function roleExistsByName($roleName){
+		global $db;
+		if(empty($roleName)) return FALSE;
+
+		$this->sql="SELECT * FROM care_user_roles WHERE role_name='".$roleName."'";
+		if ($this->res['_ud']=$db->Execute($this->sql)) {
+			if ($this->res['_ud']->RecordCount()) {
+				$this->role = $this->res['_ud']->FetchRow();
+				return TRUE;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}	
+	/**
 	*  Changes the lock status of the user
 	*
 	* @private
@@ -346,6 +439,43 @@ class Access extends Core {
 			$this->lock_status=FALSE;
 			return TRUE;
 		} else {
+			return FALSE;
+		}
+	}
+	/**
+	*  Deletes the role if exists based on his role id
+	*
+	* @public
+	* @param id role id=
+	* @return mixed adodb record or boolean FALSE
+	*/
+	function roleDelete($id){
+		global $db;
+		if(empty($id)) return FALSE;
+
+		$this->sql="DELETE FROM $this->tb_role  WHERE id=$id";
+		if ($this->Transact($this->sql)) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+	/**
+	 * Loads all the active roles
+	 *
+	 * @return ADODB
+	 */
+	function loadAllRoles(){
+		global $db;
+		# Reset all status
+		$this->sql="SELECT * FROM $this->tb_role";
+		if ($result=$db->Execute($this->sql)) {
+		    if ($this->rec_count=$result->RecordCount()) {
+		       return $result->GetArray();;
+			}else{
+				return FALSE;
+			}
+		}else{
 			return FALSE;
 		}
 	}

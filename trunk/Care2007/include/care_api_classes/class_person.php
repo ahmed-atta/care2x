@@ -152,7 +152,10 @@ class Person extends Core {
 				 'modify_id',
 				 'modify_time',
 				 'create_id',
-				 'create_time');
+				 'create_time',
+                 'relative_name_first',
+                 'relative_name_last',
+                 'relative_phone');
 	/**
 	* Constructor
 	* @param int PID number

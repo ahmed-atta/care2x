@@ -29,6 +29,11 @@ class Charts extends NursingNotes {
 	*/
 	var $tb_prescription='care_encounter_prescription';
 	/**
+	* Table name for encounter prescription data
+	* @var string
+	*/
+	var $tb_prescription_sub='care_encounter_prescription_sub';
+	/**
 	* Table name for prescription notes data
 	* @var string
 	*/
@@ -79,6 +84,27 @@ class Charts extends NursingNotes {
 								'modify_time',
 								'create_id',
 								'create_time');
+	/**
+	* Field names of care_encounter_prescription_sub table
+	* @var int
+	*/
+	var $fld_prescription_sub=array('nr', 
+								'prescription_nr',
+								'prescription_type_nr',
+								'bestellnum',
+								'article',
+								'drug_class',
+								'dosage',
+								'admin_time',
+								'quantity',
+								'application_type_nr',
+								'sub_speed',
+								'notes_sub',
+								'color_marker',
+								'is_stopped',
+								'stop_date',
+								'status',
+								'companion',);										
 	/**
 	* Field names of care_encounter_prescription_notes table
 	* @var array
@@ -316,18 +342,30 @@ class Charts extends NursingNotes {
 	}
 	/**
 	* Gets all current prescription data based on the encounter_nr key.
+	* changed by gjergj sheldija
+	* to work with the new way of managing prescriptions
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
 	*/
 	function getAllCurrentPrescription($enr){
 		global $db;
-		$this->sql="SELECT * FROM $this->tb_prescription WHERE encounter_nr=$enr AND is_stopped IN ('',0) ORDER BY nr";
+		$this->sql="SELECT $this->tb_prescription.*,
+					$this->tb_prescription_sub.*, 
+					$this->tb_prescription.nr as id 
+				FROM $this->tb_prescription_sub 
+					INNER JOIN $this->tb_prescription ON ( $this->tb_prescription.nr = $this->tb_prescription_sub.prescription_nr )  
+				WHERE $this->tb_prescription.encounter_nr=$enr 
+					AND $this->tb_prescription_sub.is_stopped IN ('',0) 
+				ORDER BY $this->tb_prescription.nr desc,  
+					$this->tb_prescription_sub.companion desc,
+					$this->tb_prescription.prescribe_date desc";
 		if($this->result=$db->Execute($this->sql)){
 			return $this->result;
 		}else{
 			return false;
 		}
 	}
+		
 	/**
 	* Gets prescription data of a day based on the encounter_nr and date keys.
 	* @param int Encounter number
@@ -336,9 +374,17 @@ class Charts extends NursingNotes {
 	*/			
 	function getDayPrescriptionNotes($enr,$date){
 		global $db;
-		$this->sql="SELECT m.*,n.nr AS notes_nr,n.short_notes AS day_notes 
-							FROM $this->tb_prescription AS m LEFT JOIN $this->tb_presc_notes AS n ON m.nr=n.prescription_nr AND n.date='$date'
-							WHERE m.encounter_nr=$enr AND  m.is_stopped IN ('',0)";
+		$this->sql="SELECT $this->tb_prescription_sub.*,
+       						$this->tb_presc_notes.nr AS notes_nr,
+      		 				$this->tb_presc_notes.short_notes AS day_notes,
+       						$this->tb_prescription.prescribe_date
+					FROM $this->tb_prescription INNER JOIN $this->tb_prescription_sub ON $this->tb_prescription.nr = $this->tb_prescription_sub.prescription_nr
+     				LEFT JOIN $this->tb_presc_notes ON
+      					$this->tb_prescription.nr =
+       					$this->tb_presc_notes.prescription_nr AND
+        				$this->tb_presc_notes.date = '$date'
+					WHERE $this->tb_prescription.encounter_nr = $enr AND
+      					$this->tb_prescription_sub.is_stopped IN ('', 0)";
 		//echo $this->sql;
 		if($this->result=$db->Execute($this->sql)){
 			return $this->result;
@@ -474,10 +520,12 @@ class Charts extends NursingNotes {
 	function getChartDailyPrescriptionNotes($enr,$start,$end){
 		global $db;
 
-        $this->sql="SELECT p.nr,n.date,n.short_notes,p.color_marker
+        $this->sql="SELECT p.nr,n.date,n.short_notes 
                         FROM $this->tb_prescription AS p
                             LEFT JOIN $this->tb_presc_notes AS n  ON p.nr=n.prescription_nr
-                         WHERE p.encounter_nr=$enr AND p.is_stopped IN ('',0) ORDER BY p.nr";
+                         WHERE p.encounter_nr=$enr  
+                         ORDER BY p.nr";
+        echo $sql;
         if($this->result=$db->Execute($this->sql)){
 			return $this->result;
 		}else{ //echo $this->sql;
