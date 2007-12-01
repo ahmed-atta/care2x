@@ -41,27 +41,8 @@ switch($mode)
 						$src="catalogpass";
 						$userck="ck_prod_order_user";
 						$fileforward=$root_path."modules/products/products-bestellkatalog-edit.php".$append.$userck."&target=catalog&from=".$src;
-						break;
-	case "furnitor":  $title=$LDFurnitor;
-						$src="catalogpass";
-						$userck="ck_furnitor_db_user";
-						$fileforward=$root_path."modules/furnitor/furnitor.php".$append.$userck;
-						break;
-	case "furnizim" : $title=$LDFurnizim;
-						//mizuko:e ndryshova per efekt te help
-						$append=URL_REDIRECT_APPEND."&cat=furnizim&from=$src&userck=";
-						//end:mizuko
-						$src="catalogpass";
-						$userck="ck_furnizim_db_user";
-						$fileforward=$root_path."modules/furnitor/furnizim.php".$append.$userck;
+						break;ward=$root_path."modules/furnitor/furnizim.php".$append.$userck;
 						break;	
-	//mizuko:shtova link te raporteve
-	case "reports"	: $title="Reports";
-						$src="orderpass";
-						$userck="ck_prod_order_user";
-					    $fileforward=$root_path."classes/agata/web/browse.php?goal=1&BrowseDir=..\\reports\\depo\\";
-					    break;
-	//end:mizuko
 	default: 	$title=$LDPharmaOrder;
 						$src="orderpass";
 					    $mode="order";

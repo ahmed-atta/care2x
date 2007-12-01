@@ -77,7 +77,6 @@ class Product extends Core {
 						'minorder',
 						'maxorder',
 						'proorder',
-						'furnitor_nr',
 						'sasi',
 						'cmimi',
 						'vlere',
@@ -123,7 +122,6 @@ class Product extends Core {
 								'skadenca',
 								'cmimi',
 								'bestellnum',
-								'idcare_furnizim',
 								'create_time');
 										
 	/**
@@ -191,7 +189,7 @@ class Product extends Core {
 		if($type=='pharma'){
 			$this->coretable=$this->tb_pocat;
 			$this->ref_array=$this->fld_ocat;
-		}elseif($type=='medlager' or $type=='furnizim'){
+		}elseif($type=='medlager' ){
 			$this->coretable=$this->tb_mocat;
 			$this->ref_array=$this->fld_ocat;
 		}else{return false;}
@@ -208,7 +206,7 @@ class Product extends Core {
 		if($type=='pharma'){
 			$this->coretable=$this->tb_pmain;
 			$this->ref_array=$this->fld_prodmain;
-		}elseif($type=='medlager' or $type='furnizim'){
+		}elseif($type=='medlager' ){
 			$this->coretable=$this->tb_mmain;
 			$this->ref_array=$this->fld_prodmain;
 		}else{return false;}
@@ -225,18 +223,6 @@ class Product extends Core {
 		$this->sql="DELETE  FROM $this->coretable WHERE order_nr='$order_nr'";
        	return $this->Transact();
 	}
-	/**
-	* Deletes an order by a furnitor.
-	* @access public
-	* @param int Order number
-	* @param string Determines the final table name 
-	* @return boolean.
-	*/
-	function DeleteOrderFurnitor($idcare_furnizim,$type){
-		//$this->useOrderList($type);
-		$this->sql="DELETE FROM care_furnizim WHERE idcare_furnizim='$idcare_furnizim'";
-		return $this->Transact();
-	}	
 	/**
 	* Returns the actual order catalog of a department.
 	*
@@ -303,27 +289,6 @@ class Product extends Core {
 		} else { return false; }
 	}	
 	/**
-	* Returns the actual order catalog of furnitor.
-	*
-	* The returned adodb record object contains rows of arrays.
-	* Each array contains catalog  data with  index keys as outlined in the <var>$fld_ocat</var> array.
-	* @access public
-	* @param int Department number
-	* @param string Determines the final table name 
-	* @return mixed adodb record object or boolean
-	*/
-	function ActualOrderCatalogFurnizim($furnitor_nr,$type=''){
-		global $db;
-		//if(empty($type)||empty($dept_nr)) return false;
-		//$this->useOrderCatalog($type);
-		$this->sql="SELECT DISTINCT * FROM care_med_ordercatalog WHERE furnitor_nr='$furnitor_nr' ORDER BY hit DESC";
-		if($this->res['aoc']=$db->Execute($this->sql)) {
-            if($this->rec_count=$this->res['aoc']->RecordCount()) {
-				return $this->res['aoc'];
-			} else { return false; }
-		} else { return false; }
-	}	
-	/**
 	* Saves (inserts)  an item in the order catalog.
 	*
 	* The data must be passed by reference with associative array.
@@ -334,22 +299,6 @@ class Product extends Core {
 	* @return boolean
 	*/
 	function SaveCatalogItem(&$data,$type){
-		if(empty($type)) return false;
-		$this->useOrderCatalog($type);
-		$this->data_array=&$data;
-		return $this->insertDataFromInternalArray();
-	}
-	/**
-	* Saves (inserts)  an item in the order catalog of the suplier.
-	*
-	* The data must be passed by reference with associative array.
-	* Data must have the index keys as outlined in the <var>$fld_ocat</var> array.
-	* @access public
-	* @param array Data to save
-	* @param string Determines the final table name 
-	* @return boolean
-	*/	
-	function SaveCatalogItemFurnizim(&$data,$type){
 		if(empty($type)) return false;
 		$this->useOrderCatalog($type);
 		$this->data_array=&$data;
@@ -414,51 +363,6 @@ class Product extends Core {
 			} else { return false; }
 		} else { return false; }
 	}
-	/**
-	* Returns all orders of a suplier marked as draft or are still unsent.
-	*
-	* The returned adodb record object contains rows of arrays.
-	* Each array contains order  data with the following index keys:
-	* - order_nr = order's primary key number
-	* - furnitor_nr = suplier number      
-	* - order_date = date of ordering
-	* - order_time = time of ordering   
-	* - articles = ordered articles                
-	* - extra1 = extra notes                
-	* - extra2 = extra notes                
-	* - validator = validator's name                
-	* - ip_addr = IP address of the workstation that send the order            
-	* - priority = priority level                
-	* - status = record's status                
-	* - history = record's history                
-	* - modify_id = name of user                
-	* - modify_time = modify time stamp in yyyymmddhhMMss format              
-	* - create_id = name of use                
-	* - create_time = creation time stamp in yyyymmddhhMMss format    
-	* - sent_datetime = date and time sent in yyyy-mm-dd hh:MM:ss format              
-	* - process_datetime = date and time processed in yyyy-mm-dd hh:MM:ss format              
-
-	* @access public
-	* @param int Suplier number
-	* @param string Determines the final table name 
-	* @return mixed adodb record object or boolean
-	*/
-	function OrderDraftsFurnitor($furnitor_nr,$type){
-		global $db;
-		if(empty($type)||empty($furnitor_nr)) return false;
-		//$this->useOrderList($type);
-		$this->sql="SELECT * FROM care_furnizim
-						WHERE sent_datetime = '".DBF_NODATETIME."'
-						AND (status='draft' OR status='')
-						AND idcare_furnitor=$furnitor_nr
-						ORDER BY order_date";
-
-        if($this->res['od']=$db->Execute($this->sql)) {
-            if($this->rec_count=$this->res['od']->RecordCount()) {
-				return $this->res['od'];
-			} else { return false; }
-		} else { return false; }
-	}	
 	/**
 	* Returns all pending orders or orders with  "acknowledge and print" status. 
 	*

@@ -1541,7 +1541,6 @@ CREATE TABLE `care_med_ordercatalog` (
   `minorder` int(4) NOT NULL default '0',
   `maxorder` int(4) NOT NULL default '0',
   `proorder` tinytext collate latin1_general_ci NOT NULL,
-  `furnitor_nr` int(3) default '0',
   `doza` tinytext collate latin1_general_ci,
   `packing` tinytext collate latin1_general_ci,
   PRIMARY KEY  (`item_no`),

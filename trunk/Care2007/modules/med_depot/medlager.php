@@ -106,9 +106,6 @@ $aSubMenuItem=array('LDPharmaOrder' => "<a href=\"medlager-pass.php".URL_APPEND.
 										'LDOrderArchive' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=archive\">$LDOrderArchive</a>",
 										'LDPharmaDb' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=dbank\">$LDPharmaDb</a>",
 										'LDOrderBotActivate' => "<a href=\"medlager-bestellbot-pass.php".URL_APPEND."\" >$LDMediBotActivate</a>",
-										'LDFurnitor' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=furnitor\">$LDFurnitor</a>",
-										'LDFurnizim' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=furnizim\">$LDFurnizim</a>",
-										'LDRaporteDepo' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=reports\">$LDRaporteDepo</a>"
 										);
 
 # Create the submenu rows
