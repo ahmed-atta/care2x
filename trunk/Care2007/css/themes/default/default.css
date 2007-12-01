@@ -274,3 +274,9 @@ a:hover {text-decoration: underline;}
 a:active {text-decoration: none;}
 a:visited:active {text-decoration: none;}
 a:visited:hover {text-decoration: underline;}
+
+/* Gjergj Sheldija - added triage specific classes */
+.triageWhite {text-transform:uppercase;background-color: #FFFFFF;font-weight: bolder;font-variant: small-caps;}
+.triageGreen {text-transform:uppercase;background-color: #00FF00;font-weight: bolder;font-variant: small-caps;}
+.triageYellow {text-transform:uppercase;background-color: #FFFF00;font-weight: bolder;font-variant: small-caps;}
+.triageRed {text-transform:uppercase;background-color: #FF0000;font-weight: bolder;font-variant: small-caps;}
