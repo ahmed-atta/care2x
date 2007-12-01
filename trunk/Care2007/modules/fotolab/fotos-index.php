@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -147,7 +147,7 @@ if(is_object($all_image)){
 	
 			echo '<tr>
      		<td class="a12_w">'.formatDate2Local($image['shot_date'],$date_format);
-			echo ' <font color=red size="1">Bild '.$image['shot_nr'].'</font>';
+			echo ' <font color=red size="1">Foto '.$image['shot_nr'].'</font>';
  
      		echo '</td>
 	 		<td class="a12_gry"><a href="javascript:preview(\''.$image['nr'].'\')" title="'.$LDClk2Preview.'">

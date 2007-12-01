@@ -7,11 +7,11 @@ require($root_path.'include/inc_environment_global.php');
 
 <html>
 <head>
-<title>Editing image with ImageJ</title>
+<title>Modifica</title>
 </head>
 <body>
 
-<h2>Editing image with ImageJ</h2>
+<h2>Edita immagine</h2>
 
 <applet codebase="."
 	code="ij.ImageJApplet.class" archive="ij.jar"
@@ -21,7 +21,7 @@ require($root_path.'include/inc_environment_global.php');
 </applet>
 
 <p>
-<a href="javascript:window.history.back()">Back</a>
+<a href="javascript:window.history.back()">Indietro</a>
 </p>
 </body>
 </html>
