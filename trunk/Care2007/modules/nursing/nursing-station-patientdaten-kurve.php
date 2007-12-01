@@ -22,7 +22,7 @@ require_once($root_path.'include/inc_editor_fx.php');
 require_once($root_path.'classes/datetimemanager/class.dateTimeManager.php');
 $dateshifter=new dateTimeManager();
 
-//$db->debug=true;
+///$db->debug=true;
 
 $thisfile=basename(__FILE__);
 $breakfile="nursing-station-patientdaten.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";
@@ -233,13 +233,29 @@ $sTitle = $sTitle.")";
 ?>
 
 <style type="text/css" name="2">
+.pblock {
+	font-family: verdana, arial;
+}
 
-.pblock{ font-family: verdana,arial; }
-div.box { border: solid; border-width: thin; width: 100% }
-div.pcont{ margin-left: 3; }
-.a12{ font-family: verdana,arial; font-size:12;}
-.a10{ font-family: arial; font-size:10;}
+div.box {
+	border: solid;
+	border-width: thin;
+	width: 100%
+}
 
+div.pcont {
+	margin-left: 3;
+}
+
+.a12 {
+	font-family: verdana, arial;
+	font-size: 12;
+}
+
+.a10 {
+	font-family: arial;
+	font-size: 10;
+}
 </style>
 
 <script language="javascript">
@@ -273,8 +289,8 @@ function popgetdailybpt(winID,patientID,jahrID,monatID,tagID,tagIDX,jahrS,monatS
 	}
 function popgetmedx(winID,patientID,tagID)
 	{
-	w=700;
-	urlholder="nursing-getmedx.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&winid=" + winID + "&station=<?php echo $station ?>&pn=" + patientID + "<?php echo "&yr=$jahr&mo=$kmonat&dystart=$tag&dyname=$tagname&dy="; ?>" + tagID ;
+	w=1000;
+	urlholder="nursing-getmedx.php?sid=<?php echo "$sid&lang=$lang&edit=$edit&dept_nr=$dept_nr&" ?>&winid=" + winID + "&station=<?php echo $station ?>&pn=" + patientID + "<?php echo "&yr=$jahr&mo=$kmonat&dystart=$tag&dyname=$tagname&dy="; ?>" + tagID ;
 	dailymedx=window.open(urlholder,"medx","width="+w+",height="+h600+",menubar=no,resizable=yes,scrollbars=yes");
    	window.dailymedx.moveTo(sw-(w/2),sh-(h600/2));
    	infowinflag=1;
@@ -652,6 +668,7 @@ if($edit){
 echo '</td>';
 		
 // ************** medication ************************
+
 if(is_object($medis)){
 	$maxmedx=$medis->RecordCount();
 }else{
@@ -674,22 +691,8 @@ $toggle=0;
 for ($i=0;$i<$maxmedx;$i++){
 		$m=$medis->FetchRow();
 		if ($toggle) $bgc="#efefef"; else $bgc="#ffffff";
-		echo '<tr><td ';
-		if($m['article']) 
-		{
-			switch($m['color_marker'])
-			{
-				case "n": echo ' bgcolor="'.$bgc.'"'; $cat[$i]="n"; break;
-				case "a": echo ' bgcolor="#00ff00"'; $cat[$i]="a";break;
-				case "w": echo ' bgcolor="#ffff00"'; $cat[$i]="w";break;
-				case "c": echo ' bgcolor="#00ccff"'; $cat[$i]="c";break;
-				case "i": echo ' bgcolor="#ff6699"'; $cat[$i]="i";break;
-				default:echo ' bgcolor="'.$bgc.'"';
-			}
-		}
-		else echo  'bgcolor='.$bgc;
-		echo ' class="a10">';
-		if($m['article']) echo $m['article'].' '.$m['dosage']; else echo '&nbsp;';
+		echo '<tr><td bgcolor="'.$bgc.'" class="a10">';
+		if($m['article']) echo substr($m['article'],0,strpos($m['article'], '-')).'/'.$m['admin_time']; else echo '&nbsp;';
 		echo '
 			</td></tr>';
 		echo "\n";
@@ -704,15 +707,13 @@ echo	'</td>';
 // ************** iv zugang dailydose ************************
 $actmonat=$kmonat;
 $actjahr=$jahr;
-for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
-{
+for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++) {
 	aligndate(&$acttag,&$actmonat,&$actjahr); // function to align the date
 	$r=&getdata($daily_iv,$i,$kmonat,$jahr,1);
 	echo '
 	<td valign="bottom" ';
 	if($r) echo "bgcolor=#ff99cc"; else echo "bgcolor=white";
 	echo '><font face="verdana,arial" size="1" color="#000000">';
-	
 
 	if($edit) echo '<a href="javascript:popgetdailyinfo(\'iv_needle\',\''.$pn.'\',\''.$actjahr.'\',\''.$actmonat.'\',\''.$acttag.'\',\''.($d+$tagnamebuf).'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tagname.'\')" title="'.str_replace("~tagword~",$LDIvPort,$LDClk2EnterDaily).'">';
 
@@ -721,7 +722,7 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 	}elseif($edit){
 		echo '<img src="p.gif" width="95" height="9"  align="absmiddle"  border=0 alt="'.str_replace("~tagword~",$LDIvPort,$LDClk2EnterDaily).'">';
 	}
-	if($edit) echo '</a>';
+	if($edit) echo '</a></font>';
 	
 // ************** medication dailydose ************************
 	//$dosis=&getdata($daily_medis,$acttag,$actmonat,$actjahr);
@@ -741,7 +742,7 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 		if(is_object($daily_medis)&&is_object($medis)){
 			$med=$medis->FetchRow();
 			while($dosis=$daily_medis->FetchRow()){
-				if(($dosis['date']==$date)&&($dosis['nr']==$med['nr'])){
+				if(($dosis['date']==$date)&&($dosis['nr']==$med['prescription_nr'])){
 				//if(($dosis['date']==$date)){
 					$ok=true;
 					break;
@@ -749,22 +750,13 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 			}
 			$daily_medis->MoveFirst();
 		}
-		//switch($med['color_marker'])  // <== use this line if the entire row must have marker color
-		switch($dosis['color_marker']) // <== use this line if only the non-empty block must have marker color
-			{
-				case "n": echo ' bgcolor="'.$bgc.'"';break;
-				case "a": echo ' bgcolor="#00ff00"';break;
-				case "w": echo ' bgcolor="#ffff00"'; break;
-				case "c": echo ' bgcolor="#00ccff"'; break;
-				case "i": echo ' bgcolor="#ff6699"'; break;
-				default:echo ' bgcolor="'.$bgc.'"';
-			}
-
-		echo ' class="a10">&nbsp;';
+		echo ' bgcolor="'.$bgc.'" class="a10">&nbsp;';
 		if($edit) echo '<a href="javascript:popgetdailymedx(\'medication\',\''.$pn.'\',\''.$actjahr.'\',\''.$actmonat.'\',\''.$acttag.'\',\''.($d+$tagnamebuf).'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tagname.'\')" title="'.str_replace("~tagword~",$LDMedication,$LDClk2PlanDaily).'">';
-	
-	
-		if($ok) echo $dosis['short_notes']; else echo'<img src="p.gif" width="90" height="9"  align="absmiddle"  border=0>';
+
+		if($ok) 
+			echo $dosis['short_notes']; 
+		else 
+			echo'<img src="p.gif" width="90" height="9"  align="absmiddle"  border=0>';
 		if($edit) echo '</a>';
 		echo '</td></tr>';
 		$toggle=!$toggle;	
@@ -776,7 +768,7 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 </table>';
 
 	echo '</td>';
-	}
+}
 
 echo 
 '</tr>
@@ -787,10 +779,10 @@ echo
 </form>
 
 <p>
-
 <ul>
-<a href="<?php echo "$breakfile" ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
-</FONT>
+	<a href="<?php echo "$breakfile" ?>"><img
+		<?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
+	</FONT>
 </ul>
 
 <?php

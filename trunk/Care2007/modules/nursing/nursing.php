@@ -16,7 +16,7 @@
  require_once($root_path.'include/care_api_classes/class_ward.php');
  // Load the wards info 
  $ward_obj=new Ward;
- $items='nr,ward_id,name';
+ $items='nr,ward_id,name, dept_nr';
  $ward_info=&$ward_obj->getAllWardsItemsObject($items, $HTTP_SESSION_VARS['department_nr']);
 
  $HTTP_SESSION_VARS['sess_file_return']=$top_dir.basename(__FILE__);
@@ -44,12 +44,14 @@
  if(is_object($ward_info))
  {
   while($stations=$ward_info->FetchRow()) {
-   $sWardInfo = $sWardInfo.'<tr><td><a href="'.strtr('nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$stations['ward_id'].'&location_id='.$stations['ward_id'].'&ward_nr='.$stations['nr'],' ',' ').'"><div class="wardname"><li>'.strtoupper($stations['ward_id']).'&nbsp;</div></a> ';
+   $sWardInfo = $sWardInfo.'<tr><td><a href="'.strtr('nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$stations['ward_id'].'&location_id='.$stations['ward_id'].'&ward_nr='.$stations['nr'].'&dept_nr='.$stations['dept_nr'],' ',' ').'"><div class="wardname"><li>'.strtoupper($stations['ward_id']).'&nbsp;</div></a> ';
    $sWardInfo = $sWardInfo."\n";
    $sWardInfo = $sWardInfo.'</td><td>'.$stations['name'].'</td></tr>';
   }
 
- } 
+ } else {
+  $sWardInfo = $LDNoWardsYet.'<br><img '.createComIcon($root_path,'redpfeil.gif','0','absmiddle').'> <a href="nursing-station-manage-pass.php'.URL_APPEND.'">'.$LDClk2CreateWard.'</a>';
+ }
 
 
  # Toolbar title
@@ -63,7 +65,6 @@
 										createComIcon($root_path,'eye_s.gif','0') ,
 										createComIcon($root_path,'findnew.gif','0'),
 										createComIcon($root_path,'storage.gif','0'),
-										createComIcon($root_path,'timeplan.gif','0'),
 										createComIcon($root_path,'forums.gif','0'),
 										createComIcon($root_path,'bubble.gif','0')
 										);
@@ -74,7 +75,6 @@ $aSubMenuItem = array('LDNursingStations' => $LDNursingStations." <img ".createC
 										'LDQuickView'  => "<a href=\"".$root_path."modules/nursing/nursing-schnellsicht.php".URL_APPEND."\">$LDQuickView</a>",
 										'LDSearchPatient'  => "<a href=\"".$root_path."modules/nursing/nursing-patient-such-start.php".URL_APPEND."\">$LDSearchPatient</a>",
 										'LDArchive'  => "<a href=\"".$root_path."modules/nursing/nursing-station-archiv.php".URL_APPEND."\">$LDArchive</a>",
-										'LDStationMan'  => "<a href=\"nursing-station-manage-pass.php?sid=$sid&lang=$lang\">$LDStationMan</a>",
 										'LDNursesList'  => "<a href=\"".$root_path."modules/nursing_or/nursing-or-main-pass.php".URL_APPEND."&target=setpersonal&retpath=menu\">$LDNursesList</a>",
 										'LDNews'  => "<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=36\">$LDNews</a>"
 										);
@@ -84,7 +84,6 @@ $aSubMenuText = array('',
 										$LDQuickViewTxt,
 										$LDSearchPatientTxt,
 										$LDArchiveTxt,
-										$LDStationManTxt,
 										$LDNursesListTxt,
 										$LDNewsTxt
 										);

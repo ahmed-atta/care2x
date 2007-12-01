@@ -10,7 +10,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-//$db->debug=1;
+///$db->debug=1;
 
 define('SHOW_DOC_2',1);  # Define to 1 to  show the 2nd doctor-on-duty
 define('DOC_CHANGE_TIME','7.30'); # Define the time when the doc-on-duty will change in 24 hours H.M format (eg. 3 PM = 15.00, 12 PM = 0.00)
@@ -186,7 +186,7 @@ function getinfo(pn){
 	{ echo '
 	urlholder="nursing-station-patientdaten.php'.URL_REDIRECT_APPEND;
 	echo '&pn=" + pn + "';
-	echo "&pday=$pday&pmonth=$pmonth&pyear=$pyear&edit=$edit&station=".$ward_info['name']; 
+	echo "&pday=$pday&pmonth=$pmonth&pyear=$pyear&edit=$edit&station=".$ward_info['name']."&dept_nr=".$dept_nr; 
 	echo '";';
 	echo '
 	patientwin=window.open(urlholder,pn,"width=700,height=600,menubar=no,resizable=yes,scrollbars=yes");
@@ -266,10 +266,6 @@ require($root_path.'include/inc_checkdate_lang.php');
 ?>
 // -->
 </script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 
 <style type="text/css" name="s2">
 td.vn { font-family:verdana,arial; color:#000088; font-size:10}
@@ -454,7 +450,8 @@ if($ward_ok){
 				$smarty->assign('sRoom','');
 			}
 	
-			$smarty->assign('sBed',strtoupper(chr($j+96)));
+			//$smarty->assign('sBed',strtoupper(chr($j+96))); //#27
+			$smarty->assign('sBed',$j);
 
 			# If patient, show images by sex
 			if($is_patient){

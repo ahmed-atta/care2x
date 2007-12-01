@@ -242,7 +242,6 @@ if($mode=='show'){
 <a href="
 <?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php'.URL_APPEND;
 else echo $breakfile.URL_APPEND;
-echo ;
 ?>
 "><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 </ul>

@@ -19,7 +19,6 @@ require($root_path.'include/inc_environment_global.php');
 * return: 0 = if no test element set, (paramlist empty)
 */
 
-
 function prepareTestElements()
 {
     global $HTTP_POST_VARS, $paramlist, $sday, $sample_time;
@@ -156,75 +155,71 @@ if(isset($pn)&&$pn) {
 	
 	switch($mode){
 		case 'save':
-							  if(prepareTestElements())
-							  {
-								$data['batch_nr']=$batch_nr;
-								$data['encounter_nr']=$pn;
-								$data['room_nr']=$room_nr;
-								$data['dept_nr']=$dept_nr;
-								$data['parameters']=$paramlist;
-								$data['doctor_sign']=$doctor_sign;
-								$data['highrisk']=$_highrisk_;
-								$data['notes']=$notes;
-								$data['send_date']=date('Y-m-d H:i:s');
-								$data['sample_time']=$sample_time;
-								$data['sample_weekday']=$sday;
-								$data['status']=$status;
-								$data['urgent']=$urgent;
-								$data['history']="Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-								$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-								$data['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-								$data['create_time']='NULL';
-								$diag_obj->setDataArray($data);
-							    if($diag_obj->insertDataFromInternalArray()){
-								  	// Load the visual signalling functions
-									include_once($root_path.'include/inc_visual_signalling_fx.php');
-									// Set the visual signal 
-									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
-									//echo $sql;
-									 header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php".URL_REDIRECT_APPEND."&edit=$edit&saved=insert&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=chemlabor&noresize=$noresize&batch_nr=$batch_nr");
-									 exit;
-								}else{
-								     echo "<p>$sql<p>$LDDbNoSave"; 
-									 $mode='';
-								 }
-		                    } //end of prepareTestElements()
-								
-							break; // end of case 'save'
+				  if(prepareTestElements())  {
+					$data['batch_nr']=$batch_nr;
+					$data['encounter_nr']=$pn;
+					$data['room_nr']=$room_nr;
+					$data['dept_nr']=$dept_nr;
+					$data['parameters']=$paramlist;
+					$data['doctor_sign']=$doctor_sign;
+					$data['highrisk']=$_highrisk_;
+					$data['notes']=$notes;
+					$data['send_date']=date('Y-m-d H:i:s');
+					$data['sample_time']=$sample_time;
+					$data['sample_weekday']=$sday;
+					$data['status']=$status;
+					$data['urgent']=$urgent;
+					$data['history']="Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+					$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+					$data['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+					$data['create_time']='NULL';
+					$diag_obj->setDataArray($data);
+				    if($diag_obj->insertDataFromInternalArray()){
+					  	// Load the visual signalling functions
+						include_once($root_path.'include/inc_visual_signalling_fx.php');
+						// Set the visual signal 
+						setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
+						//echo $sql;
+						 header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php".URL_REDIRECT_APPEND."&edit=$edit&saved=insert&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=chemlabor&noresize=$noresize&batch_nr=$batch_nr");
+						 exit;
+					}else{
+					     echo "<p>$sql<p>$LDDbNoSave"; 
+						 $mode='';
+					 }
+	            } //end of prepareTestElements()
+					
+				break; // end of case 'save'
 							
 			case 'update':
-							  if(prepareTestElements()){
-								//echo $sql;
-								$data['room_nr']=$room_nr;
-								$data['dept_nr']=$dept_nr;
-								$data['parameters']=$paramlist;
-								$data['doctor_sign']=$doctor_sign;
-								$data['highrisk']=$_highrisk_;
-								$data['notes']=$notes;
-								$data['sample_time']=$sample_time;
-								$data['sample_weekday']=$sday;
-								$data['status']=$status;
-								$data['urgent']=$urgent;
-								$data['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
-								$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-								$diag_obj->setDataArray($data);
-								$diag_obj->setWhereCond(" batch_nr=$batch_nr");
-							    if($diag_obj->updateDataFromInternalArray($batch_nr)){									
-								  	// Load the visual signalling functions
-									include_once($root_path.'include/inc_visual_signalling_fx.php');
-									// Set the visual signal 
-									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
-									 header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php".URL_REDIRECT_APPEND."&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=chemlabor&batch_nr=$batch_nr&noresize=$noresize");
-									 exit;
-								  }
-								  else
-								   {
-								      echo "<p>$sql<p>$LDDbNoSave"; 
-								      $mode="";
-								   }
-		                        } //end of prepareTestElements()
-	
-								break; // end of case 'save'
+				if(prepareTestElements()){
+					$data['room_nr']=$room_nr;
+					$data['dept_nr']=$dept_nr;
+					$data['parameters']=$paramlist;
+					$data['doctor_sign']=$doctor_sign;
+					$data['highrisk']=$_highrisk_;
+					$data['notes']=$notes;
+					$data['sample_time']=$sample_time;
+					$data['sample_weekday']=$sday;
+					$data['status']=$status;
+					$data['urgent']=$urgent;
+					$data['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
+					$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+					$diag_obj->setDataArray($data);
+					$diag_obj->setWhereCond(" batch_nr=$batch_nr");
+					if($diag_obj->updateDataFromInternalArray($batch_nr)){									
+						// Load the visual signalling functions
+						include_once($root_path.'include/inc_visual_signalling_fx.php');
+						// Set the visual signal 
+						setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
+					 	header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php".URL_REDIRECT_APPEND."&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=chemlabor&batch_nr=$batch_nr&noresize=$noresize");
+					 	exit;
+					} else {
+						echo "<p>$sql<p>$LDDbNoSave"; 
+						$mode="";
+					}
+				} //end of prepareTestElements()
+				
+				break; // end of case 'update'
 								
 								
 	        /* If mode is edit, get the stored test request when its status is either "pending" or "draft"
@@ -400,9 +395,6 @@ function printOut(){
 
 //-->
 </script>
-<script language="javascript" src="<?php echo $root_path; ?>js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
- 
 <?php
 
 $sTemp = ob_get_contents();

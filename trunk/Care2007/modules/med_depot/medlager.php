@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -79,7 +79,10 @@ $smarty->append('JavaScript',$sTemp);
 										createComIcon($root_path,'templates.gif','0'),
 										createComIcon($root_path,'documents.gif','0'),
 										createComIcon($root_path,'storage.gif','0'),
-										createComIcon($root_path,'sitemap_animator.gif','0')
+										createComIcon($root_path,'sitemap_animator.gif','0'),
+										createComIcon($root_path,'storage.gif','0'),
+										createComIcon($root_path,'storage.gif','0'),
+										createComIcon($root_path,'redlist.gif','0')										
 										);
 
 # Prepare the submenu item descriptions
@@ -89,7 +92,10 @@ $aSubMenuText=array($LDPharmaOrderTxt,
 										$LDOrderCatTxt,
 										$LDOrderArchiveTxt,
 										$LDPharmaDbTxt,
-										$LDOrderBotActivateTxt
+										$LDOrderBotActivateTxt,
+										$LDFurnitorTxt,
+										$LDFurnizimTxt,
+										$LDRaporteDepoTxt
 										);
 
 # Prepare the submenu item links indexed by their template tags
@@ -100,6 +106,9 @@ $aSubMenuItem=array('LDPharmaOrder' => "<a href=\"medlager-pass.php".URL_APPEND.
 										'LDOrderArchive' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=archive\">$LDOrderArchive</a>",
 										'LDPharmaDb' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=dbank\">$LDPharmaDb</a>",
 										'LDOrderBotActivate' => "<a href=\"medlager-bestellbot-pass.php".URL_APPEND."\" >$LDMediBotActivate</a>",
+										'LDFurnitor' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=furnitor\">$LDFurnitor</a>",
+										'LDFurnizim' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=furnizim\">$LDFurnizim</a>",
+										'LDRaporteDepo' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=reports\">$LDRaporteDepo</a>"
 										);
 
 # Create the submenu rows

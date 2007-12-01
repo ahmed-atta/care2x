@@ -70,10 +70,16 @@ function chkform(d) {
 # Pregnancy nr
 $TP_PREG_NR=$LD['this_pregnancy_nr'];
 if($pregnancy['this_pregnancy_nr']) $TP_PNR=$pregnancy['this_pregnancy_nr'];
-
+//#154
 # Delivery date
-if($pregnancy['delivery_date']) $TP_PREGDATE=formatDate2Local($pregnancy['delivery_date'],$date_format);
-$TP_IMG_PDATE=createComIcon($root_path,'show-calendar.gif','0','',TRUE);
+//gjergji : new calendar
+require_once ('../../js/jscalendar/calendar.php');
+$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+$calendar->load_files();
+
+$TP_IMG_PDATE = $calendar->show_calendar($calendar,$date_format,$pregnancy['delivery_date'],$pregnancy['delivery_date']);
+//gjergji : end
+//end : #154
 # Delivery time
 if($pregnancy['delivery_time']) $TP_PTIME=$pregnancy['delivery_time'];
 # GRavida
@@ -258,3 +264,4 @@ eval("echo $tp_preg;");
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>
 
 </form>
+

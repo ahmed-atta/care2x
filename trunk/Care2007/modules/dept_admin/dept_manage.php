@@ -75,9 +75,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <tr>
 <td bgcolor="<?php echo $cfg['bot_bgcolor']; ?>"  colspan=2>
 
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
+
 
 </td>
 </tr>

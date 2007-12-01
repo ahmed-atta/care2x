@@ -2,7 +2,14 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-
+/**
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* GNU General Public License
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* elpidio@care2x.org, 
+*
+* See the file "copy_notice.txt" for the licence notice
+*/
 define('LANG_FILE','products.php');
 $local_user='ck_prod_arch_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -301,7 +308,7 @@ if($linecount>0){
 
 			echo '
 				 <td>'.str_replace('24','00',formatDate2Local($content['process_datetime'],$date_format)).' '.convertTimeToLocal(formatDate2Local($content['process_datetime'],$date_format,1,1)).'</td>
-				 <td>'.$content['create_id'].'</td>
+				 <td>'.$content['modify_id'].'</td>
 				</tr>';
 			$i++;
 

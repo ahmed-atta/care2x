@@ -303,6 +303,13 @@ $smarty->assign('addr_str_nr',$addr_str_nr);
 $smarty->assign('addr_zip',$addr_zip);
 $smarty->assign('addr_citytown',$addr_citytown_name);
 
+
+# Salvo Rossitto 28/11/2007
+$smarty->assign('LDSSSNr',$LDSSSNr);
+$smarty->assign('sss_nr',$sss_nr);
+###
+
+
 $smarty->assign('LDAdmitClass',$LDAdmitClass);
 
 # Suggested by Dr. Sarat Nayak to emphasize the OUTPATIENT encounter type
@@ -356,6 +363,11 @@ if(isset($insurance_nr)&&$insurance_nr) $smarty->assign('insurance_nr',$insuranc
 
 $smarty->assign('LDInsuranceCo',$LDInsuranceCo);
 $smarty->assign('insurance_firm_name',$insurance_firm_name);
+
+# SalvoR 28/11/07
+$smarty->assign('LDRegionalCode',$LDRegionalCode);
+$smarty->assign('regional_code',$regional_code);
+##
 
 $smarty->assign('LDFrom',$LDFrom);
 $smarty->assign('LDTo',$LDTo);

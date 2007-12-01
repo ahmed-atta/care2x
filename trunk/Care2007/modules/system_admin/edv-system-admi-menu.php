@@ -18,7 +18,16 @@ if(isset($ck_edv_admin_user)) setcookie('ck_edvzugang_user',$ck_edv_admin_user);
 $breakfile='edv.php'.URL_APPEND;
 
 # Set the db manager app here
-
+switch($dbtype){
+	case 'mysql': $strDbAdminItem = $LDPhpMyAdmin;
+							$strDbAdminUrl='phpmyadmin';
+							break;
+	case 'postgres':
+	case 'postgres7':
+							$strDbAdminItem = 'phpPgAdmin';
+							$strDbAdminUrl = 'phppgadmin';
+							break;
+}
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
@@ -58,6 +67,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   <tr>
 	<td bgcolor="#ffffff">
 		&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><FONT  color="#0000cc" FACE="verdana,arial" size=2><a href="edv_user_access_edit.php?sid=<?php echo $sid."&lang=$lang&src=sysadmin" ?>" target="SYSADMIN_WFRAME"> <?php echo $LDCreateEditLock; ?></a></FONT><br>
+		&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><FONT  color="#0000cc" FACE="verdana,arial" size=2><a href="edv_user_role_edit.php?sid=<?php echo $sid."&lang=$lang&src=sysadmin" ?>" target="SYSADMIN_WFRAME"> <?php echo $LDCreateEditRoles; ?></a></FONT><br>
 		&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><FONT  color="#0000cc" FACE="verdana,arial" size=2><a href="edv_system_timeout.php?sid=<?php echo $sid."&lang=$lang&src=sysadmin" ?>" target="SYSADMIN_WFRAME"> <?php echo $LDTimeOut; ?></a></FONT></td>
   </tr>
   <tr>
@@ -159,7 +169,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   </tr>
 
   
-
+  
 <!--  
   <tr>
 	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><img <?php echo createComIcon($root_path,'update.gif','0','absmiddle') ?>></b> </FONT></td>

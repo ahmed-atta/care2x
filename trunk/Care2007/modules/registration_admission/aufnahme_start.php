@@ -144,7 +144,7 @@ if($pid!='' || $encounter_nr!=''){
 					  if ($referrer_recom_therapy=='') { $errortherapie=1; $error=1; $errornum++;};
 					  
 	                  $referrer_notes=trim($referrer_notes);
-					  if ($referrer_notes=='') { $errorbesonder=1; $error=1; $errornum++;};
+					  /*if ($referrer_notes=='') { $errorbesonder=1; $error=1; $errornum++;};*/
 					  
 	                  $encounter_class_nr=trim($encounter_class_nr);
 					  if ($encounter_class_nr=='') { $errorstatus=1; $error=1; $errornum++;};
@@ -417,10 +417,6 @@ function chkform(d) {
 		alert("<?php echo $LDPlsEnterRefererTherapy; ?>");
 		d.referrer_recom_therapy.focus();
 		return false;
-	}else if(d.referrer_notes.value==""){
-		alert("<?php echo $LDPlsEnterRefererNotes; ?>");
-		d.referrer_notes.focus();
-		return false;
 	}else if(d.encoder.value==""){
 		alert("<?php echo $LDPlsEnterFullName; ?>");
 		d.encoder.focus();
@@ -563,6 +559,11 @@ if(!isset($pid) || !$pid){
 		$smarty->assign('addr_str_nr',$addr_str_nr);
 		$smarty->assign('addr_zip',$addr_zip);
 		$smarty->assign('addr_citytown',$addr_citytown_name);
+        
+        # Salvo Rossitto 28/11/2007
+        $smarty->assign('LDSSSNr',$LDSSSNr);
+        $smarty->assign('sss_nr',$sss_nr); #PROBLEMACODICEFISCALE
+        ###
 		
 		$smarty->assign('LDAdmitClass',$LDAdmitClass);
 
@@ -621,6 +622,26 @@ if(!isset($pid) || !$pid){
 				}
 				$smarty->assign('sWardInput',$sTemp);
 			} //  End of if no encounter nr
+            
+            
+            /* SalvoR */
+            $smarty->assign('prova',"<select name=current_ward_nr>
+								<option value=>Diagnosi 1</option>
+                                <option value=>Diagnosi 2</option>
+                                <option value=>Diagnosi 3</option>");
+
+            /* */
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
 
 			# If no encounter nr or outpatient, show clinic/department info, 2 = outpatient
 			if(!$encounter_nr||$encounter_class_nr==2){
@@ -657,13 +678,37 @@ if(!isset($pid) || !$pid){
 			} // End of if no encounter nr
 
 			$smarty->assign('LDDiagnosis',$LDDiagnosis);
-			$smarty->assign('referrer_diagnosis','<input name="referrer_diagnosis" type="text" size="60" value="'.$referrer_diagnosis.'">');
+			
+            
+            /* SalvoR */
+            
+            
+            //$smarty->assign('referrer_diagnosis','<input name="referrer_diagnosis" type="text" size="60" value="'.$referrer_diagnosis.'">');
+			$sBuffer ="<a href=\"javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')\"><img ".createComIcon($root_path,'l-arrowgrnlrg.gif','0','',TRUE)."></a>";
+			//$smarty->assign('referrer_diagnosis','<input name="insurance_firm_name" type="text" size="60" value="'.$sTemp.'">'.$sBuffer);
+            
+            //$sBuffer2="<img ".createComIcon($root_path,'l-arrowgrnlrg.gif','0','',TRUE)."<";
+			
+            $smarty->assign('referrer_diagnosis',"<input name='referrer_diagnosis' type='text' size='60' value=".$referrer_diagnosis."><img ".createComIcon($root_path,'l-arrowgrnlrg.gif','0','',TRUE).">");
+			
+            
+            /*
+            $sBuffer ="<a href=javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name');><img ".createComIcon($root_path,'l-arrowgrnlrg.gif','0','',TRUE)."></a>";
+			$smarty->assign('referrer_diagnosis',"<input name=insurance_firm_name type=text size=60 value=".$sTemp.">".$sBuffer);
+            /* */
+            
+            
 			$smarty->assign('LDRecBy',$LDRecBy);
 			$smarty->assign('referrer_dr','<input name="referrer_dr" type="text" size="60" value="'.$referrer_dr.'">');
 			$smarty->assign('LDTherapy',$LDTherapy);
 			$smarty->assign('referrer_recom_therapy','<input name="referrer_recom_therapy" type="text" size="60" value="'.$referrer_recom_therapy.'">');
 			$smarty->assign('LDSpecials',$LDSpecials);
 			$smarty->assign('referrer_notes','<input name="referrer_notes" type="text" size="60" value="'.$referrer_notes.'">');
+
+
+            $smarty->assign('LDRegionalCode',$LDRegionalCode);
+			$smarty->assign('regional_code','<input name="regional_code" type="text" size="60" value="'.$regional_code.'">');
+
 
 			if ($errorinsclass) $smarty->assign('LDBillType',"<font color=red>$LDBillType</font>");
 				else  $smarty->assign('LDBillType',$LDBillType);
@@ -682,12 +727,15 @@ if(!isset($pid) || !$pid){
 				}
 			}
 			$smarty->assign('sBillTypeInput',$sTemp);
-			$sTemp = '';
+			
+            /* SalvoR 29/11/07
+            $sTemp = '';
 			if ($error_ins_nr) $smarty->assign('LDInsuranceNr',"<font color=red>$LDInsuranceNr</font>");
 				else  $smarty->assign('LDInsuranceNr',$LDInsuranceNr);
 			 if(isset($insurance_nr)&&$insurance_nr) $sTemp = $insurance_nr;
 			$smarty->assign('insurance_nr','<input name="insurance_nr" type="text" size="60" value="'.$sTemp.'">');
-
+            */
+            
 			$sTemp = '';
 			 if(isset($insurance_firm_name)) $sTemp = $insurance_firm_name;
 			if ($error_ins_co) $smarty->assign('LDInsuranceCo',"<font color=red>$LDInsuranceCo</font>");

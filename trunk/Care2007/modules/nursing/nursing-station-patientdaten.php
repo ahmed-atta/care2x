@@ -486,8 +486,8 @@ function rx(){
 		for($h=1;$h<25;$h++)
 		{ 
 
-		  echo ha().'<img 
-			 '.createComIcon($root_path,'qbar_'.$event['rose_'.$h].'_rose.gif','0').' alt="'.$h.' '.$LDHour.'"  name="rose_'.$h.'" '.rx();
+		  echo '<img 
+			 '.createComIcon($root_path,'qbar_'.$event['rose_'.$h].'_rose.gif','0').' alt="'.$h.' '.$LDHour.'"  name="rose_'.$h.'">';
 			if(($h==6)||($h==12)||($h==18))
 		 	echo'<img
 			  '.createComIcon($root_path,'qbar_trans.gif','0').'>';
@@ -498,17 +498,17 @@ function rx(){
 		</tr>
 		<tr bgcolor="#696969" ><td colspan="3" ><nobr>
 		<table cellpadding=0 width=100%>
-		<tr><td bgcolor=333333><font color=white><b>Grafiket<b></font></td></tr>
+		<tr><td bgcolor=333333><font color=white><b>'.$LDCharts.'<b></font></td></tr>
 		<tr><td>
 		<table cellpadding=3><tr><td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-inout.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$IO_title.'"></td>
 		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-ddc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$DDC_title.'"></td>
-		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-kurve.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'"></td>
+		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-kurve.php'.URL_REDIRECT_APPEND.'&station='.$station.'&dept_nr='.$dept_nr.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'"></td>
 		</tr>
 		<tr><td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-tc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$TC_title.'"></td>
 		<td colspan=2><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-noc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$NOC_title.'"></td>
 		</tr></table>
 		</td></tr>
-		<tr><td bgcolor=333333><font color=white><b>Reports<b></font></td></tr>
+		<tr><td bgcolor=333333><font color=white><b>'.$LDReports.'<b></font></td></tr>
 		<tr><td>
 		<table cellpadding=3><tr>
 		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-pbericht.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDNursingReport.'"></td>
@@ -519,7 +519,7 @@ function rx(){
 		//<input type="button" value="'.$LDRootData.'"><input 
 		//type="button" value="'.$LDNursingPlan.'">
 		echo '</tr></table></td></tr>';
-		echo '<tr><td bgcolor=333333><font color=white><b>Other<b></font></td></tr>';
+		echo '<tr><td bgcolor=333333><font color=white><b>'.$LDOther.'<b></font></td></tr>';
 		echo '<tr><td><table cellpadding=3><tr><td>';
 		echo '<input 
 		type="button" onClick="javascript:openDRGComposite()" value="'.$LDDRG.'"></td><td>';
@@ -542,9 +542,9 @@ function rx(){
 			</select>';
 		}
 */
-		if($edit){		
-			echo '<table cellpadding=3><tr><td><select
-			name="konsiltyp" size="1" onChange=makekonsil(this.value)>
+		if($edit){
+		
+			echo '<table cellpadding=3><tr><td><select name="konsiltyp" size="1" onChange=makekonsil(this.value)>
 			<option value="">'.$LDChkUpRequests.'</option>';
 
 			while(list($x,$v)=each($medical_depts)){

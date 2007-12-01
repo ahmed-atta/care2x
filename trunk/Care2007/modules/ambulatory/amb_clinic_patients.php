@@ -174,6 +174,21 @@ function release(nr)
 	window.location.href=urlholder;
 }
 
+// Codice aggiunto per il foglio di anamnesi
+function yellow(pn){
+	urlholder="foglioanamnesi.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&dept_nr=$ward_nr&location_nr=$ward_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
+	patientwin=window.open(urlholder,pn,"width=1000,height=600,menubar=no,resizable=yes,scrollbars=yes");
+	}
+//
+
+// Codice aggiunto per il foglio di esame obiettivo
+function target(pn){
+	urlholder="fogliotarget.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&dept_nr=$ward_nr&location_nr=$ward_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
+	patientwin=window.open(urlholder,pn,"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
+	}
+//
+
+
 function popinfo(l,d)
 {
 	urlholder="<?php echo $root_path ?>modules/doctors/doctors-dienstplan-popinfo.php<?php echo URL_REDIRECT_APPEND ?>&nr="+l+"&dept_nr="+d+"&user=<?php echo $aufnahme_user.'"' ?>;
@@ -269,6 +284,8 @@ if($rows){
 			$smarty->assign('sNotesIcon','');
 			$smarty->assign('sTransferIcon','');
 			$smarty->assign('sDischargeIcon','');
+			$smarty->assign('sYellowPaper','');
+			$smarty->assign('sTarget','');
 
 			$sAstart='';
 			$sAend='';
@@ -370,6 +387,13 @@ if($rows){
 				if($patient['notes']) $sBuffer = $sBuffer.createComIcon($root_path,'bubble3.gif','0','',TRUE);
 					else $sBuffer = $sBuffer.createComIcon($root_path,'bubble2.gif','0','',TRUE);
 				$sBuffer = $sBuffer.' alt="'.$LDNoticeRW.'"></a>';
+				
+				// Aggiunta codice per il foglio di anamnesi e per l'esame obiettivo'
+					
+					$smarty->assign('sYellowPaper','<a href="javascript:yellow(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'yellowlist.gif','0','',TRUE).' alt="'.$LDYellowPaper.'"></a>');
+					$smarty->assign('sTarget','<a href="javascript:target(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'articles.gif','0','',TRUE).' alt="'.$LDTarget.'"></a>');
+					
+					//
 
 				$smarty->assign('sNotesIcon',$sBuffer);
 
@@ -531,6 +555,7 @@ while ($patient=$opat_obj->FetchRow()){
 		 <a href="javascript:release(\''.$patient['encounter_nr'].'\')" title="'.$LDReleasePatient.'"><img '.createComIcon($root_path,'bestell.gif','0').' alt="'.$LDReleasePatient.'"></a>';
 		 //<a href="javascript:deletePatient(\''.$helper[r].'\',\''.$helper[b].'\',\''.$helper[t].'\',\''.$helper[ln].'\')"><img src="../img/delete.gif" border=0 width=19 height=19 alt="Löschen (Passwort erforderlich)"></a>';
 
+
 		 $occ_list.='</nobr>
 	 	</td>
 		</tr>
@@ -584,12 +609,15 @@ $TP_Legend1_BLOCK.='
 <nobr>&nbsp;<img '.createComIcon($root_path,'red_dot.gif','0','absmiddle',TRUE).'> <b>'.$LDNonOwnPatient.'</b></nobr><br>';
 # Create the data block
 if($edit&&$rows){
-$TP_Legend1_BLOCK.='<nobr>&nbsp;<img '.createComIcon($root_path,'pdata.gif','0','absmiddle',TRUE).'> <b>'.$LDAdmissionData.'</b></nobr><br>
-<nobr>&nbsp;<img '.createComIcon($root_path,'open.gif','0','absmiddle',TRUE).'> <b>'.$LDOpenFile.'</b></nobr><br>
-<nobr>&nbsp;<img '.createComIcon($root_path,'bubble2.gif','0','absmiddle',TRUE).'> <b>'.$LDNotesEmpty.'</b></nobr><br>
-<nobr>&nbsp;<img '.createComIcon($root_path,'bubble3.gif','0','absmiddle',TRUE).'> <b>'.$LDNotes.'</b></nobr><br>
-<nobr>&nbsp;<nobr><img '.createComIcon($root_path,'xchange.gif','0','absmiddle',TRUE).'> <b>'.$LDTransferPatient.'</b></nobr></nobr><br>
-<nobr>&nbsp;<img '.createComIcon($root_path,'bestell.gif','0','absmiddle',TRUE).'> <b>'.$LDRelease.'</b></nobr><br>';
+$TP_Legend1_BLOCK.= '&nbsp;<img '.createComIcon($root_path,'pdata.gif','0','absmiddle',TRUE).'> <b>'.$LDAdmissionData.'</b><br>
+		&nbsp;<img '.createComIcon($root_path,'open.gif','0','absmiddle',TRUE).'> <b>'.$LDOpenFile.'</b><br>
+		&nbsp;<img '.createComIcon($root_path,'yellowlist.gif','0','absmiddle',TRUE).'> <b>'.$LDYellowPaper.'</b><br>
+		&nbsp;<img '.createComIcon($root_path,'articles.gif','0','absmiddle',TRUE).'> <b>'.$LDTarget.'</b><br>		
+		&nbsp;<img '.createComIcon($root_path,'bubble2.gif','0','absmiddle',TRUE).'> <b>'.$LDNotesEmpty.'</b><br>
+		&nbsp;<img '.createComIcon($root_path,'bubble3.gif','0','absmiddle',TRUE).'> <b>'.$LDNotes.'</b><br>
+		&nbsp;<nobr><img '.createComIcon($root_path,'xchange.gif','0','absmiddle',TRUE).'> <b>'.$LDTransferPatient.'</b></nobr><br>
+		&nbsp;<img '.createComIcon($root_path,'bestell.gif','0','absmiddle',TRUE).'> <b>'.$LDRelease.'</b><br>
+		';
 
 $TP_Legend2_BLOCK= '
 &nbsp;<img '.createComIcon($root_path,'spf.gif','0','absmiddle',TRUE).'> <b>'.$LDFemale.'</b><br>

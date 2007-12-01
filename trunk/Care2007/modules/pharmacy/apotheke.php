@@ -96,7 +96,6 @@ ob_end_clean();
 										createComIcon($root_path,'templates.gif','0'),
 										createComIcon($root_path,'documents.gif','0'),
 										createComIcon($root_path,'storage.gif','0'),
-										createComIcon($root_path,'redlist.gif','0'),
 										createComIcon($root_path,'sitemap_animator.gif','0'),
 										createComIcon($root_path,'bubble.gif','0')
 										);
@@ -108,7 +107,6 @@ $aSubMenuText=array($LDPharmaOrderTxt,
 										$LDOrderCatTxt,
 										$LDOrderArchiveTxt,
 										$LDPharmaDbTxt,
-										$LDRedListTxt,
 										$LDOrderBotActivateTxt,
 										$LDNewsTxt
 										);
@@ -120,7 +118,6 @@ $aSubMenuItem=array('LDPharmaOrder' => "<a href=\"apotheke-pass.php".URL_APPEND.
 										'LDOrderCat' => "<a href=\"apotheke-pass.php".URL_APPEND."&mode=catalog\">$LDOrderCat</a>",
 										'LDOrderArchive' => "<a href=\"apotheke-pass.php".URL_APPEND."&mode=archive\">$LDOrderArchive</a>",
 										'LDPharmaDb' => "<a href=\"apotheke-pass.php".URL_APPEND."&mode=dbank\">$LDPharmaDb</a>",
-										'LDRedList' => "<a href=\"".$root_path."main/pharmaindex.php".URL_APPEND."\">$LDRedList</a>",
 										'LDOrderBotActivate' => "<a href=\"apotheke-bestellbot-pass.php".URL_APPEND."&user_origin=pharmabot\" >$LDOrderBotActivate</a>",
 										'LDNews' => "<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=38\">$LDNews</a>"
 										);

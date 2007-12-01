@@ -43,12 +43,12 @@ function chkNewForm(v) {
 <form name="sickform" onSubmit="return chkSickForm(this)" method="post">
 <?php 
 # Prepare some values for the template
-$TP_insco_1='AOK';
-$TP_insco_2='BKK';
+$TP_insco_1='ISKSH';
+/*$TP_insco_2='BKK';
 $TP_insco_3='KKH';
 $TP_insco_4='TKK';
 $TP_insco_5='HKH';
-$TP_insco_6='BGG';
+$TP_insco_6='BGG';*/
 
 if($insurance){
 	$TP_enc_insurance_name=$insurance['name']; 

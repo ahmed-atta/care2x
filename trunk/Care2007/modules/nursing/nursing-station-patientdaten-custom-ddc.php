@@ -417,7 +417,7 @@ if($edit) {
 		</tr>
 		
 <?php
- 
+} 
 ?>
 		</table>
 

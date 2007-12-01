@@ -75,7 +75,9 @@ $aSubMenuText=array($LDManageAccessTxt,
 # Prepare the submenu item links indexed by their template tags
 
 $aSubMenuItem=array('LDQViewTxt' => '<a href="edv-main-pass.php'.URL_APPEND.'&target=adminlogin">'.$LDManageAccess.'</a>',
-										
+										'LDDutyPlanTxt' => '<a href="edv-main-pass.php'.URL_APPEND.'&target=sqldb">'.$LDSqlDb.'</a>',
+										'LDDocsForumTxt' => '<a href="edv-main-pass.php'.URL_APPEND.'&target=adminlogin">'.$LDSysOpLogin.'</a>',
+										'LDNewsTxt' => '<a href="'.$root_path.'modules/news/newscolumns.php'.URL_APPEND.'&dept_nr=27">'.$LDNews.'</a>',
 										);
 
 # Create the submenu rows

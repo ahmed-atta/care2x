@@ -132,6 +132,7 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
  $smarty->assign('TP_HREF_PREQ1','<a href="javascript:goDept(\''.$root_path.'modules/laboratory/labor_test_request_pass.php\')">'.$LDPendingRequest.'</a>');
  $smarty->assign('TP_HREF_NEWS1','<a href="javascript:goDept(\''.$root_path.'modules/news/newscolumns.php\')">'.$LDNews.'</a>');
 
+/*
 # Create the top left submenu block
  $smarty->assign('sBlockTitle',$LDEmergency);
  $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=14&dept_nr=14&user_origin=amb&dept=".strtr($LDEmergency,' ','+')."\">$LDAppointments</a>");
@@ -149,7 +150,9 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
 
  # Assign to main template object
 	$smarty->assign('sTopLeftSubMenu',$sTemp);
+*/
 
+/*
 # Create the top right submenu block
  $smarty->assign('sBlockTitle',$LDGeneralAmbulatory);
  $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=15&dept_nr=15&user_origin=amb&dept=".strtr($LDGeneralAmbulatory,' ','+')."\">$LDAppointments</a>");
@@ -167,7 +170,9 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
 
  # Assign to main template object
 	$smarty->assign('sTopRightSubMenu',$sTemp);
+*/
 
+/*
 # Create the  mid left submenu block
  $smarty->assign('sBlockTitle',$LDSonography);
  $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=17&dept_nr=17&user_origin=amb&dept=".strtr($LDSonography,' ','+')."\">$LDAppointments</a>");
@@ -185,7 +190,9 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
 
  # Assign to main template object
 	$smarty->assign('sMidLeftSubMenu',$sTemp);
+*/
 
+/*
 # Create the  mid right submenu block
  $smarty->assign('sBlockTitle',$LDInternalMed);
  $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=16&dept_nr=16&user_origin=amb&dept=".strtr($LDInternalMed,' ','+')."\">$LDAppointments</a>");
@@ -203,7 +210,9 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
 
  # Assign to main template object
 	$smarty->assign('sMidRightSubMenu',$sTemp);
-	
+*/
+
+/*
 # Create the  bottom left submenu block
  $smarty->assign('sBlockTitle',$LDNuclearMed);
  $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=18&dept_nr=18&user_origin=amb&dept=".strtr($LDNuclearMed,' ','+')."\">$LDAppointments</a>");
@@ -221,7 +230,9 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
 
  # Assign to main template object
 	$smarty->assign('sBottomLeftSubMenu',$sTemp);
+*/
 
+/*
 # Create the  bottom right submenu block
  $smarty->assign('sBlockTitle',$LDEarNoseThroath);
  $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=6&dept_nr=6&user_origin=amb&dept=".strtr($LDEarNoseThroath,' ','+')."\">$LDAppointments</a>");
@@ -239,6 +250,7 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
 
  # Assign to main template object
 	$smarty->assign('sBottomRightSubMenu',$sTemp);
+*/
 
 # Assign the submenu to the mainframe center block
 

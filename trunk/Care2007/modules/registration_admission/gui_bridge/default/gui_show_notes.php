@@ -21,9 +21,9 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfilen = $root_path."main/sta
 	else $breakfile = $breakfile.URL_APPEND."&target=entry";
 
 # Start Smarty templating here
- /**
- * LOAD Smarty
- */
+
+# LOAD Smarty
+
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
 

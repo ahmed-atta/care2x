@@ -400,7 +400,8 @@ if($ward_ok){
 				$smarty->assign('sRoom','');
 			}
 
-			$smarty->assign('sBed',strtoupper(chr($j+96)));
+			//$smarty->assign('sBed',strtoupper(chr($j+96)));
+			$smarty->assign('sBed',$j); //#162
 
 			# If patient, show images by sex
 			if($is_patient){

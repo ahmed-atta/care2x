@@ -310,6 +310,7 @@ function printOut()
     testprintout<?php echo $sid ?>.print();
 }
 
+
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 //-->
 </script>

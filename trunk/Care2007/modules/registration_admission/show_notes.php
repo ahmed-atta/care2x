@@ -81,5 +81,7 @@ $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer);
 $notabs=true;
 
 /* Load GUI page */
-require('./gui_bridge/default/gui_show_notes.php');
+require('gui_bridge/default/gui_show_notes.php');
 ?>
+
+

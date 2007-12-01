@@ -421,9 +421,9 @@ if($occup){
     </div>
     </div>
     <script type="text/javascript">
-<!--
+
 var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
-//-->
+
 </script>
     <input type="text" name="personell_name" size=60 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly>
     <input type="hidden" name="sid" value="<?php echo $sid ?>">

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -27,11 +27,11 @@ switch($mode)
 						$userck="ck_prod_arch_user";
 						$fileforward=$root_path."modules/products/products-archive.php".$append.$userck;
 						break;
-	case "dbank":  $title="$LDPharmaDb";
+/*	case "dbank":  $title="$LDPharmaDb";
 						$src="dbankpass";
 						$userck="ck_prod_db_user";
 						$fileforward="medlager-datenbank-functions.php".$append.$userck;
-						break;
+						break;*/
 	case "bot":	$title="$LDMediBotActivate";
 						$src="medibotpass";
 						$userck="ck_prod_bot_user";
@@ -42,11 +42,31 @@ switch($mode)
 						$userck="ck_prod_order_user";
 						$fileforward=$root_path."modules/products/products-bestellkatalog-edit.php".$append.$userck."&target=catalog&from=".$src;
 						break;
+	case "furnitor":  $title=$LDFurnitor;
+						$src="catalogpass";
+						$userck="ck_furnitor_db_user";
+						$fileforward=$root_path."modules/furnitor/furnitor.php".$append.$userck;
+						break;
+	case "furnizim" : $title=$LDFurnizim;
+						//mizuko:e ndryshova per efekt te help
+						$append=URL_REDIRECT_APPEND."&cat=furnizim&from=$src&userck=";
+						//end:mizuko
+						$src="catalogpass";
+						$userck="ck_furnizim_db_user";
+						$fileforward=$root_path."modules/furnitor/furnizim.php".$append.$userck;
+						break;	
+	//mizuko:shtova link te raporteve
+	case "reports"	: $title="Reports";
+						$src="orderpass";
+						$userck="ck_prod_order_user";
+					    $fileforward=$root_path."classes/agata/web/browse.php?goal=1&BrowseDir=..\\reports\\depo\\";
+					    break;
+	//end:mizuko
 	default: 	$title=$LDPharmaOrder;
 						$src="orderpass";
-					   $mode="order";
+					    $mode="order";
 						$userck="ck_prod_order_user";
-					   $fileforward=$root_path."modules/products/products-bestellung.php".$append.$userck;
+					    $fileforward=$root_path."modules/products/products-bestellung.php".$append.$userck;
 }
 
 $thisfile=basename(__FILE__);

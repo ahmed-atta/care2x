@@ -286,7 +286,13 @@ div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
 <script language="javascript">
 <!-- 
 function chkForm(d){
-
+	
+	if((d.match_sample.value=1) && (d.blood_group.value=='?') ) {
+		alert("<?php echo $LDPlsEnterBloodGroup ?>");
+		d.blood_group.focus();
+		return false;		
+	}
+	
    if((d.blood_group.value=='')||(d.blood_group.value==' '))
 	{
 		alert("<?php echo $LDPlsEnterBloodGroup ?>");
@@ -446,16 +452,28 @@ if($edit){
 		     <table border=0 bgcolor="<?php echo $bgc1 ?>" cellpadding=4 width=100%>
              <tr  class=fva2_ml10>
               <td><b><font color="red" face="verdana" size=2>*</font></b><?php echo $LDBloodGroup ?><br>
-			  <input type="text" name="blood_group" size=7 maxlength=10 value="<?php  
-				//if($edit_form || $read_form) {
-					if(isset($stored_request['blood_group'])) echo $stored_request['blood_group'];
-						else echo $enc_obj->BloodGroup();
-				//}
-			  ?>"></td>
+	              <select name="blood_group" size="1"> <!-- #36 -->
+					  <option value="?">?</option>
+	              	  <option value="A">A</option>
+					  <option value="B">B</option>
+					  <option value="AB">AB</option>
+					  <option value="0">0</option>
+				  </select>
+				</td>
 			   <td><b><font color="red" face="verdana" size=2>*</font></b><?php echo $LDRhFactor ?><br>
-			   <input type="text" name="rh_factor" size=7 maxlength=10 value="<?php  if($edit_form || $read_form) echo $stored_request['rh_factor']; ?>"></td>
+			   	  <select name="rh_factor" size="1"> <!-- #36 -->
+			   	  	  <option value="?">?</option>
+					  <option value="rh+">Rh+</option>
+					  <option value="rh-">Rh-</option>
+				  </select>
+			   </td>
 			   <td><b><font color="red" face="verdana" size=2>*</font></b><?php echo $LDKell ?><br>
-			   <input type="text" name="kell" size=7 maxlength=10 value="<?php  if($edit_form || $read_form) echo $stored_request['kell']; ?>"></td>
+			   	  <select name="kell" size="1"> <!-- #36 -->
+					  <option value="?">?</option>
+					  <option value="k+">k+</option>
+					  <option value="k-">k-</option>
+				  </select>			   
+				  </td>
               </tr>
               <tr class=fva0_ml10>
               <td colspan=3><?php echo $LDDateProtNumber ?><br><input type="text" name="date_protoc_nr" size=45 maxlength=45 value="<?php  if($edit_form || $read_form) echo $stored_request['date_protoc_nr']; ?>"></td>

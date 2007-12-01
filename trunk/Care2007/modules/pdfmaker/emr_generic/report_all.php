@@ -29,7 +29,7 @@ function getNotes($type_nr){
 		WHERE e.encounter_nr=".$enc." 
 			AND e.encounter_nr=n.encounter_nr 
 			AND n.type_nr=".$type_nr."
-		ORDER BY n.date DESC";
+		ORDER BY n.date ASC"; // modifica ordine registrazioni 21 novembre 2007 - Claudio Torbinio
 		
 	if($result=$db->Execute($sql)){
 		if($rows=$result->RecordCount()){
@@ -73,7 +73,7 @@ include($classpath.'class.ezpdf.php');
 $pdf=& new Cezpdf();
 
 
-$logo=$root_path.'gui/img/logos/lopo/care_logo.png';
+$logo=$root_path.'gui/img/logos/lopo/care_logo_vm.png'; // Aggiunto il 21 novembre 2007 da Claudio Torbinio
 $arlogo=$root_path.'gui/img/logos/lopo/ar/care_logo.png'; // Added by: Tarek ALWERFALLY on 10/12/2005
 $pidbarcode=$root_path.'cache/barcodes/pn_'.$encounter['pid'].'.png';
 $encbarcode=$root_path.'cache/barcodes/en_'.$enc.'.png';
