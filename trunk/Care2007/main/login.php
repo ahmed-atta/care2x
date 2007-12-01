@@ -104,9 +104,7 @@ if(isset($is_logged_out) && $is_logged_out) {
 <img src="../img/small_help.gif" > <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Was bewirkt das einloggen?</a><br>
  -->
 <p>
-<?php
-require($root_path.'include/inc_load_copyrite.php');
-?>
+
 </FONT>
 </BODY>
 </HTML>

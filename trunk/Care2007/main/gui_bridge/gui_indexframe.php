@@ -74,7 +74,7 @@ if(!$cfg['dhtml']){
 }
 
 
-$TP_logo=createLogo($root_path,'care_logo_'.$dbtype.'.gif','0');
+$TP_logo=createLogo($root_path,'care_logo_'.$dbtype.'.png','0');
 
 $tp_body=&$TP_obj->load('tp_main_index_menu_body.htm');
 eval("echo $tp_body;");
@@ -92,56 +92,79 @@ require("menu/$LocMenuTreeDir/mainmenu.inc.php");
 //echo $HTTP_COOKIE_VARS['ck_config']; // used only in debugging related to user config data
 
 if(!$GLOBALCONFIG['language_single']){
-?>
-<tr>
-<td colspan=3>
-<FONT SIZE="1" face="arial,verdana">
-<form action="#" onSubmit="return checkIfChanged(this.lang.value)">
-<hr>
-<?php echo $LDLanguage ?><br>
- <select name="lang"> 
-<?php
-
-require($root_path.'include/care_api_classes/class_language.php');
-$lang_obj=new Language;
-$langselect= $lang_obj->createSelectForm($lang);
-echo $langselect;
-?>
-</select>
-<br>
-<input type="submit" value="<?php echo $LDChange ?>">
-<input type="hidden" name="sid" value="<?php echo $sid ?>">
-<input type="hidden" name="mask" value="<?php echo $mask ?>">
-<input type="hidden" name="egal" value="1">
-<input type="hidden" name="_chg_lang_" value="1">
-<hr>
-</FONT>
-</td>
-</tr>
-<?php
+    ?>
+    <tr>
+    <td colspan=3>
+    <FONT SIZE="1" face="arial,verdana">
+    <form action="#" onSubmit="return checkIfChanged(this.lang.value)">
+    <hr>
+    <?php echo $LDLanguage ?><br>
+     <select name="lang"> 
+    <?php
+    
+    require($root_path.'include/care_api_classes/class_language.php');
+    $lang_obj=new Language;
+    $langselect= $lang_obj->createSelectForm($lang);
+    echo $langselect;
+    ?>
+    </select>
+    <br>
+    <input type="submit" value="<?php echo $LDChange ?>">
+    <input type="hidden" name="sid" value="<?php echo $sid ?>">
+    <input type="hidden" name="mask" value="<?php echo $mask ?>">
+    <input type="hidden" name="egal" value="1">
+    <input type="hidden" name="_chg_lang_" value="1">
+    <hr>
+    </FONT>
+    </td>
+    </tr>
+    <?php
 }
 ?>
 
 <tr >
 <td colspan=3>
-<font SIZE=1 color="#6f6f6f" face="arial,verdana">
-<?php echo $dbtype; ?>
+<font SIZE=2 color="#6f6f6f" face="arial,verdana">
+<?php // echo $dbtype; ?>
 <br>
-<nobr><b><?php echo $LDUser ?>:</b></nobr><br>
-<?php echo  $HTTP_SESSION_VARS['sess_login_username']; ?><br>
-<?php echo $dept->FormalName($cfg['thispc_dept_nr']); ?><br>
-<?php echo $ward->WardName($cfg['thispc_ward_nr']); ?><br>
+<?php if($HTTP_SESSION_VARS['sess_login_username'] != '') echo '<img '.createComIcon($root_path,'team_tree.gif').'><br>' ; 
+echo $HTTP_SESSION_VARS['sess_login_username']; ?>
+<br>
+<?php 
+require_once($root_path.'include/care_api_classes/class_department.php');
+$dept=new Department;
+$depts=&$dept->getAllActive();
+$sTemp = '';
+if($depts&&is_array($depts)) {
+     while(list($x,$v)=each($depts))
+    	 if(in_array($v['nr'],$HTTP_SESSION_VARS['department_nr']))
+    		 if(isset($$v['LD_var'])&&$$v['LD_var']) $sTemp = $sTemp .  $$v['LD_var'] . '<br>';
+    			 else $sTemp = $sTemp . $v['name_formal'] . '<br>';
+    			 
+if($sTemp != '') echo '<img '.createComIcon($root_path,'home.gif').'><br>';
+echo  $sTemp;	
+}
+?>
+<br>
+<?php
+require_once($root_path.'include/care_api_classes/class_ward.php');
+$ward_obj=new Ward;
+$items='nr,ward_id,name, dept_nr'; // set the items to be fetched
+$ward_info=&$ward_obj->getAllWardsItemsArray($items);
+$sTemp = '';         
+if($ward_info&&is_array($ward_info)){
+     while(list($x,$v)=each($ward_info)){
+    	 if(in_array($v['dept_nr'],$HTTP_SESSION_VARS['department_nr']))         			 
+    		$sTemp = $sTemp . $v['name'] . '<br>';
+    }
+if($sTemp != '') echo '<img '.createComIcon($root_path,'statbel2.gif').'><br>';
+echo $sTemp;
+}
+?><br>
 </FONT>
 </td>
 </tr>
 </form>
 </TABLE>
-<center>
-<a href="http://www.opensource.org/" target="_blank"><img src="<?php echo $root_path ?>gui/img/common/default/osilogo.gif" border=0></a>
-</center>
-<br>
-<center><font SIZE=1 color="#6f6f6f" face="arial,verdana">
-  2002/2007 &copy; <br><a href=mailto:info@care2x.org>Elpidio Latorilla</a> <br><a href="http://www.care2x.org" target="_blank">www.care2x.org</a>
-</FONT></center>
 </BODY>
 </HTML>
