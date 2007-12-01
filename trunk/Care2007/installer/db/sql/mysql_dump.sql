@@ -1367,78 +1367,6 @@ CREATE TABLE `care_encounter_sickconfirm` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `care_furnitor`
---
-
-CREATE TABLE `care_furnitor` (
-  `idcare_furnitor` int(3) NOT NULL auto_increment,
-  `furnitori` varchar(35) collate latin1_general_ci NOT NULL,
-  `adresa` varchar(100) collate latin1_general_ci default NULL,
-  `telefon` varchar(35) collate latin1_general_ci default NULL,
-  `fax` varchar(35) collate latin1_general_ci default NULL,
-  `kodi_postar` varchar(5) collate latin1_general_ci default NULL,
-  `perfaqesues` varchar(35) collate latin1_general_ci default NULL,
-  `history` text collate latin1_general_ci,
-  `create_id` varchar(35) collate latin1_general_ci default NULL,
-  `create_time` timestamp NOT NULL default CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`idcare_furnitor`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=49 ;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `care_furnizim`
---
-
-CREATE TABLE `care_furnizim` (
-  `idcare_furnizim` int(10) unsigned NOT NULL auto_increment,
-  `idcare_furnitor` tinyint(3) unsigned NOT NULL,
-  `bestellnum` varchar(25) collate latin1_general_ci NOT NULL,
-  `skadenca` varchar(25) collate latin1_general_ci default '0000-00-00 00:00:00',
-  `sasi` int(10) unsigned default '0',
-  `cmimi` double default '0',
-  `vlera` double default '0',
-  `shenime` varchar(200) collate latin1_general_ci default NULL,
-  `nr_fature` varchar(25) collate latin1_general_ci default NULL,
-  `create_time` timestamp NOT NULL default CURRENT_TIMESTAMP,
-  `create_id` varchar(35) collate latin1_general_ci default NULL,
-  `history` text collate latin1_general_ci,
-  `order_date` date default NULL,
-  `articles` text collate latin1_general_ci,
-  `order_time` time default NULL,
-  `ip_addr` tinytext collate latin1_general_ci,
-  `status` varchar(25) collate latin1_general_ci default NULL,
-  `sent_datetime` datetime default '0000-00-00 00:00:00',
-  `validator` tinytext collate latin1_general_ci,
-  `modify_id` varchar(35) collate latin1_general_ci default NULL,
-  `process_datetime` datetime default NULL,
-  PRIMARY KEY  (`idcare_furnizim`,`idcare_furnitor`,`bestellnum`),
-  KEY `idcare_furnitor` (`idcare_furnitor`),
-  KEY `bestellnum` (`bestellnum`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `care_furnizim_historik`
---
-
-CREATE TABLE `care_furnizim_historik` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `id_furnitor` int(11) NOT NULL,
-  `data` date NOT NULL,
-  `nr_fature` int(11) NOT NULL,
-  `medikament` int(11) NOT NULL,
-  `sasia` double NOT NULL,
-  `cmimi` double NOT NULL,
-  `vlera` double NOT NULL,
-  `date_skadence` date NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
-
--- --------------------------------------------------------
-
---
 -- Struttura della tabella `care_group`
 --
 
@@ -1712,43 +1640,6 @@ CREATE TABLE `care_med_products_main` (
   PRIMARY KEY  (`bestellnum`),
   KEY `bestellnum` (`bestellnum`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci MIN_ROWS=134 MAX_ROWS=10000000 AVG_ROW_LENGTH=135 PACK_KEYS=0 ROW_FORMAT=DYNAMIC;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `care_med_products_main_historik`
---
-
-CREATE TABLE `care_med_products_main_historik` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `id_farmaci` int(11) NOT NULL default '0',
-  `data` date NOT NULL default '0000-00-00',
-  `nr_fature` int(11) NOT NULL default '0',
-  `medikament` tinytext collate latin1_general_ci,
-  `sasia` double NOT NULL default '0',
-  `cmimi` double NOT NULL default '0',
-  `vlera` double NOT NULL default '0',
-  `date_skadence` date NOT NULL default '0000-00-00',
-  `id_sub` int(11) NOT NULL COMMENT 'lidhja me id te sub product',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `care_med_products_main_sub`
---
-
-CREATE TABLE `care_med_products_main_sub` (
-  `id` int(10) NOT NULL auto_increment,
-  `pcs` int(4) default NULL,
-  `skadenca` date default NULL,
-  `cmimi` double default NULL,
-  `bestellnum` varchar(25) collate latin1_general_ci default NULL COMMENT 'lidhja me care_med_products_main',
-  `idcare_furnizim` int(10) default NULL,
-  `create_time` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -2257,26 +2148,6 @@ CREATE TABLE `care_pharma_products_main` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`bestellnum`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci MIN_ROWS=186 MAX_ROWS=10000000 AVG_ROW_LENGTH=186 PACK_KEYS=0 ROW_FORMAT=DYNAMIC;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `care_pharma_products_main_historik`
---
-
-CREATE TABLE `care_pharma_products_main_historik` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `id_repart` int(11) NOT NULL default '0',
-  `data` date NOT NULL default '0000-00-00',
-  `nr_fature` int(11) NOT NULL default '0',
-  `medikament` int(11) NOT NULL default '0',
-  `sasia` double NOT NULL default '0',
-  `cmimi` double NOT NULL default '0',
-  `vlera` double NOT NULL default '0',
-  `date_skadence` date NOT NULL default '0000-00-00',
-  `id_sub` int(11) NOT NULL COMMENT 'lidhja me nenkatelen e produktit',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AVG_ROW_LENGTH=1170 COMMENT='InnoDB free: 6144 kB' AUTO_INCREMENT=10893 ;
 
 -- --------------------------------------------------------
 
