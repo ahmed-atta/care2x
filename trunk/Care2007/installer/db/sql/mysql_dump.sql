@@ -1,4418 +1,2531 @@
-# phpMyAdmin SQL Dump
-# version 2.5.3
-# http://www.phpmyadmin.net
-#
-# Host: localhost
-# Erstellungszeit: 25. November 2003 um 20:25
-# Server Version: 3.22.34
-# PHP-Version: 4.0.4pl1
-# 
-# Datenbank: 
-# 
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_address_citytown
-#
-
-CREATE TABLE care_address_citytown (
-  nr mediumint(8) unsigned NOT NULL auto_increment,
-  unece_modifier char(2) default NULL,
-  unece_locode varchar(15) default NULL,
-  name varchar(100) NOT NULL default '',
-  zip_code varchar(25) default NULL,
-  iso_country_id char(3) NOT NULL default '',
-  unece_locode_type tinyint(3) unsigned default NULL,
-  unece_coordinates varchar(25) default NULL,
-  info_url varchar(255) default NULL,
-  use_frequency bigint(20) unsigned NOT NULL default '0',
-  status varchar(25) default NULL,
-  history text NOT NULL,
-  modify_id varchar(35) NOT NULL default '',
-  modify_time timestamp(14) NOT NULL,
-  create_id varchar(35) NOT NULL default '',
-  create_time timestamp(14) NOT NULL,
-  PRIMARY KEY  (nr),
-  KEY name (name)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_appointment
-#
-
-CREATE TABLE care_appointment (
-   nr bigint(20) unsigned NOT NULL auto_increment,
-   pid int(11) DEFAULT '0' NOT NULL,
-   date date DEFAULT '0000-00-00' NOT NULL,
-   time time DEFAULT '00:00:00' NOT NULL,
-   to_dept_id varchar(25) NOT NULL,
-   to_dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   to_personell_nr int(11) DEFAULT '0' NOT NULL,
-   to_personell_name varchar(60),
-   purpose text NOT NULL,
-   urgency tinyint(2) unsigned DEFAULT '0' NOT NULL,
-   remind tinyint(1) unsigned DEFAULT '0' NOT NULL,
-   remind_email tinyint(1) unsigned DEFAULT '0' NOT NULL,
-   remind_mail tinyint(1) unsigned DEFAULT '0' NOT NULL,
-   remind_phone tinyint(1) unsigned DEFAULT '0' NOT NULL,
-   appt_status varchar(35) DEFAULT 'pending' NOT NULL,
-   cancel_by varchar(255) NOT NULL,
-   cancel_date date,
-   cancel_reason varchar(255),
-   encounter_class_nr int(1) DEFAULT '0' NOT NULL,
-   encounter_nr int(11) DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   KEY pid (pid)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_billing_archive
-#
-
-CREATE TABLE care_billing_archive (
-   bill_no bigint(20) DEFAULT '0' NOT NULL,
-   encounter_nr int(10) DEFAULT '0' NOT NULL,
-   patient_name tinytext NOT NULL,
-   vorname varchar(35) DEFAULT '0' NOT NULL,
-   bill_date_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   bill_amt double(16,4) DEFAULT '0.0000' NOT NULL,
-   payment_date_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   payment_mode text NOT NULL,
-   cheque_no varchar(10) DEFAULT '0' NOT NULL,
-   creditcard_no varchar(10) DEFAULT '0' NOT NULL,
-   paid_by varchar(15) DEFAULT '0' NOT NULL,
-   PRIMARY KEY (bill_no)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_billing_bill
-#
-
-CREATE TABLE care_billing_bill (
-   bill_bill_no bigint(20) DEFAULT '0' NOT NULL,
-   bill_encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   bill_date_time date,
-   bill_amount float(10,2),
-   bill_outstanding float(10,2),
-   PRIMARY KEY (bill_bill_no),
-   KEY index_bill_patnum (bill_encounter_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_billing_bill_item
-#
-
-CREATE TABLE care_billing_bill_item (
-   bill_item_id int(11) NOT NULL auto_increment,
-   bill_item_encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   bill_item_code varchar(5),
-   bill_item_unit_cost float(10,2) DEFAULT '0.00',
-   bill_item_units tinyint(4),
-   bill_item_amount float(10,2),
-   bill_item_date datetime,
-   bill_item_status enum('0','1') DEFAULT '0',
-   bill_item_bill_no int(11) DEFAULT '0' NOT NULL,
-   PRIMARY KEY (bill_item_id),
-   KEY index_bill_item_patnum (bill_item_encounter_nr),
-   KEY index_bill_item_bill_no (bill_item_bill_no)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_billing_final
-#
-
-CREATE TABLE care_billing_final (
-   final_id tinyint(3) NOT NULL auto_increment,
-   final_encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   final_bill_no int(11),
-   final_date date,
-   final_total_bill_amount float(10,2),
-   final_discount tinyint(4),
-   final_total_receipt_amount float(10,2),
-   final_amount_due float(10,2),
-   final_amount_recieved float(10,2),
-   PRIMARY KEY (final_id),
-   KEY index_final_patnum (final_encounter_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_billing_item
-#
-
-CREATE TABLE care_billing_item (
-   item_code varchar(5) NOT NULL,
-   item_description varchar(100),
-   item_unit_cost float(10,2) DEFAULT '0.00',
-   item_type tinytext,
-   item_discount_max_allowed tinyint(4) unsigned DEFAULT '0',
-   PRIMARY KEY (item_code)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_billing_payment
-#
-
-CREATE TABLE care_billing_payment (
-   payment_id tinyint(5) NOT NULL auto_increment,
-   payment_encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   payment_receipt_no int(11) DEFAULT '0' NOT NULL,
-   payment_date datetime DEFAULT '0000-00-00 00:00:00',
-   payment_cash_amount float(10,2) DEFAULT '0.00',
-   payment_cheque_no int(11) DEFAULT '0',
-   payment_cheque_amount float(10,2) DEFAULT '0.00',
-   payment_creditcard_no int(25) DEFAULT '0',
-   payment_creditcard_amount float(10,2) DEFAULT '0.00',
-   payment_amount_total float(10,2) DEFAULT '0.00',
-   PRIMARY KEY (payment_id),
-   KEY index_payment_patnum (payment_encounter_nr),
-   KEY index_payment_receipt_no (payment_receipt_no)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_cache
-#
-
-CREATE TABLE care_cache (
-   id varchar(125) NOT NULL,
-   ctext text,
-   cbinary blob,
-   tstamp timestamp(14),
-   PRIMARY KEY (id)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_cafe_menu
-#
-
-CREATE TABLE care_cafe_menu (
-   item int(11) NOT NULL auto_increment,
-   lang varchar(10) DEFAULT 'en' NOT NULL,
-   cdate date DEFAULT '0000-00-00' NOT NULL,
-   menu text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY item (item, lang),
-   UNIQUE item_2 (item),
-   KEY cdate (cdate)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_cafe_prices
-#
-
-CREATE TABLE care_cafe_prices (
-   item int(11) NOT NULL auto_increment,
-   lang varchar(10) DEFAULT 'en' NOT NULL,
-   productgroup tinytext NOT NULL,
-   article tinytext NOT NULL,
-   description tinytext NOT NULL,
-   price varchar(10) NOT NULL,
-   unit tinytext NOT NULL,
-   pic_filename tinytext NOT NULL,
-   modify_id varchar(25) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(25) NOT NULL,
-   create_time timestamp(14),
-   KEY item (item),
-   KEY lang (lang)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_category_diagnosis
-#
-
-CREATE TABLE care_category_diagnosis (
-   nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   category varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   short_code char(1) NOT NULL,
-   LD_var_short_code varchar(25) NOT NULL,
-   description varchar(255) NOT NULL,
-   hide_from varchar(255) DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_category_disease
-#
-
-CREATE TABLE care_category_disease (
-   nr tinyint(3) unsigned NOT NULL auto_increment,
-   group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   category varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_category_procedure
-#
-
-CREATE TABLE care_category_procedure (
-   nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   category varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   short_code char(1) NOT NULL,
-   LD_var_short_code varchar(25) NOT NULL,
-   description varchar(255) NOT NULL,
-   hide_from varchar(255) DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_class_encounter
-#
-
-CREATE TABLE care_class_encounter (
-   class_nr smallint(6) unsigned DEFAULT '0' NOT NULL,
-   class_id varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(25) NOT NULL,
-   description varchar(255) NOT NULL,
-   hide_from tinyint(4) DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (class_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_class_ethnic_orig
-#
-
-CREATE TABLE care_class_ethnic_orig (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_class_financial
-#
-
-CREATE TABLE care_class_financial (
-   class_nr smallint(5) unsigned NOT NULL auto_increment,
-   class_id varchar(15) DEFAULT '0' NOT NULL,
-   type varchar(25) DEFAULT '0' NOT NULL,
-   code varchar(5) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(25) NOT NULL,
-   description varchar(255) NOT NULL,
-   policy text NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY class_2 (class_id),
-   PRIMARY KEY (class_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_class_insurance
-#
-
-CREATE TABLE care_class_insurance (
-   class_nr smallint(5) unsigned NOT NULL auto_increment,
-   class_id varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(25) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (class_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_class_therapy
-#
-
-CREATE TABLE care_class_therapy (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   class varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(25) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_classif_neonatal
-#
-
-CREATE TABLE care_classif_neonatal (
-   nr smallint(2) unsigned NOT NULL auto_increment,
-   id varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255),
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   UNIQUE id (id)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_complication
-#
-
-CREATE TABLE care_complication (
-   nr int(10) unsigned NOT NULL auto_increment,
-   group_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   code varchar(25),
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_config_global
-#
-
-CREATE TABLE care_config_global (
-   type varchar(60) NOT NULL,
-   value varchar(255),
-   notes varchar(255),
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (type)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_config_user
-#
-
-CREATE TABLE care_config_user (
-   user_id varchar(100) NOT NULL,
-   serial_config_data text NOT NULL,
-   notes varchar(255),
-   status varchar(25) NOT NULL,
-   history text,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (user_id)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_currency
-#
-
-CREATE TABLE care_currency (
-   item_no smallint(5) unsigned NOT NULL auto_increment,
-   short_name varchar(5) NOT NULL,
-   long_name varchar(20) NOT NULL,
-   info varchar(50) NOT NULL,
-   status varchar(5) NOT NULL,
-   modify_id varchar(20) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(20) NOT NULL,
-   create_time timestamp(14),
-   KEY item_no (item_no),
-   KEY short_name (short_name)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_department
-#
-
-CREATE TABLE care_department (
-   nr mediumint(8) unsigned NOT NULL auto_increment,
-   id varchar(60) NOT NULL,
-   type varchar(25) NOT NULL,
-   name_formal varchar(60) NOT NULL,
-   name_short varchar(35) NOT NULL,
-   name_alternate varchar(225),
-   LD_var varchar(35) NOT NULL,
-   description text NOT NULL,
-   admit_inpatient tinyint(1) DEFAULT '0' NOT NULL,
-   admit_outpatient tinyint(1) DEFAULT '0' NOT NULL,
-   has_oncall_doc tinyint(1) DEFAULT '1' NOT NULL,
-   has_oncall_nurse tinyint(1) DEFAULT '1' NOT NULL,
-   does_surgery tinyint(1) DEFAULT '0' NOT NULL,
-   this_institution tinyint(1) DEFAULT '1' NOT NULL,
-   is_sub_dept tinyint(1) DEFAULT '0' NOT NULL,
-   parent_dept_nr tinyint(3) unsigned,
-   work_hours varchar(100),
-   consult_hours varchar(100),
-   is_inactive tinyint(1) DEFAULT '0' NOT NULL,
-   sort_order tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   address text,
-   sig_line varchar(60),
-   sig_stamp text,
-   logo_mime_type varchar(5),
-   status varchar(25) NOT NULL,
-   history text,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   UNIQUE id (id)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_diagnosis_localcode
-#
-
-CREATE TABLE care_diagnosis_localcode (
-   localcode varchar(12) NOT NULL,
-   description text NOT NULL,
-   class_sub varchar(5) NOT NULL,
-   type varchar(10) NOT NULL,
-   inclusive text NOT NULL,
-   exclusive text NOT NULL,
-   notes text NOT NULL,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(4) DEFAULT '0' NOT NULL,
-   remarks text NOT NULL,
-   extra_codes text NOT NULL,
-   extra_subclass text NOT NULL,
-   search_keys varchar(255) NOT NULL,
-   use_frequency int(11) DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY diagnosis_code (localcode),
-   PRIMARY KEY (localcode)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_drg_intern
-#
-
-CREATE TABLE care_drg_intern (
-   nr int(11) NOT NULL auto_increment,
-   code varchar(12) NOT NULL,
-   description text NOT NULL,
-   synonyms text NOT NULL,
-   notes text,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(1) DEFAULT '0' NOT NULL,
-   parent_code varchar(12) NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(25) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(25) NOT NULL,
-   create_time timestamp(14),
-   KEY nr (nr),
-   KEY code (code),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_drg_quicklist
-#
-
-CREATE TABLE care_drg_quicklist (
-   nr int(11) NOT NULL auto_increment,
-   code varchar(25) NOT NULL,
-   code_parent varchar(25) NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   qlist_type varchar(25) DEFAULT '0' NOT NULL,
-   rank int(11) DEFAULT '0' NOT NULL,
-   status varchar(15) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(25) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(25) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_drg_related_codes
-#
-
-CREATE TABLE care_drg_related_codes (
-   nr int(11) NOT NULL auto_increment,
-   group_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   code varchar(15) NOT NULL,
-   code_parent varchar(15) NOT NULL,
-   code_type varchar(15) NOT NULL,
-   rank int(11) DEFAULT '0' NOT NULL,
-   status varchar(15) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(25) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(25) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_dutyplan_oncall
-#
-
-CREATE TABLE care_dutyplan_oncall (
-   nr bigint(20) unsigned NOT NULL auto_increment,
-   dept_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   role_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   year year(4) DEFAULT '0000' NOT NULL,
-   month char(2) NOT NULL,
-   duty_1_txt text NOT NULL,
-   duty_2_txt text NOT NULL,
-   duty_1_pnr text NOT NULL,
-   duty_2_pnr text NOT NULL,
-   status varchar(25) NOT NULL,
-   history text,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   KEY dept_nr (dept_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_effective_day
-#
-
-CREATE TABLE care_effective_day (
-   eff_day_nr tinyint(4) NOT NULL auto_increment,
-   name varchar(25) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (eff_day_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter
-#
-
-CREATE TABLE care_encounter (
-   encounter_nr bigint(11) unsigned NOT NULL auto_increment,
-   pid int(11) DEFAULT '0' NOT NULL,
-   encounter_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   encounter_class_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   encounter_type varchar(35) NOT NULL,
-   encounter_status varchar(35) NOT NULL,
-   referrer_diagnosis varchar(255) NOT NULL,
-   referrer_recom_therapy varchar(255),
-   referrer_dr varchar(60) NOT NULL,
-   referrer_dept varchar(255) NOT NULL,
-   referrer_institution varchar(255) NOT NULL,
-   referrer_notes text NOT NULL,
-   financial_class_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   insurance_nr varchar(25) DEFAULT '0',
-   insurance_firm_id varchar(25) DEFAULT '0' NOT NULL,
-   insurance_class_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   insurance_2_nr varchar(25) DEFAULT '0',
-   insurance_2_firm_id varchar(25) DEFAULT '0' NOT NULL,
-   guarantor_pid int(11) DEFAULT '0' NOT NULL,
-   contact_pid int(11) DEFAULT '0' NOT NULL,
-   contact_relation varchar(35) NOT NULL,
-   current_ward_nr smallint(3) unsigned DEFAULT '0' NOT NULL,
-   current_room_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   in_ward tinyint(1) DEFAULT '0' NOT NULL,
-   current_dept_nr smallint(3) unsigned DEFAULT '0' NOT NULL,
-   in_dept tinyint(1) DEFAULT '0' NOT NULL,
-   current_firm_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   current_att_dr_nr int(10) DEFAULT '0' NOT NULL,
-   consulting_dr varchar(60) NOT NULL,
-   extra_service varchar(25) NOT NULL,
-   is_discharged tinyint(1) unsigned DEFAULT '0' NOT NULL,
-   discharge_date date,
-   discharge_time time,
-   followup_date date DEFAULT '0000-00-00' NOT NULL,
-   followup_responsibility varchar(255),
-   post_encounter_notes text NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY pid (pid),
-   KEY encounter_date (encounter_date),
-   PRIMARY KEY (encounter_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_diagnosis
-#
-
-CREATE TABLE care_encounter_diagnosis (
-   diagnosis_nr int(11) NOT NULL auto_increment,
-   encounter_nr int(11) DEFAULT '0' NOT NULL,
-   op_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   code varchar(25) NOT NULL,
-   code_parent varchar(25) NOT NULL,
-   group_nr mediumint(8) unsigned DEFAULT '0' NOT NULL,
-   code_version tinyint(4) DEFAULT '0' NOT NULL,
-   localcode varchar(35) NOT NULL,
-   category_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   type varchar(35) NOT NULL,
-   localization varchar(35) NOT NULL,
-   diagnosing_clinician varchar(60) NOT NULL,
-   diagnosing_dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY encounter_nr (encounter_nr),
-   PRIMARY KEY (diagnosis_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_diagnostics_report
-#
-
-CREATE TABLE care_encounter_diagnostics_report (
-   item_nr int(11) NOT NULL auto_increment,
-   report_nr int(11) DEFAULT '0' NOT NULL,
-   reporting_dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   reporting_dept varchar(100) NOT NULL,
-   report_date date DEFAULT '0000-00-00' NOT NULL,
-   report_time time DEFAULT '00:00:00' NOT NULL,
-   encounter_nr int(10) DEFAULT '0' NOT NULL,
-   script_call varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY report_nr (report_nr),
-   PRIMARY KEY (item_nr, report_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_drg_intern
-#
-
-CREATE TABLE care_encounter_drg_intern (
-   nr int(11) NOT NULL auto_increment,
-   encounter_nr int(11) DEFAULT '0' NOT NULL,
-   date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   group_nr mediumint(8) unsigned DEFAULT '0' NOT NULL,
-   clinician varchar(60) NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY encounter_nr (encounter_nr),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_event_signaller
-#
-
-CREATE TABLE care_encounter_event_signaller (
-   encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   yellow tinyint(1) DEFAULT '0' NOT NULL,
-   black tinyint(1) DEFAULT '0' NOT NULL,
-   blue_pale tinyint(1) DEFAULT '0' NOT NULL,
-   brown tinyint(1) DEFAULT '0' NOT NULL,
-   pink tinyint(1) DEFAULT '0' NOT NULL,
-   yellow_pale tinyint(1) DEFAULT '0' NOT NULL,
-   red tinyint(1) DEFAULT '0' NOT NULL,
-   green_pale tinyint(1) DEFAULT '0' NOT NULL,
-   violet tinyint(1) DEFAULT '0' NOT NULL,
-   blue tinyint(1) DEFAULT '0' NOT NULL,
-   biege tinyint(1) DEFAULT '0' NOT NULL,
-   orange tinyint(1) DEFAULT '0' NOT NULL,
-   green_1 tinyint(1) DEFAULT '0' NOT NULL,
-   green_2 tinyint(1) DEFAULT '0' NOT NULL,
-   green_3 tinyint(1) DEFAULT '0' NOT NULL,
-   green_4 tinyint(1) DEFAULT '0' NOT NULL,
-   green_5 tinyint(1) DEFAULT '0' NOT NULL,
-   green_6 tinyint(1) DEFAULT '0' NOT NULL,
-   green_7 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_1 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_2 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_3 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_4 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_5 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_6 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_7 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_8 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_9 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_10 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_11 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_12 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_13 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_14 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_15 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_16 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_17 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_18 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_19 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_20 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_21 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_22 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_23 tinyint(1) DEFAULT '0' NOT NULL,
-   rose_24 tinyint(1) DEFAULT '0' NOT NULL,
-   PRIMARY KEY (encounter_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_financial_class
-#
-
-CREATE TABLE care_encounter_financial_class (
-   nr bigint(20) unsigned NOT NULL auto_increment,
-   encounter_nr int(11) DEFAULT '0' NOT NULL,
-   class_nr smallint(3) unsigned DEFAULT '0' NOT NULL,
-   date_start date,
-   date_end date,
-   date_create datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_image
-#
-
-CREATE TABLE care_encounter_image (
-   nr bigint(20) NOT NULL auto_increment,
-   encounter_nr int(11) DEFAULT '0' NOT NULL,
-   shot_date date DEFAULT '0000-00-00' NOT NULL,
-   shot_nr smallint(6) DEFAULT '0' NOT NULL,
-   mime_type varchar(10) NOT NULL,
-   upload_date date DEFAULT '0000-00-00' NOT NULL,
-   notes text NOT NULL,
-   graphic_script text NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   KEY encounter_nr (encounter_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_immunization
-#
-
-CREATE TABLE care_encounter_immunization (
-   nr int(10) unsigned NOT NULL auto_increment,
-   encounter_nr int(11) DEFAULT '0' NOT NULL,
-   date date DEFAULT '0000-00-00' NOT NULL,
-   type varchar(60) NOT NULL,
-   medicine varchar(60) NOT NULL,
-   dosage varchar(60),
-   application_type_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   application_by varchar(60),
-   titer varchar(15),
-   refresh_date date,
-   notes text,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_location
-#
-
-CREATE TABLE care_encounter_location (
-   nr int(11) NOT NULL auto_increment,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   type_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   location_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   group_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   date_from date DEFAULT '0000-00-00' NOT NULL,
-   date_to date DEFAULT '0000-00-00' NOT NULL,
-   time_from time DEFAULT '00:00:00',
-   time_to time,
-   discharge_type_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY type (type_nr),
-   KEY location_id (location_nr),
-   PRIMARY KEY (nr, location_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_measurement
-#
-
-CREATE TABLE care_encounter_measurement (
-   nr int(11) unsigned NOT NULL auto_increment,
-   msr_date date DEFAULT '0000-00-00' NOT NULL,
-   msr_time float(4,2) DEFAULT '0.00' NOT NULL,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   msr_type_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   value varchar(255),
-   unit_nr smallint(5) unsigned,
-   unit_type_nr tinyint(2) unsigned DEFAULT '0' NOT NULL,
-   notes varchar(255),
-   measured_by varchar(35) NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   KEY type (msr_type_nr),
-   KEY encounter_nr (encounter_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_notes
-#
-
-CREATE TABLE care_encounter_notes (
-   nr int(10) unsigned NOT NULL auto_increment,
-   encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   type_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   notes text NOT NULL,
-   short_notes varchar(25),
-   aux_notes varchar(255),
-   ref_notes_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   personell_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   personell_name varchar(60) NOT NULL,
-   send_to_pid int(11) DEFAULT '0' NOT NULL,
-   send_to_name varchar(60),
-   date date,
-   time time,
-   location_type varchar(35),
-   location_type_nr tinyint(3) DEFAULT '0' NOT NULL,
-   location_nr mediumint(8) unsigned DEFAULT '0' NOT NULL,
-   location_id varchar(60),
-   ack_short_id varchar(10) NOT NULL,
-   date_ack datetime,
-   date_checked datetime,
-   date_printed datetime,
-   send_by_mail tinyint(1),
-   send_by_email tinyint(1),
-   send_by_fax tinyint(1),
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY encounter_nr (encounter_nr),
-   KEY type_nr (type_nr),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_obstetric
-#
-
-CREATE TABLE care_encounter_obstetric (
-   encounter_nr int(11) unsigned NOT NULL auto_increment,
-   pregnancy_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   hospital_adm_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   patient_class varchar(60) NOT NULL,
-   is_discharged_not_in_labour tinyint(1),
-   is_re_admission tinyint(1),
-   referral_status varchar(60),
-   referral_reason text,
-   status varchar(25) NOT NULL,
-   history text,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (encounter_nr),
-   KEY encounter_nr (pregnancy_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_op
-#
-
-CREATE TABLE care_encounter_op (
-   nr int(11) NOT NULL auto_increment,
-   year varchar(4) DEFAULT '0' NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   op_room varchar(10) DEFAULT '0' NOT NULL,
-   op_nr mediumint(9) DEFAULT '0' NOT NULL,
-   op_date date DEFAULT '0000-00-00' NOT NULL,
-   op_src_date varchar(8) NOT NULL,
-   encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   diagnosis text NOT NULL,
-   operator text NOT NULL,
-   assistant text NOT NULL,
-   scrub_nurse text NOT NULL,
-   rotating_nurse text NOT NULL,
-   anesthesia varchar(30) NOT NULL,
-   an_doctor text NOT NULL,
-   op_therapy text NOT NULL,
-   result_info text NOT NULL,
-   entry_time varchar(5) NOT NULL,
-   cut_time varchar(5) NOT NULL,
-   close_time varchar(5) NOT NULL,
-   exit_time varchar(5) NOT NULL,
-   entry_out text NOT NULL,
-   cut_close text NOT NULL,
-   wait_time text NOT NULL,
-   bandage_time text NOT NULL,
-   repos_time text NOT NULL,
-   encoding longtext NOT NULL,
-   doc_date varchar(10) NOT NULL,
-   doc_time varchar(5) NOT NULL,
-   duty_type varchar(15) NOT NULL,
-   material_codedlist text NOT NULL,
-   container_codedlist text NOT NULL,
-   icd_code text NOT NULL,
-   ops_code text NOT NULL,
-   ops_intern_code text NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY dept (dept_nr),
-   KEY op_room (op_room),
-   KEY op_date (op_date),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_prescription
-#
-
-CREATE TABLE care_encounter_prescription (
-   nr int(11) NOT NULL auto_increment,
-   encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   prescription_type_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   article varchar(100) NOT NULL,
-   drug_class varchar(60) NOT NULL,
-   order_nr int(11) DEFAULT '0' NOT NULL,
-   dosage varchar(255) NOT NULL,
-   application_type_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   notes text NOT NULL,
-   prescribe_date date,
-   prescriber varchar(60) NOT NULL,
-   color_marker varchar(10) NOT NULL,
-   is_stopped tinyint(1) unsigned DEFAULT '0' NOT NULL,
-   stop_date date,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY encounter_nr (encounter_nr),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_prescription_notes
-#
-
-CREATE TABLE care_encounter_prescription_notes (
-   nr bigint(20) unsigned NOT NULL auto_increment,
-   date date DEFAULT '0000-00-00' NOT NULL,
-   prescription_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   notes varchar(35),
-   short_notes varchar(25),
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_procedure
-#
-
-CREATE TABLE care_encounter_procedure (
-   procedure_nr int(11) NOT NULL auto_increment,
-   encounter_nr int(11) DEFAULT '0' NOT NULL,
-   op_nr int(11) DEFAULT '0' NOT NULL,
-   date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   code varchar(25) NOT NULL,
-   code_parent varchar(25) NOT NULL,
-   group_nr mediumint(8) unsigned DEFAULT '0' NOT NULL,
-   code_version tinyint(4) DEFAULT '0' NOT NULL,
-   localcode varchar(35) NOT NULL,
-   category_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   localization varchar(35) NOT NULL,
-   responsible_clinician varchar(60) NOT NULL,
-   responsible_dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY encounter_nr (encounter_nr),
-   PRIMARY KEY (procedure_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_encounter_sickconfirm
-#
-
-CREATE TABLE care_encounter_sickconfirm (
-   nr int(11) NOT NULL auto_increment,
-   encounter_nr int(11) DEFAULT '0' NOT NULL,
-   date_confirm date DEFAULT '0000-00-00' NOT NULL,
-   date_start date DEFAULT '0000-00-00' NOT NULL,
-   date_end date DEFAULT '0000-00-00' NOT NULL,
-   date_create date DEFAULT '0000-00-00' NOT NULL,
-   diagnosis text NOT NULL,
-   dept_nr smallint(6) DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY encounter_nr (encounter_nr),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_group
-#
-
-CREATE TABLE care_group (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   id varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_icd10_de
-#
-
-CREATE TABLE care_icd10_de (
-   diagnosis_code varchar(12) NOT NULL,
-   description text NOT NULL,
-   class_sub varchar(5) NOT NULL,
-   type varchar(10) NOT NULL,
-   inclusive text NOT NULL,
-   exclusive text NOT NULL,
-   notes text NOT NULL,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(4) DEFAULT '0' NOT NULL,
-   remarks text NOT NULL,
-   extra_codes text NOT NULL,
-   extra_subclass text NOT NULL,
-   KEY diagnosis_code (diagnosis_code)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_icd10_en
-#
-
-CREATE TABLE care_icd10_en (
-   diagnosis_code varchar(12) NOT NULL,
-   description text NOT NULL,
-   class_sub varchar(5) NOT NULL,
-   type varchar(10) NOT NULL,
-   inclusive text NOT NULL,
-   exclusive text NOT NULL,
-   notes text NOT NULL,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(4) DEFAULT '0' NOT NULL,
-   remarks text NOT NULL,
-   extra_codes text NOT NULL,
-   extra_subclass text NOT NULL,
-   KEY diagnosis_code (diagnosis_code),
-   PRIMARY KEY (diagnosis_code)
-);
-
-# --------------------------------------------------------
-#
-# Tabellenstruktur für Tabelle care_icd10_pt_br
-#
-
-CREATE TABLE care_icd10_pt_br (
-   diagnosis_code varchar(12) NOT NULL,
-   description text NOT NULL,
-   class_sub varchar(5) NOT NULL,
-   type varchar(10) NOT NULL,
-   inclusive text NOT NULL,
-   exclusive text NOT NULL,
-   notes text NOT NULL,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(4) DEFAULT '0' NOT NULL,
-   remarks text NOT NULL,
-   extra_codes text NOT NULL,
-   extra_subclass text NOT NULL,
-   KEY diagnosis_code (diagnosis_code),
-   PRIMARY KEY (diagnosis_code)
-);
-
-
-# --------------------------------------------------------
-#
-# Tabellenstruktur für Tabelle care_icd10_es
-#
-
-CREATE TABLE care_icd10_es (
-   diagnosis_code varchar(12) NOT NULL,
-   description text NOT NULL,
-   class_sub varchar(5) NOT NULL,
-   type varchar(10) NOT NULL,
-   inclusive text NOT NULL,
-   exclusive text NOT NULL,
-   notes text NOT NULL,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(4) DEFAULT '0' NOT NULL,
-   remarks text NOT NULL,
-   extra_codes text NOT NULL,
-   extra_subclass text NOT NULL,
-   KEY diagnosis_code (diagnosis_code),
-   PRIMARY KEY (diagnosis_code)
-);
-
-#
-# Tabellenstruktur für Tabelle care_icd10_bs
-#
-
-CREATE TABLE care_icd10_bs (
-   diagnosis_code varchar(12) NOT NULL,
-   description text NOT NULL,
-   class_sub varchar(5) NOT NULL,
-   type varchar(10) NOT NULL,
-   inclusive text NOT NULL,
-   exclusive text NOT NULL,
-   notes text NOT NULL,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(4) DEFAULT '0' NOT NULL,
-   remarks text NOT NULL,
-   extra_codes text NOT NULL,
-   extra_subclass text NOT NULL,
-   KEY diagnosis_code (diagnosis_code),
-   PRIMARY KEY (diagnosis_code)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_icd10_bg
-#
-
-CREATE TABLE care_icd10_bg (
-   diagnosis_code varchar(12) NOT NULL,
-   description text NOT NULL,
-   class_sub varchar(5) NOT NULL,
-   type varchar(10) NOT NULL,
-   inclusive text NOT NULL,
-   exclusive text NOT NULL,
-   notes text NOT NULL,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(4) DEFAULT '0' NOT NULL,
-   remarks text NOT NULL,
-   extra_codes text NOT NULL,
-   extra_subclass text NOT NULL,
-   KEY diagnosis_code (diagnosis_code),
-   PRIMARY KEY (diagnosis_code)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_icd10_tr
-#
-
-CREATE TABLE care_icd10_tr (
-   diagnosis_code varchar(12) NOT NULL,
-   description text NOT NULL,
-   class_sub varchar(5) NOT NULL,
-   type varchar(10) NOT NULL,
-   inclusive text NOT NULL,
-   exclusive text NOT NULL,
-   notes text NOT NULL,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(4) DEFAULT '0' NOT NULL,
-   remarks text NOT NULL,
-   extra_codes text NOT NULL,
-   extra_subclass text NOT NULL,
-   KEY diagnosis_code (diagnosis_code),
-   PRIMARY KEY (diagnosis_code)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_icd10_it
-#
-
-CREATE TABLE care_icd10_it (
-   diagnosis_code varchar(12) NOT NULL,
-   description text NOT NULL,
-   class_sub varchar(5) NOT NULL,
-   type varchar(10) NOT NULL,
-   inclusive text NOT NULL,
-   exclusive text NOT NULL,
-   notes text NOT NULL,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(4) DEFAULT '0' NOT NULL,
-   remarks text NOT NULL,
-   extra_codes text NOT NULL,
-   extra_subclass text NOT NULL,
-   KEY diagnosis_code (diagnosis_code),
-   PRIMARY KEY (diagnosis_code)
-);
-
-# --------------------------------------------------------
-#
-# Tabellenstruktur für Tabelle care_img_diagnostic
-#
-
-CREATE TABLE care_img_diagnostic (
-   nr bigint(20) NOT NULL auto_increment,
-   pid int(11) DEFAULT '0' NOT NULL,
-   encounter_nr int(11) DEFAULT '0' NOT NULL,
-   doc_ref_ids varchar(255),
-   img_type varchar(10) NOT NULL,
-   max_nr tinyint(2) DEFAULT '0',
-   upload_date date DEFAULT '0000-00-00' NOT NULL,
-   cancel_date date DEFAULT '0000-00-00' NOT NULL,
-   cancel_by varchar(35),
-   notes text,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY encounter_nr (pid),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_insurance_firm
-#
-
-CREATE TABLE care_insurance_firm (
-   firm_id varchar(40) NOT NULL,
-   name varchar(60) NOT NULL,
-   iso_country_id char(3) NOT NULL,
-   sub_area varchar(60) NOT NULL,
-   type_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   addr varchar(255),
-   addr_mail varchar(200),
-   addr_billing varchar(200),
-   addr_email varchar(60),
-   phone_main varchar(35),
-   phone_aux varchar(35),
-   fax_main varchar(35),
-   fax_aux varchar(35),
-   contact_person varchar(60),
-   contact_phone varchar(35),
-   contact_fax varchar(35),
-   contact_email varchar(60),
-   use_frequency bigint(20) unsigned DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY name (name),
-   PRIMARY KEY (firm_id)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_mail_private
-#
-
-CREATE TABLE care_mail_private (
-   recipient varchar(60) NOT NULL,
-   sender varchar(60) NOT NULL,
-   sender_ip varchar(60) NOT NULL,
-   cc varchar(255) NOT NULL,
-   bcc varchar(255) NOT NULL,
-   subject varchar(255) NOT NULL,
-   body text NOT NULL,
-   sign varchar(255) NOT NULL,
-   ask4ack tinyint(4) DEFAULT '0' NOT NULL,
-   reply2 varchar(255) NOT NULL,
-   attachment varchar(255) NOT NULL,
-   attach_type varchar(30) NOT NULL,
-   read_flag tinyint(4) DEFAULT '0' NOT NULL,
-   mailgroup varchar(60) NOT NULL,
-   maildir varchar(60) NOT NULL,
-   exec_level tinyint(4) DEFAULT '0' NOT NULL,
-   exclude_addr text NOT NULL,
-   send_dt datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   send_stamp timestamp(14),
-   uid varchar(255) NOT NULL,
-   KEY recipient (recipient)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_mail_private_users
-#
-
-CREATE TABLE care_mail_private_users (
-   user_name varchar(60) NOT NULL,
-   email varchar(60) NOT NULL,
-   alias varchar(60) NOT NULL,
-   pw varchar(255) NOT NULL,
-   inbox longtext NOT NULL,
-   sent longtext NOT NULL,
-   drafts longtext NOT NULL,
-   trash longtext NOT NULL,
-   lastcheck timestamp(14),
-   lock_flag tinyint(4) DEFAULT '0' NOT NULL,
-   addr_book text NOT NULL,
-   addr_quick tinytext NOT NULL,
-   secret_q tinytext NOT NULL,
-   secret_q_ans tinytext NOT NULL,
-   public tinyint(4) DEFAULT '0' NOT NULL,
-   sig tinytext NOT NULL,
-   append_sig tinyint(4) DEFAULT '0' NOT NULL,
-   PRIMARY KEY (email)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_med_ordercatalog
-#
-
-CREATE TABLE care_med_ordercatalog (
-   item_no int(11) NOT NULL auto_increment,
-   dept_nr int(3) DEFAULT '0' NOT NULL,
-   hit int(11) DEFAULT '0' NOT NULL,
-   artikelname tinytext NOT NULL,
-   bestellnum varchar(20) NOT NULL,
-   minorder int(4) DEFAULT '0' NOT NULL,
-   maxorder int(4) DEFAULT '0' NOT NULL,
-   proorder tinytext NOT NULL,
-   KEY item_no (item_no),
-   PRIMARY KEY (item_no)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_med_orderlist
-#
-
-CREATE TABLE care_med_orderlist (
-   order_nr int(11) NOT NULL auto_increment,
-   dept_nr int(3) DEFAULT '0' NOT NULL,
-   order_date date DEFAULT '0000-00-00' NOT NULL,
-   order_time time DEFAULT '00:00:00' NOT NULL,
-   articles text NOT NULL,
-   extra1 tinytext NOT NULL,
-   extra2 text NOT NULL,
-   validator tinytext NOT NULL,
-   ip_addr tinytext NOT NULL,
-   priority tinytext NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   sent_datetime datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   process_datetime datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   KEY item_nr (order_nr),
-   KEY dept (dept_nr),
-   PRIMARY KEY (order_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_med_products_main
-#
-
-CREATE TABLE care_med_products_main (
-   bestellnum varchar(25) NOT NULL,
-   artikelnum tinytext NOT NULL,
-   industrynum tinytext NOT NULL,
-   artikelname tinytext NOT NULL,
-   generic tinytext NOT NULL,
-   description text NOT NULL,
-   packing tinytext NOT NULL,
-   minorder int(4) DEFAULT '0' NOT NULL,
-   maxorder int(4) DEFAULT '0' NOT NULL,
-   proorder tinytext NOT NULL,
-   picfile tinytext NOT NULL,
-   encoder tinytext NOT NULL,
-   enc_date tinytext NOT NULL,
-   enc_time tinytext NOT NULL,
-   lock_flag tinyint(1) DEFAULT '0' NOT NULL,
-   medgroup text NOT NULL,
-   cave tinytext NOT NULL,
-   status varchar(20) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY bestellnum (bestellnum),
-   PRIMARY KEY (bestellnum)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_med_report
-#
-
-CREATE TABLE care_med_report (
-   report_nr int(11) NOT NULL auto_increment,
-   dept varchar(15) NOT NULL,
-   report text NOT NULL,
-   reporter varchar(25) NOT NULL,
-   id_nr varchar(15) NOT NULL,
-   report_date date DEFAULT '0000-00-00' NOT NULL,
-   report_time time DEFAULT '00:00:00' NOT NULL,
-   status varchar(20) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY report_nr (report_nr),
-   PRIMARY KEY (report_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_menu_main
-#
-
-CREATE TABLE care_menu_main (
-   nr tinyint(3) unsigned NOT NULL auto_increment,
-   sort_nr tinyint(2) DEFAULT '0' NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   url varchar(255) NOT NULL,
-   is_visible tinyint(1) unsigned DEFAULT '1' NOT NULL,
-   hide_by text,
-   status varchar(25) NOT NULL,
-   modify_id varchar(60),
-   modify_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-#
-# Table structure for table `care_menu_sub`
-#
-
-CREATE TABLE care_menu_sub (
-  s_nr int(11) NOT NULL default '0',
-  s_sort_nr int(11) NOT NULL default '0',
-  s_main_nr int(11) NOT NULL default '0',
-  s_ebene int(11) NOT NULL default '0',
-  s_name varchar(100) NOT NULL default '',
-  s_LD_var varchar(100) NOT NULL default '',
-  s_url varchar(100) NOT NULL default '',
-  s_url_ext varchar(100) NOT NULL default '',
-  s_image varchar(100) NOT NULL default '',
-  s_open_image varchar(100) NOT NULL default '',
-  s_is_visible varchar(100) NOT NULL default '',
-  s_hide_by varchar(100) NOT NULL default '',
-  s_status varchar(100) NOT NULL default '',
-  s_modify_id varchar(100) NOT NULL default '',
-  s_modify_time datetime NOT NULL default '0000-00-00 00:00:00'
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_method_induction
-#
-
-CREATE TABLE care_method_induction (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   method varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_mode_delivery
-#
-
-CREATE TABLE care_mode_delivery (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   mode varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255),
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_neonatal
-#
-
-CREATE TABLE care_neonatal (
-   nr int(11) unsigned NOT NULL auto_increment,
-   pid int(11) unsigned DEFAULT '0' NOT NULL,
-   delivery_date date DEFAULT '0000-00-00' NOT NULL,
-   parent_encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   delivery_nr tinyint(4) DEFAULT '0' NOT NULL,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   delivery_place varchar(60) NOT NULL,
-   delivery_mode tinyint(2) DEFAULT '0' NOT NULL,
-   c_s_reason text,
-   born_before_arrival tinyint(1) DEFAULT '0',
-   face_presentation tinyint(1) DEFAULT '0' NOT NULL,
-   posterio_occipital_position tinyint(1) DEFAULT '0' NOT NULL,
-   delivery_rank tinyint(2) unsigned DEFAULT '1' NOT NULL,
-   apgar_1_min tinyint(4) DEFAULT '0' NOT NULL,
-   apgar_5_min tinyint(4) DEFAULT '0' NOT NULL,
-   apgar_10_min tinyint(4) DEFAULT '0' NOT NULL,
-   time_to_spont_resp tinyint(2),
-   `condition` varchar(60) DEFAULT '0',
-   weight float(8,2) unsigned,
-   length float(8,2) unsigned,
-   head_circumference float(8,2) unsigned,
-   scored_gestational_age float(4,2) unsigned,
-   feeding tinyint(4) DEFAULT '0' NOT NULL,
-   congenital_abnormality varchar(125) NOT NULL,
-   classification varchar(255) DEFAULT '0' NOT NULL,
-   disease_category tinyint(2) DEFAULT '0' NOT NULL,
-   outcome tinyint(2) DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY pid (pid),
-   KEY pregnancy_nr (parent_encounter_nr),
-   KEY encounter_nr (encounter_nr),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_news_article
-#
-
-CREATE TABLE care_news_article (
-   nr int(11) NOT NULL auto_increment,
-   lang varchar(10) DEFAULT 'en' NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   category tinytext NOT NULL,
-   status varchar(10) DEFAULT 'pending' NOT NULL,
-   title varchar(255) NOT NULL,
-   preface text NOT NULL,
-   body text NOT NULL,
-   pic blob,
-   pic_mime varchar(4),
-   art_num tinyint(1) DEFAULT '0' NOT NULL,
-   head_file tinytext NOT NULL,
-   main_file tinytext NOT NULL,
-   pic_file tinytext NOT NULL,
-   author varchar(30) NOT NULL,
-   submit_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   encode_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   publish_date date DEFAULT '0000-00-00' NOT NULL,
-   modify_id varchar(30) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(30) NOT NULL,
-   create_time timestamp(14),
-   KEY item_no (nr),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_op_med_doc
-#
-
-CREATE TABLE care_op_med_doc (
-   nr bigint(20) unsigned NOT NULL auto_increment,
-   op_date varchar(12) NOT NULL,
-   operator tinytext NOT NULL,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   diagnosis text NOT NULL,
-   localize text NOT NULL,
-   therapy text NOT NULL,
-   special text NOT NULL,
-   class_s tinyint(4) DEFAULT '0' NOT NULL,
-   class_m tinyint(4) DEFAULT '0' NOT NULL,
-   class_l tinyint(4) DEFAULT '0' NOT NULL,
-   op_start varchar(8) NOT NULL,
-   op_end varchar(8) NOT NULL,
-   scrub_nurse varchar(70) NOT NULL,
-   op_room varchar(10) NOT NULL,
-   status varchar(15) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY encounter_nr (encounter_nr),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_ops301_de
-#
-
-CREATE TABLE care_ops301_de (
-   code varchar(12) NOT NULL,
-   description text NOT NULL,
-   inclusive text NOT NULL,
-   exclusive text NOT NULL,
-   notes text NOT NULL,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(4) DEFAULT '0' NOT NULL,
-   remarks text NOT NULL,
-   KEY code (code)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_ops301_es
-#
-
-CREATE TABLE care_ops301_es (
-   code varchar(12) NOT NULL,
-   description text NOT NULL,
-   inclusive text NOT NULL,
-   exclusive text NOT NULL,
-   notes text NOT NULL,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(4) DEFAULT '0' NOT NULL,
-   remarks text NOT NULL,
-   KEY code (code)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_ops301_it
-#
-
-CREATE TABLE care_ops301_it (
-   code varchar(12) NOT NULL,
-   description text NOT NULL,
-   inclusive text NOT NULL,
-   exclusive text NOT NULL,
-   notes text NOT NULL,
-   std_code char(1) NOT NULL,
-   sub_level tinyint(4) DEFAULT '0' NOT NULL,
-   remarks text NOT NULL,
-   KEY code (code)
-);
-
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_person
-#
-
-CREATE TABLE care_person (
-   pid int(11) unsigned NOT NULL auto_increment,
-   date_reg datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   name_first varchar(60) NOT NULL,
-   name_2 varchar(60),
-   name_3 varchar(60),
-   name_middle varchar(60),
-   name_last varchar(60) NOT NULL,
-   name_maiden varchar(60),
-   name_others text NOT NULL,
-   date_birth date DEFAULT '0000-00-00' NOT NULL,
-   blood_group char(2) NOT NULL,
-   addr_str varchar(60) NOT NULL,
-   addr_str_nr varchar(10) NOT NULL,
-   addr_zip varchar(15) NOT NULL,
-   addr_citytown_nr mediumint(8) unsigned DEFAULT '0' NOT NULL,
-   addr_is_valid tinyint(1) DEFAULT '0' NOT NULL,
-   citizenship varchar(35),
-   phone_1_code varchar(15) DEFAULT '0',
-   phone_1_nr varchar(35),
-   phone_2_code varchar(15) DEFAULT '0',
-   phone_2_nr varchar(35),
-   cellphone_1_nr varchar(35),
-   cellphone_2_nr varchar(35),
-   fax varchar(35),
-   email varchar(60),
-   civil_status varchar(35) NOT NULL,
-   sex char(1) NOT NULL,
-   title varchar(25),
-   photo blob,
-   photo_filename varchar(60) NOT NULL,
-   ethnic_orig mediumint(8) unsigned,
-   org_id varchar(60),
-   sss_nr varchar(60),
-   nat_id_nr varchar(60),
-   religion varchar(125),
-   mother_pid int(11) unsigned DEFAULT '0' NOT NULL,
-   father_pid int(11) unsigned DEFAULT '0' NOT NULL,
-   contact_person varchar(255),
-   contact_pid int(11) unsigned DEFAULT '0' NOT NULL,
-   contact_relation varchar(25) DEFAULT '0',
-   death_date date DEFAULT '0000-00-00' NOT NULL,
-   death_encounter_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   death_cause varchar(255),
-   death_cause_code varchar(15),
-   date_update datetime,
-   status varchar(20) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY name_last (name_last),
-   KEY name_first (name_first),
-   KEY date_reg (date_reg),
-   KEY date_birth (date_birth),
-   PRIMARY KEY (pid)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_person_insurance
-#
-
-CREATE TABLE care_person_insurance (
-   item_nr int(10) unsigned NOT NULL auto_increment,
-   pid int(10) unsigned DEFAULT '0' NOT NULL,
-   type varchar(60) NOT NULL,
-   insurance_nr varchar(50) DEFAULT '0' NOT NULL,
-   firm_id varchar(60) NOT NULL,
-   class_nr tinyint(2) unsigned DEFAULT '0' NOT NULL,
-   is_void tinyint(1) unsigned DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (item_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_person_other_number
-#
-
-CREATE TABLE care_person_other_number (
-   nr int(10) unsigned NOT NULL auto_increment,
-   pid int(11) unsigned DEFAULT '0' NOT NULL,
-   other_nr varchar(30) NOT NULL,
-   org varchar(35) NOT NULL,
-   status varchar(25) NOT NULL,
-   history text,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY pid (pid),
-   KEY other_nr (other_nr),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_personell
-#
-
-CREATE TABLE care_personell (
-   nr int(11) NOT NULL auto_increment,
-   short_id varchar(10),
-   pid int(11) DEFAULT '0' NOT NULL,
-   job_type_nr int(11) DEFAULT '0' NOT NULL,
-   job_function_title varchar(60),
-   date_join date,
-   date_exit date,
-   contract_class varchar(35) DEFAULT '0' NOT NULL,
-   contract_start date,
-   contract_end date,
-   is_discharged tinyint(1) DEFAULT '0' NOT NULL,
-   pay_class varchar(25) NOT NULL,
-   pay_class_sub varchar(25) NOT NULL,
-   local_premium_id varchar(5) NOT NULL,
-   tax_account_nr varchar(60) NOT NULL,
-   ir_code varchar(25) NOT NULL,
-   nr_workday tinyint(1) DEFAULT '0' NOT NULL,
-   nr_weekhour float(10,2) DEFAULT '0.00' NOT NULL,
-   nr_vacation_day tinyint(2) DEFAULT '0' NOT NULL,
-   multiple_employer tinyint(1) DEFAULT '0' NOT NULL,
-   nr_dependent tinyint(2) unsigned DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY pid (pid),
-   PRIMARY KEY (nr, pid, job_type_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_personell_assignment
-#
-
-CREATE TABLE care_personell_assignment (
-   nr int(10) unsigned NOT NULL auto_increment,
-   personell_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   role_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   location_type_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   location_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   date_start date DEFAULT '0000-00-00' NOT NULL,
-   date_end date DEFAULT '0000-00-00' NOT NULL,
-   is_temporary tinyint(1) unsigned,
-   list_frequency int(11) unsigned DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY personell_nr (personell_nr),
-   PRIMARY KEY (nr, personell_nr, role_nr, location_type_nr, location_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_pharma_ordercatalog
-#
-
-CREATE TABLE care_pharma_ordercatalog (
-   item_no int(11) NOT NULL auto_increment,
-   dept_nr int(3) DEFAULT '0' NOT NULL,
-   hit int(11) DEFAULT '0' NOT NULL,
-   artikelname tinytext NOT NULL,
-   bestellnum varchar(20) NOT NULL,
-   minorder int(4) DEFAULT '0' NOT NULL,
-   maxorder int(4) DEFAULT '0' NOT NULL,
-   proorder tinytext NOT NULL,
-   KEY item_no (item_no)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_pharma_orderlist
-#
-
-CREATE TABLE care_pharma_orderlist (
-   order_nr int(11) NOT NULL auto_increment,
-   dept_nr int(3) DEFAULT '0' NOT NULL,
-   order_date date DEFAULT '0000-00-00' NOT NULL,
-   order_time time DEFAULT '00:00:00' NOT NULL,
-   articles text NOT NULL,
-   extra1 tinytext NOT NULL,
-   extra2 text NOT NULL,
-   validator tinytext NOT NULL,
-   ip_addr tinytext NOT NULL,
-   priority tinytext NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   sent_datetime datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   process_datetime datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   KEY dept (dept_nr),
-   PRIMARY KEY (order_nr, dept_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_pharma_products_main
-#
-
-CREATE TABLE care_pharma_products_main (
-   bestellnum varchar(25) NOT NULL,
-   artikelnum tinytext NOT NULL,
-   industrynum tinytext NOT NULL,
-   artikelname tinytext NOT NULL,
-   generic tinytext NOT NULL,
-   description text NOT NULL,
-   packing tinytext NOT NULL,
-   minorder int(4) DEFAULT '0' NOT NULL,
-   maxorder int(4) DEFAULT '0' NOT NULL,
-   proorder tinytext NOT NULL,
-   picfile tinytext NOT NULL,
-   encoder tinytext NOT NULL,
-   enc_date tinytext NOT NULL,
-   enc_time tinytext NOT NULL,
-   lock_flag tinyint(1) DEFAULT '0' NOT NULL,
-   medgroup text NOT NULL,
-   cave tinytext NOT NULL,
-   status varchar(20) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (bestellnum)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_phone
-#
-
-CREATE TABLE care_phone (
-   item_nr bigint(20) unsigned NOT NULL auto_increment,
-   title varchar(25),
-   name varchar(45) NOT NULL,
-   vorname varchar(45) NOT NULL,
-   pid int(11) unsigned DEFAULT '0' NOT NULL,
-   personell_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   dept_nr smallint(3) unsigned DEFAULT '0' NOT NULL,
-   beruf varchar(25),
-   bereich1 varchar(25),
-   bereich2 varchar(25),
-   inphone1 varchar(15),
-   inphone2 varchar(15),
-   inphone3 varchar(15),
-   exphone1 varchar(25),
-   exphone2 varchar(25),
-   funk1 varchar(15),
-   funk2 varchar(15),
-   roomnr varchar(10),
-   date date DEFAULT '0000-00-00' NOT NULL,
-   time time DEFAULT '00:00:00' NOT NULL,
-   status varchar(15) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY name (name),
-   KEY vorname (vorname),
-   PRIMARY KEY (item_nr, pid, personell_nr, dept_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_pregnancy
-#
-
-CREATE TABLE care_pregnancy (
-   nr int(10) unsigned NOT NULL auto_increment,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   this_pregnancy_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   delivery_date date DEFAULT '0000-00-00' NOT NULL,
-   delivery_time time DEFAULT '00:00:00' NOT NULL,
-   gravida tinyint(2) unsigned,
-   para tinyint(2) unsigned,
-   pregnancy_gestational_age tinyint(2) unsigned,
-   nr_of_fetuses tinyint(2) unsigned,
-   child_encounter_nr varchar(255) NOT NULL,
-   is_booked tinyint(1) DEFAULT '0' NOT NULL,
-   vdrl char(1),
-   rh tinyint(1),
-   delivery_mode tinyint(2) DEFAULT '0' NOT NULL,
-   delivery_by varchar(60),
-   bp_systolic_high smallint(4) unsigned,
-   bp_diastolic_high smallint(4) unsigned,
-   proteinuria tinyint(1),
-   labour_duration smallint(3) unsigned,
-   induction_method tinyint(2) DEFAULT '0' NOT NULL,
-   induction_indication varchar(125),
-   anaesth_type_nr tinyint(2) DEFAULT '0' NOT NULL,
-   is_epidural char(1),
-   complications varchar(255),
-   perineum tinyint(2) DEFAULT '0' NOT NULL,
-   blood_loss float(8,2) unsigned,
-   blood_loss_unit varchar(10),
-   is_retained_placenta char(1) NOT NULL,
-   post_labour_condition varchar(35),
-   outcome varchar(35) NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY encounter_nr (encounter_nr),
-   PRIMARY KEY (nr, encounter_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_registry
-#
-
-CREATE TABLE care_registry (
-   registry_id varchar(35) NOT NULL,
-   module_start_script varchar(60) NOT NULL,
-   news_start_script varchar(60) NOT NULL,
-   news_editor_script varchar(255) NOT NULL,
-   news_reader_script varchar(255) NOT NULL,
-   passcheck_script varchar(255) NOT NULL,
-   composite text NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (registry_id)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_role_person
-#
-
-CREATE TABLE care_role_person (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   role varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr, group_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_room
-#
-
-CREATE TABLE care_room (
-   nr int(8) unsigned NOT NULL auto_increment,
-   type_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   date_create date DEFAULT '0000-00-00' NOT NULL,
-   date_close date DEFAULT '0000-00-00' NOT NULL,
-   is_temp_closed tinyint(1) DEFAULT '0',
-   room_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   ward_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   nr_of_beds tinyint(3) unsigned DEFAULT '1' NOT NULL,
-   closed_beds varchar(255) NOT NULL,
-   info varchar(60),
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY room_nr (room_nr),
-   KEY ward_nr (ward_nr),
-   KEY dept_nr (dept_nr),
-   PRIMARY KEY (nr, type_nr, ward_nr, dept_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_sessions
-#
-
-CREATE TABLE care_sessions (
-   SESSKEY varchar(32) NOT NULL,
-   EXPIRY int(11) unsigned DEFAULT '0' NOT NULL,
-   expireref varchar(64) NOT NULL,
-   DATA text NOT NULL,
-   PRIMARY KEY (SESSKEY),
-   KEY EXPIRY (EXPIRY)
-);
-
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_standby_duty_report
-#
-
-CREATE TABLE care_standby_duty_report (
-   report_nr int(11) NOT NULL auto_increment,
-   dept varchar(15) NOT NULL,
-   date date DEFAULT '0000-00-00' NOT NULL,
-   standby_name varchar(35) NOT NULL,
-   standby_start time DEFAULT '00:00:00' NOT NULL,
-   standby_end time DEFAULT '00:00:00' NOT NULL,
-   oncall_name varchar(35) NOT NULL,
-   oncall_start time DEFAULT '00:00:00' NOT NULL,
-   oncall_end time DEFAULT '00:00:00' NOT NULL,
-   op_room char(2) NOT NULL,
-   diagnosis_therapy text NOT NULL,
-   encoding text NOT NULL,
-   status varchar(20) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY report_nr (report_nr),
-   PRIMARY KEY (report_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_steri_products_main
-#
-
-CREATE TABLE care_steri_products_main (
-   bestellnum int(15) unsigned DEFAULT '0' NOT NULL,
-   containernum varchar(15) NOT NULL,
-   industrynum tinytext NOT NULL,
-   containername varchar(40) NOT NULL,
-   description text NOT NULL,
-   packing tinytext NOT NULL,
-   minorder int(4) unsigned DEFAULT '0' NOT NULL,
-   maxorder int(4) unsigned DEFAULT '0' NOT NULL,
-   proorder tinytext NOT NULL,
-   picfile tinytext NOT NULL,
-   encoder tinytext NOT NULL,
-   enc_date tinytext NOT NULL,
-   enc_time tinytext NOT NULL,
-   lock_flag tinyint(1) DEFAULT '0' NOT NULL,
-   medgroup text NOT NULL,
-   cave tinytext NOT NULL
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_tech_questions
-#
-
-CREATE TABLE care_tech_questions (
-   batch_nr int(11) NOT NULL auto_increment,
-   dept varchar(60) NOT NULL,
-   query text NOT NULL,
-   inquirer varchar(25) NOT NULL,
-   tphone varchar(30) NOT NULL,
-   tdate date DEFAULT '0000-00-00' NOT NULL,
-   ttime time DEFAULT '00:00:00' NOT NULL,
-   tid timestamp(14),
-   reply text NOT NULL,
-   answered tinyint(1) DEFAULT '0' NOT NULL,
-   ansby varchar(25) NOT NULL,
-   astamp varchar(16) NOT NULL,
-   archive tinyint(1) DEFAULT '0' NOT NULL,
-   status varchar(15) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY batch_nr (batch_nr),
-   PRIMARY KEY (batch_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_tech_repair_done
-#
-
-CREATE TABLE care_tech_repair_done (
-   batch_nr int(11) NOT NULL auto_increment,
-   dept varchar(15),
-   dept_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   job_id varchar(15) DEFAULT '0' NOT NULL,
-   job text NOT NULL,
-   reporter varchar(25) NOT NULL,
-   id varchar(15) NOT NULL,
-   tdate date DEFAULT '0000-00-00' NOT NULL,
-   ttime time DEFAULT '00:00:00' NOT NULL,
-   tid timestamp(14),
-   seen tinyint(1) DEFAULT '0' NOT NULL,
-   d_idx varchar(8) NOT NULL,
-   status varchar(15) NOT NULL,
-   history text,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (batch_nr, dept_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_tech_repair_job
-#
-
-CREATE TABLE care_tech_repair_job (
-   batch_nr tinyint(4) NOT NULL auto_increment,
-   dept varchar(15) NOT NULL,
-   job text NOT NULL,
-   reporter varchar(25) NOT NULL,
-   id varchar(15) NOT NULL,
-   tphone varchar(30) NOT NULL,
-   tdate date DEFAULT '0000-00-00' NOT NULL,
-   ttime time DEFAULT '00:00:00' NOT NULL,
-   tid timestamp(14),
-   done tinyint(1) DEFAULT '0' NOT NULL,
-   seen tinyint(1) DEFAULT '0' NOT NULL,
-   seenby varchar(25) NOT NULL,
-   sstamp varchar(16) NOT NULL,
-   doneby varchar(25) NOT NULL,
-   dstamp varchar(16) NOT NULL,
-   d_idx varchar(8) NOT NULL,
-   archive tinyint(1) DEFAULT '0' NOT NULL,
-   status varchar(20) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY batch_nr (batch_nr),
-   PRIMARY KEY (batch_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_test_findings_baclabor
-#
-
-CREATE TABLE care_test_findings_baclabor (
-   batch_nr int(11) DEFAULT '0' NOT NULL,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   room_nr varchar(10) NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   notes varchar(255) NOT NULL,
-   findings_init tinyint(1) DEFAULT '0' NOT NULL,
-   findings_current tinyint(1) DEFAULT '0' NOT NULL,
-   findings_final tinyint(1) DEFAULT '0' NOT NULL,
-   entry_nr varchar(10) NOT NULL,
-   rec_date date DEFAULT '0000-00-00' NOT NULL,
-   type_general text NOT NULL,
-   resist_anaerob text NOT NULL,
-   resist_aerob text NOT NULL,
-   findings text NOT NULL,
-   doctor_id varchar(35) NOT NULL,
-   findings_date date DEFAULT '0000-00-00' NOT NULL,
-   findings_time time DEFAULT '00:00:00' NOT NULL,
-   status varchar(10) NOT NULL,
-   history text,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY findings_date (findings_date),
-   KEY rec_date (rec_date),
-   PRIMARY KEY (batch_nr, encounter_nr, room_nr, dept_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_test_findings_chemlab
-#
-
-CREATE TABLE care_test_findings_chemlab (
-   batch_nr int(11) NOT NULL auto_increment,
-   encounter_nr int(11) DEFAULT '0' NOT NULL,
-   job_id varchar(25) NOT NULL,
-   test_date date DEFAULT '0000-00-00' NOT NULL,
-   test_time time DEFAULT '00:00:00' NOT NULL,
-   group_id varchar(30) NOT NULL,
-   serial_value text NOT NULL,
-   validator varchar(15) NOT NULL,
-   validate_dt datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   status varchar(20) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (batch_nr, encounter_nr, job_id)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_test_findings_patho
-#
-
-CREATE TABLE care_test_findings_patho (
-   batch_nr int(11) DEFAULT '0' NOT NULL,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   room_nr varchar(10) NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   material text NOT NULL,
-   macro text NOT NULL,
-   micro text NOT NULL,
-   findings text NOT NULL,
-   diagnosis text NOT NULL,
-   doctor_id varchar(35) NOT NULL,
-   findings_date date DEFAULT '0000-00-00' NOT NULL,
-   findings_time time DEFAULT '00:00:00' NOT NULL,
-   status varchar(10) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY send_date (findings_date),
-   KEY findings_date (findings_date),
-   PRIMARY KEY (batch_nr, encounter_nr, room_nr, dept_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_test_findings_radio
-#
-
-CREATE TABLE care_test_findings_radio (
-   batch_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   room_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   findings text NOT NULL,
-   diagnosis text NOT NULL,
-   doctor_id varchar(35) NOT NULL,
-   findings_date date DEFAULT '0000-00-00' NOT NULL,
-   findings_time time DEFAULT '00:00:00' NOT NULL,
-   status varchar(10) NOT NULL,
-   history text,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY send_date (findings_date),
-   KEY findings_date (findings_date),
-   PRIMARY KEY (batch_nr, encounter_nr)
-);
-
-# --------------------------------------------------------
-
-
-#
-# Tabellenstruktur für Tabelle care_test_param
-#
-
-CREATE TABLE `care_test_param` (
-  `nr` smallint(5) unsigned NOT NULL auto_increment,
-  `group_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `name` varchar(35) collate latin1_general_ci NOT NULL,
-  `id` varchar(50) collate latin1_general_ci NOT NULL,
-  `sort_nr` tinyint(4) NOT NULL default '0',
-  `msr_unit` varchar(15) collate latin1_general_ci NOT NULL,
+-- phpMyAdmin SQL Dump
+-- version 2.11.1
+-- http://www.phpmyadmin.net
+-- Claudio Torbinio
+-- Host: localhost
+-- Generato il: 30 Nov, 2007 at 05:40 AM
+-- Versione MySQL: 5.0.45
+-- Versione PHP: 4.4.7
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `care2x`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_address_citytown`
+--
+
+CREATE TABLE `care_address_citytown` (
+  `nr` mediumint(8) unsigned NOT NULL auto_increment,
+  `unece_modifier` char(2) collate latin1_general_ci default NULL,
+  `unece_locode` varchar(15) collate latin1_general_ci default NULL,
+  `name` varchar(100) collate latin1_general_ci NOT NULL default '',
+  `zip_code` varchar(25) collate latin1_general_ci default NULL,
+  `iso_country_id` char(3) collate latin1_general_ci NOT NULL default '',
+  `unece_locode_type` tinyint(3) unsigned default NULL,
+  `unece_coordinates` varchar(25) collate latin1_general_ci default NULL,
+  `info_url` varchar(255) collate latin1_general_ci default NULL,
+  `use_frequency` bigint(20) unsigned NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci default NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL default '',
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL default '',
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `name` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci ROW_FORMAT=DYNAMIC COMMENT='InnoDB free: 4096 kB' AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_appointment`
+--
+
+CREATE TABLE `care_appointment` (
+  `nr` bigint(20) unsigned NOT NULL auto_increment,
+  `pid` int(11) NOT NULL default '0',
+  `date` date NOT NULL default '0000-00-00',
+  `time` time NOT NULL default '00:00:00',
+  `to_dept_id` varchar(25) collate latin1_general_ci NOT NULL,
+  `to_dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `to_personell_nr` int(11) NOT NULL default '0',
+  `to_personell_name` varchar(60) collate latin1_general_ci default NULL,
+  `purpose` text collate latin1_general_ci NOT NULL,
+  `urgency` tinyint(2) unsigned NOT NULL default '0',
+  `remind` tinyint(1) unsigned NOT NULL default '0',
+  `remind_email` tinyint(1) unsigned NOT NULL default '0',
+  `remind_mail` tinyint(1) unsigned NOT NULL default '0',
+  `remind_phone` tinyint(1) unsigned NOT NULL default '0',
+  `appt_status` varchar(35) collate latin1_general_ci NOT NULL default 'pending',
+  `cancel_by` varchar(255) collate latin1_general_ci NOT NULL,
+  `cancel_date` date default NULL,
+  `cancel_reason` varchar(255) collate latin1_general_ci default NULL,
+  `encounter_class_nr` int(1) NOT NULL default '0',
+  `encounter_nr` int(11) NOT NULL default '0',
   `status` varchar(25) collate latin1_general_ci NOT NULL,
-  `median` varchar(20) collate latin1_general_ci default NULL COMMENT 'for males',
-  `hi_bound` varchar(20) collate latin1_general_ci default NULL,
-  `lo_bound` varchar(20) collate latin1_general_ci default NULL,
-  `hi_critical` varchar(20) collate latin1_general_ci default NULL,
-  `lo_critical` varchar(20) collate latin1_general_ci default NULL,
-  `hi_toxic` varchar(20) collate latin1_general_ci default NULL,
-  `lo_toxic` varchar(20) collate latin1_general_ci default NULL,
-  `median_f` varchar(20) collate latin1_general_ci default NULL COMMENT '_ f for females',
-  `hi_bound_f` varchar(20) collate latin1_general_ci default NULL,
-  `lo_bound_f` varchar(20) collate latin1_general_ci default NULL,
-  `hi_critical_f` varchar(20) collate latin1_general_ci default NULL,
-  `lo_critical_f` varchar(20) collate latin1_general_ci default NULL,
-  `hi_toxic_f` varchar(20) collate latin1_general_ci default NULL,
-  `lo_toxic_f` varchar(20) collate latin1_general_ci default NULL,
-  `median_n` varchar(20) collate latin1_general_ci default NULL COMMENT '_n for neonatal from 0 to 1 month',
-  `hi_bound_n` varchar(20) collate latin1_general_ci default NULL,
-  `lo_bound_n` varchar(20) collate latin1_general_ci default NULL,
-  `hi_critical_n` varchar(20) collate latin1_general_ci default NULL,
-  `lo_critical_n` varchar(20) collate latin1_general_ci default NULL,
-  `hi_toxic_n` varchar(20) collate latin1_general_ci default NULL,
-  `lo_toxic_n` varchar(20) collate latin1_general_ci default NULL,
-  `median_y` varchar(20) collate latin1_general_ci default NULL COMMENT '_y for children form 1 month to 12 months',
-  `hi_bound_y` varchar(20) collate latin1_general_ci default NULL,
-  `lo_bound_y` varchar(20) collate latin1_general_ci default NULL,
-  `hi_critical_y` varchar(20) collate latin1_general_ci default NULL,
-  `lo_critical_y` varchar(20) collate latin1_general_ci default NULL,
-  `hi_toxic_y` varchar(20) collate latin1_general_ci default NULL,
-  `lo_toxic_y` varchar(20) collate latin1_general_ci default NULL,
-  `median_c` varchar(20) collate latin1_general_ci default NULL COMMENT '_c for children form 1 to 14 years',
-  `hi_bound_c` varchar(20) collate latin1_general_ci default NULL,
-  `lo_bound_c` varchar(20) collate latin1_general_ci default NULL,
-  `hi_critical_c` varchar(20) collate latin1_general_ci default NULL,
-  `lo_critical_c` varchar(20) collate latin1_general_ci default NULL,
-  `hi_toxic_c` varchar(20) collate latin1_general_ci default NULL,
-  `lo_toxic_c` varchar(20) collate latin1_general_ci default NULL,
-  `method` varchar(255) collate latin1_general_ci default NULL,
   `history` text collate latin1_general_ci NOT NULL,
   `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
   `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (`nr`,`group_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=665 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_test_request_baclabor
-#
-
-CREATE TABLE care_test_request_baclabor (
-   batch_nr int(11) NOT NULL auto_increment,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   material text NOT NULL,
-   test_type text NOT NULL,
-   material_note tinytext NOT NULL,
-   diagnosis_note tinytext NOT NULL,
-   immune_supp tinyint(4) DEFAULT '0' NOT NULL,
-   send_date date DEFAULT '0000-00-00' NOT NULL,
-   sample_date date DEFAULT '0000-00-00' NOT NULL,
-   status varchar(10) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (batch_nr),
-   KEY send_date (send_date)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_test_request_blood
-#
-
-CREATE TABLE care_test_request_blood (
-   batch_nr int(11) NOT NULL auto_increment,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   blood_group varchar(10) NOT NULL,
-   rh_factor varchar(10) NOT NULL,
-   kell varchar(10) NOT NULL,
-   date_protoc_nr varchar(45) NOT NULL,
-   pure_blood varchar(15) NOT NULL,
-   red_blood varchar(15) NOT NULL,
-   leukoless_blood varchar(15) NOT NULL,
-   washed_blood varchar(15) NOT NULL,
-   prp_blood varchar(15) NOT NULL,
-   thrombo_con varchar(15) NOT NULL,
-   ffp_plasma varchar(15) NOT NULL,
-   transfusion_dev varchar(15) NOT NULL,
-   match_sample tinyint(4) DEFAULT '0' NOT NULL,
-   transfusion_date date DEFAULT '0000-00-00' NOT NULL,
-   diagnosis tinytext NOT NULL,
-   notes tinytext NOT NULL,
-   send_date date DEFAULT '0000-00-00' NOT NULL,
-   doctor varchar(35) NOT NULL,
-   phone_nr varchar(40) NOT NULL,
-   status varchar(10) NOT NULL,
-   blood_pb tinytext NOT NULL,
-   blood_rb tinytext NOT NULL,
-   blood_llrb tinytext NOT NULL,
-   blood_wrb tinytext NOT NULL,
-   blood_prp tinyblob NOT NULL,
-   blood_tc tinytext NOT NULL,
-   blood_ffp tinytext NOT NULL,
-   b_group_count mediumint(9) DEFAULT '0' NOT NULL,
-   b_group_price float(10,2) DEFAULT '0.00' NOT NULL,
-   a_subgroup_count mediumint(9) DEFAULT '0' NOT NULL,
-   a_subgroup_price float(10,2) DEFAULT '0.00' NOT NULL,
-   extra_factors_count mediumint(9) DEFAULT '0' NOT NULL,
-   extra_factors_price float(10,2) DEFAULT '0.00' NOT NULL,
-   coombs_count mediumint(9) DEFAULT '0' NOT NULL,
-   coombs_price float(10,2) DEFAULT '0.00' NOT NULL,
-   ab_test_count mediumint(9) DEFAULT '0' NOT NULL,
-   ab_test_price float(10,2) DEFAULT '0.00' NOT NULL,
-   crosstest_count mediumint(9) DEFAULT '0' NOT NULL,
-   crosstest_price float(10,2) DEFAULT '0.00' NOT NULL,
-   ab_diff_count mediumint(9) DEFAULT '0' NOT NULL,
-   ab_diff_price float(10,2) DEFAULT '0.00' NOT NULL,
-   x_test_1_code mediumint(9) DEFAULT '0' NOT NULL,
-   x_test_1_name varchar(35) NOT NULL,
-   x_test_1_count mediumint(9) DEFAULT '0' NOT NULL,
-   x_test_1_price float(10,2) DEFAULT '0.00' NOT NULL,
-   x_test_2_code mediumint(9) DEFAULT '0' NOT NULL,
-   x_test_2_name varchar(35) NOT NULL,
-   x_test_2_count mediumint(9) DEFAULT '0' NOT NULL,
-   x_test_2_price float(10,2) DEFAULT '0.00' NOT NULL,
-   x_test_3_code mediumint(9) DEFAULT '0' NOT NULL,
-   x_test_3_name varchar(35) NOT NULL,
-   x_test_3_count mediumint(9) DEFAULT '0' NOT NULL,
-   x_test_3_price float(10,2) DEFAULT '0.00' NOT NULL,
-   lab_stamp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   release_via varchar(20) NOT NULL,
-   receipt_ack varchar(20) NOT NULL,
-   mainlog_nr varchar(7) NOT NULL,
-   lab_nr varchar(7) NOT NULL,
-   mainlog_date date DEFAULT '0000-00-00' NOT NULL,
-   lab_date date DEFAULT '0000-00-00' NOT NULL,
-   mainlog_sign varchar(20) NOT NULL,
-   lab_sign varchar(20) NOT NULL,
-   history text,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (batch_nr),
-   KEY send_date (send_date)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_test_request_chemlabor
-#
-
-CREATE TABLE care_test_request_chemlabor (
-   batch_nr int(11) NOT NULL auto_increment,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   room_nr varchar(10) NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   parameters text NOT NULL,
-   doctor_sign varchar(35) NOT NULL,
-   highrisk smallint(1) DEFAULT '0' NOT NULL,
-   notes tinytext NOT NULL,
-   send_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   sample_time time DEFAULT '00:00:00' NOT NULL,
-   sample_weekday smallint(1) DEFAULT '0' NOT NULL,
-   status varchar(15) NOT NULL,
-   history text,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (batch_nr),
-   KEY encounter_nr (encounter_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_test_request_generic
-#
-
-CREATE TABLE care_test_request_generic (
-   batch_nr int(11) DEFAULT '0' NOT NULL,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   testing_dept varchar(35) NOT NULL,
-   visit tinyint(1) DEFAULT '0' NOT NULL,
-   order_patient tinyint(1) DEFAULT '0' NOT NULL,
-   diagnosis_quiry text NOT NULL,
-   send_date date DEFAULT '0000-00-00' NOT NULL,
-   send_doctor varchar(35) NOT NULL,
-   result text NOT NULL,
-   result_date date DEFAULT '0000-00-00' NOT NULL,
-   result_doctor varchar(35) NOT NULL,
-   status varchar(10) NOT NULL,
-   history text,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   KEY batch_nr (batch_nr, encounter_nr),
-   PRIMARY KEY (batch_nr),
-   KEY send_date (send_date)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_test_request_patho
-#
-
-CREATE TABLE care_test_request_patho (
-   batch_nr int(11) unsigned NOT NULL auto_increment,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   quick_cut tinyint(4) DEFAULT '0' NOT NULL,
-   qc_phone varchar(40) NOT NULL,
-   quick_diagnosis tinyint(4) DEFAULT '0' NOT NULL,
-   qd_phone varchar(40) NOT NULL,
-   material_type varchar(25) NOT NULL,
-   material_desc text NOT NULL,
-   localization tinytext NOT NULL,
-   clinical_note tinytext NOT NULL,
-   extra_note tinytext NOT NULL,
-   repeat_note tinytext NOT NULL,
-   gyn_last_period varchar(25) NOT NULL,
-   gyn_period_type varchar(25) NOT NULL,
-   gyn_gravida varchar(25) NOT NULL,
-   gyn_menopause_since varchar(25) DEFAULT '0' NOT NULL,
-   gyn_hysterectomy varchar(25) DEFAULT '0' NOT NULL,
-   gyn_contraceptive varchar(25) DEFAULT '0' NOT NULL,
-   gyn_iud varchar(25) NOT NULL,
-   gyn_hormone_therapy varchar(25) NOT NULL,
-   doctor_sign varchar(35) NOT NULL,
-   op_date date DEFAULT '0000-00-00' NOT NULL,
-   send_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-   status varchar(10) NOT NULL,
-   entry_date date DEFAULT '0000-00-00' NOT NULL,
-   journal_nr varchar(15) NOT NULL,
-   blocks_nr int(11) DEFAULT '0' NOT NULL,
-   deep_cuts int(11) DEFAULT '0' NOT NULL,
-   special_dye varchar(35) NOT NULL,
-   immune_histochem varchar(35) NOT NULL,
-   hormone_receptors varchar(35) NOT NULL,
-   specials varchar(35) NOT NULL,
-   history text,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   process_id varchar(35) NOT NULL,
-   process_time timestamp(14),
-   PRIMARY KEY (batch_nr),
-   KEY encounter_nr (encounter_nr),
-   KEY send_date (send_date)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_test_request_radio
-#
-
-CREATE TABLE care_test_request_radio (
-   batch_nr int(11) DEFAULT '0' NOT NULL,
-   encounter_nr int(11) unsigned DEFAULT '0' NOT NULL,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   xray tinyint(1) DEFAULT '0' NOT NULL,
-   ct tinyint(1) DEFAULT '0' NOT NULL,
-   sono tinyint(1) DEFAULT '0' NOT NULL,
-   mammograph tinyint(1) DEFAULT '0' NOT NULL,
-   mrt tinyint(1) DEFAULT '0' NOT NULL,
-   nuclear tinyint(1) DEFAULT '0' NOT NULL,
-   if_patmobile tinyint(1) DEFAULT '0' NOT NULL,
-   if_allergy tinyint(1) DEFAULT '0' NOT NULL,
-   if_hyperten tinyint(1) DEFAULT '0' NOT NULL,
-   if_pregnant tinyint(1) DEFAULT '0' NOT NULL,
-   clinical_info text NOT NULL,
-   test_request text NOT NULL,
-   send_date date DEFAULT '0000-00-00' NOT NULL,
-   send_doctor varchar(35) DEFAULT '0' NOT NULL,
-   xray_nr varchar(9) DEFAULT '0' NOT NULL,
-   r_cm_2 varchar(15) NOT NULL,
-   mtr varchar(35) NOT NULL,
-   xray_date date DEFAULT '0000-00-00' NOT NULL,
-   xray_time time DEFAULT '00:00:00' NOT NULL,
-   results text NOT NULL,
-   results_date date DEFAULT '0000-00-00' NOT NULL,
-   results_doctor varchar(35) NOT NULL,
-   status varchar(10) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   process_id varchar(35) NOT NULL,
-   process_time timestamp(14),
-   KEY batch_nr (batch_nr, encounter_nr),
-   PRIMARY KEY (batch_nr),
-   KEY send_date (xray_time),
-   UNIQUE batch_nr_2 (batch_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_anaesthesia
-#
-
-CREATE TABLE care_type_anaesthesia (
-   nr smallint(2) unsigned NOT NULL auto_increment,
-   id varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255),
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   UNIQUE id (id)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_application
-#
-
-CREATE TABLE care_type_application (
-   nr int(11) NOT NULL auto_increment,
-   group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255),
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_assignment
-#
-
-CREATE TABLE care_type_assignment (
-   type_nr int(10) unsigned DEFAULT '0' NOT NULL,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(25) DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (type)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_cause_opdelay
-#
-
-CREATE TABLE care_type_cause_opdelay (
-   type_nr smallint(5) unsigned NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   cause varchar(255) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (type_nr),
-   KEY type (type)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_color
-#
-
-CREATE TABLE care_type_color (
-   color_id varchar(25) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   PRIMARY KEY (color_id)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_department
-#
-
-CREATE TABLE care_type_department (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   KEY type (type)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_discharge
-#
-
-CREATE TABLE care_type_discharge (
-   nr smallint(3) unsigned NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   name varchar(100) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_duty
-#
-
-CREATE TABLE care_type_duty (
-   type_nr smallint(5) unsigned NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (type_nr),
-   KEY type (type)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_encounter
-#
-
-CREATE TABLE care_type_encounter (
-   type_nr int(10) unsigned NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(25) DEFAULT '0' NOT NULL,
-   description varchar(255) NOT NULL,
-   hide_from tinyint(4) DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (type_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_ethnic_orig
-#
-
-CREATE TABLE care_type_ethnic_orig (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   class_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   KEY type (class_nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_feeding
-#
-
-CREATE TABLE care_type_feeding (
-   nr smallint(2) unsigned NOT NULL auto_increment,
-   group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255),
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Table structure for table `care_type_immunization`
-#
-
-CREATE TABLE care_type_immunization (
-  nr smallint(5) unsigned NOT NULL auto_increment,
-  type varchar(20) NOT NULL default '',
-  name varchar(20) NOT NULL default '',
-  LD_var varchar(35) NOT NULL default '',
-  period smallint(6) default '0',
-  tolerance smallint(3) default '0',
-  dosage text,
-  medicine text NOT NULL,
-  titer text,
-  note text,
-  application tinyint(3) default '0',
-  status varchar(25) NOT NULL default 'normal',
-  history text,
-  modify_id varchar(35) default NULL,
-  modify_time timestamp(14) NOT NULL,
-  create_id varchar(35) NOT NULL default '',
-  create_time timestamp(14) NOT NULL,
-  PRIMARY KEY  (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_insurance
-#
-
-CREATE TABLE care_type_insurance (
-   type_nr int(11) NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   name varchar(60) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (type_nr),
-   KEY type (type)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_localization
-#
-
-CREATE TABLE care_type_localization (
-   nr tinyint(3) unsigned NOT NULL auto_increment,
-   category varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   short_code char(1) NOT NULL,
-   LD_var_short_code varchar(25) NOT NULL,
-   description varchar(255) NOT NULL,
-   hide_from varchar(255) DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_location
-#
-
-CREATE TABLE care_type_location (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_measurement
-#
-
-CREATE TABLE care_type_measurement (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_notes
-#
-
-CREATE TABLE care_type_notes (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   sort_nr smallint(6) DEFAULT '0' NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   UNIQUE type (type)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_outcome
-#
-
-CREATE TABLE care_type_outcome (
-   nr smallint(2) unsigned NOT NULL auto_increment,
-   group_nr tinyint(3) unsigned DEFAULT '0' NOT NULL,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_perineum
-#
-
-CREATE TABLE care_type_perineum (
-   nr smallint(2) unsigned NOT NULL auto_increment,
-   id varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   UNIQUE id (id)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_prescription
-#
-
-CREATE TABLE care_type_prescription (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_room
-#
-
-CREATE TABLE care_type_room (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_test
-#
-
-CREATE TABLE care_type_test (
-   type_nr smallint(5) unsigned NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (type_nr),
-   KEY type (type)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_time
-#
-
-CREATE TABLE care_type_time (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   KEY type (type)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_type_unit_measurement
-#
-
-CREATE TABLE care_type_unit_measurement (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   type varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   description varchar(255) NOT NULL,
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   KEY type (type)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_unit_measurement
-#
-
-CREATE TABLE care_unit_measurement (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   unit_type_nr smallint(2) unsigned DEFAULT '0' NOT NULL,
-   id varchar(15) NOT NULL,
-   name varchar(35) NOT NULL,
-   LD_var varchar(35) NOT NULL,
-   sytem varchar(35) NOT NULL,
-   use_frequency bigint(20),
-   status varchar(25) NOT NULL,
-   modify_id varchar(35) NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(35) NOT NULL,
-   create_time timestamp(14),
-   PRIMARY KEY (nr),
-   UNIQUE id (id)
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_users
-#
-
-CREATE TABLE `care_users` (
-  `name` varchar(60) collate latin1_general_ci NOT NULL,
-  `login_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `password` varchar(255) collate latin1_general_ci default NULL,
-  `personell_nr` int(10) unsigned NOT NULL default '0',
-  `lockflag` tinyint(3) unsigned default '0',
-  `permission` text collate latin1_general_ci NOT NULL,
-  `exc` tinyint(1) NOT NULL default '0',
-  `s_date` date NOT NULL default '0000-00-00',
-  `s_time` time NOT NULL default '00:00:00',
-  `expire_date` date NOT NULL default '0000-00-00',
-  `expire_time` time NOT NULL default '00:00:00',
-  `dept_nr` text collate latin1_general_ci NOT NULL COMMENT 'the department in wich the user is allowed to enter / view',
-  `status` varchar(15) collate latin1_general_ci NOT NULL,
-  `history` text collate latin1_general_ci NOT NULL,
-  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (`login_id`),
-  KEY `login_id` (`login_id`)
+  PRIMARY KEY  (`nr`),
+  KEY `pid` (`pid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci ROW_FORMAT=DYNAMIC COMMENT='InnoDB free: 4096 kB' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_billing_archive`
+--
+
+CREATE TABLE `care_billing_archive` (
+  `bill_no` bigint(20) NOT NULL default '0',
+  `encounter_nr` int(10) NOT NULL default '0',
+  `patient_name` tinytext collate latin1_general_ci NOT NULL,
+  `vorname` varchar(35) collate latin1_general_ci NOT NULL default '0',
+  `bill_date_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `bill_amt` double(16,4) NOT NULL default '0.0000',
+  `payment_date_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `payment_mode` text collate latin1_general_ci NOT NULL,
+  `cheque_no` varchar(10) collate latin1_general_ci NOT NULL default '0',
+  `creditcard_no` varchar(10) collate latin1_general_ci NOT NULL default '0',
+  `paid_by` varchar(15) collate latin1_general_ci NOT NULL default '0',
+  PRIMARY KEY  (`bill_no`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
-
-#
-# Tabellenstruktur für Tabelle care_version
-#
-
-CREATE TABLE care_version (
-   name varchar(20) NOT NULL,
-   type varchar(20) NOT NULL,
-   number varchar(10) NOT NULL,
-   build varchar(5) NOT NULL,
-   date date DEFAULT '0000-00-00' NOT NULL,
-   time time DEFAULT '00:00:00' NOT NULL,
-   releaser varchar(30) NOT NULL
-);
-
-# --------------------------------------------------------
-
-#
-# Tabellenstruktur für Tabelle care_ward
-#
-
-CREATE TABLE care_ward (
-   nr smallint(5) unsigned NOT NULL auto_increment,
-   ward_id varchar(35) NOT NULL,
-   name varchar(35) NOT NULL,
-   is_temp_closed tinyint(1) DEFAULT '0' NOT NULL,
-   date_create date DEFAULT '0000-00-00' NOT NULL,
-   date_close date DEFAULT '0000-00-00' NOT NULL,
-   description text,
-   info tinytext,
-   dept_nr smallint(5) unsigned DEFAULT '0' NOT NULL,
-   room_nr_start smallint(6) DEFAULT '0' NOT NULL,
-   room_nr_end smallint(6) DEFAULT '0' NOT NULL,
-   roomprefix varchar(4),
-   status varchar(25) NOT NULL,
-   history text NOT NULL,
-   modify_id varchar(25) DEFAULT '0' NOT NULL,
-   modify_time timestamp(14),
-   create_id varchar(25) DEFAULT '0' NOT NULL,
-   create_time timestamp(14),
-   KEY ward_id (ward_id),
-   PRIMARY KEY (nr)
-);
-    
-
-
-# The preloaded data follows ################################################
-
-#
-# Dumping data for table care_category_diagnosis
-#
-
-INSERT INTO care_category_diagnosis VALUES ('1', 'most_responsible', 'Most responsible', 'LDMostResponsible', 'M', 'LDMostResp_s', 'Most responsible diagnosis, must be only one per admission or visit', '0', '', '', '', 20030525120956, '', 00000000000000);
-INSERT INTO care_category_diagnosis VALUES ('2', 'associated', 'Associated', 'LDAssociated', 'A', 'LDAssociated_s', 'Associated diagnosis, can be several per  admission or visit', '0', '', '', '', 20030525121005, '', 00000000000000);
-INSERT INTO care_category_diagnosis VALUES ('3', 'nosocomial', 'Hospital acquired', 'LDNosocomial', 'N', 'LDNosocomial_s', 'Hospital acquired problem, can be several per admission or visit', '0', '', '', '', 20030525121015, '', 00000000000000);
-INSERT INTO care_category_diagnosis VALUES ('4', 'iatrogenic', 'Iatrogenic', 'LDIatrogenic', 'I', 'LDIatrogenic_s', 'Problem resulting from a procedural/surgical complication or medication mistake', '0', '', '', '', 20030525121025, '', 00000000000000);
-INSERT INTO care_category_diagnosis VALUES ('5', 'other', 'Other', 'LDOther', 'O', 'LDOther_s', 'Other  diagnosis', '0', '', '', '', 20030525121033, '', 00000000000000);
-
-#
-# Dumping data for table care_category_disease
-#
-
-INSERT INTO care_category_disease VALUES ('1', '2', 'asphyxia', 'Asphyxia', 'LDAsphyxia', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_category_disease VALUES ('2', '2', 'infection', 'Infection', 'LDInfection', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_category_disease VALUES ('3', '2', 'congenital_abnomality', 'Congenital abnormality', 'LDCongenitalAbnormality', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_category_disease VALUES ('4', '2', 'trauma', 'Trauma', 'LDTrauma', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_category_procedure
-#
-
-INSERT INTO care_category_procedure VALUES ('1', 'main', 'Main', 'LDMain', 'M', 'LDMain_s', 'Main procedure, must be only one per op or intervention visit', '0', '', '', '', 20030614013508, '', 00000000000000);
-INSERT INTO care_category_procedure VALUES ('2', 'supplemental', 'Supplemental', 'LDSupplemental', 'S', 'LDSupp_s', 'Supplemental procedure, can be several per  encounter op or intervention or visit', '0', '', '', '', 20030614015324, '', 00000000000000);
-
-#
-# Dumping data for table care_class_encounter
-#
-
-INSERT INTO care_class_encounter VALUES (1, 'inpatient', 'Inpatient', 'LDStationary', 'Inpatient admission - stays at least in a ward and assigned a bed', '0', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_encounter VALUES (2, 'outpatient', 'Outpatient', 'LDAmbulant', 'Outpatient visit - does not stay in a ward nor assigned a bed', '0', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_class_ethnic_orig
-#
-
-INSERT INTO care_class_ethnic_orig VALUES (1, 'race', 'LDRace', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_ethnic_orig VALUES (2, 'country', 'LDCountry', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_class_financial
-#
-
-INSERT INTO care_class_financial VALUES (1, 'care_c', 'care', 'c', 'common', 'LDcommon', 'Common nursing care services. (Non-private)', 'Patient with common health fund insurance policy.', '', '', '', 20021229134050, '', 00000000000000);
-INSERT INTO care_class_financial VALUES (2, 'care_pc', 'care', 'p/c', 'private + common', 'LDprivatecommon', 'Private services added to common services', 'Patient with common health fund insurance\r\npolicy with additional private insurance policy\r\nOR self paying components.', '', '', '', 20021229134451, '', 20021229134451);
-INSERT INTO care_class_financial VALUES (3, 'care_p', 'care', 'p', 'private', 'LDprivate', 'Private nursing care services', 'Patient with private insurance policy\r\nOR self paying.', 'LDprivate', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_financial VALUES (4, 'care_pp', 'care', 'pp', 'private plus', 'LDprivateplus', '"Very private" nursing care services', 'Patient with private health insurance policy\r\nAND self paying components.', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_financial VALUES (5, 'room_c', 'room', 'c', 'common', 'LDcommon', 'Common room services (non-private)', 'Patient with common health fund insurance policy. ', 'LDcommon', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_financial VALUES (6, 'room_pc', 'room', 'p/c', 'private + common', '', 'Private services added to common services', 'Patient with common health fund insurance policy with additional private insurance policy OR self paying components.', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_financial VALUES (7, 'room_p', 'room', 'p', 'private', '', 'Private room services', 'Patient with private insurance policy OR self paying. ', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_financial VALUES (8, 'room_pp', 'room', 'pp', 'private plus', '', '"Very private" room services', 'Patient with private health insurance policy AND self paying components.', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_financial VALUES (9, 'att_dr_c', 'att_dr', 'c', 'common', '', 'Common clinician services', 'Patient with common health fund insurance policy. ', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_financial VALUES (10, 'att_dr_pc', 'att_dr', 'p/c', 'private + common', '', 'Private services added to common clinician services', 'Patient with common health fund insurance policy with additional private insurance policy OR self paying components.', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_financial VALUES (11, 'att_dr_p', 'att_dr', 'p', 'private', '', 'Private clinician services', 'Patient with private insurance policy OR self paying.', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_financial VALUES (12, 'att_dr_pp', 'att_dr', 'pp', 'private plus', '', '"Very private" clinician services', 'Patient with private health insurance policy AND self paying components.', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_class_insurance
-#
-
-INSERT INTO care_class_insurance VALUES (1, 'private', 'Private', 'LDPrivate', 'Private insurance plan (paid by insured alone)', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_insurance VALUES (2, 'common', 'Health Fund', 'LDInsurance', 'Public (common) health fund - usually paid both by the insured and his employer, eventually paid by the state', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_insurance VALUES (3, 'self_pay', 'Self pay', 'LDSelfPay', '', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_class_therapy
-#
-
-INSERT INTO care_class_therapy VALUES (1, '2', 'photo', 'Phototherapy', 'LDPhototherapy', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_therapy VALUES (2, '2', 'iv', 'IV Fluids', 'LDIVFluids', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_therapy VALUES (3, '2', 'oxygen', 'Oxygen therapy', 'LDOxygenTherapy', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_therapy VALUES (4, '2', 'cpap', 'CPAP', 'LDCPAP', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_therapy VALUES (5, '2', 'ippv', 'IPPV', 'LDIPPV', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_therapy VALUES (6, '2', 'nec', 'NEC', 'LDNEC', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_therapy VALUES (7, '2', 'tpn', 'TPN', 'LDTPN', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_class_therapy VALUES (8, '2', 'hie', 'HIE', 'LDHIE', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_classif_neonatal
-#
-
-INSERT INTO care_classif_neonatal VALUES (1, 'jaundice', 'Neonatal jaundice', 'LDNeonatalJaundice',  NULL, '', '', 20030807125731, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (2, 'x_transfusion', 'Exchange transfusion', 'LDExchangeTransfusion',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (3, 'photo_therapy', 'Photo therapy', 'LDPhotoTherapy',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (4, 'h_i_encep', 'Hypoxic ischaemic encephalopathy', 'LDH_I_Encephalopathy',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (5, 'parenteral', 'Parenteral nutrition', 'LDParenteralNutrition',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (6, 'vent_support', 'Ventilatory support', 'LDVentilatorySupport',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (7, 'oxygen_therapy', 'Oxygen therapy', 'LDOxygenTherapy',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (8, 'cpap', 'CPAP', 'LDCPAP', 'Continuous positive airway pressure', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (9, 'congenital_abnormality', 'Congenital abnormality', 'LDCongenitalAbnormality',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (10, 'congenital_infection', 'Congenital infection', 'LDCongenitalInfection',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (11, 'acquired_infection', 'Acquired infection', 'LDAcquiredInfection',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (12, 'gbs_infection', 'GBS infection', 'LDGBSInfection', 'Group B Strep Infection', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (13, 'rds', 'Resp Distress Syndrome', 'LDRespDistressSyndrome',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (14, 'blood_transfusion', 'Blood transfusion', 'LDBloodTransfusion',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (15, 'antibiotic_therapy', 'Antibiotic therapy', 'LDAntibioticTherapy',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_classif_neonatal VALUES (16, 'necrotising_enterocolitis', 'Necrotising enterocolitis', 'LDNecrotisingEnterocolitis',  NULL, '', '', 20030807191727, '', 00000000000000);
-
-#
-# Dumping data for table care_complication
-#
-
-INSERT INTO care_complication VALUES (1, 1, 'Previous C/S', 'LDPreviousCS', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (2, 1, 'Pre-eclampsia', 'LDPreEclampsia', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (3, 1, 'Eclampsia', 'LDEclampsia', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (4, 1, 'Other hypertension', 'LDOtherHypertension', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (5, 1, 'Other proteinuria', 'LDProteinuria', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (6, 1, 'Cardiac', 'LDCardiac', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (7, 1, 'Anaemia < 8.5g', 'LDAnaemia', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (8, 1, 'Asthma', 'LDAsthma', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (9, 1, 'Epilepsy', 'LDEpilepsy', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (10, 1, 'Placenta praevia', 'LDPlacentaPraevia', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (11, 1, 'Abruptio placentae', 'LDAbruptioPlacentae', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (12, 1, 'Other APH', 'LDOtherAPH', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (13, 1, 'Diabetes', 'LDDiabetes', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (14, 1, 'Cord prolapse', 'LDCordProlapse', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (15, 1, 'Ruptured uterus', 'LDRupturedUterus', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_complication VALUES (16, 1, 'Extrauterine pregnancy', 'LDExtraUterinePregnancy', '', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_config_global
-#
-
-
-INSERT INTO care_config_global VALUES ('date_format', 'dd/MM/yyyy', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('time_format', 'HH.MM', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_reg_nr_adder', '10000000','', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_police_nr', '11?', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_fire_dept_nr', '12?', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_emgcy_nr', '13?', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_phone', '1234567', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_fax', '567890','', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_address', 'Virtualstr. 89AA\r\nCyberia 89300\r\nLas Vegas County', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('main_info_email', 'contact@care2x.com', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_id_nr_adder', '10000000', '', '', '', '', 00000000000000, '', 000000000000000);
-INSERT INTO care_config_global VALUES ('patient_outpatient_nr_adder', '500000','', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_inpatient_nr_adder', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_2_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_3_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_middle_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_maiden_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_ethnic_orig_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_name_others_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_nat_id_nr_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_religion_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_cellphone_2_nr_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_phone_2_nr_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_citizenship_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_sss_nr_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('language_default', 'en', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('language_single', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('mascot_hide', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('mascot_style', 'default', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('gui_frame_left_nav_width', '150', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('gui_frame_left_nav_border', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_fotos_path', 'fotos/news/', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_title_font_size', '5', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_title_font_face', 'arial,verdana,helvetica,sans serif', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_title_font_color', '#CC3333', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_preface_font_size', '2', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_preface_font_face', 'arial,verdana,helvetica,sans serif','', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_preface_font_color', '#336666', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_body_font_size', '2', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_body_font_face', 'arial,verdana,helvetica,sans serif', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_body_font_color', '#000033', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_normal_preview_maxlen', '600', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_title_font_bold', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_headline_preface_font_bold', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('news_normal_display_width', '100%', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_fax_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_email_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_phone_1_nr_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_cellphone_1_nr_hide', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_foto_path', 'fotos/registration/', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_care_hide', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_room_hide', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_service_att_dr_hide', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_financial_class_single_result', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_2_show', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_3_show', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('patient_name_middle_show', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('theme_control_buttons', 'default', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('gui_frame_left_nav_bdcolor', '#990000', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('theme_control_theme_list', 'default,blue_aqua', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('medocs_text_preview_maxlen', '100', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('personell_nr_adder', '100000', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('notes_preview_maxlen', '120', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_id_nr_init', '10000000', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('personell_nr_init', '100000', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('encounter_nr_init', '000000', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('encounter_nr_fullyear_prepend', '1', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('theme_mascot', 'default', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_address_list_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_address_search_max_block_rows', '25', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_insurance_list_max_block_rows', '30', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_insurance_search_max_block_rows', '25', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_personell_search_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_person_search_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_personell_list_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_patient_search_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_or_patient_search_max_block_rows', '5', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('timeout_inactive', '0', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('timeout_time', '001500', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_title_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_bloodgroup_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_civilstatus_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_insurance_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_other_his_nr_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);    
-
-#
-# Dumping data for table care_config_user
-#
-
-INSERT INTO care_config_user VALUES ('default', 'a:19:{s:4:"mask";s:1:"1";s:11:"idx_bgcolor";s:7:"#99ccff";s:12:"idx_txtcolor";s:7:"#000066";s:9:"idx_hover";s:7:"#ffffcc";s:9:"idx_alink";s:7:"#ffffff";s:11:"top_bgcolor";s:7:"#99ccff";s:12:"top_txtcolor";s:7:"#330066";s:12:"body_bgcolor";s:7:"#ffffff";s:13:"body_txtcolor";s:7:"#000066";s:10:"body_hover";s:7:"#cc0033";s:10:"body_alink";s:7:"#cc0000";s:11:"bot_bgcolor";s:7:"#cccccc";s:12:"bot_txtcolor";s:4:"gray";s:5:"bname";s:0:"";s:8:"bversion";s:0:"";s:2:"ip";s:0:"";s:3:"cid";s:0:"";s:5:"dhtml";s:1:"1";s:4:"lang";s:0:"";}', 'default values', 'normal', 'installed', 'auto-installer', 0, 'auto-installer', 0);
-
-#
-# Dumping data for table care_currency
-#
-
-INSERT INTO care_currency VALUES (13, '€', 'Euro', 'European currency', 'main', 'Elpidio Latorilla', 20030802190637, '', 20021126200534);
-INSERT INTO care_currency VALUES (3, 'L', 'Pound', 'GB British Pound (ISO = GBP)', '', '', 20030213173107, '', 20020816230349);
-INSERT INTO care_currency VALUES (10, 'R', 'Rand', 'South African Rand (ISO = ZAR)', '', '', 20030802190637, 'Elpidio Latorilla', 20020817171805);
-INSERT INTO care_currency VALUES (8, 'R', 'Rupees', 'Indian Rupees (ISO = INR)', '', '', 20030213173059, 'Elpidio Latorilla', 20020920234306);
-
-#
-# Dumping data for table care_department
-#
-
-INSERT INTO care_department VALUES (1, 'pr', '2', 'Public Relations', 'PR', 'Press Relations', 'LDPressRelations', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (2, 'cafe', '2', 'Cafeteria', 'Cafe', 'Canteen', 'LDCafeteria', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (3, 'general_surgery', '1', 'General Surgery', 'General', 'General', 'LDGeneralSurgery', '', '1', '1', '1', '1', '1', '1', '0', '0', '8.30 - 21.00', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 20030828114327, '', 00000000000000);
-INSERT INTO care_department VALUES (4, 'emergency_surgery', '1', 'Emergency Surgery', 'Emergency', '', 'LDEmergencySurgery', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (5, 'plastic_surgery', '1', 'Plastic Surgery', 'Plastic', 'Aesthetic Surgery', 'LDPlasticSurgery', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (6, 'ent', '1', 'Ear-Nose-Throath', 'ENT', 'HNO', 'LDEarNoseThroath', 'Ear-Nose-Throath, in german Hals-Nasen-Ohren. The department with  very old traditions that date back to the early beginnings of premodern medicine.', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', 'kope akjdielj asdlkasdf', '', '', 'Update: 2003-08-13 23:24:16 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:25:27 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:29:05 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:30:21 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:31:52 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:34:08 Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20031019155346, '', 00000000000000);
-INSERT INTO care_department VALUES (7, 'opthalmology', '1', 'Opthalmology', 'Opthalmology', 'Eye Department', 'LDOpthalmology', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (8, 'pathology', '1', 'Pathology', 'Pathology', 'Patho', 'LDPathology', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (9, 'ob_gyn', '1', 'Ob-Gynecology', 'Ob-Gyne', 'Gyn', 'LDObGynecology', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (10, 'physical_therapy', '1', 'Physical Therapy', 'Physical', 'PT', 'LDPhysicalTherapy', 'Physical therapy department with on-call therapists. Day care clinics, training, rehab.', '1', '0', '1', '1', '0', '1', '1', '16', '8:00 - 15:00', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 20030828114351, '', 00000000000000);
-INSERT INTO care_department VALUES (11, 'internal_med', '1', 'Internal Medicine', 'Internal Med', 'InMed', 'LDInternalMedicine', '', '1', '1', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (12, 'imc', '1', 'Intermediate Care Unit', 'IMC', 'Intermediate', 'LDIntermediateCareUnit', '', '1', '1', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (13, 'icu', '1', 'Intensive Care Unit', 'ICU', 'Intensive', 'LDIntensiveCareUnit', '', '1', '1', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (14, 'emergency_ambulatory', '1', 'Emergency Ambulatory', 'Emergency', 'Emergency Amb', 'LDEmergencyAmbulatory', '', '0', '1', '1', '1', '0', '1', '1', '4', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', 'Update: 2003-09-23 00:06:27 Elpidio Latorilla\n', 'Elpidio Latorilla', 20030923000627, '', 00000000000000);
-INSERT INTO care_department VALUES (15, 'general_ambulatory', '1', 'General Ambulatory', 'Ambulatory', 'General Amb', 'LDGeneralAmbulatory', '', '0', '1', '1', '1', '0', '1', '1', '3', 'round the clock', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 20030828114254, '', 00000000000000);
-INSERT INTO care_department VALUES (16, 'inmed_ambulatory', '1', 'Internal Medicine Ambulatory', 'InMed Ambulatory', 'InMed Amb', 'LDInternalMedicineAmbulatory', '', '0', '1', '1', '1', '0', '1', '1', '11', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (17, 'sonography', '1', 'Sonography', 'Sono', 'Ultrasound diagnostics', 'LDSonography', '', '0', '1', '1', '1', '0', '1', '1', '11', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (18, 'nuclear_diagnostics', '1', 'Nuclear Diagnostics', 'Nuclear', 'Nuclear Testing', 'LDNuclearDiagnostics', '', '0', '1', '1', '1', '0', '1', '1', '19', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (19, 'radiology', '1', 'Radiology', 'Radiology', 'Xray', 'LDRadiology', '', '0', '1', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (20, 'oncology', '1', 'Oncology', 'Oncology', 'Cancer Department', 'LDOncology', '', '1', '1', '1', '1', '1', '1', '0', '11', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (21, 'neonatal', '1', 'Neonatal', 'Neonatal', 'Newborn Department', 'LDNeonatal', '', '1', '1', '1', '1', '1', '1', '1', '9', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '343', '', '', '', 'Update: 2003-08-13 22:32:07 Elpidio Latorilla\nUpdate: 2003-08-13 22:33:10 Elpidio Latorilla\nUpdate: 2003-08-13 22:43:39 Elpidio Latorilla\nUpdate: 2003-08-13 22:43:59 Elpidio Latorilla\nUpdate: 2003-08-13 22:44:19 Elpidio Latorilla\n', 'Elpidio Latorilla', 20030813224419, '', 00000000000000);
-INSERT INTO care_department VALUES (22, 'central_lab', '1', 'Central Laboratory', 'Central Lab', 'General Lab', 'LDCentralLaboratory', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', 'kdkdododospdfjdasljfda\r\nasdflasdjf\r\nasdfklasdjflasdjf', '', '', 'Update: 2003-08-13 23:12:30 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:14:59 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:15:28 Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20030828114243, '', 00000000000000);
-INSERT INTO care_department VALUES (23, 'serological_lab', '1', 'Serological Laboratory', 'Serological Lab', 'Serum Lab', 'LDSerologicalLaboratory', '', '0', '1', '1', '1', '0', '1', '1', '22', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (24, 'chemical_lab', '1', 'Chemical Laboratory', 'Chemical Lab', 'Chem Lab', 'LDChemicalLaboratory', '', '0', '1', '1', '1', '0', '1', '1', '22', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (25, 'bacteriological_lab', '1', 'Bacteriological Laboratory', 'Bacteriological Lab', 'Bacteria Lab', 'LDBacteriologicalLaboratory', '', '0', '1', '1', '1', '0', '1', '1', '22', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (26, 'tech', '2', 'Technical Maintenance', 'Tech', 'Technical Support', 'LDTechnicalMaintenance', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', 'jpg', '', 'Update: 2003-08-10 23:42:30 Elpidio Latorilla\n', 'Elpidio Latorilla', 20030810234230, '', 00000000000000);
-INSERT INTO care_department VALUES (27, 'it', '2', 'IT Department', 'IT', 'EDP', 'LDITDepartment', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (28, 'management', '2', 'Management', 'Management', 'Busines Administration', 'LDManagement', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (29, 'exhibition', '3', 'Exhibitions', 'Exhibit', 'Showcases', 'LDExhibitions', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (30, 'edu', '3', 'Education', 'Edu', 'Training', 'LDEducation', 'Education news bulletin of the hospital.', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', 'Update: 2003-08-13 22:44:45 Elpidio Latorilla\nUpdate: 2003-08-13 23:00:37 Elpidio Latorilla\n', 'Elpidio Latorilla', 20030813230037, '', 00000000000000);
-INSERT INTO care_department VALUES (31, 'study', '3', 'Studies', 'Studies', 'Advance studies or on-the-job training', 'LDStudies', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (32, 'health_tip', '3', 'Health Tips', 'Tips', 'Health Information', 'LDHealthTips', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (33, 'admission', '2', 'Admission', 'Admit', 'Admission information', 'LDAdmission', '', '0', '0', '1', '1', '1', '0', '1', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (34, 'news_headline', '3', 'Headline', 'News head', 'Major news', 'LDHeadline', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (35, 'cafenews', '3', 'Cafe News', 'Cafe news', 'Cafeteria news', 'LDCafeNews', '', '0', '0', '1', '1', '1', '0', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (36, 'nursing', '3', 'Nursing', 'Nursing', 'Nursing care', 'LDNursing', '', '1', '1', '1', '1', '1', '1', '1', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (37, 'doctors', '3', 'Doctors', 'Doctors', 'Medical personell', 'LDDoctors', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (38, 'pharmacy', '2', 'Pharmacy', 'Pharma', 'Drugstore', 'LDPharmacy', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (39, 'anaesthesiology', '1', 'Anesthesiology', 'ana', 'Anesthesia Department', 'LDAnesthesiology', 'Anesthesiology', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (40, 'general_ambulant', '1', 'General Outpatient Clinic', 'General Clinic', 'General Ambulatory Clinic', 'LDGeneralOutpatientClinic', 'Outpatient/Ambulant Clinic for general/internal medicine', '0', '1', '1', '1', '0', '0', '1', '16', 'round the clock', '8:30 AM - 11:30 AM , 2:00 PM - 5:30 PM', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_department VALUES (41, 'blood_bank', '1', 'Blood Bank', 'Blood Blank', 'Blood Lab', 'LDBloodBank', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-
-
-#
-# Dumping data for table care_effective_day
-#
-
-INSERT INTO care_effective_day VALUES ('1', 'entire stay', 'effective starting from admission date & ending on discharge date', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_effective_day VALUES ('2', 'admission day', 'Effective only on admission day', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_effective_day VALUES ('3', 'discharge day', 'Effective only on discharge day', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_effective_day VALUES ('4', 'op day', 'Effective only on operation day', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_effective_day VALUES ('5', 'transfer day', 'Effective only on transfer day', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_effective_day VALUES ('6', 'period', 'defined start and end dates', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_group
-#
-
-INSERT INTO care_group VALUES (1, 'pregnancy', 'Pregnancy', 'LDPregnancy', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_group VALUES (2, 'neonatal', 'Neonatal', 'LDNeonatal', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_group VALUES (3, 'encounter', 'Encounter', 'LDEncounter', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_group VALUES (4, 'op', 'OP', 'LDOP', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_group VALUES (5, 'anesthesia', 'Anesthesia', 'LDAnesthesia', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_group VALUES (6, 'prescription', 'Prescription', 'LDPrescription', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_menu_main
-#
-
-
-INSERT INTO care_menu_main VALUES ('1', '1', 'Home', 'LDHome', 'main/startframe.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('2', '5', 'Patient', 'LDPatient', 'modules/registration_admission/patient_register_pass.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('3', '10', 'Admission', 'LDAdmission', 'modules/registration_admission/aufnahme_pass.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('4', '15', 'Ambulatory', 'LDAmbulatory', 'modules/ambulatory/ambulatory.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('5', '20', 'Medocs', 'LDMedocs', 'modules/medocs/medocs_pass.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('6', '25', 'Doctors', 'LDDoctors', 'modules/doctors/doctors.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('7', '35', 'Nursing', 'LDNursing', 'modules/nursing/nursing.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('8', '40', 'OR', 'LDOR', 'main/op-doku.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('9', '45', 'Laboratories', 'LDLabs', 'modules/laboratory/labor.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('10', '50', 'Radiology', 'LDRadiology', 'modules/radiology/radiolog.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('11', '55', 'Pharmacy', 'LDPharmacy', 'modules/pharmacy/apotheke.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('12', '60', 'Medical Depot', 'LDMedDepot', 'modules/med_depot/medlager.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('13', '65', 'Directory', 'LDDirectory', 'modules/phone_directory/phone.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('14', '70', 'Tech Support', 'LDTechSupport', 'modules/tech/technik.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('15', '72', 'System Admin', 'LDEDP', 'modules/system_admin/edv.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('16', '75', 'Intranet Email', 'LDIntraEmail', 'modules/intranet_email/intra-email-pass.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('18', '85', 'Special Tools', 'LDSpecials', 'main/spediens.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('19', '90', 'Login', 'LDLogin', 'main/login.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('20', '7', 'Appointments', 'LDAppointments', 'modules/appointment_scheduler/appt_main_pass.php', '1', '',  '', 20030922232015, 20030405000145);
-
-#
-# Dumping data for table `care_menu_sub`
-#
-
-
-INSERT INTO care_menu_sub  VALUES ('3', '0', '2', '0', '', '', '', '', '../gui/img/common/default/new_group.gif', '../gui/img/common/default/new_group.gif', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('70', '0', '7', '0', '', '', '', '', '../gui/img/common/default/nurse.gif', '../gui/img/common/default/nurse.gif', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('20', '0', '1', '0', '', '', '', '', '../gui/img/common/default/articles.gif', '../gui/img/common/default/home.gif', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('30', '0', '20', '0', '', '', '', '', '../gui/img/common/default/calendar.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('5', '2', '2', '1', 'Admission', 'LDAdmission', '../modules/registration_admission/aufnahme_pass.php', '', '../gui/img/common/default/bn.gif', '../gui/img/common/default/bn.gif', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('1', '1', '2', '1', 'Registration', '', '../modules/registration_admission/patient_register_pass.php', '&target=entry', '../gui/img/common/default/post_discussion.gif', '', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('130', '1', '2', '1', 'Search', 'LDSearch', '../modules/registration_admission/patient_register_pass.php', '&target=search', '../gui/img/common/default/findnew.gif', '../gui/img/common/default/findnew.gif', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('135', '1', '2', '1', 'Archive', 'LDArchive', '../modules/registration_admission/patient_register_pass.php', '&target=archiv', '', '', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('140', '5', '2', '2', 'Search', 'LDSearch', '../modules/registration_admission/aufnahme_pass.php', '&target=search', '../gui/img/common/default/findnew.gif', '../gui/img/common/default/findnew.gif', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('145', '6', '2', '2', 'Archive', 'LDArchive', '../modules/registration_admission/aufnahme_pass.php', '&target=archiv', '', '', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('71', '1', '7', '1', 'Wards', '', '../modules/nursing/nursing.php', '', '../gui/img/common/default/bul_arrowgrnsm.gif', '../gui/img/common/default/bul_arrowgrnsm.gif', '', '', '[station]', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('155', '1', '3', '1', 'Archive', 'LDArchive', '../modules/registration_admission/aufnahme_pass.php', '&target=archiv', '', '', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('40', '0', '3', '0', '', '', '', '', '../gui/img/common/default/bn.gif', '../gui/img/common/default/bn.gif', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('165', '0', '13', '0', '', '', '', '', '../gui/img/common/default/violet_phone.gif', '../gui/img/common/default/violet_phone.gif', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('7', '3', '7', '1', 'Search', '', '../modules/nursing/nursing-patient-such-start.php', '', '../gui/img/common/default/findnew.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('72', '2', '7', '1', 'Quick view', '', '../modules/nursing/nursing-schnellsicht.php', '', '../gui/img/common/default/eye_s.gif', '', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('50', '0', '4', '0', '', '', '', '', '../gui/img/common/default/disc_unrd.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('120', '0', '6', '0', '', '', '', '', '../gui/img/common/default/forums.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('160', '0', '17', '0', '', '', '', '', '../gui/img/common/default/c-mail.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('190', '0', '16', '0', '', '', '', '', '../gui/img/common/default/bubble2.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('195', '0', '10', '0', '', '', '', '', '../gui/img/common/default/torso.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('200', '0', '18', '0', '', '', '', '', '../gui/img/common/default/settings_tree.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('205', '0', '11', '0', '', '', '', '', '../gui/img/common/default/add.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('160', '0', '19', '0', '', '', '', '', '../gui/img/common/default/padlock.gif', '../gui/img/common/default/bul_arrowgrnsm.gif', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('215', '0', '15', '0', '', '', '', '', '../gui/img/common/default/sections.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('220', '0', '12', '0', '', '', '', '', '../gui/img/common/default/storage.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('225', '0', '8', '0', '', '', '', '', '../gui/img/common/default/people_search_online.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('230', '0', '9', '0', '', '', '', '', '../gui/img/common/default/chart.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('235', '0', '14', '0', '', '', '', '', '../gui/img/common/default/settings_tree.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-
-
-#
-# Dumping data for table care_method_induction
-#
-
-INSERT INTO care_method_induction VALUES (3, '1', 'prostaglandin', 'Prostaglandin', 'LDProstaglandin', '', '', '', 20030805191247, '', 00000000000000);
-INSERT INTO care_method_induction VALUES (4, '1', 'oxytocin', 'Oxytocin', 'LDOxytocin', '', '', '', 20030805191254, '', 00000000000000);
-INSERT INTO care_method_induction VALUES (5, '1', 'arom', 'AROM', 'LDAROM', '', '', '', 20030805191302, '', 00000000000000);
-INSERT INTO care_method_induction VALUES (2, '1', 'unknown', 'Unknown', 'LDUnknown', '', '', '', 20030805191240, '', 00000000000000);
-INSERT INTO care_method_induction VALUES (1, '1', 'not_induced', 'Not induced', 'LDNotInduced', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_mode_delivery
-#
-
-INSERT INTO care_mode_delivery VALUES (1, '2', 'normal', 'Normal', 'LDNormal', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_mode_delivery VALUES (2, '2', 'breech', 'Breech', 'LDBreech', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_mode_delivery VALUES (3, '2', 'caesarian', 'Caesarian', 'LDCaesarian', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_mode_delivery VALUES (4, '2', 'forceps', 'Forceps', 'LDForceps', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_mode_delivery VALUES (5, '2', 'vacuum', 'Vacuum', 'LDVacuum', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_registry
-#
-
-INSERT INTO care_registry VALUES ('amb', 'modules/ambulatory/ambulatory.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('dept', 'modules/news/departments.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('radiology', 'modules/radiology/radiolog.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('doctors', 'modules/doctors/doctors.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('nursing', 'modules/nursing/pflege.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('edp', 'modules/admin/edv.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('pharmacy', 'modules/pharmacy/apotheke.php', 'modules/news/newscolumns.php', '', '', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('pr', 'modules/news/start_page.php', 'modules/news/start_page.php', 'modules/news/headline-edit.php', 'modules/news/headline-read.php', 'modules/news/editor-pass.php', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('cafe', 'modules/cafeteria/cafenews.php', 'modules/cafeteria/cafenews.php', 'modules/cafenews/cafenews-edit.php', 'modules/cafenews/cafenews-read.php', 'modules/cafenews/cafenews-edit-pass.php', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('main_start', 'modules/news/start_page.php', 'modules/news/start_page.php', 'modules/news/headline-edit-select-art.php', 'modules/news/headline-read.php', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('it', 'modules/system_admin/edv.php', 'modules/news/newscolumns.php', 'modules/news/editor-4plus1-select-art.php', 'modules/news/editor-4plus1-read.php', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_registry VALUES ('admission_module', 'modules/admission/aufnahme_start.php', '', '', '', 'modules/admission/aufnahme_pass.php', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_role_person
-#
-
-INSERT INTO care_role_person VALUES (1, '3', 'contact', 'Contact person', 'LDContactPerson', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (2, '3', 'guarantor', 'Guarantor', 'LDGuarantor', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (3, '3', 'doctor_att', 'Attending doctor', 'LDAttDoctor', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (4, '3', 'supervisor', 'Supervisor', 'LDSupervisor', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (5, '3', 'doctor_admit', 'Admitting doctor', 'LDAdmittingDoctor', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (6, '3', 'doctor_consult', 'Consulting doctor', 'LDConsultingDoctor', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (7, '4', 'surgeon', 'Surgeon', 'LDSurgeon', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (8, '4', 'surgeon_asst', 'Assisting surgeon', 'LDAssistingSurgeon', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (9, '4', 'nurse_scrub', 'Scrub nurse', 'LDScrubNurse', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (10, '4', 'nurse_rotating', 'Rotating nurse', 'LDRotatingNurse', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (11, '4', 'nurse_anesthesia', 'Anesthesia nurse', 'LDAnesthesiaNurse', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (12, '4', 'anesthesiologist', 'Anesthesiologist', 'LDAnesthesiologist', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (13, '4', 'anesthesiologist_asst', 'Assisting anesthesiologist', 'LDAssistingAnesthesiologist', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (14, '0', 'nurse_on_call', 'Nurse On Call', 'LDNurseOnCall', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (15, '0', 'doctor_on_call', 'Doctor On Call', 'LDDoctorOnCall', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (16, '0', 'nurse', 'Nurse', 'LDNurse', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_role_person VALUES (17, '0', 'doctor', 'Doctor', 'LDDoctor', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_room
-#
-
-INSERT INTO care_room VALUES ('1', '2', '2003-04-27', '0000-00-00', '0', 1, 0, 0, '1', '',  NULL, '', '', '', 20030427175459, '', 20030427175459);
-INSERT INTO care_room VALUES ('2', '2', '2003-04-27', '0000-00-00', '0', 2, 0, 0, '1', '',  NULL, '', '', '', 20030427175704, '', 20030427175631);
-INSERT INTO care_room VALUES ('3', '2', '2003-04-27', '0000-00-00', '0', 3, 0, 0, '1', '',  NULL, '', '', '', 20030427175813, '', 20030427175727);
-INSERT INTO care_room VALUES ('4', '2', '2003-04-27', '0000-00-00', '0', 4, 0, 0, '1', '',  NULL, '', '', '', 20030427180021, '', 20030427175846);
-INSERT INTO care_room VALUES ('5', '2', '2003-04-27', '0000-00-00', '0', 5, 0, 0, '1', '',  NULL, '', '', '', 20030427180132, '', 20030427175927);
-INSERT INTO care_room VALUES ('6', '2', '2003-04-27', '0000-00-00', '0', 6, 0, 0, '1', '',  NULL, '', '', '', 20030427180122, '', 20030427180105);
-INSERT INTO care_room VALUES ('7', '2', '2003-04-27', '0000-00-00', '0', 7, 0, 0, '1', '',  NULL, '', '', '', 20030427180310, '', 20030427180310);
-INSERT INTO care_room VALUES ('8', '2', '2003-04-27', '0000-00-00', '0', 8, 0, 0, '1', '',  NULL, '', '', '', 20030427180350, '', 20030427180350);
-INSERT INTO care_room VALUES ('9', '2', '2003-04-27', '0000-00-00', '0', 9, 0, 0, '1', '',  NULL, '', '', '', 20030427180433, '', 20030427180433);
-INSERT INTO care_room VALUES ('10', '2', '2003-04-27', '0000-00-00', '0', 10, 0, 0, '1', '',  NULL, '', '', '', 20030427180503, '', 20030427180503);
-INSERT INTO care_room VALUES ('11', '2', '2003-04-27', '0000-00-00', '0', 11, 0, 0, '1', '',  NULL, '', '', '', 20030427180636, '', 20030427180636);
-INSERT INTO care_room VALUES ('12', '2', '2003-04-27', '0000-00-00', '0', 12, 0, 0, '1', '',  NULL, '', '', '', 20030427180759, '', 20030427180759);
-INSERT INTO care_room VALUES ('13', '2', '2003-04-27', '0000-00-00', '0', 13, 0, 0, '1', '',  NULL, '', '', '', 20030427180826, '', 20030427180826);
-INSERT INTO care_room VALUES ('14', '2', '2003-04-27', '0000-00-00', '0', 14, 0, 0, '1', '',  NULL, '', '', '', 20030427180852, '', 20030427180852);
-INSERT INTO care_room VALUES ('15', '2', '2003-04-27', '0000-00-00', '0', 15, 0, 0, '1', '',  NULL, '', '', '', 20030427180918, '', 20030427180918);
-
-#
-# Dumping data for table care_type_anaesthesia
-#
-
-INSERT INTO care_type_anaesthesia VALUES (1, 'none', 'None', 'LDNone', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_anaesthesia VALUES (2, 'unknown', 'Unknown', 'LDUnknown', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_anaesthesia VALUES (3, 'general', 'General', 'LDGeneral', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_anaesthesia VALUES (4, 'spinal', 'Spinal', 'LDSpinal', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_anaesthesia VALUES (5, 'epidural', 'Epidural', 'LDEpidural', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_anaesthesia VALUES (6, 'pudendal', 'Pudendal', 'LDPudendal', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_application
-#
-
-INSERT INTO care_type_application VALUES (1, '5', 'ita', 'ITA', 'LDITA', 'Intratracheal anesthesia', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_application VALUES (2, '5', 'la', 'LA', 'LDLA', 'Locally applied anesthesia', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_application VALUES (3, '5', 'as', 'AS', 'LDAS', 'Analgesic sedation', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_application VALUES (4, '5', 'mask', 'Mask', 'LDMask', 'Gas anesthesia through breathing mask', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_application VALUES (5, '6', 'oral', 'Oral', 'LDOral', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_application VALUES (6, '6', 'iv', 'Intravenous', 'LDIntravenous', '', '', '', 00000000000000, 'preload', 00000000000000);
-INSERT INTO care_type_application VALUES (7, '6', 'sc', 'Subcutaneous', 'LDSubcutaneous', '', '', '', 00000000000000, 'preload', 00000000000000);
-INSERT INTO care_type_application VALUES (8, '6', 'im', 'Intramuscular', 'LDIntramuscular', '', '', '', 00000000000000, 'preload', 00000000000000);
-INSERT INTO care_type_application VALUES (9, '6', 'sublingual', 'Sublingual', 'LDSublingual', 'Applied under the tounge', '', '', 00000000000000, 'preload', 00000000000000);
-INSERT INTO care_type_application VALUES (10, '6', 'ia', 'Intraarterial', 'LDIntraArterial', '', '', '', 00000000000000, 'preload', 00000000000000);
-INSERT INTO care_type_application VALUES (11, '6', 'pre_admit', 'Pre-admission', 'LDPreAdmission', '', '', '', 00000000000000, 'preload', 00000000000000);
-
-#
-# Dumping data for table care_type_assignment
-#
-
-INSERT INTO care_type_assignment VALUES (1, 'ward', 'Ward', 'LDWard', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_assignment VALUES (2, 'dept', 'Department', 'LDDepartment', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_assignment VALUES (3, 'firm', 'Firm', 'LDFirm', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_assignment VALUES (4, 'clinic', 'Clinic', 'LDClinic', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_cause_opdelay
-#
-
-INSERT INTO care_type_cause_opdelay VALUES (1, 'patient', 'Patient was delayed', 'LDPatientDelayed', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_cause_opdelay VALUES (2, 'nurse', 'Nurses were delayed', 'LDNursesDelayed', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_cause_opdelay VALUES (3, 'surgeon', 'Surgeons were delayed', 'LDSurgeonsDelayed', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_cause_opdelay VALUES (4, 'cleaning', 'Cleaning delayed', 'LDCleaningDelayed', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_cause_opdelay VALUES (5, 'anesthesia', 'Anesthesiologist was delayed', 'LDAnesthesiologistDelayed', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_cause_opdelay VALUES (0, 'other', 'Other causes', 'LDOtherCauses', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_color
-#
-
-INSERT INTO care_type_color VALUES ('yellow', 'yellow', 'LDyellow', '', '', 00000000000000);
-INSERT INTO care_type_color VALUES ('black', 'black', 'LDblack', '', '', 00000000000000);
-INSERT INTO care_type_color VALUES ('blue_pale', 'pale blue', 'LDpaleblue', '', '', 00000000000000);
-INSERT INTO care_type_color VALUES ('brown', 'brown', 'LDbrown', '', '', 00000000000000);
-INSERT INTO care_type_color VALUES ('pink', 'pink', 'LDpink', '', '', 00000000000000);
-INSERT INTO care_type_color VALUES ('yellow_pale', 'pale yellow', 'LDpaleyellow', '', '', 00000000000000);
-INSERT INTO care_type_color VALUES ('red', 'red', 'LDred', '', '', 00000000000000);
-INSERT INTO care_type_color VALUES ('green_pale', 'pale green', 'LDpalegreen', '', '', 00000000000000);
-INSERT INTO care_type_color VALUES ('violet', 'violet', 'LDviolet', '', '', 00000000000000);
-INSERT INTO care_type_color VALUES ('blue', 'blue', 'LDblue', '', '', 00000000000000);
-INSERT INTO care_type_color VALUES ('biege', 'biege', 'LDbiege', '', '', 00000000000000);
-INSERT INTO care_type_color VALUES ('orange', 'orange', 'LDorange', '', '', 00000000000000);
-INSERT INTO care_type_color VALUES ('green', 'green', 'LDgreen', '', '', 00000000000000);
-INSERT INTO care_type_color VALUES ('rose', 'rose', 'LDrose', '', '', 00000000000000);
-
-#
-# Dumping data for table care_type_department
-#
-
-INSERT INTO care_type_department VALUES (1, 'medical', 'Medical', 'LDMedical', 'Medical, Nursing, Diagnostics, Labs, OR', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_department VALUES (2, 'support', 'Support (non-medical)', 'LDSupport', 'non-medical departments', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_department VALUES (3, 'news', 'News', 'LDNews', 'News group or category', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_discharge
-#
-
-INSERT INTO care_type_discharge VALUES (1, 'regular', 'Regular discharge', 'LDRegularRelease', '', '', 20030415010555, '', 20030413121226);
-INSERT INTO care_type_discharge VALUES (2, 'own', 'Patient left hospital on his own will', 'LDSelfRelease', '', '', 20030415010606, '', 20030413121317);
-INSERT INTO care_type_discharge VALUES (3, 'emergency', 'Emergency discharge', 'LDEmRelease', '', '', 20030415010617, '', 20030413121452);
-INSERT INTO care_type_discharge VALUES (4, 'change_ward', 'Change of ward', 'LDChangeWard', '', '', 00000000000000, '', 20030413121526);
-INSERT INTO care_type_discharge VALUES (6, 'change_bed', 'Change of bed', 'LDChangeBed', '', '', 20030415000942, '', 20030413121619);
-INSERT INTO care_type_discharge VALUES (7, 'death', 'Death of patient', 'LDPatientDied', '', '', 20030415010642, '', 00000000000000);
-INSERT INTO care_type_discharge VALUES (5, 'change_room', 'Change of room', 'LDChangeRoom', '', '', 20030415010659, '', 00000000000000);
-INSERT INTO care_type_discharge VALUES (8, 'change_dept', 'Change of department', 'LDChangeDept', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_duty
-#
-
-INSERT INTO care_type_duty VALUES (1, 'regular', 'Regular duty', 'LDRegularDuty', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_duty VALUES (2, 'standby', 'Standby duty', 'LDStandbyDuty', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_duty VALUES (3, 'morning', 'Morning duty', 'LDMorningDuty', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_duty VALUES (4, 'afternoon', 'Afternoon duty', 'LDAfternoonDuty', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_duty VALUES (5, 'night', 'Night duty', 'LDNightDuty', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_encounter
-#
-
-INSERT INTO care_type_encounter VALUES (1, 'referral', 'Referral', 'LDEncounterReferral', 'Referral admission or visit', '0', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_encounter VALUES (2, 'emergency', 'Emergency', 'LDEmergency', 'Emergency admission or visit', '0', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_encounter VALUES (3, 'birth_delivery', 'Birth delivery', 'LDBirthDelivery', 'Admission or visit for birth delivery', '0', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_encounter VALUES (4, 'walk_in', 'Walk-in', 'LDWalkIn', 'Walk -in admission or visit (non-referred)', '0', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_encounter VALUES (5, 'accident', 'Accident', 'LDAccident', 'Emergency admission due to accident', '0', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_ethnic_orig
-#
-
-INSERT INTO care_type_ethnic_orig VALUES (1, '1', 'asian', 'LDAsian', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_ethnic_orig VALUES (2, '1', 'black', 'LDBlack', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_ethnic_orig VALUES (3, '1', 'caucasian', 'LDCaucasian', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_ethnic_orig VALUES (4, '1', 'white', 'LDWhite', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_feeding
-#
-
-INSERT INTO care_type_feeding VALUES (1, '2', 'breast', 'Breast', 'LDBreast', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_feeding VALUES (2, '2', 'formula', 'Formula', 'LDFormula', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_feeding VALUES (3, '2', 'both', 'Both', 'LDBoth', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_feeding VALUES (4, '2', 'parenteral', 'Parenteral', 'LDParenteral', '', '', '', 20030727221351, '', 00000000000000);
-INSERT INTO care_type_feeding VALUES (5, '2', 'never_fed', 'Never fed', 'LDNeverFed', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_insurance
-#
-
-INSERT INTO care_type_insurance VALUES (1, 'medical_main', 'Medical insurance', 'LDMedInsurance', 'Main (default) medical insurance', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_insurance VALUES (2, 'medical_extra', 'Extra medical insurance', 'LDExtraMedInsurance', 'Extra medical insurance (evt. pays extra services)', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_insurance VALUES (3, 'dental', 'Dental insurance', 'LDDentalInsurance', 'Separate dental plan in case not included in medical plan or simply additional private plan', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_insurance VALUES (4, 'disability', 'Disability plan', 'LDDisabilityPlan', 'Disability insurance plan - general , both long term & short term', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_insurance VALUES (5, 'disability_short', 'Disability plan (short term)', 'LDDisabilityPlanShort', 'Short term disability plan', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_insurance VALUES (6, 'disability_long', 'Disability plan (long term)', 'LDDisabilityPlanLong', 'Long term disability plan', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_insurance VALUES (7, 'retirement_income', 'Retirement  income plan (general)', 'LDRetirementIncomePlan', 'Retirement income plan - either private or income/employer supported', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_insurance VALUES (8, 'edu_reimbursement', 'Educational Reimbursement Plan', 'LDEduReimbursementPlan', 'Reimbursement plan for education, either private or employer supported', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_insurance VALUES (9, 'retirement_medical', 'Retirement medical plan', 'LDRetirementMedPlan', 'Medical plan in retirement  - might include other care services', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_insurance VALUES (10, 'liability', 'Liability Insurance Plan', 'LDLiabilityPlan', 'General liability insurance - either private or employer supported', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_insurance VALUES (11, 'malpractice', 'Malpractice Insurance Plan', 'LDMalpracticeInsurancePlan', 'Insurance plan against possible malpractice', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_insurance VALUES (12, 'unemployment', 'Unemployment Insurance Plan', 'LDUnemploymentPlan', 'Unemployment insurance , in case compulsory unemployment funds are guaranteed by the state, this plan is usually privately paid by the insured', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_localization
-#
-
-INSERT INTO care_type_localization VALUES ('1', 'left', 'Left', 'LDLeft', 'L', 'LDLeft_s', '', '0', '', '', '', 20030525150414, '', 20030525150414);
-INSERT INTO care_type_localization VALUES ('2', 'right', 'Right', 'LDRight', 'R', 'LDRight_s', '', '0', '', '', '', 20030525150522, '', 20030525150500);
-INSERT INTO care_type_localization VALUES ('3', 'both_side', 'Both sides', 'LDBothSides', 'B', 'LDBothSides_s', '', '0', '', '', '', 20030525150618, '', 20030525150618);
-
-#
-# Dumping data for table care_type_location
-#
-
-INSERT INTO care_type_location VALUES (1, 'dept', 'Department', 'LDDepartment', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_location VALUES (2, 'ward', 'Ward', 'LDWard', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_location VALUES (3, 'firm', 'Firm', 'LDFirm', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_location VALUES (4, 'room', 'Room', 'LDRoom', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_location VALUES (5, 'bed', 'Bed', 'LDBed', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_location VALUES (6, 'clinic', 'Clinic', 'LDClinic', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_measurement
-#
-
-INSERT INTO care_type_measurement VALUES (1, 'bp_systolic', 'Systolic', 'LDSystolic', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_measurement VALUES (2, 'bp_diastolic', 'Diastolic', 'LDDiastolic', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_measurement VALUES (3, 'temp', 'Temperature', 'LDTemperature', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_measurement VALUES (4, 'fluid_intake', 'Fluid intake', 'LDFluidIntake', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_measurement VALUES (5, 'fluid_output', 'Fluid output', 'LDFluidOutput', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_measurement VALUES (6, 'weight', 'Weight', 'LDWeight', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_measurement VALUES (7, 'height', 'Height', 'LDHeight', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_measurement VALUES (8, 'bp_composite', 'Sys/Dias', 'LDSysDias', '', '', 20030419143920, '', 20030419143920);
-INSERT INTO care_type_measurement VALUES (9, 'head_circumference', 'Head circumference', 'LDHeadCircumference', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_notes
-#
-
-INSERT INTO care_type_notes VALUES (1, 'histo_physical', 'Admission History and Physical', 'LDAdmitHistoPhysical', 5, '', '', 20030517182939, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (2, 'daily_doctor', 'Doctor\'s daily notes', 'LDDoctorDailyNotes', 55, '', '', 20030517183835, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (3, 'discharge', 'Discharge summary', 'LDDischargeSummary', 50, '', '', 20030517183707, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (4, 'consult', 'Consultation notes', 'LDConsultNotes', 25, '', '', 20030517183151, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (5, 'op', 'Operation notes', 'LDOpNotes', 100, '', '', 20030517184314, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (6, 'daily_ward', 'Daily ward\'s notes', 'LDDailyNurseNotes', 30, '', '', 20030517183212, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (7, 'daily_chart_notes', 'Chart notes', 'LDChartNotes', 20, '', '', 20030517183141, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (8, 'chart_notes_etc', 'PT,ATG,etc. daily notes', 'LDPTATGetc', 115, '', '', 20030517184356, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (9, 'daily_iv_notes', 'IV daily notes', 'LDIVDailyNotes', 75, '', '', 20030517184024, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (10, 'daily_anticoag', 'Anticoagulant daily notes', 'LDAnticoagDailyNotes', 15, '', '', 20030517183117, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (11, 'lot_charge_nr', 'Material LOT, Charge Nr.', 'LDMaterialLOTChargeNr', 80, '', '', 20030517184039, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (12, 'text_diagnosis', 'Diagnosis text', 'LDDiagnosis', 40, '', '', 20030517183530, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (13, 'text_therapy', 'Therapy text', 'LDTherapy', 120, '', '', 20030517184408, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (14, 'chart_extra', 'Extra notes on therapy & diagnosis', 'LDExtraNotes', 65, '', '', 20030517183912, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (15, 'nursing_report', 'Nursing care report', 'LDNursingReport', 85, '', '', 20030517184141, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (16, 'nursing_problem', 'Nursing problem report', 'LDNursingProblemReport', 95, '', '', 20030517184208, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (17, 'nursing_effectivity', 'Nursing effectivity report', 'LDNursingEffectivityReport', 90, '', '', 20030517184156, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (18, 'nursing_inquiry', 'Inquiry to doctor', 'LDInquiryToDoctor', 70, '', '', 20030517183951, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (19, 'doctor_directive', 'Doctor\'s directive', 'LDDoctorDirective', 60, '', '', 20030517183859, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (20, 'problem', 'Problem', 'LDProblem', 110, '', '', 20030517184345, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (21, 'development', 'Development', 'LDDevelopment', 35, '', '', 20030517183228, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (22, 'allergy', 'Allergy', 'LDAllergy', 10, '', '', 20030517184439, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (23, 'daily_diet', 'Diet plan', 'LDDietPlan', 45, '', '', 20030517183545, '', 00000000000000);
-INSERT INTO care_type_notes VALUES (99, 'other', 'Other', 'LDOther', 105, '', '', 20030517184331, '', 00000000000000);
-
-#
-# Dumping data for table care_type_outcome
-#
-
-INSERT INTO care_type_outcome VALUES (1, '2', 'alive', 'Alive', 'LDAlive', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_outcome VALUES (2, '2', 'stillborn', 'Stillborn', 'LDStillborn', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_outcome VALUES (3, '2', 'early_neonatal_death', 'Early neonatal death', 'LDEarlyNeonatalDeath', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_outcome VALUES (4, '2', 'late_neonatal_death', 'Late neonatal death', 'LDLateNeonatalDeath', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_outcome VALUES (5, '2', 'death_uncertain_timing', 'Death uncertain timing', 'LDDeathUncertainTiming', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_perineum
-#
-
-INSERT INTO care_type_perineum VALUES (1, 'intact', 'Intact', 'LDIntact', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_perineum VALUES (2, '1_degree', '1st degree tear', 'LDFirstDegreeTear', '', '', '', 20030727212219, '', 00000000000000);
-INSERT INTO care_type_perineum VALUES (3, '2_degree', '2nd degree tear', 'LDSecondDegreeTear', '', '', '', 20030727212231, '', 00000000000000);
-INSERT INTO care_type_perineum VALUES (4, '3_degree', '3rd degree tear', 'LDThirdDegreeTear', '', '', '', 20030727212242, '', 00000000000000);
-INSERT INTO care_type_perineum VALUES (5, 'episiotomy', 'Episiotomy', 'LDEpisiotomy', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_prescription
-#
-
-INSERT INTO care_type_prescription VALUES (1, 'anticoag', 'Anticoagulant', 'LDAnticoagulant', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_prescription VALUES (2, 'hemolytic', 'Hemolytic', 'LDHemolytic', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_prescription VALUES (3, 'diuretic', 'Diuretic', 'LDDiuretic', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_prescription VALUES (4, 'antibiotic', 'Antibiotic', 'LDAntibiotic', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_room
-#
-
-INSERT INTO care_type_room VALUES (1, 'ward', 'Ward room', 'LDWard', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_room VALUES (2, 'op', 'Operating room', 'LDOperatingRoom', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_test
-#
-
-INSERT INTO care_type_test VALUES (1, 'chemlabor', 'Chemical-Serology Lab', 'LDChemSerologyLab', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_test VALUES (2, 'patho', 'Pathological Lab', 'LDPathoLab', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_test VALUES (3, 'baclabor', 'Bacteriological Lab', 'LDBacteriologicalLab', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_test VALUES (4, 'radio', 'Radiological Lab', 'LDRadiologicalLab', 'Lab for X-ray, Mammography, Computer Tomography, NMR', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_test VALUES (5, 'blood', 'Blood test & product', 'LDBloodTestProduct', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_test VALUES (6, 'generic', 'Generic test program', 'LDGenericTestProgram', '', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_time
-#
-
-INSERT INTO care_type_time VALUES (1, 'patient_entry_exit', 'Patient entry/exit', 'LDPatientEntryExit', 'Times when patient entered and left the op room', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_time VALUES (2, 'op_start_end', 'OP start/end', 'LDOPStartEnd', 'Times when op started (1st incision) and ended (last suture)', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_time VALUES (3, 'delay', 'Delay time', 'LDDelayTime', 'Times when the op was delayed due to any reason', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_time VALUES (4, 'plaster_cast', 'Plaster cast', 'LDPlasterCast', 'Times when the plaster cast was made', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_time VALUES (5, 'reposition', 'Reposition', 'LDReposition', 'Times when a dislocated joint(s) was repositioned (non invasive op)', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_time VALUES (6, 'coro', 'Coronary catheter', 'LDCoronaryCatheter', 'Times when a coronary catherer op was done (minimal invasive op)', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_time VALUES (7, 'bandage', 'Bandage', 'LDBandage', 'Times when the bandage was made', '', '', 00000000000000, '', 00000000000000);
-
-#
-# Dumping data for table care_type_unit_measurement
-#
-
-INSERT INTO care_type_unit_measurement VALUES (1, 'volume', 'Volume', 'LDVolume', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_unit_measurement VALUES (2, 'weight', 'Weight', 'LDWeight', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_unit_measurement VALUES (3, 'length', 'Length', 'LDLength', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_unit_measurement VALUES (4, 'pressure', 'Pressure', 'LDPressure', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_type_unit_measurement VALUES (5, 'temperature', 'Temperature', 'LDTemperature', '', '', '', 20030419144724, '', 20030419144724);
-
-#
-# Dumping data for table care_unit_measurement
-#
-
-INSERT INTO care_unit_measurement VALUES (1, 1, 'ml', 'Milliliter', 'LDMilliliter', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (2, 2, 'mg', 'Milligram', 'LDMilligram', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (3, 3, 'mm', 'Millimeter', 'LDMillimeter', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (4, 1, 'ltr', 'liter', 'LDLiter', 'metric',  NULL, '', '', 20030727131658, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (5, 2, 'gm', 'gram', 'LDGram', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (6, 2, 'kg', 'kilogram', 'LDKilogram', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (7, 3, 'cm', 'centimeter', 'LDCentimeter', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (8, 3, 'm', 'meter', 'LDMeter', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (9, 3, 'km', 'kilometer', 'LDKilometer', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (10, 3, 'in', 'inch', 'LDInch', 'english',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (11, 3, 'ft', 'foot', 'LDFoot', 'english',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (12, 3, 'yd', 'yard', 'LDYard', 'english',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (14, 4, 'mmHg', 'mmHg', 'LDmmHg', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (15, 5, 'celsius', 'Celsius', 'LDCelsius', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (16, 1, 'dl', 'deciliter', 'LDDeciliter', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (17, 1, 'cl', 'centiliter', 'LDCentiliter', 'metric', 0, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (18, 1, 'µl', 'microliter', 'LDMicroliter', 'metric', 0, '', '', 00000000000000, '', 00000000000000);
-
-#
-# begin new chart 07/28/2007
-#
-
-DROP TABLE IF EXISTS `care_encounter_custom_ddc`;
-CREATE TABLE IF NOT EXISTS `care_encounter_custom_ddc` (
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_billing_bill`
+--
+
+CREATE TABLE `care_billing_bill` (
+  `bill_bill_no` bigint(20) NOT NULL default '0',
+  `bill_encounter_nr` int(10) unsigned NOT NULL default '0',
+  `bill_date_time` date default NULL,
+  `bill_amount` float(10,2) default NULL,
+  `bill_outstanding` float(10,2) default NULL,
+  PRIMARY KEY  (`bill_bill_no`),
+  KEY `index_bill_patnum` (`bill_encounter_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_billing_bill_item`
+--
+
+CREATE TABLE `care_billing_bill_item` (
+  `bill_item_id` int(11) NOT NULL auto_increment,
+  `bill_item_encounter_nr` int(10) unsigned NOT NULL default '0',
+  `bill_item_code` varchar(5) collate latin1_general_ci default NULL,
+  `bill_item_unit_cost` float(10,2) default '0.00',
+  `bill_item_units` tinyint(4) default NULL,
+  `bill_item_amount` float(10,2) default NULL,
+  `bill_item_date` datetime default NULL,
+  `bill_item_status` enum('0','1') collate latin1_general_ci default '0',
+  `bill_item_bill_no` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`bill_item_id`),
+  KEY `index_bill_item_patnum` (`bill_item_encounter_nr`),
+  KEY `index_bill_item_bill_no` (`bill_item_bill_no`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_billing_final`
+--
+
+CREATE TABLE `care_billing_final` (
+  `final_id` tinyint(3) NOT NULL auto_increment,
+  `final_encounter_nr` int(10) unsigned NOT NULL default '0',
+  `final_bill_no` int(11) default NULL,
+  `final_date` date default NULL,
+  `final_total_bill_amount` float(10,2) default NULL,
+  `final_discount` tinyint(4) default NULL,
+  `final_total_receipt_amount` float(10,2) default NULL,
+  `final_amount_due` float(10,2) default NULL,
+  `final_amount_recieved` float(10,2) default NULL,
+  PRIMARY KEY  (`final_id`),
+  KEY `index_final_patnum` (`final_encounter_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci ROW_FORMAT=DYNAMIC COMMENT='InnoDB free: 6144 kB' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_billing_item`
+--
+
+CREATE TABLE `care_billing_item` (
+  `item_code` varchar(5) collate latin1_general_ci NOT NULL,
+  `item_description` varchar(100) collate latin1_general_ci default NULL,
+  `item_unit_cost` float(10,2) default '0.00',
+  `item_type` tinytext collate latin1_general_ci,
+  `item_discount_max_allowed` tinyint(4) unsigned default '0',
+  PRIMARY KEY  (`item_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_billing_payment`
+--
+
+CREATE TABLE `care_billing_payment` (
+  `payment_id` tinyint(5) NOT NULL auto_increment,
+  `payment_encounter_nr` int(10) unsigned NOT NULL default '0',
+  `payment_receipt_no` int(11) NOT NULL default '0',
+  `payment_date` datetime default '0000-00-00 00:00:00',
+  `payment_cash_amount` float(10,2) default '0.00',
+  `payment_cheque_no` int(11) default '0',
+  `payment_cheque_amount` float(10,2) default '0.00',
+  `payment_creditcard_no` int(25) default '0',
+  `payment_creditcard_amount` float(10,2) default '0.00',
+  `payment_amount_total` float(10,2) default '0.00',
+  PRIMARY KEY  (`payment_id`),
+  KEY `index_payment_patnum` (`payment_encounter_nr`),
+  KEY `index_payment_receipt_no` (`payment_receipt_no`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_cache`
+--
+
+CREATE TABLE `care_cache` (
+  `id` varchar(125) collate latin1_general_ci NOT NULL,
+  `ctext` text collate latin1_general_ci,
+  `cbinary` blob,
+  `tstamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_cafe_menu`
+--
+
+CREATE TABLE `care_cafe_menu` (
+  `item` int(11) NOT NULL auto_increment,
+  `lang` varchar(10) collate latin1_general_ci NOT NULL default 'en',
+  `cdate` date NOT NULL default '0000-00-00',
+  `menu` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  UNIQUE KEY `item_2` (`item`),
+  KEY `item` (`item`,`lang`),
+  KEY `cdate` (`cdate`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_cafe_prices`
+--
+
+CREATE TABLE `care_cafe_prices` (
+  `item` int(11) NOT NULL auto_increment,
+  `lang` varchar(10) collate latin1_general_ci NOT NULL default 'en',
+  `productgroup` tinytext collate latin1_general_ci NOT NULL,
+  `article` tinytext collate latin1_general_ci NOT NULL,
+  `description` tinytext collate latin1_general_ci NOT NULL,
+  `price` varchar(10) collate latin1_general_ci NOT NULL,
+  `unit` tinytext collate latin1_general_ci NOT NULL,
+  `pic_filename` tinytext collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(25) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  KEY `item` (`item`),
+  KEY `lang` (`lang`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_category_diagnosis`
+--
+
+CREATE TABLE `care_category_diagnosis` (
+  `nr` tinyint(3) unsigned NOT NULL default '0',
+  `category` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `short_code` char(1) collate latin1_general_ci NOT NULL,
+  `LD_var_short_code` varchar(25) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `hide_from` varchar(255) collate latin1_general_ci NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_category_disease`
+--
+
+CREATE TABLE `care_category_disease` (
+  `nr` tinyint(3) unsigned NOT NULL auto_increment,
+  `group_nr` tinyint(3) unsigned NOT NULL default '0',
+  `category` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_category_procedure`
+--
+
+CREATE TABLE `care_category_procedure` (
+  `nr` tinyint(3) unsigned NOT NULL default '0',
+  `category` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `short_code` char(1) collate latin1_general_ci NOT NULL,
+  `LD_var_short_code` varchar(25) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `hide_from` varchar(255) collate latin1_general_ci NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_classif_neonatal`
+--
+
+CREATE TABLE `care_classif_neonatal` (
+  `nr` smallint(2) unsigned NOT NULL auto_increment,
+  `id` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=17 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_class_encounter`
+--
+
+CREATE TABLE `care_class_encounter` (
+  `class_nr` smallint(6) unsigned NOT NULL default '0',
+  `class_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(25) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `hide_from` tinyint(4) NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`class_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_class_ethnic_orig`
+--
+
+CREATE TABLE `care_class_ethnic_orig` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_class_financial`
+--
+
+CREATE TABLE `care_class_financial` (
+  `class_nr` smallint(5) unsigned NOT NULL auto_increment,
+  `class_id` varchar(15) collate latin1_general_ci NOT NULL default '0',
+  `type` varchar(25) collate latin1_general_ci NOT NULL default '0',
+  `code` varchar(5) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(25) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `policy` text collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`class_nr`),
+  KEY `class_2` (`class_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=13 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_class_insurance`
+--
+
+CREATE TABLE `care_class_insurance` (
+  `class_nr` smallint(5) unsigned NOT NULL auto_increment,
+  `class_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(25) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`class_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_class_therapy`
+--
+
+CREATE TABLE `care_class_therapy` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `group_nr` tinyint(3) unsigned NOT NULL default '0',
+  `class` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(25) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=9 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_complication`
+--
+
+CREATE TABLE `care_complication` (
+  `nr` int(10) unsigned NOT NULL auto_increment,
+  `group_nr` int(11) unsigned NOT NULL default '0',
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `code` varchar(25) collate latin1_general_ci default NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=17 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_config_global`
+--
+
+CREATE TABLE `care_config_global` (
+  `type` varchar(60) collate latin1_general_ci NOT NULL,
+  `value` varchar(255) collate latin1_general_ci default NULL,
+  `notes` varchar(255) collate latin1_general_ci default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`type`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_config_user`
+--
+
+CREATE TABLE `care_config_user` (
+  `user_id` varchar(100) collate latin1_general_ci NOT NULL,
+  `serial_config_data` text collate latin1_general_ci NOT NULL,
+  `notes` varchar(255) collate latin1_general_ci default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_currency`
+--
+
+CREATE TABLE `care_currency` (
+  `item_no` smallint(5) unsigned NOT NULL auto_increment,
+  `short_name` varchar(5) collate latin1_general_ci NOT NULL,
+  `long_name` varchar(20) collate latin1_general_ci NOT NULL,
+  `info` varchar(50) collate latin1_general_ci NOT NULL,
+  `status` varchar(5) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(20) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(20) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  KEY `item_no` (`item_no`),
+  KEY `short_name` (`short_name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=14 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_department`
+--
+
+CREATE TABLE `care_department` (
+  `nr` mediumint(8) unsigned NOT NULL auto_increment,
+  `id` varchar(60) collate latin1_general_ci NOT NULL,
+  `type` varchar(25) collate latin1_general_ci NOT NULL,
+  `name_formal` varchar(60) collate latin1_general_ci NOT NULL,
+  `name_short` varchar(35) collate latin1_general_ci NOT NULL,
+  `name_alternate` varchar(225) collate latin1_general_ci default NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` text collate latin1_general_ci NOT NULL,
+  `admit_inpatient` tinyint(1) NOT NULL default '0',
+  `admit_outpatient` tinyint(1) NOT NULL default '0',
+  `has_oncall_doc` tinyint(1) NOT NULL default '1',
+  `has_oncall_nurse` tinyint(1) NOT NULL default '1',
+  `does_surgery` tinyint(1) NOT NULL default '0',
+  `this_institution` tinyint(1) NOT NULL default '1',
+  `is_sub_dept` tinyint(1) NOT NULL default '0',
+  `parent_dept_nr` tinyint(3) unsigned default NULL,
+  `work_hours` varchar(100) collate latin1_general_ci default NULL,
+  `consult_hours` varchar(100) collate latin1_general_ci default NULL,
+  `is_inactive` tinyint(1) NOT NULL default '0',
+  `sort_order` tinyint(3) unsigned NOT NULL default '0',
+  `address` text collate latin1_general_ci,
+  `sig_line` varchar(60) collate latin1_general_ci default NULL,
+  `sig_stamp` text collate latin1_general_ci,
+  `logo_mime_type` varchar(5) collate latin1_general_ci default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `is_pharmacy` tinyint(4) NOT NULL COMMENT 'is a pharmacy, or a normal dept ?',
+  `pharma_dept_nr` tinyint(3) unsigned default '0' COMMENT 'to wich pharmacy i take medicaments ?',
+  PRIMARY KEY  (`nr`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=67 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_diagnosis_localcode`
+--
+
+CREATE TABLE `care_diagnosis_localcode` (
+  `localcode` varchar(12) collate latin1_general_ci NOT NULL,
+  `description` text collate latin1_general_ci NOT NULL,
+  `class_sub` varchar(5) collate latin1_general_ci NOT NULL,
+  `type` varchar(10) collate latin1_general_ci NOT NULL,
+  `inclusive` text collate latin1_general_ci NOT NULL,
+  `exclusive` text collate latin1_general_ci NOT NULL,
+  `notes` text collate latin1_general_ci NOT NULL,
+  `std_code` char(1) collate latin1_general_ci NOT NULL,
+  `sub_level` tinyint(4) NOT NULL default '0',
+  `remarks` text collate latin1_general_ci NOT NULL,
+  `extra_codes` text collate latin1_general_ci NOT NULL,
+  `extra_subclass` text collate latin1_general_ci NOT NULL,
+  `search_keys` varchar(255) collate latin1_general_ci NOT NULL,
+  `use_frequency` int(11) NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`localcode`),
+  KEY `diagnosis_code` (`localcode`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_drg_intern`
+--
+
+CREATE TABLE `care_drg_intern` (
+  `nr` int(11) NOT NULL auto_increment,
+  `code` varchar(12) collate latin1_general_ci NOT NULL,
+  `description` text collate latin1_general_ci NOT NULL,
+  `synonyms` text collate latin1_general_ci NOT NULL,
+  `notes` text collate latin1_general_ci,
+  `std_code` char(1) collate latin1_general_ci NOT NULL,
+  `sub_level` tinyint(1) NOT NULL default '0',
+  `parent_code` varchar(12) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(25) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `nr` (`nr`),
+  KEY `code` (`code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_drg_quicklist`
+--
+
+CREATE TABLE `care_drg_quicklist` (
+  `nr` int(11) NOT NULL auto_increment,
+  `code` varchar(25) collate latin1_general_ci NOT NULL,
+  `code_parent` varchar(25) collate latin1_general_ci NOT NULL,
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `qlist_type` varchar(25) collate latin1_general_ci NOT NULL default '0',
+  `rank` int(11) NOT NULL default '0',
+  `status` varchar(15) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(25) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=44 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_drg_related_codes`
+--
+
+CREATE TABLE `care_drg_related_codes` (
+  `nr` int(11) NOT NULL auto_increment,
+  `group_nr` int(11) unsigned NOT NULL default '0',
+  `code` varchar(15) collate latin1_general_ci NOT NULL,
+  `code_parent` varchar(15) collate latin1_general_ci NOT NULL,
+  `code_type` varchar(15) collate latin1_general_ci NOT NULL,
+  `rank` int(11) NOT NULL default '0',
+  `status` varchar(15) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(25) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=165 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_dutyplan_oncall`
+--
+
+CREATE TABLE `care_dutyplan_oncall` (
+  `nr` bigint(20) unsigned NOT NULL auto_increment,
+  `dept_nr` int(10) unsigned NOT NULL default '0',
+  `role_nr` tinyint(3) unsigned NOT NULL default '0',
+  `year` year(4) NOT NULL default '0000',
+  `month` char(2) collate latin1_general_ci NOT NULL,
+  `duty_1_txt` text collate latin1_general_ci NOT NULL,
+  `duty_2_txt` text collate latin1_general_ci NOT NULL,
+  `duty_1_pnr` text collate latin1_general_ci NOT NULL,
+  `duty_2_pnr` text collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `dept_nr` (`dept_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_effective_day`
+--
+
+CREATE TABLE `care_effective_day` (
+  `eff_day_nr` tinyint(4) NOT NULL auto_increment,
+  `name` varchar(25) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`eff_day_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter`
+--
+
+CREATE TABLE `care_encounter` (
+  `encounter_nr` bigint(11) unsigned NOT NULL auto_increment,
+  `pid` int(11) NOT NULL default '0',
+  `encounter_date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `encounter_class_nr` smallint(5) unsigned NOT NULL default '0',
+  `encounter_type` varchar(35) collate latin1_general_ci NOT NULL,
+  `encounter_status` varchar(35) collate latin1_general_ci NOT NULL,
+  `referrer_diagnosis` varchar(255) collate latin1_general_ci NOT NULL,
+  `referrer_recom_therapy` varchar(255) collate latin1_general_ci default NULL,
+  `referrer_dr` varchar(60) collate latin1_general_ci NOT NULL,
+  `referrer_dept` varchar(255) collate latin1_general_ci NOT NULL,
+  `referrer_institution` varchar(255) collate latin1_general_ci NOT NULL,
+  `referrer_notes` text collate latin1_general_ci NOT NULL,
+  `regional_code` varchar(60) collate latin1_general_ci default NULL,
+  `triage` varchar(20) collate latin1_general_ci NOT NULL default 'white',
+  `admit_type` int(10) NOT NULL default '0',
+  `financial_class_nr` tinyint(3) unsigned NOT NULL default '0',
+  `insurance_nr` varchar(25) collate latin1_general_ci default '0',
+  `insurance_firm_id` varchar(25) collate latin1_general_ci NOT NULL default '0',
+  `insurance_class_nr` tinyint(3) unsigned NOT NULL default '0',
+  `insurance_2_nr` varchar(25) collate latin1_general_ci default '0',
+  `insurance_2_firm_id` varchar(25) collate latin1_general_ci NOT NULL default '0',
+  `guarantor_pid` int(11) NOT NULL default '0',
+  `contact_pid` int(11) NOT NULL default '0',
+  `contact_relation` varchar(35) collate latin1_general_ci NOT NULL,
+  `current_ward_nr` smallint(3) unsigned NOT NULL default '0',
+  `current_room_nr` smallint(5) unsigned NOT NULL default '0',
+  `in_ward` tinyint(1) NOT NULL default '0',
+  `current_dept_nr` smallint(3) unsigned NOT NULL default '0',
+  `in_dept` tinyint(1) NOT NULL default '0',
+  `current_firm_nr` smallint(5) unsigned NOT NULL default '0',
+  `current_att_dr_nr` int(10) NOT NULL default '0',
+  `consulting_dr` varchar(60) collate latin1_general_ci NOT NULL,
+  `extra_service` varchar(25) collate latin1_general_ci NOT NULL,
+  `is_discharged` tinyint(1) unsigned NOT NULL default '0',
+  `discharge_date` date default NULL,
+  `discharge_time` time default NULL,
+  `followup_date` date NOT NULL default '0000-00-00',
+  `followup_responsibility` varchar(255) collate latin1_general_ci default NULL,
+  `post_encounter_notes` text collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`encounter_nr`),
+  KEY `pid` (`pid`),
+  KEY `encounter_date` (`encounter_date`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci ROW_FORMAT=DYNAMIC COMMENT='InnoDB free: 11264 kB' AUTO_INCREMENT=2007500004 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_custom_ddc`
+--
+
+CREATE TABLE `care_encounter_custom_ddc` (
   `nr` int(11) NOT NULL auto_increment,
   `encounter_nr` int(11) NOT NULL,
   `indatetime` datetime NOT NULL,
-  `urinesugar` varchar(35) NOT NULL,
-  `acetone` varchar(35) NOT NULL,
+  `urinesugar` varchar(35) collate latin1_general_ci NOT NULL,
+  `acetone` varchar(35) collate latin1_general_ci NOT NULL,
   `bloodsugar` decimal(10,2) NOT NULL,
-  `tablets` varchar(35) NOT NULL,
+  `tablets` varchar(35) collate latin1_general_ci NOT NULL,
   `insulin` decimal(10,2) NOT NULL,
-  `createid` varchar(64) NOT NULL,
-  `createtime` timestamp NOT NULL,
+  `createid` varchar(64) collate latin1_general_ci NOT NULL,
+  `createtime` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`nr`)
-) TYPE=MyISAM ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=5 ;
 
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `care_encounter_custom_inout`;
-CREATE TABLE IF NOT EXISTS `care_encounter_custom_inout` (
+--
+-- Struttura della tabella `care_encounter_custom_inout`
+--
+
+CREATE TABLE `care_encounter_custom_inout` (
   `nr` int(11) NOT NULL auto_increment,
   `encounter_nr` int(11) NOT NULL,
   `indatetime` datetime NOT NULL,
   `pint` decimal(10,2) NOT NULL,
-  `solution` varchar(32) NOT NULL,
+  `solution` varchar(32) collate latin1_general_ci NOT NULL,
   `solutionamount` decimal(10,2) NOT NULL,
-  `initial` varchar(6) NOT NULL,
-  `oralfluid` varchar(32) NOT NULL,
+  `initial` varchar(6) collate latin1_general_ci NOT NULL,
+  `oralfluid` varchar(32) collate latin1_general_ci NOT NULL,
   `oralfluidamount` decimal(10,2) NOT NULL,
   `urinetime` time NOT NULL,
   `urineamount` decimal(10,2) NOT NULL,
   `rta` decimal(10,2) NOT NULL,
   `drain` decimal(10,2) NOT NULL,
-  `createid` varchar(64) NOT NULL,
-  `createtime` timestamp NOT NULL,
+  `createid` varchar(64) collate latin1_general_ci NOT NULL,
+  `createtime` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`nr`)
-) TYPE=MyISAM ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=5 ;
 
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `care_encounter_custom_noc`;
-CREATE TABLE IF NOT EXISTS `care_encounter_custom_noc` (
+--
+-- Struttura della tabella `care_encounter_custom_noc`
+--
+
+CREATE TABLE `care_encounter_custom_noc` (
   `nr` int(11) NOT NULL auto_increment,
   `encounter_nr` int(11) NOT NULL,
   `indatetime` datetime NOT NULL,
   `verbal` tinyint(1) NOT NULL,
   `moton` tinyint(1) NOT NULL,
   `eyes` tinyint(1) NOT NULL,
-  `createid` varchar(64) NOT NULL,
-  `createtime` timestamp NOT NULL,
+  `createid` varchar(64) collate latin1_general_ci NOT NULL,
+  `createtime` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`nr`)
-) TYPE=MyISAM ;
-
-
-DROP TABLE IF EXISTS `care_encounter_custom_tc`;
-CREATE TABLE IF NOT EXISTS `care_encounter_custom_tc` (
-  `nr` int(11) NOT NULL auto_increment,
-  `encounter_nr` int(11) NOT NULL,
-  `createid` varchar(64) NOT NULL,
-  `createtime` timestamp NOT NULL,
-  `indatetime` datetime NOT NULL,
-  `time` time NOT NULL,
-  `position` varchar(32) NOT NULL,
-  PRIMARY KEY  (`nr`)
-) TYPE=MyISAM ;
-#
-# end new chart 07/28/2007
-#
-
--- 
--- Struttura della tabella `care_yellow_paper`
--- 
-
-DROP TABLE IF EXISTS `care_yellow_paper`;
-CREATE TABLE `care_yellow_paper` (
-  `encounter_nr` bigint(20) NOT NULL,
-  `personell_name` varchar(20) collate latin1_general_ci default NULL,
-  `location_id` varchar(20) collate latin1_general_ci default NULL,
-  `history` text collate latin1_general_ci,
-  `create_id` varchar(20) collate latin1_general_ci default NULL,
-  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
-  `sunto_anamnestico` text collate latin1_general_ci,
-  `stato_presente` text collate latin1_general_ci,
-  `altezza` double(15,3) default NULL,
-  `peso` double(15,3) default NULL,
-  `norm` varchar(20) collate latin1_general_ci default NULL,
-  `dati_urine` varchar(20) collate latin1_general_ci default NULL,
-  `dati_sangue` varchar(20) collate latin1_general_ci default NULL,
-  `dati_altro` varchar(20) collate latin1_general_ci default NULL,
-  `diagnosi` text collate latin1_general_ci,
-  `terapia` text collate latin1_general_ci,
-  `padre` text collate latin1_general_ci,
-  `madre` text collate latin1_general_ci,
-  `fratelli` text collate latin1_general_ci,
-  `coniuge` text collate latin1_general_ci,
-  `figli` text collate latin1_general_ci,
-  `paesi_esteri` text collate latin1_general_ci,
-  `abitazione` text collate latin1_general_ci,
-  `lavoro_pregresso` text collate latin1_general_ci,
-  `lavoro_presente` text collate latin1_general_ci,
-  `lavoro_attuale` text collate latin1_general_ci,
-  `ambiente_lavoro` text collate latin1_general_ci,
-  `gas_lavoro` text collate latin1_general_ci,
-  `tossiche_lavoro` text collate latin1_general_ci,
-  `conviventi` text collate latin1_general_ci,
-  `prematuro` varchar(4) collate latin1_general_ci default NULL,
-  `eutocico` varchar(4) collate latin1_general_ci default NULL,
-  `fisiologici_normali` varchar(4) collate latin1_general_ci default NULL,
-  `fisiologici_tardivi` varchar(4) collate latin1_general_ci default NULL,
-  `mestruazione` text collate latin1_general_ci,
-  `gravidanze` text collate latin1_general_ci,
-  `militare` text collate latin1_general_ci,
-  `alcolici` varchar(20) collate latin1_general_ci default NULL,
-  `caffe` varchar(20) collate latin1_general_ci default NULL,
-  `fumo` varchar(20) collate latin1_general_ci default NULL,
-  `droghe` varchar(20) collate latin1_general_ci default NULL,
-  `sete` varchar(20) collate latin1_general_ci default NULL,
-  `alvo` varchar(20) collate latin1_general_ci default NULL,
-  `diuresi` varchar(20) collate latin1_general_ci default NULL,
-  `anamnesi_remota` text collate latin1_general_ci,
-  `anamnesi_prossima` text collate latin1_general_ci,
-  `nr` bigint(20) NOT NULL auto_increment,
-  `modify_id` text collate latin1_general_ci,
-  `modify_time` timestamp NOT NULL default '0000-00-00 00:00:00' on update CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`nr`),
-  UNIQUE KEY `nr` (`nr`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
-
--- 
--- Dump dei dati per la tabella `care_yellow_paper`
--- 
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
--- 
--- Database: `imed`
--- 
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `care_target_test`
--- 
+--
+-- Struttura della tabella `care_encounter_custom_tc`
+--
+
+CREATE TABLE `care_encounter_custom_tc` (
+  `nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) NOT NULL,
+  `createid` varchar(64) collate latin1_general_ci NOT NULL,
+  `createtime` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `indatetime` datetime NOT NULL,
+  `time` time NOT NULL,
+  `position` varchar(32) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=19 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_diagnosis`
+--
+
+CREATE TABLE `care_encounter_diagnosis` (
+  `diagnosis_nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) NOT NULL default '0',
+  `op_nr` int(10) unsigned NOT NULL default '0',
+  `date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `code` varchar(25) collate latin1_general_ci NOT NULL,
+  `code_parent` varchar(25) collate latin1_general_ci NOT NULL,
+  `group_nr` mediumint(8) unsigned NOT NULL default '0',
+  `code_version` tinyint(4) NOT NULL default '0',
+  `localcode` varchar(35) collate latin1_general_ci NOT NULL,
+  `category_nr` tinyint(3) unsigned NOT NULL default '0',
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `localization` varchar(35) collate latin1_general_ci NOT NULL,
+  `diagnosing_clinician` varchar(60) collate latin1_general_ci NOT NULL,
+  `diagnosing_dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`diagnosis_nr`),
+  KEY `encounter_nr` (`encounter_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=165 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_diagnostics_report`
+--
+
+CREATE TABLE `care_encounter_diagnostics_report` (
+  `item_nr` int(11) NOT NULL auto_increment,
+  `report_nr` int(11) NOT NULL default '0',
+  `reporting_dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `reporting_dept` varchar(100) collate latin1_general_ci NOT NULL,
+  `report_date` date NOT NULL default '0000-00-00',
+  `report_time` time NOT NULL default '00:00:00',
+  `encounter_nr` int(10) NOT NULL default '0',
+  `script_call` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`item_nr`,`report_nr`),
+  KEY `report_nr` (`report_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=31 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_drg_intern`
+--
+
+CREATE TABLE `care_encounter_drg_intern` (
+  `nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) NOT NULL default '0',
+  `date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `group_nr` mediumint(8) unsigned NOT NULL default '0',
+  `clinician` varchar(60) collate latin1_general_ci NOT NULL,
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `encounter_nr` (`encounter_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_event_signaller`
+--
+
+CREATE TABLE `care_encounter_event_signaller` (
+  `encounter_nr` int(10) unsigned NOT NULL default '0',
+  `yellow` tinyint(1) NOT NULL default '0',
+  `black` tinyint(1) NOT NULL default '0',
+  `blue_pale` tinyint(1) NOT NULL default '0',
+  `brown` tinyint(1) NOT NULL default '0',
+  `pink` tinyint(1) NOT NULL default '0',
+  `yellow_pale` tinyint(1) NOT NULL default '0',
+  `red` tinyint(1) NOT NULL default '0',
+  `green_pale` tinyint(1) NOT NULL default '0',
+  `violet` tinyint(1) NOT NULL default '0',
+  `blue` tinyint(1) NOT NULL default '0',
+  `biege` tinyint(1) NOT NULL default '0',
+  `orange` tinyint(1) NOT NULL default '0',
+  `green_1` tinyint(1) NOT NULL default '0',
+  `green_2` tinyint(1) NOT NULL default '0',
+  `green_3` tinyint(1) NOT NULL default '0',
+  `green_4` tinyint(1) NOT NULL default '0',
+  `green_5` tinyint(1) NOT NULL default '0',
+  `green_6` tinyint(1) NOT NULL default '0',
+  `green_7` tinyint(1) NOT NULL default '0',
+  `rose_1` tinyint(1) NOT NULL default '0',
+  `rose_2` tinyint(1) NOT NULL default '0',
+  `rose_3` tinyint(1) NOT NULL default '0',
+  `rose_4` tinyint(1) NOT NULL default '0',
+  `rose_5` tinyint(1) NOT NULL default '0',
+  `rose_6` tinyint(1) NOT NULL default '0',
+  `rose_7` tinyint(1) NOT NULL default '0',
+  `rose_8` tinyint(1) NOT NULL default '0',
+  `rose_9` tinyint(1) NOT NULL default '0',
+  `rose_10` tinyint(1) NOT NULL default '0',
+  `rose_11` tinyint(1) NOT NULL default '0',
+  `rose_12` tinyint(1) NOT NULL default '0',
+  `rose_13` tinyint(1) NOT NULL default '0',
+  `rose_14` tinyint(1) NOT NULL default '0',
+  `rose_15` tinyint(1) NOT NULL default '0',
+  `rose_16` tinyint(1) NOT NULL default '0',
+  `rose_17` tinyint(1) NOT NULL default '0',
+  `rose_18` tinyint(1) NOT NULL default '0',
+  `rose_19` tinyint(1) NOT NULL default '0',
+  `rose_20` tinyint(1) NOT NULL default '0',
+  `rose_21` tinyint(1) NOT NULL default '0',
+  `rose_22` tinyint(1) NOT NULL default '0',
+  `rose_23` tinyint(1) NOT NULL default '0',
+  `rose_24` tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (`encounter_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_financial_class`
+--
+
+CREATE TABLE `care_encounter_financial_class` (
+  `nr` bigint(20) unsigned NOT NULL auto_increment,
+  `encounter_nr` int(11) NOT NULL default '0',
+  `class_nr` smallint(3) unsigned NOT NULL default '0',
+  `date_start` date default NULL,
+  `date_end` date default NULL,
+  `date_create` datetime NOT NULL default '0000-00-00 00:00:00',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_image`
+--
+
+CREATE TABLE `care_encounter_image` (
+  `nr` bigint(20) NOT NULL auto_increment,
+  `encounter_nr` int(11) NOT NULL default '0',
+  `shot_date` date NOT NULL default '0000-00-00',
+  `shot_nr` smallint(6) NOT NULL default '0',
+  `mime_type` varchar(10) collate latin1_general_ci NOT NULL,
+  `upload_date` date NOT NULL default '0000-00-00',
+  `notes` text collate latin1_general_ci NOT NULL,
+  `graphic_script` text collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `encounter_nr` (`encounter_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_immunization`
+--
+
+CREATE TABLE `care_encounter_immunization` (
+  `nr` int(10) unsigned NOT NULL auto_increment,
+  `encounter_nr` int(11) NOT NULL default '0',
+  `date` date NOT NULL default '0000-00-00',
+  `type` varchar(60) collate latin1_general_ci NOT NULL,
+  `medicine` varchar(60) collate latin1_general_ci NOT NULL,
+  `dosage` varchar(60) collate latin1_general_ci default NULL,
+  `application_type_nr` smallint(5) unsigned NOT NULL default '0',
+  `application_by` varchar(60) collate latin1_general_ci default NULL,
+  `titer` varchar(15) collate latin1_general_ci default NULL,
+  `refresh_date` date default NULL,
+  `notes` text collate latin1_general_ci,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_location`
+--
+
+CREATE TABLE `care_encounter_location` (
+  `nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `type_nr` smallint(5) unsigned NOT NULL default '0',
+  `location_nr` smallint(5) unsigned NOT NULL default '0',
+  `group_nr` smallint(5) unsigned NOT NULL default '0',
+  `date_from` date NOT NULL default '0000-00-00',
+  `date_to` date NOT NULL default '0000-00-00',
+  `time_from` time default '00:00:00',
+  `time_to` time default NULL,
+  `discharge_type_nr` tinyint(3) unsigned NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`,`location_nr`),
+  KEY `type` (`type_nr`),
+  KEY `location_id` (`location_nr`),
+  KEY `encounter_nr` (`encounter_nr`),
+  KEY `location_nr` (`location_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1356 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_measurement`
+--
+
+CREATE TABLE `care_encounter_measurement` (
+  `nr` int(11) unsigned NOT NULL auto_increment,
+  `msr_date` date NOT NULL default '0000-00-00',
+  `msr_time` float(4,2) NOT NULL default '0.00',
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `msr_type_nr` tinyint(3) unsigned NOT NULL default '0',
+  `value` varchar(255) collate latin1_general_ci default NULL,
+  `unit_nr` smallint(5) unsigned default NULL,
+  `unit_type_nr` tinyint(2) unsigned NOT NULL default '0',
+  `notes` varchar(255) collate latin1_general_ci default NULL,
+  `measured_by` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `type` (`msr_type_nr`),
+  KEY `encounter_nr` (`encounter_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=27 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_notes`
+--
+
+CREATE TABLE `care_encounter_notes` (
+  `nr` int(10) unsigned NOT NULL auto_increment,
+  `encounter_nr` int(10) unsigned NOT NULL default '0',
+  `type_nr` smallint(5) unsigned NOT NULL default '0',
+  `notes` text collate latin1_general_ci NOT NULL,
+  `short_notes` varchar(25) collate latin1_general_ci default NULL,
+  `aux_notes` varchar(255) collate latin1_general_ci default NULL,
+  `ref_notes_nr` int(10) unsigned NOT NULL default '0',
+  `personell_nr` int(10) unsigned NOT NULL default '0',
+  `personell_name` varchar(60) collate latin1_general_ci NOT NULL,
+  `send_to_pid` int(11) NOT NULL default '0',
+  `send_to_name` varchar(60) collate latin1_general_ci default NULL,
+  `date` date default NULL,
+  `time` time default NULL,
+  `location_type` varchar(35) collate latin1_general_ci default NULL,
+  `location_type_nr` tinyint(3) NOT NULL default '0',
+  `location_nr` mediumint(8) unsigned NOT NULL default '0',
+  `location_id` varchar(60) collate latin1_general_ci default NULL,
+  `ack_short_id` varchar(10) collate latin1_general_ci NOT NULL,
+  `date_ack` datetime default NULL,
+  `date_checked` datetime default NULL,
+  `date_printed` datetime default NULL,
+  `send_by_mail` tinyint(1) default NULL,
+  `send_by_email` tinyint(1) default NULL,
+  `send_by_fax` tinyint(1) default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `encounter_nr` (`encounter_nr`),
+  KEY `type_nr` (`type_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1029 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_obstetric`
+--
+
+CREATE TABLE `care_encounter_obstetric` (
+  `encounter_nr` int(11) unsigned NOT NULL auto_increment,
+  `pregnancy_nr` int(11) unsigned NOT NULL default '0',
+  `hospital_adm_nr` int(11) unsigned NOT NULL default '0',
+  `patient_class` varchar(60) collate latin1_general_ci NOT NULL,
+  `is_discharged_not_in_labour` tinyint(1) default NULL,
+  `is_re_admission` tinyint(1) default NULL,
+  `referral_status` varchar(60) collate latin1_general_ci default NULL,
+  `referral_reason` text collate latin1_general_ci,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`encounter_nr`),
+  KEY `encounter_nr` (`pregnancy_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_op`
+--
+
+CREATE TABLE `care_encounter_op` (
+  `nr` int(11) NOT NULL auto_increment,
+  `year` varchar(4) collate latin1_general_ci NOT NULL default '0',
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `op_room` varchar(10) collate latin1_general_ci NOT NULL default '0',
+  `op_nr` mediumint(9) NOT NULL default '0',
+  `op_date` date NOT NULL default '0000-00-00',
+  `op_src_date` varchar(8) collate latin1_general_ci NOT NULL,
+  `encounter_nr` int(10) unsigned NOT NULL default '0',
+  `diagnosis` text collate latin1_general_ci NOT NULL,
+  `operator` text collate latin1_general_ci NOT NULL,
+  `assistant` text collate latin1_general_ci NOT NULL,
+  `scrub_nurse` text collate latin1_general_ci NOT NULL,
+  `rotating_nurse` text collate latin1_general_ci NOT NULL,
+  `anesthesia` varchar(30) collate latin1_general_ci NOT NULL,
+  `an_doctor` text collate latin1_general_ci NOT NULL,
+  `op_therapy` text collate latin1_general_ci NOT NULL,
+  `result_info` text collate latin1_general_ci NOT NULL,
+  `entry_time` varchar(5) collate latin1_general_ci NOT NULL,
+  `cut_time` varchar(5) collate latin1_general_ci NOT NULL,
+  `close_time` varchar(5) collate latin1_general_ci NOT NULL,
+  `exit_time` varchar(5) collate latin1_general_ci NOT NULL,
+  `entry_out` text collate latin1_general_ci NOT NULL,
+  `cut_close` text collate latin1_general_ci NOT NULL,
+  `wait_time` text collate latin1_general_ci NOT NULL,
+  `bandage_time` text collate latin1_general_ci NOT NULL,
+  `repos_time` text collate latin1_general_ci NOT NULL,
+  `encoding` longtext collate latin1_general_ci NOT NULL,
+  `doc_date` varchar(10) collate latin1_general_ci NOT NULL,
+  `doc_time` varchar(5) collate latin1_general_ci NOT NULL,
+  `duty_type` varchar(15) collate latin1_general_ci NOT NULL,
+  `material_codedlist` text collate latin1_general_ci NOT NULL,
+  `container_codedlist` text collate latin1_general_ci NOT NULL,
+  `icd_code` text collate latin1_general_ci NOT NULL,
+  `ops_code` text collate latin1_general_ci NOT NULL,
+  `ops_intern_code` text collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `dept` (`dept_nr`),
+  KEY `op_room` (`op_room`),
+  KEY `op_date` (`op_date`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_prescription`
+--
+
+CREATE TABLE `care_encounter_prescription` (
+  `nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(10) unsigned NOT NULL default '0',
+  `prescribe_date` date default NULL,
+  `notes` text collate latin1_general_ci,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `prescriber` varchar(60) collate latin1_general_ci NOT NULL,
+  `dept_nr` int(11) NOT NULL default '0' COMMENT 'the dept from wich the prescriprion is being made',
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `encounter_nr` (`encounter_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AVG_ROW_LENGTH=85 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_prescription_notes`
+--
+
+CREATE TABLE `care_encounter_prescription_notes` (
+  `nr` bigint(20) unsigned NOT NULL auto_increment,
+  `date` date NOT NULL default '0000-00-00',
+  `prescription_nr` int(10) unsigned NOT NULL default '0',
+  `notes` varchar(35) collate latin1_general_ci default NULL,
+  `short_notes` varchar(25) collate latin1_general_ci default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_prescription_sub`
+--
+
+CREATE TABLE `care_encounter_prescription_sub` (
+  `nr` int(11) NOT NULL auto_increment,
+  `prescription_nr` int(11) NOT NULL default '0',
+  `prescription_type_nr` smallint(5) NOT NULL default '0',
+  `bestellnum` varchar(20) collate latin1_general_ci NOT NULL default '0',
+  `article` varchar(100) collate latin1_general_ci NOT NULL,
+  `drug_class` varchar(60) collate latin1_general_ci NOT NULL,
+  `dosage` varchar(255) collate latin1_general_ci NOT NULL,
+  `admin_time` varchar(50) collate latin1_general_ci NOT NULL default '00',
+  `quantity` varchar(10) collate latin1_general_ci NOT NULL default '0',
+  `application_type_nr` smallint(5) NOT NULL default '0',
+  `sub_speed` double(5,3) default NULL,
+  `notes_sub` text collate latin1_general_ci,
+  `color_marker` varchar(10) collate latin1_general_ci NOT NULL,
+  `is_stopped` tinyint(1) NOT NULL default '0',
+  `stop_date` date default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `companion` varchar(50) collate latin1_general_ci NOT NULL default '-1',
+  `price` decimal(10,2) NOT NULL default '0.00',
+  PRIMARY KEY  (`nr`),
+  KEY `prescription_nr` (`prescription_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_procedure`
+--
+
+CREATE TABLE `care_encounter_procedure` (
+  `procedure_nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) NOT NULL default '0',
+  `op_nr` int(11) NOT NULL default '0',
+  `date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `code` varchar(25) collate latin1_general_ci NOT NULL,
+  `code_parent` varchar(25) collate latin1_general_ci NOT NULL,
+  `group_nr` mediumint(8) unsigned NOT NULL default '0',
+  `code_version` tinyint(4) NOT NULL default '0',
+  `localcode` varchar(35) collate latin1_general_ci NOT NULL,
+  `category_nr` tinyint(3) unsigned NOT NULL default '0',
+  `localization` varchar(35) collate latin1_general_ci NOT NULL,
+  `responsible_clinician` varchar(60) collate latin1_general_ci NOT NULL,
+  `responsible_dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`procedure_nr`),
+  KEY `encounter_nr` (`encounter_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_encounter_sickconfirm`
+--
+
+CREATE TABLE `care_encounter_sickconfirm` (
+  `nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) NOT NULL default '0',
+  `date_confirm` date NOT NULL default '0000-00-00',
+  `date_start` date NOT NULL default '0000-00-00',
+  `date_end` date NOT NULL default '0000-00-00',
+  `date_create` date NOT NULL default '0000-00-00',
+  `diagnosis` text collate latin1_general_ci NOT NULL,
+  `dept_nr` smallint(6) NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `encounter_nr` (`encounter_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_furnitor`
+--
+
+CREATE TABLE `care_furnitor` (
+  `idcare_furnitor` int(3) NOT NULL auto_increment,
+  `furnitori` varchar(35) collate latin1_general_ci NOT NULL,
+  `adresa` varchar(100) collate latin1_general_ci default NULL,
+  `telefon` varchar(35) collate latin1_general_ci default NULL,
+  `fax` varchar(35) collate latin1_general_ci default NULL,
+  `kodi_postar` varchar(5) collate latin1_general_ci default NULL,
+  `perfaqesues` varchar(35) collate latin1_general_ci default NULL,
+  `history` text collate latin1_general_ci,
+  `create_id` varchar(35) collate latin1_general_ci default NULL,
+  `create_time` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`idcare_furnitor`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=49 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_furnizim`
+--
+
+CREATE TABLE `care_furnizim` (
+  `idcare_furnizim` int(10) unsigned NOT NULL auto_increment,
+  `idcare_furnitor` tinyint(3) unsigned NOT NULL,
+  `bestellnum` varchar(25) collate latin1_general_ci NOT NULL,
+  `skadenca` varchar(25) collate latin1_general_ci default '0000-00-00 00:00:00',
+  `sasi` int(10) unsigned default '0',
+  `cmimi` double default '0',
+  `vlera` double default '0',
+  `shenime` varchar(200) collate latin1_general_ci default NULL,
+  `nr_fature` varchar(25) collate latin1_general_ci default NULL,
+  `create_time` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci default NULL,
+  `history` text collate latin1_general_ci,
+  `order_date` date default NULL,
+  `articles` text collate latin1_general_ci,
+  `order_time` time default NULL,
+  `ip_addr` tinytext collate latin1_general_ci,
+  `status` varchar(25) collate latin1_general_ci default NULL,
+  `sent_datetime` datetime default '0000-00-00 00:00:00',
+  `validator` tinytext collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci default NULL,
+  `process_datetime` datetime default NULL,
+  PRIMARY KEY  (`idcare_furnizim`,`idcare_furnitor`,`bestellnum`),
+  KEY `idcare_furnitor` (`idcare_furnitor`),
+  KEY `bestellnum` (`bestellnum`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_furnizim_historik`
+--
+
+CREATE TABLE `care_furnizim_historik` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `id_furnitor` int(11) NOT NULL,
+  `data` date NOT NULL,
+  `nr_fature` int(11) NOT NULL,
+  `medikament` int(11) NOT NULL,
+  `sasia` double NOT NULL,
+  `cmimi` double NOT NULL,
+  `vlera` double NOT NULL,
+  `date_skadence` date NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_group`
+--
+
+CREATE TABLE `care_group` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `id` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_icd10_it`
+--
+
+CREATE TABLE `care_icd10_it` (
+  `diagnosis_code` varchar(12) collate latin1_general_ci NOT NULL,
+  `description` text collate latin1_general_ci NOT NULL,
+  `class_sub` varchar(5) collate latin1_general_ci NOT NULL,
+  `type` varchar(10) collate latin1_general_ci NOT NULL,
+  `inclusive` text collate latin1_general_ci NOT NULL,
+  `exclusive` text collate latin1_general_ci NOT NULL,
+  `notes` text collate latin1_general_ci NOT NULL,
+  `std_code` char(1) collate latin1_general_ci NOT NULL,
+  `sub_level` tinyint(4) NOT NULL default '0',
+  `remarks` text collate latin1_general_ci NOT NULL,
+  `extra_codes` text collate latin1_general_ci NOT NULL,
+  `extra_subclass` text collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`diagnosis_code`),
+  KEY `diagnosis_code` (`diagnosis_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_img_diagnostic`
+--
+
+CREATE TABLE `care_img_diagnostic` (
+  `nr` bigint(20) NOT NULL auto_increment,
+  `pid` int(11) NOT NULL default '0',
+  `encounter_nr` int(11) NOT NULL default '0',
+  `doc_ref_ids` varchar(255) collate latin1_general_ci default NULL,
+  `img_type` varchar(10) collate latin1_general_ci NOT NULL,
+  `max_nr` tinyint(2) default '0',
+  `upload_date` date NOT NULL default '0000-00-00',
+  `cancel_date` date NOT NULL default '0000-00-00',
+  `cancel_by` varchar(35) collate latin1_general_ci default NULL,
+  `notes` text collate latin1_general_ci,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `encounter_nr` (`pid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_insurance_firm`
+--
+
+CREATE TABLE `care_insurance_firm` (
+  `firm_id` varchar(40) collate latin1_general_ci NOT NULL,
+  `name` varchar(60) collate latin1_general_ci NOT NULL,
+  `iso_country_id` char(3) collate latin1_general_ci NOT NULL,
+  `sub_area` varchar(60) collate latin1_general_ci NOT NULL,
+  `type_nr` smallint(5) unsigned NOT NULL default '0',
+  `addr` varchar(255) collate latin1_general_ci default NULL,
+  `addr_mail` varchar(200) collate latin1_general_ci default NULL,
+  `addr_billing` varchar(200) collate latin1_general_ci default NULL,
+  `addr_email` varchar(60) collate latin1_general_ci default NULL,
+  `phone_main` varchar(35) collate latin1_general_ci default NULL,
+  `phone_aux` varchar(35) collate latin1_general_ci default NULL,
+  `fax_main` varchar(35) collate latin1_general_ci default NULL,
+  `fax_aux` varchar(35) collate latin1_general_ci default NULL,
+  `contact_person` varchar(60) collate latin1_general_ci default NULL,
+  `contact_phone` varchar(35) collate latin1_general_ci default NULL,
+  `contact_fax` varchar(35) collate latin1_general_ci default NULL,
+  `contact_email` varchar(60) collate latin1_general_ci default NULL,
+  `use_frequency` bigint(20) unsigned NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`firm_id`),
+  KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_mail_private`
+--
+
+CREATE TABLE `care_mail_private` (
+  `recipient` varchar(60) collate latin1_general_ci NOT NULL,
+  `sender` varchar(60) collate latin1_general_ci NOT NULL,
+  `sender_ip` varchar(60) collate latin1_general_ci NOT NULL,
+  `cc` varchar(255) collate latin1_general_ci NOT NULL,
+  `bcc` varchar(255) collate latin1_general_ci NOT NULL,
+  `subject` varchar(255) collate latin1_general_ci NOT NULL,
+  `body` text collate latin1_general_ci NOT NULL,
+  `sign` varchar(255) collate latin1_general_ci NOT NULL,
+  `ask4ack` tinyint(4) NOT NULL default '0',
+  `reply2` varchar(255) collate latin1_general_ci NOT NULL,
+  `attachment` varchar(255) collate latin1_general_ci NOT NULL,
+  `attach_type` varchar(30) collate latin1_general_ci NOT NULL,
+  `read_flag` tinyint(4) NOT NULL default '0',
+  `mailgroup` varchar(60) collate latin1_general_ci NOT NULL,
+  `maildir` varchar(60) collate latin1_general_ci NOT NULL,
+  `exec_level` tinyint(4) NOT NULL default '0',
+  `exclude_addr` text collate latin1_general_ci NOT NULL,
+  `send_dt` datetime NOT NULL default '0000-00-00 00:00:00',
+  `send_stamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `uid` varchar(255) collate latin1_general_ci NOT NULL,
+  KEY `recipient` (`recipient`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_mail_private_users`
+--
+
+CREATE TABLE `care_mail_private_users` (
+  `user_name` varchar(60) collate latin1_general_ci NOT NULL,
+  `email` varchar(60) collate latin1_general_ci NOT NULL,
+  `alias` varchar(60) collate latin1_general_ci NOT NULL,
+  `pw` varchar(255) collate latin1_general_ci NOT NULL,
+  `inbox` longtext collate latin1_general_ci NOT NULL,
+  `sent` longtext collate latin1_general_ci NOT NULL,
+  `drafts` longtext collate latin1_general_ci NOT NULL,
+  `trash` longtext collate latin1_general_ci NOT NULL,
+  `lastcheck` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `lock_flag` tinyint(4) NOT NULL default '0',
+  `addr_book` text collate latin1_general_ci NOT NULL,
+  `addr_quick` tinytext collate latin1_general_ci NOT NULL,
+  `secret_q` tinytext collate latin1_general_ci NOT NULL,
+  `secret_q_ans` tinytext collate latin1_general_ci NOT NULL,
+  `public` tinyint(4) NOT NULL default '0',
+  `sig` tinytext collate latin1_general_ci NOT NULL,
+  `append_sig` tinyint(4) NOT NULL default '0',
+  PRIMARY KEY  (`email`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_med_ordercatalog`
+--
+
+CREATE TABLE `care_med_ordercatalog` (
+  `item_no` int(11) NOT NULL auto_increment,
+  `dept_nr` int(3) NOT NULL default '0',
+  `hit` int(11) NOT NULL default '0',
+  `artikelname` tinytext collate latin1_general_ci NOT NULL,
+  `bestellnum` varchar(20) collate latin1_general_ci NOT NULL,
+  `minorder` int(4) NOT NULL default '0',
+  `maxorder` int(4) NOT NULL default '0',
+  `proorder` tinytext collate latin1_general_ci NOT NULL,
+  `furnitor_nr` int(3) default '0',
+  `doza` tinytext collate latin1_general_ci,
+  `packing` tinytext collate latin1_general_ci,
+  PRIMARY KEY  (`item_no`),
+  KEY `item_no` (`item_no`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_med_orderlist`
+--
+
+CREATE TABLE `care_med_orderlist` (
+  `order_nr` int(11) NOT NULL auto_increment,
+  `dept_nr` int(3) NOT NULL default '0',
+  `order_date` date NOT NULL default '0000-00-00',
+  `order_time` time NOT NULL default '00:00:00',
+  `articles` text collate latin1_general_ci NOT NULL,
+  `extra1` tinytext collate latin1_general_ci NOT NULL,
+  `extra2` text collate latin1_general_ci NOT NULL,
+  `validator` tinytext collate latin1_general_ci NOT NULL,
+  `ip_addr` tinytext collate latin1_general_ci NOT NULL,
+  `priority` tinytext collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `sent_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
+  `process_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`order_nr`),
+  KEY `item_nr` (`order_nr`),
+  KEY `dept` (`dept_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=102 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_med_orderlist_sub`
+--
+
+CREATE TABLE `care_med_orderlist_sub` (
+  `sub_order` int(20) NOT NULL auto_increment,
+  `order_nr_sub` int(20) NOT NULL,
+  `bestellnum` varchar(25) collate latin1_general_ci default '0',
+  `idsub` varchar(20) collate latin1_general_ci NOT NULL default '0' COMMENT 'id te care_pharma_products_main_sub',
+  `artikelname` varchar(25) collate latin1_general_ci default NULL,
+  `pcs` decimal(11,2) default NULL,
+  `maxorder` int(11) default NULL,
+  `minorder` int(11) default NULL,
+  `proorder` int(11) default NULL,
+  `njesia` varchar(20) collate latin1_general_ci default NULL,
+  `skadenca` date default NULL,
+  `cmimi` decimal(11,2) default NULL,
+  `doza` decimal(11,2) default NULL,
+  `vlera` decimal(11,2) NOT NULL default '0.00',
+  PRIMARY KEY  (`sub_order`),
+  UNIQUE KEY `sub_order` (`sub_order`),
+  KEY `order_nr_sub` (`order_nr_sub`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_med_products_main`
+--
+
+CREATE TABLE `care_med_products_main` (
+  `bestellnum` varchar(25) collate latin1_general_ci NOT NULL,
+  `artikelnum` tinytext collate latin1_general_ci NOT NULL,
+  `industrynum` tinytext collate latin1_general_ci NOT NULL,
+  `artikelname` tinytext collate latin1_general_ci NOT NULL,
+  `generic` tinytext collate latin1_general_ci NOT NULL,
+  `description` text collate latin1_general_ci NOT NULL,
+  `packing` tinytext collate latin1_general_ci NOT NULL,
+  `doza` tinytext collate latin1_general_ci,
+  `minorder` int(4) NOT NULL default '0',
+  `maxorder` int(4) NOT NULL default '0',
+  `proorder` tinytext collate latin1_general_ci NOT NULL,
+  `picfile` tinytext collate latin1_general_ci NOT NULL,
+  `encoder` tinytext collate latin1_general_ci NOT NULL,
+  `enc_date` tinytext collate latin1_general_ci NOT NULL,
+  `enc_time` tinytext collate latin1_general_ci NOT NULL,
+  `lock_flag` tinyint(1) NOT NULL default '0',
+  `medgroup` text collate latin1_general_ci NOT NULL,
+  `cave` tinytext collate latin1_general_ci NOT NULL,
+  `status` varchar(20) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `magazina` tinytext collate latin1_general_ci,
+  `minpcs` int(99) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`bestellnum`),
+  KEY `bestellnum` (`bestellnum`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci MIN_ROWS=134 MAX_ROWS=10000000 AVG_ROW_LENGTH=135 PACK_KEYS=0 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_med_products_main_historik`
+--
+
+CREATE TABLE `care_med_products_main_historik` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `id_farmaci` int(11) NOT NULL default '0',
+  `data` date NOT NULL default '0000-00-00',
+  `nr_fature` int(11) NOT NULL default '0',
+  `medikament` tinytext collate latin1_general_ci,
+  `sasia` double NOT NULL default '0',
+  `cmimi` double NOT NULL default '0',
+  `vlera` double NOT NULL default '0',
+  `date_skadence` date NOT NULL default '0000-00-00',
+  `id_sub` int(11) NOT NULL COMMENT 'lidhja me id te sub product',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_med_products_main_sub`
+--
+
+CREATE TABLE `care_med_products_main_sub` (
+  `id` int(10) NOT NULL auto_increment,
+  `pcs` int(4) default NULL,
+  `skadenca` date default NULL,
+  `cmimi` double default NULL,
+  `bestellnum` varchar(25) collate latin1_general_ci default NULL COMMENT 'lidhja me care_med_products_main',
+  `idcare_furnizim` int(10) default NULL,
+  `create_time` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_menu_main`
+--
+
+CREATE TABLE `care_menu_main` (
+  `nr` tinyint(3) unsigned NOT NULL auto_increment,
+  `sort_nr` tinyint(2) NOT NULL default '0',
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `url` varchar(255) collate latin1_general_ci NOT NULL,
+  `is_visible` tinyint(1) unsigned NOT NULL default '1',
+  `hide_by` text collate latin1_general_ci,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(60) collate latin1_general_ci default NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=22 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_menu_sub`
+--
+
+CREATE TABLE `care_menu_sub` (
+  `s_nr` int(11) NOT NULL default '0',
+  `s_sort_nr` int(11) NOT NULL default '0',
+  `s_main_nr` int(11) NOT NULL default '0',
+  `s_ebene` int(11) NOT NULL default '0',
+  `s_name` varchar(100) collate latin1_general_ci NOT NULL default '',
+  `s_LD_var` varchar(100) collate latin1_general_ci NOT NULL default '',
+  `s_url` varchar(100) collate latin1_general_ci NOT NULL default '',
+  `s_url_ext` varchar(100) collate latin1_general_ci NOT NULL default '',
+  `s_image` varchar(100) collate latin1_general_ci NOT NULL default '',
+  `s_open_image` varchar(100) collate latin1_general_ci NOT NULL default '',
+  `s_is_visible` varchar(100) collate latin1_general_ci NOT NULL default '',
+  `s_hide_by` varchar(100) collate latin1_general_ci NOT NULL default '',
+  `s_status` varchar(100) collate latin1_general_ci NOT NULL default '',
+  `s_modify_id` varchar(100) collate latin1_general_ci NOT NULL default '',
+  `s_modify_time` datetime NOT NULL default '0000-00-00 00:00:00'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_method_induction`
+--
+
+CREATE TABLE `care_method_induction` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `group_nr` tinyint(3) unsigned NOT NULL default '0',
+  `method` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_mode_delivery`
+--
+
+CREATE TABLE `care_mode_delivery` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `group_nr` tinyint(3) unsigned NOT NULL default '0',
+  `mode` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_neonatal`
+--
+
+CREATE TABLE `care_neonatal` (
+  `nr` int(11) unsigned NOT NULL auto_increment,
+  `pid` int(11) unsigned NOT NULL default '0',
+  `delivery_date` date NOT NULL default '0000-00-00',
+  `parent_encounter_nr` int(11) unsigned NOT NULL default '0',
+  `delivery_nr` tinyint(4) NOT NULL default '0',
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `delivery_place` varchar(60) collate latin1_general_ci NOT NULL,
+  `delivery_mode` tinyint(2) NOT NULL default '0',
+  `c_s_reason` text collate latin1_general_ci,
+  `born_before_arrival` tinyint(1) default '0',
+  `face_presentation` tinyint(1) NOT NULL default '0',
+  `posterio_occipital_position` tinyint(1) NOT NULL default '0',
+  `delivery_rank` tinyint(2) unsigned NOT NULL default '1',
+  `apgar_1_min` tinyint(4) NOT NULL default '0',
+  `apgar_5_min` tinyint(4) NOT NULL default '0',
+  `apgar_10_min` tinyint(4) NOT NULL default '0',
+  `time_to_spont_resp` tinyint(2) default NULL,
+  `condition` varchar(60) collate latin1_general_ci default '0',
+  `weight` float(8,2) unsigned default NULL,
+  `length` float(8,2) unsigned default NULL,
+  `head_circumference` float(8,2) unsigned default NULL,
+  `scored_gestational_age` float(4,2) unsigned default NULL,
+  `feeding` tinyint(4) NOT NULL default '0',
+  `congenital_abnormality` varchar(125) collate latin1_general_ci NOT NULL,
+  `classification` varchar(255) collate latin1_general_ci NOT NULL default '0',
+  `disease_category` tinyint(2) NOT NULL default '0',
+  `outcome` tinyint(2) NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `pid` (`pid`),
+  KEY `pregnancy_nr` (`parent_encounter_nr`),
+  KEY `encounter_nr` (`encounter_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_news_article`
+--
+
+CREATE TABLE `care_news_article` (
+  `nr` int(11) NOT NULL auto_increment,
+  `lang` varchar(10) collate latin1_general_ci NOT NULL default 'en',
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `category` tinytext collate latin1_general_ci NOT NULL,
+  `status` varchar(10) collate latin1_general_ci NOT NULL default 'pending',
+  `title` varchar(255) collate latin1_general_ci NOT NULL,
+  `preface` text collate latin1_general_ci NOT NULL,
+  `body` text collate latin1_general_ci NOT NULL,
+  `pic` blob,
+  `pic_mime` varchar(4) collate latin1_general_ci default NULL,
+  `art_num` tinyint(1) NOT NULL default '0',
+  `head_file` tinytext collate latin1_general_ci NOT NULL,
+  `main_file` tinytext collate latin1_general_ci NOT NULL,
+  `pic_file` tinytext collate latin1_general_ci NOT NULL,
+  `author` varchar(30) collate latin1_general_ci NOT NULL,
+  `submit_date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `encode_date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `publish_date` date NOT NULL default '0000-00-00',
+  `modify_id` varchar(30) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(30) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `item_no` (`nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_ops301_it`
+--
+
+CREATE TABLE `care_ops301_it` (
+  `code` varchar(12) collate latin1_general_ci NOT NULL,
+  `description` text collate latin1_general_ci NOT NULL,
+  `inclusive` text collate latin1_general_ci NOT NULL,
+  `exclusive` text collate latin1_general_ci NOT NULL,
+  `notes` text collate latin1_general_ci NOT NULL,
+  `std_code` char(1) collate latin1_general_ci NOT NULL,
+  `sub_level` tinyint(4) NOT NULL default '0',
+  `remarks` text collate latin1_general_ci NOT NULL,
+  KEY `code` (`code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_op_med_doc`
+--
+
+CREATE TABLE `care_op_med_doc` (
+  `nr` bigint(20) unsigned NOT NULL auto_increment,
+  `op_date` varchar(12) collate latin1_general_ci NOT NULL,
+  `operator` tinytext collate latin1_general_ci NOT NULL,
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `diagnosis` text collate latin1_general_ci NOT NULL,
+  `localize` text collate latin1_general_ci NOT NULL,
+  `therapy` text collate latin1_general_ci NOT NULL,
+  `special` text collate latin1_general_ci NOT NULL,
+  `class_s` tinyint(4) NOT NULL default '0',
+  `class_m` tinyint(4) NOT NULL default '0',
+  `class_l` tinyint(4) NOT NULL default '0',
+  `op_start` varchar(8) collate latin1_general_ci NOT NULL,
+  `op_end` varchar(8) collate latin1_general_ci NOT NULL,
+  `scrub_nurse` varchar(70) collate latin1_general_ci NOT NULL,
+  `op_room` varchar(10) collate latin1_general_ci NOT NULL,
+  `status` varchar(15) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `encounter_nr` (`encounter_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_person`
+--
+
+CREATE TABLE `care_person` (
+  `pid` int(11) unsigned NOT NULL auto_increment,
+  `date_reg` datetime NOT NULL default '0000-00-00 00:00:00',
+  `name_first` varchar(60) collate latin1_general_ci NOT NULL,
+  `name_2` varchar(60) collate latin1_general_ci default NULL,
+  `name_3` varchar(60) collate latin1_general_ci default NULL,
+  `name_middle` varchar(60) collate latin1_general_ci default NULL,
+  `name_last` varchar(60) collate latin1_general_ci NOT NULL,
+  `name_maiden` varchar(60) collate latin1_general_ci default NULL,
+  `name_others` text collate latin1_general_ci NOT NULL,
+  `date_birth` date NOT NULL default '0000-00-00',
+  `blood_group` char(2) collate latin1_general_ci NOT NULL,
+  `addr_str` varchar(60) collate latin1_general_ci NOT NULL,
+  `addr_str_nr` varchar(10) collate latin1_general_ci NOT NULL,
+  `addr_zip` varchar(15) collate latin1_general_ci NOT NULL,
+  `addr_citytown_nr` mediumint(8) unsigned NOT NULL default '0',
+  `addr_is_valid` tinyint(1) NOT NULL default '0',
+  `citizenship` varchar(35) collate latin1_general_ci default NULL,
+  `phone_1_code` varchar(15) collate latin1_general_ci default '0',
+  `phone_1_nr` varchar(35) collate latin1_general_ci default NULL,
+  `phone_2_code` varchar(15) collate latin1_general_ci default '0',
+  `phone_2_nr` varchar(35) collate latin1_general_ci default NULL,
+  `cellphone_1_nr` varchar(35) collate latin1_general_ci default NULL,
+  `cellphone_2_nr` varchar(35) collate latin1_general_ci default NULL,
+  `fax` varchar(35) collate latin1_general_ci default NULL,
+  `email` varchar(60) collate latin1_general_ci default NULL,
+  `civil_status` varchar(35) collate latin1_general_ci NOT NULL,
+  `sex` char(1) collate latin1_general_ci NOT NULL,
+  `title` varchar(25) collate latin1_general_ci default NULL,
+  `photo` blob,
+  `photo_filename` varchar(60) collate latin1_general_ci NOT NULL,
+  `ethnic_orig` mediumint(8) unsigned default NULL,
+  `org_id` varchar(60) collate latin1_general_ci default NULL,
+  `sss_nr` varchar(60) collate latin1_general_ci default NULL,
+  `nat_id_nr` varchar(60) collate latin1_general_ci default NULL,
+  `religion` varchar(125) collate latin1_general_ci default NULL,
+  `mother_pid` int(11) unsigned NOT NULL default '0',
+  `father_pid` int(11) unsigned NOT NULL default '0',
+  `contact_person` varchar(255) collate latin1_general_ci default NULL,
+  `contact_pid` int(11) unsigned NOT NULL default '0',
+  `contact_relation` varchar(25) collate latin1_general_ci default '0',
+  `death_date` date NOT NULL default '0000-00-00',
+  `death_encounter_nr` int(10) unsigned NOT NULL default '0',
+  `death_cause` varchar(255) collate latin1_general_ci default NULL,
+  `death_cause_code` varchar(15) collate latin1_general_ci default NULL,
+  `date_update` datetime default NULL,
+  `status` varchar(20) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `relative_name_first` varchar(60) collate latin1_general_ci default NULL,
+  `relative_name_last` varchar(60) collate latin1_general_ci default NULL,
+  `relative_phone` varchar(35) collate latin1_general_ci default NULL,
+  PRIMARY KEY  (`pid`),
+  KEY `name_last` (`name_last`),
+  KEY `name_first` (`name_first`),
+  KEY `date_reg` (`date_reg`),
+  KEY `date_birth` (`date_birth`),
+  KEY `pid` (`pid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci ROW_FORMAT=DYNAMIC COMMENT='InnoDB free: 11264 kB' AUTO_INCREMENT=10000538 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_personell`
+--
+
+CREATE TABLE `care_personell` (
+  `nr` int(11) NOT NULL auto_increment,
+  `short_id` varchar(10) collate latin1_general_ci default NULL,
+  `pid` int(11) NOT NULL default '0',
+  `job_type_nr` int(11) NOT NULL default '0',
+  `job_function_title` varchar(60) collate latin1_general_ci default NULL,
+  `date_join` date default NULL,
+  `date_exit` date default NULL,
+  `contract_class` varchar(35) collate latin1_general_ci NOT NULL default '0',
+  `contract_start` date default NULL,
+  `contract_end` date default NULL,
+  `is_discharged` tinyint(1) NOT NULL default '0',
+  `pay_class` varchar(25) collate latin1_general_ci NOT NULL,
+  `pay_class_sub` varchar(25) collate latin1_general_ci NOT NULL,
+  `local_premium_id` varchar(5) collate latin1_general_ci NOT NULL,
+  `tax_account_nr` varchar(60) collate latin1_general_ci NOT NULL,
+  `ir_code` varchar(25) collate latin1_general_ci NOT NULL,
+  `nr_workday` tinyint(1) NOT NULL default '0',
+  `nr_weekhour` float(10,2) NOT NULL default '0.00',
+  `nr_vacation_day` tinyint(2) NOT NULL default '0',
+  `multiple_employer` tinyint(1) NOT NULL default '0',
+  `nr_dependent` tinyint(2) unsigned NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`,`pid`,`job_type_nr`),
+  KEY `pid` (`pid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=100029 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_personell_assignment`
+--
+
+CREATE TABLE `care_personell_assignment` (
+  `nr` int(10) unsigned NOT NULL auto_increment,
+  `personell_nr` int(11) unsigned NOT NULL default '0',
+  `role_nr` smallint(5) unsigned NOT NULL default '0',
+  `location_type_nr` smallint(5) unsigned NOT NULL default '0',
+  `location_nr` smallint(5) unsigned NOT NULL default '0',
+  `date_start` date NOT NULL default '0000-00-00',
+  `date_end` date NOT NULL default '0000-00-00',
+  `is_temporary` tinyint(1) unsigned default NULL,
+  `list_frequency` int(11) unsigned NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`,`personell_nr`,`role_nr`,`location_type_nr`,`location_nr`),
+  KEY `personell_nr` (`personell_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=12 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_person_insurance`
+--
+
+CREATE TABLE `care_person_insurance` (
+  `item_nr` int(10) unsigned NOT NULL auto_increment,
+  `pid` int(10) unsigned NOT NULL default '0',
+  `type` varchar(60) collate latin1_general_ci NOT NULL,
+  `insurance_nr` varchar(50) collate latin1_general_ci NOT NULL default '0',
+  `firm_id` varchar(60) collate latin1_general_ci NOT NULL,
+  `class_nr` tinyint(2) unsigned NOT NULL default '0',
+  `is_void` tinyint(1) unsigned NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`item_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=10 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_person_other_number`
+--
+
+CREATE TABLE `care_person_other_number` (
+  `nr` int(10) unsigned NOT NULL auto_increment,
+  `pid` int(11) unsigned NOT NULL default '0',
+  `other_nr` varchar(30) collate latin1_general_ci NOT NULL,
+  `org` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `pid` (`pid`),
+  KEY `other_nr` (`other_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_pharma_ordercatalog`
+--
+
+CREATE TABLE `care_pharma_ordercatalog` (
+  `item_no` int(11) NOT NULL auto_increment,
+  `dept_nr` int(3) NOT NULL default '0',
+  `hit` int(11) NOT NULL default '0',
+  `artikelname` tinytext collate latin1_general_ci NOT NULL,
+  `bestellnum` varchar(20) collate latin1_general_ci NOT NULL,
+  `minorder` int(4) NOT NULL default '0',
+  `maxorder` int(4) NOT NULL default '0',
+  `proorder` tinytext collate latin1_general_ci NOT NULL,
+  `doza` tinytext collate latin1_general_ci,
+  `packing` tinytext collate latin1_general_ci,
+  `quantity` int(11) NOT NULL default '0',
+  KEY `item_no` (`item_no`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_pharma_orderlist`
+--
+
+CREATE TABLE `care_pharma_orderlist` (
+  `order_nr` int(11) NOT NULL auto_increment,
+  `dept_nr` int(3) NOT NULL default '0',
+  `order_date` date NOT NULL default '0000-00-00',
+  `order_time` time NOT NULL default '00:00:00',
+  `articles` text collate latin1_general_ci NOT NULL,
+  `extra1` tinytext collate latin1_general_ci NOT NULL,
+  `extra2` text collate latin1_general_ci NOT NULL,
+  `validator` tinytext collate latin1_general_ci NOT NULL,
+  `ip_addr` tinytext collate latin1_general_ci NOT NULL,
+  `priority` tinytext collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `sent_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
+  `process_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`order_nr`,`dept_nr`),
+  KEY `dept` (`dept_nr`),
+  KEY `order_nr` (`order_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_pharma_orderlist_sub`
+--
+
+CREATE TABLE `care_pharma_orderlist_sub` (
+  `sub_order` int(20) NOT NULL auto_increment,
+  `order_nr_sub` int(20) NOT NULL,
+  `bestellnum` varchar(25) collate latin1_general_ci default '0',
+  `idsub` varchar(20) collate latin1_general_ci NOT NULL default '0' COMMENT 'id te care_pharma_products_main_sub',
+  `artikelname` varchar(25) collate latin1_general_ci default NULL,
+  `pcs` decimal(11,2) default NULL,
+  `maxorder` int(11) default NULL,
+  `minorder` int(11) default NULL,
+  `proorder` int(11) default NULL,
+  `njesia` varchar(20) collate latin1_general_ci default NULL,
+  `skadenca` date default NULL,
+  `cmimi` decimal(11,2) default NULL,
+  `doza` decimal(11,2) default NULL,
+  `vlera` decimal(11,2) NOT NULL default '0.00',
+  PRIMARY KEY  (`sub_order`),
+  UNIQUE KEY `sub_order` (`sub_order`),
+  KEY `order_nr_sub` (`order_nr_sub`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_pharma_products_main`
+--
+
+CREATE TABLE `care_pharma_products_main` (
+  `bestellnum` varchar(25) collate latin1_general_ci NOT NULL,
+  `id_sub` int(11) NOT NULL COMMENT 'lidhja me nenkartelen e produktit',
+  `artikelnum` tinytext collate latin1_general_ci NOT NULL,
+  `industrynum` tinytext collate latin1_general_ci NOT NULL,
+  `artikelname` tinytext collate latin1_general_ci NOT NULL,
+  `generic` tinytext collate latin1_general_ci NOT NULL,
+  `description` text collate latin1_general_ci NOT NULL,
+  `packing` tinytext collate latin1_general_ci NOT NULL,
+  `doza` tinytext collate latin1_general_ci NOT NULL,
+  `minorder` int(4) NOT NULL default '0',
+  `maxorder` int(4) NOT NULL default '0',
+  `proorder` tinytext collate latin1_general_ci NOT NULL,
+  `picfile` tinytext collate latin1_general_ci NOT NULL,
+  `encoder` tinytext collate latin1_general_ci NOT NULL,
+  `enc_date` tinytext collate latin1_general_ci NOT NULL,
+  `enc_time` tinytext collate latin1_general_ci NOT NULL,
+  `lock_flag` tinyint(1) NOT NULL default '0',
+  `medgroup` text collate latin1_general_ci NOT NULL,
+  `cave` tinytext collate latin1_general_ci NOT NULL,
+  `status` varchar(20) collate latin1_general_ci NOT NULL,
+  `minpcs` int(99) unsigned NOT NULL default '0',
+  `magazina` tinytext collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`bestellnum`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci MIN_ROWS=186 MAX_ROWS=10000000 AVG_ROW_LENGTH=186 PACK_KEYS=0 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_pharma_products_main_historik`
+--
+
+CREATE TABLE `care_pharma_products_main_historik` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `id_repart` int(11) NOT NULL default '0',
+  `data` date NOT NULL default '0000-00-00',
+  `nr_fature` int(11) NOT NULL default '0',
+  `medikament` int(11) NOT NULL default '0',
+  `sasia` double NOT NULL default '0',
+  `cmimi` double NOT NULL default '0',
+  `vlera` double NOT NULL default '0',
+  `date_skadence` date NOT NULL default '0000-00-00',
+  `id_sub` int(11) NOT NULL COMMENT 'lidhja me nenkatelen e produktit',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AVG_ROW_LENGTH=1170 COMMENT='InnoDB free: 6144 kB' AUTO_INCREMENT=10893 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_pharma_products_main_sub`
+--
+
+CREATE TABLE `care_pharma_products_main_sub` (
+  `id` int(10) NOT NULL auto_increment,
+  `bestellnum` varchar(25) collate latin1_general_ci default NULL COMMENT 'lidhja me care_pharma_products_main',
+  `pcs` int(4) default NULL,
+  `skadenca` date default NULL,
+  `cmimi` double default NULL,
+  `idcare_pharma` int(10) default NULL,
+  `create_time` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_phone`
+--
+
+CREATE TABLE `care_phone` (
+  `item_nr` bigint(20) unsigned NOT NULL auto_increment,
+  `title` varchar(25) collate latin1_general_ci default NULL,
+  `name` varchar(45) collate latin1_general_ci NOT NULL,
+  `vorname` varchar(45) collate latin1_general_ci NOT NULL,
+  `pid` int(11) unsigned NOT NULL default '0',
+  `personell_nr` int(10) unsigned NOT NULL default '0',
+  `dept_nr` smallint(3) unsigned NOT NULL default '0',
+  `beruf` varchar(25) collate latin1_general_ci default NULL,
+  `bereich1` varchar(25) collate latin1_general_ci default NULL,
+  `bereich2` varchar(25) collate latin1_general_ci default NULL,
+  `inphone1` varchar(15) collate latin1_general_ci default NULL,
+  `inphone2` varchar(15) collate latin1_general_ci default NULL,
+  `inphone3` varchar(15) collate latin1_general_ci default NULL,
+  `exphone1` varchar(25) collate latin1_general_ci default NULL,
+  `exphone2` varchar(25) collate latin1_general_ci default NULL,
+  `funk1` varchar(15) collate latin1_general_ci default NULL,
+  `funk2` varchar(15) collate latin1_general_ci default NULL,
+  `roomnr` varchar(10) collate latin1_general_ci default NULL,
+  `date` date NOT NULL default '0000-00-00',
+  `time` time NOT NULL default '00:00:00',
+  `status` varchar(15) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`item_nr`,`pid`,`personell_nr`,`dept_nr`),
+  KEY `name` (`name`),
+  KEY `vorname` (`vorname`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=29 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_pregnancy`
+--
+
+CREATE TABLE `care_pregnancy` (
+  `nr` int(10) unsigned NOT NULL auto_increment,
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `this_pregnancy_nr` int(11) unsigned NOT NULL default '0',
+  `delivery_date` date NOT NULL default '0000-00-00',
+  `delivery_time` time NOT NULL default '00:00:00',
+  `gravida` tinyint(2) unsigned default NULL,
+  `para` tinyint(2) unsigned default NULL,
+  `pregnancy_gestational_age` tinyint(2) unsigned default NULL,
+  `nr_of_fetuses` tinyint(2) unsigned default NULL,
+  `child_encounter_nr` varchar(255) collate latin1_general_ci NOT NULL,
+  `is_booked` tinyint(1) NOT NULL default '0',
+  `vdrl` char(1) collate latin1_general_ci default NULL,
+  `rh` tinyint(1) default NULL,
+  `delivery_mode` tinyint(2) NOT NULL default '0',
+  `delivery_by` varchar(60) collate latin1_general_ci default NULL,
+  `bp_systolic_high` smallint(4) unsigned default NULL,
+  `bp_diastolic_high` smallint(4) unsigned default NULL,
+  `proteinuria` tinyint(1) default NULL,
+  `labour_duration` smallint(3) unsigned default NULL,
+  `induction_method` tinyint(2) NOT NULL default '0',
+  `induction_indication` varchar(125) collate latin1_general_ci default NULL,
+  `anaesth_type_nr` tinyint(2) NOT NULL default '0',
+  `is_epidural` char(1) collate latin1_general_ci default NULL,
+  `complications` varchar(255) collate latin1_general_ci default NULL,
+  `perineum` tinyint(2) NOT NULL default '0',
+  `blood_loss` float(8,2) unsigned default NULL,
+  `blood_loss_unit` varchar(10) collate latin1_general_ci default NULL,
+  `is_retained_placenta` char(1) collate latin1_general_ci NOT NULL,
+  `post_labour_condition` varchar(35) collate latin1_general_ci default NULL,
+  `outcome` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`,`encounter_nr`),
+  KEY `encounter_nr` (`encounter_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_registry`
+--
+
+CREATE TABLE `care_registry` (
+  `registry_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `module_start_script` varchar(60) collate latin1_general_ci NOT NULL,
+  `news_start_script` varchar(60) collate latin1_general_ci NOT NULL,
+  `news_editor_script` varchar(255) collate latin1_general_ci NOT NULL,
+  `news_reader_script` varchar(255) collate latin1_general_ci NOT NULL,
+  `passcheck_script` varchar(255) collate latin1_general_ci NOT NULL,
+  `composite` text collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`registry_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_role_person`
+--
+
+CREATE TABLE `care_role_person` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `group_nr` tinyint(3) unsigned NOT NULL default '0',
+  `role` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`,`group_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=18 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_room`
+--
+
+CREATE TABLE `care_room` (
+  `nr` int(8) unsigned NOT NULL auto_increment,
+  `type_nr` tinyint(3) unsigned NOT NULL default '0',
+  `date_create` date NOT NULL default '0000-00-00',
+  `date_close` date NOT NULL default '0000-00-00',
+  `is_temp_closed` tinyint(1) default '0',
+  `room_nr` smallint(5) unsigned NOT NULL default '0',
+  `ward_nr` smallint(5) unsigned NOT NULL default '0',
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `nr_of_beds` tinyint(3) unsigned NOT NULL default '1',
+  `closed_beds` varchar(255) collate latin1_general_ci NOT NULL,
+  `info` varchar(60) collate latin1_general_ci default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`,`type_nr`,`ward_nr`,`dept_nr`),
+  KEY `room_nr` (`room_nr`),
+  KEY `ward_nr` (`ward_nr`),
+  KEY `dept_nr` (`dept_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=109 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_sessions`
+--
+
+CREATE TABLE `care_sessions` (
+  `SESSKEY` varchar(32) collate latin1_general_ci NOT NULL,
+  `EXPIRY` int(11) unsigned NOT NULL default '0',
+  `expireref` varchar(64) collate latin1_general_ci NOT NULL,
+  `DATA` text collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`SESSKEY`),
+  KEY `EXPIRY` (`EXPIRY`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_standby_duty_report`
+--
+
+CREATE TABLE `care_standby_duty_report` (
+  `report_nr` int(11) NOT NULL auto_increment,
+  `dept` varchar(15) collate latin1_general_ci NOT NULL,
+  `date` date NOT NULL default '0000-00-00',
+  `standby_name` varchar(35) collate latin1_general_ci NOT NULL,
+  `standby_start` time NOT NULL default '00:00:00',
+  `standby_end` time NOT NULL default '00:00:00',
+  `oncall_name` varchar(35) collate latin1_general_ci NOT NULL,
+  `oncall_start` time NOT NULL default '00:00:00',
+  `oncall_end` time NOT NULL default '00:00:00',
+  `op_room` char(2) collate latin1_general_ci NOT NULL,
+  `diagnosis_therapy` text collate latin1_general_ci NOT NULL,
+  `encoding` text collate latin1_general_ci NOT NULL,
+  `status` varchar(20) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`report_nr`),
+  KEY `report_nr` (`report_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_steri_products_main`
+--
+
+CREATE TABLE `care_steri_products_main` (
+  `bestellnum` int(15) unsigned NOT NULL default '0',
+  `containernum` varchar(15) collate latin1_general_ci NOT NULL,
+  `industrynum` tinytext collate latin1_general_ci NOT NULL,
+  `containername` varchar(40) collate latin1_general_ci NOT NULL,
+  `description` text collate latin1_general_ci NOT NULL,
+  `packing` tinytext collate latin1_general_ci NOT NULL,
+  `minorder` int(4) unsigned NOT NULL default '0',
+  `maxorder` int(4) unsigned NOT NULL default '0',
+  `proorder` tinytext collate latin1_general_ci NOT NULL,
+  `picfile` tinytext collate latin1_general_ci NOT NULL,
+  `encoder` tinytext collate latin1_general_ci NOT NULL,
+  `enc_date` tinytext collate latin1_general_ci NOT NULL,
+  `enc_time` tinytext collate latin1_general_ci NOT NULL,
+  `lock_flag` tinyint(1) NOT NULL default '0',
+  `medgroup` text collate latin1_general_ci NOT NULL,
+  `cave` tinytext collate latin1_general_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_target_test`
+--
 
 CREATE TABLE `care_target_test` (
   `nr` varchar(20) collate latin1_general_ci NOT NULL,
@@ -4501,9 +2614,1209 @@ CREATE TABLE `care_target_test` (
   `reperti_addome` varchar(255) collate latin1_general_ci default NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
+-- --------------------------------------------------------
 
-#
-# Dumping data for table care_version
-#
+--
+-- Struttura della tabella `care_tech_questions`
+--
 
-INSERT INTO care_version VALUES ('CARE2X', 'beta', '2.0.0', '6052', '2004-05-14', '00:00:00', 'Claudio Giulio Torbinio');
+CREATE TABLE `care_tech_questions` (
+  `batch_nr` int(11) NOT NULL auto_increment,
+  `dept` varchar(60) collate latin1_general_ci NOT NULL,
+  `query` text collate latin1_general_ci NOT NULL,
+  `inquirer` varchar(25) collate latin1_general_ci NOT NULL,
+  `tphone` varchar(30) collate latin1_general_ci NOT NULL,
+  `tdate` date NOT NULL default '0000-00-00',
+  `ttime` time NOT NULL default '00:00:00',
+  `tid` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `reply` text collate latin1_general_ci NOT NULL,
+  `answered` tinyint(1) NOT NULL default '0',
+  `ansby` varchar(25) collate latin1_general_ci NOT NULL,
+  `astamp` varchar(16) collate latin1_general_ci NOT NULL,
+  `archive` tinyint(1) NOT NULL default '0',
+  `status` varchar(15) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`batch_nr`),
+  KEY `batch_nr` (`batch_nr`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_tech_repair_done`
+--
+
+CREATE TABLE `care_tech_repair_done` (
+  `batch_nr` int(11) NOT NULL auto_increment,
+  `dept` varchar(15) collate latin1_general_ci default NULL,
+  `dept_nr` tinyint(3) unsigned NOT NULL default '0',
+  `job_id` varchar(15) collate latin1_general_ci NOT NULL default '0',
+  `job` text collate latin1_general_ci NOT NULL,
+  `reporter` varchar(25) collate latin1_general_ci NOT NULL,
+  `id` varchar(15) collate latin1_general_ci NOT NULL,
+  `tdate` date NOT NULL default '0000-00-00',
+  `ttime` time NOT NULL default '00:00:00',
+  `tid` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `seen` tinyint(1) NOT NULL default '0',
+  `d_idx` varchar(8) collate latin1_general_ci NOT NULL,
+  `status` varchar(15) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`batch_nr`,`dept_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_tech_repair_job`
+--
+
+CREATE TABLE `care_tech_repair_job` (
+  `batch_nr` tinyint(4) NOT NULL auto_increment,
+  `dept` varchar(15) collate latin1_general_ci NOT NULL,
+  `job` text collate latin1_general_ci NOT NULL,
+  `reporter` varchar(25) collate latin1_general_ci NOT NULL,
+  `id` varchar(15) collate latin1_general_ci NOT NULL,
+  `tphone` varchar(30) collate latin1_general_ci NOT NULL,
+  `tdate` date NOT NULL default '0000-00-00',
+  `ttime` time NOT NULL default '00:00:00',
+  `tid` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `done` tinyint(1) NOT NULL default '0',
+  `seen` tinyint(1) NOT NULL default '0',
+  `seenby` varchar(25) collate latin1_general_ci NOT NULL,
+  `sstamp` varchar(16) collate latin1_general_ci NOT NULL,
+  `doneby` varchar(25) collate latin1_general_ci NOT NULL,
+  `dstamp` varchar(16) collate latin1_general_ci NOT NULL,
+  `d_idx` varchar(8) collate latin1_general_ci NOT NULL,
+  `archive` tinyint(1) NOT NULL default '0',
+  `status` varchar(20) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`batch_nr`),
+  KEY `batch_nr` (`batch_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_test_findings_baclabor`
+--
+
+CREATE TABLE `care_test_findings_baclabor` (
+  `batch_nr` int(11) NOT NULL default '0',
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `room_nr` varchar(10) collate latin1_general_ci NOT NULL,
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `notes` varchar(255) collate latin1_general_ci NOT NULL,
+  `findings_init` tinyint(1) NOT NULL default '0',
+  `findings_current` tinyint(1) NOT NULL default '0',
+  `findings_final` tinyint(1) NOT NULL default '0',
+  `entry_nr` varchar(10) collate latin1_general_ci NOT NULL,
+  `rec_date` date NOT NULL default '0000-00-00',
+  `type_general` text collate latin1_general_ci NOT NULL,
+  `resist_anaerob` text collate latin1_general_ci NOT NULL,
+  `resist_aerob` text collate latin1_general_ci NOT NULL,
+  `findings` text collate latin1_general_ci NOT NULL,
+  `doctor_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `findings_date` date NOT NULL default '0000-00-00',
+  `findings_time` time NOT NULL default '00:00:00',
+  `status` varchar(10) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`batch_nr`,`encounter_nr`,`room_nr`,`dept_nr`),
+  KEY `findings_date` (`findings_date`),
+  KEY `rec_date` (`rec_date`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_test_findings_chemlab`
+--
+
+CREATE TABLE `care_test_findings_chemlab` (
+  `batch_nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) NOT NULL default '0',
+  `job_id` varchar(25) collate latin1_general_ci NOT NULL,
+  `test_date` date NOT NULL default '0000-00-00',
+  `test_time` time NOT NULL default '00:00:00',
+  `group_id` varchar(30) collate latin1_general_ci NOT NULL,
+  `serial_value` text collate latin1_general_ci NOT NULL,
+  `validator` varchar(15) collate latin1_general_ci NOT NULL,
+  `validate_dt` datetime NOT NULL default '0000-00-00 00:00:00',
+  `status` varchar(20) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`batch_nr`,`encounter_nr`,`job_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=42 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_test_findings_patho`
+--
+
+CREATE TABLE `care_test_findings_patho` (
+  `batch_nr` int(11) NOT NULL default '0',
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `room_nr` varchar(10) collate latin1_general_ci NOT NULL,
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `material` text collate latin1_general_ci NOT NULL,
+  `macro` text collate latin1_general_ci NOT NULL,
+  `micro` text collate latin1_general_ci NOT NULL,
+  `findings` text collate latin1_general_ci NOT NULL,
+  `diagnosis` text collate latin1_general_ci NOT NULL,
+  `doctor_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `findings_date` date NOT NULL default '0000-00-00',
+  `findings_time` time NOT NULL default '00:00:00',
+  `status` varchar(10) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`batch_nr`,`encounter_nr`,`room_nr`,`dept_nr`),
+  KEY `send_date` (`findings_date`),
+  KEY `findings_date` (`findings_date`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_test_findings_radio`
+--
+
+CREATE TABLE `care_test_findings_radio` (
+  `batch_nr` int(11) unsigned NOT NULL default '0',
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `room_nr` smallint(5) unsigned NOT NULL default '0',
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `findings` text collate latin1_general_ci NOT NULL,
+  `diagnosis` text collate latin1_general_ci NOT NULL,
+  `doctor_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `findings_date` date NOT NULL default '0000-00-00',
+  `findings_time` time NOT NULL default '00:00:00',
+  `status` varchar(10) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`batch_nr`,`encounter_nr`),
+  KEY `send_date` (`findings_date`),
+  KEY `findings_date` (`findings_date`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_test_param`
+--
+
+CREATE TABLE `care_test_param` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `group_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `id` varchar(50) collate latin1_general_ci NOT NULL,
+  `sort_nr` tinyint(4) NOT NULL default '0',
+  `msr_unit` varchar(15) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `median` varchar(20) collate latin1_general_ci default ' ' COMMENT 'for males',
+  `hi_bound` varchar(20) collate latin1_general_ci default ' ',
+  `lo_bound` varchar(20) collate latin1_general_ci default ' ',
+  `hi_critical` varchar(20) collate latin1_general_ci default ' ',
+  `lo_critical` varchar(20) collate latin1_general_ci default ' ',
+  `hi_toxic` varchar(20) collate latin1_general_ci default ' ',
+  `lo_toxic` varchar(20) collate latin1_general_ci default ' ',
+  `median_f` varchar(20) collate latin1_general_ci default ' ' COMMENT '_ f for females',
+  `hi_bound_f` varchar(20) collate latin1_general_ci default ' ',
+  `lo_bound_f` varchar(20) collate latin1_general_ci default ' ',
+  `hi_critical_f` varchar(20) collate latin1_general_ci default ' ',
+  `lo_critical_f` varchar(20) collate latin1_general_ci default ' ',
+  `hi_toxic_f` varchar(20) collate latin1_general_ci default ' ',
+  `lo_toxic_f` varchar(20) collate latin1_general_ci default ' ',
+  `median_n` varchar(20) collate latin1_general_ci default ' ' COMMENT '_n for neonatal from 0 to 1 month',
+  `hi_bound_n` varchar(20) collate latin1_general_ci default ' ',
+  `lo_bound_n` varchar(20) collate latin1_general_ci default ' ',
+  `hi_critical_n` varchar(20) collate latin1_general_ci default ' ',
+  `lo_critical_n` varchar(20) collate latin1_general_ci default ' ',
+  `hi_toxic_n` varchar(20) collate latin1_general_ci default ' ',
+  `lo_toxic_n` varchar(20) collate latin1_general_ci default ' ',
+  `median_y` varchar(20) collate latin1_general_ci default ' ' COMMENT '_y for children form 1 month to 12 months',
+  `hi_bound_y` varchar(20) collate latin1_general_ci default ' ',
+  `lo_bound_y` varchar(20) collate latin1_general_ci default ' ',
+  `hi_critical_y` varchar(20) collate latin1_general_ci default ' ',
+  `lo_critical_y` varchar(20) collate latin1_general_ci default ' ',
+  `hi_toxic_y` varchar(20) collate latin1_general_ci default ' ',
+  `lo_toxic_y` varchar(20) collate latin1_general_ci default ' ',
+  `median_c` varchar(20) collate latin1_general_ci default ' ' COMMENT '_c for children form 1 to 14 years',
+  `hi_bound_c` varchar(20) collate latin1_general_ci default ' ',
+  `lo_bound_c` varchar(20) collate latin1_general_ci default ' ',
+  `hi_critical_c` varchar(20) collate latin1_general_ci default ' ',
+  `lo_critical_c` varchar(20) collate latin1_general_ci default ' ',
+  `hi_toxic_c` varchar(20) collate latin1_general_ci default ' ',
+  `lo_toxic_c` varchar(20) collate latin1_general_ci default ' ',
+  `method` varchar(255) collate latin1_general_ci default ' ',
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`,`group_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=664 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_test_request_baclabor`
+--
+
+CREATE TABLE `care_test_request_baclabor` (
+  `batch_nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `material` text collate latin1_general_ci NOT NULL,
+  `test_type` text collate latin1_general_ci NOT NULL,
+  `material_note` tinytext collate latin1_general_ci NOT NULL,
+  `diagnosis_note` tinytext collate latin1_general_ci NOT NULL,
+  `immune_supp` tinyint(4) NOT NULL default '0',
+  `send_date` date NOT NULL default '0000-00-00',
+  `sample_date` date NOT NULL default '0000-00-00',
+  `status` varchar(10) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`batch_nr`),
+  KEY `send_date` (`send_date`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=30000004 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_test_request_blood`
+--
+
+CREATE TABLE `care_test_request_blood` (
+  `batch_nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `blood_group` varchar(10) collate latin1_general_ci NOT NULL,
+  `rh_factor` varchar(10) collate latin1_general_ci NOT NULL,
+  `kell` varchar(10) collate latin1_general_ci NOT NULL,
+  `date_protoc_nr` varchar(45) collate latin1_general_ci NOT NULL,
+  `pure_blood` varchar(15) collate latin1_general_ci NOT NULL,
+  `red_blood` varchar(15) collate latin1_general_ci NOT NULL,
+  `leukoless_blood` varchar(15) collate latin1_general_ci NOT NULL,
+  `washed_blood` varchar(15) collate latin1_general_ci NOT NULL,
+  `prp_blood` varchar(15) collate latin1_general_ci NOT NULL,
+  `thrombo_con` varchar(15) collate latin1_general_ci NOT NULL,
+  `ffp_plasma` varchar(15) collate latin1_general_ci NOT NULL,
+  `transfusion_dev` varchar(15) collate latin1_general_ci NOT NULL,
+  `match_sample` tinyint(4) NOT NULL default '0',
+  `transfusion_date` date NOT NULL default '0000-00-00',
+  `diagnosis` tinytext collate latin1_general_ci NOT NULL,
+  `notes` tinytext collate latin1_general_ci NOT NULL,
+  `send_date` date NOT NULL default '0000-00-00',
+  `doctor` varchar(35) collate latin1_general_ci NOT NULL,
+  `phone_nr` varchar(40) collate latin1_general_ci NOT NULL,
+  `status` varchar(10) collate latin1_general_ci NOT NULL,
+  `blood_pb` tinytext collate latin1_general_ci NOT NULL,
+  `blood_rb` tinytext collate latin1_general_ci NOT NULL,
+  `blood_llrb` tinytext collate latin1_general_ci NOT NULL,
+  `blood_wrb` tinytext collate latin1_general_ci NOT NULL,
+  `blood_prp` tinyblob NOT NULL,
+  `blood_tc` tinytext collate latin1_general_ci NOT NULL,
+  `blood_ffp` tinytext collate latin1_general_ci NOT NULL,
+  `b_group_count` mediumint(9) NOT NULL default '0',
+  `b_group_price` float(10,2) NOT NULL default '0.00',
+  `a_subgroup_count` mediumint(9) NOT NULL default '0',
+  `a_subgroup_price` float(10,2) NOT NULL default '0.00',
+  `extra_factors_count` mediumint(9) NOT NULL default '0',
+  `extra_factors_price` float(10,2) NOT NULL default '0.00',
+  `coombs_count` mediumint(9) NOT NULL default '0',
+  `coombs_price` float(10,2) NOT NULL default '0.00',
+  `ab_test_count` mediumint(9) NOT NULL default '0',
+  `ab_test_price` float(10,2) NOT NULL default '0.00',
+  `crosstest_count` mediumint(9) NOT NULL default '0',
+  `crosstest_price` float(10,2) NOT NULL default '0.00',
+  `ab_diff_count` mediumint(9) NOT NULL default '0',
+  `ab_diff_price` float(10,2) NOT NULL default '0.00',
+  `x_test_1_code` mediumint(9) NOT NULL default '0',
+  `x_test_1_name` varchar(35) collate latin1_general_ci NOT NULL,
+  `x_test_1_count` mediumint(9) NOT NULL default '0',
+  `x_test_1_price` float(10,2) NOT NULL default '0.00',
+  `x_test_2_code` mediumint(9) NOT NULL default '0',
+  `x_test_2_name` varchar(35) collate latin1_general_ci NOT NULL,
+  `x_test_2_count` mediumint(9) NOT NULL default '0',
+  `x_test_2_price` float(10,2) NOT NULL default '0.00',
+  `x_test_3_code` mediumint(9) NOT NULL default '0',
+  `x_test_3_name` varchar(35) collate latin1_general_ci NOT NULL,
+  `x_test_3_count` mediumint(9) NOT NULL default '0',
+  `x_test_3_price` float(10,2) NOT NULL default '0.00',
+  `lab_stamp` datetime NOT NULL default '0000-00-00 00:00:00',
+  `release_via` varchar(20) collate latin1_general_ci NOT NULL,
+  `receipt_ack` varchar(20) collate latin1_general_ci NOT NULL,
+  `mainlog_nr` varchar(7) collate latin1_general_ci NOT NULL,
+  `lab_nr` varchar(7) collate latin1_general_ci NOT NULL,
+  `mainlog_date` date NOT NULL default '0000-00-00',
+  `lab_date` date NOT NULL default '0000-00-00',
+  `mainlog_sign` varchar(20) collate latin1_general_ci NOT NULL,
+  `lab_sign` varchar(20) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`batch_nr`),
+  KEY `send_date` (`send_date`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=40000012 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_test_request_chemlabor`
+--
+
+CREATE TABLE `care_test_request_chemlabor` (
+  `batch_nr` int(11) NOT NULL auto_increment,
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `room_nr` varchar(10) collate latin1_general_ci NOT NULL,
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `parameters` text collate latin1_general_ci NOT NULL,
+  `doctor_sign` varchar(35) collate latin1_general_ci NOT NULL,
+  `highrisk` smallint(1) NOT NULL default '0',
+  `notes` tinytext collate latin1_general_ci NOT NULL,
+  `send_date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `sample_time` time NOT NULL default '00:00:00',
+  `urgent` tinyint(4) NOT NULL default '0',
+  `sample_weekday` smallint(1) NOT NULL default '0',
+  `status` varchar(15) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`batch_nr`),
+  KEY `encounter_nr` (`encounter_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=10000022 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_test_request_generic`
+--
+
+CREATE TABLE `care_test_request_generic` (
+  `batch_nr` int(11) NOT NULL default '0',
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `testing_dept` varchar(35) collate latin1_general_ci NOT NULL,
+  `visit` tinyint(1) NOT NULL default '0',
+  `order_patient` tinyint(1) NOT NULL default '0',
+  `diagnosis_quiry` text collate latin1_general_ci NOT NULL,
+  `send_date` date NOT NULL default '0000-00-00',
+  `send_doctor` varchar(35) collate latin1_general_ci NOT NULL,
+  `result` text collate latin1_general_ci NOT NULL,
+  `result_date` date NOT NULL default '0000-00-00',
+  `result_doctor` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(10) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`batch_nr`),
+  KEY `batch_nr` (`batch_nr`,`encounter_nr`),
+  KEY `send_date` (`send_date`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_test_request_patho`
+--
+
+CREATE TABLE `care_test_request_patho` (
+  `batch_nr` int(11) unsigned NOT NULL auto_increment,
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `quick_cut` tinyint(4) NOT NULL default '0',
+  `qc_phone` varchar(40) collate latin1_general_ci NOT NULL,
+  `quick_diagnosis` tinyint(4) NOT NULL default '0',
+  `qd_phone` varchar(40) collate latin1_general_ci NOT NULL,
+  `material_type` varchar(25) collate latin1_general_ci NOT NULL,
+  `material_desc` text collate latin1_general_ci NOT NULL,
+  `localization` tinytext collate latin1_general_ci NOT NULL,
+  `clinical_note` tinytext collate latin1_general_ci NOT NULL,
+  `extra_note` tinytext collate latin1_general_ci NOT NULL,
+  `repeat_note` tinytext collate latin1_general_ci NOT NULL,
+  `gyn_last_period` varchar(25) collate latin1_general_ci NOT NULL,
+  `gyn_period_type` varchar(25) collate latin1_general_ci NOT NULL,
+  `gyn_gravida` varchar(25) collate latin1_general_ci NOT NULL,
+  `gyn_menopause_since` varchar(25) collate latin1_general_ci NOT NULL default '0',
+  `gyn_hysterectomy` varchar(25) collate latin1_general_ci NOT NULL default '0',
+  `gyn_contraceptive` varchar(25) collate latin1_general_ci NOT NULL default '0',
+  `gyn_iud` varchar(25) collate latin1_general_ci NOT NULL,
+  `gyn_hormone_therapy` varchar(25) collate latin1_general_ci NOT NULL,
+  `doctor_sign` varchar(35) collate latin1_general_ci NOT NULL,
+  `op_date` date NOT NULL default '0000-00-00',
+  `send_date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `status` varchar(10) collate latin1_general_ci NOT NULL,
+  `entry_date` date NOT NULL default '0000-00-00',
+  `journal_nr` varchar(15) collate latin1_general_ci NOT NULL,
+  `blocks_nr` int(11) NOT NULL default '0',
+  `deep_cuts` int(11) NOT NULL default '0',
+  `special_dye` varchar(35) collate latin1_general_ci NOT NULL,
+  `immune_histochem` varchar(35) collate latin1_general_ci NOT NULL,
+  `hormone_receptors` varchar(35) collate latin1_general_ci NOT NULL,
+  `specials` varchar(35) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `process_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `process_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`batch_nr`),
+  KEY `encounter_nr` (`encounter_nr`),
+  KEY `send_date` (`send_date`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=20000004 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_test_request_radio`
+--
+
+CREATE TABLE `care_test_request_radio` (
+  `batch_nr` int(11) NOT NULL default '0',
+  `encounter_nr` int(11) unsigned NOT NULL default '0',
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `xray` tinyint(1) NOT NULL default '0',
+  `ct` tinyint(1) NOT NULL default '0',
+  `sono` tinyint(1) NOT NULL default '0',
+  `mammograph` tinyint(1) NOT NULL default '0',
+  `mrt` tinyint(1) NOT NULL default '0',
+  `nuclear` tinyint(1) NOT NULL default '0',
+  `if_patmobile` tinyint(1) NOT NULL default '0',
+  `if_allergy` tinyint(1) NOT NULL default '0',
+  `if_hyperten` tinyint(1) NOT NULL default '0',
+  `if_pregnant` tinyint(1) NOT NULL default '0',
+  `clinical_info` text collate latin1_general_ci NOT NULL,
+  `test_request` text collate latin1_general_ci NOT NULL,
+  `send_date` date NOT NULL default '0000-00-00',
+  `send_doctor` varchar(35) collate latin1_general_ci NOT NULL default '0',
+  `xray_nr` varchar(9) collate latin1_general_ci NOT NULL default '0',
+  `r_cm_2` varchar(15) collate latin1_general_ci NOT NULL,
+  `mtr` varchar(35) collate latin1_general_ci NOT NULL,
+  `xray_date` date NOT NULL default '0000-00-00',
+  `xray_time` time NOT NULL default '00:00:00',
+  `results` text collate latin1_general_ci NOT NULL,
+  `results_date` date NOT NULL default '0000-00-00',
+  `results_doctor` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(10) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `process_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `process_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`batch_nr`),
+  UNIQUE KEY `batch_nr_2` (`batch_nr`),
+  KEY `batch_nr` (`batch_nr`,`encounter_nr`),
+  KEY `send_date` (`xray_time`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_anaesthesia`
+--
+
+CREATE TABLE `care_type_anaesthesia` (
+  `nr` smallint(2) unsigned NOT NULL auto_increment,
+  `id` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_application`
+--
+
+CREATE TABLE `care_type_application` (
+  `nr` int(11) NOT NULL auto_increment,
+  `group_nr` tinyint(3) unsigned NOT NULL default '0',
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=11 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_assignment`
+--
+
+CREATE TABLE `care_type_assignment` (
+  `type_nr` int(10) unsigned NOT NULL default '0',
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(25) collate latin1_general_ci NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`type`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_cause_opdelay`
+--
+
+CREATE TABLE `care_type_cause_opdelay` (
+  `type_nr` smallint(5) unsigned NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `cause` varchar(255) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`type_nr`),
+  KEY `type` (`type`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_color`
+--
+
+CREATE TABLE `care_type_color` (
+  `color_id` varchar(25) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`color_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_department`
+--
+
+CREATE TABLE `care_type_department` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `type` (`type`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_discharge`
+--
+
+CREATE TABLE `care_type_discharge` (
+  `nr` smallint(3) unsigned NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(100) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=9 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_duty`
+--
+
+CREATE TABLE `care_type_duty` (
+  `type_nr` smallint(5) unsigned NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`type_nr`),
+  KEY `type` (`type`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_encounter`
+--
+
+CREATE TABLE `care_type_encounter` (
+  `type_nr` int(10) unsigned NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(25) collate latin1_general_ci NOT NULL default '0',
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `hide_from` tinyint(4) NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`type_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_ethnic_orig`
+--
+
+CREATE TABLE `care_type_ethnic_orig` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `class_nr` tinyint(3) unsigned NOT NULL default '0',
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `type` (`class_nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_feeding`
+--
+
+CREATE TABLE `care_type_feeding` (
+  `nr` smallint(2) unsigned NOT NULL auto_increment,
+  `group_nr` tinyint(3) unsigned NOT NULL default '0',
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_immunization`
+--
+
+CREATE TABLE `care_type_immunization` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `type` varchar(20) collate latin1_general_ci NOT NULL default '' COMMENT 'Immunization type',
+  `name` varchar(20) collate latin1_general_ci NOT NULL default '',
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL default '',
+  `period` smallint(6) default '0' COMMENT 'period..in days ?',
+  `tolerance` smallint(3) default '0',
+  `dosage` text collate latin1_general_ci,
+  `medicine` text collate latin1_general_ci NOT NULL,
+  `titer` text collate latin1_general_ci,
+  `note` text collate latin1_general_ci,
+  `application` tinyint(3) default '0' COMMENT 'from care_type_application...application type',
+  `status` varchar(25) collate latin1_general_ci NOT NULL default 'normal',
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci default NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL default '',
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_insurance`
+--
+
+CREATE TABLE `care_type_insurance` (
+  `type_nr` int(11) NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(60) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`type_nr`),
+  KEY `type` (`type`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=13 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_localization`
+--
+
+CREATE TABLE `care_type_localization` (
+  `nr` tinyint(3) unsigned NOT NULL auto_increment,
+  `category` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `short_code` char(1) collate latin1_general_ci NOT NULL,
+  `LD_var_short_code` varchar(25) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `hide_from` varchar(255) collate latin1_general_ci NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_location`
+--
+
+CREATE TABLE `care_type_location` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_measurement`
+--
+
+CREATE TABLE `care_type_measurement` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=10 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_notes`
+--
+
+CREATE TABLE `care_type_notes` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `sort_nr` smallint(6) NOT NULL default '0',
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  UNIQUE KEY `type` (`type`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=100 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_outcome`
+--
+
+CREATE TABLE `care_type_outcome` (
+  `nr` smallint(2) unsigned NOT NULL auto_increment,
+  `group_nr` tinyint(3) unsigned NOT NULL default '0',
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_perineum`
+--
+
+CREATE TABLE `care_type_perineum` (
+  `nr` smallint(2) unsigned NOT NULL auto_increment,
+  `id` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_prescription`
+--
+
+CREATE TABLE `care_type_prescription` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_room`
+--
+
+CREATE TABLE `care_type_room` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_test`
+--
+
+CREATE TABLE `care_type_test` (
+  `type_nr` smallint(5) unsigned NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`type_nr`),
+  KEY `type` (`type`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_time`
+--
+
+CREATE TABLE `care_type_time` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `type` (`type`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=8 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_type_unit_measurement`
+--
+
+CREATE TABLE `care_type_unit_measurement` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `type` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `description` varchar(255) collate latin1_general_ci NOT NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `type` (`type`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_unit_measurement`
+--
+
+CREATE TABLE `care_unit_measurement` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `unit_type_nr` smallint(2) unsigned NOT NULL default '0',
+  `id` varchar(15) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
+  `sytem` varchar(35) collate latin1_general_ci NOT NULL,
+  `use_frequency` bigint(20) default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=19 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_users`
+--
+
+CREATE TABLE `care_users` (
+  `name` varchar(60) collate latin1_general_ci NOT NULL,
+  `login_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `password` varchar(255) collate latin1_general_ci default NULL,
+  `personell_nr` int(10) unsigned NOT NULL default '0',
+  `lockflag` tinyint(3) unsigned default '0',
+  `permission` text collate latin1_general_ci NOT NULL,
+  `exc` tinyint(1) NOT NULL default '0',
+  `s_date` date NOT NULL default '0000-00-00',
+  `s_time` time NOT NULL default '00:00:00',
+  `expire_date` date NOT NULL default '0000-00-00',
+  `expire_time` time NOT NULL default '00:00:00',
+  `dept_nr` text collate latin1_general_ci NOT NULL COMMENT 'the department in wich the user is allowed to enter / view',
+  `user_role` tinyint(4) NOT NULL default '0',
+  `status` varchar(15) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`login_id`),
+  KEY `login_id` (`login_id`),
+  KEY `user_role` (`user_role`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_user_roles`
+--
+
+CREATE TABLE `care_user_roles` (
+  `id` int(11) NOT NULL auto_increment,
+  `role_name` varchar(50) collate latin1_general_ci NOT NULL default 'no_name',
+  `permission` text collate latin1_general_ci,
+  `history` text collate latin1_general_ci,
+  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=39 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_version`
+--
+
+CREATE TABLE `care_version` (
+  `name` varchar(20) collate latin1_general_ci NOT NULL,
+  `type` varchar(20) collate latin1_general_ci NOT NULL,
+  `number` varchar(10) collate latin1_general_ci NOT NULL,
+  `build` varchar(5) collate latin1_general_ci NOT NULL,
+  `date` date NOT NULL default '0000-00-00',
+  `time` time NOT NULL default '00:00:00',
+  `releaser` varchar(30) collate latin1_general_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_ward`
+--
+
+CREATE TABLE `care_ward` (
+  `nr` smallint(5) unsigned NOT NULL auto_increment,
+  `ward_id` varchar(35) collate latin1_general_ci NOT NULL,
+  `name` varchar(35) collate latin1_general_ci NOT NULL,
+  `is_temp_closed` tinyint(1) NOT NULL default '0',
+  `date_create` date NOT NULL default '0000-00-00',
+  `date_close` date NOT NULL default '0000-00-00',
+  `description` text collate latin1_general_ci,
+  `info` tinytext collate latin1_general_ci,
+  `dept_nr` smallint(5) unsigned NOT NULL default '0',
+  `room_nr_start` smallint(6) NOT NULL default '0',
+  `room_nr_end` smallint(6) NOT NULL default '0',
+  `roomprefix` varchar(4) collate latin1_general_ci default NULL,
+  `status` varchar(25) collate latin1_general_ci NOT NULL,
+  `history` text collate latin1_general_ci NOT NULL,
+  `modify_id` varchar(25) collate latin1_general_ci NOT NULL default '0',
+  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `create_id` varchar(25) collate latin1_general_ci NOT NULL default '0',
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`nr`),
+  KEY `ward_id` (`ward_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=8 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `care_yellow_paper`
+--
+
+CREATE TABLE `care_yellow_paper` (
+  `encounter_nr` bigint(20) NOT NULL,
+  `personell_name` varchar(20) collate latin1_general_ci default NULL,
+  `location_id` varchar(20) collate latin1_general_ci default NULL,
+  `history` text collate latin1_general_ci,
+  `create_id` varchar(20) collate latin1_general_ci default NULL,
+  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `sunto_anamnestico` text collate latin1_general_ci,
+  `stato_presente` text collate latin1_general_ci,
+  `altezza` double(15,3) default NULL,
+  `peso` double(15,3) default NULL,
+  `norm` varchar(20) collate latin1_general_ci default NULL,
+  `dati_urine` varchar(20) collate latin1_general_ci default NULL,
+  `dati_sangue` varchar(20) collate latin1_general_ci default NULL,
+  `dati_altro` varchar(20) collate latin1_general_ci default NULL,
+  `diagnosi` text collate latin1_general_ci,
+  `terapia` text collate latin1_general_ci,
+  `padre` text collate latin1_general_ci,
+  `madre` text collate latin1_general_ci,
+  `fratelli` text collate latin1_general_ci,
+  `coniuge` text collate latin1_general_ci,
+  `figli` text collate latin1_general_ci,
+  `paesi_esteri` text collate latin1_general_ci,
+  `abitazione` text collate latin1_general_ci,
+  `lavoro_pregresso` text collate latin1_general_ci,
+  `lavoro_presente` text collate latin1_general_ci,
+  `lavoro_attuale` text collate latin1_general_ci,
+  `ambiente_lavoro` text collate latin1_general_ci,
+  `gas_lavoro` text collate latin1_general_ci,
+  `tossiche_lavoro` text collate latin1_general_ci,
+  `conviventi` text collate latin1_general_ci,
+  `prematuro` varchar(4) collate latin1_general_ci default NULL,
+  `eutocico` varchar(4) collate latin1_general_ci default NULL,
+  `fisiologici_normali` varchar(4) collate latin1_general_ci default NULL,
+  `fisiologici_tardivi` varchar(4) collate latin1_general_ci default NULL,
+  `mestruazione` text collate latin1_general_ci,
+  `gravidanze` text collate latin1_general_ci,
+  `militare` text collate latin1_general_ci,
+  `alcolici` varchar(20) collate latin1_general_ci default NULL,
+  `caffe` varchar(20) collate latin1_general_ci default NULL,
+  `fumo` varchar(20) collate latin1_general_ci default NULL,
+  `droghe` varchar(20) collate latin1_general_ci default NULL,
+  `sete` varchar(20) collate latin1_general_ci default NULL,
+  `alvo` varchar(20) collate latin1_general_ci default NULL,
+  `diuresi` varchar(20) collate latin1_general_ci default NULL,
+  `anamnesi_remota` text collate latin1_general_ci,
+  `anamnesi_prossima` text collate latin1_general_ci,
+  `nr` bigint(20) NOT NULL auto_increment,
+  `modify_id` text collate latin1_general_ci,
+  `modify_time` timestamp NOT NULL default '0000-00-00 00:00:00' on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`nr`),
+  UNIQUE KEY `nr` (`nr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;

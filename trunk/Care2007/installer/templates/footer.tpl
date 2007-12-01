@@ -20,12 +20,11 @@
 			<tr>
 				<td>
 					<p align="center">
-					<a href="http://www.care2x.org/">Care2x Home</a> :: 
-					<a href="http://www.care2x.org/wiki/">Wiki</a> :: 
-					<a href="http://sourceforge.net/mailarchive/forum.php?forum_id=11772">Mailing List</a> :: 
-					<a href="http://sourceforge.net/projects/care2002/">SF.net Project</a>&nbsp; 
-                    //
-					Copyright 2002-2007 Elpidio Latorilla
+					<a href="http://w3.care2x.org/" target='_blank'>Care2x Home</a> ::
+					<a href="mailto:elpidio.latorilla@gmail.comsubject=Care2x">Copyright © - Elpidio Latorilla</a> ::
+					<a href="mailto:gjergj.sheldija@gmail.com?subject=Care2x">Engineering - Gjergj Sheldija</a> ::
+					<a href="http://cgt.altervista.org" target='_blank'>Release Manager - Claudio Giulio Torbinio</a> :: 
+					<a href="http://sourceforge.net/projects/care2002/" target='_blank'>SF.net Project</a> 
 				</td>
 				<td align="right" valign="bottom">
 					&nbsp;</td>
