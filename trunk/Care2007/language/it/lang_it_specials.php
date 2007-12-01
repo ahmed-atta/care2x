@@ -213,7 +213,14 @@ $LDUserConfigOptTxt='Opzioni per sfondo, colori testo, mascotte, avatar, etc.';
 $LDMascotOpt='Mascotte';
 $LDMascotOptTxt='Seleziona o nascondi Mascotte';
 $LDMascot='Mascotte';
+/*21 novembre 2007 claudio torbinio*/
 $LDSampleMascot='Mascotte di esempio';
+$LDMainMenuTree='Menù';
+$LDMainMenuTreeTxt='Stile menù';
+$LDControlButtons='Pulsanti';
+$LDControlButtonsTxt='Stile pulsanti';
+$LDComIcons='Icone';
+$LDComIconsTxt='Stile icone';
 /* 2003-04-24 EL*/
 $LDGUITemplate='Opzioni interfaccia';
 $LDGUITemplateTxt='Seleziona interfaccia';

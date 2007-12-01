@@ -21,11 +21,11 @@ $LDInternalMedicine='Medicina interna';
 $LDIntermediateCareUnit='Intermediate Care Unit';
 $LDIntensiveCareUnit='Terapia intensiva';
 $LDEmergencyAmbulatory='Pronto Soccorso';
-$LDInternalMedicineAmbulatory='Day Hospital di Medicina Interna';
+$LDInternalMedicineAmbulatory='Day Hospital di Oncoematologia';
 $LDSonography='Ecografia';
 $LDNuclearDiagnostics='Radiodiagnostica';
 $LDRadiology='Radiologia';
-$LDOncology='Oncologia';
+$LDOncology='Oncoematologia';
 $LDNeonatal='Ostetricia';
 $LDCentralLaboratory='Laboratorio clinico';
 $LDSerologicalLaboratory='Laboratorio immunologico';
@@ -40,17 +40,17 @@ $LDNursing='Infermeria';
 $LDMedical='Medico';
 $LDSupport='Non medico';
 $LDNews='Novit&agrave;';
-$LDDepartment='Reparto';
+$LDDepartment='Dipartimento';
 $LDPressRelations='Relazioni con il pubblico';
 /* 2003-05-19 EL */
-$LDSelectDept='Scegli un reparto';
+$LDSelectDept='Scegli un Dipartimento';
 /*2003-06-15 EL*/
-$LDPlsSelectDept='Per favore scegli un reparto';
-$LD_AllMedicalDept='____Tutti i reparti medici_____';
+$LDPlsSelectDept='Per favore scegli un Dipartimento';
+$LD_AllMedicalDept='____Tutti i Dipartimenti medici_____';
 $LDClinic='Clinica';
 
 #2003-10-23 EL
 $LDPlsNameFormal='Inserire il nome formale';
-$LDPlsDeptID='Inserire il codice del reparto';
+$LDPlsDeptID='Inserire il codice del Dipartimento';
 $LDPlsSelectType='Inserire il tipo';
 ?>

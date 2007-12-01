@@ -1,21 +1,21 @@
 <?php
 #        IMPORTANT!        All words or characters inclosed with ~ ~ must not be changed.
-$LDNursing='Infermieri';
-$LDStation='Corsia';
+$LDNursing='Reparti';
+$LDStation='Reparto';
 
 $LDQuickView='Quadro di insieme';
 $LDSearchPatient='Ricerca un paziente';
 $LDArchive='Archivio';
-$LDStationMan='Gestione corsie';
+$LDStationMan='Gestione Reparti';
 $LDNews='News';
 $LDMemo='Memo';
 $LDNursingForum='Forum personale infermieristico';
 $LDNursingStations='Presidio infermieristico';
 
 $LDQuickViewTxt='Quadro di insieme dei turni di lavoro odierni per il presidio infermieristico.';
-$LDSearchPatientTxt='Ricerca un paziente accettato in corsia.';
-$LDArchiveTxt='Ricerca nell\'archivio delle corsie.';
-$LDStationManTxt='Assegna una corsia, inizializza parametri quali numero
+$LDSearchPatientTxt='Ricerca un paziente accettato in Reparto.';
+$LDArchiveTxt='Ricerca nell\'archivio dei Reparti.';
+$LDStationManTxt='Assegna una Reparto, inizializza parametri quali numero
 di letti, personale, etc.';
 $LDNewsTxt='Leggi, crea o modifica una news.';
 $LDMemoTxt='Leggi, crea o modifica un memo.';
@@ -25,7 +25,7 @@ $LDNursingStationsTxt='Occupazione letti, grafici paziente, foto, etc.';
 $LDCloseBack2Main='Chiudi e torna alla pagina iniziale';
 $LDOld='Vecchio';
 $LDTodays='Di oggi';
-$LDOccupancy='occupazione letti';
+$LDOccupancy='Occupazione letti';
 $LDBedNr='Numero di letti';
 $LDOptions='Opzioni';
 $LDFreeBed='Vacante';
@@ -83,16 +83,16 @@ $LDMinusYear='Anno precedente';
 $LDGo='VAI';
 $LDLastMonth='Mese scorso';
 $LDNextMonth='Prossimo mese';
-$LDNursingManage='Gestione corsie';
+$LDNursingManage='Gestione Reparti';
 $LDShowStationDataTxt='&nbsp;Visualizza, modifica, crea, <br> &nbsp;descrizione, numero di letti<br>        &nbsp;etc.';
 $LDLockBedTxt='&nbsp;oppure libera un letto';
 $LDAccessRightsTxt='&nbsp;Crea, blocca, modifica,<br>&nbsp;attiva, cancella, etc.';
-$LDShowStationData='Profilo corsia';
+$LDShowStationData='Profilo Reparto';
 $LDLockBed='Assegna un letto';
 $LDAccessRights='Privilegi di accesso';
 $LDProfile='Profilo';
 $LDCreate='Crea';
-$LDNewStation='Nuova corsia';
+$LDNewStation='Nuovo Reparto';
 $LDDescription='Descrizione';
 $LDDept='Dipartimento';
 $LDRoom1Nr='Numero della prima stanza';
@@ -100,26 +100,26 @@ $LDRoom2Nr='Numero dell\'ultima stanza';
 $LDRoomPrefix='Prefisso stanza';
 $LDNrBeds='Numero di letti per stanza';
 $LDMaxBeds='Numero massimo di letti';
-$LDMaxBeds='Quantità di letti disponibili';
+$LDMaxBeds='Letti disponibili';
 $LDBed1Prefix='Prefisso per il primo letto';
 $LDBed2Prefix='Prefisso per il secondo letto';
 $LDHeadNurse='Coordinatore';
 $LDHeadNurse2='Aiuto';
 $LDNurses='Infermieri';
-$LDCreateStation='Crea corsia';
+$LDCreateStation='Crea Reparto';
 $LDEnterAllFields ='I campi identificati da <font color=#ff0000><b>*</b></font> vanno riempiti.';
 $LDPlsSelect='Scegliere un reparto';
-$LDStationExists='La corsia ~station~ esiste già!';
+$LDStationExists='Il Reparto ~station~ esiste già!';
 $LDAlertIncomplete='Mancano alcuni dati: si prega di inserirli.';
 $LDAlertRoomNr='Il numero dell\'ultima stanza dev\'essere MAGGIORE del numero della prima stanza!';
-$LDExistStations='Corsie esistenti. Scegliere quella desiderata.';
-$LDOtherStations='Altre corsie';
-$LDEditProfilo='Modifica profilo della corsia';
+$LDExistStations='Reparti esistenti. Scegliere quello desiderato.';
+$LDOtherStations='Altri Reparti';
+$LDEditProfilo='Modifica profilo del Reparto';
 $LDCreatedOn='Creato il:';
 $LDCreatedBy='Creato da:';
 
 /**********do not change the ~station~ **************************/
-$LDTemplateMissing='Il modello per la corsia ~station~ non esiste!';
+$LDTemplateMissing='Il modello per il Reparto ~station~ non esiste!';
 $LDNoOrigData='Dati iniziali non trovati!';
 
 $LDShowLastList='Visualizza l\'ultima lista di occupazione.';
@@ -153,8 +153,8 @@ $LDFreeOccupy='Libera/Occupa';
 $LDMale='Maschio';
 $LDFemale='Femmina';
 /**********do not change the ~station~ **************************/
-$LDNoInit='La corsia ~station~ va inizializzata!';
-$LDIfInit='Per inizializzare la corsia, selezionare qui.';
+$LDNoInit='Il Reparto ~station~ va inizializzato!';
+$LDIfInit='Per inizializzare il Reparto, selezionare qui.';
 $LDShowPatData='Apri l\'archivio dati del paziente';
 $LDReleasePatient='Dimetti paziente';
 $LDNoticeRW='Leggi o scrivi note';
@@ -182,7 +182,7 @@ $LDClk2Occupy='Selezionare per occupare il letto';
 */
 $LDSave='Salva';
 $LDNurse='Infermiere';
-$LDYesSure='Sì, dimetti il paziente.';
+$LDYesSure='Dimetti il paziente.';
 $LDFtpAttempted='Il tentativo di connessione al server FTP è fallito:<br>potrebbe essere occupato o non disponibile.
                                                         Se il problema persiste per parecchio tempo, contattare il CED.';
 $LDFtpNoLink='Login FTP fallito';
@@ -230,7 +230,7 @@ $LDExtraNotes='Annotazioni';
 $LDMedication='Terapia';
 $LDIvPort='Drenaggi';
 $LDPtAtgEtcTxt='Diuresi ed Alvo';
-$LDExtraNotesTxt='Annotazioni, LOT, etc.';
+$LDExtraNotesTxt='Annotazioni, etc.';
 
 $LDBp='Pressione arteriosa';
 $LDTemp='Temperatura';
@@ -317,13 +317,13 @@ $LDHour='Ora';
 $LDClkHere='Selezionare qui';
 
 $LDNoOccList='Non ci sono liste precedenti';
-$LDFromWard='per le corsie ';
+$LDFromWard='per i Reparti ';
 $LDWithinLast='durante gli ultimi ';
 $LDDays=' giorni.';
-$LDAvailable='';
+$LDAvailable='disponibili';
 
-$LDQueries='Domande al Medico';
-$LDChangeWard='Modifica corsia';
+$LDQueries='Quesiti Clinici';
+$LDChangeWard='Modifica Reparto';
 $LDChangeBed='Modifica letto';
 
 $LDPatientDied='Decesso del paziente';
@@ -332,7 +332,7 @@ $LDFollowing='seguente';
 $LDErrorDuplicateBed='Errore: letto già occupato nella tabella nursing_station_patients';
 $LDNoFound='Nessun paziente trovato.';
 
-$LDNoWardsYet='Non ci sono ancora corsie.';
+$LDNoWardsYet='Non ci sono ancora Reparti.';
 $LDClk2CreateWard='Per crearne una, selezionare qui.';
 
 /* 2002-10-12 EL */
@@ -341,20 +341,20 @@ $LD_ddpMMpyyyy='gg.mm.aaaa';
 $LD_yyyyhMMhdd='aaaa-mm-gg';
 $LD_MMsddsyyyy='mm/gg/aaaa';
 /* 2002-10-23 EL*/
-$LDQueryDoctor='Richieste al medico';
-$LDDoctorInfo='Richieste dal medico';
+$LDQueryDoctor='Quesiti ai Medici';
+$LDDoctorInfo='Quesiti dai Medici';
 $LDDiagnosticsReport='Diagnosi pervenute';
-$LDInfusionTherapy='Programma/terapia di infusione';
+$LDInfusionTherapy='Terapia infusionale';
 $LDMonitorFluidDischarge='Controllo dello scarico fluidi';
-$LDBloodProgram='Analisi/trasfusioni sangue';
+$LDBloodProgram='Analisi, trasfusioni sangue';
 $LDVitalStatistics='Parametri vitali';
-$LDAntibioticsProgram='Programma/terapia antibiotici';
+$LDAntibioticsProgram='Terapia antibiotica';
 $LDAnticoagProgram='Anticoagulanti';
 $LDSpecialCare='Cure speciali, parametri statistici';
-$LDTestConsultRequested='Esami/consulti rischiesti';
-$LDNurseReport='Rapporto infermieristico (nuovo)';
+$LDTestConsultRequested='Esami, consulenze rischieste';
+$LDNurseReport='Nuovo Rapporto Infermieristico';
 $LDDaily='Giornaliero';
-$LDSaveChanges='Salva modifiche';
+$LDSaveChanges='Salva';
 /* 2002-12-07*/
 $LDNoDiagReport='Nessuna diagnosi disponibile.';
 /* 2003-03-23 EL */
@@ -363,27 +363,27 @@ $LDNursesListTxt='Visualizza, crea e modifica elenco infermieri';
 /* 2003-04-18 */
 $LDInsurance='A parziale carico SSN';
 $LDPrivate='A totale carico SSN';
-$LDSelfPay='A proprio carico';
+$LDSelfPay='Esenzione Ticket';
 /* 2003-04-21 EL */
 $LDRoom='Stanza';
 $LDAdm_Nr='N. accett.';
 $LDStatus='Stato';
-$LDInWard='nella corsia';
+$LDInWard='nel Reparto';
 /* 2003-04-23 EL */
-$LDWard_ID='codice corsia';
+$LDWard_ID='Codice Reparto';
 $LDNoSpecChars='Non si possono inserire caratteri speciali';
 /* 2003-04-24 EL*/
-$LDTemporaryCloseWard='Chiudi temporaneamente la corsia';
-$LDIrreversiblyCloseWard='Chiudi definitivamente la corsia';
+$LDTemporaryCloseWard='Chiudi temporaneamente il Reparto';
+$LDIrreversiblyCloseWard='Chiudi definitivamente il Reparto';
 $LDSureTemporaryClose='Si desidera realmente effettuare la chiusura?';
-$LDSureIrreversibleClose='Si desidera realmente chiudere la corsia in modo IRREVERSIBILE?';
+$LDSureIrreversibleClose='Si desidera realmente chiudere il Reparto in modo IRREVERSIBILE?';
 /* Do not translate the ~str~ , it will be replaced with the ward's name by the program */
-$LDWardNoClose='La corsia ~str~ non può essere chiusa perché ci sono ancora pazienti.<br>Dimettere o spostare i pazienti prima di riprovare.';
-$LDBackToWardProfile='Tornare al profilo della corsia';
-$LDShowWardOccupancy='Mostrare la lista di occupazione della corsia';
+$LDWardNoClose='Il Reparto ~str~ non può essere chiusa perché ci sono ancora pazienti.<br>Dimettere o spostare i pazienti prima di riprovare.';
+$LDBackToWardProfile='Tornare al profilo del Reparto';
+$LDShowWardOccupancy='Mostrare la lista di occupazione del Reparto';
 $LDTemporaryClosed='Temporaneamente chiusa';
-$LDReopenWard='Riapri la corsia';
-$LDSureReopenWard='Si desidera realmente riaprire la corsia?';
+$LDReopenWard='Riapri il Reparto';
+$LDSureReopenWard='Si desidera realmente riaprire il Reparto?';
 $LDShortDescription='Descrizione breve';
 $LDRoomShortDescription='Descrizione breve della sala';
 $LDRoomNotCreated='Non ci sono ancora sale';
@@ -394,23 +394,23 @@ $LDNrOfBedsRoom='Il num. di letti della stanza';
 $LDIsNotANumber='non è un numero valido';
 $LDWaitingList='Lista d\'attesa';
 $LDShowAll='Mostra tutto'; # <= Pls. keep translation very short
-$LDShowWardOnly='Mostra corsia'; # <= Pls. keep translation very short
-$LDTransferToBed='Trasferisci in un altro letto in questa corsia';
-$LDTransferToWard='Trasferisci in un altro reparto';
+$LDShowWardOnly='Reparto'; # <= Pls. keep translation very short
+$LDTransferToBed='Trasferisci in un altro letto in questa Reparto';
+$LDTransferToWard='Trasferisci in un altro Reparto';
 $LDShowBeds='Mostra letti';
 $LDTransferPatient='Trasferimento paziente';
 $LDDRG='DRG';
 $LDFinanceType='Tipo di pagamento';
 #2003-08-02 EL
 $LDOutToInpatient='Cambia stato d\'accettazione al paziente ricoverato';
-$LDTransferClinic='Trasferimento alla clinica o dipartimento';
+$LDTransferClinic='Trasferimento alla Clinica o Dipartimento';
 $LDClinic='Clinica';
 $LDOwnPatient='Appartenenti al paziente';
 $LDNonOwnPatient='Non appartenente al paziente';
 # 2003-08-04 EL
-$LDShowClinicOnly='Questa clinica soltanto';
+$LDShowClinicOnly='Questa Clinica soltanto';
 # 2003-09-16 EL
 $LDAdmissionData='Dati per l\'accettazione';
 $LDShowPhoto='Mostra foto';
-$LDOpenWardManagement='Corsia/reparto aperti per l\'amministrazione';
+$LDOpenWardManagement='Reparto aperto per l\'amministrazione';
 ?>

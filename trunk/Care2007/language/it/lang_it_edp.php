@@ -104,7 +104,7 @@ $LDAccessIndex=array(
 				'Nome',
 			 	'Login',
 			 	'Password', 
-				'',
+				'Crea',
 			 	'Aree autorizzate', 
 			 	'Data/Ora', 
 			 	'Operatore',
@@ -126,12 +126,12 @@ $LDSureUnlock='Si desidera veramente sbloccare questi diritti di accesso?';
 $LDSureDelete='Si desidera veramente cancellare questi diritti di accesso?';
 $LDYesSure='Sì';
 $LDKeywordPrompt='Inserire una chiave di ricerca';
-$LDSystemAdmin='System Administrator';
+$LDSystemAdmin='Amministrazione sistema';
 $LDMySQLManage='Gestione archivi SQL tramite PHP MySQLAdmin';
 $LDSpexFunctions='Altre funzioni speciali';
 $LDForeWord='Si dispone ora del massimo livello di accesso.<br>Le seguenti funzioni sono disponibili senza alcuna restrizione:<br><b>Attenzione estrema a quello che si fa!</b>';
 
-$LDSetDateFormat='Specificare il formato della data';
+$LDSetDateFormat='Formato data';
 $LDSelectDateFormat='Scegliere il formato richiesto:';
 # Date formats
 # Add additional date formats as array element.
@@ -213,13 +213,13 @@ $LDDefaultLang='Lingua predefinita (se abilitata l\'opzione di più lingue)';
 /* 2003-02-22 EL*/
 $LDMainMenuItems='Menu principale';
 $LDMainMenuDisplay='Visualizza menu principale';
-$LDDataEntryForms='Form per inserimento dati';
+$LDDataEntryForms='Modulo anagrafica';
 $LDControlButImg='Layout';
 $LDSampleButtons='Pulsante d\'esempio';
 $LDTheme='Tema';
 $LDItem='Item';
 /* 2003-02-26- EL*/
-$LDDeptAdmin='Amministrazione';
+$LDDeptAdmin='Gestione dipartimenti';
 $LDNewDept='Crea e configura Dipartimenti';
 $LDShowDeptInfo ='Profilo dei Dipartimenti';
 $LDShowDeptInfoTxt='Mostra profilo dei Dipartimenti esistenti e attivi';
@@ -260,16 +260,16 @@ $LDFindEmployee='Cerca un impiegato';
 #2003-10-27 EL
 $LDMainMenu='Menu principale';
 $LDHideShow='Nascondi/Mostra';
-$LDSortOrder='Tipo di ordinamento';
-$LDAdminIndex='Indice amministrazione';
-$LDUsers='Utenti';
+$LDSortOrder='moduli';
+$LDAdminIndex='Amministrazione';
+$LDUsers='Gestione utenti';
 $LDCreateEditLock='Crea, modifica, blocca';
 $LDDatabase='Database';
 $LDPhpMyAdmin='PhpMyAdmin';
 $LDGeneral='Generale';
 $LDQuickInformer='Informazioni veloci';
 $LDEnterInfo='Modifica o inserisci le informazioni. Alla fine seleziona "Salva".';
-$LDPaginatorMaxRows='Massimo numero di righe in impaginazione';
+$LDPaginatorMaxRows='Impaginazione';
 
 #2003-10-28 EL
 $LDAddressList='Lista indirizzi';
@@ -299,7 +299,7 @@ $LDTimeOutTxt='Bloccare il modulo protetto da password dopo un tempo preimpostat
 $LDTimeOutTime='Tempo trascorso';
 $LDTimeOutTimeTxt='Tempo di inattività prima di bloccare il modulo. Nota: Se il dato non è valido, il sistema utilizzerà il massimo valore predefinito.';
 #2003-11-09 EL
-$LDGUI='GUI';
+$LDGUI='Opzioni interfaccia';
 $LDNewsDisplay='Mostra le news';
 $LDTitleFontSize='Grandezza del font del titolo';
 $LDTitleFontColor='Colore font del titolo';
@@ -319,7 +319,7 @@ $LDNoteDefault='Nota: Se inserisci un valore non valido, il sistema lo sostituis
 $LDUseDefault='Usa valori predefiniti';
 $LDClkPickColor='Clicca qui per il colore';
 #2003-11-11 EL
-$LDORAdmin='Amministrazione (OR)';
+$LDORAdmin='Gestione sale operatorie';
 $LDListConfig='Lista & configura';
 $LDOR='OR';
 $LDORNr='Numero OR';
@@ -335,7 +335,10 @@ $LDToggle='Pulsante';
 $LDChange='Cambio';
 $LDClkNextNr='Clicca per passare al successivo numero';
 $LDOPTable='Tabella OP';
-
+#27 novembre 2007 Claudio Torbinio
+$LDEnterNewRole='Nuova Figura professionale';
+$LDFindRole='Cerca Figura professionale';
+$LDCreateEditRoles='Crea Figure professionali';
 $LDWelcome='Benvenuto';
 $LDNursingManage='Gestione reparti';
 ?>

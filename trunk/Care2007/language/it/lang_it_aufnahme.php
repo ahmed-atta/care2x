@@ -6,20 +6,22 @@ $LDCaseNr='Codice paziente';
 $LDTitle='Titolo';
 $LDLastName='Cognome';
 $LDFirstName='Nome';
-$LDBday='Data di nascita';
+$LDBday="<font color='red'>Data di nascita</font>";
+$LDBdaypdf="Data di nascita";
 $LDPhone='Telefono';
 $LDAdmitBy='Accettato da';
-$LDSex='Sesso';
+$LDSex="<font color='red'>Sesso</font>";
 $LDMale='maschio';
 $LDFemale='femmina';
 $LDAddress='Indirizzo';
 $LDAmbulant='Paziente esterno';
 $LDStationary='Paziente interno';
-$LDSelfPay='A proprio carico';
-$LDPrivate='A carico SSN';
+$LDInsurance='A parziale carico SSN';
+$LDPrivate='A totale carico SSN';
+$LDSelfPay='Esenzione Ticket';
 $LDInsurance='Assicurazione';
-$LDDiagnosis='Diagnosi';
-$LDRecBy='Suggerito da';
+$LDDiagnosis='Diagnosi di Accettazione';//Diagnosi
+$LDRecBy='Provenienza Richiesta';//Suggerito da
 $LDTherapy='Terapia consigliata';
 $LDSpecials='Note speciali';
 
@@ -120,7 +122,7 @@ $LDDept='Rep.';
 $LDRoomNr='Stanza';
 $LDAdmitType='Tipo di accettazione';
 $LDCivilStat='Stato civile';
-$LDInsuranceNr='Codice SSN';
+$LDInsuranceNr='Compagnia Previdenza';
 $LDNameAddr='Nome e indirizzo';
 $LDBillInfo='Informazioni per la fatturazione';
 $LDAdmitDiagnosis='Diagnosi all\'accettazione';
@@ -157,9 +159,9 @@ $LDName3='Terzo nome';
 $LDNameMid='Middle name';
 $LDNameMaiden='Cognome da nubile';
 $LDNameOthers='Altri cognomi';
-$LDStreet='Via';
-$LDStreetNr='Num.';
-$LDTownCity='Città';
+$LDStreet="<font color='red'>Via</font>";
+$LDStreetNr="<font color='red'>Num.</font>";
+$LDTownCity="<font color='red'>Città</font>";
 $LDProvState='Provincia';
 $LDRegion='Regione';
 $LDCountry='Stato';
@@ -167,13 +169,13 @@ $LDCitizenship='Cittadinanza';
 $LDCivilStatus='Stato civile'; /* Civil status = married, single, divorced, widow */
 $LDSingle='Celibe/Nubile';
 $LDMarried='Sposato/a';
-$LDDivorced='Divorziato/a';
+$LDDivorced='Libero/a';
 $LDWidowed='Vedovo/a';
 $LDSeparated='Separato/a';
-$LDCellPhone='Cell.';
+$LDCellPhone='Cellulare';
 $LDFax='Fax';
 $LDEmail='Email';
-$LDZipCode='CAP';
+$LDZipCode="<font color='red'>CAP</font>";
 $LDPhoto='Foto';
 /* 2002-12-02 EL*/
 $LDPatientRegisterTxt='Accetta paziente, cerca accettazioni, ricerche in archivio';
@@ -217,8 +219,8 @@ $LDPrintPortraitFormat='Scegliere il formato di stampa orizzontale (landscape).'
 $LDRegistryNr='Numero PID';
 $LDRedirectToRegistry='Nota: la ricerca sarà indirizzata al modulo di accettazione!';
 /* 2002-12-24 EL */
-$LDSSSNr='Codice SSN';
-$LDNatIdNr='Codice SSN';
+$LDSSSNr="<font color='red'>Codice Fiscale</font>";
+$LDNatIdNr='Codice Fiscale';
 $LDEthnicOrigin='Etnia di origine';
 $LDOtherNr='Altri codici';
 /* 2002-12-25 EL */
@@ -238,7 +240,7 @@ $LDAdmitClass='Classe di accettazione';
 /* 2003-02-15 EL*/
 $LDEnterSearchKeyword='Inserire chiave di ricerca';
 $LDSearchFoundData='Dati rilevanti trovati: <font color=red><b>~nr~</b></font>.';
-$LDQuickList='Quicklist';
+$LDQuickList='Lista veloce';
 $LDSeveralInsurances='Il paziente ha più di una assicurazione: selezionare qui per modificare.';
 $LDTop='Inizio';
 $LDInsuranceClass='Tipo di assicurazione';
@@ -299,20 +301,20 @@ $LDShortNotes='Note brevi ';
 /* 2003-03-08 EL */
 $LDCreateNewAppointment='Crea nuovo appuntamento';
 $LDDepartment='Reparto';
-$LDRemindPatient='Reminder paziente';
-$LDRemindBy='Remind da';
+$LDRemindPatient='Ricordare al paziente';
+$LDRemindBy='Ricordare in che modo';
 $LDMail='Mail';
-$LDPurpose='Scopo';
+$LDPurpose='Diagnosi Medico Curante';
 $LDClinician='Clinico';
-$LDPhysician='Fisiatra';
+$LDPhysician='Medico';
 $LDBackToOptions='Torna alle opzioni';
 $LDStatus='Stato';
 /* 2003-03-08 EL*/
-$LDUrgency='Urgenza';
-$LDNormal='Normale';
-$LDPriority='Priorità';
-$LDUrgent='Urgente';
-$LDEmergency='Emergenza';
+$LDUrgency='Codice';
+$LDNormal='Bianco';
+$LDPriority='Verde';
+$LDUrgent='Giallo';
+$LDEmergency='Rosso';
 /* 2003-03-09 EL*/
 $LDCancelReason='Motivo della cancellazione';
 $LDSureCancelAppt='Conferma la cancellazione dell\'appuntamento?';
@@ -362,10 +364,10 @@ $LDInsShortID[3]='DIR';    // self pay, direct pay
 # 2003-08-26 EL
 $LDMeasurements='Misurazioni';
 #2003-08-28 eL
-$LDPlsEnterReferer='Inserire medico referente';
+$LDPlsEnterReferer='Inserire Provenienza Richiesta';
 $LDPlsEnterRefererDiagnosis='Inserire diagnosi';
-$LDPlsEnterRefererTherapy='Inserire terapia raccomandata';
-$LDPlsEnterRefererNotes='Inserire note di riferimento';
+$LDPlsEnterRefererTherapy='Inserire terapia consigliata';
+$LDPlsEnterRefererNotes='Inserire note speciali';
 $LDPlsSelectAdmissionType='Selezionare tipo di accettazione.';
 $LDForInpatient='Per ricoverati';
 $LDForOutpatient='Per pazienti esterni';
@@ -406,8 +408,13 @@ $LDPlsCheckFirst2='Per favore controlla i dati prima di decidere il prossimo pas
 $LDShowDetails='Mostra dettagli';
 
 # 2004-05-22 KB
-$LDNr='Num.';
+$LDNr="<font color='red'>Num.</font>";
 $LDOtherHospitalNr='Proveniente da';
 $LDSelectOtherHospital = 'Selezionare altra provenienza per cambiare il numero';
 $LDNoNrNoDelete = 'per cancellare, non inserire alcun numero';
+
+#2007-11-26 SalvoRossitto
+$LDRelative="Parente di riferimento";
+$LDRegionalCode="Codice Regionale";
+
 ?>

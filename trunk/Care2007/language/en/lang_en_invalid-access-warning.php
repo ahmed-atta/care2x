@@ -61,9 +61,7 @@ In rare cases there might have been an error in the data transfer. To correct th
 </table>        
 <p>
 
-<?php
-require($root_path.'include/inc_load_copyrite.php'); 
-?>
+
 </FONT>
 
 

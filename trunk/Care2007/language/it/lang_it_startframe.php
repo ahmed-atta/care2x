@@ -1,5 +1,5 @@
 <?php
-$LDMainTitle='Care2X - LAVIM: un esempio di HIS';
+$LDMainTitle='Azienda Ospedaliera-Universitaria V.Emanuele Ferrarotto S.Bambino - Catania';
 
 $LDInviteAskMe='Inserire la domanda, ad esempio: "Numero telefonico di M9d?"';
 $LDTipsLink='Suggerimenti:';
@@ -7,8 +7,8 @@ $LDTipsAskMe='Provare con sinonimi, ad esempio "postazione corsia" invece di "co
 $LDTipsImgAlt='Selezionare qui per suggerimenti per ottenere risultati migliori.';
 $LDSubmitBut='Invio domanda';
 
-$LDQuickInfo='Informazioni rapide';
-$LDPhonePolice='Polizia';
+$LDQuickInfo='Informazioni';
+$LDPhonePolice='Sicurezza';
 $LDPhoneFire='Vigili del fuoco';
 $LDAmbulance='Ambulanza';
 $LDPhone='Telefono (Ospedale)';
@@ -17,7 +17,7 @@ $LDAddress='Indirizzo';
 $LDEmail='Email';
 
 $LDOpenTimes ='Orario di lavoro';
-$LDManagement ='Direzione';
+$LDManagement ='Direzione Sanitaria';
 $LDDept ='Dipartimenti';
 $LDCafenews ='News dalla mensa';
 $LDAdmission ='Accettazione';

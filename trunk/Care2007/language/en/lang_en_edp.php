@@ -24,6 +24,7 @@ $LDNew='New';
 $LDEdit='Edit';
 $LDCreate='Create';
 $LDValue='Value';
+$LDProfile='List & configure';
 
 $LDNews='News';
 $LDNewsTxt='Read or write news articles pertaining to sytem administration department';
@@ -345,7 +346,10 @@ $LDOPTable='OP table';
 /* Gjergj Sheldija 11.08.2007 */
 $LDWelcome='Welcome';
 $LDClearFields='Clear fields';
-/* claudio torbinio 10.28.2007 */
+#27 novembre 2007 Claudio Torbinio
+$LDEnterNewRole='New Role';
+$LDFindRole='Search Role';
+$LDCreateEditRoles='Create Role';
+$LDWelcome='Wellcome';
 $LDNursingManage='Wards administration';
-$LDProfile='List & configure';
 ?>

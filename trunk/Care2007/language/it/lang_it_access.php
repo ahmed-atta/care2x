@@ -104,4 +104,6 @@ $_a_1_teldirwrite = 'Gestione completa';
 $title_hxpserver = 'HXP Server';
 $_a_1_hxpserver = 'Accesso HXP Server';
 
+// role start 27 novembre 2007 - Claudio Torbinio
+$LDRole ='Figura professionale';
 ?>

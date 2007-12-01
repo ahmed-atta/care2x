@@ -1,17 +1,17 @@
 <?php
 
 $LDHome='Home';
-$LDPatient='Paziente';
+$LDPatient='Anagrafica';
 $LDAdmission='Accettazione';
-$LDAmbulatory='Day Hospital';
+$LDAmbulatory='DH - Ambulatori';
 $LDMedocs='Cartelle cliniche';
-$LDDoctors='Gestione medici';
-$LDNursing='Corsie';
-$LDOR='Sala operatoria';
+$LDDoctors='Medici';
+$LDNursing='Reparti';
+$LDOR='Sale operatorie';
 $LDLabs='Laboratori';
 $LDRadiology='Radiologia';
 $LDPharmacy='Farmacia';
-$LDMedDepot='Deposito farmaci';
+$LDMedDepot='Farmacia centrale';
 $LDDirectory='Elenco telefonico';
 $LDTechSupport='Supporto tecnico';
 $LDEDP='CED';
