@@ -9,7 +9,7 @@ function validate_value(x,mi,mx)
 	    x.value=mx;
 	}
 }
-function validate_min(x,mi)
+function validate_max(x,mi)
 {
 	if((x.value<mi)&&(mi>0))   x.value=mi;
 }
