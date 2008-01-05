@@ -1,0 +1,17 @@
+digraph G
+{
+  bgcolor="transparent";
+  edge [fontname="FreeSans.ttf",fontsize=10,labelfontname="FreeSans.ttf",labelfontsize=10];
+  node [fontname="FreeSans.ttf",fontsize=10,shape=record];
+  Node1 [label="BarcodeObject",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node2 [label="C128AObject",height=0.2,width=0.4,color="black",URL="$class_c128_a_object.html"];
+  Node1 -> Node3 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node3 [label="C128BObject",height=0.2,width=0.4,color="black",URL="$class_c128_b_object.html"];
+  Node1 -> Node4 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node4 [label="C128CObject",height=0.2,width=0.4,color="black",URL="$class_c128_c_object.html"];
+  Node1 -> Node5 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node5 [label="C39Object",height=0.2,width=0.4,color="black",URL="$class_c39_object.html"];
+  Node1 -> Node6 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node6 [label="I25Object",height=0.2,width=0.4,color="black",URL="$class_i25_object.html"];
+}
