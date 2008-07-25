@@ -16,7 +16,7 @@ $local_user='ck_pflege_user';
 //define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 /* Create nursing notes object */
-require_once($root_path.'include/care_api_classes/YellowPaper.php');
+require_once($root_path.'include/care_api_classes/care_yellow_paper.php');
 $report_obj= new YellowPaper;
 ///$db->debug=true; 
 //if ($station=='') { $station='Non-department specific';  }
@@ -213,7 +213,7 @@ if($occup){
   </ul>
   <div class="TabbedPanelsContentGroup">
   <div class="TabbedPanelsContent">
-  <form method="post" name=remform action="foglioanamnesi.php" onSubmit="return checkForm(this)">
+  <form method="post" name=remform action="nursing-yellow-paper.php" onSubmit="return checkForm(this)">
     <textarea name="sunto_anamnestico" cols=60 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['sunto_anamnestico'] ?>
 </textarea>
     <br>
@@ -421,9 +421,9 @@ if($occup){
     </div>
     </div>
     <script type="text/javascript">
-<!--
+
 var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
-//-->
+
 </script>
     <input type="text" name="personell_name" size=60 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly>
     <input type="hidden" name="sid" value="<?php echo $sid ?>">
