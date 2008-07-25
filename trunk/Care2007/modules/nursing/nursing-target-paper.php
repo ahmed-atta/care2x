@@ -201,7 +201,7 @@ if($occup){
  	}
  ?>
  
- <form method="post" name=remform action="fogliotarget.php" onSubmit="return checkForm(this)">
+ <form method="post" name=remform action="nursing-target-paper.php" onSubmit="return checkForm(this)">
  <table>
  <tr>
  	<td>Costituzione</td>
