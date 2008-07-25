@@ -20,9 +20,15 @@ function Cond($item,$k){
 	global $where,$tab,$HTTP_POST_VARS, $sql_LIKE;
 	if(empty($HTTP_POST_VARS[$item])) return false;
 	else{
-		$buf=" $tab.$item $sql_LIKE '".$HTTP_POST_VARS[$item]."%'";
-		if(!empty($where)) $where.=' AND '.$buf;
-		 else $where=$buf;
+		if($item == 'current_ward_nr') {
+			$buf=" $tab.$item $sql_LIKE '".$HTTP_POST_VARS[$item]."'";
+			if(!empty($where)) $where.=' AND '.$buf;
+			else $where=$buf;			
+		} else {
+			$buf=" $tab.$item $sql_LIKE '".$HTTP_POST_VARS[$item]."%'";
+			if(!empty($where)) $where.=' AND '.$buf;
+			else $where=$buf;
+		}
 	}
 }
 	
