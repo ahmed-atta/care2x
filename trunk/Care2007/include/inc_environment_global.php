@@ -98,7 +98,9 @@ if(!defined('NOSTART_SESSION')||(defined('NOSTART_SESSION')&&!NOSTART_SESSION)){
 	$ADODB_SESSION_USER =$dbusername;
 	$ADODB_SESSION_PWD =$dbpassword;
 	$ADODB_SESSION_DB =$dbname;
-
+	// Gjergj Sheldija : fixed menu with php 5.x
+	$ADODB_SESSION_TBL = 'care_sessions'; 
+	
 	include_once($root_path.'classes/adodb/session/adodb-session.php');
 
 	// Old adodb 250 session handler
