@@ -1,9 +1,8 @@
 <?php
 
-// $CVSHeader: care2002_tz_mero/classes/adodb/session/adodb-compress-gzip.php,v 1.1 2004/05/20 12:21:37 robert Exp $
 
 /*
-V4.01 23 Oct 2003  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
+V5.03 22 Jan 2008   (c) 2000-2008 John Lim (jlim#natsoft.com.my). All rights reserved.
          Contributed by Ross Smith (adodb@netebb.com). 
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,

@@ -1,7 +1,7 @@
 <?php
 
 /**
-  V4.21 20 Mar 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
+  V5.03 22 Jan 2008   (c) 2000-2008 John Lim (jlim#natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -9,6 +9,9 @@
   Set tabs to 4 for best viewing.
  
 */
+
+// security - hide paths
+if (!defined('ADODB_DIR')) die();
 
 class ADODB2_informix extends ADODB_DataDict {
 	
@@ -29,7 +32,7 @@ class ADODB2_informix extends ADODB_DataDict {
 		case 'B': return 'BLOB';
 			
 		case 'D': return 'DATE';
-		case 'T': return 'DATETIME';
+		case 'T': return 'DATETIME YEAR TO SECOND';
 		
 		case 'L': return 'SMALLINT';
 		case 'I': return 'INTEGER';
