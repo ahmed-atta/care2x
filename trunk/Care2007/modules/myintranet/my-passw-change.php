@@ -121,7 +121,7 @@ switch($passtag)
 }
 
 
-logentry($userid,$keyword,$errbuf,$thisfile,$fileforward);
+//logentry($userid,$keyword,$errbuf,$thisfile,$fileforward);
 
 echo '</FONT><p>';
 

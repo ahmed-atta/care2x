@@ -15,7 +15,7 @@ function validarea($area,$zeile2,$range)
   return 0;
 }
 
-function logentry($userid,$key,$report,$remark1,$remark2)
+/*function logentry($userid,$key,$report,$remark1,$remark2)
 {
 			$logpath="logs/access/".date(Y)."/";
 			if (file_exists($logpath))
@@ -29,7 +29,7 @@ function logentry($userid,$key,$report,$remark1,$remark2)
 					fclose($file);
 				}
 			}
-}
+}*/
 
 
 if ($versand=="Abschicken")
@@ -49,7 +49,7 @@ if ($versand=="Abschicken")
 										if (validarea($allowedarea,$zeile,mysql_num_fields($ergebnis)))
 										{				
 										setcookie(op_pflegelogbuch_user,$zeile[mahopass_name]);	
-										logentry($zeile[mahopass_name],"****","OP Pflege Logbuch Access OK'd",$thisfile,$fileforward);
+										//logentry($zeile[mahopass_name],"****","OP Pflege Logbuch Access OK'd",$thisfile,$fileforward);
 										header("Location: ".$fileforward."?route=validroute");
 										exit;
 										}else {$passtag=2;};

@@ -36,7 +36,7 @@ if (isset($pass)&&($pass=='check')&&($passtag)){
 	#
 	# Log auth attempt
 	#
-	logentry($userid,"PW ($keyword)","$REMOTE_ADDR $errbuf",$thisfile,$fileforward);
+	$logs->writeline(date('Y-m-d').'/'.date('H:i'),$REMOTE_ADDR,$errbuf,$userid,'',$keyword,$thisfile,$fileforward,'0');
 	
 	$smarty->assign('bShowErrorPrompt',TRUE);
 

@@ -4,6 +4,8 @@ if (eregi('inc_passcheck.php',$PHP_SELF))
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
+require_once($root_path.'include/access_log.php');
+$logs = new AccessLog($root_path.'logs/');
 /**
 * CARE 2002 Integrated Hospital Information System
 * GNU General Public License
@@ -29,27 +31,6 @@ function validarea(&$zeile2, $permit_type_all = 1){
 		}
 	}
 	return 0;           // otherwise the user has no access permission in the area, return false
-}
-
-function logentry(&$userid,$key,$report,&$remark1,&$remark2)
-{
-   global $passtag, $root_path;
-
-	if($passtag) $logpath=$root_path.'logs/access_fail/'.date('Y').'/';
-	   else $logpath=$root_path.'logs/access/'.date('Y').'/';
-	   
-	if (file_exists($logpath))
-	{
-		$logpath=$logpath.date('Y-m-d').'.log';
-		$file=fopen($logpath,'a');
-		if ($file)
-		{	
-		    if ($userid=='') $userid='blank'; 
-			$line=date('Y-m-d').'/'.date('H:i').' '.$report.'  Username='.$key.'  Userid='.$userid.'  Fileaccess='.$remark1.'  Fileforward='.$remark2;
-			fputs($file,$line);fputs($file,"\r\n");
-			fclose($file);
-		}
-	}
 }
 
 /*if(!isset($db) || !$db || !$dblink_ok) include_once($root_path.'include/inc_db_makelink.php');
@@ -80,7 +61,9 @@ if($dblink_ok)
 				    if(empty($zeile['name'])) $zeile['name']=' ';
 					
 					
-				    logentry($userid,$zeile['name'],"IP:".$REMOTE_ADDR." $lognote ",$thisfile,$fileforward);		
+				if($passtag) $success = 0;
+				else $success = 1;
+				$logs->writeline(date('Y-m-d').'/'.date('H:i'),$_SERVER['REMOTE_ADDR'],$lognote,$userid,$zeile['name'],'',$thisfile,$fileforward,$success);
 										
 					/**
 					* Init crypt to use 2nd level key and encrypt the sid.

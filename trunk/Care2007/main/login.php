@@ -2,6 +2,8 @@
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+require_once($root_path.'include/access_log.php');
+$logs = new AccessLog();
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -65,7 +67,7 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 			# Set the login flag
 			setcookie('ck_login_logged'.$sid,'true',0,'/');
 
-			logentry($user->Name(),$user->LoginName(),$REMOTE_ADDR." OK'd","","");
+			$logs->writeline(date('Y-m-d').'/'.date('H:i'),$REMOTE_ADDR,'Main Login: OK',$user->LoginName(),$user->Name(),'','','',1);
 
 			header("Location: $fileforward");
 			exit;

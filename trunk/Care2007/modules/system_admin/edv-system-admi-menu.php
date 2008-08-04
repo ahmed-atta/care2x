@@ -167,7 +167,11 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <a href="<?php echo $root_path; ?>modules/or_admin/or_list_config.php<?php echo URL_APPEND; ?>" target="SYSADMIN_WFRAME"><?php echo $LDListConfig ?></a>
 	</td>
   </tr>
-
+  <tr>
+	<td bgcolor="#ffffff" valign="top">
+	<FONT  color="#0000cc" FACE="verdana,arial" size=2>
+	&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <a href="<?php echo $root_path; ?>modules/system_admin/access.php<?php echo URL_APPEND; ?>" target="SYSADMIN_WFRAME">Logs Administration</a><br>
+	</td>
   
   
 <!--  

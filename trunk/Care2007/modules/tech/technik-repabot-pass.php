@@ -30,7 +30,7 @@ if ($versand=="Abschicken")
 										{				
 										setcookie(ck_technik_repabot_user,$zeile[mahopass_name]);	
 										setcookie(ck_technik_repabot_src,"repabotpass");	
-										logentry($zeile[mahopass_name],"*","IP:".$REMOTE_ADDR."Technik Repabot Launch OK'd",$thisfile,$fileforward);
+										//logentry($zeile[mahopass_name],"*","IP:".$REMOTE_ADDR."Technik Repabot Launch OK'd",$thisfile,$fileforward);
 										header("Location: $fileforward?sid=$sid&stb=1");
 										exit;
 										}else {$passtag=2;};
@@ -105,7 +105,7 @@ default:$errbuf=$errbuf."Zugang gesperrt"; echo '<img src=../img/cat-sperr.gif >
 }
 
 
-logentry($userid,$keyword,$errbuf,$thisfile,$fileforward);
+//logentry($userid,$keyword,$errbuf,$thisfile,$fileforward);
 
 
 echo '</STRONG></FONT><P>';

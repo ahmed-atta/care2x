@@ -2,7 +2,8 @@
 if(($sid==NULL)||($sid!=$$ck_sid_buffer)) { header("location:invalid-access-warning.php"); exit;}
 
 require_once($root_path.'include/inc_config_color.php');
-
+require_once($root_path.'include/access_log.php');
+$logs = new AccessLog();
 
 
 srand(time()*1000);
@@ -29,23 +30,6 @@ function validarea($area,$zeile2,$range)
   return 0;
 }
 
-function logentry($userid,$key,$report,$remark1,$remark2)
-{
-			$logpath="logs/access/".date(Y)."/";
-			if (file_exists($logpath))
-			{
-				$logpath=$logpath.date("Y_m_d").".log";
-				$file=fopen($logpath,"a");
-				if ($file)
-				{	if ($userid=="") $userid="blank"; 
-					$line=date("d.m.Y").'  '.date("H.i").'  '.$report.'  Username='.$userid.'  Password='.$key.'  Fileaccess='.$remark1.'  Fileforward='.$remark2;
-					fputs($file,$line);fputs($file,"\r\n");
-					fclose($file);
-				}
-			}
-}
-
-
 if ($versand=="Abschicken")
 {
 
@@ -63,7 +47,8 @@ if ($versand=="Abschicken")
 										if (validarea($allowedarea,$zeile,mysql_num_fields($ergebnis)))
 										{				
 										setcookie(ck_edv_db_user,$zeile[mahopass_name]);	
-										logentry($zeile[mahopass_name],"*","IP:".$REMOTE_ADDR."EDV DB verwalten Access OK'd",$thisfile,$fileforward);
+										$logs->writeline(date('Y-m-d').'/'.date('H:i'),,$REMOTE_ADDR,'EDV DB verwalten Access OK',$zeile[mahopass_name],'','',$thisfile,$fileforward,0);
+										//Slogentry($zeile[mahopass_name],"*","IP:".$REMOTE_ADDR."EDV DB verwalten Access OK'd",$thisfile,$fileforward);
 										header("Location: $fileforward?sid=$$ck_sid_buffer");
 										exit;
 										}else {$passtag=2;};

@@ -57,7 +57,7 @@ case 2:$errbuf=$errbuf.$LDNoAuth; echo '<img '.createLDImgSrc($root_path,'cat-no
 default:$errbuf=$errbuf.$LDAuthLocked; echo '<img '.createLDImgSrc($root_path,'cat-sperr.gif','0').' align=left>'; 
 }
 
-logentry($userid,"PW ($keyword)","$REMOTE_ADDR $errbuf",$thisfile,$fileforward);
+//logentry($userid,"PW ($keyword)","$REMOTE_ADDR $errbuf",$thisfile,$fileforward);
 
 echo '</STRONG></FONT>';
 
