@@ -404,4 +404,25 @@ $LDShowClinicOnly='This clinic only';
 $LDAdmissionData='Admission data';
 $LDShowPhoto='Show photo';
 $LDOpenWardManagement='Open ward for administration';
+// Target Paper //
+$LDConstitution='Constitution';
+$LDNormal='Normal';
+$LDSmall='Small';
+$LDBig='Big';
+$LDGood='Good';
+$LDNormal='Normal';
+$LDBad='Bad';
+$LDNutritionalStatus='Nutritional Status';
+$LDdecubitus='Decubitus';
+$LDPsicologicalStatus='Psicological status';
+$LDSkin='Skin';
+$LDMucous='Mucous';
+$LDAnnexesSkin='Annexes skin';
+$LDEdemas='Edemas';
+$LDEdemasDescription='Edemas description';
+$LDTemperature='Temperature';
+$LDApiressia='Apiressia';
+$LDFever='Fever';
+$LDHypothermia='Hypothermia';
+$LDGeneralConditions='General Conditions';
 ?>

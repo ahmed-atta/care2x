@@ -60,7 +60,7 @@ class Target extends Core {
 									'modify_time',
 									'create_id',
 									'create_time',
-									'tipo_costituzionale',
+									'costitution_type',
 									'condizioni_generali',
 									'stato_nutrizione',
 									'decubito',
@@ -314,7 +314,7 @@ class Target extends Core {
 			$this->data_array['encounter_nr']=$data['pn'];
 			$this->data_array['location_id']=$data['station'];
 			$this->data_array['personell_name']=$data['personell_name'];
-			$this->data_array['tipo_costituzionale']=$data['tipo_costituzionale'];
+			$this->data_array['costitution_type']=$data['costitution_type'];
 			$this->data_array['condizioni_generali']=$data['condizioni_generali'];
 			$this->data_array['stato_nutrizione']=$data['stato_nutrizione'];
 			$this->data_array['decubito']=$data['decubito'];
@@ -401,7 +401,7 @@ class Target extends Core {
 			$this->data_array['location_id']=$data['station'];
 			$this->data_array['personell_name']=$data['personell_name'];
 			
-			$this->data_array['tipo_costituzionale']=$data['tipo_costituzionale'];
+			$this->data_array['costitution_type']=$data['costitution_type'];
 			$this->data_array['condizioni_generali']=$data['condizioni_generali'];
 			$this->data_array['stato_nutrizione']=$data['stato_nutrizione'];
 			$this->data_array['decubito']=$data['decubito'];

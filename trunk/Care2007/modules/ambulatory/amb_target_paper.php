@@ -148,49 +148,6 @@ $smarty->append('JavaScript',$sTemp);
 
 ob_start();
 
-/*
-if($occup){
-	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/tableHeaderbg3.gif"';
-?>
- <table border=0 cellpadding=4 cellspacing=1 width=100%>
-  <tr class="adm_item">
-    <td><FONT color="#000066"><?php echo $LDDate; ?></td>
-    <td><FONT color="#000066"><?php echo $LDTime; ?></td>
-    <td><FONT color="#000066"><?php echo $LDNotes; ?></td>
-    <td><FONT color="#000066"><?php echo $LDCreatedBy; ?></td>
-  </tr>
-<?php
-	$toggle=0;
-	while($row=$d_notes->FetchRow()){
-		if($toggle) $bgc='#efefef';
-			else $bgc='#f0f0f0';
-		if($toggle) $sRowClass='wardlistrow2';
-			else $sRowClass='wardlistrow1';
-		$toggle=!$toggle;
-		if(!empty($row['short_notes'])) $bgc='yellow';
-	
-?>
-
-
-  <tr  class="<?php echo $sRowClass ?>"  valign="top">
-    <td><?php if(!empty($row['date'])) echo @formatDate2Local($row['date'],$date_format); ?></td>
-    <td><?php if($row['time']) echo $row['time']; ?></td>
-    <td><FONT color="#000033">
-	<?php 
-		if(!empty($row['notes'])) echo deactivateHotHtml(nl2br($row['notes'])); 
-		if(!empty($row['short_notes'])) echo '<br>[ '.deactivateHotHtml($row['short_notes']).' ]';
-	?>
-	</td>
-    <td><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
-  </tr>
-
-<?php
-	}
-?>
-</table>
-<?php
-}
-*/
 ?>
 
  <ul>
@@ -204,41 +161,41 @@ if($occup){
  <form method="post" name=remform action="amb_target_paper.php" onSubmit="return checkForm(this)">
  <table>
  <tr>
- 	<td>Costituzione</td>
- 	<td><select name='tipo_costituzionale'><option name='Normotipo' <?php if (($occup)&&($row['tipo_costituzionale']=="Normotipo")) echo "selected"; ?>>Normotipo</option><option name='Brachitipo' <?php if (($occup)&&($row['tipo_costituzionale']=="Brachitipo")) echo "selected"; ?>>Brachitipo</option><option name='Longitipo' <?php if (($occup)&&($row['tipo_costituzionale']=="Longitipo")) echo "selected"; ?>>Longitipo</option></select></td>
- 	<td>Condizioni generali</td>
- 	<td><select name='condizioni_generali'><option name='Buone' <?php if (($occup)&&($row['condizioni_generali']=="Buone")) echo "selected"; ?>>Buone</option><option name='Discrete' <?php if (($occup)&&($row['condizioni_generali']=="Discrete")) echo "selected"; ?>>Discrete</option><option name='Scadute' <?php if (($occup)&&($row['condizioni_generali']=="Scadute")) echo "selected"; ?>>Scadute</option></select></td>
+ 	<td><?=$LConstitution;?></td>
+ 	<td><select name='tipo_costituzionale'><option name='Normotipo' <?php if (($occup)&&($row['tipo_costituzionale']=="Normotipo")) echo "selected"; ?>><?=$LDNormal; ?></option><option name='Brachitipo' <?php if (($occup)&&($row['tipo_costituzionale']=="Brachitipo")) echo "selected"; ?>><?=$LDSmall; ?></option><option name='Longitipo' <?php if (($occup)&&($row['tipo_costituzionale']=="Longitipo")) echo "selected"; ?>><?=$LDBig; ?></option></select></td>
+ 	<td><?=$LDGeneralConditions; ?></td>
+ 	<td><select name='condizioni_generali'><option name='Buone' <?php if (($occup)&&($row['condizioni_generali']=="Buone")) echo "selected"; ?>><?=$LDGood;?></option><option name='Discrete' <?php if (($occup)&&($row['condizioni_generali']=="Discrete")) echo "selected"; ?>><?=$LDNormal;?></option><option name='Scadute' <?php if (($occup)&&($row['condizioni_generali']=="Scadute")) echo "selected"; ?>><?=$LDBad;?></option></select></td>
  </tr>
  </table>
  
 <table>
 <tr>
-<td><strong>Stato nutrizionale</strong><br>
+<td><strong><?=$LDNutritionalStatus;?></strong><br>
 <textarea name="stato_nutrizione" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['stato_nutrizione'] ?></textarea></td>
-<td><strong>Decubito</strong><br>
+<td><strong><?=$LDdecubitus;?></strong><br>
 <textarea name="decubito" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['decubito'] ?></textarea></td>
 </tr>
 <tr>
-<td><strong>Psiche</strong><br>
+<td><strong><?=$LDPsicologicalStatus;?></strong><br>
 <textarea name="psiche" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['psiche'] ?></textarea></td>
-<td><strong>Cute</strong><br>
+<td><strong><?=$LDSkin;?></strong><br>
 <textarea name="cute" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['cute'] ?></textarea></td>
 </tr>
 </table>
 
 <table>
 <tr>
-<td><strong>Mucose</strong><br>
+<td><strong><?=$LDMucous;?></strong><br>
 <textarea name="descrizione_mucose" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['descrizione_mucose'] ?></textarea></td>
-<td><strong>Annessi cutanei</strong><br>
+<td><strong><?=$LDAnnexesSkin;?></strong><br>
 <textarea name="annessi_cutanei" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['annessi_cutanei'] ?></textarea></td>
 </tr>
 </table>
- Edemi  <select name='edemi'><option name='No'<?php if (($occup)&&($row['edemi']=="No")) echo "selected"; ?>>No</option><option name='Si' <?php if (($occup)&&($row['edemi']=="Si")) echo "selected"; ?>>Si</option></select><br>
-<strong>Descrizione edemi</strong><br><textarea name="sottocutaneo_descrizione" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['sottocutaneo_descrizione'] ?></textarea><br>
+<?=$LDEdemas;?> <select name='edemi'><option name='No'<?php if (($occup)&&($row['edemi']=="No")) echo "selected"; ?>>No</option><option name='Si' <?php if (($occup)&&($row['edemi']=="Si")) echo "selected"; ?>>Si</option></select><br>
+<strong><?=$LDEdemasDescription;?></strong><br><textarea name="sottocutaneo_descrizione" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['sottocutaneo_descrizione'] ?></textarea><br>
 <table>
  <tr>
- 	<td>Temperatura</td><td><select name='temperatura'><option name='Apiressia' <?php if (($occup)&&($row['temperatura']=="Apiressia")) echo "selected"; ?>>Apiressia</option><option name='Febbre' <?php if (($occup)&&($row['temperatura']=="Febbre")) echo "selected"; ?>>Febbre</option><option name='Ipotermia' <?php if (($occup)&&($row['temperatura']=="Ipotermia")) echo "selected"; ?>>Ipotermia</option></select></td>
+ 	<td><?=$LDTemperature;?></td><td><select name='temperatura'><option name='Apiressia' <?php if (($occup)&&($row['temperatura']=="Apiressia")) echo "selected"; ?>><?=$LDApiressia;?></option><option name='Febbre' <?php if (($occup)&&($row['temperatura']=="Febbre")) echo "selected"; ?>><?=$LDFever;?></option><option name='Ipotermia' <?php if (($occup)&&($row['temperatura']=="Ipotermia")) echo "selected"; ?>><?=$LDHypothermia;?></option></select></td>
  	<td>Pulso centrale  </i></td><td><input type="text" name="polso_battiti" size=10 maxlength=10 <?php if ($occup) echo "value='".$row['polso_battiti']."'" ?>></td>
  	<td>Pulso periferico</td><td><select name='polso'><option name='Regolare' <?php if (($occup)&&($row['polso']=="Regolare")) echo "selected"; ?>>Regolare</option><option name='Piccolo' <?php if (($occup)&&($row['polso']=="Piccolo")) echo "selected"; ?>>Piccolo</option><option name='Molle' <?php if (($occup)&&($row['polso']=="Molle")) echo "selected"; ?>>Molle</option><option name='Teso' <?php if (($occup)&&($row['polso']=="Teso")) echo "selected"; ?>>Teso</option><option name='Aritmico' <?php if (($occup)&&($row['polso']=="Aritmico")) echo "selected"; ?>>Aritmico</option></select></td>
  </tr>

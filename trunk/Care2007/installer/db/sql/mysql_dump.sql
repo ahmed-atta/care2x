@@ -2408,7 +2408,7 @@ CREATE TABLE `care_target_test` (
   `modify_time` varchar(255) collate latin1_general_ci NOT NULL,
   `create_id` varchar(255) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `tipo_costituzionale` varchar(255) collate latin1_general_ci default NULL,
+  `costitution_type` varchar(255) collate latin1_general_ci default NULL,
   `condizioni_generali` varchar(255) collate latin1_general_ci default NULL,
   `stato_nutrizione` varchar(255) collate latin1_general_ci default NULL,
   `decubito` varchar(255) collate latin1_general_ci default NULL,
