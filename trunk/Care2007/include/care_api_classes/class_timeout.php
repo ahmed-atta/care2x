@@ -66,7 +66,7 @@ class TimeOut extends GlobalConfig {
 				 return TRUE;		
 			}else{
 				# Reset the time-out start time
-				$this->Reset()
+				$this->Reset();
 				return FALSE;
 			}
 		}else{

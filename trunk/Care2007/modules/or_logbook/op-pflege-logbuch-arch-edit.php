@@ -426,7 +426,7 @@ else
 <tr>
 	<TD><font face=verdana,arial size=1>
 AufnahmeNr: <INPUT NAME="patnumber" TYPE="text" VALUE="<?php echo $pdata['patnumber']; ?>" onKeyUp="isvalnum(this.value,this.name)" SIZE="9">
-Name, Vorname<br><INPUT NAME="pname" TYPE="text" VALUE="<?php stripcslashes(echo $pdata['pname']); ?>" SIZE="20"><BR>
+Name, Vorname<br><INPUT NAME="pname" TYPE="text" VALUE="<?php stripcslashes($pdata['pname']); ?>" SIZE="20"><BR>
 	Geburtsdatum<br><INPUT NAME="gdatum" TYPE="text" VALUE="<?php echo $pdata['gdatum']; ?>" SIZE="20" onKeyUp="isgdatum(this.value,this.name)"><BR> 
 	Addresse<br><TEXTAREA NAME="addresse" Content-Type="text/html"
 	COLS="17" ROWS="4"><?php echo stripcslashes($pdata['addresse']); ?></TEXTAREA></TD>

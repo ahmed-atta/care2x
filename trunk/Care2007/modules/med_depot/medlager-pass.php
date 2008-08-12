@@ -41,7 +41,6 @@ switch($mode)
 						$src="catalogpass";
 						$userck="ck_prod_order_user";
 						$fileforward=$root_path."modules/products/products-bestellkatalog-edit.php".$append.$userck."&target=catalog&from=".$src;
-						break;ward=$root_path."modules/furnitor/furnizim.php".$append.$userck;
 						break;	
 	default: 	$title=$LDPharmaOrder;
 						$src="orderpass";
