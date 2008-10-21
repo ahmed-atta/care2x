@@ -388,13 +388,6 @@ if($rows){
 					else $sBuffer = $sBuffer.createComIcon($root_path,'bubble2.gif','0','',TRUE);
 				$sBuffer = $sBuffer.' alt="'.$LDNoticeRW.'"></a>';
 				
-				// Aggiunta codice per il foglio di anamnesi e per l'esame obiettivo'
-					
-					$smarty->assign('sYellowPaper','<a href="javascript:yellow(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'yellowlist.gif','0','',TRUE).' alt="'.$LDYellowPaper.'"></a>');
-					$smarty->assign('sTarget','<a href="javascript:target(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'articles.gif','0','',TRUE).' alt="'.$LDTarget.'"></a>');
-					
-					//
-
 				$smarty->assign('sNotesIcon',$sBuffer);
 
 				$smarty->assign('sTransferIcon','<a href="javascript:Transfer(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'xchange.gif','0','',TRUE).' alt="'.$LDTransferPatient.'"></a>');

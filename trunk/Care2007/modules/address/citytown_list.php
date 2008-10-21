@@ -25,7 +25,7 @@ $address_obj=new Address;
 $breakfile='address_manage.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
 
-# Initialize page�s control variables
+# Initialize page's control variables
 if($mode!='paginate'){
 	# Reset paginator variables
 	$pgx=0;
@@ -112,8 +112,16 @@ if(is_object($address)){
 			else $flag=FALSE; 
 		echo $pagen->SortLink($LDCityTownName,'name',$odir,$flag); 
 			 ?></b>
+  <!-- mizuko added zip code -->
 	</td>
-
+      <td><b>
+	  <?php 
+	  	if($oitem=='zip_code') $flag=TRUE;
+			else $flag=FALSE; 
+		echo $pagen->SortLink($LDZipCode,'zip_code',$odir,$flag); 
+			 ?></b>
+	</td>
+  <!-- end:mizuko added zip code -->	
       <td><b>
 	  <?php 
 	  	if($oitem=='iso_country_id') $flag=TRUE;
@@ -148,6 +156,9 @@ if(is_object($address)){
 ?>
   <tr  class="<?php echo $bgc ?>">
     <td><a href="citytown_info.php<?php echo URL_APPEND.'&retpath=list&nr='.$addr['nr']; ?>"><?php echo $addr['name']; ?></a></td>
+    <!-- mizuko added zip code -->
+    <td><?php echo $addr['zip_code']; ?></td>
+    <!-- end:mizuko added zip code -->
     <td><?php echo $addr['iso_country_id']; ?></td>
     <td><?php echo $addr['unece_locode']; ?></td>
     <td><a href="<?php echo $addr['info_url']; ?>"><?php echo $addr['info_url']; ?></a></td>

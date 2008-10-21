@@ -214,7 +214,7 @@ if($encounter['current_dept_nr']!=$dept_nr){
 <table border=0>
   <tr>
     <td><img <?php 	echo createLDImgSrc($root_path,'stop.png','0'); ?>></td>
-    <td><?php 	echo str_replace('~dept_id~',$dept,$LDChkClinicConflict); ?></a>
+    <td><?php 	echo str_replace('~dept_id~',$dept,$LDChkClinicConflict); ?>
 	</td>
   </tr>
 </table>

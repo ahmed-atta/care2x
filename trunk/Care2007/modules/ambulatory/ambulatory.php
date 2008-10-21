@@ -3,14 +3,6 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 
-/**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
-* GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
-* elpidio@care2x.org, 
-*
-* See the file "copy_notice.txt" for the licence notice
-*/
 $lang_tables=array('departments.php');
 define('LANG_FILE','ambulatory.php');
 define('NO_2LEVEL_CHK',1);
@@ -26,8 +18,10 @@ $HTTP_SESSION_VARS['sess_parent_mod']='';
 /* Create department object and load all medical depts */
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj= new Department;
-$medical_depts=&$dept_obj->getAllMedical();
-
+if(!isset($HTTP_SESSION_VARS['department_nr']) || $HTTP_SESSION_VARS['department_nr'] == '')
+	$medical_depts=&$dept_obj->getAllActiveSort( 'name_formal' ) ; //get only the main depts
+else
+	$medical_depts=&$dept_obj->getAllMedical() ; // get all depts
 # Start Smarty templating here
  /**
  * LOAD Smarty
@@ -93,26 +87,69 @@ function goDept(t) {
  # Prepare select options
 
 $TP_SELECT_BLOCK='<select name="dept_nr" size="1"><option value=""></option>';
-while(list($x,$v)=each($medical_depts)){
-	$TP_SELECT_BLOCK.='
-	<option value="'.$v['nr'].'">';
+
+if(!isset($HTTP_SESSION_VARS['department_nr']) || $HTTP_SESSION_VARS['department_nr'] == '') {
+    while(list($x,$v)=each($medical_depts)){
+    	$subDepts = $dept_obj->getAllSubDepts($v['nr']);
+    	$TP_SELECT_BLOCK.='<option value="'.$v['nr'].'" >';
 	$buffer=$v['LD_var'];
 	if(isset($$buffer)&&!empty($$buffer)) $TP_SELECT_BLOCK.=$$buffer;
 		else $TP_SELECT_BLOCK.=$v['name_formal'];
 	$TP_SELECT_BLOCK.='</option>';
+    	//add the subdept
+    	if($subDepts) {
+			while (list($y,$sDept) = each($subDepts)) {
+            	$TP_SELECT_BLOCK.='<option value="'.$sDept['nr'].'" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sup>L</sup>&nbsp;';
+            	$buffer=$sDept['LD_var'];
+            	if(isset($$buffer)&&!empty($$buffer)) $TP_SELECT_BLOCK.=$$buffer;
+            	else $TP_SELECT_BLOCK.=$sDept['name_formal'];
+            	$TP_SELECT_BLOCK.='</option>';			}
+		}
+    }  
+} else {
+    while(list($x,$v)=each($medical_depts)){
+    	if(in_array($v['nr'],$HTTP_SESSION_VARS['department_nr']))  { 
+        	$TP_SELECT_BLOCK.='<option value="'.$v['nr'].'" selected >';
+        	$buffer=$v['LD_var'];
+        	if(isset($$buffer)&&!empty($$buffer)) $TP_SELECT_BLOCK.=$$buffer;
+        	else $TP_SELECT_BLOCK.=$v['name_formal'];
+        	$TP_SELECT_BLOCK.='</option>';
+    	}
+    	else continue;
+    }    
 }
 $TP_SELECT_BLOCK.='</select>';
+
 #Prepare hidden inputs
 $TP_HIDDENS='';
 reset($medical_depts);
-while(list($x,$v)=each($medical_depts)){
+if(!isset($HTTP_SESSION_VARS['department_nr']) || $HTTP_SESSION_VARS['department_nr'] == '') {
+	while(list($x,$v)=each($medical_depts)){
+		$subDepts = $dept_obj->getAllSubDepts($v['nr']);
 	$buffer=$v['LD_var'];
 	if(isset($$buffer)&&!empty($$buffer)) $dname=$$buffer;
 		else $dname= $v['name_formal'];
 	$TP_HIDDENS.='
 	<input type="hidden" name="dname'.$v['nr'].'" value="'.$dname.'">';
+	    	if($subDepts) {
+				while (list($y,$sDept) = each($subDepts)) {
+					$buffer=$sDept['LD_var'];
+					if(isset($$buffer)&&!empty($$buffer)) $dname=$$buffer;
+					else $dname= $sDept['name_formal'];
+					$TP_HIDDENS.='
+					<input type="hidden" name="dname'.$sDept['nr'].'" value="'.$dname.'">';
+				}
+			}
+	}
+} else {
+	while(list($x,$v)=each($medical_depts)){
+		$buffer=$v['LD_var'];
+		if(isset($$buffer)&&!empty($$buffer)) $dname=$$buffer;
+			else $dname= $v['name_formal'];
+		$TP_HIDDENS.='
+		<input type="hidden" name="dname'.$v['nr'].'" value="'.$dname.'">';
+	}	
 }
-
 # hidden
 $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
    			<input type="hidden" name="lang" value="'.$lang.'">
@@ -131,9 +168,8 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
  $smarty->assign('TP_HREF_PWL1','<a href="javascript:goDept(\'amb_clinic_patients_pass.php\')">'.$LDOutpatientClinic.'</a>');
  $smarty->assign('TP_HREF_PREQ1','<a href="javascript:goDept(\''.$root_path.'modules/laboratory/labor_test_request_pass.php\')">'.$LDPendingRequest.'</a>');
  $smarty->assign('TP_HREF_NEWS1','<a href="javascript:goDept(\''.$root_path.'modules/news/newscolumns.php\')">'.$LDNews.'</a>');
-
-/*
-# Create the top left submenu block
+if(!isset($HTTP_SESSION_VARS['department_nr']) || $HTTP_SESSION_VARS['department_nr'] == '') {
+    # Create the top left submenu block
  $smarty->assign('sBlockTitle',$LDEmergency);
  $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=14&dept_nr=14&user_origin=amb&dept=".strtr($LDEmergency,' ','+')."\">$LDAppointments</a>");
  $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=14&dept=".strtr($LDEmergency,' ','+')."\">$LDOutpatientClinic</a>");
@@ -150,10 +186,8 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
 
  # Assign to main template object
 	$smarty->assign('sTopLeftSubMenu',$sTemp);
-*/
 
-/*
-# Create the top right submenu block
+    # Create the top right submenu block
  $smarty->assign('sBlockTitle',$LDGeneralAmbulatory);
  $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=15&dept_nr=15&user_origin=amb&dept=".strtr($LDGeneralAmbulatory,' ','+')."\">$LDAppointments</a>");
  $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=15&dept=".strtr($LDGeneralAmbulatory,' ','+')."\">$LDOutpatientClinic</a>");
@@ -170,10 +204,8 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
 
  # Assign to main template object
 	$smarty->assign('sTopRightSubMenu',$sTemp);
-*/
 
-/*
-# Create the  mid left submenu block
+    # Create the  mid left submenu block
  $smarty->assign('sBlockTitle',$LDSonography);
  $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=17&dept_nr=17&user_origin=amb&dept=".strtr($LDSonography,' ','+')."\">$LDAppointments</a>");
  $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=17&dept=".strtr($LDSonography,' ','+')."\">$LDOutpatientClinic</a>");
@@ -190,10 +222,8 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
 
  # Assign to main template object
 	$smarty->assign('sMidLeftSubMenu',$sTemp);
-*/
 
-/*
-# Create the  mid right submenu block
+    # Create the  mid right submenu block
  $smarty->assign('sBlockTitle',$LDInternalMed);
  $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=16&dept_nr=16&user_origin=amb&dept=".strtr($LDInternalMed,' ','+')."\">$LDAppointments</a>");
  $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=16&dept=".strtr($LDInternalMed,' ','+')."\">$LDOutpatientClinic</a>");
@@ -210,10 +240,8 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
 
  # Assign to main template object
 	$smarty->assign('sMidRightSubMenu',$sTemp);
-*/
 
-/*
-# Create the  bottom left submenu block
+    # Create the  bottom left submenu block
  $smarty->assign('sBlockTitle',$LDNuclearMed);
  $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=18&dept_nr=18&user_origin=amb&dept=".strtr($LDNuclearMed,' ','+')."\">$LDAppointments</a>");
  $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=18&dept=".strtr($LDNuclearMed,' ','+')."\">$LDOutpatientClinic</a>");
@@ -230,10 +258,8 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
 
  # Assign to main template object
 	$smarty->assign('sBottomLeftSubMenu',$sTemp);
-*/
 
-/*
-# Create the  bottom right submenu block
+    # Create the  bottom right submenu block
  $smarty->assign('sBlockTitle',$LDEarNoseThroath);
  $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=6&dept_nr=6&user_origin=amb&dept=".strtr($LDEarNoseThroath,' ','+')."\">$LDAppointments</a>");
  $smarty->assign('sOutPatientLink',"<a href=\"amb_clinic_patients_pass.php".URL_APPEND."&dept_nr=6&dept=".strtr($LDEarNoseThroath,' ','+')."\">$LDOutpatientClinic</a>");
@@ -247,10 +273,9 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
  		$smarty->display('ambulatory/submenu_dept.tpl');
  		$sTemp = ob_get_contents();
  ob_end_clean();
-
+}
  # Assign to main template object
 	$smarty->assign('sBottomRightSubMenu',$sTemp);
-*/
 
 # Assign the submenu to the mainframe center block
 

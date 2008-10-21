@@ -172,6 +172,12 @@ if(!empty($mode)){
     <td class="adm_input"><input type="text" name="name" size=50 maxlength=60 value="<?php echo $name ?>"><br>
 </td>
   </tr> 
+  <!-- mizuko added zip code -->
+  <tr>
+    <td align=right class="adm_item"><font color=#ff0000><b>*</b></font><?php echo $LDZipCode ?>: </td>
+    <td class="adm_input"><input type="text" name="zip_code" size=50 maxlength=5 value="<?php echo $zip_code ?>"><br></td>
+  </tr>  
+  <!-- end:mizuko added zip code -->   
   <tr>
     <td align=right class="adm_item"><?php echo $LDISOCountryCode ?>: </td>
     <td class="adm_input"><input type="text" name="iso_country_id" size=50 maxlength=3 value="<?php echo $iso_country_id ?>"><br></td>
