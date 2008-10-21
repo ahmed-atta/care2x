@@ -28,6 +28,8 @@ $allow_area=array(
 
 'lab_w'=>array('_a_1_labresultswrite'),
 
+'lab_all'=>array('_a_1_laball'),
+
 'radio'=>array('_a_1_radiowrite', '_a_1_opdoctorallwrite', '_a_2_opnurseallwrite'),
 
 'pharma_db'=>array('_a_1_pharmadbadmin'),

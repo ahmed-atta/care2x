@@ -186,6 +186,13 @@ ul {
 	background-color: #ffffee;
 	padding-left: 6px;
 }
+/* -- Person registration form input area -- */
+/* gjergji */
+.reg_input_must{
+	background-color: #FFCECE;
+	padding-left: 6px;
+}
+/* end gjergji */
 .reg_list_titlebar{
 	background-color: #66ee66;
 	color: #000066;
