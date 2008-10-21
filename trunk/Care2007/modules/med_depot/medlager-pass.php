@@ -23,6 +23,7 @@ $append=URL_REDIRECT_APPEND."&cat=medlager&from=$src&userck=";
 switch($mode)
 {
 	case "archive":$title=$LDOrderArchive;
+						$allowedarea[] = '_a_1_meddepotdbadmin';
 						$src="archivepass";
 						$userck="ck_prod_arch_user";
 						$fileforward=$root_path."modules/products/products-archive.php".$append.$userck;
@@ -33,11 +34,13 @@ switch($mode)
 						$fileforward="medlager-datenbank-functions.php".$append.$userck;
 						break;*/
 	case "bot":	$title="$LDMediBotActivate";
+						$allowedarea[] = '_a_1_meddepotdbadmin';
 						$src="medibotpass";
 						$userck="ck_prod_bot_user";
 						$fileforward=$root_path."modules/products/products-bestellbot.php".$append.$userck;
 						break;
 	case "catalog":  $title=$LDOrderCat;
+						$allowedarea[] = '_a_1_meddepotdbadmin';
 						$src="catalogpass";
 						$userck="ck_prod_order_user";
 						$fileforward=$root_path."modules/products/products-bestellkatalog-edit.php".$append.$userck."&target=catalog&from=".$src;

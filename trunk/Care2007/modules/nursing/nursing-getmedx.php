@@ -41,7 +41,8 @@ $charts_obj= new Charts;
 			'status' => 'saved',
 			'dept_nr' => $dept_nr,
 			'prescriber' => $prescriber,
-			'history' => 'Created by : '. date("Y-m-d H:m:s") . ' : ' .  $prescriber 
+			'history' => 'Created by : '. date("Y-m-d H:m:s") . ' : ' .  $prescriber,
+			'create_time' => date("Y-m-d H:m:s")
 		);
 		$objPrescription->insertDataFromArray($prescription);
 		
@@ -94,6 +95,7 @@ $charts_obj= new Charts;
 				'status' => 'saved',
 				'dept_nr' => $dept_nr,			
 				'prescriber' => $prescriber,
+				'create_time' => date("Y-m-d H:m:s"),
 				'history' => 'Created by : '. date("Y-m-d H:m:s") . ' : ' .  $prescriber 
 			);
 			$objPrescription->insertDataFromArray($prescription);
@@ -497,7 +499,8 @@ onLoad="<?php if($saved || $repeated) echo "parentrefresh();"; ?>if (window.focu
 ?>
 	</font></b>
 	</td>
-    <td align="right" valign="top"><a href="javascript:gethelp('nursing_feverchart_xp.php','<?php echo $winid ?>','','','<?php echo $title ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr>
+    <td align="right" valign="top"><a href="javascript:gethelp('nursing_feverchart_xp.php','<?php echo $winid ?>','','','<?php echo $title ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> </a>
+    <a href="<?php echo "nursing-station-patientdaten.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit" ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> </a></nobr>
 </td>
   </tr>
 </table>
@@ -622,8 +625,8 @@ if($count){
       </div>
       <div id="hint"></div>
       <script type="text/javascript">	
-      var kaka = "include/inc_search_medicaments.php?";
-		var kot = new Ajax.Autocompleter("search","hint",kaka, {afterUpdateElement : setSelectionId,autoSelect: true, minChars: 2,callback:funxkot});
+      var includeScript = "include/inc_search_medicaments.php?";
+		var kot = new Ajax.Autocompleter("search","hint",includeScript, {afterUpdateElement : setSelectionId,autoSelect: true, minChars: 2,callback:funxkot});
 		
 		function setSelectionId(text, li) {
     		document.getElementById('bestellnum').value = li.id;
@@ -663,7 +666,7 @@ if($count){
     <td align="right"><input type="checkbox" id="companion" name="companion" align="right">
     </td>
     <td><input type="text" maxlength="4" id="pspeed" name="pspeed">
-      ml/ore </td>
+      ml/hr </td>
     <td><input type="text" id="notesMed" name="notesMed">
     </td>
   </tr>

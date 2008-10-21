@@ -88,7 +88,7 @@ if($mode=='such'||$mode=='paginate')
 	}
 	
 	$cond.=" AND l.encounter_nr=e.encounter_nr";
-	//gjergji - show patient info of other departements
+	//gjergji - hide patient info of other departements
 	if(isset($HTTP_SESSION_VARS['department_nr']) && $HTTP_SESSION_VARS['department_nr'] != '0' ) {
 		$cond.=" AND ( ";
 		while (list($key, $val) = each($HTTP_SESSION_VARS['department_nr'])) {

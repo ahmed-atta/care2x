@@ -11,7 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-///$db->debug=true;
+//$db->debug=true;
 /**
 * Funtion prepareTestElemenst() will process the POST vars containg the test elements
 * and other variables: sampling day & sampling time
@@ -113,6 +113,7 @@ $abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 $edit_form=0;
 $read_form=0;
 $db_request_table=$target;
+$db_request_table_sub=$target . "_sub";
 $paramlist='';
 $sday='';
 $sample_time='';
@@ -143,6 +144,8 @@ if(isset($pn)&&$pn) {
 		include_once($root_path.'include/care_api_classes/class_diagnostics.php');
 		$diag_obj=new Diagnostics;
 		$diag_obj->useChemLabRequestTable();
+		$diag_obj_sub = new Diagnostics;
+		$diag_obj_sub->useChemLabRequestSubTable();
 		
 	}else{
     	$edit=0;
@@ -160,7 +163,7 @@ if(isset($pn)&&$pn) {
 					$data['encounter_nr']=$pn;
 					$data['room_nr']=$room_nr;
 					$data['dept_nr']=$dept_nr;
-					$data['parameters']=$paramlist;
+					//$data['parameters']=$paramlist;
 					$data['doctor_sign']=$doctor_sign;
 					$data['highrisk']=$_highrisk_;
 					$data['notes']=$notes;
@@ -175,6 +178,20 @@ if(isset($pn)&&$pn) {
 					$data['create_time']='NULL';
 					$diag_obj->setDataArray($data);
 				    if($diag_obj->insertDataFromInternalArray()){
+				    	
+				    	//sub values management
+				    	//$diag_obj->useChemLabRequestSubTable();
+				    	$singleParam = explode("&",$paramlist);
+				    	foreach( $singleParam as $key => $value) {
+				    		$tmpParam = explode("=",$value);
+				    		$parsedParamList['batch_nr']=$batch_nr;
+				    		$parsedParamList['encounter_nr']=$pn;
+				    		$parsedParamList['paramater_name']=$tmpParam[0];
+				    		$parsedParamList['parameter_value']=$tmpParam[1];
+					    	$diag_obj_sub->setDataArray($parsedParamList);
+					    	$diag_obj_sub->insertDataFromInternalArray();
+				    	}
+				    	
 					  	// Load the visual signalling functions
 						include_once($root_path.'include/inc_visual_signalling_fx.php');
 						// Set the visual signal 
@@ -194,7 +211,7 @@ if(isset($pn)&&$pn) {
 				if(prepareTestElements()){
 					$data['room_nr']=$room_nr;
 					$data['dept_nr']=$dept_nr;
-					$data['parameters']=$paramlist;
+					//$data['parameters']=$paramlist;
 					$data['doctor_sign']=$doctor_sign;
 					$data['highrisk']=$_highrisk_;
 					$data['notes']=$notes;
@@ -207,6 +224,21 @@ if(isset($pn)&&$pn) {
 					$diag_obj->setDataArray($data);
 					$diag_obj->setWhereCond(" batch_nr=$batch_nr");
 					if($diag_obj->updateDataFromInternalArray($batch_nr)){									
+						//sub values management
+				    	//$diag_obj->useChemLabRequestSubTable();
+				    	//first i delete the old request values
+				    	//then i insert the new ones.
+				    	$diag_obj_sub->deleteOldValues($batch_nr,$pn);
+				    	$singleParam = explode("&",$paramlist);
+				    	foreach( $singleParam as $key => $value) {
+				    		$tmpParam = explode("=",$value);
+				    		$parsedParamList['batch_nr']=$batch_nr;
+				    		$parsedParamList['encounter_nr']=$pn;
+				    		$parsedParamList['paramater_name']=$tmpParam[0];
+				    		$parsedParamList['parameter_value']=$tmpParam[1];
+					    	$diag_obj_sub->setDataArray($parsedParamList);
+					    	$diag_obj_sub->insertDataFromInternalArray();
+				    	}						
 						// Load the visual signalling functions
 						include_once($root_path.'include/inc_visual_signalling_fx.php');
 						// Set the visual signal 
@@ -230,25 +262,24 @@ if(isset($pn)&&$pn) {
 			*/
 			case 'edit':
 						//echo $batch_nr;
-		                $sql="SELECT * FROM care_test_request_".$db_request_table."  WHERE batch_nr='".$batch_nr."' AND (status='pending' OR status='draft' OR status='')";
+		    //$sql="SELECT * FROM care_test_request_".$db_request_table."  WHERE batch_nr='".$batch_nr."' AND (status='pending' OR status='draft' OR status='')";
+		    
+		    $sql  = "SELECT * FROM care_test_request_".$db_request_table." ";
+			$sql .= "INNER JOIN care_test_request_".$db_request_table_sub." ON ";
+			$sql .= "( care_test_request_".$db_request_table.".batch_nr = care_test_request_".$db_request_table_sub.".batch_nr) ";
+			$sql .= "WHERE care_test_request_".$db_request_table.".batch_nr='".$batch_nr."' ";
+			$sql .= "AND (status='pending' OR status='draft' OR status='')";
 		               // echo $sql;
-						if($ergebnis=$db->Execute($sql))
-       		            {
-				            if($editable_rows=$ergebnis->RecordCount())
-					        {
-							
-     					       $stored_request=$ergebnis->FetchRow();
-							   
-							   if($stored_request['parameters']!='')
-							   {
-							   
-							      //echo $stored_request['parameters'];
-   						          parse_str($stored_request['parameters'],$stored_param);
+						if($ergebnis=$db->Execute($sql)) {
+				            if($editable_rows=$ergebnis->RecordCount()) {
+							    while ( !$ergebnis->EOF ) {
+									$stored_param[$ergebnis->fields['paramater_name']] = $ergebnis->fields['parameter_value'];
+									$stored_request=$ergebnis->GetRowAssoc($toUpper=false);
+									$ergebnis->MoveNext();
+								}				            	
 							      $edit_form=1;
 							   }
 					         }
-			             }
-						 
 						 break; ///* End of case 'edit': */
 			
 			 default: $mode="";
@@ -426,15 +457,15 @@ ob_start();
 
 if($edit){
 
-?>
-<form name="form_test_request" method="post" action="<?php echo $thisfile ?>">
-<?php
+	?>
+	<form name="form_test_request" method="post" action="<?php echo $thisfile ?>">
+	<?php
 
-/* If in edit mode display the control buttons */
+	/* If in edit mode display the control buttons */
 
-$controls_table_width=745;
+	$controls_table_width=745;
 
-require($root_path.'include/inc_test_request_controls.php');
+	require($root_path.'include/inc_test_request_controls.php');
 
 }elseif(!$read_form && !$no_proc_assist){
 
@@ -922,16 +953,20 @@ for($i=0;$i<=$max_row;$i++) {
 	for($j=0;$j<=$column;$j++) {	
 			if($LD_Elements[$j][$i]['type']=='top') {
 				echo '<td bgcolor="#ee6666" colspan="2" onclick="selectAllParams(\''.$LD_Elements[$j][$i]['id'].'\');"><font color="white" style="cursor : pointer;">&nbsp;<b>'.$LD_Elements[$j][$i]['value'].'</b></font></td>';
-				//echo $lab_obj->getGroupParams($LD_Elements[$j][$i]['id']) . "<br>";
 
 			} else {
 				if($LD_Elements[$j][$i]['value']) {
 					echo '<td>';
 					if($edit) {
+						if( isset($stored_param[$LD_Elements[$j][$i]['id']]) && !empty($stored_param[$LD_Elements[$j][$i]['id']])) {
+							echo '<input type="hidden" name="'.$LD_Elements[$j][$i]['id'].'" value="1">
+							<a href="javascript:setM(\''.$LD_Elements[$j][$i]['id'].'\')">';
+						} else {
 						echo '<input type="hidden" name="'.$LD_Elements[$j][$i]['id'].'" value="0">
 						<a href="javascript:setM(\''.$LD_Elements[$j][$i]['id'].'\')">';
 					}
-					if($LD_Elements[$j][$i]['is_set']) {
+					}				
+					if( isset($stored_param[$LD_Elements[$j][$i]['id']]) && !empty($stored_param[$LD_Elements[$j][$i]['id']])) {
 						echo '<img src="f.gif" border=0 width=18 height=6 id="'.$LD_Elements[$j][$i]['id'].'">';
 					} else {
 						echo '<img src="b.gif" border=0 width=18 height=6 id="'.$LD_Elements[$j][$i]['id'].'">';

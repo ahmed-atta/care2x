@@ -17,6 +17,12 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 // reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
+require ($root_path.'include/care_api_classes/class_access.php');
+
+$access = new Access($HTTP_SESSION_VARS['sess_login_userid'],$HTTP_SESSION_VARS['sess_login_pw']);
+$hideOrder = 0;
+if(ereg("_a_1_meddepotdbadmin",$access->PermissionAreas()))
+	$hideOrder = 1;
 
 # Start Smarty templating here
  /**
@@ -113,6 +119,7 @@ $aSubMenuItem=array('LDPharmaOrder' => "<a href=\"medlager-pass.php".URL_APPEND.
 $iRunner = 0;
 
 while(list($x,$v)=each($aSubMenuItem)){
+	if($hideOrder == 1 && $iRunner == 0) {$hideOrder = 0;continue;}
 	$sTemp='';
 	ob_start();
 		if($cfg['icons'] != 'no_icon') $smarty2->assign('sIconImg','<img '.$aSubMenuIcon[$iRunner].'>');

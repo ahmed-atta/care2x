@@ -56,6 +56,10 @@ $charts_obj= new Charts;
 		$HTTP_POST_VARS['encounter_nr']=$pn;
 		$HTTP_POST_VARS['personell_name']=$HTTP_SESSION_VARS['sess_user_name'];
 		if($charts_obj->saveChartNotesFromArray($HTTP_POST_VARS,$notes_type_nr)){
+    	  	// Load the visual signalling functions
+    		include_once($root_path.'include/inc_visual_signalling_fx.php');	
+			// Set the visual signal 
+			setEventSignalColor($pn,SIGNAL_COLOR_ANTICOAG);
 			header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dystart=$dystart&dyname=$dyname");
 		}
 	}else{// end of if(mode==save)
@@ -186,8 +190,8 @@ if($count){
 <input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="mode" value="save">
 <br>
-		 &nbsp;<a href="javascript:sethilite(document.infoform.notes)"><img <?php echo createLDImgSrc($root_path,'color_marker_yellow.gif','0','',TRUE) ?>><?php echo $LDStart ?></a>
-		<a href="javascript:sethilite(document.infoform.notes)"><img <?php echo createLDImgSrc($root_path,'color_marker_yellow.gif','0','',TRUE) ?>><?php echo $LDEnd ?></a>
+		 &nbsp;<a href="javascript:sethilite(document.infoform.notes)"><img <?php echo createComIcon($root_path,'hilite-s.gif','0','',TRUE) ?>></a>
+		<a href="javascript:sethilite(document.infoform.notes)"><img <?php echo createComIcon($root_path,'hilite-e.gif','0','',TRUE) ?>></a>
 
 <p>
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>>

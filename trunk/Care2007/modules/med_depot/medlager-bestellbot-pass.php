@@ -30,6 +30,9 @@ require($root_path.'include/inc_2level_reset.php');
 setcookie('ck_2level_sid'.$sid,'',0,'/');
 
 require($root_path.'include/inc_passcheck_internchk.php');
+//gjergji
+unset($allowedarea);
+$allowedarea[] = '_a_2_meddepotreception';
 if ($pass=='check') include($root_path.'include/inc_passcheck.php');
 
 $errbuf=$title;

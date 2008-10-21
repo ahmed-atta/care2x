@@ -57,7 +57,7 @@ define('_BATCH_NR_INIT_',50000000);  // define the initial batch nr for generic 
 /* Create department object and load all medical depts */
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj= new Department;
-$medical_depts=$dept_obj->getAllMedical();
+$medical_depts=$dept_obj->getAllActiveSort( 'name_formal' );
 
 /* Here begins the real work */
 /* Load the date format functions and get the local format */
@@ -379,14 +379,26 @@ elseif(!$read_form && !$no_proc_assist)
 
 
 			while(list($x,$v)=each($medical_depts)){
-				echo'
-				<option value="'.$v['nr'].'"';
+				$subDepts = $dept_obj->getAllSubDepts($v['nr']);
+				echo'<option value="'.$v['nr'].'"';
 				if($v['nr']==$dept_nr) echo ' selected>';
 					else echo '>';
 				$buffer=$v['LD_var'];
 				if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
 					else echo $v['name_formal'];
 				echo '</option>';
+			    //added subdepts
+				if($subDepts) {
+			    		while (list($y,$sDept) = each($subDepts)) {
+            				echo'<option value="'.$sDept['nr'].'"';
+            				if($sDept['nr']==$dept_nr) echo ' selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sup>L</sup>&nbsp;';
+            					else echo '>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sup>L</sup>&nbsp;';
+            				$buffer=$sDept['LD_var'];
+            				if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
+            					else echo $sDept['name_formal'];
+            				echo '</option>';
+			    		}
+			    }					
 			}
 
 /*		 while(list($x,$v)=each($abtname))

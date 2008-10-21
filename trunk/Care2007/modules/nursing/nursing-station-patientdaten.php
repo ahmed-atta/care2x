@@ -47,7 +47,7 @@ $HTTP_SESSION_VARS['sess_user_origin']='nursing';
 /* Create department object and load all medical depts */
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj= new Department;
-$medical_depts=$dept_obj->getAllMedical();
+$medical_depts=$dept_obj->getAllActiveSort( 'name_formal' );
 /* Create encounter object */
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj= new Encounter;
@@ -420,7 +420,8 @@ ob_start();
 
 <ul>
 
- <form  method="post" name="patient_folder" onSubmit="return isColorBarUpdated()">
+	<form method="post" name="patient_folder"
+		onSubmit="return isColorBarUpdated()">
  
 
 <?php
@@ -504,8 +505,10 @@ function rx(){
 		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-ddc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$DDC_title.'"></td>
 		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-kurve.php'.URL_REDIRECT_APPEND.'&station='.$station.'&dept_nr='.$dept_nr.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'"></td>
 		</tr>
-		<tr><td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-tc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$TC_title.'"></td>
-		<td colspan=2><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-noc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$NOC_title.'"></td>
+		<tr><td>
+		<input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-tc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$TC_title.'"></td>
+		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-noc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$NOC_title.'"></td>
+		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-getmedx.php'.URL_REDIRECT_APPEND.'&station='.$station.'&dept_nr='.$dept_nr.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$DailyTherapy.'"></td>
 		</tr></table>
 		</td></tr>
 		<tr><td bgcolor=333333><font color=white><b>'.$LDReports.'<b></font></td></tr>
@@ -548,14 +551,22 @@ function rx(){
 			<option value="">'.$LDChkUpRequests.'</option>';
 
 			while(list($x,$v)=each($medical_depts)){
-				//echo'
-				//<option value="'.$v['nr'].'">';
-				echo'
-				<option value="'.$v['nr'].'~'.$v['id'].'">';
+				$subDepts = $dept_obj->getAllSubDepts($v['nr']);
+				echo'<option value="'.$v['nr'].'~'.$v['id'].'">';
 				$buffer=$v['LD_var'];
 				if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
 					else echo $v['name_formal'];
 				echo '</option>';
+			    //added subdepts
+				if($subDepts) {
+			    		while (list($y,$sDept) = each($subDepts)) {
+            				echo'<option value="'.$sDept['nr'].'~'.$sDept['id'].'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sup>L</sup>&nbsp;';
+            				$buffer=$sDept['LD_var'];
+            				if(isset($$buffer)&&!empty($$buffer)) echo $$buffer;
+            				else echo $sDept['name_formal'];
+            				echo '</option>';
+			    		}
+			    }	
 			}
 			echo '
 			</select></td></tr></table>';
@@ -698,61 +709,72 @@ echo '
 		</table>
 		';
 ?>
-<input type="hidden" name="sid" value="<?php echo $sid ?>">
-<input type="hidden" name="lang" value="<?php echo $lang ?>">
-<input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
-<input type="hidden" name="pn" value="<?php echo $pn ?>">
+<input type="hidden" name="sid" value="<?php echo $sid ?>"> <input
+		type="hidden" name="lang" value="<?php echo $lang ?>"> <input
+		type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>"> <input
+		type="hidden" name="pn" value="<?php echo $pn ?>">
 
 <?php
 # If in edit mode create the hidden items
 if($edit){
 ?>
 
-<input type="hidden" name="yellow" value="<?php echo $event['yellow'] ?>">
-<input type="hidden" name="black" value="<?php echo $event['black'] ?>">
-<input type="hidden" name="blue_pale" value="<?php echo $event['blue_pale'] ?>">
-<input type="hidden" name="brown" value="<?php echo $event['brown'] ?>">
-<input type="hidden" name="pink" value="<?php echo $event['pink'] ?>">
-<input type="hidden" name="yellow_pale" value="<?php echo $event['yellow_pale'] ?>">
-<input type="hidden" name="red" value="<?php echo $event['red'] ?>">
-<input type="hidden" name="green_pale" value="<?php echo $event['green_pale'] ?>">
-<input type="hidden" name="violet" value="<?php echo $event['violet'] ?>">
-<input type="hidden" name="blue" value="<?php echo $event['blue'] ?>">
-<input type="hidden" name="biege" value="<?php echo $event['biege'] ?>">
-<input type="hidden" name="orange" value="<?php echo $event['orange'] ?>">
-<input type="hidden" name="green_1" value="<?php echo $event['green_1'] ?>">
-<input type="hidden" name="green_2" value="<?php echo $event['green_2'] ?>">
-<input type="hidden" name="green_3" value="<?php echo $event['green_3'] ?>">
-<input type="hidden" name="green_4" value="<?php echo $event['green_4'] ?>">
-<input type="hidden" name="green_5" value="<?php echo $event['green_5'] ?>">
-<input type="hidden" name="green_6" value="<?php echo $event['green_6'] ?>">
-<input type="hidden" name="green_7" value="<?php echo $event['green_7'] ?>">
-<input type="hidden" name="rose_1" value="<?php echo $event['rose_1'] ?>">
-<input type="hidden" name="rose_2" value="<?php echo $event['rose_2'] ?>">
-<input type="hidden" name="rose_3" value="<?php echo $event['rose_3'] ?>">
-<input type="hidden" name="rose_4" value="<?php echo $event['rose_4'] ?>">
-<input type="hidden" name="rose_5" value="<?php echo $event['rose_5'] ?>">
-<input type="hidden" name="rose_6" value="<?php echo $event['rose_6'] ?>">
-<input type="hidden" name="rose_7" value="<?php echo $event['rose_7'] ?>">
-<input type="hidden" name="rose_8" value="<?php echo $event['rose_8'] ?>">
-<input type="hidden" name="rose_9" value="<?php echo $event['rose_9'] ?>">
-<input type="hidden" name="rose_10" value="<?php echo $event['rose_10'] ?>">
-<input type="hidden" name="rose_11" value="<?php echo $event['rose_11'] ?>">
-<input type="hidden" name="rose_12" value="<?php echo $event['rose_12'] ?>">
-<input type="hidden" name="rose_13" value="<?php echo $event['rose_13'] ?>">
-<input type="hidden" name="rose_14" value="<?php echo $event['rose_14'] ?>">
-<input type="hidden" name="rose_15" value="<?php echo $event['rose_15'] ?>">
-<input type="hidden" name="rose_16" value="<?php echo $event['rose_16'] ?>">
-<input type="hidden" name="rose_17" value="<?php echo $event['rose_17'] ?>">
-<input type="hidden" name="rose_18" value="<?php echo $event['rose_18'] ?>">
-<input type="hidden" name="rose_19" value="<?php echo $event['rose_19'] ?>">
-<input type="hidden" name="rose_20" value="<?php echo $event['rose_20'] ?>">
-<input type="hidden" name="rose_21" value="<?php echo $event['rose_21'] ?>">
-<input type="hidden" name="rose_22" value="<?php echo $event['rose_22'] ?>">
-<input type="hidden" name="rose_23" value="<?php echo $event['rose_23'] ?>">
-<input type="hidden" name="rose_24" value="<?php echo $event['rose_24'] ?>">
-<input type="hidden" name="mode" value="save_event_changes">
-<input type="submit" value="<?php echo $LDSaveChanges ?>">
+<input type="hidden" name="yellow"
+		value="<?php echo $event['yellow'] ?>"> <input type="hidden"
+		name="black" value="<?php echo $event['black'] ?>"> <input
+		type="hidden" name="blue_pale"
+		value="<?php echo $event['blue_pale'] ?>"> <input type="hidden"
+		name="brown" value="<?php echo $event['brown'] ?>"> <input
+		type="hidden" name="pink" value="<?php echo $event['pink'] ?>"> <input
+		type="hidden" name="yellow_pale"
+		value="<?php echo $event['yellow_pale'] ?>"> <input type="hidden"
+		name="red" value="<?php echo $event['red'] ?>"> <input type="hidden"
+		name="green_pale" value="<?php echo $event['green_pale'] ?>"> <input
+		type="hidden" name="violet" value="<?php echo $event['violet'] ?>"> <input
+		type="hidden" name="blue" value="<?php echo $event['blue'] ?>"> <input
+		type="hidden" name="biege" value="<?php echo $event['biege'] ?>"> <input
+		type="hidden" name="orange" value="<?php echo $event['orange'] ?>"> <input
+		type="hidden" name="green_1" value="<?php echo $event['green_1'] ?>">
+	<input type="hidden" name="green_2"
+		value="<?php echo $event['green_2'] ?>"> <input type="hidden"
+		name="green_3" value="<?php echo $event['green_3'] ?>"> <input
+		type="hidden" name="green_4" value="<?php echo $event['green_4'] ?>">
+	<input type="hidden" name="green_5"
+		value="<?php echo $event['green_5'] ?>"> <input type="hidden"
+		name="green_6" value="<?php echo $event['green_6'] ?>"> <input
+		type="hidden" name="green_7" value="<?php echo $event['green_7'] ?>">
+	<input type="hidden" name="rose_1"
+		value="<?php echo $event['rose_1'] ?>"> <input type="hidden"
+		name="rose_2" value="<?php echo $event['rose_2'] ?>"> <input
+		type="hidden" name="rose_3" value="<?php echo $event['rose_3'] ?>"> <input
+		type="hidden" name="rose_4" value="<?php echo $event['rose_4'] ?>"> <input
+		type="hidden" name="rose_5" value="<?php echo $event['rose_5'] ?>"> <input
+		type="hidden" name="rose_6" value="<?php echo $event['rose_6'] ?>"> <input
+		type="hidden" name="rose_7" value="<?php echo $event['rose_7'] ?>"> <input
+		type="hidden" name="rose_8" value="<?php echo $event['rose_8'] ?>"> <input
+		type="hidden" name="rose_9" value="<?php echo $event['rose_9'] ?>"> <input
+		type="hidden" name="rose_10" value="<?php echo $event['rose_10'] ?>">
+	<input type="hidden" name="rose_11"
+		value="<?php echo $event['rose_11'] ?>"> <input type="hidden"
+		name="rose_12" value="<?php echo $event['rose_12'] ?>"> <input
+		type="hidden" name="rose_13" value="<?php echo $event['rose_13'] ?>">
+	<input type="hidden" name="rose_14"
+		value="<?php echo $event['rose_14'] ?>"> <input type="hidden"
+		name="rose_15" value="<?php echo $event['rose_15'] ?>"> <input
+		type="hidden" name="rose_16" value="<?php echo $event['rose_16'] ?>">
+	<input type="hidden" name="rose_17"
+		value="<?php echo $event['rose_17'] ?>"> <input type="hidden"
+		name="rose_18" value="<?php echo $event['rose_18'] ?>"> <input
+		type="hidden" name="rose_19" value="<?php echo $event['rose_19'] ?>">
+	<input type="hidden" name="rose_20"
+		value="<?php echo $event['rose_20'] ?>"> <input type="hidden"
+		name="rose_21" value="<?php echo $event['rose_21'] ?>"> <input
+		type="hidden" name="rose_22" value="<?php echo $event['rose_22'] ?>">
+	<input type="hidden" name="rose_23"
+		value="<?php echo $event['rose_23'] ?>"> <input type="hidden"
+		name="rose_24" value="<?php echo $event['rose_24'] ?>"> <input
+		type="hidden" name="mode" value="save_event_changes"> <input
+		type="submit" value="<?php echo $LDSaveChanges ?>">
 <?php
 }
 

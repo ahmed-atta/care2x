@@ -10,16 +10,13 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-function prepareTestParameters($param_type)
-{
+function prepareTestParameters($param_type){
     global $HTTP_POST_VARS;
 	
 	$paramlist="";
 							   
-	while(list($x,$v)=each($HTTP_POST_VARS))
-	{
-		if(substr_count($x,$param_type) && ($HTTP_POST_VARS[$x]==1))
-		{
+	while(list($x,$v)=each($HTTP_POST_VARS))	{
+		if(substr_count($x,$param_type) && ($HTTP_POST_VARS[$x]==1))		{
 			if($paramlist=="") $paramlist=$x."=1";
 				else $paramlist.="&".$x."=1";
 		}
@@ -80,13 +77,14 @@ else
 }
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-//$db->debug=1;
+///$db->debug=1;
 
 $thisfile=basename(__FILE__);
 
 $bgc1='#fff3f3'; 
 
 $db_request_table='baclabor';
+$db_request_table_sub='baclabor_sub';
 
 $formtitle=$LDBacteriologicalLaboratory;
 
@@ -101,27 +99,17 @@ define('_BATCH_NR_INIT_',30000000);
 						
 /* Here begins the real work */
      /* Check for the patietn number = $pn. If available get the patients data, otherwise set edit to 0 */
-     if(isset($pn)&&$pn)
-	 {
-
+     if(isset($pn)&&$pn) {
 	    if( $enc_obj->loadEncounterData($pn)) {
-/*		
-			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-			$GLOBAL_CONFIG=array();
-			$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-			$glob_obj->getConfig('patient_%');	
-			switch ($enc_obj->EncounterClass())
-			{
-		    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		                   break;
-				case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-							break;
-				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-			}		
-*/			$full_en=$pn;				
+			$full_en=$pn;				
 			if($enc_obj->is_loaded){
 			$result=&$enc_obj->encounter;
 			}
+			include_once($root_path.'include/care_api_classes/class_diagnostics.php');
+			$bac_obj=new Diagnostics;
+			$bac_obj->useBacLabRequestTable();
+			$bac_obj_sub = new Diagnostics;
+			$bac_obj_sub->useBacLabRequestSubTable();			
 		}else{
 	      $edit=0;
 		  $mode="";
@@ -130,7 +118,6 @@ define('_BATCH_NR_INIT_',30000000);
      }
 	   
 	 if(!isset($mode))   $mode="";
-		
 		  switch($mode)
 		  {
 				     case 'save':
@@ -138,45 +125,49 @@ define('_BATCH_NR_INIT_',30000000);
 							  $material_type_list = &prepareTestParameters('_mx_');  /* _mx_ = test material */
 							  $test_type_list = &prepareTestParameters('_tx_');          /* _tx_ = test type */
 							  
-							  if($material_type_list || $test_type_list)
-							  {
-							     $sql="INSERT INTO care_test_request_".$db_request_table."
-										(
-										batch_nr,
-										encounter_nr,
-										dept_nr,
-										material,
-										test_type,
-										material_note,
-										diagnosis_note,
-										immune_supp,
-										send_date,
-										sample_date,
-										status,
-										history,
-										create_id,
-										create_time
-										)
-									 	VALUES
-										(
-										'".$batch_nr."',   
-										'".$pn."',		  
-										'".$dept_nr."',
-										'".$material_type_list."',
-										'".$test_type_list."',
-										'".htmlspecialchars($material_note)."',
-										'".htmlspecialchars($diagnosis_note)."',
-										'".$immune_supp."',
-										'".date('Y-m-d')."',
-										'".date('Y-m-d')."',
-										'".$status."',  
-										'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										'".$HTTP_SESSION_VARS['sess_user_name']."',
-										'".date('YmdHis')."'
-										)";
-
-							      if($ergebnis=$enc_obj->Transact($sql))
-       							  {
+							  if($material_type_list || $test_type_list) {
+									$data['batch_nr'] = $batch_nr;
+									$data['encounter_nr'] = $pn;
+									$data['dept_nr'] = $dept_nr;
+									$data['material_note'] = htmlspecialchars($material_note);
+									$data['diagnosis_note'] = htmlspecialchars($diagnosis_note);
+									$data['immune_supp'] = htmlspecialchars($immune_supp);
+									$data['send_date'] = date('Y-m-d');
+									$data['sample_date'] = date('Y-m-d');
+									$data['status'] = $status;
+									$data['history'] = 'Create: '.date('Y-m-d H:i:s').' = '.$HTTP_SESSION_VARS['sess_user_name'].'\n';
+									$data['create_id'] = $HTTP_SESSION_VARS['sess_user_name'];
+									$data['create_time'] = date('YmdHis');
+							  		$bac_obj->setDataArray($data);
+								    if($bac_obj->insertDataFromInternalArray()){
+								    	
+								    	//sub values management
+								    	//$diag_obj->useChemLabRequestSubTable();
+								    	$singleParamTest = explode("&",$test_type_list);
+								    	foreach( $singleParamTest as $key => $value) {
+								    		$tmpTest = explode("=",$value);
+								    		$parsedParamListTest['batch_nr']=$batch_nr;
+								    		$parsedParamListTest['encounter_nr']=$pn;
+								    		$parsedParamListTest['test_type']=$tmpTest[0];
+								    		$parsedParamListTest['test_type_value']=$tmpTest[1];
+								    		$parsedParamListTest['material'] = '0';
+								    		$parsedParamListTest['material_value'] = '0';
+									    	$bac_obj_sub->setDataArray($parsedParamListTest);
+									    	$bac_obj_sub->insertDataFromInternalArray();
+								    	}
+								    	
+								    	$singleParamMaterial = explode("&",$material_type_list);
+								    	foreach( $singleParamMaterial as $key => $value) {
+								    		$tmpMaterial = explode("=",$value);
+								    		$parsedParamListMaterial['batch_nr']=$batch_nr;
+								    		$parsedParamListMaterial['encounter_nr']=$pn;
+								    		$parsedParamListMaterial['material']=$tmpMaterial[0];
+								    		$parsedParamListMaterial['material_value']=$tmpMaterial[1];
+								    		$parsedParamListMaterial['test_type']='0';
+								    		$parsedParamListMaterial['test_type_value']='0';								    		
+									    	$bac_obj_sub->setDataArray($parsedParamListMaterial);
+									    	$bac_obj_sub->insertDataFromInternalArray();
+								    	}
 									//echo $sql;
 								  	// Load the visual signalling functions
 									include_once($root_path.'include/inc_visual_signalling_fx.php');
@@ -185,9 +176,7 @@ define('_BATCH_NR_INIT_',30000000);
 									
 									 header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php?sid=$sid&lang=$lang&edit=$edit&saved=insert&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&noresize=$noresize&batch_nr=$batch_nr");
 									 exit;
-								  }
-								  else 
-								  {
+									  } else {
 								     echo "<p>$sql<p>$LDDbNoSave"; 
 									 $mode="";
 								  }
@@ -199,24 +188,49 @@ define('_BATCH_NR_INIT_',30000000);
 							  $material_type_list = &prepareTestParameters('_mx_');  /* _mx_ = test material */
 							  $test_type_list = &prepareTestParameters('_tx_');          /* _tx_ = test type */
 							  
-							  if($material_type_list || $test_type_list)
-							  {
-							     $sql="UPDATE care_test_request_".$db_request_table." SET
-										  dept_nr='".$dept_nr."',
-										  material='".$material_type_list."',
-										  test_type='".$test_type_list."',
-										  material_note='".htmlspecialchars($material_note)."',        
-										  diagnosis_note='".htmlspecialchars($diagnosis_note)."',
-										  immune_supp='".$immune_supp."',
-										  status='".$status."',
-										  history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										  modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-										  modify_time='".date('YmdHis')."'
-										  WHERE batch_nr='".$batch_nr."'";
-
-							      if($ergebnis=$enc_obj->Transact($sql))
-       							  {
-									//echo $sql;
+							  if($material_type_list || $test_type_list) {
+							  	$data['dept_nr']=$dept_nr;
+							  	$data['material_note']=htmlspecialchars($material_note);
+							  	$data['diagnosis_note']=htmlspecialchars($diagnosis_note);
+							  	$data['immune_supp']=$immune_supp;
+							  	$data['status']=$status;
+							  	$data['history']=$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+							  	$data['modify_id']=$HTTP_COOKIE_VARS[$local_user.$sid];
+							  	$data['modify_time']=date('YmdHis');
+								$bac_obj->setDataArray($data);
+								$bac_obj->setWhereCond(" batch_nr=$batch_nr");
+							    
+								if($ergebnis=$bac_obj->updateDataFromInternalArray($batch_nr)) {
+							      	//sub values management
+							    	//$diag_obj->useChemLabRequestSubTable();
+							    	//first i delete the old request values
+							    	//then i insert the new ones.
+							    	$bac_obj_sub->deleteOldValues($batch_nr,$pn);
+									$singleParamTest = explode("&",$test_type_list);
+							    	foreach( $singleParamTest as $key => $value) {
+							    		$tmpTest = explode("=",$value);
+							    		$parsedParamListTest['batch_nr']=$batch_nr;
+							    		$parsedParamListTest['encounter_nr']=$pn;
+							    		$parsedParamListTest['test_type']=$tmpTest[0];
+							    		$parsedParamListTest['test_type_value']=$tmpTest[1];
+							    		$parsedParamListTest['material'] = '0';
+							    		$parsedParamListTest['material_value'] = '0';
+								    	$bac_obj_sub->setDataArray($parsedParamListTest);
+								    	$bac_obj_sub->insertDataFromInternalArray();
+							    	}
+							    	
+							    	$singleParamMaterial = explode("&",$material_type_list);
+							    	foreach( $singleParamMaterial as $key => $value) {
+							    		$tmpMaterial = explode("=",$value);
+							    		$parsedParamListMaterial['batch_nr']=$batch_nr;
+							    		$parsedParamListMaterial['encounter_nr']=$pn;
+							    		$parsedParamListMaterial['material']=$tmpMaterial[0];
+							    		$parsedParamListMaterial['material_value']=$tmpMaterial[1];
+							    		$parsedParamListMaterial['test_type']='0';
+							    		$parsedParamListMaterial['test_type_value']='0';								    		
+								    	$bac_obj_sub->setDataArray($parsedParamListMaterial);
+								    	$bac_obj_sub->insertDataFromInternalArray();
+							    	}
 								  	// Load the visual signalling functions
 									include_once($root_path.'include/inc_visual_signalling_fx.php');
 									// Set the visual signal 
@@ -224,9 +238,7 @@ define('_BATCH_NR_INIT_',30000000);
 									
 									 header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php?sid=$sid&lang=$lang&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&batch_nr=$batch_nr&noresize=$noresize");
 									 exit;
-								  }
-								  else
-								   {
+								} else {
 								      echo "<p>$sql<p>$LDDbNoSave"; 
 								      $mode="";
 								   }
@@ -244,30 +256,23 @@ define('_BATCH_NR_INIT_',30000000);
 			*  If the "test_type" element is not empty, parse it to the $stored_test_type variable
 			*/
 			case 'edit':
-			
-		                $sql="SELECT * FROM care_test_request_".$db_request_table." WHERE batch_nr='".$batch_nr."' AND (status='pending' OR status='draft')";
-		                if($ergebnis=$db->Execute($sql))
-       		            {
-				            if($editable_rows=$ergebnis->RecordCount())
-					        {
-							
-     					       $stored_request=$ergebnis->FetchRow();
-							   
-							   if($stored_request['material']!="")
-							   {
-							      //echo $stored_request['parameters'];
-   						          parse_str($stored_request['material'],$stored_material);
-							      $edit_form=1;
+		                //$sql="SELECT * FROM care_test_request_".$db_request_table." WHERE batch_nr='".$batch_nr."' AND (status='pending' OR status='draft')";
+				    $sql  = "SELECT * FROM care_test_request_".$db_request_table." ";
+					$sql .= "INNER JOIN care_test_request_".$db_request_table_sub." ON ";
+					$sql .= "( care_test_request_".$db_request_table.".batch_nr = care_test_request_".$db_request_table_sub.".batch_nr) ";
+					$sql .= "WHERE care_test_request_".$db_request_table.".batch_nr='".$batch_nr."' ";
+					$sql .= "AND (status='pending' OR status='draft')";		                
+		                if($ergebnis=$db->Execute($sql)) {
+		                	if($editable_rows=$ergebnis->RecordCount()) {
+							    while ( !$ergebnis->EOF ) {
+									$stored_param[$ergebnis->fields['material']] = $ergebnis->fields['material'];
+									$stored_param[$ergebnis->fields['test_type']] = $ergebnis->fields['test_type'];
+									$stored_request=$ergebnis->GetRowAssoc($toUpper=false);
+									$ergebnis->MoveNext();
 							   }
-							   
-							   if($stored_request['test_type']!="")
-							   {
-							      //echo $stored_request['parameters'];
-   						          parse_str($stored_request['test_type'],$stored_test_type);
 							      $edit_form=1;
 							   }
 					         }
-			             }
 						 
 						 break; ///* End of case 'edit': */
 			
@@ -275,19 +280,14 @@ define('_BATCH_NR_INIT_',30000000);
 						   
 		  }// end of switch($mode)
   
-          if(!$mode) /* Get a new batch number */
-		  {
+          if(!$mode) /* Get a new batch number */ {
 		                $sql="SELECT batch_nr FROM care_test_request_".$db_request_table." ORDER BY batch_nr DESC";
-		                if($ergebnis=$db->SelectLimit($sql,1))
-       		            {
-				            if($batchrows=$ergebnis->RecordCount())
-					        {
+		                if($ergebnis=$db->SelectLimit($sql,1)) {
+				            if($batchrows=$ergebnis->RecordCount()) {
 						       $bnr=$ergebnis->FetchRow();
 							   $batch_nr=$bnr['batch_nr'];
 							   if(!$batch_nr) $batch_nr=_BATCH_NR_INIT_; else $batch_nr++;
-					         }
-					         else
-					         {
+					         } else {
 					            $batch_nr=_BATCH_NR_INIT_;
 					          }
 			             }
@@ -491,7 +491,7 @@ if($edit){
 	   $inp_v='0';
 	   if($edit_form || $read_form )
 	   {
-	      if($stored_material[$x])
+	      if($stored_param[$x])
 		  {
 		     echo '<img src="f.gif" ';
 			 $inp_v='1';
@@ -516,7 +516,7 @@ if($edit){
 	   $inp_v='0';
 	   if($edit_form || $read_form )
 	   {
-	      if($stored_material[$x2])
+	      if($stored_param[$x2])
 		  {
 		     echo '<img src="f.gif" ';
 			 $inp_v='1';
@@ -561,7 +561,7 @@ if($edit){
 	   $inp_v='0';
 	   if($edit_form || $read_form )
 	   {
-	      if($stored_test_type[$x3])
+	      if($stored_param[$x3])
 		  {
 		     echo '<img src="f.gif" ';
 			 $inp_v='1';
@@ -586,7 +586,7 @@ if($edit){
 	   $inp_v='0';
 	   if($edit_form || $read_form )
 	   {
-	      if($stored_test_type[$x4])
+	      if($stored_param[$x4])
 		  {
 		     echo '<img src="f.gif" ';
 			 $inp_v='1';

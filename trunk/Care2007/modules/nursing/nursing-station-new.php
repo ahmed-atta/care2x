@@ -40,7 +40,7 @@ if($mode){
 				/* check if ward already exists */
 								if(!$ward->IDExists($ward_id)){				
 									if($ergebnis=$ward->saveWard($HTTP_POST_VARS)){
-										if($dbtype=='mysql'){
+										if($dbtype=='mysql' || $dbtype=='mysqli'){
 											$ward_nr=$db->Insert_ID();
 										}else{
 											$ward_nr=$ward->postgre_Insert_ID($dbtable,'nr',$db->Insert_ID());
