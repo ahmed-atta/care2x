@@ -16,11 +16,12 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['pharma'];
+//$allowedarea=&$allow_area['pharma'];
 $append=URL_REDIRECT_APPEND.'&cat=pharma&userck=';
 switch($mode)
 {
 	case "order": 	$title=$LDPharmaOrder;
+						$allowedarea[] = '_a_3_pharmaorder';
 						$src="orderpass";
 						$mode="order";
 						$userck="ck_prod_order_user";
@@ -28,19 +29,28 @@ switch($mode)
 						//$fileforward="select_dept.php".$append.$userck."&from=".$src;
 						break;
 	case "archive":$title=$LDOrderArchive;
+						$allowedarea[] = '_a_1_pharmadbadmin';	
 						$src="archivepass";
 						$userck="ck_prod_arch_user";
 						$fileforward=$root_path."modules/products/products-archive.php".$append.$userck."&from=".$src;
 						break;
 	case "dbank":  $title=$LDPharmaDb;
+						$allowedarea[] = '_a_1_pharmadbadmin';	
 						$src="dbankpass";
 						$userck="ck_prod_db_user";
 						$fileforward="apotheke-datenbank-functions.php".$append.$userck."&from=".$src;
 						break;
 	case "catalog":  $title=$LDOrderCat;
+						$allowedarea[] = '_a_1_pharmadbadmin';	
 						$src="catalogpass";
 						$userck="ck_prod_order_user";
 						$fileforward=$root_path."modules/products/products-bestellkatalog-edit.php".$append.$userck."&target=catalog&from=".$src;
+						break;
+	case "bot":  $title=$LDPharmaOrderBot;
+						$allowedarea[] = '_a_1_pharmadbadmin';	
+						$src="medibotpass";
+						$userck="ck_prod_bot_user";
+						$fileforward=$root_path."modules/pharmacy/apotheke-bestellbot-pass.php".URL_APPEND."&mode=bot&user_origin=pharmabot";
 						break;
 	default: 	{header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }

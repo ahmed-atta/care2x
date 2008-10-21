@@ -308,7 +308,7 @@ if($linecount>0){
 
 			echo '
 				 <td>'.str_replace('24','00',formatDate2Local($content['process_datetime'],$date_format)).' '.convertTimeToLocal(formatDate2Local($content['process_datetime'],$date_format,1,1)).'</td>
-				 <td>'.$content['modify_id'].'</td>
+				 <td>'.$content['create_id'].'</td>
 				</tr>';
 			$i++;
 

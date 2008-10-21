@@ -24,8 +24,13 @@ $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 
 $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
 $HTTP_SESSION_VARS['sess_user_origin']='pharma';
+require ($root_path.'include/care_api_classes/class_access.php');
+$access = new Access($HTTP_SESSION_VARS['sess_login_userid'],$HTTP_SESSION_VARS['sess_login_pw']);
+$hideOrder = 0;
+if(ereg("_a_1_pharmadbadmin",$access->PermissionAreas()))
+	$hideOrder = 1;
 
-# Start Smarty templating here
+	# Start Smarty templating here
  /**
  * LOAD Smarty
  */
@@ -127,6 +132,7 @@ $aSubMenuItem=array('LDPharmaOrder' => "<a href=\"apotheke-pass.php".URL_APPEND.
 $iRunner = 0;
 
 while(list($x,$v)=each($aSubMenuItem)){
+	if($hideOrder == 1 && $iRunner == 0) {$hideOrder = 0;continue;}
 	$sTemp='';
 	ob_start();
 		if($cfg['icons'] != 'no_icon') $smarty2->assign('sIconImg','<img '.$aSubMenuIcon[$iRunner].'>');
