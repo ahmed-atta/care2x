@@ -14,7 +14,7 @@
 		<td>&nbsp;{{$sBirthDate}}</td>
 		<td>&nbsp;{{$sPatNr}}</td>
 		<td>&nbsp;{{$sInsuranceType}}</td>
-		<td>&nbsp;{{$sAdmitDataIcon}} {{$sChartFolderIcon}} {{$sNotesIcon}} {{$sTransferIcon}} {{$sDischargeIcon}}</td>
+		<td>&nbsp;{{$sAdmitDataIcon}} {{$sChartFolderIcon}} {{$sYellowPaper}} {{$sTarget}} {{$sNotesIcon}} {{$sTransferIcon}} {{$sDischargeIcon}}</td>
 		</tr>
 		<tr>
 		<td colspan="8" class="thinrow_vspacer">{{$sOnePixel}}</td>

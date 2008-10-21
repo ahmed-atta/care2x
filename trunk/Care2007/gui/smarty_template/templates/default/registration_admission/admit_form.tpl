@@ -4,7 +4,7 @@
 {{* - /modules/registration_admission/aufnahme_daten_zeigen.php *}}
 
 	{{if $bSetAsForm}}
-	<form method="post" action="{{$thisfile}}" name="aufnahmeform" onSubmit="return chkform(this)">
+	<form method="post" action="{{$thisfile}}" name="aufnahmeform" onSubmit="return chkform(this)"  ENCTYPE="multipart/form-data">
 	{{/if}}
 		
 		<table border="0" cellspacing=1 cellpadding=0 width="100%">
@@ -45,6 +45,10 @@
 					</td>
 					<td {{$sRowSpan}} align="center" class="photo_id">
 						{{$img_source}}
+						<!--  gjergji -->
+						<br> 
+						{{$sFileBrowserInput}}
+						<!--  end : gjergji -->	
 					</td>
 				</tr>
 
@@ -161,6 +165,28 @@
 				</tr>
 
 				<tr>
+					<td class="adm_item">
+						<font color="red">{{$LDAdmitShowTypeInput}}</font>:
+					</td>
+					<td class="adm_input">
+						{{$sAdmitShowTypeInput}}
+					</td>
+					<td class="adm_input">
+					{{if $LDShowTriageData}}
+						<span class="triageWhite">{{$sAdmitTriageWhite}}</span>
+						<span class="triageGreen">{{$sAdmitTriageGreen}}</span>
+						<span class="triageYellow">{{$sAdmitTriageYellow}}</span>
+						<span class="triageRed">{{$sAdmitTriageRed}}</span>
+						{{$sAdmitTriage}}
+					{{else}}
+						<label class="triageWhite"><input type = 'radio' name ='triage' value='white'>{{$sAdmitTriageWhite}}</label>
+						<label class="triageGreen"><input type = 'radio' name ='triage' value='green'>{{$sAdmitTriageGreen}}</label>
+						<label class="triageYellow"><input type = 'radio' name ='triage' value='yellow'>{{$sAdmitTriageYellow}}</label>
+						<label class="triageRed"><input type = 'radio' name ='triage' value='red'>{{$sAdmitTriageRed}}</label>
+					{{/if}}					
+					</td>
+				</tr>
+				<tr>					
 					<td class="adm_item">
 						<font color="red">{{$LDAdmitClass}}</font>:
 					</td>

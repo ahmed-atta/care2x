@@ -2,7 +2,7 @@
 
 <frameset rows="33,*">
   <frame name="BHEADER" {{$sHeaderSource}} scrolling="no" frameborder="yes" >
-  <frameset cols="50%,*">
+  <frameset cols="50%,*" id="products">
 	<frame name="BESTELLKORB" {{$sBasketSource}} scrolling="auto" frameborder="yes">
      <frame name="BESTELLKATALOG" {{$sCatalogSource}} scrolling="auto" frameborder="yes">
   </frameset>

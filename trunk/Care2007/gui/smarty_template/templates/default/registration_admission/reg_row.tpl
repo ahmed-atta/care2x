@@ -1,4 +1,4 @@
 <tr>
-  <td class="reg_item" {{$sColSpan1}}>{{$sItem}}</td>
-  <td class="reg_input" {{$sColSpan2}}>{{$sInput}}</td>
+  <td {{if $must}} class="reg_input_must" {{else}} class="reg_item" {{/if}} {{$sColSpan1}}>{{$sItem}}</td>
+  <td {{if $must}} class="reg_input_must" {{else}} class="reg_input" {{/if}} {{$sColSpan2}}>{{$sInput}}</td>
 </tr>

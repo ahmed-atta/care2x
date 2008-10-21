@@ -10,11 +10,8 @@
 	 <FONT SIZE=-1  FACE='Arial' color='#000066'>
 	 $LDDate
 	 </td>
-     <td>
-	 <input type='text' name='delivery_date' value='$TP_PREGDATE' size=10 maxlength=10 onBlur="IsValidDate(this,'$date_format')" onKeyUp="setDate(this,'$date_format','$lang')">
- 		<a href="javascript:show_calendar('report.delivery_date','$date_format')">
- 		<img $TP_IMG_PDATE ></a> 
- 		<font color=red>*</font>
+     <td><!-- #154 -->
+ 		$TP_PREGDATE $TP_IMG_PDATE
 		<FONT SIZE=-1  FACE='Arial' color='#000066'>
 		$LDTime
 	 <input type='text' name='delivery_time' size=10 maxlength=5 value='$TP_PTIME' >

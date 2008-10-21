@@ -9,7 +9,7 @@
  {{/if}}
 		<td>{{$sMiniColorBars}}</td>
 		<td>&nbsp;{{$sRoom}}</td>
-		<td>&nbsp;{{$sBed}} {{$sBedIcon}} {{$sNotesIcon}}</td>
+		<td>&nbsp;{{$sBed}} {{$sBedIcon}}</td>
 		<td>&nbsp;{{$sTitle}} {{$sFamilyName}}{{$cComma}} {{$sName}}</td>
 		<td>&nbsp;{{$sBirthDate}}</td>
 		<td>&nbsp;{{$sPatNr}}</td>

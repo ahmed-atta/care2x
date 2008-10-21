@@ -52,10 +52,11 @@
 					</tbody>
 					</table>
 					{{$sSaveParamHiddenInputs}}
+					{{$sSelectGroupHiddenInputs}}
 				</form>
 				
 				{{* Block for parameter group select box *}}
-				<form {{$sFormAction}} method=post onSubmit="return chkselect(this)" name="paramselect">
+<!--				<form {{$sFormAction}} method=post onSubmit="return chkselect(this)" name="paramselect">
 					<table>
 					<tbody>
 						<tr>
@@ -69,7 +70,7 @@
 					</tbody>
 					</table>
 					{{$sSelectGroupHiddenInputs}}
-				</form>
+				</form> -->
 
 	  </td>
       <td width="20%">

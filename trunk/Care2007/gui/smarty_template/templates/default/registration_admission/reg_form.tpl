@@ -64,13 +64,13 @@
 				{{$sNameOthers}}
 
 				<tr>
-					<td class="reg_item">
+					<td class="reg_input_must">
 						{{$LDBday}}
 					</td>
-					<td class="reg_input">
+					<td class="reg_input_must">
 						{{$sBdayInput}}&nbsp;{{$sCrossImg}} {{$sDeathDate}}
 					</td>
-					<td class="reg_input">
+					<td class="reg_input_must">
 						{{$LDSex}} {{$sSexM}} {{$LDMale}}&nbsp;&nbsp; {{$sSexF}} {{$LDFemale}}
 					</td>
 				</tr>
@@ -108,43 +108,48 @@
 				</tr>
 
 				<tr>
-					<td class="reg_item" class="reg_input">
+					<td class="reg_input_must">
 						{{$LDStreet}}
 					</td>
-					<td class="reg_input">
+					<td class="reg_input_must">
 						{{$sStreetInput}}
 					</td>
-					<td class="reg_input">
+					<td class="reg_input_must">
 						{{$LDStreetNr}} &nbsp;&nbsp; {{$sStreetNrInput}}
 					</td>
 				</tr>
 
 				<tr>
-					<td class="reg_item">
+					<td class="reg_input_must">
 						{{$LDTownCity}}
 					</td>
-					<td class="reg_input">
+					<td class="reg_input_must">
 						{{$sTownCityInput}} {{$sTownCityMiniCalendar}}
 					</td>
-					<td class="reg_input">
+					<td class="reg_input_must">
 						{{$LDZipCode}} &nbsp;&nbsp; {{$sZipCodeInput}}
 					</td>
 				</tr>
 
 			{{if $bShowInsurance}}
 
-				{{$sInsuranceNr}}
-
-				<tr>
+				<tr class="reg_input_must">
 				<td>
 					&nbsp;
 				</td>
-				<td colspan=2 class="reg_input">
+				<td colspan=2 >
 					{{$sErrorInsClass}} 
 					{{foreach from=$sInsClasses item=InsClass}}
 						{{$InsClass}}
 					{{/foreach}}
 				</td>
+			
+				</tr>
+				
+				<tr>
+					<td>
+						{{$sInsuranceNr}}
+					</td>
 				</tr>
 
 				<tr>
