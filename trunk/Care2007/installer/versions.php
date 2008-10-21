@@ -11,7 +11,7 @@ $versions = new VersionSet();
 $version = new Version($short_version, $long_version);
 
 $version->addSeparator('Database Information');
-$version->collectOption('db_type', 'Server Type', array('MySQL', 'PostgreSQL'), array('mysql', 'postgres7'), 'mysql');
+$version->collectOption('db_type', 'Server Type', array('MySQL', 'MySQLi', 'PostgreSQL'), array('mysql', 'mysqli', 'postgres7'), 'mysqli');
 $version->collectText('db_user', 'User Name', 'root');
 $version->collectPassword('db_password', 'Password', '');
 $version->collectText('db_server', 'Server Address', 'localhost');
@@ -30,9 +30,9 @@ $version->collectText('3rd_key', '3rd Key', (rand(1,$rmax).rand(1,$rmax))*rand(1
 $version->addSeparator('');
 
 $version->addTest('PHPVersionOver', array('4.3.0'));
-$version->addTest('PHPVersionUnder', array('5.0.0'));
+//$version->addTest('PHPVersionUnder', array('5.0.0'));
 //$version->addTest('PHPMemory', array('8M'));
-//$version->addTest('PHPMagicQuotes', array('Off'));
+$version->addTest('PHPMagicQuotes', array('Off'));
 //$version->addTest('PHPRegisterGlobals', array('Off'));
 $version->addTest('PHPDBExtension', array('type_field' => 'db_type'));
 $version->addTest('PHPExtension', array('calendar', 'gd'));
@@ -54,10 +54,11 @@ $version->addTest('WritableLocation', array(APP_PATH.'/fotos/encounter'));
 $version->addTest('WritableLocation', array(APP_PATH.'/fotos/registration'));
 $version->addTest('WritableLocation', array(APP_PATH.'/fotos/news'));
 $version->addTest('WritableLocation', array(APP_PATH.'/logs'));
-$version->addTest('WritableLocation', array(APP_PATH.'/logs/access'));
-$version->addTest('WritableLocation', array(APP_PATH.'/logs/access/'.date('Y')));
-$version->addTest('WritableLocation', array(APP_PATH.'/logs/access_fail'));
-$version->addTest('WritableLocation', array(APP_PATH.'/logs/access_fail/'.date('Y')));
+//gjergji : not needed anymore, new log code
+//$version->addTest('WritableLocation', array(APP_PATH.'/logs/access'));
+//$version->addTest('WritableLocation', array(APP_PATH.'/logs/access/'.date('Y')));
+//$version->addTest('WritableLocation', array(APP_PATH.'/logs/access_fail'));
+//$version->addTest('WritableLocation', array(APP_PATH.'/logs/access_fail/'.date('Y')));
 $version->addTest('WritableLocation', array(APP_PATH.'/pharma'));
 $version->addTest('WritableLocation', array(APP_PATH.'/pharma/img'));
 $version->addTest('WritableLocation', array(APP_PATH.'/med_depot'));

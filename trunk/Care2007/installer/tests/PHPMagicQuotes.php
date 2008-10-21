@@ -25,7 +25,7 @@ class PHPMagicQuotes extends BaseTest{
 	
 	function perform(){	
 	
-		if(get_magic_quotes_gpc()=="1"){
+		if(get_magic_quotes_gpc() == 1){
 			$actual_state="On";
 		}else{
 			$actual_state="Off";

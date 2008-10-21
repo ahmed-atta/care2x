@@ -18,7 +18,7 @@ $short_version = "2.5";
 /*
  * Deployment | beta
  */
-$version_status = "RC2";
+$version_status = "beta";
 
 /*
  * Long version description
@@ -75,7 +75,7 @@ $version_detection_class = 'VersionCheck';
 /*
  * Writable directory for smarty compile dir
  */
-$writable_dir = 'c:\tmp';
+$writable_dir = sys_get_temp_dir();
 if (!file_exists($writable_dir)) {
 	$writable_dir = realpath(dirname(__FILE__).'/tmp');
 }

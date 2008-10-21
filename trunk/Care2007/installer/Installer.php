@@ -28,6 +28,8 @@ require_once(INSTALLER_PATH.'/includes/BaseSet.php');
 require_once(INSTALLER_PATH.'/includes/VersionSet.php');
 require_once(INSTALLER_PATH.'/includes/Version.php');
 require_once(INSTALLER_PATH.'/includes/VersionCheck.php');
+//gjergji : fix for magic quotes on on windows
+require_once(INSTALLER_PATH.'/includes/StripSlashes.php');
 
 class Installer{
 
