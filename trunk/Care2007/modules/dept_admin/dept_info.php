@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -19,7 +19,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_department.php');
 
 $breakfile='dept_manage.php'.URL_APPEND;
-
+//$db->debug=1;
 if($pday=='') $pday=date('d');
 if($pmonth=='') $pmonth=date('m');
 if($pyear=='') $pyear=date('Y');
@@ -71,11 +71,20 @@ ob_start();
 ?>
 
 <style type="text/css" name="formstyle">
+td.pblock {
+	font-family: verdana, arial;
+	font-size: 12
+}
 
-td.pblock{ font-family: verdana,arial; font-size: 12}
-div.box { border: solid; border-width: thin; width: 100% }
-div.pcont{ margin-left: 3; }
+div.box {
+	border: solid;
+	border-width: thin;
+	width: 100%
+}
 
+div.pcont {
+	margin-left: 3;
+}
 </style>
 
 <?php
@@ -92,19 +101,21 @@ ob_start();
 ?>
 
 <ul>
-<?php if($rows) : ?>
+<?php if($rows) { ?>
 
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><font face="Verdana, Arial" size=3 color="#880000">
-<b><?php echo str_replace("~station~",strtoupper($station),$LDStationExists) ?></b></font><p>
-<?php endif; ?>
+<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?>
+		align="absmiddle">
+	<font face="Verdana, Arial" size=3 color="#880000"> <b><?php echo str_replace("~station~",strtoupper($station),$LDStationExists) ?></b></font>
+	<p>
+<?php } ?>
 <font face="Verdana, Arial" size=-1><?php echo $LDEnterAllFields ?>
 
 <form action="dept_new.php" method="post" name="newstat">
 
-<table border=0 cellpadding=4>
-<tbody class="submenu">
+	<table border=0 cellpadding=4>
+		<tbody class="submenu">
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDFormalName ?>: </td>
+				<td class=pblock align=right bgColor="#eeeeee"><?php echo $LDFormalName ?>: </td>
     <td class=pblock>
 	<?php 	
 		if(isset($$dept['LD_var'])&&!empty($$dept['LD_var'])) echo $$dept['LD_var'];
@@ -113,13 +124,13 @@ ob_start();
 </td>
   </tr> 
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDInternalID ?>: </td>
+				<td class=pblock align=right bgColor="#eeeeee"><?php echo $LDInternalID ?>: </td>
     <td class=pblock><?php echo $dept['id'] ?>
 </td>
   </tr> 
 
-<tr>
-    <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDTypeDept ?>: </td>
+			<tr>
+				<td class=pblock align=right bgColor="#eeeeee"><?php echo $LDTypeDept ?>: </td>
     <td class=pblock><?php 
 								if(isset($$dept_info['LD_var'])&&!empty($$dept_info['LD_var'])) echo $$dept_info['LD_var'];
 									else echo $dept_info['name'];
@@ -135,15 +146,15 @@ ob_start();
   </tr>
   
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDIsSubDept ?>: </td>
+				<td class=pblock align=right bgColor="#eeeeee"><?php echo $LDIsSubDept ?>: </td>
     <td class=pblock><?php 
 								if($dept['is_sub_dept']) echo $LDYes;
 									else echo $LDNo;
 							?>
 </td>
   </tr> 
-<tr>
-    <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDParentDept ?>: </td>
+			<tr>
+				<td class=pblock align=right bgColor="#eeeeee"><?php echo $LDParentDept ?>: </td>
     <td class=pblock><?php 
 								if($dept['is_sub_dept']){
 									$info=$dept_obj->getDeptAllInfo($dept['parent_dept_nr']);
@@ -155,7 +166,7 @@ ob_start();
   </tr>
   
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDLangVariable ?>: </td>
+				<td class=pblock align=right bgColor="#eeeeee"><?php echo $LDLangVariable ?>: </td>
     <td class=pblock><?php echo $dept['LD_var'] ?>
 </td>
   </tr> 
@@ -171,7 +182,7 @@ ob_start();
   </tr> 
   
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDDoesSurgeryOp ?>: </td>
+				<td class=pblock align=right bgColor="#eeeeee"><?php echo $LDDoesSurgeryOp ?>: </td>
     <td class=pblock><?php 
 								if($dept['does_surgery']) echo $LDYes;
 									else echo $LDNo;
@@ -180,7 +191,7 @@ ob_start();
   </tr> 
   
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDAdmitsInpatients ?>: </td>
+				<td class=pblock align=right bgColor="#eeeeee"><?php echo $LDAdmitsInpatients ?>: </td>
     <td class=pblock><?php 
 								if($dept['admit_inpatient']) echo $LDYes;
 									else echo $LDNo;
@@ -189,7 +200,7 @@ ob_start();
   </tr> 
   
   <tr>
-    <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDAdmitsOutpatients; ?>: </td>
+				<td class=pblock align=right bgColor="#eeeeee"><?php echo $LDAdmitsOutpatients; ?>: </td>
     <td class=pblock><?php 
 								if($dept['admit_outpatient']) echo $LDYes;
 									else echo $LDNo;
@@ -198,7 +209,7 @@ ob_start();
   </tr> 
 
     <tr>
-    <td class=pblock align=right bgColor="#eeeeee"></font><?php echo $LDBelongsToInst ?>: </td>
+				<td class=pblock align=right bgColor="#eeeeee"><?php echo $LDBelongsToInst ?>: </td>
     <td class=pblock><?php 
 								if($dept['this_institution']) echo $LDYes;
 									else echo $LDNo;
@@ -267,17 +278,34 @@ ob_start();
 							?>
 	</td>
   </tr>
-</tbody>
-</table>
-<input type="hidden" name="sid" value="<?php echo $sid; ?>">
-<input type="hidden" name="lang" value="<?php echo $lang; ?>">
-<input type="hidden" name="dept_nr" value="<?php echo $dept['nr']; ?>">
-<input type="hidden" name="mode" value="select">
-<input type="submit" value="<?php echo $LDUpdateData; ?>">
-</form>
-<p>
-
-<a href="javascript:history.back()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a>
+			<tr>
+				<td class=pblock align=right bgColor="#eeeeee"><?php echo $LDIsPharmacy ?>: </td>
+				<td class=pblock><?php 
+								if($dept['is_pharmacy']) echo $LDYes;
+									else echo $LDNo;
+							?>
+</td>
+			</tr>
+			<tr>
+				<td class=pblock align=right bgColor="#eeeeee"><?php echo $LDPharmacy ?>: </td>
+				<td class=pblock><?php 
+								if($dept['pharma_dept_nr']){
+									$infopharma=$dept_obj->getPharmaAllInfo($dept['pharma_dept_nr']);
+									if(isset($$infopharma['name_formal'])&&!empty($$infopharma['name_formal'])) echo $$infopharma['name_formal'];
+										else echo $infopharma['name_formal'];
+								}
+							?>
+</td>
+			</tr>
+		</tbody>
+	</table>
+	<input type="hidden" name="sid" value="<?php echo $sid; ?>"> <input
+		type="hidden" name="lang" value="<?php echo $lang; ?>"> <input
+		type="hidden" name="dept_nr" value="<?php echo $dept['nr']; ?>"> <input
+		type="hidden" name="mode" value="select"> <input type="submit"
+		value="<?php echo $LDUpdateData; ?>"></form>
+	<p><a href="javascript:history.back()"><img
+		<?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a>
 
 </ul>
 

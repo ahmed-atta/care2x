@@ -78,6 +78,7 @@ if(!empty($mode)&&!$inputerror){
 						$HTTP_POST_VARS['dept_nr']=$dept_nr;
 						$HTTP_POST_VARS['name']=$HTTP_POST_VARS['name_formal'];
 						$HTTP_POST_VARS['vorname']=$HTTP_POST_VARS['id'];
+						$HTTP_POST_VARS['is_pharmacy']=$is_pharmacy;
 						$comm->setDataArray($HTTP_POST_VARS);
 						if(!@$comm->insertDataFromInternalArray()) echo $comm->getLastQuery()."<br>$LDDbNosave";
 				}
@@ -123,6 +124,7 @@ if(!empty($mode)&&!$inputerror){
 							$HTTP_POST_VARS['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
 							$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
 							$HTTP_POST_VARS['create_time']=date('YmdHis');
+							$HTTP_POST_VARS['is_pharmacy']=$is_pharmacy;
 							$comm->setDataArray($HTTP_POST_VARS);
 						if(!@$comm->insertDataFromInternalArray()) echo $comm->getLastQuery()."<br>$LDDbNoSave";
 					}
@@ -141,7 +143,7 @@ if(!empty($mode)&&!$inputerror){
 		}
 		case 'select':
 		{
-			# Get departmentï¿½s information
+			# Get department´s information
 			$dept=$dept_obj->getDeptAllInfo($dept_nr);
 			//while(list($x,$v)=each($dept)) $$x=$v;
 			extract($dept);
@@ -156,6 +158,7 @@ if(!empty($mode)&&!$inputerror){
 
 $deptarray=$dept_obj->getAllActiveSort('name_formal');
 $depttypes=$dept_obj->getTypes();
+$pharmaarray=$dept_obj->getAllPharmacy();
 
 # Prepare title
 $sTitle = "$LDDepartment :: ";
@@ -431,7 +434,33 @@ ob_start();
     <td class=pblock><input type="file" name="img" ><br>
 </td>
   </tr> 
+  <tr>
+    <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b></font><?php echo $LDIsPharmacy ?>: </td>
+    <td class=pblock>	<input type="radio" name="is_pharmacy" value="1" <?php if($is_pharmacy) echo 'checked'; ?>> <?php echo $LDYes ?> <input type="radio" name="is_pharmacy" value="0" <?php if(!$is_pharmacy) echo 'checked'; ?>> <?php echo $LDNo ?>
+</td>
+  </tr>  
 
+<!-- select the pharmacy this department will use -->  
+<tr>
+    <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b></font><?php echo $LDPharmacy; ?>: </td>
+    <td class=pblock><select name="pharma_dept_nr">
+	<option value=""> </option>';
+	<?php
+
+		while(list($x,$v)=each($pharmaarray)){
+			echo '
+				<option value="'.$v['nr'].'" ';
+			if($v['nr']==$pharma_dept_nr) echo 'selected';
+			echo ' >';
+			if(isset($$v['LD_var'])&&$$v['LD_var']) echo $$v['LD_var'];
+				else echo $v['name_formal'];
+			echo '</option>';
+		}
+	?>
+                     </select>
+		<img <?php echo createComIcon($root_path,'l_arrowgrnsm.gif','0') ?>> <?php echo $LDPlsSelect ?>
+</td>
+  </tr>
  
 </table>
 <INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="1000000">
