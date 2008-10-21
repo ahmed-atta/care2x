@@ -60,6 +60,7 @@ function adodb_error($provider,$dbType,$errno)
 	//var_dump($errno);
 	if (is_numeric($errno) && $errno == 0) return 0;
 	switch($provider) { 
+	case 'mysqli':
 	case 'mysql': $map = adodb_error_mysql(); break;
 	
 	case 'oracle':
