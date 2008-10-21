@@ -6,11 +6,11 @@ $LDCaseNr='Codice paziente';
 $LDTitle='Titolo';
 $LDLastName='Cognome';
 $LDFirstName='Nome';
-$LDBday="<font color='red'>Data di nascita</font>";
+$LDBday="Data di nascita";
 $LDBdaypdf="Data di nascita";
 $LDPhone='Telefono';
 $LDAdmitBy='Accettato da';
-$LDSex="<font color='red'>Sesso</font>";
+$LDSex="Sesso";
 $LDMale='maschio';
 $LDFemale='femmina';
 $LDAddress='Indirizzo';
@@ -23,7 +23,7 @@ $LDInsurance='Assicurazione';
 $LDDiagnosis='Diagnosi di Accettazione';//Diagnosi
 $LDRecBy='Provenienza Richiesta';//Suggerito da
 $LDTherapy='Terapia consigliata';
-$LDSpecials='Note speciali';
+$LDSpecials='Note';//Note speciali
 
 $LDPatientSearch='Ricerca dati paziente';
 $LDAdmit='Accettazione';
@@ -151,6 +151,8 @@ $LD_MMsddsyyyy='mm/gg/aaaa';
 $LDPlsSelectPatientFirst='Prima cerca la persona.';
 /* 2002-11-30 EL */
 $LDPatientRegister='Registrazione';
+$LDRegistrazioneAnagrafica='Registrazione Anagrafica';
+$LDRegistrazioneAppuntamenti='Registrazione Appuntamenti';
 $LDRegDate='Data di registrazione';
 $LDRegTime='Ora di registrazione';
 $LDRegBy='Registrato da';
@@ -353,7 +355,7 @@ $LDPatientIsDischarged='IL paziente è stato dimesso';
 $LDShow='Visualizza';
 $LDPlannedEncType='Tipo di accettazione pianificato';
 # 2003-08-01 EL
-$LDListEncounters='Lista di accettazione';
+$LDListEncounters='Storico accettazione';
 $LDDischarged='Dimesso';
 $LDDischargeDate='Data di dimissione';
 # 2003-08-04 EL
@@ -412,9 +414,11 @@ $LDNr="<font color='red'>Num.</font>";
 $LDOtherHospitalNr='Proveniente da';
 $LDSelectOtherHospital = 'Selezionare altra provenienza per cambiare il numero';
 $LDNoNrNoDelete = 'per cancellare, non inserire alcun numero';
+$LDAdmitShowTypeInput ='Codice Triage';
+$LDtriagecode ='codice';
 
-#2007-11-26 SalvoRossitto
-$LDRelative="Parente di riferimento";
-$LDRegionalCode="Codice Regionale";
+
+# claudio 01/01/2005
+$LDIcd10Search='Ricerca ICD9-CM';
 
 ?>

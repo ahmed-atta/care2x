@@ -53,4 +53,6 @@ $LDClinic='Clinica';
 $LDPlsNameFormal='Inserire il nome formale';
 $LDPlsDeptID='Inserire il codice del Dipartimento';
 $LDPlsSelectType='Inserire il tipo';
+$LDIsPharmacy='Farmacia?';
+$LDPharmacy='Seleziona Farmacia';
 ?>

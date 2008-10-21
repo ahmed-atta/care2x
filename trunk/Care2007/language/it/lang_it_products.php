@@ -209,4 +209,22 @@ $LDAlertNoNegativeOrder='Non si possono inserire valori negativi';
 $LDYellowList='Lista gialla';
 $LDYellowListTxt='Indice farmaceutico (con connessione ad internet)';
 $LDClickSelectDept='Seleziona un dipartimento.';
+$LDClickSelectPharma='Seleziona una farmacia';
+
+# claudio 2 dicembre 2007
+$LDRaporteFarmaci='Report';
+$LDRaporteFarmaciTxt='Report';
+$LDFurnitor='Fornitore';
+$LDFurnitorTxt='Crea, modifica fornitore';
+
+$LDAdresa='Indirizzo';
+$LDTelefoni='Telefono';
+$LDFax='Fax';
+$LDKodiPostar='CAP';
+
+$LDFurnizimTxt='Lista Aziende fornitrici';
+$LDFurnizim='Azienda fornitrice';
+$LDClickSelectFurnitor='Seleziona azienda';
+$LDSelectFurnitor='Seleziona azienda';
+$LDRaporteDepo='Reports';
 ?>

@@ -107,6 +107,9 @@ $LDWebCam='Webcam';
 $LDWebCamTxt='Telecamere su Intranet';
 $LDPhotoLab='Photolab';
 $LDPhotoLabTxt='Salva, documenta e indicizza le foto dei pazienti';
+$LDImmunizationMngr='Vaccinazioni';
+$LDImmunizationMngrTxt='Vaccinazioni';
+
 
 $LDBundyMachine='Bundy machine';
 $LDDutyPlanner='Pianificatore turni';
@@ -175,7 +178,7 @@ $LDBday='Data di nascita';
 $LDShotDate='Data della foto';
 $LDPatientNr='Codice paziente';
 $LDSetShotDate='Mostra tutte le foto in questa data.';
-$LDFotoLab='Photolab';
+$LDFotoLab='Archivio foto';
 $LDHowManyPics='Quante foto si vuole salvare in banca dati?';
 $LDNr='Numero';
 $LDNewPics='Foto di un nuovo paziente';
@@ -191,9 +194,9 @@ $LDAlertNoPatientData='I dati del paziente sono incompleti: inserire tutti i dat
 $LDAlertNumberOnly='Inserire un numero o la parola "main".';
 
 $LDStatistics='Statistiche';
-$LDDisplay1='Modo 1';
+$LDDisplay1='Fisso';
 $LDDisplay1Txt='Posiziona il menu nel riquadro a sinistra';
-$LDDisplay2='Modo 2';
+$LDDisplay2='Flottante';
 $LDDisplay2Txt='Posiziona il menu in una finestra flottante';
 
 $LDNewPwDiffer='La nuova password e quella di controllo non coincidono: inserirle di nuovo.';
@@ -238,5 +241,10 @@ $LDPharmaIndexTxt='Indice farmaceutico';
 #2004-05-23 EL
 $LDPlugins='Plugin';
 $LDNoPluginsPrompt='Non ci sono plugin installati.';
-$LDPluginsTxt='Colleczione di plugin e moduli installati';
+$LDPluginsTxt='Collezione di plugin e moduli installati';
+
+#15 dicembre 2007 - Claudio Torbinio
+$LDDevDesigner='Creatore';
+$LDDescription='Descrizione';
+
 ?>

@@ -15,14 +15,14 @@ $monat=array('',
 						);
 
 $LDDoctors='Medici';
-$LDQView='Quickview';
+$LDQView='Quadro sintetico turni';
 $LDQViewTxt='Vista compatta del piano turni per i medici in servizio';
 $LDDutyPlan='Turnistica';
 $LDDutyPlanTxt='Piano turni (visualizzazione, modifica, cancellazione, etc.)';
 $LDDocsList='Elenco Medici';
 $LDDocsListTxt='Crea o modifica un elenco di Medici';
 $LDDocsForum='Forum';
-$LDDocsForumTxt='Forum di discussione per Medici';
+$LDDocsForumTxt='Elenco dei Medici della struttura';
 $LDNews='News';
 $LDNewsTxt='Scrittura, lettura e modifica delle news';
 $LDMemo='Memo';
@@ -90,8 +90,8 @@ $LDCreatePersonList='Creazione elenco del personale';
 $LDNoPersonList='Non esiste un elenco del personale: occorre crearne uno premendo questo bottone.';
 $LDShow='Visualizza';
 
-$LDDOCS='DOC Scheduler';
-$LDDOCSTxt='Appuntamenti medico di turno, pianifica, mostra, aggiorna, modifica, etc.';
+$LDDOCS='Piano servizio';
+$LDDOCSTxt='Creare un piano turni con i medici in servizio.';
 $LDDOCSR='DOCSR';
 $LDDOCSRTxt='Richiesta di appuntamento con il medico di turno';
 /* 2002-09-15 EL */
@@ -119,4 +119,8 @@ $LDSureToDeleteEntry='Si desidera veramente cancellare questo dato?';
 /* 2003-03-18 EL */
 $LDChangeOnlyDept='Cambia reparto';
 $LDCreateNursesList='Crea un elenco di infermieri';
+
+# 17 dicembre 2007 - Claudio
+$LDChangemorning='Mattina';
+$LDChangenoon='Pomeriggio';
 ?>

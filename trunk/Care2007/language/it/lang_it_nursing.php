@@ -405,8 +405,8 @@ $LDFinanceType='Tipo di pagamento';
 $LDOutToInpatient='Cambia stato d\'accettazione al paziente ricoverato';
 $LDTransferClinic='Trasferimento alla Clinica o Dipartimento';
 $LDClinic='Clinica';
-$LDOwnPatient='Appartenenti al paziente';
-$LDNonOwnPatient='Non appartenente al paziente';
+$LDOwnPatient='In carico a questo reparto\ambulatorio';
+$LDNonOwnPatient='Non in carico a questo reparto\ambulatorio';
 # 2003-08-04 EL
 $LDShowClinicOnly='Questa Clinica soltanto';
 # 2003-09-16 EL

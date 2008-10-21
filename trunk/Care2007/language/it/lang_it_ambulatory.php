@@ -20,5 +20,10 @@ $LDPWListTxt='Pazienti accettati oggi in clinica';
 $LDOutpatientClinic='Day Hospital';
 $LDGeneralAmbulatory='Day Hospital Generale';
 $LDAmbulatory='Day Hospital';
+
+
+# 
+$LDShowambulatoryOnly='Solo questo Ambulatorio';
+$LDShowambulatoryAll='Tutti gli Ambulatori';
 ?>
 

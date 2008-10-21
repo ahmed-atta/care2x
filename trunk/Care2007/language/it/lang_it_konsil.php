@@ -63,11 +63,11 @@ $LDHyperthyreosisKnown='Ipertiroidismo?';
 $LDPregnantPossible='Possibile gravidanza in corso?';
 
 $LDDiagnosesInquiries='Diagnosi/richieste:';
-$LDDeptReport='Rapporto del reparto:';
+$LDDeptReport='Referto:';
 $LDRequestTo='Richiesta a';
 $LDDepartment='reparto';
 $LDVisitRequested='Visita richiesta';
-$LDPatCanBeOrdered='Patient can be ordered';
+$LDPatCanBeOrdered='Il paziente può essere dimesso';
 									
 $LDShortMonth=array('',
                    'Gen',
@@ -82,7 +82,7 @@ $LDShortMonth=array('',
 								   'Ott',
 								   'Nov',
 								   'Dic');
-$LDBatchNumber='numero batch';
+$LDBatchNumber='Numero Identificativo';
 $LDMaterial='Materiale:';
 $LDDiagnosis='Diagnosi:';
 $LDImmuneSupp='Supp. immune';		
@@ -107,7 +107,7 @@ $LDPureBlood='Sangue intero';
 $LDRedBloodCon='Globuli rossi concentrati';
 $LDLeukoLessRedBlood='Globuli rossi senza leucociti';
 $LDWashedRedBlood='Globuli rossi lavati';
-$LDPRP='Plasma ad alto tasso di platelet';
+$LDPRP='Plasma ad alto tasso di piastrine';
 $LDThromboCon='Platelet concentrato';
 $LDFFP='Plasma fresco congelato</font>';
 $LDTransfusionDevice='Macchine trasfusionali';
@@ -220,29 +220,29 @@ $LDDone='Fatto! Archivia il modulo';
 *  english word untranslated
 */
 $LDBacLabMaterialType = array(_mx_k_urin_=>'C.Urin',                                              
-												_mx_sputum_=>'Sputum',
-											  _mx_m_urin_=>'M.Urin',
-											  _mx_trachealsecrete_=>'Trac.scrt.',
-											  _mx_uricult_=>'Uricult',
-											  _mx_bronchiallavage_=>'B.lavage',
-											  _mx_wundabstrich_=>'W.smr',
-											  _mx_magensaft_=>'Gastrc.j.',
-											  _mx_augen_abstrich_right_=>'Ey.s.r.',
-											  _mx_secrete_=>'Secrete',
-											  _mx_augen_abstrich_left_=>'Ey.s.l.',
-											  _mx_exsudat_=>'Exsudat',
-											  _mx_ear_abstrich_right_=>'E.s.r.',
-											  _mx_punction_=>'Punctat',
-											  _mx_ear_abstrich_left_=>'E.s.l.',
-											  _mx_pleura_=>'Pleura',
+												_mx_sputum_=>'Espettorato',
+											  _mx_m_urin_=>'M.Urine',
+											  _mx_trachealsecrete_=>'Secrezione tracheale',
+											  _mx_uricult_=>'Urinocultura',
+											  _mx_bronchiallavage_=>'BAL',
+											  _mx_wundabstrich_=>'Ferita',
+											  _mx_magensaft_=>'Secrezioni gastriche',
+											  _mx_augen_abstrich_right_=>'Secrezioni Occhio destro.',
+											  _mx_secrete_=>'Secreto',
+											  _mx_augen_abstrich_left_=>'Secrezioni Occhio sinistro',
+											  _mx_exsudat_=>'Essudato',
+											  _mx_ear_abstrich_right_=>'Secrezioni Orecchio destro',
+											  _mx_punction_=>'Puntato',
+											  _mx_ear_abstrich_left_=>'Secrezioni Orecchio sinistro',
+											  _mx_pleura_=>'Pleurico',
 											  _mx_rachen_abstrich_=>'Th.smr',
-											  _mx_ascites_=>'Ascetis',
-											  _mx_tonsillen_abstrich_=>'Tons.s.',
+											  _mx_ascites_=>'Ascitico',
+											  _mx_tonsillen_abstrich_=>'Secrezioni Tonsille',
 											  _mx_douglas_=>'Douglas',
-											  _mx_nose_abstrich_=>'N.smr',
+											  _mx_nose_abstrich_=>'Secrezioni Nasali',
 											  _mx_liquor_=>'Liquor',
-											  _mx_vaginal_abstrich_=>'Vag.s.',
-											  _mx_blood_culture_=>'Blood.C.');
+											  _mx_vaginal_abstrich_=>'Secrezioni vaginali',
+											  _mx_blood_culture_=>'Emocultura');
 										  
 $LDBacLabTestType=array(_tx_special_body_material_=>'S.body.m.',
                                         _tx_culture_aerob_=>'Aerob.C.',

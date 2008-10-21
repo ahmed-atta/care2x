@@ -6,6 +6,6 @@ $LDTo='a';
 $LDSex='Sesso';
 $LDSelect='Seleziona';
 $LDZipCode='CAP';
-$LDPlsSearchDoctor='Carca un Medico.';
-$LDPlsSearchNurse='Cerca un infermiere.';
+$LDPlsSearchDoctor='Cerca un Medico.';
+$LDPlsSearchNurse='Cerca un Infermiere.';
 ?>

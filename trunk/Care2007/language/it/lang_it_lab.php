@@ -144,5 +144,8 @@ $LDHiddenGroups='Grouppi in verde nascost';
 $LDDeletedGroups='Grouppi in rosso cancellati';
 $LDUrgent='Urgente';
 
+# 17 dicembre 2007 Claudio
+$LDCheckParamFirst='Seleziona gli esami da visualizzare';
+
 
 ?>
