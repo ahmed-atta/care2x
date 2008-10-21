@@ -60,7 +60,7 @@ function getDateFormat()
 * The function assumes that the dates are in correct formats
 * therefore a validation routine must be done at the client side
 */
-function formatDate2Local($stdDate, $localFormat, $retTime=FALSE, $timeOnly=FALSE)
+function formatDate2Local($stdDate, $localFormat, $retTime=FALSE, $timeOnly=FALSE, &$sepChars)
 {
    global $lang;
    

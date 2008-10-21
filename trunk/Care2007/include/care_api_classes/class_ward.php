@@ -138,19 +138,18 @@ class Ward extends Encounter {
 			$this->sql.=" AND ( ";
 			while (list($key, $val) = each($dept_nr)) {
 				$tmp .= "dept_nr = " . $val . " OR ";
-	
 			}
 			$this->sql .= substr($tmp,0,-4) ;
 			$this->sql .= " ) "	;
 	    }
         //echo $this->sql;
-        if($this->res['gawio']=$db->Execute($this->sql)) {
+    if($this->res['gawio']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['gawio']->RecordCount()) {
-				 return $this->res['gawio'];	 
-			} else { return false; }
+    		return $this->res['gawio'];	 
+   		} else { return false; }
 		} else { return false; }
 	}
-	/**
+  /**
 	* Returns all wards data.
 	* 
 	* The returned adodb record object contains rows of arrays.
@@ -403,6 +402,7 @@ class Ward extends Encounter {
 	function openBed($ward_nr,$room_nr,$bed_nr){
 		global $dbtype;
 		switch ($dbtype){
+			case 'mysqli':
 			case 'mysql': $this->sql="UPDATE $this->tb_room SET closed_beds=".$this->ReplaceFieldString("closed_beds","$bed_nr/","")." WHERE type_nr=1 AND room_nr=$room_nr AND ward_nr=$ward_nr";
 				break;
 			case 'postgres':

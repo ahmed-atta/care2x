@@ -3,7 +3,7 @@
 # Page generation time measurement
 # define to 1 to measure page generation time
 #
-define('USE_PAGE_GEN_TIME',1);
+define('USE_PAGE_GEN_TIME',0);
 
 #
 # Doctors on duty change time
@@ -36,7 +36,7 @@ define('NODATE_DEFAULT','0000-00-00');
 # Admission module´s extended tabs. Care2x >= 2.0.2
 # Define to TRUE for extended tabs mode
 #
-define('ADMISSION_EXT_TABS',FALSE);
+define('ADMISSION_EXT_TABS',TRUE);
 
 #
 # Template theme for Care2x`s own template object
@@ -79,7 +79,7 @@ if(!defined('NOSTART_SESSION')||(defined('NOSTART_SESSION')&&!NOSTART_SESSION)){
 	# If the session is existing, destroy it. This is a workaround for php engines which are configured to session autostart = On
 	if(session_id()) session_destroy();
 	# Set sessions handler to "user"
-	ini_set('session.save_handler','user');
+	ini_set('session.save_handler','files');
 	# Set transparent session id
 	if(!ini_get('session.use_trans_sid')) ini_set('session.use_trans_sid',1);
 	//ini_set('session.use_trans_sid',0);

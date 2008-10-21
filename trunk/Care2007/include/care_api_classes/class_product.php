@@ -259,7 +259,6 @@ class Product extends Core {
 		global $db;
 		if(empty($type)||empty($bestellnum)) return false;
 		$this->useOrderCatalog($type);
-		//TODO ndryshue ci me marre simas emnit te farmacise...nuk e di a me kalon ne kete nivel
 		$this->sql="SELECT * FROM care_pharma_products_main_sub WHERE bestellnum='$bestellnum' AND pcs > 0  AND idcare_pharma = $pharma ORDER BY skadenca ASC";
 		if($this->res['aoc']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['aoc']->RecordCount()) {

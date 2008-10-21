@@ -122,6 +122,7 @@ $CARE_SERVER_VARS=&importGlobalVariable('server');
   
 */
 
+
 //$HTTP_SESSION_VARS=&importGlobalVariable('session');
 
 }

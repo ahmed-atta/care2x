@@ -22,6 +22,11 @@ class Lab extends Encounter {
 	*/
 	var $tb_find_chemlab='care_test_findings_chemlab';
 	/**
+	* Table name for test findings for chemical lab paramters
+	* @var string
+	*/
+	var $tb_find_chemlab_sub='care_test_findings_chemlabor_sub';
+	/**
 	* Table name for test paramaters
 	* @var string
 	*/
@@ -65,6 +70,21 @@ class Lab extends Encounter {
 				'history',
 				'modify_id',
 				'modify_time',
+				'create_id',
+				'create_time');
+	/**
+	* Field names for care_test_findings_chemlab_sub table
+	* @var array
+	*/
+	var $fld_find_chemlab_sub=array(
+				'batch_nr',
+				'job_id',
+				'encounter_nr',
+				'paramater_name',
+				'parameter_value',
+				'test_date',
+				'test_time',
+				'history',
 				'create_id',
 				'create_time');
 	/**
@@ -126,12 +146,18 @@ class Lab extends Encounter {
 	* Constructor
 	* @param int Encounter number
 	*/
-	function Lab($enc_nr=''){
+	function Lab($enc_nr='', $subTable = false){
 		if(!empty($enc_nr)) $this->enc_nr=$enc_nr;
+		if($subTable == true) {
+			$this->setTable($this->tb_find_chemlab_sub);
+			$this->setRefArray($this->fld_find_chemlab_sub);
+		} else {
 		$this->setTable($this->tb_find_chemlab);
 		$this->setRefArray($this->fld_find_chemlab);
+		}
 		//$this->en_prepend=date('Y')*1000000;
 	}
+
 	/**
 	* Sets the core table name and field names to the care_test_param table.
 	* @access public
@@ -191,13 +217,12 @@ class Lab extends Encounter {
 	* Hides the test result if it exists.
 	* @param int Encounter number
 	* @param int Job (test request) id
-	* @param int Test group id
 	* @return boolean
 	*/
-	function hideResultIfExists($enc_nr,$job_id,$grp_id){
+	function hideResultIfExists($enc_nr,$job_id){
 		global $HTTP_SESSION_VARS;
-		$this->sql="UPDATE $this->tb_find_chemlab SET status='hidden',history=".$this->ConcatHistory("Hide ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n")."
-								WHERE encounter_nr='$enc_nr' AND job_id='$job_id' AND group_id='$grp_id' AND status NOT IN ($this->dead_stat)";
+		$this->sql="UPDATE $this->tb_find_chemlab_sub SET status='hidden',history=".$this->ConcatHistory("Hide ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n")."
+								WHERE encounter_nr='$enc_nr' AND job_id='$job_id' AND status NOT IN ($this->dead_stat)";
 		return $this->Transact();
 	}
 	/**
@@ -211,7 +236,9 @@ class Lab extends Encounter {
 	*/
 	function getBatchResult($bn){
 		global $db;
-		$this->sql="SELECT * FROM $this->tb_find_chemlab WHERE batch_nr=$bn";
+		$this->sql  = "SELECT * FROM $this->tb_find_chemlab INNER JOIN $this->tb_find_chemlab_sub ";
+		$this->sql .= "ON ($this->tb_find_chemlab.job_id = $this->tb_find_chemlab_sub.job_id) ";
+		$this->sql .= "WHERE $this->tb_find_chemlab.batch_nr=$bn";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->result->RecordCount()) {
 				return $this->result;
@@ -232,7 +259,9 @@ class Lab extends Encounter {
 	function getResult($job_id,$grp_id,$enc_nr=''){
 		global $db;
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
-		$this->sql="SELECT * FROM $this->tb_find_chemlab WHERE encounter_nr='$this->enc_nr' AND job_id='$job_id' AND group_id='$grp_id' AND status<>'hidden'";
+		$this->sql  = "SELECT * FROM $this->tb_find_chemlab INNER JOIN $this->tb_find_chemlab_sub ";
+		$this->sql .= "ON ($this->tb_find_chemlab.job_id = $this->tb_find_chemlab_sub.job_id) ";
+		$this->sql .= "WHERE $this->tb_find_chemlab.encounter_nr='$this->enc_nr' AND $this->tb_find_chemlab.job_id='$job_id' AND $this->tb_find_chemlab.group_id='$grp_id' AND $this->tb_find_chemlab.status<>'hidden'";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->result->RecordCount()) {
 				return $this->result;
@@ -251,7 +280,9 @@ class Lab extends Encounter {
 	function getAllResults($enc_nr=''){
 		global $db;
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
-		$this->sql="SELECT * FROM $this->tb_find_chemlab WHERE encounter_nr='$this->enc_nr' AND status NOT IN ($this->dead_stat) ORDER BY test_date";
+		$this->sql  = "SELECT * FROM $this->tb_find_chemlab INNER JOIN $this->tb_find_chemlab_sub ";
+		$this->sql .= "ON ($this->tb_find_chemlab.job_id = $this->tb_find_chemlab_sub.job_id) ";
+		$this->sql .= "WHERE $this->tb_find_chemlab.encounter_nr='$this->enc_nr' AND $this->tb_find_chemlab.status NOT IN ($this->dead_stat) ORDER BY $this->tb_find_chemlab_sub.test_date";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->result->RecordCount()) {
 				return $this->result;
@@ -313,7 +344,8 @@ class Lab extends Encounter {
 		global $db;
 		if(empty($id)) $cond='';
 			else $cond="batch_nr='$id'";
-		$this->sql="SELECT parameters FROM $this->tb_req_chemlab WHERE $cond";
+			$sub = "_sub";
+		$this->sql  = "SELECT paramater_name, parameter_value FROM $this->tb_req_chemlab$sub  WHERE $cond";
 		if($this->tparams=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->tparams->RecordCount()) {
 				return $this->tparams;

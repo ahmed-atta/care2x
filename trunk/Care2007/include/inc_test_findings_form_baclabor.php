@@ -5,7 +5,7 @@ if (eregi('inc_test_findings_form_baclabor.php',$PHP_SELF))
 /*------end------*/
 if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php')) include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php');
   else include_once($root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_baclabor.php');
-?>
+  ?>
 
 <table>
   <tbody>
@@ -41,7 +41,6 @@ if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php
 	   </tr>
 	   <tr>
 	   <td>';
-	   
 	   if($edit) echo '<a href="javascript:setM(\''.$x.'\')">';
 	   
 	   $inp_v='0';
@@ -63,7 +62,6 @@ if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php
 	   }
 	   
 	   echo 'border=0 width=18 height=6 align="absmiddle" id="'.$x.'">';
-	   
 	   if($edit) echo '</a><input type="hidden" name="'.$x.'" value="'.$inp_v.'">';
 	   echo '</td>
 	   <td>';
@@ -156,7 +154,6 @@ if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php
 	   {
 	     echo '<img src="b.gif" ';
 	   }
-	   
 	   echo 'border=0 width=18 height=6 align="absmiddle" id="'.$x4.'">';
 	   if($edit) echo '</a><input type="hidden" name="'.$x4.'" value="'.$inp_v.'">';
 	   echo '</td>
@@ -514,7 +511,7 @@ for($n=0;$n<8;$n++)
 	 
 	 	  <table border=0 class="lab" cellpadding=0 cellspacing=0 bgcolor="<?php echo $bgc1 ?>"> 	
 <?php
-   /* The 2nd column group of resistance test ANaerobes*/
+   /* The 2nd column group of resistance test Anaerobes*/
    	while(list($x,$v)=each($lab_ResistANaerobAcro))
 	{
 	  echo '
@@ -561,7 +558,7 @@ for($n=0;$n<8;$n++)
 	 
 	 	  <table border=0 class="lab" cellpadding=0 cellspacing=0 bgcolor="<?php echo $bgc1 ?>"> 	
 <?php
-   /* The 3rd column group of resistance test ANaerobes*/
+   /* The 3rd column group of resistance test Anaerobes*/
    	while(list($x,$v)=each($lab_ResistANaerobAcro))
 	{
 	  echo '
@@ -646,11 +643,12 @@ for($n=0;$n<8;$n++)
     <td  colspan=2><font size=1 color="#ee6666" face="verdana,arial"><?php 
 	
 	echo $LDDate.'&nbsp;';
-	
     if($edit_findings)
 	 {
-	    if($stored_findings['rec_date'] && $stored_findings['rec_date']!='0000-00-00') $dateRec = formatDate2Local($stored_findings['rec_date'],$date_format);
-		  else $dateRec = formatDate2Local(date('Y-m-d'),$date_format);
+	    if($stored_findings['rec_date'] && $stored_findings['rec_date']!='0000-00-00')  //#147
+	    	$dateRec = $stored_findings['rec_date'];
+		else 
+			$dateRec = date('Y-m-d');
 		//gjergji : new calendar
 		require_once ('../../js/jscalendar/calendar.php');
 		$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
@@ -658,9 +656,7 @@ for($n=0;$n<8;$n++)
 
 		echo $calendar->show_calendar($calendar,$date_format,'rec_date',$dateRec);
 		//end gjergji
-	 }
-	 else
-	 {
+	 } else { 
 	    if($stored_findings['rec_date']) echo  formatDate2Local($stored_findings['rec_date'],$date_format);
 	  }
     ?></font></td>

@@ -92,7 +92,7 @@ $smarty->assign('gifBatchBarcode',"<img src='".$root_path."classes/barcode/image
 
 
 if($stored_request['quick_diagnosis']) $smarty->assign('input_quick_diagnosis','<img '.createComIcon($root_path,'chkbox_chk.gif','0','absmiddle').'>');
-	else $smarty->assign('input_quick_diagnosis', '<img '.createComIcon($root_path,'chkbox_blk.gif','0','absmiddle').'>');
+else $smarty->assign('input_quick_diagnosis', '<img '.createComIcon($root_path,'chkbox_blk.gif','0','absmiddle').'>');
 
 $smarty->assign('LDSpeedTest',$LDSpeedTest);
 

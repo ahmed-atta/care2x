@@ -163,8 +163,16 @@ class Department extends Core {
 	* @access public
 	* @return mixed boolean or adodb record object or assoc array
 	*/
-	function getAllActive() {
+	function getAllActive($dept_nr) {
 		return $this->_getalldata("is_inactive='0'");
+	}
+	/**
+	* Gets all ACTIVE sub - departments. The result is assoc array sorted by departments formal name
+	* @access public
+	* @return mixed boolean or adodb record object or assoc array
+	*/
+	function getAllSubDepts($dept_nr) {
+		return $this->_getalldata('is_inactive=\'0\' AND parent_dept_nr='.$dept_nr);
 	}
 	/**
 	* Gets all ACTIVE departments. The result is adodb record object sorted by departments formal name
@@ -189,7 +197,7 @@ class Department extends Core {
 	* @return mixed boolean or adodb record object or assoc array
 	*/
 	function getAllActiveSort($sort='') {
-		return $this->_getalldata("is_inactive='0'",$sort);
+		return $this->_getalldata("parent_dept_nr='0' AND is_inactive='0'",$sort);
 	}
 	/**
 	* Gets all ACTIVE medical departments. The result is assoc array sorted by departments formal name

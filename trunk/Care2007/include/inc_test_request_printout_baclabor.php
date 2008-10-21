@@ -23,8 +23,7 @@
     
   
 <?php
-  while(list($x,$v)=each($LDBacLabMaterialType))
-	{
+ while(list($x,$v)=each($LDBacLabMaterialType)){
 	   list($x2,$v2)=each($LDBacLabMaterialType); 
 	   echo '
 	   <tr>
@@ -39,7 +38,7 @@
 	   $inp_v='0';
 	   if($edit_form || $read_form )
 	   {
-	      if($stored_material[$x])
+	      if($stored_param[$x])
 		  {
 		     echo '<img src="../img/filled_pink_block.gif" ';
 			 $inp_v='1';
@@ -65,7 +64,7 @@
 	   $inp_v='0';
 	   if($edit_form || $read_form )
 	   {
-	      if($stored_material[$x2])
+	      if($stored_param[$x2])
 		  {
 		     echo '<img src="../img/filled_pink_block.gif" ';
 			 $inp_v='1';
@@ -111,7 +110,7 @@
 	   $inp_v='0';
 	   if($edit_form || $read_form )
 	   {
-	      if($stored_test_type[$x3])
+	      if($stored_param[$x3])
 		  {
 		     echo '<img src="../img/filled_pink_block.gif" ';
 			 $inp_v='1';
@@ -137,7 +136,7 @@
 	   $inp_v='0';
 	   if($edit_form || $read_form )
 	   {
-	      if($stored_test_type[$x4])
+	      if($stored_param[$x4])
 		  {
 		     echo '<img src="../img/filled_pink_block.gif" ';
 			 $inp_v='1';

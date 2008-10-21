@@ -102,6 +102,7 @@ if(isset($mode)&&($mode=='save')){
 							'description'=>$besc,
 							'picfile'=>$picfilename,
 							'packing'=>$pack,
+							'dose'=>$dose,
 							'minorder'=>$minorder,
 							'maxorder'=>$maxorder,
 							'proorder'=>$proorder,
@@ -127,6 +128,7 @@ if(isset($mode)&&($mode=='save')){
 					 	$tail="generic='$generic',
 							description='$besc',
 							packing='$pack',
+							dose='$dose',
 							minorder='$minorder',
 							maxorder='$maxorder',
 							proorder='$proorder',";

@@ -3,9 +3,9 @@
 * @package care_api
 */
 
-/**
-*/
-//require_once($root_path.'include/care_api_classes/class_core.php');
+
+require_once($root_path.'include/care_api_classes/class_core.php');
+
 /**
 *  GUI input form for person registration methods.
 *
@@ -83,10 +83,14 @@ class GuiInputPerson {
 	* Create a row of input element in the form
 	*/
 	function createTR($error_handler, $input_name, $ld_text, $input_val, $colspan = 1, $input_size = 35,$red=FALSE){
-
 		ob_start();
-			if ($error_handler || $red) $sBuffer="<font color=\"$this->error_fontcolor\">$ld_text</font>";
+		    $this->smarty->assign('must','');
+			if ($error_handler || $red) {
+			    $sBuffer="<font color=\"$this->error_fontcolor\">* $ld_text</font>";
+			    $this->smarty->assign('must',1);
+			}
 				else $sBuffer=$ld_text;
+			//$this->smarty->assign('must',1);
 			$this->smarty->assign('sItem',$sBuffer);
 			$this->smarty->assign('sColSpan2',"colspan=$colspan");
 			$this->smarty->assign('sInput','<input name="'.$input_name.'" type="text" size="'.$input_size.'" value="'.$input_val.'" >');
@@ -98,7 +102,6 @@ class GuiInputPerson {
 
 		return $sBuffer;
 	}
-
 	/**
 	* Displays the GUI input form
 	*/
@@ -153,9 +156,9 @@ class GuiInputPerson {
 			# If saving is not forced, validate important elements
 			if($mode!='forcesave') {
 				# clean and check input data variables
-				if(trim($encoder)=='') $encoder=$aufnahme_user;
+				if (trim($encoder)=='') $encoder=$aufnahme_user;
 				if (trim($name_last)=='') { $errornamelast=1; $error++;}
-				if(trim($name_first)=='') { $errornamefirst=1; $error++; }
+				if (trim($name_first)=='') { $errornamefirst=1; $error++; }
 				if (trim($date_birth)=='') { $errordatebirth=1; $error++;}
 				if (trim($addr_str)=='') { $errorstreet=1; $error++;}
 				if (trim($addr_str_nr)=='') { $errorstreetnr=1; $error++;}
@@ -186,7 +189,7 @@ class GuiInputPerson {
 				if(($update)) {
 
 					//echo formatDate2STD($geburtsdatum,$date_format);
-					$sql.="UPDATE $dbtable SET
+					$sql="UPDATE $dbtable SET
 							 title='$title',
 							 name_last='$name_last',
 							 name_first='$name_first',
@@ -216,7 +219,6 @@ class GuiInputPerson {
 							 ethnic_orig='$ethnic_orig',
 							 date_update='".date('Y-m-d H:i:s')."',";
 
-					//if ($old_fn!=$photo_filename){
 					if ($valid_image){
 						# Compose the new filename
 						$photo_filename=$pid.'.'.$picext;
@@ -295,7 +297,7 @@ class GuiInputPerson {
 						# else let the dbms make an initial value via the sequence generator e.g. postgres
 						# However, the sequence generator must be configured during db creation to start at
 						# the initial value set in the global config
-						if($dbtype=='mysql'){
+						if($dbtype=='mysql' || $dbtype=='mysqli'){
 							$HTTP_POST_VARS['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
 						}
 					}else{
@@ -421,7 +423,7 @@ class GuiInputPerson {
 		ob_start();
 ?>
 		<script  language="javascript">
-		<!--
+		
 			function forceSave(){
 			document.aufnahmeform.mode.value="forcesave";
 			document.aufnahmeform.submit();
@@ -457,14 +459,6 @@ class GuiInputPerson {
 				alert("<?php echo $LDPlsEnterStreetName; ?>");
 				d.addr_str.focus();
 				return false;
-			}else if(d.addr_str_nr.value==""){
-				alert("<?php echo $LDPlsEnterBldgNr; ?>");
-				d.addr_str_nr.focus();
-				return false;
-           }else if(d.addr_citytown_name.value==""){
-				alert("<?php echo $LDPlsEnterCityTown; ?>");
-				d.addr_citytown_name.focus();
-				return false;
 			}else if(d.addr_zip.value==""){
 				alert("<?php echo $LDPlsEnterZip; ?>");
 				d.addr_zip.focus();
@@ -472,10 +466,6 @@ class GuiInputPerson {
 			}else if(d.user_id.value==""){
 				alert("<?php echo $LDPlsEnterFullName; ?>");
 				d.user_id.focus();
-				return false;
-           }else if(d.sss_nr.value==""){
-				alert("<?php echo $LDPlsEnterSss_nr; ?>");
-				d.sss_nr.focus();
 				return false;
 			}else{
 				return true;
@@ -485,7 +475,6 @@ class GuiInputPerson {
 <?php
 		require($root_path.'include/inc_checkdate_lang.php'); 
 ?>
-		-->
 		</script>
 <?php
 		//gjergji : new calendar
@@ -587,14 +576,7 @@ class GuiInputPerson {
 		$this->smarty->assign('sNameFirst',$this->createTR($errornamefirst, 'name_first', $LDFirstName,$name_first,'',35,TRUE));
 		//$iRowSpanCount++;
         
-        /* Begin SalvoRossitto 26/11/2007 */
-        if ($errorrelative) $this->smarty->assign('LDRelative',"<font color=red>$LDRelative</font>");
-			else $this->smarty->assign('LDRelative',"$LDRelative");
-        $this->smarty->assign('sRelativeNameLast',$this->createTR($errorrelativenamelast, 'relative_name_last', $LDLastName,$relative_name_last,2,35,FALSE));
-		$this->smarty->assign('sRelativeNameFirst',$this->createTR($errorrelativenamefirst, 'relative_name_first', $LDFirstName,$relative_name_first,2,35,FALSE));
-		$this->smarty->assign('sRelativePhone',$this->createTR($errorrelativephone, 'relative_phone', $LDPhone,$relative_phone,2,35,FALSE));
-        /* Begin SalvoRossitto 26/11/2007 */
-        
+      
         
 		if (!$GLOBAL_CONFIG['person_name_2_hide']){
 			$this->smarty->assign('sName2',$this->createTR($errorname2, 'name_2', $LDName2,$name_2));
@@ -624,27 +606,15 @@ class GuiInputPerson {
 		# Set the rowspan value for the photo image <td>
 		$this->smarty->assign('sPicTdRowSpan',"rowspan=$iRowSpanCount");
 
-
-		if ($errordatebirth) $this->smarty->assign('LDBday',"<font color=red>$LDBday</font>");
-			else $this->smarty->assign('LDBday',"<font color=red></font> $LDBday");
-			
-		//gjergji : new calendar
-/*		if($date_birth){
-			if($mode=='save'||$error||$error_person_exists) $sBdayBuffer = $date_birth;
-				else $sBdayBuffer = formatDate2Local($date_birth,$date_format);
-		}*/
-		# Uncomment the following when the current date must be inserted
-		# automatically at the start of each document
-		/*else{
-			$sBdayBuffer = formatDate2Local(date('Y-m-d'),$date_format);
-		}*/
+		if ($errordatebirth) $this->smarty->assign('LDBday',"<font color=red>* $LDBday</font>:");
+		else $this->smarty->assign('LDBday',"<font color=red>*</font> $LDBday:");
 		
 		//gjergji : new calendar
 		$this->smarty->assign('sBdayInput',$calendar->show_calendar($calendar,$date_format,'date_birth',$date_birth));
 		//end gjergji
 		
-		if ($errorsex) $this->smarty->assign('LDSex', "<font color=#ff0000>$LDSex</font>:");
-			else $this->smarty->assign('LDSex', "<font color=#ff0000></font> $LDSex");
+		if ($errorsex) $this->smarty->assign('LDSex', "<font color=#ff0000>* $LDSex</font>:");
+		else $this->smarty->assign('LDSex', "<font color=#ff0000>*</font> $LDSex:");
 
 		$sSexMBuffer='<input name="sex" type="radio" value="m"  ';
 		if($sex=="m") $sSexMBuffer.=' checked>';
@@ -727,27 +697,37 @@ class GuiInputPerson {
 			$this->smarty->assign('LDSeparated',$LDSeparated);
 		}
 		
-		if ($erroraddress) $this->smarty->assign('LDAddress',"<font color=red>$LDAddress</font>");
-			else $this->smarty->assign('LDAddress',"$LDAddress");
+		if ($erroraddress) $this->smarty->assign('LDAddress',"<font color=red>$LDAddress</font>:");
+			else $this->smarty->assign('LDAddress',"$LDAddress:");
 
-		if ($errorstreet) $this->smarty->assign('LDStreet',"<font color=red><font color=#ff0000></font> $LDStreet</font>");
-			else $this->smarty->assign('LDStreet',"<font color=#ff0000></font> $LDStreet");
+		if ($errorstreet) $this->smarty->assign('LDStreet',"<font color=red><font color=#ff0000>*</font> $LDStreet</font>:");
+			else $this->smarty->assign('LDStreet',"<font color=#ff0000>*</font> $LDStreet:");
 
 		$this->smarty->assign('sStreetInput','<input name="addr_str" type="text" size="35" value="'.$addr_str.'">');
 
-		if ($errorstreetnr) $this->smarty->assign('LDStreetNr',"<font color=red><font color=#ff0000></font> $LDStreetNr</font>");
-				else $this->smarty->assign('LDStreetNr',"<font color=#ff0000></font> $LDStreetNr");
+		if ($errorstreetnr) $this->smarty->assign('LDStreetNr',"<font color=red> $LDStreetNr</font>:");
+				else $this->smarty->assign('LDStreetNr'," $LDStreetNr:");
 
 		$this->smarty->assign('sStreetNrInput','<input name="addr_str_nr" type="text" size="10" value="'.$addr_str_nr.'">');
 
-		if ($errortown) $this->smarty->assign('LDStreet',"<font color=red>$LDTownCity</font>");
-			else $this->smarty->assign('LDTownCity',"$LDTownCity");
-		$this->smarty->assign('sTownCityInput','<input name="addr_citytown_name" type="text" size="35" value="'.$addr_citytown_name.'">');
-		$this->smarty->assign('sTownCityMiniCalendar',"<a href=\"javascript:popSearchWin('citytown','aufnahmeform.addr_citytown_nr','aufnahmeform.addr_citytown_name')\"><img ".createComIcon($root_path,'b-write_addr.gif','0')."></a>");
+		if ($errortown) $this->smarty->assign('LDStreet',"<font color=red>$LDTownCity</font>:");
+		else $this->smarty->assign('LDTownCity',"$LDTownCity:");
+				
+		require_once($root_path.'include/care_api_classes/class_address.php');
+		$sAddress = '<select name="addr_citytown_name"><option  onclick="document.getElementById(\'addr_zip\').value=\'\'"></option>';
+		$address_obj=new Address;
+		$address = $address_obj->getAllActiveCityTown();
+		while($addr=$address->FetchRow()){
+		    $sAddress .= '<option onclick="document.getElementById(\'addr_zip\').value=\'' . $addr['zip_code'].'\'" value="' . $addr['name'] . '">' . $addr['name'] . '</option>';
+		}
+		$sAddress .= '</select>';
+		$this->smarty->assign('sTownCityInput',$sAddress);
+		//$this->smarty->assign('sTownCityInput','<input name="addr_citytown_name" type="text" size="35" value="'.$addr_citytown_name.'">');
+		//$this->smarty->assign('sTownCityMiniCalendar',"<a href=\"javascript:popSearchWin('citytown','aufnahmeform.addr_citytown_nr','aufnahmeform.addr_citytown_name')\"><img ".createComIcon($root_path,'b-write_addr.gif','0')."></a>");
 
-		 if ($errorzip) $this->smarty->assign('LDZipCode',"<font color=red><font color=#ff0000></font> $LDZipCode</font> ");
-		 	else  $this->smarty->assign('LDZipCode',"<font color=#ff0000></font> $LDZipCode ");
-		 $this->smarty->assign('sZipCodeInput','<input name="addr_zip" type="text" size="10" value="'.$addr_zip.'">');
+		 if ($errorzip) $this->smarty->assign('LDZipCode',"<font color=red> $LDZipCode</font> :");
+		 	else  $this->smarty->assign('LDZipCode'," $LDZipCode :");
+		 $this->smarty->assign('sZipCodeInput','<input id="addr_zip" name="addr_zip" type="text" size="10" value="'.$addr_zip.'">');
 
 
 		// KB: make insurance completely hideable
@@ -757,7 +737,7 @@ class GuiInputPerson {
 
 					$this->smarty->assign('bShowInsurance',TRUE);
 
-					$this->smarty->assign('sInsuranceNr',$this->createTR($errorinsurancenr, 'insurance_nr', $LDInsuranceNr.' 1',$insurance_nr,2));
+					$this->smarty->assign('sInsuranceNr',$this->createTR($errorinsurancenr, 'insurance_nr', $LDInsuranceNr.' 1',$insurance_nr,2,35,true));
 
 					if ($errorinsuranceclass) $this->smarty->assign('sErrorInsClass',"<font color=\"$error_fontcolor\">");
 
@@ -765,7 +745,7 @@ class GuiInputPerson {
 						$sInsClassBuffer='';
 						while($result=$insurance_classes->FetchRow()) {
 
-							$sInsClassBuffer.='<input name="insurance_class_nr" type="radio"  value="'.$result['class_nr'].'" ';
+							$sInsClassBuffer.='<input class="reg_input_must" name="insurance_class_nr" type="radio"  value="'.$result['class_nr'].'" ';
 							if($insurance_class_nr==$result['class_nr']) $sInsClassBuffer.='checked';
 							$sInsClassBuffer.='>';
 
@@ -777,12 +757,13 @@ class GuiInputPerson {
 						$this->smarty->append('sInsClasses',$sInsClassBuffer);
 
 					} else {
-						$this->smarty->assign('sInsClasses','no insurance class');
+						$this->smarty->assign('sInsClasses','No insurance classes defined');
 					}
 					
 					if ($errorinsurancecoid) $this->smarty->assign('LDInsuranceCo',"<font color=red>$LDInsuranceCo</font> :");
 						else  $this->smarty->assign('LDInsuranceCo',"$LDInsuranceCo :");
-
+					//gjergji mod for insurance
+					$insurance_firm_name = $pinsure_obj->getFirmName($GLOBAL_CONFIG['person_insurace_firm_default_id']);  
 					$this->smarty->assign('sInsCoNameInput','<input name="insurance_firm_name" type="text" size="35" value="'.$insurance_firm_name.'">');
 					$this->smarty->assign('sInsCoMiniCalendar',"<a href=\"javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')\"><img ".createComIcon($root_path,'b-write_addr.gif','0')."></a>");
 				}
@@ -875,7 +856,7 @@ class GuiInputPerson {
 			<input type="hidden" name="mode" value="save">
 			<input type="hidden" name="addr_citytown_nr" value="<?php echo $addr_citytown_nr; ?>">
 			<input type="hidden" name="insurance_item_nr" value="<?php echo $insurance_item_nr; ?>">
-			<input type="hidden" name="insurance_firm_id" value="<?php echo $insurance_firm_id; ?>">
+			<input type="hidden" name="insurance_firm_id" value="<?php echo $GLOBAL_CONFIG['person_insurace_firm_default_id']; ?>">
 			<input type="hidden" name="insurance_show" value="<?php echo $insurance_show; ?>">
 			<input type="hidden" name="ethnic_orig" value="<?php echo $ethnic_orig; ?>">
 <?php

@@ -22,11 +22,6 @@ class Immunization extends Core {
 	*/
 	var $tb='care_encounter_immunization'; // table name
 	/**
-	* Database table for encounter's immunization data
-	* @var string
-	*/
-	var $tb='care_encounter_immunization'; // table name
-	/**
 	* Database table for immunization type data
 	* @var string
 	*/

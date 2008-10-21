@@ -81,6 +81,11 @@ class Encounter extends Notes {
 	*/
 	var $tb_appt='care_appointment';
 	/**
+	* Table name for encounter type
+	* @var string
+	*/
+	var $tb_enc_type='care_type_encounter';	
+	/**
 	* Current encounter number
 	* @var int
 	*/
@@ -161,7 +166,8 @@ class Encounter extends Notes {
 							   'referrer_dept',
 							   'referrer_institution',
 							   'referrer_notes',
-                               'regional_code',
+							   'admit_type',
+							   'triage',
 							   'financial_class',
 							   'insurance_nr',
 							   'insurance_class_nr',
@@ -663,7 +669,7 @@ class Encounter extends Notes {
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="SELECT e.*, p.pid, p.title,p.name_last, p.name_first, p.date_birth, p.sex,
 									p.addr_str,p.addr_str_nr,p.addr_zip, p.blood_group,
-									p.photo_filename, t.name AS citytown_name,p.death_date,p.sss_nr
+									p.photo_filename, t.name AS citytown_name,p.death_date
 							FROM $this->tb_enc AS e, 
 									 $this->tb_person AS p
 									 LEFT JOIN $this->tb_citytown AS t ON p.addr_citytown_nr=t.nr
@@ -1274,6 +1280,30 @@ class Encounter extends Notes {
 		    return FALSE;
 		}
 	}
+	/**
+	* Gets the encounter type 
+	*
+	* The returned array contains data with following index keys:
+	* - <b>type_nr</b> = the class id (alphanumeric)
+	* - <b>name</b> = the class name
+	* - <b>LD_var</b> = the variable's name for the language dependent version of the class name
+	*
+	*
+	* @access public
+	* @return mixed array or boolean
+	*/
+	function getEncounterType(){
+	    global $db;
+		$this->sql="SELECT type_nr,type,name, LD_var AS \"LD_var\" FROM $this->tb_enc_type";
+		if($this->result=$db->Execute($this->sql)){
+		    if($this->result->RecordCount()) {
+			    $this->row=$this->result;
+				return $this->row;
+			} else return FALSE;
+		}else {
+		    return FALSE;
+		}
+	}	
 	/**
 	* Gets the insurance class' information based on its class_nr key.
 	*

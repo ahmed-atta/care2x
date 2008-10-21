@@ -30,6 +30,7 @@ class Address extends Core {
 									'unece_modifier',
 									'unece_locode',
 									'name',
+							'zip_code',
 									'iso_country_id',
 									'unece_locode_type',
 									'unece_coordinates',

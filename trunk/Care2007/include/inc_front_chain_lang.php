@@ -24,12 +24,10 @@ require_once($root_path.'include/inc_db_makelink.php');
 # param chk_file =  filename of the language table
 # return = 1 if language table exists 
 
-function getLang($chk_file) 
-{
+function getLang($chk_file) {
    global $lang, $root_path, $sid;
    
-   if(!isset($lang)||empty($lang))
-   {
+   if(!isset($lang)||empty($lang))   {
 	  $ck_lang_buffer='ck_lang'.$sid;
       if(!isset($HTTP_COOKIE_VARS[$ck_lang_buffer])||empty($HTTP_COOKIE_VARS[$ck_lang_buffer])) include($root_path.'chklang.php');
          else $lang=$HTTP_COOKIE_VARS[$ck_lang_buffer];

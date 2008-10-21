@@ -116,7 +116,7 @@ class Notes extends Core {
 	
 		if(empty($sort)) $sort=" ORDER BY nr";
 			else $sort=" ORDER BY $sort";
-	    if ($this->result=$db->Execute("SELECT nr,type,name,LD_var AS \"LD_var\" FROM $this->tb_types  $sort")) {
+	    if ($this->result=$db->Execute("SELECT nr,type,name,LD_var AS \"LD_var\" FROM $this->tb_types WHERE status NOT IN ($this->dead_stat) $sort")) {
 		    if ($this->result->RecordCount()) {
 		        return $this->result->GetArray();
 			} else {

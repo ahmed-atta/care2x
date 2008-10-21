@@ -185,6 +185,8 @@ class Core {
 	function _prepSaveArray(){
 		$x='';
 		$v='';
+		reset($this->ref_array);
+		reset($this->data_array);
 		while(list($x,$v)=each($this->ref_array)) {	
 			// Gjergj Sheldija : 
 			// deleted && ($this->data_array[$v]!='') gives me errors when var value == 0		
@@ -342,7 +344,7 @@ class Core {
 		if(!is_array($array)){ return FALSE;}
 		while(list($x,$v)=each($array)) {
 			# use backquoting for mysql and no-quoting for other dbs 
-			if ($dbtype=='mysql') $index.="`$x`,";
+			if ($dbtype=='mysql' || $dbtype=='mysqli') $index.="`$x`,";
 				else $index.="$x,";
 				
 			if(stristr($v,$concatfx)||stristr($v,'null')) $values.=" $v,";
@@ -377,7 +379,7 @@ class Core {
 		if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;			
 		while(list($x,$v)=each($array)) {
 			# use backquoting for mysql and no-quoting for other dbs. 
-			if ($dbtype=='mysql') $elems.="`$x`=";
+			if ($dbtype=='mysql' || $dbtype=='mysqli') $elems.="`$x`=";
 				else $elems.="$x=";
 			
 			if(stristr($v,$concatfx)||stristr($v,'null')) $elems.=" $v,";
@@ -505,6 +507,20 @@ class Core {
 		return $this->Transact();
 	}
 	/**
+	* Deletes data from a database table based on the job_id and
+	* batch_nr. Used in the update action for the laboratory tables
+	* ( chemlabor and baclabor )
+	* @access public
+	* @param varchar $batch_nr
+	* @param varchar $job_id
+	* @return boolean
+	*/
+	function deleteOldValues($batch_nr, $encounter_nr){
+		if(empty($batch_nr) || empty($encounter_nr)) return FALSE;
+		$this->sql="DELETE  FROM $this->coretable WHERE batch_nr = '$batch_nr' AND encounter_nr = '$encounter_nr'";
+		return $this->Transact();
+	}	
+	/**
 	* Returns the  core field names of the core table in an array.
 	* @access public
 	* @return array
@@ -591,6 +607,7 @@ class Core {
 			return $oid;
 		}else{
 			switch($dbtype){
+				case 'mysqli':
 				case 'mysql': return $oid;
 					break;
 				case 'postgres': return $this->postgre_Insert_ID($this->coretable,$pk,$oid);
@@ -613,6 +630,7 @@ class Core {
 		global $dbtype;
 
 		switch($dbtype){
+			case 'mysqli':
 			case 'mysql': return "CONCAT($fieldname,'$str')";
 				break;
 			case 'postgres': return "$fieldname || '$str'";
@@ -655,6 +673,7 @@ class Core {
 		global $dbtype;
 
 		switch($dbtype){
+			case 'mysqli' :
 			case 'mysql': return "REPLACE($fieldname,'$str1','$str2')";
 				break;
 				default: return "REPLACE($fieldname,'$str1','$str2')";

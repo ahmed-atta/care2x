@@ -436,7 +436,6 @@ for($n=0;$n<8;$n++)
 <table border=0 cellpadding=0 cellspacing=0 width=745 bgcolor="<?php echo $bgc1 ?>">
  <?php
 # Start buffering output
-
 ob_start();
 for($i=0;$i<=$max_row;$i++) {
 	echo '<tr class="lab">';
@@ -447,14 +446,20 @@ for($i=0;$i<=$max_row;$i++) {
 				if($LD_Elements[$j][$i]['value']) {
 					echo '<td>';
 					if($edit) {
+						if( isset($stored_param[$LD_Elements[$j][$i]['id']]) && !empty($stored_param[$LD_Elements[$j][$i]['id']])) {
+							echo '<input type="hidden" name="'.$LD_Elements[$j][$i]['id'].'" value="1">
+							<a href="javascript:setM(\''.$LD_Elements[$j][$i]['id'].'\')">';
+						} else {
 						echo '<input type="hidden" name="'.$LD_Elements[$j][$i]['id'].'" value="0">
 						<a href="javascript:setM(\''.$LD_Elements[$j][$i]['id'].'\')">';
+					}
 					}
 					if( isset($stored_param[$LD_Elements[$j][$i]['id']]) && !empty($stored_param[$LD_Elements[$j][$i]['id']])) {
 						echo '<img src="f.gif" border=0 width=18 height=6 id="'.$LD_Elements[$j][$i]['id'].'">';
 					} else {
 						echo '<img src="b.gif" border=0 width=18 height=6 id="'.$LD_Elements[$j][$i]['id'].'">';
-					} if($edit) {
+					} 
+					if($edit) {
 						echo '</a>';
 					}
 					echo '</td><td>';

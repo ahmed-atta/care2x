@@ -134,12 +134,11 @@ class Insurance extends Core {
     function getInsuranceClassInfoObject($items='class_nr,class_id,name,LD_var AS "LD_var", description,status,history') {
     
 	    global $db;
-	
-        if ($this->res['gicio']=$db->Execute("SELECT $items  FROM $this->tb_class")) {
+        if ($this->res['gicio']=$db->Execute("SELECT $items  FROM $this->tb_class WHERE status='active'")) {
             if ($this->res['gicio']->RecordCount()) {
                 return $this->res['gicio'];
             } else {return FALSE;}
-		} else {return FALSE; }
+				} else {return FALSE; }
     }
 	/**
 	* Gets the information of all insurance classes. Returns 2 dimensional array.
