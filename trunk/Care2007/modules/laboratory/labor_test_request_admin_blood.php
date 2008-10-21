@@ -46,8 +46,8 @@ $formtitle=$LDBloodBank;
 $dept_nr=43; // 43 = department nr. of blood bank
 
 $db_request_table='blood';
-
-//$db->debug=1;
+$target='blood';
+///$db->debug=1;
 
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
@@ -119,7 +119,8 @@ $enc_obj=new Encounter;
 								  	// Load the visual signalling functions
 									include_once($root_path.'include/inc_visual_signalling_fx.php');
 									// Set the visual signal 
-									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REPORT);									
+									setEventSignalColor($pn,SIGNAL_COLOR_BLOOD_REQUEST);
+									//echo "blood";									
 									 header("location:".$thisfile."?sid=$sid&lang=$lang&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize");
 									 exit;
 								  }else{
@@ -241,7 +242,7 @@ function chkForm(d){
 }
 
 function printOut(){
-	urlholder="labor_test_request_printpop.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&user_origin=<?php echo $user_origin ?>&subtarget=<?php echo $subtarget ?>&batch_nr=<?php echo $batch_nr ?>&pn=<?php echo $pn ?>";
+	urlholder="labor_test_request_printpop.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&user_origin=<?php echo $user_origin ?>&target=<?php echo $target ?>&subtarget=<?php echo $subtarget ?>&batch_nr=<?php echo $batch_nr ?>&pn=<?php echo $pn ?>";
 	testprintout<?php echo $sid ?>=window.open(urlholder,"testprintout<?php echo $sid ?>","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
     //testprintout<?php echo $sid ?>.print();
 }
@@ -596,7 +597,7 @@ if($edit  || $read_form){
            <td>
 			<?php
 					//gjergji : new calendar
-					echo $calendar->show_calendar($calendar,$date_format,'mainlog_date',$stored_request['lab_date']);
+					echo $calendar->show_calendar($calendar,$date_format,'lab_date',$stored_request['lab_date']); //#147
 					//end gjergji
 			?>
 		   </td>		   

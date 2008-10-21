@@ -11,7 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-
+//$db->debug=true;
 /* We need to differentiate from where the user is coming: 
 *  $user_origin != lab ;  from patient charts folder
 *  $user_origin == lab ;  from the laboratory
@@ -64,14 +64,10 @@ require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the scr
 $thisfile='labor_test_request_printpop.php';
 
 /* The main background color of the form */
-if($target=='generic')
-{
+if($target=='generic') {
     $bgc1='#bbdbc4';
-}
-else
-{
-    switch($subtarget)
-    {
+} else {
+    switch($subtarget) {
          case 'generic':
 		 	$bgc1='#bbdbc4';
 			break;
@@ -88,10 +84,12 @@ else
 			$formtitle= $LDBloodBank;
 			break;
          case 'chemlabor':
+         	$target_sub = 'chemlabor_sub';
 		 	$bgc1='#fff3f3';
 			$formtitle = $LDChemicalLaboratory;
 			break;
          case 'baclabor':
+         	$target_sub = 'baclabor_sub';
 		 	$formtitle = $LDBacteriologicalLaboratory;
 			$bgc1='#fff3f3';
             /* Load additional language table */
@@ -108,18 +106,16 @@ $read_form=1; /* Set form to read */
 $edit=0; /* Set script mode to no edit*/
 
 //$formtitle=$abtname[$subtarget];
-
-
-if ($target=='generic')
-{
-    $db_request_table=$target;
+if ($target=='generic' || $target=='blood') {
+    $db_request_table = $target;
 	$sql_2="SELECT * FROM care_test_request_".$db_request_table." WHERE batch_nr='".$batch_nr."'";
 	$formfile=$target;
-}
-else
-{
-    $db_request_table=$subtarget;
-	$sql_2="SELECT * FROM care_test_request_".$db_request_table." WHERE batch_nr='".$batch_nr."'";
+} else {
+    $sql_2  = "SELECT * FROM care_test_request_".$subtarget." ";
+	$sql_2 .= "INNER JOIN care_test_request_".$target_sub." ON ";
+	$sql_2 .= "( care_test_request_".$subtarget.".batch_nr = care_test_request_".$target_sub.".batch_nr) ";
+	$sql_2 .= "WHERE care_test_request_".$target_sub.".batch_nr='".$batch_nr."'";
+	//$sql_2="SELECT * FROM care_test_request_".$db_request_table." WHERE batch_nr='".$batch_nr."'";
 	$formfile=$subtarget;
 }
 
@@ -146,6 +142,7 @@ if(isset($pn)&&$pn) {
 		$HTTP_SESSION_VARS['sess_full_en']=$full_en;	
 	}	
 }
+
 /* Here begins the real work */
 /* Load date formatter */
      include_once($root_path.'include/inc_date_format_functions.php');
@@ -156,37 +153,27 @@ if(isset($pn)&&$pn) {
 	 if(!isset($mode))   $mode="";
   
 
-				if($enc_obj->is_loaded) 
-					{
-                           
-		                if($ergebnis=$db->Execute($sql_2))
-       		            {
-				            if($editable_rows=$ergebnis->RecordCount())
-					        {
-							
-     					       $stored_request=$ergebnis->FetchRow();
-							   
-							    if(isset($stored_request['parameters']))
-							   {
-   						          parse_str($stored_request['parameters'],$stored_param);
-                               }
-							   
+				if($enc_obj->is_loaded) {
+		                if($ergebnis=$db->Execute($sql_2)){
+				            if($editable_rows=$ergebnis->RecordCount()){
+					           while ( !$ergebnis->EOF ) {
+								   if(isset($ergebnis->fields['paramater_name'])) {
+	   						       		$stored_param[$ergebnis->fields['paramater_name']] = $ergebnis->fields['parameter_value'];
+	                               }elseif(isset($ergebnis->fields['material'])) {
 							   /* parse the material type */
-							   if(isset($stored_request['material']))
-							   {
-   						          parse_str($stored_request['material'],$stored_material);
-							   }
+	   						       		$stored_param[$ergebnis->fields['material']] = $ergebnis->fields['material'];
+								   }elseif(isset($ergebnis->fields['test_type'])) {
 							   /* parse the test type */
-							   if(isset($stored_request['test_type']))
-							   {
-   						          parse_str($stored_request['test_type'],$stored_test_type);
+	   						       		$stored_param[$ergebnis->fields['test_type']] = $ergebnis->fields['test_type'];
+								   }else{
+								   		$stored_request=$ergebnis->FetchRow();
 							   }
 							   $read_form=1;
 							   $printmode=1;
+								   $ergebnis->MoveNext();
 							}
 			             }
-						else
-					     {
+			             } else {
 						     echo "<p>$sql<p>$LDDbNoRead"; 
 						  }					
 				}
@@ -254,13 +241,12 @@ if($subtarget=='chemlabor' || $subtarget=='baclabor'){
 
     echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'&batch_nr='.$batch_nr.'&child_img=1&subtarget='.$subtarget.'" >';
 
-}elseif($subtarget=='patho'){
+} elseif($subtarget=='patho'){
 
 	$smarty->assign('bgc1',$bgc1);
 	$smarty->assign('printmode',TRUE);
 
 	$read_form=TRUE;
-
 	include($root_path.'include/inc_test_request_printout_'.$formfile.'.php');
 	
 	$smarty->display('forms/pathology.tpl');
@@ -268,6 +254,7 @@ if($subtarget=='chemlabor' || $subtarget=='baclabor'){
 }else{
     include($root_path.'include/inc_test_request_printout_'.$formfile.'.php');
 }
+
 ?>
      	
 

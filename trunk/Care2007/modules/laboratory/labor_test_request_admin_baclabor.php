@@ -11,7 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-
+///$db->debug=true;
 /* Start initializations */
 $lang_tables[] = 'departments.php';
 define('LANG_FILE','konsil.php');
@@ -38,8 +38,10 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_test_request_vars_baclabor.php');
 
 /* Load additional languge table */
-if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php')) include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php');
-  else include_once($root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_baclabor.php');
+if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php')) 
+	include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php');
+else 
+	include_once($root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_baclabor.php');
 
 
 $thisfile="labor_test_request_admin_baclabor.php";
@@ -53,7 +55,7 @@ $edit=0; /* Set script mode to no edit*/
 $formtitle=$LDBacteriologicalLaboratory;
 
 $db_request_table=$subtarget;
-
+$subtarget_sub=$subtarget . '_sub';
 /* Here begins the real work */
 
 /* Get the pending test requests */
@@ -61,7 +63,6 @@ if(!isset($mode) || empty($mode)) {
 		
 	$sql="SELECT batch_nr,encounter_nr,send_date,dept_nr FROM care_test_request_".$db_request_table."
 				WHERE status='pending' ORDER BY  send_date DESC";
-	
 	if($requests=$db->Execute($sql)){
 		/* If request is available, load the date format functions */
 		require_once($root_path.'include/inc_date_format_functions.php');
@@ -103,19 +104,20 @@ if($batchrows && $pn){
 
 		$result=&$enc_obj->encounter;
 
-		$sql="SELECT * FROM care_test_request_".$db_request_table." WHERE batch_nr='".$batch_nr."'";
+		$sql  = "SELECT * FROM care_test_request_".$subtarget." ";
+		$sql .= "INNER JOIN care_test_request_".$subtarget_sub." ON ";
+		$sql .= "( care_test_request_".$subtarget.".batch_nr = care_test_request_".$subtarget_sub.".batch_nr) ";
+		$sql .= "WHERE care_test_request_".$subtarget.".batch_nr='".$batch_nr."'";
 	    
 		if($ergebnis=$db->Execute($sql)){
 			if($editable_rows=$ergebnis->RecordCount()){
-				$stored_request=$ergebnis->FetchRow();
-				 /* parse the material type */
-				if($stored_request['material']!=''){
-					parse_str($stored_request['material'],$stored_material);
+				while ( !$ergebnis->EOF ) {
+					$stored_material[$ergebnis->fields['material']] = $ergebnis->fields['material'];
+					$stored_test_type[$ergebnis->fields['test_type']] = $ergebnis->fields['test_type'];
+					$stored_request=$ergebnis->GetRowAssoc($toUpper=false);
+					$ergebnis->MoveNext();
 				}
-				/* parse the test type */
-				if($stored_request['test_type']!=''){
-					parse_str($stored_request['test_type'],$stored_test_type);
-				}
+
 				$edit_form=1;
 			}
 		}else{
@@ -123,14 +125,21 @@ if($batchrows && $pn){
 		}
 	}
 
-	$sql="SELECT * FROM care_test_findings_".$db_request_table." WHERE batch_nr='".$batch_nr."'";
+    $sql  = "SELECT * FROM care_test_findings_".$db_request_table." ";
+	$sql .= "INNER JOIN care_test_findings_".$db_request_table_sub." ON ";
+	$sql .= "( care_test_findings_".$db_request_table.".batch_nr = care_test_findings_".$db_request_table_sub.".batch_nr) ";
+	$sql .= "WHERE care_test_findings_".$db_request_table.".batch_nr='".$batch_nr."' ";
+		
 	if($ergebnis=$db->Execute($sql)){
 		if($editable_rows=$ergebnis->RecordCount()){
-			$stored_findings=$ergebnis->FetchRow();
-			parse_str($stored_findings['type_general'],$parsed_type);
-			parse_str($stored_findings['resist_anaerob'],$parsed_resist_anaerob);
-			parse_str($stored_findings['resist_aerob'],$parsed_resist_aerob);
-			parse_str($stored_findings['findings'],$parsed_findings);
+			while ( !$ergebnis->EOF ) {
+					$parsed_type[$ergebnis->fields['type_general']] = $ergebnis->fields['type_general'];
+					$parsed_resist_anaerob[$ergebnis->fields['resist_anaerob']] = $ergebnis->fields['resist_anaerob'];
+					$parsed_resist_aerob[$ergebnis->fields['resist_aerob']] = $ergebnis->fields['resist_aerob'];
+					$parsed_findings[$ergebnis->fields['findings']] = $ergebnis->fields['findings'];
+					$stored_findings=$ergebnis->GetRowAssoc($toUpper=false);
+					$ergebnis->MoveNext();
+			}
 
 			if($stored_findings['status']=='done') $edit_findings=0; /* Inhibit editing of the findings */
 
@@ -302,8 +311,6 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 <?php
 
 require($root_path.'include/inc_test_findings_form_baclabor.php');
-
-//require($root_path.'include/inc_test_request_hiddenvars.php');
 
 ?>
 		<!--</form>-->

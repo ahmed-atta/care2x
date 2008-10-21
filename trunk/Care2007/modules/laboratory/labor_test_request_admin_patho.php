@@ -57,16 +57,13 @@ $db_request_table=$subtarget;
 /* Here begins the real work */
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-if($dblink_ok)
-{	
+if($dblink_ok) {	
 
      require_once($root_path.'include/inc_date_format_functions.php');
      
-	   
 	 if(!isset($mode))   $mode='';
 		
-		  switch($mode)
-		  {
+		  switch($mode) {
 		     case 'update':
 							      $sql="UPDATE care_test_request_".$db_request_table." SET 
                                           entry_date='".formatDate2Std($entry_date,$date_format)."',
@@ -191,16 +188,67 @@ if($batchrows) $sTitle = $sTitle." (".$batch_nr.")";
 ?>
 
 <style type="text/css">
-div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
-div.fa2_ml10 {font-family: arial; font-size: 12; margin-left: 10;}
-div.fva2_ml3 {font-family: verdana; font-size: 12; margin-left: 3; }
-div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
-.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10; color:#000099;}
-.fva2b_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10; color:#000000;}
-.fva0_ml10 {font-family: verdana,arial; font-size: 10; margin-left: 10; color:#000099;}
-.fvag_ml10 {font-family: verdana,arial; font-size: 10; margin-left: 10; color:#969696;}
-.lab {font-family: arial; font-size: 9; color:purple;}
-.lmargin {margin-left: 5;}
+div.fva2_ml10 {
+	font-family: verdana, arial;
+	font-size: 12;
+	margin-left: 10;
+}
+
+div.fa2_ml10 {
+	font-family: arial;
+	font-size: 12;
+	margin-left: 10;
+}
+
+div.fva2_ml3 {
+	font-family: verdana;
+	font-size: 12;
+	margin-left: 3;
+}
+
+div.fa2_ml3 {
+	font-family: arial;
+	font-size: 12;
+	margin-left: 3;
+}
+
+.fva2_ml10 {
+	font-family: verdana, arial;
+	font-size: 12;
+	margin-left: 10;
+	color: #000099;
+}
+
+.fva2b_ml10 {
+	font-family: verdana, arial;
+	font-size: 12;
+	margin-left: 10;
+	color: #000000;
+}
+
+.fva0_ml10 {
+	font-family: verdana, arial;
+	font-size: 10;
+	margin-left: 10;
+	color: #000099;
+}
+
+.fvag_ml10 {
+	font-family: verdana, arial;
+	font-size: 10;
+	margin-left: 10;
+	color: #969696;
+}
+
+.lab {
+	font-family: arial;
+	font-size: 9;
+	color: purple;
+}
+
+.lmargin {
+	margin-left: 5;
+}
 </style>
 
 <script language="javascript">
@@ -255,21 +303,24 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 
 		<!--  right frame for the request form -->
 
-		<td >
+		<td>
 
-        <form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
-
-		<!--         Control buttons save, print         -->
-		<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?> title="<?php echo $LDSaveEntry ?>">
-        <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
-
-	   <!--   Control button enter findings   -->
+		<form name="form_test_request" method="post"
+			action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)"><!--         Control buttons save, print         -->
+		<input type="image"
+			<?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?>
+			title="<?php echo $LDSaveEntry ?>"> <a href="javascript:printOut()"><img
+			<?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?>
+			alt="<?php echo $LDPrintOut ?>"></a> <!--   Control button enter findings   -->
 <?php
 if($stored_request['entry_date'] && $stored_request['entry_date'] != DBF_NODATE)	
 {
 ?>	
 		
-        <a href="<?php echo 'labor_test_findings_'.$subtarget.'.php?sid='.$sid.'&lang='.$lang.'&batch_nr='.$batch_nr.'&pn='.$pn.'&entry_date='.$stored_request['entry_date'].'&target='.$target.'&subtarget='.$subtarget.'&user_origin='.$user_origin.'&tracker='.$tracker; ?>"><img <?php echo createLDImgSrc($root_path,'enter_result.gif','0','absmiddle') ?> alt="<?php echo $LDEnterResult ?>"></a>
+        <a
+			href="<?php echo 'labor_test_findings_'.$subtarget.'.php?sid='.$sid.'&lang='.$lang.'&batch_nr='.$batch_nr.'&pn='.$pn.'&entry_date='.$stored_request['entry_date'].'&target='.$target.'&subtarget='.$subtarget.'&user_origin='.$user_origin.'&tracker='.$tracker; ?>"><img
+			<?php echo createLDImgSrc($root_path,'enter_result.gif','0','absmiddle') ?>
+			alt="<?php echo $LDEnterResult ?>"></a>
 <?php
 }
 
@@ -288,14 +339,20 @@ if($stored_request['entry_date'] && $stored_request['entry_date'] != DBF_NODATE)
 	require($root_path.'include/inc_test_request_hiddenvars.php');
 
 ?>	<br>
-		<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?> title="<?php echo $LDSaveEntry ?>"> 
-        <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
+		<input type="image"
+			<?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?>
+			title="<?php echo $LDSaveEntry ?>"> <a href="javascript:printOut()"><img
+			<?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?>
+			alt="<?php echo $LDPrintOut ?>"></a>
 <?php
 if($stored_request['entry_date'] && $stored_request['entry_date'] != DBF_NODATE)
 {
 ?>	
 		
-        <a href="<?php echo 'labor_test_findings_'.$subtarget.'.php?sid='.$sid.'&lang='.$lang.'&batch_nr='.$batch_nr.'&pn='.$pn.'&entry_date='.$stored_request['entry_date'].'&target='.$target.'&subtarget='.$subtarget.'&user_origin='.$user_origin.'&tracker='.$tracker; ?>"><img <?php echo createLDImgSrc($root_path,'enter_result.gif','0','absmiddle') ?> alt="<?php echo $LDEnterResult ?>"></a>
+        <a
+			href="<?php echo 'labor_test_findings_'.$subtarget.'.php?sid='.$sid.'&lang='.$lang.'&batch_nr='.$batch_nr.'&pn='.$pn.'&entry_date='.$stored_request['entry_date'].'&target='.$target.'&subtarget='.$subtarget.'&user_origin='.$user_origin.'&tracker='.$tracker; ?>"><img
+			<?php echo createLDImgSrc($root_path,'enter_result.gif','0','absmiddle') ?>
+			alt="<?php echo $LDEnterResult ?>"></a>
 <?php
 }
 ?>
@@ -309,9 +366,11 @@ if($stored_request['entry_date'] && $stored_request['entry_date'] != DBF_NODATE)
 else
 {
 ?>
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><font size=3 face="verdana,arial" color="#990000"><b><?php echo $LDNoPendingRequest ?></b></font>
-<p>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?>
+	align="absmiddle">
+<font size=3 face="verdana,arial" color="#990000"><b><?php echo $LDNoPendingRequest ?></b></font>
+<p><a href="<?php echo $breakfile ?>"><img
+	<?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
 <?php
 }
 

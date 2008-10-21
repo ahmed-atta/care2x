@@ -135,36 +135,42 @@ function checkForm(v) {
 
 <BODY onLoad="document.sform.keyword.select()">
 
-<img <?php echo createComIcon($root_path,'micros.gif','0','absmiddle') ?>><FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5> <b><?php echo "$LDMedLab - "; if($editmode) echo "$LDNewData"; else echo "$LDSeeData"; ?></b></font>
+<img
+	<?php echo createComIcon($root_path,'micros.gif','0','absmiddle') ?>>
+<FONT COLOR="<?php echo $cfg[top_txtcolor] ?>" SIZE=5> <b><?php echo "$LDMedLab - "; if($editmode) echo "$LDNewData"; else echo "$LDSeeData"; ?></b></font>
 <table width=100% border=0 cellpadding="0" cellspacing="0">
-<tr>
-<td colspan=3><img <?php echo createLDImgSrc($root_path,'such-b.gif') ?>></td>
-</tr>
-<tr >
-<td bgcolor=#333399 colspan=3>
-&nbsp;
-</td>
-</tr>
-<tr bgcolor="#DDE1EC" >
-<td bgcolor=#333399>&nbsp;</td>
-<td valign=top><p><br>
-<ul>
+	<tr>
+		<td colspan=3><img
+			<?php echo createLDImgSrc($root_path,'such-b.gif') ?>></td>
+	</tr>
+	<tr>
+		<td bgcolor=#333399 colspan=3>&nbsp;</td>
+	</tr>
+	<tr bgcolor="#DDE1EC">
+		<td bgcolor=#333399>&nbsp;</td>
+		<td valign=top>
+		<p><br>
+		
+		
+		<ul>
 
-<!-- This is the search entry mask -->
+			<!-- This is the search entry mask -->
 
-<FORM action="<?php echo $thisfile; ?>" method="post" name="sform" onSubmit="return checkForm(sform.keyword)">
-
-<B><?php echo $LDSearchWordPrompt ?></B></font><p>
-<font size=3>
-<INPUT type="text" name="keyword" size="20" maxlength="40" value="<?php echo $keyword ?>"></font>
-<input type=hidden name="search" value=1>
-<input type=hidden name="sid" value=<?php echo $sid ?>>
-<input type=hidden name="lang" value=<?php echo $lang ?>>
-<input type=hidden name="editmode" value=<?php echo $editmode ?>>
-<INPUT type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="javascript:gethelp('lab.php','search','<?php echo $mode ?>','<?php echo $linecount ?>','<?php echo $datafound ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>></a>
-</FORM>
-<p>
+			<FORM action="<?php echo $thisfile; ?>" method="post" name="sform"
+				onSubmit="return checkForm(sform.keyword)"><B><?php echo $LDSearchWordPrompt ?></B></font>
+			<p><font size=3> <INPUT type="text" name="keyword" size="20"
+				maxlength="40" value="<?php echo $keyword ?>"></font> <input
+				type=hidden name="search" value=1> <input type=hidden name="sid"
+				value=<?php echo $sid ?>> <input type=hidden name="lang"
+				value=<?php echo $lang ?>> <input type=hidden name="editmode"
+				value=<?php echo $editmode ?>> <INPUT type="image"
+				<?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a
+				href="javascript:gethelp('lab.php','search','<?php echo $mode ?>','<?php echo $linecount ?>','<?php echo $datafound ?>')"><img
+				<?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>></a>
+			
+			</FORM>
+			<p>
 <?php 
 
 $prev_nr=0;
@@ -188,12 +194,15 @@ if($linecount){
 
 	# Create the column descriptors 
 ?>	
+	
+			
+			
 	<table border=0 cellpadding=3 cellspacing=1> 
 	<tr class="wardlisttitlerow">
 
      <td><b>
 	  <?php echo $pagen->makeSortLink($LDCaseNr,'encounter_nr',$oitem,$odir,$append);  ?></b></td>
-      <td ><b>
+					<td><b>
 	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
       <td><b>
 	  <?php echo $pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$append);  ?></b></td>
@@ -201,7 +210,9 @@ if($linecount){
 	  <?php echo $pagen->makeSortLink($LDName,'name_first',$oitem,$odir,$append);  ?></b></td>
       <td><b>
 	  <?php echo $pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$append);  ?></b></td>
-    	<td background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>" align=center><font face=arial size=2 color="#ffffff"><b><?php echo $LDSelect; ?></td>
+					<td
+						background="<?php echo createBgSkin($root_path,'tableHeaderbg.gif'); ?>"
+						align=center><font face=arial size=2 color="#ffffff"><b><?php echo $LDSelect; ?></td>
 	</tr>
 
 <?php
@@ -291,31 +302,36 @@ if($linecount){
 }
 
 ?>
-<p>
-<br>&nbsp;
-<p>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+<p><br>
+				&nbsp;
+				
+				
+				<p><a href="<?php echo $breakfile ?>"><img
+					<?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
 
-<p>
 
-</ul>
-&nbsp;
-</FONT>
-<p>
-</td>
-<td bgcolor=#333399>&nbsp;</td>
-</tr>
-<tr >
-<td bgcolor="#333399" colspan=3><font size=1>
-&nbsp; 
-</td>
-</tr>
+				<p>
+				
+				
+				</ul>
+				&nbsp;
+				</FONT>
+				<p>
+				
+				
+				</td>
+				<td bgcolor=#333399>&nbsp;</td>
+				</tr>
+				<tr>
+					<td bgcolor="#333399" colspan=3><font size=1> &nbsp; </td>
+				</tr>
 
-</table>        
-<p>
+			</table>
+			<p>
 <?php
 require($root_path.'include/inc_load_copyrite.php');
 ?>
 </FONT>
+
 </BODY>
 </HTML>

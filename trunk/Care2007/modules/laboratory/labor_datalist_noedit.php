@@ -3,6 +3,7 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+//$db->debug = true;
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
@@ -96,7 +97,7 @@ if(!$encounter_nr) header("location:".$root_path."modules/laboratory/labor_data_
 
 $thisfile=basename(__FILE__);
 
-//$db->debug=1;
+///$db->debug=1;
 
 /* Create encounter object */
 require_once($root_path.'include/care_api_classes/class_lab.php');
@@ -130,9 +131,9 @@ if($encounter=&$enc_obj->getBasic4Data($encounter_nr)) {
 			$records=array();
 			$dt=array();
 			while($buffer=&$recs->FetchRow()){
-				//$records[$buffer['job_id']]=&$buffer;
 				# Prepare the values
-				$records[$buffer['job_id']]=&unserialize($buffer['serial_value']);
+				$tmp = array($buffer['paramater_name'] => $buffer['parameter_value']);
+				$records[$buffer['job_id']][] = $tmp;
 				$tdate[$buffer['job_id']]=&$buffer['test_date'];
 				$ttime[$buffer['job_id']]=&$buffer['test_time'];				
 			}
@@ -233,7 +234,7 @@ function prep2submit(){
 	if(d.params.value!=''){
 		d.submit();
 	}else{
-		alert("<?php echo $LDCheckParamFirst ?>");
+		alert('<?php echo $LDCheckParamFirst ?>');
 	}
 }
 
@@ -264,7 +265,8 @@ function wichOne(nr) {
 	
 function openReport() {
 	enc = <?php echo $encounter_nr ?>;
-	urlholder="<?php echo $root_path ?>modules/pdfmaker/laboratory/report_all.php<?php echo URL_REDIRECT_APPEND; ?>&encounter_nr="+enc+"&skipme="+skipme;
+	userId = '<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>';
+	urlholder="<?php echo $root_path ?>modules/pdfmaker/laboratory/report_all.php<?php echo URL_REDIRECT_APPEND; ?>&encounter_nr="+enc+"&skipme="+skipme+"&userId="+userId;
 	window.open(urlholder,'<?php echo $LDOpenReport; ?>',"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
 }
 //  Script End -->
@@ -344,9 +346,11 @@ reset($records);
 $jIDArray = array();
 while (list($job_id,$paramgroupvalue)=each($records)) {
 		$jIDArray[] = $job_id;
-		while(list($paramgroup,$paramvalue)=each($paramgroupvalue)) {
+		foreach($paramgroupvalue as $paramgroup_a => $paramvalue_a) {
+			foreach($paramvalue_a as $paramgroup => $paramvalue) {
 			$ext = substr(stristr($paramgroup, '__'), 2);
 			$requestData[$ext][$paramgroup][$job_id] = $paramvalue;
+			}
 		}
 }	
 

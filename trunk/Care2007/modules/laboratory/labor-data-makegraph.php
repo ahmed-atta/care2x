@@ -122,7 +122,8 @@ if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
 		$records=array();
 		$dt=array();
 		while($buffer=$recs->FetchRow()){
-			$records[$buffer['job_id']]=unserialize($buffer['serial_value']);
+			$tmp = array($buffer['paramater_name'] => $buffer['parameter_value']);
+			$records[$buffer['job_id']][] = $tmp;
 			$tdate[$buffer['job_id']]=&$buffer['test_date'];
 			$ttime[$buffer['job_id']]=&$buffer['test_time'];
 		}
@@ -244,9 +245,11 @@ reset($records);
 $jIDArray = array();
 while (list($job_id,$paramgroupvalue)=each($records)) {
 		$jIDArray[] = $job_id;
-		while(list($paramgroup,$paramvalue)=each($paramgroupvalue)) {
+		foreach($paramgroupvalue as $paramgroup_a => $paramvalue_a) {
+			foreach($paramvalue_a as $paramgroup => $paramvalue) {
 			$ext = substr(stristr($paramgroup, '__'), 2);
 			$requestData[$ext][$paramgroup][$job_id] = $paramvalue;
+			}
 		}
 }
 
