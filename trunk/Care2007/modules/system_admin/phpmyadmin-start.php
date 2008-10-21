@@ -15,7 +15,8 @@ $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 switch($dbtype){
-	case 'mysql':
+	case 'mysqli':	
+	case 'mysql' :
 		$sPrompt = $LDMySQLManage;
 		$sAction = $root_path.'modules/phpmyadmin/index.php';
 		break;

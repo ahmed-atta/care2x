@@ -143,6 +143,19 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			}
 		}
 
+    	//gjergji - hide patient info of other departements
+/*    	if(isset($HTTP_SESSION_VARS['department_nr']) && $HTTP_SESSION_VARS['department_nr'] != '' ) {
+    		$cond.=" AND ( ";
+    		while (list($key, $val) = each($HTTP_SESSION_VARS['department_nr'])) {
+    			$tmp .= "enc.current_dept_nr = " . $val . " OR ";
+    
+    		}
+    		$cond .= substr($tmp,0,-4) ;
+    		$cond .= " ) "	;
+    	}
+		$sql2 .= $cond;*/
+		//end : gjergji	
+			
 			$sql2.=" AND enc.pid=reg.pid
 					  AND enc.encounter_status <> 'cancelled'
 					  AND enc.is_discharged=0
@@ -176,7 +189,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 						$pagen->setTotalDataCount($totalcount);
 					}else{
 						# Count total available data
-						if($dbtype=='mysql'){
+						if($dbtype=='mysql' || $dbtype=='mysqli'){
 							$sql='SELECT COUNT(enc.encounter_nr) AS "count" '.$dbtable.$sql2;
 						}else{
 							$sql='SELECT * '.$dbtable.$sql2;
@@ -184,7 +197,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 
 						if($result=$db->Execute($sql)){
 							if ($totalcount=$result->RecordCount()) {
-								if($dbtype=='mysql'){
+								if($dbtype=='mysql' || $dbtype=='mysqli'){
 									$rescount=$result->FetchRow();
     									$totalcount=$rescount['count'];
 								}

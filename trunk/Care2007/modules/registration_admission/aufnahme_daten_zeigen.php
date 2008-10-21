@@ -48,7 +48,7 @@ $photo_filename='nopic';
 
 $dbtable='care_encounter';
 
-//$db->debug=1;
+///$db->debug=1;
 
 /*		$sql='SELECT * FROM '.$dbtable.' AS enc LEFT JOIN care_person AS reg ON reg.pid = enc.pid
 		         WHERE enc.encounter_nr="'.$encounter_nr.'"';
@@ -113,9 +113,7 @@ $dbtable='care_encounter';
 		         sex,addr_str,addr_str_nr,addr_zip,addr_citytown_nr,photo_filename';
 			
 		$person_obj->setPID($pid);
-		if($row=&$person_obj->getValueByList($list))
-		{
-			//while(list($x,$v)=each($row))	$$x=$v;
+		if($row=&$person_obj->getValueByList($list)) {
 			extract($row);      
 		}      
 
@@ -236,7 +234,6 @@ if(file_exists($root_path.'cache/barcodes/en_'.$encounter_nr.'.png')) {
 	$smarty->assign('sHiddenBarcode',"<img src='".$root_path."classes/barcode/image.php?code=".$encounter_nr."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>");
 	$smarty->assign('sEncBarcode',"<img src='".$root_path."classes/barcode/image.php?code=".$encounter_nr."&style=68&type=I25&width=180&height=40&xres=2&font=5' border=0>");
 }
-
 $smarty->assign('img_source',"<img $img_source>");
 
 $smarty->assign('LDAdmitDate',$LDAdmitDate);
@@ -303,12 +300,25 @@ $smarty->assign('addr_str_nr',$addr_str_nr);
 $smarty->assign('addr_zip',$addr_zip);
 $smarty->assign('addr_citytown',$addr_citytown_name);
 
+//start gjergji
+//simple admission type, how the patietnt came in
+$enc_type = $encounter_obj->getEncounterType();
+while( $typeResults = $enc_type->FetchRow()) {
+	if($typeResults['type_nr'] == $admit_type )$sTemp = $typeResults['name'] ; 
+}
 
-# Salvo Rossitto 28/11/2007
-$smarty->assign('LDSSSNr',$LDSSSNr);
-$smarty->assign('sss_nr',$sss_nr);
-###
+$smarty->assign('LDAdmitShowTypeInput',$LDAdmitShowTypeInput);
+$smarty->assign('sAdmitShowTypeInput',$sTemp);
 
+//start simple triage
+if($triage == 'white') { $smarty->assign('sAdmitTriageWhite',$sAdmitTriageWhite); }
+elseif($triage == 'green') { $smarty->assign('sAdmitTriageGreen',$sAdmitTriageGreen); }
+elseif ($triage == 'yellow') { $smarty->assign('sAdmitTriageYellow',$sAdmitTriageYellow); }
+elseif ($triage == 'red') { $smarty->assign('sAdmitTriageRed',$sAdmitTriageRed); }
+$smarty->assign('LDShowTriageData','-');
+
+//end simple triage
+//end : gjergji
 
 $smarty->assign('LDAdmitClass',$LDAdmitClass);
 
@@ -363,11 +373,6 @@ if(isset($insurance_nr)&&$insurance_nr) $smarty->assign('insurance_nr',$insuranc
 
 $smarty->assign('LDInsuranceCo',$LDInsuranceCo);
 $smarty->assign('insurance_firm_name',$insurance_firm_name);
-
-# SalvoR 28/11/07
-$smarty->assign('LDRegionalCode',$LDRegionalCode);
-$smarty->assign('regional_code',$regional_code);
-##
 
 $smarty->assign('LDFrom',$LDFrom);
 $smarty->assign('LDTo',$LDTo);

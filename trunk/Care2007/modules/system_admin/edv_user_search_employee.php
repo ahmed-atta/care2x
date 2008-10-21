@@ -41,13 +41,16 @@ if(($mode=='search')and($searchkey)){
 		$suchbuffer=$suchwort;
 	}
 			
-	$sql="SELECT ps.nr, ps.is_discharged, p.name_last, p.name_first, p.date_birth,u.login_id
+/*	$sql="SELECT ps.nr, ps.is_discharged, p.name_last, p.name_first, p.date_birth,u.login_id
 		          FROM care_person as p, care_personell as ps
 				  	LEFT JOIN care_users AS u ON u.personell_nr=ps.nr ";
 	if($numeric) $sql.="WHERE ps.nr $sql_LIKE '%".$suchbuffer."'";
 		else $sql.= "WHERE (p.name_last $sql_LIKE '".addslashes($suchwort)."%'
 		              OR p.name_first LIKE '".addslashes($suchwort)."%') ";
-	$sql.=" AND ps.is_discharged IN ('',0) AND ps.pid=p.pid ORDER BY p.name_last ";
+	$sql.=" AND ps.is_discharged IN ('',0) AND ps.pid=p.pid ORDER BY p.name_last ";*/
+	//gjergji
+	//changed to search only the users table
+	$sql = "SELECT u.* FROM care_users AS u WHERE u.name LIKE '".addslashes($suchwort)."%' OR u.name LIKE '%".addslashes($suchwort)."' ORDER BY u.name ";
 
 	if($ergebnis=$db->Execute($sql)){
 			
@@ -141,8 +144,10 @@ if($mode=='search'){
 		<td><b><?php echo $LDStatus; ?></b></td>
 		<td><b><?php echo $LDPersonellNr; ?></b></td>
 		<td><b><?php echo $LDLastName; ?></td>
-		<td><b><?php echo $LDFirstName; ?></td>
-		<td><b><?php echo $LDBday; ?></td>
+		<!--//gjergji
+		//changed to search only the users table-->
+		<!--<td><b><?php echo $LDFirstName; ?></td>-->
+		<!--<td><b><?php echo $LDBday; ?></td>-->
 		<td><b><?php echo $LDOptions; ?></td>
 		</tr>
 
@@ -162,22 +167,24 @@ if($mode=='search'){
 			}else{
 				$mode='';
 				$alt=$LDCreate;
-				$append='&is_employee=1&personell_nr='.$zeile['nr'].'&username='.strtr(($zeile['name_first'].' '.$zeile['name_last']),' ','+').'&userid='.strtr($zeile['name_last'],' ','_');
+				$append='&is_employee=1&personell_nr='.$zeile['nr'].'&username='.strtr(($zeile['name'].' '.$zeile['name_last']),' ','+').'&userid='.strtr($zeile['name_last'],' ','_');
 			}
 			echo "</td>";
 
 			echo"<td>";
-			echo '&nbsp;'.($zeile['nr']+$GLOBAL_CONFIG['personell_nr_adder']);
+			echo '&nbsp;'.($zeile['nr']+$GLOBAL_CONFIG['personell_nr']);
 			echo "</td>";
 			echo"<td>";
-			echo "&nbsp;".ucfirst($zeile['name_last']);
+			echo "&nbsp;".ucfirst($zeile['name']);
 			echo "</td>";
-			echo"<td>";
+//gjergji
+//changed to search only the users table			
+/*			echo"<td>";
 			echo "&nbsp;".ucfirst($zeile['name_first']);
-			echo "</td>";
-			echo"<td>";
+			echo "</td>";*/
+/*			echo"<td>";
 			echo "&nbsp;".@formatDate2Local($zeile['date_birth'],$date_format);
-			echo "</td>";
+			echo "</td>";*/
 
 			echo '
 				<td>&nbsp;

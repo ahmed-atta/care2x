@@ -3,13 +3,13 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
-* GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
-*
-* See the file "copy_notice.txt" for the licence notice
-*/
+ * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
+ * GNU General Public License
+ * Copyright 2002,2003,2004,2005 Elpidio Latorilla
+ * elpidio@care2x.org,
+ *
+ * See the file "copy_notice.txt" for the licence notice
+ */
 
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
 # In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
@@ -163,6 +163,19 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 			}
 		}
 	
+		//gjergji - hide patient info of other departements
+		if(isset($HTTP_SESSION_VARS['department_nr']) && $HTTP_SESSION_VARS['department_nr'] != '0' ) {
+			$cond.=" AND ( ";
+			while (list($key, $val) = each($HTTP_SESSION_VARS['department_nr'])) {
+				$tmp .= "e.current_dept_nr = " . $val . " OR ";
+
+			}
+			$cond .= substr($tmp,0,-4) ;
+			$cond .= " ) "	;
+		}
+		$where .= $cond;
+		//end : gjergji
+
 		$sql="$select$from WHERE $where AND e.encounter_status <> 'cancelled' AND e.status NOT IN ('void','inactive','hidden','deleted') ORDER by ";
 		$HTTP_SESSION_VARS['sess_searchkey']=$sql;
 	

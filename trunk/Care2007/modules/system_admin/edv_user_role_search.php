@@ -168,7 +168,10 @@ function gethelp(x,s,x1,x2,x3)
 </table>        
 <br>
 
-
+<FORM  method=get action="<?php echo $breakfile;?>" >
+<input type="hidden" name="sid" value="<?php echo $sid;?>">
+<input type="hidden" name="lang" value="<?php echo $lang;?>">
+<INPUT type="submit"  value="<?php echo $LDCancel ?>"></FORM>
 <p>
 
 

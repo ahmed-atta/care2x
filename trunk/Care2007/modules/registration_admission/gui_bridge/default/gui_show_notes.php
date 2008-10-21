@@ -21,9 +21,9 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfilen = $root_path."main/sta
 	else $breakfile = $breakfile.URL_APPEND."&target=entry";
 
 # Start Smarty templating here
-
-# LOAD Smarty
-
+ /**
+ * LOAD Smarty
+ */
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
 
@@ -362,7 +362,7 @@ if($parent_admit&&(!$is_discharged||$type_nr==3||$type_nr==99)) {
 ob_start();
 
 ?>
-		<!- Column for the options table -->
+		<!-- Column for the options table -->
 		<!-- Load the options table  -->
 			
 			<div class="vi_data">
@@ -379,6 +379,18 @@ ob_start();
 					<TD>
 						<TABLE cellSpacing=1 cellPadding=2 border=0>
 						<TBODY class="submenu" >
+<tr>
+	<td><img <?php echo createComIcon($root_path,'comments.gif','0'); ?>></td>
+	<td vAlign=top>
+		<a href="javascript:yellow(<?php echo $HTTP_SESSION_VARS['sess_en'] ?>)"><?php echo $LDYellowPaper ?></a>
+	</td>
+</tr>
+<tr>			
+	<td><img <?php echo createComIcon($root_path,'comments.gif','0'); ?>></td>
+	<td vAlign=top>
+		<a href="javascript:target(<?php echo $HTTP_SESSION_VARS['sess_en'] ?>)"><?php echo $LDTarget ?></a>
+	</td>
+</tr>						
 <?php
 						while(list($x,$v)=each($types)){
 ?>

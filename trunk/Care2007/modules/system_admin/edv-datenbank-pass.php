@@ -47,8 +47,8 @@ if ($versand=="Abschicken")
 										if (validarea($allowedarea,$zeile,mysql_num_fields($ergebnis)))
 										{				
 										setcookie(ck_edv_db_user,$zeile[mahopass_name]);	
-										$logs->writeline(date('Y-m-d').'/'.date('H:i'),$REMOTE_ADDR,'EDV DB verwalten Access OK',$zeile[mahopass_name],'','',$thisfile,$fileforward,0);
-										//Slogentry($zeile[mahopass_name],"*","IP:".$REMOTE_ADDR."EDV DB verwalten Access OK'd",$thisfile,$fileforward);
+										$logs->writeline(date('Y-m-d').'/'.date('H:i'),,$REMOTE_ADDR,'EDV DB verwalten Access OK',$zeile[mahopass_name],'','',$thisfile,$fileforward,0);
+										//logentry($zeile[mahopass_name],"*","IP:".$REMOTE_ADDR."EDV DB verwalten Access OK'd",$thisfile,$fileforward);
 										header("Location: $fileforward?sid=$$ck_sid_buffer");
 										exit;
 										}else {$passtag=2;};
@@ -135,7 +135,7 @@ default:$errbuf=$errbuf."Zugang gesperrt"; echo '<img src=../img/warn.gif align=
 }
 
 
-logentry($userid,$keyword,$errbuf,$thisfile,$fileforward);
+//logentry($userid,$keyword,$errbuf,$thisfile,$fileforward);
 
 
 echo '</STRONG></FONT><P>';

@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -13,6 +13,9 @@ require($root_path.'include/inc_environment_global.php');
 $lang_tables[] = 'access.php';
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
+
+
+///$db->debug=true;
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 /**
@@ -29,12 +32,25 @@ $HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 /* Load the date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');
 
-$sql='SELECT * FROM care_users ORDER BY login_id';
+//$sql='SELECT * FROM care_users ORDER BY user_role';
+$sql='SELECT *
+FROM
+  care_users
+  INNER JOIN care_user_roles ON (care_users.user_role = care_user_roles.id)
+ORDER BY
+  user_role,
+  dept_nr,
+  login_id';
 
 if($ergebnis=$db->Execute($sql)) {
-
 	$rows=$ergebnis->RecordCount();
 }
+require_once($root_path.'include/care_api_classes/class_access.php');
+$role = & new Access();
+
+require_once($root_path.'include/care_api_classes/class_department.php');
+$dept=new Department;
+$depts=&$dept->getAllActive();
 
 # Start Smarty templating here
  /**
@@ -63,9 +79,15 @@ if($ergebnis=$db->Execute($sql)) {
 
  # Buffer page output
 
- ob_start();
+ob_start();
+?>
+<script type="text/javascript" src="../../js/scriptaculous/lib/prototype.js"></script>
+<script type="text/javascript" src="../../js/scriptaculous/src/effects.js"></script>
+<script type="text/javascript" src="../../js/scriptaculous/src/controls.js"></script>
+<script type="text/javascript" src="../../js/scriptaculous/src/builder.js"></script>
+<?php
 
-if ($remark=='itemdelete') echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'><FONT class="warnprompt"> '.$LDAccessDeleted.'<br>'.$LDFfActualAccess.' </font><p>';
+if ($remark=='itemdelete') echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'><font class="warnprompt"> '.$LDAccessDeleted.'<br>'.$LDFfActualAccess.' </font><p>';
 
         echo '
 				<table border=0 class="frame" cellpadding=0 cellspacing=0>
@@ -75,29 +97,46 @@ if ($remark=='itemdelete') echo '<img '.createMascot($root_path,'mascot1_r.gif',
         echo '
 					<tr class="submenu">';
 		echo "
-					<td colspan=8><FONT color=\"#800000\"><b>$LDActualAccess</b></td>";
+					<td colspan=8><font color=\"#800000\"><b>$LDActualAccess</b></font></td>";
         echo "
 					</tr>"; 
-        echo '
-					<tr class="wardlisttitlerow">';
+        $sRow = '<tr class="wardlisttitlerow">';
 		for($i=0;$i<sizeof($LDAccessIndex);$i++)
-			echo "
-			<td><b>".$LDAccessIndex[$i]."</b></td>";
-            echo "</tr>"; 
-
+			$sRow .= "<td><b>".$LDAccessIndex[$i]."</b></td>"; 
 		/* Load common icons */	
 		$img_padlock=createComIcon($root_path,'padlock.gif','0');
 		$img_arrow=createComIcon($root_path,'arrow-gr.gif','0');
-			
-		while ($zeile=$ergebnis->FetchRow())
-		{  
+			$old_role = '';
+			while ($zeile=$ergebnis->FetchRow()) {  
+				if($zeile['user_role'] != $old_role) {
+					$role->roleExists($zeile['user_role']);
+					echo '</table> </div></td></tr>';
+					echo '<tr class="wardlistrow2"><td colspan=8><span style="cursor:pointer;font-weight:bold;float: left;" onClick="new Effect.toggle(\''.$zeile['user_role'].'\', \'blind\' );" /><font face=verdana,arial size=2 color=maroon>-> '.$role->role['role_name'].'</font></span><br>';
+					echo '<div id="'.$zeile['user_role'].'" style="display:none;"><table>';
+				}
+				echo $sRow;
 			if($zeile['exc']) continue;
 			 echo "
 						<tr class=\"wardlistrow1\">\n";
 			echo "
 						<td>".$zeile['name']."</td>\n
 						<td>".$zeile['login_id']."</td>\n
-						<td>*****</td><td>\n";
+							<td>";
+				
+				//gjergji .. new dept management
+				$userDept = unserialize($zeile['dept_nr']);
+				$sTemp = '';
+				reset($depts);
+        		if($depts&&is_array($depts)) {
+        			while(list($x,$v)=each($depts)) { 
+            			 if(in_array($v['nr'],$userDept)) {
+                			 if(isset($$v['LD_var'])&&$$v['LD_var'])  { $sTemp = $sTemp . '<b>' . $$v['LD_var'] . '</b><br>'; }
+                				 else  { $sTemp = $sTemp . '<b>' . $v['name_formal'] . '</b><br>'; }
+            			 }
+            	 	 }
+        		}	
+        		//gjergji : end new dept management		 
+				echo $sTemp . "</td>\n<td>\n";
 			if ($zeile['lockflag'])
 				   echo '
 				   		<img '.$img_padlock.'>'; else echo '<img '.$img_arrow.'>';
@@ -122,7 +161,11 @@ if ($remark=='itemdelete') echo '<img '.createMascot($root_path,'mascot1_r.gif',
 			echo "</a> \n
 			<a href=edv_user_access_delete.php?sid=$sid&lang=$lang&itemname=".str_replace(' ','+',$zeile['login_id'])." title=\"$LDDelete\">	$LDInitDelete</a> </td>";
 			echo "</tr>";
-        };
+				if($zeile['user_role'] != $old_role) {
+					$old_role = $zeile['user_role'];
+					//echo '</table> </div></td></tr>';
+				}
+			}
         echo "
 					</table>
 				</td>

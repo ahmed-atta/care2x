@@ -93,9 +93,9 @@ if ($mode != '') {
 		}*/
 		/* If permission area is available, save it */
 		if ($selected_role != '') {
-			///$db->debug=true;			if ($mode == 'save') {
-				$sql = "INSERT INTO care_users
-						(
+			///$db->debug=true;
+			if ($mode == 'save') {
+				$sql = "INSERT INTO care_users (
 						   name,
 						   login_id,
 						   password,
@@ -109,9 +109,7 @@ if ($mode != '') {
 						   modify_id,
 						   create_id,
 						   create_time
-						 )
-						 VALUES
-						 (
+						 ) VALUES (
 						   '" . addslashes ( $username ) . "',
 						   '" . addslashes ( $userid ) . "',
 						   '" . md5 ( $pass ) . "',
@@ -291,12 +289,12 @@ if ($edit) {
 	echo '<input type="hidden" name="username" value="' . $user [ 'name' ] . '">' . '<b>' . $user [ 'name' ] . '</b>' ;
 } elseif (isset ( $is_employee ) && $is_employee) {
 	?>  
-<input name="username" type="hidden"
-<?php
+    <input name="username" type="hidden"
+    <?php
 	if ($username != "")
-		echo ' value="' . $username . '"><br><b>' . $username . '</b>' ; else
+    		echo ' value="' . $username . '"><br><b>' . $username . '</b>' ; 
+    	else
 		echo '>' ;
-
 } else {
 	?>
 	<input name="username" type="text" <?php if ($username != "")  echo ' value="' . $username . '"' ; ?>>
@@ -368,11 +366,21 @@ if ($edit)
 <?php 
 while(list($x,$dept)=each($deptarray)){
 	$actualDept = unserialize($user['dept_nr']);
+	$subDepts = $dept_obj->getAllSubDepts($dept['nr']);
 ?>
    	<input type="checkbox" name="dept_nr[]" id="<?php echo $dept['nr'] ?>" value="<?php echo $dept['nr']?>" <?php if( in_array($dept['nr'],$actualDept)) echo 'checked' ?>>
  <?php 
 		if(isset($$dept['LD_var'])&&!empty($$dept['LD_var'])) echo $$dept['LD_var'] . '<br>';
 				else echo $dept['name_formal'] . '<br>';
+		if($subDepts) {
+			while (list($y,$sDept) = each($subDepts)) {
+    			?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sup>L</sup>&nbsp; 
+    			<input type="checkbox" name="dept_nr[]" id="<?php echo $sDept['nr'] ?>" value="<?php echo $sDept['nr']?>" <?php if( in_array($sDept['nr'],$actualDept)) echo 'checked' ?>>
+        		<?php 
+        			if(isset($$sDept['LD_var'])&&!empty($$sDept['LD_var'])) echo $$sDept['LD_var'] . '<br>';
+        			else echo $sDept['name_formal'] . '<br>';
+			}
+		}
 }
 ?>
 </td>

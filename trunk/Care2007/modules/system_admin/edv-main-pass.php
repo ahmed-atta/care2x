@@ -21,11 +21,11 @@ $breakfile='edv.php?sid='.$sid.'&lang='.$lang;
 
 switch($target)
 {
-	case 'sqldb':		 $title=$LDSqlDb;
+/*	case 'sqldb':		 $title=$LDSqlDb;
 								//$userck="ck_edv_mysql_user";
 								$fileforward='phpmyadmin-start.php?lang='.$lang.'&sid='.$sid;
 								//$fileforward="../start.php";
-								break;
+								break;*/
 	case 'adminlogin':	$title=$LDSystemLogin;
 								//$userck='ck_edv_admin_user';
 								$fileforward='edv_system_admin_mframe.php?lang='.$lang.'&sid='.$sid;

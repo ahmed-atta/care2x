@@ -19,7 +19,8 @@ $breakfile='edv.php'.URL_APPEND;
 
 # Set the db manager app here
 switch($dbtype){
-	case 'mysql': $strDbAdminItem = $LDPhpMyAdmin;
+	case 'mysqli':
+	case 'mysql' : $strDbAdminItem = $LDPhpMyAdmin;
 							$strDbAdminUrl='phpmyadmin';
 							break;
 	case 'postgres':
@@ -172,7 +173,17 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	<FONT  color="#0000cc" FACE="verdana,arial" size=2>
 	&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <a href="<?php echo $root_path; ?>modules/system_admin/access.php<?php echo URL_APPEND; ?>" target="SYSADMIN_WFRAME">Logs Administration</a><br>
 	</td>
-  
+  </tr>  
+<tr>
+	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDDatabase ?></b> </FONT></td>
+  </tr>
+  <tr>
+ 	<td bgcolor="#ffffff"><FONT  color="#0000cc" FACE="verdana,arial" size=2>&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> 
+	<a href="../<?php echo $strDbAdminUrl ?>/index.php?sid=<?php echo $sid."&lang=$lang" ?>" target="SYSADMIN_WFRAME"><?php  echo $strDbAdminItem ?>
+	</a></FONT></td>
+<!--  	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><a href="phpmyadmin-start.php?sid=<?php echo $sid."&lang=$lang" ?>"><?php echo $LDMySQLManage ?></a></b> </FONT></td>
+ -->  
+  </tr>
   
 <!--  
   <tr>
