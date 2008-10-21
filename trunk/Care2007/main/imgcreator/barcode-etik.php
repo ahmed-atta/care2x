@@ -24,7 +24,7 @@ header ('Content-type: image/png');
 require_once($root_path.'include/inc_ttf_check.php');
 
 # Check the encounter number
-if((!isset($en)||!$en)&&$HTTP_SESSION_VARS['sess_en']) $en=$HTTP_SESSION_VARS['sess_en'];
+if((!isset($en)||!$en)&&$_SESSION['sess_en']) $en=$_SESSION['sess_en'];
 
 /*
 if(file_exists("../cache/barcodes/pn_".$pn."_bclabel_".$lang.".png"))

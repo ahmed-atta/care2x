@@ -132,8 +132,8 @@ require($root_path.'include/inc_resolve_opr_dept.php');
 										'e=$encoder&a=$a_enc&r=$r_enc&d=".date('Y-m-d')."&t=".date('H:i:s')."',
 										'pending',
 										'Created: ".$history_txt."',
-										'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
-										'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+										'".$_COOKIE[$local_user.$sid]."',
+										'".$_COOKIE[$local_user.$sid]."',
 										NULL
 									)";
 
@@ -508,7 +508,7 @@ echo '">
 <table cellpadding="0" cellspacing=5 >
 	<tr>
 		<td>
-			<?php echo $LDStandbyPerson ?>:  <input type=text name="a_enc" size=30 value="<?php if(isset($a_enc)) echo $a_enc; else echo $HTTP_COOKIE_VARS['ck_login_username']; ?>">
+			<?php echo $LDStandbyPerson ?>:  <input type=text name="a_enc" size=30 value="<?php if(isset($a_enc)) echo $a_enc; else echo $_COOKIE['ck_login_username']; ?>">
 		</td>
 		<td>
 			&nbsp; <?php echo $LDOnCallPerson ?>:  <input type=text name="r_enc" size=30 value="<?php if(isset($r_enc)) echo $r_enc; ?>">

@@ -15,8 +15,8 @@ function validarea($area,$zeile2,$range)
   return 0;
 }
 
-/*function logentry($userid,$key,$report,$remark1,$remark2)
-{
+//function logentry($userid,$key,$report,$remark1,$remark2)
+/*{
 			$logpath="logs/access/".date(Y)."/";
 			if (file_exists($logpath))
 			{

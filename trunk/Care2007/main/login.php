@@ -30,20 +30,6 @@ if(!session_is_registered('sess_login_userid')) session_register('sess_login_use
 if(!session_is_registered('sess_login_username')) session_register('sess_login_username');
 if(!session_is_registered('sess_login_pw')) session_register('sess_login_pw');
 
-function logentry($userid,$key,$report){
-	$logpath='logs/access/'.date('Y').'/';
-	if (file_exists($logpath)){
-		$logpath=$logpath.date('Y_m_d').'.log';
-		$file=fopen($logpath,'a');
-		if ($file){	
-			if ($userid=='') $userid='blank';
-			$line=date('Y-m-d H:i:s').' '.'Main Login: '.$report.'  Username='.$userid.'  UserID='.$key;
-			fputs($file,$line);fputs($file,"\r\n");
-			fclose($file);
-		}
-	}
-}
-
 if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 {
 	include_once($root_path.'include/care_api_classes/class_access.php');

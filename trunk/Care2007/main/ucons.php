@@ -14,8 +14,8 @@ require($root_path.'include/inc_environment_global.php');
 */
 if(!isset($lang))
   if(isset($HTTP_GET_VARS['lang'])) $lang=$HTTP_GET_VARS['lang'];
-    elseif (isset($HTTP_POST_VARS['lang'])) $lang=$HTTP_POST_VARS['lang'];
-	  elseif(isset($HTTP_COOKIE_VARS['ck_lang'])) $lang=$HTTP_COOKIE_VARS['ck_lang'];
+    elseif (isset($_POST['lang'])) $lang=$_POST['lang'];
+	  elseif(isset($_COOKIE['ck_lang'])) $lang=$_COOKIE['ck_lang'];
 	    else $lang="en";
 		
 require_once($root_path.'include/inc_charset_fx.php');	

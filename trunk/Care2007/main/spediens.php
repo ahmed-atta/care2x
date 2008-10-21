@@ -19,14 +19,14 @@ $thisfile=basename(__FILE__);
 // reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
 
-$HTTP_SESSION_VARS['sess_file_break']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_file_return']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_file_editor']='headline-edit-select-art.php';
-$HTTP_SESSION_VARS['sess_file_reader']='headline-read.php';
-$HTTP_SESSION_VARS['sess_title']=$LDEditTitle.'::'.$LDSubmitNews;
-//$HTTP_SESSION_VARS['sess_user_origin']='main_start';
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_dept_nr']=0; // reset the department number used in the session
+$_SESSION['sess_file_break']=$top_dir.$thisfile;
+$_SESSION['sess_file_return']=$top_dir.$thisfile;
+$_SESSION['sess_file_editor']='headline-edit-select-art.php';
+$_SESSION['sess_file_reader']='headline-read.php';
+$_SESSION['sess_title']=$LDEditTitle.'::'.$LDSubmitNews;
+//$_SESSION['sess_user_origin']='main_start';
+$_SESSION['sess_path_referer']=$top_dir.$thisfile;
+$_SESSION['sess_dept_nr']=0; // reset the department number used in the session
 
 # Start Smarty templating here
  /**
@@ -61,6 +61,7 @@ $HTTP_SESSION_VARS['sess_dept_nr']=0; // reset the department number used in the
 										createComIcon($root_path,'man-gr.gif','0'),
 										createComIcon($root_path,'lockfolder.gif','0'),
 										createComIcon($root_path,'home2.gif','0'),
+					createComIcon($root_path,'show.gif','0'),
 										createComIcon($root_path,'camera_s.gif','0'),
 										createComIcon($root_path,'video.gif','0'),
 										createComIcon($root_path,'post_discussion.gif','0'),
@@ -79,6 +80,7 @@ $aSubMenuText=array($LDPluginsTxt,
 										$LDPersonellMngmntTxt,
 										$LDInsuranceCoMngrTxt,
 										$LDAddressMngrTxt,
+					$LDImmunizationMngrTxt,
 										$LDPhotoLabTxt,
 										$LDWebCamTxt,
 										$LDStandbyDutyTxt,
@@ -97,6 +99,7 @@ $aSubMenuItem=array('LDPlugins' => '<a href="'.$root_path.'plugins/plugins.php'.
 										'LDPersonellMngmnt' => '<a href="'.$root_path.'modules/personell_admin/personell_admin_pass.php'.URL_APPEND.'&retpath=spec&target=personell_reg">'.$LDPersonellMngmnt.'</a>',
 										'LDInsuranceCoMngr' => '<a href="'.$root_path.'modules/insurance_co/insurance_co_manage_pass.php'.URL_APPEND.'">'. $LDInsuranceCoMngr.'</a>',
 										'LDAddressMngr' => '<a href="'.$root_path.'modules/address/address_manage_pass.php'.URL_APPEND.'">'. $LDAddressMngr.'</a>',
+					'LDImmunizationMngr' => '<a href="'.$root_path.'modules/immunization/immunization_manage_pass.php'.URL_APPEND.'">'. $LDImmunizationMngr.'</a>',
 										'LDPhotoLab' => '<a href="'.$root_path.'modules/fotolab/fotolab_pass.php'.URL_APPEND.'&ck_config='.$ck_config.'">'.$LDPhotoLab.'</a>',
 										'LDWebCam' => '<a href="../modules/video_monitor/video_monitoring.php'.URL_APPEND.'">'.$LDWebCam.'</a>',
 										'LDStandbyDuty' => '<a href="'.$root_path.'main/spediens-bdienst-zeit-erfassung.php'.URL_APPEND.'&retpath=spec">'.$LDStandbyDuty.'</a>',

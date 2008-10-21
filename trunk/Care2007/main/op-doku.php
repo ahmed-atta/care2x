@@ -19,9 +19,9 @@ $thisfile=basename(__FILE__);
 setcookie(firstentry,''); // The cookie "firsentry" is used for switching the cat image
 
 /* Check the start script as break destination*/
-if (!empty($HTTP_SESSION_VARS['sess_path_referer'])&&($HTTP_SESSION_VARS['sess_path_referer']!=$top_dir.$thisfile)){
-	if(file_exists($root_path.$HTTP_SESSION_VARS['sess_path_referer'])){
-		$breakfile=$HTTP_SESSION_VARS['sess_path_referer'];
+if (!empty($_SESSION['sess_path_referer'])&&($_SESSION['sess_path_referer']!=$top_dir.$thisfile)){
+	if(file_exists($root_path.$_SESSION['sess_path_referer'])){
+		$breakfile=$_SESSION['sess_path_referer'];
 	}else {
 		 /* default startpage */
 		$breakfile = 'main/startframe.php';
@@ -35,7 +35,7 @@ $breakfile=$root_path.$breakfile.URL_APPEND;
 // reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
 
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
+$_SESSION['sess_path_referer']=$top_dir.$thisfile;
 
 # Start Smarty templating here
  /**
@@ -94,7 +94,7 @@ $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
       onmouseout=\"timer=setTimeout('hsm()',1000)\">$LDORNOC $LDScheduler </a>");
   $smarty->assign('LDDutyPlanTxt',$LDDutyPlanTxt);
 
-  $smarty->assign('LDOnCallDuty',"<a href=\"spediens-bdienst-zeit-erfassung.php".URL_APPEND."&retpath=op&encoder=".$HTTP_COOKIE_VARS['ck_login_username'.$sid]."\">$LDOnCallDuty</a>");
+  $smarty->assign('LDOnCallDuty',"<a href=\"spediens-bdienst-zeit-erfassung.php".URL_APPEND."&retpath=op&encoder=".$_COOKIE['ck_login_username'.$sid]."\">$LDOnCallDuty</a>");
   $smarty->assign('LDOnCallDutyTxt',$LDOnCallDutyTxt);
 
   # OR Anesthesia submenu block

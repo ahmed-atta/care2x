@@ -16,10 +16,11 @@ setcookie('ck_login_logged'.$sid,'',0,'/');
 setcookie('ck_login_reset'.$sid,FALSE,0,'/');
 
 # Empty session login values
-$HTTP_SESSION_VARS['sess_login_userid']='';		
-$HTTP_SESSION_VARS['sess_login_username']='';
-$HTTP_SESSION_VARS['sess_login_pw']='';
-
+$_SESSION['sess_login_userid']='';		
+$_SESSION['sess_login_username']='';
+$_SESSION['department_nr']='';
+$_SESSION['sess_login_pw']='';
+$_SESSION['sess_user_name']='';
 #
 # Redirect to login page for eventual new login
 #
