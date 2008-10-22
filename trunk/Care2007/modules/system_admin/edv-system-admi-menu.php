@@ -19,7 +19,6 @@ $breakfile='edv.php'.URL_APPEND;
 
 # Set the db manager app here
 switch($dbtype){
-	case 'mysqli':
 	case 'mysql' : $strDbAdminItem = $LDPhpMyAdmin;
 							$strDbAdminUrl='phpmyadmin';
 							break;

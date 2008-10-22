@@ -402,7 +402,6 @@ class Ward extends Encounter {
 	function openBed($ward_nr,$room_nr,$bed_nr){
 		global $dbtype;
 		switch ($dbtype){
-			case 'mysqli':
 			case 'mysql': $this->sql="UPDATE $this->tb_room SET closed_beds=".$this->ReplaceFieldString("closed_beds","$bed_nr/","")." WHERE type_nr=1 AND room_nr=$room_nr AND ward_nr=$ward_nr";
 				break;
 			case 'postgres':

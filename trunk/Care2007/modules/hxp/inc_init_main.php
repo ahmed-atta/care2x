@@ -29,6 +29,6 @@ $fotoserver_ip='www.care2x.net/foundry';
 # Transfer protocol. Use https if this runs on SSL server
 $httprotocol='http';
 
-$dbtype='mysqli';
+$dbtype='mysql';
 
 ?>

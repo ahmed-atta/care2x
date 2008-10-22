@@ -189,7 +189,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 						$pagen->setTotalDataCount($totalcount);
 					}else{
 						# Count total available data
-						if($dbtype=='mysql' || $dbtype=='mysqli'){
+						if($dbtype=='mysql'){
 							$sql='SELECT COUNT(enc.encounter_nr) AS "count" '.$dbtable.$sql2;
 						}else{
 							$sql='SELECT * '.$dbtable.$sql2;
@@ -197,7 +197,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 
 						if($result=$db->Execute($sql)){
 							if ($totalcount=$result->RecordCount()) {
-								if($dbtype=='mysql' || $dbtype=='mysqli'){
+								if($dbtype=='mysql'){
 									$rescount=$result->FetchRow();
     									$totalcount=$rescount['count'];
 								}

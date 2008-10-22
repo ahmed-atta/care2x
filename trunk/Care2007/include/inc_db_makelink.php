@@ -33,7 +33,6 @@ require($root_path.'include/inc_init_main.php');
 # Set the "LIKE" comparison operator, postgre needs "ILIKE" for case-insensitive comparison
 # Set the "no-date" value based on the dbtype, Values defined at include/inc_environment_global.php
 switch($dbtype){
-	case 'mysqli':
 	case 'mysql':
                     $dbf_nodate=NODATE_MYSQL;
 					$dbf_nodatetime=NODATE_MYSQL.' 00:00:00';
@@ -93,7 +92,7 @@ $db->SetDatabase($dbname);
 */
 
 # Set dbtype to mysql if not set or empty
-if(!isset($dbtype)||empty($dbtype)) $dbtype='mysqli';
+if(!isset($dbtype)||empty($dbtype)) $dbtype='mysql';
 
 # ADODB connection
 require_once($root_path.'classes/adodb/adodb.inc.php');

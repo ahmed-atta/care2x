@@ -208,7 +208,7 @@ if($pid!='' || $encounter_nr!=''){
 							//echo formatDate2STD($geburtsdatum,$date_format);
 					      $itemno=$itemname;		
 									$HTTP_POST_VARS['modify_id']=$encoder;
-									if($dbtype=='mysql' || $dbtype=='mysqli'){
+									if($dbtype=='mysql'){
 										$HTTP_POST_VARS['history']= "CONCAT(history,\"\n Update: ".date('Y-m-d H:i:s')." = $encoder\")";
 									}else{
 										$HTTP_POST_VARS['history']= "(history || '\n Update: ".date('Y-m-d H:i:s')." = $encoder')";
@@ -261,7 +261,7 @@ if($pid!='' || $encounter_nr!=''){
 									if($encounter_obj->insertDataFromInternalArray())
 									{
 									    /* Get last insert id */
-								if($dbtype=='mysql' || $dbtype=='mysqli'){
+								if($dbtype=='mysql'){
 									$encounter_nr=$db->Insert_ID();
 								}else{
 									$encounter_nr=$encounter_obj->postgre_Insert_ID($dbtable,'encounter_nr',$db->Insert_ID());

@@ -297,7 +297,7 @@ class GuiInputPerson {
 						# else let the dbms make an initial value via the sequence generator e.g. postgres
 						# However, the sequence generator must be configured during db creation to start at
 						# the initial value set in the global config
-						if($dbtype=='mysql' || $dbtype=='mysqli'){
+						if($dbtype=='mysql'){
 							$HTTP_POST_VARS['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
 						}
 					}else{

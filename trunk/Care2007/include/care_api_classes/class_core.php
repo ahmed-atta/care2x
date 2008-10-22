@@ -344,7 +344,7 @@ class Core {
 		if(!is_array($array)){ return FALSE;}
 		while(list($x,$v)=each($array)) {
 			# use backquoting for mysql and no-quoting for other dbs 
-			if ($dbtype=='mysql' || $dbtype=='mysqli') $index.="`$x`,";
+			if ($dbtype=='mysql') $index.="`$x`,";
 				else $index.="$x,";
 				
 			if(stristr($v,$concatfx)||stristr($v,'null')) $values.=" $v,";
@@ -379,7 +379,7 @@ class Core {
 		if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;			
 		while(list($x,$v)=each($array)) {
 			# use backquoting for mysql and no-quoting for other dbs. 
-			if ($dbtype=='mysql' || $dbtype=='mysqli') $elems.="`$x`=";
+			if ($dbtype=='mysql') $elems.="`$x`=";
 				else $elems.="$x=";
 			
 			if(stristr($v,$concatfx)||stristr($v,'null')) $elems.=" $v,";
@@ -607,7 +607,6 @@ class Core {
 			return $oid;
 		}else{
 			switch($dbtype){
-				case 'mysqli':
 				case 'mysql': return $oid;
 					break;
 				case 'postgres': return $this->postgre_Insert_ID($this->coretable,$pk,$oid);
@@ -630,7 +629,6 @@ class Core {
 		global $dbtype;
 
 		switch($dbtype){
-			case 'mysqli':
 			case 'mysql': return "CONCAT($fieldname,'$str')";
 				break;
 			case 'postgres': return "$fieldname || '$str'";
@@ -673,7 +671,6 @@ class Core {
 		global $dbtype;
 
 		switch($dbtype){
-			case 'mysqli' :
 			case 'mysql': return "REPLACE($fieldname,'$str1','$str2')";
 				break;
 				default: return "REPLACE($fieldname,'$str1','$str2')";

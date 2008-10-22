@@ -30,5 +30,5 @@ $fotoserver_ip='localhost';
 $httprotocol='http';
 
 # Set this to your database type. For details refer to ADODB manual or goto http://php.weblogs.com/ADODB/
-$dbtype='mysqli';
+$dbtype='mysql';
 ?>

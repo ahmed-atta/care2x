@@ -11,7 +11,7 @@ $versions = new VersionSet();
 $version = new Version($short_version, $long_version);
 
 $version->addSeparator('Database Information');
-$version->collectOption('db_type', 'Server Type', array('MySQL', 'MySQLi', 'PostgreSQL'), array('mysql', 'mysqli', 'postgres7'), 'mysqli');
+$version->collectOption('db_type', 'Server Type', array('MySQL',  'PostgreSQL'), array('mysql', 'postgres7'), 'mysql');
 $version->collectText('db_user', 'User Name', 'root');
 $version->collectPassword('db_password', 'Password', '');
 $version->collectText('db_server', 'Server Address', 'localhost');
