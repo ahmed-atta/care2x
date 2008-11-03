@@ -307,7 +307,6 @@ class GuiInputPerson {
 						}
 					}
 					//echo $person_obj->getLastQuery();
-
 					if(!$error_person_exists||$mode=='forcesave'){
 						if($person_obj->insertDataFromInternalArray()){
 							
@@ -319,6 +318,7 @@ class GuiInputPerson {
 								$pid=$person_obj->LastInsertPK('pid',$oid);
 								//EL: set the new pid
 								$person_obj->setPID($pid);
+
 							}
 
 							// KB: save other_his_no
@@ -576,8 +576,6 @@ class GuiInputPerson {
 		$this->smarty->assign('sNameFirst',$this->createTR($errornamefirst, 'name_first', $LDFirstName,$name_first,'',35,TRUE));
 		//$iRowSpanCount++;
         
-      
-        
 		if (!$GLOBAL_CONFIG['person_name_2_hide']){
 			$this->smarty->assign('sName2',$this->createTR($errorname2, 'name_2', $LDName2,$name_2));
 			$iRowSpanCount++;
@@ -714,14 +712,18 @@ class GuiInputPerson {
 		else $this->smarty->assign('LDTownCity',"$LDTownCity:");
 				
 		require_once($root_path.'include/care_api_classes/class_address.php');
-		$sAddress = '<select name="addr_citytown_name"><option  onclick="document.getElementById(\'addr_zip\').value=\'\'"></option>';
 		$address_obj=new Address;
 		$address = $address_obj->getAllActiveCityTown();
-		while($addr=$address->FetchRow()){
-		    $sAddress .= '<option onclick="document.getElementById(\'addr_zip\').value=\'' . $addr['zip_code'].'\'" value="' . $addr['name'] . '">' . $addr['name'] . '</option>';
+		if(!empty($address) && $address->RecordCount()) {
+			$sAddress = '<select name="addr_citytown_name"><option  onclick="document.getElementById(\'addr_zip\').value=\'\'"></option>';
+			while($addr=$address->FetchRow()){
+			    $sAddress .= '<option onclick="document.getElementById(\'addr_zip\').value=\'' . $addr['zip_code'].'\'" value="' . $addr['name'] . '">' . $addr['name'] . '</option>';
+			}
+			$sAddress .= '</select>';
+			$this->smarty->assign('sTownCityInput',$sAddress);
+		} else {
+			$this->smarty->assign('sTownCityInput',"<font color=red><strong>$LDNoAddress</strong></font>");
 		}
-		$sAddress .= '</select>';
-		$this->smarty->assign('sTownCityInput',$sAddress);
 		//$this->smarty->assign('sTownCityInput','<input name="addr_citytown_name" type="text" size="35" value="'.$addr_citytown_name.'">');
 		//$this->smarty->assign('sTownCityMiniCalendar',"<a href=\"javascript:popSearchWin('citytown','aufnahmeform.addr_citytown_nr','aufnahmeform.addr_citytown_name')\"><img ".createComIcon($root_path,'b-write_addr.gif','0')."></a>");
 

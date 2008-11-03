@@ -409,4 +409,6 @@ $LDNr='Nr.';
 $LDOtherHospitalNr='Other Hospital Nr.';
 $LDSelectOtherHospital = 'Select other hospital to change the number';
 $LDNoNrNoDelete = 'no number = delete';
+
+$LDNoAddress='No city present in the database<br>Please define at least one city in<br>the Special Tools.';
 ?>
