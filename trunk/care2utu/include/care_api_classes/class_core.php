@@ -357,15 +357,21 @@ class Core {
 	* @return boolean
 	*/
     function insertDataFromArray(&$array) {
+   		global $dbtype;
 		$x='';
 		$v='';
 		$index='';
 		$values='';
-		$debug=FALSE;
+		//Gjergj Sheldija : bug for concat  when inserting...
+		if($dbtype=='postgres7'||$dbtype=='postgres') $concatfx='||';
+			else $concatfx='concat';
 		if(!is_array($array)){ return FALSE;}
 		while(list($x,$v)=each($array)) {
-		    $index.="$x,";
-			if(stristr($v,'null')) $values.='NULL,';
+			# use backquoting for mysql and no-quoting for other dbs
+			if ($dbtype=='mysql') $index.="`$x`,";
+				else $index.="$x,";
+				
+			if(stristr($v,$concatfx)||stristr($v,'null')) $values.=" $v,";
 				else $values.="'$v',";
 		}
 		reset($array);

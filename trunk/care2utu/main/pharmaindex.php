@@ -38,7 +38,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 echo $LDPharmaPrompt;
 ?>
 </font>
-</center
+</center>
 <br>&nbsp;<p>
 
 <table width=100%>

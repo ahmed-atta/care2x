@@ -109,56 +109,56 @@ fieldset {
       Left Eye </td>
   </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr1'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr1' value='Normal'></td>
 <td bgcolor="#F0F8FF" align='center'>Normal</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='cl1'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='cl1' value='Normal'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr2'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr2' value='The tarsal plates are more red than the globe (tarsal injection)'></td>
 <td bgcolor="#F0F8FF" align='center'>The tarsal plates are more red than the globe (tarsal injection)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='cl2'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='cl2' value='The tarsal plates are more red than the globe (tarsal injection)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr3'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr3' value='redness is mainly around the cornea (ciliary injection)'></td>
 <td bgcolor="#F0F8FF" align='center'>redness is mainly around the cornea (ciliary injection)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='cl3'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='cl3' value='redness is mainly around the cornea (ciliary injection)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr4'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr4' value='there is a pterygium/pingueculum'></td>
 <td bgcolor="#F0F8FF" align='center'>there is a pterygium/pingueculum</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='cl4'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='cl4' value='there is a pterygium/pingueculum'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr5'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr5' value='There is another conjunctival growth'></td>
 <td bgcolor="#F0F8FF" align='center'>There is another conjunctival growth</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='cl5'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='cl5' value='There is another conjunctival growth'></td>
   </tr>
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr6'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr6' value='There is purulent discharge'></td>
 <td bgcolor="#F0F8FF" align='center'>There is purulent discharge</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='cl6'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='cl6' value='There is purulent discharge'></td>
   </tr>
 
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr7'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr7' value='There is a subconjunctival haemorrhage'></td>
 <td bgcolor="#F0F8FF" align='center'>There is a subconjunctival haemorrhage</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='cl7'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='cl7' value='There is a subconjunctival haemorrhage'></td>
   </tr>
 
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr8'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cr8' value='There is another abnormality of the conjunctiva'></td>
 <td bgcolor="#F0F8FF" align='center'>There is another abnormality of the conjunctiva</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='cl8'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='cl8' value='There is another abnormality of the conjunctiva'></td>
   </tr>
 
 
@@ -177,7 +177,7 @@ fieldset {
     <td bgcolor="#F0F8FF">
 
   <textarea name="comments" rows="10" cols="90" wrap="off">
-  text
+
   </textarea>
 
   </td>

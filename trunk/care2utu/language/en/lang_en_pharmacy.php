@@ -81,7 +81,7 @@ $LDAdminSellingPriceDescription='Configuration of price accounts';
 
 $LDPrice_fieldNo="Pricefield no.";
 $LDPrice_ShortDescription="Short Description";
-$LDPrice_LongDescription="long description (not shown)"; 
+$LDPrice_LongDescription="long description (not shown)";
 $LDPrice_IsInsurance="Is Insurance Price?";
 
 $LDLegend_Field="Field";
@@ -96,4 +96,27 @@ $LDDetail_headline='Interesting details';
 $LDDetail_Information='Information';
 $LDDetail_Last_Change='Last Change';
 $LDDetail_information='User who did it';
+
+# managing pricelist section
+$LDManagePriceList='Managing pricelist';
+$LDManagePriceList_description='Insert new pricelists';
+$LDPriceList_header='Pricelists structure';
+$LDPriceListName='Table columns';
+$LDSelectPriceList_description='please elect the CVS data with new pricelist information';
+$column0='line-no';
+$column1='item_number';
+$column2='partcode';
+$column3='is_pediatric';
+$column4='is_adult';
+$column5='is_other';
+$column6='is_consumable';
+$column7='is_labtest';
+$column8='item_description';
+$column9='item_full_description';
+$column10='unit_price';
+$column11='unit_price_1';
+$column12='unit_price_2';
+$column13='unit_price_3';
+$column14='purchasing_class';
+
 ?>

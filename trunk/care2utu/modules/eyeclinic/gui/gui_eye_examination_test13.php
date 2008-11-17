@@ -107,43 +107,43 @@ fieldset {
       Left Eye </td>
   </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='odr1'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='odr1' value='Normal'></td>
 <td bgcolor="#F0F8FF" align='center'>normal</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='odl1'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='odl1' value='Normal'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='odr2'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='odr2' value='there is cupping up to half of the disc diameter (0.5)'></td>
 <td bgcolor="#F0F8FF" align='center'>there is cupping up to half of the disc diameter (0.5)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='odl2'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='odl2' value='there is cupping up to half of the disc diameter (0.5)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='odr3'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='odr3' value='Almost all the disc is cupped (0.9)'></td>
 <td bgcolor="#F0F8FF" align='center'>Almost all the disc is cupped (0.9)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='odl3'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='odl3' value='Almost all the disc is cupped (0.9)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='odr4'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='odr4' value='There is optic atrophy'></td>
 <td bgcolor="#F0F8FF" align='center'>There is optic atrophy</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='odl4'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='odl4' value='There is optic atrophy'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='odr5'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='odr5' value='There is swelling of the disc (papilloedema/papillitis)'></td>
 <td bgcolor="#F0F8FF" align='center'>There is swelling of the disc (papilloedema/papillitis)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='odl5'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='odl5' value='There is swelling of the disc (papilloedema/papillitis)'></td>
   </tr>
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='odr6'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='odr6' value='There is another abnormality of the optic disc'></td>
 <td bgcolor="#F0F8FF" align='center'>There is another abnormality of the optic disc</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='odl6'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='odl6' value='There is another abnormality of the optic disc'></td>
   </tr>
 
 </table>
@@ -162,7 +162,7 @@ fieldset {
     <td bgcolor="#F0F8FF">
 
   <textarea name="comments" rows="10" cols="90" wrap="off">
-  text
+
   </textarea>
 
   </td>

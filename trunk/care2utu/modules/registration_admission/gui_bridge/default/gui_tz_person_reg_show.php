@@ -3,12 +3,12 @@
 require('./gui_bridge/default/gui_std_tags.php');
 
 echo StdHeader();
-echo setCharSet(); 
+echo setCharSet();
 ?>
  <TITLE><?php echo $LDPatientRegister ?></TITLE>
 
 <script  language="javascript">
-<!-- 
+<!--
 
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 
@@ -21,14 +21,14 @@ function popRecordHistory(table,pid) {
 </script>
 
 <?php
-require($root_path.'include/inc_js_gethelp.php'); 
+require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 
 
-<BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();" 
+<BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();"
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 
@@ -39,8 +39,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $LDPatientRegister ?></STRONG> <font size=+2>(<?php echo ($pid) ?>)</font></FONT>
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-<a href="javascript:gethelp('registration_overview.php','Person Registration :: Overview')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang; 
+<a href="javascript:gethelp('registration_overview.php','Person Registration :: Overview')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php
+if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang;
 	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
@@ -60,7 +60,7 @@ require('./gui_bridge/default/gui_tz_tabs_patreg.php');
 	<tr valign="top">
 		<td>
 		<?php
-		
+
 		# Display the data
 		$person->display();
 		?>
@@ -87,8 +87,8 @@ require('./gui_bridge/default/gui_tz_tabs_patreg.php');
 ?>
 <a href="<?php echo $newsearchfile ?>"><img
 <?php echo createLDImgSrc($root_path,'new_search.gif','0','absmiddle') ?>></a>
-<?php 
-} 
+<?php
+}
 ?>
 <a href="patient_register.php<?php echo URL_APPEND ?>&pid=<?php echo $pid ?>&update=1"><img
 <?php echo createLDImgSrc($root_path,'update_data.gif','0','absmiddle') ?>></a>
@@ -121,7 +121,7 @@ if($current_encounter){
 <p>
 </td>
 </tr>
-</table>        
+</table>
 <p>
 <ul>
 <FONT    SIZE=2  FACE="Arial">

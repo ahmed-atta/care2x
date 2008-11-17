@@ -108,49 +108,49 @@ fieldset {
       Left Eye </td>
   </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor1'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor1' value='Normal'></td>
 <td bgcolor="#F0F8FF" align='center'>Normal</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='col1'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='col1' value='Normal'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor2'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor2' value='There is an opacity in the cornea'></td>
 <td bgcolor="#F0F8FF" align='center'>There is an opacity in the cornea</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='col2'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='col2' value='There is an opacity in the cornea'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor3''></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor3' value='There is a corneal ulcer'></td>
 <td bgcolor="#F0F8FF" align='center'>There is a corneal ulcer</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='col3'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='col3' value='There is a corneal ulcer'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor4'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor4' value='There are blood vessels in the cornea (vascularisation)'></td>
 <td bgcolor="#F0F8FF" align='center'>There are blood vessels in the cornea (vascularisation)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='col4'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='col4' value='There are blood vessels in the cornea (vascularisation)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor5'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor5' value='the cornea has an abnormal shape'></td>
 <td bgcolor="#F0F8FF" align='center'>the cornea has an abnormal shape</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='col5'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='col5' value='the cornea has an abnormal shape'></td>
   </tr>
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor6'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor6' value='The cornea has an abnormal size'></td>
 <td bgcolor="#F0F8FF" align='center'>The cornea has an abnormal size</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='col6'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='col6' value='The cornea has an abnormal size'></td>
   </tr>
 
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor7'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='cor7' value='There is another abnormality of the Cornea'></td>
 <td bgcolor="#F0F8FF" align='center'>There is another abnormality of the Cornea</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='col7'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='col7' value='There is another abnormality of the Cornea'></td>
   </tr>
 
 
@@ -171,7 +171,7 @@ fieldset {
     <td bgcolor="#F0F8FF">
 
   <textarea name="comments" rows="10" cols="90" wrap="off">
-  text
+
   </textarea>
 
   </td>

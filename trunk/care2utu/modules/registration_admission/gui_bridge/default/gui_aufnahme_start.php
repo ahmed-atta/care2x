@@ -4,15 +4,15 @@
 <?php echo setCharSet(); ?>
  <TITLE><?php echo $headframe_title ?></TITLE>
 
-<?php 
+<?php
 
 # If  pid exists, output the form checker javascript
 if(isset($pid) && $pid){
 
 ?>
- 
+
 <script  language="javascript">
-<!-- 
+<!--
 
 function chkform(d) {
 	encr=<?php if ($encounter_class_nr) {echo $encounter_class_nr; } else {echo '0';} ?>;
@@ -72,22 +72,22 @@ function resolveLoc(){
 }
 
 require('./include/js_popsearchwindow.inc.php');
-require($root_path.'include/inc_js_gethelp.php'); 
+require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
 
 
-<BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 <?php
 if(!$encounter_nr && !$pid)
 {
 ?>
-onLoad="if(document.searchform.searchkey.focus) document.searchform.searchkey.focus();" 
+onLoad="if(document.searchform.searchkey.focus) document.searchform.searchkey.focus();"
 <?php
 }
-if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
+if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; }
 ?>>
 
 
@@ -105,16 +105,16 @@ echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0')
 </tr>
 
 <?php
-# Load tabs 
+# Load tabs
 $target='entry';
-include('./gui_bridge/default/gui_tabs_patadmit.php') 
+include('./gui_bridge/default/gui_tabs_patadmit.php')
 ?>
 
 <tr>
 <td colspan=3  bgcolor=<?php echo $cfg['body_bgcolor']; ?>>
 <ul>
 
-<?php 
+<?php
 # If the origin is admission link, show the search prompt
 if(!isset($pid) || !$pid){
 
@@ -140,9 +140,9 @@ if(!isset($pid) || !$pid){
 	        /* set the script for searching */
 	       $search_script='patient_register_search.php';
 		   $user_origin='admit';
-		   
+
             include($root_path.'include/inc_patient_searchmask.php');
-       
+
 	   ?>
 </td>
      </tr>
@@ -150,8 +150,8 @@ if(!isset($pid) || !$pid){
 
    <FONT    SIZE=3  FACE="Arial" color="#990000"><br>
    <img <?php echo createComIcon($root_path,'warn.gif','0','absmiddle'); ?>>
-<?php 
-   
+<?php
+
    echo $LDRedirectToRegistry;
 }
 else
@@ -165,8 +165,8 @@ else
 <table border="0" cellspacing=1 cellpadding=0>
 
 
-<?php 
-if($error) 
+<?php
+if($error)
 {
 ?>
 <tr>
@@ -193,11 +193,11 @@ if($error)
 </tr>
 
 <tr>
-<td  background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitDate ?>: 
+<td  background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitDate ?>:
 </td>
 <td bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial" color="#800000">
-<?php 
-    if(isset($encounter_nr)&&$encounter_nr) echo @formatDate2Local(date('Y-m-d'),$date_format); 
+<?php
+    if(isset($encounter_nr)&&$encounter_nr) echo @formatDate2Local(date('Y-m-d'),$date_format);
 ?>
 </td>
 </tr>
@@ -284,11 +284,11 @@ if($GLOBAL_CONFIG['patient_name_middle_show']&&$name_middle)
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php echo $LDBloodGroup ?>:
 </td>
 <td bgcolor="#ffffee" colspan=2><FONT SIZE=-1  FACE="Arial">&nbsp;
-<?php 
+<?php
 if($blood_group){
 	$buf='LD'.$blood_group;
 	echo $$buf;
-} 
+}
 ?>
 </td>
 </tr>
@@ -298,9 +298,9 @@ if($blood_group){
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php echo $LDAddress ?>:
 </td>
 <td colspan=2 bgcolor="#eeeeee"><FONT SIZE=-1  FACE="Arial">
-<?php 
+<?php
 
-/* Note: The address is displayed in german format. 
+/* Note: The address is displayed in german format.
 *   STREET_NAME STREET_NUMBER
 *   ZIP_CODE  TOWN_OR_CITY
 *  Edit the code to display it in other formats
@@ -330,11 +330,11 @@ if(is_object($encounter_classes)){
 		}else{
 ?>
 	<input name="encounter_class_nr" onClick="resolveLoc()" type="radio"  value="<?php echo $result['class_nr']; ?>" <?php if($encounter_class_nr==$result['class_nr']) echo 'checked'; ?>>
-<?php 
+<?php
             if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
         	echo '&nbsp;';
 		}
-	} 
+	}
 }
 ?>
 </td>
@@ -362,7 +362,7 @@ if($in_ward){
 ?>
 <select name="current_ward_nr">
 	<option value=""></option>
-<?php 
+<?php
 if(!empty($ward_info)&&$ward_info->RecordCount()){
     while($station=$ward_info->FetchRow()){
 	    echo '
@@ -405,7 +405,7 @@ if($in_dept){
 ?>
 <select name="current_dept_nr">
 	<option value=""></option>
-<?php 
+<?php
 if(is_object($all_meds)){
     while($deptrow=$all_meds->FetchRow()){
 	    echo '
@@ -468,12 +468,12 @@ if(is_object($insurance_classes)){
     while($result=$insurance_classes->FetchRow()) {
 ?>
 <input name="insurance_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" <?php if($insurance_class_nr==$result['class_nr']) echo 'checked'; ?>>
-<?php 
+<?php
         $LD=$result['LD_var'];
         if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
         echo '&nbsp;';
 	}
-} 
+}
 ?>
 
 </td>
@@ -482,7 +482,7 @@ if(is_object($insurance_classes)){
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial"><?php if ($error_ins_nr) echo "<font color=red>"; ?><?php echo $LDInsuranceNr ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input name="insurance_nr" type="text" size="60" value="<?php if(isset($insurance_nr)) echo $insurance_nr; ?>"> 
+<td colspan=2 bgcolor="#eeeeee"><input name="insurance_nr" type="text" size="60" value="<?php if(isset($insurance_nr)) echo $insurance_nr; ?>">
 </td>
 </tr>
 <tr>
@@ -517,7 +517,7 @@ while($buffer=$care_service->FetchRow())
 </select>
 
 <?php echo $LDFrom ?> <input type="text" name="sc_care_start"  value="<?php if(!empty($sc_care_start))  echo @formatDate2Local($sc_care_start,$date_format); ?>" size=9 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-<?php echo $LDTo ?> <input type="text" name="sc_care_end"  value="<?php if(!empty($sc_care_end))  echo @formatDate2Local($sc_care_end,$date_format); ?>" size=9 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">                 
+<?php echo $LDTo ?> <input type="text" name="sc_care_end"  value="<?php if(!empty($sc_care_end))  echo @formatDate2Local($sc_care_end,$date_format); ?>" size=9 maxlength=10   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 <input type="hidden" name="sc_care_nr" value="<?php echo $sc_care_nr; ?>">
 </td>
 </tr>
@@ -546,8 +546,8 @@ while($buffer=$room_service->FetchRow())
 ?>
 </select>
 
-<?php echo $LDFrom ?> <input type="text" name="sc_room_start"  value="<?php if(!empty($sc_room_start))  echo @formatDate2Local($sc_room_start,$date_format); ?>" size=9 maxlength=10    onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
-<?php echo $LDTo ?> <input type="text" name="sc_room_end"  value="<?php if(!empty($sc_room_end))  echo @formatDate2Local($sc_room_end,$date_format); ?>" size=9 maxlength=10    onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">                 
+<?php echo $LDFrom ?> <input type="text" name="sc_room_start"  value="<?php if(!empty($sc_room_start))  echo @formatDate2Local($sc_room_start,$date_format); ?>" size=9 maxlength=10    onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+<?php echo $LDTo ?> <input type="text" name="sc_room_end"  value="<?php if(!empty($sc_room_end))  echo @formatDate2Local($sc_room_end,$date_format); ?>" size=9 maxlength=10    onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 <input type="hidden" name="sc_room_nr" value="<?php echo $sc_room_nr; ?>">
 </td>
 </tr>
@@ -577,7 +577,7 @@ while($buffer=$att_dr_service->FetchRow())
 </select>
 
 <?php echo $LDFrom ?> <input type="text" name="sc_att_dr_start" size=9 maxlength=10  value="<?php if(!empty($sc_att_dr_start)) echo  @formatDate2Local($sc_att_dr_start,$date_format); ?>"   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-<?php echo $LDTo ?> <input type="text" name="sc_att_dr_end" size=9 maxlength=10 value="<?php if(!empty($sc_att_dr_end)) echo  @formatDate2Local($sc_att_dr_end,$date_format); ?>"   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">                 
+<?php echo $LDTo ?> <input type="text" name="sc_att_dr_end" size=9 maxlength=10 value="<?php if(!empty($sc_att_dr_end)) echo  @formatDate2Local($sc_att_dr_end,$date_format); ?>"   onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 <input type="hidden" name="sc_att_dr_nr" value="<?php echo $sc_att_dr_nr; ?>">
 </td>
 </tr>
@@ -630,12 +630,12 @@ while($buffer=$att_dr_service->FetchRow())
 echo '<input type="hidden" name="forcesave" value="1">
 								<input  type="submit" value="'.$LDForceSave.'">';
  ?>
-<?php if($update) 
-/*	{ 
+<?php if($update)
+/*	{
 		echo '<input type="button" value="'.$LDCancel.'" onClick="location.replace(\'';
 		if($from=="such") echo 'aufnahme_daten_such.php?sid='.$sid.'&lang='.$lang;
 			else echo 'aufnahme_list.php?sid='.$sid.'&newdata=1&lang='.$lang;
-		echo '\')"> ';  
+		echo '\')"> ';
 
 	}*/
 ?>
@@ -661,7 +661,7 @@ echo '<input type="hidden" name="forcesave" value="1">
 <p>
 </td>
 </tr>
-</table>        
+</table>
 <p>
 <ul>
 <FONT    SIZE=2  FACE="Arial">

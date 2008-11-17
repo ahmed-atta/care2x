@@ -77,6 +77,13 @@ A:visited:hover {color: #cc0033;}
 						        		<TD class="submenu_item"><nobr><a href="eye_history.php<?php echo URL_APPEND ?>&pid=<?php echo $_GET['pid']?>&mode=new" >History Sheet</a></nobr></TD>
 						        		<TD>Patient History Sheet</TD>
       								</tr>
+
+      								<TR>
+						        		<td align=center><img src="../../gui/img/common/default/showdata.gif" border=0></td>
+						        		<TD class="submenu_item"><nobr><a href="eye_examination_report.php<?php echo URL_APPEND ?>&pid=<?php echo $_GET['pid']?>&mode=new" >History Report</a></nobr></TD>
+						        		<TD>Patient History Report</TD>
+      								</tr>
+
    	 							</TBODY>
 
                   			</TABLE>

@@ -107,49 +107,49 @@ fieldset {
       Left Eye </td>
   </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr1'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr1' value='Normal'></td>
 <td bgcolor="#F0F8FF" align='center'>Normal</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='acl1'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='acl1' value='Normal'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr2'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr2' value='There is blood in the A/C (hyphaema)'></td>
 <td bgcolor="#F0F8FF" align='center'>There is blood in the A/C (hyphaema)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='acl2'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='acl2' value='There is blood in the A/C (hyphaema)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr3'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr3' value='There is pus in the A/C (hypopyon)'></td>
 <td bgcolor="#F0F8FF" align='center'>There is pus in the A/C (hypopyon)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='acl3'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='acl3' value='There is pus in the A/C (hypopyon)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr4'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr4' value='There are cells and flare'></td>
 <td bgcolor="#F0F8FF" align='center'>There are cells and flare</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='acl4'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='acl4' value='There are cells and flare'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr5'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr5' value='There are keratic precipitates'></td>
 <td bgcolor="#F0F8FF" align='center'>There are keratic precipitates</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='acl5'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='acl5' value='There are keratic precipitates'></td>
   </tr>
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr6'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr6' value='The A/C is shallow'></td>
 <td bgcolor="#F0F8FF" align='center'>The A/C is shallow</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='acl6'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='acl6' value='The A/C is shallow'></td>
   </tr>
 
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr7'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='acr7' value='There is another abnormality of the A/C'></td>
 <td bgcolor="#F0F8FF" align='center'>There is another abnormality of the A/C</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='acl7'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='acl7' value='There is another abnormality of the A/C'></td>
   </tr>
 
 </table>
@@ -169,7 +169,7 @@ fieldset {
     <td bgcolor="#F0F8FF">
 
   <textarea name="comments" rows="10" cols="90" wrap="off">
-  text
+  
   </textarea>
 
   </td>

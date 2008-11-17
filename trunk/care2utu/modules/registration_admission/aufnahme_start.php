@@ -34,6 +34,8 @@ require_once($root_path.'include/care_api_classes/class_ward.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+require_once($root_path.'include/care_api_classes/class_weberp.php');
+require_once($root_path.'include/inc_init_xmlrpc.php');
 
 $thisfile=basename(__FILE__);
 if($origin=='patreg_reg') $breakfile = 'patient_register_show.php'.URL_APPEND.'&pid='.$pid;
@@ -154,6 +156,20 @@ if($pid!='' || $encounter_nr!=''){
 
                  if(!$error)
 	             {
+		             	if($is_transmit_to_weberp_enable == 1)
+		             	{
+							$persondata = $person_obj->getAllInfoArray();
+		             		$weberp_obj = new weberp($webERPServerURL,$weberpuser,$weberppassword,$weberpDebugLevel);
+							if(!$weberp_obj->transfer_patient_to_webERP_asCustomer($pid,$persondata))
+							{
+								$person_obj->setPatientIsTransmit2ERP($pid,0);
+							}
+							else
+							{
+								$person_obj->setPatientIsTransmit2ERP($pid,1);
+							}
+
+		             	}
 
 						if(!$GLOBAL_CONFIG['patient_service_care_hide']){
 						    if(!empty($sc_care_start)) $sc_care_start=formatDate2Std($sc_care_start,$date_format);

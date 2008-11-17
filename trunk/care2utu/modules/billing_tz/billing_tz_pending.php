@@ -18,10 +18,15 @@ require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_tz_billing.php');
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
+require_once($root_path.'include/care_api_classes/class_person.php');
+require_once($root_path.'include/care_api_classes/class_weberp.php');
+require_once($root_path.'include/inc_init_xmlrpc.php');
+
 
 $enc_obj=new Encounter;
 $bill_obj = new Bill;
 $insurance_tz = new Insurance_tz;
+$person_obj = new Person;
 
 $debug = false;
 ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
@@ -40,6 +45,40 @@ if ($mode=="archived")
 if ($mode=="done" && !empty($bill_number)) {
   // Store the 'pending' bill to the 'archive'
   $bill_obj->ArchiveBill($bill_number);
+
+  // Start transfer care2xToWebERP
+
+if($is_transmit_to_weberp_enable == 1)
+{
+
+  $archivedBill = $bill_obj->GetArchivedBillEncounter($bill_number);
+  $pid = $enc_obj->GetPIDfromEncounter($archivedBill[encounter_nr]);
+  $persondata = $person_obj->getAllInfoArray($pid);
+
+  $weberp_obj = new weberp($webERPServerURL,$weberpuser,$weberppassword,$weberpDebugLevel);
+  if(!$weberp_obj->transfer_patient_to_webERP_asCustomer($pid,$persondata))
+  {
+		$person_obj->setPatientIsTransmit2ERP($pid,0);
+  }
+  else
+  {
+		$person_obj->setPatientIsTransmit2ERP($pid,1);
+  }
+ $data=$bill_obj->GetElemsOfArchivedBillForERP($bill_number);
+while($row=$data->FetchRow())
+{
+ if(!$weberp_obj->transfer_bill_to_webERP_asSalesInvoice($pid,$bill_number,$row))
+  {
+  	$bill_obj->setBillIsTransmit2ERP($bill_number,0);
+  }
+  else
+  {
+  	$bill_obj->setBillIsTransmit2ERP($bill_number,1);
+  }
+}
+
+
+}
 
   if(!$discharge)
   {

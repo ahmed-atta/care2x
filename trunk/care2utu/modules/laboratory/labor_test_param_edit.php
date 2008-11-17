@@ -1,98 +1,111 @@
 <?php
-define('ROW_MAX',15); # define here the maximum number of rows for displaying the parameters
 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('chemlab_groups.php','chemlab_params.php');
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
+
 $thisfile=basename(__FILE__);
 
-//$db->debug=true;
+///$db->debug=true;
 
 # Create lab object
 require_once($root_path.'include/care_api_classes/class_lab.php');
 $lab_obj=new Lab();
 
-require($root_path.'include/inc_labor_param_group.php');
-
-
-
 # Load the date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');
 
-
-if($mode=='save'){
+if(isset($mode) && !empty($mode)) {
+	if($mode=='save'){
 	# Save the nr
-
+		if(empty($HTTP_POST_VARS['status'])) $HTTP_POST_VARS['status']=' ';
 	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$HTTP_POST_VARS['id'] = "_" . str_replace(" ","_",strtolower($HTTP_POST_VARS['name'])) . '__' . strtolower($HTTP_POST_VARS['group_id']);
+		$HTTP_POST_VARS['id'] = strtolower($HTTP_POST_VARS['id']);
 	$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
 	# Set to use the test params
 	$lab_obj->useTestParams();
 	# Point to the data array
-	$saveparam = $HTTP_POST_VARS;
-	$saveparam['price'] = $lab_obj->CheckNumber($saveparam['price']);
+		$lab_obj->setDataArray($HTTP_POST_VARS);
+		
+		if($lab_obj->updateDataFromInternalArray($HTTP_POST_VARS['nr'])){
+	?>
 
-	// ****************************************************
-	// Decide here if it is an update or an isert:
-	if($saveparam['nr']!=0 && $saveparam['nr'])	{
-			$action = $lab_obj->UpdateParams($saveparam);
-	} else	{
-			$action = $lab_obj->InsertParams();
-	} // end of if($saveparam['nr']!=0 && $saveparam['nr'])
-	// ****************************************************
+	<script language="JavaScript">
+	<!-- Script Begin
+	 window.opener.location.reload();
+	 window.close();
+	//  Script End -->
+	</script>
 
+	<?php   
+			exit;
+		}
+		else echo $lab_obj->getLastQuery();
+	# end of if(mode==save)
+	}
+	# begin mode new 	
+	if($mode == 'savenew') {
+		# Save the nr	
 
-	//echo $action;
+		if(empty($HTTP_POST_VARS['status'])) $HTTP_POST_VARS['status']=' ';
+		//gjergji : used to generate user proof param id's :)
+		$HTTP_POST_VARS['id'] = "_" . str_replace(" ","_",strtolower($HTTP_POST_VARS['name'])) . "__" . strtolower($HTTP_POST_VARS['group_id']);
+		$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Created ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+		# Set to use the test params
+		$lab_obj->useTestParams();
+		# Point to the data array
+		//print_r($HTTP_POST_VARS);
+		$lab_obj->setDataArray($HTTP_POST_VARS);	
+		if($lab_obj->insertDataFromInternalArray()){
 
-	if($action){
-?>
+	?>
 
-<script language="JavaScript">
-<!-- Script Begin
-window.opener.location.reload();
-window.close();
-//  Script End -->
-</script>
+	<script language="JavaScript">
+	<!-- Script Begin
+	window.opener.location.reload();
+	window.close();
+	//  Script End -->
+	</script>
 
-<?php
+	<?php    
 		exit;
 	}
 	else echo $lab_obj->getLastQuery();
-# end of if(mode==save)
+	# end of if(mode==new)		
+	}
 }
+//$pnames=array($LDParameter,$LDMsrUnit,$LDMedian,$LDUpperBound,$LDLowerBound,$LDUpperCritical,$LDLowerCritical,$LDUpperToxic,$LDLowerToxic,$LDID,$LDShow);
+//$pitems=array('name','msr_unit','median','hi_bound','lo_bound','hi_critical','lo_critical','hi_toxic','lo_toxic','id','status');
 
-$pnames=array($LDParameter,$LDMsrUnit,$LDMedian,$LDUpperBound,$LDLowerBound,$LDUpperCritical,$LDLowerCritical,$LDUpperToxic,$LDLowerToxic,$LDAdd_label,$LDis_enabled,"status");
-$pitems=array('name','msr_unit','median','hi_bound','lo_bound','hi_critical','lo_critical','hi_toxic','lo_toxic','add_label','is_enabled','status');
 # Get the test parameter values
 if($tparam=&$lab_obj->getTestParam($nr)){
 	$tp=$tparam->FetchRow();
-	$ttest=&$lab_obj->TestGroupByID($tp['id']);
+	$parameters=$paralistarray[$tp['group_id']];
 }else{
 	$tp=false;
 }
-if($nr==0)
-{
-	$tp['name'] = $LDNewParam;
-	$tp['group_id'] = $parameterselect;
-}
 
+//gjergji : i get the groups here...
+$tgroups=&$lab_obj->TestActiveGroups();	
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
- <TITLE>Laborwerte Eingabe</TITLE>
+ <TITLE>Konfigurimi i Parametrave</TITLE>
 
 <script language="javascript" name="j1">
 <!--
@@ -114,7 +127,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 .a12_b{font-family:arial; font-size:12; color:#000000}
 .a10_n{font-family:arial; font-size:10; color:#000099}
 </style>
-
+<script src="../../js/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+<link href="../../js/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
@@ -130,18 +144,12 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;
 <?php
-	echo $tp['name'];
+	if(isset($parameters[$tp['id']])&&!empty($parameters[$tp['id']])) echo $parameters[$tp['id']];
+		else echo $tp['name'];
  ?>
  </STRONG></FONT>
 </td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right >
-	<nobr>
-	<a href="javascript:gethelp('lab_test_parameters.php','Laboratories :: Test Parameters')">
-	<img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>
-		<?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-	<a href="javascript:window.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>
-	<?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-	</nobr></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab_param_edit.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
 </tr>
 <tr align="center">
 <td  bgcolor=#dde1ec colspan=2>
@@ -153,7 +161,14 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <tr>
 <td  bgcolor=#ff0000 colspan=2><FONT SIZE=2  FACE="Verdana,Arial" color="#ffffff">
 <b>
-<?php echo $parametergruppe[$tp['group_id']]; ?>
+<?php 
+
+	if(isset($tp['group_id']) && !empty($tp['group_id'])) {
+		$paramName = &$lab_obj->getGroupName( $tp['group_id']);
+		$paramName = &$paramName->FetchRow();
+		echo $paramName['name']; 
+	}
+?>
 </b>
 </td>
 </tr>
@@ -162,74 +177,20 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <form action="<?php echo $thisfile; ?>" method="post" name="paramedit">
 
-<table border="0" cellpadding=2 cellspacing=1>
-
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    <li class="TabbedPanelsTab" tabindex="0"><?php echo $LDParameter ?></li>
+    <li class="TabbedPanelsTab" tabindex="0"><?php echo $LDMale ?></li>
+    <li class="TabbedPanelsTab" tabindex="0"><?php echo $LDFemales ?></li>
+    <li class="TabbedPanelsTab" tabindex="0"><?php echo $LD01Moth ?></li>
+    <li class="TabbedPanelsTab" tabindex="0"><?php echo $LD112Month ?></li>
+    <li class="TabbedPanelsTab" tabindex="0"><?php echo $LD114Years ?></li>
+  </ul>
+    <div class="TabbedPanelsContentGroup">
 <?php
-
 $toggle=0;
-
-if($tp){
-
-	if($toggle) $bgc='#ffffee'; else $bgc='#efefef';
-	$toggle=!$toggle;
-
-	for($i=0;$i<sizeof($pitems);$i++){
-
-		if($pitems[$i]=="add_label")
-		{
-			echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;Postive & Negative</td>
-			<td bgcolor="'.$bgc.'"  class="a12_b">
-			';
-		}
-		else
-		{
-			if($pnames[$i]!="status")
-			{
-				echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$pnames[$i].'</td>
-				<td bgcolor="'.$bgc.'"  class="a12_b">
-				';
-			}
-		}
-			if($pitems[$i]=="add_label")
-			{
-				echo '<input type="radio" name="status" value="showPosNeg"';
-				if($tp['status'] == 'showPosNeg') echo ' checked ';
-				echo '>Show <input type="radio" name="status" value=""';
-				if($tp['status'] == null) echo ' checked ';
-				/*if($tp[$pitems[$i]]=="checkbox") echo ' checked ';
-				echo '>Checkbox';
-				echo '<input type="radio" name="add_type" value=""';*/
-
-				//if(!trim($tp[$pitems[$i]]) || !$tp[$pitems[$i]]=="text" || !$tp[$pitems[$i]]=="radio") echo ' checked ';
-				echo '>Hide';
-
-			}
-			elseif($pitems[$i]=="is_enabled")
-			{
-				echo '<input type="radio" name="is_enabled" value="1"';
-				if($ttest['is_enabled']=="1") echo ' checked ';
-				echo '>Show <input type="radio" name="is_enabled" value="0"';
-				if($ttest['is_enabled']!="1") echo ' checked ';
-				echo '>Hide';
-			}
-			elseif($pitems[$i]=="price")
-			{
-				//echo'	<input type="text" name="'.$pitems[$i].'" size=30 maxlength=30 value="'.$tp[$pitems[$i]].'"> '.$LDTSH;
-			}
-			else
-			{
-				if($pnames[$i]!="status")
-				{
-					echo'	<input type="text" name="'.$pitems[$i].'" size=30 maxlength=30 value="'.$tp[$pitems[$i]].'">';
-				}
-			}
-			echo '&nbsp;
-			</td></tr>
-			';
-	}
-
-
-/*	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDParameter.'</td>
+	echo '<div class="TabbedPanelsContent"><table border="0" cellpadding=2 cellspacing=1>	
+	<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDParameter.'</td>
 			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="name" size=15 maxlength=15 value="'.$tp['name'].'">&nbsp;
 			</td></tr>
 			';
@@ -237,7 +198,45 @@ if($tp){
 			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="msr_unit" size=15 maxlength=15 value="'.$tp['msr_unit'].'">&nbsp;
 			</td></tr>
 			';
-	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDMedian.'</td>
+/*	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDID.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="id" size=15 maxlength=50 value="'.$tp['id'].'">&nbsp;
+			</td></tr>
+			';	*/
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDMethod.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="method" size=15 maxlength=50 value="'.$tp['method'].'">&nbsp;
+			</td></tr>
+			';	
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDShowParam.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b">
+			<select name="status">
+			  <option value="">'.$LDShow.'</option>
+			  <option value="hidden"'; 
+				 if ($tp['status']=='hidden') echo "selected";
+				 echo '>'.$LDHide.'</option>
+			  <option value="deleted"';
+				 if ($tp['status']=='deleted') echo "selected";
+				 echo '>'.$LDDelete.'</option>';
+			echo '</select>
+			</td></tr>';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDGroup.'</td><td>';	
+	echo '<select name="group_id" size=1>';
+
+	while($tg=$tgroups->FetchRow()){
+		$sTemp = $sTemp.'<option value="'.$tg['id'].'"';
+		if($tp['group_id']==$tg['id']) $sTemp = $sTemp.' selected';
+		$sTemp = $sTemp.'>';
+		if(isset($parametergruppe[$tg['id']])&&!empty($parametergruppe[$tg['group_id']])) $sTemp = $sTemp.$parametergruppe[$tg['id']];
+			else $sTemp = $sTemp.$tg['name'];
+		$sTemp = $sTemp.'</option>';
+		$sTemp = $sTemp."\n";
+	}
+	$sTemp = $sTemp.'</select>';
+	echo $sTemp;
+	echo '</td></tr></table></div>
+			';
+	//males				 	
+	echo '<div class="TabbedPanelsContent"><table border="0" cellpadding=2 cellspacing=1>	
+	<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDMedian.'</td>
 			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="median" size=15 maxlength=15 value="'.$tp['median'].'">&nbsp;
 			</td></tr>
 			';
@@ -262,29 +261,156 @@ if($tp){
 			';
 	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDLowerToxic.'</td>
 			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_toxic" size=15 maxlength=15 value="'.$tp['lo_toxic'].'">&nbsp;
+			</td></tr></table></div>
+			'; 
+	//females				 	
+	echo '<div class="TabbedPanelsContent"><table border="0" cellpadding=2 cellspacing=1>	
+	<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDMedian.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="median_f" size=15 maxlength=15 value="'.$tp['median_f'].'">&nbsp;
 			</td></tr>
 			';
-*/ }
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDUpperBound.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="hi_bound_f" size=15 maxlength=15 value="'.$tp['hi_bound_f'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDLowerBound.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_bound_f" size=15 maxlength=15 value="'.$tp['lo_bound_f'].'">&nbsp;
+			</td></tr>';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDUpperCritical.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="hi_critical_f" size=15 maxlength=15 value="'.$tp['hi_critical_f'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDLowerCritical.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_critical_f" size=15 maxlength=15 value="'.$tp['lo_critical_f'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDUpperToxic.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="hi_toxic_f" size=15 maxlength=15 value="'.$tp['hi_toxic_f'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDLowerToxic.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_toxic_f" size=15 maxlength=15 value="'.$tp['lo_toxic_f'].'">&nbsp;
+			</td></tr></table></div>
+			';	
+	//from 0 - 1 moth				 	
+	echo '<div class="TabbedPanelsContent"><table border="0" cellpadding=2 cellspacing=1>	
+	<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDMedian.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="median_n" size=15 maxlength=15 value="'.$tp['median_n'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDUpperBound.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="hi_bound_n" size=15 maxlength=15 value="'.$tp['hi_bound_n'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDLowerBound.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_bound_n" size=15 maxlength=15 value="'.$tp['lo_bound_n'].'">&nbsp;
+			</td></tr>';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDUpperCritical.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="hi_critical_n" size=15 maxlength=15 value="'.$tp['hi_critical_n'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDLowerCritical.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_critical_n" size=15 maxlength=15 value="'.$tp['lo_critical_n'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDUpperToxic.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="hi_toxic_n" size=15 maxlength=15 value="'.$tp['hi_toxic_n'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDLowerToxic.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_toxic_n" size=15 maxlength=15 value="'.$tp['lo_toxic_n'].'">&nbsp;
+			</td></tr></table></div>
+			'; 	
+	//from 1 - 12 month				 	
+	echo '<div class="TabbedPanelsContent"><table border="0" cellpadding=2 cellspacing=1>	
+	<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDMedian.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="median_y" size=15 maxlength=15 value="'.$tp['median_y'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDUpperBound.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="hi_bound_y" size=15 maxlength=15 value="'.$tp['hi_bound_y'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDLowerBound.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_bound_y" size=15 maxlength=15 value="'.$tp['lo_bound_y'].'">&nbsp;
+			</td></tr>';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDUpperCritical.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="hi_critical_y" size=15 maxlength=15 value="'.$tp['hi_critical_y'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDLowerCritical.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_critical_y" size=15 maxlength=15 value="'.$tp['lo_critical_n'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDUpperToxic.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="hi_toxic_y" size=15 maxlength=15 value="'.$tp['hi_toxic_y'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDLowerToxic.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_toxic_y" size=15 maxlength=15 value="'.$tp['lo_toxic_y'].'">&nbsp;
+			</td></tr></table></div>
+			';  	
+	//from 1 - 14 years				 	
+	echo '<div class="TabbedPanelsContent"><table border="0" cellpadding=2 cellspacing=1>	
+	<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDMedian.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="median_c" size=15 maxlength=15 value="'.$tp['median_c'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDUpperBound.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="hi_bound_c" size=15 maxlength=15 value="'.$tp['hi_bound_c'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDLowerBound.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_bound_c" size=15 maxlength=15 value="'.$tp['lo_bound_c'].'">&nbsp;
+			</td></tr>';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDUpperCritical.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="hi_critical_c" size=15 maxlength=15 value="'.$tp['hi_critical_c'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDLowerCritical.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_critical_c" size=15 maxlength=15 value="'.$tp['lo_critical_c'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDUpperToxic.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="hi_toxic_c" size=15 maxlength=15 value="'.$tp['hi_toxic_c'].'">&nbsp;
+			</td></tr>
+			';
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDLowerToxic.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_toxic_c" size=15 maxlength=15 value="'.$tp['lo_toxic_c'].'">&nbsp;
+			</td></tr></table></div>
+			';  
 ?>
-</table>
-<input type=hidden name="add_label" value ="Positive">
-<input type=hidden name="add_type" value ="radio">
-<input type=hidden name="parameterselect" value="<?php echo $parameterselect; ?>">
+</div>
+
+<script type="text/javascript">
+<?php
+echo 'var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");'
+?>
+</script>
+
 <input type=hidden name="nr" value="<?php echo $nr; ?>">
-<input type=hidden name="id" value="<?php echo $tp['id']; ?>">
 <input type=hidden name="sid" value="<?php echo $sid; ?>">
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
+<?php if($mode=='new') { ?>
+<input type=hidden name="mode" value="savenew">
+<?php } else { ?>
 <input type=hidden name="mode" value="save">
+<?php } ?>
 <input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>>
 
 </td>
 </tr>
+
 </table>
+
 </form>
+
 </FONT>
 <p>
 </td>
+
 </tr>
 </table>
+
 </BODY>
 </HTML>

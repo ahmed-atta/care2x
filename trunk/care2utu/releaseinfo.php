@@ -1,7 +1,11 @@
 <?php
-$version="2.05.2";
-/*
+$version="2.05.3.1";
+/**
  * History:
+ * Version 2.05.3.1, 20-aug-08
+ * Rollback of the billing to previous settings & some bugfixes
+ * Version 2.05.3, 20-aug-08
+ * first implementation of webERP / XML-RPC interface integrated
  * Version 2.05.2, 15-apr-08
  * Pharmacy module did not show the dental prescriptions (bugfix)
  * Version 2.05.1, 14-apr-08

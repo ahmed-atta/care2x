@@ -92,6 +92,8 @@ while($order=$orders->fetch_object($rs)){
 	$sid=$order->supplier_id;
 	$d=$order->order_date;
     $oby=$order->ordered_by;
+	$orders->getstatus($o);
+	$st = $orders->status;
 $ss=$orders->get_total($o);
 $sss=$orders->formatMoney($ss);
 
@@ -102,7 +104,8 @@ if($k==1){
 	echo"<tr bgcolor='#EEEEEE'>";
 	$k++;
 }
-echo"<td align='center'><a href='purchase_orders.php?del_order=$o'><IMG src='includes/images/delete.png' border='0' align='center' alt='Delete'></a></td><td><a href='receiving_goods.php?oid=$o&odate=$d&sp=$s&total=$sss&pby=$oby&si=$sid'>Receive</a></td><td>$o</td><td>$s</td><td>$d</td><td>$sss</td><td align='center'><a href=\"purchase_order.php?mode=show&order_id=".$o."\"><img src=\"".$root_path."gui/img/common/default/common_infoicon.gif\"  border=\"0\"></a></td></tr>";
+echo"<td align='center'>"; if($st!='received' && $st!='attended') { ?> <a href='purchase_orders.php?del_order=$o'><IMG src='includes/images/delete.png' border='0' align='center' alt='Delete'></a><?php } echo "</td><td>"; if ($st!='received')
+{ echo"<a href='receiving_goods.php?oid=$o&odate=$d&sp=$s&total=$sss&pby=$oby&si=$sid'>Receive</a>"; } else { echo ' complete '; }echo"</td><td>$o</td><td>$s</td><td>$d</td><td>$sss</td><td align='center'><a href=\"purchase_order.php?mode=show&order_id=".$o."\"><img src=\"".$root_path."gui/img/common/default/common_infoicon.gif\"  border=\"0\"></a></td></tr>";
 }
 ?>
 

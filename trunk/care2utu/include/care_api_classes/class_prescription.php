@@ -210,7 +210,7 @@ class Prescription extends Core {
 	/**
 	* Merotech customation methods
 	*/
-
+//TODO: check on enabled drugsandservices item!
 	function getDrugList($class, $is_enabled ) {
   	  global $db;
   	  if($is_enabled) $query = " AND ".$is_enabled." = 1";
@@ -304,6 +304,8 @@ class Prescription extends Core {
 	  	return TRUE;
 	} // end of function insert_prescription($encounter_nr, $drug_list_id)
 
+//TODO: check on enabled drugsandservices item!
+
 	function GetItemIDByNumber($item_number) {
 	  global $db;
       $debug = FALSE;
@@ -335,6 +337,8 @@ class Prescription extends Core {
 	  $db->debug=FALSE;
 	  return $ret;
 	}
+
+	//TODO: check on enabled drugsandservices item!
 
 	function DisplaySelectedItems($items) {
 	  global $db;
@@ -375,6 +379,7 @@ class Prescription extends Core {
 			}
 	  return TRUE;
 	}
+//TODO: check on enabled drugsandservices item!
 
   function GetNameOfItem($item_number) {
     global $db;
@@ -395,6 +400,9 @@ class Prescription extends Core {
 		}
   } // end of function GetNameOfDrug($item_number)
 
+
+//TODO: check on enabled drugsandservices item!
+
   function GetPriceOfItem($item_number) {
     global $db;
     $debug=FALSE;
@@ -413,6 +421,8 @@ class Prescription extends Core {
 			}
 		}
   } // end of function GetPriceOfItem($item_number)
+
+//TODO: check on enabled drugsandservices item!
 
   function GetClassOfItem($item_number) {
     global $db;

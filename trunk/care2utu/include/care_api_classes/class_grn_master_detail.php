@@ -13,7 +13,8 @@ class grn_goods extends supplier{
 	var $invoice_date;
 	var $invoice_no;
 	var $date_received;
-
+    var $price;
+	var $inv;
 
 
 	function _constuct(){
@@ -108,6 +109,36 @@ class grn_goods extends supplier{
 		$sql3="update care_tz_purchase_order_detail set received_quantity=received_quantity + $rquantity where no='$itemno' AND order_no='$orderno'";
 		$result=$this->query($sql3);
 		return $result;
+	}
+
+	function update_invoice_grn_master($grno,$orderno,$amounts){
+		$sql4="update care_tz_grn_master set invoice_amount=invoice_amount + $amounts where grn_no='$grno' AND order_no='$orderno' " ;
+		$result= $this->query($sql4);
+		return $result;
+	}
+
+	function update_purchase_order_status($orderno){
+		$sql0="select sum(total_price) as total_price,sum(invoice_amount) as invoice_amount  from care_tz_grn_master where order_no='$orderno' group by order_no";
+		$result=$this->query($sql0);
+
+		$row=$this->fetch_object($result);
+
+		$totalprice=mysql_result($result,0,'total_price');
+
+		$invoiceamount=mysql_result($result,0,'invoice_amount');
+
+		if($totalprice==$invoiceamount){
+			$sql01="update care_tz_purchase_order set status='received' where order_no='$orderno'";
+			$this->query($sql01);
+		}
+
+		else
+		{
+		 $sql01="update care_tz_purchase_order set status='attended' where order_no='$orderno'";
+		 $this->query($sql01);
+
+		}
+		//$this->query($sql01);
 	}
 
 

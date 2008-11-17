@@ -207,7 +207,7 @@ class GuiInputPerson {
 				if(mktime(0,0,0,substr($date_birth,3,2),substr($date_birth,0,2),substr($date_birth,6,4))>time()) { $errordatebirth=1; $error++;}
 				//if (is_array($tribe_array) && !$no_tribe) {$errormaiden=1; $error++;}
 				//if (is_array($town_array)) {$errortown=1; $error++;}
-				if (!$citizenship) { $errortown=1; $error++;}
+				//if (!$citizenship) { $errortown=1; $error++;}
 				if ($sex=='') { $errorsex=1; $error++;}
 			}
 			# If the validation produced no error, save the data
@@ -590,7 +590,7 @@ class GuiInputPerson {
 					echo 'd.district.focus();';
 					echo 'return false;';
 				echo '}else if(d.ward.value=="-1"){';
-					echo ' alert("Please select ward");';
+					echo ' alert("Please select Health Center");';
 					echo ' d.ward.focus();';
 					echo ' return false;';
 			}
@@ -622,12 +622,6 @@ class GuiInputPerson {
 				return false;
 			}else if(d.religion.value=="-1"){
 				alert ("Select religion!");
-				return false;
-			} else if (d.addr_citytown_nr.value=="-1"){
-				alert ("Select location!");
-				return false;
-			}else if (d.citizenship.value==""){
-				alert ("Insert Town/City!");
 				return false;
 			}else{
 				return true;
@@ -954,7 +948,9 @@ if(!$no_tribe)
 		}
 		?>
 
-			<tr>
+<!--
+TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
+ 			<tr>
 			<td class="reg_item">
 				<?php echo $LDBloodGroup ?>:
 			</td>
@@ -972,7 +968,7 @@ if(!$no_tribe)
 			<?php if($rh=='neg') echo 'checked'; ?>><?php echo $LDRHneg; ?>
 			</td>
 			</tr>
-
+-->
 			<tr>
 			<td class="reg_item">
 				<FONT SIZE=-1  FACE="Arial"><?php if ($errorcivil) echo "<font color=red>"; ?> <?php echo $LDCivilStatus ?></font>:
@@ -996,11 +992,13 @@ if(!$no_tribe)
 			</tr>
 
 
-			<tr>
+<!-- 		<tr>
 			<td colspan=2>
 				<FONT SIZE=-1  FACE="Arial"><?php if ($erroraddress) echo "<font color=red>"; ?><?php echo $LDAddress ?></font>:
 			</td>
 			</tr>
+-->
+
 <?php if (!$person_email_hide){
 				//{
 
@@ -1008,7 +1006,7 @@ if(!$no_tribe)
 			<tr>
 				<td class="reg_item"><FONT SIZE=-1  FACE="Arial,verdana,sans serif">
 				<?php if($errormaiden) { echo '<font color="FF0000">'; } echo '* '.'Region';
-					$sql="SELECT * FROM care_tz_region";
+					$sql="SELECT * FROM care_tz_region order by region_name";
 					$ergebnis=$db->Execute($sql);
 
 
@@ -1123,10 +1121,10 @@ if(!$no_tribe)
 			<tr></tr>
 			<tr>
 				<td class="reg_item"><FONT SIZE=-1  FACE="Arial,verdana,sans serif">
-				<?php if($errormaiden) { echo '<font color="FF0000">'; } echo '* '.'Ward'; ?></td>
+				<?php if($errormaiden) { echo '<font color="FF0000">'; } echo '* '.'Health Center'; ?></td>
 				<td  class="reg_input" colspan=1>
 					<select name="ward" size="1">
-						<option value="-1" >---select ward--------</option>
+						<option value="-1" >-select Health Center-</option>
 					</select>
 
 			<?php
@@ -1172,7 +1170,7 @@ if(!$no_tribe)
 						$i=1;
 						echo "group[".$j."][0]=new Option(\"now select this one\");\n";
 
-						$sql2="SELECT * FROM care_tz_district where is_additional=".$region['region_code'];
+						$sql2="SELECT * FROM care_tz_district where is_additional=".$region['region_code'] ." order by district_name";
 						$ergebnis2=$db->Execute($sql2);
 						while($district=$ergebnis2->FetchRow())
 						{
@@ -1214,7 +1212,7 @@ if(!$no_tribe)
 						secondGroup[i][j]=new Array()
 					}
 				}
-				secondGroup[0][0][0]=new Option("---select ward--------");
+				secondGroup[0][0][0]=new Option("-select Health Center-");
 
 				<?php
 				/*	$j=1;
@@ -1249,7 +1247,7 @@ if(!$no_tribe)
 					while($region=$ergebnis->FetchRow())
 					{
 						$i=1;
-						echo "secondGroup[".$j."][0][0]=new Option(\"---select ward--------\");\n";
+						echo "secondGroup[".$j."][0][0]=new Option(\"-select Health Center-\");\n";
 
 						$sql2="SELECT * FROM care_tz_district where is_additional=".$region['region_code'];
 						$ergebnis2=$db->Execute($sql2);
@@ -1258,7 +1256,7 @@ if(!$no_tribe)
 							$v=1;
 							echo  "secondGroup[".$j."][".$i."][0]=new Option(\"now select this one\");\n";
 
-							$sql3="SELECT * FROM care_tz_ward where is_additional =".$district['district_code'];
+							$sql3="SELECT * FROM care_tz_ward where is_additional =".$district['district_code'] ." order by ward_name";
 							$ergebnis3=$db->Execute($sql3);
 							while($ward=$ergebnis3->FetchRow())
 							{
@@ -1333,12 +1331,15 @@ if(!$no_tribe)
 				}
 				?>
 
-
-
+			<tr>
+			<td colspan=2>
+				<FONT SIZE=-1  FACE="Arial"><?php if ($erroraddress) echo "<font color=red>"; ?><?php echo $LDAddress ?></font>:
+			</td>
+			</tr>
 
 			<tr>
 			<td class="reg_item">
-				<FONT SIZE=-1  FACE="Arial"><?php if ($errortown) echo "<font color=red>"; ?>* <?php echo $LDTownCity ?>:
+				<FONT SIZE=-1  FACE="Arial"><?php echo $LDTownCity ?>:
 			</td>
 			<td class="reg_input"><input name="citizenship" type="text" value="<?php echo $citizenship;?>" ></td>
 			<!--<td class="reg_input">

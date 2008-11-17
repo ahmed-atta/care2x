@@ -114,11 +114,13 @@ $quantity=$_REQUEST['quantity'];
 						}
 						?>
 					</select>
+<!--
 
-
-					</select
+					</select> -->
                 </td>
               </tr>
+<!--        </tr> -->
+            <tr>
               <tr>
                 <td>
   <input type="hidden" name="order_id" value="<?php echo $order_id; ?>" />
@@ -141,7 +143,7 @@ $quantity=$_REQUEST['quantity'];
               <td width="10%"><?php echo $LDItemClass; ?>n</td>
               <td width="8%"><?php echo $LDUnitPrice; ?></td>
 
-              <td width="5%"><?php echo "Select"; ?></td>
+              <td width="5%"><?php echo ""; ?></td>
 
             </tr>
             <tr>

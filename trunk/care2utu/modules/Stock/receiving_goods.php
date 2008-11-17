@@ -8,8 +8,9 @@ require($root_path.'include/care_api_classes/supplier_database_class.php');
 
 require($root_path.'include/care_api_classes/class_purchase_order.php');
 require($root_path.'include/care_api_classes/class_grn_master_detail.php');
+require($root_path.'include/care_api_classes/class_add_to_store.php');
 
-
+$additem = new addtostore();
 $order_id=$_REQUEST['oid'];
 $plced_date=$_REQUEST['odate'];
 $supplier=$_REQUEST['sp'];
@@ -208,7 +209,8 @@ A:visited:hover {color: #cc0033;}
 }
 -->
 </style>
-
+<script type="text/javascript" src="calendarDateInput.js">
+</script>
 </HEAD>
 <BODY bgcolor=#ffffff link=#000066 alink=#cc0000 vlink=#000066>
 
@@ -366,19 +368,16 @@ RECEIVING <b> <?php echo $itemnames ; ?> </b>Now.
 
                 <td align=right width=145 >Order Number </td>
                 <td width="350"><input type="text" name="orderno" readonly="orderno" value="<?php echo $id; ?>" size=40 maxlength=60></td>
-
               </tr>
               <tr>
 
 
                 <td align=right width=145>Goods received Number</td>
-                <td><input type="text" name="grno" readonly="grno"value="<?php echo $grns;?>"  size=40 maxlength=40>
-                  </td>
+                <td><input type="text" name="grno" readonly="grno"value="<?php echo $grns;?>"  size=40 maxlength=40>                </td>
               </tr>
               <tr>
                 <td align=right width=145> Item decription               </td>
-                <td><input type="text" name="itemdes" readonly="itemdes"value="<?php echo $itemnames?>"  size=40 maxlength=40>
-                  </td>
+                <td><input type="text" name="itemdes" readonly="itemdes"value="<?php echo $itemnames?>"  size=40 maxlength=40>                </td>
               </tr>
 
 
@@ -391,15 +390,13 @@ RECEIVING <b> <?php echo $itemnames ; ?> </b>Now.
 
 
                 <td align=right width=145>Received quantity              </td>
-                <td><input type="text" name="rquantity" value=""  size=40 maxlength=40  onBlur="validatereceivedquantity();">
-                  </td>
+                <td><input type="text" name="rquantity" value=""  size=40 maxlength=40  onBlur="validatereceivedquantity();">                </td>
               </tr>
               <tr>
 
 
                 <td align=right width=145>Unit price              </td>
-                <td><input type="text" name="uprice"  readonly="uprice" value="<?php echo $price; ?>"  size=40 maxlength=40>
-                  </td>
+                <td><input type="text" name="uprice"  readonly="uprice" value="<?php echo $price; ?>"  size=40 maxlength=40>                </td>
               </tr>
                          <tr>
 
@@ -411,29 +408,28 @@ RECEIVING <b> <?php echo $itemnames ; ?> </b>Now.
     		<option value="cash">Cash</option>
    		 <option value="credit">Credit</option>
    		 <option value="cash and credit">Cash and Credit</option>
-  				</select>
-
-                  </td>
+  				</select>                  </td>
               </tr>
               <tr>
 
 
                 <td align=right width=145>Batch Number       </td>
-                <td><input type="text" name="batchno" value=""  size=40 maxlength=40>
-                  </td>
+                <td><input type="text" name="batchno" value=""  size=40 maxlength=40>                  </td>
               </tr>
               <tr>
 
 
                 <td align=right width=145>Expare date       </td>
-                <td><input type="text" name="expdate" value=""  size=40 maxlength=40>
-                  </td>
+                <td><div align="left">
+                  <script>DateInput('expdate', true, 'YYYY-MM-DD')</script>
+                </div></td>
               </tr>
               <tr>
 
 
                 <td align=right>&nbsp;</td>
-                <td><input type="hidden" name="itemno" value="<?php echo $itemno; ?>"><input type="hidden" name="rcd" value="<?php echo $rcvd; ?>"></td>
+                <td><input type="hidden" name="itemno" value="<?php echo $itemno; ?>">
+                <input type="hidden" name="rcd" value="<?php echo $rcvd; ?>"></td>
               </tr>
 
 <!--goes here -->
@@ -448,12 +444,12 @@ RECEIVING <b> <?php echo $itemnames ; ?> </b>Now.
 
 				        <input type="hidden" name="itemid" value="<?php echo $itemid; ?>">
 
-                <input type="submit" value="Save this" name="receiveitem" onclick="return checkForm2();"/> &nbsp;<input type="reset" value="Reset"> </td>
+                <input type="submit" value="Save this" name="receiveitem" onClick="return checkForm2();"/> &nbsp;<input type="reset" value="Reset"> </td>
               </tr>
-               </tbody>
+            </tbody>
           </table>
 
-  </form>
+</form>
 
 <?
 }else if(isset($_POST['receiveitem'])){
@@ -475,7 +471,13 @@ $process->dbselect();
 
 if($process->add_grn_detail($no,$grno,$orderno,$itemid,$oquantity,$rquantity,$invototal,$status,$batch,$expdate))
 {
+	$process->update_invoice_grn_master($grno,$orderno,$invototal);
+
 	$process->update_purchase_detail($no,$orderno,$rquantity);
+
+	$process->update_purchase_order_status($orderno);
+
+     $additem->insert_item( $itemid,1,$batch,$expdate,$rquantity);
 	echo"The Item is succesful received. ";
 
 	$data=$process->get_grn_details($orderno);
@@ -529,19 +531,16 @@ COMPLETE THE FORM BELOW FIRST:
 
                 <td align=right width=145 >Order Number </td>
                 <td width="350"><input type="text" name="orderno" readonly="orderno" value="<?php echo $order_id; ?>" size=40 maxlength=60></td>
-
               </tr>
               <tr>
 
 
                 <td align=right width=145>Supplier Name</td>
-                <td><input type="text" name="supplier" readonly="supplier"value="<?php echo $supplier;?>"  size=40 maxlength=40>
-                  </td>
+                <td><input type="text" name="supplier" readonly="supplier"value="<?php echo $supplier;?>"  size=40 maxlength=40>                  </td>
               </tr>
               <tr>
                 <td align=right width=145> Date Ordered                 </td>
-                <td><input type="text" name="odate" readonly="odate"value="<?php echo $plced_date;?>"  size=40 maxlength=40>
-                  </td>
+                <td><input type="text" name="odate" readonly="odate"value="<?php echo $plced_date;?>"  size=40 maxlength=40>                  </td>
               </tr>
 
                <tr>
@@ -552,7 +551,7 @@ COMPLETE THE FORM BELOW FIRST:
                   <tr>
                 <td align=right width=145>Order Amount</td>
                 <td><input type="text" name="amount" readonly="amount" value="<?php echo $amount;?>"  size=40 maxlength=40></td>
-              </tr>
+                  </tr>
               <tr>
 
 
@@ -562,28 +561,21 @@ COMPLETE THE FORM BELOW FIRST:
    <option value="">---Select one---</option>
    <option value="Tshs">Tanzanian Shilling Tshs</option>
     <option value="US $">US dollar $</option>
-
-  </select><input type="hidden" name="supplierid"  value="<?php echo $supplier_id;?>" >
-
-                  </td>
+  </select><input type="hidden" name="supplierid"  value="<?php echo $supplier_id;?>" >                  </td>
               </tr>
               <tr>
 
 
                 <td align=right width=145>Date Received                   </td>
-                <td><input type="text" name="datereceived" value="<?php echo $datedefault;?>"  size=40 maxlength=40 >
-                  </td>
+                <td><input type="text" name="datereceived" value="<?php echo $datedefault;?>"  size=40 maxlength=40 >                  </td>
               </tr>
               <tr>
 
 
                 <td align=right width=145><p>Order Received By</p>                 </td>
-                <td><input type="text" name="receivedby" value=""  size=40 maxlength=40 >
-                  </td>
+                <td><input type="text" name="receivedby" value=""  size=40 maxlength=40 ></td>
               </tr>
               <tr>
-
-
               <tr>
 
 
@@ -594,37 +586,33 @@ COMPLETE THE FORM BELOW FIRST:
     <option value="cash">Cash</option>
     <option value="credit">Credit</option>
     <option value="cash and credit">Cash and Credit</option>
-  </select>
-
-                  </td>
+  </select>                  </td>
               </tr>
               <tr>
 
 
                 <td align=right width=145>Invoice date             </td>
-                <td><input type="text" name="invoicedate" value=""  size=40 maxlength=40>
-                  </td>
+                <td><div align="left">
+                  <script>DateInput('invoicedate', true, 'YYYY-MM-DD')</script>
+                </div>                  </td>
               </tr>
               <tr>
 
 
                 <td align=right width=145>Invoice number              </td>
-                <td><input type="text" name="invoiceno" value=""  size=40 maxlength=40>
-                  </td>
+                <td><input type="text" name="invoiceno" value=""  size=40 maxlength=40>                  </td>
               </tr>
               <tr>
 
 
                 <td align=right width=145>Delivery number              </td>
-                <td><input type="text" name="deliveryno" value=""  size=40 maxlength=40>
-                  </td>
+                <td><input type="text" name="deliveryno" value=""  size=40 maxlength=40>                  </td>
               </tr>
               <tr>
 
 
                 <td align=right width=145>Delivery date         </td>
-                <td><input type="text" name="deliverydate" value="<?php echo $datedefault; ?>"  size=40 maxlength=40>
-                  </td>
+                <td><input type="text" name="deliverydate" value="<?php echo $datedefault; ?>"  size=40 maxlength=40>                  </td>
               </tr>
               <tr>
 
@@ -644,8 +632,9 @@ COMPLETE THE FORM BELOW FIRST:
 
 
 				        <input type="hidden" name="mode" value="create">
-
-                <input type="submit" value="Receive Now" name="receive" onclick="return checkForm();"/> &nbsp;<input type="reset" value="Reset"> </td>
+		                <input type="submit" value="Receive Now" name="receive" onClick="return checkForm();"/>
+                  &nbsp;
+				        <input type="reset" value="Reset"> </td>
               </tr>
             </tbody>
           </table>

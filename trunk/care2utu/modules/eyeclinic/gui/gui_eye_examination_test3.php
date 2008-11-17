@@ -107,51 +107,51 @@ fieldset {
       Left Eye </td>
   </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt1'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt1' value='The face and eyes look symmetrical'></td>
 <td bgcolor="#F0F8FF" align='center'>The face and eyes look symmetrical</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt1'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt1' value='The face and eyes look symmetrical'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt2'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt2' value='There is drooping of the upper lid (Ptosis)'></td>
 <td bgcolor="#F0F8FF" align='center'>There is drooping of the upper lid (Ptosis)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt2'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt2' value='There is drooping of the upper lid (Ptosis)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt3'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt3' value='The eye is pushed forwards (Proptosis)'></td>
 <td bgcolor="#F0F8FF" align='center'>The eye is pushed forwards (Proptosis)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt3'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt3' value='The eye is pushed forwards (Proptosis)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt4'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt4' value='the eyeball is enlarged (enlargement of globe)'></td>
 <td bgcolor="#F0F8FF" align='center'>the eyeball is enlarged (enlargement of globe)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt4'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt4' value='the eyeball is enlarged (enlargement of globe)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt5' ></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt5' value='The eyeball is smaller than normal' ></td>
 <td bgcolor="#F0F8FF" align='center'>The eyeball is smaller than normal</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt5'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt5' value='The eyeball is smaller than normal'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt6'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt6' value='The eyeball is absent or lost'></td>
 <td bgcolor="#F0F8FF" align='center'>The eyeball is absent or lost</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt6'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt6' value='The eyeball is absent or lost'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt7'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='foosrt7' value='The face is swollen or blistered'></td>
 <td bgcolor="#F0F8FF" align='center'>The face is swollen or blistered</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt7'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='fooslt7' value='The face is swollen or blistered'></td>
   </tr>
 
 </table>
@@ -166,7 +166,7 @@ fieldset {
     <td bgcolor="#F0F8FF">
 
   <textarea name="comments" rows="10" cols="90" wrap="off">
-  text
+
   </textarea>
 
   </td>

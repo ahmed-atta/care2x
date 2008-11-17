@@ -1,4 +1,5 @@
 <?php
+
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 
@@ -7,12 +8,20 @@ require('./roots.php');
 require($root_path.'include/care_api_classes/supplier_database_class.php');
 
 require($root_path.'include/care_api_classes/class_purchase_order.php');
+
+require($root_path.'include/care_api_classes/class_purchase_report.php');
+
+require($root_path.'include/care_api_classes/class_grn_master_detail.php');
 $del_order=$_REQUEST['del_order'];
 $del_no=$_REQUEST['del_no'];
 $update_order=$_REQUEST['order_id'];
 $update_no=$_REQUEST['updateno'];
 $update_cost=$_REQUEST['cost'];
 $update_quantity=$_REQUEST['qty'];
+if(isset($_REQUEST['order_id']))
+ {
+   $order_id = $_REQUEST['order_id'];
+ }
 ?>
 <script language="JavaScript" type="text/javascript">
   function checkForm(){
@@ -142,8 +151,8 @@ echo $purchaseorder->generate_order($orderno,$supplier,$orderedby,$datecreated);
 	$unitcost=$_POST['unitprice'];
 	$amount=$quantity *$unitcost;
 	$purchaseorder->add_order_items($order_id,$product_Id,$quantity,$unitcost,$amount);
-
-
+ $stat = new grn_goods();
+ $stat->update_purchase_order_status($orderno);
 
 
 	$order1=$purchaseorder->get_order($order_id);
@@ -173,6 +182,7 @@ echo $purchaseorder->generate_order($orderno,$supplier,$orderedby,$datecreated);
 	$supplierno=$result1->supplier_id;
 	$datecreated=$result1->order_date;
 	$orderedby=$result1->ordered_by;
+
 }
 $supplier=$purchaseorder->get_supplier($supplierno);
 
@@ -236,8 +246,16 @@ echo $purchaseorder->generate_order($orderno,$supplier,$orderedby,$datecreated);
 	$unitcost=$_POST['unitprice'];
 	$amount=$quantity *$unitcost;
 	$purchaseorder->update_order_items($order_id,$product_Id,$quantity,$unitcost,$amount,$update_no);
-
-
+      $status = new grn_goods();
+      $st0 = new purchaseorder();
+$st0->getstatus($order_id);
+$status=$st0->status;
+if($status!='new')
+{
+	 $status->update_purchase_order_status($order_id);
+}
+echo $status->price; echo "<br/>";
+echo $status->inv;
 
 
 	$order1=$purchaseorder->get_order($order_id);
@@ -278,7 +296,7 @@ while($results3=$purchaseorder->fetch_object($items)){
 
 $ss=$purchaseorder->get_total($orderno);
 $sss=$purchaseorder->formatMoney($ss);
-$results=mysql_query("select order_no,no,quantity,unit_cost,total_cost,item_description from care_tz_purchase_order_detail,care_tz_drugsandservices where order_no='$orderno' AND care_tz_purchase_order_detail.item_id=care_tz_drugsandservices.item_id")or die(mysql_error());
+$results=mysql_query("select order_no,no,quantity,unit_cost,total_cost,item_description,care_tz_purchase_order_detail.item_id from care_tz_purchase_order_detail,care_tz_drugsandservices where order_no='$orderno' AND care_tz_purchase_order_detail.item_id=care_tz_drugsandservices.item_id")or die(mysql_error());
 $k = 0;
 while($result3=$purchaseorder->fetch_object($results)){
      $o=$result3->order_no;
@@ -287,6 +305,7 @@ while($result3=$purchaseorder->fetch_object($results)){
     	$Quantity=$result3->quantity;
     	$unit_cost=$result3->unit_cost;
     	$totalcost=$result3->total_cost;
+		$itid = $result3->item_id;
     	if ($k==1){
 				echo "<tr bgcolor='#CCCCCC'>";
 				$k=0;
@@ -294,7 +313,9 @@ while($result3=$purchaseorder->fetch_object($results)){
 				echo "<tr bgcolor='#EEEEEE'>";
 				$k++;
 			}
-    	echo "<td align='center'><a href='purchase_order.php?del_order=$o&del_no=$noo'><IMG src='includes/images/delete.png' border='0'  alt='Delete'></a></td><td>$itemcode</td><td>$Quantity</td><td>$unit_cost</td><td>$totalcost</td><td><a href='purchase_order.php?order_id=$o&updateno=$noo&mode2=do&cost=$unit_cost&qty=$Quantity'>select</a></td></tr>";
+			$res = mysql_query("select  * from care_tz_grn_detail where order_no=$o and item_id=$itid ");
+			$num = mysql_num_rows($res);
+    	echo "<td align='center'>"; if($num==0) { ?><a href='purchase_order.php?del_order=$o&del_no=$noo'><IMG src='includes/images/delete.png' border='0'  alt='Delete'></a> <?php } echo"</td><td>$itemcode</td><td>$Quantity</td><td>$unit_cost</td><td>$totalcost</td><td><a href='purchase_order.php?order_id=$o&updateno=$noo&mode2=do&cost=$unit_cost&qty=$Quantity'>select</a></td></tr>";
 }// update form
 
 
@@ -374,10 +395,19 @@ while($result3=$purchaseorder->fetch_object($results)){
 
 
 <?php
-
-echo"<a href=\"purchase_orders.php\"><img src=\"".$root_path."gui/img/common/default/billing_done.gif\"  border=\"0\"></a>";
+$st = new purchaseorder();
+$st->getstatus($order_id);
+$status=$st->status;
+echo"<a href=\"purchase_orders.php?status=".$status."\"><img src=\"".$root_path."gui/img/common/default/billing_done.gif\"  border=\"0\"></a>";
 echo $form;
 }
-
+$st= new purchaseorder();
+$st->getstatus($order_id);
+$status = $st->status;
+  if($status!="new")
+  {
+$report = new  purchasereport();
+$report->select_distinct_items($order_id);
+}
 
 ?>

@@ -1,7 +1,18 @@
 <?php
+
+
 require_once($root_path.'include/care_api_classes/class_prescription.php');
 if(!isset($pres_obj)) $pres_obj=new Prescription;
 require_once($root_path.'include/care_api_classes/class_person.php');
+
+// added by mrisho
+
+require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
+$bill = new Bill();
+//end of the addition
+
 $person_obj = new Person;
 if (empty($encounter_nr) and !empty($pid))
 	$encounter_nr = $person_obj->CurrentEncounter($pid);
@@ -112,7 +123,7 @@ else
 
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $caption_dosage; ?></td>
-     <td><input type="text" name="arr_dosage[<?PHP echo $i; ?>]" size=50 maxlength=60 value="<?php echo $prescriptionitem['dosage'];?>" onBlur="chkform(this)"></td>
+     <td><input type="text" name="arr_dosage[<?PHP echo $i; ?>]" size=50 maxlength=60 value="<?php echo $prescriptionitem['dosage'];?>" onBlur="chkform(this)">  You have <strong><?php echo $bill->get_num_av($pres_obj->GetNameOfItem($item_array[$i])); ?></strong> unit(s) at phamarcy</td>
    </tr>
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDApplication.' '.$LDNotes; ?></td>
@@ -168,7 +179,7 @@ else
 <table border=0 cellpadding=4 cellspacing=1 width=100% class="frame">
 <?php
 $toggle=TRUE;
-while($row=$result->FetchRow() ){
+while($row=$result->FetchRow()){
 	if($toggle) $bgc='#f3f3f3';
 		else $bgc='#fefefe';
 	if ($toggle)
@@ -199,7 +210,6 @@ while($row=$result->FetchRow() ){
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['prescriber']; ?></td>
   </tr>
 <?php
-
 }
 ?>
 

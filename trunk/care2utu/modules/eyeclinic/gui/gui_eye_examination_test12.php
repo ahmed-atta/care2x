@@ -107,65 +107,65 @@ fieldset {
       Left Eye </td>
   </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr1'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr1' value='There are cells in the vitreous'></td>
 <td bgcolor="#F0F8FF" align='center'>There are cells in the vitreous</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='psl1'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='psl1' value='There are cells in the vitreous'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr2'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr2' value='There is a vitreous haemorrhage'></td>
 <td bgcolor="#F0F8FF" align='center'>There is a vitreous haemorrhage</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='psl2'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='psl2' value='There is a vitreous haemorrhage'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr2'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr2' value='There is a retinal detachment'></td>
 <td bgcolor="#F0F8FF" align='center'>There is a retinal detachment</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='psl2'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='psl2' value='There is a retinal detachment'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr3'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr3' value='There are changes in retinal appearance'></td>
 <td bgcolor="#F0F8FF" align='center'>There are changes in retinal appearance</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='psl3'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='psl3' value='There are changes in retinal appearance'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr4'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr4' value='There is background diabetic retinopathy'></td>
 <td bgcolor="#F0F8FF" align='center'>There is background diabetic retinopathy</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='psl4'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='psl4' value='There is background diabetic retinopathy'></td>
   </tr>
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr5'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr5' value='There is proliferative diabetic retinopathy'></td>
 <td bgcolor="#F0F8FF" align='center'>There is proliferative diabetic retinopathy</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='psl5'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='psl5' value='There is proliferative diabetic retinopathy'></td>
   </tr>
 
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr6'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr6' value='There are rings of exudates at the macula (circinate maculopathy)'></td>
 <td bgcolor="#F0F8FF" align='center'>There are rings of exudates at the macula (circinate maculopathy)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='psl6'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='psl6' value='There are rings of exudates at the macula (circinate maculopathy)'></td>
   </tr>
 
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr7'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr7' value='There is a macular hole'></td>
 <td bgcolor="#F0F8FF" align='center'>There is a macular hole</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='psl7'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='psl7' value='There is a macular hole'></td>
   </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr8'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr8' value='There is a macular scar'></td>
 <td bgcolor="#F0F8FF" align='center'>There is a macular scar</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='psl8'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='psl8' value='There is a macular scar'></td>
   </tr>
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr9'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='psr9' value='The posterior segment is normal'></td>
 <td bgcolor="#F0F8FF" align='center'>The posterior segment is normal</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='psl9'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='psl9' value='The posterior segment is normal'></td>
   </tr>
 
 </table>
@@ -185,7 +185,7 @@ fieldset {
     <td bgcolor="#F0F8FF">
 
   <textarea name="comments" rows="10" cols="90" wrap="off">
-  text
+  
   </textarea>
 
   </td>

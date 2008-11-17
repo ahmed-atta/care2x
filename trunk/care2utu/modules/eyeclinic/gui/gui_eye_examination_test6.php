@@ -108,80 +108,80 @@ fieldset {
       Left Eye </td>
   </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt1'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt1' value='the face is bruised or lacerated'></td>
 <td bgcolor="#F0F8FF" align='center'>the face is bruised or lacerated</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='tl1'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='tl1' value='the face is bruised or lacerated'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt2'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt2' value='The lids are bruised'></td>
 <td bgcolor="#F0F8FF" align='center'>The lids are bruised</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='tl2'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='tl2' value='The lids are bruised'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt3'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt3' value='laceration of upper lid'></td>
 <td bgcolor="#F0F8FF" align='center'>laceration of upper lid</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='tl3'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='tl3' value='laceration of upper lid'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt4'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt4' value='laceration of lower lid'></td>
 <td bgcolor="#F0F8FF" align='center'>laceration of lower lid</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='tl4'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='tl4' value='laceration of lower lid'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt5'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt5' value='conjunctival laceration/haemorrhage'></td>
 <td bgcolor="#F0F8FF" align='center'>conjunctival laceration/haemorrhage</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='tl5'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='tl5' value='conjunctival laceration/haemorrhage'></td>
   </tr>
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt6'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt6' value='cornea abrasion, non-penetrating laceration'></td>
 <td bgcolor="#F0F8FF" align='center'>cornea abrasion, non-penetrating laceration</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='tl6'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='tl6' value='cornea abrasion, non-penetrating laceration'></td>
   </tr>
 
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt7'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt7' value='corneal perforation'></td>
 <td bgcolor="#F0F8FF" align='center'>corneal perforation</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='tl7'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='tl7' value='corneal perforation'></td>
   </tr>
 
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt8'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt8' value='iris prolapse'></td>
 <td bgcolor="#F0F8FF" align='center'>iris prolapse</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='tl8'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='tl8' value='iris prolapse'></td>
   </tr>
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt9'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='trt9' value='scleral laceration'></td>
 <td bgcolor="#F0F8FF" align='center'>scleral laceration</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='tl9'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='tl9' value='scleral laceration'></td>
   </tr>
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='tr10' ></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='tr10' value='traumatic cataract'></td>
 <td bgcolor="#F0F8FF" align='center'>traumatic cataract</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='tl10'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='tl10' value='traumatic cataract'></td>
   </tr>
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='tr11'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='tr11' value='foreign body'></td>
 <td bgcolor="#F0F8FF" align='center'>foreign body</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='tl11'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='tl11' value='foreign body'></td>
   </tr>
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='tr12'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='tr12' value='orbital injury/foreign body'></td>
 <td bgcolor="#F0F8FF" align='center'>orbital injury/foreign body</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='tl12'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='tl12' value='orbital injury/foreign body'></td>
   </tr>
 
 </table>
@@ -198,7 +198,7 @@ fieldset {
     <td bgcolor="#F0F8FF">
 
   <textarea name="comments" rows="10" cols="90" wrap="off">
-  text
+
   </textarea>
 
   </td>

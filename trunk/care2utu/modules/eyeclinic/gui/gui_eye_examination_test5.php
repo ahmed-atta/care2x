@@ -108,37 +108,37 @@ fieldset {
       Left Eye </td>
   </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='ssrt1'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='ssrt1' value='None'></td>
 <td bgcolor="#F0F8FF" align='center'>None</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='sslt1'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='sslt1' value='None'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='ssrt2'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='ssrt2' value='Eyes pointing away from each other (Divergent)'></td>
 <td bgcolor="#F0F8FF" align='center'>Eyes pointing away from each other (Divergent)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='sslt2'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='sslt2' value='Eyes pointing away from each other (Divergent)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='ssrt3'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='ssrt3' value='Eyes pointing towards each other (Convergent)'></td>
 <td bgcolor="#F0F8FF" align='center'>Eyes pointing towards each other (Convergent)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='sslt3'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='sslt3' value='Eyes pointing towards each other (Convergent)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='ssrt4'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='ssrt4' value='Eye movement restricted (Paralytic)'></td>
 <td bgcolor="#F0F8FF" align='center'>Eye movement restricted (Paralytic)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='sslt4'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='sslt4' value='Eye movement restricted (Paralytic)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='ssrt5'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='ssrt5' value='Eyes move together although squinting (Concomitant)'></td>
 <td bgcolor="#F0F8FF" align='center'>Eyes move together although squinting (Concomitant)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='sslt5'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='sslt5' value='Eyes move together although squinting (Concomitant)'></td>
   </tr>
 
 </table>
@@ -154,7 +154,7 @@ fieldset {
     <td bgcolor="#F0F8FF">
 
   <textarea name="comments" rows="10" cols="90" wrap="off">
-  text
+
   </textarea>
 
   </td>

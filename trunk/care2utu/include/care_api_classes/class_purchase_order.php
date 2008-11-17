@@ -2,8 +2,37 @@
 require('./roots.php');
 class purchaseorder extends supplier
 {
+  var $status;
+
 	function _construct(){
 
+	}
+	
+	function getstatus($orderno)
+	{
+	 
+	 if(trim($orderno)!="")
+	  {
+	    $res = mysql_query("select status from care_tz_purchase_order where order_no='$orderno'") or die(mysql_error());
+		$row = mysql_fetch_array($res);
+		$this->status = $row['status'];
+	  }
+	  elseif(!isset($_GET['status']))
+	  { 
+	  if(isset($_POST['search']))
+	  {
+	    $this->status='';
+	  }
+	  else
+	  {
+	    $this->status = 'new';
+	  }
+	  }
+	  else
+	  {
+	    $this->status = $_GET['status'];
+	  }
+	   
 	}
 	function add_order($datecreated,$supplier_id,$createdby){
 		$sqlo1="insert into care_tz_purchase_order (order_date,supplier_id,ordered_by) values('$datecreated','$supplier_id','$createdby')";
@@ -42,9 +71,10 @@ return $val;
 		return $result;
 	}
 	function orders($supplier){
+	$this->getstatus("");
 		$sql1="select order_no,order_date,supplier_id,ordered_by, Company_Name from care_tz_purchase_order,care_tz_supplier_deatail where
 care_tz_supplier_deatail.Suplier_id=care_tz_purchase_order.supplier_id AND care_tz_supplier_deatail.Company_Name LIKE
-'%$supplier%' group by order_no
+'%$supplier%' and care_tz_purchase_order.status like '%$this->status%' group by order_no
 	order by order_no desc";
 	$result=$this->query($sql1);
 	return $result;
@@ -56,6 +86,7 @@ function get_total($id){
 $result=mysql_result($sum,0,'m');
 return $result;
 }
+
 function formatMoney($amount)
 {
 	$amount = round($amount, 2);

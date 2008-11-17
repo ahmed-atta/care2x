@@ -7,7 +7,7 @@ require($root_path.'include/inc_environment_global.php');
 require($root_path.'include/inc_date_format_functions.php');
 require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_tz_arv_patient.php');
-require_once($root_path.'include/care_api_classes/eye_clinic_class.php');
+require_once($root_path.'include/care_api_classes/class_eye_clinic.php');
 
 //-------------------------------------------------------------------------------------------------------
 /**
@@ -26,10 +26,7 @@ $registration_data=$o_arv_patient->getRegistrationData();
 
 
 global $vart1,$vart2,$vart3,$valt1,$valt2,$valt3,$signature;
-$host="localhost";
-$user="root";
-$pass="";
-$db=caredb;
+
 $eyeclinic=new eyeclinic();
 
 $eyeclinic->setacr1($_POST['acr1']);

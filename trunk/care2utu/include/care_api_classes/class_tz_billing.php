@@ -614,6 +614,25 @@ class Bill extends Encounter {
 
   //------------------------------------------------------------------------------
 
+  //------------------------------------------------------------------------------
+
+  function GetArchivedBillEncounter($bill_nr) {
+  	global $db;
+  	$this->sql="SELECT encounter_nr FROM care_tz_billing_archive WHERE nr=".$bill_nr;
+	while ($row = $db->Execute($this->sql)->FetchRow() )
+	{
+		return $db->Execute($this->sql)->FetchRow();
+	}
+  }
+
+  //------------------------------------------------------------------------------
+
+  function setBillIsTransmit2ERP($bill_number,$transmit) {
+	    global $db;
+	    $db->debug=false;
+	    $this->sql="update care_tz_billing_archive_elem SET is_transmit2ERP='$transmit' where nr='$bill_number'";
+	    $db->Execute($this->sql);
+  }
 
   function GetElemsOfArchivedBill($nr,$what_kind_of) {
   	global $db;
@@ -632,6 +651,18 @@ class Bill extends Encounter {
 					 ORDER BY date_change ASC";
 		return $db->Execute($this->sql);
 	}
+
+  function GetElemsOfArchivedBillForERP($nr)
+  {
+  	global $db;
+  	$debug=false;
+  	($debug) ? $db->debug=true : $db->debug=false;
+
+  	$this->sql="SELECT a.*, b.partcode FROM care_tz_billing_archive_elem a
+				inner join care_tz_drugsandservices b on a.item_number = b.item_id where nr=$nr";
+
+ 	return $db->Execute($this->sql);
+  }
 
   //------------------------------------------------------------------------------
 
@@ -2372,27 +2403,53 @@ function DisplayCompanyBills($batch_nr, $specific_bill, $edit_fields) {
     	$where_encounter='GROUP BY care_encounter_prescription.encounter_nr, care_person.pid, care_person.selian_pid, care_person.name_first, care_person.name_last, care_person.date_birth';
     	$anzahl= 'count(*) AS anzahl,';
     }
-   $this->sql = "SELECT $anzahl  		care_encounter_prescription.*, " .
-    		"							care_person.pid, " .
-    		"							care_person.selian_pid, " .
-    		"							care_person.name_first, " .
-    		"							care_person.name_last, " .
-    		"							care_person.date_birth," .
-    		"							care_tz_drugsandservices.unit_price," .
-    		"							care_tz_drugsandservices.unit_price_1," .
-    		"							care_tz_drugsandservices.unit_price_2," .
-    		"							care_tz_drugsandservices.unit_price_3" .
-    		"							from care_encounter_prescription
-										INNER JOIN care_encounter ON care_encounter.encounter_nr=care_encounter_prescription.encounter_nr
-										INNER JOIN care_person On care_person.pid=care_encounter.pid
-										INNER JOIN care_tz_drugsandservices ON care_encounter_prescription.article_item_number=care_tz_drugsandservices.item_id
-									WHERE care_encounter_prescription.bill_number = 0 $and_in_outpatient
 
-									AND 	(isnull(care_encounter_prescription.is_disabled)
-									OR care_encounter_prescription.is_disabled='')
-									$where_encounter
-									ORDER BY care_encounter_prescription.prescribe_date DESC , care_encounter_prescription.encounter_nr ASC";
+    if(!$_REQUEST['sort'])
+    {
+	   $this->sql = "SELECT $anzahl  		care_encounter_prescription.*, " .
+	    		"							care_person.pid, " .
+	    		"							care_person.selian_pid, " .
+	    		"							care_person.name_first, " .
+	    		"							care_person.name_last, " .
+	    		"							care_person.date_birth," .
+	    		"							care_tz_drugsandservices.unit_price," .
+	    		"							care_tz_drugsandservices.unit_price_1," .
+	    		"							care_tz_drugsandservices.unit_price_2," .
+	    		"							care_tz_drugsandservices.unit_price_3" .
+	    		"							from care_encounter_prescription
+											INNER JOIN care_encounter ON care_encounter.encounter_nr=care_encounter_prescription.encounter_nr
+											INNER JOIN care_person On care_person.pid=care_encounter.pid
+											INNER JOIN care_tz_drugsandservices ON care_encounter_prescription.article_item_number=care_tz_drugsandservices.item_id
+										WHERE care_encounter_prescription.bill_number = 0 $and_in_outpatient
 
+										AND 	(isnull(care_encounter_prescription.is_disabled)
+										OR care_encounter_prescription.is_disabled='')
+										$where_encounter
+										ORDER BY care_encounter_prescription.prescribe_date DESC , care_encounter_prescription.encounter_nr ASC";
+	}
+	else
+	{
+		   $this->sql = "SELECT $anzahl  		care_encounter_prescription.*, " .
+	    		"							care_person.pid, " .
+	    		"							care_person.selian_pid, " .
+	    		"							care_person.name_first, " .
+	    		"							care_person.name_last, " .
+	    		"							care_person.date_birth," .
+	    		"							care_tz_drugsandservices.unit_price," .
+	    		"							care_tz_drugsandservices.unit_price_1," .
+	    		"							care_tz_drugsandservices.unit_price_2," .
+	    		"							care_tz_drugsandservices.unit_price_3" .
+	    		"							from care_encounter_prescription
+											INNER JOIN care_encounter ON care_encounter.encounter_nr=care_encounter_prescription.encounter_nr
+											INNER JOIN care_person On care_person.pid=care_encounter.pid
+											INNER JOIN care_tz_drugsandservices ON care_encounter_prescription.article_item_number=care_tz_drugsandservices.item_id
+										WHERE care_encounter_prescription.bill_number = 0 $and_in_outpatient
+
+										AND 	(isnull(care_encounter_prescription.is_disabled)
+										OR care_encounter_prescription.is_disabled='')
+										$where_encounter
+	       								order by $_REQUEST[sort] $_REQUEST[sorttyp]";
+	}
     $this->request = $db->Execute($this->sql);
     return $this->request;
 
@@ -2554,43 +2611,7 @@ function DisplayCompanyBills($batch_nr, $specific_bill, $edit_fields) {
 					  </form>
 					</tr>';
 				$alreadyshown[$row['encounter_nr']] = $row['encounter_nr'];
-
-
 	    	}
-
-/*			$result = $this->GetNewQuotation_Laboratory(0,$in_outpatient);
-			    if($result)
-			    {
-				    while ($row=$result->FetchRow())
-				    {
-			    		if(!$alreadyshown[$row['encounter_nr']])
-			    		{
-			    		$counter++;
-
-				      if ($color_change) {
-				        $BGCOLOR='bgcolor="#ffffdd"';
-				        $color_change=FALSE;
-				      } else {
-				        $BGCOLOR='bgcolor="#ffffaa"';
-				        $color_change=TRUE;
-				      }
-				      if(empty($labinfo['anzahl'])) $labinfo['anzahl'] = 0;
-								echo '
-			          <tr>
-			          	<form method="GET" action="billing_tz_quotation_create.php">
-								  <td '.$BGCOLOR.' class="td_content"><div align="center">'.substr($row['modify_time'],0,10).'</div></td>
-								  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['encounter_nr'].'</div></td>
-								  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$this->ShowPID($row['pid']).'</div></td>
-								  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['selian_pid'].'</div></td>
-								  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['name_last'].', '.$row['name_first'].'</div></td>
-								  <td '.$BGCOLOR.' class="td_content"><div align="center">'.$row['date_birth'].'</div></td>
-								  <td '.$BGCOLOR.' class="td_content"><div align="center">0 pres.<br>'.$row['anzahl'].' req.</div></td>
-								  <td '.$BGCOLOR.' class="td_content"><div align="center"><input type="hidden" name="namelast" value="'.$row['name_last'].'"><input type="hidden" name="patient" value="'.$_REQUEST['patient'].'"><input type="hidden" name="namefirst" value="'.$row['name_first'].'"><input type="hidden" name="patient" value="'.$_REQUEST['patient'].'"><input type="hidden" name="countpres" value="0"><input type="hidden" name="countlab" value="'.$row['anzahl'].'"><input type="hidden" value="'.$row['encounter_nr'].'" name="encounter_nr"><input type="hidden" value="'.$row['pid'].'" name="pid"><input type="submit" value=">>"></div></td>
-					   </form>
-					 </tr>';
-							}
-				    }
-	    	}*/
 
 
 	    if(!$counter)
@@ -2745,7 +2766,7 @@ function DisplayCompanyBills($batch_nr, $specific_bill, $edit_fields) {
 	      echo '
           <tr>
 					  <td colspan=8>
-					  	<table border="0" cellpadding="2" cellspacing="2" width="620">
+					  	<table border="0" cellpadding="2" cellspacing="2" width="650">
 					  		<tr bgcolor="#ffffaa">
 					  			<td width="150">
 					  				<div align="left">'.$row['prescribe_date'].'</div>
@@ -2762,9 +2783,6 @@ function DisplayCompanyBills($batch_nr, $specific_bill, $edit_fields) {
 					  						<td width="60" align="right"><input type="radio" value="delete" name="modepres_'.$row['nr'].'" onClick="javascript:toggle_tr(\'tr_'.$row['nr'].'\',false,\''.$row['nr'].'\');"><img align=absmiddle src="../../gui/img/common/default/delete2.gif" border=0 alt="Delete this item now!" style="filter:alpha(opacity=70)"></td>
 					  					</tr>
 					  				</table>
-
-
-
 					  				</div>
 					  			</td>
 					  		</tr>
@@ -2774,20 +2792,41 @@ function DisplayCompanyBills($batch_nr, $specific_bill, $edit_fields) {
 					  				<textarea rows="3" cols="22" name="notes_'.$row['nr'].'">'.$row['notes'].'</textarea>
 					  			</td>
 					  			<td valign="top">
-					  				<table border="0" cellpadding="0" cellspacing="0" width="250"  class="table_content">
+					  				<table border="0" cellpadding="0" cellspacing="0" width="250" >
 					  					<tr >
-					  						<td width="5">'.$LDPrice.'</td>
-					  						<td align="right">
 
-					  							                                                    <input type="hidden" name="showprice_'.$row['nr'].'" id="showprice_'.$row['nr'].'" value="'.$unit_price.'">'.$row['price'].' '.$LDTSH.'
-					  								<br><font size="1">'.$unit_price_description.':'.$unit_price.' '.$LDTSH.'  <input type="radio" name="unit_price_'.$row['nr'].'" value="'.$unit_price.'"'; if($_REQUEST['unit_price']==1)  echo 'checked ';  echo ' onclick="document.forms[0].elements[\'showprice_\' + '.$row['nr'].'].value = '.$unit_price.';calc_article('.$row['nr'].')"></font>
-					  								<br><font size="1">'.$unit_price_1_description.':'.$unit_price_1.' '.$LDTSH.'<input type="radio" name="unit_price_'.$row['nr'].'" value="'.$unit_price_1.'"'; if($_REQUEST['unit_price']==2)  echo 'checked ';  echo '  onclick="document.forms[0].elements[\'showprice_\' + '.$row['nr'].'].value = '.$unit_price_1.';calc_article('.$row['nr'].')"></font>
-					  								<br><font size="1">'.$unit_price_2_description.':'.$unit_price_2.' '.$LDTSH.'<input type="radio" name="unit_price_'.$row['nr'].'" value="'.$unit_price_2.'"'; if($_REQUEST['unit_price']==3)  echo 'checked ';   echo ' onclick="document.forms[0].elements[\'showprice_\' + '.$row['nr'].'].value = '.$unit_price_2.';calc_article('.$row['nr'].')"></font>
-					  								<br><font size="1">'.$unit_price_3_description.':'.$unit_price_3.' '.$LDTSH.'<input type="radio" name="unit_price_'.$row['nr'].'" value="'.$unit_price_3.'"'; if($_REQUEST['unit_price']==4)  echo 'checked ';   echo ' onclick="document.forms[0].elements[\'showprice_\' + '.$row['nr'].'].value = '.$unit_price_3.';calc_article('.$row['nr'].')"> </font><br></td>
-					  					</tr>
+					  						<td align="center"><br>
+
+					  							                                                    <input type="hidden" name="showprice_'.$row['nr'].'" id="showprice_'.$row['nr'].'" value="'.$unit_price.'">';
+										/*			switch($_REQUEST['unit_price'])
+														{
+															case 1: echo '<br><font size="1">'.$unit_price_description.':'.$unit_price.' '.$LDTSH.'  <input type="radio" name="unit_price_'.$row['nr'].'" value="'.$unit_price.'" checked>';
+																	break;
+															case 2: echo '<br><font size="1">'.$unit_price_1_description.':'.$unit_price_1.' '.$LDTSH.'<input type="radio" name="unit_price_'.$row['nr'].'" value="'.$unit_price_1.'" checked>';
+																	break;
+															case 3: echo '<br><font size="1">'.$unit_price_1_description.':'.$unit_price_1.' '.$LDTSH.'<input type="radio" name="unit_price_'.$row['nr'].'" value="'.$unit_price_1.'" checked>';
+					  												break;
+															case 4: echo '<br><font size="1">'.$unit_price_3_description.':'.$unit_price_3.' '.$LDTSH.'<input type="radio" name="unit_price_'.$row['nr'].'" value="'.$unit_price_3.'" checked>';
+																	break;
+														} */
+												switch($_REQUEST['unit_price'])
+												{
+													case 1: echo '<br><font size="1"><input type="hidden" name="unit_price_'.$row['nr'].'" value="'.$unit_price.'"';
+					  										break;
+					  								case 2: echo '<br><font size="1"><input type="hidden" name="unit_price_'.$row['nr'].'" value="'.$unit_price_1.'"';
+					  										break;
+					  								case 3: echo '<br><font size="1"><input type="hidden" name="unit_price_'.$row['nr'].'" value="'.$unit_price_2.'"';
+					  										break;
+					  							    case 4: echo '<br><font size="1"><input type="hidden" name="unit_price_'.$row['nr'].'" value="'.$unit_price_3.'"';
+					  										break;
+												}
+
+												echo '</td>
+
+								 </tr>
 					  					<tr>
-					  						<td>'.$LDDosage.'</td>
-					  						<td align="right"><input onkeyup="calc_article(\''.$row['nr'].'\');" type="text" size="4" value="'.$row['dosage'].'" name="dosage_'.$row['nr'].'"></td>
+					  						<td align="center"><u>'.$LDDosage.'</u><br><br></td>
+					  						<td align="center"><input onkeyup="calc_article(\''.$row['nr'].'\');" type="text" size="4" value="'.$row['dosage'].'" name="dosage_'.$row['nr'].'"><br><br></td>
 					  					</tr>';
 									if ($IS_PATIENT_INSURED){
 									echo '
@@ -2939,7 +2978,7 @@ function DisplayCompanyBills($batch_nr, $specific_bill, $edit_fields) {
 	  else
 	  	echo '<tr><td colspan="5">'.$LDPricing.'</td></tr>';
   }
-
+//TODO: check on enabled drugsandservices item!
 function new_reg($encounter,$reg,$prescriber)
 	{
 	global $db;
@@ -3299,18 +3338,83 @@ function ShowPriceList()
 	($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
 	$result=$db->Execute('SELECT * FROM care_tz_drugsandservices_description');
-	echo '<table border="1" cellpadding="0" cellspacing="0" width="250"  class="table_content" align="center" >
+	echo '<table border="0" cellpadding="0" cellspacing="0" width="200"  class="table_content" align="center" >
 			<tr class="tr_content">
-				<td align="center" bgcolor="#CC9933"><font size="2" class="submenu_item">Select Pricelist</font></td></tr><tr>
-				<td align="center" bgcolor="#FFFF88"><p>';
+				<td colspan="2" align="center" bgcolor="#CC9933" ><font size="2" class="submenu_item">Select Pricelist</font></td></tr>';
 	while($pricelist=$result->FetchRow())
 	{
-		echo'<font size="2">'.$pricelist['ShowDescription'].' <input type="radio" name="unit_price" value="'.$pricelist['ID'].'"'; if($pricelist['ID']=='1') echo 'checked'; echo'></font></br>';
+		echo'<tr><td bgcolor="#FFFF88" >'.$pricelist['ShowDescription'].' </td>
+				<td bgcolor="#FFFF88"><input type="radio" name="unit_price" value="'.$pricelist['ID'].'"'; if($pricelist['ID']=='1') echo 'checked'; echo'></td></tr>';
 	}
-	echo '</td></tr></table></p>';
+	echo '</table></p>';
 }
+//-------------------------------------
+function deduct_from_stock($prescriptions_nr,$amountt)
+{
 
+	$res =mysql_query("select article from $this->tbl_prescriptions WHERE nr = $prescriptions_nr ");
+	$r = mysql_fetch_object($res); $item =$r->article;
+
+	$n=$amountt;
+	$m = 0;
+      while($n!=0)
+      {
+      $query = "select
+     care_tz_stock_in_hand.st_in_h_id,care_tz_stock_in_hand.item_id,current_qty,item_full_description
+     from care_tz_stock_in_hand,care_tz_drugsandservices where
+      care_tz_stock_in_hand.item_id=care_tz_drugsandservices .item_id and
+      item_full_description like '$item%' and store_id=1 order by expire_date asc limit
+      $m,1";
+
+
+      $result = mysql_query($query);
+      $num = mysql_num_rows($result);
+      $row = mysql_fetch_object($result);
+      $curr_am = $row->current_qty;
+     $st_id = $row->st_in_h_id;
+
+     if($num!=0)
+     {
+
+
+     if($curr_am >= $n)
+     {
+     	$query1 ="update care_tz_stock_in_hand set current_qty=current_qty-$n where
+     st_in_h_id=$st_id";
+      mysql_query($query1) or die(mysql_error());
+     $n=0;
+      }
+      else
+     {
+     	$query1 = "update care_tz_stock_in_hand set current_qty=0 where st_in_h_id=$st_id";
+     	mysql_query($query1) or die(mysql_error());
+        $n-=$curr_am;
+        $m++;
 }
+     }
+     else
+     {
+     	$n=0;
+     }
+     }
+   }
+   function get_num_av($art)
+   {
+   	$result = mysql_query("select sum(current_qty) as qty from care_tz_stock_in_hand,care_tz_drugsandservices where care_tz_stock_in_hand.item_id=" .
+   			"care_tz_drugsandservices.item_id and item_full_description like '$art%' " .
+   			"and expire_date>now()");
+   	$row = mysql_fetch_object($result);
+   	if($row->qty >0)
+   	{
+   		$num = $row->qty;
+   	}
+   	else
+   	{
+   		$num=0;
+   	}
 
+   	return $num;
+   }
+}
 
 ?>

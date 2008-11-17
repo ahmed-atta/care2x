@@ -115,60 +115,60 @@ fieldset {
     </tr>
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox'>At night</td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'> </td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='hid1' value='At night'>At night</td>
+    <td bgcolor="#F0F8FF"><input name='his1e' value='both' type='radio'> </td>
+    <td bgcolor="#F0F8FF"><input name='his1e' value= 'right' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input value='left' name='his1e' type='radio'></td>
     <td bgcolor="#F0F8FF">&nbsp;</td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
+    <td bgcolor="#F0F8FF"><input name='his1d' value='up to 1 week' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input value='up to 1 month' name='his1d' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input  value='2-12 months' name='his1d' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input  value='years' name='his1d' type='radio'></td>
     </tr>
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox'>in distance</td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'> </td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' value='in distance' name='hid2'>in distance</td>
+    <td bgcolor="#F0F8FF"><input name='his2e' value='both' type='radio'> </td>
+    <td bgcolor="#F0F8FF"><input name='his2e' value= 'right' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input value='left' name='his2e' type='radio'></td>
     <td bgcolor="#F0F8FF">&nbsp;</td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
+    <td bgcolor="#F0F8FF"><input name='his2d' value='up to 1 week' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input  value='up to 1 month' name='his2d' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input  value='2-12 months' name='his2d' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input  value='years' name='his2d' type='radio'></td>
     </tr>
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox'>Near by (reading/sewing)</td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'> </td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='hid3' value='Near by (reading/sewing)'>Near by (reading/sewing)</td>
+    <td bgcolor="#F0F8FF"><input name='his3e' value='both' type='radio'> </td>
+    <td bgcolor="#F0F8FF"><input name='his3e' value= 'right' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input value='left' name='his3e' type='radio'></td>
     <td bgcolor="#F0F8FF">&nbsp;</td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'> </td>
+    <td bgcolor="#F0F8FF"><input name='his3d' value='up to 1 week' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input value='up to 1 month' name='his3d' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input  value='2-12 months' name='his3d' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input  value='years' name='his3d' type='radio'></td>
     </tr>
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox'>both near and distance</td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'> </td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='hid4' value='both near and distance'>both near and distance</td>
+    <td bgcolor="#F0F8FF"><input name='his4e' value='both' type='radio'> </td>
+    <td bgcolor="#F0F8FF"><input name='his4e' value= 'right' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input value='left' name='his4e' type='radio'></td>
     <td bgcolor="#F0F8FF">&nbsp;</td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
+    <td bgcolor="#F0F8FF"><input name='his4d' value='up to 1 week' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input value='up to 1 month' name='his4d' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input  value='2-12 months' name='his4d' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input  value='years' name='his4d' type='radio'></td>
     </tr>
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox'>I have double vision</td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'> </td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' value='I have double vision' name='hid5'>I have double vision</td>
+    <td bgcolor="#F0F8FF"><input name='his5e' value='both' type='radio'> </td>
+    <td bgcolor="#F0F8FF"><input name='his5e' value= 'right' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input value='left' name='his5e' type='radio'></td>
     <td bgcolor="#F0F8FF">&nbsp;</td>
-    <td bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
-    <td colspan="2" bgcolor="#F0F8FF"><input type='checkbox'></td>
-    </tr>
+    <td bgcolor="#F0F8FF"><input name='his5d' value='up to 1 week' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input value='up to 1 month' name='his5d' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input  value='2-12 months' name='his5d' type='radio'></td>
+    <td colspan="2" bgcolor="#F0F8FF"><input  value='years' name='his5d' type='radio'></td>
+        </tr>
 
 <tr>
   <td bgcolor="#F0F8FF">&nbsp;</td>
@@ -182,7 +182,7 @@ fieldset {
   <td colspan="2" bgcolor="#F0F8FF"></td>
 </tr>
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox'>I do not have a problem seeing    </td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='hid6' value='I do not have a problem seeing'>I do not have a problem seeing</td>
     <td bgcolor="#F0F8FF"></td>
     <td bgcolor="#F0F8FF"></td>
     <td colspan="2" bgcolor="#F0F8FF"></td>
@@ -203,7 +203,7 @@ fieldset {
     <td bgcolor="#F0F8FF">
 
   <textarea name="comments" rows="10" cols="90" wrap="off">
-  text
+
   </textarea>
 
   </td>
@@ -230,7 +230,7 @@ fieldset {
              <input name="pid" type="hidden" value="<?php echo $_REQUEST['pid']?>" />
              <input name="encounter_nr" type="hidden" value="<?php echo $_REQUEST['encounter_nr']?>" />
              <!--<input name="addtest" type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> id="submit" value="Submit" onClick="javascript:return submitForm()"/></td>-->
-			<input type="submit" value="ADD" name="addtest" onclick="return submitForm();"/> &nbsp;<input type="reset" value="Reset"> </td>
+			<input type="submit" value="ADD" name="addhistory" onclick="return submitForm();"/> &nbsp;<input type="reset" value="Reset"> </td>
 
          </tr>
 <tr><td width="643"><a href="eye_history_test2.php<?php echo URL_APPEND ?>&pid=<?php echo $_GET['pid']?>&mode=new" >Go to next page</a></td></tr>

@@ -119,11 +119,11 @@ $LDMedocsElements=array(
 								);
 $LDStartNewDoc='Start a new medocs document';
 $LDNoMedocsFound='No medocs document of the patient found!';
-$LDAt='at';		
-		
+$LDAt='at';
+
 $LDDept='Dept';
 $LDRoomNr='Room nr';
-$LDAdmitType='Admission type';		
+$LDAdmitType='Admission type';
 $LDCivilStat='Civil status';
 $LDInsuranceNr='Insurance nr';
 $LDNameAddr='Name & Address';
@@ -164,7 +164,7 @@ $LDNameMaiden='Tribe';
 $LDNameOthers='Allergy';
 $LDStreet='Street';
 $LDStreetNr='Nr.';
-$LDTownCity='Town/City';
+$LDTownCity='Street/Location';
 $LDProvState='Province/State';
 $LDRegion='Region';
 $LDCountry='Country';
@@ -194,7 +194,7 @@ $LDDRG='DRG (composite)';
 $LDDRGTxt=$LDESE.' DRG (Diagnosis related groups)';
 $LDProcedures='Procedures';
 $LDProceduresTxt=$LDESE.' therapy procedures';
-$LDPrescriptions='Prescriptions';
+$LDPrescriptions='Services';
 $LDPrescriptionsTxt=$LDESE.' Prescriptions';
 /* 2002-12-03 EL*/
 $LDDiagXResults='Diagnostic Results';

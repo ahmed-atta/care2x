@@ -109,62 +109,62 @@ fieldset {
       Left Eye </td>
   </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='er1'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='er1' vale='Normal'></td>
 <td bgcolor="#F0F8FF" align='center'>Normal</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='el1'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='el1' value='Normal'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='er2'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='er2' value='there is a swelling in the eyelid (cyst, stye, chalazion)'></td>
 <td bgcolor="#F0F8FF" align='center'>there is a swelling in the eyelid (cyst, stye, chalazion)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='el2'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='el2' value='there is a swelling in the eyelid (cyst, stye, chalazion)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='er3'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='er3' value='Upper lid is turning in (Entropion)'></td>
 <td bgcolor="#F0F8FF" align='center'>Upper lid is turning in (Entropion)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='el3'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='el3' value='Upper lid is turning in (Entropion)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='er4'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='er4' value='Lower lid is drooping out (Ectropion)'></td>
 <td bgcolor="#F0F8FF" align='center'>Lower lid is drooping out (Ectropion)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='el4'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='el4' value='Lower lid is drooping out (Ectropion)'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='er5'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='er5' value='there are white spots on the tarsal plate (Follicles)'></td>
 <td bgcolor="#F0F8FF" align='center'>there are white spots on the tarsal plate (Follicles)</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='el5'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='el5' value='there are white spots on the tarsal plate (Follicles)'></td>
   </tr>
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='er6'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='er6' value='There are papillae on the tarsal plate'></td>
 <td bgcolor="#F0F8FF" align='center'>There are papillae on the tarsal plate</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='el6'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='el6' value='There are papillae on the tarsal plate'></td>
   </tr>
 
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='er7'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='er7' value='there are giant papillae'></td>
 <td bgcolor="#F0F8FF" align='center'>there are giant papillae</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='el7'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='el7' value='there are giant papillae'></td>
   </tr>
 
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='er8'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='er8' value='there is scarring on the lids'></td>
 <td bgcolor="#F0F8FF" align='center'>there is scarring on the lids</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='el8'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='el8' value='there is scarring on the lids'></td>
   </tr>
 
 <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='er9'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='er9' value='There is another abnormality of the eyelids'></td>
 <td bgcolor="#F0F8FF" align='center'>There is another abnormality of the eyelids</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='el9'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='el9' value='There is another abnormality of the eyelids'></td>
   </tr>
 
 
@@ -182,7 +182,7 @@ fieldset {
     <td bgcolor="#F0F8FF">
 
   <textarea name="comments" rows="10" cols="90" wrap="off">
-  text
+
   </textarea>
 
   </td>

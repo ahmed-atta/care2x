@@ -88,6 +88,8 @@ A:visited:hover {color: #cc0033;}
 
 <script language="JavaScript">
 
+
+
 function toggle_tr(myelem,show,id) {
 
  if(show){
@@ -141,18 +143,19 @@ function calc_article(id)
 		{
 <?php
 	 	$result = $bill_obj->GetNewQuotation_Prescriptions($_REQUEST['encounter_nr']);
-	 	echo "for(var i=0;i<=3;i++){ \n";
+	 	//echo "for(var i=0;i<=1;i++){ \n";
 	 	while($row=$result->FetchRow())
 	 	{
 	 		echo "if(id==".$row['nr'].") { \n";
-	 		echo "	if (document.forms[0].unit_price_".$row['nr']."[i].checked==true){ \n";
-	 		echo "		sum=document.forms[0].unit_price_".$row['nr']."[i].value * document.forms[0].elements['dosage_' + id].value; \n";
+	 	//	echo "	if (document.forms[0].unit_price_".$row['nr']."[i].checked==true){ \n";
+	 		echo "		sum=document.forms[0].unit_price_".$row['nr'].".value * document.forms[0].elements['dosage_' + id].value; \n";
 	 		echo " 		sum_total = sum; \n";
-	 		echo " 		document.getElementById('div_' + id).innerHTML='<table width=\"100%\" border=\"0\"><tr><td>' + document.forms[0].unit_price_".$row['nr']."[i].value + ' x ' + document.forms[0].elements['dosage_' + id].value + ' = </td><td align=\"right\">' + sum + ' TSH</td></tr><tr><td><b>Sum:</b></td><td align=\"right\"><b>' + sum_total + ' TSH</b></td></tr></table><input type=\"hidden\" name=\"pressum_' + id + '\" value=\"'+ sum_total + '\">'; \n";
-	 		echo "  } \n";
+	 		echo " 		document.getElementById('div_' + id).innerHTML='<table width=\"100%\" border=\"0\"><tr><td>' + document.forms[0].unit_price_".$row['nr'].".value + ' x ' + document.forms[0].elements['dosage_' + id].value + ' = </td><td align=\"right\">' + sum + ' TSH</td></tr><tr><td><b>Sum:</b></td><td align=\"right\"><b>' + sum_total + ' TSH</b></td></tr></table><input type=\"hidden\" name=\"pressum_' + id + '\" value=\"'+ sum_total + '\">'; \n";
+	 	//	echo "  } \n";
+
 	 		echo "} \n";
 	 	}
-	 	echo "} \n";
+	 	//echo "} \n";
  ?>
 
 		}
@@ -318,11 +321,13 @@ function calc_article(id)
 								document.forms[0].elements['modepres_".$v."'][trigger].checked = true;
 								toggle_tr('tr_".$v."',showtr,'".$v."');
 							}
+
 							if(document.forms[0].elements['modelab_".$v."'])
 							{
 								document.forms[0].elements['modelab_".$v."'][trigger].checked = true;
 								toggle_tr('tr_".$v."',showtr,'".$v."');
 							}
+
 							";
 
 						} // end of while(list($x,$v) = each($objectarray))

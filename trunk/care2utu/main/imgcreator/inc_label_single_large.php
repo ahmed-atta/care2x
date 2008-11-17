@@ -40,9 +40,11 @@
 		$tmargin=2;
 		$lmargin=6;
 		
-	
-  		#  Full encounter nr
-    	ImageTTFText($label,12,0,$lmargin,$tmargin+14,$eblack,$arial,$fen);
+	    # PID and Hospital Filenumber
+	    ImageTTFText($label,12,0,$lmargin,$tmargin+14,$eblack,$arial,'PID: '.$result['pid']);
+	    ImageTTFText($label,12,0,$lmargin+185,$tmargin+14,$eblack,$arial,'File: '.$result['selian_pid']);
+  		# Full encounter nr
+    	ImageTTFText($label,12,0,$lmargin+185,$tmargin+30,$eblack,$arial,$fen);
 		# Encounter admission date
     	ImageTTFText($label,11,0,$lmargin,$tmargin+30,$eblack,$arial,$result['pdate']);
 		# Family name, first name
@@ -69,8 +71,11 @@
 		}
 	}else{ # Use system fonts
 	
-  		#  Full encounter nr
-    	ImageString($label,4,2,2,$fen,$eblack);
+  		# PID and Hospital File Number
+        ImageString($label,4,2,2,'PID: '.$result['pid'],$eblack);
+        ImageString($label,4,180,2,'File: '.$result['selian_pid'],$eblack);
+        #  Full encounter nr
+        ImageString($label,2,215,18,$fen,$eblack);
 		# Encounter admission date
     	ImageString($label,2,2,18,$result['pdate'],$eblack);
 		# Family name, first name

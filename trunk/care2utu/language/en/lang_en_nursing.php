@@ -409,7 +409,7 @@ $LDOpenWardManagement='Open ward for administration';
 # 2006-09-13 d.r. from merotech
 $LDDiagnoses='Diagnoses';
 $LDLabRequest='Lab requests';
-$LDPrescriptions='Prescriptions';
+$LDPrescriptions='Services';
 $LDNoDiagnosesAvailable='--- NO DIAGNOSIS AVAILABLE ---';
 $LDLastDiagnosis='Last Diagnosis';
 $LDChangeDept='Change of Department';

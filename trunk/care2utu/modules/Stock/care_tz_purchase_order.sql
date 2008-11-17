@@ -1,47 +1,59 @@
 -- phpMyAdmin SQL Dump
--- version 2.8.2.4
+-- version 2.11.1
 -- http://www.phpmyadmin.net
--- 
+--
 -- Host: localhost
--- Generation Time: Jun 17, 2008 at 09:45 AM
--- Server version: 5.0.24
--- PHP Version: 4.4.4
--- 
+-- Generation Time: Mar 29, 2008 at 10:06 AM
+-- Server version: 5.0.45
+-- PHP Version: 4.4.7
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
 -- Database: `caredb`
--- 
+--
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `care_tz_purchase_order`
--- 
+--
+-- Table structure for table `care_tz_purchase_order_detail`
+--
 
-DROP TABLE IF EXISTS `care_tz_purchase_order`;
-CREATE TABLE `care_tz_purchase_order` (
-  `order_no` int(11) NOT NULL auto_increment,
-  `order_date` varchar(25) collate latin1_general_ci NOT NULL,
-  `supplier_id` int(11) NOT NULL,
-  `ordered_by` varchar(35) collate latin1_general_ci NOT NULL,
-  `status` varchar(50) collate latin1_general_ci default NULL,
-  `remarks` varchar(75) collate latin1_general_ci default NULL,
-  PRIMARY KEY  (`order_no`),
-  KEY `supplier_id` (`supplier_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+DROP TABLE IF EXISTS `care_tz_purchase_order_detail`;
+CREATE TABLE `care_tz_purchase_order_detail` (
+  `order_no` int(11) NOT NULL,
+  `item_id` bigint(20) NOT NULL,
+  `unit` varchar(50) collate latin1_general_ci default NULL,
+  `quantity` float NOT NULL,
+  `unit_cost` double NOT NULL,
+  `total_cost` double NOT NULL,
+  KEY `item_id` (`item_id`),
+  KEY `order_no` (`order_no`),
+  KEY `order_no_2` (`order_no`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
--- 
--- Dumping data for table `care_tz_purchase_order`
--- 
+--
+-- Dumping data for table `care_tz_purchase_order_detail`
+--
 
-INSERT INTO `care_tz_purchase_order` VALUES (42, '06/06/08', 5, 'demo', NULL, NULL);
-INSERT INTO `care_tz_purchase_order` VALUES (3, '03/28/08', 7, 'demo', NULL, NULL);
-INSERT INTO `care_tz_purchase_order` VALUES (40, '06/02/08', 18, 'demo', NULL, NULL);
-INSERT INTO `care_tz_purchase_order` VALUES (6, '03/28/08', 15, 'demo', NULL, NULL);
-INSERT INTO `care_tz_purchase_order` VALUES (7, '03/28/08', 0, 'demo', NULL, NULL);
-INSERT INTO `care_tz_purchase_order` VALUES (8, '03/28/08', 0, 'demo', NULL, NULL);
-INSERT INTO `care_tz_purchase_order` VALUES (10, '03/28/08', 0, 'demo', NULL, NULL);
-INSERT INTO `care_tz_purchase_order` VALUES (14, '03/28/08', 16, 'demo', NULL, NULL);
-INSERT INTO `care_tz_purchase_order` VALUES (16, '03/28/08', 7, 'demo', NULL, NULL);
-INSERT INTO `care_tz_purchase_order` VALUES (17, '03/28/08', 15, 'demo', NULL, NULL);
-INSERT INTO `care_tz_purchase_order` VALUES (19, '03/28/08', 7, 'demo', NULL, NULL);
-INSERT INTO `care_tz_purchase_order` VALUES (20, '03/28/08', 16, 'demo', NULL, NULL);
-INSERT INTO `care_tz_purchase_order` VALUES (41, '06/04/08', 22, 'demo', NULL, NULL);
+INSERT INTO `care_tz_purchase_order_detail` (`order_no`, `item_id`, `unit`, `quantity`, `unit_cost`, `total_cost`) VALUES
+(37, 11, NULL, 1, 100, 100),
+(37, 5, NULL, 1, 100, 100),
+(37, 11, NULL, 1, 100, 100),
+(37, 7, NULL, 10, 10, 100),
+(37, 12, NULL, 10, 2, 20),
+(37, 11, NULL, 10, 3, 30),
+(37, 2, NULL, 10, 100, 1000),
+(37, 4, NULL, 8, 100, 800),
+(37, 12, NULL, 50, 100, 5000),
+(38, 11, NULL, 100, 1000, 100000),
+(41, 8, NULL, 12, 3000, 36000),
+(41, 11, NULL, 500, 30000, 15000000),
+(41, 6, NULL, 2, 5000, 10000),
+(41, 10, NULL, 10, 300, 3000),
+(41, 1, NULL, 10, 6, 60),
+(41, 3, NULL, 12, 1000, 12000),
+(41, 5, NULL, 12, 100, 1200),
+(41, 9, NULL, 12, 100, 1200),
+(41, 9, NULL, 10, 1000, 10000),
+(41, 3, NULL, 1, 2, 2);

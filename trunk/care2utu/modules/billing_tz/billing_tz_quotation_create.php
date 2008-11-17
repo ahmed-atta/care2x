@@ -23,9 +23,9 @@ require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
 $enc_obj=new Encounter;
 $bill_obj = new Bill;
 $insurance_obj = new Insurance_tz;
-$which_price=$_REQUEST['unit_price'];
 
-$debug = false;
+
+$debug = FALSE;
 ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
 $IS_PATIENT_INSURED=$insurance_obj->is_patient_insured($bill_obj->GetPIDfromEncounter($encounter_nr));
@@ -40,8 +40,8 @@ if($task=="insert")
 	$billcounter=0;
 	$deletecounter=0;
 
-	while(list($x,$v) = each($_REQUEST))
-	{
+	while(list($x,$v) = each($_POST))
+	{//echo print_r($_POST);
 
 		if ($debug) echo "looking for:".$x."<br>";
 
@@ -49,7 +49,7 @@ if($task=="insert")
 		{
 
 			$prescriptions_nr = substr(strrchr($x,"_"),1);
-			if($_REQUEST['modepres_'.$prescriptions_nr]=='bill')
+			if($_POST['modepres_'.$prescriptions_nr]=='bill')
 			{
 				$billcounter++;
 				//Okay, this one has to be billed!
@@ -57,18 +57,19 @@ if($task=="insert")
 				{
 					$new_bill_number = $bill_obj->CreateNewBill($encounter_nr);
 				}
-				if ($debug) echo "insurance_$prescriptions_nr".$_REQUEST['insurance_'.$prescriptions_nr]."<br>";
-				if ($debug) echo "insurance:".$_REQUEST['insurance']."<br>";
-				if ($debug) echo "showprice_$prescriptions_nr :".$_REQUEST['showprice_'.$prescriptions_nr];
-				$price=$_REQUEST['showprice_'.$prescriptions_nr];
-				echo $_REQUEST['price_'.$prescriptions_nr];
-				$bill_obj->StorePrescriptionItemToBill($pid,$prescriptions_nr,$new_bill_number, $_REQUEST['showprice_'.$prescriptions_nr], $_REQUEST['dosage_'.$prescriptions_nr], $_REQUEST['notes_'.$prescriptions_nr], $_REQUEST['insurance_'.$prescriptions_nr]);
+				if ($debug) echo "insurance_$prescriptions_nr".$_POST['insurance_'.$prescriptions_nr]."<br>";
+				if ($debug) echo "insurance:".$_POST['insurance']."<br>";
+				if ($debug) echo "showprice_$prescriptions_nr :".$_POST['showprice_'.$prescriptions_nr];
+				$price=$_POST['showprice_'.$prescriptions_nr];
+				echo $_POST['price_'.$prescriptions_nr];
+				$bill_obj->StorePrescriptionItemToBill($pid,$prescriptions_nr,$new_bill_number, $_POST['showprice_'.$prescriptions_nr], $_POST['dosage_'.$prescriptions_nr], $_POST['notes_'.$prescriptions_nr], $_POST['insurance_'.$prescriptions_nr]);
 				$bill_obj->UpdateBillNumberNewPrescription($prescriptions_nr,$new_bill_number);
-				if ($debug) echo "Prescription: allocate2insurance(".$new_bill_number.", ".$_REQUEST['showprice_'.$prescriptions_nr].",".$_REQUEST['insurance'].");";
-				if ($_REQUEST['insurance']!=-1)
-					$insurance_obj->allocatePrescriptionsToinsurance($new_bill_number, $prescriptions_nr, $_REQUEST['showprice_'.$prescriptions_nr],$_REQUEST['insurance']);
+		        $bill_obj->deduct_from_stock($prescriptions_nr,$_POST['dosage_'.$prescriptions_nr]);
+		        if ($debug) echo "Prescription: allocate2insurance(".$new_bill_number.", ".$_POST['showprice_'.$prescriptions_nr].",".$_POST['insurance'].");";
+				if ($_POST['insurance']!=-1)
+					$insurance_obj->allocatePrescriptionsToinsurance($new_bill_number, $prescriptions_nr, $_POST['showprice_'.$prescriptions_nr],$_POST['insurance']);
 			}
-			elseif($_REQUEST['modepres_'.$prescriptions_nr]=='delete')
+			elseif($_POST['modepres_'.$prescriptions_nr]=='delete')
 			{
 				$deletecounter++;
 				//Hmm, lets kick this one out!
@@ -79,7 +80,7 @@ if($task=="insert")
 		{
 			if ($debug) echo "looking for lab ...<br>";
 			$labtest_nr = substr(strrchr($x,"_"),1);
-			if($_REQUEST['modelab_'.$labtest_nr]=='bill')
+			if($_POST['modelab_'.$labtest_nr]=='bill')
 			{
 				$billcounter++;
 				//Okay, this one has to be billed!
@@ -87,18 +88,18 @@ if($task=="insert")
 				{
 					$new_bill_number = $bill_obj->CreateNewBill($encounter_nr);
 				}
-				$bill_obj->StoreLaboratoryItemToBill($pid,$labtest_nr,$new_bill_number, $_REQUEST['insurance_'.$labtest_nr]);
+				$bill_obj->StoreLaboratoryItemToBill($pid,$labtest_nr,$new_bill_number, $_POST['insurance_'.$labtest_nr]);
 
-				if ($debug) echo "Laboratory: allocate2insurance(".$new_bill_number.", $labtest_nr,".$_REQUEST['insurance'].");";
+				if ($debug) echo "Laboratory: allocate2insurance(".$new_bill_number.", $labtest_nr,".$_POST['insurance'].");";
 				if ($debug) echo "labtest nr.".$labtest_nr."<br>";
 				if ($debug) echo "billnumber: $new_bill_number<br>";
-				if ($debug) echo "labtest nr.: ".$_REQUEST['insurance_'.$labtest_nr]."<br>";
-				if ($debug) echo "insurance: ".$_REQUEST['insurance']."<br>";
+				if ($debug) echo "labtest nr.: ".$_POST['insurance_'.$labtest_nr]."<br>";
+				if ($debug) echo "insurance: ".$_POST['insurance']."<br>";
 
-				if ($_REQUEST['insurance']!=-1)
-					$insurance_obj->allocateLaboratoryItemsToinsurance($new_bill_number, $labtest_nr,$_REQUEST['insurance']);
+				if ($_POST['insurance']!=-1)
+					$insurance_obj->allocateLaboratoryItemsToinsurance($new_bill_number, $labtest_nr,$_POST['insurance']);
 			}
-			elseif($_REQUEST['modelab_'.$labtest_nr]=='delete')
+			elseif($_POST['modelab_'.$labtest_nr]=='delete')
 			{
 				$deletecounter++;
 				//Hmm, lets kick this one out!
@@ -109,15 +110,16 @@ if($task=="insert")
 	}
 
 	if($billcounter>0)
-		header("Location: billing_tz_edit.php".URL_APPEND."&batch_nr=".$pid."&billnr=".$new_bill_number."&user_origin=quotation&patient=".$_REQUEST['patient']);
+		header("Location: billing_tz_edit.php".URL_APPEND."&batch_nr=".$pid."&billnr=".$new_bill_number."&user_origin=quotation");
 	else
 	{
 		if($deletecounter>0)
 				$message = '<font color=red>'.$deletecounter.' items deleted for '.$enc_obj->ShowPID($pid).'.</font>';
 		else
 				$message = '<font color=red>'.$LDNothingToDo.' '.$enc_obj->ShowPID($pid).'.</font>';
-		header("Location: billing_tz_quotation.php".URL_APPEND."&message=".urlencode($message)."&patient=".$_REQUEST['patient']);
+		header("Location: billing_tz_quotation.php".URL_APPEND."&message=".urlencode($message));
 	}
+
 } // end of if($task=="insert")
 
 if ($debug) "nothing to do - just show what we have...<br>";
@@ -132,15 +134,7 @@ $ceiling = $matchingContract['Member']['ceiling']-$matchingContract['Member']['c
 $used_budget = array_sum($matchingBills);
 $insurancebudget = $ceiling-$used_budget;
 
-$result = $bill_obj->GetNewQuotation_Prescriptions($encounter_nr);
 
-//if($result->FetchRow())
-{
-	require ("gui/gui_billing_tz_quotation_create.php");
-}
-//else
-/*{
-	header("Location: billing_tz_quotation.php".URL_APPEND."&message=".urlencode($message)."&patient=".$_REQUEST['patient']);
-}*/
+require ("gui/gui_billing_tz_quotation_create.php");
 
 ?>

@@ -1243,5 +1243,11 @@ class Person extends Core {
 		return substr($altered_pid,0,strlen($altered_pid)-1);
 
 	}
+	function setPatientIsTransmit2ERP($pid,$transmit) {
+	    global $db;
+	    $db->debug=false;
+	    $this->sql="update $this->tb_person SET is_transmit2ERP='$transmit' where pid='$pid'";
+	    $db->Execute($this->sql);
+	}
 }
 ?>

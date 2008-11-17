@@ -107,51 +107,51 @@ fieldset {
       Left Eye </td>
   </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox'  name='prt1'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox'  name='prt1' value='equal and round'></td>
 <td bgcolor="#F0F8FF" align='center'>equal and round</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='plt1'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='plt1' value='equal and round'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='prt2'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='prt2' value='Irregularity of pupil'></td>
 <td bgcolor="#F0F8FF" align='center'>Irregularity of pupil</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='plt2'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='plt2' value='Irregularity of pupil'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='prt3'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='prt3' value='not reacting to light'></td>
 <td bgcolor="#F0F8FF" align='center'>not reacting to light</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='plt3'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='plt3' value='not reacting to light'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='prt4'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='prt4' value='reacts to light'></td>
 <td bgcolor="#F0F8FF" align='center'>reacts to light</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='plt4'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='plt4' value='reacts to light'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='prt5'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='prt5' value='reacts to accommodation'></td>
 <td bgcolor="#F0F8FF" align='center'>reacts to accommodation</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='plt5'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='plt5' value='reacts to accommodation'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='prt6'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='prt6' value='Afferent defect'></td>
 <td bgcolor="#F0F8FF" align='center'>Afferent defect</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='plt6'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='plt6' value='Afferent defect'></td>
   </tr>
 
 </tr>
   <tr>
-    <td bgcolor="#F0F8FF"><input type='checkbox' name='prt7'></td>
+    <td bgcolor="#F0F8FF"><input type='checkbox' name='prt7' value='The face is swollen or blistered'></td>
 <td bgcolor="#F0F8FF" align='center'>The face is swollen or blistered</td>
-<td bgcolor="#F0F8FF"><input type='checkbox' name='plt7'></td>
+<td bgcolor="#F0F8FF"><input type='checkbox' name='plt7' value='The face is swollen or blistered'></td>
   </tr>
 
 </table>
@@ -166,7 +166,7 @@ fieldset {
     <td bgcolor="#F0F8FF">
 
   <textarea name="comments" rows="10" cols="90" wrap="off">
-  text
+
   </textarea>
 
   </td>

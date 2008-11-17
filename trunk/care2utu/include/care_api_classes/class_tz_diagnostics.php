@@ -424,7 +424,7 @@ class Diagnostics extends Encounter {
 
   function EnterNewCase($dataarray) {
     global $db;
-    $debug=TRUE;
+    $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if (!is_array($dataarray)) {
 	  echo "internal error at class_tz_diagnostics.php::EnterNewCase(dataarray)";

@@ -1,4 +1,9 @@
 <?php
+
+//TODO: (Prakash) Why you do not extends from encounter? Then you would have many work still done ADOdb e.g.
+// require_once($root_path.'include/care_api_classes/class_encounter.php');
+// class eyeclinic extends encounter
+// instead of:
 class eyeclinic
 {
    var $host;
@@ -29,19 +34,29 @@ class eyeclinic
 
    }
 
+
+   //TODO (Prakash) Please disable that: We are using ADOdb. Do not use mysql_connect - it will give trouble by PHP5 and its future
    function dbconnect(){
          $this->connection=mysql_connect("localhost","root","")or die(mysql_error());
          return $this->connection;
    }
+
+   //TODO: (Prakash) please use ADOdb - no mysql_select_db - change it
    function dbselect(){
        $dbselect=mysql_select_db("caredb",$this->connection);
        return $dbselect;
    }
+
+   	  // TODO: (Prakash) you can kick out that. We have from class_code the Execute(SQLCommand) what is doing exactley the same
+
 	  //excuting any query
 	  function query($sql){
 	  	$query=mysql_query($sql)or die(mysql_error());
 	  return $query;
 	  }
+
+	  //TODO: (Prakash) are these not private methods? Then put either "private" in front or a prefix "_" like "function _setvart1($vart1){"
+
 	  //setting visual acuity test attributes and getting them
 	  function setvart1($vart1){
 	  $this->vart1=$vart1;
@@ -1197,17 +1212,178 @@ function setodr5($odr5){
 	  function getodl5(){
 	  return $this->odl5;
 	  }
-function setodr6($odr6){
+	function setodr6($odr6){
 	  $this->odr6=$odr6;
 	  }
 	  function getodr6(){
 	  return $this->odr6;
 	  }
-	  	   function setodl6($odl6){
+	  function setodl6($odl6){
 	  $this->odl6=$odl6;
 	  }
 	  function getodl6(){
 	  return $this->odl6;
+	  }
+
+
+
+function sethis1e($his1e){
+	  $this->his1e=$his1e;
+	  }
+	  function gethis1e(){
+	  return $this->his1e;
+	  }
+
+function sethis1d($his1d){
+	  $this->his1d=$his1d;
+	  }
+	  function gethis1d(){
+	  return $this->his1d;
+	  }
+
+function sethis2e($his2e){
+	  $this->his2e=$his2e;
+	  }
+	  function gethis2e(){
+	  return $this->his2e;
+	  }
+
+function sethis2d($his2d){
+	  $this->his2d=$his2d;
+	  }
+	  function gethis2d(){
+	  return $this->his2d;
+	  }
+
+
+function sethis3e($his3e){
+	  $this->his3e=$his3e;
+	  }
+	  function gethis3e(){
+	  return $this->his3e;
+	  }
+
+function sethis3d($his3d){
+	  $this->his3d=$his3d;
+	  }
+	  function gethis3d(){
+	  return $this->his3d;
+	  }
+
+
+function sethis4e($his4e){
+	  $this->his4e=$his4e;
+	  }
+	  function gethis4e(){
+	  return $this->his4e;
+	  }
+
+function sethis4d($his4d){
+	  $this->his4d=$his4d;
+	  }
+	  function gethis4d(){
+	  return $this->his4d;
+	  }
+
+function sethis5e($his5e){
+	  $this->his5e=$his5e;
+	  }
+	  function gethis5e(){
+	  return $this->his5e;
+	  }
+
+function sethis5d($his5d){
+	  $this->his5d=$his5d;
+	  }
+	  function gethis5d(){
+	  return $this->his5d;
+	  }
+
+function sethis6e($his6e){
+	  $this->his6e=$his6e;
+	  }
+	  function gethis6e(){
+	  return $this->his6e;
+	  }
+
+function sethis6d($his6d){
+	  $this->his6d=$his6d;
+	  }
+	  function gethis6d(){
+	  return $this->his6d;
+	  }
+
+
+function sethis7e($his7e){
+	  $this->his7e=$his7e;
+	  }
+	  function gethis7e(){
+	  return $this->his7e;
+	  }
+
+function sethis7d($his7d){
+	  $this->his7d=$his7d;
+	  }
+	  function gethis7d(){
+	  return $this->his7d;
+	  }
+
+
+
+
+function sethid1($hid1){
+	  $this->hid1=$hid1;
+	  }
+	  function gethid1(){
+	  return $this->hid1;
+	  }
+
+function sethid2($hid2){
+	  $this->hid2=$hid2;
+	  }
+	  function gethid2(){
+	  return $this->hid2;
+	  }
+
+function sethid3($hid3){
+	  $this->hid3=$hid3;
+	  }
+	  function gethid3(){
+	  return $this->hid3;
+	  }
+
+function sethid4($hid4){
+	  $this->hid4=$hid4;
+	  }
+	  function gethid4(){
+	  return $this->hid4;
+	  }
+
+function sethid5($hid5){
+	  $this->hid5=$hid5;
+	  }
+	  function gethid5(){
+	  return $this->hid5;
+	  }
+function sethid6($hid6){
+	  $this->hid6=$hid6;
+	  }
+	  function gethid6(){
+	  return $this->hid6;
+	  }
+
+function sethid7($hid7){
+	  $this->hid7=$hid7;
+	  }
+	  function gethid7(){
+	  return $this->hid7;
+	  }
+
+function sethid8($hid8){
+	  $this->hid8=$hid8;
+	  }
+	  function gethid8(){
+	  return $this->hid8;
 	  }
 
 
@@ -1242,6 +1418,9 @@ function setodr6($odr6){
       function getcriteria(){
       	return $this->criteria;
       }
+
+      //TODO (Prakash) See above my comments on the other native interfaces what we should not use
+
       function fetch_object($results){
 
       	return mysql_fetch_object($results);
@@ -1429,40 +1608,72 @@ function addTest13($pid,$odr1,$odl1,$odr2,$odl2,$odr3,$odl3,$odr4,$odl4,$odr5,$o
 	   }
 
 
-	   //get all suppliers in the database
 
+function addHistory($pid,$hid1,$his1e,$his1d,$hid2,$his2e,$his2d,$hid3,$his3e,$his3d,$hid4,$his4e,$his4d,$hid5,$his5e,$his5d,$hid,$comments,$signature){
+   	$date=Date('Y-m-d');
+	  $sql1= "INSERT INTO care_tz_eye_history1(pid,hid1,hid1e,hid1d,hid2,hid2e,hid2d,hid3,hid3e,hid3d,hid4,hid4e,hid4d,hid5,hid5e,hid5d,hid6,signature,remarks,examination_date)
+	   VALUES ('$pid','$hid1','$his1e','$his1d','$hid2','$his2e','$his2d','$hid3','$his3e','$his3d','$hid4','$his4e','$his4d','$hid5','$his5e','$his5d','$hid6','$signature','$remarks','$date')";
+      if($result=$this->query($sql1)){
 
-	   function get_all_suppliers(){
-           $sql2="select Suplier_id,Company_Name,Contact_Person from care_tz_supplier_deatail ORDER BY Suplier_id DESC";
-           $result=$this->query($sql2);
-           return $result;
+		return true;
+	  }
+	  else{
+	  return $result;
+	  }
+	   }
 
+function addHistory2($pid,$hid1,$his1e,$his1d,$hid2,$his2e,$his2d,$hid3,$his3e,$his3d,$hid4,$his4e,$his4d,$hid5,$his5e,$his5d,$hid6,$his6e,$his6d,$hid7,$his7e,$his7d,$hid8,$comments,$signature){
+   	$date=Date('Y-m-d');
+	  $sql1= "INSERT INTO care_tz_eye_history2(pid,hid1,hid1e,hid1d,hid2,hid2e,hid2d,hid3,hid3e,hid3d,hid4,hid4e,hid4d,hid5,hid5e,hid5d,hid6,hid6e,hid6d,hid7,hid7e,hid7d,hid8,signature,remarks,examination_date)
+	   VALUES ('$pid','$hid1','$his1e','$his1d','$hid2','$his2e','$his2d','$hid3','$his3e','$his3d','$hid4','$his4e','$his4d','$hid5','$his5e','$his5d','$hid6','$his6e','$his6d','$hid7','$his7e','$his7d','$hid8','$signature','$remarks','$date')";
+      if($result=$this->query($sql1)){
+
+		return true;
+	  }
+	  else{
+	  return $result;
+	  }
 	   }
-	   function get_criteria_search_results($criteria,$keyword)
-	   {
-          $sql3="select Suplier_id,Company_Name,Contact_Person from care_tz_supplier_deatail where  $criteria like '%$keyword%'  ORDER BY Suplier_id DESC";
-          		$result=$this->query($sql3);
-          		return $result;
+
+function addHistory3($pid,$hid1,$his1e,$his1d,$hid2,$his2e,$his2d,$hid3,$his3e,$his3d,$hid4,$his4e,$his4d,$hid5,$his5e,$his5d,$hid6,$comments,$signature){
+   	$date=Date('Y-m-d');
+	  $sql1= "INSERT INTO care_tz_eye_history3(pid,hid1,hid1e,hid1d,hid2,hid2e,hid2d,hid3,hid3e,hid3d,hid4,hid4e,hid4d,hid5,hid5e,hid5d,hid6,signature,remarks,examination_date)
+	   VALUES ('$pid','$hid1','$his1e','$his1d','$hid2','$his2e','$his2d','$hid3','$his3e','$his3d','$hid4','$his4e','$his4d','$hid5','$his5e','$his5d','$hid6','$signature','$remarks','$date')";
+      if($result=$this->query($sql1)){
+
+		return true;
+	  }
+	  else{
+	  return $result;
+	  }
 	   }
-       function show_supplier_details($id){
-       	$sql4="select * from care_tz_supplier_deatail where Suplier_id='$id'";
-       	$result=$this->query($sql4);
-       	return $result;
-       }
-     function update_supplier($id,$companyname, $contactperson,$address1,$adress2,$cell1,$cell2,$phone1,$phone2, $email,$fax,$banker,$bankdetails,$accountnumber,$creditlimit,$creditperiod )
-     {
-     	$sql5="update care_tz_supplier_deatail set Company_Name='$companyname',Contact_Person='$contactperson',Address1='$address1',Address2='$adress2',Phone1='$cell1',Phone2='$cell2',Cell1='$phone1',Cell2='$phone2',Email='$email',Fax='$fax',Banker='$banker',Bank_Details='$bankdetails',Account_no='$accountnumber',Credit_Limit='$creditlimit',Credit_Period='$creditperiod' where Suplier_id='$id'";
-     	if($result=$this->query($sql5)){
-     		return true;
-     	}else{
-     		return $result;
-     	}
+
+function addHistory4($pid,$hid1,$his1e,$his1d,$hid2,$his2e,$his2d,$hid3,$his3e,$his3d,$hid4,$his4e,$his4d,$hid5,$his5e,$his5d,$hid6,$his6e,$his6d,$hid7,$comments,$signature){
+   	$date=Date('Y-m-d');
+	  $sql1= "INSERT INTO care_tz_eye_history4(pid,hid1,hid1e,hid1d,hid2,hid2e,hid2d,hid3,hid3e,hid3d,hid4,hid4e,hid4d,hid5,hid5e,hid5d,hid6,hid6e,hid6d,hid7,signature,remarks,examination_date)
+	   VALUES ('$pid','$hid1','$his1e','$his1d','$hid2','$his2e','$his2d','$hid3','$his3e','$his3d','$hid4','$his4e','$his4d','$hid5','$his5e','$his5d','$hid6','$his6e','$his6d','$hid7','$signature','$remarks','$date')";
+      if($result=$this->query($sql1)){
+
+		return true;
+	  }
+	  else{
+	  return $result;
+	  }
 	   }
-	   function detete_supplier($id){
-	   	$sql6="DELETE from care_tz_supplier_deatail where Suplier_id='$id'";
-	   	$result=$this->query($sql6);
-	   	return $result;
+
+function addHistory5($pid,$hid1,$his1e,$his1d,$hid2,$his2e,$his2d,$hid3,$his3e,$his3d,$hid4,$his4e,$his4d,$hid5,$his5e,$his5d,$hid6,$his6e,$his6d,$hid7,$comments,$signature){
+   	$date=Date('Y-m-d');
+	  $sql1= "INSERT INTO care_tz_eye_history5(pid,hid1,hid1e,hid1d,hid2,hid2e,hid2d,hid3,hid3e,hid3d,hid4,hid4e,hid4d,hid5,hid5e,hid5d,hid6,hid6e,hid6d,hid7,signature,remarks,examination_date)
+	   VALUES ('$pid','$hid1','$his1e','$his1d','$hid2','$his2e','$his2d','$hid3','$his3e','$his3d','$hid4','$his4e','$his4d','$hid5','$his5e','$his5d','$hid6','$his6e','$his6d','$hid7','$signature','$remarks','$date')";
+      if($result=$this->query($sql1)){
+
+		return true;
+	  }
+	  else{
+	  return $result;
+	  }
 	   }
+
 
 }
 ?>

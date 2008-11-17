@@ -2280,6 +2280,55 @@ function DisplayTBBillingTestSummary($start_timeframe, $end_timeframe){
     }
   }
 
+  /* WebERP */
+
+  function DisplaywebERPTableHead($what){
+  	if($what == 'debtor')
+  	{
+  		echo '<tr>';
+		echo '<td><b>PID</b></td><td><b>Name</b></td><td><b>Date</b></td>';
+		echo '</tr>';
+  	}
+  	else if($what == 'saleInvoice'){
+  		echo '<tr>';
+		echo '<td><b>Bill Number</b></td><td><b>PID</b></td><td><b>Date</b></td>';
+		echo '</tr>';
+  	}
+
+  }
+
+  function DisplaywebERPShowFailedTransaction($start_timeframe, $end_timeframe, $what)
+  {
+  	global $db;
+
+  	if($what == 'debtor')
+  	{
+  		$sql=" select * from care_person WHERE date_reg>='".date("Y-m-d G:i:s",$start_timeframe)."' AND date_reg<='".date("Y-m-d G:i:s",$end_timeframe)."' and is_transmit2ERP=0";
+  		$patient=$db->Execute($sql);
+  		while($row=$patient->FetchRow())
+  		{
+  			echo '<tr>';
+			echo '<td>'.$row[pid].'</td><td>'.$row[name_first] .' '. $row[name_last] .'</td><td>'. $row[date_reg] .'</td>';
+			echo '</tr>';
+  		}
+  	}
+  	else if($what == 'saleInvoice'){;
+  		$sql="select a.nr, b.encounter_nr,c.pid,a.date_change
+					from care_tz_billing_archive_elem as a
+					inner join care_tz_billing_archive b on a.nr = b.nr
+					inner join care_encounter c on b.encounter_nr = c.encounter_nr WHERE a.date_change>='".$start_timeframe."' AND a.date_change<='".$end_timeframe."' and a.is_transmit2ERP=0";
+  		$patient=$db->Execute($sql);
+
+  		while($row=$patient->FetchRow())
+  		{
+	  		echo '<tr>';
+			echo '<td>'.$row[nr].'</td><td>'.$row[pid].'</td><td>'.date("Y-m-d G:i:s",$row[date_change]).'</td>';
+			echo '</tr>';
+  		}
+  	}
+
+  }
+
 
 }
 

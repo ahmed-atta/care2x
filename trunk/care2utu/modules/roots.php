@@ -1,4 +1,4 @@
 <?php
-$root_path='../';
-$top_dir='modules/';
+$root_path='../../';
+$top_dir='modules/eyeclinic/';
 ?>

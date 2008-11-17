@@ -198,6 +198,11 @@ function getARV(path) {
                   <td class="submenu_item"><a href="dental_prepaid_financial_summary.php"><?php echo 'Dental Insurance Financial Summary'; ?></a></td>
                   <td><?php echo 'Dental Insurance Financial Summary'; ?></td>
                 </tr>
+                <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="reporting_weberp.php">webERP Transaction</a></td>
+                  <td>Monthly failed Transaction</td>
+                </tr>
 
 
                 <!--
@@ -217,6 +222,7 @@ function getARV(path) {
                   <td class="submenu_item"><a href="javascript:getARV('modules/arv/arv_reporting_cstatistics.php')">HIV C-Statistics</a></td>
                   <td>C-Statistics Overview</td>
                 </tr>
+
                  -->
               </tbody>
             </table></TD>
