@@ -13,6 +13,18 @@ $LDOPDSummary='OPD - Summary';
 $LDAllvisits='All visits (with diagnostic) to this clinic';
 $LDAllvisitsWithoutDiagnosis='All visits (without diagnostic) to this clinic';
 
+/* t.h. from merotech */
+$LDModule='Module';
+$LDModuleID='Module ID';
+$LDRefModule='Refering Module';
+$LDAction='Action';
+$LDOldValue='Old Value';
+$LDNewValue='New Value';
+$LDValueType='Value Type';
+$LDComment='Comment User';
+$LDUser='Session User';
+
+
 $LDOPDAdmissionSummary='OPD Admissions - Summary';
 $LDOPDAdmissionReport='OPD Admissions Report';
 $LDClinicSummary='Clinic - Summany';
@@ -20,6 +32,8 @@ $LDAllvisitsClinic='All visits (generally) to this clinic';
 $LDLaboratorySummary='Laboratory - Summary';
 $LDMonthlyLabReport='Monthly Laboratory Report';
 $LDFinancialReport='Financial Report';
+$LDTrackingReport='Tracking Report';
+$LDMonthlyTrackingReport='Monthly Tracking Record listed by specific month';
 $LDDailyFinancialRecord='Daily Financial Record listened of a specific month';
 $LDPharmacyReport='Pharmacy Report';
 $LDGenerallyPharmacyReport='Generally Pharmacy Report (without stock informations)';

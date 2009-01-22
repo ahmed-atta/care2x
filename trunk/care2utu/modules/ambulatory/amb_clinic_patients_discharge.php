@@ -28,7 +28,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 /**
 * Set default values if not available from url
 */
-//if (!isset($dept_nr)||empty($dept_nr)) { $dept_nr=$HTTP_SESSION_VARS['sess_dept_nr'];} # Default station must be set here !!
+//if (!isset($dept_nr)||empty($dept_nr)) { $dept_nr=$_SESSION['sess_dept_nr'];} # Default station must be set here !!
 if(!isset($pday)||empty($pday)) $pday=date('d');
 if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
@@ -57,7 +57,7 @@ if(isset($retpath)){
 	}
 }
 # Mark where we are
-$HTTP_SESSION_VARS['sess_user_origin']='amb';
+$_SESSION['sess_user_origin']='amb';
 
 # Load date formatter
 require_once($root_path.'include/inc_date_format_functions.php');
@@ -210,6 +210,14 @@ function release(nr)
 	indatawin=window.open(urlholder,"bedroom","width=700,height=730,menubar=no,resizable=yes,scrollbars=yes");
 	//window.location.href=urlholder;
 }
+
+function release_info(nr)
+{
+	urlholder="amb_clinic_discharge_info.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+nr+"<?php echo "&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&station=<?php echo $station; ?>&dept_nr=<?php echo $dept_nr; ?>&backpath=<?php echo $breakfile; ?>";
+	indatawin=window.open(urlholder,"bedroom","width=700,height=730,menubar=no,resizable=yes,scrollbars=yes");
+	//window.location.href=urlholder;
+}
+
 
 function popinfo(l,d)
 {
@@ -447,6 +455,7 @@ if($rows){
 
 				$smarty->assign('sTransferIcon','<a href="javascript:Transfer(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'xchange.gif','0','',TRUE).' alt="'.$LDTransferPatient.'"></a>');
 				*/
+				$smarty->assign('sDischargeInfoIcon','<a href="javascript:release_info(\''.$patient['encounter_nr'].'\')" title="show info"><img '.createComIcon($root_path,'button_info.gif','0','',TRUE).' alt="show info"></a>');
 				$smarty->assign('sDischargeIcon','<a href="javascript:release(\''.$patient['encounter_nr'].'\')" title="'.$LDReleasePatient.'"><img '.createComIcon($root_path,'bestell.gif','0','',TRUE).' alt="'.$LDReleasePatient.'"></a>');
 			}
 

@@ -225,7 +225,7 @@ Benutzername eingeben:<br></font>
 </table>        
 
 <p>
-<img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Einführung in die SQL Datenbank.</a><br>
+<img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Einfï¿½hrung in die SQL Datenbank.</a><br>
 <img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Wie mache ich was hier?</a><br>
 <HR>
 <p>

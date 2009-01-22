@@ -130,7 +130,7 @@ function cxjahr(offs)
 function optionwin(d,m,y)
 {
 	if (!d) d="";
-	urlholder="calendar-options.php?sid=<?php echo "$sid&lang=$lang" ?>&day="+d+"&month="+m+"&year="+y;
+	urlholder="calendar-options.php?sid=<?php echo "$sid&lang=$lang"; ?>&day="+d+"&month="+m+"&year="+y;
 	optwin=window.open(urlholder,"optwin","width=500,height=400,menubar=no,resizable=yes,scrollbars=yes");
 }
 

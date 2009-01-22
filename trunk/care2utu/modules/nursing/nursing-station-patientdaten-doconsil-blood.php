@@ -106,8 +106,8 @@ $enc_obj=new Encounter;
 										   '".$ffp_plasma."','".$transfusion_dev."','".$match_sample."',
 										   '".formatDate2Std($transfusion_date,$date_format)."','".htmlspecialchars($diagnosis)."','".htmlspecialchars($notes)."','".formatDate2Std($send_date,$date_format)."',
 										   '".$doctor."','".$phone_nr."','pending',
-										   'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										   '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   'Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n',
+										   '".$_SESSION['sess_user_name']."',
 										   '".date('YmdHis')."'
 										   )";
 										   
@@ -155,7 +155,7 @@ $enc_obj=new Encounter;
 										   doctor='".$doctor."', 
 										   phone_nr='".$phone_nr."', 
 										   status='".$status."', 
-										   history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+										   history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
 										   modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."',
 										   modify_time='".date('YmdHis')."'
                                            WHERE batch_nr = '".$batch_nr."'";
@@ -287,6 +287,12 @@ div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
 <!-- 
 function chkForm(d){
 
+	if((d.match_sample.value=1) && (d.blood_group.value=='?') ) {
+		alert("<?php echo $LDPlsEnterBloodGroup ?>");
+		d.blood_group.focus();
+		return false;		
+	}
+	
    if((d.blood_group.value=='')||(d.blood_group.value==' '))
 	{
 		alert("<?php echo $LDPlsEnterBloodGroup ?>");
@@ -450,16 +456,28 @@ if($edit){
 		     <table border=0 bgcolor="<?php echo $bgc1 ?>" cellpadding=4 width=100%>
              <tr  class=fva2_ml10>
               <td><b><font color="red" face="verdana" size=2>*</font></b><?php echo $LDBloodGroup ?><br>
-			  <input type="text" name="blood_group" size=7 maxlength=10 value="<?php  
-				//if($edit_form || $read_form) {
-					if(isset($stored_request['blood_group'])) echo $stored_request['blood_group'];
-						else echo $enc_obj->BloodGroup();
-				//}
-			  ?>"></td>
+	              <select name="blood_group" size="1"> <!-- #36 -->
+					  <option value="?">?</option>
+	              	  <option value="A">A</option>
+					  <option value="B">B</option>
+					  <option value="AB">AB</option>
+					  <option value="0">0</option>
+				  </select>
+				</td>
 			   <td><b><font color="red" face="verdana" size=2>*</font></b><?php echo $LDRhFactor ?><br>
-			   <input type="text" name="rh_factor" size=7 maxlength=10 value="<?php  if($edit_form || $read_form) echo $stored_request['rh_factor']; ?>"></td>
+			   	  <select name="rh_factor" size="1"> <!-- #36 -->
+			   	  	  <option value="?">?</option>
+					  <option value="rh+">Rh+</option>
+					  <option value="rh-">Rh-</option>
+				  </select>
+			   </td>
 			   <td><b><font color="red" face="verdana" size=2>*</font></b><?php echo $LDKell ?><br>
-			   <input type="text" name="kell" size=7 maxlength=10 value="<?php  if($edit_form || $read_form) echo $stored_request['kell']; ?>"></td>
+			   	  <select name="kell" size="1"> <!-- #36 -->
+					  <option value="?">?</option>
+					  <option value="k+">k+</option>
+					  <option value="k-">k-</option>
+				  </select>			   
+				  </td>
               </tr>
               <tr class=fva0_ml10>
               <td colspan=3><?php echo $LDDateProtNumber ?><br><input type="text" name="date_protoc_nr" size=45 maxlength=45 value="<?php  if($edit_form || $read_form) echo $stored_request['date_protoc_nr']; ?>"></td>
@@ -547,9 +565,15 @@ if($edit){
      </tr>
      <tr>
        <td><div class=fva2b_ml10><b><font color="red" face="verdana" size=2>*</font></b><font size=1><?php echo $LDTransfusionDate ?></font></div></td>
-       <td><input type="text" name="transfusion_date" size=20 maxlength=10  value="<?php  if($mode=='edit') echo formatDate2Local($stored_request['transfusion_date'],$date_format); ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-	   <a href="javascript:show_calendar('form_test_request.transfusion_date','<?php echo $date_format ?>')">
- 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
+       <td>
+ 			<?php
+				//gjergji : new calendar
+				require_once ('../../js/jscalendar/calendar.php');
+				$calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);
+				$calendar->load_files();
+	  			echo $calendar->show_calendar($calendar,$date_format,'transfusion_date',$stored_request['transfusion_date']);
+				//end : gjergji  
+ 			?>
 	   </td>
      </tr>
      <tr>
@@ -563,9 +587,12 @@ if($edit){
      </tr>
      <tr>
        <td align="right"><div class=fva2b_ml10><b><font color="red" face="verdana" size=2>*</font></b><font size=1><?php echo $LDDate ?>:&nbsp;</font></div></td>
-       <td><input type="text" name="send_date" size=20 maxlength=10  value="<?php  if($mode=="edit") echo formatDate2Local($stored_request['send_date'],$date_format); else echo formatDate2Local(date("Y-m-d"),$date_format) ?>" onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
-	   	   <a href="javascript:show_calendar('form_test_request.send_date','<?php echo $date_format ?>')">
- 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
+       <td>
+ 			<?php
+				//gjergji : new calendar
+	  			echo $calendar->show_calendar($calendar,$date_format,'send_date',$stored_request['send_date']);
+				//end : gjergji  
+ 			?> 		
 		</td>
      </tr>
      <tr>

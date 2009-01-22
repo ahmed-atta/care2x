@@ -21,6 +21,11 @@ class Diagnostics extends Core {
 	*/
     var $tb_req_chem='care_test_request_chemlabor';
 	/**
+	* Table name for chemical lab test request lab parameters
+	* @var string
+	*/
+    var $tb_req_chem_sub='care_test_request_chemlabor_sub';
+	/**
 	* Table name for bacteriology lab test request
 	* @var string
 	*/
@@ -72,6 +77,14 @@ class Diagnostics extends Core {
 									'create_id',
 									'create_time');
 	/**
+	* Field names of care_test_request_chemlabor_sub
+	* @var array
+	*/
+	var $chemlabor_sub=array('batch_nr',
+							'encounter_nr',
+							'paramater_name',
+							'parameter_value');
+	/**
 	* Sets the core to point to the care_test_request_chemlabor table
 	* @access public
 	*/
@@ -79,6 +92,14 @@ class Diagnostics extends Core {
 		$this->setTable($this->tb_req_chem);
 		$this->setRefArray($this->chemlabor);
 	}			
+	/**
+	* Sets the core to point to the care_test_request_chemlabor_sub table
+	* @access public
+	*/
+	function useChemLabRequestSubTable(){
+		$this->setTable($this->tb_req_chem_sub);
+		$this->setRefArray($this->chemlabor_sub);
+	}
 	/**
 	* Sets the core to point to the a care_test_request_????? table.
 	* The ????? is replaced with string passed as parameter.

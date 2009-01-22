@@ -82,13 +82,13 @@ function chkselect(d)
 function editParam(nr)
 {
 	urlholder="<?php echo $root_path ?>modules/laboratory/labor_test_param_edit.php?sid=<?php echo "$sid&lang=$lang" ?>&nr="+nr;
-	editparam_<?php echo $sid ?>=window.open(urlholder,"editparam_<?php echo $sid ?>","width=510,height=390,menubar=no,resizable=yes,scrollbars=yes");
+	editparam_<?php echo $sid ?>=window.open(urlholder,"editparam_<?php echo $sid ?>","width=590,height=390,menubar=no,resizable=yes,scrollbars=yes");
 }
 
 function newParam()
 {
 	urlholder="<?php echo $root_path ?>modules/laboratory/labor_test_param_edit.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=new";
-	editparam_<?php echo $sid ?>=window.open(urlholder,"editparam_<?php echo $sid ?>","width=510,height=390,menubar=no,resizable=yes,scrollbars=yes");
+	editparam_<?php echo $sid ?>=window.open(urlholder,"editparam_<?php echo $sid ?>","width=590,height=390,menubar=no,resizable=yes,scrollbars=yes");
 }
 // -->
 </script>

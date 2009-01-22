@@ -5,6 +5,7 @@
 	{{include file="laboratory/patient_data_basic.tpl"}}
 	<p>
 	<button onClick="javascript:prep2submit()">{{$sMakeGraphButton}}</button>
+	<button onClick="javascript:openReport()">{{$sOpenReport}}</button>
 	</p>
 	   <table border=0 class="frame" cellspacing=0 cellpadding=0>
 		<tbody>

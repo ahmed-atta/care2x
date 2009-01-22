@@ -190,13 +190,13 @@ class Charts extends NursingNotes {
 	* @access private
 	*/			
 	function _prepareSaveMeasurement(){
-		global $HTTP_SESSION_VARS;
+//		global $HTTP_SESSION_VARS;
 		$this->coretable=$this->tb_measure;
 		$this->ref_array=$this->fld_measure;
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['modify_id']=$_SESSION['sess_user_name'];
+		$this->data_array['create_id']=$_SESSION['sess_user_name'];
 		$this->data_array['create_time']=date('YmdHis');
-		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
 	}
 	/**
 	* Saves a blood pressure data.
@@ -266,14 +266,14 @@ class Charts extends NursingNotes {
 	* @return boolean
 	*/			
 	function savePrescriptionFromArray(&$data){
-		global $HTTP_SESSION_VARS;
+//		global $HTTP_SESSION_VARS;
 		$this->_usePrescriptionTable();
 		$this->data_array=$data;
 		$this->data_array['prescribe_date']=date('Y-m-d');
 		$this->data_array['modify_id']='';
-		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['create_id']=$_SESSION['sess_user_name'];
 		$this->data_array['create_time']=date('YmdHis');
-		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
 		if($this->insertDataFromInternalArray()){
 			return true;
 		}else{return false;}
@@ -286,13 +286,13 @@ class Charts extends NursingNotes {
 	* @return boolean
 	*/			
 	function updatePrescriptionFromArray($nr,&$data){
-		global $HTTP_SESSION_VARS;
+//		global $HTTP_SESSION_VARS;
 		$this->_usePrescriptionTable();
 		$this->data_array=$data;
 		if(isset($this->data_array['prescribe_date'])) unset($this->data_array['prescribe_date']);
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['modify_id']=$_SESSION['sess_user_name'];
         $this->data_array['modify_time']=date('YmdHis');
-		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
 		if($this->updateDataFromInternalArray($nr)){
 			return true;
 		}else{return false;}
@@ -303,13 +303,13 @@ class Charts extends NursingNotes {
 	* @return boolean
 	*/
 	function EndPrescription($nr){
-		global $HTTP_SESSION_VARS;
+//		global $HTTP_SESSION_VARS;
 		$this->data_array=NULL;
 		$this->_usePrescriptionTable();
 		$this->data_array['is_stopped']=1;
 		$this->data_array['stop_date']=date('Y-m-d');
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['history']=$this->ConcatHistory("Ended: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+		$this->data_array['modify_id']=$_SESSION['sess_user_name'];
+		$this->data_array['history']=$this->ConcatHistory("Ended: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
 		if($this->updateDataFromInternalArray($nr)){
 			return true;
 		}else{return false;}
@@ -353,14 +353,14 @@ class Charts extends NursingNotes {
 	* @return boolean
 	*/
 	function savePrescriptionNotesFromArray(&$data){
-		global $HTTP_SESSION_VARS;
+//		global $HTTP_SESSION_VARS;
 		$this->data_array=$data;
 		$this->coretable=$this->tb_presc_notes;
 		$this->ref_array=$this->fld_presc_notes;
-		//$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		//$this->data_array['modify_id']=$_SESSION['sess_user_name'];
+		$this->data_array['create_id']=$_SESSION['sess_user_name'];
 		$this->data_array['create_time']=date('YmdHis');
-		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
 		if($this->insertDataFromInternalArray()){
 			return true;
 		}else{return false;}
@@ -373,13 +373,13 @@ class Charts extends NursingNotes {
 	* @return boolean
 	*/			
 	function updatePrescriptionNotesFromArray($nr,&$data){
-		global $HTTP_SESSION_VARS;
+//		global $HTTP_SESSION_VARS;
 		$this->data_array=$data;
 		$this->coretable=$this->tb_presc_notes;
 		$this->ref_array=$this->fld_presc_notes;
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['modify_id']=$_SESSION['sess_user_name'];
         $this->data_array['modify_time']=date('YmdHis');
-		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
 		if($this->updateDataFromInternalArray($nr)){
 			return true;
 		}else{return false;}

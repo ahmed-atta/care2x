@@ -28,6 +28,7 @@ $LDFoundPatient='The search found <b>~nr~</b> patients';
 $LDWildCards='What are wildcards and how to use them';
 $LDNewSearch='New search';
 
+$LDPatientID='Patient ID';
 $LDCaseNr='Admission-Nr.';
 $LDLabReport='Lab report';
 $LDLastName='Surname/Ukoo';
@@ -104,10 +105,10 @@ $LDEditForm='Edit the same test request';
 $LDEndTestRequest='I\'m finished.';
 $LDNewFormOtherPatient='Create a test request for <b>another</b> patient';
 
-/* 2002-09-03 EL */							  
+/* 2002-09-03 EL */
 $LDSearchPatient='Search patient';
 $LDSearchFound='~nr~ patients were found.';
-/* 2002-09-04 EL */		
+/* 2002-09-04 EL */
 $LDTestRequestFor='Request for';
 $LDTestType=array('chemlabor'=>'chemical laboratory test',
                               'patho'=>'pathological test',
@@ -154,5 +155,12 @@ $LDBatchNumber='Batch number';
 $LDSelianFileNr='Selian File no.';
 $LDDateOfTestRequest='Date of test request';
 $LDInsertNewParameter='Insert new Parameter (click edit)';
-
+//gjergji : param management
+$LDInputManagement='Input Management';
+$LDInputType='Input Type';
+$LDInputTypeInputBox='Input box';
+$LDInputTypeDropDown='Drop down';
+$LDInputTypeLimited='Limited values';
+$LDInputValue='Value';
+$LDInputHint='for separate values separate them by ; <br> for range separate them with a dash - ';
 ?>

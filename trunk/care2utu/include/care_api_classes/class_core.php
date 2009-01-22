@@ -370,7 +370,7 @@ class Core {
 			# use backquoting for mysql and no-quoting for other dbs
 			if ($dbtype=='mysql') $index.="`$x`,";
 				else $index.="$x,";
-				
+
 			if(stristr($v,$concatfx)||stristr($v,'null')) $values.=" $v,";
 				else $values.="'$v',";
 		}
@@ -378,8 +378,6 @@ class Core {
 		$index=substr_replace($index,'',(strlen($index))-1);
 		$values=substr_replace($values,'',(strlen($values))-1);
         $this->sql="INSERT INTO $this->coretable ($index) VALUES ($values)";
-		if($debug) echo $this->sql;
-		if($debug) exit();
 		reset($array);
 		return $this->Transact();
 	}
@@ -414,6 +412,7 @@ class Core {
 		$elems=substr_replace($elems,'',(strlen($elems))-1);
 		if(empty($this->where)) $this->where="nr=$item_nr";
         $this->sql="UPDATE $this->coretable SET $elems WHERE $this->where";
+
 		# Bug fix. Reset the condition variable to prevent affecting subsequent update calls.
 		$this->where='';
 		//echo $this->sql.'<br>';
@@ -431,8 +430,8 @@ class Core {
 	* @return boolean
 	*/
     function updateDataFromInternalArray($item_nr='',$isnum=TRUE) {
-		if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
-	    $this->_prepSaveArray();
+    	if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
+		$this->_prepSaveArray();
 		return $this->updateDataFromArray($this->buffer_array,$item_nr,$isnum);
 	}
 	/**
@@ -832,6 +831,36 @@ function GetHospitalName() {
 			echo '<font color=red>'.$text.'</font>';
 		else
 			echo $text;
+	}
+
+	function IsHospitalFileNrMandatory()
+	{
+	  global $db;
+	  $debug=FALSE;
+	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+
+	    $this->sql = "SELECT value FROM care_config_global WHERE type='identificationNr'";
+	    $this->db_res=$db->Execute($this->sql);
+	    $this->res=$this->db_res->FetchRow();
+	    if ($this->res) {
+	      if ($this->res[0] == "HospFileNr")
+	      {
+	      	return true;
+	      }
+	    }
+
+	  return false;
+	}
+
+	function trackChanges($module, $module_id, $ref_module, $ref_module_id, $action, $old_value, $new_value, $value_type, $comment_user, $session_user)
+	{
+		global $db;
+		$this->sql="INSERT INTO care_tz_tracker SET time='".date('Y-m-d H:i:s')."'," .
+								" module='$module', module_id=$module_id, refering_module='$ref_module'," .
+								" refering_module_id=$ref_module_id, action='$action', old_value='$old_value', " .
+								" new_value='$new_value', value_type='$value_type', comment_user='$comment_user', session_user='$session_user'";
+		$db->execute($this->sql);
+
 	}
 
 

@@ -9,9 +9,11 @@
 		<td class="wardlisttitlerow">{{$LDBed}}</td>
 		<td class="wardlisttitlerow">{{$LDFamilyName}}, {{$LDName}}</td>
 		<td class="wardlisttitlerow">{{$LDBirthDate}}</td>
-		<td class="wardlisttitlerow">{{$LDPatNr}}</td>
+		<td class="wardlisttitlerow">{{$LDPatientID}}</td>
+		<td class="wardlisttitlerow">{{$LDAdmissionDate}}</td>
 		<td class="wardlisttitlerow">{{$LDInsuranceType}}</td>
 		<td class="wardlisttitlerow">{{$LDOptions}}</td>
+
 	</tr>
 
 	{{$sOccListRows}}

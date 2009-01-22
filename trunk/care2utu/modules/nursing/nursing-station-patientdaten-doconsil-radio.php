@@ -111,8 +111,8 @@ $core = & new Core;
 										   '".$if_patmobile."','".$if_allergy."','".$if_hyperten."','".$if_pregnant."',
 										   '".htmlspecialchars($clinical_info)."','".htmlspecialchars($test_request)."','".formatDate2Std($send_date,$date_format)."',
 										   '".htmlspecialchars($send_doctor)."', 'pending',
-										   'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										   '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   'Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n',
+										   '".$_SESSION['sess_user_name']."',
 										   '".date('YmdHis')."'
 										   )";
 
@@ -146,8 +146,8 @@ $core = & new Core;
 										  clinical_info='".htmlspecialchars($clinical_info)."', test_request='".htmlspecialchars($test_request)."',
 										  send_date='".formatDate2Std($send_date,$date_format)."',
 										  send_doctor='".htmlspecialchars($send_doctor)."', status='".$status."',
-										  history=".$core->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										  modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+										  history=".$core->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										  modify_id='".$_SESSION['sess_user_name']."',
 										  modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
 
@@ -394,9 +394,9 @@ echo '
             include($root_path.'include/inc_test_request_searchmask.php');
         }
 		?></td>
-      <td bgcolor="<?php echo $bgc1 ?>"  class=fva2_ml10><div   class=fva2_ml10><font size=5 color="#0000ff"><b><?php echo $formtitle ?></b></font>
+ <!--     <td bgcolor="<?php echo $bgc1 ?>"  class=fva2_ml10><div   class=fva2_ml10><font size=5 color="#0000ff"><b><?php echo $formtitle ?></b></font>
 		 <br><?php echo $global_address[$target].'<br>'.$LDTel.'&nbsp;'.$global_phone[$target]; ?>
-		 </td>
+		 </td> -->
 		 </tr>
 	 <tr>
       <td bgcolor="<?php echo $bgc1 ?>" align="right" valign="bottom">
@@ -422,15 +422,15 @@ echo '
     <tr>
       <td align="right"><div class=fva2_ml10><?php echo $LDCT ?></td>
       <td><input type="checkbox" name="ct" value="1" <?php if(($edit_form || $read_form) && $stored_request['ct']) echo "checked" ?>></td>
-      <td align="right"><div class=fva2_ml10><?php echo $LDMammograph ?></td>
-      <td><input type="checkbox" name="mammograph" value="1" <?php if(($edit_form || $read_form) && $stored_request['mammograph']) echo "checked" ?>></td>
+<!--    <td align="right"><div class=fva2_ml10><?php echo $LDMammograph ?></td>
+      <td><input type="checkbox" name="mammograph" value="1" <?php if(($edit_form || $read_form) && $stored_request['mammograph']) echo "checked" ?>></td> -->
     </tr>
-    <tr>
+<!--    <tr>
       <td align="right"><div class=fva2_ml10><?php echo $LDMRT ?></td>
       <td><input type="checkbox" name="mrt" value="1" <?php if(($edit_form || $read_form) && $stored_request['mrt']) echo "checked" ?>></td>
       <td align="right"><div class=fva2_ml10><?php echo $LDNuclear ?></td>
       <td><input type="checkbox" name="nuclear" value="1" <?php if(($edit_form || $read_form) && $stored_request['nuclear']) echo "checked" ?>></td>
-	    </tr>
+	 </tr> -->
 <tr></tr>
 <tr><td>Test Request<select><option>X-Ray</option><option>X-Ray1</option></td></tr>
 

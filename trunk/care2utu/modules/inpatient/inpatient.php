@@ -11,6 +11,8 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
+$lang_tables[]='nursing.php';
 define('LANG_FILE','inpatient.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -19,9 +21,9 @@ require($root_path.'include/inc_2level_reset.php');
 
 if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
-$HTTP_SESSION_VARS['sess_user_origin']='amb';
-$HTTP_SESSION_VARS['sess_parent_mod']='';
+$_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
+$_SESSION['sess_user_origin']='amb';
+$_SESSION['sess_parent_mod']='';
 
 require_once($root_path.'include/care_api_classes/class_ward.php');
 $ward_obj=new Ward;
@@ -34,7 +36,7 @@ $ward_info=&$ward_obj->getAllWardsItemsObject($items);
 <HEAD>
 <?php echo setCharSet(); ?>
 
-<?php 
+<?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
 ?>
@@ -53,7 +55,7 @@ function goWard(t) {
 </script>
 </HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
@@ -104,11 +106,11 @@ echo '
         <TBODY>
         <TR>
           <TD>
-            <TABLE cellSpacing=1 cellPadding=3 width=600 bgColor=#999999 
+            <TABLE cellSpacing=1 cellPadding=3 width=600 bgColor=#999999
             border=0>
               <TBODY>
 			 <!-- Be careful in moving the form tag -->
-  			<form name="dept_select" method="post" action=""> 
+  			<form name="dept_select" method="post" action="">
               <TR bgColor=#dddddd>
                 <TD colSpan=3 bgColor=#dddddd >
 				'.$TP_SELECT_BLOCK.'
@@ -130,9 +132,20 @@ echo '
 				  </FONT>
 				  </TD>
 				  </TR>
-';
+				<TR bgColor=#eeeeee><td align=center><img src="'.$TP_ROOT_PATH.'/gui/img/common/default/timeplan.gif"></td>
+                <TD vAlign=top ><FONT face="Verdana,Helvetica,Arial" size=2><B>
+			 	<a href="javascript:goWard(\'../nursing/nursing-station-manage-pass.php\')">'.$LDNursingManage.'</a>
+				  </B></FONT>
+				  </TD>
+                <TD><FONT face="Verdana,Helvetica,Arial" size=2>
+				  '.$LDStationManTxt.'
+				  </FONT>
+				  </TD>
+				  </TR>
+		';
+
  /* 05-02-25: Not necessary for Selian
- 
+
               <TR bgColor=#eeeeee><td align=center><img src="$TP_ROOT_PATH/gui/img/common/default/forums.gif"></td>
                 <TD vAlign=top ><FONT face="Verdana,Helvetica,Arial" size=2><B>
 			 	$TP_HREF_PWL1
@@ -157,18 +170,18 @@ echo '
 
 ';
  /* 05-02-25: Not necessary for Selian
- 
+
              <TR bgColor=#eeeeee><td align=center><img src="$TP_ROOT_PATH/gui/img/common/default/bubble2.gif"></td>
                 <TD vAlign=top ><FONT face="Verdana,Helvetica,Arial" size=2><B>
 			 	$TP_HREF_NEWS1
 				  </B></FONT>
 				  </TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" size=2>
-				  $LDNewsTxt 
+				  $LDNewsTxt
 				  </FONT>
 				  </TD>
 				  </TR>
-				  
+
 */
 
 echo			$TP_HINPUTS.'
@@ -180,8 +193,8 @@ echo			$TP_HINPUTS.'
 		</TABLE>
 	</td>
   </tr>
-  
-  
+
+
 </table>'.
 $TP_CANCEL_BUT;
 ?>
@@ -199,7 +212,7 @@ $TP_CANCEL_BUT;
 require($root_path.'include/inc_load_copyrite.php');
 ?>
 </td></tr>
-</table>        
+</table>
 &nbsp;
 </FONT>
 </BODY>

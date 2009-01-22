@@ -36,11 +36,11 @@ echo 'bgcolor='.$cfg['idx_bgcolor'];
 <FONT  FACE="Arial"  SIZE="-1">
 
 <?php
-//echo $HTTP_COOKIE_VARS['ck_config']; // used only in debugging related to user config data
+//echo $_COOKIE['ck_config']; // used only in debugging related to user config data
 if($result){
 	while($menu=$result->FetchRow()){
 		if (eregi('LDLogin',$menu['LD_var'])){
-			if ($HTTP_COOKIE_VARS['ck_login_logged'.$sid]=='true'){
+			if ($_COOKIE['ck_login_logged'.$sid]=='true'){
 				$menu['url']='main/logout_confirm.php';
 				$menu['LD_var']='LDLogout';
 			}	
@@ -95,8 +95,6 @@ echo $langselect;
 <?php echo $login_dept ?><br></FONT>
 </td>
 </tr>
-</form>
-</FONT>
 </TABLE>
 
 </BODY>

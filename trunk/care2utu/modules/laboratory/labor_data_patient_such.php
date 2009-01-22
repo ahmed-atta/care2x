@@ -35,9 +35,9 @@ if(!isset($mode)){
 $keyword=trim($keyword);
 $toggle=0;
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode=='paginate'){
-	$keyword=$HTTP_SESSION_VARS['sess_searchkey'];
+	$keyword=$_SESSION['sess_searchkey'];
 }else{
 	# Reset paginator variables
 	$pgx=0;
@@ -67,7 +67,7 @@ if($search&&!empty($keyword)){
 	
 	#Load and create paginator object
 	include_once($root_path.'include/care_api_classes/class_paginator.php');
-	$pagen=& new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+	$pagen=& new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 	$GLOBAL_CONFIG=array();
 	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -83,7 +83,7 @@ if($search&&!empty($keyword)){
 	# Get the resulting record count
 	if($linecount=$lab_obj->LastRecordCount()){
 	
-		if($mode!='paginate') $HTTP_SESSION_VARS['sess_searchkey']=$keyword;
+		if($mode!='paginate') $_SESSION['sess_searchkey']=$keyword;
 
 		$pagen->setTotalBlockCount($linecount);
 		# Count total available data
@@ -277,7 +277,7 @@ if($linecount){
 				<td>&nbsp';
 						
 			if($editmode){
-				echo'<a href="labor_datainput.php?sid='.session_id().'&job_id='.$zeile['batch_nr'].'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1"  title="'.$LDEnterData.'">
+				echo'<a href="labor_datainput.php?sid='.$sid.'&job_id='.$zeile['batch_nr'].'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1"  title="'.$LDEnterData.'">
 					<img '.createComIcon($root_path,'play_one.gif','0','absmiddle',FALSE).' </a> ';
 			}else{
 				echo'

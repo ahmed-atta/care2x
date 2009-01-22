@@ -18,7 +18,7 @@
   
   function popPic(pid,nm){
   
-   if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=887dbee085487a55605a5120412992dd&lang=$lang&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
+   if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=<?php echo $sid."&lang=".$lang;?>&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
   
   }
 

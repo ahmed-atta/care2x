@@ -102,7 +102,7 @@ if ($mode=="done" && isset($pn) && isset($prescription_date)) {
 					{
 						//First the header
 						$sql_bill="INSERT INTO care_tz_billing (encounter_nr, first_date, create_id)
-											 VALUES (".$v_bill['encounter_nr'].",".time().",".$HTTP_SESSION_VARS['sess_user_name'].")";
+											 VALUES (".$v_bill['encounter_nr'].",".time().",".$_SESSION['sess_user_name'].")";
 						echo $sql_bill."<br>";
 						$requests=$db->Execute($sql_bill);
 						$insertnr=$db->Insert_ID();

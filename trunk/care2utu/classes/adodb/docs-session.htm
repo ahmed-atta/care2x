@@ -189,7 +189,7 @@ When a session is first created, we check a global variable $ADODB_SESSION_EXPIR
  	NOTE 1: If you have register_globals disabled in php.ini, then you will have to
 	manually set the EXPIREREF. E.g.
 	  <pre> <font color=#004040>
-	    $GLOBALS['USERID'] =& $_SESSION['USERID'];
+	    $GLOBALS['USERID'] =& $HTTP_SESSION_VARS['USERID'];
         $ADODB_SESSION_EXPIRE_NOTIFY = array('USERID','NotifyFn');
     </font></pre>
     <p>

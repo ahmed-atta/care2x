@@ -21,7 +21,7 @@ function gethelp(x,s,x1,x2,x3,x4)
 
 function printOut()
 {
-	urlholder="<?php echo $root_path;?>modules/registration_admission/show_prescription.php?externalcall=TRUE&printout=TRUE&pn=2005500002&sid=a766fb71265eb3f17f755010606c4ace";
+	urlholder="<?php echo $root_path;?>modules/registration_admission/show_prescription.php?externalcall=TRUE&printout=TRUE&pn=2005500002&sid=<?php echo $sid."&lang=".$lang;?>";
 	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
   
 }

@@ -57,9 +57,9 @@ if(!empty($mode)&&!$inputerror){
 	{	
 		case 'create': 
 		{
-			$HTTP_POST_VARS['history']='Create: '.date('Y-m-d H:i:s').' '.$HTTP_SESSION_VARS['sess_user_name'];
-			$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-			$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+			$HTTP_POST_VARS['history']='Create: '.date('Y-m-d H:i:s').' '.$_SESSION['sess_user_name'];
+			$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
+			$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
 			$HTTP_POST_VARS['create_time']=date('YmdHis');
 			$HTTP_POST_VARS['modify_time']=date('YmdHis');
 			$dept_obj->setDataArray($HTTP_POST_VARS);
@@ -96,8 +96,8 @@ if(!empty($mode)&&!$inputerror){
 		}	
 		case 'update':
 		{ 
-			$HTTP_POST_VARS['history']=$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
-			$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+			$HTTP_POST_VARS['history']=$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
+			$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
 			$HTTP_POST_VARS['modify_time']=date('YmdHis');
 			$dept_obj->setTable('care_department');
 			$dept_obj->setDataArray($HTTP_POST_VARS);
@@ -120,8 +120,8 @@ if(!empty($mode)&&!$inputerror){
 							$HTTP_POST_VARS['dept_nr']=$dept_nr;
 							$HTTP_POST_VARS['name']=$HTTP_POST_VARS['name_formal'];
 							$HTTP_POST_VARS['vorname']=$HTTP_POST_VARS['id'];
-							$HTTP_POST_VARS['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-							$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+							$HTTP_POST_VARS['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+							$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
 							$HTTP_POST_VARS['create_time']=date('YmdHis');
 							$comm->setDataArray($HTTP_POST_VARS);
 						if(!@$comm->insertDataFromInternalArray()) echo $comm->getLastQuery()."<br>$LDDbNoSave";
@@ -141,7 +141,7 @@ if(!empty($mode)&&!$inputerror){
 		}
 		case 'select':
 		{
-			# Get department´s information
+			# Get departmentï¿½s information
 			$dept=$dept_obj->getDeptAllInfo($dept_nr);
 			//while(list($x,$v)=each($dept)) $$x=$v;
 			extract($dept);

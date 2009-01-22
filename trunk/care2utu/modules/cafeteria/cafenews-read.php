@@ -16,8 +16,8 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'include/inc_cafe_get_menu.php');
 
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
-$breakfile=$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
+$returnfile=$_SESSION['sess_file_return'].URL_APPEND;
+$breakfile=$_SESSION['sess_file_break'].URL_APPEND;
 
 $dept_nr=2; /* 2= cafeteria */
 
@@ -57,7 +57,7 @@ function editcafe()
 {
 		if(confirm("<?php echo $LDConfirmEdit ?>"))
 		{
-			window.location.href="cafenews-edit-pass.php?sid=<?php echo "$sid&lang=$lang&title=$LDCafeNews" ?>";
+			window.location.href="cafenews-edit-pass.php?sid=<?php echo "$sid&lang=$lang&title=$LDCafeNews"; ?>";
 			return false;
 		}
 }

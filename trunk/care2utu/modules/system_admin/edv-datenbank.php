@@ -42,11 +42,11 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <table width=100% border=0 cellspacing=0 height=100%>
 
 <tr valign=top height=10>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" ><FONT  COLOR="<?php echo  $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp; &nbsp; EDV Datenbank mit Menuführung</STRONG></FONT></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" ><FONT  COLOR="<?php echo  $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp; &nbsp; EDV Datenbank mit Menufï¿½hrung</STRONG></FONT></td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<a href="#" onClick=history.back()><img src="../img/zuruck.gif" border=0 <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="#"><img src="../img/hilfe.gif" border=0  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
-<a href="startframe.php?sid=<?php echo $$ck_sid_buffer;?>"><img src="../img/fenszu.gif" border=0  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td></tr>
+<a href="#" onClick=history.back()><img src="../img/zuruck.gif" border=0 <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a>
+<a href="#"><img src="../img/hilfe.gif" border=0  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a>
+<a href="startframe.php?sid=<?php echo $$ck_sid_buffer;?>"><img src="../img/fenszu.gif" border=0  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a></td></tr>
 <tr valign=top >
 <td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
 <ul><FONT 
@@ -67,9 +67,9 @@ echo "$ck_edv_db_user!";
 <a href="#">Neue Tabelle erstellen</a><br>
 <a href="#">Neue Daten eingeben</a><br>
 <a href="#">Vorhandene Daten aktualisieren</a><br>
-<a href="#">Daten löschen</a><br>
-<a href="#">Tabelle löschen</a><br>
-<a href="#">Datenbank löschen</a><br>
+<a href="#">Daten lï¿½schen</a><br>
+<a href="#">Tabelle lï¿½schen</a><br>
+<a href="#">Datenbank lï¿½schen</a><br>
 <a href="#">Daten Suchen</a><p>
 <a href="#" onClick=closewin()><img src="../img/close.gif" border=0  alt="Dieses Fenster schliessen." align="middle"></a>
 

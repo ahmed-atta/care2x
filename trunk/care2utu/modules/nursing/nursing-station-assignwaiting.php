@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
+* elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -23,7 +23,7 @@ if(empty($HTTP_COOKIE_VARS[$local_user.$sid])){
 /**
 * Set default values if not available from url
 */
-if (!isset($station)||empty($station)) { $station=$HTTP_SESSION_VARS['sess_nursing_station'];} # Default station must be set here !!
+if (!isset($station)||empty($station)) { $station=$_SESSION['sess_nursing_station'];} # Default station must be set here !!
 if(!isset($pday)||empty($pday)) $pday=date('d');
 if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
@@ -39,9 +39,9 @@ $breakfile='javascript:window.close()'; # Set default breakfile
 require_once($root_path.'include/care_api_classes/class_ward.php');
 $ward_obj= new Ward;
 
-# Load date formatter 
+# Load date formatter
 require_once($root_path.'include/inc_date_format_functions.php');
-  
+
 if(($mode=='')||($mode=='fresh')){
 	if($ward_info=&$ward_obj->getWardInfo($ward_nr)){
 		$room_obj=&$ward_obj->getRoomInfo($ward_nr,$ward_info['room_nr_start'],$ward_info['room_nr_end']);
@@ -64,9 +64,9 @@ if(($mode=='')||($mode=='fresh')){
 		}else{
 				$patients_ok=false;
 		}
-				
+
 		$ward_ok=true;
-		
+
 		# Load global person photo source path
 		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 		$GLOBAL_CONFIG=array();
@@ -80,7 +80,7 @@ if(($mode=='')||($mode=='fresh')){
 		if($enc_obj->is_loaded) {
 			$encounter=&$enc_obj->encounter;
 		}
-		
+
 		# Set the foto filename
 		$photo_filename=$encounter['photo_filename'];
 		/* Prepare the photo filename */
@@ -88,7 +88,7 @@ if(($mode=='')||($mode=='fresh')){
 
 		# Get billing type
 		$billing_type=&$enc_obj->getInsuranceClassInfo($encounter['insurance_class_nr']);
-			
+
 	}else{
 			$ward_ok=false;
 	}
@@ -327,8 +327,8 @@ if($ward_ok){
 		// Scan the patients object if the patient is assigned to the bed & room
 		# Loop through room beds
 
-		//for($j=1;$j<=$room_info['nr_of_beds'];$j++){
-		for($j=1;$j<=$nr_beds;$j++){
+		for($j=1;$j<=$room_info['nr_of_beds'];$j++){
+		//for($j=1;$j<=$nr_beds;$j++){
 
 			# Reset elements
 
@@ -425,7 +425,7 @@ if($ward_ok){
 
 			if($is_patient&&($bed['encounter_nr']!="")){
 
-				$smarty->assign('sTitle',ucfirst($bed['title']));
+				//$smarty->assign('sTitle',ucfirst($bed['title']));
 
 				if(isset($sln)&&$sln) $smarty->assign('sFamilyName',eregi_replace($sln,'<span style="background:yellow">'.ucfirst($sln).'</span>',ucfirst($bed['name_last'])));
 					else $smarty->assign('sFamilyName',ucfirst($bed['name_last']));
@@ -493,7 +493,7 @@ if($ward_ok){
 
 		$smarty->assign('sOccListRows',$sListRows);
 	} // end of ward loop
-	
+
 	# Display the empty bed transfer list
 	$smarty->display('nursing/ward_transferbed_list.tpl');
 

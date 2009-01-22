@@ -417,13 +417,13 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function saveWard(&$data){
-		global $HTTP_SESSION_VARS;
+		//		global $HTTP_SESSION_VARS;;
 		$this->_useWard();
 		$this->data_array=$data;
 		$this->data_array['date_create']=date('Y-m-d');
-		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-		//$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+		//$this->data_array['modify_id']=$_SESSION['sess_user_name'];
+		$this->data_array['create_id']=$_SESSION['sess_user_name'];
 		$this->data_array['create_time']=date('YmdHis');
 		return $this->insertDataFromInternalArray();
 	}
@@ -438,7 +438,7 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function updateWard($nr,&$data){
-		global $HTTP_SESSION_VARS;
+		//		global $HTTP_SESSION_VARS;;
 		$this->_useWard();
 		$this->data_array=$data;
 		// remove probable existing array data to avoid replacing the stored data
@@ -446,8 +446,9 @@ class Ward extends Encounter {
 		if(isset($this->data_array['create_id'])) unset($this->data_array['create_id']);
 		// clear the where condition
 		$this->where='';
-		$this->data_array['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n')";
+		$this->data_array['modify_id']=$_SESSION['sess_user_name'];
+
 		return $this->updateDataFromInternalArray($nr);
 	}
 	/**
@@ -495,7 +496,7 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function _setIsTemporaryClosed($nr,$flag=1){
-		global $HTTP_SESSION_VARS;
+		//		global $HTTP_SESSION_VARS;;
 		$this->_useWard();
 		// clear the where condition
 		$this->where='';
@@ -505,8 +506,8 @@ class Ward extends Encounter {
 		}else{
 			$action='Reopened';
 		}
-		$data['history']="CONCAT(history,'$action: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
-		$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$data['history']="CONCAT(history,'$action: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n')";
+		$data['modify_id']=$_SESSION['sess_user_name'];
 		$this->data_array=$data;
 		return $this->updateDataFromInternalArray($nr);
 	}
@@ -535,14 +536,14 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function closeWardNonReversible($nr){
-		global $HTTP_SESSION_VARS;
+		//		global $HTTP_SESSION_VARS;;
 		$this->_useWard();
 		// clear the where condition
 		$this->where='';
 		$data['date_close']=date('Y-m-d');
 		$data['status']='inactive';
-		$data['history']="CONCAT(history,'Closed nonreversible: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
-		$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$data['history']="CONCAT(history,'Closed nonreversible: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n')";
+		$data['modify_id']=$_SESSION['sess_user_name'];
 		$this->data_array=$data;
 		return $this->updateDataFromInternalArray($nr);
 	}
@@ -635,6 +636,32 @@ class Ward extends Encounter {
 		$this->data_array['type_nr']=1; // 1 = ward room type nr
 		return $this->insertDataFromInternalArray();
 	}
+
+	function updateWardRoomInfoFromArray(&$data){
+		$this->coretable=$this->tb_room;
+		$this->ref_array=$this->fld_room;
+		$this->data_array=$data;
+		$this->data_array['type_nr']=1; // 1 = ward room type nr
+		return $this->updateDataFromInternalArray();
+	}
+
+
+	function updateRoomInfo($data){
+		global $db;
+		$this->sql="UPDATE care_room SET info='".$data['info']."' WHERE nr=".$data['nr'];
+		$db->Execute($this->sql);
+		return true;
+	}
+
+
+	function updateRoomNumberBeds($data){
+		global $db;
+		$this->sql="UPDATE care_room SET nr_of_beds='".$data['nr_of_beds']."' WHERE nr=".$data['nr'];
+		$db->Execute($this->sql);
+		return true;
+	}
+
+
 	/**
 	* Checks if a room number of a given ward number exists.
 	*
@@ -738,6 +765,7 @@ class Ward extends Encounter {
 	    global $db;
 		$this->sql="SELECT SUM(nr_of_beds) AS nr FROM $this->tb_room WHERE ward_nr=$ward_nr AND
 		is_temp_closed IN ('',0) AND status NOT IN ($this->dead_stat)";
+
         if($buf=$db->Execute($this->sql)) {
             if($buf->RecordCount()) {
 				$row=$buf->FetchRow();
@@ -774,7 +802,8 @@ class Ward extends Encounter {
 					LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
 					LEFT JOIN $this->tb_ward AS w ON e.current_ward_nr=w.nr
 				WHERE e.encounter_class_nr='1' AND  e.is_discharged IN ('',0) $cond AND  in_ward IN ('',0)";
-		//echo $sql;
+		//echo 'waiting list: '.$this->sql;
+
 	    if ($this->res['_cwil']=$db->Execute($this->sql)){
 		   	if ($this->rec_count=$this->res['_cwil']->RecordCount()){
 				return $this->res['_cwil'];

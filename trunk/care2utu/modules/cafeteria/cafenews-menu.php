@@ -107,7 +107,7 @@ function editcafe()
 
 		if(confirm("<?php echo $LDConfirmEdit ?>"))
 		{
-			window.location.href="cafenews-edit-pass.php?sid=<?php echo "$sid&lang=$lang&title=$LDCafeNews" ?>";
+			window.location.href="cafenews-edit-pass.php?sid=<?php echo "$sid&lang=$lang&title=$LDCafeNews"; ?>";
 			return false;
 		}
 

@@ -3,7 +3,7 @@
 	<!-- First row -->	 
         <tr bgcolor="<?php echo $bgc1 ?>" valign="top">
 		<!-- <td rowspan=3><img src="../img/de/de_blood_wardfill.gif" border=0 width=27 height=492 align="absmiddle"></td> -->
-        <td rowspan=3><img src="<?php echo $root_path; ?>main/imgcreator/blood_lab_leftbar.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>" border=0 width=27 height=492 align="absmiddle"></td>
+        <td rowspan=3><img src="<?php echo $root_path; ?>main/imgcreator/blood_lab_leftbar.php?sid=<?php echo $sid."&lang=".$lang;?>" border=0 width=27 height=492 align="absmiddle"></td>
 		<td width=50% bgcolor="<?php echo $bgc1 ?>"  class=fva2_ml10><div   class=fva2_ml10><?php echo $LDToBloodBank."</b></font><br>".$LDTelephone ?><br>
 <?php
 	  echo '<font size=1 color="#000099" face="verdana,arial">'.$batch_nr.'</font>&nbsp;<br>';

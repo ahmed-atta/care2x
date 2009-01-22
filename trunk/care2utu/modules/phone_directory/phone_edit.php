@@ -52,18 +52,18 @@ if ($mode=='save' || ($mode=='update' && !empty($nr)) ){
         $HTTP_POST_VARS['title'] = $HTTP_POST_VARS['anrede'];
 		
 		if($mode=='save'){
-			$HTTP_POST_VARS['create_id'] = $HTTP_SESSION_VARS['sess_user_name'];
+			$HTTP_POST_VARS['create_id'] = $_SESSION['sess_user_name'];
 			$HTTP_POST_VARS['create_time'] = date('YmdHis');
-			$HTTP_POST_VARS['history'] = "Add ".date('Y-m-d H:i:S')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+			$HTTP_POST_VARS['history'] = "Add ".date('Y-m-d H:i:S')." ".$_SESSION['sess_user_name']."\n";
 			$phone->setDataArray($HTTP_POST_VARS);
 			//))if($db->Execute($sql))
 			if($phone->insertDataFromInternalArray()){
 				$bSaveOk = TRUE;
 			}
 		}else{
-                $HTTP_POST_VARS['modify_id'] = $HTTP_SESSION_VARS['sess_user_name'];
+                $HTTP_POST_VARS['modify_id'] = $_SESSION['sess_user_name'];
                 $HTTP_POST_VARS['modify_time'] = date('YmdHis');
-                $HTTP_POST_VARS['history'] = $phone->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+                $HTTP_POST_VARS['history'] = $phone->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
 
                 $phone->setWhereCondition("personell_nr='$nr'");
                 $phone->setDataArray($HTTP_POST_VARS);

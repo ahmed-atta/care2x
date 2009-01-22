@@ -49,6 +49,16 @@ if($task=="insert")
 		{
 
 			$prescriptions_nr = substr(strrchr($x,"_"),1);
+
+			$dosageNew = $_POST['dosage_'.$prescriptions_nr];
+			$sqlQuery = "SELECT dosage, bill_number FROM care_encounter_prescription WHERE nr=$prescriptions_nr";
+			$result=$db->Execute($sqlQuery);
+			$row=$result->FetchRow();
+			$dosageOld = $row['dosage'];
+			$old_bill_nr = $row['bill_number'];
+			$comment = $_POST['notes_'.$prescriptions_nr];
+			$user = $_SESSION['sess_user_name'];
+
 			if($_POST['modepres_'.$prescriptions_nr]=='bill')
 			{
 				$billcounter++;
@@ -62,15 +72,21 @@ if($task=="insert")
 				if ($debug) echo "showprice_$prescriptions_nr :".$_POST['showprice_'.$prescriptions_nr];
 				$price=$_POST['showprice_'.$prescriptions_nr];
 				echo $_POST['price_'.$prescriptions_nr];
+
+				if ($dosageOld != $dosageNew)
+					$insurance_obj->trackChanges('billing', $new_bill_number, 'prescription', $prescriptions_nr, 'change', $dosageOld, $dosageNew, 'dosage', $comment,  $user);
+
 				$bill_obj->StorePrescriptionItemToBill($pid,$prescriptions_nr,$new_bill_number, $_POST['showprice_'.$prescriptions_nr], $_POST['dosage_'.$prescriptions_nr], $_POST['notes_'.$prescriptions_nr], $_POST['insurance_'.$prescriptions_nr]);
 				$bill_obj->UpdateBillNumberNewPrescription($prescriptions_nr,$new_bill_number);
-		        $bill_obj->deduct_from_stock($prescriptions_nr,$_POST['dosage_'.$prescriptions_nr]);
+		        //$bill_obj->deduct_from_stock($prescriptions_nr,$_POST['dosage_'.$prescriptions_nr]);
 		        if ($debug) echo "Prescription: allocate2insurance(".$new_bill_number.", ".$_POST['showprice_'.$prescriptions_nr].",".$_POST['insurance'].");";
 				if ($_POST['insurance']!=-1)
 					$insurance_obj->allocatePrescriptionsToinsurance($new_bill_number, $prescriptions_nr, $_POST['showprice_'.$prescriptions_nr],$_POST['insurance']);
 			}
 			elseif($_POST['modepres_'.$prescriptions_nr]=='delete')
 			{
+				$insurance_obj->trackChanges('billing', -1, 'prescription', $prescriptions_nr, 'delete', $dosageOld, '-', 'dosage', $comment,  $user);
+
 				$deletecounter++;
 				//Hmm, lets kick this one out!
 				$bill_obj->DeleteNewPrescription($prescriptions_nr,'Disabled by billing officer');

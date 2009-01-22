@@ -1,5 +1,5 @@
 <?php
-//error_reporting unterdrückt Warnmeldungen für fehlende Variablen,....
+//error_reporting unterdrï¿½ckt Warnmeldungen fï¿½r fehlende Variablen,....
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 
 require($root_path.'include/inc_environment_global.php');
@@ -11,13 +11,13 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 
-//Sprachdatei für das Modul einbinden, muss VOR den defines stehen.
+//Sprachdatei fï¿½r das Modul einbinden, muss VOR den defines stehen.
 $lang_tables[]=$lang_thismodule_used;
-//enthält Sprachvariablen wie zurück, weiter, drucken,...
+//enthï¿½lt Sprachvariablen wie zurï¿½ck, weiter, drucken,...
 $lang_tables[]='actions.php';
-//enthält Sprachvariablen für längere allgemeine Textphrasen
+//enthï¿½lt Sprachvariablen fï¿½r lï¿½ngere allgemeine Textphrasen
 $lang_tables[]='prompt.php';
-//auch eine langfile, müsste auf neuere art($-ang_tables[]... umgestellt werden (noch rudimentär) in front_chain_nalg.php
+//auch eine langfile, mï¿½sste auf neuere art($-ang_tables[]... umgestellt werden (noch rudimentï¿½r) in front_chain_nalg.php
 define('LANG_FILE','edp.php');
 //define('NO_TEMPLATE', TRUE);
 //Konstante definieren, FLAG ob Dateischutz gecheckt wird oder nicht bei eins wird nicht gecheckt
@@ -26,28 +26,28 @@ define('NO_2LEVEL_CHK',1);
 
 //Name des Schutzcookies, macht nur Sinn wenn No_2level_chk =0 ist
 //$local_user='ck_edv_user'; original-Zeile statt der folgenden drei.
-//der Cookie heisst für dieses Modul wie der in der edv-main-pass, und die variable $this_cookie_name
+//der Cookie heisst fï¿½r dieses Modul wie der in der edv-main-pass, und die variable $this_cookie_name
 //wird in der edv_modul_neu.php gesetzt.
 $local_user=$this_cookie_name;
 
 
-//macht dateischutz und lädt die sprachdateien, andere Funktionen werden geladen (createldimgsrc)
+//macht dateischutz und lï¿½dt die sprachdateien, andere Funktionen werden geladen (createldimgsrc)
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-//setzt alle cookies zurück nur nötig wenn ein passwortscript generiert wird
+//setzt alle cookies zurï¿½ck nur nï¿½tig wenn ein passwortscript generiert wird
 //require($root_path.'include/inc_2level_reset.php');
 
-//$breakfile und $returnfile für den "Rückweg" setzen
+//$breakfile und $returnfile fï¿½r den "Rï¿½ckweg" setzen
 
 if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
-$returnfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
-$HTTP_SESSION_VARS['sess_user_origin']='it';
+$returnfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND;
+$_SESSION['sess_file_return']=basename(__FILE__);
+$_SESSION['sess_user_origin']='it';
 // Set this file as the referer
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
+$_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
 ?>
 
-<!-- dieses muss vor dem head integriert werden, stellt bei arabisch das Menü nach rechts, 
+<!-- dieses muss vor dem head integriert werden, stellt bei arabisch das Menï¿½ nach rechts, 
 text wird von re nach links gesetzt -->
 <?php 
 html_rtl($lang); 

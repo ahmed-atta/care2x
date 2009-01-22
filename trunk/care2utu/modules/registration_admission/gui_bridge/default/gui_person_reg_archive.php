@@ -80,63 +80,63 @@ if(isset($rows)&&$rows) {
       <td><b>
 	  <?php
 	  	if($oitem=='sex') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDSex,'sex',$odir,$flag); 
+			else $flag=FALSE;
+		echo $pagen->SortLink($LDSex,'sex',$odir,$flag);
 			 ?></b></td>
       <td><b>
-	  <?php 
+	  <?php
 	  	if($oitem=='name_last') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDLastName,'name_last',$odir,$flag); 
+			else $flag=FALSE;
+		echo $pagen->SortLink($LDLastName,'name_last',$odir,$flag);
 			 ?></b></td>
       <td><b>
-	  <?php 
+	  <?php
 	  	if($oitem=='name_first') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDFirstName,'name_first',$odir,$flag); 
+			else $flag=FALSE;
+		echo $pagen->SortLink($LDFirstName,'name_first',$odir,$flag);
 			 ?></b></td>
       <td><b>
-	  <?php 
+	  <?php
 	  	if($oitem=='date_birth') $flag=TRUE;
 			else $flag=FALSE;
-		 echo $pagen->SortLink($LDBday,'date_birth',$odir,$flag); 
-		 	
+		 echo $pagen->SortLink($LDBday,'date_birth',$odir,$flag);
+
 		?></b></td>
 	  <td align=right><b>
-	  <?php 
+	  <?php
 	  	if($oitem=='selian_pid') $flag=TRUE;
-			else $flag=FALSE; 
+			else $flag=FALSE;
 		echo $pagen->SortLink($LDSelianPID,'selian_pid',$odir,$flag);
 			 ?></b></td>
-      
+
 
 	  <td align=right><b>
-	  <?php 
+	  <?php
 	  	if($oitem=='pid') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDRegistryNr,'pid',$odir,$flag); 
+			else $flag=FALSE;
+		echo $pagen->SortLink($LDRegistryNr,'pid',$odir,$flag);
 			 ?></b></td>
       <td align=right><b>
-	  <?php 
+	  <?php
 	  	if($oitem=='date_reg') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDRegDate,'date_reg',$odir,$flag); 
+			else $flag=FALSE;
+		echo $pagen->SortLink($LDRegDate,'date_reg',$odir,$flag);
 			 ?></b></td>
   </tr>
-<?php 
+<?php
 # Load common icons
 $img_arrow=createComIcon($root_path,'r_arrowgrnsm.gif','0');
 $img_male=createComIcon($root_path,'spm.gif','0');
 $img_female=createComIcon($root_path,'spf.gif','0');
- 
+
  $toggle=0;
  while($result=$ergebnis->FetchRow()){
 	if($result['status']==''||$result['status']=='normal'){
-	
+
  	echo'
   <tr ';
   if($toggle){
-  	//echo "bgcolor=#efefef"; 
+  	//echo "bgcolor=#efefef";
 	echo 'class="wardlistrow2"';
 	$toggle=0;
 	} else {
@@ -157,10 +157,10 @@ $img_female=createComIcon($root_path,'spf.gif','0');
 	echo '</a></td>
     <td>&nbsp; <a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_last'].'</a></td>
     <td>&nbsp; &nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">'.$result['name_first'].'</a>';
-	
+
 	# If person is dead show a black cross
 	if($result['death_date']&&$result['death_date']!=$dbf_nodate) echo '&nbsp;<img '.createComIcon($root_path,'blackcross_sm.gif','0','absmiddle').'>';
-	
+
 	echo '</td>
     <td>&nbsp; &nbsp;'.@formatDate2Local($result['date_birth'],$date_format).'</td>
     <td align=right>&nbsp; &nbsp;'.$result['selian_pid'].'</td>
@@ -171,9 +171,9 @@ $img_female=createComIcon($root_path,'spf.gif','0');
   <td colspan=8 height=1 class="thinrow_vspacer"><img src="../../gui/img/common/default/pixel.gif" border=0 width=1 height=1></td>
   </tr>';
 
-	} 
+	}
  }
- 
+
 		echo '
 			<tr><td colspan=6>'.$pagen->makePrevLink($LDPrevious).'</td>
 			<td align=right>'.$pagen->makeNextLink($LDNext).'</td>
@@ -189,7 +189,7 @@ $img_female=createComIcon($root_path,'spf.gif','0');
 <input type="submit" value="<?php echo $LDAdvancedSearch ?>" >
                              </form>
 
-<?php 
+<?php
 }
 else
 {
@@ -212,16 +212,16 @@ createTR( 'user_id', $LDRegBy,$user_id);
 <td class="reg_input">
 <input name="date_start" type="text" size=10 maxlength=10   value="<?php if(!empty($date_start)) echo @formatDate2Local($date_start,$date_format);  ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
  <a href="javascript:show_calendar('aufnahmeform.date_start','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
- <font size=1>[ <?php   
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+ <font size=1>[ <?php
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
  ?> ] </font>
 </td>
 <td class="reg_input"><nobr><?php echo $LDTo ?>: <input name="date_end" type="text" size=10 maxlength=10  value="<?php if(!empty($date_end))  echo @formatDate2Local($date_end,$date_format);  ?>"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
  <a href="javascript:show_calendar('aufnahmeform.date_end','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
- <font size=1>[ <?php   
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+ <font size=1>[ <?php
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
  ?> ] </font>
@@ -278,10 +278,10 @@ if(!isset($addr_city_town)) $addr_city_town='';
 </td>
 <td class="reg_input">
 <input name="date_birth" type="text" size="15" maxlength=10 value="<?php  if(!empty($date_birth))  echo @formatDate2Local($date_birth,$date_format);  ?>"
- onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
+ onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
 <a href="javascript:show_calendar('aufnahmeform.date_birth','<?php echo $date_format ?>')">
- <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a> 
- <font size=1>[ <?php   
+ <img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+ <font size=1>[ <?php
  $dfbuffer="LD_".strtr($date_format,".-/","phs");
   echo $$dfbuffer;
  ?> ] </font>
@@ -301,8 +301,8 @@ if(!isset($addr_city_town)) $addr_city_town='';
  <input name="civil_status" type="radio" value="separated"><?php echo $LDSeparated ?>&nbsp;&nbsp;
 </td>
 </tr>
- 
- <tr>
+
+<tr>
 <td colspan=3><?php echo $LDAddress ?>:
 </td>
 
@@ -394,7 +394,15 @@ if (!$GLOBAL_CONFIG['person_ethnic_orig_hide'])
 if(!isset($ethnic_orig)) $ethnic_orig='';
 createTR('ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 }
+/*
+if (!$GLOBAL_CONFIG['insurance_ID_hide'])
+{
+if(!isset($insurance_ID)) $insurance_ID='';
+createTR('insurance_ID', $LDInsurance,$insurance_ID,2);
+}
+*/
 ?>
+
 
 </table>
 <p>

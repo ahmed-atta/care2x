@@ -1,4 +1,5 @@
 <?php
+
 /*
 CARE 2X Integrated Information System for Hospitals and Health Care Organizations and Services
 Care 2002, Care2x, Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla
@@ -40,6 +41,7 @@ require('./roots.php');
 require('./include/inc_environment_global.php');
 
 //$db->debug=1;
+
 
 # Register global session variables
 if(!session_is_registered('sess_user_name')) session_register('sess_user_name');
@@ -266,7 +268,7 @@ if(file_exists($lang_file)) {
 #
 # The language detection is finished, we save it to session
 #
-$HTTP_SESSION_VARS['sess_lang']=$lang;
+$_SESSION['sess_lang']=$lang;
 
 /*$ck_lang_buffer='ck_lang'.$sid;
 setcookie($ck_lang_buffer,$lang);*/
@@ -305,13 +307,13 @@ if((isset($mask)&&$mask)||!$config_exists||$savelang) {
 #
 # save user_id to session
 #
-$HTTP_SESSION_VARS['sess_user_id']=$user_id;
-if(empty($HTTP_SESSION_VARS['sess_user_name'])) $HTTP_SESSION_VARS['sess_user_name']='default';
+$_SESSION['sess_user_id']=$user_id;
+if(empty($_SESSION['sess_user_name'])) $_SESSION['sess_user_name']='default';
 
 #
 # set the initial session timeout start value
 #
-$HTTP_SESSION_VARS['sess_tos']=date('His');
+$_SESSION['sess_tos']=date('His');
 
 #
 # Load character set fx

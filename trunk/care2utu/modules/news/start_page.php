@@ -43,14 +43,14 @@ $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
 if(!session_is_registered('sess_file_editor')) session_register('sess_file_editor');
 if(!session_is_registered('sess_file_reader')) session_register('sess_file_reader');
 
-$HTTP_SESSION_VARS['sess_file_break']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_file_return']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_file_editor']='headline-edit-select-art.php';
-$HTTP_SESSION_VARS['sess_file_reader']='headline-read.php';
-$HTTP_SESSION_VARS['sess_dept_nr']='1'; // 1= press relations dept
-$HTTP_SESSION_VARS['sess_title']=$LDEditTitle.'::'.$LDSubmitNews;
-$HTTP_SESSION_VARS['sess_user_origin']='main_start';
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
+$_SESSION['sess_file_break']=$top_dir.$thisfile;
+$_SESSION['sess_file_return']=$top_dir.$thisfile;
+$_SESSION['sess_file_editor']='headline-edit-select-art.php';
+$_SESSION['sess_file_reader']='headline-read.php';
+$_SESSION['sess_dept_nr']='1'; // 1= press relations dept
+$_SESSION['sess_title']=$LDEditTitle.'::'.$LDSubmitNews;
+$_SESSION['sess_user_origin']='main_start';
+$_SESSION['sess_path_referer']=$top_dir.$thisfile;
 
 $readerpath='headline-read.php'.URL_APPEND;
 # Load the news display configs
@@ -77,7 +77,7 @@ require_once($root_path.'include/inc_news_display_config.php');
  # Headline title
  $smarty->assign('LDHeadline',$LDHeadline);
  
- $smarty->assign('sOnLoadJs', 'onLoad="window.parent.STARTPAGE.location.href=\''.$root_path.'main/indexframe.php?sid=$sid&lang=$lang\';"');
+ $smarty->assign('sOnLoadJs', 'onLoad="window.parent.STARTPAGE.location.href=\''.$root_path.'main/indexframe.php?sid='.$sid.'&lang='.$lang.'\';"');
  
 
  #Collect html code
@@ -91,7 +91,7 @@ for($j=1;$j<=$news_num_stop;$j++){
 
 	 ob_start();
 		include($root_path.'include/inc_news_preview.php');
-		$image = 'src="'.$root_path.'gui/img/common/default/selian.gif"';
+		$image = 'src="'.$root_path.'gui/img/common/default/'.$hospital_logo.'"';
 		$smarty->assign('sHeadlineImg',$image);
 		($j==2)? $smarty->display('news/headline_newslist_item2.tpl') : $smarty->display('news/headline_newslist_item.tpl');
 		$sTemp = ob_get_contents();

@@ -32,7 +32,7 @@ echo '<br><br><br>
                       
 
 
-$pres_obj->DisplayPrescriptionList($HTTP_SESSION_VARS['sess_en']);
+$pres_obj->DisplayPrescriptionList($_SESSION['sess_en']);
 
 echo '</table>';
 

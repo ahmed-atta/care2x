@@ -32,13 +32,13 @@ require_once($root_path.'include/inc_date_format_functions.php');
 </HEAD>
 
 <frameset rows="25%,*">
-  <frame name="INTERN" src="drg-ops-intern.php?sid=<?php echo $targetbuf ?>" frameborder="yes">
+  <frame name="INTERN" src="drg-ops-intern.php?sid=<?php echo $targetbuf; ?>" frameborder="yes">
   
  <frameset rows="52%,*">
   
-    <frame name="ICD" src="drg-icd10.php?sid=<?php echo $targetbuf ?>" frameborder="yes">
+    <frame name="ICD" src="drg-icd10.php?sid=<?php echo $targetbuf; ?>" frameborder="yes">
 	
-    <frame name="OPS" src="drg-ops301.php?sid=<?php echo $targetbuf ?>" frameborder="yes">
+    <frame name="OPS" src="drg-ops301.php?sid=<?php echo $targetbuf; ?>" frameborder="yes">
 	
   </frameset> 
   

@@ -105,14 +105,14 @@ if(isset($mode)&&($mode=='save')){
 							'minorder'=>$minorder,
 							'maxorder'=>$maxorder,
 							'proorder'=>$proorder,
-							'encoder'=>$HTTP_SESSION_VARS['sess_user_name'],
+							'encoder'=>$_SESSION['sess_user_name'],
 							'enc_date'=>$dstamp,
 							'enc_time'=>$tstamp,
 							'lock_flag'=>$lockflag,
 							'medgroup'=>$medgroup,
 							'cave'=>$caveflag,
-							'history'=>"Created ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n",
-							'create_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+							'history'=>"Created ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n",
+							'create_id'=>$_SESSION['sess_user_name'],
 							'create_time'=>date('YmdHis')
 							 );
 							
@@ -141,8 +141,8 @@ if(isset($mode)&&($mode=='save')){
 							lock_flag='".(int)$lockflag."',
 							medgroup='$medgroup',
 							cave='$caveflag',
-							history=".$product_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-							create_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+							history=".$product_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n").",
+							create_id = '".$_SESSION['sess_user_name']."',
 							create_time = '".date('YmdHis')."'";
 
 						$sql="UPDATE $dbtable SET ";

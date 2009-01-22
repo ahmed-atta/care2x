@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
+* elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -17,7 +17,7 @@ $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'include/care_api_classes/class_department.php');
-## Load all wards info 
+## Load all wards info
 $dept_obj=new Department;
 $allmed=&$dept_obj->getAllMedical();
 $dept_count=$dept_obj->LastRecordCount();
@@ -60,7 +60,7 @@ $dept_count=$dept_obj->LastRecordCount();
 ?>
 
 <script language="javascript">
-<!-- 
+<!--
 var urlholder;
 
 function TransferDept(dn){
@@ -72,6 +72,21 @@ urlholder="amb_clinic_transfer_save.php?mode=transferdept&sid='.$sid.'&lang='.$l
 window.opener.location.replace(urlholder);
 window.close();
 }
+
+var urlholder2;
+
+function TransferWard(wd){
+<?php
+echo '
+urlholder2="'.$root_path.'modules/nursing/nursing-station-transfer-save.php?mode=transferward&sid='.$sid.'&lang='.$lang.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&pn='.$pn.'&station='.$station.'&ward_nr=-1&dept_nr='.$dept_nr.'&trwd="+wd;
+';
+?>
+window.opener.location.replace(urlholder2);
+window.close();
+}
+
+
+
 // -->
 </script>
 
@@ -122,7 +137,27 @@ while(list($x,$v)=each($allmed)){
 	 </tr>';
 }
 ?>
-  
+
+</table>
+
+<table>
+	<?php
+	require_once($root_path.'include/care_api_classes/class_ward.php');
+	## Load all wards info
+	$ward_obj=new Ward;
+	$items='nr,ward_id,name';
+	$ward_info=&$ward_obj->getAllWardsItemsObject($items);
+	$ward_count=$ward_obj->LastRecordCount();
+
+	while($ward=$ward_info->FetchRow()){
+	if($ward['nr']==$ward_nr) continue;
+	echo '<tr bgcolor="#f6f6f6"><td>'.$ward['ward_id'].'</td>
+	 <td>'.$ward['name'].'</td>
+	 <td><a href="javascript:TransferWard(\''.$ward['nr'].'\')"><img '.createLDImgSrc($root_path,'transfer_sm.gif','0').'></a></td></tr>';
+}
+
+
+?>
 </table>
 <?php
 

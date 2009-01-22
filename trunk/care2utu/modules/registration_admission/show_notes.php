@@ -40,9 +40,9 @@ if($parent_admit){
 		FROM care_encounter AS e, 
 					care_person AS p, 
 					care_encounter_notes AS n 
-		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." 
+		WHERE p.pid=".$_SESSION['sess_pid']." 
 			AND p.pid=e.pid 
-			AND e.encounter_nr=".$HTTP_SESSION_VARS['sess_en']." 
+			AND e.encounter_nr=".$_SESSION['sess_en']." 
 			AND e.encounter_nr=n.encounter_nr 
 			AND n.type_nr=".$type_nr."
 		ORDER BY n.date DESC";
@@ -51,7 +51,7 @@ if($parent_admit){
 		FROM 	care_encounter AS e, 
 					care_person AS p, 
 					care_encounter_notes AS n
-		WHERE	p.pid=".$HTTP_SESSION_VARS['sess_pid']." 
+		WHERE	p.pid=".$_SESSION['sess_pid']." 
 			AND	p.pid=e.pid 
 			AND e.encounter_nr=n.encounter_nr 
 			AND n.type_nr=".$type_nr."

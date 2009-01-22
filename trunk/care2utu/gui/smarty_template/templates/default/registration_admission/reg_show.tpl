@@ -16,7 +16,7 @@
 			</table>
 	  </td>
     </tr>
-    
+
 	<tr>
       <td valign="top">
 	  {{$pbNewSearch}} {{$pbUpdateData}} {{$pbShowAdmData}} {{$pbAdmitInpatient}} {{$pbAdmitOutpatient}} {{$pbRegNewPerson}}

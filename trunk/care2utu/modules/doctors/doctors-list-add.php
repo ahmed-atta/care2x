@@ -11,7 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 //define('LANG_FILE','doctors.php');
-if($HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
+if($_SESSION['sess_user_origin']=='personell_admin'){
 	$local_user='aufnahme_user';
 }else{
 	$local_user='ck_doctors_dienstplan_user';
@@ -33,19 +33,19 @@ if($mode!='delete'){
 	$data['date_start']=date('Y-m-d');
 }
 
-$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+$data['modify_id']=$_SESSION['sess_user_name'];
 
 switch($mode){
 	case 'save':
-					$data['history']="Add: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-					$data['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+					$data['history']="Add: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n";
+					$data['create_id']=$_SESSION['sess_user_name'];
 					$data['create_time']=date('YmdHis');
 					$pers_obj->setDataArray($data);
 					if(!$pers_obj->insertDataFromInternalArray())  echo "$obj->sql<br>$LDDbNoSave";
 					break;
 	case 'update':
-					$data['history']=$pers_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n");
-					$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+					$data['history']=$pers_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n");
+					$data['modify_id']=$_SESSION['sess_user_name'];
 					$data['modify_time']=date('YmdHis');
 					$pers_obj->setDataArray($data);
 					if(!$pers_obj->updateDataFromInternalArray($item_nr))  echo "$obj->sql<br>$LDDbNoUpdate";
@@ -53,8 +53,8 @@ switch($mode){
 	case 'delete':
 					$data['status']='deleted';
 					$data['date_end']=date('Y-m-d');
-					$data['history']=$pers_obj->ConcatHistory("Deleted: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n");
-					$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+					$data['history']=$pers_obj->ConcatHistory("Deleted: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n");
+					$data['modify_id']=$_SESSION['sess_user_name'];
 					$data['modify_time']=date('YmdHis');
 					$pers_obj->setDataArray($data);
 					if(!$pers_obj->updateDataFromInternalArray($item_nr))  echo "$obj->sql<br>$LDDbNoUpdate";

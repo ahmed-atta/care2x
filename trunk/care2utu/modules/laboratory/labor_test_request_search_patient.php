@@ -6,13 +6,13 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
+* elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
 # In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
-define('MAX_BLOCK_ROWS',30); 
+define('MAX_BLOCK_ROWS',30);
 
 $lang_tables[]='search.php';
 $lang_tables[]='actions.php';
@@ -64,9 +64,9 @@ $thisfile=basename(__FILE__);
 # Data to append to url
 $append='&status='.$status.'&target='.$target.'&user_origin='.$user_origin;
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode=='paginate'){
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	$searchkey=$_SESSION['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
 	//$mode='search';
 }else{
@@ -78,7 +78,7 @@ if($mode=='paginate'){
 }
 # Paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -93,7 +93,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	# Convert other wildcards
 	$searchkey=strtr($searchkey,'*?','%_');
 	# Save the search keyword for eventual pagination routines
-	if($mode=='search') $HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
+	if($mode=='search') $_SESSION['sess_searchkey']=$searchkey;
 
 	include_once($root_path.'include/inc_date_format_functions.php');
 	include_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -169,10 +169,10 @@ $smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.select()"');
      <tr>
        <td>
 	   <?php
-	   
+
 	        $searchmask_bgcolor="#f3f3f3";
             include($root_path.'include/inc_test_request_searchmask.php');
-       
+
 	   ?>
 </td>
      </tr>
@@ -185,8 +185,8 @@ $smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.select()"');
 <?php
 //echo $mode;
 if ($linecount) echo '<hr width=80% align=left>'.str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
-		else echo str_replace('~nr~','0',$LDSearchFound); 
-if ($enc_obj->record_count) { 
+		else echo str_replace('~nr~','0',$LDSearchFound);
+if ($enc_obj->record_count) {
 	# Preload  common icon images
 	$img_male=createComIcon($root_path,'spm.gif','0','',TRUE);
 	$img_female=createComIcon($root_path,'spf.gif','0','',TRUE);
@@ -195,11 +195,11 @@ if ($enc_obj->record_count) {
 	$tbg= 'class="adm_list_titlebar"';
 
 ?>
-				<table border=0 cellpadding=2 cellspacing=1> 
-				<tr bgcolor="#abcdef">				
+				<table border=0 cellpadding=2 cellspacing=1>
+				<tr bgcolor="#abcdef">
 
      <td <?php echo $tbg; ?>><b>
-	  <?php echo $pagen->makeSortLink($LDCaseNr,'encounter_nr',$oitem,$odir,$append);  ?></b></td>
+	  <?php echo $pagen->makeSortLink($LDPID,'pid',$oitem,$odir,$append);  ?></b></td>
       <td <?php echo $tbg; ?>><b>
 	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></b></td>
       <td <?php echo $tbg; ?>><b>
@@ -217,39 +217,43 @@ if ($enc_obj->record_count) {
 					while($row=$encounter->FetchRow())
 					{
 						$full_en=$row['encounter_nr'];
+
+						$enc_obj->loadEncounterData( $full_en );
+						$pid = $enc_obj->PID();
+
 						echo "
 							<tr class=";
 						if($toggle) { echo '"wardlistrow1">'; $toggle=0;} else {echo '"wardlistrow2">'; $toggle=1;};
 						echo"<td>";
-						echo "&nbsp;".$full_en;
-                        echo '&nbsp;</td><td>';	
+						echo "&nbsp;".$pid;
+                        echo '&nbsp;</td><td>';
 
 						switch($row['sex']){
 							case 'f': echo '<img '.$img_female.'>'; break;
 							case 'm': echo '<img '.$img_male.'>'; break;
 							default: echo '&nbsp;'; break;
-						}	
-						
+						}
+
 						echo'</td><td>';
 						echo "&nbsp;".ucfirst($row['name_last']);
-                        echo "</td>";	
+                        echo "</td>";
 						echo"<td>";
 						echo "&nbsp;".ucfirst($row['name_first']);
-                        echo "</td>";	
+                        echo "</td>";
 						echo"<td>";
 						echo "&nbsp;".formatDate2Local($row['date_birth'],$date_format);
-                        echo "</td>";	
+                        echo "</td>";
 						echo"<td>";
 						echo "&nbsp;".$row['selian_pid'];
-                        echo "</td>";	
+                        echo "</td>";
 
 					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
 						<td>&nbsp;';
 						echo "
 							<a href=\"".$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_APPEND."&pn=".$row['encounter_nr']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=\">";
-						echo '	
+						echo '
 							<img '.createLDImgSrc($root_path,'ok_small.gif','0').' alt="'.$LDTestThisPatient.'"></a>&nbsp;';
-							
+
                        if(!file_exists($root_path."cache/barcodes/en_".$full_en.".png"))
 	      		       {
 			               echo "<img src='".$root_path."classes/barcode/image.php?code=".$full_en."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
@@ -257,7 +261,7 @@ if ($enc_obj->record_count) {
 						echo '</td></tr>';
 
 					}
-					
+
 					echo '
 						<tr><td colspan=6>'.$pagen->makePrevLink($LDPrevious,$append).'</td>
 						<td align=right>'.$pagen->makeNextLink($LDNext,$append).'</td>
@@ -270,10 +274,10 @@ if ($enc_obj->record_count) {
      <tr>
        <td>
 	   <?php
-	   
+
 	        $searchform_count=2;
             include($root_path.'include/inc_test_request_searchmask.php');
-       
+
 	   ?>
 </td>
      </tr>
@@ -288,7 +292,7 @@ if ($enc_obj->record_count) {
 <p>
 </td>
 </tr>
-</table>        
+</table>
 </ul>
 <p>
 <?php

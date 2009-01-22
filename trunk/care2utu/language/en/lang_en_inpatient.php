@@ -21,5 +21,4 @@ $LDGeneralAmbulatory='General Ambulatory';
 $LDInpatient='Inpatient';
 $LDSelectWard='Select ward';
 
-
 ?>

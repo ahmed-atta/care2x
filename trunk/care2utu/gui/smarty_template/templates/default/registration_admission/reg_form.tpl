@@ -8,7 +8,7 @@
 
 		{{* extra block for additional front text *}}
 		{{$pretext}}
-		
+
 		{{if $bSetAsForm}}
 		<form method="post" action="{{$thisfile}}" name="aufnahmeform" ENCTYPE="multipart/form-data" onSubmit="return chkform(this)">
 		{{/if}}
@@ -54,7 +54,7 @@
 
 				{{* The following tags contain rows patterned after the  "registration_admission/reg_row.tpl" template *}}
 
-				
+
 				{{$sPersonTitle}}
 				{{$sNameLast}}
 				{{$sNameFirst}}
@@ -70,13 +70,13 @@
         					  <td class="reg_input">
         					    {{ $sTribeSelect }}
         				</td>
-        			  </td>        					  
+        			  </td>
     					</tr>
-    					
+
     				{{else}}
     				  {{ $sNameTribe }}
-    				{{/if}}				
-    		
+    				{{/if}}
+
     					<tr>
     					  <td class="reg_item" valign=top class="reg_input">
             		{{$sTownCity}}
@@ -182,7 +182,7 @@
 					&nbsp;
 				</td>
 				<td colspan=2 class="reg_input">
-					{{$sErrorInsClass}} 
+					{{$sErrorInsClass}}
 					{{foreach from=$sInsClasses item=InsClass}}
 						{{$InsClass}}
 					{{/foreach}}
@@ -229,7 +229,7 @@
 					{{$sEthnicOrigInput}} {{$sEthnicOrigMiniCalendar}}
 				</td>
 			</tr>
-			
+
 			{{if $bShowOtherHospNr}}
 				<tr>
 				<td class="reg_item" valign=top class="reg_input">

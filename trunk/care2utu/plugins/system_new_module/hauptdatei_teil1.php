@@ -6,20 +6,20 @@
 
 // Datei <modulname.php> im neuen Verzeichnis erstellen 
 
-//Pfad für das neue Modul
+//Pfad fï¿½r das neue Modul
 $pfad=$root_path."modules/$ModulNeuBez/";
 
 //Dateiname generieren auf Grundlage des Modulnamens
 $dateiname=$ModulNeuBez . ".php";
 
-// Prüfen ob die Datei bereits existiert
+// Prï¿½fen ob die Datei bereits existiert
 	if (is_file($pfad.$dateiname)){
-	    echo $dateiname." -Datei gibt es schon, bitte überprüfen sie den Ordner <strong>".$pfad."</strong>";
+	    echo $dateiname." -Datei gibt es schon, bitte ï¿½berprï¿½fen sie den Ordner <strong>".$pfad."</strong>";
 			exit;
 			}
 		
  
-//Datei öffnen
+//Datei ï¿½ffnen
 $datei=fopen($pfad . $dateiname,"w");
 
 if(!$datei) echo "wrong ".$pfad . $dateiname;
@@ -27,30 +27,30 @@ if(!$datei) echo "wrong ".$pfad . $dateiname;
 //Inhalt dieser Datei in ein Array schreiben
 $mainline=array(55);
 $mainline[0]="<?PHP\n";
-$mainline[1]="//***Variablen für dieses Modul setzen***\n";
-$mainline[2]="//Variable für Individual-Sprachdateisetzen, Ausgabetext sollte in Variablen hier abgelegt werden.\n";
+$mainline[1]="//***Variablen fï¿½r dieses Modul setzen***\n";
+$mainline[2]="//Variable fï¿½r Individual-Sprachdateisetzen, Ausgabetext sollte in Variablen hier abgelegt werden.\n";
 
-//$zeile4 Umgebungsvaliable für die spezielle Sprachdatei für das neue Modul setzen;
+//$zeile4 Umgebungsvaliable fï¿½r die spezielle Sprachdatei fï¿½r das neue Modul setzen;
 $mainline[3]="\$lang_thismodule_used=\"".$ModulNeuBez.".php\";\n";
 
-// Variable für den Cookie setzen
-$mainline[4]="// Variable für den Cookie setzen\n";
+// Variable fï¿½r den Cookie setzen
+$mainline[4]="// Variable fï¿½r den Cookie setzen\n";
 $mainline[5]="\$this_cookie_name=\"ck_".$ModulNeuBez."_user\";\n";
 
 //Hilfedatei Variable setzen und erstellen
 $mainline[6]="//Hilfedatei Variable setzen\n";
 $mainline[7]="\$new_hlp_file=\"".$ModulNeuBez."_hlp.php\";\n";
 
-$mainline[8]="//Variable für Überschrift der Titelleseite, des Submenüs o.ä.\n";
+$mainline[8]="//Variable fï¿½r ï¿½berschrift der Titelleseite, des Submenï¿½s o.ï¿½.\n";
 $mainline[9]="\$thismodulname=\"".$ModulNeuBez."\";\n";
 
 // Standardpfadangaben laden
 $mainline[10]="//Standardpfadangaben laden\n";
 $mainline[11]="require(\"./roots.php\");\n";
-//Array für die Dateien laden
+//Array fï¿½r die Dateien laden
 require_once("daten_inc_dateiarray.php");
 // Die aus daten_inc_dateiarray.php  Dateien einbinden
-$mainline[12]="// Error Meldungen unterdrücken, inc_environment_global.php includen, Standard-Sprachdateien einbinden,\n";
+$mainline[12]="// Error Meldungen unterdrï¿½cken, inc_environment_global.php includen, Standard-Sprachdateien einbinden,\n";
 $mainline[13]="// Dateischutz etc.\n"; 
 $mainline[14]="require(\$root_path.\"modules/"."$ModulNeuBez"."/"."$inc_datei_array[0]\");\n";
 $mainline[15]="// Den <HEAD> includen\n";
@@ -68,10 +68,10 @@ $mainline[24]="// Eigener Code folgt ab hier.\n";
 $mainline[25]="// Verweis auf die Datei mit DBForm.\n";
 $mainline[26]="/*****************************************/\n";
 
-//Prüfen ob eine Leere Seite gewünscht ist
+//Prï¿½fen ob eine Leere Seite gewï¿½nscht ist
 
 if ($leere_seite=="1") {
-   $mainline[27]="echo \"<h1><strong>Hier könnte ihr Code stehen.</strong></h1>\";?>\n";
+   $mainline[27]="echo \"<h1><strong>Hier kï¿½nnte ihr Code stehen.</strong></h1>\";?>\n";
 	 $field_type="hidden";
    }
 	 
@@ -92,7 +92,7 @@ else {
 $mainline[29]="<input type=\"hidden\" name=\"lang\" value=\"<?php echo \$lang; ?>\">\n";
 $mainline[30]="<input type=\"hidden\" name=\"sid\" value=\"<?php echo \$sid; ?>\">\n";
 $mainline[31]="<input type=\"hidden\" name=\"pid\" value=\"<?php echo \$pid; ?>\">\n"; 
-$mainline[32]="<input type=\"$field_type\" name=\"los\" value=\"Tabelle öffnen\">\n";
+$mainline[32]="<input type=\"$field_type\" name=\"los\" value=\"Tabelle ï¿½ffnen\">\n";
 $mainline[33]="</form><?php\n";
 
 $mainline[34]="require(\$root_path.\"modules/system_new_module/includes/footnote.inc.php\");\n";
@@ -102,7 +102,7 @@ $mainline[35]="?>\n";
 //Anzahl der Codezeilen im Array bestimmen
 $anzahl_mainline=count($mainline);
 
-//Alle Codezeilen in die Datei einfügen
+//Alle Codezeilen in die Datei einfï¿½gen
 $i=0;
 while($i<$anzahl_mainline){
 			fwrite($datei,$mainline[$i]);

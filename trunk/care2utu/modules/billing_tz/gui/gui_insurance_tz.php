@@ -8,7 +8,7 @@
  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
   	<script language="javascript" >
-<!-- 
+<!--
 function gethelp(x,s,x1,x2,x3,x4)
 {
 	if (!x) x="";
@@ -17,7 +17,7 @@ function gethelp(x,s,x1,x2,x3,x4)
 	window.helpwin.moveTo(0,0);
 }
 // -->
-</script> 
+</script>
 <link rel="stylesheet" href="../../css/themes/default/default.css" type="text/css">
 <script language="javascript" src="../../js/hilitebu.js"></script>
 
@@ -33,7 +33,7 @@ A:visited:hover {color: #cc0033;}
 <!--
 function popPic(pid,nm){
 
- if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=6ac874bb63e983fd6ec8b9fdc544cab5&lang=$lang&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
+ if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=<?php echo $sid."&lang=".$lang;?>&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
 
 }
 // -->
@@ -43,13 +43,13 @@ function popPic(pid,nm){
 <!--
 function closewin()
 {
-	location.href='startframe.php?sid=6ac874bb63e983fd6ec8b9fdc544cab5&lang=$lang';
+	location.href='startframe.php?sid=<?php echo $sid."&lang=".$lang;?>';
 }
 // -->
 </script>
 
 
- 
+
 </HEAD>
 <BODY bgcolor=#ffffff link=#000066 alink=#cc0000 vlink=#000066  >
 <table width=100% border=0 cellspacing=0 height=100%>
@@ -73,7 +73,7 @@ function closewin()
 	<tr>
 		<td bgcolor=#ffffff valign=top>
 
-		
+
 												 <blockquote>
 			<TABLE cellSpacing=0  width=600 class="submenu_frame" cellpadding="0">
 			<TBODY>
@@ -81,35 +81,46 @@ function closewin()
 				<TD>
 					<TABLE cellSpacing=1 cellPadding=3 width=600>
                     <TBODY class="submenu">
-                      <TR> 
+                      <TR>
+
                         <td align=center><img src="../../gui/img/common/default/pdata.gif" border=0></td>
                         <TD class="submenu_item"><nobr><a href="insurance_company_tz.php"><?php echo $LDAdministrativeCompanies; ?></a></nobr></TD>
                         <TD><?php echo $LDManageCompanies; ?></TD>
                       </tr>
-                      <TR> 
+                      <TR>
                         <td align=center><img src="../../gui/img/common/default/comments.gif" border=0></td>
                         <TD class="submenu_item"><nobr><a href="insurance_types_tz.php"><?php echo $LDAdministrativeinsurancetypes; ?></a></nobr></TD>
                         <TD><?php echo $LDaddeditremoveinsurance; ?></TD>
                       </tr>
-                      <TR> 
+
+
+
+                        <td align=center><img src="../../gui/img/common/default/pdata.gif" border=0></td>
+                        <!--<TD class="submenu_item"><nobr><a href="insurance_company_tz_manage.php"><?echo $LDManageInsurances; ?></a></nobr></TD>-->
+                        <TD class="submenu_item"><nobr> <? echo "<a href='insurance_company_tz_manage.php'".URL_APPEND."&save='save'>".$LDManageInsurances; ?></a></nobr></TD>
+                        <TD><?php echo $LDManageInsurancesDescr; ?></TD>
+                      </tr>
+
+
+                      <TR>
                         <td align=center><img src="../../gui/img/common/default/new_group.gif" border=0></td>
                         <TD class="submenu_item"><nobr><a href="insurance_members_tz.php"><?php echo $LDmembers; ?></a></nobr></TD>
                         <TD><?php echo $LDaddremoveemployees; ?></TD>
                       </tr>
 
 
-                      <TR  height=1> 
+                      <TR  height=1>
                         <TD colSpan=3 class="vspace"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>
                       </TR>
 
-                      <TR> 
+                      <TR>
                         <td height="26" align=center><img src="../../gui/img/common/default/report.jpg" border=0 width="20" height="20"></td>
                         <TD class="submenu_item"><nobr><a href="insurance_reports.php?back_path=billing"><?php echo $LDInsuranceReports; ?></a></nobr></TD>
 
                         <TD><?php echo $LDInsuranceReporting; ?></TD>
                       </tr>
 
-                      <TR  height=1> 
+                      <TR  height=1>
                         <TD colSpan=3 class="vspace"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>
                       </TR>
 
@@ -124,10 +135,10 @@ function closewin()
 			<a href="../../main/startframe.php?ntid=false&lang=$lang"><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>
 
 			<p>
-			</blockquote>									
+			</blockquote>
 		</td>
 	</tr>
-	
+
 		<tr valign=top >
 		<td bgcolor=#cccccc>
 							<table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#cfcfcf">
@@ -149,7 +160,7 @@ function openCreditsWindow() {
 //  Script End -->
 </script>
 
-	
+
  <a href="http://www.care2x.org" target=_new>CARE2X 2nd Generation pre-deployment 2.0.2</a> :: <a href="../../legal_gnu_gpl.htm" target=_new> License</a> ::
  <a href=mailto:info@care2x.org>Contact</???a>  :: <a href="../../language/en/en_privacy.htm" target="pp"> Our Privacy Policy </a> ::
  <a href="../../docs/show_legal.php?lang=$lang" target="lgl"> Legal </a> ::
@@ -168,7 +179,7 @@ function openCreditsWindow() {
 					</td>
 
 	</tr>
-	
+
 	</tbody>
  </table>
 

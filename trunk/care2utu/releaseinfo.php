@@ -1,7 +1,18 @@
 <?php
-$version="2.05.3.1";
+$version="2.06.0.0";
 /**
  * History:
+ * Version 2.06.0.0
+ * Working inpatient ward management; Tested basic webERP interface; laboratory module connected to pricelist; First preview
+ * Version 2.05.3.5, 22-dec-08
+ * Integratoin of insurances (pre alpha); new and better lab module; Several smaller changes in the process
+ * Version 2.05.3.4, 24-nov-08
+ * First try to add the hospital-file number generic (varchar instead of bigint @ care_person)
+ * Version 2.05.3.3, 21-nov-08
+ * redesign of lab backend (pre-alpha); Prescription: no neg. values, Colored bars for presrc. & diagnosis
+ * Version 2.05.3.2, 14-nov-08
+ * Laboratory-bugfix; prescription-bugfix; Preparing for 2nf data handling of laboratory;
+ * preparing of "managed pricelist" step.
  * Version 2.05.3.1, 20-aug-08
  * Rollback of the billing to previous settings & some bugfixes
  * Version 2.05.3, 20-aug-08

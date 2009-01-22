@@ -1,4 +1,4 @@
-<?php 
+<?php
 $LDPerson='Person';
 $LDPatient='Patient';
 $LDBloodGroup='Blood group';

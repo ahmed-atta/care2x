@@ -803,24 +803,24 @@ Committed_AS:   348732 kB
 	
 	function DoSQLForm()
 	{
-	global $HTTP_SERVER_VARS,$HTTP_GET_VARS,$HTTP_POST_VARS,$HTTP_SESSION_VARS;
+	global $HTTP_SERVER_VARS,$HTTP_GET_VARS,$HTTP_POST_VARS; // $HTTP_SESSION_VARS;
 	
 		$HTTP_VARS = array_merge($HTTP_GET_VARS,$HTTP_POST_VARS);
 		
 		$PHP_SELF = $HTTP_SERVER_VARS['PHP_SELF'];
 		$sql = isset($HTTP_VARS['sql']) ? $HTTP_VARS['sql'] : '';
 
-		if (isset($HTTP_SESSION_VARS['phplens_sqlrows'])) $rows = $HTTP_SESSION_VARS['phplens_sqlrows'];
+		if (isset($_SESSION['phplens_sqlrows'])) $rows = $_SESSION['phplens_sqlrows'];
 		else $rows = 3;
 		
 		if (isset($HTTP_VARS['SMALLER'])) {
 			$rows /= 2;
 			if ($rows < 3) $rows = 3;
-			$HTTP_SESSION_VARS['phplens_sqlrows'] = $rows;
+			$_SESSION['phplens_sqlrows'] = $rows;
 		}
 		if (isset($HTTP_VARS['BIGGER'])) {
 			$rows *= 2;
-			$HTTP_SESSION_VARS['phplens_sqlrows'] = $rows;
+			$_SESSION['phplens_sqlrows'] = $rows;
 		}
 		
 ?>

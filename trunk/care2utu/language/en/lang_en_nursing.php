@@ -111,7 +111,12 @@ $LDEnterAllFields ='The fields marked with <font color=#ff0000><b>*</b></font> m
 $LDPlsSelect='Please select a department';
 $LDStationExists='The ward ~station~ exists already! Please use another ward\'s name.';
 $LDAlertIncomplete='Some information are missing. Please fill in the important information.';
+
+/* 16-01-2009 T.H. from merotech */
 $LDAlertRoomNr='The number of the last room MUST BE HIGHER than the number of the first room!';
+$LDAlertRoomNrCorr='The Room numbers must correspond to the actual number of rooms';
+$LDRoomNrInvalid='Please enter valid room numbers';
+
 $LDExistStations='Existing wards. Please click the desired one.';
 $LDOtherStations='Other wards';
 $LDEditProfile='Edit ward\'s profile';
@@ -334,7 +339,7 @@ $LD_ddpMMpyyyy='dd.mm.yyyy';
 $LD_yyyyhMMhdd='yyyy-mm-dd';
 $LD_MMsddsyyyy='mm/dd/yyyy';
 /* 2002-10-23 EL*/
-$LDQueryDoctor='Query to doctor';
+$LDQueryDoctor='Diagnosis';
 $LDDoctorInfo='Doctor\'s info, instructions';
 $LDDiagnosticsReport='Diagnostics report arrived';
 $LDInfusionTherapy='Infusion therapy/program';
@@ -413,4 +418,7 @@ $LDPrescriptions='Services';
 $LDNoDiagnosesAvailable='--- NO DIAGNOSIS AVAILABLE ---';
 $LDLastDiagnosis='Last Diagnosis';
 $LDChangeDept='Change of Department';
+
+$LDAdmissionDate='Admission date';
+$LDPatientID='ID';
 ?>

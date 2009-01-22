@@ -55,7 +55,7 @@ if($is_transmit_to_weberp_enable == 1)
   $pid = $enc_obj->GetPIDfromEncounter($archivedBill[encounter_nr]);
   $persondata = $person_obj->getAllInfoArray($pid);
 
-  $weberp_obj = new weberp($webERPServerURL,$weberpuser,$weberppassword,$weberpDebugLevel);
+  $weberp_obj = new_weberp();
   if(!$weberp_obj->transfer_patient_to_webERP_asCustomer($pid,$persondata))
   {
 		$person_obj->setPatientIsTransmit2ERP($pid,0);
@@ -64,6 +64,7 @@ if($is_transmit_to_weberp_enable == 1)
   {
 		$person_obj->setPatientIsTransmit2ERP($pid,1);
   }
+  destroy_weberp($weberp_obj);
  $data=$bill_obj->GetElemsOfArchivedBillForERP($bill_number);
 while($row=$data->FetchRow())
 {

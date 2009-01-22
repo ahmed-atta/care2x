@@ -20,7 +20,7 @@ $bPastDateError = FALSE;
 #
 # Save PID to session. Patch as result of bug report from Francesco and Marco.
 #
-$HTTP_SESSION_VARS['sess_pid'] = $pid;
+$_SESSION['sess_pid'] = $pid;
 
 if(!isset($mode)){
 	$mode='show';
@@ -52,14 +52,14 @@ if(!isset($mode)){
 			if(!isset($HTTP_POST_VARS['remind_mail'])) $HTTP_POST_VARS['remind_mail']='0';
 			if(!isset($HTTP_POST_VARS['remind_email'])) $HTTP_POST_VARS['remind_email']='0';
 			if(!isset($HTTP_POST_VARS['remind_phone'])) $HTTP_POST_VARS['remind_phone']='0';
-            $HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+            $HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
             $HTTP_POST_VARS['modify_time'] = date('YmdHis');
-			$HTTP_POST_VARS['history']= $obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." : ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+			$HTTP_POST_VARS['history']= $obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." : ".$_SESSION['sess_user_name']."\n");
 		}else{
 			$HTTP_POST_VARS['appt_status']='pending';
-            $HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+            $HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
             $HTTP_POST_VARS['create_time'] = date('YmdHis');
-            $HTTP_POST_VARS['history'] = "Created: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+            $HTTP_POST_VARS['history'] = "Created: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
 		}
 		include('./include/save_admission_data.inc.php');
 	}elseif(($mode=='select')&&!empty($nr)){
@@ -69,10 +69,10 @@ if(!isset($mode)){
 			//while(list($x,$v)=each($appt_row)) $$x=$v;
 		}
 	}elseif($mode=='appt_cancel'&&!empty($nr)){
-			$HTTP_POST_VARS['history']=$obj->ConcatHistory("Cancel: ".date('Y-m-d H:i:s')." : ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+			$HTTP_POST_VARS['history']=$obj->ConcatHistory("Cancel: ".date('Y-m-d H:i:s')." : ".$_SESSION['sess_user_name']."\n");
 			$HTTP_POST_VARS['appt_status']='cancelled';
 			$HTTP_POST_VARS['cancel_reason']=$reason;
-            $HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+            $HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
             $HTTP_POST_VARS['modify_time'] = date('YmdHis');
 			$mode='update';
 		include('./include/save_admission_data.inc.php');
@@ -93,7 +93,7 @@ $enc_obj=new Encounter;
 $encounter_classes=&$enc_obj->AllEncounterClassesObject();
 
 $subtitle=$LDAppointments;
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 /* Load departments */
 require_once($root_path.'include/care_api_classes/class_department.php');

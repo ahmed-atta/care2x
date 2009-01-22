@@ -31,7 +31,7 @@ if($eclass_obj=$enc_obj->AllEncounterClassesObject()){
 }
 
 $subtitle=$LDListEncounters;
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

@@ -29,7 +29,7 @@ define('SIGNAL_COLOR_LEVEL_ZERO',0);  // integer for no event
 define('SIGNAL_COLOR_DIAGNOSTICS_REPORT','brown');   // color to be set for signalling a diagnostic report
 define('SIGNAL_COLOR_DIAGNOSTICS_REQUEST','blue_pale');   // color to be set for signalling a diagnostic/consult request
 
-define('SIGNAL_COLOR_QUERY_DOCTOR','yellow');    // color to be set for signalling a query to the doctor
+define('SIGNAL_COLOR_QUERY_DOCTOR','yellow');    // color to be set for signalling a diagnosis from the doctor
 define('SIGNAL_COLOR_DOCTOR_INFO','black');             // color to be set for signalling a doctor's instruction or answer
 define('SIGNAL_COLOR_NURSE_REPORT','blue');             // color to be set for signalling a newly written nurse report
 
@@ -47,6 +47,8 @@ function setEventSignalColor($pn, $color, $status = SIGNAL_COLOR_LEVEL_FULL )
 
 	//$event_table='care_nursing_station_patients_event_signaller';
 	$event_table='care_encounter_event_signaller';
+
+	//$db->debug=true;
 
 	$sql="SELECT encounter_nr, $color FROM $event_table WHERE encounter_nr=$pn";
    	if($ergebnis=$db->Execute($sql)) {

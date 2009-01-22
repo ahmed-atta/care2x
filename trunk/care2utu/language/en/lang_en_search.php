@@ -8,4 +8,5 @@ $LDSelect='Select';
 $LDZipCode='Hospital file nr';
 $LDPlsSearchDoctor='Please search for the doctor first.';
 $LDPlsSearchNurse='Please search for the nurse first.';
+$LDPID='Patient ID';
 ?>

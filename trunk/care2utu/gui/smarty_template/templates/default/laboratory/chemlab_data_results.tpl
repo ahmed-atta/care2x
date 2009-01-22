@@ -9,7 +9,7 @@
 					<tbody>
 						<tr>
 							<td class="adm_item">{{$LDCaseNr}}:</td>
-							<td class="adm_input">{{$encounter_nr}}</td>
+							<td class="adm_input">{{$sPID}}</td>
 						</tr>
 						<tr>
 							<td class="adm_item">{{$LDLastName}}, {{$LDName}}, {{$LDBday}}:</td>
@@ -25,7 +25,7 @@
 						</tr>
 					</tbody>
 					</table>
-				
+
 					<table cellspacing=1 cellpadding=1 width="100%"  bgcolor=#ffdddd >
 					<tbody>
 						<tr>
@@ -33,7 +33,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-							
+
 								{{* Table block for the parameters *}}
 								<table cellpadding=0 cellspacing=1>
 								<tbody>
@@ -52,7 +52,7 @@
 					</table>
 					{{$sSaveParamHiddenInputs}}
 				</form>
-				
+
 				{{* Block for parameter group select box *}}
 				<form {{$sFormAction}} method=post onSubmit="return chkselect(this)" name="paramselect">
 					<table>

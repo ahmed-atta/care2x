@@ -275,9 +275,14 @@ $LDCreateEditLock='Create, edit, lock';
 $LDDatabase='Database';
 $LDPhpMyAdmin='PhpMyAdmin';
 $LDGeneral='General';
+$LDGeneralSettings='General Settings';
 $LDQuickInformer='Quick informer';
 $LDEnterInfo='Please edit or enter the information. Then click "Save".';
 $LDPaginatorMaxRows='Paginator max rows';
+$LDGeneralSettingsHeading='Please choose number of identification:';
+$LDGeneralSettingsPID='PID';
+$LDGeneralSettingsHospFileNr='Hospital File Number';
+
 
 #2003-10-28 EL
 $LDAddressList='Address list';

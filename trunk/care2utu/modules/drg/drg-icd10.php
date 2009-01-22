@@ -81,8 +81,8 @@ function pruf(d)
 }
 function openICDsearch(k,x)
 {
-	urlholder="drg-icd10-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&edit=$edit&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&display=$display" ?>&keyword="+k+"&showonly="+x;
-	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid ?>","width=600,height=450,menubar=no,resizable=yes,scrollbars=yes");
+	urlholder="drg-icd10-search.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&edit=$edit&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&display=$display"; ?>&keyword="+k+"&showonly="+x;
+	drgwin_<?php echo $uid ?>=window.open(urlholder,"drgwin_<?php echo $uid; ?>","width=600,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	window.drgwin_<?php echo $uid ?>.moveTo(100,100);
 }
 function deleteItem(i)

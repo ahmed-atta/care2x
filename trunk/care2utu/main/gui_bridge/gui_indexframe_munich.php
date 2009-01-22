@@ -129,7 +129,7 @@ echo $langselect;
 <td colspan=3>
 <br>
 <nobr><b><?php echo $LDUser ?>:</b></nobr>
-<?php echo  $HTTP_SESSION_VARS['sess_login_username']; ?><br>
+<?php echo  $_SESSION['sess_login_username']; ?><br>
 <?php echo $dept->FormalName($cfg['thispc_dept_nr']); ?><br>
 <?php echo $ward->WardName($cfg['thispc_ward_nr']); ?><br>
 </FONT>

@@ -22,9 +22,20 @@ require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_tz_diagnostics.php');
 
 $diagnostic_obj = new Diagnostics;
+/*
 
+ print_r ( $_SESSION );
+echo "<br>";
+echo "das will ich sehen: ".$_SESSION['sess_full_en'];
+*/
 if($todo=='submit')
 {
+	// Load the visual signalling functions
+	include_once($root_path.'include/inc_visual_signalling_fx.php');
+	// Set the visual signal
+	setEventSignalColor( $_SESSION['sess_en'],SIGNAL_COLOR_QUERY_DOCTOR);
+
+
 	$diagnostic_obj->EnterNewCase($HTTP_POST_VARS);
 }
 

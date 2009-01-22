@@ -31,7 +31,7 @@ if($cat=='pharma'){
 	$title=$LDMedDepot;
 }
  
-$encbuf=$HTTP_SESSION_VARS['sess_user_name'];
+$encbuf=$_SESSION['sess_user_name'];
 
 //$db->debug=1;
 

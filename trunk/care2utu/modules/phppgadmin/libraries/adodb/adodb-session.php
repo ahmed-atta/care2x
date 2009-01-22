@@ -15,24 +15,24 @@ wrapper library.
  Example
  =======
  
- 	GLOBAL $HTTP_SESSION_VARS;
+// 	GLOBAL $HTTP_SESSION_VARS;
 	include('adodb.inc.php');
 	include('adodb-session.php');
 	session_start();
 	session_register('AVAR');
-	$HTTP_SESSION_VARS['AVAR'] += 1;
-	print "<p>\$HTTP_SESSION_VARS['AVAR']={$HTTP_SESSION_VARS['AVAR']}</p>";
+	$_SESSION['AVAR'] += 1;
+	print "<p>\$_SESSION['AVAR']={$_SESSION['AVAR']}</p>";
 	
 To force non-persistent connections, call adodb_session_open first before session_start():
 
- 	GLOBAL $HTTP_SESSION_VARS;
+// 	GLOBAL $HTTP_SESSION_VARS;
 	include('adodb.inc.php');
 	include('adodb-session.php');
 	adodb_session_open(false,false,false);
 	session_start();
 	session_register('AVAR');
-	$HTTP_SESSION_VARS['AVAR'] += 1;
-	print "<p>\$HTTP_SESSION_VARS['AVAR']={$HTTP_SESSION_VARS['AVAR']}</p>";
+	$_SESSION['AVAR'] += 1;
+	print "<p>\$_SESSION['AVAR']={$_SESSION['AVAR']}</p>";
 
  
  Installation
@@ -286,12 +286,12 @@ session_set_save_handler(
 /*  TEST SCRIPT -- UNCOMMENT */
 
 if (0) {
-GLOBAL $HTTP_SESSION_VARS;
+//		global $HTTP_SESSION_VARS;;
 
 	session_start();
 	session_register('AVAR');
-	$HTTP_SESSION_VARS['AVAR'] += 1;
-	ADOConnection::outp( "<p>\$HTTP_SESSION_VARS['AVAR']={$HTTP_SESSION_VARS['AVAR']}</p>",false);
+	$_SESSION['AVAR'] += 1;
+	ADOConnection::outp( "<p>\$_SESSION['AVAR']={$_SESSION['AVAR']}</p>",false);
 }
 
 ?>

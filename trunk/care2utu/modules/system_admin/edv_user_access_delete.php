@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 $returnfile='edv_user_access_list.php'.URL_APPEND;
-//$HTTP_SESSION_VARS['sess_file_return']='edv.php';
+//$_SESSION['sess_file_return']='edv.php';
 
 require_once($root_path.'include/care_api_classes/class_access.php');
 $user = & new Access($itemname);
@@ -26,7 +26,7 @@ if($user->UserExists()){
 	if ($finalcommand=='delete') {
 
 		if($user->Delete()) {
-                	header("Location: edv_user_access_list.php?sid=$sid&lang=$lang&remark=itemdelete");
+                	header("Location: edv_user_access_list.php?sid=".$sid."&lang=".$lang."&remark=itemdelete");
 			exit;
 		} else {
 			echo '<p>'.$LDDbNoDelete.'<p>'.$user->getLastQuery();

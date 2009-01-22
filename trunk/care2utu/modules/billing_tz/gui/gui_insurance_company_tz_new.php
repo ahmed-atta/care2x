@@ -30,20 +30,20 @@ A:visited:active {color: #cc0000;}
 A:visited:hover {color: #cc0033;}
 </style>
 <script language="JavaScript">
-<!--
+
 function popPic(pid,nm){
 
- if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=6ac874bb63e983fd6ec8b9fdc544cab5&lang=$lang&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
+ if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=<?php echo $sid."&lang=".$lang; ?>&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
 
 }
 // -->
 </script>
 
   	<script language="javascript">
-<!--
+
 function closewin()
 {
-	location.href='startframe.php?sid=6ac874bb63e983fd6ec8b9fdc544cab5&lang=$lang';
+	location.href='startframe.php?sid=<?php echo $sid."&lang=".$lang; ?>';
 }
 // -->
 </script>

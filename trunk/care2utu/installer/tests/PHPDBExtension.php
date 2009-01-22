@@ -5,7 +5,7 @@
  * Tests that the database extension for the selected
  * database type is loaded into the running PHP instance
  */
- 
+
 class PHPDBExtension extends BaseTest {
 
     var $type;
@@ -24,7 +24,7 @@ class PHPDBExtension extends BaseTest {
         $engine =& $GLOBALS['INSTALLER']['ENGINE'];
         if (isset($this->params['type_field'])) {
             $type_field = $engine->getField($this->params['type_field']);
-            $this->type = $type_field->value;
+            $this->type = $type_field->values[0];
         } else if (isset($this->params['type'])) {
             $this->type = $this->params['type'];
         } else {
@@ -46,7 +46,7 @@ class PHPDBExtension extends BaseTest {
             $this->result = INSTALLER_TEST_FAIL;
             $this->result_message = "PHP Database Extension $this->type is not loaded";
         }
-        
+
         return $this->result;
     }
 }

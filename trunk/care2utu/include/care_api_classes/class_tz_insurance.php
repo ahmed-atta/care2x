@@ -1781,7 +1781,7 @@ class Insurance_tz extends Core {
 	  	global $db;
 	    $debug=FALSE;
 	    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-	    $this->sql = "SELECT ID,price FROM care_tz_billing_elem where nr=$bill_number and is_labtest=1";
+	    $this->sql = "SELECT ID,price FROM care_tz_billing_elem where nr=$bill_number and is_labtest=<>0";
 	    if ($this->result=$db->Execute($this->sql)) {
 	    	while ($this->row=$this->result->FetchRow()) {
 				$covered_price=$this->row['price'];

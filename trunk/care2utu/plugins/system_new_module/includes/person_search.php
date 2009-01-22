@@ -45,7 +45,7 @@ $breakfile=$root_path."main/startframe.php?sid=$sid&lang=$lang";
 
 $thisfile=basename(__FILE__);
 
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 if(!isset($searchkey)) 	$searchkey='';
 if(!isset($mode)) $mode='';
@@ -82,7 +82,7 @@ $GLOBAL_CONFIG=array();
 
 # Initialize page's control variables
 if($mode=='paginate'){
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	$searchkey=$_SESSION['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
 	//$mode='search';
 }else{
@@ -94,7 +94,7 @@ if($mode=='paginate'){
 }
 #Load and create paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -111,7 +111,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 	include_once($root_path.'include/inc_date_format_functions.php');
 
 	if($mode=='paginate'){
-		$fromwhere=$HTTP_SESSION_VARS['sess_searchkey'];
+		$fromwhere=$_SESSION['sess_searchkey'];
 	}else{
 		# convert * and ? to % and &
 		$searchkey=strtr($searchkey,'*?','%_');
@@ -207,7 +207,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 		 }
 			$fromwhere=$dbtable.$sql2;
 			# Save the query for pagination
-			$HTTP_SESSION_VARS['sess_searchkey']=$fromwhere;
+			$_SESSION['sess_searchkey']=$fromwhere;
 		}
 			 
 			//$sql2.=' AND status NOT IN ("void","hidden","deleted","inactive")  ORDER BY '.$oitem.' '.$odir;
@@ -281,7 +281,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo "Patient auswählen";//$LDUploadDicom :: $LDSearch?></STRONG></FONT> 
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo "Patient auswï¿½hlen";//$LDUploadDicom :: $LDSearch?></STRONG></FONT> 
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('patient_search.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 

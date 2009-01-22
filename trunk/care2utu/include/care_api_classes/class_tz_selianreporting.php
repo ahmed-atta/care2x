@@ -490,6 +490,8 @@ class selianreport extends report {
     }
 
 
+
+
 function DisplayCashBillingTableHead(){
     	global $PRINTOUT;
     	global $LDDailyFinancialRecordOPD,$LDDate,$LDInvoice,$LDFileTSH,$LDMatTSH,$LDLabTSH,
@@ -687,6 +689,99 @@ function DisplayDentalPrepaidFinancialTableHead(){
 
     }
 
+     /**
+	 * Tracking-Section
+	 */
+	//--
+    function DisplayTrackingTableHead(){
+    	global $PRINTOUT;
+    	global $LDDailyFinancialRecordOPD,$LDDate,$LDInvoice,$LDFileTSH,$LDMatTSH,$LDLabTSH,
+    	       $LDXRayTSH,$LDDawaTSH,$LDProcSurgTSH,$LDDressTSH,$LDMengTSH,$LDJumlaTSH,
+    	       $LDTrackingReport, $LDModule, $LDModuleID, $LDRefModule, $LDAction, $LDOldValue,
+    	       $LDNewValue, $LDValueType, $LDComment, $LDUser;
+
+		// Table definition will be organized by the variable $table_head from here:
+
+		// headline:
+		$table_head = "<tr>\n";
+		if (!$PRINTOUT)
+			$table_head .= "<td bgcolor=\"#ffffaa\" colspan=\"11\" align=\"center\">".$LDTrackingReport."</td>\n";
+		else
+			$table_head .= "<td colspan=\"11\" align=\"center\">".$LDTrackingReport."</td>\n";
+		$table_head.="</tr>\n";
+
+		$table_head.="<tr>\n";
+		if (!$PRINTOUT) {
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDDate."</td>\n";
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDModule."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDModuleID."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDRefModule."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDAction."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDOldValue."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDNewValue."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDValueType."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDComment."</td>\n" ;
+			$table_head .= "<td bgcolor=\"#CC9933\">".$LDUser."</td>\n" ;
+			$table_head.="</tr>\n";
+		} else {
+			$table_head .= "<td>".$LDDate."</td>\n";
+			$table_head .= "<td>".$LDModule."</td>\n" ;
+			$table_head .= "<td>".$LDModuleID."</td>\n" ;
+			$table_head .= "<td>".$LDRefModule."</td>\n" ;
+			$table_head .= "<td>".$LDAction."</td>\n" ;
+			$table_head .= "<td>".$LDOldValue."</td>\n" ;
+			$table_head .= "<td>".$LDNewValue."</td>\n" ;
+			$table_head .= "<td>".$LDValueType."</td>\n" ;
+			$table_head .= "<td>".$LDComment."</td>\n" ;
+			$table_head .= "<td>".$LDUser."</td>\n" ;
+			$table_head.="</tr>\n";
+		}
+		echo $table_head;
+
+    }
+
+    function DisplayTrackingRows($start_timeframe, $end_timeframe){
+		global $db;
+		global $PRINTOUT;
+		global $LDLookingforFinancialReports,$LDstarttime,$LDendtime;
+		$first_day_of_req_month=0;
+		$last_day_of_req_month=0;
+		$end_timeframe += (24*60*60-1);
+		$this->_Create_financial_tmp_master_table($start_timeframe, $end_timeframe);
+		echo "Looking for Tracking entries by time range: ".$LDstarttime.": ".date("d.m.y :: G:i:s",$start_timeframe)." ".$LDendtime.": ".date("d.m.y :: G:i:s",$end_timeframe)."<br>";
+
+		$first_day_of_req_month = date ("d",$start_timeframe);
+		$last_day_of_req_month = date ("d",$end_timeframe);
+		$table.="<tr>\n";
+
+		$sql = "select * from care_tz_tracker where time between FROM_UNIXTIME($start_timeframe) and FROM_UNIXTIME($end_timeframe)";
+
+		if ($result = $db->execute($sql))
+		{
+
+		foreach ($result as $row){
+
+			if ($row['comment_user'] == '')
+			{
+				$row['comment_user'] = '&nbsp;';
+			}
+
+			if ($row['module_id']>-1)
+			{
+				$row['module'] = 'bill nr.';
+			}
+			else{
+				$row['module_id']='-';
+				$row['module']='-';
+			}
+
+			$table.='<td>'.$row['time'].'</td><td>'.$row['module'].'</td><td>'.$row['module_id'].'</td><td>'.$row['refering_module'].'</td><td>'.$row['action'].'</td><td>'.$row['old_value'].'</td><td>'.$row['new_value'].'</td><td>'.$row['value_type'].'</td><td>'.$row['comment_user'].'</td><td>'.$row['session_user'].'</td></tr>';
+
+		}
+		};
+
+		echo $table;
+	}
 
 
 /**

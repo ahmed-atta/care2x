@@ -205,6 +205,9 @@ $LDPricing='Pricing:';
 $LDNothingtodo='Nothing to do :)';
 #rm from Merotech
 $LDPrepaid_Amount='Prepaid Amount';
+$LDParent_Insurer='Parent Insurer:';
+$LDInsurance_Limit='Insurance Limit:';
+$LDPerPerson=' per person and day';
 
 $LDPendingTestRequest='Pending Test Request';
 $LDBatchFileNr='Batch file no.';
@@ -247,6 +250,11 @@ $LDMemberManagement='Insurance Companys - Member Management';
 $LDSelectInsurance='Please select an insurance company to manage its members:';
 $LDSearch='Search for family name, PID or Selian file nr:';
 $LDbillinginsurancereports='billing :: insurance :: reports';
+$LDManageInsurances='Manage Insurances';
+$LDManageInsurancesDescr='Manage insurances and their conditions';
+$LDCreateNewInsurance='Create new insurance';
+$LDModifyInsurance='Modify existing insurance';
+$LDRelationshipsInsurances='Relationships between Insurances';
 
 # rm: Insurance Report output starts here:
 

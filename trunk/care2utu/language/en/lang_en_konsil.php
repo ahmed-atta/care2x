@@ -46,13 +46,13 @@ $LDNotesTempReport='Notes / Initial findings:';
 $LDRequestingDoc='Requesting doctor';
 $LDReportingDoc='Reporting doctor';
 $LDXrayNumber='X-ray Nr.:';
-$LD_r_cm2='r cm² :';
+$LD_r_cm2='r cmÂ² :';
 $LDXrayTechnician='X-ray tech.';
 $LDYes='Yes';
 $LDNo='No';
 $LDXrayTest='X-ray diagnostics';
 $LDMammograph='Mammography';
-$LDSonograph='Sonography';
+$LDSonograph='Ulrasound';
 $LDCT='Computer Tomography';
 $LDNuclear='Nuclear medicine';
 $LDMRT='Magnetic Resonance Tomography';
@@ -85,10 +85,10 @@ $LDShortMonth=array('',
 $LDBatchNumber='Batchnumber';
 $LDMaterial='Material:';
 $LDDiagnosis='Diagnosis:';
-$LDImmuneSupp='Immune supp.';		
+$LDImmuneSupp='Immune supp.';
 
 $LDRequestedTest='Requested Test';
-$LDLabel='Label';					
+$LDLabel='Label';
 $LDCentralLab='Central Laboratory';
 
 $LDRequestOf='Request for ';
@@ -152,7 +152,7 @@ $LDBookedOn='booked on';
 $LDFillByLab='To be filled up by blood bank only!';
 $LDFillByWard='Must be filled up at the ward!';
 
-/* 2002-09-03 EL */							  
+/* 2002-09-03 EL */
 $LDSearchPatient='Search patient';
 $LDPlsSelectPatientFirst='Please search for the patient first.';
 /* 2002-09-07 EL*/
@@ -216,10 +216,10 @@ $LD1500='15.00';
 $LDDone='It\'s done! Move the form to the archive';
 
 /* Note: the following arrays use strict medical terminology.
-*  If you are not sure about their translation, please leave the 
+*  If you are not sure about their translation, please leave the
 *  english word untranslated
 */
-$LDBacLabMaterialType = array(_mx_k_urin_=>'C.Urin',                                              
+$LDBacLabMaterialType = array(_mx_k_urin_=>'C.Urin',
                                               _mx_sputum_=>'Sputum',
 											  _mx_m_urin_=>'M.Urin',
 											  _mx_trachealsecrete_=>'Trac.scrt.',
@@ -243,7 +243,7 @@ $LDBacLabMaterialType = array(_mx_k_urin_=>'C.Urin',
 											  _mx_liquor_=>'Liquor',
 											  _mx_vaginal_abstrich_=>'Vag.s.',
 											  _mx_blood_culture_=>'Blood.C.');
-										  
+
 $LDBacLabTestType=array(_tx_special_body_material_=>'S.body.m.',
                                         _tx_culture_aerob_=>'Aerob.C.',
 										_tx_op_material_=>'OP.Mat.',
@@ -278,5 +278,7 @@ $LDFirstName='First Name:';
 $LDBirthdate='date of birth:';
 $LDSex='sex:';
 $LDSystemPID='System PID:';
+
+$LDDoctorRequest='Requested by: ';
 
 ?>

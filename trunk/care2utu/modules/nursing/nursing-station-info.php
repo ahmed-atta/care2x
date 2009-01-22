@@ -6,13 +6,20 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
+* elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
+
+
+if ($ward_nr == '')
+{
+	$ward_nr = $HTTP_POST_VARS['nr'];
+
+}
 
 $thisfile=basename(__FILE__);
 /* Load the ward object */
@@ -26,22 +33,25 @@ $rows=0;
     /* Load the date formatter */
     include_once($root_path.'include/inc_date_format_functions.php');
 
-	switch($mode){	
-		
-		case 'show': 
+
+	switch($mode){
+
+		case 'show':
 		{
 			if($ward=&$ward_obj->getWardInfo($ward_nr)){
 				$rooms=&$ward_obj->getAllActiveRoomsInfo();
+
+				$roomsTemp = &$rooms;
 				$rows=true;
 				extract($ward);
 				// Get all medical departments
 				/* Load the dept object */
 /*				if($edit){
 					include_once($root_path.'include/care_api_classes/class_department.php');
-					$dept=new Department;							
+					$dept=new Department;
 					$depts=&$dept->getAllMedical();
 				}
-*/							
+*/
 			}else{
 				header('location:nursing-station-info.php'.URL_REDIRECT_APPEND);
 				exit;
@@ -49,20 +59,68 @@ $rows=0;
 			$breakfile='nursing-station-info.php'.URL_APPEND;
 			break;
 		}
-		
+
 		case 'update':
 		{
-			$HTTP_POST_VARS['nr']=$HTTP_POST_VARS['ward_nr'];
+
+			//$HTTP_POST_VARS['nr']=$HTTP_POST_VARS['ward_nr'];
+
+
 			if($ward_obj->updateWard($ward_nr,$HTTP_POST_VARS)){
-				header("location:nursing-station-info.php".URL_REDIRECT_APPEND."&edit=0&mode=show&ward_id=$station&ward_nr=$ward_nr");
+
+
+
+			//update number of beds
+			foreach ($roomBedsArr as $careRoom => $anzahl)
+			{
+
+
+				$dataArrRoomAnzahl = array('nr' => $careRoom, 'nr_of_beds' => $anzahl);
+
+				//print_r($dataArrRoomAnzahl);
+
+				$ward_obj->updateRoomNumberBeds($dataArrRoomAnzahl);
+
+
+
+			}
+			//update room info
+			foreach ($roomInfoArr as $careRoom => $info)
+			{
+
+				$dataArrRoomInfo = array('nr' => $careRoom, 'info' => $info);
+				//print_r($dataArrRoomInfo);
+				$ward_obj->updateRoomInfo($dataArrRoomInfo);
+
+
+			}
+
+				//header("location:../inpatient/inpatient.php".URL_REDIRECT_APPEND."&edit=0&mode=show&ward_id=$ward_nr&ward_nr=$ward_nr");
+
+				if($ward=&$ward_obj->getWardInfo($ward_nr)){
+				$rooms=&$ward_obj->getAllActiveRoomsInfo();
+				$rows=true;
+				extract($ward);
+
+				}else{
+					header('location:nursing-station-info.php'.URL_REDIRECT_APPEND);
 				exit;
+				}
+
+				$breakfile='nursing-station-info.php'.URL_APPEND;
+
+				break;
+
+				//exit;
 			}else{
 				echo $ward_obj->getLastQuery()."<br>$LDDbNoSave";
+
+
 			}
-							
+
 			break;
 		}
-		
+
 		case 'close_ward':
 		{
 			if($ward_obj->hasPatient($ward_nr)){
@@ -71,49 +129,51 @@ $rows=0;
 			}else{
 				switch($close_type)
 				{
-					case 'temporary':		
+					case 'temporary':
 					{
 						$ward_obj->closeWardTemporary($ward_nr);
 						break;
 					}
-					
-					case 'nonreversible':	
+
+					case 'nonreversible':
 					{
 						$ward_obj->closeWardNonReversible($ward_nr);
 						break;
 					}
-					
-					case 're_open':	
+
+					case 're_open':
 					{
 						$ward_obj->reOpenWard($ward_nr);
 					}
 				}
-				
+
 				header("location:nursing-station-info.php".URL_REDIRECT_APPEND);
 				exit;
 			}
 		}
-							
-		default:					
+
+		default:
 		{
 			if($wards=&$ward_obj->getAllActiveWards()){
 				# Count wards
 				$rows=$wards->RecordCount();
+
 
 				if($rows==1){
 					# If only one ward, fetch the ward
 					$ward=$wards->FetchRow();
 					# globalize ward values
 					extract($ward);
-					# Get ward´s active rooms info
+					# Get wardï¿½s active rooms info
 					$rooms=&$ward_obj->getAllActiveRoomsInfo($ward['nr']);
 				}else{
 					$rooms=$ward_obj->countCreatedRooms();
+
 				}
 			}else{
 			 	//echo $ward_obj->getLastQuery()."<br>$LDDbNoRead";
 			}
-							
+
 			$breakfile='nursing-station-manage.php?sid='.$sid.'&lang='.$lang;
 		}
 	} # End of switch($mode)
@@ -156,17 +216,41 @@ div.pcont{ margin-left: 3; }
 </style>
 
 <script language="javascript">
-<!-- 
+<!--
 function check(d){
 	if((d.description.value=="")||(d.roomprefix.value=="")){
 		alert("<?php echo $LDAlertIncomplete ?>");
 		return false;
-	}
-	if(d.room_nr_start.value>=d.room_nr_end.value){
-		alert("<?php echo $LDAlertRoomNr ?>");
-		return false;
-	}
+	}else{
+			//check if room numbers are valid
+			if((isNaN(d.room_nr_start.value) == true)||(isNaN(d.room_nr_end.value) == true))
+			{
+				alert("<?php echo $LDRoomNrInvalid?>");
+				return false;
+
+			}else{
+
+				var start = parseInt(d.room_nr_start.value);
+				var end   = parseInt(d.room_nr_end.value);
+				var diff  = (end - start)+1;
+
+				//end must be higher than start
+				if (diff < 0)
+				{
+					alert("<?php echo $LDAlertRoomNr?>");
+					return false;
+				}
+
+				//roomnumbers must correspond to actual rooms
+				if (diff != parseInt(d.roomCount.value))
+				{
+					alert("<?php echo $LDAlertRoomNrCorr?>");
+					return false;
+				}
+			}
+		}
 }
+
 function checkTempClose(){
 	if(confirm("<?php echo $LDSureTemporaryClose ?>")) return true;
 		else return false;
@@ -184,7 +268,7 @@ function checkClose(f){
 		return false;
 	}
 }
-// -->
+ -->
 </script>
 
 <?php
@@ -208,6 +292,8 @@ if($rows==1) {
 	$smarty->assign('LDRoomPrefix',$LDRoomPrefix);
 	$smarty->assign('LDCreatedOn',$LDCreatedOn);
 	$smarty->assign('LDCreatedBy',$LDCreatedBy);
+	//$saveImg = createLDImgSrc($root_path,'close2.gif','0','absmiddle');
+	//$smarty->assign('SaveImage', $saveImg);
 
 	# Assign input values
 	$smarty->assign('name',$name);
@@ -219,7 +305,11 @@ if($rows==1) {
 	$smarty->assign('roomprefix',$roomprefix);
 	$smarty->assign('date_create',formatDate2Local($date_create,$date_format));
 	$smarty->assign('create_id',$create_id);
-	
+
+	$smarty->assign('ward_descr',$ward_nr);
+
+
+
 	# If rooms available, create list and show them
 
 	if(is_object($rooms)){
@@ -229,20 +319,26 @@ if($rows==1) {
 		$smarty->assign('LDBedNr',$LDBedNr);
 		$smarty->assign('LDRoomShortDescription',$LDRoomShortDescription);
 
+		$roomCount = 0;
 		$toggle=0;
 		$sTemp='';
 		while($room=$rooms->FetchRow()){
 			if($toggle)	$trc='#dedede';
 				else $trc='#efefef';
+			$roomCount++;
 			$toggle=!$toggle;
 			$sTemp=$sTemp.'
 				<tr bgcolor="'.$trc.'">
 				<td>&nbsp;'.strtoupper($ward['roomprefix']).' '.$room['room_nr'].'&nbsp;
 				</td>
-				<td class=pv >&nbsp;<font color="#ff0000">&nbsp;'.$room['nr_of_beds'].'</td>
-				<td class=pv >&nbsp;'.$room['info'].'</td>
+				<!--<td class=pv >&nbsp;<font color="#ff0000">&nbsp;'.$room['nr_of_beds'].'</td>-->
+				<td class="room"><textarea name="roomBedsArr['.$room['nr'].']" cols=4 rows=1 wrap="physical">'.$room['nr_of_beds'].'</textarea></td>
+				<!--<td class=pv >&nbsp;'.$room['info'].'</td>-->
+				<td class="room"><textarea name="roomInfoArr['.$room['nr'].']" cols=10 rows=2 wrap="physical">'.$room['info'].'</textarea></td>
 				</tr>';
 		}
+
+		$smarty->assign('roomCount',$roomCount);
 
 		$smarty->assign('sRoomRows',$sTemp);
 	}
@@ -289,11 +385,11 @@ if($rows==1) {
 		ob_end_clean();
 
 		$smarty->assign('sWardClosure',$sTemp);
-	
+
 	}
 
 }elseif($rows){
-	
+
 	# If more than one station available, create list and show
 
 	ob_start();
@@ -303,7 +399,7 @@ if($rows==1) {
 	<font class="prompt"><?php echo $LDExistStations ?></font><p>
 	<table border=0 cellpadding=4 cellspacing=1>
 
-<?php 
+<?php
 	echo '<tr class="wardlisttitlerow">
 			<td></td>
 			<td><font face="verdana,arial" size="2" ><b>&nbsp;'.$LDStation.'</b></td>
@@ -327,7 +423,7 @@ if($rows==1) {
 		$buf='nursing-station-info.php'.URL_APPEND.'&mode=show&station='.$result['name'].'&ward_nr='.$result['nr'];
 		echo '
 	<tr class="'.$trc.'">
-    <td>&nbsp;<a href="'.$buf.'"><img '.createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle').'>&nbsp;&nbsp;<font face="Verdana, Arial" size=2>'.strtoupper($result[station]).'</a></td> 
+    <td>&nbsp;<a href="'.$buf.'"><img '.createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle').'>&nbsp;&nbsp;<font face="Verdana, Arial" size=2>'.strtoupper($result[station]).'</a></td>
 	<td><a href="'.$buf.'">'.ucfirst($result['name']).'</a> &nbsp;</td>
 	<td>&nbsp;<a href="'.$buf.'">'.ucfirst($result['ward_id']).'</a> &nbsp;</td>
 	<td>'.ucfirst($result['description']).'&nbsp;</td>
@@ -339,7 +435,7 @@ if($rows==1) {
 	}else{
 		echo $wbuf[$result['nr']].' '.$LDRoom;
 	}
-	echo '&nbsp;</td>  
+	echo '&nbsp;</td>
 	</tr>';
 	}
 ?>
@@ -355,7 +451,8 @@ if($rows==1) {
 }else{
 
 	# If no wards available, prompt no ward
-	
+
+
 	$sTemp = '<p><font size=2 face="verdana,arial,helvetica">'.$LDNoWardsYet.'<br><img '.createComIcon($root_path,'redpfeil.gif','0','absmiddle').'> <a href="nursing-station-new.php'.URL_APPEND.'">'.$LDClk2CreateWard.'</a></font>';
 
 }
@@ -366,6 +463,7 @@ if($rows==1){
 	# Assign the page output to main frame template
 	$smarty->assign('sMainFrameBlockData',$sTemp);
 }
+
 
  /**
  * show Template

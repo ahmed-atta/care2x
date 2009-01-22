@@ -159,7 +159,8 @@ class Person extends Core {
 				 'modify_time',
 				 'create_id',
 				 'create_time',
-				 'insurance_category');
+				 'insurance_category',
+				 'insurance_ID');
 	/**
 	* Constructor
 	* @param int PID number
@@ -1221,12 +1222,12 @@ class Person extends Core {
 	* @return mixed string or boolean
 	*/
 	function setPhotoFilename($pid='',$fn=''){
-	    global $db, $HTTP_SESSION_VARS;
+	    global $db; // $HTTP_SESSION_VARS;
 		if(empty($pid)||empty($fn)) return false;
 		if(!$this->internResolvePID($pid)) return false;
 
 		 $this->sql="UPDATE $this->tb_person SET photo_filename='$fn',
-		 			history=".$this->ConcatHistory("\nPhoto set ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name'])." WHERE pid=$this->pid";
+		 			history=".$this->ConcatHistory("\nPhoto set ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name'])." WHERE pid=$this->pid";
 		return $this->Transact($this->sql);
 	}
 	function showPID($pid)

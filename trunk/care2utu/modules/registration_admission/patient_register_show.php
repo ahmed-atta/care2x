@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
+* elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -22,20 +22,23 @@ $thisfile=basename(__FILE__);
 if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfile=$root_path."main/startframe.php".URL_APPEND;
 	else $breakfile="patient.php".URL_APPEND."&target=entry";
 
+
 $admissionfile='aufnahme_start.php'.URL_APPEND;
 
+echo 'KKKK';
+
 # Resolve PID
-if((!isset($pid)||!$pid)&&$HTTP_SESSION_VARS['sess_pid']) $pid=$HTTP_SESSION_VARS['sess_pid'];
+if((!isset($pid)||!$pid)&&$_SESSION['sess_pid']) $pid=$_SESSION['sess_pid'];
 
 # Save session data
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
-$HTTP_SESSION_VARS['sess_pid']=$pid;
-//$HTTP_SESSION_VARS['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
-$HTTP_SESSION_VARS['sess_parent_mod']='registration';
-$HTTP_SESSION_VARS['sess_user_origin']='registration';
+$_SESSION['sess_path_referer']=$top_dir.$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
+$_SESSION['sess_pid']=$pid;
+//$_SESSION['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
+$_SESSION['sess_parent_mod']='registration';
+$_SESSION['sess_user_origin']='registration';
 # Reset the encounter number
-$HTTP_SESSION_VARS['sess_en']=0;
+$_SESSION['sess_en']=0;
 
 # Create the person show GUI
 require_once($root_path.'include/care_api_classes/class_gui_person_show.php');
@@ -129,7 +132,7 @@ $smarty->assign('sRegOptions',$sTemp);
 
 # If the data is not new , show new search button
 
-if (!$newdata) { 
+if (!$newdata) {
 
 	if($target=="search") $newsearchfile='patient_register_search.php'.URL_APPEND;
 		else $newsearchfile='patient_register_archive.php'.URL_APPEND;

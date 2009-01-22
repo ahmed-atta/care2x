@@ -40,7 +40,7 @@ require_once($root_path.'include/inc_init_xmlrpc.php');
 $thisfile=basename(__FILE__);
 if($origin=='patreg_reg') $breakfile = 'patient_register_show.php'.URL_APPEND.'&pid='.$pid;
 	elseif($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfile = $root_path.'main/startframe.php'.URL_APPEND;
-		elseif(!empty($HTTP_SESSION_VARS['sess_path_referer'])) $breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND.'&pid='.$pid;
+		elseif(!empty($_SESSION['sess_path_referer'])) $breakfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND.'&pid='.$pid;
 			else $breakfile = "aufnahme_pass.php".URL_APPEND."&target=entry";
 
 $newdata=1;
@@ -138,7 +138,7 @@ if($pid!='' || $encounter_nr!=''){
 					  */
 
 	                  $encoder=trim($encoder);
-					  if($encoder=='') $encoder=$HTTP_SESSION_VARS['sess_user_name'];
+					  if($encoder=='') $encoder=$_SESSION['sess_user_name'];
 
 					  /*if ($referrer_notes=='') { $errorbesonder=1; $error=1; $errornum++;};
 
@@ -156,10 +156,11 @@ if($pid!='' || $encounter_nr!=''){
 
                  if(!$error)
 	             {
+
 		             	if($is_transmit_to_weberp_enable == 1)
 		             	{
 							$persondata = $person_obj->getAllInfoArray();
-		             		$weberp_obj = new weberp($webERPServerURL,$weberpuser,$weberppassword,$weberpDebugLevel);
+		             		$weberp_obj = new_weberp();
 							if(!$weberp_obj->transfer_patient_to_webERP_asCustomer($pid,$persondata))
 							{
 								$person_obj->setPatientIsTransmit2ERP($pid,0);
@@ -168,6 +169,7 @@ if($pid!='' || $encounter_nr!=''){
 							{
 								$person_obj->setPatientIsTransmit2ERP($pid,1);
 							}
+							destroy_weberp($weberp_obj);
 
 		             	}
 
@@ -268,6 +270,12 @@ if($pid!='' || $encounter_nr!=''){
 										}else{
 											$encounter_nr=$encounter_obj->postgre_Insert_ID($dbtable,'encounter_nr',$db->Insert_ID());
 										} // end of if($dbtype=='mysql')
+
+										if($is_transmit_to_weberp_enable == 1)
+		             					{
+//											$weberp_obj = new weberp($webERPServerURL,$weberpuser,$weberppassword,$weberpDebugLevel);
+//											$weberp_obj->make_patient_workorder_in_webERP($encounter_nr);
+		             					}
 
 										$encounter_obj->assignInDept($encounter_nr,$current_dept_nr,$current_dept_nr);
 
@@ -600,20 +608,39 @@ if(!isset($pid) || !$pid){
 							break;
 						}
 					}else{
-						$sTemp = $sTemp.'<input name="encounter_class_nr" onClick="resolveLoc()" type="radio"  value="'.$result['class_nr'].'" ';
-						if($encounter_class_nr==$result['class_nr']) $sTemp = $sTemp.'checked';
-						$sTemp = $sTemp.'>';
+						//old code:
 
-						if(isset($$LD)&&!empty($$LD)) $sTemp = $sTemp.$$LD;
-							else $sTemp = $sTemp.$result['name'];
+//						$sTemp = $sTemp.'<input name="encounter_class_nr" onClick="resolveLoc()" type="radio"  value="'.$result['class_nr'].'" ';
+//						if($encounter_class_nr==$result['class_nr']) $sTemp = $sTemp.'checked';
+//						$sTemp = $sTemp.'>';
+//
+//						if(isset($$LD)&&!empty($$LD)) $sTemp = $sTemp.$$LD;
+//							else $sTemp = $sTemp.$result['name'];
+
+
+						//new code:
+
+						if($encounter_class_nr==$result['class_nr']) {
+							$sTemp = $sTemp.'<input name="encounter_class_nr"  type="hidden"  value="'.$result['class_nr'].'" ';
+							$sTemp = $sTemp.'>';
+						}
+
+
 					}
 				}
+
+				if ($encounter_class_nr==1)
+							$sTemp .= $LDStationary;
+						else if ($encounter_class_nr==2)
+								$sTemp .= $LDAmbulant;
+
 				$smarty->assign('sAdmitClassInput',$sTemp);
+
 			}
 
 			# If no encounter nr or inpatient, show ward/station info, 1 = inpatient
 			if(!$encounter_nr||$encounter_class_nr==1){
-				if ($errorward||$encounter_class_nr==1) $smarty->assign('LDWard',"<font color=red>$LDWard</font>");
+				if ($errorward||$encounter_class_nr==1){ $smarty->assign('LDWard',"<font color=red>$LDWard</font>");}
 					$smarty->assign('LDWard',$LDWard);
 				$sTemp = '';
 				if($in_ward){
@@ -639,7 +666,12 @@ if(!isset($pid) || !$pid){
 					$sTemp = $sTemp.'</select>
 							<font size=1><img '.createComIcon($root_path,'redpfeil_l.gif','0','',TRUE).'> '.$LDForInpatient.'</font>';
 				}
-				$smarty->assign('sWardInput',$sTemp);
+				//old code:
+				//$smarty->assign('sWardInput',$sTemp);
+
+				//new code:
+				if ($encounter_class_nr==1)$smarty->assign('sWardInput',$sTemp);
+
 			} //  End of if no encounter nr
 
 			# If no encounter nr or outpatient, show clinic/department info, 2 = outpatient
@@ -674,7 +706,12 @@ if(!isset($pid) || !$pid){
 					}
 					$sTemp = $sTemp.'</select><font size=1><img '.createComIcon($root_path,'redpfeil_l.gif','0','',TRUE).'> '.$LDForOutpatient.'</font>';
 				}
-				$smarty->assign('sDeptInput',$sTemp);
+				//old code:
+				//$smarty->assign('sDeptInput',$sTemp);
+
+				//new code:
+				if ($encounter_class_nr==2)$smarty->assign('sDeptInput',$sTemp);
+
 			} // End of if no encounter nr
 
 			$smarty->assign('LDDiagnosis',$LDDiagnosis);

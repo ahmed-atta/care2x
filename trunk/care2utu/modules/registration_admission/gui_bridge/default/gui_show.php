@@ -1,7 +1,7 @@
 <?php
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'];
+$returnfile=$_SESSION['sess_file_return'];
 
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 if (empty($externalcall))
   $breakfile='javascript:window.close()';
@@ -44,8 +44,8 @@ if ($debug) {
  require_once($root_path.'gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('common');
 
-if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
-	else $sTitleNr = ($HTTP_SESSION_VARS['sess_full_pid']);
+if($parent_admit) $sTitleNr= ($_SESSION['sess_full_en']);
+	else $sTitleNr = ($_SESSION['sess_full_pid']);
 
 
 # Title in the toolbar
@@ -81,7 +81,7 @@ if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
  $smarty->assign('sOnLoadJs',"if (window.focus) window.focus();");
 
   # href for return button
- //$smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
+ //$smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
 
 
 # Start buffering extra javascript output
@@ -250,10 +250,10 @@ if($mode=='show' /*&& !isset($externalcall) */){
 
       if (!empty($externalcall)) {
         if (!isset($printout)) {
-          $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&help_site='.$help_site.'&externalcall='.$externalcall.'&backpath='.urlencode($backpath).'"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
+          $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new&help_site='.$help_site.'&externalcall='.$externalcall.'&backpath='.urlencode($backpath).'"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
         }
       } else
-        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
+        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
 
 
 		ob_end_clean();
@@ -264,11 +264,11 @@ if($mode=='show' /*&& !isset($externalcall) */){
 
 	        if (!isset($printout)) {
 
-	          	$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&mode=new&help_site&externalcall='.$externalcall.'&backpath='.urlencode($backpath).'"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
+	          	$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new&mode=new&help_site&externalcall='.$externalcall.'&backpath='.urlencode($backpath).'"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
 
 	        } else {
 
-	        	$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
+	        	$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
 
 	        }
 
@@ -282,9 +282,9 @@ if($mode=='show' /*&& !isset($externalcall) */){
 	  	  $smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
 
 	      if (!empty($externalcall))
-	        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&mode=new&help_site&externalcall='.$externalcall.'"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
+	        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new&mode=new&help_site&externalcall='.$externalcall.'"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
 	      else
-	        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&mode=new&help_site"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
+	        $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new&mode=new&help_site"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
 
  	  }else{
 	  		if(file_exists('./gui_bridge/default/gui_person_createnew_'.$thisfile)) include('./gui_bridge/default/gui_person_createnew_'.$thisfile);
@@ -298,7 +298,7 @@ if($mode=='show' /*&& !isset($externalcall) */){
 	   //set here "druglist", "Supplies", "supplies-lab", "special-others" if you want.
 	   $activated_tab = "druglist";
 	   // (by Merotech(RM): Here the main prescription-table-content will be loaded: ;
-
+		//echo './gui_bridge/default/gui_input_'.$thisfile;
 	  if ($debug) echo  './gui_bridge/default/gui_input_'.$thisfile;
 	  include('./gui_bridge/default/gui_input_'.$thisfile);
 

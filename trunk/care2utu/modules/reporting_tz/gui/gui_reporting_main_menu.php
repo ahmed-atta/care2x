@@ -13,7 +13,7 @@
 function gethelp(x,s,x1,x2,x3,x4)
 {
 	if (!x) x="";
-	urlholder="../../main/help-router.php?sid=<?php echo sid;?>&lang=$lang&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4;
+	urlholder="../../main/help-router.php?sid=<?php echo $sid."&lang=".$lang;?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -36,7 +36,7 @@ A:visited:hover {color: #cc0033;}
 
 function popPic(pid,nm){
 
- if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=<?php echo sid;?>&lang=$lang&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
+ if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=<?php echo $sid."&lang=".$lang;?>&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
 
 }
 function getARV(path) {
@@ -100,7 +100,7 @@ function getARV(path) {
                   <td class="submenu_item"><a href="OPD_infections.php"><?php echo $LDOPDInfectionsSummary; ?></a></td>
                   <td>&nbsp;</td>
                 </tr>
-                 <tr>
+                <tr>
                   <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
                   <td class="submenu_item"><a href="mtuha_icd10.php"><?php echo 'Mtuha-ICD10-Summary'; ?></a></td>
                   <td>&nbsp;</td>
@@ -136,6 +136,12 @@ function getARV(path) {
                   <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
                   <td class="submenu_item"><a href="billing_summary.php"><?php echo $LDFinancialReport; ?></a></td>
                   <td><?php echo $LDDailyFinancialRecord; ?></td>
+                </tr>
+
+                <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="tracking_summary.php"><?php echo $LDTrackingReport; ?></a></td>
+                  <td><?php echo $LDMonthlyTrackingReport; ?></td>
                 </tr>
 
                 <tr>
@@ -205,7 +211,7 @@ function getARV(path) {
                 </tr>
 
 
-                <!--
+
                 <tr>
                   <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
                   <td class="submenu_item"><a href="javascript:getARV('modules/arv/arv_reporting_quarterly.php')">HIV Care Reporting</a></td>
@@ -223,7 +229,7 @@ function getARV(path) {
                   <td>C-Statistics Overview</td>
                 </tr>
 
-                 -->
+
               </tbody>
             </table></TD>
 	</TR>

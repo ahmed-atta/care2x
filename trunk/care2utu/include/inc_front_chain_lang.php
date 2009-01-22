@@ -18,7 +18,7 @@ require_once($root_path.'include/inc_db_makelink.php');
 
 # The function getLang gets the language code and stores it to the lang variable
 # The ck_language variable is a cookie which holds the language code stored at the beginning of
-# browser´s session. After acquiring the language code, the existence of the language table is
+# browserï¿½s session. After acquiring the language code, the existence of the language table is
 # checked. If language table does not exist, function returns 0.
 #
 # param chk_file =  filename of the language table
@@ -43,7 +43,7 @@ function getLang($chk_file)
 require_once($root_path.'include/inc_charset_fx.php'); // charset functions
 
 # The following lines of code is the script chaining detector. It compares the sid values propagated via
-# the relative url with the ck_sid+sid (decrypted) cookie values. If the two don´t match, a warning message will apear and
+# the relative url with the ck_sid+sid (decrypted) cookie values. If the two donï¿½t match, a warning message will apear and
 # the script exits stopping the execution. If the caller script does not require chaining, it must set the
 # constant NO_CHAIN to 1 before including this script.
 
@@ -79,32 +79,32 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 		
 			if(!$TIME_OUT_INACTIVE){
     				//echo $tnow."<br>";
-					//echo $HTTP_SESSION_VARS['sess_tos']."<br>";
-					//echo ($tnow-$HTTP_SESSION_VARS['sess_tos'])."<br>";
+					//echo $_SESSION['sess_tos']."<br>";
+					//echo ($tnow-$_SESSION['sess_tos'])."<br>";
 	  			# Check if session is still valid 
-	  			if(isset($HTTP_SESSION_VARS['sess_tos'])||session_is_registered('sess_tos')){
+	  			if(isset($_SESSION['sess_tos'])||session_is_registered('sess_tos')){
 					# Check if time out value is positive or not zero
 					# current time minus start time
-					if(($tnow - $HTTP_SESSION_VARS['sess_tos']) >= $TIME_OUT_TIME) $time_out=TRUE;
-						else $HTTP_SESSION_VARS['sess_tos']=$tnow;
+					if(($tnow - $_SESSION['sess_tos']) >= $TIME_OUT_TIME) $time_out=TRUE;
+						else $_SESSION['sess_tos']=$tnow;
 				}else{
 					$time_out=TRUE;
 				}
 			
-    			//if(!isset($HTTP_SESSION_VARS['sess_tos'])||!session_is_registered('sess_tos')||!$HTTP_SESSION_VARS['sess_tos']||$time_out){
-    			if($time_out||!$HTTP_SESSION_VARS['sess_tos']){
+    			//if(!isset($_SESSION['sess_tos'])||!session_is_registered('sess_tos')||!$_SESSION['sess_tos']||$time_out){
+    			if($time_out||!$_SESSION['sess_tos']){
     				//echo $tnow."<br>";
-					//echo $HTTP_SESSION_VARS['sess_tos']."<br>";
-					//echo ($tnow-$HTTP_SESSION_VARS['sess_tos'])."<br>";
+					//echo $_SESSION['sess_tos']."<br>";
+					//echo ($tnow-$_SESSION['sess_tos'])."<br>";
 	  				//echo "session expired<br>";
     				//echo $TIME_OUT_TIME."<br>";
-					//echo $HTTP_SESSION_VARS['sess_user_id'];
+					//echo $_SESSION['sess_user_id'];
 					# Show session time out warning and exit the script to stop the module
 					include($root_path."include/inc_session_timeout_warning.php");
 					exit;
 				}else{
 					# Reset the time-out start time
-					$HTTP_SESSION_VARS['sess_tos']=$tnow;
+					$_SESSION['sess_tos']=$tnow;
 					//echo $tnow;
 				}
 			}
@@ -121,7 +121,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
    		$no_valid=1;
 	}else{
 		# Reset the time-out start time
-		$HTTP_SESSION_VARS['sess_tos']=$tnow;
+		$_SESSION['sess_tos']=$tnow;
 	}
 		
 

@@ -4,6 +4,7 @@
 */
 /** */
 require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/care_api_classes/class_weberp.php');
 /**
 *  Prescription methods.
 *
@@ -243,6 +244,7 @@ class Prescription extends Core {
 
 	function insert_prescription($encounter_nr, $drug_list_id) {
 	  global $db;
+	  global $is_transmit_to_weberp_enable;
       $debug = FALSE;
       ($debug)?$db->debug=TRUE:$db->debug=FALSE;
       if ($debug) echo "class prescription::insert_prescription($encounter_nr, $drug_list_id)<br>";
@@ -301,6 +303,17 @@ class Prescription extends Core {
 	  		"			'', " .
 	  		"			'0000-00-00 00:00:00');";
 	  	$db->Execute($this->sql);
+		if($is_transmit_to_weberp_enable == 1)
+		{
+  			$this->sql='select max(nr) from care_encounter_prescription where encounter_nr="'.$encounter_nr.'"';
+			$result=$db->Execute($this->sql);
+			$WONumberArray = $result->FetchRow();
+			$WONumber=$WONumberArray[0];
+			$weberp_obj = new_weberp();
+			$weberp_obj->make_patient_workorder_in_webERP($WONumber);
+//			$weberp_obj->issue_to_patient_workorder_in_weberp($WONumber, $StockID, $Location, $Quantity, $Batch);
+			weberp_destroy($weberp_obj);
+		}
 	  	return TRUE;
 	} // end of function insert_prescription($encounter_nr, $drug_list_id)
 

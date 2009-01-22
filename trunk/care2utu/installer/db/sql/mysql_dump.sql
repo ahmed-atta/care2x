@@ -2124,6 +2124,7 @@ CREATE TABLE care_person (
   create_id varchar(35) NOT NULL default '',
   create_time timestamp NOT NULL default '0000-00-00 00:00:00',
   addr_citytown_name varchar(35) NOT NULL default '',
+  insurance_ID tinyint(4) NOT NULL default '0',
   insurance_silver tinyint(4) NOT NULL default '0',
   insurance_gold tinyint(4) NOT NULL default '0',
   insurance_friedkin tinyint(4) NOT NULL default '0',
@@ -4509,6 +4510,48 @@ CREATE TABLE care_tz_insurance (
   PRIMARY KEY  (id),
   KEY parent (parent,company_id,PID)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `care_tz_insurances_admin`
+--
+
+DROP TABLE IF EXISTS `care_tz_insurances_admin`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `care_tz_insurances_admin` (
+  `insurance_ID` smallint(5) NOT NULL auto_increment,
+  `insurer` smallint(5) NOT NULL default '-1',
+  `name` varchar(30) default NULL,
+  `max_pay` int(10) default NULL,
+  `deleted` tinyint(1) NOT NULL default '1',
+  `creation` text NOT NULL,
+  `id_insurer_hist` text,
+  `name_hist` text,
+  `max_pay_hist` text,
+  `deleted_hist` text,
+  `contact_person` varchar(60) default NULL,
+  `contact_person_hist` text NOT NULL,
+  `po_box` varchar(50) default NULL,
+  `po_box_hist` text NOT NULL,
+  `city` varchar(60) default NULL,
+  `city_hist` text NOT NULL,
+  `phone` varchar(35) default NULL,
+  `phone_hist` text NOT NULL,
+  `email` varchar(60) default NULL,
+  `email_hist` text NOT NULL,
+  PRIMARY KEY  (`insurance_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `care_tz_insurances_admin`
+--
+
+LOCK TABLES `care_tz_insurances_admin` WRITE;
+/*!40000 ALTER TABLE `care_tz_insurances_admin` DISABLE KEYS */;
+INSERT INTO `care_tz_insurances_admin` VALUES (1,-1,'sss',0,1,'Creation 2008-12-23 13:23:20 Niemi \n','-1\n','sss \n','-\n','-\n','','-\n','','-\n','','-\n','','-\n','','-\n'),(2,-1,'sssa',0,1,'Creation 2008-12-23 13:23:36 Niemi \n','-1\n','sssa \n','0\n','-\n','','-\n','','-\n','','-\n','','-\n','','-\n'),(3,-1,'sssa',0,1,'Creation 2008-12-23 13:23:36 Niemi ','-1\n','sssa ','0\n','- ','','-\n','','-\n','','-\n','','-\n','','-\n'),(4,-1,'ddda',0,0,'Creation 2008-12-23 13:27:31 Niemi \n','-1\n','ddd \nUpdate from sssa (del) to ddda / 2008-12-23 13:29:37 Niemi \n','-\n','-\n','','-\n','','-\n','','-\n','','-\n','','-\n');
+/*!40000 ALTER TABLE `care_tz_insurances_admin` ENABLE KEYS */;
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -10201,4 +10244,4 @@ FROM
 where tests.id = param.id AND parent<>-1
 ;
 
-
+insert into care_users values('Admin','admin',md5('haydom'),0,0,'System_Admin',0,'2004-07-17','12:41:46','2006-10-03','00:00:00','normal','','','2006-07-03 07:25:34','Aklei G.Kessy','2004-07-17 08:41:46');

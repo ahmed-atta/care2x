@@ -30,9 +30,9 @@ if (isset ( $mode ) && ! empty ( $mode )) {
 	if ($mode == 'save') {
 		# Save the nr			if (empty ( $HTTP_POST_VARS [ 'status' ] ))
 			$HTTP_POST_VARS [ 'status' ] = ' ' ;
-		$HTTP_POST_VARS [ 'modify_id' ] = $HTTP_SESSION_VARS [ 'sess_user_name' ] ;
+		$HTTP_POST_VARS [ 'modify_id' ] = $_SESSION [ 'sess_user_name' ] ;
 		$HTTP_POST_VARS [ 'id' ] = strtolower ( $HTTP_POST_VARS [ 'id' ] ) ;
-		$HTTP_POST_VARS [ 'history' ] = $lab_obj->ConcatHistory ( "Update " . date ( 'Y-m-d H:i:s' ) . " " . $HTTP_SESSION_VARS [ 'sess_user_name' ] . "\n" ) ;
+		$HTTP_POST_VARS [ 'history' ] = $lab_obj->ConcatHistory ( "Update " . date ( 'Y-m-d H:i:s' ) . " " . $_SESSION [ 'sess_user_name' ] . "\n" ) ;
 		# Set to use the test params		$lab_obj->useTestParams () ;
 		# Point to the data array		//print_r($HTTP_POST_VARS);		$lab_obj->setDataArray ( $HTTP_POST_VARS ) ;
 		
@@ -54,11 +54,11 @@ if (isset ( $mode ) && ! empty ( $mode )) {
 	# begin mode new 		if ($mode == 'savenew') {
 		# Save the nr			if (empty ( $HTTP_POST_VARS [ 'status' ] ))
 			$HTTP_POST_VARS [ 'status' ] = ' ' ;
-		$HTTP_POST_VARS [ 'modify_id' ] = $HTTP_SESSION_VARS [ 'sess_user_name' ] ;
+		$HTTP_POST_VARS [ 'modify_id' ] = $_SESSION [ 'sess_user_name' ] ;
 		$HTTP_POST_VARS [ 'group_id' ] = '-1' ;
 		$HTTP_POST_VARS [ 'sort_nr' ] = rand ( 1, 99 ) ;
 		$HTTP_POST_VARS [ 'id' ] = str_replace ( " ", "_", strtolower ( $HTTP_POST_VARS [ 'name' ] ) ) ;
-		$HTTP_POST_VARS [ 'history' ] = $lab_obj->ConcatHistory ( "Created " . date ( 'Y-m-d H:i:s' ) . " " . $HTTP_SESSION_VARS [ 'sess_user_name' ] . "\n" ) ;
+		$HTTP_POST_VARS [ 'history' ] = $lab_obj->ConcatHistory ( "Created " . date ( 'Y-m-d H:i:s' ) . " " . $_SESSION [ 'sess_user_name' ] . "\n" ) ;
 		# Set to use the test params		$lab_obj->useTestParams () ;
 		# Point to the data array		$lab_obj->setDataArray ( $HTTP_POST_VARS ) ;
 		if ($lab_obj->insertDataFromInternalArray ()) {

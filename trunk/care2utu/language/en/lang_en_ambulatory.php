@@ -23,5 +23,5 @@ $LDAmbulatory='Ambulatory';
 $LDAdmissionDate='Admission Date';
 # 2006-09-15 d.r. from merotech
 $LDDischargePatients='Discharge patients';
-
+$LDPatNr='Patient ID';
 ?>

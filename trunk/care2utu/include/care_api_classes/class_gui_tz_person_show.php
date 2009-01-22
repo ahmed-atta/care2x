@@ -200,7 +200,7 @@ class GuiPersonShow extends Person{
 				$this->current_encounter=$this->person_obj->CurrentEncounter($this->pid);
 
 				# update the record�s history
-				if(empty($newdata)) @$this->person_obj->setHistorySeen($HTTP_SESSION_VARS['sess_user_name']);
+				if(empty($newdata)) @$this->person_obj->setHistorySeen($_SESSION['sess_user_name']);
 
 				# Check whether config foto path exists, else use default path
 				$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $this->default_photo_path;
@@ -255,7 +255,7 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			<FONT SIZE=-1  FACE="Arial"><?php echo $LDFileNr ?>:
 		</td>
 		<td  bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $selian_pid; ?>
+			<FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $selian_pid ?>
 		</td>
 		</tr>
 		<tr>
@@ -388,13 +388,31 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 		</td>
 		</tr>
 
+		<?php global $db;
+
+		    	$coreObj->sql="SELECT name FROM care_tz_insurances_admin WHERE insurance_ID=$insurance_ID";
+				if ($ergebnis = $db->Execute($coreObj->sql))
+				{
+					$row = $ergebnis->FetchRow();
+					$insurance_name = $row['name'];
+				}
+				else $insurance_name = '';
+		?>
+
+		<tr>
+		<td>
+			<FONT SIZE=-1  FACE="Arial">
+			<?php echo $LDInsurance; ?>:
+		</td>
+		<td><?php echo $insurance_name; ?></td>
+		</tr>
+
 		<tr>
 		<td colspan=3>
 			<FONT SIZE=-1  FACE="Arial">
 			<?php echo $LDAddress ?>:
 		</td>
 		</tr>
-
 
 		<tr>
 		<td bgColor="#eeeeee">
@@ -444,9 +462,6 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 		</tr>
 
 
-
-
-
  <?php
 		if (!$GLOBAL_CONFIG['person_insurance_1_nr_hide']&&$insurance_show&&$insurance_nr){
 			$this->createTR($LDInsuranceNr,$insurance_nr,2);
@@ -489,6 +504,11 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 		if (!$GLOBAL_CONFIG['person_religion_hide']&&$religion){
 			$this->createTR($LDReligion,$name,2);
 		}
+
+		if (!$GLOBAL_CONFIG['person_insurance_hide']&&$insurance_ID){
+			$this->createTR($LDInsurance,$insurance_ID,2);
+		}
+
 		if (!$GLOBAL_CONFIG['person_ethnic_orig_hide']&&$ethnic_orig){
 			$this->createTR($LDEthnicOrigin,$ethnic_orig_txt,2);
 		}

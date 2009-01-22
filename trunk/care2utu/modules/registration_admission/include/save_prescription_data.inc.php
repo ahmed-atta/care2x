@@ -76,8 +76,18 @@ foreach ($arr_item_number AS $item_number) {
                   $db->Execute($sql);
 
 								  //if (isset($externalcall))
-									//  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+									//  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$_SESSION['sess_pid']);
  								  //exit;
+
+ 								  //dosage ausgeben:
+ 								  //echo 'Dosage: '.$dosage;
+
+ 								    //*******
+ 								  	// Load the visual signalling functions
+									include_once($root_path.'include/inc_visual_signalling_fx.php');
+									// Set the visual signal
+									setEventSignalColor($encounter_nr,SIGNAL_COLOR_DOCTOR_INFO);
+									//********
   								break;
   		case 'update':
   		            $sql="UPDATE care_encounter_prescription SET
@@ -87,13 +97,20 @@ foreach ($arr_item_number AS $item_number) {
   		                          `history`='$history'
   		                  WHERE nr=$nr";
                   $db->Execute($sql);
+
+                  					//*******
+ 								  	// Load the visual signalling functions
+									include_once($root_path.'include/inc_visual_signalling_fx.php');
+									// Set the visual signal
+									setEventSignalColor($encounter_nr,SIGNAL_COLOR_DOCTOR_INFO);
+									//********
   								break;
   		case 'delete':
   		            $sql="DELETE FROM care_encounter_prescription WHERE nr=$nr";
                   $db->Execute($sql);
 
 								  //if (isset($externalcall))
-									//  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+									//  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$_SESSION['sess_pid']);
  								  //exit;
   								break;
   }// end of switch
@@ -103,9 +120,9 @@ if (isset($externalcall)){
 	if ($backpath=='billing' || $backpath=='billing')
   		header("location: $root_path/modules/billing_tz/billing_tz_quotation.php");
   	else
-  		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&backpath=".urlencode($backpath)."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+  		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&backpath=".urlencode($backpath)."&pid=".$_SESSION['sess_pid']);
 } else
-  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&backpath=".urlencode($backpath)."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&backpath=".urlencode($backpath)."&pid=".$_SESSION['sess_pid']);
 
 exit();
 ?>

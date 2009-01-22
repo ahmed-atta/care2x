@@ -53,13 +53,13 @@ require($root_path.'include/inc_css_a_hilitebu.php');
     </tr> -->
     <tr>
       <td></td>
-      <td valign=top><FONT face="Verdana,Helvetica,Arial" size=2 ><a href="dept_new.php?sid=<?php echo $sid ?>&mw=1<?php echo "&lang=$lang&station=$ck_thispc_station&name=$ck_thispc_dept" ?>"><b><?php echo $LDCreate ?></b></a><br>
-	  		&nbsp;<?php echo $LDNewDept ?><p>
+      <td valign=top><FONT face="Verdana,Helvetica,Arial" size=2 ><a href="dept_new.php?sid=<?php echo $sid; ?>&mw=1<?php echo "&lang=$lang&station=$ck_thispc_station&name=$ck_thispc_dept"; ?>"><b><?php echo $LDCreate; ?></b></a><br>
+	  		&nbsp;<?php echo $LDNewDept; ?><p>
 			<?php if ($ck_thispc_station) $mode="show"; ?>
-			<a href="dept_list.php?sid=<?php echo "$sid&lang=$lang&mode=$mode&dept_nr=4" ?>"><b><?php echo $LDShowDeptInfo ?></b></a><br>
-			<?php echo $LDShowDeptInfoTxt ?><p>
-			<a href="dept_list_config.php<?php echo URL_APPEND; ?>"><b><?php echo $LDConfigOptions ?></b></a><br>
-			<?php echo $LDDeptConfigOptions ?>
+			<a href="dept_list.php?sid=<?php echo "$sid&lang=$lang&mode=$mode&dept_nr=4"; ?>"><b><?php echo $LDShowDeptInfo; ?></b></a><br>
+			<?php echo $LDShowDeptInfoTxt; ?><p>
+			<a href="dept_list_config.php<?php echo URL_APPEND; ?>"><b><?php echo $LDConfigOptions; ?></b></a><br>
+			<?php echo $LDDeptConfigOptions; ?>
 			</td>
       <td></td>
     </tr>
@@ -68,7 +68,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </FONT>
 <p>
 <ul>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a>
+<a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0'); ?> border="0"></a>
 </ul>
 </td>
 </tr>

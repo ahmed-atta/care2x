@@ -50,7 +50,7 @@ require($root_path.'include/inc_2level_reset.php');
 <script language="JavaScript">
 function open_request()
 {
- 	urlholder=("\labor_test_request_pass.php?sid=$sid&lang=$lang&target=admin&subtarget=chemlabor&user_origin=lab\"");
+ 	urlholder=("\labor_test_request_pass.php?sid=<?php echo $sid."&lang=".$lang;?>&target=admin&subtarget=chemlabor&user_origin=lab\"");
 	requestwin=window.open(urlholder,"requestwin_2","menubar=no,resizable=yes,scrollbars=yes,status=yes");
 	requestwin.moveTo(0,0);
 	requestwin_2.resizeTo(screen.availWidth,screen.availHeight);

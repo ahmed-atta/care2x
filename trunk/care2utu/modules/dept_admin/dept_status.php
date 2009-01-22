@@ -33,7 +33,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
       if( isset($HTTP_GET_VARS['active']) )
         $sql .= " is_inactive='".(1-$HTTP_GET_VARS['active'])."', ";
 
-      $sql .= " modify_id='".$HTTP_SESSION_VARS['sess_user_name']."' ".
+      $sql .= " modify_id='".$_SESSION['sess_user_name']."' ".
         " WHERE nr='".$HTTP_GET_VARS['nr']."'";
   }else{
       if( isset($_REQUEST['status']) )

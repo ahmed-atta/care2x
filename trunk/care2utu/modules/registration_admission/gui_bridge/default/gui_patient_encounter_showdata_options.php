@@ -11,8 +11,8 @@ function openDRGComposite(){
 			h=650;';
 ?>
 	
-	drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=".$HTTP_SESSION_VARS['sess_full_en']."&edit=$edit&is_discharged=$is_discharged&ln=$name_last&fn=$name_first&bd=$date_birth&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $encounter_nr."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
-	window.drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
+	drgcomp_<?php echo $_SESSION['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=".$_SESSION['sess_full_en']."&edit=$edit&is_discharged=$is_discharged&ln=$name_last&fn=$name_first&bd=$date_birth&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $encounter_nr."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+	window.drgcomp_<?php echo $_SESSION['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
 } 
 
 function getinfo(pn){
@@ -31,7 +31,7 @@ function getinfo(pn){
 ?>
 }
 function cancelEnc(){
-	window.location.href="aufnahme_cancel.php<?php echo URL_REDIRECT_APPEND ?>&mode=&encounter_nr=<?php echo $HTTP_SESSION_VARS['sess_en'] ?>";
+	window.location.href="aufnahme_cancel.php<?php echo URL_REDIRECT_APPEND ?>&mode=&encounter_nr=<?php echo $_SESSION['sess_en'] ?>";
 }
 //-->
 </script>
@@ -128,7 +128,7 @@ if($data_entry){
 }
 */
 if($data_entry) {
-  $TP_DRG="<a href=\"../diagnostics_tz/icd10_quicklist.php".URL_REDIRECT_APPEND."&sid=".$sid."&encounter=".$HTTP_SESSION_VARS['sess_en']."&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=false&backpath_diag=".urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&encounter_nr='.$encounter_nr)."\">$LDDiagnoses</a>";
+  $TP_DRG="<a href=\"../diagnostics_tz/icd10_quicklist.php".URL_REDIRECT_APPEND."&sid=".$sid."&encounter=".$_SESSION['sess_en']."&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=false&backpath_diag=".urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&encounter_nr='.$encounter_nr)."\">$LDDiagnoses</a>";
 }else{
 	$TP_DRG="<font color='#333333'>Diagnoses</font>";
 }
@@ -170,28 +170,28 @@ if($data_entry){
 }else{
 	$TP_BIRTHDX="<font color='#333333'>$LDBirthDetails</font>";
 }
-$TP_HISTORY="<a href=\"javascript:popRecordHistory('care_encounter',".$HTTP_SESSION_VARS['sess_en'].")\">$LDRecordsHistory</a>";
+$TP_HISTORY="<a href=\"javascript:popRecordHistory('care_encounter',".$_SESSION['sess_en'].")\">$LDRecordsHistory</a>";
 # Links to chart folder
-$TP_href_17='javascript:getinfo(\''.$HTTP_SESSION_VARS['sess_en'].'\')';
+$TP_href_17='javascript:getinfo(\''.$_SESSION['sess_en'].'\')';
 if($data_entry){
-	$TP_CHARTSFOLDER="<a href=\"javascript:getinfo('".$HTTP_SESSION_VARS['sess_en']."')\">$LDChartsRecords</a>";
+	$TP_CHARTSFOLDER="<a href=\"javascript:getinfo('".$_SESSION['sess_en']."')\">$LDChartsRecords</a>";
 }else{
 	$TP_CHARTSFOLDER="<font color='#333333'>$LDChartsRecords</font>";
 }
 # Links to patient registration data display
-$TP_PATREGSHOW="<a href=\"patient_register_show.php".URL_APPEND."&pid=".$HTTP_SESSION_VARS['sess_pid']."&from=$from&newdata=1&target=$target\">$LDShow $LDPatientRegister</a>";
+$TP_PATREGSHOW="<a href=\"patient_register_show.php".URL_APPEND."&pid=".$_SESSION['sess_pid']."&from=$from&newdata=1&target=$target\">$LDShow $LDPatientRegister</a>";
 $TP_PATREGUPDATE="<a href=\"patient_register.php".URL_APPEND."&pid=$pid&update=1\">$LDUpdate $LDPatientRegister</a>";
 
 # Links to medocs module
 /*if($data_entry){
-	$TP_MEDOCS="<a href=\"".$root_path."modules/medocs/show_medocs.php".URL_APPEND."&encounter_nr=".$HTTP_SESSION_VARS['sess_en']."&edit=$edit&from=$from&is_discharged=$is_discharged&target=$target\">$LDMedocs</a>";
+	$TP_MEDOCS="<a href=\"".$root_path."modules/medocs/show_medocs.php".URL_APPEND."&encounter_nr=".$_SESSION['sess_en']."&edit=$edit&from=$from&is_discharged=$is_discharged&target=$target\">$LDMedocs</a>";
 }else{
 	$TP_MEDOCS="<font color='#333333'>$LDMedocs</font>";
 }
 */
 # Links to pdf doc generator
 if($data_entry){
-	$TP_PRINT_PDFDOC="<a href=\"".$root_path."modules/pdfmaker/admission/admitdata.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']."\" target=_blank>$LDPrintPDFDoc</a>";
+	$TP_PRINT_PDFDOC="<a href=\"".$root_path."modules/pdfmaker/admission/admitdata.php".URL_APPEND."&enc=".$_SESSION['sess_en']."\" target=_blank>$LDPrintPDFDoc</a>";
 }else{
 	$TP_PRINT_PDFDOC="<font color='#333333'>$LDPrintPDFDoc</font>";
 }
@@ -201,7 +201,7 @@ if($data_entry){
 # If encounter_status empty or 'allow_cancel', show the cancel option link
 //if(!$enc_status['is_discharged']&&!$enc_status['in_ward']&&!$enc_status['in_dept']&&(empty($enc_status['encounter_status'])||$enc_status['encounter_status']=='allow_cancel')){
 if(!$data_entry&&($enc_status['encounter_status']!='cancelled')&&!$enc_status['is_discharged']){
-	$TP_xenc_BLK="<a href=\"javascript:cancelEnc('".$HTTP_SESSION_VARS['sess_en']."')\">$LDCancelThisAdmission</a>";
+	$TP_xenc_BLK="<a href=\"javascript:cancelEnc('".$_SESSION['sess_en']."')\">$LDCancelThisAdmission</a>";
 }else{
 	$TP_xenc_BLK="<font color='#333333'>$LDCancelThisAdmission</font>";
 }

@@ -46,8 +46,8 @@ require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 $buffer=$dept_obj->LDvar();
-if(isset($$buffer)&&!empty($$buffer)) $HTTP_SESSION_VARS['sess_dept_name']=$$buffer;
-	else $HTTP_SESSION_VARS['sess_dept_name']=$dept_obj->FormalName();
+if(isset($$buffer)&&!empty($$buffer)) $_SESSION['sess_dept_name']=$$buffer;
+	else $_SESSION['sess_dept_name']=$dept_obj->FormalName();
 
 # Create the encounter object
 include_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -58,7 +58,7 @@ $patientselected=FALSE;
 
 function clean_it(&$d)
 {
-	$d=strtr($d,"°!§$&/()=?`´+'#{}[]\^","~~~~~~~~~~~~~~~~~~~~~");
+	$d=strtr($d,"ï¿½!ï¿½$&/()=?`ï¿½+'#{}[]\^","~~~~~~~~~~~~~~~~~~~~~");
 	$d=str_replace("\"","~",$d);   //"
 	$d=str_replace("~","",$d);
 	return trim($d);
@@ -69,18 +69,18 @@ require_once($root_path.'include/inc_date_format_functions.php');
     
 
 if($mode=='search'||$mode=='paginate'){
-	# Initialize page´s control variables
+	# Initialize pageï¿½s control variables
 	if($mode!='paginate'){
 		# Reset paginator variables
 		$pgx=0;
 		$totalcount=0;
 		$odir='ASC';
 		$oitem='name_last';
-		$HTTP_SESSION_VARS['sess_searchkey']=$matchcode;
+		$_SESSION['sess_searchkey']=$matchcode;
 	}
 	# Paginator object
 	require_once($root_path.'include/care_api_classes/class_paginator.php');
-	$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+	$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 	# Load global configs
 	$GLOBAL_CONFIG=array();
@@ -104,7 +104,7 @@ if($mode=='search'||$mode=='paginate'){
 	$dbtable='care_op_med_doc';
 			
 	if($mode=='paginate'){
-		$s2=$HTTP_SESSION_VARS['sess_searchkey'];
+		$s2=$_SESSION['sess_searchkey'];
 	}else{
 		
 							
@@ -160,7 +160,7 @@ if($mode=='search'||$mode=='paginate'){
 									exit;
 								}
 		#Save the search condition for pagination routines
-		$HTTP_SESSION_VARS['sess_searchkey']=$s2;
+		$_SESSION['sess_searchkey']=$s2;
 	}
 														
 	$select_sql="SELECT o.*,  e.encounter_class_nr, p.name_last, p.name_first, p.date_birth, p.sex, d.name_formal, d.LD_var  AS \"LD_var\"";
@@ -182,7 +182,7 @@ if($mode=='search'||$mode=='paginate'){
 									$s2=str_replace("'","%'",$s2);
 									$s2=str_replace("~","'",$s2);
 									#Save the search condition for pagination routines
-									$HTTP_SESSION_VARS['sess_searchkey']=$s2;
+									$_SESSION['sess_searchkey']=$s2;
 									$sql2=$from_sql.$s2." AND o.encounter_nr=e.encounter_nr AND e.pid=p.pid AND o.dept_nr=d.nr";
 									$sql=$select_sql.$sql2.$order_sql;
 									//echo $sql;
@@ -256,7 +256,7 @@ if($mode=='search'||$mode=='paginate'){
 
 # Added for the common header top block
 
- $smarty->assign('sToolbarTitle',"$LDOrDocument :: $LDArchive (".$HTTP_SESSION_VARS['sess_dept_name'].")");
+ $smarty->assign('sToolbarTitle',"$LDOrDocument :: $LDArchive (".$_SESSION['sess_dept_name'].")");
 
  $smarty->assign('pbHelp',"javascript:gethelp('opdoc_arch.php','arch','$mode','$rows')");
 
@@ -267,7 +267,7 @@ if($mode=='search'||$mode=='paginate'){
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
- $smarty->assign('sWindowTitle',"$LDOrDocument :: $LDArchive (".$HTTP_SESSION_VARS['sess_dept_name'].")");
+ $smarty->assign('sWindowTitle',"$LDOrDocument :: $LDArchive (".$_SESSION['sess_dept_name'].")");
 
 $smarty->assign('sOnLoadJs','onLoad="if(window.focus) window.focus();"');
 

@@ -24,32 +24,56 @@ require_once($root_path.'include/care_api_classes/class_lab.php');
 $lab_obj=new Lab();
 
 # Load the date formatter */
-include_once($root_path.'include/inc_date_format_functions.php');
+function cleanString($wild) {
+    return ereg_replace("[^[:alnum:]+]","_",$wild);
+}
 
 if(isset($mode) && !empty($mode)) {
 	if($mode=='save'){
 	# Save the nr
 		if(empty($HTTP_POST_VARS['status'])) $HTTP_POST_VARS['status']=' ';
-	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$HTTP_POST_VARS['id'] = "_" . str_replace(" ","_",strtolower($HTTP_POST_VARS['name'])) . '__' . strtolower($HTTP_POST_VARS['group_id']);
-		$HTTP_POST_VARS['id'] = strtolower($HTTP_POST_VARS['id']);
-	$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
-	# Set to use the test params
-	$lab_obj->useTestParams();
-	# Point to the data array
+		$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
+		$HTTP_POST_VARS['id'] = "_" . cleanString(strtolower($HTTP_POST_VARS['name'])) . '__' . strtolower($HTTP_POST_VARS['group_id']);
+		$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
+		# Set to use the test params
+		$lab_obj->useTestParams();
+		# Point to the data array
 		$lab_obj->setDataArray($HTTP_POST_VARS);
 		
 		if($lab_obj->updateDataFromInternalArray($HTTP_POST_VARS['nr'])){
-	?>
-
-	<script language="JavaScript">
-	<!-- Script Begin
-	 window.opener.location.reload();
-	 window.close();
-	//  Script End -->
-	</script>
-
-	<?php   
+			if($lab_obj->deleteParamType($HTTP_POST_VARS['id'])) {
+				if(!empty($HTTP_POST_VARS['field_type']) && !empty($HTTP_POST_VARS['input_value'])) {
+					//i'm dealing with a drop down
+					if($HTTP_POST_VARS['field_type'] == 'drop_down') {
+						$value_type = explode(";",$HTTP_POST_VARS['input_value']);
+						$lab_obj->useTestParamsType();
+						foreach($value_type as $arrNr => $value) {
+							$tmp_array['input_value'] 	= $value;
+							$tmp_array['param_id'] 		= $HTTP_POST_VARS['id'];
+							$lab_obj->insertDataFromArray($tmp_array);
+					
+						}
+					//i'm dealing with ranged values
+					} else {
+						$lab_obj->useTestParamsType();
+						$paramValue = array (
+							'param_id' 		=> $HTTP_POST_VARS['id'],
+							'input_value'	=> $HTTP_POST_VARS['input_value']
+						);
+						$lab_obj->insertDataFromArray($paramValue);
+					}
+				}
+			}
+			?>
+		
+			<script language="JavaScript">
+			<!-- Script Begin
+			 window.opener.location.reload();
+			 window.close();
+			//  Script End -->
+			</script>
+		
+			<?php   
 			exit;
 		}
 		else echo $lab_obj->getLastQuery();
@@ -61,34 +85,51 @@ if(isset($mode) && !empty($mode)) {
 
 		if(empty($HTTP_POST_VARS['status'])) $HTTP_POST_VARS['status']=' ';
 		//gjergji : used to generate user proof param id's :)
-		$HTTP_POST_VARS['id'] = "_" . str_replace(" ","_",strtolower($HTTP_POST_VARS['name'])) . "__" . strtolower($HTTP_POST_VARS['group_id']);
-		$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Created ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+		$HTTP_POST_VARS['id'] = "_" . cleanString(strtolower($HTTP_POST_VARS['name'])) . '__' . strtolower($HTTP_POST_VARS['group_id']);
+		$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
+		$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Created ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
 		# Set to use the test params
 		$lab_obj->useTestParams();
 		# Point to the data array
-		//print_r($HTTP_POST_VARS);
 		$lab_obj->setDataArray($HTTP_POST_VARS);	
 		if($lab_obj->insertDataFromInternalArray()){
-
-	?>
-
-	<script language="JavaScript">
-	<!-- Script Begin
-	window.opener.location.reload();
-	window.close();
-	//  Script End -->
-	</script>
-
-	<?php    
-		exit;
+			if(!empty($HTTP_POST_VARS['field_type']) && !empty($HTTP_POST_VARS['input_value'])) {
+				//i'm dealing with a drop down
+				if($HTTP_POST_VARS['field_type'] == 'drop_down') {
+					$value_type = explode(";",$HTTP_POST_VARS['input_value']);
+					$lab_obj->useTestParamsType();
+					foreach($value_type as $arrNr => $value) {
+						$tmp_array['input_value'] 	= $value;
+						$tmp_array['param_id'] 		= $HTTP_POST_VARS['id'];
+						$lab_obj->insertDataFromArray($tmp_array);
+				
+					}
+				//i'm dealing with ranged values
+				} else {
+					$lab_obj->useTestParamsType();
+					$paramValue = array (
+						'param_id' 		=> $HTTP_POST_VARS['id'],
+						'input_value'	=> $HTTP_POST_VARS['input_value']
+					);
+					$lab_obj->insertDataFromArray($paramValue);
+				}
+			}
+			?>
+		
+			<script language="JavaScript">
+			<!-- Script Begin
+			window.opener.location.reload();
+			window.close();
+			//  Script End -->
+			</script>
+		
+			<?php    
+				exit;
 	}
-	else echo $lab_obj->getLastQuery();
-	# end of if(mode==new)		
+		else echo $lab_obj->getLastQuery();
+		# end of if(mode==new)		
 	}
 }
-//$pnames=array($LDParameter,$LDMsrUnit,$LDMedian,$LDUpperBound,$LDLowerBound,$LDUpperCritical,$LDLowerCritical,$LDUpperToxic,$LDLowerToxic,$LDID,$LDShow);
-//$pitems=array('name','msr_unit','median','hi_bound','lo_bound','hi_critical','lo_critical','hi_toxic','lo_toxic','id','status');
 
 # Get the test parameter values
 if($tparam=&$lab_obj->getTestParam($nr)){
@@ -97,7 +138,6 @@ if($tparam=&$lab_obj->getTestParam($nr)){
 }else{
 	$tp=false;
 }
-
 //gjergji : i get the groups here...
 $tgroups=&$lab_obj->TestActiveGroups();	
 ?>
@@ -105,7 +145,7 @@ $tgroups=&$lab_obj->TestActiveGroups();
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
- <TITLE>Konfigurimi i Parametrave</TITLE>
+ <TITLE>Parameter Management</TITLE>
 
 <script language="javascript" name="j1">
 <!--
@@ -185,6 +225,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
     <li class="TabbedPanelsTab" tabindex="0"><?php echo $LD01Moth ?></li>
     <li class="TabbedPanelsTab" tabindex="0"><?php echo $LD112Month ?></li>
     <li class="TabbedPanelsTab" tabindex="0"><?php echo $LD114Years ?></li>
+    <li class="TabbedPanelsTab" tabindex="0"><?php echo $LDInputManagement ?></li>
   </ul>
     <div class="TabbedPanelsContentGroup">
 <?php
@@ -379,7 +420,33 @@ $toggle=0;
 			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="lo_toxic_c" size=15 maxlength=15 value="'.$tp['lo_toxic_c'].'">&nbsp;
 			</td></tr></table></div>
 			';  
-?>
+	//parameter types				 	
+	echo '<div class="TabbedPanelsContent"><table border="0" cellpadding=2 cellspacing=1>	
+	<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDInputType.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b">
+			<select name="field_type" size="1">
+  				<option value="drop_down"'; if ($tp['field_type']=='drop_down') echo "selected"; echo '>'.$LDInputTypeDropDown.'</option>
+  				<option value="input_box"'; if ($tp['field_type']=='input_box') echo "selected"; echo '>'.$LDInputTypeInputBox.'</option>
+  				<option value="limited"'; if ($tp['field_type']=='limited') echo "selected"; echo '>'.$LDInputTypeLimited.'</option>
+			</select>
+			&nbsp;
+			</td></tr>
+			';
+	if ($tp['field_type']=='drop_down') {
+		do {
+			$inputValues .= $tp['input_value'] . ";";
+		} while($tp=$tparam->FetchRow());
+	} else {
+		$inputValues = $tp['input_value'];
+	}
+	echo '<tr><td  class="a12_b" bgcolor="#fefefe">&nbsp;'.$LDInputValue.'</td>
+			<td bgcolor="'.$bgc.'"  class="a12_b"><input type="text" name="input_value" size=15 maxlength=15 value="'.$inputValues.'">&nbsp;<br>
+			' . $LDInputHint . '</td></tr>
+			';
+	echo '</table></div>
+			'; 
+	
+	?>
 </div>
 
 <script type="text/javascript">

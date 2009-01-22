@@ -23,7 +23,7 @@ if($type&&$medicine&&$dosage&&$application_type_nr&&$application_by){
 								
 								if($imm_obj->insertDataFromInternalArray()) 
 									{
-										header("location:".$thisfile.URL_REDIRECT_APPEND."&mode=show&target=$target&pid=".$HTTP_SESSION_VARS['sess_pid']);
+										header("location:".$thisfile.URL_REDIRECT_APPEND."&mode=show&target=$target&pid=".$_SESSION['sess_pid']);
 										exit;
 									}
 									else echo "<br>$LDDbNoSave";
@@ -34,7 +34,7 @@ if($type&&$medicine&&$dosage&&$application_type_nr&&$application_by){
 								$imm_obj->setWhereCond("nr=$imm_nr");
 								if($imm_obj->updateDataFromInternalArray($dept_nr)) 
 									{
-										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&pid=".$HTTP_SESSION_VARS['sess_pid']);
+										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&pid=".$_SESSION['sess_pid']);
 										exit;
 									}
 									else echo "$sql<br>$LDDbNoUpdate";

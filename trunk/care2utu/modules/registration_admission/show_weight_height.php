@@ -39,7 +39,7 @@ if(!isset($mode)){
 	# Non standard time format
 	$HTTP_POST_VARS['msr_time']=date('H.i');
 	$HTTP_POST_VARS['create_time']=date('YmdHis'); # Create the timestamp to group the values
-	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
 
 	if($weight||$height||$head_c){
 		# Set to no redirect
@@ -70,7 +70,7 @@ if(!isset($mode)){
 			include('./include/save_admission_data.inc.php');
 		}
 	
-		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
+		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&allow_update=1&pid=".$_SESSION['sess_pid']);
 		exit;
 	}
 }
@@ -84,7 +84,7 @@ if($mode=='show'){
 		FROM 	care_encounter AS e, 
 					care_person AS p, 
 					care_encounter_measurement AS m
-		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." 
+		WHERE p.pid=".$_SESSION['sess_pid']." 
 			AND p.pid=e.pid 
 			AND e.encounter_nr=m.encounter_nr  
 			AND (m.msr_type_nr=6 OR m.msr_type_nr=7 OR m.msr_type_nr=9)
@@ -116,7 +116,7 @@ $subtitle=$LDMeasurements;
 # Set the type of "notes"
 $notestype='msr';
 
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

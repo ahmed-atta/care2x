@@ -51,14 +51,14 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 	{
 		if($user->isNotLocked())
 		{
-			$HTTP_SESSION_VARS['sess_login_userid']=$user->LoginName();
-			$HTTP_SESSION_VARS['sess_login_username']=$user->Name();
+			$_SESSION['sess_login_userid']=$user->LoginName();
+			$_SESSION['sess_login_username']=$user->Name();
 			# Init the crypt object, encrypt the password, and store in cookie
     			$enc_login = new Crypt_HCEMD5($key_login,makeRand());
 
 			$cipherpw=$enc_login->encodeMimeSelfRand($keyword);
 
-			$HTTP_SESSION_VARS['sess_login_pw']=$cipherpw;
+			$_SESSION['sess_login_pw']=$cipherpw;
 
 			# Set the login flag
 			setcookie('ck_login_logged'.$sid,'true',0,'/');

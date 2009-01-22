@@ -15,8 +15,8 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $breakfile='technik.php'.URL_APPEND;
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+$returnfile=$_SESSION['sess_file_return'].URL_APPEND;
+$_SESSION['sess_file_return']=basename(__FILE__);
 
 //$db->debug=1;
 
@@ -55,8 +55,8 @@ $dbtable='care_tech_repair_done';
 							0,
 							'".date('Ymd')."',
 							'pending',
-							'Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-							'".$HTTP_SESSION_VARS['sess_user_name']."',
+							'Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n',
+							'".$_SESSION['sess_user_name']."',
 							'".date('YmdHis')."'
 							)";
         $db->BeginTrans();

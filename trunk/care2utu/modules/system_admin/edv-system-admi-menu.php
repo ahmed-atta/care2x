@@ -55,6 +55,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   </tr>
   <tr>
 	<td bgcolor="#ffffff">
+	    &nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><FONT  color="#0000cc" FACE="verdana,arial" size=2><a href="edv_general_settings.php<?php echo URL_APPEND ?>" target="SYSADMIN_WFRAME"> <?php echo $LDGeneralSettings; ?></a></FONT><br>
 		&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><FONT  color="#0000cc" FACE="verdana,arial" size=2><a href="edv_general_info_quick.php<?php echo URL_APPEND ?>" target="SYSADMIN_WFRAME"> <?php echo $LDQuickInformer; ?></a></FONT><br>
 		&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><FONT  color="#0000cc" FACE="verdana,arial" size=2><a href="edv_paginator_maxrows.php<?php echo URL_APPEND ?>" target="SYSADMIN_WFRAME"> <?php echo $LDPaginatorMaxRows; ?></a></FONT></td>
   </tr>
@@ -74,8 +75,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   </tr>
   <tr>
 	<td bgcolor="#ffffff">
-		&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><FONT  color="#0000cc" FACE="verdana,arial" size=2><a href="edv_user_access_edit.php?sid=<?php echo $sid."&lang=$lang&src=sysadmin" ?>" target="SYSADMIN_WFRAME"> <?php echo $LDCreateEditLock; ?></a></FONT><br>
-		&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><FONT  color="#0000cc" FACE="verdana,arial" size=2><a href="edv_system_timeout.php?sid=<?php echo $sid."&lang=$lang&src=sysadmin" ?>" target="SYSADMIN_WFRAME"> <?php echo $LDTimeOut; ?></a></FONT></td>
+		&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><FONT  color="#0000cc" FACE="verdana,arial" size=2><a href="edv_user_access_edit.php?sid=<?php echo $sid."&lang=".$lang."&src=sysadmin" ?>" target="SYSADMIN_WFRAME"> <?php echo $LDCreateEditLock; ?></a></FONT><br>
+		&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><FONT  color="#0000cc" FACE="verdana,arial" size=2><a href="edv_system_timeout.php?sid=<?php echo $sid."&lang=".$lang."&src=sysadmin" ?>" target="SYSADMIN_WFRAME"> <?php echo $LDTimeOut; ?></a></FONT></td>
   </tr>
   <tr>
 	<td bgcolor="#e9e9e9" valign="top">
@@ -84,11 +85,11 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   </tr>
   <tr>
 	<td bgcolor="#ffffff"><FONT  color="#0000cc" FACE="verdana,arial" size=2>
-	&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><a href="edv_news_display.php?sid=<?php echo $sid."&lang=$lang" ?>" target="SYSADMIN_WFRAME"> <?php echo $LDNewsDisplay ?></a></FONT></td>
+	&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><a href="edv_news_display.php?sid=<?php echo $sid."&lang=".$lang ?>" target="SYSADMIN_WFRAME"> <?php echo $LDNewsDisplay ?></a></FONT></td>
   </tr>
   <tr>
 	<td bgcolor="#ffffff"><FONT  color="#0000cc" FACE="verdana,arial" size=2>
-	&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><a href="edv_system_format_date.php?sid=<?php echo $sid."&lang=$lang" ?>" target="SYSADMIN_WFRAME"> <?php echo $LDSetDateFormat ?></a></FONT></td>
+	&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>><a href="edv_system_format_date.php?sid=<?php echo $sid."&lang=".$lang ?>" target="SYSADMIN_WFRAME"> <?php echo $LDSetDateFormat ?></a></FONT></td>
   </tr>
 <!--   <tr>
 	<td bgcolor="#e9e9e9" valign="top">
@@ -167,13 +168,13 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   </tr>
   <tr>
  	<td bgcolor="#ffffff"><FONT  color="#0000cc" FACE="verdana,arial" size=2>&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>>
-	<a href="../<?php echo $strDbAdminUrl ?>/index.php?sid=<?php echo $sid."&lang=$lang" ?>" target="SYSADMIN_WFRAME"><?php  echo $strDbAdminItem ?>
+	<a href="../<?php echo $strDbAdminUrl ?>/index.php?sid=<?php echo $sid."&lang=".$lang ?>" target="SYSADMIN_WFRAME"><?php  echo $strDbAdminItem ?>
 	</a></FONT><br>
 	<FONT  color="#0000cc" FACE="verdana,arial" size=2>&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>>
 	<a href="edv_database_maintanance.php" target="SYSADMIN_WFRAME">database Maintanance
 	</a></FONT>
 	</td>
-<!--  	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><a href="phpmyadmin-start.php?sid=<?php echo $sid."&lang=$lang" ?>"><?php echo $LDMySQLManage ?></a></b> </FONT></td>
+<!--  	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><a href="phpmyadmin-start.php?sid=<?php echo $sid."&lang=".$lang ?>"><?php echo $LDMySQLManage ?></a></b> </FONT></td>
  -->
   </tr>
   <tr>
@@ -181,10 +182,10 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   </tr>
   <tr>
  	<td bgcolor="#ffffff"><FONT  color="#0000cc" FACE="verdana,arial" size=2>&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>>
-	<a href="edv_xmlrpc_interface_weberp.php?sid=<?php echo $sid."&lang=$lang" ?>" target="SYSADMIN_WFRAME"><?php  echo 'Configuration';?>
+	<a href="edv_xmlrpc_interface_weberp.php?sid=<?php echo $sid."&lang=".$lang ?>" target="SYSADMIN_WFRAME"><?php  echo 'Configuration';?>
 	</a></FONT><br>
 	</td>
-<!--  	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><a href="phpmyadmin-start.php?sid=<?php echo $sid."&lang=$lang" ?>"><?php echo $LDMySQLManage ?></a></b> </FONT></td>
+<!--  	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><a href="phpmyadmin-start.php?sid=<?php echo $sid."&lang=".$lang ?>"><?php echo $LDMySQLManage ?></a></b> </FONT></td>
  -->
   </tr>
 
@@ -196,7 +197,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   </tr>
    <tr>
 	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><img <?php echo createComIcon($root_path,'update.gif','0','absmiddle') ?>></b> </FONT></td>
-	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><a href="<?php echo $root_path; ?>/modules/news/newscolumns.php?sid=<?php echo $sid."&lang=$lang&target=edp&title=$LDEDP" ?>"><?php echo $LDNewsTxt ?></a></b> </FONT></td>
+	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><a href="<?php echo $root_path; ?>/modules/news/newscolumns.php?sid=<?php echo $sid."&lang=".$lang."&target=edp&title=".$LDEDP ?>"><?php echo $LDNewsTxt ?></a></b> </FONT></td>
   </tr>
   <tr>
 	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><img <?php echo createComIcon($root_path,'update.gif','0','absmiddle') ?>></b> </FONT></td>

@@ -144,7 +144,9 @@ function popPic(pid,nm){
               <th bgcolor="#999933" scope="col"><div align="left"></div></th>
               <th bgcolor="#999933" scope="col"><div align="left"></div></th>
             </tr>
+            
 			<?php showPriceListTable(); ?>
+          
           </table>
           <hr>
       	  </ul>

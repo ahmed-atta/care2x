@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
+* elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -14,20 +14,20 @@ $lang_tables[]='prompt.php';
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-if(!$encoder) $encoder=$HTTP_SESSION_VARS['sess_user_name'];
+if(!$encoder) $encoder=$_SESSION['sess_user_name'];
 
 //$breakfile="amb_clinic_patients.php".URL_APPEND."&edit=$edit&dept_nr=$dept_nr";
 $breakfile="javascript:window.close();";
 //if($backpath) $breakfile=urldecode($backpath).URL_APPEND;
 $thisfile=basename(__FILE__);
 
-# Load date formatter 
+# Load date formatter
 require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_tz_diagnostics.php');
 $enc_obj=new Encounter;
-	
-if($enc_obj->loadEncounterData($pn)){		
+
+if($enc_obj->loadEncounterData($pn)){
 	//$db->debug=1;
 
 	if(($mode=='release')&&!(isset($lock)||$lock)){
@@ -41,7 +41,7 @@ if($enc_obj->loadEncounterData($pn)){
 						}
 						 break;
 			default: $released=$enc_obj->Discharge($pn,$relart,$date,$time);
-		}	
+		}
 		if($released){
 			# If discharge note present
 			if(!empty($info)){
@@ -52,7 +52,7 @@ if($enc_obj->loadEncounterData($pn)){
 				$data_array['personell_name']=$encoder;
 				$enc_obj->saveDischargeNotesFromArray($data_array);
 			}
-			
+
 			# If patient died
 			//$db->debug=1;
 			if($relart==7){
@@ -72,16 +72,16 @@ if($enc_obj->loadEncounterData($pn)){
 			exit;
 		}
 	}
-			
+
 		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 		$GLOBAL_CONFIG=array();
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-		$glob_obj->getConfig('patient_%');	
-		$glob_obj->getConfig('person_%');	
-		
+		$glob_obj->getConfig('patient_%');
+		$glob_obj->getConfig('person_%');
+
 		$result=&$enc_obj->encounter;
-		
-		/* Check whether config foto path exists, else use default path */			
+
+		/* Check whether config foto path exists, else use default path */
 		$default_photo_path='fotos/registration';
 		$photo_filename=$result['photo_filename'];
 		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
@@ -90,13 +90,13 @@ if($enc_obj->loadEncounterData($pn)){
 		$discharge_types=&$enc_obj->getDischargeTypesData();
 
 		if(!isset($dept)||empty($dept)){
-			# Create nursing notes object 
+			# Create nursing notes object
 			include_once($root_path.'include/care_api_classes/class_department.php');
 			$dept_obj= new Department;
 			$dept=$dept_obj->FormalName($dept_nr);
 		}
 	}
-	
+
 # Start Smarty templating here
  /**
  * LOAD Smarty
@@ -127,21 +127,21 @@ if($enc_obj->loadEncounterData($pn)){
  # Collect extra javascript code
 
   if(!$released){
- 
+
 	ob_start();
 
 ?>
 
 <script language="javascript">
-<!-- 
+<!--
 
 function pruf(d)
-{ 
+{
 	if(!d.sure.checked){
 		return false;
 	}else{
-		if(!d.encoder.value){ 
-			alert("<?php echo $LDAlertNoName ?>"); 
+		if(!d.encoder.value){
+			alert("<?php echo $LDAlertNoName ?>");
 			d.encoder.focus();
 			return false;
 		}
@@ -177,7 +177,7 @@ if(($mode=="release")&&($released)){
 	<html><head>
 	<script  language="javascript">
 	window.opener.location.replace(\''.$backpath.'\');
-	window.close();	
+	window.close();
 	</script></head></html>';
 	die();
 	$smarty->assign('sPrompt',$LDJustReleased);
@@ -190,6 +190,8 @@ $smarty->assign('LDLocation',"$LDClinic/$LDDept");
 $smarty->assign('sLocation',$dept);
 $smarty->assign('LDDate',$LDDate);
 
+$temp_image="<a href=\"javascript:getARV('".$patient['pid']."','".$patient['encounter_nr']."')\"><img ".createComIcon($root_path,'ball_gray.png','0','',TRUE)." alt=\"inARV\"></a>";
+$smarty->assign('sARVIcon', 'TEST');
 	if($released){
 		$smarty->assign('released',TRUE);
 		$smarty->assign('x_date',nl2br($x_date));
@@ -255,7 +257,7 @@ $smarty->assign('LDDate',$LDDate);
 		$smarty->assign('sValidatorCheckBox','<input type="checkbox" name="sure" value="1">');
 		$smarty->assign('LDYesSure',$LDYesSure);
 	}
-	
+
 	$sTemp = '<input type="hidden" name="mode" value="release">
 						';
 

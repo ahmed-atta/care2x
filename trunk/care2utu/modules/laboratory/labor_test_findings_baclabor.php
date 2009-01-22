@@ -126,8 +126,8 @@ require_once($root_path.'include/inc_date_format_functions.php');
 										   '".$findings_final."','".$entry_nr."','".formatDate2Std($rec_date,$date_format)."',
 										   '".$type_general."','".$resist_anaerob."',
 										   '".$resist_aerob."','".$findings."','".$doctor_id."','".date('Y-m-d')."',
-										   '".date('H:i')."','initial','Create: ".date('Y-m.d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										   '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   '".date('H:i')."','initial','Create: ".date('Y-m.d H:i:s')." = ".$_SESSION['sess_user_name']."\n',
+										   '".$_SESSION['sess_user_name']."',
 										   '".date('YmdHis')."'
 										   )";						 
 
@@ -155,8 +155,8 @@ require_once($root_path.'include/inc_date_format_functions.php');
 										   type_general = '".$type_general."', resist_anaerob ='".$resist_anaerob."', resist_aerob = '".$resist_aerob."', 
 										   findings = '".$findings."', doctor_id = '', findings_date = '".date('Y-m-d')."', 
 										   findings_time = '".date('H:i')."',  
-										   history =".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   history =".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										   modify_id = '".$_SESSION['sess_user_name']."',
 										   modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '$batch_nr'";	
 										   							  							
@@ -179,8 +179,8 @@ require_once($root_path.'include/inc_date_format_functions.php');
 			 
 							      $sql="UPDATE care_test_findings_".$db_request_table." SET 
 										   status='done', 
-										   history =".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   history =".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										   modify_id = '".$_SESSION['sess_user_name']."',
 										   modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
 										  							
@@ -189,8 +189,8 @@ require_once($root_path.'include/inc_date_format_functions.php');
 									//echo $sql;
 							          $sql="UPDATE care_test_request_".$db_request_table." SET 
 										   status='done',
-										   history =".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   history =".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										   modify_id = '".$_SESSION['sess_user_name']."',
 										   modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
 							          if($ergebnis=$enc_obj->Transact($sql))

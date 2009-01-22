@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
+* elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -23,7 +23,7 @@ if(empty($HTTP_COOKIE_VARS[$local_user.$sid])){
 /**
 * Set default values if not available from url
 */
-if (!isset($station)||empty($station)) { $station=$HTTP_SESSION_VARS['sess_nursing_station'];} # Default station must be set here !!
+if (!isset($station)||empty($station)) { $station=$_SESSION['sess_nursing_station'];} # Default station must be set here !!
 if(!isset($pday)||empty($pday)) $pday=date('d');
 if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
@@ -38,41 +38,80 @@ $forwardfile="location:nursing-station.php".URL_REDIRECT_APPEND.$fileappend;
 require_once($root_path.'include/care_api_classes/class_ward.php');
 $ward_obj= new Ward;
 
-if(isset($mode)&&($mode=='transferbed'||$mode=='transferward')){	
-	
+if(isset($mode)&&($mode=='transferbed'||$mode=='transferward')){
+
 	$date=date('Y-m-d');
 	$time=date('H:i:s');
-	
+
 	# Determine the reason for temporary discharge
 	if($mode=='transferward'){
 		$dis_type=4; # transfer of ward
 	}else{
 		$dis_type=6; # transfer of bed
 	}
-	
+
 	# First, discharge the patient from the current assignment
-	if($ward_obj->DischargeFromWard($pn,$dis_type,$date,$time)){ 
-	
+	if ($ward_nr==-1)
+	{
+		//transfer from station to ward
+		//echo 'transfer from station to ward';
+		//echo 'from: '.$dept_nr;
+		//echo 'to: ward '.$trwd;
+
+		require_once($root_path.'include/care_api_classes/class_encounter.php');
+		$enc_obj= new Encounter;
+
+		if($enc_obj->DischargeFromDept($pn,8,$date,$time))
+		{
+			//echo 'erfolgreich discharged';
+
+		}else echo 'DischargeFromDept failed.';
+
+
+		$forwardfile="location:amb_clinic_patients.php".URL_REDIRECT_APPEND.$fileappend;
+
+
+		echo 'replace ward from station pn='.$pn;
+		if($ward_obj->ReplaceWard($pn,$trwd,2)){
+			//echo 'erfolgreich angemeldet.';
+			header($forwardfile);
+			exit;
+		}
+		else
+		{
+			echo 'ReplaceWard failed.';
+		}
+
+
+
+
+	}else
+	{
+	//transfer from ward to ward
+		if($ward_obj->DischargeFromWard($pn,$dis_type,$date,$time)){
+
 		switch($mode){
-  			case 'transferbed' : 
-			{
+  			case 'transferbed' :
+			{	echo 'case transferbed ***';
 				# Assign to ward,room and bed
 				if($ward_obj->AdmitInWard($pn,$ward_nr,$rm,$bd)){
 					//echo "ok";
 					$ward_obj->setAdmittedInWard($pn,$ward_nr,$rm,$bd);
 					header($forwardfile);
 					exit;
-				}	
+				}
 				break;
 			}
-			case 'transferward': 
+			case 'transferward':
 			{
-				if($ward_obj->ReplaceWard($pn,$trwd)){
+
+				if($ward_obj->ReplaceWard($pn,$trwd,1)){
 					header($forwardfile);
 					exit;
 				}
 				break;
 			}
+		}
 		}
 	}
 }else{
@@ -98,7 +137,7 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10}
 </style>
 </HEAD>
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 <table border=0>

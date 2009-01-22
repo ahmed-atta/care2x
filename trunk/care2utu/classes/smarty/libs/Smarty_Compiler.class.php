@@ -39,7 +39,7 @@
  * @package Smarty
  */
 
-/* $Id: Smarty_Compiler.class.php,v 1.1 2006/01/13 13:20:48 irroal Exp $ */
+/* $Id: Smarty_Compiler.class.php,v 1.2 2008/12/09 15:05:41 andi Exp $ */
 
 /**
  * Template compiling class
@@ -1915,11 +1915,11 @@ class Smarty_Compiler extends Smarty {
                 break;
 
             case 'server':
-                $compiled_ref = ($this->request_use_auto_globals) ? '$_SERVER' : "\$GLOBALS['HTTP_SERVER_VARS']";
+                $compiled_ref = ($this->request_use_auto_globals) ? '$_SERVER' : "\$_SESSION"; // \$GLOBALS['HTTP_SERVER_VARS']";
                 break;
 
             case 'session':
-                $compiled_ref = ($this->request_use_auto_globals) ? '$_SESSION' : "\$GLOBALS['HTTP_SESSION_VARS']";
+                $compiled_ref = ($this->request_use_auto_globals) ? '$_SESSION' : "\$_SESSION"; // \$GLOBALS['HTTP_SESSION_VARS']";
                 break;
 
             /*

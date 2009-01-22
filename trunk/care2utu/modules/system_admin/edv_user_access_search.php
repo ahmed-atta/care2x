@@ -22,8 +22,8 @@ require($root_path.'include/inc_accessplan_areas_functions.php');
 require_once($root_path.'include/inc_config_color.php');
 
 $breakfile='edv.php?sid='.$sid.'&lang='.$lang;
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+$returnfile=$_SESSION['sess_file_return'].URL_APPEND;
+$_SESSION['sess_file_return']=basename(__FILE__);
 
 $thisfile=basename(__FILE__);
 
@@ -137,11 +137,11 @@ function gethelp(x,s,x1,x2,x3)
 					<td><FONT    SIZE=1  FACE=Arial>".$zeile['create_id']."</td>";
             echo "
 					<td><FONT    SIZE=1  FACE=verdana,Arial>
-					<a href=edv_user_access_edit.php?sid=$sid&lang=$lang&mode=edit&userid=".str_replace(' ','+',$zeile['login_id'])." title=\"$LDChange\"> $LDInitChange</a> \n
-			<a href=edv_user_access_lock.php?sid=$sid&lang=$lang&itemname=".str_replace(' ','+',$zeile['login_id'])." ";
+					<a href=edv_user_access_edit.php?sid=".$sid."&lang=".$lang."&mode=edit&userid=".str_replace(' ','+',$zeile['login_id'])." title=\"$LDChange\"> $LDInitChange</a> \n
+			<a href=edv_user_access_lock.php?sid=".$sid."&lang=".$lang."&itemname=".str_replace(' ','+',$zeile['login_id'])." ";
 			if ($zeile['lockflag']) echo "title=\"$LDUnlock\" > $LDInitUnlock"; else echo "title=\"$LDLock\"> $LDInitLock";
 			echo "</a> \n
-			<a href=edv_user_access_delete.php?sid=$sid&lang=$lang&itemname=".str_replace(' ','+',$zeile['login_id'])." title=\"$LDDelete\">	$LDInitDelete</a> </td>";
+			<a href=edv_user_access_delete.php?sid=".$sid."&lang=".$lang."&itemname=".str_replace(' ','+',$zeile['login_id'])." title=\"$LDDelete\">	$LDInitDelete</a> </td>";
 			echo "</tr>";
         };
         echo "

@@ -199,7 +199,7 @@ function pruf(d)
 }
 function show_order(d,o)
 {
-	urlholder="products-archive-orderlist-showcontent.php?sid=<?php echo "$sid&lang=$lang&userck=$userck"; ?>&cat=<?php echo $cat ?>&dept="+d+"&order_nr="+o;
+	urlholder="products-archive-orderlist-showcontent.php?sid=<?php $sid."&lang=".$lang."&userck=".$userck ?>&cat=<?php echo $cat ?>&dept="+d+"&order_nr="+o;
 	window.location.href=urlholder;
 	}
 

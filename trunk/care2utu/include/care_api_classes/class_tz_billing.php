@@ -228,6 +228,8 @@ class Bill extends Encounter {
     global $db;
     $this->debug=false;
     ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
+    $PRESCRIPTION_GIVEN=FALSE;
+    $LABORTORY_GIVEN=FALSE;
     if ($this->debug) echo "<br><b>class_tz_billing::GetPendingObjects($encounter_nr)</b><br>";
     // prescription:
     // read all items out of the prescription table where no bill_number is given for this encounter
@@ -237,7 +239,7 @@ class Bill extends Encounter {
                   where bill_number = 0 AND encounter_nr=".$encounter_nr;
     $this->result=$db->Execute($this->sql);
     if ($this->result->RecordCount()>0)
-      return TRUE;
+      $PRESCRIPTION_GIVEN=TRUE;
 
     //laboratory:
     // read all items out of the laboratory table where no bill_number is given for this encounter
@@ -249,9 +251,12 @@ class Bill extends Encounter {
 		// echo $this->sql;
     $this->result=$db->Execute($this->sql);
     if ($this->result->RecordCount()>0)
-      return TRUE;
+      $LABORTORY_GIVEN = TRUE;
 
-    return FALSE; // We have nothing to do... no pending issues in the tables!
+	if ($LABORTORY_GIVEN===TRUE && $LABORTORY_GIVEN ===TRUE)
+		return TRUE;
+	else
+    	return FALSE; // We have nothing to do... no pending issues in the tables!
 
   }
 
@@ -376,7 +381,7 @@ class Bill extends Encounter {
   }
   	function StoreToBill($encounter_nr, $bill_number){
 	  global $db;
-	  $this->debug=false;
+	  $this->debug=true;
 	  if ($this->debug) echo "<b>class_tz_billing::StoreToBill(encounter_nr: $encounter_nr, bill_number: $bill_number)</b><br>";
 	  ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
     // do we have pending issues of prescriptions?
@@ -571,6 +576,7 @@ class Bill extends Encounter {
 	{
 		$this->sql="INSERT INTO care_tz_billing_archive SET nr='balanced".$this->row['nr']."', encounter_nr=".$this->row['encounter_nr'].", first_date=".time().", creation_date=".time();
 		$this->result = $db->Execute($this->sql);
+		//TODO: Please check that this is ok or not. there will be all is_* (is_labtest) etc. set to 0 - can that be true? R.M.
 		$this->sql="INSERT INTO care_tz_billing_archive_elem SET nr='balanced".$this->row['nr']."', date_change=".time().", is_labtest=0, is_medicine=0, is_comment=0, is_paid=1, amount=1, price=0, balanced_insurance=".$value.", insurance_id=".$insurance_id.", item_number=0, prescriptions_nr=0";
 		$this->result = $db->Execute($this->sql);
 		return true;
@@ -643,7 +649,7 @@ class Bill extends Encounter {
   	  $sql_where = " AND is_medicine=1 ";
 
   	if ($what_kind_of=="laboratory")
-  	  $sql_where = " AND is_labtest=1 ";
+  	  $sql_where = " AND is_labtest<>0 ";
 
 
   	$this->sql="SELECT * FROM care_tz_billing_archive_elem
@@ -658,7 +664,7 @@ class Bill extends Encounter {
   	$debug=false;
   	($debug) ? $db->debug=true : $db->debug=false;
 
-  	$this->sql="SELECT a.*, b.partcode FROM care_tz_billing_archive_elem a
+  	$this->sql="SELECT a.*, b.item_number FROM care_tz_billing_archive_elem a
 				inner join care_tz_drugsandservices b on a.item_number = b.item_id where nr=$nr";
 
  	return $db->Execute($this->sql);
@@ -676,7 +682,7 @@ class Bill extends Encounter {
   	  $sql_where = " AND is_medicine=1 ";
 
   	if ($what_kind_of=="laboratory")
-  	  $sql_where = " AND is_labtest=1 ";
+  	  $sql_where = " AND is_labtest<>0 ";
 
 
   	$this->sql="SELECT * FROM ".$this->tbl_bill_elements."
@@ -838,27 +844,37 @@ class Bill extends Encounter {
 	    // Load the encounter data:
 	    $enc_data = $enc_obj->loadEncounterData($enc_number);
 		echo ($printout) ? '<table width="100%"  border="0" cellspacing=1 cellpadding=0 align="center" >' : '<table width="100%" border="0" cellspacing=1 cellpadding=0 >';
-  	  echo '<tr><td></td><td width="40%"><b><table border=0 width="100%" align="left"><tr><td align="center"><b>'.$bill_head. '</td></tr></table></td><td align="right"><img src="../../'.$bill_logo.'" border=0 align="absmiddle" alt=""></td></tr>	' ;
+  	  echo '<tr><td></td></td><td width="40%"><b><table border=0 width="100%" align="left"><tr><td align="center"><b>'.$bill_head. '</td></tr></table></td><td align="right"><img src="../../'.$bill_logo.'" border=0 align="absmiddle" alt=""></td></tr>	' ;
 
   	  echo ($printout) ? '<table width="200"  border="0" cellspacing=1 cellpadding=0 >' : '<table width="100%"  border="0" cellspacing=1 cellpadding=0 >';
 
-  	  echo '<tr>
+  	  echo '
+  	  		<tr><td></td></tr>
+
   				<td class="headline"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4"><b>'.$LDBatchFileNr.'</b></font></span></span></td>
   					<td class="headline"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$encoded_batch_number.'</font></span></span></b></td>
 
-  				</tr>
+  				</tr>'
+  				;
+  				/*
   				<tr>
   					<td class="headline"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">Admission-Nr.:</font></span></span></td>
   					<td bgcolor="#ffffee" class="vi_data"><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$enc_number.'</font></span></span></b></td>
   				</tr>
-  				<tr>
-  					<td class="headline"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">Surname/Ukoo:</font></span></span></td>
-  					<td bgcolor="#ffffee" class="vi_data"><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$enc_obj->LastName($enc_number).'</font></span></span></b></td>
-  				</tr>
+  				*/
+  	 echo '			<tr>
+  					<td class="headline"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">Patient Names:</font></span></span></td>
+  					<td bgcolor="#ffffee" class="vi_data"><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$enc_obj->LastName($enc_number).', '.$enc_obj->FirstName($enc_number).'</font></span></span></b></td>
+  				</tr>';
+
+  				/*
   				<tr>
   					<td class="headline"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">First name:</font></span></span></td>
   					<td bgcolor="#ffffee" class="vi_data"><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$enc_obj->FirstName($enc_number).'</font></span></span></td>
-  				</tr>
+  				</tr>'
+  				;
+  				*/
+  				/*
   				<tr>
   					<td class="headline"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">Date of birth:</font></span></span></td>
   					<td bgcolor="#ffffee" class="vi_data"><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$enc_obj->BirthDate($enc_number).'</font></span></span></td>
@@ -866,8 +882,9 @@ class Bill extends Encounter {
   				<tr>
   					<td class="headline""><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$LDSex.':</font></span></span></td>
   					<td class="adm_input"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.$enc_obj->Sex($enc_number).'</font></span></span></td>
-  				</tr>' .
-  						'<tr>
+  				</tr>
+  				*/
+  	echo '		<tr>
   					<td class="headline"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">Bill Date</font></span></span></td>
   					<td class="headline"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">'.date('d-m-Y').'</font></span></span></td>
   				</tr>
@@ -923,7 +940,7 @@ class Bill extends Encounter {
       			{
       				$pos_nr+=1;
       				$insurance_used +=$bill_elems_row['balanced_insurance'];
-      				if($bill_elems_row['is_labtest']==1)
+      				if($bill_elems_row['is_labtest']!=0)
       				{
       				  $this->tbl_bill_elem_ID=$bill_elems_row['ID'];
       					$this->chemlab_testname=$bill_elems_row['description'];
@@ -1005,7 +1022,7 @@ class Bill extends Encounter {
 		$pos_nr+=1;
 		$insurance_id=$bill_elems_row['insurance_id']; // could be used later to display name of company
 		$insurance_used +=$bill_elems_row['balanced_insurance'];
-		if($bill_elems_row['is_labtest']==1)
+		if($bill_elems_row['is_labtest']<>0)
 		{
 		  $this->tbl_bill_elem_ID=$bill_elems_row['ID'];
 			$this->chemlab_testname=$bill_elems_row['description'];
@@ -1359,7 +1376,7 @@ function DisplayCompanyPrescriptionBill($bill_nr, $edit_fields){
       				$pos_nr+=1;
       				$insurance_id=$bill_elems_row['insurance_id']; // could be used later to display name of company
       				$insurance_used_lab +=$bill_elems_row['balanced_insurance'];
-      				if($bill_elems_row['is_labtest']==1)
+      				if($bill_elems_row['is_labtest']!=0)
       				{
       				  $this->tbl_bill_elem_ID=$bill_elems_row['ID'];
       					$this->chemlab_testname=$bill_elems_row['description'];
@@ -1789,7 +1806,7 @@ function delete_bill_element($bill_elem_number) {
 //------------------------------------------------------------------------------
 
 	function DisplayBills($batch_nr, $specific_bill, $edit_fields) {
-	  global $insurancebudget, $used_budget, $ceiling, $insurance_tz, $bill_obj,$HTTP_SESSION_VARS,$sid;
+	  global $insurancebudget, $used_budget, $ceiling, $insurance_tz, $bill_obj,$sid; // $HTTP_SESSION_VARS;
 	  global $LDInsurance,$LDOldBudget,$LDUsedBudget,$LDOverdrawnBudget,$LDOverdrawnPayment,
   		  	 $LDNoCompanyCredit,$LDCompanyCredit,$LDLabTotal,$LDPrescTotal,$LDSumtopay,
   		  	 $LDInsuranceTotal,$LDSummary,$LDNoPendingBills,$LDTranferPendingBillArchive,$LDDone;
@@ -2012,13 +2029,18 @@ function delete_bill_element($bill_elem_number) {
 				$encounter_nr = $enc_obj->GetEncounterFromBatchNumber($batch_nr);
 		     	if ($printout==FALSE)
 		     	{
-					 if ($show_printout_button) echo '<a href="javascript:printOut_'.$bills['nr'].'()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" alt="Print this form"></a> ';
-					   if ($show_printout_button) echo '<a href="javascript:printOut1_'.$bills['nr'].'()"><img src="../../gui/img/control/default/en/en_companybill.gif" border=0 align="absmiddle" ></a> ';
-					 if ($edit_fields) echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif"> &nbsp;&nbsp;&nbsp; '.$LDTranferPendingBillArchive.' <a href="billing_tz_pending.php?&mode=done&user_origin='.$user_origin.'&patient='.$_REQUEST['patient'].'&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="'.$LDDone.'"></a>&nbsp;&nbsp;&nbsp;<img src="../../gui/img/common/default/achtung.gif">';
-					 if (!$edit_fields) echo '<a href="billing_tz_edit.php?batch_nr='.$batch_nr.'&billnr='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_auswahl2.gif" border=0 align="absmiddle" width="120" height="24"></a>';
+					 if ($show_printout_button) echo '<a href="javascript:printOut_'.$bills['nr'].'()" align=""><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="" alt="Print this form"></a> ';
+					 if ($show_printout_button) echo '<a href="javascript:printOut1_'.$bills['nr'].'()"><img src="../../gui/img/control/default/en/en_companybill.gif" border=0 align="" ></a> ';
 				}
 	         	echo '</td>
 	  			  	</tr>';
+	  			if ($printout==FALSE)
+		     	{
+		     		echo '<tr><td align="right">';
+					 if ($edit_fields) echo '<img src="../../gui/img/common/default/achtung.gif"><font size="4">'.$LDTranferPendingBillArchive.'</font><a href="billing_tz_pending.php?&mode=done&user_origin='.$user_origin.'&patient='.$_REQUEST['patient'].'&bill_number='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_done.gif" border=0 width="75" height="24" alt="'.$LDDone.'"></a><img src="../../gui/img/common/default/achtung.gif">';
+					 if (!$edit_fields) echo '<a href="billing_tz_edit.php?batch_nr='.$batch_nr.'&billnr='.$bills['nr'].'"><img src="../../gui/img/control/default/en/en_auswahl2.gif" border=0 align="" width="120" height="24"></a>';
+		     		echo '</tr></td>';
+		     	}
     		}
     	}
     	else
@@ -2028,7 +2050,7 @@ function delete_bill_element($bill_elem_number) {
 	  	echo'
 
 	  	</table>';
-	  	echo ($printout) ? '<font color="#FF0000"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">Billed by:'.$HTTP_SESSION_VARS['sess_user_name'].'</font></span></span></font><br>' : '';
+	  	echo ($printout) ? '<font color="#FF0000"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">Billed by:'.$_SESSION['sess_user_name'].'</font></span></span></font><br>' : '';
 
 	  //if($edit_fields) echo '<form method=post action="#" name="edit_bill">';
 	}
@@ -2392,7 +2414,7 @@ function DisplayCompanyBills($batch_nr, $specific_bill, $edit_fields) {
 
 	$and_in_outpatient=$this->GetQuotationStatus($in_outpatient);
 
-    $this->debug=false;
+    $this->debug=FALSE;
     ($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if ($this->debug) echo "<br><b>Method class_tz_billing::GetNewQuotation_Prescriptions()</b><br>";
 
@@ -2526,7 +2548,7 @@ function DisplayCompanyBills($batch_nr, $specific_bill, $edit_fields) {
 	  ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 	  if(!$nr) return false;
     $this->sql = "UPDATE care_encounter_prescription SET
-    	is_disabled = '$reason'
+    	is_disabled = 1, bill_status = 'droped', history = CONCAT(history, '$reason')
     	WHERE `nr`=".$nr;
     $db->Execute($this->sql);
     return TRUE;
@@ -2980,29 +3002,38 @@ function DisplayCompanyBills($batch_nr, $specific_bill, $edit_fields) {
   }
 //TODO: check on enabled drugsandservices item!
 function new_reg($encounter,$reg,$prescriber)
-	{
+{
 	global $db;
-  	$debug=FALSE;
-  	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+	$debug=FALSE;
+	($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
 
-  	  $this->sql="SELECT `item_id`, `item_description`, `unit_price` FROM care_tz_drugsandservices where item_description='".$reg."'";
-    $this->request=$db->Execute($this->sql);
-    while ($this->res=$this->request->FetchRow()) {
+  	$this->sql="SELECT `item_id`, `item_number`,`item_description`, `unit_price` FROM care_tz_drugsandservices where item_description='".$reg."'";
+  	$this->request=$db->Execute($this->sql);
+   	while ($this->res=$this->request->FetchRow()) {
 
-     $item_id=$this->res['item_id'];
-      $item_description=$this->res['item_description'];
-      $unit_price=$this->res['unit_price'];
-
-
-					$this->sql="insert into care_encounter_prescription(encounter_nr,article,article_item_number,price,prescribe_date,prescriber,history,modify_time,dosage)values('".$encounter."','".$item_description."','".$item_id."','".$unit_price."','".date('Y-m-d')."','".$prescriber."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."','1')";
-  					#$this->sql="insert into care_encounter_prescription(encounter_nr)values('".$encounter."')";
-  					$db->Execute($this->sql);
+		$item_id=$this->res['item_id'];
+		$item_number=$this->res['item_number'];
+		$item_description=$this->res['item_description'];
+		$unit_price=$this->res['unit_price'];
 
 
-    }
-  return TRUE;
-	}
+		$this->sql="insert into care_encounter_prescription(encounter_nr,article,article_item_number,price,prescribe_date,prescriber,history,modify_time,dosage)values('".$encounter."','".$item_description."','".$item_id."','".$unit_price."','".date('Y-m-d')."','".$prescriber."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."','1')";
+		#$this->sql="insert into care_encounter_prescription(encounter_nr)values('".$encounter."')";
+		$db->Execute($this->sql);
+
+		$this->sql='select max(nr) from care_encounter_prescription where encounter_nr="'.$encounter.'"';
+		$result=$db->Execute($this->sql);
+		$WONumberArray = $result->FetchRow();
+		$WONumber=$WONumberArray[0];
+		$weberp_obj = new_weberp();
+		$weberp_obj->make_patient_workorder_in_webERP($WONumber);
+		$weberp_obj->issue_to_patient_workorder_in_weberp($WONumber, $item_number, $weberp_obj->defaultLocation, '1', '');
+		destroy_weberp($weberp_obj);
+
+   	}
+	return TRUE;
+}
 
 
 function disable_reg($encounter_nr,$type,$reg)
@@ -3349,6 +3380,7 @@ function ShowPriceList()
 	echo '</table></p>';
 }
 //-------------------------------------
+/*
 function deduct_from_stock($prescriptions_nr,$amountt)
 {
 
@@ -3415,6 +3447,7 @@ function deduct_from_stock($prescriptions_nr,$amountt)
 
    	return $num;
    }
+   */
 }
 
 ?>

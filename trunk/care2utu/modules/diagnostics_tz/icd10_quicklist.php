@@ -4,7 +4,7 @@ require('./roots.php');
 
 require($root_path.'include/inc_environment_global.php');
 
-if(!empty($encounter)) $HTTP_SESSION_VARS['sess_en']=$encounter;
+if(!empty($encounter)) $_SESSION['sess_en']=$encounter;
 
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02

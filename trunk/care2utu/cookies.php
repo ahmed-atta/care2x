@@ -28,7 +28,7 @@ echo setCharSet();
 <p><br>
 <p><br>
 <font size=3>
-<A HREF="<?php echo "index.php?lang=$lang&egal=1&sid=egal&cookie=egal" ?>" <?php if($startframe) print ' target="_top"'; ?>><u><?php echo $LDGoAheadEgalCookie ?></u></A>
+<A HREF="<?php echo "index.php?lang=$lang&egal=1&sid=.$sid.&cookie=egal" ?>" <?php if($startframe) print ' target="_top"'; ?>><u><?php echo $LDGoAheadEgalCookie ?></u></A>
 </font>
 <font size=2 color="#000000">
 <p><br>

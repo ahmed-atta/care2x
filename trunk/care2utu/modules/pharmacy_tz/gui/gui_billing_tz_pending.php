@@ -21,7 +21,7 @@ function gethelp(x,s,x1,x2,x3,x4)
 
 function printOut()
 {
-	urlholder="<?php echo $root_path;?>modules/registration_admission/show_prescription.php?externalcall=TRUE&printout=TRUE&pn=2005500002&sid=a766fb71265eb3f17f755010606c4ace";
+	urlholder="<?php echo $root_path;?>modules/registration_admission/show_prescription.php?externalcall=TRUE&printout=TRUE&pn=2005500002&sid=<?php echo $sid."&lang=".$lang;?>";
 	testprintout=window.open(urlholder,"printout","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
   
 }
@@ -90,7 +90,7 @@ A:visited:hover {color: #cc0033;}
 		          if (!$NO_PENDING_PRESCRIPTIONS) {
 		            echo '
                       <a href="javascript:printOut()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a> 
-                      <a href="pharmacy_tz_pending_prescriptions.php?&mode=done&pn='.$pn.'&prescription_date='.$prescription_date.'>"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It´s done! Move the form to the archive"></a> 
+                      <a href="pharmacy_tz_pending_prescriptions.php?&mode=done&pn='.$pn.'&prescription_date='.$prescription_date.'>"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="Itï¿½s done! Move the form to the archive"></a> 
                       <br>
                      ';}
                  

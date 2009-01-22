@@ -11,7 +11,7 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfilen = $root_path."main/sta
  */
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
- 
+
  require_once($root_path.'gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('common');
 
@@ -33,7 +33,7 @@ if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfilen = $root_path."main/sta
  $smarty->assign('pbBack',FALSE);
 
 /**
-* Helper function to generate rows 
+* Helper function to generate rows
 */
 function createTR($input_name, $ld_text, $input_val, $colspan = 2, $input_size = 55){
 	global $root_path;
@@ -57,7 +57,7 @@ ob_start();
 ?>
 
 <script  language="javascript">
-<!-- 
+<!--
 
 function popSearchWin(target,obj_val,obj_name) {
 	urlholder="./data_search.php<?php echo URL_REDIRECT_APPEND; ?>&target="+target+"&obj_val="+obj_val+"&obj_name="+obj_name;
@@ -119,7 +119,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')){
 */
 // if(isset($rows)&&$rows>1)
 if(!empty($rows)){
- 
+
 	# Initialize the icon and background images
 
 	$img_male=createComIcon($root_path,'spm.gif','0');
@@ -136,46 +136,46 @@ if(!empty($rows)){
 		<?php
 	  		if($oitem=='sex') $flag=TRUE;
 				else $flag=FALSE;
-			
+
 			echo $pagen->SortLink($LDSex,'sex',$odir,$flag);
 		?></b></td>
       <td><b>
-	  <?php 
+	  <?php
 	  	if($oitem=='name_last') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDLastName,'name_last',$odir,$flag); 
+			else $flag=FALSE;
+		echo $pagen->SortLink($LDLastName,'name_last',$odir,$flag);
 			 ?></b></td>
       <td><b>
-	  <?php 
+	  <?php
 	  	if($oitem=='name_first') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDFirstName,'name_first',$odir,$flag); 
+			else $flag=FALSE;
+		echo $pagen->SortLink($LDFirstName,'name_first',$odir,$flag);
 			 ?></b></td>
       <td><b>
-	  <?php 
+	  <?php
 	  	if($oitem=='date_birth') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDBday,'date_birth',$odir,$flag); 
+			else $flag=FALSE;
+		echo $pagen->SortLink($LDBday,'date_birth',$odir,$flag);
 			 ?></b></td>
       <td align="center"><b>
-	  <?php 
+	  <?php
 	  	if($oitem=='addr_zip') $flag=TRUE;
 			else $flag=FALSE;
-		 echo $pagen->SortLink($LDZipCode,'addr_zip',$odir,$flag); 
-		 	
+		 echo $pagen->SortLink($LDZipCode,'addr_zip',$odir,$flag);
+
 		?></b></td>
       <td><b>
-	  <?php 
+	  <?php
 	  	if($oitem=='encounter_nr') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDAdmitNr,'encounter_nr',$odir,$flag); 
+			else $flag=FALSE;
+		echo $pagen->SortLink($LDAdmitNr,'encounter_nr',$odir,$flag);
 			 ?></b></td>
-    
+
       <td><b>
-	  <?php 
+	  <?php
 	  	if($oitem=='encounter_date') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDAdmitDate,'encounter_date',$odir,$flag); 
+			else $flag=FALSE;
+		echo $pagen->SortLink($LDAdmitDate,'encounter_date',$odir,$flag);
 			 ?></b></td>
 
 	</tr>
@@ -338,7 +338,7 @@ if(!empty($rows)){
 		while($result=$encounter_classes->FetchRow()) {
 ?>
 			<input name="encounter_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>"  <?php if($encounter_class_nr==$result['class_nr']) echo 'checked'; ?>>
-<?php 
+<?php
 			$LD=$result['LD_var'];
 			if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
 			echo '&nbsp;';
@@ -383,7 +383,7 @@ if(!empty($rows)){
 		</td>
 		<td colspan=2 bgcolor="#eeeeee">
 <?php
-	
+
 	# Create the bill type radiobuttons
 
 	//if($insurance_classes){
@@ -473,7 +473,7 @@ if(!empty($rows)){
 				<option value="'.$buffer['class_nr'].'">';
 			if(empty($$buffer['LD_var'])) echo $buffer['name']; else echo $$buffer['LD_var'];
 			echo '</option>';
-	
+
 		}
 ?>
 			</select>
@@ -501,7 +501,7 @@ if(!empty($rows)){
 
 <p>
 <a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php';
+<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'aufnahme_pass.php';
 	else echo 'patient.php';
 	echo URL_APPEND;
 ?>

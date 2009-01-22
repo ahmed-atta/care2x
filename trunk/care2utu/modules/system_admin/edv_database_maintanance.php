@@ -115,7 +115,7 @@ $pending_prescription_count=$result->FetchRow();
 function gethelp(x,s,x1,x2,x3,x4)
 {
 	if (!x) x="";
-	urlholder="../../main/help-router.php?sid=e8004c3458708943fb5bb2115762ea73&lang=en&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4;
+	urlholder="../../main/help-router.php?sid=<?php echo $sid."&lang=".$lang;?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4;
 	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
 	window.helpwin.moveTo(0,0);
 }
@@ -137,7 +137,7 @@ A:visited:hover {color: #cc0033;}
 <!--
 function popPic(pid,nm){
 
- if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=e8004c3458708943fb5bb2115762ea73&lang=en&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
+ if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=<?php echo $sid."&lang=".$lang;?>&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
 
 }
 // -->
@@ -157,9 +157,9 @@ function popPic(pid,nm){
     &nbsp;&nbsp;<font color="#330066">Database Maintanance</font>
        </td>
   <td bgcolor="#99ccff" align=right><a
-   href="edv_generally_management.php?sid=e8004c3458708943fb5bb2115762ea73&ntid=false&lang=en"><img src="../../gui/img/control/blue_aqua/en/en_back2.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a><a
+   href="edv_generally_management.php?sid=<?php echo $sid."&lang=".$lang;?>&ntid=false"><img src="../../gui/img/control/blue_aqua/en/en_back2.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a><a
    href="javascript:gethelp('edp.php','access','')"><img src="../../gui/img/control/blue_aqua/en/en_hilfe-r.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
-   href="edv-system-admi-welcome.php?sid=e8004c3458708943fb5bb2115762ea73&ntid=false&lang=en" ><img src="../../gui/img/control/blue_aqua/en/en_close2.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>     </td>
+   href="edv-system-admi-welcome.php?sid=<?php echo $sid."&lang=".$lang;?>&ntid=false" ><img src="../../gui/img/control/blue_aqua/en/en_close2.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>     </td>
  </tr>
 
  </table>

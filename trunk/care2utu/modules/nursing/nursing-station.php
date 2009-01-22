@@ -27,7 +27,7 @@ if(empty($HTTP_COOKIE_VARS[$local_user.$sid])){
 }
 
 # Set default values if not available from url
-if (!isset($station)||empty($station)) { $station=$HTTP_SESSION_VARS['sess_nursing_station'];} # Default station must be set here !!
+if (!isset($station)||empty($station)) { $station=$_SESSION['sess_nursing_station'];} # Default station must be set here !!
 if(!isset($pday)||empty($pday)) $pday=date('d');
 if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
@@ -69,6 +69,7 @@ if(($mode=='')||($mode=='fresh')){
 		}
 		# GEt the number of beds
 		$nr_beds=$ward_obj->countBeds($ward_nr);
+
 		# Get ward patients
 		if($is_today) $patients_obj=&$ward_obj->getDayWardOccupants($ward_nr);
 			else $patients_obj=&$ward_obj->getDayWardOccupants($ward_nr,$s_date);
@@ -331,7 +332,8 @@ if($ward_ok){
 	$smarty->assign('LDFamilyName',$LDLastName);
 	$smarty->assign('LDName',$LDName);
 	$smarty->assign('LDBirthDate',$LDBirthDate);
-	$smarty->assign('LDPatNr',$LDPatListElements[4]);
+	$smarty->assign('LDPatientID',$LDPatientID);
+	$smarty->assign('LDAdmissionDate',$LDAdmissionDate);
 	$smarty->assign('LDInsuranceType',$LDPatListElements[5]);
 	$smarty->assign('LDOptions',$LDPatListElements[6]);
 
@@ -361,6 +363,7 @@ if($ward_ok){
 		// Scan the patients object if the patient is assigned to the bed & room
 		# Loop through room beds
 
+
 		for($j=1;$j<=$room_info['nr_of_beds'];$j++){
 		//for($j=1;$j<=$nr_beds;$j++){
 			# Reset elements
@@ -375,6 +378,7 @@ if($ward_ok){
 			$smarty->assign('sTitle','');
 			$smarty->assign('sBirthDate','');
 			$smarty->assign('sPatNr','');
+			$smarty->assign('sAdmDate','');
 			$smarty->assign('sAdmitDataIcon','');
 			$smarty->assign('sChartFolderIcon','');
 			$smarty->assign('sNotesIcon','');
@@ -478,7 +482,7 @@ if($ward_ok){
 
 			if($is_patient&&($bed['encounter_nr']!="")){
 
-				$smarty->assign('sTitle',ucfirst($bed['title']));
+				//$smarty->assign('sTitle',ucfirst($bed['title']));
 
 				if(isset($sln)&&$sln) $sFamNameBuffer = eregi_replace($sln,'<span style="background:yellow">'.ucfirst($sln).'</span>',ucfirst($bed['name_last']));
 					else $sFamNameBuffer = ucfirst($bed['name_last']);
@@ -513,7 +517,32 @@ if($ward_ok){
 					else $smarty->assign('sBirthDate',formatDate2Local($bed['date_birth'],$date_format));
 			}
 
-			if ($bed['encounter_nr']) $smarty->assign('sPatNr',$bed['encounter_nr']);
+
+
+			//if ($bed['encounter_nr']) $smarty->assign('sPatNr',$bed['encounter_nr']);
+
+			if ($bed['encounter_nr'])
+			{
+
+				# Create encounter object
+				require_once ($root_path . 'include/care_api_classes/class_encounter.php');
+				$enc_obj = new Encounter ( $bed['encounter_nr'] );
+
+				$enc_obj->loadEncounterData( $bed['encounter_nr'] );
+				$pid = $enc_obj->PID();
+				$date = $enc_obj->EncounterDate();
+
+				$dateArr = date_parse($date);
+
+				$smarty->assign('sPatNr',$pid);
+				$smarty->assign('sAdmDate',formatDate2Local($date,$date_format).' '.$dateArr['hour'].':'.$dateArr['minute']);
+
+
+
+			}
+
+
+
 
 			$sBuffer = '';
 			if($bed['insurance_class_nr']!=2) $sBuffer = $sBuffer.'<font color="#ff0000">';
@@ -573,8 +602,10 @@ if($ward_ok){
 
 	//$buf1='<img '.createComIcon($root_path,'powdot.gif','0','absmiddle').'>';
 	# Create waiting list block
+
 	if($waitlist_count&&$edit){
 		while($waitpatient=$waitlist->FetchRow()){
+
 			$buf2='';
 			//if($waitpatient['current_ward_nr']!=$ward_nr) $buf2='<nobr>'.$waitpatient['ward_id'].'::';
 			if($waitpatient['current_ward_nr']!=$ward_nr) $buf2=createComIcon($root_path,'red_dot.gif','0','',TRUE);

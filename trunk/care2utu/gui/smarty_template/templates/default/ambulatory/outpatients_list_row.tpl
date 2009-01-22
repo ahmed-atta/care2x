@@ -15,7 +15,7 @@
 		<td>&nbsp;{{$sPatNr}}</td>
 		<td>&nbsp;{{$sAdmissionDate}}</td>
 		<td>&nbsp;{{$sInsuranceType}}</td>
-		<td>&nbsp;{{$sAdmitDataIcon}} {{$sARVIcon}} {{$sChartFolderIcon}} {{$sNotesIcon}} {{$sTransferIcon}} {{$sDischargeIcon}}</td>
+		<td>&nbsp;{{$sAdmitDataIcon}} {{$sDischargeInfoIcon}} {{$sARVIcon}} {{$sChartFolderIcon}} {{$sNotesIcon}} {{$sTransferIcon}} {{$sDischargeIcon}}</td>
 	</tr>
 	<tr>
 		<td colspan="9" class="thinrow_vspacer">{{$sOnePixel}}</td>

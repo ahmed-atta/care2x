@@ -65,7 +65,7 @@
 			<td class="adm_input">{{$sValidatorCheckBox}} {{$LDYesSure}}</td>
 		</tr>
 	{{/if}}
-	
+
 	</table>
 
 	{{$sHiddenInputs}}

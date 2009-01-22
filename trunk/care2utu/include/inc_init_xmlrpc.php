@@ -11,10 +11,10 @@
 		$db->Execute($sql);
 	}
 
-	$webERPServerURL = "http://localhost/webERP_tz/api/api_xml-rpc.php";
-   	$weberpuser = "admin";
-	$weberppassword = "selian";
-	$weberpDebugLevel = 0;
+//	$webERPServerURL = "http://localhost/webERPtanzania/api/api_xml-rpc.php";
+// 	$weberpuser = "admin";
+//	$weberppassword = "haydom";
+//	$weberpDebugLevel = 2;
 	$is_transmit_to_weberp_enable=$GLOBAL_CONFIG['is_transmit_to_weberp_enable'];
 
 ?>

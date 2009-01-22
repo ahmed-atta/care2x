@@ -189,7 +189,7 @@ $dbtable='care_encounter';
 
 
 	/* Update History */
-	if(!$newdata) $encounter_obj->setHistorySeen($HTTP_SESSION_VARS['sess_user_name'],$encounter_nr);
+	if(!$newdata) $encounter_obj->setHistorySeen($_SESSION['sess_user_name'],$encounter_nr);
 	/* Get insurance firm name*/
 	$insurance_firm_name=$insurance_obj->getFirmName($insurance_firm_id);
 	/* Check whether config path exists, else use default path */
@@ -200,12 +200,12 @@ $dbtable='care_encounter';
 require_once($root_path.'include/inc_patient_encounter_type.php');
 
 /* Save encounter nrs to session */
-$HTTP_SESSION_VARS['sess_pid']=$pid;
-$HTTP_SESSION_VARS['sess_en']=$encounter_nr;
-$HTTP_SESSION_VARS['sess_full_en']=$full_en;
-$HTTP_SESSION_VARS['sess_parent_mod']='admission';
-$HTTP_SESSION_VARS['sess_user_origin']='admission';
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_pid']=$pid;
+$_SESSION['sess_en']=$encounter_nr;
+$_SESSION['sess_full_en']=$full_en;
+$_SESSION['sess_parent_mod']='admission';
+$_SESSION['sess_user_origin']='admission';
+$_SESSION['sess_file_return']=$thisfile;
 
 /* Prepare the photo filename */
 require_once($root_path.'include/inc_photo_filename_resolve.php');

@@ -22,7 +22,7 @@ $core = & new Core;
 $parsedstr=array();
 $globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 // clean the input data
-$material_nr=strtr($material_nr,"§%&?/\+*~#';:,!$","                ");// convert chars to (15) spaces
+$material_nr=strtr($material_nr,"ï¿½%&?/\+*~#';:,!$","                ");// convert chars to (15) spaces
 $material_nr=trim($material_nr);
 //$material_nr=str_replace(" ","",$material_nr);
 
@@ -160,8 +160,8 @@ $material_nr=trim($material_nr);
 			$matlist[0]=implode("~",$matbuf);
 			$sql="UPDATE $dbtable SET 
 							material_codedlist='$matlist[0]',
-							history = ".$core->ConcatHistory("Material deleted ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-							modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+							history = ".$core->ConcatHistory("Material deleted ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n").",
+							modify_id = '".$_SESSION['sess_user_name']."',
 							modify_time = '".date('YmdHis')."'
 								WHERE dept_nr='$dept_nr'
 								AND op_room='$saal'
@@ -193,8 +193,8 @@ $material_nr=trim($material_nr);
 			
 			$sql="UPDATE $dbtable SET
 							material_codedlist='$matlist[0]',
-							history = ".$core->ConcatHistory("Material updated ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-							modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+							history = ".$core->ConcatHistory("Material updated ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n").",
+							modify_id = '".$_SESSION['sess_user_name']."',
 							modify_time = '".date('YmdHis')."'
 								WHERE dept_nr='$dept_nr'
 								AND op_room='$saal'

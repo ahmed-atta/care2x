@@ -37,9 +37,9 @@ $entry_body_bgcolor='#ffffff';
 if(!isset($searchkey)) $searchkey='';
 if(!isset($mode)) $mode='';
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode=='paginate'){
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	$searchkey=$_SESSION['sess_searchkey'];
 }else{
 	# Reset paginator variables
 	$pgx=0;
@@ -49,13 +49,13 @@ if($mode=='paginate'){
 }
 #Load and create paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 //$db->debug=true;
 if(($mode=='search'||$mode=='paginate')&&($searchkey))
 {
 	$searchkey=strtr($searchkey,'*?','%_');
 	# Save the search keyword for eventual pagination routines
-	if($mode=='search') $HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
+	if($mode=='search') $_SESSION['sess_searchkey']=$searchkey;
 	
 		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
         $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -169,8 +169,8 @@ if(($mode=='search'||$mode=='paginate')&&($searchkey))
  require_once($root_path.'gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('common');
 
-if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
-	else $sTitleNr = ($HTTP_SESSION_VARS['sess_full_pid']);
+if($parent_admit) $sTitleNr= ($_SESSION['sess_full_en']);
+	else $sTitleNr = ($_SESSION['sess_full_pid']);
 
 # Title in the toolbar
  $smarty->assign('sToolbarTitle',"Medocs :: $LDSearch ");

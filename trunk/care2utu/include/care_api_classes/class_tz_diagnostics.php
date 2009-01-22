@@ -622,7 +622,7 @@ class Diagnostics extends Encounter {
   }
   //------------------------------------------------------------------------------
   function Display_Selected_Diagnoses($encounter, $itemlist, $pid){
-  	global $db;
+  	global $db,$userName;
   	global $LDNewPatient,$LDNewCase,$LDRevisit,$LDComment,$LDVIEW,$LDResetFields,$LDSubmitDiagnose,
   	       $LDSameDiagnose,$LDDiagnosis;
     $this->icd_old_array = $this->GetAllCasesFromPID($pid);
@@ -653,7 +653,7 @@ class Diagnostics extends Encounter {
     		$new="checked";
     		$revisit="";
     	}
-			echo '
+    		echo '
 					<tr bgcolor="#CAD3EC">
             <td>'.$this->get_icd10_description_from_code($v).$oldcase_code.'</td>
             <td><div align="center">
@@ -669,7 +669,7 @@ class Diagnostics extends Encounter {
             </div></td>
             <td valign="bottom"><input type="text" name="comment_'.$idcounter.'" value="" size="25" maxlength="255"></td>
 
-			<td valign="bottom"><input type="text" name="doctor_'.$idcounter.'" value="" size="25" maxlength="255"></td>
+			<td valign="bottom"><input type="text" name="doctor_'.$idcounter.'" value="'.$userName.'" size="25" maxlength="255"></td>
 
           </tr>';
   	}

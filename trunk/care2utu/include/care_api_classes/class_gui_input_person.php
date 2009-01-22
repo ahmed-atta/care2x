@@ -201,7 +201,14 @@ class GuiInputPerson {
 				# clean and check input data variables
 				if(trim($encoder)=='') $encoder=$aufnahme_user;
 				if (trim($name_last)=='') { $errornamelast=1; $error++;}
-				if (trim($selian_pid)=='' || !is_numeric($selian_pid) || (!$update && $person_obj->SelianFileExists($selian_pid))) { $errorfilenr=1; $error++;}
+				//if (trim($selian_pid)=='' || !is_numeric($selian_pid) || (!$update && $person_obj->SelianFileExists($selian_pid))) { $errorfilenr=1; $error++;}
+
+
+				if ($person_obj->IsHospitalFileNrMandatory())
+				{
+					if (trim($selian_pid)=='' || (!$update && $person_obj->SelianFileExists($selian_pid))) { $errorfilenr=1; $error++;}
+				}
+
 				if(trim($name_first)=='') { $errornamefirst=1; $error++; }
 				if (trim($date_birth)=='') { $errordatebirth=1; $error++;}
 				if(mktime(0,0,0,substr($date_birth,3,2),substr($date_birth,0,2),substr($date_birth,6,4))>time()) { $errordatebirth=1; $error++;}
@@ -258,7 +265,7 @@ class GuiInputPerson {
 							 civil_status='$civil_status',
 							 sss_nr='',
 							 nat_id_nr='',
-							 religion='$religion',
+							 religion='$religion', insurance_ID='$insurance_ID',
 							 ethnic_orig='$ethnic_orig',
 							 date_update='".date('Y-m-d H:i:s')."',";
 
@@ -280,8 +287,10 @@ class GuiInputPerson {
 						$sql.=" photo_filename='$photo_filename',";
 					}
 
+
+
 					# complete the sql query
-					$sql.=" history=".$person_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." \n").", modify_id='".$HTTP_SESSION_VARS['sess_user_name']."' WHERE pid=$pid";
+					$sql.=" history=".$person_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." \n").", modify_id='".$_SESSION['sess_user_name']."' WHERE pid=$pid";
 					//$db->debug=true;
 					$db->BeginTrans();
 					$ok=$db->Execute($sql);
@@ -296,8 +305,8 @@ class GuiInputPerson {
 									$insure_data=array('insurance_nr'=>$insurance_nr,
 											'firm_id'=>$insurance_firm_id,
 											'class_nr'=>$insurance_class_nr,
-											'history'=>"Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." \n",
-											'modify_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+											'history'=>"Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." \n",
+											'modify_id'=>$_SESSION['sess_user_name'],
 											'modify_time'=>date('YmdHis')
 											);
 
@@ -308,8 +317,8 @@ class GuiInputPerson {
 											'firm_id'=>$insurance_firm_id,
 											'pid'=>$pid,
 											'class_nr'=>$insurance_class_nr,
-											'history'=>"Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." \n",
-											'create_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+											'history'=>"Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." \n",
+											'create_id'=>$_SESSION['sess_user_name'],
 											'create_time'=>date('YmdHis')
 										);
 								$pinsure_obj->insertDataFromArray($insure_data);
@@ -331,9 +340,9 @@ class GuiInputPerson {
 					$HTTP_POST_VARS['date_reg']=date('Y-m-d H:i:s');
 					$HTTP_POST_VARS['blood_group']=trim($HTTP_POST_VARS['blood_group']);
 					$HTTP_POST_VARS['status']='normal';
-					$HTTP_POST_VARS['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-					//$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-					$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+					$HTTP_POST_VARS['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+					//$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
+					$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
 					$HTTP_POST_VARS['create_time']=date('YmdHis');
 
 					# Prepare internal data to be stored together with the user input data
@@ -541,11 +550,16 @@ class GuiInputPerson {
 			}
 		}
 		function chkform(d) {
-			if(d.selian_pid.value==""){
-				alert("<?php echo 'Please enter Hospital Nr'; ?>");
-				d.selian_pid.focus();
-				return false;
-			}else if(d.name_last.value==""){
+			<?php if ($person_obj->IsHospitalFileNrMandatory())
+			      {
+			      	echo 'if(d.selian_pid.value==""){
+			      			alert("Please enter Hospital File Number");
+			      		 d.selian_pid.focus();
+			      			return false;
+			      			}else';
+			      } ?>
+
+			if(d.name_last.value==""){
 				alert("<?php echo $LDPlsEnterLastName; ?>");
 				d.name_last.focus();
 				return false;
@@ -590,7 +604,7 @@ class GuiInputPerson {
 					echo 'd.district.focus();';
 					echo 'return false;';
 				echo '}else if(d.ward.value=="-1"){';
-					echo ' alert("Please select Health Center");';
+					echo ' alert("Please select Ward");';
 					echo ' d.ward.focus();';
 					echo ' return false;';
 			}
@@ -797,11 +811,19 @@ class GuiInputPerson {
 			<tr>
 			<td class="reg_item">
 				<FONT SIZE=-1  FACE="Arial"><?php
+
+				if ($person_obj->IsHospitalFileNrMandatory())
+
+						$asterik = '*';
+
+				else
+						$asterik = ' ';
+
 				if($errorfilenr)
 					echo '<font color="#ff0000">*'.$LDFileNr.'</font><br>
 					Try this one: '.$person_obj->GetNewSelianFileNumber();
 				else
-					echo '*'.$LDFileNr;
+					echo $asterik.$LDFileNr;
 
 				?>
 			</td>
@@ -811,6 +833,7 @@ class GuiInputPerson {
 			</tr>
 
 <?php
+
 		$this->createTR($errornamefirst, 'name_first', ' *'.$LDFirstName,$name_first,'','',FALSE);
 
 		$this->createTR($errorname2, 'name_2', ' *'.$LDName2,$name_2,'','',FALSE);
@@ -981,16 +1004,74 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 				<FONT SIZE=-1  FACE="Arial"> <input name="civil_status" type="radio" value="separated"  <?php if($civil_status=="separated") echo "checked"; ?>><?php echo $LDSeparated ?>&nbsp;&nbsp;
 			</td>
 			</tr>
+			<tr>
+				<td class="reg_item">
+				<FONT SIZE=-1  FACE="Arial"> <?php echo $LDInsurance ?>:
+			</td>
+				<td class="reg_input"> <?php
 
+			// Create array of all insurances for GUI
+			$coreObj->sql="SELECT DISTINCT insurance_ID FROM care_tz_insurances_admin WHERE deleted='0' order by name asc";
+			$result = $db->Execute($coreObj->sql);
+
+			$name_insurer_array = array();
+
+
+			while($row=$result->FetchRow())
+			{
+				$nr = $row['insurance_ID'];
+
+				if ($nr != -1)
+				{
+				$coreObj->sql="SELECT name FROM care_tz_insurances_admin WHERE insurance_ID=$nr";
+
+
+				$ergebnis = $db->Execute($coreObj->sql);
+				$row = $ergebnis->FetchRow();
+				$arrayTemp = array("name"=> $row['name'], "id"=>$nr);
+				array_push($name_insurer_array, $arrayTemp);
+
+
+				}
+			}
+
+			echo '<SELECT name="insurance_ID">';
+			echo '<OPTION value="-1" >--select insurance--</OPTION>';
+
+			foreach($name_insurer_array as $row)
+			{
+
+				if($insurance_ID == $row[id])
+				{
+					$check = 'selected';
+				}
+				else
+				{
+					$check = '';
+				}
+				echo '<OPTION value="'.$row[id].'" '.$check.'>'.$row[name].'</OPTION>';
+
+			}
+
+			echo '</SELECT>';
+			?></td>
+
+			</tr>
 			<tr>
 			<td class="reg_item">
-				<FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
+				<FONT SIZE=-1  FACE="Arial"><?php echo $LDOccupation ?>:
 			</td>
 			<td class="reg_input">
 				<input type="text" name="title" size=14 maxlength=25 value="<?php echo $title ?>" onFocus="this.select();">
 			</td>
 			</tr>
-
+			<td class="reg_item">
+				<FONT SIZE=-1  FACE="Arial"><?php echo $LDEducation ?>:
+			</td>
+			<td class="reg_input">
+				<input type="text" name="name_others" size=14 maxlength=25 value="<?php echo $name_others ?>" onFocus="this.select();">
+			</td>
+			</tr>
 
 <!-- 		<tr>
 			<td colspan=2>
@@ -1006,44 +1087,28 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 			<tr>
 				<td class="reg_item"><FONT SIZE=-1  FACE="Arial,verdana,sans serif">
 				<?php if($errormaiden) { echo '<font color="FF0000">'; } echo '* '.'Region';
-					$sql="SELECT * FROM care_tz_region order by region_name";
-					$ergebnis=$db->Execute($sql);
+					$sql="SELECT DISTINCT region_id, region_name FROM care_tz_region region INNER JOIN care_tz_district distrcit ON distrcit.is_additional=region.region_id INNER JOIN care_tz_ward ward ON distrcit.district_id=ward.is_additional ORDER BY region_name, district_name, ward_name";
+					//$sql="SELECT region_id,region_name FROM view_care_region_district_ward GROUP BY region_id order by region_name ";
+					$catchment_area_obj=$db->Execute($sql);
 
 
 				?></td>
 				<td  class="reg_input" colspan=1>
 					<select name="region" size="1" onChange="redirect(this.options.selectedIndex)">
 
-						<option value="-1">---select region--------</option>
+						<option value="-1" id="-1">---select region--------</option>
 						<?php
 
-							while($region=$ergebnis->FetchRow())
+							while($catchment_area_row=$catchment_area_obj->FetchRow())
 							{
-								echo '<option>'.$region['region_name'].'</option>';
+								echo '<option value="'.$catchment_area_row['region_name'].'" id='.$catchment_area_row['region_id'].'>'.$catchment_area_row['region_name'].'</option>';
 							}
 
 						?>
 					</select>
 
 				<?php
-/*
-					echo '<SELECT name="email" onChange="test();">';
-					echo '<OPTION value="-1" >'.'--SelectRegion--'.'</OPTION>';
-					foreach($region_array as $unit)
-					{
-						//if($update && (strtoupper($name_maiden) == strtoupper($unit[1])))
-						if((strtoupper($email) == strtoupper($unit[1])))
-						{
-							$check = 'selected';
-						}
-						else
-						{
-							$check = '';
-						}
-						echo '<OPTION value="'.$unit[1].'" '.$check.'>'.$unit[0].'</OPTION>';
-					}
-				// echo '<OPTION value="notinlist">NOT IN LIST</OPTION>';
-				 echo '</SELECT>'; */
+
 				}
 				?>
 
@@ -1077,26 +1142,6 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 							<option value="-1" >---select district--------</option>
 							</select>
 
-				<?php
-/*
-					echo '<SELECT name="sss_nr" onChange="test();">';
-					echo '<OPTION value="-1" >'.'--SelectDistrict--'.'</OPTION>';
-					foreach($district_array as $unit)
-					{
-						//if($update && (strtoupper($name_maiden) == strtoupper($unit[1])))
-						if((strtoupper($sss_nr) == strtoupper($unit[1])))
-						{
-							$check = 'selected';
-						}
-						else
-						{
-							$check = '';
-						}
-						echo '<OPTION value="'.$unit[1].'" '.$check.'>'.$unit[0].'</OPTION>';
-					}
-				// echo '<OPTION value="notinlist">NOT IN LIST</OPTION>';
-				 echo '</SELECT>';
-				*/?>
 
 				</td>
 				<?php
@@ -1121,10 +1166,10 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 			<tr></tr>
 			<tr>
 				<td class="reg_item"><FONT SIZE=-1  FACE="Arial,verdana,sans serif">
-				<?php if($errormaiden) { echo '<font color="FF0000">'; } echo '* '.'Health Center'; ?></td>
+				<?php if($errormaiden) { echo '<font color="FF0000">'; } echo '* '.'Ward'; ?></td>
 				<td  class="reg_input" colspan=1>
 					<select name="ward" size="1">
-						<option value="-1" >-select Health Center-</option>
+						<option value="-1" >-select Ward-</option>
 					</select>
 
 			<?php
@@ -1135,182 +1180,114 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 
 			<script language="javascript">
 
-				var groups=document.aufnahmeform.region.options.length
-				var group=new Array(groups)
-				for (i=0; i<groups; i++)
-				group[i]=new Array()
-
-				group[0][0]=new Option("---select district--------");
-
 				<?php
-					/*$j=1;
-					$sql="SELECT * FROM care_tz_region";
-					$ergebnis=$db->Execute($sql);
-					foreach($ergebnis as $region)
-					{
-						$i=1;
-						echo "group[".$j."][0]=new Option(\"now select this one\");\n";
+					// fill up all regions, districts and wards:
+					$sql="SELECT region_id, region_name, district_id, district_name, ward_id, ward_name FROM care_tz_region region INNER JOIN care_tz_district distrcit ON distrcit.is_additional=region.region_id INNER JOIN care_tz_ward ward ON distrcit.district_id=ward.is_additional ORDER BY region_name, district_name, ward_name";
+					$catchment_area_obj=$db->Execute ($sql);
+					$number_of_rows=$catchment_area_obj->RecordCount();
+					echo "var group=new Array(".$number_of_rows.")\n";
+					echo "for (i=0; i<".$number_of_rows."; i++)\n";
+					echo "group[i]=new Array()\n";
+					echo "group[0]= new Option(\"---select Region -----\");\n";
+					echo "group[0][0]=new Option(\"---select district--------\");\n";
+					echo "group[1][0]=new Option(\"now select this one\");\n";
+					echo "group[1][0][0]=new Option(\"-select Ward-\");\n";
+					// define some variables that eclipse will get no trouble by syntax error check...
+					$previous_region_id = -1;
+					$previous_district_id = -1;
+					$region_id = 1;
+					$district_id = 0;
+					$ward_id = 0;
+					// remember if it's the first row...
+					$FIRST_ROW=TRUE;
+					while ($catchment_area_row=$catchment_area_obj->FetchRow()) {
+						// reading out all information of this row and store each to a variable
+						$this_region_name=$catchment_area_row['region_name'];
+						$this_district_name=$catchment_area_row['district_name'];
+						$this_district_id=$catchment_area_row['district_id'];
+						$this_ward_name=$catchment_area_row['ward_name'];
+						$this_ward_id=$catchment_area_row['ward_id'];
+						if ($FIRST_ROW==TRUE) {
+							// it's the first row, the "this" is the same as the "previous" status
+							$previous_region_id=$region_id;
+							$previous_ward_id=$ward_id;
+							$previous_district_id=$district_id;
+							// if its the first row, so we can attach this line directly to the jscript-array:
+							echo "group[".$region_id."][".$district_id."]=new Option(\"".$this_district_name."\");\n";
+							// "this" is no longer the first row, set it to FALSE
+							$FIRST_ROW=FALSE;
+						} else {
+							// reading out all information of this row and store each to a variable
+							$this_region_id=$catchment_area_row['region_id'];
+							$this_region_name=$catchment_area_row['region_name'];
+							$this_district_name=$catchment_area_row['district_name'];
+							$this_district_id=$catchment_area_row['district_id'];
+							// it is not the first row, so we have to be a bit more carefully
+							if ($this_region_id==$previous_region_id) {
+								// if its the same region ID like the previous one, so check if it's a new district as well:
+								if ($this_district_id==$previous_district_id) {
+									// if its the same district ID like the previous one, then we have a new ward
+									echo  "group[".$region_id."][".$district_id."][".$ward_id."]=new Option(\"".$this_ward_name."\"); // Ward_id=".$this_ward_id."\n";
+									$ward_id = $ward_id + 1;
+								} else {
+									$district_id = $district_id + 1;
+									$previous_district_id=$this_district_id;
+									$ward_id = 0;
+									echo "group[".$region_id."][".$district_id."]=new Option(\"".$this_district_name."\"); //Region_id=".$this_region_id."\n";
+								}
+							} else {
+								// it's a new region, so reset the value of "this region"
+								$district_id=0;
+								$region_id = $region_id + 1;
+								echo "group[".$region_id."][".$district_id."]=new Option(\"".$this_district_name."\"); //Region_id=".$this_region_id."\n";
+								$previous_region_id=$this_region_id;
+							} // end of if ($this_region_id==$previous_region_id)
 
-						$sql2="SELECT * FROM care_tz_district where is_additional=".$region['region_code'];
-						$ergebnis2=$db->Execute($sql2);
-						foreach($ergebnis2 as $district)
-						{
-							$v=1;
+						} // end of if ($FIRST_ROW==TRUE)
 
-							echo "group[".$region['region_code']."][".$i."]=new Option(\"".$district["district_name"]."\");\n";
-							$i=$i+1;
-						}
-						$j=$j+1;
-					} */
-					$j=1;
-					$sql="SELECT * FROM care_tz_region";
-					$ergebnis=$db->Execute($sql);
-					while($region=$ergebnis->FetchRow())
-					{
-						$i=1;
-						echo "group[".$j."][0]=new Option(\"now select this one\");\n";
-
-						$sql2="SELECT * FROM care_tz_district where is_additional=".$region['region_code'] ." order by district_name";
-						$ergebnis2=$db->Execute($sql2);
-						while($district=$ergebnis2->FetchRow())
-						{
-							$v=1;
-
-							echo "group[".$region['region_code']."][".$i."]=new Option(\"".$district["district_name"]."\");\n";
-							$i=$i+1;
-						}
-						$j=$j+1;
 					}
-
-
 				?>
-				var temp=document.aufnahmeform.district
 
+
+				var temp_district=document.aufnahmeform.district
+				var temp_ward=document.aufnahmeform.ward
 
 				function redirect(x){
-					for (m=temp.options.length-1;m>0;m--)
-						temp.options[m]=null
 
-					for (i=0;i<group[x].length;i++){
-						temp.options[i]=new Option(group[x][i].text)
+					// delete all previous entries
+					for (m=temp_district.options.length-1;m>0;m--)
+						temp_district.options[m]=null;
+					// set the new ones to this option list
+
+					for (i=1;i<group[x].length;i++){
+						temp_district.options[i]=new Option(group[x][i].text)
 					}
-						temp.options[0].selected=true
-						temp.options[0].value=-1;
-						redirect1(0)
+					temp_district.options[0].selected=true;
+					temp_district.options[0].value=-1;
+					redirect1(0)
 					}
 
 
 
-				var secondGroups=document.aufnahmeform.district.options.length
-				var secondGroup=new Array(groups)
+				function redirect1(y){
+					for (m=temp_ward.options.length-1;m>=0;m--)
+						temp_ward.options[m]=null;
 
-				for (i=0; i<groups; i++)  {
-					secondGroup[i]=new Array(group[i].length)
+					var region_index = document.aufnahmeform.region.options.selectedIndex;
+					var district_index = document.aufnahmeform.district.options.selectedIndex;
+					var i = 0;
 
-					for (j=0; j<group[i].length; j++)
-					{
-						secondGroup[i][j]=new Array()
+					for (i=0;i<100;i++){
+						temp_ward.options[i]=new Option(group[region_index][district_index][i].text)
 					}
+
+					temp_ward.options[0].selected=true
+					temp_ward.options[0].value=-1;
+
 				}
-				secondGroup[0][0][0]=new Option("-select Health Center-");
-
-				<?php
-				/*	$j=1;
-					$sql="SELECT * FROM care_tz_region";
-					$ergebnis=$db->Execute($sql);
-					foreach($ergebnis as $region)
-					{
-						$i=1;
-						echo "secondGroup[".$j."][0][0]=new Option(\"---select ward--------\");\n";
-
-						$sql2="SELECT * FROM care_tz_district where is_additional=".$region['region_code'];
-						$ergebnis2=$db->Execute($sql2);
-						foreach($ergebnis2 as $district)
-						{
-							$v=1;
-							echo  "secondGroup[".$j."][".$i."][0]=new Option(\"now select this one\");\n";
-
-							$sql3="SELECT * FROM care_tz_ward where is_additional =".$district['district_code'];
-							$ergebnis3=$db->Execute($sql3);
-							foreach($ergebnis3 as $ward)
-							{
-								echo  "secondGroup[".$region["region_code"]."][".$i."][".$v."]=new Option(\"".$ward["ward_name"]."\");\n";
-								$v=$v+1;
-							}
-							$i=$i+1;
-						}
-						$j=$j+1;
-					} */
-					$j=1;
-					$sql="SELECT * FROM care_tz_region";
-					$ergebnis=$db->Execute($sql);
-					while($region=$ergebnis->FetchRow())
-					{
-						$i=1;
-						echo "secondGroup[".$j."][0][0]=new Option(\"-select Health Center-\");\n";
-
-						$sql2="SELECT * FROM care_tz_district where is_additional=".$region['region_code'];
-						$ergebnis2=$db->Execute($sql2);
-						while($district=$ergebnis2->FetchRow())
-						{
-							$v=1;
-							echo  "secondGroup[".$j."][".$i."][0]=new Option(\"now select this one\");\n";
-
-							$sql3="SELECT * FROM care_tz_ward where is_additional =".$district['district_code'] ." order by ward_name";
-							$ergebnis3=$db->Execute($sql3);
-							while($ward=$ergebnis3->FetchRow())
-							{
-								echo  "secondGroup[".$region["region_code"]."][".$i."][".$v."]=new Option(\"".$ward["ward_name"]."\");\n";
-								$v=$v+1;
-							}
-							$i=$i+1;
-						}
-						$j=$j+1;
-					}
-				?>
-
-			var temp1=document.aufnahmeform.ward
-
-			function redirect1(y){
-				for (m=temp1.options.length-1;m>0;m--)
-					temp1.options[m]=null
-				for (i=0;i<secondGroup[document.aufnahmeform.region.options.selectedIndex][y].length;i++){
-					temp1.options[i]=new Option(secondGroup[document.aufnahmeform.region.options.selectedIndex][y][i].text)
-				}
-
-				temp1.options[0].selected=true
-				temp1.options[0].value=-1;
-
-			}
 
 			</script>
 
-
-
-
-
-				<?php
-
-
-/*
-					echo '<SELECT name="nat_id_nr" >';
-					echo '<OPTION value="-1" >'.'--SelectWard--'.'</OPTION>';
-					foreach($ward_array as $unit)
-					{
-						//if($update && (strtoupper($name_maiden) == strtoupper($unit[1])))
-						if((strtoupper($nat_id_nr) == strtoupper($unit[1])))
-						{
-							$check = 'selected';
-						}
-						else
-						{
-							$check = '';
-						}
-						echo '<OPTION value="'.$unit[1].'" '.$check.'>'.$unit[0].'</OPTION>';
-					}
-				// echo '<OPTION value="notinlist">NOT IN LIST</OPTION>';
-				 echo '</SELECT>'; */
-				?>
 
 				</td>
 				<?php
@@ -1447,7 +1424,7 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 			</td>
 			<td colspan=2 class="reg_input">
 				<FONT SIZE=-1  FACE="Arial"><nobr>
-				<input  name="user_id" type="text" value="<?php if(isset($user_id) && $user_id) echo $user_id; else  echo $HTTP_SESSION_VARS['sess_user_name'] ?>"  size="35" readonly>
+				<input  name="user_id" type="text" value="<?php if(isset($user_id) && $user_id) echo $user_id; else  echo $_SESSION['sess_user_name'] ?>"  size="35" readonly>
 				</nobr>
 			</td>
 			</tr>

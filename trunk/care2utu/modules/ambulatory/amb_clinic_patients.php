@@ -27,7 +27,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 /**
 * Set default values if not available from url
 */
-if (!isset($dept_nr)||empty($dept_nr)) { $dept_nr=$HTTP_SESSION_VARS['sess_dept_nr'];} # Default station must be set here !!
+if (!isset($dept_nr)||empty($dept_nr)) { $dept_nr=$_SESSION['sess_dept_nr'];} # Default station must be set here !!
 if(!isset($pday)||empty($pday)) $pday=date('d');
 if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
@@ -59,7 +59,7 @@ if(isset($retpath)){
 
 
 # Mark where we are
-$HTTP_SESSION_VARS['sess_user_origin']='amb';
+$_SESSION['sess_user_origin']='amb';
 
 # Load date formatter
 require_once($root_path.'include/inc_date_format_functions.php');
@@ -73,7 +73,7 @@ if(($mode=='')||($mode=='fresh')){
 	$enc_obj= new Encounter;
 
 	# Get all outpatients for this dept
-	if($sort=='') $sort='name_last';
+	if($_GET['sort']=='') $sort='name_last';
 	$opat_obj=&$enc_obj->OutPatientsBasic($sort,$dept_nr);
 	#echo $enc_obj->getLastQuery();
 	$rows=$enc_obj->LastRecordCount();
@@ -90,7 +90,7 @@ if(($mode=='')||($mode=='fresh')){
 
 	# set to edit mode
 	$edit=true;
-		# Create the waiting outpatients´ list
+		# Create the waiting outpatientsï¿½ list
 
 		$dnr=(isset($w_waitlist)&&$w_waitlist) ? 0 : $dept_nr;
 		//echo '<p>'.$enc_obj->getLastQuery();
@@ -99,7 +99,7 @@ if(($mode=='')||($mode=='fresh')){
 		$waitlist_count=$enc_obj->LastRecordCount();
 		//echo $waitlist_count.'<p>'.$enc_obj->getLastQuery();
 
-		# Get the doctor´s on duty information
+		# Get the doctorï¿½s on duty information
 		#### Start of routine to fetch doctors on duty
 		$elem='duty_1_pnr';
 		if(SHOW_DOC_2) $elem.=',duty_2_pnr';
@@ -162,9 +162,9 @@ if(($mode=='')||($mode=='fresh')){
 
  # Collect extra javascript code
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode=='paginate'){
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	$searchkey=$_SESSION['sess_searchkey'];
 }else{
 	# Reset paginator variables
 	$pgx=0;
@@ -173,7 +173,7 @@ if($mode=='paginate'){
 	$oitem='';
 }
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=& new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=& new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
  $breakfile='amb_clinic_patients.php';
 $newdata=1;
 $target='archiv';
@@ -296,7 +296,7 @@ if($rows){
 				#else $flag=FALSE;
 
 	$smarty->assign('LDBirthDate','<a href="amb_clinic_patients.php?&dept_nr='.$dept_nr.'&sort=date_birth">'.$LDBirthDate.'</a>');
-	$smarty->assign('LDPatNr','<a href="amb_clinic_patients.php?&dept_nr='.$dept_nr.'&sort=encounter_nr">'.$LDPatListElements[4].'</a>');
+	$smarty->assign('LDPatNr','<a href="amb_clinic_patients.php?&dept_nr='.$dept_nr.'&sort=pid">'.$LDPatNr.'</a>');
 	$smarty->assign('LDInsuranceType','<a href="amb_clinic_patients.php?&dept_nr='.$dept_nr.'&sort=selian_pid">'.$LDPatListElements[7].'</a>');
 	$smarty->assign('LDOptions',$LDPatListElements[6]);
 
@@ -313,7 +313,6 @@ if($rows){
 	# Loop trough patients
 
 	while ($patient=$opat_obj->FetchRow()){
-
 			if($patient['encounter_nr']==$sEncNrBuffer) continue;
 				else $sEncNrBuffer=$patient['encounter_nr'];
 
@@ -334,6 +333,7 @@ if($rows){
 			$smarty->assign('sNotesIcon','');
 			$smarty->assign('sTransferIcon','');
 			$smarty->assign('sDischargeIcon','');
+
 
 			$sAstart='';
 			$sAend='';
@@ -415,7 +415,14 @@ if($rows){
 					else $smarty->assign('sBirthDate',formatDate2Local($patient['date_birth'],$date_format));
 			}
 
-			if ($patient['encounter_nr']) $smarty->assign('sPatNr',$patient['encounter_nr']);
+			$enc_obj->loadEncounterData( $patient['encounter_nr'] );
+			$pid = $enc_obj->PID();
+
+			if ($patient['encounter_nr']) $smarty->assign('sPatNr',$pid);
+
+
+
+			//if ($patient['encounter_nr']) $smarty->assign('sPatNr',$patient['encounter_nr']);
 			if(isset($sfn)&&$sfn) $sNameBuffer = eregi_replace($sfn,'<span style="background:yellow">'.ucfirst($sln).'</span>',ucfirst($patient['title']));
 				else $sNameBuffer = ucfirst($patient['title']);
 
@@ -426,6 +433,7 @@ if($rows){
 				else  $sBuffer = $sBuffer.$patient['selian_pid'];
 
 			$smarty->assign('sInsuranceType',$sBuffer);
+
 
 			if($edit){
 
@@ -454,7 +462,10 @@ if($rows){
 						$temp_image="<a href=\"javascript:getEyeclinic('".$patient['pid']."','".$patient['encounter_nr']."')\"><img width=17 height=17 ".createComIcon($root_path,'eye.gif','0','',TRUE)." alt=\"Eye Examination\"></a>";
 					//}
 				}
+
+
 				$smarty->assign('sARVIcon',$temp_image);
+
 				$smarty->assign('sChartFolderIcon','<a href="javascript:getinfo(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'open.gif','0','',TRUE).' alt="'.$LDShowPatData.'"></a>');
 
 				$sBuffer = '<a href="javascript:getrem(\''.$patient['encounter_nr'].'\')"><img ';
@@ -465,6 +476,8 @@ if($rows){
 				$smarty->assign('sNotesIcon',$sBuffer);
 
 				$smarty->assign('sTransferIcon','<a href="javascript:Transfer(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'xchange.gif','0','',TRUE).' alt="'.$LDTransferPatient.'"></a>');
+
+
 
 				/* MEROTECH:
 				Commented out for selian town clinic by Alexander Irro
@@ -624,7 +637,7 @@ while ($patient=$opat_obj->FetchRow()){
 		$occ_list.=' alt="'.$LDNoticeRW.'"></a>';
 		$occ_list.='&nbsp;<a href="javascript:Transfer(\''.$patient['encounter_nr'].'\')" title="'.$LDTransferPatient.'"><img '.createComIcon($root_path,'xchange.gif','0').' alt="'.$LDTransferPatient.'"></a>
 		 <a href="javascript:release(\''.$patient['encounter_nr'].'\')" title="'.$LDReleasePatient.'"><img '.createComIcon($root_path,'bestell.gif','0').' alt="'.$LDReleasePatient.'"></a>';
-		 //<a href="javascript:deletePatient(\''.$helper[r].'\',\''.$helper[b].'\',\''.$helper[t].'\',\''.$helper[ln].'\')"><img src="../img/delete.gif" border=0 width=19 height=19 alt="Löschen (Passwort erforderlich)"></a>';
+		 //<a href="javascript:deletePatient(\''.$helper[r].'\',\''.$helper[b].'\',\''.$helper[t].'\',\''.$helper[ln].'\')"><img src="../img/delete.gif" border=0 width=19 height=19 alt="Lï¿½schen (Passwort erforderlich)"></a>';
 
 		 $occ_list.='</nobr>
 	 	</td>

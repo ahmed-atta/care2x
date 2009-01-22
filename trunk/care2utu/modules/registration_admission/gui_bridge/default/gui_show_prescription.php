@@ -110,7 +110,7 @@ if($parent_admit&&!$is_discharged) {
 ?>
 <p>
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
-<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new'; ?>">
+<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new'; ?>">
 <?php echo $LDEnterNewRecord; ?>
 </a>
 <?php

@@ -28,6 +28,7 @@ class Product extends Core {
   var $tbl_temp="tmp_search_results";
   var $fields_tbl_product=array(
 	                            'item_number',
+  								'partcode',
 								'is_pediatric',
 								'is_adult',
 								'is_other',

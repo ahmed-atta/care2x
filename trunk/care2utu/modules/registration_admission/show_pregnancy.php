@@ -30,7 +30,7 @@ if(!isset($mode)){
 	$saved=FALSE;
 
 	# Prepare additional info saving
-	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
 	$HTTP_POST_VARS['modify_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
 	if(empty($HTTP_POST_VARS['delivery_date'])) $HTTP_POST_VARS['delivery_date']=date('Y-m-d');
 		else $HTTP_POST_VARS['delivery_date']=@formatDate2STD($HTTP_POST_VARS['delivery_date'],$date_format);
@@ -54,8 +54,8 @@ if(!isset($mode)){
 		if(isset($rec_nr)&&$rec_nr){
 			$obj->deactivatePregnancy($HTTP_POST_VARS['rec_nr']);
 		}
-		$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-		$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+		$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
 		$HTTP_POST_VARS['create_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
 		$obj->setDataArray($HTTP_POST_VARS);
 
@@ -66,7 +66,7 @@ if(!isset($mode)){
 		}
 	}
 	if($saved){
-		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
+		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&allow_update=1&pid=".$_SESSION['sess_pid']);
 		exit;
 	}
 }
@@ -75,15 +75,15 @@ require('./include/init_show.php');
 
 if($parent_admit){
 	# Get the pregnancy data of this encounter
-	$pregs=&$obj->Pregnancies($HTTP_SESSION_VARS['sess_en'],'_ENC');
+	$pregs=&$obj->Pregnancies($_SESSION['sess_en'],'_ENC');
 }else{
 	# Get all pregnancies  of this person
-	$pregs=&$obj->Pregnancies($HTTP_SESSION_VARS['sess_pid'],'_REG');
+	$pregs=&$obj->Pregnancies($_SESSION['sess_pid'],'_REG');
 }
 $rows=$obj->LastRecordCount();
 
 $subtitle=$LDPregnancies;
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 
