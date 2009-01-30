@@ -212,19 +212,19 @@ $LDClickSelectDept='Seleziona un dipartimento.';
 $LDClickSelectPharma='Seleziona una farmacia';
 
 # claudio 2 dicembre 2007
-$LDRaporteFarmaci='Report';
-$LDRaporteFarmaciTxt='Report';
-$LDFurnitor='Fornitore';
-$LDFurnitorTxt='Crea, modifica fornitore';
+$LDPharmaReports='Report';
+$LDPharmaReportsTxt='Report';
+$LDSupplier='Fornitore';
+$LDSupplierTxt='Crea, modifica fornitore';
 
 $LDAdresa='Indirizzo';
 $LDTelefoni='Telefono';
 $LDFax='Fax';
 $LDKodiPostar='CAP';
 
-$LDFurnizimTxt='Lista Aziende fornitrici';
-$LDFurnizim='Azienda fornitrice';
-$LDClickSelectFurnitor='Seleziona azienda';
-$LDSelectFurnitor='Seleziona azienda';
-$LDRaporteDepo='Reports';
+$LDSupplyTxt='Lista Aziende fornitrici';
+$LDSupply='Azienda fornitrice';
+$LDClickSelectSupplier='Seleziona azienda';
+$LDSelectSupplier='Seleziona azienda';
+$LDDepotReportsTxt='Reports';
 ?>

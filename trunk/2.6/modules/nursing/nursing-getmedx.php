@@ -192,7 +192,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	}
 		
 	function repeatPrescription(prescriptionId){
-		var answer = "Jeni te sigurt se deshironi te perserisni terapine ";
+		var answer = "Are you sure you want to apply the therapy again";
 		if( confirm(answer) ) {
 			window.location = "<?php echo $thisfile ?>?sid=<?php echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&tag=$dystart&monat=$mo&jahr=$yr&tagname=$dyname&mode=repeat&dept_nr=$dept_nr&prescriptionId=" ?>" + prescriptionId;
 		} else {
@@ -281,19 +281,19 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		}
 		//for avoiding only one medicaments checked as accompanied
 		if(!document.getElementById('companion').checked && countCompanions == 1){
-			alert('Kujdes nuk keni perzgjedhur shoqerimin');
+			alert('Warning no companion medicament selected');
 			exit;
 		}
 		var roseBars = countRoseBars();
-		if(roseBars == '') { alert('Perzgjidhni Oren'); return true;}
+		if(roseBars == '') { alert('Select Time'); return true;}
 		//get the values
 		if(document.getElementById('bestellnum').value) elembName = document.getElementById('bestellnum').value;
 		if(document.getElementById('search').value) elemmName = document.getElementById('search').value;
-		else { alert('Perzgjidhni medikamentin'); return true; }
+		else { alert('Select medicament'); return true; }
 		if(document.getElementById('dosage').value) elemdName = document.getElementById('dosage').value
-		else { alert('Shkruani Sasine'); return true; }	
+		else { alert('Select quantity'); return true; }	
 		if(document.getElementById('application_type_nr').value) elemaName = document.getElementById('application_type_nr').value;
-		else { alert('Perzgjidhni Menyren e dhenies'); return true; }
+		else { alert('Select application type'); return true; }
 		elempName = document.getElementById('pspeed').value;
 		elemnName = document.getElementById('notesMed').value;
 		
@@ -308,7 +308,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
         	parameters: { bestellnum : elembName, dose : elemdName,times : numTimes.length },
         	onComplete: function (req) {
         		if(req.responseText == "0") {
-        			alert("Medikamenti : " + elemmName + " \nnuk gjindet ne farmaci!\nJu lutemi te zgjidhni nje tjeter.");
+        			alert("Medicament : " + elemmName + " \nis not present in the pharmacy!\nPlease check the spelling.");
 					notfound = true;
 				}
         	}
@@ -409,12 +409,12 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 	
 	function printPrescription(enc,presnr) {
 		urlholder="<?php echo $root_path ?>modules/pdfmaker/prescription/report_all.php<?php echo URL_REDIRECT_APPEND; ?>&enc="+enc+"&presnr="+presnr;
-		window.open(urlholder,'Terapia Ditore',"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
+		window.open(urlholder,'Daily Therapy',"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	
 	function submitMainForm() {
 		if(countCompanions == 1) {
-			alert('Keni nje gabim ne zgjedhjen e medikamenteve');
+			alert('Error in the selection of the medicament');
 			exit;
 			return false;
 		} else
@@ -507,8 +507,8 @@ onLoad="<?php if($saved || $repeated) echo "parentrefresh();"; ?>if (window.focu
 <form name="infoform" id="infoform" action="<?php echo $thisfile ?>" method="post">
 <div id="TabbedPanels1" class="TabbedPanels">
   <ul class="TabbedPanelsTabGroup">
-    <ul class="TabbedPanelsTab" tabindex="0"><font face=verdana,arial size=5 color=maroon>Recetat e dhena</font></ul>
-    <ul class="TabbedPanelsTab" tabindex="0"><font face=verdana,arial size=5 color=maroon>Recete e re</font></ul>
+    <ul class="TabbedPanelsTab" tabindex="0"><font face=verdana,arial size=5 color=maroon>Prescription</font></ul>
+    <ul class="TabbedPanelsTab" tabindex="0"><font face=verdana,arial size=5 color=maroon>New Prescription</font></ul>
   </ul>
   <div class="TabbedPanelsContentGroup">
     <div class="TabbedPanelsContent">
@@ -535,13 +535,13 @@ if($count){
 	$row=$medis->fields;
 	do {
 			$companionBestellnum =  explode(",",unserialize($row['companion']));
-			echo "<span style=\"cursor:pointer;font-weight:bold;float: left;\" onclick=\"new Effect.toggle('_". $row['prescription_nr']  ."_', 'blind' );\" /><font face=verdana,arial size=2 color=maroon>Receta Nr : " . $row['prescription_nr']. " / Dt: " .$row['prescribe_date'] ."</font></span>";
+			echo "<span style=\"cursor:pointer;font-weight:bold;float: left;\" onclick=\"new Effect.toggle('_". $row['prescription_nr']  ."_', 'blind' );\" /><font face=verdana,arial size=2 color=maroon>Therapy Nr : " . $row['prescription_nr']. " / Dt: " .$row['prescribe_date'] ."</font></span>";
 			echo '<span style="float:right;cursor:pointer;"><img onClick="repeatPrescription(' .  $row['id'] . ');"' . createLDImgSrc($root_path,'redo.png','0') . ' alt=' .  $LDSave . '>&nbsp;';
 			if($row['status'] != 'printed') echo '<img onclick="printPrescription(' . $row['encounter_nr']  .','. $row['id'] .');"' . createLDImgSrc($root_path,'printer.png','0') . ' alt=' .  $LDPrint . '>';
 			echo '</span><br /><br />';
 			echo '<div id="_' . $row['prescription_nr'] .'_" style="display:none;">';
 			echo '<table border=0 cellpadding=4 cellspacing=1 width=100% class="frame">';
-			echo '<tr><td><strong>Medikamenti / Form-Doza</strong></td><td><strong>Sasia</strong></td><td><strong>Ora</strong></td><td><strong>Shpejtesia</strong></td><td><strong>Menyra</strong></td><td><strong>Shenime</strong></td></tr>';
+			echo '<tr><td><strong>Medicament / Form-Dose</strong></td><td><strong>Qty.</strong></td><td><strong>Time</strong></td><td><strong>Speed</strong></td><td><strong>App. type</strong></td><td><strong>Notes</strong></td></tr>';
 			do {			
 				$i++; ?>
 					<?php
@@ -588,7 +588,7 @@ if($count){
 			$medis->Move($i-1) ;
 			$row=$medis->fields;
 			echo'<tr>';
-			echo '	<td colspan="4"> Shenime : ' . hilite($row['notes']);
+			echo '	<td colspan="4"> Notes : ' . hilite($row['notes']);
 			echo '	</td>
 			    </tr>';
 			echo '</table></div>';
@@ -609,13 +609,13 @@ if($count){
 <div class="TabbedPanelsContent">
 <table>
   <tr>
-    <td><label>Medikamenti  / Form-Doza: </label></td>
+    <td><label>Medicament  / Form-Dose: </label></td>
     <td>&nbsp;</td>
-    <td><label>Doza</label></td>
-    <td><label>Menyra dhenies : </label></td>
-    <td><label>Shoq. : </label></td>
-    <td>Koha :</td>
-    <td>Shenime :</td>
+    <td><label>Dose</label></td>
+    <td><label>App. Type : </label></td>
+    <td><label>Acc. : </label></td>
+    <td>Time :</td>
+    <td>Notes :</td>
     <td rowspan="4"><?php echo '<img style="cursor:pointer;"onClick="addPrescription();"' . createLDImgSrc($root_path,'add.png','0') . ' alt=' .  $LDAdd . '>'; ?> </td>
   </tr>
   <tr>
@@ -703,12 +703,12 @@ src="../../gui/img/common/default/qbar_0_rose.gif" border=0 width="10" height="4
 <table>
 <table id="prescriptionTable" width="100%">
 <tr>
-<td><strong>Medikamenti / Form-Doza</strong></td><td><strong>Doza dhe Ora e Dhenies</strong></td><td><strong>Menyra dhenies</strong></td><td><strong>Koha</strong></td><td><strong>Shenime</strong></td><td>&nbsp;</td> 
+<td><strong>Medicament / Form-Dose</strong></td><td><strong>Dose and Time of application</strong></td><td><strong>App. type</strong></td><td><strong>Time</strong></td><td><strong>Notes</strong></td><td>&nbsp;</td> 
 </tr>
 </table>
 <table>
 	<tr valign="top">
-		<td valign="top"><label>Shenime : </label></td>
+		<td valign="top"><label>Notes : </label></td>
 		<td>
 		<textarea name="notes" id="notes" cols="20" rows="4"></textarea>
 		<br>&nbsp;

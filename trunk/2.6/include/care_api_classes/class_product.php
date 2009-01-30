@@ -77,11 +77,11 @@ class Product extends Core {
 						'minorder',
 						'maxorder',
 						'proorder',
-						'sasi',
-						'cmimi',
-						'vlere',
-						'skadenca',
-						'doza',
+						'quantity',
+						'price',
+						'value',
+						'expiry',
+						'dose',
 						'packing');
 	/**
 	* Field names of care_pharma_products_main or care_med_products_main tables
@@ -94,7 +94,7 @@ class Product extends Core {
 							'generic',
 							'description',
 							'packing',
-							'doza',
+							'dose',
 							'minorder',
 							'maxorder',
 							'proorder',
@@ -111,7 +111,7 @@ class Product extends Core {
 							'modify_time',
 							'create_id',
 							'create_time',
-							'magazina',
+							'warehouse',
 							'minpcs');
 	/**
 	* Field names of care_med_products_main_sub
@@ -119,8 +119,8 @@ class Product extends Core {
 	*/
 	var $fld_prodmain_sub=array('id',
 								'pcs',
-								'skadenca',
-								'cmimi',
+								'expiry',
+								'price',
 								'bestellnum',
 								'create_time');
 										
@@ -130,8 +130,8 @@ class Product extends Core {
 	*/
 	var $fld_pharmamain_sub=array('id',
 									'pcs',
-									'skadenca',
-									'cmimi',
+									'expiry',
+									'price',
 									'bestellnum',
 									'idcare_pharma',
 									'create_time');
@@ -259,7 +259,7 @@ class Product extends Core {
 		global $db;
 		if(empty($type)||empty($bestellnum)) return false;
 		$this->useOrderCatalog($type);
-		$this->sql="SELECT * FROM care_pharma_products_main_sub WHERE bestellnum='$bestellnum' AND pcs > 0  AND idcare_pharma = $pharma ORDER BY skadenca ASC";
+		$this->sql="SELECT * FROM care_pharma_products_main_sub WHERE bestellnum='$bestellnum' AND pcs > 0  AND idcare_pharma = $pharma ORDER BY expiry ASC";
 		if($this->res['aoc']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['aoc']->RecordCount()) {
 				return $this->res['aoc'];
@@ -280,7 +280,7 @@ class Product extends Core {
 		global $db;
 		if(empty($type)||empty($bestellnum)) return false;
 		$this->useOrderCatalog($type);
-		$this->sql="SELECT * FROM care_med_products_main_sub WHERE bestellnum='$bestellnum' AND pcs > 0 ORDER BY  skadenca ASC";
+		$this->sql="SELECT * FROM care_med_products_main_sub WHERE bestellnum='$bestellnum' AND pcs > 0 ORDER BY  expiry ASC";
 		if($this->res['aoc']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['aoc']->RecordCount()) {
 				return $this->res['aoc'];
@@ -466,14 +466,14 @@ class Product extends Core {
 		$this->coretable=$this->tb_prescription_sub;
 		$this->ref_array=$this->fld_presc_sub;
 		$this->sql="INSERT INTO $this->tb_pocat(bestellnum, quantity, artikelname,
-                     minorder, maxorder, proorder, doza, packing, dept_nr)
+                     minorder, maxorder, proorder, dose, packing, dept_nr)
                     SELECT $this->tb_prescription_sub.bestellnum,
                            SUM($this->tb_prescription_sub.quantity) AS quantity,
                            $this->tb_pmain.artikelname,
                            $this->tb_pmain.minorder,
                            $this->tb_pmain.maxorder,
                            $this->tb_pmain.proorder,
-                           $this->tb_pmain.doza,
+                           $this->tb_pmain.dose,
                            $this->tb_pmain.packing,
                            care_encounter_prescription.dept_nr
                     FROM $this->tb_pmain
@@ -487,7 +487,7 @@ class Product extends Core {
                              $this->tb_pmain.minorder,
                              $this->tb_pmain.maxorder,
                              $this->tb_pmain.proorder,
-                             $this->tb_pmain.doza,
+                             $this->tb_pmain.dose,
                              $this->tb_pmain.packing,
                              care_encounter_prescription.dept_nr
                     ORDER BY $this->tb_prescription_sub.companion DESC";
@@ -516,7 +516,7 @@ class Product extends Core {
 		//get the actual prices of the mediaments
 		$this->sql = "SELECT $this->tb_polist.dept_nr,
                            $this->tb_polist.status,
-                           AVG ($this->tb_polist_sub.cmimi) AS cmimi,
+                           AVG ($this->tb_polist_sub.price) AS price,
                            $this->tb_polist_sub.bestellnum
                     FROM $this->tb_polist
                          INNER JOIN $this->tb_polist_sub ON ($this->tb_polist.order_nr =
@@ -532,11 +532,11 @@ class Product extends Core {
 		
 		//update the prices for the prescriptions
 		while($actualProduct = $actualPrices->fetchRow()) {
-			$cmimi = $actualProduct['cmimi'];
+			$price = $actualProduct['price'];
 			$bnum = $actualProduct['bestellnum'];
 			$this->sql = "UPDATE $this->tb_prescription,
                                $this->tb_prescription_sub
-                        SET $this->tb_prescription_sub.price = $cmimi, 
+                        SET $this->tb_prescription_sub.price = $price, 
                         	$this->tb_prescription_sub.status = 'done'
                         WHERE $this->tb_prescription.nr =
                          $this->tb_prescription_sub.prescription_nr AND

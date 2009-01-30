@@ -65,15 +65,15 @@ function createOrderList($validator,$prior,$dept_nr) {
     	$proorder = 'proorder' . $i;
     	$bestellnum = 'bestellnum' . $i;
     	$idsub = 'idsub' . $i;
-    	$doza = 'doza' .$i;
-    	$njesia = 'njesia' .$i;
-    	$cmimi = 'cmimi' .$i;
-    	$vlera = 'vlera' .$i;
-    	$skadenca = 'skadenca' . $i;
+    	$dose = 'dose' .$i;
+    	$unit = 'unit' .$i;
+    	$price = 'price' .$i;
+    	$value = 'value' .$i;
+    	$expiry = 'expiry' . $i;
 
     	if($_POST[$art]) {
-        	$sqlSub = "INSERT INTO $dbtablesub(order_nr_sub,bestellnum,idsub,artikelname,pcs,proorder,njesia,skadenca,cmimi,doza,vlera)
-        				VALUES ('$order_nr','$_POST[$bestellnum]','$_POST[$idsub]','$_POST[$art]','$_POST[$p]','$_POST[$proorder]','$_POST[$njesia]','$_POST[$skadenca]','$_POST[$cmimi]','$_POST[$doza]','$_POST[$vlera]')";
+        	$sqlSub = "INSERT INTO $dbtablesub(order_nr_sub,bestellnum,idsub,artikelname,pcs,proorder,unit,expiry,price,dose,value)
+        				VALUES ('$order_nr','$_POST[$bestellnum]','$_POST[$idsub]','$_POST[$art]','$_POST[$p]','$_POST[$proorder]','$_POST[$unit]','$_POST[$expiry]','$_POST[$price]','$_POST[$dose]','$_POST[$value]')";
         	if($ergebnis=$product_obj->Transact($sqlSub)) {
         		$saveok = true;	
         	}else { echo "$sql<br>$LDDbNoSave<br>";$db->RollbackTrans(); exit();}
@@ -218,11 +218,11 @@ if ($_POST['maxnum']>0) {
         		<td><font face="Verdana,Arial" size="1">'.$_POST[$art].'</font><input type="hidden" name="art'.$i.'" value="'.$_POST[$art].'"></td>
         		<td align="right"><font face="Verdana,Arial" size="1">'.$_POST[$p].'</font><input type="hidden" name="p'.$i.'" value="'.$_POST[$p].'"></td>
         		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['proorder'].'</font><input type="hidden" name="proorder'.$i.'" value="'.$prodInfo['proorder'].'"></td>
-        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['doza'].'</font><input type="hidden" name="doza'.$i.'" value="'.$prodInfo['doza'].'"></td>
-        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['njesia'].'</font><input type="hidden" name="njesia'.$i.'" value="'.$prodInfo['njesia'].'"></td>					
-        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['cmimi'].'</font><input type="hidden" name="cmimi'.$i.'" value="'.$prodInfo['cmimi'].'"></td>									
-        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['cmimi'] * $_POST[$p].'</font><input type="hidden" name="vlera'.$i.'" value="'.$prodInfo['cmimi'] * $_POST[$p].'"></td>									
-        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['skadenca'].'</font><input type="hidden" name="skadenca'.$i.'" value="'.$prodInfo['skadenca'].'"></td>										
+        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['dose'].'</font><input type="hidden" name="dose'.$i.'" value="'.$prodInfo['dose'].'"></td>
+        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['unit'].'</font><input type="hidden" name="unit'.$i.'" value="'.$prodInfo['unit'].'"></td>					
+        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['price'].'</font><input type="hidden" name="price'.$i.'" value="'.$prodInfo['price'].'"></td>									
+        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['price'] * $_POST[$p].'</font><input type="hidden" name="value'.$i.'" value="'.$prodInfo['price'] * $_POST[$p].'"></td>									
+        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['expiry'].'</font><input type="hidden" name="expiry'.$i.'" value="'.$prodInfo['expiry'].'"></td>										
         		<td align="right"><font face="Verdana,Arial" size="1">'.$_POST[$bestellnum].'</font>
         			<input type="hidden" name="bestellnum'.$i.'" value="'.$_POST[$bestellnum].'"></td>
         			<input type="hidden" name="idsub'.$i.'" value="'.$_POST[$idsub].'"></td>

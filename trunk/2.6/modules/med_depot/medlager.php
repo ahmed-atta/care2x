@@ -99,9 +99,9 @@ $aSubMenuText=array($LDPharmaOrderTxt,
 										$LDOrderArchiveTxt,
 										$LDPharmaDbTxt,
 										$LDOrderBotActivateTxt,
-										$LDFurnitorTxt,
-										$LDFurnizimTxt,
-										$LDRaporteDepoTxt
+										$LDSupplierTxt,
+										$LDSupplyTxt,
+										$LDDepotReportsTxt
 										);
 
 # Prepare the submenu item links indexed by their template tags

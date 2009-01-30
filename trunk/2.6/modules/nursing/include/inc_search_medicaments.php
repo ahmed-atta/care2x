@@ -36,6 +36,6 @@ if (!$ergebnis) {
 <ul>
 <?php while($zeile=$ergebnis->FetchRow()) { ?>
 	<li id="<?php echo stripslashes($zeile["bestellnum"]);?>">
-<div class="sx"><?php echo stripslashes($zeile["artikelname"]);echo " - ";echo stripslashes($zeile["generic"]); ?></div><span > / <?php echo stripslashes($zeile["packing"]);echo " - ";echo stripslashes($zeile["doza"]);?></span></li>
+<div class="sx"><?php echo stripslashes($zeile["artikelname"]);echo " - ";echo stripslashes($zeile["generic"]); ?></div><span > / <?php echo stripslashes($zeile["packing"]);echo " - ";echo stripslashes($zeile["dose"]);?></span></li>
 				<?php } ?>
 </ul>
