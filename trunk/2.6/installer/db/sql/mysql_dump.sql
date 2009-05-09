@@ -16,6 +16,27 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `care_accesslog`
+--
+
+CREATE TABLE IF NOT EXISTS `care_accesslog` (
+  `id` int(11) NOT NULL auto_increment,
+  `datetime` datetime NOT NULL,
+  `ip` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `lognote` text collate utf8_unicode_ci NOT NULL,
+  `userid` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `username` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `password` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `thisfile` text collate utf8_unicode_ci NOT NULL,
+  `fileforward` text collate utf8_unicode_ci NOT NULL,
+  `login_success` int(1) NOT NULL default '1',
+  PRIMARY KEY  (`id`)
+);
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `care_address_citytown`
 --
 

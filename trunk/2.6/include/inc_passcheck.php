@@ -5,7 +5,7 @@ if (eregi('inc_passcheck.php',$PHP_SELF))
 /*------end------*/
 
 require_once($root_path.'include/access_log.php');
-$logs = new AccessLog($root_path.'logs/');
+$logs = new AccessLog();
 /**
 * CARE 2002 Integrated Hospital Information System
 * GNU General Public License
