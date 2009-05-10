@@ -2,6 +2,8 @@
 require_once($root_path.'include/inc_init_main.php');
 require_once($root_path.'classes/adodb/adodb.inc.php');
 require_once($root_path.'classes/adodb/adodb-errorpear.inc.php');
+require_once($root_path.'classes/adodb/adodb-pager.inc.php');
+
 /**
  * @class      AccessLogs
  * @short      Simple Read/Write log manager
@@ -36,6 +38,13 @@ class AccessLog {
 		}
 	}
 
+	public function RenderLogsTable ( $sql ) {
+
+		$pager = new ADODB_Pager($this->conn,$sql);
+    	return $pager->Render($rows_per_page=10); 
+		
+	}
+	
 	/*
 	 * writes a log line
 	 */
