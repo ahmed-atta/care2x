@@ -40,7 +40,7 @@ $LDHowEnter='How to enter new phone information';
 
 $LDPhoneDir='Phone directory';
 $LDMakeDutyPlan='Create dutyplan';
-$LDDocsList='Doctors\' list';
+$LDDocsList='Doctors list';
 $LDNursingManage='Ward management';
 
 $LDNursingStation='Nursing ward';
@@ -111,7 +111,7 @@ $LDPendingRequest='Pending request';
 /* 2002-10-06 EL*/
 $LDLoggedOut='Logged out';
 /* 2003-03-18 EL */
-$LDNursesList='Nurses\' List';
+$LDNursesList='Nurses List';
 $LDAppointments='Appointments';
 /* 2003-04-27 */
 $LDInsuranceCoManager='Insurance Company Manager';

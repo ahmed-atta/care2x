@@ -347,8 +347,8 @@ $LDSaveChanges='Save changes';
 /* 2002-12-07*/
 $LDNoDiagReport='No diagnostic report available.';
 /* 2003-03-23 EL */
-$LDNursesList='Nurses\' List';
-$LDNursesListTxt='List, View, Create, & Edit Nurses\' List';
+$LDNursesList='Nurses List';
+$LDNursesListTxt='List, View, Create, & Edit Nurses List';
 /* 2003-04-18 */
 $LDInsurance='Health Fund';
 $LDPrivate='Private';

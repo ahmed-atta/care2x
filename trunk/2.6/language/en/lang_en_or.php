@@ -332,7 +332,7 @@ $LDDutyPlan='Duty plan';
 /* 2003-03-18 EL */
 $LDSearchInAllDepts='Search in all departments';
 $LDAddNurseToList='Add a nurse to list';
-$LDNursesList='Nurses\' List';
+$LDNursesList='Nurses List';
 /* 2003-03-19 EL */
 $LDPlsSelectDept='Please select a department.';
 $LDSelectORoomNr='...and an OP Room.';
