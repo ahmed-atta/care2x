@@ -169,7 +169,7 @@ function makefwdpath($path,$dpt,$mo,$yr,$saved)
  $smarty->assign('breakfile',$breakfile);
 
  # Body onLoad javascript
- $smarty->assign('sOnLoadJs','onUnload="killchild()"');
+ //$smarty->assign('sOnLoadJs','onUnload="killchild()"');
 
  # Window bar title
  $smarty->assign('sWindowTitle',$sTitle);
