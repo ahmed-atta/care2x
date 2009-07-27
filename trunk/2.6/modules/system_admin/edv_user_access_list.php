@@ -25,9 +25,9 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require($root_path.'include/inc_accessplan_areas_functions.php');
 
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
-//$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
+//$returnfile=$_SESSION['sess_file_return'].URL_APPEND;
 $returnfile='edv_user_access_edit.php'.URL_APPEND;
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+$_SESSION['sess_file_return']=basename(__FILE__);
 
 /* Load the date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');

@@ -31,16 +31,16 @@ if ($mode=='save'){
     if (($name!="")or($vorname!="")){
 
                 # Correctly map some indexes
-                $HTTP_POST_VARS['roomnr']=$HTTP_POST_VARS['zimmerno'];
-                $HTTP_POST_VARS['date'] = $curdate;
-                $HTTP_POST_VARS['time'] = $curtime;
-                $HTTP_POST_VARS['modify_id'] = $HTTP_SESSION_VARS['sess_user_name'];
-                $HTTP_POST_VARS['modify_time'] = date('YmdHis');
-                $HTTP_POST_VARS['history'] = $phone->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
-                $HTTP_POST_VARS['title'] = $HTTP_POST_VARS['anrede'];
+                $_POST['roomnr']=$_POST['zimmerno'];
+                $_POST['date'] = $curdate;
+                $_POST['time'] = $curtime;
+                $_POST['modify_id'] = $_SESSION['sess_user_name'];
+                $_POST['modify_time'] = date('YmdHis');
+                $_POST['history'] = $phone->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
+                $_POST['title'] = $_POST['anrede'];
 
                 $phone->setWhereCondition("item_nr='$itemname'");
-                $phone->setDataArray($HTTP_POST_VARS);
+                $phone->setDataArray($_POST);
 
  				if($phone->updateDataFromInternalArray($itemname))
 						{

@@ -19,23 +19,23 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $thisfile=basename(__FILE__);
 //$breakfile='patient.php';
 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfile=$root_path."main/startframe.php".URL_APPEND;
+if($_COOKIE["ck_login_logged".$sid]) $breakfile=$root_path."main/startframe.php".URL_APPEND;
 	else $breakfile="patient.php".URL_APPEND."&target=entry";
 
 $admissionfile='aufnahme_start.php'.URL_APPEND;
 
 # Resolve PID
-if((!isset($pid)||!$pid)&&$HTTP_SESSION_VARS['sess_pid']) $pid=$HTTP_SESSION_VARS['sess_pid'];
+if((!isset($pid)||!$pid)&&$_SESSION['sess_pid']) $pid=$_SESSION['sess_pid'];
 
 # Save session data
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
-$HTTP_SESSION_VARS['sess_pid']=$pid;
-//$HTTP_SESSION_VARS['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
-$HTTP_SESSION_VARS['sess_parent_mod']='registration';
-$HTTP_SESSION_VARS['sess_user_origin']='registration';
+$_SESSION['sess_path_referer']=$top_dir.$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
+$_SESSION['sess_pid']=$pid;
+//$_SESSION['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
+$_SESSION['sess_parent_mod']='registration';
+$_SESSION['sess_user_origin']='registration';
 # Reset the encounter number
-$HTTP_SESSION_VARS['sess_en']=0;
+$_SESSION['sess_en']=0;
 
 # Create the person show GUI
 require_once($root_path.'include/care_api_classes/class_gui_person_show.php');
@@ -168,7 +168,7 @@ $smarty->assign('sSearchLink','<img '.createComIcon($root_path,'varrow.gif','0')
 $smarty->assign('sArchiveLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="patient_register_archive.php'.URL_APPEND.'&newdata=1&from=entry">'.$LDArchive.'</a>');
 
 $sCancel="<a href=";
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $sCancel.=$breakfile;
+if($_COOKIE['ck_login_logged'.$sid]) $sCancel.=$breakfile;
 	else $sCancel.='aufnahme_pass.php';
 $sCancel.=URL_APPEND.'><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt="'.$LDCancelClose.'"></a>';
 

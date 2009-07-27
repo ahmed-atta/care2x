@@ -2,7 +2,7 @@
 
 # Resolve href for close button
 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfilen = $root_path."main/startframe.php".URL_APPEND;
+if($_COOKIE["ck_login_logged".$sid]) $breakfilen = $root_path."main/startframe.php".URL_APPEND;
 	else $breakfile = $breakfile.URL_APPEND."&target=entry";
 
 //gjergji : new calendar
@@ -508,7 +508,7 @@ if(!empty($rows)){
 
 <p>
 <a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php';
+<?php if($_COOKIE['ck_login_logged'.$sid]) echo 'startframe.php';
 	else echo 'patient.php';
 	echo URL_APPEND;
 ?>

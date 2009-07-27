@@ -17,15 +17,15 @@ define('MAX_BLOCK_ROWS',30);
 define('AUTOSHOW_ONERESULT',1); # Defining to 1 will automatically show the admission data if the search result is one, otherwise the single result will be listed
 
 function Cond($item,$k){
-	global $where,$tab,$HTTP_POST_VARS, $sql_LIKE;
-	if(empty($HTTP_POST_VARS[$item])) return false;
+	global $where,$tab,$_POST, $sql_LIKE;
+	if(empty($_POST[$item])) return false;
 	else{
 		if($item == 'current_ward_nr') {
-			$buf=" $tab.$item $sql_LIKE '".$HTTP_POST_VARS[$item]."'";
+			$buf=" $tab.$item $sql_LIKE '".$_POST[$item]."'";
 			if(!empty($where)) $where.=' AND '.$buf;
 			else $where=$buf;			
 		} else {
-			$buf=" $tab.$item $sql_LIKE '".$HTTP_POST_VARS[$item]."%'";
+			$buf=" $tab.$item $sql_LIKE '".$_POST[$item]."%'";
 			if(!empty($where)) $where.=' AND '.$buf;
 			else $where=$buf;
 		}
@@ -33,10 +33,10 @@ function Cond($item,$k){
 }
 	
 function fCond($item,$k){
-	global $orwhere,$tab,$HTTP_POST_VARS, $sql_LIKE;
-	if(empty($HTTP_POST_VARS[$item])) return false;
+	global $orwhere,$tab,$_POST, $sql_LIKE;
+	if(empty($_POST[$item])) return false;
 	else{
-		$buf=" f.class_nr $sql_LIKE '".$HTTP_POST_VARS[$item]."%'";
+		$buf=" f.class_nr $sql_LIKE '".$_POST[$item]."%'";
 		if(!empty($orwhere)) $orwhere.=' OR '.$buf;
 		 else $orwhere=$buf;
 	}
@@ -52,7 +52,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 # Initialize page�s control variables
 if($mode=='paginate'){
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	$searchkey=$_SESSION['sess_searchkey'];
 }else{
 	# Reset paginator variables
 	$pgx=0;
@@ -62,7 +62,7 @@ if($mode=='paginate'){
 }
 #Load and create paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=& new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=& new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 $GLOBAL_CONFIG=array();
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -82,7 +82,7 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 	$pagen->setSortDirection($odir);
 
 	if($mode=='paginate'){
-		$sql=$HTTP_SESSION_VARS['sess_searchkey'];
+		$sql=$_SESSION['sess_searchkey'];
 		$where='?'; # Dummy char to force the sql query to be executed
 	}else{
 
@@ -164,9 +164,9 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 		}
 	
 		//gjergji - hide patient info of other departements
-		if(isset($HTTP_SESSION_VARS['department_nr']) && $HTTP_SESSION_VARS['department_nr'] != '0' ) {
+		if(isset($_SESSION['department_nr']) && $_SESSION['department_nr'] != '0' ) {
 			$cond.=" AND ( ";
-			while (list($key, $val) = each($HTTP_SESSION_VARS['department_nr'])) {
+			while (list($key, $val) = each($_SESSION['department_nr'])) {
 				$tmp .= "e.current_dept_nr = " . $val . " OR ";
 
 			}
@@ -177,7 +177,7 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 		//end : gjergji
 
 		$sql="$select$from WHERE $where AND e.encounter_status <> 'cancelled' AND e.status NOT IN ('void','inactive','hidden','deleted') ORDER by ";
-		$HTTP_SESSION_VARS['sess_searchkey']=$sql;
+		$_SESSION['sess_searchkey']=$sql;
 	
 	}
 

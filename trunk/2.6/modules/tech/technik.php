@@ -20,7 +20,7 @@ if(!session_is_registered('sess_path_referer')) session_register('sess_path_refe
 if(!session_is_registered('sess_file_return')) session_register('sess_file_return');
 if(!session_is_registered('sess_file_forward')) session_register('sess_file_forward');
 
-$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'];
+$breakfile=$root_path.$_SESSION['sess_path_referer'];
 
 if(!file_exists($breakfile)) {
     $breakfile=$root_path.'main/startframe.php';
@@ -29,8 +29,8 @@ if(!file_exists($breakfile)) {
 $breakfile=$breakfile.URL_APPEND;
 $returnfile=$breakfile;
 
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
-$HTTP_SESSION_VARS['sess_path_referer']=str_replace($doc_root.'/','',__FILE__);
+$_SESSION['sess_file_return']=basename(__FILE__);
+$_SESSION['sess_path_referer']=str_replace($doc_root.'/','',__FILE__);
 
 if(!isset($stb)) $stb=0;
 

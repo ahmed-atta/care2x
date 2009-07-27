@@ -19,9 +19,9 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 $updatereturn='edv_user_access_list.php';
 //$updatereturn='edv_user_access_list.php';
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
+$returnfile=$_SESSION['sess_file_return'].URL_APPEND;
 //$db->debug=true;
-//$HTTP_SESSION_VARS['sess_file_return']='edv.php';
+//$_SESSION['sess_file_return']='edv.php';
 
 require_once($root_path.'include/care_api_classes/class_access.php');
 $user = & new Access($itemname);

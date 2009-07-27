@@ -32,16 +32,16 @@ if($parent_admit){
 			LEFT JOIN care_ops301_de AS pr ON d.code_parent=pr.code
 			LEFT JOIN care_category_procedure AS cat ON d.category_nr=cat.nr
 			LEFT JOIN care_type_localization AS loc ON d.localization=loc.nr
-         WHERE d.encounter_nr=".$HTTP_SESSION_VARS['sess_en']."  AND d.code=c.code";
+         WHERE d.encounter_nr=".$_SESSION['sess_en']."  AND d.code=c.code";
 }else{
 /*$sql="SELECT d.*, c.description FROM care_person AS p ,care_encounter AS e, care_encounter_procedure AS d, care_ops301_de AS c 
-         WHERE  p.pid='".$HTTP_SESSION_VARS['sess_pid']."' AND p.pid=e.pid AND e.encounter_nr=d.encounter_nr AND d.code=c.code";
+         WHERE  p.pid='".$_SESSION['sess_pid']."' AND p.pid=e.pid AND e.encounter_nr=d.encounter_nr AND d.code=c.code";
 */
 	$sql=$m_sql." FROM   ( care_person AS p , care_encounter AS e, care_encounter_procedure AS d, care_ops301_de AS c )
 			LEFT JOIN care_ops301_de AS pr ON d.code_parent=pr.code
 			LEFT JOIN care_category_procedure AS cat ON d.category_nr=cat.nr
 			LEFT JOIN care_type_localization AS loc ON d.localization=loc.nr
-		 WHERE  p.pid='".$HTTP_SESSION_VARS['sess_pid']."' AND p.pid=e.pid AND e.encounter_nr=d.encounter_nr AND d.code=c.code";
+		 WHERE  p.pid='".$_SESSION['sess_pid']."' AND p.pid=e.pid AND e.encounter_nr=d.encounter_nr AND d.code=c.code";
 }
 if($result=$db->Execute($sql)){
 	$rows=$result->RecordCount();
@@ -50,7 +50,7 @@ echo $sql;
 }
 
 $subtitle=$LDProcedures;
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

@@ -14,8 +14,8 @@ function openDRGComposite(enr,edit,isd){
 			h=650;';
 ?>
 	
-	drgcomp_<?php echo $HTTP_SESSION_VARS['sess_pid'].$sid; ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=\"+enr+\"&edit=\"+edit+\"&is_discharged=\"+isd+\"&ln=$name_last&fn=$name_first&bd=$date_birth"; ?>","drgcomp_<?php echo $encounter_nr.$sid; ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
-	window.drgcomp_<?php echo $HTTP_SESSION_VARS['sess_pid'].$sid; ?>.moveTo(0,0);
+	drgcomp_<?php echo $_SESSION['sess_pid'].$sid; ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=\"+enr+\"&edit=\"+edit+\"&is_discharged=\"+isd+\"&ln=$name_last&fn=$name_first&bd=$date_birth"; ?>","drgcomp_<?php echo $encounter_nr.$sid; ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+	window.drgcomp_<?php echo $_SESSION['sess_pid'].$sid; ?>.moveTo(0,0);
 } 
 //-->
 </script>

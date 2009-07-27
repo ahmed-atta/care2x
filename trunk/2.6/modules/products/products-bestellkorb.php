@@ -28,18 +28,18 @@ if(!session_is_registered('current_order'))
 
 switch($mode) {
 	case 'add' :
-		$HTTP_SESSION_VARS['current_order'][] = $_GET;
+		$_SESSION['current_order'][] = $_GET;
 	break;
 	case'delete' :
-		unset($HTTP_SESSION_VARS['current_order'][$_GET['delete_id']]);
+		unset($_SESSION['current_order'][$_GET['delete_id']]);
 	break;
 	case 'multiadd' :
 		for($i=1;$i<$_GET['maxcount']+1;$i++) {
 			if(isset($_GET['bestellnum'.$i])) {
-				$HTTP_SESSION_VARS['current_order'][$i]['bestellnum1'] = $_GET['bestellnum'.$i];
-				$HTTP_SESSION_VARS['current_order'][$i]['art1'] = $_GET['art'.$i];
-				$HTTP_SESSION_VARS['current_order'][$i]['p1'] = $_GET['pcs'.$i];
-				$HTTP_SESSION_VARS['current_order'][$i]['idsub1'] = $_GET['idsub'.$i];
+				$_SESSION['current_order'][$i]['bestellnum1'] = $_GET['bestellnum'.$i];
+				$_SESSION['current_order'][$i]['art1'] = $_GET['art'.$i];
+				$_SESSION['current_order'][$i]['p1'] = $_GET['pcs'.$i];
+				$_SESSION['current_order'][$i]['idsub1'] = $_GET['idsub'.$i];
 			}
 		}
 	break;
@@ -87,7 +87,7 @@ function resize() {
 ?>
 </font><br>
 <?php
-if($HTTP_SESSION_VARS['current_order']){
+if($_SESSION['current_order']){
 	$tog=1;
     echo '<form name="actlist" action="products-orderlist-final.php" method="post">
     	<font size=2 color="#800000">'.$LDActualOrder.':</font>
@@ -98,8 +98,8 @@ if($HTTP_SESSION_VARS['current_order']){
 	echo '<td>'.$LDcatindex[$i].'</td>';
 	echo '</tr>';	
     $i=1;
-    foreach ($HTTP_SESSION_VARS['current_order'] as $orderVals) {
-    	$currID = each($HTTP_SESSION_VARS['current_order']);
+    foreach ($_SESSION['current_order'] as $orderVals) {
+    	$currID = each($_SESSION['current_order']);
     	if($tog) { echo '<tr class="wardlistrow1">'; $tog=0; }
     	else{ echo '<tr class="wardlistrow2">'; $tog=1; }
     	echo'<td>';

@@ -46,27 +46,27 @@ if ($mode=='save' || ($mode=='update' && !empty($nr)) ){
          $phone = & new Comm;
 
         # Correctly map some indexes
-        $HTTP_POST_VARS['roomnr']=$HTTP_POST_VARS['zimmerno'];
-        $HTTP_POST_VARS['date'] = $curdate;
-        $HTTP_POST_VARS['time'] = $curtime;
-        $HTTP_POST_VARS['title'] = $HTTP_POST_VARS['anrede'];
+        $_POST['roomnr']=$_POST['zimmerno'];
+        $_POST['date'] = $curdate;
+        $_POST['time'] = $curtime;
+        $_POST['title'] = $_POST['anrede'];
 		
 		if($mode=='save'){
-			$HTTP_POST_VARS['create_id'] = $HTTP_SESSION_VARS['sess_user_name'];
-			$HTTP_POST_VARS['create_time'] = date('YmdHis');
-			$HTTP_POST_VARS['history'] = "Add ".date('Y-m-d H:i:S')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-			$phone->setDataArray($HTTP_POST_VARS);
+			$_POST['create_id'] = $_SESSION['sess_user_name'];
+			$_POST['create_time'] = date('YmdHis');
+			$_POST['history'] = "Add ".date('Y-m-d H:i:S')." ".$_SESSION['sess_user_name']."\n";
+			$phone->setDataArray($_POST);
 			//))if($db->Execute($sql))
 			if($phone->insertDataFromInternalArray()){
 				$bSaveOk = TRUE;
 			}
 		}else{
-                $HTTP_POST_VARS['modify_id'] = $HTTP_SESSION_VARS['sess_user_name'];
-                $HTTP_POST_VARS['modify_time'] = date('YmdHis');
-                $HTTP_POST_VARS['history'] = $phone->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+                $_POST['modify_id'] = $_SESSION['sess_user_name'];
+                $_POST['modify_time'] = date('YmdHis');
+                $_POST['history'] = $phone->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
 
                 $phone->setWhereCondition("personell_nr='$nr'");
-                $phone->setDataArray($HTTP_POST_VARS);
+                $phone->setDataArray($_POST);
 
  				if($phone->updateDataFromInternalArray($nr)){
 					$bSaveOk = TRUE;
@@ -122,7 +122,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 		if(($nowtime>=0)&&($nowtime<10)) echo $LDGoodMorning;
 		elseif(($nowtime > 9)&&($curtime<18)) echo $LDGoodDay;
 		elseif($nowtime > 18) echo $LDGoodEvening;
-		echo ' '.$HTTP_COOKIE_VARS[$local_user.$sid];
+		echo ' '.$_COOKIE[$local_user.$sid];
 		}
 	?>&nbsp;&nbsp;</b>
 	</FONT>

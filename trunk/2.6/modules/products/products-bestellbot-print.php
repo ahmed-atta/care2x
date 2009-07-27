@@ -24,8 +24,8 @@ $lang_tables[]='departments.php';
 define('LANG_FILE','products.php');
 
 if(!isset($userck)) 
-  if(isset($HTTP_GET_VARS['userck'])) $userck=$HTTP_GET_VARS['userck'];
-    elseif(isset($HTTP_POST_VARS['userck'])) $userck=$HTTP_POST_VARS['userck'];
+  if(isset($_GET['userck'])) $userck=$_GET['userck'];
+    elseif(isset($_POST['userck'])) $userck=$_POST['userck'];
 $local_user=$userck;
 require_once($root_path.'include/inc_front_chain_lang.php');
 
@@ -35,7 +35,7 @@ $core = & new Core;
 
 $thisfile=basename(__FILE__);
 
-if ($HTTP_COOKIE_VARS[$local_user.$sid]=='') $cat='';  
+if ($_COOKIE[$local_user.$sid]=='') $cat='';  
 
 switch($cat)
 {
@@ -84,7 +84,7 @@ if($order_nr&&$dept_nr){
 		 {
 			case 'ack_print':
                  
-				$history_txt=" by ".$HTTP_COOKIE_VARS[$local_user.$sid]." on ".date('Y-m-d H:i:s')."\n\r";
+				$history_txt=" by ".$_COOKIE[$local_user.$sid]." on ".date('Y-m-d H:i:s')."\n\r";
 
 				$sql="UPDATE $dbtable SET status='ack_print',
 				                                            history='".$content['history']." Received ".$history_txt."',

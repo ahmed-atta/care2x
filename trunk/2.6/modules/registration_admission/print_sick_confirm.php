@@ -52,7 +52,7 @@ require_once($root_path.'include/care_api_classes/class_person.php');
 
 # Load the encounter class
 require_once($root_path.'include/care_api_classes/class_encounter.php');
-$enc_obj=new Encounter($HTTP_SESSION_VARS['sess_full_en']);
+$enc_obj=new Encounter($_SESSION['sess_full_en']);
 
 if(!isset($mode)||empty($mode)){
 	
@@ -81,8 +81,8 @@ if($insure_obj=$enc_obj->EncounterInsuranceData()){
 
 
 
-if((!isset($pid)||!$pid)&&$HTTP_SESSION_VARS['sess_pid']) $pid=$HTTP_SESSION_VARS['sess_pid'];
-	elseif((isset($pid)&&$pid)&&!$HTTP_SESSION_VARS['sess_pid']) $HTTP_SESSION_VARS['sess_pid']=$pid;
+if((!isset($pid)||!$pid)&&$_SESSION['sess_pid']) $pid=$_SESSION['sess_pid'];
+	elseif((isset($pid)&&$pid)&&!$_SESSION['sess_pid']) $_SESSION['sess_pid']=$pid;
 
 
 if(!isset($user_id) || !$user_id)
@@ -109,7 +109,7 @@ $subtitle=$LDSickReport;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 /* Load all  medical depts info */
 require_once($root_path.'include/care_api_classes/class_department.php');

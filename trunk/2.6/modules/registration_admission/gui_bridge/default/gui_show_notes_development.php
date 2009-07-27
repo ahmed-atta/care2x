@@ -23,7 +23,7 @@ while($row=$result->FetchRow()){
     <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php echo $row['notes']; ?></td>
     <td align="center"><a href="#"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_nr']) echo $row['personell_nr']; ?></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo $HTTP_SESSION_VARS['sess_full_en']; ?></td>
+    <td><FONT SIZE=-1  FACE="Arial"><?php echo $_SESSION['sess_full_en']; ?></td>
   </tr>
 
 <?php
@@ -32,6 +32,6 @@ while($row=$result->FetchRow()){
 </table>
 <p>
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
-<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new'; ?>"> 
+<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new'; ?>"> 
 <?php echo $LDEnterNewRecord; ?>
 </a>

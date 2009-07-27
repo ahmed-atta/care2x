@@ -22,14 +22,14 @@ $admissionfile='aufnahme_start.php'.URL_APPEND;
 
 if((!isset($pid)||!$pid)&&$HTPP_SESSION_VARS['sess_pid']) $pid=$HTPP_SESSION_VARS['sess_pid'];
 
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
-$HTTP_SESSION_VARS['sess_pid']=$pid;
-//$HTTP_SESSION_VARS['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
-$HTTP_SESSION_VARS['sess_parent_mod']='registration';
-$HTTP_SESSION_VARS['sess_user_origin']='registration';
+$_SESSION['sess_path_referer']=$top_dir.$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
+$_SESSION['sess_pid']=$pid;
+//$_SESSION['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
+$_SESSION['sess_parent_mod']='registration';
+$_SESSION['sess_user_origin']='registration';
 # Reset the encounter number
-$HTTP_SESSION_VARS['sess_en']=0;
+$_SESSION['sess_en']=0;
 
 # Load the standard tags functions
 require('./gui_bridge/default/gui_std_tags.php');

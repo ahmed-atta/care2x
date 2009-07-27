@@ -68,7 +68,7 @@ if($parent_admit&&$edit) {
 ?>
 <p>
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
-<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new&allow_update='.$allow_update; ?>"> 
+<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new&allow_update='.$allow_update; ?>"> 
 <?php 
 if($rows) echo $LD['update_bd'];
 	else echo $LDEnterNewRecord; ?>

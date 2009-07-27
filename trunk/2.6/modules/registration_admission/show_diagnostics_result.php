@@ -21,14 +21,14 @@ require('./include/init_show.php');
 
 if($parent_admit){
 $sql="SELECT dr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_diagnostics_report AS dr 
-		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." 
+		WHERE p.pid=".$_SESSION['sess_pid']." 
 			AND p.pid=e.pid 
-			AND e.encounter_nr=".$HTTP_SESSION_VARS['sess_en']." 
+			AND e.encounter_nr=".$_SESSION['sess_en']." 
 			AND e.encounter_nr=dr.encounter_nr 
 		ORDER BY dr.create_time DESC";
 }else{
 $sql="SELECT dr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_diagnostics_report AS dr 
-		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=dr.encounter_nr 
+		WHERE p.pid=".$_SESSION['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=dr.encounter_nr 
 		ORDER BY dr.create_time DESC";
 }
 
@@ -45,7 +45,7 @@ if($result=$db->Execute($sql)){
 $subtitle=$LDDiagXResults;
 $notestype='diagnostics';
 
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

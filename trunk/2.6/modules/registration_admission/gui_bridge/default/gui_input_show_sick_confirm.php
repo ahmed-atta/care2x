@@ -126,8 +126,8 @@ eval("echo $TP_sickform;");
 	?></select>
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
-<input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
-<input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
+<input type="hidden" name="encounter_nr" value="<?php echo $_SESSION['sess_en']; ?>">
+<input type="hidden" name="pid" value="<?php echo $_SESSION['sess_pid']; ?>">
 <input type="hidden" name="mode" value="new">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
 <!-- <input type="submit" <?php echo createLDImgSrc($root_path,'ok.gif','0','absmiddle'); ?> >            

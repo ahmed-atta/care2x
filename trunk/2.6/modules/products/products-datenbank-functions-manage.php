@@ -186,7 +186,7 @@ if($linecount==1){
 	//<input type="hidden" name="picfilename" value="'.$zeile[picfile].'"> 
 
 	echo '
-	<input type="hidden" name="encoder" value="'.strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+").'">
+	<input type="hidden" name="encoder" value="'.strtr($_COOKIE[$local_user.$sid]," ","+").'">
 	<input type="hidden" name="dstamp" value="'.str_replace("_",".",date(Y_m_d)).'">
 	<input type="hidden" name="tstamp" value="'.str_replace("_",".",date(H_i)).'">
 	<input type="hidden" name="lock_flag" value="">

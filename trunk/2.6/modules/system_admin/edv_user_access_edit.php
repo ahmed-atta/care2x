@@ -22,8 +22,8 @@ require_once ($root_path . 'include/inc_front_chain_lang.php') ;
 require ($root_path . 'include/inc_accessplan_areas_functions.php') ;
 
 $breakfile = 'edv-system-admi-welcome.php' . URL_APPEND ;
-$returnfile = $HTTP_SESSION_VARS [ 'sess_file_return' ] . URL_APPEND ;
-$HTTP_SESSION_VARS [ 'sess_file_return' ] = basename ( __FILE__ ) ;
+$returnfile = $_SESSION [ 'sess_file_return' ] . URL_APPEND ;
+$_SESSION [ 'sess_file_return' ] = basename ( __FILE__ ) ;
 
 //gjergji : load the department list
 require_once ($root_path . 'include/care_api_classes/class_department.php') ;
@@ -84,11 +84,11 @@ if ($mode != '') {
 		
 /*		$p_areas = '' ;
 		
-		while ( list ( $x, $v ) = each ( $HTTP_POST_VARS ) ) {
+		while ( list ( $x, $v ) = each ( $_POST ) ) {
 			if (! ereg ( '_a_', $x ))
 				continue ;
 			
-			if ($HTTP_POST_VARS [ $x ] != '')
+			if ($_POST [ $x ] != '')
 				$p_areas .= $v . ' ' ;
 		}*/
 		/* If permission area is available, save it */
@@ -121,12 +121,12 @@ if ($mode != '') {
 						   '" . $selected_role . "',
 						   'normal',
 						   '',
-						   '" . $HTTP_SESSION_VARS [ 'sess_user_name' ] . "',
+						   '" . $_SESSION [ 'sess_user_name' ] . "',
 						   '" . date ( 'YmdHis' ) . "'
 						 )" ;
 			
 			} else {
-				$sql = "UPDATE care_users SET permission='$permission', dept_nr='" . serialize($dept_nr) ."', user_role ='$selected_role' ,modify_id='" . $HTTP_COOKIE_VARS [ $local_user . $sid ] . "'  WHERE login_id='$userid'" ;
+				$sql = "UPDATE care_users SET permission='$permission', dept_nr='" . serialize($dept_nr) ."', user_role ='$selected_role' ,modify_id='" . $_COOKIE [ $local_user . $sid ] . "'  WHERE login_id='$userid'" ;
 			}
 			
 			/* Do the query */
@@ -229,7 +229,7 @@ if (($mode == "") and ($remark != 'fromlist')) {
 		echo $LDGoodDay ;
 	if ($gtime > '18.00')
 		echo $LDGoodEvening ;
-	echo ' ' . $HTTP_COOKIE_VARS [ $local_user . $sid ] ;
+	echo ' ' . $_COOKIE [ $local_user . $sid ] ;
 }
 ?>
 </FONT>

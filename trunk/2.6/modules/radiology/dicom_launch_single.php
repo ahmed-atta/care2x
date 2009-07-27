@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 
 # Switch to the selected dicom viewer module
 
-switch($HTTP_SESSION_VARS['sess_dicom_viewer']){
+switch($_SESSION['sess_dicom_viewer']){
 	case 'raimjava':
 			header("location:raimjava/raimjava_launch_single.php".URL_REDIRECT_APPEND."&pid=$pid&img_nr=$img_nr&fn=$fn");
 			exit;

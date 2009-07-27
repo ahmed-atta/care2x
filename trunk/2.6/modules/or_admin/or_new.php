@@ -40,8 +40,8 @@ $ward_obj=& new Ward;
 # Validate 3 most important inputs
 if(isset($mode)&&!empty($mode)&&$mode!='select'){
 	# format date to standard
-	$datebuffer=formatDate2STD($HTTP_POST_VARS['date_create'],$date_format);
-	if(empty($HTTP_POST_VARS['room_nr'])||empty($datebuffer)||($mode=='update'&&empty($HTTP_POST_VARS['nr']))){
+	$datebuffer=formatDate2STD($_POST['date_create'],$date_format);
+	if(empty($_POST['room_nr'])||empty($datebuffer)||($mode=='update'&&empty($_POST['nr']))){
 		$inputerror=TRUE; # Set error flag
 		$error_msg=$LDInputError;
 	}
@@ -51,32 +51,32 @@ if(isset($mode)&&!empty($mode)&&$mode!='select'){
 if(!empty($mode)&&!$inputerror){
 		
 	# Compose the data for storing into history field
-	$udata='name='.$HTTP_POST_VARS['info'].': bed='. $HTTP_POST_VARS['nr_of_beds'].': ward='.$HTTP_POST_VARS['ward_nr'].': dept='.$HTTP_POST_VARS['dept_nr'].': closed='.$HTTP_POST_VARS['is_temp_closed'];
+	$udata='name='.$_POST['info'].': bed='. $_POST['nr_of_beds'].': ward='.$_POST['ward_nr'].': dept='.$_POST['dept_nr'].': closed='.$_POST['is_temp_closed'];
 	
 	switch($mode)
 	{	
 		case 'create': 
 		{
-			if($OR_obj->ORNrExists($HTTP_POST_VARS['room_nr'])){
+			if($OR_obj->ORNrExists($_POST['room_nr'])){
 				$error_msg=$LDORNrExists;
 				$inputerror=TRUE;
 			}else{
 					
 				# Validate the date creation, if invalid, use today date
-				if(empty($datebuffer)) $HTTP_POST_VARS['date_create']=date('Y-m-d');
-					else $HTTP_POST_VARS['date_create']=$datebuffer;
+				if(empty($datebuffer)) $_POST['date_create']=date('Y-m-d');
+					else $_POST['date_create']=$datebuffer;
 				
 				# Validate number of beds..if invalid use 1
-				if(!$HTTP_POST_VARS['nr_of_beds']) $HTTP_POST_VARS['nr_of_beds']=1;
+				if(!$_POST['nr_of_beds']) $_POST['nr_of_beds']=1;
 				
-				$HTTP_POST_VARS['type_nr']=$OR_obj->ORTypeNr(); # 2 = operating room
-				$HTTP_POST_VARS['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." ".$udata."\n";
-				$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-				//$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-				$HTTP_POST_VARS['create_time']=date('YmdHis');
-				$HTTP_POST_VARS['modify_time']=date('YmdHis');
+				$_POST['type_nr']=$OR_obj->ORTypeNr(); # 2 = operating room
+				$_POST['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." ".$udata."\n";
+				$_POST['create_id']=$_SESSION['sess_user_name'];
+				//$_POST['modify_id']=$_SESSION['sess_user_name'];
+				$_POST['create_time']=date('YmdHis');
+				$_POST['modify_time']=date('YmdHis');
 				
-				$OR_obj->setDataArray($HTTP_POST_VARS);
+				$OR_obj->setDataArray($_POST);
 				
 				if($OR_obj->insertDataFromInternalArray()){
 					
@@ -96,15 +96,15 @@ if(!empty($mode)&&!$inputerror){
 		case 'update':
 		{ 
 			
-			$HTTP_POST_VARS['history']=$OR_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." $udata\n");
-			$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-			$HTTP_POST_VARS['modify_time']=date('YmdHis');
+			$_POST['history']=$OR_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." $udata\n");
+			$_POST['modify_id']=$_SESSION['sess_user_name'];
+			$_POST['modify_time']=date('YmdHis');
 			
-			$OR_obj->setDataArray($HTTP_POST_VARS);
-			$OR_obj->where='nr='.$HTTP_POST_VARS['nr'];
+			$OR_obj->setDataArray($_POST);
+			$OR_obj->where='nr='.$_POST['nr'];
 			
 			if($OR_obj->updateDataFromInternalArray($nr)){
-				header("location:or_info.php".URL_REDIRECT_APPEND."&edit=1&mode=newdata&nr=".$HTTP_POST_VARS['nr']."&OR_nr=".$HTTP_POST_VARS['room_nr']);
+				header("location:or_info.php".URL_REDIRECT_APPEND."&edit=1&mode=newdata&nr=".$_POST['nr']."&OR_nr=".$_POST['room_nr']);
 				exit;
 			}else{
 				echo $OR_obj->getLastQuery."<br>$LDDbNoSave";

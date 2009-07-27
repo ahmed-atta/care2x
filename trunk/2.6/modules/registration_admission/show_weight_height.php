@@ -33,44 +33,44 @@ if(!isset($mode)){
 }elseif($mode=='create'||$mode=='update') {
 
 	include_once($root_path.'include/inc_date_format_functions.php');
-	if($HTTP_POST_VARS['msr_date']) 	$HTTP_POST_VARS['msr_date']=@formatDate2STD($HTTP_POST_VARS['msr_date'],$date_format);
-		else $HTTP_POST_VARS['msr_date']=date('Y-m-d');
+	if($_POST['msr_date']) 	$_POST['msr_date']=@formatDate2STD($_POST['msr_date'],$date_format);
+		else $_POST['msr_date']=date('Y-m-d');
 	
 	# Non standard time format
-	$HTTP_POST_VARS['msr_time']=date('H.i');
-	$HTTP_POST_VARS['create_time']=date('YmdHis'); # Create the timestamp to group the values
-	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	$_POST['msr_time']=date('H.i');
+	$_POST['create_time']=date('YmdHis'); # Create the timestamp to group the values
+	$_POST['create_id']=$_SESSION['sess_user_name'];
 
 	if($weight||$height||$head_c){
 		# Set to no redirect
 		$no_redirect=TRUE;
 		
 		if($weight){
-			$HTTP_POST_VARS['value']=$weight;
-			$HTTP_POST_VARS['msr_type_nr']=6; # msrmt type 6 = weight
-			$HTTP_POST_VARS['notes']=$wt_notes;
-			$HTTP_POST_VARS['unit_nr']=$wt_unit_nr;
-			$HTTP_POST_VARS['unit_type_nr']=2; # 2 = weight
+			$_POST['value']=$weight;
+			$_POST['msr_type_nr']=6; # msrmt type 6 = weight
+			$_POST['notes']=$wt_notes;
+			$_POST['unit_nr']=$wt_unit_nr;
+			$_POST['unit_type_nr']=2; # 2 = weight
 			include('./include/save_admission_data.inc.php');
 		}
 		if($height){
-			$HTTP_POST_VARS['value']=$height;
-			$HTTP_POST_VARS['msr_type_nr']=7;  # msrmt type 7 = height
-			$HTTP_POST_VARS['notes']=$ht_notes;
-			$HTTP_POST_VARS['unit_nr']=$ht_unit_nr;
-			$HTTP_POST_VARS['unit_type_nr']=3; # 3 = length
+			$_POST['value']=$height;
+			$_POST['msr_type_nr']=7;  # msrmt type 7 = height
+			$_POST['notes']=$ht_notes;
+			$_POST['unit_nr']=$ht_unit_nr;
+			$_POST['unit_type_nr']=3; # 3 = length
 			include('./include/save_admission_data.inc.php');
 		}
 		if($head_c){
-			$HTTP_POST_VARS['value']=$head_c;
-			$HTTP_POST_VARS['msr_type_nr']=9; # msrmt type 9 = head circumference
-			$HTTP_POST_VARS['notes']=$hc_notes;
-			$HTTP_POST_VARS['unit_nr']=$hc_unit_nr;
-			$HTTP_POST_VARS['unit_type_nr']=3; # 3 = length
+			$_POST['value']=$head_c;
+			$_POST['msr_type_nr']=9; # msrmt type 9 = head circumference
+			$_POST['notes']=$hc_notes;
+			$_POST['unit_nr']=$hc_unit_nr;
+			$_POST['unit_type_nr']=3; # 3 = length
 			include('./include/save_admission_data.inc.php');
 		}
 	
-		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
+		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&allow_update=1&pid=".$_SESSION['sess_pid']);
 		exit;
 	}
 }
@@ -84,7 +84,7 @@ if($mode=='show'){
 		FROM 	care_encounter AS e, 
 					care_person AS p, 
 					care_encounter_measurement AS m
-		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." 
+		WHERE p.pid=".$_SESSION['sess_pid']." 
 			AND p.pid=e.pid 
 			AND e.encounter_nr=m.encounter_nr  
 			AND (m.msr_type_nr=6 OR m.msr_type_nr=7 OR m.msr_type_nr=9)
@@ -116,7 +116,7 @@ $subtitle=$LDMeasurements;
 # Set the type of "notes"
 $notestype='msr';
 
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

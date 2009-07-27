@@ -16,7 +16,7 @@ $local_user='ck_prod_order_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 
-switch($HTTP_SESSION_VARS['sess_user_origin'])
+switch($_SESSION['sess_user_origin'])
 {
 	case 'pharma':
 		$breakfile=$root_path.'modules/pharmacy/apotheke.php'.URL_APPEND;

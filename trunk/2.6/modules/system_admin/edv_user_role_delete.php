@@ -19,7 +19,7 @@ require($root_path.'include/inc_accessplan_areas_functions.php');
 
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 $returnfile='edv_user_role_list.php'.URL_APPEND;
-//$HTTP_SESSION_VARS['sess_file_return']='edv.php';
+//$_SESSION['sess_file_return']='edv.php';
 
 require_once($root_path.'include/care_api_classes/class_access.php');
 $role = & new Access();

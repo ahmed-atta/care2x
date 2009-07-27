@@ -13,22 +13,22 @@ if($dblink_ok){
 	switch($mode)
 	{	
 		case 'create': 
-								$HTTP_POST_VARS['prescribe_date']=@formatDate2STD($HTTP_POST_VARS['prescribe_date'],$date_format);
-								$obj->setDataArray($HTTP_POST_VARS);
+								$_POST['prescribe_date']=@formatDate2STD($_POST['prescribe_date'],$date_format);
+								$obj->setDataArray($_POST);
 								if($obj->insertDataFromInternalArray()) 
 									{
-										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&pid=".$HTTP_SESSION_VARS['sess_pid']);
+										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&pid=".$_SESSION['sess_pid']);
 										exit;
 									}
 									else echo "<br>$LDDbNoSave";
 								break;
 		case 'update': 
-								$HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
-								$obj->setDataArray($HTTP_POST_VARS);
+								$_POST['date']=@formatDate2STD($_POST['date'],$date_format);
+								$obj->setDataArray($_POST);
 								$obj->where=' nr='.$imm_nr;
 								if($obj->updateDataFromInternalArray($dept_nr)) 
 									{
-										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&pid=".$HTTP_SESSION_VARS['sess_pid']);
+										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&pid=".$_SESSION['sess_pid']);
 										exit;
 									}
 									else echo "$sql<br>$LDDbNoUpdate";

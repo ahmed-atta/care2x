@@ -21,12 +21,12 @@ require_once($root_path.'include/inc_resolve_dept.php');
 require_once($root_path.'include/inc_resolve_ward.php');
 	
 $breakfile='technik.php'.URL_APPEND;
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+$returnfile=$_SESSION['sess_file_return'].URL_APPEND;
+$_SESSION['sess_file_return']=basename(__FILE__);
 
 //$db->debug=1;
 
-if(!isset($HTTP_COOKIE_VARS['ck_login_username'.$sid])) $HTTP_COOKIE_VARS['ck_login_username'.$sid]='';
+if(!isset($_COOKIE['ck_login_username'.$sid])) $_COOKIE['ck_login_username'.$sid]='';
 
 if(!isset($dept)) $dept='';
 
@@ -63,8 +63,8 @@ if(isset($job)&&!empty($job)) {
 							'0',
 							'".date('Ymd')."',
 							'pending',
-							'Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-							'".$HTTP_SESSION_VARS['sess_user_name']."',
+							'Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n',
+							'".$_SESSION['sess_user_name']."',
 							'".date('YmdHis')."'
 							)";
 							
@@ -155,7 +155,7 @@ $smarty->assign('LDReRepairTxt',$LDReRepairTxt);
 $smarty->assign('LDRepairArea',$LDRepairArea);
 $smarty->assign('sArea',strtoupper($ward_id)." - ".$cfg['thispc_room_nr']." - ".$dept_name);
 $smarty->assign('LDReporter',$LDReporter);
-$smarty->assign('sUserName',$HTTP_SESSION_VARS['sess_user_name']);
+$smarty->assign('sUserName',$_SESSION['sess_user_name']);
 $smarty->assign('LDPersonnelNr',$LDPersonnelNr);
 $smarty->assign('LDPhoneNr',$LDPhoneNr);
 $smarty->assign('sThisPhoneNr',$cfg['thispc_phone']);

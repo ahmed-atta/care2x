@@ -39,14 +39,14 @@ $m_sql="SELECT d.*, c.description, pr.description AS parent_desc,
 
 if($parent_admit){
 
-	$sql=$m_sql." WHERE p.pid='".$HTTP_SESSION_VARS['sess_pid']."' 
+	$sql=$m_sql." WHERE p.pid='".$_SESSION['sess_pid']."' 
 		 	AND p.pid=e.pid 
-		 	AND e.encounter_nr='".$HTTP_SESSION_VARS['sess_en']."'
+		 	AND e.encounter_nr='".$_SESSION['sess_en']."'
 			AND e.encounter_nr=d.encounter_nr
 		 	AND d.code=c.diagnosis_code
 		 ORDER BY d.modify_time DESC";
 }else{
-	$sql=$m_sql." WHERE  p.pid='".$HTTP_SESSION_VARS['sess_pid']."' 
+	$sql=$m_sql." WHERE  p.pid='".$_SESSION['sess_pid']."' 
 		 	AND p.pid=e.pid 
 			AND e.encounter_nr=d.encounter_nr 
 			AND d.code=c.diagnosis_code
@@ -60,7 +60,7 @@ if($result=$db->Execute($sql)){
 }
 
 $subtitle=$LDDiagnoses;
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

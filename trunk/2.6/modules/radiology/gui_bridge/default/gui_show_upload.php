@@ -1,5 +1,5 @@
 <?php
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'];
+$returnfile=$_SESSION['sess_file_return'];
 
 # Start Smarty templating here
  /**
@@ -16,7 +16,7 @@ $returnfile=$HTTP_SESSION_VARS['sess_file_return'];
  $smarty->assign('sToolbarTitle',$page_title);
 
   # hide back button
- $smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
+ $smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
 
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('dicom_upload.php','$rows')");
@@ -37,7 +37,7 @@ $returnfile=$HTTP_SESSION_VARS['sess_file_return'];
  ob_start();
 
 
-//$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+//$_SESSION['sess_file_return']=$thisfile;
 
 function createTR($ld_text, $input_val, $colspan = 1)
 {
@@ -354,9 +354,9 @@ for($i=0;$i<$maxpic;$i++){
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="maxpic" value="<?php echo $maxpic; ?>">
-<input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
-<!-- <input type="hidden" name="modify_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
-<input type="hidden" name="create_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
+<input type="hidden" name="pid" value="<?php echo $_SESSION['sess_pid']; ?>">
+<!-- <input type="hidden" name="modify_id" value="<?php echo $_SESSION['sess_user_name']; ?>">
+<input type="hidden" name="create_id" value="<?php echo $_SESSION['sess_user_name']; ?>">
 <input type="hidden" name="create_time" value="null">
  -->
  <input type="hidden" name="mode" value="create">
@@ -367,7 +367,7 @@ for($i=0;$i<$maxpic;$i++){
 
 
 <!-- <input type="hidden" name="is_discharged" value="<?php echo $is_discharged; ?>">
-<input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $HTTP_SESSION_VARS['sess_user_name']."\n"; ?>">
+<input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $_SESSION['sess_user_name']."\n"; ?>">
  -->
 <?php
 } 

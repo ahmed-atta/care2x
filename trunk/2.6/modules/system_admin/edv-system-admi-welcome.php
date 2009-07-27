@@ -16,7 +16,7 @@ $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 if(isset($ck_edv_admin_user)) setcookie('ck_edvzugang_user',$ck_edv_admin_user);
 $breakfile='edv.php'.URL_APPEND;
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+$_SESSION['sess_file_return']=basename(__FILE__);
 
 # Start Smarty templating here
  /**
@@ -47,7 +47,7 @@ $HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
 
 <br><ul>
 <FONT    SIZE=2  FACE="verdana,Arial">
-<?php echo $LDWelcome ?> <FONT    SIZE=3 color=#800000 FACE="Arial"><b><?php echo $HTTP_COOKIE_VARS[$local_user.$sid];?></b></font>. <p>
+<?php echo $LDWelcome ?> <FONT    SIZE=3 color=#800000 FACE="Arial"><b><?php echo $_COOKIE[$local_user.$sid];?></b></font>. <p>
 <?php echo $LDForeWord ?></font><p>
 
 <p>

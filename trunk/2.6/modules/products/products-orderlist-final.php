@@ -95,7 +95,7 @@ function createOrderList($validator,$prior,$dept_nr) {
 // Load the date formatter
 require_once($root_path.'include/inc_date_format_functions.php');
 
-if(($mode=='send') && isset($HTTP_SESSION_VARS['current_order']) ){
+if(($mode=='send') && isset($_SESSION['current_order']) ){
 	
 	//Check authenticity of validator person
 	include_once($root_path.'include/care_api_classes/class_access.php');
@@ -233,7 +233,7 @@ if ($_POST['maxnum']>0) {
     	
     if(($mode!='send')&&(!$sendok)) {
 		echo $LDListindex[4].'<br>
-			<input type="text" name="sender" size=30 maxlength=40 value="'. $HTTP_COOKIE_VARS[$local_user.$sid].'"> 
+			<input type="text" name="sender" size=30 maxlength=40 value="'. $_COOKIE[$local_user.$sid].'"> 
 			 &nbsp;'.$LDNormal.'<input type="radio" name="prior" value="normal" ';
 			 
 			 if(!isset($prior) || $prior=='normal' || $prior=='') echo ' checked';

@@ -24,9 +24,9 @@ if(!isset($mode)){
 } elseif($mode=='create'||$mode=='update') {
 	include_once($root_path.'include/inc_date_format_functions.php');
 	# Set the date, default is today
-	if(empty($HTTP_POST_VARS['date'])) $HTTP_POST_VARS['date']=date('Y-m-d');
-		else $HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
-	$HTTP_POST_VARS['time']=date('H:i:s');
+	if(empty($_POST['date'])) $_POST['date']=date('Y-m-d');
+		else $_POST['date']=@formatDate2STD($_POST['date'],$date_format);
+	$_POST['time']=date('H:i:s');
 	include('./include/save_admission_data.inc.php');
 }
 # Load the emr language table
@@ -40,9 +40,9 @@ if($parent_admit){
 		FROM care_encounter AS e, 
 					care_person AS p, 
 					care_encounter_notes AS n 
-		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." 
+		WHERE p.pid=".$_SESSION['sess_pid']." 
 			AND p.pid=e.pid 
-			AND e.encounter_nr=".$HTTP_SESSION_VARS['sess_en']." 
+			AND e.encounter_nr=".$_SESSION['sess_en']." 
 			AND e.encounter_nr=n.encounter_nr 
 			AND n.type_nr=".$type_nr."
 		ORDER BY n.date DESC";
@@ -51,7 +51,7 @@ if($parent_admit){
 		FROM 	care_encounter AS e, 
 					care_person AS p, 
 					care_encounter_notes AS n
-		WHERE	p.pid=".$HTTP_SESSION_VARS['sess_pid']." 
+		WHERE	p.pid=".$_SESSION['sess_pid']." 
 			AND	p.pid=e.pid 
 			AND e.encounter_nr=n.encounter_nr 
 			AND n.type_nr=".$type_nr."

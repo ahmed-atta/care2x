@@ -35,12 +35,12 @@ require_once($root_path.'include/care_api_classes/class_ward.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 //gjergji
-$current_dept_nr = $HTTP_SESSION_VARS['department_nr']; 
+$current_dept_nr = $_SESSION['department_nr']; 
 //end: gjergji
 $thisfile=basename(__FILE__);
 if($origin=='patreg_reg') $breakfile = 'patient_register_show.php'.URL_APPEND.'&pid='.$pid;
-	elseif($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfile = $root_path.'main/startframe.php'.URL_APPEND;
-		elseif(!empty($HTTP_SESSION_VARS['sess_path_referer'])) $breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND.'&pid='.$pid;
+	elseif($_COOKIE["ck_login_logged".$sid]) $breakfile = $root_path.'main/startframe.php'.URL_APPEND;
+		elseif(!empty($_SESSION['sess_path_referer'])) $breakfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND.'&pid='.$pid;
 			else $breakfile = "aufnahme_pass.php".URL_APPEND."&target=entry";
 
 $newdata=1;
@@ -143,7 +143,7 @@ if($pid!='' || $encounter_nr!=''){
 					  $picext='';
 					  $valid_image=false;
 					  $photo_filename='';
-					  if($img_obj->isValidUploadedImage($HTTP_POST_FILES['photo_filename'])){
+					  if($img_obj->isValidUploadedImage($_FILES['photo_filename'])){
 					 	$valid_image=TRUE;
 						# Get the file extension
 						$picext=$img_obj->UploadedImageMimeType();
@@ -153,14 +153,14 @@ if($pid!='' || $encounter_nr!=''){
 						# Compose the new filename
 						$photo_filename=$pid.'.'.$picext;
 						# Save the file
-						$img_obj->saveUploadedImage($HTTP_POST_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
+						$img_obj->saveUploadedImage($_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
  						$person_obj->setPhotoFilename($pid,$photo_filename);
 					  }
 					  
 					  //end : gjergji
 
 	                  $encoder=trim($encoder); 
-					  if($encoder=='') $encoder=$HTTP_SESSION_VARS['sess_user_name'];
+					  if($encoder=='') $encoder=$_SESSION['sess_user_name'];
 					  
 	                  $referrer_diagnosis=trim($referrer_diagnosis);
 					  if ($referrer_diagnosis=='') { $errordiagnose=1; $error=1; $errornum++; };
@@ -207,16 +207,16 @@ if($pid!='' || $encounter_nr!=''){
 					  {
 							//echo formatDate2STD($geburtsdatum,$date_format);
 					      $itemno=$itemname;		
-									$HTTP_POST_VARS['modify_id']=$encoder;
+									$_POST['modify_id']=$encoder;
 									if($dbtype=='mysql'){
-										$HTTP_POST_VARS['history']= "CONCAT(history,\"\n Update: ".date('Y-m-d H:i:s')." = $encoder\")";
+										$_POST['history']= "CONCAT(history,\"\n Update: ".date('Y-m-d H:i:s')." = $encoder\")";
 									}else{
-										$HTTP_POST_VARS['history']= "(history || '\n Update: ".date('Y-m-d H:i:s')." = $encoder')";
+										$_POST['history']= "(history || '\n Update: ".date('Y-m-d H:i:s')." = $encoder')";
 									}
-									if(isset($HTTP_POST_VARS['encounter_nr'])) unset($HTTP_POST_VARS['encounter_nr']);		
-									if(isset($HTTP_POST_VARS['pid'])) unset($HTTP_POST_VARS['pid']);		
+									if(isset($_POST['encounter_nr'])) unset($_POST['encounter_nr']);		
+									if(isset($_POST['pid'])) unset($_POST['pid']);		
 												
-									$encounter_obj->setDataArray($HTTP_POST_VARS);
+									$encounter_obj->setDataArray($_POST);
 									
 									if($encounter_obj->updateEncounterFromInternalArray($encounter_nr))
 									{
@@ -241,22 +241,22 @@ if($pid!='' || $encounter_nr!=''){
 							if($GLOBAL_CONFIG['encounter_nr_fullyear_prepend']) $ref_nr=(int)date('Y').$GLOBAL_CONFIG['encounter_nr_init'];
 								else $ref_nr=$GLOBAL_CONFIG['encounter_nr_init'];
 							//echo $ref_nr;
-							switch($HTTP_POST_VARS['encounter_class_nr'])
+							switch($_POST['encounter_class_nr'])
 							{
-								case '1': $HTTP_POST_VARS['encounter_nr']=$encounter_obj->getNewEncounterNr($ref_nr+$GLOBAL_CONFIG['patient_inpatient_nr_adder'],1);
+								case '1': $_POST['encounter_nr']=$encounter_obj->getNewEncounterNr($ref_nr+$GLOBAL_CONFIG['patient_inpatient_nr_adder'],1);
 											break;
-								case '2': $HTTP_POST_VARS['encounter_nr']=$encounter_obj->getNewEncounterNr($ref_nr+$GLOBAL_CONFIG['patient_outpatient_nr_adder'],2);
+								case '2': $_POST['encounter_nr']=$encounter_obj->getNewEncounterNr($ref_nr+$GLOBAL_CONFIG['patient_outpatient_nr_adder'],2);
 							}
 							
-									$HTTP_POST_VARS['encounter_date']=date('Y-m-d H:i:s');
-									$HTTP_POST_VARS['modify_id']=$encoder;
-									//$HTTP_POST_VARS['modify_time']='NULL';
-									$HTTP_POST_VARS['create_id']=$encoder;
-									$HTTP_POST_VARS['create_time']=date('YmdHis');
-									$HTTP_POST_VARS['history']='Create: '.date('Y-m-d H:i:s').' = '.$encoder;
-									//if(isset($HTTP_POST_VARS['encounter_nr'])) unset($HTTP_POST_VARS['encounter_nr']);					
+									$_POST['encounter_date']=date('Y-m-d H:i:s');
+									$_POST['modify_id']=$encoder;
+									//$_POST['modify_time']='NULL';
+									$_POST['create_id']=$encoder;
+									$_POST['create_time']=date('YmdHis');
+									$_POST['history']='Create: '.date('Y-m-d H:i:s').' = '.$encoder;
+									//if(isset($_POST['encounter_nr'])) unset($_POST['encounter_nr']);					
 									
-									$encounter_obj->setDataArray($HTTP_POST_VARS);
+									$encounter_obj->setDataArray($_POST);
 									
 									if($encounter_obj->insertDataFromInternalArray())
 									{
@@ -280,7 +280,7 @@ if($pid!='' || $encounter_nr!=''){
 										//echo $encounter_obj->getLastQuery();
 										
 										# If appointment number available, mark appointment as "done"
-										if(isset($appt_nr)&&$appt_nr) $encounter_obj->markAppointmentDone($appt_nr,$HTTP_POST_VARS['encounter_class_nr'],$encounter_nr);
+										if(isset($appt_nr)&&$appt_nr) $encounter_obj->markAppointmentDone($appt_nr,$_POST['encounter_class_nr'],$encounter_nr);
 										//echo $encounter_obj->getLastQuery();
 							            header("Location: aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr&origin=admit&target=entry&newdata=$newdata"); 
 								        exit;
@@ -849,7 +849,7 @@ if(!isset($pid) || !$pid){
 			}
 
 			$smarty->assign('LDAdmitBy',$LDAdmitBy);
-			if (empty($encoder)) $encoder = $HTTP_COOKIE_VARS[$local_user.$sid];
+			if (empty($encoder)) $encoder = $_COOKIE[$local_user.$sid];
 			$smarty->assign('encoder','<input  name="encoder" type="text" value="'.$encoder.'" size="28" readonly>');
 
 			$sTemp = '<input type="hidden" name="pid" value="'.$pid.'">

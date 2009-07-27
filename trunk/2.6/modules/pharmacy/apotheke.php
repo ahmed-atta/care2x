@@ -22,10 +22,10 @@ if(!session_is_registered('sess_user_origin')) session_register('sess_user_origi
 
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
-$HTTP_SESSION_VARS['sess_user_origin']='pharma';
+$_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
+$_SESSION['sess_user_origin']='pharma';
 require ($root_path.'include/care_api_classes/class_access.php');
-$access = new Access($HTTP_SESSION_VARS['sess_login_userid'],$HTTP_SESSION_VARS['sess_login_pw']);
+$access = new Access($_SESSION['sess_login_userid'],$_SESSION['sess_login_pw']);
 $hideOrder = 0;
 if(ereg("_a_1_pharmadbadmin",$access->PermissionAreas()))
 	$hideOrder = 1;

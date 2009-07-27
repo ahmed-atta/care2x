@@ -307,10 +307,10 @@ function isgdatum(val,idx)
 function updatebar(x)
 {
 	if(x=="main"){
-		window.opener.parent.LOGINPUT.location.replace('<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=edit&enc_nr=$enc_nr".$HTTP_SESSION_VARS['sess_comdat']; ?>');
-		window.opener.parent.OPLOGMAIN.location.replace("<?php echo "oplogmain.php?sid=$sid&lang=$lang&gotoid=$enc_nr".$HTTP_SESSION_VARS['sess_comdat']; ?>");
+		window.opener.parent.LOGINPUT.location.replace('<?php echo "oploginput.php?sid=$sid&lang=$lang&mode=edit&enc_nr=$enc_nr".$_SESSION['sess_comdat']; ?>');
+		window.opener.parent.OPLOGMAIN.location.replace("<?php echo "oplogmain.php?sid=$sid&lang=$lang&gotoid=$enc_nr".$_SESSION['sess_comdat']; ?>");
 	}else{
-		window.opener.parent.OPLOGIMGBAR.location.replace('<?php echo "oplogtimebar.php?sid=$sid&lang=$lang&winid=$winid&enc_nr=$enc_nr".$HTTP_SESSION_VARS['sess_comdat']; ?>');
+		window.opener.parent.OPLOGIMGBAR.location.replace('<?php echo "oplogtimebar.php?sid=$sid&lang=$lang&winid=$winid&enc_nr=$enc_nr".$_SESSION['sess_comdat']; ?>');
 	}
 }
 //$imgsrc="../imgcreator/log-timebar.php?sid=$sid&winid=$winid&patnum=$patnum&op_nr=$op_nr&dept=$dept&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";

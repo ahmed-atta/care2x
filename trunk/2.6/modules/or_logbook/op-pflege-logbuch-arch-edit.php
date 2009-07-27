@@ -96,15 +96,15 @@ switch($mode)
 			if ($file)
 			{
 			reset($template);
-			reset($HTTP_POST_VARS);
-            while (list($k,$v)=each($HTTP_POST_VARS))
+			reset($_POST);
+            while (list($k,$v)=each($_POST))
 			{
 				$template[$k]=addcslashes($v,"\n\r");
 				$pdata[$k]=$v;
 			}
 
-			$buf=explode(" ",$HTTP_POST_VARS['pname']);
-			if (strstr($HTTP_POST_VARS['pname'],","))
+			$buf=explode(" ",$_POST['pname']);
+			if (strstr($_POST['pname'],","))
 			{
 				$template['nname']=str_replace(",","",$buf[0]);
 				$template['vname']=$buf[1];
