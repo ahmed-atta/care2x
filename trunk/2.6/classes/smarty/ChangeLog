@@ -4006,7 +4006,7 @@
 2003-09-11  Messju Mohr  <messju@lammfellpuschen.de>
 
     * libs/Smarty.class.php:
-      silenced two notices acces HTTP_SERVER_VARS
+      silenced two notices acces $_SERVER
 
 2003-09-10  andreas halter  <phpcvs@andreashalter.ch>
 

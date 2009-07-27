@@ -568,7 +568,7 @@ class Smarty
     function Smarty()
     {
       $this->assign('SCRIPT_NAME', isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME']
-                    : @$GLOBALS['HTTP_SERVER_VARS']['SCRIPT_NAME']);
+                    : @$GLOBALS['$_SERVER']['SCRIPT_NAME']);
     }
 
     /**
@@ -1121,7 +1121,7 @@ class Smarty
                ? $this->error_reporting : error_reporting() & ~E_NOTICE);
 
         if (!$this->debugging && $this->debugging_ctrl == 'URL') {
-            $_query_string = $this->request_use_auto_globals ? $_SERVER['QUERY_STRING'] : $GLOBALS['HTTP_SERVER_VARS']['QUERY_STRING'];
+            $_query_string = $this->request_use_auto_globals ? $_SERVER['QUERY_STRING'] : $GLOBALS['$_SERVER']['QUERY_STRING'];
             if (@strstr($_query_string, $this->_smarty_debug_id)) {
                 if (@strstr($_query_string, $this->_smarty_debug_id . '=on')) {
                     // enable debugging for this browser session
@@ -1197,7 +1197,7 @@ class Smarty
                         $_smarty_results .= smarty_core_display_debug_console($_params, $this);
                     }
                     if ($this->cache_modified_check) {
-                        $_server_vars = ($this->request_use_auto_globals) ? $_SERVER : $GLOBALS['HTTP_SERVER_VARS'];
+                        $_server_vars = ($this->request_use_auto_globals) ? $_SERVER : $GLOBALS['$_SERVER'];
                         $_last_modified_date = @substr($_server_vars['HTTP_IF_MODIFIED_SINCE'], 0, strpos($_server_vars['HTTP_IF_MODIFIED_SINCE'], 'GMT') + 3);
                         $_gmt_mtime = gmdate('D, d M Y H:i:s', $this->_cache_info['timestamp']).' GMT';
                         if (@count($this->_cache_info['insert_tags']) == 0

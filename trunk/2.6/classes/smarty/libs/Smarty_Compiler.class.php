@@ -2058,7 +2058,7 @@ class Smarty_Compiler extends Smarty {
                 break;
 
             case 'server':
-                $compiled_ref = ($this->request_use_auto_globals) ? '$_SERVER' : "\$GLOBALS['HTTP_SERVER_VARS']";
+                $compiled_ref = ($this->request_use_auto_globals) ? '$_SERVER' : "\$GLOBALS['$_SERVER']";
                 break;
 
             case 'session':

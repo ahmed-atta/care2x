@@ -1,10 +1,11 @@
 <?php
 /**
-* Inserted code for Care 2002
-*/
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+ * Inserted code for Care 2002
+ */
+error_reporting ( E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR ) ;
 
-require_once("../../include/inc_vars_resolve.php"); // globalize POST, GET, & COOKIE  vars
+require_once ("../../include/inc_vars_resolve.php") ; // globalize POST, GET, & COOKIE  vars
+
 
 /*
 #
@@ -25,21 +26,27 @@ require_once("../../include/inc_vars_resolve.php"); // globalize POST, GET, & CO
 # Code Interleaved 2 of 5 (default, you do not need to activate the line below if you use this format)
 # $type = 'I25';
 
+
 # Code 39 (activate the following line)
 #  $type = 'C39';
+
 
 # Code 128-A (activate the following line)
 # $type = 'C128A';
 
+
 # Code 128-B (activate the following line)
 # $type = 'C128B';
+
 
 # Code 128-C (activate the following line)
 # $type = 'C128C';
 
+
 # If you have chosen a format other that I25, you might need to activate this line too! To use a finer barcode line and a narrower barcode image.
 # Do not forget to delete all cached barcode images from /cache/barcodes/ before you start using the new resolution!
 #  $xres = 1;
+
 
 /*
 Barcode Render Class for PHP using the GD graphics library 
@@ -66,109 +73,95 @@ Copy of GNU Lesser General Public License at: http://www.gnu.org/copyleft/lesser
 Source code home page: http://www.mribti.com/barcode/
 Contact author at: barcode@mribti.com
 */
-  
-  define (__TRACE_ENABLED__, false);
-  define (__DEBUG_ENABLED__, false);
-  
-  require("barcode.php");  
-  require("i25object.php");
-  require("c39object.php");
-  require("c128aobject.php");
-  require("c128bobject.php");
-  require("c128cobject.php");
-              			   
-  if (!isset($style))  $style   = BCD_DEFAULT_STYLE;
-  if (!isset($width))  $width   = BCD_DEFAULT_WIDTH;
-  if (!isset($height)) $height  = BCD_DEFAULT_HEIGHT;
-  if (!isset($xres))   $xres    = BCD_DEFAULT_XRES;
-  if (!isset($font))   $font    = BCD_DEFAULT_FONT;
 
+define ( __TRACE_ENABLED__, false ) ;
+define ( __DEBUG_ENABLED__, false ) ;
 
-  switch ($type)
-  {
-    case "I25":
-			  $obj = new I25Object($width, $height, $style, $code);
-			  break;
-    case "C39":
-			  $obj = new C39Object($width, $height, $style, $code);
-			  break;
-    case "C128A":
-			  $obj = new C128AObject($width, $height, $style, $code);
-			  break;
-    case "C128B":
-			  $obj = new C128BObject($width, $height, $style, $code);
-			  break;
-    case "C128C":
-              $obj = new C128CObject($width, $height, $style, $code);
-			  break;
-	default:
-			//echo "Need bar code type ex. C39";
-			
-			# Default format is I25
+require ("barcode.php") ;
+require ("i25object.php") ;
+require ("c39object.php") ;
+require ("c128aobject.php") ;
+require ("c128bobject.php") ;
+require ("c128cobject.php") ;
 
-			$obj = new I25Object($width, $height, $style, $code);
-			$obj = false;
-  }
-   
-  if ($obj) {
-      $obj->SetFont($font);   
-      $obj->DrawObject($xres);
-  	 if($label)
-	 {
-	 
-	  
-        if(!$pn&&$code) $pn=$code;
+if (! isset ( $style ))
+	$style = BCD_DEFAULT_STYLE ;
+if (! isset ( $width ))
+	$width = BCD_DEFAULT_WIDTH ;
+if (! isset ( $height ))
+	$height = BCD_DEFAULT_HEIGHT ;
+if (! isset ( $xres ))
+	$xres = BCD_DEFAULT_XRES ;
+if (! isset ( $font ))
+	$font = BCD_DEFAULT_FONT ;
 
-/*	    switch($form_file)
-	    {
-	        case "1":  $obj->FlushObject2FormFile();
-		                   $prepend='form_';
-						   break;
-		    case "lab":$obj->FlushObject2LabFile();
-		                   $prepend='lab_';
-						   break;
-		    case "en":$obj->FlushObject2EnFile();
-		                   $prepend='en_';
-						   break;
-		    default:    $obj->FlushObject2PnFile();
-		                   $prepend='pn_';
-		  }*/
-		  
-	    switch($form_file)
-	    {
-	        case "1": 
-		                   $prepend='form_';
-						   break;
-		    case "lab":
-		                   $prepend='lab_';
-						   break;
-		    case "en":
-		                   $prepend='en_';
-						   break;
-		    default:    
-		                   $prepend='pn_';
-		  }
-		  
-		  	$obj->FlushObject2File($prepend);	
-			   
-           /* Copy the temporary file to the correct patient number */
-          copy('../../cache/barcodes/'.$prepend.'temp.png','../../cache/barcodes/'.$prepend.$pn.'.png');
+switch ( $type) {
+	case "I25" :
+		$obj = new I25Object ( $width, $height, $style, $code ) ;
+	break ;
+	case "C39" :
+		$obj = new C39Object ( $width, $height, $style, $code ) ;
+	break ;
+	case "C128A" :
+		$obj = new C128AObject ( $width, $height, $style, $code ) ;
+	break ;
+	case "C128B" :
+		$obj = new C128BObject ( $width, $height, $style, $code ) ;
+	break ;
+	case "C128C" :
+		$obj = new C128CObject ( $width, $height, $style, $code ) ;
+	break ;
+	default :
+		//echo "Need bar code type ex. C39";
+		
 
-          /* Delete the temporary file */
-          if(file_exists('../../cache/barcodes/'.$prepend.'temp.png')) unlink('../../cache/barcodes/'.$prepend.'temp.png');
+		# Default format is I25
+		
 
-	 }
-	 else
-		 { 
-		 	$obj->FlushObject();
-	 	 }
-  	 $obj->DestroyObject();
-  	  unset($obj);  /* clean */
-  }
+		$obj = new I25Object ( $width, $height, $style, $code ) ;
+		$obj = false ;
+}
 
+if ($obj) {
+	$obj->SetFont ( $font ) ;
+	$obj->DrawObject ( $xres ) ;
 
-if($label==1)
-{
-	 header("location: ../../main/imgcreator/barcode-etik.php?sid=$sid&lang=$lang&pn=$pn");
+	//if ($label) {
+		
+		if (! $pn && $code)
+			$pn = $code ;
+		
+		switch ( $form_file) {
+			case "1" :
+				$prepend = 'form_' ;
+			break ;
+			case "lab" :
+				$prepend = 'lab_' ;
+			break ;
+			case "en" :
+				$prepend = 'en_' ;
+			break ;
+			default :
+				$prepend = 'pn_' ;
+		}
+		
+		$obj->FlushObject2File ( $prepend ) ;
+		
+		/* Copy the temporary file to the correct patient number */
+		copy ( '../../cache/barcodes/' . $prepend . 'temp.png', '../../cache/barcodes/' . $prepend . $pn . '.png' ) ;
+		
+		/* Delete the temporary file */
+		if (file_exists ( '../../cache/barcodes/' . $prepend . 'temp.png' ))
+			unlink ( '../../cache/barcodes/' . $prepend . 'temp.png' ) ;
+	
+	//} else {
+		$obj->FlushObject () ;
+	}
+	$obj->DestroyObject () ;
+	unset ( $obj ) ; /* clean */
+//}
+
+if ($label == 1) {
+	header ( "location: ../../main/imgcreator/barcode-etik.php?sid=$sid&lang=$lang&pn=$pn" ) ;
 }
 ?>
