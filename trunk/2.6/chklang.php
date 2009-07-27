@@ -104,16 +104,16 @@ if (!defined('__PMA_LANG_DETECT__')) {
 /**
  * Get some global variables if 'register_globals' is set to 'off'
  */
-if (!empty($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']))
-    $HTTP_ACCEPT_LANGUAGE = $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE'];
-if (!empty($HTTP_SERVER_VARS['HTTP_USER_AGENT']))
-    $HTTP_USER_AGENT = $HTTP_SERVER_VARS['HTTP_USER_AGENT'];
+if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+    $HTTP_ACCEPT_LANGUAGE = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+if (!empty($_SERVER['HTTP_USER_AGENT']))
+    $HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
 if (!isset($lang)) {
-    if (isset($HTTP_GET_VARS) && !empty($HTTP_GET_VARS['lang'])) {
-        $lang = $HTTP_GET_VARS['lang'];
+    if (isset($_GET) && !empty($_GET['lang'])) {
+        $lang = $_GET['lang'];
     }
-    if (isset($HTTP_POST_VARS) && !empty($HTTP_POST_VARS['lang'])) {
-        $lang = $HTTP_POST_VARS['lang'];
+    if (isset($_POST) && !empty($_POST['lang'])) {
+        $lang = $_POST['lang'];
     }
 }
 
