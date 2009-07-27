@@ -107,10 +107,10 @@ if($maxpic){
 		
 		$data=array('encounter_nr'=>$patnum,
 									'upload_date'=>date('Y-m-d'),
-									'history'=>"Upload ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n",
+									'history'=>"Upload ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n",
 									'modify_id'=>'',
 									'modify_time'=>0,
-									'create_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+									'create_id'=>$_SESSION['sess_user_name'],
 									'create_time'=>date('YmdHis'));
 		
 		for ($i=0;$i<$maxpic;$i++)
@@ -120,7 +120,7 @@ if($maxpic){
 		   $shotnr='nr'.$i;//echo $shotnr."<br>";
 		   //echo $picfile.' '.$shotdate.' '.$shotnr;
 		   # Check the image
-		   if(!$img->isValidUploadedImage($HTTP_POST_FILES[$picfile])) continue;
+		   if(!$img->isValidUploadedImage($_FILES[$picfile])) continue;
 		   # Get the file extension
 		  $picext=$img->UploadedImageMimeType();
 
@@ -139,7 +139,7 @@ if($maxpic){
 
 				$picfilename[$i]=$picnr.'.'.$picext;
 		
-		      		echo '<tr><td>'.$HTTP_POST_FILES[$picfile]['name'].'</td><td> <img '.createComIcon($root_path,'fwd.gif','0','absmiddle').'> ';
+		      		echo '<tr><td>'.$_FILES[$picfile]['name'].'</td><td> <img '.createComIcon($root_path,'fwd.gif','0','absmiddle').'> ';
 		       		if($disc_pix_mode)
 		       		{
 			      		if(!is_dir($d)){
@@ -158,7 +158,7 @@ if($maxpic){
 						$dir_path=$root_path.'cache/';
 			   		}
 					# Save the uploaded image
-					$img->saveUploadedImage($HTTP_POST_FILES[$picfile],$dir_path,$picfilename[$i]);
+					$img->saveUploadedImage($_FILES[$picfile],$dir_path,$picfilename[$i]);
 					
 		       		echo '<font color="#cc0000"><a href="javascript:previewpic(\'';
 		       		if($disc_pix_mode) echo $root_path.$fotoserver_localpath; else echo $fotoserver_http;

@@ -80,7 +80,7 @@ if($dblink_ok)
 				if($update)
 				{
 					$sql="UPDATE $dbtable SET menu='$menuplan',
-					modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+					modify_id='".$_COOKIE[$local_user.$sid]."',
 					modify_time='".date('YmdHis')."'  WHERE  item='".$item."'";
 				}
 				else
@@ -97,7 +97,7 @@ if($dblink_ok)
 						    '$lang',
 						    '".formatDate2STD($myear."-".$mmonth."-".$mday,"yyyy-mm-dd")."',
 							'$menuplan',
-							'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+							'".$_COOKIE[$local_user.$sid]."',
 							'".date('YmdHis')."'
 							)";
 				}					

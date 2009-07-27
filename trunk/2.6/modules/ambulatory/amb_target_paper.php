@@ -32,28 +32,28 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 if($mode=='save'){
 	# Know where we are
-	switch($HTTP_SESSION_VARS['sess_user_origin']){
-		case 'lab': $HTTP_POST_VARS['location_type_nr']=1; # 1 =department
+	switch($_SESSION['sess_user_origin']){
+		case 'lab': $_POST['location_type_nr']=1; # 1 =department
 						break;
-		default: 	$HTTP_POST_VARS['location_type_nr']=2; # 2 = ward 
+		default: 	$_POST['location_type_nr']=2; # 2 = ward 
 						break;
 	}
-	$HTTP_POST_VARS['location_id']=$station; 
-	if($report_obj->saveDailyWardNotes($HTTP_POST_VARS)){
+	$_POST['location_id']=$station; 
+	if($report_obj->saveDailyWardNotes($_POST)){
 		//echo $report_obj->getLastQuery();
 		header("Location:$thisfile".URL_REDIRECT_APPEND."&pn=$pn&station=$station&dept_nr=$dept_nr&location_nr=$location_nr&saved=1");
 		exit;
 	}else{echo $report_obj->getLastQuery()."<p>$LDDbNoUpdate";}
 } elseif ($mode=='update') {
 	# Know where we are
-	switch($HTTP_SESSION_VARS['sess_user_origin']){
-		case 'lab': $HTTP_POST_VARS['location_type_nr']=1; # 1 =department
+	switch($_SESSION['sess_user_origin']){
+		case 'lab': $_POST['location_type_nr']=1; # 1 =department
 						break;
-		default: 	$HTTP_POST_VARS['location_type_nr']=2; # 2 = ward 
+		default: 	$_POST['location_type_nr']=2; # 2 = ward 
 						break;
 	}
-	$HTTP_POST_VARS['location_id']=$station;
-	if($report_obj->updateDailyWardNotes($HTTP_POST_VARS)){
+	$_POST['location_id']=$station;
+	if($report_obj->updateDailyWardNotes($_POST)){
 		//echo $report_obj->getLastQuery();
 		header("Location:$thisfile".URL_REDIRECT_APPEND."&pn=$pn&station=$station&dept_nr=$dept_nr&location_nr=$location_nr&saved=1");
 		exit;
@@ -66,7 +66,7 @@ if($mode=='save'){
 	# If location name is empty, fetch by location nr
 	if(!isset($station)||empty($station)){
 		# Know where we are
-		switch($HTTP_SESSION_VARS['sess_user_origin']){
+		switch($_SESSION['sess_user_origin']){
 			case 'amb': # Create nursing notes object 
 						include_once($root_path.'include/care_api_classes/class_department.php');
 						$obj= new Department;
@@ -391,7 +391,7 @@ Reperti <select name='reperti_muscolare'><option name='Si'<?php if (($occup)&&($
 Reperti <select name='reperti_nervoso'><option name='Si'<?php if (($occup)&&($row['reperti_nervoso']=="Si")) echo "selected"; ?>>Si</option><option name='No' <?php if (($occup)&&($row['reperti_nervoso']=="No")) echo "selected"; ?>>No</option></select><br>
 
 
-<input type="text" name="personell_name" size=60 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly>
+<input type="text" name="personell_name" size=60 maxlength=60 value="<?php echo $_SESSION['sess_user_name']; ?>" readonly>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="station" value="<?php echo $station ?>">

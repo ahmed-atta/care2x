@@ -23,11 +23,11 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 /* Resolve the department number
 * If no dept nr available, redirect to dept selector page
 */
-$HTTP_SESSION_VARS['sess_user_origin']='calendar_opt'; // set the origin
+$_SESSION['sess_user_origin']='calendar_opt'; // set the origin
 if(!isset($forceback)||empty($forceback)){
 	if(!isset($dept_nr)||empty($dept_nr)){
-		if(isset($HTTP_SESSION_VARS['sess_dept_nr'])&&$HTTP_SESSION_VARS['sess_dept_nr']){
-			$dept_nr=$HTTP_SESSION_VARS['sess_dept_nr'];
+		if(isset($_SESSION['sess_dept_nr'])&&$_SESSION['sess_dept_nr']){
+			$dept_nr=$_SESSION['sess_dept_nr'];
 		}elseif(isset($cfg['thispc_dept_nr'])&&$cfg['thispc_dept_nr']){
 			$dept_nr=$cfg['thispc_dept_nr'];
 		}else{
@@ -38,14 +38,14 @@ if(!isset($forceback)||empty($forceback)){
 }
 require_once($root_path.'include/inc_date_format_functions.php');
 
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
+$_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
 
 if(!session_is_registered('sess_date_process')) session_register('sess_date_process');
 
 /* Filter the date */
 if(empty($month)||empty($day)||empty($year)){
-	if(isset($HTTP_SESSION_VARS['sess_date_process'])&&!empty($HTTP_SESSION_VARS['sess_date_process'])){
-		list($year,$month,$day)=explode('-',$HTTP_SESSION_VARS['sess_date_process']);
+	if(isset($_SESSION['sess_date_process'])&&!empty($_SESSION['sess_date_process'])){
+		list($year,$month,$day)=explode('-',$_SESSION['sess_date_process']);
 	}else{
 		$no_date=true;
 	}
@@ -54,7 +54,7 @@ if(empty($month)||empty($day)||empty($year)){
 	if(($month<10)&&(strlen($month)<2)) $month="0".$month;
 	if(($day<10)&&(strlen($day)<2)) $day="0".$day;
 
-	$HTTP_SESSION_VARS['sess_date_process']=$year.'-'.$month.'-'.$day; // store the date used in the current process
+	$_SESSION['sess_date_process']=$year.'-'.$month.'-'.$day; // store the date used in the current process
 }
 
 $i_date=$year.'-'.$month.'-'.$day;
@@ -78,7 +78,7 @@ if($dept_nr){
 	if(isset($$dept_ldvar)&&!empty($$dept_ldvar)) $dept_name=$$dept_ldvar;
 		else $dept_name=$dept_obj->FormalName($dept_nr);
 	
-	$HTTP_SESSION_VARS['sess_dept_nr']=$dept_nr;
+	$_SESSION['sess_dept_nr']=$dept_nr;
 }
 
 
@@ -93,10 +93,10 @@ if($dept_nr){
 <font face="Verdana, Arial" size=2>
 
 <?php 
-if(isset($HTTP_COOKIE_VARS['ck_login_logged'.$sid])&&($HTTP_SESSION_VARS['sess_login_username'])) { 
+if(isset($_COOKIE['ck_login_logged'.$sid])&&($_SESSION['sess_login_username'])) { 
 ?>
 <!-- 
-<b> <?php echo "$LDOptions $LDFor ".$HTTP_SESSION_VARS['sess_login_username']." ".$LDOn." ".formatDate2Local($i_date,$date_format) ?></b>
+<b> <?php echo "$LDOptions $LDFor ".$_SESSION['sess_login_username']." ".$LDOn." ".formatDate2Local($i_date,$date_format) ?></b>
 <ul>
 <li><a href="#"><?php echo $LDShowMyCalendar ?></a></li>
 <li><a href="#"><?php echo $LDShowMySched ?></a></li>

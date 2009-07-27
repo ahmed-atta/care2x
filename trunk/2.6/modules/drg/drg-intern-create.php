@@ -37,17 +37,17 @@ $thisfile=basename(__FILE__);
 
 if(isset($mode)){
 	/* Prepare the common data */
-	$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-	//$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-	$HTTP_POST_VARS['create_time']=date('YmdHis');
+	$_POST['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+	//$_POST['modify_id']=$_SESSION['sess_user_name'];
+	$_POST['create_id']=$_SESSION['sess_user_name'];
+	$_POST['create_time']=date('YmdHis');
 
 	switch($mode){
 	
 		case 'save':
 		{
 			$DRG_obj->useInternalDRGCodes(); // Set the core variables
-			$DRG_obj->setDataArray($HTTP_POST_VARS); // transfer the data
+			$DRG_obj->setDataArray($_POST); // transfer the data
 			if($DRG_obj->insertDataFromInternalArray()){
 				$oid=$db->Insert_ID(); // Get the insert ID
 				$group_nr=$DRG_obj->LastInsertPK('nr',$oid);
@@ -63,10 +63,10 @@ if(isset($mode)){
 		{
 			if(!$DRG_obj->EncounterDRGGroupExists($group_nr)){
 				$DRG_obj->useInternalDRG(); // Set the core variables to encounter DRG table
-				$HTTP_POST_VARS['clinician']=$HTTP_SESSION_VARS['sess_user_name'];
-				$HTTP_POST_VARS['encounter_nr']=$pn;
-				$HTTP_POST_VARS['date']=date('Y-m-d H:i:s');
-				$DRG_obj->setDataArray($HTTP_POST_VARS); // transfer the data
+				$_POST['clinician']=$_SESSION['sess_user_name'];
+				$_POST['encounter_nr']=$pn;
+				$_POST['date']=date('Y-m-d H:i:s');
+				$DRG_obj->setDataArray($_POST); // transfer the data
 				if($DRG_obj->insertDataFromInternalArray()){
 					$DRG_obj->groupNonGroupedItems($group_nr);
 					$saveok=true;

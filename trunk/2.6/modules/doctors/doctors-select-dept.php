@@ -12,13 +12,13 @@ require($root_path.'include/inc_environment_global.php');
 */
 $lang_tables[]='departments.php';
 define('LANG_FILE','doctors.php');
-if($HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
+if($_SESSION['sess_user_origin']=='personell_admin'){
 	$local_user='aufnahme_user';
 	$breakfile=$root_path.'modules/personell_admin/personell_register_show.php'.URL_APPEND.'&target=personell_reg&personell_nr='.$nr;
 }else{
 	$local_user='ck_doctors_dienstplan_user';
-	if (!empty($HTTP_SESSION_VARS['sess_path_referer'])){
-		$breakfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
+	if (!empty($_SESSION['sess_path_referer'])){
+		$breakfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND;
 	} else {
 		/* default startpage */
 		$breakfile = $root_path.'doctors.php'.URL_APPEND;

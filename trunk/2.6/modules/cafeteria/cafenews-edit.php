@@ -15,10 +15,10 @@ $local_user='ck_cafenews_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 /* Set navigation paths for this page*/
-$breakfile=$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
+$breakfile=$_SESSION['sess_file_break'].URL_APPEND;
 /* Set the new return file for the suceeding page */
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
-$HTTP_SESSION_VARS['sess_file_return']='cafenews-edit-select-art.php';
+$_SESSION['sess_file_return']=basename(__FILE__);
+$_SESSION['sess_file_return']='cafenews-edit-select-art.php';
 
 $returnfile='cafenews-edit-select-art.php'.URL_APPEND;
 
@@ -31,7 +31,7 @@ $calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system',
 $calendar->load_files();
 //end : gjergji
 
-$title=$HTTP_SESSION_VARS['sess_title'];
+$title=$_SESSION['sess_title'];
 ?>
 <?php html_rtl($lang); ?>
 <head>

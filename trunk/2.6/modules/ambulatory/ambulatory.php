@@ -12,13 +12,13 @@ require($root_path.'include/inc_2level_reset.php');
 
 if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
-$HTTP_SESSION_VARS['sess_user_origin']='amb';
-$HTTP_SESSION_VARS['sess_parent_mod']='';
+$_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
+$_SESSION['sess_user_origin']='amb';
+$_SESSION['sess_parent_mod']='';
 /* Create department object and load all medical depts */
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj= new Department;
-if(!isset($HTTP_SESSION_VARS['department_nr']) || $HTTP_SESSION_VARS['department_nr'] == '')
+if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '')
 	$medical_depts=&$dept_obj->getAllActiveSort( 'name_formal' ) ; //get only the main depts
 else
 	$medical_depts=&$dept_obj->getAllMedical() ; // get all depts
@@ -88,7 +88,7 @@ function goDept(t) {
 
 $TP_SELECT_BLOCK='<select name="dept_nr" size="1"><option value=""></option>';
 
-if(!isset($HTTP_SESSION_VARS['department_nr']) || $HTTP_SESSION_VARS['department_nr'] == '') {
+if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '') {
     while(list($x,$v)=each($medical_depts)){
     	$subDepts = $dept_obj->getAllSubDepts($v['nr']);
     	$TP_SELECT_BLOCK.='<option value="'.$v['nr'].'" >';
@@ -108,7 +108,7 @@ if(!isset($HTTP_SESSION_VARS['department_nr']) || $HTTP_SESSION_VARS['department
     }  
 } else {
     while(list($x,$v)=each($medical_depts)){
-    	if(in_array($v['nr'],$HTTP_SESSION_VARS['department_nr']))  { 
+    	if(in_array($v['nr'],$_SESSION['department_nr']))  { 
         	$TP_SELECT_BLOCK.='<option value="'.$v['nr'].'" selected >';
         	$buffer=$v['LD_var'];
         	if(isset($$buffer)&&!empty($$buffer)) $TP_SELECT_BLOCK.=$$buffer;
@@ -123,7 +123,7 @@ $TP_SELECT_BLOCK.='</select>';
 #Prepare hidden inputs
 $TP_HIDDENS='';
 reset($medical_depts);
-if(!isset($HTTP_SESSION_VARS['department_nr']) || $HTTP_SESSION_VARS['department_nr'] == '') {
+if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '') {
 	while(list($x,$v)=each($medical_depts)){
 		$subDepts = $dept_obj->getAllSubDepts($v['nr']);
 	$buffer=$v['LD_var'];
@@ -168,7 +168,7 @@ $TP_HINPUTS='<input type="hidden" name="sid" value="'.$sid.'">
  $smarty->assign('TP_HREF_PWL1','<a href="javascript:goDept(\'amb_clinic_patients_pass.php\')">'.$LDOutpatientClinic.'</a>');
  $smarty->assign('TP_HREF_PREQ1','<a href="javascript:goDept(\''.$root_path.'modules/laboratory/labor_test_request_pass.php\')">'.$LDPendingRequest.'</a>');
  $smarty->assign('TP_HREF_NEWS1','<a href="javascript:goDept(\''.$root_path.'modules/news/newscolumns.php\')">'.$LDNews.'</a>');
-if(!isset($HTTP_SESSION_VARS['department_nr']) || $HTTP_SESSION_VARS['department_nr'] == '') {
+if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '') {
     # Create the top left submenu block
  $smarty->assign('sBlockTitle',$LDEmergency);
  $smarty->assign('sApptLink',"<a href=\"".$root_path."modules/appointment_scheduler/appt_main_pass.php".URL_APPEND."&target=14&dept_nr=14&user_origin=amb&dept=".strtr($LDEmergency,' ','+')."\">$LDAppointments</a>");

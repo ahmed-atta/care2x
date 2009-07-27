@@ -47,12 +47,12 @@ if(isset($pn)&&$pn){
 	//$db->debug=true;
 	if(isset($mode)&&$mode=='save'){
 
-		//$HTTP_POST_VARS['history']="CONCAT(history,'Notes ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
-		$HTTP_POST_VARS['history']=$img_obj->ConcatHistory("Notes ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
-		$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$HTTP_POST_VARS['modify_time']=date('YmdHis');
-		//$img_obj->setDataArray($HTTP_POST_VARS);
-		if($img_obj->updateImageNotes($HTTP_POST_VARS)){
+		//$_POST['history']="CONCAT(history,'Notes ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n')";
+		$_POST['history']=$img_obj->ConcatHistory("Notes ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
+		$_POST['modify_id']=$_SESSION['sess_user_name'];
+		$_POST['modify_time']=date('YmdHis');
+		//$img_obj->setDataArray($_POST);
+		if($img_obj->updateImageNotes($_POST)){
 			header('Location:'.basename(__FILE__).URL_REDIRECT_APPEND.'&pn='.$pn.'&nr='.$nr.'&bShowImageJApplet='.$bShowImageJApplet);
 			exit;
 		}

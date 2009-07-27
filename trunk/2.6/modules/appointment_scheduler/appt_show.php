@@ -21,7 +21,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 if(!isset($currDay)||!$currDay) $currDay=date('d');
 if(!isset($currMonth)||!$currMonth) $currMonth=date('m');
 if(!isset($currYear)||!$currYear) $currYear=date('Y');
-if(isset($HTTP_SESSION_VARS['sess_parent_mod'])) $HTTP_SESSION_VARS['sess_parent_mod']='';
+if(isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod']='';
 
 $thisfile=basename(__FILE__);
 $editorfile=$root_path.'modules/registration_admission/show_appointment.php';
@@ -31,7 +31,7 @@ $appt_obj=new Appointment();
 if(!isset($mode)){
 	$mode='show';
 }elseif($mode=='appt_cancel'&&!empty($nr)){
-	if($appt_obj->cancelAppointment($nr,$reason,$HTTP_SESSION_VARS['sess_user_name'])){
+	if($appt_obj->cancelAppointment($nr,$reason,$_SESSION['sess_user_name'])){
 		header("location:$thisfile".URL_REDIRECT_APPEND."&currYear=$currYear&currMonth=$currMonth&currDay=$currDay");
 		exit;
 	}else{
@@ -55,9 +55,9 @@ if($mode=='show'){
 	}
 }
 
-$HTTP_SESSION_VARS['sess_parent_mod']='';
-$HTTP_SESSION_VARS['sess_appt_dept_nr']='';
-$HTTP_SESSION_VARS['sess_appt_doc']='';
+$_SESSION['sess_parent_mod']='';
+$_SESSION['sess_appt_dept_nr']='';
+$_SESSION['sess_appt_doc']='';
 
 # Create encounter object
 require_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -75,7 +75,7 @@ $dept_obj=new Department;
 $deptarray=$dept_obj->getAllMedical('name_formal');
 
 # Set the break (return) file
-switch($HTTP_SESSION_VARS['sess_user_origin']){
+switch($_SESSION['sess_user_origin']){
 	case 'amb': $breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND; break;
 	default: $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 }
@@ -209,7 +209,7 @@ if($appt_obj->count){
 }
 
 $smarty->assign('sButton','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
-$smarty->assign('sNewApptLink','<a href="'.$root_path.'modules/registration_admission/patient_register_pass.php'.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target=search">'.$LDScheduleNewAppointment.'</a>');
+$smarty->assign('sNewApptLink','<a href="'.$root_path.'modules/registration_admission/patient_register_pass.php'.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target=search">'.$LDScheduleNewAppointment.'</a>');
 
 $smarty->assign('pbClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0').' alt="'.$LDCloseAlt.'">');
 

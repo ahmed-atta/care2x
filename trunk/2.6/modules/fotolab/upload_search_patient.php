@@ -39,7 +39,7 @@ $append='&status='.$status.'&target='.$target.'&user_origin='.$user_origin;
 
 # Initialize page´s control variables
 if($mode=='paginate'){
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	$searchkey=$_SESSION['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
 	//$mode='search';
 }else{
@@ -51,7 +51,7 @@ if($mode=='paginate'){
 }
 # Paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -65,7 +65,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	# Convert other wildcards
 	$searchkey=strtr($searchkey,'*?','%_');
 	# Save the search keyword for eventual pagination routines
-	if($mode=='search') $HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
+	if($mode=='search') $_SESSION['sess_searchkey']=$searchkey;
 
 	include_once($root_path.'include/inc_date_format_functions.php');
 	include_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -221,7 +221,7 @@ if($mode=='search'||$mode=='paginate'){
 						echo "&nbsp;".$zeile['addr_zip'];
                         echo "</td>";	
 */
-					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
+					    if($_COOKIE[$local_user.$sid]) echo '
 						<td>&nbsp;
 							<a href="fotolab-dir-select.php'.URL_APPEND.'&patnum='.$zeile['encounter_nr'].'&lastname='.strtr($zeile['name_last'],' ','+').'&firstname='.strtr($zeile['name_first'],' ','+').'&bday='.$zeile['date_birth'].'&maxpic='.$aux1.'">
 							<img '.$img_options.' alt="'.$LDSelect.'"></a>&nbsp;

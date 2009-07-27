@@ -5,7 +5,7 @@ if (eregi("inc_config_color.php",$PHP_SELF))
 
 # ------end-----
 
-switch($HTTP_SESSION_VARS['sess_user_origin'])
+switch($_SESSION['sess_user_origin'])
 {
 	case 'nursing':
 	{

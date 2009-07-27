@@ -16,7 +16,7 @@ define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-if(empty($HTTP_COOKIE_VARS[$local_user.$sid])){
+if(empty($_COOKIE[$local_user.$sid])){
     $edit=0;
 	include($root_path."language/".$lang."/lang_".$lang."_".LANG_FILE);
 }
