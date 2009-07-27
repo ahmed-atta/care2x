@@ -89,7 +89,7 @@ require("menu/$LocMenuTreeDir/mainmenu.inc.php");
 <TABLE CELLPADDING=0 CELLSPACING=0 border=0>
 
 <?php
-//echo $HTTP_COOKIE_VARS['ck_config']; // used only in debugging related to user config data
+//echo $_COOKIE['ck_config']; // used only in debugging related to user config data
 
 if(!$GLOBALCONFIG['language_single']){
     ?>
@@ -127,8 +127,8 @@ if(!$GLOBALCONFIG['language_single']){
 <font SIZE=2 color="#6f6f6f" face="arial,verdana">
 <?php // echo $dbtype; ?>
 <br>
-<?php if($HTTP_SESSION_VARS['sess_login_username'] != '') echo '<img '.createComIcon($root_path,'team_tree.gif').'><br>' ; 
-echo $HTTP_SESSION_VARS['sess_login_username']; ?>
+<?php if($_SESSION['sess_login_username'] != '') echo '<img '.createComIcon($root_path,'team_tree.gif').'><br>' ; 
+echo $_SESSION['sess_login_username']; ?>
 <br>
 <?php 
 require_once($root_path.'include/care_api_classes/class_department.php');
@@ -137,7 +137,7 @@ $depts=&$dept->getAllActive();
 $sTemp = '';
 if($depts&&is_array($depts)) {
      while(list($x,$v)=each($depts))
-    	 if(in_array($v['nr'],$HTTP_SESSION_VARS['department_nr']))
+    	 if(in_array($v['nr'],$_SESSION['department_nr']))
     		 if(isset($$v['LD_var'])&&$$v['LD_var']) $sTemp = $sTemp .  $$v['LD_var'] . '<br>';
     			 else $sTemp = $sTemp . $v['name_formal'] . '<br>';
     			 
@@ -154,7 +154,7 @@ $ward_info=&$ward_obj->getAllWardsItemsArray($items);
 $sTemp = '';         
 if($ward_info&&is_array($ward_info)){
      while(list($x,$v)=each($ward_info)){
-    	 if(in_array($v['dept_nr'],$HTTP_SESSION_VARS['department_nr']))         			 
+    	 if(in_array($v['dept_nr'],$_SESSION['department_nr']))         			 
     		$sTemp = $sTemp . $v['name'] . '<br>';
     }
 if($sTemp != '') echo '<img '.createComIcon($root_path,'statbel2.gif').'><br>';
