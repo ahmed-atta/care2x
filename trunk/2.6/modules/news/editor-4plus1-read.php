@@ -22,9 +22,9 @@ $breakfile='newscolumns.php'.URL_APPEND;
 if($mode=="preview4saved") $sReturn = $returnfile; else $sReturn = $breakfile;
 
 /* Set the return file to this file*/
-//$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+//$_SESSION['sess_file_return']=basename(__FILE__);
 /* get the title = name of department */
-$title=$HTTP_SESSION_VARS['sess_title'];
+$title=$_SESSION['sess_title'];
 
 /* Get the news article */
 require($root_path.'include/inc_news_get_one.php');

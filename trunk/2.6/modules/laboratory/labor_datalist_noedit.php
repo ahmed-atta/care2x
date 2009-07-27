@@ -91,7 +91,7 @@ if($user_origin=='lab'||$user_origin=='lab_mgmt'){
   	$breakfile=$root_path.'modules/nursing/nursing-station-patientdaten.php'.URL_APPEND.'&pn='.$pn.'&edit='.$edit;
 	$encounter_nr=$pn;
 }
-if(!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if(!$_COOKIE[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 if(!$encounter_nr) header("location:".$root_path."modules/laboratory/labor_data_patient_such.php?sid=$sid&lang=$lang");
 
@@ -265,7 +265,7 @@ function wichOne(nr) {
 	
 function openReport() {
 	enc = <?php echo $encounter_nr ?>;
-	userId = '<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>';
+	userId = '<?php echo $_SESSION['sess_user_name']; ?>';
 	urlholder="<?php echo $root_path ?>modules/pdfmaker/laboratory/report_all.php<?php echo URL_REDIRECT_APPEND; ?>&encounter_nr="+enc+"&skipme="+skipme+"&userId="+userId;
 	window.open(urlholder,'<?php echo $LDOpenReport; ?>',"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
 }

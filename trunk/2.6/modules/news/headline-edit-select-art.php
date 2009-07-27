@@ -14,17 +14,17 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 /* Set navigation paths for this page*/
 $thisfile=basename(__FILE__);
-$breakfile=$root_path.$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
+$breakfile=$root_path.$_SESSION['sess_file_break'].URL_APPEND;
 
-if($HTTP_SESSION_VARS['sess_file_return']==$thisfile) $returnfile='start_page.php'.URL_APPEND;
-    else $returnfile=$root_path.$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
+if($_SESSION['sess_file_return']==$thisfile) $returnfile='start_page.php'.URL_APPEND;
+    else $returnfile=$root_path.$_SESSION['sess_file_return'].URL_APPEND;
 	
 /* Set the new return file for the preview page */
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
-$HTTP_SESSION_VARS['sess_file_forward']='headline-read.php';
+$_SESSION['sess_file_forward']='headline-read.php';
 
-$title= $HTTP_SESSION_VARS['sess_title']; 
+$title= $_SESSION['sess_title']; 
 ?>
 <?php html_rtl($lang); ?>
 <head>

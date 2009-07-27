@@ -74,8 +74,8 @@ require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 $buffer=$dept_obj->LDvar();
-if(isset($$buffer)&&!empty($$buffer)) $HTTP_SESSION_VARS['sess_dept_name']=$$buffer;
-	else $HTTP_SESSION_VARS['sess_dept_name']=$dept_obj->FormalName();
+if(isset($$buffer)&&!empty($$buffer)) $_SESSION['sess_dept_name']=$$buffer;
+	else $_SESSION['sess_dept_name']=$dept_obj->FormalName();
 /* Load global configs */
 include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $GLOBAL_CONFIG=array();
@@ -96,7 +96,7 @@ $entry_border_bgcolor='#6666ee';
 $entry_body_bgcolor='#ffffff';
 
 if(!isset($dept)||empty($dept))
-	if($HTTP_COOKIE_VARS['ck_thispc_dept']) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
+	if($_COOKIE['ck_thispc_dept']) $dept=$_COOKIE['ck_thispc_dept'];
 		else $dept='plop'; // default department is plop
 
 $linecount=0;
@@ -147,7 +147,7 @@ if($mode=='save')
 
 		# Initialize page´s control variables
 		if($mode=='paginate'){
-			$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+			$searchkey=$_SESSION['sess_searchkey'];
 			//$searchkey='USE_SESSION_SEARCHKEY';
 			//$mode='search';
 		}else{
@@ -159,7 +159,7 @@ if($mode=='save')
 		}
 		# Paginator object
 		require_once($root_path.'include/care_api_classes/class_paginator.php');
-		$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+		$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 		//require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 		//$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -172,7 +172,7 @@ if($mode=='save')
 		# Convert other wildcards
 		$searchkey=strtr($searchkey,'*?','%_');
 		# Save the search keyword for eventual pagination routines
-		if($mode=='search') $HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
+		if($mode=='search') $_SESSION['sess_searchkey']=$searchkey;
 
 		include_once($root_path.'include/inc_date_format_functions.php');
 		include_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -263,8 +263,8 @@ if($mode=='save')
 									op_end='$op_end',
 									scrub_nurse='$scrub_nurse',
 									op_room='$op_room',
-									history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-									modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+									history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+									modify_id='".$_SESSION['sess_user_name']."',
 									modify_time='".date('YmdHis')."'
 									WHERE nr='$nr'";
 									
@@ -313,8 +313,8 @@ if($mode=='save')
 									'$op_end',
 									'$scrub_nurse',
 									'$op_room',
-									'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-									'".$HTTP_SESSION_VARS['sess_user_name']."',
+									'Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n',
+									'".$_SESSION['sess_user_name']."',
 									'".date('YmdHis')."'
 								)";
 								//echo $sql;
@@ -353,7 +353,7 @@ if($mode=='save')
 
 			default:
 
-					if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $mode="dummy";
+					if($_COOKIE["ck_login_logged".$sid]) $mode="dummy";
 					
 		} // end of switch
 	}
@@ -370,7 +370,7 @@ if($mode=='save')
 
 # Added for the common header top block
 
- $smarty->assign('sToolbarTitle',"$LDOrDocument :: (".$HTTP_SESSION_VARS['sess_dept_name'].")");
+ $smarty->assign('sToolbarTitle',"$LDOrDocument :: (".$_SESSION['sess_dept_name'].")");
 
  # href for help button
  if(!$mode) $sBuffer ='dummy';
@@ -385,7 +385,7 @@ if($mode=='save')
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
- $smarty->assign('sWindowTitle',"$LDOrDocument :: (".$HTTP_SESSION_VARS['sess_dept_name'].")");
+ $smarty->assign('sWindowTitle',"$LDOrDocument :: (".$_SESSION['sess_dept_name'].")");
 
  # Prepare Body onLoad javascript code
  if(!isset($mode) || empty($mode) || ($mode=='search'&&!$rows) || $mode=='dummy') {
@@ -673,7 +673,7 @@ if($mode=='saveok'){
 	if($err_data){
 	  	echo $operator; 
 	 }else{
-		    echo $HTTP_COOKIE_VARS[$local_user.$sid];
+		    echo $_COOKIE[$local_user.$sid];
 	  }
 	echo '">';
 }

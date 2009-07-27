@@ -21,7 +21,7 @@ require($root_path.'include/inc_environment_global.php');
 
 function prepareTestElements()
 {
-    global $HTTP_POST_VARS, $paramlist, $sday, $sample_time;
+    global $_POST, $paramlist, $sday, $sample_time;
 	
 	/* Prepare the parameters 
 	*  Check the first char of the POST_VARS. Concatenate all POST vars with
@@ -29,8 +29,8 @@ function prepareTestElements()
 	*/
 	$paramlist='';
 					   
-	while(list($x,$v)=each($HTTP_POST_VARS)){
-    	if((substr($x,0,1)=='_')&&($HTTP_POST_VARS[$x]==1)){
+	while(list($x,$v)=each($_POST)){
+    	if((substr($x,0,1)=='_')&&($_POST[$x]==1)){
 	    	if($paramlist==''){
 				$paramlist=$x.'=1';
 			}else{
@@ -48,7 +48,7 @@ function prepareTestElements()
 		/* Prepare the sampling minutes */
 		for($i=15;$i<46;$i=$i+15){
 			$hmin="min_".$i;
-			if($HTTP_POST_VARS[$hmin]){
+			if($_POST[$hmin]){
 				$tmin=$i;
 				break;
 			}
@@ -56,13 +56,13 @@ function prepareTestElements()
 		if(!$tmin) $tmin=0;
 							
 		/* Prepare the sampling ten hours */
-		if($HTTP_POST_VARS['hrs_20']) $th=20;
-			elseif($HTTP_POST_VARS['hrs_10']) $th=10;
+		if($_POST['hrs_20']) $th=20;
+			elseif($_POST['hrs_10']) $th=10;
 								
 		/* Prepare the sampling one hours */
 		for($i=0;$i<10;$i++){
 			$h1s='hrs_'.$i;
-			if($HTTP_POST_VARS[$h1s]){
+			if($_POST[$h1s]){
 				$to=$i;
 				break;
 			}
@@ -72,7 +72,7 @@ function prepareTestElements()
 		/* Prepare the weekday */
 		for($i=0;$i<7;$i++){
 			$tday="day_".$i;
-			if($HTTP_POST_VARS[$tday]){
+			if($_POST[$tday]){
 				$sday=$i;
 				break;
 			}
@@ -138,8 +138,8 @@ if(isset($pn)&&$pn) {
 	if($enc_obj->loadEncounterData($pn)){
 		$edit=true;
 		$full_en=$pn;					
-		$HTTP_SESSION_VARS['sess_en']=$pn;	
-		$HTTP_SESSION_VARS['sess_full_en']=$full_en;	
+		$_SESSION['sess_en']=$pn;	
+		$_SESSION['sess_full_en']=$full_en;	
 		
 		include_once($root_path.'include/care_api_classes/class_diagnostics.php');
 		$diag_obj=new Diagnostics;
@@ -172,9 +172,9 @@ if(isset($pn)&&$pn) {
 					$data['sample_weekday']=$sday;
 					$data['status']=$status;
 					$data['urgent']=$urgent;
-					$data['history']="Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-					$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-					$data['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+					$data['history']="Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n";
+					$data['modify_id']=$_SESSION['sess_user_name'];
+					$data['create_id']=$_SESSION['sess_user_name'];
 					$data['create_time']='NULL';
 					$diag_obj->setDataArray($data);
 				    if($diag_obj->insertDataFromInternalArray()){
@@ -219,8 +219,8 @@ if(isset($pn)&&$pn) {
 					$data['sample_weekday']=$sday;
 					$data['status']=$status;
 					$data['urgent']=$urgent;
-					$data['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
-					$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+					$data['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n')";
+					$data['modify_id']=$_SESSION['sess_user_name'];
 					$diag_obj->setDataArray($data);
 					$diag_obj->setWhereCond(" batch_nr=$batch_nr");
 					if($diag_obj->updateDataFromInternalArray($batch_nr)){									
@@ -510,7 +510,7 @@ if($edit){
 	    <input type="text" name="room_nr" size=10 maxlength=10 
 	    value="<?php 
 	                    if($edit_form||$read_form) echo stripslashes($stored_request['room_nr']); 
-						 else   echo $HTTP_COOKIE_VARS['ck_thispc_room'] 
+						 else   echo $_COOKIE['ck_thispc_room'] 
 				   ?>">
 		<?php
 		}

@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 $fileforward='headline-read.php';
 
-$dept_nr=$HTTP_SESSION_VARS['sess_dept_nr'];
+$dept_nr=$_SESSION['sess_dept_nr'];
 
 if(($artnum)&&($mode=='save'))
 {

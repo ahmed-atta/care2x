@@ -25,7 +25,7 @@ include_once($root_path.'include/inc_visual_signalling_fx.php');
 $thisfile=basename(__FILE__);
 
 ///$db->debug=true;
-if(!isset($prescriber)||empty($prescriber)) $prescriber=$HTTP_COOKIE_VARS[$local_user.$sid];
+if(!isset($prescriber)||empty($prescriber)) $prescriber=$_COOKIE[$local_user.$sid];
 
 $title="$LDMedication/$LDDosage";
 /* Create charts object */

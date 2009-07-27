@@ -19,7 +19,7 @@ $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 require($root_path.'include/inc_2level_reset.php');
 require ($root_path.'include/care_api_classes/class_access.php');
 
-$access = new Access($HTTP_SESSION_VARS['sess_login_userid'],$HTTP_SESSION_VARS['sess_login_pw']);
+$access = new Access($_SESSION['sess_login_userid'],$_SESSION['sess_login_pw']);
 $hideOrder = 0;
 if(ereg("_a_1_meddepotdbadmin",$access->PermissionAreas()))
 	$hideOrder = 1;

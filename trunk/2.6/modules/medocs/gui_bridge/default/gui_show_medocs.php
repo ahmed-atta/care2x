@@ -1,5 +1,5 @@
 <?php
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'];
+$returnfile=$_SESSION['sess_file_return'];
 
 # Start Smarty templating here
  /**
@@ -11,8 +11,8 @@ $returnfile=$HTTP_SESSION_VARS['sess_file_return'];
  require_once($root_path.'gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('common');
 
-if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
-	else $sTitleNr = ($HTTP_SESSION_VARS['sess_full_pid']);
+if($parent_admit) $sTitleNr= ($_SESSION['sess_full_en']);
+	else $sTitleNr = ($_SESSION['sess_full_pid']);
 
 # Title in the toolbar
  $smarty->assign('sToolbarTitle',"$page_title $encounter_nr");
@@ -32,7 +32,7 @@ if($parent_admit) $sTitleNr= ($HTTP_SESSION_VARS['sess_full_en']);
  $smarty->assign('pbHelp',"javascript:gethelp('medocs_entry.php')");
 
   # href for return button
- $smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
+ $smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
 
 
 # Buffer extra javascript code
@@ -75,7 +75,7 @@ $smarty->assign('sClassInput','class="adm_input"');
 
 $smarty->assign('LDCaseNr',$LDAdmitNr);
 
-$smarty->assign('sEncNrPID',$HTTP_SESSION_VARS['sess_en']);
+$smarty->assign('sEncNrPID',$_SESSION['sess_en']);
 
 $smarty->assign('img_source',"<img $img_source>");
 
@@ -165,8 +165,8 @@ if($mode=='show'){
 			
 			if(!empty($row['therapy'])) $smarty->assign('sTherapy',substr($row['therapy'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']));
 
-			$smarty->assign('sDetailsIcon','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr'].'"><img '.createComIcon($root_path,'info3.gif','0').'></a>');
-			$smarty->assign('sMakePdfIcon','<a href="'.$root_path.'modules/pdfmaker/medocs/report.php'.URL_APPEND.'&enc='.$HTTP_SESSION_VARS['sess_en'].'&mnr='.$row['nr'].'&target='.$target.'" target=_blank><img '.createComIcon($root_path,'pdf_icon.gif','0').'></a>');
+			$smarty->assign('sDetailsIcon','<a href="'.$thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&encounter_nr='.$_SESSION['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr'].'"><img '.createComIcon($root_path,'info3.gif','0').'></a>');
+			$smarty->assign('sMakePdfIcon','<a href="'.$root_path.'modules/pdfmaker/medocs/report.php'.URL_APPEND.'&enc='.$_SESSION['sess_en'].'&mnr='.$row['nr'].'&target='.$target.'" target=_blank><img '.createComIcon($root_path,'pdf_icon.gif','0').'></a>');
 			if($row['personell_name']) $smarty->assign('sAuthor',$row['personell_name']);
 			
 			ob_start();
@@ -272,17 +272,17 @@ function chkForm(d) {
 	$calendar->load_files();
 	$smarty->assign('sDateMiniCalendar',$calendar->show_calendar($calendar,$date_format,'date'));
 	//end gjergji
-	$smarty->assign('TP_user_name',$HTTP_SESSION_VARS['sess_user_name']);
+	$smarty->assign('TP_user_name',$_SESSION['sess_user_name']);
 
 	# Collect hidden inputs
 	
 	ob_start();
 
 ?>
-<input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
-<input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
-<input type="hidden" name="modify_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
-<input type="hidden" name="create_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
+<input type="hidden" name="encounter_nr" value="<?php echo $_SESSION['sess_en']; ?>">
+<input type="hidden" name="pid" value="<?php echo $_SESSION['sess_pid']; ?>">
+<input type="hidden" name="modify_id" value="<?php echo $_SESSION['sess_user_name']; ?>">
+<input type="hidden" name="create_id" value="<?php echo $_SESSION['sess_user_name']; ?>">
 <input type="hidden" name="create_time" value="null">
 <input type="hidden" name="mode" value="create">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
@@ -302,17 +302,17 @@ function chkForm(d) {
 if(($mode=='show'||$mode=='details')&&!$enc_obj->Is_Discharged()){
 	
 	$smarty->assign('sNewLinkIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle').'>');
-	$smarty->assign('sNewRecLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=new&type_nr='.$type_nr.'">'.$LDEnterNewRecord.'</a>');
+	$smarty->assign('sNewRecLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&encounter_nr='.$_SESSION['sess_en'].'&target='.$target.'&mode=new&type_nr='.$type_nr.'">'.$LDEnterNewRecord.'</a>');
 
 	if($mode=='details'){
 		$smarty->assign('sPdfLinkIcon','<img '.createComIcon($root_path,'icon_acro.gif','0','absmiddle').'>');
-		$smarty->assign('sMakePdfLink','<a href="'.$root_path."modules/pdfmaker/medocs/report.php".URL_APPEND."&enc=".$HTTP_SESSION_VARS['sess_en']."&mnr=".$nr.'&target='.$target.'" target=_blank>'.$LDPrintPDFDoc.'</a>');
+		$smarty->assign('sMakePdfLink','<a href="'.$root_path."modules/pdfmaker/medocs/report.php".URL_APPEND."&enc=".$_SESSION['sess_en']."&mnr=".$nr.'&target='.$target.'" target=_blank>'.$LDPrintPDFDoc.'</a>');
 	}
 } 
 if(($mode!='show'&&!$nolist) ||($mode=='show'&&$nolist&&$rows>1)){
 
 	$smarty->assign('sListLinkIcon','<img '.createComIcon($root_path,'l-arrowgrnlrg.gif','0','absmiddle').'>');
-	$smarty->assign('sListRecLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=show&type_nr='.$type_nr.'">'.$LDShowDocList.'</a>');
+	$smarty->assign('sListRecLink','<a href="'.$thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&encounter_nr='.$_SESSION['sess_en'].'&target='.$target.'&mode=show&type_nr='.$type_nr.'">'.$LDShowDocList.'</a>');
 
 }
 

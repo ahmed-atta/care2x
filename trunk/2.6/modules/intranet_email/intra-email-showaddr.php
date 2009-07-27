@@ -28,7 +28,7 @@ $dbtable='care_mail_private_users';
 $linecount=0;
 $modetypes=array('sendmail','listmail');
 
-$sql="SELECT addr_book, lastcheck FROM $dbtable WHERE  email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
+$sql="SELECT addr_book, lastcheck FROM $dbtable WHERE  email='".$_COOKIE[$local_user.$sid]."'";
 
 if($ergebnis=$db->Execute($sql))
 {
@@ -112,7 +112,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
  <?php
  
 echo '
-	<font color="#800000">&nbsp;'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font>';
+	<font color="#800000">&nbsp;'.$_COOKIE[$local_user.$sid].'</font>';
 // ******************************** show address book***************************************
 
  	$arrlist=explode("_",strtolower($content[addr_book]));

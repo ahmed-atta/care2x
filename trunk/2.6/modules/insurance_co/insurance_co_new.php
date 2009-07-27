@@ -36,18 +36,18 @@ if(!isset($mode)){
 		{
 			//$db->debug=true;
 			/* Validate important data */
-			$HTTP_POST_VARS['firm_id']=trim($HTTP_POST_VARS['firm_id']);
-			$HTTP_POST_VARS['name']=trim($HTTP_POST_VARS['name']);
-			if(!(empty($HTTP_POST_VARS['firm_id'])||empty($HTTP_POST_VARS['name']))){
+			$_POST['firm_id']=trim($_POST['firm_id']);
+			$_POST['name']=trim($_POST['name']);
+			if(!(empty($_POST['firm_id'])||empty($_POST['name']))){
 				
 				# Check if insurance ID exists
-				if($ins_obj->FirmIDExists($HTTP_POST_VARS['firm_id'])){
+				if($ins_obj->FirmIDExists($_POST['firm_id'])){
 
 				# Notify
 					$mode='firm_exists';
 				
 				}else{
-					if($ins_obj->saveFirmInfoFromArray($HTTP_POST_VARS)){
+					if($ins_obj->saveFirmInfoFromArray($_POST)){
     					header("location:insurance_co_info.php?sid=$sid&lang=$lang&firm_id=$firm_id&mode=show&save_ok=1&retpath=$retpath");
 						exit;
 					}else{echo "$sql<br>$LDDbNoSave";}

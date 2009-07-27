@@ -14,9 +14,9 @@ define('LANG_FILE','editor.php');
 $local_user='ck_editor_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$fileforward=$HTTP_SESSION_VARS['sess_file_reader'];
+$fileforward=$_SESSION['sess_file_reader'];
 
-$dept_nr=$HTTP_SESSION_VARS['sess_dept_nr'];
+$dept_nr=$_SESSION['sess_dept_nr'];
 
 if(($artnum)&&($mode=='save'))
 {

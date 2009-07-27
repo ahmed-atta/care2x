@@ -16,7 +16,7 @@ $lang_tables=array('actions.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
+if($edit&&!$_COOKIE[$local_user.$sid]) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
  
 $thisfile=basename(__FILE__);
 $breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
@@ -64,7 +64,7 @@ if($dblink_ok)
 			include_once($root_path.'include/inc_visual_signalling_fx.php');
 			// Prepare  the date 
 			$indatetime_date=formatDate2STD($indatetime_date,$date_format);
-			$indatetime_time=$HTTP_POST_VARS['indatetime_time'].':00';
+			$indatetime_time=$_POST['indatetime_time'].':00';
 			
 			$q="update care_encounter_custom_ddc set
 			
@@ -93,7 +93,7 @@ if($dblink_ok)
 			include_once($root_path.'include/inc_visual_signalling_fx.php');
 			// Prepare  the date 
 			$indatetime_date=formatDate2STD($indatetime_date,$date_format);
-			$indatetime_time=$HTTP_POST_VARS['indatetime_time'].':00';
+			$indatetime_time=$_POST['indatetime_time'].':00';
 			$q="insert into care_encounter_custom_ddc (encounter_nr,createid,indatetime,urinesugar,acetone,bloodsugar,tablets,insulin) values (
 				'".$pn."',
 				'".$_SESSION['sess_login_userid']."',
@@ -215,7 +215,7 @@ function select_this(formtag){
 	}
 	
 function getinfo(patientID){
-	urlholder="nursing-station.php?sid=<?php echo "$sid&lang=$lang" ?>&route=validroute&patient=" + patientID + "&user=<?php echo $HTTP_COOKIE_VARS[$local_user.$sid].'"' ?>;
+	urlholder="nursing-station.php?sid=<?php echo "$sid&lang=$lang" ?>&route=validroute&patient=" + patientID + "&user=<?php echo $_COOKIE[$local_user.$sid].'"' ?>;
 	patientwin=window.open(urlholder,patientID,"width=600,height=400,menubar=no,resizable=yes,scrollbars=yes");
 	}
 function sethilite(d){

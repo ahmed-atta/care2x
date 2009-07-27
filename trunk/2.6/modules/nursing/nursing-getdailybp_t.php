@@ -30,7 +30,7 @@ $maxelement=10;
 		$saved=0;
 		$data_array=array();
 		$data_array['encounter_nr']=$pn;
-        $data_array['measured_by']=$HTTP_SESSION_VARS['sess_user_name'];
+        $data_array['measured_by']=$_SESSION['sess_user_name'];
 		$data_array['unit_nr']=14; // 14 = mmHg unit of measurement , must be set to local standards
 		$data_array['msr_date']=date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr)); 
 		// Save the blood pressure data

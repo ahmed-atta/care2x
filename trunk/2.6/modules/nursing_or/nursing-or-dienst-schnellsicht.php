@@ -24,8 +24,8 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_core.php');
 $core=new Core;
 
-if (!empty($HTTP_SESSION_VARS['sess_path_referer'])){
-	$breakfile=$HTTP_SESSION_VARS['sess_path_referer'];
+if (!empty($_SESSION['sess_path_referer'])){
+	$breakfile=$_SESSION['sess_path_referer'];
 } else {
 	/* default startpage */
 	$breakfile = $root_path.'main/op-doku.php';

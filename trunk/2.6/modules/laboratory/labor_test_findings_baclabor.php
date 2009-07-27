@@ -125,8 +125,8 @@ switch ($mode) {
 		$data ['rec_date'] = formatDate2Std ( $rec_date, $date_format );
 		$data ['doctor_id'] = $doctor_id;
 		$data ['status'] = 'initial';
-		$data ['history'] = "Create: " . date ( 'Y-m.d H:i:s' ) . " = " . $HTTP_SESSION_VARS ['sess_user_name'] . "\n";
-		$data ['create_id'] = $HTTP_SESSION_VARS ['sess_user_name'];
+		$data ['history'] = "Create: " . date ( 'Y-m.d H:i:s' ) . " = " . $_SESSION ['sess_user_name'] . "\n";
+		$data ['create_id'] = $_SESSION ['sess_user_name'];
 		$data ['create_time'] = date ( 'YmdHis' );
 		$bac_obj->setDataArray ( $data );
 		if ($bac_obj->insertDataFromInternalArray ()) {
@@ -139,8 +139,8 @@ switch ($mode) {
 					$singleParamTG ['encounter_nr'] = $pn;
 					$singleParamTG ['type_general'] = $tmpTest[0];
 					$singleParamTG ['status'] = 'initial';
-					$singleParamTG ['history'] = "Create: " . date ( 'Y-m.d H:i:s' ) . " = " . $HTTP_SESSION_VARS ['sess_user_name'] . "\n";
-					$singleParamTG ['create_id'] = $HTTP_SESSION_VARS ['sess_user_name'];
+					$singleParamTG ['history'] = "Create: " . date ( 'Y-m.d H:i:s' ) . " = " . $_SESSION ['sess_user_name'] . "\n";
+					$singleParamTG ['create_id'] = $_SESSION ['sess_user_name'];
 					$singleParamTG ['create_time'] = date ( 'YmdHis' );
 					$bac_obj_sub->setDataArray ( $singleParamTG );
 					$bac_obj_sub->insertDataFromInternalArray ();
@@ -156,8 +156,8 @@ switch ($mode) {
 					$singleParamRA ['resist_anaerob'] = $tmpTest[0];
 					$singleParamTG ['type_general'] = '0';
 					$singleParamRA ['status'] = 'initial';
-					$singleParamRA ['history'] = "Create: " . date ( 'Y-m.d H:i:s' ) . " = " . $HTTP_SESSION_VARS ['sess_user_name'] . "\n";
-					$singleParamRA ['create_id'] = $HTTP_SESSION_VARS ['sess_user_name'];
+					$singleParamRA ['history'] = "Create: " . date ( 'Y-m.d H:i:s' ) . " = " . $_SESSION ['sess_user_name'] . "\n";
+					$singleParamRA ['create_id'] = $_SESSION ['sess_user_name'];
 					$singleParamRA ['create_time'] = date ( 'YmdHis' );
 					$bac_obj_sub->setDataArray ( $singleParamRA );
 					$bac_obj_sub->insertDataFromInternalArray ();
@@ -174,8 +174,8 @@ switch ($mode) {
 					$singleParamRAE ['resist_anaerob'] = '0';
 					$singleParamRAE ['type_general'] = '0';
 					$singleParamRAE ['status'] = 'initial';
-					$singleParamRAE ['history'] = "Create: " . date ( 'Y-m.d H:i:s' ) . " = " . $HTTP_SESSION_VARS ['sess_user_name'] . "\n";
-					$singleParamRAE ['create_id'] = $HTTP_SESSION_VARS ['sess_user_name'];
+					$singleParamRAE ['history'] = "Create: " . date ( 'Y-m.d H:i:s' ) . " = " . $_SESSION ['sess_user_name'] . "\n";
+					$singleParamRAE ['create_id'] = $_SESSION ['sess_user_name'];
 					$singleParamRAE ['create_time'] = date ( 'YmdHis' );
 					$bac_obj_sub->setDataArray ( $singleParamRAE );
 					$bac_obj_sub->insertDataFromInternalArray ();
@@ -193,8 +193,8 @@ switch ($mode) {
 					$singleParamF ['resist_anaerob'] = '0';
 					$singleParamF ['type_general'] = '0';
 					$singleParamF ['status'] = 'initial';
-					$singleParamF ['history'] = "Create: " . date ( 'Y-m.d H:i:s' ) . " = " . $HTTP_SESSION_VARS ['sess_user_name'] . "\n";
-					$singleParamF ['create_id'] = $HTTP_SESSION_VARS ['sess_user_name'];
+					$singleParamF ['history'] = "Create: " . date ( 'Y-m.d H:i:s' ) . " = " . $_SESSION ['sess_user_name'] . "\n";
+					$singleParamF ['create_id'] = $_SESSION ['sess_user_name'];
 					$singleParamF ['create_time'] = date ( 'YmdHis' );
 					$bac_obj_sub->setDataArray ( $singleParamF );
 					$bac_obj_sub->insertDataFromInternalArray ();
@@ -226,8 +226,8 @@ switch ($mode) {
 		$data ['rec_date'] = formatDate2Std ( $rec_date, $date_format );
 		$data ['doctor_id'] = $doctor_id;
 		$data ['status'] = 'initial';
-		$data ['history'] = $enc_obj->ConcatHistory ( "Update: " . date ( 'Y-m-d H:i:s' ) . " = " . $HTTP_SESSION_VARS ['sess_user_name'] . "\n" );
-		$data ['create_id'] = $HTTP_SESSION_VARS ['sess_user_name'];
+		$data ['history'] = $enc_obj->ConcatHistory ( "Update: " . date ( 'Y-m-d H:i:s' ) . " = " . $_SESSION ['sess_user_name'] . "\n" );
+		$data ['create_id'] = $_SESSION ['sess_user_name'];
 		$data ['create_time'] = date ( 'YmdHis' );
 		$bac_obj->setDataArray ( $data );
 		$bac_obj->setWhereCond ( " batch_nr=$batch_nr" );
@@ -245,8 +245,8 @@ switch ($mode) {
 					$singleParamTG ['encounter_nr'] = $pn;
 					$singleParamTG ['type_general'] = $tmpTest[0];
 					$singleParamTG ['status'] = 'initial';
-					$singleParamTG ['history'] = $enc_obj->ConcatHistory ( "Update: " . date ( 'Y-m-d H:i:s' ) . " = " . $HTTP_SESSION_VARS ['sess_user_name'] . "\n" );
-					$singleParamTG ['create_id'] = $HTTP_SESSION_VARS ['sess_user_name'];
+					$singleParamTG ['history'] = $enc_obj->ConcatHistory ( "Update: " . date ( 'Y-m-d H:i:s' ) . " = " . $_SESSION ['sess_user_name'] . "\n" );
+					$singleParamTG ['create_id'] = $_SESSION ['sess_user_name'];
 					$singleParamTG ['create_time'] = date ( 'YmdHis' );
 					$bac_obj_sub->setDataArray ( $singleParamTG );
 					$bac_obj_sub->insertDataFromInternalArray ();
@@ -262,8 +262,8 @@ switch ($mode) {
 					$singleParamRA ['resist_anaerob'] = $tmpTest[0];
 					$singleParamRA ['type_general'] = '0';
 					$singleParamRA ['status'] = 'initial';
-					$singleParamRA ['history'] = $enc_obj->ConcatHistory ( "Update: " . date ( 'Y-m-d H:i:s' ) . " = " . $HTTP_SESSION_VARS ['sess_user_name'] . "\n" );
-					$singleParamRA ['create_id'] = $HTTP_SESSION_VARS ['sess_user_name'];
+					$singleParamRA ['history'] = $enc_obj->ConcatHistory ( "Update: " . date ( 'Y-m-d H:i:s' ) . " = " . $_SESSION ['sess_user_name'] . "\n" );
+					$singleParamRA ['create_id'] = $_SESSION ['sess_user_name'];
 					$singleParamRA ['create_time'] = date ( 'YmdHis' );
 					$bac_obj_sub->setDataArray ( $singleParamRA );
 					$bac_obj_sub->insertDataFromInternalArray ();
@@ -280,8 +280,8 @@ switch ($mode) {
 					$singleParamRAE ['resist_anaerob'] = '0';
 					$singleParamRAE ['type_general'] = '0';
 					$singleParamRAE ['status'] = 'initial';
-					$singleParamRAE ['history'] = $enc_obj->ConcatHistory ( "Update: " . date ( 'Y-m-d H:i:s' ) . " = " . $HTTP_SESSION_VARS ['sess_user_name'] . "\n" );
-					$singleParamRAE ['create_id'] = $HTTP_SESSION_VARS ['sess_user_name'];
+					$singleParamRAE ['history'] = $enc_obj->ConcatHistory ( "Update: " . date ( 'Y-m-d H:i:s' ) . " = " . $_SESSION ['sess_user_name'] . "\n" );
+					$singleParamRAE ['create_id'] = $_SESSION ['sess_user_name'];
 					$singleParamRAE ['create_time'] = date ( 'YmdHis' );
 					$bac_obj_sub->setDataArray ( $singleParamRAE );
 					$bac_obj_sub->insertDataFromInternalArray ();
@@ -299,8 +299,8 @@ switch ($mode) {
 					$singleParamF ['resist_anaerob'] = '0';
 					$singleParamF ['type_general'] = '0';
 					$singleParamF ['status'] = 'initial';
-					$singleParamF ['history'] = $enc_obj->ConcatHistory ( "Update: " . date ( 'Y-m-d H:i:s' ) . " = " . $HTTP_SESSION_VARS ['sess_user_name'] . "\n" );
-					$singleParamF ['create_id'] = $HTTP_SESSION_VARS ['sess_user_name'];
+					$singleParamF ['history'] = $enc_obj->ConcatHistory ( "Update: " . date ( 'Y-m-d H:i:s' ) . " = " . $_SESSION ['sess_user_name'] . "\n" );
+					$singleParamF ['create_id'] = $_SESSION ['sess_user_name'];
 					$singleParamF ['create_time'] = date ( 'YmdHis' );
 					$bac_obj_sub->setDataArray ( $singleParamF );
 					$bac_obj_sub->insertDataFromInternalArray ();
@@ -319,8 +319,8 @@ switch ($mode) {
 										  							
 	case 'done' :
 		$data['status'] = 'done';
-		$data['history'] = $enc_obj->ConcatHistory ( "Done: " . date ( 'Y-m-d H:i:s' ) . " = " . $HTTP_SESSION_VARS ['sess_user_name'] . "\n" );
-		$data['modify_id'] =  $HTTP_SESSION_VARS ['sess_user_name'];
+		$data['history'] = $enc_obj->ConcatHistory ( "Done: " . date ( 'Y-m-d H:i:s' ) . " = " . $_SESSION ['sess_user_name'] . "\n" );
+		$data['modify_id'] =  $_SESSION ['sess_user_name'];
 		$data['modify_time'] =  date ( 'YmdHis' );
 		$bac_obj->setDataArray ( $data );
 		$bac_obj->setWhereCond ( " batch_nr=$batch_nr" );

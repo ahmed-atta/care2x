@@ -57,9 +57,9 @@ $dbtable='care_ward';
 							AND status NOT IN ('hide','delete','void','inactive') 
 							AND date_create<='$s_date' ";
     //gjergji - show only info on my departement
-	if(isset($HTTP_SESSION_VARS['department_nr']) && !empty($HTTP_SESSION_VARS['department_nr']) ) {
+	if(isset($_SESSION['department_nr']) && !empty($_SESSION['department_nr']) ) {
 		$sql.=" AND ( ";
-		while (list($key, $val) = each($HTTP_SESSION_VARS['department_nr'])) {
+		while (list($key, $val) = each($_SESSION['department_nr'])) {
 			$tmp .= "dept_nr = " . $val . " OR ";
 
 		}

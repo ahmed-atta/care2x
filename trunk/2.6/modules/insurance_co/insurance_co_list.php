@@ -44,7 +44,7 @@ if(empty($GLOBAL_CONFIG['pagin_insurance_list_max_block_rows'])) $GLOBAL_CONFIG[
 
 #Load and create paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 # Adjust the max nr of rows in a block
 $pagen->setMaxCount($GLOBAL_CONFIG['pagin_insurance_list_max_block_rows']);
 

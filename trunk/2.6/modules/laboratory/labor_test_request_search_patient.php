@@ -66,7 +66,7 @@ $append='&status='.$status.'&target='.$target.'&user_origin='.$user_origin;
 
 # Initialize page�s control variables
 if($mode=='paginate'){
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	$searchkey=$_SESSION['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
 	//$mode='search';
 }else{
@@ -78,7 +78,7 @@ if($mode=='paginate'){
 }
 # Paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -93,7 +93,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	# Convert other wildcards
 	$searchkey=strtr($searchkey,'*?','%_');
 	# Save the search keyword for eventual pagination routines
-	if($mode=='search') $HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
+	if($mode=='search') $_SESSION['sess_searchkey']=$searchkey;
 
 	include_once($root_path.'include/inc_date_format_functions.php');
 	include_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -144,7 +144,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
  $smarty->assign('pbHelp',"javascript:gethelp('request_search.php')");
 
  # href for close button
- if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $smarty->assign('breakfile',$root_path.'main/startframe.php'.URL_APPEND);
+ if($_COOKIE["ck_login_logged".$sid]) $smarty->assign('breakfile',$root_path.'main/startframe.php'.URL_APPEND);
 	else  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
@@ -243,7 +243,7 @@ if ($enc_obj->record_count) {
 						echo "&nbsp;".$row['addr_zip'];
                         echo "</td>";	
 
-					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
+					    if($_COOKIE[$local_user.$sid]) echo '
 						<td>&nbsp;';
 						echo "
 							<a href=\"".$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_APPEND."&pn=".$row['encounter_nr']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=\">";

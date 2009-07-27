@@ -27,15 +27,15 @@ if(!isset($artopt) || !$artopt) {
 }
 
 /* Set navigation paths for this page*/
-$breakfile=$root_path.$HTTP_SESSION_VARS['sess_file_break'].URL_APPEND;
+$breakfile=$root_path.$_SESSION['sess_file_break'].URL_APPEND;
 $returnfile='headline-edit-select-art.php'.URL_APPEND;
 
 /* Set the new return file for the suceeding page */
-//$HTTP_SESSION_VARS['sess_file_return']='headline-edit-select-art.php';
+//$_SESSION['sess_file_return']='headline-edit-select-art.php';
 
-$HTTP_SESSION_VARS['sess_file_forward']='headline-read.php';
+$_SESSION['sess_file_forward']='headline-read.php';
 
-$title= (!empty($title)) ? $title : $HTTP_SESSION_VARS['sess_title']; 
+$title= (!empty($title)) ? $title : $_SESSION['sess_title']; 
 
 /* Load the date formatter */
 require_once($root_path.'include/inc_date_format_functions.php');

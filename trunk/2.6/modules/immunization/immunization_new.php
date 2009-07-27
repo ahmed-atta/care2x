@@ -36,18 +36,18 @@ if(!isset($mode)){
 		{
 			//$db->debug=true;
 			/* Validate important data */
-			$HTTP_POST_VARS['name']=trim($HTTP_POST_VARS['name']);
-			if(!empty($HTTP_POST_VARS['name'])){
+			$_POST['name']=trim($_POST['name']);
+			if(!empty($_POST['name'])){
 				
 				# Check if insurance ID exists
 				//TODO : find how to use it..
-				if($immu_obj->ImmuExists($HTTP_POST_VARS['name'])){
+				if($immu_obj->ImmuExists($_POST['name'])){
 
 				# Notify
 					$mode='immu_exists';
 				
 				}else{
-					if($immu_obj->saveImmuInfoFromArray($HTTP_POST_VARS)){
+					if($immu_obj->saveImmuInfoFromArray($_POST)){
 						$immu_save=$db->Insert_ID();
 						$immu_id = $immu_obj->LastInsertPK('nr',$immu_save);
     					header("location:immunization_info.php?sid=$sid&lang=$lang&immu_id=$immu_id&mode=show&save_ok=1&retpath=$retpath");

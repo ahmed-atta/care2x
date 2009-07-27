@@ -11,31 +11,31 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 function prepareTestParameters($param_type){
-    global $HTTP_POST_VARS;
+    global $_POST;
 	
 	$paramlist="";
 							   
-	while(list($x,$v)=each($HTTP_POST_VARS))	{
-		if(substr_count($x,$param_type) && ($HTTP_POST_VARS[$x]==1))		{
+	while(list($x,$v)=each($_POST))	{
+		if(substr_count($x,$param_type) && ($_POST[$x]==1))		{
 			if($paramlist=="") $paramlist=$x."=1";
 				else $paramlist.="&".$x."=1";
 		}
 	}
-    reset($HTTP_POST_VARS);		
+    reset($_POST);		
 	return $paramlist;
 }
 
 								
 function prepareSampleDate()
 {
-    global $HTTP_POST_VARS;
+    global $_POST;
 	
 								
 								/* Prepare the weekday */
 								for($i=0;$i<7;$i++)
 								{
 								   $tday="day_".$i;
-								   if($HTTP_POST_VARS[$tday])
+								   if($_POST[$tday])
 								   {
 									  $sday=$i;
 									  break;
@@ -45,7 +45,7 @@ function prepareSampleDate()
 								for($i=1;$i<13;$i++)
 								{
 								   $tmon="month_".$i;
-								   if($HTTP_POST_VARS[$tmon])
+								   if($_POST[$tmon])
 								   {
 									  $smon=$i;
 									  break;
@@ -135,8 +135,8 @@ define('_BATCH_NR_INIT_',30000000);
 									$data['send_date'] = date('Y-m-d');
 									$data['sample_date'] = date('Y-m-d');
 									$data['status'] = $status;
-									$data['history'] = 'Create: '.date('Y-m-d H:i:s').' = '.$HTTP_SESSION_VARS['sess_user_name'].'\n';
-									$data['create_id'] = $HTTP_SESSION_VARS['sess_user_name'];
+									$data['history'] = 'Create: '.date('Y-m-d H:i:s').' = '.$_SESSION['sess_user_name'].'\n';
+									$data['create_id'] = $_SESSION['sess_user_name'];
 									$data['create_time'] = date('YmdHis');
 							  		$bac_obj->setDataArray($data);
 								    if($bac_obj->insertDataFromInternalArray()){
@@ -194,8 +194,8 @@ define('_BATCH_NR_INIT_',30000000);
 							  	$data['diagnosis_note']=htmlspecialchars($diagnosis_note);
 							  	$data['immune_supp']=$immune_supp;
 							  	$data['status']=$status;
-							  	$data['history']=$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n");
-							  	$data['modify_id']=$HTTP_COOKIE_VARS[$local_user.$sid];
+							  	$data['history']=$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n");
+							  	$data['modify_id']=$_COOKIE[$local_user.$sid];
 							  	$data['modify_time']=date('YmdHis');
 								$bac_obj->setDataArray($data);
 								$bac_obj->setWhereCond(" batch_nr=$batch_nr");

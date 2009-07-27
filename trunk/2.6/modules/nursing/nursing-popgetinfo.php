@@ -53,9 +53,9 @@ $charts_obj= new Charts;
 	}
 
 	if(($mode=='save')&&(trim($notes)!='')){
-		$HTTP_POST_VARS['encounter_nr']=$pn;
-		$HTTP_POST_VARS['personell_name']=$HTTP_SESSION_VARS['sess_user_name'];
-		if($charts_obj->saveChartNotesFromArray($HTTP_POST_VARS,$notes_type_nr)){
+		$_POST['encounter_nr']=$pn;
+		$_POST['personell_name']=$_SESSION['sess_user_name'];
+		if($charts_obj->saveChartNotesFromArray($_POST,$notes_type_nr)){
     	  	// Load the visual signalling functions
     		include_once($root_path.'include/inc_visual_signalling_fx.php');	
 			// Set the visual signal 

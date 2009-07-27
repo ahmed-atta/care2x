@@ -58,7 +58,7 @@ if( isset($mode) && $mode=='save' ){
 	$nbuf=array();
 	//Prepare parameter values
 	//gjergji
-	while (list($z,$y)=each($HTTP_POST_VARS)) {
+	while (list($z,$y)=each($_POST)) {
 		if($result_tests = $lab_obj->GetTestsToDo($job_id))
 			while($row_tests = $result_tests->FetchRow())	{
 			if ($z == $row_tests['paramater_name'] ) {
@@ -71,11 +71,11 @@ if( isset($mode) && $mode=='save' ){
 	$dbuf['encounter_nr']=$encounter_nr;
 	if($allow_update == TRUE){
 		
-		$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$dbuf['modify_id']=$_SESSION['sess_user_name'];
 		$dbuf['modify_time']=date('YmdHis');
 
-		# Recheck the date, ! bug pat	$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
+		# Recheck the date, ! bug pat	$dbuf['modify_id']=$_SESSION['sess_user_name'];
+		if($_POST['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
 	
 		foreach( $nbuf as $key => $value) {
 			if(isset($value) && !empty($value) && !array_key_exists($key, $pdata)) {
@@ -86,8 +86,8 @@ if( isset($mode) && $mode=='save' ){
 				$parsedParamList['paramater_name']	= $key;
 				$parsedParamList['parameter_value']	= $value;
 				$parsedParamList['test_time']		= date('H:i:s');
-				$parsedParamList['history']			= "Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-				$parsedParamList['create_id']		= $HTTP_SESSION_VARS['sess_user_name'];
+				$parsedParamList['history']			= "Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+				$parsedParamList['create_id']		= $_SESSION['sess_user_name'];
 				$parsedParamList['create_time']		= date('YmdHis');
 				$lab_obj_sub->setDataArray($parsedParamList);
 				if($lab_obj_sub->insertDataFromInternalArray()){
@@ -114,18 +114,18 @@ if( isset($mode) && $mode=='save' ){
 		//$lab_obj->hideResultIfExists($encounter_nr,$job_id,$parameterselect);
 		# Convert date to standard format
 		/*		if(isset($std_date)){
-		if($HTTP_POST_VARS['std_date'] == DBF_NODATE)
+		if($_POST['std_date'] == DBF_NODATE)
 		$dbuf['test_date']=date('Y-m-d');
 		else
-		$dbuf['test_date']=$HTTP_POST_VARS['std_date'];
+		$dbuf['test_date']=$_POST['std_date'];
 		}else{
-			$dbuf['test_date']=formatDate2STD($HTTP_POST_VARS['test_date'],$date_format);
+			$dbuf['test_date']=formatDate2STD($_POST['test_date'],$date_format);
 		}*/
-		$dbuf['test_date']=formatDate2STD($HTTP_POST_VARS['test_date'],$date_format);
+		$dbuf['test_date']=formatDate2STD($_POST['test_date'],$date_format);
 		$dbuf['test_time']=date('H:i:s');
 		
-		$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-		$dbuf['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+		$dbuf['create_id']=$_SESSION['sess_user_name'];
 		$dbuf['create_time']=date('YmdHis');
 
 		# Insert new job record

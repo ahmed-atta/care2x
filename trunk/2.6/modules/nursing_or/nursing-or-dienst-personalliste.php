@@ -23,7 +23,7 @@ $lang_tables[]='personell.php';
 
 define('LANG_FILE','doctors.php');
 
-if($HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
+if($_SESSION['sess_user_origin']=='personell_admin'){
 	$local_user='aufnahme_user';
 	$bShowSearchEntry = FALSE;
 	if(!isset($saved)||!$saved){
@@ -33,8 +33,8 @@ if($HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
 	$breakfile=$root_path.'modules/personell_admin/personell_register_show.php'.URL_APPEND.'&target=personell_reg&personell_nr='.$nr;
 }else{
 	$local_user='ck_op_dienstplan_user';
-	//$breakfile=$root_path.$top_dir.$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND.'&dept_nr='.$dept_nr;
-	$breakfile=$root_path.$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND.'&dept_nr='.$dept_nr;
+	//$breakfile=$root_path.$top_dir.$_SESSION['sess_file_return'].URL_APPEND.'&dept_nr='.$dept_nr;
+	$breakfile=$root_path.$_SESSION['sess_file_return'].URL_APPEND.'&dept_nr='.$dept_nr;
 	$bShowSearchEntry = TRUE;
 }
 
@@ -92,7 +92,7 @@ $append='&retpath='.$retpath.'&ipath='.$ipath;
 
 # Initialize page´s control variables
 if($mode=='paginate'){
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	$searchkey=$_SESSION['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
 	//$mode='search';
 }else{
@@ -104,7 +104,7 @@ if($mode=='paginate'){
 }
 # Paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 
 # Get the max nr of rows from global config
@@ -118,7 +118,7 @@ if($mode=='search'||$mode=='paginate'){
 	# Convert other wildcards
 	$searchkey=strtr($searchkey,'*?','%_');
 	# Save the search keyword for eventual pagination routines
-	if($mode=='search') $HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
+	if($mode=='search') $_SESSION['sess_searchkey']=$searchkey;
 	
 	$search_result=&$pers_obj->searchLimitPersonellBasicInfo($searchkey,$pagen->MaxCount(),$pgx,$oitem,$odi);
 	//echo $pers_obj->getLastQuery();
@@ -393,7 +393,7 @@ if($mode=='search'||$mode=='paginate'){
 						echo "&nbsp;".ucfirst($row['job_function_title']);
                         echo "</td>";	
 
-					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
+					    if($_COOKIE[$local_user.$sid]) echo '
 						<td>&nbsp;
 							<a href="nursing-or-list-add.php'.URL_APPEND.'&nr='.$row['nr'].'&dept_nr='.$dept_nr.'&mode=save&retpath='.$retpath.'&ipath='.$ipath.'" title="'.$LDAddNurseToList.'">
 							<img '.$img_options_add.' alt="'.$LDShowData.'"></a>&nbsp;';

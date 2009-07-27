@@ -74,7 +74,7 @@ if($dblink_ok) {
 										  immune_histochem='".$immune_histochem."',
 										  hormone_receptors='".$hormone_receptors."',
 										  specials='".$specials."',
-										  modify_id = '".$HTTP_COOKIE_VARS[$local_user.$sid]."'
+										  modify_id = '".$_COOKIE[$local_user.$sid]."'
 										   WHERE batch_nr = '".$batch_nr."'";
 							      if($ergebnis=$db->Execute($sql))
        							  {

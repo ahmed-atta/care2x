@@ -69,8 +69,8 @@ if (isset ( $pn ) && $pn) {
 			default :
 				$full_en = ($pn + $GLOBAL_CONFIG ['patient_inpatient_nr_adder']);
 		}						
-		$HTTP_SESSION_VARS ['sess_en'] = $pn;
-		$HTTP_SESSION_VARS ['sess_full_en'] = $full_en;
+		$_SESSION ['sess_en'] = $pn;
+		$_SESSION ['sess_full_en'] = $full_en;
 	}	
 }
 

@@ -15,7 +15,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 if(!$dept) 
-	if($HTTP_COOKIE_VARS[ck_thispc_dept]) $dept=$HTTP_COOKIE_VARS[ck_thispc_dept];
+	if($_COOKIE[ck_thispc_dept]) $dept=$_COOKIE[ck_thispc_dept];
 		else $dept='plop'; // set to default plop = plastic surgery op
 
 $breakfile="nursing.php".URL_APPEND;
