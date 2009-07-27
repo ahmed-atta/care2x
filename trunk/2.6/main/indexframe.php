@@ -4,9 +4,9 @@ require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -15,7 +15,7 @@ define('LANG_FILE','indexframe.php');
 define(NO_CHAIN,1);
 
 # Set here the window title
-$wintitle='Menu - Care2x';
+$wintitle='Menu - SIIS';
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
@@ -33,7 +33,7 @@ if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_indexframe.php')){
 	$lang='en'; // last desperate effort to settle the language 
 }
 
-// echo $HTTP_COOKIE_VARS['ck_config']; // for debugging only
+// echo $_COOKIE['ck_config']; // for debugging only
 
 if(($mask==2)&&!$nonewmask){
 	header ("location: indexframe2.php?sid=$sid&lang=$lang&boot=$boot&cookie=$cookie");

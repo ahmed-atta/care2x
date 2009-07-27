@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -29,13 +29,13 @@ if(isset($mode)&&$mode=='save'){
 	
 	$user=new UserConfig;
 
-	if($user->getConfig($HTTP_COOKIE_VARS['ck_config'])){
+	if($user->getConfig($_COOKIE['ck_config'])){
 
 		$config=&$user->getConfigData();
 	
 		$config=array_merge($config,$config_new);
 
-		if($user->saveConfig($HTTP_COOKIE_VARS['ck_config'],$config)){
+		if($user->saveConfig($_COOKIE['ck_config'],$config)){
 			header('location:'.basename(__FILE__).URL_REDIRECT_APPEND.'&saved=1');
 			exit;
 		}

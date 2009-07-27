@@ -26,7 +26,7 @@ else
   $local_user='ck_pflege_user';
   $breakfile=$root_path.'modules/nursing/nursing-station-patientdaten.php'.$rel_url;
 }
-//echo $HTTP_COOKIE_VARS[$local_user.$sid]; exit;
+//echo $_COOKIE[$local_user.$sid]; exit;
 require_once($root_path.'include/inc_front_chain_lang.php');
 //require_once($root_path.'include/inc_config_color.php'); // load color preferences
 

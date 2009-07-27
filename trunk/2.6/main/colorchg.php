@@ -3,9 +3,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
+* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005 Elpidio Latorilla
 * elpidio@care2x.org, 
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -22,8 +22,8 @@ $config_new=array();
 if(!session_is_registered('sess_serial_buffer')){
 	session_register('sess_serial_buffer');
 }
-if(isset($HTTP_SESSION_VARS['sess_serial_buffer'])){
-	$config_new=unserialize($HTTP_SESSION_VARS['sess_serial_buffer']);
+if(isset($_SESSION['sess_serial_buffer'])){
+	$config_new=unserialize($_SESSION['sess_serial_buffer']);
 }	
 
 if ($mode=='change'){
@@ -31,23 +31,23 @@ if ($mode=='change'){
 	//$$item=$color;
 	$config_new[$item]=$color;
 	
-	$HTTP_SESSION_VARS['sess_serial_buffer']=serialize($config_new);
+	$_SESSION['sess_serial_buffer']=serialize($config_new);
 	$config_new=array_merge($cfg,$config_new);
 	
-}elseif((($mode=='ok')||($mode=='remain'))&&isset($HTTP_SESSION_VARS['sess_serial_buffer'])){
+}elseif((($mode=='ok')||($mode=='remain'))&&isset($_SESSION['sess_serial_buffer'])){
 
 	// Save to user config table
 
 	include_once($root_path.'include/care_api_classes/class_userconfig.php');
 	$user=new UserConfig;
 
-	if($user->getConfig($HTTP_COOKIE_VARS['ck_config'])){
+	if($user->getConfig($_COOKIE['ck_config'])){
 
 		$config=&$user->getConfigData();
 	
 		$config=array_merge($config,$config_new);
 
-		if($user->saveConfig($HTTP_COOKIE_VARS['ck_config'],$config)){
+		if($user->saveConfig($_COOKIE['ck_config'],$config)){
 			if($mode=='ok'){
 				header("location:spediens.php?sid=$sid&lang=$lang&idxreload=j");
 			}
@@ -144,7 +144,7 @@ ob_start();
 <table border=1>
   <tr >
     <td rowspan=3 bgcolor="<?php echo $config_new['idx_bgcolor']; ?>" width=100 align=left>
-	<center><img <?php echo createLogo($root_path,'care_logo.gif','0') ?>></center>
+	<center><img <?php echo createLogo($root_path,'care_logo.png','0') ?>></center>
 
 <a href="#" title="<?php echo $LDClk4TxtColor ?>" onClick="chgcolor('idx_txtcolor')">
 <FONT    SIZE=1  color="<?php echo $config_new['idx_txtcolor']; ?>">

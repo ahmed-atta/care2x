@@ -12,6 +12,7 @@ $logs = new AccessLog();
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+//$db->debug = true;
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -39,16 +40,16 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 	{
 		if($user->isNotLocked())
 		{
-			$HTTP_SESSION_VARS['sess_login_userid']=$user->LoginName();
-			$HTTP_SESSION_VARS['sess_login_username']=$user->Name();
+			$_SESSION['sess_login_userid']=$user->LoginName();
+			$_SESSION['sess_login_username']=$user->Name();
 			//gjergji - modified to let each user access it's own ward
-			$HTTP_SESSION_VARS['department_nr']=$user->PermittedDepartment();
+			$_SESSION['department_nr']=$user->PermittedDepartment();
 			# Init the crypt object, encrypt the password, and store in cookie
     			$enc_login = new Crypt_HCEMD5($key_login,makeRand());
 
 			$cipherpw=$enc_login->encodeMimeSelfRand($keyword);
 
-			$HTTP_SESSION_VARS['sess_login_pw']=$cipherpw;
+			$_SESSION['sess_login_pw']=$cipherpw;
 
 			# Set the login flag
 			setcookie('ck_login_logged'.$sid,'true',0,'/');
@@ -92,7 +93,9 @@ if(isset($is_logged_out) && $is_logged_out) {
 <img src="../img/small_help.gif" > <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Was bewirkt das einloggen?</a><br>
  -->
 <p>
-
+<?php
+require($root_path.'include/inc_load_copyrite.php');
+?>
 </FONT>
 </BODY>
 </HTML>

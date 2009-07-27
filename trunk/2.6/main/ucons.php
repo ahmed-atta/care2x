@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 * 19.oct.2003 Daniel Hinostroza: Spanish switch lang added
 */
 if(!isset($lang))
-  if(isset($HTTP_GET_VARS['lang'])) $lang=$HTTP_GET_VARS['lang'];
+  if(isset($_GET['lang'])) $lang=$_GET['lang'];
     elseif (isset($_POST['lang'])) $lang=$_POST['lang'];
 	  elseif(isset($_COOKIE['ck_lang'])) $lang=$_COOKIE['ck_lang'];
 	    else $lang="en";
@@ -37,7 +37,7 @@ switch($lang)
 	case "it": echo 'Ancora un po\' di pazienza, ci siamo lavorando.'; break;
 	case "id": echo 'Kami sedan mengerjakan bagian ini. Harap bersabar'; break;
 	case "es": echo 'Estamos trabajando en este módulo.  Por favor, sea paciente'; break;
-	default: echo 'We are working on it. Please be patient.';
+	default: echo 'Moduli do te aktivizohet se shpejti.';
 }
 ?>
 <form>

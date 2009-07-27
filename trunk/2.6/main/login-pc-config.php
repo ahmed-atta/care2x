@@ -2,14 +2,7 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-/**
-* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
-* GNU General Public License
-* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
-* elpidio@care2x.org, 
-*
-* See the file "copy_notice.txt" for the licence notice
-*/
+
 $lang_tables=array('departments.php');
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
@@ -90,37 +83,37 @@ if(isset($mode)&&($mode=='save')){
  	$smarty->assign('sPromptText',$LDWelcome);
  	$smarty->assign('sUserName',$_SESSION['sess_login_username']);
  }
- #
- # Prepare the config form block
- #
- $smarty->assign('sFormParams','name="pcids"  method="post" action="login-pc-config.php"');
- $smarty->assign('LDPcID',$LDPcID);
-
- $smarty->assign('sDeptIcon','<img '.createComIcon($root_path,'home.gif').'>');
- $smarty->assign('LDDept',$LDDept);
-
- $smarty->assign('sWardIcon','<img '.createComIcon($root_path,'statbel2.gif').'>');
- $smarty->assign('LDWard',$LDWard);
-
- $smarty->assign('sWardORIcon','<img '.createComIcon($root_path,'button_info.gif').'>');
- $smarty->assign('sWardORValue',$config['thispc_room_nr']);
- $smarty->assign('LDWardOR',$LDWardOR);
-
- $smarty->assign('sPhoneNrIcon','<img '.createComIcon($root_path,'profile.gif').'>');
- $smarty->assign('sPhoneNrValue',$config['thispc_phone']);
- $smarty->assign('LDPhoneNr',$LDPhoneNr);
-
- $smarty->assign('sIntercomNrIcon','<img '.createComIcon($root_path,'listen-sm-legend.gif').'>');
- $smarty->assign('sIntercomNrValue',$config['thispc_intercom']);
- $smarty->assign('LDIntercomNr',$LDIntercomNr);
-
- $smarty->assign('sIPAddressIcon','<img '.createComIcon($root_path,'lightning.gif').'>');
- $smarty->assign('sIPAddress',$HTTP_SERVER_VARS['REMOTE_ADDR']);
- $smarty->assign('LDPcIP',$LDPcIP);
-
- #
+		 #
+		 # Prepare the config form block
+		 #
+		 $smarty->assign('sFormParams','name="pcids"  method="post" action="login-pc-config.php"');
+		 $smarty->assign('LDPcID',$LDPcID);
+		
+		 $smarty->assign('sDeptIcon','<img '.createComIcon($root_path,'home.gif').'>');
+		 $smarty->assign('LDDept',$LDDept);
+		
+		 $smarty->assign('sWardIcon','<img '.createComIcon($root_path,'statbel2.gif').'>');
+		 $smarty->assign('LDWard',$LDWard);
+		
+		 $smarty->assign('sWardORIcon','<img '.createComIcon($root_path,'button_info.gif').'>');
+		 $smarty->assign('sWardORValue',$config['thispc_room_nr']);
+		 $smarty->assign('LDWardOR',$LDWardOR);
+		
+		 $smarty->assign('sPhoneNrIcon','<img '.createComIcon($root_path,'profile.gif').'>');
+		 $smarty->assign('sPhoneNrValue',$config['thispc_phone']);
+		 $smarty->assign('LDPhoneNr',$LDPhoneNr);
+		
+		 $smarty->assign('sIntercomNrIcon','<img '.createComIcon($root_path,'listen-sm-legend.gif').'>');
+		 $smarty->assign('sIntercomNrValue',$config['thispc_intercom']);
+		 $smarty->assign('LDIntercomNr',$LDIntercomNr);
+		
+		 $smarty->assign('sIPAddressIcon','<img '.createComIcon($root_path,'lightning.gif').'>');
+		 $smarty->assign('sIPAddress',$$_SERVER['REMOTE_ADDR']);
+		 $smarty->assign('LDPcIP',$LDPcIP);
+		
+         #
          # Print the user departments
- #
+         #
          //gjergji..new dept's management
          $sTemp = '';
     	 if($depts&&is_array($depts))
@@ -128,27 +121,27 @@ if(isset($mode)&&($mode=='save')){
     			 if(in_array($v['nr'],$_SESSION['department_nr']))
         			 if(isset($$v['LD_var'])&&$$v['LD_var']) $sTemp = $sTemp . '<b>' . $$v['LD_var'] . '</b><br>';
         				 else $sTemp = $sTemp . '<b>' . $v['name_formal'] . '</b><br>';
-
- $smarty->assign('sDeptSelect',$sTemp);
- 
- #
- # Prepare the ward selector element
- #
+        				 
+         $smarty->assign('sDeptSelect',$sTemp);	
+         	 	 
+         #
+         # Prepare the ward selector element
+         #
          $sTemp = '';         
-	if($ward_info&&is_array($ward_info)){
-		while(list($x,$v)=each($ward_info)){
+    	 if($ward_info&&is_array($ward_info)){
+    		 while(list($x,$v)=each($ward_info)){
     			 if(in_array($v['dept_nr'],$_SESSION['department_nr']))         			 
 					$sTemp = $sTemp . '<b>' . $v['name'] . '</b><br>';
-		}
-	}
- $smarty->assign('sWardSelect',$sTemp);
+    		}
+    	 }
+         $smarty->assign('sWardSelect',$sTemp);
          //gjergji : end new dept management
- #
- # Prepare the submit option buttons
- #
-
- $smarty->assign('sSubmitFormButton','<input type="submit" value="'.$LDSave.'">');
- $smarty->assign('sNoChangeButton','<input type="button" value="'.$LDNoChange.'" onClick="window.location.href=\'startframe.php'.URL_REDIRECT_APPEND.'\'">');
+		 #
+		 # Prepare the submit option buttons
+		 #
+		
+		 $smarty->assign('sSubmitFormButton','<input type="submit" value="'.$LDSave.'">');
+		 $smarty->assign('sNoChangeButton','<input type="button" value="'.$LDNoChange.'" onClick="window.location.href=\'startframe.php'.URL_REDIRECT_APPEND.'\'">');
 		 $smarty->assign('sCancelButton','<a href="startframe.php'.URL_APPEND.'"><img '.createLDImgSrc($root_path,'close2.gif','0','top').'  alt="'.$LDClose.'"></a>');
 		 
 		 #
@@ -157,9 +150,9 @@ if(isset($mode)&&($mode=='save')){
 		 $smarty->assign('sHiddenInputs','<input type="hidden" name="sid" value="'.$sid.'">
 			<input type="hidden" name="lang" value="'.$lang.'">
 			<input type="hidden" name="mode" value="save">');		 
- 
+		 
 		 $smarty->assign('sMainBlockIncludeFile','main/login_config.tpl');
-
+		 
  #
  # Prepare the hidden inputs
  #
