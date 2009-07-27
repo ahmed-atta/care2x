@@ -250,12 +250,12 @@ class Immunization extends Core {
 	* @return boolean
 	*/
 	function saveImmuInfoFromArray(&$data){
-		global $HTTP_SESSION_VARS;
+		global $_SESSION;
 		$this->ImmunizationType();;
 		$this->data_array=$data;
-		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-		//$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+		//$this->data_array['modify_id']=$_SESSION['sess_user_name'];
+		$this->data_array['create_id']=$_SESSION['sess_user_name'];
 		$this->data_array['create_time']=date('YmdHis');
 		return $this->insertDataFromInternalArray();	
 	
@@ -310,7 +310,7 @@ class Immunization extends Core {
 	* @return boolean
 	*/
 	function updateImmuInfoFromArray($nr,&$data){
-		global $HTTP_SESSION_VARS;
+		global $_SESSION;
 		$this->ImmunizationType();;
 		$this->data_array=$data;
 		# remove probable existing array data to avoid replacing the stored data
@@ -318,8 +318,8 @@ class Immunization extends Core {
 		if(isset($this->data_array['create_id'])) unset($this->data_array['create_id']);
 		# Set the where condition
 		$this->where="nr='$nr'";
-		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
+		$this->data_array['modify_id']=$_SESSION['sess_user_name'];
 		$this->data_array['modify_time']=date('YmdHis');
 		##### param FALSE disables strict numeric id behaviour of the method
 		return $this->updateDataFromInternalArray($nr,FALSE);

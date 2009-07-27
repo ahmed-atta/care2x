@@ -6,7 +6,7 @@
 */
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 /**
-*  Laboratory methods. 
+*  Laboratory methods.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
 * @version beta 2.0.1
@@ -14,7 +14,7 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 * @package care_api
 */
 class Lab extends Encounter {
-	
+
 	var $tb_req_chemlab='care_test_request_chemlabor';
 	/**
 	* Table name for test findings for chemical lab
@@ -124,7 +124,7 @@ class Lab extends Encounter {
 				'hi_critica$l_y',
 				'lo_critical_y',
 				'hi_toxic_y',
-				'lo_toxic_y',	
+				'lo_toxic_y',
 				'median_c',
 				'hi_bound_c',
 				'lo_bound_c',
@@ -132,7 +132,7 @@ class Lab extends Encounter {
 				'lo_critical_c',
 				'hi_toxic_c',
 				'lo_toxic_c',
-				'method',								
+				'method',
 				'status',
 				'history',
 				'modify_id',
@@ -140,7 +140,7 @@ class Lab extends Encounter {
 				'create_id',
 				'create_time',
 				'sort_nr');
-				
+
 	//var $debug = true;
 	/**
 	* Constructor
@@ -152,8 +152,8 @@ class Lab extends Encounter {
 			$this->setTable($this->tb_find_chemlab_sub);
 			$this->setRefArray($this->fld_find_chemlab_sub);
 		} else {
-		$this->setTable($this->tb_find_chemlab);
-		$this->setRefArray($this->fld_find_chemlab);
+			$this->setTable($this->tb_find_chemlab);
+			$this->setRefArray($this->fld_find_chemlab);
 		}
 		//$this->en_prepend=date('Y')*1000000;
 	}
@@ -174,16 +174,16 @@ class Lab extends Encounter {
 	*/
 	function createResultsList($enc_nr){
 	    global $db;
-	
+
 		$this->sql="SELECT job_id,test_date,test_time,group_id FROM $this->tb_find_chemlab WHERE encounter_nr='$enc_nr' AND status<>'hidden' ORDER BY batch_nr DESC";
-		
+
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->rec_count=$this->result->RecordCount()) {
 				return $this->result;
 			} else {return FALSE;}
 		}else {return FALSE;}
 	}
-	/** 
+	/**
 	* Gets the batch number of a given encounter number and  job id.
 	* @access public
 	* @param int Encounter number
@@ -201,7 +201,7 @@ class Lab extends Encounter {
 			} else {return FALSE;}
 		}else {return FALSE;}
 	}
-	/** 
+	/**
 	* Checks if the job id is existing.
 	* @param int Encounter number
 	* @param int Job (test request) id
@@ -220,8 +220,8 @@ class Lab extends Encounter {
 	* @return boolean
 	*/
 	function hideResultIfExists($enc_nr,$job_id){
-		global $HTTP_SESSION_VARS;
-		$this->sql="UPDATE $this->tb_find_chemlab_sub SET status='hidden',history=".$this->ConcatHistory("Hide ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n")."
+		global $_SESSION;
+		$this->sql="UPDATE $this->tb_find_chemlab_sub SET status='hidden',history=".$this->ConcatHistory("Hide ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n")."
 								WHERE encounter_nr='$enc_nr' AND job_id='$job_id' AND status NOT IN ($this->dead_stat)";
 		return $this->Transact();
 	}
@@ -289,8 +289,8 @@ class Lab extends Encounter {
 			} else {return FALSE;}
 		}else {return FALSE;}
 	}
-	
-	
+
+
 	/**
 	* Returns all test parameters belonging to a test group.
 	*
@@ -311,11 +311,11 @@ class Lab extends Encounter {
 			} else {return FALSE;}
 		}else {return FALSE;}
 	}
-	
+
 	/**
 	* Returns all test parameters belonging to a test group.
 	* used in the param administration module
-	* 
+	*
 	* The returned adodb record object contains rows of arrays.
 	* Each array contains the test result data with index keys as outlined in the <var>$fld_test_param</var> array.
 	* @access public
@@ -332,8 +332,8 @@ class Lab extends Encounter {
 				return $this->tparams;
 			} else {return FALSE;}
 		}else {return FALSE;}
-	}	
-	
+	}
+
 	/**
 	 * returns the tests of the selected patient
 	 *
@@ -422,10 +422,10 @@ class Lab extends Encounter {
 				return $this->tparamsdetails->FetchRow();
 			} else {return FALSE;}
 		}else {return FALSE;}
-	}		
-	
+	}
+
 	/**
-	* Returns all test groups. 
+	* Returns all test groups.
 	* gjergji : changed it to get groups from params table
 	* @access public
 	* @return mixed adodb record object or boolean
@@ -444,7 +444,7 @@ class Lab extends Encounter {
 	}
 
 	/**
-	* Returns all test groups not in dead state. 
+	* Returns all test groups not in dead state.
 	* gjergji : changed it to get groups from params table
 	* @access public
 	* @return mixed adodb record object or boolean
@@ -490,7 +490,7 @@ class Lab extends Encounter {
 	*/
 	function getTestParam($nr=0,$id=''){
 		global $db;
-		if($nr){	
+		if($nr){
 			$cond="nr='$nr'";
 		}elseif(!empty($id)){
 			$cond="id='$id'";
@@ -528,8 +528,8 @@ class Lab extends Encounter {
 		global $db, $sql_LIKE;
 		if(empty($key)) return FALSE;
 		$this->sql="SELECT f.encounter_nr, e.encounter_class_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
-				FROM $this->tb_find_chemlab AS f 
-				LEFT JOIN $this->tb_enc AS e ON e.encounter_nr = f.encounter_nr 
+				FROM $this->tb_find_chemlab AS f
+				LEFT JOIN $this->tb_enc AS e ON e.encounter_nr = f.encounter_nr
 				LEFT JOIN $this->tb_person AS p ON p.pid = e.pid";
 		if(is_numeric($key)){
 			$key=(int)$key;
@@ -560,7 +560,7 @@ class Lab extends Encounter {
 				return $this->res['selr'];
 			}else{return FALSE;}
 		}else{return FALSE;}
-	}	
+	}
 	/**
 	* Searches for encounters with existing lab results.
 	*
@@ -580,7 +580,7 @@ class Lab extends Encounter {
 		}else{
 			$option='';
 		}
-		return $this->searchEncounterLabResults($key,$option,TRUE,$len,$so); 
+		return $this->searchEncounterLabResults($key,$option,TRUE,$len,$so);
 	}
 	/**
 	* Gets the latest modify_time information of an encounter's laboratory result.
@@ -613,21 +613,21 @@ class Lab extends Encounter {
 		$this->sql = "UPDATE $this->tb_test_param SET sort_nr = '$sortnr' WHERE nr = '$nr'";
 		return  $this->Transact();
 	}
-	
+
 	/**
 	 * moves down a test group, updating it's current sort_nr
 	 *
 	 * @param int current sort_nr $nr
 	 * @param int the new sort nr $sortnr
 	 * @return mixed interger or boolean
-	 */	
+	 */
 	function moveDown($nr,$sortnr) {
 		global $db;
 		$this->sql = "UPDATE $this->tb_test_param SET sort_nr = '$sortnr' WHERE nr = '$nr'";
 		return  $this->Transact();
 	}
 	/**
-	* Returns the group name for the give group id. 
+	* Returns the group name for the give group id.
 	* gjergji : changed it to get groups from params table
 	* @access public
 	* @param varchar the id of the group

@@ -9,7 +9,7 @@
 */
 function processFindings(&$indx,$offset=0)
 {
-   global $HTTP_POST_VARS ;
+   global $_POST ;
    
    $ret_str=''; 
     
@@ -17,7 +17,7 @@ function processFindings(&$indx,$offset=0)
    {
       while(list($x,$v)=each($indx))
 	  {	
-	    if(isset($HTTP_POST_VARS[$v]) && $HTTP_POST_VARS[$v])
+	    if(isset($_POST[$v]) && $_POST[$v])
 		{
 		  if($ret_str=='') $ret_str=$v.'=1';
 		    else $ret_str.='&'.$v.'=1';
@@ -28,7 +28,7 @@ function processFindings(&$indx,$offset=0)
 	{
       while(list($x,$v)=each($indx))
 	  {	
-	    if(isset($HTTP_POST_VARS[$x]) && $HTTP_POST_VARS[$x])
+	    if(isset($_POST[$x]) && $_POST[$x])
 		{
 		  if($ret_str=='') $ret_str=$x.'=1';
 		    else $ret_str.='&'.$x.'=1';

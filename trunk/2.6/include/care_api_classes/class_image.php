@@ -231,7 +231,7 @@ class Image extends Core{
 	*
 	* File's extension/mime type will be extracted and saved in the internal <var>$ul_img_ext</var> buffer.
 	* @access public
-	* @param array  Image pointer, (pass by reference) usually $HTTP_POST_FILES
+	* @param array  Image pointer, (pass by reference) usually $_FILES
 	* @param string  Optional filter string for mime types. If empty, default filter string <var>$mimefilter</var> will be used
 	* @return boolean
 	*/
@@ -257,7 +257,7 @@ class Image extends Core{
 	* Saves the uploaded image with the given filename into a given path.
 	*
 	* @access public
-	* @param array  Image file in array (pass by reference) (usually $HTTP_POST_FILES)
+	* @param array  Image file in array (pass by reference) (usually $_FILES)
 	* @param string Complete path for the stored image. If empty, the default <var>$def_root_path</var> will be used.
 	* @param string Filename of the stored image. If empty, the original file name will be used.
 	*/

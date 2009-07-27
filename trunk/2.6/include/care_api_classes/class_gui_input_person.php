@@ -23,10 +23,10 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 * @package care_api
 */
 
-$thisfile = basename($HTTP_SERVER_VARS['PHP_SELF']);
+$thisfile = basename($_SERVER['PHP_SELF']);
 
 class GuiInputPerson {
-	
+
 	# Language tables
 	var $langfiles= array('emr.php', 'person.php', 'date_time.php', 'aufnahme.php');
 
@@ -38,7 +38,7 @@ class GuiInputPerson {
 
 	# PID number
 	var $pid=0;
-	
+
 	# Toggler var
 	var $toggle=0;
 
@@ -49,13 +49,13 @@ class GuiInputPerson {
 	var $pretext='';
 	# Text block below the form
 	var $posttext='';
-	
+
 	# filename for displaying the data after saving
 	var $displayfile='';
-	
+
 	# smarty template
 	var $smarty;
-	
+
 	# Flag for output or returning form data
 	var $bReturnOnly = FALSE;
 
@@ -89,7 +89,7 @@ class GuiInputPerson {
 			    $sBuffer="<font color=\"$this->error_fontcolor\">* $ld_text</font>";
 			    $this->smarty->assign('must',1);
 			}
-				else $sBuffer=$ld_text;
+			else $sBuffer=$ld_text;
 			//$this->smarty->assign('must',1);
 			$this->smarty->assign('sItem',$sBuffer);
 			$this->smarty->assign('sColSpan2',"colspan=$colspan");
@@ -107,14 +107,14 @@ class GuiInputPerson {
 	*/
 	function display(){
 		global $db, $sid, $lang, $root_path, $pid, $insurance_show, $user_id, $mode, $dbtype, $breakfile, $cfg,
-				$update, $photo_filename, $HTTP_POST_VARS,  $HTTP_POST_FILES, $HTTP_SESSION_VARS;
+				$update, $photo_filename, $_POST,  $_FILES, $_SESSION;
 
-		extract($HTTP_POST_VARS);
+		extract($_POST);
 
 		# Load the language tables
 		$lang_tables =$this->langfiles;
 		include($root_path.'include/inc_load_lang_tables.php');
-		
+
 		# Load the other hospitals array
 		include_once($root_path.'global_conf/other_hospitals.php');
 
@@ -145,7 +145,7 @@ class GuiInputPerson {
 		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 		$glob_obj->getConfig('person_%');
-		
+
 		//extract($GLOBAL_CONFIG);
 
 		# Check whether config foto path exists, else use default path
@@ -180,12 +180,12 @@ class GuiInputPerson {
 				$img_obj=& new Image;
 
 				# Check the uploaded image file if exists and valid
-				if($img_obj->isValidUploadedImage($HTTP_POST_FILES['photo_filename'])){
+				if($img_obj->isValidUploadedImage($_FILES['photo_filename'])){
 					$valid_image=TRUE;
 					# Get the file extension
 					$picext=$img_obj->UploadedImageMimeType();
 				}
-     
+
 				if(($update)) {
 
 					//echo formatDate2STD($geburtsdatum,$date_format);
@@ -223,13 +223,13 @@ class GuiInputPerson {
 						# Compose the new filename
 						$photo_filename=$pid.'.'.$picext;
 						# Save the file
-						$img_obj->saveUploadedImage($HTTP_POST_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
+						$img_obj->saveUploadedImage($_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
 				   		# add to the sql query
 						$sql.=" photo_filename='$photo_filename',";
 					}
 
 					# complete the sql query
-					$sql.=" history=".$person_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." \n").", modify_id='".$HTTP_SESSION_VARS['sess_user_name']."' WHERE pid=$pid";
+					$sql.=" history=".$person_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." \n").", modify_id='".$_SESSION['sess_user_name']."' WHERE pid=$pid";
 
 					//$db->debug=true;
 					$db->BeginTrans();
@@ -245,8 +245,8 @@ class GuiInputPerson {
 									$insure_data=array('insurance_nr'=>$insurance_nr,
 											'firm_id'=>$insurance_firm_id,
 											'class_nr'=>$insurance_class_nr,
-											'history'=>"Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." \n",
-											'modify_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+											'history'=>"Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." \n",
+											'modify_id'=>$_SESSION['sess_user_name'],
 											'modify_time'=>date('YmdHis')
 											);
 
@@ -257,8 +257,8 @@ class GuiInputPerson {
 											'firm_id'=>$insurance_firm_id,
 											'pid'=>$pid,
 											'class_nr'=>$insurance_class_nr,
-											'history'=>"Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." \n",
-											'create_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+											'history'=>"Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." \n",
+											'create_id'=>$_SESSION['sess_user_name'],
 											'create_time'=>date('YmdHis')
 										);
 								$pinsure_obj->insertDataFromArray($insure_data);
@@ -282,14 +282,14 @@ class GuiInputPerson {
 					}
   				} else {
 					$from='entry';
-					$HTTP_POST_VARS['date_birth']=@formatDate2Std($date_birth,$date_format);
-					$HTTP_POST_VARS['date_reg']=date('Y-m-d H:i:s');
-					$HTTP_POST_VARS['blood_group']=trim($HTTP_POST_VARS['blood_group']);
-					$HTTP_POST_VARS['status']='normal';
-					$HTTP_POST_VARS['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-					//$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-					$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-					$HTTP_POST_VARS['create_time']=date('YmdHis');
+					$_POST['date_birth']=@formatDate2Std($date_birth,$date_format);
+					$_POST['date_reg']=date('Y-m-d H:i:s');
+					$_POST['blood_group']=trim($_POST['blood_group']);
+					$_POST['status']='normal';
+					$_POST['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+					//$_POST['modify_id']=$_SESSION['sess_user_name'];
+					$_POST['create_id']=$_SESSION['sess_user_name'];
+					$_POST['create_time']=date('YmdHis');
 
 					# Prepare internal data to be stored together with the user input data
 					if(!$person_obj->InitPIDExists($GLOBAL_CONFIG['person_id_nr_init'])){
@@ -298,40 +298,40 @@ class GuiInputPerson {
 						# However, the sequence generator must be configured during db creation to start at
 						# the initial value set in the global config
 						if($dbtype=='mysql'){
-							$HTTP_POST_VARS['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
+							$_POST['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
 						}
 					}else{
 						# Persons are existing. Check if duplicate might exist
-						if(is_object($duperson=$person_obj->PIDbyData($HTTP_POST_VARS))){
+						if(is_object($duperson=$person_obj->PIDbyData($_POST))){
 							$error_person_exists=TRUE;
 						}
 					}
 					//echo $person_obj->getLastQuery();
+
 					if(!$error_person_exists||$mode=='forcesave'){
 						if($person_obj->insertDataFromInternalArray()){
-							
-							# If data was newly inserted, get the insert id if mysql, 
+
+							# If data was newly inserted, get the insert id if mysql,
 							# else get the pid number from the latest primary key
-							
+
 							if(!$update){
 								$oid = $db->Insert_ID();
 								$pid=$person_obj->LastInsertPK('pid',$oid);
 								//EL: set the new pid
 								$person_obj->setPID($pid);
-
 							}
 
 							// KB: save other_his_no
 							if( isset($_POST['other_his_org']) && !empty($_POST['other_his_org'])){
 								$person_obj->OtherHospNrSet($_POST['other_his_org'], $_POST['other_his_no'], $_SESSION['sess_user_name'] );
 							}
-							
+
 							# Save the valid uploaded photo
 							if($valid_image){
 								# Compose the new filename by joining the pid number and the file extension with "."
 								$photo_filename=$pid.'.'.$picext;
 								# Save the file
-								if($img_obj->saveUploadedImage($HTTP_POST_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename)){
+								if($img_obj->saveUploadedImage($_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename)){
 									# Update the filename to the databank
 									$person_obj->setPhotoFilename($pid,$photo_filename);
 								}
@@ -370,7 +370,7 @@ class GuiInputPerson {
 				}
 			} // end of if(!$error)
 		}elseif(!empty($this->pid)){
-			 # Get the person´s data
+			 # Get the personï¿½s data
 			if($data_obj=&$person_obj->getAllInfoObject()){
 
 				$zeile=$data_obj->FetchRow();
@@ -400,13 +400,13 @@ class GuiInputPerson {
 		$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var AS "LD_var"');
 
 		include_once($root_path.'include/inc_photo_filename_resolve.php');
-		
+
 		#
 		#
 		########  Here starts the GUI output #######################################################
 		#
 		#
-		
+
 		# Start Smarty templating here
 		# Create smarty object without initiliazing the GUI (2nd param = FALSE)
 
@@ -423,8 +423,8 @@ class GuiInputPerson {
 		ob_start();
 ?>
 		<script  language="javascript">
-		
-			function forceSave(){
+
+		function forceSave(){
 			document.aufnahmeform.mode.value="forcesave";
 			document.aufnahmeform.submit();
 		}
@@ -473,7 +473,7 @@ class GuiInputPerson {
 		}
 
 <?php
-		require($root_path.'include/inc_checkdate_lang.php'); 
+		require($root_path.'include/inc_checkdate_lang.php');
 ?>
 		</script>
 <?php
@@ -484,7 +484,7 @@ class GuiInputPerson {
 		//end : gjergji
 		$sTemp = ob_get_contents();
 		ob_end_clean();
-		
+
 		$this->smarty->assign('sRegFormJavaScript',$sTemp);
 
 		$this->smarty->assign('thisfile',$thisfile);
@@ -494,7 +494,7 @@ class GuiInputPerson {
 			$this->smarty->assign('sErrorImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
 			if ($error>1) $this->smarty->assign('sErrorText',$LDErrorS);
 				else $this->smarty->assign('sErrorText',$LDError);
-		
+
 		}elseif($error_person_exists){
 			$this->smarty->assign('errorDupPerson',TRUE);
 			$this->smarty->assign('sErrorImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
@@ -546,7 +546,7 @@ class GuiInputPerson {
 			}
 			$this->smarty->assign('sDupDataRows',$sTemp);
 		}
-		
+
 		if($pid) $this->smarty->assign('LDRegistryNr',$LDRegistryNr);
 		$this->smarty->assign('pid',$pid);
 		$this->smarty->assign('img_source',$img_source);
@@ -554,7 +554,7 @@ class GuiInputPerson {
 		if(isset($photo_filename)) $pfile= $photo_filename;
 			else $pfile='';
 		$this->smarty->assign('sFileBrowserInput','<input name="photo_filename" type="file" size="15"   onChange="showpic(this)" value="'.$pfile.'">');
-		
+
 		# iRowSpanCount counts the rows on the left of the photo image. Begin with 5 because there are 5 static rows.
 		$iRowSpanCount = 5;
 
@@ -575,7 +575,7 @@ class GuiInputPerson {
 		//$iRowSpanCount++;
 		$this->smarty->assign('sNameFirst',$this->createTR($errornamefirst, 'name_first', $LDFirstName,$name_first,'',35,TRUE));
 		//$iRowSpanCount++;
-        
+
 		if (!$GLOBAL_CONFIG['person_name_2_hide']){
 			$this->smarty->assign('sName2',$this->createTR($errorname2, 'name_2', $LDName2,$name_2));
 			$iRowSpanCount++;
@@ -606,23 +606,23 @@ class GuiInputPerson {
 
 		if ($errordatebirth) $this->smarty->assign('LDBday',"<font color=red>* $LDBday</font>:");
 		else $this->smarty->assign('LDBday',"<font color=red>*</font> $LDBday:");
-		
+
 		//gjergji : new calendar
 		$this->smarty->assign('sBdayInput',$calendar->show_calendar($calendar,$date_format,'date_birth',$date_birth));
 		//end gjergji
-		
+
 		if ($errorsex) $this->smarty->assign('LDSex', "<font color=#ff0000>* $LDSex</font>:");
 		else $this->smarty->assign('LDSex', "<font color=#ff0000>*</font> $LDSex:");
 
 		$sSexMBuffer='<input name="sex" type="radio" value="m"  ';
 		if($sex=="m") $sSexMBuffer.=' checked>';
-			else $sSexMBuffer.='>';
+		else $sSexMBuffer.='>';
 		$this->smarty->assign('sSexM',$sSexMBuffer);
 		$this->smarty->assign('LDMale',$LDMale);
 
 		$sSexFBuffer ='<input name="sex" type="radio" value="f"  ';
 		if($sex=="f") $sSexFBuffer.='checked>';
-			else $sSexFBuffer.='>';
+		else $sSexFBuffer.='>';
 		$this->smarty->assign('sSexF',$sSexFBuffer);
 		$this->smarty->assign('LDFemale',$LDFemale);
 
@@ -646,14 +646,14 @@ class GuiInputPerson {
 			$sBGBuffer.='>';
 			$this->smarty->assign('sBGBInput',$sBGBuffer);
 			$this->smarty->assign('LDB',$LDB);
-			
+
 			$sBGBuffer='
 				<input name="blood_group" type="radio" value="AB" ';
 			if($blood_group=='AB') $sBGBuffer.='checked';
 			$sBGBuffer.='>';
 			$this->smarty->assign('sBGABInput',$sBGBuffer);
 			$this->smarty->assign('LDAB',$LDAB);
-			
+
 			$sBGBuffer='
 				<input name="blood_group" type="radio" value="O" ';
 			if($blood_group=='O') $sBGBuffer.='checked';
@@ -678,12 +678,12 @@ class GuiInputPerson {
 			$sCSBuffer = $sCSInput.'value="divorced" ';
 			if($civil_status=="divorced") $sCSBuffer.='checked';
 			$this->smarty->assign('sCSDivorcedInput',$sCSBuffer.'>');
-			
+
 
 			$sCSBuffer = $sCSInput.'value="widowed" ';
 			if($civil_status=="widowed") $sCSBuffer.='checked';
 			$this->smarty->assign('sCSWidowedInput',$sCSBuffer.'>');
-			
+
 			$sCSBuffer = $sCSInput.'value="separated" ';
 			if($civil_status=="separated") $sCSBuffer.='checked';
 			$this->smarty->assign('sCSSeparatedInput',$sCSBuffer.'>');
@@ -694,7 +694,7 @@ class GuiInputPerson {
 			$this->smarty->assign('LDWidowed',$LDWidowed);
 			$this->smarty->assign('LDSeparated',$LDSeparated);
 		}
-		
+
 		if ($erroraddress) $this->smarty->assign('LDAddress',"<font color=red>$LDAddress</font>:");
 			else $this->smarty->assign('LDAddress',"$LDAddress:");
 
@@ -710,22 +710,24 @@ class GuiInputPerson {
 
 		if ($errortown) $this->smarty->assign('LDStreet',"<font color=red>$LDTownCity</font>:");
 		else $this->smarty->assign('LDTownCity',"$LDTownCity:");
-				
+
 		require_once($root_path.'include/care_api_classes/class_address.php');
+		$sAddress = '<select name="addr_citytown_name"><option  onclick="document.getElementById(\'addr_zip\').value=\'\'"></option>';
 		$address_obj=new Address;
 		$address = $address_obj->getAllActiveCityTown();
-		if(!empty($address) && $address->RecordCount()) {
-			$sAddress = '<select name="addr_citytown_name"><option  onclick="document.getElementById(\'addr_zip\').value=\'\'"></option>';
-			while($addr=$address->FetchRow()){
-			    $sAddress .= '<option onclick="document.getElementById(\'addr_zip\').value=\'' . $addr['zip_code'].'\'" value="' . $addr['name'] . '">' . $addr['name'] . '</option>';
+		if(!empty($address)) {
+			if($address->RecordCount()) {
+				while($addr=$address->FetchRow()){
+				    $sAddress .= '<option onclick="document.getElementById(\'addr_zip\').value=\'' . $addr['zip_code'].'\'" value="' . $addr['name'] . '">' . $addr['name'] . '</option>';
+				}
+				$sAddress .= '</select>';
+				$this->smarty->assign('sTownCityInput',$sAddress);
+			} else {
+				$this->smarty->assign('sTownCityInput',$LDNoAddress);
 			}
-			$sAddress .= '</select>';
-			$this->smarty->assign('sTownCityInput',$sAddress);
 		} else {
-			$this->smarty->assign('sTownCityInput',"<font color=red><strong>$LDNoAddress</strong></font>");
+			$this->smarty->assign('sTownCityInput',$LDNoAddress);
 		}
-		//$this->smarty->assign('sTownCityInput','<input name="addr_citytown_name" type="text" size="35" value="'.$addr_citytown_name.'">');
-		//$this->smarty->assign('sTownCityMiniCalendar',"<a href=\"javascript:popSearchWin('citytown','aufnahmeform.addr_citytown_nr','aufnahmeform.addr_citytown_name')\"><img ".createComIcon($root_path,'b-write_addr.gif','0')."></a>");
 
 		 if ($errorzip) $this->smarty->assign('LDZipCode',"<font color=red> $LDZipCode</font> :");
 		 	else  $this->smarty->assign('LDZipCode'," $LDZipCode :");
@@ -759,13 +761,13 @@ class GuiInputPerson {
 						$this->smarty->append('sInsClasses',$sInsClassBuffer);
 
 					} else {
-						$this->smarty->assign('sInsClasses','No insurance classes defined');
+						$this->smarty->assign('sInsClasses','Nuk jane konfiguruar klasat e sigurimit');
 					}
-					
+
 					if ($errorinsurancecoid) $this->smarty->assign('LDInsuranceCo',"<font color=red>$LDInsuranceCo</font> :");
-						else  $this->smarty->assign('LDInsuranceCo',"$LDInsuranceCo :");
-					//gjergji mod for insurance
-					$insurance_firm_name = $pinsure_obj->getFirmName($GLOBAL_CONFIG['person_insurace_firm_default_id']);  
+					else  $this->smarty->assign('LDInsuranceCo',"$LDInsuranceCo :");
+					//gjergji mod per insurance
+					$insurance_firm_name = $pinsure_obj->getFirmName($GLOBAL_CONFIG['person_insurace_firm_default_id']);
 					$this->smarty->assign('sInsCoNameInput','<input name="insurance_firm_name" type="text" size="35" value="'.$insurance_firm_name.'">');
 					$this->smarty->assign('sInsCoMiniCalendar',"<a href=\"javascript:popSearchWin('insurance','aufnahmeform.insurance_firm_id','aufnahmeform.insurance_firm_name')\"><img ".createComIcon($root_path,'b-write_addr.gif','0')."></a>");
 				}
@@ -824,7 +826,7 @@ class GuiInputPerson {
 			}
 
 			$this->smarty->assign('sOtherNr',$sOtherNrBuffer);
-			
+
 			$sOtherNrBuffer='';
 			$sOtherNrBuffer.="<SELECT name=\"other_his_org\">".
 						"<OPTION value=\"\">--</OPTION>";
@@ -843,11 +845,11 @@ class GuiInputPerson {
 		}
 
 		$this->smarty->assign('LDRegBy',$LDRegBy);
-		if(isset($user_id) && $user_id) $buffer=$user_id; else  $buffer = $HTTP_SESSION_VARS['sess_user_name'];
+		if(isset($user_id) && $user_id) $buffer=$user_id; else  $buffer = $_SESSION['sess_user_name'];
 		$this->smarty->assign('sRegByInput','<input  name="user_id" type="text" value="'.$buffer.'"  size="35" readonly>');
 
 		# Collect the hidden inputs
-		
+
 		ob_start();
 ?>
 			<INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="1000000">

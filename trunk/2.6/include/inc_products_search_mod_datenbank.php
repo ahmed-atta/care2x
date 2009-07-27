@@ -3,7 +3,7 @@
 if (eregi('inc_products_search_mod_datenbank.php',$PHP_SELF)) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
-
+///$db->debug = true;
 /**
 * CARE 2002 Integrated Hospital Information System
 * GNU General Public License
@@ -12,28 +12,34 @@ if (eregi('inc_products_search_mod_datenbank.php',$PHP_SELF))
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-if($cat=='pharma') $dbtable='care_pharma_products_main';
-	else $dbtable='care_med_products_main';
-# clean input data
+if ($cat == 'pharma') {
+	$dbtable = 'care_pharma_products_main';
+	$dbtablesub = 'care_pharma_products_main_sub';
+} else {
+	$dbtable = 'care_med_products_main';
+	$dbtablesub = 'care_med_products_main_sub';
+}
+// clean input data
 $keyword=addslashes(trim($keyword));
-//$db->debug=true;
 
-#this is the search module
+// this is the search module
 if((($mode=='search')||$update)&&($keyword!='')){
 
 	if($update){
-				
 		$sql="SELECT  * FROM $dbtable WHERE  bestellnum='$keyword'";
         	$ergebnis=$db->Execute($sql);
 		$linecount=$ergebnis->RecordCount();
 	}else{
-		$sql="SELECT * FROM $dbtable WHERE  bestellnum='$keyword'
+		$sql = "SELECT $dbtable.*, sum(pcs) as qty FROM $dbtable 
+					LEFT OUTER JOIN $dbtablesub ON (
+                    $dbtablesub.bestellnum = $dbtable.bestellnum )
+					WHERE  $dbtable.bestellnum='$keyword'
 					OR artikelnum $sql_LIKE '$keyword'
 					OR industrynum $sql_LIKE '$keyword'
 					OR artikelname $sql_LIKE '$keyword'
 					OR generic $sql_LIKE '$keyword'
-					OR description $sql_LIKE '$keyword'";
-				//print $sql;
+					OR description $sql_LIKE '$keyword' 
+					GROUP BY $dbtable.bestellnum";
         	$ergebnis=$db->Execute($sql);
 
 		if(!$linecount=$ergebnis->RecordCount()){
@@ -43,7 +49,6 @@ if((($mode=='search')||$update)&&($keyword!='')){
 					OR artikelname $sql_LIKE '$keyword%'
 					OR generic $sql_LIKE '$keyword%'
 					OR description $sql_LIKE '$keyword%'";
-
         		$ergebnis=$db->Execute($sql);
 			$linecount=$ergebnis->RecordCount();
 		}
@@ -54,7 +59,6 @@ if((($mode=='search')||$update)&&($keyword!='')){
 		$ergebnis->MoveFirst();
 		$title_art=$ttl['artikelname'];
 	}
-// print "from table ".$linecount;
 }
 
 ?>

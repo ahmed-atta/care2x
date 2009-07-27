@@ -10,7 +10,7 @@ function importGlobalVariable($variable)
    { case 'server' :
           if (isset($_SERVER))  { return $_SERVER; }
           else
-                 { return $GLOBALS['HTTP_SERVER_VARS']; }
+		{ return $GLOBALS['$_SERVER']; }
            break;
 /*      case 'session' :
            if (isset($_SESSION)) { return $_SESSION; }
@@ -44,17 +44,14 @@ function importGlobalVariable($variable)
 */
 $reg_glob_ini=ini_get('register_globals');
 
-if(empty($reg_glob_ini)||(!$reg_glob_ini))
-{
+if(empty($reg_glob_ini)||(!$reg_glob_ini)) {
 
 /* Process GET vars */
 
-  //if(sizeof($HTTP_GET_VARS))
-  if(sizeof($global_vars=&importGlobalVariable('get')))
-  {
-    //while(list($x,$v)=each($HTTP_GET_VARS))    
-    while(list($x,$v)=each($global_vars))
-    {
+	//if(sizeof($_GET))
+	if(sizeof($global_vars=&importGlobalVariable('get'))) {
+		//while(list($x,$v)=each($_GET))
+		while(list($x,$v)=each($global_vars)) {
 		$$x=$v;
     }
     reset($global_vars);
@@ -62,46 +59,40 @@ if(empty($reg_glob_ini)||(!$reg_glob_ini))
   
 /* Process POST vars */
   
-  //if(sizeof($HTTP_POST_VARS))
-  if(sizeof($global_vars=&importGlobalVariable('post')))
-  {
-    //while(list($x,$v)=each($HTTP_POST_VARS)) 
-    while(list($x,$v)=each($global_vars))    
-    {
+	//if(sizeof($_POST))
+	if(sizeof($global_vars=&importGlobalVariable('post'))) {
+		//while(list($x,$v)=each($_POST))
+		while(list($x,$v)=each($global_vars)) {
 		$$x=$v;
     }
-    //reset($HTTP_POST_VARS);
+		//reset($_POST);
     reset($global_vars);
   }
   
 /* Process COOKIE vars */
 
-  //if(sizeof($HTTP_COOKIE_VARS))
-  if(sizeof($global_vars=&importGlobalVariable('cookie')))
-  {
-    //while(list($x,$v)=each($HTTP_COOKIE_VARS)) 
-    while(list($x,$v)=each($global_vars))
-    {
+	//if(sizeof($_COOKIE))
+	if(sizeof($global_vars=&importGlobalVariable('cookie'))) {
+		//while(list($x,$v)=each($_COOKIE))
+		while(list($x,$v)=each($global_vars)) {
 		$$x=$v;
     }
-    //reset($HTTP_COOKIE_VARS);
+		//reset($_COOKIE);
     reset($global_vars);
   }
 
 /* Get cookie vars equivalent */
-$HTTP_COOKIE_VARS=&importGlobalVariable('cookie');
+	$_COOKIE=&importGlobalVariable('cookie');
  
 /* Process SERVER vars */
 
-  //if(sizeof($HTTP_SERVER_VARS))
-  if(sizeof($global_vars=&importGlobalVariable('server')))
-  {
-    //while(list($x,$v)=each($HTTP_SERVER_VARS)) 
-    while(list($x,$v)=each($global_vars))
-    {
+	//if(sizeof($$_SERVER))
+	if(sizeof($global_vars=&importGlobalVariable('server'))) {
+		//while(list($x,$v)=each($$_SERVER))
+		while(list($x,$v)=each($global_vars)) {
 		$$x=$v;
     }
-    //reset($HTTP_SERVER_VARS);
+		//reset($$_SERVER);
     reset($global_vars);
   }
 
@@ -111,19 +102,19 @@ $CARE_SERVER_VARS=&importGlobalVariable('server');
 /* Process SESSION vars */  
 /*  if(sizeof($global_vars=&importGlobalVariable('session')))
   {
-    //while(list($x,$v)=each($HTTP_SERVER_VARS)) 
+	 //while(list($x,$v)=each($$_SERVER))
     while(list($x,$v)=each($global_vars))    
     {
 		$$x=$v;
     }
-    //reset($HTTP_SERVER_VARS);
+		//reset($$_SERVER);
     reset($global_vars);
   }  
   
 */
 
 
-//$HTTP_SESSION_VARS=&importGlobalVariable('session');
+	//$_SESSION=&importGlobalVariable('session');
 
 }
 

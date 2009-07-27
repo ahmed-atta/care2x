@@ -7,8 +7,8 @@ if (eregi("inc_config_color.php",$PHP_SELF))
 
 /* Load user config API. Get the user config data from db */
 
-if(!empty($HTTP_COOKIE_VARS['ck_config'])){
-	$ck_userid=$HTTP_COOKIE_VARS['ck_config'];
+if(!empty($_COOKIE['ck_config'])){
+	$ck_userid=$_COOKIE['ck_config'];
 }else {
 	$ck_userid='';
 }

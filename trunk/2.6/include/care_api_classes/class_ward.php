@@ -143,13 +143,13 @@ class Ward extends Encounter {
 			$this->sql .= " ) "	;
 	    }
         //echo $this->sql;
-    if($this->res['gawio']=$db->Execute($this->sql)) {
+        if($this->res['gawio']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['gawio']->RecordCount()) {
-    		return $this->res['gawio'];	 
-   		} else { return false; }
+				 return $this->res['gawio'];	 
+			} else { return false; }
 		} else { return false; }
 	}
-  /**
+	/**
 	* Returns all wards data.
 	* 
 	* The returned adodb record object contains rows of arrays.
@@ -424,13 +424,13 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function saveWard(&$data){
-		global $HTTP_SESSION_VARS;
+		global $_SESSION;
 		$this->_useWard();
 		$this->data_array=$data;
 		$this->data_array['date_create']=date('Y-m-d');
-		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-		//$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+		//$this->data_array['modify_id']=$_SESSION['sess_user_name'];
+		$this->data_array['create_id']=$_SESSION['sess_user_name'];
 		$this->data_array['create_time']=date('YmdHis');
 		return $this->insertDataFromInternalArray();
 	}
@@ -445,7 +445,7 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function updateWard($nr,&$data){
-		global $HTTP_SESSION_VARS;
+		global $_SESSION;
 		$this->_useWard();
 		$this->data_array=$data;
 		// remove probable existing array data to avoid replacing the stored data
@@ -453,8 +453,8 @@ class Ward extends Encounter {
 		if(isset($this->data_array['create_id'])) unset($this->data_array['create_id']);
 		// clear the where condition
 		$this->where='';
-		$this->data_array['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n')";
+		$this->data_array['modify_id']=$_SESSION['sess_user_name'];
 		return $this->updateDataFromInternalArray($nr);
 	}
 	/**
@@ -502,7 +502,7 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function _setIsTemporaryClosed($nr,$flag=1){
-		global $HTTP_SESSION_VARS;
+		global $_SESSION;
 		$this->_useWard();
 		// clear the where condition
 		$this->where='';
@@ -512,8 +512,8 @@ class Ward extends Encounter {
 		}else{
 			$action='Reopened';
 		} 
-		$data['history']="CONCAT(history,'$action: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
-		$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$data['history']="CONCAT(history,'$action: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n')";
+		$data['modify_id']=$_SESSION['sess_user_name'];
 		$this->data_array=$data;		
 		return $this->updateDataFromInternalArray($nr);
 	}
@@ -542,14 +542,14 @@ class Ward extends Encounter {
 	* @return boolean
 	*/
 	function closeWardNonReversible($nr){
-		global $HTTP_SESSION_VARS;
+		global $_SESSION;
 		$this->_useWard();
 		// clear the where condition
 		$this->where='';
 		$data['date_close']=date('Y-m-d');
 		$data['status']='inactive';
-		$data['history']="CONCAT(history,'Closed nonreversible: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
-		$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$data['history']="CONCAT(history,'Closed nonreversible: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n')";
+		$data['modify_id']=$_SESSION['sess_user_name'];
 		$this->data_array=$data;
 		return $this->updateDataFromInternalArray($nr);
 	}

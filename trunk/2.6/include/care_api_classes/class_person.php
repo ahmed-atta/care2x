@@ -211,13 +211,13 @@ class Person extends Core {
 	* @access private
 	*/
 	function prepInsertArray(){
-        global $HTTP_POST_VARS;
+        global $_POST;
 		$x='';
 		$v='';
 		$this->data_array=NULL;
-		if(!isset($HTTP_POST_VARS['create_time'])||empty($HTTP_POST_VARS['create_time'])) $HTTP_POST_VARS['create_time']=date('YmdHis');
+		if(!isset($_POST['create_time'])||empty($_POST['create_time'])) $_POST['create_time']=date('YmdHis');
 		while(list($x,$v)=each($this->elems_array)) {
-	    	if(isset($HTTP_POST_VARS[$v])&&!empty($HTTP_POST_VARS[$v])) $this->data_array[$v]=$HTTP_POST_VARS[$v];
+	    	if(isset($_POST[$v])&&!empty($_POST[$v])) $this->data_array[$v]=$_POST[$v];
 	    }
     }	
 	/**
@@ -1113,12 +1113,12 @@ class Person extends Core {
 	* @return mixed string or boolean
 	*/
 	function setPhotoFilename($pid='',$fn=''){
-	    global $db, $HTTP_SESSION_VARS;
+	    global $db, $_SESSION;
 		if(empty($pid)||empty($fn)) return false;
 		if(!$this->internResolvePID($pid)) return false;
 
 		 $this->sql="UPDATE $this->tb_person SET photo_filename='$fn', 
-		 			history=".$this->ConcatHistory("\nPhoto set ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name'])." WHERE pid=$this->pid";
+		 			history=".$this->ConcatHistory("\nPhoto set ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name'])." WHERE pid=$this->pid";
 		return $this->Transact($this->sql);
 	}
 }

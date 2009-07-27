@@ -17,7 +17,7 @@ if($dblink_ok)
   	$new_main_currency=0;
 
        $sql="UPDATE care_currency SET status='main', 
-       		modify_id='".$HTTP_COOKIE_VARS['ck_cafenews_user'.$sid]."',
+       		modify_id='".$_COOKIE['ck_cafenews_user'.$sid]."',
 		modify_time='".date('YmdHis')."'
 		WHERE item_no=".$new_main_item;
 

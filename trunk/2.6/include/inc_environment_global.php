@@ -60,12 +60,21 @@ if(defined('ENCRYPT_PAGE_BASE64')&&ENCRYPT_PAGE_BASE64){
 #
 # globalize the POST, GET, & COOKIE variables
 #
-require_once($root_path.'include/inc_vars_resolve.php');
-
+//require_once($root_path.'include/inc_vars_resolve.php');
+if (!ini_get('register_globals')) {
+    $superglobals = array($_SERVER, $_ENV,
+        $_FILES, $_COOKIE, $_POST, $_GET);
+    if (isset($_SESSION)) {
+        array_unshift($superglobals, $_SESSION);
+    }
+    foreach ($superglobals as $superglobal) {
+        extract($superglobal, EXTR_SKIP);
+    }
+}
 #
 # Set global defines
 #
-if(!defined('LANG_DEFAULT')) define ('LANG_DEFAULT','en');
+if(!defined('LANG_DEFAULT')) define ('LANG_DEFAULT','sq');
 
 #
 # Establish db connection 

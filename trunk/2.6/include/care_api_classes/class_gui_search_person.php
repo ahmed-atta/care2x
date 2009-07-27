@@ -21,7 +21,7 @@
 * @package care_api
 */
 
-$thisfile = basename($HTTP_SERVER_VARS['PHP_SELF']);
+$thisfile = basename($_SERVER['PHP_SELF']);
 
 class GuiSearchPerson {
 
@@ -148,8 +148,8 @@ class GuiSearchPerson {
 	*/
 
 	function display($skey=''){
-		global 	$db, $searchkey, $root_path,  $firstname_too, $HTTP_POST_VARS, $HTTP_GET_VARS,
-				$sid, $lang, $mode,$totalcount, $pgx, $odir, $oitem, $HTTP_SESSION_VARS,
+		global 	$db, $searchkey, $root_path,  $firstname_too, $_POST, $_GET,
+				$sid, $lang, $mode,$totalcount, $pgx, $odir, $oitem, $_SESSION,
 				$dbf_nodate,  $user_origin, $parent_admit, $status, $target, $origin;
 
 		$this->thisfile = $filename;
@@ -172,7 +172,7 @@ class GuiSearchPerson {
 
 		# Initialize pages control variables
 		if($mode=='paginate'){
-			$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+			$searchkey=$_SESSION['sess_searchkey'];
 			//$searchkey='USE_SESSION_SEARCHKEY';
 			//$mode='search';
 		}else{
@@ -188,7 +188,7 @@ class GuiSearchPerson {
 
 		#Load and create paginator object
 		include_once($root_path.'include/care_api_classes/class_paginator.php');
-		$pagen=new Paginator($pgx,$this->thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+		$pagen=new Paginator($pgx,$this->thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -208,10 +208,10 @@ class GuiSearchPerson {
 		if(!defined('SHOW_FIRSTNAME_CONTROLLER')) define('SHOW_FIRSTNAME_CONTROLLER',$this->show_firstname_controller);
 
 		if(SHOW_FIRSTNAME_CONTROLLER){
-			if(isset($HTTP_POST_VARS['firstname_too'])){
-				if($HTTP_POST_VARS['firstname_too']){
+			if(isset($_POST['firstname_too'])){
+				if($_POST['firstname_too']){
 					$firstname_too=1;
-				}elseif($mode=='paginate'&&isset($HTTP_GET_VARS['firstname_too'])&&$HTTP_GET_VARS['firstname_too']){
+				}elseif($mode=='paginate'&&isset($_GET['firstname_too'])&&$_GET['firstname_too']){
 					$firstname_too=1;
 				}
 			}elseif($mode!='search'){
@@ -235,7 +235,7 @@ class GuiSearchPerson {
 			//$sql='SELECT * FROM '.$dbtable.$sql2;
 
 			if($mode=='paginate'){
-				$fromwhere=$HTTP_SESSION_VARS['sess_searchkey'];
+				$fromwhere=$_SESSION['sess_searchkey'];
 				$sql='SELECT pid, name_last, name_first, date_birth, addr_zip, sex, death_date, status FROM '.$fromwhere.$sql3;
 				$ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pagen->BlockStartIndex());
 				$linecount=$ergebnis->RecordCount();
@@ -243,7 +243,7 @@ class GuiSearchPerson {
 				$ergebnis=$person->SearchSelect($searchkey,$pagen->MaxCount(),$pagen->BlockStartIndex(),$oitem,$odir,$firstname_too);
 				#Retrieve the sql fromwhere portion
 				$fromwhere=$person->buffer;
-				$HTTP_SESSION_VARS['sess_searchkey']=$fromwhere;
+				$_SESSION['sess_searchkey']=$fromwhere;
 				$sql=$person->getLastQuery();
 				$linecount=$person->LastRecordCount();
 			}

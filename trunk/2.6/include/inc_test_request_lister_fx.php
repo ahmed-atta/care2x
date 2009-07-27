@@ -75,7 +75,6 @@ if($tracker>1)
 <a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker-1); ?>"><img <?php echo createComIcon($root_path,'uparrowgrnlrg.gif','0','left',TRUE) ?> alt="<?php echo $LDPrevRequest ?>"></a>
 <?php
 }
-//mizuko : kjo asht kur kam shume analiza...bamja e listes
 if($tracker<$batchrows)
 {
    $requests->Move($tracker);

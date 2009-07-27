@@ -25,12 +25,13 @@ $cookie_2level=array('ck_cafenews_user',
 								 'ck_pflege_user',
 								 'currentuser',
 								 'ck_op_dienstplan_user',
-								 'ck_radio_user'
+								 'ck_radio_user',
+								 'ck_supplier_db_user'
 								 );
 								 
 for($i=0;$i<sizeof($cookie_2level); $i++)
 {
-	if(!empty($HTTP_COOKIE_VARS[$cookie_2level[$i].$sid])) setcookie($cookie_2level[$i].$sid,'',0,'/');
-	//if(isset($HTTP_COOKIE_VARS[$cookie_2level[$i].$sid])) setcookie($cookie_2level[$i].$sid);
+	if(!empty($_COOKIE[$cookie_2level[$i].$sid])) setcookie($cookie_2level[$i].$sid,'',0,'/');
+	//if(isset($_COOKIE[$cookie_2level[$i].$sid])) setcookie($cookie_2level[$i].$sid);
 } 
 ?>

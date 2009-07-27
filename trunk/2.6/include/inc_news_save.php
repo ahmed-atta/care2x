@@ -22,7 +22,7 @@ if (!isset($category)) $category=1;
 # Clean the title
 require($root_path.'include/inc_newstitle_clean.php');
 # Check if the uploaded image file is valid
-$is_pic=@$img_obj->isValidUploadedImage($HTTP_POST_FILES['pic']);
+$is_pic=@$img_obj->isValidUploadedImage($_FILES['pic']);
 # Retrieve the filename extension
 $picext=@$img_obj->UploadedImageMimeType();
 
@@ -52,7 +52,7 @@ if($news_nr = $newsobj->saveNews($dept_nr,$news)) {
 	        else $news_fotos_path = $root_path.$GLOBALCONFIG['news_fotos_path']; 
 				
 	    $picfilename="$news_nr.$picext";
-        $img_obj->saveUploadedImage($HTTP_POST_FILES['pic'],$news_fotos_path,$picfilename);
+        $img_obj->saveUploadedImage($_FILES['pic'],$news_fotos_path,$picfilename);
 	}
 	header('Location: '.$fileforward.URL_REDIRECT_APPEND.'&nr='.$news_nr.'&mode=preview4saved'); exit;
 }else{
