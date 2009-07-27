@@ -13,10 +13,10 @@ require($root_path.'include/inc_css_a_sublinker_d.php');
 require_once($root_path."include/care_api_classes/MenuVisibility.php");
 require_once($root_path."include/care_api_classes/StringPermissionParser.php");
 
-$sqlPermissions = "SELECT permission FROM care_users WHERE login_id = '".$HTTP_SESSION_VARS['sess_login_username']."'";
+$sqlPermissions = "SELECT permission FROM care_users WHERE login_id = '".$_SESSION['sess_login_username']."'";
 $resultPermissions = $db->Execute($sqlPermissions);
 if ($resultPermissions->RecordCount()==0) {
-	$sqlPermissions = "SELECT permission FROM care_users WHERE name = '".$HTTP_SESSION_VARS['sess_login_username']."'";
+	$sqlPermissions = "SELECT permission FROM care_users WHERE name = '".$_SESSION['sess_login_username']."'";
 	$resultPermissions = $db->Execute($sqlPermissions);
 }
 $permissionRow = $resultPermissions->FetchRow();
@@ -41,7 +41,7 @@ if($result){
 	$tp =&$TP_obj->load('tp_main_index_menu_item.htm');
 	while($menu=$result->FetchRow()){
 		if (eregi('LDLogin',$menu['LD_var'])){
-			if ($HTTP_COOKIE_VARS['ck_login_logged'.$sid]=='true'){
+			if ($_COOKIE['ck_login_logged'.$sid]=='true'){
 				$menu['url']='main/logout_confirm.php';
 				$menu['LD_var']='LDLogout';
 			}
