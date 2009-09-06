@@ -1,4 +1,9 @@
 <?php
+
+/*
+ What is the use of this file ? Comments are required here
+ Added by Frank Tilugulilwa @ University Computing Center Ltd 20090906
+*/
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require('include/inc_environment_global.php');
