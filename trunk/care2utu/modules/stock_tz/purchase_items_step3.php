@@ -28,7 +28,7 @@ if($todo=="proceed")
 		if(strstr($x,'amount_'))
 			$_SESSION['items'][substr($x,7)] = $v;
 	}
-	header("Location: purchase_items_step4.php");
+	header("location: purchase_items_step4.php");
 }
 else
 {

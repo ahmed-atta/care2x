@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 
 define('FILE_DISCRIM','.dcm'); # define here the file discrimator string 
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $returnfile=$_SESSION['sess_file_return'];
 
@@ -41,15 +41,15 @@ if(!isset($mode)){
 		{
 		   $picfile='f'.$i;
 		   # Check the image, use 'dcm' as discriminator
-		   if($img->isValidUploadedImage($HTTP_POST_FILES[$picfile],'dcm'))
+		   if($img->isValidUploadedImage($_FILES[$picfile],'dcm'))
 		   {
 				//$data['mime_type']=$picext;
 				# Hard code image type to "dicom"
 				$data=array('pid'=>$pid,
-									'encounter_nr'=>$HTTP_POST_VARS['encounter_nr'],
-									'doc_ref_ids'=>$HTTP_POST_VARS['doc_ref_ids'],
+									'encounter_nr'=>$_POST['encounter_nr'],
+									'doc_ref_ids'=>$_POST['doc_ref_ids'],
 									'img_type'=>'dicom',
-									'notes'=>$HTTP_POST_VARS['notes'],
+									'notes'=>$_POST['notes'],
 									'upload_date'=>date('Y-m-d'),
 									'history'=>"Upload ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n",
 									'create_id'=>$_SESSION['sess_user_name'],
@@ -75,9 +75,9 @@ if(!isset($mode)){
 					# to simplify sorting of the filenames according to order of upload
 					$prep=1000+$icount;
 					
-					$picfilename=$prep.'_'.$HTTP_POST_FILES[$picfile]['name'];
+					$picfilename=$prep.'_'.$_FILES[$picfile]['name'];
 					
-		      		//echo $HTTP_POST_FILES[$picfile]['name'].' <img '.createComIcon($root_path,'fwd.gif','0','absmiddle').'> ';
+		      		//echo $_FILES[$picfile]['name'].' <img '.createComIcon($root_path,'fwd.gif','0','absmiddle').'> ';
 					# Echo for debugging
 					//echo $picfilename.'<br>';
 					
@@ -117,7 +117,7 @@ if(!isset($mode)){
 					$dir_path=$imgdir.'/';										
 
 					# Save the uploaded image
-					if($img->saveUploadedImage($HTTP_POST_FILES[$picfile],$dir_path,$picfilename)){
+					if($img->saveUploadedImage($_FILES[$picfile],$dir_path,$picfilename)){
 						# Increse internal count
 						$icount++;
 					}

@@ -26,7 +26,7 @@ $_SESSION['sess_file_return']=basename(__FILE__);
 
 //$db->debug=1;
 
-if(!isset($HTTP_COOKIE_VARS['ck_login_username'.$sid])) $HTTP_COOKIE_VARS['ck_login_username'.$sid]='';
+if(!isset($_COOKIE['ck_login_username'.$sid])) $_COOKIE['ck_login_username'.$sid]='';
 
 if(!isset($dept)) $dept='';
 
@@ -71,7 +71,7 @@ if(isset($job)&&!empty($job)) {
         $db->BeginTrans();
         $ok=$db->Execute($sql);
         if($ok && $db->CommitTrans()) {
-            header("Location: technik-reparatur-empfang.php".URL_REDIRECT_APPEND."&repair=ask&dept=$dept&reporter=$reporter&tdate=$tdate&ttime=$ttime"); exit;
+            header("location: technik-reparatur-empfang.php".URL_REDIRECT_APPEND."&repair=ask&dept=$dept&reporter=$reporter&tdate=$tdate&ttime=$ttime"); exit;
         } else {
             $db->RollbackTrans();
             echo "<p>".$sql."$LDDbNoSave<br>"; 

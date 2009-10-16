@@ -38,8 +38,8 @@ if($mode){
 			case 'create':
 			//$db->debug=1;
 				/* check if ward already exists */
-								if(!$ward->IDExists($ward_id)){
-									if($ergebnis=$ward->saveWard($HTTP_POST_VARS)){
+								if(!$ward->IDExists($ward_id)){				
+									if($ergebnis=$ward->saveWard($_POST)){
 										if($dbtype=='mysql'){
 											$ward_nr=$db->Insert_ID();
 										}else{
@@ -94,7 +94,7 @@ div.pcont{ margin-left: 3; }
 </style>
 
 <script language="javascript">
-<!--
+<!-- 
 
 function check(d)
 {
@@ -103,7 +103,7 @@ function check(d)
 		alert("<?php echo $LDAlertIncomplete ?>");
 		return false;
 	}
-	if(parseInt(d.room_nr_start.value)>parseInt(d.room_nr_end.value))
+	if(parseInt(d.room_nr_start.value)>=parseInt(d.room_nr_end.value)) 
 	{
 		alert("<?php echo $LDAlertRoomNr ?>");
 		return false;
@@ -154,7 +154,7 @@ $sTemp = '<select name="dept_nr">
 
 if($depts&&is_array($depts)){
 	while(list($x,$v)=each($depts)){
-		$sTemp = $sTemp.'
+		$sTemp = $sTemp.'	
 		<option value="'.$v['nr'].'"';
 		if($v['nr']==$dept_nr) $sTemp = $sTemp.' selected';
 		$sTemp = $sTemp.'>';

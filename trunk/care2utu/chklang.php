@@ -1,5 +1,5 @@
 <?php
-/* $Id: chklang.php,v 1.1 2006/01/13 13:19:15 irroal Exp $ */
+/* $Id: chklang.php,v 1.4 2009/07/13 16:57:17 timschofield Exp $ */
 
 /**
  * phpMyAdmin Language Loading File - lolo@phpheaven.net 01may2001
@@ -43,7 +43,7 @@ $available_languages = array(
   'cs-win1250' => array('cs|czech', 'czech-win1250'),
   'da'         => array('da|danish', 'danish'),
   'de'         => array('de([-_][[:alpha:]]{2})?|german', 'german'),
-  'en'         => array('en([-_][[:alpha:]]{2})?|english',  'english'),
+  'en'         => array('en([-_][[:alpha:]]{2})?|english', 'english'),
   'es'         => array('es([-_][[:alpha:]]{2})?|spanish', 'spanish'),
    'fa'         => array('fa|Farsi', 'farsi'),
   'fr'         => array('fr([-_][[:alpha:]]{2})?|french', 'french'),
@@ -100,22 +100,22 @@ if (!defined('__PMA_LANG_DETECT__')) {
 
 } // end if
 
-
+$lang='en';
 /**
  * Get some global variables if 'register_globals' is set to 'off'
  */
-if (!empty($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']))
-    $HTTP_ACCEPT_LANGUAGE = $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE'];
-if (!empty($HTTP_SERVER_VARS['HTTP_USER_AGENT']))
-    $HTTP_USER_AGENT = $HTTP_SERVER_VARS['HTTP_USER_AGENT'];
+// if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+//    $HTTP_ACCEPT_LANGUAGE = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+// if (!empty($_SERVER['HTTP_USER_AGENT']))
+//   $HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
 if (!isset($lang)) {
-    if (isset($HTTP_GET_VARS) && !empty($HTTP_GET_VARS['lang'])) {
-        $lang = $HTTP_GET_VARS['lang'];
+//    if (isset($_GET) && !empty($_GET['lang'])) {
+        $lang = $_GET['lang'];
     }
-    if (isset($HTTP_POST_VARS) && !empty($HTTP_POST_VARS['lang'])) {
-        $lang = $HTTP_POST_VARS['lang'];
-    }
-}
+//    if (isset($_POST) && !empty($_POST['lang'])) {
+//        $lang = $_POST['lang'];
+//    }
+//}
 
 
 /**
@@ -134,8 +134,8 @@ if (!empty($lang) && empty($available_languages[$lang])) {
 // Language is not defined yet :
 // 1. try to findout users language by checking it's HTTP_ACCEPT_LANGUAGE
 //    variable
-if (empty($lang) && !empty($HTTP_ACCEPT_LANGUAGE)) {
-    $accepted    = explode(',', $HTTP_ACCEPT_LANGUAGE);
+if ((empty($lang)) && !empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+    $accepted    = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
     $acceptedCnt = count($accepted);
     reset($accepted);
     for ($i = 0; $i < $acceptedCnt && empty($lang); $i++) { 
@@ -143,8 +143,8 @@ if (empty($lang) && !empty($HTTP_ACCEPT_LANGUAGE)) {
     }
 }
 // 2. try to findout users language by checking it's HTTP_USER_AGENT variable
-if (empty($lang) && !empty($HTTP_USER_AGENT)) {
-    pmaLangDetect($HTTP_USER_AGENT, 2);
+if ((empty($lang)) && !empty($_SERVER['HTTP_USER_AGENT'])) {
+    pmaLangDetect($_SERVER['HTTP_USER_AGENT'], 2);
 }
 
 // 3. Didn't catch any valid lang : we use the default settings

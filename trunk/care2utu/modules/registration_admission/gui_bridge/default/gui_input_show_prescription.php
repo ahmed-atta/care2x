@@ -88,8 +88,6 @@ if ($show=='eye-glasses') {
     }
 
 
-
-
   if ($show=='insert') {
     if (empty($_SESSION['item_array'])) {
       //echo "Taking items from get values...<br>";
@@ -105,6 +103,19 @@ if ($show=='eye-glasses') {
     include('./gui_bridge/default/gui_input_prescription_preselection.php');
   }
 } else {
+
+	if ($prescrServ=="serv")
+	   {
+		$show ="xray";
+	   	echo 'show XRAY activated';
+
+	   }
+	   else
+	   {
+	   	$show="druglist";
+		echo 'show DRUGLIST activated';
+	   }
+
   // first call of descriptions. The value $show is not set in this case.
   include('./gui_bridge/default/gui_input_prescription_preselection.php');
 }

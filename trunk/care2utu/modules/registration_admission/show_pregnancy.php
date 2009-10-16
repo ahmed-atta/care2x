@@ -10,7 +10,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 require_once($root_path.'include/care_api_classes/class_obstetrics.php');
 $obj=new Obstetrics;
 # Point the core data to pregnancy
@@ -30,21 +30,21 @@ if(!isset($mode)){
 	$saved=FALSE;
 
 	# Prepare additional info saving
-	$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-	$HTTP_POST_VARS['modify_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
-	if(empty($HTTP_POST_VARS['delivery_date'])) $HTTP_POST_VARS['delivery_date']=date('Y-m-d');
-		else $HTTP_POST_VARS['delivery_date']=@formatDate2STD($HTTP_POST_VARS['delivery_date'],$date_format);
-	if(empty($HTTP_POST_VARS['delivery_time'])) $HTTP_POST_VARS['delivery_time']=date('H:i:s');
-		else $HTTP_POST_VARS['delivery_time']=@convertTimeToStandard($HTTP_POST_VARS['delivery_time']);
+	$_POST['modify_id']=$_SESSION['sess_user_name'];
+	$_POST['modify_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
+	if(empty($_POST['delivery_date'])) $_POST['delivery_date']=date('Y-m-d');
+		else $_POST['delivery_date']=@formatDate2STD($_POST['delivery_date'],$date_format);
+	if(empty($_POST['delivery_time'])) $_POST['delivery_time']=date('H:i:s');
+		else $_POST['delivery_time']=@convertTimeToStandard($_POST['delivery_time']);
 
-	//if(empty($HTTP_POST_VARS['blood_loss'])) $HTTP_POST_VARS['blood_loss_unit']=0;
+	//if(empty($_POST['blood_loss'])) $_POST['blood_loss_unit']=0;
 		
 
 	if($allow_update){
-		$obj->setWhereCondition('nr='.$HTTP_POST_VARS['rec_nr']);
-		$obj->setDataArray($HTTP_POST_VARS);
+		$obj->setWhereCondition('nr='.$_POST['rec_nr']);
+		$obj->setDataArray($_POST);
 
-		if($obj->updateDataFromInternalArray($HTTP_POST_VARS['rec_nr'])) {
+		if($obj->updateDataFromInternalArray($_POST['rec_nr'])) {
 			$saved=true;
 		}else{
 			echo $obj->getLastQuery()."<br>$LDDbNoUpdate";
@@ -52,12 +52,12 @@ if(!isset($mode)){
 	}else{
 		# Deactivate the old record first if exists
 		if(isset($rec_nr)&&$rec_nr){
-			$obj->deactivatePregnancy($HTTP_POST_VARS['rec_nr']);
+			$obj->deactivatePregnancy($_POST['rec_nr']);
 		}
-		$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
-		$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
-		$HTTP_POST_VARS['create_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
-		$obj->setDataArray($HTTP_POST_VARS);
+		$_POST['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+		$_POST['create_id']=$_SESSION['sess_user_name'];
+		$_POST['create_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
+		$obj->setDataArray($_POST);
 
 		if($obj->insertDataFromInternalArray()) {
 			$saved=true;

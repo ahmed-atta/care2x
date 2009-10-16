@@ -1,6 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_passcheck.php',$PHP_SELF)) 
+if (eregi('inc_passcheck.php',$_SERVER['PHP_SELF'])) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
@@ -68,7 +68,7 @@ $debug=FALSE;
 		if(isset($checkintern)&&$checkintern)
 		{
 			$dec_login = new Crypt_HCEMD5($key_login,'');
-			//$keyword = $dec_login->DecodeMimeSelfRand($HTTP_COOKIE_VARS['ck_login_pw'.$sid]);
+			//$keyword = $dec_login->DecodeMimeSelfRand($_COOKIE['ck_login_pw'.$sid]);
 			$keyword = $dec_login->DecodeMimeSelfRand($_SESSION['sess_login_pw']);
     	}else{
 			$checkintern=false;
@@ -83,7 +83,7 @@ $debug=FALSE;
 				    if(empty($zeile['name'])) $zeile['name']=' ';
 					
 					
-				    logentry($userid,$zeile['name'],"IP:".$REMOTE_ADDR." $lognote ",$thisfile,$fileforward);		
+				    logentry($userid,$zeile['name'],"IP:".$_SERVER['REMOTE_ADDR']." $lognote ",$thisfile,$fileforward);		
 										
 					/**
 					* Init crypt to use 2nd level key and encrypt the sid.
@@ -101,8 +101,9 @@ $debug=FALSE;
 					//setcookie($userck.$sid,$zeile['name']);	
 					//echo $fileforward;
 					$_SESSION['sess_user_name']=$zeile['name'];
-					
+			        		
 					header('Location:'.strtr($fileforward,' ','+').'&checkintern='.$checkintern);
+					
 					exit;					
 				}else {$passtag=2;};
 			}else $passtag=3;

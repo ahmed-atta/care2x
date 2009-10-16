@@ -33,7 +33,7 @@ switch($target)
 				$title=$LDNewData;
 }
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $lognote="OP Logs $title ok";
 

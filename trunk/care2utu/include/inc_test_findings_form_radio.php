@@ -120,9 +120,23 @@ function createInputBlock($param, $value)
 		  ?>
             </div></td>
 			<td align="right"><div class=fva2_ml10><font color="#000099">
-		<?php echo $LDReportingDoc ?>:</font><font color="#000000">
-		<?php createInputBlock('doctor_id',$stored_findings['doctor_id']); ?>
-        &nbsp;&nbsp;
+									<font
+								size=1 face="arial"> <?php echo $LDReportingDoc ?>: <select
+								name="'doctor_id'"><option>===Select a Doctor===</option>
+<?php 
+$sql='select name_first, name_last from care_person left join care_personell on care_person.pid=care_personell.pid where care_personell.job_function_title=17';
+$doctors=$db->Execute($sql);
+while ($doctor_list=$doctors->FetchRow()) {
+	if (($doctor_list[0].' '.$doctor_list[1])==$stored_request['send_doctor']) {
+		echo '<option selected value="'.$doctor_list[0].' '.$doctor_list[1].'">'.$doctor_list[0].' '.$doctor_list[1].'</option>';
+	} else {
+		echo '<option value="'.$doctor_list[0].' '.$doctor_list[1].'">'.$doctor_list[0].' '.$doctor_list[1].'</option>';
+	}
+}
+?>
+								</select>
+							<br>
+		
   </div></td>
 </tr>
 		</table>	

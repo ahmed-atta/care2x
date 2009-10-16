@@ -14,20 +14,20 @@ require($root_path.'include/inc_environment_global.php');
 define('AUTOSHOW_ONERESULT',0);
 
 function Cond($item,$k){
-	global $where,$tab,$HTTP_POST_VARS;
-	if(empty($HTTP_POST_VARS[$item])) return false;
+	global $where,$tab,$_POST;
+	if(empty($_POST[$item])) return false;
 	else{
-		$buf=" $tab.$item LIKE \"".$HTTP_POST_VARS[$item]."%\"";
+		$buf=" $tab.$item LIKE \"".$_POST[$item]."%\"";
 		if(!empty($where)) $where.=' AND '.$buf;
 		 else $where=$buf;
 	}
 }
 	
 function fCond($item,$k){
-	global $orwhere,$tab,$HTTP_POST_VARS;
-	if(empty($HTTP_POST_VARS[$item])) return false;
+	global $orwhere,$tab,$_POST;
+	if(empty($_POST[$item])) return false;
 	else{
-		$buf=" f.class_nr LIKE \"".$HTTP_POST_VARS[$item]."%\"";
+		$buf=" f.class_nr LIKE \"".$_POST[$item]."%\"";
 		if(!empty($orwhere)) $orwhere.=' OR '.$buf;
 		 else $orwhere=$buf;
 	}
@@ -110,7 +110,7 @@ if (isset($mode) && ($mode=='search'))
 	        	if($rows==1){
 		      	 //// If result is single item, display the data immediately 
 			   	$result=$ergebnis->FetchRow();
-			   	header("Location:aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&target=archiv&origin=archiv&encounter_nr=".$result['encounter_nr']);
+			   	header("location:aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&target=archiv&origin=archiv&encounter_nr=".$result['encounter_nr']);
 			   	exit;
 	        	}
 			}
@@ -128,7 +128,7 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient%');
 $glob_obj->getConfig('person%');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile='patient.php';
 $newdata=1;
 $target='archiv';

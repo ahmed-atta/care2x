@@ -15,13 +15,17 @@ define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
-///$db->debug=true;
+//$db->debug=true;
 
 # Create lab object
 require_once($root_path.'include/care_api_classes/class_lab.php');
 $lab_obj=new Lab();
+
+//create a new drugs and services object
+require_once($root_path.'include/care_api_classes/class_tz_drugsandservices.php');
+$das_obj = new DrugsAndServices();
 
 # Load the date formatter */
 function cleanString($wild) {
@@ -30,26 +34,25 @@ function cleanString($wild) {
 
 if(isset($mode) && !empty($mode)) {
 	if($mode=='save'){
-	# Save the nr
-		if(empty($HTTP_POST_VARS['status'])) $HTTP_POST_VARS['status']=' ';
-		$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-		$HTTP_POST_VARS['id'] = "_" . cleanString(strtolower($HTTP_POST_VARS['name'])) . '__' . strtolower($HTTP_POST_VARS['group_id']);
-		$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
+		# Save the nr
+		if(empty($_POST['status'])) $_POST['status']=' ';
+		$_POST['modify_id']=$_SESSION['sess_user_name'];
+		$_POST['id'] = "_" . cleanString(strtolower($_POST['name'])) . '__' . strtolower($_POST['group_id']);
+		$_POST['history']=$lab_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
 		# Set to use the test params
 		$lab_obj->useTestParams();
 		# Point to the data array
-		$lab_obj->setDataArray($HTTP_POST_VARS);
-		
-		if($lab_obj->updateDataFromInternalArray($HTTP_POST_VARS['nr'])){
-			if($lab_obj->deleteParamType($HTTP_POST_VARS['id'])) {
-				if(!empty($HTTP_POST_VARS['field_type']) && !empty($HTTP_POST_VARS['input_value'])) {
+		$lab_obj->setDataArray($_POST);
+		if($lab_obj->updateDataFromInternalArray($_POST['nr'])){
+			if($lab_obj->deleteParamType($_POST['id'])) {
+				if(!empty($_POST['field_type']) && !empty($_POST['input_value'])) {
 					//i'm dealing with a drop down
-					if($HTTP_POST_VARS['field_type'] == 'drop_down') {
-						$value_type = explode(";",$HTTP_POST_VARS['input_value']);
+					if($_POST['field_type'] == 'drop_down') {
+						$value_type = explode(";",$_POST['input_value']);
 						$lab_obj->useTestParamsType();
 						foreach($value_type as $arrNr => $value) {
 							$tmp_array['input_value'] 	= $value;
-							$tmp_array['param_id'] 		= $HTTP_POST_VARS['id'];
+							$tmp_array['param_id'] 		= $_POST['id'];
 							$lab_obj->insertDataFromArray($tmp_array);
 					
 						}
@@ -57,8 +60,8 @@ if(isset($mode) && !empty($mode)) {
 					} else {
 						$lab_obj->useTestParamsType();
 						$paramValue = array (
-							'param_id' 		=> $HTTP_POST_VARS['id'],
-							'input_value'	=> $HTTP_POST_VARS['input_value']
+							'param_id' 		=> $_POST['id'],
+							'input_value'	=> str_replace(",",".",$_POST['input_value'])
 						);
 						$lab_obj->insertDataFromArray($paramValue);
 					}
@@ -83,24 +86,26 @@ if(isset($mode) && !empty($mode)) {
 	if($mode == 'savenew') {
 		# Save the nr	
 
-		if(empty($HTTP_POST_VARS['status'])) $HTTP_POST_VARS['status']=' ';
+		if(empty($_POST['status'])) $_POST['status']=' ';
 		//gjergji : used to generate user proof param id's :)
-		$HTTP_POST_VARS['id'] = "_" . cleanString(strtolower($HTTP_POST_VARS['name'])) . '__' . strtolower($HTTP_POST_VARS['group_id']);
-		$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-		$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Created ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
+		$_POST['id'] = "_" . cleanString(strtolower($_POST['name'])) . '__' . strtolower($_POST['group_id']);
+		$_POST['modify_id']=$_SESSION['sess_user_name'];
+		$_POST['history']=$lab_obj->ConcatHistory("Created ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
 		# Set to use the test params
 		$lab_obj->useTestParams();
 		# Point to the data array
-		$lab_obj->setDataArray($HTTP_POST_VARS);	
+		$lab_obj->setDataArray($_POST);	
 		if($lab_obj->insertDataFromInternalArray()){
-			if(!empty($HTTP_POST_VARS['field_type']) && !empty($HTTP_POST_VARS['input_value'])) {
+			//gjergji:insert the drugs and services item
+			$das_obj->insertLabTest($_POST);
+			if(!empty($_POST['field_type']) && !empty($_POST['input_value'])) {
 				//i'm dealing with a drop down
-				if($HTTP_POST_VARS['field_type'] == 'drop_down') {
-					$value_type = explode(";",$HTTP_POST_VARS['input_value']);
+				if($_POST['field_type'] == 'drop_down') {
+					$value_type = explode(";",$_POST['input_value']);
 					$lab_obj->useTestParamsType();
 					foreach($value_type as $arrNr => $value) {
 						$tmp_array['input_value'] 	= $value;
-						$tmp_array['param_id'] 		= $HTTP_POST_VARS['id'];
+						$tmp_array['param_id'] 		= $_POST['id'];
 						$lab_obj->insertDataFromArray($tmp_array);
 				
 					}
@@ -108,8 +113,8 @@ if(isset($mode) && !empty($mode)) {
 				} else {
 					$lab_obj->useTestParamsType();
 					$paramValue = array (
-						'param_id' 		=> $HTTP_POST_VARS['id'],
-						'input_value'	=> $HTTP_POST_VARS['input_value']
+						'param_id' 		=> $_POST['id'],
+						'input_value'	=> str_replace(",",".",$_POST['input_value'])
 					);
 					$lab_obj->insertDataFromArray($paramValue);
 				}
@@ -189,7 +194,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
  ?>
  </STRONG></FONT>
 </td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab_param_edit.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="javascript:window.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></nobr></td>
+<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('lab_param_edit.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?>></img></a><a href="javascript:window.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?>></img></a></nobr></td>
 </tr>
 <tr align="center">
 <td  bgcolor=#dde1ec colspan=2>

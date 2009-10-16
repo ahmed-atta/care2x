@@ -31,7 +31,7 @@ $LDFuzzySearch='fuzzy search';
 $LDSearchFor='Search for:';
 
 $LDPID='PID';
-$LDHospitalFileNr='Hospital file nr';
+$LDHospitalFileNr='Hospital file NR';
 $LDLastName='Last name';
 $LDFirstName='First name';
 $LDBirth='Birth';

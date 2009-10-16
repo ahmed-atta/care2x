@@ -21,7 +21,7 @@ $insurance_tz = New Insurance_tz();
 require_once($root_path.'include/care_api_classes/class_person.php');
 $person_obj = New Person();
 require_once($root_path.'include/care_api_classes/class_tz_insurance_reports.php');
-$insurance_tz_report = new Insurance_Reports_tz();
+$insurance_tz_report = New Insurance_Reports_tz();
 
 
 

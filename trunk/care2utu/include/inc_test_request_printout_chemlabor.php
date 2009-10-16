@@ -29,21 +29,35 @@
 /* Patient label */
  if($read_form) {
 echo '
-					<td width=25%>
+					<td width=20%>';
+					if ($urgency==0) {
+						echo '<font color="green"><b>NORMAL';
+					}
+					if ($urgency==3) {
+						echo '<font color="blue"><b>PRIORITY';
+					}
+					if ($urgency==5) {
+						echo '<font color="orange"><b>URGENT';
+					}
+					if ($urgency==7) {
+						echo '<font color="red"><b>EMERGENCY';
+					}
+					echo '</td>';
+echo'<td width=20%>
 					<font color="purple">'.$LDSelianFileNr.'
 						<font color="#ffffee" class="vi_data"><b>'.$h_selian_file_number.'
 					</td>
-					<td width="25%">
+					<td width="20%">
 					<font color="purple">'.$LDPatientID.'
 						<font color="#ffffee" class="vi_data"><b>'.$h_pid.'
 					</td>
-					<td width="25%">
+					<td width="20%">
 							<font color="purple">'.$LDSurnameUkoo.'
 					 	<font color="#ffffee" class="vi_data"><b>
 						'.$h_name_last.'</b>
 					</td>
 
-					<td width="25%">
+					<td width="20%">
 					<font color="purple">'.$LDFirstName.'
 					<font color="#ffffee" class="vi_data"><b>
 						'.$h_name_first.' </b>

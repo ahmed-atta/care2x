@@ -58,7 +58,7 @@ if($bPastDateError) echo '<font class="warnprompt">'.$LDInvalidDate.' '.$LDNoPas
      <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDDepartment; ?></td>
      <td>
 	    <select name="to_dept_nr">
-		<option value=""></option>
+		<option value="">===Select a Department===</option>
 	<?php
 		
 		while(list($x,$v)=each($deptarray)){
@@ -77,7 +77,19 @@ if($bPastDateError) echo '<font class="warnprompt">'.$LDInvalidDate.' '.$LDNoPas
    
    <tr bgcolor="#f6f6f6">
      <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDPhysician/$LDClinician"; ?></td>
-     <td><input type="text" name="to_personell_name" size=50 maxlength=60  value="<?php if(isset($to_personell_name)) echo $to_personell_name; ?>"></td>
+     <td><select name="to_personell_name"><option>===Select a Doctor===</option>
+<?php 
+$sql='select name_first, name_last from care_person left join care_personell on care_person.pid=care_personell.pid where care_personell.job_function_title=17';
+$doctors=$db->Execute($sql);
+while ($doctor_list=$doctors->FetchRow()) {
+	if (($doctor_list[0].' '.$doctor_list[1])==$to_personell_name) {
+		echo '<option selected value="'.$doctor_list[0].' '.$doctor_list[1].'">'.$doctor_list[0].' '.$doctor_list[1].'</option>';
+	} else {
+		echo '<option value="'.$doctor_list[0].' '.$doctor_list[1].'">'.$doctor_list[0].' '.$doctor_list[1].'</option>';
+	}
+}
+?>
+</select></td>
    </tr>
 
    <tr bgcolor="#f6f6f6">

@@ -775,7 +775,12 @@ function DisplayDentalPrepaidFinancialTableHead(){
 				$row['module']='-';
 			}
 
-			$table.='<td>'.$row['time'].'</td><td>'.$row['module'].'</td><td>'.$row['module_id'].'</td><td>'.$row['refering_module'].'</td><td>'.$row['action'].'</td><td>'.$row['old_value'].'</td><td>'.$row['new_value'].'</td><td>'.$row['value_type'].'</td><td>'.$row['comment_user'].'</td><td>'.$row['session_user'].'</td></tr>';
+			if ($row['old_value']=='')
+				$oldVal = '&nbsp;';
+			else
+				$oldVal = $row['old_value'];
+
+			$table.='<td>'.$row['time'].'</td><td>'.$row['module'].'</td><td>'.$row['module_id'].'</td><td>'.$row['refering_module'].'</td><td>'.$row['action'].'</td><td>'.$oldVal.'</td><td>'.$row['new_value'].'</td><td>'.$row['value_type'].'</td><td>'.$row['comment_user'].'</td><td>'.$row['session_user'].'</td></tr>';
 
 		}
 		};
@@ -1476,6 +1481,8 @@ function _get_dental_prepaid_amount_of($start_timeframe,$day,$insuranceid,$filte
 				  care_tz_billing_archive_elem.is_comment,
 				  care_tz_billing_archive_elem.is_paid,
 				  care_tz_billing_archive_elem.amount,
+				  care_tz_billing_archive_elem.times_per_day,
+				  care_tz_billing_archive_elem.days,
 				  care_tz_billing_archive_elem.price,
 				  care_tz_billing_archive_elem.description,
 				  care_tz_drugsandservices.purchasing_class,
@@ -2227,10 +2234,10 @@ function DisplayTBBillingTestSummary($start_timeframe, $end_timeframe){
 
 	function _GetSumOfAmoutDrugs($item_number) {
 		global $db;
-		$sql="SELECT SUM(amount) as RetVal FROM tmp_billing_master WHERE item_number='".$item_number."'";
+		$sql="SELECT SUM(amount) as RetVal, times_per_day, days FROM tmp_billing_master WHERE item_number='".$item_number."'";
 		$res_ptr=$db->Execute($sql);
 		$res_row=$res_ptr->FetchRow();
-		return $res_row['RetVal'];
+		return ($res_row['RetVal']*$res_row['times_per_day']*$res_row['days']);
 	}
 
 	function _GetTotalSumOfCostsDrugs() {
@@ -2270,7 +2277,7 @@ function DisplayTBBillingTestSummary($start_timeframe, $end_timeframe){
 
 		$this->_Create_financial_tmp_master_table($start_timeframe,$end_timeframe);
 		echo "Looking for Pharmacy Reports by time range: starttime: ".date("d.m.y :: G:i:s",$start_timeframe)." endtime: ".date("d.m.y :: G:i:s",$end_timeframe)."<br><br><br>";
-		$sql="SELECT item_number, description, price FROM tmp_billing_master WHERE purchasing_class='drug_list' GROUP BY item_number, price";
+		$sql="SELECT item_number, description, price, times_per_day, days FROM tmp_billing_master WHERE purchasing_class='drug_list' GROUP BY item_number, price";
 		$rs_ptr=$db->Execute($sql);
 		$table="";
 		if ($res_array = $rs_ptr->GetArray()) {
@@ -2414,12 +2421,20 @@ function DisplayTBBillingTestSummary($start_timeframe, $end_timeframe){
 					inner join care_encounter c on b.encounter_nr = c.encounter_nr WHERE a.date_change>='".$start_timeframe."' AND a.date_change<='".$end_timeframe."' and a.is_transmit2ERP=0";
   		$patient=$db->Execute($sql);
 
-  		while($row=$patient->FetchRow())
-  		{
-	  		echo '<tr>';
-			echo '<td>'.$row[nr].'</td><td>'.$row[pid].'</td><td>'.date("Y-m-d G:i:s",$row[date_change]).'</td>';
-			echo '</tr>';
-  		}
+		if ($patient->RecordCount()>0)
+	  		while($row=$patient->FetchRow())
+	  		{
+		  		echo '<tr>';
+				echo '<td>'.$row[nr].'</td><td>'.$row[pid].'</td><td>'.date("Y-m-d G:i:s",$row[date_change]).'</td>';
+				echo '</tr>';
+	  		}
+	  	else
+	  		{
+		  		echo '<tr>';
+				echo '<td>&nbsp;</td><td>all transactions submitted to webERP</td><td>&nbsp;</td>';
+				echo '</tr>';
+	  		}
+
   	}
 
   }

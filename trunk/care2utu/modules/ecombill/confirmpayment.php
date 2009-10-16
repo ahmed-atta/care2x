@@ -166,7 +166,7 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
  	<tr bgColor="#eeeeee">
 	   <td align="left" height="37" width="7738"><font size="4" color="#FF0000">&nbsp;<?php echo $LDModeofPayment; ?>:</font></td>
 	   <?php
-	      if(strstr(getenv('QUERY_STRING'),"mode1")!="")
+	      if(strstr($_SERVER['QUERY_STRING'],"mode1")!="")
 	      {
 		  echo "<tr bgColor=\"#eeeeee\">";
 		  echo "<td align=\"center\" height=\"7\" width=\"3182\">";
@@ -179,7 +179,7 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
 	  ?>
   </td></tr>
   <?php
-  	if(strstr(getenv('QUERY_STRING'),"mode2")!="")
+  	if(strstr($_SERVER['QUERY_STRING'],"mode2")!="")
   	{
 		echo "<tr bgColor=\"#dddddd\" height=\"1\">";
 		  echo "<td height=\"5\" width=\"7738\">";
@@ -197,7 +197,7 @@ $breakfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='
 	}	
   ?>
   <?php
-	if(strstr(getenv('QUERY_STRING'),"mode3")!="")
+	if(strstr($_SERVER['QUERY_STRING'],"mode3")!="")
 	{
 	  echo "<tr bgColor=\"#dddddd\" height=\"1\"><td height=\"5\" width=\"7738\">";
 	    echo "<img height=\"1\" src=\"pics/hor_bar.bmp\" width=\"5\">";

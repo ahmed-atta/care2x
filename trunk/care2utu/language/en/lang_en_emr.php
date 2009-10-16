@@ -21,7 +21,7 @@ $LDInquiryToDoctor='Inquiry to doctor';
 $LDDoctorDirective='Physician orders';
 $LDProblem='Problems';
 $LDDevelopment='Development';
-$LDAllergy='Allergy';
+$LDAllergy='Allergy emr';
 $LDDietPlan='Diet plan';
 $LDPrintPDFDocAllReport='PDF document of all reports';
 ?>

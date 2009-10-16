@@ -20,7 +20,7 @@ $DRG_obj=new DRG($pn); // Create a drg object
 //$db->debug=1;
 
 $toggle=0;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 if(isset($mode)&&!empty($mode)){
 	$saved_header="location:$thisfile?sid=$sid&lang=$lang&pn=$pn&edit=$edit&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&group_nr=$group_nr&dept_nr=$dept_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=$display&newsave=1";

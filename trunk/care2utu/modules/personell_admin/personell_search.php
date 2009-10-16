@@ -30,9 +30,9 @@ if(isset($fwd_nr)&&$fwd_nr){
 	# Translate *? wildcards	
 	$searchkey=strtr($searchkey,'*?','%_');
 }
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $toggle=0;
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
  /* Set color values for the search mask */
 $searchmask_bgcolor='#f3f3f3';
@@ -356,7 +356,7 @@ if($mode=='search'||$mode=='paginate'){
                         echo '</td>
 					    <td align=right>&nbsp; &nbsp;'.$zeile['addr_zip'].'</td>';	
 
-					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
+					    if($_COOKIE[$local_user.$sid]) echo '
 						<td>&nbsp;
 							<a href="personell_register_show.php'.URL_APPEND.'&from=such&personell_nr='.$zeile['nr'].'&target=personell_search">
 							<img '.$img_options.' alt="'.$LDShowData.'"></a>&nbsp;';

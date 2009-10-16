@@ -45,7 +45,7 @@ function getMailNum($element_name,$username)
 /**
 * Set some initial values
 */
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 if(!isset($folder)) $folder='inbox';
 if(!isset($mode)) $mode='';
@@ -97,7 +97,7 @@ if(in_array($mode,$modetypes))
 							 ) 
 						VALUES (
 							'$recipient',
-							'".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+							'".$_COOKIE[$local_user.$sid]."',
 							'$REMOTE_ADDR',
 							'$cc', 
 							'$bcc', 
@@ -105,7 +105,7 @@ if(in_array($mode,$modetypes))
 							'".htmlspecialchars($body_txt)."',
 							'',
 							'$ack', 
-							'".$HTTP_COOKIE_VARS[$local_user.$sid]."', 
+							'".$_COOKIE[$local_user.$sid]."', 
 							'', 
 							'', 
 							'0', 
@@ -128,7 +128,7 @@ if(in_array($mode,$modetypes))
 						//	if($folder=="inbox") $folder="sent";
 							//echo "q ok ".$sql;
 							$dbtable='care_mail_private_users';
-							$sql="SELECT $folder, lastcheck FROM $dbtable WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]. "'";
+							$sql="SELECT $folder, lastcheck FROM $dbtable WHERE email='".$_COOKIE[$local_user.$sid]. "'";
 							if($ergebnis=$db->Execute($sql))
 							{
 								$content=$ergebnis->FetchRow();
@@ -139,7 +139,7 @@ if(in_array($mode,$modetypes))
 									else  $content[$folder].='_'.$buf;
 								if(empty($content['lastcheck'])) $content['lastcheck']='0001-01-01 00:00:00';
 								$sql="UPDATE $dbtable SET $folder='".$content[$folder]."' , lastcheck='".$content['lastcheck']."'
-																WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]. "'";
+																WHERE email='".$_COOKIE[$local_user.$sid]. "'";
 							    $db->BeginTrans();
 						        $ok=$db->Execute($sql);
 						        if($ok&&$db->CommitTrans()) { 
@@ -163,7 +163,7 @@ if(in_array($mode,$modetypes))
 				// set dbtable to users
 				$dbtable='care_mail_private_users';
 				// get the last check timestamp
-				$sql="SELECT $folder, lastcheck FROM $dbtable WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
+				$sql="SELECT $folder, lastcheck FROM $dbtable WHERE email='".$_COOKIE[$local_user.$sid]."'";
 				
 				if($ergebnis=$db->Execute($sql))
 				{ 
@@ -176,9 +176,9 @@ if(in_array($mode,$modetypes))
 						// if last check time stamp found check for  new mails
 						$dbtable='care_mail_private';
 						if(empty($content['lastcheck'])) $content['lastcheck']=DBF_NODATETIME;
-						$sql="SELECT * FROM $dbtable WHERE ( recipient $sql_LIKE '%".$HTTP_COOKIE_VARS[$local_user.$sid]."%'
-																	OR cc $sql_LIKE '%".$HTTP_COOKIE_VARS[$local_user.$sid]."%'
-																	OR bcc $sql_LIKE '%".$HTTP_COOKIE_VARS[$local_user.$sid]."%')
+						$sql="SELECT * FROM $dbtable WHERE ( recipient $sql_LIKE '%".$_COOKIE[$local_user.$sid]."%'
+																	OR cc $sql_LIKE '%".$_COOKIE[$local_user.$sid]."%'
+																	OR bcc $sql_LIKE '%".$_COOKIE[$local_user.$sid]."%')
 																	AND send_stamp > '".$content['lastcheck']."'";
 						//echo $sql;
 						if($ergebnis=$db->Execute($sql))
@@ -198,7 +198,7 @@ if(in_array($mode,$modetypes))
 									
 									$dbtable='care_mail_private_users';
 									
-									$sql="UPDATE $dbtable SET inbox='".$content['inbox']."', lastcheck ='".date('Y-m-d H:i:s')."' WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]. "'";
+									$sql="UPDATE $dbtable SET inbox='".$content['inbox']."', lastcheck ='".date('Y-m-d H:i:s')."' WHERE email='".$_COOKIE[$local_user.$sid]. "'";
 							        $db->BeginTrans();
 						            $ok=$db->Execute($sql);
 						            if($ok) {
@@ -223,7 +223,7 @@ if(in_array($mode,$modetypes))
 				
 				if($folder!='inbox') 
 				 {
-                   $inbnum=getMailNum('inbox',$HTTP_COOKIE_VARS[$local_user.$sid]);
+                   $inbnum=getMailNum('inbox',$_COOKIE[$local_user.$sid]);
                 }
 				else 
 				{ 
@@ -232,15 +232,15 @@ if(in_array($mode,$modetypes))
 				
 				if($folder!='sent') 
 				 {
-	                   $sentnum=getMailNum('sent',$HTTP_COOKIE_VARS[$local_user.$sid]);
+	                   $sentnum=getMailNum('sent',$_COOKIE[$local_user.$sid]);
 			     }
 				if($folder!='drafts') 
 				 {
-	                   $drafnum=getMailNum('drafts',$HTTP_COOKIE_VARS[$local_user.$sid]);
+	                   $drafnum=getMailNum('drafts',$_COOKIE[$local_user.$sid]);
 				}
 				if($folder!='trash') 
 				 {
-	                   $trasnum=getMailNum('trash',$HTTP_COOKIE_VARS[$local_user.$sid]);
+	                   $trasnum=getMailNum('trash',$_COOKIE[$local_user.$sid]);
 				}
 				break;
 			}// end of case listmail
@@ -252,7 +252,7 @@ if(in_array($mode,$modetypes))
 				// set dbtable to users
 				$dbtable='care_mail_private_users';
 				
-				$sql="SELECT addr_quick FROM $dbtable WHERE  email='".$HTTP_COOKIE_VARS[$local_user.$sid]. "'";
+				$sql="SELECT addr_quick FROM $dbtable WHERE  email='".$_COOKIE[$local_user.$sid]. "'";
 
 					if($ergebnis=$db->Execute($sql))
 					{
@@ -446,7 +446,7 @@ function showAll()
 }
 function chgQuickAddr()
 {
-	url="intra-email-chgQaddr.php?sid=<?php echo "$sid&lang=$lang&eadd=".$HTTP_COOKIE_VARS[$local_user.$sid] ?>";
+	url="intra-email-chgQaddr.php?sid=<?php echo "$sid&lang=$lang&eadd=".$_COOKIE[$local_user.$sid] ?>";
 	addrwin=window.open(url,"addrwin","width=600,height=500,menubar=no,resizable=yes,scrollbars=yes");
 }
 <?php endif; ?>
@@ -477,14 +477,14 @@ ob_start();
 	<a href="javascript:gethelp(\'intramail.php\',\'mail\',\''.$mode.'\',\''.$folder.'\',\''.$sendok.'\')">'.$LDHelp.'</a>| 
 	<a href="intra-email-pass.php'.URL_APPEND.'">'.$LDLogout.'</a></b>
   <hr color=#000080>
-   &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'<br>
+   &nbsp; <FONT  color="#800000">'.$_COOKIE[$local_user.$sid].'<br>
 ';
 /*	echo '<a href="intra-email-addrbook.php'.URL_APPEND.'&mode='.$mode.'&folder='.$folder.'">'.$LDAddrBook.'</a> | 
 	<a href="intra-email-options.php'.URL_APPEND.'">'.$LDOptions.'</a> | 
 	<a href="javascript:gethelp(\'intramail.php\',\'mail\',\''.$mode.'\',\''.$folder.'\',\''.$sendok.'\')">'.$LDHelp.'</a>| 
 	<a href="intra-email-pass.php'.URL_APPEND.'">'.$LDLogout.'</a></b>
   <hr color=#000080>
-   &nbsp; <FONT  color="#800000">'.$HTTP_COOKIE_VARS[$local_user.$sid].'</font><br>
+   &nbsp; <FONT  color="#800000">'.$_COOKIE[$local_user.$sid].'</font><br>
 ';
 *//**
 * Compose routine
@@ -567,7 +567,7 @@ echo '
     </tr>';
  /*   <tr>
       <td bgcolor="#f3f3f3" align=right><FONT face="Verdana,Helvetica,Arial" size=2 color="#000080">Anhang:</td>
-      <td  bgcolor="#f3f3f3"><input type="button" name="attach"  value="Einfügen/Aktualisieren" ></td>
+      <td  bgcolor="#f3f3f3"><input type="button" name="attach"  value="Einfï¿½gen/Aktualisieren" ></td>
     </tr>
 */
  		echo'

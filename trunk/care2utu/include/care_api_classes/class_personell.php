@@ -251,7 +251,7 @@ class Personell extends Core {
 					AND (a.date_end='$dbf_nodate' OR a.date_end>='".date('Y-m-d')."')
 					AND a.status NOT IN ($this->dead_stat)
 					AND a.personell_nr=ps.nr
-					AND ps.pid=p.pid .
+					AND ps.pid=p.pid 
 				ORDER BY a.list_frequency DESC";
 
 
@@ -531,10 +531,10 @@ class Personell extends Core {
 		global $db, $sql_LIKE;
 		if(empty($key)) return FALSE;
 		$this->sql="SELECT ps.nr, j.name, p.pid, p.name_last, p.name_first, p.date_birth, p.sex
-				FROM $this->tb AS ps, $this->tb_person AS p,care_db_personell_jobs";
+				FROM $this->tb AS ps, $this->tb_person AS p, care_role_person as j";
 		if(is_numeric($key)){
 			$key=(int)$key;
-			$this->sql.=" WHERE ps.nr = $key AND ps.pid=p.pid";
+			$this->sql.=" WHERE ps.nr = $key AND ps.pid=p.pid AND j.nr=ps.job_function_title";
 		}else{
 			$this->sql.=" WHERE (ps.nr $sql_LIKE '$key%'
 						OR ps.job_function_title $sql_LIKE '$key%'
@@ -622,12 +622,12 @@ class Personell extends Core {
 				    p.name_first, p.date_birth, p.sex, p.addr_str,p.addr_str_nr,p.addr_zip,
 					p.photo_filename,c.item_nr AS phone_pk,c.beruf,c.bereich1,c.bereich2,c.exphone1,c.exphone2,
 					c.funk1,c.funk2,c.inphone1,c.inphone2,c.inphone3,c.roomnr,t.name AS citytown_name
-					FROM $this->tb AS ps,care_personell_jobs j,
+					FROM $this->tb AS ps,care_role_person as j,
 						 $this->tb_person AS p
 						 LEFT JOIN $this->tb_cphone AS c ON c.personell_nr=$nr
 						 LEFT JOIN $this->tb_citytown AS t ON p.addr_citytown_nr=t.nr
 					WHERE
-						ps.nr=$nr AND ps.pid=p.pid AND j.number=ps.job_function_title";
+						ps.nr=$nr AND ps.pid=p.pid AND j.nr=ps.job_function_title";
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->record_count=$this->result->RecordCount()) {
 			    $this->personell_data=$this->result->FetchRow();
@@ -789,7 +789,7 @@ class Personell extends Core {
 
 	function ResetPassword($user_ID, $password_PLAINTEXT) {
 		global $db;
-		$debug=TRUE;
+		$debug=false;
 		($debug) ? $db->debug=true : $db->debug=FALSE;
 
 	 	$sql = "UPDATE $this->tbl_users  SET password = MD5('$password_PLAINTEXT') WHERE login_id='$user_ID'";

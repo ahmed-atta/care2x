@@ -21,7 +21,7 @@ if(!isset($dept_nr)||!$dept_nr){
 	exit;
 }
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile="nursing-or-dienstplan.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath";
 $_SESSION['sess_file_return']=$thisfile;
 

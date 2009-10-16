@@ -11,7 +11,7 @@ require_once($root_path.'global_conf/areas_allow.php');
 $allowedarea=&$allow_area['wards'];
 
 $fileforward="dept_manage.php?sid=".$sid."&lang=".$lang;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile="edv.php?sid=".$sid."&lang=".$lang;
 
 $lognote="$LDNursingManage ok";

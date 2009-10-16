@@ -12,7 +12,7 @@
   		    while($data_result= $global_result->FetchRow())
 			    {
                       
-                     $$data_result['type']=$data_result['value'];				   
+                     $data_result['type']=$data_result['value'];				   
 			     }
 	   		
 			    $global_config_ok=1; 

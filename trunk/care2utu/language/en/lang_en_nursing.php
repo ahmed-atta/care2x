@@ -221,7 +221,7 @@ $LDBackDay='Move back 1 day. (right click to enter any date)';
 $LDFwdDay='Move forward 1 day. (right click to enter any date)';
 $LDClk2PlanDiet='Click to plan the diet for this day';
 
-$LDAllergy='Allergy';
+$LDAllergy='Allergy nursing';
 $LDDiagnosisTherapy='Diagnosis / Therapy';
 $LDBpTemp='Temperature/Blood pressure';
 $LDPtAtgEtc='PT,Atg,etc';
@@ -231,6 +231,7 @@ $LDMedication='Medication';
 $LDIvPort='Intravenous';
 $LDPtAtgEtcTxt='Physical therapy, Anti thrombosis, etc.';
 $LDExtraNotesTxt='Notes, LOT, Charge nr., etc.';
+$LDTaken='taken';
 
 $LDBp='Blood pressure';
 $LDTemp='Temperature';
@@ -402,6 +403,10 @@ $LDFinanceType='Insurance';
 #2003-08-02 EL
 $LDOutToInpatient='Change admission status to inpatient';
 $LDTransferClinic='Transfer to clinic or department';
+
+#2009-01-21 TH from merotech
+$LDTransferWard='Transfer to ward';
+
 $LDClinic='Clinic';
 $LDOwnPatient='This ward\'s patient';
 $LDNonOwnPatient='Not this ward\'s patient';
@@ -418,6 +423,11 @@ $LDPrescriptions='Services';
 $LDNoDiagnosesAvailable='--- NO DIAGNOSIS AVAILABLE ---';
 $LDLastDiagnosis='Last Diagnosis';
 $LDChangeDept='Change of Department';
+
+#2009-01-30 TH from merotech
+$LDShowPrescr='Show prescriptions';
+$LDTimesPerDay='times per day';
+$LDPrescrWithoutServices='Prescriptions';
 
 $LDAdmissionDate='Admission date';
 $LDPatientID='ID';

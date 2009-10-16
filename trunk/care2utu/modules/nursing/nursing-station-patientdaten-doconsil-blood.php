@@ -34,7 +34,7 @@ else
 }
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 //$db->debug=1;
 
@@ -156,7 +156,7 @@ $enc_obj=new Encounter;
 										   phone_nr='".$phone_nr."', 
 										   status='".$status."', 
 										   history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
-										   modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+										   modify_id='".$_COOKIE[$local_user.$sid]."',
 										   modify_time='".date('YmdHis')."'
                                            WHERE batch_nr = '".$batch_nr."'";
 									  							
@@ -241,7 +241,7 @@ $enc_obj=new Encounter;
 
 # Added for the common header top block
 
- $smarty->assign('sToolbarTitle',$LDTestRequestFor.$LDTestType[$target]);
+ $smarty->assign('sToolbarTitle',$LDTestRequestFor.' '.$LDTestType[$target]);
 
  # Prepare start new form button and href
  if($user_origin=='lab' && $edit){
@@ -259,7 +259,7 @@ $enc_obj=new Encounter;
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
- $smarty->assign('sWindowTitle',$LDTestRequestFor.$LDTestType[$target]);
+ $smarty->assign('sWindowTitle',$LDTestRequestFor.' '.$LDTestType[$target]);
 
  # Prepare Body onLoad javascript code
 $sTemp = 'onLoad="if (window.focus) window.focus();';
@@ -430,7 +430,7 @@ if($edit){
           echo "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=180&height=40&xres=2&font=5' border=0>";
 ?>
       </td>
-		<td class=fva2_ml10><div   class=fva2_ml10><font size=3 color="#0000ff"><b><?php  echo $LDTestRequestFor.$LDTestType[$target];  ?></b></font>
+		<td class=fva2_ml10><div   class=fva2_ml10><font size=3 color="#0000ff"><b><?php  echo $LDTestRequestFor.' '.$LDTestType[$target];  ?></b></font>
 		<br>
 		<?php 
 		 
@@ -596,9 +596,24 @@ if($edit){
 		</td>
      </tr>
      <tr>
-       <td align="right"><div class=fva2b_ml10><b><font color="red" face="verdana" size=2>*</font></b><font size=1><?php echo $LDDoctor ?>:&nbsp;</font></div></td>
-       <td><input type="text" name="doctor" size=20 maxlength=20 value="<?php  if($edit_form || $read_form) echo $stored_request['doctor']; ?>"></td>
-     </tr>
+							<td align=right><font
+								size=1 face="arial"> <?php echo $LDRequestingDoc ?>:</font></td><td align=left> <select
+								name="doctor"><option>===Select a Doctor===</option>
+<?php 
+$sql='select name_first, name_last from care_person left join care_personell on care_person.pid=care_personell.pid where care_personell.job_function_title=17';
+$doctors=$db->Execute($sql);
+while ($doctor_list=$doctors->FetchRow()) {
+	if (($doctor_list[0].' '.$doctor_list[1])==$stored_request['send_doctor']) {
+		echo '<option selected value="'.$doctor_list[0].' '.$doctor_list[1].'">'.$doctor_list[0].' '.$doctor_list[1].'</option>';
+	} else {
+		echo '<option value="'.$doctor_list[0].' '.$doctor_list[1].'">'.$doctor_list[0].' '.$doctor_list[1].'</option>';
+	}
+}
+?>
+								</select>
+							<br>
+							</td>
+						</tr>
      <tr>
        <td align="right"><div class=fva2b_ml10><font size=1><?php echo $LDTelephone ?>:&nbsp;</font></div></td>
        <td><input type="text" name="phone_nr" size=20 maxlength=20 value="<?php  if($edit_form || $read_form) echo $stored_request['phone_nr']; ?>"></td>

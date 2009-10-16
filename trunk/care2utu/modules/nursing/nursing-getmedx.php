@@ -15,9 +15,9 @@ define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 //$db->debug=true;
-if(!isset($prescriber)||empty($prescriber)) $prescriber=$HTTP_COOKIE_VARS[$local_user.$sid];
+if(!isset($prescriber)||empty($prescriber)) $prescriber=$_COOKIE[$local_user.$sid];
 
 $title="$LDMedication/$LDDosage";
 $maxelement=5; // set to default maximum nr of elements for entry

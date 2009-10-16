@@ -8,7 +8,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $parsedstr=array();
 $globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 // clean the input data
-$material_nr=strtr($material_nr,"§%&?/\+*~#';:,!$","                ");// convert chars to (15) spaces
+$material_nr=strtr($material_nr,"ï¿½%&?/\+*~#';:,!$","                ");// convert chars to (15) spaces
 $material_nr=trim($material_nr);
 //$material_nr=str_replace(" ","",$material_nr);
 

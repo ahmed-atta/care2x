@@ -75,7 +75,7 @@ function closewin()
 	</tr>
 	<tr>
 		<td height=75>
-			<input type="hidden" name="id" value="<?php echo $this_insurance['id']; ?>"
+			<input type="hidden" name="id" value="<?php echo $this_insurance['id']; ?>">
 			<table border="0" cellpadding="2" cellspacing="0" width="788">
 				<tr bgcolor=ffffaa>
 					<td><?php $insurance_tz->ShowRedIfError(''.$LDCompanyName.'',$error['name']);?>:</td>
@@ -127,8 +127,7 @@ function closewin()
   		</tr>
   	</table>
 			<p>
-			</blockquote>
-		</td>
+			</td>
 	</tr>
 
 		<tr valign=top >
@@ -154,14 +153,11 @@ function openCreditsWindow() {
 
 
  <a href="http://www.care2x.org" target=_new>CARE2X 2nd Generation pre-deployment 2.0.2</a> :: <a href="../../legal_gnu_gpl.htm" target=_new> License</a> ::
- <a href=mailto:info@care2x.org>Contact</???a>  :: <a href="../../language/en/en_privacy.htm" target="pp"> Our Privacy Policy </a> ::
+ <a href=mailto:info@care2x.org>Contact</a>  :: <a href="../../language/en/en_privacy.htm" target="pp"> Our Privacy Policy </a> ::
  <a href="../../docs/show_legal.php?lang=$lang" target="lgl"> Legal </a> ::
  <a href="javascript:openCreditsWindow()"> Credits </a> ::.<br>
 
 </div>
-	    <font size=1 face="verdana,arial">
-	    Page generation time: 0.10928583145142
-	    </font>
     </td>
    <tr>
   </table>
@@ -175,6 +171,5 @@ function openCreditsWindow() {
 	</tbody>
  </table>
 </form>
-<!--   -->
 </BODY>
 </HTML>

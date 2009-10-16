@@ -22,7 +22,7 @@ if ($debug) echo $search_mode."<br>";
 
 $product_obj = new Product();
 if ($mode=="finalize") {
-	header("Location: assignments_step3.php");
+	header("location: assignments_step3.php");
 }
 
 $debug = TRUE;

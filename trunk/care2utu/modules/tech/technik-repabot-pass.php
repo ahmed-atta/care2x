@@ -31,7 +31,7 @@ if ($versand=="Abschicken")
 										setcookie(ck_technik_repabot_user,$zeile[mahopass_name]);	
 										setcookie(ck_technik_repabot_src,"repabotpass");	
 										logentry($zeile[mahopass_name],"*","IP:".$REMOTE_ADDR."Technik Repabot Launch OK'd",$thisfile,$fileforward);
-										header("Location: $fileforward?sid=$sid&stb=1");
+										header("location: $fileforward?sid=$sid&stb=1");
 										exit;
 										}else {$passtag=2;};
 									}else $passtag=3;
@@ -73,7 +73,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
-<td colspan=3><FONT   SIZE=2  FACE="verdana,Arial">Dieser Bereich ist passwortgeschützt!<br></td>
+<td colspan=3><FONT   SIZE=2  FACE="verdana,Arial">Dieser Bereich ist passwortgeschï¿½tzt!<br></td>
 </tr>
 
 <tr>

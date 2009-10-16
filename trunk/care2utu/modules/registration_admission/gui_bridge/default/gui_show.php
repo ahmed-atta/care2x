@@ -6,7 +6,7 @@ $_SESSION['sess_file_return']=$thisfile;
 if (empty($externalcall))
   $breakfile='javascript:window.close()';
 else
-  if($HTTP_COOKIE_VARS["ck_login_logged".$sid])
+  if($_COOKIE["ck_login_logged".$sid])
     $breakfile = $root_path."main/startframe.php".URL_APPEND;
   else
     $breakfile = $breakfile.URL_APPEND."&target=entry";
@@ -16,6 +16,9 @@ elseif($back_path) {
 	$backpath=$back_path; // Just an ugly workaround! Sometimes back_path instead of backpath is used!
 	$breakfile = urldecode($backpath);
 }
+
+$prescrServ = $_GET['prescrServ'];
+
 $debug=FALSE;
 if ($debug) {
 	echo "file: gui_show.php<br>";
@@ -32,7 +35,14 @@ if ($debug) {
 
     echo "breakfile: ".$breakfile."<br>";
 
-    echo "pid:".$pid;
+    echo "pid:".$pid."<br>";
+
+    echo "pn: ".$pn."<br>";
+
+    echo "prescrServ: ".$prescrServ."<br>";
+
+    echo "showHist: ".$showHist."<br>";
+
 }
 # Start Smarty templating here
  /**
@@ -247,16 +257,25 @@ if($mode=='show' /*&& !isset($externalcall) */){
       $smarty->assign('bShowNoRecord',TRUE);
       if (!isset($printout))
         $smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
+        echo 'externalcall: '.$externalcall;
 
       if (!empty($externalcall)) {
         if (!isset($printout)) {
-          $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new&help_site='.$help_site.'&externalcall='.$externalcall.'&backpath='.urlencode($backpath).'"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
+
+        	$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new&help_site='.$help_site.'&externalcall='.$externalcall.'&prescrServ='.$prescrServ.'&backpath='.urlencode($backpath).'"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
         }
       } else
         $smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
 
 
+
+		//History
+		$smarty->assign('sPromptLinkEdit', '<input type=submit value="show history" name="show_history" onclick="javascript:alert(\''.$showHist.'\');"/>');
+
+
+
 		ob_end_clean();
+
 	  $smarty->assign('sOptionBlock',$sTemp);
 
 	}else{
@@ -264,11 +283,11 @@ if($mode=='show' /*&& !isset($externalcall) */){
 
 	        if (!isset($printout)) {
 
-	          	$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new&mode=new&help_site&externalcall='.$externalcall.'&backpath='.urlencode($backpath).'"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
+	          	$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new&prescrServ='.$prescrServ.'&mode=new&help_site&externalcall='.$externalcall.'&backpath='.urlencode($backpath).'"><img '.createComIcon($root_path,'createnew_tz.gif','0' ).' ></a>');
 
 	        } else {
 
-	        	$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new">'.$LDEnterNewRecord.'</a>');
+	        	$smarty->assign('sPromptLink','<a href="'.$thisfile.URL_APPEND.'&disablebuttons='.$disablebuttons.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new&prescrServ='.$prescrServ.'>'.$LDEnterNewRecord.'</a>');
 
 	        }
 
@@ -276,7 +295,9 @@ if($mode=='show' /*&& !isset($externalcall) */){
 
   	  $smarty->assign('bShowNoRecord',TRUE);
 	  $smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>');
+
 	  $smarty->assign('norecordyet',$norecordyet);
+
 	  if($parent_admit && !$is_discharged && $thisfile!='show_diagnostics_result.php'){
 
 	  	  $smarty->assign('sPromptIcon','<img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>');
@@ -296,11 +317,31 @@ if($mode=='show' /*&& !isset($externalcall) */){
 	ob_start();
 	   // witch tab sould be activated at first:
 	   //set here "druglist", "Supplies", "supplies-lab", "special-others" if you want.
-	   $activated_tab = "druglist";
+
+	   //old code:
+	   //$activated_tab = "druglist";
+
+	   if ($prescrServ=="serv")
+	   {
+
+
+		   	if (!isset($show))
+		   		$show = 'xray';
+		   	$activated_tab ="xray";
+
+	   }
+	   else
+	   {
+		   	if (!isset($show))
+		   		$show = 'druglist';
+		   	$activated_tab = "druglist";
+	   }
+
 	   // (by Merotech(RM): Here the main prescription-table-content will be loaded: ;
 		//echo './gui_bridge/default/gui_input_'.$thisfile;
-	  if ($debug) echo  './gui_bridge/default/gui_input_'.$thisfile;
+
 	  include('./gui_bridge/default/gui_input_'.$thisfile);
+
 
 		$sTemp = ob_get_contents();
 	ob_end_clean();

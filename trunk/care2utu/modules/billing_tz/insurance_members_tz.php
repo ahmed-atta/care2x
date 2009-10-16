@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 //define('NO_2LEVEL_CHK',1);
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $debug=FALSE;
 define('LANG_FILE','billing.php');
 $lang_tables[]='aufnahme.php';
@@ -21,7 +21,7 @@ require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 $person_obj = New Person();
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
-$insurance_tz = New Insurance_tz();
+$insurance_tz = New Insurance_tz;
 if($mode=='update')
 {
 

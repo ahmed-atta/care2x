@@ -21,14 +21,14 @@
 * @package care_api
 */
 
-$thisfile = basename($HTTP_SERVER_VARS['PHP_SELF']);
+$thisfile = basename($_SERVER['PHP_SELF']);
 
 class GuiSearchPerson {
 
 	# Default value for the maximum nr of rows per block displayed, define this to the value you wish
 	# In normal cases the value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 	var $max_block_rows =30 ;
-	
+
 	# Set to TRUE if you want to show the option to select  inclusion of the first name in universal searches
 	# This would give the user a chance to shut the search for first names and makes the search faster, but the user has one element more to consider
 	# If set to FALSE the option will be hidden and both last name and first names will be searched, resulting to slower search
@@ -65,7 +65,7 @@ class GuiSearchPerson {
 
 	# Search key buffer
 	var $searchkey='';
-	
+
 	# Optional url parameter to append to target url
 	var $targetappend ='';
 
@@ -77,16 +77,16 @@ class GuiSearchPerson {
 
 	# script parameters buffer
 	var $script_vars = array();
-	
+
 	# Tipps tricks flag
 	var $showtips = TRUE;
-	
+
 	var $closefile='main/startframe.php';
 	var $thisfile ='' ;
 	var $cancelfile = 'main/startframe.php';
 	var $targetfile = '';
 	var $searchfile = '';
-	
+
 	# smarty template
 	var $smarty;
 
@@ -148,14 +148,14 @@ class GuiSearchPerson {
 	*/
 
 	function display($skey=''){
-		global 	$db, $searchkey, $root_path,  $firstname_too, $HTTP_POST_VARS, $HTTP_GET_VARS,
+		global 	$db, $searchkey, $root_path,  $firstname_too,
 				$sid, $lang, $mode,$totalcount, $pgx, $odir, $oitem, $_SESSION,
-				$dbf_nodate,  $user_origin, $parent_admit, $status, $target, $origin;
+				$dbf_nodate,  $user_origin, $parent_admit, $status, $target, $origin; # $HTTP_GET_VARS $HTTP_POST_VARS,
 
 		$this->thisfile = $filename;
 		$this->searchkey = $skey;
 		$this->mode = $mode;
-		
+
 		if(empty($this->targetfile)){
 			$withtarget = FALSE;
 			$navcolspan = 5;
@@ -165,7 +165,7 @@ class GuiSearchPerson {
 		}
 
 		if(!empty($skey)) $searchkey = $skey;
-		
+
 		# Load the language tables
 		$lang_tables =$this->langfile;
 		include($root_path.'include/inc_load_lang_tables.php');
@@ -204,14 +204,14 @@ class GuiSearchPerson {
 		}
 
 		//$db->debug=true;
-			
+
 		if(!defined('SHOW_FIRSTNAME_CONTROLLER')) define('SHOW_FIRSTNAME_CONTROLLER',$this->show_firstname_controller);
 
 		if(SHOW_FIRSTNAME_CONTROLLER){
-			if(isset($HTTP_POST_VARS['firstname_too'])){
-				if($HTTP_POST_VARS['firstname_too']){
+			if(isset($_POST['firstname_too'])){
+				if($_POST['firstname_too']){
 					$firstname_too=1;
-				}elseif($mode=='paginate'&&isset($HTTP_GET_VARS['firstname_too'])&&$HTTP_GET_VARS['firstname_too']){
+				}elseif($mode=='paginate'&&isset($_GET['firstname_too'])&&$_GET['firstname_too']){
 					$firstname_too=1;
 				}
 			}elseif($mode!='search'){
@@ -220,7 +220,7 @@ class GuiSearchPerson {
 
 		}
 		if(($this->mode=='search' || $this->mode=='paginate') && !empty($searchkey)){
-			
+
 			# Translate *? wildcards
 			$searchkey=strtr($searchkey,'*?','%_');
 
@@ -236,7 +236,7 @@ class GuiSearchPerson {
 
 			if($mode=='paginate'){
 				$fromwhere=$_SESSION['sess_searchkey'];
-				$sql='SELECT pid, name_last, name_first, date_birth, selian_pid, sex, death_date, status FROM '.$fromwhere.$sql3;
+				$sql='SELECT pid, name_last, name_first, name_2, date_birth, selian_pid, sex, death_date, status FROM '.$fromwhere.$sql3;
 				$ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pagen->BlockStartIndex());
 				$linecount=$ergebnis->RecordCount();
 			}else{
@@ -292,7 +292,7 @@ class GuiSearchPerson {
 
 
 		##############  Here starts the html output
-		
+
 		# Start Smarty templating here
 		# Create smarty object without initiliazing the GUI (2nd param = FALSE)
 
@@ -394,7 +394,7 @@ class GuiSearchPerson {
 		}
 
 		if ($linecount){
-			
+
 			$this->smarty->assign('bShowResult',TRUE);
 
 			$img_male=createComIcon($root_path,'spm.gif','0');
@@ -403,6 +403,7 @@ class GuiSearchPerson {
 			$this->smarty->assign('LDRegistryNr',$pagen->makeSortLink($LDRegistryNr,'pid',$oitem,$odir,$this->targetappend));
 			$this->smarty->assign('LDSex',$pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$this->targetappend));
 			$this->smarty->assign('LDLastName',$pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$this->targetappend));
+			$this->smarty->assign('LDName2',$pagen->makeSortLink($LDName2,'name_2',$oitem,$odir,$this->targetappend));
 			$this->smarty->assign('LDFirstName',$pagen->makeSortLink($LDFirstName,'name_first',$oitem,$odir,$this->targetappend));
 			$this->smarty->assign('LDBday',$pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$this->targetappend));
 			$this->smarty->assign('LDZipCode',$pagen->makeSortLink($LDFileNr,'selian_pid',$oitem,$odir,$this->targetappend));
@@ -416,7 +417,7 @@ class GuiSearchPerson {
 			$sTemp = '';
 			$toggle=0;
 			while($zeile=$ergebnis->FetchRow()){
-						
+
 				if($zeile['status']=='' || $zeile['status']=='normal'){
 
 					$this->smarty->assign('toggle',$toggle);
@@ -430,13 +431,14 @@ class GuiSearchPerson {
 						default: $this->smarty->assign('sSex','&nbsp;'); break;
 					}
 					$this->smarty->assign('sLastName',ucfirst($zeile['name_last']));
+					$this->smarty->assign('sName2',ucfirst($zeile['name_2']));
 					$this->smarty->assign('sFirstName',ucfirst($zeile['name_first']));
 					#
 					# If person is dead show a black cross
 					#
 					if($zeile['death_date']&&$zeile['death_date']!=$dbf_nodate) $this->smarty->assign('sCrossIcon','<img '.createComIcon($root_path,'blackcross_sm.gif','0','absmiddle').'>');
 						else $this->smarty->assign('sCrossIcon','');
-					
+
 					$this->smarty->assign('sBday',formatDate2Local($zeile['date_birth'],$date_format));
 
 					$this->smarty->assign('sZipCode',$zeile['selian_pid']);
@@ -471,7 +473,7 @@ class GuiSearchPerson {
 		# Add eventual appending text block
 		#
 		if(!empty($this->posttext)) $this->smarty->assign('sPostText',$this->posttext);
-		
+
 		#
 		# Displays the search page
 		#

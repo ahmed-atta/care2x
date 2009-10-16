@@ -32,14 +32,14 @@ if(!isset($delok)||!$delok) {
 
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 //echo $del0;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 //foreach($arg as $v) echo "$v<br>"; //init db parameters
 $dbtable='care_mail_private_users';
 
 $linecount=0;
 $modetypes=array('sendmail','listmail');
 
-							$sql="SELECT $folder, lastcheck FROM $dbtable WHERE  email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
+							$sql="SELECT $folder, lastcheck FROM $dbtable WHERE  email='".$_COOKIE[$local_user.$sid]."'";
 							if($ergebnis=$db->Execute($sql)) 
 							{			
 								if($ergebnis->RecordCount())
@@ -64,7 +64,7 @@ $modetypes=array('sendmail','listmail');
 									}
 									$result[$folder]=implode("_",$inb);
 									$sql="UPDATE $dbtable SET $folder='".$result[$folder]."', lastcheck='".$result['lastcheck']."'
-																		WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
+																		WHERE email='".$_COOKIE[$local_user.$sid]."'";
 
 								    $db->BeginTrans();
 								    $ok=$db->Execute($sql);
@@ -73,7 +73,7 @@ $modetypes=array('sendmail','listmail');
 										// update the recyle folder 
 										if($folder!='trash')
 										{
-											$sql="SELECT trash, lastcheck FROM $dbtable WHERE  email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
+											$sql="SELECT trash, lastcheck FROM $dbtable WHERE  email='".$_COOKIE[$local_user.$sid]."'";
 											if($ergebnis=$db->Execute($sql)) 
 											{			
 												if($ergebnis->RecordCount())
@@ -90,7 +90,7 @@ $modetypes=array('sendmail','listmail');
 														else $result['trash'].="_".$delbuf2."\r\n";
 													}
 													$sql="UPDATE $dbtable SET trash='".$result['trash']."', lastcheck='".$result['lastcheck']."'
-																		WHERE email='".$HTTP_COOKIE_VARS[$local_user.$sid]."'";
+																		WHERE email='".$_COOKIE[$local_user.$sid]."'";
   								                   $db->BeginTrans();
 								                   $ok=$db->Execute($sql);
 								                   if($ok) {

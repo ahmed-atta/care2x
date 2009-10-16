@@ -16,11 +16,14 @@ connector object  has been established by an adodb instance
  */
 class Lab extends Encounter {
 
-	var $tb_req_chemlab = 'care_test_request_chemlabor';
 	/**
-	 * Table name for test findings for chemical lab
-	 * @var string
-	 */
+	* Table name for test requests for chemical lab
+	* @var string
+	*/
+	var $tb_req_chemlab = 'care_test_request_chemlabor';
+	/* Table name for finding test requests for chemical lab*/
+	var $tb_req_chemlab_sub = 'care_test_request_chemlabor_sub';
+	/* Table name for test findings for chemical lab*/
 	var $tb_find_chemlab = 'care_test_findings_chemlab';
 	/**
 	 * Table name for test findings for chemical lab paramters
@@ -129,7 +132,7 @@ class Lab extends Encounter {
 		'median_y',
 		'hi_bound_y',
 		'lo_bound_y',
-		'hi_critica$l_y',
+		'hi_critical_y',
 		'lo_critical_y',
 		'hi_toxic_y',
 		'lo_toxic_y',
@@ -160,6 +163,40 @@ class Lab extends Encounter {
 		'param_id',
 	//	'value_name',
 		'input_value' );
+	/* Field names for care_test_request_chemlab table*/
+	var $fld_req_chemlab = array (
+		'batch_nr',
+		'encounter_nr',
+		'room_nr',
+		'dept_nr',
+		'parameters',
+		'doctor_sign',
+		'high_risk',
+		'notes',
+		'send_date',
+		'sample_time',
+		'sample_week',
+		'status',
+		'history',
+		'bill_nr',
+		'bill_status',
+		'is_disabled',
+		'modify_id',
+		'modify_time',
+		'create_id',
+		'create_time' );
+	 /* Field names for care_test_request_chemlab_sub table*/
+	var $fld_req_chemlab_sub = array (
+		'sub_id',
+		'batch_nr',
+		'encounter_nr',
+		'paramater_name',
+		'parameter_value',
+		'test_date',
+		'test_time',
+		'history',
+		'create_id',
+		'create_time' );
 
 	/**
 	 * Constructor
@@ -259,6 +296,29 @@ class Lab extends Encounter {
 			return FALSE;
 		}
 	}
+	/* Searches for existing laboratory reports for an encounter.
+	 * @access public
+	 * @param int Encounter number
+	 * @return mixed adodb record object or boolean
+	 */
+	function createRequestsList($enc_nr) {
+		global $db;
+
+		$this->sql = "SELECT batch_nr,send_date FROM $this->tb_req_chemlab WHERE
+					encounter_nr='$enc_nr' AND status<>'hidden' ORDER BY batch_nr
+					DESC";
+
+		if ($this->result = $db->Execute ( $this->sql )) {
+			if ($this->rec_count = $this->result->RecordCount ()) {
+				return $this->result;
+			} else {
+				return FALSE;
+			}
+		} else {
+			return FALSE;
+		}
+	}
+	
 	function GetJobsByEncounter($enc_nr) {
 		global $db;
 
@@ -364,7 +424,7 @@ job_id='$job_id' AND group_id='$grp_id' AND status NOT IN
 		$this->sql = "SELECT * FROM $this->tb_find_chemlab INNER JOIN $this->tb_find_chemlab_sub ";
 		$this->sql .= "ON ($this->tb_find_chemlab.job_id = $this->tb_find_chemlab_sub.job_id) ";
 		$this->sql .= "WHERE $this->tb_find_chemlab.batch_nr=$bn";
-		echo $this->sql;
+		//echo $this->sql;
 		if ($this->result = $db->Execute ( $this->sql )) {
 			if ($this->rec_count = $this->result->RecordCount ()) {
 				return $this->result;
@@ -514,6 +574,7 @@ job_id='$job_id' AND group_id='$grp_id' AND status NOT IN
 			$this->sql  = "SELECT * FROM $this->tb_test_param ";
 			$this->sql .= "LEFT JOIN $this->tb_test_param_type ON ( $this->tb_test_param.id = $this->tb_test_param_type.param_id ) ";
 			$this->sql .=" $cond ";
+			//echo 'SQL: '.$this->sql;
 		if ($this->tparamsdetails = $db->Execute ( $this->sql )) {
 			if ($this->rec_count = $this->tparamsdetails->RecordCount ()) {
 				return $this->tparamsdetails;
@@ -607,60 +668,8 @@ id=" . $id . " ORDER BY name";
 		}
 	}
 
-	function InsertParams() {
-		global $db, $HTTP_POST_VARS;
-		// TODO: Make sure that this test will also added to drugsandservices
-		if ($HTTP_POST_VARS ['name'] == 'New parameter')
-			return FALSE;
-		$this->sql = "INSERT INTO $this->tb_test_group (parent, name,
-is_enabled) VALUES
-        (" . $HTTP_POST_VARS ['parameterselect'] . ",
-'" . $HTTP_POST_VARS ['name'] . "',1)";
-		$db->Execute ( $this->sql );
-		$this->sql = "INSERT INTO $this->tb_test_param
-        (`group_id`, `name`, `id`, `msr_unit`, `median`,
-`hi_bound`, `lo_bound`, `hi_critical`, `lo_critical`, `hi_toxic`,
-`lo_toxic`,`add_type`,`add_label`, `status`, `history`,
-`modify_id`, `create_id`, `price`) VALUES
-
-('" . $HTTP_POST_VARS ['parameterselect'] . "','" . $HTTP_POST_VARS ['name'] . "','" . $db->Insert_ID () . "','" . $HTTP_POST_VARS ['msr_unit'] . "','" . $HTTP_POST_VARS ['median'] . "','" . $HTTP_POST_VARS ['hi_bound'] . "','" . $HTTP_POST_VARS ['lo_bound'] . "',
-
-'" . $HTTP_POST_VARS ['hi_critical'] . "','" . $HTTP_POST_VARS ['lo_critical'] . "','" . $HTTP_POST_VARS ['hi_toxic'] . "','" . $HTTP_POST_VARS ['lo_toxic'] . "','radio','Positive','" . $HTTP_POST_VARS ['status'] . "','" . addslashes ( $HTTP_POST_VARS ['history'] ) . "','" . $HTTP_POST_VARS ['modify_id'] . "',
-
-'" . $HTTP_POST_VARS ['create_id'] . "','" . $HTTP_POST_VARS ['price'] . "')";
-
-		$id = $db->Insert_ID ();
-
-		if ($this->tgroups = $db->Execute ( $this->sql )) {
-			// Store test to care_tz_drugsandservices
-
-
-			$sql = "INSERT INTO care_tz_drugsandservices (
-                            `item_number` ,
-                            `is_pediatric` ,
-                            `is_adult` ,
-                            `is_other` ,
-                            `is_consumable` ,
-                            `is_labtest` ,
-                            `item_description` ,
-                            `item_full_description` ,
-                            `unit_price` ,
-                            `unit_price_1` ,
-                            `unit_price_2` ,
-                            `unit_price_3` ,
-                            `purchasing_class` )
-                        VALUES (
-'LAB" . $id . "',0,0,0,0,1,'" . $HTTP_POST_VARS ['name'] . "','" . $HTTP_POST_VARS ['name'] . "',0,0,0,0,'labtest')";
-			$db->Execute ( $sql );
-			return ($db->Insert_ID () > 1) ? TRUE : FALSE;
-		} else {
-			return FALSE;
-		} // End of if($this->tgroups=$db->Execute($this->sql))
-	}
-
 	/**
-	 * Check if at least one laboratory result exists for the
-encounter.
+	 * Check if at least one laboratory result exists for the encounter.
 	 * @access public
 	 * @param int Encounter number
 	 * @return boolean
@@ -835,7 +844,8 @@ the database
 		$param_array = array ();
 		($debug) ? $db->debug = TRUE : $db->debug = FALSE;
 		$this->sql = "SELECT DISTINCT parameters FROM
-care_test_request_chemlabor where batch_nr=" . $batch_nr;
+		$this->tb_req_chemlab where batch_nr=" . $batch_nr;
+
 		$db_obj = $db->Execute ( $this->sql );
 		$row = $db_obj->GetArray ();
 		while ( list ( $u, $v ) = each ( $row ) ) {

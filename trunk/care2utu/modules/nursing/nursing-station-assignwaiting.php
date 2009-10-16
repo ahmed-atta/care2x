@@ -16,7 +16,7 @@ define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-if(empty($HTTP_COOKIE_VARS[$local_user.$sid])){
+if(empty($_COOKIE[$local_user.$sid])){
     $edit=0;
 	include($root_path."language/".$lang."/lang_".$lang."_".LANG_FILE);
 }
@@ -509,8 +509,7 @@ if($ward_ok){
 
 <p>
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
-<p>
-
+<p><a href="<?php echo $root_path.'modules/ambulatory/amb_clinic_discharge.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&ward=1&backpath='.$root_path.'modules/nursing/nursing-station.php'.URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr"?>">discharge</a>
 		</td>
 	</tr>
 </table>

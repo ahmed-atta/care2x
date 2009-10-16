@@ -57,6 +57,14 @@ function printRadioButton($param,$value,$printout=true)
 
 if(!isset($tracker)||!$tracker) $tracker=1;
 
+$sql='SELECT nr, name FROM care_ward';
+$result=$db->Execute($sql);
+echo '<select>';
+while ($ward=$result->FetchRow()) {
+	echo '<option value='.$ward['nr'].'>'.$ward['name'].'</option>';
+}
+echo '</select>';
+
 if($tracker>1)
 {
    $requests->Move($tracker-2);
@@ -64,6 +72,12 @@ if($tracker>1)
    $requests->MoveFirst();
 
 ?>
+<select name=urgency>
+<option value=0>Normal</option>
+<option value=3>Priority</option>
+<option value=5>Urgent</option>
+<option value=7>Emergency</option>
+</select>
 <a href="<?php echo $thisfile.URL_APPEND."&target=".$target."&subtarget=".$subtarget."&pn=".$test_request['encounter_nr']."&batch_nr=".$test_request['batch_nr']."&user_origin=".$user_origin."&tracker=".($tracker-1); ?>"><img <?php echo createComIcon($root_path,'uparrowgrnlrg.gif','0','left',TRUE) ?> alt="<?php echo $LDPrevRequest ?>"></a>
 <?php
 }
@@ -105,7 +119,20 @@ while($test_request=$requests->FetchRow())
 				//}
 				//else
 				//{
+					if ($test_request['priority']==0) {
+						echo '<font size=1 color="green">';						
+					}
+					if ($test_request['priority']==3) {
+						echo '<font size=1 color="blue">';						
+					}
+					if ($test_request['priority']==5) {
+						echo '<font size=1 color="orange">';						
+					}
+					if ($test_request['priority']==7) {
+						echo '<font size=1 color="red">';						
+					}
 					echo $test_request['selian_pid'].'/'.$test_request['name_first']." ".$test_request['name_last'];
+					echo '</font>';
 				}
 			}
 	echo " ".$test_request['room_nr']."</a><br>";

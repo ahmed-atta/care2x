@@ -13,7 +13,7 @@ $local_user='ck_editor_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 /* Set navigation paths for this page*/
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile=$root_path.$_SESSION['sess_file_break'].URL_APPEND;
 
 if($_SESSION['sess_file_return']==$thisfile) $returnfile='start_page.php'.URL_APPEND;

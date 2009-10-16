@@ -22,7 +22,7 @@ $append=URL_REDIRECT_APPEND;
 $fileforward='reporting_main_menu.php'.$append;
 $lognow='Reporting login ok';
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $userck='aufnahme_user';
 //reset cookie;

@@ -70,10 +70,10 @@ if($mode!= ''){
 	     $sql="SELECT * FROM care_menu_main";
 	     $result=$db->Execute($sql);
 
-	     while(list($x,$v)=each($HTTP_POST_VARS))
+	     while(list($x,$v)=each($_POST))
 	     {
            if(!ereg('_a_',$x)) continue;
-           if($HTTP_POST_VARS[$x] != '') $p_areas.=$v.' ';
+           if($_POST[$x] != '') $p_areas.=$v.' ';
 	     }
 
 	     /* If permission area is available, save it */
@@ -112,7 +112,7 @@ if($mode!= ''){
 						 )";
 
 		       } else {
-		            $sql="UPDATE care_users SET permission='$p_areas', modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."'  WHERE login_id='$userid'";
+		            $sql="UPDATE care_users SET permission='$p_areas', modify_id='".$_COOKIE[$local_user.$sid]."'  WHERE login_id='$userid'";
 		       }
 
 			   /* Do the query */
@@ -227,7 +227,7 @@ $gtime=date('H.i');
 if ($gtime<'9.00') echo $LDGoodMorning;
 if (($gtime>'9.00')and($gtime<'18.00')) echo $LDGoodDay;
 if ($gtime>'18.00') echo $LDGoodEvening;
-echo ' '.$HTTP_COOKIE_VARS[$local_user.$sid];
+echo ' '.$_COOKIE[$local_user.$sid];
 }
 ?>
 
@@ -236,7 +236,7 @@ echo ' '.$HTTP_COOKIE_VARS[$local_user.$sid];
 
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
-<INPUT type="submit" name=message value="<?php echo $LDListActual ?>"></font>
+<input type="submit" name=message value="<?php echo $LDListActual ?>">
 
 </FORM>
 <p>
@@ -287,7 +287,7 @@ else { echo $LDName;} ?>
 <input name="username" type="hidden"
 <?php
 	if ($username!="") echo ' value="'.$username.'"><br><b>'.$username.'</b>';
-		else echo '>';
+		else ?> > <?php ;
 
 }else{
 ?>

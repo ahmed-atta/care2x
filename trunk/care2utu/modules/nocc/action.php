@@ -1,6 +1,6 @@
 <?php
 /*
- * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/action.php,v 1.1 2006/01/13 13:39:03 irroal Exp $
+ * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/action.php,v 1.2 2009/01/31 20:06:45 andi Exp $
  *
  * Copyright 2001 Nicolas Chalanset <nicocha@free.fr>
  * Copyright 2001 Olivier Cahagne <cahagn_o@epita.fr>
@@ -50,7 +50,7 @@ switch ($action)
 		require ('html/menu_mail.php');
 		break;
 	case 'logout':
-		header("Location: logout.php?lang=$lang&$php_session=".$$php_session);
+		header("location: logout.php?lang=$lang&$php_session=".$$php_session);
 		break;
 	case 'write':
 		require ('html/menu_inbox.php');

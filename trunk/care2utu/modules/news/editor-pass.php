@@ -44,7 +44,7 @@ $userck="ck_editor_user";
 //$fileforward=$_SESSION['sess_file_editor'].URL_REDIRECT_APPEND;
 //$breakfile=$_SESSION['sess_file_break'].$URL_APPEND;
 
-$thisfile=basename(__FILE__);							
+$thisfile=basename($_SERVER['PHP_SELF']);							
 
 $passtag=0;
 

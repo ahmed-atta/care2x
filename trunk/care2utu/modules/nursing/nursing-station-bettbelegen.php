@@ -279,7 +279,7 @@ if($mode=='search'){
 							echo "&nbsp;".formatDate2Local($row['date_birth'],$date_format);
 	                        echo "</td>";
 
-						    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
+						    if($_COOKIE[$local_user.$sid]) echo '
 							<td><font face=arial size=2>&nbsp;
 								<a href="javascript:belegen(\''.$row['encounter_nr'].'\')">
 								<img '.$img_options.' alt="'.$LDShowData.'"></a>&nbsp;';

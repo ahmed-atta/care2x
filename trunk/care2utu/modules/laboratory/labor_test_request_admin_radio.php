@@ -91,8 +91,10 @@ switch($mode){
 
 /* Get the pending test requests */
 if(!$mode) {
-	$sql="SELECT batch_nr,encounter_nr,send_date,dept_nr FROM care_test_request_".$db_request_table."
-				WHERE status='pending' OR status='received' ORDER BY  send_date DESC";
+	$sql="SELECT care_encounter.pid as selian_pid,name_first,name_last, batch_nr,care_encounter.encounter_nr,send_date,dept_nr FROM care_test_request_".$db_request_table."
+				LEFT JOIN care_encounter ON care_test_request_".$db_request_table.".encounter_nr=care_encounter.encounter_nr
+				LEFT JOIN care_person on care_encounter.pid=care_person.pid
+	WHERE care_test_request_".$db_request_table.".status='pending' OR care_test_request_".$db_request_table.".status='received' ORDER BY  send_date ASC";
 	if($requests=$db->Execute($sql)){
 		$batchrows=$requests->RecordCount();
 	 	if($batchrows && (!isset($batch_nr) || !$batch_nr)){
@@ -349,9 +351,14 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 		<font face="courier" size=2 color="#000099">&nbsp;&nbsp;<?php echo stripslashes($stored_request['clinical_info']) ?></font>
 				</td>
 		</tr>	
+<?php 
+$sql='select item_full_description from care_tz_drugsandservices where item_id='.$stored_request['test_request'];
+$requests=$db->Execute($sql);
+if ($requests) $test_request=$requests->FetchRow();
+?>
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2><div class=fva2_ml10><?php echo $LDReqTest ?>:<p><img src="../../gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
-		<font face="courier" size=2 color="#000099">&nbsp;&nbsp;<?php echo stripslashes($stored_request['test_request']) ?></font>
+		<font face="courier" size=2 color="#000099">&nbsp;&nbsp;<?php echo stripslashes($test_request[0]) ?></font>
 				</td>
 		</tr>	
 
@@ -425,11 +432,29 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 		  	<a href="javascript:show_calendar('form_test_request.results_date','<?php echo $date_format ?>')">
 			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
 
-				  
-  <?php echo $LDReportingDoc ?>
-        <input type="text" name="results_doctor" value="<?php if($read_form && $stored_request['results_doctor']) echo $stored_request['results_doctor']; ?>" size=35 maxlength=35> 
-		</td>
-    </tr>
+
+							<font
+								size=1 face="arial"> <?php echo $LDRequestingDoc ?>:</font> <select
+								name="results_doctor"><option>===Select a Doctor===</option>
+<?php 
+$sql='select name_first, name_last from care_person left join care_personell on care_person.pid=care_personell.pid where care_personell.job_function_title=17';
+$doctors=$db->Execute($sql);
+while ($doctor_list=$doctors->FetchRow()) {
+	if (($doctor_list[0].' '.$doctor_list[1])==$stored_request['send_doctor']) {
+		echo '<option selected value="'.$doctor_list[0].' '.$doctor_list[1].'">'.$doctor_list[0].' '.$doctor_list[1].'</option>';
+	} else {
+		echo '<option value="'.$doctor_list[0].' '.$doctor_list[1].'">'.$doctor_list[0].' '.$doctor_list[1].'</option>';
+	}
+}
+?>
+								</select>
+							<br>
+							</td>
+						</tr>
+
+
+
+
 		</table> 
 		
 

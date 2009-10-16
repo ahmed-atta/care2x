@@ -162,7 +162,7 @@ if($pool=$db->Execute($sql1)){
 			exit;
 		}else{
 
-			header("Location:makeperson.php?max=$totmax&sex=$sex");
+			header("location:makeperson.php?max=$totmax&sex=$sex");
 			exit;
 		}
 	}else{

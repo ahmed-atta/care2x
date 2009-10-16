@@ -22,17 +22,17 @@ if ($debug) echo $search_mode."<br>";
 
 $stock_obj = new Stock_tz();
 if ($task=="pending") {
-	while(list($x,$v) = each($HTTP_POST_VARS))
+	while(list($x,$v) = each($_POST))
 	{
 		if(strstr($x,"trigger"))
 		{
 			
 			$itemid = substr(strrchr($x,"_"),1);
-			if($HTTP_POST_VARS['trigger_'.$itemid]=='receive')
+			if($_POST['trigger_'.$itemid]=='receive')
 			{
 				$stock_obj->transfer_insert_into_stock($itemid);
 			}
-			elseif($HTTP_POST_VARS['trigger_'.$itemid]=='cancel')
+			elseif($_POST['trigger_'.$itemid]=='cancel')
 			{
 				$stock_obj->transfer_cancel($itemid);
 			}

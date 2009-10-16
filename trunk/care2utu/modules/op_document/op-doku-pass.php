@@ -9,7 +9,7 @@ require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['op_docs'];
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 /*
 $fileforward="op-doku-javastart.php?sid=$sid&lang=$lang&target=";

@@ -20,8 +20,8 @@ require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 
 $GLOBAL_CONFIG=array();
 
-$thisfile=basename(__FILE__);
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+$thisfile=basename($_SERVER['PHP_SELF']);
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 $personell_obj=new Personell();

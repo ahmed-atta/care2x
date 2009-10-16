@@ -19,7 +19,7 @@ if(!$encoder) $encoder=$_SESSION['sess_user_name'];
 //$breakfile="amb_clinic_patients.php".URL_APPEND."&edit=$edit&dept_nr=$dept_nr";
 $breakfile="javascript:window.close();";
 //if($backpath) $breakfile=urldecode($backpath).URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 # Load date formatter
 require_once($root_path.'include/inc_date_format_functions.php');
@@ -243,213 +243,205 @@ $smarty->assign('sARVIcon', 'TEST');
 	$coreObj2 = new core;
 	$coreObj3 = new core;
 
-
-	//drugs and services
-
 	$sqlPurchaseClass =  "SELECT purchasing_class FROM care_tz_drugsandservices WHERE purchasing_class != 'service' group by purchasing_class";
 	$coreObj3->result= $db->Execute($sqlPurchaseClass);
-	$tabAll = '';
-	foreach($coreObj3->result as $wert)
+	$tabAll = '<table cellpadding=6>';
+
+
+	$encounterNr = $pn;
+	while ($encounterNr != null)
 	{
-		$p_class = $wert['purchasing_class'];
+		//block "location"
+		$tab_temp0 = '';
+		$sql4 ="select * from care_encounter_location where encounter_nr =".$encounterNr;
+
+		$coreObj->result = $db->Execute($sql4);
+		foreach ($coreObj->result as $wert){
+			//echo $wert['name'].'<br>';
+
+			$sqlTemp="select * from care_encounter where encounter_nr=".$encounterNr;
+			$ergTemp=$db->Execute($sqlTemp);
+			$rowTemp=$ergTemp->FetchRow();
+
+			if ($rowTemp['encounter_class_nr']==1)
+			{
+				//inpatient
+				$table = 'care_ward';
+				$column ='name';
+
+			}else
+			{
+				//outpatient
+				$table = 'care_department';
+				$column = 'name_formal';
+
+			}
+
+			$sql5 = "select * from ".$table." where nr=".$wert['location_nr'];
+			$ergebnis=$db->Execute($sql5);
+			$row2=$ergebnis->FetchRow();
 
 
-		$sql="SELECT * FROM care_encounter_prescription INNER JOIN care_tz_drugsandservices ON care_tz_drugsandservices.item_id=care_encounter_prescription.article_item_number where encounter_nr='".$pn."' and purchasing_class='".$p_class."'";
-		$tab_add = '';
-
-		//sql-query for every purchasing class
-		$coreObj->result = $db->Execute($sql);
-		foreach ($coreObj->result as $wertInner){
-			$tab_add .="<tr><td>".$wertInner['article']."</td><td>".$wertInner['article_item_number']."</td></tr>";
-		}
-
-
-		//output only if there is any entry
-		if ($tab_add != '')
-		{
-			$tab_prescr1 = "<tr><td>&nbsp;</td></tr><tr><th>".$p_class."</th></tr><tr><th align=left>article</th><th align=left>article item number</th></tr>";
-			$tab_prescr1 .= $tab_add;
-		}else
-			$tab_prescr1 ='';
-
-		$tabAll .= $tab_prescr1;
-	}
-
-	$smarty->assign('tab_care_encounter_prescription', $tabAll);
-
-
-
-	//diagnosises
-
-	$tab_temp = '';
-	$sql2 ="select * from care_tz_diagnosis where encounter_nr =".$pn;
-	$coreObj->result = $db->Execute($sql2);
-	foreach ($coreObj->result as $wert){
-		//echo $wert['ICD_10_code'].' '.$wert['ICD_10_description'].' '.date("d.m.Y H:i",$wert['timestamp']).'<br>';
-		$tab_temp .="<tr><td>".date("d.m.Y H:i",$wert['timestamp'])."</td><td>".$wert['ICD_10_description']."</td><td>".$wert['ICD_10_code']."</td></tr>";
-	}
-
-	if ($tab_temp != '')
-	{
-		$tab_diagnosis = "<tr><td>&nbsp;</td></tr><tr><th>diagnosises</th></tr><tr><th align=left>date and time</th><th align=left>ICD 10 description</th><th align=left>ICD 10 code</th></tr>";
-		$tab_diagnosis .= $tab_temp;
-	}
-	else
-		$tab_diagnosis = '';
-
-	$smarty->assign('tab_diagnosis', $tab_diagnosis);
-
-
-
-	//test findings chemlab
-
-	$tab_temp = '';
-	$sql3 ="select * from care_test_findings_chemlab where encounter_nr =".$pn;
-	$coreObj->result = $db->Execute($sql3);
-	foreach ($coreObj->result as $wert){
-
-		$tab_temp .="<tr><td>".$wert['test_date']."</td><td>".$wert['test_time']."</td></tr>";
-	}
-
-	if ($tab_temp != '')
-	{
-		$tab_findings_chemlab = "<tr><td>&nbsp;</td></tr><tr><th>diagnosises</th></tr><tr><th align=left>date and time</th><th align=left>ICD 10 description</th><th align=left>ICD 10 code</th></tr>";
-		$tab_findings_chemlab .= $tab_temp;
-	}
-	else
-		$tab_findings_chemlab = '';
-
-	$smarty->assign('tab_findings_chemlab', $tab_findings_chemlab);
-
-
-
-	//laboratory params
-
-	$tab_temp = '';
-	$sql4 ="select * from care_tz_laboratory_param where encounter_nr =".$pn;
-	//$tab_prescr .= "<tr><td>&nbsp;</td></tr><tr><th>lab parameter</th></tr><tr><th align=left>name</th><th align=left></th></tr>";
-	$coreObj->result = $db->Execute($sql4);
-	foreach ($coreObj->result as $wert){
-		//echo $wert['name'].'<br>';
-		$tab_temp .="<tr><td>".$wert['name']."</td><td></td></tr>";
-	}
-
-	if ($tab_temp != '')
-	{
-		$tab_laboratory_param = "<tr><td>&nbsp;</td></tr><tr><th>lab parameter</th></tr><tr><th align=left>name</th><th align=left></th></tr>";
-		$tab_laboratory_param .= $tab_temp;
-	}
-	else
-		$tab_laboratory_param = '';
-
-	$smarty->assign('tab_laboratory_param', $tab_laboratory_param);
-
-
-
-	//location
-
-	$tab_temp = '';
-	$sql4 ="select * from care_encounter_location where encounter_nr =".$pn;
-	//$tab_prescr .= "<tr><td>&nbsp;</td></tr><tr><th>location history</th></tr><tr><th align=left>date from</th><th align=left>date to</th><th align=left>location</th></tr>";
-	$coreObj->result = $db->Execute($sql4);
-	foreach ($coreObj->result as $wert){
-		//echo $wert['name'].'<br>';
-
-		$sqlTemp="select * from care_encounter where encounter_nr=".$pn;
-		$ergTemp=$db->Execute($sqlTemp);
-		$rowTemp=$ergTemp->FetchRow();
-
-		if ($rowTemp['encounter_class_nr']==1)
-		{
-			//inpatient
-			$table = 'care_ward';
-			$column ='name';
-
-		}else
-		{
-			//outpatient
-			$table = 'care_department';
-			$column = 'name_formal';
-
-		}
-
-		$sql5 = "select * from ".$table." where nr=".$wert['location_nr'];
-		$ergebnis=$db->Execute($sql5);
-		$row2=$ergebnis->FetchRow();
-
-
-		if($wert['date_to']=="0000-00-00")
-		{
-			$date_to = '---';
-		}
-		else
+			if($wert['date_to']=="0000-00-00")
+			{
+				$date_to = '---';
+			}
+			else
 			$date_to = $wert['date_to'];
 
-		$type = $wert['type_nr'];
+			$type = $wert['type_nr'];
 
-		$currWard = $wert['current_ward'];
-		$encDate  = $wert['encounter_date'];
-
-
+			$currWard = $wert['current_ward'];
+			$encDate  = $wert['encounter_date'];
 
 
-		if ($rowTemp['encounter_class_nr']==1)
-		{
-			//inpatient
-			if ($type==1)
-				$location = "Waiting Area";
+			if ($rowTemp['encounter_class_nr']==1)
+			{
+				//inpatient
+				if ($type==1)
+					$location = "Waiting Area";
+				else
+					$location = $row2[$column];
+
+				if (($type == 1)||($type==2))
+					$tab_temp0 .="<tr bgcolor=lightgreen><td>".$wert['date_from']."</td><td>".$wert['time_from']."</td><td>".$date_to."</td><td>".$wert['time_to']."</td><td>".$location."</td></tr>";
+			}
 			else
+			{
+				//outpatient
 				$location = $row2[$column];
+				$tab_temp0 .="<tr bgcolor=lightgreen><td>".$wert['date_from']."</td><td>".$wert['time_from']."</td><td>".$date_to."</td><td>".$wert['time_to']."</td><td>".$location."</td></tr>";
+			}
 
-			if (($type == 1)||($type==2))
-				$tab_temp .="<tr><td>".$wert['date_from']."</td><td>".$wert['time_from']."</td><td>".$date_to."</td><td>".$wert['time_to']."</td><td>".$location."</td></tr>";
+		}
+
+		if ($tab_temp0 != '')
+		{
+
+			$tabAll .= "<tr><td>&nbsp;</td></tr><tr><th>location</th></tr><tr><th align=left>date from</th><th align=left>time from</th><th align=left>date to</th><th align=left>time to</th><th align=left>location</th></tr>";
+			$tabAll .= $tab_temp0;
+			$tabAll .= "</table><br/><table cellpadding=6>";
+
+
+		}// end of block "location"
+
+
+
+		//drugs and services
+		$tab_temp1 = '';
+		$sql4 ="select distinct purchasing_class from care_tz_drugsandservices";
+		$coreObj3->result = $db->Execute($sql4);
+		foreach($coreObj3->result as $wert)
+		{
+			$p_class = $wert['purchasing_class'];
+
+			$sql="SELECT * FROM care_encounter_prescription INNER JOIN care_tz_drugsandservices ON care_tz_drugsandservices.item_id=care_encounter_prescription.article_item_number where encounter_nr='".$encounterNr."' and purchasing_class='".$p_class."'";
+
+			//sql-query for every purchasing class
+			$coreObj->result = $db->Execute($sql);
+			foreach ($coreObj->result as $wertInner){
+				$tab_temp1 .="<tr><td>".$wertInner['article']."</td><td>".$wertInner['article_item_number']."</td></tr>";
+			}
+
+
+			//output only if there is any entry
+			if ($tab_temp1 != '')
+			{
+				$tab_prescr1 = "<tr><td>&nbsp;</td></tr><tr><th>".$p_class."</th></tr><tr><th align=left>article</th><th align=left>article item number</th></tr>";
+				$tab_prescr1 .= $tab_temp1;
+			}else
+				$tab_prescr1 ='';
+
+		}
+
+		$tabAll .= $tab_prescr1;
+		$tabAll .="</table><br/><table cellpadding=6>";
+
+		//diagnosises
+		$tab_temp2 = '';
+		$sql2 ="select * from care_tz_diagnosis where encounter_nr =".$encounterNr;
+		$coreObj->result = $db->Execute($sql2);
+		foreach ($coreObj->result as $wert){
+			//echo $wert['ICD_10_code'].' '.$wert['ICD_10_description'].' '.date("d.m.Y H:i",$wert['timestamp']).'<br>';
+			$tab_temp2 .="<tr><td>".date("d.m.Y H:i",$wert['timestamp'])."</td><td>".$wert['ICD_10_description']."</td><td>".$wert['ICD_10_code']."</td></tr>";
+		}
+
+		if ($tab_temp2 != '')
+		{
+			$tab_diagnosis = "<tr><td>&nbsp;</td></tr><tr><th>diagnosises</th></tr><tr><th align=left>date and time</th><th align=left>ICD 10 description</th><th align=left>ICD 10 code</th></tr>";
+			$tab_diagnosis .= $tab_temp2;
 		}
 		else
+			$tab_diagnosis = '';
+
+		$tabAll .= $tab_diagnosis;
+		$tabAll .= "</table><br/><table cellpadding=6>";
+
+
+		//test findings chemlab
+		$tab_temp3 = '';
+		$sql3 ="select * from care_test_findings_chemlab where encounter_nr =".$encounterNr;
+		//echo $sql3;
+		$coreObj->result = $db->Execute($sql3);
+		foreach ($coreObj->result as $wert){
+
+			$batchNr = $wert['batch_nr'];
+
+			$sqlBatch = "select * from care_test_findings_chemlabor_sub where batch_nr=$batchNr";
+			$coreObj2->result = $db->Execute($sqlBatch);
+
+			foreach ($coreObj2->result as $param)
+			{
+				$tab_temp3 .="<tr><td>".$wert['test_date']."</td><td>".$wert['test_time']."</td><td>".$param['paramater_name']."</td><td>".$param['parameter_value']."</td></tr>";
+			}
+
+
+		}
+
+		if ($tab_temp3 != '')
 		{
-			//outpatient
-			$location = $row2[$column];
-			$tab_temp .="<tr><td>".$wert['date_from']."</td><td>".$wert['time_from']."</td><td>".$date_to."</td><td>".$wert['time_to']."</td><td>".$location."</td></tr>";
+			$tab_findings_chemlab = "<tr><td>&nbsp;</td></tr><tr><th>laboratory</th></tr><tr><th align=left>date</th><th align=left>time</th><th align=left>parameter</th><th align=left>value</th></tr>";
+			$tab_findings_chemlab .= $tab_temp3;
+		}
+		else
+			$tab_findings_chemlab = '';
+
+		$tabAll .= $tab_findings_chemlab;
+		$tabAll .= "</table><br/><table cellpadding=6>";
+
+
+
+		//block: find previous encounter_nr
+		$sqlEncounter = "SELECT encounter_nr_prev FROM care_encounter where encounter_nr=$encounterNr";
+		$result = $db->Execute($sqlEncounter);
+
+		foreach ($result as $wert){
+			$encounter_nr_prev = $wert['encounter_nr_prev'];
+			//echo 'encounter nr prev: '.$encounter_nr_prev;
 		}
 
 
-
-//		if ($rowTemp['encounter_class_nr']==1)
-//		{
-//			if (($type == 1)||($type==2))
-//				$tab_temp .="<tr><td>".$wert['date_from']."</td><td>".$wert['time_from']."</td><td>".$date_to."</td><td>".$wert['time_to']."</td><td>".$location."</td></tr>";
-//		}
-//
-//
-//		else
-//			$tab_temp .="<tr><td>".$wert['date_from']."</td><td>".$wert['time_from']."</td><td>".$date_to."</td><td>".$wert['time_to']."</td><td>".$location."</td></tr>";
+		if ($encounter_nr_prev != 0)
+			$encounterNr = $wert['encounter_nr_prev'];
+		else
+			$encounterNr = null;
 
 
+	}//Ende der encounter-Schleife
 
+	$tabAll .="</table>";
 
+	$smarty->assign('list', $tabAll);
 
-	}
-
-	if ($tab_temp != '')
-	{
-
-
-		$tab_station .= "<tr><td>&nbsp;</td></tr><tr><th>location</th></tr><tr><th align=left>date from</th><th align=left>time from</th><th align=left>date to</th><th align=left>time to</th><th align=left>location</th></tr>";
-		$tab_station .= $tab_temp;
-
-	}
-
-
-	$smarty->assign('tab_care_encounter_location', $tab_station);
-
-	/*important tables:
+		/*important tables:
 		 * care_class_encounter		 : division inpatient/outpatient
 		 * care_department     		 : all outpatient departments
 		 * care_ward            	 : all inpatient wards
 		 * care_encounter_location 	 : history of patient by encounter_nr
 		 * care_type_discharge       : type of discharge/transfer
 		 *
-		 * care_tz_drugsandservices
-		 * care_encounter_prescription
+		 * care_test_findings_chemlab
+		 * care_test_findings_chemlabor_sub
 		 */
 
 

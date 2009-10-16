@@ -52,7 +52,7 @@
 					<td  class="adm_item">
 						{{$LDAdmitDate}}:
 					</td>
-					<td class="adm_input">
+					<td class="vi_data">
 						{{$sAdmitDate}}
 					</td>
 				</tr>
@@ -61,7 +61,7 @@
 					<td class="adm_item">
 					{{$LDAdmitTime}}:
 					</td>
-					<td class="adm_input">
+					<td class="vi_data">
 						{{$sAdmitTime}}
 					</td>
 				</tr>
@@ -70,7 +70,7 @@
 					<td class="adm_item">
 						{{$LDTitle}}:
 					</td>
-					<td class="adm_input">
+					<td class="vi_data">
 						{{$title}}
 					</td>
 				</tr>
@@ -98,7 +98,7 @@
 					<td class="adm_item">
 						{{$LDName2}}:
 					</td>
-					<td bgcolor="#ffffee">
+					<td bgcolor="#ffffee" class="vi_data"><b>
 						{{$name_2}}
 					</td>
 				</tr>
@@ -109,7 +109,7 @@
 					<td class="adm_item">
 						{{$LDName3}}:
 					</td>
-					<td bgcolor="#ffffee">
+					<td bgcolor="#ffffee" class="vi_data"><b>
 						{{$name_3}}
 					</td>
 				</tr>
@@ -120,7 +120,7 @@
 					<td class="adm_item">
 						{{$LDNameMid}}:
 					</td>
-					<td bgcolor="#ffffee">
+					<td bgcolor="#ffffee" class="vi_data"><b>
 						{{$name_middle}}
 					</td>
 				</tr>
@@ -133,7 +133,7 @@
 					<td bgcolor="#ffffee" class="vi_data">
 						{{$sBdayDate}} &nbsp; {{$sCrossImg}} &nbsp; <font color="black">{{$sDeathDate}}</font>
 					</td>
-					<td bgcolor="#ffffee">
+					<td bgcolor="#ffffee" class="vi_data"><b>
 						{{$LDSex}}: {{$sSexType}}
 					</td>
 				</tr>
@@ -143,7 +143,7 @@
 					<td class="adm_item">
 						{{$LDBloodGroup}}:
 					</td>
-					<td class="adm_input" colspan=2>&nbsp;
+					<td class="vi_data" colspan=2>&nbsp;
 						{{$blood_group}}
 					</td>
 				</tr>
@@ -153,7 +153,7 @@
 					<td class="adm_item">
 						{{$LDAddress}}:
 					</td>
-					<td colspan=2 class="adm_input">
+					<td colspan=2 class="vi_data">
 						{{$addr_str}}  {{$addr_str_nr}}
 						<br>
 						{{$addr_zip}} {{$addr_citytown_name}}
@@ -164,7 +164,7 @@
 					<td class="adm_item">
 						<font color="red">{{$LDAdmitClass}}</font>:
 					</td>
-					<td colspan=2 class="adm_input">
+					<td colspan=2 class="vi_data">
 						{{$sAdmitClassInput}}
 					</td>
 				</tr>

@@ -1,4 +1,4 @@
-tz	<?php
+<?php
 require_once($root_path.'include/care_api_classes/class_tz_pharmacy.php');
 
 

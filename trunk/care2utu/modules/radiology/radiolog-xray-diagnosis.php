@@ -13,7 +13,7 @@ define("LANG_FILE","radio.php");
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 ?>
 <?php html_rtl($lang); ?>
 <head>

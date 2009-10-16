@@ -15,8 +15,8 @@ $LDCafeteria='Cafeteria News';
 $LDGeneralSurgery='General Surgery';
 $LDEmergencySurgery='Emergency Surgery';
 $LDPlasticSurgery='Plastic Surgery';
-$LDEarNoseThroath='Ear-Nose-Throath';
-$LDOpthalmology='Opthalmology';
+$LDEarNoseThroath='Ear-Nose-Throat';
+$LDOpthalmology='Ophthalmology';
 $LDPathology='Pathology';
 $LDObGynecology='Ob-Gynecology';
 $LDPhysicalTherapy='Physical Therapy';
@@ -44,7 +44,7 @@ $LDMedical='Medical';
 $LDSupport='Non-medical';
 $LDNews='News';
 $LDDepartment='Department';
-$LDPressRelations='Presse';
+$LDPressRelations='Press';
 /* 2003-05-19 EL */
 $LDSelectDept='Select department';
 /*2003-06-15 EL*/

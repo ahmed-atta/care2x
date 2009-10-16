@@ -23,10 +23,10 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 //$db->debug=true;
 
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 # Initialize page�s control variables
 if($mode!='paginate'){
@@ -228,7 +228,7 @@ if ($linecount) echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowi
 			echo '</td>
 			<td align=right>&nbsp; &nbsp;'.$zeile['addr_zip'].'</td>';
 
-			if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
+			if($_COOKIE[$local_user.$sid]) echo '
 			<td>&nbsp;
 				<a href="personell_register_show.php'.URL_APPEND.'&from=such&personell_nr='.$zeile['nr'].'&target=personell_search">
 				<img '.$img_options.' alt="'.$LDShowData.'"></a>&nbsp;';

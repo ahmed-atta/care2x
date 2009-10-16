@@ -78,13 +78,13 @@ if(isset($_GET['submit'])){
 		if ($_GET['mode']=='new') {
 			if($o_arv_visit->insertNewVisit($_GET['arv_data'],$_GET['a_item_no'],$_GET['r_item_no'])){
 				$o_arv_case->addARV_visit($o_arv_visit);
-				header("Location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
+				header("location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
 				exit;
 			}
 		}
 		elseif ($_GET['mode']=='edit') {	
 			if($o_arv_visit->updateVisit($_GET['arv_data'],$_GET['a_item_no'],$_GET['r_item_no'])) {
-				header("Location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
+				header("location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
 				exit;
 			}
 		}
@@ -93,13 +93,13 @@ if(isset($_GET['submit'])){
 elseif (isset($_GET['select_aidsdef_events'])) {
 	$filename = 'arv_events.php';
 	$querystring=$o_arv_visit->querystring('arv_data').$o_arv_visit->querystring('a_item_no').$o_arv_visit->querystring('r_item_no');
-	header("Location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$querystring");
+	header("location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$querystring");
 	exit;
 }
 elseif (isset($_GET['select_status_reason'])) {
 	$filename = 'arv_status_reason.php';
 	$querystring=$o_arv_visit->querystring('arv_data').$o_arv_visit->querystring('a_item_no').$o_arv_visit->querystring('r_item_no');
-	header("Location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$querystring");
+	header("location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$querystring");
 	exit;
 }
 

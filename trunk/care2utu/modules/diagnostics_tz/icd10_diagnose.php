@@ -36,7 +36,7 @@ if($todo=='submit')
 	setEventSignalColor( $_SESSION['sess_en'],SIGNAL_COLOR_QUERY_DOCTOR);
 
 
-	$diagnostic_obj->EnterNewCase($HTTP_POST_VARS);
+	$diagnostic_obj->EnterNewCase($_POST);
 }
 
 require ("gui/gui_icd10_diagnose.php");

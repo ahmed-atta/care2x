@@ -20,7 +20,7 @@ $core = & new Core();
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 if($from=='add') $returnfile='edv_system_format_menu_item_add.php'.URL_APPEND.'&from=set';
   else $returnfile=$breakfile;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $editfile='edv_system_format_menu_item_add.php'.URL_REDIRECT_APPEND.'&mode=edit&from=set&item_no=';
 /**
 * Load the db routine

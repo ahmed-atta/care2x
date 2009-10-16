@@ -19,7 +19,7 @@ if(!$encoder) $encoder=$_SESSION['sess_user_name'];
 //$breakfile="amb_clinic_patients.php".URL_APPEND."&edit=$edit&dept_nr=$dept_nr";
 $breakfile="javascript:window.close();";
 //if($backpath) $breakfile=urldecode($backpath).URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 # Load date formatter
 require_once($root_path.'include/inc_date_format_functions.php');
@@ -68,7 +68,18 @@ if($enc_obj->loadEncounterData($pn)){
 				//echo $person->getLastQuery();
 			}
 
+			if (!$ward){
+
 			header("location:$thisfile?sid=$sid&lang=$lang&pn=$pn&backpath=$backpath&bd=$bd&rm=$rm&pyear=$pyear&pmonth=$pmonth&pday=$pday&mode=$mode&released=1&lock=1&x_date=$x_date&x_time=$x_time&relart=$relart&encoder=".strtr($encoder," ","+")."&info=".strtr($info," ","+")."&station=$station&dept_nr=$dept_nr");
+
+			}
+			else
+			{
+				echo '
+				<script  language="javascript">
+					opener.focus();opener.location.reload();window.close();
+				</script>';
+			}
 			exit;
 		}
 	}
@@ -171,7 +182,11 @@ function pruf(d)
 	$smarty->append('JavaScript',$sTemp);
 } // End of if !$released
 
+echo $mode;
+echo $released;
+
 if(($mode=="release")&&($released)){
+
 
 	echo '
 	<html><head>
@@ -276,7 +291,10 @@ $smarty->assign('sARVIcon', 'TEST');
 		<input type="hidden" name="bd" value="'.$bd.'">
 		<input type="hidden" name="pn" value="'.$pn.'">
 		<input type="hidden" name="backpath" value="'.urlencode($backpath).'">
-		<input type="hidden" name="s_date" value="'."$pyear-$pmonth-$pday".'">';
+		<input type="hidden" name="s_date" value="'."$pyear-$pmonth-$pday".'">
+
+		<input type="hidden" name="ward" value="'.$ward.'">';
+
 
 	$smarty->assign('sHiddenInputs',$sTemp);
 

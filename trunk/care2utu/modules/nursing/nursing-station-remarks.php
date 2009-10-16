@@ -29,7 +29,7 @@ if($pmonth=='') $pmonth=date('m');
 if($pyear=='') $pyear=date('Y');
 $s_date=$pyear.'-'.$pmonth.'-'.$pday;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 			
 require_once($root_path.'include/inc_date_format_functions.php');
 
@@ -37,15 +37,15 @@ require_once($root_path.'include/inc_date_format_functions.php');
 if($mode=='save'){
 	# Know where we are
 	switch($_SESSION['sess_user_origin']){
-		case 'lab': $HTTP_POST_VARS['location_type_nr']=1; # 1 =department
+		case 'lab': $_POST['location_type_nr']=1; # 1 =department
 						break;
-		default: 	$HTTP_POST_VARS['location_type_nr']=2; # 2 = ward 
+		default: 	$_POST['location_type_nr']=2; # 2 = ward 
 						break;
 	}
-	$HTTP_POST_VARS['location_id']=$station; 
-	if($report_obj->saveDailyWardNotes($HTTP_POST_VARS)){
+	$_POST['location_id']=$station; 
+	if($report_obj->saveDailyWardNotes($_POST)){
 		//echo $report_obj->getLastQuery();
-		header("Location:$thisfile".URL_REDIRECT_APPEND."&pn=$pn&station=$station&dept_nr=$dept_nr&location_nr=$location_nr&saved=1");
+		header("location:$thisfile".URL_REDIRECT_APPEND."&pn=$pn&station=$station&dept_nr=$dept_nr&location_nr=$location_nr&saved=1");
 		exit;
 	}else{echo $report_obj->getLastQuery()."<p>$LDDbNoUpdate";}
 }else{ //echo $_SESSION['sess_pid'];

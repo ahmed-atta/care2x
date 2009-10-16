@@ -22,7 +22,7 @@ $append=URL_REDIRECT_APPEND;
 $fileforward='billing_tz.php'.$append;
 $lognow='Billing login ok';
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $userck='aufnahme_user';
 //reset cookie;

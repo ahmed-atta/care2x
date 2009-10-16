@@ -82,6 +82,11 @@ if (!isset($subtarget) || !$subtarget) $subtarget=$target;
 		
   </td>
 </tr>
+<?php 
+$sql='select item_full_description from care_tz_drugsandservices where item_id='.$stored_request['test_request'];
+$requests=$db->Execute($sql);
+if ($requests) $test_request=$requests->FetchRow();
+?>
 		 
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2><div class=fva2_ml10><?php echo $LDClinicalInfo ?>:<p><blockquote><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=1 height=45 align="left">
@@ -90,7 +95,7 @@ if (!isset($subtarget) || !$subtarget) $subtarget=$target;
 		</tr>	
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2><div class=fva2_ml10><?php echo $LDReqTest ?>:<p><blockquote><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=1 height=45 align="left">
-		<font face="courier" size=2 color="#000000"><?php echo  nl2br(stripslashes($stored_request['test_request'])) ?></font></blockquote>
+		<font face="courier" size=2 color="#000000"><?php echo  nl2br(stripslashes($test_request[0])) ?></font></blockquote>
 				</td>
 		</tr>	
 

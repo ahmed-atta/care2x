@@ -56,7 +56,7 @@ $template_theme='biju';
 #
 # Set the template path
 #
-if ($_GET['root_path'] || $_POST['root_path']) die();
+//if ($_GET['root_path'] || $_POST['root_path']) die();
 //require('roots.php');
 $template_path=$root_path.'gui/html_template/';
 
@@ -73,6 +73,16 @@ if(defined('ENCRYPT_PAGE_BASE64')&&ENCRYPT_PAGE_BASE64){
 #
 require_once($root_path.'include/inc_vars_resolve.php');
 
+ if (!ini_get('register_globals')) {
+    $superglobals = array($_SERVER, $_ENV,
+        $_FILES, $_COOKIE, $_POST, $_GET);
+    if (isset($_SESSION)) {
+        array_unshift($superglobals, $_SESSION);
+    }
+    foreach ($superglobals as $superglobal) {
+        extract($superglobal, EXTR_SKIP);
+    }
+}
 #
 # Set global defines
 #
@@ -130,7 +140,6 @@ if (ini_get('session.use_trans_sid')!=1) {
 	//define('URL_APPEND','?lang='.$lang);
 	$not_trans_id=false;
 }
-
 define('URL_REDIRECT_APPEND','?sid='.session_id().'&lang=en');
 
 #

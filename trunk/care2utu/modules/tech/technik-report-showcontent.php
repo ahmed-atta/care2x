@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 # Load the date formatter
 require_once($root_path.'include/inc_date_format_functions.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile='technik-report-arch.php'.URL_APPEND;
 $returnfile=$breakfile;
 

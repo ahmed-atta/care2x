@@ -1,9 +1,9 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('save_admission_data.inc.php',$PHP_SELF)) 
+if (eregi('save_admission_data.inc.php',$_SERVER['PHP_SELF'])) 
 	die('<meta http-equiv="refresh" content="0; url=../">');	
 	
-$obj->setDataArray($HTTP_POST_VARS);
+$obj->setDataArray($_POST);
 	
 switch($mode){	
 		case 'create': 

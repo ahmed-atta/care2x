@@ -2,13 +2,13 @@
 # To see how the script locking is implemented in this script see /development/dev_docs/script_locking.txt 
 
 #------begin------ This protection code was suggested by Luki R. luki@karet.org ----
-if (eregi('inc_front_chain_lang.php',$PHP_SELF)) 
+if (eregi('inc_front_chain_lang.php',$_SERVER['PHP_SELF'])) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 #------end-----
 
 # Set  to TRUE if you want to disable the time-out feature,
 # Once this value is taken from the database, this will be used as the last resort default value
-$TIME_OUT_INACTIVE=FALSE;
+$TIME_OUT_INACTIVE=TRUE;
 # Set for  the time out value. The format is MinutesSeconds, e.g.  530 = 5 minutes, 20 seconds or e.g. 2000 = 20 minutes, 00 seconds
 # Once the time-out value is taken from the database, this will be used as the last resort default value
 $TIME_OUT_TIME=1500;
@@ -31,8 +31,8 @@ function getLang($chk_file)
    if(!isset($lang)||empty($lang))
    {
 	  $ck_lang_buffer='ck_lang'.$sid;
-      if(!isset($HTTP_COOKIE_VARS[$ck_lang_buffer])||empty($HTTP_COOKIE_VARS[$ck_lang_buffer])) include($root_path.'chklang.php');
-         else $lang=$HTTP_COOKIE_VARS[$ck_lang_buffer];
+      if(!isset($_COOKIE[$ck_lang_buffer])||empty($_COOKIE[$ck_lang_buffer])) include($root_path.'chklang.php');
+         else $lang=$_COOKIE[$ck_lang_buffer];
    }
    
    if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_'.$chk_file)) return 1;
@@ -58,7 +58,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 	
    include($root_path.'include/inc_init_crypt.php'); # initialize crypt 
 	
-   $clear_ck_sid = $dec_hcemd5->DecodeMimeSelfRand($HTTP_COOKIE_VARS[$ck_sid_buffer]);
+   $clear_ck_sid = $dec_hcemd5->DecodeMimeSelfRand($_COOKIE[$ck_sid_buffer]);
 
 	$tnow=date('His');
    // echo $tnow."<p>";
@@ -67,7 +67,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
    if(!defined('NO_2LEVEL_CHK')||NO_2LEVEL_CHK!=1){
 		
 		# Let us check if the calling script is the time-out configuration script, if yes, then we skip the time out
-		if (!eregi('edv_system_timeout.php',$PHP_SELF)) {
+		if (!eregi('edv_system_timeout.php',$_SERVER['PHP_SELF'])) {
 			# Load the global time out configs
 			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 			if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
@@ -111,9 +111,9 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 		}
 	  # Decrypt the second level cookie sid and compare to sid
        $dec_2level = new Crypt_HCEMD5($key_2level, '');
-       $clear_2sid = $dec_2level->DecodeMimeSelfRand($HTTP_COOKIE_VARS[('ck_2level_sid'.$sid)]);
+       $clear_2sid = $dec_2level->DecodeMimeSelfRand($_COOKIE[('ck_2level_sid'.$sid)]);
 
-       //if(!$sid||($sid!=$clear_ck_sid)||($sid!=$clear_2sid)||!isset($HTTP_COOKIE_VARS[$local_user.$sid])||empty($HTTP_COOKIE_VARS[$local_user.$sid])) $no_valid=1;
+       //if(!$sid||($sid!=$clear_ck_sid)||($sid!=$clear_2sid)||!isset($_COOKIE[$local_user.$sid])||empty($_COOKIE[$local_user.$sid])) $no_valid=1;
        if(!$sid||($sid!=$clear_ck_sid)||($sid!=$clear_2sid)) $no_valid=1;
       
 	# if(!$sid||($sid!=$clear_ck_sid)||($sid!=$clear_2sid)) $no_valid=1; 

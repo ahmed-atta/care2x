@@ -36,7 +36,7 @@ if($user->UserExists()){
 			$result = $user->Lock();
 		}
 		if($result){
-			header("Location: ".$updatereturn.URL_REDIRECT_APPEND."&itemname=$itemname&remark=lockchanged");
+			header("location: ".$updatereturn.URL_REDIRECT_APPEND."&itemname=$itemname&remark=lockchanged");
 			exit;
 		}else {
 			echo "$LDDbNoSave<p>".$user->getLastQuery();

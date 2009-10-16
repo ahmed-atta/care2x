@@ -10,7 +10,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-if (!$pn) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
+if (!$pn) {header("location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
 
 if(!isset($saveok)) $saveok=false;
 
@@ -35,7 +35,7 @@ if($saveok) {
 		case "procedure":
 							$openerfile="drg-ops301.php";
 							break;
-		default:{header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;};
+		default:{header("location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;};
 	}
 ?>
  <script language="javascript" >
@@ -72,7 +72,7 @@ switch($target){
 							$element_related="related_ops";
 							$hidselector='ops_px';
 							break;
-	default:{header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;};
+	default:{header("location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;};
 }
 
 $toggle=0;

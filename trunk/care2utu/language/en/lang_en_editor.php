@@ -107,7 +107,7 @@ $LDClkContinue='Then click \'Continue...\'.';
 $LDPlsEnter='Type the menu here...';
 $LDClk2Edit='Click me to edit';
 $LDPreviewPic='Preview Picture';
-$LDCafeEditorial='Cafenews Editor';
+$LDCafeEditorial='Cafe-news Editor';
 $LDHealthTips='Health Tips';
 $LDClk2Write='Click here to start the editor';
 

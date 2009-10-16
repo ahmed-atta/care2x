@@ -43,7 +43,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 $breakfile=$root_path."main/startframe.php?sid=$sid&lang=$lang";
 
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $_SESSION['sess_file_return']=$thisfile;
 
@@ -185,7 +185,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 					echo $DOB;
 					if($DOB=='') {
 						if(defined('SHOW_FIRSTNAME_CONTROLLER')&&SHOW_FIRSTNAME_CONTROLLER){
-							if(isset($HTTP_POST_VARS['firstname_too'])&&$HTTP_POST_VARS['firstname_too']){
+							if(isset($_POST['firstname_too'])&&$_POST['firstname_too']){
 								$sql2='	WHERE name_last LIKE "'.strtr($suchwort,'+',' ').'%" OR name_first LIKE "'.strtr($suchwort,'+',' ').'%"';
 								$firstname_too=1;
 							}else{
@@ -400,7 +400,7 @@ if ($linecount){
 						echo "&nbsp;".$zeile['addr_zip'];
                         echo "</td>";	
 
-					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
+					    if($_COOKIE[$local_user.$sid]) echo '
 						<td><font face=arial size=2>&nbsp;';
 						$pname=$zeile['name_last'].", ".$zeile['name_first'];
 //						echo '<a href="test.php'.URL_APPEND.'&pid='.$zeile['pid'].'&mode=new">';

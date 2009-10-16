@@ -112,6 +112,7 @@ div.Section1
 <div class=Section1> 
 
 <?php 
+
   if ($show_archived_bill)
     $bill_obj->DisplayArchivedBills($batch_nr,$bill_number,0,TRUE);
   else

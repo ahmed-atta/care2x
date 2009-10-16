@@ -14,7 +14,7 @@ define('LANG_FILE','tech.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile='technik.php'.URL_APPEND;
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
 $_SESSION['sess_file_return']=basename(__FILE__);

@@ -14,7 +14,7 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 
 $debug = FALSE;
-
+echo 'help';
 if ($debug) {
   echo $pn."<br>";
   echo $prescription_date."<br>";

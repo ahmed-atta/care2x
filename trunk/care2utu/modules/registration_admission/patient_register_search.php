@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
+* elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -28,7 +28,7 @@ switch($origin)
 }
 
 $breakfile.=URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 # Start Smarty templating here
  /**
@@ -83,7 +83,7 @@ if(isset($origin) && $origin=='pass')
     <td><img <?php echo createMascot($root_path,'mascot1_l.gif','0','absmiddle') ?>></td>
   </tr>
 </table>
-<?php 
+<?php
 }
 
  $sTemp = ob_get_contents();

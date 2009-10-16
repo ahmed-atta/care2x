@@ -1,5 +1,6 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+//error_reporting(E_ALL);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
@@ -34,12 +35,12 @@ require_once($root_path.'include/care_api_classes/class_ward.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 require_once($root_path.'include/care_api_classes/class_tz_billing.php');
-require_once($root_path.'include/care_api_classes/class_weberp.php');
+require_once($root_path.'include/care_api_classes/class_weberp_c2x.php');
 require_once($root_path.'include/inc_init_xmlrpc.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 if($origin=='patreg_reg') $breakfile = 'patient_register_show.php'.URL_APPEND.'&pid='.$pid;
-	elseif($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfile = $root_path.'main/startframe.php'.URL_APPEND;
+	elseif($_COOKIE["ck_login_logged".$sid]) $breakfile = $root_path.'main/startframe.php'.URL_APPEND;
 		elseif(!empty($_SESSION['sess_path_referer'])) $breakfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND.'&pid='.$pid;
 			else $breakfile = "aufnahme_pass.php".URL_APPEND."&target=entry";
 
@@ -105,11 +106,49 @@ if($pid!='' || $encounter_nr!=''){
 
         if ($pid)
         {
-		  /* Check whether the person is currently admitted. If yes jump to display admission data */
-		  if(!$update&&$encounter_nr=$encounter_obj->isPIDCurrentlyAdmitted($pid)){
-		      header('Location:aufnahme_daten_zeigen.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$encounter_nr.'&origin=admit&sem=isadmitted&target=entry');
-			  exit;
-		  }
+        	if (isset($transFromOutp))
+         	{
+						//echo 'transFrom Outpatient';
+
+
+						if($encoder=='') $encoder=$_SESSION['sess_user_name'];
+						# Load date formatter
+
+						require_once($root_path.'include/care_api_classes/class_encounter.php');
+
+						$enc_obj=new Encounter;
+
+						$pn = $_GET['pn'];
+
+						//echo 'Encounter: '.$pn;
+
+						//$encounter_obj->sql="UPDATE care_encounter SET encounter_nr_prev=$pn where encounter_nr=$pn";
+						//
+						//$encounter_obj->Transact($encounter_obj->sql);
+
+						if($encounter_obj->loadEncounterData($pn)){
+							//$db->debug=1;
+
+							$date=(empty($x_date))?date('Y-m-d'):formatDate2STD($x_date,$date_format);
+							$time=(empty($x_time))?date('H:i:s'):convertTimeToStandard($x_time);
+							# Check the discharge type
+
+
+					 		if( $enc_obj->DischargeFromDept($pn,8,$date,$time)){
+								//echo 'discharge has been successfull';
+					 		}
+					 			else echo 'couldn\'t discharge outpatient';
+
+						}else echo 'could not load encounter data';
+          	}else{
+
+		  	/* Check whether the person is currently admitted. If yes jump to display admission data */
+		  	if(!$update&&$encounter_nr=$encounter_obj->isPIDCurrentlyAdmitted($pid)){
+		    	  header('Location:aufnahme_daten_zeigen.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$encounter_nr.'&origin=admit&sem=isadmitted&target=entry');
+			exit;
+		  	}
+
+          }
 
 			 /* Get the related insurance data */
 			 $p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
@@ -129,7 +168,7 @@ if($pid!='' || $encounter_nr!=''){
 
             if (($mode=='save') || ($forcesave!=''))
             {
-	             if(!$forcesave)
+            	 if(!$forcesave)
 	             {
 	                  //clean and check input data variables
 					  /**
@@ -193,16 +232,16 @@ if($pid!='' || $encounter_nr!=''){
 					  {
 							//echo formatDate2STD($geburtsdatum,$date_format);
 					      $itemno=$itemname;
-									$HTTP_POST_VARS['modify_id']=$encoder;
-									if($dbtype=='mysql'){
-										$HTTP_POST_VARS['history']= "CONCAT(history,\"\n Update: ".date('Y-m-d H:i:s')." = $encoder\")";
+									$_POST['modify_id']=$encoder;
+									if($dbtype=='mysql' || $dbtype=='mysqli'){
+										$_POST['history']= "CONCAT(history,\"\n Update: ".date('Y-m-d H:i:s')." = $encoder\")";
 									}else{
-										$HTTP_POST_VARS['history']= "(history || '\n Update: ".date('Y-m-d H:i:s')." = $encoder')";
+										$_POST['history']= "(history || '\n Update: ".date('Y-m-d H:i:s')." = $encoder')";
 									}
-									if(isset($HTTP_POST_VARS['encounter_nr'])) unset($HTTP_POST_VARS['encounter_nr']);
-									if(isset($HTTP_POST_VARS['pid'])) unset($HTTP_POST_VARS['pid']);
+									if(isset($_POST['encounter_nr'])) unset($_POST['encounter_nr']);
+									if(isset($_POST['pid'])) unset($_POST['pid']);
 
-									$encounter_obj->setDataArray($HTTP_POST_VARS);
+									$encounter_obj->setDataArray($_POST);
 
 									if($encounter_obj->updateEncounterFromInternalArray($encounter_nr))
 									{
@@ -235,7 +274,7 @@ if($pid!='' || $encounter_nr!=''){
 									    if($consultation_fee!='')
 									    	$bill_obj->new_reg($encounter_nr,$consultation_fee,$user);
 
-							            header("Location: aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr&origin=admit&target=entry&newdata=$newdata");
+							            header("location: aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr&origin=admit&target=entry&newdata=$newdata");
 								        exit;
 								    }
 
@@ -246,26 +285,31 @@ if($pid!='' || $encounter_nr!=''){
 							if($GLOBAL_CONFIG['encounter_nr_fullyear_prepend']) $ref_nr=(int)date('Y').$GLOBAL_CONFIG['encounter_nr_init'];
 								else $ref_nr=$GLOBAL_CONFIG['encounter_nr_init'];
 							//echo $ref_nr;
-							switch($HTTP_POST_VARS['encounter_class_nr'])
+							switch($_POST['encounter_class_nr'])
 							{
-								case '1': $HTTP_POST_VARS['encounter_nr']=$encounter_obj->getNewEncounterNr($ref_nr+$GLOBAL_CONFIG['patient_inpatient_nr_adder'],1);
+								case '1': $_POST['encounter_nr']=$encounter_obj->getNewEncounterNr($ref_nr+$GLOBAL_CONFIG['patient_inpatient_nr_adder'],1);
 											break;
-								case '2': $HTTP_POST_VARS['encounter_nr']=$encounter_obj->getNewEncounterNr($ref_nr+$GLOBAL_CONFIG['patient_outpatient_nr_adder'],2);
+								case '2': $_POST['encounter_nr']=$encounter_obj->getNewEncounterNr($ref_nr+$GLOBAL_CONFIG['patient_outpatient_nr_adder'],2);
+
+
 							}
 
-									$HTTP_POST_VARS['encounter_date']=date('Y-m-d H:i:s');
-									$HTTP_POST_VARS['modify_id']=$encoder;
-									//$HTTP_POST_VARS['modify_time']='NULL';
-									$HTTP_POST_VARS['create_id']=$encoder;
-									$HTTP_POST_VARS['create_time']=date('YmdHis');
-									$HTTP_POST_VARS['history']='Create: '.date('Y-m-d H:i:s').' = '.$encoder;
-									//if(isset($HTTP_POST_VARS['encounter_nr'])) unset($HTTP_POST_VARS['encounter_nr']);
-									//print_r($HTTP_POST_VARS);
-									$encounter_obj->setDataArray($HTTP_POST_VARS);
+									$_POST['encounter_date']=date('Y-m-d H:i:s');
+									$_POST['modify_id']=$encoder;
+									//$_POST['modify_time']='NULL';
+									$_POST['create_id']=$encoder;
+									$_POST['create_time']=date('YmdHis');
+									$_POST['history']='Create: '.date('Y-m-d H:i:s').' = '.$encoder;
+									if(isset($_POST['encounter_nr'])) unset($_POST['encounter_nr']);
+									//print_r($_POST);
+									$encounter_obj->setDataArray($_POST);
+
+
+
 
 									if($encounter_obj->insertDataFromInternalArray()) {
 									    /* Get last insert id */
-										if($dbtype=='mysql') {
+										if($dbtype=='mysql' || $dbtype=='mysqli') {
 											$encounter_nr=$db->Insert_ID();
 										}else{
 											$encounter_nr=$encounter_obj->postgre_Insert_ID($dbtable,'encounter_nr',$db->Insert_ID());
@@ -281,7 +325,7 @@ if($pid!='' || $encounter_nr!=''){
 
 										# If appointment number available, mark appointment as "done"
 										if(isset($appt_nr)&&$appt_nr)
-											$encounter_obj->markAppointmentDone($appt_nr,$HTTP_POST_VARS['encounter_class_nr'],$encounter_nr);
+											$encounter_obj->markAppointmentDone($appt_nr,$_POST['encounter_class_nr'],$encounter_nr);
 
 										//echo $encounter_obj->getLastQuery();
 
@@ -293,8 +337,36 @@ if($pid!='' || $encounter_nr!=''){
 									    if($consultation_fee!='')
 									    	$bill_obj->new_reg($encounter_nr,$consultation_fee,$user);
 
+
+									    if (isset($transFromOutp))
+          								{
+											global $pn;
+											$enc_new = $_POST['encounter_nr'];
+											$encounter_obj->sql_="UPDATE care_encounter SET encounter_nr_prev='$pn' where encounter_nr='$enc_new'";
+											$encounter_obj->sql_old="UPDATE care_encounter SET is_discharged='1', discharge_date='$date', discharge_time='$time' where encounter_nr='$pn'";
+											//echo $encounter_obj->sql_;
+											if ($encounter_obj->Transact($encounter_obj->sql_)&&$encounter_obj->Transact($encounter_obj->sql_old))
+											{
+												//echo 'transact erfolgreich';
+												echo '<script language="javascript">';
+												echo 'function closeWindow(){';
+												echo 'window.close();';
+												echo '}';
+												echo 'closeWindow();';
+												echo '</script>';
+
+
+											}
+											else
+											{
+												echo 'problem occured at aufnahme_start.php: '.$encounter_obj->sql_.' and/or '.$encounter_obj->sql_old;
+											}
+
+          							}
+
+
 							            // Show the admission data:
-							            header("Location: aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr&origin=admit&target=entry&newdata=$newdata");
+							            header("location: aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr&origin=admit&target=entry&newdata=$newdata");
 								        exit;
 								    }else{
 										echo $LDDbNoSave.'<p>'.$encounter_obj->getLastQuery();
@@ -480,7 +552,7 @@ ob_end_clean();
 $smarty->append('JavaScript',$sTemp);
 
 # Load tabs
-$target='entry';
+$target='search';
 
 $parent_admit = TRUE;
 
@@ -538,11 +610,11 @@ if(!isset($pid) || !$pid){
 
 	$smarty->assign('LDAdmitDate',$LDAdmitDate);
 
-	 if(isset($encounter_nr)&&$encounter_nr) 	$smarty->assign('sAdmitDate',@formatDate2Local(date('Y-m-d'),$date_format));
+	$smarty->assign('sAdmitDate',@formatDate2Local(date('Y-m-d'),$date_format));
 
 	$smarty->assign('LDAdmitTime',$LDAdmitTime);
 
-	if(isset($encounter_nr)&&$encounter_nr)  $smarty->assign('sAdmitTime',@convertTimeToLocal(date('H:i:s')));
+	$smarty->assign('sAdmitTime',@convertTimeToLocal(date('H:i:s')));
 
 	$smarty->assign('LDTitle',$LDTitle);
 	$smarty->assign('title',$title);
@@ -562,7 +634,7 @@ if(!isset($pid) || !$pid){
 
 	if($GLOBAL_CONFIG['patient_name_3_show']&&$name_3){
 		$smarty->assign('LDName3',$LDName3);
-		$smarty->assign('name_3',$name_3);
+		$smarty->assign('name_3',$name_3.'xxx');
 		$iRowSpan++;
 	}
 
@@ -594,6 +666,7 @@ if(!isset($pid) || !$pid){
 		$smarty->assign('addr_citytown',$addr_citytown_name);
 
 		$smarty->assign('LDAdmitClass',$LDAdmitClass);
+		
 
 			if(is_object($encounter_classes)){
 				$sTemp = '';
@@ -638,8 +711,10 @@ if(!isset($pid) || !$pid){
 
 			}
 
+
+
 			# If no encounter nr or inpatient, show ward/station info, 1 = inpatient
-			if(!$encounter_nr||$encounter_class_nr==1){
+			if($encounter_class_nr==1){
 				if ($errorward||$encounter_class_nr==1){ $smarty->assign('LDWard',"<font color=red>$LDWard</font>");}
 					$smarty->assign('LDWard',$LDWard);
 				$sTemp = '';
@@ -671,12 +746,11 @@ if(!isset($pid) || !$pid){
 
 				//new code:
 				if ($encounter_class_nr==1)$smarty->assign('sWardInput',$sTemp);
-
 			} //  End of if no encounter nr
 
 			# If no encounter nr or outpatient, show clinic/department info, 2 = outpatient
 			$sTemp = $sTemp.'<input name="current_dept_nr" type="hidden"  value="'.$current_dept_nr.'">';
-			if(!$encounter_nr||$encounter_class_nr==2){
+			if($encounter_class_nr==2){
 
 				if ($errorward||$encounter_class_nr==2) $smarty->assign('LDDepartment',"<font color=red>$LDClinic/$LDDepartment</font>");
 					else $smarty->assign('LDDepartment',"$LDClinic/$LDDepartment");
@@ -725,7 +799,8 @@ if(!isset($pid) || !$pid){
 							<option value=""></option>';
 
 
-						$sql_con="SELECT  item_description FROM care_tz_drugsandservices WHERE  item_number LIKE 'C%'";
+						$sql_con="SELECT  item_description FROM care_tz_drugsandservices WHERE item_number like 'C%' and
+						 item_description LIKE '%CONS%'";
 			  			$db_con = $db->Execute($sql_con);
 						while($conrow=$db_con->FetchRow()){
 							$cTemp = $cTemp.'<option value="'.$conrow['item_description'].'" ';
@@ -737,23 +812,49 @@ if(!isset($pid) || !$pid){
 					$cTemp = $cTemp.'</select>';
 
 				$smarty->assign('consultation_fee',$cTemp);
-
-			$smarty->assign('LDRecBy',$LDReg);
-
-
-			// REGISTRATION FEE
-			$rTemp = $rTemp.'<select name="registration_fee">
+			// Ambulance FEE
+/*$Ambulance='Ambulance';
+			$smarty->assign('Ambulance',$Ambulance);
+//				$smarty->assign('ambulance_fee','Ambulance');
+				$aTemp = '<select name="ambulance_fee">
 							<option value=""></option>';
-						$sql_reg="SELECT  item_description FROM care_tz_drugsandservices WHERE  item_number LIKE 'R%'";
-			  			$db_reg = $db->Execute($sql_reg);
-						while($regrow=$db_reg->FetchRow()){
-							$rTemp = $rTemp.'<option value="'.$regrow['item_description'].'" ';
-							$rTemp = $rTemp.'>';
-						    $rTemp = $rTemp.$regrow['item_description'];
-							$rTemp = $rTemp.'</option>';
+
+
+						$sql_con="SELECT  item_description FROM care_tz_drugsandservices WHERE  item_number LIKE 'A%'";
+			  			$db_con = $db->Execute($sql_con);
+						while($conrow=$db_con->FetchRow()){
+							$aTemp = $aTemp.'<option value="'.$conrow['item_description'].'" ';
+							$aTemp = $aTemp.'>';
+							$aTemp = $aTemp.$conrow['item_description'];
+							$aTemp = $aTemp.'</option>';
 						}
 
-					$rTemp = $rTemp.'</select>';
+					$aTemp = $aTemp.'</select>';
+
+				$smarty->assign('ambulance_fee',$aTemp);
+				*/
+			$smarty->assign('LDRecBy',$LDReg);
+
+			
+
+			// REGISTRATION FEE
+			//$rTemp = $rTemp.'<select name="registration_fee">
+				//			<option value=""></option>';
+						$sql_reg="SELECT  item_description FROM care_tz_drugsandservices WHERE  item_description LIKE 'REG%'";
+			  			$db_reg = $db->Execute($sql_reg);
+						while($regrow=$db_reg->FetchRow()){
+							$rTemp = $rTemp.'<input type="radio" name="registration_fee" value="'.$regrow['item_description'].'" ';
+							$rTemp = $rTemp.'>';
+						    $rTemp = $rTemp.$regrow['item_description'];
+						}
+			  		//	while($regrow=$db_reg->FetchRow()){
+						//	$rTemp = $rTemp.'<option value="'.$regrow['item_description'].'" ';
+							//$rTemp = $rTemp.'>';
+						    //$rTemp = $rTemp.$regrow['item_description'];
+							//$rTemp = $rTemp.'</option>';
+						//}
+
+					//$rTemp = $rTemp.'</select>';
 
 			$smarty->assign('registration_fee',$rTemp);
 
@@ -889,7 +990,8 @@ if(!isset($pid) || !$pid){
 			}
 
 			$smarty->assign('LDAdmitBy',$LDAdmitBy);
-			if (empty($encoder)) $encoder = $HTTP_COOKIE_VARS[$local_user.$sid];
+			if (empty($encoder)) $encoder = $_COOKIE[$local_user.$sid];
+if(isset($user_id) && $user_id) $encoder= $user_id; else $encoder= $_SESSION['sess_user_name'];
 			$smarty->assign('encoder','<input  name="encoder" type="text" value="'.$encoder.'" size="28" readonly>');
 
 

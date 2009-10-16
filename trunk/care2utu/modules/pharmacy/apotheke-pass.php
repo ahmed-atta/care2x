@@ -42,9 +42,9 @@ switch($mode)
 						$userck="ck_prod_order_user";
 						$fileforward=$root_path."modules/products/products-bestellkatalog-edit.php".$append.$userck."&target=catalog&from=".$src;
 						break;
-	default: 	{header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+	default: 	{header("location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile='apotheke.php'.URL_APPEND;
 $lognote="$LDPharmacy $title ok";
 

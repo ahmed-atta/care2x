@@ -23,7 +23,7 @@ if(!isset($currMonth)||!$currMonth) $currMonth=date('m');
 if(!isset($currYear)||!$currYear) $currYear=date('Y');
 if(isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod']='';
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $editorfile=$root_path.'modules/registration_admission/show_appointment.php';
 require_once($root_path.'include/care_api_classes/class_appointment.php');
 $appt_obj=new Appointment();

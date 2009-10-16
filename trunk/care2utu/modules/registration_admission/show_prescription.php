@@ -1,8 +1,10 @@
 <?php
 
-//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+require_once($root_path.'include/care_api_classes/class_weberp_c2x.php');
+require_once($root_path.'include/inc_init_xmlrpc.php');
 /**
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
@@ -51,12 +53,16 @@ if ($debug) {
 
 	echo "Session-ecnounter_nr: ".$_SESSION['sess_en']."<br>";
 
-	echo "show onyl pharamcy artivles is set to: ".$ShowOnlyPharmacy;
+	echo "show onyl pharamcy artivles is set to: ".$ShowOnlyPharmacy."<br>";
+
+	echo "prescrServ: ".$prescrServ."<br>";
 }
+
+//echo '$prescrServ = '.$_GET['prescrServ'];
 
 if(!$prescription_date) $prescription_date = date("Y-m-d");
 define('NO_2LEVEL_CHK',1);
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 if(!isset($mode)){
 	$mode='show';
 } elseif($mode=='create'||$mode=='update' || $mode=='delete') {
@@ -91,6 +97,8 @@ if (isset($pn)) {
 }
 
 
+
+
 require('./include/init_show.php');
 
 if($parent_admit){
@@ -101,7 +109,7 @@ if($parent_admit){
 			AND e.encounter_nr=pr.encounter_nr
 			AND pr.prescribe_date = '".$prescription_date."'
 			AND service.item_id=pr.article_item_number
-			AND service.is_labtest<>1
+			AND service.is_labtest=0
 		ORDER BY pr.modify_time DESC";
 }else{
 	if ($ShowOnlyPharmacy) {
@@ -109,25 +117,78 @@ if($parent_admit){
 		  WHERE p.pid=".$_SESSION['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr AND pr.article_item_number=care_tz_drugsandservices.item_id AND ( purchasing_class = 'drug_list' OR purchasing_class ='supplies' OR purchasing_class ='dental')
 		  ORDER BY pr.modify_time DESC";
 	} else {
+		//echo '$prescr = '.$_GET['prescrServ'];
+		if ($_GET['prescrServ']=="serv")
+		{
+			$SQLCrit = "( service.purchasing_class = 'xray' OR service.purchasing_class = 'service' OR service.purchasing_class ='dental' OR service.purchasing_class ='smallop' OR service.purchasing_class ='bigop')";
+		}
+		else
+		{
+			$SQLCrit = "( service.purchasing_class = 'drug_list' OR service.purchasing_class ='supplies' OR service.purchasing_class ='supplies_laboratory' OR service.purchasing_class ='special_others_list')";
+		}
+
 		$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr, care_tz_drugsandservices as service
 		  WHERE p.pid=".$_SESSION['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr AND service.item_id=pr.article_item_number
-			AND service.is_labtest<>1 AND ( service.purchasing_class = 'drug_list' OR service.purchasing_class ='supplies' OR purchasing_class ='dental')
+			AND service.is_labtest=0 AND ".$SQLCrit." ORDER BY pr.modify_time DESC";
+
+		//echo $sql;
+
+		// old code:
+
+		/*
+		$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr, care_tz_drugsandservices as service
+		  WHERE p.pid=".$_SESSION['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr AND service.item_id=pr.article_item_number
+			AND service.is_labtest=0 AND ( service.purchasing_class = 'drug_list' OR service.purchasing_class ='supplies' OR purchasing_class ='dental')
 		  ORDER BY pr.modify_time DESC";
+		 */
+
 	}
 }
-
+//echo $sql;
 
 if($result=$db->Execute($sql)){
 	$rows=$result->RecordCount();
 }else{
+// echo $sql;
+}
+
+
+
+if($resultTemp=$db->Execute($sql)){
+	//echo 'executed successfully';
+}else{
  echo $sql;
 }
+
+
+$showHist = '';
+
+while ($row_hist = $resultTemp->FetchRow())
+{
+
+	$tmp = str_replace ("\r","",$row_hist['history']);
+	$tmp = str_replace ("\n","",$tmp);
+	$showHist .= $tmp;
+	$showHist .= '\n';
+
+
+}
+
+//echo '$showHist: '.$showHist;
+
+
 $subtitle=$LDPrescriptions;
 $notestype='prescription';
 $_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
+//$norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer);
+
+if ($prescrServ != "serv")
+$norecordyet=str_replace('~obj~',strtolower($LDPrescription),$buffer);
+else
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer);
+
 
 
 /* Load GUI page */

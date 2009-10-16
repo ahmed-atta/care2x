@@ -18,7 +18,11 @@ $lang_tables[]='billing.php';
 $lang_tables[]='aufnahme.php';
 require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
-$insurance_tz = New Insurance_tz();
+$insurance_tz = new Insurance_tz();
+require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+$bill_obj = new Bill;
+require_once($root_path.'include/care_api_classes/class_tz_insurance_reports.php');
+$insurance_tz_report = new Insurance_Reports_tz();
 
 $debug=FALSE;
 ($debug==TRUE)?$db->debug=true:$db->debug=false;
@@ -28,7 +32,8 @@ $debug=FALSE;
 
 <table border=0>
 	<tr valign="top">
-		<td><!-- Here begins the form  -->
+	<td>
+		<!-- Here begins the form  -->
 
 			<?php
 
@@ -174,6 +179,7 @@ $debug=FALSE;
 
 						//$coreObj->sql="UPDATE care_tz_insurances_admin SET name=\"$name\",".$sql_1.$sql_2.$sql_3.$sql_4.$sql_5.$sql_6.$sql_7.$sql_8." insurer=$id_insurer, max_pay=$max_pay, contact_person=\"$contact_person\", po_box=\"$po_box\", city=\"$city\", phone=\"$phone\", email=\"$email\" WHERE insurance_ID=$insurance_ID";
 						$coreObj->sql="UPDATE care_tz_insurances_admin SET name=\"$name\",".$addition." insurer=$id_insurer, max_pay=$max_pay, contact_person=\"$contact_person\", po_box=\"$po_box\", city=\"$city\", phone=\"$phone\", email=\"$email\" WHERE insurance_ID=$insurance_ID";
+						//echo $coreObj->sql;
 						$db->execute($coreObj->sql);
 					}
 				}

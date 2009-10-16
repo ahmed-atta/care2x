@@ -12,6 +12,10 @@ $LDArchive='Archive';
 $LDViewEditArchiveProcessedOrders='View, edit, archive processed orders';
 $LDAlreadyBilled='Already billed! See bill number';
 
+# t.h. from merotech
+$LDShowPrescrPerWardAndDay='Show prescription per ward and day';
+$LDPrescrWard='Prescription per ward';
+
 $LDPharmacyProductCatalog='Pharmacy::Product Catalog';
 $LDNewProduct='New product';
 $LDEnterNewPharmacyProduct='Enter new pharmacy product in the database';

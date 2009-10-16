@@ -34,7 +34,7 @@ $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND.'&target=currency_admin';
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $GLOBAL_CONFIG=array();
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -47,22 +47,22 @@ if(isset($mode)&&$mode=='save'){
 	$numeric=FALSE; # Values are not strictly numeric
 	$addslash=TRUE; # Slashes should be added to the stored values
 	# Validate input data. Invalid data are just replaced with default values
-	if(!is_numeric($HTTP_POST_VARS['news_headline_title_font_size'])) $HTTP_POST_VARS['news_headline_title_font_size']=NEWS_TITLE_SIZE;
-	if(empty($HTTP_POST_VARS['news_headline_title_font_face'])) $HTTP_POST_VARS['news_headline_title_font_face']=NEWS_TITLE_FONT;
-	if(!is_numeric($HTTP_POST_VARS['news_headline_preface_font_size'])) $HTTP_POST_VARS['news_headline_preface_font_size']=NEWS_PREFACE_SIZE;
-	if(empty($HTTP_POST_VARS['news_headline_preface_font_face'])) $HTTP_POST_VARS['news_headline_preface_font_face']=NEWS_PREFACE_FONT;
-	if(!is_numeric($HTTP_POST_VARS['news_headline_body_font_size'])) $HTTP_POST_VARS['news_headline_body_font_size']=NEWS_BODY_SIZE;
-	if(empty($HTTP_POST_VARS['news_headline_body_font_face'])) $HTTP_POST_VARS['news_headline_body_font_face']=NEWS_BODY_FONT;
-	if(stristr($HTTP_POST_VARS['news_normal_display_width'],'%')){
-		$buffer=substr($HTTP_POST_VARS['news_normal_display_width'],0,strlen($HTTP_POST_VARS['news_normal_display_width'])-1);
-		if(!is_numeric($buffer)||$buffer>100) $HTTP_POST_VARS['news_normal_display_width']=NEWS_DISPLAY_WIDTH;
+	if(!is_numeric($_POST['news_headline_title_font_size'])) $_POST['news_headline_title_font_size']=NEWS_TITLE_SIZE;
+	if(empty($_POST['news_headline_title_font_face'])) $_POST['news_headline_title_font_face']=NEWS_TITLE_FONT;
+	if(!is_numeric($_POST['news_headline_preface_font_size'])) $_POST['news_headline_preface_font_size']=NEWS_PREFACE_SIZE;
+	if(empty($_POST['news_headline_preface_font_face'])) $_POST['news_headline_preface_font_face']=NEWS_PREFACE_FONT;
+	if(!is_numeric($_POST['news_headline_body_font_size'])) $_POST['news_headline_body_font_size']=NEWS_BODY_SIZE;
+	if(empty($_POST['news_headline_body_font_face'])) $_POST['news_headline_body_font_face']=NEWS_BODY_FONT;
+	if(stristr($_POST['news_normal_display_width'],'%')){
+		$buffer=substr($_POST['news_normal_display_width'],0,strlen($_POST['news_normal_display_width'])-1);
+		if(!is_numeric($buffer)||$buffer>100) $_POST['news_normal_display_width']=NEWS_DISPLAY_WIDTH;
 	}else{
-		if(!is_numeric($HTTP_POST_VARS['news_normal_display_width'])) $HTTP_POST_VARS['news_normal_display_width']=NEWS_DISPLAY_WIDTH;
+		if(!is_numeric($_POST['news_normal_display_width'])) $_POST['news_normal_display_width']=NEWS_DISPLAY_WIDTH;
 	}
-	if(!is_numeric($HTTP_POST_VARS['news_normal_preview_maxlen'])) $HTTP_POST_VARS['news_normal_preview_maxlen']=NEWS_PREVIEW_MAXLEN;
+	if(!is_numeric($_POST['news_normal_preview_maxlen'])) $_POST['news_normal_preview_maxlen']=NEWS_PREVIEW_MAXLEN;
 	
 	# Save the configuration
-	$glob_obj->saveConfigArray($HTTP_POST_VARS,$filter,$numeric,'',$addslash);
+	$glob_obj->saveConfigArray($_POST,$filter,$numeric,'',$addslash);
 	# Loop back to self to get the newly stored values
 	header("location:$thisfile".URL_REDIRECT_APPEND."&save_ok=1");
 	exit;

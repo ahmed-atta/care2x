@@ -15,7 +15,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_intramail_domains.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $forwardfile='intra-email.php'.URL_REDIRECT_APPEND.'&mode=listmail';
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 

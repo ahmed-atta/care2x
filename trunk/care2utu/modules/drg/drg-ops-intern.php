@@ -30,7 +30,7 @@ if(isset($mode)&&$mode=='save_group'&&isset($group_nr)&&$group_nr){
 }
 
 $toggle=0;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
           
 if(isset($mode)&&$mode=='delete'&&$item){
 	$buf=$enc_obj->ungroupDiagnoses($group_nr);

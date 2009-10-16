@@ -71,7 +71,7 @@ switch($mode) {
 													modify_id = '".$_SESSION['sess_user_name']."',
 													modify_time = '".date('YmdHis')."'
 											WHERE batch_nr = '".$batch_nr."'";
-
+								  //echo $sql;
 							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 								  	include_once($root_path.'include/inc_diagnostics_report_fx.php');
@@ -93,12 +93,14 @@ switch($mode) {
 }// end of switch($mode)
 
 if(!$mode) /* Get the pending test requests */ 	{
-	$sql="SELECT care_person.pid, care_person.selian_pid, name_first, name_last, batch_nr, tr.encounter_nr,tr.send_date,dept_nr,room_nr
+	$sql="SELECT care_person.pid, care_person.selian_pid, name_first, name_last, batch_nr, tr.encounter_nr,tr.send_date,dept_nr,room_nr, tr.priority
 	FROM care_test_request_".$subtarget." tr, care_encounter, care_person
-						         WHERE (tr.status='pending' OR tr.status='') AND
+						         WHERE (tr.status='pending') AND
 						         tr.encounter_nr = care_encounter.encounter_nr AND
 						         care_encounter.pid = care_person.pid
-						         ORDER BY  tr.send_date DESC";
+						         ORDER BY  tr.send_date ASC";
+
+		//echo $sql;
 		if($requests=$db->Execute($sql)){
 			/* If request is available, load the date format functions */
 			require_once($root_path.'include/inc_date_format_functions.php');
@@ -131,7 +133,7 @@ if(!$mode) /* Get the pending test requests */ 	{
 						         tr.encounter_nr = care_encounter.encounter_nr AND
 						         care_encounter.pid = care_person.pid
 						         AND tr.batch_nr = ".$h_batch_nr."
-						         ORDER BY  tr.send_date DESC";
+						         ORDER BY  tr.send_date ASC";
 		if($h_requests=$db->Execute($sql_headline)){
 			if ($test_request_headline = $h_requests->FetchRow()) {
 				$h_pid=$test_request_headline['pid'];
@@ -144,12 +146,14 @@ if(!$mode) /* Get the pending test requests */ 	{
 		        $h_sex=$test_request_headline['sex'];
 		        $h_DoctorID=$test_request_headline['create_id'];
 
+	$sql_urgency='SELECT priority from care_test_request_chemlabor WHERE batch_nr='.$h_batch_nr;
+	$h_urgency=$db->Execute($sql_urgency);
+	$test_urgency=$h_urgency->FetchRow();
+	$urgency=$test_urgency['priority'];
 		        if ($_sex=="f")
 		        	$h_sex_img="spf.gif";
 		        else
 		        	$h_sex_img="spm.gif";
-
-
 		        //echo "sex:".$_sex;
 			} // end of if ($test_request_headline = $h_requests->FetchRow())
 		} // end of if($h_requests=$db->Execute($sql_headline))
@@ -189,7 +193,7 @@ if($batchrows && $pn){
 		$sql .= "INNER JOIN care_test_request_" . $subtarget_sub . " ON ";
 		$sql .= "( care_test_request_" . $subtarget . ".batch_nr = care_test_request_" . $subtarget_sub . ".batch_nr) ";
 		$sql .= "WHERE care_test_request_" . $subtarget . ".batch_nr='" . $batch_nr . "'";
-
+//echo $sql;
 		if ($ergebnis = $db->Execute ( $sql )) {
 			//if ($editable_rows = $ergebnis->RecordCount ()) {
 				while ( !$ergebnis->EOF ) {
@@ -404,7 +408,7 @@ if($batchrows){
 			<?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?>
 			alt="<?php echo $LDDone ?>"></a> <a
 			href="labor_test_request_pass.php"><img
-			<?php echo createLDImgSrc($root_path,'new.gif','0','absmiddle') ?></a>
+			<?php echo createLDImgSrc($root_path,'new.gif','0','absmiddle') ?>></a>
 
 		</td>
 	</tr>

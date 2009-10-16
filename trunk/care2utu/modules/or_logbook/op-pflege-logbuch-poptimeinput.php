@@ -1,6 +1,6 @@
 <?php
 
-if ($rt!="optimeinput") {header("Location: invalid-access-warning.php"); exit;};
+if ($rt!="optimeinput") {header("location: invalid-access-warning.php"); exit;};
 
 $pdata=array();
 $template=array();
@@ -13,7 +13,7 @@ switch ($mode)
 		$file=fopen($filename,"w+");
 		if($file)
 		{
-			while(list($k,$v)=each($HTTP_POST_VARS))
+			while(list($k,$v)=each($_POST))
 			{
 				$pdata[$k]=$v;
 			}
@@ -38,7 +38,7 @@ switch ($mode)
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
-<TITLE>Eingabefenster für die Kurve</TITLE>
+<TITLE>Eingabefenster fï¿½r die Kurve</TITLE>
 <META name="description" content="">
 <META name="keywords" content="">
 <META name="generator" content="CuteHTML">

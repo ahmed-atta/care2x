@@ -1,6 +1,6 @@
 <?php
 /*
- * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/logout.php,v 1.1 2006/01/13 13:39:03 irroal Exp $
+ * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/logout.php,v 1.2 2009/01/31 20:06:45 andi Exp $
  *
  * Copyright 2001 Nicolas Chalanset <nicocha@free.fr>
  * Copyright 2001 Olivier Cahagne <cahagn_o@epita.fr>
@@ -19,5 +19,5 @@ if (is_array($attach_array))
 	while ($tmp = array_shift($attach_array))
 		@unlink($tmpdir.'/'.$tmp->tmp_file);
 session_destroy();
-Header("Location: index.php?lang=$lang&theme=$old_theme");
+header("location: index.php?lang=$lang&theme=$old_theme");
 ?>

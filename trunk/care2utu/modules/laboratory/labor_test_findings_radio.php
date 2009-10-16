@@ -214,6 +214,45 @@ $enc_obj=new Encounter;
 			 
 		  }// end of switch($mode)
 
+if (empty($batch_nr)) {
+	require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+	$smarty = new smarty_care('nursing');
+
+# Title in toolbar
+	$smarty->assign('sToolbarTitle','Select Radiology Test'." (".$pn.")");
+
+# hide back button
+	$smarty->assign('pbBack',$returnfile);
+
+# href for help button
+	$smarty->assign('pbHelp',"javascript:gethelp('pending_radio_findings.php')");
+
+# href for close button
+	$smarty->assign('breakfile',$breakfile);
+
+# Window bar title
+	$smarty->assign('sWindowTitle',$LDDiagnosticTest." (".$batch_nr.")");
+
+	$smarty->assign('sOnLoadJs','onLoad="if (window.focus) window.focus();"');
+	
+	$sql="SELECT * FROM care_test_findings_radio WHERE encounter_nr='".$pn."'";
+	$result=$db->Execute($sql);
+	ob_start();
+
+	echo '<table bgcolor=lightblue width=50%><tr><th>Test Number</th><th>Date of test</th><th>Test</th></tr>';
+	while ($row=$result->FetchRow()) {
+		$sql="SELECT test_request FROM care_test_request_radio WHERE batch_nr='".$row['batch_nr']."'";
+		$requestresult=$db->Execute($sql);
+		$testrow=$requestresult->FetchRow();
+		echo '<tr><td align=center><a href="'. $thisfile.'?sid='.$sid.'&lang='.$lang.'&edit='.$edit.'&mode=done&target='.$target.'&subtarget='.$subtarget.'&batch_nr='.$row['batch_nr'].'&pn='.$pn.'&user_origin='.$user_origin.'&entry_date='.$entry_date.'">'.$row['batch_nr'].'</a>';
+		echo '<td align=center>'.$row['findings_date'].'</td>';
+		echo '<td align=center>'.$testrow['test_request'].'</td></tr>';
+	}
+	echo '</table>';
+
+
+} else {
+		  
 if($edit) $returnfile.='&batch_nr='.$batch_nr.'&pn='.$pn.'&tracker='.$tracker; 
 
 # Start Smarty templating here
@@ -327,9 +366,6 @@ $sTemp = ob_get_contents();
 ob_end_clean();
 
 $smarty->append('JavaScript',$sTemp);
-
-ob_start();
-
 ?>
 
  <ul>
@@ -341,8 +377,8 @@ ob_start();
 <?php
 }
 
-require_once($root_path.'include/inc_test_findings_form_'.$subtarget.'.php');
 
+require_once($root_path.'include/inc_test_findings_form_'.$subtarget.'.php');
 echo '&nbsp;<br>';
 if ($edit)
 {
@@ -378,6 +414,7 @@ require($root_path.'include/inc_test_request_hiddenvars.php');
 </ul>
 
 <?php
+}
 
 $sTemp = ob_get_contents();
 ob_end_clean();
@@ -389,5 +426,4 @@ $smarty->assign('sMainFrameBlockData',$sTemp);
  * show Template
  */
  $smarty->display('common/mainframe.tpl');
-
- ?>
+?>

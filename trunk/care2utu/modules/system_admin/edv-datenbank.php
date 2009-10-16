@@ -1,5 +1,5 @@
 <?php if (($sid=="")or($sid==NULL)or($sid!=$$ck_sid_buffer)or($ck_edv_db_user==""))
-{header("Location: invalid-access-warning.php"); exit;}
+{header("location: invalid-access-warning.php"); exit;}
 
 require_once($root_path.'include/inc_config_color.php');
 

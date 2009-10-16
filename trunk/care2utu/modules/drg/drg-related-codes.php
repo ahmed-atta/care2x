@@ -15,7 +15,7 @@ define('LANG_FILE','drg.php');
 require_once('drg_inc_local_user.php');
 
 require_once($root_path.'include/inc_front_chain_lang.php');
-if (!isset($pn)||!$pn) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
+if (!isset($pn)||!$pn) {header("location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
 //$db->debug=true;
 if($saveok) { ?>
 

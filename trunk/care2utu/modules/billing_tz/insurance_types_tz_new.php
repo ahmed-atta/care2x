@@ -26,7 +26,7 @@ if($mode=='insert')
 	if(!$error)
 	{
 		if($insurance_tz->InsertInsuranceType($_POST))
-			header("Location: insurance_types_tz.php");
+			header("location: insurance_types_tz.php");
 	}
 	$this_insurance = $_POST;
 }

@@ -31,7 +31,7 @@ $fileforward='amb_clinic_patients_discharge.php'.$append;
 						$lognote='Discharge search ok';
 
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 //$breakfile='startframe.php'.URL_APPEND;
 //$breakfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND.'&pid='.$pid;
 $breakfile='patient.php'.URL_APPEND.'&pid='.$pid;

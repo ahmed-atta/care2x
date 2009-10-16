@@ -38,7 +38,7 @@ switch($target)
 }
 
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 //$breakfile='startframe.php'.URL_APPEND;
 $breakfile=$root_path.'main/startframe.php';
 

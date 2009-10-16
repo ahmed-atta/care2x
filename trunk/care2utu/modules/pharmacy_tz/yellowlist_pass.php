@@ -20,7 +20,7 @@ $allowedarea=&$allow_area['pharma'];
 $userck='_';
 $fileforward='http://www.gelbe-liste.de/index.htm?';
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile='apotheke.php'.URL_APPEND;
 $lognote="$LDYellowList $title ok";
 

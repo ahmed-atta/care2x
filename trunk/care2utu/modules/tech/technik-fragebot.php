@@ -14,7 +14,7 @@ define('LANG_FILE','tech.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 if(!isset($mode)) $mode='';
 $dbtable='care_tech_questions';
 

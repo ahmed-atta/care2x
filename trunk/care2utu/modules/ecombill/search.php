@@ -246,7 +246,7 @@ if($mode=='search'||$mode=='paginate'){
                         echo "</td>";	
 						
 						// Temporarily set to edit-for-all-user mode
-					    //if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
+					    //if($_COOKIE[$local_user.$sid]) echo '
 					   echo '
 						<td><font face=arial size=2>&nbsp;
 							<a href="patientbill.php'.URL_APPEND.'&patnum='.$zeile['encounter_nr'].'&update=1&mode='.$mode.'&full_en='.$full_en.'">

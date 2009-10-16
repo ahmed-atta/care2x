@@ -52,7 +52,7 @@ function loadcat()
 {
 
   	cat=new Image();
-  	cat.src="../imgcreator/catcom.php?person=<?php echo strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+")."&lang=$lang";?>";
+  	cat.src="../imgcreator/catcom.php?person=<?php echo strtr($_COOKIE[$local_user.$sid]," ","+")."&lang=$lang";?>";
   	
 }
 
@@ -126,7 +126,7 @@ require('./gui_bridge/default/gui_tabs_personell_reg.php');
 <a href="javascript:hidecat()"><img
 <?php if($from=="pass")
 { 
-    echo 'src="'.$root_path.'main/imgcreator/catcom.php?lang='.$lang.'&person='.strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+").'" ';
+    echo 'src="'.$root_path.'main/imgcreator/catcom.php?lang='.$lang.'&person='.strtr($_COOKIE[$local_user.$sid]," ","+").'" ';
  }
 else 
 {
@@ -415,7 +415,7 @@ createTR($errorethnicorig, 'ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial" ><FONT  SIZE=2  FACE="Arial"><?php echo $LDRegBy ?>
 </td>
 <td colspan=2><FONT SIZE=-1  FACE="Arial"><nobr>
-<input  name="user_id" type="text" value=<?php if ($user_id!='') echo '"'.$user_id.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="35" onFocus=hidecat()>
+<input  name="user_id" type="text" value=<?php if ($user_id!='') echo '"'.$user_id.'"' ; else echo '"'.$_COOKIE[$local_user.$sid].'"' ?> size="35" onFocus=hidecat()>
 </nobr></td>
 </tr>
 

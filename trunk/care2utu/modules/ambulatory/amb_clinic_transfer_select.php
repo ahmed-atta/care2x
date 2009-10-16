@@ -58,6 +58,13 @@ $dept_count=$dept_obj->LastRecordCount();
 
  ob_start();
 ?>
+<?php
+//echo 'pw: '.$_GET['dept_nr'];
+//echo 'pat_station:'.$_GET['pat_station'];
+//echo 'pn: '.$_GET['pn'];
+//echo 'patnr: '.$_GET['patnr']; $patnr = $_GET['patnr'];
+?>
+
 
 <script language="javascript">
 <!--
@@ -66,26 +73,12 @@ var urlholder;
 function TransferDept(dn){
 <?php
 echo '
-urlholder="amb_clinic_transfer_save.php?mode=transferdept&sid='.$sid.'&lang='.$lang.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&pn='.$pn.'&station='.$station.'&dept_nr='.$dept_nr.'&tgt_nr="+dn;
+urlholder="amb_clinic_transfer_save.php?mode=transferdept&sid='.$sid.'&lang='.$lang.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&pn='.$pn.'&station='.$station.'&dept_nr='.$dept_nr.'&tgt_nr="+dn
 ';
 ?>
 window.opener.location.replace(urlholder);
 window.close();
 }
-
-var urlholder2;
-
-function TransferWard(wd){
-<?php
-echo '
-urlholder2="'.$root_path.'modules/nursing/nursing-station-transfer-save.php?mode=transferward&sid='.$sid.'&lang='.$lang.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&pn='.$pn.'&station='.$station.'&ward_nr=-1&dept_nr='.$dept_nr.'&trwd="+wd;
-';
-?>
-window.opener.location.replace(urlholder2);
-window.close();
-}
-
-
 
 // -->
 </script>
@@ -139,26 +132,46 @@ while(list($x,$v)=each($allmed)){
 ?>
 
 </table>
+<br>
 
-<table>
+<table border=0 cellpadding=2 cellspacing=1 width=100%>
+
+  <tr bgcolor="#f6f6f6">
+    <td colspan=2>&nbsp;<FONT class="prompt"><?php echo $LDTransferWard; ?></td>
+  </tr>
+
+
 	<?php
-	require_once($root_path.'include/care_api_classes/class_ward.php');
-	## Load all wards info
-	$ward_obj=new Ward;
-	$items='nr,ward_id,name';
-	$ward_info=&$ward_obj->getAllWardsItemsObject($items);
-	$ward_count=$ward_obj->LastRecordCount();
+//	require_once($root_path.'include/care_api_classes/class_ward.php');
+//	## Load all wards info
+//	$ward_obj=new Ward;
+//	$items='nr,ward_id,name';
+//	$ward_info=&$ward_obj->getAllWardsItemsObject($items);
+//	$ward_count=$ward_obj->LastRecordCount();
+//
+//	while($ward=$ward_info->FetchRow()){
+//	if($ward['nr']==$ward_nr) continue;
+//	echo '<tr bgcolor="#f6f6f6"><td>'.$ward['ward_id'].'</td>
+//	 <td>'.$ward['name'].'</td>
+//	 <td><a href="javascript:TransferWard(\''.$ward['nr'].'\')"><img '.createLDImgSrc($root_path,'transfer_sm.gif','0').'></a></td></tr>';
+//}
+//
+//
+//?>
 
-	while($ward=$ward_info->FetchRow()){
-	if($ward['nr']==$ward_nr) continue;
-	echo '<tr bgcolor="#f6f6f6"><td>'.$ward['ward_id'].'</td>
-	 <td>'.$ward['name'].'</td>
-	 <td><a href="javascript:TransferWard(\''.$ward['nr'].'\')"><img '.createLDImgSrc($root_path,'transfer_sm.gif','0').'></a></td></tr>';
-}
+<?php $station = "'.$root_path.'modules/registration_admission/aufnahme_start.php?sid='.$sid.'&ntid=false&lang='.$lang.'&pid=10000058&origin=patreg_reg&encounter_class_nr=1";
 
+	 $pathInpatient =$root_path.'modules/registration_admission/aufnahme_start.php?sid='.$sid.'&ntid=false&lang='.$lang.'&pid='.$patnr.'&origin=patreg_reg&encounter_class_nr=1&transFromOutp=yes&pn='.$pn;
 
 ?>
+<tr><td><a href="<?php echo $root_path.'modules/registration_admission/aufnahme_start.php?sid='.$sid.'&ntid=false&lang='.$lang.'&pid='.$patnr.'&origin=patreg_reg&encounter_class_nr=1&transFromOutp=yes&pn='.$pn?>">click here</a></td></tr>
+
+
 </table>
+</form>
+
+
+
 <?php
 
 $sTemp = ob_get_contents();

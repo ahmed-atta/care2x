@@ -228,7 +228,7 @@ $curtime=date('H.i');
 if ($curtime<'9.00') echo $LDGoodMorning;
 if (($curtime>'9.00')and($curtime<'18.00')) echo $LDGoodDay;
 if ($curtime>'18.00') echo $LDGoodEvening;
-echo ' '.$HTTP_COOKIE_VARS[$local_user.$sid];
+echo ' '.$_COOKIE[$local_user.$sid];
 }else echo '<br>';
 ?>
 </font>

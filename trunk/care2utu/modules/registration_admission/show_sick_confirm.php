@@ -16,7 +16,7 @@ $logo_ht_limit=50; # Maximum deparment logo�s height in pixels
 # Load the encounter class
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter($_SESSION['sess_full_en']);
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 if(!isset($mode)||empty($mode)){
 	
@@ -37,18 +37,18 @@ if(!isset($mode)||empty($mode)){
 	//$db->debug=true;
 	include_once($root_path.'include/inc_date_format_functions.php');
 	# Convert date to standard format
-	$HTTP_POST_VARS['date_end']=formatDate2STD($HTTP_POST_VARS['date_end'],$date_format);
-	$HTTP_POST_VARS['date_start']=formatDate2STD($HTTP_POST_VARS['date_start'],$date_format);
-	$HTTP_POST_VARS['date_confirm']=formatDate2STD($HTTP_POST_VARS['date_confirm'],$date_format);
+	$_POST['date_end']=formatDate2STD($_POST['date_end'],$date_format);
+	$_POST['date_start']=formatDate2STD($_POST['date_start'],$date_format);
+	$_POST['date_confirm']=formatDate2STD($_POST['date_confirm'],$date_format);
 	
-	$HTTP_POST_VARS['encounter_nr']=$_SESSION['sess_en'];
-	$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
-	$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-	$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
-	$HTTP_POST_VARS['create_time']=date('YmdHis');
+	$_POST['encounter_nr']=$_SESSION['sess_en'];
+	$_POST['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+	$_POST['modify_id']=$_SESSION['sess_user_name'];
+	$_POST['create_id']=$_SESSION['sess_user_name'];
+	$_POST['create_time']=date('YmdHis');
 
 	
-	if($enc_obj->saveSicknessConfirm($HTTP_POST_VARS)) {
+	if($enc_obj->saveSicknessConfirm($_POST)) {
 		$get_nr=$db->Insert_ID();
 		header("location:".$thisfile.URL_REDIRECT_APPEND."&get_nr=$get_nr&dept_nr=$dept_nr&target=$target&type_nr=$type_nr&pid=".$_SESSION['sess_pid']);
 		exit;

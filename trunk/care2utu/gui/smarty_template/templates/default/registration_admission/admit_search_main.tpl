@@ -49,6 +49,7 @@
 			<td>{{$LDCaseNr}}</td>
 			<td>{{$LDSex}}</td>
 			<td>{{$LDLastName}}</td>
+			<td>{{$LDName2}}</td>
 			<td>{{$LDFirstName}}</td>
 			<td>{{$LDBday}}</td>
 			<td>{{$LDZipCode}}</td>

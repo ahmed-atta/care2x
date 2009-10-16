@@ -17,10 +17,9 @@ class Insurance_tz extends Core {
 
   var $tbl_company='care_tz_company';
   var $tbl_temp="tmp_search_results";
-	var $fields_tbl_company=array(
-	                'id',
-									'name',
-									'contact',
+  var $fields_tbl_company=array('id','name','contact','email',
+									'phone_code',
+									'phone_nr',
 									'po_box',
 									'city',
 									'start_date',
@@ -59,7 +58,7 @@ class Insurance_tz extends Core {
       $company_id = $db_company;
     } else {
         // Check if the company_id (as parameter) is the same like what we have in the database:
-    	if ( ($company_id <> $db_company) && (!empty($db_company))) {
+    	if (($company_id <> $db_company) && (!empty($db_company))) {
     			return -2;
     		}
     }
@@ -166,7 +165,7 @@ class Insurance_tz extends Core {
     	$hide_sql2=false;
     }
     if (!$JUST_CONTRACTED)
-      $this->sql="SELECT id, name, contact, po_box, city, start_date, end_date, hide_company_flag FROM care_tz_company ".$hide_sql1." ORDER BY id ASC";
+      $this->sql="SELECT id, name, contact, email, phone_code, phone_nr, po_box, city, start_date, end_date, hide_company_flag FROM care_tz_company ".$hide_sql1." ORDER BY id ASC";
     else {
       // This gives a list of companies what are somehow dedicated to a list of contracted companies
       // No check if the contract is valid to any time period...
@@ -174,13 +173,17 @@ class Insurance_tz extends Core {
                     care_tz_company.id,
                     care_tz_company.name,
                     care_tz_company.contact,
+		    		care_tz_company.email,
+		    		care_tz_company.phone_code,
+		    		care_tz_company.phone_nr,
                     care_tz_company.po_box,
                     care_tz_company.city,
                     care_tz_company.start_date,
                     care_tz_company.end_date,
                     care_tz_company.invoice_flag,
                     care_tz_company.credit_preselection_flag,
-                    care_tz_company.hide_company_flag
+                    care_tz_company.hide_company_flag,
+                    care_tz_company.prepaid_amount
                   FROM care_tz_company
                     INNER JOIN care_tz_insurance ON care_tz_insurance.company_id=care_tz_company.id
                     INNER JOIN care_tz_insurance_types ON care_tz_insurance_types.id=care_tz_insurance.plan
@@ -189,10 +192,11 @@ class Insurance_tz extends Core {
     }
     $this->result = $db->Execute($this->sql);
     $counter=0;
-    while($this->row = $this->result->FetchRow())
-    {
-    	$return[$counter++] = $this->row;
-  	}
+    if ($this->result)
+	    while($this->row = $this->result->FetchRow())
+	    {
+	    	$return[$counter++] = $this->row;
+	  	}
   	return $return;
   }
 
@@ -275,9 +279,9 @@ class Insurance_tz extends Core {
     if ($this->is_company_just_invoiced($company_id)) {
     	# This company does not have a ceiling, does not have any entry what allocates to care_tz_insurance_types.
     	# so there is no need to join this table.
-    	$this->sql="SELECT i.id, start_date, end_date, cancel_flag, paid_flag FROM care_tz_insurance i WHERE parent=-1 AND company_id=$company_id AND start_date<".time()." AND end_date > ".time()." AND cancel_flag=0 ORDER BY id DESC";
+    	$this->sql="SELECT i.id, start_date, end_date, cancel_flag, paid_flag FROM care_tz_insurance i WHERE parent=-1 AND company_id=".$company_id." AND start_date<".time()." AND end_date > ".time()." AND cancel_flag=0 ORDER BY id DESC";
     } else {
-    	$this->sql="SELECT i.id, it.name, plan, start_date, end_date, cancel_flag, paid_flag FROM care_tz_insurance i, care_tz_insurance_types it WHERE parent=-1 AND company_id=$company_idAND it.id = i.plan AND start_date<".time()." AND end_date > ".time()." AND cancel_flag=0 ORDER BY id DESC";
+    	$this->sql="SELECT i.id, it.name, plan, start_date, end_date, cancel_flag, paid_flag FROM care_tz_insurance i, care_tz_insurance_types it WHERE parent=-1 AND company_id=".$company_id." AND it.id = i.plan AND start_date<".time()." AND end_date > ".time()." AND cancel_flag=0 ORDER BY id DESC";
     }
 
     $this->result = $db->Execute($this->sql);
@@ -375,6 +379,9 @@ class Insurance_tz extends Core {
                   care_tz_company.id,
                   care_tz_company.name,
                   care_tz_company.contact,
+ 	          	  care_tz_company.email,
+		  		  care_tz_company.phone_code,
+		 		  care_tz_company.phone_nr,
                   care_tz_company.po_box,
                   care_tz_company.city,
                   care_tz_company.start_date,
@@ -393,20 +400,23 @@ class Insurance_tz extends Core {
                   care_tz_company.id,
                   care_tz_company.name,
                   care_tz_company.contact,
+		  care_tz_company.email,
+		  care_tz_company.phone_code,
+		  care_tz_company.phone_nr,
                   care_tz_company.po_box,
                   care_tz_company.city,
                   care_tz_company.start_date,
                   care_tz_company.end_date,
                   care_tz_company.invoice_flag,
                   care_tz_company.credit_preselection_flag,
-				  care_tz_company.hide_company_flag,
-				  care_tz_company.prepaid_amount,
+		  care_tz_company.hide_company_flag,
+		  care_tz_company.prepaid_amount,
                   care_tz_insurance_types.name as InsuranceName,
                   care_tz_insurance.plan as insurance
                 FROM care_tz_company
                   LEFT JOIN care_tz_insurance ON care_tz_insurance.company_id=care_tz_company.id
                   LEFT JOIN care_tz_insurance_types ON care_tz_insurance_types.id=care_tz_insurance.plan
-                WHERE care_tz_company.id=$id";
+                WHERE care_tz_company.id=".$id;
     }
     if ($this->debug) echo $this->sql;
     if ( $this->result = $db->Execute($this->sql))
@@ -489,7 +499,7 @@ class Insurance_tz extends Core {
   	function CreateInsuranceContract($company_id, $plan, $start, $end){
 
     global $db;
-    $debug=TRUE;
+    $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
     $company_parent = $this->GetInsuranceIDByCompanyID($company_id);
     if (empty($plan))
@@ -497,7 +507,7 @@ class Insurance_tz extends Core {
     $this->sql="INSERT INTO care_tz_insurance SET
     	parent=-1,
     	company_id='".$company_id."',
-    	PID=0,
+    	PID='".$pid."',
     	company_parent='".$company_parent."',
     	ceiling_startup_subtraction=0,
     	plan=".$plan.",
@@ -555,7 +565,7 @@ class Insurance_tz extends Core {
   	{
   		$where = ' AND start_date > '.$timestamp;
   	}
-    $this->sql="SELECT * FROM care_tz_insurance WHERE company_id=$id"; //.$where;
+    $this->sql="SELECT * FROM care_tz_insurance WHERE company_id=".$id; //.$where;
 
     $this->result = $db->Execute($this->sql);
     $counter=0;
@@ -607,6 +617,9 @@ class Insurance_tz extends Core {
     $this->sql="INSERT INTO care_tz_company SET
     	name='".$dataarray['name']."',
     	contact='".$dataarray['contact']."',
+    	email='".$dataarray['email']."',
+	phone_code='".$dataarray['phone_code']."',
+	phone_nr='".$dataarray['phone_nr']."',
     	po_box='".$dataarray['po_box']."',
     	city='".$dataarray['city']."',
     	invoice_flag='".$invoice."',
@@ -628,6 +641,9 @@ class Insurance_tz extends Core {
     $this->sql="UPDATE care_tz_company SET
     	name='".$dataarray['name']."',
     	contact='".$dataarray['contact']."',
+    	email='".$dataarray['email']."',
+	phone_code='".$dataarray['phone_code']."',
+	phone_nr='".$dataarray['phone_nr']."',
     	po_box='".$dataarray['po_box']."',
     	city='".$dataarray['city']."',
     	invoice_flag='".$invoice."',
@@ -700,8 +716,8 @@ class Insurance_tz extends Core {
 	    	ceiling_startup_subtraction='".$startup_subtraction."',
 	    	gets_company_credit='".$companycredit."',
 	    	plan='".$plan."',
-	    	start_date='0',
-	    	end_date='0',
+	    	start_date='".date()."',
+	    	end_date='".(date()+Y(1))."',
 	    	timestamp='".time()."',
 	    	cancel_flag=0 WHERE PID='".$pid."' AND parent='".$parent."'";
 	} else {
@@ -714,8 +730,8 @@ class Insurance_tz extends Core {
 	    	ceiling_startup_subtraction='".$startup_subtraction."',
 	    	gets_company_credit='".$companycredit."',
 	    	plan='".$plan."',
-	    	start_date='0',
-	    	end_date='0',
+	    	start_date='".date()."',
+	    	end_date='".(date()+Y(1))."',
 	    	timestamp='".time()."',
 	    	cancel_flag=0";
 	}
@@ -901,9 +917,7 @@ class Insurance_tz extends Core {
     	<td align="center" width="30">'.$LDID.'</td>
     	<td align="center" width="240">'.$LDCompanyName.'</td>
 			<td colspan="2" align="center" width="50">'.$LDOptions.'</td>
-    </tr>
-
-    ';
+    </tr>';
 
     while(list($x,$v) = each($this->insurance_array)) {
       // Do we have to show also the hidden companies?
@@ -1097,7 +1111,7 @@ class Insurance_tz extends Core {
   function ShowContractsOfCompany($company_id) {
 
   	global $root_path;
-  	global $LDNoContractsFound,$LDID,$LDplan,$LDStartDate,$LDEndDate,$LDAlreadyPaid,$LDShowContract,$LDShowBill, $LDPaybyInvoice,
+  	global $LDNoContractsFound,$LDID,$LDplan,$LDStartDate,$LDEndDate,$LDCancelled,$LDAlreadyPaid,$LDShowContract,$LDShowBill, $LDPaybyInvoice,
   	       $LDYes,$LDNo;
     /**
     * Returns TRUE if this item number still exists in the database
@@ -1125,16 +1139,16 @@ class Insurance_tz extends Core {
 
 
     <input type="hidden" name="mode" value="updateflags">
-    <table border="0" cellpadding="2" cellspacing="1" width="788">
+    <table border="2" cellpadding="2" cellspacing="1" width="788">
     <tr bgcolor=#ffff66>
     	<td align="center" width="30">'.$LDID.'</td>
     	<td align="center" width="240">'.$LDplan.'</td>
-    	<td align="center" width="80" colspan="2">'.$LDStartDate.'</td>
+    	<td align="center" width="80">'.$LDStartDate.'</td>
     	<td align="center" width="70">'.$LDEndDate.'</td>
-			<td align="center" width="70">'.$LDEndDate.'</td>
-			<td align="center" width="100">'.$LDAlreadyPaid.'</td>
-			<td align="center" width="70">'.$LDShowContract.'</td>
-			<td align="center" width="70">'.$LDShowBill.'</td>
+	<td align="center" width="70">'.$LDCancelled.'</td>
+	<td align="center" width="100">'.$LDAlreadyPaid.'</td>
+	<td align="center" width="70">'.$LDShowContract.'</td>
+	<td align="center" width="70">'.$LDShowBill.'</td>
     </tr>
     ';
     if(is_array($this->contract_array))
@@ -1174,7 +1188,6 @@ class Insurance_tz extends Core {
 	      	<td>'.$v['id'].'</td>
 	      	<td>'.$plan.'</td>
 	      	<td align="center">'.date("d.m.y", $v['start_date']).'</td>
-	      	<td>-</td>
 	      	<td align="center">'.date("d.m.y", $v['end_date']).'</td>
 	      <td><div align="center">'.$LDYes.'<input type="radio" '.$cancel_flag_yes.' name="cancel_'.$v['id'].'" value="yes"><input type="radio" '.$cancel_flag_no.' name="cancel_'.$v['id'].'" value="no"> '.$LDNo.'</td>
 	      <td><div align="center">'.$LDYes.'<input type="radio" '.$paid_flag_yes.' name="paid_'.$v['id'].'" value="yes"><input type="radio" '.$paid_flag_no.' name="paid_'.$v['id'].'" value="no"> '.$LDNo.'</td>
@@ -1298,29 +1311,29 @@ class Insurance_tz extends Core {
 
     include_once($root_path.'include/inc_date_format_functions.php');
     echo '<script language="JavaScript">';
-		require($root_path.'include/inc_checkdate_lang.php');
+    require($root_path.'include/inc_checkdate_lang.php');
     echo '</script>';
     echo '<script language="javascript" src="'.$root_path.'js/setdatetime.js"></script>';
     echo '<script language="javascript" src="'.$root_path.'js/checkdate.js"></script>';
     echo '<script language="javascript" src="'.$root_path.'js/dtpick_care2x.js"></script>';
-    echo '<table border="0" cellpadding="1" cellspacing="1" width="850">
+    echo '<table border="0" cellpadding="1" cellspacing="1" width="" align="center">
       	<tr bgcolor="ffffdd"><td>'.$LDContractStartEnd.':<br><input type="text" size="15" maxlength=10 value="';
       	$datename=	'start';
-    		$formname= 'insurance';
+    	$formname= 'insurance';
 				if($start){
 					echo $start;
 				}
 				else{
 					echo formatDate2Local(date('Y').'-01-01',$date_format);
 				}
-		  	echo '"
+		  		echo '"
 		 				onFocus="this.select();"
 						onBlur="IsValidDate(this,\''.$date_format.'\')"
 						onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\');" name="'.$datename.'">
 						<a href="javascript:show_calendar(\''.$formname.'.'.$datename.'\',\''.$date_format.'\')">
 						<img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle').'></a> - <input type="text" size="15" maxlength=10 value="';
-      	$datename=	'end';
-    		$formname= 'insurance';
+      $datename=	'end';
+      $formname= 'insurance';
 				if($end){
 					echo $end;
 				}
@@ -1329,7 +1342,7 @@ class Insurance_tz extends Core {
 				}
 
 			if ($this->is_company_just_invoiced($company_id)) {
-			  	echo '"
+			  	echo '
 			 				onFocus="this.select();"
 							onBlur="IsValidDate(this,\''.$date_format.'\')"
 							onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\');" name="'.$datename.'">
@@ -1338,7 +1351,7 @@ class Insurance_tz extends Core {
 					</table>';
 
 			} else {
-			  	echo '"
+			  	echo '
 			 				onFocus="this.select();"
 							onBlur="IsValidDate(this,\''.$date_format.'\')"
 							onKeyUp="setDate(this,\''.$date_format.'\',\''.$lang.'\');" name="'.$datename.'">
@@ -1346,8 +1359,6 @@ class Insurance_tz extends Core {
 							<img '.createComIcon($root_path,'show-calendar.gif','0','absmiddle').'></a></td><td>'.$LDPreselectedContractPlan.':<br>'; $this->ShowInsuranceTypesDropDown('plan',$v['Contract']['plan']); echo '</td></tr>
 					</table>';
 			}
-
-
   }
 
   //------------------------------------------------------------------------------
@@ -1433,7 +1444,7 @@ class Insurance_tz extends Core {
     global $thisfile;
     global $LDSelectInsuranceCompany;
     $this->insurance = $this->GetInsuranceAsArray($company_id);
-    echo '<table border="0" cellpadding="1" cellspacing="1" bgcolor="FFFF33" width="850">
+    echo '<table border="0" cellpadding="1" cellspacing="1" bgcolor="FFFF33" width="">
     			<tr>
     				<td align="center">'.$LDSelectInsuranceCompany.' '.$this->insurance['name'].'
     				</td>
@@ -1456,11 +1467,11 @@ class Insurance_tz extends Core {
     while(list($x,$v) = each($this->insurance_array))
     {
       	echo '<option ';
-      	if($v['id']==$selected) echo ' selected ';
+      	if($v['id']==$selected) echo 'selected ';
       	echo 'value="'.$v['id'].'">'.$v['id'].' - '.$v['name'].'</option>';
   	}
   	echo '</select>';
-    return true;
+    return;
   }
 
 
@@ -1478,6 +1489,7 @@ class Insurance_tz extends Core {
     /**
     * Returns TRUE if this item number still exists in the database
     */
+
     echo '<script language="JavaScript">';
 		require($root_path.'include/inc_checkdate_lang.php');
     echo '</script>';
@@ -1503,63 +1515,60 @@ class Insurance_tz extends Core {
 
 		    		if(!is_array($v['Contract']) and $v['Contract']!=-2)		//New Contract
 		    		{
-							echo '<tr bgcolor="ffffaa"><td>'.$person['name_last'].', '.$person['name_first'].' (Selian file nr: '.$person['selian_pid'].')</td><td>'.$LDAction.'</td><td>'.$LDPlanSubstraction.'</td></tr>
+							echo '<tr bgcolor="ffffaa"><td>'.$person['name_last'].', '.$person['name_first'].' (Hospital file nr: '.$person['selian_pid'].')</td><td>'.$LDAction.'</td><td>'.$LDPlanSubstraction.'</td></tr>
 							<tr bgcolor="ffffdd"><td>'.$LDContractStartEnd.'<br><input type="hidden" name="this_'.$v['PID'].'" value="conclude">'.date("m/d/Y",$contractarray['start_date']).' - '.date("m/d/Y",$contractarray['end_date']).'</td><td><input type="hidden" name="this_'.$v['PID'].'" value="conclude">
 							<input type="checkbox" name="action_'.$v['PID'].'" align="absmiddle" checked value="conclude">Conclude contract</td>
 							<td align="center">';
-							if (!$this->is_company_just_invoiced($company_id) )
+							if (!$this->is_company_just_invoiced($company_id))
 								$this->ShowInsuranceTypesDropDown('plan_'.$v['PID'],$contractarray['plan']);
 
-							if (!$this->is_company_just_invoiced($company_id) ) {
-								//echo '<input type="text" value="'.$v['Contract']['ceiling_startup_subtraction'].'" name="startup_'.$v['PID'].'"><br><input type="checkbox" value="1" name="credit_preselection_flag_'.$v['PID'].'" ';
-								//if($insurance_masterfile['credit_preselection_flag']) echo 'checked'; echo '> '.$LDGetsCredit.'</td></tr>';
+							if (!$this->is_company_just_invoiced($company_id)) {
+								echo '<input type="text" value="'.$v['Contract']['ceiling_startup_subtraction'].'" name="startup_'.$v['PID'].'"><br><input type="checkbox" value="1" name="credit_preselection_flag_'.$v['PID'].'" ';
+								if($insurance_masterfile['credit_preselection_flag']) echo 'checked'; echo '> '.$LDGetsCredit.'</td></tr>';
 							} else {
 								echo $LDGetsCredit.'</td></tr>';
 							}
 						}
-				    elseif($v['Contract']['is_valid'])  // Actual Contract
-				    {
-
-						echo '<tr bgcolor="ffffaa"><td><img src="'.$root_path.'gui/img/common/default/lock.gif" height="15" align="absmiddle">'.$person['name_last'].', '.$person['name_first'].' (Selian file nr: '.$person['selian_pid'].')</td><td>'.$LDAction.'</td><td>'.$LDPlanSubstraction.'</td></tr>';
-
-						if($v['Contract']['company_id']!=$selected_insurance) // Is there another valid contract for this person?
+				    	elseif($v['Contract']['is_valid'])  // Actual Contract
 				    	{
-				    		$other_insurance = $this->GetInsuranceAsArray($v['Contract']['company_id']);
-				    		echo '<tr>
-				    		<td colspan="3"><table border="0" bgcolor="FFFF00" width="100%">
-				    		<tr><td><img src="'.$root_path.'gui/img/common/default/level_7.gif" height="15" align="absmiddle"></td><td align="center">'.$LDPersonNoValidContract.'<br><b>'.$other_insurance['name'].'</b><br>'.$LDDeactivatePersonContract.'Please deactivate the persons contract there first!</td><td><img src="'.$root_path.'gui/img/common/default/level_7.gif" height="15" align="absmiddle"></td></tr></table></td></tr>';
-				    	}
-				    	else // No its not, pid is member of this company
-				    	{
-				    		if($v['Contract']['ceiling_startup_subtraction']) $startupsubstraction=$v['Contract']['ceiling_startup_subtraction'];
-				    		else $startupsubstraction=0;
-				    		$selectedplan = $this->GetInsuranceTypeAsArray($v['Contract']['plan']);
-				    		echo '<tr bgcolor="ffffdd"><td>'.$LDContractStartEnd.'Contract (Start/End):<br>'.date('m/d/Y',$contractarray['start_date']).' - '.date('m/d/Y',$contractarray['end_date']).'
-				    		</td>';
-				    		echo '<td><input type="hidden" name="parent_'.$v['PID'].'" value="'.$v['Contract']['parent'].'"><input type="hidden" name="contract_'.$v['PID'].'" value="'.$v['Contract']['id'].'"><input type="hidden" name="this_'.$v['PID'].'" value="cancel"><input type="checkbox" name="action_'.$v['PID'].'" align="absmiddle" value="cancel"> '.$LDCancelContract.'</td>';
-				    		if (!$this->is_company_just_invoiced($company_id) ) {
-				    			echo '<td align="center">'.$LDPlan.' '.$selectedplan['name'].'<br> '.$LDSubstraction.' '.$startupsubstraction.' '.$LDTSH.'<br> '.$LDGetsCredit.' '.$credit.'</td></tr>';
-				    		} else {
-				    			echo '<td align="center">'.$LDGetsCredit.'</td></tr>';
+
+							echo '<tr bgcolor="ffffaa"><td><img src="'.$root_path.'gui/img/common/default/lock.gif" height="15" align="absmiddle">'.$person['name_last'].', '.$person['name_first'].' (Hospital file nr: '.$person['selian_pid'].')</td><td>'.$LDAction.'</td><td>'.$LDPlanSubstraction.'</td></tr>';
+
+							if($v['Contract']['company_id']!=$selected_insurance) // Is there another valid contract for this person?
+				    		{
+				    			$other_insurance = $this->GetInsuranceAsArray($v['Contract']['company_id']);
+				    			echo '<tr>
+				    			<td colspan="3"><table border="0" bgcolor="FFFF00" width="100%">
+				    			<tr><td><img src="'.$root_path.'gui/img/common/default/level_7.gif" height="15" align="absmiddle"></td><td align="center">'.$LDPersonNoValidContract.'<br><b>'.$other_insurance['name'].'</b><br>'.$LDDeactivatePersonContract.'Please deactivate the persons contract there first!</td><td><img src="'.$root_path.'gui/img/common/default/level_7.gif" height="15" align="absmiddle"></td></tr></table></td></tr>';
+				    		} else {// No its not, pid is member of this company
+
+				    			if($v['Contract']['ceiling_startup_subtraction']) $startupsubstraction=$v['Contract']['ceiling_startup_subtraction'];
+				    			else $startupsubstraction=0;
+				    			$selectedplan = $this->GetInsuranceTypeAsArray($v['Contract']['plan']);
+				    			echo '<tr bgcolor="ffffdd"><td>'.$LDContractStartEnd.'Contract (Start/End):<br>'.date('m/d/Y',$contractarray['start_date']).' - '.date('m/d/Y',$contractarray['end_date']).'
+				    			</td>';
+				    			echo '<td><input type="hidden" name="parent_'.$v['PID'].'" value="'.$v['Contract']['parent'].'"><input type="hidden" name="contract_'.$v['PID'].'" value="'.$v['Contract']['id'].'"><input type="hidden" name="this_'.$v['PID'].'" value="cancel"><input type="checkbox" name="action_'.$v['PID'].'" align="absmiddle" value="cancel"> '.$LDCancelContract.'</td>';
+				    			if (!$this->is_company_just_invoiced($company_id) ) {
+				    				echo '<td align="center">'.$LDPlan.' '.$selectedplan['name'].'<br> '.$LDSubstraction.' '.$startupsubstraction.' '.$LDTSH.'<br> '.$LDGetsCredit.' '.$credit.'</td></tr>';
+				    			} else {
+				    				echo '<td align="center">'.$LDGetsCredit.'</td></tr>';
+				    			}
+
 				    		}
-
-				    	}
-				  	}
-				  	elseif($v['Contract']==-2) { // contracted to another company!
-							echo '<tr bgcolor="ffffaa"><td><i>'.$person['name_last'].', '.$person['name_first'].' (Selian file nr: '.$person['selian_pid'].')</td><td>'.$LDAction.'</td><td>'.$LDPlanSubstraction.'<i></td></tr>
+				  		}
+				  		elseif($v['Contract']==-2) { // contracted to another company!
+							echo '<tr bgcolor="ffffaa"><td><i>'.$person['name_last'].', '.$person['name_first'].' (Hospital file nr: '.$person['selian_pid'].')</td><td>'.$LDAction.'</td><td>'.$LDPlanSubstraction.'<i></td></tr>
 							<tr bgcolor="ffffdd"><td><font color="red"> this person is a member of another company</font></td><td>--</td>
 							<td align="center">--</td></tr>';
 
-				  	} else {
-				  		echo 'No Data ...';
-				  	}
-				}
-			else
-				echo '<tr bgcolor="ffffaa"><td colspan="3" align="center">'.$LDNoMembersCompany.'</a></td></tr>';
-  	}
-  	else
-  	{
-			echo '<tr bgcolor="ffffaa"><td colspan="3" align="center">'.$LDNoValidContract.'<br><a href="insurance_company_tz_contracts_new.php?company_id='.$company_id.'">'.$LDClickCreateContract.'</a></td></tr>';
+				  		} else {
+				  			echo 'No Data ...';
+				  		}
+				} else {
+					echo '<tr bgcolor="ffffaa"><td colspan="3" align="center">'.$LDNoMembersCompany.'</a></td></tr>';
+  				}
+	} else {
+		echo '<tr bgcolor="ffffaa"><td colspan="3" align="center">'.$LDNoValidContract.'<br><a href="insurance_company_tz_contracts_new.php?company_id='.$company_id.'">'.$LDClickCreateContract.'</a></td></tr>';
   	}
 
   	while(list($x,$v) = each($allcontracts))   	{
@@ -1571,12 +1580,12 @@ class Insurance_tz extends Core {
 				$cancel_string="checked";
 			else
 				$cancel_string="";
-			echo '<tr bgcolor="ffffaa"><td><img src="'.$root_path.'gui/img/common/default/lock.gif" height="15" align="absmiddle"><input type="hidden" name="this_'.$v['PID'].'" value="cancel">'.$person['name_last'].', '.$person['name_first'].' (Selian file nr: '.$person['selian_pid'].')</td><td>'.$LDStatus.'</td><td>'.$LDPlanSubstraction.'</td></tr>';
+			echo '<tr bgcolor="ffffaa"><td><img src="'.$root_path.'gui/img/common/default/lock.gif" height="15" align="absmiddle"><input type="hidden" name="this_'.$v['PID'].'" value="cancel">'.$person['name_last'].', '.$person['name_first'].' (Hospital file nr: '.$person['selian_pid'].')</td><td>'.$LDStatus.'</td><td>'.$LDPlanSubstraction.'</td></tr>';
 
     		echo '<tr bgcolor="ffffdd"><td>'.$LDContractStartEnd.'<br>'.date('m/d/Y',$contractarray['start_date']).' - '.date('m/d/Y',$contractarray['end_date']).'
     		</td><td><input type="hidden" name="contract_'.$v['PID'].'" value="'.$v['id'].'"><input type="checkbox" name="action_'.$v['PID'].'" '.$cancel_string.' value="cancel"> Cancel contract</td><td align="center">'; $this->ShowInsuranceTypesDropDown('plan_'.$v['PID'],$v['plan']); echo '</td></tr>';
   	}
-  	  	echo '</table>';
+  	  echo '</table>';
     return true;
   }
 
@@ -1593,8 +1602,8 @@ class Insurance_tz extends Core {
 	($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
     if ($this->debug) echo "<br><b>Method class_tz_billing::ShowAllInsurancesForQuotatuion()</b><br>";
     $this->sql = "SELECT company_id,  name FROM care_tz_insurance
-											INNER JOIN care_tz_company ON care_tz_company.id=care_tz_insurance.company_id
-							where
+										INNER JOIN care_tz_company ON care_tz_company.id=care_tz_insurance.company_id
+										where
 										parent = -1
 										AND
 										( care_tz_insurance.start_date <= UNIX_TIMESTAMP() AND care_tz_insurance.end_date >= UNIX_TIMESTAMP())
@@ -1716,17 +1725,19 @@ class Insurance_tz extends Core {
 									AND insurance_2.pid=$pid
 									AND insurance_2.cancel_flag=0";
 	$this->result = $db->Execute($this->sql);
-	if ($this->result)
+	if ($this->result) {
 		if($this->result->RecordCount()>0)
 	  		return TRUE;
 	  	else
 	  		return FALSE;
-    else
+    	}
+	else
     	return FALSE;
-
 	}
-  //------------------------------------------------------------------------------
-  function GetName_insurance_from_pid($pid) {
+
+	//------------------------------------------------------------------------------
+
+	function GetName_insurance_from_pid($pid) {
   	global $db;
     $debug=FALSE;
     ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
@@ -1744,6 +1755,21 @@ class Insurance_tz extends Core {
 	return $return_value;
 	}
 	 //------------------------------------------------------------------------------
+
+	function GetName_insurance_from_id($id) {
+  	global $db;
+    $debug=FALSE;
+    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+	$this->sql="SELECT name FROM care_tz_company where id=".$id;
+	$this->result = $db->Execute($this->sql);
+	$return_value="";
+	while ($this->row=$this->result->FetchRow()) {
+		$return_value.=$this->row['name'];
+	}
+	return $return_value;
+	}
+	 //------------------------------------------------------------------------------
+
 	function is_contract_cancelled($pid) {
 	  	global $db;
 	    $debug=FALSE;
@@ -1764,7 +1790,7 @@ class Insurance_tz extends Core {
 	  	global $db;
 	    $debug=FALSE;
 	    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-	    $this->sql = "SELECT ID,amount, price FROM care_tz_billing_elem where nr=$bill_number AND prescriptions_nr=$prescriptions_nr and is_medicine=1";
+	    $this->sql = "SELECT ID, amount, price FROM care_tz_billing_elem where nr=$bill_number AND prescriptions_nr=$prescriptions_nr and is_medicine=1";
 	    if ($this->result=$db->Execute($this->sql)) {
 	    	while ($this->row=$this->result->FetchRow()) {
 				$covered_price=$this->row['amount'] * $this->row['price'];
@@ -1781,7 +1807,7 @@ class Insurance_tz extends Core {
 	  	global $db;
 	    $debug=FALSE;
 	    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
-	    $this->sql = "SELECT ID,price FROM care_tz_billing_elem where nr=$bill_number and is_labtest=<>0";
+	    $this->sql = "SELECT ID, price FROM care_tz_billing_elem where nr=$bill_number and is_labtest=1";
 	    if ($this->result=$db->Execute($this->sql)) {
 	    	while ($this->row=$this->result->FetchRow()) {
 				$covered_price=$this->row['price'];
@@ -1792,7 +1818,24 @@ class Insurance_tz extends Core {
 	    }
 		return true;
 	}
-	//------------------------------------------------------------------------------
+	 //------------------------------------------------------------------------------
+	function allocateRadiologyItemsToinsurance($bill_number,$insurance_id) {
+
+	  	global $db;
+	    $debug=FALSE;
+	    ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
+	    $this->sql = "SELECT ID, price FROM care_tz_billing_elem where nr=$bill_number and is_radio_test=1";
+	    if ($this->result=$db->Execute($this->sql)) {
+	    	while ($this->row=$this->result->FetchRow()) {
+				$covered_price=$this->row['price'];
+				$exact_id_of_bill_element=$this->row['ID'];
+				$this->sql ="update care_tz_billing_elem SET balanced_insurance='$covered_price', insurance_id=$insurance_id WHERE ID=$exact_id_of_bill_element";
+				$db->Execute($this->sql);
+	    	}
+	    }
+		return true;
+	}
+
 	//------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------
@@ -2050,6 +2093,145 @@ class Insurance_tz extends Core {
 		return $res_array;
 	} // end of function GetMembersOfCompany($company_id, $year)
 
-}
+  function Display_Header($Title){
 
+	global $URL_APPEND, $LDBillingInsurance;
+
+  	echo '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
+			<HTML>
+			<HEAD>
+			 <TITLE>'.$Title.'</TITLE>
+			 <meta name="Description" content="Hospital and Healthcare Integrated Information System - CARE2x">
+			<meta name="Author" content="Robert Meggle">
+			<meta name="Generator" content="various: Quanta, AceHTML 4 Freeware, NuSphere, PHP Coder">
+			 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+			<script language="javascript" >
+			<!--
+			function gethelp(x,s,x1,x2,x3,x4)
+			{
+			if (!x) x="";
+			urlholder="../../main/help-router.php'.URL_APPEND.'&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4;
+			helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
+			window.helpwin.moveTo(0,0);
+			}
+			// -->
+			</script>
+			<link rel="stylesheet" href="../../css/themes/default/default.css" type="text/css">
+			<script language="javascript" src="../../js/hilitebu.js"></script>
+
+			<STYLE TYPE="text/css">
+			A:link  {color: #000066;}
+			A:hover {color: #cc0033;}
+			A:active {color: #cc0000;}
+			A:visited {color: #000066;}
+			A:visited:active {color: #cc0000;}
+			A:visited:hover {color: #cc0033;}
+			</style>
+			<script language="JavaScript">
+			<!--
+			function popPic(pid,nm){
+
+			 if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid='.$sid.'&lang='.$lang.'&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
+
+			}
+			// -->
+			</script>
+
+			  	<script language="javascript">
+			<!--
+			function closewin()
+			{
+				location.href=\'startframe.php?sid='.$sid.'&lang='.$lang.'\';
+			}
+			// -->
+			</script>
+			</HEAD>';
+  	return TRUE;
+  }
+
+
+  function Display_Headline($Headline, $Help_file, $Help_Tag){
+
+	echo '<table cellspacing="0"  class="titlebar" border=0 height="35" width="100%">
+	          <tr valign=top  class="titlebar" >
+	            <td bgcolor="#99ccff" >&nbsp;&nbsp;<font color="#330066">'.$Headline.'</font></td>
+	  	    <td bgcolor="#99ccff" align=right><a
+   href="javascript:window.history.back()"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a>';
+
+		if($_SESSION['ispopup']=="true")
+	  		$closelink='javascript:window.close();';
+	  	else
+	  		$closelink='insurance_tz.php?ntid=false&lang=$lang';
+
+	  echo '<a href="javascript:gethelp(\''.$Help_file.'\',\''. $Help_Tag.'\')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a href="insurance_tz.php?ntid=false&lang=$lang" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
+	 </tr>
+	 </table>
+	<table width=100% border=0 cellspacing=0 height=80%>
+	<tbody class="main">
+		<tr valign="middle" align="center">
+			<td>';
+  	return TRUE;
+  }
+
+  function Display_Footer($Headline, $Help_file, $Help_Tag){
+
+	echo '</td></tr></table> <table cellspacing="0" class="titlebar" border=0>
+	          <tr valign=bottom class="titlebar">
+	            <td bgcolor="#99ccff" >
+	                &nbsp;&nbsp;<font color="#330066">'.$Headline.'</font>
+
+	       	    </td>
+	  	    <td bgcolor="#99ccff" align=right><a
+	   href="javascript:window.history.back()"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)" ></a>';
+
+		if($_SESSION['ispopup']=="true")
+	  		$closelink='javascript:window.close();';
+	  	else
+	  		$closelink='insurance_tz.php?ntid=false&lang=$lang';
+
+	  echo '<a
+	   href="javascript:gethelp(\' '.$Help_file.'\', \''. $Help_Tag.'\')(\'insurance_reports_companies.php\',\'Insurance Reports :: Company Overview\')"><img src="../../gui/img/control/default/en/en_hilfe-r.gif" border=0 width="75" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a><a
+	   href="insurance_tz.php?ntid=false&lang=$lang" ><img src="../../gui/img/control/default/en/en_close2.gif" border=0 width="103" height="24" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>  </td>
+	 	</tr>
+	 </table>';
+  	return TRUE;
+  }
+
+  function Display_Credits(){
+	echo '<table width="100%" border="0" cellspacing="0" cellpadding="1" bgcolor="#cfcfcf">
+			<tr valign=bottom>
+				<td align="center">
+ 		 			<table width="100%" bgcolor="#ffffff" cellspacing=0 cellpadding=5>
+						<tr>
+   							<td><div class="copyright">
+	<script language="JavaScript">
+	<!-- Script Begin
+	function openCreditsWindow() {
+
+		urlholder="../../language/$lang/$lang_credits.php?lang=$lang";
+		creditswin=window.open(urlholder,"creditswin","width=500,height=600,menubar=no,resizable=yes,scrollbars=yes");
+
+}
+//  Script End -->
+</script>
+
+
+ 	<a href="http://www.care2x.org" target=_new>CARE2X 2nd Generation pre-deployment 2.0.2</a> :: <a href="../../legal_gnu_gpl.htm" target=_new> License</a> ::
+ 	<a href=mailto:info@care2x.org>Contact</???a>  :: <a href="../../language/en/en_privacy.htm" target="pp"> Our Privacy Policy </a> ::
+ 	<a href="../../docs/show_legal.php?lang=$lang" target="lgl"> Legal </a> ::
+ 	<a href="javascript:openCreditsWindow()"> Credits </a> ::.<br>
+
+							</div>
+							</td>
+   						<tr>
+  					</table>
+				</td>
+			</tr>
+		</table>
+	</BODY>
+	</html>';
+	return true;
+  }
+}
 ?>

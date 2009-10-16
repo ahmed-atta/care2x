@@ -49,7 +49,7 @@ switch($g)
 							$endid="Ende";
 							//$maxelement=10;
 							break;
-	default:{header("Location: invalid-access-warning.php?mode=close"); exit;}; 
+	default:{header("location: invalid-access-warning.php?mode=close"); exit;}; 
 }
 //echo $g;
 
@@ -162,9 +162,9 @@ $dbtable='care_encounter_op';
        							{
 									//echo $sql." new update <br> resetmain= $resetmainput";
 									
-									//if((($g=="entry_out")||($g=="cut_close"))&&$resetmainput) header("Location: $fileforward&resetmainput=1");
- 											//else header("Location: $fileforward");									
-									header("Location: $fileforward&resetmainput=$resetmainput");
+									//if((($g=="entry_out")||($g=="cut_close"))&&$resetmainput) header("location: $fileforward&resetmainput=1");
+ 											//else header("location: $fileforward");									
+									header("location: $fileforward&resetmainput=$resetmainput");
 									exit;
 								}
 								else
@@ -186,5 +186,5 @@ $dbtable='care_encounter_op';
 				
 	 			}else echo "<p>".$sql."<p>$LDDbNoRead"; 
 
-header("Location: $fileforward");
+header("location: $fileforward");
 ?>

@@ -18,7 +18,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 if($from=='add') $returnfile='edv_system_format_menu_item_add.php'.URL_APPEND.'&from=set';
   else $returnfile=$breakfile;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $editfile='edv_system_format_menu_item_add.php'.URL_REDIRECT_APPEND.'&mode=edit&from=set&item_no=';
 /**
 * Load the db routine
@@ -31,9 +31,9 @@ $gc=new GlobalConfig($GCONFIG);
 if(isset($mode)&&($mode=='save')&&!empty($max_items)){
 	
 	for($i=1;$i<=$max_items;$i++){
-		if(empty($HTTP_POST_VARS["value$i"])) $HTTP_POST_VARS["value$i"]='0';
-		//echo $HTTP_POST_VARS["index$i"].'==>'.$HTTP_POST_VARS["value$i"].'<br>';
-		$gc->saveConfigItem($HTTP_POST_VARS["index$i"],$HTTP_POST_VARS["value$i"]);
+		if(empty($_POST["value$i"])) $_POST["value$i"]='0';
+		//echo $_POST["index$i"].'==>'.$_POST["value$i"].'<br>';
+		$gc->saveConfigItem($_POST["index$i"],$_POST["value$i"]);
 	}
 	header('location:'.$thisfile.URL_REDIRECT_APPEND.'&mode=0');
 	exit;

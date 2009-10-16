@@ -152,7 +152,7 @@ $LDis_enabled='Show/Hide Parameter';
 $LDTSH='TSH (Ex: 1234,56)';
 #2006-09-13 d.r from merotech
 $LDBatchNumber='Batch number';
-$LDSelianFileNr='Selian File no.';
+$LDSelianFileNr='Hospital File no.';
 $LDDateOfTestRequest='Date of test request';
 $LDInsertNewParameter='Insert new Parameter (click edit)';
 //gjergji : param management

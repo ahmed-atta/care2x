@@ -75,11 +75,11 @@ $title_tech = 'Technical support';
 $_a_1_techreception = 'Qbot & Repabot activate, receive, read and write';
 
 // Group start
-$title_pdo = 'Personell Duty Organizer';
-$_a_1_timestampallwrite = 'Personell timestamp (all areas) manage, read & write';
-$_a_2_timestampallread = 'Personell timestamp read only';
-$_a_1_dutyplanallwrite = 'Personell Duty/Leave plan (all areas) manage, read & write';
-$_a_2_dutyplanallread = 'Personell Duty/Leave plan read only';
+$title_pdo = 'Personell Duty Organiser';
+$_a_1_timestampallwrite = 'Personnel time stamp (all areas) manage, read & write';
+$_a_2_timestampallread = 'Personnel time stamp read only';
+$_a_1_dutyplanallwrite = 'Personnel Duty/Leave plan (all areas) manage, read & write';
+$_a_2_dutyplanallread = 'Personnel Duty/Leave plan read only';
 
 // Group start
 $title_bill = 'Billing';

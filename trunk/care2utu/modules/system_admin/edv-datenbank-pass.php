@@ -15,7 +15,7 @@ $fileforward="edv-datenbank.php";
 $thisfile="edv-datenbank-pass.php";
 $breakfile="edv.php";
 
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]&&$HTTP_COOKIE_VARS['ck_login_userid'.$sid])
+if($_COOKIE['ck_login_logged'.$sid]&&$_COOKIE['ck_login_userid'.$sid])
 {
  header("location: passcheck-intern.php?sid=$sid&lang=$lang&allowedarea=$allowedarea&fileforward=$fileforward&retfilepath=$thisfile");
  exit;
@@ -64,7 +64,7 @@ if ($versand=="Abschicken")
 										{				
 										setcookie(ck_edv_db_user,$zeile[mahopass_name]);	
 										logentry($zeile[mahopass_name],"*","IP:".$REMOTE_ADDR."EDV DB verwalten Access OK'd",$thisfile,$fileforward);
-										header("Location: $fileforward?sid=$$ck_sid_buffer");
+										header("location: $fileforward?sid=$$ck_sid_buffer");
 										exit;
 										}else {$passtag=2;};
 									}else $passtag=3;

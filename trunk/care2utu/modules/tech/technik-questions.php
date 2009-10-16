@@ -15,7 +15,7 @@ define('LANG_FILE','tech.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile='technik.php'.URL_APPEND;
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
 $_SESSION['sess_file_return']=basename(__FILE__);
@@ -31,13 +31,13 @@ require_once($root_path.'include/inc_resolve_ward.php');
 
 if(!isset($inquirer)||empty($inquirer))
 {
-	if(isset($HTTP_GET_VARS['inquirer'])&&!empty($HTTP_GET_VARS['inquirer'])) 
+	if(isset($_GET['inquirer'])&&!empty($_GET['inquirer'])) 
 	{
-	    $inquirer=$HTTP_GET_VARS['inquirer'];
+	    $inquirer=$_GET['inquirer'];
     }
-	elseif(isset($HTTP_POST_VARS['inquirer'])&&!empty($HTTP_POST_VARS['inquirer'])) 
+	elseif(isset($_POST['inquirer'])&&!empty($_POST['inquirer'])) 
 	{
-	    $inquirer=$HTTP_POST_VARS['inquirer'];
+	    $inquirer=$_POST['inquirer'];
     }
 /*	else
 	{
@@ -69,11 +69,11 @@ $dbtable='care_tech_questions';
 						VALUES 
 						(
 							'$dept',
-							'".htmlspecialchars($HTTP_POST_VARS['query'])."',
+							'".htmlspecialchars($_POST['query'])."',
 							'$inquirer',
-							'".$HTTP_POST_VARS['tphone']."', 
-							'".$HTTP_POST_VARS['tdate']."', 
-							'".$HTTP_POST_VARS['ttime']."', 
+							'".$_POST['tphone']."', 
+							'".$_POST['tdate']."', 
+							'".$_POST['ttime']."', 
 							'".date('YmdHis')."',
 							'0',
 							'pending',
@@ -85,7 +85,7 @@ $dbtable='care_tech_questions';
         $ok=$db->Execute($sql);
         if($ok && $db->CommitTrans()) {
 			$inquirer=strtr($inquirer,' ','+');
-			header("Location: technik-questions.php".URL_REDIRECT_APPEND."&dept=$dept&inquirer=$inquirer");
+			header("location: technik-questions.php".URL_REDIRECT_APPEND."&dept=$dept&inquirer=$inquirer");
 			exit;
 		}else {
 			$db->RollbackTrans();
@@ -95,13 +95,13 @@ $dbtable='care_tech_questions';
     if($mode=='read') {
 /*        $sql="SELECT tdate,ttime,inquirer,query,answered,reply,ansby,astamp FROM $dbtable
 							 WHERE inquirer='$inquirer'
-							 		AND dept='".$HTTP_GET_VARS['dept']."'
-									AND tdate='".$HTTP_GET_VARS['tdate']."'
-									AND ttime='".$HTTP_GET_VARS['ttime']."'
-									AND tid='".$HTTP_GET_VARS['tid']."'
+							 		AND dept='".$_GET['dept']."'
+									AND tdate='".$_GET['tdate']."'
+									AND ttime='".$_GET['ttime']."'
+									AND tid='".$_GET['tid']."'
 									LIMIT 0,10"; 
 */        $sql="SELECT tdate,ttime,inquirer,query,answered,reply,ansby,astamp FROM $dbtable
-							 WHERE batch_nr='".$HTTP_GET_VARS['batch_nr']."'";
+							 WHERE batch_nr='".$_GET['batch_nr']."'";
         if($result=$db->SelectLimit($sql,10)) {
             $inhalt=$result->FetchRow();		
         } else {echo "<p>$sql $LDDbNoSave<br>"; };

@@ -99,7 +99,7 @@ class Person extends Core {
 	* @var array
 	*/
 	var $basic_list='pid,title,name_first,name_last,name_2,name_3,name_middle,name_maiden,name_others,date_birth,
-				           sex,addr_str,addr_str_nr,addr_zip,addr_citytown_nr,citizenship,photo_filename,email,sss_nr,nat_id_nr,region,district,ward';
+				           blood_group,sex,addr_str,addr_str_nr,addr_zip,addr_citytown_nr,citizenship,photo_filename,email,sss_nr,nat_id_nr,region,district,ward';
 	/**
 	* Field names of table care_person
 	* @var array
@@ -107,24 +107,23 @@ class Person extends Core {
 	var  $elems_array=array(
 				'pid',
 				'selian_pid',
-				 'title',
 				 'date_reg',
-				 'name_last',
 				 'name_first',
-				 'date_birth',
-				 'sex',
 				 'name_2',
 				 'name_3',
 				 'name_middle',
+				'name_last',
 				 'name_maiden',
 				 'name_others',
-				 'date_birth',
+				'education',
+				'date_birth',
 				 'blood_group',
 				 'rh',
 				 'addr_str',
 				 'addr_str_nr',
 				 'addr_zip',
 				 'addr_citytown_nr',
+				'addr_is_valid',
 				 'citizenship',
 				 'phone_1_code',
 				 'phone_1_nr',
@@ -135,6 +134,9 @@ class Person extends Core {
 				 'fax',
 				 'email',
 				 'civil_status',
+				'sex',
+				'title',
+				'photo',
 				 'photo_filename',
 				 'ethnic_orig',
 				 'org_id',
@@ -159,7 +161,8 @@ class Person extends Core {
 				 'modify_time',
 				 'create_id',
 				 'create_time',
-				 'insurance_category',
+				 'addr_citytown_name',
+				'allergy',
 				 'insurance_ID');
 	/**
 	* Constructor
@@ -257,15 +260,15 @@ class Person extends Core {
 	* @access private
 	*/
 	function prepInsertArray(){
-        global $HTTP_POST_VARS;
+#        global $HTTP_POST_VARS;
 		$x='';
 		$v='';
 
 		$this->data_array=NULL;
-		if(!isset($HTTP_POST_VARS['create_time'])||empty($HTTP_POST_VARS['create_time'])) $HTTP_POST_VARS['create_time']=date('YmdHis');
+		if(!isset($_POST['create_time'])||empty($_POST['create_time'])) $_POST['create_time']=date('YmdHis');
 		//print_r ($this->elems_array);
 		while(list($x,$v)=each($this->elems_array)) {
-	    	if(isset($HTTP_POST_VARS[$v])&&!empty($HTTP_POST_VARS[$v])) $this->data_array[$v]=$HTTP_POST_VARS[$v];
+	    	if(isset($_POST[$v])&&!empty($_POST[$v])) $this->data_array[$v]=$_POST[$v];
 
 	    }
     }
@@ -301,6 +304,9 @@ class Person extends Core {
 		$index='';
 		$values='';
 		if(!is_array($array)) return false;
+		if (!isset($array['name_others'])) {
+			$array['name_others']='';
+		}
 		while(list($x,$v)=each($array)) {
 				if($x!='insurance_category')
 				{
@@ -414,9 +420,9 @@ class Person extends Core {
 
 					LEFT JOIN care_tz_tribes AS tribe ON p.name_maiden=tribe.tribe_id
 					LEFT JOIN care_tz_religion AS religion ON p.religion=religion.nr
-					LEFT JOIN care_tz_region AS region ON p.email=region.region_id
-					LEFT JOIN care_tz_district AS district ON p.sss_nr=district.district_id
-					LEFT JOIN care_tz_ward AS ward ON p.nat_id_nr=ward.ward_id
+					LEFT JOIN care_tz_region AS region ON p.region=region.region_id
+					LEFT JOIN care_tz_district AS district ON p.district=district.district_id
+					LEFT JOIN care_tz_ward AS ward ON p.ward=ward.ward_id
 					LEFT JOIN  $this->tb_ethnic_orig AS ethnic ON p.ethnic_orig=ethnic.nr
 					WHERE p.pid='$this->pid' ";
         $this->result=$db->Execute($this->sql);
@@ -717,6 +723,16 @@ class Person extends Core {
 	function Religion() {
         return  $this->getValue('religion');
 	}
+	/**
+	
+	/**
+	* Returns Insurance_ID.
+	*/
+	function Insurance($pid) {
+        return $this->getValue('insurance_ID');
+	}
+	/**
+	
 	/**
 	* Returns pid number of mother.
 	*/
@@ -1082,7 +1098,7 @@ class Person extends Core {
 			# Check the size of the comp
 			if(sizeof($comp)>1){
 
-				$sql2=" WHERE (name_last $sql_LIKE '".strtr($ln,'+',' ')."%' AND name_first $sql_LIKE '".strtr($fn,'+',' ')."%')";
+				$sql2=" WHERE (name_2 $sql_LIKE '".strtr($ln,'+',' ')."%' AND name_last $sql_LIKE '".strtr($ln,'+',' ')."%' AND name_first $sql_LIKE '".strtr($fn,'+',' ')."%')";
 				if(!empty($bd)){
 					$DOB=@formatDate2STD($bd,$date_format);
 					if($DOB=='') {
@@ -1101,7 +1117,7 @@ class Person extends Core {
 					if($DOB=='') {
 						if(defined('SHOW_FIRSTNAME_CONTROLLER')&&SHOW_FIRSTNAME_CONTROLLER){
 							if($fname){
-								$sql2=" WHERE name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%' OR name_first $sql_LIKE '".strtr($suchwort,'+',' ')."%'";
+								$sql2=" WHERE name_2 $sql_LIKE '".strtr($suchwort,'+',' ')."%' OR name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%' OR name_first $sql_LIKE '".strtr($suchwort,'+',' ')."%'";
 							}else{
 								$sql2=" WHERE name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%' ";
 							}
@@ -1126,7 +1142,7 @@ class Person extends Core {
 		# Set the sorting directive
 		if(isset($oitem)&&!empty($oitem)) $sql3 =" ORDER BY $oitem $odir";
 
-		$this->sql='SELECT pid, selian_pid, name_last, name_first, date_birth, addr_zip, sex, death_date, status FROM '.$this->buffer.$sql3;
+		$this->sql='SELECT pid, selian_pid, name_2, name_last, name_first, date_birth, addr_zip, sex, death_date, status FROM '.$this->buffer.$sql3;
 		//echo $this->sql;
 		if($this->res['ssl']=$db->SelectLimit($this->sql,$maxcount,$offset)){
 			if($this->rec_count=$this->res['ssl']->RecordCount()) {

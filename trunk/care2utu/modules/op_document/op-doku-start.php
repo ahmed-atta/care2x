@@ -83,10 +83,10 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient_%');	
 
 
-if ((substr($matchcode,0,1)=='%')||(substr($matchcode,0,1)=='&')) {header("Location:'.$root_path.'language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if ((substr($matchcode,0,1)=='%')||(substr($matchcode,0,1)=='&')) {header("location:'.$root_path.'language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 $breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
  /* Set color values for the search mask */
 $searchmask_bgcolor='#f3f3f3';
@@ -96,7 +96,7 @@ $entry_border_bgcolor='#6666ee';
 $entry_body_bgcolor='#ffffff';
 
 if(!isset($dept)||empty($dept))
-	if($HTTP_COOKIE_VARS['ck_thispc_dept']) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
+	if($_COOKIE['ck_thispc_dept']) $dept=$_COOKIE['ck_thispc_dept'];
 		else $dept='plop'; // default department is plop
 
 $linecount=0;
@@ -353,7 +353,7 @@ if($mode=='save')
 
 			default:
 
-					if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $mode="dummy";
+					if($_COOKIE["ck_login_logged".$sid]) $mode="dummy";
 					
 		} // end of switch
 	}
@@ -683,7 +683,7 @@ if($mode=='saveok'){
 	if($err_data){
 	  	echo $operator; 
 	 }else{
-		    echo $HTTP_COOKIE_VARS[$local_user.$sid];
+		    echo $_COOKIE[$local_user.$sid];
 	  }
 	echo '">';
 }

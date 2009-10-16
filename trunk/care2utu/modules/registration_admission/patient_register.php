@@ -19,10 +19,11 @@ define('LANG_FILE','aufnahme.php');
 
 $local_user='aufnahme_user';
 require($root_path.'include/inc_front_chain_lang.php');
-//$db->debug=true;
+$db->debug=false;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $default_filebreak=$root_path.'main/startframe.php'.URL_APPEND;
+
 if(empty($_SESSION['sess_path_referer']) || !file_exists($root_path.$_SESSION['sess_path_referer'])) {
     $breakfile=$default_filebreak;
 } else {
@@ -47,11 +48,9 @@ echo setCharSet();
 <?php
 require($root_path.'include/inc_js_gethelp.php');
 require($root_path.'include/inc_css_a_hilitebu.php');
-
 ?>
 
 </HEAD>
-
 
 <BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();"
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
@@ -63,7 +62,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
     </td>
     <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
       <a href="javascript:gethelp('registration_overview.php','Person Registration :: Overview','<?php echo $error_person_exists; ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php
-      echo $breakfile;  ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+      echo $breakfile;  ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>></a>
     </td>
   </tr>
 
@@ -82,9 +81,10 @@ require('./gui_bridge/default/gui_tz_tabs_patreg.php');
  $sTemp = ob_get_contents();
  ob_end_clean();
 
+ chdir(dirname($_SERVER['SCRIPT_FILENAME']));
 
 //require_once($root_path.'include/care_api_classes/class_gui_input_person.php');
-require('../../include/care_api_classes/class_gui_input_person.php');
+require($root_path.'include/care_api_classes/class_gui_input_person.php');
 
 
 $inperson = & new GuiInputPerson;
@@ -112,7 +112,7 @@ $inperson->Display();
 
 <p>
 <a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo $breakfile;
+<?php if($_COOKIE['ck_login_logged'.$sid]) echo $breakfile;
 	else echo 'aufnahme_pass.php';
 	echo URL_APPEND;
 ?>
@@ -127,4 +127,3 @@ require($root_path.'include/inc_load_copyrite.php');
 <?php
 echo StdFooter();
 ?>
-

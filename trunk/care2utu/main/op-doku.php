@@ -14,7 +14,7 @@ define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 setcookie(firstentry,''); // The cookie "firsentry" is used for switching the cat image
 
@@ -94,7 +94,7 @@ $_SESSION['sess_path_referer']=$top_dir.$thisfile;
       onmouseout=\"timer=setTimeout('hsm()',1000)\">$LDORNOC $LDScheduler </a>");
   $smarty->assign('LDDutyPlanTxt',$LDDutyPlanTxt);
 
-  $smarty->assign('LDOnCallDuty',"<a href=\"spediens-bdienst-zeit-erfassung.php".URL_APPEND."&retpath=op&encoder=".$HTTP_COOKIE_VARS['ck_login_username'.$sid]."\">$LDOnCallDuty</a>");
+  $smarty->assign('LDOnCallDuty',"<a href=\"spediens-bdienst-zeit-erfassung.php".URL_APPEND."&retpath=op&encoder=".$_COOKIE['ck_login_username'.$sid]."\">$LDOnCallDuty</a>");
   $smarty->assign('LDOnCallDutyTxt',$LDOnCallDutyTxt);
 
   # OR Anesthesia submenu block

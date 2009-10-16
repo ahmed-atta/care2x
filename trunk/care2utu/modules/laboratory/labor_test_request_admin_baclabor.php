@@ -59,8 +59,8 @@ $db_request_table=$subtarget;
 /* Get the pending test requests */
 if(!isset($mode) || empty($mode)) {
 		
-	$sql="SELECT batch_nr,encounter_nr,send_date,dept_nr FROM care_test_request_".$db_request_table."
-				WHERE status='pending' ORDER BY  send_date DESC";
+	$sql="SELECT batch_nr,encounter_nr,send_date,dept_nr,priority FROM care_test_request_".$db_request_table."
+				WHERE status='pending' ORDER BY  send_date ASC";
 	
 	if($requests=$db->Execute($sql)){
 		/* If request is available, load the date format functions */

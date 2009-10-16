@@ -1,6 +1,6 @@
 <?php
 /*
- * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/send.php,v 1.1 2006/01/13 13:39:03 irroal Exp $
+ * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/send.php,v 1.2 2009/01/31 20:06:45 andi Exp $
  *
  * Copyright 2001 Nicolas Chalanset <nicocha@free.fr>
  * Copyright 2001 Olivier Cahagne <cahagn_o@epita.fr>
@@ -14,12 +14,12 @@ require ('check_lang.php');
 require ('functions.php');
 
 if (!session_is_registered('loggedin') && $loggedin)
-	header("Location: logout.php?lang=$lang");
+	header("location: logout.php?lang=$lang");
 
 if (!function_exists('is_uploaded_file'))
 	include ('is_uploaded_file.php');
 
-if ($HTTP_SERVER_VARS['REQUEST_METHOD'] != 'POST')
+if ($_SERVER['REQUEST_METHOD'] != 'POST')
 	go_back_index($attach_array, $tmpdir, $php_session, $sort, $sortdir, $lang);
 else
 {
@@ -54,7 +54,7 @@ else
 			require ('html/menu_inbox.php');
 			break;
 		case 'send':
-			$ip = (getenv('HTTP_X_FORWARDED_FOR') ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR'));
+			$ip = ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
 			$mail = new mime_mail();
 			$mail->crlf = get_crlf($smtp_server);
 			$mail->smtp_server = $smtp_server;

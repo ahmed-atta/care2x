@@ -25,7 +25,7 @@ $breakfile='edv.php?sid='.$sid.'&lang='.$lang;
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
 $_SESSION['sess_file_return']=basename(__FILE__);
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 if(isset($mode) && ($mode=='search')) {
 

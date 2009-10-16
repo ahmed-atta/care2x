@@ -19,7 +19,11 @@ $txtsearch=$_REQUEST['txtsearch'];
 
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+$billing_tz = new Bill();
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
+$insurance_tz = new Insurance_tz();
+require_once($root_path.'include/care_api_classes/class_tz_insurance_reports.php');
+$insurance_tz_report = new Insurance_Reports_tz();
 
 
 require_once('include/inc_timeframe.php');

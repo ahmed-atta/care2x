@@ -1,6 +1,6 @@
 <?php
 /*
- * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/functions.php,v 1.1 2006/01/13 13:39:03 irroal Exp $ 
+ * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/functions.php,v 1.2 2009/01/31 20:06:45 andi Exp $ 
  *
  * Copyright 2001 Nicolas Chalanset <nicocha@free.fr>
  * Copyright 2001 Olivier Cahagne <cahagn_o@epita.fr>
@@ -110,7 +110,7 @@ function aff_mail($servr, $user, $passwd, $folder, $mail, $verbose, $lang, $sort
 	require ('conf.php');
 	require ('check_lang.php');
 	GLOBAL $attach_tab;
-	GLOBAL $PHP_SELF;
+//	// GLOBAL $PHP_SELF;
 	$glob_body = '';
 	$subject = $from = $to = $cc = '';
 
@@ -359,7 +359,7 @@ function GetSinglePart($this_part, $header, $body)
 
 function remove_stuff($body, $lang, $mime)
 {
-	GLOBAL $PHP_SELF;
+	// GLOBAL $PHP_SELF;
 
 	if (eregi('html', $mime))
 	{
@@ -380,8 +380,8 @@ function remove_stuff($body, $lang, $mime)
 		$body = preg_replace("|<([^>]*)java|i", '<nocc_removed_java_tag', $body);
 		$body = preg_replace("|<([^>]*)&{.*}([^>]*)>|i", "<&{;}\\3>", $body);
 		//$body = preg_replace("|<([^>]*)mocha:([^>]*)>|i", "<nocc_removed_mocha:\\2>",$body);
-		$body = eregi_replace("href=\"mailto:([[:alnum:]+-=%&:_.~?@]+[#[:alnum:]+]*)\"","<A HREF=\"$PHP_SELF?action=write&amp;mail_to=\\1&amp;lang=$lang\"", $body);
-		$body = eregi_replace("href=mailto:([[:alnum:]+-=%&:_.~?@]+[#[:alnum:]+]*)","<A HREF=\"$PHP_SELF?action=write&amp;mail_to=\\1&amp;lang=$lang\"", $body);
+		$body = eregi_replace("href=\"mailto:([[:alnum:]+-=%&:_.~?@]+[#[:alnum:]+]*)\"","<A HREF=\"$_SERVER['PHP_SELF']?action=write&amp;mail_to=\\1&amp;lang=$lang\"", $body);
+		$body = eregi_replace("href=mailto:([[:alnum:]+-=%&:_.~?@]+[#[:alnum:]+]*)","<A HREF=\"$_SERVER['PHP_SELF']?action=write&amp;mail_to=\\1&amp;lang=$lang\"", $body);
 		$body = eregi_replace("target=\"([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)\"", "", $body);
 		$body = eregi_replace("target=([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)", "", $body);
 		$body = eregi_replace("href=\"([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)\"","<a href=\"\\1\" target=\"_blank\"", $body);
@@ -391,7 +391,7 @@ function remove_stuff($body, $lang, $mime)
 	{
 		$body = htmlspecialchars($body);
 		$body = eregi_replace("(http|https|ftp)://([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)","<a href=\"\\1://\\2\" target=\"_blank\">\\1://\\2</a>", $body);
-		$body = eregi_replace("([#[:alnum:]+-._]*)@([#[:alnum:]+-_]*)\.([[:alnum:]+-_.]+[#[:alnum:]+]*)","<a href=\"$PHP_SELF?action=write&amp;mail_to=\\1@\\2.\\3&amp;lang=$lang\">\\1@\\2.\\3</a>", $body);
+		$body = eregi_replace("([#[:alnum:]+-._]*)@([#[:alnum:]+-_]*)\.([[:alnum:]+-_.]+[#[:alnum:]+]*)","<a href=\"$_SERVER['PHP_SELF']?action=write&amp;mail_to=\\1@\\2.\\3&amp;lang=$lang\">\\1@\\2.\\3</a>", $body);
 		$body = nl2br($body);
 		if (function_exists('wordwrap'))
 			$body = wordwrap($body, 80, "\n");
@@ -571,7 +571,7 @@ function go_back_index($attach_array, $tmpdir, $php_session, $sort, $sortdir, $l
 			unlink($tmpdir.'/'.$tmp->tmp_file);
 	session_unregister('num_attach');
 	session_unregister('attach_array');
-	header("Location: action.php?sort=$sort&sortdir=$sortdir&lang=$lang&$php_session=".$$php_session);
+	header("location: action.php?sort=$sort&sortdir=$sortdir&lang=$lang&$php_session=".$$php_session);
 }
 
 /* ----------------------------------------------------- */

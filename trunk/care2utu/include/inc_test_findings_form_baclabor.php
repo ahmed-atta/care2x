@@ -1,6 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_test_findings_form_baclabor.php',$PHP_SELF)) 
+if (eregi('inc_test_findings_form_baclabor.php',$_SERVER['PHP_SELF'])) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php')) include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php');
@@ -366,13 +366,9 @@ for($n=0;$n<8;$n++)
 	<b><?php echo $LDBatchNumber." ".$batch_nr ?>  </b>
     </td>
 	</tr>	
-	
-	
-	
-	  <tr bgcolor="#fff3f3"  valign="top">
+	<tr bgcolor="#fff3f3"  valign="top">
     <td align="right"><font size=3 color="#ee6666" face="verdana,arial"><b><?php echo $LDMaterial ?></b></td>
     <td colspan=2><font size=2 color="black" face="verdana,arial">&nbsp;<?php if($edit_form || $read_form || $edit_findings) echo stripslashes($stored_request['material_note']); ?></font></td>
-	</td>
     <td  rowspan=8>	 
 		<?php
 	       if($edit_findings) echo '

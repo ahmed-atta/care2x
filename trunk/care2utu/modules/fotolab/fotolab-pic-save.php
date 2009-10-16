@@ -19,7 +19,7 @@ include_once($root_path.'include/inc_date_format_functions.php');
 				
 # If data incomplete go back to select page
 if(!$patnum||!$firstname||!$lastname||!$bday||!$maxpic)	{
-	header("Location:fotolab-dir-select.php?sid=$sid&lang=$lang&maxpic=$maxpic&nopatdata=1"); 
+	header("location:fotolab-dir-select.php?sid=$sid&lang=$lang&maxpic=$maxpic&nopatdata=1"); 
 	exit;
 }; 
 require($root_path.'global_conf/inc_remoteservers_conf.php');
@@ -120,7 +120,7 @@ if($maxpic){
 		   $shotnr='nr'.$i;//echo $shotnr."<br>";
 		   //echo $picfile.' '.$shotdate.' '.$shotnr;
 		   # Check the image
-		   if(!$img->isValidUploadedImage($HTTP_POST_FILES[$picfile])) continue;
+		   if(!$img->isValidUploadedImage($_FILES[$picfile])) continue;
 		   # Get the file extension
 		  $picext=$img->UploadedImageMimeType();
 
@@ -139,7 +139,7 @@ if($maxpic){
 
 				$picfilename[$i]=$picnr.'.'.$picext;
 		
-		      		echo '<tr><td>'.$HTTP_POST_FILES[$picfile]['name'].'</td><td> <img '.createComIcon($root_path,'fwd.gif','0','absmiddle').'> ';
+		      		echo '<tr><td>'.$_FILES[$picfile]['name'].'</td><td> <img '.createComIcon($root_path,'fwd.gif','0','absmiddle').'> ';
 		       		if($disc_pix_mode)
 		       		{
 			      		if(!is_dir($d)){
@@ -158,7 +158,7 @@ if($maxpic){
 						$dir_path=$root_path.'cache/';
 			   		}
 					# Save the uploaded image
-					$img->saveUploadedImage($HTTP_POST_FILES[$picfile],$dir_path,$picfilename[$i]);
+					$img->saveUploadedImage($_FILES[$picfile],$dir_path,$picfilename[$i]);
 					
 		       		echo '<font color="#cc0000"><a href="javascript:previewpic(\'';
 		       		if($disc_pix_mode) echo $root_path.$fotoserver_localpath; else echo $fotoserver_http;

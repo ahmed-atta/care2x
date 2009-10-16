@@ -1,5 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+
+
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
@@ -14,11 +16,11 @@ $lang_tables=array('person.php','actions.php');
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
-
 require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['admit'];
 $append=URL_REDIRECT_APPEND; 
+
 switch($target)
 {
 	case 'entry':$fileforward='patient_register_search.php'.$append.'&origin=pass&target=entry'; 
@@ -29,24 +31,26 @@ switch($target)
 						break;
 	case 'archiv':$fileforward='patient_register_archive.php'.$append.'&origin=pass';
 						$lognote='Patient register archive ok';
-						 break;
+                        break;
 	default: 
 				$target='entry';
 				$lognote='Patient register ok';
 				$fileforward='patient_register.php'.$append;
 }
 
-
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile='patient.php'.URL_APPEND;
 
 $userck='aufnahme_user';
 //reset cookie;
 // reset all 2nd level lock cookies
 setcookie($userck.$sid,'',0,'/');
+
 require($root_path.'include/inc_2level_reset.php'); setcookie(ck_2level_sid.$sid,'',0,'/');
 
 require($root_path.'include/inc_passcheck_internchk.php');
+$pass=check;
+
 if ($pass=='check') 	
 	include($root_path.'include/inc_passcheck.php');
 

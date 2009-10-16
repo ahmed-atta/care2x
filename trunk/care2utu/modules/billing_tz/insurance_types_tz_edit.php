@@ -27,7 +27,7 @@ if($mode=='update')
 	if(!$error)
 	{
 		if($insurance_tz->UpdateInsuranceType($_POST))
-			header("Location: insurance_types_tz.php");
+			header("location: insurance_types_tz.php");
 	}
 	$this_insurance = $_POST;
 }

@@ -31,7 +31,7 @@ if(!isset($forceback)||empty($forceback)){
 		}elseif(isset($cfg['thispc_dept_nr'])&&$cfg['thispc_dept_nr']){
 			$dept_nr=$cfg['thispc_dept_nr'];
 		}else{
-			header("Location:".$root_path."modules/nursing_or/nursing-or-select-dept.php".URL_REDIRECT_APPEND."&target=calendar_opt&retpath=$retpath&year=$year&month=$month&day=$day");
+			header("location:".$root_path."modules/nursing_or/nursing-or-select-dept.php".URL_REDIRECT_APPEND."&target=calendar_opt&retpath=$retpath&year=$year&month=$month&day=$day");
 			exit;
 		}
 	}
@@ -93,7 +93,7 @@ if($dept_nr){
 <font face="Verdana, Arial" size=2>
 
 <?php 
-if(isset($HTTP_COOKIE_VARS['ck_login_logged'.$sid])&&($_SESSION['sess_login_username'])) { 
+if(isset($_COOKIE['ck_login_logged'.$sid])&&($_SESSION['sess_login_username'])) { 
 ?>
 <!-- 
 <b> <?php echo "$LDOptions $LDFor ".$_SESSION['sess_login_username']." ".$LDOn." ".formatDate2Local($i_date,$date_format) ?></b>

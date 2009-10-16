@@ -17,11 +17,11 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 /*if(!isset($dept)||!$dept)
 {
-	if(isset($HTTP_COOKIE_VARS['ck_thispc_dept'])&&!empty($HTTP_COOKIE_VARS['ck_thispc_dept'])) $dept=$HTTP_COOKIE_VARS['ck_thispc_dept'];
+	if(isset($_COOKIE['ck_thispc_dept'])&&!empty($_COOKIE['ck_thispc_dept'])) $dept=$_COOKIE['ck_thispc_dept'];
 	 else $dept='plop';//default is plop dept
 }*/
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 if($cat=='pharma'){
  	$dbtable='care_pharma_orderlist';
@@ -88,7 +88,7 @@ if($mode!=''){
 									sent_datetime='".$content['sent_datetime']."',
 									ip_addr='".$content['ip_addr']."',
 									priority='".$content['priority']."',
-									modify_id= '".$HTTP_COOKIE_VARS[$local_user.$sid]."'
+									modify_id= '".$_COOKIE[$local_user.$sid]."'
 							   		WHERE order_nr='".$content['order_nr']."'
 									AND dept_nr='$dept_nr'";
 									

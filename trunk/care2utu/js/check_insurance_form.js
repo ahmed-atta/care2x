@@ -79,8 +79,8 @@ function submit_form(reference, t, session, todo) {
 			try
 			{
 			parameters += "&keyword="+document.forms[0].elements['keyword'].value;
-		  if (destination_obj.length > 0)
-		    for (var i=0 ; i<destination_obj.length; i++ )
+		  if (destination_obj.length > 0) 
+		    for (var i=0; i<destination_obj.length; i++ )
 		    	if(destination_obj.options[i].value!=-1)
 		    	{
 		      	parameters+="&item_no["+i+"]="+destination_obj.options[i].value;
@@ -88,6 +88,7 @@ function submit_form(reference, t, session, todo) {
 			}
 			catch(E){};
 			break;
+			
 		case "done":
 			
 			try
@@ -102,7 +103,9 @@ function submit_form(reference, t, session, todo) {
 			}
 			catch(E){};
 			break;
+			
 		case "company_id":
+		
 	  	try
 	  	{
 			  for (i = 0; i < document.forms[0].elements['company_id'].length; ++i)

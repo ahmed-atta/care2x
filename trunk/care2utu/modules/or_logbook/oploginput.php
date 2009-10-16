@@ -23,12 +23,12 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 # Added intrusion trap
-if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
+if (!$internok&&!$_COOKIE['ck_op_pflegelogbuch_user'.$sid]) {header("location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
 
 //$db->debug=true;
 
 # initializations
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $pdata=array();
 
 if(!isset($thisday)||empty($thisday)) $thisday=date('Y-m-d');
@@ -542,7 +542,7 @@ function getinfo(m)
 	getinfowin=window.open(urlholder,"getinfo","width=800,height=500,menubar=no,resizable=yes,scrollbars=yes");
 }
 function openfolder(pid,pdata){
-	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-station-patientdaten.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&dept_nr=<?php echo "$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=".$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]; ?>";
+	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-station-patientdaten.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&dept_nr=<?php echo "$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=".$_COOKIE['ck_op_pflegelogbuch_user'.$sid]; ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	}
 
@@ -768,7 +768,7 @@ if(($mode=='search'||$mode=='paginate')&&!$datafound){
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="internok" value="<?php echo $internok; ?>">
-<input type="hidden" name="encoder" value="<?php echo $HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]; ?>">
+<input type="hidden" name="encoder" value="<?php echo $_COOKIE['ck_op_pflegelogbuch_user'.$sid]; ?>">
 <input type="hidden" name="op_nr" value="<?php echo $op_nr; ?>">
 <input type="hidden" name="thisday"  value="<?php echo $thisday; ?>">
 <input type="hidden" name="op_date"  value="<?php echo $thisday; ?>">

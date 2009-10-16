@@ -66,7 +66,7 @@ if(($report!=NULL)||($mode!=''))
 						    $oid=$db->Insert_ID();
 							$core->coretable=$dbtable;
 							$report_nr = $core->LastInsertPK('report_nr',$oid);
-							header("Location: $thisfile".URL_REDIRECT_APPEND."&userck=$userck&dept=$dept&report_nr=$report_nr&mode=sent"); exit;
+							header("location: $thisfile".URL_REDIRECT_APPEND."&userck=$userck&dept=$dept&report_nr=$report_nr&mode=sent"); exit;
 							
 							exit;
 						}
@@ -179,7 +179,7 @@ echo '</font>
 <tr>
 <td bgcolor="#dddddd"><FONT    SIZE=-1  FACE="Arial">
 
-<?php echo $LDReporter ?>:<br><input type="text" name="reporter" size=30 value="<?php echo $HTTP_COOKIE_VARS[$local_user.$sid]; ?>"> <p>
+<?php echo $LDReporter ?>:<br><input type="text" name="reporter" size=30 value="<?php echo $_COOKIE[$local_user.$sid]; ?>"> <p>
 <?php echo $LDPersonellNr ?>:<br><input type="text" name="id_nr" size=30>
 <input type="hidden" name="report_date" value="<?php echo date('Y-m-d') ?>" >
 <input type="hidden" name="report_time" value= "<?php echo date('H:i:s') ?>">

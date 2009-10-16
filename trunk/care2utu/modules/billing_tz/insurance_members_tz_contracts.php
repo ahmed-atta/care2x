@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 //define('NO_2LEVEL_CHK',1);
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $lang_tables[]='billing.php';
 $lang_tables[]='aufnahme.php';
 require_once($root_path.'include/inc_front_chain_lang.php');
@@ -28,7 +28,7 @@ if($mode=='update')
 {
 	if($insurance) 	{
 		$insurance_tz->UpdateContractsArray($_POST);
-		header("Location: insurance_members_tz.php?company_id=".$insurance);
+		header("location: insurance_members_tz.php?company_id=".$insurance);
 	}
 }
 if(is_array($item_no))

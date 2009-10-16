@@ -7,7 +7,10 @@ if(isset($_SESSION['sess_file_return'])&&!empty($_SESSION['sess_file_return']))
 	else $returnfile=$top_dir.'show_appointment.php';
 
 # Patch 2003-11-20 
-if($parent_admit){
+if ($_GET['pid']) {
+	$sTitleNr=$_GET['pid'];
+	$pid=$_GET['pid'];
+}elseif($parent_admit){
 	$retbuf='&encounter_nr='.$_SESSION['sess_full_en'];
 	$sTitleNr =($_SESSION['sess_full_en']);
 }else{
@@ -17,7 +20,7 @@ if($parent_admit){
 
 # Resolve href for close button
 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfilen = $root_path."main/startframe.php".URL_APPEND;
+if($_COOKIE["ck_login_logged".$sid]) $breakfilen = $root_path."main/startframe.php".URL_APPEND;
 	else $breakfile = $breakfile.URL_APPEND."&target=entry";
 
 # Start Smarty templating here
@@ -118,7 +121,14 @@ if($parent_admit) {
 	$smarty->assign('sClassItem','class="reg_item"');
 	$smarty->assign('sClassInput','class="reg_input"');
 }
-
+$sql='SELECT * FROM care_person WHERE pid='.$sTitleNr;
+$personresult=$db->Execute($sql);
+$personrow=$personresult->FetchRow();
+$title=$personrow['title'];
+$name_last=$personrow['name_last'];
+$name_first=$personrow['name_first'];
+$date_birth=$personrow['date_birth'];
+$blood_group=$personrow['blood_group'];
 # If encounter is already discharged, show warning
 
 if($parent_admit&&$is_discharged){
@@ -134,7 +144,7 @@ if($parent_admit) $smarty->assign('LDCaseNr',$LDAdmitNr);
 
 if($parent_admit) $smarty->assign('sEncNrPID',$_SESSION['sess_full_en']);
 	else $smarty->assign('sEncNrPID',$_SESSION['sess_full_pid']);
-
+$smarty->assign('sEncNrPID',$sTitleNr);
 $smarty->assign('img_source',"<img $img_source>");
 
 $smarty->assign('LDTitle',$LDTitle);
@@ -363,7 +373,6 @@ if($parent_admit&&(!$is_discharged||$type_nr==3||$type_nr==99)) {
 }
 
 // Buffer the options table
-
 ob_start();
 
 ?>
@@ -431,10 +440,7 @@ ob_start();
 				</TR>
 			</TBODY>
 			</TABLE>
-		</td>
-	</tr>
-</table>
-
+	
 <!-- End of main data block table -->
 
 <p>

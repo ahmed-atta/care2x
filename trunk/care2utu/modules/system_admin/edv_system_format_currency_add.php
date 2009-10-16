@@ -39,7 +39,7 @@ if(($mode=='save')&&$short_name&&$long_name&&$info){
 		 if($db->Affected_Rows())
 		 {
 	  	   /* $sql="UPDATE ".$dbtable." SET
-									  modify_id='".$HTTP_COOKIE_VARS['ck_cafenews_user'.$sid]."',
+									  modify_id='".$_COOKIE['ck_cafenews_user'.$sid]."',
 									 modify_time='".date('YmdHis')."'
 									 WHERE item_no=".$item_no;
 		   $db->Execute($sql);*/

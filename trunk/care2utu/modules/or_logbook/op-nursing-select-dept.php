@@ -44,7 +44,7 @@ if(isset($cfg['thispc_room_nr'])&&!empty($cfg['thispc_room_nr'])&&$dept_obj->isO
 	$or_ok=true;	
 }
 if($dept_ok&&$or_ok){
-	header("Location:$targetfile".URL_REDIRECT_APPEND."&dept_nr=".$cfg['thispc_dept_nr']."&saal=".$cfg['thispc_room_nr']."&retpath=".$retpath);
+	header("location:$targetfile".URL_REDIRECT_APPEND."&dept_nr=".$cfg['thispc_dept_nr']."&saal=".$cfg['thispc_room_nr']."&retpath=".$retpath);
 	exit;
 }
 

@@ -65,7 +65,7 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 
 			logentry($user->Name(),$user->LoginName(),$REMOTE_ADDR." OK'd","","");
 
-			header("Location: $fileforward");
+			header("location: $fileforward");
 			exit;
 
 		}else { $passtag=3;}

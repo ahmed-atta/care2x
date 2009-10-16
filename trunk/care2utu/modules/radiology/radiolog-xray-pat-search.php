@@ -14,7 +14,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_config_color.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 if(!empty($searchkey)) if(is_numeric($searchkey)) $searchkey=(int)$searchkey;
 

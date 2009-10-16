@@ -771,8 +771,8 @@ class ARV_visit extends Encounter{
 	}
 
 	function querystring($name) {
-		global $HTTP_GET_VARS;
-		reset ($HTTP_GET_VARS); 
+#		global $HTTP_GET_VARS;
+		reset ($_GET); 
 		#stripslashes($_GET[$name]);
 		$querystring="";
 		$querystring=$querystring."&arv_visit_id=".$_GET['arv_visit_id']."&pid=".$_GET['pid']."&mode=".$_GET['mode'];

@@ -1,5 +1,6 @@
 <?php
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+error_reporting(E_ALL);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
@@ -13,13 +14,33 @@ require($root_path.'include/inc_environment_global.php');
 $lang_tables[]='billing.php';
 $lang_tables[]='aufnahme.php';
 require($root_path.'include/inc_front_chain_lang.php');
-
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+$billing_tz = new Bill();
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
-$enc_obj=new Encounter;
+$insurance_tz = new Insurance_tz();
+//require_once($root_path.'include/care_api_classes/class_tz_insurance_reports.php');
+//$insurance_tz_report = new Insurance_Reports_tz();
+$enc_obj= new Encounter;
 $bill_obj = new Bill;
 $insurance_tz = new Insurance_tz;
+$db->debug=FALSE;
+if ($db->debug) print_r($_GET);
+if (isset($_GET['bill_number'])) {
+	$sql='select encounter_nr,description,price,amount,is_paid,ID from care_tz_billing b INNER JOIN care_tz_billing_elem be ON b.nr=be.nr where b.nr='.$_GET['bill_number'];
+	$result=$db->Execute($sql);
+	$row=$result->FetchRow();
+	$pn=$row['encounter_nr'];
+	$description=$row['description'];
+	$price=$row['price'];
+	$amount=$row['amount'];
+	$payment_status=$row['is_paid'];
+	$bill_elem_number=$row['ID'];
+	$batch_nr=$_GET['batch_nr'];
+	$bill_nr=$_GET['bill_number'];
+	$mode=' ';
+}
+//echo $sql;
 $debug = FALSE;
 
 if ($debug) {
@@ -43,7 +64,7 @@ if ($mode=="edit_elem") {
 
 if ($mode=="modfication") {
   if ($debug) {
-    echo "modfication";
+    echo "modification";
     echo "description:$description<br>";
     echo "price$price<br>";
     echo "amount:$amount<br>";
@@ -66,6 +87,7 @@ if($mode=="allpaid")
 {
 	$bill_obj->update_bill_element_allpaid($bill_nr, 1);
 }
+
 require ("gui/gui_billing_tz_edit.php");
 
 ?>

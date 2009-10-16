@@ -74,14 +74,14 @@ if(isset($_GET['submit'])) {
 	if ($errors==0) {
 		if ($_GET['mode']=="new") { 
 			if($o_arv_case->insertARVdata($values)) {
-				header("Location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
+				header("location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
 				exit;
 			} 
 		}
 		elseif ($_GET['mode']=="edit") 
 		{
 			if($o_arv_case->updateARVdata($values)){
-				header("Location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
+				header("location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
 				exit;
 			}
 		}	

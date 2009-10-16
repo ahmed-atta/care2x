@@ -33,7 +33,7 @@ $entry_border_bgcolor='#6666ee';
 $entry_body_bgcolor='#ffffff';
 
 $breakfile=$root_path."main/spediens.php$append";
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 # Data to append to url
 $append='&status='.$status.'&target='.$target.'&user_origin='.$user_origin;
 
@@ -221,7 +221,7 @@ if($mode=='search'||$mode=='paginate'){
 						echo "&nbsp;".$zeile['addr_zip'];
                         echo "</td>";	
 */
-					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
+					    if($_COOKIE[$local_user.$sid]) echo '
 						<td>&nbsp;
 							<a href="fotolab-dir-select.php'.URL_APPEND.'&patnum='.$zeile['encounter_nr'].'&lastname='.strtr($zeile['name_last'],' ','+').'&firstname='.strtr($zeile['name_first'],' ','+').'&bday='.$zeile['date_birth'].'&maxpic='.$aux1.'">
 							<img '.$img_options.' alt="'.$LDSelect.'"></a>&nbsp;

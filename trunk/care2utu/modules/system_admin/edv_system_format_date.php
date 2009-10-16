@@ -15,7 +15,7 @@ $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 if(!isset($mode)) $mode='';
 if(!isset($date_format)) $date_format='';

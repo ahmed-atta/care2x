@@ -19,7 +19,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 if($from=='add') $returnfile='edv_system_format_menu_item_add.php'.URL_APPEND.'&from=set';
   else $returnfile=$breakfile;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $editfile='edv_system_format_menu_item_add.php'.URL_REDIRECT_APPEND.'&mode=edit&from=set&item_no=';
 
 if(!isset($GCONFIG)) $GCONFIG=array();
@@ -28,7 +28,7 @@ $gc=new GlobalConfig($GCONFIG);
 
 if(isset($mode)&&($mode=='save')&&!empty($max_items)){
 	
-	$gc->saveConfigItem('theme_control_buttons',$HTTP_POST_VARS['theme_control_buttons']);
+	$gc->saveConfigItem('theme_control_buttons',$_POST['theme_control_buttons']);
 	header('location:'.$thisfile.URL_REDIRECT_APPEND.'&mode=0');
 	exit;
 }

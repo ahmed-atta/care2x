@@ -9,10 +9,8 @@
   
     <tr>
     <td width=50%>
-		{{$s1SubMenu}}
 	</td>
     <td width=50%>
-		{{$s11SubMenu}}
 	</td>
   </tr>
 <!--
@@ -27,26 +25,20 @@
 -->
 	<tr>
     <td width=50%>
-		{{$s5SubMenu}}
 	</td>
     <td width=50%>
-		{{$s6SubMenu}}
 	</td>
   </tr>
 	<tr>
     <td width=50%>
-		{{$s7SubMenu}}
 	</td>
     <td width=50%>
-		{{$s8SubMenu}}
 	</td>
   </tr>
 	<tr>
     <td width=50%>
-		{{$s9SubMenu}}
 	</td>
     <td width=50%>
-		{{$s10SubMenu}}
 	</td>
   </tr>
   <!--

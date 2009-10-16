@@ -66,7 +66,7 @@ $enc_obj=new Encounter();
 
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
 //foreach($arg as $v) echo "$v<br>"; //init db parameters
 
@@ -206,7 +206,7 @@ if($mode=='match'||$mode=='search'||$mode=='paginate'){
 		echo "$LDDbNoRead<p> $sql <p>";
 	}
 }else{
-	if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $mode='dummy';
+	if($_COOKIE['ck_login_logged'.$sid]) $mode='dummy';
 } 
 
 

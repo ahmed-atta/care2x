@@ -26,10 +26,10 @@ Contact author at: barcode@mribti.com
 */
 
 define(__DEBUG_HOST__, "localhost");
-define(__DEBUG_PORT__, "9999");
+define(__DEBUG_PORT__, "9000");
 
 define(__TRACE_HOST__, "localhost");
-define(__TRACE_PORT__, "9999");
+define(__TRACE_PORT__, "9000");
 
 define(__TIMEOUT__, 3);
 						   

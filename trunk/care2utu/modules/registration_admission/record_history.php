@@ -7,7 +7,7 @@ $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
-//$thisfile=basename(__FILE__);
+//$thisfile=basename($_SERVER['PHP_SELF']);
 
 
 if(!isset($db) || !$db) include_once($root_path.'include/inc_db_makelink.php');

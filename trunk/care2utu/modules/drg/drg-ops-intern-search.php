@@ -18,7 +18,7 @@ require_once('drg_inc_local_user.php');
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-if (!isset($pn)||!$pn) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
+if (!isset($pn)||!$pn) {header("location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
 
 require_once($root_path.'include/care_api_classes/class_drg.php');
 

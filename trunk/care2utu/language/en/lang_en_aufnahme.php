@@ -2,8 +2,8 @@
 $LDAdmission='Admission';
 $LDAdmitDate='Admission date';
 $LDAdmitTime='Admission time';
-$LDCaseNr='Admission-Nr.';
-$LDFileNr='Hospital file nr';
+$LDCaseNr='Admission-NR.';
+$LDFileNr='Hospital file NR';
 $LDTitle='Occupation';
 $LDOccupation='Occupation';
 $LDEducation='Education';
@@ -12,6 +12,7 @@ $LDFirstName='First name';
 $LDPleaseSelectTribe = '-- select tribe --';
 $LDBday='Date of birth';
 $LDAge='OR: [ age in years ]';
+$LDYears='Age';
 $LDPhone='Phone';
 $LDAdmitBy='Admitted by';
 $LDSex='Sex';
@@ -55,8 +56,8 @@ $LDCloseWin='Close admission window';
 $LDError='Information is missing in the input field marked <font color=red>red</font>!';
 $LDErrorS='Some information are missing in the input fields marked with <font color=red>red</font>!';
 
-$fieldname=array('Admission-Nr.','Lastname','Firstname','Date of birth','Options');
-$LDEntryPrompt='Enter the search keyword. For example: lastname, or firstname, or date of birth, etc.';
+$fieldname=array('Admission-NR.','Lastname','First name','Date of birth','Options');
+$LDEntryPrompt='Enter the search keyword. For example: fathers name, or first name, or date of birth, etc.';
 $LDSEARCH='SEARCH';
 $LDAdmWantEntry='I need to admit a patient';
 $LDAdmWantSearch='I am looking for a patient';
@@ -124,10 +125,10 @@ $LDNoMedocsFound='No medocs document of the patient found!';
 $LDAt='at';
 
 $LDDept='Dept';
-$LDRoomNr='Room nr';
+$LDRoomNr='Room NR';
 $LDAdmitType='Admission type';
 $LDCivilStat='Civil status';
-$LDInsuranceNr='Insurance nr';
+$LDInsuranceNr='Insurance NR';
 $LDNameAddr='Name & Address';
 $LDBillInfo='Billing info';
 $LDAdmitDiagnosis='Admission diagnosis';
@@ -138,13 +139,13 @@ $LDTherapyType='Therapy type';
 $LDTherapyOpt='Therapy option';
 $LDServiceType='Service type';
 
-$LDClick2Print='Click the barcode labels to print';
+$LDClick2Print='Click the bar code labels to print';
 
 $LDEnterDiagnosisNote='Attach links to diagnosis related notes & publications:';
 $LDEnterTherapyNote='Attach links to therapy related notes & publications:';
 $LDSeeDiagnosisNote='Diagnosis related notes & publications:';
 $LDSeeTherapyNote='Therapy related notes & publications:';
-$LDMakeBarcodeLabels='Make barcode labels';
+$LDMakeBarcodeLabels='Make bar-code labels';
 
 $LDPlsEnterDept='<b>Please enter your department, clinic, or work area.</b><br>(e.g. PLOP, Internal Med2, or M4A, etc.)';
 $LDOkSaveNow='OK save now';
@@ -163,9 +164,9 @@ $LDName2='Fathers name';
 $LDName3='Third name';
 $LDNameMid='Balozi';
 $LDNameMaiden='Tribe';
-$LDNameOthers='Allergy';
+$LDNameOthers='Education';
 $LDStreet='Street';
-$LDStreetNr='Nr.';
+$LDStreetNr='NRA.';
 $LDTownCity='Village';
 $LDProvState='Province/State';
 $LDRegion='Region';
@@ -195,8 +196,11 @@ $LDImmunizationTxt=$LDESE.' immunization report';
 $LDDRG='DRG (composite)';
 $LDDRGTxt=$LDESE.' DRG (Diagnosis related groups)';
 $LDProcedures='Procedures';
+$LDServices='Services';
+$LDLabTestsandResults='Lab Tests and Results';
+$LDRadTestsandResults='Radiology Tests and Results';
 $LDProceduresTxt=$LDESE.' therapy procedures';
-$LDPrescriptions='Services';
+$LDPrescriptions='Prescriptions';
 $LDPrescriptionsTxt=$LDESE.' Prescriptions';
 /* 2002-12-03 EL*/
 $LDDiagXResults='Diagnostic Results';
@@ -340,7 +344,7 @@ $LDOptsForPatient='Options for this patient';
 /* 2003-05-06 EL */
 $LDRegisterNewPerson='Register a new person';
 /* 2003-05-17 EL */
-$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, file number, first name, surname/Ukoo, or birth date';
+$LDEnterPersonSearchKey='Enter search keyword: e.g. PID, file number, first name, fahers name, or birth date';
 $LDPersonData='Personal data';
 /* 2003-05-26 EL*/
 $LDDiagnoses='Diagnoses';

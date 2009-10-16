@@ -71,7 +71,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
     <tr >
       <td ><input type="submit" value="Suchen" >
            </td>
-      <td align=right><input type="reset" value="Löschen" onClick="document.suchform.keyword.focus()">
+      <td align=right><input type="reset" value="Lï¿½schen" onClick="document.suchform.keyword.focus()">
                       </td>
     </tr>
   </table>
@@ -80,7 +80,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
   </form>
 <hr>
 
-<b>Anforderung für Reparatur<br>
+<b>Anforderung fï¿½r Reparatur<br>
 Anmeldung eines Schaden<br>
 Heizung<br>
 Entsorgung<br>
@@ -91,20 +91,20 @@ EDV<br></b>
 </ul>
 <b>Klimaanlage<br>
 Reinigung<br>
-Strom, Elektrizität<br>
+Strom, Elektrizitï¿½t<br>
 Telefon<br>
 Wasser, Versorgung</b>
 
 
 <form action="<?php echo $breakfile?>" method="post" >
 <input type="hidden" name="sid" value="<?php echo $sid?>">
-<input  type="image" src="../img/abbrech.gif" border=0 width=103 height=24 alt="Zurück zu Datenbank Menuauswahl">
+<input  type="image" src="../img/abbrech.gif" border=0 width=103 height=24 alt="Zurï¿½ck zu Datenbank Menuauswahl">
 </form>
 <?php if ($from=="multiple")
 echo '
 <form name=backbut onSubmit="<?php echo $breakfile ?>">
 <input type="hidden" name="sid" value="<?php echo $sid?>">
-<input type="submit" value="Zurück" onClick="history.back()">
+<input type="submit" value="Zurï¿½ck" onClick="history.back()">
 </form>
 ';
 ?>

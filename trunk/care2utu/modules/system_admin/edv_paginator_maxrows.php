@@ -16,7 +16,7 @@ $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $GLOBAL_CONFIG=array();
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -24,7 +24,7 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 # Save data if save mode
 if(isset($mode)&&$mode=='save'){
-	$glob_obj->saveConfigArray($HTTP_POST_VARS,'pagin_',TRUE,20);
+	$glob_obj->saveConfigArray($_POST,'pagin_',TRUE,20);
 	header("location:$thisfile".URL_REDIRECT_APPEND."&save_ok=1");
 	exit;
 # Else get current global data
