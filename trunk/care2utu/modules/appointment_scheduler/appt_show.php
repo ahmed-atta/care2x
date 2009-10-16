@@ -130,7 +130,7 @@ $img_female=createComIcon($root_path,'spf.gif','0','',TRUE);
  $smarty->assign('title',$LDAppointments);
 
  # Collect extra javascript code
- 
+
  ob_start();
 
 ?>

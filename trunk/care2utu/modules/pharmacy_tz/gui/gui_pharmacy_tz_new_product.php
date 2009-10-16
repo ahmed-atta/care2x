@@ -158,20 +158,20 @@ A:visited:hover {color: #cc0033;}
                 if ($html_disabler) {
                           echo $item_classification;
                       } else { ?>
-                  <select name="item_classification">
-                    <option value="drug_list" <?PHP if ($item_classification=="drug") echo "selected";?>>drug</option>
-                    <option value="supplies" <?PHP if ($item_classification=="supplies") echo "selected";?>>supplies</option>
-                    <option value="supplies_laboratory" <?PHP if ($item_classification=="supplies lab.") echo "selected";?>>supplies Laboratory</option>
-                    <option value="special_others_list" <?PHP if ($item_classification=="special others") echo "selected";?>>special others</option>
-                    <option value="xray" <?PHP if ($item_classification=="x-ray") echo "selected";?>>x-ray</option>
-                    <option value="service" <?PHP if ($item_classification=="service") echo "selected";?>>service</option>
-                    <option value="dental" <?PHP if ($item_classification=="dental services") echo "selected";?>>dental services</option>
-                    <option value="smallop" <?PHP if ($item_classification=="small op") echo "selected";?>>small op</option>
-                    <option value="bigop" <?PHP if ($item_classification=="big op") echo "selected";?>>major op</option>
-                    <option value="labtest" <?PHP if ($item_classification=="labtest") echo "selected";?>>labtest</option>
-					<option value="eye-service" <?PHP if ($item_classification=="eye-service") echo "selected";?>>Eye Service</option>
-					<option value="eye-surgery" <?PHP if ($item_classification=="eye-surgery") echo "selected";?>>Eye Surgery</option>
-					<option value="eye-glasses" <?PHP if ($item_classification=="eye-glasses") echo "selected";?>>Eye Glasses</option>
+                  <select name="purchasing_class">
+                    <option value="drug_list" <?PHP if ($purchasing_class=="drug") echo "selected";?>>drug</option>
+                    <option value="supplies" <?PHP if ($purchasing_class=="supplies") echo "selected";?>>supplies</option>
+                    <option value="supplies_laboratory" <?PHP if ($purchasing_class=="supplies lab.") echo "selected";?>>supplies Laboratory</option>
+                    <option value="special_others_list" <?PHP if ($purchasing_class=="special others") echo "selected";?>>special others</option>
+                    <option value="xray" <?PHP if ($purchasing_class=="x-ray") echo "selected";?>>x-ray</option>
+                    <option value="service" <?PHP if ($purchasing_class=="service") echo "selected";?>>service</option>
+                    <option value="dental" <?PHP if ($purchasing_class=="dental services") echo "selected";?>>dental services</option>
+                    <option value="smallop" <?PHP if ($purchasing_class=="small op") echo "selected";?>>small op</option>
+                    <option value="bigop" <?PHP if ($purchasing_class=="big op") echo "selected";?>>major op</option>
+                    <option value="labtest" <?PHP if ($purchasing_class=="labtest") echo "selected";?>>labtest</option>
+					<option value="eye-service" <?PHP if ($purchasing_class=="eye-service") echo "selected";?>>Eye Service</option>
+					<option value="eye-surgery" <?PHP if ($purchasing_class=="eye-surgery") echo "selected";?>>Eye Surgery</option>
+					<option value="eye-glasses" <?PHP if ($purchasing_class=="eye-glasses") echo "selected";?>>Eye Glasses</option>
 
                   </select>
                   <?php } ?></td>

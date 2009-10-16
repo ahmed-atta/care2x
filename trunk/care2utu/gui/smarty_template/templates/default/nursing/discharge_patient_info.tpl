@@ -49,16 +49,8 @@
 			</td>
 		</tr>
 
-		<table cellpadding=6>
-		{{$tab_care_encounter_prescription}}
-		{{$tab_diagnosis}}
-		{{$tab_fingings_chemlab}}
-		{{$tab_laboratory_param}}
+		{{$list}}
 
-		</table>
-		<table>
-			{{$tab_care_encounter_location}}
-		</table>
 
 	</table>
 

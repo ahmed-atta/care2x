@@ -49,7 +49,7 @@ switch($winid)
 
 if($pers_obj->record_count) $quickexist=true;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
@@ -350,7 +350,7 @@ echo'
   </tr>
 </table>
 
-<input type="hidden" name="encoder" value="<?php echo $HTTP_COOKIE_VARS[$local_user.$sid]; ?>">
+<input type="hidden" name="encoder" value="<?php echo $_COOKIE[$local_user.$sid]; ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="winid" value="<?php echo $winid ?>">
@@ -438,7 +438,7 @@ echo'
 </td>
   </tr>
 </table>
-<input type="hidden" name="encoder" value="<?php echo $HTTP_COOKIE_VARS[$local_user.$sid]; ?>">
+<input type="hidden" name="encoder" value="<?php echo $_COOKIE[$local_user.$sid]; ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="winid" value="<?php echo $winid ?>">

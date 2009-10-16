@@ -15,7 +15,7 @@ $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 //$db->debug=true;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 /* Create charts object */
 require_once($root_path.'include/care_api_classes/class_charts.php');
 $charts_obj= new Charts;

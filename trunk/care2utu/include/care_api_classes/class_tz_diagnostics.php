@@ -55,7 +55,6 @@ class Diagnostics extends Encounter {
   var $levenshtein=0;
   var $methaphone="";
 
-
   //------------------------------------------------------------------------------
   function get_array_search_results($keyword){
     global $db;
@@ -442,7 +441,7 @@ class Diagnostics extends Encounter {
 
     	}
     	if($return)
-    		header("Location: icd10_history.php".URL_APPEND);
+    		header("location: icd10_history.php".URL_APPEND);
   	}
   }
   //------------------------------------------------------------------------------

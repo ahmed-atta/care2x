@@ -207,7 +207,6 @@ class Core {
 		$x='';
 		$v='';
 		while(list($x,$v)=each($this->ref_array)) {
-
 			if(isset($this->data_array[$v])&&($this->data_array[$v]!='')) {
 				$this->buffer_array[$v]=$this->data_array[$v];
 				if($v=='create_time' && $this->data['create_time']!='') $this->buffer_array[$v] = date('YmdHis');
@@ -228,7 +227,6 @@ class Core {
 	function insertDataFromInternalArray() {
 		//$this->data_array=NULL;
 		$this->_prepSaveArray();
-
 		# Check if  "create_time" key has a value, if no, create a new value
 		//if(!isset($this->buffer_array['create_time'])||empty($this->buffer_array['create_time'])) $this->buffer_array['create_time']=date('YmdHis');
 		//print_r($this->buffer_array);
@@ -368,7 +366,7 @@ class Core {
 		if(!is_array($array)){ return FALSE;}
 		while(list($x,$v)=each($array)) {
 			# use backquoting for mysql and no-quoting for other dbs
-			if ($dbtype=='mysql') $index.="`$x`,";
+			if ($dbtype=='mysql' || $dbtype=='mysqli') $index.="`$x`,";
 				else $index.="$x,";
 
 			if(stristr($v,$concatfx)||stristr($v,'null')) $values.=" $v,";
@@ -378,6 +376,7 @@ class Core {
 		$index=substr_replace($index,'',(strlen($index))-1);
 		$values=substr_replace($values,'',(strlen($values))-1);
         $this->sql="INSERT INTO $this->coretable ($index) VALUES ($values)";
+//        echo $this->sql;
 		reset($array);
 		return $this->Transact();
 	}
@@ -402,9 +401,8 @@ class Core {
 		if(empty($array)) return FALSE;
 		if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
 		while(list($x,$v)=each($array)) {
-
-		if(stristr($v,$concatfx)||stristr($v,'null')) $elems.="$x= $v,";
-		    else $elems.="$x='$v',";
+			if(stristr($v,$concatfx)||stristr($v,'null')) $elems.="$x= $v,";
+			    else $elems.="$x='$v',";
 		}
 		# Bug fix. Reset array.
 		reset($array);
@@ -415,7 +413,6 @@ class Core {
 
 		# Bug fix. Reset the condition variable to prevent affecting subsequent update calls.
 		$this->where='';
-		//echo $this->sql.'<br>';
 		return $this->Transact();
 	}
 	/**
@@ -530,6 +527,20 @@ class Core {
 		return $this->Transact();
 	}
 	/**
+	* Deletes data from a database table based on the job_id and
+	* batch_nr. Used in the update action for the laboratory tables
+	* ( chemlabor and baclabor )
+	* @access public
+	* @param varchar $batch_nr
+	* @param varchar $job_id
+	* @return boolean
+	*/
+	function deleteOldValues($batch_nr, $encounter_nr){
+		if(empty($batch_nr) || empty($encounter_nr)) return FALSE;
+		$this->sql="DELETE  FROM $this->coretable WHERE batch_nr = '$batch_nr' AND encounter_nr = '$encounter_nr'";
+		return $this->Transact();
+	}
+	/**
 	* Returns the  core field names of the core table in an array.
 	* @access public
 	* @return array
@@ -616,7 +627,8 @@ class Core {
 			return $oid;
 		}else{
 			switch($dbtype){
-				case 'mysql': return $oid;
+				case 'mysql':
+				case 'mysqli' : return $oid;
 					break;
 				case 'postgres': return $this->postgre_Insert_ID($this->coretable,$pk,$oid);
 					break;
@@ -638,7 +650,8 @@ class Core {
 		global $dbtype;
 
 		switch($dbtype){
-			case 'mysql': return "CONCAT($fieldname,'$str')";
+			case 'mysql'  :
+			case 'mysqli' : return "CONCAT($fieldname,'$str')";
 				break;
 			case 'postgres': return "$fieldname || '$str'";
 				break;
@@ -680,7 +693,9 @@ class Core {
 		global $dbtype;
 
 		switch($dbtype){
-			case 'mysql': return "REPLACE($fieldname,'$str1','$str2')";
+			case 'mysql':
+			case 'mysqli' :
+				return "REPLACE($fieldname,'$str1','$str2')";
 				break;
 				default: return "REPLACE($fieldname,'$str1','$str2')";
 		}

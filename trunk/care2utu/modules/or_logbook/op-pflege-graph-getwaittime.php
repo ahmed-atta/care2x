@@ -5,7 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 /*if(!$lang)
 	if(!$ck_language) include("../chklang.php");
 		else $lang=$ck_language;
-if (!$sid||($sid!=$$ck_sid_buffer)||!$ck_op_pflegelogbuch_user||!$winid||!$patnum) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if (!$sid||($sid!=$$ck_sid_buffer)||!$ck_op_pflegelogbuch_user||!$winid||!$patnum) {header("location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 require("../language/".$lang."/lang_".$lang."_or.php");
 */
 define('LANG_FILE','or.php');
@@ -23,7 +23,7 @@ switch($winid)
 							$endid=$LDEnd;
 							$maxelement=5;
 							break;
-	default:{header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+	default:{header("location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
 
 $dbtable='care_encounter_op';

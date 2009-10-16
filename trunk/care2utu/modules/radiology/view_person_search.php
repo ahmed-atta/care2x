@@ -42,7 +42,7 @@ define('LANG_FILE','radio.php');
 $local_user='ck_radio_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $breakfile='radiolog.php'.URL_APPEND;
 

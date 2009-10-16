@@ -190,7 +190,7 @@ if ( !empty($mode) && !$ERROR ) {
   $db_buffer['item_number']             = $selian_item_number;
   $db_buffer['item_description']        = $selians_item_description;
   $db_buffer['item_full_description']   = $items_full_description;
-  $db_buffer['purchasing_class']        = $item_classification;
+  $db_buffer['purchasing_class']        = $purchasing_class;
 
   $db_buffer['unit_price']              = $selians_item_price;
   $db_buffer['unit_price_1']            = $selians_item_price_1;

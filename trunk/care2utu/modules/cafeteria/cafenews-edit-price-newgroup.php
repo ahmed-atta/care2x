@@ -25,7 +25,7 @@ if(($groupname)&&($mode=='save'))
 
 	if($ergebnis=$db->Execute($sql))
 	{
-		header("Location: cafenews-edit-price.php?sid=$sid&lang=$lang&mode=saved_newgroup&groupname=$groupname");
+		header("location: cafenews-edit-price.php?sid=$sid&lang=$lang&mode=saved_newgroup&groupname=$groupname");
 		exit;
 	}
 		else echo "<p>".$sql."<p>$LDDbNoSave";

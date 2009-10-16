@@ -80,7 +80,7 @@ A:visited:hover {color: #cc0033;}
 <table border="0" width="100%" height="100%">
 	<tr valign="top">
 		<!-- Left block for the request list  -->
-		    <td>
+		    <td width="14%">
 <?php
 
 if ($back_path!='billing' || $comming_from=='pharmacy') {
@@ -93,7 +93,7 @@ if ($back_path!='billing' || $comming_from=='pharmacy') {
 		          <?php
 
 		          if (!$NO_PENDING_PRESCRIPTIONS) {
-		            echo '
+		          	echo '
                       <a href="javascript:printOut()"><img src="../../gui/img/control/default/en/en_printout.gif" border=0 align="absmiddle" width="99" height="24" alt="Print this form"></a>
                       <a href="pharmacy_tz_pending_prescriptions.php?&mode=done&pn='.$pn.'&prescription_date='.$prescription_date.'>"><img src="../../gui/img/control/default/en/en_done.gif" border=0 align="absmiddle" width="75" height="24" alt="It�s done! Move the form to the archive"></a>
 <!--                      <a href="pharmacy_tz_pending_prescriptions.php?&mode=done&discharge=true&encounter='.$pn.'&pn='.$pn.'&prescription_date='.$prescription_date.'>"><img src="../../gui/img/control/default/en/en_done_and_discharge.gif" border=0 align="absmiddle" width="175" height="24" alt="It�s done! Move the form to the archive and discharge our patient"></a> -->

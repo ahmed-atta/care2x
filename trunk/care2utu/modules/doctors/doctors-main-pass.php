@@ -19,11 +19,11 @@ switch($target)
 	case 'setpersonal': $fileforward="doctors-dienst-personalliste.php".URL_REDIRECT_APPEND."&ipath=$retpath&retpath=$retpath";
 							$title=$LDDocsList;
 							break;
-	default:{ header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}
+	default:{ header("location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}
 }
 
 							
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 switch($retpath){
 	case 'op': $breakfile=$root_path.'main/op-doku.php'.URL_APPEND;

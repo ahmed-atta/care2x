@@ -12,16 +12,16 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 */
 //$db->debug=true;
 if(isset($op_shortcut)&&$op_shortcut){
-	$HTTP_COOKIE_VARS['ck_pflege_user'.$sid]=$op_shortcut;
+	$_COOKIE['ck_pflege_user'.$sid]=$op_shortcut;
 	setcookie('ck_pflege_user'.$sid,$op_shortcut,0,'/');
 	$edit=1;
-}elseif($HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]){
-	setcookie('ck_pflege_user'.$sid,$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid],0,'/');
+}elseif($_COOKIE['ck_op_pflegelogbuch_user'.$sid]){
+	setcookie('ck_pflege_user'.$sid,$_COOKIE['ck_op_pflegelogbuch_user'.$sid],0,'/');
 	$edit=1;
-}elseif($HTTP_COOKIE_VARS['aufnahme_user'.$sid]){
-	setcookie('ck_pflege_user'.$sid,$HTTP_COOKIE_VARS['aufnahme_user'.$sid],0,'/');
+}elseif($_COOKIE['aufnahme_user'.$sid]){
+	setcookie('ck_pflege_user'.$sid,$_COOKIE['aufnahme_user'.$sid],0,'/');
 	$edit=1;
-}elseif(!$HTTP_COOKIE_VARS['ck_pflege_user'.$sid]){
+}elseif(!$_COOKIE['ck_pflege_user'.$sid]){
 	if($edit) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;};
 }
 /* Load the visual signalling defined constants */
@@ -159,7 +159,7 @@ if($dblink_ok)
 
 					    if($event_result=$enc_obj->Transact($sql))
 					    {
-					       $event=&$HTTP_POST_VARS;
+					       $event=&$_POST;
 
 						   $mode='changes_saved';
 						    //echo "ok insertd $sql";
@@ -486,25 +486,34 @@ function rx(){
 		 	echo'<img
 			  '.createComIcon($root_path,'qbar_trans.gif','0').'>';
 		 }
-
+$sql='SELECT pid FROM care_encounter WHERE encounter_nr='.$pn;
+$result=$db->Execute($sql);
+$row=$result->FetchRow();
+$pid=$row[0];
 		 /* Create the tag links */
 		echo '</td></nobr>
 		</tr>
 		<tr bgcolor="#696969" ><td colspan="3" ><nobr>
 		<!--<input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-kurve.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'">-->
-		<input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'main/diagnostics-report-start.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'&header='.$result['name_last'].',+'.$result['name_first'].'+'.formatDate2Local($result['date_birth'],$date_format).'\'" value="'.$LDReports.'">
-		';
+		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/nursing/nursing-station-patientdaten-doconsil-radio.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&target=chemlabor&noresize=1&edit='.$edit.'\'" value="'.'X-Ray Requests'.'">
+		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_test_findings_radio.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'&target=admin&subtarget=radio\'" value="'.'X-Ray Reports'.'">
+		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/registration_admission/show_notes.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pid.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.'Notes And Reports'.'">';
+		//		<input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'main/diagnostics-report-start.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'&header='.$result['name_last'].',+'.$result['name_first'].'+'.formatDate2Local($result['date_birth'],$date_format).'\'" value="'.$LDReports.'">
+		
 
 
     // RM: Original DRG-Button:
 		//echo '<input type="button" onClick="javascript:openDRGComposite()" value="'.$LDDRG.'">';
 		// RM: Customized Diagnostic button:
-		echo '<input type="button" onClick="window.location.href=\''.$root_path.'modules/diagnostics_tz/icd10_quicklist.php?sid='.$sid.'&encounter='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=true&backpath_diag='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn).'\'" value="'.$LDDiagnoses.'"><br>';
+		echo '<input type="button" onClick="window.location.href=\''.$root_path.'modules/diagnostics_tz/icd10_quicklist.php?sid='.$sid.'&encounter='.$pn.'&lang=en&ntid=false&externalcall=true&target=search&1=1&ispopup=true&backpath_diag='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn).'\'" value="'.$LDDiagnoses.'">';
+
+		//new button
+		echo '<input type="button" onClick="window.location.href=\''.$root_path.'modules/registration_admission/show_prescription.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&pn='.$pn.'&lang=en&ntid=false&externalcall=true&help_site=patient_charts&target=search&1=1&prescrServ=&backpath='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn.'&edit=1').'\'" value="'.$LDPrescrWithoutServices.'"><br>';
 
 		echo '
 		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/nursing/nursing-station-patientdaten-doconsil-chemlabor.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&target=chemlabor&noresize=1&edit='.$edit.'\'" value="'.$LDLabRequest.'">
 		<input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.$LDLabReports.'">
-		<input type="button" onClick="window.location.href=\''.$root_path.'modules/registration_admission/show_prescription.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&pn='.$pn.'&lang=en&ntid=false&externalcall=true&help_site=patient_charts&target=search&1=1&backpath='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn).'\'" value="'.$LDPrescriptions.'">';
+		<input type="button" onClick="window.location.href=\''.$root_path.'modules/registration_admission/show_prescription.php'.URL_REDIRECT_APPEND.'$sid='.$SID.'&pn='.$pn.'&lang=en&ntid=false&externalcall=true&help_site=patient_charts&target=search&1=1&prescrServ=serv&backpath='.urlencode($_SERVER["PHP_SELF"].URL_APPEND.'&pn='.$pn.'&edit=1').'\'" value="'.$LDPrescriptions.'">';
 
 
 		/* Create the select  menu in edit mode */

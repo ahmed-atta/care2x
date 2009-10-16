@@ -13,9 +13,9 @@
 							{{include file="registration_admission/common_norecord.tpl"}}
 						{{/if}}
 						{{$sOptionBlock}}
-					
+
 					</td>
-					
+
 				</tr>
 			</table>
 	  </td>
@@ -23,7 +23,7 @@
 
 	<tr>
       <td valign="top">
-	  	{{$sBottomControls}} {{$pbPersonData}} {{$pbAdmitData}} {{$pbMakeBarcode}} {{$pbMakeWristBands}} {{$pbBottomClose}} 
+	  	{{$sBottomControls}} {{$pbPersonData}} {{$pbAdmitData}} {{$pbMakeBarcode}} {{$pbKMakeWristBands}} {{$pbBottomClose}}
 	</td>
     </tr>
 

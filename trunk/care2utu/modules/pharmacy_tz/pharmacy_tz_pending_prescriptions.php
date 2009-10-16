@@ -13,6 +13,8 @@ require($root_path.'include/inc_environment_global.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 
+$prescrServ=$_GET['prescrServ'];
+
 $debug = FALSE;
 
 if ($debug) {
@@ -20,6 +22,7 @@ if ($debug) {
   echo $prescription_date."<br>";
   echo "comming from ".$comming_from."<br>";
   echo "back path:".$back_path."<br>";
+  echo "prescrServ: ".$prescrServ."<br>";
 
 }
 
@@ -33,7 +36,7 @@ else {
 }
 
 if ($mode=="done" && isset($pn) && isset($prescription_date)) {
-
+	
   // Update the datbase: Set this prescription as "done"
   $sql = "UPDATE
                 care_encounter_prescription
@@ -42,7 +45,6 @@ if ($mode=="done" && isset($pn) && isset($prescription_date)) {
                 AND prescribe_date = '".$prescription_date."'";
   ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
   $db -> Execute ($sql);
-
   if($discharge)
   	header ( 'Location: ../ambulatory/amb_clinic_discharge.php'.URL_REDIRECT_APPEND.'&pn='.$encounter.'&pyear='.date("Y").'&pmonth='.date("n").'&pday='.date(j).'&tb='.str_replace("#","",$cfg['top_bgcolor']).'&tt='.str_replace("#","",$cfg['top_txtcolor']).'&bb='.str_replace("#","",$cfg['body_bgcolor']).'&d='.$cfg['dhtml'].'&station='.$station.'&backpath='.urlencode('../pharmacy_tz/pharmacy_tz_pending_prescriptions.php').'&dept_nr='.$dept_nr);
 
@@ -71,8 +73,8 @@ if ($mode=="done" && isset($pn) && isset($prescription_date)) {
 					"inner join care_person on care_encounter.pid = care_person.pid " .
 					"inner join care_tz_drugsandservices on care_encounter_prescription.article_item_number=care_tz_drugsandservices.item_id " .
 							"and ( care_tz_drugsandservices.purchasing_class = 'drug_list' OR care_tz_drugsandservices.purchasing_class ='supplies' OR care_tz_drugsandservices.purchasing_class ='dental') " .
-					"group by care_encounter_prescription.prescribe_date, care_encounter_prescription.encounter_nr " .
-					"ORDER BY care_encounter_prescription.prescribe_date DESC";
+					"group by care_encounter_prescription.prescribe_date, care_encounter_prescription.encounter_nr, care_person.pid, care_person.selian_pid, name_first, name_last " .
+					"ORDER BY care_encounter_prescription.prescribe_date ASC";
 
 		if($requests=$db->Execute($sql)){
 
@@ -80,7 +82,7 @@ if ($mode=="done" && isset($pn) && isset($prescription_date)) {
 
   			/* If request is available, load the date format functions */
 
-  			if ($debug) echo ($sql);
+  			if ($debug) echo $requests;
   			require_once($root_path.'include/inc_date_format_functions.php');
 
   			$batchrows=$requests->RecordCount();

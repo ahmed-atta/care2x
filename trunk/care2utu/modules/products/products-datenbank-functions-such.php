@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 //$db->debug=1;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 switch($cat)
 {
@@ -30,7 +30,7 @@ switch($cat)
 							$breakfile=$root_path."modules/med_depot/medlager-datenbank-functions.php".URL_APPEND."&userck=$userck";
 							$imgpath=$root_path."med_depot/img/";
 							break;
-	default:  {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+	default:  {header("location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
 
 require($root_path."include/inc_products_search_mod.php");

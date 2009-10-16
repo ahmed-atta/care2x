@@ -47,7 +47,7 @@ $_SESSION['sess_file_return']=basename(__FILE__);
 
 <br><ul>
 <FONT    SIZE=2  FACE="verdana,Arial">
-<?php echo $LDWelcome ?> <FONT    SIZE=3 color=#800000 FACE="Arial"><b><?php echo $HTTP_COOKIE_VARS[$local_user.$sid];?></b></font>. <p>
+<?php echo $LDWelcome ?> <FONT    SIZE=3 color=#800000 FACE="Arial"><b><?php echo $_COOKIE[$local_user.$sid];?></b></font>. <p>
 <?php echo $LDForeWord ?></font><p>
 
 <p>

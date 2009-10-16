@@ -21,7 +21,7 @@ $append=URL_REDIRECT_APPEND;
 $fileforward='amb_clinic_patients.php'.$append.'&origin=pass&target=list&dept_nr='.$dept_nr; 
 $lognote=$LDAppointments.'ok';
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 # Set the break (return) file
 switch($_SESSION['sess_user_origin']){
 	case 'amb': $breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND; break;

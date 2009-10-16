@@ -17,13 +17,15 @@ $lang_tables[]='aufnahme.php';
 require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+$billing_tz = new Bill();
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
+$insurance_tz = new Insurance_tz();
 require_once($root_path.'include/care_api_classes/class_person.php');
-require_once($root_path.'include/care_api_classes/class_weberp.php');
+require_once($root_path.'include/care_api_classes/class_weberp_c2x.php');
 require_once($root_path.'include/inc_init_xmlrpc.php');
 
 
-$enc_obj=new Encounter;
+$enc_obj= new Encounter;
 $bill_obj = new Bill;
 $insurance_tz = new Insurance_tz;
 $person_obj = new Person;
@@ -65,8 +67,9 @@ if($is_transmit_to_weberp_enable == 1)
 		$person_obj->setPatientIsTransmit2ERP($pid,1);
   }
   destroy_weberp($weberp_obj);
- $data=$bill_obj->GetElemsOfArchivedBillForERP($bill_number);
-while($row=$data->FetchRow())
+  $weberp_obj = new_weberp();
+  $data=$bill_obj->GetElemsOfArchivedBillForERP($bill_number);
+  while($row=$data->FetchRow())
 {
  if(!$weberp_obj->transfer_bill_to_webERP_asSalesInvoice($pid,$bill_number,$row))
   {

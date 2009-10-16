@@ -39,7 +39,7 @@ switch($target)
 }
 
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 
 $userck='aufnahme_user';

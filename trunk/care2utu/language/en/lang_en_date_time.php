@@ -17,7 +17,9 @@ $LDmilliseconds='milliseconds';
 $LDmicrosecond='microsecond';
 $LDmicroseconds='microseconds';
 $LDDay='Day';
+$LDDays='Days';
 $LDWeek='Week';
+$LDWeeks='Weeks';
 $LDNoon='Noon';
 $LDEvening='Evening';
 $LDNight='Night';
@@ -28,7 +30,9 @@ $LD_MMsddsyyyy='mm/dd/yyyy';
 $LD_ddsMMsyyyy='dd/mm/yyyy';
 #d.r. from merotech
 $LDMonth='Month';
+$LDMonths='Months';
 $LDYear='Year';
+$LDYears='Years';
 $LDShow='Show';
 
 ?>

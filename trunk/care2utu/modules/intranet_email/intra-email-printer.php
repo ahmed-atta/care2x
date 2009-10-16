@@ -14,7 +14,7 @@ define('LANG_FILE','intramail.php');
 $local_user='ck_intra_email_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $dbtable='care_mail_private';
 

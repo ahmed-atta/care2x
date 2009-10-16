@@ -1,5 +1,5 @@
 <?php
-if (($sid==NULL)||($sid!=$$ck_sid_buffer)||($user==NULL)) {header("Location: invalid-access-warning.php?mode=close"); exit;}; 
+if (($sid==NULL)||($sid!=$$ck_sid_buffer)||($user==NULL)) {header("location: invalid-access-warning.php?mode=close"); exit;}; 
 
 srand(time()*10000);
 $r=rand(1,10000);
@@ -12,7 +12,7 @@ require_once($root_path.'include/inc_config_color.php');
 $pdata=array();
 $filetitles=array();
 $template=array();
-$monat=array("januar","februar","märz","april","mai","juni","juli","august","september","oktober","november","dezember");
+$monat=array("januar","februar","mï¿½rz","april","mai","juni","juli","august","september","oktober","november","dezember");
 if($pyear=="") $pyear=date(Y);
 if($pmonth=="") $pmonth=date(m);
 if($pday=="") $pday=date(d);
@@ -26,7 +26,7 @@ $mainpath="op/abteilung/".strtolower($dept)."/op_saal_".strtolower($saal)."/opbu
 function getlastnum($xyr,$xmon,$xday)
 {
 
- $xmonat=array("januar","februar","märz","april","mai","juni","juli","august","september","oktober","november","dezember");
+ $xmonat=array("januar","februar","mï¿½rz","april","mai","juni","juli","august","september","oktober","november","dezember");
  while (!sizeof($titles))
   {
 	
@@ -96,15 +96,15 @@ switch($mode)
 			if ($file)
 			{
 			reset($template);
-			reset($HTTP_POST_VARS);
-            while (list($k,$v)=each($HTTP_POST_VARS))
+			reset($_POST);
+            while (list($k,$v)=each($_POST))
 			{
 				$template[$k]=addcslashes($v,"\n\r");
 				$pdata[$k]=$v;
 			}
 
-			$buf=explode(" ",$HTTP_POST_VARS['pname']);
-			if (strstr($HTTP_POST_VARS['pname'],","))
+			$buf=explode(" ",$_POST['pname']);
+			if (strstr($_POST['pname'],","))
 			{
 				$template['nname']=str_replace(",","",$buf[0]);
 				$template['vname']=$buf[1];
@@ -211,7 +211,7 @@ function isnum(val,idx)
 			}
 			
 			
-//			alert("Zeitangabe ist ungültig! (ausserhalb des 24H Zeitrahmens)");
+//			alert("Zeitangabe ist ungï¿½ltig! (ausserhalb des 24H Zeitrahmens)");
 	
 		}
 		switch(v3.length)
@@ -343,7 +343,7 @@ function checksubmit()
 	
 	if (xdoc.patnumber.value=="")
 	{
-		react=confirm("Die Aufnahmenummer fehlt! Möchten Sie trotzdem speichern?!");	
+		react=confirm("Die Aufnahmenummer fehlt! Mï¿½chten Sie trotzdem speichern?!");	
 		xdoc.patnumber.focus();
 		return react;
 	}
@@ -451,7 +451,7 @@ Name, Vorname<br><INPUT NAME="pname" TYPE="text" VALUE="<?php echo stripcslashes
 	
 
 <BR>
-	Anästhesist<br><TEXTAREA NAME="anadoc1" Content-Type="text/html"
+	Anï¿½sthesist<br><TEXTAREA NAME="anadoc1" Content-Type="text/html"
 	COLS="17" ROWS="2"><?php echo stripcslashes($pdata['anadoc1']); ?></TEXTAREA>
 	<p>
 

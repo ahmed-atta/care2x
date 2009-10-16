@@ -5,7 +5,7 @@ require('./gui_bridge/default/gui_std_tags.php');
 echo StdHeader();
 echo setCharSet();
 ?>
- <TITLE><?php echo $LDPatientRegister ?></TITLE>
+<TITLE><?php echo $LDPatientRegister ?></TITLE>
 
 <script  language="javascript">
 <!--
@@ -41,7 +41,8 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('registration_overview.php','Person Registration :: Overview')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php
 if($_COOKIE["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang;
-	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
+	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>
+"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
 
@@ -68,9 +69,11 @@ require('./gui_bridge/default/gui_tz_tabs_patreg.php');
 		<td>
 		<?php
 
+	require('./gui_bridge/default/gui_patient_reg_options.php');
+	$sTemp = ob_get_contents();
 		# Load and display the options table
 		if($current_encounter)
-		  require('./gui_bridge/default/gui_patient_reg_options.php');
+//		  require('./gui_bridge/default/gui_patient_reg_options.php');
 
 		?>
 		</td>
@@ -114,6 +117,9 @@ if($current_encounter){
 <input type=hidden name="sid" value=<?php echo $sid; ?>>
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
 </form> */
+# Load and display the options table
+//ob_start();
+//ob_end_clean();
 ?>
 
 <p>
@@ -132,7 +138,7 @@ if($current_encounter){
 
 <p>
 <a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo $root_path.'main/startframe.php'.URL_APPEND;
+<?php if($_COOKIE['ck_login_logged'.$sid]) echo $root_path.'main/menu/startframe.php'.URL_APPEND;
 	else echo $breakfile.URL_APPEND;
 ?>
 "><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>

@@ -16,7 +16,7 @@ require('./include/inc_admit_station_bridge.php');
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-//if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:../language/$lang/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+//if($edit&&!$_COOKIE[$local_user.$sid]) {header("location:../language/$lang/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 require_once($root_path.'include/inc_editor_fx.php'); 
 /* Load the data time shifter and create object */
 require_once($root_path.'classes/datetimemanager/class.dateTimeManager.php');
@@ -24,7 +24,7 @@ $dateshifter=new dateTimeManager();
 
 //$db->debug=true;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile="nursing-station-patientdaten.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";
 
 if(!$kmonat) $kmonat=date('n');

@@ -19,7 +19,7 @@
  require_once($root_path.'include/inc_front_chain_lang.php');
 
  $breakfile='nursing.php'.URL_APPEND;
- $thisfile=basename(__FILE__);
+ $thisfile=basename($_SERVER['PHP_SELF']);
 
  $today = date('Y-m-d');
 

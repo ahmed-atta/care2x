@@ -72,13 +72,13 @@ if(isset($_POST['submit'])) {
 	if(($o_val->getErrors())==0){ 	
 		if ($_REQUEST['mode']=='edit') { 
 	 		if($o_arv_patient->updateARTPatient($o_val->getValues())) {
-	 			header("Location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
+	 			header("location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
 				exit;
 	 		}
 	 	}
 	 	else if($_REQUEST['mode']=='new') { 
 	 		if($o_arv_patient->insertARTPatient($o_val->getValues())){
-	 			header("Location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
+	 			header("location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
 				exit;
 	 		}
 	 	}

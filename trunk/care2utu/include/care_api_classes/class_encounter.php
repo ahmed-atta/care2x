@@ -6,6 +6,7 @@
 /**
 */
 require_once($root_path.'include/care_api_classes/class_notes.php');
+require_once($root_path.'include/care_api_classes/class_prescription.php');
 /**
 *  Patient encounter.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
@@ -70,8 +71,11 @@ class Encounter extends Notes {
 	* @var string
 	*/
 	var $tb_dept='care_department';
-	/**
-	* Table name for insurance firms' general data
+		/**
+	* Table name for ward general data*/
+	var $tb_ward='care_ward';
+		/**
+* Table name for insurance firms' general data
 	* @var string
 	*/
 	var $tb_insco='care_insurance_firm';
@@ -805,6 +809,7 @@ class Encounter extends Notes {
 	* @return mixed integer or boolean
 	*/
 	function EncounterClass($enr=0){
+		//echo $enc;
 		if($this->is_loaded) {
 			return $this->encounter['encounter_class_nr'];
 		}else{
@@ -951,6 +956,30 @@ class Encounter extends Notes {
 				else return FALSE;
 		}
 	}
+	/* Returns current ward name.
+	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
+	* @return mixed string or boolean
+	*/
+	function CurrentWardName($enr=0){
+		global $db;
+		if($this->is_loaded) {
+			$ward_nr=$this->CurrentWardNr($enc_nr);
+			$this->new_sql = "SELECT ward_id FROM $this->tb_ward WHERE nr=$ward_nr";
+			if($this->result=$db->Execute($this->new_sql)){
+				$this->row=$this->result->FetchRow();
+				return $this->row['ward_id'];
+			}
+		}else{
+		if($enr) {
+			$this->new_sql = "SELECT ward_id FROM $this->tb_ward WHERE nr=$this->getValue('current_ward_nr',$enr)";
+				if($this->result=$db->Execute($this->new_sql)){
+					$this->row=$this->result->FetchRow();
+					return $this->row['ward_id'];
+				}
+			}
+			else return FALSE;
+		}
+	}
 	/**
 	* Returns current room number.
 	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
@@ -975,6 +1004,31 @@ class Encounter extends Notes {
 		}else{
 			if($enr) return $this->getValue('current_dept_nr',$enr);
 				else return FALSE;
+		}
+	}
+	/**
+	* Returns current department name.
+	* Use only after the encounter data was successfully loaded by the <var>loadEncounterData()</var> method.
+	* @return mixed string or boolean
+	*/
+	function CurrentDeptName($enr=0){
+		global $db;
+		if($this->is_loaded) {
+			$dept_nr=$this->CurrentDeptNr($enc_nr);
+			$this->new_sql = "SELECT name_formal FROM $this->tb_dept WHERE nr=$dept_nr";
+			if($this->result=$db->Execute($this->new_sql)){
+			    $this->row=$this->result->FetchRow();
+				return $this->row['name_formal'];
+			}
+		}else{
+			if($enr){
+				$this->new_sql = "SELECT name_formal FROM $this->tb_dept WHERE nr=$this->getValue('current_dept_nr',$enr)";
+				if($this->result=$db->Execute($this->new_sql)){
+					$this->row=$this->result->FetchRow();
+					return $this->row['name_formal'];
+				}
+			}
+			else return FALSE;
 		}
 	}
 	/**
@@ -1419,6 +1473,65 @@ class Encounter extends Notes {
 		}else{return FALSE;}
 	}
 	/**
+	* The above private search function has been modified to enable the collection of the
+	* history of admission data using a key.
+	* The resulting count can be fetched with the <var>LastRecordCount()</var> method.
+	*
+	* The returned adodb object contains rows of arrays.
+	* Each array contains "basic" admission data with following index keys:
+	* - <b>encounter_nr</b> = encounter number
+	* - <b>search key</b> = field requested in search as $key
+	* - <b>create_time</b> = time field data entered
+	*  -<b>modify_time</b> = time field data modified
+	*
+	
+	* @param int Encounter class number. default = 0 (2=just for laboratory issues)
+	* @param string for addtion of select field list.
+	* @param string for addtion of tables - must be listed using the vars from this class. Do
+	* not include care_encounter.
+	* @param string for addtion to WHERE clause.
+	* @param boolean  Flag whether the select query is limited or not, default FALSE = unlimited
+	* @param int Maximum number or rows returned in case of limited select, default = 30 rows
+	* @param int Start index offset in case of limited select, default 0 = start
+	* @return mixed adodb record object or boolean
+	*/
+	function _searchBasicInfoHistory($key, $enc_class=0,$selectFieldList='',$tblList='',$add_where='',$limit=FALSE,$len=30,$so=0){
+		global $db,$sql_LIKE;
+		$db->debug=FALSE;
+		if ($db->debug) echo "_searchAdmissionBasicInfo is called with enc_class=".$enc_class."<br>";
+		
+			$this->sql="SELECT *.create_time, *.modify_time, '.$selectFieldList.' FROM $this->'.$tblList.', $this->tbl_enc e WHERE '.$add_where.' AND e.encounter_class_nr='.$enc_class ORD *.create_time";
+		
+		if(is_numeric($key)){
+			if ($db->debug) echo " -> the key is nummeric<br>";
+			$key=(int)$key;
+			if ($enc_class==2) {
+				$this->sql.=" WHERE (*.* $sql_LIKE '$key%' ) ".$add_where;
+			} else {
+				$this->sql.=" WHERE (*.* $sql_Like '$key%') AND  e.is_discharged IN ('',0)".$add_where;
+			}
+		}elseif($key=='%'||$key=='*'){
+			if ($db->debug) echo " -> the joker is given as search key<br>";
+			if ($enc_class==2) {
+				$this->sql.=" WHERE e.status NOT IN ($this->dead_stat) ".$add_where;
+			} else {
+				$this->sql.=" WHERE e.is_discharged IN ('',0) AND e.status NOT IN ($this->dead_stat) ".$add_where;
+			}
+		}
+		if($limit){
+	    	$this->res['sabi']=$db->SelectLimit($this->sql,$len,$so);
+		}else{
+	    	$this->res['sabi']=$db->Execute($this->sql);
+		}
+
+	    if ($this->res['sabi']){
+		   	if ($this->record_count=$this->res['sabi']->RecordCount()) {
+				$this->rec_count=$this->record_count; # workaround
+				return $this->res['sabi'];
+			} else{return FALSE;}
+		}else{return FALSE;}
+	}
+		/**
 	* Searches and returns inpatient admissions based on a supplied keyword.
 	*
 	* See <var>_searchAdmissionBasicInfo()</var> for details of the resulting data structure.
@@ -1588,9 +1701,12 @@ class Encounter extends Notes {
 	*/
 	function _InLocation($type_nr){
 		global $db;
-		if($this->result=$db->Execute("SELECT nr FROM $this->tb_location WHERE encounter_nr=$this->enc_nr AND type_nr=$type_nr AND location_nr=$this->loc_nr AND (date_to='' OR date_to='0000-00-00')")){
+		$sql="SELECT nr FROM $this->tb_location WHERE encounter_nr=$this->enc_nr AND type_nr=$type_nr AND location_nr=$this->loc_nr AND (date_to='' OR date_to='0000-00-00')";
+//		echo $sql;
+		if($this->result=$db->Execute($sql)){
 			if($this->result->RecordCount()){
-				return $this->result['nr'];
+				$row=$this->result->Fetchrow();
+				return $row['nr'];
 			}else{return FALSE;}
 		}else{return FALSE;}
 	}
@@ -1704,6 +1820,24 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function assignInRoom($enr,$loc_nr,$group_nr,$date,$time){
+		global $db;
+		$sql='select nr_of_beds from care_room where room_nr='.$loc_nr.' and ward_nr='.$group_nr;
+		$result=$db->Execute($sql);
+		$row=$result->FetchRow();
+		if ($row[0]==1) {
+			$bedcode='bed1';
+		} else if ($row[0]==2) {
+			$bedcode='bed2';
+		} else if ($row[0]==3) {
+			$bedcode='bed3';
+		} else {
+			$bedcode='bed4';
+		}
+		$sql='select item_id from care_tz_drugsandservices where partcode="'.$bedcode.'"';
+		$result=$db->Execute($sql);
+		$row=$result->FetchRow();
+		$presc_obj = new prescription;
+		$presc_obj->insert_prescription($enr,$row[0],'service');
 		return $this->_setLocation($enr,4,$loc_nr,$group_nr,$date,$time); # loc. type 4 = room
 	}
 	/**
@@ -2007,7 +2141,7 @@ class Encounter extends Notes {
 	*/
 	function setIsDischarged($enr,$date,$time){
 		//$this->sql="UPDATE $this->tb_enc SET is_discharged=1, discharge_date='$date',discharge_time='$time', current_ward_nr=0,current_room_nr=0,current_dept_nr=0,current_firm_nr=0,in_ward=0 WHERE encounter_nr=$enr AND NOT is_discharged";
-		$this->sql="UPDATE $this->tb_enc SET is_discharged=1, discharge_date='$date',discharge_time='$time', in_ward=0,in_dept=0 WHERE encounter_nr=$enr AND is_discharged IN ('',0)";
+		$this->sql="UPDATE $this->tb_enc SET is_discharged=1, discharge_date='$date',discharge_time='$time', in_ward=0,in_dept=0, status='discharged', history =".$this->ConcatHistory("Update (discharged): ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n")." WHERE encounter_nr=$enr AND is_discharged IN ('',0)";
 		//if($this->Transact($this->sql)) return true; else echo $this->sql;
 		return $this->Transact($this->sql);
 	}
@@ -2042,7 +2176,7 @@ class Encounter extends Notes {
 	* @param string Time of discharge
 	* @return boolean
 	*/
-	function _discharge($enr,$loc_types,$d_type_nr,$date='',$time=''){
+	function _discharge($enr,$loc_types,$d_type_nr,$date='',$time='', $transferToWard){
 		global $dbf_nodate, $dbtype; // $HTTP_SESSION_VARS;
 		if(empty($date)) $date=date('Y-m-d');
 		if(empty($time)) $time=date('H:i:s');
@@ -2051,7 +2185,7 @@ class Encounter extends Notes {
 									date_to='$date',
 									time_to='$time',
 									status='discharged',";
-        /*
+		/*
         if($dbtype=='mysql'){
 			$this->sql.=" history=CONCAT(history,'\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."'),";
 		}else{
@@ -2076,16 +2210,31 @@ class Encounter extends Notes {
 
 		$db->debug = 0;
 
-			$sql="UPDATE care_encounter
+		$sqlLoc="UPDATE care_encounter_location cel" .
+					"       INNER JOIN care_encounter ce" .
+					"       ON cel.encounter_nr=ce.encounter_nr" .
+					"		SET		cel.status='discharged',
+									cel.date_to = curdate(),
+									cel.time_to = curtime()," .
+								"   cel.discharge_type_nr = 1,
+									cel.history =CONCAT(cel.history, 'Update (discharged): ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."'\n)".",
+									cel.modify_id='".$_SESSION['sess_user_name']."'" .
+					"		WHERE ce.is_discharged='0' AND ce.encounter_class_nr=$encounter_class";
+
+		$db->Execute($sqlLoc);
+
+
+		$sql="UPDATE care_encounter
 							SET		is_discharged = '1',
 									status='discharged',
 									discharge_date = curdate(),
 									discharge_time = curtime(),
 									history =".$this->ConcatHistory("Update (discharged): ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n").",
-									modify_id='".$_SESSION['sess_user_name']."'
+									modify_id='".$_SESSION['sess_user_name']."', in_dept = '0'
 					WHERE IS_discharged='0' AND encounter_class_nr=$encounter_class";
 
 		$db->Execute($sql);
+
 	}
 
 	/**
@@ -2116,9 +2265,10 @@ class Encounter extends Notes {
 	*/
 	function DischargeFromDept($enr,$d_type_nr,$date='',$time='',$rst_enc=1){
 		if($this->_discharge($enr,"'1','2','3','4','5','6','8'",$d_type_nr,$date,$time)){
-		  //echo "<br>patient dischared now<br>";
-			return $this->resetCurrentDept($enr);
+		  		//echo "<br>patient dischared now<br>";
+				return $this->resetCurrentDept($enr);
 		}
+
 	}
 	/**
 	* Complete discharge of patient from the ward but patient remains admitted.
@@ -2470,7 +2620,7 @@ class Encounter extends Notes {
 	*/
 	function getValue($item,$enr='',$person=FALSE) {
 	    global $db;
-
+		$tb_enc='care_encounter';
 	    if($this->is_loaded) {
 		    if(isset($this->encounter[$item])) return $this->encounter[$item];
 		        else  return false;
@@ -2484,7 +2634,7 @@ class Encounter extends Notes {
 			//return $this->sql;
 		 		if($result=$db->Execute($this->sql)) {
 					if($result->RecordCount()) {
-						$row=$this->result->FetchRow();
+						$row=$result->FetchRow();
 						return $row[$item];
 					} else { return false; }
 				} else { return false; }

@@ -24,7 +24,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 # Set break file
 require('include/inc_breakfile.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $_SESSION['sess_file_return']=$thisfile;
 

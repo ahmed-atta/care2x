@@ -15,7 +15,7 @@ define('NO_CHAIN',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $cksid='ck_sid'.$sid;
-if(!$HTTP_COOKIE_VARS[$cksid] && !$cookie) { header("location:".$root_path."cookies.php?lang=$lang&startframe=1"); exit;}
+if(!$_COOKIE[$cksid] && !$cookie) { header("location:".$root_path."cookies.php?lang=$lang&startframe=1"); exit;}
 
 if(!session_is_registered('sess_news_nr')) session_register('sess_news_nr');
 
@@ -33,7 +33,7 @@ if(!isset($news_headline_max_display)||!$news_headline_max_display) $news_num_st
     else $news_num_stop=$news_headline_max_display;  # The maximum number of news article to be displayed
 	
 //include($root_path.'include/inc_news_get.php'); // now get the current news
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 require_once($root_path.'include/care_api_classes/class_news.php');
 $newsobj=new News;
 $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);

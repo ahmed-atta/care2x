@@ -1,9 +1,17 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-//error_reporting(E_ALL);
+error_reporting(E_ALL && ~E_NOTICE);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-require($root_path.'include/care_api_classes/class_prescription.php');
+require_once($root_path.'include/care_api_classes/class_encounter.php');
+$enc_obj = new Encounter;
+require_once($root_path.'include/care_api_classes/class_weberp.php');
+require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/care_api_classes/class_prescription.php');
+$pres_obj = new Prescription;
+//require_once($root_path.'include/care_api_classes/class_tz_drugsandservices.php');
+//$drg_obj = new DrugsAndServices;
+
 /**
  * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
  * GNU General Public License
@@ -21,7 +29,7 @@ require($root_path.'include/care_api_classes/class_prescription.php');
  */
 function prepareTestElements()
 {
-	global $HTTP_POST_VARS, $paramlist, $sday, $sample_time, $param_array;
+	global $_POST, $paramlist, $sday, $sample_time, $param_array;
 
 	/* Prepare the parameters
 	 *  Check the first char of the POST_VARS. Concatenate all POST vars with
@@ -30,8 +38,8 @@ function prepareTestElements()
 	//gjergji new parameter handling code
 	$paramlist='';
 
-	while(list($x,$v)=each($HTTP_POST_VARS)){
-		if((substr($x,0,1)=='_')&&($HTTP_POST_VARS[$x]==1)){
+	while(list($x,$v)=each($_POST)){
+		if((substr($x,0,1)=='_')&&($_POST[$x]==1)){
 			if($paramlist==''){
 				$paramlist=$x.'=1';
 			}else{
@@ -45,11 +53,12 @@ function prepareTestElements()
 	 *  otherwise, the user sent a form without setting any test parameter.
 	 *  In such a case, do not save data and show the form again.
 	 */
+//	echo 'param='.$paramlist;
 	if($paramlist!=''){
 		/* Prepare the sampling minutes */
 		for($i=15;$i<46;$i=$i+15){
 			$hmin="min_".$i;
-			if($HTTP_POST_VARS[$hmin]){
+			if($_POST[$hmin]){
 				$tmin=$i;
 				break;
 			}
@@ -57,13 +66,13 @@ function prepareTestElements()
 		if(!$tmin) $tmin=0;
 
 		/* Prepare the sampling ten hours */
-		if($HTTP_POST_VARS['hrs_20']) $th=20;
-		elseif($HTTP_POST_VARS['hrs_10']) $th=10;
+		if($_POST['hrs_20']) $th=20;
+		elseif($_POST['hrs_10']) $th=10;
 
 		/* Prepare the sampling one hours */
 		for($i=0;$i<10;$i++){
 			$h1s='hrs_'.$i;
-			if($HTTP_POST_VARS[$h1s]){
+			if($_POST[$h1s]){
 				$to=$i;
 				break;
 			}
@@ -73,7 +82,7 @@ function prepareTestElements()
 		/* Prepare the weekday */
 		for($i=0;$i<7;$i++){
 			$tday="day_".$i;
-			if($HTTP_POST_VARS[$tday]){
+			if($_POST[$tday]){
 				$sday=$i;
 				break;
 			}
@@ -106,7 +115,7 @@ if($user_origin=='lab'){
 	if ($user_origin=='bill')
 	$breakfile=$root_path."modules/billing_tz/billing_tz_quotation.php";
 	else
-	$breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
+	$breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=".$edit."&station=".$station."&pn=".$pn."&saved=insert&user_origin=".$user_origin."&status=".$status."&target=chemlabor&noresize=".$noresize."&batch_nr=".$batch_nr;
 	if ($debug) echo "User Origin is $user_origin and Breakfile is ".$breakfile."<br>";
 }
 
@@ -118,11 +127,13 @@ $bgc1='#fff3f3'; /* The main background color of the form */
 $abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
 $edit_form=0;
 $read_form=0;
+
 $db_request_table=$target;
 $paramlist='';
 $sday='';
 $sample_time='';
 $data=array();
+
 
 $formtitle=$abtname[$konsil];
 define('_BATCH_NR_INIT_',10000000);
@@ -145,7 +156,8 @@ if(isset($pn)&&$pn) {
 		$full_en=$pn;
 		$_SESSION['sess_en']=$pn;
 		$_SESSION['sess_full_en']=$full_en;
-
+		include_once($root_path.'include/care_api_classes/class_tz_drugsandservices.php');
+		$drg_obj = new DrugsAndServices;
 		include_once($root_path.'include/care_api_classes/class_diagnostics.php');
 		$diag_obj=new Diagnostics;
 		$diag_obj->useChemLabRequestTable();
@@ -160,54 +172,92 @@ if(isset($pn)&&$pn) {
 }
 
 if(!isset($mode)) $mode='';
-
+$coreObj = new Core;
 switch($mode){
 	case 'save':
 		if(prepareTestElements())
 		{
-			$prescription_obj = new Prescription();
 			$data['batch_nr']=$batch_nr;
 			$data['encounter_nr']=$pn;
 			$data['room_nr']=$room_nr;
 			$data['dept_nr']=$dept_nr;
-			//$data['parameters']=$paramlist;
+			$data['parameters']=$paramlist;
 			$data['doctor_sign']=$doctor_sign;
 			$data['highrisk']=$_highrisk_;
-			$data['notes']=$notes;
+			$data['notes']=' ';
 			$data['send_date']=date('Y-m-d H:i:s');
 			$data['sample_time']=$sample_time;
 			$data['sample_weekday']=$sday;
 			$data['status']=$status;
 			$data['history']="Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n";
+			$data['bill_number']=$bill_nr;
+			$data['bill_status']=$bill_status;
+			$data['is_disabled']=$is_disabled;
 			$data['modify_id']=$_SESSION['sess_user_name'];
+			$data['modify_time']=date('Y-m-d H:i:s');
 			$data['create_id']=$_SESSION['sess_user_name'];
-			$data['create_time']='NULL';
+			$data['create_time']=date('Y-m-d H:i:s');
+			$data['priority']=$urgency;
 			$diag_obj->setDataArray($data);
 			if($diag_obj->insertDataFromInternalArray()){
 				//gjergji : new lab handlign code
 				//sub values management
-				//$diag_obj->useChemLabRequestSubTable();
+				$diag_obj_sub->useChemLabRequestSubTable();
 				$singleParam = explode("&",$paramlist);
 				foreach( $singleParam as $key => $value) {
 					$tmpParam = explode("=",$value);
 					$parsedParamList['batch_nr']=$batch_nr;
 					$parsedParamList['encounter_nr']=$pn;
+					$parsedParamList['item_id']=$pres_obj->GetItemIDByNumber($diag_obj->getItemNrByParamName($tmpParam[0]));
 					$parsedParamList['paramater_name']=$tmpParam[0];
 					$parsedParamList['parameter_value']=$tmpParam[1];
+					$parsedParamList['status']='pending';
 					$diag_obj_sub->setDataArray($parsedParamList);
+					//echo 'Name: '.$tmpParam[0];
+					//echo $diag_obj_sub->getLastQuery();
 					$diag_obj_sub->insertDataFromInternalArray();
-					//TODO : check if it works - gjergji
-					// Get for each lab-request-id the item_id of this lab-test out of drugsandservices-table
-					$item_id = $prescription_obj->GetItemIDByNumber('LAB'.$value);
-					// TODO: Set here the function to store it as bill - element -> drug_class='lab'
-					$prescription_obj->insert_prescription($pn,$item_id);
-				}
-				/*									while (list($u,$v) = each ($param_array)) {
+//echo 'z'.$diag_obj->getItemNrByParamName($tmpParam[0]).'z';
+				$item_id = $pres_obj->GetItemIDByNumber($diag_obj->getItemNrByParamName($tmpParam[0]));
+				$diag_obj->setItemID($item_id,$batch_nr);
+				//TODO : check if it works - gjergji
+				// Get for each lab-request-id the item_id of this lab-test out of drugsandservices-table
+				//$item_id = $drg_obj->GetItemIDByNumber('LAB'.$value);
+				// TODO: Set here the function to store it as bill - element -> drug_class='lab'
+				//$prescription_obj->insert_prescription($pn,$item_id);
+
+				//new code:
+
+
+
+					$sqlInner1 = "SELECT * from care_tz_laboratory_param WHERE id='".$parsedParamList['paramater_name']."'";
+
+					$resultInner1=$db->Execute($sqlInner1);
+					$row1=$resultInner1->FetchRow();
+					//echo 'id='.$row1['id'];
+					$testname = str_replace("'","\'",$row1['name'] );
+
+					$sqlInner2 = "SELECT * from care_tz_laboratory_tests WHERE name='".$testname."'";
+
+					$resultInner2=$db->Execute($sqlInner2);
+					//echo $resultInner;
+					$row2=$resultInner2->FetchRow();
+
+					$pre_item_id = $row2['id'];
+
+					$item_id='LAB'.$pre_item_id;
+
+					$pres_obj = new Prescription;
+
+					$pres_obj->insert_prescription($pn,$item_id,1);
+//				 echo 'x'.$item_id.'x';
+					
+					while (list($u,$v) = each ($param_array)) {
 				 // Get for each lab-request-id the item_id of this lab-test out of drugsandservices-table
-				 $item_id = $prescription_obj->GetItemIDByNumber('LAB'.$v);
+						$item_id = $prescription_obj->GetItemIDByNumber('LAB'.$v);
 				 // TODO: Set here the function to store it as bill - element -> drug_class='lab'
-				 $prescription_obj->insert_prescription($pn,$item_id);
-				 } // end of while (list($u,$v) = each ($param_array))*/
+				 	$prescription_obj->insert_prescription($pn,$item_id);
+				}
+													} // end of while (list($u,$v) = each ($param_array))
 
 				// Load the visual signalling functions
 				include_once($root_path.'include/inc_visual_signalling_fx.php');
@@ -231,6 +281,7 @@ switch($mode){
 	case 'update':
 		if(prepareTestElements()){
 			//echo $sql;
+			$data['batch_nr']=$batch_nr;
 			$data['room_nr']=$room_nr;
 			$data['dept_nr']=$dept_nr;
 			$data['parameters']=$paramlist;
@@ -241,7 +292,10 @@ switch($mode){
 			$data['sample_weekday']=$sday;
 			$data['status']=$status;
 			$data['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n')";
+			$data['is_disabled']=$is_disabled;
 			$data['modify_id']=$_SESSION['sess_user_name'];
+			$data['modify_time']=date('Y-m-d H:i:s');
+			$data['priority']=$urgency;
 			$diag_obj->setDataArray($data);
 			$diag_obj->setWhereCond(" batch_nr=$batch_nr");
 			if($diag_obj->updateDataFromInternalArray($batch_nr)){
@@ -249,7 +303,7 @@ switch($mode){
 				include_once($root_path.'include/inc_visual_signalling_fx.php');
 				// Set the visual signal
 				setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);
-				header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php".URL_REDIRECT_APPEND."&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=chemlabor&batch_nr=$batch_nr&noresize=$noresize");
+				header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php".URL_REDIRECT_APPEND."&edit=".$edit."&saved=update&pn=".$pn."&station=".$station."&user_origin=".$user_origin."&status=".$status."&target=chemlabor&batch_nr=".$batch_nr."&noresize=".$noresize);
 				exit;
 			}
 			else
@@ -396,11 +450,11 @@ function setM(m){
 
     if(marker.src!=mFilled.src)	{
 	   marker.src=mFilled.src;
-	   element.value='1';
+	   element.value=1;
 	   //alert(element.name+element.value);
 	}else{
 	    marker.src=mBlank.src;
-		element.value='0';
+		element.value=0;
 	   //alert(element.name+element.value);
 	 }
 }
@@ -494,7 +548,7 @@ if($edit){
 
 	?>
 
-	<table border=0>
+	<table border=0 align="left" width="">
 		<tr>
 			<td><img
 			<?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
@@ -508,7 +562,7 @@ if($edit){
 ?> <br>
 
 	<!-- outermost table for the form -->
-	<table border=0 cellpadding=1 cellspacing=0 id=table_param
+	<table border=0 cellpadding=1 cellspacing=0 id="table_param"
 		bgcolor="#606060">
 		<tr>
 			<td><!-- table for the form simulating the border -->
@@ -527,7 +581,7 @@ if($edit){
 								 <input type="text" name="room_nr" size=10 maxlength=10
 								 value="<?php
 								 if($edit_form||$read_form) echo stripslashes($stored_request['room_nr']);
-								 else   echo $HTTP_COOKIE_VARS['ck_thispc_room']
+								 else   echo $_COOKIE['ck_thispc_room']
 								 ?>">
 								 <?php
 								 */
@@ -536,8 +590,7 @@ if($edit){
 							{
 								if($edit_form||$read_form) echo stripslashes($stored_request['room_nr']);
 							}
-							?>
-							<p><!--  Table for the day and month code -->
+							?> <!--  Table for the day and month code -->
 
 
 							<table border=0 cellspacing=0 cellpadding=0 width="1">
@@ -554,8 +607,8 @@ if($edit){
 								</tr>
 								<!-- Input blocks for 10, 20 Time row -->
 								<tr align="center">
-									<td><font size=1 face="arial" color="purple"></td>
-									<td colspan=8><font size=1 face="arial" color="purple"></td>
+									<td><font size=1 face="arial" color="purple"></font></td>
+									<td colspan=8><font size=1 face="arial" color="purple"></font></td>
 
 								</tr>
 
@@ -565,7 +618,7 @@ if($edit){
 								<tr>
 									<td></td>
 								</tr>
-							</table></div>
+							</table></font></div>
 							</td>
 
 							<!-- Middle block of first row -->
@@ -604,33 +657,29 @@ if($edit){
 										} // end of if($h_requests=$db->Execute($sql_headline))
 										echo '
 
-
+					</td>
 					<td width="25%">
-					<font color="purple">'.$LDHospitalFileNr.'
-						<font color="#ffffee" class="vi_data"><b>'.$h_selian_file_number.'
+					<font color="purple">'.$LDHospitalFileNr.'</font>
+						<font color="#ffffee" class="vi_data"><b>'.$h_selian_file_number.'</font>
 					</td>
 					<td width="25%">
 
-					<font color="purple">'.$LDPatientID.'
-						<font color="#ffffee" class="vi_data"><b>'.$h_pid.'
+					<font color="purple">'.$LDPatientID.'</font>
+						<font color="#ffffee" class="vi_data"><b>'.$h_pid.'</font>
 					</td>
 					<td width="25%">
-						<font color="purple">	'.$LDSurnameUkoo.'
+						<font color="purple">	'.$LDSurnameUkoo.'</font>
 					 	<font color="#ffffee" class="vi_data"><b>
-						'.$h_name_last.'</b>
+						'.$h_name_last.'</b></font>
 					</td>
 
 					<td width="25%">
-					<font color="purple"> '.$LDFirstName.'
+					<font color="purple"> '.$LDFirstName.'</font>
 					<font color="#ffffee" class="vi_data"><b>
-						'.$h_name_first.' </b>
-
-					</font>
+						'.$h_name_first.' </b></font>
 					</td>
-
-
-
-';
+				</tr>
+				<tr>';
 										//echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 									}
 									elseif(empty($pn))
@@ -639,8 +688,8 @@ if($edit){
 										include($root_path.'include/inc_test_request_searchmask.php');
 									}
 
-									?></td>
-								</tr>
+									?>
+					</td>
 							</table>
 							</td>
 
@@ -660,10 +709,10 @@ if($edit){
 
 									//echo '<font size=1 color="#990000" face="verdana,arial">'.$batch_nr.'</font>&nbsp;&nbsp;<br>';
 									/**
-									 *  The barcode image is first searched in the cache. If present, it will be displayed.
-									 *  Otherwise an image will be generated, stored in the cache and displayed.
-									 */
-									$in_cache=1;
+									*  The barcode image is first searched in the cache. If present, it will be displayed.
+									*  Otherwise an image will be generated, stored in the cache and displayed.
+									*/
+									/*$in_cache=1;
 
 									if(!file_exists('../cache/barcodes/form_'.$batch_nr.'.png'))
 									{
@@ -677,12 +726,12 @@ if($edit){
 
 									if($in_cache)   echo '<img src="'.$root_path.'cache/barcodes/form_'.$batch_nr.'.png"  border=0>';
 
-									/* Prepare the narrow batch nr barcode for specimen labels */
+									/* Prepare the narrow batch nr barcode for specimen labels
 									if(!file_exists('../cache/barcodes/lab_'.$batch_nr.'.png'))
 									{
 										echo "<img src='".$root_path."classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=60&xres=1&font=5&label=1&form_file=lab' border=0 width=0 height=0>";
 									}
-									?></td>
+									*/?></td>
 								</tr>
 
 							</table>
@@ -692,37 +741,38 @@ if($edit){
 						</tr>
 						<!--  The  row for batch number -->
 						<tr bgcolor="<?php echo $bgc1 ?>">
-						<!--<td>&nbsp;oo</td>-->
-									<table cellpadding="0" border="0" bgcolor="">
-										<tbody>
-										<tr>
+							<td>&nbsp;</td>
+							<td>
+							<table cellpadding="0" border="0" bgcolor="">
+								<tbody>
+									<tr>
 										<td>&nbsp;</td>
-										<td width="25%"">
-											<font color="purple">
+										<td><FONT SIZE=1 FACE="Arial" color="#000066"><?php echo 'Urgency : '; ?></FONT></td>
+										<td><FONT SIZE=1 FACE="Arial" color="#000066"> <input
+											type="radio" name="urgency" value="0"
+											<?php if($urgency==0) echo 'checked'; ?>><?php echo 'Normal'; ?></FONT></td>
+										<td><FONT SIZE=1 FACE="Arial" color="#000066"><input type="radio" name="urgency" value="3"
+										<?php if($urgency==3) echo 'checked'; ?>><?php echo 'Priority'; ?></FONT></td>
+										<td><FONT SIZE=1 FACE="Arial" color="#000066"><input type="radio" name="urgency" value="5"
+										<?php if($urgency==5) echo 'checked'; ?>><?php echo 'Urgent'; ?></FONT></td>
+										<td><FONT SIZE=1 FACE="Arial" color="#000066"><input type="radio" name="urgency" value="7"
+										<?php if($urgency==7) echo 'checked'; ?>><?php echo 'Emergency'; ?></FONT></td>
+										<td width=10%>&nbsp;</td>
+										<td align="left"></td>
+										<td width=20% align="left"><font size=1
+											color="purple" face="verdana,arial"><?php echo $LDBatchNumber ?></font><font
+											color="#000000" size=2> <?php echo $batch_nr ?></font></td>
+										<td width="25%" align="right"><?php $user = $_SESSION['sess_user_name']?>
+										<font size=1 color="purple" face="verdana,arial"><?php echo $LDDoctorRequest ?></font><font
+											color="#000000" size=2> <?php echo $enc_obj->ConsultingDr($pn) ?></font>
 
-											<font class="vi_data" color="#ffffee">
-											</font>
-											</font>
 										</td>
-										<td width="25%">&nbsp;</td>
-										<td width="25%" align="right" border="1">
-										<font size=1 color="purple"
-								face="verdana,arial"><?php echo $LDBatchNumber ?><font
-								color="#000000" size=2> <?php echo $batch_nr ?>
-										</td>
-										<td width="25%" align="right" border="1">
-										<?php $user = $_SESSION['sess_user_name']?>
-							<font size=1 color="purple"
-							    face="verdana,arial"><?php echo $LDDoctorRequest ?><font
-							    color="#000000" size=2> <?php echo $user ?>
+									</tr>
+								</tbody>
+							</table>
+							</td>
 
-										</td>
-										</tr>
-										</tbody>
-									</table>
-								</td>
-
-								<td>&nbsp;</td>
+							<td>&nbsp;</td>
 
 						</tr>
 
@@ -777,6 +827,7 @@ if($edit){
 								}
 								echo '</tr>';
 							}
+							echo '</td>';
 						}
 
 						//$sTemp=ob_get_contents();

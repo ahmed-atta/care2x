@@ -1,6 +1,6 @@
 <?php
 # This is the database name
-$dbname='caredb';
+$dbname='care2x';
 
 # Database user name, default is root or httpd for mysql, or postgres for postgresql
 $dbusername='root';
@@ -12,7 +12,7 @@ $dbpassword='';
 $dbhost='localhost';
 
 # Hospitals Logo Filename in directory gui/img/common/default/
-$hospital_logo='haydom.gif';
+$hospital_logo='selian.gif';
 
 # First key used for simple chaining protection of scripts
 $key='2.67452802362E+28';
@@ -24,7 +24,7 @@ $key_2level='2.48431445375E+26';
 $key_login='1.69264361013E+27';
 
 # Main host address or domain
-$main_domain='localhost';
+$main_domain='kahawa.dhcp.haydom.co.tz';
 
 # Host address for images
 $fotoserver_ip='localhost';

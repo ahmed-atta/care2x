@@ -301,7 +301,7 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 	<select name="job_function_title">
 <?php
 		global $db;
-		$result=$db->Execute("select number,name from care_personell_jobs");
+		$result=$db->Execute("select nr,name from care_role_person");
 		while($row = $result->FetchRow())
         	echo '<option value="'.$row[0].'">'.$row[1].'</option>';
 ?>                                                        

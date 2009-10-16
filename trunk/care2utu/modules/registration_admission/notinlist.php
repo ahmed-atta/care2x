@@ -15,7 +15,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 //$db->debug=true;
 require_once($root_path.'include/care_api_classes/class_advanced_search.php');

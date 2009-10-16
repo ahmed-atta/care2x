@@ -104,7 +104,7 @@ $LDjumla='jumla';
 
 $LDCompanyReportInsurance='Company Report (Insurance)';
 $LDNameofemployee='Name of employee';
-$LDSelianfilenumber='Selian filenumber';
+$LDSelianfilenumber='Hospital filenumber';
 $LDDateofcontract='Date of contract';
 $LDValidto='Valid to';
 $LDPrice='Price';

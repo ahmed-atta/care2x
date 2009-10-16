@@ -1,6 +1,6 @@
  <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_products_db_save_mod.php',$PHP_SELF)) 
+if (eregi('inc_products_db_save_mod.php',$_SERVER['PHP_SELF'])) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
@@ -57,13 +57,13 @@ if(isset($mode)&&($mode=='save')){
 		if($encoder=='') 	$encoder=$ck_prod_db_user; 
 		// save the uploaded picture
 		// if a pic file is uploaded move it to the right dir
-		if(is_uploaded_file($HTTP_POST_FILES['bild']['tmp_name']) && $HTTP_POST_FILES['bild']['size']){
-			$picext=substr($HTTP_POST_FILES['bild']['name'],strrpos($HTTP_POST_FILES['bild']['name'],'.')+1);
+		if(is_uploaded_file($_FILES['bild']['tmp_name']) && $_FILES['bild']['size']){
+			$picext=substr($_FILES['bild']['name'],strrpos($_FILES['bild']['name'],'.')+1);
 			# Check if the file format is allowed
 			if(stristr($picext,'gif')||stristr($picext,'jpg')||stristr($picext,'png'))
 			{
 			    $n=0;
-			    $picfilename=$HTTP_POST_FILES['bild']['name'];
+			    $picfilename=$_FILES['bild']['name'];
 			    list($f,$x)=explode('.',$picfilename);
 			    $idx=substr($picfilename,strpos($picfilename,'[')+1);
 			    if($idx)
@@ -82,7 +82,7 @@ if(isset($mode)&&($mode=='save')){
 				# Prepend the order nr to the filename
 				$picfilename=$bestellnum.'_'.$picfilename;
 				# Now save the image to the hard drive
-			  	copy($HTTP_POST_FILES['bild']['tmp_name'],$imgpath.$picfilename);
+			  	copy($_FILES['bild']['tmp_name'],$imgpath.$picfilename);
 		    }
 			else
 			{

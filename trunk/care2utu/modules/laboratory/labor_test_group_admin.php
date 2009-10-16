@@ -18,7 +18,7 @@ define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 ///$db->debug=true;
 
@@ -29,8 +29,8 @@ $lab_obj=new Lab();
 # Load the date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');
 if(isset($mode) && !empty($mode)) {
-	$lab_obj->moveUp($HTTP_GET_VARS['nrFirst'],$HTTP_GET_VARS['sortnrFirst']);
-	$lab_obj->moveDown($HTTP_GET_VARS['nrSecond'],$HTTP_GET_VARS['sortnrSecond']);
+	$lab_obj->moveUp($_GET['nrFirst'],$_GET['sortnrFirst']);
+	$lab_obj->moveDown($_GET['nrSecond'],$_GET['sortnrSecond']);
 }
 
 # Get the test test groups

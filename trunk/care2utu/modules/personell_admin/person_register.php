@@ -16,9 +16,9 @@ define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 if($update) $breakfile='person_register_show.php'.URL_APPEND.'&pid='.$pid;
-	elseif($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+	elseif($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 		else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 if(!session_is_registered('sess_pid')) session_register('sess_pid');

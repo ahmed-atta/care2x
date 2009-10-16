@@ -17,7 +17,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_product.php');
 $product_obj=new Product;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 if(!isset($mode)) $mode="";
 if(!isset($cat)) $cat="";
@@ -34,7 +34,7 @@ switch($cat)
 							$breakfile=$root_path."modules/med_depot/medlager-datenbank-functions.php".URL_APPEND."&userck=$userck";
 							$imgpath=$root_path."med_depot/img/";
 							break;
-	default:  {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+	default:  {header("location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 }
 
@@ -146,7 +146,7 @@ ob_start();
 			</td>
 			<td align="right"><input type="submit" value="<?php echo $LDSearch ?>" >
 			</td>
-<!--       <td align=right><p><br><input type="reset" value="Löschen" onClick="document.suchform.keyword.focus()">
+<!--       <td align=right><p><br><input type="reset" value="Lï¿½schen" onClick="document.suchform.keyword.focus()">
 			</td>
 -->
 		 </tr>
@@ -186,7 +186,7 @@ if($linecount==1){
 	//<input type="hidden" name="picfilename" value="'.$zeile[picfile].'"> 
 
 	echo '
-	<input type="hidden" name="encoder" value="'.strtr($HTTP_COOKIE_VARS[$local_user.$sid]," ","+").'">
+	<input type="hidden" name="encoder" value="'.strtr($_COOKIE[$local_user.$sid]," ","+").'">
 	<input type="hidden" name="dstamp" value="'.str_replace("_",".",date(Y_m_d)).'">
 	<input type="hidden" name="tstamp" value="'.str_replace("_",".",date(H_i)).'">
 	<input type="hidden" name="lock_flag" value="">

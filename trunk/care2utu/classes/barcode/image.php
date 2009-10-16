@@ -3,8 +3,9 @@
 * Inserted code for Care 2002
 */
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+//error_reporting(E_ALL);
 
-require_once("../../include/inc_vars_resolve.php"); // globalize POST, GET, & COOKIE  vars
+//require_once("../../include/inc_vars_resolve.php"); // globalize POST, GET, & COOKIE  vars
 
 /*
 #
@@ -67,24 +68,28 @@ Source code home page: http://www.mribti.com/barcode/
 Contact author at: barcode@mribti.com
 */
   
-  define (__TRACE_ENABLED__, false);
-  define (__DEBUG_ENABLED__, false);
-  
   require("barcode.php");  
   require("i25object.php");
   require("c39object.php");
   require("c128aobject.php");
   require("c128bobject.php");
   require("c128cobject.php");
-              			   
-  if (!isset($style))  $style   = BCD_DEFAULT_STYLE;
+  
+$code=$_GET['code'];
+$style=$_GET['style'];
+$width=$_GET['width'];
+$height=$_GET['height'];
+$xres=$_GET['xres'];
+$font=$_GET['font'];
+$type=$_GET['type'];
+
+if (!isset($style))  $style   = BCD_DEFAULT_STYLE;
   if (!isset($width))  $width   = BCD_DEFAULT_WIDTH;
   if (!isset($height)) $height  = BCD_DEFAULT_HEIGHT;
   if (!isset($xres))   $xres    = BCD_DEFAULT_XRES;
   if (!isset($font))   $font    = BCD_DEFAULT_FONT;
-
-$width=1;
-$height=1;
+//$width=1;
+//$height=1;
   switch ($type)
   {
     case "I25":
@@ -167,7 +172,7 @@ $height=1;
   	  unset($obj);  /* clean */
   }
 
-
+$label=1;
 if($label==1)
 {
 	 header("location: ../../main/imgcreator/barcode-etik.php?sid=$sid&lang=$lang&pn=$pn");

@@ -17,11 +17,10 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 if ($ward_nr == '')
 {
-	$ward_nr = $HTTP_POST_VARS['nr'];
-
+	$ward_nr = $_POST['nr'];
 }
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 /* Load the ward object */
 require_once($root_path.'include/care_api_classes/class_ward.php');
 $ward_obj=new Ward($ward_nr);
@@ -63,10 +62,10 @@ $rows=0;
 		case 'update':
 		{
 
-			//$HTTP_POST_VARS['nr']=$HTTP_POST_VARS['ward_nr'];
+			//$_POST['nr']=$_POST['ward_nr'];
 
 
-			if($ward_obj->updateWard($ward_nr,$HTTP_POST_VARS)){
+			if($ward_obj->updateWard($ward_nr,$_POST)){
 
 
 

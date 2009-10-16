@@ -21,7 +21,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 if($pmonth=='') $pmonth=date('n');
 if($pyear=='') $pyear=date('Y');
 if($pday=='') $pday=date('d');
-//$thisfile=basename(__FILE__);
+//$thisfile=basename($_SERVER['PHP_SELF']);
 
 $offset_day=$pday-1;
 

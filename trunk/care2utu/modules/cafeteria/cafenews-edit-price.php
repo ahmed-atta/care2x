@@ -38,7 +38,7 @@ if($mode=='save')
 				$sql="UPDATE $dbtable SET productgroup='$groupname',
 					article='".$$product."',
 					price='".$$price."',
-					modify_id='".$HTTP_COOKIE_VARS[$local_user.$sid]."',
+					modify_id='".$_COOKIE[$local_user.$sid]."',
 					modify_time='".date('YmdHis')."'
 					WHERE item='".$$item."'";
 		}
@@ -46,14 +46,14 @@ if($mode=='save')
 		{
 			if($$product)
 			$sql="INSERT INTO $dbtable (lang,productgroup,article,price,create_id,create_time)
-					VALUES ('$lang','$groupname','".$$product."','".$$price."','".$HTTP_COOKIE_VARS[$local_user.$sid]."','".date('YmdHis')."')";
+					VALUES ('$lang','$groupname','".$$product."','".$$price."','".$_COOKIE[$local_user.$sid]."','".date('YmdHis')."')";
 			else continue;
 		}
 		//echo $sql."<br>";
 		if(!$ergebnis=$db->Execute($sql)) $savefail=1;
 	}
 	if($savefail) echo "<p>".$sql."<p>".$LDDbNoSave;
-		else {header("Location: cafenews-edit-price.php?sid=$sid&lang=$lang&mode=saveok&groupname=$groupname"); exit;};
+		else {header("location: cafenews-edit-price.php?sid=$sid&lang=$lang&mode=saveok&groupname=$groupname"); exit;};
 }
 else
 {

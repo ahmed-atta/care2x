@@ -6,7 +6,7 @@ require($root_path.'include/inc_environment_global.php');
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
+* elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
 */
@@ -17,12 +17,12 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 switch($dbtype){
 	case 'mysql':
 		$sPrompt = $LDMySQLManage;
-		$sAction = $root_path.'modules/phpmyadmin/index.php';
+		$sAction = "../".$root_path.'/phpmyadmin/index.php';
 		break;
 	case 'postgre':
 	case 'postgres7':
 		$sPrompt = eregi_replace('mysql','Pg',$LDMySQLManage);
-		$sAction = $root_path.'modules/phppgadmin/index.php';
+		$sAction = $_SERVER['SERVER_NAME'].'modules/phppgadmin/index.php';
 		break;
 }
 ?>
@@ -33,7 +33,7 @@ switch($dbtype){
 		<?php require($root_path.'include/inc_css_a_hilitebu.php'); ?>
 	</head>
 	<body>
-	   &nbsp;      
+	   &nbsp;
 	   <p></p>
 		<font class="prompt">
 		<center>
@@ -42,7 +42,7 @@ switch($dbtype){
 			<input type="hidden" name="lang" value="<?php echo $lang ?>">
 			<input type="hidden" name="sid" value="<?php echo $sid; ?>">
 			<input type="submit" value="<?php echo $LDContinue ?>">
-		</form><p> 
+		</form><p>
 		<form action="edv.php" method="post">
 			<input type="hidden" name="lang" value="<?php echo $lang ?>">
 			<input type="hidden" name="sid" value="<?php echo $sid; ?>">

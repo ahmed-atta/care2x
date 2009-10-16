@@ -41,8 +41,8 @@ class smarty_care extends Smarty {
 	*/
 	function smarty_care ($dirname, $bInit = TRUE, $bShowCopy = TRUE, $bLoadJS = TRUE) {
 
- 		global $root_path, $templatedir, $default_template, $sDocRoot, $LDCloseAlt, $cfg, $lang, $pgt, $GLOBAL_CONFIG;
-
+ 		global $root_path, $template_theme, $templatedir, $default_template, $sDocRoot, $LDCloseAlt, $cfg, $lang, $pgt, $GLOBAL_CONFIG;
+ 		
 		$this->smarty();
 
 		$this->root_path = $root_path;
@@ -115,7 +115,7 @@ class smarty_care extends Smarty {
 		/**
 		* global configs
 		*/
-		$Logo = $this->root_path.'classes/Smarty-2.6.0/misc/smarty_icon.gif';
+		$Logo = $this->root_path.'classes/smarty/misc/smarty_icon.gif';
 
 		//$this->assign("SmartyLogo","<a href='http://smarty.php.net/'><img src='$Logo' border='00' height='31' width='88' /></a>");
 		$this->debug = true;

@@ -25,7 +25,7 @@ if(!isset($dept_nr)||!$dept_nr){
 			#
 			require($root_path.'include/inc_mozillapatch_redirect.php');
 		}else{
-			header("Location:select_dept.php".URL_REDIRECT_APPEND."&cat=$cat&target=entry&retpath=$retpath");
+			header("location:select_dept.php".URL_REDIRECT_APPEND."&cat=$cat&target=entry&retpath=$retpath");
 		}
 		exit;
 	}

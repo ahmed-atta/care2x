@@ -17,7 +17,7 @@ define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile='nursing-station-info.php?sid='.$sid.'&lang='.$lang;
 /* Load the ward object */
 require_once($root_path.'include/care_api_classes/class_ward.php');
@@ -29,23 +29,23 @@ if(isset($mode)&&$mode=='save_beds'){
 	$saved_ok=false;
 	
 	// Set the values common to all rooms 
-	$HTTP_POST_VARS['date_create']=date('Y-m-d');
-	$HTTP_POST_VARS['history']="Created: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
-	//$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-	$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
-	$HTTP_POST_VARS['create_time']=date('YmdHis');
+	$_POST['date_create']=date('Y-m-d');
+	$_POST['history']="Created: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+	//$_POST['modify_id']=$_SESSION['sess_user_name'];
+	$_POST['create_id']=$_SESSION['sess_user_name'];
+	$_POST['create_time']=date('YmdHis');
 	//$db->debug=1;
 	for($i=$room_nr_start;$i<=$room_nr_end;$i++){
 
 		if(!$ward_obj->RoomExists($i)){
 			$beds='beds'.$i;
 			$info='info'.$i;
-			$HTTP_POST_VARS['room_nr']=$i;
+			$_POST['room_nr']=$i;
 			if(empty($$beds)) $$beds=DEFAULT_NR_OF_BEDS;
-			$HTTP_POST_VARS['nr_of_beds']=$$beds;
-			if(empty($$info)) $HTTP_POST_VARS['info'] = ' ';
-				else $HTTP_POST_VARS['info']=$$info;
-			if($ward_obj->saveWardRoomInfoFromArray($HTTP_POST_VARS)) $saved_ok=true;
+			$_POST['nr_of_beds']=$$beds;
+			if(empty($$info)) $_POST['info'] = ' ';
+				else $_POST['info']=$$info;
+			if($ward_obj->saveWardRoomInfoFromArray($_POST)) $saved_ok=true;
 			//echo $ward_obj->getLastQuery().'<p>';
 		}
 	}

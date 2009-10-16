@@ -10,6 +10,8 @@
 				{{include file="ambulatory/outpatients_list.tpl"}}
 			{{/if}}
 			<p>
+			{{$showPrescr}}
+			<p>
 			{{$pbClose}}
 		</td>
 		<td align="right">

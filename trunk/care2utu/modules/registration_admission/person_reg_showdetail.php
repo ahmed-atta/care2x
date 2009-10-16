@@ -16,7 +16,7 @@ define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile='patient.php';
 $admissionfile='aufnahme_start.php'.URL_APPEND;
 

@@ -11,6 +11,8 @@
   </tbody>
 </table>
 <p>
+{{$pPrescriptions}}
+<p>
 {{$pbClose}}
 <br>
 {{$sOpenWardMngmt}}

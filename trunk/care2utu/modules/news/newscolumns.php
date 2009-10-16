@@ -27,7 +27,7 @@ $subtitle=$LDSubTitle[$target];
 # Set default values
 $default_editor_script='modules/news/editor-4plus1-select-art.php';
 $default_start_page='main/startframe.php';
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $_SESSION['sess_file_break']=$top_dir.$thisfile;
 

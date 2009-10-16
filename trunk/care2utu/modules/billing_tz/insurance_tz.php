@@ -15,6 +15,10 @@ require($root_path.'include/inc_environment_global.php');
 //define('NO_2LEVEL_CHK',1);
 define('LANG_FILE','billing.php');
 require($root_path.'include/inc_front_chain_lang.php');
+require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
+require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+$insurance_tz = New Insurance_tz();
+$bill_obj = new Bill;
 require ("gui/gui_insurance_tz.php");
 
 ?>

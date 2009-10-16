@@ -28,7 +28,7 @@ $entry_body_bgcolor='#ffffff';
 if(!isset($searchkey)) $searchkey='';
 if(!isset($mode)) $mode='';
 
-$db->debug=1;
+//$db->debug=1;
 
 if(($mode=='search')and($searchkey)){
 	/* Load global config */
@@ -42,9 +42,9 @@ if(($mode=='search')and($searchkey)){
 	}
 
 	if(addslashes($suchwort)!='*')
-		$sql="SELECT * FROM care_users  WHERE name $sql_LIKE '".addslashes($suchwort)."%'";
+		$sql="SELECT * FROM care_person  WHERE name_first $sql_LIKE '".addslashes($suchwort)."%'";
 	else
-		$sql="SELECT * FROM care_users ";
+		$sql="SELECT * FROM care_person";
 
 	if($ergebnis=$db->Execute($sql)){
 

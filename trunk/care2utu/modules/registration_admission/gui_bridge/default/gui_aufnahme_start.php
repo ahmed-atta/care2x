@@ -588,7 +588,7 @@ while($buffer=$att_dr_service->FetchRow())
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial" color=red><?php echo $LDAdmitBy ?>:
 </td>
-<td colspan=2 bgcolor="#eeeeee"><input  name="encoder" type="text" value=<?php if ($encoder!='') echo '"'.$encoder.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="28" readonly>
+<td colspan=2 bgcolor="#eeeeee"><input  name="encoder" type="text" value=<?php if ($encoder!='') echo '"'.$encoder.'"' ; else echo '"'.$_COOKIE[$local_user.$sid].'"' ?> size="28" readonly>
 </nobr>
 </td>
 </tr>
@@ -683,7 +683,7 @@ if(defined('MASCOT_SHOW') && MASCOT_SHOW==1)
 <!--<a href="
 <?php
 	/*
-	if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'patient.php';
+	if($_COOKIE['ck_login_logged'.$sid]) echo 'patient.php';
 	else echo 'patient.php';
 	echo URL_APPEND;
 	*/

@@ -21,7 +21,7 @@ define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require($root_path.'include/inc_front_chain_lang.php');
 
-if(empty($HTTP_COOKIE_VARS[$local_user.$sid])){
+if(empty($_COOKIE[$local_user.$sid])){
     $edit=0;
 	include($root_path."language/".$lang."/lang_".$lang."_".LANG_FILE);
 }
@@ -38,7 +38,7 @@ if($s_date==date('Y-m-d')) $is_today=true;
 if(!isset($mode)) $mode='';
 
 $breakfile='nursing.php'.URL_APPEND; # Set default breakfile
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 if(isset($retpath)){
 	switch($retpath)
@@ -530,9 +530,10 @@ if($ward_ok){
 
 				$enc_obj->loadEncounterData( $bed['encounter_nr'] );
 				$pid = $enc_obj->PID();
+
 				$date = $enc_obj->EncounterDate();
 
-				$dateArr = date_parse($date);
+				//$dateArr = date_parse($date);
 
 				$smarty->assign('sPatNr',$pid);
 				$smarty->assign('sAdmDate',formatDate2Local($date,$date_format).' '.$dateArr['hour'].':'.$dateArr['minute']);
@@ -679,6 +680,10 @@ if($pday.$pmonth.$pyear<>date('dmY'))
 	$smarty->assign('sToArchiveLink','<p>
 			<a href="nursing-station-archiv.php'.URL_APPEND.'">'.$LDClk2Archive.' <img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','',TRUE).'></a>
 			<p>');
+
+$stationName = $ward_info['name'];
+
+$smarty->assign('pPrescriptions', '<a href=nursing-station-pharmacy-list.php'.URL_APPEND.'&station='.urlencode($stationName).'&ward_nr='.$ward_nr.'>'.$LDShowPrescr.'</a>');
 
 $smarty->assign('pbClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp');
 

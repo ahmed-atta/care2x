@@ -20,7 +20,7 @@ setcookie(ck_plan,"1");
 if($dept=="") $dept="plast";
 if($pmonth=="") $pmonth=date('n');
 if($pyear=="") $pyear=date('Y');
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;

@@ -32,7 +32,7 @@ if (!empty($_SESSION['sess_path_referer'])){
 }
 
 $breakfile=$root_path.$breakfile.URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 //$db->debug=1;
 

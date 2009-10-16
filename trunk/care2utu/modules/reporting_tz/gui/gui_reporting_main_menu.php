@@ -134,32 +134,6 @@ function getARV(path) {
 
                 <tr>
                   <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-                  <td class="submenu_item"><a href="billing_summary.php"><?php echo $LDFinancialReport; ?></a></td>
-                  <td><?php echo $LDDailyFinancialRecord; ?></td>
-                </tr>
-
-                <tr>
-                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-                  <td class="submenu_item"><a href="tracking_summary.php"><?php echo $LDTrackingReport; ?></a></td>
-                  <td><?php echo $LDMonthlyTrackingReport; ?></td>
-                </tr>
-
-                <tr>
-                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-                  <td class="submenu_item"><a href="cash_billing_summary.php"><?php echo 'CashReport'; ?></a></td>
-                  <td><?php echo 'Daily Cash Collection Report'; ?></td>
-                </tr>
-
-                <!--<tr>
-                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-                  <td class="submenu_item"><a href="company_billing_summary.php"><?php echo 'CompanyFinancialReport'; ?></a></td>
-                  <td><?php echo 'Daily Financial Record listened of a specific Companies'; ?></td>
-                </tr>-->
-
-
-
-                <tr>
-                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
                   <td class="submenu_item"><a href="reporting_pharmacy.php"><?php echo $LDPharmacyReport; ?></a></td>
                   <td><?php echo $LDGenerallyPharmacyReport; ?></td>
                 </tr>
@@ -183,6 +157,49 @@ function getARV(path) {
                   <td class="submenu_item"><a href="tb_billing_summary.php"><?php echo 'TB Financial Report'; ?></a></td>
                   <td><?php echo 'Monthly TB Patients Financial Report'; ?></td>
                 </tr>
+
+                <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="javascript:getARV('modules/arv/arv_reporting_quarterly.php')">HIV Care Reporting</a></td>
+                  <td>Quarterly Facility Based Reporting</td>
+                </tr>
+
+                 <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="javascript:getARV('modules/arv/arv_reporting_overview.php')">HIV Overview</a></td>
+                  <td>Patient Data Overview</td>
+                </tr>
+
+                 <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="javascript:getARV('modules/arv/arv_reporting_cstatistics.php')">HIV C-Statistics</a></td>
+                  <td>C-Statistics Overview</td>
+                </tr>
+                
+                <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="billing_summary.php"><?php echo $LDFinancialReport; ?></a></td>
+                  <td><?php echo $LDDailyFinancialRecord; ?></td>
+                </tr>
+
+                <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="tracking_summary.php"><?php echo $LDTrackingReport; ?></a></td>
+                  <td><?php echo $LDMonthlyTrackingReport; ?></td>
+                </tr>
+
+                <tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="cash_billing_summary.php"><?php echo 'CashReport'; ?></a></td>
+                  <td><?php echo 'Daily Cash Collection Report'; ?></td>
+                </tr>
+
+                <!--<tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="company_billing_summary.php"><?php echo 'CompanyFinancialReport'; ?></a></td>
+                  <td><?php echo 'Daily Financial Record listened of a specific Companies'; ?></td>
+                </tr>-->
+
 				<tr>
                   <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
                   <td class="submenu_item"><a href="billing_cash_summary.php"><?php echo 'Cash Receipt-General Financial Summary'; ?></a></td>
@@ -208,28 +225,7 @@ function getARV(path) {
                   <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
                   <td class="submenu_item"><a href="reporting_weberp.php">webERP Transaction</a></td>
                   <td>Monthly failed Transaction</td>
-                </tr>
-
-
-
-                <tr>
-                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-                  <td class="submenu_item"><a href="javascript:getARV('modules/arv/arv_reporting_quarterly.php')">HIV Care Reporting</a></td>
-                  <td>Quarterly Facility Based Reporting</td>
-                </tr>
-                 <tr>
-                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-                  <td class="submenu_item"><a href="javascript:getARV('modules/arv/arv_reporting_overview.php')">HIV Overview</a></td>
-                  <td>Patient Data Overview</td>
-                </tr>
-                </tr>
-                 <tr>
-                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
-                  <td class="submenu_item"><a href="javascript:getARV('modules/arv/arv_reporting_cstatistics.php')">HIV C-Statistics</a></td>
-                  <td>C-Statistics Overview</td>
-                </tr>
-
-
+                </tr>                
               </tbody>
             </table></TD>
 	</TR>

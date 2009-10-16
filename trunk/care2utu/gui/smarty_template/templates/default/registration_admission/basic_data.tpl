@@ -21,7 +21,7 @@
 					<td  {{$sClassItem}}>
 						{{$LDCaseNr}}
 					</td>
-					<td {{$sClassInput}}>
+					<td bgcolor="#ffffee" class="vi_data">
 						{{$sEncNrPID}}
 					</td>
 					<td {{$sRowSpan}} align="center" class="photo_id">
@@ -33,7 +33,7 @@
 					<td {{$sClassItem}}>
 						{{$LDTitle}}:
 					</td>
-					<td {{$sClassInput}}>
+					<td bgcolor="#ffffee" class="vi_data">
 						{{$title}}
 					</td>
 				</tr>
@@ -102,7 +102,7 @@
 					<td {{$sClassItem}}>
 						{{$LDSex}}:
 					</td>
-					<td {{$sClassInput}}>
+					<td bgcolor="#ffffee" class="vi_data">
 						{{$sSexType}}
 					</td>
 				</tr>
@@ -112,7 +112,7 @@
 					<td {{$sClassItem}}>
 						{{$LDBloodGroup}}:
 					</td>
-					<td  {{$sClassInput}}>&nbsp;
+					<td bgcolor="#ffffee" class="vi_data">&nbsp;
 						{{$blood_group}}
 					</td>
 				</tr>

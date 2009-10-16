@@ -19,12 +19,12 @@ define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-if (!$internok&&!$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if (!$internok&&!$_COOKIE['ck_op_pflegelogbuch_user'.$sid]) {header("location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 require_once($root_path.'include/inc_config_color.php');
 
 # Initialization
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile='javascript:window.close()';
 
 # Workaround: Resolve the search key variables
@@ -595,7 +595,7 @@ echo '
 				<input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>"> 
 				<input type="hidden" name="saal" value="<?php echo $saal; ?>">
 				<input type="hidden" name="child" value="<?php echo $child; ?>"> 
-				<input type="hidden" name="user" value="<?php echo str_replace(" ","+",$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]); ?>">
+				<input type="hidden" name="user" value="<?php echo str_replace(" ","+",$_COOKIE['ck_op_pflegelogbuch_user'.$sid]); ?>">
     			<input type="hidden" name="mode" value="search">
        
            	</td>

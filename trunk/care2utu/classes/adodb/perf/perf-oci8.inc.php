@@ -1,23 +1,29 @@
 <?php
 /* 
-V4.21 20 Mar 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
+V5.07 18 Dec 2008   (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. See License.txt. 
   Set tabs to 4 for best viewing.
   
-  Latest version is available at http://php.weblogs.com/
+  Latest version is available at http://adodb.sourceforge.net
   
   Library for basic performance monitoring and tuning 
   
 */
 
+// security - hide paths
+if (!defined('ADODB_DIR')) die();
+
 class perf_oci8 extends ADODB_perf{
+
+	var $noShowIxora = 15; // if the sql for suspicious sql is taking too long, then disable ixora
 	
 	var $tablesSQL = "select segment_name as \"tablename\", sum(bytes)/1024 as \"size_in_k\",tablespace_name as \"tablespace\",count(*) \"extents\" from sys.user_extents 
 	   group by segment_name,tablespace_name";
 	 
 	var $version;
+	
 	var $createTableSQL = "CREATE TABLE adodb_logsql (
 		  created date NOT NULL,
 		  sql0 varchar(250) NOT NULL,
@@ -65,6 +71,7 @@ AND    b.name = 'sorts (memory)'",
 		"select value from v\$sysstat where name='physical writes'"),
 	
 	'Data Cache',
+	
 		'data cache buffers' => array( 'DATAC',
 		"select a.value/b.value  from v\$parameter a, v\$parameter b 
 			where a.name = 'db_cache_size' and b.name= 'db_block_size'",
@@ -72,13 +79,20 @@ AND    b.name = 'sorts (memory)'",
 		'data cache blocksize' => array('DATAC',
 			"select value from v\$parameter where name='db_block_size'",
 			'' ),			
+	
 	'Memory Pools',
-		'data cache size' => array('DATAC',
+		'SGA Max Size' => array( 'DATAC',
+		"select value from v\$parameter where name = 'sga_max_size'",
+			'The sga_max_size is the maximum value to which sga_target can be set.' ),
+	'SGA target' => array( 'DATAC',
+		"select value from v\$parameter where name = 'sga_target'",
+			'If sga_target is defined then data cache, shared, java and large pool size can be 0. This is because all these pools are consolidated into one sga_target.' ),
+	'data cache size' => array('DATAC',
 			"select value from v\$parameter where name = 'db_cache_size'",
 			'db_cache_size' ),
 		'shared pool size' => array('DATAC',
 			"select value from v\$parameter where name = 'shared_pool_size'",
-			'shared_pool_size, which holds shared cursors, stored procedures and similar shared structs' ),
+			'shared_pool_size, which holds shared sql, stored procedures, dict cache and similar shared structs' ),
 		'java pool size' => array('DATAJ',
 			"select value from v\$parameter where name = 'java_pool_size'",
 			'java_pool_size' ),
@@ -104,10 +118,10 @@ AND    b.name = 'sorts (memory)'",
 			"select round((1-bytes/sgasize)*100, 2)
 			from (select sum(bytes) sgasize from sys.v_\$sgastat) s, sys.v_\$sgastat f
 			where name = 'free memory' and pool = 'shared pool'",
-		'Percentage of data cache actually in use - too low is bad, too high is worse'),
+		'Percentage of data cache actually in use - should be over 85%'),
 		
-		'shared pool utilization ratio' => array('RATIOU',
-		'select round((sga.bytes/p.value)*100,2)
+		'shared pool utilization ratio' => array('RATIOU', 
+		'select round((sga.bytes/case when p.value=0 then sga.bytes else to_number(p.value) end)*100,2)
 		from v$sgastat sga, v$parameter p
 		where sga.name = \'free memory\' and sga.pool = \'shared pool\'
 		and p.name = \'shared_pool_size\'',
@@ -120,7 +134,7 @@ AND    b.name = 'sorts (memory)'",
 		'Percentage of large_pool actually in use - too low is bad, too high is worse'),
 		'sort buffer size' => array('CACHE',
 			"select value from v\$parameter where name='sort_area_size'",
-			'sort_area_size (per query), uses memory in pga' ),
+			'max in-mem sort_area_size (per query), uses memory in pga' ),
 
 		'pga usage at peak' => array('RATIOU',
 		'=PGA','Mb utilization at peak transactions (requires Oracle 9i+)'),
@@ -141,16 +155,37 @@ AND    b.name = 'sorts (memory)'",
 		'cursor sharing' => array('CURSOR',
 			"select value from v\$parameter where name = 'cursor_sharing'",
 			'Cursor reuse strategy. Recommended is FORCE (8i+) or SIMILAR (9i+). See <a href=http://www.praetoriate.com/oracle_tips_cursor_sharing.htm>cursor_sharing</a>.'),
-			
+		/*
+		'cursor reuse' => array('CURSOR',
+			"select count(*) from (select sql_text_wo_constants, count(*)
+  from t1
+ group by sql_text_wo_constants
+having count(*) > 100)",'These are sql statements that should be using bind variables'),*/
 		'index cache cost' => array('COST',
 			"select value from v\$parameter where name = 'optimizer_index_caching'",
-			'% of indexed data blocks expected in the cache.
-			Recommended is 20-80. Default is 0. See <a href=http://www.dba-oracle.com/oracle_tips_cbo_part1.htm>optimizer_index_caching</a>.'),
-		
+			'=WarnIndexCost'),
 		'random page cost' => array('COST',
 			"select value from v\$parameter where name = 'optimizer_index_cost_adj'",
-			'Recommended is 10-50 for TP, and 50 for data warehouses. Default is 100. See <a href=http://www.dba-oracle.com/oracle_tips_cost_adj.htm>optimizer_index_cost_adj</a>. '),		
+			'=WarnPageCost'),
 		
+	'Backup',
+		'Achivelog Mode' => array('BACKUP', 'select log_mode from v$database', 'To turn on archivelog:<br>
+	<pre>
+        SQLPLUS> connect sys as sysdba;
+        SQLPLUS> shutdown immediate;
+
+        SQLPLUS> startup mount exclusive;
+        SQLPLUS> alter database archivelog;
+        SQLPLUS> archive log start;
+        SQLPLUS> alter database open;
+</pre>'),
+	
+		'DBID' => array('BACKUP','select dbid from v$database','Primary key of database, used for recovery with an RMAN Recovery Catalog'),
+		'Archive Log Dest' => array('BACKUP', "SELECT NVL(v1.value,v2.value) 
+FROM v\$parameter v1, v\$parameter v2 WHERE v1.name='log_archive_dest' AND v2.name='log_archive_dest_10'", ''),
+	
+	'Flashback Area' => array('BACKUP', "select nvl(value,'Flashback Area not used') from v\$parameter where name=lower('DB_RECOVERY_FILE_DEST')", 'Flashback area is a folder where all backup data and logs can be stored and managed by Oracle. If Error: message displayed, then it is not in use.'),
+		'Control File Keep Time' => array('BACKUP', "select value from v\$parameter where name='control_file_record_keep_time'",'No of days to keep RMAN info in control file. I recommend it be set to x2 or x3 times the frequency of your full backup.'),
 		false
 		
 	);
@@ -161,9 +196,26 @@ AND    b.name = 'sorts (memory)'",
 		$savelog = $conn->LogSQL(false);	
 		$this->version = $conn->ServerInfo();
 		$conn->LogSQL($savelog);	
-		$this->conn =& $conn;
+		$this->conn = $conn;
 	}
 	
+	function WarnPageCost($val)
+	{
+		if ($val == 100) $s = '<font color=red><b>Too High</b>. </font>';
+		else $s = '';
+		
+		return $s.'Recommended is 20-50 for TP, and 50 for data warehouses. Default is 100. See <a href=http://www.dba-oracle.com/oracle_tips_cost_adj.htm>optimizer_index_cost_adj</a>. ';
+	}
+	
+	function WarnIndexCost($val)
+	{
+		if ($val == 0) $s = '<font color=red><b>Too Low</b>. </font>';
+		else $s = '';
+		
+		return $s.'Percentage of indexed data blocks expected in the cache.
+			Recommended is 20 (fast disk array) to 30 (slower hard disks). Default is 0.
+			 See <a href=http://www.dba-oracle.com/oracle_tips_cbo_part1.htm>optimizer_index_caching</a>.';
+		}
 	
 	function PGA()
 	{
@@ -188,7 +240,7 @@ AND    b.name = 'sorts (memory)'",
 	function Explain($sql,$partial=false) 
 	{
 		$savelog = $this->conn->LogSQL(false);
-		$rs =& $this->conn->SelectLimit("select ID FROM PLAN_TABLE");
+		$rs = $this->conn->SelectLimit("select ID FROM PLAN_TABLE");
 		if (!$rs) {
 			echo "<p><b>Missing PLAN_TABLE</b></p>
 <pre>
@@ -227,7 +279,7 @@ CREATE TABLE PLAN_TABLE (
 	
 		if ($partial) {
 			$sqlq = $this->conn->qstr($sql.'%');
-			$arr = $this->conn->GetArray("select distinct distinct sql1 from adodb_logsql where sql1 like $sqlq");
+			$arr = $this->conn->GetArray("select distinct sql1 from adodb_logsql where sql1 like $sqlq");
 			if ($arr) {
 				foreach($arr as $row) {
 					$sql = reset($row);
@@ -240,7 +292,8 @@ CREATE TABLE PLAN_TABLE (
 		
 		$this->conn->BeginTrans();
 		$id = "ADODB ".microtime();
-		$rs =& $this->conn->Execute("EXPLAIN PLAN SET STATEMENT_ID='$id' FOR $sql");
+
+		$rs = $this->conn->Execute("EXPLAIN PLAN SET STATEMENT_ID='$id' FOR $sql");
 		$m = $this->conn->ErrorMsg();
 		if ($m) {
 			$this->conn->RollbackTrans();
@@ -268,7 +321,7 @@ CONNECT BY prior id=parent_id and statement_id='$id'");
 	{
 		if ($this->version['version'] < 9) return 'Oracle 9i or later required';
 		
-		 $rs =& $this->conn->Execute("
+		 $rs = $this->conn->Execute("
 select  a.size_for_estimate as cache_mb_estimate,
 	case when a.size_factor=1 then 
    		'&lt;&lt;= current'
@@ -322,7 +375,7 @@ select  a.size_for_estimate as cache_mb_estimate,
 				$check = $rs->fields[0].'::'.$rs->fields[1];			
 			} else
 				$sql .= $rs->fields[2];
-			
+			if (substr($sql,strlen($sql)-1) == "\0") $sql = substr($sql,0,strlen($sql)-1);
 			$rs->MoveNext();
 		}
 		$rs->Close();
@@ -379,28 +432,37 @@ where
 order by
   1 desc, s.address, p.piece";
 
-  		global $ADODB_CACHE_MODE,$HTTP_GET_VARS;
-  		if (isset($HTTP_GET_VARS['expsixora']) && isset($HTTP_GET_VARS['sql'])) {
-				$partial = empty($HTTP_GET_VARS['part']);
-				echo "<a name=explain></a>".$this->Explain($HTTP_GET_VARS['sql'],$partial)."\n";
+  		global $ADODB_CACHE_MODE;
+  		if (isset($_GET['expsixora']) && isset($_GET['sql'])) {
+				$partial = empty($_GET['part']);
+				echo "<a name=explain></a>".$this->Explain($_GET['sql'],$partial)."\n";
 		}
 
-		if (isset($HTTP_GET_VARS['sql'])) return $this->_SuspiciousSQL();
+		if (isset($_GET['sql'])) return $this->_SuspiciousSQL($numsql);
+		
+		$s = '';
+		$timer = time();
+		$s .= $this->_SuspiciousSQL($numsql);
+		$timer = time() - $timer;
+		
+		if ($timer > $this->noShowIxora) return $s;
+		$s .= '<p>';
 		
 		$save = $ADODB_CACHE_MODE;
 		$ADODB_CACHE_MODE = ADODB_FETCH_NUM;
+		if ($this->conn->fetchMode !== false) $savem = $this->conn->SetFetchMode(false);
+		
 		$savelog = $this->conn->LogSQL(false);
-		$rs =& $this->conn->SelectLimit($sql);
+		$rs = $this->conn->SelectLimit($sql);
 		$this->conn->LogSQL($savelog);
+		
+		if (isset($savem)) $this->conn->SetFetchMode($savem);
 		$ADODB_CACHE_MODE = $save;
 		if ($rs) {
-			$s = "\n<h3>Ixora Suspicious SQL</h3>";
+			$s .= "\n<h3>Ixora Suspicious SQL</h3>";
 			$s .= $this->tohtml($rs,'expsixora');
-		} else 
-			$s = '';
+		}
 		
-		if ($s) $s .= '<p>';
-		$s .= $this->_SuspiciousSQL();
 		return $s;
 	}
 	
@@ -444,32 +506,64 @@ where
 order by
   1 desc, s.address, p.piece
 ";
-		global $ADODB_CACHE_MODE,$HTTP_GET_VARS;
-  		if (isset($HTTP_GET_VARS['expeixora']) && isset($HTTP_GET_VARS['sql'])) {
-			$partial = empty($HTTP_GET_VARS['part']);	
-			echo "<a name=explain></a>".$this->Explain($HTTP_GET_VARS['sql'],$partial)."\n";
+		global $ADODB_CACHE_MODE;
+  		if (isset($_GET['expeixora']) && isset($_GET['sql'])) {
+			$partial = empty($_GET['part']);	
+			echo "<a name=explain></a>".$this->Explain($_GET['sql'],$partial)."\n";
 		}
-		
-		if (isset($HTTP_GET_VARS['sql'])) {
-			 $var =& $this->_ExpensiveSQL();
+		if (isset($_GET['sql'])) {
+			 $var = $this->_ExpensiveSQL($numsql);
 			 return $var;
 		}
+		
+		$s = '';		
+		$timer = time();
+		$s .= $this->_ExpensiveSQL($numsql);
+		$timer = time() - $timer;
+		if ($timer > $this->noShowIxora) return $s;
+		
+		$s .= '<p>';
 		$save = $ADODB_CACHE_MODE;
 		$ADODB_CACHE_MODE = ADODB_FETCH_NUM;
+		if ($this->conn->fetchMode !== false) $savem = $this->conn->SetFetchMode(false);
+		
 		$savelog = $this->conn->LogSQL(false);
-		$rs =& $this->conn->Execute($sql);
+		$rs = $this->conn->Execute($sql);
 		$this->conn->LogSQL($savelog);
+		
+		if (isset($savem)) $this->conn->SetFetchMode($savem);
 		$ADODB_CACHE_MODE = $save;
+		
 		if ($rs) {
-			$s = "\n<h3>Ixora Expensive SQL</h3>";
+			$s .= "\n<h3>Ixora Expensive SQL</h3>";
 			$s .= $this->tohtml($rs,'expeixora');
-		} else 
-			$s = '';
-		
-		
-		if ($s) $s .= '<p>';
-		$s .= $this->_ExpensiveSQL();
+		}
+	
 		return $s;
+	}
+	
+	function clearsql() 
+	{
+		$perf_table = adodb_perf::table();
+	// using the naive "delete from $perf_table where created<".$this->conn->sysTimeStamp will cause the table to lock, possibly
+	// for a long time
+		$sql = 
+"DECLARE cnt pls_integer;
+BEGIN
+	cnt := 0;
+	FOR rec IN (SELECT ROWID AS rr FROM $perf_table WHERE created<SYSDATE) 
+	LOOP
+	  cnt := cnt + 1;
+	  DELETE FROM $perf_table WHERE ROWID=rec.rr;
+	  IF cnt = 1000 THEN
+	  	COMMIT;
+		cnt := 0;
+	  END IF;
+	END LOOP;
+	commit;
+END;";
+
+		$ok = $this->conn->Execute($sql);
 	}
 	
 }

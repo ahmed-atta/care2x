@@ -32,7 +32,7 @@ else
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $bgc1='#bbdbc4'; // <= Set the background color of the form here
 $abtname=get_meta_tags($root_path."global_conf/$lang/konsil_tag_dept.pid");
@@ -451,12 +451,27 @@ elseif(!$read_form && !$no_proc_assist)
 		<a href="javascript:show_calendar('form_test_request.send_date','<?php echo $date_format ?>')">
  		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle',TRUE); ?>></a>
 
-  </div></td>
-			<td align="right"><div class=fva2_ml10><font color="#000099">
-		<?php echo $LDDoctor ?>
-		<input type="text" name="send_doctor" size=40 maxlength=40 value="<?php if($edit_form || $read_form) echo stripslashes($stored_request['send_doctor']) ?>">&nbsp;&nbsp;&nbsp;&nbsp;
-  </div></td>
-</tr>
+							<td><font
+								size=1 face="arial"> <?php echo $LDDoctor ?>:</font> <select
+								name="send_doctor"><option>===Select a Doctor===</option>
+<?php 
+$sql='select name_first, name_last from care_person left join care_personell on care_person.pid=care_personell.pid where care_personell.job_function_title=17';
+$doctors=$db->Execute($sql);
+while ($doctor_list=$doctors->FetchRow()) {
+	if (($doctor_list[0].' '.$doctor_list[1])==$stored_request['send_doctor']) {
+		echo '<option selected value="'.$doctor_list[0].' '.$doctor_list[1].'">'.$doctor_list[0].' '.$doctor_list[1].'</option>';
+	} else {
+		echo '<option value="'.$doctor_list[0].' '.$doctor_list[1].'">'.$doctor_list[0].' '.$doctor_list[1].'</option>';
+	}
+}
+
+?>
+								</select>
+							<br>
+							</td>
+						</tr>
+
+
 
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2><div class=fva2_ml10>&nbsp;<br><font color="#969696"><?php echo $LDDeptReport ?><br>

@@ -24,7 +24,7 @@ require_once($root_path.'include/care_api_classes/class_address.php');
 $address_obj=new Address;
 
 $breakfile='address_manage.php'.URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 # Initialize page�s control variables
 if($mode!='paginate'){

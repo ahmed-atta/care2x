@@ -27,7 +27,7 @@ $local_user='ck_radio_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $breakfile='patient_search.php'.URL_APPEND;
 

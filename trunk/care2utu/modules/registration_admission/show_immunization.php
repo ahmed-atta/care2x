@@ -10,13 +10,13 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 if(!isset($mode)){
 	$mode='show';
 } elseif($mode=='create'||$mode=='update') {
 	//$db->debug=true;
 	
-	$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
+	$_POST['create_id']=$_SESSION['sess_user_name'];
 	
 	include('./include/save_immunization.inc.php');
 }

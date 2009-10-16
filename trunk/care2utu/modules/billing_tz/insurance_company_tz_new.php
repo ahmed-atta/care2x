@@ -17,7 +17,7 @@ $lang_tables[]='billing.php';
 $lang_tables[]='aufnahme.php';
 require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
-$insurance_tz = New Insurance_tz();
+$insurance_tz = new Insurance_tz();
 if($mode=='insert')
 {
 	//Error checking
@@ -29,9 +29,9 @@ if($mode=='insert')
 		$newid = $insurance_tz->InsertNewInsuranceCompany($_POST);
 		if($newid)
 			if($sitetarget=='contract')
-				header("Location: insurance_company_tz_contracts_new.php?company_id=".$newid);
+				header("location: insurance_company_tz_contracts_new.php?company_id=".$newid);
 			else
-				header("Location: insurance_company_tz.php");
+				header("location: insurance_company_tz.php");
 	}
 }
 

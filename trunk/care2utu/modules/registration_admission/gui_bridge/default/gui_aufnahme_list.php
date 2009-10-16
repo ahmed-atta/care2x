@@ -2,7 +2,7 @@
 
 # Resolve href for close button
 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfilen = $root_path."main/startframe.php".URL_APPEND;
+if($_COOKIE["ck_login_logged".$sid]) $breakfilen = $root_path."main/startframe.php".URL_APPEND;
 	else $breakfile = $breakfile.URL_APPEND."&target=entry";
 
 # Start Smarty templating here
@@ -295,7 +295,7 @@ if(!empty($rows)){
 	}
 	if ($GLOBAL_CONFIG['patient_name_middle_show']){
 		if(!isset($name_3)) $name_3='';
-		createTR('name_3', $LDName3,$name_3);
+		createTR('name_3', 'Middle Name',$name_3);
 	}
 
 	if(!isset($date_birth)) $date_birth='';
@@ -375,6 +375,24 @@ if(!empty($rows)){
 	createTR( 'referrer_dr', $LDRecBy,$referrer_dr);
 	createTR( 'referrer_recom_therapy', $LDTherapy,$referrer_recom_therapy);
 	createTR( 'referrer_notes', $LDSpecials,$referrer_notes);
+?>
+	<tr>
+		<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<?php echo 'Discharge Date' ?>:
+		</td>
+		<td bgcolor="#eeeeee" colspan=2>
+			<input name="date_discharge" type="text" size="15" maxlength=10 value="<?php if(!empty($date_discharge)) echo @formatDate2Local($date_discharge,$date_format);  ?>"
+			onFocus="this.select();"  onBlur="IsValidDate(this,'<?php echo $date_format ?>')" onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+			<a href="javascript:show_calendar('aufnahmeform.date_discharge','<?php echo $date_format ?>')">
+			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
+			<font size=1>[<?php
+			$dfbuffer="LD_".strtr($date_format,".-/","phs");
+			echo $$dfbuffer;
+			?>]</font>
+		</td>
+	</tr>
+<?php 
+		createTR( 'referrer_notes', 'Discharge Type',$referrer_notes);
+	createTR( 'referrer_notes', 'Discharged By',$referrer_notes);
 ?>
 
 	    <tr bgcolor="white">
@@ -501,7 +519,7 @@ if(!empty($rows)){
 
 <p>
 <a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'aufnahme_pass.php';
+<?php if($_COOKIE['ck_login_logged'.$sid]) echo 'aufnahme_pass.php';
 	else echo 'patient.php';
 	echo URL_APPEND;
 ?>

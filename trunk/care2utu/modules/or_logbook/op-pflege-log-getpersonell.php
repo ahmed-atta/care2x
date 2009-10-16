@@ -31,7 +31,7 @@ switch($winid)
 	default:{header('Location:'.$root_path.'/language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 }
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $forwardfile="op-pflege-log-getinfo.php?sid=$sid&lang=$lang&winid=$winid&mode=save&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr";
 
 $search=$pers_obj->searchPersonellBasicInfo($inputdata);

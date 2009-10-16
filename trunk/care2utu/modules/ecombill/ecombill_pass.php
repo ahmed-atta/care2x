@@ -12,7 +12,7 @@ require_once($root_path.'global_conf/areas_allow.php');
 $allowedarea=&$allow_area['admit'];
 
 $fileforward='billingmenu.php'.URL_REDIRECT_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 
 $lognote="$LDBilling ok";

@@ -39,10 +39,10 @@ $local_user='aufnahme_user';
 require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $toggle=0;
 
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 	else $breakfile='aufnahme_pass.php'.URL_APPEND.'&target=entry';
 
 # Set value for the search mask
@@ -138,7 +138,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 
 			# Check the size of the comp
 			if(sizeof($comp)>1){
-				$sql2=" WHERE ( reg.name_last $sql_LIKE '".strtr($ln,'+',' ')."%'
+				$sql2=" WHERE ( reg.name_2 $sql_LIKE '".strtr($ln,'+',' ')."%'
 			                		AND reg.name_first $sql_LIKE '".strtr($fn,'+',' ')."%')";
 				if($bd){
 					$stddate=formatDate2STD($bd,$date_format);
@@ -151,8 +151,9 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 
 			}else{
 
-				$sql2=" WHERE (reg.name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%'
-			                		OR reg.name_first $sql_LIKE '".strtr($suchwort,'+',' ')."%'";
+				$sql2=" WHERE (reg.name_2 $sql_LIKE '".strtr($suchwort,'+',' ')."%'
+			                		OR reg.name_first $sql_LIKE '".strtr($suchwort,'+',' ')."%'
+			                		OR reg.name_last $sql_LIKE '".strtr($suchwort,'+',' ')."%'";
 				$bufdate=formatDate2STD($suchwort,$date_format);
 				if(!empty($bufdate)){
 					$sql2.= " OR reg.date_birth $sql_LIKE '$bufdate'";
@@ -174,7 +175,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			$dbtable='FROM care_encounter as enc,care_person as reg ';
 
 			$sql='SELECT enc.encounter_nr, enc.encounter_class_nr, enc.is_discharged,
-								reg.pid, reg.name_last, reg.name_first, reg.date_birth, reg.selian_pid,reg.sex, reg.selian_pid '.$dbtable.$sql2;
+								reg.pid, reg.name_2, reg.name_last, reg.name_first, reg.date_birth, reg.selian_pid,reg.sex, reg.selian_pid '.$dbtable.$sql2;
 
 			// echo $sql;
 
@@ -336,6 +337,7 @@ if($mode=='search'||$mode=='paginate'){
 		$smarty->assign('LDCaseNr',$pagen->makeSortLink($LDCaseNr,'encounter_nr',$oitem,$odir,$targetappend));
 		$smarty->assign('LDSex',$pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$targetappend));
 		$smarty->assign('LDLastName',$pagen->makeSortLink($LDLastName,'name_last',$oitem,$odir,$targetappend));
+		$smarty->assign('LDName2',$pagen->makeSortLink($LDName2,'name_2',$oitem,$odir,$targetappend));
 		$smarty->assign('LDFirstName',$pagen->makeSortLink($LDFirstName,'name_first',$oitem,$odir,$targetappend));
 		$smarty->assign('LDBday',$pagen->makeSortLink($LDBday,'date_birth',$oitem,$odir,$targetappend));
 		$smarty->assign('LDZipCode',$pagen->makeSortLink($LDZipCode,'addr_zip',$oitem,$odir,$targetappend));
@@ -366,7 +368,8 @@ if($mode=='search'||$mode=='paginate'){
 			}
 			$smarty->assign('sLastName',ucfirst($zeile['name_last']));
 			$smarty->assign('sFirstName',ucfirst($zeile['name_first']));
-
+			$smarty->assign('sName2',ucfirst($zeile['name_2']));
+			
 			#
 			# If person is dead show a black cross
 			#

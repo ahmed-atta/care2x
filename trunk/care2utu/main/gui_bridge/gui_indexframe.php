@@ -92,9 +92,12 @@ require("./menu/dtree/mainmenu.inc.php");
 <TABLE CELLPADDING=0 CELLSPACING=0 border=0>
 
 <?php
-//echo $HTTP_COOKIE_VARS['ck_config']; // used only in debugging related to user config data
+
+
+//echo $_COOKIE['ck_config']; // used only in debugging related to user config data
 //echo $GLOBALCONFIG['language_single']."<br>";
 if($GLOBALCONFIG['language_single']<>1){
+
 ?>
 <tr>
 <td colspan=3>
@@ -105,10 +108,10 @@ if($GLOBALCONFIG['language_single']<>1){
  <select name="lang">
 <?php
 
-require($root_path.'include/care_api_classes/class_language.php');
-$lang_obj=new Language;
-$langselect= $lang_obj->createSelectForm($lang);
-echo $langselect;
+//require($root_path.'include/care_api_classes/class_language.php');
+//$lang_obj=new Language;
+//$langselect= $lang_obj->createSelectForm($lang);
+//echo $langselect;
 ?>
 </select>
 <br>
@@ -140,7 +143,6 @@ echo $name;
 
 <font size="-2">Ver.<?php echo $version;?></font><br>
 <br>
-</FONT>
 </td>
 </tr>
 </form>

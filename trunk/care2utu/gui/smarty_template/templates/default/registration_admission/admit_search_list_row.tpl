@@ -6,6 +6,7 @@
 	<td>&nbsp;{{$sCaseNr}} {{$sOutpatientIcon}} <font size=1 color="red">{{$LDAmbulant}}</font></td>
 	<td>&nbsp;{{$sSex}}</td>
 	<td>&nbsp;{{$sLastName}}</td>
+	<td>&nbsp;{{$sName2}}</td>
 	<td>&nbsp;{{$sFirstName}} {{$sCrossIcon}}</td>
 	<td>&nbsp;{{$sBday}}</td>
 	<td>&nbsp;{{$sZipCode}}</td>

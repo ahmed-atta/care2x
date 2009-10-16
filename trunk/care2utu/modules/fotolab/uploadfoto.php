@@ -70,7 +70,7 @@ if( $_REQUEST["function"]=="save" )
       //DEBUG: print "saving to $d ... $CRLF";
      // $db->debug=true;
 
-      if( $img->isValidUploadedImage($HTTP_POST_FILES['imagefile']) )
+      if( $img->isValidUploadedImage($_FILES['imagefile']) )
 	{ 
 	  $data=array('encounter_nr'=>$_REQUEST["encounter_nr"],
 		      'upload_date'=>date('Y-m-d'),
@@ -118,7 +118,7 @@ if( $_REQUEST["function"]=="save" )
 		    $dir_path = $root_path.'cache/';
 		  }
 		// Save the uploaded image
-		$img->saveUploadedImage( $HTTP_POST_FILES['imagefile'],
+		$img->saveUploadedImage( $_FILES['imagefile'],
 					 $dir_path, $picfilename );
 	   
 		print "saved to $dir_path$picfilename$CRLF";

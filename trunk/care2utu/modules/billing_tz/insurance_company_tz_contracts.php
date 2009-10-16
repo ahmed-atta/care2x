@@ -18,7 +18,7 @@ $lang_tables[]='billing.php';
 $lang_tables[]='aufnahme.php';
 require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
-$insurance_tz = New Insurance_tz();
+$insurance_tz = new Insurance_tz;
 $this_insurance = $insurance_tz->GetInsuranceAsArray($id);
 
 if (is_array($insurance_tz->GetContractsForCompanyAsArray($id)))
@@ -38,11 +38,11 @@ if($mode=="updateflags")
 	if(!$error)
 	{
 		$insurance_tz->UpdateInsuranceCompany($_POST);
-		header("Location: ./insurance_company_tz.php");
+		header("location: ./insurance_company_tz.php");
 		exit();
 	}
 	$this_insurance = $_POST;
-	while(list($x,$v) = each($HTTP_POST_VARS))
+	while(list($x,$v) = each($_POST))
 	{
 		if(strstr($x,"cancel_"))
 		{

@@ -1,6 +1,6 @@
 <?php
 /**
-*    class.Calendar by Jürgen Lang - www.getinspired.at
+*    class.Calendar by Jï¿½rgen Lang - www.getinspired.at
 *   Modifications done by elpidio latorilla for Care2002 
 */
 class Calendar {
@@ -42,7 +42,7 @@ class Calendar {
 		var $deactivate_future=0;
 		// future date color
 		var $strFutureDayColor='gray';
-		
+
 	/* Function to set the activate "future" day : Added by Elpidio Latorilla 2003-04-25 */
 	function activateFutureDay(){
 		$this->deactivate_future=0;
@@ -59,7 +59,7 @@ class Calendar {
 		global $LDMonthFullName, $LDDayShortName; 
 		## Added by Elpidio Latorilla 2003-08-28
 		global $thisfile;
-		if(empty($PHP_SELF)) $PHP_SELF=$thisfile;
+		//if(empty($PHP_SELF)) $PHP_SELF=$thisfile;
 		##############################
 		$intYear = $intYear ? $intYear : date("Y");
 		$intMonth = $intMonth ? $intMonth : date("m");
@@ -84,7 +84,7 @@ class Calendar {
 		$calWidth = 0 ? $this -> intCalWidth : "width=\"" . $this -> intCalWidth . "\"";
 		echo "
 <!---
-	class.Calendar by Jürgen Lang - www.getinspired.at
+	class.Calendar by Jï¿½rgen Lang - www.getinspired.at
 --->
 		";
 		echo "
@@ -94,9 +94,12 @@ class Calendar {
 						<TABLE width=\"100%\" bgcolor=\"" . $this -> strCalColor . "\" border=\"" . $this -> intNavBorder . "\" cellpadding=\"3\" cellspacing=\"1\">
 							<FORM name=\"CalOptions\">
 							<TR bgcolor=\"" . $this -> strNavColor . "\">
-								<TD align=\"center\" nowrap=\"nowrap\"><INPUT type=\"button\" value=\" < \" onClick=\"location.href = '$PHP_SELF".URL_REDIRECT_APPEND."&currYear=$prevYear&currMonth=$prevMonth';\" class=\"button\"></TD>
+								<TD align=\"center\" nowrap=\"nowrap\"><INPUT type=\"button\" value=\" < \" onClick=\"location.href = " ;
+		echo  $_SERVER['PHP_SELF'] ;
+		echo  URL_REDIRECT_APPEND."&currYear=$prevYear&currMonth=$prevMonth';\" class=\"button\"></TD>
 								<TD align=\"center\" nowrap=\"nowrap\">
-									<SELECT name=\"currMonth\" class=\"SelectMisc\" onChange=\"location.href = '$PHP_SELF".URL_REDIRECT_APPEND."&currYear=' + document.CalOptions.currYear.value + '&currMonth=' + this.value;\">
+									<SELECT name=\"currMonth\" class=\"SelectMisc\" onChange=\"location.href = " ;
+		echo $_SERVER['PHP_SELF'] . URL_REDIRECT_APPEND."&currYear=' + document.CalOptions.currYear.value + '&currMonth=' + this.value;\">
 		";
 		for ($m = 1; $m <= 12; $m++) {
 			if ($intMonth == $m) {
@@ -113,7 +116,8 @@ class Calendar {
 			;
 	}
 		echo "						</SELECT>
-									<SELECT name=\"currYear\" class=\"SelectMisc\" onChange=\"location.href = '$PHP_SELF".URL_REDIRECT_APPEND."&currYear=' + this.value + '&currMonth=' +  + document.CalOptions.currMonth.value;\">
+									<SELECT name=\"currYear\" class=\"SelectMisc\" onChange=\"location.href = '";
+		echo $_SERVER[PHP_SELF] .URL_REDIRECT_APPEND."&currYear=' + this.value + '&currMonth=' +  + document.CalOptions.currMonth.value;\">
 		";
 		for ($y = date ("Y") - 6; $y <= date ("Y") + 10; $y++) {
 			if ($intYear == $y) {
@@ -126,7 +130,8 @@ class Calendar {
 			;
 		}
 		echo "					</TD>
-								<TD align=\"center\" nowrap=\"nowrap\"><INPUT type=\"button\" value=\" > \" onClick=\"location.href = '$PHP_SELF".URL_REDIRECT_APPEND."&currYear=$nextYear&currMonth=$nextMonth';\" class=\"button\"></TD>
+								<TD align=\"center\" nowrap=\"nowrap\"><INPUT type=\"button\" value=\" > \" onClick=\"location.href = '";
+		echo $_SERVER['PHP_SELF'] .URL_REDIRECT_APPEND."&currYear=$nextYear&currMonth=$nextMonth';\" class=\"button\"></TD>
 							</TR>
 								<input type=\"hidden\" name=\"sid\" value=\"$sid\">
        							<input type=\"hidden\" name=\"lang\" value=\"$lang\">
@@ -181,7 +186,7 @@ class Calendar {
 			}
 			// Write Day
 /*			echo "
-								<TD align=\"center\" bgcolor=\"$currBGColor\"><font size=1 face=\"verdana,arial\"><A href=\"$PHP_SELF".URL_APPEND."&currYear=$intYear&currMonth=$intMonth&currDay=$i\">$DayPrepend$i$DayAppend</A></font></TD>
+								<TD align=\"center\" bgcolor=\"$currBGColor\"><font size=1 face=\"verdana,arial\"><A href=\"$_SERVER['PHP_SELF']".URL_APPEND."&currYear=$intYear&currMonth=$intMonth&currDay=$i\">$DayPrepend$i$DayAppend</A></font></TD>
 			";
 */			
 			/* Modified by Elpidio Latorilla 2003-04-25 for the future day activation/deactivation */
@@ -191,7 +196,7 @@ class Calendar {
 				";
 			}else{ 
 				echo "
-								<TD align=\"center\" bgcolor=\"$currBGColor\"><font size=1 face=\"verdana,arial\"><A href=\"$PHP_SELF".URL_APPEND."&currYear=$intYear&currMonth=$intMonth&currDay=$i&dept_nr=$dept_nr&aux=$aux\">$DayPrepend$i$DayAppend</A></font></TD>
+								<TD align=\"center\" bgcolor=\"$currBGColor\"><font size=1 face=\"verdana,arial\"><A href=\"$_SERVER[PHP_SELF]".URL_APPEND."&currYear=$intYear&currMonth=$intMonth&currDay=$i&dept_nr=$dept_nr&aux=$aux\">$DayPrepend$i$DayAppend</A></font></TD>
 				";
 			}
 			

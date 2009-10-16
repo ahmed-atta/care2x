@@ -34,7 +34,7 @@ switch($target)
 
 $this_cookie_name='ck_#Modulname#_user';
 $userck=$this_cookie_name;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $lognote="$title ok";
 
 // reset all 2nd level lock cookies

@@ -95,7 +95,7 @@ while($test_request=$requests->FetchRow())
 					//echo $test_request['selian_pid'].'/'.$test_request['name_first']." ".$test_request['name_last'];
 					echo $test_request['selian_pid'];
 			}
-	    echo " ".$test_request['room_nr']."</a><br>";
+	    echo " ".$test_request['room_nr']."/".$test_request['name_first']." ".$test_request['name_last']."</a><br>";
    }
    else
    {

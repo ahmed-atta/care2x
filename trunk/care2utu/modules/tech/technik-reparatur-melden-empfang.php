@@ -5,7 +5,7 @@
 <HTML>
 <HEAD>
 <?php echo setCharSet(); ?>
- <TITLE>Technik - Bestätigung</TITLE>
+ <TITLE>Technik - Bestï¿½tigung</TITLE>
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
@@ -24,12 +24,12 @@
  
 <FONT    SIZE=4  FACE="Arial" color="#cc0000">
 <ul>
-<b>Bestätigung</b></FONT><p>
+<b>Bestï¿½tigung</b></FONT><p>
 </ul>
 <FONT    SIZE=2  FACE="Arial" >
 
 <?php /*
-echo("<hr> <font color=#cc0000 ><b>Eine Anforderung für eine Reparaturarbeit ist eingegangen.</b> <p>");
+echo("<hr> <font color=#cc0000 ><b>Eine Anforderung fï¿½r eine Reparaturarbeit ist eingegangen.</b> <p>");
 echo("Datum:</font> $tdate <br>");
 echo("<font color=#cc0000 >Uhrzeit:</font> $ttime <br>");
 echo("<font color=#cc0000 >Abteilung:</font> $dept <br>");

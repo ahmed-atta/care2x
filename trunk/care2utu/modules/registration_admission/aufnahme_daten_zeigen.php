@@ -24,8 +24,6 @@ require_once($root_path.'include/care_api_classes/class_ward.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 
 
-
-
 if(!session_is_registered('sess_parent_mod')) session_register('sess_parent_mod');
 
 # Create objects
@@ -33,9 +31,9 @@ $encounter_obj=new Encounter($encounter_nr);
 $person_obj=new Person();
 $insurance_obj=new Insurance;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 	else $breakfile='aufnahme_pass.php'.URL_APPEND.'&target=entry';
 
 //$breakfile='aufnahme_pass.php'.URL_APPEND;
@@ -209,7 +207,7 @@ $_SESSION['sess_file_return']=$thisfile;
 
 /* Prepare the photo filename */
 require_once($root_path.'include/inc_photo_filename_resolve.php');
-$user=$HTTP_COOKIE_VARS[$local_user.$sid];
+$user=$_COOKIE[$local_user.$sid];
 
 
  # Start Smarty templating here
@@ -452,7 +450,8 @@ if(!$GLOBAL_CONFIG['patient_service_att_dr_hide'] && $sc_att_dr_class_nr){
 }
 
 $smarty->assign('LDAdmitBy',$LDAdmitBy);
-if (empty($encoder)) $encoder = $HTTP_COOKIE_VARS[$local_user.$sid];
+if (empty($encoder)) $encoder = $_COOKIE[$local_user.$sid];
+if(isset($user_id) && $user_id) $encoder= $user_id; else $encoder= $_SESSION['sess_user_name'];
 $smarty->assign('encoder',$encoder);
 
 # Buffer the options block

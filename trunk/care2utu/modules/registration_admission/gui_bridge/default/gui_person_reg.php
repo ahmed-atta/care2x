@@ -485,7 +485,7 @@ if (!$person_ethnic_orig_hide)
 <td ><FONT SIZE=-1  FACE="Arial" ><FONT  SIZE=2  FACE="Arial"><font color=#ff0000><?php echo $LDRegBy ?></font>
 </td>
 <td colspan=2><FONT SIZE=-1  FACE="Arial"><nobr>
-<input  name="user_id" type="text" value=<?php if ($user_id!='') echo '"'.$user_id.'"' ; else echo '"'.$HTTP_COOKIE_VARS[$local_user.$sid].'"' ?> size="35" readonly>
+<input  name="user_id" type="text" value=<?php if ($user_id!='') echo '"'.$user_id.'"' ; else echo '"'.$_COOKIE[$local_user.$sid].'"' ?> size="35" readonly>
 </nobr></td>
 </tr>
 
@@ -554,7 +554,7 @@ if (!$person_ethnic_orig_hide)
 
 <p>
 <a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo $breakfile;
+<?php if($_COOKIE['ck_login_logged'.$sid]) echo $breakfile;
 	else echo 'aufnahme_pass.php';
 	echo URL_APPEND;
 ?>

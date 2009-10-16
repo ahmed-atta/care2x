@@ -13,11 +13,11 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-if($edit&&!$HTTP_COOKIE_VARS[$local_user.$sid]) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
+if($edit&&!$_COOKIE[$local_user.$sid]) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 $target='';
 
-# The mapping of department id´s with the forms´ id´s must be done here
+# The mapping of department idï¿½s with the formsï¿½ idï¿½s must be done here
 # The department id is forwarded to this script in   the format  "nr~string" or e.g "12~pediatrics"
 
 $nrbuf=explode('~',$dept_id);

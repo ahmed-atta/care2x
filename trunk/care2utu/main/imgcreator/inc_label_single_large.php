@@ -1,4 +1,7 @@
 <?php
+
+	require_once($root_path.'include/inc_date_format_functions.php');
+
 	/* Load the barcode img if it exists */
     if(file_exists($root_path.'cache/barcodes/pn_'.$fen.'.png'))
 	{
@@ -22,7 +25,7 @@
 	
 	# Write the data on the label
 	# Location info, admission class, blood group
-	$locstr=strtoupper($location['dept_id']).' '.strtoupper($location['ward_id']).' '.$location['roomprefix'];
+	$locstr=strtoupper($location['ward_id']).' '.$location['roomprefix'];
 	if($location['room_nr'])  $locstr.='-'.$location['room_nr'];
 	if($location['bed_nr']) $locstr.=' '.strtoupper(chr($location['bed_nr']+96));
 	$locstr.=' '.$admit_type.' '.$LDInsShortID[$result['insurance_class_nr']];
@@ -40,7 +43,7 @@
 		$tmargin=2;
 		$lmargin=6;
 		
-	    # PID and Hospital Filenumber
+		# PID and Hospital Filenumber
 	    ImageTTFText($label,12,0,$lmargin,$tmargin+14,$eblack,$arial,'PID: '.$result['pid']);
 	    ImageTTFText($label,12,0,$lmargin+185,$tmargin+14,$eblack,$arial,'File: '.$result['selian_pid']);
   		# Full encounter nr
@@ -51,7 +54,8 @@
     	ImageTTFText($label,16,0,$lmargin,$tmargin+56,$eblack,$arial,$result['name_last'].', '.$result['name_first']);
 		# Date of birth
     	ImageTTFText($label,11,0,$lmargin,$tmargin+74,$eblack,$arial,$result['date_birth']);
-		# Address street nr, street name
+    	ImageTTFText($label,11,0,$lmargin+90,$tmargin+74,$eblack,$arial,exactAge($result['date_birth']));
+    	# Address street nr, street name
     	ImageTTFText($label,11,0,$lmargin,$tmargin+93,$eblack,$arial,ucfirst($result['addr_str']).' '.$result['addr_str_nr']);
 		# Address, zip, city/town name
     	ImageTTFText($label,11,0,$lmargin,$tmargin+108,$eblack,$arial,ucfirst($result['addr_zip']).' '.$result['citytown_name']);
@@ -82,7 +86,7 @@
     	ImageString($label,5,10,40,$result['name_last'].', '.$result['name_first'],$eblack);
 		# Date of birth
     	ImageString($label,3,10,55,$result['date_birth'],$eblack);
-	
+		ImageString($label,3,100,55,exactAge($result['date_birth']),$eblack);
     	//for($a=0,$l=75;$a<sizeof($addr);$a++,$l+=15) ImageString($label,4,10,$l,$addr[$a],$eblack);
 		# Address street nr, street name
     	ImageString($label,4,10,75,strtoupper($result['addr_str']).' '.$result['addr_str_nr'],$eblack);

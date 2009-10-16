@@ -16,9 +16,9 @@ $toggler=0;
 // if ($statdate=="") $statdate=$pyear.'-'.$pmonth.'-'.$pday;
 if ($filename=="") $filename=$pyear.'-'.$pmonth.'-'.$pday.'.bel';
 
-$monat=array("januar","februar","märz","april","mai","juni","juli","august","september","oktober","november","dezember");
+$monat=array("januar","februar","mï¿½rz","april","mai","juni","juli","august","september","oktober","november","dezember");
 
-//$xchars="!?*#/\&§+-_$;:~";
+//$xchars="!?*#/\&ï¿½+-_$;:~";
 
 $filename=$pyear.'-'.$pmonth.'-'.$pday.'.bel';	 
 $path="pflege/station/".strtolower($station)."/belegung/".$pyear."/".strtolower($monat[$pmonth-1])."/".strtolower($filename);
@@ -139,7 +139,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <?php
 if($deffile)
 		 	{
-			 echo'<font face="verdana,arial" size="2"  color=red>Die Belegung für heute ist noch nicht erstellt!</font><br>';
+			 echo'<font face="verdana,arial" size="2"  color=red>Die Belegung fï¿½r heute ist noch nicht erstellt!</font><br>';
 			 }
 		
 //echo $statdata[$bd.$rm];
@@ -195,8 +195,8 @@ for ($i=$statdata['startnumber'];$i<=$statdata['endnumber'];$i++)
 	}
 	echo "\r\n</td>";
 	echo '<td><font face="verdana,arial" size="2" ><a href="#" onClick=';
-	if($buf[0]!="!") echo 'getinfo(\''.$buf[0].'\',\''.$buf2.'\') title="Click für mehr Info">';
-	else echo 'unlock(\''.strtoupper($j).'\',\''.$i.'\') title="Click für Info bzw. zum Aufheben der Sperre.">'; //$j=bed   $i=room number
+	if($buf[0]!="!") echo 'getinfo(\''.$buf[0].'\',\''.$buf2.'\') title="Click fï¿½r mehr Info">';
+	else echo 'unlock(\''.strtoupper($j).'\',\''.$i.'\') title="Click fï¿½r Info bzw. zum Aufheben der Sperre.">'; //$j=bed   $i=room number
 	echo str_replace("-"," ",$buf[1]).' <b>'.$buf[2].'</b> '.$buf[3].'</a>';
 	echo "\r\n";
 	

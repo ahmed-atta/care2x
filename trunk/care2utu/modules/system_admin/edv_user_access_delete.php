@@ -26,7 +26,7 @@ if($user->UserExists()){
 	if ($finalcommand=='delete') {
 
 		if($user->Delete()) {
-                	header("Location: edv_user_access_list.php?sid=".$sid."&lang=".$lang."&remark=itemdelete");
+                	header("location: edv_user_access_list.php?sid=".$sid."&lang=".$lang."&remark=itemdelete");
 			exit;
 		} else {
 			echo '<p>'.$LDDbNoDelete.'<p>'.$user->getLastQuery();

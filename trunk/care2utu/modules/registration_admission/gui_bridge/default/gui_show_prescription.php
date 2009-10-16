@@ -1,7 +1,16 @@
 <table border=0 cellpadding=4 cellspacing=1 width=100% class="frame">
 
+<tr bgcolor="<?php echo $bgc; ?>" valign="top">
+    <td><FONT SIZE=-1  FACE="Arial">Date/Adm.Nr./Days</td>
+    <td><FONT SIZE=-1  FACE="Arial">Days</td>
+    <td><FONT SIZE=-1  FACE="Arial">Dose</td>
+    <td><FONT SIZE=-1  FACE="Arial">Times per Day</td>
+  </tr>
+
 <?php
+
 $toggle=0;
+
 
 while($row=$result->FetchRow()){
 	if($toggle) $bgc='#f3f3f3';
@@ -10,6 +19,7 @@ while($row=$result->FetchRow()){
 
 	if($row['encounter_class_nr']==1) $full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']; // inpatient admission
 		else $full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']; // outpatient admission
+
 	$amount = 0;
 	$notbilledyet=false;
 	if($row['bill_number']>0)
@@ -52,9 +62,10 @@ while($row=$result->FetchRow()){
     }
 
     ?></td>
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['application_type_nr']; ?></td>
+    <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['times_per_day']; ?></td>
   </tr>
   <tr bgcolor="<?php echo $bgc; ?>" valign="top">
+
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $full_en; ?></td>
     <td rowspan=2><FONT SIZE=-1  FACE="Arial"><?php echo $row['notes']; ?>
 
@@ -66,7 +77,7 @@ while($row=$result->FetchRow()){
   	}
   	elseif($row['bill_number']>0)
   	{
-  		echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)"> <font color=green>'.$LDAlreadyBilled.' '.$row['bill_number'].'</font>';
+  		echo '<br><br><img src="../../gui/img/common/default/check2.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)"> <font color=green>'.$LDAlreadyBilled.' '.$row['bill_number'].'</font>';
   		if($amount>0) echo '<br><img src="../../gui/img/common/default/warn.gif" border=0 height="15" alt="" style="filter:alpha(opacity=70)"> <font color="red">'.$LDTheDrugDosagehasChanged.'</font>';
   	}
   	elseif($notbilledyet)
@@ -81,13 +92,12 @@ while($row=$result->FetchRow()){
   		echo '<font color="#D4D4D4">edit</font>';
   	}
   	else
-    echo '<a href="'.$thisfile.URL_APPEND.'&mode=edit&nr='.$row['nr'].'&show=insert&backpath='.urlencode($backpath).'&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">'.$LDEdit.'</a>'
-
-    ?>
+    echo '<a href="'.$thisfile.URL_APPEND.'&mode=edit&nr='.$row['nr'].'&show=insert&backpath='.urlencode($backpath).'&prescrServ='.$_GET['prescrServ'].'&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">'.$LDEdit.'</a>';
+	?>
     </td><td><FONT SIZE=-1  FACE="Arial"><?php echo $row['order_nr']; ?></td>
   </tr>
   <tr bgcolor="<?php echo $bgc; ?>" valign="top">
-    <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['prescription_type_nr']; ?></td>
+    <td><FONT SIZE=-1  FACE="Arial">Days: <?php echo $row['days']; ?></td>
 
     <td><FONT SIZE=-1  FACE="Arial"><?php
     if($row['is_disabled'] || $row['bill_number']>0)
@@ -95,14 +105,18 @@ while($row=$result->FetchRow()){
   		echo '<font color="#D4D4D4">'.$LDdelete.'</font>';
   	}
   	else
-      echo '<a href="'.$thisfile.URL_APPEND.'&mode=delete&nr='.$row['nr'].'&show=insert&backpath='.urlencode($backpath).'&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">'.$LDdelete.'</a>' ?>
+      echo '<a href="'.$thisfile.URL_APPEND.'&mode=delete&nr='.$row['nr'].'&show=insert&backpath='.urlencode($backpath).'&prescrServ='.$_GET['prescrServ'].'&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">'.$LDdelete.'</a>' ?>
     </td>
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['prescriber']; ?></td>
+
   </tr>
 
 <?php
 }
+
+
 ?>
+
 </table>
 
 <?php

@@ -17,7 +17,7 @@ require_once($root_path.'include/inc_config_color.php');
 
 $breakfile='cafenews.php'.URL_APPEND;
 $returnfile='cafenews-edit-price-select.php'.URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 require($root_path.'include/inc_currency_set.php');
 ?>

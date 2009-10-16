@@ -28,9 +28,9 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 * Set default values if not available from url
 */
 if (!isset($dept_nr)||empty($dept_nr)) { $dept_nr=$_SESSION['sess_dept_nr'];} # Default station must be set here !!
-if(!isset($pday)||empty($pday)) $pday=date('d');
-if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
-if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
+if (!isset($pday)||empty($pday)) $pday=date('d');
+if (!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
+if (!isset($pyear)||empty($pyear)) $pyear=date('Y');
 $s_date=$pyear.'-'.$pmonth.'-'.$pday;
 
 if($s_date==date('Y-m-d')) $is_today=true;
@@ -44,7 +44,7 @@ if(!isset($mode)) $mode='';
 
 $breakfile='ambulatory.php'.URL_APPEND; # Set default breakfile
 if($backpath) $breakfile=urldecode($backpath).URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 if(isset($retpath)){
 	switch($retpath)
 	{
@@ -140,6 +140,7 @@ if(($mode=='')||($mode=='fresh')){
  require_once($root_path.'gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('nursing');
 
+
 # Reload the page after 60 seconds
 	$smarty->assign('sReloadPage',TRUE);
 	$smarty->assign('sReloadTarget',$REQUEST_URI);
@@ -156,6 +157,8 @@ if(($mode=='')||($mode=='fresh')){
 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
+
+ $smarty->assign('showPrescr', '<a href=amb_clinic_pharmacy_list.php'.URL_APPEND.'&dept='.urlencode($dept).'&dept_nr='.$dept_nr.'>'.$LDShowPrescr.'</a>');
 
  # Window bar title
  $smarty->assign('sWindowTitle',$dept." :: $LDOutpatientClinic (".formatDate2Local($s_date,$date_format,'','',$null='').")");
@@ -245,11 +248,11 @@ function assignWaiting(pn,pw)
 	asswin<?php echo $sid ?>=window.open(urlholder,"asswind<?php echo $sid ?>","width=650,height=500,menubar=no,resizable=yes,scrollbars=yes");
 
 }
-function Transfer(pn,pw)
+function Transfer(pn,pw,patnr)
 {
 	if(confirm("<?php echo $LDSureTransferPatient."-" ?>")){
-		urlholder="amb_clinic_transfer_select.php<?php echo URL_REDIRECT_APPEND ?>&pn="+pn+"&pat_station="+pw+"&dept_nr=<?php echo $dept_nr ?>&station=<?php echo $station ?>";
-		transwin<?php echo $sid ?>=window.open(urlholder,"transwin<?php echo $sid ?>","width=550,height=620,menubar=no,resizable=yes,scrollbars=yes");
+		urlholder="amb_clinic_transfer_select.php<?php echo URL_REDIRECT_APPEND ?>&pn="+pn+"&pat_station="+pw+"&dept_nr=<?php echo $dept_nr ?>&station=<?php echo $station ?>&patnr="+patnr;
+		transwin<?php echo $sid ?>=window.open(urlholder,"transwin<?php echo $sid ?>","width=800,height=620,menubar=no,resizable=yes,scrollbars=yes");
 	}
 }
 
@@ -475,7 +478,7 @@ if($rows){
 
 				$smarty->assign('sNotesIcon',$sBuffer);
 
-				$smarty->assign('sTransferIcon','<a href="javascript:Transfer(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'xchange.gif','0','',TRUE).' alt="'.$LDTransferPatient.'"></a>');
+				$smarty->assign('sTransferIcon','<a href="javascript:Transfer(\''.$patient['encounter_nr'].'\',\'\', \''.$pid.'\')"><img '.createComIcon($root_path,'xchange.gif','0','',TRUE).' alt="'.$LDTransferPatient.'"></a>');
 
 
 

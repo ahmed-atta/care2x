@@ -1,6 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_date_format_functions.php',$PHP_SELF)) 
+if (eregi('inc_date_format_functions.php',$_SERVER['PHP_SELF'])) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
@@ -60,7 +60,7 @@ function getDateFormat()
 * The function assumes that the dates are in correct formats
 * therefore a validation routine must be done at the client side
 */
-function formatDate2Local($stdDate, $localFormat, $retTime=FALSE, $timeOnly=FALSE, &$sepChars)
+function formatDate2Local($stdDate, $localFormat, $retTime=FALSE, $timeOnly=FALSE, $sepChars)
 {
    global $lang;
    
@@ -224,6 +224,102 @@ function convertTimeToLocal($time_val)
    
    //return $time_val;
    return substr($time_val,0,strrpos($time_val,':'));
+}
+
+function exactAge($birthday) # Calculate exact Age 
+{
+
+global $root_path;
+
+include($root_path.'/language/'.$_SESSION['sess_lang'].'/lang_'.$_SESSION['sess_lang'].'_date_time.php');
+	
+$birthday=formatDate2STD($birthday,getDateFormat());
+
+$day_seconds=86400;
+$week_seconds=$day_seconds*7;
+$month_seconds=$week_seconds*4;
+
+$date=explode("-",$birthday);
+$now=date("U");
+$age=date("Y")-$date[0]-1;
+$days=0;
+$weeks=0;
+$age_seconds=0;
+$week_seconds=0;
+$born=0;
+
+#Babies
+if ( $age == -1 ) {
+# calculate days between birthday and today
+	$born=mktime(date("H"),date("i"),0,$date[1],$date[2],$date[0]);
+	$age_seconds=$now-$born;
+	#Younger than one Week
+	if ( $age_seconds <= $week_seconds ) {
+		$days=intval($age_seconds/$day_seconds);
+		$returnvalue = $days;
+		 if ($days > 1)
+		  {$returnvalue = $returnvalue." ".$LDDays;} 
+		 else 
+		  {$returnvalue = $returnvalue." ".$LDDay;};
+		return $returnvalue;
+ 	}
+	#Younger than four Weeks
+	if ( $age_seconds <= $month_seconds) {
+		$weeks=intval($age_seconds/$week_seconds);
+		$days=intval(($age_seconds%$week_seconds)/$day_seconds);
+		$returnvalue = $weeks;
+		 if ($weeks > 1)
+		  {$returnvalue = $returnvalue." ".$LDWeeks;}
+		 else
+		  {$returnvalue = $returnvalue." ".$LDWeek;}
+		 if ($days > 0)
+		  {$returnvalue = $returnvalue." ".$days;
+		 if ($days > 1)
+		  {$returnvalue = $returnvalue." ".$LDDays;}
+		 else
+		  {$returnvalue = $returnvalue." ".$LDDay;}} ;
+		return $returnvalue;
+	}
+	
+	$weeks=intval($age_seconds/$week_seconds);
+	$returnvalue = $weeks." ".$LDWeeks;
+	return $returnvalue;
+
+}
+
+#Children
+if (( $age >= 0 ) && ( $age < 6 )) {
+        if (date("m") > $date[1])	{ # Birthday has been
+        	$age++;
+        	$months=date("m") - $date[1];
+         } else { # Birthday will be
+         	$months=12-abs(date("m") - $date[1]);
+         	}
+        # Birthday is today   
+        if ((date("m") == $date[1]) && (date("d") >= $date[2])) { $age++; }
+        $returnvalue = $age;
+         if ($age > 1)
+           {$returnvalue = $returnvalue." ".$LDYears;}
+          else 
+           {$returnvalue = $returnvalue." ".$LDYear;}
+         if (($months > 0) && ($months < 12))
+          {$returnvalue = $returnvalue." ".$months;
+           if ($months > 1)
+            {$returnvalue = $returnvalue." ".$LDMonths;}
+           else
+            {$returnvalue." ".$LDMonth;}}
+		return $returnvalue;
+}
+
+#Adults left over when here
+#check for bithday to adjust exact date
+
+if (date("m") > $date[1])	{ $age++; }
+	
+if ((date("m") == $date[1]) && (date("d") >= $date[2])) { $age++; }
+
+return $age." ".$LDYears;
+	
 }
 
 # Now load the date format

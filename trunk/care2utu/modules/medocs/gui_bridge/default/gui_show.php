@@ -74,7 +74,7 @@ if($parent_admit) echo ($_SESSION['sess_full_en']);
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="<?php echo $returnfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>" ><img
 <?php echo createLDImgSrc($root_path,'back2.gif','0'); ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>><a href="javascript:gethelp('admission_how2new.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang;
+if($_COOKIE["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang;
 	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
 </td>
 </tr>
@@ -247,7 +247,7 @@ if($mode=='show'){
 
 <p>
 <a href="
-<?php if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) echo 'startframe.php'.URL_APPEND;
+<?php if($_COOKIE['ck_login_logged'.$sid]) echo 'startframe.php'.URL_APPEND;
 	else echo $breakfile.URL_APPEND;
 ?>
 "><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>

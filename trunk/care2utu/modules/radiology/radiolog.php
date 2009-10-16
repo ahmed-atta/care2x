@@ -15,7 +15,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 $_SESSION['sess_path_referer']=$top_dir.$thisfile;
 

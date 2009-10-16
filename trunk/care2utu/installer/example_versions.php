@@ -13,7 +13,7 @@ $version_0_2->collectData('db_password', 'Database Password', 'text', '');
 $version_0_2->collectData('db_server', 'Database Server', 'text', 'localhost');
 $version_0_2->collectData('db_port', 'Database Port', 'text', '3306');
 $version_0_2->collectData('db_database', 'Database Name', 'text', '');
-$version_0_2->addTest('PHPVersionOver', array('4.2.0'));
+$version_0_2->addTest('PHPVersionOver', array('5.0.0'));
 $version_0_2->addTest('PHPExtension', array('mysql', 'gd'));
 $version_0_2->addTest('WritableLocation', array(dirname(__FILE__).'/test_replacement.txt', realpath(dirname(__FILE__).'/tmp')));
 $version_0_2->addTest('MysqlVersionOver', array(

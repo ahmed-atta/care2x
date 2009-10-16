@@ -5,6 +5,6 @@ require($root_path.'include/inc_environment_global.php');
 //$_SESSION['sess_path_referer']=str_replace($doc_root.'/','',__FILE__);
 //echo __FILE__;
 
-header("Location:".$root_path."main/login.php?");
+header("location:".$root_path."main/login.php?");
 exit;
 ?>

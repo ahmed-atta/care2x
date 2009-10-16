@@ -1,14 +1,14 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_config_color.php",$PHP_SELF)) 
+if (eregi("inc_config_color.php",$_SERVER['PHP_SELF'])) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 
 /*------end------*/
 
 /* Load user config API. Get the user config data from db */
 
-if(!empty($HTTP_COOKIE_VARS['ck_config'])){
-	$ck_userid=$HTTP_COOKIE_VARS['ck_config'];
+if(!empty($_COOKIE['ck_config'])){
+	$ck_userid=$_COOKIE['ck_config'];
 }else {
 	$ck_userid='';
 }

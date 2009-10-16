@@ -18,7 +18,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 $breakfile='config_options.php'.URL_APPEND;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 if(isset($mode)&&$mode=='save'){
 	// Save to user config table
@@ -29,13 +29,13 @@ if(isset($mode)&&$mode=='save'){
 	
 	$user=new UserConfig;
 
-	if($user->getConfig($HTTP_COOKIE_VARS['ck_config'])){
+	if($user->getConfig($_COOKIE['ck_config'])){
 
 		$config=&$user->getConfigData();
 	
 		$config=array_merge($config,$config_new);
 
-		if($user->saveConfig($HTTP_COOKIE_VARS['ck_config'],$config)){
+		if($user->saveConfig($_COOKIE['ck_config'],$config)){
 			header('location:'.basename(__FILE__).URL_REDIRECT_APPEND.'&saved=1');
 			exit;
 		}

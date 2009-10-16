@@ -18,7 +18,7 @@ $allowedarea=&$allow_area['phonedir'];
 
 $fileforward='phone_edit.php'.URL_REDIRECT_APPEND.'&edit=1';
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $breakfile='phone.php'.URL_APPEND;
 

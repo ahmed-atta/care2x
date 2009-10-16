@@ -35,7 +35,7 @@ if($user_origin=='lab')
 require_once($root_path.'include/inc_front_chain_lang.php'); ///* invoke the script lock*/
 require_once($root_path.'include/inc_diagnostics_report_fx.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $bgc1='#99ffcc'; /* The main background color of the form */
 $edit_form=0; /* Set form to non-editable*/
@@ -132,7 +132,7 @@ $enc_obj=new Encounter;
           if(!$mode) /* Get the pending test requests */
 		  {
 		                $sql="SELECT batch_nr,encounter_nr,send_date,dept_nr FROM care_test_request_blood 
-						         WHERE status='pending' OR status='received' ORDER BY  send_date DESC";
+						         WHERE status='pending' OR status='received' ORDER BY  send_date ASC";
 		                if($requests=$db->Execute($sql))
        		            {
 				            $batchrows=$requests->RecordCount();

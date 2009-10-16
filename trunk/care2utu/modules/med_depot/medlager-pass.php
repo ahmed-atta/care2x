@@ -49,7 +49,7 @@ switch($mode)
 					   $fileforward=$root_path."modules/products/products-bestellung.php".$append.$userck;
 }
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile='medlager.php'.URL_APPEND;
 
 $lognote="$LDMedDepot $title ok";

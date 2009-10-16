@@ -42,7 +42,7 @@ $core= new Core;
 	//echo $resultbillquery;
 	
 	/*$redir="patientbill.php?patnum=".$pno;
-	header("Location:".$redir);
+	header("location:".$redir);
 	exit;*/
 
 	//disconnect_db();

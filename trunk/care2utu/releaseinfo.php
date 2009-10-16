@@ -1,9 +1,9 @@
 <?php
-$version="2.06.0.0";
+$version="2.05.3.8";
 /**
  * History:
- * Version 2.06.0.0
- * Working inpatient ward management; Tested basic webERP interface; laboratory module connected to pricelist; First preview
+ * Version 2.05.3.8
+ * Improving the lab module, covering to the billing section. Embedded reporting elements on discharge and also patient tracking and presciption tracking
  * Version 2.05.3.5, 22-dec-08
  * Integratoin of insurances (pre alpha); new and better lab module; Several smaller changes in the process
  * Version 2.05.3.4, 24-nov-08

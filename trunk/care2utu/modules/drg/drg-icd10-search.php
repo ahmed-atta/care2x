@@ -15,7 +15,7 @@ define('LANG_FILE','drg.php');
 require_once('drg_inc_local_user.php');
 
 require_once($root_path.'include/inc_front_chain_lang.php');
-//if (!isset($opnr) || !$opnr) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
+//if (!isset($opnr) || !$opnr) {header("location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
 
 # Create drg object
 require_once($root_path.'include/care_api_classes/class_drg.php');

@@ -22,7 +22,7 @@ $append=URL_REDIRECT_APPEND;
 $fileforward='pharmacy_tz.php'.$append;
 $lognow='Pharmacy login ok';
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $userck='aufnahme_user';
 //reset cookie;

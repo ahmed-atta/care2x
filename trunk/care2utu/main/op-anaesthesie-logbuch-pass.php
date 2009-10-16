@@ -50,7 +50,7 @@ if ($versand=="Abschicken")
 										{				
 										setcookie(op_pflegelogbuch_user,$zeile[mahopass_name]);	
 										logentry($zeile[mahopass_name],"****","OP Pflege Logbuch Access OK'd",$thisfile,$fileforward);
-										header("Location: ".$fileforward."?route=validroute");
+										header("location: ".$fileforward."?route=validroute");
 										exit;
 										}else {$passtag=2;};
 									}else $passtag=3;
@@ -82,7 +82,7 @@ if ($versand=="Abschicken")
 
 <P>
 <img src="../img/monitor2.jpg">
-<FONT  COLOR=#cc6600  SIZE=9  FACE="verdana"> <b>OP Anästhesie Logbuch</b></font>
+<FONT  COLOR=#cc6600  SIZE=9  FACE="verdana"> <b>OP Anï¿½sthesie Logbuch</b></font>
 
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
@@ -182,13 +182,13 @@ Benutzername eingeben:<br></font>
 </table>        
 
 <p>
-<img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Einführung in das OP Logbuch</a><br>
+<img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Einfï¿½hrung in das OP Logbuch</a><br>
 <img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Wie mache ich was mit OP Logbuch?</a><br>
 <HR>
 <p>
 
 <FONT    SIZE=1  FACE="Arial" color=gray>
-Copyright © 2000 by Elpidio Latorilla<p>
+Copyright ï¿½ 2000 by Elpidio Latorilla<p>
 All programs and scripts are not to be copied nor modified without permission from Elpidio Latorilla.<br>
 If you want to use the scripts or some of the scripts for your own purposes
 please contact Elpidio Latorilla at <a href=mailto:elpidio@care2x.org, >elpidio@care2x.org, </a>.

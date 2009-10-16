@@ -23,7 +23,7 @@ $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $GLOBAL_CONFIG=array();
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -34,13 +34,13 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 if(isset($mode)&&$mode=='save'){
 
 	# Validate time values
-	if(!is_numeric($HTTP_POST_VARS['thours'])||$HTTP_POST_VARS['thours']>24) $HTTP_POST_VARS['thours']=0;
-	if(!is_numeric($HTTP_POST_VARS['tmins'])||$HTTP_POST_VARS['tmins']>59||$HTTP_POST_VARS['tmins']<1) $HTTP_POST_VARS['tmins']=$def_max_mins;
-	if(!is_numeric($HTTP_POST_VARS['tsecs'])||$HTTP_POST_VARS['tsecs']>59) $HTTP_POST_VARS['tsecs']=$def_max_tsecs;
+	if(!is_numeric($_POST['thours'])||$_POST['thours']>24) $_POST['thours']=0;
+	if(!is_numeric($_POST['tmins'])||$_POST['tmins']>59||$_POST['tmins']<1) $_POST['tmins']=$def_max_mins;
+	if(!is_numeric($_POST['tsecs'])||$_POST['tsecs']>59) $_POST['tsecs']=$def_max_tsecs;
 	
 	# combine the values to final format HoursMinsSecs
-	//$HTTP_POST_VARS['timeout_time']=$HTTP_POST_VARS['thours'].$HTTP_POST_VARS['tmins'].$HTTP_POST_VARS['tsecs'];
-	$HTTP_POST_VARS['timeout_time']=date('His',mktime($HTTP_POST_VARS['thours'],$HTTP_POST_VARS['tmins'],$HTTP_POST_VARS['tsecs'],1,1,1971));
+	//$_POST['timeout_time']=$_POST['thours'].$_POST['tmins'].$_POST['tsecs'];
+	$_POST['timeout_time']=date('His',mktime($_POST['thours'],$_POST['tmins'],$_POST['tsecs'],1,1,1971));
 	
 	$filter='timeout_'; # The index filter
 
@@ -48,7 +48,7 @@ if(isset($mode)&&$mode=='save'){
 	$addslash=FALSE; # Slashes should be added to the stored values
 
 	# Save the configuration
-	$glob_obj->saveConfigArray($HTTP_POST_VARS,$filter,$numeric,'',$addslash);
+	$glob_obj->saveConfigArray($_POST,$filter,$numeric,'',$addslash);
 
 	# Loop back to self to get the newly stored values
 	header("location:$thisfile".URL_REDIRECT_APPEND."&save_ok=1");

@@ -17,7 +17,7 @@ define ( 'LANG_FILE', 'lab.php' );
 $local_user = 'ck_lab_user';
 require_once ($root_path . 'include/inc_front_chain_lang.php');
 
-$debug = false;
+$debug = FALSE;
 ($debug) ? $db->debug = true : $db->debug = FALSE;
 
 if (! $encounter_nr) {
@@ -71,7 +71,7 @@ if ($mode == 'save') {
 	$nbuf=array();
 	//Prepare parameter values
 	//gjergji
-	while (list($z,$y)=each($HTTP_POST_VARS)) {
+	while (list($z,$y)=each($_POST)) {
 		if($result_tests = $lab_obj->GetTestsToDo($job_id))
 		while($row_tests = $result_tests->FetchRow()) {
 			if ($z == $row_tests['paramater_name'] ) {
@@ -79,17 +79,18 @@ if ($mode == 'save') {
 			}
 		}
 	}
-		$dbuf['job_id']=$job_id;
-		$dbuf['encounter_nr']=$encounter_nr;
+
+	$dbuf['job_id']=$job_id;
+	$dbuf['encounter_nr']=$encounter_nr;
 	if($allow_update == TRUE){
-			$dbuf['modify_id']=$_SESSION['sess_user_name'];
-			$dbuf['modify_time']=date('YmdHis');
+		$dbuf['modify_id']=$_SESSION['sess_user_name'];
+		$dbuf['modify_time']=date('YmdHis');
 
 		# Recheck the date, ! bug pat	$dbuf['modify_id']=$_SESSION['sess_user_name'];
-			if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
-
+		if($_POST['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
+		$lab_obj_sub->deleteOldValues($batch_nr,$encounter_nr);
 		foreach( $nbuf as $key => $value) {
-			if(isset($value) && !empty($value) && !array_key_exists($key, $pdata)) {
+			if(isset($value) && !empty($value) ) {
 				$parsedParamList['test_date']		= date('Y-m-d');
 				$parsedParamList['batch_nr'] 		= $batch_nr;
 				$parsedParamList['job_id'] 			= $job_id;
@@ -103,7 +104,8 @@ if ($mode == 'save') {
 				$lab_obj_sub->setDataArray($parsedParamList);
 				if($lab_obj_sub->insertDataFromInternalArray()){
 					$saved = TRUE;
-			}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
+					$lab_obj->getLastQuery();
+				}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
 			}
 		}
 
@@ -118,7 +120,7 @@ if ($mode == 'save') {
 			exit;
 			}
 	} else {
-		$dbuf['test_date']=formatDate2STD($HTTP_POST_VARS['test_date'],$date_format);
+			$dbuf['test_date']=formatDate2STD($_POST['test_date'],$date_format);
 			$dbuf['test_time']=date('H:i:s');
 
 			$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
@@ -130,19 +132,19 @@ if ($mode == 'save') {
 			if($lab_obj->insertDataFromInternalArray()){
 				$pk_nr=$db->Insert_ID();
 	            $batch_nr=$lab_obj->LastInsertPK('batch_nr',$pk_nr);
-			foreach( $nbuf as $key => $value) {
-				if(isset($value) && !empty($value)) {
-					$parsedParamList['batch_nr']=$batch_nr;
-					$parsedParamList['encounter_nr']=$encounter_nr;
-					$parsedParamList['job_id']=$job_id;
-					$parsedParamList['paramater_name']=$key;
-					$parsedParamList['parameter_value']=$value;
-					$lab_obj_sub->setDataArray($parsedParamList);
-					$lab_obj_sub->insertDataFromInternalArray();
-		}
-	}
-			$saved=true;
-		}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
+				foreach( $nbuf as $key => $value) {
+					if(isset($value) && !empty($value)) {
+						$parsedParamList['batch_nr']=$batch_nr;
+						$parsedParamList['encounter_nr']=$encounter_nr;
+						$parsedParamList['job_id']=$job_id;
+						$parsedParamList['paramater_name']=$key;
+						$parsedParamList['parameter_value']=$value;
+						$lab_obj_sub->setDataArray($parsedParamList);
+						$lab_obj_sub->insertDataFromInternalArray();
+					}
+				}
+				$saved=true;
+			}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
 
 	}
 	# If save successful, jump to display values
@@ -287,7 +289,7 @@ function posneg(f)
 	echo $adddata [$tp ['id']]?>"[1].checked)
 	//{
 	// alert(<?php
-	echo $HTTP_POST_VARS ['_add' . $x . '_'];
+	echo $_POST ['_add' . $x . '_'];
 	?>);
 	//return false;
 	//}
@@ -298,13 +300,14 @@ function posneg(f)
 function limitedInput(inputId, range) {
 	var inputElement = document.getElementById(inputId);
 	var rangeArray = range.split("-");
-	if(Number(inputElement.value).toFixed(6) < Number(rangeArray[0]).toFixed(6) || 
-			Number(inputElement.value).toFixed(6) > Number(rangeArray[1]).toFixed(6) && 
-			inputElement.value != '') {
-			alert('Value must be between ranges : ' + rangeArray[0] + ' and ' + rangeArray[1] + '!');
-			inputElement.value = '';
+	if(inputElement.value != '') {
+		if(Number(inputElement.value).toFixed(6) < Number(rangeArray[0]).toFixed(6) ||
+				Number(inputElement.value).toFixed(6) > Number(rangeArray[1]).toFixed(6)) {
+				alert('Value must be between ranges : ' + rangeArray[0] + ' and ' + rangeArray[1] + '!');
+				inputElement.value = '';
+		}
 	}
-	
+
 }
 
 
@@ -326,15 +329,11 @@ require ($root_path . 'include/inc_checkdate_lang.php');
 // -->
 </script>
 <script language="javascript"
-	src="<?php
-	echo $root_path?>js/checkdate.js" type="text/javascript"></script>
+	src="<?php echo $root_path?>js/checkdate.js" type="text/javascript"></script>
 <script language="javascript"
-	src="<?php
-	echo $root_path?>js/setdatetime.js"></script>
+	src="<?php echo $root_path?>js/setdatetime.js"></script>
 <script language="javascript"
-	src="<?php
-	echo $root_path;
-	?>js/dtpick_care2x.js"></script>
+	src="<?php	echo $root_path;?>js/dtpick_care2x.js"></script>
 
 <?php
 
@@ -450,16 +449,18 @@ while(list($group,$pm)=each($requestData)) {
 		if ($pName->fields['field_type']=='drop_down') {
 			$inputValue = '<select name="'.$pId.'" size="1">';
 			do {
-				$inputValue .= "<option value=".$pDropDown['input_value'].">".$pDropDown['input_value']."</option>";
+				$inputValue .= '<option value='.$pDropDown['input_value'];
+				if($pDropDown['input_value'] == $pdata[$pId] ) $inputValue .= ' selected="selected" ';
+				$inputValue .= '>'.$pDropDown['input_value'] . '</option>';
 			} while($pDropDown=$pName->FetchRow());
 			$inputValue .= '</select>';
 		//it has margins in the set of values so activate js
 		} elseif($pName->fields['field_type'] == 'limited') {
-			$inputValue  = '<input name="'.$pId.'" type="text" size="8" value="" id="'.$pId.'" ';
+			$inputValue  = '<input name="'.$pId.'" type="text" size="8" value="'.$pdata[$pId].'" id="'.$pId.'" ';
 			$inputValue .= 'onBlur="javascript:limitedInput(\''.$pId.'\',\''.$pName->fields['input_value'].'\')">';
-		//standart input box
+		//standard input box
 		} else {
-			$inputValue =  '<input name="'.$pId.'" type="text" size="8" value="">';
+			$inputValue =  '<input name="'.$pId.'" type="text" size="8" value="'.$pdata[$pId].'">';
 		}
 		//remove the following comment if you want to deny the user
 		//the ability to update results

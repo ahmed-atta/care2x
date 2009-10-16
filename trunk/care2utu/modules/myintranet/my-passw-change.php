@@ -16,7 +16,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 if($n==$n2)
 {

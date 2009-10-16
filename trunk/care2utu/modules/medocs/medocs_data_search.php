@@ -286,7 +286,7 @@ if($mode=='search'||$mode=='paginate'){
 						echo "&nbsp;".formatDate2Local($zeile['date_birth'],$date_format);
                         echo "</td>";	
 
-					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
+					    if($_COOKIE[$local_user.$sid]) echo '
 						<td>&nbsp;
 							<a href=show_medocs.php'.URL_APPEND.'&from=such&pid='.$zeile['pid'].'&encounter_nr='.$zeile['encounter_nr'].'&target=entry>
 							<img '.$img_options.' alt="'.$LDShowData.'"></a>&nbsp;';

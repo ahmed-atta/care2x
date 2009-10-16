@@ -15,7 +15,7 @@ $fileforward='radiolog-xray-diagnosis-write.php?sid='.$sid.'&lang='.$lang;
 if($retpath=='read_diagnosis') $breakfile='radiolog-xray-diagnosis.php?sid='.$sid.'&lang='.$lang;
  	else $breakfile="javascript:window.top.location.replace('radiolog-xray-javastart.php?sid=$sid&lang=$lang&mode=display1')";
 	
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $userck='ck_radio_user';
 //reset cookie;

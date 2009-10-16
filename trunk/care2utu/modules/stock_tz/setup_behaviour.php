@@ -22,13 +22,13 @@ if ($debug) echo $search_mode."<br>";
 
 $stock_obj = new Stock_tz();
 if ($task=="update") {
-	while(list($x,$v) = each($HTTP_POST_VARS))
+	while(list($x,$v) = each($_POST))
 	{
 		if(strstr($x,"description"))
 		{
 			
 			$itemid = substr(strrchr($x,"_"),1);
-			if($HTTP_POST_VARS['description_'.$itemid])
+			if($_POST['description_'.$itemid])
 			{
 				$stock_obj->stock_update($itemid, $_POST['description_'.$itemid], $_POST['type_'.$itemid], $_POST['trigger_'.$itemid]);
 			}

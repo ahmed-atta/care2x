@@ -34,7 +34,7 @@ require_once($root_path.'include/care_api_classes/class_personell.php');
 
 //$db->debug=TRUE;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $returnfile=$breakfile;
 
 $newdata=1;
@@ -104,61 +104,61 @@ if($pid||$personell_nr){
 		if (($mode=='save')){
 			$error=FALSE;
 			# Check some values
-			if(empty($HTTP_POST_VARS['job_function_title'])
-				|| empty($HTTP_POST_VARS['date_join'])
-				|| empty($HTTP_POST_VARS['contract_start']))
+			if(empty($_POST['job_function_title'])
+				|| empty($_POST['date_join'])
+				|| empty($_POST['contract_start']))
 			{
 				$error=TRUE;
 			}
 			# Get default user if needed
-			if(empty($HTTP_POST_VARS['encoder'])) $encoder=$_SESSION['sess_user_name'];
+			if(empty($_POST['encoder'])) $encoder=$_SESSION['sess_user_name'];
 			# Start save routine if no error
 			if(!$error) {
 				if($update || $personell_nr){
 					//echo formatDate2STD($geburtsdatum,$date_format);
 					$itemno=$itemname;
-					if($HTTP_POST_VARS['date_join']) $HTTP_POST_VARS['date_join']=@formatDate2STD($HTTP_POST_VARS['date_join'],$date_format);
-					if($HTTP_POST_VARS['date_exit']) $HTTP_POST_VARS['date_exit']=@formatDate2STD($HTTP_POST_VARS['date_exit'],$date_format);
-						else $HTTP_POST_VARS['date_exit']= DBF_NODATE;
-					if($HTTP_POST_VARS['contract_start']) $HTTP_POST_VARS['contract_start']=@formatDate2STD($HTTP_POST_VARS['contract_start'],$date_format);
-					if($HTTP_POST_VARS['contract_end']) $HTTP_POST_VARS['contract_end']=@formatDate2STD($HTTP_POST_VARS['contract_end'],$date_format);
-						else $HTTP_POST_VARS['contract_end']= DBF_NODATE;
-					$HTTP_POST_VARS['modify_id']=$encoder;
-					$HTTP_POST_VARS['modify_time']=date('YmdHis');
-					$HTTP_POST_VARS['history']= $personell_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$encoder."\n");
+					if($_POST['date_join']) $_POST['date_join']=@formatDate2STD($_POST['date_join'],$date_format);
+					if($_POST['date_exit']) $_POST['date_exit']=@formatDate2STD($_POST['date_exit'],$date_format);
+						else $_POST['date_exit']= DBF_NODATE;
+					if($_POST['contract_start']) $_POST['contract_start']=@formatDate2STD($_POST['contract_start'],$date_format);
+					if($_POST['contract_end']) $_POST['contract_end']=@formatDate2STD($_POST['contract_end'],$date_format);
+						else $_POST['contract_end']= DBF_NODATE;
+					$_POST['modify_id']=$encoder;
+					$_POST['modify_time']=date('YmdHis');
+					$_POST['history']= $personell_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$encoder."\n");
 					
 					# Disable the pid variable
-					if(isset($HTTP_POST_VARS['pid'])) unset($HTTP_POST_VARS['pid']);
+					if(isset($_POST['pid'])) unset($_POST['pid']);
 
-					$personell_obj->setDataArray($HTTP_POST_VARS);
+					$personell_obj->setDataArray($_POST);
 
 					if($personell_obj->updateDataFromInternalArray($personell_nr)){
-						header("Location: personell_register_show.php".URL_REDIRECT_APPEND."&personell_nr=$personell_nr&origin=admit&target=personell_reg&newdata=$newdata");
+						header("location: personell_register_show.php".URL_REDIRECT_APPEND."&personell_nr=$personell_nr&origin=admit&target=personell_reg&newdata=$newdata");
 						exit;
 					}else{
 						$error=TRUE;
 					}
 				}else{
 					$newdata=1;
-					if(!$personell_obj->InitPersonellNrExists($GLOBAL_CONFIG['personell_nr_init'])) $HTTP_POST_VARS['nr']=$GLOBAL_CONFIG['personell_nr_init'];
+					if(!$personell_obj->InitPersonellNrExists($GLOBAL_CONFIG['personell_nr_init'])) $_POST['nr']=$GLOBAL_CONFIG['personell_nr_init'];
 
-					if($HTTP_POST_VARS['date_join']) $HTTP_POST_VARS['date_join']=@formatDate2STD($HTTP_POST_VARS['date_join'],$date_format);
-					if($HTTP_POST_VARS['date_exit']) $HTTP_POST_VARS['date_exit']=@formatDate2STD($HTTP_POST_VARS['date_exit'],$date_format);
-					if($HTTP_POST_VARS['contract_start']) $HTTP_POST_VARS['contract_start']=@formatDate2STD($HTTP_POST_VARS['contract_start'],$date_format);
-					if($HTTP_POST_VARS['contract_end']) $HTTP_POST_VARS['contract_end']=@formatDate2STD($HTTP_POST_VARS['contract_end'],$date_format);
+					if($_POST['date_join']) $_POST['date_join']=@formatDate2STD($_POST['date_join'],$date_format);
+					if($_POST['date_exit']) $_POST['date_exit']=@formatDate2STD($_POST['date_exit'],$date_format);
+					if($_POST['contract_start']) $_POST['contract_start']=@formatDate2STD($_POST['contract_start'],$date_format);
+					if($_POST['contract_end']) $_POST['contract_end']=@formatDate2STD($_POST['contract_end'],$date_format);
 					
-					$HTTP_POST_VARS['create_id']=$encoder;
-					$HTTP_POST_VARS['create_time']=date('YmdHis');
-					$HTTP_POST_VARS['history']="Create: ".date('Y-m-d H:i:s')." = ".$encoder."\n";
+					$_POST['create_id']=$encoder;
+					$_POST['create_time']=date('YmdHis');
+					$_POST['history']="Create: ".date('Y-m-d H:i:s')." = ".$encoder."\n";
 
-					$personell_obj->setDataArray($HTTP_POST_VARS);
+					$personell_obj->setDataArray($_POST);
 
 					if($personell_obj->insertDataFromInternalArray()){
 						# Get the PID
 						$oid = $db->Insert_ID();
 						$personell_nr = $personell_obj->LastInsertPK('nr',$oid);
 				            
-						header("Location: personell_register_show.php".URL_REDIRECT_APPEND."&personell_nr=$personell_nr&origin=admit&target=personell_reg&newdata=$newdata");
+						header("location: personell_register_show.php".URL_REDIRECT_APPEND."&personell_nr=$personell_nr&origin=admit&target=personell_reg&newdata=$newdata");
 						exit;
 					}else{
 						$error=TRUE;
@@ -167,7 +167,7 @@ if($pid||$personell_nr){
 			} // end of if($error)
 		
 			if($error){
-				header("Location: $thisfile".URL_REDIRECT_APPEND."&personell_nr=$personell_nr&error=1");
+				header("location: $thisfile".URL_REDIRECT_APPEND."&personell_nr=$personell_nr&error=1");
 				exit;
 			}
 		} // end of if($mode)
@@ -199,7 +199,7 @@ $items='nr,name';
 $ward_info=&$ward_obj->getAllWardsItemsObject($items);
 
 if($update) $breakfile='personell_register_show.php'.URL_APPEND.'&personell_nr='.$personell_nr;
-	elseif($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+	elseif($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 		else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 # Prepare the photo filename

@@ -143,9 +143,6 @@ function openCreditsWindow() {
  <a href="javascript:openCreditsWindow()"> Credits </a> ::.<br>
 
 </div>
-	    <font size=1 face="verdana,arial">
-	    Page generation time: 0.10575914382935
-	    </font>
     </td>
    <tr>
   </table>
@@ -158,7 +155,5 @@ function openCreditsWindow() {
 	
 	</tbody>
  </table>
-
-<!--   -->
 </BODY>
 </HTML>

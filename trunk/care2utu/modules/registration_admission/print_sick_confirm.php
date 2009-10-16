@@ -23,7 +23,7 @@ require_once($root_path.'include/care_api_classes/class_template.php');
 # Create the template object
 $TP_obj=new Template($root_path);
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 # Check if the print style is set, if not, display the style selector page and exit.
 if(!isset($sickform_style)){

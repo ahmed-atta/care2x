@@ -45,7 +45,7 @@ if(!isset($mode)) $mode='';
 
 $breakfile='amb_clinic_patients_discharge.php'.URL_APPEND; # Set default breakfile
 if($backpath) $breakfile=urldecode($backpath).URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 if(isset($retpath)){
 	switch($retpath)
 	{

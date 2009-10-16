@@ -15,7 +15,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 //$dbtable='care_phone';
 $forwardfile='phone_list.php';
 $breakfile='phone_list.php';
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 # Load the Comm class and create comm (phone) object
 require_once($root_path.'include/care_api_classes/class_comm.php');
@@ -33,7 +33,7 @@ if ($finalcommand=='delete'){
 			    if($batchnum>1)  $batchnum--;
 		}
         $linecount--;
-        header("Location: phone_list.php".URL_REDIRECT_APPEND."&route=validroute&remark=itemdelete&batchnum=$batchnum&displaysize=$displaysize&linecount=$linecount&pagecount=$pagecount&edit=$edit");
+        header("location: phone_list.php".URL_REDIRECT_APPEND."&route=validroute&remark=itemdelete&batchnum=$batchnum&displaysize=$displaysize&linecount=$linecount&pagecount=$pagecount&edit=$edit");
         exit;
     }else{
         echo $phone->getLastQuery()."<br>$LDDbNoDelete";

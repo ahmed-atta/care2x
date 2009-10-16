@@ -20,7 +20,7 @@ define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile='labor.php'.URL_APPEND;
 
 # Workaround

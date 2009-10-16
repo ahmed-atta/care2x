@@ -26,7 +26,7 @@ $LDCreate='Create';
 $LDValue='Value';
 
 $LDNews='News';
-$LDNewsTxt='Read or write news articles pertaining to sytem administration department';
+$LDNewsTxt='Read or write news articles pertaining to system administration department';
 $LDETL='ETL';
 $LDELTTxt='Exact,transform,load Databases';
 $LDMemo='Memo';
@@ -205,7 +205,7 @@ $LDNoMainDelete='You cannot delete a main currency. \nPlease set a different mai
 $LDCurrencyExisting='This currency exists already!';
 /* 2003-02-21 EL*/
 $LDMenuItem='Menu item';
-$LDOrderNr='Sort nr.';
+$LDOrderNr='Sort NR.';
 $LDStatus='Status';
 $LDHideBy='Hide by:';
 $LDPath='Path';
@@ -308,7 +308,7 @@ $LDEnterMaxRows='Please enter the maximum number rows displayed  per page after 
 #2003-11-01 EL
 $LDTimeOut='Time out';
 $LDTimeOutActive='Time out active';
-$LDTimeOutTxt='Should the password protected modules time out (lock itselt) after a set time of inactivity?';
+$LDTimeOutTxt='Should the password protected modules time out (lock itself) after a set time of inactivity?';
 $LDTimeOutTime='Elapsed time';
 $LDTimeOutTimeTxt='Elapsed idle time (inactivity) that triggers the time out and locks the module. Note:
 If your entry is invalid, the system will use the default maximum values.';

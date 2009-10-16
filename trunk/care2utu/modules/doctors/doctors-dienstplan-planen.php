@@ -22,7 +22,7 @@ if(!isset($dept_nr)||!$dept_nr){
 
 //$db->debug=1;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile="doctors-dienstplan.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath";
 
 require_once($root_path.'include/care_api_classes/class_department.php');

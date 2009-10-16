@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 
 //define('NO_2LEVEL_CHK',1);
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $lang_tables[]='billing.php';
 $lang_tables[]='aufnahme.php';
 require($root_path.'include/inc_front_chain_lang.php');

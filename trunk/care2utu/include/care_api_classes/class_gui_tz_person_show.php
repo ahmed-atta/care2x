@@ -18,7 +18,7 @@
 */
 require_once($root_path.'include/care_api_classes/class_person.php');
 
-$thisfile = basename($HTTP_SERVER_VARS['PHP_SELF']);
+$thisfile = basename($_SERVER['PHP_SELF']);
 
 class GuiPersonShow extends Person{
 	# Language files to be loaded
@@ -131,7 +131,8 @@ class GuiPersonShow extends Person{
 		echo '<tr>
 				<td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial,verdana,sans serif">'.$ld_text.':
 				</td>
-				<td colspan='.$colspan.' bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial,verdana,sans serif">'.$input_val.'
+				<td colspan='.$colspan.' bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial,verdana,sans serif" color="#990000"><b>'
+				.$input_val.'
 				</td>
 			</tr>';
 	}
@@ -140,7 +141,7 @@ class GuiPersonShow extends Person{
 	* Displays the GUI showing the data
 	*/
 	function display($pid){
-		global $HTTP_SESSION_VARS, $root_path, $dbf_nodate, $newdata;
+		global $root_path, $dbf_nodate, $newdata;
 
 		$validdata = TRUE;
 
@@ -255,7 +256,7 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			<FONT SIZE=-1  FACE="Arial"><?php echo $LDFileNr ?>:
 		</td>
 		<td  bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo $selian_pid ?>
+			<FONT SIZE=-1  FACE="Arial" color="#800000"><b><?php echo $selian_pid ?>
 		</td>
 		</tr>
 		<tr>
@@ -263,7 +264,7 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			<FONT SIZE=-1  FACE="Arial"><?php echo $LDRegTime ?>:
 		</td>
 		<td  bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial" color="#800000"><?php echo convertTimeToLocal(formatDate2Local($date_reg,$date_format,0,1)); ?>
+			<FONT SIZE=-1  FACE="Arial" color="#800000"><b><?php echo convertTimeToLocal(formatDate2Local($date_reg,$date_format,0,1)); ?>
 		</td>
 		</tr>
 
@@ -274,7 +275,7 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 		</td>
 		<td bgcolor="#ffffee">
 			<FONT SIZE=-1  FACE="Arial" color="#800000">
-			<?php echo formatDate2Local($date_reg,$date_format); ?>
+			<b><?php echo formatDate2Local($date_reg,$date_format); ?>
 			<input name="date_reg" type="hidden" value="<?php echo $date_reg ?>">
 		</td>
 		</tr>
@@ -284,8 +285,8 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			<FONT SIZE=-1  FACE="Arial"><?php echo $LDTitle ?>:
 		</td>
 		<td  bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $title ?>
+			<FONT SIZE=-1  FACE="Arial" color="#990000">
+			<b><?php echo $title ?>
 		</td>
 		</tr>
 
@@ -348,7 +349,7 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 ?>
 		</td>
 		<td bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
+			<FONT SIZE=-1  FACE="Arial" color="#990000"><b>
 			<?php  echo $LDSex ?>: <?php if($sex=="m") echo  $LDMale; elseif($sex=="f") echo $LDFemale ?>
 		</td>
 		</tr>
@@ -358,17 +359,27 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			<FONT SIZE=-1  FACE="Arial"><?php echo $LDBloodGroup ?>:
 		</td>
 		<td bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
+			<FONT SIZE=-1  FACE="Arial" color="#990000"><b>
 <?php
 		$buf='LD'.trim($blood_group);
 		echo $$buf;
 ?>
 		</td>
 <td bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
+			<FONT SIZE=-1  FACE="Arial" color="#990000"><b>
 <?php
 		echo $LDRHfactor.$rh;
 ?>
+		</td>
+		</tr>
+		<tr>
+		<td bgColor="#eeeeee">
+			<FONT SIZE=-1  FACE="Arial">
+			<?php echo 'Allergy' ?>:
+		</td>
+		<td bgcolor="#ffffee">
+			<FONT SIZE=-1  FACE="Arial" color="#990000">
+			<b><?php echo $allergy; ?></b>
 		</td>
 		</tr>
 
@@ -378,7 +389,7 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			<?php echo $LDCivilStatus ?>:
 		</td>
 		<td colspan=2 bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
+			<FONT SIZE=-1  FACE="Arial" color="#990000"><b>
 <?php
 		if($civil_status=="single") echo $LDSingle;
 		  elseif($civil_status=="married") echo  $LDMarried;
@@ -390,7 +401,7 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 
 		<?php global $db;
 
-		    	$coreObj->sql="SELECT name FROM care_tz_insurances_admin WHERE insurance_ID=$insurance_ID";
+		    	$coreObj->sql="SELECT name FROM care_tz_company WHERE id=$insurance_ID";
 				if ($ergebnis = $db->Execute($coreObj->sql))
 				{
 					$row = $ergebnis->FetchRow();
@@ -400,11 +411,12 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 		?>
 
 		<tr>
-		<td>
+		<td bgColor="#eeeeee">
 			<FONT SIZE=-1  FACE="Arial">
 			<?php echo $LDInsurance; ?>:
 		</td>
-		<td><?php echo $insurance_name; ?></td>
+		<td><FONT SIZE=-1  FACE="Arial" color="#990000"><b>
+		<?php echo $insurance_name; ?></td>
 		</tr>
 
 		<tr>
@@ -420,13 +432,14 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			&nbsp;&nbsp;&nbsp;<?php echo $LDTownCity ?>:
 		</td>
 		<td bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
+			<FONT SIZE=-1  FACE="Arial" color="#990000"><b>
+
 
 			<?php echo $citizenship; ?> <?php //echo $addr_citytown_name; ?><?php //echo $addr_citytown_nr; ?>
 
 		</td>
 		<td bgcolor="#ffffee">
-			<FONT SIZE=-1  FACE="Arial">
+			<FONT SIZE=-1  FACE="Arial" color="#990000"><b>
 			&nbsp;&nbsp;&nbsp;<?php echo $LDZipCode ?>: <?php echo $addr_zip; ?>
 		</td>
 		</tr>
@@ -436,8 +449,8 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			&nbsp;&nbsp;&nbsp;<?php echo 'Region' ?>:
 		</td>
 		<td bgcolor="#ffffee" colspan=2>
-			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $region; ?>
+			<FONT SIZE=-1  FACE="Arial" color="#990000">
+			<b><?php echo $region; ?>
 		</td>
 		</tr>
 		<tr>
@@ -446,8 +459,8 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			&nbsp;&nbsp;&nbsp;<?php echo 'District' ?>:
 		</td>
 		<td bgcolor="#ffffee" colspan=2>
-			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $district; ?>
+			<FONT SIZE=-1  FACE="Arial" color="#990000">
+			<b><?php echo $district; ?>
 		</td>
 		</tr>
 		<tr>
@@ -456,8 +469,8 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			&nbsp;&nbsp;&nbsp;<?php echo 'Ward' ?>:
 		</td>
 		<td bgcolor="#ffffee" colspan=2>
-			<FONT SIZE=-1  FACE="Arial">
-			<?php echo $ward; ?>
+			<FONT SIZE=-1  FACE="Arial" color="#990000">
+			<b><?php echo $ward; ?>
 		</td>
 		</tr>
 
@@ -487,9 +500,6 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 		}
 
 		if (!$GLOBAL_CONFIG['person_email_hide']&&$email){
-?>
-
-<?php
 		}
 
 		//if (!$GLOBAL_CONFIG['person_citizenship_hide']&&$citizenship){
@@ -499,18 +509,26 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			$this->createTR('District',$district_name,2);
 		}
 		if (!$GLOBAL_CONFIG['person_nat_id_nr_hide']&&$nat_id_nr){
-			$this->createTR('Ward',$ward_name,2);
+//			$this->createTR('Ward',$ward_name,2);
 		}
 		if (!$GLOBAL_CONFIG['person_religion_hide']&&$religion){
 			$this->createTR($LDReligion,$name,2);
 		}
 
 		if (!$GLOBAL_CONFIG['person_insurance_hide']&&$insurance_ID){
-			$this->createTR($LDInsurance,$insurance_ID,2);
+//			$this->createTR($LDInsurance,$insurance_ID,2);
 		}
 
 		if (!$GLOBAL_CONFIG['person_ethnic_orig_hide']&&$ethnic_orig){
 			$this->createTR($LDEthnicOrigin,$ethnic_orig_txt,2);
+		}
+		$sql='SELECT modify_id, create_id FROM care_person where pid="'.$pid.'"';
+		$result = $db->Execute($sql);
+		$row=$result->FetchRow();
+		if ($row['modify_id']=='') {
+			$modifyid=$row['create_id'];
+		} else {
+			$modifyid=$row['modify_id'];
 		}
 ?>
 		<tr>
@@ -518,7 +536,7 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 			<nobr><FONT  SIZE=2  FACE="Arial"><?php echo $LDRegBy ?>:</nobr>
 		</td>
 		<td colspan=2 bgcolor="#ffffee">
-			<FONT  SIZE=2  FACE="Arial"><?php echo $modify_id ?> </FONT>
+			<FONT  SIZE=2  FACE="Arial" color="#990000"><b><?php echo $modifyid ?> </b></FONT>
 		</td>
 		</tr>
 		</table>

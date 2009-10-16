@@ -17,7 +17,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_core.php');
 $core = & new Core;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 switch($cat){
 
@@ -34,7 +34,7 @@ switch($cat){
 							$breakfile=$root_path."modules/med_depot/medlager-datenbank-functions.php?sid=$sid&lang=$lang&userck=$userck";
 							break;
 	
-	default:  {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
+	default:  {header("location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
 
 }
 

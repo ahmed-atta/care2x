@@ -107,7 +107,7 @@ if($dblink_ok)
 								area10="'.$bereich10.'", 
 								s_date="'.$curdate.'", 
 								s_time="'.$curtime.'",
-								modify_id="'.$HTTP_COOKIE_VARS[$local_user.$sid].'"  
+								modify_id="'.$_COOKIE[$local_user.$sid].'"  
 							WHERE name="'.$username.'"';
 
 						if($db->Execute($sql))

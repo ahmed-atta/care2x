@@ -11,9 +11,7 @@
  </tr>
 </table>
 <br><br>
-<?php 
- define (__TRACE_ENABLED__, false);
- define (__DEBUG_ENABLED__, false);
+<?php
 								   
  require("barcode.php");		   
  require("i25object.php");

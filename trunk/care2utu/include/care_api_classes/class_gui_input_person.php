@@ -23,7 +23,7 @@
 require('./roots.php');
 
 
-$thisfile = basename($HTTP_SERVER_VARS['PHP_SELF']);
+$thisfile = basename($_SERVER['PHP_SELF']);
 
 class GuiInputPerson {
 
@@ -110,9 +110,9 @@ class GuiInputPerson {
 	*/
 	function display(){
 		global $db, $sid, $lang, $root_path, $pid, $insurance_show, $user_id, $mode, $dbtype, $no_tribe,$no_region,
-						$update, $photo_filename, $HTTP_POST_VARS,  $HTTP_POST_FILES, $HTTP_SESSION_VARS;
+						$update, $photo_filename; #, $HTTP_POST_FILES $HTTP_POST_VARS, $HTTP_SESSION_VARS;
 
-		extract($HTTP_POST_VARS);
+		extract($_POST);
 		require_once($root_path.'include/care_api_classes/class_advanced_search.php');
 
 		# Load the language tables
@@ -136,6 +136,8 @@ class GuiInputPerson {
 
 		$error=0;
 		$dbtable='care_person';
+
+
 
 		if(!isset($photo_filename)||empty($photo_filename)) $photo_filename='nopic';
 		# Assume first that image is not uploaded
@@ -206,7 +208,10 @@ class GuiInputPerson {
 
 				if ($person_obj->IsHospitalFileNrMandatory())
 				{
-					if (trim($selian_pid)=='' || (!$update && $person_obj->SelianFileExists($selian_pid))) { $errorfilenr=1; $error++;}
+					if (trim($selian_pid)=='' || (!$update && $person_obj->SelianFileExists($selian_pid))) {
+						$errorfilenr=1;
+						$error++;
+					}
 				}
 
 				if(trim($name_first)=='') { $errornamefirst=1; $error++; }
@@ -227,7 +232,7 @@ class GuiInputPerson {
 				$img_obj=& new Image;
 
 				# Check the uploaded image file if exists and valid
-				if($img_obj->isValidUploadedImage($HTTP_POST_FILES['photo_filename'])){
+				if($img_obj->isValidUploadedImage($_FILES['photo_filename'])){
 					$valid_image=TRUE;
 					# Get the file extension
 					$picext=$img_obj->UploadedImageMimeType();
@@ -237,36 +242,39 @@ class GuiInputPerson {
 
 					//echo formatDate2STD($geburtsdatum,$date_format);
 					$sql="UPDATE $dbtable SET
-							 title='$title',
 							 selian_pid='$selian_pid',
-							 name_last='$name_last',
 							 name_first='$name_first',
 							 name_2='$name_2',
 							 name_3='$name_3',
 							 name_middle='$name_middle',
+							 name_last='$name_last',
 							 name_maiden='$name_maiden',
 							 name_others='$name_others',
+							 education='$education',
 							 date_birth='".formatDate2STD($date_birth,$date_format)."',
 							 blood_group='".trim($blood_group)."',
 							 rh='".trim($rh)."',
-							 sex='$sex',
 							 addr_str='$addr_str',
 							 addr_str_nr='$addr_str_nr',
 							 addr_zip='$addr_zip',
 							 addr_citytown_nr='$addr_citytown_nr',
 							 addr_citytown_name='$addr_citytown_name',
+							 citizenship ='$citizenship',
 							 phone_1_nr='$phone_1_nr',
 							 phone_2_nr='$phone_2_nr',
 							 cellphone_1_nr='$cellphone_1_nr',
 							 cellphone_2_nr='$cellphone_2_nr',
 							 fax='$fax',
-							 email='',
-							 citizenship ='$citizenship',
+							 email='$email',
 							 civil_status='$civil_status',
-							 sss_nr='',
-							 nat_id_nr='',
-							 religion='$religion', insurance_ID='$insurance_ID',
+							 sex='$sex',
+							 title='$title',
 							 ethnic_orig='$ethnic_orig',
+							 sss_nr='',
+							 allergy='$allergy',
+							 nat_id_nr='',
+							 religion='$religion',
+							 insurance_ID='$insurance_ID',
 							 date_update='".date('Y-m-d H:i:s')."',";
 
 					if($region !="-1" && $district!="-1" && $ward!="-1")
@@ -282,7 +290,7 @@ class GuiInputPerson {
 						# Compose the new filename
 						$photo_filename=$pid.'.'.$picext;
 						# Save the file
-						$img_obj->saveUploadedImage($HTTP_POST_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
+						$img_obj->saveUploadedImage($_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename);
 				   		# add to the sql query
 						$sql.=" photo_filename='$photo_filename',";
 					}
@@ -326,7 +334,7 @@ class GuiInputPerson {
 						}
 						$newdata=1;
 						if(file_exists($this->displayfile)){
-							header("Location: $this->displayfile".URL_REDIRECT_APPEND."&pid=$pid&from=$from&newdata=1&target=entry");
+							header("location: $this->displayfile".URL_REDIRECT_APPEND."&pid=$pid&from=$from&newdata=1&target=entry");
 							exit;
 						}else{
 							echo "Error! Target display file not defined!!";
@@ -336,14 +344,16 @@ class GuiInputPerson {
 					}
   				} else {
 					$from='entry';
-					$HTTP_POST_VARS['date_birth']=@formatDate2Std($date_birth,$date_format);
-					$HTTP_POST_VARS['date_reg']=date('Y-m-d H:i:s');
-					$HTTP_POST_VARS['blood_group']=trim($HTTP_POST_VARS['blood_group']);
-					$HTTP_POST_VARS['status']='normal';
-					$HTTP_POST_VARS['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
-					//$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-					$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
-					$HTTP_POST_VARS['create_time']=date('YmdHis');
+					$_POST['date_birth']=@formatDate2Std($date_birth,$date_format);
+					$_POST['date_reg']=date('Y-m-d H:i:s');
+					$_POST['blood_group']=trim($_POST['blood_group']);
+					$_POST['status']='normal';
+					$_POST['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+					//$_POST['modify_id']=$_SESSION['sess_user_name'];
+					$_POST['create_id']=$_SESSION['sess_user_name'];
+					$_POST['create_time']=date('YmdHis');
+
+
 
 					# Prepare internal data to be stored together with the user input data
 					if(!$person_obj->InitPIDExists($GLOBAL_CONFIG['person_id_nr_init'])){
@@ -352,11 +362,11 @@ class GuiInputPerson {
 						# However, the sequence generator must be configured during db creation to start at
 						# the initial value set in the global config
 						if($dbtype=='mysql'){
-							$HTTP_POST_VARS['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
+							$_POST['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
 						}
 					}else{
 						# Persons are existing. Check if duplicate might exist
-						if(is_object($duperson=$person_obj->PIDbyData($HTTP_POST_VARS))){
+						if(is_object($duperson=$person_obj->PIDbyData($_POST))){
 							$error_person_exists=TRUE;
 						}
 					}
@@ -381,7 +391,7 @@ class GuiInputPerson {
 								# Compose the new filename by joining the pid number and the file extension with "."
 								$photo_filename=$pid.'.'.$picext;
 								# Save the file
-								if($img_obj->saveUploadedImage($HTTP_POST_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename)){
+								if($img_obj->saveUploadedImage($_FILES['photo_filename'],$root_path.$photo_path.'/',$photo_filename)){
 									# Update the filename to the databank
 									$person_obj->setPhotoFilename($pid,$photo_filename);
 								}
@@ -409,7 +419,7 @@ class GuiInputPerson {
 							}
 							$newdata=1;
 							if(file_exists($this->displayfile)){
-								header("Location: $this->displayfile".URL_REDIRECT_APPEND."&pid=$pid&from=$from&newdata=1&target=entry");
+								header("location: $this->displayfile".URL_REDIRECT_APPEND."&pid=$pid&from=$from&newdata=1&target=entry");
 								exit;
 							}else{
 								echo "Error! Target display file not defined!!";
@@ -421,7 +431,7 @@ class GuiInputPerson {
 				}
 			} // end of if(!$error)
 		}elseif(!empty($this->pid)){
-			 # Get the person�s data
+			 # Get the person?s data
 			if($data_obj=&$person_obj->getAllInfoObject()){
 
 				$zeile=$data_obj->FetchRow();
@@ -452,6 +462,8 @@ class GuiInputPerson {
 
 		include_once($root_path.'include/inc_photo_filename_resolve.php');
 		$search_obj = & new advanced_search();
+
+
 		if(!$update)
 		{
 			$tribe=$name_maiden;
@@ -524,7 +536,7 @@ class GuiInputPerson {
 		<script  language="javascript">
 		<!--
 			function test(){
-			document.aufnahmeform.action="<?php $HTTP_SERVER_VARS['PHP_SELF'] ?>";
+			document.aufnahmeform.action="<?php $_SERVER['PHP_SELF'] ?>";
 			document.aufnahmeform.submit();
 		}
 
@@ -653,7 +665,7 @@ class GuiInputPerson {
 		<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 		<script language="javascript" src="<?php echo $root_path; ?>js/dtpick_care2x.js"></script>
 
-		<FONT    SIZE=-1  FACE="Arial">
+		<FONT SIZE=-1 FACE="Arial">
 
 		<form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform" ENCTYPE="multipart/form-data" onSubmit="return chkform(this)">
 
@@ -663,7 +675,9 @@ class GuiInputPerson {
 		echo "<script language=\"Javascript\" type=\"text/javascript\"> </script>";//alert('Information is missing in the input field marked red!') ;
 ?>
 			<tr bgcolor=#ffffee>
+
 			<td colspan=3>
+
 			<center>
 				<font face=arial color=#7700ff size=4>
 				<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle">
@@ -824,11 +838,13 @@ class GuiInputPerson {
 					Try this one: '.$person_obj->GetNewSelianFileNumber();
 				else
 					echo $asterik.$LDFileNr;
-
+				if (!isset($selian_pid)) {
+					$selian_pid=$person_obj->GetNewSelianFileNumber();
+				}
 				?>
 			</td>
 			<td class="reg_input">
-				<input type="text" name="selian_pid" size=14 maxlength=6 value="<?php echo $selian_pid ?>" onFocus="this.select();">
+				<input type="text" name="selian_pid" size=14 maxlength=11 value="<?php echo $selian_pid ?>" onFocus="this.select();">
 			</td>
 			</tr>
 
@@ -967,12 +983,13 @@ if(!$no_tribe)
 			</tr>
 		<?php
 		if (!$person_name_others_hide){
-			$this->createTR($errornameothers, 'name_others', $LDNameOthers,$name_others);
+//			$this->createTR($errornameothers, 'name_others', $LDNameOthers,$name_others);
 		}
 		?>
 
 <!--
 TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
+-->
  			<tr>
 			<td class="reg_item">
 				<?php echo $LDBloodGroup ?>:
@@ -991,7 +1008,6 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 			<?php if($rh=='neg') echo 'checked'; ?>><?php echo $LDRHneg; ?>
 			</td>
 			</tr>
--->
 			<tr>
 			<td class="reg_item">
 				<FONT SIZE=-1  FACE="Arial"><?php if ($errorcivil) echo "<font color=red>"; ?> <?php echo $LDCivilStatus ?></font>:
@@ -1011,7 +1027,7 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 				<td class="reg_input"> <?php
 
 			// Create array of all insurances for GUI
-			$coreObj->sql="SELECT DISTINCT insurance_ID FROM care_tz_insurances_admin WHERE deleted='0' order by name asc";
+			$coreObj->sql="SELECT DISTINCT parent FROM care_tz_insurance WHERE cancel_flag='0' order by parent asc";
 			$result = $db->Execute($coreObj->sql);
 
 			$name_insurer_array = array();
@@ -1019,18 +1035,15 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 
 			while($row=$result->FetchRow())
 			{
-				$nr = $row['insurance_ID'];
+				$nr = $row['parent'];
 
-				if ($nr != -1)
+				if ($nr !== -1)
 				{
-				$coreObj->sql="SELECT name FROM care_tz_insurances_admin WHERE insurance_ID=$nr";
-
-
+				$coreObj->sql="SELECT name FROM care_tz_company WHERE ID=$nr";
 				$ergebnis = $db->Execute($coreObj->sql);
 				$row = $ergebnis->FetchRow();
 				$arrayTemp = array("name"=> $row['name'], "id"=>$nr);
 				array_push($name_insurer_array, $arrayTemp);
-
 
 				}
 			}
@@ -1065,6 +1078,15 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 				<input type="text" name="title" size=14 maxlength=25 value="<?php echo $title ?>" onFocus="this.select();">
 			</td>
 			</tr>
+			<tr>
+			<td class="reg_item">
+				<FONT SIZE=-1  FACE="Arial"><?php echo 'Allergy' ?>:
+			</td>
+			<td class="reg_input">
+				<input type="text" name="allergy" size=14 maxlength=25 value="<?php echo $title ?>" onFocus="this.select();">
+			</td>
+			</tr>
+			<tr>
 			<td class="reg_item">
 				<FONT SIZE=-1  FACE="Arial"><?php echo $LDEducation ?>:
 			</td>
@@ -1092,18 +1114,21 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 					$catchment_area_obj=$db->Execute($sql);
 
 
-				?></td>
+					echo '</td>
 				<td  class="reg_input" colspan=1>
 					<select name="region" size="1" onChange="redirect(this.options.selectedIndex)">
 
-						<option value="-1" id="-1">---select region--------</option>
-						<?php
+						<option value="-1" id="-1">---select region--------</option>';
+
 
 							while($catchment_area_row=$catchment_area_obj->FetchRow())
 							{
-								echo '<option value="'.$catchment_area_row['region_name'].'" id='.$catchment_area_row['region_id'].'>'.$catchment_area_row['region_name'].'</option>';
+								if ($region== $catchment_area_row['region_name']) {
+									echo '<option selected value="'.$catchment_area_row['region_name'].'" id='.$catchment_area_row['region_id'].'>'.$catchment_area_row['region_name'].'</option>';
+								} else {
+									echo '<option value="'.$catchment_area_row['region_name'].'" id='.$catchment_area_row['region_id'].'>'.$catchment_area_row['region_name'].'</option>';
+								}
 							}
-
 						?>
 					</select>
 
@@ -1120,12 +1145,12 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 					<td class="reg_input"><FONT SIZE=-1  FACE="Arial,verdana,sans serif">
 					<?php if($errormaiden) { echo '<font color="FF0000">'; }
 
-					$sql="Select * from care_person where pid=".$pid;
-					$result=$db->Execute($sql);
+//					$sql="Select * from care_person where pid=".$pid;
+//					$result=$db->Execute($sql);
 
-					$region=$result->FetchRow();
+//					$region=$result->FetchRow();
 
-					echo ''.'Region:<FONT SIZE=-1 FACE="Arial" color="#800000"> '.$region['region'].'</FONT>';
+//					echo ''.'Region:<FONT SIZE=-1 FACE="Arial" color="#800000"> '.$region['region'].'</FONT>';
 
 
 					?></td><?php
@@ -1139,7 +1164,17 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 				<td  class="reg_input" colspan=1>
 
 							<select name="district" size="1" onChange="redirect1(this.options.selectedIndex)">
-							<option value="-1" >---select district--------</option>
+							<?php
+							if (!isset($_POST['district'])) {
+							?>
+								<option value="-1" >---select district--------</option>
+							<?php
+							} else  {
+							?>
+								<option value="<?php echo $_POST['district'];?>" ><?php echo $_POST['district'];?></option>
+						    <?php
+							}
+							?>
 							</select>
 
 
@@ -1151,7 +1186,7 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 					<td class="reg_input"><FONT SIZE=-1  FACE="Arial,verdana,sans serif">
 					<?php if($errormaiden) { echo '<font color="FF0000">'; }
 
-					$sql="Select * from care_person where pid=".$pid;
+					$sql="Select district from care_person where pid=".$pid;
 					$result=$db->Execute($sql);
 
 					$region=$result->FetchRow();
@@ -1169,7 +1204,18 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 				<?php if($errormaiden) { echo '<font color="FF0000">'; } echo '* '.'Ward'; ?></td>
 				<td  class="reg_input" colspan=1>
 					<select name="ward" size="1">
-						<option value="-1" >-select Ward-</option>
+							<?php
+							if (!isset($_POST['ward'])) {
+							?>
+							<option value="-1" >-select Ward-</option>
+							<?php
+							} else  {
+							?>
+							<option value="<?php echo $_POST['ward'];?>" ><?php echo $_POST['ward'];?></option>
+						    <?php
+							}
+							?>
+
 					</select>
 
 			<?php
@@ -1246,11 +1292,17 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 						} // end of if ($FIRST_ROW==TRUE)
 
 					}
+
 				?>
 
 
 				var temp_district=document.aufnahmeform.district
 				var temp_ward=document.aufnahmeform.ward
+
+				<?php
+				if (!empty($_POST['district'])) echo "var MyDistrict='".$_POST['district']."'\n";
+				if (!empty($_POST['ward'])) echo "var MyDistrict='".$_POST['ward']."'\n";
+				?>
 
 				function redirect(x){
 
@@ -1261,8 +1313,12 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 
 					for (i=1;i<group[x].length;i++){
 						temp_district.options[i]=new Option(group[x][i].text)
+//						if (temp_district.options[i]==MyDistrict) {
+							temp_district.options[i].selected=true
+//							}
 					}
-					temp_district.options[0].selected=true;
+//					if (len(MyDistrict)==0)
+						temp_district.options[0].selected=true;
 					temp_district.options[0].value=-1;
 					redirect1(0)
 					}
@@ -1424,7 +1480,7 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 			</td>
 			<td colspan=2 class="reg_input">
 				<FONT SIZE=-1  FACE="Arial"><nobr>
-				<input  name="user_id" type="text" value="<?php if(isset($user_id) && $user_id) echo $user_id; else  echo $_SESSION['sess_user_name'] ?>"  size="35" readonly>
+				<input  name="modify_id" type="text" value="<?php if(isset($user_id) && $user_id) echo $user_id; else  echo $_SESSION['sess_user_name'] ?>"  size="35" readonly>
 				</nobr>
 			</td>
 			</tr>
@@ -1467,14 +1523,17 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 				<input type=hidden name=patnum value="">
 				<input type=hidden name="lang" value="<?php echo $lang; ?>">
 				<input type=hidden name="date_format" value="<?php echo $date_format; ?>">
-				<input type=submit value="<?php echo $LDNewForm ?>" >
+				<input type=submit value="<?php echo $LDNewForm; ?>" >
 			</form>
 <?php
 		}
 	} // end of function
+
 	function create(){
 		$this->bReturnOnly = TRUE;
 		return $this->display();
 	}
+
 } // end of class
+
 ?>

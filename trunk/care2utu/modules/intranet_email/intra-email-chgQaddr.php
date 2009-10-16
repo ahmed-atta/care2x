@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'include/inc_config_color.php'); // load color preferences
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 //init db parameters
 $dbtable='care_mail_private_users';

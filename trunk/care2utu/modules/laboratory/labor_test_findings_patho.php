@@ -22,7 +22,7 @@ require_once($root_path.'include/inc_diagnostics_report_fx.php');
 $breakfile='labor.php'.URL_APPEND;
 $returnfile='labor_test_request_admin_'.$subtarget.'.php'.URL_APPEND.'&target='.$target.'&subtarget='.$subtarget.'&user_origin='.$user_origin;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $bgc1='#cde1ec'; 
 $edit=1; /* Assume to edit first */

@@ -35,7 +35,7 @@ if(!isset($dept_nr)||!$dept_nr){
 
 //$db->debug=1;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
 
 # Save dept name to session 
@@ -241,7 +241,7 @@ if($mode=='search'||$mode=='paginate'){
 
 							
 }else{
-	if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $mode='dummy';
+	if($_COOKIE['ck_login_logged'.$sid]) $mode='dummy';
 } 
 
 # Start the smarty templating

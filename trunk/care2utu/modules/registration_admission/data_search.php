@@ -28,7 +28,7 @@ require_once($root_path.'classes/datetimemanager/class.dateTimeManager.php');
 # Create time manager object
 $datetime_obj= & new dateTimeManager;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $searchmask_bgcolor="#f3f3f3";
 $searchprompt=$LDEnterSearchKeyword;
 

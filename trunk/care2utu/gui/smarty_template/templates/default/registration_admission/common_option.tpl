@@ -20,9 +20,9 @@
 						{{if $bShowNoRecord}}
 							{{include file="registration_admission/common_norecord.tpl"}}
 						{{/if}}
-            
+
 						{{$sOptionBlock}}
-					
+
 					</td>
 					<td>{{$sOptionsMenu}}</td>
 				</tr>

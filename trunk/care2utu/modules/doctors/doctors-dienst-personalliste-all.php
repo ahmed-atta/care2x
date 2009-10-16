@@ -34,7 +34,7 @@ if($_SESSION['sess_user_origin']=='personell_admin'){
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 
 
@@ -334,7 +334,7 @@ if($mode=='search'||$mode=='paginate'){
 						echo "&nbsp;".ucfirst($row['job_function_title']);
                         echo "</td>";	
 
-					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
+					    if($_COOKIE[$local_user.$sid]) echo '
 						<td>&nbsp;
 							<a href="doctors-list-add.php'.URL_APPEND.'&nr='.$row['nr'].'&dept_nr='.$dept_nr.'&mode=save&retpath='.$retpath.'&ipath='.$ipath.'" title="'.$LDAddDoctorToList.'">
 							<img '.$img_options_add.' alt="'.$LDShowData.'"></a>&nbsp;';

@@ -16,16 +16,14 @@ define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 //$breakfile='patient.php';
 
-if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $breakfile=$root_path."main/startframe.php".URL_APPEND;
+if($_COOKIE["ck_login_logged".$sid]) $breakfile=$root_path."main/startframe.php".URL_APPEND;
 	else $breakfile="patient.php".URL_APPEND."&target=entry";
 
 
 $admissionfile='aufnahme_start.php'.URL_APPEND;
-
-echo 'KKKK';
 
 # Resolve PID
 if((!isset($pid)||!$pid)&&$_SESSION['sess_pid']) $pid=$_SESSION['sess_pid'];
@@ -169,7 +167,7 @@ $smarty->assign('sSearchLink','<img '.createComIcon($root_path,'varrow.gif','0')
 $smarty->assign('sArchiveLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="patient_register_archive.php'.URL_APPEND.'&newdata=1&from=entry">'.$LDArchive.'</a>');
 
 $sCancel="<a href=";
-if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $sCancel.=$breakfile;
+if($_COOKIE['ck_login_logged'.$sid]) $sCancel.=$breakfile;
 	else $sCancel.='aufnahme_pass.php';
 $sCancel.=URL_APPEND.'><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt="'.$LDCancelClose.'"></a>';
 

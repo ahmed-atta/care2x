@@ -19,7 +19,7 @@ if(!isset($dept_nr)||!$dept_nr){
 	if($cfg['thispc_dept_nr']){
 		$dept_nr=$cfg['thispc_dept_nr'];
 	}else{
-		header("Location:select_dept.php".URL_REDIRECT_APPEND."&cat=$cat&target=catalog&retpath=$retpath");
+		header("location:select_dept.php".URL_REDIRECT_APPEND."&cat=$cat&target=catalog&retpath=$retpath");
 		exit;
 	}
 }
@@ -30,7 +30,7 @@ $product_obj=new Product;
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $invalid=0; // Set a toggler flag
 if(isset($cat))
@@ -50,7 +50,7 @@ else $invalid=1;
 
 if ($invalid) 
 {
-    header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); 
+    header("location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); 
 	exit;
 }
 
@@ -59,7 +59,7 @@ if(($mode=='search')&&($keyword!='')&&($keyword!='%')){
  	 include($root_path.'include/inc_products_search_mod.php');
  }elseif(($mode=='save')&&($bestellnum!='')&&($artikelname!='')){
 		//include($root_path.'include/inc_products_ordercatalog_save.php');
-		$saveok=$product_obj->SaveCatalogItem($HTTP_GET_VARS,$cat);
+		$saveok=$product_obj->SaveCatalogItem($_GET,$cat);
 }
 
 if(($mode=='delete')&&($keyword!='')) 

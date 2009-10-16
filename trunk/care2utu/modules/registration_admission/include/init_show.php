@@ -36,7 +36,7 @@ if(isset($pid) && ($pid!='')) {
 	if($data_obj=&$person_obj->getAllInfoObject()){
 		$zeile=$data_obj->FetchRow();
 		//while(list($x,$v)=each($zeile))	$$x=$v;
-		extract($zeile);       
+		extract($zeile);
 	} else {
 	  //
   }
@@ -52,8 +52,8 @@ if(!$GLOBAL_CONFIG['notes_preview_maxlen']) $GLOBAL_CONFIG['notes_preview_maxlen
 
 //$_SESSION['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
 $_SESSION['sess_full_pid']=$pid;
-		
-/* Check whether config foto path exists, else use default path */			
+
+/* Check whether config foto path exists, else use default path */
 $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
 require_once($root_path.'include/inc_photo_filename_resolve.php');
 
@@ -64,14 +64,14 @@ if(!isset($edit)) $edit=false;
 $current_encounter=$person_obj->CurrentEncounter($pid);
 
 if($_SESSION['sess_parent_mod']=='admission') {
-	
+
 	# Resolve the encounter number
 	if((!isset($encounter_nr)||!$encounter_nr)&&$_SESSION['sess_en']) $encounter_nr=$_SESSION['sess_en'];
 		elseif((isset($encounter_nr)&&$encounter_nr)&&!$_SESSION['sess_en']) $_SESSION['sess_en']=$encounter_nr;
 
 	$parent_admit=true;
 	$page_title=$LDAdmission;
-	
+
 	# Get the overall status
 	include_once($root_path.'include/care_api_classes/class_encounter.php');
 	$enc_obj=new Encounter;

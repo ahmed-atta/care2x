@@ -8,14 +8,14 @@ $LDDayTxt='Day';
 
 /**
 * A small dictionary:
-* ENT = Eye, Nose, Throath
-* OB-Gyne = Obstetrics-Gynecology
+* ENT = Eye, Nose, Throat
+* OB-Gyne = Obstetrics-Gynaecology
 */
 $dept=array('General Surgery',
 					'Emergency Surgery',
 					'Plastic Surgery',
 					'ENT',
-					'Opthalmology',
+					'Ophthalmology',
 					'Pathology',
 					'OB-Gyne',
 					'Physical Therapy',

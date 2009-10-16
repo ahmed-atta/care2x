@@ -14,7 +14,7 @@ define('LANG_FILE','drg.php');
 
 require_once('drg_inc_local_user.php');
 
-if (!$pn) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
+if (!$pn) {header("location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
@@ -33,21 +33,21 @@ $DRG_obj = new DRG($pn);
 
 $toggle=0;
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 if(isset($mode)){
 	/* Prepare the common data */
-	$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
-	//$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-	$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
-	$HTTP_POST_VARS['create_time']=date('YmdHis');
+	$_POST['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+	//$_POST['modify_id']=$_SESSION['sess_user_name'];
+	$_POST['create_id']=$_SESSION['sess_user_name'];
+	$_POST['create_time']=date('YmdHis');
 
 	switch($mode){
 	
 		case 'save':
 		{
 			$DRG_obj->useInternalDRGCodes(); // Set the core variables
-			$DRG_obj->setDataArray($HTTP_POST_VARS); // transfer the data
+			$DRG_obj->setDataArray($_POST); // transfer the data
 			if($DRG_obj->insertDataFromInternalArray()){
 				$oid=$db->Insert_ID(); // Get the insert ID
 				$group_nr=$DRG_obj->LastInsertPK('nr',$oid);
@@ -63,10 +63,10 @@ if(isset($mode)){
 		{
 			if(!$DRG_obj->EncounterDRGGroupExists($group_nr)){
 				$DRG_obj->useInternalDRG(); // Set the core variables to encounter DRG table
-				$HTTP_POST_VARS['clinician']=$_SESSION['sess_user_name'];
-				$HTTP_POST_VARS['encounter_nr']=$pn;
-				$HTTP_POST_VARS['date']=date('Y-m-d H:i:s');
-				$DRG_obj->setDataArray($HTTP_POST_VARS); // transfer the data
+				$_POST['clinician']=$_SESSION['sess_user_name'];
+				$_POST['encounter_nr']=$pn;
+				$_POST['date']=date('Y-m-d H:i:s');
+				$DRG_obj->setDataArray($_POST); // transfer the data
 				if($DRG_obj->insertDataFromInternalArray()){
 					$DRG_obj->groupNonGroupedItems($group_nr);
 					$saveok=true;

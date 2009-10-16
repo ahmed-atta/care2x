@@ -1,8 +1,8 @@
-<?php $insurance_tz_report->Display_Report_Header(); ?>
+<?php $insurance_tz->Display_Header(); ?>
 
 <BODY bgcolor=#ffffff link=#000066 alink=#cc0000 vlink=#000066  >
 
-<?php $insurance_tz_report->Dispay_Headline("Used Ceiling Report"); ?>
+<?php $insurance_tz->Display_Headline($LDReportsCeiling, 'insurance_reports_companies.php', 'Insurance Reports :: Company Overview'); ?>
 <br>
 
 
@@ -23,8 +23,13 @@
 
 	<?php $insurance_tz_report->Display_ReportCeiling($year); ?>
 
+	
+
 
 </table>
 
+<br><br>
 
-</BODY>
+<?php $insurance_tz->Display_Footer($LDReportsCeiling,'insurance_reports_companies.php', 'Insurance Reports :: Company Overview'); ?>
+
+<?php $insurance_tz->Display_Credits(); ?>

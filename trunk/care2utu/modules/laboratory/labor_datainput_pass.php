@@ -21,7 +21,7 @@ require_once($root_path.'global_conf/areas_allow.php');
 $allowedarea=&$allow_area['lab_w'];
 
 $fileforward="labor_data_patient_such.php?sid=$sid&lang=$lang&editmode=1";
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $breakfile="labor.php?sid=".$sid."&lang=".$lang;
 

@@ -60,7 +60,7 @@ switch($target)
 }
 
 $breakfile=$root_path.'modules/nursing/'.$breakfile;
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 # Data to append to url
 $append='&status='.$status.'&target='.$target.'&user_origin='.$user_origin;
 
@@ -144,7 +144,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
  $smarty->assign('pbHelp',"javascript:gethelp('laboratory_testrequest.php','Laboratories :: Test Request','lab')");
 
  # href for close button
- if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) $smarty->assign('breakfile',$root_path.'main/startframe.php'.URL_APPEND);
+ if($_COOKIE["ck_login_logged".$sid]) $smarty->assign('breakfile',$root_path.'main/startframe.php'.URL_APPEND);
 	else  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
@@ -159,7 +159,7 @@ $smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.select()"');
 ?>
 
 <ul>
-<FONT  class="prompt"><?php echo $LDTestRequestFor.$LDTestType[$target] ?></font>
+<FONT  class="prompt"><?php echo $LDTestRequestFor.' '.$LDTestType[$target] ?></font>
 <table width=90% border=0 cellpadding="0" cellspacing="0">
 <tr bgcolor="<?php echo $entry_block_bgcolor ?>" >
 <td ><p><br>
@@ -247,7 +247,7 @@ if ($enc_obj->record_count) {
 						echo "&nbsp;".$row['selian_pid'];
                         echo "</td>";
 
-					    if($HTTP_COOKIE_VARS[$local_user.$sid]) echo '
+					    if($_COOKIE[$local_user.$sid]) echo '
 						<td>&nbsp;';
 						echo "
 							<a href=\"".$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_APPEND."&pn=".$row['encounter_nr']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=\">";

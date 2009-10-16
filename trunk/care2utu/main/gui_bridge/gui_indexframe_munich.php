@@ -92,7 +92,7 @@ require("./menu/dtree/mainmenu.inc.php");
 <TABLE CELLPADDING=0 CELLSPACING=0 border=0>
 
 <?php
-//echo $HTTP_COOKIE_VARS['ck_config']; // used only in debugging related to user config data
+//echo $_COOKIE['ck_config']; // used only in debugging related to user config data
 //echo $GLOBALCONFIG['language_single']."<br>";
 if($GLOBALCONFIG['language_single']<>1){
 ?>

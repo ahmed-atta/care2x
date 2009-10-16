@@ -63,13 +63,13 @@ if(isset($_REQUEST['submit'])) {
 	if(($o_val->getErrors())==0){ 	
 		if (!empty($_REQUEST['visit_id'])) { 
 	 		if($o_arv_visit->updateARTVisit($o_val->getValues())) {
-	 			header("Location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
+	 			header("location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
 				exit;
 	 		}
 	 	}
 	 	else if(empty($_REQUEST['visit_id'])) { 
 	 		if($o_arv_visit->insertARTVisit($o_val->getValues())){
-	 			header("Location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
+	 			header("location: http://$host$uri/$filename".URL_REDIRECT_APPEND."$add_breakfile");
 				exit;
 	 		}
 	 	}

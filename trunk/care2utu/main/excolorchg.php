@@ -41,13 +41,13 @@ if ($mode=='change'){
 	include_once($root_path.'include/care_api_classes/class_userconfig.php');
 	$user=new UserConfig;
 
-	if($user->getConfig($HTTP_COOKIE_VARS['ck_config'])){
+	if($user->getConfig($_COOKIE['ck_config'])){
 
 		$config=&$user->getConfigData();
 	
 		$config=array_merge($config,$config_new);
 
-		if($user->saveConfig($HTTP_COOKIE_VARS['ck_config'],$config)){
+		if($user->saveConfig($_COOKIE['ck_config'],$config)){
 			if($mode=='ok'){
 				header("location:spediens.php?sid=$sid&lang=$lang&idxreload=j");
 			}

@@ -1,5 +1,6 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+error_reporting(E_ALL);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
@@ -12,13 +13,18 @@ require($root_path.'include/inc_environment_global.php');
 */
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_tz_billing.php');
-$enc_obj=new Encounter;
+//require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
+//$insurance_tz = New Insurance_tz;
+$enc_obj = new Encounter;
 $bill_obj = new Bill;
+
+require_once($root_path.'include/care_api_classes/class_tz_drugsandservices.php');
+$drg_obj = new DrugsAndServices;
 
 $in_outpatient= $_REQUEST['patient'] ;
 
-  define('LANG_FILE','billing.php');
-  require($root_path.'include/inc_front_chain_lang.php');
-  require ('gui/gui_billing_tz_quotation.php');
+define('LANG_FILE','billing.php');
+require($root_path.'include/inc_front_chain_lang.php');
+require ('gui/gui_billing_tz_quotation.php');
 
 ?>

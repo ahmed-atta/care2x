@@ -1,8 +1,8 @@
-<?php $insurance_tz_report->Display_Report_Header(); ?>
+<?php $insurance_tz->Display_Header(); ?>
 
 <BODY bgcolor=#ffffff link=#000066 alink=#cc0000 vlink=#000066  >
 
-<?php $insurance_tz_report->Dispay_Headline($LDReportPrepaidAmount); ?>
+<?php $insurance_tz->Display_Headline($LDReportPrepaidAmount,'insurance_reports_companies.php', 'Insurance Reports :: Company Overview'); ?>
 <br>
 
 
@@ -25,5 +25,8 @@
 
 </table>
 
+<br><br>
 
-</BODY>
+<?php $insurance_tz->Display_Footer($LDReportPrepaidAmount,'insurance_reports_companies.php', 'Insurance Reports :: Company Overview'); ?>
+
+<?php $insurance_tz->Display_Credits(); ?>
