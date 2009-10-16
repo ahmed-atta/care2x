@@ -1,6 +1,6 @@
 <?php
 	include 'xmlrpc/lib/xmlrpc.inc';
-	include 'config.inc';
+	include 'config.inc.php';
 
 	echo '<a href="index.php">Home</a></BR>';
  
