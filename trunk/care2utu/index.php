@@ -1,6 +1,12 @@
 <?php
 
 /*
+define (__TRACE_ENABLE__, true);
+define (__DEBUG_ENABLE__, true);
+define (__DEBUG_HOST__, "localhost");
+define (__DEBUG_PORT__, "9000");
+*/
+/*
 CARE 2X Integrated Information System for Hospitals and Health Care Organizations and Services
 Care 2002, Care2x, Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla
 
@@ -89,8 +95,8 @@ require_once('./classes/phpSniff/phpSniff.class.php'); # Sniffer for PHP
 
 function configNew(&$bn,&$bv,&$f,$i,&$uid)
 {
-  global $HTTP_USER_AGENT;
-  global $REMOTE_ADDR;
+//  global $HTTP_USER_AGENT;
+//  global $REMOTE_ADDR;
 
   # We disable the error reporting, because Konqueror 3.0.3 causes a  runtime error output that stops the program.
   #  could be a bug in phpsniff .. hmmm?
@@ -140,7 +146,7 @@ $ck_sid_buffer='ck_sid'.$sid;
 include('include/inc_init_crypt.php'); // initialize crypt
 $ciphersid=$enc_hcemd5->encodeMimeSelfRand($sid);
 setcookie($ck_sid_buffer,$ciphersid);
-$HTTP_COOKIE_VARS[$ck_sid_buffer]=$ciphersid;
+$_COOKIE[$ck_sid_buffer]=$ciphersid;
 
 #
 # Simple counter, counts all hits including revisits
@@ -157,10 +163,10 @@ if( $dbname == '')
 }
 
 
-if((isset($boot)&&$boot)||!isset($HTTP_COOKIE_VARS['ck_config'])||empty($HTTP_COOKIE_VARS['ck_config'])) {
+if((isset($boot)&&$boot)||!isset($_COOKIE['ck_config'])||empty($_COOKIE['ck_config'])) {
     configNew($bname,$bversion,$user_id,$ip,$cfgid);
 } else {
-    $user_id=$HTTP_COOKIE_VARS['ck_config'];
+    $user_id=$_COOKIE['ck_config'];
 }
 
 #
@@ -273,7 +279,7 @@ $_SESSION['sess_lang']=$lang;
 /*$ck_lang_buffer='ck_lang'.$sid;
 setcookie($ck_lang_buffer,$lang);*/
 
-/*$HTTP_COOKIE_VARS[$ck_lang_buffer]=$lang;*/
+/*$_COOKIE[$ck_lang_buffer]=$lang;*/
 	 //echo $mask;
 if((isset($mask)&&$mask)||!$config_exists||$savelang) {
 	if(!$config_exists) {
