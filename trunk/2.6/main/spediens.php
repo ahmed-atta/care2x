@@ -95,7 +95,7 @@ $aSubMenuText=array($LDPluginsTxt,
 # Prepare the submenu item links indexed by their template tags
 
 $aSubMenuItem=array('LDPlugins' => '<a href="'.$root_path.'plugins/plugins.php'.URL_APPEND.'">'.$LDPlugins.'</a>',
-										'LDBilling' => '<a href="'.$root_path.'modules/ecombill/ecombill_pass.php'.URL_APPEND.'">'. $LDBilling.'</a>',
+										'LDBilling' => '<a href="'.$root_path.'modules/webERP/index.php'.URL_APPEND.'">'. $LDBilling.'</a>',
 										'LDPersonellMngmnt' => '<a href="'.$root_path.'modules/personell_admin/personell_admin_pass.php'.URL_APPEND.'&retpath=spec&target=personell_reg">'.$LDPersonellMngmnt.'</a>',
 										'LDInsuranceCoMngr' => '<a href="'.$root_path.'modules/insurance_co/insurance_co_manage_pass.php'.URL_APPEND.'">'. $LDInsuranceCoMngr.'</a>',
 										'LDAddressMngr' => '<a href="'.$root_path.'modules/address/address_manage_pass.php'.URL_APPEND.'">'. $LDAddressMngr.'</a>',
