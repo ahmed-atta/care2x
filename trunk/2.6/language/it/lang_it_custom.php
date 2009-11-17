@@ -6,6 +6,7 @@ $IO_title='Bilancio Idrico';
 $DDC_title='Terapia diabetica';
 $NOC_title='Glasgow Coma Scale';
 $TC_title='Mobilizzazione';
+$DailyTherapy='Terapia';
 /* general */ 
 $LDEDIT='Modifica';
 $LDCLEAR='Elimina';
