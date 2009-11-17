@@ -9,50 +9,7 @@
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
--- 
--- Database: `care2x`
--- 
 
--- --------------------------------------------------------
-
--- 
--- Struttura della tabella `care_pharma_products_main`
--- 
-
-CREATE TABLE `care_pharma_products_main` (
-  `bestellnum` varchar(25) collate latin1_general_ci NOT NULL,
-  `artikelnum` tinytext collate latin1_general_ci NOT NULL,
-  `industrynum` tinytext collate latin1_general_ci NOT NULL,
-  `artikelname` tinytext collate latin1_general_ci NOT NULL,
-  `generic` tinytext collate latin1_general_ci NOT NULL,
-  `description` text collate latin1_general_ci NOT NULL,
-  `packing` tinytext collate latin1_general_ci NOT NULL,
-  `dose` tinytext collate latin1_general_ci NOT NULL,
-  `minorder` int(4) NOT NULL default '0',
-  `maxorder` int(4) NOT NULL default '0',
-  `proorder` tinytext collate latin1_general_ci NOT NULL,
-  `picfile` tinytext collate latin1_general_ci NOT NULL,
-  `encoder` tinytext collate latin1_general_ci NOT NULL,
-  `enc_date` tinytext collate latin1_general_ci NOT NULL,
-  `enc_time` tinytext collate latin1_general_ci NOT NULL,
-  `lock_flag` tinyint(1) NOT NULL default '0',
-  `medgroup` text collate latin1_general_ci NOT NULL,
-  `cave` tinytext collate latin1_general_ci NOT NULL,
-  `status` varchar(20) collate latin1_general_ci NOT NULL,
-  `minpcs` int(99) unsigned NOT NULL default '0',
-  `id_sub` int(11) NOT NULL COMMENT 'connection with the subproduct',
-  `warehouse` tinytext collate latin1_general_ci NOT NULL,
-  `history` text collate latin1_general_ci NOT NULL,
-  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP,
-  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (`bestellnum`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci MIN_ROWS=186 MAX_ROWS=10000000 AVG_ROW_LENGTH=186 PACK_KEYS=0 ROW_FORMAT=DYNAMIC;
-
--- 
--- Dump dei dati per la tabella `care_pharma_products_main`
--- 
 
 INSERT INTO `care_pharma_products_main` (`bestellnum`, `artikelnum`, `industrynum`, `artikelname`, `generic`, `description`, `packing`, `dose`, `minorder`, `maxorder`, `proorder`, `picfile`, `encoder`, `enc_date`, `enc_time`, `lock_flag`, `medgroup`, `cave`, `status`, `minpcs`, `id_sub`, `warehouse`, `history`, `modify_id`, `modify_time`, `create_id`, `create_time`) VALUES 
 ('bestellnum', 'artikelnum', 'industrynum', 'artikelname', 'generic', 'description', 'packing', 'dose', 0, 0, 'proorder', 'picfile', 'encoder', 'enc_date', 'enc_time', 0, 'medgroup', 'cave', 'status', 0, 0, 'warehouse', 'history', 'modify_id', '0000-00-00 00:00:00', 'create_id', '0000-00-00 00:00:00'),
