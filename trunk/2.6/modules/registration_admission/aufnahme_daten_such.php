@@ -13,6 +13,8 @@ require($root_path.'include/inc_environment_global.php');
 
 # Default value for the maximum nr of rows per block displayed, define this to the value you wish
 # In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
+///$db->debug=true;
+
 define('MAX_BLOCK_ROWS',30); 
 
 define('LANG_FILE','aufnahme.php');
@@ -40,7 +42,7 @@ if(isset($fwd_nr)&&$fwd_nr&&is_numeric($fwd_nr)){
 
 if(!isset($mode)) $mode='';
 
-# Initialize page�s control variables
+// Initialize page's control variables
 if($mode=='paginate'){
 	$searchkey=$_SESSION['sess_searchkey'];
 }else{
@@ -164,6 +166,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			# Filter if it is personnel nr
 			if($oitem=='encounter_nr') $sql2.='enc.'.$oitem.' '.$odir;
 				else $sql2.='reg.'.$oitem.' '.$odir;
+
 
 			$dbtable='FROM care_encounter as enc,care_person as reg ';
 

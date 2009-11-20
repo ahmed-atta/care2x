@@ -1,8 +1,4 @@
 <?php 
-require('./roots.php');
-require($root_path.'include/inc_environment_global.php');
-$lang_tables[]='plugins_VitalCalc.php';
-require($root_path.'include/inc_front_chain_lang.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>

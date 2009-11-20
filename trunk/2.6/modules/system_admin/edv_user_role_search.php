@@ -174,7 +174,9 @@ function gethelp(x,s,x1,x2,x3)
 <INPUT type="submit"  value="<?php echo $LDCancel ?>"></FORM>
 <p>
 
-
+<?php
+require($root_path.'include/inc_load_copyrite.php');
+?>
 
 
 </FONT>

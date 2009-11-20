@@ -138,7 +138,8 @@ $ck_sid_buffer='ck_sid'.$sid;
 include('include/inc_init_crypt.php'); // initialize crypt
 $ciphersid=$enc_hcemd5->encodeMimeSelfRand($sid);
 setcookie($ck_sid_buffer,$ciphersid);
-$HTTP_COOKIE_VARS[$ck_sid_buffer]=$ciphersid;
+$_COOKIE[$ck_sid_buffer]=$ciphersid;
+
 
 #
 # Simple counter, counts all hits including revisits
@@ -148,10 +149,10 @@ $HTTP_COOKIE_VARS[$ck_sid_buffer]=$ciphersid;
 // include('./counter/count.php');
 
 
-if((isset($boot)&&$boot)||!isset($HTTP_COOKIE_VARS['ck_config'])||empty($HTTP_COOKIE_VARS['ck_config'])) {
+if((isset($boot)&&$boot)||!isset($_COOKIE['ck_config'])||empty($_COOKIE['ck_config'])) {
     configNew($bname,$bversion,$user_id,$ip,$cfgid);
 } else {
-    $user_id=$HTTP_COOKIE_VARS['ck_config'];
+    $user_id=$_COOKIE['ck_config'];
 }
 
 #
@@ -245,12 +246,12 @@ if(file_exists($lang_file)) {
 #
 # The language detection is finished, we save it to session
 #
-$HTTP_SESSION_VARS['sess_lang']=$lang;
+$_SESSION['sess_lang']=$lang;
 
 /*$ck_lang_buffer='ck_lang'.$sid;
 setcookie($ck_lang_buffer,$lang);*/
 
-/*$HTTP_COOKIE_VARS[$ck_lang_buffer]=$lang;*/
+/*$_COOKIE[$ck_lang_buffer]=$lang;*/
 	 //echo $mask;
 if((isset($mask)&&$mask)||!$config_exists||$savelang) {
 	if(!$config_exists) {
@@ -284,13 +285,13 @@ if((isset($mask)&&$mask)||!$config_exists||$savelang) {
 #
 # save user_id to session
 #
-$HTTP_SESSION_VARS['sess_user_id']=$user_id;
-if(empty($HTTP_SESSION_VARS['sess_user_name'])) $HTTP_SESSION_VARS['sess_user_name']='default';
+$_SESSION['sess_user_id']=$user_id;
+if(empty($_SESSION['sess_user_name'])) $_SESSION['sess_user_name']='default';
 
 #
 # set the initial session timeout start value
 #
-$HTTP_SESSION_VARS['sess_tos']=date('His');
+$_SESSION['sess_tos']=date('His');
 
 #
 # Load character set fx
@@ -339,7 +340,6 @@ if($mask == 2){
 	$smarty->assign('sStartFrameSource',"src=\"main/indexframe.php?boot=1&lang=$lang&egal=$egal&cookie=$cookie&sid=$sid&mask=2\"");
 
 }else{
-	
 	$smarty->assign('sStartFrameSource',"src = \"main/indexframe.php?boot=1&mask=$mask&lang=$lang&cookie=$cookie&sid=$sid\"");
 	
 	#

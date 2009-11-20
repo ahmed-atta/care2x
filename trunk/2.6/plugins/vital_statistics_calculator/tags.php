@@ -5,12 +5,12 @@
 /*
 # Plug-in name that is displayed on the menu or submenu pages
 */
-$sPluginName = $LDVitalCalc;
+$sPluginName = 'Statistika Vitale';
 
 /*
 # Plug-in description that is displayed on some format of menu pages or as context sensitive info
 */
-$sPluginDescription = $LDVitalStatisticCalc;
+$sPluginDescription = 'Llogarites i Statistikave Vitale';
 
 /*
 # Plug-in start script or URL. This will be started when the user clicks on the

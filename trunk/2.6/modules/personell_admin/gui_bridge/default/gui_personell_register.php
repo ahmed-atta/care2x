@@ -489,8 +489,7 @@ echo $calendar->show_calendar($calendar,$date_format,'contract_end',$contract_en
 <a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>"   align="absmiddle"></a> 
 -->
 <?php if($error==1) 
-echo '<input type="hidden" name="forcesave" value="1">
-								<input  type="submit" value="'.$LDForceSave.'">';
+echo '<input type="hidden" name="forcesave" value="1"><input  type="submit" value="'.$LDForceSave.'">';
  ?>
 </form>
 

@@ -9,12 +9,12 @@ extract($_POST);
 $tmpBestellNum = '';
 for($i=0;$i<=$maxelements;$i++){
 	if($_POST['b'.$i])
-		$tmpBestellNum .=  $_POST['b'.$i] .',';
+		$tmpBestellNum .=  "'" . $_POST['b'.$i] .'\',';
 }
 if($tmpBestellNum) $tmpBestellNum = substr($tmpBestellNum, 0, -1);  
 # clean input data
 $keyword=addslashes(trim($_POST['search']));
-//$db->debug=true;
+///$db->debug=true;
 
 $sql="SELECT DISTINCT $dbtable.* FROM $dbtable RIGHT JOIN $dbtablejoin ON $dbtable.bestellnum = $dbtablejoin.bestellnum 
 		WHERE $dbtablejoin.pcs > 0 AND ( $dbtable.bestellnum='%$keyword%'

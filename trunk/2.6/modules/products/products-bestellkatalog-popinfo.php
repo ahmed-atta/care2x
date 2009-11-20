@@ -18,7 +18,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $bcat=true;
 
 # Load search routine
-require($root_path.'include/inc_products_search_mod.php');
+require($root_path.'include/inc_products_search_mod_datenbank.php');
 
 # Start Smarty templating here
  /**

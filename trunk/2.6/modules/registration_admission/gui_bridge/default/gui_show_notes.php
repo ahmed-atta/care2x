@@ -85,6 +85,22 @@ function popNotesDetails(n,t) {
 	HISTWIN<?php echo $sid ?>=window.open(urlholder,"histwin<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
 }
 
+
+// Codice aggiunto per il foglio di anamnesi
+function yellow(pn){
+	urlholder="../nursing/foglioanamnesi.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&dept_nr=$ward_nr&location_nr=$ward_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
+	patientwin=window.open(urlholder,pn,"width=1000,height=600,menubar=no,resizable=yes,scrollbars=yes");
+}
+//
+
+// Codice aggiunto per il foglio di esame obiettivo
+function target(pn){
+	urlholder="../nursing/fogliotarget.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&dept_nr=$ward_nr&location_nr=$ward_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
+	patientwin=window.open(urlholder,pn,"width=1000,height=600,menubar=no,resizable=yes,scrollbars=yes");
+}
+//
+
+
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
 
 -->

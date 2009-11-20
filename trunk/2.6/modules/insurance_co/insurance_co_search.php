@@ -25,7 +25,7 @@ $ins_obj=new Insurance;
 $breakfile='insurance_co_manage.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
 
-# Initialize page�s control variables
+# Initialize page´s control variables
 if($mode!='paginate'){
 	# Reset paginator variables
 	$pgx=0;

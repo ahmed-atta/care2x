@@ -48,13 +48,13 @@ if(isset($mode)&&($mode=='save')){
 		if($encoder=='') 	$encoder=$ck_prod_db_user; 
 		// save the uploaded picture
 		// if a pic file is uploaded move it to the right dir
-		if(is_uploaded_file($_FILES['bild']['tmp_name']) && $_FILES['bild']['size']){
-			$picext=substr($_FILES['bild']['name'],strrpos($_FILES['bild']['name'],'.')+1);
+		if(is_uploaded_file($HTTP_POST_FILES['bild']['tmp_name']) && $HTTP_POST_FILES['bild']['size']){
+			$picext=substr($HTTP_POST_FILES['bild']['name'],strrpos($HTTP_POST_FILES['bild']['name'],'.')+1);
 			# Check if the file format is allowed
 			if(stristr($picext,'gif')||stristr($picext,'jpg')||stristr($picext,'png'))
 			{
 			    $n=0;
-			    $picfilename=$_FILES['bild']['name'];
+			    $picfilename=$HTTP_POST_FILES['bild']['name'];
 			    list($f,$x)=explode('.',$picfilename);
 			    $idx=substr($picfilename,strpos($picfilename,'[')+1);
 			    if($idx)
@@ -73,7 +73,7 @@ if(isset($mode)&&($mode=='save')){
 				# Prepend the order nr to the filename
 				$picfilename=$bestellnum.'_'.$picfilename;
 				# Now save the image to the hard drive
-			  	copy($_FILES['bild']['tmp_name'],$imgpath.$picfilename);
+			  	copy($HTTP_POST_FILES['bild']['tmp_name'],$imgpath.$picfilename);
 		    }
 			else
 			{
@@ -93,7 +93,7 @@ if(isset($mode)&&($mode=='save')){
 							'description'=>$besc,
 							'picfile'=>$picfilename,
 							'packing'=>$pack,
-							'doza'=>$doza,
+							'dose'=>$dose,
 							'minorder'=>$minorder,
 							'maxorder'=>$maxorder,
 							'proorder'=>$proorder,
@@ -104,7 +104,7 @@ if(isset($mode)&&($mode=='save')){
 							'medgroup'=>$medgroup,
 							'cave'=>$caveflag,
 							'minpcs'=>$minpcs,
-							'history'=>"Krijuar ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n",
+							'history'=>"Created ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n",
 							'create_id'=>$_SESSION['sess_user_name'],
 							'create_time'=>date('YmdHis')
 							 );
@@ -120,7 +120,7 @@ if(isset($mode)&&($mode=='save')){
 					 	$tail="generic='$generic',
 							description='$besc',
 							packing='$pack',
-							doza='$doza',
+							dose='$dose',
 							minorder='$minorder',
 							maxorder='$maxorder',
 							proorder='$proorder',

@@ -10,18 +10,18 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['depot'];
+//$allowedarea=&$allow_area['depot'];
 
 $append=URL_REDIRECT_APPEND."&cat=medlager&from=$src&userck=";
 
-switch($mode)
-{
+switch($mode) {
 	case "archive":$title=$LDOrderArchive;
 						$allowedarea[] = '_a_1_meddepotdbadmin';
 						$src="archivepass";
@@ -45,7 +45,27 @@ switch($mode)
 						$userck="ck_prod_order_user";
 						$fileforward=$root_path."modules/products/products-bestellkatalog-edit.php".$append.$userck."&target=catalog&from=".$src;
 						break;	
+	case "supplier":  $title=$LDSupplier;
+						$allowedarea[] = '_a_1_meddepotdbadmin';
+						$src="catalogpass";
+						$userck="ck_supplier_db_user";
+						$fileforward=$root_path."modules/supplier/supplier.php".$append.$userck;
+						break;
+	case "supply" : $title=$LDSupply;
+						$allowedarea[] = '_a_1_meddepotdbadmin';
+						$append=URL_REDIRECT_APPEND."&cat=supply&from=$src&userck=";
+						$src="catalogpass";
+						$userck="ck_supply_db_user";
+						$fileforward=$root_path."modules/supplier/supply.php".$append.$userck;
+						break;	
+	case "reports"	: $title="Reports";
+						$allowedarea[] = '_a_3_meddepotorder';
+						$src="orderpass";
+						$userck="ck_prod_order_user";
+					    $fileforward=$root_path."modules/med_depot/reports/index.php".$append.$userck;;
+					    break;
 	default: 	$title=$LDPharmaOrder;
+						$allowedarea[] = '_a_3_meddepotorder';
 						$src="orderpass";
 					    $mode="order";
 						$userck="ck_prod_order_user";
@@ -70,9 +90,7 @@ $minimal=1;
 require($root_path.'include/inc_passcheck_head.php');
 ?>
 
-<BODY  <?php if (!$nofocus) echo 'onLoad="document.passwindow.userid.select()"'; echo  ' bgcolor='.$cfg['body_bgcolor']; 
- if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } 
-?>>
+<BODY  <?php if (!$nofocus) echo 'onLoad="document.passwindow.userid.select()"'; echo  ' bgcolor='.$cfg['body_bgcolor'];?>>
 
 <p>
 <FONT    SIZE=-1  FACE="Arial">
@@ -84,9 +102,9 @@ require($root_path.'include/inc_passcheck_head.php');
 <?php require($root_path.'include/inc_passcheck_mask.php') ?>  
 
 <p>
-<!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $LDMedDepot $title " ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $LDMedDepot $title " ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDWhat2Do $LDMedDepot $title " ?>?</a><br>
- -->
+
 <p>
 
 <?php

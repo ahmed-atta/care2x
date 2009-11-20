@@ -15,6 +15,7 @@ define('NO_CHAIN',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 $cksid='ck_sid'.$sid;
+
 if(!$_COOKIE[$cksid] && !$cookie) { header("location:".$root_path."cookies.php?lang=$lang&startframe=1"); exit;}
 
 if(!session_is_registered('sess_news_nr')) session_register('sess_news_nr');

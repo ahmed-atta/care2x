@@ -201,8 +201,7 @@ function cleandata(&$buf)
 	return strtr($buf,",.()*+-","_______");
 }
 
-function drawAdditional($tag,&$codebuf,&$databuf,$bkcolor,&$alttag)
-{
+function drawAdditional($tag,&$codebuf,&$databuf,$bkcolor,&$alttag) {
 	global $LDClose, $img;
 	
 							//echo '&nbsp;<a href="javascript:ssm(\''.$tag.'_'.cleandata($codebuf).'\'); clearTimeout(timer)"><img src="../img/l_arrowGrnSm.gif" border=0 width=12 height=12 alt="'.$alttag.'" align="absmiddle"></a>';
@@ -219,11 +218,9 @@ function drawAdditional($tag,&$codebuf,&$databuf,$bkcolor,&$alttag)
 										</TD></TR></TABLE></TD></TR></TBODY></TABLE></div>';
 }
 
-function drawdata(&$data,&$advdata)
-{
+function drawdata(&$data,&$advdata){
 	global $toggle,$parentcode,$grandcode,$priocolor,$LDInclusive,$LDExclusive,$LDNotes,$LDRemarks,$LDExtraCodes,$LDAddCodes;
  	global $idx,$iscolor,$keyword,$showonly,$parentdata, $img;
-	
 						echo "
 						<tr class=";
 						if($priocolor||$iscolor) echo "hilite>";

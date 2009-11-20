@@ -50,7 +50,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 //$db->debug=1;
 
-# Initialize page�s control variables
+// Initialize page's control variables
 if($mode=='paginate'){
 	$searchkey=$_SESSION['sess_searchkey'];
 }else{

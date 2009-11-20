@@ -136,12 +136,6 @@ $smarty->assign('sRowSpan',"rowspan=\"$iRowSpan\"");
 $smarty->assign('LDBday',$LDBday);
 $smarty->assign('sBdayDate',@formatDate2Local($date_birth,$date_format));
 
-# Salvo Rossitto 28/11/07
-#$smarty->assign('LDSSSNr',$LDSSSNr);
-#$smarty->assign('sBdayDate',@formatDate2Local($date_birth,$date_format));
-##
-
-
 $smarty->assign('LDSex',$LDSex);
 if($sex=='m') $smarty->assign('sSexType',$LDMale);
 	elseif($sex=='f') $smarty->assign('sSexType',$LDFemale);

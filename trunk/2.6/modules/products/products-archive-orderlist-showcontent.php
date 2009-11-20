@@ -24,16 +24,17 @@ $thisfile='products-archive-orderlist-showcontent.php';
 $searchfile='products-archive.php';
 $returnfile="products-archive.php?sid=$sid&lang=$lang&cat=$cat&userck=$userck";
 
-switch($cat)
-{
+switch($cat) {
 	case 'pharma':
 							$title=$LDPharmacy;
 							$dbtable='care_pharma_orderlist';
+		$dbtableSub='care_pharma_orderlist_sub';
 							$breakfile=$root_path.'modules/pharmacy/apotheke.php?sid='.$sid.'&lang='.$lang;
 							break;
 	case 'medlager':
 							$title=$LDMedDepot;
 							$dbtable='care_med_orderlist';
+		$dbtableSub='care_med_orderlist_sub';
 							$breakfile=$root_path.'modules/med_depot/medlager.php?sid='.$sid.'&lang='.$lang;
 							break;
 	default:  {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
@@ -85,13 +86,11 @@ $img_info=createComIcon($root_path,'info3.gif','0');
 
 <script language="javascript" >
 <!-- 
-function pruf(d)
-{
+function pruf(d) {
 	kw=d.keyword;
 	var k=kw.value; 
 	//if(k=="") return false;
-	if((k=="")||(k==" ")||(!(k.indexOf('%')))||(!(k.indexOf('_'))))
-	{
+	if((k=="")||(k==" ")||(!(k.indexOf('%')))||(!(k.indexOf('_')))) {
 		kw.value="";
 		kw.focus();
 		return false;
@@ -99,8 +98,7 @@ function pruf(d)
 	return true;
 }
 
-function popinfo(b)
-{
+function popinfo(b) {
 	urlholder="products-bestellkatalog-popinfo.php<?php echo URL_REDIRECT_APPEND; ?>&cat=<?php echo $cat ?>&keyword="+b+"&mode=search";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
@@ -122,12 +120,7 @@ ob_start();
 ?>
 
 <ul>
-
-<p>
-<?php 
-
-//$db->debug=1;
-
+	<p><?php 
 require($root_path.'include/inc_products_archive_search_form.php');
 
 $rows=0;
@@ -135,10 +128,12 @@ $rows=0;
 /* Load the date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');
 
-$sql="SELECT * FROM $dbtable WHERE order_nr='$order_nr'";
+	$sql="SELECT * FROM $dbtable
+	INNER JOIN $dbtableSub ON ($dbtable.order_nr =
+	$dbtableSub.order_nr_sub)
+	WHERE order_nr='$order_nr'";
 
-if($ergebnis=$db->Execute($sql))
-{
+	if($ergebnis=$db->Execute($sql)) {
 	$rows=$ergebnis->RecordCount();
 }else {
 	echo "$LDDbNoRead<br>";
@@ -180,8 +175,8 @@ if($rows>0){
 	echo '</td>
 		<td>'.formatDate2Local($content['order_date'],$date_format).'</td>
 		<td >'.convertTimeToLocal($content['order_time']).'</td>
-		<td>'.$content['modify_id'].'</td>
-		<td>'.substr($content['validator'],0,strpos($content['validator'],'@')).'</td>
+		<td>'.$content['create_id'].'</td>
+		<td>'.$content['validator'].'</td>
 		<td>'.formatDate2Local($content['sent_datetime'],$date_format).'</td>
 		<td>'.convertTimeToLocal(formatDate2Local($content['sent_datetime'],$date_format,0,1)).'</td>
 		<td>'.$content['priority'].'</td>
@@ -193,10 +188,10 @@ if($rows>0){
 
 	//++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++
 	$tog=1;
-	$artikeln=explode(' ',$content['articles']);
+
 	echo '<form name=actlist>
 			<font size=2 color="#800000">';
-	if (sizeof($artikeln)==1) echo $LDOrderedArticle; else echo  $LDOrderedArticleMany;
+		if (sizeof($content)==1) echo $LDOrderedArticle; else echo  $LDOrderedArticleMany;
 
 	$LDFinindex[]='';
 	echo '</font>
@@ -209,32 +204,36 @@ if($rows>0){
 	echo '</tr>';
 
 	$i=1;
-	for($n=0;$n<sizeof($artikeln);$n++){
-
-		parse_str($artikeln[$n],$r);
-
+		for($n=0;$n<sizeof($content);$n++){
 		if($tog){
 			echo '<tr class="wardlistrow2">'; $tog=0;
 		}else{
 			echo '<tr class="wardlistrow2">'; $tog=1;
 		}
-
 		echo '
 					<td><font color="#000080">'.$i.'</td>
-					<td>'.$r['artikelname'].'</td>
-					<td>'.$r['pcs'].'</td>
-					<td ><nobr>X '.$r['proorder'].'</nobr></td>
-					<td>'.$r['bestellnum'].'</td>';
-					echo '<td><a href="javascript:popinfo(\''.$r['bestellnum'].'\')" ><img '.$img_info.' alt="'.$LDOpenInfo.$r['artikelname'].'"></a></td>
+					<td>'.$content['artikelname'].'</td>
+					<td>'.$content['pcs'].'</td>
+					<td ><nobr>X '.$content['proorder'].'</nobr></td>
+					<td>'.$content['dose'].'</td>
+					<td>'.$content['unit'].'</td>		
+					<td>'.$content['price'].'</td>		
+					<td>'.$content['price'] * $content['pcs'].'</td>	
+					<td>'.$content['expiry'] .'</td>
+					<td>'.$content['bestellnum'].'</td>';		
+			echo '<td><a href="javascript:popinfo(\''.$content['bestellnum'].'\')" ><img '.$img_info.' alt="'.$LDOpenInfo.$content['artikelname'].'"></a></td>
 				</tr>';
 		$i++;
+			$content=$ergebnis->FetchRow();
  	}
 	echo '</table>
 			</form>
 			';
 }
- ?>
-<a href="<?php echo $returnfile; ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+	?> <a href="<?php echo $returnfile; ?>"><img
+	<?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+	
+	
 </table>
 	
 </ul>

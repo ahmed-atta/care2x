@@ -21,8 +21,7 @@ if(!isset($keyword)) $keyword='';
 
 $thisfile='products-archive.php';
 $searchfile=$thisfile;
-switch($cat)
-{
+switch($cat) {
 	case 'pharma':	
 							$title="$LDPharmacy $LDOrderArchive";
 							$dbtable='care_pharma_orderlist';

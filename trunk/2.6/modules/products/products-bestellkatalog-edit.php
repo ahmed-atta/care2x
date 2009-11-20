@@ -56,7 +56,7 @@ if ($invalid)
 
 if(($mode=='search')&&($keyword!='')&&($keyword!='%')){
  	if($keyword=="*%*") $keyword="%";
- 	 include($root_path.'include/inc_products_search_mod.php');
+ 	 include($root_path.'include/inc_products_search_mod_datenbank.php');
  }elseif(($mode=='save')&&($bestellnum!='')&&($artikelname!='')){
 		//include($root_path.'include/inc_products_ordercatalog_save.php');
 		$saveok=$product_obj->SaveCatalogItem($_GET,$cat);

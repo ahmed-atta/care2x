@@ -17,7 +17,7 @@ $sql="SELECT care_pharma_products_main.bestellnum,
          INNER JOIN care_pharma_products_main_sub ON (
          care_pharma_products_main.bestellnum =
           care_pharma_products_main_sub.bestellnum)
-    WHERE care_pharma_products_main_sub.bestellnum = $keyword
+    WHERE care_pharma_products_main_sub.bestellnum = '$keyword'
     GROUP BY care_pharma_products_main.bestellnum";
 
 $pharmaStock=$db->Execute($sql);
@@ -37,7 +37,7 @@ $sql="SELECT sum(care_encounter_prescription_sub.quantity) AS presc,
           care_encounter_prescription_sub.article
     FROM care_encounter_prescription_sub
     WHERE care_encounter_prescription_sub.`status` = 'saved'
-    AND care_encounter_prescription_sub.bestellnum = $keyword
+    AND care_encounter_prescription_sub.bestellnum = '$keyword'
     GROUP BY care_encounter_prescription_sub.bestellnum,
       	care_encounter_prescription_sub.article";
 

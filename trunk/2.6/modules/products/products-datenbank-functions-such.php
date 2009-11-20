@@ -14,12 +14,11 @@ define('LANG_FILE','products.php');
 $local_user='ck_prod_db_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-//$db->debug=1;
+///$db->debug = 1;
 
 $thisfile=basename(__FILE__);
 
-switch($cat)
-{
+switch ( $cat) {
 	case "pharma":	
 							$title=$LDPharmacy;
 							$breakfile=$root_path."modules/pharmacy/apotheke-datenbank-functions.php".URL_APPEND."&userck=$userck";
@@ -30,10 +29,15 @@ switch($cat)
 							$breakfile=$root_path."modules/med_depot/medlager-datenbank-functions.php".URL_APPEND."&userck=$userck";
 							$imgpath=$root_path."med_depot/img/";
 							break;
-	default:  {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+	default :
+		{
+			header ( "Location:" . $root_path . "language/" . $lang . "/lang_" . $lang . "_invalid-access-warning.php" );
+			exit ();
+		}
+		;
 }
 
-require($root_path."include/inc_products_search_mod.php");
+require ($root_path . "include/inc_products_search_mod_datenbank.php");
 
 # Start Smarty templating here
  /**
@@ -52,6 +56,7 @@ require($root_path."include/inc_products_search_mod.php");
  # href for the back button
 // $smarty->assign('pbBack',$returnfile);
 
+
  # href for the help button
  $smarty->assign('pbHelp',"javascript:gethelp('products_db.php','search','$from','$cat')");
 
@@ -65,17 +70,14 @@ require($root_path."include/inc_products_search_mod.php");
  $smarty->assign('sOnLoadJs','onLoad="document.suchform.keyword.select()"');
 
  # Collect javascript code
- ob_start()
+ob_start ()?>
 
-?>
 
 <script language="javascript" >
 <!--
 
-function pruf(d)
-{
-	if(d.keyword.value=="")
-	{
+function pruf(d) {
+	if(d.keyword.value=="") {
 		d.keyword.focus();
 		 return false;
 	}
@@ -94,6 +96,7 @@ $smarty->append('JavaScript',$sTemp);
 
 # Buffer page output
 
+
 ob_start();
 
 ?>
@@ -101,16 +104,15 @@ ob_start();
 <a name="pagetop"></a>
 
 <ul>
-<p>
-<br>
+	<p><br>
   
 <form action="<?php echo $thisfile?>" method="get" name="suchform" onSubmit="return pruf(this)">
 
 <table border=0 cellspacing=2 cellpadding=3>
 	<tr bgcolor=#ffffdd>
-		<td colspan=2>
-			<FONT color="#800000"><?php echo $LDSearchWordPrompt ?></font>
-			<br><p>
+			<td colspan=2><FONT color="#800000"><?php echo $LDSearchWordPrompt?></font>
+			<br>
+			<p>
 		</td>
 	</tr>
 	<tr bgcolor=#ffffdd>
@@ -140,11 +142,9 @@ ob_start();
 <hr>
 
 <?php
-
-# Workaround to force display of results  form
+// Workaround to force display of results  form
 $bShowThisForm = TRUE;
 require($root_path."include/inc_products_search_result_mod.php");
-
 ?>
 
 <form action="<?php echo $breakfile?>" method="post">
@@ -153,15 +153,15 @@ require($root_path."include/inc_products_search_result_mod.php");
 <input type="hidden" name="userck" value="<?php echo $userck ?>">
 <input type="image" <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border=0 width=103 height=24 alt="<?php echo $LDBack2Menu ?>">
 </form>
-<?php if ($from=="multiple")
+<?php
+if ($from == "multiple")
 echo '
 <form name=backbut onSubmit="return false">
 <input type="hidden" name="sid" value="'.$sid.'">
 <input type="hidden" name="lang" value="'.$lang.'">
 <input type="hidden" name="userck" value="'.$userck.'">
 <input type="submit" value="'.$LDBack.'" onClick="history.back()">
-</form>
-';
+</form>';
 ?>
 </ul>
 
@@ -171,6 +171,7 @@ $sTemp = ob_get_contents();
 ob_end_clean();
 
 # Assign the form template to mainframe
+
 
  $smarty->assign('sMainFrameBlockData',$sTemp);
 

@@ -48,7 +48,7 @@ $photo_filename='nopic';
 
 $dbtable='care_encounter';
 
-///$db->debug=1;
+//$db->debug=1;
 
 /*		$sql='SELECT * FROM '.$dbtable.' AS enc LEFT JOIN care_person AS reg ON reg.pid = enc.pid
 		         WHERE enc.encounter_nr="'.$encounter_nr.'"';

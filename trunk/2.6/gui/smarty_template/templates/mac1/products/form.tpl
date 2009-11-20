@@ -32,6 +32,10 @@
 		<td>{{$sPackingInput}}</td>
 		</tr>
 		<tr>
+		<td align=right width=140>{{$LDDoza}}</td>
+		<td>{{$sDozaInput}}</td>
+		</tr>		
+		<tr>
 		<td align=right width=140>{{$LDCAVE}}</td>
 		<td>{{$sCAVEInput}}</td>
 		</tr>
@@ -59,6 +63,10 @@
 		<td align=right width=140>{{$LDLicenseNr}}</td>
 		<td>{{$sLicenseNrInput}}</td>
 		</tr>
+		<tr>
+		<td align=right width=140>{{$LDMinPieces}}</td>
+		<td>{{$sMinPiecesInput}}</td>
+		</tr>						
 		<tr>
 		<td align=right width=140>{{$LDPicFile}}</td>
 		<td>{{$sPicFileInput}}</td>

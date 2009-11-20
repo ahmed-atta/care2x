@@ -18,8 +18,9 @@ function setDate(elindex, date_format, lang){
 	   case 'fr':  today = 'a';       // h = aujourd'hui
 	              yesterday = 'h';   // a = hier
 				  break; 
-		 case 'sq':  today = 's';       // s = sot
-	              yesterday = 'n';   // n = neser
+		case 'sq':  today = 's';       // s = sot //#43
+	              yesterday = 'd';   // d = dje //#43
+	              tomorrow = 'n'	 // n = neser //#43
 				  break;   
 	   default: today = 't';         // t = today
 	            yesterday = 'y';     // y = yesterday
@@ -30,44 +31,49 @@ function setDate(elindex, date_format, lang){
     buf = buf.toLowerCase();
 	buf = buf.charAt(buf.length - 1);
 	/* Check whether it is a possible shortcut */
-	if (((buf<".")|| (buf > "9")) && (buf!="/") && (buf!='-'))
-    {
+	if (((buf<".")|| (buf > "9")) && (buf!="/") && (buf!='-')) {
 	    /* Get the date today */
 	    jetzt=new Date();
 	    datum=jetzt.getDate();
 	    monat=jetzt.getMonth();
 	    jahr=jetzt.getFullYear();
 	
-		if(buf == today)
-		{ 
+		if(buf == today) { 
 		    make_time = 1;
-		}
-	    else if(buf == yesterday)  //* If yesterday, move one day backwards
-		{
+		} else if(buf == yesterday) { //* If yesterday, move one day backwards
 			datum--;
 			
-			if(datum<1)
-			{
+			if(datum<1) {
 				datum = 1;
 				monat--;
 				
-				if(monat<0)
-				{
+				if(monat<0) {
 					monat = 0; 
 					jahr--;
 				}
 			}
 			
 			make_time =1;
+		} else if(buf == tomorrow) { //* If tomorrow, move one day afterwards
+			datum++;
+			
+			if(datum<1) {
+				datum = 1;
+				monat++;
+				
+				if(monat<0) {
+					monat = 0; 
+					jahr++;
+				}
 		}
-		else
-		 {
+			
+			make_time =1;
+		} else {
 		       actual=''; //* Set to empty to erase the input
 		 }
 	    
 		//* If a short cut compose date according to format 
-		if(make_time == 1)
-		{
+		if(make_time == 1) {
 		
 		    //* Adjust month to correspond to 12 = December, 1 = January, etc. 
 	        monat++; 
@@ -78,8 +84,7 @@ function setDate(elindex, date_format, lang){
 			
 		
 	        //* Now compose the date according to the format 
-		    switch(date_format.toLowerCase())
-		    {
+		    switch(date_format.toLowerCase()) {
 		        case 'yyyy-mm-dd': actual = jahr + '-' + monat + '-' + datum;
 				                    break;
 						case 'dd.mm.yyyy':  actual = datum + '.' + monat + '.' + jahr;
@@ -96,9 +101,7 @@ function setDate(elindex, date_format, lang){
 	
 	    elindex.value=actual; //* Now set the value of the element
 	    return true;
-	}
-	else
-	{
+	} else {
 	   return false;
 	}
 }

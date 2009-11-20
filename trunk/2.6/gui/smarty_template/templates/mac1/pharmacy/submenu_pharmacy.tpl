@@ -23,13 +23,14 @@
 					{{include file="common/submenu_row_spacer.tpl"}}
 
 					{{$LDPharmaDb}}
-					{{include file="common/submenu_row_spacer.tpl"}}
-
-					{{$LDRedList}}
-
+					
 					{{include file="common/submenu_row_spacer.tpl"}}
 
 					{{$LDOrderBotActivate}}
+
+					{{include file="common/submenu_row_spacer.tpl"}}
+
+					{{$LDNews}}
 						
 					{{include file="common/submenu_row_spacer.tpl"}}
 

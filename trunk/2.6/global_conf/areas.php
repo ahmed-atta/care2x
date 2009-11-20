@@ -60,6 +60,7 @@ $area_opt=array(
 						  '_a_2_meddepotreception' =>  $_a_2_meddepotreception,
 						  '_a_3_meddepotorder' =>  $_a_3_meddepotorder,
 						  '_a_4_meddepotread' =>  $_a_4_meddepotread,
+						  '_a_5_meddeporsupplier' => $_a_5_meddepotsupplier,
 						  
 							/* Group start*/
 						   'title_docs' => $title_docs,

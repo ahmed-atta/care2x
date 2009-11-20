@@ -71,15 +71,15 @@ $xray_diagnosis_localpath="../../radiology/diagnosis/";
 $dicom_img_localpath='radiology/dicom_img/';
 
 # Dicom path used for the Nagoya java applet dicom viewer
-$dicom_img_http="$main_url/radiology/dicom_img/";
+$dicom_img_http="$main_url/imed/radiology/dicom_img/";
 /*
 webcam http server address... the webcam files are deposited to this server through one or
 several ftp servers with different ports
 */
-$cam_http_1="$httprotocol://$fotoserver_ip/modules/video_monitor/cam_img/";
-$cam_http_2="$httprotocol://$fotoserver_ip/modules/video_monitor/cam_img/";
-$cam_http_3="$httprotocol://$fotoserver_ip/modules/video_monitor/cam_img/";
-$cam_http_4="$httprotocol://$fotoserver_ip/modules/video_monitor/cam_img/";
+$cam_http_1="http://192.168.11.158/view/index.shtml";
+$cam_http_2="$httprotocol://$fotoserver_ip/iMed/modules/video_monitor/cam_img/";
+$cam_http_3="$httprotocol://$fotoserver_ip/iMed/modules/video_monitor/cam_img/";
+$cam_http_4="$httprotocol://$fotoserver_ip/iMed/modules/video_monitor/cam_img/";
 $cam_http_5="";
 $cam_http_6="";
 $cam_http_7="";

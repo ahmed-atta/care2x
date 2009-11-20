@@ -14,7 +14,7 @@ define ( 'LANG_FILE', 'nursing.php' ) ;
 $local_user = 'ck_pflege_user' ;
 require_once ($root_path . 'include/inc_front_chain_lang.php') ;
 
-$db->debug = true ;
+///$db->debug = true ;
 $thisfile = basename ( __FILE__ ) ;
 /* Create charts object */
 require_once ($root_path . 'include/care_api_classes/class_charts.php') ;

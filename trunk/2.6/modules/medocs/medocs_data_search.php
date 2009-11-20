@@ -37,7 +37,7 @@ $entry_body_bgcolor='#ffffff';
 if(!isset($searchkey)) $searchkey='';
 if(!isset($mode)) $mode='';
 
-# Initialize page�s control variables
+# Initialize page's control variables
 if($mode=='paginate'){
 	$searchkey=$_SESSION['sess_searchkey'];
 }else{
@@ -173,7 +173,7 @@ if($parent_admit) $sTitleNr= ($_SESSION['sess_full_en']);
 	else $sTitleNr = ($_SESSION['sess_full_pid']);
 
 # Title in the toolbar
- $smarty->assign('sToolbarTitle',"Medocs :: $LDSearch ");
+ $smarty->assign('sToolbarTitle',"$LDMedocs :: $LDSearch ");
 
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('medocs_search.php')");

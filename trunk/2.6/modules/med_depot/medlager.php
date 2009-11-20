@@ -63,8 +63,7 @@ if(ereg("_a_1_meddepotdbadmin",$access->PermissionAreas()))
 
 if($stb)
 echo '
-function startbot()
-{
+function startbot() {
 	medibotwin'.$sid.'=window.open("'.$root_path.'modules/products/products-bestellbot.php'.URL_REDIRECT_APPEND.'&cat=medlager&userck='.$userck.'","medibotwin'.$sid.'","width=200,height=180,menubar=no,resizable=yes,scrollbars=yes");
 }
 ';
@@ -101,7 +100,7 @@ $aSubMenuText=array($LDPharmaOrderTxt,
 										$LDOrderBotActivateTxt,
 										$LDSupplierTxt,
 										$LDSupplyTxt,
-										$LDDepotReportsTxt
+					$LDRaporteDepoTxt
 										);
 
 # Prepare the submenu item links indexed by their template tags
@@ -112,6 +111,9 @@ $aSubMenuItem=array('LDPharmaOrder' => "<a href=\"medlager-pass.php".URL_APPEND.
 										'LDOrderArchive' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=archive\">$LDOrderArchive</a>",
 										'LDPharmaDb' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=dbank\">$LDPharmaDb</a>",
 										'LDOrderBotActivate' => "<a href=\"medlager-bestellbot-pass.php".URL_APPEND."\" >$LDMediBotActivate</a>",
+					'LDSupplier' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=supplier\">$LDSupplier</a>",
+					'LDSupply' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=supply\">$LDSupply</a>",
+					'LDRaporteDepo' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=reports\">$LDRaporteDepo</a>"
 										);
 
 # Create the submenu rows
