@@ -29,8 +29,8 @@ $version->collectText('2nd_key', '2nd Key', (rand(1,$rmax).rand(1,$rmax))*rand(1
 $version->collectText('3rd_key', '3rd Key', (rand(1,$rmax).rand(1,$rmax))*rand(1,$rmax));
 $version->addSeparator('');
 
-$version->addTest('PHPVersionOver', array('4.3.0'));
-$version->addTest('PHPVersionUnder', array('5.0.0'));
+$version->addTest('PHPVersionOver', array('5.0.0'));
+$version->addTest('PHPVersionUnder', array('5.3.0'));
 //$version->addTest('PHPMemory', array('8M'));
 $version->addTest('PHPMagicQuotes', array('Off'));
 //$version->addTest('PHPRegisterGlobals', array('Off'));
@@ -53,12 +53,6 @@ $version->addTest('WritableLocation', array(APP_PATH.'/fotos'));
 $version->addTest('WritableLocation', array(APP_PATH.'/fotos/encounter'));
 $version->addTest('WritableLocation', array(APP_PATH.'/fotos/registration'));
 $version->addTest('WritableLocation', array(APP_PATH.'/fotos/news'));
-$version->addTest('WritableLocation', array(APP_PATH.'/logs'));
-//gjergji : not needed anymore, new log code
-//$version->addTest('WritableLocation', array(APP_PATH.'/logs/access'));
-//$version->addTest('WritableLocation', array(APP_PATH.'/logs/access/'.date('Y')));
-//$version->addTest('WritableLocation', array(APP_PATH.'/logs/access_fail'));
-//$version->addTest('WritableLocation', array(APP_PATH.'/logs/access_fail/'.date('Y')));
 $version->addTest('WritableLocation', array(APP_PATH.'/pharma'));
 $version->addTest('WritableLocation', array(APP_PATH.'/pharma/img'));
 $version->addTest('WritableLocation', array(APP_PATH.'/med_depot'));
@@ -75,14 +69,6 @@ $version->addTest('WritableLocation', array(APP_PATH.'/installer'));
 $version->addTest('WritableLocation', array(APP_PATH.'/installer/install.php'));
 
 $version->addAction('AcceptText', 'License Agreement', array(dirname(__FILE__).'/LICENSE'));
-
-/*$version->addAction('SQLSchema', array(
-	'username_field' => 'db_user',
-	'password_field' => 'db_password',
-	'server_field' => 'db_server',
-	'type_field' => 'db_type',
-	'db_field' => 'db_database',
-	'schema' => dirname(__FILE__).'/db/schema.xml'));*/
 
 $version->addAction('SQLFile', 'Install Database Schema', array(
     'username_field' => 'db_user',
