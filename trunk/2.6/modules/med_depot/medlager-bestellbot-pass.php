@@ -15,14 +15,15 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
-
-$allowedarea=&$allow_area['depot'];
+//gjergji
+//$allowedarea=&$allow_area['depot'];
 $userck="ck_medlager_user";
 $breakfile="medlager.php".URL_APPEND."&userck=$userck";
 $fileforward="medlager.php".URL_REDIRECT_APPEND."&userck=$userck&stb=1";
 $title=$LDMediBotActivate; 
 $thisfile="medlager-bestellbot-pass.php";
 $lognote="$title ok";
+
 //reset cookie;
 // reset all 2nd level lock cookies
 setcookie($userck.$sid,'');
@@ -34,6 +35,7 @@ require($root_path.'include/inc_passcheck_internchk.php');
 unset($allowedarea);
 $allowedarea[] = '_a_2_meddepotreception';
 if ($pass=='check') include($root_path.'include/inc_passcheck.php');
+//end gjergji
 
 $errbuf=$title;
 

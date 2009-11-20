@@ -79,12 +79,12 @@ if(isset($save_ok)&&$save_ok){
     <td align=right class="adm_item"></font><?php echo $LDCityTownName ?>: </td>
     <td class="adm_input"><?php echo $address['name'] ?><br></td>
   </tr> 
-  <!-- mizuko added zip code -->
+  <!-- gjergji added zip code -->
   <tr>
     <td align=right class="adm_item"><font color=#ff0000></font><?php echo $LDZipCode ?>: </td>
     <td class="adm_input"><?php echo $address['zip_code']; ?></td>
   </tr>  
-  <!-- end:mizuko added zip code -->  
+  <!-- end:gjergji added zip code -->  
   <tr>
     <td align=right class="adm_item"><font color=#ff0000></font><?php echo $LDISOCountryCode ?>: </td>
     <td class="adm_input"><?php echo $address['iso_country_id']; ?></td>

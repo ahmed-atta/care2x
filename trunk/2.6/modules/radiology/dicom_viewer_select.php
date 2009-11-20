@@ -51,8 +51,7 @@ window.opener.location.reload();
 	&nbsp;<p>
 	 <font face=arial size=3>	
 	 <input type="radio" name="viewer" value="nagoyatech" <?php if($_SESSION['sess_dicom_viewer']=='nagoyatech') echo 'checked' ?>> <?php echo $LDNagoyaTechInst  ?>
-	 
-	 	 <br>
+	 	 <font size=1> ><a href="http://mars.elcom.nitech.ac.jp/dicom/index-e.html" target="_blank"><?php echo $LDPlsReadThis ?></a><</font> <br>
 		 <br>
 <!--       <input type="radio" name="viewer" value="raimjava" <?php if($_SESSION['sess_dicom_viewer']=='raimjava') echo 'checked' ?>> <?php echo $LDRAIMJAVA  ?>
 	 <font size=1> ><a href="<?php echo $root_path  ?>modules/radiology/raimjava/care_demo_notice.htm" target="_blank"><?php echo $LDPlsReadThis ?></a><</font> <br>

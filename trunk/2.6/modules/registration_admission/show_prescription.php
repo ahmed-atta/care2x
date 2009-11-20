@@ -28,27 +28,37 @@ if(!isset($mode)){
 
 	//$db->debug=true;
 	# Check the important items
+	//gjergji : new prescription..
+	//used save_prescription instead of save_admission
 	if($article&&$dosage&&$application_type_nr&&$prescriber){
-		//include('./include/save_prescription.inc.php');
-		include('./include/save_admission_data.inc.php');
+		include('./include/save_prescription.inc.php');
+		//include('./include/save_admission_data.inc.php');
 	}
+	//end : gjergji
 }
 
 require('./include/init_show.php');
-
+//gjergji : new prescription management
 if($parent_admit){
-	$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr
+	$sql="SELECT prs.*, pr.*,
+			e.encounter_class_nr 
+		  FROM care_encounter AS e, 
+		  	   care_person AS p, 
+		  	   care_encounter_prescription AS pr, 
+		  	   care_encounter_prescription_sub prs
 		WHERE p.pid=".$_SESSION['sess_pid']." 
 			AND p.pid=e.pid 
 			AND e.encounter_nr=".$_SESSION['sess_en']." 
 			AND e.encounter_nr=pr.encounter_nr 
+			AND pr.nr = prs.prescription_nr
 		ORDER BY pr.modify_time DESC";
 }else{
-	$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr
-		WHERE p.pid=".$_SESSION['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr 
+	$sql="SELECT prs.*, pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr, 
+		  	   care_encounter_prescription_sub prs
+		WHERE p.pid=".$_SESSION['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr AND pr.nr = prs.prescription_nr
 		ORDER BY pr.modify_time DESC";
 }
-
+//end : gjergji		
 		
 if($result=$db->Execute($sql)){
 	$rows=$result->RecordCount();

@@ -22,12 +22,23 @@
 
 					{{include file="common/submenu_row_spacer.tpl"}}
 
-					{{$LDPharmaDb}}
+<!--					{{$LDPharmaDb}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					{{include file="common/submenu_row_spacer.tpl"}}-->
 
 					{{$LDOrderBotActivate}}
 
+					{{include file="common/submenu_row_spacer.tpl"}}
+
+					{{$LDSupplier}}
+					
+					{{include file="common/submenu_row_spacer.tpl"}}
+					
+					{{$LDSupply}}
+					
+					{{include file="common/submenu_row_spacer.tpl"}}
+
+					{{$LDRaporteDepo}}					
 					</TBODY>
 					</TABLE>
 				</TD>

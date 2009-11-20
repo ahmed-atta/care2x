@@ -11,7 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 
-$logo_ht_limit=50; # Maximum deparment logo�s height in pixels
+$logo_ht_limit=50; # Maximum deparment logo height in pixels
 
 # Load the encounter class
 require_once($root_path.'include/care_api_classes/class_encounter.php');

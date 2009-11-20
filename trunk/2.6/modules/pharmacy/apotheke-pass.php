@@ -18,15 +18,13 @@ require_once($root_path.'global_conf/areas_allow.php');
 
 //$allowedarea=&$allow_area['pharma'];
 $append=URL_REDIRECT_APPEND.'&cat=pharma&userck=';
-switch($mode)
-{
+switch($mode) {
 	case "order": 	$title=$LDPharmaOrder;
 						$allowedarea[] = '_a_3_pharmaorder';
 						$src="orderpass";
 						$mode="order";
 						$userck="ck_prod_order_user";
 						$fileforward=$root_path."modules/products/products-bestellung.php".$append.$userck."&from=".$src;
-						//$fileforward="select_dept.php".$append.$userck."&from=".$src;
 						break;
 	case "archive":$title=$LDOrderArchive;
 						$allowedarea[] = '_a_1_pharmadbadmin';	
@@ -54,6 +52,7 @@ switch($mode)
 						break;
 	default: 	{header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
+
 $thisfile=basename(__FILE__);
 $breakfile='apotheke.php'.URL_APPEND;
 $lognote="$LDPharmacy $title ok";
@@ -63,7 +62,8 @@ require($root_path.'include/inc_2level_reset.php');
 setcookie('ck_2level_sid'.$sid,'',0,'/');
 
 require($root_path.'include/inc_passcheck_internchk.php');
-if ($pass=='check') include($root_path.'include/inc_passcheck.php');
+if ($pass=='check') 
+	include($root_path.'include/inc_passcheck.php');
 
 $errbuf="$LDPharmacy $title";
 $minimal=1;

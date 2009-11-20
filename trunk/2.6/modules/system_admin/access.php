@@ -273,4 +273,3 @@ function sql_select() {
 }
 
 ?>
-

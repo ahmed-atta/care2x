@@ -15,7 +15,7 @@ define ( 'LANG_FILE', 'edp.php' ) ;
 $local_user = 'ck_edv_user' ;
 require_once ($root_path . 'include/inc_front_chain_lang.php') ;
 require_once($root_path.'include/care_api_classes/class_core.php');
-//$db->debug=true;
+///$db->debug=true;
 /**
  * The following require loads the access areas that can be assigned for
  * user permissions.

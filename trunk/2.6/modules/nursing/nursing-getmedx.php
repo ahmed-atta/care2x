@@ -9,6 +9,12 @@ if(!isset($objPrescription))
 $objPrescription=new Prescription;
 $app_types=$objPrescription->getAppTypes();
 $pres_types=$objPrescription->getPrescriptionTypes();
+// load the encounter class to check if patient is discharged
+require_once($root_path.'include/care_api_classes/class_encounter.php');
+$enc_obj= new Encounter;
+$enc_obj->loadEncounterData($pn);
+$isDischarged = $enc_obj->Is_Discharged($pn);
+
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -122,7 +128,8 @@ $charts_obj= new Charts;
 						'article' => $$mdx,
 						'admin_time' => $$tdx,
 						'dosage' => $$ddx,
-						'quantity' => ( $$ddx * count($tmpTimes)),
+						//'quantity' => ( $$ddx * count($tmpTimes)),
+						'quantity' => ( $$ddx ),
 						'application_type_nr' => $$adx,
 						'sub_speed' => $$pdx,
 						'notes_sub' => $$ndx,						
@@ -276,10 +283,10 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 			countCompanions++;
 		} else {
 			companionBNum = '';
-			//for avoiding only one medicaments checked as accompanied
+			//avoid only one medicament checked as accompanied
 			if(countCompanions > 1) countCompanions = 0;
 		}
-		//for avoiding only one medicaments checked as accompanied
+		//avoid only one medicament checked as accompanied
 		if(!document.getElementById('companion').checked && countCompanions == 1){
 			alert('Warning no companion medicament selected');
 			exit;
@@ -489,11 +496,10 @@ li.selected {
 .together { border-left:thick solid #0000FF; }
 </style>
 </HEAD>
-<BODY  bgcolor="#99ccff" TEXT="#000000" LINK="#0000FF" VLINK="#800080"    topmargin="0" marginheight="0" 
-onLoad="<?php if($saved || $repeated) echo "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();" >
+<BODY  bgcolor="#99ccff" TEXT="#000000" LINK="#0000FF" VLINK="#800080"    topmargin="0" marginheight="0" if (window.focus) window.focus(); window.focus();" >
 <table border=0 width="100%">
   <tr>
-    <td><b><font face=verdana,arial size=5 color=maroon>
+    <td><b><font face="verdana,arial" size="5" color="maroon">
 <?php 
 	echo $title.'<br><font size=4>';	
 ?>
@@ -536,7 +542,11 @@ if($count){
 	do {
 			$companionBestellnum =  explode(",",unserialize($row['companion']));
 			echo "<span style=\"cursor:pointer;font-weight:bold;float: left;\" onclick=\"new Effect.toggle('_". $row['prescription_nr']  ."_', 'blind' );\" /><font face=verdana,arial size=2 color=maroon>Therapy Nr : " . $row['prescription_nr']. " / Dt: " .$row['prescribe_date'] ."</font></span>";
+			if(!$isDischarged) {
 			echo '<span style="float:right;cursor:pointer;"><img onClick="repeatPrescription(' .  $row['id'] . ');"' . createLDImgSrc($root_path,'redo.png','0') . ' alt=' .  $LDSave . '>&nbsp;';
+			} else {
+				echo '<span style="float:right;cursor:pointer;">';
+			}
 			if($row['status'] != 'printed') echo '<img onclick="printPrescription(' . $row['encounter_nr']  .','. $row['id'] .');"' . createLDImgSrc($root_path,'printer.png','0') . ' alt=' .  $LDPrint . '>';
 			echo '</span><br /><br />';
 			echo '<div id="_' . $row['prescription_nr'] .'_" style="display:none;">';
@@ -548,7 +558,7 @@ if($count){
 						if($toggle) $bgc='#f3f3f3';
 							else $bgc='#fefefe';
 						$toggle=!$toggle;
-					
+//TODO : finish the outpatinet daily therapy					
 /*						if($row['encounter_class_nr']==1) $full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']; // inpatient admission
 							else $full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']; // outpatient admission*/
 					?>
@@ -606,6 +616,7 @@ if($count){
  <!-- end : old prescription -->
 </div>
 <!-- new prescription -->
+<?php if(!$isDischarged) { ?>
 <div class="TabbedPanelsContent">
 <table>
   <tr>
@@ -640,6 +651,7 @@ if($count){
     <td>
       <select id="dosage" name="dosage">
         <option value=""></option>
+        <option value="0.1">1 / 10</option>
         <option value="0.25">1 / 4</option>
         <option value="0.5">1 / 2</option>
         <option value="0.75">3 / 4</option>
@@ -648,6 +660,14 @@ if($count){
         <option value="1.5">1 + 1 / 2</option>
         <option value="1.75">1 + 3 / 4</option>
         <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
       </select>
     </td>
     <td><select name="application_type_nr" id="application_type_nr">
@@ -718,6 +738,7 @@ src="../../gui/img/common/default/qbar_0_rose.gif" border=0 width="10" height="4
 	</tr>
 </table>
   </div>
+  <?php } ?>
 <!-- end : new prescription -->  
 </div>
 </div>

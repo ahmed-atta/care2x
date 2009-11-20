@@ -71,7 +71,7 @@ if($bPastDateError) echo '<font class="warnprompt">'.$LDInvalidDate.' '.$LDNoPas
    </tr>
    
    <tr bgcolor="#f6f6f6">
-     <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDPhysician"; ?></td>
+     <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDPhysician/$LDClinician"; ?></td>
      <td><input type="text" name="to_personell_name" size=50 maxlength=60  value="<?php if(isset($to_personell_name)) echo $to_personell_name; ?>"></td>
    </tr>
 
@@ -103,18 +103,15 @@ if($bPastDateError) echo '<font class="warnprompt">'.$LDInvalidDate.' '.$LDNoPas
 	 	<input type="checkbox" name="remind_mail" value="1"  <?php if($remind_mail) echo 'checked'; ?>><?php echo $LDMail; ?>
 	 </td>
    </tr>
-   
-<!-- Salvo 23/11/07 
-
    <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066">?php echo $LDPlannedEncType; ?></td>
+     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPlannedEncType; ?></td>
      <td><FONT SIZE=-1  FACE="Arial" color="#000066">
-?php
+<?php
 if(is_object($encounter_classes)){
     while($result=$encounter_classes->FetchRow()) {
 ?>
-		<input name="encounter_class_nr" type="radio"  value="?php echo $result['class_nr']; ?>" ?php if($encounter_class_nr==$result['class_nr']) echo 'checked'; ?>>
-?php 
+		<input name="encounter_class_nr" type="radio"  value="<?php echo $result['class_nr']; ?>" <?php if($encounter_class_nr==$result['class_nr']) echo 'checked'; ?>>
+<?php 
         $LD=$result['LD_var'];
         if(isset($$LD)&&!empty($$LD)) echo $$LD; else echo $result['name'];
         echo '&nbsp;';
@@ -123,7 +120,6 @@ if(is_object($encounter_classes)){
 ?>
      </td>
    </tr>
--->
 
  </table>
 <input type="hidden" name="encounter_nr" value="<?php echo $_SESSION['sess_en']; ?>">

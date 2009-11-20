@@ -2,7 +2,7 @@
 $pataddress=$encounter['addr_str']." ".$encounter['addr_str_nr']."\n".$encounter['addr_zip']." ".$encounter['citytown_name'];
 //$pdf->Line(20,750,550,750);
 $pdf->ezText("\n",6);
-$data[]=array("$LDLastName:\n$LDFirstName:\n$LDBdaypdf:\n\nPID:",$encounter['name_last']."\n".$encounter['name_first']."\n".formatDate2Local($encounter['date_birth'],$date_format)."\n\n".$encounter['pid'],'    ',"$LDAddress:",$pataddress);
+$data[]=array("$LDLastName:\n$LDFirstName:\n$LDBday:\n\nPID:",$encounter['name_last']."\n".$encounter['name_first']."\n".formatDate2Local($encounter['date_birth'],$date_format)."\n\n".$encounter['pid'],'    ',"$LDAddress:",$pataddress);
 
 $pdf->ezTable($data,'','',array('xPos'=>'left','xOrientation'=>'right','showLines'=>0,'fontSize'=>12,'showHeadings'=>0,'shaded'=>0,'cols'=>array(0=>array('justification'=>'right'))));
 # Add the PID barcode

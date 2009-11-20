@@ -17,10 +17,9 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_product.php');
 $product_obj=new Product;
 
-//$db->debug=1;
+///$db->debug=1;
 
-switch($cat)
-{
+switch($cat) {
 	case "pharma":	
 							$title=$LDPharmacy;
 							$breakfile=$root_path."modules/pharmacy/apotheke-datenbank-functions.php".URL_APPEND."&userck=$userck";
@@ -73,7 +72,7 @@ if($mode=='save') include($root_path.'include/inc_products_db_save_mod.php');
 
 ob_start();
 
-	 # Load the javascript code
+// Load the javascript code
 	require($root_path.'include/inc_js_products.php');
 
 	$sTemp = ob_get_contents();
@@ -103,6 +102,7 @@ if($update&&(!$updateok)&&($mode=='save')) $smarty->assign('sNoSave',$LDDataNoSa
  $smarty->assign('LDGeneric',$LDGeneric);
  $smarty->assign('LDDescription',$LDDescription);
  $smarty->assign('LDPacking',$LDPacking);
+ $smarty->assign('LDDoza',$LDDoza);
  $smarty->assign('LDCAVE',$LDCAVE);
  $smarty->assign('LDCategory',$LDCategory);
  $smarty->assign('LDMinOrder',$LDMinOrder);
@@ -110,6 +110,7 @@ if($update&&(!$updateok)&&($mode=='save')) $smarty->assign('sNoSave',$LDDataNoSa
  $smarty->assign('LDPcsProOrder',$LDPcsProOrder);
  $smarty->assign('LDIndustrialNr',$LDIndustrialNr);
  $smarty->assign('LDLicenseNr',$LDLicenseNr);
+ $smarty->assign('LDMinPieces',$LDMinPieces);
  $smarty->assign('LDPicFile',$LDPicFile);
 
  # Assign the preview picture
@@ -131,6 +132,7 @@ if ($saveok){
 	$smarty->assign('sGenericInput',$generic.'<input type="hidden" name="generic" value="'.$generic.'">');
 	$smarty->assign('sDescriptionInput',nl2br($besc).'<input type="hidden" name="besc" value="'.$besc.'">');
 	$smarty->assign('sPackingInput',$pack.'<input type="hidden" name="pack" value="'.$pack.'">');
+	$smarty->assign('sDoseInput',$dose.'<input type="hidden" name="dose" value="'.$dose.'">');
 	$smarty->assign('sCAVEInput',$caveflag.'<input type="hidden" name="caveflag" value="'.$caveflag.'">');
 	$smarty->assign('sCategoryInput',$medgroup.'<input type="hidden" name="medgroup" value="'.$medgroup.'">');
 	$smarty->assign('sMinOrderInput',$minorder.'<input type="hidden" name="minorder" value="'.$minorder.'">');
@@ -138,12 +140,14 @@ if ($saveok){
 	$smarty->assign('sPcsProOrderInput',$proorder.'<input type="hidden" name="proorder" value="'.$proorder.'">');
 	$smarty->assign('sIndustrialNrInput',$artnum.'<input type="hidden" name="artnum" value="'.$artnum.'">');
 	$smarty->assign('sLicenseNrInput',$indusnum.'<input type="hidden" name="indusnum" value="'.$indusnum.'">');
+	$smarty->assign('sMinPiecesInput',$minpcs.'<input type="hidden" name="minpcs" value="'.$minpcs.'">');	
 	$smarty->assign('sPicFileInput',$picfilename.'<input type="hidden" name="bild" value="'.$picfilename.'">');
 }else{
 	$smarty->assign('sArticleNameInput','<input type="text" name="artname" value="'.$artname.'" size=40 maxlength=40>');
 	$smarty->assign('sGenericInput','<input type="text" name="generic" value="'.$generic.'" size=40 maxlength=60>');
 	$smarty->assign('sDescriptionInput','<textarea name="besc" cols=35 rows=4>'.$besc.'</textarea>');
 	$smarty->assign('sPackingInput','<input type="text" name="pack" value="'.$pack.'"  size=40 maxlength=40>');
+	$smarty->assign('sDoseInput','<input type="text" name="dose" value="'.$dose.'"  size=40 maxlength=40>');
 	$smarty->assign('sCAVEInput','<input type="text" name="caveflag" value="'.$caveflag.'" size=40 maxlength=80>');
 	$smarty->assign('sCategoryInput','<input type="text" name="medgroup" value="'.$medgroup.'" size=20 maxlength=40>');
 	$smarty->assign('sMinOrderInput','<input type="text" name="minorder" value="'.$minorder.'" size=20 maxlength=9>');
@@ -151,6 +155,7 @@ if ($saveok){
 	$smarty->assign('sPcsProOrderInput','<input type="text" name="proorder" value="'.$proorder.'" size=20 maxlength=40>');
 	$smarty->assign('sIndustrialNrInput','<input type="text" name="artnum" value="'.$artnum.'" size=20 maxlength=20>');
 	$smarty->assign('sLicenseNrInput','<input type="text" name="indusnum" value="'.$indusnum.'" size=20 maxlength=20>');
+	$smarty->assign('sMinPiecesInput','<input type="text" name="minpcs" value="'.$minpcs.'" size=20 maxlength=20>');	
 	$smarty->assign('sPicFileInput','<input type="file" name="bild" onChange="getfilepath(this)">');
 
 	$smarty->assign('LDReset','<input type="reset" value="'.$LDReset.'" onClick="document.inputform.bestellnum.focus()" >');

@@ -67,16 +67,14 @@ if(ereg("_a_1_pharmadbadmin",$access->PermissionAreas()))
 ?>
 <script language="javascript">
 <!--
-function closewin()
-{
+function closewin() {
 	location.href='startframe.php?sid=<?php echo "$sid&lang=$lang";?>';
 }
 <?php 
 
 if($stb)
 echo '
-function startbot()
-{
+function startbot() {
 	pharmabotwin'.$sid.'=window.open("'.$root_path.'modules/products/products-bestellbot.php'.URL_REDIRECT_APPEND.'&cat=pharma&userck='.$userck.'","pharmabotwin'.$sid.'","width=200,height=180,menubar=no,resizable=yes,scrollbars=yes");
 }
 ';
@@ -90,11 +88,11 @@ function startbot()
 	$sTemp = ob_get_contents();
 ob_end_clean();
 
- # Append javascript to JavaScript block
+// Append javascript to JavaScript block
 
  $smarty->append('JavaScript',$sTemp);
 
- # Prepare the submenu icons
+// Prepare the submenu icons
 
  $aSubMenuIcon=array(createComIcon($root_path,'bestell.gif','0'),
 										createComIcon($root_path,'help_tree.gif','0'),
@@ -102,10 +100,11 @@ ob_end_clean();
 										createComIcon($root_path,'documents.gif','0'),
 										createComIcon($root_path,'storage.gif','0'),
 										createComIcon($root_path,'sitemap_animator.gif','0'),
-										createComIcon($root_path,'bubble.gif','0')
+					createComIcon($root_path,'bubble.gif','0'),
+					createComIcon($root_path,'redlist.gif','0')										
 										);
 
-# Prepare the submenu item descriptions
+// Prepare the submenu item descriptions
 
 $aSubMenuText=array($LDPharmaOrderTxt,
 										$LDHow2OrderTxt,
@@ -116,7 +115,7 @@ $aSubMenuText=array($LDPharmaOrderTxt,
 										$LDNewsTxt
 										);
 
-# Prepare the submenu item links indexed by their template tags
+// Prepare the submenu item links indexed by their template tags
 
 $aSubMenuItem=array('LDPharmaOrder' => "<a href=\"apotheke-pass.php".URL_APPEND."&mode=order\">$LDPharmaOrder</a>",
 										'LDHow2Order' => "<a href=\"javascript:gethelp('products.php','how2','','pharma')\">$LDHow2Order</a>",

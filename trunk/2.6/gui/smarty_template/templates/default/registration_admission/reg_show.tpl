@@ -19,7 +19,7 @@
     
 	<tr>
       <td valign="top">
-	  {{$pbNewSearch}} {{$pbUpdateData}} {{$pbShowAdmData}} {{$pbAdmitInpatient}} {{$pbAdmitOutpatient}} {{$pbRegNewPerson}}
+	  {{$pbNewSearch}} {{$pbUpdateData}} {{$pbShowAdmData}} {{$pbAdmitInpatient}} {{$pbAdmitOutpatient}} {{$pbAdmitPrintout}} {{$pbRegNewPerson}}
 	</td>
     </tr>
 

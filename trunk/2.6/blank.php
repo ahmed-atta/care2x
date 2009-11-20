@@ -4,7 +4,7 @@ require('./roots.php');
 require('include/inc_environment_global.php');
 if(!isset($lang)||!$lang)
 {
-	if(!$HTTP_SESSION_VARS['sess_lang']) include('chklang.php');
+	if(!$_SESSION['sess_lang']) include('chklang.php');
 }
 
 if(file_exists('language/'.$lang.'/lang_'.$lang.'_indexframe.php')) include('language/'.$lang.'/lang_'.$lang.'_indexframe.php');

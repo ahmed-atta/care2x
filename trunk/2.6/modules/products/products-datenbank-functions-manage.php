@@ -43,7 +43,7 @@ if($mode=='save')
 	include($root_path.'include/inc_products_db_save_mod.php');
 }
 
-if(!empty($mode)) include($root_path.'include/inc_products_search_mod.php');
+if(!empty($mode)) include($root_path.'include/inc_products_search_mod_datenbank.php');
 
 if($linecount==1) {  $from='multiple'; }
 
@@ -146,9 +146,6 @@ ob_start();
 			</td>
 			<td align="right"><input type="submit" value="<?php echo $LDSearch ?>" >
 			</td>
-<!--       <td align=right><p><br><input type="reset" value="L�schen" onClick="document.suchform.keyword.focus()">
-			</td>
--->
 		 </tr>
 	</table>
 		
@@ -219,7 +216,7 @@ if($linecount==1){
 		echo'
  		<input type="hidden" name="mode" value="save">
 		<input type="hidden" name="picref" value="'.$zeile[picfile].'">
-  		<input type="submit" value="'.$LDSave.'"
+  		<input type="submit" value="'.$LDSave.'">
 		</form>';
 	}else{
 		echo'

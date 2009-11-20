@@ -151,7 +151,8 @@ for($i=0;$i<(sizeof($fieldnames));$i++)
 <input type=hidden name=displaysize value="<?php echo $displaysize ?>">
 <input type=hidden name=linecount value="<?php echo $linecount ?>">
 <input type=hidden name=pagecount value="<?php echo $pagecount ?>">
-<img src="../img/suspend.gif"> <INPUT type="submit"  value="Nein, Abbrechen"></font></FORM>
+<img src="../img/suspend.gif"> <INPUT type="submit"  value="Nein, Abbrechen"></FORM>
+
 
 </center>
 

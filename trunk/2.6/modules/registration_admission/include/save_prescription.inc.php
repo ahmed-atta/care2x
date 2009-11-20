@@ -1,40 +1,68 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('save_immunization.inc.php',$PHP_SELF)) 
+if (eregi('save_prescription.inc.php',$PHP_SELF)) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 
-require_once($root_path.'include/care_api_classes/class_prescription.php');
-if(!isset($obj)) $obj=new Prescription;
+global $db;
 
-require_once($root_path.'include/inc_date_format_functions.php');
+switch($mode){	
+		case 'create':
+			//prescription 
+			$prescription = array(
+				'encounter_nr' => $_POST['encounter_nr'],
+				'prescribe_date'=> $_POST['prescribe_date'],
+				'status' => $_POST['status'],
+				'prescriber' => $_POST['prescriber'],
+				'history' => $_POST['history'],
+				'modify_id' => $_POST['modify_id'],
+				'modify_time' => $_POST['modify_time'],
+				'create_id' => $_POST['create_id'],
+				'create_time' => $_POST['create_time']
+			);
+			$obj->insertDataFromArray($prescription);
 
-if(!isset($db)||!$db) include_once($root_path.'include/inc_db_makelink.php');
-if($dblink_ok){
-	switch($mode)
-	{	
-		case 'create': 
-								$_POST['prescribe_date']=@formatDate2STD($_POST['prescribe_date'],$date_format);
-								$obj->setDataArray($_POST);
-								if($obj->insertDataFromInternalArray()) 
-									{
-										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&pid=".$_SESSION['sess_pid']);
+			//prescriptio sub
+			$obj->usePrescription('prescription_sub');
+			$pk =  $db->Insert_ID();
+			$prescription_sub = array(
+				'prescription_nr' => $obj->LastInsertPK('nr',$pk),
+				'prescription_type_nr' => $_POST['prescription_type_nr'],
+				'article' => $_POST['article'],
+				'drug_class' => $_POST['drug_class'],
+				'dosage' => $_POST['dosage'],
+				'application_type_nr' => $_POST['application_type_nr'],
+				'notes' => $_POST['notes'],
+				'color_marker' => $_POST['color_marker'],
+				'is_stopped' => $_POST['is_stopped'],
+				'stop_date' => $_POST['stop_date'],
+				'status' => $_POST['status']
+			);
+			$obj->insertDataFromArray($prescription_sub);					
+			if(!$no_redirect){
+				header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&pid=".$_SESSION['sess_pid']);
+				//echo "$obj->getLastQuery<br>$LDDbNoSave";
 										exit;
 									}
-									else echo "<br>$LDDbNoSave";
+			/*	do i really need it ? booh 
+				gjergji
+				} else{
+		           echo "$obj->getLastQuery<br>$LDDbNoSave";
+		           $error=TRUE;
+		        }*/
 								break;
 		case 'update': 
-								$_POST['date']=@formatDate2STD($_POST['date'],$date_format);
-								$obj->setDataArray($_POST);
-								$obj->where=' nr='.$imm_nr;
-								if($obj->updateDataFromInternalArray($dept_nr)) 
-									{
-										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&pid=".$_SESSION['sess_pid']);
+						$obj->where=' nr='.$nr;
+						if($obj->updateDataFromInternalArray($nr)) {
+							if(!$no_redirect){
+								header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&pid=".$_SESSION['sess_pid']);
+								//echo "$obj->sql<br>$LDDbNoUpdate";
 										exit;
 									}
-									else echo "$sql<br>$LDDbNoUpdate";
+						} else{
+                          echo "$obj->getLastQuery<br>$LDDbNoUpdate";
+                          $error=TRUE;
+                        }
 								break;
-					
 	}// end of switch
-} else { echo "$LDDbNoLink<br>"; } 
 
 ?>

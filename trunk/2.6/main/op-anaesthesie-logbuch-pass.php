@@ -118,8 +118,6 @@ default:$errbuf=$errbuf."Zugang gesperrt"; echo 'Ihre Zugangsberechtigung ist ge
 }
 
 
-logentry($username,$keyword,$errbuf,$thisfile,$fileforward);
-
 
 echo '</STRONG></FONT><P>';
 

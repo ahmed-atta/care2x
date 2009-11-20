@@ -151,7 +151,7 @@ if($current_encounter){
 }
 //gjergji
 //$smarty->assign('pbAdmitPrintout',"<a href=". $root_path."modules/pdfmaker/registration/regdata_admit.php".URL_APPEND."&pid=".$pid ." target=_blank><img ".createLDImgSrc($root_path,'printout.gif','0','absmiddle')."></a>'");
-//$smarty->assign('pbAdmitPrintout',"<a href=". $root_path."modules/registration_admission/reports/sample.php".URL_APPEND."&pid=".$pid . "><img ".createLDImgSrc($root_path,'printout.gif','0','absmiddle')."></a>'");
+$smarty->assign('pbAdmitPrintout',"<a href=". $root_path."modules/registration_admission/reports/sample.php".URL_APPEND."&pid=".$pid . "><img ".createLDImgSrc($root_path,'printout.gif','0','absmiddle')."></a>'");
 //end :  gjergji
 # Create new button to fresh input form
 $sNewRegBuffer='

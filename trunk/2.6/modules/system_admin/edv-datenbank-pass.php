@@ -5,7 +5,6 @@ require_once($root_path.'include/inc_config_color.php');
 require_once($root_path.'include/access_log.php');
 $logs = new AccessLog();
 
-
 srand(time()*1000);
 $r=rand(1,1000);
 $dbname="maho";
@@ -30,6 +29,7 @@ function validarea($area,$zeile2,$range)
   return 0;
 }
 
+
 if ($versand=="Abschicken")
 {
 
@@ -47,7 +47,7 @@ if ($versand=="Abschicken")
 										if (validarea($allowedarea,$zeile,mysql_num_fields($ergebnis)))
 										{				
 										setcookie(ck_edv_db_user,$zeile[mahopass_name]);	
-										$logs->writeline(date('Y-m-d').'/'.date('H:i'),,$REMOTE_ADDR,'EDV DB verwalten Access OK',$zeile[mahopass_name],'','',$thisfile,$fileforward,0);
+										$logs->writeline(date('Y-m-d').'/'.date('H:i'),'',$REMOTE_ADDR,'EDV DB verwalten Access OK',$zeile[mahopass_name],'','',$thisfile,$fileforward,0);
 										//logentry($zeile[mahopass_name],"*","IP:".$REMOTE_ADDR."EDV DB verwalten Access OK'd",$thisfile,$fileforward);
 										header("Location: $fileforward?sid=$$ck_sid_buffer");
 										exit;

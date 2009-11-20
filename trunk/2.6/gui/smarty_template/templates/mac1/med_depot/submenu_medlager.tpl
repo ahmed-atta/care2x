@@ -22,11 +22,21 @@
 
 					{{include file="common/submenu_row_spacer.tpl"}}
 
-					{{$LDPharmaDb}}
+<!--					{{$LDPharmaDb}}
+
+					{{include file="common/submenu_row_spacer.tpl"}}-->
+
+					{{$LDOrderBotActivate}}
 
 					{{include file="common/submenu_row_spacer.tpl"}}
 
-					{{$LDOrderBotActivate}}
+					{{$LDSupplier}}
+					
+					{{include file="common/submenu_row_spacer.tpl"}}
+					
+					{{$LDSupply}}					
+					
+					{{include file="common/submenu_row_spacer.tpl"}}
 
 					</TBODY>
 					</TABLE>

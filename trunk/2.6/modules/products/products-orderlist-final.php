@@ -34,7 +34,7 @@ $rows=0;
 $count=0;
 //this is a bit of horror, but it works...
 function createOrderList($validator,$prior,$dept_nr) {
-	global $REMOTE_ADDR,$encbuf,$product_obj,$db;
+	global $REMOTE_ADDR,$encbuf,$product_obj,$db,$_SESSION;
 	$oid = '';
 	$order_nr = '';
 	//select where i'm working
@@ -51,7 +51,7 @@ function createOrderList($validator,$prior,$dept_nr) {
 	$db->BeginTrans();
 	//create the new orderlist
 	$sql="INSERT INTO $dbtable ( dept_nr,order_date,order_time,ip_addr,status,create_id,create_time,validator,priority,sent_datetime) 
-				VALUES ('$dept_nr','".date('Y-m-d')."','".date('H:i:s')."','".$REMOTE_ADDR."','pending','".$validator."',
+				VALUES ('$dept_nr','".date('Y-m-d')."','".date('H:i:s')."','".$REMOTE_ADDR."','pending','".$_SESSION['sess_user_name']."',
     					".date('YmdHis').",'$validator','$prior',".date('YmdHis').")";
     if($ergebnis=$product_obj->Transact($sql)) {
 			$oid=$db->Insert_ID(); // if the last action was insert get the last id
@@ -67,7 +67,7 @@ function createOrderList($validator,$prior,$dept_nr) {
     	$idsub = 'idsub' . $i;
     	$dose = 'dose' .$i;
     	$unit = 'unit' .$i;
-    	$price = 'price' .$i;
+    	$price = 'prive' .$i;
     	$value = 'value' .$i;
     	$expiry = 'expiry' . $i;
 
@@ -80,7 +80,7 @@ function createOrderList($validator,$prior,$dept_nr) {
     	}
     }
     //update prices in the care_encounter_prescription_sub
-    if($cat == 'pharma') {
+    if($_POST['cat'] == 'pharma') {
         if($product_obj->updatePrescriptionPrices($dept_nr) && $saveok) {
         	//delete the ordercatalog, i don't need it anymore
         	$sqlDel = "DELETE FROM $dbcatalog WHERE dept_nr ='$dept_nr'";
@@ -114,6 +114,9 @@ if(($mode=='send') && isset($_SESSION['current_order']) ){
 		$mode='';
 	} 
 }
+
+if( $ofinal && $sendok )
+	unset($_SESSION['current_order']);
 ?>
 <?php html_rtl($lang); ?>
 <head>
@@ -218,8 +221,8 @@ if ($_POST['maxnum']>0) {
         		<td><font face="Verdana,Arial" size="1">'.$_POST[$art].'</font><input type="hidden" name="art'.$i.'" value="'.$_POST[$art].'"></td>
         		<td align="right"><font face="Verdana,Arial" size="1">'.$_POST[$p].'</font><input type="hidden" name="p'.$i.'" value="'.$_POST[$p].'"></td>
         		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['proorder'].'</font><input type="hidden" name="proorder'.$i.'" value="'.$prodInfo['proorder'].'"></td>
-        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['dose'].'</font><input type="hidden" name="dose'.$i.'" value="'.$prodInfo['dose'].'"></td>
-        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['unit'].'</font><input type="hidden" name="unit'.$i.'" value="'.$prodInfo['unit'].'"></td>					
+        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['dose'].'</font><input type="hidden" name="doza'.$i.'" value="'.$prodInfo['doza'].'"></td>
+        		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['packing'].'</font><input type="hidden" name="njesia'.$i.'" value="'.$prodInfo['packing'].'"></td>					
         		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['price'].'</font><input type="hidden" name="price'.$i.'" value="'.$prodInfo['price'].'"></td>									
         		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['price'] * $_POST[$p].'</font><input type="hidden" name="value'.$i.'" value="'.$prodInfo['price'] * $_POST[$p].'"></td>									
         		<td align="right"><font face="Verdana,Arial" size="1">'.$prodInfo['expiry'].'</font><input type="hidden" name="expiry'.$i.'" value="'.$prodInfo['expiry'].'"></td>										
