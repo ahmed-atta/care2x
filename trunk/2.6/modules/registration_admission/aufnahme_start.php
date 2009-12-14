@@ -262,7 +262,9 @@ if($pid!='' || $encounter_nr!=''){
 									{
 									    /* Get last insert id */
 								if($dbtype=='mysql'){
-									$encounter_nr=$db->Insert_ID();
+									//$encounter_nr=$db->Insert_ID();
+									//see ticket #5
+									$encounter_nr = $encounter_obj->buffer_array['encounter_nr'];
 								}else{
 									$encounter_nr=$encounter_obj->postgre_Insert_ID($dbtable,'encounter_nr',$db->Insert_ID());
 								}
