@@ -6,7 +6,7 @@
 */
 include_once($root_path.'include/inc_t1ps_ar2uni.php');
 
-if (eregi('pageheader1ar.php',$_SERVER['PHP_SELF'])){
+if (stristr('pageheader1ar.php',$_SERVER['PHP_SELF'])){
 	die('<meta http-equiv="refresh" content="0; url=../../../">');
 }
 

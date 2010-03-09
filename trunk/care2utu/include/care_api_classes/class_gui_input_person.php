@@ -844,7 +844,7 @@ class GuiInputPerson {
 				?>
 			</td>
 			<td class="reg_input">
-				<input type="text" name="selian_pid" size=14 maxlength=11 value="<?php echo $selian_pid ?>" onFocus="this.select();">
+				<input type="text" readonly name="selian_pid" size=14 maxlength=11 value="<?php echo $selian_pid ?>" onFocus="this.select();">
 			</td>
 			</tr>
 
@@ -1516,7 +1516,7 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 
 <?php
 
-		if (!$newdata){
+if (!$newdata){
 ?>
 			<form action=<?php echo $thisfile; ?> method=post>
 				<input type=hidden name=sid value=<?php echo $sid; ?>>
@@ -1535,5 +1535,6 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 	}
 
 } // end of class
+	
 
-?>
+}

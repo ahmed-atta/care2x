@@ -1,5 +1,5 @@
 <?php
-/* $Id: chklang.php,v 1.4 2009/07/13 16:57:17 timschofield Exp $ */
+/* $Id: chklang.php,v 1.5 2010/03/09 13:02:58 robert Exp $ */
 
 /**
  * phpMyAdmin Language Loading File - lolo@phpheaven.net 01may2001
@@ -89,8 +89,8 @@ if (!defined('__PMA_LANG_DETECT__')) {
         while (list($key, $value) = each($available_languages)) {
             // $envType =  1 for the 'HTTP_ACCEPT_LANGUAGE' environment variable,
             //             2 for the 'HTTP_USER_AGENT' one
-            if (($envType == 1 && eregi('^(' . $value[0] . ')(;q=[0-9]\\.[0-9])?$', $str))
-                || ($envType == 2 && eregi('(\(|\[|;[[:space:]])(' . $value[0] . ')(;|\]|\))', $str))) {
+            if (($envType == 1 && stristr('^(' . $value[0] . ')(;q=[0-9]\\.[0-9])?$', $str))
+                || ($envType == 2 && stristr('(\(|\[|;[[:space:]])(' . $value[0] . ')(;|\]|\))', $str))) {
                 $lang     = $key;
                 break;
             }

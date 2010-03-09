@@ -1,6 +1,6 @@
 <?php
 /*
- * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/download.php,v 1.2 2009/01/31 20:06:45 andi Exp $
+ * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/download.php,v 1.3 2010/03/09 13:02:58 robert Exp $
  *
  * Copyright 2001 Nicolas Chalanset <nicocha@free.fr>
  * Copyright 2001 Olivier Cahagne <cahagn_o@epita.fr>
@@ -11,14 +11,14 @@
  * File for downloading the attachments
  */
 
-if (eregi('MSIE', $_SERVER['HTTP_USER_AGENT']) || eregi('Internet Explorer', $_SERVER['HTTP_USER_AGENT']))
+if (stristr('MSIE', $_SERVER['HTTP_USER_AGENT']) || stristr('Internet Explorer', $_SERVER['HTTP_USER_AGENT']))
 	session_cache_limiter('public');
 session_start();
 require ('conf.php');
 
 header('Content-Type: application/x-unknown-' . $mime);
 // IE 5.5 is weird, the line is not correct but it works
-if (eregi('MSIE', $_SERVER['HTTP_USER_AGENT']) && eregi('5.5', $_SERVER['HTTP_USER_AGENT']))
+if (stristr('MSIE', $_SERVER['HTTP_USER_AGENT']) && stristr('5.5', $_SERVER['HTTP_USER_AGENT']))
 	header('Content-Disposition: filename=' . urldecode($filename));
 else
 	header('Content-Disposition: attachment; filename=' . urldecode($filename));

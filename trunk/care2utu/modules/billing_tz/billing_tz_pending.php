@@ -30,7 +30,7 @@ $bill_obj = new Bill;
 $insurance_tz = new Insurance_tz;
 $person_obj = new Person;
 
-$debug = false;
+$debug = FALSE;
 ($debug) ? $db->debug=TRUE : $db->debug=FALSE;
 
 if ($debug) {
@@ -56,7 +56,7 @@ if($is_transmit_to_weberp_enable == 1)
   $archivedBill = $bill_obj->GetArchivedBillEncounter($bill_number);
   $pid = $enc_obj->GetPIDfromEncounter($archivedBill[encounter_nr]);
   $persondata = $person_obj->getAllInfoArray($pid);
-
+ 
   $weberp_obj = new_weberp();
   if(!$weberp_obj->transfer_patient_to_webERP_asCustomer($pid,$persondata))
   {
@@ -67,8 +67,11 @@ if($is_transmit_to_weberp_enable == 1)
 		$person_obj->setPatientIsTransmit2ERP($pid,1);
   }
   destroy_weberp($weberp_obj);
+ 
   $weberp_obj = new_weberp();
   $data=$bill_obj->GetElemsOfArchivedBillForERP($bill_number);
+ 
+  
   while($row=$data->FetchRow())
 {
  if(!$weberp_obj->transfer_bill_to_webERP_asSalesInvoice($pid,$bill_number,$row))

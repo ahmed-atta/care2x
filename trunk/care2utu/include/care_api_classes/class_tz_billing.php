@@ -884,9 +884,12 @@ class Bill extends Encounter {
 
 
 		$this->sql="SELECT * FROM care_tz_billing_archive_elem
-					 WHERE nr = ".$nr." $sql_where
+					 WHERE nr = ".$nr." ".$sql_where."
 					 ORDER BY date_change ASC";
-		return $db->Execute($this->sql);
+		$result = $db->Execute($this->sql);
+		if ($result) {
+			return $result;
+		}
 	}
 
 	function GetElemsOfArchivedBillForERP($nr)
@@ -897,7 +900,7 @@ class Bill extends Encounter {
 
 		$this->sql="SELECT a.*, b.item_number FROM care_tz_billing_archive_elem a
 		inner join care_tz_drugsandservices b on a.item_number = b.item_id where nr=".$nr;
-
+        if ($debug) echo $this->sql;
 		return $db->Execute($this->sql);
 	}
 
@@ -931,7 +934,7 @@ $sql_where="AND purchasing_class='".$what_kind_of."'";
 				LEFT JOIN care_tz_drugsandservices ON $this->tbl_bill_elements.item_number=care_tz_drugsandservices.item_id
 					 WHERE nr = ".$nr." $sql_where
 					 ORDER BY date_change ASC";
-//		echo $this->sql;
+		// echo $this->sql;
 		return $db->Execute($this->sql);
 	}
 
@@ -1192,7 +1195,7 @@ $sql_where="AND purchasing_class='".$what_kind_of."'";
 		{
 			$pos_nr+=1;
 			$insurance_used +=$bill_elems_row['balanced_insurance'];
-			if($bill_elems_row['is_labtest']==1)
+			if($bill_elems_row['is_labtest']=1)
 			{
 				$this->tbl_bill_elem_ID=$bill_elems_row['ID'];
 				$this->chemlab_testname=$bill_elems_row['description'];
@@ -1282,7 +1285,7 @@ $sql_where="AND purchasing_class='".$what_kind_of."'";
 		{
 			$pos_nr+=1;
 			$insurance_used +=$bill_elems_row['balanced_insurance'];
-			if($bill_elems_row['is_radio_test']==1)
+			if($bill_elems_row['is_radio_test']=1)
 			{
 				$this->tbl_bill_elem_ID=$bill_elems_row['ID'];
 				$this->radio_testname=$bill_elems_row['description'];
@@ -1362,7 +1365,7 @@ $sql_where="AND purchasing_class='".$what_kind_of."'";
 			$pos_nr+=1;
 			$insurance_id=$bill_elems_row['insurance_id']; // could be used later to display name of company
 			$insurance_used +=$bill_elems_row['balanced_insurance'];
-			if($bill_elems_row['is_labtest']==1)
+			if($bill_elems_row['is_labtest']=1)
 			{
 		  $this->tbl_bill_elem_ID=$bill_elems_row['ID'];
 		  $this->chemlab_testname=$bill_elems_row['description'];
@@ -1451,7 +1454,8 @@ $sql_where="AND purchasing_class='".$what_kind_of."'";
 			$pos_nr+=1;
 			$insurance_id=$bill_elems_row['insurance_id']; // could be used later to display name of company
 			$insurance_used +=$bill_elems_row['balanced_insurance'];
-			if($bill_elems_row['is_radio_test']==1)
+//			echo $bill_elems_row['price'];
+			if($bill_elems_row['is_radio_test']=1)
 			{
 		  $this->tbl_bill_elem_ID=$bill_elems_row['ID'];
 		  $this->radio_testname=$bill_elems_row['description'];
@@ -1810,7 +1814,7 @@ $sql_where="AND purchasing_class='".$what_kind_of."'";
 		while($bill_elems_row=$billelems->FetchRow()) {
 			$insurance_used += $bill_elems_row['balanced_insurance'];
 			$pos_nr+=1;
-			if($bill_elems_row['is_medicine']==1)
+			if($bill_elems_row['is_medicine']=1)
 			{
 				$this->tbl_bill_elem_ID=$bill_elems_row['ID'];
 				$desc = $bill_elems_row['description'];
@@ -1894,7 +1898,7 @@ $sql_where="AND purchasing_class='".$what_kind_of."'";
 		{
 			$insurance_used += $bill_elems_row['balanced_insurance'];
 			$pos_nr+=1;
-			if($bill_elems_row['is_medicine']==1)
+			if($bill_elems_row['is_medicine']=1)
 			{
 				$this->tbl_bill_elem_ID=$bill_elems_row['ID'];
 				$desc = $bill_elems_row['description'];
@@ -2290,7 +2294,7 @@ A:visited:hover {color: #cc0033;}
 			$sum = 0;
 
 			$billelems=$this->GetElemsOfArchivedBill($bills['nr'],"laboratory");
-			if($bill_elems_row=$billelems->FetchRow())
+			if(isset($billelems) and $bill_elems_row=$billelems->FetchRow())
 			{
 				echo '
 	  	  			<tr>
@@ -2301,7 +2305,7 @@ A:visited:hover {color: #cc0033;}
 		  	      	</tr>';
 			}
 			$billelems=$this->GetElemsOfArchivedBill($bills['nr'],"radiology");
-			if($bill_elems_row=$billelems->FetchRow())
+			if(isset($billelems) and $bill_elems_row=$billelems->FetchRow())
 			{
 				echo '
 	  	  			<tr>
@@ -2312,7 +2316,7 @@ A:visited:hover {color: #cc0033;}
 		  	      	</tr>';
 			}
 			$billelems=$this->GetElemsOfArchivedBill($bills['nr'],"prescriptions");
-			if($bill_elems_row=$billelems->FetchRow())
+			if(isset($billelems) and $bill_elems_row=$billelems->FetchRow())
 			{
 				echo '
 	  	  			<tr>
@@ -3091,6 +3095,7 @@ A:visited:hover {color: #cc0033;}
 
 	function GetQuotationStatus($in_outpatient)
 	{
+
 		if($in_outpatient == 'inpatient')
 		{
 			return "AND care_encounter.encounter_class_nr = 1";
@@ -3203,6 +3208,7 @@ A:visited:hover {color: #cc0033;}
 								$where_encounter
 								order by $_REQUEST[sort] $_REQUEST[sorttyp]";
 		}
+
 		if ($this->debug) echo $this->sql;
 		$this->request = $db->Execute($this->sql);
 		if ($this->debug) echo $this->request;
@@ -3229,6 +3235,7 @@ A:visited:hover {color: #cc0033;}
 		 */
 
 		$and_in_outpatient=$this->GetQuotationStatus($in_outpatient);
+
 /*		$all_lab_rad_services=$dia_obj->getBillables();
 		$all_meds=$prescription_obj->getBillables();
 		$all_procedures=$proced_obj->getBillables();
@@ -3279,7 +3286,7 @@ A:visited:hover {color: #cc0033;}
 				ON care_test_request_chemlabor.batch_nr=care_test_request_chemlabor_sub.batch_nr
 			LEFT JOIN care_tz_drugsandservices
 				ON care_test_request_chemlabor_sub.paramater_name=care_tz_drugsandservices.partcode
-			WHERE care_test_request_chemlabor_sub.status='pending'
+			WHERE care_test_request_chemlabor_sub.status='pending' ".$and_in_outpatient." and care_encounter.create_time>'2010-02-22 00:00:00'
 
 			UNION
 
@@ -3309,7 +3316,7 @@ A:visited:hover {color: #cc0033;}
 
 			WHERE
 					care_encounter_prescription.bill_number = 0
-				AND 	(isnull(care_encounter_prescription.is_disabled) OR care_encounter_prescription.is_disabled='')
+				AND 	(isnull(care_encounter_prescription.is_disabled) OR care_encounter_prescription.is_disabled='') ".$and_in_outpatient." and care_encounter.create_time>'2010-02-22 00:00:00'
 			";
 
 		if ($this->request = $db->Execute($this->sql))
@@ -3324,8 +3331,9 @@ A:visited:hover {color: #cc0033;}
 		$db->debug=FALSE;
 		$this->sql="SELECT
 						count(*) as anzahl, encounter_nr,pid, selian_pid, name_first, name_last, date_birth, encounter_date
-					FROM quotation_temporary
+					FROM quotation_temporary where article<>''
 					GROUP BY pid, selian_pid, name_first, name_last, date_birth, encounter_date ";
+		//echo $this->sql;
 		$db->Execute($this->sql);
 		$this->request = $db->Execute($this->sql);
 		return $this->request;
@@ -3779,11 +3787,13 @@ A:visited:hover {color: #cc0033;}
 		($this->debug) ? $db->debug=true : $db->debug=FALSE;
 		if ($this->debug) echo "<br><b>Method class_tz_billing::ShowNewQuotations()</b><br>";
 
+		//TODO: This is not working in that way... I reset it to the previous hanling and could have issues by laboratory...
+		/*
 		if ($this->CreateTmpTableOfElementsToQuote(0,$in_outpatient))
 			$result=$this->getNewQuotationOverview();
-
-//		$result=$this->getNewQuotation_Prescriptions(0,$in_outpatient,$id_array);
-//		$this->getNewQuotation_Laboratory(0,$in_outpatient,$id_array);
+		*/
+		$result=$this->getNewQuotation_Prescriptions(0,$in_outpatient,$id_array);
+		$this->getNewQuotation_Laboratory(0,$in_outpatient,$id_array);
 //		$this->getNewQuotation_Radiology(0,$in_outpatient,&$id_array);
 
 		if ($result)
@@ -3801,7 +3811,6 @@ A:visited:hover {color: #cc0033;}
 				if ($row['purchasing_class'] == 'labtest') $createmode = 'laboratory';
 
 				$total_count=0;
-				$row['anzahl']+=$row['anzahl'];
 				if(empty($row['anzahl'])) $row['anzahl'] = 0;
 				//$labinfo = $this->GetLaboratoryCount($row['encounter_nr']);
 				$row['anzahl_lab']+=$row['anzahl_lab'];
@@ -3809,8 +3818,13 @@ A:visited:hover {color: #cc0033;}
 				//$radinfo = $this->GetRadiologyCount($row['encounter_nr']);
 				$row['anzahl_rad']+=$row['anzahl_rad'];
 				if(empty($row['anzahl_rad'])) $row['anzahl_rad'] = 0;
-				$total_count = ($row['anzahl'])/2;
+				$total_count+=$row['anzahl'];
+
+				$total_count = $total_count-0;
 				//echo $row['anzahl']." + ".$row['anzahl_lab']." = ".$total_count;
+				if ($row['current_dept_nr']=='') {
+					$row['current_dept_nr']=0;
+				}
 				if ($in_outpatient=='outpatient') {
 					$sql='SELECT name_formal from care_department where nr='.$row['current_dept_nr'];
 					$deptresult=$db->Execute($sql);
@@ -3830,7 +3844,8 @@ A:visited:hover {color: #cc0033;}
 						$deptname=$deptrow[0];
 					}
 				}
-				echo '
+//				echo $row['pid'].$total_count.'<br>';
+				if ($total_count>0) echo '
 
 
           <tr>

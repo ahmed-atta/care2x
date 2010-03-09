@@ -25,7 +25,7 @@ if($result){
 	$tp =&$TP_obj->load('tp_main_index_menu_item.htm');
 	while($menu=$result->FetchRow()){
 		/* Deactivated because of laggy login-detection
-		if (eregi('LDLogin',$menu['LD_var'])){
+		if (stristr('LDLogin',$menu['LD_var'])){
 			if ($_COOKIE['ck_login_logged'.$sid]=='true'){
 				$menu['url']='main/logout_confirm.php';
 				$menu['LD_var']='LDLogout';

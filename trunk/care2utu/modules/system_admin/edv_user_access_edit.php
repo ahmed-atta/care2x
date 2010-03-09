@@ -361,7 +361,7 @@ while (list($x,$v)=each($area_opt))
 
    echo '<tr  bgcolor="white">';
 
-   if (eregi('title',$x))  // If title print it out
+   if (stristr('title',$x))  // If title print it out
    {
       echo ' <td  valign=top bgcolor="#81eff5" colspan=5><FONT  SIZE=2  FACE="Arial">'.$v.'</td>';
    }

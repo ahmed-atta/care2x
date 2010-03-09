@@ -25,11 +25,11 @@ if($news[$j]){
 		}
 
 		if(!empty($news[$j]['body']))
-		{
+		{ 
 		    $sBuffer = '<font size="'.$news_headline_title_font_size.'" face="'.$news_headline_title_font_face.'" color="'.$news_headline_title_font_color.'">';
 			
 			if ($news_headline_title_font_bold) $sBuffer = $sBuffer.'<b>';
-
+echo deactivateHotHtml(nl2br($news[$j]['title']));
 			$sBuffer = $sBuffer.ucfirst(deactivateHotHtml(nl2br($news[$j]['title'])));
 			
 			if ($news_headline_title_font_bold) $sBuffer = $sBuffer.'</b>';
@@ -78,7 +78,7 @@ if($news[$j]){
 
 		}
 		else
-		{
+		{ 
 		 $nofile=1;
 		 }
 	} 

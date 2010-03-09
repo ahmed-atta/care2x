@@ -1,6 +1,6 @@
 <?php
 /*
- * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/action.php,v 1.2 2009/01/31 20:06:45 andi Exp $
+ * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/action.php,v 1.3 2010/03/09 13:02:58 robert Exp $
  *
  * Copyright 2001 Nicolas Chalanset <nicocha@free.fr>
  * Copyright 2001 Olivier Cahagne <cahagn_o@epita.fr>
@@ -33,13 +33,13 @@ switch ($action)
 		{
 			// $attach_tab is the array of attachments
 			// If it's a text/plain, display it
-			if ($display_text_attach && eregi ('text/plain', $tmp['mime']))
+			if ($display_text_attach && stristr ('text/plain', $tmp['mime']))
 				echo '<hr />'.view_part($servr, $user, stripslashes($passwd), $folder, $mail, $tmp['number'], $tmp['transfer'], $tmp['charset'], $charset);
-			if ($display_img_attach && (eregi ('image', $tmp['mime']) && ($tmp['id'] == '')))
+			if ($display_img_attach && (stristr ('image', $tmp['mime']) && ($tmp['id'] == '')))
 			{
 				// if it's an image, display it
 				$img_type = array_pop(explode('/', $tmp['mime']));
-				if (eregi('JPEG', $img_type) || eregi('JPG', $img_type) || eregi('GIF', $img_type) || eregi ('PNG', $img_type))
+				if (stristr('JPEG', $img_type) || stristr('JPG', $img_type) || stristr('GIF', $img_type) || stristr ('PNG', $img_type))
 				{
 					echo '<hr />';
 					echo '<center><img src="get_img.php?'.$php_session.'='.$$php_session.'&amp;mail='.$mail.'&amp;folder='.$folder.'&amp;num='.$tmp['number'].'&amp;mime='.$img_type.'&amp;transfer='.$tmp['transfer'].'" /></center>';
