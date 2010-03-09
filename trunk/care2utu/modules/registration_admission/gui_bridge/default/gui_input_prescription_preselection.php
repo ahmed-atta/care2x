@@ -1,6 +1,6 @@
 <?php
 //require('./roots.php');
-$debug=FalsE;
+$debug=FALSE;
 $_SESSION['item_array']=NULL;
 
 if (empty($show))
@@ -8,13 +8,14 @@ if (empty($show))
 
 if (!empty($show)) { // In case something goes wrong, then do nothing!
 
-  if ($debug) echo "Show tab: ".$show."<br>";
-  if ($debug) echo "DB-Filter: ".$db_drug_filter."<br>";
-  if ($debug) echo "DB-Filter2: ".$filter."<br>";
-  if ($debug) echo "This is external call?: ".$externalcall."<br>";
-  if ($debug) echo "prescrServ: ".$_GET['prescrServ']."<br>";
-
-
+  if ($debug) {
+  	echo "Show tab: ".$show."<br>";
+  	 echo "DB-Filter: ".$db_drug_filter."<br>";
+  	 echo "DB-Filter2: ".$filter."<br>";
+  	 echo "This is external call?: ".$externalcall."<br>";
+  	 echo "prescrServ: ".$_GET['prescrServ']."<br>";
+  }
+  
 
   if (empty($db_drug_filter))
     $db_drug_filter="drug_list";
@@ -33,16 +34,17 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
 else {
   $drug_list = $pres_obj->getDrugList("drug_list", 0);
 }
+
 ?>
 
 <script language="javascript" src="<?php echo $root_path;?>js/check_prescription_form.js"></script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
-  <? if ($debug) echo "this file is named: ".$thisfile."<br>"; ?>
-  <? if ($debug) echo "activated tab: ".$activated_tab."<br>"; ?>
-  <? if ($debug) echo URL_APPEND; ?>
+  <?PHP if ($debug) echo "this file is named: ".$thisfile."<br>"; ?>
+  <?PHP if ($debug) echo "activated tab: ".$activated_tab."<br>"; ?>
+  <?PHP if ($debug) echo URL_APPEND;  ?>
   <form name="prescription" method="POST" action="<?php echo $thisfile.URL_APPEND;?>&mode=new">
   <tr>
-    <?php
+    <?php 
       if (isset($externalcall))
         $EXTERNAL_CALL_PARAMETER="&externalcall=".$externalcall;
     ?>
@@ -257,15 +259,15 @@ else {
           </tr>
           <tr>
             <td height="20" align="center">
-            <?
+            <?php
 			        if (isset($externalcall)) {
 			        ?>
 			        <input type="button" name="show" value="<?php echo $LDPrescribe; ?>" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&prescrServ=<?php echo $_GET['prescrServ']?>&show=insert&externalcall=<?php echo $externalcall;?>&disablebuttons=<?php echo $disablebuttons; ?>&backpath=<?php echo urlencode($backpath); ?>')">
-			        <?
+			        <?php
 			        } else {
 			        ?>
 			        <input type="button" name="show" value="<?php echo $LDPrescribe; ?>" onClick="javascript:submit_form('<?php echo $thisfile.URL_APPEND;?>&mode=new&prescrServ=<?php echo $_GET['prescrServ']?>&show=insert&disablebuttons=<?php echo $disablebuttons; ?>&backpath=<?php echo urlencode($backpath); ?>')">
-			        <?
+			        <?php
 			        }
         ?></td>
           </tr>

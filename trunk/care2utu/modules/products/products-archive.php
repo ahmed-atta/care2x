@@ -43,7 +43,7 @@ if($mode=='search')
 	if(($keyword=='')||($keyword=='%')||($keyword=='_')) { header("location:$thisfile".URL_REDIRECT_APPEND."&invalid=1&cat=$cat&userck=$userck"); exit;}
 	if($lang=='de')
 	{
-		if(eregi($keyword,'eilig')) $keyword='urgent';
+		if(stristr($keyword,'eilig')) $keyword='urgent';
 	}
 	if(!$ofset) $ofset=0;
 	if(!$nrows) $nrows=20;

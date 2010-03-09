@@ -30,7 +30,7 @@ $new_date_ok=0;
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 	
-if(($mode=='save')&&($date_format!='')&&(eregi($date_format,$validator))){  
+if(($mode=='save')&&($date_format!='')&&(stristr($date_format,$validator))){  
 	  $new_date_ok=$glob_obj->saveConfigItem('date_format',$date_format);
 }else{
 	if($glob_obj->getConfig('date_format')) $date_format=$GLOBAL_CONFIG['date_format'];

@@ -3,6 +3,7 @@
 error_reporting(E_ALL);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License

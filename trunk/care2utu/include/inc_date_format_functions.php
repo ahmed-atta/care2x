@@ -1,6 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_date_format_functions.php',$_SERVER['PHP_SELF'])) 
+if (stristr('inc_date_format_functions.php',$_SERVER['PHP_SELF'])) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
@@ -60,14 +60,14 @@ function getDateFormat()
 * The function assumes that the dates are in correct formats
 * therefore a validation routine must be done at the client side
 */
-function formatDate2Local($stdDate, $localFormat, $retTime=FALSE, $timeOnly=FALSE, $sepChars)
+function formatDate2Local($stdDate, $localFormat, $retTime=FALSE, $timeOnly=FALSE, $sepChars=FALSE)
 {
    global $lang;
    
    if(!$sepChars) $sepChars=array('-','.','/',':',',');
    $localFormat=strtolower($localFormat); 
    
-   if(eregi('0000',$stdDate))  return strtr($localFormat,'yYmMdDHis','000000000'); // IF  std date is 0 return 0's in local format
+   if(stristr('0000',$stdDate))  return strtr($localFormat,'yYmMdDHis','000000000'); // IF  std date is 0 return 0's in local format
 
    /* If time is included then isolate */
    if(strchr($stdDate,':'))
@@ -140,7 +140,7 @@ function formatDate2STD($localDate,$localFormat,&$sepChars)
 
    if(!$sepChars) $sepChars=array('-','.','/',':',',');
 
-	  if(eregi('0000',$finalDate)) $finalDate=0;
+	  if(stristr('0000',$finalDate)) $finalDate=0;
 
    
    if(!$finalDate)

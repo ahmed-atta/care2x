@@ -1,6 +1,6 @@
 <?php
 /*
- * $Header: /usr/share/cvs/care2002_tz_mero_vps/nocc/functions.php,v 1.2 2009/01/31 20:07:05 andi Exp $ 
+ * $Header: /usr/share/cvs/care2002_tz_mero_vps/nocc/functions.php,v 1.3 2010/03/09 13:02:58 robert Exp $ 
  *
  * Copyright 2001 Nicolas Chalanset <nicocha@free.fr>
  * Copyright 2001 Olivier Cahagne <cahagn_o@epita.fr>
@@ -142,7 +142,7 @@ function aff_mail($servr, $user, $passwd, $folder, $mail, $verbose, $lang, $sort
 	else
 		$header = '';
 	$tmp = array_pop($attach_tab);
-	if (eregi('text/html', $tmp['mime']) || eregi('text/plain', $tmp['mime']))
+	if (stristr('text/html', $tmp['mime']) || stristr('text/plain', $tmp['mime']))
 	{	
 		if ($tmp['transfer'] == 'QUOTED-PRINTABLE')
 			$glob_body = imap_qprint(imap_fetchbody($pop, $mail, $tmp['number']));
@@ -315,7 +315,7 @@ function GetSinglePart($this_part, $header, $body)
 {
 	GLOBAL $attach_tab;
 
-	if (eregi('text/html', $header))
+	if (stristr('text/html', $header))
 		$full_mime_type = 'text/html';
 	else
 		$full_mime_type = 'text/plain';
@@ -361,7 +361,7 @@ function remove_stuff($body, $lang, $mime)
 {
 	// GLOBAL $PHP_SELF;
 
-	if (eregi('html', $mime))
+	if (stristr('html', $mime))
 	{
 		$to_removed_array = array (
 						"'<html>'si",
@@ -387,7 +387,7 @@ function remove_stuff($body, $lang, $mime)
 		$body = eregi_replace("href=\"([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)\"","<a href=\"\\1\" target=\"_blank\"", $body);
 		$body = eregi_replace("href=([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)","<a href=\"\\1\" target=\"_blank\"", $body);
 	}
-	elseif (eregi('plain', $mime))
+	elseif (stristr('plain', $mime))
 	{
 		$body = htmlspecialchars($body);
 		$body = eregi_replace("(http|https|ftp)://([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)","<a href=\"\\1://\\2\" target=\"_blank\">\\1://\\2</a>", $body);
@@ -458,15 +458,15 @@ function get_mail_size($this_part)
 // this function build an array with all the recipients of the message for later reply or reply all 
 function get_reply_all($user, $domain, $from, $to, $cc)
 {
-	if (!eregi($user.'@'.$domain, $from))
+	if (!stristr($user.'@'.$domain, $from))
 		$rcpt = $from.'; ';
 	$tab = explode(',', $to);
 	while ($tmp = array_shift($tab))
-		if (!eregi($user.'@'.$domain, $tmp))
+		if (!stristr($user.'@'.$domain, $tmp))
 			$rcpt .= $tmp.'; ';
 	$tab = explode(',', $cc);
 	while ($tmp = array_shift($tab))
-		if (!eregi($user.'@'.$domain, $tmp))
+		if (!stristr($user.'@'.$domain, $tmp))
 			$rcpt .= $tmp.'; ';
 	return (substr($rcpt, 0, strlen($rcpt) - 2));
 }
@@ -540,7 +540,7 @@ function view_part($servr, $user, $passwd, $folder, $mail, $part_no, $transfer, 
 		$str = nl2br(quoted_printable_decode($text));
 	else
 		$str = nl2br($text);
-	//if (eregi('koi', $transfer) || eregi('windows-1251', $transfer))
+	//if (stristr('koi', $transfer) || stristr('windows-1251', $transfer))
 	//	$str = @convert_cyr_string($str, $msg_charset, $charset);
 	return ($str);
 }

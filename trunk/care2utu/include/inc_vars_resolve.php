@@ -128,7 +128,7 @@ if(empty($reg_glob_ini)||(!$reg_glob_ini))
 ///}
 
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-/***if (eregi('inc_vars_resolve.php',$_SERVER['PHP_SELF'])) 
+/***if (stristr('inc_vars_resolve.php',$_SERVER['PHP_SELF'])) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 ?>

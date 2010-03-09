@@ -1,7 +1,13 @@
 <?php
-$version="2.05.3.8";
+$version="2.05.4.1 beta";
 /**
  * History:
+ * version: 2.05.4.1 beta
+ * replaced all depriciated eregi commands with stristr (just eregi_replace is still there) - it still might contain bugs: beta
+ * version: 2.05.4.0 beta
+ * Latest integration of Haydom implemented. Full test is outstanding - so it is a beta. It might contain bugs
+ * version: 2.05.3.9
+ * Store the config file for webERP as XML file in the include folder (config_webERP.xml) and created a new class to read that values(class_readconfig.php)
  * Version 2.05.3.8
  * Improving the lab module, covering to the billing section. Embedded reporting elements on discharge and also patient tracking and presciption tracking
  * Version 2.05.3.5, 22-dec-08
