@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<serverlogin>
-	<user>admin</user>
-	<password>admin</password>
-	<Server>http://localhost/webERP/api/api_xml-rpc.php</Server>
-	<DebugLevel>0</DebugLevel>
-</serverlogin>
