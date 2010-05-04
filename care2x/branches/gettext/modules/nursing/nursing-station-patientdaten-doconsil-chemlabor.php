@@ -105,6 +105,7 @@ if($user_origin=='lab'){
 }
 
 require_once($root_path.'include/core/inc_front_chain_lang.php'); ///* invoke the script lock*/
+include($root_path.'modules/laboratory/inc_list_chemlab_tests.php');
 
 $thisfile='nursing-station-patientdaten-doconsil-chemlabor.php';
 
