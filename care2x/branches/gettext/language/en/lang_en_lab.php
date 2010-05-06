@@ -129,7 +129,7 @@ $LDLowerCritical='Lower critical';
 $LDUpperToxic='Upper toxic';
 $LDLowerToxic='Lower toxic';
 /* 2007-07-22 Gjergj Sheldija*/
-$LDShowParam='Show/Hide param';
+$LDShowParam='Show\Hide param';
 $LDHide='Hide';
 $LDDelete='Delete';
 $LDShow='Show';

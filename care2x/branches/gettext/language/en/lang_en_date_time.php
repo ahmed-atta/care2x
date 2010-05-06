@@ -64,6 +64,6 @@ $LDNight='Night';
 #2003-11-11 EL
 $LD_ddpMMpyyyy='dd.mm.yyyy';
 $LD_yyyyhMMhdd='yyyy-mm-dd';
-$LD_MMsddsyyyy='mm/dd/yyyy';
-$LD_ddsMMsyyyy='dd/mm/yyyy';
+$LD_MMsddsyyyy='mm\dd\yyyy';
+$LD_ddsMMsyyyy='dd\mm\yyyy';
 ?>

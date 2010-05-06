@@ -171,8 +171,8 @@ $LDDateFormatsTxt[3]='For example: 01/10/2010 (01 October , 2010)';
 * BEGIN */
 $LD_ddpMMpyyyy='dd.mm.yyyy';
 $LD_yyyyhMMhdd='yyyy-mm-dd';
-$LD_MMsddsyyyy='mm/dd/yyyy';
-$LD_ddsMMsyyyy='dd/mm/yyyy';
+$LD_MMsddsyyyy='mm\dd\yyyy';
+$LD_ddsMMsyyyy='dd\mm\yyyy';
 /* END */
 
 $LDNewDateFormatSaved='The new date format is now in effect.';

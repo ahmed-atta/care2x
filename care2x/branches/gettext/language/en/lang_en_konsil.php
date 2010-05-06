@@ -13,7 +13,7 @@ $LDReset='Reset';
 $LDClose='Close';
 $LDSpeedTest='Urgent test.';
 $LDDiagnosticTest='Request diagnostic test';
-$LDRelayResult='Relay diagnosis at Phone/Beeper';
+$LDRelayResult='Relay diagnosis at Phone \ Beeper';
 $LDSpeedCut='Express cut.';
 $LDDate='Date';
 $LDOpDate='Date of operation';
@@ -178,7 +178,7 @@ $LDPendingTestRequest='Pending Test Request';
 /* 2002-09-13 EL */
 $LDPrevRequest='Previous request';
 $LDNextRequest='Next request';
-$LDEnterResult='Write findings/results for this test request';
+$LDEnterResult='Write findings\results for this test request';
 $LDPrintOut='Print this form';
 $LDSaveEntry='Save entries';
 /* 2002-09-14 EL */
