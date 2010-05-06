@@ -8,7 +8,7 @@ $fieldname[5]="Beeper1";
 $fieldname[6]="Beeper2";
 $fieldname[7]="Private1";
 $fieldname[8]="Private2";
-							
+
 $LDPhoneDir="Phone directory";
 $LDSearch="Search";
 $LDDir="Directory";
@@ -16,7 +16,7 @@ $LDNewData="New data";
 $LDSEARCH="SEARCH";
 
 /**************** note the " ~nr~ " must not be erased it will be replaced by the script with the number of search results ******/
-$LDPhoneFound="Search found <font color=red><b> ~nr~ </b></font> relevant data.";
+$LDPhoneFound="Search found  ~nr~  relevant data.";
 
 $LDKeywordPrompt="Enter search keyword. For example: a name, or a department, or a shortform, etc.";
 $LDShowDir="Show the complete directory";
@@ -80,7 +80,7 @@ $LDShowActualDir="Show current directory entries";
 $LDYesDelete="Yes, delete";
 $LDNoCancel="NO! CANCEL";
 $LDDeleteEntry="Delete entry";
-$LDNoData="You did not enter anything. Please enter the data before clicking the \"Save\" button.";
+$LDNoData="You did not enter anything. Please enter the data before clicking the Save button.";
 $LDReallyDelete="Do you really want to erase the following entry?";
 
 $LDHowManage="How to manage the directory";
@@ -89,7 +89,7 @@ $LDHowEnter="How to enter new phone information";
 $LDHow2SearchPhone="How to search for a phone number";
 $LDUpdate="Update data";
 
-$LDDirData="Edit directory entry nr. <font color=\"red\">~nr~</font>";
+$LDDirData="Edit directory entry nr. ~nr~";
 $LDTelephone='Telephone';
 $LDBeeper='Beeper';
 ?>

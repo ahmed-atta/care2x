@@ -1,6 +1,6 @@
 ﻿<?php
 $LDWhereTo='Where do you want to post the article?';
-$LDPlsSelect='Please select the number based on the sample graphic, then press \'Continue...\'.';
+$LDPlsSelect='Please select the number based on the sample graphic, then press Continue...';
 $LDContinueBut='Continue...';
 $LDCancelBut='Cancel';
 $LDBackBut='Back';
@@ -22,12 +22,12 @@ $LDNews='News article';
 /**
 * Do not translate the '<font size=1>' and '</font>'
 */
-$LDPicFile='Picture <font size=1>(maximum file size 1MB)</font>';
+$LDPicFile='Picture (maximum file size 1MB)';
 $LDAuthor='Author';
 /**
 * Do not translate the '<font size=1>' and '</font>'
 */
-$LDPublishDate='Publish date <font size=1>(\'T\' for today)</font>';
+$LDPublishDate='Publish date (T for today)';
 
 $LDAlertTitle='Please supply a title';
 $LDAlertNews='Please type the news article';
@@ -70,12 +70,12 @@ $LDNewsDummy[2]='second';
 $LDNewsDummy[3]='third';
 $LDNewsDummy[4]='fourth';
 
-$LDMenuToday='Today\'s menu';
-$LDMenuAll='Menu for <br> &nbsp;other days';
+$LDMenuToday='Todays menu';
+$LDMenuAll='Menu for other days';
 $LDPrices='Prices';
-$LDNoMenu='Menu is not<br> available.';
+$LDNoMenu='Menu is not available.';
 $LDWhatToDo='What do you want to edit?';
-$LDPlsMarkSelection='Please select one option, then click \'Continue...\'.';
+$LDPlsMarkSelection='Please select one option, then click Continue...';
 $LDMenuEdit='Edit menu';
 $LDPriceEdit='Edit prices';
 $LDNewsEdit='Edit news or information article';
@@ -104,18 +104,18 @@ $LDSorry='We are sorry. Please try again later.';
 $LDCafePrices='cafeteria price list';
 
 $LDCreateGroup='Create a new group of products';
-$LDCreateGroupPrompt='You must create a new group of products. Please click \'Continue...\'.';
+$LDCreateGroupPrompt='You must create a new group of products. Please click Continue...';
 /**
 * Do not translate the '<font color=\'#000000\'>' and '</font>'
 */
-$LDMarkGroup='You must select a product group to edit.<br> Then click  \'<font color=\'#000000\'>Continue...</font>\'';
-$LDEnterGroup='Enter the name of the new group.<br>Then click \'<font color=\'#000000\'>Continue...</font>\'';
+$LDMarkGroup='You must select a product group to edit. Then click  Continue...';
+$LDEnterGroup='Enter the name of the new group. Then click Continue...';
 $LDProdGroup='Product group';
 $LDClk2End='To finish please click this >> ';
 $LDPriceSaved='The following product(s) and price(s) were saved.';
 
 $LDMarkWeek='Please select the week.';
-$LDClkContinue='Then click \'Continue...\'.';
+$LDClkContinue='Then click Continue...';
 $LDPlsEnter='Type the menu here...';
 $LDClk2Edit='Click me to edit';
 $LDPreviewPic='Preview Picture';
@@ -139,6 +139,6 @@ $LD_MMsddsyyyy='mm/dd/yyyy';
 $LDSubmitNews='Submit News';
 $LDDelete='Delete';
 $LDDeleteCurrency='Are you sure, you really want to delete this currency?';
-$LDNoMainDelete='You cannot delete a main currency. \nPlease set a different main currency first.';
+$LDNoMainDelete='You cannot delete a main currency. Please set a different main currency first.';
 $LDCurrencyExisting='This currency exists already!';
 ?>

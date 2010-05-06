@@ -42,7 +42,7 @@ $LDRepeatedTestPls='please enter the early Journal number with date';
 $LDHysterectomy='Hysterectomy:';
 $LDClinicalInfo='Clinical information';
 $LDReqTest='Requested diagnostic test';
-$LDNotesTempReport='Notes / Initial findings:';
+$LDNotesTempReport='Notes \ Initial findings:';
 $LDRequestingDoc='Requesting doctor';
 $LDReportingDoc='Reporting doctor';
 $LDXrayNumber='X-ray Nr.:';
@@ -62,8 +62,8 @@ $LDAllergyKnown='Allergy known?';
 $LDHyperthyreosisKnown='Hyperthyreosis known?';
 $LDPregnantPossible='Pregnancy possible?';
 
-$LDDiagnosesInquiries='Diagnoses / Inquiries:';
-$LDDeptReport='Department\'s Report:';
+$LDDiagnosesInquiries='Diagnoses \ Inquiries:';
+$LDDeptReport='Departments Report:';
 $LDRequestTo='Request to the';
 $LDDepartment='department';
 $LDVisitRequested='Visit requested';
@@ -86,10 +86,10 @@ $LDShortMonth[12]='De';
 $LDBatchNumber='Batchnumber';
 $LDMaterial='Material:';
 $LDDiagnosis='Diagnosis:';
-$LDImmuneSupp='Immune supp.';		
+$LDImmuneSupp='Immune supp.';
 
 $LDRequestedTest='Requested Test';
-$LDLabel='Label';					
+$LDLabel='Label';
 $LDCentralLab='Central Laboratory';
 
 $LDRequestOf='Request for ';
@@ -101,7 +101,7 @@ $LDByBloodBank='from the blood bank:';
 $LDBloodGroup='Blood group:';
 $LDRhFactor='Rh-factor:';
 $LDKell='Kell';
-$LDDateProtNumber='Date & protocol nr. of test by:';
+$LDDateProtNumber='Date and protocol nr. of test by:';
 $LDBloodSpecimen='Specimen';
 $LDCount='Count';
 $LDPureBlood='Pure blood';
@@ -110,11 +110,11 @@ $LDLeukoLessRedBlood='Leukocytedepleted red blood cell';
 $LDWashedRedBlood='Washed red blood cells';
 $LDPRP='Platelet rich plasma';
 $LDThromboCon='Platelet concentrate';
-$LDFFP='Fresh frozen plasma</font>';
+$LDFFP='Fresh frozen plasma';
 $LDTransfusionDevice='Transfusion devices';
 $LDTransfusionDate='Transfusion date:';
-$LDNotesRequests='Notes/special orders:';
-$LDDoctorNotice='<b>The ordering doctor is responsible for this order!</b><br>For security reasons, only sample tubes with full name & birthdate will be accepted.';
+$LDNotesRequests='Notes\special orders:';
+$LDDoctorNotice='The ordering doctor is responsible for this order!For security reasons, only sample tubes with full name and birthdate will be accepted.';
 
 $LDPB='PB'; /* Pure blood */
 $LD350='350';
@@ -153,7 +153,7 @@ $LDBookedOn='booked on';
 $LDFillByLab='To be filled up by blood bank only!';
 $LDFillByWard='Must be filled up at the ward!';
 
-/* 2002-09-03 EL */							  
+/* 2002-09-03 EL */
 $LDSearchPatient='Search patient';
 $LDPlsSelectPatientFirst='Please search for the patient first.';
 /* 2002-09-07 EL*/
@@ -161,13 +161,13 @@ $LDAlertQuickCut='The quick cut is selected.';
 $LDAlertQuickDiagnosis='The quick diagnosis is selected.';
 $LDPlsEnterPhone='Please enter the phone or beeper number.';
 $LDPlsEnterOpDate='Please enter the op date.';
-$LDPlsEnterDoctorName='Please enter the doctor\\\'s name.';
+$LDPlsEnterDoctorName='Please enter the doctors name.';
 
 /* 2002-09-08 EL */
 $LDPlsEnterBloodGroup='Please enter the blood group.';
 $LDPlsEnterRhFactor='Please enter the Rh-factor.';
 $LDPlsEnterKell='Please enter the Kell value.';
-$LDPlsEnterBloodPcs='Please enter the blood product\'s number of pcs.';
+$LDPlsEnterBloodPcs='Please enter the blood products number of pcs.';
 $LDPlsEnterDate='Please enter the date.';
 /* 2002-09-09 EL */
 $LDPlsEnterDiagnosisQuiry='Please enter the diagnoses or inquiries.';
@@ -198,7 +198,7 @@ $LDPlsEnterTransfusionDate='Please enter the date of transfusion.';
 /* 2002-09-21 EL */
 $LDPlsEnterLEN='Please enter the Lab Entry Number (LEN)';
 /* 2002-09-28 EL */
-$LDHospitalName='Care';
+$LDHospitalName='Hospital Name';
 
 /* 2002-09-29 EL */
 $LDHematology='Hematology';
@@ -214,10 +214,10 @@ $LD900='9.00';
 $LD1500='15.00';
 
 /* 2002-10-14 EL */
-$LDDone='It\'s done! Move the form to the archive';
+$LDDone='Its done! Move the form to the archive';
 
 /* Note: the following arrays use strict medical terminology.
-*  If you are not sure about their translation, please leave the 
+*  If you are not sure about their translation, please leave the
 *  english word untranslated
 */
 

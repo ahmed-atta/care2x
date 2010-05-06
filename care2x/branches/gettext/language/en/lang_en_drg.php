@@ -1,6 +1,6 @@
 <?php
-$LDIcd10='ICD_10'; // ICD = International Codes of Diseases  !! 
-$LDOps301='OPS_301'; // OPS = Opertionenschl�ssel - German code for surgical operations !!
+$LDIcd10='ICD_10'; // ICD = International Codes of Diseases  !!
+$LDOps301='OPS_301'; // OPS = Opertionenschlssel - German code for surgical operations !!
 $LDBack2Logbook='Go back to logbook';
 $LDIcd10Search='ICD-10 Search';
 $LDSearch4ICD10='Search for ICD-10 Codes';
@@ -22,7 +22,7 @@ $LDLocalization='Localization';
 $LDOpsIntern='Intern code';
 $LDSearchCodes='Search codes';
 $LDQuickList='Quicklist';
-$LDConvert2IcdOps='->ICD/ICPM';  // !! Do not translate !!
+$LDConvert2IcdOps='->ICD-ICPM';  // !! Do not translate !!
 
 $LDSearch='Search';
 $LDOperation='Operation';
@@ -37,7 +37,7 @@ $LDBoth='Both';  // B = Both or (both sides)
 $LDDeleteEntry='Delete entry';
 $LDNoQuickList='The quicklist is empty at the moment.';
 $LDClick2Search='Please click here to go to search.';
-$LDPossibleCodes='Possible ICD & ICPM Codes';
+$LDPossibleCodes='Possible ICD and ICPM Codes';
 /*2003-05-25 EL */
 $LDCategory='Category';
 $LDLoc='Loc.';
@@ -82,8 +82,8 @@ $LDIfAvailable='If available';
 $LDYes='Yes';
 $LDNo='No';
 $LDExtraNotes='Extra notes';
-$LDAlertNoCode='Please enter the group\'s code.';
-$LDAlertNoDescription='Please enter the code\'s description.';
+$LDAlertNoCode='Please enter the groups code.';
+$LDAlertNoDescription='Please enter the codes description.';
 /*2003-06-07 EL*/
 $LDCode='Code';
 /*2003-06-13 EL*/

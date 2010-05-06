@@ -4,9 +4,9 @@ $LDMedLab='Medical laboratory';
 $LDPathLab='Pathological laboratory';
 $LDBacLab='Bacteriological laboratory';
 $LDClose='Close';
-$LDSeeLabData='Search and display patient\'s laboratory data.';
+$LDSeeLabData='Search and display patients laboratory data.';
 $LDSeeData='Display data';
-$LDEnterLabData='Enter patient\'s laboratory data';
+$LDEnterLabData='Enter patients laboratory data';
 $LDNewData='Enter new data';
 $LDEnterPrioParams='Set priority parameters';
 $LDPrioParams='Priority parameters';
@@ -25,7 +25,7 @@ $LDfieldname[3]='Birthdate';
 $LDSearchWordPrompt='Enter a search keyword, for example: a family name, a name, a birthdate, etc.';
 $LDEnterData='Click to enter data';
 $LDClk2See='Click to see data';
-$LDFoundPatient='The search found <b>~nr~</b> patients';
+$LDFoundPatient='The search found ~nr~ patients';
 $LDWildCards='What are wildcards and how to use them';
 $LDNewSearch='New search';
 
@@ -73,7 +73,7 @@ $LDAlertTestDate='Enter the examination date first!';
 /* 2002-09-01 EL */
 $LDTestRequest='Test Request';
 $LDFillUpSend='Fill up and send request form for ';
-$LDTestRequestPathoTxt=$LDFillUpSend.'pathology/histology test';
+$LDTestRequestPathoTxt=$LDFillUpSend.'pathology\histology test';
 $LDTestRequestBacterioTxt=$LDFillUpSend.'bacteriological test';
 $LDTestRequestChemLabTxt=$LDFillUpSend.'chemical laboratory test';
 $LDBloodBank='Blood bank';
@@ -86,15 +86,15 @@ $LDRequestSent['update']='The update test request was sent. ';
 $LDFormSaved['update']='The updated test was saved (not yet sent).';
 $LDWhatToDo=' What do you want to do now?';
 
-$LDNewFormSamePatient='Create a new test request for the <b>same</b> patient';
+$LDNewFormSamePatient='Create a new test request for the same patient';
 $LDEditForm='Edit the same test request';
-$LDEndTestRequest='I\'m finished.';
-$LDNewFormOtherPatient='Create a test request for <b>another</b> patient';
+$LDEndTestRequest='Im finished.';
+$LDNewFormOtherPatient='Create a test request for another patient';
 
-/* 2002-09-03 EL */							  
+/* 2002-09-03 EL */
 $LDSearchPatient='Search patient';
 $LDSearchFound='~nr~ patients were found.';
-/* 2002-09-04 EL */		
+/* 2002-09-04 EL */
 $LDTestRequestFor='Request for ';
 
 $LDTestType["'chemlabor'"]='chemicallaboratorytest';
@@ -106,7 +106,7 @@ $LDTestType["'radio'"]='radiology';
 
 /* 2002-09-10 EL */
 $LDTestReception='Pending Request';
-$LDTestReceptionTxt='Receive & process requests, write results/findings/diagnoses';
+$LDTestReceptionTxt='Receive and process requests, write results\findings\diagnoses';
 /* 2002-09-15 EL */
 $LDPrintForm='Print the request form';
 
@@ -142,7 +142,7 @@ $LDID='Param ID';
 $LDMethod='Method';
 $LDGroup='GRoup';
 $LDTestGroups='Analysis Group';
-$LDTestGroupsTxt='Create / Change analysis group';
+$LDTestGroupsTxt='Create \ Change analysis group';
 $LDHiddenParams='Parameters in green are hidden';
 $LDDeletedParams='Parameters in red are deleted';
 $LDHiddenGroups='Groups in green are hidden';

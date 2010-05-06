@@ -32,8 +32,8 @@ $kontrollmeldung_2="called";
 $kontrollmeldung_3="Create a module with the title shown above?";
 
 //Variablen fuer edv_modul_neu_3.php
-$weiter_info="Please click \"contiue\" for creating the main file. Some more information is necessary.";
-$wichtige_info="Click here for important advices for adjusting the files \"Modulname\"-main-pass.php and test_person_search.php";
+$weiter_info="Please click contiue for creating the main file. Some more information is necessary.";
+$wichtige_info="Click here for important advices for adjusting the files Modulname-main-pass.php and test_person_search.php";
 
 //Variablen fuer check_patientwahl.php
 $LD_headline_frage="Please choose. If nothing is changed, a patient based module will be generated.";
@@ -48,12 +48,12 @@ $setback_fields="Set back fields";
 
 //Variablen fuer radio_tabwahl.php  U N D  radio1_memofeld.php
 $nenne_tabelle="specify the table name";
-$nenne_tabelle2="<strong>(the same like in the memo field!)</strong>";
-$nenne_suchfeld="specify the search field (normally \"id\")";
+$nenne_tabelle2="(the same like in the memo field!)";
+$nenne_suchfeld="specify the search field (normally id)";
 $nenne_tab_bezeichner="specify a string name for the table headline";
-$nenne_anzeigefeld="specify the field shown in the search list (e.g. name/firstname)";
+$nenne_anzeigefeld="specify the field shown in the search list (e.g. name\firstname)";
 $nenne_server="specify the database server";
-$fertig="create table and finish module $ModulNeuBez.";
+$fertig="create table and finish module";
 
 //Variablen fuer radio1_memofeld.php
 $infoline="Change the example table as you wish.</br>";
@@ -69,7 +69,7 @@ $err_kopieren="Error accured while copying ";
 $err_fehlgeschlagen=" .<br/>";
 
 //Variablen aus Schlusssatz.php
-$ld_gratulation="Congratulation, the module <strong> $ModulNeuBez</strong>is finish.";
+$ld_gratulation="Congratulation, the module is finished.";
 
 
 ?>

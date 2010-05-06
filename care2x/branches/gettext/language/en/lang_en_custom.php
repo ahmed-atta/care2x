@@ -2,11 +2,11 @@
 
 // custom text file for new pages
 
-$IO_title='Intake & Output chart';
+$IO_title='Intake and Output chart';
 $DDC_title='Diabetic Drug Chart';
 $NOC_title='Neuro Observation Chart';
 $TC_title='Turning Chart';
-/* general */ 
+/* general */
 $LDEDIT='EDIT';
 $LDCLEAR='CLEAR';
 $LDDate='Date';

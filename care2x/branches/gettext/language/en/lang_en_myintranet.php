@@ -7,7 +7,7 @@ $LDMyDiary="myDiary";
 $LDMyCalendar="myCalendar";
 $LDMyMemo="myMemo";
 
-$LDMyPersonalPlannerTxt="Planner for personal appointments, to do's, etc.";
+$LDMyPersonalPlannerTxt="Planner for personal appointments, to dos, etc.";
 $LDMyOrganizerTxt="Organizer for all the not so small little things in life";
 $LDMyOffRequesterTxt="Requester for vacation and off days";
 $LDMyDiaryTxt="Personal diary";

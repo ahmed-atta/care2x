@@ -23,7 +23,7 @@ $LDRecBy='Referred by';
 $LDTherapy='Therapy';
 $LDSpecials='Referrer notes';
 
-$LDPatientSearch='Search patient\'s data';
+$LDPatientSearch='Search patients data';
 $LDAdmit='Admission';
 $LDSearch='Search';
 $LDArchive='Archive';
@@ -44,8 +44,8 @@ $LDCancel='Cancel';
 
 $LDCancelClose='Cancel and back to start page';
 $LDCloseWin='Close admission window';
-$LDError='Information is missing in the input field marked <font color=red>red</font>!';
-$LDErrorS='Some information are missing in the input fields marked with <font color=red>red</font>!';
+$LDError='Information is missing in the input field marked red!';
+$LDErrorS='Some information are missing in the input fields marked with red!';
 
 $fieldname[0] = 'Patient nr.';
 $fieldname[1] = 'Lastname';
@@ -60,7 +60,7 @@ $LDAdmWantSearch='I am looking for a patient';
 $LDAdmWantArchive='I need to research in the archive';
 
 /**************** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFound='The search found <font color=red><b>~nr~</b></font> relevant data.';
+$LDSearchFound='The search found ~nr~ relevant data.';
 
 $LDShowData='Show data';
 $LDPatientData='Admission Data';
@@ -117,11 +117,11 @@ $LDMedocsElements[8]='Time';
 
 $LDStartNewDoc='Start a new medocs document';
 $LDNoMedocsFound='No medocs document of the patient found!';
-$LDAt='at';		
-		
+$LDAt='at';
+
 $LDDept='Dept';
 $LDRoomNr='Room nr';
-$LDAdmitType='Admission type';		
+$LDAdmitType='Admission type';
 $LDCivilStat='Civil status';
 $LDInsuranceNr='Insurance nr';
 $LDNameAddr='Name & Address';
@@ -142,7 +142,7 @@ $LDSeeDiagnosisNote='Diagnosis related notes & publications:';
 $LDSeeTherapyNote='Therapy related notes & publications:';
 $LDMakeBarcodeLabels='Make barcode labels';
 
-$LDPlsEnterDept='<b>Please enter your department, clinic, or work area.</b><br>(e.g. PLOP, Internal Med2, or M4A, etc.)';
+$LDPlsEnterDept='Please enter your department, clinic, or work area.<br>(e.g. PLOP, Internal Med2, or M4A, etc.)';
 $LDOkSaveNow='OK save now';
 
 $LD_ddpMMpyyyy='dd.mm.yyyy';
@@ -162,8 +162,8 @@ $LDNameMaiden='Maiden name';
 $LDNameOthers='Other names';
 $LDStreet='Street';
 $LDStreetNr='Nr.';
-$LDTownCity='Town/City';
-$LDProvState='Province/State';
+$LDTownCity='Town-City';
+$LDProvState='Province-State';
 $LDRegion='Region';
 $LDCountry='Country';
 $LDCitizenship='Citizenship';
@@ -200,7 +200,7 @@ $LDDiagXResultsTxt='Search, research, display diagnostic results or reports';
 $LDAppointments='Appointments';
 $LDAppointmentsTxt=$LDESE.', research appointments or schedules';
 $LDPatientDev='Development';
-$LDPatientDevTxt=$LDESE.', display reports on patient\'s development';
+$LDPatientDevTxt=$LDESE.', display reports on patients development';
 $LDWtHt='Weights & Heights';
 $LDWtHtTxt=$LDESE.' weight, height & head circumference';
 $LDPregnancies='Pregnancies';
@@ -240,18 +240,18 @@ $LDAttDrServiceClass='Medical service class';
 $LDAdmitClass='Admission class';
 /* 2003-02-15 EL*/
 $LDEnterSearchKeyword='Please enter search keyword';
-$LDSearchFoundData='The search found <font color=red><b>~nr~</b></font> relevant data.';
+$LDSearchFoundData='The search found ~nr~ relevant data.';
 $LDQuickList='Quicklist';
 $LDSeveralInsurances='Patient has several insurances. Click here to edit.';
 $LDTop='Top';
 $LDInsuranceClass='Insurance class';
-$LDRecordsHistory='DB Record\'s History';
+$LDRecordsHistory='DB Records History';
 /* 2003-02-16 EL*/
 $LDNotYetAdmitted='Not yet admitted';
 $LDPatientCurrentlyAdmitted='Patient is currently admitted!';
 $LDOptions='Options';
 /** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDSearchFoundAdmit='I found <font color=red><b>~nr~</b></font> relevant admission data.';
+$LDSearchFoundAdmit='I found ~nr~ relevant admission data.';
 $LDPatientNr='Patient Nr.';
 $LDNoRecordYet='~tag~ has no ~obj~ yet.';
 $LDNoRecordFor='No ~obj~ record for ~tag~ yet.';
@@ -288,7 +288,7 @@ $LDMeasuredBy='Measured by';
 $LDSickUntil='Unable to work until (inclusive)';
 $LDStartingFrom='Starting from';
 $LDConfirmedOn='Confirmed on';
-$LDInsurersCopy='Insurer\'s copy';
+$LDInsurersCopy='Insurers copy';
 $LDDiagnosis2='Diagnosis';
 /* 2003-03-03*/
 $LDBy='By';
@@ -354,7 +354,7 @@ $LDPatientIsDischarged='This patient is already discharged';
 $LDShow='Show';
 $LDPlannedEncType='Planned admission type';
 # 2003-08-01 EL
-$LDListEncounters='Encounters\' list';
+$LDListEncounters='Encounters list';
 $LDDischarged='Discharged';
 $LDDischargeDate='Discharge date';
 # 2003-08-04 EL
@@ -367,8 +367,8 @@ $LDMeasurements='Measurements';
 #2003-08-28 eL
 $LDPlsEnterReferer='Please enter refering physician';
 $LDPlsEnterRefererDiagnosis='Please enter referal diagnosis';
-$LDPlsEnterRefererTherapy='Please enter referer\'s recommended therapy';
-$LDPlsEnterRefererNotes='Please enter referer\'s notes';
+$LDPlsEnterRefererTherapy='Please enter referers recommended therapy';
+$LDPlsEnterRefererNotes='Please enter referers notes';
 $LDPlsSelectAdmissionType='Please select admission type';
 $LDForInpatient='For inpatient';
 $LDForOutpatient='For outpatient';
@@ -414,5 +414,5 @@ $LDOtherHospitalNr='Other Hospital Nr.';
 $LDSelectOtherHospital = 'Select other hospital to change the number';
 $LDNoNrNoDelete = 'no number = delete';
 
-$LDNoAddress='No City defined yet. Please go to the main menu and<br>click Special Tools -> Address Manager -> New data and <br>enter City and ZIP data<br>.';
+$LDNoAddress='No City defined yet. Please go to the main menu and click Special Tools -> Address Manager -> New data and <br>enter City and ZIP data.';
 ?>

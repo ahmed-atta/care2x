@@ -22,7 +22,7 @@ $LDSober='sober';
 $LDBloodSugar='BLS';
 $LDBLoodSugar1='BLS1';
 $LDBloodPlasma='BLP';
-$LDDoctorSignature='Doctor\'s signature';
+$LDDoctorSignature='Doctors signature';
 $LDLifeRisk='Risk to life';
 $LDRarity='Rarity';
 $LDSpecTest='special Tests';
@@ -41,7 +41,7 @@ $LDShortMonth[9]='Sep';
 $LDShortMonth[10]='Oct';
 $LDShortMonth[11]='Nov';
 $LDShortMonth[12]='Dec';
-								   
+
 $LDShortDay[0]='So';
 $LDShortDay[1]='Mo';
 $LDShortDay[2]='Tu';
@@ -50,12 +50,12 @@ $LDShortDay[4]='Th';
 $LDShortDay[5]='Fr';
 $LDShortDay[6]='Sa';
 $LDShortDay[7]='So';
-				
+
 $LDBatchNumber='Batch nr.';
 $LDMaterial='Material:';
 $LDEmergencyProgram='The violet shaded fields belong to emergency program';
 $LDPhoneOrder=' = must be confirmed by phone';
-/* 2002-09-03 EL */							  
+/* 2002-09-03 EL */
 $LDSearchPatient='Search patient';
 $LDPlsSelectPatientFirst='Please search for the patient first.';
 /* 2002-09-11 EL */
