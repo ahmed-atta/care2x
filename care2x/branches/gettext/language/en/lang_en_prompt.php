@@ -6,7 +6,7 @@ $LDPlsEnterDiagnosis='Please enter the diagnosis';
 $LDPlsSelectStyle='Please select a style';
 $LDCheckParamFirst='Please check first the parameter you want to display';
 # Do not edit ~ward_id~
-$LDChkWardConflict='This patient was initially assigned to a different ward (<b>~ward_id~</b>). Please clarify this first with the 
+$LDChkWardConflict='This patient was initially assigned to a different ward (~ward_id~). Please clarify this first with the
 admission desk before proceeding to admit this patient in your ward. Thank you.';
 $LDSelectRoomBed='Please select the room and bed below to assign to this patient. Thank you';
 $LDSureAssignRoomBed='Are you really sure, you want to assign this room and bed to the patient ?';
@@ -15,7 +15,7 @@ $LDErrorOccured='An error occured.';
 $LDTryOrNotifyEDP='Please try again or notify your EDP department if the problem persists. Thank you.';
 # 2003-07-30 EL
 $LDPlsEnterDate='Please enter a date';
-$LDPlsEnterDoctor='Please enter a  physician\'s or surgeon\'s name';
+$LDPlsEnterDoctor='Please enter a  physicians or surgeons name';
 $LDPlsEnterPurpose='Please enter the purpose';
 $LDAppointNotToday='This appointment is NOT scheduled for today!';
 $LDSureAdmitAppoint='Are you sure you want to admit this appointment for today?';
@@ -28,7 +28,7 @@ $LDGoToAppointments='Please click here to check the pending appointments.';
 $LDSureTransferPatient='Are you really sure, you want to transfer this patient ?';
 $LDClkTransfer='Click to transfer patient';
 $LDSureTakeOverPatient='Are you sure? You want to take over this patient?';
-$LDChkClinicConflict='This patient was preassigned to another clinic/department (<b>~dept_id~</b>). 
+$LDChkClinicConflict='This patient was preassigned to another clinic\department (~dept_id~).
 Please clarify this first with the admission desk or other clinic before proceeding to take over  this patient in your clinic. Thank you.';
 $LDSureToCancel='Are you sure? You want to cancel this?';
 $LDPlsEnterFullName='Please enter your full name';
@@ -38,15 +38,15 @@ $LDCancelError='An error happened! Cancel was aborted.';
 $LDTellEdpIfPersist='Notify your EDP department if the problem persists. Thank you.';
 $LDPlsFindPersonFirst='Please find the person first.';
 $LDEnterRelatedInfo='If available, enter related information here';
-$LDRelatedEncNr='Related encounter\'s nr.';
-$LDRelatedDocsIds='Related documents\' ID\'s';
+$LDRelatedEncNr='Related encounters nr.';
+$LDRelatedDocsIds='Related documents IDs';
 $LDSeparateComma='Separate with commas';
 $LDPlsReadThis='Please read this';
 # 2003-08-11 EL
-$LDPersonIsEmployed='This person is currently this hospital\'s employee!';
+$LDPersonIsEmployed='This person is currently this hospitals employee!';
 # 2003-08-24 EL
 $LDCachedInfo='This is a cached information!';
-$LDClkNoCache='Click >>this<< to get the non-cached information.';
+$LDClkNoCache='Click this to get the non-cached information.';
 
 # 2003-08-25 EL
 $LDPlsEnterReport='Please enter your report or notes';

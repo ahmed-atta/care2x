@@ -12,7 +12,7 @@ $LDPharmacy="Pharmacy";
 $LDSearchWordPrompt="Enter a search keyword, for example: a Family name, a name, or a birhtdate, etc.";
 $LDEnterData="Click to enter data";
 $LDClk2See="Click to see data";
-$LDFoundPatient="The search found <b>~nr~</b> patients";
+$LDFoundPatient="The search found ~nr~ patients";
 $LDWildCards="What are wildcards and how to use them";
 $LDNewSearch="New search";
 
@@ -57,5 +57,4 @@ $LDRedList="Index of Medical Specialties";
 $LDRedListTxt="Detailed info about medical products";
 $LDOrderBotActivate="OrderBot";
 $LDOrderBotActivateTxt="Activate automatic reception of order lists.";
-
 ?>

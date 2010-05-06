@@ -1,5 +1,5 @@
 <?php
-$LDAddressCitytown='City/Town List';
+$LDAddressCitytown='City\Town List';
 $LDTypeImmunization='Immunization List';
 $Choose='Choose a table in the list';
 $Send='Select';

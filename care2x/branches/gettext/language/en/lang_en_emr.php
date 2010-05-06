@@ -1,10 +1,10 @@
 <?php
 $LDAdmitHistoPhysical='Admission History and Physical';
-$LDDoctorDailyNotes='Doctor\'s daily notes';
+$LDDoctorDailyNotes='Doctors daily notes';
 $LDDischargeSummary='Discharge summary';
 $LDConsultNotes='Consultation notes';
 $LDOpNotes='Operation notes';
-$LDDailyNurseNotes='Daily ward\'s notes';
+$LDDailyNurseNotes='Daily wards notes';
 $LDOther='Other notes';
 $LDChartNotes='Chart notes';
 $LDPTATGetc='PT, ATG, etc. daily notes';

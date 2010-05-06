@@ -19,25 +19,25 @@ $monat[12]='December';
 
 $LDDoctors='Doctors';
 $LDQView='DOC Quickview';  // DOC = doctor on call
-$LDQViewTxt='Quickview of today\'s DOC (doctor-on-call) schedule';
+$LDQViewTxt='Quickview of todays DOC (doctor-on-call) schedule';
 $LDDutyPlan='Duty plan';
 $LDDutyPlanTxt='Duty plan, view, update, delete, manage, etc.';
-$LDDocsList='Doctor\'s list';
-$LDDocsListTxt='Create or update doctor\'s list, enter data, etc..';
+$LDDocsList='Doctors list';
+$LDDocsListTxt='Create or update doctors list, enter data, etc..';
 $LDDocsForum='Forum';
 $LDDocsForumTxt='Discussions forum for doctors';
 $LDNews='News';
 $LDNewsTxt='Compose, read, edit news';
 $LDMemo='Memo';
 $LDMemoTxt='Compose, read, edit memo';
-$LDCloseAlt='Close physicians/surgeon\'s window';
+$LDCloseAlt='Close physicians-surgeons window';
 $LDDocsOnDuty='Doctors on Call';
 
 $LDTabElements[0]='Department';
 $LDTabElements[1]='DOC1';
-$LDTabElements[2]='Beeper/Phone';
+$LDTabElements[2]='Beeper-Phone';
 $LDTabElements[3]='DOC2';
-$LDTabElements[4]='Beeper/Phone';
+$LDTabElements[4]='Beeper-Phone';
 $LDTabElements[5]='Dutyplan';
 
 $LDShowActualPlan='Show actual duty plan';
@@ -101,13 +101,13 @@ $LDContactInfo='Contact Info';
 $LDPersonalContactInfo='Personal Contact Info';
 $LDOnCallContactInfo='On-Call Contact Info';
 $LDPlsSelectDept='Please select a department';
-$LDCreateDoctorsList='Create doctors\' list';
+$LDCreateDoctorsList='Create doctors list';
 $LDPlsCreateList='Please create the list first.';
 $LDPlsClickButton='Click on the following button.';
 $LDFamilyName='Family name';
 $LDGivenName='Given name';
 $LDDateOfBirth='Date of birth';
-$LDEntryPrompt='Please enter a search keyword:<br>(e.g. family name, given name, personnel number, etc.)<br>';
+$LDEntryPrompt='Please enter a search keyword:(e.g. family name, given name, personnel number, etc.)';
 $LDPersonellNr='Personell Nr.';
 $LDFunction='Function';
 $LDOptions='Options';
@@ -118,5 +118,5 @@ $LDDelete='Delete';
 $LDSureToDeleteEntry='Are you sure you want to delete this entry?';
 /* 2003-03-18 EL */
 $LDChangeOnlyDept='Change the department';
-$LDCreateNursesList='Create Nurses\' List';
+$LDCreateNursesList='Create Nurses List';
 ?>

@@ -9,14 +9,14 @@ $LDEmergency='Emergency Ambulatory';
 $LDSonography='Sonography';
 $LDNuclearMed='Nuclear Diagnostics';
 $LDAdmission='Admission';
-$LDAdmissionTxt='Admission/discharge of ambulatory, search, archive';
+$LDAdmissionTxt='Admission-Discharge of ambulatory, search, archive';
 $LDNews='News';
 $LDNewsTxt='Clinic specific news, memo, info, etc.';
 # 2003-08-01 EL
 $LDAppointments='Appointments';
 $LDAppointmentsTxt='Patient appointments with this department';
 $LDPatientWaitingList='Patient waiting list';
-$LDPWListTxt='Today\'s admitted patients in the clinic';
+$LDPWListTxt='Todays admitted patients in the clinic';
 $LDOutpatientClinic='Outpatient clinic';
 $LDGeneralAmbulatory='General Ambulatory';
 $LDAmbulatory='Ambulatory';

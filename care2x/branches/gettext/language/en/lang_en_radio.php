@@ -7,7 +7,7 @@ $LDSave='Save';
 $LDSearchWordPrompt='Enter a search keyword, for example: a Family name, a name, or a birhtdate, etc.';
 $LDEnterData='Click to enter data';
 $LDClk2See='Click to see data';
-$LDFoundPatient='The search found <b>~nr~</b> patients';
+$LDFoundPatient='The search found ~nr~ patients';
 $LDWildCards='What are wildcards and how to use them';
 $LDNewSearch='New search';
 
@@ -15,7 +15,7 @@ $LDCaseNr='Encounter nr.';
 $LDLastName='Family name';
 $LDName='Name';
 $LDBday='Birthdate';
-$LDOClock='o�clock';
+$LDOClock='oclock';
 $LDBack='Go back';
 
 $LDOn='On';
@@ -45,13 +45,13 @@ $LDFullScreen='View in full screen';
 $LDEditXrayDiag='Edit diagnostic report';
 $LDReadDiag='Read diagnosis';
 $LDWriteDiag='Write diagnosis';
-$LDPreviewReport='Preview/Diagnosis';
+$LDPreviewReport='Preview\Diagnosis';
 /* 2002-09-08 EL*/
 $LDTestRequestRadio='Test request';
 $LDTestRequestRadioTxt='Request for radiological tests';
 /* 2002-09-10 EL */
 $LDTestReception='Pending Request';
-$LDTestReceptionTxt='Receive & process test requests, write results/diagnoses';
+$LDTestReceptionTxt='Receive and process test requests, write results\diagnoses';
 # 2003-08-08 EL
 $LDDicomImages='DICOM images';
 $LDDicomImagesTxt='View diagnostic images in DICOM format';

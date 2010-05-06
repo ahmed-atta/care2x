@@ -13,12 +13,12 @@ $LDEnterData='Click to enter data';
 $LDClk2See='Click to see data';
 
 /**************** note the ' ~nr~ ' must not be erased it will be replaced by the script with the number of search results ******/
-$LDFoundPatient='The search found <b>~nr~</b> patients';
+$LDFoundPatient='The search found ~nr~ patients';
 $LDWildCards='What are wildcards and how to use them';
 $LDNewSearch='New search';
 $LDSearch='Search';
 
-$LDOClock='o\'clock';
+$LDOClock='oclock';
 $LDContinue='Continue';
 $LDBack='Go back';
 
@@ -45,7 +45,7 @@ $LDSelect='Select';
 $LDOrderArchive='Archive';
 $LDOrderArchiveTxt='View, edit, archive processed orders';
 $LDPharmaOrder='Ordering';
-$LDPharmaOrderTxt='Create and/or send order list';
+$LDPharmaOrderTxt='Create and\or send order list';
 $LDHow2Order='How to order?';
 $LDHow2OrderTxt='How, what, when should I order?';
 $LDOrderCat='My product catalog';
@@ -114,7 +114,7 @@ $LDMSRCindex[7]='';
 $LDBasketEmpty='The basket is empty at the moment.';
 $LDWasSent='Somebody has either already sent the order to the pharmacy or erased it! Please create a new order list. Thank you.';
 $LDFinalizeList='Finalize order list';
-$LDClk2SeeEdit='To see and/or edit it please click the arrow button.';
+$LDClk2SeeEdit='To see and\or edit it please click the arrow button.';
 $LDListNotSentMany='The following order lists are not yet sent.';
 $LDListNotSent='The following order list is not yet sent.';
 $LDEditList='Edit list';
@@ -125,10 +125,10 @@ $LDCatalog='Order catalog';
 $LDPutNBasket='Put in the basket';
 $LDRemoveArticle='Remove article';
 $LDPut2BasketAway='Put in the basket right away';
-$LDNoDataFound='The search found <font color=red><b>no</b></font> data.';
+$LDNoDataFound='The search found no data.';
 $LDClk2SeeInfo='Please click the right one to see the complete information';
 /********************** Do not erase or replace the ~nr~ *****************************/
-$LDFoundNrData='The search found <font color=red><b>~nr~</b></font> data that corresponded to the search keyword.';
+$LDFoundNrData='The search found ~nr~ data that corresponded to the search keyword.';
 $LDSearchArticle='Find article';
 $LDSearchKey='Search keyword';
 $LDPut2Catalog='Put this article in the catalog';
@@ -143,7 +143,7 @@ $LDBack2Edit='Go back and edit list.';
 $LDEndOrder='End ordering.';
 $LDCreateBasket='Start a new order list.';
 $LDAlertNoValidator='The validator is needed.';
-$LDAlertNoPassword='The validator\'s password is needed.';
+$LDAlertNoPassword='The validators password is needed.';
 $LDOpenInfo='Show complete information about ';
 
 $LDSearch4OrderList='Search for order lists';
@@ -186,7 +186,7 @@ $LDNoSingleChar='A single character will be ignored.';
 
 $LDListFound='The following is the order list in the archive that corresponded to the search keyword.';
 $LDListFoundMany='The following are the order lists in the archive that corresponded to the search keyword.';
-$LDDataRemoved='The information could have been removed from the pharmacy\'s databank.';
+$LDDataRemoved='The information could have been removed from the pharmacys databank.';
 $LDPlsInformDept='Please notify the ~tagword~ department and eventually the EDP department. Thank you.';
 
 $LDOrderedArticle='Ordered article';
@@ -199,10 +199,10 @@ $LDInfo='Information';
 $LDInfoTxt='Search and read information pertaining to pharmacy';
 $LDManage='Management';
 $LDSearchDb='Search in the pharmacy databank';
-$LDUpdateOk='Update was <b>successful</b>:';
+$LDUpdateOk='Update was successful:';
 $LDDataSaved='The following data was successully saved:';
-$LDDataNoUpdate='Update  <b>failed</b>. Please check the entries.';
-$LDDataNoSaved='Save <b>failed</b>. Please check the entries.';
+$LDDataNoUpdate='Update failed. Please check the entries.';
+$LDDataNoSaved='Save failed. Please check the entries.';
 $LDClk2EnterNew='If you want to enter a new product, please click this.';
 $LDOrderNr='Order number';
 $LDArticleName='Article name';
@@ -226,13 +226,13 @@ $LDAlertNoOrderNr='Order number is missing!';
 $LDAlertNoArticleName='Article name is missing!';
 $LDAlertNoDescription='Description is missing!';
 
-$LDConfirmDelete='Do you really want to <b>delete</b> or <b>remove</b> the following data from the databank ?';
-$LDAlertDelete='<b>ATTENTION!</b> Delete or remove <b>CANNOT</b> be undone!';
-$LDNoDelete='Deletion of the data failed!<br>Please notify the EDP department.';
+$LDConfirmDelete='Do you really want to delete or remove the following data from the database ?';
+$LDAlertDelete='ATTENTION! Delete or remove CANNOT be undone!';
+$LDNoDelete='Deletion of the data failed! Please notify the EDP department.';
 $LDYesDelete='Yes, I am dead sure. Delete data.';
 $LDNoBack='No, do not delete. Go back.';
 $LDIm='I am the';
-$LDClk2Ack='Click the arrow button to acknowledge and/or print the order list.';
+$LDClk2Ack='Click the arrow button to acknowledge and\or print the order list.';
 $LDOrderArrived='A new order list has arrived !';
 $LDShowOrder='Show order list';
 $LDNewOrder='The following order list has just arrived.';
@@ -243,10 +243,10 @@ $LDOrderAck='Acknowledge and print out';
 $LDOrderPrint='Print out order list';
 $LDOrder2Archive='Move order list to the archive';
 $LDProcessedBy='Processed by';
-$LDDataNoFoundTxt='The information cannot be found. An error occured somewhere. Please click the \'Close\' button and try to
+$LDDataNoFoundTxt='The information cannot be found. An error occured somewhere. Please click the Close button and try to
 reopen the order list. If this problems occurs even after several trials, please notify the pharmacy and the EDP departments. Thank you.';
 $LDCreatedBy='Created by';
-$LDAlertEnterName='Please enter your name in the \'Created by\' field.';
+$LDAlertEnterName='Please enter your name in the Created by field.';
 $LDMediBotActivate='Medibot';
 $LDOpenHelp='Open help window';
 $LDOrderListKey='Search keyword for order list';
