@@ -51,7 +51,7 @@ $LDGoAheadEgalCookie='I dont want to accept cookies. Go ahead and start the prog
 $LDCookieRef='If you want to know more about cookies you can read the following documents:<br>
 						<a href=\'http://www.dtp-aus.com/cookies.htm\' target=\'pp\'>A few words about Cookies (Security and the lies)</a><br>
 						<a href=\'http://www.cookiecentral.com/content.phtml?area=4&id=10\' target=\'pp\'>Cookies and Privacy FAQ</a><br>';
-$LDPrivPolicy='If you want to read our privacy policy please <a href=\'language/en/en_privacy.htm\' target=\'pp\'>click this:</a>';
+$LDPrivPolicy='If you want to read our privacy policy please <a href=\'language\en\en_privacy.htm\' target=\'pp\'>click this:<\a>';
 $LDOurPrivPolicy='Our Privacy Policy';
 $LDSubmitNews='Submit News';
 $LDEditNews='Edit & submit news via online editor';

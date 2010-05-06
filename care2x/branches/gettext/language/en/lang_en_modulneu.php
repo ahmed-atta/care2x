@@ -56,7 +56,7 @@ $nenne_server="specify the database server";
 $fertig="create table and finish module";
 
 //Variablen fuer radio1_memofeld.php
-$infoline="Change the example table as you wish.</br>";
+$infoline="Change the example table as you wish.";
 
 //Variablen fuer editsql.php
 $sql_meldung="The following SQL string was executed in your database.";
@@ -66,10 +66,7 @@ $err_ida_var_fehlt="The variables root_path or MoulNeuBez are empty. path of goa
 $err_keinpfad="Break. The path does not exist. This is an error from the file inc_datei_array.php.";
 $err_mainpass_copy="Copying the main-pass-file failed!";
 $err_kopieren="Error accured while copying ";
-$err_fehlgeschlagen=" .<br/>";
 
 //Variablen aus Schlusssatz.php
 $ld_gratulation="Congratulation, the module is finished.";
-
-
 ?>
