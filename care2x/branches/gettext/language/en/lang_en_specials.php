@@ -50,7 +50,7 @@ $LDChange='Change';
 $LDLock='Lock';
 $LDUnlock='Unlock';
 $LDDelete='Delete';
-$LDYesSure='Yes, Im sure.';
+$LDYesSure='Yes, I\'m sure.';
 $LDKeywordPrompt='Enter a search keyword';
 $LDWelcome='Welcome';
 
@@ -109,6 +109,8 @@ $LDWebCam='Video Security';
 $LDWebCamTxt='Intranet webcamera security surveillance';
 $LDPhotoLab='Photolab';
 $LDPhotoLabTxt='Save, document, index photos of patients';
+$LDImmunizationMngr='Immunization';
+$LDImmunizationMngrTxt='Immunization';
 
 $LDBundyMachine='Bundy machine';
 $LDDutyPlanner='Duty planner';
@@ -254,21 +256,21 @@ $LDWantUpload='I want to upload';
 $LDImage='image(s)';
 # 2002-01-18 EL
 $LDTicketedSupport='Ticketed Support';
-$LDTicketedSupportTxt='Send a ticketed request to the projects online support';
+$LDTicketedSupportTxt='Send a ticketed request to the project\'s online support';
 $LDNewsgroup='Newsgroup';
-$LDNewsgroupTxt='Newsgroup mirroring the developers mailing list.';
+$LDNewsgroupTxt='Newsgroup mirroring the developers\' mailing list.';
 # 2002-08-19 EL
 $LDPharmaIndex='Pharma Index';
 $LDPharmaIndexTxt='Pharmaceutical indexes like Redlist, IFAP, NIMS, or PIMS';
 
 #2004-05-23 EL
 $LDPlugins='Plugins';
-$LDNoPluginsPrompt='There are no plugins installed yet.';
+$LDNoPluginsPrompt='There are no plugins installed yet. If you want to get a Care2x plugin module please go to http://www.care2x-plugins.org.';
 $LDPluginsTxt='Collection of plugin tools and modules';
 
 #2004-06-13 EL
 $LDCssThemes = 'CSS Theme Styles';
-$LDCssThemesTxt= 'Select design for border color, sizes, decoration, font types and sizes, backgrounds, etc.';
+$LDCssThemesTxt= 'Select design for border color, sizes, decoration, font types & sizes, backgrounds, etc.';
 $LDDescription = 'Description';
 $LDScreenshot = 'Screenshot';
 
@@ -280,8 +282,8 @@ $LDSmartyTemplateTxt = 'Select smarty based GUI template style';
 $LDControlButtons = 'Control Buttons Styles';
 $LDControlButtonsTxt = 'Select control buttons style';
 $LDComIcons = 'Common Icons Styles';
-$LDComIconsTxt = 'Select decorative icons style (note: in combination with some CSS themes, the icons are overridden by the CSS design)';
-$LDDevDesigner = 'Developer\Designer';
+$LDComIconsTxt = 'Select decorative icons style <br>(note: in combination with some CSS themes, the icons are overridden by the CSS design)';
+$LDDevDesigner = 'Developer/Designer';
 $LDNoIcon = 'No icons';
 $LDNoIconTxt = 'Shows no icons in submenus. Display of icons is suppressed';
 
