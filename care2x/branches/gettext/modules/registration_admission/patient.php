@@ -41,13 +41,13 @@ $_SESSION['sess_path_referer'] = 'modules/registration_admission/patient.php';
 
 
  # Toolbar title
- $smarty->assign('sToolbarTitle',$LDPerson );
+ $smarty->assign('sToolbarTitle',_('Person') );
 
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('person_reg.php','$LDDoctors')");
 
 # Window title
- $smarty->assign('sWindowTitle',$LDPerson);
+ $smarty->assign('sWindowTitle',_('Person'));
  
  # Prepare the icons
  $aSubMenuIcon = array(createComIcon($root_path,'post_discussion.gif','0') ,
