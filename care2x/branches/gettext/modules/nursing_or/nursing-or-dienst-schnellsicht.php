@@ -81,7 +81,7 @@ if(!$is_cached || ($is_cached && $force_no_cache)){
 	include_once($root_path.'modules/dept_admin/model/class_department.php');
 	$dept_obj=new Department;
 	$dept_OC=$dept_obj->getAllActiveWithNOC();
-	include_once($root_path.'include/core/class_personell.php');
+	include_once($root_path.'modules/personell_admin/model/class_personell.php');
 	$pers_obj=new Personell;
 	$quicklist=&$pers_obj->getNOCQuicklist($dept_OC,$pyear,$pmonth);
 }

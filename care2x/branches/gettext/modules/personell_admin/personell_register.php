@@ -26,11 +26,11 @@ require($root_path.'include/helpers/inc_front_chain_lang.php');
 */
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'include/core/class_person.php');
-require_once($root_path.'include/core/class_insurance.php');
+require_once($root_path.'modules/insurance_co/model/class_insurance.php');
 //require_once($root_path.'include/core/class_core.php');
 require_once($root_path.'include/core/class_ward.php');
 require_once($root_path.'include/core/class_globalconfig.php');
-require_once($root_path.'include/core/class_personell.php');
+require_once($root_path.'modules/personell_admin/model/class_personell.php');
 
 //$db->debug=TRUE;
 

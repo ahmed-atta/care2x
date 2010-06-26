@@ -60,7 +60,7 @@ if($mode=='search'&&!empty($searchkey)){
 	# Load date formatter
 	include_once($root_path.'include/helpers/inc_date_format_functions.php');
 	
-	include_once($root_path.'include/core/class_image.php');
+	include_once($root_path.'modules/fotolab/model/class_image.php');
 	$img_obj=new Image;
 	$result=$img_obj->DicomImages($searchkey);
 	//	echo $img_obj->getLastQuery();

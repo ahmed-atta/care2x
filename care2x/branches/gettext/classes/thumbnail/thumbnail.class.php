@@ -24,7 +24,7 @@ $myThumb->getThumbData( 'width' ) // This will get you pixel width of thumbnail 
 
 # This is required for the gd_version method needed in this class
 
-require_once($root_path.'include/core/class_image.php');
+require_once($root_path.'modules/fotolab/model/class_image.php');
 
 class Thumbnail extends Image {
 	

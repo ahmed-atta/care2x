@@ -88,7 +88,7 @@ if(isset($origin) && $origin=='pass')
 }
 
 
-require_once($root_path.'include/core/class_gui_search_person.php');
+require_once($root_path.'include/core/modules/registration_admission/model/class_gui_search_person.php');
 
 $psearch = & new GuiSearchPerson;
 

@@ -21,12 +21,12 @@ require($root_path.'include/helpers/inc_front_chain_lang.php');
 
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'include/core/class_person.php');
-require_once($root_path.'include/core/class_insurance.php');
+require_once($root_path.'modules/insurance_co/model/class_insurance.php');
 require_once($root_path.'include/core/class_ward.php');
 require_once($root_path.'include/core/class_encounter.php');
 require_once($root_path.'include/core/class_globalconfig.php');
 require_once($root_path.'modules/ecombill/model/class_ecombill.php');
-require_once($root_path.'include/core/class_personell.php');
+require_once($root_path.'modules/personell_admin/model/class_personell.php');
 
 //gjergji
 $current_dept_nr = $_SESSION['department_nr'];
@@ -138,7 +138,7 @@ if($pid!='' || $encounter_nr!=''){
 				//gjergji
 				//added the possibility to upload foto here
 				// Create image object
-				include_once($root_path.'include/core/class_image.php');
+				include_once($root_path.'modules/fotolab/model/class_image.php');
 				$img_obj=& new Image;
 				$picext='';
 				$valid_image=false;

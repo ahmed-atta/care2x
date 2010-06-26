@@ -51,7 +51,7 @@ $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 $dept_list=&$dept_obj->getAllMedical();
 # Load the dept doctors
-require_once($root_path.'include/core/class_personell.php');
+require_once($root_path.'modules/personell_admin/model/class_personell.php');
 $pers_obj=new Personell;
 $doctors=&$pers_obj->getDoctorsOfDept($dept_nr);
 # Load global values

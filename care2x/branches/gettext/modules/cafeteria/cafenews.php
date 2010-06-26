@@ -47,7 +47,7 @@ if(!$news_headline_max_display) $news_headline_max_display=3; /* default is 3 */
 
 $news_num_stop=$news_headline_max_display;  // The maximum number of news article to be displayed
 
-require_once($root_path.'include/core/class_news.php');
+require_once($root_path.'modules/news/model/class_news.php');
 $newsobj=new News;
 $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
 

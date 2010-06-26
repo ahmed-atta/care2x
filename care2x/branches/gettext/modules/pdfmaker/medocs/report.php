@@ -33,7 +33,7 @@ if(($_SESSION['sess_user_origin']=='admission')||($_SESSION['sess_user_origin']=
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'include/core/class_encounter.php');
-require_once($root_path.'include/core/class_medocs.php');
+require_once($root_path.'modules/medocs/model/class_medocs.php');
 # Get the encouter data
 $enc_obj=& new Encounter($enc);
 if($enc_obj->loadEncounterData()){
@@ -45,7 +45,7 @@ if($enc_obj->loadEncounterData()){
 $medocs_obj=& new Medocs();
 $medocs=$medocs_obj->getMedocsDocument($mnr);
 
-require_once($root_path.'include/core/class_insurance.php');
+require_once($root_path.'modules/insurance_co/model/class_insurance.php');
 $insurance_obj=new Insurance;
 
 

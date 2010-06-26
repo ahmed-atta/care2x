@@ -59,7 +59,7 @@ $roomName = $ward_obj->_getActiveRoomInfo($enc_obj->encounter['current_room_nr']
 $roomNumber = $enc_obj->encounter['current_room_nr'];
 
 //get the lab data
-require_once($root_path.'include/core/class_lab.php');
+require_once($root_path.'modules/laboratory/model/class_lab.php');
 $lab_obj=new Lab($encounter_nr);
 
 //get the lab results..

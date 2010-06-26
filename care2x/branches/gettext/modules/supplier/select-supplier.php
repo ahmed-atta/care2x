@@ -17,7 +17,7 @@ $abtname=array();
 $datum=date('d.m.Y');
 
 # Load the supplier list
-require_once($root_path.'include/core/class_supplier.php');
+require_once($root_path.'modules/supplier/model/class_supplier.php');
 $supplier_obj=new Supplier;
 
 $dept=$supplier_obj->getAllSupplier();

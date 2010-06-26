@@ -16,7 +16,7 @@ $local_user='ck_pflege_user';
 //define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 /* Create nursing notes object */
-require_once($root_path.'include/core/class_notes_nursing.php');
+require_once($root_path.'modules/nursing/model/class_notes_nursing.php');
 $report_obj= new NursingNotes;
  
 //if ($station=='') { $station='Non-department specific';  }

@@ -6,7 +6,7 @@ define('LANG_FILE','products.php');
 $local_user='ck_prod_db_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 # Create products object
-require_once($root_path.'include/core/class_product.php');
+require_once($root_path.'modules/products/model/class_product.php');
 $product_obj=new Product;
 
 ///$db->debug=1;

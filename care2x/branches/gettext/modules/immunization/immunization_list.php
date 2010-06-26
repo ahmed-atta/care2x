@@ -11,7 +11,7 @@ define('LANG_FILE','immunization.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 # Load the insurance object
-require_once($root_path.'include/core/class_immunization.php');
+require_once($root_path.'modules/immunization/model/class_immunization.php');
 $immu_obj=new Immunization();
 
 $breakfile='immunization_manage.php'.URL_APPEND;

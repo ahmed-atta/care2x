@@ -91,7 +91,7 @@ if(($mode=='')||($mode=='fresh')){
 		if(SHOW_DOC_2) $elem.=',duty_2_pnr';
 		
 		# Create personnel object
-		include_once($root_path.'include/core/class_personell.php');
+		include_once($root_path.'modules/personell_admin/model/class_personell.php');
 		$pers_obj=new Personell;
 			
 		if($result=$pers_obj->getDOCDutyplan($dept_nr,$pyear,$pmonth,$elem)){

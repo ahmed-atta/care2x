@@ -37,7 +37,7 @@ if($encounter =&$enc_obj->getBasic4Data($encounter_nr)){
 $thisfile='labor_datainput.php';
 
 # Create lab object
-require_once($root_path.'include/core/class_lab.php');
+require_once($root_path.'modules/laboratory/model/class_lab.php');
 $lab_obj = new Lab($encounter_nr);
 $lab_obj_sub = new Lab($encounter_nr, true);
 $batch_nr = '';

@@ -38,7 +38,7 @@ $_SESSION['sess_user_origin']='registration';
 $_SESSION['sess_en']=0;
 
 # Create the person show GUI
-require_once($root_path.'include/core/class_gui_person_show.php');
+require_once($root_path.'include/core/modules/registration_admission/model/class_gui_person_show.php');
 $person = & new GuiPersonShow;
 
 # Set PID to load the data

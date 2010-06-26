@@ -80,7 +80,7 @@ if($force_no_cache || (!$force_no_cache && !$is_cached)){
 	include_once($root_path.'modules/dept_admin/model/class_department.php');
 	$dept_obj=new Department;
 	$dept_DOC=$dept_obj->getAllActiveWithDOC();
-	include_once($root_path.'include/core/class_personell.php');
+	include_once($root_path.'modules/personell_admin/model/class_personell.php');
 	$pers_obj=new Personell;
 	$quicklist=&$pers_obj->getDOCQuicklist($dept_DOC,$pyear,$pmonth);
 }

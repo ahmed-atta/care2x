@@ -137,7 +137,7 @@ if(!AUTOSHOW_ONERESULT) {
 
 	include($root_path.'include/core/class_encounter.php');
 	include($root_path.'include/core/class_ward.php');
-	include($root_path.'include/core/class_insurance.php');
+	include($root_path.'modules/insurance_co/model/class_insurance.php');
 
 	/* Create encounter object */
 	$encounter_obj=new Encounter();

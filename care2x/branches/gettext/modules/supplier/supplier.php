@@ -8,7 +8,7 @@ $local_user='ck_supplier_db_user';
 $breakfile=$root_path.'modules/med_depot/medlager.php'.URL_APPEND;
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 # Create products object
-require_once($root_path.'include/core/class_supplier.php');
+require_once($root_path.'modules/supplier/model/class_supplier.php');
 $supplier_obj=new Supplier();
 $title=$LDNewSupplier;
 //$db->debug=1;

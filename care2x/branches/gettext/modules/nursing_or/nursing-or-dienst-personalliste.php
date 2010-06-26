@@ -59,7 +59,7 @@ $dept_obj->preloadDept($dept_nr);
 $dept_list=&$dept_obj->getAllMedical();
 
 # Load the dept nurses
-require_once($root_path.'include/core/class_personell.php');
+require_once($root_path.'modules/personell_admin/model/class_personell.php');
 $pers_obj=new Personell;
 $nurses=&$pers_obj->getNursesOfDept($dept_nr);
 

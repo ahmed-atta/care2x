@@ -26,7 +26,7 @@ require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 
-require_once($root_path.'include/core/class_personell.php');
+require_once($root_path.'modules/personell_admin/model/class_personell.php');
 $pers_obj=new Personell;
 $dutyplan=&$pers_obj->getDOCDutyplan($dept_nr,$pyear,$pmonth);
 

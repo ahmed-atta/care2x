@@ -8,7 +8,7 @@ require_once($root_path.'modules/news/includes/inc_editor_fx.php');
 # Load date formatter
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 # Load image class 
-require_once($root_path.'include/core/class_image.php');
+require_once($root_path.'modules/fotolab/model/class_image.php');
 # Create image object
 $img_obj=new Image;
 
@@ -39,7 +39,7 @@ $news=array( 'category'=>$category,
 					 'publish_date'=>$publishdate
 					 );
 
-require_once($root_path.'include/core/class_news.php');
+require_once($root_path.'modules/news/model/class_news.php');
 $newsobj=new News;
 if($news_nr = $newsobj->saveNews($dept_nr,$news)) {
     if($is_pic)	{

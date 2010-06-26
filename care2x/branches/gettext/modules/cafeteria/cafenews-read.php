@@ -24,7 +24,7 @@ $dept_nr=2; /* 2= cafeteria */
 if(!isset($mode)) $mode='';
 
 /* Get the news article */
-require_once($root_path.'include/core/class_news.php');
+require_once($root_path.'modules/news/model/class_news.php');
 $newsobj=new News;
 $news=&$newsobj->getNews($nr);
 

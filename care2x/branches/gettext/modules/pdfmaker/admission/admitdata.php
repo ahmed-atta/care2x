@@ -66,7 +66,7 @@ if($encounter['encounter_class_nr']==1){
 		else $current_dept_name=$dept_obj->FormalName($encounter['current_dept_nr']);
 }
 
-require_once($root_path.'include/core/class_insurance.php');
+require_once($root_path.'modules/insurance_co/model/class_insurance.php');
 $insurance_obj=new Insurance;
 
 
