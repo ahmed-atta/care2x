@@ -27,7 +27,7 @@ if(!isset($dept_nr)||!$dept_nr){
 require_once($root_path.'include/core/class_product.php');
 $product_obj=new Product;
 
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 
 $thisfile=basename(__FILE__);

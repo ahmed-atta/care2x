@@ -131,7 +131,7 @@ if(!$GLOBALCONFIG['language_single']){
 echo $_SESSION['sess_login_username']; ?>
 <br>
 <?php 
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept=new Department;
 $depts=&$dept->getAllActive();
 $sTemp = '';

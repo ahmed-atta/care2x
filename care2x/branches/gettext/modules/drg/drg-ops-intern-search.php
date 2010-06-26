@@ -20,7 +20,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 if (!isset($pn)||!$pn) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
 
-require_once($root_path.'include/core/class_drg.php');
+require_once($root_path.'modules/drg/model/class_drg.php');
 
 $drg_obj=new DRG($pn);
 

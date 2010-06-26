@@ -36,7 +36,7 @@ $abtname=array();
 $datum=date('d.m.Y');
 
 # Load the medical department list
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 
 //begin:gjergji 

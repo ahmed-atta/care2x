@@ -9,7 +9,7 @@ include_once($root_path."classes/fpdf/fpdf.php");
 include_once($root_path."classes/PHPJasperXML/PHPJasperXML.inc");
 
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require($root_path.'include/core/class_ecombill.php');
+require($root_path.'modules/ecombill/model/class_ecombill.php');
 require($root_path.'include/core/class_encounter.php');
 require_once($root_path.'include/core/class_globalconfig.php');
 //$db->debug=true;

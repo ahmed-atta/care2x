@@ -25,7 +25,7 @@ require_once($root_path.'include/core/class_insurance.php');
 require_once($root_path.'include/core/class_ward.php');
 require_once($root_path.'include/core/class_encounter.php');
 require_once($root_path.'include/core/class_globalconfig.php');
-require_once($root_path.'include/core/class_ecombill.php');
+require_once($root_path.'modules/ecombill/model/class_ecombill.php');
 require_once($root_path.'include/core/class_personell.php');
 
 //gjergji
@@ -337,7 +337,7 @@ if($pid!='' || $encounter_nr!=''){
 	}
 	if(!$encounter_nr||$encounter_class_nr==2){
 		# Load all medical departments
-		include_once($root_path.'include/core/class_department.php');
+		include_once($root_path.'modules/dept_admin/model/class_department.php');
 		$dept_obj=new Department;
 		$all_meds=&$dept_obj->getAllMedicalObject();
 	}

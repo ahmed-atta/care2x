@@ -67,7 +67,7 @@ if($mode=='save'){
 		# Know where we are
 		switch($_SESSION['sess_user_origin']){
 			case 'amb': # Create nursing notes object 
-						include_once($root_path.'include/core/class_department.php');
+						include_once($root_path.'modules/dept_admin/model/class_department.php');
 						$obj= new Department;
 						$station=$obj->FormalName($dept_nr);
 						break;

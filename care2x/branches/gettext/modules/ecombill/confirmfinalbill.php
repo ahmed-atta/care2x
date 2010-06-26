@@ -13,7 +13,7 @@ define('LANG_FILE','billing.php');
 define('NO_CHAIN',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
-require($root_path.'include/core/class_ecombill.php');
+require($root_path.'modules/ecombill/model/class_ecombill.php');
 require($root_path.'include/core/class_encounter.php');
 $eComBill = new eComBill;
 $Encounter = new Encounter;

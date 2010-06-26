@@ -19,7 +19,7 @@ require_once($root_path.'include/core/class_person.php');
 require_once($root_path.'include/core/class_insurance.php');
 require_once($root_path.'include/core/class_ward.php');
 require_once($root_path.'include/core/class_globalconfig.php');
-require_once($root_path.'include/core/class_ecombill.php');
+require_once($root_path.'modules/ecombill/model/class_ecombill.php');
 require_once($root_path.'include/core/class_personell.php');
 
 if(!isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod'] = "";
@@ -129,7 +129,7 @@ $dbtable='care_encounter';
 			$current_ward_name=$ward_obj->WardName($current_ward_nr);
 		}elseif($encounter_class_nr==2){
 			# Get ward name
-			include_once($root_path.'include/core/class_department.php');
+			include_once($root_path.'modules/dept_admin/model/class_department.php');
 			$dept_obj=new Department;
 			//$current_dept_name=$dept_obj->FormalName($current_dept_nr);
 			$current_dept_LDvar=$dept_obj->LDvar($current_dept_nr);

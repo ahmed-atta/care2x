@@ -57,7 +57,7 @@ if(!isset($mode)||empty($mode)){
 
 if($mode=='new'){
 	# Load the department class 
-	include_once($root_path.'include/core/class_department.php');
+	include_once($root_path.'modules/dept_admin/model/class_department.php');
 	$dept_obj=new Department($dept_nr);
 	$dept=&$dept_obj->getDeptAllInfo($dept_nr);
 }
@@ -79,7 +79,7 @@ $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer);
 $_SESSION['sess_file_return']=$thisfile;
 
 /* Load all  medical depts info */
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 $dept_med=$dept_obj->getAllMedical();
 

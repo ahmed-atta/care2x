@@ -70,7 +70,7 @@ if($ec_obj=&$enc_obj->AllEncounterClassesObject()){
 }
 
 # Load departments
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 $deptarray=$dept_obj->getAllMedical('name_formal');
 
@@ -80,7 +80,7 @@ switch($_SESSION['sess_user_origin']){
 	default: $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 }
 # Create department object
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 # Load all medical departments
 $med_arr=&$dept_obj->getAllMedical();

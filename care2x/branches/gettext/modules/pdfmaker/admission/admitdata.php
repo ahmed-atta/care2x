@@ -58,7 +58,7 @@ if($encounter['encounter_class_nr']==1){
 	$current_ward_name=$ward_obj->WardName($encounter['current_ward_nr']);
 }elseif($encounter['encounter_class_nr']==2){
 	# Get ward name
-	include_once($root_path.'include/core/class_department.php');
+	include_once($root_path.'modules/dept_admin/model/class_department.php');
 	$dept_obj=new Department;
 	//$current_dept_name=$dept_obj->FormalName($current_dept_nr);
 	$current_dept_LDvar=$dept_obj->LDvar($encounter['current_dept_nr']);

@@ -10,7 +10,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/helpers/inc_environment_global.php');
 require_once($root_path.'include/core/class_core.php');
-require($root_path.'include/core/class_ecombill.php');
+require($root_path.'modules/ecombill/model/class_ecombill.php');
 $eComBill = new eComBill;
 $core= new Core;
 

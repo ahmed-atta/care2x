@@ -45,7 +45,7 @@ $f = SIGNAL_COLOR_LEVEL_FULL;
 $_SESSION['sess_user_origin']='nursing';
 
 /* Create department object and load all medical depts */
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj= new Department;
 $medical_depts=$dept_obj->getAllActiveSort( 'name_formal' );
 /* Create encounter object */

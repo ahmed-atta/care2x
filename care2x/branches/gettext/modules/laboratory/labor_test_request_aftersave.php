@@ -129,7 +129,7 @@ switch ($target) {
 		$bgc1 = '#ffffff';
 		break;
 	case 'generic' :
-		include_once ($root_path . 'include/core/class_department.php');
+		include_once ($root_path . 'modules/dept_admin/model/class_department.php');
 		$dept_obj = new Department ( );
 		if ($dept_obj->preloadDept ( $stored_request ['testing_dept'] )) {
 			$buffer = $dept_obj->LDvar ();

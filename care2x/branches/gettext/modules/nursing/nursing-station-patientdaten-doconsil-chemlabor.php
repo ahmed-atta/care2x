@@ -142,7 +142,7 @@ if(isset($pn)&&$pn) {
 		$_SESSION['sess_en']=$pn;
 		$_SESSION['sess_full_en']=$full_en;
 		
-		include_once($root_path.'include/core/class_diagnostics.php');
+		include_once($root_path.'modules/laboratory/model/class_diagnostics.php');
 		$diag_obj=new Diagnostics;
 		$diag_obj->useChemLabRequestTable();
 		$diag_obj_sub = new Diagnostics;

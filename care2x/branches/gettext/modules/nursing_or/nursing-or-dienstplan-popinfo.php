@@ -18,7 +18,7 @@ require_once($root_path.'include/core/class_personell.php');
 $pers_obj=new Personell;
 $person=&$pers_obj->getPersonellInfo($nr);
 
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 $dept=&$dept_obj->getPhoneInfo($dept_nr);
 

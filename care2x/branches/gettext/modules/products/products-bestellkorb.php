@@ -20,7 +20,7 @@ if($cat=='pharma'){
 // Load the date formatter
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 // Create department object
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 
 if(!isset($_SESSION['current_order']))

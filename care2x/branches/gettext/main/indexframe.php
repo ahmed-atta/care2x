@@ -50,7 +50,7 @@ $gc->getConfig('language_%');
 $charset=setCharSet();
 
 # Load dept & ward classes
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 require_once($root_path.'include/core/class_ward.php');
 $dept=new Department();
 $ward=new Ward();
