@@ -25,7 +25,7 @@ if(isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod']='';
 
 $thisfile=basename(__FILE__);
 $editorfile=$root_path.'modules/registration_admission/show_appointment.php';
-require_once($root_path.'include/core/class_appointment.php');
+require_once($root_path.'modules/appointment_scheduler/model/class_appointment.php');
 $appt_obj=new Appointment();
 
 if(!isset($mode)){

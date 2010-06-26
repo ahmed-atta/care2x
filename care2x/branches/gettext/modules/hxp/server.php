@@ -484,7 +484,7 @@ function PersonAppt($args){
 }
 function PersonApptList($args){
 	global $error,$root_path;
-	include($root_path.'include/core/class_appointment.php');
+	include($root_path.'modules/appointment_scheduler/model/class_appointment.php');
 	$appt=& new Appointment();
 
 	if(checkAccess($args[0])){
