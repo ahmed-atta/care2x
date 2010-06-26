@@ -41,7 +41,7 @@ if(!isset($saal)||empty($saal)) $saal=1;
 # Set first entry flag
 setcookie(firstentry,'1');
 
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 # Preload the deparment info 
 $dept_obj->preloadDept($dept_nr);

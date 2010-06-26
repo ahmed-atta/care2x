@@ -14,7 +14,7 @@ define('LANG_FILE','billing.php');
 
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require($root_path.'include/core/class_ecombill.php');
+require($root_path.'modules/ecombill/model/class_ecombill.php');
 $eComBill=new eComBill;
 
 //$db->debug=true;

@@ -15,7 +15,7 @@ define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 
 switch($target){

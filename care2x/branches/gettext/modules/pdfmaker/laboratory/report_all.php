@@ -49,7 +49,7 @@ if($enc_obj->loadEncounterData()){
 }
 
 // Get the Deparment name
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj = new Department();
 $deptName = $dept_obj->FormalName($enc_obj->encounter['current_dept_nr']);
 require_once($root_path.'include/core/class_ward.php');

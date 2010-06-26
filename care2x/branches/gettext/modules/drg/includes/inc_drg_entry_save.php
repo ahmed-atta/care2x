@@ -4,7 +4,7 @@ if (stristr('inc_drg_entry_save.php',$PHP_SELF))
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
-require_once($root_path.'include/core/class_drg.php');
+require_once($root_path.'modules/drg/model/class_drg.php');
 
 # Bug patch 2003-06-19
 if(is_object($DRG_obj)) unset($DRG_obj);

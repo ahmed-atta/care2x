@@ -7,7 +7,7 @@ define('LANG_FILE','products.php');
 $local_user='ck_prod_order_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department();
 require_once($root_path.'include/core/class_product.php');
 $product_obj=new Product();

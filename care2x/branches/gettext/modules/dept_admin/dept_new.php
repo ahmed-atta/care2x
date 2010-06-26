@@ -19,8 +19,8 @@ $lang_tables[]='doctors.php';
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/core/class_department.php');
-require_once($root_path.'include/core/class_comm.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
+require_once($root_path.'modules/phone_directory/model/class_comm.php');
 
 $breakfile='dept_list.php'.URL_APPEND;
 

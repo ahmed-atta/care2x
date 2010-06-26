@@ -64,7 +64,7 @@ if($pnr=$duty2['hr'.$offset_day]){
 	$person2=&$pers_obj->getPersonellInfo($pnr);
 }
 
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 $dept=&$dept_obj->getPhoneInfo($dept_nr);
 /* Resolve the departments name "language dependent" */

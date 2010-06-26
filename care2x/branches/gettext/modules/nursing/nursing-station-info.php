@@ -37,7 +37,7 @@ $rows=0;
 				// Get all medical departments
 				/* Load the dept object */
 /*				if($edit){
-					include_once($root_path.'include/core/class_department.php');
+					include_once($root_path.'modules/dept_admin/model/class_department.php');
 					$dept=new Department;							
 					$depts=&$dept->getAllMedical();
 				}

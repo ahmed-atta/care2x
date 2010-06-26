@@ -105,7 +105,7 @@ define('_BATCH_NR_INIT_',30000000);
 			if($enc_obj->is_loaded){
 				$result=&$enc_obj->encounter;
 			}
-			include_once($root_path.'include/core/class_diagnostics.php');
+			include_once($root_path.'modules/laboratory/model/class_diagnostics.php');
 			$bac_obj=new Diagnostics;
 			$bac_obj->useBacLabRequestTable();
 			$bac_obj_sub = new Diagnostics;

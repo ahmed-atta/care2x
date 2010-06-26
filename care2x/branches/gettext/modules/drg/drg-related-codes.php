@@ -29,7 +29,7 @@ if($saveok) { ?>
 	exit;
 }
 
-require_once($root_path.'include/core/class_drg.php');
+require_once($root_path.'modules/drg/model/class_drg.php');
 $DRG_obj=new DRG($pn); // Create a drg object
 
 $toggle=0;

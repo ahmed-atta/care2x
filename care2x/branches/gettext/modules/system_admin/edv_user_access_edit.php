@@ -26,7 +26,7 @@ $returnfile = $_SESSION [ 'sess_file_return' ] . URL_APPEND ;
 $_SESSION [ 'sess_file_return' ] = basename ( __FILE__ ) ;
 
 //gjergji : load the department list
-require_once ($root_path . 'include/core/class_department.php') ;
+require_once ($root_path . 'modules/dept_admin/model/class_department.php') ;
 $dept_obj = new Department ( ) ;
 $deptarray = $dept_obj->getAllActiveSort ( 'name_formal' ) ;
 

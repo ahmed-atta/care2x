@@ -18,7 +18,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/core/class_ward.php');
 $ward=new Ward;
 /* Load the dept object */
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept=new Department;
 
 $breakfile='nursing-station-manage.php'.URL_APPEND;

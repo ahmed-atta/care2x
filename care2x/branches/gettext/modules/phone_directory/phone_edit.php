@@ -42,7 +42,7 @@ if ($mode=='save' || ($mode=='update' && !empty($nr)) ){
 		$bSaveOk = FALSE;
 
          # Create comm object
-         include_once($root_path.'include/core/class_comm.php');
+         include_once($root_path.'modules/phone_directory/model/class_comm.php');
          $phone = & new Comm;
 
         # Correctly map some indexes

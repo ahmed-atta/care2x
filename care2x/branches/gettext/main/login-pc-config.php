@@ -20,7 +20,7 @@ if($user->getConfig($_COOKIE['ck_config'])){
 }
 
 /* Load the dept object */
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept=new Department;
 $depts=&$dept->getAllActive();
 

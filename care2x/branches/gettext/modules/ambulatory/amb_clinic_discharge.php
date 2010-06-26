@@ -89,7 +89,7 @@ if($enc_obj->loadEncounterData($pn)){
 
 		if(!isset($dept)||empty($dept)){
 			# Create nursing notes object 
-			include_once($root_path.'include/core/class_department.php');
+			include_once($root_path.'modules/dept_admin/model/class_department.php');
 			$dept_obj= new Department;
 			$dept=$dept_obj->FormalName($dept_nr);
 		}

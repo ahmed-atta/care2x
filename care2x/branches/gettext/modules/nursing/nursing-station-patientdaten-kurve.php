@@ -109,7 +109,7 @@ $date_end=$dateshifter->shift_dates($date_start,-6,'d');
 			$result=&$enc_obj->encounter;		
 			$rows=$enc_obj->record_count;	
 			/* Create charts object */
-			include_once($root_path.'include/core/class_charts.php');
+			include_once($root_path.'modules/nursing/model/class_charts.php');
 			$charts_obj= new Charts;
 		
 			// get Allergy notes  type = 22

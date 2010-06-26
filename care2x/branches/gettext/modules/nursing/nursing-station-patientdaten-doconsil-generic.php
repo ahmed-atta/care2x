@@ -55,7 +55,7 @@ $formtitle=$abtname[$konsil];
 define('_BATCH_NR_INIT_',50000000);  // define the initial batch nr for generic forms
 
 /* Create department object and load all medical depts */
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj= new Department;
 $medical_depts=$dept_obj->getAllActiveSort( 'name_formal' );
 

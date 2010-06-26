@@ -716,7 +716,7 @@ class GuiInputPerson {
 		if ($errortown) $this->smarty->assign('LDStreet',"<font color=red>$LDTownCity</font>:");
 		else $this->smarty->assign('LDTownCity',"$LDTownCity:");
 
-		require_once($root_path.'include/core/class_address.php');
+		require_once($root_path.'modules/address/model/class_address.php');
 		$sAddress = '<select name="addr_citytown_name"><option onClick="updateAddress(\'  \',\'--\')" value=""></option>';
 		$address_obj=new Address;
 		$address = $address_obj->getAllActiveCityTown();

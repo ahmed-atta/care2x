@@ -25,7 +25,7 @@ if(!isset($dept_nr)||!$dept_nr){
 $thisfile=basename(__FILE__);
 $breakfile="doctors-dienstplan.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath";
 
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 

@@ -78,7 +78,7 @@ if(!$is_cached || ($is_cached && $force_no_cache)){
 		if($dept_nr) $hilitedept=$dept_nr;
 	}
 	# Load the department list with oncall doctors 
-	include_once($root_path.'include/core/class_department.php');
+	include_once($root_path.'modules/dept_admin/model/class_department.php');
 	$dept_obj=new Department;
 	$dept_OC=$dept_obj->getAllActiveWithNOC();
 	include_once($root_path.'include/core/class_personell.php');

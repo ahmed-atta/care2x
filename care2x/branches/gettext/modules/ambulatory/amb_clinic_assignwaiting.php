@@ -51,7 +51,7 @@ if(($mode=='')||($mode=='fresh')){
 		
 		if($encounter['current_dept_nr'] != $dept_nr){
 			if(!isset($pdept)||empty($pdept)){
-				require_once($root_path.'include/core/class_department.php');
+				require_once($root_path.'modules/dept_admin/model/class_department.php');
 				$dept_obj=new Department;
 				$dept=$dept_obj->FormalName($encounter['current_dept_nr']);
 			}else{

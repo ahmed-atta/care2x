@@ -20,7 +20,7 @@ require_once ($root_path . 'include/helpers/inc_config_color.php'); // load colo
 
 $thisfile  =basename(__FILE__);
 /* Create charts object */
-require_once ($root_path . 'include/core/class_charts.php');
+require_once ($root_path . 'modules/nursing/model/class_charts.php');
 $charts_obj=new Charts;
 
 switch ($winid)

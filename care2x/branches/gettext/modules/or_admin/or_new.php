@@ -19,7 +19,7 @@ $lang_tables[]='prompt.php';
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 require_once($root_path.'include/core/class_ward.php');
 require_once($root_path.'include/core/class_oproom.php');
 

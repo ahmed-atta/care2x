@@ -70,7 +70,7 @@ if(($mode=='')||($mode=='fresh')){
 	# If dept name is empty, fetch by location nr
 	if(!isset($dept)||empty($dept)){
 		# Create department object 
-		include_once($root_path.'include/core/class_department.php');
+		include_once($root_path.'modules/dept_admin/model/class_department.php');
 		$dept_obj= new Department;
 		$deptLDvar=$dept_obj->LDvar($dept_nr);
 		if(isset($$deptLDvar)&&!empty($$deptLDvar)) $dept=$$deptLDvar;

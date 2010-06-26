@@ -35,7 +35,7 @@ if(!isset($prescriber)||empty($prescriber)) $prescriber=$_COOKIE[$local_user.$si
 
 $title="$LDMedication/$LDDosage";
 /* Create charts object */
-require_once($root_path.'include/core/class_charts.php');
+require_once($root_path.'modules/nursing/model/class_charts.php');
 
 $charts_obj= new Charts;
 	if($mode=='repeat' && $pn!=''){

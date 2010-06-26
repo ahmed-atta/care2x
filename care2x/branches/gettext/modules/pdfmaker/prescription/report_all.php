@@ -109,7 +109,7 @@ if($enc_obj->loadEncounterData()){
 
 
 // Get the Deparment name
-require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj = new Department();
 $deptName = $dept_obj->FormalName($enc_obj->encounter['current_dept_nr']);
 require_once($root_path.'include/core/class_ward.php');
@@ -119,7 +119,7 @@ $roomName = $ward_obj->_getActiveRoomInfo($enc_obj->encounter['current_room_nr']
 $roomNumber = $enc_obj->encounter['current_room_nr'];
 
 // get Allergy notes type = 22
-include_once($root_path.'include/core/class_charts.php');
+include_once($root_path.'modules/nursing/model/class_charts.php');
 $charts_obj= new Charts;
 $allergy=&$charts_obj->getChartNotes($enc,22);
 $patientAllergy = '';
@@ -129,7 +129,7 @@ if(is_object($allergy)){
 	}
 }
 if( $patientAllergy == "" ) $patientAllergy = " -- ";
-include_once($root_path.'include/core/class_drg.php');
+include_once($root_path.'modules/drg/model/class_drg.php');
 $patientDiagnosis = '';
 $diag=new DRG();
 $diagnosis=&$diag->DiagnosisCodes(0,$enc);

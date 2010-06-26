@@ -45,7 +45,7 @@ $db_request_table_sub = $subtarget . "_sub";
 require_once ($root_path . 'include/core/class_encounter.php');
 $enc_obj = new Encounter ( );
 //use this methods instead of using SQL inside the code
-include_once ($root_path . 'include/core/class_diagnostics.php');
+include_once ($root_path . 'modules/laboratory/model/class_diagnostics.php');
 $bac_obj = new Diagnostics ( );
 $bac_obj->useBacLabFindingsTable ();
 $bac_obj_sub = new Diagnostics ( );
