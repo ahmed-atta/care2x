@@ -1,7 +1,7 @@
 <?PHP
 
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 require($root_path.'global_conf/inc_remoteservers_conf.php');
 $local_user='ck_fotolab_user';
 
@@ -11,7 +11,7 @@ require_once($root_path.'include/care_api_classes/class_image.php');
 $img=new Image;
 $disc_pix_mode = true;
 
-if(!isset($db) || !$db) include_once($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db) || !$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
 if(!$dblink_ok) {
   print "ERROR: db not ready.\n";
   exit;

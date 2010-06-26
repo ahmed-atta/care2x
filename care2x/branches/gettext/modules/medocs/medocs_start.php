@@ -1,7 +1,7 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -15,7 +15,7 @@ require($root_path.'include/core/inc_environment_global.php');
 define('LANG_FILE','aufnahme.php');
 # Resolve the local user based on the origin of the script
 require_once('include/inc_local_user.php');
-require($root_path.'include/core/inc_front_chain_lang.php');
+require($root_path.'include/helpers/inc_front_chain_lang.php');
 
 /* If patient nr is invallid jump to registration search module*/
 /*if(!isset($pid) || !$pid)
@@ -24,7 +24,7 @@ require($root_path.'include/core/inc_front_chain_lang.php');
 	exit;
 }
 */
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 $thisfile=basename(__FILE__);
 if($origin=='patreg_reg') $returnfile='patient_register_show.php'.URL_APPEND.'&pid='.$pid;

@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,12 +12,12 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 // reset all 2nd level lock cookies
-require($root_path.'include/core/inc_2level_reset.php');
+require($root_path.'include/helpers/inc_2level_reset.php');
 
-require_once($root_path.'include/core/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
 
 if($retpath=='home') $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 	else $breakfile=$root_path.'main/spediens.php'.URL_APPEND;

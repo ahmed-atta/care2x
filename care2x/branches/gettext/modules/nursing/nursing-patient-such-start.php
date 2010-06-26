@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -14,12 +14,12 @@ require($root_path.'include/core/inc_environment_global.php');
 $lang_tables[]='search.php';
 define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $breakfile='nursing.php'.URL_APPEND;
 
 /* Load the date formatter */
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $GLOBAL_CONFIG;
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -113,7 +113,7 @@ if($mode=='such'||$mode=='paginate')
 	
 	//$db->debug=1;
 
-	if(!isset($db)||!$db)include($root_path.'include/core/inc_db_makelink.php');
+	if(!isset($db)||!$db)include($root_path.'include/helpers/inc_db_makelink.php');
 	if($dblink_ok){			
 		$sqlselect="SELECT r.location_nr AS room_nr, p.name_last, p.name_first,p.date_birth,
 					e.encounter_nr, e.encounter_class_nr,e.in_ward,

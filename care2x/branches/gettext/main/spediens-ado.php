@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
  * CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
  * GNU General Public License
@@ -12,9 +12,9 @@ require($root_path.'include/core/inc_environment_global.php');
  */
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/core/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
 
 $thisfile="spediens-ado.php";
 $breakfile="spediens.php?sid=".$sid."&lang=".$lang;
@@ -37,8 +37,8 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 
 <?php
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 

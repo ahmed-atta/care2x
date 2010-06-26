@@ -1,11 +1,11 @@
 <?php 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 $lang_tables[]='actions.php';
 define('LANG_FILE','obstetrics.php');
 $local_user='aufnahme_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 # Create obstetrics object and get all neonatal classifications
 require_once($root_path.'include/care_api_classes/class_obstetrics.php');
 $neo=new Obstetrics;

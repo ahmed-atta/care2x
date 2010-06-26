@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -20,7 +20,7 @@ $lang_tables[]='departments.php';
 define('LANG_FILE','nursing.php');
 //define('NO_2LEVEL_CHK',1);
 $local_user='ck_pflege_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 /**
 * Set default values if not available from url
@@ -55,7 +55,7 @@ if(isset($retpath)){
 $_SESSION['sess_user_origin']='amb';
 
 # Load date formatter 
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
   
 if(($mode=='')||($mode=='fresh')){
 
@@ -217,7 +217,7 @@ function billinfo(patnum)
 }
 
 <?php 
-require($root_path.'include/core/inc_checkdate_lang.php'); 
+require($root_path.'include/helpers/inc_checkdate_lang.php'); 
 ?>
 
 // -->

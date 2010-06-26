@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'/include/core/inc_environment_global.php');
+require_once($root_path.'/include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,9 +12,9 @@ require_once($root_path.'/include/core/inc_environment_global.php');
 */
 define('LANG_FILE','phone.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
-require($root_path.'include/core/inc_2level_reset.php');
+require($root_path.'include/helpers/inc_2level_reset.php');
 
 if(isset($_SESSION['sess_personell_nr'])&&$_SESSION['sess_user_origin']=='personell_admin'){
 	$breakfile=$root_path.'modules/personell_admin/personell_admin_pass.php'.URL_APPEND.'&fwd_nr='.$_SESSION['sess_personell_nr'].'&target=personell_search';
@@ -66,8 +66,8 @@ function pruf(d)
 </script>
  
 <?php 
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
  
 </HEAD>
@@ -181,7 +181,7 @@ if ($linecount>0) {
 </table>        
 <p>
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
  ?>
 
 </BODY>

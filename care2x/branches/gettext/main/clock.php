@@ -1,7 +1,7 @@
 <?php
 error_reporting ( E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR );
 require ('./roots.php');
-require ($root_path . 'include/core/inc_environment_global.php');
+require ($root_path . 'include/helpers/inc_environment_global.php');
 /**
  * CARE 2002 Integrated Hospital Information System beta 1.0.04 - 2003-03-31
  * GNU General Public License
@@ -12,8 +12,8 @@ require ($root_path . 'include/core/inc_environment_global.php');
  */
 define ( 'LANG_FILE', 'specials.php' );
 define ( 'NO_2LEVEL_CHK', 1 );
-require_once ($root_path . 'include/core/inc_front_chain_lang.php');
-require_once ($root_path . 'include/core/inc_config_color.php');
+require_once ($root_path . 'include/helpers/inc_front_chain_lang.php');
+require_once ($root_path . 'include/helpers/inc_config_color.php');
 
 $breakfile = "spediens.php?sid=" . $sid . "&lang=" . $lang;
 
@@ -28,8 +28,8 @@ echo setCharSet ();
 </script>
 
 <?php
-require ($root_path . 'include/core/inc_js_gethelp.php');
-require ($root_path . 'include/core/inc_css_a_hilitebu.php');
+require ($root_path . 'include/helpers/inc_js_gethelp.php');
+require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
 ?><script language="javascript">
 <!-- 
 function gethelp(x,s,x1,x2,x3)
@@ -114,7 +114,7 @@ echo "$LDPresent $LDTime"?>
 		echo $cfg ['bot_bgcolor'];
 		?> height=70 colspan=2>
 <?php
-require ($root_path.'include/core/inc_load_copyrite.php');
+require ($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 </td>
 	</tr>

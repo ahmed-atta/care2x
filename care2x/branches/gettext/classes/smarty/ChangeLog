@@ -2341,28 +2341,28 @@
     * NEWS
       libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.assemble_plugin_filepath.php
-      libs/core/core.assign_smarty_interface.php
-      libs/core/core.create_dir_structure.php
-      libs/core/core.display_debug_console.php
-      libs/core/core.get_include_path.php
-      libs/core/core.get_microtime.php
-      libs/core/core.get_php_resource.php
-      libs/core/core.is_secure.php
-      libs/core/core.is_trusted.php
-      libs/core/core.load_plugins.php
-      libs/core/core.load_resource_plugin.php
-      libs/core/core.process_cached_inserts.php
-      libs/core/core.process_compiled_include.php
-      libs/core/core.read_cache_file.php
-      libs/core/core.rm_auto.php
-      libs/core/core.rmdir.php
-      libs/core/core.run_insert_handler.php
-      libs/core/core.smarty_include_php.php
-      libs/core/core.write_cache_file.php
-      libs/core/core.write_compiled_include.php
-      libs/core/core.write_compiled_resource.php
-      libs/core/core.write_file.php
+      libs/helpers/core.assemble_plugin_filepath.php
+      libs/helpers/core.assign_smarty_interface.php
+      libs/helpers/core.create_dir_structure.php
+      libs/helpers/core.display_debug_console.php
+      libs/helpers/core.get_include_path.php
+      libs/helpers/core.get_microtime.php
+      libs/helpers/core.get_php_resource.php
+      libs/helpers/core.is_secure.php
+      libs/helpers/core.is_trusted.php
+      libs/helpers/core.load_plugins.php
+      libs/helpers/core.load_resource_plugin.php
+      libs/helpers/core.process_cached_inserts.php
+      libs/helpers/core.process_compiled_include.php
+      libs/helpers/core.read_cache_file.php
+      libs/helpers/core.rm_auto.php
+      libs/helpers/core.rmdir.php
+      libs/helpers/core.run_insert_handler.php
+      libs/helpers/core.smarty_include_php.php
+      libs/helpers/core.write_cache_file.php
+      libs/helpers/core.write_compiled_include.php
+      libs/helpers/core.write_compiled_resource.php
+      libs/helpers/core.write_file.php
       libs/plugins/function.config_load.php
       libs/plugins/function.debug.php
       libs/plugins/function.fetch.php
@@ -2466,7 +2466,7 @@
 2004-08-29  Messju Mohr  <messju@lammfellpuschen.de>
 
     * NEWS
-      libs/core/core.write_file.php:
+      libs/helpers/core.write_file.php:
       tempnam() seems to be borken on many installation.
       
       now we try tempnam first and if that fails we generate our own
@@ -2580,8 +2580,8 @@
     * NEWS
       libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.load_plugins.php
-      libs/core/core.load_resource_plugin.php
+      libs/helpers/core.load_plugins.php
+      libs/helpers/core.load_resource_plugin.php
       libs/plugins/function.html_checkboxes.php
       libs/plugins/function.html_image.php
       libs/plugins/function.html_options.php
@@ -2597,7 +2597,7 @@
 2004-07-20  Messju Mohr  <messju@lammfellpuschen.de>
 
     * libs/Smarty_Compiler.class.php
-      libs/core/core.is_trusted.php
+      libs/helpers/core.is_trusted.php
       libs/plugins/compiler.assign.php:
       Some fixes on PhpDocumentor comments. Thanks go to Ruben Vermeersch.
 
@@ -2651,15 +2651,15 @@
     * NEWS
       libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.load_plugins.php
-      libs/core/core.load_resource_plugin.php:
+      libs/helpers/core.load_plugins.php
+      libs/helpers/core.load_resource_plugin.php:
       renamed Smarty::_get_plugin_filepath() to Smarty::get_plugin_filepath()
 
     * NEWS
       libs/Smarty.class.php
-      libs/core/core.write_compiled_include.php
-      libs/core/core.write_compiled_resource.php
-      libs/core/core.write_file.php:
+      libs/helpers/core.write_compiled_include.php
+      libs/helpers/core.write_compiled_resource.php
+      libs/helpers/core.write_file.php:
       removed touch() call. changing the timestamp of the compiled-template
       to the source template's may be irritating for certain
       source-code-caches. now a newly compiled template gets the current
@@ -2810,7 +2810,7 @@
 2004-05-06  Messju Mohr  <messju@lammfellpuschen.de>
 
     * NEWS
-      libs/core/core.write_file.php:
+      libs/helpers/core.write_file.php:
       use tempnam() instead of unqid() to create better temporary files in
       smarty_core_write_file().
       
@@ -2871,9 +2871,9 @@
       reverted Stuff
 
     * libs/debug.tpl
-      libs/core/core.assemble_plugin_filepath.php
-      libs/core/core.read_cache_file.php
-      libs/core/core.write_file.php
+      libs/helpers/core.assemble_plugin_filepath.php
+      libs/helpers/core.read_cache_file.php
+      libs/helpers/core.write_file.php
       libs/plugins/function.eval.php
       libs/plugins/function.popup.php
       libs/plugins/modifier.escape.php
@@ -2883,9 +2883,9 @@
     * libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
       libs/debug.tpl
-      libs/core/core.assemble_plugin_filepath.php
-      libs/core/core.read_cache_file.php
-      libs/core/core.write_file.php
+      libs/helpers/core.assemble_plugin_filepath.php
+      libs/helpers/core.read_cache_file.php
+      libs/helpers/core.write_file.php
       libs/plugins/function.eval.php
       libs/plugins/function.popup.php
       libs/plugins/modifier.escape.php
@@ -2895,7 +2895,7 @@
 2004-04-15  Messju Mohr  <messju@lammfellpuschen.de>
 
     * NEWS
-      libs/core/core.write_compiled_include.php:
+      libs/helpers/core.write_compiled_include.php:
       made smarty_core_write_compiled_include() php5-aware
       
       if someone knows a better way than patching the source with the
@@ -2938,7 +2938,7 @@
       Andreas Streichardt who pointed this out.
 
     * NEWS
-      libs/core/core.is_secure.php:
+      libs/helpers/core.is_secure.php:
       smarty_core_is_secure() only checks the file for readability now, not
       the directory where is in.
 
@@ -2970,11 +2970,11 @@
 
 2004-03-30  Monte Ohrt  <monte@ispi.net>
 
-    * libs/core/core.display_debug_console.php:
+    * libs/helpers/core.display_debug_console.php:
       fix problem with debug_tpl path and security
 
     * NEWS
-      libs/core/core.display_debug_console.php:
+      libs/helpers/core.display_debug_console.php:
       fix problem displaying debug console when $default_resource_type is not
       "file:"
 
@@ -3093,7 +3093,7 @@
 
 2004-03-18  Messju Mohr  <messju@lammfellpuschen.de>
 
-    * libs/core/core.is_secure.php:
+    * libs/helpers/core.is_secure.php:
       removed merging of $smarty->template_dir into $smarty->secure_dir
       
       the resource_base_path is considerd secure instead. this change should
@@ -3164,7 +3164,7 @@
 
 2004-03-11  Messju Mohr  <messju@lammfellpuschen.de>
 
-    * libs/core/core.assemble_plugin_filepath.php:
+    * libs/helpers/core.assemble_plugin_filepath.php:
       fixed little bug that prevented plugins filepaths that are found in
       php's include_path (and not in one of the plugins_dirs) from being
       cached in the internal plugins-filepath-cache
@@ -3198,7 +3198,7 @@
 2004-02-24  Messju Mohr  <messju@lammfellpuschen.de>
 
     * NEWS
-      libs/core/core.is_secure.php:
+      libs/helpers/core.is_secure.php:
       smarty_resource_*_secure got &$smarty passed errornously as 3rd
       parameter and not as 2nd. this is fixed.
 
@@ -3381,7 +3381,7 @@
       fix: $smarty->security is now correctly handled
       
       minor optimizations:
-         core/core.is_secure.php is only included when needed
+         helpers/core.is_secure.php is only included when needed
          $dpi_default is only determined when needed
 
 2004-01-14  Messju Mohr  <messju@lammfellpuschen.de>
@@ -3426,7 +3426,7 @@
 2004-01-08  Messju Mohr  <messju@lammfellpuschen.de>
 
     * NEWS
-      libs/core/core.assemble_plugin_filepath.php:
+      libs/helpers/core.assemble_plugin_filepath.php:
       added caching of requested paths to smarty_core_assemble_plugin_filepath()
 
     * NEWS:
@@ -3655,10 +3655,10 @@
 
 2003-12-01  Messju Mohr  <messju@lammfellpuschen.de>
 
-    * libs/core/core.create_dir_structure.php:
+    * libs/helpers/core.create_dir_structure.php:
       thought again about my latest commit and backed it out.
 
-    * libs/core/core.create_dir_structure.php:
+    * libs/helpers/core.create_dir_structure.php:
       fix root-dir-handling on windows filepath
 
 2003-11-29  boots  <jayboots@yahoo.com>
@@ -3699,14 +3699,14 @@
       libs/plugins/function.assign.php:
       move function.assign.php to compiler.assign.php
 
-    * libs/core/core.get_include_path.php:
+    * libs/helpers/core.get_include_path.php:
       silence occasional warnings of open_basedir- and
       safe_mode-restrictions in core.get_include_path.php
 
 2003-11-23  Messju Mohr  <messju@lammfellpuschen.de>
 
-    * libs/core/core.write_compiled_resource.php
-      libs/core/core.write_file.php:
+    * libs/helpers/core.write_compiled_resource.php
+      libs/helpers/core.write_file.php:
       avoid touch()-ing of recently unlinked files by touch()-ing the
       tempfile before rename instead of touch()-ing the resulting file after
       rename.
@@ -3808,19 +3808,19 @@
 2003-11-11  Messju Mohr  <messju@lammfellpuschen.de>
 
     * NEWS
-      libs/core/core.process_cached_inserts.php:
+      libs/helpers/core.process_cached_inserts.php:
       fix handling of assign inside {insert}-tags
 
 2003-11-06  Messju Mohr  <messju@lammfellpuschen.de>
 
-    * libs/core/core.read_cache_file.php:
+    * libs/helpers/core.read_cache_file.php:
       added $exp_time-parameter
 
     * docs/programmers.sgml:
       added $exp_time to cache_handler_func-example
 
     * libs/Smarty.class.php
-      libs/core/core.write_cache_file.php:
+      libs/helpers/core.write_cache_file.php:
       added $exp_time-parameter of clear_cache() and clear_all_cache() to
       cache_handler_func.
 
@@ -3884,7 +3884,7 @@
       Smarty_Compiler::_compile_include_php_tag()
 
     * NEWS
-      libs/core/core.create_dir_structure.php:
+      libs/helpers/core.create_dir_structure.php:
       fix handling of trailing-slashes in open_basedir in
       smarty_core_create_dir_structure()
 
@@ -3902,7 +3902,7 @@
 2003-10-12  Messju Mohr  <messju@lammfellpuschen.de>
 
     * libs/Smarty.class.php
-      libs/core/core.is_secure.php:
+      libs/helpers/core.is_secure.php:
       move check for template_dir in secure_dir-array into core.is_secure.php
       
       this makes template_exists() work correctly with security=true even if
@@ -3923,28 +3923,28 @@
     * libs/Config_File.class.php
       libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.assemble_plugin_filepath.php
-      libs/core/core.assign_smarty_interface.php
-      libs/core/core.create_dir_structure.php
-      libs/core/core.display_debug_console.php
-      libs/core/core.get_include_path.php
-      libs/core/core.get_microtime.php
-      libs/core/core.get_php_resource.php
-      libs/core/core.is_secure.php
-      libs/core/core.is_trusted.php
-      libs/core/core.load_plugins.php
-      libs/core/core.load_resource_plugin.php
-      libs/core/core.process_cached_inserts.php
-      libs/core/core.process_compiled_include.php
-      libs/core/core.read_cache_file.php
-      libs/core/core.rm_auto.php
-      libs/core/core.rmdir.php
-      libs/core/core.run_insert_handler.php
-      libs/core/core.smarty_include_php.php
-      libs/core/core.write_compiled_include.php
-      libs/core/core.write_compiled_resource.php
-      libs/core/core.write_file.php:
-      removed tabs from the main and the core/*.php files
+      libs/helpers/core.assemble_plugin_filepath.php
+      libs/helpers/core.assign_smarty_interface.php
+      libs/helpers/core.create_dir_structure.php
+      libs/helpers/core.display_debug_console.php
+      libs/helpers/core.get_include_path.php
+      libs/helpers/core.get_microtime.php
+      libs/helpers/core.get_php_resource.php
+      libs/helpers/core.is_secure.php
+      libs/helpers/core.is_trusted.php
+      libs/helpers/core.load_plugins.php
+      libs/helpers/core.load_resource_plugin.php
+      libs/helpers/core.process_cached_inserts.php
+      libs/helpers/core.process_compiled_include.php
+      libs/helpers/core.read_cache_file.php
+      libs/helpers/core.rm_auto.php
+      libs/helpers/core.rmdir.php
+      libs/helpers/core.run_insert_handler.php
+      libs/helpers/core.smarty_include_php.php
+      libs/helpers/core.write_compiled_include.php
+      libs/helpers/core.write_compiled_resource.php
+      libs/helpers/core.write_file.php:
+      removed tabs from the main and the helpers/*.php files
 
 2003-10-08  Monte Ohrt  <monte@ispi.net>
 
@@ -3971,11 +3971,11 @@
 
     * libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.write_cache_paths_file.php:
+      libs/helpers/core.write_cache_paths_file.php:
       backed out _smarty_cached_paths-file-handling
 
     * libs/Smarty.class.php
-      libs/core/core.rm_auto.php:
+      libs/helpers/core.rm_auto.php:
       fixed clear_compiled_tpl with explicit $tpl_file given
       fixed return value of smarty_core_rm_auto() + Smarty::_unlink()
 
@@ -3985,7 +3985,7 @@
 2003-09-14  Messju Mohr  <messju@lammfellpuschen.de>
 
     * libs/Smarty.class.php
-      libs/core/core.assemble_auto_filename.php:
+      libs/helpers/core.assemble_auto_filename.php:
       removed auto-filenames from path-cache. merged assemble_auto_filename
       back into Smarty::_get_auto_filename()
 
@@ -3997,9 +3997,9 @@
     * NEWS
       libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.get_php_resource.php
-      libs/core/core.load_plugins.php
-      libs/core/core.load_resource_plugin.php:
+      libs/helpers/core.get_php_resource.php
+      libs/helpers/core.load_plugins.php
+      libs/helpers/core.load_resource_plugin.php:
       remove Smarty::_plugin_implementation_exists() - use php's native
       is_callable()
 
@@ -4059,14 +4059,14 @@
 
 2003-08-29  Messju Mohr  <messju@lammfellpuschen.de>
 
-    * libs/core/core.assign_smarty_interface.php
-      libs/core/core.display_debug_console.php
+    * libs/helpers/core.assign_smarty_interface.php
+      libs/helpers/core.display_debug_console.php
       libs/plugins/function.assign.php
       libs/plugins/function.html_options.php
       libs/plugins/function.html_table.php:
       fixed PHPDocumentor-comments (thanks Konstantin)
 
-    * libs/core/core.rmdir.php:
+    * libs/helpers/core.rmdir.php:
       made rmdir a bit more optimistic. especially it now removes
       directories correctly that where created accidently by "safe_mode=On
       && $use_sub_dirs=true"
@@ -4089,12 +4089,12 @@
 2003-08-22  Messju Mohr  <messju@lammfellpuschen.de>
 
     * NEWS
-      libs/core/core.assemble_plugin_filepath.php:
+      libs/helpers/core.assemble_plugin_filepath.php:
       fixed bug in traversal of $smarty->plugins_dir-array in
       smarty_core_assemble_plugin_filepath(). the first matching plugin in
       the path should be used, not the last one.
 
-    * libs/core/core.read_cache_file.php:
+    * libs/helpers/core.read_cache_file.php:
       discard $_cache_info when the cache should be regenerated
 
 2003-08-20  Messju Mohr  <messju@lammfellpuschen.de>
@@ -4123,7 +4123,7 @@
 2003-08-18  Messju Mohr  <messju@lammfellpuschen.de>
 
     * libs/Smarty.class.php
-      libs/core/core.read_cache_file.php:
+      libs/helpers/core.read_cache_file.php:
       fixed unnecessary load of source in template_exists() and the
       compile-check of smarty_core_read_cache_file()
 
@@ -4141,7 +4141,7 @@
 2003-08-14  Messju Mohr  <messju@lammfellpuschen.de>
 
     * libs/Smarty.class.php
-      libs/core/core.read_cache_file.php:
+      libs/helpers/core.read_cache_file.php:
       fixed timestamp-check of config-files in smarty_core_read_cache_file()
 
     * libs/Smarty.class.php:
@@ -4159,7 +4159,7 @@
 2003-08-13  Messju Mohr  <messju@lammfellpuschen.de>
 
     * libs/Smarty.class.php
-      libs/core/core.smarty_include_php.php:
+      libs/helpers/core.smarty_include_php.php:
       fixed problem with vars as attributes in {include_php}
 
 2003-08-13  Monte Ohrt  <monte@ispi.net>
@@ -4194,11 +4194,11 @@
 
 2003-08-09  Messju Mohr  <messju@lammfellpuschen.de>
 
-    * libs/core/core.is_secure.php
-      libs/core/core.is_trusted.php:
+    * libs/helpers/core.is_secure.php
+      libs/helpers/core.is_trusted.php:
       synced secure_dir-checking with trusted_dir-checking
 
-    * libs/core/core.is_secure.php:
+    * libs/helpers/core.is_secure.php:
       tightenend path checking in smarty_core_is_secure()
 
 2003-08-08  Messju Mohr  <messju@lammfellpuschen.de>
@@ -4283,7 +4283,7 @@
     * NEWS
       libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.process_compiled_include.php:
+      libs/helpers/core.process_compiled_include.php:
       added optional parameter $cache_attrs to register_function() and
       register_block(). $cache_attrs is an array containing attribute- names
       that should be cached on calls to functions that have $cacheable set
@@ -4303,7 +4303,7 @@
       updated copyright notice
 
     * libs/Smarty.class.php
-      libs/core/core.load_plugins.php:
+      libs/helpers/core.load_plugins.php:
       fixed bug that occurred when using the same not-cacheable plugin in
       multiple includes
 
@@ -4336,11 +4336,11 @@
 
     * libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.smarty_include.php:
+      libs/helpers/core.smarty_include.php:
       moved _smarty_include() back into Smarty.class.php
 
     * libs/Smarty.class.php
-      libs/core/core.load_plugins.php:
+      libs/helpers/core.load_plugins.php:
       prevent unnecessary calls to _read_file() in _is_compiled()
       converted method-call to internal function-call in
       smarty_core_load_plugins()
@@ -4353,22 +4353,22 @@
 
 2003-07-25  Messju Mohr  <messju@lammfellpuschen.de>
 
-    * libs/core/core.create_dir_structure.php:
+    * libs/helpers/core.create_dir_structure.php:
       weakend race-condition and removed bogus error-message caused by that
       in smarty_core_create_dir_structure().
 
 2003-07-23  Messju Mohr  <messju@lammfellpuschen.de>
 
     * libs/Smarty.class.php
-      libs/core/core.display_debug_console.php
-      libs/core/core.fetch_resource_info.php
-      libs/core/core.get_php_resource.php
-      libs/core/core.parse_resource_name.php
-      libs/core/core.process_cached_inserts.php
-      libs/core/core.read_cache_file.php
-      libs/core/core.run_insert_handler.php
-      libs/core/core.smarty_include.php
-      libs/core/core.smarty_include_php.php
+      libs/helpers/core.display_debug_console.php
+      libs/helpers/core.fetch_resource_info.php
+      libs/helpers/core.get_php_resource.php
+      libs/helpers/core.parse_resource_name.php
+      libs/helpers/core.process_cached_inserts.php
+      libs/helpers/core.read_cache_file.php
+      libs/helpers/core.run_insert_handler.php
+      libs/helpers/core.smarty_include.php
+      libs/helpers/core.smarty_include_php.php
       libs/plugins/function.eval.php:
       moved  _fetch_resource_info and _parse_resource_name back into
       Smarty.class.php
@@ -4376,12 +4376,12 @@
 
 2003-07-17  Messju Mohr  <messju@lammfellpuschen.de>
 
-    * libs/core/core.process_compiled_include.php
-      libs/core/core.read_cache_file.php:
+    * libs/helpers/core.process_compiled_include.php
+      libs/helpers/core.read_cache_file.php:
       improved checking of compiled_include against cached-template with
       non-cached-chunks
 
-    * libs/core/core.write_compiled_include.php:
+    * libs/helpers/core.write_compiled_include.php:
       fixed too short open-tag
 
     * libs/plugins/function.eval.php:
@@ -4422,7 +4422,7 @@
     * libs/Smarty_Compiler.class.php:
       backed out errornously committed support for $foo->$bar
 
-    * libs/core/core.write_file.php:
+    * libs/helpers/core.write_file.php:
       fixed indentiation, silenced occasional warning
 
     * libs/plugins/function.html_image.php:
@@ -4430,17 +4430,17 @@
       DIRECTORY_SEPARATOR since it is a url-path and not a file-path.
 
     * libs/Smarty_Compiler.class.php
-      libs/core/core.write_file.php
+      libs/helpers/core.write_file.php
       libs/plugins/function.html_image.php:
       libs/plugins/function.html_image.php
 
     * libs/Smarty_Compiler.class.php:
       re-fixed cacheable_state-handling
 
-    * libs/core/core.display_debug_console.php
-      libs/core/core.process_cached_inserts.php
-      libs/core/core.process_compiled_include.php
-      libs/core/core.run_insert_handler.php:
+    * libs/helpers/core.display_debug_console.php
+      libs/helpers/core.process_cached_inserts.php
+      libs/helpers/core.process_compiled_include.php
+      libs/helpers/core.run_insert_handler.php:
       extincting $this out of smarty_core_*-functions
 
     * libs/Smarty.class.php
@@ -4450,13 +4450,13 @@
 2003-06-29  Messju Mohr  <messju@lammfellpuschen.de>
 
     * libs/Smarty.class.php
-      libs/core/core.smarty_include.php
-      libs/core/core.smarty_include_php.php
+      libs/helpers/core.smarty_include.php
+      libs/helpers/core.smarty_include_php.php
       libs/plugins/function.eval.php:
       removed $this from smarty_include and smarty_include_php
       added cleaner handling of $this to {eval}
 
-    * libs/core/core.load_resource_plugin.php:
+    * libs/helpers/core.load_resource_plugin.php:
       fixed inlude_once-call
 
     * docs/de/designers.sgml
@@ -4465,19 +4465,19 @@
 
 2003-06-25  Monte Ohrt  <monte@ispi.net>
 
-    * libs/core/core.assemble_auto_filename.php
-      libs/core/core.write_cache_paths_file.php:
+    * libs/helpers/core.assemble_auto_filename.php
+      libs/helpers/core.write_cache_paths_file.php:
       fix typo, fix write_cache_paths logic
 
     * libs/Smarty.class.php
-      libs/core/core.assemble_auto_filename.php:
+      libs/helpers/core.assemble_auto_filename.php:
       fix SMARTY_COMPILE_DIR_SEP problem, make local var
 
 2003-06-24  Monte Ohrt  <monte@ispi.net>
 
     * libs/Smarty.class.php
-      libs/core/core.assemble_auto_filename.php
-      libs/core/core.write_cache_paths_file.php:
+      libs/helpers/core.assemble_auto_filename.php
+      libs/helpers/core.write_cache_paths_file.php:
       fixed cache_paths bug, simplified filename assembly logic
 
 2003-06-24  Messju Mohr  <messju@lammfellpuschen.de>
@@ -4498,7 +4498,7 @@
 
     * libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.write_cache_paths_file.php:
+      libs/helpers/core.write_cache_paths_file.php:
       make cache_path per resource, fix a couple directory path issues
 
 2003-06-23  Messju Mohr  <messju@lammfellpuschen.de>
@@ -4506,10 +4506,10 @@
     * libs/Smarty_Compiler.class.php:
       removed warning when compiling empty template
 
-    * libs/core/core.write_compiled_include.php:
+    * libs/helpers/core.write_compiled_include.php:
       fixed bug in write_compiled_include
 
-    * libs/core/core.assemble_plugin_filepath.php:
+    * libs/helpers/core.assemble_plugin_filepath.php:
       fixed warning
 
 2003-06-22  Messju Mohr  <messju@lammfellpuschen.de>
@@ -4517,60 +4517,60 @@
     * libs/plugins/function.eval.php:
       fixed propagation of $this into evald code in smarty_function_eval()
 
-    * libs/core/core.write_cache_paths_file.php
-      libs/core/core.write_compiled_include.php:
+    * libs/helpers/core.write_cache_paths_file.php
+      libs/helpers/core.write_compiled_include.php:
       fix in compiled-include-handling
 
-    * libs/core/core.assemble_auto_filename.php
-      libs/core/core.assemble_plugin_filepath.php
-      libs/core/core.assign_smarty_interface.php
-      libs/core/core.create_dir_structure.php
-      libs/core/core.fetch_resource_info.php
-      libs/core/core.get_include_path.php
-      libs/core/core.get_microtime.php
-      libs/core/core.get_php_resource.php
-      libs/core/core.is_secure.php
-      libs/core/core.is_trusted.php
-      libs/core/core.load_plugins.php
-      libs/core/core.load_resource_plugin.php
-      libs/core/core.parse_resource_name.php
-      libs/core/core.read_cache_file.php
-      libs/core/core.rm_auto.php
-      libs/core/core.rmdir.php
-      libs/core/core.write_cache_file.php
-      libs/core/core.write_cache_paths_file.php
-      libs/core/core.write_compiled_include.php
-      libs/core/core.write_compiled_resource.php
-      libs/core/core.write_file.php
+    * libs/helpers/core.assemble_auto_filename.php
+      libs/helpers/core.assemble_plugin_filepath.php
+      libs/helpers/core.assign_smarty_interface.php
+      libs/helpers/core.create_dir_structure.php
+      libs/helpers/core.fetch_resource_info.php
+      libs/helpers/core.get_include_path.php
+      libs/helpers/core.get_microtime.php
+      libs/helpers/core.get_php_resource.php
+      libs/helpers/core.is_secure.php
+      libs/helpers/core.is_trusted.php
+      libs/helpers/core.load_plugins.php
+      libs/helpers/core.load_resource_plugin.php
+      libs/helpers/core.parse_resource_name.php
+      libs/helpers/core.read_cache_file.php
+      libs/helpers/core.rm_auto.php
+      libs/helpers/core.rmdir.php
+      libs/helpers/core.write_cache_file.php
+      libs/helpers/core.write_cache_paths_file.php
+      libs/helpers/core.write_compiled_include.php
+      libs/helpers/core.write_compiled_resource.php
+      libs/helpers/core.write_file.php
       libs/plugins/modifier.date_format.php:
       started moving from $this to $smarty in core.*.php
 
 2003-06-21  Monte Ohrt  <monte@ispi.net>
 
-    * libs/core/core.create_dir_structure.php
-      libs/core/core.write_file.php
+    * libs/helpers/core.create_dir_structure.php
+      libs/helpers/core.write_file.php
       libs/plugins/function.config_load.php:
       fix more dir paths
 
     * NEWS
       libs/Smarty.class.php
-      libs/core/core.assemble_auto_filename.php
-      libs/core/core.assemble_plugin_filepath.php
-      libs/core/core.fetch_resource_info.php
-      libs/core/core.get_php_resource.php
-      libs/core/core.parse_resource_name.php
-      libs/core/core.process_cached_inserts.php
-      libs/core/core.read_cache_file.php
-      libs/core/core.rm_auto.php
-      libs/core/core.rmdir.php
-      libs/core/core.run_insert_handler.php
-      libs/core/core.smarty_include.php
-      libs/core/core.smarty_include_php.php
-      libs/core/core.write_cache_file.php
-      libs/core/core.write_cache_paths_file.php
-      libs/core/core.write_compiled_include.php
-      libs/core/core.write_compiled_resource.php
-      libs/core/core.write_file.php
+      libs/helpers/core.assemble_auto_filename.php
+      libs/helpers/core.assemble_plugin_filepath.php
+      libs/helpers/core.fetch_resource_info.php
+      libs/helpers/core.get_php_resource.php
+      libs/helpers/core.parse_resource_name.php
+      libs/helpers/core.process_cached_inserts.php
+      libs/helpers/core.read_cache_file.php
+      libs/helpers/core.rm_auto.php
+      libs/helpers/core.rmdir.php
+      libs/helpers/core.run_insert_handler.php
+      libs/helpers/core.smarty_include.php
+      libs/helpers/core.smarty_include_php.php
+      libs/helpers/core.write_cache_file.php
+      libs/helpers/core.write_cache_paths_file.php
+      libs/helpers/core.write_compiled_include.php
+      libs/helpers/core.write_compiled_resource.php
+      libs/helpers/core.write_file.php
       libs/plugins/function.config_load.php
       libs/plugins/function.fetch.php
       libs/plugins/function.html_image.php:
@@ -4582,16 +4582,16 @@
       fixed {plugin|modifier} syntax
 
     * libs/Smarty.class.php
-      libs/core/core.write_compiled_include.php:
+      libs/helpers/core.write_compiled_include.php:
       fixed compiled include handling
 
 2003-06-21  Monte Ohrt  <monte@ispi.net>
 
     * libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.assemble_auto_filename.php
-      libs/core/core.assemble_plugin_filepath.php
-      libs/core/core.write_cache_paths_file.php:
+      libs/helpers/core.assemble_auto_filename.php
+      libs/helpers/core.assemble_plugin_filepath.php
+      libs/helpers/core.write_cache_paths_file.php:
       added filepath caching
 
 2003-06-20  Monte Ohrt  <monte@ispi.net>
@@ -4600,19 +4600,19 @@
       update more varnames
 
     * libs/Smarty.class.php
-      libs/core/core.display_debug_console.php
-      libs/core/core.fetch_file_info.php
-      libs/core/core.fetch_resource_info.php
-      libs/core/core.get_php_resource.php
-      libs/core/core.parse_file_path.php
-      libs/core/core.parse_resource_name.php
-      libs/core/core.process_cached_inserts.php
-      libs/core/core.read_cache_file.php
-      libs/core/core.run_insert_handler.php
-      libs/core/core.smarty_include.php
-      libs/core/core.smarty_include_php.php
-      libs/core/core.write_compiled_resource.php
-      libs/core/core.write_compiled_template.php
+      libs/helpers/core.display_debug_console.php
+      libs/helpers/core.fetch_file_info.php
+      libs/helpers/core.fetch_resource_info.php
+      libs/helpers/core.get_php_resource.php
+      libs/helpers/core.parse_file_path.php
+      libs/helpers/core.parse_resource_name.php
+      libs/helpers/core.process_cached_inserts.php
+      libs/helpers/core.read_cache_file.php
+      libs/helpers/core.run_insert_handler.php
+      libs/helpers/core.smarty_include.php
+      libs/helpers/core.smarty_include_php.php
+      libs/helpers/core.write_compiled_resource.php
+      libs/helpers/core.write_compiled_template.php
       libs/plugins/function.config_load.php:
       refactored var naming to better reflect "resource" instead of "file" where
       appropriate
@@ -4622,18 +4622,18 @@
     * libs/Smarty.class.php:
       updated version-number to 2.5.0-cvs
 
-    * libs/core/core.write_cache_file.php:
+    * libs/helpers/core.write_cache_file.php:
       omit is-cache_dir-writable-check if a cache_handler_function is in use
 
-    * libs/core/core.smarty_include_php.php:
+    * libs/helpers/core.smarty_include_php.php:
       fixed comments in smarty_include_php
 
 2003-06-19  Monte Ohrt  <monte@ispi.net>
 
     * libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.display_debug_console.php
-      libs/core/core.smarty_include.php
+      libs/helpers/core.display_debug_console.php
+      libs/helpers/core.smarty_include.php
       libs/plugins/function.eval.php:
       split up _compile_template to _compile_file and _compile_source, fix eval
       function
@@ -4657,11 +4657,11 @@
     * NEWS
       libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.load_plugins.php
-      libs/core/core.process_compiled_include.php
-      libs/core/core.read_cache_file.php
-      libs/core/core.write_cache_file.php
-      libs/core/core.write_compiled_include.php:
+      libs/helpers/core.load_plugins.php
+      libs/helpers/core.process_compiled_include.php
+      libs/helpers/core.read_cache_file.php
+      libs/helpers/core.write_cache_file.php
+      libs/helpers/core.write_compiled_include.php:
       added $cacheable-parameter to register_function() and register_block()
 
     * libs/Smarty.class.php:
@@ -4669,7 +4669,7 @@
       $use_sub_dirs
 
     * libs/Smarty.class.php
-      libs/core/core.read_cache_file.php:
+      libs/helpers/core.read_cache_file.php:
       fixed $file_path-parameters  passed to smarty_core_fetch_file_info()
 
 2003-06-17  Monte Ohrt  <monte@ispi.net>
@@ -4686,7 +4686,7 @@
 
 2003-06-17  Messju Mohr  <messju@lammfellpuschen.de>
 
-    * libs/core/core.smarty_include.php:
+    * libs/helpers/core.smarty_include.php:
       switched _process_template() to _is_compiled()-logic
 
 2003-06-17  Monte Ohrt  <monte@ispi.net>
@@ -4703,23 +4703,23 @@
 
     * libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.display_debug_console.php
-      libs/core/core.fetch_file_info.php
-      libs/core/core.parse_file_path.php
-      libs/core/core.write_compiled_template.php
+      libs/helpers/core.display_debug_console.php
+      libs/helpers/core.fetch_file_info.php
+      libs/helpers/core.parse_file_path.php
+      libs/helpers/core.write_compiled_template.php
       libs/plugins/function.config_load.php:
       fix path problems, rename some varibles from "template" to "file"
 
 2003-06-16  Monte Ohrt  <monte@ispi.net>
 
-    * libs/core/core.fetch_file_info.php
-      libs/core/core.fetch_template_info.php:
+    * libs/helpers/core.fetch_file_info.php
+      libs/helpers/core.fetch_template_info.php:
       rename file, commit
 
     * libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.parse_file_path.php
-      libs/core/core.read_cache_file.php
+      libs/helpers/core.parse_file_path.php
+      libs/helpers/core.read_cache_file.php
       libs/plugins/block.strip.php
       libs/plugins/block.textformat.php
       libs/plugins/compiler.config_load.php
@@ -4744,28 +4744,28 @@
     * NEWS
       libs/Smarty.class.php
       libs/Smarty_Compiler.class.php
-      libs/core/core.assign_smarty_interface.php
-      libs/core/core.create_dir_structure.php
-      libs/core/core.display_debug_console.php
-      libs/core/core.fetch_template_info.php
-      libs/core/core.get_include_path.php
-      libs/core/core.get_microtime.php
-      libs/core/core.get_php_resource.php
-      libs/core/core.is_secure.php
-      libs/core/core.is_trusted.php
-      libs/core/core.load_plugins.php
-      libs/core/core.load_resource_plugin.php
-      libs/core/core.parse_file_path.php
-      libs/core/core.process_cached_inserts.php
-      libs/core/core.read_cache_file.php
-      libs/core/core.rm_auto.php
-      libs/core/core.rmdir.php
-      libs/core/core.run_insert_handler.php
-      libs/core/core.smarty_include.php
-      libs/core/core.smarty_include_php.php
-      libs/core/core.write_cache_file.php
-      libs/core/core.write_compiled_template.php
-      libs/core/core.write_file.php
+      libs/helpers/core.assign_smarty_interface.php
+      libs/helpers/core.create_dir_structure.php
+      libs/helpers/core.display_debug_console.php
+      libs/helpers/core.fetch_template_info.php
+      libs/helpers/core.get_include_path.php
+      libs/helpers/core.get_microtime.php
+      libs/helpers/core.get_php_resource.php
+      libs/helpers/core.is_secure.php
+      libs/helpers/core.is_trusted.php
+      libs/helpers/core.load_plugins.php
+      libs/helpers/core.load_resource_plugin.php
+      libs/helpers/core.parse_file_path.php
+      libs/helpers/core.process_cached_inserts.php
+      libs/helpers/core.read_cache_file.php
+      libs/helpers/core.rm_auto.php
+      libs/helpers/core.rmdir.php
+      libs/helpers/core.run_insert_handler.php
+      libs/helpers/core.smarty_include.php
+      libs/helpers/core.smarty_include_php.php
+      libs/helpers/core.write_cache_file.php
+      libs/helpers/core.write_compiled_template.php
+      libs/helpers/core.write_file.php
       libs/plugins/core.assign_smarty_interface.php
       libs/plugins/core.create_dir_structure.php
       libs/plugins/core.display_debug_console.php

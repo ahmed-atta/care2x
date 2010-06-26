@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
  * CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
  * GNU General Public License
@@ -12,8 +12,8 @@ require($root_path.'include/core/inc_environment_global.php');
  */
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-require_once($root_path.'include/core/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
 
 $thisfile=basename(__FILE__);
 $breakfile='spediens-ado.php'.URL_APPEND;
@@ -49,7 +49,7 @@ else
 	//if(!$day) $day=date(d);
 }
 /* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db)||!$db) include($root_path.'include/helpers/inc_db_makelink.php');
 if($dblink_ok){
 	include_once($root_path.'include/care_api_classes/class_personell.php');
 	$pers_obj=new Personell();
@@ -67,8 +67,8 @@ if($dblink_ok){
 <?php echo setCharSet(); ?>
 
 <?php
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 
@@ -154,7 +154,7 @@ require($root_path.'include/core/inc_css_a_hilitebu.php');
 
 	<tr>
 		<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2><?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?></td>
 	</tr>
 </table>

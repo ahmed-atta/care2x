@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -18,7 +18,7 @@ if(isset($user_origin)&&$user_origin=='pers'){
 	$local_user='phonedir_user';
 	$sBreakUrl = 'phone.php'.URL_APPEND;
 }
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_personell.php');
 
 /* Create employee object */
@@ -97,8 +97,8 @@ if($user_origin=='pers'&&$nr){
  	<TITLE></TITLE>
 	 
 <?php
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?> 
 </HEAD>
 
@@ -331,7 +331,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 </table>        
 <p>
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?></FONT>
 </BODY>
 </HTML>

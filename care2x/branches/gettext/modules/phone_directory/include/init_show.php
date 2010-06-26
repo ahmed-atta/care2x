@@ -3,8 +3,8 @@ $lang_tables[]='person.php';
 $lang_tables[]='prompt.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'modules/news/includes/inc_editor_fx.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 # Load the template class
@@ -52,7 +52,7 @@ $_SESSION['sess_full_pid']=$pid;
 		
 /* Check whether config foto path exists, else use default path */			
 $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
-require_once($root_path.'include/core/inc_photo_filename_resolve.php');
+require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 
 # set to safe defaults
 if(!isset($is_discharged)) $is_discharged=true;

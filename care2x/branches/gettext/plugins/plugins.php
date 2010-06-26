@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
 * GNU General Public License
@@ -12,13 +12,13 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 $returnfile=$root_path.'main/spediens.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
 
 // reset all 2nd level lock cookies
-require($root_path.'include/core/inc_2level_reset.php');
+require($root_path.'include/helpers/inc_2level_reset.php');
 
 # Start Smarty templating here
  /**

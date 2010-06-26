@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -18,7 +18,7 @@ if(!isset($_SESSION['sess_dept_nr'])) $_SESSION['sess_dept_nr'] = "";
 $lang_tables=array('departments.php');
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 /* Resolve the department number
 * If no dept nr available, redirect to dept selector page
@@ -36,7 +36,7 @@ if(!isset($forceback)||empty($forceback)){
 		}
 	}
 }
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 $_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
 

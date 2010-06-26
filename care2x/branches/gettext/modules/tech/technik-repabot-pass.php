@@ -1,7 +1,7 @@
 <?php 
 if(($sid==NULL)||($sid!=$$ck_sid_buffer)) { header("location:invalid-access-warning.php"); exit;}
 
-require_once($root_path.'include/core/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
 
 srand(time()*1000);
 $r=rand(1,1000);
@@ -56,7 +56,7 @@ if ($versand=="Abschicken")
  <TITLE>Repabot Aktivieren</TITLE>
  
  <?php 
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
  
 </HEAD>

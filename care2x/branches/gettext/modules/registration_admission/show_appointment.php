@@ -1,7 +1,7 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
@@ -31,7 +31,7 @@ if(!isset($mode)){
 	# Validate date against past date
 	#
 	if($mode=='create'||$mode=='update') {
-		include_once($root_path.'include/core/inc_date_format_functions.php');
+		include_once($root_path.'include/helpers/inc_date_format_functions.php');
 		$_POST['date']=@formatDate2STD($_POST['date'],$date_format);
 		$sBufDate = (int) str_replace('-','',$_POST['date']);
 		$sBufToday = (int) date('Ymd');

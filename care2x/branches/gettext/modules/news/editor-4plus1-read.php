@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,8 +12,8 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','editor.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-require_once($root_path.'include/core/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
 
 /* Set the return paths */
 $returnfile='editor-4plus1-select-art.php'.URL_APPEND;
@@ -31,7 +31,7 @@ require('includes/inc_news_get_one.php');
 
 /* Get the news table width */
 $config_type='news_normal_display_width';
-include_once($root_path.'include/core/inc_get_global_config.php');
+include_once($root_path.'include/helpers/inc_get_global_config.php');
 
 # Start Smarty templating here
  /**

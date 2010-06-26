@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 /*
 CARE2X Integrated Information System Deployment 2.1 - 2004-10-02 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
@@ -10,7 +10,7 @@ GNU GPL. For details read file "copy_notice.txt".
 */
 define('LANG_FILE','phone.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 if(isset($user_origin)&&$user_origin=='pers'){
 	$sBreakUrl = 'phone_edit.php'.URL_APPEND.'&user_origin='.$user_origin.'&nr='.$nr;
@@ -23,7 +23,7 @@ $dbtable='care_phone';
 if(empty($displaysize)||!is_numeric($displaysize)) $displaysize=10;
 
 # Load the date formatter
-include_once($root_path.'include/core/inc_date_format_functions.php');
+include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 $fielddata='item_nr, title, name, vorname, beruf, bereich1, bereich2,  inphone1, inphone2, inphone3, exphone1, exphone2, funk1, funk2,  roomnr';
 
@@ -43,7 +43,7 @@ if( $ergebnis=$db->Execute($sql)){
 <?php echo setCharSet(); ?>
 <TITLE></TITLE>
 <?php 
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 <BODY  bgcolor=<?php echo $cfg['body_bgcolor']; ?>
@@ -217,7 +217,7 @@ if($rows){
 </table>        
 <p>
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
  ?>
 </BODY>
 </HTML>

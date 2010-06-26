@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,14 +12,14 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 /**
 * The following require loads the access areas that can be assigned for
 * user permissions.
 */
-require($root_path.'include/core/inc_accessplan_areas_functions.php');
+require($root_path.'include/helpers/inc_accessplan_areas_functions.php');
 
-require_once($root_path.'include/core/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
 
 $breakfile='edv.php?sid='.$sid.'&lang='.$lang;
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
@@ -29,11 +29,11 @@ $thisfile=basename(__FILE__);
 
 if(isset($mode) && ($mode=='search')) {
 
-	if(!isset($db) || !$db) include_once($root_path.'include/core/inc_db_makelink.php');
+	if(!isset($db) || !$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
 
     if(isset($dblink_ok)&&$dblink_ok) {	
 	    /* Load the date formatter */
-        include_once($root_path.'include/core/inc_date_format_functions.php');
+        include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 	
 	    $sql='SELECT * FROM care_users WHERE exc <> 1 AND (login_id LIKE "'.addslashes($name).'%" OR name LIKE "'.addslashes($name).'%")';
@@ -52,7 +52,7 @@ if(isset($mode) && ($mode=='search')) {
 <HEAD>
 <?php echo setCharSet(); ?>
 <?php 
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 <script language="javascript">
 <!-- 
@@ -193,7 +193,7 @@ function gethelp(x,s,x1,x2,x3)
 <p>
 
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 
 

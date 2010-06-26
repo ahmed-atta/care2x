@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -17,10 +17,10 @@ $lang_tables=array('departments.php');
 define('LANG_FILE','newscolumns.php');
 define('NO_2LEVEL_CHK',1);
 
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 # reset all 2nd level lock cookies
-require($root_path.'include/core/inc_2level_reset.php'); 
+require($root_path.'include/helpers/inc_2level_reset.php'); 
 
 $subtitle=$LDSubTitle[$target];
 
@@ -38,7 +38,7 @@ if(isset($dept_nr) && $dept_nr) $_SESSION['sess_dept_nr']=$dept_nr;
 if(empty($user_origin)) $user_origin=$_SESSION['sess_user_origin'];
 # Set the return paths 
 
-if(!isset($db) || !$db) include_once($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db) || !$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
 
 
 if($dblink_ok) {
@@ -99,13 +99,13 @@ if($dblink_ok) {
 	$_SESSION['sess_file_editor'] = $root_path.$default_editor_script;
 	
 	# Now get the news articles
-    include_once($root_path.'include/core/inc_date_format_functions.php');
+    include_once($root_path.'include/helpers/inc_date_format_functions.php');
 	
     $dbtable='care_news_article';
 
 	# Get the maximum number of headlines to be displayed 
     $config_type='news_dept_max_display';
-    include($root_path.'include/core/inc_get_global_config.php');
+    include($root_path.'include/helpers/inc_get_global_config.php');
 
     if(!$news_dept_max_display) $news_num_stop=4; // default is 3
         else $news_num_stop=$news_dept_max_display;  // The maximum number of news article to be displayed
@@ -154,7 +154,7 @@ $_SESSION['sess_file_return']=$top_dir.basename(__FILE__);
 
  /* Get the news global configurations */
 $config_type='news_%';
-include($root_path.'include/core/inc_get_global_config.php');
+include($root_path.'include/helpers/inc_get_global_config.php');
 
 if(!$news_normal_preview_maxlen) $news_normal_preview_maxlen=300;
 

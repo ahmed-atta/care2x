@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -19,7 +19,7 @@ $lang_tables[]='prompt.php';
 define('LANG_FILE','nursing.php');
 //define('NO_2LEVEL_CHK',1);
 $local_user='ck_pflege_user';
-require($root_path.'include/core/inc_front_chain_lang.php');
+require($root_path.'include/helpers/inc_front_chain_lang.php');
 
 if(empty($_COOKIE[$local_user.$sid])){
     $edit=0;
@@ -57,7 +57,7 @@ require_once($root_path.'include/care_api_classes/class_ward.php');
 $ward_obj= new Ward;
 
 # Load date formatter 
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
   
 if(($mode=='')||($mode=='fresh')){
@@ -262,7 +262,7 @@ function Transfer(pn,pw)
 	}
 }
 <?php 
-require($root_path.'include/core/inc_checkdate_lang.php'); 
+require($root_path.'include/helpers/inc_checkdate_lang.php'); 
 ?>
 // -->
 </script>

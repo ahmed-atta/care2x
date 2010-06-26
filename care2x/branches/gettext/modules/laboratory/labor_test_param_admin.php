@@ -4,7 +4,7 @@ define('ROW_MAX',15); # define here the maximum number of rows for displaying th
 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
@@ -15,7 +15,7 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
 
@@ -30,7 +30,7 @@ if(!isset($parameterselect)||$parameterselect=='') $parameterselect='priority';
 $pitems=array('msr_unit','median','lo_bound','hi_bound','lo_critical','hi_critical','lo_toxic','hi_toxic');
 
 # Load the date formatter */
-include_once($root_path.'include/core/inc_date_format_functions.php');
+include_once($root_path.'include/helpers/inc_date_format_functions.php');
     
 # Get the test test groups
 $tgroups=&$lab_obj->TestActiveGroups();

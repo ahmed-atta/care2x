@@ -1,10 +1,10 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
@@ -41,16 +41,16 @@ $userck='ck_op_pflegelogbuch_user';
 //reset cookie;
 // reset all 2nd level lock cookies
 setcookie($userck.$sid,'');
-require($root_path.'include/core/inc_2level_reset.php'); 
+require($root_path.'include/helpers/inc_2level_reset.php'); 
 setcookie(ck_2level_sid.$sid,'');
 
-require($root_path.'include/core/inc_passcheck_internchk.php');
+require($root_path.'include/helpers/inc_passcheck_internchk.php');
 if ($pass=='check') 	
-	include($root_path.'include/core/inc_passcheck.php');
+	include($root_path.'include/helpers/inc_passcheck.php');
 
 $errbuf="OP Logs $title";
 
-require($root_path.'include/core/inc_passcheck_head.php');
+require($root_path.'include/helpers/inc_passcheck_head.php');
 ?>
 
 <BODY <?php if (!$nofocus)
@@ -78,7 +78,7 @@ require($root_path.'include/core/inc_passcheck_head.php');
 								else{ echo '<a href="'.$thisfile.$append.'&target=archiv"><img '.createLDImgSrc($root_path,'arch-gray.gif','0').' alt="'.$LDArchive.'"  ';if($cfg['dhtml'])echo'class="fadeOut" '; echo '></a>';}
 						?></td>
 </tr>
-<?php require($root_path.'include/core/inc_passcheck_mask.php') ?>  
+<?php require($root_path.'include/helpers/inc_passcheck_mask.php') ?>  
 <p>
 <!-- <img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $LDOrLogBook" ?></a><br>
 <img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDWhat2Do $LDOrLogBook" ?></a><br>
@@ -86,7 +86,7 @@ require($root_path.'include/core/inc_passcheck_head.php');
 <p>
  -->
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 </FONT>
 </BODY>

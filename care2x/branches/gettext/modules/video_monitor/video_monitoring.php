@@ -1,12 +1,12 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
 
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 $breakfile=$root_path.'main/spediens.php?sid='.$sid.'&lang='.$lang;
 require($root_path.'global_conf/inc_remoteservers_conf.php');
 ?>

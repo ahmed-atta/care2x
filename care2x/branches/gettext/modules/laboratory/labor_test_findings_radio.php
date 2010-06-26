@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
@@ -14,7 +14,7 @@ $lang_tables=array('departments.php');
 define('LANG_FILE','konsil.php');
 $local_user='ck_lab_user';
 
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/inc_global_address.php');
 require_once ('includes/inc_diagnostics_report_fx.php');
 
@@ -37,7 +37,7 @@ $enc_obj=new Encounter;
 
 /* Here begins the real work */
 
-   require_once($root_path.'include/core/inc_date_format_functions.php');
+   require_once($root_path.'include/helpers/inc_date_format_functions.php');
    
 
      /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
@@ -164,7 +164,7 @@ $enc_obj=new Encounter;
 							          if($ergebnis=$enc_obj->Transact($sql))
        							      {
 								  		// Load the visual signalling functions
-										include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+										include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 										// Set the visual signal 
 										setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REPORT);									
 									     header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=insert&mode=edit&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize&batch_nr=$batch_nr&entry_date=$entry_date");
@@ -255,8 +255,8 @@ $smarty->assign('sOnLoadJs','onLoad="if (window.focus) window.focus();"');
 <?php echo setCharSet(); ?>
  <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
 <?php
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 ?>
 <style type="text/css">
@@ -313,7 +313,7 @@ function printOut()
     findings_printout<?php echo $sid ?>.print();
 }
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 //-->
 </script>
 <?php

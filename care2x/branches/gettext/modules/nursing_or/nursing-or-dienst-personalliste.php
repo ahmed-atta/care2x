@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -38,7 +38,7 @@ if($_SESSION['sess_user_origin']=='personell_admin'){
 	$bShowSearchEntry = TRUE;
 }
 
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 # Check for the department nr., else show department selector
 if(!isset($dept_nr)||!$dept_nr){
@@ -113,7 +113,7 @@ if(empty($GLOBAL_CONFIG['pagin_personell_search_max_block_rows'])) $pagen->setMa
 	else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_personell_search_max_block_rows']);
 
 # Load date formatter
-include_once($root_path.'include/core/inc_date_format_functions.php');
+include_once($root_path.'include/helpers/inc_date_format_functions.php');
 if($mode=='search'||$mode=='paginate'){
 	# Convert other wildcards
 	$searchkey=strtr($searchkey,'*?','%_');
@@ -215,7 +215,7 @@ function deleteItem(nr){
 </script>
 
 <script language="javascript">
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 </script>
 <?php
 
@@ -312,7 +312,7 @@ if($bShowSearchEntry){
        <td>
 	   <?php
 
-            include($root_path.'include/core/inc_patient_searchmask.php');
+            include($root_path.'include/helpers/inc_patient_searchmask.php');
        
 	   ?>
 		</td>
@@ -425,7 +425,7 @@ if($mode=='search'||$mode=='paginate'){
      <tr>
        <td>
 	   <?php
-            include($root_path.'include/core/inc_patient_searchmask.php');
+            include($root_path.'include/helpers/inc_patient_searchmask.php');
 	   ?>
 </td>
      </tr>

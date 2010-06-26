@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -14,7 +14,7 @@ $lang_tables=array('date_time.php');
 $lang_tables=array('actions.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 //$db->debug=true;
 
@@ -57,7 +57,7 @@ $charts_obj= new Charts;
 		$_POST['personell_name']=$_SESSION['sess_user_name'];
 		if($charts_obj->saveChartNotesFromArray($_POST,$notes_type_nr)){
     	  	// Load the visual signalling functions
-    		include_once($root_path.'include/core/inc_visual_signalling_fx.php');	
+    		include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');	
 			// Set the visual signal 
 			setEventSignalColor($pn,SIGNAL_COLOR_ANTICOAG);
 			header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dystart=$dystart&dyname=$dyname");
@@ -69,7 +69,7 @@ $charts_obj= new Charts;
 		if(is_object($chartnotes)){
 			$count=$chartnotes->RecordCount();
 			include_once($root_path.'modules/news/includes/inc_editor_fx.php');
-			include_once($root_path.'include/core/inc_date_format_functions.php');
+			include_once($root_path.'include/helpers/inc_date_format_functions.php');
 		}	
 	}
 
@@ -80,8 +80,8 @@ $charts_obj= new Charts;
 <?php echo setCharSet(); ?>
 <TITLE><?php echo "$title - $LDInputWin" ?></TITLE>
 <?php
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 ?>
 <script language="javascript">

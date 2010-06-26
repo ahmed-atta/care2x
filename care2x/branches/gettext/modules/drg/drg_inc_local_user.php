@@ -1,6 +1,6 @@
 <?php
 #------begin------ This protection code was suggested by Luki R. luki@karet.org 
-if (stristr("core/inc_config_color.php",$PHP_SELF)) 
+if (stristr("helpers/inc_config_color.php",$PHP_SELF)) 
 	die('<meta http-equiv="refresh" content="0; url=../../">');
 
 # ------end-----

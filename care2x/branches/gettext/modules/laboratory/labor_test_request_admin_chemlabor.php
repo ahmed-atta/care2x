@@ -1,7 +1,7 @@
 <?php
 error_reporting ( E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR );
 require ('./roots.php');
-require ($root_path . 'include/core/inc_environment_global.php');
+require ($root_path . 'include/helpers/inc_environment_global.php');
 /**
  * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
  * GNU General Public License
@@ -34,7 +34,7 @@ if ($user_origin == 'lab') {
 	$local_user = 'ck_pflege_user';
 	$breakfile = $root_path . "modules/nursing/nursing-station-patientdaten.php" . URL_APPEND . "&edit=$edit&station=$station&pn=$pn";
 }
-require_once ($root_path . 'include/core/inc_front_chain_lang.php'); ///* invoke the script lock*/
+require_once ($root_path . 'include/helpers/inc_front_chain_lang.php'); ///* invoke the script lock*/
 
 
 $thisfile = 'labor_test_request_admin_chemlabor.php';
@@ -90,7 +90,7 @@ if (!$mode) {/* Get the pending test requests */
 			WHERE (status='pending' OR status='') ORDER BY  send_date DESC";
 	if ($requests = $db->Execute ( $sql )) {
 		/* If request is available, load the date format functions */
-		require_once ($root_path . 'include/core/inc_date_format_functions.php');
+		require_once ($root_path . 'include/helpers/inc_date_format_functions.php');
 		
 		$batchrows = $requests->RecordCount ();
 		if ($batchrows && (! isset ( $batch_nr ) || ! $batch_nr)) {
@@ -282,7 +282,7 @@ function printOut()
 }
 
 <?php
-require ($root_path . 'include/core/inc_checkdate_lang.php');
+require ($root_path . 'include/helpers/inc_checkdate_lang.php');
 ?>
 
 //-->

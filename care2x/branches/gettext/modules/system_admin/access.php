@@ -1,6 +1,6 @@
 <?php
 require('./roots.php');
-require($root_path.'include/core/access_log.php');
+require($root_path.'include/helpers/access_log.php');
 
 
 session_start();

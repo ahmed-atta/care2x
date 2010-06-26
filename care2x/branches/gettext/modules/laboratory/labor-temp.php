@@ -4,7 +4,7 @@
 if (!$sid||($sid!=$$ck_sid_buffer)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 require("../language/".$lang."/lang_".$lang."_lab.php");
-require_once($root_path.'include/core/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
 
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 
@@ -33,8 +33,8 @@ function gethelp(x,s,x1,x2,x3)
 </script> 
  
 <?php 
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?><SCRIPT language="JavaScript" src="../js/sublinker-nd.js">
 </SCRIPT>
 
@@ -249,7 +249,7 @@ require($root_path.'include/core/inc_css_a_hilitebu.php');
 <tr>
 <td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 </td>
 </tr>

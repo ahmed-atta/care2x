@@ -1,7 +1,7 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -13,8 +13,8 @@ require($root_path.'include/core/inc_environment_global.php');
 $lang_tables=array('personell.php','edp.php');
 define('LANG_FILE','aufnahme.php');
 $local_user='ck_edv_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 $toggle=0;
 $breakfile= 'edv_user_access_edit.php'.URL_APPEND.'&target='.$target;
@@ -112,7 +112,7 @@ if(($mode=='search')and($searchkey)){
 		<td>
 	   <?php
 
-            include($root_path.'include/core/inc_patient_searchmask.php');
+            include($root_path.'include/helpers/inc_patient_searchmask.php');
        
 	   ?>
 		</td>
@@ -210,7 +210,7 @@ if($mode=='search'){
      <tr>
        <td>
 	   <?php
-            include($root_path.'include/core/inc_patient_searchmask.php');
+            include($root_path.'include/helpers/inc_patient_searchmask.php');
 	   ?>
 </td>
      </tr>

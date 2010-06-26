@@ -2,7 +2,7 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 //error_reporting(E_ALL);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -104,7 +104,7 @@ if($user_origin=='lab'){
   $breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
 
-require_once($root_path.'include/core/inc_front_chain_lang.php'); ///* invoke the script lock*/
+require_once($root_path.'include/helpers/inc_front_chain_lang.php'); ///* invoke the script lock*/
 include($root_path.'modules/laboratory/inc_list_chemlab_tests.php');
 
 $thisfile='nursing-station-patientdaten-doconsil-chemlabor.php';
@@ -194,7 +194,7 @@ if(isset($pn)&&$pn) {
 				    	}
 				    	
 					  	// Load the visual signalling functions
-						include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+						include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 						// Set the visual signal
 						setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);
 						//echo $sql;
@@ -241,7 +241,7 @@ if(isset($pn)&&$pn) {
 					    	$diag_obj_sub->insertDataFromInternalArray();
 				    	}						
 						// Load the visual signalling functions
-						include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+						include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 						// Set the visual signal
 						setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);
 					 	header("location:".$root_path."modules/laboratory/labor_test_request_aftersave.php".URL_REDIRECT_APPEND."&edit=$edit&saved=update&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=chemlabor&batch_nr=$batch_nr&noresize=$noresize");
@@ -423,7 +423,7 @@ function printOut(){
     testprintout<?php echo $sid ?>.print();
 }
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 
 //-->
 </script>

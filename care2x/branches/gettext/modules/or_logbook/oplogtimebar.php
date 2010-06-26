@@ -1,10 +1,10 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 define('LANG_FILE','or.php');
 define("NO_CHAIN",1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 /*if(!session_is_registered('sess_opfclic_rt')) session_register('sess_opfclic_rt');
 if(!session_is_registered('sess_opfclic_filename')) session_register('sess_opfclic_filename');

@@ -1,14 +1,14 @@
 <?php
 error_reporting(E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR);
 require('./roots.php');
-require($root_path . 'include/core/inc_environment_global.php');
+require($root_path . 'include/helpers/inc_environment_global.php');
 $lang_tables[] = 'departments.php';
 define('LANG_FILE', 'products.php');
 if (!isset($userck))
     if (isset($_GET['userck'])) $userck = $_GET['userck'];
         elseif (isset($_POST['userck'])) $userck = $_POST['userck'];
     $local_user = $userck;
-    require_once($root_path . 'include/core/inc_front_chain_lang.php');
+    require_once($root_path . 'include/helpers/inc_front_chain_lang.php');
 
     switch ($cat) {
         case 'pharma': if ($_COOKIE[$local_user . $sid] == null) $cat = "";
@@ -70,7 +70,7 @@ function show_order(d,o,s,t) {
 if ($rows) {
         if ($showlist) {
         // Load the date formatter
-        include_once($root_path . 'include/core/inc_date_format_functions.php'); 
+        include_once($root_path . 'include/helpers/inc_date_format_functions.php'); 
         // Create the department object
         include_once($root_path . 'include/care_api_classes/class_department.php');
         $dept_obj = new Department;

@@ -1,7 +1,7 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,7 +12,7 @@ require_once($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','startframe.php');
 define('NO_CHAIN',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $cksid='ck_sid'.$sid;
 
@@ -22,13 +22,13 @@ if(!isset($_SESSION['sess_news_nr'])) $_SESSION['sess_news_nr'] = "";
 
 $readerpath='headline-read.php?sid='.$sid.'&lang='.$lang;
 # reset all 2nd level lock cookies
-require($root_path.'include/core/inc_2level_reset.php');
+require($root_path.'include/helpers/inc_2level_reset.php');
 		
 $dept_nr=1; # 1 = press relations
 
 # Get the maximum number of headlines to be displayed
 $config_type='news_headline_max_display';
-include($root_path.'include/core/inc_get_global_config.php');
+include($root_path.'include/helpers/inc_get_global_config.php');
 
 if(!isset($news_headline_max_display)||!$news_headline_max_display) $news_num_stop=3; # default is 3 
     else $news_num_stop=$news_headline_max_display;  # The maximum number of news article to be displayed
@@ -99,7 +99,7 @@ for($j=1;$j<=$news_num_stop;$j++){
 
 ob_start();
 
-	include($root_path.'include/core/inc_rightcolumn_menu.php');
+	include($root_path.'include/helpers/inc_rightcolumn_menu.php');
 
 	# Stop buffering, get contents
 

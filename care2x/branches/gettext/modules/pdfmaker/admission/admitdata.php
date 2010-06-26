@@ -7,7 +7,7 @@ $report_auxtitlesize=10;
 $report_authorsize=10;
 
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
@@ -24,8 +24,8 @@ define('LANG_FILE','aufnahme.php');
 //define('NO_2LEVEL_CHK',1);
 //define('NO_CHAIN',TRUE);
 $local_user='aufnahme_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 
 

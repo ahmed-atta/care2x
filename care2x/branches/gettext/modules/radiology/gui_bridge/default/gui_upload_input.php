@@ -29,7 +29,7 @@ echo setCharSet();
 <script  language="javascript">
 <!-- 
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 
 function popRecordHistory(table,pid) {
 	urlholder="./record_history.php<?php echo URL_REDIRECT_APPEND; ?>&table="+table+"&pid="+pid;
@@ -39,8 +39,8 @@ function popRecordHistory(table,pid) {
 -->
 </script>
 <?php 
-require($root_path.'include/core/inc_js_gethelp.php'); 
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php'); 
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 //gjergji : new calendar
 require_once ('../../js/jscalendar/calendar.php');
@@ -340,7 +340,7 @@ if($parent_admit) {
 <p>
 </ul>
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
  ?>
 </FONT>
 <?php

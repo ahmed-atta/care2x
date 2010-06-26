@@ -8,7 +8,7 @@ $report_authorsize=10;
 $filter='3,99'; # notes type number which are not allowed to be displayed
 
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -51,8 +51,8 @@ define('LANG_FILE','aufnahme.php');
 //define('NO_2LEVEL_CHK',1);
 //define('NO_CHAIN',TRUE);
 $local_user='aufnahme_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 
 # Get the encouter data

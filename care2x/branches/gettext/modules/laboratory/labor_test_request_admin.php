@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
@@ -12,12 +12,12 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','lab.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-require_once($root_path.'include/core/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
 
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 // reset all 2nd level lock cookies
-require($root_path.'include/core/inc_2level_reset.php');
+require($root_path.'include/helpers/inc_2level_reset.php');
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -42,8 +42,8 @@ function gethelp(x,s,x1,x2,x3)
 </script> 
  
 <?php 
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?><SCRIPT language="JavaScript" src="../js/sublinker-nd.js">
 </SCRIPT>
 
@@ -78,7 +78,7 @@ require($root_path.'include/core/inc_css_a_hilitebu.php');
 <tr>
 <td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');?>
+require($root_path.'include/helpers/inc_load_copyrite.php');?>
 </td>
 </tr>
 </table>        

@@ -8,7 +8,7 @@ if (($sid == NULL) || ($sid != $$ck_sid_buffer) || ($user == NULL)) {
 srand ( time () * 10000 ) ;
 $r = rand ( 1, 10000 ) ;
 // initializations
-require_once ($root_path . 'include/core/inc_config_color.php') ;
+require_once ($root_path . 'include/helpers/inc_config_color.php') ;
 
 $pdata = array ( ) ;
 $filetitles = array ( ) ;

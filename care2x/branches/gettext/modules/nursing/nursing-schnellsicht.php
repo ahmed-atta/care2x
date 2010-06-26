@@ -1,7 +1,7 @@
 <?php
  error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
  require('./roots.php');
- require($root_path.'include/core/inc_environment_global.php');
+ require($root_path.'include/helpers/inc_environment_global.php');
  /**
  * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
  * GNU General Public License
@@ -16,7 +16,7 @@
  $lang_tables=array('date_time.php'); 
  define('LANG_FILE','nursing.php');
  define('NO_2LEVEL_CHK',1);
- require_once($root_path.'include/core/inc_front_chain_lang.php');
+ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
  $breakfile='nursing.php'.URL_APPEND;
  $thisfile=basename(__FILE__);
@@ -48,7 +48,7 @@
 $dbtable='care_ward';
 
   /* Load date formatter */
-  include_once($root_path.'include/core/inc_date_format_functions.php');
+  include_once($root_path.'include/helpers/inc_date_format_functions.php');
 	
 	# Get the wards´ info
     $sql="SELECT nr,ward_id,name,room_nr_start,room_nr_end	

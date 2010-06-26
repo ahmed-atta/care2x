@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 $root_path='../../';
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System beta 1.0.08 - 2003-10-05
 * GNU General Public License
@@ -12,7 +12,7 @@ require_once($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','editor.php');
 $local_user='ck_editor_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $fileforward='headline-read.php';
 

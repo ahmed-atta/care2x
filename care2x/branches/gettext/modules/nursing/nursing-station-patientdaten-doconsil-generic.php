@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -30,7 +30,7 @@ else
   $breakfile="nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
 
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
 
@@ -61,7 +61,7 @@ $medical_depts=$dept_obj->getAllActiveSort( 'name_formal' );
 
 /* Here begins the real work */
 /* Load the date format functions and get the local format */
-	require_once($root_path.'include/core/inc_date_format_functions.php');
+	require_once($root_path.'include/helpers/inc_date_format_functions.php');
      /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
 	if(isset($pn)&&$pn){		
 		include_once($root_path.'include/care_api_classes/class_encounter.php');
@@ -116,7 +116,7 @@ $medical_depts=$dept_obj->getAllActiveSort( 'name_formal' );
 								if($ergebnis=$dept_obj->Transact($sql))
        							  {
 								  	// Load the visual signalling functions
-									include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+									include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 									// Set the visual signal 
 									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);
 									//echo $sql;
@@ -150,7 +150,7 @@ $medical_depts=$dept_obj->getAllActiveSort( 'name_formal' );
 							      if($ergebnis=$dept_obj->Transact($sql))
        							  {
 								  	// Load the visual signalling functions
-									include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+									include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 									// Set the visual signal 
 									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
 									//echo $sql;
@@ -306,7 +306,7 @@ function printOut()
     testprintout<?php echo $sid ?>.print();
 }
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 //-->
 </script>
 <?php

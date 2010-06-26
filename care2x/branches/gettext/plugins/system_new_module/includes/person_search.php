@@ -2,7 +2,7 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 echo $pat_bez;
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -35,8 +35,8 @@ define('LANG_FILE','radio.php');
 //require_once('include/inc_local_user.php');
 //define('NO_2LEVEL_CHK',1);
 $local_user='ck_#Modulname#_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 # Set break file
 //require('include/inc_breakfile.php');
@@ -108,7 +108,7 @@ if(empty($GLOBAL_CONFIG['pagin_person_search_max_block_rows'])) $pagen->setMaxCo
 
 if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($searchkey)){
 	
-	include_once($root_path.'include/core/inc_date_format_functions.php');
+	include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 	if($mode=='paginate'){
 		$fromwhere=$_SESSION['sess_searchkey'];
@@ -269,8 +269,8 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
  <TITLE></TITLE>
  
 <?php
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 
@@ -300,7 +300,7 @@ echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0')
        <td>
 	   <?php
 
-            include($root_path.'include/core/inc_patient_searchmask.php');
+            include($root_path.'include/helpers/inc_patient_searchmask.php');
        
 	   ?>
 </td>
@@ -430,7 +430,7 @@ if ($linecount){
        <td>
 	   <?php
 	     $searchform_count=2;
-       include($root_path.'include/core/inc_patient_searchmask.php');
+       include($root_path.'include/helpers/inc_patient_searchmask.php');
      ?>
 </td>
      </tr>
@@ -448,7 +448,7 @@ if ($linecount){
 </ul>
 <p>
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 </FONT>
 </BODY>

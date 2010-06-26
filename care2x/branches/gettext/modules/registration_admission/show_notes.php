@@ -1,7 +1,7 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 ///$db->debug = true;
 $thisfile=basename(__FILE__);
 
@@ -15,7 +15,7 @@ $this_type=$obj->getType($type_nr);
 if(!isset($mode)){
 	$mode='show';
 } elseif($mode=='create'||$mode=='update') {
-	include_once($root_path.'include/core/inc_date_format_functions.php');
+	include_once($root_path.'include/helpers/inc_date_format_functions.php');
 	# Set the date, default is today
 	if(empty($_POST['date'])) $_POST['date']=date('Y-m-d');
 		else $_POST['date']=@formatDate2STD($_POST['date'],$date_format);

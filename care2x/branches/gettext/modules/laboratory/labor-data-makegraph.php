@@ -4,7 +4,7 @@ define('LAB_MAX_DAY_DISPLAY',7); # define the max number or days displayed at on
 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
@@ -16,7 +16,7 @@ require($root_path.'include/core/inc_environment_global.php');
 ///$db->debug=1;
 define('LANG_FILE','lab.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 if($user_origin=='lab'||$user_origin=='lab_mgmt'){
 	$local_user='ck_lab_user';
@@ -30,7 +30,7 @@ if($user_origin=='lab'||$user_origin=='lab_mgmt'){
 if(!$_COOKIE[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 if(!$encounter_nr) header("location:".$root_path."modules/laboratory/labor_data_patient_such.php?sid=$sid&lang=$lang");
-require_once($root_path.'include/core/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
 
 $thisfile=basename(__FILE__);
 
@@ -104,7 +104,7 @@ if($nostat) $ret=$root_path."modules/laboratory/labor_data_patient_such.php?sid=
 	else $ret=$root_path."modules/nursing/nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn";
 	
 # Load the date formatter
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 $enc_obj->setWhereCondition("encounter_nr='$encounter_nr'");
 

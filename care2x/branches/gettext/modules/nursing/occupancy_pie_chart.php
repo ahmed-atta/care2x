@@ -4,7 +4,7 @@ require('./roots.php');
 /*
 * We do not need the entire environment here so we just load the variable globalizer routine
 */
-require($root_path.'include/core/inc_vars_resolve.php');
+require($root_path.'include/helpers/inc_vars_resolve.php');
 
 define('PIE_CHART_BASE_COLOR','greenyellow'); 	// define the base color of the pie chart
 define('PIE_CHART_DIAMETER',25); 						// define the diameter of the pie chart

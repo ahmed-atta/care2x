@@ -2,15 +2,15 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/core/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
 
 /**
 * The following require loads the access areas that can be assigned for
 * user permissions.
 */
-require($root_path.'include/core/inc_accessplan_areas_functions.php');
+require($root_path.'include/helpers/inc_accessplan_areas_functions.php');
 
 $breakfile="edv.php?sid=".$sid."&lang=".$lang;
 
@@ -22,7 +22,7 @@ $breakfile="edv.php?sid=".$sid."&lang=".$lang;
 	<HEAD>
 <?php echo setCharSet(); ?>
 <?php 
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 <script language="javascript">
 <!-- 
@@ -65,7 +65,7 @@ $curdate=date('Y-m-d');
 $curtime=date('H:i:s');
 
 /* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db)||!$db) include($root_path.'include/helpers/inc_db_makelink.php');
 if($dblink_ok)
 {	
 
@@ -90,7 +90,7 @@ if($dblink_ok)
 				<tr>
 				<td colspan=3><FONT    SIZE=-1  FACE=Arial>";
 				
-				//include('../include/core/inc_db_makelink.php');
+				//include('../include/helpers/inc_db_makelink.php');
 	
 						$sql='UPDATE care_users SET  
 								login_id="'.$userid.'", 
@@ -296,7 +296,7 @@ else { echo $LDAllowedArea;} ?>
 <font size=2>
 <?php 
 /** 
-* The following line calls the function contained in core/inc_accessplan_areas_functions.php
+* The following line calls the function contained in helpers/inc_accessplan_areas_functions.php
 */
 printAccessAreas();
 ?>
@@ -339,7 +339,7 @@ printAccessAreas();
 <p>
 
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 
 </FONT>

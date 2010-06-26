@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -27,7 +27,7 @@ if(!isset($mode)){
 				&&!empty($_POST['text_diagnosis'])
 				&&!empty($_POST['text_therapy'])) {
 	# Prepare the posted data for saving in databank
-	include_once($root_path.'include/core/inc_date_format_functions.php');
+	include_once($root_path.'include/helpers/inc_date_format_functions.php');
 	# If date is empty,default to today
 	if(empty($_POST['date'])){
 		$_POST['date']=date('Y-m-d');

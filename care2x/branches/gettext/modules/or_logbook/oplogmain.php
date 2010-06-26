@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -14,7 +14,7 @@ $lang_tables[]='departments.php';
 $lang_tables[] = 'actions.php';
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 if (!$internok&&!$_COOKIE['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
@@ -51,7 +51,7 @@ $ORNrs=&$dept_obj->getAllActiveORNrs();
 $surgery_arr=&$dept_obj->getAllActiveWithSurgery();
 
 # Load the date formatter 
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 	
 $dbtable='care_encounter_op';
 			
@@ -100,8 +100,8 @@ function getinfo(pid,pdata){
  // -->
  </script>
  <?php
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
  <?php if(!$datafound) { ?>
 <script language="javascript" src="<?php echo $root_path; ?>js/showhide-div.js"></script>

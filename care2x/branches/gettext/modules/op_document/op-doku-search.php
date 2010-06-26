@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -20,7 +20,7 @@ $lang_tables[]='search.php';
 $lang_tables[]='actions.php';
 define('LANG_FILE','or.php');
 $local_user='ck_opdoku_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 # Check if department nr and OR nr are available from user config
 if(!isset($dept_nr)||!$dept_nr){
@@ -64,7 +64,7 @@ $glob_obj->getConfig('patient_%');
 include_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter();
 
-require_once($root_path.'include/core/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 
 $thisfile=basename(__FILE__);
 $breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
@@ -72,7 +72,7 @@ $breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
 
 		
 # Load date formatter
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 if($mode=='match'||$mode=='search'||$mode=='paginate'){
 

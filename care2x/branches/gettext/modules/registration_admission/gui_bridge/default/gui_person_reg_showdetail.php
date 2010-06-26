@@ -8,8 +8,8 @@ echo setCharSet();
  <TITLE><?php echo $LDPatientRegister ?></TITLE>
 
 <?php
-require($root_path.'include/core/inc_js_gethelp.php'); 
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php'); 
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
@@ -57,7 +57,7 @@ href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'clos
 </ul>
 <p>
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 </FONT>
 <?php

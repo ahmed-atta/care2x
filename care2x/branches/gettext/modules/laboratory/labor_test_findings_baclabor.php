@@ -1,7 +1,7 @@
 <?php
 error_reporting ( E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR );
 require ('./roots.php');
-require ($root_path . 'include/core/inc_environment_global.php');
+require ($root_path . 'include/helpers/inc_environment_global.php');
 /**
  * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
  * GNU General Public License
@@ -14,7 +14,7 @@ $lang_tables = array ('departments.php' );
 define ( 'LANG_FILE', 'konsil.php' );
 $local_user = 'ck_lab_user';
 
-require_once ($root_path . 'include/core/inc_front_chain_lang.php');
+require_once ($root_path . 'include/helpers/inc_front_chain_lang.php');
 require_once ($root_path . 'global_conf/inc_global_address.php');
 require_once ('includes/inc_test_findings_fx_baclabor.php');
 require_once ('includes/inc_test_request_vars_baclabor.php');
@@ -52,7 +52,7 @@ $bac_obj_sub = new Diagnostics ( );
 $bac_obj_sub->useBacLabFindingsSubTable ();
 /* Here begins the real work */
 /* Establish db connection */
-require_once ($root_path . 'include/core/inc_date_format_functions.php');
+require_once ($root_path . 'include/helpers/inc_date_format_functions.php');
 /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
 if (isset ( $pn ) && $pn) {
 	
@@ -328,7 +328,7 @@ switch ($mode) {
 				$bac_obj->setDataArray($data);	
 				$bac_obj->setWhereCond ( " batch_nr=$batch_nr" );
 				$bac_obj->updateDataFromInternalArray ( $batch_nr );
-				// Load the visual signalling functions				include_once ($root_path . 'include/core/inc_visual_signalling_fx.php');
+				// Load the visual signalling functions				include_once ($root_path . 'include/helpers/inc_visual_signalling_fx.php');
 				// Set the visual signal 				setEventSignalColor ( $pn, SIGNAL_COLOR_DIAGNOSTICS_REPORT );
 				header ( "location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=insert&mode=edit_findings&pn=$pn&station=$station&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize&batch_nr=$batch_nr&entry_date=$entry_date" );
 				exit ();
@@ -529,7 +529,7 @@ function printOut()
 }
    
 <?php
-require ($root_path . 'include/core/inc_checkdate_lang.php');
+require ($root_path . 'include/helpers/inc_checkdate_lang.php');
 ?>
 //-->
 </script>

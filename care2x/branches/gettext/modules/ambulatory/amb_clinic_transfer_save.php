@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -14,7 +14,7 @@ require($root_path.'include/core/inc_environment_global.php');
 define('LANG_FILE','prompt.php');
 define('NO_2LEVEL_CHK',1);
 $local_user='ck_pflege_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 if(empty($_COOKIE[$local_user.$sid])){
     $edit=0;
@@ -60,8 +60,8 @@ if(isset($mode)&&$mode=='transferdept'){
 
 echo setCharSet();
 
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 
 <style type="text/css" name="s2">
@@ -82,7 +82,7 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10}
 
 <p>
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 </BODY>
 </HTML>

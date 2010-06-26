@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,7 +12,7 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','editor.php');
 $local_user='ck_editor_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 //gjergji : new calendar
 require_once ('../../js/jscalendar/calendar.php');
@@ -38,7 +38,7 @@ $_SESSION['sess_file_forward']='headline-read.php';
 $title= (!empty($title)) ? $title : $_SESSION['sess_title']; 
 
 /* Load the date formatter */
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 /* Determine the picture alignment basing on the article number.
 * You can change here the alignment. Preset are odd number= left, even number= right
@@ -66,7 +66,7 @@ function showpic(d)
 require_once('includes/inc_js_editor_chkform.php');
 
 # Load the dates js values
-require($root_path.'include/core/inc_checkdate_lang.php'); 
+require($root_path.'include/helpers/inc_checkdate_lang.php'); 
 ?>
 <!--  Root path for the html WYSIWYG editor -->
 var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
@@ -82,7 +82,7 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <!--  Load validators -->
 <script language="javascript" src="<?php echo $root_path; ?>js/editor_chkform.js" type="text/javascript"></script>
  
-<?php require($root_path.'include/core/inc_css_a_hilitebu.php'); ?>
+<?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
 
 </head>
 

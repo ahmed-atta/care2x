@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,7 +12,7 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','intramail.php');
 $local_user='ck_intra_email_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 /**
 * check the info params for completeness
@@ -24,7 +24,7 @@ if(!isset($task)) $task='';
 $addr=trim($addr);
 if(($mode=='saveadd')&&($addr=='')) { header('location:intra-email-addrbook.php'.URL_REDIRECT_APPEND); exit;}
 
-require_once($root_path.'include/core/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 
 $thisfile=basename(__FILE__);
 $breakfile='intra-email.php'.URL_APPEND.'&mode=listmail';

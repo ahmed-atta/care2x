@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -14,7 +14,7 @@ define('LANG_FILE','nursing.php');
 
 require('./include/inc_admit_station_bridge.php');
 
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 require_once($root_path.'modules/news/includes/inc_editor_fx.php'); 
 /* Load the data time shifter and create object */
@@ -138,7 +138,7 @@ $date_end=$dateshifter->shift_dates($date_start,-6,'d');
 			$daily_medis=$charts_obj->getChartDailyPrescriptionNotes($pn,$date_start,$date_end);
 		}
 	}else {echo $enc_obj->getLastQuery()."<p>$LDDbNoRead"; exit;}
-	include_once($root_path.'include/core/inc_date_format_functions.php');
+	include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 
 function getlatestdata($info,$d,$m,$y)

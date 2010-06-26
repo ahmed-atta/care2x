@@ -1,12 +1,12 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 
 $lang_tables[]='departments.php';
 define('LANG_FILE','products.php');
 $local_user='ck_supply_db_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 require_once($root_path.'include/care_api_classes/class_supplier.php');
 $supplier_obj=new Supplier;
@@ -26,7 +26,7 @@ $rows=0;
 $count=0;
 
 # Load the date formatter
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 if(($mode=='send') && isset($idcare_supply) && $idcare_supply){
 
@@ -113,8 +113,8 @@ function show_order(d,o,s) {
 
 </script>
 <?php 
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 </head>
 <BODY  topmargin=5 leftmargin=10  marginwidth=10 marginheight=5 

@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -17,11 +17,11 @@ define('MAX_BLOCK_ROWS',30);
 $lang_tables[]='search.php';
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 if (!$internok&&!$_COOKIE['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
-require_once($root_path.'include/core/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
 
 # Initialization
 $thisfile=basename(__FILE__);
@@ -33,7 +33,7 @@ if(empty($srcword)&&!empty($searchkey)) $srcword=$searchkey;
 if($srcword!=''||$mode=='paginate'){
 	
     # Load the date formatter
-    include_once($root_path.'include/core/inc_date_format_functions.php');
+    include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 
 	//$db->debug=1;

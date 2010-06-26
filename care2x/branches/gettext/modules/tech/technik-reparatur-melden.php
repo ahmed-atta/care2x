@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'/include/core/inc_environment_global.php');
+require($root_path.'/include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,7 +12,7 @@ require($root_path.'/include/core/inc_environment_global.php');
 */
 define('LANG_FILE','tech.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $breakfile='technik.php'.URL_APPEND;
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
@@ -23,7 +23,7 @@ $_SESSION['sess_file_return']=basename(__FILE__);
 if(isset($job)&&!empty($job)){
 	$dbtable='care_tech_repair_done';
 
-    if(!isset($db) || !$db) include_once($root_path.'include/core/inc_db_makelink.php');
+    if(!isset($db) || !$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
     if($dblink_ok) {
 			
         $sql="INSERT INTO ".$dbtable." 

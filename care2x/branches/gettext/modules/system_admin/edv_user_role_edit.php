@@ -1,7 +1,7 @@
 <?php
 error_reporting ( E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR ) ;
 require ('./roots.php') ;
-require ($root_path . 'include/core/inc_environment_global.php') ;
+require ($root_path . 'include/helpers/inc_environment_global.php') ;
 /**
  * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
  * GNU General Public License
@@ -13,14 +13,14 @@ require ($root_path . 'include/core/inc_environment_global.php') ;
 $lang_tables [] = 'access.php' ;
 define ( 'LANG_FILE', 'edp.php' ) ;
 $local_user = 'ck_edv_user' ;
-require_once ($root_path . 'include/core/inc_front_chain_lang.php') ;
+require_once ($root_path . 'include/helpers/inc_front_chain_lang.php') ;
 require_once($root_path.'include/care_api_classes/class_core.php');
 ///$db->debug=true;
 /**
  * The following require loads the access areas that can be assigned for
  * user permissions.
  */
-require ($root_path . 'include/core/inc_accessplan_areas_functions.php') ;
+require ($root_path . 'include/helpers/inc_accessplan_areas_functions.php') ;
 require_once($root_path.'include/care_api_classes/class_access.php');
 $role = & new Access();
 

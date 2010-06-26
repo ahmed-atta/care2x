@@ -1,12 +1,12 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 
 $lang_tables[]='products.php';
 define('LANG_FILE','products.php');
 $local_user='ck_supply_db_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 require_once($root_path.'include/care_api_classes/class_product.php');
 $product_obj=new Product;
@@ -14,7 +14,7 @@ $product_obj=new Product;
 require_once($root_path.'include/care_api_classes/class_supplier.php');
 $supplier_obj=new Supplier;
 # Load date formatter
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 $thisfile=basename(__FILE__);
 
 //$db->debug=1;
@@ -116,8 +116,8 @@ function resize() {
 
 <script language="javascript" src="<?php echo $root_path; ?>js/products_validate_order_num.js"></script>
 <?php 
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 </head>
 <BODY  topmargin=5 leftmargin=10  marginwidth=10 marginheight=5 onLoad="document.smed.keyword.focus()"

@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
@@ -19,7 +19,7 @@ if(!isset($userck))
   if(isset($_GET['userck'])) $userck=$_GET['userck'];
     elseif(isset($_POST['userck'])) $userck=$_POST['userck'];
 $local_user=$userck;
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 # Create core object
 require_once($root_path.'include/care_api_classes/class_core.php');
@@ -53,7 +53,7 @@ if($order_nr&&$dept_nr){
 	$deltodo=false;
 
      # Load the date formatter
-     include_once($root_path.'include/core/inc_date_format_functions.php');
+     include_once($root_path.'include/helpers/inc_date_format_functions.php');
   
      # Get the data first
 	$sql="SELECT * FROM $dbtable INNER JOIN $dbtablesub ON ( $dbtablesub.order_nr_sub = $dbtable.order_nr) WHERE order_nr='$order_nr'";					

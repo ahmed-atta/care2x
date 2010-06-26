@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,7 +12,7 @@ require_once($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','editor.php');
 $local_user='ck_cafenews_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 if(isset($groupopt)) {
     switch($groupopt)
@@ -72,7 +72,7 @@ function chkForm(d)
 </script>
 <?php endif ?>
 
-<?php if($cfg['dhtml']) include("/include/core/inc_css_a_hilitebu.php"); ?>
+<?php if($cfg['dhtml']) include("/include/helpers/inc_css_a_hilitebu.php"); ?>
 
 <SCRIPT LANGUAGE="javascript" >
 function chkRadioButton(e){
@@ -80,7 +80,7 @@ function chkRadioButton(e){
 }
 </SCRIPT>
 
-<?php require($root_path.'include/core/inc_css_a_hilitebu.php'); ?>
+<?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
 
 </head>
 <body>

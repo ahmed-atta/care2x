@@ -1,12 +1,12 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 
 $lang_tables[]='departments.php';
 define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 /**
 Load custom file - note that by default we will assume english
@@ -34,7 +34,7 @@ if(isset($op_shortcut)&&$op_shortcut){
 	if($edit) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 }
 /* Load the visual signalling defined constants */
-require_once($root_path.'include/core/inc_visual_signalling_fx.php');
+require_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
 
 /* Retrieve the SIGNAL_COLOR_LEVEL_ZERO = for convenience purposes */
@@ -59,11 +59,11 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient_%');	
 
 /* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db)||!$db) include($root_path.'include/helpers/inc_db_makelink.php');
 if($dblink_ok)
 {	
     /* Load date formatter */
-	include_once($root_path.'include/core/inc_date_format_functions.php');
+	include_once($root_path.'include/helpers/inc_date_format_functions.php');
 		$enc_obj->where=" encounter_nr=$pn";
 	    if( $enc_obj->loadEncounterData($pn)) {
 /*			switch ($enc_obj->EncounterClass())

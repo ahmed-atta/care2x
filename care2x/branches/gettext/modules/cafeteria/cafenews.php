@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -13,10 +13,10 @@ require_once($root_path.'include/core/inc_environment_global.php');
 define('LANG_FILE','editor.php');
 define('NO_2LEVEL_CHK',1);
 
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 // reset all 2nd level lock cookies
-require($root_path.'include/core/inc_2level_reset.php');
+require($root_path.'include/helpers/inc_2level_reset.php');
 
 /* Set initial session environment for this module */
 $dept_nr=2;// 2= cafeteria dept
@@ -41,7 +41,7 @@ require_once($root_path.'modules/news/includes/inc_news_display_config.php');
 
 /* Get the maximum number of headlines to be displayed */
 $config_type='news_headline_max_display';
-require($root_path.'include/core/inc_get_global_config.php');
+require($root_path.'include/helpers/inc_get_global_config.php');
 
 if(!$news_headline_max_display) $news_headline_max_display=3; /* default is 3 */
 

@@ -1,6 +1,6 @@
 <?php
 $root_path = '../../../';
-require($root_path.'/include/core/inc_environment_global.php');
+require($root_path.'/include/helpers/inc_environment_global.php');
 global $db;
 
 $dbtable='care_pharma_products_main';

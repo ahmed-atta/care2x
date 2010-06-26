@@ -1,8 +1,8 @@
 <?php 
 if(($sid==NULL)||($sid!=$$ck_sid_buffer)) { header("location:invalid-access-warning.php"); exit;}
 
-require_once($root_path.'include/core/inc_config_color.php');
-require_once($root_path.'include/core/access_log.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
+require_once($root_path.'include/helpers/access_log.php');
 $logs = new AccessLog();
 
 srand(time()*1000);
@@ -213,7 +213,7 @@ Benutzername eingeben:<br></font>
 <p>
 
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 
 

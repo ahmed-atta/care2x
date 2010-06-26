@@ -8,7 +8,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
  * GPL License
  */
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 require($root_path.'include/care_api_classes/class_ecombill.php');
 $eComBill = new eComBill;
 
@@ -16,7 +16,7 @@ define('NO_CHAIN',1);
 define('LANG_FILE','billing.php');
 
 $local_user='aufnahme_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 while (list($cle, $val) = each($_POST)) {
 	if (substr($cle,0,7) == "nounits") {

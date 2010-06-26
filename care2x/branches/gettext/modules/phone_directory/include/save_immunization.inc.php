@@ -6,7 +6,7 @@ if (stristr('save_immunization.inc.php',$PHP_SELF))
 require_once($root_path.'include/care_api_classes/class_immunization.php');
 if(!isset($imm_obj)) $imm_obj=new Immunization;
 
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 # Check date, default is today
 if($_POST['date']) $_POST['date']=@formatDate2STD($_POST['date'],$date_format);
 	else $_POST['date']=date('Y-m-d');

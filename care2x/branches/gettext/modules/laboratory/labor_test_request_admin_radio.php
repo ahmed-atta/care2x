@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -31,7 +31,7 @@ if($user_origin=='lab'){
 	$breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
 
-require_once($root_path.'include/core/inc_front_chain_lang.php'); ///* invoke the script lock*/
+require_once($root_path.'include/helpers/inc_front_chain_lang.php'); ///* invoke the script lock*/
 
 require_once($root_path.'global_conf/inc_global_address.php');
 
@@ -50,7 +50,7 @@ $db_request_table='radio';
 //$db->debug=1;
 
 /* Here begins the real work */
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
   
 
 if(!isset($mode))   $mode='';
@@ -59,7 +59,7 @@ switch($mode){
 	case 'update':
 	{
 		# Create a core object
-		include_once($root_path.'include/core/inc_front_chain_lang.php');
+		include_once($root_path.'include/helpers/inc_front_chain_lang.php');
 		$core = & new Core;
 
 		$sql="UPDATE care_test_request_".$db_request_table." SET
@@ -224,7 +224,7 @@ function printOut()
     //testprintout<?php echo $sid ?>.print();
 }
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 
 //-->
 </script>

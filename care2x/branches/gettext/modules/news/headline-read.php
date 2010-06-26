@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -13,7 +13,7 @@ require_once($root_path.'include/core/inc_environment_global.php');
 $lang_tables=array('startframe.php');
 define('LANG_FILE','editor.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $returnfile='headline-edit-select-art.php'.URL_APPEND;
 $breakfile=$root_path.$_SESSION['sess_file_break'].URL_APPEND;
@@ -73,7 +73,7 @@ if(!isset($picalign) || empty($picalign)) {
 
 ob_start();
 
-	include($root_path.'include/core/inc_rightcolumn_menu.php');
+	include($root_path.'include/helpers/inc_rightcolumn_menu.php');
 
 	# Stop buffering, get contents
 

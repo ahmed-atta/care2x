@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
@@ -13,9 +13,9 @@ require($root_path.'include/core/inc_environment_global.php');
 $lang_tables[]='person.php';
 define('LANG_FILE','aufnahme.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
-require($root_path.'include/core/inc_2level_reset.php');
+require($root_path.'include/helpers/inc_2level_reset.php');
 
 if(!isset($_SESSION['sess_pid'])) $_SESSION['sess_pid'] = "";
 if(!isset($_SESSION['sess_full_pid'])) $_SESSION['sess_full_pid'] = "";
