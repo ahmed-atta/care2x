@@ -28,7 +28,7 @@ if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.U
 
 $thisfile=basename(__FILE__);
 
-# Initialize page�s control variables
+# Initialize page's control variables
 if($mode!='paginate'){
 	# Reset paginator variables
 	$pgx=0;

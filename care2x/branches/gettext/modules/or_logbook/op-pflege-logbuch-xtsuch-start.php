@@ -39,7 +39,7 @@ if($srcword!=''||$mode=='paginate'){
 	//$db->debug=1;
 
 
-	# Initialize page�s control variables
+	# Initialize page's control variables
 	if($mode=='paginate'){
 		$sql2=$_SESSION['sess_searchkey'];
 	}else{

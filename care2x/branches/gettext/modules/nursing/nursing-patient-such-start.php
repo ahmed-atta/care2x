@@ -32,7 +32,7 @@ if($mode=='such'||$mode=='paginate')
 	$tb_location='care_encounter_location';
 	$tb_ward='care_ward';
 
-	# Initialize page�s control variables
+	# Initialize page's control variables
 	if($mode=='paginate'){
 		$searchkey=$_SESSION['sess_searchkey'];
 	}else{

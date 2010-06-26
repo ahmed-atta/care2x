@@ -250,7 +250,7 @@ if(!isset($rows)||!$rows) {
 	# Get all encounter classes
 	$encounter_classes=$encounter_obj->AllEncounterClassesObject();
 	# Get the insurance classes */
-	# Create new person�s insurance object */
+	# Create new person's insurance object */
 	$insurance_obj=new Insurance;
 	$insurance_classes=&$insurance_obj->getInsuranceClassInfoObject('class_nr,LD_var,name');
 

@@ -226,7 +226,7 @@ if($occup){
         <td><input type="text" name="peso" size=10 maxlength=10 <?php if ($occup) echo "value='".$row['peso']."'" ?>></td>
       </tr>
       <tr>
-        <td><i>Et�:&nbsp;</i></td>
+        <td><i>Et':&nbsp;</i></td>
         <td><input type="text" name="norm" size=10 maxlength=10 <?php if ($occup) echo "value='".$row['norm']."'" ?>></td>
       </tr>
     </table>
@@ -296,15 +296,15 @@ if($occup){
           <td><i>Abitazione</i><br>
             <textarea name="abitazione" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['abitazione'] ?>
 </textarea></td>
-          <td><i>Attivit� lavorativa passata</i><br>
+          <td><i>Attivit' lavorativa passata</i><br>
             <textarea name="lavoro_pregresso" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['lavoro_pregresso'] ?>
 </textarea></td>
         </tr>
         <tr>
-          <td><i>Attivit� lavorativa recente</i><br>
+          <td><i>Attivit' lavorativa recente</i><br>
             <textarea name="lavoro_presente" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['lavoro_presente'] ?>
 </textarea></td>
-          <td><i>Attivit� lavorativa attuale</i><br>
+          <td><i>Attivit' lavorativa attuale</i><br>
             <textarea name="lavoro_attuale" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['lavoro_attuale'] ?>
 </textarea></td>
           <td><i>Ambiente lavorativo</i><br>
@@ -371,7 +371,7 @@ if($occup){
               <option name='Medio bevitore' <?php if (($occup)&&($row['alcolici']=="Medio bevitore")) echo "selected"; ?>>Medio bevitore</option>
               <option name='Forte bevitore' <?php if (($occup)&&($row['alcolici']=="Forte bevitore")) echo "selected"; ?>>Forte bevitore</option>
             </select></td>
-          <td>Caff� T�</td>
+          <td>Caff' T'</td>
           <td><select name='caffe'>
               <option name='Non bevitore' <?php if (($occup)&&($row['caffe']=="Non bevitore")) echo "selected"; ?>>Non bevitore</option>
               <option name='Medio bevitore' <?php if (($occup)&&($row['caffe']=="Medio bevitore")) echo "selected"; ?>>Medio bevitore</option>

@@ -76,7 +76,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 if($mode=='match'||$mode=='search'||$mode=='paginate'){
 
-	# Initialize page�s control variables
+	# Initialize page's control variables
 	if($mode=='paginate'){
 		$matchcode=$_SESSION['sess_searchkey'];
 		//$searchkey='USE_SESSION_SEARCHKEY';

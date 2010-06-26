@@ -28,7 +28,7 @@ require_once ($root_path . 'modules/insurance_co/model/class_insurance.php') ;
 
 $insurance_obj = new PersonInsurance ( ) ;
 $person_obj = & new Person ( $pid ) ;
-// Get the person�s dataif ($person_obj->preloadPersonInfo ( $pid )) {
+// Get the person's dataif ($person_obj->preloadPersonInfo ( $pid )) {
 	$person = $person_obj->person ;
 	// copy to encounter variable 	$encounter = & $person ;	
 

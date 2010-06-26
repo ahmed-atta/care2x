@@ -171,7 +171,7 @@ class GuiPersonShow {
 		include_once($root_path.'modules/insurance_co/model/class_insurance.php');
 		$pinsure_obj=new PersonInsurance($this->pid);
 
-		# Get the global config for person�s registration form
+		# Get the global config for person's registration form
 		include_once($root_path.'include/core/class_globalconfig.php');
 
 		$GLOBAL_CONFIG = array();
@@ -216,7 +216,7 @@ class GuiPersonShow {
 				# Check if person is currently admitted
 				$this->current_encounter=$this->person_obj->CurrentEncounter($this->pid);
 
-				# update the record�s history
+				# update the record's history
 				if(empty($newdata)) @$this->person_obj->setHistorySeen($_SESSION['sess_user_name']);
 			
 				# Check whether config foto path exists, else use default path

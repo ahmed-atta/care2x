@@ -370,7 +370,7 @@ class GuiInputPerson {
 				}
 			} // end of if(!$error)
 		}elseif(!empty($this->pid)){
-			 # Get the person�s data
+			 # Get the person's data
 			if($data_obj=&$person_obj->getAllInfoObject()){
 
 				$zeile=$data_obj->FetchRow();

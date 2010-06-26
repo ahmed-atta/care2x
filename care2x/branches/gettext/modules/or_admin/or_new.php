@@ -113,7 +113,7 @@ if(!empty($mode)&&!$inputerror){
 		}
 		case 'select':
 		{
-			# Get department�s information
+			# Get department's information
 			if(isset($nr)&&$nr){
 				$OR_Info=$OR_obj->ORRecordInfo($nr);
 			}elseif(isset($OR_nr)&&$OR_nr){

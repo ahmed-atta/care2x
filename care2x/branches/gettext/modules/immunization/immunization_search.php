@@ -17,7 +17,7 @@ $immu_obj=new Immunization();
 $breakfile='immunization_manage.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
 
-# Initialize page�s control variables
+# Initialize page's control variables
 if($mode!='paginate'){
 	# Reset paginator variables
 	$pgx=0;
