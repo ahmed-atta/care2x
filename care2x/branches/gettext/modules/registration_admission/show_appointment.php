@@ -11,7 +11,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 $thisfile=basename(__FILE__);
-require_once($root_path.'include/core/class_appointment.php');
+require_once($root_path.'modules/appointment_scheduler/model/class_appointment.php');
 $obj=new Appointment();
 //$db->debug=true;
 
