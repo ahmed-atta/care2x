@@ -122,7 +122,7 @@ if (isset($mode) && ($mode=='search'))
   { echo "$LDDbNoLink<br>"; }
 
 }
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient%');
@@ -135,9 +135,9 @@ $target='archiv';
 
 if(!AUTOSHOW_ONERESULT) {
 
-	include($root_path.'include/care_api_classes/class_encounter.php');
-	include($root_path.'include/care_api_classes/class_ward.php');
-	include($root_path.'include/care_api_classes/class_insurance.php');
+	include($root_path.'include/core/class_encounter.php');
+	include($root_path.'include/core/class_ward.php');
+	include($root_path.'include/core/class_insurance.php');
 
 	/* Create encounter object */
 	$encounter_obj=new Encounter();
@@ -148,7 +148,7 @@ if(!AUTOSHOW_ONERESULT) {
 	/* Create new person's insurance object */
 	$insurance_obj=new Insurance;	 
 	/* Get the insurance classes */
-	$insurance_classes=&$insurance_obj->getInsuranceClassInfoObject($root_path.'include/care_api_classes/class_nr,name,LD_var');
+	$insurance_classes=&$insurance_obj->getInsuranceClassInfoObject($root_path.'include/core/class_nr,name,LD_var');
 		/* Get all encounter classes */
 	$encounter_classes=$encounter_obj->AllEncounterClassesObject();
 

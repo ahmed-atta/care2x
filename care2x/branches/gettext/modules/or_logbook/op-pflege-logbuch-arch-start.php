@@ -58,7 +58,7 @@ $filetitles=array();
 $template=array();
 $datafound=false;
 
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 /* Load all operative departments */

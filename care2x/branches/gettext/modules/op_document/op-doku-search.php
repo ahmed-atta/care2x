@@ -48,7 +48,7 @@ $linecount=0;
 if(!isset($_SESSION['sess_dept_name'])) $_SESSION['sess_dept_name'] = "";
 
 /* Create dept object and preload dept info */
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 $buffer=$dept_obj->LDvar();
@@ -56,12 +56,12 @@ if(isset($$buffer)&&!empty($$buffer)) $_SESSION['sess_dept_name']=$$buffer;
 	else $_SESSION['sess_dept_name']=$dept_obj->FormalName();
 
 /* Load global configs */
-include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+include_once($root_path.'include/core/class_globalconfig.php');
 $GLOBAL_CONFIG=array();
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient_%');
 /* Create the encounter object */
-include_once($root_path.'include/care_api_classes/class_encounter.php');
+include_once($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter();
 
 require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
@@ -76,7 +76,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 if($mode=='match'||$mode=='search'||$mode=='paginate'){
 
-	# Initialize page´s control variables
+	# Initialize pageï¿½s control variables
 	if($mode=='paginate'){
 		$matchcode=$_SESSION['sess_searchkey'];
 		//$searchkey='USE_SESSION_SEARCHKEY';
@@ -90,10 +90,10 @@ if($mode=='match'||$mode=='search'||$mode=='paginate'){
 		$_SESSION['sess_searchkey']=$matchcode;
 	}
 	# Paginator object
-	require_once($root_path.'include/care_api_classes/class_paginator.php');
+	require_once($root_path.'include/core/class_paginator.php');
 	$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
-	require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	require_once($root_path.'include/core/class_globalconfig.php');
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 	# Get the max nr of rows from global config

@@ -22,7 +22,7 @@ $rows=$person_obj->LastRecordCount();
 //echo $obj->getLastQuery();
 
 # Create encounter object
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter();
 
 # Get all encounter classes & load in array

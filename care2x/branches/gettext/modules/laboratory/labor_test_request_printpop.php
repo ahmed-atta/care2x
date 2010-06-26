@@ -121,12 +121,12 @@ if ($target=='generic' || $target=='blood') {
 
 /* Check for the patietn number = $pn. If available get the patients data, */
 if(isset($pn)&&$pn) {	
-    include_once($root_path.'include/care_api_classes/class_encounter.php');
+    include_once($root_path.'include/core/class_encounter.php');
 	$enc_obj=new Encounter;
 	
 	if($enc_obj->loadEncounterData($pn)){
 		$edit=true;
-		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		include_once($root_path.'include/core/class_globalconfig.php');
 		$GLOBAL_CONFIG=array();
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 		$glob_obj->getConfig('patient_%');	
@@ -176,7 +176,7 @@ if(isset($pn)&&$pn) {
 						  }					
 				}
 
-require_once($root_path.'include/care_api_classes/class_department.php');	
+require_once($root_path.'include/core/class_department.php');	
 $dept_obj=new Department;
 if($dept_obj->preloadDept($stored_request['testing_dept'])){
 	$buffer=$dept_obj->LDvar();

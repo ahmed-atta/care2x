@@ -15,10 +15,10 @@ define('LANG_FILE','nursing.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 /* Load the ward object */
-require_once($root_path.'include/care_api_classes/class_ward.php');
+require_once($root_path.'include/core/class_ward.php');
 $ward=new Ward;
 /* Load the dept object */
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept=new Department;
 
 $breakfile='nursing-station-manage.php'.URL_APPEND;

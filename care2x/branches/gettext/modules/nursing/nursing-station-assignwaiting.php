@@ -36,7 +36,7 @@ if(!isset($mode)) $mode='';
 $breakfile='javascript:window.close()'; # Set default breakfile
 
 /* Create ward object */
-require_once($root_path.'include/care_api_classes/class_ward.php');
+require_once($root_path.'include/core/class_ward.php');
 $ward_obj= new Ward;
 
 # Load date formatter 
@@ -68,7 +68,7 @@ if(($mode=='')||($mode=='fresh')){
 		$ward_ok=true;
 		
 		# Load global person photo source path
-		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		include_once($root_path.'include/core/class_globalconfig.php');
 		$GLOBAL_CONFIG=array();
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 		$glob_obj->getConfig('person_foto_path');

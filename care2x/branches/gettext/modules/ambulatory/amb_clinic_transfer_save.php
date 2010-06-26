@@ -26,7 +26,7 @@ $fileappend="&dept_nr=$dept_nr&edit=$edit&mode=&pday=$pday&pmonth=$pmonth&pyear=
 $breakfile="location:amb_clinic_patients.php".URL_APPEND.$fileappend;
 $forwardfile="location:amb_clinic_patients.php".URL_REDIRECT_APPEND.$fileappend;
 # Create ward object
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj= new Encounter;
 
 if(isset($mode)&&$mode=='transferdept'){	

@@ -6,7 +6,7 @@ define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 # Create the personell object 
-require_once($root_path.'include/care_api_classes/class_personell.php');
+require_once($root_path.'include/core/class_personell.php');
 $pers_obj=new Personell;
 
 $title=$LDOpPersonElements[$winid];

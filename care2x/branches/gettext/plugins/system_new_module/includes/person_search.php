@@ -64,7 +64,7 @@ $entry_body_bgcolor='#ffffff';
 /*
 if(($mode=='search')&&($searchkey))
 {
-    include_once($root_path.'include/care_api_classes/class_person.php');
+    include_once($root_path.'include/core/class_person.php');
 	$obj=new Person;
 	$pers_obj=&$obj->Persons($searchkey);
 	$pers_count=$obj->LastRecordCount();
@@ -93,10 +93,10 @@ if($mode=='paginate'){
 	$oitem='';
 }
 #Load and create paginator object
-require_once($root_path.'include/care_api_classes/class_paginator.php');
+require_once($root_path.'include/core/class_paginator.php');
 $pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('person_id_%');
 
@@ -281,7 +281,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 <tr>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo "Patient auswählen";//$LDUploadDicom :: $LDSearch?></STRONG></FONT> 
+<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo "Patient auswï¿½hlen";//$LDUploadDicom :: $LDSearch?></STRONG></FONT> 
 </td>
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
 <a href="javascript:gethelp('patient_search.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><a href="<?php 

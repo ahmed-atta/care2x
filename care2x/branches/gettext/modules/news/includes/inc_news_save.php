@@ -8,7 +8,7 @@ require_once($root_path.'modules/news/includes/inc_editor_fx.php');
 # Load date formatter
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 # Load image class 
-require_once($root_path.'include/care_api_classes/class_image.php');
+require_once($root_path.'include/core/class_image.php');
 # Create image object
 $img_obj=new Image;
 
@@ -39,12 +39,12 @@ $news=array( 'category'=>$category,
 					 'publish_date'=>$publishdate
 					 );
 
-require_once($root_path.'include/care_api_classes/class_news.php');
+require_once($root_path.'include/core/class_news.php');
 $newsobj=new News;
 if($news_nr = $newsobj->saveNews($dept_nr,$news)) {
     if($is_pic)	{
 	    # Get the news foto path from global config 					
-		require_once($root_path.'include/care_api_classes/class_globalconfig.php');    
+		require_once($root_path.'include/core/class_globalconfig.php');    
         $globobj=new GlobalConfig($GLOBALCONFIG);
 		$globobj->getConfig('news_fotos_path');
 					

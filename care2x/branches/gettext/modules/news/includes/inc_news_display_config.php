@@ -1,6 +1,6 @@
 <?php
 # Get the  config depending on the current logged user id
-require_once($root_path.'include/care_api_classes/class_config.php');
+require_once($root_path.'include/core/class_config.php');
 $userobj=new UserConfig;
 $globobj=new GlobalConfig($GLOBALCONFIG);
 

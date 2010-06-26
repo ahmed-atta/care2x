@@ -4,7 +4,7 @@ if (stristr('inc_passcheck.php',$PHP_SELF))
 die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
-require_once($root_path.'include/core/access_log.php');
+require_once($root_path.'include/helpers/access_log.php');
 $logs = new AccessLog();
 /**
  * CARE 2002 Integrated Hospital Information System
@@ -35,7 +35,7 @@ function validarea(&$zeile2, $permit_type_all = 1){
 }
 
 
-/*if(!isset($db) || !$db || !$dblink_ok) include_once($root_path.'include/core/inc_db_makelink.php');
+/*if(!isset($db) || !$db || !$dblink_ok) include_once($root_path.'include/helpers/inc_db_makelink.php');
 
 if($dblink_ok)
 {*/

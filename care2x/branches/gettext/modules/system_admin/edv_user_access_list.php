@@ -45,10 +45,10 @@ ORDER BY
 if($ergebnis=$db->Execute($sql)) {
 	$rows=$ergebnis->RecordCount();
 }
-require_once($root_path.'include/care_api_classes/class_access.php');
+require_once($root_path.'include/core/class_access.php');
 $role = & new Access();
 
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept=new Department;
 $depts=&$dept->getAllActive();
 

@@ -25,11 +25,11 @@ $thisfile=basename(__FILE__);
 $breakfile="nursing-or-dienstplan.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath";
 $_SESSION['sess_file_return']=$thisfile;
 
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 
-require_once($root_path.'include/care_api_classes/class_personell.php');
+require_once($root_path.'include/core/class_personell.php');
 $pers_obj=new Personell;
 $pers_obj->useDutyplanTable();
 

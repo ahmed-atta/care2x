@@ -13,7 +13,7 @@
  $toggler=0;
  $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 ///$db->debug=true;
- require_once($root_path.'include/care_api_classes/class_ward.php');
+ require_once($root_path.'include/core/class_ward.php');
  // Load the wards info 
  $ward_obj=new Ward;
  $items='nr,ward_id,name, dept_nr';

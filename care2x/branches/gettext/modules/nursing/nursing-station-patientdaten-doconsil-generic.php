@@ -55,7 +55,7 @@ $formtitle=$abtname[$konsil];
 define('_BATCH_NR_INIT_',50000000);  // define the initial batch nr for generic forms
 
 /* Create department object and load all medical depts */
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj= new Department;
 $medical_depts=$dept_obj->getAllActiveSort( 'name_formal' );
 
@@ -64,11 +64,11 @@ $medical_depts=$dept_obj->getAllActiveSort( 'name_formal' );
 	require_once($root_path.'include/helpers/inc_date_format_functions.php');
      /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
 	if(isset($pn)&&$pn){		
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
+		include_once($root_path.'include/core/class_encounter.php');
 		$enc_obj=new Encounter;
 	    if( $enc_obj->loadEncounterData($pn)) {
 		
-/*			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+/*			include_once($root_path.'include/core/class_globalconfig.php');
 			$GLOBAL_CONFIG=array();
 			$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 			$glob_obj->getConfig('patient_%');	

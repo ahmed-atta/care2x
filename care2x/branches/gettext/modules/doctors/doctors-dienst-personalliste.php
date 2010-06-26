@@ -46,17 +46,17 @@ if(!isset($dept_nr)||!$dept_nr){
 $thisfile=basename(__FILE__);
 
 # Load the department list with oncall doctors
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 $dept_list=&$dept_obj->getAllMedical();
 # Load the dept doctors
-require_once($root_path.'include/care_api_classes/class_personell.php');
+require_once($root_path.'include/core/class_personell.php');
 $pers_obj=new Personell;
 $doctors=&$pers_obj->getDoctorsOfDept($dept_nr);
 # Load global values
 $GLOBAL_CONFIG=array();
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('personell_%');
 
@@ -82,7 +82,7 @@ if(!empty($ipath)){
 
 $append='&retpath='.$retpath.'&ipath='.$ipath;
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode=='paginate'){
 	$searchkey=$_SESSION['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
@@ -95,7 +95,7 @@ if($mode=='paginate'){
 	$oitem='name_last';
 }
 # Paginator object
-require_once($root_path.'include/care_api_classes/class_paginator.php');
+require_once($root_path.'include/core/class_paginator.php');
 $pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 

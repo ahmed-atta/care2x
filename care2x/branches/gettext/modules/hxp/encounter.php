@@ -8,7 +8,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 //define('NO_CHAIN',1);
 //require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 # Create the encounter object
-include($root_path.'include/care_api_classes/class_encounter.php');
+include($root_path.'include/core/class_encounter.php');
 $enc = & new Encounter();
 # Load the authentication functions
 require('./include/inc_access.php');

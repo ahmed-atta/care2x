@@ -88,7 +88,7 @@ $db_request_table_sub='baclabor_sub';
 
 $formtitle=$LDBacteriologicalLaboratory;
 
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter;
 
 define('_BATCH_NR_INIT_',30000000);
@@ -105,7 +105,7 @@ define('_BATCH_NR_INIT_',30000000);
 			if($enc_obj->is_loaded){
 				$result=&$enc_obj->encounter;
 			}
-			include_once($root_path.'include/care_api_classes/class_diagnostics.php');
+			include_once($root_path.'include/core/class_diagnostics.php');
 			$bac_obj=new Diagnostics;
 			$bac_obj->useBacLabRequestTable();
 			$bac_obj_sub = new Diagnostics;

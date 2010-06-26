@@ -24,7 +24,7 @@ if (!isset($userck))
     } 
     $rows = 0;
     // Create the product object
-    include_once($root_path . 'include/care_api_classes/class_product.php');
+    include_once($root_path . 'include/core/class_product.php');
     $product = new Product;
     $ergebnis = &$product->PendingOrders($cat);
     $rows = $product->LastRecordCount();
@@ -72,7 +72,7 @@ if ($rows) {
         // Load the date formatter
         include_once($root_path . 'include/helpers/inc_date_format_functions.php'); 
         // Create the department object
-        include_once($root_path . 'include/care_api_classes/class_department.php');
+        include_once($root_path . 'include/core/class_department.php');
         $dept_obj = new Department;
         if ($depts = &$dept_obj->getAllActiveObject()) {
             while ($buf = $depts->FetchRow()) {

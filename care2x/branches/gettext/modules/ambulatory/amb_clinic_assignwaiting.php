@@ -26,7 +26,7 @@ if(empty($_COOKIE[$local_user.$sid])){
 
 if(!isset($mode)) $mode='';
 
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 #Create encounter object and load encounter info
 $enc_obj=new Encounter($pn);
 
@@ -36,7 +36,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 if(($mode=='')||($mode=='fresh')){
 		
 		# Load global person photo source path
-		require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		require_once($root_path.'include/core/class_globalconfig.php');
 		$GLOBAL_CONFIG=array();
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 		$glob_obj->getConfig('person_foto_path');
@@ -51,7 +51,7 @@ if(($mode=='')||($mode=='fresh')){
 		
 		if($encounter['current_dept_nr'] != $dept_nr){
 			if(!isset($pdept)||empty($pdept)){
-				require_once($root_path.'include/care_api_classes/class_department.php');
+				require_once($root_path.'include/core/class_department.php');
 				$dept_obj=new Department;
 				$dept=$dept_obj->FormalName($encounter['current_dept_nr']);
 			}else{

@@ -16,7 +16,7 @@ $_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
 $_SESSION['sess_user_origin']='amb';
 $_SESSION['sess_parent_mod']='';
 /* Create department object and load all medical depts */
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj= new Department;
 if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '')
 	$medical_depts=&$dept_obj->getAllActiveSort( 'name_formal' ) ; //get only the main depts

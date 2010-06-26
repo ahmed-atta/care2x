@@ -69,7 +69,7 @@ if(!$GLOBALCONFIG['language_single']){
  <select name="lang"> 
 <?php
 
-require($root_path.'include/care_api_classes/class_language.php');
+require($root_path.'include/core/class_language.php');
 $lang_obj=new Language;
 $langselect= $lang_obj->createSelectForm($lang);
 echo $langselect;

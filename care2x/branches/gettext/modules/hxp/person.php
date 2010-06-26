@@ -6,7 +6,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 //define('LANG_FILE','stdpass.php');
 //define('NO_CHAIN',1);
 //require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-include($root_path.'include/care_api_classes/class_person.php');
+include($root_path.'include/core/class_person.php');
 $person = & new Person();
 
 require('./include/inc_access.php');
@@ -387,7 +387,7 @@ function PersonAppt($args){
 }
 function PersonApptList($args){
 	global $error,$root_path;
-	include($root_path.'include/care_api_classes/class_appointment.php');
+	include($root_path.'include/core/class_appointment.php');
 	$appt=& new Appointment();
 	if(checkAccess($args[0])){
 		$buf=$appt->getPersonsAppointmentsObj($args[1]);

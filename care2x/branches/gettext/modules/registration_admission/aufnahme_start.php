@@ -20,13 +20,13 @@ $local_user='aufnahme_user';
 require($root_path.'include/helpers/inc_front_chain_lang.php');
 
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
-require_once($root_path.'include/care_api_classes/class_person.php');
-require_once($root_path.'include/care_api_classes/class_insurance.php');
-require_once($root_path.'include/care_api_classes/class_ward.php');
-require_once($root_path.'include/care_api_classes/class_encounter.php');
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
-require_once($root_path.'include/care_api_classes/class_ecombill.php');
-require_once($root_path.'include/care_api_classes/class_personell.php');
+require_once($root_path.'include/core/class_person.php');
+require_once($root_path.'include/core/class_insurance.php');
+require_once($root_path.'include/core/class_ward.php');
+require_once($root_path.'include/core/class_encounter.php');
+require_once($root_path.'include/core/class_globalconfig.php');
+require_once($root_path.'include/core/class_ecombill.php');
+require_once($root_path.'include/core/class_personell.php');
 
 //gjergji
 $current_dept_nr = $_SESSION['department_nr'];
@@ -138,7 +138,7 @@ if($pid!='' || $encounter_nr!=''){
 				//gjergji
 				//added the possibility to upload foto here
 				// Create image object
-				include_once($root_path.'include/care_api_classes/class_image.php');
+				include_once($root_path.'include/core/class_image.php');
 				$img_obj=& new Image;
 				$picext='';
 				$valid_image=false;
@@ -337,7 +337,7 @@ if($pid!='' || $encounter_nr!=''){
 	}
 	if(!$encounter_nr||$encounter_class_nr==2){
 		# Load all medical departments
-		include_once($root_path.'include/care_api_classes/class_department.php');
+		include_once($root_path.'include/core/class_department.php');
 		$dept_obj=new Department;
 		$all_meds=&$dept_obj->getAllMedicalObject();
 	}

@@ -13,7 +13,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 $thisfile=basename(__FILE__);
 
 # Create DRG object
-require_once($root_path.'include/care_api_classes/class_drg.php');
+require_once($root_path.'include/core/class_drg.php');
 $obj=new DRG;
 
 //$db->debug=1;

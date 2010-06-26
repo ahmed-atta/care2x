@@ -240,7 +240,7 @@ echo ' '.$_COOKIE[$local_user.$sid];
 if($linecount>0){
 
 	# Create the department object
-	include_once($root_path.'include/care_api_classes/class_department.php');
+	include_once($root_path.'include/core/class_department.php');
 	$dept_obj=new Department;
 	if($depts=&$dept_obj->getAllActiveObject()){
 		while($buf=$depts->FetchRow()){

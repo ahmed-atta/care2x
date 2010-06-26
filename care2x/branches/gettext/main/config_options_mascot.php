@@ -25,7 +25,7 @@ if(isset($mode)&&$mode=='save'){
 
 	$config_new['mascot']=$mascot;
 	
-	include_once($root_path.'include/care_api_classes/class_userconfig.php');
+	include_once($root_path.'include/core/class_userconfig.php');
 	
 	$user=new UserConfig;
 
@@ -43,7 +43,7 @@ if(isset($mode)&&$mode=='save'){
 
 }elseif(!isset($cfg['mascot'])||empty($cfg['mascot'])){
 	if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	include_once($root_path.'include/core/class_globalconfig.php');
 	$gc=new GlobalConfig($GLOBAL_CONFIG);
 	$gc->getConfig('theme_mascot');
 	$cfg['mascot']=$GLOBAL_CONFIG['theme_mascot'];

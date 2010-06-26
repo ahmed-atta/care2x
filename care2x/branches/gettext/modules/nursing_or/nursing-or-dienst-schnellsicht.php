@@ -21,7 +21,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 # Create the core object
-require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/core/class_core.php');
 $core=new Core;
 
 if (!empty($_SESSION['sess_path_referer'])){
@@ -78,10 +78,10 @@ if(!$is_cached || ($is_cached && $force_no_cache)){
 		if($dept_nr) $hilitedept=$dept_nr;
 	}
 	# Load the department list with oncall doctors 
-	include_once($root_path.'include/care_api_classes/class_department.php');
+	include_once($root_path.'include/core/class_department.php');
 	$dept_obj=new Department;
 	$dept_OC=$dept_obj->getAllActiveWithNOC();
-	include_once($root_path.'include/care_api_classes/class_personell.php');
+	include_once($root_path.'include/core/class_personell.php');
 	$pers_obj=new Personell;
 	$quicklist=&$pers_obj->getNOCQuicklist($dept_OC,$pyear,$pmonth);
 }
@@ -212,7 +212,7 @@ if(!$force_no_cache&&$is_cached){
 	
 	//if ($aelems[l]!="") echo $aelems[l].', ';
 	//echo $aelems[f].'</b></a></td>';
-	if(in_array($v['nr'],$quicklist)&&$OC_1['name_last']){$temp_out.='<a href="javascript:popinfo(\''.$ha['ha'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click für mehr Info."><b>'.$OC_1['name_last'].', '.$OC_1['name_first'].'</b></a>'; }
+	if(in_array($v['nr'],$quicklist)&&$OC_1['name_last']){$temp_out.='<a href="javascript:popinfo(\''.$ha['ha'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click fï¿½r mehr Info."><b>'.$OC_1['name_last'].', '.$OC_1['name_first'].'</b></a>'; }
 	$temp_out.='</td>
 	<td>';
 	if ($a['a'.(date('d')-1)]!='') 
@@ -223,7 +223,7 @@ if(!$force_no_cache&&$is_cached){
 	$temp_out.='&nbsp;
 	</td><td>
 	<img '.createComIcon($root_path,'mans-red.gif','0').'>&nbsp;';
-	if(in_array($v['nr'],$quicklist)&&$OC_2['name_last']){$temp_out.='<a href="javascript:popinfo(\''.$hr['hr'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click für mehr Info."><b>'.$OC_2['name_last'].', '.$OC_2['name_first'].'</b></a>';}
+	if(in_array($v['nr'],$quicklist)&&$OC_2['name_last']){$temp_out.='<a href="javascript:popinfo(\''.$hr['hr'.(date('d')-1)].'\',\''.$v['nr'].'\')" title="Click fï¿½r mehr Info."><b>'.$OC_2['name_last'].', '.$OC_2['name_first'].'</b></a>';}
 	$temp_out.='</td>
 	<td>';
 	if ($r['r'.(date('d')-1)]!='') 

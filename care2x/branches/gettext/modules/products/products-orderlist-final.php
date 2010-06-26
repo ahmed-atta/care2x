@@ -7,9 +7,9 @@ define('LANG_FILE','products.php');
 $local_user='ck_prod_order_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department();
-require_once($root_path.'include/care_api_classes/class_product.php');
+require_once($root_path.'include/core/class_product.php');
 $product_obj=new Product();
 $sendok=false;
 $ofinal=false;
@@ -96,7 +96,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 if(($mode=='send') && isset($_SESSION['current_order']) ){
 	
 	//Check authenticity of validator person
-	include_once($root_path.'include/care_api_classes/class_access.php');
+	include_once($root_path.'include/core/class_access.php');
 	$user = & new Access($validator,$vpw);
 	if($user->isKnown()){
 		if($user->hasValidPassword()&&$user->isNotLocked()){ 

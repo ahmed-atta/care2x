@@ -78,7 +78,7 @@ if(!defined('LANG_DEFAULT')) define ('LANG_DEFAULT','en');
 #
 # Establish db connection
 #
-require_once($root_path.'include/core/inc_db_makelink.php');
+require_once($root_path.'include/helpers/inc_db_makelink.php');
 
 #
 # Session configurations

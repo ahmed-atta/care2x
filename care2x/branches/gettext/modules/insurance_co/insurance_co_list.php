@@ -20,7 +20,7 @@ define('LANG_FILE','finance.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 # Load the insurance object
-require_once($root_path.'include/care_api_classes/class_insurance.php');
+require_once($root_path.'include/core/class_insurance.php');
 $ins_obj=new Insurance;
 
 $breakfile='insurance_co_manage.php'.URL_APPEND;
@@ -37,13 +37,13 @@ if($mode!='paginate'){
 }
 
 $GLOBAL_CONFIG=array();
-include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+include_once($root_path.'include/core/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('pagin_insurance_list_max_block_rows');
 if(empty($GLOBAL_CONFIG['pagin_insurance_list_max_block_rows'])) $GLOBAL_CONFIG['pagin_insurance_list_max_block_rows']=MAX_BLOCK_ROWS; # Last resort, use the default defined at the start of this page
 
 #Load and create paginator object
-require_once($root_path.'include/care_api_classes/class_paginator.php');
+require_once($root_path.'include/core/class_paginator.php');
 $pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 # Adjust the max nr of rows in a block
 $pagen->setMaxCount($GLOBAL_CONFIG['pagin_insurance_list_max_block_rows']);

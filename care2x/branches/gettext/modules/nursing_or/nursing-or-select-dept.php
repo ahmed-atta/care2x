@@ -53,7 +53,7 @@ $abtname=array();
 $datum=date('d.m.Y');
 
 /* Load the department list with oncall doctors */
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 $dept_DOC=$dept_obj->getAllActiveWithDOC();
 

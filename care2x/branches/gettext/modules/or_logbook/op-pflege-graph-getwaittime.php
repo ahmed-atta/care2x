@@ -30,7 +30,7 @@ $dbtable='care_encounter_op';
 
 if($mode=='save'){
 	
-	require_once($root_path.'include/care_api_classes/class_core.php');
+	require_once($root_path.'include/core/class_core.php');
 	$core = & new Core;
 
 				// check if entry is already existing
@@ -167,7 +167,7 @@ function isnum(val,idx)
 			}
 			
 			
-//			alert("Zeitangabe ist ungültig! (ausserhalb des 24H Zeitrahmens)");
+//			alert("Zeitangabe ist ungï¿½ltig! (ausserhalb des 24H Zeitrahmens)");
 	
 		}
 		switch(v3.length)

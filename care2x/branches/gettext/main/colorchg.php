@@ -38,7 +38,7 @@ if ($mode=='change'){
 
 	// Save to user config table
 
-	include_once($root_path.'include/care_api_classes/class_userconfig.php');
+	include_once($root_path.'include/core/class_userconfig.php');
 	$user=new UserConfig;
 
 	if($user->getConfig($_COOKIE['ck_config'])){

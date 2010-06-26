@@ -4,13 +4,13 @@ require('./roots.php');
 require($root_path.'include/helpers/inc_environment_global.php');
 include_once($root_path.'include/helpers/inc_date_format_functions.php');
 global $db;
-include_once($root_path.'include/care_api_classes/class_prescription.php');
+include_once($root_path.'include/core/class_prescription.php');
 if(!isset($objPrescription))
 $objPrescription=new Prescription;
 $app_types=$objPrescription->getAppTypes();
 $pres_types=$objPrescription->getPrescriptionTypes();
 // load the encounter class to check if patient is discharged
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj= new Encounter;
 $enc_obj->loadEncounterData($pn);
 $isDischarged = $enc_obj->Is_Discharged($pn);
@@ -35,7 +35,7 @@ if(!isset($prescriber)||empty($prescriber)) $prescriber=$_COOKIE[$local_user.$si
 
 $title="$LDMedication/$LDDosage";
 /* Create charts object */
-require_once($root_path.'include/care_api_classes/class_charts.php');
+require_once($root_path.'include/core/class_charts.php');
 
 $charts_obj= new Charts;
 	if($mode=='repeat' && $pn!=''){

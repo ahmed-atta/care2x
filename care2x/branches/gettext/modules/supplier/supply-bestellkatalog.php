@@ -8,10 +8,10 @@ define('LANG_FILE','products.php');
 $local_user='ck_supply_db_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/care_api_classes/class_product.php');
+require_once($root_path.'include/core/class_product.php');
 $product_obj=new Product;
 
-require_once($root_path.'include/care_api_classes/class_supplier.php');
+require_once($root_path.'include/core/class_supplier.php');
 $supplier_obj=new Supplier;
 # Load date formatter
 require_once($root_path.'include/helpers/inc_date_format_functions.php');

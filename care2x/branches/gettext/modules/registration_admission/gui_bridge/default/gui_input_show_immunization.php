@@ -1,5 +1,5 @@
 <?php
-include_once($root_path.'include/care_api_classes/class_immunization.php');
+include_once($root_path.'include/core/class_immunization.php');
 if(!isset($imm_obj)) $imm_obj=new Immunization;
 $imm_types=$imm_obj->getAppTypes();
 ?>

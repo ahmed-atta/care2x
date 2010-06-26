@@ -24,7 +24,7 @@ if(!$patnum||!$firstname||!$lastname||!$bday||!$maxpic)	{
 }; 
 require($root_path.'global_conf/inc_remoteservers_conf.php');
 
-require_once($root_path.'include/care_api_classes/class_image.php');
+require_once($root_path.'include/core/class_image.php');
 $img=new Image;
 
 

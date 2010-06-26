@@ -71,7 +71,7 @@ if(!isset($dept_nr)||empty($dept_nr)){
 
 /* If dept number is available, get the formal dept name */
 if($dept_nr){
-	include_once($root_path.'include/care_api_classes/class_department.php');
+	include_once($root_path.'include/core/class_department.php');
 	$dept_obj=new Department;
 	/* Resolve the departments name, "language dependent" */
 	$dept_ldvar=$dept_obj->LDvar($dept_nr);

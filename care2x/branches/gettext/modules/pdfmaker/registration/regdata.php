@@ -25,13 +25,13 @@ define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
-require_once($root_path.'include/care_api_classes/class_person.php');
-require_once($root_path.'include/care_api_classes/class_insurance.php');
+require_once($root_path.'include/core/class_person.php');
+require_once($root_path.'include/core/class_insurance.php');
 
 
 $insurance_obj=new PersonInsurance;
 $person_obj=& new Person($pid);
-# Get the person´s data
+# Get the personï¿½s data
 if($person_obj->preloadPersonInfo($pid)){
 	$person=$person_obj->person;
 	# copy to encounter variable 
@@ -64,13 +64,13 @@ if (isset($$insurance_class['LD_var'])&&!empty($$insurance_class['LD_var'])) $in
 
 
 # Get the global config for person's registration form*/
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $GLOBAL_CONFIG=array();
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('person_%');
 
 
-require_once($root_path.'include/care_api_classes/class_insurance.php');
+require_once($root_path.'include/core/class_insurance.php');
 $insurance_obj=new Insurance;
 
 

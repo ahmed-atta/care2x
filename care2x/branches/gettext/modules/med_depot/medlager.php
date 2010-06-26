@@ -17,7 +17,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 // reset all 2nd level lock cookies
 require($root_path.'include/helpers/inc_2level_reset.php');
-require ($root_path.'include/care_api_classes/class_access.php');
+require ($root_path.'include/core/class_access.php');
 
 $access = new Access($_SESSION['sess_login_userid'],$_SESSION['sess_login_pw']);
 $hideOrder = 0;

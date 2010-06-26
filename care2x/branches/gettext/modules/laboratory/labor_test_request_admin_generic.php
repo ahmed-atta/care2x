@@ -51,7 +51,7 @@ $dept_nr=$subtarget;
 
 //$db->debug=1;
 
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 
 /* Here begins the real work */
@@ -139,11 +139,11 @@ if(!isset($mode))   $mode='';
      /* Check for the patietn number = $pn. If available get the patients data */
      if($batchrows && $pn)
 	 {		
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
+		include_once($root_path.'include/core/class_encounter.php');
 		$enc_obj=new Encounter;
 	    if( $enc_obj->loadEncounterData($pn)) {
 		
-			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+			include_once($root_path.'include/core/class_globalconfig.php');
 			$GLOBAL_CONFIG=array();
 			$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 			$glob_obj->getConfig('patient_%');	

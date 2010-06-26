@@ -22,7 +22,7 @@ $returnfile=$_SESSION['sess_file_return'];
 # Load paths und dirs
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
 # Create image object
-require_once($root_path.'include/care_api_classes/class_image.php');
+require_once($root_path.'include/core/class_image.php');
 $img=new Image();
 
 

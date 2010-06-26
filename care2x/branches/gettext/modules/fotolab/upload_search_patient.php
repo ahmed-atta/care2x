@@ -37,7 +37,7 @@ $thisfile=basename(__FILE__);
 # Data to append to url
 $append='&status='.$status.'&target='.$target.'&user_origin='.$user_origin;
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode=='paginate'){
 	$searchkey=$_SESSION['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
@@ -50,10 +50,10 @@ if($mode=='paginate'){
 	$oitem='name_last';
 }
 # Paginator object
-require_once($root_path.'include/care_api_classes/class_paginator.php');
+require_once($root_path.'include/core/class_paginator.php');
 $pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 # Get the max nr of rows from global config
@@ -68,7 +68,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	if($mode=='search') $_SESSION['sess_searchkey']=$searchkey;
 
 	include_once($root_path.'include/helpers/inc_date_format_functions.php');
-	include_once($root_path.'include/care_api_classes/class_encounter.php');
+	include_once($root_path.'include/core/class_encounter.php');
 	$enc_obj=new Encounter;
 	$encounter=& $enc_obj->searchLimitEncounterBasicInfo($searchkey,$pagen->MaxCount(),$pgx,$oitem,$odir);
 	//echo $enc_obj->getLastQuery();

@@ -51,7 +51,7 @@ define('_BATCH_NR_INIT_',20000000);
 
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter;
 
      /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */

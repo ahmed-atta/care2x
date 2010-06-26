@@ -14,15 +14,15 @@ define('LANG_FILE','doctors.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/care_api_classes/class_personell.php');
+require_once($root_path.'include/core/class_personell.php');
 $pers_obj=new Personell;
 $person=&$pers_obj->getPersonellInfo($nr);
 
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 $dept=&$dept_obj->getPhoneInfo($dept_nr);
 
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('person_%');
 /* Check whether config foto path exists, else use default path */			

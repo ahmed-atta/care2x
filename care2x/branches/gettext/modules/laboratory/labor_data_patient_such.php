@@ -61,16 +61,16 @@ if($search&&!empty($keyword)){
 	# Load the date formatter 
 	include_once($root_path.'include/helpers/inc_date_format_functions.php');
     
-	include_once($root_path.'include/care_api_classes/class_lab.php');
+	include_once($root_path.'include/core/class_lab.php');
 	
 	$lab_obj=new Lab();
 	
 	#Load and create paginator object
-	include_once($root_path.'include/care_api_classes/class_paginator.php');
+	include_once($root_path.'include/core/class_paginator.php');
 	$pagen=& new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 	$GLOBAL_CONFIG=array();
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	include_once($root_path.'include/core/class_globalconfig.php');
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);	
 	# Get the max nr of rows from global config
 	$glob_obj->getConfig('pagin_patient_search_max_block_rows');

@@ -3,7 +3,7 @@
 if (stristr('save_immunization.inc.php',$PHP_SELF)) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 
-require_once($root_path.'include/care_api_classes/class_prescription.php');
+require_once($root_path.'include/core/class_prescription.php');
 if(!isset($obj)) $obj=new Prescription;
 
 require_once($root_path.'include/helpers/inc_date_format_functions.php');

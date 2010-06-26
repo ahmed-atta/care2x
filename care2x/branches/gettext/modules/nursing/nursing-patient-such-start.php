@@ -20,7 +20,7 @@ $breakfile='nursing.php'.URL_APPEND;
 
 /* Load the date formatter */
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
-include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+include_once($root_path.'include/core/class_globalconfig.php');
 $GLOBAL_CONFIG;
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient_%');
@@ -32,7 +32,7 @@ if($mode=='such'||$mode=='paginate')
 	$tb_location='care_encounter_location';
 	$tb_ward='care_ward';
 
-	# Initialize page´s control variables
+	# Initialize pageï¿½s control variables
 	if($mode=='paginate'){
 		$searchkey=$_SESSION['sess_searchkey'];
 	}else{
@@ -48,11 +48,11 @@ if($mode=='such'||$mode=='paginate')
 	$searchkey=strtr($searchkey,'*?','%_');
 
 	#Load and create paginator object
-	include_once($root_path.'include/care_api_classes/class_paginator.php');
+	include_once($root_path.'include/core/class_paginator.php');
 	$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 	
 	$GLOBAL_CONFIG=array();
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	include_once($root_path.'include/core/class_globalconfig.php');
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 	# Get the max nr of rows from global config

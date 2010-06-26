@@ -23,7 +23,7 @@ $thisfile=basename(__FILE__);
 $editfile='edv_system_format_menu_item_add.php'.URL_REDIRECT_APPEND.'&mode=edit&from=set&item_no=';
 
 if(!isset($GCONFIG)) $GCONFIG=array();
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $gc=new GlobalConfig($GCONFIG);
 
 if(isset($mode)&&($mode=='save')&&!empty($max_items)){

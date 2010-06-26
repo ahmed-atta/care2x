@@ -158,7 +158,7 @@ if((isset($boot)&&$boot)||!isset($_COOKIE['ck_config'])||empty($_COOKIE['ck_conf
 #
 # Load user config API. Get the user config data from db
 #
-require_once('include/care_api_classes/class_userconfig.php');
+require_once('include/core/class_userconfig.php');
 $cfg_obj=new UserConfig;
 
 if($cfg_obj->exists($user_id)) {
@@ -171,7 +171,7 @@ if($cfg_obj->exists($user_id)) {
 }
 
 # Load global configurations API
-require_once('include/care_api_classes/class_globalconfig.php');
+require_once('include/core/class_globalconfig.php');
 $glob_cfg=new GlobalConfig($GLOBALCONFIG);
 
 # Get the global config for language usage

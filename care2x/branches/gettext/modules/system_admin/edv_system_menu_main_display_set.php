@@ -25,7 +25,7 @@ $editfile='edv_system_format_menu_item_add.php'.URL_REDIRECT_APPEND.'&mode=edit&
 */
 $GLOBALCONFIG=array();
 
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $gc=new GlobalConfig($GLOBALCONFIG);
 
 if(isset($mode)&&($mode=='save')){
@@ -122,7 +122,7 @@ ob_start();
     <td><select name="deflang">
 
 <?php
-require($root_path.'include/care_api_classes/class_language.php');
+require($root_path.'include/core/class_language.php');
 $lang_obj=new Language;
 $langselect= &$lang_obj->createSelectForm($GLOBALCONFIG['language_default']);
 echo $langselect;

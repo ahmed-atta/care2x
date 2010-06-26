@@ -31,7 +31,7 @@ require('inc_init_main.php');
 
 # Adjust some  db dependent sql peculiarities
 # Set the "LIKE" comparison operator, postgre needs "ILIKE" for case-insensitive comparison
-# Set the "no-date" value based on the dbtype, Values defined at include/core/inc_environment_global.php
+# Set the "no-date" value based on the dbtype, Values defined at include/helpers/inc_environment_global.php
 switch($dbtype){
 	case 'mysql':
                     $dbf_nodate=NODATE_MYSQL;

@@ -112,7 +112,7 @@ if($dblink_ok) {
 	
 	# Now set the sql query for article # 5 or the achived news 
 	
-	require_once($root_path.'include/care_api_classes/class_news.php');
+	require_once($root_path.'include/core/class_news.php');
     $newsobj=new News;
     $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
 	

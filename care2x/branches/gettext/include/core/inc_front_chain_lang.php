@@ -14,11 +14,11 @@ $TIME_OUT_INACTIVE=FALSE;
 $TIME_OUT_TIME=1500;
 
 # Establish db connection
-require_once($root_path.'include/core/inc_db_makelink.php');
+require_once($root_path.'include/helpers/inc_db_makelink.php');
 
 # The function getLang gets the language code and stores it to the lang variable
 # The ck_language variable is a cookie which holds the language code stored at the beginning of
-# browser´s session. After acquiring the language code, the existence of the language table is
+# browserï¿½s session. After acquiring the language code, the existence of the language table is
 # checked. If language table does not exist, function returns 0.
 #
 # param chk_file =  filename of the language table
@@ -38,10 +38,10 @@ function getLang($chk_file) {
 }
 
 # Load charset function
-require_once($root_path.'include/core/inc_charset_fx.php'); // charset functions
+require_once($root_path.'include/helpers/inc_charset_fx.php'); // charset functions
 
 # The following lines of code is the script chaining detector. It compares the sid values propagated via
-# the relative url with the ck_sid+sid (decrypted) cookie values. If the two don´t match, a warning message will apear and
+# the relative url with the ck_sid+sid (decrypted) cookie values. If the two donï¿½t match, a warning message will apear and
 # the script exits stopping the execution. If the caller script does not require chaining, it must set the
 # constant NO_CHAIN to 1 before including this script.
 
@@ -67,7 +67,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 		# Let us check if the calling script is the time-out configuration script, if yes, then we skip the time out
 		if (!stristr('edv_system_timeout.php',$PHP_SELF)) {
 			# Load the global time out configs
-			include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+			include_once($root_path.'include/core/class_globalconfig.php');
 			if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
 			$gc_obj=& new GlobalConfig($GLOBAL_CONFIG);
 			$gc_obj->getConfig('timeout_%');
@@ -91,7 +91,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 			
     			if($time_out||!$_SESSION['sess_tos']){
 					# Show session time out warning and exit the script to stop the module
-					include($root_path."include/core/inc_session_timeout_warning.php");
+					include($root_path."include/helpers/inc_session_timeout_warning.php");
 					exit;
 				}else{
 					# Reset the time-out start time
@@ -150,7 +150,7 @@ if(isset($cfg['template_theme'])&&!empty($cfg['template_theme'])) $template_them
 
 # Load template class by default
 if(!defined('NO_TEMPLATE')||!NO_TEMPLATE){
-	require_once($root_path.'include/care_api_classes/class_template.php'); // template class
+	require_once($root_path.'include/core/class_template.php'); // template class
 	# Template object
 	$TP_obj=new Template($root_path,$template_path,$template_theme);
 }

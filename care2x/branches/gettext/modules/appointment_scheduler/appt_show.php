@@ -25,7 +25,7 @@ if(isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod']='';
 
 $thisfile=basename(__FILE__);
 $editorfile=$root_path.'modules/registration_admission/show_appointment.php';
-require_once($root_path.'include/care_api_classes/class_appointment.php');
+require_once($root_path.'include/core/class_appointment.php');
 $appt_obj=new Appointment();
 
 if(!isset($mode)){
@@ -60,7 +60,7 @@ $_SESSION['sess_appt_dept_nr']='';
 $_SESSION['sess_appt_doc']='';
 
 # Create encounter object
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter;
 
 # load all encounter classes
@@ -70,7 +70,7 @@ if($ec_obj=&$enc_obj->AllEncounterClassesObject()){
 }
 
 # Load departments
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 $deptarray=$dept_obj->getAllMedical('name_formal');
 
@@ -80,7 +80,7 @@ switch($_SESSION['sess_user_origin']){
 	default: $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 }
 # Create department object
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 # Load all medical departments
 $med_arr=&$dept_obj->getAllMedical();

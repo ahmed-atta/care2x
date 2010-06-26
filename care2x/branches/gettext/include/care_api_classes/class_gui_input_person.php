@@ -4,16 +4,16 @@
 */
 
 
-require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/core/class_core.php');
 
 /**
 *  GUI input form for person registration methods.
 *
 * Dependencies:
 * assumes the following files are in the given path
-* /include/care_api_classes/class_person.php
-* /include/care_api_classes/class_paginator.php
-* /include/care_api_classes/class_globalconfig.php
+* /include/core/class_person.php
+* /include/core/class_paginator.php
+* /include/core/class_globalconfig.php
 * /include/helpers/inc_date_format_functions.php
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
@@ -119,8 +119,8 @@ class GuiInputPerson {
 		include_once($root_path.'global_conf/other_hospitals.php');
 
 		include_once($root_path.'include/helpers/inc_date_format_functions.php');
-		include_once($root_path.'include/care_api_classes/class_insurance.php');
-		include_once($root_path.'include/care_api_classes/class_person.php');
+		include_once($root_path.'include/core/class_insurance.php');
+		include_once($root_path.'include/core/class_person.php');
 
 		//$db->debug=true;
 
@@ -142,7 +142,7 @@ class GuiInputPerson {
 		$valid_image=FALSE;
 
 		//* Get the global config for person's registration form*/
-		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		include_once($root_path.'include/core/class_globalconfig.php');
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 		$glob_obj->getConfig('person_%');
 
@@ -176,7 +176,7 @@ class GuiInputPerson {
 				$old_fn=$photo_filename;
 
 				# Create image object
-				include_once($root_path.'include/care_api_classes/class_image.php');
+				include_once($root_path.'include/core/class_image.php');
 				$img_obj=& new Image;
 
 				# Check the uploaded image file if exists and valid
@@ -716,7 +716,7 @@ class GuiInputPerson {
 		if ($errortown) $this->smarty->assign('LDStreet',"<font color=red>$LDTownCity</font>:");
 		else $this->smarty->assign('LDTownCity',"$LDTownCity:");
 
-		require_once($root_path.'include/care_api_classes/class_address.php');
+		require_once($root_path.'include/core/class_address.php');
 		$sAddress = '<select name="addr_citytown_name"><option onClick="updateAddress(\'  \',\'--\')" value=""></option>';
 		$address_obj=new Address;
 		$address = $address_obj->getAllActiveCityTown();

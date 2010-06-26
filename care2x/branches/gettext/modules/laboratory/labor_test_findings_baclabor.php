@@ -42,10 +42,10 @@ $edit_findings = 1;
 $dept_nr = 25; // 25 = department nr. of bacteriological lab$db_request_table = $subtarget;
 $db_request_table_sub = $subtarget . "_sub";
 
-require_once ($root_path . 'include/care_api_classes/class_encounter.php');
+require_once ($root_path . 'include/core/class_encounter.php');
 $enc_obj = new Encounter ( );
 //use this methods instead of using SQL inside the code
-include_once ($root_path . 'include/care_api_classes/class_diagnostics.php');
+include_once ($root_path . 'include/core/class_diagnostics.php');
 $bac_obj = new Diagnostics ( );
 $bac_obj->useBacLabFindingsTable ();
 $bac_obj_sub = new Diagnostics ( );
@@ -58,7 +58,7 @@ if (isset ( $pn ) && $pn) {
 	
 	if ($enc_obj->loadEncounterData ( $pn )) {
 		
-		include_once ($root_path . 'include/care_api_classes/class_globalconfig.php');
+		include_once ($root_path . 'include/core/class_globalconfig.php');
 		$GLOBAL_CONFIG = array ();
 		$glob_obj = new GlobalConfig ( $GLOBAL_CONFIG );
 		$glob_obj->getConfig ( 'patient_%' );

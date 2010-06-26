@@ -18,7 +18,7 @@ if(!isset($hc_unit_nr)||!$hc_unit_nr) $hc_unit_nr=7; # set your default unit of 
 
 $thisfile=basename(__FILE__);
 
-require_once($root_path.'include/care_api_classes/class_measurement.php');
+require_once($root_path.'include/core/class_measurement.php');
 $obj=new Measurement;
 $unit_types=$obj->getUnits();
 # Prepare unit ids in array

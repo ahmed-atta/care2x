@@ -41,7 +41,7 @@ $patientfound=FALSE; # The flag for the patient
 $md=$pday;
 if(strlen($md)==1) $md='0'.$md;
 # Create the encounter object 
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter;
 
 # Load the date formatter 
@@ -50,7 +50,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 # Consider search and paginate modes separately
 if($mode=='search'||$mode=='paginate'){
 
-		# Initialize page´s control variables
+		# Initialize pageï¿½s control variables
 		if($mode=='paginate'){
 			$sk=$_SESSION['sess_searchkey'];
 			//$searchkey='USE_SESSION_SEARCHKEY';
@@ -63,11 +63,11 @@ if($mode=='search'||$mode=='paginate'){
 			$oitem='name_last';
 		}
 		# Paginator object
-		require_once($root_path.'include/care_api_classes/class_paginator.php');
+		require_once($root_path.'include/core/class_paginator.php');
 		$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 		
 		$GLOBAL_CONFIG=array();
-		require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		require_once($root_path.'include/core/class_globalconfig.php');
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 		# Get the max nr of rows from global config
@@ -404,7 +404,7 @@ function isnum(val,idx)
 			}
 			
 			
-//			alert("Zeitangabe ist ungültig! (ausserhalb des 24H Zeitrahmens)");
+//			alert("Zeitangabe ist ungï¿½ltig! (ausserhalb des 24H Zeitrahmens)");
 	
 		}
 		switch(v3.length)

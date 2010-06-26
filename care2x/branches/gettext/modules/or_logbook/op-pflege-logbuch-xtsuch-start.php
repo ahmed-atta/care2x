@@ -39,7 +39,7 @@ if($srcword!=''||$mode=='paginate'){
 	//$db->debug=1;
 
 
-	# Initialize page´s control variables
+	# Initialize pageï¿½s control variables
 	if($mode=='paginate'){
 		$sql2=$_SESSION['sess_searchkey'];
 	}else{
@@ -116,11 +116,11 @@ if($srcword!=''||$mode=='paginate'){
 		}
 	}
 	#Load and create paginator object
-	include_once($root_path.'include/care_api_classes/class_paginator.php');
+	include_once($root_path.'include/core/class_paginator.php');
 	$pagen=& new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 	$GLOBAL_CONFIG=array();
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	include_once($root_path.'include/core/class_globalconfig.php');
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);	
 	# Get the max nr of rows from global config
 	$glob_obj->getConfig('pagin_patient_search_max_block_rows');

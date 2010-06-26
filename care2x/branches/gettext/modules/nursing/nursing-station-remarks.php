@@ -16,7 +16,7 @@ $local_user='ck_pflege_user';
 //define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 /* Create nursing notes object */
-require_once($root_path.'include/care_api_classes/class_notes_nursing.php');
+require_once($root_path.'include/core/class_notes_nursing.php');
 $report_obj= new NursingNotes;
  
 //if ($station=='') { $station='Non-department specific';  }
@@ -54,12 +54,12 @@ if($mode=='save'){
 		# Know where we are
 		switch($_SESSION['sess_user_origin']){
 			case 'amb': # Create nursing notes object 
-						include_once($root_path.'include/care_api_classes/class_department.php');
+						include_once($root_path.'include/core/class_department.php');
 						$obj= new Department;
 						$station=$obj->FormalName($dept_nr);
 						break;
 			default: # Create nursing notes object 
-						include_once($root_path.'include/care_api_classes/class_ward.php');
+						include_once($root_path.'include/core/class_ward.php');
 						$obj= new Ward;
 						$station=$obj->WardName($location_nr);
 		}

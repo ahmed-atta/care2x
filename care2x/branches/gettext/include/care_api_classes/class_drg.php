@@ -5,7 +5,7 @@
 
 /**
 */
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 /**
 * DRG = Diagnosis related groups.
 * Methods for Diagnosis and Procedure codes (ICD and OPS)

@@ -16,10 +16,10 @@ define('LANG_FILE','products.php');
 $local_user='ck_prod_order_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/care_api_classes/class_product.php');
+require_once($root_path.'include/core/class_product.php');
 $product_obj=new Product;
 $product_obj_sub = new Product();
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 $pharma_nr = $dept_obj->getPharmaOfDept($dept_nr);
 $thisfile=basename(__FILE__);

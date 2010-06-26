@@ -28,7 +28,7 @@ if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.U
 
 $thisfile=basename(__FILE__);
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode!='paginate'){
 	# Reset paginator variables
 	$pgx=0;
@@ -37,13 +37,13 @@ if($mode!='paginate'){
 	$oitem='';
 }
 #Load and create paginator object
-require_once($root_path.'include/care_api_classes/class_paginator.php');
+require_once($root_path.'include/core/class_paginator.php');
 $pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 $GLOBAL_CONFIG=array();
 
 # Get the max nr of rows from global config
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('pagin_personell_list_max_block_rows');
 if(empty($GLOBAL_CONFIG['pagin_personell_list_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page

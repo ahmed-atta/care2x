@@ -9,7 +9,7 @@ define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/care_api_classes/class_userconfig.php');
+require_once($root_path.'include/core/class_userconfig.php');
 $user=new UserConfig;
 
 //$db->debug=true;
@@ -20,12 +20,12 @@ if($user->getConfig($_COOKIE['ck_config'])){
 }
 
 /* Load the dept object */
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept=new Department;
 $depts=&$dept->getAllActive();
 
 // Load the ward object and wards info 
-require_once($root_path.'include/care_api_classes/class_ward.php');
+require_once($root_path.'include/core/class_ward.php');
 $ward_obj=new Ward;
 $items='nr,ward_id,name, dept_nr'; // set the items to be fetched
 $ward_info=&$ward_obj->getAllWardsItemsArray($items);

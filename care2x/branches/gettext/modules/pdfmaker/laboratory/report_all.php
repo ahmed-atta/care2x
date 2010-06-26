@@ -35,13 +35,13 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 $thisfile=basename(__FILE__);
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
-require_once($root_path.'include/care_api_classes/class_access.php');
+require_once($root_path.'include/core/class_access.php');
 $access =& new Access();
 $access->UserExists($_SESSION['sess_user_name']);
 
 //get in the classes i need
 /* Create encounter object */
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj=& new Encounter($encounter_nr);
 $encounter = '';
 if($enc_obj->loadEncounterData()){
@@ -49,17 +49,17 @@ if($enc_obj->loadEncounterData()){
 }
 
 // Get the Deparment name
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj = new Department();
 $deptName = $dept_obj->FormalName($enc_obj->encounter['current_dept_nr']);
-require_once($root_path.'include/care_api_classes/class_ward.php');
+require_once($root_path.'include/core/class_ward.php');
 $ward_obj = new Ward();
 $wardName = $ward_obj->getWardInfo($enc_obj->encounter['current_ward_nr']);
 $roomName = $ward_obj->_getActiveRoomInfo($enc_obj->encounter['current_room_nr'],$enc_obj->encounter['current_ward_nr']);
 $roomNumber = $enc_obj->encounter['current_room_nr'];
 
 //get the lab data
-require_once($root_path.'include/care_api_classes/class_lab.php');
+require_once($root_path.'include/core/class_lab.php');
 $lab_obj=new Lab($encounter_nr);
 
 //get the lab results..

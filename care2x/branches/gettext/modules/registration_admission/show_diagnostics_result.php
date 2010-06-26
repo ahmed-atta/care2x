@@ -35,7 +35,7 @@ $sql="SELECT dr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS
 		
 if($result=$db->Execute($sql)){
 	$rows=$result->RecordCount();
-	include_once($root_path.'include/care_api_classes/class_department.php');
+	include_once($root_path.'include/core/class_department.php');
 	$dept_obj=new Department();
 	$depts_array=&$dept_obj->getAll();
 }else{

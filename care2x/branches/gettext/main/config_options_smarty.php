@@ -25,7 +25,7 @@ if(isset($mode)&&$mode=='save'){
 
 	$config_new['template_smarty']=$template_smarty;
 
-	include_once($root_path.'include/care_api_classes/class_userconfig.php');
+	include_once($root_path.'include/core/class_userconfig.php');
 	
 	$user=new UserConfig;
 
@@ -43,7 +43,7 @@ if(isset($mode)&&$mode=='save'){
 
 }elseif(!isset($cfg['template_smarty'])||empty($cfg['template_smarty'])){
 	if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	include_once($root_path.'include/core/class_globalconfig.php');
 	$gc=new GlobalConfig($GLOBAL_CONFIG);
 	$gc->getConfig('template_smarty');
 	if(!empty($GLOBAL_CONFIG['template_smarty'])) $cfg['template_smarty']=$GLOBAL_CONFIG['template_smarty'];
@@ -114,7 +114,7 @@ while (false!==($theme = readdir($handle))) {
 ?>
   
 	<tr class="submenu">
-		<td>&nbsp;<input type="radio" name="template_smarty" value="<?php echo $sTemplateDirectory; ?>" <?php if($cfg['template_smarty'] == $sTemplateDirectory) echo 'checked'; ?>></td>
+		<td>&nbsp;<input type="radio" name="template_smarty" value="<?php echo $sTemplateDirectory; ?>" <?php if($cfg['template_smarty'] == $sTemplateDirectory) echo 'checked';ï¿½?>></td>
 		<td>&nbsp;<b><?php echo $sTemplateName; ?></b></td>
 		<td>&nbsp;<?php echo $sTemplateDescription; ?></td>
 		<td>&nbsp;<?php if(!empty($sTemplateScreenShot)) echo '<a href="'.$$filepath.$theme.'/'.$sTemplateScreenShot.'" target="_blank">'.$sTemplateScreenShot.'</a>'; ?></td>

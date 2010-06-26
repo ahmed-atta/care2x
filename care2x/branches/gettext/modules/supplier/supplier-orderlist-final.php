@@ -8,7 +8,7 @@ define('LANG_FILE','products.php');
 $local_user='ck_supply_db_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/care_api_classes/class_supplier.php');
+require_once($root_path.'include/core/class_supplier.php');
 $supplier_obj=new Supplier;
 
 $sendok=false;
@@ -32,7 +32,7 @@ if(($mode=='send') && isset($idcare_supply) && $idcare_supply){
 
 	#Check authenticity of validator person
 	   
-	include_once($root_path.'include/care_api_classes/class_access.php');
+	include_once($root_path.'include/core/class_access.php');
 	$user = & new Access($validator,$vpw);
 	   
 	if($user->isKnown()){

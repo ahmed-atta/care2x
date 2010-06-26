@@ -17,7 +17,7 @@ $abtname=array();
 $datum=date('d.m.Y');
 
 # Load the supplier list
-require_once($root_path.'include/care_api_classes/class_supplier.php');
+require_once($root_path.'include/core/class_supplier.php');
 $supplier_obj=new Supplier;
 
 $dept=$supplier_obj->getAllSupplier();

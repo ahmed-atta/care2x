@@ -20,7 +20,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 $thisfile=basename(__FILE__);
 $breakfile='nursing-station-info.php?sid='.$sid.'&lang='.$lang;
 /* Load the ward object */
-require_once($root_path.'include/care_api_classes/class_ward.php');
+require_once($root_path.'include/core/class_ward.php');
 $ward_obj=new Ward($ward_nr);
 
 //$db->debug=1;

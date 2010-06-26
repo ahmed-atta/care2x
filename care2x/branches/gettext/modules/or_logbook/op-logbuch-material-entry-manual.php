@@ -9,7 +9,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 
-require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/core/class_core.php');
 $core = & new Core;
 
 //$db->debug=1;

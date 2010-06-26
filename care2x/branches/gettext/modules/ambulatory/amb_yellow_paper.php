@@ -16,7 +16,7 @@ $local_user='ck_pflege_user';
 //define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 /* Create nursing notes object */
-require_once($root_path.'include/care_api_classes/class_yellow_paper.php');
+require_once($root_path.'include/core/class_yellow_paper.php');
 $report_obj= new YellowPaper;
 ///$db->debug=true; 
 //if ($station=='') { $station='Non-department specific';  }
@@ -69,12 +69,12 @@ if($mode=='save'){
 		# Know where we are
 		switch($_SESSION['sess_user_origin']){
 			case 'amb': # Create nursing notes object 
-						include_once($root_path.'include/care_api_classes/class_department.php');
+						include_once($root_path.'include/core/class_department.php');
 						$obj= new Department;
 						$station=$obj->FormalName($dept_nr);
 						break;
 			default: # Create nursing notes object 
-						include_once($root_path.'include/care_api_classes/class_ward.php');
+						include_once($root_path.'include/core/class_ward.php');
 						$obj= new Ward;
 						$station=$obj->WardName($location_nr);
 		}
@@ -228,7 +228,7 @@ if($occup){
         <td><input type="text" name="peso" size=10 maxlength=10 <?php if ($occup) echo "value='".$row['peso']."'" ?>></td>
       </tr>
       <tr>
-        <td><i>Età:&nbsp;</i></td>
+        <td><i>Etï¿½:&nbsp;</i></td>
         <td><input type="text" name="norm" size=10 maxlength=10 <?php if ($occup) echo "value='".$row['norm']."'" ?>></td>
       </tr>
     </table>
@@ -298,15 +298,15 @@ if($occup){
           <td><i>Abitazione</i><br>
             <textarea name="abitazione" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['abitazione'] ?>
 </textarea></td>
-          <td><i>Attività lavorativa passata</i><br>
+          <td><i>Attivitï¿½ lavorativa passata</i><br>
             <textarea name="lavoro_pregresso" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['lavoro_pregresso'] ?>
 </textarea></td>
         </tr>
         <tr>
-          <td><i>Attività lavorativa recente</i><br>
+          <td><i>Attivitï¿½ lavorativa recente</i><br>
             <textarea name="lavoro_presente" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['lavoro_presente'] ?>
 </textarea></td>
-          <td><i>Attività lavorativa attuale</i><br>
+          <td><i>Attivitï¿½ lavorativa attuale</i><br>
             <textarea name="lavoro_attuale" cols=30 rows=2 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['lavoro_attuale'] ?>
 </textarea></td>
           <td><i>Ambiente lavorativo</i><br>
@@ -373,7 +373,7 @@ if($occup){
               <option name='Medio bevitore' <?php if (($occup)&&($row['alcolici']=="Medio bevitore")) echo "selected"; ?>>Medio bevitore</option>
               <option name='Forte bevitore' <?php if (($occup)&&($row['alcolici']=="Forte bevitore")) echo "selected"; ?>>Forte bevitore</option>
             </select></td>
-          <td>Caffè Tè</td>
+          <td>Caffï¿½ Tï¿½</td>
           <td><select name='caffe'>
               <option name='Non bevitore' <?php if (($occup)&&($row['caffe']=="Non bevitore")) echo "selected"; ?>>Non bevitore</option>
               <option name='Medio bevitore' <?php if (($occup)&&($row['caffe']=="Medio bevitore")) echo "selected"; ?>>Medio bevitore</option>

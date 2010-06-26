@@ -53,7 +53,7 @@ if($mode=='paginate'){
 	$oitem='';
 }
 #Load and create paginator object
-require_once($root_path.'include/care_api_classes/class_paginator.php');
+require_once($root_path.'include/core/class_paginator.php');
 $pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($searchkey)){
@@ -69,7 +69,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 		$searchkey=strtr($searchkey,'*?','%_');
 		
 		$GLOBAL_CONFIG=array();
-		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		include_once($root_path.'include/core/class_globalconfig.php');
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 		# Get the max nr of rows from global config

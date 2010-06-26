@@ -14,7 +14,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 $logo_ht_limit=50; # Maximum deparment logo height in pixels
 
 # Load the encounter class
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter($_SESSION['sess_full_en']);
 $thisfile=basename(__FILE__);
 
@@ -57,7 +57,7 @@ if(!isset($mode)||empty($mode)){
 
 if($mode=='new'){
 	# Load the department class 
-	include_once($root_path.'include/care_api_classes/class_department.php');
+	include_once($root_path.'include/core/class_department.php');
 	$dept_obj=new Department($dept_nr);
 	$dept=&$dept_obj->getDeptAllInfo($dept_nr);
 }
@@ -79,7 +79,7 @@ $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer);
 $_SESSION['sess_file_return']=$thisfile;
 
 /* Load all  medical depts info */
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 $dept_med=$dept_obj->getAllMedical();
 

@@ -15,7 +15,7 @@ define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/care_api_classes/class_ward.php');
+require_once($root_path.'include/core/class_ward.php');
 ## Load all wards info 
 $ward_obj=new Ward;
 $items='nr,ward_id,name';

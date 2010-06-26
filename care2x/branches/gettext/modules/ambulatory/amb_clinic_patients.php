@@ -60,7 +60,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 if(($mode=='')||($mode=='fresh')){
 
 	# Create encounter object
-	include_once($root_path.'include/care_api_classes/class_encounter.php');
+	include_once($root_path.'include/core/class_encounter.php');
 	$enc_obj= new Encounter;
 	
 	# Get all outpatients for this dept
@@ -70,7 +70,7 @@ if(($mode=='')||($mode=='fresh')){
 	# If dept name is empty, fetch by location nr
 	if(!isset($dept)||empty($dept)){
 		# Create department object 
-		include_once($root_path.'include/care_api_classes/class_department.php');
+		include_once($root_path.'include/core/class_department.php');
 		$dept_obj= new Department;
 		$deptLDvar=$dept_obj->LDvar($dept_nr);
 		if(isset($$deptLDvar)&&!empty($$deptLDvar)) $dept=$$deptLDvar;
@@ -79,19 +79,19 @@ if(($mode=='')||($mode=='fresh')){
 	# set to edit mode
 	$edit=true;
 	
-		# Create the waiting outpatients´ list
+		# Create the waiting outpatientsï¿½ list
 		$dnr=(isset($w_waitlist)&&$w_waitlist) ? 0 : $dept_nr;
 		$waitlist=&$enc_obj->createWaitingOutpatientList($dnr);
 		$waitlist_count=$enc_obj->LastRecordCount();
 		//echo $waitlist_count.'<p>'.$enc_obj->getLastQuery();
 		
-		# Get the doctor´s on duty information
+		# Get the doctorï¿½s on duty information
 		#### Start of routine to fetch doctors on duty
 		$elem='duty_1_pnr';
 		if(SHOW_DOC_2) $elem.=',duty_2_pnr';
 		
 		# Create personnel object
-		include_once($root_path.'include/care_api_classes/class_personell.php');
+		include_once($root_path.'include/core/class_personell.php');
 		$pers_obj=new Personell;
 			
 		if($result=$pers_obj->getDOCDutyplan($dept_nr,$pyear,$pmonth,$elem)){
@@ -553,7 +553,7 @@ while ($patient=$opat_obj->FetchRow()){
 		$occ_list.=' alt="'.$LDNoticeRW.'"></a>';
 		$occ_list.='&nbsp;<a href="javascript:Transfer(\''.$patient['encounter_nr'].'\')" title="'.$LDTransferPatient.'"><img '.createComIcon($root_path,'xchange.gif','0').' alt="'.$LDTransferPatient.'"></a>
 		 <a href="javascript:release(\''.$patient['encounter_nr'].'\')" title="'.$LDReleasePatient.'"><img '.createComIcon($root_path,'bestell.gif','0').' alt="'.$LDReleasePatient.'"></a>';
-		 //<a href="javascript:deletePatient(\''.$helper[r].'\',\''.$helper[b].'\',\''.$helper[t].'\',\''.$helper[ln].'\')"><img src="../img/delete.gif" border=0 width=19 height=19 alt="Löschen (Passwort erforderlich)"></a>';
+		 //<a href="javascript:deletePatient(\''.$helper[r].'\',\''.$helper[b].'\',\''.$helper[t].'\',\''.$helper[ln].'\')"><img src="../img/delete.gif" border=0 width=19 height=19 alt="Lï¿½schen (Passwort erforderlich)"></a>';
 
 
 		 $occ_list.='</nobr>

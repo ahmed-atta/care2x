@@ -15,7 +15,7 @@ $local_user='phonedir_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 # Load the Comm class and create comm (phone) object
-require_once($root_path.'include/care_api_classes/class_comm.php');
+require_once($root_path.'include/core/class_comm.php');
 $phone = & new Comm;
 
 //$db->debug=true;

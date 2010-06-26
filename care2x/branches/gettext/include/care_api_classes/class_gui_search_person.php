@@ -5,14 +5,14 @@
 
 /**
 */
-//require_once($root_path.'include/care_api_classes/class_core.php');
+//require_once($root_path.'include/core/class_core.php');
 /**
 *  GUI person search methods.
 * Dependencies:
 * assumes the following files are in the given path
-* /include/care_api_classes/class_person.php
-* /include/care_api_classes/class_paginator.php
-* /include/care_api_classes/class_globalconfig.php
+* /include/core/class_person.php
+* /include/core/class_paginator.php
+* /include/core/class_globalconfig.php
 * /include/helpers/inc_date_format_functions.php
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
@@ -185,10 +185,10 @@ class GuiSearchPerson {
 		$GLOBAL_CONFIG=array();
 
 		#Load and create paginator object
-		include_once($root_path.'include/care_api_classes/class_paginator.php');
+		include_once($root_path.'include/core/class_paginator.php');
 		$pagen=new Paginator($pgx,$this->thisfile,$_SESSION['sess_searchkey'],$root_path);
 
-		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		include_once($root_path.'include/core/class_globalconfig.php');
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 		$glob_obj->getConfig('person_id_%');
 
@@ -224,7 +224,7 @@ class GuiSearchPerson {
 
 			include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
-			include_once($root_path.'include/care_api_classes/class_person.php');
+			include_once($root_path.'include/core/class_person.php');
 			$person=& new Person();
 
 			# Set the sorting directive

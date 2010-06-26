@@ -3,7 +3,7 @@
 * @package care_api
 */
 /** */
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 /**
 * Class for session time out routines.
 *

@@ -24,7 +24,7 @@ $myThumb->getThumbData( 'width' ) // This will get you pixel width of thumbnail 
 
 # This is required for the gd_version method needed in this class
 
-require_once($root_path.'include/care_api_classes/class_image.php');
+require_once($root_path.'include/core/class_image.php');
 
 class Thumbnail extends Image {
 	
@@ -111,7 +111,7 @@ class Thumbnail extends Image {
 		{
 
 		# Modified by Elpidio Latorilla 2004-03-27
-		# Uses the gd_version method of the Image class from /include/care_api_classes/class_image.ph
+		# Uses the gd_version method of the Image class from /include/core/class_image.ph
 
 		if($this->gd_version>=2) $img_des = @ImageCreateTrueColor ( $this->GetThumbData('width'), $this->GetThumbData('height') );
 			else $img_des = ImageCreate( $this->GetThumbData('width'), $this->GetThumbData('height') );

@@ -16,7 +16,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 ///$db->debug = true;
 $thisfile=basename(__FILE__);
 /* Load the ward object */
-require_once($root_path.'include/care_api_classes/class_ward.php');
+require_once($root_path.'include/core/class_ward.php');
 $ward_obj=new Ward($ward_nr);
 
 $rows=0;
@@ -37,7 +37,7 @@ $rows=0;
 				// Get all medical departments
 				/* Load the dept object */
 /*				if($edit){
-					include_once($root_path.'include/care_api_classes/class_department.php');
+					include_once($root_path.'include/core/class_department.php');
 					$dept=new Department;							
 					$depts=&$dept->getAllMedical();
 				}
@@ -105,7 +105,7 @@ $rows=0;
 					$ward=$wards->FetchRow();
 					# globalize ward values
 					extract($ward);
-					# Get ward´s active rooms info
+					# Get wardï¿½s active rooms info
 					$rooms=&$ward_obj->getAllActiveRoomsInfo($ward['nr']);
 				}else{
 					$rooms=$ward_obj->countCreatedRooms();

@@ -19,7 +19,7 @@ define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 # Load the template class
-require_once($root_path.'include/care_api_classes/class_template.php');
+require_once($root_path.'include/core/class_template.php');
 # Create the template object
 $TP_obj=new Template($root_path);
 
@@ -48,10 +48,10 @@ if(!isset($sickform_style)){
 //require_once($root_path.'include/helpers/inc_config_color.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'modules/news/includes/inc_editor_fx.php');
-require_once($root_path.'include/care_api_classes/class_person.php');
+require_once($root_path.'include/core/class_person.php');
 
 # Load the encounter class
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter($_SESSION['sess_full_en']);
 
 if(!isset($mode)||empty($mode)){
@@ -100,7 +100,7 @@ if(isset($pid) && ($pid!='')) {
 	}
 }
 
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 
@@ -112,7 +112,7 @@ $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer);
 $_SESSION['sess_file_return']=$thisfile;
 
 /* Load all  medical depts info */
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 $dept_med=$dept_obj->getAllMedical();
 

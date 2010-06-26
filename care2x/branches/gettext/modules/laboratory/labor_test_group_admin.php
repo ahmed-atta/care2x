@@ -22,7 +22,7 @@ $thisfile=basename(__FILE__);
 ///$db->debug=true;
 
 # Create lab object
-require_once($root_path.'include/care_api_classes/class_lab.php');
+require_once($root_path.'include/core/class_lab.php');
 $lab_obj=new Lab();
 
 # Load the date formatter */

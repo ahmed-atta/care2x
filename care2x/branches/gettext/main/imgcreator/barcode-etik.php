@@ -56,15 +56,15 @@ if($dblink_ok) {
 	//$date_format=getDateFormat($link,$DBLink_OK);
 
 	/* Get the patient global configs */
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	include_once($root_path.'include/core/class_globalconfig.php');
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 	$glob_obj->getConfig('patient_%');
 
 	# Create insurance object
-	include_once($root_path.'include/care_api_classes/class_insurance.php');
+	include_once($root_path.'include/core/class_insurance.php');
 	$ins_obj=new Insurance;
 
-	include_once($root_path.'include/care_api_classes/class_ward.php');
+	include_once($root_path.'include/core/class_ward.php');
 	$obj=new Ward;
 	# Get location data
 	$location=&$obj->EncounterLocationsInfo($en);

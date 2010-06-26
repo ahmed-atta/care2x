@@ -7,7 +7,7 @@ define('LANG_FILE','obstetrics.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 # Create obstetrics object and get all neonatal classifications
-require_once($root_path.'include/care_api_classes/class_obstetrics.php');
+require_once($root_path.'include/core/class_obstetrics.php');
 $neo=new Obstetrics;
 $classif= &$neo->Classifications();
 $rows=$neo->LastRecordCount();

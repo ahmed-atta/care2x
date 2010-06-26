@@ -19,8 +19,8 @@ $lang_tables[]='doctors.php';
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/care_api_classes/class_department.php');
-require_once($root_path.'include/care_api_classes/class_comm.php');
+require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'include/core/class_comm.php');
 
 $breakfile='dept_list.php'.URL_APPEND;
 
@@ -143,7 +143,7 @@ if(!empty($mode)&&!$inputerror){
 		}
 		case 'select':
 		{
-			# Get department´s information
+			# Get departmentï¿½s information
 			$dept=$dept_obj->getDeptAllInfo($dept_nr);
 			//while(list($x,$v)=each($dept)) $$x=$v;
 			extract($dept);

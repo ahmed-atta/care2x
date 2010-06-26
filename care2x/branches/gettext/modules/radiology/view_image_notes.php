@@ -9,7 +9,7 @@ define('LANG_FILE','radio.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if(isset($nr)&&$nr){
-	require_once($root_path.'include/care_api_classes/class_image.php');
+	require_once($root_path.'include/core/class_image.php');
 	$img=new Image;
 	$img_notes=$img->ImgNotes($nr);
 }

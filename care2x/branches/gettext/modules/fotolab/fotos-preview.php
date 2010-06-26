@@ -42,7 +42,7 @@ if($disc_pix_mode){
 }
 if(isset($pn)&&$pn){
 	/* Create image object */
-	include_once($root_path.'include/care_api_classes/class_image.php');
+	include_once($root_path.'include/core/class_image.php');
 	$img_obj=new Image();
 	//$db->debug=true;
 	if(isset($mode)&&$mode=='save'){
@@ -122,7 +122,7 @@ list($w,$h,$t,$wh)=getImageSize($picsource); // get the size of the image
 
 if(isset($bShowImageJApplet) && $bShowImageJApplet){
 	#
-	# Set applet´s dimensions
+	# Set appletï¿½s dimensions
 	#
 	$iAppletHeight=$h + IMAGEJ_PANEL_HEIGHT;
 
