@@ -567,7 +567,7 @@ echo '
     </tr>';
  /*   <tr>
       <td bgcolor="#f3f3f3" align=right><FONT face="Verdana,Helvetica,Arial" size=2 color="#000080">Anhang:</td>
-      <td  bgcolor="#f3f3f3"><input type="button" name="attach"  value="Einf�gen/Aktualisieren" ></td>
+      <td  bgcolor="#f3f3f3"><input type="button" name="attach"  value="Einf'gen/Aktualisieren" ></td>
     </tr>
 */
  		echo'

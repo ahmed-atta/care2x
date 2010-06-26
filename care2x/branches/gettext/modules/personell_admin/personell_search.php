@@ -45,7 +45,7 @@ if(!isset($searchkey)) $searchkey='';
 if(!isset($mode)) $mode='';
 
 
-# Initialize page�s control variables
+# Initialize page's control variables
 if($mode=='paginate'){
 	$searchkey=$_SESSION['sess_searchkey'];
 }else{

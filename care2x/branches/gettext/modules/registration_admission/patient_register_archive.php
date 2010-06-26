@@ -32,7 +32,7 @@ $target='archiv';
 
 $error=0;
 
-# Initialize page�s control variables
+# Initialize page's control variables
 if($mode=='paginate'){
 	$searchkey=$_SESSION['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';

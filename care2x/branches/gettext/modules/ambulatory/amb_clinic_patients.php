@@ -79,13 +79,13 @@ if(($mode=='')||($mode=='fresh')){
 	# set to edit mode
 	$edit=true;
 	
-		# Create the waiting outpatients� list
+		# Create the waiting outpatients' list
 		$dnr=(isset($w_waitlist)&&$w_waitlist) ? 0 : $dept_nr;
 		$waitlist=&$enc_obj->createWaitingOutpatientList($dnr);
 		$waitlist_count=$enc_obj->LastRecordCount();
 		//echo $waitlist_count.'<p>'.$enc_obj->getLastQuery();
 		
-		# Get the doctor�s on duty information
+		# Get the doctor's on duty information
 		#### Start of routine to fetch doctors on duty
 		$elem='duty_1_pnr';
 		if(SHOW_DOC_2) $elem.=',duty_2_pnr';
@@ -424,151 +424,6 @@ if($rows){
 
 # Assign href  for  bottom close button
 $smarty->assign('pbClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp');
-
-/*
-if($rows){
-
-	if($s_date<date('Y-m-d')){
-	 	echo '
-		<font face="verdana,arial" size="2"><img '.createComIcon($root_path,'warn.gif','0','absmiddle').'> <font color="#ff0000"><b>'.$LDAttention.'</font> '.$LDOldList.'</b></font> ';
-		$edit=0;
-	}
-
-# Start here, create the occupancy list
-
-$occ_list='<table  cellpadding="0" cellspacing=0 border="0" >';
-
-$occ_list.='<tr bgcolor="#0000dd" align=center>';
-# Add the description row
-
-$occ_list.='
-	<td><font face="verdana,arial" size="2" color="#ffffff"><b>'.$LDTime.'&nbsp;&nbsp;</b></td>
-	<td><font face="verdana,arial" size="2" color="#ffffff"><b>&nbsp;</b></td>
-	<td><font face="verdana,arial" size="2" color="#ffffff"><b>&nbsp;</b></td>
-	<td><font face="verdana,arial" size="2" color="#ffffff"><b>'.$LDLastName.'&nbsp;&nbsp;</b></td>
-	<td><font face="verdana,arial" size="2" color="#ffffff"><b>'.$LDName.'&nbsp;&nbsp;</b></td>
-	<td><font face="verdana,arial" size="2" color="#ffffff"><b>'.$LDBirthDate.' &nbsp;&nbsp;</b></td>
-	<td><font face="verdana,arial" size="2" color="#ffffff"><b>'.$LDFinanceType.'&nbsp;&nbsp;</b></td>
-	<td><font face="verdana,arial" size="2" color="#ffffff"><b>'.$LDAdm_Nr.'&nbsp;&nbsp;</b></td>
-	<td><font face="verdana,arial" size="2" color="#ffffff"><b>'.$LDOptions.'&nbsp;&nbsp;</b></td>';
-	
-
-$occ_list.= '</tr>';
-
-$opat_obj->MoveFirst();
-
-$toggle=1;
-$room_info=array();
-$males=0;
-$females=0;
-while ($patient=$opat_obj->FetchRow()){
- 	
-	# set row color
-	$occ_list.='
-			<tr bgcolor=';
-	if ($toggle) $occ_list.='"#fefefe">'; else $occ_list.='"#dfdfdf">';
-	
-	$toggle=!$toggle;
-
-	$occ_list.='
-			<td><font face="verdana,arial" size="2"';
-	# If appt time is past the now time, color font with red
-	if($patient['time']<$tnow) $occ_list.=' color="red"';
-		elseif(($patient['time']>=$tnow)&&($patient['time']<=$tnow)) $occ_list.=' color="green"';
-	$occ_list.='>';
-	if($patient['time']) $occ_list.=convertTimeToLocal($patient['time'],$date_format);
-	$occ_list.='&nbsp;</td><td>';
-	# If edit show small color bars
-	if($edit)
-	{  
-		 $occ_list.='<a href="javascript:getinfo(\''.$patient['encounter_nr'].'\')" title="'.$LDSetColorRider.'">
-		 <img src="'.$root_path.'main/imgcreator/imgcreate_colorbar_small.php'.URL_APPEND.'&pn='.$patient['encounter_nr'].'" alt="'.$LDSetColorRider.'" align="absmiddle" border=0 width=80 height=18>
-		 </a>';
-    }
-	$occ_list.='&nbsp;
-			</td>
-			<td align=center><font face="verdana,arial" size="2" >';
-	# If patient, show images by sex
-	$occ_list.='<a href="javascript:popPic(\''.$patient['pid'].'\')" title="'.$LDShowPhoto.'">';
-		switch(strtolower($patient['sex']))
-		{
-			case 'f': $occ_list.='<img '.createComIcon($root_path,'spf.gif','0'); $females++; break;
-			case 'm': $occ_list.='<img '.createComIcon($root_path,'spm.gif','0'); $males++; break;
-			default: $occ_list.='<img '.createComIcon($root_path,'bn.gif','0');break;
-		}
-
-	 $occ_list.=' alt="'.$LDShowPhoto.'"></a>';
-
-	$occ_list.='&nbsp;
-	</td>';
-	$occ_list.='
-			<td><font face="verdana,arial" size="2" >';
-	# Show the patients name with link to open charts
-	if($edit)
-	{
-	  //$occ_list.='<a href="javascript:';
-	   //$occ_list.='getinfo(\''.$patient['encounter_nr'].'\')" title="'.$LDShowPatData.'">'; 
-	  $occ_list.='<a href="'.$root_path.'modules/registration_admission/aufnahme_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$patient['encounter_nr'].'" title="'.$LDAdmissionData.' : '.$LDClk2Show.'">';
-	}
-
-	$occ_list.=ucfirst($patient['title']).' ';
-		
-	 $occ_list.=ucfirst($patient['name_last']); 
-	
-	if($edit) $occ_list.='</a>';
-			
-	
-	$occ_list.='&nbsp;
-	</td><td><font face="verdana,arial" size="2">'.ucfirst($patient['name_first']);
-
-	
-	$occ_list.='&nbsp;
-			</td><td align=right><font face="verdana,arial" size="2">&nbsp;';
-			
-    if($patient['date_birth'])
-	{
-	   $occ_list.=formatDate2Local($patient['date_birth'],$date_format);
-    }
-	$occ_list.='&nbsp;
-			</td><td ><font face="verdana,arial" size="2" >&nbsp;';
-	if($patient['insurance_class_nr']!=2) $occ_list.='<font color="#ff0000">';
-	if(isset($$patient['LD_var'])&&!empty($$patient['LD_var'])) $occ_list.=$$patient['LD_var'];
-		else $occ_list.=$patient['insurance_name'];
-	$occ_list.='&nbsp;
-	</td>
-	<td><font face="verdana,arial" size="2">&nbsp;'.$patient['encounter_nr'].'&nbsp;
-	</td>';
-	
-	if($edit)
-	{
-		$occ_list.='
-			<td><nobr>&nbsp;';
-			
-		$occ_list.='<a href="'.$root_path.'modules/registration_admission/aufnahme_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$patient['encounter_nr'].'" title="'.$LDAdmissionData.' : '.$LDClk2Show.'">';
-		$occ_list.='<img '.createComIcon($root_path,'pdata.gif','0').' alt="'.$LDAdmissionData.' : '.$LDClk2Show.'"></a>';
-		$occ_list.='
-		<a href="javascript:getinfo(\''.$patient['encounter_nr'].'\')" title="'.$LDShowPatData.'"><img '.createComIcon($root_path,'open.gif','0').' alt="'.$LDShowPatData.'"></a>
-	 	<a href="javascript:getrem(\''.$patient['encounter_nr'].'\')" title="'.$LDNoticeRW.'"><img ';
-		if($patient['notes']) $occ_list.=createComIcon($root_path,'bubble3.gif','0'); else $occ_list.=createComIcon($root_path,'bubble2.gif','0');
-		$occ_list.=' alt="'.$LDNoticeRW.'"></a>';
-		$occ_list.='&nbsp;<a href="javascript:Transfer(\''.$patient['encounter_nr'].'\')" title="'.$LDTransferPatient.'"><img '.createComIcon($root_path,'xchange.gif','0').' alt="'.$LDTransferPatient.'"></a>
-		 <a href="javascript:release(\''.$patient['encounter_nr'].'\')" title="'.$LDReleasePatient.'"><img '.createComIcon($root_path,'bestell.gif','0').' alt="'.$LDReleasePatient.'"></a>';
-		 //<a href="javascript:deletePatient(\''.$helper[r].'\',\''.$helper[b].'\',\''.$helper[t].'\',\''.$helper[ln].'\')"><img src="../img/delete.gif" border=0 width=19 height=19 alt="L�schen (Passwort erforderlich)"></a>';
-
-
-		 $occ_list.='</nobr>
-	 	</td>
-		</tr>
-		 <tr><td bgcolor="#0000ee" colspan="9"><img '.createComIcon($root_path,'pixel.gif').'></td></tr> 
-	 	';
-	}
-}	
-# Final occupancy list line
-$occ_list.='</table>';
-}
-
-echo $occ_list;
-*/
 
 # Declare template items
 $TP_DOC1_BLOCK='';

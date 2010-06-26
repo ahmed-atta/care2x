@@ -35,7 +35,7 @@ if(!isset($mode)){
 $keyword=trim($keyword);
 $toggle=0;
 
-# Initialize page�s control variables
+# Initialize page's control variables
 if($mode=='paginate'){
 	$keyword=$_SESSION['sess_searchkey'];
 }else{

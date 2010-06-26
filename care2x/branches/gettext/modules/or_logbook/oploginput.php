@@ -50,7 +50,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 # Consider search and paginate modes separately
 if($mode=='search'||$mode=='paginate'){
 
-		# Initialize page�s control variables
+		# Initialize page's control variables
 		if($mode=='paginate'){
 			$sk=$_SESSION['sess_searchkey'];
 			//$searchkey='USE_SESSION_SEARCHKEY';
@@ -404,7 +404,7 @@ function isnum(val,idx)
 			}
 			
 			
-//			alert("Zeitangabe ist ung�ltig! (ausserhalb des 24H Zeitrahmens)");
+//			alert("Zeitangabe ist ung'ltig! (ausserhalb des 24H Zeitrahmens)");
 	
 		}
 		switch(v3.length)

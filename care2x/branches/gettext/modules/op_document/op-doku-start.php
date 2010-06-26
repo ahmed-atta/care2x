@@ -145,7 +145,7 @@ if($mode=='save')
 	
 	if($mode=='search'||$mode=='paginate'){	# Filter the search and paginate modes
 
-		# Initialize page�s control variables
+		# Initialize page's control variables
 		if($mode=='paginate'){
 			$searchkey=$_SESSION['sess_searchkey'];
 			//$searchkey='USE_SESSION_SEARCHKEY';

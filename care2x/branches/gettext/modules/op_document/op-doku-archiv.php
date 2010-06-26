@@ -58,7 +58,7 @@ $patientselected=FALSE;
 
 function clean_it(&$d)
 {
-	$d=strtr($d,"�!�$&/()=?`�+'#{}[]\^","~~~~~~~~~~~~~~~~~~~~~");
+	$d=strtr($d,"'!'$&/()=?`'+'#{}[]\^","~~~~~~~~~~~~~~~~~~~~~");
 	$d=str_replace("\"","~",$d);   //"
 	$d=str_replace("~","",$d);
 	return trim($d);
@@ -69,7 +69,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
     
 
 if($mode=='search'||$mode=='paginate'){
-	# Initialize page�s control variables
+	# Initialize page's control variables
 	if($mode!='paginate'){
 		# Reset paginator variables
 		$pgx=0;

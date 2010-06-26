@@ -167,7 +167,7 @@ function isnum(val,idx)
 			}
 			
 			
-//			alert("Zeitangabe ist ung�ltig! (ausserhalb des 24H Zeitrahmens)");
+//			alert("Zeitangabe ist ung'ltig! (ausserhalb des 24H Zeitrahmens)");
 	
 		}
 		switch(v3.length)

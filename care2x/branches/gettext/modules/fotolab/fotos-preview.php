@@ -122,7 +122,7 @@ list($w,$h,$t,$wh)=getImageSize($picsource); // get the size of the image
 
 if(isset($bShowImageJApplet) && $bShowImageJApplet){
 	#
-	# Set applet�s dimensions
+	# Set applet's dimensions
 	#
 	$iAppletHeight=$h + IMAGEJ_PANEL_HEIGHT;
 

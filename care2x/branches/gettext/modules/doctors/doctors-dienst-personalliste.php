@@ -82,7 +82,7 @@ if(!empty($ipath)){
 
 $append='&retpath='.$retpath.'&ipath='.$ipath;
 
-# Initialize page�s control variables
+# Initialize page's control variables
 if($mode=='paginate'){
 	$searchkey=$_SESSION['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
