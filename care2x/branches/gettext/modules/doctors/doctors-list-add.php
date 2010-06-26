@@ -20,7 +20,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 //$db->debug=true;
 
-require_once($root_path.'include/core/class_personell.php');
+require_once($root_path.'modules/personell_admin/model/class_personell.php');
 $pers_obj=new Personell;
 $pers_obj->useAssignmentTable();
 $data=array();

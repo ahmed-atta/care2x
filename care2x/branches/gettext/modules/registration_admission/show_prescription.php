@@ -17,7 +17,7 @@ $thisfile=basename(__FILE__);
 if(!isset($mode)){
 	$mode='show';
 } elseif($mode=='create'||$mode=='update') {
-	include_once($root_path.'include/core/class_prescription.php');
+	include_once($root_path.'modules/nursing/model/class_prescription.php');
 	if(!isset($obj)) $obj=new Prescription;
 	include_once($root_path.'include/helpers/inc_date_format_functions.php');
 	

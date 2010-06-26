@@ -8,7 +8,7 @@ define('LANG_FILE','products.php');
 $local_user='ck_supply_db_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/core/class_supplier.php');
+require_once($root_path.'modules/supplier/model/class_supplier.php');
 $supplier_obj=new Supplier;
 
 $sendok=false;

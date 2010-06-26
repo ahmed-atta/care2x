@@ -42,7 +42,7 @@ if($disc_pix_mode){
 }
 if(isset($pn)&&$pn){
 	/* Create image object */
-	include_once($root_path.'include/core/class_image.php');
+	include_once($root_path.'modules/fotolab/model/class_image.php');
 	$img_obj=new Image();
 	//$db->debug=true;
 	if(isset($mode)&&$mode=='save'){

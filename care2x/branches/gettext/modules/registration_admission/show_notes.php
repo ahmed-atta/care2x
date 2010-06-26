@@ -7,7 +7,7 @@ $thisfile=basename(__FILE__);
 
 if(!isset($type_nr)||!$type_nr) $type_nr=1; //* 1 = history physical notes
 
-require_once($root_path.'include/core/class_notes.php');
+require_once($root_path.'modules/nursing/model/class_notes.php');
 $obj=new Notes;
 $types=$obj->getAllTypesSort('name');
 $this_type=$obj->getType($type_nr);

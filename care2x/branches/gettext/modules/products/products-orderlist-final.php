@@ -9,7 +9,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department();
-require_once($root_path.'include/core/class_product.php');
+require_once($root_path.'modules/products/model/class_product.php');
 $product_obj=new Product();
 $sendok=false;
 $ofinal=false;

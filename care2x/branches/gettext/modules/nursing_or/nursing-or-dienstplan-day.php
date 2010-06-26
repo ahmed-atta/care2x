@@ -54,7 +54,7 @@ if($ergebnis=$db->Execute($sql)){
 
 //echo $sql;
 
-require_once($root_path.'include/core/class_personell.php');
+require_once($root_path.'modules/personell_admin/model/class_personell.php');
 $pers_obj=new Personell;
 
 if($pnr=$duty1['ha'.$offset_day]){

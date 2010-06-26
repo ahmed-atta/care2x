@@ -168,7 +168,7 @@ class GuiPersonShow {
 
 		include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
-		include_once($root_path.'include/core/class_insurance.php');
+		include_once($root_path.'modules/insurance_co/model/class_insurance.php');
 		$pinsure_obj=new PersonInsurance($this->pid);
 
 		# Get the global config for person�s registration form

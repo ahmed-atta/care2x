@@ -128,7 +128,7 @@ define('_BATCH_NR_INIT_',10000000);
 */
 						
 /* Here begins the real work */
-include_once($root_path.'include/core/class_lab.php');
+include_once($root_path.'modules/laboratory/model/class_lab.php');
 $lab_obj = new Lab;
 
 /* Check for the patietn number = $pn. If available get the patients data, otherwise set edit to 0 */

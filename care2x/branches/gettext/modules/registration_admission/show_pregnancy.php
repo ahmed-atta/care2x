@@ -11,12 +11,12 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 $thisfile=basename(__FILE__);
-require_once($root_path.'include/core/class_obstetrics.php');
+require_once($root_path.'modules/registration_admission/model/class_obstetrics.php');
 $obj=new Obstetrics;
 # Point the core data to pregnancy
 $obj->usePregnancy();
 # Create measurement object
-require_once($root_path.'include/core/class_measurement.php');
+require_once($root_path.'modules/registration_admission/model/class_measurement.php');
 $msr=new Measurement;
 
 

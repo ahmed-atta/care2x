@@ -55,7 +55,7 @@ else
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/helpers/inc_db_makelink.php');
 if($dblink_ok){
-	include_once($root_path.'include/core/class_personell.php');
+	include_once($root_path.'modules/personell_admin/model/class_personell.php');
 	$pers_obj=new Personell();
 	if($pers_row=$pers_obj->getNursesOfDept($dept_nr)){
 		$datafound=1;

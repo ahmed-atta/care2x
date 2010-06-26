@@ -26,7 +26,7 @@ $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'include/core/class_person.php');
-require_once($root_path.'include/core/class_insurance.php');
+require_once($root_path.'modules/insurance_co/model/class_insurance.php');
 
 
 $insurance_obj=new PersonInsurance;
@@ -70,7 +70,7 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('person_%');
 
 
-require_once($root_path.'include/core/class_insurance.php');
+require_once($root_path.'modules/insurance_co/model/class_insurance.php');
 $insurance_obj=new Insurance;
 
 

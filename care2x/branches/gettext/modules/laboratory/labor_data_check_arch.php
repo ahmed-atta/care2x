@@ -13,7 +13,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/core/class_lab.php');
+require_once($root_path.'modules/laboratory/model/class_lab.php');
 
 $thisfile='labor_data_check_arch.php';
 $breakfile='labor_data_patient_such.php'.URL_APPEND.'&mode=edit';

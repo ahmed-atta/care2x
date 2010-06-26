@@ -4,7 +4,7 @@ require('./roots.php');
 require($root_path.'include/helpers/inc_environment_global.php');
 include_once($root_path.'include/helpers/inc_date_format_functions.php');
 global $db;
-include_once($root_path.'include/core/class_prescription.php');
+include_once($root_path.'modules/nursing/model/class_prescription.php');
 if(!isset($objPrescription))
 $objPrescription=new Prescription;
 $app_types=$objPrescription->getAppTypes();

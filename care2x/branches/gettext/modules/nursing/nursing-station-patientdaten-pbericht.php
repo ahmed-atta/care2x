@@ -23,7 +23,7 @@ $breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$statio
 require_once($root_path.'include/core/class_encounter.php');
 $enc_obj= new Encounter;
 /* Create nursing notes object */
-require_once($root_path.'include/core/class_notes_nursing.php');
+require_once($root_path.'modules/nursing/model/class_notes_nursing.php');
 $report_obj= new NursingNotes;
 /* Load global configs */
 require_once($root_path.'include/core/class_globalconfig.php');

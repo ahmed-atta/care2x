@@ -3,7 +3,7 @@
 
 //gjergji
 
-include_once($root_path.'include/core/class_prescription.php');
+include_once($root_path.'modules/nursing/model/class_prescription.php');
 if(!isset($pres_obj)) $pres_obj=new Prescription;
 $app_types=$pres_obj->getAppTypes();
 $pres_types=$pres_obj->getPrescriptionTypes();

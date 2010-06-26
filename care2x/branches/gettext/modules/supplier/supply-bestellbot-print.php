@@ -158,7 +158,7 @@ function parentref(n) {
 <?php
 if($rows){
 	 # Create supplier object
-     include_once($root_path.'include/core/class_supplier.php');
+     include_once($root_path.'modules/supplier/model/class_supplier.php');
 	 $supplier=new Supplier;
 	 echo $supplier->FormalName($supplier_nr);
 //++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++

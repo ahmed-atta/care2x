@@ -16,11 +16,11 @@ $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/core/class_encounter.php');
 require_once($root_path.'include/core/class_person.php');
-require_once($root_path.'include/core/class_insurance.php');
+require_once($root_path.'modules/insurance_co/model/class_insurance.php');
 require_once($root_path.'include/core/class_ward.php');
 require_once($root_path.'include/core/class_globalconfig.php');
 require_once($root_path.'modules/ecombill/model/class_ecombill.php');
-require_once($root_path.'include/core/class_personell.php');
+require_once($root_path.'modules/personell_admin/model/class_personell.php');
 
 if(!isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod'] = "";
 # Create objects

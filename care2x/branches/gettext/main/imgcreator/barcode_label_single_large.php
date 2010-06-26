@@ -18,7 +18,7 @@ if ($obj->loadEncounterData ( $en )) {
 }
 
 # Create insurance object
-include_once ($root_path . 'include/core/class_insurance.php');
+include_once ($root_path . 'modules/insurance_co/model/class_insurance.php');
 $ins_obj = new Insurance ( );
 
 $fen = $en;

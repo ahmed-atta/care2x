@@ -19,7 +19,7 @@ if(isset($user_origin)&&$user_origin=='pers'){
 	$sBreakUrl = 'phone.php'.URL_APPEND;
 }
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/core/class_personell.php');
+require_once($root_path.'modules/personell_admin/model/class_personell.php');
 
 /* Create employee object */
 $employee=new Personell();

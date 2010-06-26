@@ -24,7 +24,7 @@ if (!isset($userck))
     } 
     $rows = 0;
     // Create the product object
-    include_once($root_path . 'include/core/class_product.php');
+    include_once($root_path . 'modules/products/model/class_product.php');
     $product = new Product;
     $ergebnis = &$product->PendingOrders($cat);
     $rows = $product->LastRecordCount();

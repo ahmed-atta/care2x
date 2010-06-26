@@ -13,7 +13,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 $thisfile=basename(__FILE__);
 
 # Create measurement object
-require_once($root_path.'include/core/class_medocs.php');
+require_once($root_path.'modules/medocs/model/class_medocs.php');
 $obj=new Medocs;
 
 if(!isset($mode)) $mode='show';

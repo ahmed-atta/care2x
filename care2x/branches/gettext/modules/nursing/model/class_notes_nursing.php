@@ -10,7 +10,7 @@
 /**
 */
 require_once($root_path.'include/core/class_core.php');
-require_once($root_path.'include/core/class_notes.php');
+require_once($root_path.'modules/nursing/model/class_notes.php');
 
 /**
 *  Nursing Notes and Documentation methods.

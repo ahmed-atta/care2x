@@ -8,7 +8,7 @@ $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 # Create the notes object
-require_once($root_path.'include/core/class_notes.php');
+require_once($root_path.'modules/nursing/model/class_notes.php');
 $obj=new Notes;
 # Load the notes
 if($n_obj=&$obj->getEncounterNotes($nr)) $notes=$n_obj->FetchRow();

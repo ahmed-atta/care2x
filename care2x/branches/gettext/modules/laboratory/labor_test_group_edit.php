@@ -23,7 +23,7 @@ $thisfile = basename ( __FILE__ ) ;
 
 
 # Create lab object
-require_once ($root_path . 'include/core/class_lab.php') ;
+require_once ($root_path . 'modules/laboratory/model/class_lab.php') ;
 $lab_obj = new Lab ( ) ;
 
 # Load the date formatter */

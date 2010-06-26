@@ -61,7 +61,7 @@ if($search&&!empty($keyword)){
 	# Load the date formatter 
 	include_once($root_path.'include/helpers/inc_date_format_functions.php');
     
-	include_once($root_path.'include/core/class_lab.php');
+	include_once($root_path.'modules/laboratory/model/class_lab.php');
 	
 	$lab_obj=new Lab();
 	

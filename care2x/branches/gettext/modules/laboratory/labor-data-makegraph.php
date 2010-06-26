@@ -35,7 +35,7 @@ require_once($root_path.'include/helpers/inc_config_color.php');
 $thisfile=basename(__FILE__);
 
 /* Create encounter object */
-require_once($root_path.'include/core/class_lab.php');
+require_once($root_path.'modules/laboratory/model/class_lab.php');
 $enc_obj= new Encounter($encounter_nr);
 $lab_obj=new Lab($encounter_nr);
 

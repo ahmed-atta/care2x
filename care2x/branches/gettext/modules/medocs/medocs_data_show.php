@@ -13,7 +13,7 @@ $local_user='medocs_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/core/class_encounter.php');
 require_once($root_path.'include/core/class_person.php');
-require_once($root_path.'include/core/class_insurance.php');
+require_once($root_path.'modules/insurance_co/model/class_insurance.php');
 require_once($root_path.'include/core/class_ward.php');
 require_once($root_path.'include/core/class_globalconfig.php');
 
