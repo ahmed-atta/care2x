@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -32,7 +32,7 @@ if($user_origin=='lab')
   $breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
 
-require_once($root_path.'include/core/inc_front_chain_lang.php'); ///* invoke the script lock*/
+require_once($root_path.'include/helpers/inc_front_chain_lang.php'); ///* invoke the script lock*/
 require_once ('includes/inc_diagnostics_report_fx.php');
 
 $thisfile=basename(__FILE__);
@@ -55,7 +55,7 @@ $enc_obj=new Encounter;
 /* Here begins the real work */
  
 /* Load date formatter */
-    include_once($root_path.'include/core/inc_date_format_functions.php');
+    include_once($root_path.'include/helpers/inc_date_format_functions.php');
     
 	
 	/* Load editor functions */
@@ -116,7 +116,7 @@ $enc_obj=new Encounter;
 							      if($ergebnis=$enc_obj->Transact($sql)){
 									//echo $sql;
 								  	// Load the visual signalling functions
-									include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+									include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 									// Set the visual signal 
 									setEventSignalColor($pn,SIGNAL_COLOR_BLOOD_REQUEST);
 									//echo "blood";									
@@ -246,7 +246,7 @@ function printOut(){
     //testprintout<?php echo $sid ?>.print();
 }
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 //-->
 </script>
 <?php

@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -14,7 +14,7 @@ $lang_tables=array('aufnahme.php','prompt.php','departments.php','person.php');
 define('LANG_FILE','nursing.php');
 //define('NO_2LEVEL_CHK',1);
 $local_user='ck_pflege_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 if(empty($_COOKIE[$local_user.$sid])){
     $edit=0;
@@ -31,7 +31,7 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter($pn);
 
 # Load date formatter 
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
   
 if(($mode=='')||($mode=='fresh')){
 		
@@ -62,7 +62,7 @@ if(($mode=='')||($mode=='fresh')){
 		# Set the foto filename
 		$photo_filename=$encounter['photo_filename'];
 		/* Prepare the photo filename */
-		require_once($root_path.'include/core/inc_photo_filename_resolve.php');
+		require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 
 		# Get billing type
 		$billing_type=&$enc_obj->getInsuranceClassInfo($encounter['insurance_class_nr']);

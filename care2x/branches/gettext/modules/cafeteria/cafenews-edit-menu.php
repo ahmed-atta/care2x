@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,7 +12,7 @@ require_once($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','editor.php');
 $local_user='ck_cafenews_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 $breakfile='cafenews.php'.URL_APPEND;
 $returnfile='cafenews-edit-menu-select-week.php'.URL_APPEND;
 
@@ -66,12 +66,12 @@ if(!$mday)
 
 $dbtable="care_cafe_menu";
 /* Establish db connection */
-if(!isset($db) || !$db) include_once($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db) || !$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
 
 if($dblink_ok)
 {
 
-  include_once($root_path.'include/core/inc_date_format_functions.php');
+  include_once($root_path.'include/helpers/inc_date_format_functions.php');
   
 
 	 switch($mode)
@@ -175,7 +175,7 @@ function aligndate(&$ad,&$am,&$ay)
 .v18_b{ font-family:verdana,arial; color:#000066; font-size:18}
 </style>
 
-<?php require($root_path.'include/core/inc_css_a_hilitebu.php'); ?>
+<?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
 
 </head>
 

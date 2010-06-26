@@ -1,14 +1,14 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 
 $lang_tables=array('departments.php');
 define('LANG_FILE','ambulatory.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
-require($root_path.'include/core/inc_2level_reset.php');
+require($root_path.'include/helpers/inc_2level_reset.php');
 
 if(!isset($_SESSION['sess_path_referer'])) $_SESSION['sess_path_referer'] = "";
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;

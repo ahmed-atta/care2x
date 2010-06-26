@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 
 # Define to TRUE if you want to echo the actions
 # Note: might be useless in case of large number of persons.
@@ -30,7 +30,7 @@ $inmax=180;
 define('LANG_FILE','specials.php');
 //$local_user='aufnahme_user';
 define('NO_CHAIN',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 
 # Retrieve all available persons from the table according to selected sex

@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 //error_reporting(E_WARNING);
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
@@ -49,7 +49,7 @@ $lang_tables[] = 'departments.php';
 if($subtarget=='chemlabor') define('LANG_FILE','konsil_chemlabor.php');
  else define('LANG_FILE','konsil.php');
 
-require_once($root_path.'include/core/inc_front_chain_lang.php'); ///* invoke the script lock*/
+require_once($root_path.'include/helpers/inc_front_chain_lang.php'); ///* invoke the script lock*/
 
  /**
  * LOAD Smarty
@@ -145,7 +145,7 @@ if(isset($pn)&&$pn) {
 
 /* Here begins the real work */
 /* Load date formatter */
-     include_once($root_path.'include/core/inc_date_format_functions.php');
+     include_once($root_path.'include/helpers/inc_date_format_functions.php');
      
      /* Load editor functions */
 	 if(!isset($mode))   $mode="";
@@ -191,8 +191,8 @@ if($dept_obj->preloadDept($stored_request['testing_dept'])){
 <?php echo setCharSet(); ?>
  <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
 <?php
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 ?>
 <style type="text/css">

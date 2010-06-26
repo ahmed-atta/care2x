@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -36,16 +36,16 @@ function fCond($item,$k){
 
 define('LANG_FILE','aufnahme.php');
 $local_user='medocs_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-require_once($root_path.'include/core/inc_config_color.php');
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 
 
 
 if (isset($mode) && ($mode=='search'))
 {
-    if(!isset($db) || !$db) include_once($root_path.'include/core/inc_db_makelink.php');
+    if(!isset($db) || !$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
     if($dblink_ok) {
 	
 	$select="SELECT p.name_last,p.name_first,p.date_birth,e.encounter_nr,e.encounter_class_nr,e.is_discharged,e.encounter_date FROM ";

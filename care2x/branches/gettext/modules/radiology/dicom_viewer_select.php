@@ -1,13 +1,13 @@
 <?php 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 $lang_tables[]='actions.php';
 $lang_tables[]='prompt.php';
 define('LANG_FILE','radio.php');
 //$local_user='ck_radio_user';
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if(isset($mode)&&$mode=='save'&&isset($viewer)){
 	$_SESSION['sess_dicom_viewer']=$viewer;
 	 echo $viewer;

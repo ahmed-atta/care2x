@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -16,12 +16,12 @@ $local_user='ck_edv_user';
 
 ///$db->debug=true;
 
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 /**
 * The following require loads the access areas that can be assigned for
 * user permissions.
 */
-require($root_path.'include/core/inc_accessplan_areas_functions.php');
+require($root_path.'include/helpers/inc_accessplan_areas_functions.php');
 
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 //$returnfile=$_SESSION['sess_file_return'].URL_APPEND;
@@ -29,7 +29,7 @@ $returnfile='edv_user_role_edit.php'.URL_APPEND;
 $_SESSION['sess_file_return']=basename(__FILE__);
 
 /* Load the date formatter */
-include_once($root_path.'include/core/inc_date_format_functions.php');
+include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 $sql='SELECT * FROM care_user_roles ORDER BY role_name';
 

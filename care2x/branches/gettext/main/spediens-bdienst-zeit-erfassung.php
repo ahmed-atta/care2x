@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,7 +12,7 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 /* Check the date values */
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
@@ -29,7 +29,7 @@ if($retpath=='spec') $breakfile="spediens.php".URL_APPEND;
 
 /********************************* Resolve the department and op room ***********************/
 	    /* Load date formatter */
-        include_once($root_path.'include/core/inc_date_format_functions.php');
+        include_once($root_path.'include/helpers/inc_date_format_functions.php');
         
 		
 		if($mode=='save')
@@ -388,7 +388,7 @@ function isgdatum(val,idx)
 
 }
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 
 //-->
 </script>

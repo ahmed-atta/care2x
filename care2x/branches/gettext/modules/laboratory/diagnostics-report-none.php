@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
@@ -12,14 +12,14 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";
 ?>
 <?php html_rtl($lang); ?>
 <head>
 <title></title>
-<?php require($root_path.'include/core/inc_css_a_hilitebu.php'); ?>
+<?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
 </head>
 <body>
 

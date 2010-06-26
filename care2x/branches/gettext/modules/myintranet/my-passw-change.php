@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -13,7 +13,7 @@ require($root_path.'include/core/inc_environment_global.php');
 $lang_tables[]='stdpass.php';
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
@@ -23,7 +23,7 @@ if($n==$n2)
 	$screenall=1;
 	$fileforward="my-passw-change-update.php?sid=$sid&lang=$lang&userid=$userid&n=$n";
 	if ($pass=='check') 	
-		include($root_path.'include/core/inc_passcheck.php');
+		include($root_path.'include/helpers/inc_passcheck.php');
 }
 else $n_error=1;
 

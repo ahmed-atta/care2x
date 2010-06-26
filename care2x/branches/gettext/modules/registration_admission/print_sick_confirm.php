@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
@@ -17,7 +17,7 @@ $lang_tables=array('departments.php','legal.php','prompt.php');
 
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 # Load the template class
 require_once($root_path.'include/care_api_classes/class_template.php');
 # Create the template object
@@ -45,8 +45,8 @@ if(!isset($sickform_style)){
 	exit;
 }
 
-//require_once($root_path.'include/core/inc_config_color.php');
-require_once($root_path.'include/core/inc_date_format_functions.php');
+//require_once($root_path.'include/helpers/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'modules/news/includes/inc_editor_fx.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 

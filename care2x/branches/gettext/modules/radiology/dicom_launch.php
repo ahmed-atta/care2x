@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 
 # Switch to the selected dicom viewer module
 switch($_SESSION['sess_dicom_viewer']){
@@ -25,7 +25,7 @@ define('LANG_FILE','actions.php');
 //define('LANG_FILE','radio.php');
 //define('NO_2LEVEL_CHK',1);
 $local_user='ck_radio_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
 
 $thisfile=basename(__FILE__);

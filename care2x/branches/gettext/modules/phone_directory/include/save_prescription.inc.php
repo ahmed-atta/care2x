@@ -6,9 +6,9 @@ if (stristr('save_immunization.inc.php',$PHP_SELF))
 require_once($root_path.'include/care_api_classes/class_prescription.php');
 if(!isset($obj)) $obj=new Prescription;
 
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
-if(!isset($db)||!$db) include_once($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db)||!$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
 if($dblink_ok){
 	switch($mode)
 	{	

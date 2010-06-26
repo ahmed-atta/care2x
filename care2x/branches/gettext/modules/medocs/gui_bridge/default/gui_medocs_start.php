@@ -66,7 +66,7 @@ function settitle(d)
 	else document.aufnahmeform.anrede.selectedIndex=1;
 }
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 
 -->
 </script>
@@ -118,7 +118,7 @@ $entry_body_bgcolor='#ffffff';
 	       $search_script='medocs_data_search.php';
 		   $user_origin='admit';
 		   
-            include($root_path.'include/core/inc_patient_searchmask.php');
+            include($root_path.'include/helpers/inc_patient_searchmask.php');
        
 	   ?>
 	</td>

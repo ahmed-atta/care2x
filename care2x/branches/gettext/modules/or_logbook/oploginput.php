@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -20,7 +20,7 @@ define('REDIRECT_SINGLERESULT',1);
 $lang_tables[]='search.php';
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 # Added intrusion trap
 if (!$internok&&!$_COOKIE['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
@@ -45,7 +45,7 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 
 # Load the date formatter 
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 # Consider search and paginate modes separately
 if($mode=='search'||$mode=='paginate'){
@@ -570,8 +570,8 @@ function openDRGComposite()
 .v10_n{font-family:verdana;font-size:10;color=#0000cc;}
 </style>
 <?php
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 

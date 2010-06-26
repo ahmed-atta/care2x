@@ -1,11 +1,11 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['radio'];
@@ -21,11 +21,11 @@ $userck='ck_radio_user';
 //reset cookie;
 // reset all 2nd level lock cookies
 setcookie($userck.$sid,'');
-require($root_path.'include/core/inc_2level_reset.php'); setcookie(ck_2level_sid.$sid,'');
+require($root_path.'include/helpers/inc_2level_reset.php'); setcookie(ck_2level_sid.$sid,'');
 
-require($root_path.'include/core/inc_passcheck_internchk.php');
+require($root_path.'include/helpers/inc_passcheck_internchk.php');
 if ($pass=='check') 	
-	include($root_path.'include/core/inc_passcheck.php');
+	include($root_path.'include/helpers/inc_passcheck.php');
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

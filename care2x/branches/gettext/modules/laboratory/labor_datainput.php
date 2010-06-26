@@ -3,7 +3,7 @@ define(COL_MAX,6); # define here the maximum number of rows for displaying the p
 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
  * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
  * GNU General Public License
@@ -14,7 +14,7 @@ require($root_path.'include/core/inc_environment_global.php');
  */
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 //$db->debug=1;
 
 if(!$encounter_nr) {
@@ -51,7 +51,7 @@ if($result=&$lab_obj->getResult($job_id,$parameterselect)){
 
 if (!empty($pdata) ) $allow_update = TRUE; else $allow_update = FALSE;
 # Load the date formatter
-include_once($root_path.'include/core/inc_date_format_functions.php');
+include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 if( isset($mode) && $mode=='save' ){
 
@@ -98,7 +98,7 @@ if( isset($mode) && $mode=='save' ){
 
 		# If save successful, jump to display values
 		if($saved){
-			include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+			include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 			# Set the visual signal
 			setEventSignalColor($encounter_nr,SIGNAL_COLOR_DIAGNOSTICS_REPORT);
 			header("location:$thisfile?sid=$sid&lang=$lang&saved=1&batch_nr=$batch_nr&encounter_nr=$encounter_nr&job_id=$job_id&parameterselect=$parameterselect&allow_update=1&user_origin=$user_origin&mode=show");
@@ -150,7 +150,7 @@ if( isset($mode) && $mode=='save' ){
 	}
 	# If save successful, jump to display values
 	if($saved){
-		include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+		include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 		# Set the visual signal
 		setEventSignalColor($encounter_nr,SIGNAL_COLOR_DIAGNOSTICS_REPORT);
 		header("location:$thisfile?sid=$sid&lang=$lang&saved=1&batch_nr=$batch_nr&encounter_nr=$encounter_nr&job_id=$job_id&parameterselect=$parameterselect&allow_update=1&user_origin=$user_origin");
@@ -277,7 +277,7 @@ function chkselect(d) {
 function labReport(){
 	window.location.replace("<?php echo 'labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$encounter_nr.'&noexpand=1&from=input&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&nostat=1&user_origin=lab'; ?>");
 }
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 // -->
 </script>
 <?php

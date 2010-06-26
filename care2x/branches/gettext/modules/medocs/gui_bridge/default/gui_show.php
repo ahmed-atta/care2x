@@ -30,7 +30,7 @@ echo setCharSet();
 <script  language="javascript">
 <!--
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 
 function popRecordHistory(table,pid) {
 	urlholder="./record_history.php<?php echo URL_REDIRECT_APPEND; ?>&table="+table+"&pid="+pid;
@@ -41,8 +41,8 @@ function popRecordHistory(table,pid) {
 </script>
 <?php 
 if($parent_admit) include($root_path.'main/imgcreator/inc_js_barcode_wristband_popwin.php');
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 
 </HEAD>
@@ -247,7 +247,7 @@ else echo $breakfile.URL_APPEND;
 </ul>
 
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
  ?>
 </FONT>
 <?php

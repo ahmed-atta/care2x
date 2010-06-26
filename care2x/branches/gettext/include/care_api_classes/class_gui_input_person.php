@@ -14,7 +14,7 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 * /include/care_api_classes/class_person.php
 * /include/care_api_classes/class_paginator.php
 * /include/care_api_classes/class_globalconfig.php
-* /include/core/inc_date_format_functions.php
+* /include/helpers/inc_date_format_functions.php
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
 * @version beta 2.0.1
@@ -113,12 +113,12 @@ class GuiInputPerson {
 
 		# Load the language tables
 		$lang_tables =$this->langfiles;
-		include($root_path.'include/core/inc_load_lang_tables.php');
+		include($root_path.'include/helpers/inc_load_lang_tables.php');
 
 		# Load the other hospitals array
 		include_once($root_path.'global_conf/other_hospitals.php');
 
-		include_once($root_path.'include/core/inc_date_format_functions.php');
+		include_once($root_path.'include/helpers/inc_date_format_functions.php');
 		include_once($root_path.'include/care_api_classes/class_insurance.php');
 		include_once($root_path.'include/care_api_classes/class_person.php');
 
@@ -399,7 +399,7 @@ class GuiInputPerson {
 		# Get the insurance classes
 		$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var AS "LD_var"');
 
-		include_once($root_path.'include/core/inc_photo_filename_resolve.php');
+		include_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 
 		#
 		#
@@ -478,7 +478,7 @@ class GuiInputPerson {
 		}
 
 <?php
-		require($root_path.'include/core/inc_checkdate_lang.php');
+		require($root_path.'include/helpers/inc_checkdate_lang.php');
 ?>
 		</script>
 <?php

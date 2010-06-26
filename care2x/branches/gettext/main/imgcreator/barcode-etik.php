@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /*
  CARE2X Integrated Information System beta 2.0.1 - 2003-10-13 for Hospitals and Health Care Organizations and Services
  Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org
@@ -16,7 +16,7 @@ if(!extension_loaded('gd')) dl('php_gd.dll');
 
 define('LANG_FILE','aufnahme.php');
 define('NO_CHAIN',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 header ('Content-type: image/png');
 
 # Check the encounter number
@@ -31,7 +31,7 @@ if((!isset($en)||!$en)&&$_SESSION['sess_en']) $en=$_SESSION['sess_en'];
  else
  {
  */
-if(!isset($db) || !$db) include_once($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db) || !$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
 if($dblink_ok) {
 	// get orig data
 	//$dbtable='care_patient_encounter';
@@ -52,7 +52,7 @@ if($dblink_ok) {
 	}
 	// else {print "<p>$sql$LDDbNoRead"; exit;} /* Remove comment for debugging*/
 	 
-	include_once($root_path.'include/core/inc_date_format_functions.php');
+	include_once($root_path.'include/helpers/inc_date_format_functions.php');
 	//$date_format=getDateFormat($link,$DBLink_OK);
 
 	/* Get the patient global configs */

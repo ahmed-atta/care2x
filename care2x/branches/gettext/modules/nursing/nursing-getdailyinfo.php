@@ -2,7 +2,7 @@
 error_reporting (E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR);
 
 require ('./roots.php');
-require ($root_path . 'include/core/inc_environment_global.php');
+require ($root_path . 'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -15,8 +15,8 @@ $lang_tables=array('date_time.php');
 
 define('LANG_FILE', 'nursing.php');
 $local_user='ck_pflege_user';
-require_once ($root_path . 'include/core/inc_front_chain_lang.php');
-require_once ($root_path . 'include/core/inc_config_color.php'); // load color preferences
+require_once ($root_path . 'include/helpers/inc_front_chain_lang.php');
+require_once ($root_path . 'include/helpers/inc_config_color.php'); // load color preferences
 
 $thisfile  =basename(__FILE__);
 /* Create charts object */
@@ -67,7 +67,7 @@ switch ($winid)
 //$dbtable='care_nursing_station_patients_curve';
 
 /* Load date formatter */
-require_once ($root_path . 'include/core/inc_date_format_functions.php');
+require_once ($root_path . 'include/helpers/inc_date_format_functions.php');
 
 if ($mode == 'save' && $sformat && (trim($short_notes) == ''))
     $mode='';
@@ -95,7 +95,7 @@ else
         {
         $count=$chartnotes->RecordCount();
         include_once ($root_path . 'modules/news/includes/inc_editor_fx.php');
-        include_once ($root_path . 'include/core/inc_date_format_functions.php');
+        include_once ($root_path . 'include/helpers/inc_date_format_functions.php');
         }
     }
 
@@ -120,8 +120,8 @@ html_rtl ($lang);
     <TITLE><?php echo "$title $LDInputWin" ?></TITLE>
 
 <?php
-require ($root_path . 'include/core/inc_js_gethelp.php');
-require ($root_path . 'include/core/inc_css_a_hilitebu.php');
+require ($root_path . 'include/helpers/inc_js_gethelp.php');
+require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
 ?>
 
 <script language = "javascript">

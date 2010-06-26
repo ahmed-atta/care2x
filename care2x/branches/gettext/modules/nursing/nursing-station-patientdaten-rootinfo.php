@@ -3,13 +3,13 @@
 		else $lang=$ck_language;
 if (!$sid||($sid!=$$ck_sid_buffer)||!$ck_pflege_user) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 require("../language/".$lang."/lang_".$lang."_nursing.php");
-require_once($root_path.'include/core/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 
 $thisfile="nursing-station-patientdaten-rootinfo.php";
 $breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn";
 
 /* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db)||!$db) include($root_path.'include/helpers/inc_db_makelink.php');
 if($dblink_ok)
 	{	
 		// get orig data
@@ -126,8 +126,8 @@ if($dblink_ok)
 <HEAD>
 <?php echo setCharSet(); ?>
 <?php
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 ?>
 <style type="text/css">
@@ -359,7 +359,7 @@ echo '
 <p>
 
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 <a name="bottom"></a>
 </BODY>

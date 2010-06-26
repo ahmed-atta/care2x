@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /*if(!$lang)
 	if(!$ck_language) include("../chklang.php");
 		else $lang=$ck_language;
@@ -10,7 +10,7 @@ require("../language/".$lang."/lang_".$lang."_or.php");
 */
 define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile="op-pflege-graph-getwaittime.php";
 
@@ -286,8 +286,8 @@ function updatebar()
 <script language="javascript" src="<?php echo $root_path ?>js/setdatetime.js">
 </script>
 <?php
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 <STYLE type=text/css>
 div.box { border: double; border-width: thin; width: 100%; border-color: black; }

@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -31,7 +31,7 @@ if($user_origin=='lab'){
 	$breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn";
 }
 
-require_once($root_path.'include/core/inc_front_chain_lang.php'); # call the script lock
+require_once($root_path.'include/helpers/inc_front_chain_lang.php'); # call the script lock
 
  /**
  * LOAD Smarty
@@ -56,10 +56,10 @@ $db_request_table=$subtarget;
 
 /* Here begins the real work */
 /* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db)||!$db) include($root_path.'include/helpers/inc_db_makelink.php');
 if($dblink_ok) {	
 
-     require_once($root_path.'include/core/inc_date_format_functions.php');
+     require_once($root_path.'include/helpers/inc_date_format_functions.php');
       
 	 if(!isset($mode))   $mode='';
 		
@@ -270,7 +270,7 @@ function printOut()
     //testprintout<?php echo $sid ?>.print();
 }
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 //-->
 </script>
 <?php

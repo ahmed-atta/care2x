@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,7 +12,7 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','doctors.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 require_once($root_path.'include/care_api_classes/class_personell.php');
 $pers_obj=new Personell;
@@ -29,7 +29,7 @@ $glob_obj->getConfig('person_%');
 $default_photo_path='uploads/photos/registration';
 $photo_filename=$person['photo_filename'];
 $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
-require_once($root_path.'include/core/inc_photo_filename_resolve.php');
+require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 ?>
 <?php html_rtl($lang); ?>
 <HEAD>

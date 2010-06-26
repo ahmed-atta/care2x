@@ -52,7 +52,7 @@ $version->addTest('AdminPasswordConfirmed', array(
 $version->addTest('WritableLocation', array(APP_PATH.'/cache'));
 $version->addTest('WritableLocation', array(APP_PATH.'/uploads'));
 $version->addTest('WritableLocation', array(APP_PATH.'/include'));
-$version->addTest('WritableLocation', array(APP_PATH.'/include/core/inc_init_main.php'));
+$version->addTest('WritableLocation', array(APP_PATH.'/include/helpers/inc_init_main.php'));
 $version->addTest('WritableLocation', array(APP_PATH.'/installer/install.php'));
 
 $version->addAction('AcceptText', 'License Agreement', array(dirname(__FILE__).'/LICENSE'));
@@ -77,7 +77,7 @@ $version->addAction('CreateAdmin', 'Create Administrator User', array(
 $version->addAction('ReplaceString', 'Save System Configuration', array(
 	'message' => "Configuration information saved",
 	'files' => array(
-		dirname(__FILE__).'/inc_init_main.php.dist' => APP_PATH.'/include/core/inc_init_main.php'),
+		dirname(__FILE__).'/inc_init_main.php.dist' => APP_PATH.'/include/helpers/inc_init_main.php'),
 	'fields' => array(
 		'INSTALL_DB_USERNAME' => 'db_user',
 		'INSTALL_DB_PASSWORD' => 'db_password', 

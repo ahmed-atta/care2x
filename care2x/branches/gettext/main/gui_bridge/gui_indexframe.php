@@ -33,7 +33,7 @@ if(isset($cfg['mainmenu_tree']) && !empty($cfg['mainmenu_tree']) && file_exists(
 <TITLE><?php echo $wintitle; ?></TITLE>
 <?php
 //set the css style for a links
-require($root_path.'include/core/inc_css_a_sublinker_d.php');
+require($root_path.'include/helpers/inc_css_a_sublinker_d.php');
 ?>
 
 <script language="javascript">

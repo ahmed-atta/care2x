@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE 2002 Integrated Hospital Information System beta 2.0.1 - 30.11.2003
 * GNU General Public License
@@ -18,8 +18,8 @@ if(!isset($lang))
 	  elseif(isset($_COOKIE['ck_lang'])) $lang=$_COOKIE['ck_lang'];
 	    else $lang="en";
 		
-require_once($root_path.'include/core/inc_charset_fx.php');	
-require_once($root_path.'include/core/inc_img_fx.php');	
+require_once($root_path.'include/helpers/inc_charset_fx.php');	
+require_once($root_path.'include/helpers/inc_img_fx.php');	
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
@@ -45,7 +45,7 @@ switch($lang)
 </form>
 <p>
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 </FONT>
 </BODY>

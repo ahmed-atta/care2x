@@ -2,7 +2,7 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 define('NO_CHAIN',1);
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 
 # Define to true to echo the sql query, for debugging 
 define('SHOW_SQLQUERY',FALSE);
@@ -11,8 +11,8 @@ $lang_tables[]='search.php';
 $lang_tables[]='billing.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 $breakfile='billingmenu.php'.URL_APPEND;
 $returnfile='billingmenu.php'.URL_APPEND;
@@ -157,7 +157,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	<table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
 		<tr>
 			<td>
-				<?php include($root_path.'include/core/inc_patient_searchmask.php'); ?>
+				<?php include($root_path.'include/helpers/inc_patient_searchmask.php'); ?>
 			</td>
 		</tr>
 	</table>
@@ -248,7 +248,7 @@ if($mode=='search'||$mode=='paginate'){
 		<tr>
 			<td>
 				<?php
-            include($root_path.'include/core/inc_patient_searchmask.php');
+            include($root_path.'include/helpers/inc_patient_searchmask.php');
 	   ?>
 			</td>
 		</tr>

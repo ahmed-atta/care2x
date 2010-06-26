@@ -1,6 +1,6 @@
 <?php
 require('./roots.php');
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 require_once($root_path.'classes/ixr_library.inc.php');
 $client = new IXR_Client('http://scripts.incutio.com/xmlrpc/simpleserver.php');
 $client->query('test.getTime');

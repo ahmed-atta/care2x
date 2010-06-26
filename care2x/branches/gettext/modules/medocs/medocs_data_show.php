@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /*
 CARE2X Integrated Information System Deployment 2.1 - 2004-10-02 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
@@ -10,7 +10,7 @@ GNU GPL. For details read file "copy_notice.txt".
 */
 define('LANG_FILE','aufnahme.php');
 $local_user='medocs_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 require_once($root_path.'include/care_api_classes/class_insurance.php');
@@ -41,7 +41,7 @@ $photo_filename='nopic';
 $dbtable='care_encounter';
 
 /* Establish db connection */
-if(!isset($db) || !$db) include_once($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db) || !$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
 if($dblink_ok) {
 
 /*		$sql='SELECT * FROM '.$dbtable.' AS enc LEFT JOIN care_person AS reg ON reg.pid = enc.pid
@@ -109,7 +109,7 @@ if($dblink_ok) {
 		$encoder=$encounter_obj->RecordModifierID();
 	}
 
-	include_once($root_path.'include/core/inc_date_format_functions.php');
+	include_once($root_path.'include/helpers/inc_date_format_functions.php');
         
 	/* Update History */
 	if(!$newdata) $encounter_obj->setHistorySeen($_SESSION['sess_user_name'],$encounter_nr);
@@ -124,7 +124,7 @@ if($dblink_ok) {
 } 
 
 /* Prepare text and resolve the numbers */
-require_once($root_path.'include/core/inc_patient_encounter_type.php');		 
+require_once($root_path.'include/helpers/inc_patient_encounter_type.php');		 
 
 if(!isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod'] = "";
 
@@ -135,7 +135,7 @@ $_SESSION['sess_full_en']=$full_en;
 $_SESSION['sess_parent_mod']='admission';
 
 /* Prepare the photo filename */
-require_once($root_path.'include/core/inc_photo_filename_resolve.php');
+require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 
 /* Load the GUI page */
 require('./gui_bridge/default/gui_patient_encounter_showdata.php');

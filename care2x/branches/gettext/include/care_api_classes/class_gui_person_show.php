@@ -161,12 +161,12 @@ class GuiPersonShow {
 
 		# Load the language tables
 		$lang_tables =$this->langfiles;
-		include($root_path.'include/core/inc_load_lang_tables.php');
+		include($root_path.'include/helpers/inc_load_lang_tables.php');
 
 		# Load the other hospitals array
 		include_once($root_path.'global_conf/other_hospitals.php');
 
-		include_once($root_path.'include/core/inc_date_format_functions.php');
+		include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 		include_once($root_path.'include/care_api_classes/class_insurance.php');
 		$pinsure_obj=new PersonInsurance($this->pid);
@@ -230,7 +230,7 @@ class GuiPersonShow {
 
 		if($validdata){
 
-		include_once($root_path.'include/core/inc_photo_filename_resolve.php');
+		include_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 
 		############ Here starts the GUI output ##################
 

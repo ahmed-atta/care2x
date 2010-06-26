@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /*** CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
 * Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
@@ -43,7 +43,7 @@ function getFiles($sDirPath = '', $sDiscString = '') {
 define('LANG_FILE','radio.php');
 //define('NO_2LEVEL_CHK',1);
 $local_user='ck_radio_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
 
@@ -58,7 +58,7 @@ if($mode=='search'&&!empty($searchkey)){
 	if(is_numeric($searchkey)) $searchkey=(int)$searchkey;
 
 	# Load date formatter
-	include_once($root_path.'include/core/inc_date_format_functions.php');
+	include_once($root_path.'include/helpers/inc_date_format_functions.php');
 	
 	include_once($root_path.'include/care_api_classes/class_image.php');
 	$img_obj=new Image;
@@ -169,7 +169,7 @@ function chkform(d){
 		else return true;
 }
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 
 // -->
 </script>

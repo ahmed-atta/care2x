@@ -14,10 +14,10 @@ function signalNewDiagnosticsReportEvent($report_date='', $script_name='labor_te
    				$subtarget, $LDDbNoRead, $LDDbNoSave, $date_format, $entry_date,$root_path;
    
 	# Check if the formatDate2Local function is loaded 
-	if(!function_exists('formatDate2Local'))   include_once($root_path.'include/core/inc_date_format_functions.php');
+	if(!function_exists('formatDate2Local'))   include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 	# Load the visual signalling defined constants
-	if(!function_exists('setEventSignalColor')) include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+	if(!function_exists('setEventSignalColor')) include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 	
 	# Create a core object
 	include_once($root_path.'include/care_api_classes/class_core.php');

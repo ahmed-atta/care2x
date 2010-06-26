@@ -4,7 +4,7 @@
  */
 error_reporting ( E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR ) ;
 
-require_once ("../../include/core/inc_vars_resolve.php") ; // globalize POST, GET, & COOKIE  vars
+require_once ("../../include/helpers/inc_vars_resolve.php") ; // globalize POST, GET, & COOKIE  vars
 
 
 /*

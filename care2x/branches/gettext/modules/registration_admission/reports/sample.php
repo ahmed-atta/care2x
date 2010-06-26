@@ -3,7 +3,7 @@ require ('./roots.php') ;
 $pidbarcode = $root_path . 'cache/barcodes/pn_' . $_GET['pid'] . '.png' ;
 //echo $pidbarcode;
 # Include AgataAPI class
-include_once('../../../classes/agata/classes/core/AgataAPI.class');
+include_once('../../../classes/agata/classes/helpers/AgataAPI.class');
 
 # Instantiate AgataAPI
 $api = new AgataAPI;

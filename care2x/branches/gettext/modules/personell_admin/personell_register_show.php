@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /*
 CARE2X Integrated Information System Deployment 2.1 - 2004-10-02 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
@@ -11,7 +11,7 @@ GNU GPL. For details read file "copy_notice.txt".
 $lang_tables=array('personell.php');
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_personell.php');
 //require_once($root_path.'include/care_api_classes/class_person.php');
 //require_once($root_path.'include/care_api_classes/class_insurance.php');
@@ -72,7 +72,7 @@ if($_SESSION['sess_user_origin']=='phonedir'&&$_SESSION['sess_personell_nr']){
 		$encoder=$encounter_obj->RecordModifierID();
 */	}
 
-	include_once($root_path.'include/core/inc_date_format_functions.php');
+	include_once($root_path.'include/helpers/inc_date_format_functions.php');
         
 	/* Update History */
 	//if(!$newdata) $encounter_obj->setHistorySeen($_SESSION['sess_user_name'],$encounter_nr);
@@ -85,7 +85,7 @@ if($_SESSION['sess_user_origin']=='phonedir'&&$_SESSION['sess_personell_nr']){
 
 
 /* Prepare text and resolve the numbers */
-require_once($root_path.'include/core/inc_patient_encounter_type.php');		 
+require_once($root_path.'include/helpers/inc_patient_encounter_type.php');		 
 
 if(!isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod'] = "";
 if(!isset($_SESSION['sess_user_origin'])) $_SESSION['sess_user_origin'] = "";
@@ -102,7 +102,7 @@ $_SESSION['sess_full_pnr']=$full_pnr;
 $_SESSION['sess_user_origin']='personell_admin';
 
 /* Prepare the photo filename */
-require_once($root_path.'include/core/inc_photo_filename_resolve.php');
+require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 
 /* Load the GUI page */
 require('./gui_bridge/default/gui_'.$thisfile);

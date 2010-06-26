@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -15,7 +15,7 @@ $lang_tables[]='prompt.php';
 $lang_tables[]='products.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
-require($root_path.'include/core/inc_front_chain_lang.php');
+require($root_path.'include/helpers/inc_front_chain_lang.php');
 
 /* If patient nr is invallid jump to registration search module*/
 /*if(!isset($pid) || !$pid)
@@ -24,7 +24,7 @@ require($root_path.'include/core/inc_front_chain_lang.php');
 	exit;
 }
 */
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 require_once($root_path.'include/care_api_classes/class_insurance.php');
 //require_once($root_path.'include/care_api_classes/class_core.php');
@@ -203,7 +203,7 @@ if($update) $breakfile='personell_register_show.php'.URL_APPEND.'&personell_nr='
 		else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 # Prepare the photo filename
-require_once($root_path.'include/core/inc_photo_filename_resolve.php');
+require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 
 require('./gui_bridge/default/gui_'.$thisfile);
 ?>

@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -30,10 +30,10 @@ define('IMAGEJ_PANEL_WIDTH_MIN', 250);
 $lang_tables=array('images.php');
 define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require($root_path.'global_conf/inc_remoteservers_conf.php');
 /* Load date formatter */
-include_once($root_path.'include/core/inc_date_format_functions.php');
+include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 if($disc_pix_mode){
 	$final_path="$root_path$fotoserver_localpath$pn/"; 

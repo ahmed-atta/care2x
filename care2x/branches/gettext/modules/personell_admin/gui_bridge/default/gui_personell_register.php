@@ -64,7 +64,7 @@ function chkForm(d){
 	}
 }
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 
 -->
 </script>

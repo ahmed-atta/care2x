@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 /*
 CARE2X Integrated Information System Deployment 2.1 - 2004-10-02 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
@@ -10,7 +10,7 @@ GNU GPL. For details read file "copy_notice.txt".
 */
 define('LANG_FILE','editor.php');
 $local_user='ck_editor_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 /* Set navigation paths for this page*/
 $thisfile=basename(__FILE__);
@@ -39,7 +39,7 @@ function chkForm(d)
 }
 </script>
 
-<?php require($root_path.'include/core/inc_css_a_hilitebu.php'); ?>
+<?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
 
 </head>
 <body>
@@ -82,7 +82,7 @@ function chkForm(d)
 <input type="hidden" name="title" value="<?php echo $title ?>">
 <p>
 <?php 
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 </form>
 </body>

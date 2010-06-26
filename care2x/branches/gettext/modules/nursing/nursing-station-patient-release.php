@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -13,7 +13,7 @@ require($root_path.'include/core/inc_environment_global.php');
 $lang_tables[]='prompt.php';
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
 //$db->debug=true;
 if(!$encoder) $encoder=$_COOKIE[$local_user.$sid];
@@ -22,7 +22,7 @@ $breakfile="nursing-station.php".URL_APPEND."&edit=1&station=$station&ward_nr=$w
 $thisfile=basename(__FILE__);
 
 # Load date formatter
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 	
@@ -87,7 +87,7 @@ if( $enc_obj->loadEncounterData($pn)) {
 		$default_photo_path='uploads/photos/registration';
 		$photo_filename=$result['photo_filename'];
 		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
-		require_once($root_path.'include/core/inc_photo_filename_resolve.php');
+		require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 		/* Load the discharge types */
 		$discharge_types=&$enc_obj->getDischargeTypesData();
 		
@@ -154,7 +154,7 @@ function pruf(d){
 	}
 }
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 
 //-->
 </script>

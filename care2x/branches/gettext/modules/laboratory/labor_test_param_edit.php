@@ -2,7 +2,7 @@
 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
@@ -13,7 +13,7 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
 
@@ -24,7 +24,7 @@ require_once($root_path.'include/care_api_classes/class_lab.php');
 $lab_obj=new Lab();
 
 # Load the date formatter */
-include_once($root_path.'include/core/inc_date_format_functions.php');
+include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 if(isset($mode) && !empty($mode)) {
 	if($mode=='save'){
@@ -118,8 +118,8 @@ function editParam(nr)
 </script>
 
 <?php 
-require($root_path.'include/core/inc_js_gethelp.php'); 
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php'); 
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 <style type="text/css" name="1">
 .va12_n{font-family:verdana,arial; font-size:12; color:#000099}

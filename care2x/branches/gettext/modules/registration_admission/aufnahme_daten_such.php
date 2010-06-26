@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
@@ -19,8 +19,8 @@ define('MAX_BLOCK_ROWS',30);
 
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
-require($root_path.'include/core/inc_front_chain_lang.php');
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 $thisfile=basename(__FILE__);
 $toggle=0;
@@ -58,7 +58,7 @@ $pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($searchkey)){
 	
-	include_once($root_path.'include/core/inc_date_format_functions.php');
+	include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 	//$db->debug=true;
 

@@ -1,14 +1,14 @@
 <?php
 error_reporting ( E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR );
 require ('./roots.php');
-require ($root_path . 'include/core/inc_environment_global.php');
+require ($root_path . 'include/helpers/inc_environment_global.php');
 
 if (! extension_loaded ( 'gd' ))
 	dl ( 'php_gd.dll' );
 $lang_tables [] = 'aufnahme.php';
 define ( 'LANG_FILE', 'konsil.php' );
 define ( 'NO_CHAIN', 1 );
-require_once ($root_path . 'include/core/inc_front_chain_lang.php');
+require_once ($root_path . 'include/helpers/inc_front_chain_lang.php');
 header ( 'Content-type: image/png' );
 
 include_once ($root_path . 'include/care_api_classes/class_ward.php');
@@ -22,7 +22,7 @@ include_once ($root_path . 'include/care_api_classes/class_insurance.php');
 $ins_obj = new Insurance ( );
 
 $fen = $en;
-include_once ($root_path . 'include/core/inc_date_format_functions.php');
+include_once ($root_path . 'include/helpers/inc_date_format_functions.php');
 
 # Get location data
 $location = &$obj->EncounterLocationsInfo ( $en );

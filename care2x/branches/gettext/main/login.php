@@ -1,8 +1,8 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
-require_once($root_path.'include/core/access_log.php');
+require($root_path.'include/helpers/inc_environment_global.php');
+require_once($root_path.'include/helpers/access_log.php');
 $logs = new AccessLog();
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
@@ -15,9 +15,9 @@ $logs = new AccessLog();
 //$db->debug = true;
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
-require($root_path.'include/core/inc_2level_reset.php');
+require($root_path.'include/helpers/inc_2level_reset.php');
 
 $fileforward='login-pc-config.php'.URL_REDIRECT_APPEND;
 $thisfile='login.php';
@@ -65,7 +65,7 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 
 $errbuf='Log in';
 $minimal=1;
-require($root_path.'include/core/inc_passcheck_head.php');
+require($root_path.'include/helpers/inc_passcheck_head.php');
 ?>
 
 <?php echo setCharSet(); ?>
@@ -85,7 +85,7 @@ if(isset($is_logged_out) && $is_logged_out) {
 <td colspan=3><img <?php echo createLDImgSrc($root_path,'login-b.gif') ?>></td>
 </tr>
 
-<?php require($root_path.'include/core/inc_passcheck_mask.php') ?>
+<?php require($root_path.'include/helpers/inc_passcheck_mask.php') ?>
 
 <p><!-- 
 <img src="../img/small_help.gif" > <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Was ist login?</a><br>
@@ -94,7 +94,7 @@ if(isset($is_logged_out) && $is_logged_out) {
  -->
 <p>
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 </FONT>
 </BODY>

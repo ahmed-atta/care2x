@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System beta 1.0.03 - 2002-10-26
 * GNU General Public License
@@ -14,9 +14,9 @@ require($root_path.'include/core/inc_environment_global.php');
 $lang_tables=array('doctors.php','departments.php');
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 if($pmonth=='') $pmonth=date('n');
 if($pyear=='') $pyear=date('Y');
@@ -135,7 +135,7 @@ function popinfo(l,f,b)
 <?php if($person1) { 
 
 	$photo_filename=$person1['photo_filename'];
-	include($root_path.'include/core/inc_photo_filename_resolve.php');
+	include($root_path.'include/helpers/inc_photo_filename_resolve.php');
 ?>
 
 <font face=verdana,arial size=+1 color=maroon>
@@ -184,7 +184,7 @@ echo ucfirst($person1['name_last']).', '.ucfirst($person1['name_first']);
 <?php if($person2) { 
 
 	$photo_filename=$person2['photo_filename'];
-	include($root_path.'include/core/inc_photo_filename_resolve.php');
+	include($root_path.'include/helpers/inc_photo_filename_resolve.php');
 ?>
 <hr>
 

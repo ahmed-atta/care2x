@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 if (file_exists($custom_lang_file)) {include "./lang_en_custom.php";}
 
 /**
@@ -15,7 +15,7 @@ if (file_exists($custom_lang_file)) {include "./lang_en_custom.php";}
 $lang_tables=array('actions.php');
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if($edit&&!$_COOKIE[$local_user.$sid]) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
  
 $thisfile=basename(__FILE__);
@@ -42,11 +42,11 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient_%');	
 
 /* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db)||!$db) include($root_path.'include/helpers/inc_db_makelink.php');
 if($dblink_ok)
 {
 	/* Load date formatter */
-    include_once($root_path.'include/core/inc_date_format_functions.php');
+    include_once($root_path.'include/helpers/inc_date_format_functions.php');
     
        
 	if($mode=='save'){
@@ -58,7 +58,7 @@ if($dblink_ok)
 		    // Load the editor functions 
 			include_once($root_path.'modules/news/includes/inc_editor_fx.php');
 		    // Load the visual signalling functions
-			include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+			include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 			// Prepare  the date 
 			$indatetime_date=formatDate2STD($indatetime_date,$date_format);
 			//$indatetime_time=$_POST['indatetime_time'].':00';
@@ -86,7 +86,7 @@ if($dblink_ok)
 		    // Load the editor functions 
 			include_once($root_path.'modules/news/includes/inc_editor_fx.php');
 		    // Load the visual signalling functions
-			include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+			include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 			// Prepare  the date 
 			$indatetime_date=formatDate2STD($indatetime_date,$date_format);
 			//$indatetime_time=$_POST['indatetime_time'].':00';
@@ -252,7 +252,7 @@ function endhilite(d){
 	d.focus();
 	}
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 -->
 </script>
 <?php

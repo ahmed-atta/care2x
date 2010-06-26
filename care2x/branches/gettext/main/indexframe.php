@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
@@ -17,7 +17,7 @@ define(NO_CHAIN,1);
 # Set here the window title
 $wintitle='Menu - SIIS';
 
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 /**
 * We check again the language variable lang. If table file not available use default (lang = "en")

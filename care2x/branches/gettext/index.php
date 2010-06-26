@@ -37,7 +37,7 @@ if(!isset($boot)) $boot=false;
 if(!isset($sid)) $sid='';
 
 require('./roots.php');
-require('./include/core/inc_environment_global.php');
+require('./include/helpers/inc_environment_global.php');
 
 //$db->debug=FALSE;
 
@@ -135,7 +135,7 @@ function configNew(&$bn,&$bv,&$f,$i,&$uid)
 $sid=session_id();
 $ck_sid_buffer='ck_sid'.$sid;
 
-include('include/core/inc_init_crypt.php'); // initialize crypt
+include('include/helpers/inc_init_crypt.php'); // initialize crypt
 $ciphersid=$enc_hcemd5->encodeMimeSelfRand($sid);
 setcookie($ck_sid_buffer,$ciphersid);
 $_COOKIE[$ck_sid_buffer]=$ciphersid;
@@ -296,12 +296,12 @@ $_SESSION['sess_tos']=date('His');
 #
 # Load character set fx
 #
-include_once('include/core/inc_charset_fx.php');
+include_once('include/helpers/inc_charset_fx.php');
 
 #
 # Load image fx
 #
-require_once('include/core/inc_img_fx.php');
+require_once('include/helpers/inc_img_fx.php');
 
 #
 # Start smarty templating

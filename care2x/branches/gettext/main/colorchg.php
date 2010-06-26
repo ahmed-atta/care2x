@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -13,7 +13,7 @@ require($root_path.'include/core/inc_environment_global.php');
 $lang_tables=array('indexframe.php');
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $breakfile='config_options.php'.URL_APPEND;
 
@@ -68,7 +68,7 @@ $sql="SELECT name,LD_var FROM care_menu_main WHERE is_visible=1 OR LD_var='LDEDP
 
 $menu_obj=$db->Execute($sql);
 
-require_once($root_path.'include/core/inc_nocache_headers.php');
+require_once($root_path.'include/helpers/inc_nocache_headers.php');
 
 # Start Smarty templating here
  /**
@@ -179,7 +179,7 @@ if(is_object($menu_obj)){
     <td bgcolor="<?php echo $config_new['bot_bgcolor']; ?>">
 
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 <p><a href="#" title="<?php echo $LDClk4BgColor ?>" onClick="chgcolor('bot_bgcolor')"><?php echo $LDBgColor ?> <img <?php echo createComIcon($root_path,'settings_tree.gif','0') ?> alt="<?php echo $LDClk4BgColor ?>">
 </a>

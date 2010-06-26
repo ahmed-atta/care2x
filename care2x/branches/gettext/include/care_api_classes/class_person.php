@@ -923,7 +923,7 @@ class Person extends Core {
 		if(empty($maxcount)) $maxcount=100;
 		if(empty($offset)) $offset=0;
 
-		include_once($root_path.'include/core/inc_date_format_functions.php');
+		include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 		# convert * and ? to % and &
 		$searchkey=strtr($searchkey,'*?','%_');

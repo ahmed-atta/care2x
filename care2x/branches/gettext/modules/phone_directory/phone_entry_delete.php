@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 /*
 CARE2X Integrated Information System Deployment 2.1 - 2004-10-02 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
@@ -10,7 +10,7 @@ GNU GPL. For details read file "copy_notice.txt".
 */
 define('LANG_FILE','phone.php');
 $local_user='phonedir_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 //$db->debug=true;
 //$dbtable='care_phone';
 $forwardfile='phone_list.php';
@@ -22,7 +22,7 @@ require_once($root_path.'include/care_api_classes/class_comm.php');
 $phone = & new Comm;
 
 /* Load the date formatter */
-include_once($root_path.'include/core/inc_date_format_functions.php');
+include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 if ($finalcommand=='delete'){
     if ($phone->deleteData($itemname)){
@@ -54,7 +54,7 @@ if ($finalcommand=='delete'){
 <?php echo setCharSet(); ?>
  <TITLE></TITLE>
 <?php 
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 
@@ -150,7 +150,7 @@ $colstop=sizeof($LDEditFields);
 <p>
 
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 </FONT>
 </BODY>

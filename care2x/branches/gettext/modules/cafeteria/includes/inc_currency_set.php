@@ -6,7 +6,7 @@ if (stristr('inc_currency_set.php',$PHP_SELF))
 
 if(!isset($mode)) $mode='';
 
-if(!isset($db) || !$db) include_once($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db) || !$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
 
 
 if($dblink_ok)

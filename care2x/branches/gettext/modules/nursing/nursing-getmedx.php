@@ -1,8 +1,8 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
-include_once($root_path.'include/core/inc_date_format_functions.php');
+require($root_path.'include/helpers/inc_environment_global.php');
+include_once($root_path.'include/helpers/inc_date_format_functions.php');
 global $db;
 include_once($root_path.'include/care_api_classes/class_prescription.php');
 if(!isset($objPrescription))
@@ -26,8 +26,8 @@ $isDischarged = $enc_obj->Is_Discharged($pn);
 
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 $thisfile=basename(__FILE__);
 
 ///$db->debug=true;
@@ -174,8 +174,8 @@ $charts_obj= new Charts;
 <?php echo setCharSet(); ?>
 <TITLE><?php echo "$title &LDInputWin" ?></TITLE>
 <?php
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 
 <script type="text/javascript" src="../../js/scriptaculous/lib/prototype.js"></script>

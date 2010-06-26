@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 define('LANG_FILE','konsil.php');
 
 /* Globalize the variables */
@@ -27,8 +27,8 @@ else
   $breakfile=$root_path.'modules/nursing/nursing-station-patientdaten.php'.$rel_url;
 }
 //echo $_COOKIE[$local_user.$sid]; exit;
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-//require_once($root_path.'include/core/inc_config_color.php'); // load color preferences
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+//require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 
 ?>
 <?php html_rtl($lang); ?>

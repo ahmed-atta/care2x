@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -32,7 +32,7 @@ else
   $local_user='ck_pflege_user';
   $breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
 
@@ -51,7 +51,7 @@ define('_BATCH_NR_INIT_',40000000);
 
 /* Here begins the real work */
 	/* Load the date format functions and get the local format */
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 
@@ -114,7 +114,7 @@ $enc_obj=new Encounter;
 							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 								  	// Load the visual signalling functions
-									include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+									include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 									// Set the visual signal 
 									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
 									//echo $sql;
@@ -163,7 +163,7 @@ $enc_obj=new Encounter;
 							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 								  	// Load the visual signalling functions
-									include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+									include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 									// Set the visual signal 
 									setEventSignalColor($pn,SIGNAL_COLOR_DIAGNOSTICS_REQUEST);									
 									//echo $sql;
@@ -350,7 +350,7 @@ function printOut()
     testprintout<?php echo $sid ?>.print();
 }
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 //-->
 </script>
 <?php

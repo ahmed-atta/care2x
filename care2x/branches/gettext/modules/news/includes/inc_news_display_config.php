@@ -17,5 +17,5 @@ if(!$news_normal_preview_maxlen) $news_normal_preview_maxlen=300;
 # Load editor functions
 require_once($root_path.'modules/news/includes/inc_editor_fx.php');
 
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 ?>

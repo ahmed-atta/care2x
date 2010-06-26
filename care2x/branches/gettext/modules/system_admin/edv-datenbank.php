@@ -1,7 +1,7 @@
 <?php if (($sid=="")or($sid==NULL)or($sid!=$$ck_sid_buffer)or($ck_edv_db_user==""))
 {header("Location: invalid-access-warning.php"); exit;}
 
-require_once($root_path.'include/core/inc_config_color.php');
+require_once($root_path.'include/helpers/inc_config_color.php');
 
 
 //create unique id
@@ -31,7 +31,7 @@ function closewin()
 </script> 
  
 <?php 
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 
@@ -84,7 +84,7 @@ echo "$ck_edv_db_user!";
 <tr valign=top  >
 <td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 </td>
 </tr>

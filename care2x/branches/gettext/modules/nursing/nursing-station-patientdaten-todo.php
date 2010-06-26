@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -12,7 +12,7 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if($edit&&!$_COOKIE[$local_user.$sid]) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 
 $thisfile='nursing-station-patientdaten-todo.php';
@@ -31,14 +31,14 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient_%');
 
 /* Load date formatter */
-include_once($root_path.'include/core/inc_date_format_functions.php');
+include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 if($mode=='save'){
 	if(($dateput&&$timeput&&$berichtput&&$author)||($dateput2&&$berichtput2&&$author2)){
 		// Load the editor functions
 		include_once($root_path.'modules/news/includes/inc_editor_fx.php');
 		// Load the visual signalling functions
-		include_once($root_path.'include/core/inc_visual_signalling_fx.php');
+		include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 
 		if($dateput&&$timeput&&$berichtput&&$author){
 			if($dateput)  $_POST['dateput']=formatDate2STD($dateput,$date_format);
@@ -190,7 +190,7 @@ function endhilite(d){
 	d.focus();
 	}
 <?php 
-require($root_path.'include/core/inc_checkdate_lang.php'); 
+require($root_path.'include/helpers/inc_checkdate_lang.php'); 
 ?>
 
 //-->

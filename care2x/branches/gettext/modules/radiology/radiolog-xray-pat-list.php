@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /*** CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
 * GNU General Public License
 * Copyright 2002,2003,2004,2005 Elpidio Latorilla
@@ -11,16 +11,16 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','radio.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
 
 if($mode=='search'&&!empty($sk)){
 
-	if(!isset($db) || !$db) include_once($root_path.'include/core/inc_db_makelink.php');
+	if(!isset($db) || !$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
 	if($dblink_ok) {	
 		/* Load date formatter */
-		include_once($root_path.'include/core/inc_date_format_functions.php');
+		include_once($root_path.'include/helpers/inc_date_format_functions.php');
 	}else { echo "$LDDbNoLink<br>"; }
 	
 	include_once($root_path.'include/care_api_classes/class_encounter.php');

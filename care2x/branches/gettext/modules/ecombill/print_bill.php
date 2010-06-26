@@ -4,11 +4,11 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 $local_user='aufnahme_user';
 define('NO_CHAIN',1);
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 include_once($root_path."classes/fpdf/fpdf.php");
 include_once($root_path."classes/PHPJasperXML/PHPJasperXML.inc");
 
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require($root_path.'include/care_api_classes/class_ecombill.php');
 require($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');

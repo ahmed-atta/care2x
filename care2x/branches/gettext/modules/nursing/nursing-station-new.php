@@ -1,7 +1,7 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -13,7 +13,7 @@ require($root_path.'include/core/inc_environment_global.php');
 $lang_tables[]='departments.php';
 define('LANG_FILE','nursing.php');
 $local_user='ck_edv_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 /* Load the ward object */
 require_once($root_path.'include/care_api_classes/class_ward.php');
 $ward=new Ward;
@@ -31,7 +31,7 @@ $t_date=$pday.'.'.$pmonth.'.'.$pyear;
 if($mode){
 	$dbtable='care_ward';
 			
-	if(!isset($db)||!$db) include($root_path.'include/core/inc_db_makelink.php');
+	if(!isset($db)||!$db) include($root_path.'include/helpers/inc_db_makelink.php');
 	if($dblink_ok){
 		switch($mode)
 		{	

@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 
 
 # Initializations 
@@ -9,7 +9,7 @@ $lang_tables[]='departments.php';
 define('LANG_FILE','products.php');
 $local_user='ck_supply_db_user';
 
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 require_once($root_path.'include/care_api_classes/class_core.php');
 $core = & new Core;
@@ -32,7 +32,7 @@ $deltodo=false;
   
 
 # Load the date formatter
-include_once($root_path.'include/core/inc_date_format_functions.php');
+include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 # Get the data first
 $sql="SELECT * FROM $dbtable WHERE idcare_supply='$idcare_supply'";

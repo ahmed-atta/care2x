@@ -114,8 +114,8 @@ function unlock(b,r)
 </script>
 
 <?php
-require($root_path.'include/core/inc_js_gethelp.php');
-require($root_path.'include/core/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/inc_js_gethelp.php');
+require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 ?>
 
@@ -228,7 +228,7 @@ for ($i=$statdata['startnumber'];$i<=$statdata['endnumber'];$i++)
 <p>
 
 <?php
-require($root_path.'include/core/inc_load_copyrite.php');
+require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
 
 </BODY>

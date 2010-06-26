@@ -2,7 +2,7 @@
 //error_reporting unterdrückt Warnmeldungen für fehlende Variablen,....
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE 2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -32,10 +32,10 @@ $local_user=$this_cookie_name;
 
 
 //macht dateischutz und lädt die sprachdateien, andere Funktionen werden geladen (createldimgsrc)
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 //setzt alle cookies zurück nur nötig wenn ein passwortscript generiert wird
-//require($root_path.'include/core/inc_2level_reset.php');
+//require($root_path.'include/helpers/inc_2level_reset.php');
 
 //$breakfile und $returnfile für den "Rückweg" setzen
 

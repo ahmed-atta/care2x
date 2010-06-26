@@ -13,7 +13,7 @@
 * /include/care_api_classes/class_person.php
 * /include/care_api_classes/class_paginator.php
 * /include/care_api_classes/class_globalconfig.php
-* /include/core/inc_date_format_functions.php
+* /include/helpers/inc_date_format_functions.php
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
 * @version beta 2.0.1
@@ -168,7 +168,7 @@ class GuiSearchPerson {
 		
 		# Load the language tables
 		$lang_tables =$this->langfile;
-		include($root_path.'include/core/inc_load_lang_tables.php');
+		include($root_path.'include/helpers/inc_load_lang_tables.php');
 
 		# Initialize pages control variables
 		if($mode=='paginate'){
@@ -222,7 +222,7 @@ class GuiSearchPerson {
 			# Translate *? wildcards
 			$searchkey=strtr($searchkey,'*?','%_');
 
-			include_once($root_path.'include/core/inc_date_format_functions.php');
+			include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 			include_once($root_path.'include/care_api_classes/class_person.php');
 			$person=& new Person();
@@ -303,7 +303,7 @@ class GuiSearchPerson {
 		# Show tips and tricks link and the javascript
 		if($this->showtips){
 			ob_start();
-				include_once($root_path.'include/core/inc_js_gethelp.php');
+				include_once($root_path.'include/helpers/inc_js_gethelp.php');
 				$sTemp = ob_get_contents();
 				$this->smarty->assign('sJSGetHelp',$sTemp);
 			ob_end_clean();
@@ -375,7 +375,7 @@ class GuiSearchPerson {
 
 		$this->smarty->assign('sCancelButton','<a href="'.$this->cancelfile.URL_APPEND.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').'></a>');
 
-		//include($root_path.'include/core/inc_patient_searchmask.php');
+		//include($root_path.'include/helpers/inc_patient_searchmask.php');
 		#
 		# Create append data for previous and next page links
 		#

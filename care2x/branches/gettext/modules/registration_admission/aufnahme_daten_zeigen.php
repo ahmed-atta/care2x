@@ -1,7 +1,7 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /*
 CARE2X Integrated Information System beta 2.0.1 - 2004-07-04 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
@@ -13,7 +13,7 @@ $lang_tables[]='person.php';
 $lang_tables[]='departments.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 require_once($root_path.'include/care_api_classes/class_insurance.php');
@@ -140,7 +140,7 @@ $dbtable='care_encounter';
 
 	}
 
-	include_once($root_path.'include/core/inc_date_format_functions.php');
+	include_once($root_path.'include/helpers/inc_date_format_functions.php');
         
 	/* Update History */
 	if(!$newdata) $encounter_obj->setHistorySeen($_SESSION['sess_user_name'],$encounter_nr);
@@ -151,7 +151,7 @@ $dbtable='care_encounter';
 
 
 /* Prepare text and resolve the numbers */
-require_once($root_path.'include/core/inc_patient_encounter_type.php');		 
+require_once($root_path.'include/helpers/inc_patient_encounter_type.php');		 
 
 /* Save encounter nrs to session */
 $_SESSION['sess_pid']=$pid;
@@ -162,7 +162,7 @@ $_SESSION['sess_user_origin']='admission';
 $_SESSION['sess_file_return']=$thisfile;
 
 /* Prepare the photo filename */
-require_once($root_path.'include/core/inc_photo_filename_resolve.php');
+require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 
 # Start Smarty templating here
  /**

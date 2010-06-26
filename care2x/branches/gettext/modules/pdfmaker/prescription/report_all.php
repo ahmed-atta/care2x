@@ -7,7 +7,7 @@ $report_auxtitlesize=10;
 $report_authorsize=10;
 
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
@@ -85,9 +85,9 @@ function dec2frac( $decimal ) {
 $lang_tables[]='emr.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='ck_pflege_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 $thisfile=basename(__FILE__);
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 // Get the prescription data
 include_once($root_path.'include/care_api_classes/class_prescription.php');

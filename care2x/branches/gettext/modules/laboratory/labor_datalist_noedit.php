@@ -2,7 +2,7 @@
 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 //$db->debug = true;
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
@@ -79,7 +79,7 @@ function checkParamValue($paramValue,$pName) {
 
 define('LANG_FILE','lab.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if(!isset($user_origin)) $user_origin='';
 
 if($user_origin=='lab'||$user_origin=='lab_mgmt'){
@@ -110,7 +110,7 @@ if($nostat) $ret=$root_path."modules/laboratory/labor_data_patient_such.php?sid=
 	else $ret=$root_path."modules/nursing/nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$encounter_nr";
 	
 # Load the date formatter */
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 $enc_obj->setWhereCondition("encounter_nr='$encounter_nr'");
 

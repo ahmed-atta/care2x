@@ -1,7 +1,7 @@
 <?php
 error_reporting ( E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR );
 require ('./roots.php');
-require ($root_path . 'include/core/inc_environment_global.php');
+require ($root_path . 'include/helpers/inc_environment_global.php');
 /**
  * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
  * GNU General Public License
@@ -40,7 +40,7 @@ switch ($user_origin) {
 //$local_user='ck_lab_user';
 
 
-require_once ($root_path . 'include/core/inc_front_chain_lang.php');
+require_once ($root_path . 'include/helpers/inc_front_chain_lang.php');
 
 $thisfile = "labor_test_findings_" . $subtarget . ".php";
 
@@ -71,7 +71,7 @@ $db_request_table_sub = $subtarget . "_sub";
 
 /* Here begins the real work */
 
-require_once ($root_path . 'include/core/inc_date_format_functions.php');
+require_once ($root_path . 'include/helpers/inc_date_format_functions.php');
 
 /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
 if (isset ( $pn ) && $pn) {
@@ -183,8 +183,8 @@ echo setCharSet ();
  <TITLE><?php
 	echo "$LDTestFindings #$batch_nr"?></TITLE>
 <?php
-require ($root_path . 'include/core/inc_js_gethelp.php');
-require ($root_path . 'include/core/inc_css_a_hilitebu.php');
+require ($root_path . 'include/helpers/inc_js_gethelp.php');
+require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
 
 ?>
 <style type="text/css">

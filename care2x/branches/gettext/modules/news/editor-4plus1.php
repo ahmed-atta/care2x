@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'include/core/inc_environment_global.php');
+require_once($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,10 +12,10 @@ require_once($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','editor.php');
 $local_user='ck_editor_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 /* Load the date formatter */
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 
 //gjergji : new calendar
@@ -51,7 +51,7 @@ function showpic(d)
 require_once('includes/inc_js_editor_chkform.php');
 
 # Load the dates js values
-require($root_path.'include/core/inc_checkdate_lang.php'); 
+require($root_path.'include/helpers/inc_checkdate_lang.php'); 
 ?>
 <!--  Root path for the html WYSIWYG editor -->
 var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
@@ -63,7 +63,7 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <script language="javascript"  type="text/javascript" src="<?php echo $root_path.'js/html_editor/'; ?>lang/en.js"></script>
 <script language="javascript"  type="text/javascript" src="<?php echo $root_path.'js/html_editor/'; ?>dialog.js"></script>
 <style type="text/css">@import url("<?php echo $root_path.'js/html_editor/'; ?>htmlarea.css")</style>
-<?php require($root_path.'include/core/inc_css_a_hilitebu.php'); ?>
+<?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
 
 </head>
 <body onLoad="HTMLArea.replace('newsbody');document.selectform.newstitle.focus()">

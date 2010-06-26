@@ -2,11 +2,11 @@
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 //error_reporting(E_ALL);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 
 //define('LANG_FILE','stdpass.php');
 //define('NO_CHAIN',1);
-//require_once($root_path.'include/core/inc_front_chain_lang.php');
+//require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 # Create the encounter object
 include($root_path.'include/care_api_classes/class_encounter.php');
 $enc = & new Encounter();

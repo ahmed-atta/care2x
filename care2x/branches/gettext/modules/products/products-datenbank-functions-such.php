@@ -1,7 +1,7 @@
 <?php
 error_reporting ( E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR );
 require ('./roots.php');
-require ($root_path . 'include/core/inc_environment_global.php');
+require ($root_path . 'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
@@ -12,7 +12,7 @@ require ($root_path . 'include/core/inc_environment_global.php');
 */
 define ( 'LANG_FILE', 'products.php' );
 $local_user = 'ck_prod_db_user';
-require_once ($root_path . 'include/core/inc_front_chain_lang.php');
+require_once ($root_path . 'include/helpers/inc_front_chain_lang.php');
 
 ///$db->debug = 1;
 

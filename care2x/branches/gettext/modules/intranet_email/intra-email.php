@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,7 +12,7 @@ require($root_path.'include/core/inc_environment_global.php');
 */
 define('LANG_FILE','intramail.php');
 $local_user='ck_intra_email_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 //$db->debug=1;
 
@@ -22,7 +22,7 @@ require_once($root_path.'include/core/inc_front_chain_lang.php');
 * param $element = element name (the box being checked)
 * param $username = email address to be searched
 *
-* global $link = the database link handle created by the core/inc_db_makelink.php include
+* global $link = the database link handle created by the helpers/inc_db_makelink.php include
 * global $dbtable = the table for the mailboxes
 *
 * return = number of mails in the box
@@ -58,13 +58,13 @@ $linecount=0;
 $modetypes=array('sendmail','listmail','compose');
 
 /* Load the date formatter */
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 
 
 if(in_array($mode,$modetypes)) 
 {
-    if(!isset($db) || !$db) include_once($root_path.'include/core/inc_db_makelink.php');
+    if(!isset($db) || !$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
     if($dblink_ok) {	
 					// sendmail (save to db) module
 		switch($mode)

@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
  * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
  * GNU General Public License
@@ -17,9 +17,9 @@ $lang_tables[]='help.php';
 $lang_tables[]='person.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
-require($root_path.'include/core/inc_front_chain_lang.php');
+require($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 require_once($root_path.'include/care_api_classes/class_insurance.php');
 require_once($root_path.'include/care_api_classes/class_ward.php');
@@ -349,13 +349,13 @@ if($pid!='' || $encounter_nr!=''){
 	}
 
 	# Prepare the photo filename
-	include_once($root_path.'include/core/inc_photo_filename_resolve.php');
+	include_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 	/* Get the citytown name */
 	$addr_citytown_name=$person_obj->CityTownName($addr_citytown_nr);
 
 }
 # Prepare text and resolve the numbers
-include_once($root_path.'include/core/inc_patient_encounter_type.php');
+include_once($root_path.'include/helpers/inc_patient_encounter_type.php');
 
 # Prepare the title
 if($encounter_nr) $headframe_title = "$headframe_title $headframe_append ";
@@ -457,7 +457,7 @@ function resolveLoc(){
 		else d.current_ward_nr.selectedIndex=0;
 }
 
-<?php require($root_path.'include/core/inc_checkdate_lang.php'); ?>
+<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
 
 -->
 </script>
@@ -501,7 +501,7 @@ if(!isset($pid) || !$pid){
 
 	$search_script='patient_register_search.php';
 	$user_origin='admit';
-	include($root_path.'include/core/inc_patient_searchmask.php');
+	include($root_path.'include/helpers/inc_patient_searchmask.php');
 
 	$sTemp = ob_get_contents();
 

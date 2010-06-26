@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -13,7 +13,7 @@ require($root_path.'include/core/inc_environment_global.php');
 $lang_tables[]='departments.php';
 define('LANG_FILE','doctors.php');
 $local_user='ck_doctors_dienstplan_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 if(!isset($dept_nr)||!$dept_nr){
 	header('Location:doctors-select-dept.php'.URL_REDIRECT_APPEND.'&retpath='.$retpath);
@@ -37,7 +37,7 @@ if ($pmonth=='') $pmonth=date('n');
 if ($pyear=='') $pyear=date('Y');
 
 /* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/core/inc_db_makelink.php');
+if(!isset($db)||!$db) include($root_path.'include/helpers/inc_db_makelink.php');
 if($dblink_ok)
 	{	
 		if($mode=='save')

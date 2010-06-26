@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/core/inc_environment_global.php');
+require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -17,8 +17,8 @@ define('MAX_BLOCK_ROWS',30);
 $lang_tables=array('personell.php');
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 ///$db->debug=true;
 
@@ -61,7 +61,7 @@ $pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($searchkey)){
 	
-	include_once($root_path.'include/core/inc_date_format_functions.php');
+	include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 	if($mode!='paginate'){
 		$_SESSION['sess_searchkey']=$searchkey;
@@ -253,7 +253,7 @@ $target='personell_search';
        <td>
 	   <?php
 
-            include($root_path.'include/core/inc_patient_searchmask.php');
+            include($root_path.'include/helpers/inc_patient_searchmask.php');
        
 	   ?>
 </td>
@@ -385,7 +385,7 @@ if($mode=='search'||$mode=='paginate'){
      <tr>
        <td>
 	   <?php
-            include($root_path.'include/core/inc_patient_searchmask.php');
+            include($root_path.'include/helpers/inc_patient_searchmask.php');
 	   ?>
 </td>
      </tr>

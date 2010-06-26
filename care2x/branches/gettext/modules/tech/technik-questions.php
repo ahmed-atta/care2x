@@ -1,7 +1,7 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'/include/core/inc_environment_global.php');
+require($root_path.'/include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -13,7 +13,7 @@ require($root_path.'/include/core/inc_environment_global.php');
 $lang_tables[]='departments.php';
 define('LANG_FILE','tech.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/core/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
 $breakfile='technik.php'.URL_APPEND;
@@ -43,7 +43,7 @@ if(!isset($inquirer)||empty($inquirer))
 $dbtable='care_tech_questions';
 
     /* Load the date formatter */
-    include_once($root_path.'include/core/inc_date_format_functions.php');
+    include_once($root_path.'include/helpers/inc_date_format_functions.php');
     
 
     if($mode=='save') {

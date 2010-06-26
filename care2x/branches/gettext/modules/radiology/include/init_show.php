@@ -12,8 +12,8 @@ if($_SESSION['sess_user_origin']=='admission') {
 	$local_user='ck_radio_user';
 }
 
-require_once($root_path.'include/core/inc_front_chain_lang.php');
-require_once($root_path.'include/core/inc_date_format_functions.php');
+require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_person.php');
 
 $admissionfile='aufnahme_start.php'.URL_APPEND;
@@ -54,6 +54,6 @@ $glob_obj->getConfig('patient_%');
 		
 /* Check whether config foto path exists, else use default path */			
 $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
-require_once($root_path.'include/core/inc_photo_filename_resolve.php');
+require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 
 ?>
