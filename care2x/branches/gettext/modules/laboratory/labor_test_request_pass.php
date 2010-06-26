@@ -79,7 +79,7 @@ switch($target)
 					   break;
 					   
   case 'generic': 
-  						include_once($root_path.'include/care_api_classes/class_department.php');
+  						include_once($root_path.'include/core/class_department.php');
 						$dept_obj=new Department;
 						if($dept_obj->preloadDept($subtarget)){
 							$buffer=$dept_obj->LDvar();

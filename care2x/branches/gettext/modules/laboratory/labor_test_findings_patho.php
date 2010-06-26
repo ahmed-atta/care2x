@@ -34,7 +34,7 @@ $dept_nr = 8 ; // 8 = department nr. of pathology
 
 //$db->debug=1;
 
-require_once ($root_path . 'include/care_api_classes/class_encounter.php') ;
+require_once ($root_path . 'include/core/class_encounter.php') ;
 $enc_obj = new Encounter ( ) ;
 
 /* Here begins the real work */
@@ -46,7 +46,7 @@ if (isset ( $pn ) && $pn) {
 	
 	if ($enc_obj->loadEncounterData ( $pn )) {
 		
-		include_once ($root_path . 'include/care_api_classes/class_globalconfig.php') ;
+		include_once ($root_path . 'include/core/class_globalconfig.php') ;
 		$GLOBAL_CONFIG = array ( ) ;
 		$glob_obj = new GlobalConfig ( $GLOBAL_CONFIG ) ;
 		$glob_obj->getConfig ( 'patient_%' ) ;

@@ -26,7 +26,7 @@ define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 
 
 # Get the encouter data
@@ -53,12 +53,12 @@ if (isset($$insurance_class['LD_var'])&&!empty($$insurance_class['LD_var'])) $in
 # Get ward or department infos
 if($encounter['encounter_class_nr']==1){
 	# Get ward name
-	include_once($root_path.'include/care_api_classes/class_ward.php');
+	include_once($root_path.'include/core/class_ward.php');
 	$ward_obj=new Ward;
 	$current_ward_name=$ward_obj->WardName($encounter['current_ward_nr']);
 }elseif($encounter['encounter_class_nr']==2){
 	# Get ward name
-	include_once($root_path.'include/care_api_classes/class_department.php');
+	include_once($root_path.'include/core/class_department.php');
 	$dept_obj=new Department;
 	//$current_dept_name=$dept_obj->FormalName($current_dept_nr);
 	$current_dept_LDvar=$dept_obj->LDvar($encounter['current_dept_nr']);
@@ -66,7 +66,7 @@ if($encounter['encounter_class_nr']==1){
 		else $current_dept_name=$dept_obj->FormalName($encounter['current_dept_nr']);
 }
 
-require_once($root_path.'include/care_api_classes/class_insurance.php');
+require_once($root_path.'include/core/class_insurance.php');
 $insurance_obj=new Insurance;
 
 

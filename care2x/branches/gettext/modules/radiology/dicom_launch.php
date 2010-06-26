@@ -34,7 +34,7 @@ $breakfile='patient_search.php'.URL_APPEND;
 
 if(isset($img_nr)&&$img_nr){
 # Get the dicom image
-	include_once($root_path.'include/care_api_classes/class_image.php');
+	include_once($root_path.'include/core/class_image.php');
 	$img_obj=new Image;
 	$dicom=&$img_obj->getDicomImage($img_nr);
 	//echo $img_obj->getLastQuery();

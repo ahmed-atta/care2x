@@ -11,7 +11,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 $thisfile=basename(__FILE__);
-require_once($root_path.'include/care_api_classes/class_appointment.php');
+require_once($root_path.'include/core/class_appointment.php');
 $obj=new Appointment();
 //$db->debug=true;
 
@@ -88,7 +88,7 @@ if($result=&$obj->getPersonsAppointmentsObj($pid)){
 }
 
 # Load the encounter classes
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter;
 
 /* Get all encounter classes */
@@ -98,7 +98,7 @@ $subtitle=$LDAppointments;
 $_SESSION['sess_file_return']=$thisfile;
 
 /* Load departments */
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 $deptarray=$dept_obj->getAllMedical('name_formal');
 

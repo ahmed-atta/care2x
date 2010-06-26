@@ -25,10 +25,10 @@ if(!isset($mode)) $mode='';
 if(!isset($non_grouped)) $non_grouped=false;
 
 
-require_once($root_path.'include/care_api_classes/class_template.php');
+require_once($root_path.'include/core/class_template.php');
 $tp_obj = new Template($root_path,$template_path,$template_theme);
 
-require_once($root_path.'include/care_api_classes/class_drg.php');
+require_once($root_path.'include/core/class_drg.php');
 $DRG_obj = new DRG($pn);
 
 $toggle=0;

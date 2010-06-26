@@ -20,7 +20,7 @@ function signalNewDiagnosticsReportEvent($report_date='', $script_name='labor_te
 	if(!function_exists('setEventSignalColor')) include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
 	
 	# Create a core object
-	include_once($root_path.'include/care_api_classes/class_core.php');
+	include_once($root_path.'include/core/class_core.php');
 	$core = & new Core;
 
 

@@ -102,7 +102,7 @@ if(!$GLOBALCONFIG['language_single']){
      <select name="lang"> 
     <?php
     
-    require($root_path.'include/care_api_classes/class_language.php');
+    require($root_path.'include/core/class_language.php');
     $lang_obj=new Language;
     $langselect= $lang_obj->createSelectForm($lang);
     echo $langselect;
@@ -131,7 +131,7 @@ if(!$GLOBALCONFIG['language_single']){
 echo $_SESSION['sess_login_username']; ?>
 <br>
 <?php 
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept=new Department;
 $depts=&$dept->getAllActive();
 $sTemp = '';
@@ -147,7 +147,7 @@ echo  $sTemp;
 ?>
 <br>
 <?php
-require_once($root_path.'include/care_api_classes/class_ward.php');
+require_once($root_path.'include/core/class_ward.php');
 $ward_obj=new Ward;
 $items='nr,ward_id,name, dept_nr'; // set the items to be fetched
 $ward_info=&$ward_obj->getAllWardsItemsArray($items);

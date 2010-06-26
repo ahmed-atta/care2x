@@ -25,7 +25,7 @@ if(isset($mode)&&$mode=='save'){
 
 	$config_new['css']=$css;
 
-	include_once($root_path.'include/care_api_classes/class_userconfig.php');
+	include_once($root_path.'include/core/class_userconfig.php');
 	
 	$user=new UserConfig;
 
@@ -43,7 +43,7 @@ if(isset($mode)&&$mode=='save'){
 
 }elseif(!isset($cfg['css'])||empty($cfg['css'])){
 	if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	include_once($root_path.'include/core/class_globalconfig.php');
 	$gc=new GlobalConfig($GLOBAL_CONFIG);
 	$gc->getConfig('theme_css');
 	if(!empty($GLOBAL_CONFIG['theme_css'])) $cfg['css']=$GLOBAL_CONFIG['theme_css'];
@@ -114,7 +114,7 @@ while (false!==($theme = readdir($handle))) {
 ?>
   
 	<tr class="submenu">
-		<td>&nbsp;<input type="radio" name="css" value="<?php echo $sCssFileLocation; ?>" <?php if($cfg['css'] == $sCssFileLocation) echo 'checked'; ?>></td>
+		<td>&nbsp;<input type="radio" name="css" value="<?php echo $sCssFileLocation; ?>" <?php if($cfg['css'] == $sCssFileLocation) echo 'checked';ï¿½?>></td>
 		<td>&nbsp;<b><?php echo $sCssThemeName; ?></b></td>
 		<td>&nbsp;<?php echo $sCssDescription; ?></td>
 		<td>&nbsp;<?php if(!empty($sCssScreenShot)) echo '<a href="'.$root_path.'gui/css/themes/'.$sCssScreenShot.'" target="_blank">'.$sCssScreenShot.'</a>'; ?></td>

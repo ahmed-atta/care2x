@@ -19,13 +19,13 @@ $thisfile='nursing-station-patientdaten-todo.php';
 $breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
 
 /* Create encounter object */
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj= new Encounter;
 /* Create nursing notes object */
-require_once($root_path.'include/care_api_classes/class_notes_doctors.php');
+require_once($root_path.'include/core/class_notes_doctors.php');
 $report_obj= new DoctorsNotes;
 /* Load global configs */
-include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+include_once($root_path.'include/core/class_globalconfig.php');
 $GLOBAL_CONFIG=array();
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient_%');

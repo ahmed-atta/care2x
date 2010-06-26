@@ -70,7 +70,7 @@ $tab_bot_line='#66ee66';
 require('./gui_bridge/default/gui_tabs_patreg.php');
 
 
-require_once($root_path.'include/care_api_classes/class_gui_input_person.php');
+require_once($root_path.'include/core/class_gui_input_person.php');
 
 $inperson = & new GuiInputPerson;
 

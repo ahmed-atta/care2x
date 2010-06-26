@@ -25,7 +25,7 @@ if(isset($mode)&&$mode=='save'){
 
 	$config_new['mainmenu_tree']=$mainmenu_tree;
 
-	include_once($root_path.'include/care_api_classes/class_userconfig.php');
+	include_once($root_path.'include/core/class_userconfig.php');
 	
 	$user=new UserConfig;
 
@@ -43,7 +43,7 @@ if(isset($mode)&&$mode=='save'){
 
 }elseif(!isset($cfg['mainmenu_tree'])||empty($cfg['mainmenu_tree'])){
 	if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	include_once($root_path.'include/core/class_globalconfig.php');
 	$gc=new GlobalConfig($GLOBAL_CONFIG);
 	$gc->getConfig('theme_mainmenu_tree');
 	if(!empty($GLOBAL_CONFIG['theme_mainmenu_tree'])) $cfg['mainmenu_tree']=$GLOBAL_CONFIG['theme_mainmenu_tree'];
@@ -117,7 +117,7 @@ while (false!==($theme = readdir($handle))) {
 ?>
   
 	<tr class="submenu">
-		<td>&nbsp;<input type="radio" name="mainmenu_tree" value="<?php echo $theme; ?>" <?php if($cfg['mainmenu_tree'] == $theme) echo 'checked'; ?>></td>
+		<td>&nbsp;<input type="radio" name="mainmenu_tree" value="<?php echo $theme; ?>" <?php if($cfg['mainmenu_tree'] == $theme) echo 'checked';ï¿½?>></td>
 		<td>&nbsp;<b><?php echo $sMainMenuStyleName; ?></b></td>
 		<td>&nbsp;
 		<?php

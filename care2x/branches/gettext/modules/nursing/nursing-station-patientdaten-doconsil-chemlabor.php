@@ -128,12 +128,12 @@ define('_BATCH_NR_INIT_',10000000);
 */
 						
 /* Here begins the real work */
-include_once($root_path.'include/care_api_classes/class_lab.php');
+include_once($root_path.'include/core/class_lab.php');
 $lab_obj = new Lab;
 
 /* Check for the patietn number = $pn. If available get the patients data, otherwise set edit to 0 */
 if(isset($pn)&&$pn) {
-    include_once($root_path.'include/care_api_classes/class_encounter.php');
+    include_once($root_path.'include/core/class_encounter.php');
 	$enc_obj=new Encounter;
 	
 	if($enc_obj->loadEncounterData($pn)){
@@ -142,7 +142,7 @@ if(isset($pn)&&$pn) {
 		$_SESSION['sess_en']=$pn;
 		$_SESSION['sess_full_en']=$full_en;
 		
-		include_once($root_path.'include/care_api_classes/class_diagnostics.php');
+		include_once($root_path.'include/core/class_diagnostics.php');
 		$diag_obj=new Diagnostics;
 		$diag_obj->useChemLabRequestTable();
 		$diag_obj_sub = new Diagnostics;

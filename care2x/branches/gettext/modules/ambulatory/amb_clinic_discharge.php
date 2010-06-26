@@ -22,7 +22,7 @@ $thisfile=basename(__FILE__);
 
 # Load date formatter 
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter;
 	
 if($enc_obj->loadEncounterData($pn)){		
@@ -54,7 +54,7 @@ if($enc_obj->loadEncounterData($pn)){
 			# If patient died
 			//$db->debug=1;
 			if($relart==7){
-				include_once($root_path.'include/care_api_classes/class_person.php');
+				include_once($root_path.'include/core/class_person.php');
 				$person=new Person;
 				$death['death_date']=$date;
 				$death['death_encounter_nr']=$pn;
@@ -71,7 +71,7 @@ if($enc_obj->loadEncounterData($pn)){
 		}
 	}
 			
-		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		include_once($root_path.'include/core/class_globalconfig.php');
 		$GLOBAL_CONFIG=array();
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 		$glob_obj->getConfig('patient_%');	
@@ -89,7 +89,7 @@ if($enc_obj->loadEncounterData($pn)){
 
 		if(!isset($dept)||empty($dept)){
 			# Create nursing notes object 
-			include_once($root_path.'include/care_api_classes/class_department.php');
+			include_once($root_path.'include/core/class_department.php');
 			$dept_obj= new Department;
 			$dept=$dept_obj->FormalName($dept_nr);
 		}

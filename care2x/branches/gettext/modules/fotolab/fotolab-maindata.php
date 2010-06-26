@@ -22,7 +22,7 @@ if($mode=='search'){
 
 $patnum=(int)$patnum;
 
-include($root_path.'include/care_api_classes/class_encounter.php');
+include($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter($patnum);
 	
 // get orig data

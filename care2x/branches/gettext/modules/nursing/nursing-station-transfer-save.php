@@ -35,7 +35,7 @@ $fileappend="&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$stati
 $breakfile="location:nursing-station.php".URL_APPEND.$fileappend;
 $forwardfile="location:nursing-station.php".URL_REDIRECT_APPEND.$fileappend;
 # Create ward object
-require_once($root_path.'include/care_api_classes/class_ward.php');
+require_once($root_path.'include/core/class_ward.php');
 $ward_obj= new Ward;
 
 if(isset($mode)&&($mode=='transferbed'||$mode=='transferward')){	

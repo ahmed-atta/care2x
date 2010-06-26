@@ -5,7 +5,7 @@
 
 /**
 */
-require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/core/class_core.php');
 
 /**
 *  Communication, Phone, beeper information methods.

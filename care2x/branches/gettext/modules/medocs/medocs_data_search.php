@@ -48,7 +48,7 @@ if($mode=='paginate'){
 	$oitem='name_last';
 }
 #Load and create paginator object
-require_once($root_path.'include/care_api_classes/class_paginator.php');
+require_once($root_path.'include/core/class_paginator.php');
 $pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 //$db->debug=true;
 if(($mode=='search'||$mode=='paginate')&&($searchkey))
@@ -57,7 +57,7 @@ if(($mode=='search'||$mode=='paginate')&&($searchkey))
 	# Save the search keyword for eventual pagination routines
 	if($mode=='search') $_SESSION['sess_searchkey']=$searchkey;
 	
-		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		include_once($root_path.'include/core/class_globalconfig.php');
         $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
         $glob_obj->getConfig('patient_%');
 

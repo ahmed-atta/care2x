@@ -19,9 +19,9 @@ $lang_tables[]='prompt.php';
 define('LANG_FILE','edp.php');
 $local_user='ck_edv_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/care_api_classes/class_department.php');
-require_once($root_path.'include/care_api_classes/class_ward.php');
-require_once($root_path.'include/care_api_classes/class_oproom.php');
+require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'include/core/class_ward.php');
+require_once($root_path.'include/core/class_oproom.php');
 
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
@@ -113,7 +113,7 @@ if(!empty($mode)&&!$inputerror){
 		}
 		case 'select':
 		{
-			# Get department´s information
+			# Get departmentï¿½s information
 			if(isset($nr)&&$nr){
 				$OR_Info=$OR_obj->ORRecordInfo($nr);
 			}elseif(isset($OR_nr)&&$OR_nr){

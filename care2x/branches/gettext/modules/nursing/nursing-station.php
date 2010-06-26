@@ -53,7 +53,7 @@ if(isset($retpath)){
 }
 
 # Create ward object
-require_once($root_path.'include/care_api_classes/class_ward.php');
+require_once($root_path.'include/core/class_ward.php');
 $ward_obj= new Ward;
 
 # Load date formatter 
@@ -101,7 +101,7 @@ if(($mode=='')||($mode=='fresh')){
 		if(SHOW_DOC_2) $elem.=',duty_2_pnr';
 			
 		# Create personnel object
-		include_once($root_path.'include/care_api_classes/class_personell.php');
+		include_once($root_path.'include/core/class_personell.php');
 		$pers_obj=new Personell;
 			
 		if($result=$pers_obj->getDOCDutyplan($ward_info['dept_nr'],$pyear,$pmonth,$elem)){

@@ -20,7 +20,7 @@ define('LANG_FILE','doctors.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/core/class_core.php');
 $core=new Core;
 
 //$db->debug=1;
@@ -77,10 +77,10 @@ if($force_no_cache || (!$force_no_cache && !$is_cached)){
 		if($dept_nr) $hilitedept=$dept_nr;
 	}
 	# Load the department list with oncall doctors 
-	include_once($root_path.'include/care_api_classes/class_department.php');
+	include_once($root_path.'include/core/class_department.php');
 	$dept_obj=new Department;
 	$dept_DOC=$dept_obj->getAllActiveWithDOC();
-	include_once($root_path.'include/care_api_classes/class_personell.php');
+	include_once($root_path.'include/core/class_personell.php');
 	$pers_obj=new Personell;
 	$quicklist=&$pers_obj->getDOCQuicklist($dept_DOC,$pyear,$pmonth);
 }

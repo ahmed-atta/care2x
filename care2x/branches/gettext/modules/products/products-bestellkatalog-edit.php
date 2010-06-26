@@ -24,10 +24,10 @@ if(!isset($dept_nr)||!$dept_nr){
 	}
 }
 
-require_once($root_path.'include/care_api_classes/class_product.php');
+require_once($root_path.'include/core/class_product.php');
 $product_obj=new Product;
 
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 
 $thisfile=basename(__FILE__);

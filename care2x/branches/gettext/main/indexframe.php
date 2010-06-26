@@ -41,7 +41,7 @@ if(($mask==2)&&!$nonewmask){
 }
 
 # Get the global config for language usage
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $GLOBALCONFIG=array();
 $gc=new GlobalConfig($GLOBALCONFIG);
 $gc->getConfig('language_%');
@@ -50,8 +50,8 @@ $gc->getConfig('language_%');
 $charset=setCharSet();
 
 # Load dept & ward classes
-require_once($root_path.'include/care_api_classes/class_department.php');
-require_once($root_path.'include/care_api_classes/class_ward.php');
+require_once($root_path.'include/core/class_department.php');
+require_once($root_path.'include/core/class_ward.php');
 $dept=new Department();
 $ward=new Ward();
 

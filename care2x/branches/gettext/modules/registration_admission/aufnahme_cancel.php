@@ -19,13 +19,13 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 # Do some filtering
 if(isset($mode)&&($mode=='cancel')&&isset($encounter_nr)&&$encounter_nr){
 
-	include_once($root_path.'include/care_api_classes/class_access.php');
+	include_once($root_path.'include/core/class_access.php');
 	# Create user access object
 	$user=& new Access($cby,$pw);
 
 	if($user->isKnown()&&$user->hasValidPassword()&&$user->isNotLocked()){
 		$is_cancelled=0;
-		include_once($root_path.'include/care_api_classes/class_encounter.php');
+		include_once($root_path.'include/core/class_encounter.php');
 		$encounter=new Encounter;
 		//if($encounter->Cancel($encounter_nr,$cby)){
 		if($encounter->Cancel($encounter_nr,$user->Name())){

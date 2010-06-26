@@ -20,7 +20,7 @@ function getDateFormat()
 	$errFormat=0;
 
     /* If no link to db, make own link*/
-    if(!isset($db) || !$db) include_once($root_path.'include/core/inc_db_makelink.php');
+    if(!isset($db) || !$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
 
     if($dblink_ok)
     {

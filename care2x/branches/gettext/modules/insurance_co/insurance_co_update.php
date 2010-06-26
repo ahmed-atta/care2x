@@ -15,7 +15,7 @@ $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 // Load the insurance object
-require_once($root_path.'include/care_api_classes/class_insurance.php');
+require_once($root_path.'include/core/class_insurance.php');
 $ins_obj=& new Insurance;
 
 switch($retpath){

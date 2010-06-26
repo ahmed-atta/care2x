@@ -7,7 +7,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 define('LANG_FILE','billing.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/core/class_core.php');
 $core= new Core;
 //$db->debug=true;
 $presdate=date("Y-m-d");

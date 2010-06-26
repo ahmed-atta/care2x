@@ -26,7 +26,7 @@ if(!isset($user_origin)||empty($user_origin))
 $user_origin='lab';
 
 # Create encounter object
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $encounter=new Encounter($encounter_nr);
 
 $enc_obj=new Encounter($encounter_nr);
@@ -37,7 +37,7 @@ if($encounter =&$enc_obj->getBasic4Data($encounter_nr)){
 $thisfile='labor_datainput.php';
 
 # Create lab object
-require_once($root_path.'include/care_api_classes/class_lab.php');
+require_once($root_path.'include/core/class_lab.php');
 $lab_obj = new Lab($encounter_nr);
 $lab_obj_sub = new Lab($encounter_nr, true);
 $batch_nr = '';

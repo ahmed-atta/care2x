@@ -26,12 +26,12 @@ $returnfile = $_SESSION [ 'sess_file_return' ] . URL_APPEND ;
 $_SESSION [ 'sess_file_return' ] = basename ( __FILE__ ) ;
 
 //gjergji : load the department list
-require_once ($root_path . 'include/care_api_classes/class_department.php') ;
+require_once ($root_path . 'include/core/class_department.php') ;
 $dept_obj = new Department ( ) ;
 $deptarray = $dept_obj->getAllActiveSort ( 'name_formal' ) ;
 
 //gjergji : load the access roles
-require_once($root_path.'include/care_api_classes/class_access.php');
+require_once($root_path.'include/core/class_access.php');
 $role_obj = & new Access();
 $roles = $role_obj->loadAllRoles();
 

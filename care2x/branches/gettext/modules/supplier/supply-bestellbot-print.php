@@ -11,7 +11,7 @@ $local_user='ck_supply_db_user';
 
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/core/class_core.php');
 $core = & new Core;
 
 $thisfile=basename(__FILE__);
@@ -158,7 +158,7 @@ function parentref(n) {
 <?php
 if($rows){
 	 # Create supplier object
-     include_once($root_path.'include/care_api_classes/class_supplier.php');
+     include_once($root_path.'include/core/class_supplier.php');
 	 $supplier=new Supplier;
 	 echo $supplier->FormalName($supplier_nr);
 //++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++

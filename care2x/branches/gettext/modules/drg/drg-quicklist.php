@@ -21,7 +21,7 @@ require_once('drg_inc_local_user.php');
 //$db->debug=true;
 
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/care_api_classes/class_drg.php');
+require_once($root_path.'include/core/class_drg.php');
 $DRG_obj= new DRG($pn,$dept_nr);
 
 if($saveok) { 

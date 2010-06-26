@@ -11,7 +11,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 $thisfile=basename(__FILE__);
-require_once($root_path.'include/care_api_classes/class_obstetrics.php');
+require_once($root_path.'include/core/class_obstetrics.php');
 $obj=new Obstetrics;
 
 //$db->debug=true;

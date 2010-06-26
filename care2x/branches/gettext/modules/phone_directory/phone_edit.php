@@ -19,7 +19,7 @@ if(isset($user_origin)&&$user_origin=='pers'){
 	$sBreakUrl = 'phone.php'.URL_APPEND;
 }
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/care_api_classes/class_personell.php');
+require_once($root_path.'include/core/class_personell.php');
 
 /* Create employee object */
 $employee=new Personell();
@@ -42,7 +42,7 @@ if ($mode=='save' || ($mode=='update' && !empty($nr)) ){
 		$bSaveOk = FALSE;
 
          # Create comm object
-         include_once($root_path.'include/care_api_classes/class_comm.php');
+         include_once($root_path.'include/core/class_comm.php');
          $phone = & new Comm;
 
         # Correctly map some indexes

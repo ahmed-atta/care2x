@@ -30,7 +30,7 @@ $entry_body_bgcolor='#ffffff';
 if(!isset($searchkey)) $searchkey='';
 if(!isset($mode)) $mode='';
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode=='paginate'){
 	$searchkey=$_SESSION['sess_searchkey'];
 	
@@ -59,10 +59,10 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	$append='&status='.$status.'&target='.$target.'&user_origin='.$user_origin;
 
 	# Paginator object
-	include_once($root_path.'include/care_api_classes/class_paginator.php');
+	include_once($root_path.'include/core/class_paginator.php');
 	$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	include_once($root_path.'include/core/class_globalconfig.php');
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 	# Get the max nr of rows from global config
@@ -72,7 +72,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_patient_search_max_block_rows']);
 
 
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	include_once($root_path.'include/core/class_globalconfig.php');
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 	$glob_obj->getConfig('patient_%');
 

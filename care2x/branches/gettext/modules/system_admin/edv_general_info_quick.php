@@ -19,7 +19,7 @@ $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
 
 $GLOBAL_CONFIG=array();
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 # Create object linking our global config array to the object
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 

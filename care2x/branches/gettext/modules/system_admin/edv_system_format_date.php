@@ -27,7 +27,7 @@ $GLOBAL_CONFIG=array();
 $new_date_ok=0;
 
 # Create global config object
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 	
 if(($mode=='save')&&($date_format!='')&&(stristr($date_format,$validator))){  

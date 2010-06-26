@@ -90,7 +90,7 @@ $thisfile=basename(__FILE__);
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 // Get the prescription data
-include_once($root_path.'include/care_api_classes/class_prescription.php');
+include_once($root_path.'include/core/class_prescription.php');
 if(!isset($objPrescription))
 $objPrescription=new Prescription;
 $app_types=$objPrescription->getAppTypes();
@@ -100,7 +100,7 @@ $pres_types=$objPrescription->getPrescriptionTypes();
 $objPrescription->setPrescriptionStatus($presnr,'printed');
 
 // Get the encouter data
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj=& new Encounter($enc);
 $encounter = '';
 if($enc_obj->loadEncounterData()){
@@ -109,17 +109,17 @@ if($enc_obj->loadEncounterData()){
 
 
 // Get the Deparment name
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj = new Department();
 $deptName = $dept_obj->FormalName($enc_obj->encounter['current_dept_nr']);
-require_once($root_path.'include/care_api_classes/class_ward.php');
+require_once($root_path.'include/core/class_ward.php');
 $ward_obj = new Ward();
 $wardName = $ward_obj->getWardInfo($enc_obj->encounter['current_ward_nr']);
 $roomName = $ward_obj->_getActiveRoomInfo($enc_obj->encounter['current_room_nr'],$enc_obj->encounter['current_ward_nr']);
 $roomNumber = $enc_obj->encounter['current_room_nr'];
 
 // get Allergy notes type = 22
-include_once($root_path.'include/care_api_classes/class_charts.php');
+include_once($root_path.'include/core/class_charts.php');
 $charts_obj= new Charts;
 $allergy=&$charts_obj->getChartNotes($enc,22);
 $patientAllergy = '';
@@ -129,7 +129,7 @@ if(is_object($allergy)){
 	}
 }
 if( $patientAllergy == "" ) $patientAllergy = " -- ";
-include_once($root_path.'include/care_api_classes/class_drg.php');
+include_once($root_path.'include/core/class_drg.php');
 $patientDiagnosis = '';
 $diag=new DRG();
 $diagnosis=&$diag->DiagnosisCodes(0,$enc);

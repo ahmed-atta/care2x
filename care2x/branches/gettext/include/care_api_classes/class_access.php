@@ -5,9 +5,9 @@
 
 /**
 */
-require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/core/class_core.php');
 /**
-* Class for access authentication routínes.
+* Class for access authentication routï¿½nes.
 * Extends the class "Core".
 * Note this class should be instantiated only after a "$db" adodb  connector object has been established by an adodb instance
 * @package care_api

@@ -14,7 +14,7 @@ define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/core/class_core.php');
 $core = & new Core;
 
 //$db->debug=1;
@@ -22,7 +22,7 @@ $core = & new Core;
 $parsedstr=array();
 $globdata="sid=$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 // clean the input data
-$material_nr=strtr($material_nr,"§%&?/\+*~#';:,!$","                ");// convert chars to (15) spaces
+$material_nr=strtr($material_nr,"ï¿½%&?/\+*~#';:,!$","                ");// convert chars to (15) spaces
 $material_nr=trim($material_nr);
 //$material_nr=str_replace(" ","",$material_nr);
 

@@ -25,7 +25,7 @@ if(isset($mode)&&$mode=='save'){
 
 	$config_new['template_theme']=$gui_theme;
 	
-	include_once($root_path.'include/care_api_classes/class_userconfig.php');
+	include_once($root_path.'include/core/class_userconfig.php');
 	
 	$user=new UserConfig;
 

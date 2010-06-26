@@ -1,6 +1,6 @@
 <?php
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
-require_once($root_path.'include/care_api_classes/class_userconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
+require_once($root_path.'include/core/class_userconfig.php');
 
 
 if($_SESSION['sess_level2_logged'] && $_SESSION['sess_level2_user_id']) {

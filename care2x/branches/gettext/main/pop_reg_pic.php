@@ -14,7 +14,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
-require_once($root_path.'include/care_api_classes/class_person.php');
+require_once($root_path.'include/core/class_person.php');
 $person=& new Person($pid);
 $person->preloadPersonInfo();
 ?>

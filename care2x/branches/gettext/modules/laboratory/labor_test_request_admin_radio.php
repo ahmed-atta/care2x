@@ -110,11 +110,11 @@ if(!$mode) {
 
 /* Check for the patient number = $pn. If available get the patients data */
 if($batchrows && $pn){
-	include_once($root_path.'include/care_api_classes/class_encounter.php');
+	include_once($root_path.'include/core/class_encounter.php');
 	$enc_obj=new Encounter;
 	if( $enc_obj->loadEncounterData($pn)) {
 
-		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+		include_once($root_path.'include/core/class_globalconfig.php');
 		$GLOBAL_CONFIG=array();
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 		$glob_obj->getConfig('patient_%');

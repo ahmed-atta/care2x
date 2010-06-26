@@ -25,7 +25,7 @@ if(isset($mode)&&$mode=='save'){
 
 	$config_new['control_buttons']=$control_buttons;
 
-	include_once($root_path.'include/care_api_classes/class_userconfig.php');
+	include_once($root_path.'include/core/class_userconfig.php');
 	
 	$user=new UserConfig;
 
@@ -43,7 +43,7 @@ if(isset($mode)&&$mode=='save'){
 
 }elseif(!isset($cfg['control_buttons'])||empty($cfg['control_buttons'])){
 	if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	include_once($root_path.'include/core/class_globalconfig.php');
 	$gc=new GlobalConfig($GLOBAL_CONFIG);
 	$gc->getConfig('theme_common_icons');
 	if(!empty($GLOBAL_CONFIG['theme_common_icons'])) $cfg['icons']=$GLOBAL_CONFIG['theme_common_icons'];
@@ -116,7 +116,7 @@ while (false!==($theme = readdir($handle))) {
 ?>
   
 	<tr class="submenu">
-		<td>&nbsp;<input type="radio" name="control_buttons" value="<?php echo $theme; ?>" <?php if($cfg['control_buttons'] == $theme) echo 'checked'; ?>></td>
+		<td>&nbsp;<input type="radio" name="control_buttons" value="<?php echo $theme; ?>" <?php if($cfg['control_buttons'] == $theme) echo 'checked';ï¿½?>></td>
 		<td>&nbsp;<b><?php echo $sControlButtonsThemeName; ?></b></td>
 		<td>&nbsp;
 		<img src="<?php echo $root_path."gui/img/control/$theme/$lang/$lang"."_back2.gif"; ?>">

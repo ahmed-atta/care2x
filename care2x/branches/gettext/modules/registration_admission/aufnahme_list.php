@@ -61,11 +61,11 @@ if($mode=='paginate'){
 	$oitem='';
 }
 #Load and create paginator object
-require_once($root_path.'include/care_api_classes/class_paginator.php');
+require_once($root_path.'include/core/class_paginator.php');
 $pagen=& new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 $GLOBAL_CONFIG=array();
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 # Get the max nr of rows from global config
 $glob_obj->getConfig('pagin_person_search_max_block_rows');
@@ -223,7 +223,7 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 		}
 	}
 }
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient%');
@@ -237,9 +237,9 @@ $target='archiv';
 
 if(!isset($rows)||!$rows) {
 
-	include($root_path.'include/care_api_classes/class_encounter.php');
-	include($root_path.'include/care_api_classes/class_ward.php');
-	include_once($root_path.'include/care_api_classes/class_insurance.php');
+	include($root_path.'include/core/class_encounter.php');
+	include($root_path.'include/core/class_ward.php');
+	include_once($root_path.'include/core/class_insurance.php');
 
 	# Create encounter object
 	$encounter_obj=new Encounter();

@@ -23,12 +23,12 @@ define ( 'LANG_FILE', 'aufnahme.php' ) ;
 //define('NO_2LEVEL_CHK',1);//define('NO_CHAIN',TRUE);$local_user = 'aufnahme_user' ;
 require_once ($root_path . 'include/helpers/inc_front_chain_lang.php') ;
 require_once ($root_path . 'include/helpers/inc_date_format_functions.php') ;
-require_once ($root_path . 'include/care_api_classes/class_person.php') ;
-require_once ($root_path . 'include/care_api_classes/class_insurance.php') ;
+require_once ($root_path . 'include/core/class_person.php') ;
+require_once ($root_path . 'include/core/class_insurance.php') ;
 
 $insurance_obj = new PersonInsurance ( ) ;
 $person_obj = & new Person ( $pid ) ;
-// Get the person´s dataif ($person_obj->preloadPersonInfo ( $pid )) {
+// Get the personï¿½s dataif ($person_obj->preloadPersonInfo ( $pid )) {
 	$person = $person_obj->person ;
 	// copy to encounter variable 	$encounter = & $person ;	
 
@@ -55,12 +55,12 @@ $insurance_class = $insurance_obj->getInsuranceClassInfo ( $insurance_class_nr )
 	$insclass = $$insurance_class [ 'LD_var' ] ; else
 	$insclass = $insurance_class [ 'name' ] ;
 	
-# Get the global config for person's registration form*/require_once ($root_path . 'include/care_api_classes/class_globalconfig.php') ;
+# Get the global config for person's registration form*/require_once ($root_path . 'include/core/class_globalconfig.php') ;
 $GLOBAL_CONFIG = array ( ) ;
 $glob_obj = new GlobalConfig ( $GLOBAL_CONFIG ) ;
 $glob_obj->getConfig ( 'person_%' ) ;
 
-require_once ($root_path . 'include/care_api_classes/class_insurance.php') ;
+require_once ($root_path . 'include/core/class_insurance.php') ;
 $insurance_obj = new Insurance ( ) ;
 
 $classpath = $root_path . 'classes/phppdf/' ;
@@ -82,7 +82,7 @@ $encbarcode = $root_path . 'cache/barcodes/en_' . $enc . '.png' ;
 $diff = array ( 199 => 'Ccedilla' , 208 => 'Gbreve' , 221 => 'Idotaccent' , 214 => 'Odieresis' , 222 => 'Scedilla' , 220 => 'Udieresis' , 231 => 'ccedilla' , 240 => 'gbreve' , 253 => 'dotlessi' , 246 => 'odieresis' , 254 => 'scedilla' , 252 => 'udieresis' , 226 => 'acircumflex' ) ;
 $pdf->selectFont ( $fontpath . 'Helvetica.afm', array ( 'encoding' => 'WinAnsiEncoding' , 'differences' => $diff ) ) ;# Get the main informationsif (! isset ( $GLOBAL_CONFIG ))
 	$GLOBAL_CONFIG = array ( ) ;
-include_once ($root_path . 'include/care_api_classes/class_globalconfig.php') ;
+include_once ($root_path . 'include/core/class_globalconfig.php') ;
 $glob = & new GlobalConfig ( $GLOBAL_CONFIG ) ;
 # Get all config items starting with "main_"$glob->getConfig ( 'main_%' ) ;
 $y = $pdf->ezText ( "\n", 30 ) ;

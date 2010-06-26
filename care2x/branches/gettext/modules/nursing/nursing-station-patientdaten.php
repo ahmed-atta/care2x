@@ -45,15 +45,15 @@ $f = SIGNAL_COLOR_LEVEL_FULL;
 $_SESSION['sess_user_origin']='nursing';
 
 /* Create department object and load all medical depts */
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj= new Department;
 $medical_depts=$dept_obj->getAllActiveSort( 'name_formal' );
 /* Create encounter object */
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj= new Encounter;
 
 /* Load global configs */
-include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+include_once($root_path.'include/core/class_globalconfig.php');
 $GLOBAL_CONFIG=array();
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('patient_%');	

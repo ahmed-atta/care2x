@@ -100,7 +100,7 @@ $thisfile=basename(__FILE__);
 ///$db->debug=1;
 
 /* Create encounter object */
-require_once($root_path.'include/care_api_classes/class_lab.php');
+require_once($root_path.'include/core/class_lab.php');
 $enc_obj= new Encounter($encounter_nr);
 $lab_obj=new Lab($encounter_nr);
 

@@ -21,7 +21,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 $thisfile=basename(__FILE__);
 
 /* Create charts object */
-require_once($root_path.'include/care_api_classes/class_charts.php');
+require_once($root_path.'include/core/class_charts.php');
 $charts_obj= new Charts;
 
 	switch($winid)

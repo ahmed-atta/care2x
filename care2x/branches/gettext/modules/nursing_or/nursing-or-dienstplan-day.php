@@ -54,7 +54,7 @@ if($ergebnis=$db->Execute($sql)){
 
 //echo $sql;
 
-require_once($root_path.'include/care_api_classes/class_personell.php');
+require_once($root_path.'include/core/class_personell.php');
 $pers_obj=new Personell;
 
 if($pnr=$duty1['ha'.$offset_day]){
@@ -64,7 +64,7 @@ if($pnr=$duty2['hr'.$offset_day]){
 	$person2=&$pers_obj->getPersonellInfo($pnr);
 }
 
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 $dept=&$dept_obj->getPhoneInfo($dept_nr);
 /* Resolve the departments name "language dependent" */
@@ -72,7 +72,7 @@ $dept_ldvar=$dept_obj->LDvar($dept_nr);
 if(isset($$dept_ldvar)&&!empty($$dept_ldvar)) $dept_name=$$dept_ldvar;
 	else $dept_name=$dept_obj->FormalName($dept_nr);
 
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('person_%');
 /* Check whether config foto path exists, else use default path */			

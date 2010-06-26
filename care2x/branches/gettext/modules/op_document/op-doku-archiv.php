@@ -42,7 +42,7 @@ $breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
 if(!isset($_SESSION['sess_dept_name'])) $_SESSION['sess_dept_name'] = "";
 
 # Create dept object and preload dept info
-require_once($root_path.'include/care_api_classes/class_department.php');
+require_once($root_path.'include/core/class_department.php');
 $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 $buffer=$dept_obj->LDvar();
@@ -50,7 +50,7 @@ if(isset($$buffer)&&!empty($$buffer)) $_SESSION['sess_dept_name']=$$buffer;
 	else $_SESSION['sess_dept_name']=$dept_obj->FormalName();
 
 # Create the encounter object
-include_once($root_path.'include/care_api_classes/class_encounter.php');
+include_once($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter();
 		
 $linecount=0;
@@ -58,7 +58,7 @@ $patientselected=FALSE;
 
 function clean_it(&$d)
 {
-	$d=strtr($d,"°!§$&/()=?`´+'#{}[]\^","~~~~~~~~~~~~~~~~~~~~~");
+	$d=strtr($d,"ï¿½!ï¿½$&/()=?`ï¿½+'#{}[]\^","~~~~~~~~~~~~~~~~~~~~~");
 	$d=str_replace("\"","~",$d);   //"
 	$d=str_replace("~","",$d);
 	return trim($d);
@@ -69,7 +69,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
     
 
 if($mode=='search'||$mode=='paginate'){
-	# Initialize page´s control variables
+	# Initialize pageï¿½s control variables
 	if($mode!='paginate'){
 		# Reset paginator variables
 		$pgx=0;
@@ -79,12 +79,12 @@ if($mode=='search'||$mode=='paginate'){
 		$_SESSION['sess_searchkey']=$matchcode;
 	}
 	# Paginator object
-	require_once($root_path.'include/care_api_classes/class_paginator.php');
+	require_once($root_path.'include/core/class_paginator.php');
 	$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 	# Load global configs
 	$GLOBAL_CONFIG=array();
-	require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	require_once($root_path.'include/core/class_globalconfig.php');
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 	# Get the max nr of rows from global config

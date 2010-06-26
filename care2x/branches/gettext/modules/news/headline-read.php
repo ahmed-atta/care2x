@@ -21,7 +21,7 @@ $breakfile=$root_path.$_SESSION['sess_file_break'].URL_APPEND;
 //$_SESSION['sess_file_return']='start_page.php';
 
 # Get the news article
-require_once($root_path.'include/care_api_classes/class_news.php');
+require_once($root_path.'include/core/class_news.php');
 $newsobj=new News;
 $news=&$newsobj->getNews($nr);
 

@@ -16,7 +16,7 @@ $local_user='ck_pflege_user';
 //define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 /* Create nursing notes object */
-require_once($root_path.'include/care_api_classes/class_target.php');
+require_once($root_path.'include/core/class_target.php');
 $report_obj= new Target;
  
 //if ($station=='') { $station='Non-department specific';  }
@@ -68,12 +68,12 @@ if($mode=='save'){
 		# Know where we are
 		switch($_SESSION['sess_user_origin']){
 			case 'amb': # Create nursing notes object 
-						include_once($root_path.'include/care_api_classes/class_department.php');
+						include_once($root_path.'include/core/class_department.php');
 						$obj= new Department;
 						$station=$obj->FormalName($dept_nr);
 						break;
 			default: # Create nursing notes object 
-						include_once($root_path.'include/care_api_classes/class_ward.php');
+						include_once($root_path.'include/core/class_ward.php');
 						$obj= new Ward;
 						$station=$obj->WardName($location_nr);
 		}
@@ -231,7 +231,7 @@ ob_start();
 <textarea name="cavo_orofaringeo" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['cavo_orofaringeo'] ?></textarea></td
 ></tr>
 </table>
- Lingua <select name='lingua'><option name='Epitelizzata' <?php if (($occup)&&($row['lingua']=="Epitelizzata")) echo "selected"; ?>>Ben epitelizzata</option><option name='Atrofica' <?php if (($occup)&&($row['lingua']=="Atrofica")) echo "selected"; ?>>Atrofica</option><option name='Patinosa' <?php if (($occup)&&($row['lingua']=="Patinosa")) echo "selected"; ?>>Patinosa</option><option name='Secca' <?php if (($occup)&&($row['lingua']=="Secca")) echo "selected"; ?>>Secca</option></select><br>
+ï¿½Lingua <select name='lingua'><option name='Epitelizzata' <?php if (($occup)&&($row['lingua']=="Epitelizzata")) echo "selected"; ?>>Ben epitelizzata</option><option name='Atrofica' <?php if (($occup)&&($row['lingua']=="Atrofica")) echo "selected"; ?>>Atrofica</option><option name='Patinosa' <?php if (($occup)&&($row['lingua']=="Patinosa")) echo "selected"; ?>>Patinosa</option><option name='Secca' <?php if (($occup)&&($row['lingua']=="Secca")) echo "selected"; ?>>Secca</option></select><br>
  <table>
 <tr>
 <td>Dentizione<br>
@@ -246,7 +246,7 @@ ob_start();
 <tr>
 <td>Forma<br>
 <textarea name="collo_forma" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['collo_forma'] ?></textarea></td>
-<td>Mobilità<br>
+<td>Mobilitï¿½<br>
 <textarea name="mobilita" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['mobilita'] ?></textarea></td>
 </tr>
 <tr>
@@ -273,7 +273,7 @@ ob_start();
 <textarea name="mammelle" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['mammelle'] ?></textarea></td>
 </tr>
 </table>
- Reperti <select name='reperti_torace'><option name='Si'<?php if (($occup)&&($row['reperti_torace']=="Si")) echo "selected"; ?>>Si</option><option name='No' <?php if (($occup)&&($row['reperti_torace']=="No")) echo "selected"; ?>>No</option></select><br>
+ï¿½Reperti <select name='reperti_torace'><option name='Si'<?php if (($occup)&&($row['reperti_torace']=="Si")) echo "selected"; ?>>Si</option><option name='No' <?php if (($occup)&&($row['reperti_torace']=="No")) echo "selected"; ?>>No</option></select><br>
 <strong>Apparato respiratorio</strong><br> 
 <table>
 <tr>
@@ -319,7 +319,7 @@ Reperti <select name='reperti_cuore'><option name='Si'<?php if (($occup)&&($row[
 <textarea name="vene" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['vene'] ?></textarea></td>
 </tr>
 </table>
- Reperti <select name='reperti_vasi'><option name='Si'<?php if (($occup)&&($row['reperti_vasi']=="Si")) echo "selected"; ?>>Si</option><option name='No' <?php if (($occup)&&($row['reperti_vasi']=="No")) echo "selected"; ?>>No</option></select><br>
+ï¿½Reperti <select name='reperti_vasi'><option name='Si'<?php if (($occup)&&($row['reperti_vasi']=="Si")) echo "selected"; ?>>Si</option><option name='No' <?php if (($occup)&&($row['reperti_vasi']=="No")) echo "selected"; ?>>No</option></select><br>
 <strong>Addome</strong><br> 
 <table>
 <tr>
@@ -341,7 +341,7 @@ Reperti <select name='reperti_cuore'><option name='Si'<?php if (($occup)&&($row[
 <textarea name="rettale" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['rettale'] ?></textarea></td>
 </tr>
 </table>
- Reperti <select name='reperti_addome'><option name='Si'<?php if (($occup)&&($row['reperti_addome']=="Si")) echo "selected"; ?>>Si</option><option name='No' <?php if (($occup)&&($row['reperti_addome']=="No")) echo "selected"; ?>>No</option></select><br>
+ï¿½Reperti <select name='reperti_addome'><option name='Si'<?php if (($occup)&&($row['reperti_addome']=="Si")) echo "selected"; ?>>Si</option><option name='No' <?php if (($occup)&&($row['reperti_addome']=="No")) echo "selected"; ?>>No</option></select><br>
 <strong>Fegato</strong><br>
 <textarea name="fegato_descrizione" cols=30 rows=5 wrap="physical" onKeyup="setChg()"><?php if ($occup) echo $row['fegato_descrizione'] ?></textarea><br>
 <table>

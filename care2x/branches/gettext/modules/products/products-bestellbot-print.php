@@ -22,7 +22,7 @@ $local_user=$userck;
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 # Create core object
-require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/core/class_core.php');
 $core = & new Core;
 
 $thisfile=basename(__FILE__);
@@ -200,7 +200,7 @@ function parentref(n) {
 
 <?php
 if($rows){
-    include_once($root_path.'include/care_api_classes/class_department.php');
+    include_once($root_path.'include/core/class_department.php');
     $dept=new Department;
 
 //++++++++++++++++++++++++ show the actual list +++++++++++++++++++++++++++

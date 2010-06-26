@@ -17,7 +17,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 //$db->debug=true;
 $thisfile=basename(__FILE__);
 /* Create charts object */
-require_once($root_path.'include/care_api_classes/class_charts.php');
+require_once($root_path.'include/core/class_charts.php');
 $charts_obj= new Charts;
 
 $title=$LDBpTemp;
@@ -271,7 +271,7 @@ if($bpcount||$tempcount){
  						 <tr>
    						 <td><input type="text" name="ttime'.$i.'" size=6 maxlength=5 value="'.$bb['msr_time'].'" onKeyUp="isvalidtime(this,\''.$lang.'\')">
         				</td>
-   						 <td class="v12"><input type="text" name="tdata'.$i.'" size=8 maxlength=7 value="'.$bb['value'].'">°C'.$GLOBAL_CONFIG['measure_temp_unit_id'].'</td>
+   						 <td class="v12"><input type="text" name="tdata'.$i.'" size=8 maxlength=7 value="'.$bb['value'].'">ï¿½C'.$GLOBAL_CONFIG['measure_temp_unit_id'].'</td>
   						</tr>
   						';
 			}

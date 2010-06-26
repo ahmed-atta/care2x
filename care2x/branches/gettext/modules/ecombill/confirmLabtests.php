@@ -9,7 +9,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
  */
 require('./roots.php');
 require($root_path.'include/helpers/inc_environment_global.php');
-require($root_path.'include/care_api_classes/class_ecombill.php');
+require($root_path.'include/core/class_ecombill.php');
 $eComBill = new eComBill;
 
 define('NO_CHAIN',1);

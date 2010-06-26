@@ -6,9 +6,9 @@ $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'modules/news/includes/inc_editor_fx.php');
-require_once($root_path.'include/care_api_classes/class_person.php');
+require_once($root_path.'include/core/class_person.php');
 # Load the template class
-require_once($root_path.'include/care_api_classes/class_template.php');
+require_once($root_path.'include/core/class_template.php');
 # Create the template object
 $TP_obj=new Template($root_path);
 
@@ -40,7 +40,7 @@ if(isset($pid) && ($pid!='')) {
 	}
 }
 
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('person_%');
 //$glob_obj->getConfig('patient_%');
@@ -70,7 +70,7 @@ if($_SESSION['sess_parent_mod']=='admission') {
 	$page_title=$LDAdmission;
 	
 	# Get the overall status
-	include_once($root_path.'include/care_api_classes/class_encounter.php');
+	include_once($root_path.'include/core/class_encounter.php');
 	$enc_obj=new Encounter;
 	if($stat=&$enc_obj->AllStatus($_SESSION['sess_en'])){
 		$enc_status=$stat->FetchRow();

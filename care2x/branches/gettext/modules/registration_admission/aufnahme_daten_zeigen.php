@@ -14,13 +14,13 @@ $lang_tables[]='departments.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/care_api_classes/class_encounter.php');
-require_once($root_path.'include/care_api_classes/class_person.php');
-require_once($root_path.'include/care_api_classes/class_insurance.php');
-require_once($root_path.'include/care_api_classes/class_ward.php');
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
-require_once($root_path.'include/care_api_classes/class_ecombill.php');
-require_once($root_path.'include/care_api_classes/class_personell.php');
+require_once($root_path.'include/core/class_encounter.php');
+require_once($root_path.'include/core/class_person.php');
+require_once($root_path.'include/core/class_insurance.php');
+require_once($root_path.'include/core/class_ward.php');
+require_once($root_path.'include/core/class_globalconfig.php');
+require_once($root_path.'include/core/class_ecombill.php');
+require_once($root_path.'include/core/class_personell.php');
 
 if(!isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod'] = "";
 # Create objects
@@ -124,12 +124,12 @@ $dbtable='care_encounter';
 		# Get ward or department infos
 		if($encounter_class_nr==1){
 			# Get ward name
-			include_once($root_path.'include/care_api_classes/class_ward.php');
+			include_once($root_path.'include/core/class_ward.php');
 			$ward_obj=new Ward;
 			$current_ward_name=$ward_obj->WardName($current_ward_nr);
 		}elseif($encounter_class_nr==2){
 			# Get ward name
-			include_once($root_path.'include/care_api_classes/class_department.php');
+			include_once($root_path.'include/core/class_department.php');
 			$dept_obj=new Department;
 			//$current_dept_name=$dept_obj->FormalName($current_dept_nr);
 			$current_dept_LDvar=$dept_obj->LDvar($current_dept_nr);

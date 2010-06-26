@@ -6,7 +6,7 @@ if (stristr("inc_rightcolumn_menu.php",$PHP_SELF))
 
 /* Get the main info data */
 $config_type='main_info_%';
-require($root_path.'include/core/inc_get_global_config.php');
+require($root_path.'include/helpers/inc_get_global_config.php');
 
 #Workaround
 $main_info_address=nl2br($main_info_address);

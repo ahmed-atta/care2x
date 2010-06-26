@@ -14,7 +14,7 @@ $thisfile=basename(__FILE__);
 
 if(!isset($type_nr)||!$type_nr) $type_nr=1; //* 1 = history physical notes
 
-require_once($root_path.'include/care_api_classes/class_notes.php');
+require_once($root_path.'include/core/class_notes.php');
 $obj=new Notes;
 $types=$obj->getAllTypesSort('name');
 $this_type=$obj->getType($type_nr);
@@ -61,7 +61,7 @@ require('./include/init_show.php');
 $page_title=$LDMedocs;
 
 # Load the entire encounter data
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter($encounter_nr);
 $enc_obj->loadEncounterData();
 # Get encounter class

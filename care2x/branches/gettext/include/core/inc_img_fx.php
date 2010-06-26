@@ -13,7 +13,7 @@
 # Create global config object
 
 if(!isset($GLOBAL_CONFIG)||!is_array($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $gc=new GlobalConfig($GLOBAL_CONFIG);
 
 

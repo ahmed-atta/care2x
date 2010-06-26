@@ -22,13 +22,13 @@ $thisfile=basename(__FILE__);
 $breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
 
 /* Create encounter object */
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $enc_obj= new Encounter;
 /* Create nursing notes object */
-require_once($root_path.'include/care_api_classes/class_notes_nursing.php');
+require_once($root_path.'include/core/class_notes_nursing.php');
 $report_obj= new NursingNotes;
 /* Load global configs */
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 
 /**
 Load custom file - note that by default we will assume english

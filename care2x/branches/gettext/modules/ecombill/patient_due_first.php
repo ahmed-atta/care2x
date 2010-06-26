@@ -17,8 +17,8 @@ define('LANG_FILE','billing.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
-require($root_path.'include/care_api_classes/class_ecombill.php');
-require($root_path.'include/care_api_classes/class_encounter.php');
+require($root_path.'include/core/class_ecombill.php');
+require($root_path.'include/core/class_encounter.php');
 $eComBill = new eComBill;
 $Encounter = new Encounter;
 

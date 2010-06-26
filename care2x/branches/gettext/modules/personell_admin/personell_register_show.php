@@ -12,11 +12,11 @@ $lang_tables=array('personell.php');
 define('LANG_FILE','aufnahme.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/care_api_classes/class_personell.php');
-//require_once($root_path.'include/care_api_classes/class_person.php');
-//require_once($root_path.'include/care_api_classes/class_insurance.php');
-//require_once($root_path.'include/care_api_classes/class_ward.php');
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_personell.php');
+//require_once($root_path.'include/core/class_person.php');
+//require_once($root_path.'include/core/class_insurance.php');
+//require_once($root_path.'include/core/class_ward.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 
 $GLOBAL_CONFIG=array();
 

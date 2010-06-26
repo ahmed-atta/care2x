@@ -13,7 +13,7 @@ if(!empty($_COOKIE['ck_config'])){
 	$ck_userid='';
 }
 $cfg=array();
-include_once($root_path.'include/care_api_classes/class_userconfig.php');
+include_once($root_path.'include/core/class_userconfig.php');
 $cfg_obj=new UserConfig;
 
 if(is_object($cfg_obj)) {

@@ -18,7 +18,7 @@ require_once('drg_inc_local_user.php');
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 /* Load the date formatter */
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
-require_once($root_path.'include/care_api_classes/class_drg.php');
+require_once($root_path.'include/core/class_drg.php');
 $enc_obj = new DRG($pn);
 
 //$db->debug=true;

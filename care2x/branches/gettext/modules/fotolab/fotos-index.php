@@ -30,11 +30,11 @@ if($disc_pix_mode){
 include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 /* Create encounter object */
-require_once($root_path.'include/care_api_classes/class_encounter.php');
+require_once($root_path.'include/core/class_encounter.php');
 $encounter= new Encounter;
 $encounter->loadEncounterData($pn);
 /* Create image object */
-require_once($root_path.'include/care_api_classes/class_image.php');
+require_once($root_path.'include/core/class_image.php');
 $img=new Image();
 $all_image=$img->getAllImageData($pn);
 

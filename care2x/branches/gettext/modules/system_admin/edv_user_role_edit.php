@@ -14,14 +14,14 @@ $lang_tables [] = 'access.php' ;
 define ( 'LANG_FILE', 'edp.php' ) ;
 $local_user = 'ck_edv_user' ;
 require_once ($root_path . 'include/helpers/inc_front_chain_lang.php') ;
-require_once($root_path.'include/care_api_classes/class_core.php');
+require_once($root_path.'include/core/class_core.php');
 ///$db->debug=true;
 /**
  * The following require loads the access areas that can be assigned for
  * user permissions.
  */
 require ($root_path . 'include/helpers/inc_accessplan_areas_functions.php') ;
-require_once($root_path.'include/care_api_classes/class_access.php');
+require_once($root_path.'include/core/class_access.php');
 $role = & new Access();
 
 $breakfile = 'edv-system-admi-welcome.php' . URL_APPEND ;

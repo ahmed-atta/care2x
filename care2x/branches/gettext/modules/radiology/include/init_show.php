@@ -14,7 +14,7 @@ if($_SESSION['sess_user_origin']=='admission') {
 
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
-require_once($root_path.'include/care_api_classes/class_person.php');
+require_once($root_path.'include/core/class_person.php');
 
 $admissionfile='aufnahme_start.php'.URL_APPEND;
 
@@ -47,7 +47,7 @@ if(isset($pid) && ($pid!='')) {
 	}
 }
 
-require_once($root_path.'include/care_api_classes/class_globalconfig.php');
+require_once($root_path.'include/core/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('person_%');
 $glob_obj->getConfig('patient_%');

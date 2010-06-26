@@ -13,8 +13,8 @@
 */
 /**
 */
-require_once($root_path.'include/care_api_classes/class_core.php');
-require_once($root_path.'include/care_api_classes/class_notes.php');
+require_once($root_path.'include/core/class_core.php');
+require_once($root_path.'include/core/class_notes.php');
 /**
 *  Doctor's notes.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.

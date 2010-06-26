@@ -10,8 +10,8 @@
 //set the css style for a links
 require($root_path.'include/helpers/inc_css_a_sublinker_d.php');
 // Code for checking menu's voices' permissions added by Daniele Palmas and Guido Porruvecchio
-require_once($root_path."include/care_api_classes/MenuVisibility.php");
-require_once($root_path."include/care_api_classes/StringPermissionParser.php");
+require_once($root_path."include/core/MenuVisibility.php");
+require_once($root_path."include/core/StringPermissionParser.php");
 
 $sqlPermissions = "SELECT permission FROM care_users WHERE login_id = '".$_SESSION['sess_login_username']."'";
 $resultPermissions = $db->Execute($sqlPermissions);

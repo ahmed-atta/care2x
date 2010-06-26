@@ -25,7 +25,7 @@ if(isset($mode)&&$mode=='save'){
 
 	$config_new['icons']=$icons;
 
-	include_once($root_path.'include/care_api_classes/class_userconfig.php');
+	include_once($root_path.'include/core/class_userconfig.php');
 	
 	$user=new UserConfig;
 
@@ -43,7 +43,7 @@ if(isset($mode)&&$mode=='save'){
 
 }elseif(!isset($cfg['icons'])||empty($cfg['icons'])){
 	if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
-	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	include_once($root_path.'include/core/class_globalconfig.php');
 	$gc=new GlobalConfig($GLOBAL_CONFIG);
 	$gc->getConfig('theme_common_icons');
 	if(!empty($GLOBAL_CONFIG['theme_common_icons'])) $cfg['icons']=$GLOBAL_CONFIG['theme_common_icons'];
@@ -116,7 +116,7 @@ while (false!==($theme = readdir($handle))) {
 ?>
   
 	<tr class="submenu">
-		<td>&nbsp;<input type="radio" name="icons" value="<?php echo $theme; ?>" <?php if($cfg['icons'] == $theme) echo 'checked'; ?>></td>
+		<td>&nbsp;<input type="radio" name="icons" value="<?php echo $theme; ?>" <?php if($cfg['icons'] == $theme) echo 'checked';ï¿½?>></td>
 		<td>&nbsp;<b><?php echo $sIconsThemeName; ?></b></td>
 		<td>&nbsp;
 			<img src="<?php echo $root_path.'gui/img/common/'.$theme.'/team_wksp.gif'; ?>">
@@ -138,7 +138,7 @@ while (false!==($theme = readdir($handle))) {
 ?>
 
 	<tr class="submenu">
-		<td>&nbsp;<input type="radio" name="icons" value="no_icon" <?php if($cfg['icons'] == 'no_icon') echo 'checked'; ?>></td>
+		<td>&nbsp;<input type="radio" name="icons" value="no_icon" <?php if($cfg['icons'] == 'no_icon') echo 'checked';ï¿½?>></td>
 		<td>&nbsp;<b><?php echo $LDNoIcon; ?></b></td>
 		<td>&nbsp;</td>
 		<td>&nbsp;<?php echo $LDNoIconTxt; ?></td>

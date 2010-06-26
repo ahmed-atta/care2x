@@ -18,7 +18,7 @@ $breakfile='phone_list.php';
 $thisfile=basename(__FILE__);
 
 # Load the Comm class and create comm (phone) object
-require_once($root_path.'include/care_api_classes/class_comm.php');
+require_once($root_path.'include/core/class_comm.php');
 $phone = & new Comm;
 
 /* Load the date formatter */

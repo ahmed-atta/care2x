@@ -18,7 +18,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 //if (!isset($opnr) || !$opnr) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
 
 # Create drg object
-require_once($root_path.'include/care_api_classes/class_drg.php');
+require_once($root_path.'include/core/class_drg.php');
 $drg=& new DRG;
 
 ///$db->debug=true;
