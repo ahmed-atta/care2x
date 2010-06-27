@@ -167,7 +167,7 @@ class Appointment extends Core {
 			if($this->count=$this->res['_ga']->RecordCount()){
 				return $this->res['_ga'];
 			}else {return false;}
-		}else {echo $this->sql; return false;}
+		}else {return false;}
 	}
 	/**
 	* Gets all appointments by a given date.
