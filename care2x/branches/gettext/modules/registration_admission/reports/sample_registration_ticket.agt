@@ -258,21 +258,21 @@
     <Label>
         <Body>$barcode1
 
-#setfab12Spitali Rajonal Shkoder
-Lagja \"Skenderbeu\"
+#setfab12Sample Hospital
+Sample Address
 
-Emri :  $var2 
-Mbiemri :  $var3 
-Datelindja :  $var4 
-Seksi :  $var8 
-Grupi gjakut :  $var5 
-Adresa :  $var6  $var7
+Name :  $var2 
+Surname :  $var3 
+DOB :  $var4 
+Sex :  $var8 
+Blood Group :  $var5 
+Address :  $var6  $var7
 
-Nr. Sig.  $var11 
-Kompania :  $var12 
+SSN.  $var11 
+Company :  $var12 
 
-Data e reg :  $var10 
-Regjistruar nga :  $var14 
+Reg Date :  $var10 
+Reg from :  $var14 
 
 $barcode2
 
