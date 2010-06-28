@@ -11,7 +11,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
  * See the file "copy_notice.txt" for the licence notice
  */
 define('LANG_FILE','specials.php');
-$local_user='ck_fotolab_user';
+$local_user='ck_photolab_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_config_color.php');
 $breakfile="javascript:window.parent.location.replace('spediens.php?sid=$sid&lang=$lang')";
@@ -67,7 +67,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 			<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?>
 			style="filter: alpha(opacity = 70)" onMouseover=hilite(this,1)
 			onMouseOut=hilite(this,0)></a><a
-			href="javascript:gethelp('fotolab.php','init','')"><img
+			href="javascript:gethelp('photolab.php','init','')"><img
 			<?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>
 			class="fadeOut" /></a><a href="<?php echo $breakfile ?>"><img
 			<?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?>
@@ -77,7 +77,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 		<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
 		<center>
 		<p><font face=verdana,arial size=3 color="#cc0000">
-		<form action="fotolab-dir-select.php" method="get"
+		<form action="photolab-dir-select.php" method="get"
 			onSubmit="return chkform(this)" name="srcform"><br>
 			<?php echo $LDHowManyPics ?>
 		<p><input type="text" name="maxpic" size=2 maxlength=2>

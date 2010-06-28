@@ -3,10 +3,10 @@
 require('./roots.php');
 require($root_path.'include/helpers/inc_environment_global.php');
 require($root_path.'global_conf/inc_remoteservers_conf.php');
-$local_user='ck_fotolab_user';
+$local_user='ck_photolab_user';
 
 
-require_once($root_path.'modules/fotolab/model/class_image.php');
+require_once($root_path.'modules/photolab/model/class_image.php');
 
 $img=new Image;
 $disc_pix_mode = true;

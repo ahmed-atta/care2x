@@ -11,7 +11,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','specials.php');
-$local_user='ck_fotolab_user';
+$local_user='ck_photolab_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 ?>
 <?php html_rtl($lang); ?>
@@ -25,7 +25,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if($lang=='ar'||$lang=='fa'){
 ?>
 <frameset cols="*,49%">
-   <frame name="PREVIEWFRAME" src="fotolab-preview.php?sid=<?php echo "$sid&lang=$lang" ?>">
+   <frame name="PREVIEWFRAME" src="photolab-preview.php?sid=<?php echo "$sid&lang=$lang" ?>">
   <frame name="SELECTFRAME" src="upload_search_patient.php?sid=<?php echo "$sid&lang=$lang" ?>">
 <noframes>
 <body>
@@ -37,7 +37,7 @@ if($lang=='ar'||$lang=='fa'){
 ?>
 <frameset cols="49%,*">
   <frame name="SELECTFRAME" src="upload_search_patient.php?sid=<?php echo "$sid&lang=$lang" ?>">
-   <frame name="PREVIEWFRAME" src="fotolab-preview.php?sid=<?php echo "$sid&lang=$lang" ?>">
+   <frame name="PREVIEWFRAME" src="photolab-preview.php?sid=<?php echo "$sid&lang=$lang" ?>">
 <noframes>
 <body>
 </body>

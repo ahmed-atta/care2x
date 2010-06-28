@@ -11,7 +11,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','specials.php');
-$local_user='ck_fotolab_user';
+$local_user='ck_photolab_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 /* Load date formatter */
@@ -36,7 +36,7 @@ $breakfile="javascript:window.parent.location.replace('".$root_path."main/spedie
  $smarty->assign('sToolbarTitle',$LDFotoLab);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('fotolab.php','input','')");
+ $smarty->assign('pbHelp',"javascript:gethelp('photolab.php','input','')");
 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
@@ -45,8 +45,8 @@ $breakfile="javascript:window.parent.location.replace('".$root_path."main/spedie
  $smarty->assign('sWindowTitle',$LDFotoLab);
   
  # Body Onload js
- if(!$same_pat) $smarty->assign('sOnLoadJs','onLoad="window.parent.PREVIEWFRAME.location.replace(\'fotolab-preview.php?sid='.$sid.'&lang='.$lang.'\');"');
-	else $smarty->assign('sOnLoadJs','onLoad="window.parent.PREVIEWFRAME.location.replace(\'fotolab-preview.php?sid='.$sid.'&lang='.$lang.'\');" ');
+ if(!$same_pat) $smarty->assign('sOnLoadJs','onLoad="window.parent.PREVIEWFRAME.location.replace(\'photolab-preview.php?sid='.$sid.'&lang='.$lang.'\');"');
+	else $smarty->assign('sOnLoadJs','onLoad="window.parent.PREVIEWFRAME.location.replace(\'photolab-preview.php?sid='.$sid.'&lang='.$lang.'\');" ');
 
 # Collect js code
 
@@ -81,7 +81,7 @@ function chkNumber(n)
 
 function previewpic(fn) {
 if(fn=="") return;
-//else parent.PREVIEWFRAME.document.location.href="fotolab-preview.php<?php echo URL_REDIRECT_APPEND ?>&picsource="+fn;
+//else parent.PREVIEWFRAME.document.location.href="photolab-preview.php<?php echo URL_REDIRECT_APPEND ?>&picsource="+fn;
 else parent.PREVIEWFRAME.document.previewpic.src=fn;
 
 }
@@ -152,7 +152,7 @@ $calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system',
 $calendar->load_files();
 //end : gjergji
 ?>
-<form ENCTYPE="multipart/form-data"  action="fotolab-pic-save.php" method="post"  name="srcform" onSubmit="return chkform(this)">
+<form ENCTYPE="multipart/form-data"  action="photolab-pic-save.php" method="post"  name="srcform" onSubmit="return chkform(this)">
 <INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="2000000">
 <?php 
 /* Load the common icons*/

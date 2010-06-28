@@ -36,7 +36,7 @@ include($root_path.'include/core/class_encounter.php');
 $enc = & new Encounter();
 
 #Create the image object
-include($root_path.'modules/fotolab/model/class_image.php');
+include($root_path.'modules/photolab/model/class_image.php');
 $img= & new Image();
 
 require('./include/inc_access.php');

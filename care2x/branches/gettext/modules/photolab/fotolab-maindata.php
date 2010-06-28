@@ -11,7 +11,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','specials.php');
-$local_user='ck_fotolab_user';
+$local_user='ck_photolab_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 /* Load date formatter */
@@ -93,7 +93,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 </head>
 <body topmargin=3 marginheight=3 onLoad="document.maindata.patnum.select()" onFocus="document.maindata.patnum.select()">
 <form name="maindata">
-<a href="javascript:gethelp('fotolab.php','maindata','')"><img <?php echo createComIcon($root_path,'frage.gif','0','right') ?>></a>
+<a href="javascript:gethelp('photolab.php','maindata','')"><img <?php echo createComIcon($root_path,'frage.gif','0','right') ?>></a>
 <table border=0>
   <tr>
     <td><font size=2 color="#cc0000" face="verdana,arial">

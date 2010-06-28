@@ -8,7 +8,7 @@ require_once($root_path.'modules/news/includes/inc_editor_fx.php');
 # Load date formatter
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 # Load image class 
-require_once($root_path.'modules/fotolab/model/class_image.php');
+require_once($root_path.'modules/photolab/model/class_image.php');
 # Create image object
 $img_obj=new Image;
 

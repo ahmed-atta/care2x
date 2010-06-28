@@ -176,7 +176,7 @@ class GuiInputPerson {
 				$old_fn=$photo_filename;
 
 				# Create image object
-				include_once($root_path.'modules/fotolab/model/class_image.php');
+				include_once($root_path.'modules/photolab/model/class_image.php');
 				$img_obj=& new Image;
 
 				# Check the uploaded image file if exists and valid

@@ -19,16 +19,16 @@ require_once($root_path.'global_conf/areas_allow.php');
 $allowedarea=&$allow_area['doctors'];
 //$append="?sid=$sid&lang=$lang&from=pass"; 
 
-$fileforward="fotolab-parentframe.php?sid=$sid&lang=$lang&ck_config=$ck_config";
+$fileforward="photolab-parentframe.php?sid=$sid&lang=$lang&ck_config=$ck_config";
 $title=$LDFotolab;
 							
-$thisfile="fotolab_pass.php";
+$thisfile="photolab_pass.php";
 
 $breakfile=$root_path."main/spediens.php".URL_APPEND;
 
 $lognote="$LDFotolab $title ok";
 
-$userck="ck_fotolab_user";
+$userck="ck_photolab_user";
 
 //reset cookie;
 // reset all 2nd level lock cookies
