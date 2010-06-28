@@ -28,7 +28,7 @@ function checkApptDate(d,e,n){
 		}
 	}
 	if(fg){
-		window.location.href="<?php echo $root_path.'modules/registration_admission/aufnahme_start.php'.URL_REDIRECT_APPEND; ?>&pid=<?php echo $_SESSION['sess_pid'] ?>&origin=patreg_reg&encounter_class_nr="+e+"&appt_nr="+n;
+		window.location.href="<?php echo $root_path.'modules/registration_admission/admission_start.php'.URL_REDIRECT_APPEND; ?>&pid=<?php echo $_SESSION['sess_pid'] ?>&origin=patreg_reg&encounter_class_nr="+e+"&appt_nr="+n;
 	}
 }
 //  Script End -->

@@ -66,7 +66,7 @@ if(isset($is_cancelled)&&$is_cancelled){
   <tr>
     <td></td>
     <td align=center>
-	<form action="aufnahme_start.php" method="post">
+	<form action="admission_start.php" method="post">
 	 <input type="hidden" name="sid" value="<?php echo $sid ?>">
  	<input type="hidden" name="lang" value="<?php echo $lang ?>">
 	<input type="submit" value="<?php echo $LDOk ?>">

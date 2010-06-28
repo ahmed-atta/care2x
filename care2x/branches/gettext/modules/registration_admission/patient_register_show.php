@@ -22,7 +22,7 @@ $thisfile=basename(__FILE__);
 if($_COOKIE["ck_login_logged".$sid]) $breakfile=$root_path."main/startframe.php".URL_APPEND;
 	else $breakfile="patient.php".URL_APPEND."&target=entry";
 
-$admissionfile='aufnahme_start.php'.URL_APPEND;
+$admissionfile='admission_start.php'.URL_APPEND;
 
 # Resolve PID
 if((!isset($pid)||!$pid)&&$_SESSION['sess_pid']) $pid=$_SESSION['sess_pid'];

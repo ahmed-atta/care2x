@@ -17,7 +17,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'include/core/class_person.php');
 
-$admissionfile='aufnahme_start.php'.URL_APPEND;
+$admissionfile='admission_start.php'.URL_APPEND;
 
 if((!isset($pid)||!$pid)&&$_SESSION['sess_pid']) $pid=$_SESSION['sess_pid'];
 	elseif($pid) $_SESSION['sess_pid']=$pid;
