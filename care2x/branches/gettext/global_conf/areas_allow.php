@@ -54,7 +54,7 @@ $allow_area=array(
 
 'duty_op'=>array('_a_1_opnursedutyplanwrite'),
 
-'fotolab'=>array('_a_1_photowrite'),
+'photolab'=>array('_a_1_photowrite'),
 
 'test_diagnose'=>array('_a_1_diagnosticsresultwrite', '_a_1_labresultswrite'),
 

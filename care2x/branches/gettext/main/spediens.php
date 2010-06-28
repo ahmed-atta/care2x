@@ -100,7 +100,7 @@ $aSubMenuItem=array('LDPlugins' => '<a href="'.$root_path.'plugins/plugins.php'.
 					'LDInsuranceCoMngr' => '<a href="'.$root_path.'modules/insurance_co/insurance_co_manage_pass.php'.URL_APPEND.'">'. $LDInsuranceCoMngr.'</a>',
 					'LDAddressMngr' => '<a href="'.$root_path.'modules/address/address_manage_pass.php'.URL_APPEND.'">'. $LDAddressMngr.'</a>',
 					'LDImmunizationMngr' => '<a href="'.$root_path.'modules/immunization/immunization_manage_pass.php'.URL_APPEND.'">'. $LDImmunizationMngr.'</a>',
-					'LDPhotoLab' => '<a href="'.$root_path.'modules/fotolab/fotolab_pass.php'.URL_APPEND.'&ck_config='.$ck_config.'">'.$LDPhotoLab.'</a>',
+					'LDPhotoLab' => '<a href="'.$root_path.'modules/photolab/photolab_pass.php'.URL_APPEND.'&ck_config='.$ck_config.'">'.$LDPhotoLab.'</a>',
 					'LDWebCam' => '<a href="../modules/video_monitor/video_monitoring.php'.URL_APPEND.'">'.$LDWebCam.'</a>',
 					'LDStandbyDuty' => '<a href="'.$root_path.'main/spediens-bdienst-zeit-erfassung.php'.URL_APPEND.'&retpath=spec">'.$LDStandbyDuty.'</a>',
 					'LDCalendar' => '<a href="'.$root_path.'modules/calendar/calendar.php'.URL_APPEND.'">'. $LDCalendar.'</a>',
