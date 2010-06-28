@@ -33,9 +33,9 @@ $personell_obj = new Personell;
 $thisfile=basename(__FILE__);
 
 if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
-	else $breakfile='aufnahme_pass.php'.URL_APPEND.'&target=entry';
+	else $breakfile='admission_pass.php'.URL_APPEND.'&target=entry';
 
-//$breakfile='aufnahme_pass.php'.URL_APPEND;
+//$breakfile='admission_pass.php'.URL_APPEND;
 
 $GLOBAL_CONFIG=array();
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);

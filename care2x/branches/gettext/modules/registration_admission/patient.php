@@ -68,8 +68,8 @@ $_SESSION['sess_path_referer'] = 'modules/registration_admission/patient.php';
 # Prepare the submenu links indexed with their template tags
 
 $aSubMenuItem = array('LDPatientRegister' => "<a href=\"patient_register_pass.php".URL_APPEND."&retpath=docs\">$LDPatientRegister</a>",
-										'LDAdmission'  => "<a href=\"aufnahme_pass.php".URL_APPEND."&target=dutyplan&retpath=menu\">$LDAdmission</a>",
-										'LDVisit'  => "<a href=\"aufnahme_pass.php".URL_APPEND."&target=entry&retpath=docs\">$LDVisit</a>",
+										'LDAdmission'  => "<a href=\"admission_pass.php".URL_APPEND."&target=dutyplan&retpath=menu\">$LDAdmission</a>",
+										'LDVisit'  => "<a href=\"admission_pass.php".URL_APPEND."&target=entry&retpath=docs\">$LDVisit</a>",
 										'LDAppointments'  => "<a href=\"patient_register_pass.php".URL_APPEND."&target=search&retpath=docs\">$LDAppointments</a>",
 										'LDDiagXResults'  => "<a href=\"patient_register_pass.php".URL_APPEND."&target=search&retpath=docs\">$LDDiagXResults</a>",
 										'LDDRG'  => "<a href=\"patient_register_pass.php".URL_APPEND."&target=search&retpath=docs\">$LDDRG</a>",

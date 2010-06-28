@@ -35,7 +35,7 @@ $thisfile=basename(__FILE__);
 if($origin=='patreg_reg') $breakfile = 'patient_register_show.php'.URL_APPEND.'&pid='.$pid;
 elseif($_COOKIE["ck_login_logged".$sid]) $breakfile = $root_path.'main/startframe.php'.URL_APPEND;
 elseif(!empty($_SESSION['sess_path_referer'])) $breakfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND.'&pid='.$pid;
-else $breakfile = "aufnahme_pass.php".URL_APPEND."&target=entry";
+else $breakfile = "admission_pass.php".URL_APPEND."&target=entry";
 
 $newdata=1;
 
