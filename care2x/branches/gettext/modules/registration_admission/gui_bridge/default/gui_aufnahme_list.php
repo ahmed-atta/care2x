@@ -231,7 +231,7 @@ if(!empty($rows)){
 
 <p>
 
-<form method="post"  action="aufnahme_list.php" >
+<form method="post"  action="admission_list.php" >
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="mode" value="?">

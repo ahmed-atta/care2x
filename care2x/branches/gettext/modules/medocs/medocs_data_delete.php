@@ -8,8 +8,8 @@ $dbusername="httpd";
 $dbpassword="";
 $dbname="maho";
 $dbtable='care_admission_patient';
-$forwardfile="aufnahme_list.php";
-$breakfile="aufnahme_list.php";
+$forwardfile="admission_list.php";
+$breakfile="admission_list.php";
 $thisfile="aufnahme_daten_delete.php";
 
 
@@ -55,7 +55,7 @@ $fieldnames=array("no.","Pat.nummer","Anrede","Name","Vorname","Geburstdatum");
 									if (($buffer+1)==$linecount)
 										 { $pagecount--; if($batchnum>1)  $batchnum--; };						
 									$linecount--;
-									header("Location: aufnahme_list.php?route=validroute&remark=itemdelete&batchnum=".$batchnum."&displaysize=".$displaysize."&linecount=".$linecount."&pagecount=".$pagecount); exit;
+									header("Location: admission_list.php?route=validroute&remark=itemdelete&batchnum=".$batchnum."&displaysize=".$displaysize."&linecount=".$linecount."&pagecount=".$pagecount); exit;
 								}else 
 									{
 										$sql='SELECT * FROM '.$dbtable.' WHERE care_admission_patient_item="'.$itemname.'"';
