@@ -38,7 +38,7 @@ if(isset($mode)&&($mode=='cancel')&&isset($encounter_nr)&&$encounter_nr){
 		$error_msg=$LDWrongLoginPW;
 	}
 }elseif(!isset($is_cancelled)||!$is_cancelled){
-	header("location:aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr");
+	header("location:admission_data_search.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr");
 	exit;
 }else{
 	$error_msg=$LDTellEdpIfPersist;
@@ -86,7 +86,7 @@ if(isset($is_cancelled)&&$is_cancelled){
   <tr>
     <td></td>
     <td align=center>
-	<form action="aufnahme_daten_zeigen.php" method="post">
+	<form action="admission_data_search.php" method="post">
 	 <input type="hidden" name="sid" value="<?php echo $sid ?>">
  	<input type="hidden" name="lang" value="<?php echo $lang ?>">
  	<input type="hidden" name="encounter_nr" value="<?php echo $encounter_nr ?>">

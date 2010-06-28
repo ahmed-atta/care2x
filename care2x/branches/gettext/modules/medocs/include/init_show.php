@@ -3,7 +3,7 @@ $lang_tables[]='prompt.php';
 define('LANG_FILE','aufnahme.php');
 # Resolve the local user based on the origin of the script
 if($_SESSION['sess_user_origin']=='admission') {
-	$breakfile=$root_path.'modules/registration_admission/aufnahme_daten_zeigen.php'.URL_APPEND.'&encounter_nr='.$_SESSION['sess_en'];
+	$breakfile=$root_path.'modules/registration_admission/admission_data_search.php'.URL_APPEND.'&encounter_nr='.$_SESSION['sess_en'];
 	$local_user='aufnahme_user';
 }elseif($_SESSION['sess_user_origin']=='registration'){
 	$breakfile=$root_path.'modules/registration_admission/patient_register_show.php'.URL_APPEND.'&pid='.$_SESSION['sess_pid'];

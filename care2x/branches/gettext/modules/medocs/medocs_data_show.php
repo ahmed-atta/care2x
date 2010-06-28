@@ -25,7 +25,7 @@ $insurance_obj=new Insurance;
 $ward_obj=new Ward;
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
-$thisfile='aufnahme_daten_zeigen.php';
+$thisfile='admission_data_search.php';
 $breakfile='aufnahme_pass.php?sid='.$sid.'&lang='.$lang;
 
 /* Get the patient global configs */	

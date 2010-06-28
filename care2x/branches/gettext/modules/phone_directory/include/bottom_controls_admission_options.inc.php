@@ -1,4 +1,4 @@
-<a href="<?php echo 'aufnahme_daten_zeigen.php'.URL_APPEND.'&encounter_nr='.$_SESSION['sess_en'].'&target='.$target; ?>"><img <?php echo createLDImgSrc($root_path,'admission_data.gif','0','top') ?>></a>
+<a href="<?php echo 'admission_data_search.php'.URL_APPEND.'&encounter_nr='.$_SESSION['sess_en'].'&target='.$target; ?>"><img <?php echo createLDImgSrc($root_path,'admission_data.gif','0','top') ?>></a>
 <?php
 if(!$is_discharged){
 ?>

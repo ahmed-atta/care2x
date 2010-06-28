@@ -1,7 +1,7 @@
 {{* Template for admission input and data display *}}
 {{* Files using this: *}}
 {{* - /modules/registration_admission/aufnahme_start.php *}}
-{{* - /modules/registration_admission/aufnahme_daten_zeigen.php *}}
+{{* - /modules/registration_admission/admission_data_search.php *}}
 
 	{{if $bSetAsForm}}
 	<form method="post" action="{{$thisfile}}" name="aufnahmeform" onSubmit="return chkform(this)"  ENCTYPE="multipart/form-data">

@@ -84,7 +84,7 @@ if($rows){
 					if($pregbuf[$show_preg_enc][$x]){
 						$buf=explode(' ',$pregbuf[$show_preg_enc][$x]);
 						while(list($q,$r)=each($buf)){
-							 echo'<a href="aufnahme_daten_zeigen.php'.URL_APPEND.'&encounter_nr='.$r.'&origin=admit&target='.$target.'">'.$r.'</a> ';
+							 echo'<a href="admission_data_search.php'.URL_APPEND.'&encounter_nr='.$r.'&origin=admit&target='.$target.'">'.$r.'</a> ';
 						}
 					}
 					break;

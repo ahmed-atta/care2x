@@ -1,5 +1,5 @@
 {{* Frame template for displaying admission data *}}
-{{* Used by /modules/registration_admission/aufnahme_daten_zeigen.php *}}
+{{* Used by /modules/registration_admission/admission_data_search.php *}}
 {{* Elpidio Latorilla 2004-06-07 *}}
 
 <table width="100%" cellspacing="0" cellpadding="0">

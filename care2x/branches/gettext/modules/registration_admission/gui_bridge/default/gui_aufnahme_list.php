@@ -196,7 +196,7 @@ if(!empty($rows)){
 		<tr ';
 		if($toggle){ echo "bgcolor=#efefef"; $toggle=0;} else {echo "bgcolor=#ffffff"; $toggle=1;}
 
-		$buf='aufnahme_daten_zeigen.php'.URL_APPEND.'&origin=archive&encounter_nr='.$result['encounter_nr'].'&target=archiv';
+		$buf='admission_data_search.php'.URL_APPEND.'&origin=archive&encounter_nr='.$result['encounter_nr'].'&target=archiv';
 
 		echo '>
 			<td>&nbsp;<a href="'.$buf.'" title="'.$LDClk2Show.'">';

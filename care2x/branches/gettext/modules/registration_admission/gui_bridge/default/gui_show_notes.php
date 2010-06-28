@@ -265,7 +265,7 @@ if($mode=='show'){
 			if($row['personell_name']) $smarty->assign('sAuthor',$row['personell_name']);
 			
 			if(!$parent_admit){
-				$smarty->assign('sEncNr','<a href="aufnahme_daten_zeigen.php'.URL_APPEND.'&encounter_nr='.$row['encounter_nr'].'&origin=patreg_reg">'.$row['encounter_nr'].'</a>');
+				$smarty->assign('sEncNr','<a href="admission_data_search.php'.URL_APPEND.'&encounter_nr='.$row['encounter_nr'].'&origin=patreg_reg">'.$row['encounter_nr'].'</a>');
 			}
 			# buffer the row and assign to array
 			ob_start();
