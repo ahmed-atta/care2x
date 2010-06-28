@@ -141,7 +141,7 @@ $smarty->assign('pbUpdateData',"<a href=\"patient_register.php".URL_APPEND."&pid
 # If currently admitted show button link to admission data display
 if($current_encounter){
 
-	$smarty->assign('pbShowAdmData',"<a href=\"aufnahme_daten_zeigen.php".URL_APPEND."&encounter_nr=$current_encounter&origin=patreg_reg\"><img ".createLDImgSrc($root_path,'admission_data.gif','0','absmiddle')."></a>");
+	$smarty->assign('pbShowAdmData',"<a href=\"admission_data_search.php".URL_APPEND."&encounter_nr=$current_encounter&origin=patreg_reg\"><img ".createLDImgSrc($root_path,'admission_data.gif','0','absmiddle')."></a>");
 
 # Else if person still living, show button links to admission
 }elseif(!$death_date||$death_date==$dbf_nodate){

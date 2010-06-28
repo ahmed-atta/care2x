@@ -15,9 +15,9 @@ if($rows){
     <td>
 	<?php 
 		switch($x){
-				    //  header('Location:aufnahme_daten_zeigen.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$encounter_nr.'&origin=admit&sem=isadmitted&target=entry');
+				    //  header('Location:admission_data_search.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$encounter_nr.'&origin=admit&sem=isadmitted&target=entry');
 
-			case 'parent_encounter_nr': echo'<a href="aufnahme_daten_zeigen.php'.URL_APPEND.'&encounter_nr='.$birth[$x].'&origin=admit&target='.$target.'">'.$birth[$x].'</a>'; break;
+			case 'parent_encounter_nr': echo'<a href="admission_data_search.php'.URL_APPEND.'&encounter_nr='.$birth[$x].'&origin=admit&target='.$target.'">'.$birth[$x].'</a>'; break;
 			case 'delivery_date': echo formatDate2Local($birth[$x],$date_format); break;
 			case 'c_s_reason': 	echo nl2br($birth[$x]); break;
 			case 'delivery_mode':

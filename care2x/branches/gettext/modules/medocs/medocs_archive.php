@@ -110,7 +110,7 @@ if (isset($mode) && ($mode=='search'))
 	        	if($rows==1){
 		      	 //// If result is single item, display the data immediately 
 			   	$result=$ergebnis->FetchRow();
-			   	header("Location:aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&target=archiv&origin=archiv&encounter_nr=".$result['encounter_nr']);
+			   	header("Location:admission_data_search.php".URL_REDIRECT_APPEND."&target=archiv&origin=archiv&encounter_nr=".$result['encounter_nr']);
 			   	exit;
 	        	}
 			}

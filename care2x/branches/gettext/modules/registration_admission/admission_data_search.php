@@ -181,7 +181,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 					if(($linecount==1)&&$numeric&&$mode=='search')
 					{
 						$zeile=$ergebnis->FetchRow();
-						header('Location:aufnahme_daten_zeigen.php'.URL_REDIRECT_APPEND.'&from=such&encounter_nr='.$zeile['encounter_nr'].'&target=search');
+						header('Location:admission_data_search.php'.URL_REDIRECT_APPEND.'&from=such&encounter_nr='.$zeile['encounter_nr'].'&target=search');
 						exit;
 					}
 					
@@ -355,7 +355,7 @@ if($mode=='search'||$mode=='paginate'){
 
 			$smarty->assign('sZipCode',$zeile['addr_zip']);
 
-			$sTarget = "<a href=\"aufnahme_daten_zeigen.php".URL_APPEND."&from=such&encounter_nr=$full_en&target=search\">";
+			$sTarget = "<a href=\"admission_data_search.php".URL_APPEND."&from=such&encounter_nr=$full_en&target=search\">";
 			$sTarget=$sTarget.'<img '.$img_options.' title="'.$LDShowData.'"></a>';
 			$smarty->assign('sOptions',$sTarget);
 

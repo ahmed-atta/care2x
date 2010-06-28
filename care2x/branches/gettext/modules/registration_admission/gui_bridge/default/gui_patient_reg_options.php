@@ -28,7 +28,7 @@ function Spacer()
                <TR> <td align=center><img <?php echo createComIcon($root_path,'pdata.gif','0','',FALSE) ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2> <nobr>
-				 <a href="aufnahme_daten_zeigen.php<?php echo URL_APPEND ?>&encounter_nr=<?php echo $current_encounter ?>&origin=patreg_reg"><?php echo $LDPatientData; ?></a>
+				 <a href="admission_data_search.php<?php echo URL_APPEND ?>&encounter_nr=<?php echo $current_encounter ?>&origin=patreg_reg"><?php echo $LDPatientData; ?></a>
 				  </nobr> </FONT></TD>
                 </TR>
 			   

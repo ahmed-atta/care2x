@@ -107,7 +107,7 @@ if($pid!='' || $encounter_nr!=''){
 	{
 		/* Check whether the person is currently admitted. If yes jump to display admission data */
 		if(!$update&&$encounter_nr=$encounter_obj->isPIDCurrentlyAdmitted($pid)){
-			header('Location:aufnahme_daten_zeigen.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$encounter_nr.'&origin=admit&sem=isadmitted&target=entry');
+			header('Location:admission_data_search.php'.URL_REDIRECT_APPEND.'&encounter_nr='.$encounter_nr.'&origin=admit&sem=isadmitted&target=entry');
 			exit;
 		}
 		 
@@ -231,7 +231,7 @@ if($pid!='' || $encounter_nr!=''){
 						if(!$GLOBAL_CONFIG['patient_service_att_dr_hide']){
 							$encounter_obj->updateAttDrServiceClass($att_dr_class);
 						}
-						header("Location: aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr&origin=admit&target=entry&newdata=$newdata");
+						header("Location: admission_data_search.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr&origin=admit&target=entry&newdata=$newdata");
 						exit;
 					}
 
@@ -276,7 +276,7 @@ if($pid!='' || $encounter_nr!=''){
 							}
 						}
 						//echo $encounter_obj->getLastQuery();
-						header("Location: aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr&origin=admit&target=entry&newdata=$newdata");
+						header("Location: admission_data_search.php".URL_REDIRECT_APPEND."&encounter_nr=$encounter_nr&origin=admit&target=entry&newdata=$newdata");
 						exit;
 					}else{
 						echo $LDDbNoSave.'<p>'.$encounter_obj->getLastQuery();

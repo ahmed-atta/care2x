@@ -125,7 +125,7 @@ if(($mode=='search'||$mode=='paginate')&&($searchkey))
 					if(($linecount==1)&&$numeric&&$mode=='search')
 					{
 						$zeile=$ergebnis->FetchRow();
-						header("location:aufnahme_daten_zeigen.php".URL_REDIRECT_APPEND."&from=such&target=search&pid=".$zeile['pid']."&encounter_nr=".$zeile['encounter_nr']."&sem=".(!$zeile['is_discharged']));
+						header("location:admission_data_search.php".URL_REDIRECT_APPEND."&from=such&target=search&pid=".$zeile['pid']."&encounter_nr=".$zeile['encounter_nr']."&sem=".(!$zeile['is_discharged']));
 						exit;
 					}
 					

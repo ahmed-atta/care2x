@@ -93,7 +93,7 @@ while($row=$result->FetchRow()){
 	?>
 <?php 
 		if($row['appt_status']=='done' && $row['encounter_nr']){
-			echo '<a href="'.$root_path.'modules/registration_admission/aufnahme_daten_zeigen.php'.URL_APPEND.'&encounter_nr='.$row['encounter_nr'].'&origin=appt&target='.$target.'">'.$row['encounter_nr'].'</a>';
+			echo '<a href="'.$root_path.'modules/registration_admission/admission_data_search.php'.URL_APPEND.'&encounter_nr='.$row['encounter_nr'].'&origin=appt&target='.$target.'">'.$row['encounter_nr'].'</a>';
 		}
 	}else{
 		echo '&nbsp;';
