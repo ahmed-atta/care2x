@@ -46,7 +46,7 @@ $glob_obj->getConfig('person_foto_path');
 $glob_obj->getConfig('show_billable_items');
 $glob_obj->getConfig('show_doctors_list');
 
-$updatefile='aufnahme_start.php';
+$updatefile='admission_start.php';
 
 /* Default path for fotos. Make sure that this directory exists! */
 $default_photo_path=$root_path.'uploads/photos/registration';
@@ -481,7 +481,7 @@ if(!$is_discharged){
 
 $smarty->assign('pbBottomClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0').'  title="'.$LDCancel.'"  align="absmiddle"></a>');
 
-$smarty->assign('sAdmitLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="aufnahme_start.php'.URL_APPEND.'&mode=?">'.$LDAdmWantEntry.'</a>');
+$smarty->assign('sAdmitLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="admission_start.php'.URL_APPEND.'&mode=?">'.$LDAdmWantEntry.'</a>');
 $smarty->assign('sSearchLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="admission_data_search.php'.URL_APPEND.'">'.$LDAdmWantSearch.'</a>');
 $smarty->assign('sArchiveLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="aufnahme_list.php'.URL_APPEND.'&newdata=1">'.$LDAdmWantArchive.'</a>');
 

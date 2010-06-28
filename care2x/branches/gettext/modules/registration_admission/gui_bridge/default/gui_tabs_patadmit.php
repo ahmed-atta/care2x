@@ -11,7 +11,7 @@ if(!isset($notabs)||!$notabs){
 	if(defined('ADMISSION_EXT_TABS') && ADMISSION_EXT_TABS){
 		if($target=="entry") $img='admit-blue.gif';
 									else{ $img='admit-gray.gif';}
-		$pbBuffer='<a href="aufnahme_start.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDAdmit.'"  title="'.$LDAdmit.'"';
+		$pbBuffer='<a href="admission_start.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDAdmit.'"  title="'.$LDAdmit.'"';
 		if($cfg['dhtml']) $pbBuffer.='class="fadeOut" ';
 		$pbBuffer.=' align=middle></a>';
 		$smarty->assign('pbNew',$pbBuffer);

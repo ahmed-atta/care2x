@@ -29,7 +29,7 @@ if(!defined('ADMISSION_EXT_TABS') || !ADMISSION_EXT_TABS){
 
 switch($target){
 
-	case 'entry':$fileforward='aufnahme_start.php'.$append;
+	case 'entry':$fileforward='admission_start.php'.$append;
 						$lognote='Admission ok';
 						break;
 	case 'search':$fileforward='admission_data_search.php'.$append;

@@ -21,7 +21,7 @@ $thisfile=basename(__FILE__);
 if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 	else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 	
-$admissionfile='aufnahme_start.php'.URL_APPEND;
+$admissionfile='admission_start.php'.URL_APPEND;
 
 if((!isset($pid)||!$pid)&&$HTPP_SESSION_VARS['sess_pid']) $pid=$HTPP_SESSION_VARS['sess_pid'];
 

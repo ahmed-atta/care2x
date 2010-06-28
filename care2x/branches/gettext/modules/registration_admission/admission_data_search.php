@@ -381,7 +381,7 @@ if($mode=='search'||$mode=='paginate'){
 	}
 }
 /*
-$smarty->assign('sPostText','<a href="aufnahme_start.php'.URL_APPEND.'&mode=?">'.$LDAdmWantEntry.'</a><br>
+$smarty->assign('sPostText','<a href="admission_start.php'.URL_APPEND.'&mode=?">'.$LDAdmWantEntry.'</a><br>
 	<a href="aufnahme_list.php'.URL_APPEND.'">'.$LDAdmWantArchive.'</a>');
 */
 $smarty->assign('sPostText','<a href="aufnahme_list.php'.URL_APPEND.'">'.$LDAdmWantArchive.'</a>');

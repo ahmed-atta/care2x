@@ -1,6 +1,6 @@
 {{* Template for admission input and data display *}}
 {{* Files using this: *}}
-{{* - /modules/registration_admission/aufnahme_start.php *}}
+{{* - /modules/registration_admission/admission_start.php *}}
 {{* - /modules/registration_admission/admission_data_search.php *}}
 
 	{{if $bSetAsForm}}

@@ -32,7 +32,7 @@ $breakfile='aufnahme_pass.php?sid='.$sid.'&lang='.$lang;
 $glob_obj->getConfig('patient_%');
 $glob_obj->getConfig('person_foto_path');
 
-$updatefile='aufnahme_start.php';
+$updatefile='admission_start.php';
 
 /* Default path for fotos. Make sure that this directory exists! */
 $default_photo_path=$root_path.'uploads/photos/registration';

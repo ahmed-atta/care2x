@@ -13,7 +13,7 @@ require_once($root_path.'include/core/class_template.php');
 $TP_obj=new Template($root_path);
 
 $breakfile='patient.php';
-$admissionfile='aufnahme_start.php'.URL_APPEND;
+$admissionfile='admission_start.php'.URL_APPEND;
 
 if((!isset($pid)||!$pid)&&$_SESSION['sess_pid']) $pid=$_SESSION['sess_pid'];
 	elseif((isset($pid)&&$pid)&&!$_SESSION['sess_pid']) $_SESSION['sess_pid']=$pid;
