@@ -150,7 +150,7 @@ if($current_encounter){
 	$smarty->assign('pbAdmitOutpatient',"<a href=\"$admissionfile&pid=$pid&origin=patreg_reg&encounter_class_nr=2\"><img ".createLDImgSrc($root_path,'admit_outpatient.gif','0','absmiddle')."></a>");
 }
 //gjergji
-$smarty->assign('pbAdmitPrintout',"<a href=". $root_path."modules/pdfmaker/registration/regdata_admit.php".URL_APPEND."&pid=".$pid ." target=_blank><img ".createLDImgSrc($root_path,'printout.gif','0','absmiddle')."></a>'");
+$smarty->assign('pbAdmitPrintout',"<a href=". $root_path."modules/registration_admission/print/regdata_admit.php".URL_APPEND."&pid=".$pid ." target=_blank><img ".createLDImgSrc($root_path,'printout.gif','0','absmiddle')."></a>'");
 //$smarty->assign('pbAdmitPrintout',"<a href=". $root_path."modules/registration_admission/reports/sample.php".URL_APPEND."&pid=".$pid . "><img ".createLDImgSrc($root_path,'printout.gif','0','absmiddle')."></a>'");
 //end :  gjergji
 # Create new button to fresh input form

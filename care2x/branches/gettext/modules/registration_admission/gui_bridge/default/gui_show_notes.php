@@ -252,7 +252,7 @@ if($mode=='show'){
 			$smarty->assign('sPreview',$sTemp);
 
 			# Link to pdf generator
-			$topdf= '<a href="'.$root_path.'modules/pdfmaker/emr_generic/report.php'.URL_APPEND.'&enc='.$row['encounter_nr'].'&recnr='.$row['nr'].'&type_nr='.$this_type['nr'].'&LD_var='.$this_type['LD_var'].'" target=_blank><img '.createComIcon($root_path,'pdf_icon.gif','0','',TRUE).'></a>';
+			$topdf= '<a href="'.$root_path.'modules/registration_admission/print/report.php'.URL_APPEND.'&enc='.$row['encounter_nr'].'&recnr='.$row['nr'].'&type_nr='.$this_type['nr'].'&LD_var='.$this_type['LD_var'].'" target=_blank><img '.createComIcon($root_path,'pdf_icon.gif','0','',TRUE).'></a>';
 
 			if (strlen($row['notes']) > $GLOBAL_CONFIG['notes_preview_maxlen']){
 				$smarty->assign('sDetails','<a href="javascript:popNotesDetails(\''.$row['nr'].'\',\''.strtr($subtitle,"' ","´+").'\',\''.$this_type['LD_var'].'\')"><img '.createComIcon($root_path,'info3.gif','0','',TRUE).'></a>');
@@ -438,7 +438,7 @@ ob_start();
 								<img <?php echo createComIcon($root_path,'icon_acro.gif','0');?>>
 								</TD>
 								<TD vAlign=top >
-									<a href="<?php echo $root_path."modules/pdfmaker/emr_generic/report_all.php".URL_APPEND."&enc=".$_SESSION['sess_en']; ?>" target=_blank>
+									<a href="<?php echo $root_path."modules/registration_admission/print/report_all.php".URL_APPEND."&enc=".$_SESSION['sess_en']; ?>" target=_blank>
 <?php
 									echo $LDPrintPDFDocAllReport;
 ?>

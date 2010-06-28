@@ -266,7 +266,7 @@ function wichOne(nr) {
 function openReport() {
 	enc = <?php echo $encounter_nr ?>;
 	userId = '<?php echo $_SESSION['sess_user_name']; ?>';
-	urlholder="<?php echo $root_path ?>modules/pdfmaker/laboratory/report_all.php<?php echo URL_REDIRECT_APPEND; ?>&encounter_nr="+enc+"&skipme="+skipme+"&userId="+userId;
+	urlholder="<?php echo $root_path ?>modules/laboratory/print/report_all.php<?php echo URL_REDIRECT_APPEND; ?>&encounter_nr="+enc+"&skipme="+skipme+"&userId="+userId;
 	window.open(urlholder,'<?php echo $LDOpenReport; ?>',"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
 }
 //  Script End -->

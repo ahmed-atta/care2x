@@ -415,7 +415,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 	}
 	
 	function printPrescription(enc,presnr) {
-		urlholder="<?php echo $root_path ?>modules/pdfmaker/prescription/report_all.php<?php echo URL_REDIRECT_APPEND; ?>&enc="+enc+"&presnr="+presnr;
+		urlholder="<?php echo $root_path ?>modules/nursing/print/report_all.php<?php echo URL_REDIRECT_APPEND; ?>&enc="+enc+"&presnr="+presnr;
 		window.open(urlholder,'Terapia Ditore',"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	

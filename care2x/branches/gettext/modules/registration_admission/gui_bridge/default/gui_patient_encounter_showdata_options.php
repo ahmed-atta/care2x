@@ -191,7 +191,7 @@ if($data_entry){
 
 # Links to pdf doc generator
 if($data_entry){
-	$TP_PRINT_PDFDOC="<a href=\"".$root_path."modules/pdfmaker/admission/admitdata.php".URL_APPEND."&enc=".$_SESSION['sess_en']."\" target=_blank>$LDPrintPDFDoc</a>";
+	$TP_PRINT_PDFDOC="<a href=\"".$root_path."modules/registration_admission/print/admitdata.php".URL_APPEND."&enc=".$_SESSION['sess_en']."\" target=_blank>$LDPrintPDFDoc</a>";
 }else{
 	$TP_PRINT_PDFDOC="<font color='#333333'>$LDPrintPDFDoc</font>";
 }
