@@ -166,7 +166,7 @@ if($mode=='show'){
 			if(!empty($row['therapy'])) $smarty->assign('sTherapy',substr($row['therapy'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']));
 
 			$smarty->assign('sDetailsIcon','<a href="'.$thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&encounter_nr='.$_SESSION['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr'].'"><img '.createComIcon($root_path,'info3.gif','0').'></a>');
-			$smarty->assign('sMakePdfIcon','<a href="'.$root_path.'modules/pdfmaker/medocs/report.php'.URL_APPEND.'&enc='.$_SESSION['sess_en'].'&mnr='.$row['nr'].'&target='.$target.'" target=_blank><img '.createComIcon($root_path,'pdf_icon.gif','0').'></a>');
+			$smarty->assign('sMakePdfIcon','<a href="'.$root_path.'modules/medocs/print/report.php'.URL_APPEND.'&enc='.$_SESSION['sess_en'].'&mnr='.$row['nr'].'&target='.$target.'" target=_blank><img '.createComIcon($root_path,'pdf_icon.gif','0').'></a>');
 			if($row['personell_name']) $smarty->assign('sAuthor',$row['personell_name']);
 			
 			ob_start();
@@ -306,7 +306,7 @@ if(($mode=='show'||$mode=='details')&&!$enc_obj->Is_Discharged()){
 
 	if($mode=='details'){
 		$smarty->assign('sPdfLinkIcon','<img '.createComIcon($root_path,'icon_acro.gif','0','absmiddle').'>');
-		$smarty->assign('sMakePdfLink','<a href="'.$root_path."modules/pdfmaker/medocs/report.php".URL_APPEND."&enc=".$_SESSION['sess_en']."&mnr=".$nr.'&target='.$target.'" target=_blank>'.$LDPrintPDFDoc.'</a>');
+		$smarty->assign('sMakePdfLink','<a href="'.$root_path."modules/medocs/print/report.php".URL_APPEND."&enc=".$_SESSION['sess_en']."&mnr=".$nr.'&target='.$target.'" target=_blank>'.$LDPrintPDFDoc.'</a>');
 	}
 } 
 if(($mode!='show'&&!$nolist) ||($mode=='show'&&$nolist&&$rows>1)){

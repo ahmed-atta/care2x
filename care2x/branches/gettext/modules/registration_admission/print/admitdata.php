@@ -90,9 +90,9 @@ if(empty($encounter['photo_filename'])){
 }
 
 # Load the page header #1
-require('../std_plates/pageheader.php');
+require($root_path.'include/std_plates/pageheader.php');
 # Load the patient data plate #1
-require('../std_plates/patientdata.php');
+require($root_path.'include/std_plates/patientdata.php');
 
 $data=NULL;
 # make empty line
