@@ -11,21 +11,6 @@ $allowedarea=&$allow_area['op_docs'];
 
 $thisfile=basename(__FILE__);
 
-/*
-$fileforward="op-doku-javastart.php?sid=$sid&lang=$lang&target=";
-
-switch($target)
-{
-	case 'search':$fileforward.="search";
-						$lognote="search";
-						break;
-	case 'archiv':$fileforward.="archiv";
-						$lognote="archive";
-						break;
-	default:$fileforward.="entry"; 
-				$target="entry";
-}*/
-
 switch($target)
 {
 	case 'search':$fileforward.="op-doku-search.php?sid=$sid&lang=$lang&target=search";
