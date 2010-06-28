@@ -18,8 +18,8 @@ files to be renamed is changed.
   * Fix in smarty_care.class.php that causes blank page result in some setups. 
   * Delete phpinfo.php - security issue. 
   * Fixed the problem of coming to patient.php page in English (not the 
-selected language) after closing the aufnahme_list.php page. 
-  * Fixed broken link for the Cancel button in the aufnahme_list.php page. 
+selected language) after closing the admission_list.php page. 
+  * Fixed broken link for the Cancel button in the admission_list.php page. 
   * Fixed broken links for city and insurance company selection in the 
 personell register page. 
   * Fixes language problems in nursing module. It involves usage of the 

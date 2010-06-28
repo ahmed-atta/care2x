@@ -33,7 +33,7 @@ if(!isset($notabs)||!$notabs){
 
 	if($target=="archiv") $img='arch-blu.gif'; //echo '<img '.createLDImgSrc($root_path,'archive_green.gif','0').'  alt="'.$LDArchive.'">';
 								else{$img='arch-gray.gif'; }
-	$pbBuffer='<a href="aufnahme_list.php'.URL_APPEND.'&target=archiv"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDArchive.'" title="'.$LDArchive.'" ';
+	$pbBuffer='<a href="admission_list.php'.URL_APPEND.'&target=archiv"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDArchive.'" title="'.$LDArchive.'" ';
 	if($cfg['dhtml']) $pbBuffer.='class="fadeOut" ';
 	$pbBuffer.=' align=middle></a>';
 	$smarty->assign('pbAdvSearch',$pbBuffer);
