@@ -342,7 +342,7 @@ if($rows){
 			# Show the patients name with link to open charts
 			if($edit){
 
-				$sAstart = '<a href="'.$root_path.'modules/registration_admission/aufnahme_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$patient['encounter_nr'].'" title="'.$LDClk2Show.'">';
+				$sAstart = '<a href="'.$root_path.'modules/registration_admission/admission_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$patient['encounter_nr'].'" title="'.$LDClk2Show.'">';
 
 			}
 
@@ -385,7 +385,7 @@ if($rows){
 
 			if($edit){
 
-				$smarty->assign('sAdmitDataIcon','<a href="'.$root_path.'modules/registration_admission/aufnahme_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$patient['encounter_nr'].'" title="'.$LDAdmissionData.' : '.$LDClk2Show.'"><img '.createComIcon($root_path,'pdata.gif','0','',TRUE).' alt="'.$LDAdmissionData.' : '.$LDClk2Show.'"></a>');
+				$smarty->assign('sAdmitDataIcon','<a href="'.$root_path.'modules/registration_admission/admission_pass.php'.URL_APPEND.'&target=search&fwd_nr='.$patient['encounter_nr'].'" title="'.$LDAdmissionData.' : '.$LDClk2Show.'"><img '.createComIcon($root_path,'pdata.gif','0','',TRUE).' alt="'.$LDAdmissionData.' : '.$LDClk2Show.'"></a>');
 
 				$smarty->assign('sChartFolderIcon','<a href="javascript:getinfo(\''.$patient['encounter_nr'].'\')"><img '.createComIcon($root_path,'open.gif','0','',TRUE).' alt="'.$LDShowPatData.'"></a>');
 

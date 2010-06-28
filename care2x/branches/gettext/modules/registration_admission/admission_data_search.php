@@ -26,7 +26,7 @@ $thisfile=basename(__FILE__);
 $toggle=0;
 
 if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
-	else $breakfile='aufnahme_pass.php'.URL_APPEND.'&target=entry';
+	else $breakfile='admission_pass.php'.URL_APPEND.'&target=entry';
 
 # Set value for the search mask
 $searchprompt=$LDEntryPrompt;
