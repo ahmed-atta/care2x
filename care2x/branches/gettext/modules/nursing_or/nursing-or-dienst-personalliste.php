@@ -45,7 +45,7 @@ if(!isset($dept_nr)||!$dept_nr){
 	if($cfg['thispc_dept_nr']){
 		$dept_nr=$cfg['thispc_dept_nr'];
 	}else{
-		header('Location:nursing-or-select-dept.php'.URL_REDIRECT_APPEND.'&target=plist&retpath='.$retpath);
+		header('Location: nursing-or-select-dept.php'.URL_REDIRECT_APPEND.'&target=plist&retpath='.$retpath);
 		exit;
 	}
 }

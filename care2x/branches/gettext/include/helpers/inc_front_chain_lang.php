@@ -2,8 +2,7 @@
 # To see how the script locking is implemented in this script see /development/dev_docs/script_locking.txt 
 
 #------begin------ This protection code was suggested by Luki R. luki@karet.org ----
-if (stristr('inc_front_chain_lang.php',$PHP_SELF)) 
-	die('<meta http-equiv="refresh" content="0; url=../">');
+if (stristr('inc_front_chain_lang.php',$PHP_SELF)) 	die('<meta http-equiv="refresh" content="0; url=../">');
 #------end-----
 
 # Set  to TRUE if you want to disable the time-out feature,
@@ -61,7 +60,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 	$tnow=date('His');
    // echo $tnow."<p>";
 	$time_out=FALSE;
-   
+
    if(!defined('NO_2LEVEL_CHK')||NO_2LEVEL_CHK!=1){
 		
 		# Let us check if the calling script is the time-out configuration script, if yes, then we skip the time out
@@ -111,7 +110,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 		# Reset the time-out start time
 		$_SESSION['sess_tos']=$tnow;
 	}
-		
+
 
    if ($no_valid) {
 
