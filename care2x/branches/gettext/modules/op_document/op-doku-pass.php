@@ -80,12 +80,6 @@ require($root_path.'include/helpers/inc_passcheck_head.php');
 </tr>
 
 <?php require($root_path.'include/helpers/inc_passcheck_mask.php') ?>  
-
-<p>
-<!-- 
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $LDOrDocu" ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDWhat2Do $LDOrDocu" ?></a><br> -->
-<!-- <HR> -->
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>

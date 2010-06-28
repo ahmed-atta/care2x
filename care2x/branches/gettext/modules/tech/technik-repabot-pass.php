@@ -179,12 +179,6 @@ Benutzername eingeben:<br></font>
 
 </table>        
 
-<p>
-<img <?php echo createComIcon($root_path,'small_help.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Was ist der Bestellbot?.</a><br>
-<img <?php echo createComIcon($root_path,'small_help.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Was kann der Bestellbot?</a><br>
-<HR>
-<p>
-
 </FONT>
 
 

@@ -101,8 +101,6 @@ require($root_path.'include/helpers/inc_passcheck_head.php');
 <FONT    SIZE=2  FACE="Arial">
 
 <p>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDIntroTo." ".$title ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDWhatTo." ".$title ?>?</a><br>
 <HR>
 <?php
  // get a  page into an array and echo it out

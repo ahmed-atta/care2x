@@ -179,12 +179,6 @@ Benutzername eingeben:<br></font>
 
 </table>        
 
-<p>
-<img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Einführung in das OP Logbuch</a><br>
-<img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Wie mache ich was mit OP Logbuch?</a><br>
-<HR>
-<p>
-
 <FONT    SIZE=1  FACE="Arial" color=gray>
 Copyright © 2000 by Elpidio Latorilla<p>
 All programs and scripts are not to be copied nor modified without permission from Elpidio Latorilla.<br>

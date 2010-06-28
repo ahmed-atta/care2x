@@ -66,15 +66,6 @@ if($dblink_ok)
 	include_once($root_path.'include/helpers/inc_date_format_functions.php');
 		$enc_obj->where=" encounter_nr=$pn";
 	    if( $enc_obj->loadEncounterData($pn)) {
-/*			switch ($enc_obj->EncounterClass())
-			{
-		    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		                   break;
-				case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-							break;
-				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-			}						
-*/
 			$full_en=$pn;
 			
 			if( $enc_obj->is_loaded){
@@ -118,7 +109,6 @@ if($dblink_ok)
 					   
 					   $sql = "UPDATE $event_table SET $sql_buf WHERE encounter_nr='$pn'";
 					 
-					 //  echo $sql; 
 
 					   if ($event_result=$enc_obj->Transact($sql))
 					   {
@@ -296,26 +286,16 @@ function enlargewin(){
 function xmakekonsil(v)
 { 
     var x=v;
-/*	if((v=="patho")||(v=="inmed")||(v=="radio")||(v=="baclabor")||(v=="blood")||(v=="chemlabor"))
-	{
-*/	
 	   if((v=="inmed")||(v=="allamb")||(v=="unfamb")||(v=="sono")	||(v=="nuklear"))
 	   {
 	     v="generic";
 	   }
 	   location.href="nursing-station-patientdaten-doconsil-"+v+".php?sid=<?php echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&konsil="; ?>"+x+"&target="+v;
-/*	}
-	else 
-	{v="radio";
-	location.href="ucons.php?sid=<?php echo "$sid&lang=$lang&station=$station&pn=$pn&konsil="; ?>"+v;
-	}
-*/	//enlargewin();
 }
 function makekonsil(d)
 { 
 	if(d!=""){
 	   location.href="nursing-station-patientdaten-doconsil-router.php?sid=<?php 
-	   //echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&dept_nr=";
 	   echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&dept_id=";
 	   ?>"+d;
 	}
@@ -530,21 +510,6 @@ function rx(){
 		echo '<td><input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'modules/fotolab/fotos-start.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'"></td></tr></table></td></tr></table>';
 		
 		
-		/* Create the select  menu in edit mode */
-/*		if($edit){
-			$ChkUpOptions=get_meta_tags($root_path.'global_conf/'.$lang.'/konsil_tag_dept.pid');
-		
-			echo '<select 
-			name="konsiltyp" size="1" onChange=makekonsil(this.value)>
-			<option value="">'.$LDChkUpRequests.'</option>';
-
-			while(list($x,$v)=each($ChkUpOptions))
-			echo'
-			<option value="'.$x.'">'.$v.'</option>';
-			echo '
-			</select>';
-		}
-*/
 		if($edit){
 		
 			echo '<table cellpadding=3><tr><td><select name="konsiltyp" size="1" onChange=makekonsil(this.value)>
@@ -586,19 +551,6 @@ function rx(){
 * To use the html display form uncomment the code within the PATIENT_INFO_HTML tags
 *  and comment out the code within the PATIENT_INFO_IMAGE tags
 */		
-/*	
-
-#..................... START...... PATIENT_INFO_HTML
-
-	echo'
-		<tr  bgcolor="#696969"><td   background="'.createBgSkin('../','folderskin2.jpg').'"><font face="verdana,arial" size="2" ><b>&nbsp;&nbsp;</b></td>
-		<td bgcolor="aqua"><font face="verdana,arial" size="2" >&nbsp;<b>'.$result[encounter_nr].'</b></td>
-		<td   background="'.createBgSkin('../','folderskin2.jpg').'"><font face="verdana,arial" size="2" ><b>&nbsp;</b></td>
-		</tr>';
-
-#..................... END....... PATIENT_INFO_HTML
-		
-*/
 echo '
 <tr  bgcolor="#696969" >
 	<td  background="'.createBgSkin($root_path,'folderskin2.jpg').'" width="10%">&nbsp;</td>
@@ -606,20 +558,6 @@ echo '
 
 //..................... START...... PATIENT_INFO_HTML
 
-/*
-echo '<ul>'.$result[title].'<br>
-		<b>'.ucfirst($result[name]).', '.ucfirst($result[name_first]).'</b> <br>
-		<font color=maroon>'.formatDate2Local($result[date_birth],$date_format).'</font> <p>
-		'.nl2br($result[address]);
-
-echo '<p>'.strtoupper($station).' &nbsp; &nbsp; '.$result[kasse].' '.$result[kassename];
-//echo '<p><IMG SRC="http://www.barcodemill.com/cgi-bin/barcodemill/bcmill/barcode.gif?height=30&symbol=1&content='.$result[encounter_nr].'" align="left">';
-
-if(file_exists('../cache/barcodes/en_'.$result['encounter_nr'].'.png')) echo '<br><img src="../cache/barcodes/en_'.$result[encounter_nr].'.png" border=0>';
-else echo "<br><img src='../classes/barcode/image.php?code=$result[encounter_nr]&style=68&type=I25&width=180&height=50&xres=2&font=5' border=0>";
-echo '</ul>';
-*/
-// echo '<p>'.$pday.'.'.$pmonth.'.'.$pyear;
 
 //..................... END....... PATIENT_INFO_HTML
 
@@ -778,7 +716,6 @@ if($edit){
 <?php
 }
 
-  //echo '<a href="javascript:winClose()"><img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'></a>';
 ?>
 
 </form>

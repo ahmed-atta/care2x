@@ -86,12 +86,6 @@ if(isset($is_logged_out) && $is_logged_out) {
 </tr>
 
 <?php require($root_path.'include/helpers/inc_passcheck_mask.php') ?>
-
-<p><!-- 
-<img src="../img/small_help.gif" > <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Was ist login?</a><br>
-<img src="../img/small_help.gif" > <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Wieso soll ich mich einloggen?</a><br>
-<img src="../img/small_help.gif" > <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Was bewirkt das einloggen?</a><br>
- -->
 <p>
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');

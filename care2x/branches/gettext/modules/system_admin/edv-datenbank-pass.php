@@ -206,12 +206,6 @@ Benutzername eingeben:<br></font>
 
 </table>        
 
-<p>
-<img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Einführung in die SQL Datenbank.</a><br>
-<img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>">Wie mache ich was hier?</a><br>
-<HR>
-<p>
-
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
