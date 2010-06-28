@@ -65,13 +65,6 @@ require($root_path.'include/helpers/inc_passcheck_head.php');
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 
 <?php require($root_path.'include/helpers/inc_passcheck_mask.php') ?>  
-<!--
-<FONT  COLOR="<?php echo $cfg[body_txtcolor] ?>"  SIZE=2  FACE="arial,verdana">
-<p>
-<img <?php echo createComIcon($root_path,'small_help.gif','0') ?>> <a href="<?php echo $root_path ?>main/ucons.php<?php echo "?lang=$lang" ?>"><?php echo "$LDIntro2 $title"; ?></a><br>
-<img <?php echo createComIcon($root_path,'small_help.gif','0') ?>> <a href="<?php echo $root_path ?>main/ucons.php<?php echo "?lang=$lang" ?>"><?php echo "$LDWhat2Do $title"; ?>?</a><br>
-</font>
-<HR>-->
 <p>
 
 <?php

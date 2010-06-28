@@ -63,12 +63,6 @@ require($root_path.'include/helpers/inc_passcheck_head.php');
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 
 <?php require($root_path.'include/helpers/inc_passcheck_mask.php') ?>  
-
-<p>
-<!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $title " ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDWhat2Do $title " ?>?</a><br>
- --><HR>
-<p>
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>

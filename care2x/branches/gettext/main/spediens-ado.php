@@ -71,8 +71,6 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 			<a
 				href="spediens-ado-dutyplanner.php?sid=<?php echo "$sid&lang=$lang" ?>"><img
 				<?php echo createComIcon($root_path,'icon_pencil.gif','0') ?>> <?php echo $LDDutyPlanner ?></a><br>
-			<a href="ucons.php?sid=<?php echo "$sid&lang=$lang" ?>"><img
-			<?php echo createComIcon($root_path,'achtung.gif','0') ?>> <?php echo $LDStatistics ?></a><br>
 			<p><br>
 			<a href="<?php echo $breakfile ?>"><img
 			<?php echo createLDImgSrc($root_path,'close2.gif','0') ?>

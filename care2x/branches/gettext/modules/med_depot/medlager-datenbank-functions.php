@@ -99,18 +99,7 @@ echo " $ck_prod_db_user!";
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDReportsTxt ?></nobr></FONT></TD></TR>
 
-<!--               <TR bgColor=#dddddd height=1>
-                <TD colSpan=3><IMG height=1 
-                  src="../../gui/img/common/default/pixel.gif" 
-                  width=5></TD></TR>
-              <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'info2.gif','0','',FALSE) ?>></td>
-                <TD vAlign=top width=150><FONT 
-                  face="Verdana,Helvetica,Arial" size=2><B>
-			 <nobr><a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo $LDInfo ?></a></nobr>
-				  </B></FONT></TD>
-                <TD><FONT face="Verdana,Helvetica,Arial" 
-                  size=2><?php echo $LDInfoTxt ?></FONT></TD></TR>
- -->		</TBODY>
+		</TBODY>
 		</TABLE>
 		</TD></TR>
 		</TBODY>

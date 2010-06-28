@@ -79,12 +79,6 @@ require($root_path.'include/helpers/inc_passcheck_head.php');
 						?></td>
 </tr>
 <?php require($root_path.'include/helpers/inc_passcheck_mask.php') ?>  
-<p>
-<!-- <img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDIntro2 $LDOrLogBook" ?></a><br>
-<img src="../img/small_help.gif"> <a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><?php echo "$LDWhat2Do $LDOrLogBook" ?></a><br>
-
-<p>
- -->
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>

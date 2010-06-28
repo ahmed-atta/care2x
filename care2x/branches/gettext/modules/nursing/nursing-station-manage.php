@@ -49,46 +49,7 @@ $breakfile="nursing.php".URL_APPEND;
  $smarty->assign('LDShowStationDataTxt',$LDShowStationDataTxt);
  
  $smarty->assign('sCancel','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').' border="0"></a>');
-/*
-# Buffer page output
 
-ob_start();
-
-?>
-
-  <table border=1 cellpadding=5 >
-    <tr>
-      <td >&nbsp;</td>
-      <td bgcolor="#0066aa"><FONT face="Verdana,Helvetica,Arial" size=2 color="#ffffff"><b><?php echo $LDProfile ?></b></td>
-      <td >&nbsp;</td>
-      <!-- <td bgcolor="#0066aa"><FONT face="Verdana,Helvetica,Arial" size=2 color="#ffffff"><b>Kommunikation</b></td> -->
-    </tr>
-    <tr>
-      <td></td>
-      <td valign=top><FONT face="Verdana,Helvetica,Arial" size=2 ><a href="nursing-station-new.php?sid=<?php echo $sid ?>&mw=1<?php echo "&lang=$lang&station=$ck_thispc_station&name=$ck_thispc_dept" ?>"><b><?php echo $LDCreate ?></b></a><br>
-	  		&nbsp;<?php echo $LDNewStation ?><p>
-			<?php if ($ck_thispc_station) $mode="show"; ?>
-			<a href="nursing-station-info.php?sid=<?php echo "$sid&lang=$lang&mode=$mode&station=$ck_thispc_station" ?>"><b><?php echo $LDShowStationData ?></b></a><br>
-			<?php echo $LDShowStationDataTxt ?><p>
-<!-- 			<a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><b><?php echo $LDLockBed ?></b></a><br>
-			<?php echo $LDLockBedTxt ?><p>
-			<a href="<?php echo $root_path; ?>main/ucons.php<?php echo URL_APPEND; ?>"><b><?php echo $LDAccessRights ?></b></a><br>
-			<?php echo $LDAccessRightsTxt ?>
- -->			</td>
-      <td></td>
-    </tr>
-  </table>
-
-<p>
-<ul>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a>
-</ul>
-
-<?php
-
-$sTemp = ob_get_contents();
- ob_end_clean();
-*/
 # Assign the include file to main frame template
 
  $smarty->assign('sMainBlockIncludeFile','nursing/ward_manage_submenu.tpl');
