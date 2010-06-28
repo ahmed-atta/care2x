@@ -1,4 +1,3 @@
-
 <blockquote>
 <div class="prompt">{{$LDOrDocs}}</div>
 <TABLE cellSpacing=0 width=600 class="submenu_frame" cellpadding="0">
