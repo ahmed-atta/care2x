@@ -68,17 +68,12 @@ if(empty($encounter['photo_filename'])){
 }
 
 # Load the page header #1
-require('../std_plates/pageheader.php');
+require($root_path.'include/std_plates/pageheader.php');
 # Load the patient data plate #1
-require('../std_plates/patientdata.php');
+require($root_path.'include/std_plates/patientdata.php');
 
 $data=NULL;
 # make empty line
-//$y=$pdf->ezText("\n",14);
-
-/*$data[]=array($LDPatientData);
-$pdf->ezTable($data,'','',array('xPos'=>'left','xOrientation'=>'right','showLines'=>0,'fontSize'=>$report_titlesize,'showHeadings'=>0,'shaded'=>2,'shadeCol2'=>array(0.9,0.9,0.9),'width'=>555));
-*/# make empty line
 //$y=$pdf->ezText("\n",14);
 
 # reset
