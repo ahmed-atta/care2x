@@ -17,7 +17,7 @@ define('MAX_BLOCK_ROWS',30);
 $lang_tables[]='actions.php';
 $lang_tables[]='search.php';
 define('LANG_FILE','specials.php');
-$local_user='ck_fotolab_user';
+$local_user='ck_photolab_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $searchkey=trim($searchkey);
@@ -76,7 +76,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	$linecount=$enc_obj->LastRecordCount();
 	if($linecount==1&&$mode=='search'){
 		$zeile=$encounter->FetchRow();
-		header('location:fotolab-dir-select.php'.URL_REDIRECT_APPEND.'&patnum='.$zeile['encounter_nr'].'&lastname='.strtr($zeile['name_last'],' ','+').'&firstname='.strtr($zeile['name_first'],' ','+').'&bday='.$zeile['date_birth'].'&maxpic='.$aux1);
+		header('location:photolab-dir-select.php'.URL_REDIRECT_APPEND.'&patnum='.$zeile['encounter_nr'].'&lastname='.strtr($zeile['name_last'],' ','+').'&firstname='.strtr($zeile['name_first'],' ','+').'&bday='.$zeile['date_birth'].'&maxpic='.$aux1);
 		exit;
 	}
 //$linecount=$address_obj->LastRecordCount();
@@ -110,7 +110,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('fotolab_how2search.php')");
+ $smarty->assign('pbHelp',"javascript:gethelp('photolab_how2search.php')");
 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
@@ -189,7 +189,7 @@ if($mode=='search'||$mode=='paginate'){
 
 					while($zeile=$encounter->FetchRow())
 					{
-						$ahref='<a href="fotolab-dir-select.php'.URL_APPEND.'&patnum='.$zeile['encounter_nr'].'&lastname='.strtr($zeile['name_last'],' ','+').'&firstname='.strtr($zeile['name_first'],' ','+').'&bday='.$zeile['date_birth'].'&maxpic='.$aux1.'">';
+						$ahref='<a href="photolab-dir-select.php'.URL_APPEND.'&patnum='.$zeile['encounter_nr'].'&lastname='.strtr($zeile['name_last'],' ','+').'&firstname='.strtr($zeile['name_first'],' ','+').'&bday='.$zeile['date_birth'].'&maxpic='.$aux1.'">';
 						echo '
 							<tr class=';
 						if($toggle) { echo "wardlistrow2>"; $toggle=0;} else {echo "wardlistrow1>"; $toggle=1;};
@@ -223,7 +223,7 @@ if($mode=='search'||$mode=='paginate'){
 */
 					    if($_COOKIE[$local_user.$sid]) echo '
 						<td>&nbsp;
-							<a href="fotolab-dir-select.php'.URL_APPEND.'&patnum='.$zeile['encounter_nr'].'&lastname='.strtr($zeile['name_last'],' ','+').'&firstname='.strtr($zeile['name_first'],' ','+').'&bday='.$zeile['date_birth'].'&maxpic='.$aux1.'">
+							<a href="photolab-dir-select.php'.URL_APPEND.'&patnum='.$zeile['encounter_nr'].'&lastname='.strtr($zeile['name_last'],' ','+').'&firstname='.strtr($zeile['name_first'],' ','+').'&bday='.$zeile['date_birth'].'&maxpic='.$aux1.'">
 							<img '.$img_options.' alt="'.$LDSelect.'"></a>&nbsp;
 							</td>';
 						

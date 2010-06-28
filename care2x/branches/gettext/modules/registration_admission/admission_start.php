@@ -138,7 +138,7 @@ if($pid!='' || $encounter_nr!=''){
 				//gjergji
 				//added the possibility to upload foto here
 				// Create image object
-				include_once($root_path.'modules/fotolab/model/class_image.php');
+				include_once($root_path.'modules/photolab/model/class_image.php');
 				$img_obj=& new Image;
 				$picext='';
 				$valid_image=false;

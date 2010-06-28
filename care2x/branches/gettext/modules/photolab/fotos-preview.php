@@ -42,7 +42,7 @@ if($disc_pix_mode){
 }
 if(isset($pn)&&$pn){
 	/* Create image object */
-	include_once($root_path.'modules/fotolab/model/class_image.php');
+	include_once($root_path.'modules/photolab/model/class_image.php');
 	$img_obj=new Image();
 	//$db->debug=true;
 	if(isset($mode)&&$mode=='save'){
@@ -88,7 +88,7 @@ if(file_exists($picsource)){
 	#
 	# If java applet class exists, show link
 	#
-	if(file_exists($root_path.'modules/fotolab/IJBasicViewer.class') && file_exists($root_path.'modules/fotolab/ij.jar')){
+	if(file_exists($root_path.'modules/photolab/IJBasicViewer.class') && file_exists($root_path.'modules/photolab/ij.jar')){
 		echo '<font face=arial><a href="'.basename(__FILE__).URL_APPEND.'&pn='.$pn.'&nr='.$nr.'&bShowImageJApplet='.(!$bShowImageJApplet).'">';
 		if($bShowImageJApplet) echo $LDHideJavaApplet;
 			else echo $LDShowJavaApplet;
@@ -97,7 +97,7 @@ if(file_exists($picsource)){
 	#
 	# If ImageJ applet class exists, show link
 	#
-	if(file_exists($root_path.'modules/fotolab/IJApplet.class') && file_exists($root_path.'modules/fotolab/ij.jar')){
+	if(file_exists($root_path.'modules/photolab/IJApplet.class') && file_exists($root_path.'modules/photolab/ij.jar')){
 		echo '<font face=arial>
 		<a href="ijapplet_launcher.php'.URL_APPEND.'&pn='.$pn.'&img='.$sImgFileName.'&bShowImageJApplet='.(!$bShowImageJApplet).'">'.$LDEditWithImageJ.'</a>
 		</font>';

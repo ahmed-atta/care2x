@@ -11,7 +11,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','specials.php');
-$local_user='ck_fotolab_user';
+$local_user='ck_photolab_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 # Load date formatter
@@ -19,16 +19,16 @@ include_once($root_path.'include/helpers/inc_date_format_functions.php');
 				
 # If data incomplete go back to select page
 if(!$patnum||!$firstname||!$lastname||!$bday||!$maxpic)	{
-	header("Location:fotolab-dir-select.php?sid=$sid&lang=$lang&maxpic=$maxpic&nopatdata=1"); 
+	header("Location:photolab-dir-select.php?sid=$sid&lang=$lang&maxpic=$maxpic&nopatdata=1"); 
 	exit;
 }; 
 require($root_path.'global_conf/inc_remoteservers_conf.php');
 
-require_once($root_path.'modules/fotolab/model/class_image.php');
+require_once($root_path.'modules/photolab/model/class_image.php');
 $img=new Image;
 
 
-$dirselectfile='fotolab-dir-select.php';
+$dirselectfile='photolab-dir-select.php';
 $breakfile="javascript:window.parent.location.replace('".$root_path."main/spediens.php?sid=$sid&lang=$lang')";
 
 # Start Smarty templating here
@@ -45,7 +45,7 @@ $breakfile="javascript:window.parent.location.replace('".$root_path."main/spedie
  $smarty->assign('sToolbarTitle',$LDFotoLab);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('fotolab.php','save','')");
+ $smarty->assign('pbHelp',"javascript:gethelp('photolab.php','save','')");
 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
@@ -181,7 +181,7 @@ $filelist=array();
 if(!$disc_pix_mode)
  {
  	# The ftp username and password should be set here
-	$user='maryhospital_fotolabor';
+	$user='maryhospital_photolabor';
 	$pw='bong';
 	
 	$conn_id = ftp_connect($ftp_server); 

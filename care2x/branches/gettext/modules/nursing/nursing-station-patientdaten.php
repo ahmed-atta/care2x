@@ -507,7 +507,7 @@ function rx(){
 		echo '<input 
 		type="button" onClick="javascript:openDRGComposite()" value="'.$LDDRG.'"></td><td>';
 		echo '<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-todo.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDDocsPrescription.'"></td>';
-		echo '<td><input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'modules/fotolab/fotos-start.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'"></td></tr></table></td></tr></table>';
+		echo '<td><input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'modules/photolab/fotos-start.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'"></td></tr></table></td></tr></table>';
 		
 		
 		if($edit){
