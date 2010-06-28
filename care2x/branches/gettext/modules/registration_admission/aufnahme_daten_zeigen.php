@@ -482,7 +482,7 @@ if(!$is_discharged){
 $smarty->assign('pbBottomClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0').'  title="'.$LDCancel.'"  align="absmiddle"></a>');
 
 $smarty->assign('sAdmitLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="aufnahme_start.php'.URL_APPEND.'&mode=?">'.$LDAdmWantEntry.'</a>');
-$smarty->assign('sSearchLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="aufnahme_daten_such.php'.URL_APPEND.'">'.$LDAdmWantSearch.'</a>');
+$smarty->assign('sSearchLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="admission_data_search.php'.URL_APPEND.'">'.$LDAdmWantSearch.'</a>');
 $smarty->assign('sArchiveLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="aufnahme_list.php'.URL_APPEND.'&newdata=1">'.$LDAdmWantArchive.'</a>');
 
 $smarty->assign('sMainBlockIncludeFile','registration_admission/admit_show.tpl');

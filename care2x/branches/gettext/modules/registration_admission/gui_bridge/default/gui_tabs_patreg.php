@@ -47,7 +47,7 @@ if(!isset($notabs)||!$notabs){
 	# Starting at version 2.0.2, the button is named  "admission" and links to search admission page
 	#
 	//$pbBuffer='<a href="aufnahme_start.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,'admit-gray.gif','0').' alt="'.$LDAdmit.'"  title="'.$LDAdmit.'" ';
-	$pbBuffer='<a href="aufnahme_daten_such.php'.URL_APPEND.'&target=search"><img '.createLDImgSrc($root_path,'ein-gray.gif','0').' alt="'.$LDAdmit.'"  title="'.$LDAdmit.'" ';
+	$pbBuffer='<a href="admission_data_search.php'.URL_APPEND.'&target=search"><img '.createLDImgSrc($root_path,'ein-gray.gif','0').' alt="'.$LDAdmit.'"  title="'.$LDAdmit.'" ';
 	if($cfg['dhtml']) $pbBuffer.='class="fadeOut" ';
 	$pbBuffer.=' align=middle></a>';
 	$smarty->assign('pbSwitchMode',$pbBuffer);

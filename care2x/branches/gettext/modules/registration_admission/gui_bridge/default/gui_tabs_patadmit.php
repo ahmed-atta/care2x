@@ -26,7 +26,7 @@ if(!isset($notabs)||!$notabs){
 	
 	if($target=="search") $img='such-b.gif'; //echo '<img '.createLDImgSrc($root_path,'search_green.gif','0').' alt="'.$LDSearch.'">';
 								else{ $img='such-gray.gif';}
-	$pbBuffer='<a href="aufnahme_daten_such.php'.URL_APPEND.'&target=search"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDSearch.'" title="'.$LDSearch.'"';
+	$pbBuffer='<a href="admission_data_search.php'.URL_APPEND.'&target=search"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDSearch.'" title="'.$LDSearch.'"';
 	if($cfg['dhtml']) $pbBuffer.='class="fadeOut" ';
 	$pbBuffer.=' align=middle></a>';
 	$smarty->assign('pbSearch',$pbBuffer);

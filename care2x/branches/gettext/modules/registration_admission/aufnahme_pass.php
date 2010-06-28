@@ -32,7 +32,7 @@ switch($target){
 	case 'entry':$fileforward='aufnahme_start.php'.$append;
 						$lognote='Admission ok';
 						break;
-	case 'search':$fileforward='aufnahme_daten_such.php'.$append;
+	case 'search':$fileforward='admission_data_search.php'.$append;
 						$lognote='Admision search ok';
 						break;
 	case 'archiv':$fileforward='aufnahme_list.php'.$append;
@@ -40,7 +40,7 @@ switch($target){
 						 break;
 	default: $target='search';
 						$lognote='Admission ok';
-						$fileforward='aufnahme_daten_such.php'.$append;
+						$fileforward='admission_data_search.php'.$append;
 }
 
 

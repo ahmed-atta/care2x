@@ -941,7 +941,7 @@ if(!isset($pid) || !$pid){
 
 # Prepare shortcut links to other functions
 
-$smarty->assign('sSearchLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="aufnahme_daten_such.php'.URL_APPEND.'">'.$LDPatientSearch.'</a>');
+$smarty->assign('sSearchLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="admission_data_search.php'.URL_APPEND.'">'.$LDPatientSearch.'</a>');
 $smarty->assign('sArchiveLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="aufnahme_list.php'.URL_APPEND.'&newdata=1&from=entry">'.$LDArchive.'</a>');
 
 $smarty->assign('sMainBlockIncludeFile','registration_admission/admit_input.tpl');
