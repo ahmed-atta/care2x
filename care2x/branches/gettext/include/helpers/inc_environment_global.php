@@ -120,8 +120,8 @@ define('URL_REDIRECT_APPEND','?sid='.$sid.'&lang='.$lang);
 # Page generation time start
 #
 if(defined('USE_PAGE_GEN_TIME')&&USE_PAGE_GEN_TIME){
-	include($root_path.'classes/ladezeit/ladezeitclass.php');
-	$pgt=new ladezeit();
+	include($root_path.'classes/loadtime/loadtimeclass.php');
+	$pgt=new loadtime();
 	$pgt->start();
 }
 //echo URL_APPEND; echo URL_REDIRECT_APPEND;
