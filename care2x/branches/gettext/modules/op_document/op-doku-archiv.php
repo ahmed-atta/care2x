@@ -423,7 +423,7 @@ $append="&dept_nr=$dept_nr&target=archiv&all_depts=$all_depts";
 ?>
 </table>
 <p>
-<form method="post"  action="op-doku-archiv.php">
+<form method="post"  action="op-docu-archive.php">
 
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
@@ -453,7 +453,7 @@ $append="&dept_nr=$dept_nr&target=archiv&all_depts=$all_depts";
 
 <table border="0"  bgcolor="#ffffff">
 
-<form method="post" name="opdoc" <?php if($mode=="select") echo 'action="op-doku-start.php"'; else echo 'action="op-doku-archiv.php"  onSubmit="return chkForm(this)"'; ?>>
+<form method="post" name="opdoc" <?php if($mode=="select") echo 'action="op-doku-start.php"'; else echo 'action="op-docu-archive.php"  onSubmit="return chkForm(this)"'; ?>>
 <tr <?php if($mode=="select") echo "bgcolor=#ffffff"; ?>>
 <td><?php echo $LDOpDate ?>:<br>
 </td>
@@ -662,7 +662,7 @@ if($row[class_s]) echo "$row[class_s] $LDMinor  &nbsp; ";
  -->
  <input type="image"<?php echo createLDImgSrc($root_path,'update_data.gif') ?>>
 <p>
-<input type="button" value="<?php echo $LDNewArchiveSearch ?>" onClick="window.location.href='op-doku-archiv.php<?php echo URL_REDIRECT_APPEND."&dept_nr=$dept_nr" ?>&target=archiv&mode=?'">
+<input type="button" value="<?php echo $LDNewArchiveSearch ?>" onClick="window.location.href='op-docu-archive.php<?php echo URL_REDIRECT_APPEND."&dept_nr=$dept_nr" ?>&target=archiv&mode=?'">
 
 <?php else : ?>
 <input type="hidden" name="target" value="archiv">
