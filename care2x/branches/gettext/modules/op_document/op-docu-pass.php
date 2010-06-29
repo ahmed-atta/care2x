@@ -27,7 +27,7 @@ $lognote="OP docs $lognote ok";
 
 $breakfile=$root_path.'main/op-docu.php'.URL_APPEND;
 
-$userck='ck_opdoku_user';
+$userck='ck_opdocu_user';
 
 //reset cookie;
 // reset all 2nd level lock cookies

@@ -13,7 +13,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 $lang_tables[]='departments.php';
 $lang_tables[]='or.php';
 define('LANG_FILE','doctors.php');
-$local_user='ck_opdoku_user';
+$local_user='ck_opdocu_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 //$db->debug=1;

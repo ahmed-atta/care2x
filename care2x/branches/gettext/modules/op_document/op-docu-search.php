@@ -19,7 +19,7 @@ $lang_tables[]='doctors.php';
 $lang_tables[]='search.php';
 $lang_tables[]='actions.php';
 define('LANG_FILE','or.php');
-$local_user='ck_opdoku_user';
+$local_user='ck_opdocu_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 # Check if department nr and OR nr are available from user config
