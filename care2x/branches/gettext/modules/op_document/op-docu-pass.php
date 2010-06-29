@@ -13,7 +13,7 @@ $thisfile=basename(__FILE__);
 
 switch($target)
 {
-	case 'search':$fileforward.="op-doku-search.php?sid=$sid&lang=$lang&target=search";
+	case 'search':$fileforward.="op-docu-search.php?sid=$sid&lang=$lang&target=search";
 						$lognote="search";
 						break;
 	case 'archiv':$fileforward.="op-docu-archive.php?sid=$sid&lang=$lang&target=archiv";

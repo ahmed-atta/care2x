@@ -257,7 +257,7 @@ function lookmatch(d)
 		d.matchcode.focus();
 		return false;
 	}
-*/	window.location.replace("op-doku-search.php?sid=<?php echo "$sid&lang=$lang&target=$target&dept_nr=$dept_nr" ?>&mode=match&matchcode="+m+"&all_depts="+a);
+*/	window.location.replace("op-docu-search.php?sid=<?php echo "$sid&lang=$lang&target=$target&dept_nr=$dept_nr" ?>&mode=match&matchcode="+m+"&all_depts="+a);
 	return false;
 }
 // -->
@@ -345,7 +345,7 @@ $append="&dept_nr=$dept_nr&target=search&all_depts=$all_depts";
   if($toggle){ echo 'class="wardlistrow2"'; } else { echo 'class="wardlistrow1"'; }
 	$toggle=!$toggle;
   # Prepare the url get values
-  $buf="op-doku-search.php".URL_APPEND."&dept_nr=".$row['dept_nr']."&target=search&mode=select&nr=".$row['nr']."&all_depts=".$all_depts;
+  $buf="op-docu-search.php".URL_APPEND."&dept_nr=".$row['dept_nr']."&target=search&mode=select&nr=".$row['nr']."&all_depts=".$all_depts;
 
   echo '><td>';
  		switch($row['sex']){
