@@ -184,7 +184,7 @@ if($mode=='save')
 		$rows=$enc_obj->LastRecordCount();
 		if($rows==1&&$mode=='search'){
 			$row=$encounter->FetchRow();
-			header("location:op-doku-start.php?sid=$sid&lang=$lang&target=$target&pn=".$row['encounter_nr']."&dept_nr=$dept_nr");
+			header("location:op-docu-start.php?sid=$sid&lang=$lang&target=$target&pn=".$row['encounter_nr']."&dept_nr=$dept_nr");
 			exit;
 		}
 		//$linecount=$address_obj->LastRecordCount();
@@ -270,7 +270,7 @@ if($mode=='save')
 									
 						if($ergebnis=$enc_obj->Transact($sql))
 						{
-								header("location:op-doku-start.php?sid=$sid&lang=$lang&target=$target&mode=saveok&pn=$pn&nr=$nr&dept_nr=$dept_nr");
+								header("location:op-docu-start.php?sid=$sid&lang=$lang&target=$target&mode=saveok&pn=$pn&nr=$nr&dept_nr=$dept_nr");
 								exit;
 						}else echo "$sql<br>$LDDbNoUpdate"; 
 					}
@@ -324,7 +324,7 @@ if($mode=='save')
 										$enc_obj->coretable=$dbtable;
 										$nr = $enc_obj->LastInsertPK('nr',$oid);
 							  			
-										header("location:op-doku-start.php?sid=$sid&lang=$lang&target=$target&mode=saveok&pn=$pn&nr=$nr&dept_nr=$dept_nr");
+										header("location:op-docu-start.php?sid=$sid&lang=$lang&target=$target&mode=saveok&pn=$pn&nr=$nr&dept_nr=$dept_nr");
 										exit;
 										
   							    }else echo "$sql<br>$LDDbNoSave"; 
@@ -419,7 +419,7 @@ function lookmatch(d)
 		d.matchcode.focus();
 		return false;
 	}
-	window.location.replace("op-doku-start.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=match&matchcode="+m);
+	window.location.replace("op-docu-start.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=match&matchcode="+m);
 	return false;
 }
 
@@ -638,7 +638,7 @@ $bg_img=$root_path.'gui/img/common/default/tableHeaderbg3.gif';
 ?>
 <table border=0 cellpadding=3 >
 
-<form method="post" action="op-doku-start.php" name="opdoc" <?php if($mode!='saveok') echo 'onSubmit="return chkForm(this)"'; ?>>
+<form method="post" action="op-docu-start.php" name="opdoc" <?php if($mode!='saveok') echo 'onSubmit="return chkForm(this)"'; ?>>
 <tr <?php if($mode=='saveok') echo "bgcolor=#ffffff"; ?>>
 <td background="<?php echo $bg_img; ?>"><FONT color=red><?php if($err_op_date) echo '*'; ?><?php echo $LDOpDate ?>:<br>
 </td>
@@ -919,7 +919,7 @@ echo createElement('op_room',$op_room);
 <?php if($mode=='saveok') : ?>
 
  <input  type="image" <?php echo createLDImgSrc($root_path,'update_data.gif','0','absmiddle') ?>  alt="<?php echo $LDSave ?>">
-<input type="button" value="<?php echo $LDStartNewDocu ?>" onclick="window.location.replace('op-doku-start.php<?php echo URL_REDIRECT_APPEND."&target=$target&dept_nr=$dept_nr"; ?>&mode=dummy')">
+<input type="button" value="<?php echo $LDStartNewDocu ?>" onclick="window.location.replace('op-docu-start.php<?php echo URL_REDIRECT_APPEND."&target=$target&dept_nr=$dept_nr"; ?>&mode=dummy')">
 
 <?php else : ?>
 

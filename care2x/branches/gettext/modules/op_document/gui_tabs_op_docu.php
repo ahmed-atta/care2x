@@ -6,7 +6,7 @@ if(!isset($notabs)||!$notabs){
 <tr>
 <td colspan=3><?php if($target=="entry")  $img='document-blue.gif'; //echo '<img '.createLDImgSrc($root_path,'admit-blue.gif','0').' alt="'.$LDAdmit.'">';
 								else{ $img='document-gray.gif';}
-							echo'<a href="op-doku-start.php'.URL_APPEND.'&target=entry&dept_nr='.$dept_nr.'"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDDocument.'"'; if($cfg['dhtml'])echo'class="fadeOut" '; echo '></a>';
+							echo'<a href="op-docu-start.php'.URL_APPEND.'&target=entry&dept_nr='.$dept_nr.'"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDDocument.'"'; if($cfg['dhtml'])echo'class="fadeOut" '; echo '></a>';
 							if($target=="search") $img='such-b.gif'; //echo '<img '.createLDImgSrc($root_path,'such-b.gif','0').' alt="'.$LDSearch.'">';
 								else{ $img='such-gray.gif'; }
 							echo '<a href="op-docu-search.php'.URL_APPEND.'&target=search&dept_nr='.$dept_nr.'&all_depts='.$all_depts.'"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDSearch.'" ';if($cfg['dhtml'])echo'class="fadeOut" '; echo '></a>';

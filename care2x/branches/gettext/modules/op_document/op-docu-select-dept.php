@@ -42,7 +42,7 @@ $datum=date("d.m.Y");
 
 switch($target){
 	case 'entry': $title=$LDOrDocument;
-					  $fileforward='op-doku-start.php'.URL_APPEND.'&retpath='.$retpath;
+					  $fileforward='op-docu-start.php'.URL_APPEND.'&retpath='.$retpath;
 					  break;
 	case 'archiv': $title="$LDOrDocument :: $LDArchive";
 					$fileforward='op-docu-archive.php'.URL_APPEND.'&retpath='.$retpath;
