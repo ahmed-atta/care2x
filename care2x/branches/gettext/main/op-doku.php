@@ -70,16 +70,16 @@ $smarty->append('JavaScript',$sTemp);
 
 $smarty->assign('LDOrDocs',"<img ".createLDImgSrc($root_path,'arzt2.gif','0','absmiddle')."  alt=\"$LDDoctor\">");
 //ALog
-$smarty->assign('LDOrDocument',"<a href=\"".$root_path."modules/op_document/op-doku-pass.php".URL_APPEND."\">$LDOrDocument</a>");
+$smarty->assign('LDOrDocument',"<a href=\"".$root_path."modules/op_document/op-docu-pass.php".URL_APPEND."\">$LDOrDocument</a>");
 $smarty->assign('LDOrDocumentTxt',$LDOrDocumentTxt);
 $smarty->assign('LDOrDocumentMenu',
   '<TABLE cellSpacing=1 cellPadding=5 width="100%" bgColor=#dddddd border=0>
 			<TR>
 				<TD bgColor=#ffffff>
 				<font face=arial,verdana size=2>
-				» <A href="' . $root_path . 'modules/op_document/op-doku-pass.php' . URL_REDIRECT_APPEND . '&target=entry">' . $LDNewDocu . '</A>
-				» <A href="' . $root_path . 'modules/op_document/op-doku-pass.php' . URL_REDIRECT_APPEND . '&target=search">' . $LDSearch . '</A>
-				» <A href="' . $root_path . 'modules/op_document/op-doku-pass.php' . URL_REDIRECT_APPEND . '&target=archiv">' . $LDArchive . '</A>
+				» <A href="' . $root_path . 'modules/op_document/op-docu-pass.php' . URL_REDIRECT_APPEND . '&target=entry">' . $LDNewDocu . '</A>
+				» <A href="' . $root_path . 'modules/op_document/op-docu-pass.php' . URL_REDIRECT_APPEND . '&target=search">' . $LDSearch . '</A>
+				» <A href="' . $root_path . 'modules/op_document/op-docu-pass.php' . URL_REDIRECT_APPEND . '&target=archiv">' . $LDArchive . '</A>
 				</font>
 				</TD>
 			</TR>

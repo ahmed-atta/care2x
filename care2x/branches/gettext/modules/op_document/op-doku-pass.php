@@ -56,11 +56,11 @@ require($root_path.'include/helpers/inc_passcheck_head.php');
 <tr>
 
 <td colspan=3><?php if($target=="entry") echo '<img '.createLDImgSrc($root_path,'newdata-b.gif','0').'>';
-								else echo'<a href="op-doku-pass.php?sid='.$sid.'&lang='.$lang.'&target=entry"><img '.createLDImgSrc($root_path,'newdata-gray.gif','0').'></a>';
+								else echo'<a href="op-docu-pass.php?sid='.$sid.'&lang='.$lang.'&target=entry"><img '.createLDImgSrc($root_path,'newdata-gray.gif','0').'></a>';
 							if($target=="search") echo '<img '.createLDImgSrc($root_path,'such-b.gif','0').'>';
-								else echo '<a href="op-doku-pass.php?sid='.$sid.'&lang='.$lang.'&target=search"><img '.createLDImgSrc($root_path,'such-gray.gif','0').'></a>';
+								else echo '<a href="op-docu-pass.php?sid='.$sid.'&lang='.$lang.'&target=search"><img '.createLDImgSrc($root_path,'such-gray.gif','0').'></a>';
 							if($target=="archiv") echo '<img '.createLDImgSrc($root_path,'arch-blu.gif','0').'>';
-								else echo '<a href="op-doku-pass.php?sid='.$sid.'&lang='.$lang.'&target=archiv"><img '.createLDImgSrc($root_path,'arch-gray.gif','0').'></a>';
+								else echo '<a href="op-docu-pass.php?sid='.$sid.'&lang='.$lang.'&target=archiv"><img '.createLDImgSrc($root_path,'arch-gray.gif','0').'></a>';
 						?></td>
 </tr>
 
