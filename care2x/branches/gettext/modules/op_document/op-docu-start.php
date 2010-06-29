@@ -47,7 +47,7 @@ $lang_tables[]='search.php';
 $lang_tables[]='prompt.php';
 $lang_tables[]='actions.php';
 define('LANG_FILE','or.php');
-$local_user='ck_opdoku_user';
+$local_user='ck_opdocu_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 //$db->debug=1;
