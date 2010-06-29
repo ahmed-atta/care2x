@@ -496,7 +496,7 @@ ob_start();
 
 <table width=100% border=0 cellspacing=0 cellpadding=0>
 
-<?php require('./gui_tabs_op_doku.php'); ?>
+<?php require('./gui_tabs_op_docu.php'); ?>
 <tr>
 <td colspan=2><p>
 
