@@ -964,7 +964,7 @@ if(($mode=='search'||$mode=='paginate')&&$rows){
 <hr>
 <ul>
 
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-doku-search.php<?php echo URL_APPEND."&target=search&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDSearchDocu ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-search.php<?php echo URL_APPEND."&target=search&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDSearchDocu ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-archive.php<?php echo URL_APPEND."&target=archiv&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDResearchArchive ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-doku-select-dept.php<?php echo URL_APPEND."&target=$target&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDChangeOnlyDept ?></a><br>
 
