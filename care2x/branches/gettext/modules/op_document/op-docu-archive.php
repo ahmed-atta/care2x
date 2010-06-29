@@ -28,7 +28,7 @@ if(!isset($dept_nr)||!$dept_nr){
 		$dept_nr=$cfg['thispc_dept_nr'];
 		$dept_ok=true;
 	}else{
-		header('Location:op-doku-select-dept.php'.URL_REDIRECT_APPEND.'&target=entry');
+		header('Location:op-docu-select-dept.php'.URL_REDIRECT_APPEND.'&target=entry');
 		exit;
 	}
 }
@@ -690,7 +690,7 @@ if($row[class_s]) echo "$row[class_s] $LDMinor  &nbsp; ";
 <FONT    SIZE=2  FACE="Arial">
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-doku-start.php<?php echo URL_APPEND."&target=entry&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDStartNewDocu ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-search.php<?php echo URL_APPEND."&target=archiv&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDSearchDocu ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-doku-select-dept.php<?php echo URL_APPEND."&target=$target&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDChangeOnlyDept ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-select-dept.php<?php echo URL_APPEND."&target=$target&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDChangeOnlyDept ?></a><br>
 <p>
 
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  alt="<?php echo $LDClose ?>"></a>

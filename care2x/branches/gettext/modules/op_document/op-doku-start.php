@@ -57,7 +57,7 @@ if(!isset($dept_nr)||!$dept_nr){
 	if(isset($cfg['thispc_dept_nr'])&&!empty($cfg['thispc_dept_nr'])){
 		$dept_nr=$cfg['thispc_dept_nr'];
 	}else{
-		header('Location:op-doku-select-dept.php'.URL_REDIRECT_APPEND.'&target=entry');
+		header('Location:op-docu-select-dept.php'.URL_REDIRECT_APPEND.'&target=entry');
 		exit;
 	}
 }
@@ -966,7 +966,7 @@ if(($mode=='search'||$mode=='paginate')&&$rows){
 
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-search.php<?php echo URL_APPEND."&target=search&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDSearchDocu ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-archive.php<?php echo URL_APPEND."&target=archiv&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDResearchArchive ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-doku-select-dept.php<?php echo URL_APPEND."&target=$target&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDChangeOnlyDept ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-select-dept.php<?php echo URL_APPEND."&target=$target&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDChangeOnlyDept ?></a><br>
 
 <p>
 
