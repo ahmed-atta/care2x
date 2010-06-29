@@ -4890,7 +4890,7 @@ INSERT INTO care_menu_main VALUES ('4', '15', 'Ambulatory', '', 'LDAmbulatory', 
 INSERT INTO care_menu_main VALUES ('5', '20', 'Medocs', '', 'LDMedocs', 'modules/medocs/medocs_pass.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('6', '25', 'Doctors', '', 'LDDoctors', 'modules/doctors/doctors.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('7', '35', 'Nursing',  '','LDNursing', 'modules/nursing/nursing.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('8', '40', 'OR', 'LDOR', '', 'main/op-doku.php', '1', '', '', 20030922232015, 00000000000000);
+INSERT INTO care_menu_main VALUES ('8', '40', 'OR', 'LDOR', '', 'main/op-docu.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('9', '45', 'Laboratories', '', 'LDLabs', 'modules/laboratory/labor.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('10', '50', 'Radiology', '', 'LDRadiology', 'modules/radiology/radiolog.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('11', '55', 'Pharmacy', '', 'LDPharmacy', 'modules/pharmacy/apotheke.php', '1', '', '', 20030922232015, 00000000000000);

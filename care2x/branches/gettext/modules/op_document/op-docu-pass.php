@@ -25,7 +25,7 @@ switch($target)
 
 $lognote="OP docs $lognote ok";
 
-$breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
+$breakfile=$root_path.'main/op-docu.php'.URL_APPEND;
 
 $userck='ck_opdoku_user';
 

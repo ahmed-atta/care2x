@@ -36,7 +36,7 @@ if(!isset($dept_nr)||!$dept_nr){
 //$db->debug=1;
 
 $thisfile=basename(__FILE__);
-$breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
+$breakfile=$root_path.'main/op-docu.php'.URL_APPEND;
 
 # Save dept name to session 
 if(!isset($_SESSION['sess_dept_name'])) $_SESSION['sess_dept_name'] = "";

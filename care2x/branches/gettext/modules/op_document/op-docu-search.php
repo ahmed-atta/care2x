@@ -67,7 +67,7 @@ $enc_obj=new Encounter();
 require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 
 $thisfile=basename(__FILE__);
-$breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
+$breakfile=$root_path.'main/op-docu.php'.URL_APPEND;
 //foreach($arg as $v) echo "$v<br>"; //init db parameters
 
 		

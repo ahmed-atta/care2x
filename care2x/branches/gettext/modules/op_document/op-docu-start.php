@@ -85,7 +85,7 @@ $glob_obj->getConfig('patient_%');
 
 if ((substr($matchcode,0,1)=='%')||(substr($matchcode,0,1)=='&')) {header("Location:'.$root_path.'language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
-$breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
+$breakfile=$root_path.'main/op-docu.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
 
  /* Set color values for the search mask */

@@ -52,11 +52,11 @@ if($dept_ok&&$or_ok){
 switch($retpath)
 {
 	case "docs": $breakfile='doctors.php'.URL_APPEND; break;
-	case "op": $breakfile='op-doku.php'.URL_APPEND; break;
+	case "op": $breakfile='op-docu.php'.URL_APPEND; break;
 }
 */
 /* default startpage */
-$breakfile = $root_path.'main/op-doku.php'.URL_APPEND;
+$breakfile = $root_path.'main/op-docu.php'.URL_APPEND;
 
 $pday=date(j);
 $pmonth=date(n);
