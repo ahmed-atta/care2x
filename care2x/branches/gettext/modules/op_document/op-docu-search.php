@@ -394,7 +394,7 @@ $append="&dept_nr=$dept_nr&target=search&all_depts=$all_depts";
 
 <table border="0">
 
-<form method="post" action="op-doku-start.php" name="opdoc">
+<form method="post" action="op-docu-start.php" name="opdoc">
 <tr bgcolor="#ffffff">
 <td><?php echo $LDSrcListElements[7] ?>:<br>
 </td>
@@ -543,7 +543,7 @@ if($row['class_s']) echo $row['class_s']." $LDMinor  &nbsp; ";
 <?php  echo '<font color="#800000">'.$row['op_room']; 
 ?>
 <?php
-$buf="op-doku-start.php?sid=$sid&lang=$lang&mode=update&update=1&nr=".$row['nr']."&pn=".$row['encounter_nr'];
+$buf="op-docu-start.php?sid=$sid&lang=$lang&mode=update&update=1&nr=".$row['nr']."&pn=".$row['encounter_nr'];
 ?>
 <!-- <p><input type="button" value="<?php echo $LDUpdateData ?>" onClick="window.location.href='<?php echo $buf ?>'"> &nbsp;
  -->
@@ -587,7 +587,7 @@ $buf="op-doku-start.php?sid=$sid&lang=$lang&mode=update&update=1&nr=".$row['nr']
 <hr>
 <ul>
 <FONT    SIZE=2  FACE="Arial">
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-doku-start.php<?php echo URL_APPEND."&target=entry&dept_nr=$dept_nr" ?>&mode=dummy"><?php echo $LDStartNewDocu ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-start.php<?php echo URL_APPEND."&target=entry&dept_nr=$dept_nr" ?>&mode=dummy"><?php echo $LDStartNewDocu ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-archive.php<?php echo URL_APPEND."&target=archiv&dept_nr=$dept_nr" ?>&mode=dummy"><?php echo $LDResearchArchive ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-select-dept.php<?php echo URL_APPEND."&target=$target&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDChangeOnlyDept ?></a><br>
 <p>

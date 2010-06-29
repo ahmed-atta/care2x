@@ -289,7 +289,7 @@ function lookmatch(d)
 {
 	m=d.matchcode.value;
 	if(m=="") return false;
-	window.location.replace("op-doku-start.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=match&matchcode="+m);
+	window.location.replace("op-docu-start.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=match&matchcode="+m);
 	return false;
 }
 
@@ -453,7 +453,7 @@ $append="&dept_nr=$dept_nr&target=archiv&all_depts=$all_depts";
 
 <table border="0"  bgcolor="#ffffff">
 
-<form method="post" name="opdoc" <?php if($mode=="select") echo 'action="op-doku-start.php"'; else echo 'action="op-docu-archive.php"  onSubmit="return chkForm(this)"'; ?>>
+<form method="post" name="opdoc" <?php if($mode=="select") echo 'action="op-docu-start.php"'; else echo 'action="op-docu-archive.php"  onSubmit="return chkForm(this)"'; ?>>
 <tr <?php if($mode=="select") echo "bgcolor=#ffffff"; ?>>
 <td><?php echo $LDOpDate ?>:<br>
 </td>
@@ -688,7 +688,7 @@ if($row[class_s]) echo "$row[class_s] $LDMinor  &nbsp; ";
 <hr>
 <ul>
 <FONT    SIZE=2  FACE="Arial">
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-doku-start.php<?php echo URL_APPEND."&target=entry&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDStartNewDocu ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-start.php<?php echo URL_APPEND."&target=entry&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDStartNewDocu ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-search.php<?php echo URL_APPEND."&target=archiv&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDSearchDocu ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-select-dept.php<?php echo URL_APPEND."&target=$target&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDChangeOnlyDept ?></a><br>
 <p>
