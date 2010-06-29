@@ -12,7 +12,7 @@ if(!isset($notabs)||!$notabs){
 							echo '<a href="op-doku-search.php'.URL_APPEND.'&target=search&dept_nr='.$dept_nr.'&all_depts='.$all_depts.'"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDSearch.'" ';if($cfg['dhtml'])echo'class="fadeOut" '; echo '></a>';
 							if($target=="archiv") $img='arch-blu.gif'; //echo '<img '.createLDImgSrc($root_path,'arch-blu.gif','0').'  alt="'.$LDArchive.'">';
 								else{$img='arch-gray.gif'; }
-							echo '<a href="op-doku-archiv.php'.URL_APPEND.'&target=archiv&dept_nr='.$dept_nr.'"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDArchive.'" ';if($cfg['dhtml'])echo'class="fadeOut" '; echo '></a>';
+							echo '<a href="op-docu-archive.php'.URL_APPEND.'&target=archiv&dept_nr='.$dept_nr.'"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDArchive.'" ';if($cfg['dhtml'])echo'class="fadeOut" '; echo '></a>';
 						?></td>
 </tr>
 <?php

@@ -45,7 +45,7 @@ switch($target){
 					  $fileforward='op-doku-start.php'.URL_APPEND.'&retpath='.$retpath;
 					  break;
 	case 'archiv': $title="$LDOrDocument :: $LDArchive";
-					$fileforward='op-doku-archiv.php'.URL_APPEND.'&retpath='.$retpath;
+					$fileforward='op-docu-archive.php'.URL_APPEND.'&retpath='.$retpath;
 					break;
 	case 'search': $title="$LDOrDocument :: $LDSearch";
 					$fileforward='op-doku-search.php'.URL_APPEND.'&retpath='.$retpath;

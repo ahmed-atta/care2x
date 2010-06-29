@@ -588,7 +588,7 @@ $buf="op-doku-start.php?sid=$sid&lang=$lang&mode=update&update=1&nr=".$row['nr']
 <ul>
 <FONT    SIZE=2  FACE="Arial">
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-doku-start.php<?php echo URL_APPEND."&target=entry&dept_nr=$dept_nr" ?>&mode=dummy"><?php echo $LDStartNewDocu ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-doku-archiv.php<?php echo URL_APPEND."&target=archiv&dept_nr=$dept_nr" ?>&mode=dummy"><?php echo $LDResearchArchive ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-docu-archive.php<?php echo URL_APPEND."&target=archiv&dept_nr=$dept_nr" ?>&mode=dummy"><?php echo $LDResearchArchive ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-doku-select-dept.php<?php echo URL_APPEND."&target=$target&dept_nr=$dept_nr"; ?>&mode=dummy"><?php echo $LDChangeOnlyDept ?></a><br>
 <p>
 
