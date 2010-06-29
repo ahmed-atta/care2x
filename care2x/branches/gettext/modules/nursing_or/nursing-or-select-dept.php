@@ -32,7 +32,7 @@ switch($_SESSION['sess_user_origin'])
 			$breakfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND;
 		} else {
 			/* default startpage */
-			$breakfile = $root_path.'op-doku.php'.URL_APPEND;
+			$breakfile = $root_path.'op-docu.php'.URL_APPEND;
 		}
 }
 
@@ -42,7 +42,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 switch($retpath)
 {
 	case "docs": $breakfile='doctors.php'.URL_APPEND; break;
-	case "op": $breakfile='op-doku.php'.URL_APPEND; break;
+	case "op": $breakfile='op-docu.php'.URL_APPEND; break;
 }
 */
 

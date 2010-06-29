@@ -26,7 +26,7 @@ switch($target)
 $thisfile=basename(__FILE__);
 
 switch($retpath){
-	case 'op': $breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
+	case 'op': $breakfile=$root_path.'main/op-docu.php'.URL_APPEND;
 	default: $breakfile='doctors.php'.URL_APPEND;
 }
 

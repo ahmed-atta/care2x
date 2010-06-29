@@ -28,7 +28,7 @@ if (!empty($_SESSION['sess_path_referer'])){
 	$breakfile=$_SESSION['sess_path_referer'];
 } else {
 	/* default startpage */
-	$breakfile = $root_path.'main/op-doku.php';
+	$breakfile = $root_path.'main/op-docu.php';
 }
 
 $breakfile=$root_path.$breakfile.URL_APPEND;
@@ -39,7 +39,7 @@ $thisfile=basename(__FILE__);
 switch($retpath)
 {
 	case "docs": $breakfile='doctors.php'.URL_APPEND; break;
-	case "op": $breakfile='op-doku.php'.URL_APPEND; break;
+	case "op": $breakfile='op-docu.php'.URL_APPEND; break;
 }
 
 

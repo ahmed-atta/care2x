@@ -15,7 +15,7 @@ if($retpath=='calendar_opt'){
 	$breakfile=$root_path."modules/calendar/calendar-options.php".URL_APPEND."&dept_nr=$dept_nr&retpath=$retpath&day=$pday&month=$pmonth&year=$pyear";
 }else{
 	$append=URL_APPEND; 
- 	$breakfile=$root_path."main/op-doku.php".URL_APPEND;
+ 	$breakfile=$root_path."main/op-docu.php".URL_APPEND;
 }
 
 if(!isset($dept_nr)) $dept_nr='';

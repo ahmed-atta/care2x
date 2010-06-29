@@ -45,7 +45,7 @@ function makelogbuch()
 
 	logbuchwin=window.open("<?php echo $root_path.$top_dir; ?>op-pflege-logbuch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>","logbuchwin<?php echo $sid ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
 	window.logbuchwin.moveTo(0,0);
-	window.location.replace('<?php if($retpath=="calendar_opt") echo $root_path."calendar/calendar-options.php?sid=$sid&lang=$lang&day=$pday&month=$pmonth&year=$pyear"; else echo $root_path."main/op-doku.php?sid=".$sid."&lang=".$lang;?>&forcestation=1&nofocus=1&nointern=1');
+	window.location.replace('<?php if($retpath=="calendar_opt") echo $root_path."calendar/calendar-options.php?sid=$sid&lang=$lang&day=$pday&month=$pmonth&year=$pyear"; else echo $root_path."main/op-docu.php?sid=".$sid."&lang=".$lang;?>&forcestation=1&nofocus=1&nointern=1');
 }
 </script>
 

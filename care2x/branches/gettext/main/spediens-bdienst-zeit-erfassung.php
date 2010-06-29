@@ -25,7 +25,7 @@ $dbtable='care_standby_duty_report';
 
 $thisfile='spediens-bdienst-zeit-erfassung.php';
 if($retpath=='spec') $breakfile="spediens.php".URL_APPEND;
- else $breakfile="op-doku.php".URL_APPEND;
+ else $breakfile="op-docu.php".URL_APPEND;
 
 /********************************* Resolve the department and op room ***********************/
 	    /* Load date formatter */
@@ -227,9 +227,9 @@ eval("document.reportform.tag"+d+".value=1");
 <?php
 switch($retpath)
 {
-	case "op": $rettarget="op-doku.php?sid=$sid"; break;
+	case "op": $rettarget="op-docu.php?sid=$sid"; break;
 	case "spec": $rettarget="spediens.php?sid=$sid"; break;
-	default: $rettarget="op-doku.php?sid=$sid"; break;
+	default: $rettarget="op-docu.php?sid=$sid"; break;
 }
 ?>
 

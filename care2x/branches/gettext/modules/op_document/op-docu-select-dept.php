@@ -22,7 +22,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 switch($retpath)
 {
 	case "docs": $breakfile='doctors.php'.URL_APPEND; break;
-	case "op": $breakfile='op-doku.php'.URL_APPEND; break;
+	case "op": $breakfile='op-docu.php'.URL_APPEND; break;
 }
 */
 if (!empty($_SESSION['sess_path_referer'])){

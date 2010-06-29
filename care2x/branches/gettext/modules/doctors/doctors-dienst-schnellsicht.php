@@ -28,7 +28,7 @@ $core=new Core;
 switch($retpath)
 {
 	case "docs": $breakfile='doctors.php'.URL_APPEND; break;
-	case "op": $breakfile=$root_path.'main/op-doku.php'.URL_APPEND; break;
+	case "op": $breakfile=$root_path.'main/op-docu.php'.URL_APPEND; break;
 	default: $breakfile='doctors.php'.URL_APPEND; 
 }
 
