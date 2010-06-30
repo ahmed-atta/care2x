@@ -16,7 +16,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_config_color.php');
 
 $thisfile=basename(__FILE__);
-$breakfile='technik.php'.URL_APPEND;
+$breakfile='tech.php'.URL_APPEND;
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
 $_SESSION['sess_file_return']=basename(__FILE__);
 

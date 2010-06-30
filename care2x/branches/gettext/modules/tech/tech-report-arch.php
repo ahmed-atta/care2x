@@ -15,7 +15,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
-$breakfile='technik.php'.URL_APPEND;
+$breakfile='tech.php'.URL_APPEND;
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
 $_SESSION['sess_file_return']=basename(__FILE__);
 
@@ -122,7 +122,7 @@ ob_start();
 <!-- 
 function show_order(d,D,t,r,i)
 {
-	urlholder="technik-report-showcontent.php<?php echo URL_REDIRECT_APPEND; ?>&dept="+d+"&tdate="+D+"&ttime="+t+"&reporter="+r+"&tid="+i;
+	urlholder="tech-report-showcontent.php<?php echo URL_REDIRECT_APPEND; ?>&dept="+d+"&tdate="+D+"&ttime="+t+"&reporter="+r+"&tid="+i;
 	//orderlistwin=window.open(urlholder,"orderlistwin","width=700,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	window.location.href=urlholder;
 }
@@ -305,7 +305,7 @@ if($mode=='search') echo '
 
 ?>
 <p><br>
- <a> <?php echo'<a href="technik.php'.URL_APPEND.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'>';?></a>
+ <a> <?php echo'<a href="tech.php'.URL_APPEND.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'>';?></a>
 </ul>
 <?php
 

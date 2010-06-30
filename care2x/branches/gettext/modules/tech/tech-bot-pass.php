@@ -18,23 +18,23 @@ require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['tech'];
 
-$breakfile='technik.php?sid='.$sid.'&lang='.$lang;
+$breakfile='tech.php?sid='.$sid.'&lang='.$lang;
 
-if($mode=='fragebot')
-{ $fileforward="technik.php".URL_REDIRECT_APPEND."&mode=$mode&stb=2"; 
+if($mode=='requestbot')
+{ $fileforward="tech.php".URL_REDIRECT_APPEND."&mode=$mode&stb=2"; 
 	$title=$LDQBotActivate; 
 }
 else 
 {
-	$fileforward="technik.php?sid=$sid&lang=$lang&mode=$mode&stb=1";
-	$title=$LDRepabotActivate;
+	$fileforward="tech.php?sid=$sid&lang=$lang&mode=$mode&stb=1";
+	$title=$LDRepairbotActivate;
 }
 
-$thisfile='technik-bot-pass.php';
+$thisfile='tech-bot-pass.php';
 $lognote="$title ok";
 
 
-$userck='ck_technik_repabot_user';
+$userck='ck_tech_repairbot_user';
 
 //reset cookie;
 // reset all 2nd level lock cookies

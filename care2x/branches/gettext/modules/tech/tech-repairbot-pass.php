@@ -7,9 +7,9 @@ srand(time()*1000);
 $r=rand(1,1000);
 $dbname="maho";
 $allowedarea="System_Admin";
-$fileforward="technik.php";
-$thisfile="technik-repabot-pass.php";
-$breakfile="technik.php";
+$fileforward="tech.php";
+$thisfile="tech-repairbot-pass.php";
+$breakfile="tech.php";
 
 require($root_path."include/inc_passcheck_f2f.php"); // loads the validarea and logentry functions
 
@@ -28,9 +28,9 @@ if ($versand=="Abschicken")
 									{
 										if (validarea($allowedarea,$zeile,mysql_num_fields($ergebnis)))
 										{				
-										setcookie(ck_technik_repabot_user,$zeile[mahopass_name]);	
-										setcookie(ck_technik_repabot_src,"repabotpass");	
-										//logentry($zeile[mahopass_name],"*","IP:".$REMOTE_ADDR."Technik Repabot Launch OK'd",$thisfile,$fileforward);
+										setcookie(ck_tech_repairbot_user,$zeile[mahopass_name]);	
+										setcookie(ck_tech_repairbot_src,"repairbotpass");	
+										//logentry($zeile[mahopass_name],"*","IP:".$REMOTE_ADDR."tech repairbot Launch OK'd",$thisfile,$fileforward);
 										header("Location: $fileforward?sid=$sid&stb=1");
 										exit;
 										}else {$passtag=2;};
@@ -53,7 +53,7 @@ if ($versand=="Abschicken")
 <HTML>
 <HEAD>
 <?php echo setCharSet(); ?>
- <TITLE>Repabot Aktivieren</TITLE>
+ <TITLE>Repairbot Aktivieren</TITLE>
  
  <?php 
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');
@@ -69,11 +69,11 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 <FONT    SIZE=-1  FACE="Arial">
 
 <P>
-<FONT  COLOR=#cc6600  SIZE=5  FACE="verdana"> <b>Repabot Aktivieren</b></font>
+<FONT  COLOR=#cc6600  SIZE=5  FACE="verdana"> <b>Repairbot Aktivieren</b></font>
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
-<td colspan=3><FONT   SIZE=2  FACE="verdana,Arial">Dieser Bereich ist passwortgeschützt!<br></td>
+<td colspan=3><FONT   SIZE=2  FACE="verdana,Arial">Dieser Bereich ist passwortgeschÃ¼tzt!<br></td>
 </tr>
 
 <tr>

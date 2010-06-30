@@ -1,6 +1,6 @@
 {{* Inquiries list box inquiry_listbox.tpl 2004-06-12 Elpidio Latorilla *}}
 
-<form action="technik-questions.php">
+<form action="tech-questions.php">
 	<table cellspacing=0 cellpadding=1 border=0 class="frame" width=20%>
 		<tr>
 			<td>

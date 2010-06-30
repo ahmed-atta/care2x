@@ -31,8 +31,8 @@ $dbtable='care_tech_repair_job';
 <?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-<meta http-equiv="refresh" content="15, url: technik-repabot.php?<?php echo "sid=$sid&lang=$lang" ?>">
-<title><?php echo $LDRepabotActivate ?></title>
+<meta http-equiv="refresh" content="15, url: tech-repairbot.php?<?php echo "sid=$sid&lang=$lang" ?>">
+<title><?php echo $LDRepairbotActivate ?></title>
 <script language=javascript>
 function goactive()
 	{
@@ -46,7 +46,7 @@ if ($nofocus=='') echo "
 	
 function show_order(d,o,s,t)
 {
-	url="technik-repabot-print.php<?php echo URL_REDIRECT_APPEND; ?>&dept="+d+"&tdate="+o+"&ttime="+s+"&tid="+t;
+	url="tech-repairbot-print.php<?php echo URL_REDIRECT_APPEND; ?>&dept="+d+"&tdate="+o+"&ttime="+s+"&tid="+t;
 	repaechowin=window.open(url,"repaprintwin","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
 }
 </script>
@@ -142,7 +142,7 @@ else if($showlist)
 
 <font face="Verdana, Arial" size=2 color=#800000>
 <MARQUEE dir=ltr scrollAmount=3 scrollDelay=120 width=150
-      height=10 align="middle"><b><?php echo $LDImRepabot ?>...</b></MARQUEE></font>
+      height=10 align="middle"><b><?php echo $LDImRepairbot ?>...</b></MARQUEE></font>
 <p>
 
 <?php

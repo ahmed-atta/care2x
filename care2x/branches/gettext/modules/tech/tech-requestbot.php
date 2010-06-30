@@ -99,7 +99,7 @@ switch($mode)
 <?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-<?php if(!isset($mode)||empty($mode)) echo '<meta http-equiv="refresh" content="30, url: technik-fragebot.php">'; ?>
+<?php if(!isset($mode)||empty($mode)) echo '<meta http-equiv="refresh" content="30, url: tech-requestbot.php">'; ?>
 <title><?php echo $LDQBotActivate ?></title>
 <script language=javascript>
 
@@ -134,7 +134,7 @@ if (!$nofocus) echo '
 	
 function show_order(d,o,s,t)
 {
-	url="technik-fragebot-print.php?sid=<?php echo"$sid&lang=$lang"; ?>&dept="+d+"&tdate="+o+"&ttime="+s+"&tid="+t;
+	url="tech-requestbot-print.php?sid=<?php echo"$sid&lang=$lang"; ?>&dept="+d+"&tdate="+o+"&ttime="+s+"&tid="+t;
 	frageechowin=window.open(url,"frageprintwin","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
 }
 </script>
@@ -231,7 +231,7 @@ if($rows)
 			{ echo '<tr bgcolor="#dddddd">'; $tog=0; }else{ echo '<tr bgcolor="#efefff">'; $tog=1; }
 			echo'
 				<td><font face=Verdana,Arial size=2>'.$i.'</td>
-				<td><a href="technik-fragebot.php'.URL_REDIRECT_APPEND.'&dept='.$content['dept'].'&inquirer='.$content['inquirer'].'&tdate='.$content['tdate'].'&ttime='.$content['ttime'].'&tid='.$content['tid'].'&mode=read&showlist=1">
+				<td><a href="tech-requestbot.php'.URL_REDIRECT_APPEND.'&dept='.$content['dept'].'&inquirer='.$content['inquirer'].'&tdate='.$content['tdate'].'&ttime='.$content['ttime'].'&tid='.$content['tid'].'&mode=read&showlist=1">
 						<img '.createComIcon($root_path,'uparrowgrnlrg.gif','0').' alt="'.$LDShow.'"></a></td>
 				<td ><font face=Verdana,Arial size=2>'.$content['inquirer'].' </td>
 				<td ><font face=Verdana,Arial size=2>'.strtoupper($content['dept']).' </td>
@@ -244,7 +244,7 @@ if($rows)
 
 			if($content['answered'])
 				{
-					 echo '<a href="technik-fragebot.php'.URL_REDIRECT_APPEND.'&dept='.$content['dept'].'&inquirer='.$content['inquirer'].'&tdate='.$content['tdate'].'&ttime='.$content['ttime'].'&tid='.$content['tid'].'&mode=archive&showlist=1">
+					 echo '<a href="tech-requestbot.php'.URL_REDIRECT_APPEND.'&dept='.$content['dept'].'&inquirer='.$content['inquirer'].'&tdate='.$content['tdate'].'&ttime='.$content['ttime'].'&tid='.$content['tid'].'&mode=archive&showlist=1">
 					 <img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0').' alt="'.$LDMove2Archive.'"></a>';
 				}
 

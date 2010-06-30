@@ -17,7 +17,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 $thisfile=basename(__FILE__);
-$breakfile='technik-report-arch.php'.URL_APPEND;
+$breakfile='tech-report-arch.php'.URL_APPEND;
 $returnfile=$breakfile;
 
 #init db parameters
