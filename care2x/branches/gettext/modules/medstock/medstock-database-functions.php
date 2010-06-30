@@ -60,7 +60,7 @@ echo " $ck_prod_db_user!";
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'settings_tree.gif','0','',FALSE) ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				 <a href="<?php echo $root_path ?>modules/products/products-datenbank-functions-eingabe.php<?php echo URL_APPEND."&userck=$userck"?>&cat=medstock"><?php echo $LDNewProduct ?></a>
+				 <a href="<?php echo $root_path ?>modules/products/products-database-functions-eingabe.php<?php echo URL_APPEND."&userck=$userck"?>&cat=medstock"><?php echo $LDNewProduct ?></a>
 				  </nobr></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDNewProductTxt ?></FONT></TD>
@@ -71,7 +71,7 @@ echo " $ck_prod_db_user!";
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'eyeglass.gif','0','',FALSE) ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B> 
-   				<a href="<?php echo $root_path ?>modules/products/products-datenbank-functions-such.php<?php echo URL_APPEND."&userck=$userck"?>&cat=medstock"><?php echo $LDSearch ?></a></B></FONT></TD>
+   				<a href="<?php echo $root_path ?>modules/products/products-database-functions-such.php<?php echo URL_APPEND."&userck=$userck"?>&cat=medstock"><?php echo $LDSearch ?></a></B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDSearchDb ?></nobr></FONT></TD></TR>
               
@@ -82,7 +82,7 @@ echo " $ck_prod_db_user!";
               <TR bgColor=#eeeeee><td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0','',FALSE) ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B>
-				<a href="<?php echo $root_path ?>modules/products/products-datenbank-functions-manage.php<?php echo URL_APPEND."&userck=$userck"?>&cat=medstock"><nobr><?php echo $LDManage ?></nobr></a>
+				<a href="<?php echo $root_path ?>modules/products/products-database-functions-manage.php<?php echo URL_APPEND."&userck=$userck"?>&cat=medstock"><nobr><?php echo $LDManage ?></nobr></a>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><?php echo $LDPharmaDbTxt ?></FONT></TD></TR>
