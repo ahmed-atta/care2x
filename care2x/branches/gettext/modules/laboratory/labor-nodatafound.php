@@ -16,7 +16,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if(isset($from)&&$from=='input'){
 	$backfile="labor_datainput.php".URL_APPEND."&encounter_nr=$encounter_nr&job_id=$job_id&parameterselect=$parameterselect&allow_update=$allow_update&user_origin=$user_origin";
 }else{
-	$backfile="labor_data_patient_such.php".URL_APPEND."&search=1";
+	$backfile="labor_data_patient_search.php".URL_APPEND."&search=1";
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

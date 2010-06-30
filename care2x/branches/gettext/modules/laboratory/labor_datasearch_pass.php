@@ -19,7 +19,7 @@ require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['lab_r'];
 
-$fileforward='labor_data_patient_such.php?sid='.$sid.'&lang='.$lang;
+$fileforward='labor_data_patient_search.php?sid='.$sid.'&lang='.$lang;
 $thisfile='labor_datasearch_pass.php';
 
  if ($pdatencookie=='ja') 

@@ -192,7 +192,7 @@ if( isset($mode) && $mode=='save' ){
 			default: $breakfile="labor_data_check_arch.php".URL_APPEND."&versand=1&encounter_nr=$encounter_nr";
 		}
 	}else{
-		$breakfile="labor_data_patient_such.php".URL_APPEND."&mode=edit";
+		$breakfile="labor_data_patient_search.php".URL_APPEND."&mode=edit";
 	}
 }
 
