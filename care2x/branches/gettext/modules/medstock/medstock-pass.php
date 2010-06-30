@@ -63,7 +63,7 @@ switch($mode) {
 						$src="orderpass";
 					    $mode="order";
 						$userck="ck_prod_order_user";
-					    $fileforward=$root_path."modules/products/products-bestellung.php".$append.$userck;
+					    $fileforward=$root_path."modules/products/products-order.php".$append.$userck;
 }
 
 $thisfile=basename(__FILE__);

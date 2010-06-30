@@ -257,7 +257,7 @@ for($n=0;$n<sizeof($artikeln);$n++)
 				<p><font face=Verdana,Arial size=1 color="#000080"><a href="'.$breakfile.'" target="_parent">
 				<img '.createComIcon($root_path,'arrow-blu.gif','0').'> '.$LDEndOrder.'</a>
 				<p>
-				<a href="products-bestellung.php'.URL_APPEND.'&dept_nr='.$dept_nr.'&cat='.$cat.'&userck='.$userck.'" target="_parent"><img '.createComIcon($root_path,'arrow-blu.gif','0').'> '.$LDCreateBasket.'</a>
+				<a href="products-order.php'.URL_APPEND.'&dept_nr='.$dept_nr.'&cat='.$cat.'&userck='.$userck.'" target="_parent"><img '.createComIcon($root_path,'arrow-blu.gif','0').'> '.$LDCreateBasket.'</a>
 				</font>';
 		}
 }
