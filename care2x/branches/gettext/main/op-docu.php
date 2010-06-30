@@ -92,15 +92,15 @@ $smarty->assign('LDQviewTxtDocs',$LDQviewTxtDocs);
 
 $smarty->assign('LDOrNursing',"<img ".createLDImgSrc($root_path,'pflege2.gif','0','absmiddle')."  alt=\"$LDNursing\">");
 //PLog
-$smarty->assign('LDOrLogBook',"<a href=\"".$root_path."modules/or_logbook/op-care-logbuch-pass.php".URL_APPEND."\">$LDOrLogBook</a>");
+$smarty->assign('LDOrLogBook',"<a href=\"".$root_path."modules/or_logbook/op-care-log-pass.php".URL_APPEND."\">$LDOrLogBook</a>");
 $smarty->assign('LDOrLogBookTxt',$LDOrLogBookTxt);
 $smarty->assign('LDOrLogBookMenu',
   		'<TABLE cellSpacing=1 cellPadding=5 width="100%" bgColor=#dddddd border=0>
 			<TR>
 				<TD bgColor=#ffffff><font face=arial,verdana size=2><nobr> 
-				» <A href="' . $root_path . 'modules/or_logbook/op-care-logbuch-pass.php' . URL_REDIRECT_APPEND.'&target=entry";>'.  $LDNewDocu .'</A>
-				» <A href="'. $root_path .'modules/or_logbook/op-care-logbuch-pass.php' .  URL_REDIRECT_APPEND . '&target=search";">' .  $LDSearch . '</A> 
-				» <A href="'.  $root_path . 'modules/or_logbook/op-care-logbuch-pass.php' .  URL_REDIRECT_APPEND . '&target=archiv";">' .  $LDArchive . '</A>
+				» <A href="' . $root_path . 'modules/or_logbook/op-care-log-pass.php' . URL_REDIRECT_APPEND.'&target=entry";>'.  $LDNewDocu .'</A>
+				» <A href="'. $root_path .'modules/or_logbook/op-care-log-pass.php' .  URL_REDIRECT_APPEND . '&target=search";">' .  $LDSearch . '</A> 
+				» <A href="'.  $root_path . 'modules/or_logbook/op-care-log-pass.php' .  URL_REDIRECT_APPEND . '&target=archiv";">' .  $LDArchive . '</A>
 				</font></TD>
 			</TR>
 		</TABLE>');

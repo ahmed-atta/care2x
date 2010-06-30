@@ -654,8 +654,8 @@ if($datafound) {
 }
 ?><a 
 	href="oploginput.php?sid=<?php echo "$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal" ?>&mode=fresh"><img <?php echo createLDImgSrc($root_path,'newpat2.gif','0','absmiddle') ?> 
-	alt="<?php echo $LDStartNewDocu ?>"></a><A href="op-care-logbuch-xtsuch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>" target="_parent"><img <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?> 
-	alt="<?php echo $LDSearchPatient ?>"></a><A href="op-care-logbuch-arch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>"  
+	alt="<?php echo $LDStartNewDocu ?>"></a><A href="op-care-log-xtsuch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>" target="_parent"><img <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?> 
+	alt="<?php echo $LDSearchPatient ?>"></a><A href="op-care-log-arch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>"  
 	target="_parent"><img <?php echo createLDImgSrc($root_path,'archive.gif','0','absmiddle') ?> 
 	alt="<?php echo $LDArchive ?>"></a><br>
 

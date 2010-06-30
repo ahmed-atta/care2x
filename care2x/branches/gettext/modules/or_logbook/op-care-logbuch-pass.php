@@ -22,13 +22,13 @@ if(!isset($dept_nr)) $dept_nr='';
 
 switch($target)
 {
-	case 'search':$fileforward="op-care-logbuch-such-javastart.php".URL_REDIRECT_APPEND."&dept_nr=$dept_nr";
+	case 'search':$fileforward="op-care-log-such-javastart.php".URL_REDIRECT_APPEND."&dept_nr=$dept_nr";
 						$title=$LDSearch;
 						break;
-	case 'archiv':$fileforward="op-care-logbuch-arch-javastart.php".URL_REDIRECT_APPEND."&dept_nr=$dept_nr";
+	case 'archiv':$fileforward="op-care-log-arch-javastart.php".URL_REDIRECT_APPEND."&dept_nr=$dept_nr";
 						$title=$LDArchive;
 						break;
-	default:$fileforward="op-care-logbuch-javastart.php".URL_REDIRECT_APPEND."&dept_nr=$dept_nr";
+	default:$fileforward="op-care-log-javastart.php".URL_REDIRECT_APPEND."&dept_nr=$dept_nr";
 				$target="entry";
 				$title=$LDNewData;
 }

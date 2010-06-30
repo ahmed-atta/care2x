@@ -245,7 +245,7 @@ function pruf(d)
 <?php if ($datafound) { ?>
 function openeditwin(filename,y,m,d)
 {
-	url="op-care-logbuch-arch-edit.php?mode=edit&fileid="+filename+"&sid=<?php echo $sid; ?>&user=<?php echo str_replace(" ","+",$user); ?>&pyear="+y+"&pmonth="+m+"&pday="+d+"&dept_nr=<?php echo $dept_nr;?>&saal=<?php echo $saal;?>";
+	url="op-care-log-arch-edit.php?mode=edit&fileid="+filename+"&sid=<?php echo $sid; ?>&user=<?php echo str_replace(" ","+",$user); ?>&pyear="+y+"&pmonth="+m+"&pday="+d+"&dept_nr=<?php echo $dept_nr;?>&saal=<?php echo $saal;?>";
 	
 	w=window.parent.screen.width;
 	h=window.parent.screen.height;
@@ -290,7 +290,7 @@ echo '
 		<tr class="wardlisttitlerow"><td colspan=2   ><nobr>';
  	
 echo '
-			<a href="op-care-logbuch-arch-start.php?sid='.$sid.'&lang='.$lang.'&nogetlast=1&dept_nr='.$dept_nr.'&saal='.$saal.'&thisday='.$yesday.'&noseek=1" 
+			<a href="op-care-log-arch-start.php?sid='.$sid.'&lang='.$lang.'&nogetlast=1&dept_nr='.$dept_nr.'&saal='.$saal.'&thisday='.$yesday.'&noseek=1" 
 			title="'.formatDate2Local($yesday,$date_format).'">
 			&lt;&lt; '.$LDPrevDay.'</a>';
 
@@ -304,7 +304,7 @@ echo $tage[(date("w",mktime(0,0,0,$tm,$td,$ty)))].' ('.formatDate2Local($thisday
 		<td colspan=2 align=right >';
 
 if($thisday!=$today) echo '
-					<a href="op-care-logbuch-arch-start.php?sid='.$sid.'&lang='.$lang.'&nogetlast=1&dept_nr='.$dept_nr.'&saal='.$saal.'&thisday='.$tomorow.'&noseek=1" 
+					<a href="op-care-log-arch-start.php?sid='.$sid.'&lang='.$lang.'&nogetlast=1&dept_nr='.$dept_nr.'&saal='.$saal.'&thisday='.$tomorow.'&noseek=1" 
 					title="'.formatDate2Local($tomorow,$date_format).'">
 					<nobr>'.$LDNextDay.' &gt;&gt;</a></td></tr>';
 echo '
@@ -333,7 +333,7 @@ if($datafound)
 	echo '
 			<td valign=top><font size="1" ><font size=2 color=red><b>'.$pdata['op_nr'].'</b></font><hr>'.formatDate2Local($pdata['op_date'],$date_format).'<br>
 			'.$tage[date("w",mktime(0,0,0,$imonth,$iday,$iyear))].'<br>
-			<a href="op-care-logbuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=saveok&enc_nr='.$pdata['encounter_nr'].'&op_nr='.$pdata['op_nr'].'&dept_nr='.$pdata['dept_nr'].'&saal='.$pdata['op_room'].'&thisday='.$pdata['op_date'].'" ';
+			<a href="op-care-log-start.php?sid='.$sid.'&lang='.$lang.'&mode=saveok&enc_nr='.$pdata['encounter_nr'].'&op_nr='.$pdata['op_nr'].'&dept_nr='.$pdata['dept_nr'].'&saal='.$pdata['op_room'].'&thisday='.$pdata['op_date'].'" ';
 	
 	if ($child) echo 'target="_parent"';		
 	
@@ -464,7 +464,7 @@ if($datafound)
 		{
 			echo '
 			<MAP NAME="catcom">
-			<AREA SHAPE="RECT" COORDS="158,90,230,110"  HREF="op-care-logbuch-xtsuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=fresh&dept_nr='.$dept_nr.'&saal='.$saal.'"   title="'.$LDSearchPatient.' ['.$LDOrLogBook.']" >
+			<AREA SHAPE="RECT" COORDS="158,90,230,110"  HREF="op-care-log-xtsuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=fresh&dept_nr='.$dept_nr.'&saal='.$saal.'"   title="'.$LDSearchPatient.' ['.$LDOrLogBook.']" >
 			</MAP><img ismap usemap="#catcom" '.createLDImgSrc($root_path,'cat-com2.gif','0').'>
 			<DIV id=dLogoTable style=" VISIBILITY: hidden; POSITION: relative">
 			<table border=0 bgcolor="#33333" cellspacing=0 cellpadding=1>
@@ -510,7 +510,7 @@ echo '
         
 <ul>
 
-<form action="op-care-logbuch-arch-start.php" method="post" name="chgdept" onSubmit="return pruf(this)">
+<form action="op-care-log-arch-start.php" method="post" name="chgdept" onSubmit="return pruf(this)">
 
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
@@ -561,8 +561,8 @@ echo '
 </form><p>
 <b><?php echo $LDOtherFunctions ?>:</b><br>
 
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-care-logbuch-xtsuch-start.php?sid=<?php echo "$sid&lang=$lang&mode=fresh&dept_nr=$dept_nr&saal=$saal&child=$child" ?>"><?php echo "$LDSearchPatient [$LDOrLogBook]" ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-care-logbuch-start.php?sid=<?php echo "$sid&lang=$lang&mode=fresh&dept_nr=$dept_nr&saal=$saal" ?>" <?php if ($child) echo "target=\"_parent\""; ?>><?php echo "$LDStartNewDocu [$opabt[$dept_nr] $LDRoom $saal]" ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-care-log-xtsuch-start.php?sid=<?php echo "$sid&lang=$lang&mode=fresh&dept_nr=$dept_nr&saal=$saal&child=$child" ?>"><?php echo "$LDSearchPatient [$LDOrLogBook]" ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-care-log-start.php?sid=<?php echo "$sid&lang=$lang&mode=fresh&dept_nr=$dept_nr&saal=$saal" ?>" <?php if ($child) echo "target=\"_parent\""; ?>><?php echo "$LDStartNewDocu [$opabt[$dept_nr] $LDRoom $saal]" ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="javascript:gethelp('oplog.php','arch','<?php echo $dif ?>','<?php echo $lastlog ?>','<?php echo $datafound ?>')"><?php echo "$LDHelp" ?></a><br>
 <!-- 
 <p>
