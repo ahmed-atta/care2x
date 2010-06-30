@@ -13,7 +13,7 @@ $allowedarea="System_Admin";
 
 $fileforward="admin_datenbank.php";
 $thisfile="admin_datenbank-pass.php";
-$breakfile="edv.php";
+$breakfile="admin.php";
 
 if($_COOKIE['ck_login_logged'.$sid]&&$_COOKIE['ck_login_userid'.$sid])
 {

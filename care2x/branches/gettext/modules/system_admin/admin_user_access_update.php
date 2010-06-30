@@ -12,7 +12,7 @@ require_once($root_path.'include/helpers/inc_config_color.php');
 */
 require($root_path.'include/helpers/inc_accessplan_areas_functions.php');
 
-$breakfile="edv.php?sid=".$sid."&lang=".$lang;
+$breakfile="admin.php?sid=".$sid."&lang=".$lang;
 
 ?>
 

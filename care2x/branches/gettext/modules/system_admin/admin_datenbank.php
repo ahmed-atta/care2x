@@ -25,7 +25,7 @@ setcookie(ck_admin_sysadmin,"");
 <!-- 
 function closewin()
 {
-	location.href='edv.php?sid=<?php echo $$ck_sid_buffer.'&uid='.$r;?>';
+	location.href='admin.php?sid=<?php echo $$ck_sid_buffer.'&uid='.$r;?>';
 }
 // -->
 </script> 

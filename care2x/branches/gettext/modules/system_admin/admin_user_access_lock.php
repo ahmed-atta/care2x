@@ -21,7 +21,7 @@ $updatereturn='admin_user_access_list.php';
 //$updatereturn='admin_user_access_list.php';
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
 //$db->debug=true;
-//$_SESSION['sess_file_return']='edv.php';
+//$_SESSION['sess_file_return']='admin.php';
 
 require_once($root_path.'include/core/class_access.php');
 $user = & new Access($itemname);

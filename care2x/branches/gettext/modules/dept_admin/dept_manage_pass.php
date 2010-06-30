@@ -12,7 +12,7 @@ $allowedarea=&$allow_area['wards'];
 
 $fileforward="dept_manage.php?sid=".$sid."&lang=".$lang;
 $thisfile=basename(__FILE__);
-$breakfile="edv.php?sid=".$sid."&lang=".$lang;
+$breakfile="admin.php?sid=".$sid."&lang=".$lang;
 
 $lognote="$LDNursingManage ok";
 

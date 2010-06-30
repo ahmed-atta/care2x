@@ -19,7 +19,7 @@ require($root_path.'include/helpers/inc_accessplan_areas_functions.php');
 
 $breakfile='admin_system-admi-welcome.php'.URL_APPEND;
 $returnfile='admin_user_role_list.php'.URL_APPEND;
-//$_SESSION['sess_file_return']='edv.php';
+//$_SESSION['sess_file_return']='admin.php';
 
 require_once($root_path.'include/core/class_access.php');
 $role = & new Access();
