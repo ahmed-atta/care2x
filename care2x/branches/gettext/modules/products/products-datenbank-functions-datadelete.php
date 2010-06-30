@@ -55,7 +55,7 @@ if(($mode=='delete')&&($sure)&&($keyword!='')&&($keytype!='')) {
 $update=true;
 
 # Load search routine
-require("includes/inc_products_search_mod_datenbank.php");
+require("includes/inc_products_search_mod_database.php");
 
 # Start Smarty templating here
  /**

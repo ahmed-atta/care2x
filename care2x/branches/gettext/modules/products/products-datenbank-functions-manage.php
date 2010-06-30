@@ -36,7 +36,7 @@ if($mode=='save')
 	include('includes/inc_products_db_save_mod.php');
 }
 
-if(!empty($mode)) include('includes/inc_products_search_mod_datenbank.php');
+if(!empty($mode)) include('includes/inc_products_search_mod_database.php');
 
 if($linecount==1) {  $from='multiple'; }
 
