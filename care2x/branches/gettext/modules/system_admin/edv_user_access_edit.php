@@ -12,7 +12,7 @@ require ($root_path . 'include/helpers/inc_environment_global.php') ;
  */
 $lang_tables [] = 'access.php' ;
 define ( 'LANG_FILE', 'edp.php' ) ;
-$local_user = 'ck_edv_user' ;
+$local_user = 'ck_admin_user' ;
 require_once ($root_path . 'include/helpers/inc_front_chain_lang.php') ;
 ///$db->debug=true;
 /**
@@ -21,7 +21,7 @@ require_once ($root_path . 'include/helpers/inc_front_chain_lang.php') ;
  */
 require ($root_path . 'include/helpers/inc_accessplan_areas_functions.php') ;
 
-$breakfile = 'edv-system-admi-welcome.php' . URL_APPEND ;
+$breakfile = 'admin_system-admi-welcome.php' . URL_APPEND ;
 $returnfile = $_SESSION [ 'sess_file_return' ] . URL_APPEND ;
 $_SESSION [ 'sess_file_return' ] = basename ( __FILE__ ) ;
 
@@ -133,7 +133,7 @@ if ($mode != '') {
 			$ok = $db->Execute ( $sql ) ;
 			if ($ok && $db->CommitTrans ()) {
 				//echo $sql;
-				header ( 'Location:edv_user_access_edit.php' . URL_REDIRECT_APPEND . '&userid=' . strtr ( $userid, ' ', '+' ) . '&mode=data_saved' ) ;
+				header ( 'Location:admin_user_access_edit.php' . URL_REDIRECT_APPEND . '&userid=' . strtr ( $userid, ' ', '+' ) . '&mode=data_saved' ) ;
 				exit () ;
 			} else {
 				$db->RollbackTrans () ;
@@ -235,7 +235,7 @@ if (($mode == "") and ($remark != 'fromlist')) {
 <p>
 	
 	
-	<FORM action="edv_user_access_list.php" name="all">
+	<FORM action="admin_user_access_list.php" name="all">
 		<input type="hidden" name="sid" value="<?php echo $sid ; ?>"> 
 		<input type="hidden" name="lang" value="<?php echo $lang ; ?>"> 
 		<input type="submit" name=message value="<?php echo $LDListActual ?>">
@@ -243,18 +243,18 @@ if (($mode == "") and ($remark != 'fromlist')) {
 	<p>
 	
 	
-	<form method="post" action="edv_user_access_edit.php" name="user">
+	<form method="post" action="admin_user_access_edit.php" name="user">
 		<input type="image" <?php echo createLDImgSrc ( $root_path, 'savedisc.gif', '0', 'absmiddle' ) ?>>
 
 <?php
 if ($mode == 'data_saved' || $edit) {
-	echo '<input type="button" value="' . $LDEnterNewUser . '" onClick="javascript:window.location.href=\'edv_user_access_edit.php' . URL_REDIRECT_APPEND . '&remark=fromlist\'">' ;
+	echo '<input type="button" value="' . $LDEnterNewUser . '" onClick="javascript:window.location.href=\'admin_user_access_edit.php' . URL_REDIRECT_APPEND . '&remark=fromlist\'">' ;
 }
 ?>
 <input type="button" value="<?php
 echo $LDFindEmployee ;
 ?>"
-		onClick="javascript:window.location.href='edv_user_search_employee.php<?php
+		onClick="javascript:window.location.href='admin_user_search_employee.php<?php
 		echo URL_REDIRECT_APPEND ;
 		?>&remark=fromlist'">
 

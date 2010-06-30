@@ -12,12 +12,12 @@ require($root_path.'include/helpers/inc_environment_global.php');
 */
 $lang_tables=array('personell.php','edp.php');
 define('LANG_FILE','aufnahme.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 $toggle=0;
-$breakfile= 'edv_user_access_edit.php'.URL_APPEND.'&target='.$target;
+$breakfile= 'admin_user_access_edit.php'.URL_APPEND.'&target='.$target;
  /* Set color values for the search mask */
 $searchmask_bgcolor='#f3f3f3';
 $searchprompt=$LDEntryPrompt;
@@ -62,7 +62,7 @@ if(($mode=='search')and($searchkey)){
 				}else{
 						$append='&is_employee=1&personell_nr='.$zeile['nr'].'&username='.strtr(($zeile['name_first'].' '.$zeile['name_last']),' ','+').'&userid='.strtr($zeile['name_last'],' ','_');
 				}
-				header("location:edv_user_access_edit.php".URL_REDIRECT_APPEND.$append);
+				header("location:admin_user_access_edit.php".URL_REDIRECT_APPEND.$append);
 				exit;
 			}
 		}
@@ -188,7 +188,7 @@ if($mode=='search'){
 
 			echo '
 				<td>&nbsp;
-					<a href="edv_user_access_edit.php'.URL_APPEND.$append.'">
+					<a href="admin_user_access_edit.php'.URL_APPEND.$append.'">
 					<img '.$img_options.' alt="'.$alt.'"></a>&nbsp;';
 
 			if(!file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png'))

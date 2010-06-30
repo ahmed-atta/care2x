@@ -30,10 +30,10 @@ define('NEWS_DISPLAY_WIDTH','100%');
 
 $lang_tables[]='startframe.php';
 define('LANG_FILE','edp.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-$breakfile='edv-system-admi-welcome.php'.URL_APPEND.'&target=currency_admin';
+$breakfile='admin_system-admi-welcome.php'.URL_APPEND.'&target=currency_admin';
 $thisfile=basename(__FILE__);
 
 $GLOBAL_CONFIG=array();

@@ -17,7 +17,7 @@ $lang_tables[]='departments.php';
 $lang_tables[]='date_time.php';
 $lang_tables[]='prompt.php';
 define('LANG_FILE','edp.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'modules/dept_admin/model/class_department.php');
 require_once($root_path.'include/core/class_ward.php');
@@ -25,7 +25,7 @@ require_once($root_path.'modules/or_admin/model/class_oproom.php');
 
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
-$breakfile=$root_path.'modules/system_admin/edv-system-admi-welcome.php'.URL_APPEND	;
+$breakfile=$root_path.'modules/system_admin/admin_system-admi-welcome.php'.URL_APPEND	;
 
 if(!isset($mode)) $mode='';
 # Create department object

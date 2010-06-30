@@ -11,10 +11,10 @@ require ($root_path . 'include/helpers/inc_environment_global.php');
  * See the file "copy_notice.txt" for the licence notice
  */
 define ( 'LANG_FILE', 'edp.php' );
-$local_user = 'ck_edv_user';
+$local_user = 'ck_admin_user';
 require_once ($root_path . 'include/helpers/inc_front_chain_lang.php');
 
-$breakfile = $root_path . 'modules/system_admin/edv-system-admi-menu.php' . URL_APPEND;
+$breakfile = $root_path . 'modules/system_admin/admin_system-admi-menu.php' . URL_APPEND;
 $title = $LDDeptAdmin;
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

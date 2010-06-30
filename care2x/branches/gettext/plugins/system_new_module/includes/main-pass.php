@@ -26,7 +26,7 @@ switch($target)
 {
 	
 	case '#Modulname#':	$title=$LDSystemLogin;
-								//$userck='ck_edv_admin_user';
+								//$userck='ck_admin_admin_user';
 								$fileforward=$root_path."/modules/#Modulname#/#Modulname#.php?sid=$sid&lang=$lang&from=$from";
 								break;
 	default:{header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 

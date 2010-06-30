@@ -44,7 +44,7 @@ require('includes/inc_currency_set.php');
 /**
 * Create the GUI body
 */
-$bottomlink=$root_path.'modules/system_admin/edv-main-pass.php'.URL_APPEND.'&target=currency_admin'; 
+$bottomlink=$root_path.'modules/system_admin/admin_main-pass.php'.URL_APPEND.'&target=currency_admin'; 
 $bottomlink_txt=$LDClk2AddCurrency;
 require('includes/inc_currency_set_gui.php'); 
 ?>

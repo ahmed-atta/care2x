@@ -169,8 +169,8 @@ for($i=0;$i<(sizeof($fieldnames));$i++)
 <p>
 <hr>
 <p>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="edv-accessplan-wie.htm">Wie verwalte ich die Zugangsberechtigungen?</a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="edv-accessplan-werwo.htm">Wer hat wo Zugangsberechtigung?</a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="admin_accessplan-wie.htm">Wie verwalte ich die Zugangsberechtigungen?</a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="admin_accessplan-werwo.htm">Wer hat wo Zugangsberechtigung?</a><br>
 <HR>
 <p>
 

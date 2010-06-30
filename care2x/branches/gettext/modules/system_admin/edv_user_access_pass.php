@@ -18,30 +18,30 @@ require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['edp'];
 
-$userck='ck_edv_user';
+$userck='ck_admin_user';
 $append="?sid=$sid&lang=$lang&fwck=$userck";
 switch($target)
 {
-/*	case 'entry':$fileforward='edv_user_access_edit.php'.$append; 
+/*	case 'entry':$fileforward='admin_user_access_edit.php'.$append; 
 						$title="$LDManageAccess - $LDNewData";
 						break;
 */
-	case 'entry':$fileforward='edv_user_access_edit.php'.$append; 
+	case 'entry':$fileforward='admin_user_access_edit.php'.$append; 
 						$title="$LDManageAccess - $LDNewData";
 						break;
 
-	case 'search':$fileforward='edv_user_access_search.php'.$append; 
+	case 'search':$fileforward='admin_user_access_search.php'.$append; 
 						$title="$LDManageAccess - $LDSearch";
 						break;
-	case 'archiv':$fileforward='edv_user_access_list.php'.$append; 
+	case 'archiv':$fileforward='admin_user_access_list.php'.$append; 
 						$title="$LDManageAccess - $LDListAll";
 						break;
 	default: $target='entry';
-				$fileforward='edv_user_access_edit.php'.$append; 
+				$fileforward='admin_user_access_edit.php'.$append; 
 				$title="$LDManageAccess $LDNewData";
 }
 
-$thisfile='edv_user_access_pass.php';
+$thisfile='admin_user_access_pass.php';
 $breakfile='edv.php?sid='.$sid.'&lang='.$lang;
 
 

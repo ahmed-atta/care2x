@@ -64,7 +64,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
    if(!defined('NO_2LEVEL_CHK')||NO_2LEVEL_CHK!=1){
 		
 		# Let us check if the calling script is the time-out configuration script, if yes, then we skip the time out
-		if (!stristr('edv_system_timeout.php',$PHP_SELF)) {
+		if (!stristr('admin_system_timeout.php',$PHP_SELF)) {
 			# Load the global time out configs
 			include_once($root_path.'include/core/class_globalconfig.php');
 			if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();

@@ -11,14 +11,14 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','edp.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-//$breakfile='edv_user_access_list.php'.URL_APPEND;
-$breakfile='edv-system-admi-welcome.php'.URL_APPEND;
-$updatereturn='edv_user_access_list.php';
-//$updatereturn='edv_user_access_list.php';
+//$breakfile='admin_user_access_list.php'.URL_APPEND;
+$breakfile='admin_system-admi-welcome.php'.URL_APPEND;
+$updatereturn='admin_user_access_list.php';
+//$updatereturn='admin_user_access_list.php';
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
 //$db->debug=true;
 //$_SESSION['sess_file_return']='edv.php';
@@ -117,14 +117,14 @@ echo $zeile['password'];
 </table>
 
 <br>
-<FORM action="edv_user_access_lock.php" method="post">
+<FORM action="admin_user_access_lock.php" method="post">
 <INPUT type="hidden" name="itemname" value="<?php echo $itemname ?>">
 <input type="hidden" name="finalcommand" value="changelock">
 <input type="hidden" name="sid" value="<?php echo $sid;?>">
 <input type="hidden" name="lang" value="<?php echo $lang;?>">
 <INPUT type="submit" name="versand"  value="  <?php echo $LDYesSure ?>  "></font></FORM>
 
-<FORM  method=get action="edv_user_access_list.php" >
+<FORM  method=get action="admin_user_access_list.php" >
 <input type="hidden" name="sid" value="<?php echo $sid;?>">
 <input type="hidden" name="lang" value="<?php echo $lang;?>">
 <INPUT type="submit"  value="<?php echo $LDNoBack ?>"></font></FORM>

@@ -12,7 +12,7 @@ require('./roots.php');
 require($root_path.'include/helpers/inc_environment_global.php');
 
 # The following 2 lines are for the permission checking: EL - 2004-04-19
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 //$db->debug=1;

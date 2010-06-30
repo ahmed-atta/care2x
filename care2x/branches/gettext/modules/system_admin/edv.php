@@ -70,7 +70,7 @@ $aSubMenuText=array($LDSysOpLoginTxt,
 
 # Prepare the submenu item links indexed by their template tags
 
-$aSubMenuItem=array('LDQViewTxt' => '<a href="edv-main-pass.php'.URL_APPEND.'&target=adminlogin">'.$LDManageAccess.'</a>',
+$aSubMenuItem=array('LDQViewTxt' => '<a href="admin_main-pass.php'.URL_APPEND.'&target=adminlogin">'.$LDManageAccess.'</a>',
 										'LDNewsTxt' => '<a href="'.$root_path.'modules/news/newscolumns.php'.URL_APPEND.'&dept_nr=27">'.$LDNews.'</a>',
 										);
 

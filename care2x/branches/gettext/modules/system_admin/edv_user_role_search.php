@@ -12,7 +12,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 */
 $lang_tables[] = 'access.php';
 define('LANG_FILE','edp.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 /**
@@ -121,8 +121,8 @@ function gethelp(x,s,x1,x2,x3)
 			for($j=0;$j<sizeof($area);$j++) echo $area_opt[$area[$j]].'<br>';
             echo "
 					<td>
-					<a href=edv_user_role_edit.php?sid=$sid&lang=$lang&mode=edit&id=".$zeile['id']." title=\"$LDChange\"> $LDInitChange</a> \n
-					<a href=edv_user_role_delete.php?sid=$sid&lang=$lang&itemname=".$zeile['id']." title=\"$LDDelete\">	$LDInitDelete</a> 
+					<a href=admin_user_role_edit.php?sid=$sid&lang=$lang&mode=edit&id=".$zeile['id']." title=\"$LDChange\"> $LDInitChange</a> \n
+					<a href=admin_user_role_delete.php?sid=$sid&lang=$lang&itemname=".$zeile['id']." title=\"$LDDelete\">	$LDInitDelete</a> 
 					</td>";
 			echo "</tr>";
         };

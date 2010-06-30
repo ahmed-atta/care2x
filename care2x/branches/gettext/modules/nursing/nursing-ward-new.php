@@ -12,7 +12,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 */
 $lang_tables[]='departments.php';
 define('LANG_FILE','nursing.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 /* Load the ward object */
 require_once($root_path.'include/core/class_ward.php');

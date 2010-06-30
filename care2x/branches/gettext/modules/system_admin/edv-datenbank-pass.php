@@ -11,8 +11,8 @@ $dbname="maho";
 
 $allowedarea="System_Admin";
 
-$fileforward="edv-datenbank.php";
-$thisfile="edv-datenbank-pass.php";
+$fileforward="admin_datenbank.php";
+$thisfile="admin_datenbank-pass.php";
 $breakfile="edv.php";
 
 if($_COOKIE['ck_login_logged'.$sid]&&$_COOKIE['ck_login_userid'.$sid])
@@ -20,7 +20,7 @@ if($_COOKIE['ck_login_logged'.$sid]&&$_COOKIE['ck_login_userid'.$sid])
  header("location: passcheck-intern.php?sid=$sid&lang=$lang&allowedarea=$allowedarea&fileforward=$fileforward&retfilepath=$thisfile");
  exit;
 }
-//setcookie(ck_edv_db_user,"");
+//setcookie(ck_admin_db_user,"");
 
 function validarea($area,$zeile2,$range)
 {
@@ -46,7 +46,7 @@ if ($versand=="Abschicken")
 									{
 										if (validarea($allowedarea,$zeile,mysql_num_fields($ergebnis)))
 										{				
-										setcookie(ck_edv_db_user,$zeile[mahopass_name]);	
+										setcookie(ck_admin_db_user,$zeile[mahopass_name]);	
 										$logs->writeline(date('Y-m-d').'/'.date('H:i'),'',$REMOTE_ADDR,'EDV DB verwalten Access OK',$zeile[mahopass_name],'','',$thisfile,$fileforward,0);
 										//logentry($zeile[mahopass_name],"*","IP:".$REMOTE_ADDR."EDV DB verwalten Access OK'd",$thisfile,$fileforward);
 										header("Location: $fileforward?sid=$$ck_sid_buffer");

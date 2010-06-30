@@ -12,7 +12,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 */
 $lang_tables=array('stdpass.php');
 define('LANG_FILE','specials.php');
-//$local_user='ck_edv_user';
+//$local_user='ck_admin_user';
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 

@@ -11,14 +11,14 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','edp.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-$breakfile='edv-system-admi-welcome.php'.URL_APPEND;
-if($from=='add') $returnfile='edv_system_format_currency_add.php'.URL_APPEND.'&from=set';
+$breakfile='admin_system-admi-welcome.php'.URL_APPEND;
+if($from=='add') $returnfile='admin_system_format_currency_add.php'.URL_APPEND.'&from=set';
   else $returnfile=$breakfile;
-$thisfile='edv_system_format_currency_set.php';
-$editfile='edv_system_format_currency_add.php'.URL_REDIRECT_APPEND.'&mode=edit&from=set&item_no=';
+$thisfile='admin_system_format_currency_set.php';
+$editfile='admin_system_format_currency_add.php'.URL_REDIRECT_APPEND.'&mode=edit&from=set&item_no=';
 
 # Load the db routine
 
@@ -60,7 +60,7 @@ ob_start();
 #  Define to create the edit links on the table and create the GUI body
 define('SET_EDIT',1); 
 
-$bottomlink='edv_system_format_currency_add.php'.URL_APPEND.'&from=set';
+$bottomlink='admin_system_format_currency_add.php'.URL_APPEND.'&from=set';
 $bottomlink_txt=$LDClk2AddCurrency;
 
 require($root_path.'modules/cafeteria/includes/inc_currency_set_gui.php');

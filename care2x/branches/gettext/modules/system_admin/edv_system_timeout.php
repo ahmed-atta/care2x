@@ -19,10 +19,10 @@ $def_max_secs=59; # 59 seconds
 $lang_tables[]='startframe.php';
 $lang_tables[]='date_time.php';
 define('LANG_FILE','edp.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-$breakfile='edv-system-admi-welcome.php'.URL_APPEND;
+$breakfile='admin_system-admi-welcome.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
 
 $GLOBAL_CONFIG=array();
