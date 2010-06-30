@@ -31,7 +31,7 @@ $dbtable='care_tech_repair_job';
 <?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-<meta http-equiv="refresh" content="15, url: technik-repabot.php?<?php echo "sid=$sid&lang=$lang" ?>">
+<meta http-equiv="refresh" content="15, url: tech-repabot.php?<?php echo "sid=$sid&lang=$lang" ?>">
 <title><?php echo $LDRepabotActivate ?></title>
 <script language=javascript>
 function goactive()

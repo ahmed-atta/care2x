@@ -80,7 +80,7 @@ if($stb)
 echo '
 function startbot(d)
 {
-	if(d=="r") repabotwin=window.open("technik-repabot.php'.URL_REDIRECT_APPEND.'","repabotwin","width=300,height=150,menubar=no,resizable=yes,scrollbars=yes");
+	if(d=="r") repabotwin=window.open("tech-repabot.php'.URL_REDIRECT_APPEND.'","repabotwin","width=300,height=150,menubar=no,resizable=yes,scrollbars=yes");
 	else if(d=="f") fragebotwin=window.open("tech-question-bot.php'.URL_REDIRECT_APPEND.'","fragebotwin","width=300,height=150,menubar=no,resizable=yes,scrollbars=yes");
 }
 ';
