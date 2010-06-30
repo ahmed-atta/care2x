@@ -53,7 +53,7 @@ switch($target){
 					  $fileforward='doctors-roster-personal-list.php'.URL_APPEND.'&retpath='.$retpath;
 					  break;
 	default: $title=$LDMakeDutyPlan;
-					  $fileforward='doctors-rosterplan-planen.php'.URL_APPEND.'&retpath='.$retpath;
+					  $fileforward='doctors-roster-plan.php'.URL_APPEND.'&retpath='.$retpath;
 					  break;
 }
 

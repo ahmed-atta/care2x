@@ -13,7 +13,7 @@ $allowedarea=&$allow_area['doctors'];
 
 switch($target)
 {
-	case 'dutyplan': $fileforward="doctors-rosterplan-planen.php".URL_REDIRECT_APPEND."&dept_nr=$dept_nr&retpath=$retpath&pmonth=$pmonth&pyear=$pyear";
+	case 'dutyplan': $fileforward="doctors-roster-plan.php".URL_REDIRECT_APPEND."&dept_nr=$dept_nr&retpath=$retpath&pmonth=$pmonth&pyear=$pyear";
 							$title=$LDDOCScheduler;
 							break;
 	case 'setpersonal': $fileforward="doctors-roster-personal-list.php".URL_REDIRECT_APPEND."&ipath=$retpath&retpath=$retpath";

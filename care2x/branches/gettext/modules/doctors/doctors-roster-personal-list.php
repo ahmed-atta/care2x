@@ -75,7 +75,7 @@ if(!empty($ipath)){
 	{
 		case 'menu': $breakfile="doctors.php".URL_APPEND; break;
 		case 'qview': $breakfile="doctors-roster-quickview.php".URL_APPEND."&hilitedept=$dept_nr"; break;
-		case 'plan': $breakfile="doctors-rosterplan-planen.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; break;
+		case 'plan': $breakfile="doctors-roster-plan.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; break;
 		default: $breakfile="javascript:window.history.back()";
 	}
 }
