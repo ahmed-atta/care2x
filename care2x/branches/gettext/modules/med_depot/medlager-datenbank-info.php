@@ -2,7 +2,7 @@
 require_once($root_path.'include/helpers/inc_config_color.php');
 
 $thisfile="medlager-datenbank-info.php";
-$breakfile="medlager-datenbank-functions.php";
+$breakfile="medstock-database-functions.php";
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
