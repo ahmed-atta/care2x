@@ -171,7 +171,7 @@ if($order_nr&&$dept_nr){
 <script language=javascript>
 function ack_print() {
 	this.print()
-	this.location.replace("products-bestellbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck&mode=ack_print&cat=$cat&dept_nr=$dept_nr&order_nr=$order_nr&status=$status"; ?>");
+	this.location.replace("products-order-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck&mode=ack_print&cat=$cat&dept_nr=$dept_nr&order_nr=$order_nr&status=$status"; ?>");
 }
 function move2arch() {
 	if(document.opt3.clerk.value=="") {
@@ -179,7 +179,7 @@ function move2arch() {
 		return;
 	}
 	c=document.opt3.clerk.value;
-	this.location.replace("products-bestellbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck&mode=archive&cat=$cat&dept_nr=$dept_nr&order_nr=$order_nr&status=$status&clerk="; ?>"+c);
+	this.location.replace("products-order-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck&mode=archive&cat=$cat&dept_nr=$dept_nr&order_nr=$order_nr&status=$status&clerk="; ?>"+c);
 }
 function parentref(n) {
     if(n==1) window.opener.location.replace("products-bestellbot.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&nofocus="+n+"&showlist=1");

@@ -53,7 +53,7 @@ function goactive()	{
 }
 	
 function show_order(d,o,s,t) {
-	url="products-bestellbot-print.php<?php echo URL_REDIRECT_APPEND . "&userck=$userck";
+	url="products-order-print.php<?php echo URL_REDIRECT_APPEND . "&userck=$userck";
 
     ?>&cat=<?php echo $cat ?>&dept_nr="+d+"&order_nr="+o+"&status="+s+"&sent_datetime="+t;
 	<?php echo $cat . 'powin' . $sid;

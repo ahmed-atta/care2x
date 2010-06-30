@@ -45,14 +45,7 @@ switch($cat)
 
   $smarty->assign('LDCatalog',$LDCatalog);
  $smarty->assign('LDBasket',$LDBasket);
-/*
-$smarty->assign('$LDBasket ?></b></td>
-    <td align=center valign=top class="prompt"><?php echo $LDCatalog ?></td>
-	 <td align=right valign=top><nobr><a href="javascript:gethelp('products.php','head','main','<?php echo $cat ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><a href="<?php echo $breakfile; ?>" target=_parent><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>
-	<?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a></nobr></td>
-  </font></tr>
-</table>
-*/
+
 $smarty->assign('sMainBlockIncludeFile','products/ordering_header.tpl');
 
 $smarty->display('common/mainframe.tpl');
