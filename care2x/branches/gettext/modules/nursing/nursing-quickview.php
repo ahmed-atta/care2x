@@ -294,7 +294,7 @@ $dbtable='care_ward';
 
  # Assign quick view template to the mainframe block
  
- $smarty->assign('sMainBlockIncludeFile','nursing/nursing-schnellansicht.tpl');
+ $smarty->assign('sMainBlockIncludeFile','nursing/nursing-quickview.tpl');
 
  /**
  * show Template
