@@ -538,7 +538,7 @@ function searchpat()
 
 function getinfo(m)
 {
-	urlholder="<?php echo "op-pflege-log-getinfo.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&winid=";?>"+m;
+	urlholder="<?php echo "op-care-log-getinfo.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&winid=";?>"+m;
 	getinfowin=window.open(urlholder,"getinfo","width=800,height=500,menubar=no,resizable=yes,scrollbars=yes");
 }
 function openfolder(pid,pdata){
@@ -654,8 +654,8 @@ if($datafound) {
 }
 ?><a 
 	href="oploginput.php?sid=<?php echo "$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal" ?>&mode=fresh"><img <?php echo createLDImgSrc($root_path,'newpat2.gif','0','absmiddle') ?> 
-	alt="<?php echo $LDStartNewDocu ?>"></a><A href="op-pflege-logbuch-xtsuch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>" target="_parent"><img <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?> 
-	alt="<?php echo $LDSearchPatient ?>"></a><A href="op-pflege-logbuch-arch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>"  
+	alt="<?php echo $LDStartNewDocu ?>"></a><A href="op-care-logbuch-xtsuch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>" target="_parent"><img <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?> 
+	alt="<?php echo $LDSearchPatient ?>"></a><A href="op-care-logbuch-arch-start.php?sid=<?php echo "$sid&lang=$lang&internok=$internok&dept_nr=$dept_nr&saal=$saal"; ?>&user=<?php echo str_replace(' ','+',$op_pflegelogbuch_user); ?>"  
 	target="_parent"><img <?php echo createLDImgSrc($root_path,'archive.gif','0','absmiddle') ?> 
 	alt="<?php echo $LDArchive ?>"></a><br>
 

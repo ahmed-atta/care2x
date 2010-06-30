@@ -329,7 +329,7 @@ if(!$datafound)
 	{
 	echo '
 			<MAP NAME="catcom">
-			<AREA SHAPE="RECT" COORDS="158,90,230,110" HREF="op-pflege-logbuch-xtsuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=fresh&dept_nr='.$dept_nr.'&saal='.$saal.'&child=1"  target="_parent"  title="'.$LDSearchPatient.' ['.$LDOrLogBook.']" >
+			<AREA SHAPE="RECT" COORDS="158,90,230,110" HREF="op-care-logbuch-xtsuch-start.php?sid='.$sid.'&lang='.$lang.'&mode=fresh&dept_nr='.$dept_nr.'&saal='.$saal.'&child=1"  target="_parent"  title="'.$LDSearchPatient.' ['.$LDOrLogBook.']" >
 			</MAP><img ismap usemap="#catcom" '.createLDImgSrc($root_path,'cat-com2.gif','0').'>';
 ?>
 			<DIV id=dLogoTable style=" VISIBILITY: hidden; POSITION: relative">

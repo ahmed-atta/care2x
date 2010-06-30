@@ -136,16 +136,16 @@ window.close();
  -->
  <?php if($i_date==date('Y-m-d'))
 		{ echo '
-		<li><a href="'.$root_path.'modules/or_logbook/op-pflege-logbuch-pass.php'.URL_APPEND;
+		<li><a href="'.$root_path.'modules/or_logbook/op-care-logbuch-pass.php'.URL_APPEND;
 			echo "&target=entry&lang=$lang&pday=$day&pmonth=$month&pyear=$year&dept_nr=$dept_nr";
 			echo '&retpath=calendar_opt">'.$LDORLogbook.'</a></li>
 		';
 		}
 	?>
-<li><a href="<?php echo $root_path ?>modules/or_logbook/op-pflege-logbuch-pass.php<?php echo URL_APPEND."&target=search&lang=$lang&pday=$day&pmonth=$month&pyear=$year&dept=$dept" ?>&retpath=calendar_opt"><?php echo $LDORLogbookSearch ?></a></li>
+<li><a href="<?php echo $root_path ?>modules/or_logbook/op-care-logbuch-pass.php<?php echo URL_APPEND."&target=search&lang=$lang&pday=$day&pmonth=$month&pyear=$year&dept=$dept" ?>&retpath=calendar_opt"><?php echo $LDORLogbookSearch ?></a></li>
 	<?php if($i_date<=date('Y-m-d'))
 		{ echo '
-			<li><a href="'.$root_path.'modules/or_logbook/op-pflege-logbuch-pass.php'.URL_APPEND;
+			<li><a href="'.$root_path.'modules/or_logbook/op-care-logbuch-pass.php'.URL_APPEND;
 			echo "&target=archiv&pday=$day&pmonth=$month&pyear=$year&dept_nr=$dept_nr";
 			echo '&retpath=calendar_opt">'.$LDORLogbookArch.'</a></li>';
 		}
