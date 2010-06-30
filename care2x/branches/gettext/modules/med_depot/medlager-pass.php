@@ -31,7 +31,7 @@ switch($mode) {
 /*	case "dbank":  $title="$LDPharmaDb";
 						$src="dbankpass";
 						$userck="ck_prod_db_user";
-						$fileforward="medlager-datenbank-functions.php".$append.$userck;
+						$fileforward="medstock-database-functions.php".$append.$userck;
 						break;*/
 	case "bot":	$title="$LDMediBotActivate";
 						$allowedarea[] = '_a_1_meddepotdbadmin';

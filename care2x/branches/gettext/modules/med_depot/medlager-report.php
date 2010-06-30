@@ -23,7 +23,7 @@ $core = & new Core;
 
 $thisfile='medlager-report.php';
 
-if($mode=='sent') $breakfile=$thisfile; else $breakfile='medlager-datenbank-functions.php';
+if($mode=='sent') $breakfile=$thisfile; else $breakfile='medstock-database-functions.php';
 
 //$db->debug=1;
 
