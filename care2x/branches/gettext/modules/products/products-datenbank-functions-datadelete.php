@@ -30,8 +30,8 @@ switch($cat){
 	case "medstock":
 							$title=$LDMedDepot;
 							$dbtable="care_med_products_main";
-							$imgpath=$root_path."uplodas/med_depot/img/";
-							$breakfile=$root_path."modules/med_depot/medstock-database-functions.php?sid=$sid&lang=$lang&userck=$userck";
+							$imgpath=$root_path."uplodas/medstock/img/";
+							$breakfile=$root_path."modules/medstock/medstock-database-functions.php?sid=$sid&lang=$lang&userck=$userck";
 							break;
 	
 	default:  {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};

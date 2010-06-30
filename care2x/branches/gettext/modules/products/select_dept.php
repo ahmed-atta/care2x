@@ -23,7 +23,7 @@ switch($_SESSION['sess_user_origin'])
 		break;
 		
 	case 'meddepot':
-		$breakfile=$root_path.'modules/med_depot/medstock.php '.URL_APPEND;
+		$breakfile=$root_path.'modules/medstock/medstock.php '.URL_APPEND;
 		break;
 }
 

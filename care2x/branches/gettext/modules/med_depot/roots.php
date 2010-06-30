@@ -1,4 +1,4 @@
 <?php
 $root_path='../../';
-$top_dir='modules/med_depot/';
+$top_dir='modules/medstock/';
 ?>

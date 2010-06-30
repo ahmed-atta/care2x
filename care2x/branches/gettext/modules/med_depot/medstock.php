@@ -133,7 +133,7 @@ while(list($x,$v)=each($aSubMenuItem)){
 
 # Assign the submenu to the mainframe center block
 
- $smarty->assign('sMainBlockIncludeFile','med_depot/submenu_medstock.tpl');
+ $smarty->assign('sMainBlockIncludeFile','medstock/submenu_medstock.tpl');
 
   /**
  * show Template

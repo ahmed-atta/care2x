@@ -41,7 +41,7 @@ if(isset($cat))
 							$breakfile=$root_path."modules/pharmacy/apotheke.php".URL_APPEND;
 							break;
 	case 'medstock':$title=$LDMedDepot;
-							$breakfile=$root_path."modules/med_depot/medstock.php ".URL_APPEND;
+							$breakfile=$root_path."modules/medstock/medstock.php ".URL_APPEND;
 							break;
 	default:  $invalid=1;
     }
