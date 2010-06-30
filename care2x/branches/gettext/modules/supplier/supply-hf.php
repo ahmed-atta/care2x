@@ -13,7 +13,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 define('LANG_FILE','products.php');
 $local_user='ck_supply_db_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-$breakfile=$root_path.'modules/med_depot/medlager.php'.URL_APPEND;
+$breakfile=$root_path.'modules/med_depot/medstock.php '.URL_APPEND;
 
 
 /**

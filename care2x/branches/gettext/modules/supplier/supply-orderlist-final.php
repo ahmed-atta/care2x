@@ -30,7 +30,7 @@ if($cat=='pharma') {
 }else{
  	$dbtable='care_med_orderlist';
 	$title=$LDMedDepot;
-	$breakfile=$root_path.'modules/med_depot/medlager.php';
+	$breakfile=$root_path.'modules/med_depot/medstock.php ';
 }
 
 $thisfile=basename(__FILE__);

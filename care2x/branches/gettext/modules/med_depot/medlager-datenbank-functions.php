@@ -13,7 +13,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 define('LANG_FILE','products.php');
 $local_user='ck_prod_db_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-$breakfile='medlager.php'.URL_APPEND;
+$breakfile='medstock.php '.URL_APPEND;
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>

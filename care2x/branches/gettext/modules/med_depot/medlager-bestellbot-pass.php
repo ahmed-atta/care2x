@@ -18,8 +18,8 @@ require_once($root_path.'global_conf/areas_allow.php');
 //gjergji
 //$allowedarea=&$allow_area['depot'];
 $userck="ck_medlager_user";
-$breakfile="medlager.php".URL_APPEND."&userck=$userck";
-$fileforward="medlager.php".URL_REDIRECT_APPEND."&userck=$userck&stb=1";
+$breakfile="medstock.php ".URL_APPEND."&userck=$userck";
+$fileforward="medstock.php ".URL_REDIRECT_APPEND."&userck=$userck&stb=1";
 $title=$LDMediBotActivate; 
 $thisfile="medlager-bestellbot-pass.php";
 $lognote="$title ok";
