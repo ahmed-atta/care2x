@@ -17,7 +17,7 @@ $ofinal=false;
 if($cat=='pharma') {
  	$dbtable='care_pharma_orderlist';
 	$title=$LDPharmacy;
-	$breakfile='modules/pharmacy/apotheke.php';
+	$breakfile='modules/pharmacy/pharmacy.php';
 }else{
  	$dbtable='care_med_orderlist';
 	$title=$LDMedDepot;

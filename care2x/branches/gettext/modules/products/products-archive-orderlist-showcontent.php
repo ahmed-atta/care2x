@@ -30,7 +30,7 @@ switch($cat) {
 		$title=$LDPharmacy;
 		$dbtable='care_pharma_orderlist';
 		$dbtableSub='care_pharma_orderlist_sub';
-		$breakfile=$root_path.'modules/pharmacy/apotheke.php?sid='.$sid.'&lang='.$lang;
+		$breakfile=$root_path.'modules/pharmacy/pharmacy.php?sid='.$sid.'&lang='.$lang;
 		break;
 	case 'medstock':
 		$title=$LDMedDepot;
