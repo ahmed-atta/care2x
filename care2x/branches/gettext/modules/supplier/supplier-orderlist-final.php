@@ -106,7 +106,7 @@ function show_order(d,o,s) {
 <?php if (($mode=='send')&&($sendok)) {
     $idbuf=$idcare_supply + 1;
     echo "function hide_bcat(){
-			window.parent.BESTELLKATALOG.location.replace('supply-bestellkatalog.php?sid=$sid&lang=$lang&supplier_nr=$supplier_nr&userck=$userck&cat=$cat&idcare_supply=$idbuf')
+			window.parent.BESTELLKATALOG.location.replace('supply-ordercatalog.php?sid=$sid&lang=$lang&supplier_nr=$supplier_nr&userck=$userck&cat=$cat&idcare_supply=$idbuf')
 		}";
 }
 ?>
