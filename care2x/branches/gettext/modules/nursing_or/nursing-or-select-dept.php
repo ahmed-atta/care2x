@@ -66,7 +66,7 @@ switch($target){
 					  $fileforward=$root_path."modules/calendar/calendar-options.php".URL_APPEND."&year=$year&month=$month&day=$day";
 					  break;	
 	default: $title=$LDMakeDutyPlan;
-					  $fileforward='nursing-or-dienstplan-planen.php'.URL_APPEND.'&retpath='.$retpath;
+					  $fileforward='nursing-or-roster-plan.php'.URL_APPEND.'&retpath='.$retpath;
 					  break;
 }
 
