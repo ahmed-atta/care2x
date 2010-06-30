@@ -48,7 +48,7 @@ if(isset($retpath)){
 	{
 		case 'quick': $breakfile='nursing-quickview.php'.URL_APPEND;
 							break;
-		case 'ward_mng': $breakfile='nursing-station-info.php'.URL_APPEND.'&ward_nr='.$ward_nr.'&mode=show';
+		case 'ward_mng': $breakfile='nursing-ward-info.php'.URL_APPEND.'&ward_nr='.$ward_nr.'&mode=show';
 	}
 }
 # Mark where we are
@@ -160,11 +160,11 @@ function getinfo(pn){
 	';
 	}
 	/*else echo '
-	window.location.href=\'nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$station.'\'';*/
+	window.location.href=\'nursing-ward-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$station.'\'';*/
 ?>
 	}
 function getrem(pn){
-	urlholder="<?php echo $root_path ?>modules/nursing/nursing-station-remarks.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&dept_nr=$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>";
+	urlholder="<?php echo $root_path ?>modules/nursing/nursing-ward-remarks.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&dept_nr=$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>";
 	patientwin=window.open(urlholder,pn,"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
 	}
 function release(nr)

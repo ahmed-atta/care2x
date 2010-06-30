@@ -179,7 +179,7 @@ if($occup){
 
  <ul>
  
-<form method="post" name=remform action="nursing-station-remarks.php" onSubmit="return checkForm(this)">
+<form method="post" name=remform action="nursing-ward-remarks.php" onSubmit="return checkForm(this)">
 <textarea name="notes" cols=60 rows=5 wrap="physical" onKeyup="setChg()"></textarea>
 <input type="text" name="personell_name" size=60 maxlength=60 value="<?php echo $_SESSION['sess_user_name']; ?>" readonly>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">

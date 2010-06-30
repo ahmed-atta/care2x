@@ -177,7 +177,7 @@ function select_this(formtag){
 	}
 	
 function getinfo(patientID){
-	urlholder="nursing-station.php?route=validroute&patient=" + patientID + "&user=<?php echo $aufnahme_user.'"' ?>;
+	urlholder="nursing-ward.php?route=validroute&patient=" + patientID + "&user=<?php echo $aufnahme_user.'"' ?>;
 	patientwin=window.open(urlholder,patientID,"width=600,height=400,menubar=no,resizable=yes,scrollbars=yes");
 	}
 function sethilite(d){

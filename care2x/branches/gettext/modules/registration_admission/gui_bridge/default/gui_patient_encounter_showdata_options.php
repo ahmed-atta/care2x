@@ -27,7 +27,7 @@ function getinfo(pn){
 	';
 	}
 	/*else echo '
-	window.location.href=\'nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$station.'\'';*/
+	window.location.href=\'nursing-ward-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$station.'\'';*/
 ?>
 }
 function cancelEnc(){

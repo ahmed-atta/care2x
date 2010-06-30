@@ -10,8 +10,8 @@ require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['wards'];
 
-$fileforward="nursing-station-manage.php?sid=".$sid."&lang=".$lang;
-$thisfile="nursing-station-manage-pass.php";
+$fileforward="nursing-ward-manage.php?sid=".$sid."&lang=".$lang;
+$thisfile="nursing-ward-manage-pass.php";
 $breakfile="nursing.php?sid=".$sid."&lang=".$lang;
 
 $lognote="$LDNursingManage ok";

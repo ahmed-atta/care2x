@@ -338,7 +338,7 @@ if($encounter_class_nr==1){
 	
 	$smarty->assign('LDWard',$LDWard);
 
-	$smarty->assign('sWardInput','<a href="'.$root_path.'modules/nursing/'.strtr('nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$current_ward_name.'&location_id='.$current_ward_name.'&ward_nr='.$current_ward_nr,' ',' ').'">'.$current_ward_name.'</a>');
+	$smarty->assign('sWardInput','<a href="'.$root_path.'modules/nursing/'.strtr('nursing-ward-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$current_ward_name.'&location_id='.$current_ward_name.'&ward_nr='.$current_ward_nr,' ',' ').'">'.$current_ward_name.'</a>');
 
 }elseif($encounter_class_nr==2){
 

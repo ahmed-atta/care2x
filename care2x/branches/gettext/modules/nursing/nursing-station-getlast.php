@@ -11,7 +11,7 @@
 </head>
 <body>
 <a href="<?php
-echo "nursing-station.php?mode=getlast&rt=pflege&sid=$sid&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&c=".$c."&station=".$station;
+echo "nursing-ward.php?mode=getlast&rt=pflege&sid=$sid&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&c=".$c."&station=".$station;
 ?>">Bitte clicken Sie hier an.....
 </a>
 </body>

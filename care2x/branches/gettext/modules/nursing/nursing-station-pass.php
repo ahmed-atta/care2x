@@ -22,10 +22,10 @@ require_once($root_path.'global_conf/areas_allow.php');
 //if(isset($station)&&!empty($station)) $_SESSION['sess_nursing_station']=$station;
 $allowedarea=&$allow_area['wards'];
 
-//$fileforward="nursing-station.php".URL_REDIRECT_APPEND."&edit=$edit&retpath=$retpath&station=".$_SESSION['sess_nursing_station'];
-$fileforward="nursing-station.php".URL_REDIRECT_APPEND."&fwd_nr=$fwd_nr&edit=$edit&retpath=$retpath&station=$station&ward_nr=$ward_nr&dept_nr=$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
-//$fileforward="nursing-station.php?sid=$sid&edit=$edit&retpath=$retpath&station=$station";
-$thisfile="nursing-station-pass.php";
+//$fileforward="nursing-ward.php".URL_REDIRECT_APPEND."&edit=$edit&retpath=$retpath&station=".$_SESSION['sess_nursing_station'];
+$fileforward="nursing-ward.php".URL_REDIRECT_APPEND."&fwd_nr=$fwd_nr&edit=$edit&retpath=$retpath&station=$station&ward_nr=$ward_nr&dept_nr=$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
+//$fileforward="nursing-ward.php?sid=$sid&edit=$edit&retpath=$retpath&station=$station";
+$thisfile="nursing-ward-pass.php";
 if($retpath=="quick") $breakfile="nursing-quickview.php".URL_APPEND;
  else $breakfile="nursing.php".URL_APPEND;
 

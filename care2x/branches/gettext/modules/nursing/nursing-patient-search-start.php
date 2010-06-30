@@ -172,7 +172,7 @@ if($mode=='such'||$mode=='paginate')
 			$rows=$ergebnis->RecordCount();
 /*			if($rows==1){
 				$result=$ergebnis->FetchRow();
-				header("location:nursing-station.php?sid=$sid&lang=$lang&ward_nr=".$result['ward_nr']."&station=".$result['ward_name']);
+				header("location:nursing-ward.php?sid=$sid&lang=$lang&ward_nr=".$result['ward_nr']."&station=".$result['ward_name']);
 				exit;
 			}
 */
@@ -245,7 +245,7 @@ var urlholder;
 ?>
 	winspecs="menubar=no,resizable=yes,scrollbars=yes,width=" + (w-15) + ", height=" + (h-60);
 	
-	urlholder="nursing-station-pass.php?rt=pflege&sid=<?php echo "$sid&lang=$lang"; ?>&pday="+d+"&pmonth="+m+"&pyear="+y+"&edit=1&retpath=search_patient&ward_nr="+ward_nr+"&station="+st;
+	urlholder="nursing-ward-pass.php?rt=pflege&sid=<?php echo "$sid&lang=$lang"; ?>&pday="+d+"&pmonth="+m+"&pyear="+y+"&edit=1&retpath=search_patient&ward_nr="+ward_nr+"&station="+st;
 	window.location.href=urlholder;
 }
 
@@ -379,8 +379,8 @@ if($rows){
 	
 	list($pyear,$pmonth,$pday)=explode('-',$result['ward_date']);
   
-	//$buf="nursing-station.php".URL_APPEND."&station=".$result['ward_name']."&ward_nr=".$result['ward_nr'];
-	//$buf="nursing-station.php".URL_APPEND."&ward_nr=".$result['ward_nr']."&pyear=$pyear&pmonth=$pmonth&pday=$pday";
+	//$buf="nursing-ward.php".URL_APPEND."&station=".$result['ward_name']."&ward_nr=".$result['ward_nr'];
+	//$buf="nursing-ward.php".URL_APPEND."&ward_nr=".$result['ward_nr']."&pyear=$pyear&pmonth=$pmonth&pday=$pday";
 	$buf="javascript:gotoWard('".$result['ward_nr']."','".addslashes($result['ward_name'])."','$pyear','$pmonth','$pday')";
   
   echo '>';
@@ -467,7 +467,7 @@ if($rows){
 <ul>
 
 <b><?php echo $LDMoreFunctions ?>:</b><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="nursing-station-archiv.php?sid=<?php echo "$sid&lang=$lang";?>&user=<?php echo str_replace(" ","+",$user);?>"><?php echo $LDArchive ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="nursing-ward-archiv.php?sid=<?php echo "$sid&lang=$lang";?>&user=<?php echo str_replace(" ","+",$user);?>"><?php echo $LDArchive ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="javascript:gethelp('nursing_how2search.php','<?php echo $mode ?>','<?php echo $rows ?>','search')"><?php echo $LDHow2Search ?></a><br>
 
 <p>

@@ -41,10 +41,10 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
  
  <p>
 <font size=2 face="verdana,arial" color="#990000"> 
-<a href="nursing-station-info.php<?php echo URL_APPEND."&mode=show&ward_id=$ward_id&ward_nr=$ward_nr"; ?>">
+<a href="nursing-ward-info.php<?php echo URL_APPEND."&mode=show&ward_id=$ward_id&ward_nr=$ward_nr"; ?>">
 <?php echo $LDBackToWardProfile.'... '.$LDClkHere ?></a>
 <p>
- <a href="nursing-station.php<?php echo URL_APPEND."&edit=1&ward_id=$ward_id&ward_nr=$ward_nr&retpath=ward_mng"; ?>">
+ <a href="nursing-ward.php<?php echo URL_APPEND."&edit=1&ward_id=$ward_id&ward_nr=$ward_nr&retpath=ward_mng"; ?>">
 <?php echo $LDShowWardOccupancy.'... '.$LDClkHere ?></a>
 
 </center>

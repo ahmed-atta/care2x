@@ -12,7 +12,7 @@ var urlholder;
     winh=(winh / 2) - 300;
     winspecs="width=800,height=600,screenX=" + winw + ",screenY=" + winh + ",menubar=no,resizable=yes,scrollbars=yes";
 
-     urlholder="nursing-station.php?route=validroute&user={$aufnahme_user}&station=" + station;
+     urlholder="nursing-ward.php?route=validroute&user={$aufnahme_user}&station=" + station;
      stationwin=window.open(urlholder,station,winspecs);
  }
 
@@ -28,8 +28,8 @@ var urlholder;
 
   winspecs="menubar=no,resizable=yes,scrollbars=yes,width=" + (w-15) + ", height=" + (h-60);
 
-  if (e==1) urlholder="nursing-station-pass.php?rt=pflege&sid={{$SID_Parameter}}&edit=1&retpath=quick&ward_nr="+ward_nr+"&station="+st;
-  else urlholder="nursing-station.php?rt=pflege&sid={{$SID_Parameter}}&edit=0&retpath=quick&ward_nr="+ward_nr+"&station="+st;
+  if (e==1) urlholder="nursing-ward-pass.php?rt=pflege&sid={{$SID_Parameter}}&edit=1&retpath=quick&ward_nr="+ward_nr+"&station="+st;
+  else urlholder="nursing-ward.php?rt=pflege&sid={{$SID_Parameter}}&edit=0&retpath=quick&ward_nr="+ward_nr+"&station="+st;
   //stationwin=window.open(urlholder,station,winspecs);
   window.location.href=urlholder;
  }

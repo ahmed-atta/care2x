@@ -7,7 +7,7 @@
 {{$sMascotImg}} {{$sStationExists}} {{$LDEnterAllFields}}
 <p>
 
-<form action="nursing-station-new.php" method="post" name="newstat" onSubmit="return check(this)">
+<form action="nursing-ward-new.php" method="post" name="newstat" onSubmit="return check(this)">
 <table>
   <tbody>
     <tr>

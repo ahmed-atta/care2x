@@ -1,5 +1,5 @@
 {{* Template for displaying basic data of patient/person *}}
-{{* Used by /nursing/nursing-station-assignwaiting.php *}}
+{{* Used by /nursing/nursing-ward-assignwaiting.php *}}
 
 		<table border="0" cellspacing=1 cellpadding=0 width="100%">
 

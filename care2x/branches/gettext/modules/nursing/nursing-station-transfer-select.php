@@ -66,7 +66,7 @@ var urlholder;
 function TransferWard(wd){
 <?php
 echo '
-urlholder="nursing-station-transfer-save.php?mode=transferward&sid='.$sid.'&lang='.$lang.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&pn='.$pn.'&station='.$station.'&ward_nr='.$ward_nr.'&trwd="+wd;
+urlholder="nursing-ward-transfer-save.php?mode=transferward&sid='.$sid.'&lang='.$lang.'&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&pn='.$pn.'&station='.$station.'&ward_nr='.$ward_nr.'&trwd="+wd;
 ';
 ?>
 window.opener.location.replace(urlholder);
@@ -97,7 +97,7 @@ ob_start();
 </table>
 
  <table border=0 cellpadding=4 cellspacing=1 width=100%>
-	<form method="post" name="transbed" action="nursing-station-assignwaiting.php"> 
+	<form method="post" name="transbed" action="nursing-ward-assignwaiting.php"> 
 	<tr>
     <td colspan=2 bgcolor="#f6f6f6"><?php 	echo $LDTransferToBed.' ('.$station.')'; ?></td>
     <td bgcolor="#f6f6f6">
