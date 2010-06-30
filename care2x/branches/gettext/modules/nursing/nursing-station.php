@@ -48,7 +48,7 @@ if(isset($retpath)){
 							break;
 		case 'ward_mng': $breakfile='nursing-station-info.php'.URL_APPEND.'&ward_nr='.$ward_nr.'&mode=show';
 							break;
-		case 'search_patient': $breakfile='nursing-patient-such-start.php'.URL_APPEND;
+		case 'search_patient': $breakfile='nursing-patient-search-start.php'.URL_APPEND;
 	}
 }
 
