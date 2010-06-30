@@ -60,7 +60,7 @@ $dept_DOC=$dept_obj->getAllActiveWithDOC();
 
 switch($target){
 	case 'plist': $title=$LDCreateNursesList;
-					  $fileforward='nursing-or-roster-personelliste.php'.URL_APPEND.'&retpath='.$retpath;
+					  $fileforward='nursing-or-roster-personnel-list.php'.URL_APPEND.'&retpath='.$retpath;
 					  break;
 	case 'calendar_opt': $title=$LDSelectDept;
 					  $fileforward=$root_path."modules/calendar/calendar-options.php".URL_APPEND."&year=$year&month=$month&day=$day";

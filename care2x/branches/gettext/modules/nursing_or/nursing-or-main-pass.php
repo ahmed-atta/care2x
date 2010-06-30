@@ -16,7 +16,7 @@ switch($target)
 	case 'dutyplan': $fileforward="nursing-or-roster-plan.php".URL_REDIRECT_APPEND."&dept_nr=$dept_nr&retpath=$retpath&pmonth=$pmonth&pyear=$pyear";
 							$title=$LDORNOCScheduler;
 							break;
-	case 'setpersonal': $fileforward="nursing-or-roster-personelliste.php".URL_REDIRECT_APPEND."&ipath=$retpath&retpath=$retpath";
+	case 'setpersonal': $fileforward="nursing-or-roster-personnel-list.php".URL_REDIRECT_APPEND."&ipath=$retpath&retpath=$retpath";
 							$title=$LDNursesList;
 							break;
 	default:{ header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}
