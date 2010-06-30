@@ -16,7 +16,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
-$breakfile='technik.php'.URL_APPEND;
+$breakfile='tech.php'.URL_APPEND;
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
 $_SESSION['sess_file_return']=basename(__FILE__);
 
@@ -80,7 +80,7 @@ $dbtable='care_tech_questions';
         $ok=$db->Execute($sql);
         if($ok && $db->CommitTrans()) {
 			$inquirer=strtr($inquirer,' ','+');
-			header("Location: technik-questions.php".URL_REDIRECT_APPEND."&dept=$dept&inquirer=$inquirer");
+			header("Location: tech-questions.php".URL_REDIRECT_APPEND."&dept=$dept&inquirer=$inquirer");
 			exit;
 		}else {
 			$db->RollbackTrans();
@@ -218,13 +218,13 @@ $smarty->assign('sListboxSubmit','<input type="submit" value="'.$LDLogIn.'">');
 
 $smarty->assign('sButton','<img '.createComIcon($root_path,'varrow.gif','0').'>');
 
-$smarty->assign('sFormTag','<form ENCTYPE="multipart/form-data" action="technik-questions.php" method="post" onSubmit="return checkform(this)">');
+$smarty->assign('sFormTag','<form ENCTYPE="multipart/form-data" action="tech-questions.php" method="post" onSubmit="return checkform(this)">');
 
 $smarty->assign('LDQuestions',$LDQuestions);
 
 $smarty->assign('LDEnterQuestion',$LDEnterQuestion);
 
-$smarty->assign('LDPlsNoRequest','<a href="technik-reparatur-anfordern.php'.URL_APPEND.'">'.$LDPlsNoRequest.'</a>');
+$smarty->assign('LDPlsNoRequest','<a href="tech-reparatur-anfordern.php'.URL_APPEND.'">'.$LDPlsNoRequest.'</a>');
 
 $smarty->assign('LDName',$LDName);
 $smarty->assign('LDDept',$LDDept);
@@ -243,8 +243,8 @@ $smarty->assign('sHiddenInputs','<input type="hidden" name="tdate" value="'.date
 $smarty->assign('pbSubmit','<input type="image"  '.createLDImgSrc($root_path,'abschic.gif','0','middle').'>');
 $smarty->assign('pbCancel','<a href="'.$breakfile.'" ><img '.createLDImgSrc($root_path,'cancel.gif','0','middle').' title="'.$LDCancel.'" align="middle"></a>');
 
-$smarty->assign('sReportLink','<a href="technik-reparatur-melden.php'.URL_APPEND.'">'.$LDRepairReportTxt.'</a>');
-$smarty->assign('sRepairLink','<a href="technik-reparatur-anfordern.php'.URL_APPEND.'">'.$LDReRepairTxt.'</a>');
+$smarty->assign('sReportLink','<a href="tech-reparatur-melden.php'.URL_APPEND.'">'.$LDRepairReportTxt.'</a>');
+$smarty->assign('sRepairLink','<a href="tech-reparatur-anfordern.php'.URL_APPEND.'">'.$LDReRepairTxt.'</a>');
 
 $smarty->assign('sMainBlockIncludeFile','tech/send_inquiry.tpl');
 

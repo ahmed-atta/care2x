@@ -1,5 +1,5 @@
 {{* Repair report input form. repair_report.tpl 2004-06-12 Elpidio Latorilla *}}
-{{* Used by /modules/tech/technik-reparatur-melden.php *}}
+{{* Used by /modules/tech/tech-reparatur-melden.php *}}
 {{* Note: never rename the input, when redimensioning or repositioning it  *}}
 
 <ul>

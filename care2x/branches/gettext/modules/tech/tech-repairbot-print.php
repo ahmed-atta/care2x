@@ -85,13 +85,13 @@ if(isset($tid)&&$tid&&isset($dept)&&$dept)
 <?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-<title><?php echo "$LDRepabotActivate $LDAck" ?></title>
+<title><?php echo "$LDRepairbotActivate $LDAck" ?></title>
 
 <script language=javascript>
 function ack_print()
 {
 	window.print()
-	window.location.replace("./technik-repabot-print.php<?php echo URL_REDIRECT_APPEND."&mode=ack_print&dept=$dept&tdate=$tdate&ttime=$ttime&tid=$tid"; ?>")
+	window.location.replace("./tech-repairbot-print.php<?php echo URL_REDIRECT_APPEND."&mode=ack_print&dept=$dept&tdate=$tdate&ttime=$ttime&tid=$tid"; ?>")
 }
 function move2arch()
 {
@@ -101,13 +101,13 @@ function move2arch()
 		return;
 	}
 	c=document.opt.clerk.value;
-	window.location.replace("./technik-repabot-print.php<?php echo URL_REDIRECT_APPEND."&mode=archive&dept=$dept&tdate=$tdate&ttime=$ttime&tid=$tid"; ?>&clerk="+c)
+	window.location.replace("./tech-repairbot-print.php<?php echo URL_REDIRECT_APPEND."&mode=archive&dept=$dept&tdate=$tdate&ttime=$ttime&tid=$tid"; ?>&clerk="+c)
 }
 function parentref(n)
 {
    
-     if(n==1) window.opener.location.replace("./technik-repabot.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&nofocus="+n+"&showlist=1");
-    else window.opener.location.replace("./technik-repabot.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&showlist=1");
+     if(n==1) window.opener.location.replace("./tech-repairbot.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&nofocus="+n+"&showlist=1");
+    else window.opener.location.replace("./tech-repairbot.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&showlist=1");
     //
 	<?php
 	if($statseen || $deltodo)

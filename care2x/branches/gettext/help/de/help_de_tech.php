@@ -15,7 +15,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 <b>
 
 <?php
-print "Technische Unterstützung - ";	
+print "Technische UnterstÃ¼tzung - ";	
 switch($src)
 	{
 		case "request": print "Reparatur anfordern";
@@ -47,7 +47,7 @@ Wie kann ich eine Reparaturanforderung erstellen?</b></font>
      <b>Schritt 6: </b>Klickt den <input type="button" value="Anforderung senden"> Knopf um die Anforderung zu senden. <br>
 </ul>
 <b>Achtung!</b>
-<ul>Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
+<ul>Wenn Sie abbrechen mï¿½chten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
 <?php endif;?>
 <?php if($src=="report") : ?>
@@ -63,7 +63,7 @@ Wie berichte ich eine erledigte Reparaturarbeit?</b></font>
      <b>Schritt 6: </b>Klickt den <input type="button" value="Meldung senden"> Knopf um den Bericht zu senden. <br>
 </ul>
 <b>Achtung!</b>
-<ul>Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
+<ul>Wenn Sie abbrechen mï¿½chten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
 <?php endif;?>
 <?php if($src=="queries") : ?>
@@ -84,20 +84,20 @@ Wie kann ich meine letzte Anfragen sehen und die Antwort von der Technik?</b></f
  <b>Schritt 5: </b>Klickt die Frage in der Liste um die Antwort zu lesen. <br>
 </ul>
 <b>Achtung!</b>
-<ul>Wenn Sie abbrechen möchten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
+<ul>Wenn Sie abbrechen mï¿½chten klickt den <img <?php echo createLDImgSrc('../','close2.gif','0') ?>> Knopf an.
 </ul>
 <?php endif;?>
 <?php if($src=="arch") : ?>
 
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Wie kann ich technische Berichte öffnen zum lesen?</b></font>
+Wie kann ich technische Berichte ï¿½ffnen zum lesen?</b></font>
 <ul> 
 		<b>Achtung! </b>Technische Berichte die noch nicht gelesen bzw. nicht gedruckt wurden werden sofort aufgelistet.<p>
-<b>Schritt 1: </b>Klickt den  <img src="../img/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle"> Knopf des Berichts den Sie lesen möchten. <br>
+<b>Schritt 1: </b>Klickt den  <img src="../img/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle"> Knopf des Berichts den Sie lesen mï¿½chten. <br>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
 Wie finde ich einen bestimmten Bericht?</b></font>
-<ul> <b>Schritt 1: </b>Gibt entweder eine vollständige Information oder deren erste Zeichen in das entsprechende Feld ein.<br>
+<ul> <b>Schritt 1: </b>Gibt entweder eine vollstï¿½ndige Information oder deren erste Zeichen in das entsprechende Feld ein.<br>
 	<ul type=disc> 
 	Wenn Sie einen Bericht suchen ...
 	<li>der ein bestimmter Techniker schrieb: gibt den Namen des Technikers in das Feld "<span style="background-color:yellow" > Techniker: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" ein.<br>
@@ -107,7 +107,7 @@ Wie finde ich einen bestimmten Bericht?</b></font>
 		gibt das Enddatum in das Feld  "<span style="background-color:yellow" > bis: <input type="text" name="t" size=11 maxlength=4 value="Name"> </span>" ein.<br>
 	</ul>
  <b>Schritt 2: </b>Klickt den <input type="button" value="Suchen"> Knopf an um die Suche zu starten. <br>
-<b>Schritt 3: </b>Die Ergebnisse werden aufgelistet. Klickt das Symbol <img src="../img/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle">  des Berichtes an den Sie öffnen möchten. <br>
+<b>Schritt 3: </b>Die Ergebnisse werden aufgelistet. Klickt das Symbol <img src="../img/upArrowGrnLrg.gif" border=0 width=16 height=16 align="absmiddle">  des Berichtes an den Sie ï¿½ffnen mï¿½chten. <br>
 	<b>Achtung! </b>Technische Berichte die mit einem <img src="../img/check-r.gif" border=0  align="absmiddle"> gekennzeichnet sind, wurden schon gelesen bzw. gedruckt.<p>
 
 </ul>
@@ -124,8 +124,8 @@ Den Bericht ausdrucken.</b></font>
 <ul> <b>Schritt 1: </b>Klickt den  <input type="button" value="Ausdrucken"> Knopf an.<p>
 </ul>
 <img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Wie komme ich zum Suchen im Archiv zurück?</b></font>
-<ul> <b>Schritt 1: </b>Klickt den  <input type="button" value="<< Zurück"> Knopf an.<p>
+Wie komme ich zum Suchen im Archiv zurï¿½ck?</b></font>
+<ul> <b>Schritt 1: </b>Klickt den  <input type="button" value="<< Zurï¿½ck"> Knopf an.<p>
 </ul>
 <?php endif;?>
 

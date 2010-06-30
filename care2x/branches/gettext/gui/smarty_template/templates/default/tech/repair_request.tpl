@@ -1,5 +1,5 @@
 {{* Repair request input form. repair_request.tpl 2004-06-12 Elpidio Latorilla *}}
-{{* Used by /modules/tech/technik-reparatur-anfordern.php *}}
+{{* Used by /modules/tech/tech-reparatur-anfordern.php *}}
 {{* Note: never rename the input, when redimensioning or repositioning it  *}}
 
 <ul>

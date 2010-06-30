@@ -49,7 +49,7 @@ $LDOrLogBook='OR nursing logbook';
 $LDOrNursing='OR nursing';
 $LDCreate='Create';
 $LDPersonList='Personnel list';
-$LDRepabotActivate='Activate Repabot';
+$LDRepairbotActivate='Activate Repairbot';
 $LDQBotActivate='Activate Q-Bot';
 
 $LDMedLab='Medical laboratory';

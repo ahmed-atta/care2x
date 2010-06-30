@@ -70,7 +70,7 @@ $_a_2_photoread = 'Photos display & read only';
 
 // Group start
 $title_tech = 'Technical support';
-$_a_1_techreception = 'Qbot & Repabot activate, receive, read and write';
+$_a_1_techreception = 'Qbot & Repairbot activate, receive, read and write';
 
 // Group start
 $title_pdo = 'Personell Duty Organizer';
