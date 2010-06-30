@@ -19,7 +19,7 @@ $_SESSION['sess_file_return']='tech.php';
 
 if($repair=='ask'){
  	$target=$LDRequest;
-	$returnfile='technik-reparatur-anfordern.php?sid='.$sid.'&lang='.$lang;
+	$returnfile='tech-repair-request.php?sid='.$sid.'&lang='.$lang;
 }else{
   $target=$LDReport;
   $returnfile='technik-reparatur-melden.php?sid='.$sid.'&lang='.$lang;
@@ -73,7 +73,7 @@ $smarty->assign('pbOK','<FORM action="'.$returnfile.'" >
 <input type="hidden" name="lang" value="'.$lang.'">
 <INPUT type="submit"  value="  OK  "></font></FORM>');
 
-$smarty->assign('sRepairLink','<a href="technik-reparatur-anfordern.php'.URL_APPEND.'">'.$LDReRepairTxt.'</a>');
+$smarty->assign('sRepairLink','<a href="tech-repair-request.php'.URL_APPEND.'">'.$LDReRepairTxt.'</a>');
 $smarty->assign('sReportLink','<a href="technik-reparatur-melden.php'.URL_APPEND.'">'.$LDRepairReportTxt.'</a>');
 $smarty->assign('sQuestionLink','<a href="tech-questions.php'.URL_APPEND.'">'.$LDQuestionsTxt.'</a>');
 
