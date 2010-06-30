@@ -106,8 +106,8 @@ function move2arch()
 function parentref(n)
 {
    
-     if(n==1) window.opener.location.replace("./technik-repabot.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&nofocus="+n+"&showlist=1");
-    else window.opener.location.replace("./technik-repabot.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&showlist=1");
+     if(n==1) window.opener.location.replace("./tech-repabot.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&nofocus="+n+"&showlist=1");
+    else window.opener.location.replace("./tech-repabot.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&showlist=1");
     //
 	<?php
 	if($statseen || $deltodo)
