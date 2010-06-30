@@ -136,7 +136,7 @@ $material_nr=trim($material_nr);
 
 						if($mat_result=$core->Transact($sql))
 						{
-  							header("location:op-logbuch-material-list.php?$globdata&item_idx=$item_idx&chg=1");
+  							header("location:log-material-list.php?$globdata&item_idx=$item_idx&chg=1");
 							exit;
 						}	else { echo "$LDDbNoSave<br>"; } 
 						
@@ -172,7 +172,7 @@ $material_nr=trim($material_nr);
 			if($mat_result=$core->Transact($sql))
 			{
 				
-  				header("location:op-logbuch-material-list.php?$globdata");
+  				header("location:log-material-list.php?$globdata");
 				exit;
 			}	else { echo "$LDDbNoSave<br>"; } 
 			break;
@@ -206,7 +206,7 @@ $material_nr=trim($material_nr);
 			if($mat_result=$core->Transact($sql))
 			{
 				
-  				header("location:op-logbuch-material-list.php?$globdata");
+  				header("location:log-material-list.php?$globdata");
 				exit;
 			}	
 			else 
@@ -238,7 +238,7 @@ function popinfo(b)
 <?php if(empty($material_nr)||($art_avail==1)) : ?>	
 function delete_item(x)
 {
-	window.location.replace('op-logbuch-material-list.php?<?php echo $globdata; ?>&mode=delete&art_idx='+x);
+	window.location.replace('log-material-list.php?<?php echo $globdata; ?>&mode=delete&art_idx='+x);
 }
 
 // -->
@@ -285,7 +285,7 @@ if(empty($material_nr)||(($art_avail==1)&&(!$nonumeric))){
 	if(($rows==1)&&(trim($matbuf[0])=="")) $rows=0;
 	if($rows){
 		echo'
-<form action="op-logbuch-material-list.php" method="post" name="plist" onReset="hsm()">
+<form action="log-material-list.php" method="post" name="plist" onReset="hsm()">
 <table border=0 cellpadding=0 cellspacing=0 width="100%">
   <tr>';
   for($i=0;$i<sizeof($LDMaterialElements);$i++)
@@ -363,9 +363,9 @@ style=" VISIBILITY: hidden; POSITION: relative;">
 		while($pdata=$ergebnis->FetchRow()){
 			echo'
  		<tr bgcolor="#ffffff">
-    	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-material-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'"><img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle').' alt="'.$LDSelectArticle.'"></a></td>
-    	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-material-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[artikelnum].'</a>&nbsp;</td>
-    	<td class="v12" valign="top"><a href="op-logbuch-material-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[artikelname].'</a>&nbsp;</td>
+    	<td class="v12" valign="top">&nbsp;<a href="log-material-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'"><img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle').' alt="'.$LDSelectArticle.'"></a></td>
+    	<td class="v12" valign="top">&nbsp;<a href="log-material-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[artikelnum].'</a>&nbsp;</td>
+    	<td class="v12" valign="top"><a href="log-material-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[artikelname].'</a>&nbsp;</td>
     	<td class="v12" valign="top">'.$pdata[description].'&nbsp;</td>
    	 	<td class="v12" valign="top">&nbsp;<a href="javascript:popinfo(\''.$pdata[bestellnum].'\')"><img '.createComIcon($root_path,'info3.gif','0').'></a>&nbsp;</td>
     	<td class="v12" valign="top">&nbsp;'.$pdata[generic].'&nbsp;</td>
@@ -385,10 +385,10 @@ style=" VISIBILITY: hidden; POSITION: relative;">
  			<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'> <b>'.$LDArticleNotFound.'</b><p></font> '.$LDNoArticleTxt.'<p>';
 			$databuf="$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 		echo '
-			<a href="op-logbuch-material-entry-manual.php?sid='.$databuf.'"><img '.createComIcon($root_path,'accessrights.gif','0','absmiddle').'> 
+			<a href="log-material-entry-manual.php?sid='.$databuf.'"><img '.createComIcon($root_path,'accessrights.gif','0','absmiddle').'> 
 			<font size=3 > '.$LDClk2ManualEntry.'</font></a>
 			</font><p>
-			<a href="op-logbuch-material-list.php?sid='.$databuf.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt="'.$LDCancel.'">
+			<a href="log-material-list.php?sid='.$databuf.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt="'.$LDCancel.'">
 			</a>
 			</center>
 			';

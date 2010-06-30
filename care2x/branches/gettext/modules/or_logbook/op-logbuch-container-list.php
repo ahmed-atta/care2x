@@ -119,7 +119,7 @@ if($dblink_ok)
 						//echo $sql;
 						if($mat_result=$db->Execute($sql))
 						{
-  							header("location:op-logbuch-container-list.php?$globdata&item_idx=$item_idx&chg=1");
+  							header("location:log-container-list.php?$globdata&item_idx=$item_idx&chg=1");
 							exit;
 						}	else { echo "$LDDbNoSave<br>$sql"; } 
 						
@@ -144,7 +144,7 @@ if($dblink_ok)
 			//echo $sql;
 			if($mat_result=$db->Execute($sql))
 			{
-  				header("location:op-logbuch-container-list.php?$globdata");
+  				header("location:log-container-list.php?$globdata");
 				exit;
 			}	else { echo "$LDDbNoSave<br>$sql"; } 
 			break;
@@ -168,7 +168,7 @@ if($dblink_ok)
 			//echo "update ".$sql;
 			if($mat_result=$db->Execute($sql))
 			{
-  				header("location:op-logbuch-container-list.php?$globdata");
+  				header("location:log-container-list.php?$globdata");
 				exit;
 			}	else { echo "$LDDbNosave<br>$sql"; }  
 			break;
@@ -200,7 +200,7 @@ function popinfo(b)
 <?php if(empty($material_nr)||($art_avail==1)) : ?>	
 function delete_item(x)
 {
-	window.location.replace('op-logbuch-container-list.php?<?php echo $globdata; ?>&mode=delete&art_idx='+x);
+	window.location.replace('log-container-list.php?<?php echo $globdata; ?>&mode=delete&art_idx='+x);
 }
 
 // -->
@@ -249,7 +249,7 @@ if(($rows==1)&&(trim($matbuf[0])=="")) $rows=0;
 if($rows)
 {
 echo'
-<form action="op-logbuch-container-list.php" method="post" name="plist" onReset="hsm()">
+<form action="log-container-list.php" method="post" name="plist" onReset="hsm()">
 <table border=0 cellpadding=0 cellspacing=0 width="100%">
   <tr>';
   for($i=0;$i<sizeof($LDContainerElements);$i++)
@@ -337,9 +337,9 @@ else
 	{
 		echo'
  		<tr bgcolor="#ffffff">
-    	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'"><img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle').' alt="'.$LDSelectArticle.'"></a></td>
-    	<td class="v12" valign="top">&nbsp;<a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[containernum].'</a>&nbsp;</td>
-    	<td class="v12" valign="top"><a href="op-logbuch-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[containername].'</a>&nbsp;</td>
+    	<td class="v12" valign="top">&nbsp;<a href="log-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'"><img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle').' alt="'.$LDSelectArticle.'"></a></td>
+    	<td class="v12" valign="top">&nbsp;<a href="log-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[containernum].'</a>&nbsp;</td>
+    	<td class="v12" valign="top"><a href="log-container-list.php?'.$globdata.'&mode=search&material_nr='.$pdata[bestellnum].'" title="'.$LDSelectArticle.'">'.$pdata[containername].'</a>&nbsp;</td>
    	 	<td class="v12" valign="top">&nbsp;<a href="javascript:popinfo(\''.$pdata[bestellnum].'\')"><img '.createComIcon($root_path,'info3.gif','0').'></a>&nbsp;</td>
     	<td class="v12" valign="top">&nbsp;'.$pdata[industrynum].'&nbsp;</td>
     	<td class="v12" valign="top">&nbsp;'.$pdata[bestellnum].'&nbsp;</td>
@@ -360,10 +360,10 @@ else
  			<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'> <b>'.$LDArticleNotFound.'</b><p></font> '.$LDNoArticleTxt.'<p>';
 			$databuf="$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&artikelnum=$material_nr";
 		echo '
-			<a href="op-logbuch-container-entry-manual.php?sid='.$databuf.'"><img '.createComIcon($root_path,'accessrights.gif','0','absmiddle').'> 
+			<a href="log-container-entry-manual.php?sid='.$databuf.'"><img '.createComIcon($root_path,'accessrights.gif','0','absmiddle').'> 
 			<font size=3 > '.$LDClk2ManualEntry.'</font></a>
 			</font><p>
-			<a href="op-logbuch-container-list.php?sid='.$databuf.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt="'.$LDCancel.'">
+			<a href="log-container-list.php?sid='.$databuf.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt="'.$LDCancel.'">
 			</a>
 			</center>
 			';

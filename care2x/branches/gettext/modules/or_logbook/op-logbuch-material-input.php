@@ -18,7 +18,7 @@ function sendnum(d)
 	d.material_nr.select();
 	if(d.material_nr.value==""){
 		return false;
-	}else{	window.parent.OPMLISTFRAME.location.replace('op-logbuch-material-list.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&mode=search&material_nr='+d.material_nr.value);
+	}else{	window.parent.OPMLISTFRAME.location.replace('log-material-list.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>&mode=search&material_nr='+d.material_nr.value);
 		return false;
 	}
 }

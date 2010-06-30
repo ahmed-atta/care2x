@@ -57,7 +57,7 @@ if(($mode=='force_add')&&$containername&&$pcs){
 						//echo $sql;
 						if($mat_result=$db->Execute($sql))
 						{
-  							header("location:op-logbuch-container-list.php?$globdata&item_idx=$item_idx&chg=1");
+  							header("location:log-container-list.php?$globdata&item_idx=$item_idx&chg=1");
 							exit;
 						}	else { echo "$LDDbNoSave<br>$sql"; } 
 						
@@ -119,7 +119,7 @@ var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu='';
 </head>
 <body leftmargin=0 marginwidth=0>
 
-<form name="plist" action="op-logbuch-container-entry-manual.php" method="post">
+<form name="plist" action="log-container-entry-manual.php" method="post">
 <table border=0>
 <tr>
 <?php
@@ -159,7 +159,7 @@ var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu='';
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> width=99 height=24 align="absmiddle" alt="<?php echo $LDSave ?>">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.plist.reset()" title="<?php echo $LDReset ?>"><img <?php echo createLDImgSrc($root_path,'reset.gif','0','absmiddle') ?>></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="op-logbuch-material-list.php?<?php echo $globdata ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0','absmiddle') ?> alt="<?php echo $LDCancel ?>"></a>
+<a href="log-material-list.php?<?php echo $globdata ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0','absmiddle') ?> alt="<?php echo $LDCancel ?>"></a>
 </form>
 
 
