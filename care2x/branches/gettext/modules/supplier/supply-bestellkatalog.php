@@ -47,7 +47,7 @@ $img_delete=createComIcon($root_path,'delete2.gif','0');
   
 <script language=javascript>
 function popinfo(b){
-	urlholder="supplier-bestellkatalog-popinfo.php<?php echo URL_REDIRECT_APPEND; ?>&keyword="+b+"&mode=search&cat=<?php echo $cat; ?>";
+	urlholder="supplier-ordercatalog-popinfo.php<?php echo URL_REDIRECT_APPEND; ?>&keyword="+b+"&mode=search&cat=<?php echo $cat; ?>";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 }
 
