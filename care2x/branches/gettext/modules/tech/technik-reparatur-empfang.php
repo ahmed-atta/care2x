@@ -75,7 +75,7 @@ $smarty->assign('pbOK','<FORM action="'.$returnfile.'" >
 
 $smarty->assign('sRepairLink','<a href="technik-reparatur-anfordern.php'.URL_APPEND.'">'.$LDReRepairTxt.'</a>');
 $smarty->assign('sReportLink','<a href="technik-reparatur-melden.php'.URL_APPEND.'">'.$LDRepairReportTxt.'</a>');
-$smarty->assign('sQuestionLink','<a href="technik-questions.php'.URL_APPEND.'">'.$LDQuestionsTxt.'</a>');
+$smarty->assign('sQuestionLink','<a href="tech-questions.php'.URL_APPEND.'">'.$LDQuestionsTxt.'</a>');
 
 $smarty->assign('sMainBlockIncludeFile','tech/acknowledge.tpl');
 

@@ -164,7 +164,7 @@ $smarty->assign('pbSubmit','<input type="image"  '.createLDImgSrc($root_path,'ab
 $smarty->assign('pbCancel','<a href="'.$breakfile.'" ><img '.createLDImgSrc($root_path,'cancel.gif','0','middle').' title="'.$LDCancel.'" align="middle"></a>');
 
 $smarty->assign('sRepairLink','<a href="technik-reparatur-anfordern.php'.URL_APPEND.'">'.$LDReRepairTxt.'</a>');
-$smarty->assign('sQuestionLink','<a href="technik-questions.php'.URL_APPEND.'">'.$LDQuestionsTxt.'</a>');
+$smarty->assign('sQuestionLink','<a href="tech-questions.php'.URL_APPEND.'">'.$LDQuestionsTxt.'</a>');
 
 $smarty->assign('sMainBlockIncludeFile','tech/repair_report.tpl');
 
