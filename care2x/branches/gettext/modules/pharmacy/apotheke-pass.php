@@ -36,7 +36,7 @@ switch($mode) {
 						$allowedarea[] = '_a_1_pharmadbadmin';	
 						$src="dbankpass";
 						$userck="ck_prod_db_user";
-						$fileforward="apotheke-datenbank-functions.php".$append.$userck."&from=".$src;
+						$fileforward="pharmacy-database-functions.php".$append.$userck."&from=".$src;
 						break;
 	case "catalog":  $title=$LDOrderCat;
 						$allowedarea[] = '_a_1_pharmadbadmin';	

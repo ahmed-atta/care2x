@@ -21,7 +21,7 @@ $thisfile = basename ( __FILE__ );
 switch ( $cat) {
 	case "pharma" :
 		$title = $LDPharmacy;
-		$breakfile = $root_path . "modules/pharmacy/apotheke-datenbank-functions.php" . URL_APPEND . "&userck=$userck";
+		$breakfile = $root_path . "modules/pharmacy/pharmacy-database-functions.php" . URL_APPEND . "&userck=$userck";
 		$imgpath = $root_path . "uplodas/pharma/img/";
 	break;
 	case "medstock" :
