@@ -204,7 +204,7 @@ function popselect(elem,mode)
 	wh=500;
 	var tmonth=document.dienstplan.month.value;
 	var tyear=document.dienstplan.jahr.value;
-	urlholder="nursing-or-dienstplan-poppersonselect.php?elemid="+elem + "&dept_nr=<?php echo $dept_nr ?>&month="+tmonth+"&year="+tyear+ "&mode=" + mode + "&retpath=<?php echo $retpath ?>&user=<?php echo $ck_op_dienstplan_user."&lang=$lang&sid=$sid"; ?>";
+	urlholder="nursing-or-roster-poppersonselect.php?elemid="+elem + "&dept_nr=<?php echo $dept_nr ?>&month="+tmonth+"&year="+tyear+ "&mode=" + mode + "&retpath=<?php echo $retpath ?>&user=<?php echo $ck_op_dienstplan_user."&lang=$lang&sid=$sid"; ?>";
 	
 	popselectwin=window.open(urlholder,"pop","width=" + ww + ",height=" + wh + ",menubar=no,resizable=yes,scrollbars=yes,dependent=yes");
 	window.popselectwin.moveTo((w/2)+80,(h/2)-(wh/2));
