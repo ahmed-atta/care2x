@@ -1,7 +1,7 @@
 <?php if(($sid==NULL)||($sid!=$$ck_sid_buffer)) { header("location:invalid-access-warning.php"); exit;}
 require_once($root_path.'include/helpers/inc_config_color.php');
 
-$thisfile="medlager-datenbank-info.php";
+$thisfile="medstock-database-info.php";
 $breakfile="medstock-database-functions.php";
 
 ?>
