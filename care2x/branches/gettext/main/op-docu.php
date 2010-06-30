@@ -113,7 +113,7 @@ $smarty->assign('LDDutyPlanMenu',
   		  		'<TABLE cellSpacing=1 cellPadding=5 width="100%" bgColor=#dddddd border=0>
 				<TR>
 					<TD bgColor=#ffffff><font face=arial,verdana size=2> 
-					» <A href="'.$root_path.'modules/nursing_or/nursing-or-dienstplan.php'. URL_REDIRECT_APPEND.'&retpath=menu">'. $LDSee .'</A> 
+					» <A href="'.$root_path.'modules/nursing_or/nursing-or-roster.php'. URL_REDIRECT_APPEND.'&retpath=menu">'. $LDSee .'</A> 
 					» <A href="'.$root_path.'modules/nursing_or/nursing-or-main-pass.php'.URL_REDIRECT_APPEND.'&retpath=menu&target=dutyplan">'.$LDCreate . '/' . $LDUpdate .'</A> 
 					» <A href="'.$root_path.'modules/nursing_or/nursing-or-main-pass.php'. URL_REDIRECT_APPEND.'&target=setpersonal&retpath=menu">' . $LDCreatePersonList .'</A>
 					</font></TD>
@@ -130,12 +130,12 @@ $smarty->assign('LDORAnesthesia',"<img ".createLDImgSrc($root_path,'anaes.gif','
 $smarty->assign('LDORAnaQuickView',"<a href=\"".$root_path."modules/nursing_or/nursing-or-roster-quickview.php".URL_APPEND."&retpath=menu&hilitedept=39\">$LDQuickView</a>");
 $smarty->assign('LDQviewTxtAna',$LDQviewTxtAna);
 //AnaDienstplan
-$smarty->assign('LDORAnaNOCScheduler',"<a href=\"".$root_path."modules/nursing_or/nursing-or-dienstplan.php".URL_APPEND."&dept_nr=39&retpath=menu\" >$LDORNOC $LDScheduler</a>");
+$smarty->assign('LDORAnaNOCScheduler',"<a href=\"".$root_path."modules/nursing_or/nursing-or-roster.php".URL_APPEND."&dept_nr=39&retpath=menu\" >$LDORNOC $LDScheduler</a>");
 $smarty->assign('LDORAnaNOCSchedulerMenu',
   		  		'<TABLE cellSpacing=1 cellPadding=5 width="100%" bgColor=#dddddd border=0>
 			<TR>
 				<TD bgColor=#ffffff><font face=arial,verdana size=2>
-				» <A href="' . $root_path . 'modules/nursing_or/nursing-or-dienstplan.php'.URL_REDIRECT_APPEND.'">'. $LDSee .'</A>
+				» <A href="' . $root_path . 'modules/nursing_or/nursing-or-roster.php'.URL_REDIRECT_APPEND.'">'. $LDSee .'</A>
 				» <A href="' . $root_path . 'modules/nursing_or/nursing-or-main-pass.php'.URL_REDIRECT_APPEND.'">'. $LDCreate . '/' . $LDUpdate  .'</A>
 				</font></TD>
 			</TR>

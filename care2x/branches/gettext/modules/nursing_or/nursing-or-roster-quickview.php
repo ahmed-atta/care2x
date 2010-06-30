@@ -233,8 +233,8 @@ if(!$force_no_cache&&$is_cached){
 	}
 
 	$temp_out.='&nbsp;
-	</td><td >&nbsp; <a href="nursing-or-dienstplan.phpURLAPPEND&dept_nr='.$v['nr'].'&retpath=qview">
-	<button onClick="javascript:window.location.href=\'nursing-or-dienstplan.phpURLREDIRECTAPPEND&dept_nr='.$v['nr'].'&retpath=qview\'"><img '.createComIcon($root_path,'new_address.gif','0','absmiddle').' alt="IMGALT" ><font size=1> SHOWBUTTON </font></button></a> </td></tr>';
+	</td><td >&nbsp; <a href="nursing-or-roster.phpURLAPPEND&dept_nr='.$v['nr'].'&retpath=qview">
+	<button onClick="javascript:window.location.href=\'nursing-or-roster.phpURLREDIRECTAPPEND&dept_nr='.$v['nr'].'&retpath=qview\'"><img '.createComIcon($root_path,'new_address.gif','0','absmiddle').' alt="IMGALT" ><font size=1> SHOWBUTTON </font></button></a> </td></tr>';
 }
 
 # Save in cache
