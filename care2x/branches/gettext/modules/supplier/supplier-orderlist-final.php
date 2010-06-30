@@ -100,7 +100,7 @@ function goactive() {
 }
 	
 function show_order(d,o,s) {
-	url="supply-bestellbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"; ?>&cat=<?php echo $cat ?>&supplier_nr="+d+"&idcare_supply="+o+"&status="+s
+	url="supply-orderbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"; ?>&cat=<?php echo $cat ?>&supplier_nr="+d+"&idcare_supply="+o+"&status="+s
 	<?php echo $cat.'powin'.$sid; ?>=window.open(url,"<?php echo $cat.'powin'.$sid; ?>","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
 }
 <?php if (($mode=='send')&&($sendok)) {
