@@ -100,7 +100,7 @@ function pruf(d) {
 }
 
 function popinfo(b) {
-	urlholder="products-bestellkatalog-popinfo.php<?php echo URL_REDIRECT_APPEND; ?>&cat=<?php echo $cat ?>&keyword="+b+"&mode=search";
+	urlholder="products-ordercatalog-popinfo.php<?php echo URL_REDIRECT_APPEND; ?>&cat=<?php echo $cat ?>&keyword="+b+"&mode=search";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 }
 

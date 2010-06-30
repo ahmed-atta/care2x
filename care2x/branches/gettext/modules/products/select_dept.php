@@ -54,7 +54,7 @@ elseif($cat=='pharma')
 	$title=$LDSelectDept;
 # Set forward file
 switch($target){
-	case 'catalog': $fileforward=$root_path."modules/products/products-bestellkatalog-edit.php".URL_APPEND."&cat=$cat";
+	case 'catalog': $fileforward=$root_path."modules/products/products-ordercatalog-edit.php".URL_APPEND."&cat=$cat";
 							break;
 	default : $fileforward=$root_path."modules/products/products-bestellung.php".URL_APPEND."&cat=$cat";
 }

@@ -122,7 +122,7 @@ if( $ofinal && $sendok )
 
 <script language=javascript>
 function popinfo(b) {
-	urlholder="products-bestellkatalog-popinfo.php<?php echo URL_APPEND; ?>&cat=<?php echo $cat; ?>&keyword="+b+"&mode=search";
+	urlholder="products-ordercatalog-popinfo.php<?php echo URL_APPEND; ?>&cat=<?php echo $cat; ?>&keyword="+b+"&mode=search";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 }
 function checkform(d) {
@@ -142,7 +142,7 @@ function checkform(d) {
 if (($mode=='send')&&($sendok)) {
     $idbuf=$order_nr + 1;
     echo "function hide_bcat() {
-    			window.parent.BESTELLKATALOG.location.replace('products-bestellkatalog.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&userck=$userck&cat=$cat&order_nr=$idbuf')
+    			window.parent.BESTELLKATALOG.location.replace('products-ordercatalog.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&userck=$userck&cat=$cat&order_nr=$idbuf')
     	  }";
 }
 ?>
