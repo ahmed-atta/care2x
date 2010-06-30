@@ -77,7 +77,7 @@ if(($mode=='send') && isset($idcare_supply) && $idcare_supply){
 <script language=javascript>
 function popinfo(b)
 {
-	urlholder="supplier-bestellkatalog-popinfo.php<?php echo URL_APPEND; ?>&cat=<?php echo $cat; ?>&keyword="+b+"&mode=search";
+	urlholder="supplier-ordercatalog-popinfo.php<?php echo URL_APPEND; ?>&cat=<?php echo $cat; ?>&keyword="+b+"&mode=search";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 }
 function checkform(d) {
