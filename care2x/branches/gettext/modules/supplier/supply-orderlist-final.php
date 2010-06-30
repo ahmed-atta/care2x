@@ -250,7 +250,7 @@ for($n=0;$n<sizeof($artikeln);$n++)
 			<input type="submit" value="'.$LDSendOrder.'">   
    			</form></font><p>
 			<font face=Verdana,Arial size=2>
-			<a href="products-bestellkorb.php'.URL_APPEND.'&cat='.$cat.'&dept_nr='.$dept_nr.'&order_nr='.$order_nr.'&userck='.$userck.'" ><< '.$LDBack2Edit.'</a></font>
+			<a href="products-basket.php'.URL_APPEND.'&cat='.$cat.'&dept_nr='.$dept_nr.'&order_nr='.$order_nr.'&userck='.$userck.'" ><< '.$LDBack2Edit.'</a></font>
 			';
 		}else{
 			echo '
