@@ -11,7 +11,7 @@ $LD_Hinweise="references";
 $LD_HinweiseTxt="references for the supply of a login within the new module";
 
 
-//Variablen fuer edv_modul_neu.php
+//Variablen fuer admin_modul_neu.php
 $modul_titel="Title of the new module:";
 $menue_eintrag_ja="Should there be made an entry in the standard menue(standard value).";
 $menue_eintrag_nein="No thanks, no entry. A submenu of another module will be created manually.";
@@ -24,14 +24,14 @@ $LD_weiter="next page...";
 $LD_mit_untermenu="Check this field if you plan to create more than one submenu, a file with a submenu for easy expansion will be generated automatically.";
 
 
-//Variablen fuer edv_modul_neu_2.php
+//Variablen fuer admin_modul_neu_2.php
 $blank_eingabe="You have entered more than one word or space characters. That s not allowed. Recommended would be to keep the stripped-down version. Klick \"No\" to change your entry.";
 $fehleingabe="Empty module names are not allwed.";
 $kontrollmeldung_1="The modules new name would be:";
 $kontrollmeldung_2="called";
 $kontrollmeldung_3="Create a module with the title shown above?";
 
-//Variablen fuer edv_modul_neu_3.php
+//Variablen fuer admin_modul_neu_3.php
 $weiter_info="Please click contiue for creating the main file. Some more information is necessary.";
 $wichtige_info="Click here for important advices for adjusting the files Modulname-main-pass.php and test_person_search.php";
 

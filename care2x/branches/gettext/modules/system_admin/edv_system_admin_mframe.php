@@ -11,9 +11,9 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-if(isset($ck_edv_admin_user)) setcookie('ck_edvzugang_user',$ck_edv_admin_user);
+if(isset($ck_admin_admin_user)) setcookie('ck_edvzugang_user',$ck_admin_admin_user);
 ?>
 <?php html_rtl($lang); ?>
 <head>
@@ -24,8 +24,8 @@ if(isset($ck_edv_admin_user)) setcookie('ck_edvzugang_user',$ck_edv_admin_user);
 if($lang=='ar'||$lang=='fa'){
 ?>
 <frameset cols="*,22%">
-  <frame name="SYSADMIN_WFRAME" src="edv-system-admi-welcome.php<?php echo URL_REDIRECT_APPEND ?>">
-  <frame name="SYSADMIN_INDEX" src="edv-system-admi-menu.php<?php echo URL_REDIRECT_APPEND ?>">
+  <frame name="SYSADMIN_WFRAME" src="admin_system-admi-welcome.php<?php echo URL_REDIRECT_APPEND ?>">
+  <frame name="SYSADMIN_INDEX" src="admin_system-admi-menu.php<?php echo URL_REDIRECT_APPEND ?>">
 <noframes>
 <body>
 </body>
@@ -35,8 +35,8 @@ if($lang=='ar'||$lang=='fa'){
 }else{
 ?>
 <frameset cols="22%,*">
-  <frame name="SYSADMIN_INDEX" src="edv-system-admi-menu.php<?php echo URL_REDIRECT_APPEND ?>">
-  <frame name="SYSADMIN_WFRAME" src="edv-system-admi-welcome.php<?php echo URL_REDIRECT_APPEND ?>">
+  <frame name="SYSADMIN_INDEX" src="admin_system-admi-menu.php<?php echo URL_REDIRECT_APPEND ?>">
+  <frame name="SYSADMIN_WFRAME" src="admin_system-admi-welcome.php<?php echo URL_REDIRECT_APPEND ?>">
 <noframes>
 <body>
 </body>

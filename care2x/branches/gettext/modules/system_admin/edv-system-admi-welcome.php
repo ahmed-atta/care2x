@@ -12,9 +12,9 @@ require($root_path.'include/helpers/inc_environment_global.php');
 */
 
 define('LANG_FILE','edp.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-if(isset($ck_edv_admin_user)) setcookie('ck_edvzugang_user',$ck_edv_admin_user);
+if(isset($ck_admin_admin_user)) setcookie('ck_edvzugang_user',$ck_admin_admin_user);
 $breakfile='edv.php'.URL_APPEND;
 $_SESSION['sess_file_return']=basename(__FILE__);
 

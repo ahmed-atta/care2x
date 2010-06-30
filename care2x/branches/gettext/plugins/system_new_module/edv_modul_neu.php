@@ -10,7 +10,7 @@ require('./roots.php');
 $lang_thismodule_used="modulneu.php";
 
 //Cookiename setzen
-$this_cookie_name='ck_edv_user';
+$this_cookie_name='ck_admin_user';
 													 
 require_once($root_path.$newmodule_includepath."inc_modul_top.php");
 
@@ -24,13 +24,13 @@ require_once($root_path.$newmodule_includepath."head_include.inc.php");
 ?>
 
 <!-- Java Script für Entscheidung ob das Modul so angelegt werden soll oder nicht.
-FAlls ja, edv_modul_neu_2 php ausführen, falls nein, eine Seite zurück zu edv.php
+FAlls ja, admin_modul_neu_2 php ausführen, falls nein, eine Seite zurück zu edv.php
 return false ist nötig damit die action - Anweisung in der FORM nicht ausgeführt wird. 
 Die Action muss vorhanden sein, falls ein Browser Java nicht aktiviert hat. -->
 <script language="JavaScript" type="text/javascript">
 <!--
 function submitja(){
-				 document.ModulNeu.action="edv_modul_neu_2.php";
+				 document.ModulNeu.action="admin_modul_neu_2.php";
 				 document.ModulNeu.submit();
 				 return false;
 				 }
@@ -75,7 +75,7 @@ require ($root_path.$newmodule_includepath."inc_body.php");
 // blauer Titelblock einbinden
 //Variablen des Titelblocks
 //Hilfedatei
-$new_hlp_file="edv_modul_neu_hlp1.php";
+$new_hlp_file="admin_modul_neu_hlp1.php";
 
 //Variable für Überschrift Titellesite
 $thismodulname=$LDEDP . " - " . $LDNeuesModulanlegen;
@@ -101,7 +101,7 @@ else {
 
 <!-- Beginn des Formulars -->
 <!-- versteckte Felder für SID und LANG erstellen-->
-<FORM name="ModulNeu" action="edv_modul_neu_2.php" >
+<FORM name="ModulNeu" action="admin_modul_neu_2.php" >
 <input type='hidden' value="<?php echo $sid ?>" name="sid" />
 <input type='hidden' value="<?php echo $lang ?>" name="lang" /><br/>
 <!-- Modulnamen eingeben-->

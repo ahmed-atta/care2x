@@ -11,15 +11,15 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','edp.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 require_once($root_path.'include/core/class_core.php');
 $core=& new Core();
 
-$breakfile='edv-system-admi-welcome.php'.URL_APPEND.'&target=currency_admin';
-$thisfile='edv_system_format_currency_add.php';
-if($from=='set') $returnfile='edv_system_format_currency_set.php'.URL_APPEND.'&from=add';
+$breakfile='admin_system-admi-welcome.php'.URL_APPEND.'&target=currency_admin';
+$thisfile='admin_system_format_currency_add.php';
+if($from=='set') $returnfile='admin_system_format_currency_set.php'.URL_APPEND.'&from=add';
  else $returnfile=$breakfile;
 
 $dbtable='care_currency';
@@ -217,7 +217,7 @@ if($item_no) echo $LDPlsEnterUpdate; else echo $LDPlsAddCurrency;
 </form>
 <p><br><p>
 <hr>
-<a href="edv_system_format_currency_set.php?<?php echo 'sid='.$sid.'&lang='.$lang; ?>">
+<a href="admin_system_format_currency_set.php?<?php echo 'sid='.$sid.'&lang='.$lang; ?>">
 <img <?php echo createComIcon($root_path,'bul_arrowgrnsm.gif','0') ?>> <?php echo $LDClk2SetCurrency; ?></a>
 
 </ul>

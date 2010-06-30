@@ -25,9 +25,9 @@ define('LANG_FILE','edp.php');
 define('NO_2LEVEL_CHK',1);
 
 //Name des Schutzcookies, macht nur Sinn wenn No_2level_chk =0 ist
-//$local_user='ck_edv_user'; original-Zeile statt der folgenden drei.
-//der Cookie heisst für dieses Modul wie der in der edv-main-pass, und die variable $this_cookie_name
-//wird in der edv_modul_neu.php gesetzt.
+//$local_user='ck_admin_user'; original-Zeile statt der folgenden drei.
+//der Cookie heisst für dieses Modul wie der in der admin_main-pass, und die variable $this_cookie_name
+//wird in der admin_modul_neu.php gesetzt.
 $local_user=$this_cookie_name;
 
 

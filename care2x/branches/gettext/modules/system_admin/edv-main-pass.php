@@ -22,22 +22,22 @@ $breakfile='edv.php?sid='.$sid.'&lang='.$lang;
 switch($target)
 {
 	case 'adminlogin':	$title=$LDSystemLogin;
-								//$userck='ck_edv_admin_user';
-								$fileforward='edv_system_admin_mframe.php?lang='.$lang.'&sid='.$sid;
+								//$userck='ck_admin_admin_user';
+								$fileforward='admin_system_admin_mframe.php?lang='.$lang.'&sid='.$sid;
 								break;
 	case 'currency_admin':	$title=$LDSystemLogin;
-								//$userck='ck_edv_admin_user';
-								$fileforward="edv_system_format_currency_add.php?sid=$sid&lang=$lang&from=$from";
+								//$userck='ck_admin_admin_user';
+								$fileforward="admin_system_format_currency_add.php?sid=$sid&lang=$lang&from=$from";
 								break;
 	case 'modulgenerator':	$title=$LDSystemLogin;
-								//$userck='ck_edv_admin_user';
+								//$userck='ck_admin_admin_user';
 								$fileforward=$root_path."modules/system_admin/sub_modul_neu.php?sid=$sid&lang=$lang&from=$from";
 								break;
 	default:{header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 }
 
-$userck='ck_edv_user';
-$thisfile='edv-main-pass.php';
+$userck='ck_admin_user';
+$thisfile='admin_main-pass.php';
 $lognote="$title ok";
 
 // reset all 2nd level lock cookies

@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 define('LANG_FILE','edp.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 require_once($root_path.'include/helpers/inc_config_color.php');
@@ -136,12 +136,12 @@ if($dblink_ok)
 				</table>
 				<FONT    SIZE=-1  FACE=Arial>
 				<p>
-				<FORM method="get" action="edv_user_access_edit.php">
+				<FORM method="get" action="admin_user_access_edit.php">
 				<input type="hidden" name="sid" value="'.$sid.'">
 				<input type="hidden" name="lang" value="'.$lang.'">
 				<INPUT type="submit"  value="'.$LDOK.'"></font></FORM>
 				<p>
-				<FORM method="get" action="edv_user_access_list.php">
+				<FORM method="get" action="admin_user_access_list.php">
 				<input type="hidden" name="sid" value="'.$sid.'">
 				<input type="hidden" name=lang value="'.$lang.'">
 				<INPUT type="submit"  value="'.$LDListActual.'"></font></FORM>
@@ -192,7 +192,7 @@ echo "<FONT  COLOR=red  SIZE=+1  FACE=Arial>$LDInputError<p>";
 
 <?php if ((($error==1)and($mode=='save'))or(($error==0)and($mode==""))) :; ?>
 
-<form method="post" action="edv_user_access_update.php">
+<form method="post" action="admin_user_access_update.php">
 <table border=0 cellpadding=0 cellspacing=0 bgcolor=#666666>
 <tr><td>
 
@@ -321,7 +321,7 @@ printAccessAreas();
 </form>
 
 <p>
-<FORM method=get action="edv_user_access_list.php" >
+<FORM method=get action="admin_user_access_list.php" >
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <INPUT type="submit"  value="<?php echo $LDCancel ?>"></font></FORM>

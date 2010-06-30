@@ -1,4 +1,4 @@
-<?php if (($sid=="")or($sid==NULL)or($sid!=$$ck_sid_buffer)or($ck_edv_db_user==""))
+<?php if (($sid=="")or($sid==NULL)or($sid!=$$ck_sid_buffer)or($ck_admin_db_user==""))
 {header("Location: invalid-access-warning.php"); exit;}
 
 require_once($root_path.'include/helpers/inc_config_color.php');
@@ -10,9 +10,9 @@ $r=uniqid("");
 //erase relevant cookies
 setcookie(ck_edvzugang_user,"");
 setcookie(ck_edvzugang_src,"");
-setcookie(ck_edv_db_user,"");
-setcookie(ck_edv_sql_user,"");
-setcookie(ck_edv_sysadmin,"");
+setcookie(ck_admin_db_user,"");
+setcookie(ck_admin_sql_user,"");
+setcookie(ck_admin_sysadmin,"");
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -57,7 +57,7 @@ $curtime=date("H.i");
 if ($curtime<"9.00") echo "Guten Morgen ";
 if (($curtime>"9.00")and($curtime<"18.00")) echo "Guten Tag ";
 if ($curtime>"18.00") echo "Guten Abend ";
-echo "$ck_edv_db_user!";
+echo "$ck_admin_db_user!";
 
 ?>
 				  

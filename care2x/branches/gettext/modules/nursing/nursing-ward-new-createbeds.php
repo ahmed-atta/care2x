@@ -14,7 +14,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 define('DEFAULT_NR_OF_BEDS',2); // Define here the default number of beds if the bed value is empty or 0
 
 define('LANG_FILE','nursing.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);

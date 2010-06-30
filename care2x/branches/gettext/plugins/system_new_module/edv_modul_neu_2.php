@@ -2,7 +2,7 @@
 //***Variablen GENERELL für dieses Modul setzen***//
 
 //Variable für dieHilfedatei
-$new_hlp_file="edv_modul_neu_hlp2.php";
+$new_hlp_file="admin_modul_neu_hlp2.php";
 
 //Variable für die in diesem Modul benutzte Individual-Sprachdatei 
 $lang_thismodule_used="modulneu.php";
@@ -35,11 +35,11 @@ require('./roots.php');
 $lang_thismodule_used="modulneu.php";
 
 //Cookiename setzen
-$this_cookie_name='ck_edv_user';
+$this_cookie_name='ck_admin_user';
 require_once($root_path.$newmodule_includepath."inc_modul_top.php");
 
 // ggf. $breakfile und $returnfile neu definieren
-$returnfile="edv_modul_neu.php?sid=$sid&lang=$lang&ModulNeuBez=$ModulNeuBez";
+$returnfile="admin_modul_neu.php?sid=$sid&lang=$lang&ModulNeuBez=$ModulNeuBez";
 $breakfile=$root_path."main/startframe.php?sid=$sid&lang=$lang";
 ?>
 
@@ -49,19 +49,19 @@ require_once($root_path.$newmodule_includepath."head_include.inc.php");
 ?>
 
 <!-- Java Script für Entscheidung ob das Modul so angelegt werden soll oder nicht.
-FAlls ja, edv_modul_neu_3.php ausführen, falls nein, eine Seite zurück zu edv_modul_neu.php
+FAlls ja, admin_modul_neu_3.php ausführen, falls nein, eine Seite zurück zu admin_modul_neu.php
 return false ist nötig damit die action - Anweisung in der FORM nicht ausgeführt wird. 
 Die Action muss vorhanden sein, falls ein Browser Java nicht aktiviert hat. -->
 <script language="JavaScript" type="text/javascript">
 <!--
 
 function submityes(){
-				 document.modul3.action="edv_modul_neu_3.php";
+				 document.modul3.action="admin_modul_neu_3.php";
 				 document.modul3.submit();
 				 return false;
 				 }
 function submitno(){
-				 document.modul3.action="edv_modul_neu.php";
+				 document.modul3.action="admin_modul_neu.php";
 				 document.modul3.submit();
 				 return false;				 
 				 }				 
@@ -81,7 +81,7 @@ require ($root_path.$newmodule_includepath."inc_body.php");
 // blauer Titelblock einbinden
 //Variablen des Titelblocks
 //Hilfedatei
-$new_hlp_file="edv_modul_neu_hlp1.php";
+$new_hlp_file="admin_modul_neu_hlp1.php";
 
 //Variable für Überschrift Titellesite
 $thismodulname=$LDEDP . " - " . $LDNeuesModulanlegen;
@@ -117,7 +117,7 @@ else {
 <FONT FACE='ARIAL'  COLOR="<?php echo $cfg['top_txtcolor']; ?>"><STRONG><?php echo $kontrollmeldung_1; ?> </STRONG></FONT>
 <Font Face='ARIAL'  COLOR="#990000"><STRONG><I> <?PHP echo $ModulNeuBez;?> </STRONG></I></FONT>
 
-<FORM name= "modul3" action="edv_modul_neu_3.php" method="post">
+<FORM name= "modul3" action="admin_modul_neu_3.php" method="post">
 
 <FONT FACE='ARIAL' COLOR="<?php echo $cfg['top_txtcolor']; ?>"><STRONG><?php echo $kontrollmeldung_3; ?></STRONG></FONT><br/><br/><br/>
 <input type="submit"   name="jafeld"  value="<?php echo $LDja; ?>" maxlength="30" size="30"  >
@@ -130,7 +130,7 @@ else {
 <INPUT type='hidden' value="<?php echo $lang; ?>" name="lang" />
 </form>
 
-<FORM name= "no" action="edv_modul_neu.php" method="post">
+<FORM name= "no" action="admin_modul_neu.php" method="post">
 <INPUT type="submit" name="neinfeld" value="<?PHP echo $LDnein; ?>">
 <INPUT type="hidden" name="ModulNeuBez" value="<? echo $alteBez; ?>"> 
 <INPUT type='hidden' name="sid"  value="<?php echo $sid ?>"  />

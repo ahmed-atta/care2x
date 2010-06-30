@@ -12,7 +12,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 */
 $lang_tables[] = 'access.php';
 define('LANG_FILE','edp.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 
 
 ///$db->debug=true;
@@ -24,9 +24,9 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 */
 require($root_path.'include/helpers/inc_accessplan_areas_functions.php');
 
-$breakfile='edv-system-admi-welcome.php'.URL_APPEND;
+$breakfile='admin_system-admi-welcome.php'.URL_APPEND;
 //$returnfile=$_SESSION['sess_file_return'].URL_APPEND;
-$returnfile='edv_user_access_edit.php'.URL_APPEND;
+$returnfile='admin_user_access_edit.php'.URL_APPEND;
 $_SESSION['sess_file_return']=basename(__FILE__);
 
 /* Load the date formatter */
@@ -155,11 +155,11 @@ if ($remark=='itemdelete') echo '<img '.createMascot($root_path,'mascot1_r.gif',
 						
 	            echo "
 						<td>
-						<a href=edv_user_access_edit.php?sid=$sid&lang=$lang&mode=edit&userid=".str_replace(' ','+',$zeile['login_id'])." title=\"$LDChange\"> $LDInitChange</a> \n
-				<a href=edv_user_access_lock.php?sid=$sid&lang=$lang&itemname=".str_replace(' ','+',$zeile['login_id'])." ";
+						<a href=admin_user_access_edit.php?sid=$sid&lang=$lang&mode=edit&userid=".str_replace(' ','+',$zeile['login_id'])." title=\"$LDChange\"> $LDInitChange</a> \n
+				<a href=admin_user_access_lock.php?sid=$sid&lang=$lang&itemname=".str_replace(' ','+',$zeile['login_id'])." ";
 				if ($zeile['lockflag']) echo "title=\"$LDUnlock\" > $LDInitUnlock"; else echo "title=\"$LDLock\"> $LDInitLock";
 				echo "</a> \n
-				<a href=edv_user_access_delete.php?sid=$sid&lang=$lang&itemname=".str_replace(' ','+',$zeile['login_id'])." title=\"$LDDelete\">	$LDInitDelete</a> </td>";
+				<a href=admin_user_access_delete.php?sid=$sid&lang=$lang&itemname=".str_replace(' ','+',$zeile['login_id'])." title=\"$LDDelete\">	$LDInitDelete</a> </td>";
 				echo "</tr>";
 				if($zeile['user_role'] != $old_role) {
 					$old_role = $zeile['user_role'];
@@ -175,7 +175,7 @@ if ($remark=='itemdelete') echo '<img '.createMascot($root_path,'mascot1_r.gif',
 
 <p>
 
-<FORM method="post" action="<?php if($ck_edvzugang_src=="listpass") echo "edv-accessplan-list-pass.php"; else echo "edv_user_access_edit.php"; ?>" >
+<FORM method="post" action="<?php if($ck_edvzugang_src=="listpass") echo "admin_accessplan-list-pass.php"; else echo "admin_user_access_edit.php"; ?>" >
 	<input type=hidden name="sid" value="<?php echo $sid; ?>">
 	<input type=hidden name="lang" value="<?php echo $lang; ?>">
 	<input type=hidden name="remark" value="fromlist">

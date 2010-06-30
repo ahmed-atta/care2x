@@ -1,5 +1,5 @@
 <?PHP 
-//ordner.inc.php ist eine Include-Datei von edv_modul_neu_3.php
+//ordner.inc.php ist eine Include-Datei von admin_modul_neu_3.php
  
 clearstatcache();
 //Variable einlesen

@@ -11,11 +11,11 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','edp.php');
-$local_user='ck_edv_user';
+$local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-$breakfile='edv-system-admi-welcome.php'.URL_APPEND;
-$returnfile='edv_user_access_list.php'.URL_APPEND;
+$breakfile='admin_system-admi-welcome.php'.URL_APPEND;
+$returnfile='admin_user_access_list.php'.URL_APPEND;
 //$_SESSION['sess_file_return']='edv.php';
 
 require_once($root_path.'include/core/class_access.php');
@@ -26,7 +26,7 @@ if($user->UserExists()){
 	if ($finalcommand=='delete') {
 
 		if($user->Delete()) {
-                	header("Location: edv_user_access_list.php?sid=$sid&lang=$lang&remark=itemdelete");
+                	header("Location: admin_user_access_list.php?sid=$sid&lang=$lang&remark=itemdelete");
 			exit;
 		} else {
 			echo '<p>'.$LDDbNoDelete.'<p>'.$user->getLastQuery();
@@ -101,7 +101,7 @@ echo $zeile['password'];
 </table>
 
 <br>
-<FORM action="edv_user_access_delete.php" method="post">
+<FORM action="admin_user_access_delete.php" method="post">
 <INPUT type="hidden" name="itemname" value="<?php echo $itemname ?>">
 <input type="hidden" name="finalcommand" value="delete">
 <input type="hidden" name="sid" value="<?php echo $sid;?>">

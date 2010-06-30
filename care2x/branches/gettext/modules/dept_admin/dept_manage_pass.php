@@ -16,7 +16,7 @@ $breakfile="edv.php?sid=".$sid."&lang=".$lang;
 
 $lognote="$LDNursingManage ok";
 
-$userck="ck_edv_user";
+$userck="ck_admin_user";
 
 //reset cookie;
 // reset all 2nd level lock cookies
