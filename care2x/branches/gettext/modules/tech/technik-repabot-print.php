@@ -91,7 +91,7 @@ if(isset($tid)&&$tid&&isset($dept)&&$dept)
 function ack_print()
 {
 	window.print()
-	window.location.replace("./technik-repabot-print.php<?php echo URL_REDIRECT_APPEND."&mode=ack_print&dept=$dept&tdate=$tdate&ttime=$ttime&tid=$tid"; ?>")
+	window.location.replace("./tech-repabot-print.php<?php echo URL_REDIRECT_APPEND."&mode=ack_print&dept=$dept&tdate=$tdate&ttime=$ttime&tid=$tid"; ?>")
 }
 function move2arch()
 {
@@ -101,7 +101,7 @@ function move2arch()
 		return;
 	}
 	c=document.opt.clerk.value;
-	window.location.replace("./technik-repabot-print.php<?php echo URL_REDIRECT_APPEND."&mode=archive&dept=$dept&tdate=$tdate&ttime=$ttime&tid=$tid"; ?>&clerk="+c)
+	window.location.replace("./tech-repabot-print.php<?php echo URL_REDIRECT_APPEND."&mode=archive&dept=$dept&tdate=$tdate&ttime=$ttime&tid=$tid"; ?>&clerk="+c)
 }
 function parentref(n)
 {
