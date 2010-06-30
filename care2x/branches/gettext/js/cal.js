@@ -9,7 +9,7 @@ function update() {
 	var jbuf = document.direct.jahr.value;
 	if (!isNaN(jbuf)) {
 		jbuf = parseInt(jbuf);
-		var urltarget = "op-pflege-calendar.php?sid=<?print $ck_sid; ?>&pmonth=" + mbuf + "&pyear=" + jbuf;
+		var urltarget = "op-care-calendar.php?sid=<?print $ck_sid; ?>&pmonth=" + mbuf + "&pyear=" + jbuf;
 		window.location.replace(urltarget);
 	} else
 		document.direct.jahr.select();

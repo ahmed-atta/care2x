@@ -245,7 +245,7 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 onLoad="<?php if($mode=="saveok") echo "refreshparent();window.focus();"; ?>if (window.focus) window.focus();
 				window.focus();document.infoform.inputdata.focus();" >
 <a href="javascript:gethelp('oplog.php','person','<?php echo $winid ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> alt="<?php echo $LDHelp ?>" align="right"></a>
-<form name="infoform" action="op-pflege-log-getpersonell.php" method="post" onSubmit="return pruf(this)">
+<form name="infoform" action="op-care-log-getpersonell.php" method="post" onSubmit="return pruf(this)">
 				
 <font face=verdana,arial size=5 color=maroon>
 <b>

@@ -115,7 +115,7 @@ function popinfo(l,f,b)
 	h=window.screen.height;
 	ww=400;
 	wh=400;
-	urlholder="op-pflege-dienstplan-popinfo.php?ln="+l+"&fn="+f+"&bd="+b+"&dept=<?php echo "$dept&sid=$sid&lang=$lang" ?>&route=validroute&user=<?php echo $aufnahme_user.'"' ?>;
+	urlholder="op-care-dienstplan-popinfo.php?ln="+l+"&fn="+f+"&bd="+b+"&dept=<?php echo "$dept&sid=$sid&lang=$lang" ?>&route=validroute&user=<?php echo $aufnahme_user.'"' ?>;
 	
 	infowin=window.open(urlholder,"infowin","width=" + ww + ",height=" + wh +",menubar=no,resizable=yes,scrollbars=yes");
 	window.infowin.moveTo((w/2)+20,(h/2)-(wh/2));

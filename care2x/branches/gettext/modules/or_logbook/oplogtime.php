@@ -24,7 +24,7 @@ function opentimewin(s)
 	h=window.parent.screen.height;
 	ww=550; 
 	wh=500;
-	if(s=="wait_time") t="op-pflege-graph-getwaittime.php";
+	if(s=="wait_time") t="op-care-graph-getwaittime.php";
 		else t="op-care-graph-getinfo.php";
 	timewin=window.open(t+"<?php echo $comdat ?>&winid="+s,"timewin","menubar=no,resizable=yes,scrollbars=yes, width=" + ww + ", height=" + wh);
 	window.timewin.moveTo((w/2)-(ww/2),(h/2)-(wh/2));

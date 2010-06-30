@@ -32,7 +32,7 @@ switch($winid)
 }
 
 $thisfile=basename(__FILE__);
-$forwardfile="op-pflege-log-getinfo.php?sid=$sid&lang=$lang&winid=$winid&mode=save&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr";
+$forwardfile="op-care-log-getinfo.php?sid=$sid&lang=$lang&winid=$winid&mode=save&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday&op_nr=$op_nr";
 
 $search=$pers_obj->searchPersonellBasicInfo($inputdata);
 
@@ -59,7 +59,7 @@ function savedata(iln,ifn,inx,ipr)
 	//urlholder="<?php echo $forwardfile ?>&ln="+ln+"&fn="+fn+"&nx="+d[x].value;
 	//window.location.replace(urlholder);
 	d=document.infoform;
-	d.action="op-pflege-log-getinfo.php";
+	d.action="op-care-log-getinfo.php";
 	d.ln.value=iln;
 	d.fn.value=ifn;
 	d.pr.value=ipr;
@@ -87,7 +87,7 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.focus(); window.focus();document.infoform.inputdata.focus();" >
 <a href="javascript:gethelp()"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> alt="<?php echo $LDHelp ?>" align="right"></a>
 
-<form name="infoform" action="op-pflege-log-getpersonell.php" method="post" onSubmit="return pruf(this)">
+<form name="infoform" action="op-care-log-getpersonell.php" method="post" onSubmit="return pruf(this)">
 <img <?php echo createComIcon($root_path,'magnify.gif','0','absmiddle'); ?>><font face=verdana,arial size=5 color=maroon>
 <b>
 <?php 
@@ -223,7 +223,7 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 
 </form>
 <p>
-<a href="<?php echo "op-pflege-log-getinfo.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&winid=$winid";?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','left'); ?>>
+<a href="<?php echo "op-care-log-getinfo.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&winid=$winid";?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','left'); ?>>
 </a><a href="javascript:window.close()">
 <img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0" alt="<?php echo $LDClose ?>" align="right">
 </a>
