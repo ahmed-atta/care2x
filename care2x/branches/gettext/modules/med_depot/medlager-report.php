@@ -21,7 +21,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'include/core/class_core.php');
 $core = & new Core;
 
-$thisfile='medlager-report.php';
+$thisfile='medstock-report.php';
 
 if($mode=='sent') $breakfile=$thisfile; else $breakfile='medstock-database-functions.php';
 

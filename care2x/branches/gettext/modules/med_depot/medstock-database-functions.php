@@ -94,7 +94,7 @@ echo " $ck_prod_db_user!";
               <TR bgColor=#eeeeee> <td align=center><img <?php echo createComIcon($root_path,'icn_rad.gif','0','',FALSE) ?>></td>
                 <TD vAlign=top width=150><FONT 
                   face="Verdana,Helvetica,Arial" size=2><B><nobr>
-				<a href="medlager-report.php<?php echo URL_APPEND."&userck=$userck"?>"><?php echo $LDReports ?></a></nobr>
+				<a href="medstock-report.php<?php echo URL_APPEND."&userck=$userck"?>"><?php echo $LDReports ?></a></nobr>
 				  </B></FONT></TD>
                 <TD><FONT face="Verdana,Helvetica,Arial" 
                   size=2><nobr><?php echo $LDReportsTxt ?></nobr></FONT></TD></TR>
