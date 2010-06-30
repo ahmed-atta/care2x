@@ -182,8 +182,8 @@ function move2arch() {
 	this.location.replace("products-order-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck&mode=archive&cat=$cat&dept_nr=$dept_nr&order_nr=$order_nr&status=$status&clerk="; ?>"+c);
 }
 function parentref(n) {
-    if(n==1) window.opener.location.replace("products-bestellbot.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&nofocus="+n+"&showlist=1");
-    else window.opener.location.replace("products-bestellbot.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&showlist=1");
+    if(n==1) window.opener.location.replace("products-orderbot.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&nofocus="+n+"&showlist=1");
+    else window.opener.location.replace("products-orderbot.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&showlist=1");
     //
 	<?php if($statseen || $deltodo) { ?>
 		setTimeout("parentref('')",10000);

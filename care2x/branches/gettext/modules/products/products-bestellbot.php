@@ -38,7 +38,7 @@ if (!isset($userck))
 <?php echo setCharSet();
 
     ?>
-<meta http-equiv="refresh" content="15,url=products-bestellbot.php?<?php echo "$sid&lang=$lang&userck=$userck";
+<meta http-equiv="refresh" content="15,url=products-orderbot.php?<?php echo "$sid&lang=$lang&userck=$userck";
 
     ?>&cat=<?php echo $cat ?>">
 <title><?php echo $title ?></title>

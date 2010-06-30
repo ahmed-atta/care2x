@@ -75,7 +75,7 @@ function closewin() {
 if($stb)
 echo '
 function startbot() {
-	pharmabotwin'.$sid.'=window.open("'.$root_path.'modules/products/products-bestellbot.php'.URL_REDIRECT_APPEND.'&cat=pharma&userck='.$userck.'","pharmabotwin'.$sid.'","width=200,height=180,menubar=no,resizable=yes,scrollbars=yes");
+	pharmabotwin'.$sid.'=window.open("'.$root_path.'modules/products/products-orderbot.php'.URL_REDIRECT_APPEND.'&cat=pharma&userck='.$userck.'","pharmabotwin'.$sid.'","width=200,height=180,menubar=no,resizable=yes,scrollbars=yes");
 }
 ';
 
