@@ -22,7 +22,7 @@ if(!isset($dept_nr)) $dept_nr='';
 
 switch($target)
 {
-	case 'search':$fileforward="op-care-log-such-javastart.php".URL_REDIRECT_APPEND."&dept_nr=$dept_nr";
+	case 'search':$fileforward="op-care-log-search-javastart.php".URL_REDIRECT_APPEND."&dept_nr=$dept_nr";
 						$title=$LDSearch;
 						break;
 	case 'archiv':$fileforward="op-care-log-arch-javastart.php".URL_REDIRECT_APPEND."&dept_nr=$dept_nr";

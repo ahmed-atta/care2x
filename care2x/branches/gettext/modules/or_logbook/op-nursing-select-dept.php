@@ -20,8 +20,8 @@ $dept_obj=new Department;
 
 switch($target){
 	case 'search': $title="$LDOrLogBook :: $LDSearch";
-					  //$fileforward='op-care-log-such-javastart.php'.URL_APPEND.'&retpath='.$retpath;
-					  $targetfile='op-care-log-such-javastart.php';
+					  //$fileforward='op-care-log-search-javastart.php'.URL_APPEND.'&retpath='.$retpath;
+					  $targetfile='op-care-log-search-javastart.php';
 					  break;
 	case 'archiv': $title="$LDOrLogBook :: $LDArchive";
 					  //$fileforward='op-care-log-arch-javastart.php'.URL_APPEND.'&retpath='.$retpath;
