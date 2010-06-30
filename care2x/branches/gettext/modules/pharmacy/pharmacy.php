@@ -118,12 +118,12 @@ $aSubMenuText=array($LDPharmaOrderTxt,
 
 // Prepare the submenu item links indexed by their template tags
 
-$aSubMenuItem=array('LDPharmaOrder' => "<a href=\"apotheke-pass.php".URL_APPEND."&mode=order\">$LDPharmaOrder</a>",
+$aSubMenuItem=array('LDPharmaOrder' => "<a href=\"pharmacy-pass.php".URL_APPEND."&mode=order\">$LDPharmaOrder</a>",
 					'LDHow2Order' => "<a href=\"javascript:gethelp('products.php','how2','','pharma')\">$LDHow2Order</a>",
-					'LDOrderCat' => "<a href=\"apotheke-pass.php".URL_APPEND."&mode=catalog\">$LDOrderCat</a>",
-					'LDOrderArchive' => "<a href=\"apotheke-pass.php".URL_APPEND."&mode=archive\">$LDOrderArchive</a>",
-					'LDPharmaDb' => "<a href=\"apotheke-pass.php".URL_APPEND."&mode=dbank\">$LDPharmaDb</a>",
-					'LDOrderBotActivate' => "<a href=\"apotheke-pass.php".URL_APPEND."&mode=bot&user_origin=pharmabot\" >$LDOrderBotActivate</a>",
+					'LDOrderCat' => "<a href=\"pharmacy-pass.php".URL_APPEND."&mode=catalog\">$LDOrderCat</a>",
+					'LDOrderArchive' => "<a href=\"pharmacy-pass.php".URL_APPEND."&mode=archive\">$LDOrderArchive</a>",
+					'LDPharmaDb' => "<a href=\"pharmacy-pass.php".URL_APPEND."&mode=dbank\">$LDPharmaDb</a>",
+					'LDOrderBotActivate' => "<a href=\"pharmacy-pass.php".URL_APPEND."&mode=bot&user_origin=pharmabot\" >$LDOrderBotActivate</a>",
 					'LDNews' => "<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=38\">$LDNews</a>",
 					'LDRaporteFarmaci' => "<a href=\"".$root_path."modules/pharmacy/reports/index.php\">$LDRaporteFarmaci</a>"
 					);
