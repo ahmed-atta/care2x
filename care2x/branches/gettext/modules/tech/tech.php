@@ -107,7 +107,7 @@ $smarty->append('JavaScript',$sTemp);
 # Prepare the submenu item descriptions
 
 $aSubMenuText=array($LDReRepairTxt,
-										$LDRepabotActivateTxt,
+										$LDRepairbotActivateTxt,
 										$LDRepairReportTxt,
 										$LDReportsArchiveTxt,
 										$LDQuestionsTxt,
@@ -117,7 +117,7 @@ $aSubMenuText=array($LDReRepairTxt,
 # Prepare the submenu item links indexed by their template tags
 
 $aSubMenuItem=array('LDPharmaOrder' => "<a href=\"tech-repair-request.php".URL_APPEND."\">$LDReRepair</a>",
-										'LDHow2Order' => "<a href=\"tech-bot-pass.php".URL_APPEND."&mode=repabot\">$LDRepabotActivate</a>",
+										'LDHow2Order' => "<a href=\"tech-bot-pass.php".URL_APPEND."&mode=repabot\">$LDRepairbotActivate</a>",
 										'LDOrderCat' => "<a href=\"tech-repair-advice.php".URL_APPEND."\">$LDRepairReport</a>",
 										'LDOrderArchive' => "<a href=\"tech-report-archive.php".URL_APPEND."\">$LDReportsArchive</a>",
 										'LDPharmaDb' => "<a href=\"tech-questions.php".URL_APPEND."\">$LDQuestions</a>",
