@@ -7,9 +7,9 @@ srand(time()*1000);
 $r=rand(1,1000);
 $dbname="maho";
 $allowedarea="System_Admin";
-$fileforward="technik.php";
+$fileforward="tech.php";
 $thisfile="technik-repabot-pass.php";
-$breakfile="technik.php";
+$breakfile="tech.php";
 
 require($root_path."include/inc_passcheck_f2f.php"); // loads the validarea and logentry functions
 

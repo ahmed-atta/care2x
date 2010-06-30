@@ -18,15 +18,15 @@ require_once($root_path.'global_conf/areas_allow.php');
 
 $allowedarea=&$allow_area['tech'];
 
-$breakfile='technik.php?sid='.$sid.'&lang='.$lang;
+$breakfile='tech.php?sid='.$sid.'&lang='.$lang;
 
 if($mode=='fragebot')
-{ $fileforward="technik.php".URL_REDIRECT_APPEND."&mode=$mode&stb=2"; 
+{ $fileforward="tech.php".URL_REDIRECT_APPEND."&mode=$mode&stb=2"; 
 	$title=$LDQBotActivate; 
 }
 else 
 {
-	$fileforward="technik.php?sid=$sid&lang=$lang&mode=$mode&stb=1";
+	$fileforward="tech.php?sid=$sid&lang=$lang&mode=$mode&stb=1";
 	$title=$LDRepabotActivate;
 }
 
