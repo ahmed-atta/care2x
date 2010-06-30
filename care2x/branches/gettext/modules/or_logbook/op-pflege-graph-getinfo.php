@@ -13,7 +13,7 @@ $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $dbtable='care_encounter_op';
-$thisfile="op-pflege-graph-getinfo.php";
+$thisfile="op-care-graph-getinfo.php";
 
 switch($winid)
 {
