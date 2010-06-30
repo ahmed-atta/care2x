@@ -80,7 +80,7 @@ $dbtable='care_tech_questions';
         $ok=$db->Execute($sql);
         if($ok && $db->CommitTrans()) {
 			$inquirer=strtr($inquirer,' ','+');
-			header("Location: technik-questions.php".URL_REDIRECT_APPEND."&dept=$dept&inquirer=$inquirer");
+			header("Location: tech-questions.php".URL_REDIRECT_APPEND."&dept=$dept&inquirer=$inquirer");
 			exit;
 		}else {
 			$db->RollbackTrans();
@@ -218,7 +218,7 @@ $smarty->assign('sListboxSubmit','<input type="submit" value="'.$LDLogIn.'">');
 
 $smarty->assign('sButton','<img '.createComIcon($root_path,'varrow.gif','0').'>');
 
-$smarty->assign('sFormTag','<form ENCTYPE="multipart/form-data" action="technik-questions.php" method="post" onSubmit="return checkform(this)">');
+$smarty->assign('sFormTag','<form ENCTYPE="multipart/form-data" action="tech-questions.php" method="post" onSubmit="return checkform(this)">');
 
 $smarty->assign('LDQuestions',$LDQuestions);
 

@@ -120,7 +120,7 @@ $aSubMenuItem=array('LDPharmaOrder' => "<a href=\"technik-reparatur-anfordern.ph
 										'LDHow2Order' => "<a href=\"tech-bot-pass.php".URL_APPEND."&mode=repabot\">$LDRepabotActivate</a>",
 										'LDOrderCat' => "<a href=\"technik-reparatur-melden.php".URL_APPEND."\">$LDRepairReport</a>",
 										'LDOrderArchive' => "<a href=\"technik-report-arch.php".URL_APPEND."\">$LDReportsArchive</a>",
-										'LDPharmaDb' => "<a href=\"technik-questions.php".URL_APPEND."\">$LDQuestions</a>",
+										'LDPharmaDb' => "<a href=\"tech-questions.php".URL_APPEND."\">$LDQuestions</a>",
 										'LDOrderBotActivate' => "<a href=\"tech-bot-pass.php".URL_APPEND."&mode=fragebot\">$LDQBotActivate</a>",
 										);
 
