@@ -22,7 +22,7 @@ if($repair=='ask'){
 	$returnfile='tech-repair-request.php?sid='.$sid.'&lang='.$lang;
 }else{
   $target=$LDReport;
-  $returnfile='technik-reparatur-melden.php?sid='.$sid.'&lang='.$lang;
+  $returnfile='tech-repair-advice.php?sid='.$sid.'&lang='.$lang;
 }
 
 # Load date formatter
@@ -74,7 +74,7 @@ $smarty->assign('pbOK','<FORM action="'.$returnfile.'" >
 <INPUT type="submit"  value="  OK  "></font></FORM>');
 
 $smarty->assign('sRepairLink','<a href="tech-repair-request.php'.URL_APPEND.'">'.$LDReRepairTxt.'</a>');
-$smarty->assign('sReportLink','<a href="technik-reparatur-melden.php'.URL_APPEND.'">'.$LDRepairReportTxt.'</a>');
+$smarty->assign('sReportLink','<a href="tech-repair-advice.php'.URL_APPEND.'">'.$LDRepairReportTxt.'</a>');
 $smarty->assign('sQuestionLink','<a href="tech-questions.php'.URL_APPEND.'">'.$LDQuestionsTxt.'</a>');
 
 $smarty->assign('sMainBlockIncludeFile','tech/acknowledge.tpl');
