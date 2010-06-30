@@ -27,7 +27,7 @@ if ($update || ($mode == "search")) {
 		case "pharma" :
 			$imgpath = $root_path . "uplodas/pharma/img/";
 		break;
-		case "medlager" :
+		case "medstock" :
 			$imgpath = $root_path . "uplodas/med_depot/img/";
 		break;
 	}

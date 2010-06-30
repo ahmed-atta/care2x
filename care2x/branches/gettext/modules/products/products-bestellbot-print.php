@@ -35,7 +35,7 @@ switch($cat) {
 				$dbtable='care_pharma_orderlist';
 				$dbtablesub='care_pharma_orderlist_sub';
 				break;
-	case 'medlager':
+	case 'medstock':
 				$title="$LDMedDepot - $LDOrderBotActivate $LDAck";
 				$dbtable='care_med_orderlist';
 				$dbtablesub='care_med_orderlist_sub';
@@ -85,7 +85,7 @@ if($order_nr&&$dept_nr){
 								$dbtableupdate='care_pharma_products_main_sub';
 								$dbmovements='care_pharma_products_main_movements';
 								break;
-    				case 'medlager':
+    				case 'medstock':
 								$title="$LDMedDepot - $LDOrderBotActivate $LDAck";
 								$dbtableupdate='care_med_products_main_sub';
 								$tableupdatepharmacy='care_pharma_products_main_sub';
@@ -111,7 +111,7 @@ if($order_nr&&$dept_nr){
     			//end:gjergji
     			
     		 	//gjergji:
-    		 	if($cat=='medlager'){
+    		 	if($cat=='medstock'){
     		 		$ergebnis->MoveFirst();
     		 		while ($dept = $ergebnis->FetchRow()) { 
     					$dstmp = explode('/',$dept['expiry_date']);

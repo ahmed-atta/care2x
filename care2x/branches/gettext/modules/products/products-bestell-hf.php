@@ -17,7 +17,7 @@ switch($cat)
 {
 	case "pharma": $breakfile=$root_path."modules/pharmacy/apotheke.php".URL_APPEND;
 	                       break;
-    case "medlager": $breakfile=$root_path."modules/med_depot/medstock.php ".URL_APPEND;
+    case "medstock": $breakfile=$root_path."modules/med_depot/medstock.php ".URL_APPEND;
 	                       break;
 }
 

@@ -40,7 +40,7 @@ if(isset($cat))
 	case 'pharma':	$title=$LDPharmacy;
 							$breakfile=$root_path."modules/pharmacy/apotheke.php".URL_APPEND;
 							break;
-	case 'medlager':$title=$LDMedDepot;
+	case 'medstock':$title=$LDMedDepot;
 							$breakfile=$root_path."modules/med_depot/medstock.php ".URL_APPEND;
 							break;
 	default:  $invalid=1;

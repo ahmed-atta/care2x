@@ -64,7 +64,7 @@ if(ereg("_a_1_meddepotdbadmin",$access->PermissionAreas()))
 if($stb)
 echo '
 function startbot() {
-	medibotwin'.$sid.'=window.open("'.$root_path.'modules/products/products-bestellbot.php'.URL_REDIRECT_APPEND.'&cat=medlager&userck='.$userck.'","medibotwin'.$sid.'","width=200,height=180,menubar=no,resizable=yes,scrollbars=yes");
+	medibotwin'.$sid.'=window.open("'.$root_path.'modules/products/products-bestellbot.php'.URL_REDIRECT_APPEND.'&cat=medstock&userck='.$userck.'","medibotwin'.$sid.'","width=200,height=180,menubar=no,resizable=yes,scrollbars=yes");
 }
 ';
 ?>
@@ -133,7 +133,7 @@ while(list($x,$v)=each($aSubMenuItem)){
 
 # Assign the submenu to the mainframe center block
 
- $smarty->assign('sMainBlockIncludeFile','med_depot/submenu_medlager.tpl');
+ $smarty->assign('sMainBlockIncludeFile','med_depot/submenu_medstock.tpl');
 
   /**
  * show Template

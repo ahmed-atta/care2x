@@ -175,7 +175,7 @@ class Product extends Core {
 	function useOrderList($type){
 		if($type=='pharma'){
 			$this->coretable=$this->tb_polist;
-		}elseif($type=='medlager'){
+		}elseif($type=='medstock'){
 			$this->coretable=$this->tb_molist;
 		}else{return false;}
 	}
@@ -191,7 +191,7 @@ class Product extends Core {
 		if($type=='pharma'){
 			$this->coretable=$this->tb_pocat;
 			$this->ref_array=$this->fld_ocat;
-		}elseif($type=='medlager' or $type=='supply'){
+		}elseif($type=='medstock' or $type=='supply'){
 			$this->coretable=$this->tb_mocat;
 			$this->ref_array=$this->fld_ocat;
 		}else{return false;}
@@ -208,7 +208,7 @@ class Product extends Core {
 		if($type=='pharma'){
 			$this->coretable=$this->tb_pmain;
 			$this->ref_array=$this->fld_prodmain;
-		}elseif($type=='medlager' or $type='supply'){
+		}elseif($type=='medstock' or $type='supply'){
 			$this->coretable=$this->tb_mmain;
 			$this->ref_array=$this->fld_prodmain;
 		}else{return false;}
