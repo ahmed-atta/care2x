@@ -14,7 +14,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 if($_SESSION['sess_user_origin']=='personell_admin'){
 	$local_user='aufnahme_user';
 }else{
-	$local_user='ck_doctors_dienstplan_user';
+	$local_user='ck_doctors_roster_user';
 }
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
