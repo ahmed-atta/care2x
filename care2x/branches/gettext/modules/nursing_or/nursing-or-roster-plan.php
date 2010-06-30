@@ -22,7 +22,7 @@ if(!isset($dept_nr)||!$dept_nr){
 }
 
 $thisfile=basename(__FILE__);
-$breakfile="nursing-or-dienstplan.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath";
+$breakfile="nursing-or-roster.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath";
 $_SESSION['sess_file_return']=$thisfile;
 
 require_once($root_path.'modules/dept_admin/model/class_department.php');
@@ -127,7 +127,7 @@ function makefwdpath($path,$dpt,$mo,$yr,$saved)
 {
 	if ($path==1)
 	{	
-		$fwdpath='nursing-or-dienstplan.php?';
+		$fwdpath='nursing-or-roster.php?';
 		if($saved!="1") 
 		{  
 			if ($mo==1) {$mo=12; $yr--;}
