@@ -24,11 +24,11 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 </head>
 <frameset cols="16%,*">
 <?php if($mode=="cont") : ?>
-  <frame name="OPMINPUTFRAME" src="op-logbuch-container-input.php?sid=<?php  echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>">
-  <frame name="OPMLISTFRAME" src="op-logbuch-container-list.php?sid=<?php  echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>">
+  <frame name="OPMINPUTFRAME" src="log-container-input.php?sid=<?php  echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>">
+  <frame name="OPMLISTFRAME" src="log-container-list.php?sid=<?php  echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>">
 <?php else : ?>
-  <frame name="OPMINPUTFRAME" src="op-logbuch-material-input.php?sid=<?php  echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>">
-  <frame name="OPMLISTFRAME" src="op-logbuch-material-list.php?sid=<?php  echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>">
+  <frame name="OPMINPUTFRAME" src="log-material-input.php?sid=<?php  echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>">
+  <frame name="OPMLISTFRAME" src="log-material-list.php?sid=<?php  echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=$enc_nr&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>">
 <?php endif ?>
 <noframes>
 <body>

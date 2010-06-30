@@ -634,9 +634,9 @@ if($datafound) {
 <A onClick="document.oppflegepatinfo.xx2.value='drg'"
     href="javascript:openDRGComposite()"><img <?php echo createLDImgSrc($root_path,'drg.gif','0','absmiddle') ?> 
 	alt="<?php echo $LDDRG ?>"></a><A onClick="document.oppflegepatinfo.xx2.value='material'"
-    href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN"><img <?php echo createLDImgSrc($root_path,'material.gif','0','absmiddle') ?> 
+    href="log-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN"><img <?php echo createLDImgSrc($root_path,'material.gif','0','absmiddle') ?> 
 	alt="<?php echo $LDUsedMaterial ?>"></a><!-- <A onClick="document.oppflegepatinfo.xx2.value='container'"
-    href="op-logbuch-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&mode=cont&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN"><img <?php echo createLDImgSrc($root_path,'instrument.gif','0','absmiddle') ?> 
+    href="log-material-parentframe.php?sid=<?php echo "$sid&lang=$lang&mode=cont&op_nr=$op_nr&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&pday=$pday&pmonth=$pmonth&pyear=$pyear"; ?>" target="OPLOGMAIN"><img <?php echo createLDImgSrc($root_path,'instrument.gif','0','absmiddle') ?> 
 	alt="<?php echo $LDContainer ?>"></a>--><?php } ?> <a href="javascript:gethelp('oplog.php','create','<?php echo $mode ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>
 	alt="<?php echo $LDHelp ?>"></a><a href="javascript:if(!window.parent.opener.closed)window.parent.opener.focus();window.parent.close();"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> 
 	alt="<?php echo $LDClose ?>"></a><br>
