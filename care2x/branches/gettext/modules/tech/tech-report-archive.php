@@ -122,7 +122,7 @@ ob_start();
 <!-- 
 function show_order(d,D,t,r,i)
 {
-	urlholder="technik-report-showcontent.php<?php echo URL_REDIRECT_APPEND; ?>&dept="+d+"&tdate="+D+"&ttime="+t+"&reporter="+r+"&tid="+i;
+	urlholder="tech-report-showcontent.php<?php echo URL_REDIRECT_APPEND; ?>&dept="+d+"&tdate="+D+"&ttime="+t+"&reporter="+r+"&tid="+i;
 	//orderlistwin=window.open(urlholder,"orderlistwin","width=700,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	window.location.href=urlholder;
 }
