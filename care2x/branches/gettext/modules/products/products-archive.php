@@ -30,7 +30,7 @@ switch($cat) {
 	case 'medstock':
 				$title="$LDMedDepot $LDOrderArchive";
 				$dbtable='care_med_orderlist';
-				$breakfile=$root_path.'modules/med_depot/medstock.php '.URL_APPEND;
+				$breakfile=$root_path.'modules/medstock/medstock.php '.URL_APPEND;
 				break;
 	default:  {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 }

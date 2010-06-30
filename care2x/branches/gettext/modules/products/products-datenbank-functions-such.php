@@ -26,8 +26,8 @@ switch ( $cat) {
 	break;
 	case "medstock" :
 		$title = $LDMedDepot;
-		$breakfile = $root_path . "modules/med_depot/medstock-database-functions.php" . URL_APPEND . "&userck=$userck";
-		$imgpath = $root_path . "uplodas/med_depot/img/";
+		$breakfile = $root_path . "modules/medstock/medstock-database-functions.php" . URL_APPEND . "&userck=$userck";
+		$imgpath = $root_path . "uplodas/medstock/img/";
 	break;
 	default :
 		{

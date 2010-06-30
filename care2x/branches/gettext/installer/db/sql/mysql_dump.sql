@@ -4894,7 +4894,7 @@ INSERT INTO care_menu_main VALUES ('8', '40', 'OR', 'LDOR', '', 'main/op-docu.ph
 INSERT INTO care_menu_main VALUES ('9', '45', 'Laboratories', '', 'LDLabs', 'modules/laboratory/labor.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('10', '50', 'Radiology', '', 'LDRadiology', 'modules/radiology/radiolog.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('11', '55', 'Pharmacy', '', 'LDPharmacy', 'modules/pharmacy/apotheke.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('12', '60', 'Medical Depot', '', 'LDMedDepot', 'modules/med_depot/medstock.php ', '1', '', '', 20030922232015, 00000000000000);
+INSERT INTO care_menu_main VALUES ('12', '60', 'Medical Depot', '', 'LDMedDepot', 'modules/medstock/medstock.php ', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('13', '65', 'Directory', '', 'LDDirectory', 'modules/phone_directory/phone.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('14', '70', 'Tech Support', '', 'LDTechSupport', 'modules/tech/technik.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('15', '72', 'System Admin', '', 'LDEDP', 'modules/system_admin/edv.php', '1', '', '', 20030922232015, 00000000000000);
