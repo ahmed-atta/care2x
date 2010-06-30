@@ -39,7 +39,7 @@ $returnfile=$breakfile;
 
 $newdata=1;
 
-# Default path for fotos. Make sure that this directory exists!
+# Default path for photos. Make sure that this directory exists!
 $default_photo_path=$root_path.'uploads/photos/registration';
 $photo_filename='nopic';
 
@@ -74,10 +74,10 @@ if($pid||$personell_nr){
 	# Get the patient global configs
         $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
         $glob_obj->getConfig('personell_%');
-        $glob_obj->getConfig('person_foto_path'); 
+        $glob_obj->getConfig('person_photo_path'); 
 
         # Check whether config path exists, else use default path			
-        $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
+        $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_photo_path'])) ? $GLOBAL_CONFIG['person_photo_path'] : $default_photo_path;
 
         if ($pid){
 		  # Check whether the person is currently admitted. If yes jump to display admission data

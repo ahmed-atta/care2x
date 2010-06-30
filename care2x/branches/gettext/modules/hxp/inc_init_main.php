@@ -24,7 +24,7 @@ $key_login='17394275820319';
 $main_domain='www.care2x.net/foundry';
 
 # Host address for images
-$fotoserver_ip='www.care2x.net/foundry';
+$photoserver_ip='www.care2x.net/foundry';
 
 # Transfer protocol. Use https if this runs on SSL server
 $httprotocol='http';

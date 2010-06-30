@@ -31,11 +31,11 @@ $personell_obj=new Personell();
 /* Get the personell  global configs */	
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('personell_%');
-$glob_obj->getConfig('person_foto_path');
+$glob_obj->getConfig('person_photo_path');
 
 $updatefile='personell_register.php';
 
-/* Default path for fotos. Make sure that this directory exists! */
+/* Default path for photos. Make sure that this directory exists! */
 $default_photo_path=$root_path.'uploads/photos/registration';
 $photo_filename='nopic';
 
@@ -81,7 +81,7 @@ if($_SESSION['sess_user_origin']=='phonedir'&&$_SESSION['sess_personell_nr']){
 	/* Get ward name */
 	//$current_ward_name=$ward_obj->WardName($current_ward_nr);
 	/* Check whether config path exists, else use default path */			
-	$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
+	$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_photo_path'])) ? $GLOBAL_CONFIG['person_photo_path'] : $default_photo_path;
 
 
 /* Prepare text and resolve the numbers */

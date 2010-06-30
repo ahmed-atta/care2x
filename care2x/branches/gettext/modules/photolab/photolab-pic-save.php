@@ -102,7 +102,7 @@ if($maxpic){
 		$picdir=$patnum;
 		
 		if($disc_pix_mode){
-			$d=$root_path.$fotoserver_localpath.$picdir;
+			$d=$root_path.$photoserver_localpath.$picdir;
 		}
 		
 		$data=array('encounter_nr'=>$patnum,
@@ -161,7 +161,7 @@ if($maxpic){
 					$img->saveUploadedImage($_FILES[$picfile],$dir_path,$picfilename[$i]);
 					
 		       		echo '<font color="#cc0000"><a href="javascript:previewpic(\'';
-		       		if($disc_pix_mode) echo $root_path.$fotoserver_localpath; else echo $fotoserver_http;
+		       		if($disc_pix_mode) echo $root_path.$photoserver_localpath; else echo $photoserver_http;
 		       		echo $picdir.'/'.$picfilename[$i].'\')">'.$picfilename[$i].'</a></font>';
  		       		echo '</td></tr>';	
  		       		//echo '<hr>';	

@@ -6,7 +6,7 @@ Note: this script works only properly when the calling script has a smarty templ
 # Load the news display configs
 require_once('inc_news_display_config.php');
 
-$picpath=$root_path.$news_fotos_path.$news['nr'].'.'.$news['pic_mime'];
+$picpath=$root_path.$news_photos_path.$news['nr'].'.'.$news['pic_mime'];
 
 if(!isset($picalign) || empty($picalign)) {
     $picalign=(!($news['art_num']%2))? 'right' : 'left';

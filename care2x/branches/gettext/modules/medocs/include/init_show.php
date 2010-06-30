@@ -25,8 +25,8 @@ if((!isset($pid)||!$pid)&&$_SESSION['sess_pid']) $pid=$_SESSION['sess_pid'];
 //$_SESSION['sess_path_referer']=$top_dir.$thisfile;
 //$HTPP_SESSION_VARS['sess_pid']=$pid;
 
-/* Default path for fotos. Make sure that this directory exists! */
-$default_photo_path=$root_path.'fotos/registration';
+/* Default path for photos. Make sure that this directory exists! */
+$default_photo_path=$root_path.'photos/registration';
 $photo_filename='nopic';
 
 if(!isset($user_id) || !$user_id)
@@ -58,8 +58,8 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('person_%');
 $glob_obj->getConfig('patient_%');
 		
-/* Check whether config foto path exists, else use default path */			
-$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
+/* Check whether config photo path exists, else use default path */			
+$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_photo_path'])) ? $GLOBAL_CONFIG['person_photo_path'] : $default_photo_path;
 require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 
 if($_SESSION['sess_parent_mod']=='admission') {

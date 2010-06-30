@@ -30,11 +30,11 @@ $breakfile='admission_pass.php?sid='.$sid.'&lang='.$lang;
 
 /* Get the patient global configs */	
 $glob_obj->getConfig('patient_%');
-$glob_obj->getConfig('person_foto_path');
+$glob_obj->getConfig('person_photo_path');
 
 $updatefile='admission_start.php';
 
-/* Default path for fotos. Make sure that this directory exists! */
+/* Default path for photos. Make sure that this directory exists! */
 $default_photo_path=$root_path.'uploads/photos/registration';
 $photo_filename='nopic';
 
@@ -118,7 +118,7 @@ if($dblink_ok) {
 	/* Get ward name */
 	$current_ward_name=$ward_obj->WardName($current_ward_nr);
 	/* Check whether config path exists, else use default path */			
-	$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
+	$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_photo_path'])) ? $GLOBAL_CONFIG['person_photo_path'] : $default_photo_path;
 } else { 
 	echo "$LDDbNoLink<br>"; 
 } 

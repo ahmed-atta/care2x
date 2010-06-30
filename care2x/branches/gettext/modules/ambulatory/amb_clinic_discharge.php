@@ -79,10 +79,10 @@ if($enc_obj->loadEncounterData($pn)){
 		
 		$result=&$enc_obj->encounter;
 		
-		/* Check whether config foto path exists, else use default path */			
+		/* Check whether config photo path exists, else use default path */			
 		$default_photo_path='uploads/photos/registration';
 		$photo_filename=$result['photo_filename'];
-		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
+		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_photo_path'])) ? $GLOBAL_CONFIG['person_photo_path'] : $default_photo_path;
 		require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 		/* Load the discharge types */
 		$discharge_types=&$enc_obj->getDischargeTypesData();

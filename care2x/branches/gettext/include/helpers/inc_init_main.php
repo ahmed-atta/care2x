@@ -24,7 +24,7 @@ $key_login='29298508193976';
 $main_domain='localhost';
 
 # Host address for images
-$fotoserver_ip='localhost';
+$photoserver_ip='localhost';
 
 # Transfer protocol. Use https if this runs on SSL server
 $httprotocol='http';

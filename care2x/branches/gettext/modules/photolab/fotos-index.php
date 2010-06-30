@@ -19,9 +19,9 @@ $breakfile=$root_path."modules/nursing/nursing-ward-patientdata.php".URL_REDIREC
 require($root_path.'global_conf/inc_remoteservers_conf.php');
 
 if($disc_pix_mode){
-	$final_path="$root_path$fotoserver_localpath$pn/";
+	$final_path="$root_path$photoserver_localpath$pn/";
 }else{
-	$final_path="$fotoserver_http$pn/";
+	$final_path="$photoserver_http$pn/";
 }
 
 //$db->debug=1;
@@ -55,7 +55,7 @@ $all_image=$img->getAllImageData($pn);
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('encounter_photos.php','fotos','','$station','$LDPhotos')");
+ $smarty->assign('pbHelp',"javascript:gethelp('encounter_photos.php','photos','','$station','$LDPhotos')");
 
  # href for close button
  $smarty->assign('breakfile',"javascript:window.parent.location.replace('$breakfile');");
@@ -81,15 +81,15 @@ ob_start();
 
 var x=-1;
 
-function showfoto(srcimg)
+function showphoto(srcimg)
 {
-	if (document.images) document.images.foto.src=srcimg;
+	if (document.images) document.images.photo.src=srcimg;
 	x=-2;
 }
 
 function preview(n)
 {
-	window.parent.FOTOS_PREVIEW.location.href="fotos-preview.php<?php echo URL_REDIRECT_APPEND; ?>&pn=<?php echo $pn ?>&nr="+n;
+	window.parent.FOTOS_PREVIEW.location.href="photos-preview.php<?php echo URL_REDIRECT_APPEND; ?>&pn=<?php echo $pn ?>&nr="+n;
 }
 </script>
 <?php
@@ -156,7 +156,7 @@ if(is_object($all_image)){
 				echo $final_path.$image['nr'].'.'.$image['mime_type'].'" border=0  width=80></a> </td>
    				</tr>';
 			}else{
-				echo  $root_path.'main/imgcreator/thumbnail.php?mx=80&my=100&imgfile='.$fotoserver_localpath.$pn.'/'.$image['nr'].'.'.$image['mime_type'].'" border=0></a> </td>
+				echo  $root_path.'main/imgcreator/thumbnail.php?mx=80&my=100&imgfile='.$photoserver_localpath.$pn.'/'.$image['nr'].'.'.$image['mime_type'].'" border=0></a> </td>
    				</tr>';
 			}
    		}
@@ -175,7 +175,7 @@ if(is_object($all_image)){
 
 </td>
 <td>
-<img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border="0" name="foto">
+<img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border="0" name="photo">
 
 </td>
 </tr>

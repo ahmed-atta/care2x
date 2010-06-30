@@ -71,8 +71,8 @@ if(($mode=='')||($mode=='fresh')){
 		include_once($root_path.'include/core/class_globalconfig.php');
 		$GLOBAL_CONFIG=array();
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-		$glob_obj->getConfig('person_foto_path');
-		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
+		$glob_obj->getConfig('person_photo_path');
+		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_photo_path'])) ? $GLOBAL_CONFIG['person_photo_path'] : $default_photo_path;
 
 		#Create encounter object and load encounter info
 		$enc_obj=new Encounter($pn);
@@ -81,7 +81,7 @@ if(($mode=='')||($mode=='fresh')){
 			$encounter=&$enc_obj->encounter;
 		}
 		
-		# Set the foto filename
+		# Set the photo filename
 		$photo_filename=$encounter['photo_filename'];
 		/* Prepare the photo filename */
 		require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');

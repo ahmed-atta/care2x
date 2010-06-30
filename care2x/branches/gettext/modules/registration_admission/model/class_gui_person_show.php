@@ -24,7 +24,7 @@ class GuiPersonShow {
 	# Filename of script to run in fallback state (when something goes wrong)
 	var $fallbackfile = '';
 	
-	# Default path for fotos. Make sure that this directory exists!
+	# Default path for photos. Make sure that this directory exists!
 	var $default_photo_path='uploads/photos/registration';
 	var $photo_filename='nopic';
 	
@@ -219,8 +219,8 @@ class GuiPersonShow {
 				# update the record's history
 				if(empty($newdata)) @$this->person_obj->setHistorySeen($_SESSION['sess_user_name']);
 			
-				# Check whether config foto path exists, else use default path
-				$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $this->default_photo_path;
+				# Check whether config photo path exists, else use default path
+				$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_photo_path'])) ? $GLOBAL_CONFIG['person_photo_path'] : $this->default_photo_path;
 
 			}else{
 				$validdata = FALSE;
