@@ -67,7 +67,7 @@ switch($mode) {
 }
 
 $thisfile=basename(__FILE__);
-$breakfile='medlager.php'.URL_APPEND;
+$breakfile='medstock.php '.URL_APPEND;
 
 $lognote="$LDMedDepot $title ok";
 

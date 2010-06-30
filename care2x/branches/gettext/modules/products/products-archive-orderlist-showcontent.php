@@ -36,7 +36,7 @@ switch($cat) {
 		$title=$LDMedDepot;
 		$dbtable='care_med_orderlist';
 		$dbtableSub='care_med_orderlist_sub';
-		$breakfile=$root_path.'modules/med_depot/medlager.php?sid='.$sid.'&lang='.$lang;
+		$breakfile=$root_path.'modules/med_depot/medstock.php ?sid='.$sid.'&lang='.$lang;
 		break;
 	default:  {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;};
 }
