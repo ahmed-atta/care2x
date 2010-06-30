@@ -46,7 +46,7 @@ if ($nofocus=='') echo "
 	
 function show_order(d,o,s,t)
 {
-	url="technik-repabot-print.php<?php echo URL_REDIRECT_APPEND; ?>&dept="+d+"&tdate="+o+"&ttime="+s+"&tid="+t;
+	url="tech-repabot-print.php<?php echo URL_REDIRECT_APPEND; ?>&dept="+d+"&tdate="+o+"&ttime="+s+"&tid="+t;
 	repaechowin=window.open(url,"repaprintwin","width=800,height=600,menubar=no,resizable=yes,scrollbars=yes");
 }
 </script>
