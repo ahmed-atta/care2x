@@ -64,7 +64,7 @@ if( $_REQUEST["function"]=="save" )
       $picdir = $_REQUEST["encounter_nr"];
       
       if($disc_pix_mode){
-	$d = $root_path.$fotoserver_localpath.$picdir;
+	$d = $root_path.$photoserver_localpath.$picdir;
       }
       
       //DEBUG: print "saving to $d ... $CRLF";

@@ -68,7 +68,7 @@ $area_opt=array(
 						  '_a_2_doctorsdutyplanread' =>  $_a_2_doctorsdutyplanread,
 
 							/* Group start*/
-						   'title_foto' => $title_foto,
+						   'title_photo' => $title_photo,
 						  '_a_1_photowrite' =>  $_a_1_photowrite,
 						  '_a_2_photoread' =>  $_a_2_photoread,
 						  

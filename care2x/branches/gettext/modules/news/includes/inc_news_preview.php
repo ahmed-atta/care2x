@@ -19,9 +19,9 @@ if($news[$j]){
 	# First test for record nr. + mime combination of image filename
 	# If not exists, try pic_file value + mime combination
 	
-		 $picpath=$root_path.$news_fotos_path.$news[$j]['nr'].'.'.$news[$j]['pic_mime'];
+		 $picpath=$root_path.$news_photos_path.$news[$j]['nr'].'.'.$news[$j]['pic_mime'];
 		 if(!file_exists($picpath)){
-		 	$picpath=$root_path.$news_fotos_path.$news[$j]['pic_file'].'.'.$news[$j]['pic_mime'];
+		 	$picpath=$root_path.$news_photos_path.$news[$j]['pic_file'].'.'.$news[$j]['pic_mime'];
 		}
 
 		if(!empty($news[$j]['body']))

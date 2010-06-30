@@ -30,7 +30,7 @@ class GuiInputPerson {
 	# Language tables
 	var $langfiles= array('emr.php', 'person.php', 'date_time.php', 'aufnahme.php');
 
-	# Default path for fotos. Make sure that this directory exists!
+	# Default path for photos. Make sure that this directory exists!
 	var $default_photo_path='uploads/photos/registration';
 
 	# Filename of file running this gui
@@ -148,8 +148,8 @@ class GuiInputPerson {
 
 		//extract($GLOBAL_CONFIG);
 
-		# Check whether config foto path exists, else use default path
-		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $this->default_photo_path;
+		# Check whether config photo path exists, else use default path
+		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_photo_path'])) ? $GLOBAL_CONFIG['person_photo_path'] : $this->default_photo_path;
 
 		if (($mode=='save') || ($mode=='forcesave')) {
 

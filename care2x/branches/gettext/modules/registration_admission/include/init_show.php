@@ -21,7 +21,7 @@ if((!isset($pid)||!$pid)&&$_SESSION['sess_pid']) $pid=$_SESSION['sess_pid'];
 $_SESSION['sess_path_referer']=$top_dir.$thisfile;
 //$HTPP_SESSION_VARS['sess_pid']=$pid;
 
-/* Default path for fotos. Make sure that this directory exists! */
+/* Default path for photos. Make sure that this directory exists! */
 $default_photo_path=$root_path.'uploads/photos/registration';
 $photo_filename='nopic';
 
@@ -50,8 +50,8 @@ if(!$GLOBAL_CONFIG['notes_preview_maxlen']) $GLOBAL_CONFIG['notes_preview_maxlen
 //$_SESSION['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
 $_SESSION['sess_full_pid']=$pid;
 		
-/* Check whether config foto path exists, else use default path */			
-$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
+/* Check whether config photo path exists, else use default path */			
+$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_photo_path'])) ? $GLOBAL_CONFIG['person_photo_path'] : $default_photo_path;
 require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 
 # set to safe defaults

@@ -36,9 +36,9 @@ require($root_path.'global_conf/inc_remoteservers_conf.php');
 include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 if($disc_pix_mode){
-	$final_path="$root_path$fotoserver_localpath$pn/"; 
+	$final_path="$root_path$photoserver_localpath$pn/"; 
 }else{
-	$final_path="$fotoserver_http$pn/";
+	$final_path="$photoserver_http$pn/";
 }
 if(isset($pn)&&$pn){
 	/* Create image object */
@@ -158,7 +158,7 @@ if(isset($bShowImageJApplet) && $bShowImageJApplet){
 <?php
 	}else{
 ?>
-<img src="<?php	echo $root_path.'main/imgcreator/thumbnail.php?mx='.$preview_size.'&my='.$preview_size.'&imgfile=/'.$fotoserver_localpath.$pn.'/'.$image['nr'].'.'.$image['mime_type'] ?>" border=0  name="preview"
+<img src="<?php	echo $root_path.'main/imgcreator/thumbnail.php?mx='.$preview_size.'&my='.$preview_size.'&imgfile=/'.$photoserver_localpath.$pn.'/'.$image['nr'].'.'.$image['mime_type'] ?>" border=0  name="preview"
 <?php
 	}
 

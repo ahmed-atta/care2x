@@ -42,13 +42,13 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 /* Get the patient global configs */	
 $glob_obj->getConfig('patient_%');
-$glob_obj->getConfig('person_foto_path');
+$glob_obj->getConfig('person_photo_path');
 $glob_obj->getConfig('show_billable_items');
 $glob_obj->getConfig('show_doctors_list');
 
 $updatefile='admission_start.php';
 
-/* Default path for fotos. Make sure that this directory exists! */
+/* Default path for photos. Make sure that this directory exists! */
 $default_photo_path=$root_path.'uploads/photos/registration';
 $photo_filename='nopic';
 
@@ -147,7 +147,7 @@ $dbtable='care_encounter';
 	/* Get insurance firm name*/
 	$insurance_firm_name=$insurance_obj->getFirmName($insurance_firm_id);
 	/* Check whether config path exists, else use default path */			
-	$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
+	$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_photo_path'])) ? $GLOBAL_CONFIG['person_photo_path'] : $default_photo_path;
 
 
 /* Prepare text and resolve the numbers */

@@ -24,7 +24,7 @@ $key_login='INSTALL_KEY_3';
 $main_domain='INSTALL_ADDRESS';
 
 # Host address for images
-$fotoserver_ip='INSTALL_ADDRESS';
+$photoserver_ip='INSTALL_ADDRESS';
 
 # Transfer protocol. Use https if this runs on SSL server
 $httprotocol='INSTALL_PROTOCOL';

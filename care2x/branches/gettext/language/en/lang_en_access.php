@@ -64,7 +64,7 @@ $_a_1_doctorsdutyplanwrite = 'Doctors duty plan read & write';
 $_a_2_doctorsdutyplanread = 'Doctors duty plan read only';
 
 // Group start
-$title_foto = 'Photo Studio';
+$title_photo = 'Photo Studio';
 $_a_1_photowrite = 'Photos upload, read and write';
 $_a_2_photoread = 'Photos display & read only';
 

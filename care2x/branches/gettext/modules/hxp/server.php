@@ -502,14 +502,14 @@ function PersonApptList($args){
 }
 
 function PersonPhotoIDURL($args){
-	global $error,$root_path, $person,$db, $httprotocol,$fotoserver_ip;
+	global $error,$root_path, $person,$db, $httprotocol,$photoserver_ip;
 
 	if(checkAccess($args[0])){
 
 		include($root_path.'global_conf/inc_remoteservers_conf.php');
 
 		# Prepare the url path for the image
-		$d = $fotoserver_http."uploads/registration/";
+		$d = $photoserver_http."uploads/registration/";
 
 		$sql="SELECT photo_filename FROM $person->coretable WHERE pid=".$args[1];
 
@@ -546,7 +546,7 @@ function PersonPhotoIDSave($args){
 	if(checkAccess($args[0])){
 		include($root_path.'global_conf/inc_remoteservers_conf.php');
 
-		$d=$root_path."fotos/$type/";
+		$d=$root_path."photos/$type/";
 
 		# Try to get the extension
 		if(empty($args[2]['ext'])){
@@ -583,7 +583,7 @@ function PersonPhotoIDSave($args){
 				if($fp=fopen($newfilepath,'wb')){
 					fwrite($fp,base64_decode($args[2]['img']));
 					fclose($fp);
-					return "$fotoserver_http$type/$picfilename";
+					return "$photoserver_http$type/$picfilename";
 				}else{
 
 					# Delete the table record
@@ -862,7 +862,7 @@ function _ImageAdd($args,$type){
 	if(checkAccess($args[0])){
 		include($root_path.'global_conf/inc_remoteservers_conf.php');
 
-		$d=$root_path."fotos/$type/$picdir";
+		$d=$root_path."photos/$type/$picdir";
 
 		# Try to get the extension
 		if(empty($args[2]['ext'])){
@@ -903,8 +903,8 @@ function _ImageAdd($args,$type){
 					// if $d directory not exist create it with CHMOD 777
 					mkdir($d,0777);
 					// Copy the trap files to this new directory
-					copy($root_path."fotos/$type/donotremove/index.htm",$d.'/index.htm');
-					copy($root_path."fotos/$type/donotremove/index.php",$d.'/index.php');
+					copy($root_path."photos/$type/donotremove/index.htm",$d.'/index.htm');
+					copy($root_path."photos/$type/donotremove/index.php",$d.'/index.php');
 				}
 				// Store to the newly created directory
 
@@ -913,7 +913,7 @@ function _ImageAdd($args,$type){
 				if($fp=fopen($newfilepath,'wb')){
 					fwrite($fp,base64_decode($args[2]['img']));
 					fclose($fp);
-					return "$fotoserver_http$type/$picdir/$picfilename";
+					return "$photoserver_http$type/$picdir/$picfilename";
 				}else{
 
 					# Delete the table record
@@ -941,7 +941,7 @@ function EMRImageURLList($args){
 
 		$picdir= $args[1];
 
-		$d = $fotoserver_localpath.$picdir;
+		$d = $photoserver_localpath.$picdir;
 		$sql="SELECT nr,mime_type FROM $img->coretable WHERE encounter_nr=".$args[1];
 		
 		if($buff=$db->Execute($sql)) {
