@@ -638,7 +638,7 @@ if($count){
       </div>
       <div id="hint"></div>
       <script type="text/javascript">
-      var includeScript = "include/inc_search_medicaments.php?";
+      var includeScript = "include/inc_search_medicine.php?";
 		var kot = new Ajax.Autocompleter("search","hint",includeScript, {afterUpdateElement : setSelectionId,autoSelect: true, minChars: 2,callback:funxkot});
 		
 		function setSelectionId(text, li) {
