@@ -21,7 +21,7 @@ $userck="ck_medlager_user";
 $breakfile="medstock.php ".URL_APPEND."&userck=$userck";
 $fileforward="medstock.php ".URL_REDIRECT_APPEND."&userck=$userck&stb=1";
 $title=$LDMediBotActivate; 
-$thisfile="medlager-bestellbot-pass.php";
+$thisfile="medstock-orderbot-pass.php";
 $lognote="$title ok";
 
 //reset cookie;

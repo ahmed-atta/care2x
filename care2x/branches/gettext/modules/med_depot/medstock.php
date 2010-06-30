@@ -108,7 +108,7 @@ $aSubMenuItem=array('LDPharmaOrder' => "<a href=\"medlager-pass.php".URL_APPEND.
 					'LDOrderCat' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=catalog\">$LDOrderCat</a>",
 					'LDOrderArchive' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=archive\">$LDOrderArchive</a>",
 					'LDPharmaDb' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=dbank\">$LDPharmaDb</a>",
-					'LDOrderBotActivate' => "<a href=\"medlager-bestellbot-pass.php".URL_APPEND."\" >$LDMediBotActivate</a>",
+					'LDOrderBotActivate' => "<a href=\"medstock-orderbot-pass.php".URL_APPEND."\" >$LDMediBotActivate</a>",
 					'LDSupplier' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=supplier\">$LDSupplier</a>",
 					'LDSupply' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=supply\">$LDSupply</a>"
 										);
