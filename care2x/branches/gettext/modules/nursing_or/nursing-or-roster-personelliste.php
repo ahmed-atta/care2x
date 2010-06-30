@@ -83,7 +83,7 @@ if(!empty($ipath)){
 	switch($ipath){
 		case 'menu': $breakfile=$root_path.'main/op-docu.php'.URL_APPEND; break;
 		case 'qview': $breakfile="nursing-or-roster-quickview.php".URL_APPEND."&hilitedept=$dept_nr"; break;
-		case 'plan': $breakfile="nursing-or-dienstplan-planen.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; break;
+		case 'plan': $breakfile="nursing-or-roster-plan.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; break;
 		default: $breakfile="javascript:window.history.back()";
 	}
 }

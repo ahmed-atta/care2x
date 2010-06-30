@@ -217,7 +217,7 @@ function killchild()
 
 function cal_update()
 {
-	var filename="nursing-or-dienstplan-planen.php?<?php echo "sid=$sid&lang=$lang" ?>&retpath=<?php echo $retpath ?>&dept_nr=<?php echo $dept_nr; ?>&pmonth="+document.dienstplan.month.value+"&pyear="+document.dienstplan.jahr.value;
+	var filename="nursing-or-roster-plan.php?<?php echo "sid=$sid&lang=$lang" ?>&retpath=<?php echo $retpath ?>&dept_nr=<?php echo $dept_nr; ?>&pmonth="+document.dienstplan.month.value+"&pyear="+document.dienstplan.jahr.value;
 	window.location.replace(filename);
 }
 </script>
@@ -255,7 +255,7 @@ for ($i=2000;$i<2016;$i++){
 $sBuffer = $sBuffer.'</select>';
 $smarty->assign('sYearSelect',$sBuffer);
 
-$smarty->assign('sFormAction','action="nursing-or-dienstplan-planen.php"');
+$smarty->assign('sFormAction','action="nursing-or-roster-plan.php"');
 
  # collect hidden inputs
 
