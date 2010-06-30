@@ -122,7 +122,7 @@ if($force_no_cache || (!$force_no_cache && !$is_cached)){
   var urlholder;
 function popinfo(l,d)
 {
-	urlholder="doctors-dienstplan-popinfo.php<?php echo URL_REDIRECT_APPEND ?>&nr="+l+"&dept_nr="+d+"&user=<?php echo $aufnahme_user.'"' ?>;
+	urlholder="doctors-rosterplan-popinfo.php<?php echo URL_REDIRECT_APPEND ?>&nr="+l+"&dept_nr="+d+"&user=<?php echo $aufnahme_user.'"' ?>;
 	
 	infowin=window.open(urlholder,"dienstinfo","width=400,height=300,menubar=no,resizable=yes,scrollbars=yes");
 
@@ -237,8 +237,8 @@ if(!$force_no_cache&&$is_cached){
 	}
 	
 	$temp_out.='&nbsp;
-	</td><td >&nbsp; <a href="doctors-dienstplan.phpURLAPPEND&dept_nr='.$v['nr'].'&retpath=qview">
-	<button onClick="javascript:window.location.href=\'doctors-dienstplan.phpURLREDIRECTAPPEND&dept_nr='.$v['nr'].'&retpath=qview\'"><img '.createComIcon($root_path,'new_address.gif','0','absmiddle',FALSE).' alt="IMGALT" ><font size=1> SHOWBUTTON </font></button></a> </td></tr>';
+	</td><td >&nbsp; <a href="doctors-rosterplan.phpURLAPPEND&dept_nr='.$v['nr'].'&retpath=qview">
+	<button onClick="javascript:window.location.href=\'doctors-rosterplan.phpURLREDIRECTAPPEND&dept_nr='.$v['nr'].'&retpath=qview\'"><img '.createComIcon($root_path,'new_address.gif','0','absmiddle',FALSE).' alt="IMGALT" ><font size=1> SHOWBUTTON </font></button></a> </td></tr>';
 	
 }
 # Save in cache 

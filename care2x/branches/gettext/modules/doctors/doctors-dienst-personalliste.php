@@ -74,8 +74,8 @@ if(!empty($ipath)){
 	switch($ipath)
 	{
 		case 'menu': $breakfile="doctors.php".URL_APPEND; break;
-		case 'qview': $breakfile="doctors-dienst-schnellsicht.php".URL_APPEND."&hilitedept=$dept_nr"; break;
-		case 'plan': $breakfile="doctors-dienstplan-planen.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; break;
+		case 'qview': $breakfile="doctors-roster-quickview.php".URL_APPEND."&hilitedept=$dept_nr"; break;
+		case 'plan': $breakfile="doctors-rosterplan-planen.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath"; break;
 		default: $breakfile="javascript:window.history.back()";
 	}
 }
@@ -181,7 +181,7 @@ $img_options_delete=createComIcon($root_path,'delete2.gif','0');
 <!-- 
   var urlholder;
 function popinfo(l,d){
-	urlholder="doctors-dienstplan-popinfo.php<?php echo URL_REDIRECT_APPEND ?>&nr="+l+"&dept_nr="+d+"&user=<?php echo $aufnahme_user.'"' ?>;
+	urlholder="doctors-rosterplan-popinfo.php<?php echo URL_REDIRECT_APPEND ?>&nr="+l+"&dept_nr="+d+"&user=<?php echo $aufnahme_user.'"' ?>;
 	infowin=window.open(urlholder,"dienstinfo","width=400,height=300,menubar=no,resizable=yes,scrollbars=yes");
 }
 function deleteItem(nr){

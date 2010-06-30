@@ -85,7 +85,7 @@ $smarty->assign('LDOrDocumentMenu',
 			</TR>
 	</TABLE>');
 
-$smarty->assign('LDQviewDocs',"<a href=\"".$root_path."modules/doctors/doctors-dienst-schnellsicht.php".URL_APPEND."&retpath=op\">$LDDOC $LDQuickView</a>");
+$smarty->assign('LDQviewDocs',"<a href=\"".$root_path."modules/doctors/doctors-roster-quickview.php".URL_APPEND."&retpath=op\">$LDDOC $LDQuickView</a>");
 $smarty->assign('LDQviewTxtDocs',$LDQviewTxtDocs);
 
 # OR Nursing submenu block
