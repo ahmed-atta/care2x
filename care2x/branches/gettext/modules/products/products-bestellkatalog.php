@@ -198,7 +198,7 @@ if($rows){
     		<td><a href="'.$thisfile.URL_APPEND.'&dept_nr='.$dept_nr.'&order_nr='.$order_nr.'&mode=delete&cat='.$cat.'&keyword='.$content['item_no'].'&userck='.$userck.'" ><img '.$img_delete.' alt="'.$LDRemoveArticle.'"></a></td>
     		</tr>';
     		//gjergji:get how many of this product do i have in the care_med/pharma_producs_main_sub
-    		if($cat=='medlager'){
+    		if($cat=='medstock'){
     			$ergebnis_sub=&$product_obj_sub->ActualOrderCatalogProducts('medsub',$content['bestellnum']);
     		}else{
     			$ergebnis_sub=&$product_obj_sub->ActualOrderCatalogPharma('pharmasub',$content['bestellnum'],$pharma_nr['pharma_dept_nr']);

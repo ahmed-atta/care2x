@@ -27,7 +27,7 @@ switch($cat){
 							$imgpath=$root_path."uplodas/pharma/img/";
 							$breakfile=$root_path."modules/pharmacy/apotheke-datenbank-functions.php?sid=$sid&lang=$lang&userck=$userck";
 							break;
-	case "medlager":
+	case "medstock":
 							$title=$LDMedDepot;
 							$dbtable="care_med_products_main";
 							$imgpath=$root_path."uplodas/med_depot/img/";

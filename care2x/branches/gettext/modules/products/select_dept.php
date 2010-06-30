@@ -42,13 +42,13 @@ $dept_obj=new Department;
 //begin:gjergji 
 //if i'm the depot then i only take the pharmacy
 //else, all the departments
-if($cat=='medlager') 
+if($cat=='medstock') 
 		$dept=$dept_obj->getAllPharmacy();
 elseif($cat=='pharma') 
 		$dept=$dept_obj->getAllMedical();
 //end:gjergji
 
-if($cat=='medlager')
+if($cat=='medstock')
 	$title=$LDSelectPharma;
 elseif($cat=='pharma') 
 	$title=$LDSelectDept;
@@ -83,7 +83,7 @@ switch($target){
  $smarty->assign('sWindowTitle',$title);
 
 $smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
-if($cat=='medlager')
+if($cat=='medstock')
 	$smarty->assign('LDPlsSelectDept',$LDPlsSelectFarma);
 elseif($cat=='pharma') 
 	$smarty->assign('LDPlsSelectDept',$LDPlsSelectDept);

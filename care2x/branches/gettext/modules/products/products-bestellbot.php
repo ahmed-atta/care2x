@@ -16,7 +16,7 @@ if (!isset($userck))
             $bot_name = $LDPharmaOrderBot;
             $dbtable = 'care_pharma_orderlist';
             break;
-        case 'medlager':if ($_COOKIE[$local_user . $sid] == null) $cat = "";
+        case 'medstock':if ($_COOKIE[$local_user . $sid] == null) $cat = "";
             $title = "$LDMedDepot - $LDOrderBotActivate";
             $bot_name = $LDDepotOrderBot;
             $dbtable = 'care_med_orderlist';

@@ -12,7 +12,7 @@ $thisfile=basename(__FILE__);
 if($cat=='pharma'){
  	$dbtable='care_pharma_orderlist';
 	$title=$LDPharmacy;
-}elseif($cat=='medlager'){
+}elseif($cat=='medstock'){
  	$dbtable='care_med_orderlist';
 	$title=$LDMedDepot;
 }

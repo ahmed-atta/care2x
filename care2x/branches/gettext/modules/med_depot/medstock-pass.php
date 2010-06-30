@@ -19,7 +19,7 @@ require_once($root_path.'global_conf/areas_allow.php');
 
 //$allowedarea=&$allow_area['depot'];
 
-$append=URL_REDIRECT_APPEND."&cat=medlager&from=$src&userck=";
+$append=URL_REDIRECT_APPEND."&cat=medstock&from=$src&userck=";
 
 switch($mode) {
 	case "archive":$title=$LDOrderArchive;
