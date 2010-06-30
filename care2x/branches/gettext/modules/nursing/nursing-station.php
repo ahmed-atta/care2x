@@ -46,7 +46,7 @@ if(isset($retpath)){
 	{
 		case 'quick': $breakfile='nursing-quickview.php'.URL_APPEND;
 							break;
-		case 'ward_mng': $breakfile='nursing-station-info.php'.URL_APPEND.'&ward_nr='.$ward_nr.'&mode=show';
+		case 'ward_mng': $breakfile='nursing-ward-info.php'.URL_APPEND.'&ward_nr='.$ward_nr.'&mode=show';
 							break;
 		case 'search_patient': $breakfile='nursing-patient-search-start.php'.URL_APPEND;
 	}
@@ -131,17 +131,17 @@ if(($mode=='')||($mode=='fresh')){
 		if($pn=='lock') $ward_obj->closeBed($ward_nr,$rm,$bd);
 			else $ward_obj->openBed($ward_nr,$rm,$bd);
 
-		//header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
+		//header("location:nursing-ward.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
 		//exit;
 	}else{
 		if($ward_obj->AdmitInWard($pn,$ward_nr,$rm,$bd)){
 			//echo "ok";
 			$ward_obj->setAdmittedInWard($pn,$ward_nr,$rm,$bd);
 		}
-		//header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
+		//header("location:nursing-ward.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
 		//exit;
 	}
-	header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
+	header("location:nursing-ward.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
 	exit;
 }
 
@@ -193,12 +193,12 @@ function getinfo(pn){
 	';
 	}
 	/*else echo '
-	window.location.href=\'nursing-station-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$station.'\'';*/
+	window.location.href=\'nursing-ward-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$station.'\'';*/
 ?>
 
 	}
 function getrem(pn){
-	urlholder="nursing-station-remarks.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&dept_nr=$ward_nr&location_nr=$ward_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
+	urlholder="nursing-ward-remarks.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&dept_nr=$ward_nr&location_nr=$ward_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
 	patientwin=window.open(urlholder,pn,"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
 	}
 
@@ -218,12 +218,12 @@ function target(pn){
 	
 function indata(room,bed)
 {
-	urlholder="nursing-station-bed-occupancy.php<?php echo URL_REDIRECT_APPEND; ?>&rm="+room+"&bd="+bed+"<?php echo "&py=".$pyear."&pm=".$pmonth."&pd=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&s=<?php echo $station; ?>&wnr=<?php echo $ward_nr; ?>";
+	urlholder="nursing-ward-bed-occupancy.php<?php echo URL_REDIRECT_APPEND; ?>&rm="+room+"&bd="+bed+"<?php echo "&py=".$pyear."&pm=".$pmonth."&pd=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&s=<?php echo $station; ?>&wnr=<?php echo $ward_nr; ?>";
 	indatawin=window.open(urlholder,"bedroom","width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 }
 function release(room,bed,pid)
 {
-	urlholder="nursing-station-patient-release.php<?php echo URL_REDIRECT_APPEND; ?>&rm="+room+"&bd="+bed+"&pn="+pid+"<?php echo "&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&station=<?php echo $station; ?>&ward_nr=<?php echo $ward_nr; ?>";
+	urlholder="nursing-ward-patient-release.php<?php echo URL_REDIRECT_APPEND; ?>&rm="+room+"&bd="+bed+"&pn="+pid+"<?php echo "&pyear=".$pyear."&pmonth=".$pmonth."&pday=".$pday."&tb=".str_replace("#","",$cfg['top_bgcolor'])."&tt=".str_replace("#","",$cfg['top_txtcolor'])."&bb=".str_replace("#","",$cfg['body_bgcolor'])."&d=".$cfg['dhtml']; ?>&station=<?php echo $station; ?>&ward_nr=<?php echo $ward_nr; ?>";
 	//indatawin=window.open(urlholder,"bedroom","width=700,height=450,menubar=no,resizable=yes,scrollbars=yes"
 	window.location.href=urlholder;
 }
@@ -232,7 +232,7 @@ function unlock(b,r)
 {
 <?php
 	echo '
-	urlholder="nursing-station.php'.URL_REDIRECT_APPEND.'&mode=newdata&pn=unlock&rm="+r+"&bd="+b+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&station='.$station.'&ward_nr='.$ward_nr.'";
+	urlholder="nursing-ward.php'.URL_REDIRECT_APPEND.'&mode=newdata&pn=unlock&rm="+r+"&bd="+b+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&station='.$station.'&ward_nr='.$ward_nr.'";
 	';
 ?>
 	if(confirm('<?php echo $LDConfirmUnlock ?>'))
@@ -250,14 +250,14 @@ function popinfo(l,d)
 }
 function assignWaiting(pn,pw)
 {
-	urlholder="nursing-station-assignwaiting.php<?php echo URL_REDIRECT_APPEND ?>&pn="+pn+"&pat_station="+pw+"&ward_nr=<?php echo $ward_nr ?>&station=<?php echo $station ?>";	
+	urlholder="nursing-ward-assignwaiting.php<?php echo URL_REDIRECT_APPEND ?>&pn="+pn+"&pat_station="+pw+"&ward_nr=<?php echo $ward_nr ?>&station=<?php echo $station ?>";	
 	asswin<?php echo $sid ?>=window.open(urlholder,"asswind<?php echo $sid ?>","width=650,height=600,menubar=no,resizable=yes,scrollbars=yes");
 
 }
 function Transfer(pn,pw)
 {
 	if(confirm("<?php echo $LDSureTransferPatient ?>")){
-		urlholder="nursing-station-transfer-select.php<?php echo URL_REDIRECT_APPEND ?>&pn="+pn+"&pat_station="+pw+"&ward_nr=<?php echo $ward_nr ?>&station=<?php echo $station ?>";	
+		urlholder="nursing-ward-transfer-select.php<?php echo URL_REDIRECT_APPEND ?>&pn="+pn+"&pat_station="+pw+"&ward_nr=<?php echo $ward_nr ?>&station=<?php echo $station ?>";	
 		transwin<?php echo $sid ?>=window.open(urlholder,"transwin<?php echo $sid ?>","width=650,height=600,menubar=no,resizable=yes,scrollbars=yes");
 	}
 }
@@ -282,7 +282,7 @@ $smarty->append('JavaScript',$sTemp);
 if(($occup=='template')&&(!$mode)&&(!isset($list)||!$list)){
 	
 	$smarty->assign('sWarningPrompt'.$LDNoListYet.'<br>
-			 <form action="nursing-station.php" method=post>
+			 <form action="nursing-ward.php" method=post>
 			<input type="hidden" name="sid" value="'.$sid.'">
    			<input type="hidden" name="lang" value="'.$lang.'">
    			<input type="hidden" name="pyear" value="'.$pyear.'">
@@ -303,7 +303,7 @@ if(($occup=='template')&&(!$mode)&&(!isset($list)||!$list)){
 				else $sWarnBuffer = $sWarnBuffer.'<font color=red><b>'.$LDFromYesterday.'</b></font><br>
 				';
 			$sWarnBuffer = $sWarnBuffer.'
-			<form action="nursing-station.php" method=post>
+			<form action="nursing-ward.php" method=post>
 			<input type="hidden" name="sid" value="'.$sid.'">
     		<input type="hidden" name="lang" value="'.$lang.'">
   			<input type="hidden" name="pyear" value="'.$pyear.'">
@@ -316,7 +316,7 @@ if(($occup=='template')&&(!$mode)&&(!isset($list)||!$list)){
 				else $sWarnBuffer = $sWarnBuffer.'
    					<input type="submit" value="'.$LDTakeoverList.'" >';
 			$sWarnBuffer = $sWarnBuffer.'
-			&nbsp;&nbsp;&nbsp;<input type="button" value="'.$LDDoNotCopy.'" onClick="javascript:window.location.href=\'nursing-station.php?sid='.$sid.'&edit=1&list=1&station='.$station.'&mode=fresh\'">
+			&nbsp;&nbsp;&nbsp;<input type="button" value="'.$LDDoNotCopy.'" onClick="javascript:window.location.href=\'nursing-ward.php?sid='.$sid.'&edit=1&list=1&station='.$station.'&mode=fresh\'">
  			</form>';
 			
 	$smarty->assign('sWarningPrompt',$sWarnBuffer);
@@ -663,20 +663,20 @@ if($ward_ok){
 
 	$smarty->assign('sNewWardLink','<ul><div class="prompt"><img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>
 			'.str_replace("~station~",strtoupper($station),$LDNoInit).'</b></font><br>
-			<a href="nursing-station-new.php'.URL_APPEND.'&station='.$station.'&edit='.$edit.'">'.$LDIfInit.' <img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','',TRUE).'></a><p>
+			<a href="nursing-ward-new.php'.URL_APPEND.'&station='.$station.'&edit='.$edit.'">'.$LDIfInit.' <img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','',TRUE).'></a><p>
 			</div></ul>');
 } // end of if ward_ok
 
 if($pday.$pmonth.$pyear<>date('dmY'))
 
 	$smarty->assign('sToArchiveLink','<p>
-			<a href="nursing-station-archiv.php'.URL_APPEND.'">'.$LDClk2Archive.' <img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','',TRUE).'></a>
+			<a href="nursing-ward-archiv.php'.URL_APPEND.'">'.$LDClk2Archive.' <img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','',TRUE).'></a>
 			<p>');
 
 $smarty->assign('pbClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp');
 
 if(!$edit){
-	$smarty->assign('sOpenWardMngmt','<a href="nursing-station-pass.php'.URL_APPEND.'&edit=1&rt=pflege&ward_nr='.$ward_nr.'&station='.$ward_info['name'].'"><img '.createComIcon($root_path,'uparrowgrnlrg.gif','0','absmiddle',TRUE).'> '.$LDOpenWardManagement.'</a>');
+	$smarty->assign('sOpenWardMngmt','<a href="nursing-ward-pass.php'.URL_APPEND.'&edit=1&rt=pflege&ward_nr='.$ward_nr.'&station='.$ward_info['name'].'"><img '.createComIcon($root_path,'uparrowgrnlrg.gif','0','absmiddle',TRUE).'> '.$LDOpenWardManagement.'</a>');
 }
 
 

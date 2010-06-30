@@ -40,11 +40,11 @@ $breakfile="nursing.php".URL_APPEND;
  
  # Assign submenu items
  $smarty->assign('LDProfile',$LDProfile);
- $smarty->assign('sCreate',"<a href=\"nursing-station-new.php".URL_APPEND."&mw=1&station=$ck_thispc_station&name=$ck_thispc_dept\"><b>$LDCreate</b></a>");
+ $smarty->assign('sCreate',"<a href=\"nursing-ward-new.php".URL_APPEND."&mw=1&station=$ck_thispc_station&name=$ck_thispc_dept\"><b>$LDCreate</b></a>");
  $smarty->assign('LDNewStation',$LDNewStation);
  
  if ($ck_thispc_station) $mode="show";
- $smarty->assign('sShowStationData',"<a href=\"nursing-station-info.php".URL_APPEND."&mode=$mode&station=$ck_thispc_station\"><b>$LDShowStationData</b></a>");
+ $smarty->assign('sShowStationData',"<a href=\"nursing-ward-info.php".URL_APPEND."&mode=$mode&station=$ck_thispc_station\"><b>$LDShowStationData</b></a>");
 
  $smarty->assign('LDShowStationDataTxt',$LDShowStationDataTxt);
  

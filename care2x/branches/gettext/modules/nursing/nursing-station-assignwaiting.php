@@ -142,7 +142,7 @@ if(isset($transfer)&&$transfer){
   var urlholder;
 
 function getrem(pn){
-	urlholder="nursing-station-remarks.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
+	urlholder="nursing-ward-remarks.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";
 	patientwin=window.open(urlholder,pn,"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
 	}
 
@@ -157,7 +157,7 @@ if(confirm("'.$LDSureAssignRoomBed.'"))
 {
 <?php
 echo '
-	urlholder="nursing-station.php?mode=newdata&sid='.$sid.'&lang='.$lang.'&rm="+rm+"&bd="+bd+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&pn="+pn+"&station='.$station.'&ward_nr='.$ward_nr.'"
+	urlholder="nursing-ward.php?mode=newdata&sid='.$sid.'&lang='.$lang.'&rm="+rm+"&bd="+bd+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&pn="+pn+"&station='.$station.'&ward_nr='.$ward_nr.'"
 ';
 ?>
 	window.opener.location.replace(urlholder);
@@ -168,7 +168,7 @@ function transferBed(pn,rm,bd){
 
 <?php
 echo '
-urlholder="nursing-station-transfer-save.php?mode=transferbed&sid='.$sid.'&lang='.$lang.'&rm="+rm+"&bd="+bd+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&pn="+pn+"&station='.$station.'&ward_nr='.$ward_nr.'"
+urlholder="nursing-ward-transfer-save.php?mode=transferbed&sid='.$sid.'&lang='.$lang.'&rm="+rm+"&bd="+bd+"&pyear='.$pyear.'&pmonth='.$pmonth.'&pday='.$pday.'&pn="+pn+"&station='.$station.'&ward_nr='.$ward_nr.'"
 ';
 ?>
 window.opener.location.replace(urlholder);
@@ -501,7 +501,7 @@ if($ward_ok){
 	echo '
 			<ul><img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'><font face="Verdana, Arial" size=3>
 			<font class="prompt"><b>'.str_replace("~station~",strtoupper($station),$LDNoInit).'</b></font><br>
-			<a href="nursing-station-new.php'.URL_APPEND.'&station='.$station.'&edit='.$edit.'">'.$LDIfInit.' <img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','',TRUE).'></a><p></font>
+			<a href="nursing-ward-new.php'.URL_APPEND.'&station='.$station.'&edit='.$edit.'">'.$LDIfInit.' <img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','',TRUE).'></a><p></font>
 			</ul>';
 }
 

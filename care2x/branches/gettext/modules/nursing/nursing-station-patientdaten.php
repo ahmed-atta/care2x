@@ -274,7 +274,7 @@ function initwindow(){
 }
 
 function getinfo(patientID){
-	urlholder="nursing-station.php?route=validroute&patient=" + patientID + "&user=<?php echo $aufnahme_user.'"' ?>;
+	urlholder="nursing-ward.php?route=validroute&patient=" + patientID + "&user=<?php echo $aufnahme_user.'"' ?>;
 	patientwin=window.open(urlholder,patientID,"width=700,height=600,menubar=no,resizable=yes,scrollbars=yes");
 }
 

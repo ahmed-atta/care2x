@@ -21,7 +21,7 @@ $ward=new Ward;
 require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept=new Department;
 
-$breakfile='nursing-station-manage.php'.URL_APPEND;
+$breakfile='nursing-ward-manage.php'.URL_APPEND;
 
 if($pday=='') $pday=date('d');
 if($pmonth=='') $pmonth=date('m');
@@ -45,7 +45,7 @@ if($mode){
 										}else{
 											$ward_nr=$ward->postgre_Insert_ID($dbtable,'nr',$db->Insert_ID());
 										}
-										header("location:nursing-station-new-createbeds.php?sid=$sid&lang=$lang&ward_nr=$ward_nr");
+										header("location:nursing-ward-new-createbeds.php?sid=$sid&lang=$lang&ward_nr=$ward_nr");
 										exit;
 									}else{echo "$sql<br>$LDDbNoSave";}
 								}else{ $ward_exists=true;}

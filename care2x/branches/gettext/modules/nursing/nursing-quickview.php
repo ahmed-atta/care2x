@@ -282,7 +282,7 @@ $dbtable='care_ward';
  * IF ($from == "arch")
  */
  $smarty->assign('from',$from);
- $smarty->assign('LINKArchiv','nursing-station-archiv.php'.URL_APPEND.'&pyear='.$pyear.'&pmonth='.$pmonth);
+ $smarty->assign('LINKArchiv','nursing-ward-archiv.php'.URL_APPEND.'&pyear='.$pyear.'&pmonth='.$pmonth);
  $smarty->assign('pbBack2',createLDImgSrc($root_path,'back2.gif','0') );
  /* ELSE */
  $smarty->assign('pbClose2',createLDImgSrc($root_path,'close2.gif','0') );

@@ -93,7 +93,7 @@ function belegen(anum){
 
              <?php
             echo '
-	          urlholder="nursing-station.php?mode=newdata&sid='.$sid.'&lang='.$lang.'&rm='.$rm.'&bd='.$bd.'&pyear='.$py.'&pmonth='.$pm.'&pday='.$pd.'&pn="+anum+"&station='.$s.'&ward_nr='.$wnr.'";
+	          urlholder="nursing-ward.php?mode=newdata&sid='.$sid.'&lang='.$lang.'&rm='.$rm.'&bd='.$bd.'&pyear='.$py.'&pmonth='.$pm.'&pday='.$pd.'&pn="+anum+"&station='.$s.'&ward_nr='.$wnr.'";
 			  ';
              ?>
 	          window.opener.location.replace(urlholder);
@@ -131,7 +131,7 @@ ob_start();
 <p>
  <ul>
  
- <form action="nursing-station-bed-occupancy.php" method="post" name="psearch" onSubmit="return pruf(this)">
+ <form action="nursing-ward-bed-occupancy.php" method="post" name="psearch" onSubmit="return pruf(this)">
  <div class="prompt"><?php echo $LDSearchPatient; ?></div>
  <table border=0 cellspacing=0 cellpadding=1>
    <tr>

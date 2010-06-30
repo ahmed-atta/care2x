@@ -32,8 +32,8 @@ if($s_date==date('Y-m-d')) $is_today=true;
 	else $is_today=false;
 
 $fileappend="&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr";
-$breakfile="location:nursing-station.php".URL_APPEND.$fileappend;
-$forwardfile="location:nursing-station.php".URL_REDIRECT_APPEND.$fileappend;
+$breakfile="location:nursing-ward.php".URL_APPEND.$fileappend;
+$forwardfile="location:nursing-ward.php".URL_REDIRECT_APPEND.$fileappend;
 # Create ward object
 require_once($root_path.'include/core/class_ward.php');
 $ward_obj= new Ward;

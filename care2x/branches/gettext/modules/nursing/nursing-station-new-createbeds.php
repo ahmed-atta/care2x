@@ -18,7 +18,7 @@ $local_user='ck_edv_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
-$breakfile='nursing-station-info.php?sid='.$sid.'&lang='.$lang;
+$breakfile='nursing-ward-info.php?sid='.$sid.'&lang='.$lang;
 /* Load the ward object */
 require_once($root_path.'include/core/class_ward.php');
 $ward_obj=new Ward($ward_nr);
@@ -52,8 +52,8 @@ if(isset($mode)&&$mode=='save_beds'){
 	
 	if($saved_ok){
 		//gjergji : commented it out for the changing of the magament
-		//header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&ward_nr=$ward_nr&retpath=ward_mng");
-		header("location:nursing-station-info.php".URL_REDIRECT_APPEND."&edit=0&mode=show&ward_id=$station&ward_nr=$ward_nr");
+		//header("location:nursing-ward.php".URL_REDIRECT_APPEND."&edit=1&ward_nr=$ward_nr&retpath=ward_mng");
+		header("location:nursing-ward-info.php".URL_REDIRECT_APPEND."&edit=0&mode=show&ward_id=$station&ward_nr=$ward_nr");
 		//end : gjergji
 		exit;
 	}else{
@@ -134,7 +134,7 @@ $bgc=$root_path.'gui/img/skin/default/tableHeaderbg3.gif';
 $bgc2='#eeeeee';
 
 ?>
-<form action="nursing-station-new-createbeds.php" method="post" name="newbeds" onSubmit="return checkForm(this)">
+<form action="nursing-ward-new-createbeds.php" method="post" name="newbeds" onSubmit="return checkForm(this)">
 
 <table border=0 cellpadding=2 cellspacing=1>
   <tr>

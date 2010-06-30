@@ -98,7 +98,7 @@ function update()
 	if(!isNaN(jbuf))
 	{
 	jbuf=parseInt(jbuf);
-	var urltarget="nursing-station-archiv.php<?php echo URL_REDIRECT_APPEND; ?>&pmonth="+mbuf+"&pyear="+jbuf;
+	var urltarget="nursing-ward-archiv.php<?php echo URL_REDIRECT_APPEND; ?>&pmonth="+mbuf+"&pyear="+jbuf;
 	window.location.replace(urltarget);
 	}
 	else document.direct.jahr.select();
@@ -141,13 +141,13 @@ ob_start();
 <?php 
 echo '<table cellspacing=0 cellpadding=0 border=0>
 		<tr><td align=left>';
-echo '<a href="nursing-station-archiv.php'.URL_APPEND.'&pmonth=';
+echo '<a href="nursing-ward-archiv.php'.URL_APPEND.'&pmonth=';
 if($pmonth<2) echo '12&pyear='.($pyear-1).'" title="'.$LDLastMonth.'">&lt;'.$monat[11];
 else echo ($pmonth-1).'&pyear='.$pyear.'" title="'.$LDLastMonth.'">&lt;'.$monat[$pmonth-2];
 echo '</a></td><td  align=center>';
 echo '<FONT color=navy><b>'.$monat[$pmonth-1].' '.$pyear.'</b></font>';
 echo '</td><td align=right>';
-echo '<a href="nursing-station-archiv.php'.URL_APPEND.'&pmonth=';
+echo '<a href="nursing-ward-archiv.php'.URL_APPEND.'&pmonth=';
 if($pmonth>11) echo '1&pyear='.($pyear+1).'" title="'.$LDNextMonth.'">'.$monat[0];
 else echo ($pmonth+1).'&pyear='.$pyear.'" title="'.$LDNextMonth.'">'.$monat[$pmonth];
 echo '&gt;</a></td></tr><tr><td bgcolor=black colspan=3>';

@@ -43,10 +43,10 @@ $rows=0;
 				}
 */							
 			}else{
-				header('location:nursing-station-info.php'.URL_REDIRECT_APPEND);
+				header('location:nursing-ward-info.php'.URL_REDIRECT_APPEND);
 				exit;
 			}
-			$breakfile='nursing-station-info.php'.URL_APPEND;
+			$breakfile='nursing-ward-info.php'.URL_APPEND;
 			break;
 		}
 		
@@ -54,7 +54,7 @@ $rows=0;
 		{
 			$_POST['nr']=$_POST['ward_nr'];
 			if($ward_obj->updateWard($ward_nr,$_POST)){
-				header("location:nursing-station-info.php".URL_REDIRECT_APPEND."&edit=0&mode=show&ward_id=$station&ward_nr=$ward_nr");
+				header("location:nursing-ward-info.php".URL_REDIRECT_APPEND."&edit=0&mode=show&ward_id=$station&ward_nr=$ward_nr");
 				exit;
 			}else{
 				echo $ward_obj->getLastQuery()."<br>$LDDbNoSave";
@@ -66,7 +66,7 @@ $rows=0;
 		case 'close_ward':
 		{
 			if($ward_obj->hasPatient($ward_nr)){
-				header("location:nursing-station-noclose.php".URL_REDIRECT_APPEND."&ward_id=$ward_id&ward_nr=$ward_nr");
+				header("location:nursing-ward-noclose.php".URL_REDIRECT_APPEND."&ward_id=$ward_id&ward_nr=$ward_nr");
 				exit;
 			}else{
 				switch($close_type)
@@ -89,7 +89,7 @@ $rows=0;
 					}
 				}
 				
-				header("location:nursing-station-info.php".URL_REDIRECT_APPEND);
+				header("location:nursing-ward-info.php".URL_REDIRECT_APPEND);
 				exit;
 			}
 		}
@@ -114,7 +114,7 @@ $rows=0;
 			 	//echo $ward_obj->getLastQuery()."<br>$LDDbNoRead";
 			}
 							
-			$breakfile='nursing-station-manage.php?sid='.$sid.'&lang='.$lang;
+			$breakfile='nursing-ward-manage.php?sid='.$sid.'&lang='.$lang;
 		}
 	} # End of switch($mode)
 
@@ -324,7 +324,7 @@ if($rows==1) {
 		if($toggle)	$trc='wardlistrow2';
 			else $trc='wardlistrow1';
 		$toggle=!$toggle;
-		$buf='nursing-station-info.php'.URL_APPEND.'&mode=show&station='.$result['name'].'&ward_nr='.$result['nr'];
+		$buf='nursing-ward-info.php'.URL_APPEND.'&mode=show&station='.$result['name'].'&ward_nr='.$result['nr'];
 		echo '
 	<tr class="'.$trc.'">
     <td>&nbsp;<a href="'.$buf.'"><img '.createComIcon($root_path,'bul_arrowgrnsm.gif','0','absmiddle').'>&nbsp;&nbsp;<font face="Verdana, Arial" size=2>'.strtoupper($result[station]).'</a></td> 
@@ -335,7 +335,7 @@ if($rows==1) {
 	if($result['is_temp_closed']){
 		echo '<font  color="red">'.$LDTemporaryClosed.'</font>';
 	}elseif(empty($wbuf[$result['nr']])){
-		echo $LDRoomNotCreated.'<a href="nursing-station-new-createbeds.php'.URL_APPEND.'&ward_nr='.$result['nr'].'"> '.$LDCreate.'>></a>';
+		echo $LDRoomNotCreated.'<a href="nursing-ward-new-createbeds.php'.URL_APPEND.'&ward_nr='.$result['nr'].'"> '.$LDCreate.'>></a>';
 	}else{
 		echo $wbuf[$result['nr']].' '.$LDRoom;
 	}
@@ -356,7 +356,7 @@ if($rows==1) {
 
 	# If no wards available, prompt no ward
 	
-	$sTemp = '<p><font size=2 face="verdana,arial,helvetica">'.$LDNoWardsYet.'<br><img '.createComIcon($root_path,'redpfeil.gif','0','absmiddle').'> <a href="nursing-station-new.php'.URL_APPEND.'">'.$LDClk2CreateWard.'</a></font>';
+	$sTemp = '<p><font size=2 face="verdana,arial,helvetica">'.$LDNoWardsYet.'<br><img '.createComIcon($root_path,'redpfeil.gif','0','absmiddle').'> <a href="nursing-ward-new.php'.URL_APPEND.'">'.$LDClk2CreateWard.'</a></font>';
 
 }
 
