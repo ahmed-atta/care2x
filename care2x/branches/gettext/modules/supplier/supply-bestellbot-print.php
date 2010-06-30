@@ -123,7 +123,7 @@ if($ergebnis=$db->Execute($sql)) {
 <script language=javascript>
 function ack_print() {
 	this.print()
-	this.location.replace("supply-bestellbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck&mode=ack_print&cat=$cat&supplier_nr=$supplier_nr&idcare_supply=$idcare_supply&status=$status"; ?>");
+	this.location.replace("supply-orderbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck&mode=ack_print&cat=$cat&supplier_nr=$supplier_nr&idcare_supply=$idcare_supply&status=$status"; ?>");
 }
 function move2arch() {
 	if(document.opt3.clerk.value=="")
@@ -132,7 +132,7 @@ function move2arch() {
 		return;
 	}
 	c=document.opt3.clerk.value;
-	this.location.replace("supply-bestellbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck&mode=archive&cat=$cat&supplier_nr=$supplier_nr&idcare_supply=$idcare_supply&status=$status&clerk="; ?>"+c);
+	this.location.replace("supply-orderbot-print.php<?php echo URL_REDIRECT_APPEND."&userck=$userck&mode=archive&cat=$cat&supplier_nr=$supplier_nr&idcare_supply=$idcare_supply&status=$status&clerk="; ?>"+c);
 }
 function parentref(n) {
     if(n==1) window.opener.location.replace("supply-orderlist-final.php<?php echo URL_REDIRECT_APPEND."&userck=$userck"?>&cat=<?php echo $cat ?>&nofocus="+n+"&showlist=1");
