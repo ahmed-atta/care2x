@@ -103,14 +103,14 @@ $aSubMenuText=array($LDPharmaOrderTxt,
 
 # Prepare the submenu item links indexed by their template tags
 
-$aSubMenuItem=array('LDPharmaOrder' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=order\">$LDPharmaOrder</a>",
+$aSubMenuItem=array('LDPharmaOrder' => "<a href=\"medstock-pass.php".URL_APPEND."&mode=order\">$LDPharmaOrder</a>",
 					'LDHow2Order' => "<a href=\"javascript:gethelp('products.php','how2','','meddepot')\">$LDHow2Order</a>",
-					'LDOrderCat' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=catalog\">$LDOrderCat</a>",
-					'LDOrderArchive' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=archive\">$LDOrderArchive</a>",
-					'LDPharmaDb' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=dbank\">$LDPharmaDb</a>",
+					'LDOrderCat' => "<a href=\"medstock-pass.php".URL_APPEND."&mode=catalog\">$LDOrderCat</a>",
+					'LDOrderArchive' => "<a href=\"medstock-pass.php".URL_APPEND."&mode=archive\">$LDOrderArchive</a>",
+					'LDPharmaDb' => "<a href=\"medstock-pass.php".URL_APPEND."&mode=dbank\">$LDPharmaDb</a>",
 					'LDOrderBotActivate' => "<a href=\"medstock-orderbot-pass.php".URL_APPEND."\" >$LDMediBotActivate</a>",
-					'LDSupplier' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=supplier\">$LDSupplier</a>",
-					'LDSupply' => "<a href=\"medlager-pass.php".URL_APPEND."&mode=supply\">$LDSupply</a>"
+					'LDSupplier' => "<a href=\"medstock-pass.php".URL_APPEND."&mode=supplier\">$LDSupplier</a>",
+					'LDSupply' => "<a href=\"medstock-pass.php".URL_APPEND."&mode=supply\">$LDSupply</a>"
 										);
 
 # Create the submenu rows
