@@ -82,7 +82,7 @@ if(($mode=='force_add')&&$containername&&$pcs){
 
 function popinfo(b)
 {
-	urlholder="products-bestellkatalog-popinfo.php<?php echo URL_APPEND; ?>&keyword="+b+"&mode=search&cat=pharma";
+	urlholder="products-ordercatalog-popinfo.php<?php echo URL_APPEND; ?>&keyword="+b+"&mode=search&cat=pharma";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
 

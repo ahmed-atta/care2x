@@ -44,7 +44,7 @@ $smarty->assign ( 'sWindowTitle', '' );
 
 $smarty->assign ( 'sHeaderSource', "src=\"products-order-header.php?sid=$sid&lang=$lang&cat=$cat&userck=$userck\"" );
 $smarty->assign ( 'sBasketSource', "src=\"products-bestellkorb.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&order_nr=$order_nr&itwassent=$itwassent&cat=$cat&userck=$userck\"" );
-$smarty->assign ( 'sCatalogSource', "src=\"products-bestellkatalog.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&order_nr=$order_nr&cat=$cat&userck=$userck\"" );
+$smarty->assign ( 'sCatalogSource', "src=\"products-ordercatalog.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&order_nr=$order_nr&cat=$cat&userck=$userck\"" );
 
 $smarty->assign ( 'sBaseFramesetTemplate','products/ordering_frameset.tpl' );
 

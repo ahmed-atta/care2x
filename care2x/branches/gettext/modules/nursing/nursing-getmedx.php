@@ -405,7 +405,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 	  	
 	}
 	function popinfo(b) {
-		urlholder="../products/products-bestellkatalog-popinfo.php?sid=7071bab054d376600a2ecf70ac6128a5&lang=sq&keyword="+b+"&mode=search&cat=pharma";
+		urlholder="../products/products-ordercatalog-popinfo.php?sid=7071bab054d376600a2ecf70ac6128a5&lang=sq&keyword="+b+"&mode=search&cat=pharma";
 		ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	

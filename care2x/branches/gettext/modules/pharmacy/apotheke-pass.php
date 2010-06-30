@@ -42,7 +42,7 @@ switch($mode) {
 						$allowedarea[] = '_a_1_pharmadbadmin';	
 						$src="catalogpass";
 						$userck="ck_prod_order_user";
-						$fileforward=$root_path."modules/products/products-bestellkatalog-edit.php".$append.$userck."&target=catalog&from=".$src;
+						$fileforward=$root_path."modules/products/products-ordercatalog-edit.php".$append.$userck."&target=catalog&from=".$src;
 						break;
 	case "bot":  $title=$LDPharmaOrderBot;
 						$allowedarea[] = '_a_1_pharmadbadmin';	

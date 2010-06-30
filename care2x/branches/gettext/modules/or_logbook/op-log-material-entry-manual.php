@@ -78,7 +78,7 @@ if(($mode=="force_add") && !empty($artikelname) && !empty($pcs)){
 
 function popinfo(b)
 {
-	urlholder="products-bestellkatalog-popinfo.php?sid=<?php echo $sid; ?>&keyword="+b+"&mode=search&cat=pharma";
+	urlholder="products-ordercatalog-popinfo.php?sid=<?php echo $sid; ?>&keyword="+b+"&mode=search&cat=pharma";
 	ordercatwin=window.open(urlholder,"ordercat","width=850,height=550,menubar=no,resizable=yes,scrollbars=yes");
 	}
 
