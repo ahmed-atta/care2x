@@ -15,7 +15,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
-$breakfile='technik.php'.URL_APPEND;
+$breakfile='tech.php'.URL_APPEND;
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
 $_SESSION['sess_file_return']=basename(__FILE__);
 
@@ -305,7 +305,7 @@ if($mode=='search') echo '
 
 ?>
 <p><br>
- <a> <?php echo'<a href="technik.php'.URL_APPEND.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'>';?></a>
+ <a> <?php echo'<a href="tech.php'.URL_APPEND.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'>';?></a>
 </ul>
 <?php
 

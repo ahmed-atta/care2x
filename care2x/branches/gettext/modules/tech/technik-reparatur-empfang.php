@@ -13,9 +13,9 @@ require($root_path.'/include/helpers/inc_environment_global.php');
 define('LANG_FILE','tech.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-$breakfile='technik.php'.URL_APPEND;
+$breakfile='tech.php'.URL_APPEND;
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
-$_SESSION['sess_file_return']='technik.php';
+$_SESSION['sess_file_return']='tech.php';
 
 if($repair=='ask'){
  	$target=$LDRequest;
