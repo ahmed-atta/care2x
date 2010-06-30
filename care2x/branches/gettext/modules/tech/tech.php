@@ -116,7 +116,7 @@ $aSubMenuText=array($LDReRepairTxt,
 
 # Prepare the submenu item links indexed by their template tags
 
-$aSubMenuItem=array('LDPharmaOrder' => "<a href=\"technik-reparatur-anfordern.php".URL_APPEND."\">$LDReRepair</a>",
+$aSubMenuItem=array('LDPharmaOrder' => "<a href=\"tech-repair-request.php".URL_APPEND."\">$LDReRepair</a>",
 										'LDHow2Order' => "<a href=\"tech-bot-pass.php".URL_APPEND."&mode=repabot\">$LDRepabotActivate</a>",
 										'LDOrderCat' => "<a href=\"technik-reparatur-melden.php".URL_APPEND."\">$LDRepairReport</a>",
 										'LDOrderArchive' => "<a href=\"tech-report-archive.php".URL_APPEND."\">$LDReportsArchive</a>",

@@ -143,7 +143,7 @@ $smarty->append('JavaScript',$sTemp);
 
 $smarty->assign('sButton','<img '.createComIcon($root_path,'varrow.gif','0').'>');
 
-$smarty->assign('sFormTag','<form  action="technik-reparatur-anfordern.php" method="post" onSubmit="return checkform(this)">');
+$smarty->assign('sFormTag','<form  action="tech-repair-request.php" method="post" onSubmit="return checkform(this)">');
 
 $smarty->assign('LDReRepairTxt',$LDReRepairTxt);
 

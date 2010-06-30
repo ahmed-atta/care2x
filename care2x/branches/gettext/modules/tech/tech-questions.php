@@ -224,7 +224,7 @@ $smarty->assign('LDQuestions',$LDQuestions);
 
 $smarty->assign('LDEnterQuestion',$LDEnterQuestion);
 
-$smarty->assign('LDPlsNoRequest','<a href="technik-reparatur-anfordern.php'.URL_APPEND.'">'.$LDPlsNoRequest.'</a>');
+$smarty->assign('LDPlsNoRequest','<a href="tech-repair-request.php'.URL_APPEND.'">'.$LDPlsNoRequest.'</a>');
 
 $smarty->assign('LDName',$LDName);
 $smarty->assign('LDDept',$LDDept);
@@ -244,7 +244,7 @@ $smarty->assign('pbSubmit','<input type="image"  '.createLDImgSrc($root_path,'ab
 $smarty->assign('pbCancel','<a href="'.$breakfile.'" ><img '.createLDImgSrc($root_path,'cancel.gif','0','middle').' title="'.$LDCancel.'" align="middle"></a>');
 
 $smarty->assign('sReportLink','<a href="technik-reparatur-melden.php'.URL_APPEND.'">'.$LDRepairReportTxt.'</a>');
-$smarty->assign('sRepairLink','<a href="technik-reparatur-anfordern.php'.URL_APPEND.'">'.$LDReRepairTxt.'</a>');
+$smarty->assign('sRepairLink','<a href="tech-repair-request.php'.URL_APPEND.'">'.$LDReRepairTxt.'</a>');
 
 $smarty->assign('sMainBlockIncludeFile','tech/send_inquiry.tpl');
 
