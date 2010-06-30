@@ -131,7 +131,7 @@ ob_start();
 <p>
  <ul>
  
- <form action="nursing-station-bettbelegen.php" method="post" name="psearch" onSubmit="return pruf(this)">
+ <form action="nursing-station-bed-occupancy.php" method="post" name="psearch" onSubmit="return pruf(this)">
  <div class="prompt"><?php echo $LDSearchPatient; ?></div>
  <table border=0 cellspacing=0 cellpadding=1>
    <tr>
