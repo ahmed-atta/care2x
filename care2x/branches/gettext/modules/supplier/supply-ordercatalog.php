@@ -74,7 +74,7 @@ function add2basket(b,i){
 	if(nv=='') {alert('Nuk eshte dhene vlera ');exit();}; 
 	ns=eval("document.curcatform.s"+i+".value");
 	if(ns=='') {alert('Nuk eshte dhene vlera per daten e skadences');exit();}; 
-	window.parent.BESTELLKORB.location.href="supply-bestellkorb.php<?php echo URL_REDIRECT_APPEND."&userck=$userck" ?>&supplier_nr=<?php echo $supplier_nr; ?>&idcare_supply=<?php echo $idcare_supply; ?>&mode=add&cat=<?php echo $cat; ?>&maxcount=1&order1=1&bestellnum1="+b+"&p1="+n+"&c1="+nc+"&v1="+nv+"&s1="+ns;
+	window.parent.BESTELLKORB.location.href="supply-baket.php<?php echo URL_REDIRECT_APPEND."&userck=$userck" ?>&supplier_nr=<?php echo $supplier_nr; ?>&idcare_supply=<?php echo $idcare_supply; ?>&mode=add&cat=<?php echo $cat; ?>&maxcount=1&order1=1&bestellnum1="+b+"&p1="+n+"&c1="+nc+"&v1="+nv+"&s1="+ns;
 }
 
 function add_update(b,i){
@@ -85,7 +85,7 @@ function add_update(b,i){
 	nc=eval("document.vogel.c"+i+".value");	 
 	nv=eval("document.vogel.v"+i+".value");
 	ns=eval("document.vogel.s"+i+".value");
-	window.parent.BESTELLKORB.location.href="supply-bestellkorb.php<?php echo URL_REDIRECT_APPEND."&userck=$userck" ?>&supplier_nr=<?php echo $supplier_nr; ?>&idcare_supply=<?php echo $idcare_supply; ?>&mode=add&cat=<?php echo $cat; ?>&maxcount=1&order1=1&bestellnum1="+b+"&p1=1"+"&c1="+nc+"&v1="+nv+"&s1="+ns;
+	window.parent.BESTELLKORB.location.href="supply-baket.php<?php echo URL_REDIRECT_APPEND."&userck=$userck" ?>&supplier_nr=<?php echo $supplier_nr; ?>&idcare_supply=<?php echo $idcare_supply; ?>&mode=add&cat=<?php echo $cat; ?>&maxcount=1&order1=1&bestellnum1="+b+"&p1=1"+"&c1="+nc+"&v1="+nv+"&s1="+ns;
 }
 
 function checkform(d){
@@ -277,7 +277,7 @@ if(isset($mode)&&($mode=="multiadd"))
 {
  	echo '
 			<script language="javascript">
-			window.parent.BESTELLKORB.location.href="supply-bestellkorb.php'.URL_REDIRECT_APPEND.'&supplier_nr='.$supplier_nr.'&idcare_supply='.$idcare_supply.'&mode=add&cat='.$cat.'&maxcount='.$maxcount.'&userck='.$userck;
+			window.parent.BESTELLKORB.location.href="supply-baket.php'.URL_REDIRECT_APPEND.'&supplier_nr='.$supplier_nr.'&idcare_supply='.$idcare_supply.'&mode=add&cat='.$cat.'&maxcount='.$maxcount.'&userck='.$userck;
 	for($i=1;$i<=$maxcount;$i++)
 	{
 		$o="order".$i;

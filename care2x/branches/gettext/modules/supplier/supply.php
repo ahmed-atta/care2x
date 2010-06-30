@@ -65,7 +65,7 @@ if(!isset($idcare_supply) || !$idcare_supply) {
 # Assign frameset source file
 
 $smarty->assign('sHeaderSource',"src=\"supply-hf.php?sid=$sid&lang=$lang&cat=$cat&userck=$userck\"");
-$smarty->assign('sBasketSource',"src=\"supply-bestellkorb.php?sid=$sid&lang=$lang&supplier_nr=$supplier_nr&idcare_supply=$idcare_supply&itwassent=$itwassent&cat=$cat&userck=$userck\"");
+$smarty->assign('sBasketSource',"src=\"supply-baket.php?sid=$sid&lang=$lang&supplier_nr=$supplier_nr&idcare_supply=$idcare_supply&itwassent=$itwassent&cat=$cat&userck=$userck\"");
 $smarty->assign('sCatalogSource',"src=\"supply-ordercatalog.php?sid=$sid&lang=$lang&supplier_nr=$supplier_nr&idcare_supply=$idcare_supply&cat=$cat&userck=$userck\"");
 
 $smarty->assign('sBaseFramesetTemplate','products/ordering_frameset.tpl');

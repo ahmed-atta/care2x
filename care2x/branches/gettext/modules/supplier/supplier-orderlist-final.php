@@ -232,7 +232,7 @@ for($n=0;$n<sizeof($artikeln);$n++)	{
 			<input type="submit" value="'.$LDSendBillPrint.'">   
    			</form></font><p>
 			<font face=Verdana,Arial size=2>
-			<a href="supply-bestellkorb.php'.URL_APPEND.'&cat='.$cat.'&supplier_nr='.$supplier_nr.'&idcare_supply='.$idcare_supply.'&userck='.$userck.'" ><< '.$LDBack2Edit.'</a></font>
+			<a href="supply-baket.php'.URL_APPEND.'&cat='.$cat.'&supplier_nr='.$supplier_nr.'&idcare_supply='.$idcare_supply.'&userck='.$userck.'" ><< '.$LDBack2Edit.'</a></font>
 			';
 		}else{
 			echo '
