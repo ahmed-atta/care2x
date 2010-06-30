@@ -21,8 +21,8 @@ $allowedarea=&$allow_area['pharma'];
 if($user_origin=='pharmabot') $userck='ck_pharmabot_user';
     else $userck='ck_apo_user';
 	
-$breakfile='apotheke.php?sid='.$sid.'&lang='.$lang;
-$fileforward="apotheke.php".URL_REDIRECT_APPEND."&stb=1&userck=$userck";
+$breakfile='pharmacy.php?sid='.$sid.'&lang='.$lang;
+$fileforward="pharmacy.php".URL_REDIRECT_APPEND."&stb=1&userck=$userck";
 $title=$LDPharmaOrderBot; 
 $thisfile='apotheke-bestellbot-pass.php';
 $lognote="$title ok";

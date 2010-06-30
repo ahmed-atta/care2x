@@ -14,7 +14,7 @@ define('LANG_FILE','products.php');
 $local_user='ck_prod_db_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-$breakfile='apotheke.php'.URL_APPEND;
+$breakfile='pharmacy.php'.URL_APPEND;
 
 # Start Smarty templating here
  /**

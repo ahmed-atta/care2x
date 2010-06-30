@@ -15,7 +15,7 @@ $local_user='ck_prod_order_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 switch($cat)
 {
-	case "pharma": $breakfile=$root_path."modules/pharmacy/apotheke.php".URL_APPEND;
+	case "pharma": $breakfile=$root_path."modules/pharmacy/pharmacy.php".URL_APPEND;
 	                       break;
     case "medstock": $breakfile=$root_path."modules/medstock/medstock.php ".URL_APPEND;
 	                       break;

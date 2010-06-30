@@ -38,7 +38,7 @@ if(isset($cat))
     switch($cat)
     {
 	case 'pharma':	$title=$LDPharmacy;
-							$breakfile=$root_path."modules/pharmacy/apotheke.php".URL_APPEND;
+							$breakfile=$root_path."modules/pharmacy/pharmacy.php".URL_APPEND;
 							break;
 	case 'medstock':$title=$LDMedDepot;
 							$breakfile=$root_path."modules/medstock/medstock.php ".URL_APPEND;

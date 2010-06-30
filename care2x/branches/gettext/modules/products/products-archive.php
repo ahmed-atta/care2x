@@ -25,7 +25,7 @@ switch($cat) {
 	case 'pharma':	
 				$title="$LDPharmacy $LDOrderArchive";
 				$dbtable='care_pharma_orderlist';
-				$breakfile=$root_path.'modules/pharmacy/apotheke.php'.URL_APPEND;
+				$breakfile=$root_path.'modules/pharmacy/pharmacy.php'.URL_APPEND;
 				break;
 	case 'medstock':
 				$title="$LDMedDepot $LDOrderArchive";

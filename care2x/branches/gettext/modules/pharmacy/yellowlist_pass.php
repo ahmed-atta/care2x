@@ -21,7 +21,7 @@ $userck='_';
 $fileforward='http://www.gelbe-liste.de/index.htm?';
 
 $thisfile=basename(__FILE__);
-$breakfile='apotheke.php'.URL_APPEND;
+$breakfile='pharmacy.php'.URL_APPEND;
 $lognote="$LDYellowList $title ok";
 
 // reset all 2nd level lock cookies

@@ -54,7 +54,7 @@ switch($mode) {
 }
 
 $thisfile=basename(__FILE__);
-$breakfile='apotheke.php'.URL_APPEND;
+$breakfile='pharmacy.php'.URL_APPEND;
 $lognote="$LDPharmacy $title ok";
 
 // reset all 2nd level lock cookies
