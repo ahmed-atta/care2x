@@ -19,7 +19,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if($edit&&!$_COOKIE[$local_user.$sid]) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
  
 $thisfile=basename(__FILE__);
-$breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
+$breakfile="nursing-ward-patientdata.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
 
 /* Create encounter object */
 require_once($root_path.'include/core/class_encounter.php');
@@ -411,7 +411,7 @@ if($edit) {
 		</td>
 	<td align=center><a <?
 			
-			echo 'href=\'nursing-station-patientdaten-custom-ddc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'';
+			echo 'href=\'nursing-ward-patientdata-custom-ddc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'';
 			
 			?>> <span style="background-color:#FFFF00"> <?php echo $LDCLEAR; ?> </span> </a></td>
 		</tr>

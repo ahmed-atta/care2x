@@ -101,7 +101,7 @@ function doGraph($paramValue,$pName,$valueBuff,$cols=1){
 }
 
 if($nostat) $ret=$root_path."modules/laboratory/labor_data_patient_search.php?sid=$sid&lang=$lang&versand=1&keyword=$pn";
-	else $ret=$root_path."modules/nursing/nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn";
+	else $ret=$root_path."modules/nursing/nursing-ward-patientdata.php?sid=$sid&lang=$lang&station=$station&pn=$pn";
 	
 # Load the date formatter
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
@@ -133,7 +133,7 @@ if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
 		$records = array_reverse($records,true);
 	}else{
 		if($nostat) header("location:".$root_path."modules/laboratory/labor-nodatafound.php?sid=$sid&lang=$lang&patnum=$pn&ln=$result[name]&fn=$result[vorname]&nodoc=labor");
-		 	else header("location:".$root_path."modules/nursing/nursing-station-patientdaten-nolabreport.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&nodoc=labor&user_origin=$user_origin");
+		 	else header("location:".$root_path."modules/nursing/nursing-ward-patientdata-nolabreport.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&nodoc=labor&user_origin=$user_origin");
 			exit;
 	}
 }else{

@@ -14,7 +14,7 @@ define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-$breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";
+$breakfile=$root_path."modules/nursing/nursing-ward-patientdata.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";
 ?>
 <?php html_rtl($lang); ?>
 <head>

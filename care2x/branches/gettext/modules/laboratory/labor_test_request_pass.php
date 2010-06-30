@@ -29,7 +29,7 @@ if(!isset($target)||!$target) $target='chemlabor';
 if(!isset($user_origin)||empty($user_origin)) $user_origin='lab';
 
 /* Set the default file forward */
-$fileforward=$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_REDIRECT_APPEND."&noresize=1&user_origin=".$user_origin."&target=".$target;
+$fileforward=$root_path."modules/nursing/nursing-ward-patientdata-doconsil-".$target.".php".URL_REDIRECT_APPEND."&noresize=1&user_origin=".$user_origin."&target=".$target;
 
 $thisfile='labor_test_request_pass.php';
 

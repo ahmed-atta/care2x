@@ -14,7 +14,7 @@ define('LANG_FILE','nursing.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-$breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_REDIRECT_APPEND."&edit=$edit&station=$station&pn=$pn";
+$breakfile=$root_path."modules/nursing/nursing-ward-patientdata.php".URL_REDIRECT_APPEND."&edit=$edit&station=$station&pn=$pn";
 
 require($root_path.'global_conf/inc_remoteservers_conf.php');
 

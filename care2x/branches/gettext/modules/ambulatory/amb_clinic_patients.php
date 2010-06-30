@@ -151,7 +151,7 @@ if(($mode=='')||($mode=='fresh')){
 function getinfo(pn){
 <?php /* if($edit)*/
 	{ echo '
-	urlholder="'.$root_path.'modules/nursing/nursing-station-patientdaten.php'.URL_REDIRECT_APPEND;
+	urlholder="'.$root_path.'modules/nursing/nursing-ward-patientdata.php'.URL_REDIRECT_APPEND;
 	echo '&pn=" + pn + "';
 	echo "&pday=$pday&pmonth=$pmonth&pyear=$pyear&edit=$edit&station=$station"; 
 	echo '";';

@@ -184,7 +184,7 @@ function getinfo(pn){
 
 <?php /* if($edit)*/
 	{ echo '
-	urlholder="nursing-station-patientdaten.php'.URL_REDIRECT_APPEND;
+	urlholder="nursing-ward-patientdata.php'.URL_REDIRECT_APPEND;
 	echo '&pn=" + pn + "';
 	echo "&pday=$pday&pmonth=$pmonth&pyear=$pyear&edit=$edit&station=".$ward_info['name']."&dept_nr=".$dept_nr; 
 	echo '";';

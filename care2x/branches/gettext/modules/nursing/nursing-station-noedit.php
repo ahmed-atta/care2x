@@ -87,7 +87,7 @@ header ("Pragma: no-cache");                          // HTTP/1.0
   var urlholder;
 
 function getinfo(pid,pdata){
-	urlholder="nursing-station-patientdaten.php?sid=<?php echo $sid; ?>&patient=" + pdata + "&station=<?php echo $station; ?>";
+	urlholder="nursing-ward-patientdata.php?sid=<?php echo $sid; ?>&patient=" + pdata + "&station=<?php echo $station; ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	

@@ -17,7 +17,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if($edit&&!$_COOKIE[$local_user.$sid]) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
  
 $thisfile=basename(__FILE__);
-$breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
+$breakfile="nursing-ward-patientdata.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
 
 /* Create encounter object */
 require_once($root_path.'include/core/class_encounter.php');

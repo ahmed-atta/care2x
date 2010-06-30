@@ -195,7 +195,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 	}
 	
 	function parentrefresh(){
-		window.opener.location.href="nursing-station-patientdaten-kurve.php?sid=<?php echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&tag=$dystart&monat=$mo&dept_nr=$dept_nr&jahr=$yr&tagname=$dyname" ?>&nofocus=1";
+		window.opener.location.href="nursing-ward-patientdata-kurve.php?sid=<?php echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&tag=$dystart&monat=$mo&dept_nr=$dept_nr&jahr=$yr&tagname=$dyname" ?>&nofocus=1";
 	}
 		
 	function repeatPrescription(prescriptionId){
@@ -506,7 +506,7 @@ li.selected {
 	</font></b>
 	</td>
     <td align="right" valign="top"><a href="javascript:gethelp('nursing_feverchart_xp.php','<?php echo $winid ?>','','','<?php echo $title ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> </a>
-    <a href="<?php echo "nursing-station-patientdaten.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit" ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> </a></nobr>
+    <a href="<?php echo "nursing-ward-patientdata.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit" ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> </a></nobr>
 </td>
   </tr>
 </table>

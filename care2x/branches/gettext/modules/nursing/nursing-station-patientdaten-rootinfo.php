@@ -5,8 +5,8 @@ if (!$sid||($sid!=$$ck_sid_buffer)||!$ck_pflege_user) {header("Location:../langu
 require("../language/".$lang."/lang_".$lang."_nursing.php");
 require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 
-$thisfile="nursing-station-patientdaten-rootinfo.php";
-$breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn";
+$thisfile="nursing-ward-patientdata-rootinfo.php";
+$breakfile="nursing-ward-patientdata.php?sid=$sid&lang=$lang&station=$station&pn=$pn";
 
 /* Establish db connection */
 if(!isset($db)||!$db) include($root_path.'include/helpers/inc_db_makelink.php');

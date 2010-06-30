@@ -35,7 +35,7 @@ $sTemp= '<ul><p><br>
 	<center><FONT class="warnprompt"><p><br>
 	<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'> &nbsp;
 	<b>'.$LDNoLabReport.'</b><p>
-		<form method="post" action="'.$root_path.'modules/nursing/nursing-station-patientdaten.php" name="retform">
+		<form method="post" action="'.$root_path.'modules/nursing/nursing-ward-patientdata.php" name="retform">
 	<input type="hidden" name="sid" value="'.$sid.'">
  	<input type="hidden" name="lang" value="'.$lang.'">
 <input type="hidden" name="pn" value="'.$pn.'">

@@ -17,7 +17,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 
 $thisfile=basename(__FILE__);
-$breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";
+$breakfile=$root_path."modules/nursing/nursing-ward-patientdata.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";
 
 $bgc1='#fefefe'; 
 

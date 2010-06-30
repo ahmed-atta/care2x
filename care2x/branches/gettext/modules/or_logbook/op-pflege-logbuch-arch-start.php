@@ -254,7 +254,7 @@ function openeditwin(filename,y,m,d)
 }
 
 function getinfo(pid,pdata){
-	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-station-patientdaten.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&station=<?php echo "$dept_nr&dept_nr=$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=".$_COOKIE['ck_op_pflegelogbuch_user'.$sid]; ?>";
+	urlholder="<?php echo $root_path; ?>modules/nursing/nursing-ward-patientdata.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pid+"&patient=" + pdata + "&station=<?php echo "$dept_nr&dept_nr=$dept_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&op_shortcut=".$_COOKIE['ck_op_pflegelogbuch_user'.$sid]; ?>";
 	patientwin=window.open(urlholder,pid,"width=700,height=450,menubar=no,resizable=yes,scrollbars=yes");
 	}
 	

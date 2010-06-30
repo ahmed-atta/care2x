@@ -24,7 +24,7 @@ $dateshifter=new dateTimeManager();
 ///$db->debug=true;
 
 $thisfile=basename(__FILE__);
-$breakfile="nursing-station-patientdaten.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";
+$breakfile="nursing-ward-patientdata.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";
 
 if(!$kmonat) $kmonat=date('n');
 
@@ -314,7 +314,7 @@ if($cfg['bname']=='msie'){
 		if(winID=="dayfwd") dayID="<?php echo $LDEndDate ?>";
 		if(confirm("<?php echo $LDConfirmSetDate ?>"))
 			{
-			urlholder="nursing-station-patientdaten-setstartdate.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&winid="+winID+"&pn=" + patientID + "&jahr=" + jahrID + "&kmonat=" + monatID + "&tag="+ tagID + "&station="+station+"&tagname="+ tagN ;
+			urlholder="nursing-ward-patientdata-setstartdate.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&winid="+winID+"&pn=" + patientID + "&jahr=" + jahrID + "&kmonat=" + monatID + "&tag="+ tagID + "&station="+station+"&tagname="+ tagN ;
 			setdatewin=window.open(urlholder,"setdatewin","width=400,height=250,menubar=no,resizable=yes,scrollbars=yes");
    			infowinflag=1;
 			}
@@ -325,7 +325,7 @@ if($cfg['bname']=='msie'){
 ?>
 		{
 		// alert("left click");	
-		urlholder="nursing-station-patientdaten-kurve.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&"+winID+"=1&pn=" + patientID + "&jahr=" + jahrID + "&kmonat=" + monatID + "&tag="+ tagID + "&station="+station+"&tagname="+ tagN ;
+		urlholder="nursing-ward-patientdata-kurve.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&"+winID+"=1&pn=" + patientID + "&jahr=" + jahrID + "&kmonat=" + monatID + "&tag="+ tagID + "&station="+station+"&tagname="+ tagN ;
  		window.location.replace(urlholder);
    		}
 }

@@ -88,7 +88,7 @@ if($user_origin=='lab'||$user_origin=='lab_mgmt'){
 		else $breakfile=$root_path.'modules/laboratory/labor_data_patient_search.php'.URL_APPEND;
 }else{
   	$local_user='ck_pflege_user';
-  	$breakfile=$root_path.'modules/nursing/nursing-station-patientdaten.php'.URL_APPEND.'&pn='.$pn.'&edit='.$edit;
+  	$breakfile=$root_path.'modules/nursing/nursing-ward-patientdata.php'.URL_APPEND.'&pn='.$pn.'&edit='.$edit;
 	$encounter_nr=$pn;
 }
 if(!$_COOKIE[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
@@ -107,7 +107,7 @@ $lab_obj=new Lab($encounter_nr);
 $cache='';
 
 if($nostat) $ret=$root_path."modules/laboratory/labor_data_patient_search.php?sid=$sid&lang=$lang&versand=1&keyword=$encounter_nr";
-	else $ret=$root_path."modules/nursing/nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$encounter_nr";
+	else $ret=$root_path."modules/nursing/nursing-ward-patientdata.php?sid=$sid&lang=$lang&station=$station&pn=$encounter_nr";
 	
 # Load the date formatter */
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
@@ -140,7 +140,7 @@ if($encounter=&$enc_obj->getBasic4Data($encounter_nr)) {
 		}
 	}else{
 		if($nostat) header("location:".$root_path."modules/laboratory/labor-nodatafound.php".URL_REDIRECT_APPEND."&user_origin=$user_origin&ln=".strtr($patient['name_last'],' ','+')."&fn=".strtr($patient['name_first'],' ','+')."&bd=".formatDate2Local($patient['date_birth'],$date_format)."&encounter_nr=$encounter_nr&nodoc=labor&job_id=$job_id&parameterselect=$parameterselect&allow_update=$allow_update&from=$from");
-		 	else header("location:".$root_path."modules/nursing/nursing-station-patientdaten-nolabreport.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$encounter_nr&nodoc=labor&user_origin=$user_origin");
+		 	else header("location:".$root_path."modules/nursing/nursing-ward-patientdata-nolabreport.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$encounter_nr&nodoc=labor&user_origin=$user_origin");
 			exit;
 	}
 

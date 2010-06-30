@@ -19,7 +19,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if($edit&&!$_COOKIE[$local_user.$sid]) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
  
 $thisfile=basename(__FILE__);
-$breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
+$breakfile="nursing-ward-patientdata.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
 
 /* Create encounter object */
 require_once($root_path.'include/core/class_encounter.php');
@@ -349,7 +349,7 @@ while ($iod=mysql_fetch_assoc($res)) {
 		
 if($edit) { 
 	
-		$row_top.="<td align=center><a href='nursing-station-patientdaten-custom-noc.php".URL_REDIRECT_APPEND."&station=".$station."&pn=".$pn."&edit=".$edit."'>";
+		$row_top.="<td align=center><a href='nursing-ward-patientdata-custom-noc.php".URL_REDIRECT_APPEND."&station=".$station."&pn=".$pn."&edit=".$edit."'>";
 		$row_top.="<span style='background-color:#FFFF00'> ".$LDCLEAR." </span> </a></td>";
 		$time_top.="<td>";
 		$time_top.=$LDDate.":<br><table><tr><td>";
