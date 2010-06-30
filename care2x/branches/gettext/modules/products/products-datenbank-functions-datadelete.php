@@ -45,7 +45,7 @@ if(($mode=='delete')&&($sure)&&($keyword!='')&&($keytype!='')) {
     $sql="DELETE  FROM $dbtable WHERE  $keytype='$keyword'";
 
 	if($ergebnis=$core->Transact($sql)){
-		header ("location:products-datenbank-functions-manage.php".URL_REDIRECT_APPEND."&from=deleteok&cat=$cat&userck=$userck");
+		header ("location:products-database-functions-manage.php".URL_REDIRECT_APPEND."&from=deleteok&cat=$cat&userck=$userck");
 		$deleteok=true;
 	}
 	//echo $sql;
@@ -105,7 +105,7 @@ if(!$sure)
        <td><FONT face="Verdana,Helvetica,Arial" size=3  color="#800000">
 		'.$LDConfirmDelete.'</font><br>
 		<font size=2>'.$LDAlertDelete.'</font><p>
-		<a href="products-datenbank-functions-manage.php'.URL_APPEND.'&keyword='.$keyword.'&userck='.$userck.'&cat='.$cat.'&mode=search"><b><font color="#ff0000"><< '.$LDNoBack.'</font></b></a></td>
+		<a href="products-database-functions-manage.php'.URL_APPEND.'&keyword='.$keyword.'&userck='.$userck.'&cat='.$cat.'&mode=search"><b><font color="#ff0000"><< '.$LDNoBack.'</font></b></a></td>
      </tr>
    </table>	';
 }

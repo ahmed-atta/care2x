@@ -26,7 +26,7 @@ switch($cat) {
 }
 
 
-$thisfile='products-datenbank-functions-eingabe.php';
+$thisfile='products-database-functions-eingabe.php';
 
 # Save data routine
 if($mode=='save') include('includes/inc_products_db_save_mod.php');
@@ -83,7 +83,7 @@ if($error=="order_nr_exists"){
 	$smarty->assign('LDOrderNrExists',$LDOrderNrExists);
 }
 
-if($update&&(!$updateok)&&($mode=='save')) $smarty->assign('sNoSave',$LDDataNoSaved.'<a href="products-datenbank-functions-eingabe.php'.URL_APPEND.'&cat='.$cat.'"><u>'.$LDClk2EnterNew.'</u></a>');
+if($update&&(!$updateok)&&($mode=='save')) $smarty->assign('sNoSave',$LDDataNoSaved.'<a href="products-database-functions-eingabe.php'.URL_APPEND.'&cat='.$cat.'"><u>'.$LDClk2EnterNew.'</u></a>');
 
  $smarty->assign('sFormStart','<form ENCTYPE="multipart/form-data" action="'.$thisfile.'" method="post" name="inputform" onSubmit="return prufform(this)">');
  $smarty->assign('sFormEnd','</form>');

@@ -61,9 +61,9 @@ $aSubMenuText=array(					$LDNewProductTxt,
 
 # Prepare the submenu item links indexed by their template tags
 
-$aSubMenuItem=array(					'LDNewProductTxt' => '<a href="'.$root_path.'modules/products/products-datenbank-functions-eingabe.php'. URL_APPEND."&userck=$userck".'&cat=pharma">'.$LDNewProduct.'</a>',
-										'LDSearchDb' => '<a href="'.$root_path.'modules/products/products-datenbank-functions-such.php'. URL_APPEND."&userck=$userck".'&cat=pharma">'.$LDSearch.'</a>',
-										'LDPharmaDbTxt' => '<a href="'.$root_path.'modules/products/products-datenbank-functions-manage.php'. URL_APPEND."&userck=$userck".'&cat=pharma"><nobr>'.$LDManage.'</nobr></a>'
+$aSubMenuItem=array(					'LDNewProductTxt' => '<a href="'.$root_path.'modules/products/products-database-functions-eingabe.php'. URL_APPEND."&userck=$userck".'&cat=pharma">'.$LDNewProduct.'</a>',
+										'LDSearchDb' => '<a href="'.$root_path.'modules/products/products-database-functions-such.php'. URL_APPEND."&userck=$userck".'&cat=pharma">'.$LDSearch.'</a>',
+										'LDPharmaDbTxt' => '<a href="'.$root_path.'modules/products/products-database-functions-manage.php'. URL_APPEND."&userck=$userck".'&cat=pharma"><nobr>'.$LDManage.'</nobr></a>'
 										);
 
 # Create the submenu rows

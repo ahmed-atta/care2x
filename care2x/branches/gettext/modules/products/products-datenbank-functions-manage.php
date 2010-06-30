@@ -161,7 +161,7 @@ if($mode=='save'){
 		$smarty->assign('sSaveFeedBack',$LDDataSaved);
 	}else{
 		echo $sql.'<p>';
-		$smarty->assign('sNoSave',$LDDataNoSaved.'<br><a href="products-datenbank-functions-eingabe.php'.URL_APPEND.'">
+		$smarty->assign('sNoSave',$LDDataNoSaved.'<br><a href="products-database-functions-eingabe.php'.URL_APPEND.'">
 			<u>'.$LDClk2EnterNew.'</u></a>');
 	}
 }
@@ -218,7 +218,7 @@ if($linecount==1){
 		</form>';
 
 		echo'
-		<form action="products-datenbank-functions-datadelete.php" method="get" name="delform">
+		<form action="products-database-functions-datadelete.php" method="get" name="delform">
   		<input type="hidden" name="sid" value="'.$sid.'">
 		<input type="hidden" name="lang" value="'.$lang.'">
 		<input type="hidden" name="userck" value="'.$userck.'">
@@ -252,7 +252,7 @@ if($linecount==1){
 
 <?php if ($from=="multiple")
 echo '
-<a href="products-datenbank-functions-manage.php'.URL_APPEND.'&cat='.$cat.'"><img '.createLDImgSrc($root_path,'back2.gif','0','absmiddle').' alt="'.$LDBack.'"></a>
+<a href="products-database-functions-manage.php'.URL_APPEND.'&cat='.$cat.'"><img '.createLDImgSrc($root_path,'back2.gif','0','absmiddle').' alt="'.$LDBack.'"></a>
 ';
 ?>
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
