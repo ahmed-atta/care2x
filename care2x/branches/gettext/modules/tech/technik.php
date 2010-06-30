@@ -80,8 +80,8 @@ if($stb)
 echo '
 function startbot(d)
 {
-	if(d=="r") repairbotwin=window.open("tech-repairbot.php'.URL_REDIRECT_APPEND.'","repairbotwin","width=300,height=150,menubar=no,resizable=yes,scrollbars=yes");
-	else if(d=="f") requestbotwin=window.open("tech-requestbot.php'.URL_REDIRECT_APPEND.'","requestbotwin","width=300,height=150,menubar=no,resizable=yes,scrollbars=yes");
+	if(d=="r") repabotwin=window.open("technik-repabot.php'.URL_REDIRECT_APPEND.'","repabotwin","width=300,height=150,menubar=no,resizable=yes,scrollbars=yes");
+	else if(d=="f") fragebotwin=window.open("technik-fragebot.php'.URL_REDIRECT_APPEND.'","fragebotwin","width=300,height=150,menubar=no,resizable=yes,scrollbars=yes");
 }
 ';
 ?>
@@ -107,7 +107,7 @@ $smarty->append('JavaScript',$sTemp);
 # Prepare the submenu item descriptions
 
 $aSubMenuText=array($LDReRepairTxt,
-										$LDRepairbotActivateTxt,
+										$LDRepabotActivateTxt,
 										$LDRepairReportTxt,
 										$LDReportsArchiveTxt,
 										$LDQuestionsTxt,
@@ -116,21 +116,12 @@ $aSubMenuText=array($LDReRepairTxt,
 
 # Prepare the submenu item links indexed by their template tags
 
-<<<<<<< .mine
 $aSubMenuItem=array('LDPharmaOrder' => "<a href=\"technik-reparatur-anfordern.php".URL_APPEND."\">$LDReRepair</a>",
 										'LDHow2Order' => "<a href=\"tech-bot-pass.php".URL_APPEND."&mode=repabot\">$LDRepabotActivate</a>",
 										'LDOrderCat' => "<a href=\"technik-reparatur-melden.php".URL_APPEND."\">$LDRepairReport</a>",
 										'LDOrderArchive' => "<a href=\"technik-report-arch.php".URL_APPEND."\">$LDReportsArchive</a>",
 										'LDPharmaDb' => "<a href=\"technik-questions.php".URL_APPEND."\">$LDQuestions</a>",
 										'LDOrderBotActivate' => "<a href=\"tech-bot-pass.php".URL_APPEND."&mode=fragebot\">$LDQBotActivate</a>",
-=======
-$aSubMenuItem=array('LDPharmaOrder' => "<a href=\"tech-reparatur-anfordern.php".URL_APPEND."\">$LDReRepair</a>",
-										'LDHow2Order' => "<a href=\"tech-bot-pass.php".URL_APPEND."&mode=repairbot\">$LDRepairbotActivate</a>",
-										'LDOrderCat' => "<a href=\"tech-reparatur-melden.php".URL_APPEND."\">$LDRepairReport</a>",
-										'LDOrderArchive' => "<a href=\"tech-report-arch.php".URL_APPEND."\">$LDReportsArchive</a>",
-										'LDPharmaDb' => "<a href=\"tech-questions.php".URL_APPEND."\">$LDQuestions</a>",
-										'LDOrderBotActivate' => "<a href=\"tech-bot-pass.php".URL_APPEND."&mode=requestbot\">$LDQBotActivate</a>",
->>>>>>> .r6503
 										);
 
 # Create the submenu rows
@@ -152,7 +143,7 @@ while(list($x,$v)=each($aSubMenuItem)){
 
 # Assign the submenu to the mainframe center block
 
- $smarty->assign('sMainBlockIncludeFile','tech/submenu_tech.tpl');
+ $smarty->assign('sMainBlockIncludeFile','tech/submenu_technik.tpl');
 
   /**
  * show Template
