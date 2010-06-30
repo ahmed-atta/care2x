@@ -66,7 +66,7 @@ if(isset($job)&&!empty($job)) {
         $db->BeginTrans();
         $ok=$db->Execute($sql);
         if($ok && $db->CommitTrans()) {
-            header("Location: technik-reparatur-empfang.php".URL_REDIRECT_APPEND."&repair=ask&dept=$dept&reporter=$reporter&tdate=$tdate&ttime=$ttime"); exit;
+            header("Location: tech-repair-voucher.php".URL_REDIRECT_APPEND."&repair=ask&dept=$dept&reporter=$reporter&tdate=$tdate&ttime=$ttime"); exit;
         } else {
             $db->RollbackTrans();
             echo "<p>".$sql."$LDDbNoSave<br>"; 

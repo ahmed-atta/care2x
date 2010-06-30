@@ -62,7 +62,7 @@ if(isset($job)&&!empty($job)){
         $db->BeginTrans();
         $ok=$db->Execute($sql);
         if($ok && $db->CommitTrans()) {
-		    header("Location: technik-reparatur-empfang.php".URL_REDIRECT_APPEND."&dept=".$_POST['dept']."&reporter=".$_POST['reporter']."&tdate=".$_POST['tdate']."&ttime=".$_POST['ttime']);
+		    header("Location: tech-repair-voucher.php".URL_REDIRECT_APPEND."&dept=".$_POST['dept']."&reporter=".$_POST['reporter']."&tdate=".$_POST['tdate']."&ttime=".$_POST['ttime']);
 		    exit;
          } else {
 			$db->RollbackTrans();
