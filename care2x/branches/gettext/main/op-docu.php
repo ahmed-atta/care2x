@@ -104,7 +104,7 @@ $smarty->assign('LDOrLogBookMenu',
 				</font></TD>
 			</TR>
 		</TABLE>');
-$smarty->assign('LDORNOCQuickView',"<a href=\"".$root_path."modules/nursing_or/nursing-or-dienst-schnellsicht.php".URL_APPEND."\">$LDORNOC $LDQuickView</a>");
+$smarty->assign('LDORNOCQuickView',"<a href=\"".$root_path."modules/nursing_or/nursing-or-roster-quickview.php".URL_APPEND."\">$LDORNOC $LDQuickView</a>");
 $smarty->assign('LDQviewTxtNurse',$LDQviewTxtNurse);
 //PDienstplan
 $smarty->assign('LDORNOCScheduler',"<a href=\"".$root_path."modules/nursing_or/nursing-or-main-pass.php".URL_APPEND."&retpath=menu&target=dutyplan\">$LDORNOC $LDScheduler </a>");
@@ -127,7 +127,7 @@ $smarty->assign('LDOnCallDutyTxt',$LDOnCallDutyTxt);
 
 $smarty->assign('LDORAnesthesia',"<img ".createLDImgSrc($root_path,'anaes.gif','0','absmiddle')."  alt=\"$LDAna\">");
 
-$smarty->assign('LDORAnaQuickView',"<a href=\"".$root_path."modules/nursing_or/nursing-or-dienst-schnellsicht.php".URL_APPEND."&retpath=menu&hilitedept=39\">$LDQuickView</a>");
+$smarty->assign('LDORAnaQuickView',"<a href=\"".$root_path."modules/nursing_or/nursing-or-roster-quickview.php".URL_APPEND."&retpath=menu&hilitedept=39\">$LDQuickView</a>");
 $smarty->assign('LDQviewTxtAna',$LDQviewTxtAna);
 //AnaDienstplan
 $smarty->assign('LDORAnaNOCScheduler',"<a href=\"".$root_path."modules/nursing_or/nursing-or-dienstplan.php".URL_APPEND."&dept_nr=39&retpath=menu\" >$LDORNOC $LDScheduler</a>");
