@@ -24,7 +24,7 @@ switch($mode) {
 						$src="orderpass";
 						$mode="order";
 						$userck="ck_prod_order_user";
-						$fileforward=$root_path."modules/products/products-bestellung.php".$append.$userck."&from=".$src;
+						$fileforward=$root_path."modules/products/products-order.php".$append.$userck."&from=".$src;
 						break;
 	case "archive":$title=$LDOrderArchive;
 						$allowedarea[] = '_a_1_pharmadbadmin';	

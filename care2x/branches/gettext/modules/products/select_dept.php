@@ -56,7 +56,7 @@ elseif($cat=='pharma')
 switch($target){
 	case 'catalog': $fileforward=$root_path."modules/products/products-ordercatalog-edit.php".URL_APPEND."&cat=$cat";
 							break;
-	default : $fileforward=$root_path."modules/products/products-bestellung.php".URL_APPEND."&cat=$cat";
+	default : $fileforward=$root_path."modules/products/products-order.php".URL_APPEND."&cat=$cat";
 }
 
 # Start Smarty templating here
