@@ -16,7 +16,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $breakfile='admin_system-admi-welcome.php'.URL_APPEND;
 $returnfile='admin_user_access_list.php'.URL_APPEND;
-//$_SESSION['sess_file_return']='edv.php';
+//$_SESSION['sess_file_return']='admin.php';
 
 require_once($root_path.'include/core/class_access.php');
 $user = & new Access($itemname);

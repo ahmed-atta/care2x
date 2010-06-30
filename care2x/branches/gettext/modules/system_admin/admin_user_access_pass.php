@@ -42,7 +42,7 @@ switch($target)
 }
 
 $thisfile='admin_user_access_pass.php';
-$breakfile='edv.php?sid='.$sid.'&lang='.$lang;
+$breakfile='admin.php?sid='.$sid.'&lang='.$lang;
 
 
 $lognote="$title ok";

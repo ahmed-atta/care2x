@@ -24,7 +24,7 @@ require_once($root_path.$newmodule_includepath."head_include.inc.php");
 ?>
 
 <!-- Java Script für Entscheidung ob das Modul so angelegt werden soll oder nicht.
-FAlls ja, admin_modul_neu_2 php ausführen, falls nein, eine Seite zurück zu edv.php
+FAlls ja, admin_modul_neu_2 php ausführen, falls nein, eine Seite zurück zu admin.php
 return false ist nötig damit die action - Anweisung in der FORM nicht ausgeführt wird. 
 Die Action muss vorhanden sein, falls ein Browser Java nicht aktiviert hat. -->
 <script language="JavaScript" type="text/javascript">
@@ -35,7 +35,7 @@ function submitja(){
 				 return false;
 				 }
 function submitnein(){
-				 //document.ModulNeu.action="../system_admin/edv.php";
+				 //document.ModulNeu.action="../system_admin/admin.php";
 				  document.ModulNeu.action="../system_admin/sub_modul_neu.php";
 				 document.ModulNeu.submit();
 				 return false;				 
