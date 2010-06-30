@@ -12,7 +12,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 */
 $lang_tables[]='departments.php';
 define('LANG_FILE','doctors.php');
-$local_user='ck_doctors_dienstplan_user';
+$local_user='ck_doctors_roster_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 if(!isset($dept_nr)||!$dept_nr){
@@ -200,7 +200,7 @@ function popselect(elem,mode)
 	wh=500;
 	var tmonth=document.dienstplan.month.value;
 	var tyear=document.dienstplan.jahr.value;
-	urlholder="doctors-roster-poppersonselect.php?elemid="+elem + "&dept_nr=<?php echo $dept_nr ?>&month="+tmonth+"&year="+tyear+ "&mode=" + mode + "&retpath=<?php echo $retpath ?>&user=<?php echo $ck_doctors_dienstplan_user."&lang=$lang&sid=$sid"; ?>";
+	urlholder="doctors-roster-poppersonselect.php?elemid="+elem + "&dept_nr=<?php echo $dept_nr ?>&month="+tmonth+"&year="+tyear+ "&mode=" + mode + "&retpath=<?php echo $retpath ?>&user=<?php echo $ck_doctors_roster_user."&lang=$lang&sid=$sid"; ?>";
 	
 	popselectwin=window.open(urlholder,"pop","width=" + ww + ",height=" + wh + ",menubar=no,resizable=yes,scrollbars=yes,dependent=yes");
 	window.popselectwin.moveTo((w/2)+80,(h/2)-(wh/2));
@@ -265,7 +265,7 @@ $smarty->assign('sFormAction','action="doctors-roster-plan.php"');
 <input type="hidden" name="pyear" value="<?php echo $pyear; ?>">
 <input type="hidden" name="planid" value="<?php echo $ck_plan; ?>">
 <input type="hidden" name="maxelement" value="<?php echo $maxdays; ?>">
-<input type="hidden" name="encoder" value="<?php echo $ck_doctors_dienstplan_user; ?>">
+<input type="hidden" name="encoder" value="<?php echo $ck_doctors_roster_user; ?>">
 <input type="hidden" name="retpath" value="<?php echo $retpath; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">

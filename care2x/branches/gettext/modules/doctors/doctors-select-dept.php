@@ -16,7 +16,7 @@ if($_SESSION['sess_user_origin']=='personell_admin'){
 	$local_user='aufnahme_user';
 	$breakfile=$root_path.'modules/personell_admin/personell_register_show.php'.URL_APPEND.'&target=personell_reg&personell_nr='.$nr;
 }else{
-	$local_user='ck_doctors_dienstplan_user';
+	$local_user='ck_doctors_roster_user';
 	if (!empty($_SESSION['sess_path_referer'])){
 		$breakfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND;
 	} else {

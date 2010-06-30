@@ -32,7 +32,7 @@ switch($retpath){
 
 $lognote="Doctors $title ok";
 
-$userck='ck_doctors_dienstplan_user';
+$userck='ck_doctors_roster_user';
 
 //reset cookie;
 // reset all 2nd level lock cookies

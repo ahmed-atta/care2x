@@ -20,7 +20,7 @@ $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 
 $_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
 # Erase the cookie 
-if(isset($_COOKIE['ck_doctors_dienstplan_user'.$sid])) setcookie('ck_doctors_dienstplan_user'.$sid,'',0,'/');
+if(isset($_COOKIE['ck_doctors_roster_user'.$sid])) setcookie('ck_doctors_roster_user'.$sid,'',0,'/');
 # erase the user_origin 
 if(isset($_SESSION['sess_user_origin'])) $_SESSION['sess_user_origin']='';
 
