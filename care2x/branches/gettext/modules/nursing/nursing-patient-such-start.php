@@ -434,7 +434,7 @@ if($rows){
 
 <?php echo $LDSearchPrompt ?>
 	
-<form action="nursing-patient-such-start.php" method="get" name="suchlogbuch" >
+<form action="nursing-patient-search-start.php" method="get" name="suchlogbuch" >
 <table border=0 cellspacing=0 cellpadding=1 bgcolor="#999999">
 	<tr>
 		<td>
