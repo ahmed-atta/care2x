@@ -261,7 +261,7 @@ if ($_POST['maxnum']>0) {
 			<input type="submit" value="'.$LDSendOrderDepo.'">   
    			</form></font><p>
 			<font face=Verdana,Arial size=2>
-			<a href="products-bestellkorb.php'.URL_APPEND.'&cat='.$cat.'&dept_nr='.$dept_nr.'&order_nr='.$order_nr.'&userck='.$userck.'" ><< '.$LDBack2Edit.'</a></font>
+			<a href="products-basket.php'.URL_APPEND.'&cat='.$cat.'&dept_nr='.$dept_nr.'&order_nr='.$order_nr.'&userck='.$userck.'" ><< '.$LDBack2Edit.'</a></font>
 			';
     }else{
     	echo '

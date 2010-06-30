@@ -77,11 +77,11 @@ function add2basket(b,i,id,art){
 	if(eval("document.curcatform.p"+i+".value")=="") n=1;
 	else n=eval("document.curcatform.p"+i+".value")
 	
-	window.parent.BESTELLKORB.location.href="products-bestellkorb.php<?php echo URL_REDIRECT_APPEND."&userck=$userck" ?>&dept_nr=<?php echo $dept_nr; ?>&order_nr=<?php echo $order_nr; ?>&mode=add&cat=<?php echo $cat; ?>&maxcount=1&order1=1&bestellnum1="+b+"&p1="+n+"&idsub1="+id+"&art1="+art;
+	window.parent.BESTELLKORB.location.href="products-basket.php<?php echo URL_REDIRECT_APPEND."&userck=$userck" ?>&dept_nr=<?php echo $dept_nr; ?>&order_nr=<?php echo $order_nr; ?>&mode=add&cat=<?php echo $cat; ?>&maxcount=1&order1=1&bestellnum1="+b+"&p1="+n+"&idsub1="+id+"&art1="+art;
 }
 
 function add_update(b) {
-	window.parent.BESTELLKORB.location.href="products-bestellkorb.php<?php echo URL_REDIRECT_APPEND."&userck=$userck" ?>&dept_nr=<?php echo $dept_nr; ?>&order_nr=<?php echo $order_nr; ?>&mode=add&cat=<?php echo $cat; ?>&maxcount=1&order1=1&bestellnum1="+b+"&p1=1";
+	window.parent.BESTELLKORB.location.href="products-basket.php<?php echo URL_REDIRECT_APPEND."&userck=$userck" ?>&dept_nr=<?php echo $dept_nr; ?>&order_nr=<?php echo $order_nr; ?>&mode=add&cat=<?php echo $cat; ?>&maxcount=1&order1=1&bestellnum1="+b+"&p1=1";
 }
 
 function checkform(d) {
@@ -241,7 +241,7 @@ if($rows){
 }
     
     if(isset($mode)&&($mode=="multiadd")) {
-     	echo '<script language="javascript">window.parent.BESTELLKORB.location.href="products-bestellkorb.php'.URL_REDIRECT_APPEND.'&dept_nr='.$dept_nr.'&order_nr='.$order_nr.'&mode=multiadd&cat='.$cat.'&maxcount='.$maxcount.'&userck='.$userck;
+     	echo '<script language="javascript">window.parent.BESTELLKORB.location.href="products-basket.php'.URL_REDIRECT_APPEND.'&dept_nr='.$dept_nr.'&order_nr='.$order_nr.'&mode=multiadd&cat='.$cat.'&maxcount='.$maxcount.'&userck='.$userck;
     	for($i=1;$i<=$maxcount;$i++) {
     		$o="order".$i;
     		$pc="p".$i;
