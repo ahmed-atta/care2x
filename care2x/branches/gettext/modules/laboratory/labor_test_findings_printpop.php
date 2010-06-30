@@ -34,7 +34,7 @@ switch ($user_origin) {
 	
 	default :
 		$local_user = 'ck_pflege_user';
-		$breakfile = $root_path . "modules/nursing/nursing-station-patientdaten.php" . URL_APPEND . "&edit=$edit&station=$station&pn=$pn";
+		$breakfile = $root_path . "modules/nursing/nursing-ward-patientdata.php" . URL_APPEND . "&edit=$edit&station=$station&pn=$pn";
 }
 
 //$local_user='ck_lab_user';

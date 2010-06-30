@@ -290,12 +290,12 @@ function xmakekonsil(v)
 	   {
 	     v="generic";
 	   }
-	   location.href="nursing-station-patientdaten-doconsil-"+v+".php?sid=<?php echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&konsil="; ?>"+x+"&target="+v;
+	   location.href="nursing-ward-patientdata-doconsil-"+v+".php?sid=<?php echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&konsil="; ?>"+x+"&target="+v;
 }
 function makekonsil(d)
 { 
 	if(d!=""){
-	   location.href="nursing-station-patientdaten-doconsil-router.php?sid=<?php 
+	   location.href="nursing-ward-patientdata-doconsil-router.php?sid=<?php 
 	   echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&dept_id=";
 	   ?>"+d;
 	}
@@ -481,20 +481,20 @@ function rx(){
 		<table cellpadding=0 width=100%>
 		<tr><td bgcolor=333333><font color=white><b>'.$LDCharts.'<b></font></td></tr>
 		<tr><td>
-		<table cellpadding=3><tr><td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-inout.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$IO_title.'"></td>
-		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-ddc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$DDC_title.'"></td>
-		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-kurve.php'.URL_REDIRECT_APPEND.'&station='.$station.'&dept_nr='.$dept_nr.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'"></td>
+		<table cellpadding=3><tr><td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-custom-inout.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$IO_title.'"></td>
+		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-custom-ddc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$DDC_title.'"></td>
+		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-kurve.php'.URL_REDIRECT_APPEND.'&station='.$station.'&dept_nr='.$dept_nr.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'"></td>
 		</tr>
 		<tr><td>
-		<input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-tc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$TC_title.'"></td>
-		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-custom-noc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$NOC_title.'"></td>
+		<input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-custom-tc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$TC_title.'"></td>
+		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-custom-noc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$NOC_title.'"></td>
 		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-getmedx.php'.URL_REDIRECT_APPEND.'&station='.$station.'&dept_nr='.$dept_nr.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$DailyTherapy.'"></td>
 		</tr></table>
 		</td></tr>
 		<tr><td bgcolor=333333><font color=white><b>'.$LDReports.'<b></font></td></tr>
 		<tr><td>
 		<table cellpadding=3><tr>
-		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-pbericht.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDNursingReport.'"></td>
+		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-pbericht.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDNursingReport.'"></td>
 		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'main/diagnostics-report-start.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'&header='.$result['name_last'].',+'.$result['name_first'].'+'.formatDate2Local($result['date_birth'],$date_format).'\'" value="'.$LDReports.'"></td>
 		';
 		echo '<td><input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.$LDLabReports.'"></td>';
@@ -506,7 +506,7 @@ function rx(){
 		echo '<tr><td><table cellpadding=3><tr><td>';
 		echo '<input 
 		type="button" onClick="javascript:openDRGComposite()" value="'.$LDDRG.'"></td><td>';
-		echo '<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-station-patientdaten-todo.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDDocsPrescription.'"></td>';
+		echo '<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-todo.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDDocsPrescription.'"></td>';
 		echo '<td><input type="button" onClick="javascript:enlargewin();window.location.href=\''.$root_path.'modules/photolab/fotos-start.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&station='.$station.'&fileroot='.$fr.'&edit='.$edit.'\'" value="'.$LDPhotos.'"></td></tr></table></td></tr></table>';
 		
 		

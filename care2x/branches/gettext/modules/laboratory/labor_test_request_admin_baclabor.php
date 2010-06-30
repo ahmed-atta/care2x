@@ -30,7 +30,7 @@ if($user_origin=='lab'){
 	$breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND;
 }else{
 	$local_user='ck_pflege_user';
-	$breakfile=$root_path."modules/nursing/nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
+	$breakfile=$root_path."modules/nursing/nursing-ward-patientdata.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
 ///* invoke the script lock*/
 require_once($root_path.'include/helpers/inc_front_chain_lang.php'); 

@@ -31,32 +31,32 @@ switch($target)
   case 'chemlabor': $entry_block_bgcolor="#fff3f3";
                           $entry_border_bgcolor="#ee6666";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="nursing-station-patientdaten-doconsil-chemlabor.php$append";
+						  $breakfile="nursing-ward-patientdata-doconsil-chemlabor.php$append";
 						  break;
   case 'baclabor': $entry_block_bgcolor="#fff3f3";
                           $entry_border_bgcolor="#ee6666";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="nursing-station-patientdaten-doconsil-baclabor.php$append";
+						  $breakfile="nursing-ward-patientdata-doconsil-baclabor.php$append";
 						  break;
   case 'patho': $entry_block_bgcolor="#cde1ec";
                           $entry_border_bgcolor="#cde1ec";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="nursing-station-patientdaten-doconsil-patho.php$append";
+						  $breakfile="nursing-ward-patientdata-doconsil-patho.php$append";
 						  break;
   case 'blood': $entry_block_bgcolor="#99ffcc";
                           $entry_border_bgcolor="#99ffcc";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="nursing-station-patientdaten-doconsil-blood.php$append";
+						  $breakfile="nursing-ward-patientdata-doconsil-blood.php$append";
 						  break;
   case 'radio': $entry_block_bgcolor="#efefef";
                           $entry_border_bgcolor="#fcfcfc";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="nursing-station-patientdaten-doconsil-radio.php$append";
+						  $breakfile="nursing-ward-patientdata-doconsil-radio.php$append";
 						  break;
   default            : $entry_block_bgcolor="#fff3f3";
                           $entry_border_bgcolor="#ee6666";
 						  $entry_body_bgcolor="#ffffff";
-						  $breakfile="nursing-station-patientdaten-doconsil-baclabor.php$append";
+						  $breakfile="nursing-ward-patientdata-doconsil-baclabor.php$append";
 }
 
 $breakfile=$root_path.'modules/nursing/'.$breakfile;
@@ -105,7 +105,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	$linecount=$enc_obj->LastRecordCount();
 	if($linecount==1&&$mode=='search'){
 		$row=$encounter->FetchRow();
-		header("location:".$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_REDIRECT_APPEND."&pn=".$row['encounter_nr']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=");
+		header("location:".$root_path."modules/nursing/nursing-ward-patientdata-doconsil-".$target.".php".URL_REDIRECT_APPEND."&pn=".$row['encounter_nr']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=");
 		exit;
 	}
 	//$linecount=$address_obj->LastRecordCount();
@@ -246,7 +246,7 @@ if ($enc_obj->record_count) {
 					    if($_COOKIE[$local_user.$sid]) echo '
 						<td>&nbsp;';
 						echo "
-							<a href=\"".$root_path."modules/nursing/nursing-station-patientdaten-doconsil-".$target.".php".URL_APPEND."&pn=".$row['encounter_nr']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=\">";
+							<a href=\"".$root_path."modules/nursing/nursing-ward-patientdata-doconsil-".$target.".php".URL_APPEND."&pn=".$row['encounter_nr']."&edit=1&status=".$status."&target=".$target."&user_origin=".$user_origin."&noresize=1&mode=\">";
 						echo '	
 							<img '.createLDImgSrc($root_path,'ok_small.gif','0').' alt="'.$LDTestThisPatient.'"></a>&nbsp;';
 							

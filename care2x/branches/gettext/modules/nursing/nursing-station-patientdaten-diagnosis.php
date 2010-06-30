@@ -16,8 +16,8 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if($edit&&!$_COOKIE[$local_user.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 
-$thisfile='nursing-station-patientdaten-diagnosis.php';
-$breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
+$thisfile='nursing-ward-patientdata-diagnosis.php';
+$breakfile="nursing-ward-patientdata.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
 
 $bgc1='#fefefe'; 
 	

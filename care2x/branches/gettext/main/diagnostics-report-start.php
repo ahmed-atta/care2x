@@ -24,7 +24,7 @@ if($user_origin=='lab')
 else
 {
   $local_user='ck_pflege_user';
-  $breakfile=$root_path.'modules/nursing/nursing-station-patientdaten.php'.$rel_url;
+  $breakfile=$root_path.'modules/nursing/nursing-ward-patientdata.php'.$rel_url;
 }
 //echo $_COOKIE[$local_user.$sid]; exit;
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');

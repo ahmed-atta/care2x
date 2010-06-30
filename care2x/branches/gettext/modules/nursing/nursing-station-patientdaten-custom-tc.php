@@ -19,7 +19,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if($edit&&!$_COOKIE[$local_user.$sid]) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
  
 $thisfile=basename(__FILE__);
-$breakfile="nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
+$breakfile="nursing-ward-patientdata.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
 
 /* Create encounter object */
 require_once($root_path.'include/core/class_encounter.php');
@@ -436,7 +436,7 @@ $tc++;
 </td>
 
 <td>
-<a href='nursing-station-patientdaten-custom-tc.php<?php echo URL_REDIRECT_APPEND?>&station=<?php echo $station?>&pn=<?php echo $pn?>&edit=<?php echo $edit?>'><span style="background-color:yellow"><?php echo $LDEDIT ?></span></a>
+<a href='nursing-ward-patientdata-custom-tc.php<?php echo URL_REDIRECT_APPEND?>&station=<?php echo $station?>&pn=<?php echo $pn?>&edit=<?php echo $edit?>'><span style="background-color:yellow"><?php echo $LDEDIT ?></span></a>
 </td>
 </tr></table>
 

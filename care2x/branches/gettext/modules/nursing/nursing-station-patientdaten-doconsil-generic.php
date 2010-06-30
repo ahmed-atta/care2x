@@ -27,7 +27,7 @@ if($user_origin=='lab')
 else
 {
   $local_user='ck_pflege_user';
-  $breakfile="nursing-station-patientdaten.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
+  $breakfile="nursing-ward-patientdata.php".URL_APPEND."&edit=$edit&station=$station&pn=$pn";
 }
 
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');

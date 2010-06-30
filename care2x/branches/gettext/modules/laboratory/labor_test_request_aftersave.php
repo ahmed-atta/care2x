@@ -26,7 +26,7 @@ if ($user_origin == 'lab') {
 		$breakfile = $root_path . 'modules/laboratory/labor.php' . URL_APPEND;
 } else {
 	$local_user = 'ck_pflege_user';
-	$breakfile = $root_path . 'modules/nursing/nursing-station-patientdaten.php' . URL_APPEND . '&pn=' . $pn . '&station=' . $station . '&edit=' . $edit . '&user_origin=' . $user_origin;
+	$breakfile = $root_path . 'modules/nursing/nursing-ward-patientdata.php' . URL_APPEND . '&pn=' . $pn . '&station=' . $station . '&edit=' . $edit . '&user_origin=' . $user_origin;
 }
 
 require_once ($root_path . 'include/helpers/inc_front_chain_lang.php');
@@ -275,14 +275,14 @@ $smarty->assign ( 'LDWhatToDo', $LDWhatToDo );
 $smarty->assign ( 'pbPrintOut', 'javascript:printOut()' );
 $smarty->assign ( 'gifGrnArrow', '<img ' . createComIcon ( $root_path, 'bul_arrowgrnsm.gif', '0', 'absmiddle', TRUE ) . '>' );
 $smarty->assign ( 'LDPrintForm', $LDPrintForm );
-$smarty->assign ( 'pbEditForm', $root_path . "modules/nursing/nursing-station-patientdaten-doconsil-" . $target . ".php" . URL_APPEND . "&pn=$pn&edit=$edit&station=$station&target=$target&dept_nr=$dept_nr&user_origin=$user_origin&noresize=$noresize&mode=edit&batch_nr=$batch_nr" );
+$smarty->assign ( 'pbEditForm', $root_path . "modules/nursing/nursing-ward-patientdata-doconsil-" . $target . ".php" . URL_APPEND . "&pn=$pn&edit=$edit&station=$station&target=$target&dept_nr=$dept_nr&user_origin=$user_origin&noresize=$noresize&mode=edit&batch_nr=$batch_nr" );
 $smarty->assign ( 'LDEditForm', $LDEditForm );
-$smarty->assign ( 'pbNewSamePatient', $root_path . "modules/nursing/nursing-station-patientdaten-doconsil-" . $target . ".php" . URL_APPEND . "&pn=$pn&edit=$edit&station=$station&target=$target&dept_nr=$dept_nr&user_origin=$user_origin&noresize=$noresize&mode=" );
+$smarty->assign ( 'pbNewSamePatient', $root_path . "modules/nursing/nursing-ward-patientdata-doconsil-" . $target . ".php" . URL_APPEND . "&pn=$pn&edit=$edit&station=$station&target=$target&dept_nr=$dept_nr&user_origin=$user_origin&noresize=$noresize&mode=" );
 $smarty->assign ( 'LDNewFormSamePatient', $LDNewFormSamePatient );
 
 if ($user_origin == 'lab') {
 	$smarty->assign ( 'user_origin_lab', TRUE );
-	$smarty->assign ( 'pbNewForm', $root_path . "modules/nursing/nursing-station-patientdaten-doconsil-" . $target . ".php" . URL_APPEND . "&edit=0&station=$station&target=$target&dept_nr=$dept_nr&user_origin=$user_origin&noresize=$noresize" );
+	$smarty->assign ( 'pbNewForm', $root_path . "modules/nursing/nursing-ward-patientdata-doconsil-" . $target . ".php" . URL_APPEND . "&edit=0&station=$station&target=$target&dept_nr=$dept_nr&user_origin=$user_origin&noresize=$noresize" );
 	$smarty->assign ( 'LDNewFormOtherPatient', $LDNewFormOtherPatient );
 
 }

@@ -66,6 +66,6 @@ switch($dept_nr)
 }
 */
 
-header('Location:'.$root_path.'modules/nursing/nursing-station-patientdaten-doconsil-'.$target.'.php'.URL_REDIRECT_APPEND."&edit=$edit&station=$station&pn=$pn&konsil=$type&dept_nr=$dept_nr&target=$target");
+header('Location:'.$root_path.'modules/nursing/nursing-ward-patientdata-doconsil-'.$target.'.php'.URL_REDIRECT_APPEND."&edit=$edit&station=$station&pn=$pn&konsil=$type&dept_nr=$dept_nr&target=$target");
 exit;
 ?>
