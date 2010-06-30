@@ -37,7 +37,7 @@ switch($mode) {
 						$allowedarea[] = '_a_1_meddepotdbadmin';
 						$src="medibotpass";
 						$userck="ck_prod_bot_user";
-						$fileforward=$root_path."modules/products/products-bestellbot.php".$append.$userck;
+						$fileforward=$root_path."modules/products/products-orderbot.php".$append.$userck;
 						break;
 	case "catalog":  $title=$LDOrderCat;
 						$allowedarea[] = '_a_1_meddepotdbadmin';
