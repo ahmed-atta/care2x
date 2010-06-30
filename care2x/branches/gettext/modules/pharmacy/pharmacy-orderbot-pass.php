@@ -24,7 +24,7 @@ if($user_origin=='pharmabot') $userck='ck_pharmabot_user';
 $breakfile='pharmacy.php?sid='.$sid.'&lang='.$lang;
 $fileforward="pharmacy.php".URL_REDIRECT_APPEND."&stb=1&userck=$userck";
 $title=$LDPharmaOrderBot; 
-$thisfile='apotheke-bestellbot-pass.php';
+$thisfile='pharmacy-orderbot-pass.php';
 $lognote="$title ok";
 //reset cookie;
 // reset all 2nd level lock cookies
