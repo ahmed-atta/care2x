@@ -20,16 +20,16 @@ $dept_obj=new Department;
 
 switch($target){
 	case 'search': $title="$LDOrLogBook :: $LDSearch";
-					  //$fileforward='op-care-logbuch-such-javastart.php'.URL_APPEND.'&retpath='.$retpath;
-					  $targetfile='op-care-logbuch-such-javastart.php';
+					  //$fileforward='op-care-log-such-javastart.php'.URL_APPEND.'&retpath='.$retpath;
+					  $targetfile='op-care-log-such-javastart.php';
 					  break;
 	case 'archiv': $title="$LDOrLogBook :: $LDArchive";
-					  //$fileforward='op-care-logbuch-arch-javastart.php'.URL_APPEND.'&retpath='.$retpath;
-					  $targetfile='op-care-logbuch-arch-javastart.php';
+					  //$fileforward='op-care-log-arch-javastart.php'.URL_APPEND.'&retpath='.$retpath;
+					  $targetfile='op-care-log-arch-javastart.php';
 					  break;
 	default: $title=$LDOrLogBook;
-					  //$fileforward='op-care-logbuch-javastart.php'.URL_APPEND.'&retpath='.$retpath;
-					  $targetfile='op-care-logbuch-javastart.php';
+					  //$fileforward='op-care-log-javastart.php'.URL_APPEND.'&retpath='.$retpath;
+					  $targetfile='op-care-log-javastart.php';
 					  break;
 }
 $dept_ok=false;

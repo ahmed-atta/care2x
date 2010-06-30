@@ -41,7 +41,7 @@ setcookie(currentuser,"");
 <ul>
 <FONT    SIZE=-1  FACE="Arial">
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-care-dienst-schnellsicht.php">Schnellübersicht über die gegenwärtige diensthabende OP Pfleger</a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-care-logbuch-pass.php">OP Logbuch</a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-care-log-pass.php">OP Logbuch</a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="#" ONCLICK="bdienstwin()">Bereitschaftsdienst - Zeiterfassung</a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="#">Dienstplan</a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="#">Nachrichten</a><br>

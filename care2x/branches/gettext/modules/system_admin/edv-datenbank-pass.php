@@ -100,7 +100,7 @@ if ($versand=="Abschicken")
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
-<td colspan=3><img src=../img/einga-b.gif border=0  width=130 height=25><!-- <a href="op-care-logbuch-such-pass.php?sid=<?php echo $$ck_sid_buffer;?>"><img src="../img/such-gray.gif" border=0 width=130 height=25 <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><a href="op-care-logbuch-arch-pass.php?sid=<?php echo $$ck_sid_buffer;?>"><img src="../img/arch-gray.gif" border=0 width=130 height=25 <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a> --></td>
+<td colspan=3><img src=../img/einga-b.gif border=0  width=130 height=25><!-- <a href="op-care-log-such-pass.php?sid=<?php echo $$ck_sid_buffer;?>"><img src="../img/such-gray.gif" border=0 width=130 height=25 <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><a href="op-care-log-arch-pass.php?sid=<?php echo $$ck_sid_buffer;?>"><img src="../img/arch-gray.gif" border=0 width=130 height=25 <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a> --></td>
 </tr>
 
 <tr>

@@ -393,7 +393,7 @@ if (! $cfg [ 'dhtml' ]) {
 	</TR>
 </TABLE>
 
-<FORM METHOD="post" ACTION="op-care-logbuch-arch-edit.php?mode=save"
+<FORM METHOD="post" ACTION="op-care-log-arch-edit.php?mode=save"
 	name="oppflegepatinfo" onSubmit="return checksubmit()"><input
 	type="hidden" name="processer"
 	value="<?php
@@ -443,7 +443,7 @@ if (($mode != "") && ($mode != "fresh")) {
 
 &nbsp;
 &nbsp; <!-- 
-<a href="op-care-logbuch-arch-edit.php?mode=fresh&filename=<?php
+<a href="op-care-log-arch-edit.php?mode=fresh&filename=<?php
 echo $filename . '&pyear=' . date ( Y ) . '&pmonth=' . date ( m ) . '&pday=' . date ( d ) ;
 ?>"><img src="../img/newpat2.gif" border=0></a>
  -->

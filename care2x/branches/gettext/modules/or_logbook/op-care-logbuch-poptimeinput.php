@@ -128,7 +128,7 @@ onLoad="if (window.focus) window.focus();<?php if ($mode=='save') echo 'resettim
 <td bgcolor="navy" align=right>
 <font face=arial size=2 >
 <?php
-$thisurl="op-care-logbuch-poptimeinput.php?rt=optimeinput&filename=";
+$thisurl="op-care-log-poptimeinput.php?rt=optimeinput&filename=";
 
 if($scope==1) echo '<font color=silver>Ein/Aus &nbsp;</font>';
 	else echo '<a href="'.$thisurl.$filename.'&scope=1"><font color=white>Ein/Aus</a> &nbsp;</font>';
@@ -156,7 +156,7 @@ Zeiteingabe
 <p>
 <ul>
 
-<form method="post" name="timeform" action="op-care-logbuch-poptimeinput.php?mode=save&rt=optimeinput&scope=<?php echo $scope; ?>&filename=<?php echo $filename; ?>" onSubmit=checkform()>
+<form method="post" name="timeform" action="op-care-log-poptimeinput.php?mode=save&rt=optimeinput&scope=<?php echo $scope; ?>&filename=<?php echo $filename; ?>" onSubmit=checkform()>
 
 <font face=verdana,arial size=2>
 <?php if (($scope==1)||($scope==0))
