@@ -161,7 +161,7 @@ if($mode=='save'){
 		$smarty->assign('sSaveFeedBack',$LDDataSaved);
 	}else{
 		echo $sql.'<p>';
-		$smarty->assign('sNoSave',$LDDataNoSaved.'<br><a href="products-database-functions-eingabe.php'.URL_APPEND.'">
+		$smarty->assign('sNoSave',$LDDataNoSaved.'<br><a href="products-database-functions-insert.php'.URL_APPEND.'">
 			<u>'.$LDClk2EnterNew.'</u></a>');
 	}
 }
