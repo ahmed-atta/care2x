@@ -50,10 +50,10 @@ $dept_DOC=$dept_obj->getAllActiveWithDOC();
 
 switch($target){
 	case 'plist': $title=$LDCreateDoctorsList;
-					  $fileforward='doctors-dienst-personalliste.php'.URL_APPEND.'&retpath='.$retpath;
+					  $fileforward='doctors-roster-personal-list.php'.URL_APPEND.'&retpath='.$retpath;
 					  break;
 	default: $title=$LDMakeDutyPlan;
-					  $fileforward='doctors-dienstplan-planen.php'.URL_APPEND.'&retpath='.$retpath;
+					  $fileforward='doctors-rosterplan-planen.php'.URL_APPEND.'&retpath='.$retpath;
 					  break;
 }
 

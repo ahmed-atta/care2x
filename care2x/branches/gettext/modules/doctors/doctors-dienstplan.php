@@ -38,7 +38,7 @@ $maxdays=date("t",mktime(0,0,0,$pmonth,1,$pyear));
 switch($retpath)
 {
 	case "menu": $rettarget='doctors.php'.URL_APPEND; break;
-	case "qview": $rettarget='doctors-dienst-schnellsicht.php'.URL_APPEND.'&hilitedept='.$dept_nr; break;
+	case "qview": $rettarget='doctors-roster-quickview.php'.URL_APPEND.'&hilitedept='.$dept_nr; break;
 	default: $rettarget="javascript:window.history.back()";
 }
 
@@ -88,7 +88,7 @@ function popinfo(l)
 	h=window.screen.height;
 	ww=400;
 	wh=400;
-	urlholder="doctors-dienstplan-popinfo.php<?php echo URL_REDIRECT_APPEND ?>&nr="+l+"&dept_nr=<?php echo $dept_nr ?>&route=validroute&user=<?php echo $aufnahme_user.'"' ?>;
+	urlholder="doctors-rosterplan-popinfo.php<?php echo URL_REDIRECT_APPEND ?>&nr="+l+"&dept_nr=<?php echo $dept_nr ?>&route=validroute&user=<?php echo $aufnahme_user.'"' ?>;
 	
 	infowin<?php echo $sid ?>=window.open(urlholder,"infowin<?php echo $sid ?>","width=" + ww + ",height=" + wh +",menubar=no,resizable=yes,scrollbars=yes");
 	window.infowin<?php echo $sid ?>.moveTo((w/2)+20,(h/2)-(wh/2));

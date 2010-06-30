@@ -132,7 +132,7 @@ window.close();
  <li><a href="<?php echo $root_path ?>modules/nursing_or/nursing-or-dienstplan-day.php<?php echo URL_APPEND."&dept_nr=$dept_nr&pday=$day&pmonth=$month&pyear=$year" ?>&retpath=calendar_opt"><?php echo "$LDDutyPerson $LDOn (".formatDate2Local($i_date,$date_format).")" ?></a></li>
 <!--
  <li><a href="<?php echo $root_path ?>modules/nursing_or/nursing-or-dienstplan.php<?php echo URL_APPEND."&dept_nr=$dept_nr&cday=$day&cmonth=$month&cyear=$year&pmonth=".((int)$month)."&pyear=".((int)$year) ?>&noedit=1&retpath=calendar_opt" onClick="window.resizeTo(600,700)"><?php echo "$LDDutyPerson ($LDMonth)" ?></a></li>
-<li><a href="<?php echo $root_path ?>modules/doctors/doctors-dienstplan.php<?php echo URL_APPEND."&dept_nr=$dept_nr&cday=$day&cmonth=$month&cyear=$year&pmonth=".((int)$month)."&pyear=".((int)$year) ?>&noedit=1&retpath=calendar_opt" onClick="window.resizeTo(600,700)"><?php echo "$LDDocsOnDuty (".formatDate2Local($i_date,$date_format).")" ?></a></li>
+<li><a href="<?php echo $root_path ?>modules/doctors/doctors-rosterplan.php<?php echo URL_APPEND."&dept_nr=$dept_nr&cday=$day&cmonth=$month&cyear=$year&pmonth=".((int)$month)."&pyear=".((int)$year) ?>&noedit=1&retpath=calendar_opt" onClick="window.resizeTo(600,700)"><?php echo "$LDDocsOnDuty (".formatDate2Local($i_date,$date_format).")" ?></a></li>
  -->
  <?php if($i_date==date('Y-m-d'))
 		{ echo '

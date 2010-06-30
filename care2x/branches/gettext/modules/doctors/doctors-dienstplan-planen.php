@@ -23,7 +23,7 @@ if(!isset($dept_nr)||!$dept_nr){
 //$db->debug=1;
 
 $thisfile=basename(__FILE__);
-$breakfile="doctors-dienstplan.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath";
+$breakfile="doctors-rosterplan.php".URL_APPEND."&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath";
 
 require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
@@ -136,7 +136,7 @@ function makefwdpath($path,$dpt,$mo,$yr,$saved)
 {
 	if ($path==1)
 	{	
-		$fwdpath='doctors-dienstplan.php?';
+		$fwdpath='doctors-rosterplan.php?';
 		if($saved!="1") 
 		{  
 			if ($mo==1) {$mo=12; $yr--;}
@@ -144,7 +144,7 @@ function makefwdpath($path,$dpt,$mo,$yr,$saved)
 		}
 		return $fwdpath.'dept='.$dpt.'&pmonth='.$mo.'&pyear='.$yr;
 	}
-	else return "doctors-dienstplan-checkpoint.php";
+	else return "doctors-rosterplan-checkpoint.php";
 }
 
 # Prepare page title
@@ -200,7 +200,7 @@ function popselect(elem,mode)
 	wh=500;
 	var tmonth=document.dienstplan.month.value;
 	var tyear=document.dienstplan.jahr.value;
-	urlholder="doctors-dienstplan-poppersonselect.php?elemid="+elem + "&dept_nr=<?php echo $dept_nr ?>&month="+tmonth+"&year="+tyear+ "&mode=" + mode + "&retpath=<?php echo $retpath ?>&user=<?php echo $ck_doctors_dienstplan_user."&lang=$lang&sid=$sid"; ?>";
+	urlholder="doctors-rosterplan-poppersonselect.php?elemid="+elem + "&dept_nr=<?php echo $dept_nr ?>&month="+tmonth+"&year="+tyear+ "&mode=" + mode + "&retpath=<?php echo $retpath ?>&user=<?php echo $ck_doctors_dienstplan_user."&lang=$lang&sid=$sid"; ?>";
 	
 	popselectwin=window.open(urlholder,"pop","width=" + ww + ",height=" + wh + ",menubar=no,resizable=yes,scrollbars=yes,dependent=yes");
 	window.popselectwin.moveTo((w/2)+80,(h/2)-(wh/2));
@@ -213,7 +213,7 @@ function killchild()
 
 function cal_update()
 {
-	var filename="doctors-dienstplan-planen.php?<?php echo "sid=$sid&lang=$lang" ?>&retpath=<?php echo $retpath ?>&dept_nr=<?php echo $dept_nr; ?>&pmonth="+document.dienstplan.month.value+"&pyear="+document.dienstplan.jahr.value;
+	var filename="doctors-rosterplan-planen.php?<?php echo "sid=$sid&lang=$lang" ?>&retpath=<?php echo $retpath ?>&dept_nr=<?php echo $dept_nr; ?>&pmonth="+document.dienstplan.month.value+"&pyear="+document.dienstplan.jahr.value;
 	window.location.replace(filename);
 }
 </script>
@@ -251,7 +251,7 @@ for ($i=2000;$i<2016;$i++){
 $sBuffer = $sBuffer.'</select>';
 $smarty->assign('sYearSelect',$sBuffer);
 
-$smarty->assign('sFormAction','action="doctors-dienstplan-planen.php"');
+$smarty->assign('sFormAction','action="doctors-rosterplan-planen.php"');
 
  # collect hidden inputs
 
