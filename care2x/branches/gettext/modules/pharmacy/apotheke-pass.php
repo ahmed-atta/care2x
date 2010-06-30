@@ -48,7 +48,7 @@ switch($mode) {
 						$allowedarea[] = '_a_1_pharmadbadmin';	
 						$src="medibotpass";
 						$userck="ck_prod_bot_user";
-						$fileforward=$root_path."modules/pharmacy/apotheke-bestellbot-pass.php".URL_APPEND."&mode=bot&user_origin=pharmabot";
+						$fileforward=$root_path."modules/pharmacy/pharmacy-orderbot-pass.php".URL_APPEND."&mode=bot&user_origin=pharmabot";
 						break;
 	default: 	{header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 }
