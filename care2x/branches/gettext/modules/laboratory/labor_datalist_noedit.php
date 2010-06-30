@@ -85,7 +85,7 @@ if(!isset($user_origin)) $user_origin='';
 if($user_origin=='lab'||$user_origin=='lab_mgmt'){
   	$local_user='ck_lab_user';
   	if(isset($from)&&$from=='input') $breakfile=$root_path.'modules/laboratory/labor_datainput.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&user_origin='.$user_origin;
-		else $breakfile=$root_path.'modules/laboratory/labor_data_patient_such.php'.URL_APPEND;
+		else $breakfile=$root_path.'modules/laboratory/labor_data_patient_search.php'.URL_APPEND;
 }else{
   	$local_user='ck_pflege_user';
   	$breakfile=$root_path.'modules/nursing/nursing-station-patientdaten.php'.URL_APPEND.'&pn='.$pn.'&edit='.$edit;
@@ -93,7 +93,7 @@ if($user_origin=='lab'||$user_origin=='lab_mgmt'){
 }
 if(!$_COOKIE[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
-if(!$encounter_nr) header("location:".$root_path."modules/laboratory/labor_data_patient_such.php?sid=$sid&lang=$lang");
+if(!$encounter_nr) header("location:".$root_path."modules/laboratory/labor_data_patient_search.php?sid=$sid&lang=$lang");
 
 $thisfile=basename(__FILE__);
 
@@ -106,7 +106,7 @@ $lab_obj=new Lab($encounter_nr);
 
 $cache='';
 
-if($nostat) $ret=$root_path."modules/laboratory/labor_data_patient_such.php?sid=$sid&lang=$lang&versand=1&keyword=$encounter_nr";
+if($nostat) $ret=$root_path."modules/laboratory/labor_data_patient_search.php?sid=$sid&lang=$lang&versand=1&keyword=$encounter_nr";
 	else $ret=$root_path."modules/nursing/nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$encounter_nr";
 	
 # Load the date formatter */

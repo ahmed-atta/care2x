@@ -29,7 +29,7 @@ if($user_origin=='lab'||$user_origin=='lab_mgmt'){
 
 if(!$_COOKIE[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
-if(!$encounter_nr) header("location:".$root_path."modules/laboratory/labor_data_patient_such.php?sid=$sid&lang=$lang");
+if(!$encounter_nr) header("location:".$root_path."modules/laboratory/labor_data_patient_search.php?sid=$sid&lang=$lang");
 require_once($root_path.'include/helpers/inc_config_color.php');
 
 $thisfile=basename(__FILE__);
@@ -100,7 +100,7 @@ function doGraph($paramValue,$pName,$valueBuff,$cols=1){
 	return $txt;	
 }
 
-if($nostat) $ret=$root_path."modules/laboratory/labor_data_patient_such.php?sid=$sid&lang=$lang&versand=1&keyword=$pn";
+if($nostat) $ret=$root_path."modules/laboratory/labor_data_patient_search.php?sid=$sid&lang=$lang&versand=1&keyword=$pn";
 	else $ret=$root_path."modules/nursing/nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn";
 	
 # Load the date formatter

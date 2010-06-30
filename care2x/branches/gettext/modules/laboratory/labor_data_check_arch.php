@@ -16,7 +16,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'modules/laboratory/model/class_lab.php');
 
 $thisfile='labor_data_check_arch.php';
-$breakfile='labor_data_patient_such.php'.URL_APPEND.'&mode=edit';
+$breakfile='labor_data_patient_search.php'.URL_APPEND.'&mode=edit';
 
 $toggle=0;
 
@@ -57,7 +57,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 <img <?php echo createComIcon($root_path,'micros.gif','0','absmiddle') ?>><FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=5  FACE="verdana"> <b><?php echo "$LDLabReport - $LDNewData" ?></b></font>
 <table width=100% border=0 cellpadding="0" cellspacing="0">
 <tr>
-<td colspan=3><img <?php echo createLDImgSrc($root_path,'newdata-b.gif','0') ?>><a href="labor_data_patient_such.php?sid=<?php echo "$sid&lang=$lang&mode=$mode" ?>"><img <?php echo createLDImgSrc($root_path,'such-gray.gif','0') ?>></a></td>
+<td colspan=3><img <?php echo createLDImgSrc($root_path,'newdata-b.gif','0') ?>><a href="labor_data_patient_search.php?sid=<?php echo "$sid&lang=$lang&mode=$mode" ?>"><img <?php echo createLDImgSrc($root_path,'such-gray.gif','0') ?>></a></td>
 </tr>
 <tr >
 <td bgcolor=#333399 colspan=3>
