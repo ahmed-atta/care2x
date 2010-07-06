@@ -79,20 +79,20 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 	<tr valign=top>
-		<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="35"><FONT
-			COLOR="<?php echo $cfg['top_txtcolor']; ?>" SIZE=+2 FACE="Arial"> <STRONG>
-		&nbsp;<?php echo $LDDutyPlanOrg ?></STRONG></FONT></td>
-		<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right
-			height="35"><a href="javascript:history.back();"><img
-			<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?>
-			style="filter: alpha(opacity = 70)" class="fadeOut" /></a><a
-			href="javascript:gethelp()"><img
-			<?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>
-			align="absmiddle" style="filter: alpha(opacity = 70)" class="fadeOut"/></a><a
-			href="<?php echo $breakfile ?>"><img
-			<?php echo createLDImgSrc($root_path,'close2.gif','0') ?> width=103
-			height=24 align="absmiddle" style="filter: alpha(opacity = 70)"
-			class="fadeOut"></a></td>
+		<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="35">
+			<FONT COLOR="<?php echo $cfg['top_txtcolor']; ?>" SIZE=+2 FACE="Arial"> <STRONG>&nbsp;<?php echo $LDDutyPlanOrg ?></STRONG></FONT>
+		</td>
+		<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right height="35">
+			<a href="javascript:history.back();">
+				<img <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> style="filter: alpha(opacity = 70)" class="fadeOut" />
+			</a>
+			<a href="javascript:gethelp()">
+				<img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> align="absmiddle" style="filter: alpha(opacity = 70)" class="fadeOut"/>
+			</a>
+			<a href="<?php echo $breakfile ?>">
+				<img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> width=103 height=24 align="absmiddle" style="filter: alpha(opacity = 70)" class="fadeOut">
+			</a>
+	</td>
 	</tr>
 	<tr valign=top>
 		<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
@@ -101,17 +101,18 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 			<p><FONT face="Verdana,Helvetica,Arial" size=4> <img
 			<?php echo createComIcon($root_path,'icon_clock.gif','0') ?>> <?php echo $LDBundyMachine ?>
 			<p>
-			
-			</font> <FONT face="Verdana,Helvetica,Arial" size=3> <font size=1><a
-				href="spediens-ado-bundy.php?sid=<?php echo "$sid&lang=$lang&month=$month&year=$year" ?>&mondir=-1"><img
-				<?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>> <?php echo $LDPrevMonth ?></a></font>
-			<b>&nbsp;<?php echo $monat[(int)$month]." ".$year; ?>&nbsp;</b> <font
-				size=1><a
-				href="spediens-ado-bundy.php?sid=<?php echo "$sid&lang=$lang&month=$month&year=$year" ?>&mondir=1"><?php echo $LDNextMonth ?>
-			<img
-			<?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0') ?>></a></font>
-
-
+			</font> 
+			<FONT face="Verdana,Helvetica,Arial" size=3> <font size=1>
+			<a href="spediens-ado-bundy.php?sid=<?php echo "$sid&lang=$lang&month=$month&year=$year" ?>&mondir=-1">
+				<img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>> <?php echo $LDPrevMonth ?>
+			</a>
+			</font>
+			<b>&nbsp;<?php echo $monat[(int)$month]." ".$year; ?>&nbsp;</b> 
+			<font size=1>
+				<a href="spediens-ado-bundy.php?sid=<?php echo "$sid&lang=$lang&month=$month&year=$year" ?>&mondir=1"><?php echo $LDNextMonth ?>
+					<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0') ?>>
+				</a>
+			</font>
 			<FONT face="Verdana,Helvetica,Arial" size=2>
 			<table border=1>
 			<?php
