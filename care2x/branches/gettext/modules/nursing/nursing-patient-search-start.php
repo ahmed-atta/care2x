@@ -467,7 +467,7 @@ if($rows){
 <ul>
 
 <b><?php echo $LDMoreFunctions ?>:</b><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="nursing-ward-archiv.php?sid=<?php echo "$sid&lang=$lang";?>&user=<?php echo str_replace(" ","+",$user);?>"><?php echo $LDArchive ?></a><br>
+<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="nursing-ward-archive.php?sid=<?php echo "$sid&lang=$lang";?>&user=<?php echo str_replace(" ","+",$user);?>"><?php echo $LDArchive ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="javascript:gethelp('nursing_how2search.php','<?php echo $mode ?>','<?php echo $rows ?>','search')"><?php echo $LDHow2Search ?></a><br>
 
 <p>

@@ -670,7 +670,7 @@ if($ward_ok){
 if($pday.$pmonth.$pyear<>date('dmY'))
 
 	$smarty->assign('sToArchiveLink','<p>
-			<a href="nursing-ward-archiv.php'.URL_APPEND.'">'.$LDClk2Archive.' <img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','',TRUE).'></a>
+			<a href="nursing-ward-archive.php'.URL_APPEND.'">'.$LDClk2Archive.' <img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','',TRUE).'></a>
 			<p>');
 
 $smarty->assign('pbClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp');
