@@ -494,7 +494,7 @@ function rx(){
 		<tr><td bgcolor=333333><font color=white><b>'.$LDReports.'<b></font></td></tr>
 		<tr><td>
 		<table cellpadding=3><tr>
-		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-pbericht.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDNursingReport.'"></td>
+		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-report.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDNursingReport.'"></td>
 		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'diagnostics-report-start.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'&header='.$result['name_last'].',+'.$result['name_first'].'+'.formatDate2Local($result['date_birth'],$date_format).'\'" value="'.$LDReports.'"></td>
 		';
 		echo '<td><input type="button" onClick="javascript:window.location.href=\''.$root_path.'modules/laboratory/labor_datalist_noedit.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&user_origin='.$user_origin.'&edit='.$edit.'\'" value="'.$LDLabReports.'"></td>';
