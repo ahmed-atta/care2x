@@ -41,7 +41,7 @@ $yr=date(Y);
 
  function parentrefresh(d)
 {
-	window.opener.location.replace("nursing-ward-patientdata-kurve.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&edit=<?php echo $edit ?>&station=<?php echo $station ?>&pn=<?php echo $pn."&tag=\"+d.day.value+\"&kmonat=\"+d.month.value+\"&jahr=\"+d.year.value+\"&tagname=$tagname&dayback=$dayback\")"; ?>;
+	window.opener.location.replace("nursing-ward-patientdata-graph.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&edit=<?php echo $edit ?>&station=<?php echo $station ?>&pn=<?php echo $pn."&tag=\"+d.day.value+\"&kmonat=\"+d.month.value+\"&jahr=\"+d.year.value+\"&tagname=$tagname&dayback=$dayback\")"; ?>;
 	window.close();
 	return false;
 }

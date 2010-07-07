@@ -483,7 +483,7 @@ function rx(){
 		<tr><td>
 		<table cellpadding=3><tr><td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-custom-inout.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$IO_title.'"></td>
 		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-custom-ddc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$DDC_title.'"></td>
-		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-kurve.php'.URL_REDIRECT_APPEND.'&station='.$station.'&dept_nr='.$dept_nr.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'"></td>
+		<td><input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-graph.php'.URL_REDIRECT_APPEND.'&station='.$station.'&dept_nr='.$dept_nr.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$LDFeverCurve.'"></td>
 		</tr>
 		<tr><td>
 		<input type="button" onClick="javascript:enlargewin();window.location.href=\'nursing-ward-patientdata-custom-tc.php'.URL_REDIRECT_APPEND.'&station='.$station.'&pn='.$pn.'&edit='.$edit.'\'" value="'.$TC_title.'"></td>

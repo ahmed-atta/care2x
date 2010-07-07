@@ -325,7 +325,7 @@ if($cfg['bname']=='msie'){
 ?>
 		{
 		// alert("left click");	
-		urlholder="nursing-ward-patientdata-kurve.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&"+winID+"=1&pn=" + patientID + "&jahr=" + jahrID + "&kmonat=" + monatID + "&tag="+ tagID + "&station="+station+"&tagname="+ tagN ;
+		urlholder="nursing-ward-patientdata-graph.php?sid=<?php echo "$sid&lang=$lang&edit=$edit" ?>&"+winID+"=1&pn=" + patientID + "&jahr=" + jahrID + "&kmonat=" + monatID + "&tag="+ tagID + "&station="+station+"&tagname="+ tagN ;
  		window.location.replace(urlholder);
    		}
 }
