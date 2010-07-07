@@ -21,7 +21,7 @@ files to be renamed is changed.
 selected language) after closing the admission_list.php page. 
   * Fixed broken link for the Cancel button in the admission_list.php page. 
   * Fixed broken links for city and insurance company selection in the 
-personell register page. 
+staff register page. 
   * Fixes language problems in nursing module. It involves usage of the 
 Start & End image links. 
 
