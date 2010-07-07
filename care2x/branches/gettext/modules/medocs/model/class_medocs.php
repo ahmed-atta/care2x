@@ -103,8 +103,8 @@ class Medocs extends Notes {
 	* aux_notes = Auxilliary notes
 	* date = Date of creation
 	* time = Time of creation
-	* staff_nr = Personnel number who created the document
-	* staff_name = Personnel name
+	* staff_nr = staff number who created the document
+	* staff_name = staff name
 	* therapy = Therapy text
 	* @access public
 	* @param int document number

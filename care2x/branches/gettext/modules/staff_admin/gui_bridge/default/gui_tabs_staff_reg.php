@@ -1,5 +1,5 @@
 <?php
-# Creates the tabs for the personnel administration module 
+# Creates the tabs for the staff administration module 
 if(!isset($notabs)||!$notabs){
 
 	if($target=='person_reg') $tab_bot_line='reg_div';

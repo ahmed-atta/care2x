@@ -6,7 +6,7 @@
 */
 require_once($root_path.'include/core/class_core.php');
 /**
-*  Personnel methods. 
+*  staff methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
 * @version beta 2.0.1
@@ -18,12 +18,12 @@ class Staff extends Core {
 	* @access private
 	*/
 	/**
-	* Table name for personnel data
+	* Table name for staff data
 	* @var string
 	*/
 	var $tb='care_staff';
 	/**
-	* Table name for personnel assignments
+	* Table name for staff assignments
 	* @var string
 	*/
 	var $tb_assign='care_staff_assignment';
@@ -74,7 +74,7 @@ class Staff extends Core {
 	*/
 	var $record_count;
 	/**
-	* Personnel data buffer
+	* staff data buffer
 	* @var adodb record object
 	*/
 	var $staff_data;
@@ -178,9 +178,9 @@ class Staff extends Core {
 		$this->setRefArray($this->staff_fields);
 	}
 	/**
-	* Checks if the personnel (employee) number exists in the database.
+	* Checks if the staff (employee) number exists in the database.
 	* @access public
-	* @param int Personnel number
+	* @param int staff number
 	* @return boolean
 	*/
 	function InitstaffNrExists($init_nr){
@@ -195,9 +195,9 @@ class Staff extends Core {
 	/**#@+
 	*
 	* The returned adodb record object contains rows of arrays.
-	* Each array contains the personnel data with the following index keys:
+	* Each array contains the staff data with the following index keys:
 	* - nr = record's primary key number
-	* - staff_nr = personnel or employee number
+	* - staff_nr = staff or employee number
 	* - job_function_title = job function title or name
 	* - name_last = employee's last or family name
 	* - name_first = employee's first or given name
@@ -226,7 +226,7 @@ class Staff extends Core {
 		else return $this->_getAllstaff(1,16,$dept_nr); // 1= dept (location); 16 = nurse (role)
 	}
 	/**
-	* Returns  information of all personnel (employee) based on location type, role number and department number keys
+	* Returns  information of all staff (employee) based on location type, role number and department number keys
 	*
 	* @access private
 	* @param int Location type number
@@ -264,7 +264,7 @@ class Staff extends Core {
 	}
 	
 	/**
-	* Returns  information of the selected personnel (employee) based on staff id
+	* Returns  information of the selected staff (employee) based on staff id
 	*
 	* @access private
 	* @param int Location type number
@@ -300,7 +300,7 @@ class Staff extends Core {
 	}
 	
 	/**
-	* Returns  information of all personnel (employee) based on role number
+	* Returns  information of all staff (employee) based on role number
 	*
 	* @access private
 	* @param int Role number
@@ -442,9 +442,9 @@ class Staff extends Core {
 	/**#@-*/
 	
 	/**
-	* Gets the personnel information based on its personnel number key.
+	* Gets the staff information based on its staff number key.
 	*
-	* The returned  array contains the personnel data with the following index keys:
+	* The returned  array contains the staff data with the following index keys:
 	* - all index keys as outlined in the <var>$staff_fields</var> array
 	* - all index keys as outlined in the <var>Person::$elems_array</var> array
 	* - funk1 = first pager number
@@ -452,7 +452,7 @@ class Staff extends Core {
 	* - inphone2 = second internal phone number
 	* - inphone3 = third internal phone number
 	* @access public
-	* @param int Personnel number
+	* @param int staff number
 	* @return mixed adodb record object or boolean
 	*/
 	function getstaffInfo($nr){
@@ -551,10 +551,10 @@ class Staff extends Core {
 		return $this->_getOCQuicklist(14,$year,$month);
 	}	
 	/**
-	* Searches and returns basic personnel information.
+	* Searches and returns basic staff information.
 	*
 	* The returned adodb record object contains rows of arrays.
-	* Each array contains the personnel data with the following index keys:
+	* Each array contains the staff data with the following index keys:
 	* - nr = record's primary key number
 	* - job_function_title = job function title or name
 	* - name_last = employee's last or family name
@@ -644,12 +644,12 @@ class Staff extends Core {
 		}
 	}
 	/**
-	* Loads the personnel data in the internal buffer <var>$staff_data</var>. based on its personnel number key.
+	* Loads the staff data in the internal buffer <var>$staff_data</var>. based on its staff number key.
 	*
 	* The data is stored in the internal buffer array <var> $staff_data</var> .
 	* This method returns only TRUE or FALSE. The load success status is also stored in the <var>$is_loaded</var> variable.
 	* @access public
-	* @param int Personnel number
+	* @param int staff number
 	* @return boolean
 	*/
 	function loadstaffData($nr=0){
@@ -694,7 +694,7 @@ class Staff extends Core {
 	}
 	/**#@+
 	*
-	* Use this methode only after the personnell data was successfully loaded with the <var>loadstaffData()</var> method.
+	* Use this methode only after the staffl data was successfully loaded with the <var>loadstaffData()</var> method.
 	* @access public
 	* @return string
 	*/
@@ -828,7 +828,7 @@ class Staff extends Core {
 	/**
 	* Returns person's PID number.
 	*
-	* Use this methode only after the personnell data was successfully loaded with the <var>loadstaffData()</var> method.
+	* Use this methode only after the staffl data was successfully loaded with the <var>loadstaffData()</var> method.
 	* @access public
 	* @return string
 	*/

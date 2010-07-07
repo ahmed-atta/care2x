@@ -21,7 +21,7 @@
 				{{$LDTechnician}}:<br>
 				{{* Note: never rename the input, when redimensioning or repositioning it  *}}
 				<input type="text" name="reporter" size=30 ><p>
-				{{$LDPersonnelNr}}:<br>
+				{{$LDstaffNr}}:<br>
 				{{* Note: never rename the input, when redimensioning or repositioning it  *}}
 				<input type="text" name="id" size=30>
 			</td>

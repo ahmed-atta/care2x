@@ -25,7 +25,7 @@ Outpatient<br>
 Pharmacy<br>
 Physicians & Surgeons<br>
 Person registration<br>
-Personnel Management<br>
+staff Management<br>
 Radiology<br>
 Telephone Directory<br>
 </font>

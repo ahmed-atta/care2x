@@ -48,7 +48,7 @@ $LDOrDocu='OR Documentation';
 $LDOrLogBook='OR nursing logbook';
 $LDOrNursing='OR nursing';
 $LDCreate='Create';
-$LDPersonList='Personnel list';
+$LDPersonList='staff list';
 $LDRepairbotActivate='Activate Repairbot';
 $LDQBotActivate='Activate Q-Bot';
 

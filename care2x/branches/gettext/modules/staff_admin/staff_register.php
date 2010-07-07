@@ -181,7 +181,7 @@ if($pid||$staff_nr){
 			$addr_citytown_name=$person_obj->CityTownName($addr_citytown_nr);
 		}
         } elseif($staff_nr) {
-		# Load personnel data
+		# Load staff data
 		$staff_obj->loadstaffData($staff_nr);
 		if($staff_obj->is_loaded) {
 			$zeile=&$staff_obj->staff_data;

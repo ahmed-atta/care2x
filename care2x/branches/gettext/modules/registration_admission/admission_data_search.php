@@ -163,7 +163,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 					  AND enc.is_discharged=0
 					  AND enc.status NOT IN ('void','hidden','inactive','deleted')  ORDER BY ";
 
-			# Filter if it is personnel nr
+			# Filter if it is staff nr
 			if($oitem=='encounter_nr') $sql2.='enc.'.$oitem.' '.$odir;
 				else $sql2.='reg.'.$oitem.' '.$odir;
 				

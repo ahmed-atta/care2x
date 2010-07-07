@@ -154,7 +154,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 			$sql2.=" AND ps.status NOT IN ('void','hidden','deleted','inactive')
 						AND ps.is_discharged IN ('',0)
 					  	AND ps.pid=p.pid ";
-			# Filter if it is personnel nr
+			# Filter if it is staff nr
 			if($oitem=='nr') $sql3.='ORDER BY ps.'.$oitem.' '.$odir;
 				else $sql3 ='ORDER BY p.'.$oitem.' '.$odir;
 
@@ -213,7 +213,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
  $smarty = new smarty_care('system_admin');
 
 # Title in toolbar
- $smarty->assign('sToolbarTitle',"$LDPersonnelManagement :: $LDstaffData :: $LDSearch");
+ $smarty->assign('sToolbarTitle',"$LDstaffManagement :: $LDstaffData :: $LDSearch");
 
  # hide return button
  $smarty->assign('pbBack',FALSE);
@@ -225,7 +225,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
- $smarty->assign('sWindowTitle',"$LDPersonnelManagement :: $LDstaffData :: $LDSearch");
+ $smarty->assign('sWindowTitle',"$LDstaffManagement :: $LDstaffData :: $LDSearch");
 
  # Body onLoad Javascript code
  $smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.select()"');

@@ -30,14 +30,14 @@ $LDSendInquiry='Send inquiry';
 $LDReset='Reset';
 $LDRepairArea='Localization of the damage';
 $LDReporter='Requested by';
-$LDPersonnelNr='Personnel nr.';
+$LDstaffNr='staff nr.';
 $LDPhoneNr='Telephone nr. (for eventual inquiries)';
 $LDPlsDescribe='Please describe the nature of the damage';
 
 $LDAlertName='Please enter your name.';
 $LDAlertDept='Please enter your department or localisation of the damage.';
 $LDAlertDeptOnly='Please enter your department.';
-$LDAlertPNr='Please enter your personnel number.';
+$LDAlertPNr='Please enter your staff number.';
 $LDAck='Acknowledgement';
 $LDYour='Your';
 $LDReceived='was received on';

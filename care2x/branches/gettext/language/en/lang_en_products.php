@@ -260,7 +260,7 @@ $LDResetAll='Reset all';
 $LDReporter='Reporter';
 
 $LDAlertName='Enter your name please!';
-$LDAlertPersonNr='Enter your personnel number please!';
+$LDAlertPersonNr='Enter your staff number please!';
 $LDAlertReport='Please write your report!';
 
 $LDOrderNrExists='The order number exists already! Please use a different number.';

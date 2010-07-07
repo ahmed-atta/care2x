@@ -11,7 +11,7 @@
  $smarty = new smarty_care('system_admin');
 
 # Title in toolbar
- $smarty->assign('sToolbarTitle', "$LDPersonnelManagement :: $LDstaffData ($full_pnr)");
+ $smarty->assign('sToolbarTitle', "$LDstaffManagement :: $LDstaffData ($full_pnr)");
 
  # hide return button
  $smarty->assign('pbBack',FALSE);
@@ -23,7 +23,7 @@
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
- $smarty->assign('sWindowTitle',"$LDPersonnelManagement :: $LDstaffData ($full_pnr)");
+ $smarty->assign('sWindowTitle',"$LDstaffManagement :: $LDstaffData ($full_pnr)");
 
 # Colllect javascript code
 

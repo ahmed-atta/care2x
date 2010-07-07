@@ -150,7 +150,7 @@ $smarty->assign('LDRepairReport',$LDRepairReport);
 $smarty->assign('LDPlsDoneOnly',$LDPlsDoneOnly);
 $smarty->assign('LDRepairArea',$LDRepairArea);
 $smarty->assign('LDTechnician',$LDTechnician);
-$smarty->assign('LDPersonnelNr',$LDPersonnelNr);
+$smarty->assign('LDstaffNr',$LDstaffNr);
 $smarty->assign('LDPlsTypeReport',$LDPlsTypeReport);
 $smarty->assign('LDJobIdNr',$LDJobIdNr);
 

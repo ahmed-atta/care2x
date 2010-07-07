@@ -1,4 +1,4 @@
-<font face="Verdana, Arial" size=3 color="#0000cc"><b>Personnel management</b></font><p>
+<font face="Verdana, Arial" size=3 color="#0000cc"><b>staff management</b></font><p>
 <?php 
 if(!$src&&!$x1){
 ?>

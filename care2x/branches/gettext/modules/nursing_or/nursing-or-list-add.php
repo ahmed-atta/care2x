@@ -59,6 +59,6 @@ switch($mode){
 					$pers_obj->setDataArray($data);
 					if(!$pers_obj->updateDataFromInternalArray($item_nr))  echo "$obj->sql<br>$LDDbNoUpdate";
 }
-header("location:nursing-or-roster-personnel-list.php".URL_REDIRECT_APPEND."&saved=1&retpath=$retpath&ipath=$ipath&dept_nr=$dept_nr&nr=$nr");
+header("location:nursing-or-roster-staff-list.php".URL_REDIRECT_APPEND."&saved=1&retpath=$retpath&ipath=$ipath&dept_nr=$dept_nr&nr=$nr");
 exit;
 ?>
