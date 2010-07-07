@@ -53,7 +53,7 @@ if( $enc_obj->loadEncounterData($pn)) {
 				$data_array['encounter_nr']=$pn;
 				$data_array['date']=$date;
 				$data_array['time']=$time;
-				$data_array['personell_name']=$encoder;
+				$data_array['staff_name']=$encoder;
 				$enc_obj->saveDischargeNotesFromArray($data_array);
 			}
 			# If patient died

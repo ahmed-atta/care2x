@@ -9,7 +9,7 @@
 					{{include file='common/submenu_row_spacer.tpl'}}
 					{{$LDBilling}}
 					{{include file='common/submenu_row_spacer.tpl'}}
-					{{$LDPersonellMngmnt}}
+					{{$LDstaffMngmnt}}
 					{{include file='common/submenu_row_spacer.tpl'}}
 					{{$LDInsuranceCoMngr}}
 					{{include file='common/submenu_row_spacer.tpl'}}

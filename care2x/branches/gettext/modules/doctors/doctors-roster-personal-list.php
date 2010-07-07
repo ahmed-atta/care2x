@@ -18,14 +18,14 @@ define('MAX_BLOCK_ROWS',30);
 $lang_tables[]='search.php';
 $lang_tables[]='departments.php';
 define('LANG_FILE','doctors.php');
-if($_SESSION['sess_user_origin']=='personell_admin'){
+if($_SESSION['sess_user_origin']=='staff_admin'){
 	$local_user='aufnahme_user';
 	$bShowSearchEntry = FALSE;
 	if(!isset($saved)||!$saved){
 		$mode='search';
 		$searchkey=$nr;
 	}
-	$breakfile=$root_path.'modules/personell_admin/personell_register_show.php'.URL_APPEND.'&target=personell_reg&personell_nr='.$nr;
+	$breakfile=$root_path.'modules/staff_admin/staff_register_show.php'.URL_APPEND.'&target=staff_reg&staff_nr='.$nr;
 }else{
 	$local_user='ck_doctors_roster_user';
 	$breakfile='javascript:history.back()';
@@ -51,14 +51,14 @@ $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 $dept_list=&$dept_obj->getAllMedical();
 # Load the dept doctors
-require_once($root_path.'modules/personell_admin/model/class_personell.php');
-$pers_obj=new Personell;
+require_once($root_path.'modules/staff_admin/model/class_staff.php');
+$pers_obj=new staff;
 $doctors=&$pers_obj->getDoctorsOfDept($dept_nr);
 # Load global values
 $GLOBAL_CONFIG=array();
 require_once($root_path.'include/core/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
-$glob_obj->getConfig('personell_%');
+$glob_obj->getConfig('staff_%');
 
 # Set color values for the search mask
 $searchmask_bgcolor='#f3f3f3';
@@ -100,9 +100,9 @@ $pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 
 # Get the max nr of rows from global config
-$glob_obj->getConfig('pagin_personell_search_max_block_rows');
-if(empty($GLOBAL_CONFIG['pagin_personell_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
-	else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_personell_search_max_block_rows']);
+$glob_obj->getConfig('pagin_staff_search_max_block_rows');
+if(empty($GLOBAL_CONFIG['pagin_staff_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
+	else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_staff_search_max_block_rows']);
 
 
 # Load date formatter
@@ -114,7 +114,7 @@ if($mode=='search'||$mode=='paginate'){
 	# Save the search keyword for eventual pagination routines
 	if($mode=='search') $_SESSION['sess_searchkey']=$searchkey;
 
-	$search_result=&$pers_obj->searchLimitPersonellBasicInfo($searchkey,$pagen->MaxCount(),$pgx,$oitem,$odir);
+	$search_result=&$pers_obj->searchLimitstaffBasicInfo($searchkey,$pagen->MaxCount(),$pgx,$oitem,$odir);
 	//echo $pers_obj->getLastQuery();
 	# Get the resulting record count
 	$linecount=$pers_obj->LastRecordCount();
@@ -124,7 +124,7 @@ if($mode=='search'||$mode=='paginate'){
 	if(isset($totalcount)&&$totalcount){
 		$pagen->setTotalDataCount($totalcount);
 	}else{
-		@$pers_obj->searchPersonellBasicInfo($searchkey,''); # The second param is empty to prevent sorting
+		@$pers_obj->searchstaffBasicInfo($searchkey,''); # The second param is empty to prevent sorting
 		$totalcount=$pers_obj->LastRecordCount();
 		$pagen->setTotalDataCount($totalcount);
 	}
@@ -250,7 +250,7 @@ if(is_object($doctors)&&$doctors->RecordCount()){
  -->    <td  class="v13" colspan=2><nobr>&nbsp;<?php echo $row['job_function_title']; ?></nobr></td>
     <td  class="v13" colspan=2>&nbsp;<?php echo '
 						&nbsp;
-							<a href="javascript:popinfo(\''.$row['personell_nr'].'\',\''.$dept_nr.'\')" title="'.$LDContactInfo.'">
+							<a href="javascript:popinfo(\''.$row['staff_nr'].'\',\''.$dept_nr.'\')" title="'.$LDContactInfo.'">
 							<img '.$img_options_contact.' alt="'.$LDShowData.'"></a>&nbsp;';	 ?></td>
 	<td><a href="javascript:deleteItem('<?php echo $row['nr']; ?>')" title="<?php echo $LDDelete; ?>">
 							<img <?php echo $img_options_delete.' alt="'.$LDDelete.'"'; ?>></a>&nbsp</td>  	
@@ -319,7 +319,7 @@ if($mode=='search'||$mode=='paginate'){
 			
 ?>
      <td>
-	  <?php echo $pagen->makeSortLink($LDPersonellNr,'nr',$oitem,$odir,$append);  ?></td>
+	  <?php echo $pagen->makeSortLink($LDstaffNr,'nr',$oitem,$odir,$append);  ?></td>
      <td>
 	  <?php echo $pagen->makeSortLink($LDSex,'sex',$oitem,$odir,$append);  ?></td>
       <td>
@@ -343,7 +343,7 @@ if($mode=='search'||$mode=='paginate'){
 							<tr class=";
 						if($toggle) { echo "wardlistrow2>"; $toggle=0;} else {echo "wardlistrow1>"; $toggle=1;};
 						echo"<td>";
-                        echo '&nbsp;'.($row['nr']+$GLOBAL_CONFIG['personell_nr_adder']);
+                        echo '&nbsp;'.($row['nr']+$GLOBAL_CONFIG['staff_nr_adder']);
                         echo "</td><td>";	
 
 						switch($row['sex']){

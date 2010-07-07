@@ -77,7 +77,7 @@ $_SESSION['sess_dept_nr']=0; // reset the department number used in the session
 
 $aSubMenuText=array($LDPluginsTxt,
 					$LDBillingTxt,
-					$LDPersonellMngmntTxt,
+					$LDstaffMngmntTxt,
 					$LDInsuranceCoMngrTxt,
 					$LDAddressMngrTxt,
 					$LDImmunizationMngrTxt,
@@ -96,7 +96,7 @@ $aSubMenuText=array($LDPluginsTxt,
 
 $aSubMenuItem=array('LDPlugins' => '<a href="'.$root_path.'plugins/plugins.php'.URL_APPEND.'">'.$LDPlugins.'</a>',
 					'LDBilling' => '<a href="'.$root_path.'modules/ecombill/ecombill_pass.php'.URL_APPEND.'">'. $LDBilling.'</a>',
-					'LDPersonellMngmnt' => '<a href="'.$root_path.'modules/personell_admin/personell_admin_pass.php'.URL_APPEND.'&retpath=spec&target=personell_reg">'.$LDPersonellMngmnt.'</a>',
+					'LDstaffMngmnt' => '<a href="'.$root_path.'modules/staff_admin/staff_admin_pass.php'.URL_APPEND.'&retpath=spec&target=staff_reg">'.$LDstaffMngmnt.'</a>',
 					'LDInsuranceCoMngr' => '<a href="'.$root_path.'modules/insurance_co/insurance_co_manage_pass.php'.URL_APPEND.'">'. $LDInsuranceCoMngr.'</a>',
 					'LDAddressMngr' => '<a href="'.$root_path.'modules/address/address_manage_pass.php'.URL_APPEND.'">'. $LDAddressMngr.'</a>',
 					'LDImmunizationMngr' => '<a href="'.$root_path.'modules/immunization/immunization_manage_pass.php'.URL_APPEND.'">'. $LDImmunizationMngr.'</a>',

@@ -13,16 +13,16 @@ require_once($root_path.'include/helpers/inc_environment_global.php');
 define('LANG_FILE','phone.php');
 if(isset($user_origin)&&$user_origin=='pers'){
 	$local_user='aufnahme_user';
-	$sBreakUrl = $root_path.'modules/personell_admin/personell_register_show.php'.URL_APPEND.'&personell_nr='.$nr;
+	$sBreakUrl = $root_path.'modules/staff_admin/staff_register_show.php'.URL_APPEND.'&staff_nr='.$nr;
 }else{
 	$local_user='phonedir_user';
 	$sBreakUrl = 'phone.php'.URL_APPEND;
 }
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'modules/personell_admin/model/class_personell.php');
+require_once($root_path.'modules/staff_admin/model/class_staff.php');
 
 /* Create employee object */
-$employee=new Personell();
+$employee=new staff();
 
 if(!isset($mode)) $mode='';
 if(!isset($name)) $name='';
@@ -65,7 +65,7 @@ if ($mode=='save' || ($mode=='update' && !empty($nr)) ){
                 $_POST['modify_time'] = date('YmdHis');
                 $_POST['history'] = $phone->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
 
-                $phone->setWhereCondition("personell_nr='$nr'");
+                $phone->setWhereCondition("staff_nr='$nr'");
                 $phone->setDataArray($_POST);
 
  				if($phone->updateDataFromInternalArray($nr)){
@@ -84,7 +84,7 @@ if ($mode=='save' || ($mode=='update' && !empty($nr)) ){
 }
 
 if($user_origin=='pers'&&$nr){
-	if(!$employee->loadPersonellData($nr)) $mode='save';
+	if(!$employee->loadstaffData($nr)) $mode='save';
 		elseif($employee->PhoneKey()) $mode = 'update';
 }
 ?>
@@ -300,7 +300,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <?php 
 if($user_origin=='pers'&&$employee->isPreLoaded()){
 ?>
-<input type="hidden" name="personell_nr" value="<?php echo $nr; ?>">
+<input type="hidden" name="staff_nr" value="<?php echo $nr; ?>">
 <input type="hidden" name="nr" value="<?php echo $nr ?>">
 <?php
 }

@@ -9,9 +9,9 @@ function chkForm(d) {
 		alert("<?php echo $LDPlsSelectDept; ?>");
 		d.to_dept_nr.focus();
 		return false;
-	}else if(d.to_personell_name.value==''){
+	}else if(d.to_staff_name.value==''){
 		alert("<?php echo $LDPlsEnterDoctor; ?>");
-		d.to_personell_name.focus();
+		d.to_staff_name.focus();
 		return false;
 	}else if(d.purpose.value==''){
 		alert("<?php echo $LDPlsEnterPurpose; ?>");
@@ -72,7 +72,7 @@ if($bPastDateError) echo '<font class="warnprompt">'.$LDInvalidDate.' '.$LDNoPas
    
    <tr bgcolor="#f6f6f6">
      <td><font color="red"><b>*</b><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDPhysician/$LDClinician"; ?></td>
-     <td><input type="text" name="to_personell_name" size=50 maxlength=60  value="<?php if(isset($to_personell_name)) echo $to_personell_name; ?>"></td>
+     <td><input type="text" name="to_staff_name" size=50 maxlength=60  value="<?php if(isset($to_staff_name)) echo $to_staff_name; ?>"></td>
    </tr>
 
    <tr bgcolor="#f6f6f6">

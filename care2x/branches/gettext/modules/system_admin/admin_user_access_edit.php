@@ -99,7 +99,7 @@ if ($mode != '') {
 						   login_id,
 						   password,
 						   permission,
-						   personell_nr,
+						   staff_nr,
 						   s_date,
 						   s_time,
 						   dept_nr,
@@ -113,7 +113,7 @@ if ($mode != '') {
 						   '" . addslashes ( $userid ) . "',
 						   '" . md5 ( $pass ) . "',
 						   '" . $permission . "',
-						   '" . (( int ) $personell_nr) . "',
+						   '" . (( int ) $staff_nr) . "',
 						   '" . date ( 'Y-m-d' ) . "',
 						   '" . date ( 'H:i:s' ) . "',
 						   '" .  serialize($dept_nr)  . "',
@@ -387,7 +387,7 @@ while(list($x,$dept)=each($deptarray)){
 <tr bgcolor="#dddddd">
 <td colspan=3>
 <p>
-<input type="hidden" name="personell_nr" value="<?php echo $personell_nr ; ?>">
+<input type="hidden" name="staff_nr" value="<?php echo $staff_nr ; ?>">
 <input type="hidden" name="itemname" value="<?php echo $itemname ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ; ?>">

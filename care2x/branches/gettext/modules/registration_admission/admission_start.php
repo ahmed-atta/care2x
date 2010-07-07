@@ -26,7 +26,7 @@ require_once($root_path.'include/core/class_ward.php');
 require_once($root_path.'include/core/class_encounter.php');
 require_once($root_path.'include/core/class_globalconfig.php');
 require_once($root_path.'modules/ecombill/model/class_ecombill.php');
-require_once($root_path.'modules/personell_admin/model/class_personell.php');
+require_once($root_path.'modules/staff_admin/model/class_staff.php');
 
 //gjergji
 $current_dept_nr = $_SESSION['department_nr'];
@@ -72,8 +72,8 @@ $encounter_obj=new Encounter($encounter_nr);
 $encounter_classes=$encounter_obj->AllEncounterClassesObject();
 /* Create eComBill object */
 $eComBill_obj = new eComBill;
-/* Create personell object */
-$personell_obj = new Personell;
+/* Create staff object */
+$staff_obj = new staff;
 
 
 
@@ -867,21 +867,21 @@ if(!isset($pid) || !$pid){
 
 	if ($GLOBAL_CONFIG['show_doctors_list'] && $encounter_class_nr == 2){
 		$smarty->assign('LDAdmitDoctorRefered',$LDAdmitDoctorRefered);
-		$personellItems = $personell_obj->_getAllPersonellByRole(17);
+		$staffItems = $staff_obj->_getAllstaffByRole(17);
 
 		$bufferBill = $encounter_obj->ReferredDoctor($encounter_nr);
-		$tmpPersonell = $personell_obj->_getPersonellById($bufferBill);
+		$tmpstaff = $staff_obj->_getstaffById($bufferBill);
 
-		if(isset($tmpPersonell) && !empty($tmpPersonell)) $referred_dr = $tmpPersonell->Fields("personell_nr");
+		if(isset($tmpstaff) && !empty($tmpstaff)) $referred_dr = $tmpstaff->Fields("staff_nr");
 
 		$sTemp = '';
 		$sTemp = $sTemp.'<select name="referred_dr_list"';
 		if($update) $sTemp .= 'disabled="disabled"';
 		$sTemp .= '>';
-		while($buffer = $personellItems->FetchRow()) {
+		while($buffer = $staffItems->FetchRow()) {
 			$sTemp = $sTemp.'
-						<option value="'.$buffer['personell_nr'].'" ';
-			if($referred_dr == $buffer['personell_nr']) $sTemp = $sTemp.'selected';
+						<option value="'.$buffer['staff_nr'].'" ';
+			if($referred_dr == $buffer['staff_nr']) $sTemp = $sTemp.'selected';
 			$sTemp = $sTemp.'>';
 			$sTemp = $sTemp . $buffer['name_first'] . ' ' . $buffer['name_last'];
 			$sTemp = $sTemp.'</option>';

@@ -77,7 +77,7 @@
      <td>
 
 	 	{{if $bSetAsForm}}
-	 		<input type='text' name='personell_name' size=50 maxlength=60 value='{{$TP_user_name}}' readonly>
+	 		<input type='text' name='staff_name' size=50 maxlength=60 value='{{$TP_user_name}}' readonly>
 		{{else}}
 			{{$sAuthor}}
 		{{/if}}

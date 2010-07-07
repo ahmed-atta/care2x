@@ -110,7 +110,7 @@ if($mode=='save'){
 var n=false;
 function checkForm(f)
 {
-	if(f.notes.value==""||f.personell_name=="") return false;
+	if(f.notes.value==""||f.staff_name=="") return false;
 	 else return true;
 }
 function setChg()
@@ -166,7 +166,7 @@ if($occup){
 		if(!empty($row['short_notes'])) echo '<br>[ '.deactivateHotHtml($row['short_notes']).' ]';
 	?>
 	</td>
-    <td><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
+    <td><?php if($row['staff_name']) echo $row['staff_name']; ?></td>
   </tr>
 
 <?php
@@ -181,7 +181,7 @@ if($occup){
  
 <form method="post" name=remform action="nursing-ward-remarks.php" onSubmit="return checkForm(this)">
 <textarea name="notes" cols=60 rows=5 wrap="physical" onKeyup="setChg()"></textarea>
-<input type="text" name="personell_name" size=60 maxlength=60 value="<?php echo $_SESSION['sess_user_name']; ?>" readonly>
+<input type="text" name="staff_name" size=60 maxlength=60 value="<?php echo $_SESSION['sess_user_name']; ?>" readonly>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="station" value="<?php echo $station ?>">

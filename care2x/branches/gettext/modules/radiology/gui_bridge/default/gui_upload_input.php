@@ -215,7 +215,7 @@ if($mode=='show'){
 			    <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['therapy'])) echo substr($row['therapy'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>
 			
 				</td>    <td align="center"><a href="<?php echo $thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&encounter_nr='.$_SESSION['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr']; ?>"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a></td>
-			    <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
+			    <td><FONT SIZE=-1  FACE="Arial"><?php if($row['staff_name']) echo $row['staff_name']; ?></td>
 			  </tr>
 			
 			<?php
@@ -248,7 +248,7 @@ if($mode=='show'){
 	$TP_diagnosis=nl2br($row['diagnosis']);
 	$TP_therapy=nl2br($row['therapy']);
 	$TP_date=formatDate2Local($row['date'],$date_format);
-	$TP_personell_name=$row['personell_name'];
+	$TP_staff_name=$row['staff_name'];
 	# Load and output the template 
 	$TP_form=$TP_obj->load('medocs/tp_medocs_showdata.htm');
 	eval("echo $TP_form;");

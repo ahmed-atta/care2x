@@ -43,7 +43,7 @@ class GuiSearchPerson {
 	var $auto_show_byalphanumeric = FALSE;
 
 	# The language tables
-	var $langfile = array( 'aufnahme.php', 'personell.php');
+	var $langfile = array( 'aufnahme.php', 'staff.php');
 
 	# Initialize some flags
 	var $toggle = 0;

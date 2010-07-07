@@ -129,7 +129,7 @@ while($row=$result->FetchRow()){
 		 ?></td>
   </tr>
   <tr  class="<?php echo $bgc; ?>" >
-    <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo $row['to_personell_name']; ?></td>
+    <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo $row['to_staff_name']; ?></td>
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
 	<?php
 		$buf=$enc_class[$row['encounter_class_nr']]['LD_var'];

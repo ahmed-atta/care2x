@@ -16,8 +16,8 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
         
-require_once($root_path.'modules/personell_admin/model/class_personell.php');
-$pers_obj=new Personell;
+require_once($root_path.'modules/staff_admin/model/class_staff.php');
+$pers_obj=new staff;
 $nurses=&$pers_obj->getNursesOfDept($dept_nr);
 
 $wkday=date("w",mktime(0,0,0,$month,$elemid+1,$year));
@@ -98,7 +98,7 @@ if($pers_obj->record_count){
 
     while($row=$nurses->FetchRow()){
 	    echo '
-	    <a href="#" onClick="addelem(\''.$mode.$elemid.'\',\'h'.$mode.$elemid.'\',\''.ucfirst($row['name_last']).'\',\''.ucfirst($row['name_first']).'\',\''.$row['date_birth'].'\',\''.$row['personell_nr'].'\')">
+	    <a href="#" onClick="addelem(\''.$mode.$elemid.'\',\'h'.$mode.$elemid.'\',\''.ucfirst($row['name_last']).'\',\''.ucfirst($row['name_first']).'\',\''.$row['date_birth'].'\',\''.$row['staff_nr'].'\')">
 	    <img ';
 	    if ($mode=="a") echo createComIcon($root_path,'mans-gr.gif','0') ; else echo  createComIcon($root_path,'mans-red.gif','0');
 	    echo '> '.ucfirst($row['name_last']).', '.ucfirst($row['name_first']).'</a>

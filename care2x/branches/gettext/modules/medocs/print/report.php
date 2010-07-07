@@ -91,7 +91,7 @@ $data=NULL;
 $data[]=array($LDMedocs);
 $pdf->ezTable($data,'','',array('xPos'=>'left','xOrientation'=>'right','showLines'=>0,'fontSize'=>$report_titlesize,'showHeadings'=>0,'shaded'=>2,'shadeCol2'=>array(0.9,0.9,0.9),'width'=>555));
 # Print the author and date info
-$y=$pdf->ezText("$LDBy ".$medocs['personell_name']." $LDDate: ".formatDate2Local($medocs['date'],$date_format)." $LDTime: ".$medocs['time']."\n",$report_authorsize);
+$y=$pdf->ezText("$LDBy ".$medocs['staff_name']." $LDDate: ".formatDate2Local($medocs['date'],$date_format)." $LDTime: ".$medocs['time']."\n",$report_authorsize);
 
 $data=NULL;
 # Print the add insurance info

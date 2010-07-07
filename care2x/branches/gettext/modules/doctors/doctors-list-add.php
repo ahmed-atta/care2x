@@ -11,7 +11,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 //define('LANG_FILE','doctors.php');
-if($_SESSION['sess_user_origin']=='personell_admin'){
+if($_SESSION['sess_user_origin']=='staff_admin'){
 	$local_user='aufnahme_user';
 }else{
 	$local_user='ck_doctors_roster_user';
@@ -20,13 +20,13 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 //$db->debug=true;
 
-require_once($root_path.'modules/personell_admin/model/class_personell.php');
-$pers_obj=new Personell;
+require_once($root_path.'modules/staff_admin/model/class_staff.php');
+$pers_obj=new staff;
 $pers_obj->useAssignmentTable();
 $data=array();
 
 if($mode!='delete'){
-	$data['personell_nr']=$nr;
+	$data['staff_nr']=$nr;
 	$data['role_nr']=17; // 17 = doctor (role person)
 	$data['location_type_nr']=1; // 1 = dept (location type)
 	$data['location_nr']=$dept_nr;

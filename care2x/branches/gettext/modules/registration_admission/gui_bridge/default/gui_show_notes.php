@@ -262,7 +262,7 @@ if($mode=='show'){
 				$smarty->assign('sMakePdf',$topdf);
 			}
 			
-			if($row['personell_name']) $smarty->assign('sAuthor',$row['personell_name']);
+			if($row['staff_name']) $smarty->assign('sAuthor',$row['staff_name']);
 			
 			if(!$parent_admit){
 				$smarty->assign('sEncNr','<a href="admission_data_search.php'.URL_APPEND.'&encounter_nr='.$row['encounter_nr'].'&origin=patreg_reg">'.$row['encounter_nr'].'</a>');
@@ -307,9 +307,9 @@ function chkform(d) {
 		alert("<?php echo $LDPlsEnterReport; ?>");
 		d.notes.focus();
 		return false;
-	}else if(d.personell_name.value==""){
+	}else if(d.staff_name.value==""){
 		alert("<?php echo $LDPlsEnterFullName; ?>");
-		d.personell_name.focus();
+		d.staff_name.focus();
 		return false;
 	}else{
 		return true;
@@ -336,7 +336,7 @@ function chkform(d) {
 	$smarty->assign('LDSendCopyTo',$LDSendCopyTo);
 	$smarty->assign('sSendCopyInput','<input type="text" name="send_to_name" size=50 maxlength=60>');
 
-	$smarty->assign('sAuthorInput','<input type="text" name="personell_name" size=50 maxlength=60 value="'.$_SESSION['sess_user_name'].'" readonly>');
+	$smarty->assign('sAuthorInput','<input type="text" name="staff_name" size=50 maxlength=60 value="'.$_SESSION['sess_user_name'].'" readonly>');
 
 
 $sTemp = '<input type="hidden" name="encounter_nr" value="'.$_SESSION['sess_en'].'">
@@ -345,7 +345,7 @@ $sTemp = '<input type="hidden" name="encounter_nr" value="'.$_SESSION['sess_en']
 <input type="hidden" name="create_id" value="'.$_SESSION['sess_user_name'].'">
 <input type="hidden" name="create_time" value="null">
 <input type="hidden" name="mode" value="create">
-<input type="hidden" name="personell_nr">
+<input type="hidden" name="staff_nr">
 <input type="hidden" name="send_to_pid">
 <input type="hidden" name="type_nr" value="'.$type_nr.'">
 <input type="hidden" name="target" value="'.$target.'">

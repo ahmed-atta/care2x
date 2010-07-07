@@ -20,7 +20,7 @@ require_once($root_path.'modules/insurance_co/model/class_insurance.php');
 require_once($root_path.'include/core/class_ward.php');
 require_once($root_path.'include/core/class_globalconfig.php');
 require_once($root_path.'modules/ecombill/model/class_ecombill.php');
-require_once($root_path.'modules/personell_admin/model/class_personell.php');
+require_once($root_path.'modules/staff_admin/model/class_staff.php');
 
 if(!isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod'] = "";
 # Create objects
@@ -28,7 +28,7 @@ $encounter_obj=new Encounter($encounter_nr);
 $person_obj=new Person();
 $insurance_obj=new Insurance;
 $eComBill_obj = new eComBill;
-$personell_obj = new Personell;
+$staff_obj = new staff;
 
 $thisfile=basename(__FILE__);
 
@@ -439,11 +439,11 @@ if($GLOBAL_CONFIG['show_doctors_list'] && $encounter_class_nr == 2){
 
 	$bufferBill = $encounter_obj->ReferredDoctor($encounter_nr);
 	if(!empty($bufferBill) && isset($bufferBill))
-		$personellNr = $bufferBill->Fields("referred_dr");
+		$staffNr = $bufferBill->Fields("referred_dr");
 
-	if($att_doctor = $personell_obj->_getPersonellById($personellNr)) {
+	if($att_doctor = $staff_obj->_getstaffById($staffNr)) {
 		//TODO : gjergji : change to list appointments by doctor...
-		$smarty->assign('sAdmitDoctorRefered','<a href="'.$root_path.'modules/personell_admin/'.strtr('personell_register_show.php'.URL_APPEND.'&from=such&target=personell_search&personell_nr=' .$att_doctor->Fields("personell_nr") .'&sem=1',' ',' ').'">'.$att_doctor->Fields("name_first") . ' '  .$att_doctor->Fields("name_last") .'</a>');
+		$smarty->assign('sAdmitDoctorRefered','<a href="'.$root_path.'modules/staff_admin/'.strtr('staff_register_show.php'.URL_APPEND.'&from=such&target=staff_search&staff_nr=' .$att_doctor->Fields("staff_nr") .'&sem=1',' ',' ').'">'.$att_doctor->Fields("name_first") . ' '  .$att_doctor->Fields("name_last") .'</a>');
 	} else {
 		$smarty->assign('sAdmitDoctorRefered',"----");
 	}

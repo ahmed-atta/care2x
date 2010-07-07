@@ -101,8 +101,8 @@ if(($mode=='')||($mode=='fresh')){
 		if(SHOW_DOC_2) $elem.=',duty_2_pnr';
 			
 		# Create personnel object
-		include_once($root_path.'modules/personell_admin/model/class_personell.php');
-		$pers_obj=new Personell;
+		include_once($root_path.'modules/staff_admin/model/class_staff.php');
+		$pers_obj=new staff;
 			
 		if($result=$pers_obj->getDOCDutyplan($ward_info['dept_nr'],$pyear,$pmonth,$elem)){
 			$duty1=&unserialize($result['duty_1_pnr']);
@@ -115,10 +115,10 @@ if(($mode=='')||($mode=='fresh')){
 		# Consider the early morning hours to belong to the past day
 		if(date('H.i')<DOC_CHANGE_TIME) $offset_day--;
 		if($pnr1=$duty1['ha'.$offset_day]){
-			$person1=&$pers_obj->getPersonellInfo($pnr1);
+			$person1=&$pers_obj->getstaffInfo($pnr1);
 		}
 		if(SHOW_DOC_2 && ($pnr2=$duty2['hr'.$offset_day])){
-			$person2=&$pers_obj->getPersonellInfo($pnr2);
+			$person2=&$pers_obj->getstaffInfo($pnr2);
 		}
 		#### End of routine to fetch doctors on duty
 	}else{

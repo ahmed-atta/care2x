@@ -54,7 +54,7 @@ $charts_obj= new Charts;
 
 	if(($mode=='save')&&(trim($notes)!='')){
 		$_POST['encounter_nr']=$pn;
-		$_POST['personell_name']=$_SESSION['sess_user_name'];
+		$_POST['staff_name']=$_SESSION['sess_user_name'];
 		if($charts_obj->saveChartNotesFromArray($_POST,$notes_type_nr)){
     	  	// Load the visual signalling functions
     		include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');	
@@ -163,7 +163,7 @@ if($count){
 	</td>
     <td><FONT SIZE=1  FACE="Arial"><?php if(!empty($row['date'])) echo @formatDate2Local($row['date'],$date_format); ?></td>
     <td><FONT SIZE=1  FACE="Arial"><?php if($row['time']) echo $row['time']; ?></td>
-    <td><FONT SIZE=1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
+    <td><FONT SIZE=1  FACE="Arial"><?php if($row['staff_name']) echo $row['staff_name']; ?></td>
   </tr>
 
 <?php

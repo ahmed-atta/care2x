@@ -16,9 +16,9 @@ define('LANG_FILE','doctors.php');
 
 switch($_SESSION['sess_user_origin'])
 {
-	case 'personell_admin':
+	case 'staff_admin':
 		$local_user='aufnahme_user';
-		$breakfile=$root_path.'modules/personell_admin/personell_register_show.php'.URL_APPEND.'&target=personell_reg&personell_nr='.$nr;
+		$breakfile=$root_path.'modules/staff_admin/staff_register_show.php'.URL_APPEND.'&target=staff_reg&staff_nr='.$nr;
 		break;
 		
 	case 'calendar_opt':

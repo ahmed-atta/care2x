@@ -14,9 +14,9 @@ define('LANG_FILE','doctors.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'modules/personell_admin/model/class_personell.php');
-$pers_obj=new Personell;
-$person=&$pers_obj->getPersonellInfo($nr);
+require_once($root_path.'modules/staff_admin/model/class_staff.php');
+$pers_obj=new staff;
+$person=&$pers_obj->getstaffInfo($nr);
 
 require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;

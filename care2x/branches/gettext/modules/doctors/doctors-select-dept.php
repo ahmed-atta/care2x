@@ -12,9 +12,9 @@ require($root_path.'include/helpers/inc_environment_global.php');
 */
 $lang_tables[]='departments.php';
 define('LANG_FILE','doctors.php');
-if($_SESSION['sess_user_origin']=='personell_admin'){
+if($_SESSION['sess_user_origin']=='staff_admin'){
 	$local_user='aufnahme_user';
-	$breakfile=$root_path.'modules/personell_admin/personell_register_show.php'.URL_APPEND.'&target=personell_reg&personell_nr='.$nr;
+	$breakfile=$root_path.'modules/staff_admin/staff_register_show.php'.URL_APPEND.'&target=staff_reg&staff_nr='.$nr;
 }else{
 	$local_user='ck_doctors_roster_user';
 	if (!empty($_SESSION['sess_path_referer'])){
