@@ -74,7 +74,7 @@
 $aSubMenuItem = array('LDNursingStations' => $LDNursingStations." <img ".createComIcon($root_path,'dwn-arrow-grn.gif','0','absmiddle').">",
 										'LDQuickView'  => "<a href=\"".$root_path."modules/nursing/nursing-quickview.php".URL_APPEND."\">$LDQuickView</a>",
 										'LDSearchPatient'  => "<a href=\"".$root_path."modules/nursing/nursing-patient-search-start.php".URL_APPEND."\">$LDSearchPatient</a>",
-										'LDArchive'  => "<a href=\"".$root_path."modules/nursing/nursing-ward-archiv.php".URL_APPEND."\">$LDArchive</a>",
+										'LDArchive'  => "<a href=\"".$root_path."modules/nursing/nursing-ward-archive.php".URL_APPEND."\">$LDArchive</a>",
 										'LDNursesList'  => "<a href=\"".$root_path."modules/nursing_or/nursing-or-main-pass.php".URL_APPEND."&target=setpersonal&retpath=menu\">$LDNursesList</a>",
 										'LDNews'  => "<a href=\"".$root_path."modules/news/newscolumns.php".URL_APPEND."&dept_nr=36\">$LDNews</a>"
 										);
