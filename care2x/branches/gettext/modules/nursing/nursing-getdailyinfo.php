@@ -144,7 +144,7 @@ require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
 
     function parentrefresh()
         {
-        window.opener.location.href = "nursing-ward-patientdata-kurve.php?sid=<?php echo "
+        window.opener.location.href = "nursing-ward-patientdata-graph.php?sid=<?php echo "
         $sid & lang = $lang & edit = $edit & station = $station & pn = $pn & tag = $dystart & kmonat = $monstart & jahr
             = $yrstart & tagname = $dyname
         " ?>&nofocus=1";

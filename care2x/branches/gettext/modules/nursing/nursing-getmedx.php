@@ -195,7 +195,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 	}
 	
 	function parentrefresh(){
-		window.opener.location.href="nursing-ward-patientdata-kurve.php?sid=<?php echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&tag=$dystart&monat=$mo&dept_nr=$dept_nr&jahr=$yr&tagname=$dyname" ?>&nofocus=1";
+		window.opener.location.href="nursing-ward-patientdata-graph.php?sid=<?php echo "$sid&lang=$lang&edit=$edit&station=$station&pn=$pn&tag=$dystart&monat=$mo&dept_nr=$dept_nr&jahr=$yr&tagname=$dyname" ?>&nofocus=1";
 	}
 		
 	function repeatPrescription(prescriptionId){
