@@ -16,8 +16,6 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $cksid='ck_sid'.$sid;
 
-if(!$_COOKIE[$cksid] && !$cookie) { header("location:".$root_path."cookies.php?lang=$lang&startframe=1"); exit;}
-
 if(!isset($_SESSION['sess_news_nr'])) $_SESSION['sess_news_nr'] = "";
 
 $readerpath='headline-read.php?sid='.$sid.'&lang='.$lang;
