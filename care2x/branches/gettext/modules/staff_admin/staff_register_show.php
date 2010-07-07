@@ -39,7 +39,7 @@ $updatefile='staff_register.php';
 $default_photo_path=$root_path.'uploads/photos/registration';
 $photo_filename='nopic';
 
-#Check whether the origin is phone directory and if session personnel nr. is ok
+#Check whether the origin is phone directory and if session staff nr. is ok
 if($_SESSION['sess_user_origin']=='phonedir'&&$_SESSION['sess_staff_nr']){
 	$staff_nr=$_SESSION['sess_staff_nr'];
 }else{

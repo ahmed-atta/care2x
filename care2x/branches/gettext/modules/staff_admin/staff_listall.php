@@ -106,7 +106,7 @@ if($ergebnis=$db->SelectLimit($sql.$sql2.$sql3,$pagen->MaxCount(),$pagen->BlockS
  $smarty = new smarty_care('system_admin');
 
 # Title in toolbar
- $smarty->assign('sToolbarTitle', "$LDPersonnelManagement :: $LDstaffData :: $LDSearch");
+ $smarty->assign('sToolbarTitle', "$LDstaffManagement :: $LDstaffData :: $LDSearch");
 
  # hide return button
  $smarty->assign('pbBack',FALSE);
@@ -118,7 +118,7 @@ if($ergebnis=$db->SelectLimit($sql.$sql2.$sql3,$pagen->MaxCount(),$pagen->BlockS
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
- $smarty->assign('sWindowTitle',"$LDPersonnelManagement :: $LDstaffData :: $LDSearch");
+ $smarty->assign('sWindowTitle',"$LDstaffManagement :: $LDstaffData :: $LDSearch");
 
 # Colllect javascript code
 

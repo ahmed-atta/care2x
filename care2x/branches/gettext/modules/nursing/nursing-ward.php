@@ -100,7 +100,7 @@ if(($mode=='')||($mode=='fresh')){
 		$elem='duty_1_pnr';
 		if(SHOW_DOC_2) $elem.=',duty_2_pnr';
 			
-		# Create personnel object
+		# Create staff object
 		include_once($root_path.'modules/staff_admin/model/class_staff.php');
 		$pers_obj=new staff;
 			

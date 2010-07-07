@@ -34,7 +34,7 @@ if(!isset($_SESSION['sess_pid'])) $_SESSION['sess_pid'] = "";
  $smarty = new smarty_care('system_admin');
 
 # Title in toolbar
- $smarty->assign('sToolbarTitle', "$LDPersonnelManagement :: $LDPersonRegister");
+ $smarty->assign('sToolbarTitle', "$LDstaffManagement :: $LDPersonRegister");
 
  # hide return button
  $smarty->assign('pbBack',FALSE);
@@ -46,7 +46,7 @@ if(!isset($_SESSION['sess_pid'])) $_SESSION['sess_pid'] = "";
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
- $smarty->assign('sWindowTitle',"$LDPersonnelManagement :: $LDPersonRegister");
+ $smarty->assign('sWindowTitle',"$LDstaffManagement :: $LDPersonRegister");
 
 # Colllect javascript code
 

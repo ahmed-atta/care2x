@@ -38,7 +38,7 @@ How to send a request for repair service?</b></font>
 <ul> <b>Step 1: </b>Enter the localization of the damage in the 
 <nobr>"<span style="background-color:yellow" > Localization of the damage <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<p>
 <b>Step 2: </b>Enter your name in the <nobr>"<span style="background-color:yellow" > Requested by: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<br>
- <b>Step 3: </b>Enter your personnel number in the <nobr>"<span style="background-color:yellow" > Personnel nr.: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
+ <b>Step 3: </b>Enter your staff number in the <nobr>"<span style="background-color:yellow" > staff nr.: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
  <b>Step 4: </b>Enter your telephone number in the <nobr>"<span style="background-color:yellow" > Telephone nr. <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field in case the technical support department has inquiries regarding your request.<p>
  <b>Step 5: </b>Type the description of the damage in the <nobr>"<span style="background-color:yellow" > Please describe the nature of the damage: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
  <b>Step 6: </b>Click the <img <?php echo createLDImgSrc('../','abschic.gif','0') ?>> button to send your request. <br>
@@ -55,7 +55,7 @@ How to report a done repair service?</b></font>
 <nobr>"<span style="background-color:yellow" > Localization of the damage <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<p>
 <b>Step 2: </b>Enter the job id number in the <nobr>"<span style="background-color:yellow" > Job ID nr.: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<br>
 <b>Step 3: </b>Enter your name in the <nobr>"<span style="background-color:yellow" > Technician: <input type="text" name="d" size=20 maxlength=10> </span>"</nobr> field.<br>
- <b>Step 4: </b>Enter your personnel number in the <nobr>"<span style="background-color:yellow" > Personnel nr.: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
+ <b>Step 4: </b>Enter your staff number in the <nobr>"<span style="background-color:yellow" > staff nr.: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
  <b>Step 5: </b>Type the description of the repair job you have done in the <nobr>"<span style="background-color:yellow" > Please describe the repair job you have done: <input type="text" name="d" size=20 maxlength=5> </span>"</nobr> field.<br>
  <b>Step 6: </b>Click the <input type="button" value="Send report"> button to send your report. <br>
 </ul>

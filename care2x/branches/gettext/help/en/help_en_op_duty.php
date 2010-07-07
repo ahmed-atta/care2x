@@ -19,7 +19,7 @@
 							break;
 		case "plan": print "Nurses on duty - Create dutyplan";
 							break;
-		case "personlist": print "Create personnel list";
+		case "personlist": print "Create staff list";
 							break;
 		case "dutydoc": print "Nurses on duty - Documenting work done on on-call-duty hours";
 							break;

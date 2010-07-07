@@ -1,7 +1,7 @@
 <?php
 # Prepare title
 
-$sTitle="$LDPersonnelManagement :: $LDNewEmployee ";
+$sTitle="$LDstaffManagement :: $LDNewEmployee ";
 if($full_nr) $sTitle=$sTitle.$full_pnr;
 
 //gjergji : new calendar

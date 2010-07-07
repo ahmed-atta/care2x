@@ -151,7 +151,7 @@ $smarty->assign('LDRepairArea',$LDRepairArea);
 $smarty->assign('sArea',strtoupper($ward_id)." - ".$cfg['thispc_room_nr']." - ".$dept_name);
 $smarty->assign('LDReporter',$LDReporter);
 $smarty->assign('sUserName',$_SESSION['sess_user_name']);
-$smarty->assign('LDPersonnelNr',$LDPersonnelNr);
+$smarty->assign('LDstaffNr',$LDstaffNr);
 $smarty->assign('LDPhoneNr',$LDPhoneNr);
 $smarty->assign('sThisPhoneNr',$cfg['thispc_phone']);
 $smarty->assign('LDPlsDescribe',$LDPlsDescribe);

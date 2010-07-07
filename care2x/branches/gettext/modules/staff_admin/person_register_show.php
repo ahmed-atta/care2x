@@ -42,7 +42,7 @@ $_SESSION['sess_parent_mod']='registration';
  $smarty = new smarty_care('system_admin');
 
 # Title in toolbar
- $smarty->assign('sToolbarTitle', "$LDPersonnelManagement :: $LDPersonData ($pid)");
+ $smarty->assign('sToolbarTitle', "$LDstaffManagement :: $LDPersonData ($pid)");
 
  # hide return button
  $smarty->assign('pbBack',FALSE);
@@ -54,7 +54,7 @@ $_SESSION['sess_parent_mod']='registration';
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
- $smarty->assign('sWindowTitle',"$LDPersonnelManagement :: $LDPersonData ($pid)");
+ $smarty->assign('sWindowTitle',"$LDstaffManagement :: $LDPersonData ($pid)");
 
 # Buffer page output
 

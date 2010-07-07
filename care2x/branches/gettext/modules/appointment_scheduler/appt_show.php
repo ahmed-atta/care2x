@@ -187,7 +187,7 @@ $smarty->assign('sByDocHiddenInputs','<input type="submit" value="'.$LDShow.'">
 			<input type="hidden"  name="name_last" value="">
 			<input type="hidden"  name="name_first" value="">
 			<input type="hidden"  name="date_birth" value="">
-			<input type="hidden"  name="personnel_nr" value="">
+			<input type="hidden"  name="staff_nr" value="">
 			<input type="hidden"  name="currYear" value="'.$currYear.'">
 			<input type="hidden"  name="currMonth" value="'.$currMonth.'">
 			<input type="hidden"  name="currDay" value="'.$currDay.'">

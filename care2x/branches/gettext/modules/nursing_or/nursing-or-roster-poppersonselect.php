@@ -112,7 +112,7 @@ else
     echo '<form><font face="verdana,arial" size=2>
     <img '.createMascot($root_path,'mascot1_r.gif','0','left').'  > '.$LDNoPersonList.'
     <p>
-    <input type="button" value="'.$LDCreatePersonList.'" onClick="window.opener.location.href=\'nursing-or-roster-personnel-list.php?sid='.$sid.'&lang='.$lang.'&dept_nr='.$dept_nr.'&pmonth='.$month.'&pyear='.$year.'&retpath='.$retpath.'&ipath=plan\';window.opener.focus();window.close();">
+    <input type="button" value="'.$LDCreatePersonList.'" onClick="window.opener.location.href=\'nursing-or-roster-staff-list.php?sid='.$sid.'&lang='.$lang.'&dept_nr='.$dept_nr.'&pmonth='.$month.'&pyear='.$year.'&retpath='.$retpath.'&ipath=plan\';window.opener.focus();window.close();">
     </form>';
 }
 ?>

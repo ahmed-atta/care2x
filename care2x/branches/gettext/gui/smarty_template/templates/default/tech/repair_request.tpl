@@ -19,7 +19,7 @@
 				{{* Note: never rename the input, when redimensioning or repositioning it  *}}
 				<input type="text" name="reporter" size="30" value="{{$sUserName}}">
 				<br>
-				{{$LDPersonnelNr}}:<br>
+				{{$LDstaffNr}}:<br>
 				{{* Note: never rename the input, when redimensioning or repositioning it  *}}
 				<input type="text" name="id" size="30" value=""><br>
 				{{$LDPhoneNr}}:<br>
