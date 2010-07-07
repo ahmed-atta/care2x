@@ -89,7 +89,7 @@ class DoctorsNotes extends Notes {
 	* - eff_aux = auxillary effectivity report
 	* - eff_date = date of  effectivity report
 	* - eff_time = time effectivity report
-	* - eff_personell_name = author of effectivity report
+	* - eff_staff_name = author of effectivity report
 	*
 	* @access public
 	* @param Encounter number
@@ -103,7 +103,7 @@ class DoctorsNotes extends Notes {
 						e.aux_notes AS eff_aux_notes,
 						e.date AS eff_date,
 						e.time AS eff_time,
-						e.personell_name AS eff_personell_name
+						e.staff_name AS eff_staff_name
 					FROM $this->tb_notes AS n LEFT JOIN $this->tb_notes AS e ON n.nr=e.ref_notes_nr AND e.encounter_nr=$enr
 					WHERE (n.type_nr=19 AND n.encounter_nr=$enr)
 						OR (n.type_nr=18 AND n.encounter_nr=$enr)
@@ -132,7 +132,7 @@ class DoctorsNotes extends Notes {
 			$this->data_array['notes']=$data['berichtput'];
 			$this->data_array['date']=$data['dateput'];
 			$this->data_array['time']=$data['timeput'];
-			$this->data_array['personell_name']=$data['author'];
+			$this->data_array['staff_name']=$data['author'];
 			$this->data_array['aux_notes']=$data['warn'];
 		}
 		return $this->_insertNotesFromInternalArray(19);
@@ -161,7 +161,7 @@ class DoctorsNotes extends Notes {
 			$this->data_array['notes']=$data['berichtput2'];
 			$this->data_array['date']=$data['dateput2'];
 			$this->data_array['time']=$data['timeput'];
-			$this->data_array['personell_name']=$data['author2'];
+			$this->data_array['staff_name']=$data['author2'];
 			$this->data_array['aux_notes']=$data['warn2'];
 			$this->data_array['ref_notes_nr']=$data['ref_notes_nr'];
 		}

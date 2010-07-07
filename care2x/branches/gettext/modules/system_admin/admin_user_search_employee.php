@@ -10,7 +10,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('personell.php','edp.php');
+$lang_tables=array('staff.php','edp.php');
 define('LANG_FILE','aufnahme.php');
 $local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
@@ -42,8 +42,8 @@ if(($mode=='search')and($searchkey)){
 	}
 			
 /*	$sql="SELECT ps.nr, ps.is_discharged, p.name_last, p.name_first, p.date_birth,u.login_id
-		          FROM care_person as p, care_personell as ps
-				  	LEFT JOIN care_users AS u ON u.personell_nr=ps.nr ";
+		          FROM care_person as p, care_staff as ps
+				  	LEFT JOIN care_users AS u ON u.staff_nr=ps.nr ";
 	if($numeric) $sql.="WHERE ps.nr $sql_LIKE '%".$suchbuffer."'";
 		else $sql.= "WHERE (p.name_last $sql_LIKE '".addslashes($suchwort)."%'
 		              OR p.name_first LIKE '".addslashes($suchwort)."%') ";
@@ -60,7 +60,7 @@ if(($mode=='search')and($searchkey)){
 				if(!empty($zeile['login_id'])){
 					$append='&mode=edit&userid='.$zeile['login_id'];
 				}else{
-						$append='&is_employee=1&personell_nr='.$zeile['nr'].'&username='.strtr(($zeile['name_first'].' '.$zeile['name_last']),' ','+').'&userid='.strtr($zeile['name_last'],' ','_');
+						$append='&is_employee=1&staff_nr='.$zeile['nr'].'&username='.strtr(($zeile['name_first'].' '.$zeile['name_last']),' ','+').'&userid='.strtr($zeile['name_last'],' ','_');
 				}
 				header("location:admin_user_access_edit.php".URL_REDIRECT_APPEND.$append);
 				exit;
@@ -82,7 +82,7 @@ if(($mode=='search')and($searchkey)){
  $smarty = new smarty_care('system_admin');
 
 # Title in toolbar
- $smarty->assign('sToolbarTitle',"$LDPersonellData :: $LDSearch");
+ $smarty->assign('sToolbarTitle',"$LDstaffData :: $LDSearch");
 
  # hide return button
  $smarty->assign('pbBack',FALSE);
@@ -94,7 +94,7 @@ if(($mode=='search')and($searchkey)){
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
- $smarty->assign('sWindowTitle',"$LDPersonellData :: $LDSearch");
+ $smarty->assign('sWindowTitle',"$LDstaffData :: $LDSearch");
 
  # Body onLoad Javascript
  $smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.select()"');
@@ -142,7 +142,7 @@ if($mode=='search'){
 		<table border=0 cellpadding=2 cellspacing=1>
 		<tr class="wardlisttitlerow">
 		<td><b><?php echo $LDStatus; ?></b></td>
-		<td><b><?php echo $LDPersonellNr; ?></b></td>
+		<td><b><?php echo $LDstaffNr; ?></b></td>
 		<td><b><?php echo $LDLastName; ?></td>
 		<!--//gjergji
 		//changed to search only the users table-->
@@ -167,12 +167,12 @@ if($mode=='search'){
 			}else{
 				$mode='';
 				$alt=$LDCreate;
-				$append='&is_employee=1&personell_nr='.$zeile['nr'].'&username='.strtr(($zeile['name'].' '.$zeile['name_last']),' ','+').'&userid='.strtr($zeile['name_last'],' ','_');
+				$append='&is_employee=1&staff_nr='.$zeile['nr'].'&username='.strtr(($zeile['name'].' '.$zeile['name_last']),' ','+').'&userid='.strtr($zeile['name_last'],' ','_');
 			}
 			echo "</td>";
 
 			echo"<td>";
-			echo '&nbsp;'.($zeile['nr']+$GLOBAL_CONFIG['personell_nr']);
+			echo '&nbsp;'.($zeile['nr']+$GLOBAL_CONFIG['staff_nr']);
 			echo "</td>";
 			echo"<td>";
 			echo "&nbsp;".ucfirst($zeile['name']);
@@ -193,7 +193,7 @@ if($mode=='search'){
 
 			if(!file_exists($root_path.'cache/barcodes/en_'.$full_en.'.png'))
 			{
-				echo "<img src='".$root_path."classes/barcode/image.php?code=".($zeile['nr']+$GLOBAL_CONFIG['personell_nr_adder'])."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
+				echo "<img src='".$root_path."classes/barcode/image.php?code=".($zeile['nr']+$GLOBAL_CONFIG['staff_nr_adder'])."&style=68&type=I25&width=180&height=50&xres=2&font=5&label=2&form_file=en' border=0 width=0 height=0>";
 			}
 			echo '</td></tr>';
 

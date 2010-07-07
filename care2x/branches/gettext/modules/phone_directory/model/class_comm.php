@@ -30,7 +30,7 @@ class Comm extends Core {
 									'name',
 									'vorname',
 									'pid',
-									'personell_nr',
+									'staff_nr',
 									'dept_nr',
 									'beruf',
 									'bereich1',

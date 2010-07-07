@@ -43,7 +43,7 @@ class Person extends Core {
 	* Table name for employee data.
 	* @var string
 	*/
-	var $tb_employ='care_personell';
+	var $tb_employ='care_staff';
 	/**
 	* SQL query
 	*/

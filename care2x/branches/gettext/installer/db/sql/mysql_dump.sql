@@ -79,8 +79,8 @@ CREATE TABLE IF NOT EXISTS `care_appointment` (
   `time` time NOT NULL default '00:00:00',
   `to_dept_id` varchar(25) collate latin1_general_ci NOT NULL,
   `to_dept_nr` smallint(5) unsigned NOT NULL default '0',
-  `to_personell_nr` int(11) NOT NULL default '0',
-  `to_personell_name` varchar(60) collate latin1_general_ci default NULL,
+  `to_staff_nr` int(11) NOT NULL default '0',
+  `to_staff_name` varchar(60) collate latin1_general_ci default NULL,
   `purpose` text collate latin1_general_ci NOT NULL,
   `urgency` tinyint(2) unsigned NOT NULL default '0',
   `remind` tinyint(1) unsigned NOT NULL default '0',
@@ -1370,8 +1370,8 @@ CREATE TABLE IF NOT EXISTS `care_encounter_notes` (
   `short_notes` varchar(25) collate latin1_general_ci default NULL,
   `aux_notes` varchar(255) collate latin1_general_ci default NULL,
   `ref_notes_nr` int(10) unsigned NOT NULL default '0',
-  `personell_nr` int(10) unsigned NOT NULL default '0',
-  `personell_name` varchar(60) collate latin1_general_ci NOT NULL,
+  `staff_nr` int(10) unsigned NOT NULL default '0',
+  `staff_name` varchar(60) collate latin1_general_ci NOT NULL,
   `send_to_pid` int(11) NOT NULL default '0',
   `send_to_name` varchar(60) collate latin1_general_ci default NULL,
   `date` date default NULL,
@@ -2452,10 +2452,10 @@ CREATE TABLE IF NOT EXISTS `care_person` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `care_personell`
+-- Table structure for table `care_staff`
 --
 
-CREATE TABLE IF NOT EXISTS `care_personell` (
+CREATE TABLE IF NOT EXISTS `care_staff` (
   `nr` int(11) NOT NULL auto_increment,
   `short_id` varchar(10) collate latin1_general_ci default NULL,
   `pid` int(11) NOT NULL default '0',
@@ -2488,19 +2488,19 @@ CREATE TABLE IF NOT EXISTS `care_personell` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `care_personell`
+-- Dumping data for table `care_staff`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `care_personell_assignment`
+-- Table structure for table `care_staff_assignment`
 --
 
-CREATE TABLE IF NOT EXISTS `care_personell_assignment` (
+CREATE TABLE IF NOT EXISTS `care_staff_assignment` (
   `nr` int(10) unsigned NOT NULL auto_increment,
-  `personell_nr` int(11) unsigned NOT NULL default '0',
+  `staff_nr` int(11) unsigned NOT NULL default '0',
   `role_nr` smallint(5) unsigned NOT NULL default '0',
   `location_type_nr` smallint(5) unsigned NOT NULL default '0',
   `location_nr` smallint(5) unsigned NOT NULL default '0',
@@ -2514,12 +2514,12 @@ CREATE TABLE IF NOT EXISTS `care_personell_assignment` (
   `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (`nr`,`personell_nr`,`role_nr`,`location_type_nr`,`location_nr`),
-  KEY `personell_nr` (`personell_nr`)
+  PRIMARY KEY  (`nr`,`staff_nr`,`role_nr`,`location_type_nr`,`location_nr`),
+  KEY `staff_nr` (`staff_nr`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `care_personell_assignment`
+-- Dumping data for table `care_staff_assignment`
 --
 
 
@@ -2693,7 +2693,7 @@ CREATE TABLE IF NOT EXISTS `care_phone` (
   `name` varchar(45) collate latin1_general_ci NOT NULL,
   `vorname` varchar(45) collate latin1_general_ci NOT NULL,
   `pid` int(11) unsigned NOT NULL default '0',
-  `personell_nr` int(10) unsigned NOT NULL default '0',
+  `staff_nr` int(10) unsigned NOT NULL default '0',
   `dept_nr` smallint(3) unsigned NOT NULL default '0',
   `beruf` varchar(25) collate latin1_general_ci default NULL,
   `bereich1` varchar(25) collate latin1_general_ci default NULL,
@@ -2714,7 +2714,7 @@ CREATE TABLE IF NOT EXISTS `care_phone` (
   `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (`item_nr`,`pid`,`personell_nr`,`dept_nr`),
+  PRIMARY KEY  (`item_nr`,`pid`,`staff_nr`,`dept_nr`),
   KEY `name` (`name`),
   KEY `vorname` (`vorname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
@@ -2956,8 +2956,8 @@ CREATE TABLE IF NOT EXISTS `care_steri_products_main` (
 CREATE TABLE IF NOT EXISTS `care_target_test` (
   `nr` bigint(20) NOT NULL auto_increment,
   `encounter_nr` varchar(20) collate latin1_general_ci NOT NULL,
-  `personell_nr` varchar(20) collate latin1_general_ci NOT NULL,
-  `personell_name` varchar(255) collate latin1_general_ci default NULL,
+  `staff_nr` varchar(20) collate latin1_general_ci NOT NULL,
+  `staff_name` varchar(255) collate latin1_general_ci default NULL,
   `location_id` varchar(20) collate latin1_general_ci NOT NULL,
   `history` varchar(255) collate latin1_general_ci NOT NULL,
   `modify_id` varchar(255) collate latin1_general_ci NOT NULL,
@@ -4400,7 +4400,7 @@ CREATE TABLE IF NOT EXISTS `care_users` (
   `name` varchar(60) collate latin1_general_ci NOT NULL,
   `login_id` varchar(35) collate latin1_general_ci NOT NULL,
   `password` varchar(255) collate latin1_general_ci default NULL,
-  `personell_nr` int(10) unsigned NOT NULL default '0',
+  `staff_nr` int(10) unsigned NOT NULL default '0',
   `lockflag` tinyint(3) unsigned default '0',
   `permission` text collate latin1_general_ci NOT NULL,
   `exc` tinyint(1) NOT NULL default '0',
@@ -4512,7 +4512,7 @@ CREATE TABLE IF NOT EXISTS `care_ward` (
 
 CREATE TABLE IF NOT EXISTS `care_yellow_paper` (
   `encounter_nr` bigint(20) NOT NULL,
-  `personell_name` varchar(20) collate latin1_general_ci default NULL,
+  `staff_name` varchar(20) collate latin1_general_ci default NULL,
   `location_id` varchar(20) collate latin1_general_ci default NULL,
   `history` text collate latin1_general_ci,
   `create_id` varchar(20) collate latin1_general_ci default NULL,
@@ -4770,10 +4770,10 @@ INSERT INTO care_config_global VALUES ('theme_control_buttons', 'default', '', '
 INSERT INTO care_config_global VALUES ('gui_frame_left_nav_bdcolor', '#990000', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('theme_control_theme_list', 'default,blue_aqua', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('medocs_text_preview_maxlen', '100', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('personell_nr_adder', '100000', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('staff_nr_adder', '100000', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('notes_preview_maxlen', '120', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('person_id_nr_init', '10000000', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('personell_nr_init', '100000', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('staff_nr_init', '100000', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('encounter_nr_init', '000000', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('encounter_nr_fullyear_prepend', '1', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('theme_mascot', 'default', '', '', '', '', 00000000000000, '', 00000000000000);
@@ -4781,9 +4781,9 @@ INSERT INTO care_config_global VALUES ('pagin_address_list_max_block_rows', '20'
 INSERT INTO care_config_global VALUES ('pagin_address_search_max_block_rows', '25', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('pagin_insurance_list_max_block_rows', '30', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('pagin_insurance_search_max_block_rows', '25', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_personell_search_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('pagin_staff_search_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('pagin_person_search_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('pagin_personell_list_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_config_global VALUES ('pagin_staff_list_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('pagin_patient_search_max_block_rows', '20', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('pagin_or_patient_search_max_block_rows', '5', '', '', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('timeout_inactive', '0', '', '', '', '', 00000000000000, '', 00000000000000);
@@ -4849,7 +4849,7 @@ INSERT INTO care_department VALUES (33, 'admission', '2', 'Admission', 'Admit', 
 INSERT INTO care_department VALUES (34, 'news_headline', '3', 'Headline', 'News head', 'Major news', 'LDHeadline', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000, '','');
 INSERT INTO care_department VALUES (35, 'cafenews', '3', 'Cafe News', 'Cafe news', 'Cafeteria news', 'LDCafeNews', '', '0', '0', '1', '1', '1', '0', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000, '','');
 INSERT INTO care_department VALUES (36, 'nursing', '3', 'Nursing', 'Nursing', 'Nursing care', 'LDNursing', '', '1', '1', '1', '1', '1', '1', '1', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000, '','');
-INSERT INTO care_department VALUES (37, 'doctors', '3', 'Doctors', 'Doctors', 'Medical personell', 'LDDoctors', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000, '','');
+INSERT INTO care_department VALUES (37, 'doctors', '3', 'Doctors', 'Doctors', 'Medical staff', 'LDDoctors', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000, '','');
 INSERT INTO care_department VALUES (38, 'pharmacy', '2', 'Pharmacy', 'Pharma', 'Drugstore', 'LDPharmacy', '', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000, '','');
 INSERT INTO care_department VALUES (39, 'anaesthesiology', '1', 'Anesthesiology', 'ana', 'Anesthesia Department', 'LDAnesthesiology', 'Anesthesiology', '0', '0', '1', '1', '1', '1', '0', '0', '', '', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000, '','');
 INSERT INTO care_department VALUES (40, 'general_ambulant', '1', 'General Outpatient Clinic', 'General Clinic', 'General Ambulatory Clinic', 'LDGeneralOutpatientClinic', 'Outpatient/Ambulant Clinic for general/internal medicine', '0', '1', '1', '1', '0', '0', '1', '16', 'round the clock', '8:30 AM - 11:30 AM , 2:00 PM - 5:30 PM', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000, '','');

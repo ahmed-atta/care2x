@@ -27,8 +27,8 @@ require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 
-require_once($root_path.'modules/personell_admin/model/class_personell.php');
-$pers_obj=new Personell;
+require_once($root_path.'modules/staff_admin/model/class_staff.php');
+$pers_obj=new staff;
 $dutyplan=&$pers_obj->getNOCDutyplan($dept_nr,$pyear,$pmonth);
 
 

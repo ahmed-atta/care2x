@@ -255,7 +255,7 @@ $LDReport='Report';
 $LDWriteReport='Write report';
 $LDReportSent='The report was sent';
 $LDSend='Send';
-$LDPersonellNr='Personell Nr.';
+$LDstaffNr='staff Nr.';
 $LDResetAll='Reset all';
 $LDReporter='Reporter';
 

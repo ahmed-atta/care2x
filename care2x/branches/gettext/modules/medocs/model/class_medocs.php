@@ -103,8 +103,8 @@ class Medocs extends Notes {
 	* aux_notes = Auxilliary notes
 	* date = Date of creation
 	* time = Time of creation
-	* personell_nr = Personnel number who created the document
-	* personell_name = Personnel name
+	* staff_nr = Personnel number who created the document
+	* staff_name = Personnel name
 	* therapy = Therapy text
 	* @access public
 	* @param int document number
@@ -118,8 +118,8 @@ class Medocs extends Notes {
 						nd.aux_notes, 
 						nd.date,
 						nd.time,
-						nd.personell_nr,
-						nd.personell_name,
+						nd.staff_nr,
+						nd.staff_name,
 						nt.notes AS therapy
 		FROM $this->tb_notes AS nd LEFT JOIN $this->tb_notes AS nt ON nd.nr=nt.ref_notes_nr
 		WHERE   nd.nr=$nr";

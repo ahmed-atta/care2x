@@ -54,14 +54,14 @@ if($ergebnis=$db->Execute($sql)){
 
 //echo $sql;
 
-require_once($root_path.'modules/personell_admin/model/class_personell.php');
-$pers_obj=new Personell;
+require_once($root_path.'modules/staff_admin/model/class_staff.php');
+$pers_obj=new staff;
 
 if($pnr=$duty1['ha'.$offset_day]){
-	$person1=&$pers_obj->getPersonellInfo($pnr);
+	$person1=&$pers_obj->getstaffInfo($pnr);
 }
 if($pnr=$duty2['hr'.$offset_day]){
-	$person2=&$pers_obj->getPersonellInfo($pnr);
+	$person2=&$pers_obj->getstaffInfo($pnr);
 }
 
 require_once($root_path.'modules/dept_admin/model/class_department.php');

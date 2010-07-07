@@ -264,8 +264,8 @@ if($cnt){
 			$buf['time']='';
 			$buf['eff_notes']=$buf['notes'];
 			$buf['notes']='';
-			$buf['eff_personell_name']=$buf['personell_name'];
-			$buf['personell_name']='';
+			$buf['eff_staff_name']=$buf['staff_name'];
+			$buf['staff_name']='';
 			$buf['eff_aux_notes']=$buf['aux_notes'];
 			$buf['aux_notes']='';
 		}
@@ -285,7 +285,7 @@ if($cnt){
 			echo str_replace('~','<span style="background:yellow">',$strbuf).'</i></div>
 			</td>
 			<td>
-			<div class=fa2_ml3>'.$buf['personell_name'].'</div>
+			<div class=fa2_ml3>'.$buf['staff_name'].'</div>
 			</td>';
 
 				// Column for the effectivity report
@@ -300,7 +300,7 @@ if($cnt){
 				echo str_replace('~','<span style="background:yellow">',$strbuf).'</i></div>
 				</td>
 				<td>
-				<div class=fa2_ml3>'.$buf['eff_personell_name'].'</div>
+				<div class=fa2_ml3>'.$buf['eff_staff_name'].'</div>
 				</td>';
 		echo'</tr>';	
 	}

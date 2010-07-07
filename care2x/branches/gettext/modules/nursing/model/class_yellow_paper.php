@@ -52,8 +52,8 @@ class YellowPaper extends Core {
 	*/
 	var $fld_notes=array('nr',
 									'encounter_nr',
-									'personell_nr',
-									'personell_name',
+									'staff_nr',
+									'staff_name',
 									'location_id',
 									'history',
 									'modify_id',
@@ -280,7 +280,7 @@ class YellowPaper extends Core {
 			$this->data_array=$data;
 			$this->data_array['encounter_nr']=$data['pn'];
 			$this->data_array['location_id']=$data['station'];
-			$this->data_array['personell_name']=$data['personell_name'];
+			$this->data_array['staff_name']=$data['staff_name'];
 			$this->data_array['sunto_anamnestico']=$data['sunto_anamnestico'];
 			$this->data_array['stato_presente']=$data['stato_presente'];
 			$this->data_array['altezza']=$data['altezza'];
@@ -334,7 +334,7 @@ class YellowPaper extends Core {
 			$this->data_array=$data;
 			$this->data_array['encounter_nr']=$data['pn'];
 			$this->data_array['location_id']=$data['station'];
-			$this->data_array['personell_name']=$data['personell_name'];
+			$this->data_array['staff_name']=$data['staff_name'];
 			$this->data_array['sunto_anamnestico']=$data['sunto_anamnestico'];
 			$this->data_array['stato_presente']=$data['stato_presente'];
 			$this->data_array['altezza']=$data['altezza'];

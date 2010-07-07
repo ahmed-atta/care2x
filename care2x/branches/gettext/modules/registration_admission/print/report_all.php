@@ -23,7 +23,7 @@ function getNotes($type_nr){
 
 	global $db,$_SESSION,$rows,$result,$enc;
 
-	$sql="SELECT n.nr,n.notes,n.short_notes, n.encounter_nr,n.date,n.time, n.personell_nr,n.personell_name
+	$sql="SELECT n.nr,n.notes,n.short_notes, n.encounter_nr,n.date,n.time, n.staff_nr,n.staff_name
 		FROM care_encounter AS e, 
 					care_encounter_notes AS n 
 		WHERE e.encounter_nr=".$enc." 
@@ -120,7 +120,7 @@ if(empty($encounter['photo_filename'])){
 						$y=$pdf->ezText("\n",6);
 						$data=NULL;
 						# create the tag infos inside a table
-						$data[]=array(" $LDDate: ".formatDate2Local($report['date'],$date_format)."   $LDTime: ".$report['time']."   $LDBy: ".$report['personell_name']);
+						$data[]=array(" $LDDate: ".formatDate2Local($report['date'],$date_format)."   $LDTime: ".$report['time']."   $LDBy: ".$report['staff_name']);
 				
     					$pdf->ezTable($data,'','',array('xPos'=>'left','xOrientation'=>'right','showLines'=>1,'fontSize'=>$report_authorsize,'showHeadings'=>0,'shaded'=>0,'width'=>555));
     					//$y=$pdf->ezText("\n",$report_authorsize);

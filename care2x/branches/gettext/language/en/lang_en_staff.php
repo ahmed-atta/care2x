@@ -1,6 +1,6 @@
 <?php
 $LDPlsFindPersonFirst='Please find the person first';
-$LDSearchPersonell='Search an employee';
+$LDSearchstaff='Search an employee';
 $LDPersonRegister='Person Registration';
 $LDShortID='Short ID';
 $LDJobNr='Job Nr';
@@ -19,14 +19,14 @@ $LDNrWorkDay='Nr. of Workdays';
 $LDNrWeekHour='Nr. of Weekhours';
 $LDNrVacationDay='Nr. of Vacation days';
 $LDMultipleEmployer='Multiple employed?';
-$LDPersonellNr='Employee Nr.';
+$LDstaffNr='Employee Nr.';
 $LDPersonCurrentlyEmployed='Person is currently employed';
 $LDRecordedBy='Recorded by';
 $LDNrDependent='Nr. of Dependents';
-$LDPersonellData='Employees Data';
+$LDstaffData='Employees Data';
 $LDEnterNewEmployment='Enter new employees data';
 $LDRegNewPerson='Register new persons basic data';
-$LDFindPersonell='Find an employee';
+$LDFindstaff='Find an employee';
 $LDPersonalID='Personal ID';
 $LDAssignDoctorDept='Assign as DOCTOR to a department';
 $LDAssignNurseDept='Assign as NURSE to a department';

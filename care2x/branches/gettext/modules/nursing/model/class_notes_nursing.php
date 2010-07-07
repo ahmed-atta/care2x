@@ -96,7 +96,7 @@ class NursingNotes extends Notes {
 						e.aux_notes AS eff_aux_notes,
 						e.date AS eff_date,
 						e.time AS eff_time,
-						e.personell_name AS eff_personell_name
+						e.staff_name AS eff_staff_name
 					FROM $this->tb_notes AS n LEFT JOIN $this->tb_notes AS e ON n.nr=e.ref_notes_nr AND e.encounter_nr=$enr
 					WHERE (n.type_nr=15 AND n.encounter_nr=$enr)
 						OR (n.type_nr=17 AND n.encounter_nr=$enr)
@@ -124,7 +124,7 @@ class NursingNotes extends Notes {
 			$this->data_array['notes']=$data['berichtput'];
 			$this->data_array['date']=$data['dateput'];
 			$this->data_array['time']=$data['timeput'];
-			$this->data_array['personell_name']=$data['author'];
+			$this->data_array['staff_name']=$data['author'];
 			$this->data_array['aux_notes']=$data['warn'];
 		}
 		return $this->_insertNotesFromInternalArray(15);
@@ -144,7 +144,7 @@ class NursingNotes extends Notes {
 			$this->data_array['notes']=$data['berichtput2'];
 			$this->data_array['date']=$data['dateput2'];
 			$this->data_array['time']=$data['timeput'];
-			$this->data_array['personell_name']=$data['author2'];
+			$this->data_array['staff_name']=$data['author2'];
 			$this->data_array['aux_notes']=$data['warn2'];
 			$this->data_array['ref_notes_nr']=$data['ref_notes_nr'];
 		}

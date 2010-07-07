@@ -92,12 +92,12 @@ echo $LDEnterMaxRows;
 	</tr>
 <tr>
 	<td class="adm_item"><FONT  color="#0000cc"><?php echo "<b>$LDPersonnelList</b><br><font color=#000000>$LDPersonnelListTxt</font><br>" ?></FONT></td>
-	<td class="adm_input"><input type="text" name="pagin_personell_list_max_block_rows" size=2 maxlength=2 value="<?php echo $GLOBAL_CONFIG['pagin_personell_list_max_block_rows'] ?>">
+	<td class="adm_input"><input type="text" name="pagin_staff_list_max_block_rows" size=2 maxlength=2 value="<?php echo $GLOBAL_CONFIG['pagin_staff_list_max_block_rows'] ?>">
       </td>  
 	</tr>
 <tr>
 	<td class="adm_item"><FONT  color="#0000cc"><?php echo "<b>$LDPersonnelSearch</b><br><font color=#000000>$LDPersonnelSearchTxt</font><br>" ?></FONT></td>
-	<td class="adm_input"><input type="text" name="pagin_personell_search_max_block_rows" size=2 maxlength=2 value="<?php echo $GLOBAL_CONFIG['pagin_personell_search_max_block_rows'] ?>">
+	<td class="adm_input"><input type="text" name="pagin_staff_search_max_block_rows" size=2 maxlength=2 value="<?php echo $GLOBAL_CONFIG['pagin_staff_search_max_block_rows'] ?>">
       </td>  
 	</tr>
 <tr>

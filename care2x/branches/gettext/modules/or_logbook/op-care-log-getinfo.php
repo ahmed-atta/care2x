@@ -5,9 +5,9 @@ require($root_path.'include/helpers/inc_environment_global.php');
 define('LANG_FILE','or.php');
 $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-/* Create the personell object */
-require_once($root_path.'modules/personell_admin/model/class_personell.php');
-$pers_obj=new Personell;
+/* Create the staff object */
+require_once($root_path.'modules/staff_admin/model/class_staff.php');
+$pers_obj=new staff;
 
 $title=$LDOpPersonElements[$winid];
 
@@ -245,7 +245,7 @@ div.box { border: double; border-width: thin; width: 100%; border-color: black; 
 onLoad="<?php if($mode=="saveok") echo "refreshparent();window.focus();"; ?>if (window.focus) window.focus();
 				window.focus();document.infoform.inputdata.focus();" >
 <a href="javascript:gethelp('oplog.php','person','<?php echo $winid ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> alt="<?php echo $LDHelp ?>" align="right"></a>
-<form name="infoform" action="op-care-log-getpersonell.php" method="post" onSubmit="return pruf(this)">
+<form name="infoform" action="op-care-log-getstaff.php" method="post" onSubmit="return pruf(this)">
 				
 <font face=verdana,arial size=5 color=maroon>
 <b>

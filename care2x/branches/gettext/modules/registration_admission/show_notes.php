@@ -29,7 +29,7 @@ require('./include/init_show.php');
 $page_title.=" :: $LDNotes $LDAndSym $LDReports";
 
 if($parent_admit){
-	$sql="SELECT n.nr,n.notes,n.short_notes, n.encounter_nr,n.date,n.personell_nr,n.personell_name,e.encounter_class_nr
+	$sql="SELECT n.nr,n.notes,n.short_notes, n.encounter_nr,n.date,n.staff_nr,n.staff_name,e.encounter_class_nr
 		FROM care_encounter AS e, 
 			care_person AS p, 
 			care_encounter_notes AS n 
@@ -40,7 +40,7 @@ if($parent_admit){
 			AND n.type_nr=".$type_nr."
 		ORDER BY n.date DESC";
 }else{
-	$sql="SELECT n.nr,n.notes,n.short_notes, n.encounter_nr,n.date,n.personell_nr,n.personell_name,e.encounter_class_nr
+	$sql="SELECT n.nr,n.notes,n.short_notes, n.encounter_nr,n.date,n.staff_nr,n.staff_name,e.encounter_class_nr
 		FROM care_encounter AS e, 
 			care_person AS p, 
 			care_encounter_notes AS n

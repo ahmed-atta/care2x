@@ -79,7 +79,7 @@ if(empty($encounter['photo_filename'])){
 
 	if(is_object($notes)){
 		$report=$notes->FetchRow();
-		$y=$pdf->ezText("\n$LDBy: ".$report['personell_name']."   $LDDate: ".formatDate2Local($report['date'],$date_format)."   $LDTime: ".$report['time'],$report_authorsize);
+		$y=$pdf->ezText("\n$LDBy: ".$report['staff_name']."   $LDDate: ".formatDate2Local($report['date'],$date_format)."   $LDTime: ".$report['time'],$report_authorsize);
 		$y=$pdf->ezText("\n".$report['notes']."\n",$report_textsize);
 		if(!empty($report['short_notes'])){
 			$y=$pdf->ezText("$LDShortNotes\n",$report_auxtitlesize);

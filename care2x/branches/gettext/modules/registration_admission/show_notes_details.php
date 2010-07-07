@@ -18,7 +18,7 @@ $bd=@formatDate2Local($bd,$date_format);
 $TP_CHARSET=setCharSet();
 $TP_DATE=@formatDate2Local($notes['date'],$date_format);
 $TP_TIME=@convertTimeToLocal($notes['time']);
-$TP_DOC=$notes['personell_name'];
+$TP_DOC=$notes['staff_name'];
 $TP_USR=$notes['modify_id']; 
 $TP_NOTES=nl2br($notes['notes']);
 $TP_CLOSE='<a href="javascript:window.close()"><img '.createLDImgSrc($root_path,'close2.gif','0').'></a>';

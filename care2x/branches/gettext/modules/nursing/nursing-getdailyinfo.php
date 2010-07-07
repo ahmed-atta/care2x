@@ -79,7 +79,7 @@ if ($mode == 'save')
     {
     $_POST['encounter_nr']  =$pn;
     $_POST['date']          =date('Y-m-d', mktime(0, 0, 0, $mo, $dy, $yr));
-    $_POST['personell_name']=$_SESSION['sess_user_name'];
+    $_POST['staff_name']=$_SESSION['sess_user_name'];
 
     if ($charts_obj->saveChartNotesFromArray($_POST, $notes_type_nr))
         {
@@ -280,8 +280,8 @@ require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
 
                         <td><FONT SIZE = 1 FACE = "Arial">
                     <?php
-                            if ($row['personell_name'])
-                                echo $row['personell_name'];
+                            if ($row['staff_name'])
+                                echo $row['staff_name'];
                     ?></td>
                     </tr>
 

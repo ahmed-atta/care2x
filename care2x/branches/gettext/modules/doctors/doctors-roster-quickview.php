@@ -80,8 +80,8 @@ if($force_no_cache || (!$force_no_cache && !$is_cached)){
 	include_once($root_path.'modules/dept_admin/model/class_department.php');
 	$dept_obj=new Department;
 	$dept_DOC=$dept_obj->getAllActiveWithDOC();
-	include_once($root_path.'modules/personell_admin/model/class_personell.php');
-	$pers_obj=new Personell;
+	include_once($root_path.'modules/staff_admin/model/class_staff.php');
+	$pers_obj=new staff;
 	$quicklist=&$pers_obj->getDOCQuicklist($dept_DOC,$pyear,$pmonth);
 }
 
@@ -182,8 +182,8 @@ if(!$force_no_cache&&$is_cached){
 			$r=unserialize($dutyplan['duty_2_txt']);
 			$ha=unserialize($dutyplan['duty_1_pnr']);	
 			$hr=unserialize($dutyplan['duty_2_pnr']);	
-			if($ha['ha'.($plan_day-1)]) $DOC_1=$pers_obj->getPersonellInfo($ha['ha'.($plan_day-1)]);
-			if($hr['hr'.($plan_day-1)]) $DOC_2=$pers_obj->getPersonellInfo($hr['hr'.($plan_day-1)]);
+			if($ha['ha'.($plan_day-1)]) $DOC_1=$pers_obj->getstaffInfo($ha['ha'.($plan_day-1)]);
+			if($hr['hr'.($plan_day-1)]) $DOC_2=$pers_obj->getstaffInfo($hr['hr'.($plan_day-1)]);
 		}
 	
 	}else{

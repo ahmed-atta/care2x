@@ -180,7 +180,7 @@ if(!stristr($filter,$nr)){
 	$data=NULL;
 	$data[]=array($title);
 	$pdf->ezTable($data,'','',array('xPos'=>'left','xOrientation'=>'right','showLines'=>0,'fontSize'=>$report_titlesize,'showHeadings'=>0,'shaded'=>2,'shadeCol2'=>array(0.9,0.9,0.9),'width'=>555));
-	$data[]=array(" $LDDate: ".formatDate2Local($report['date'],$date_format)."   $LDTime: ".$report['time']."   $LDBy: ".$report['personell_name']);
+	$data[]=array(" $LDDate: ".formatDate2Local($report['date'],$date_format)."   $LDTime: ".$report['time']."   $LDBy: ".$report['staff_name']);
 	$dataInfo[] = array (
 		'Reparti :' => 'Reparti : ' . $deptName ,
 		'Pavijon :' => 'Pavijon : ' . $wardName['name'],

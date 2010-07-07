@@ -167,7 +167,7 @@ if($mode=='show'){
 
 			$smarty->assign('sDetailsIcon','<a href="'.$thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&encounter_nr='.$_SESSION['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr'].'"><img '.createComIcon($root_path,'info3.gif','0').'></a>');
 			$smarty->assign('sMakePdfIcon','<a href="'.$root_path.'modules/medocs/print/report.php'.URL_APPEND.'&enc='.$_SESSION['sess_en'].'&mnr='.$row['nr'].'&target='.$target.'" target=_blank><img '.createComIcon($root_path,'pdf_icon.gif','0').'></a>');
-			if($row['personell_name']) $smarty->assign('sAuthor',$row['personell_name']);
+			if($row['staff_name']) $smarty->assign('sAuthor',$row['staff_name']);
 			
 			ob_start();
 				$smarty->display('medocs/docslist_row.tpl');
@@ -203,7 +203,7 @@ if($mode=='show'){
 	$smarty->assign('sDiagnosis',nl2br($row['diagnosis']));
 	$smarty->assign('sTherapy',nl2br($row['therapy']));
 	$smarty->assign('sDate',formatDate2Local($row['date'],$date_format));
-	$smarty->assign('sAuthor',$row['personell_name']);
+	$smarty->assign('sAuthor',$row['staff_name']);
 
 # Create a new form for data entry
 
@@ -245,9 +245,9 @@ function chkForm(d) {
 		alert("<?php echo $LDPlsEnterDate ?>");
 		d.date.focus();
 		return false;
-	}else if(d.personell_name.value==""){
+	}else if(d.staff_name.value==""){
 		alert("<?php echo $LDPlsEnterFullName ?>");
-		d.personell_name.focus();
+		d.staff_name.focus();
 		return false;
 	}else{
 		return true;

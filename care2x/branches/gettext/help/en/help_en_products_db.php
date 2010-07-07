@@ -208,8 +208,8 @@ How to write a report?</b>
 				<nobr><span style="background-color:yellow" >" Report: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
  	<b>Schritt 2: </b>Type your name in the
 				<nobr><span style="background-color:yellow" >" Reporter: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
- 	<b>Schritt 3: </b>Enter your personell number in teh
-				<nobr><span style="background-color:yellow" >" Personell Nr: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
+ 	<b>Schritt 3: </b>Enter your staff number in teh
+				<nobr><span style="background-color:yellow" >" staff Nr: <input type="text" name="s" size=10 maxlength=10> "</span></nobr> field.<br>
  	<b>Schritt 4: </b>Click the button <input type="button" value="Send"> to send the report.<br>
 </ul>
 <img <?php echo createComIcon('../','warn.gif','0','absmiddle') ?>> <font color="#990000"><b> Note:</b><br></font> 

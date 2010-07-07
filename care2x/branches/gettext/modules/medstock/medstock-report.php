@@ -178,7 +178,7 @@ echo '</font>
 <td bgcolor="#dddddd"><FONT    SIZE=-1  FACE="Arial">
 
 <?php echo $LDReporter ?>:<br><input type="text" name="reporter" size=30 value="<?php echo $_COOKIE[$local_user.$sid]; ?>"> <p>
-<?php echo $LDPersonellNr ?>:<br><input type="text" name="id_nr" size=30>
+<?php echo $LDstaffNr ?>:<br><input type="text" name="id_nr" size=30>
 <input type="hidden" name="report_date" value="<?php echo date('Y-m-d') ?>" >
 <input type="hidden" name="report_time" value= "<?php echo date('H:i:s') ?>">
 <input type="hidden" name="sid" value= "<?php echo $sid ?>">
