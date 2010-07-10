@@ -23,7 +23,7 @@ $thisfile=basename(__FILE__);
 if(isset($mode)&&$mode=='save'){
 	// Save to user config table
 
-	$config_new['template_smarty']=$template_smarty;
+	$config_new['css']=$css;
 
 	include_once($root_path.'include/core/class_userconfig.php');
 	
@@ -41,13 +41,13 @@ if(isset($mode)&&$mode=='save'){
 		}
 	}
 
-}elseif(!isset($cfg['template_smarty'])||empty($cfg['template_smarty'])){
+}elseif(!isset($cfg['css'])||empty($cfg['css'])){
 	if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
 	include_once($root_path.'include/core/class_globalconfig.php');
 	$gc=new GlobalConfig($GLOBAL_CONFIG);
-	$gc->getConfig('template_smarty');
-	if(!empty($GLOBAL_CONFIG['template_smarty'])) $cfg['template_smarty']=$GLOBAL_CONFIG['template_smarty'];
-		else $cfg['template_smarty']='default';
+	$gc->getConfig('theme_css');
+	if(!empty($GLOBAL_CONFIG['theme_css'])) $cfg['css']=$GLOBAL_CONFIG['theme_css'];
+		else $cfg['css']='default/default.tpl';
 }
 
 # Start Smarty templating here
@@ -78,7 +78,7 @@ if(isset($mode)&&$mode=='save'){
  ob_start();
 ?>
 
-<FONT  color="#000066" size=4><?php echo $LDSmartyTemplate; ?></font>
+<FONT  color="#000066" size=4><?php echo $LDCssThemes; ?></font>
 <br>
 
 <form method="post">
@@ -88,7 +88,7 @@ if(isset($mode)&&$mode=='save'){
 <div class="prompt"><?php echo $LDChangeSaved ?></div><br>
 <?php } ?>
 
-<table border=0 cellspacing=1 cellpadding=2 width="70%">
+<table border=0 cellspacing=1 cellpadding=2>
   <tbody>
   <tr >
     <td colspan=4>&nbsp;</td>
@@ -103,7 +103,7 @@ if(isset($mode)&&$mode=='save'){
   
 <?php
 
-$filepath=$root_path.'gui/smarty_template/templates/';
+$filepath=$root_path.'gui/css/themes/';
 
 $handle=opendir($filepath.'.');  // Modify this path if you have placed the mascot directories somewhere else
 $dirs=array();
@@ -114,10 +114,10 @@ while (false!==($theme = readdir($handle))) {
 ?>
   
 	<tr class="submenu">
-		<td>&nbsp;<input type="radio" name="template_smarty" value="<?php echo $sTemplateDirectory; ?>" <?php if($cfg['template_smarty'] == $sTemplateDirectory) echo 'checked';'?>></td>
-		<td>&nbsp;<b><?php echo $sTemplateName; ?></b></td>
-		<td>&nbsp;<?php echo $sTemplateDescription; ?></td>
-		<td>&nbsp;<?php if(!empty($sTemplateScreenShot)) echo '<a href="'.$$filepath.$theme.'/'.$sTemplateScreenShot.'" target="_blank">'.$sTemplateScreenShot.'</a>'; ?></td>
+		<td>&nbsp;<input type="radio" name="css" value="<?php echo $sCssFileLocation; ?>" <?php if($cfg['css'] == $sCssFileLocation) echo 'checked';''?>></td>
+		<td>&nbsp;<b><?php echo $sCssThemeName; ?></b></td>
+		<td>&nbsp;<?php echo $sCssDescription; ?></td>
+		<td>&nbsp;<?php if(!empty($sCssScreenShot)) echo '<a href="'.$root_path.'gui/css/themes/'.$sCssScreenShot.'" target="_blank">'.$sCssScreenShot.'</a>'; ?></td>
 	</tr>
 
  <?php
