@@ -26,17 +26,17 @@ if(isset($_SESSION['sess_serial_buffer'])){
 	$config_new=unserialize($_SESSION['sess_serial_buffer']);
 }	
 
-      
 if ($mode=='change'){
-
 	$color='#'.$color;
-
+	//$$item=$color;
 	$config_new[$item]=$color;
 	
 	$_SESSION['sess_serial_buffer']=serialize($config_new);
 	$config_new=array_merge($cfg,$config_new);
-
+	
 }elseif((($mode=='ok')||($mode=='remain'))&&isset($_SESSION['sess_serial_buffer'])){
+
+	// Save to user config table
 
 	include_once($root_path.'include/core/class_userconfig.php');
 	$user=new UserConfig;
@@ -52,25 +52,22 @@ if ($mode=='change'){
 				header("location:spediens.php?sid=$sid&lang=$lang&idxreload=j");
 			}
 			if($mode=='remain'){
-				header("location:colorchg.php?sid=$sid&lang=$lang&idxreload=j");
+				header("location:'.$root_path.'modules/tools/colorchg.php?sid=$sid&lang=$lang&idxreload=j");
 			}
 			exit;
 		}
 	}else{
     	$config=array(); // just declare the array
     }
-
-}else{
+}else{	
 	// Get  default values
 	$config_new=$cfg;
 }
-
 // Get the menu items for simulation
 $sql="SELECT name,LD_var FROM care_menu_main WHERE is_visible=1 OR LD_var='LDEDP' OR LD_var='LDLogin' ORDER by sort_nr";
 
 $menu_obj=$db->Execute($sql);
 
-//prevent client from caching
 require_once($root_path.'include/helpers/inc_nocache_headers.php');
 
 # Start Smarty templating here
@@ -84,47 +81,49 @@ require_once($root_path.'include/helpers/inc_nocache_headers.php');
  $smarty = new smarty_care('system_admin');
 
 # Title in toolbar
- $smarty->assign('sToolbarTitle',$LDColorOptExt);
+ $smarty->assign('sToolbarTitle',$LDColorOpt);
 
 # Title image
  $smarty->assign('sTitleImage','<img '.createComIcon($root_path,'settings_tree.gif','0').'>');
-
+ 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('color_opt.php','ext')");
+ $smarty->assign('pbHelp',"javascript:gethelp('color_opt.php','')");
 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
- $smarty->assign('sWindowTitle',$LDColorOptExt);
- 
+ $smarty->assign('sWindowTitle',$LDColorOpt);
+
  # Body Onload js
   if($idxreload=="j"){
  	$sOnLoadJs = 'onLoad="window.parent.STARTPAGE.location.replace(\'indexframe.php?sid='.$sid.'&lang='.$lang.'\'); ';
+ 	if($cfg[mask]==2) $sOnLoadJs = $sOnLoadJs.'window.parent.MENUBAR.location.replace(\'menubar2.php?sid='.$sid.'&lang='.$lang.'\');';
+ 	$sOnLoadJs = $sOnLoadJs.'"';
 	$smarty->assign('sOnLoadJs',$sOnLoadJs);
 }
 
-?>
+# Collect js code
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
- <TITLE>Spezielle Dienste</TITLE>
+ob_start();
+?>
 
 <script language="javascript">
 <!-- 
-var urlholder;
-
-  function chgcolor(p,x){
+	var urlholder;
+  function chgcolor(p){
 	winspecs="width=550,height=600,menubar=no,resizable=yes,scrollbars=yes";
-<?php
-echo 'urlholder="chg-color.php?item="+p+"&sid='.$sid.'&lang='.$lang.'&mode=ex&tb='.str_replace('#','',$cfg['top_bgcolor']).'&tt='.str_replace('#','',$cfg['top_txtcolor']).'&bb='.str_replace('#','',$cfg['body_bgcolor']).'&btb='.str_replace('#','',$cfg['bot_bgcolor']).'&d='.$cfg['dhtml'].'";';
+<?php 
+	echo 'urlholder="chg-color.php?item="+p+"&sid='.$sid.'&lang='.$lang.'&tb='.str_replace('#','',$cfg['top_bgcolor']).'&tt='.str_replace('#','',$cfg['top_txtcolor']).'&bb='.str_replace('#','',$cfg['body_bgcolor']).'&btb='.str_replace('#','',$cfg['bot_bgcolor']).'&d='.$cfg['dhtml'].'";';
 ?>
 	
-	colorwin=window.open(urlholder,"colorwin",winspecs);
+		colorwin=window.open(urlholder,"colorwin",winspecs);
 	}
-//  -->
+	
+	function ok(){
+		location.href="colorchg.php?mode=ok&sid=<?php echo "$sid&lang=$lang"; ?>";
+	}
+ // -->
 </script>
 
 <?php
@@ -144,11 +143,11 @@ ob_start();
 
 <table border=1>
   <tr >
-    <td rowspan=3 bgcolor=<?php echo $cfg['idx_bgcolor']; ?> width=100 >
+    <td rowspan=3 bgcolor="<?php echo $config_new['idx_bgcolor']; ?>" width=100 align=left>
 	<center><img <?php echo createLogo($root_path,'care_logo.png','0') ?>></center>
 
-
-<FONT    SIZE=1  color=<?php echo $cfg['idx_txtcolor']; ?>>
+<a href="#" title="<?php echo $LDClk4TxtColor ?>" onClick="chgcolor('idx_txtcolor')">
+<FONT    SIZE=1  color="<?php echo $config_new['idx_txtcolor']; ?>">
 <?php
 if(is_object($menu_obj)){
 	while($menu=$menu_obj->FetchRow()){
@@ -158,47 +157,48 @@ if(is_object($menu_obj)){
 	}
 }
 ?>
-<p align=center>
-Index frame<p align=left >
-&nbsp;<a href="#" onClick="chgcolor('idx_hover','ex')"><img <?php echo createComIcon($root_path,'settings_tree.gif','0','absmiddle') ?> alt="Index frame hover  link color"><font face="Verdana, Arial" size=2 color=<?php echo $config_new['idx_hover']; ?>> Hover link.</font></a><br>
-&nbsp;<a href="#" onClick="chgcolor('idx_alink','ex')"><img <?php echo createComIcon($root_path,'settings_tree.gif','0','absmiddle') ?> alt="Index frame active  link color"><font face="Verdana, Arial" color=<?php echo $config_new['idx_alink']; ?>> Active link.</font></a><br>
-
-
-</p>
-<p><br>
+<p>
+<a href="#" title="<?php echo $LDClk4BgColor ?>" onClick="chgcolor('idx_bgcolor')"><?php echo $LDBgColor ?> <img <?php echo createComIcon($root_path,'settings_tree.gif','0') ?> >
+</a>
 </td>
-    <td bgcolor=<?php echo $cfg['top_bgcolor']; ?> >
-	&nbsp;&nbsp;&nbsp;<font  color=<?php echo $cfg['top_txtcolor']; ?> ><?php echo $LDTopFrame ?></font>
-</td>
+    <td bgcolor="<?php echo $config_new['top_bgcolor']; ?>" ><p><FONT    SIZE=1  color="<?php echo $config_new['top_txtcolor']; ?>">
+	&nbsp;&nbsp;&nbsp;<a href="#" title="<?php echo $LDClk4TxtColor ?>" onClick="chgcolor('top_txtcolor')"><font size=3 color=<?php echo $config_new['top_txtcolor']; ?>><?php echo $LDTxtColor ?></font></a>&nbsp;&nbsp;&nbsp;
+<a href="#" title="<?php echo $LDClk4BgColor ?>" onClick="chgcolor('top_bgcolor')"><?php echo $LDBgColor ?> <img <?php echo createComIcon($root_path,'settings_tree.gif','0') ?> alt="<?php echo $LDClk4BgColor ?>">
+</a></td>
   </tr>
-  <tr valign=top>
+  <tr>
   
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> width=400 >
-<p><br>&nbsp; <?php echo $LDMainFrame ?><p><br>
-&nbsp;<a href="#" onClick="chgcolor('body_hover','ex')"><img <?php echo createComIcon($root_path,'settings_tree.gif','0','absmiddle') ?>  alt="<?php echo $LDMainFrame ?> hover  link "><font face="Verdana, Arial" color=<?php echo $config_new['body_hover']; ?>> <?php echo $LDMainFrame ?> hover link.</font></a><br>
-&nbsp;<a href="#" onClick="chgcolor('body_alink','ex')"><img <?php echo createComIcon($root_path,'settings_tree.gif','0','absmiddle') ?>  alt="<?php echo $LDMainFrame ?> active link "><font face="Verdana, Arial" color=<?php echo $config_new['body_alink']; ?>> <?php echo $LDMainFrame ?> active link.</font></a><br>
-<p><br>
+<td bgcolor="<?php echo $config_new['body_bgcolor']; ?>" width=400 ><p><br>
+	<a href="#" onClick="chgcolor('body_txtcolor')"><FONT    SIZE=4 color="<?php echo $config_new['body_txtcolor']; ?>">	<?php echo $LDMainFrame ?></font></a><p><FONT    SIZE=1>	
+	<a href="#" title="<?php echo $LDClk4BgColor ?>" onClick="chgcolor('body_bgcolor')"><?php echo $LDBgColor ?> <img <?php echo createComIcon($root_path,'settings_tree.gif','0') ?> alt="<?php echo $LDClk4BgColor ?>">
+	</a><p><br>
 </td>
   </tr>
   <tr>
  
-    <td bgcolor=<?php echo $cfg['bot_bgcolor']; ?>>
-	<p><br>
-	&nbsp;&nbsp;&nbsp;<?php echo $LDBottomFrame ?>
-	<p>
+    <td bgcolor="<?php echo $config_new['bot_bgcolor']; ?>">
+
+<?php
+require($root_path.'include/helpers/inc_load_copyrite.php');
+?>
+<p><a href="#" title="<?php echo $LDClk4BgColor ?>" onClick="chgcolor('bot_bgcolor')"><?php echo $LDBgColor ?> <img <?php echo createComIcon($root_path,'settings_tree.gif','0') ?> alt="<?php echo $LDClk4BgColor ?>">
+</a>
 
 </td>
   </tr>
 </table>
 
 <FORM >
-<input type="button" value="<?php echo $LDOK ?>" onClick="location.replace('excolorchg.php?mode=ok&sid=<?php echo "$sid&lang=$lang"; ?>&item=<?php echo $item; ?>')">
+<input type="button" value="<?php echo $LDOK ?>" onClick="ok()">
 <INPUT type="button"  value="<?php echo $LDCancel ?>" onClick="location.replace('config_options.php<?php echo URL_REDIRECT_APPEND; ?>')">
-<input type="button" value="<?php echo $LDApply ?>" onClick="location.replace('excolorchg.php?mode=remain&sid=<?php echo "$sid&lang=$lang"; ?>&item=<?php echo $item; ?>')">
+<input type="button" value="<?php echo $LDApply ?>" onClick="location.replace('colorchg.php<?php echo URL_REDIRECT_APPEND; ?>&mode=remain')">
+<?php if ($cfg['dhtml'])
+echo '&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="'.$LDColorOptExt.'" onClick="location.replace(\'excolorchg.php'.URL_REDIRECT_APPEND.'\')">';
+?>
 </FORM>
-</font>
 <p>
 </ul>
+
 <?php
 
 $sTemp = ob_get_contents();

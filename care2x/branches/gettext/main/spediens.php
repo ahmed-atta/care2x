@@ -106,7 +106,7 @@ $aSubMenuItem=array('LDPlugins' => '<a href="'.$root_path.'plugins/plugins.php'.
 					'LDCalendar' => '<a href="'.$root_path.'modules/calendar/calendar.php'.URL_APPEND.'">'. $LDCalendar.'</a>',
 					'LDNews' => '<a href="'.$root_path.'modules/news/editor-pass.php'.URL_APPEND.'&dept_nr=1&title='.$LDEditTitle.'">'.$LDNews.'</a>',
 					'LDCalc' => '<a href="'.$root_path.'modules/tools/calculator.php'.URL_APPEND.'">'. $LDCalc.'</a>',
-					'LDUserConfigOpt' => '<a href="config_options.php'.URL_APPEND.'">'. $LDUserConfigOpt.'</a>',
+					'LDUserConfigOpt' => '<a href="'.$root_path.'modules/tools/config_options.php'.URL_APPEND.'">'. $LDUserConfigOpt.'</a>',
 					'LDAccessPw' => '<a href="'.$root_path.'modules/myintranet/my-passw-change.php'.URL_APPEND.'">'. $LDAccessPw.'</a>',
 					'LDNewsgroup' => '<a href="http://www.mail-archive.com/care2002-developers@lists.sourceforge.net/">'.$LDNewsgroup.'</a>'
 					);
