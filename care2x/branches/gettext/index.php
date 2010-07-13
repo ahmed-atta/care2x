@@ -39,7 +39,7 @@ if(!isset($sid)) $sid='';
 require('./roots.php');
 require('./include/helpers/inc_environment_global.php');
 
-//$db->debug=FALSE;
+////$db->debug=FALSE;
 
 # Register global session variables
 if(!session_is_registered('sess_user_name')) session_register('sess_user_name');

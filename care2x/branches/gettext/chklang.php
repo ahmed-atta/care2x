@@ -162,6 +162,7 @@ if((!file_exists($lang_file))&&(!file_exists('../'.$lang_file))){
 	$lang='en';
 }
 
+//should we move it somewhere else ?
 // save language to cookie
 //setcookie("ck_lang".$sid,$lang);
 	
