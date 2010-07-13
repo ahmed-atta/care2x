@@ -93,6 +93,7 @@ $smarty->assign('sMainBlockIncludeFile','common/submenu_tableframe.tpl');
  * show Template
  */
 
+
  $smarty->display('common/mainframe.tpl');
  // $smarty->display('debug.tpl');
  ?>
