@@ -21,8 +21,6 @@ echo setCharSet();
 
 ?>
 <head>
-<!-- <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1/28596">
- -->
  <title>Init Page</title>
 </head>
 <body>
