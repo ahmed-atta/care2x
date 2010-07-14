@@ -29,7 +29,7 @@
 
 ob_start();
 
-require($root_path.'main/imgcreator/inc_js_barcode_wristband_popwin.php');
+require($root_path.'include/imgcreator/inc_js_barcode_wristband_popwin.php');
 require('./include/js_poprecordhistorywindow.inc.php');
 
 

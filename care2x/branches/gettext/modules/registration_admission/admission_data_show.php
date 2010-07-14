@@ -195,7 +195,7 @@ require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
  
  ob_start();
 
-require($root_path.'main/imgcreator/inc_js_barcode_wristband_popwin.php');
+require($root_path.'include/imgcreator/inc_js_barcode_wristband_popwin.php');
 require('./include/js_poprecordhistorywindow.inc.php');
 
 $sTemp = ob_get_contents();

@@ -57,7 +57,7 @@ function popRecordHistory(table,pid) {
 -->
 </script>
 <?php 
-if($parent_admit) include($root_path.'main/imgcreator/inc_js_barcode_wristband_popwin.php');
+if($parent_admit) include($root_path.'include/imgcreator/inc_js_barcode_wristband_popwin.php');
 
 $sTemp = ob_get_contents();
 ob_end_clean();

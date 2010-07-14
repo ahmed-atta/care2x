@@ -158,7 +158,7 @@ if(isset($bShowImageJApplet) && $bShowImageJApplet){
 <?php
 	}else{
 ?>
-<img src="<?php	echo $root_path.'main/imgcreator/thumbnail.php?mx='.$preview_size.'&my='.$preview_size.'&imgfile=/'.$photoserver_localpath.$pn.'/'.$image['nr'].'.'.$image['mime_type'] ?>" border=0  name="preview"
+<img src="<?php	echo $root_path.'include/imgcreator/thumbnail.php?mx='.$preview_size.'&my='.$preview_size.'&imgfile=/'.$photoserver_localpath.$pn.'/'.$image['nr'].'.'.$image['mime_type'] ?>" border=0  name="preview"
 <?php
 	}
 

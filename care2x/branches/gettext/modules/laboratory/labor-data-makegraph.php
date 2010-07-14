@@ -82,19 +82,19 @@ function doGraph($paramValue,$pName,$valueBuff,$cols=1){
 	$diff = dateDiff("-", date("Y-m-d"), $patient['date_birth']);
 	switch ($diff) {
 		case ( ($diff >= 1) and ($diff <= 30 ) ) :
-			echo $txt.'<img src="'.$root_path.'main/imgcreator/labor-datachart.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$pName['lo_bound_n'].'&hi='.$pName['hi_bound_n'].'&d='.$valueBuff.'" border=0>';
+			echo $txt.'<img src="'.$root_path.'include/imgcreator/labor-datachart.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$pName['lo_bound_n'].'&hi='.$pName['hi_bound_n'].'&d='.$valueBuff.'" border=0>';
 			break;
 		case ( ($diff >= 31) and ($diff <= 360 ) ) :
-			echo $txt.'<img src="'.$root_path.'main/imgcreator/labor-datachart.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$pName['lo_bound_y'].'&hi='.$pName['hi_bound_y'].'&d='.$valueBuff.'" border=0>';
+			echo $txt.'<img src="'.$root_path.'include/imgcreator/labor-datachart.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$pName['lo_bound_y'].'&hi='.$pName['hi_bound_y'].'&d='.$valueBuff.'" border=0>';
 			break;
 		case ( $diff >= 361) and ($diff <= 5040 ) :
-			echo $txt.'<img src="'.$root_path.'main/imgcreator/labor-datachart.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$pName['lo_bound_c'].'&hi='.$pName['hi_bound_c'].'&d='.$valueBuff.'" border=0>';
+			echo $txt.'<img src="'.$root_path.'include/imgcreator/labor-datachart.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$pName['lo_bound_c'].'&hi='.$pName['hi_bound_c'].'&d='.$valueBuff.'" border=0>';
 			break;
 		case $diff > 5040 :
 			if($patient['sex']=='m')
-				echo $txt.'<img src="'.$root_path.'main/imgcreator/labor-datachart.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$pName['lo_bound'].'&hi='.$pName['hi_bound'].'&d='.$valueBuff.'" border=0>';
+				echo $txt.'<img src="'.$root_path.'include/imgcreator/labor-datachart.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$pName['lo_bound'].'&hi='.$pName['hi_bound'].'&d='.$valueBuff.'" border=0>';
 			elseif($patient['sex']=='f')
-				echo $txt.'<img src="'.$root_path.'main/imgcreator/labor-datachart.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$pName['lo_bound_f'].'&hi='.$pName['hi_bound_f'].'&d='.$valueBuff.'" border=0>';
+				echo $txt.'<img src="'.$root_path.'include/imgcreator/labor-datachart.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$pName['lo_bound_f'].'&hi='.$pName['hi_bound_f'].'&d='.$valueBuff.'" border=0>';
 			break;
 	}
 	return $txt;	

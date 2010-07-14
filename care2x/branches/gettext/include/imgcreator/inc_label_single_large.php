@@ -117,7 +117,7 @@
 	}
 	else
 	{
-	  if(file_exists($root_path.'main/imgcreator/gd_test_request_'.$subtarget.'.php'))   include_once($root_path.'main/imgcreator/gd_test_request_'.$subtarget.'.php');
+	  if(file_exists($root_path.'include/imgcreator/gd_test_request_'.$subtarget.'.php'))   include_once($root_path.'include/imgcreator/gd_test_request_'.$subtarget.'.php');
 	  else Imagepng($label);
 	/*   Imagepng($label);*/
 	  

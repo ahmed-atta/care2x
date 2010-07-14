@@ -307,7 +307,7 @@ if (($stored_request['result']!='') && $stored_request['status']!='done')
 	$TP_checkbox_1=printCheckBox('visit',false);
 	$TP_checkbox_2=printCheckBox('order_patient',false); 
 	$TP_img_barcode= "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
-	$TP_img_patient_label='<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+	$TP_img_patient_label='<img src="'.$root_path.'include/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 
 	if($stored_request['diagnosis_quiry']) $TP_diagnosis_quiry=nl2br(stripslashes($stored_request['diagnosis_quiry']));
 		else $TP_diagnosis_quiry='';

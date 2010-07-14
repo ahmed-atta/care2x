@@ -272,7 +272,7 @@ if ($show_print_button)
  *  Load the form 
  */
 if ($subtarget == 'baclabor') {
-	echo '<img src="' . $root_path . 'main/imgcreator/barcode_label_single_large.php?sid=' . $sid . '&lang=' . $lang . '&fen=' . $full_en . '&en=' . $pn . '&batch_nr=' . $batch_nr . '&child_img=1&subtarget=' . $subtarget . '" >';
+	echo '<img src="' . $root_path . 'include/imgcreator/barcode_label_single_large.php?sid=' . $sid . '&lang=' . $lang . '&fen=' . $full_en . '&en=' . $pn . '&batch_nr=' . $batch_nr . '&child_img=1&subtarget=' . $subtarget . '" >';
 }
 else
 {

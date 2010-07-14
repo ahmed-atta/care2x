@@ -88,5 +88,5 @@ switch ($result['encounter_class_nr'])
 	$result['encounter_class']=$LDStationary;
 }
 	
-include($root_path.'main/imgcreator/inc_etik.php');
+include($root_path.'include/imgcreator/inc_etik.php');
 ?>

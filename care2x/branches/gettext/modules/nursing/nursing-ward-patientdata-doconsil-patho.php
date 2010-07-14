@@ -378,7 +378,7 @@ if($edit){
 }
 
 if($edit){
-	$smarty->assign('barcode_label_single_large','<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>');
+	$smarty->assign('barcode_label_single_large','<img src="'.$root_path.'include/imgcreator/barcode_label_single_large.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>');
 }elseif($pn==""){
 	$smarty->assign('show_searchmask',TRUE);
 	# Collect buffer output

@@ -433,7 +433,7 @@ elseif(!$read_form && !$no_proc_assist)
 <?php
 
         if($edit){
-		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'include/imgcreator/barcode_label_single_large.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}elseif($pn==''){
 		    $searchmask_bgcolor='#ffffff';
             include($root_path.'modules/laboratory/includes/inc_test_request_searchmask.php');

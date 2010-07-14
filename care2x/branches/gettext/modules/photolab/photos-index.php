@@ -117,7 +117,7 @@ if(is_object($encounter)){
 		# If main photo ID exists, show it
 		echo '<br><a href="'.$root_path.'main/pop_reg_pic.php'.URL_APPEND.'&pid='.$encounter->PID().'&fn='.$fn.'" target="FOTOS_PREVIEW" title="'.$LDClk2Preview.'">
 	 		<img src="';
-		echo $root_path.'main/imgcreator/thumbnail.php?mx=80&my=100&imgfile=uploads/photos/registration/'.$fn;
+		echo $root_path.'include/imgcreator/thumbnail.php?mx=80&my=100&imgfile=uploads/photos/registration/'.$fn;
 				
 		echo '" border=0></a>';
 
@@ -156,7 +156,7 @@ if(is_object($all_image)){
 				echo $final_path.$image['nr'].'.'.$image['mime_type'].'" border=0  width=80></a> </td>
    				</tr>';
 			}else{
-				echo  $root_path.'main/imgcreator/thumbnail.php?mx=80&my=100&imgfile='.$photoserver_localpath.$pn.'/'.$image['nr'].'.'.$image['mime_type'].'" border=0></a> </td>
+				echo  $root_path.'include/imgcreator/thumbnail.php?mx=80&my=100&imgfile='.$photoserver_localpath.$pn.'/'.$image['nr'].'.'.$image['mime_type'].'" border=0></a> </td>
    				</tr>';
 			}
    		}

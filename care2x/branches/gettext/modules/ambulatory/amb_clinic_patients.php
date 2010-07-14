@@ -318,7 +318,7 @@ if($rows){
 			# If patient and edit show small color bars
 			if($edit){
 			 	$smarty->assign('sMiniColorBars','<a href="javascript:getinfo(\''.$patient['encounter_nr'].'\')">
-			 		<img src="'.$root_path.'main/imgcreator/imgcreate_colorbar_small.php'.URL_APPEND.'&pn='.$patient['encounter_nr'].'" alt="'.$LDSetColorRider.'" align="absmiddle" border=0 width=80 height=18>
+			 		<img src="'.$root_path.'include/imgcreator/imgcreate_colorbar_small.php'.URL_APPEND.'&pn='.$patient['encounter_nr'].'" alt="'.$LDSetColorRider.'" align="absmiddle" border=0 width=80 height=18>
 			 		</a>');
 			}
 			

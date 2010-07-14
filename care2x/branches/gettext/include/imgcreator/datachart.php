@@ -80,7 +80,7 @@ $tabrows=$tabhi/20; # Total number of horizontal lines
 
 header ('Content-type: image/PNG');
 
-$im=@ImageCreateFromPNG($root_path.'main/imgcreator/datachart.png'); // Loads the ready made image (makes this routine faster)
+$im=@ImageCreateFromPNG($root_path.'include/imgcreator/datachart.png'); // Loads the ready made image (makes this routine faster)
 
 /**
 * The next set of codes create the graph chart on-the-fly 
