@@ -272,7 +272,7 @@ ob_start();
 <tr  valign="top">
 <td colspan=4 bgcolor="#99ccff"  width="50%">
 <?php
-echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+echo '<img src="'.$root_path.'include/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 ?>
 </td>
 <td colspan=4 bgcolor="#99ccff"><div class=fva2_ml10>

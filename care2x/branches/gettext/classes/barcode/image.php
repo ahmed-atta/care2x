@@ -162,6 +162,6 @@ if ($obj) {
 //}
 
 if ($label == 1) {
-	header ( "location: ../../main/imgcreator/barcode-etik.php?sid=$sid&lang=$lang&pn=$pn" ) ;
+	header ( "location: ../../include/imgcreator/barcode-etik.php?sid=$sid&lang=$lang&pn=$pn" ) ;
 }
 ?>

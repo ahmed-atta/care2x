@@ -15,7 +15,7 @@ $template=array();
 
 //setcookie(opfclic_rt,"timebar");
 //setcookie(opfclic_filename,$filename);
-$imgsrc=$root_path."main/imgcreator/log-timebar.php?sid=$sid&lang=$lang&winid=$winid&enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";
+$imgsrc=$root_path."include/imgcreator/log-timebar.php?sid=$sid&lang=$lang&winid=$winid&enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday";
 //setcookie(ck_comdat,"enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&pyear=$pyear&pmonth=$pmonth&pday=$pday");
 
 /*$_SESSION['sess_opfclic_rt']='timebar';

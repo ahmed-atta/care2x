@@ -175,7 +175,7 @@ if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php
           /* The patient label */
  if($edit || $edit_findings || $read_form || $edit_form)
         {
-		   echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+		   echo '<img src="'.$root_path.'include/imgcreator/barcode_label_single_large.php'.URL_REDIRECT_APPEND.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 		}
 
 ?>

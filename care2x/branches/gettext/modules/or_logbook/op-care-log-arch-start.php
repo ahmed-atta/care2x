@@ -488,7 +488,7 @@ if($datafound)
 		else
 			{ 
 				$buffy=str_replace(" ","+",$_COOKIE['ck_op_pflegelogbuch_user'.$sid]);
-				echo '<img src="'.$root_path.'main/imgcreator/catcom.php?person='.$buffy.'&rnd='.$r.'">';
+				echo '<img src="'.$root_path.'include/imgcreator/catcom.php?person='.$buffy.'&rnd='.$r.'">';
 				if($nofile) echo '<p><b><font color="#800000" size=4>'.$LDPatNoExist.'</b>';
 			}
 		//echo '

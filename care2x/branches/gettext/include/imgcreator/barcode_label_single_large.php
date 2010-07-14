@@ -96,5 +96,5 @@ $addr = explode ( "\r\n", $result ['address'] );
 
 	
 # Load the image generation script based on the language
-include ($root_path . 'main/imgcreator/inc_label_single_large.php');
+include ($root_path . 'include/imgcreator/inc_label_single_large.php');
 ?>

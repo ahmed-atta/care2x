@@ -297,7 +297,7 @@ if ($stored_request['release_via']!='' && $stored_request['mainlog_sign']!='' &&
 	<!-- First row -->	
         <tr bgcolor="<?php echo $bgc1 ?>" valign="top">
 		<!-- <td rowspan=3><img src="../img/de/de_blood_wardfill.gif" border=0 width=27 height=492 align="absmiddle"></td> -->
-        <td rowspan=3><img src="<?php echo $root_path; ?>main/imgcreator/blood_lab_leftbar.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>" border=0 width=27 height=492 align="absmiddle"></td>
+        <td rowspan=3><img src="<?php echo $root_path; ?>include/imgcreator/blood_lab_leftbar.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>" border=0 width=27 height=492 align="absmiddle"></td>
 		<td width=50% bgcolor="<?php echo $bgc1 ?>"  class=fva2_ml10><div   class=fva2_ml10><?php echo $LDToBloodBank."</b></font><br>".$LDTelephone ?><br>
 <?php
 	  echo '<font size=1 color="#000099" face="verdana,arial">'.$batch_nr.'</font>&nbsp;<br>';
@@ -353,7 +353,7 @@ if ($stored_request['release_via']!='' && $stored_request['mainlog_sign']!='' &&
 <?php
 
 if($edit  || $read_form){
-	echo '<img src="'.$root_path.'main/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
+	echo '<img src="'.$root_path.'include/imgcreator/barcode_label_single_large.php?sid='.$sid.'&lang='.$lang.'&fen='.$full_en.'&en='.$pn.'" width=282 height=178>';
 }
 
 		?>
@@ -466,7 +466,7 @@ if($edit  || $read_form){
 	      <table border=0 cellspacing=1 width=100% height=100% align="left" cellpadding=0>
          <tr bgcolor="<?php echo $bgc1 ?>">
         <td  bgcolor="<?php echo $bgc1 ?>" rowspan=20 width=27>
-		<img src="<?php echo $root_path; ?>main/imgcreator/blood_lab_leftbar.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&form_bottom=1" border=0 width=27 height=492><br></td>
+		<img src="<?php echo $root_path; ?>include/imgcreator/blood_lab_leftbar.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&form_bottom=1" border=0 width=27 height=492><br></td>
            <td width=100 align="center"><font size=2 face="arial"><?php echo $LDPB ?><br><?php echo $LD350 ?></font></td>
            <td  colspan=7>&nbsp;<input type="text" name="blood_pb" size=90 maxlength=90 <?php  if($stored_request['blood_pb']) echo 'value="'.$stored_request['blood_pb'].'"'; ?>></td>
          </tr>

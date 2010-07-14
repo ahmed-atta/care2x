@@ -509,7 +509,7 @@ if($edit)
 echo '
 		<img';
 if($edit) echo ' ismap usemap="#FrontPageMap"';
-echo ' src="'.$root_path.'main/imgcreator/datachart.php'.URL_APPEND.'&pn='.$pn.'&max=15&yr='.$jahr.'&mo='.$kmonat.'&dy='.$tag.'" height=135 width=700 border=0 >
+echo ' src="'.$root_path.'include/imgcreator/datachart.php'.URL_APPEND.'&pn='.$pn.'&max=15&yr='.$jahr.'&mo='.$kmonat.'&dy='.$tag.'" height=135 width=700 border=0 >
 		</td>
 		</tr>
 		<tr   valign="top" >
