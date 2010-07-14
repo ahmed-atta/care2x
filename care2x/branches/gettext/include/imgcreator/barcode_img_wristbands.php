@@ -76,5 +76,5 @@ header ('Content-type: image/png');
 	$full_en=$en;
 
 	# Load the image generator according to the language version
-    include($root_path.'include/imgcreator/inc_wristband.php');
+    include('inc_wristband.php');
 ?>
