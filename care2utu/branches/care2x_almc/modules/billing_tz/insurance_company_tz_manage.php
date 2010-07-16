@@ -8,6 +8,7 @@ require($root_path.'include/inc_environment_global.php');
 * GNU General Public License
 *
 * elpidio@care2x.org, meggle@merotech.de
+* 2009,2010 Modified for ALMC clinic Arusha/Tanzania by Moye Masenga (mmoyejm@yahoo.com)
 *
 * See the file "copy_notice.txt" for the licence notice
 */

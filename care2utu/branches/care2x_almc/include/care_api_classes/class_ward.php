@@ -12,6 +12,7 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 * @author Elpidio Latorilla
 * @version beta 2.0.1
 * @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
+* 2009,2010 Modified for ALMC clinic Arusha/Tanzania by Moye Masenga (mmoyejm@yahoo.com)
 * @package care_api
 */
 class Ward extends Encounter {

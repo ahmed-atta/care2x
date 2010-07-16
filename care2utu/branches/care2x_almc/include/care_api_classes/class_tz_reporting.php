@@ -11,6 +11,7 @@
 * @author Robert Meggle (www.MEROTECH.de: meggle@merotech.de)
 * @version beta 0.0.1
 * @copyright 2006 Robert Meggle, based on the development of Elpidio Latorilla
+* 2009,2010 Modified for ALMC clinic Arusha/Tanzania by Moye Masenga (mmoyejm@yahoo.com)
 * @package care_api
 */
 
