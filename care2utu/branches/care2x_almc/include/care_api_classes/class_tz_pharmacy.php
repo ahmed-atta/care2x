@@ -15,6 +15,7 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 * @author Alexander Irro (Version 2.0.0) - alexander.irro@merotech.de
 * @version beta 2.0.0
 * @copyright 2005 Robert Meggle (MEROTECH info@merotech.de)
+* 2009,2010 Modified for ALMC clinic Arusha/Tanzania by Moye Masenga (mmoyejm@yahoo.com)
 * @package care_api from Elpidio Latirilla
 */
 

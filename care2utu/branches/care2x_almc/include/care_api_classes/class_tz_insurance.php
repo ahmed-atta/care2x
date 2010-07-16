@@ -1,6 +1,8 @@
 <?php
 require_once($root_path.'include/care_api_classes/class_core.php');
-
+/*
+2009,2010 Modified for ALMC clinic Arusha/Tanzania by Moye Masenga (mmoyejm@yahoo.com)
+*/
 
 /**
 *  Insurance methods for tanzania (the product-module is completely rewritten by Alexander Irro)
