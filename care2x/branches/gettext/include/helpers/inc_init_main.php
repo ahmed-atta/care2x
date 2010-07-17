@@ -12,19 +12,19 @@ $dbpassword='root';
 $dbhost='localhost';
 
 # First key used for simple chaining protection of scripts
-$key='12041125018466';
+$key='7811371076400';
 
 # Second key used for accessing modules
-$key_2level='34367269977810';
+$key_2level='7619423922162';
 
 # 3rd key for encrypting cookie information
-$key_login='29298508193976';
+$key_login='46924924597506';
 
 # Main host address or domain
-$main_domain='localhost';
+$main_domain='localhost/gettext/care2002/care2x/branches/gettext/';
 
 # Host address for images
-$photoserver_ip='localhost';
+$photoserver_ip='localhost/gettext/care2002/care2x/branches/gettext/';
 
 # Transfer protocol. Use https if this runs on SSL server
 $httprotocol='http';
@@ -35,4 +35,5 @@ $dbtype='mysql';
 # Set this to your timezone.
 $timezone = 'Europe/Tirane';
 date_default_timezone_set($timezone);
+
 ?>
