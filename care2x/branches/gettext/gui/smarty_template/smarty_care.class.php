@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
 * SETUP Smarty for CARE2X
 *
@@ -11,7 +12,7 @@
 /**
 * LOAD Smarty Library
 */
-require_once ($root_path.'classes/smarty/libs/Smarty.class.php');
+require_once (CARE_BASE.'classes/smarty/libs/Smarty.class.php');
 
 class smarty_care extends Smarty {
 
@@ -42,19 +43,19 @@ class smarty_care extends Smarty {
 	*/
 	function smarty_care ($dirname, $bInit = TRUE, $bShowCopy = TRUE, $bLoadJS = TRUE) {
 
- 		global $root_path, $templatedir, $default_template, $sDocRoot, $LDCloseAlt, $cfg, $lang, $pgt, $GLOBAL_CONFIG;
+ 		global $templatedir, $default_template, $sDocRoot, $LDCloseAlt, $cfg, $lang, $pgt, $GLOBAL_CONFIG;
 
 		$this->smarty();
 
-		$this->root_path = $root_path;
+		$this->root_path = CARE_BASE;
 
 		# Set the root path
-		$this->assign('root_path',$root_path);
+		$this->assign('root_path',CARE_BASE);
 		
 		# Path to the smarty care templates and classes
-		$this->sDocRoot = $root_path.'gui/smarty_template';
+		$this->sDocRoot = CARE_BASE.'gui/smarty_template';
 		# Path to the template cache
-		$this->templateCache = $root_path.'cache/templates_c';
+		$this->templateCache = CARE_BASE.'cache/templates_c';
 
 		# Set the template
 		# First check if the user config template is available
@@ -66,7 +67,7 @@ class smarty_care extends Smarty {
 
 			# create global config object
 			if(!isset($GLOBAL_CONFIG['template_smarty'])){
-				include_once($root_path.'include/core/class_globalconfig.php');
+				include_once(CARE_BASE.'include/core/class_globalconfig.php');
 				$gc=& new GlobalConfig($GLOBAL_CONFIG);
 				# Get the global template config
 				$gc->getConfig('template_smarty');
@@ -133,9 +134,8 @@ class smarty_care extends Smarty {
 	} // end of constructor
 
 	function InitializeGUI(){
- 		global $root_path, $lang, $cfg;
+ 		global  $lang, $cfg;
 		
-		if(empty($root_path)) $root_path = $this->root_path;
 		if(empty($lang)) $lang = $this->lang;
 		
 		# HEAD META definition
@@ -207,15 +207,14 @@ class smarty_care extends Smarty {
 	}
 
 	function Copyright(){
-		global $root_path, $lang;
+		global $lang;
 
-		if(empty($root_path)) $root_path = $this->root_path;
 		if(empty($lang)) $lang = $this->lang;
 
 		ob_start();
 			$sTempFile=$this->root_path.'language/'.$this->lang.'/'.$this->lang.'_copyrite.php';
 			if(file_exists($sTempFile)) include($sTempFile);
-			else include($this->root_path.'language/sq/sq_copyrite.php');
+			else include($this->root_path.'language/en/en_copyrite.php');
 			$sTemp = ob_get_contents();
 		ob_end_clean();
 		return "<div class=\"copyright\">$sTemp</div>";

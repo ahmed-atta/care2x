@@ -33,7 +33,7 @@ if(isset($cfg['mainmenu_tree']) && !empty($cfg['mainmenu_tree']) && file_exists(
 <TITLE><?php echo $wintitle; ?></TITLE>
 <?php
 //set the css style for a links
-require($root_path.'include/helpers/inc_css_a_sublinker_d.php');
+require(CARE_BASE.'include/helpers/inc_css_a_sublinker_d.php');
 ?>
 
 <script language="javascript">
@@ -74,7 +74,7 @@ if(!$cfg['dhtml']){
 }
 
 
-$TP_logo=createLogo($root_path,'care_logo.png','0');
+$TP_logo=createLogo(CARE_BASE,'care_logo.png','0');
 
 $tp_body=&$TP_obj->load('tp_main_index_menu_body.htm');
 eval("echo $tp_body;");
@@ -102,7 +102,7 @@ if(!$GLOBALCONFIG['language_single']){
      <select name="lang"> 
     <?php
     
-    require($root_path.'include/core/class_language.php');
+    require(CARE_BASE.'include/core/class_language.php');
     $lang_obj=new Language;
     $langselect= $lang_obj->createSelectForm($lang);
     echo $langselect;
@@ -127,11 +127,11 @@ if(!$GLOBALCONFIG['language_single']){
 <font SIZE=2 color="#6f6f6f" face="arial,verdana">
 <?php // echo $dbtype; ?>
 <br>
-<?php if($_SESSION['sess_login_username'] != '') echo '<img '.createComIcon($root_path,'team_tree.gif').'><br>' ; 
+<?php if($_SESSION['sess_login_username'] != '') echo '<img '.createComIcon(CARE_BASE,'team_tree.gif').'><br>' ; 
 echo $_SESSION['sess_login_username']; ?>
 <br>
 <?php 
-require_once($root_path.'modules/dept_admin/model/class_department.php');
+require_once(CARE_BASE.'modules/dept_admin/model/class_department.php');
 $dept=new Department;
 $depts=&$dept->getAllActive();
 $sTemp = '';
@@ -141,13 +141,13 @@ if($depts&&is_array($depts)) {
     		 if(isset($$v['LD_var'])&&$$v['LD_var']) $sTemp = $sTemp .  $$v['LD_var'] . '<br>';
     			 else $sTemp = $sTemp . $v['name_formal'] . '<br>';
     			 
-if($sTemp != '') echo '<img '.createComIcon($root_path,'home.gif').'><br>';
+if($sTemp != '') echo '<img '.createComIcon(CARE_BASE,'home.gif').'><br>';
 echo  $sTemp;	
 }
 ?>
 <br>
 <?php
-require_once($root_path.'include/core/class_ward.php');
+require_once(CARE_BASE.'include/core/class_ward.php');
 $ward_obj=new Ward;
 $items='nr,ward_id,name, dept_nr'; // set the items to be fetched
 $ward_info=&$ward_obj->getAllWardsItemsArray($items);
@@ -157,7 +157,7 @@ if($ward_info&&is_array($ward_info)){
     	 if(in_array($v['dept_nr'],$_SESSION['department_nr']))         			 
     		$sTemp = $sTemp . $v['name'] . '<br>';
     }
-if($sTemp != '') echo '<img '.createComIcon($root_path,'statbel2.gif').'><br>';
+if($sTemp != '') echo '<img '.createComIcon(CARE_BASE,'statbel2.gif').'><br>';
 echo $sTemp;
 }
 ?><br>

@@ -13,7 +13,7 @@
 # Create global config object
 
 if(!isset($GLOBAL_CONFIG)||!is_array($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
-require_once($root_path.'include/core/class_globalconfig.php');
+require_once(CARE_BASE . '/include/core/class_globalconfig.php');
 $gc=new GlobalConfig($GLOBAL_CONFIG);
 
 
@@ -80,17 +80,23 @@ $img_path_skin='gui/img/skin/'.$theme_skin.'/'; # the path for non-language depe
 function createLDImgSrc($froot, $fn, $border='', $align='')
 {
    global $lang, $theme_control, $img_path_control;
-   
+   $froot = CARE_BASE;
    //return 1;
 	if(file_exists($froot.$img_path_control.$lang.'/'.$lang.'_'.$fn)){
 		$picfile_path=$froot.$img_path_control.$lang.'/'.$lang.'_'.$fn;
+		$picsize=getimagesize($picfile_path);
+		$picfile_path=CARE_GUI.$img_path_control.$lang.'/'.$lang.'_'.$fn;
 	}elseif(file_exists($froot.'gui/img/control/default/'.$lang.'/'.$lang.'_'.$fn)){
 		$picfile_path=$froot.'gui/img/control/default/'.$lang.'/'.$lang.'_'.$fn;
+		$picsize=getimagesize($picfile_path);
+		$picfile_path=CARE_GUI.'gui/img/control/default/'.$lang.'/'.$lang.'_'.$fn;
 	}else{
 		$picfile_path=$froot.'gui/img/control/default/'.LANG_DEFAULT.'/'.LANG_DEFAULT.'_'.$fn;
+		$picsize=getimagesize($picfile_path);
+		$picfile_path=CARE_GUI.'gui/img/control/default/'.LANG_DEFAULT.'/'.LANG_DEFAULT.'_'.$fn;
 	}
-	
-	$picsize=GetImageSize($picfile_path);
+
+//	$picsize=getimagesize($picfile_path);
 	  
 	$picfilesrc='src="'.$picfile_path.'"';  
 	if($border!='') $picfilesrc.=' border='.$border;
@@ -113,22 +119,24 @@ function createLDImgSrc($froot, $fn, $border='', $align='')
 function createComIcon($froot, $fn, $border='', $align='', $show_always=TRUE)
 {
    global $lang, $theme_com_icon, $img_path_com_icon;
-	
+	$froot = CARE_BASE;
    # if icon theme is  "no_icon", return a transparent pixel gif
    if($theme_com_icon == 'no_icon' && !$show_always){
 	$picfile_path=$froot.'gui/img/common/default/pixel.gif';
-   }
-   elseif(file_exists($froot.$img_path_com_icon.$fn))
-   {
+	$picsize= getimagesize($picfile_path);
+	$picfile_path=CARE_GUI.'gui/img/common/default/pixel.gif';
+   } elseif(file_exists($froot.$img_path_com_icon.$fn)){
       $picfile_path=$froot.$img_path_com_icon.$fn;
-    }
-	else
-	{
+      $picsize= getimagesize($picfile_path);
+      $picfile_path=CARE_GUI.$img_path_com_icon.$fn;
+    } else {
         $picfile_path=$froot.'gui/img/common/default/'.$fn;
+        $picsize= getimagesize($picfile_path);
+        $picfile_path=CARE_GUI.'gui/img/common/default/'.$fn;
 	}
    
 	
-	$picsize= @ GetImageSize($picfile_path);
+	
 	  
 	$picfilesrc='src="'.$picfile_path.'"';  
 	if($border!='') $picfilesrc.=' border='.$border;
@@ -145,18 +153,22 @@ function createComIcon($froot, $fn, $border='', $align='', $show_always=TRUE)
 */
 function createMascot($froot, $fn, $border='', $align='')
 {
+	$froot = CARE_BASE;
    global $lang, $theme_mascot, $img_path_mascot;
    
    if(file_exists($froot.$img_path_mascot.$fn))
    {
       $picfile_path=$froot.$img_path_mascot.$fn;
+      $picsize= getimagesize($picfile_path);
+      $picfile_path=CARE_GUI.$img_path_mascot.$fn;
     }
 	else
 	{
         $picfile_path=$froot.'gui/img/mascot/default/'.$fn;
+        $picsize= getimagesize($picfile_path);
+        $picfile_path=CARE_GUI.'gui/img/mascot/default/'.$fn;
 	}
 	
-	$picsize= @ GetImageSize($picfile_path);
 	  
 	$picfilesrc='src="'.$picfile_path.'"';  
 	if($border!='') $picfilesrc.=' border='.$border;
@@ -173,7 +185,7 @@ function createMascot($froot, $fn, $border='', $align='')
 function createBgSkin($froot,$fn)
 {
    global $lang, $theme_skin, $img_path_skin;
-   
+   $froot = CARE_GUI;
    if(file_exists($froot.$img_path_skin.$fn))
    {
       $picfile_path=$froot.$img_path_skin.$fn;
@@ -191,6 +203,7 @@ function createBgSkin($froot,$fn)
 *  createLogo creates a logo image 
 */ 
 function createLogo($froot, $fn, $border='', $align=''){
+	$froot = CARE_GUI;
    global $lang, $img_path_com_icon;
 	# save the orig icon path
 	$icon_path=$img_path_com_icon;
@@ -214,7 +227,7 @@ function createLogo($froot, $fn, $border='', $align=''){
 function image_exists($froot, $fn)
 {
    global $lang,  $img_path_com_con;
-   
+   $froot = CARE_GUI;
 	if(file_exists($froot.$img_path_com_icon.$fn)){
 		return TRUE;
 	}else{
@@ -226,6 +239,7 @@ function image_exists($froot, $fn)
 */
 function lang_image_exists($froot, $fn)
 {
+	$froot = CARE_GUI;
    global $lang, $img_path_control;
    
 	if(file_exists($froot.$img_path_control.$lang.'/'.$lang.'_'.$fn)){

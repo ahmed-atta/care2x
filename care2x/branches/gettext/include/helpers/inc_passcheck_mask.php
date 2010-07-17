@@ -11,7 +11,7 @@ $bShowThisPage = FALSE;
 #
 if(!isset($smarty) || !is_object($smarty)){
 	$bShowThisPage = TRUE;
-	require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+	require_once(CARE_BASE .'gui/smarty_template/smarty_care.class.php');
 	$smarty = new smarty_care('common',FALSE);
 }
 
@@ -23,15 +23,12 @@ if (isset($pass)&&($pass=='check')&&($passtag)){
 	switch($passtag){
 		case 1:$errbuf="$errbuf $LDWrongEntry";
 		$err_msg="<div class=\"warnprompt\">$LDWrongEntry</div><br>$LDPlsTryAgain";
-		//echo '<img '.createLDImgSrc($root_path,'cat-fe.gif','0','left').'>';
 		break;
 		case 2:$errbuf="$errbuf $LDNoAuth";
 		$err_msg="<div class=\"warnprompt\">$LDNoAuth</div><br>$LDPlsContactEDP";
-		//echo '<img '.createLDImgSrc($root_path,'cat-noacc.gif','0','left').'>';
 		break;
 		default:$errbuf="$errbuf $LDAuthLocked";
 		$err_msg="<div class=\"warnprompt\">$LDAuthLocked</div><br>$LDPlsContactEDP";
-		//echo '<img '.createLDImgSrc($root_path,'cat-sperr.gif','0','left').'>';
 	}
 	#
 	# Log auth attempt
@@ -40,11 +37,11 @@ if (isset($pass)&&($pass=='check')&&($passtag)){
 
 	$smarty->assign('bShowErrorPrompt',TRUE);
 
-	$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0').'>');
+	$smarty->assign('sMascotImg','<img '.createMascot(CARE_GUI  ,'mascot1_r.gif','0').'>');
 	$smarty->assign('sErrorMsg',$err_msg);
 }
 
-if(!$passtag) $smarty->assign('sMascotColumn','<td><img '.createMascot($root_path,'mascot3_r.gif','0').'></td>');
+if(!$passtag) $smarty->assign('sMascotColumn','<td><img '.createMascot(CARE_GUI  ,'mascot3_r.gif','0').'></td>');
 
 #
 # Prepare the auth entry form elements
@@ -96,8 +93,8 @@ if(isset($c_flag)&&$c_flag) {
 
 $smarty->assign('sPassHiddenInputs',$sHiddenTemp);
 
-$smarty->assign('sPassSubmitButton','<INPUT type="image"  '.createLDImgSrc($root_path,'continue.gif','0').'>');
-$smarty->assign('sCancelButton','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').'></a>');
+$smarty->assign('sPassSubmitButton','<INPUT type="image"  '.createLDImgSrc(CARE_GUI  ,'continue.gif','0').'>');
+$smarty->assign('sCancelButton','<a href="'.$breakfile.'"><img '.createLDImgSrc(CARE_GUI  ,'cancel.gif','0').'></a>');
 
 #
 # Display this page if necessary

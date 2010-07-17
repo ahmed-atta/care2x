@@ -1,8 +1,8 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
-require($root_path.'classes/datetimemanager/class.dateTimeManager.php');
+require(CARE_BASE .'include/helpers/inc_environment_global.php');
+require(CARE_BASE .'classes/datetimemanager/class.dateTimeManager.php');
 $dateshifter=new dateTimeManager();
 /*
 CARE2X Integrated Information System for Hospitals and Health Care Organizations and Services
@@ -49,7 +49,7 @@ if(!isset($dy)||empty($dy)) $dy=date('d');
 if(!isset($yr)||empty($yr)) $yr=date('Y');
 if(!extension_loaded('gd')) dl('php_gd.dll');
 
-if(!isset($db)||!$db) include($root_path.'include/helpers/inc_db_makelink.php');
+if(!isset($db)||!$db) include(CARE_BASE .'include/helpers/inc_db_makelink.php');
 if($dblink_ok){	
     $dbtable='care_encounter_measurement';
 	$start=date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr));
@@ -80,7 +80,7 @@ $tabrows=$tabhi/20; # Total number of horizontal lines
 
 header ('Content-type: image/PNG');
 
-$im=@ImageCreateFromPNG($root_path.'datachart.png'); // Loads the ready made image (makes this routine faster)
+$im=@ImageCreateFromPNG(CARE_BASE  .'datachart.png'); // Loads the ready made image (makes this routine faster)
 
 /**
 * The next set of codes create the graph chart on-the-fly 

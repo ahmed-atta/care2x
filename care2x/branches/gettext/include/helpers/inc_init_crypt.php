@@ -24,12 +24,12 @@ function makeRand()
 
 /*if(defined('FROM_ROOT')&&FROM_ROOT==1)
 {
-   include_once($root_path.'classes/pear/crypt/hcemd5.php');
-   include_once($root_path.'include/inc_init_main.php');   // This loads the chaining keys
+   include_once(CARE_BASE .'classes/pear/crypt/hcemd5.php');
+   include_once(CARE_BASE .'include/inc_init_main.php');   // This loads the chaining keys
 }
  else*/
 {
-   include_once($root_path.'classes/pear/crypt/hcemd5.php');
+   include_once(CARE_BASE .'classes/pear/crypt/hcemd5.php');
    include_once('inc_init_main.php');   // This loads the chaining keys
 }
 

@@ -1,11 +1,9 @@
 <?php
-
-if(isset($cfg['css']) && !empty($cfg['css']) && file_exists($root_path.'gui/css/themes/'.$cfg['css'])){
-	$sCssFile =$root_path.'gui/css/themes/'.$cfg['css'];
+if(isset($cfg['css']) && !empty($cfg['css']) && file_exists( CARE_GUI. '/gui/css/themes/'.$cfg['css'])){
+	$sCssFile = CARE_GUI.  '/gui/css/themes/'.$cfg['css'];
 }else{
-	$sCssFile=$root_path.'gui/css/themes/default/default.css';
+	$sCssFile=  CARE_GUI. '/gui/css/themes/default/default.css';
 }
-
 echo '<link rel="stylesheet" href="'.$sCssFile.'" type="text/css">';
 
 if($cfg['dhtml']){
@@ -26,7 +24,7 @@ A:visited:hover {color: '.$cfg['body_hover'].';}
 <!--
 function popPic(pid,nm){
 
- if(pid!="") regpicwindow = window.open("<?php echo $root_path ?>main/pop_reg_pic.php<?php echo URL_REDIRECT_APPEND ?>&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
+ if(pid!="") regpicwindow = window.open("<?php echo CARE_BASE   ?>main/pop_reg_pic.php<?php echo URL_REDIRECT_APPEND ?>&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
 
 }
 // -->

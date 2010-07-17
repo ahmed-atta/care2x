@@ -4,7 +4,7 @@
 */
 /**
 */
-require_once($root_path.'include/core/class_core.php');
+require_once(CARE_BASE.'include/core/class_core.php');
 
 /**
 *  Notes methods.

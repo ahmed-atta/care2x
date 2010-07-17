@@ -10,7 +10,7 @@
 		$locstr.=' '.$admit_type.' ';
 		$locstr.=$LDInsShortID[$result['insurance_class_nr']];
 		
-    $bc = ImageCreateFrompng($root_path.'cache/barcodes/en_'.$full_en.'.png');
+    $bc = ImageCreateFrompng(CARE_BASE .'cache/barcodes/en_'.$full_en.'.png');
 
     $w=745;  // The width of the image = equal to the width of DIN-A4 paper
     $h=1080; // The height of the image = egual to the height of DIN-A4 paper

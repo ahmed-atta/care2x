@@ -5,7 +5,7 @@
 
 /**
 */
-require_once($root_path.'include/core/class_encounter.php');
+require_once(CARE_BASE .'include/core/class_encounter.php');
 /**
 *  Ward methods.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.

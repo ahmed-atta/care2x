@@ -26,7 +26,6 @@ $person->preloadPersonInfo();
 </head>
 <body onLoad="if (window.focus) window.focus()">
 <font size=2 face="verdana,arial"><?php echo $person->LastName().', '.$person->FirstName().' ['.formatDate2Local($person->Birthdate(),$date_format).']';  ?><br>
-<!-- <img src="<?php echo "$httprotocol://$main_domain" ?>/uploads/photos/registration/<?php echo $person->PhotoFilename();  ?>"> -->
 <?php
 if($person->PhotoFilename()&&file_exists($root_path.'uploads/photos/registration/'.$person->PhotoFilename())){
 ?>

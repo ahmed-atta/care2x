@@ -8,10 +8,10 @@
 */
 ///$db->debug=1;
 //set the css style for a links
-require($root_path.'include/helpers/inc_css_a_sublinker_d.php');
+require(CARE_BASE.'include/helpers/inc_css_a_sublinker_d.php');
 // Code for checking menu's voices' permissions added by Daniele Palmas and Guido Porruvecchio
-require_once($root_path."include/core/MenuVisibility.php");
-require_once($root_path."include/core/StringPermissionParser.php");
+require_once(CARE_BASE."include/core/MenuVisibility.php");
+require_once(CARE_BASE."include/core/StringPermissionParser.php");
 
 $sqlPermissions = "SELECT permission FROM care_users WHERE login_id = '".$_SESSION['sess_login_username']."'";
 $resultPermissions = $db->Execute($sqlPermissions);
@@ -34,8 +34,8 @@ $result=$db->Execute($sql);
 if($result){
 	echo '<table CELLPADDING=0 CELLSPACING=0 border=0>';
 	$gui='';
-	$TP_img1= '<img '.createComIcon($root_path,'blue_bullet.gif','0','middle').'>';
-	$TP_com_img_path=$root_path.'gui/img/common';
+	$TP_img1= '<img '.createComIcon(CARE_BASE,'blue_bullet.gif','0','middle').'>';
+	$TP_com_img_path=CARE_BASE.'gui/img/common';
 	$buf='';
 	# Load the menu item template
 	$tp =&$TP_obj->load('tp_main_index_menu_item.htm');
@@ -46,7 +46,7 @@ if($result){
 				$menu['LD_var']='LDLogout';
 			}
 		}
-		$TP_menu_item='<a href="'.$root_path.$menu['url'].URL_APPEND.'" TARGET="CONTENTS" REL="child">';
+		$TP_menu_item='<a href="'.CARE_BASE.$menu['url'].URL_APPEND.'" TARGET="CONTENTS" REL="child">';
 		if(isset($$menu['LD_var'])&&!empty($$menu['LD_var'])) $TP_menu_item.=$$menu['LD_var'];
 			else $TP_menu_item.=$menu['name'];
 		$TP_menu_item.='</A>';

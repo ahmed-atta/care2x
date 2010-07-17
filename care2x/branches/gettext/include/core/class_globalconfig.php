@@ -4,7 +4,7 @@
 */
 /**
 */
-require_once($root_path.'include/core/class_core.php');
+require_once('class_core.php');
 
 /**
 *  Global configuration methods.

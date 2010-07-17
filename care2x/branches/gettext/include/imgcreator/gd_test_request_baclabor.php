@@ -18,11 +18,11 @@ if (stristr('inc_test_request_gd_baclabor.php',$PHP_SELF))
 */
 
 /* Load the variables elements */
-require_once($root_path.'modules/laboratory/includes/inc_test_request_vars_baclabor.php');
+require_once(CARE_BASE .'modules/laboratory/includes/inc_test_request_vars_baclabor.php');
 
 /* Load additional language table */
-if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_'.$subtarget.'.php')) include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_'.$subtarget.'.php');
-  else include_once($root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_'.$subtarget.'.php');
+if(file_exists(CARE_BASE .'language/'.$lang.'/lang_'.$lang.'_konsil_'.$subtarget.'.php')) include_once(CARE_BASE .'language/'.$lang.'/lang_'.$lang.'_konsil_'.$subtarget.'.php');
+  else include_once(CARE_BASE .'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_'.$subtarget.'.php');
 
 
 function doBlock()

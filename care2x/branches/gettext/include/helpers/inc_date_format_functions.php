@@ -15,12 +15,12 @@ if (stristr('inc_date_format_functions.php',$PHP_SELF))
 function getDateFormat()
 {
 
-    global $root_path, $db, $dblink_ok;
+    global $db, $dblink_ok;
 
 	$errFormat=0;
 
     /* If no link to db, make own link*/
-    if(!isset($db) || !$db) include_once($root_path.'include/helpers/inc_db_makelink.php');
+    if(!isset($db) || !$db) include_once(CARE_BASE .'include/helpers/inc_db_makelink.php');
 
     if($dblink_ok)
     {
@@ -43,7 +43,7 @@ function getDateFormat()
 	
 	if($errFormat)	{
 	
-	    $df=get_meta_tags($root_path.'global_conf/format_date_default.pid');
+	    $df=get_meta_tags(CARE_BASE .'global_conf/format_date_default.pid');
 
         if($df['date_format']!='') return $df['date_format'];
 	        else return 'dd.MM.yyyy'; // this is the last alternative format (german traditional)

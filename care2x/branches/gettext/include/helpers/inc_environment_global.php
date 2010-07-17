@@ -1,4 +1,7 @@
 <?php
+//define the base path for all the following includes
+define('CARE_BASE', substr(dirname(__FILE__),0,-15 ));
+
 #
 # Page generation time measurement
 # define to 1 to measure page generation time
@@ -47,15 +50,10 @@ $template_theme='biju';
 #
 # Set the template path
 #
-$template_path=$root_path.'gui/html_template/';
-
+$template_path= CARE_BASE .'gui/html_template/';
 #
 # ---------- Do not edit below this ---------------------------------------------
-# Load the html page encryptor
 #
-if(defined('ENCRYPT_PAGE_BASE64')&&ENCRYPT_PAGE_BASE64){
-	include_once($root_path.'classes/html_encryptor/csource.php');
-}
 
 #
 # globalize the POST, GET, & COOKIE variables
@@ -78,7 +76,7 @@ if(!defined('LANG_DEFAULT')) define ('LANG_DEFAULT','en');
 #
 # Establish db connection
 #
-require_once($root_path.'include/helpers/inc_db_makelink.php');
+require_once('inc_db_makelink.php');
 
 #
 # Session configurations
@@ -120,18 +118,19 @@ define('URL_REDIRECT_APPEND','?sid='.$sid.'&lang='.$lang);
 # Page generation time start
 #
 if(defined('USE_PAGE_GEN_TIME')&&USE_PAGE_GEN_TIME){
-	include($root_path.'classes/loadtime/loadtimeclass.php');
+	include(CARE_BASE .'classes/loadtime/loadtimeclass.php');
 	$pgt=new loadtime();
 	$pgt->start();
 }
 //echo URL_APPEND; echo URL_REDIRECT_APPEND;
+define('CARE_GUI',$httprotocol . '://' . $main_domain);
+
 #
 # Template align tags, default values
 #
 $TP_ALIGN='left'; # template variable for document direction
 $TP_ANTIALIGN='right';
 $TP_DIR='ltr';
-
 #
 # Function to return the <html> or <html dir-rtl> tag
 #
@@ -153,4 +152,5 @@ function html_ret_rtl($lang){
 function html_rtl($lang){
 	echo html_ret_rtl($lang);
 }
+
 ?>

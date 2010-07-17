@@ -1,10 +1,11 @@
 <?php
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
 * @package care_api
 */
 /**
 */
-require_once($root_path.'include/core/class_core.php');
+require_once(CARE_BASE .'include/core/class_core.php');
 /**
 *  Person methods. 
 *
@@ -918,12 +919,12 @@ class Person extends Core {
 	* @return mixed integer or boolean
 	*/
 	function SearchSelect($searchkey='',$maxcount=100,$offset=0,$oitem='name_last',$odir='ASC',$fname=FALSE){
-		global $db, $sql_LIKE, $root_path;
+		global $db, $sql_LIKE;
 		//$db->debug=true;
 		if(empty($maxcount)) $maxcount=100;
 		if(empty($offset)) $offset=0;
 
-		include_once($root_path.'include/helpers/inc_date_format_functions.php');
+		include_once(CARE_BASE .'include/helpers/inc_date_format_functions.php');
 
 		# convert * and ? to % and &
 		$searchkey=strtr($searchkey,'*?','%_');

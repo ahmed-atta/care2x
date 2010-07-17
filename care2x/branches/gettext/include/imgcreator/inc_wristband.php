@@ -3,7 +3,7 @@
 * This script is included by the barcode_img_wristband.php for non-arabic languages
 */
 	/* Load the barcode image*/
-    $bc = ImageCreateFrompng($root_path.'cache/barcodes/en_'.$full_en.'.png');
+    $bc = ImageCreateFrompng(CARE_BASE .'cache/barcodes/en_'.$full_en.'.png');
 
 	/* Load the wristband images */
 	
