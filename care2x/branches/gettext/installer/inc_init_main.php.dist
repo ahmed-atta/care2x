@@ -35,4 +35,5 @@ $dbtype='INSTALL_DB_TYPE';
 # Set this to your timezone.
 $timezone = 'TIMEZONE';
 date_default_timezone_set($timezone);
+
 ?>

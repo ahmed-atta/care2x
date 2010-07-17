@@ -2,8 +2,11 @@
 
 require(INSTALLER_PATH.'/config.php');
 include(INSTALLER_PATH.'/helpers/TimeZoneHelper.php');
+include(INSTALLER_PATH.'/helpers/UriHelper.php');
 
 $timezoneList = TimeZoneHelper();
+$uri = UriHelper();
+$transferProtocol = ConnectionTypeHelper();
 
 # seed the random generator
 srand ((double) microtime() * 1000000);
@@ -24,8 +27,8 @@ $version->collectText('admin_user', 'User Name', 'admin');
 $version->collectPassword('admin_password', 'Password', '');
 $version->collectPassword('admin_confirm', 'Password Confirm', '');
 $version->addSeparator('Network Protocol and Domain');
-$version->collectOption('transfer_protocol', 'Transfer Protocol', array('http', 'https'), array('http', 'https'), 'http');
-$version->collectText('care2x_address', 'Care2x Host', 'localhost');
+$version->collectOption('transfer_protocol', 'Transfer Protocol',array('http','https'), array('http','https'), $transferProtocol);
+$version->collectText('care2x_address', 'Care2x Host', $uri);
 $version->addSeparator('TimeZone Information');
 $version->collectOption('timezone', 'TimeZone', $timezoneList, $timezoneList, '');
 $version->addSeparator('Encryption Keys');
@@ -83,13 +86,13 @@ $version->addAction('ReplaceString', 'Save System Configuration', array(
 		'INSTALL_DB_PASSWORD' => 'db_password', 
 		'INSTALL_DB_DATABASE' => 'db_database', 
 		'INSTALL_DB_SERVER' => 'db_server',
-                'INSTALL_DB_TYPE' => 'db_type',
-                'INSTALL_ADDRESS' => 'care2x_address',
-                'INSTALL_PROTOCOL' => 'transfer_protocol',
-                'INSTALL_KEY_1' => '1st_key',
-                'INSTALL_KEY_2' => '2nd_key',
-                'INSTALL_KEY_3' => '3rd_key',
-                'TIMEZONE' => 'timezone')
+        'INSTALL_DB_TYPE' => 'db_type',
+        'INSTALL_ADDRESS' => 'care2x_address',
+        'INSTALL_PROTOCOL' => 'transfer_protocol',
+        'INSTALL_KEY_1' => '1st_key',
+        'INSTALL_KEY_2' => '2nd_key',
+        'INSTALL_KEY_3' => '3rd_key',
+        'TIMEZONE' => 'timezone')
 	));
 
 
