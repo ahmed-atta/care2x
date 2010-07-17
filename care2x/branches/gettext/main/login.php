@@ -1,9 +1,9 @@
 <?php
-//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
-require_once($root_path.'include/helpers/access_log.php');
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('../include/helpers/inc_environment_global.php');
+require_once(CARE_BASE . '/include/helpers/access_log.php');
 $logs = new AccessLog();
+
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -15,9 +15,9 @@ $logs = new AccessLog();
 //$db->debug = true;
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once(CARE_BASE.'include/helpers/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
-require($root_path.'include/helpers/inc_2level_reset.php');
+require(CARE_BASE.'include/helpers/inc_2level_reset.php');
 
 $fileforward='login-pc-config.php'.URL_REDIRECT_APPEND;
 $thisfile='login.php';
@@ -33,7 +33,7 @@ if(!isset($_SESSION['sess_login_pw'])) $_SESSION['sess_login_pw'] = "";
 
 if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 {
-	include_once($root_path.'include/core/class_access.php');
+	include_once(CARE_BASE.'include/core/class_access.php');
 	$user = & new Access($userid,$keyword);
 
 	if($user->isKnown() && $user->hasValidPassword())
@@ -65,7 +65,7 @@ if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 
 $errbuf='Log in';
 $minimal=1;
-require($root_path.'include/helpers/inc_passcheck_head.php');
+require(CARE_BASE.'include/helpers/inc_passcheck_head.php');
 ?>
 
 <?php echo setCharSet(); ?>
@@ -82,13 +82,13 @@ if(isset($is_logged_out) && $is_logged_out) {
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0">
 <tr>
-<td colspan=3><img <?php echo createLDImgSrc($root_path,'login-b.gif') ?>></td>
+<td colspan=3><img <?php echo createLDImgSrc(CARE_GUI,'login-b.gif'); ?>></td>
 </tr>
 
-<?php require($root_path.'include/helpers/inc_passcheck_mask.php') ?>
+<?php require(CARE_BASE.'include/helpers/inc_passcheck_mask.php') ?>
 <p>
 <?php
-require($root_path.'include/helpers/inc_load_copyrite.php');
+require(CARE_BASE.'include/helpers/inc_load_copyrite.php');
 ?>
 </FONT>
 </BODY>

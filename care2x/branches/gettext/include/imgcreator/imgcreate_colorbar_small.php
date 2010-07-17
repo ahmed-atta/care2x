@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require(CARE_BASE .'include/helpers/inc_environment_global.php');
 /*
 CARE2X Integrated Information System Deployment 2.1 - 2004-10-02 for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
@@ -12,7 +12,7 @@ GNU GPL. For details read file "copy_notice.txt".
 if(!extension_loaded('gd')) dl('php_gd.dll');
 define('LANG_FILE','konsil.php');
 define('NO_CHAIN',1);
-require($root_path.'include/helpers/inc_front_chain_lang.php');
+require(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
 header ('Content-type: image/png');
 
 	    // get event signals

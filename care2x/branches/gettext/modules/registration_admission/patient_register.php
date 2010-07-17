@@ -67,7 +67,7 @@ $target='entry';
 
 /* Create the tabs */
 $tab_bot_line='#66ee66';
-require('./gui_bridge/default/gui_tabs_patreg.php');
+require('gui_bridge/default/gui_tabs_patreg.php');
 
 
 require_once($root_path.'modules/registration_admission/model/class_gui_input_person.php');

@@ -30,13 +30,13 @@ A copy of this notice is also available as file named copy_notice.txt under the 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 define('FROM_ROOT',1);
 
+
 if(!isset($mask)) $mask=false;
 if(!isset($cookie)) $cookie=false;
 if(!isset($_chg_lang_)) $_chg_lang_=false;
 if(!isset($boot)) $boot=false;
 if(!isset($sid)) $sid='';
 
-require('./roots.php');
 require('./include/helpers/inc_environment_global.php');
 
 ////$db->debug=FALSE;
@@ -174,12 +174,14 @@ if($cfg_obj->exists($user_id)) {
 require_once('include/core/class_globalconfig.php');
 $glob_cfg=new GlobalConfig($GLOBALCONFIG);
 
+
 # Get the global config for language usage
 $glob_cfg->getConfig('language_%');
 # Get the global config for frames 
 $glob_cfg->getConfig('gui_frame_left_nav_width');
 # Get the global config for lev nav border 
 $glob_cfg->getConfig('gui_frame_left_nav_border');
+
 
 $savelang=0;
 /*echo $GLOBALCONFIG['language_non_single'];
@@ -297,7 +299,6 @@ $_SESSION['sess_tos']=date('His');
 # Load character set fx
 #
 include_once('include/helpers/inc_charset_fx.php');
-
 #
 # Load image fx
 #
@@ -331,6 +332,7 @@ $smarty->assign('sContentsFrameSource',"src = \"blank.php?lang=$lang&sid=$sid\""
 #
 # If the floating menu window is selected
 #
+
 if($mask == 2){
 
 	if($lang=='ar'||$lang=='fa') $smarty->assign('sBaseFramesetTemplate','common/frameset_floatingmenu_rtl.tpl');
@@ -338,7 +340,6 @@ if($mask == 2){
 	
 	$smarty->assign('sMenuFrameSource','src="main/menubar2.php"');
 	$smarty->assign('sStartFrameSource',"src=\"main/indexframe.php?boot=1&lang=$lang&egal=$egal&cookie=$cookie&sid=$sid&mask=2\"");
-
 }else{
 	$smarty->assign('sStartFrameSource',"src = \"main/indexframe.php?boot=1&mask=$mask&lang=$lang&cookie=$cookie&sid=$sid\"");
 	
@@ -358,7 +359,6 @@ if($mask == 2){
 		$smarty->assign('sBaseFramesetTemplate','common/frameset_ltr.tpl');
 	}
 }
-
 #
 # Display the frame page
 #

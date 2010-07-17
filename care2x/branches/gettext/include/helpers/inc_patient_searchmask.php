@@ -38,7 +38,7 @@ if(!isset($searchform_count) || !$searchform_count){
 <?php
 }
 ?>
-				<input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?>>
+				<input type="image" <?php echo createLDImgSrc(CARE_GUI ,'searchlamp.gif','0','absmiddle') ?>>
 				<input type="hidden" name="sid" value="<?php echo $sid; ?>">
 				<input type="hidden" name="lang" value="<?php echo $lang; ?>">
 				<input type="hidden" name="noresize" value="<?php echo $noresize; ?>">

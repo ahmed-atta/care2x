@@ -1,10 +1,10 @@
 <?php
 	/* Load the barcode img if it exists */
-    if(file_exists($root_path.'cache/barcodes/pn_'.$fen.'.png'))
+    if(file_exists(CARE_BASE .'cache/barcodes/pn_'.$fen.'.png'))
 	{
-	   $bc = ImageCreateFrompng($root_path.'cache/barcodes/pn_'.$fen.'.png');
-	}elseif(file_exists($root_path.'cache/barcodes/en_'.$fen.'.png')){
-	   $bc = ImageCreateFrompng($root_path.'cache/barcodes/en_'.$fen.'.png');
+	   $bc = ImageCreateFrompng(CARE_BASE .'cache/barcodes/pn_'.$fen.'.png');
+	}elseif(file_exists(CARE_BASE .'cache/barcodes/en_'.$fen.'.png')){
+	   $bc = ImageCreateFrompng(CARE_BASE .'cache/barcodes/en_'.$fen.'.png');
 	}	 
 	 /* Dimensions of the patient's label */
 	 $label_w=282; 
@@ -117,7 +117,7 @@
 	}
 	else
 	{
-	  if(file_exists('gd_test_request_'.$subtarget.'.php'))   include_once($root_path.'include/imgcreator/gd_test_request_'.$subtarget.'.php');
+	  if(file_exists('gd_test_request_'.$subtarget.'.php'))   include_once(CARE_BASE .'include/imgcreator/gd_test_request_'.$subtarget.'.php');
 	  else Imagepng($label);
 	/*   Imagepng($label);*/
 	  

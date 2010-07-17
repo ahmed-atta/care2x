@@ -5,8 +5,8 @@
    <tr>
 	<td>
 <?php
-if(file_exists($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php')) include($root_path.'language/'.$lang.'/'.$lang.'_copyrite.php');
-  else include($root_path.'language/en/en_copyrite.php');
+if(file_exists(CARE_BASE .'language/'.$lang.'/'.$lang.'_copyrite.php')) include(CARE_BASE .'language/'.$lang.'/'.$lang.'_copyrite.php');
+  else include(CARE_BASE .'language/en/en_copyrite.php');
 ?>
 <?php
 if(defined('USE_PAGE_GEN_TIME')&&USE_PAGE_GEN_TIME){

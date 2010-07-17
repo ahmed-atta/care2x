@@ -1,7 +1,7 @@
 <?php
 
 if(!isset($GLOBAL_CONFIG)) {
-		include_once($root_path.'include/core/class_globalconfig.php');
+		include_once(CARE_BASE .'include/core/class_globalconfig.php');
         $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
         $glob_obj->getConfig('patient_%');
 }

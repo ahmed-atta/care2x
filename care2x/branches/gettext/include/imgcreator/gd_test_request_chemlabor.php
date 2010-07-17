@@ -18,8 +18,8 @@ if (stristr('inc_test_request_gd_chemlabor.php',$PHP_SELF))
 */
 
 /* Load additional language table */
-if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_'.$subtarget.'.php')) include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_'.$subtarget.'.php');
-  else include_once($root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_'.$subtarget.'.php');
+if(file_exists(CARE_BASE .'language/'.$lang.'/lang_'.$lang.'_konsil_'.$subtarget.'.php')) include_once(CARE_BASE .'language/'.$lang.'/lang_'.$lang.'_konsil_'.$subtarget.'.php');
+  else include_once(CARE_BASE .'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_'.$subtarget.'.php');
 
 
 function doBlock()
@@ -109,22 +109,22 @@ $mark_v_offset=1; /* Vertical offset of the marking blocks */
 
 
     /* Load the violet phone icon */
-    if(file_exists($root_path.'gui/img/common/default/violet_phone2.png'))
+    if(file_exists(CARE_BASE  .'gui/img/common/default/violet_phone2.png'))
 	{
-	   $v_phone = ImageCreateFrompng($root_path.'gui/img/common/default/violet_phone2.png');
+	   $v_phone = ImageCreateFrompng(CARE_BASE  .'gui/img/common/default/violet_phone2.png');
 	}
  
 	
 	/* Load the batch nr barcode */
-    if(file_exists($root_path.'cache/barcodes/form_'.$batch_nr.'.png'))
+    if(file_exists(CARE_BASE  .'cache/barcodes/form_'.$batch_nr.'.png'))
 	{
-	   $fbc = ImageCreateFrompng($root_path.'cache/barcodes/form_'.$batch_nr.'.png');
+	   $fbc = ImageCreateFrompng(CARE_BASE  .'cache/barcodes/form_'.$batch_nr.'.png');
 	}
 
 	/* Load the label nr barcode */
-    if(file_exists($root_path.'cache/barcodes/lab_'.$batch_nr.'.png'))
+    if(file_exists(CARE_BASE  .'cache/barcodes/lab_'.$batch_nr.'.png'))
 	{
-	   $lab_bc = ImageCreateFrompng($root_path.'cache/barcodes/lab_'.$batch_nr.'.png');
+	   $lab_bc = ImageCreateFrompng(CARE_BASE  .'cache/barcodes/lab_'.$batch_nr.'.png');
 	}
 	
 	/* Set dimensions of the form */

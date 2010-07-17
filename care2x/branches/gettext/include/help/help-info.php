@@ -41,7 +41,7 @@ if($helpidx=='') {
 ?>
 <hr>
 <ul>
-<a href="javascript:window.parent.close()"><img <?php echo createLDImgSrc($root_path,'closehelp.gif','0') ?> alt="<?php echo $LDCloseHelpWin ?>"></a>
+<a href="javascript:window.parent.close()"><img <?php echo createLDImgSrc(CARE_GUI ,'closehelp.gif','0') ?> alt="<?php echo $LDCloseHelpWin ?>"></a>
 </ul>
 </body>
 </html>

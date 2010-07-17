@@ -20,8 +20,8 @@ function pruf(d)
 </script>
  
  <?php 
-require($root_path.'include/helpers/inc_js_gethelp.php');
-include($root_path.'include/helpers/inc_css_a_hilitebu.php');
+require(CARE_BASE .'include/helpers/inc_js_gethelp.php');
+include(CARE_BASE .'include/helpers/inc_css_a_hilitebu.php');
 ?>
  
 </HEAD>

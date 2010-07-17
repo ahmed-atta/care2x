@@ -1,7 +1,6 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../include/helpers/inc_environment_global.php');
 
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
@@ -15,21 +14,20 @@ define('LANG_FILE','indexframe.php');
 define(NO_CHAIN,1);
 
 # Set here the window title
-$wintitle='Menu - SIIS';
-
-require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+$wintitle='Menu - CARE2X';
+require_once(CARE_BASE.'include/helpers/inc_front_chain_lang.php');
 
 /**
 * We check again the language variable lang. If table file not available use default (lang = "en")
 */
 
-if(!isset($lang)||empty($lang))  include($root_path.'chklang.php');
+if(!isset($lang)||empty($lang))  include(CARE_BASE.'chklang.php');
 
 /* Load the language table */
-if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_indexframe.php')){
-	include($root_path.'language/'.$lang.'/lang_'.$lang.'_indexframe.php');
+if(file_exists(CARE_BASE.'language/'.$lang.'/lang_'.$lang.'_indexframe.php')){
+	include(CARE_BASE.'language/'.$lang.'/lang_'.$lang.'_indexframe.php');
 }else{
-	include($root_path.'language/en/lang_en_indexframe.php');
+	include(CARE_BASE.'language/en/lang_en_indexframe.php');
 	$lang='en'; // last desperate effort to set the language 
 }
 
@@ -41,7 +39,7 @@ if(($mask==2)&&!$nonewmask){
 }
 
 # Get the global config for language usage
-require_once($root_path.'include/core/class_globalconfig.php');
+require_once(CARE_BASE.'include/core/class_globalconfig.php');
 $GLOBALCONFIG=array();
 $gc=new GlobalConfig($GLOBALCONFIG);
 $gc->getConfig('language_%');
@@ -50,8 +48,8 @@ $gc->getConfig('language_%');
 $charset=setCharSet();
 
 # Load dept & ward classes
-require_once($root_path.'modules/dept_admin/model/class_department.php');
-require_once($root_path.'include/core/class_ward.php');
+require_once(CARE_BASE.'modules/dept_admin/model/class_department.php');
+require_once(CARE_BASE.'include/core/class_ward.php');
 $dept=new Department();
 $ward=new Ward();
 

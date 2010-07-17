@@ -8,15 +8,15 @@
 */
 
 function setCharSet($param_lang=''){
-   global $lang, $root_path;
+   global $lang ;
    
    $cs_ok=false;
    
    if(!$param_lang && $lang) $param_lang=$lang;
    
    # Try to get the charset code from the language file
-   if(file_exists($root_path."language/$param_lang/tags.php")){
-   		include_once($root_path."language/$param_lang/tags.php");
+   if(file_exists(CARE_BASE ."language/$param_lang/tags.php")){
+   		include_once(CARE_BASE ."language/$param_lang/tags.php");
 		if(isset($lang_charset)&&!empty($lang_charset))	$cs_ok=true;
 	}	
    

@@ -9,8 +9,7 @@
 if (stristr('inc_db_makelink.php',$PHP_SELF)) die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
-if(!isset($root_path)) $root_path='../'; // default language table root path is "../"
-if(!isset($lang)) include($root_path.'chklang.php');
+if(!isset($lang)) include(CARE_BASE.'chklang.php');
 //if(!isset($dbtype) || empty($dbtype)) $dbtype='mysql';
 
 /*********************************************************
@@ -37,7 +36,7 @@ switch($dbtype){
                     $dbf_nodate=NODATE_MYSQL;
 					$dbf_nodatetime=NODATE_MYSQL.' 00:00:00';
                     define('DBF_NODATE',NODATE_MYSQL);
-					 define('DBF_NODATETIME',NODATE_MYSQL.' 00:00:00');
+					define('DBF_NODATETIME',NODATE_MYSQL.' 00:00:00');
 				    $sql_LIKE='LIKE';
 				    break;
 	case 'postgres7':
@@ -63,10 +62,10 @@ switch($dbtype){
 }
 
 # Load the db error messages lang table
-if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_db_msg.php')){
-	include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_db_msg.php');
+if(file_exists(CARE_BASE.'language/'.$lang.'/lang_'.$lang.'_db_msg.php')){
+	include_once(CARE_BASE.'language/'.$lang.'/lang_'.$lang.'_db_msg.php');
 }else{
-	include_once($root_path.'language/en/lang_en_db_msg.php');
+	include_once(CARE_BASE.'language/en/lang_en_db_msg.php');
 }
 	
 # Establish a database link	
@@ -77,7 +76,7 @@ $dblink_ok=0;
 if(!isset($dbtype)||empty($dbtype)) $dbtype='mysql';
 
 # ADODB connection
-require_once($root_path.'classes/adodb/adodb.inc.php');
+require_once(CARE_BASE . 'classes/adodb/adodb.inc.php');
 $db = &ADONewConnection($dbtype);
 
 $dblink_ok = $db->Connect($dbhost,$dbusername,$dbpassword,$dbname);
@@ -85,7 +84,6 @@ $dblink_ok = $db->Connect($dbhost,$dbusername,$dbpassword,$dbname);
 #
 # If there is no connection than call the installation procedure..
 #
-
 if( !$dblink_ok ) {
 	#
 	# Load necessary language tables

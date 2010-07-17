@@ -26,14 +26,14 @@ class Language {
 	* @return string
 	*/			
 	function createSelectForm($curr_lang){
-		global $root_path;
+
 		$str='';
-		$handle=opendir($root_path.$this->lang_path.'.');
+		$handle=opendir(CARE_BASE .$this->lang_path.'.');
 		$langdirs=array();
 		while (false!==($langcode = readdir($handle))) { 
    			if ($langcode != '.' && $langcode != '..') {
-				if(is_dir($root_path.$this->lang_path.$langcode)&&file_exists($root_path.$this->lang_path.$langcode.'/tags.php')){
-				@include($root_path.$this->lang_path.$langcode.'/tags.php');
+				if(is_dir(CARE_BASE .$this->lang_path.$langcode)&&file_exists(CARE_BASE .$this->lang_path.$langcode.'/tags.php')){
+				@include(CARE_BASE .$this->lang_path.$langcode.'/tags.php');
 				if($langcode==$lang_iso_code) $langdirs[$lang_iso_code]=$lang_name;
 				}
 			} 

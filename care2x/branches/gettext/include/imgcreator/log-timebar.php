@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require(CARE_BASE .'include/helpers/inc_environment_global.php');
 /*
 CARE2X Integrated Information System for Hospitals and Health Care Organizations and Services
 Copyright (C) 2002,2003,2004,2005  Elpidio Latorilla & Intellin.org	
@@ -28,7 +28,7 @@ $black = ImageColorAllocate ($im, 0, 0, 0);
 $red =ImageColorAllocate ($im, 255, 0, 0);
 
 /* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/helpers/inc_db_makelink.php');
+if(!isset($db)||!$db) include(CARE_BASE .'include/helpers/inc_db_makelink.php');
 if($dblink_ok){	
 	$sql="SELECT entry_out,cut_close,wait_time,bandage_time,repos_time FROM care_encounter_op 
 			WHERE encounter_nr='$enc_nr' 

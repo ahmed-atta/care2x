@@ -20,7 +20,7 @@ if(file_exists('../help/'.$lang.'/help_'.$lang.'_index.php')) include ('../help/
 # Start scanning for plugged local documents
 #
 
-$sDirPath = $root_path.'docs/plugins/';
+$sDirPath = CARE_BASE .'docs/plugins/';
 
 if(file_exists($sDirPath.'.')){
 	

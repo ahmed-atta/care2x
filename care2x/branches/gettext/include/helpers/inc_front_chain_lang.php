@@ -13,7 +13,7 @@ $TIME_OUT_INACTIVE=FALSE;
 $TIME_OUT_TIME=1500;
 
 # Establish db connection
-require_once($root_path.'include/helpers/inc_db_makelink.php');
+require_once('inc_db_makelink.php');
 
 # The function getLang gets the language code and stores it to the lang variable
 # The ck_language variable is a cookie which holds the language code stored at the beginning of
@@ -24,20 +24,20 @@ require_once($root_path.'include/helpers/inc_db_makelink.php');
 # return = 1 if language table exists 
 
 function getLang($chk_file) {
-   global $lang, $root_path, $sid;
+   global $lang,  $sid;
    
    if(!isset($lang)||empty($lang))   {
 	  $ck_lang_buffer='ck_lang'.$sid;
-      if(!isset($_COOKIE[$ck_lang_buffer])||empty($_COOKIE[$ck_lang_buffer])) include($root_path.'chklang.php');
+      if(!isset($_COOKIE[$ck_lang_buffer])||empty($_COOKIE[$ck_lang_buffer])) include(CARE_BASE .'chklang.php');
          else $lang=$_COOKIE[$ck_lang_buffer];
    }
    
-   if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_'.$chk_file)) return 1;
+   if(file_exists(CARE_BASE .'language/'.$lang.'/lang_'.$lang.'_'.$chk_file)) return 1;
       else return 0;
 }
 
 # Load charset function
-require_once($root_path.'include/helpers/inc_charset_fx.php'); // charset functions
+require_once('inc_charset_fx.php'); // charset functions
 
 # The following lines of code is the script chaining detector. It compares the sid values propagated via
 # the relative url with the ck_sid+sid (decrypted) cookie values. If the two don't match, a warning message will apear and
@@ -66,7 +66,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 		# Let us check if the calling script is the time-out configuration script, if yes, then we skip the time out
 		if (!stristr('admin_system_timeout.php',$PHP_SELF)) {
 			# Load the global time out configs
-			include_once($root_path.'include/core/class_globalconfig.php');
+			include_once(CARE_BASE .'include/core/class_globalconfig.php');
 			if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
 			$gc_obj=& new GlobalConfig($GLOBAL_CONFIG);
 			$gc_obj->getConfig('timeout_%');
@@ -90,7 +90,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 			
     			if($time_out||!$_SESSION['sess_tos']){
 					# Show session time out warning and exit the script to stop the module
-					include($root_path."include/helpers/inc_session_timeout_warning.php");
+					include(CARE_BASE ."include/helpers/inc_session_timeout_warning.php");
 					exit;
 				}else{
 					# Reset the time-out start time
@@ -116,11 +116,11 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 
        if(getLang('invalid-access-warning.php')) {
 
-	       header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); 
+	       header('Location:'.CARE_BASE .'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); 
 	   }
 	     else {
 
-		     header('Location:'.$root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_invalid-access-warning.php');
+		     header('Location:'.CARE_BASE .'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_invalid-access-warning.php');
 		 } 
        
 	   exit;
@@ -132,8 +132,8 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 # If the calling script does not need a language table, the constant LANG_FILE must be set to empty string '' 
 
 if(defined('LANG_FILE')&&LANG_FILE!='') {
-    if(getLang(LANG_FILE)) include($root_path.'language/'.$lang.'/lang_'.$lang.'_'.LANG_FILE);
-	    else include ($root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_'.LANG_FILE);
+    if(getLang(LANG_FILE)) include(CARE_BASE .'language/'.$lang.'/lang_'.$lang.'_'.LANG_FILE);
+	    else include (CARE_BASE .'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_'.LANG_FILE);
 }
 
 # Load additional language tables
@@ -149,8 +149,8 @@ if(isset($cfg['template_theme'])&&!empty($cfg['template_theme'])) $template_them
 
 # Load template class by default
 if(!defined('NO_TEMPLATE')||!NO_TEMPLATE){
-	require_once($root_path.'include/core/class_template.php'); // template class
+	require_once(CARE_BASE . '/include/core/class_template.php'); // template class
 	# Template object
-	$TP_obj=new Template($root_path,$template_path,$template_theme);
+	$TP_obj=new Template(CARE_BASE ,$template_path,$template_theme);
 }
 ?>

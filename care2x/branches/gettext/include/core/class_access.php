@@ -5,7 +5,7 @@
 
 /**
 */
-require_once($root_path.'include/core/class_core.php');
+require_once(CARE_BASE .'include/core/class_core.php');
 /**
 * Class for access authentication rout'nes.
 * Extends the class "Core".
