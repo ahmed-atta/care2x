@@ -97,7 +97,7 @@ for($j=1;$j<=$news_num_stop;$j++){
 
 ob_start();
 
-	include($root_path.'include/helpers/inc_rightcolumn_menu.php');
+	include('includes/inc_rightcolumn_menu.php');
 
 	# Stop buffering, get contents
 

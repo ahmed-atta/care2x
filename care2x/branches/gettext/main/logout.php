@@ -1,11 +1,10 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../include/helpers/inc_environment_global.php');
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-if (!isset($logout)||!$logout) {header('Location:'.$root_path.'/language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
+require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
+if (!isset($logout)||!$logout) {header('Location:'.CARE_GUI .'/language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
 
 // Reset all login cookies 
 

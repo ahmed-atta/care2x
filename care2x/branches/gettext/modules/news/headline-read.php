@@ -52,7 +52,7 @@ require_once('includes/inc_news_display_config.php');
 
 
 if($mode=="preview4saved"){
-
+echo '---';
 	$smarty->assign('bShowPrompt',TRUE);
 
 	$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0').'>');
@@ -73,8 +73,7 @@ if(!isset($picalign) || empty($picalign)) {
 
 ob_start();
 
-	include($root_path.'include/helpers/inc_rightcolumn_menu.php');
-
+	include('includes/inc_rightcolumn_menu.php');
 	# Stop buffering, get contents
 
 	$sTemp = ob_get_contents();

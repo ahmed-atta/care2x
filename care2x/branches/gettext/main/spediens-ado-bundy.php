@@ -1,7 +1,6 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../include/helpers/inc_environment_global.php');
 /**
  * CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
  * GNU General Public License
@@ -12,8 +11,8 @@ require($root_path.'include/helpers/inc_environment_global.php');
  */
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/helpers/inc_config_color.php');
+require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
+require_once(CARE_BASE .'include/helpers/inc_config_color.php');
 
 $thisfile=basename(__FILE__);
 $breakfile='spediens-ado.php'.URL_APPEND;
@@ -49,9 +48,9 @@ else
 	//if(!$day) $day=date(d);
 }
 /* Establish db connection */
-if(!isset($db)||!$db) include($root_path.'include/helpers/inc_db_makelink.php');
+if(!isset($db)||!$db) include(CARE_BASE .'include/helpers/inc_db_makelink.php');
 if($dblink_ok){
-	include_once($root_path.'modules/staff_admin/model/class_staff.php');
+	include_once(CARE_BASE .'modules/staff_admin/model/class_staff.php');
 	$pers_obj=new staff();
 	if($pers_row=$pers_obj->getNursesOfDept($dept_nr)){
 		$datafound=1;
@@ -67,8 +66,8 @@ if($dblink_ok){
 <?php echo setCharSet(); ?>
 
 <?php
-require($root_path.'include/helpers/inc_js_gethelp.php');
-require($root_path.'include/helpers/inc_css_a_hilitebu.php');
+require(CARE_BASE .'include/helpers/inc_js_gethelp.php');
+require(CARE_BASE .'include/helpers/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 
@@ -84,13 +83,13 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 		</td>
 		<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right height="35">
 			<a href="javascript:history.back();">
-				<img <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> style="filter: alpha(opacity = 70)" class="fadeOut" />
+				<img <?php echo createLDImgSrc(CARE_BASE ,'back2.gif','0','absmiddle') ?> style="filter: alpha(opacity = 70)" class="fadeOut" />
 			</a>
 			<a href="javascript:gethelp()">
-				<img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?> align="absmiddle" style="filter: alpha(opacity = 70)" class="fadeOut"/>
+				<img <?php echo createLDImgSrc(CARE_BASE ,'hilfe-r.gif','0') ?> align="absmiddle" style="filter: alpha(opacity = 70)" class="fadeOut"/>
 			</a>
 			<a href="<?php echo $breakfile ?>">
-				<img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> width=103 height=24 align="absmiddle" style="filter: alpha(opacity = 70)" class="fadeOut">
+				<img <?php echo createLDImgSrc(CARE_BASE ,'close2.gif','0') ?> width=103 height=24 align="absmiddle" style="filter: alpha(opacity = 70)" class="fadeOut">
 			</a>
 	</td>
 	</tr>
@@ -99,18 +98,18 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 		<ul>
 			<br>
 			<p><FONT face="Verdana,Helvetica,Arial" size=4> <img
-			<?php echo createComIcon($root_path,'icon_clock.gif','0') ?>> <?php echo $LDBundyMachine ?>
+			<?php echo createComIcon(CARE_BASE ,'icon_clock.gif','0') ?>> <?php echo $LDBundyMachine ?>
 			<p>
 			</font> 
 			<FONT face="Verdana,Helvetica,Arial" size=3> <font size=1>
 			<a href="spediens-ado-bundy.php?sid=<?php echo "$sid&lang=$lang&month=$month&year=$year" ?>&mondir=-1">
-				<img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0') ?>> <?php echo $LDPrevMonth ?>
+				<img <?php echo createComIcon(CARE_BASE ,'l-arrowgrnlrg.gif','0') ?>> <?php echo $LDPrevMonth ?>
 			</a>
 			</font>
 			<b>&nbsp;<?php echo $monat[(int)$month]." ".$year; ?>&nbsp;</b> 
 			<font size=1>
 				<a href="spediens-ado-bundy.php?sid=<?php echo "$sid&lang=$lang&month=$month&year=$year" ?>&mondir=1"><?php echo $LDNextMonth ?>
-					<img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0') ?>>
+					<img <?php echo createComIcon(CARE_BASE ,'bul_arrowgrnlrg.gif','0') ?>>
 				</a>
 			</font>
 			<FONT face="Verdana,Helvetica,Arial" size=2>
@@ -143,7 +142,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 			<p><br>
 			<a href="<?php echo $breakfile ?>"><img
-			<?php echo createLDImgSrc($root_path,'cancel.gif','0','middle') ?>
+			<?php echo createLDImgSrc(CARE_BASE ,'cancel.gif','0','middle') ?>
 				alt="<?php echo $LDCancel ?>"></a>
 			
 			</FONT>
@@ -155,7 +154,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 	<tr>
 		<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2><?php
-require($root_path.'include/helpers/inc_load_copyrite.php');
+require(CARE_BASE .'include/helpers/inc_load_copyrite.php');
 ?></td>
 	</tr>
 </table>

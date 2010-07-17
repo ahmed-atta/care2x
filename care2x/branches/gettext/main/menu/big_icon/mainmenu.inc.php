@@ -18,7 +18,7 @@ if($result){
 	#
 	# Load the tags file to get the icon image sources
 	#
-	include_once($root_path.'main/menu/big_icon/tags.php');
+	include_once(CARE_BASE .'main/menu/big_icon/tags.php');
 
 	#
 	# Create the framing table
@@ -36,7 +36,7 @@ if($result){
 				$menu['LD_var']='LDLogout';
 			}
 		}
-		echo '<font face=verdana size=2><a href="'.$root_path.$menu['url'].URL_APPEND.'" TARGET="CONTENTS" REL="child">';
+		echo '<font face=verdana size=2><a href="'.CARE_GUI .$menu['url'].URL_APPEND.'" TARGET="CONTENTS" REL="child">';
 		#
 		# Do intelligent checks to ensure that an icon will be displayed and avoid the broken image symbol
 		#
@@ -49,7 +49,7 @@ if($result){
 				#
 				# Last alternative. Show an icon from the system files.
 				#
-				echo '<img '.createComIcon($root_path,'smiley.gif','0').'>';
+				echo '<img '.createComIcon(CARE_BASE ,'smiley.gif','0').'>';
 			}
 		}
 		echo '<br>';

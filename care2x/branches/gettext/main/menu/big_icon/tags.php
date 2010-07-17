@@ -22,7 +22,7 @@ $sMainMenuStyleDescriptionLang['de'] = "Icons wie bei KDE Theme.";
 #
 # The directory where the icons are placed (without trailing slash)
 #
-$sIconDirPath = $root_path.'gui/img/common/default';
+$sIconDirPath = CARE_BASE .'gui/img/common/default';
 
 $sDefaultIcon = 'kwheel.gif';
 
