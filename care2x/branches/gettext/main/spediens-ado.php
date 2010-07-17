@@ -1,7 +1,6 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../include/helpers/inc_environment_global.php');
 /**
  * CARE2X Integrated Hospital Information System beta 2.0.0 - 2004-05-16
  * GNU General Public License
@@ -12,9 +11,9 @@ require($root_path.'include/helpers/inc_environment_global.php');
  */
 define('LANG_FILE','specials.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/helpers/inc_config_color.php');
+require_once(CARE_BASE .'include/helpers/inc_config_color.php');
 
 $thisfile="spediens-ado.php";
 $breakfile="spediens.php?sid=".$sid."&lang=".$lang;
@@ -37,8 +36,8 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 
 <?php
-require($root_path.'include/helpers/inc_js_gethelp.php');
-require($root_path.'include/helpers/inc_css_a_hilitebu.php');
+require(CARE_BASE .'include/helpers/inc_js_gethelp.php');
+require(CARE_BASE .'include/helpers/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 
@@ -54,11 +53,11 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 		&nbsp;<?php echo $LDDutyPlanOrg ?></STRONG></FONT></td>
 		<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a
 			href="javascript:history.back();"><img
-			<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?>
+			<?php echo createLDImgSrc(CARE_BASE ,'back2.gif','0','absmiddle') ?>
 			style="filter: alpha(opacity = 70)" class="fadeOut" /></a><a href="javascript:gethelp()"><img
-			<?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>
+			<?php echo createLDImgSrc(CARE_BASE ,'hilfe-r.gif','0','absmiddle') ?>
 			style="filter: alpha(opacity = 70)" class="fadeOut" /></a><a href="<?php echo $breakfile ?>"><img
-			<?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?>
+			<?php echo createLDImgSrc(CARE_BASE ,'close2.gif','0','absmiddle') ?>
 			style="filter: alpha(opacity = 70)" class="fadeOut" /></a></td>
 	</tr>
 	<tr valign=top>
@@ -67,13 +66,13 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 			<FONT face="Verdana,Helvetica,Arial" size=2>
 			<p><br>
 			<a href="spediens-ado-bundy.php?sid=<?php echo "$sid&lang=$lang" ?>"><img
-			<?php echo createComIcon($root_path,'icon_clock.gif','0') ?>> <?php echo $LDBundyMachine ?></a><br>
+			<?php echo createComIcon(CARE_BASE ,'icon_clock.gif','0') ?>> <?php echo $LDBundyMachine ?></a><br>
 			<a
 				href="spediens-ado-dutyplanner.php?sid=<?php echo "$sid&lang=$lang" ?>"><img
-				<?php echo createComIcon($root_path,'icon_pencil.gif','0') ?>> <?php echo $LDDutyPlanner ?></a><br>
+				<?php echo createComIcon(CARE_BASE ,'icon_pencil.gif','0') ?>> <?php echo $LDDutyPlanner ?></a><br>
 			<p><br>
 			<a href="<?php echo $breakfile ?>"><img
-			<?php echo createLDImgSrc($root_path,'close2.gif','0') ?>
+			<?php echo createLDImgSrc(CARE_BASE ,'close2.gif','0') ?>
 				alt="<?php echo $LDClose ?>" align="middle"></a> <?php if ($from=="multiple")
 				echo '
 <form name=backbut onSubmit="return false">

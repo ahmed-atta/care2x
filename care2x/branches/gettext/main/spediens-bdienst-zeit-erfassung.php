@@ -1,7 +1,6 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -12,7 +11,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 */
 define('LANG_FILE','or.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
 
 /* Check the date values */
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
@@ -29,7 +28,7 @@ if($retpath=='spec') $breakfile="spediens.php".URL_APPEND;
 
 /********************************* Resolve the department and op room ***********************/
 	    /* Load date formatter */
-        include_once($root_path.'include/helpers/inc_date_format_functions.php');
+        include_once(CARE_BASE .'include/helpers/inc_date_format_functions.php');
         
 		
 		if($mode=='save')
@@ -191,7 +190,7 @@ if($retpath=='spec') $breakfile="spediens.php".URL_APPEND;
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
 
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ require_once(CARE_BASE .'gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('nursing');
 
 # Added for the common header top block
@@ -388,7 +387,7 @@ function isgdatum(val,idx)
 
 }
 
-<?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+<?php require(CARE_BASE .'include/helpers/inc_checkdate_lang.php'); ?>
 
 //-->
 </script>
@@ -527,14 +526,14 @@ echo '">
 			<input type="hidden" name="mode" value="save">
 			<!-- <input type=submit value="<?php echo $LDSave ?>">
 			-->
-			<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0','absmiddle') ?>>
+			<input type="image" <?php echo createLDImgSrc(CARE_BASE ,'savedisc.gif','0','absmiddle') ?>>
 			<input type=reset value="<?php echo $LDReset ?>" onClick=winreset()>
 		</td>
 		<td align="right">
 			<!-- <INPUT TYPE="BUTTON" VALUE="<?php echo $LDPrint ?>" ONCLICK="if (window.echo) {window.echo();} else {window.alert('<?php echo $LDAlertNoechoer ?>');}">
 			-->
-			<img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> ONCLICK="if (window.print) {window.print();} else {window.alert('<?php echo $LDAlertNoechoer ?>');}">
-			&nbsp;&nbsp;<a href="javascript:closeifok()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> align=absmiddle></a>
+			<img <?php echo createLDImgSrc(CARE_BASE ,'printout.gif','0','absmiddle') ?> ONCLICK="if (window.print) {window.print();} else {window.alert('<?php echo $LDAlertNoechoer ?>');}">
+			&nbsp;&nbsp;<a href="javascript:closeifok()"><img <?php echo createLDImgSrc(CARE_BASE ,'close2.gif','0') ?> align=absmiddle></a>
 		</td>
 	</tr>
 </table>

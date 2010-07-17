@@ -67,7 +67,7 @@ m.config.useCookies=false;
 		}
 		if ($menu ['s_ebene'] != 0) {
 			//if ($menu['s_url']!='') {
-			//$my_menu_call=$root_path.$menu['s_url'].URL_APPEND.$menu['s_url_ext'];
+			//$my_menu_call=CARE_BASE .$menu['s_url'].URL_APPEND.$menu['s_url_ext'];
 			$my_menu_call = $menu ['s_url'] . URL_APPEND . $menu ['s_url_ext'];
 			$my_menu_LDvar = $menu ['s_LD_var'];
 			$my_menu_name = $menu ['s_LD_var'];
@@ -76,7 +76,7 @@ m.config.useCookies=false;
 			//$i=$ip;
 		//$i=$p_last;
 		} else {
-			$my_menu_call = $root_path . $menu ['url'] . URL_APPEND;
+			$my_menu_call = CARE_GUI  . $menu ['url'] . URL_APPEND;
 			$my_menu_LDvar = $menu ['LD_var'];
 			$my_menu_name = $menu ['name'];
 			$my_menu_img = $menu ['s_image'];

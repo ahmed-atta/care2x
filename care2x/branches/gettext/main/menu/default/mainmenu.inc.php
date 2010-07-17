@@ -46,7 +46,7 @@ if($result){
 				$menu['LD_var']='LDLogout';
 			}
 		}
-		$TP_menu_item='<a href="'.CARE_BASE.$menu['url'].URL_APPEND.'" TARGET="CONTENTS" REL="child">';
+		$TP_menu_item='<a href="'.CARE_GUI.$menu['url'].URL_APPEND.'" TARGET="CONTENTS" REL="child">';
 		if(isset($$menu['LD_var'])&&!empty($$menu['LD_var'])) $TP_menu_item.=$$menu['LD_var'];
 			else $TP_menu_item.=$menu['name'];
 		$TP_menu_item.='</A>';

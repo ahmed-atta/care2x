@@ -74,7 +74,7 @@ if(isset($mode)&&($mode=='save')){
  #
  # Prepare the top message
  #
- $smarty->assign('gifMascot',createMascot($root_path,'mascot1_r.gif','0','bottom'));
+ $smarty->assign('gifMascot',createMascot(CARE_BASE ,'mascot1_r.gif','0','bottom'));
  if ($saved){
   	$smarty->assign('sPromptText',$LDChangeSaved);
  }else{
@@ -87,25 +87,25 @@ if(isset($mode)&&($mode=='save')){
  $smarty->assign('sFormParams','name="pcids"  method="post" action="login-pc-config.php"');
  $smarty->assign('LDPcID',$LDPcID);
 
- $smarty->assign('sDeptIcon','<img '.createComIcon($root_path,'home.gif').'>');
+ $smarty->assign('sDeptIcon','<img '.createComIcon(CARE_BASE ,'home.gif').'>');
  $smarty->assign('LDDept',$LDDept);
 	
- $smarty->assign('sWardIcon','<img '.createComIcon($root_path,'statbel2.gif').'>');
+ $smarty->assign('sWardIcon','<img '.createComIcon(CARE_BASE ,'statbel2.gif').'>');
  $smarty->assign('LDWard',$LDWard);
 	
- $smarty->assign('sWardORIcon','<img '.createComIcon($root_path,'button_info.gif').'>');
+ $smarty->assign('sWardORIcon','<img '.createComIcon(CARE_BASE ,'button_info.gif').'>');
  $smarty->assign('sWardORValue',$config['thispc_room_nr']);
  $smarty->assign('LDWardOR',$LDWardOR);
 
- $smarty->assign('sPhoneNrIcon','<img '.createComIcon($root_path,'profile.gif').'>');
+ $smarty->assign('sPhoneNrIcon','<img '.createComIcon(CARE_BASE ,'profile.gif').'>');
  $smarty->assign('sPhoneNrValue',$config['thispc_phone']);
  $smarty->assign('LDPhoneNr',$LDPhoneNr);
 
- $smarty->assign('sIntercomNrIcon','<img '.createComIcon($root_path,'listen-sm-legend.gif').'>');
+ $smarty->assign('sIntercomNrIcon','<img '.createComIcon(CARE_BASE ,'listen-sm-legend.gif').'>');
  $smarty->assign('sIntercomNrValue',$config['thispc_intercom']);
  $smarty->assign('LDIntercomNr',$LDIntercomNr);
 
- $smarty->assign('sIPAddressIcon','<img '.createComIcon($root_path,'lightning.gif').'>');
+ $smarty->assign('sIPAddressIcon','<img '.createComIcon(CARE_BASE ,'lightning.gif').'>');
  $smarty->assign('sIPAddress',$_SERVER['REMOTE_ADDR']);
  $smarty->assign('LDPcIP',$LDPcIP);
 
@@ -141,7 +141,7 @@ $smarty->assign('sWardSelect',$sTemp);
 
  $smarty->assign('sSubmitFormButton','<input type="submit" value="'.$LDSave.'">');
  $smarty->assign('sNoChangeButton','<input type="button" value="'.$LDNoChange.'" onClick="window.location.href=\'startframe.php'.URL_REDIRECT_APPEND.'\'">');
- $smarty->assign('sCancelButton','<a href="startframe.php'.URL_APPEND.'"><img '.createLDImgSrc($root_path,'close2.gif','0','top').'  alt="'.$LDClose.'"></a>');
+ $smarty->assign('sCancelButton','<a href="startframe.php'.URL_APPEND.'"><img '.createLDImgSrc(CARE_BASE ,'close2.gif','0','top').'  alt="'.$LDClose.'"></a>');
  
  #
  # Prepare the hidden inputs
