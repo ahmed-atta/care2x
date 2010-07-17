@@ -28,7 +28,7 @@ Intercom nr:<p>
 Application form
 <p>
 </blockquote>
-<a href="../../main/help-info.php" >Back to "Initial steps"</a>
+<a href="../../include/help/help-info.php" >Back to "Initial steps"</a>
 </font></blockquote>
 
 </body>

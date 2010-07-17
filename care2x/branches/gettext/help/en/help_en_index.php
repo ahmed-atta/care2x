@@ -15,13 +15,8 @@ require_once($root_path.'include/helpers/inc_charset_fx.php') // load the charse
 <body alink="#0000ff" vlink="#0000ff" link="#0000ff">
 <font face="Arial" color="#cc0000" size=3><b>Help</b></font><p>
 <font face="Verdana, Arial" size=2>
-<a href="../main/help-info.php?lang=en" target="HELPINFOFRAME">Initial steps</a><br></b>
-<!--<a href="../help/en/help_en_contents.php" target="HELPINFOFRAME">Contents</a><br>
- <a href="#" target="HELPINFOFRAME">Index</a><br>
-<a href="#" target="HELPINFOFRAME">Search</a><br>
-<a href="#" target="HELPINFOFRAME">Tips & Tricks</a><br>
-<a href="#" target="HELPINFOFRAME">Introductions</a></b>
- --><p>
+<a href="../include/help/help-info.php?lang=en" target="HELPINFOFRAME">Initial steps</a><br></b>
+<p>
  <p>
  <b>
 <font color=#ff0000><b>*</b></font><a href="http://care2x.org/wiki/index.php/UM_-_English" target="HELPINFOFRAME">Online Manual</a>
