@@ -141,4 +141,8 @@ $LDDelete='Delete';
 $LDDeleteCurrency='Are you sure, you really want to delete this currency?';
 $LDNoMainDelete='You cannot delete a main currency. Please set a different main currency first.';
 $LDCurrencyExisting='This currency exists already!';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

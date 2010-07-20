@@ -123,7 +123,10 @@ if($dblink_ok)
  $smarty = new smarty_care('nursing');
 
  $smarty->assign('sToolbarTitle',"$NOC_title $station");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  $smarty->assign('pbBack',FALSE);
 
  $smarty->assign('pbHelp',"javascript:gethelp('nursing_report.php','','','$station','$NOC_title')");

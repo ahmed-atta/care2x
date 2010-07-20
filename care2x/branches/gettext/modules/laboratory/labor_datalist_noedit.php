@@ -160,7 +160,9 @@ if($encounter=&$enc_obj->getBasic4Data($encounter_nr)) {
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDLabReport $station");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('lab_list.php','','','','$LDLabReport')");
 

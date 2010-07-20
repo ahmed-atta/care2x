@@ -238,7 +238,10 @@ $fr=strtolower(str_replace('.','-',($result['encounter_nr'].'_'.$result['name_la
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDPatDataFolder $station");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

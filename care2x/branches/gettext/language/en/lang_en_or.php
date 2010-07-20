@@ -339,4 +339,8 @@ $LDPlsSelectDept='Please select a department.';
 $LDSelectORoomNr='...and an OP Room.';
 $LDAlertNoDeptSelected=$LDPlsSelectDept;
 $LDAlertNoORSelected='Please select an operating room!';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

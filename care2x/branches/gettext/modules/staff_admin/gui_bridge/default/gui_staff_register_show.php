@@ -12,7 +12,10 @@
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle', "$LDstaffManagement :: $LDstaffData ($full_pnr)");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

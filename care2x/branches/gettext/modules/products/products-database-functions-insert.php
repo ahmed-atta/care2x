@@ -44,7 +44,10 @@ if($mode=='save') include('includes/inc_products_db_save_mod.php');
 
  # Title in the title bar
  $smarty->assign('sToolbarTitle',"$title::$LDPharmaDb::$LDNewProduct");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for the back button
 // $smarty->assign('pbBack',$returnfile);
 

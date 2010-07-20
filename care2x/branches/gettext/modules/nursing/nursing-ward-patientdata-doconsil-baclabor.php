@@ -308,7 +308,10 @@ define('_BATCH_NR_INIT_',30000000);
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle', "$LDDiagnosticTest :: $formtitle");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('request_baclabor.php')");
 

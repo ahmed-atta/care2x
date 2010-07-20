@@ -35,7 +35,9 @@ $returnfile='patient_payment.php'.URL_APPEND.'&patientno='.$patientno.'&full_en=
 # Toolbar title
 
  $smarty->assign('sToolbarTitle',$LDBilling . ' - ' . $LDPaymentPreview);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for the return button
  $smarty->assign('pbBack',$returnfile);
 

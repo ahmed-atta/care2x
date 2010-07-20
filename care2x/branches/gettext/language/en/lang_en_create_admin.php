@@ -5,4 +5,8 @@ $LDAdminOk='The system admin is now created. Please delete the create_admin.php 
 $LDDeleteWarning='Very important!  You must delete this create_admin.php script after successfully creating an admin access!';
 $LDWarning='Warning!';
 $LDInstallerWarning='Critical installation files are still available. Probably you have not run through the installation process yet. You will be redirected to the installation in 5 seconds. ';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

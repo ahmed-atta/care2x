@@ -57,4 +57,8 @@ $LDRedList="Index of Medical Specialties";
 $LDRedListTxt="Detailed info about medical products";
 $LDOrderBotActivate="OrderBot";
 $LDOrderBotActivateTxt="Activate automatic reception of order lists.";
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

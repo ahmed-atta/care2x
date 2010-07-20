@@ -30,4 +30,8 @@ $LDChange='Change';
 $LDPerson='Person';
 // 2003-09-05 EL
 $LDUser='User';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

@@ -8,4 +8,7 @@ $LDErrorYear="The year is wrong";
 $LDErrorMonth="The month is wrong";
 $LDErrorDay="The day is wrong";
 
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

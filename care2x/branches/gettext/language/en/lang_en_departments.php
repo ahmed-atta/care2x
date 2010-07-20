@@ -24,4 +24,8 @@ $LDClinic='Clinic';
 $LDPlsNameFormal='Please write the Formal Name';
 $LDPlsDeptID='Please write the Department ID';
 $LDPlsSelectType='Please select the type';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

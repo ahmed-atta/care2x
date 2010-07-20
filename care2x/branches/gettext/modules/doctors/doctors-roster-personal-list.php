@@ -155,7 +155,9 @@ $img_options_delete=createComIcon($root_path,'delete2.gif','0');
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$sTitle);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for return button
  $smarty->assign('pbBack',$breakfile);
 

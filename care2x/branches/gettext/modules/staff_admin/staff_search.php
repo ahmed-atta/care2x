@@ -214,7 +214,10 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDstaffManagement :: $LDstaffData :: $LDSearch");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

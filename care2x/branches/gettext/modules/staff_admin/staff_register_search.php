@@ -36,7 +36,10 @@ if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.U
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDPatientRegister." - ".$LDSearch);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

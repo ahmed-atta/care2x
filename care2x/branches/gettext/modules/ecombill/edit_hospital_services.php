@@ -36,7 +36,9 @@ $returnfile='billingmenu.php'.URL_APPEND;
 # Toolbar title
 
  $smarty->assign('sToolbarTitle',$LDBilling);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for the return button
  $smarty->assign('pbBack',$returnfile);
 

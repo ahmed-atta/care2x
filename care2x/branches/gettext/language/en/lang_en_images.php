@@ -6,4 +6,8 @@ $LDToggleOrigPreview='Click to show in reduced size';
 $LDHideJavaApplet = 'Hide control panel';
 $LDShowJavaApplet = 'Show control panel';
 $LDEditWithImageJ = 'Edit image with ImageJ';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

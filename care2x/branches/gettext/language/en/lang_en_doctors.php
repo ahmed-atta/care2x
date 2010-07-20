@@ -119,4 +119,8 @@ $LDSureToDeleteEntry='Are you sure you want to delete this entry?';
 /* 2003-03-18 EL */
 $LDChangeOnlyDept='Change the department';
 $LDCreateNursesList='Create Nurses List';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

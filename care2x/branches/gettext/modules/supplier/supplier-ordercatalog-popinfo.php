@@ -26,7 +26,10 @@ require('includes/inc_products_search_mod.php');
 
 # Title in the title bar
  $smarty->assign('sToolbarTitle',$title_art);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide back button
  $smarty->assign('pbBack',FALSE);
 

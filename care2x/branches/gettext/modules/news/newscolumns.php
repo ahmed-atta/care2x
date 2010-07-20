@@ -141,7 +141,10 @@ $_SESSION['sess_file_return']=$top_dir.basename(__FILE__);
 
  # Toolbar title
  $smarty->assign('sToolbarTitle',$title);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('dept_news.php')");
  # href for close file

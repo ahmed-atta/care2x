@@ -371,7 +371,10 @@ if($mode=='save')
 # Added for the common header top block
 
  $smarty->assign('sToolbarTitle',"$LDOrDocument :: (".$_SESSION['sess_dept_name'].")");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for help button
  if(!$mode) $sBuffer ='dummy';
  	else $sBuffer = $mode;

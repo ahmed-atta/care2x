@@ -94,7 +94,9 @@ if($mode=='save'){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle', $LDTarget.' :: '.$station.' ('.formatDate2Local($s_date,$date_format).')');
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
    # hide back button
  $smarty->assign('pbBack',FALSE);
 

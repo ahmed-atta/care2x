@@ -38,4 +38,8 @@ $LDListAllTxt='List all available insurance firms';
 $LDSearch='Search';
 $LDSearchTxt='Search for an insurance firm';
 $LDSearchPrompt='Please enter a firms name, ID, or email address';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

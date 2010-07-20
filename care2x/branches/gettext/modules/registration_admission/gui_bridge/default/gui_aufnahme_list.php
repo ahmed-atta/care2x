@@ -22,7 +22,10 @@ $calendar->load_files();*/
 
 # Title in the toolbar
  $smarty->assign('sToolbarTitle',$LDAdmission.' :: '.$LDArchive);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title

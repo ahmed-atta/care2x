@@ -22,7 +22,10 @@ if($parent_admit) $sTitleNr= ($_SESSION['sess_full_en']);
 
 # Title in the toolbar
  $smarty->assign('sToolbarTitle',"$page_title ($sTitleNr)");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDPatientRegister')");
 

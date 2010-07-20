@@ -136,7 +136,10 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle', $LDTestRequest." - ".$LDSearchPatient);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
   # hide back button
  $smarty->assign('pbBack',FALSE);
 

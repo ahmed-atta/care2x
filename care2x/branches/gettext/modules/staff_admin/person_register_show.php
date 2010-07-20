@@ -43,7 +43,10 @@ $_SESSION['sess_parent_mod']='registration';
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle', "$LDstaffManagement :: $LDPersonData ($pid)");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

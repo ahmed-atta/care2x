@@ -147,4 +147,8 @@ $LDNoEmailAddress='Email address mission! Please enter an email address';
 $LDLogout='Logout';
 $LDNameIsUsed='The email address is already being used by somebody. Please choose another username.';
 
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

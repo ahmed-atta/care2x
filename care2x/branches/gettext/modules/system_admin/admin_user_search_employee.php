@@ -83,7 +83,10 @@ if(($mode=='search')and($searchkey)){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDstaffData :: $LDSearch");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

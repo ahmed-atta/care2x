@@ -292,4 +292,8 @@ $LDMainMenuTree = 'Main Menu Styles';
 $LDMainMenuTreeTxt = 'Select the main menu style';
 $LDStyle = 'Style';
 $LDRefreshBrowser = 'Refresh your browser to see the change(s)';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

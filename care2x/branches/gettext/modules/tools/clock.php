@@ -28,7 +28,10 @@ $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDClock);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
 # href for return button
  $smarty->assign('pbBack',$breakfile);
 

@@ -30,4 +30,8 @@ $LDRefreshWindow = 'Refresh display';
 
 $LDNext = 'Next';
 $LDPrevious = 'Previous';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

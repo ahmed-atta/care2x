@@ -54,4 +54,8 @@ $LDSUPINE='SUPINE';
 $LDLEFTLATERAL='LEFT LATERAL';
 $LDRIGHTLATERAL='RIGHT LATERAL';
 
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

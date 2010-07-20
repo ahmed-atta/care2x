@@ -229,7 +229,9 @@ if($edit) $returnfile.='&batch_nr='.$batch_nr.'&pn='.$pn.'&tracker='.$tracker;
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDDiagnosticTest." (".$batch_nr.")");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
   # hide back button
  $smarty->assign('pbBack',$returnfile);
 

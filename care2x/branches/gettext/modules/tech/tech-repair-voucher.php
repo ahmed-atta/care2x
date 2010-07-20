@@ -42,7 +42,10 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 # Toolbar title
 
  $smarty->assign('sToolbarTitle',$LDTechSupport);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for the return button
  $smarty->assign('pbBack',$returnfile);
 

@@ -225,7 +225,10 @@ if($srcword!=''||$mode=='paginate'){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDOrLogBook - $LDSearch");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

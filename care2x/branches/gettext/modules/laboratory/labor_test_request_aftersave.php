@@ -201,7 +201,10 @@ $smarty->assign ( 'gifClose2', createLDImgSrc ( $root_path, 'close2.gif', '0' ) 
 
 
 $smarty->assign ( 'sToolbarTitle', "$LDTestRequest ::  $formtitle" );
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
 $smarty->assign ( 'pbBack', 'javascript:window.history.back()' );
 $smarty->assign ( 'gifBack2', createLDImgSrc ( $root_path, 'back2.gif', '0' ) );
 

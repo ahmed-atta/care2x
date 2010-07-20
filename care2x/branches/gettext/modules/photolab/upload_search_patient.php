@@ -105,7 +105,10 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDFotoLab);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
 # Hide return button
  $smarty->assign('pbBack',FALSE);
 

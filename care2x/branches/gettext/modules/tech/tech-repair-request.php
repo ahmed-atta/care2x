@@ -87,7 +87,10 @@ if(isset($job)&&!empty($job)) {
 # Toolbar title
 
  $smarty->assign('sToolbarTitle',$LDTechSupport);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for the return button
  $smarty->assign('pbBack',$returnfile);
 

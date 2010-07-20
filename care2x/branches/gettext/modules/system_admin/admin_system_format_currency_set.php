@@ -36,7 +36,10 @@ require($root_path.'modules/cafeteria/includes/inc_currency_set.php');
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDCurrencyAdmin);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
 # href for return button
  $smarty->assign('pbBack',$returnfile);
  

@@ -56,7 +56,10 @@ if(isset($mode)&&($mode=='save')){
 # Toolbar title
 
  $smarty->assign('sToolbarTitle',$LDLogin);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide the return button
  $smarty->assign('pbBack',FALSE);
 

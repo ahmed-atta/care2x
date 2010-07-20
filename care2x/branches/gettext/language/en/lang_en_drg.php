@@ -94,4 +94,8 @@ $LDSupp_s='S';
 $LDCreateNew='Create new';
 /*2006-09-03 Potur*/
 $LDSureToCreateNewGr='Are you sure you want to create a new group code?';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

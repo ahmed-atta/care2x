@@ -30,7 +30,10 @@ $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 # Toolbar title
 
  $smarty->assign('sToolbarTitle',$LDOpenHrsTxt);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp()");
  # href for close file

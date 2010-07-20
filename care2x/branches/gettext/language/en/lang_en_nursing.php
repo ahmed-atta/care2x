@@ -415,4 +415,8 @@ $LDApiressia='Apiressia';
 $LDFever='Fever';
 $LDHypothermia='Hypothermia';
 $LDGeneralConditions='General Conditions';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

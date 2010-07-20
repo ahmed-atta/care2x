@@ -24,4 +24,8 @@ $LDDevelopment='Development';
 $LDAllergy='Allergy';
 $LDDietPlan='Diet plan';
 $LDPrintPDFDocAllReport='PDF document of all reports';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

@@ -74,5 +74,5 @@ var urlholder;
 {{if $from == "arch"}}
 	<a href="{{$LINKArchiv}}"><img {{$pbBack2}} alt="" width=110 height=24></a>
 {{else}}
-	<a href="{{$breakfile}}"><img {{$gifClose2}} alt="{{$LDCloseAlt}}" {{$dhtml}}></a>
+	<a href="{{$breakfile}}"><img {{$gifClose2}} alt="{{$LDCloseAlt}}"></a>
 {{/if}}

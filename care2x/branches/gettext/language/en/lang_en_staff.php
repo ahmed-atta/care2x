@@ -39,4 +39,8 @@ $LDShowPersonalData='Show personal data';
 $LDEnterEmployeeSearchKey='Enter search keyword: e.g. Employment-Nr., first name, or family name.';
 $LDstaffManagement='staff Management';
 $LDNewEmployee='New employee';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

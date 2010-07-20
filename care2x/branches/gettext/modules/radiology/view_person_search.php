@@ -93,7 +93,10 @@ switch($_SESSION['sess_dicom_viewer']){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDDicomImages - $LDSearchPat");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
   # hide back button
  //$smarty->assign('pbBack',FALSE);
 

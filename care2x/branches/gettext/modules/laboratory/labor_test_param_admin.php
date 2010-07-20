@@ -52,7 +52,9 @@ $breakfile="labor.php".URL_APPEND;
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDTestParameters);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('lab_param_config.php')");
 

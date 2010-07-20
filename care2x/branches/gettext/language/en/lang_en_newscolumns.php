@@ -66,4 +66,8 @@ $LDNewsDummy[3]='third';
 
 $LDClk2Compose='Click here to post news';
 $LDClk2Write='Click here to start the editor';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

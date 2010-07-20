@@ -199,7 +199,9 @@ if($stored_request['batch_nr']) $sTitle = $sTitle."  (".$stored_request['batch_n
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$sTitle);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('pending_generic.php')");
 
