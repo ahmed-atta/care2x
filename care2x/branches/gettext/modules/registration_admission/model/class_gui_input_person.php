@@ -165,11 +165,15 @@ class GuiInputPerson {
 				if (trim($addr_str_nr)=='') { $errorstreetnr=1; $error++;}
 				if ($addr_citytown_nr&&(trim($addr_citytown_name)=='')) { $errortown=1; $error++;}
 				if ($sex=='') { $errorsex=1; $error++;}
+				//TODO: Check out if there is really insurance as mandatory field needed (comment by Robert)
+				/*
 				if($insurance_show) {
 					if(trim($insurance_nr) && (trim($insurance_firm_name)=='')) { $errorinsurancecoid=1; $error++;}
 				}
+				*/
 			}
-
+			//echo "amount of errors: $error";
+			//echo "errornamelast: $errornamelast <br> errornamefirst:$errornamefirst  <br> errordatebirth: $errordatebirth  <br>errorstreet: $errorstreet  <br> errorstreetnr: $errorstreetnr <br>errortown:  $errortown  <br> errorsex: $errorsex";
 
 			# If the validation produced no error, save the data
 			if(!$error) {
