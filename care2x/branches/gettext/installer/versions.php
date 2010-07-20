@@ -54,7 +54,6 @@ $version->addTest('AdminPasswordConfirmed', array(
     'confirm_field' => 'admin_confirm'));
 $version->addTest('WritableLocation', array(APP_PATH.'/cache'));
 $version->addTest('WritableLocation', array(APP_PATH.'/uploads'));
-$version->addTest('WritableLocation', array(APP_PATH.'/include'));
 $version->addTest('WritableLocation', array(APP_PATH.'/include/helpers/inc_init_main.php'));
 $version->addTest('WritableLocation', array(APP_PATH.'/installer/install.php'));
 
