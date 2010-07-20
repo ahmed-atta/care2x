@@ -30,7 +30,9 @@ $_SESSION['sess_file_return']=basename(__FILE__);
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDEDP $LDSystemAdmin");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('system_admin.php')");
 

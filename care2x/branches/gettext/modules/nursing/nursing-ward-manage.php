@@ -29,7 +29,9 @@ $breakfile="nursing.php".URL_APPEND;
 # Added for the common header top block
 
  $smarty->assign('sToolbarTitle',$LDNursingManage);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  $smarty->assign('pbHelp',"javascript:gethelp('nursing_ward_mng.php','main')");
 
  # href for close button

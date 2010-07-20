@@ -43,7 +43,9 @@ $breakfile="javascript:window.parent.location.replace('".$root_path."main/spedie
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDFotoLab);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('photolab.php','save','')");
 

@@ -57,7 +57,9 @@ if(isset($firm_id)&&$firm_id){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDInsuranceCo :: $LDUpdateData");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp()");
 

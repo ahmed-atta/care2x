@@ -39,7 +39,9 @@ $returnfile=$root_path.'main/spediens.php'.URL_APPEND;
 # Added for the common header top block
 
  $smarty->assign('sToolbarTitle',$LDBilling);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # Added for the common header top block
  $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDBilling')");
 

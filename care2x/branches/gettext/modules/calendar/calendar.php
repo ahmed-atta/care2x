@@ -81,7 +81,9 @@ while ($n<35)
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDCalendar);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('calendar.php')");
 

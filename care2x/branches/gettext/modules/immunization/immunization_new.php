@@ -76,7 +76,9 @@ $bgc2='#eeeeee';
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDImmunization :: $LDNewData");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"ja	vascript:gethelp('immunization_new.php','new')");
 

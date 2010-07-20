@@ -54,7 +54,9 @@ if(isset($$dept['LD_var'])&&!empty($$dept['LD_var'])) $sTitle = $sTitle.$$dept['
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$sTitle);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('dept_info.php')");
 

@@ -44,7 +44,9 @@ $_SESSION['sess_dept_nr']=0; // reset the department number used in the session
 # Toolbar title
 
  $smarty->assign('sToolbarTitle',$LDSpexFunctions);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for the help button
  $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDSpexFunctions')");
 

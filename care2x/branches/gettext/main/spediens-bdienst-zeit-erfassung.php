@@ -196,7 +196,9 @@ if($retpath=='spec') $breakfile="spediens.php".URL_APPEND;
 # Added for the common header top block
 
  $smarty->assign('sToolbarTitle',"$LDOnCallDuty ".$opabt['$dept']);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  $smarty->assign('pbHelp',"javascript:gethelp('op_duty.php','dutydoc','$rows')");
 
  # href for close button

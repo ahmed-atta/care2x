@@ -96,7 +96,9 @@ $entry_body_bgcolor='#ffffff';
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDInsuranceCo :: $LDSearch");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('insurance_search.php')");
 

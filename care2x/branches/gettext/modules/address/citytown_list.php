@@ -77,7 +77,9 @@ $pagen->setSortDirection($odir);
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDAddress :: $LDListAll");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('address_list.php')");
 

@@ -41,7 +41,9 @@ if(ereg("_a_1_meddepotdbadmin",$access->PermissionAreas()))
 # Added for the common header top block
 
  $smarty->assign('sToolbarTitle',$LDMedDepot);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # Added for the common header top block
  $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDMedDepot')");
 

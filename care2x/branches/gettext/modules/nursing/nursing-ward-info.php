@@ -131,7 +131,9 @@ $rows=0;
 # Added for the common header top block
 
  $smarty->assign('sToolbarTitle',"$LDNursing $LDStation - $LDProfile");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  $smarty->assign('pbHelp',"javascript:gethelp('nursing_ward_mng.php','$mode','$edit')");
 
  # href for close button

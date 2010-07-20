@@ -28,7 +28,9 @@ $breakfile=$root_path."main/spediens.php".URL_APPEND;
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDInsuranceCo :: $LDManager");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('insurance_manage.php','main')");
 

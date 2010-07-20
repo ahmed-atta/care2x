@@ -41,8 +41,10 @@ $_SESSION['sess_path_referer'] = 'modules/registration_admission/patient.php';
 
 
  # Toolbar title
- $smarty->assign('sToolbarTitle',_('Person') );
-
+ $smarty->assign('sToolbarTitle',$LDPerson );
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('person_reg.php','$LDDoctors')");
 

@@ -61,7 +61,9 @@ if(isset($mode)&&$mode=='save'){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDUserConfigOpt);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('config_mascot.php')");
 

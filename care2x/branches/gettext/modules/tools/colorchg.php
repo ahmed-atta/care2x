@@ -82,7 +82,9 @@ require_once($root_path.'include/helpers/inc_nocache_headers.php');
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDColorOpt);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
 # Title image
  $smarty->assign('sTitleImage','<img '.createComIcon($root_path,'settings_tree.gif','0').'>');
  

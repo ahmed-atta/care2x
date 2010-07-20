@@ -51,7 +51,9 @@ if(!isset($stb)) $stb=0;
 # Added for the common header top block
 
  $smarty->assign('sToolbarTitle',$LDTechSupport);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # Added for the common header top block
  $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDTechSupport')");
 

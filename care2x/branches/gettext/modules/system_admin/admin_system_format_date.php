@@ -48,7 +48,9 @@ if(($mode=='save')&&($date_format!='')&&(stristr($date_format,$validator))){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDDate);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('date_format_set.php')");
 

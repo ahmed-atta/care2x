@@ -99,7 +99,9 @@ if(!$is_cached || ($is_cached && $force_no_cache)){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDORNOC :: $LDQuickView");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('op_duty.php','quick')");
 

@@ -158,7 +158,9 @@ if($mode=='select') $sTitle = $sTitle.$LDUpdate;
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$sTitle);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('or_create.php')");
 

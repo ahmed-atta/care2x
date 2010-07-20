@@ -47,7 +47,9 @@ if(ereg("_a_1_pharmadbadmin",$access->PermissionAreas()))
 # Added for the common header top block
 
  $smarty->assign('sToolbarTitle',$LDPharmacy);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # Added for the common header top block
  $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDPharmacy')");
 
