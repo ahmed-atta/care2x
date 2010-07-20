@@ -155,4 +155,8 @@ $LDInfoCat[13]='Water Supply';
 $LDNoFound='I found nothing that corresponds to the search keyword. Please try it again and enter some more information.';
 /* 2003-02-11*/
 $LDCancel='Cancel';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

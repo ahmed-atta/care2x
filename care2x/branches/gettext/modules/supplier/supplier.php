@@ -31,7 +31,10 @@ if($mode=='save') include('includes/inc_supplier_db_save_mod.php');
 
  # Title in the title bar
  $smarty->assign('sToolbarTitle',"$LDSupplier::$title");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for the back button
  $smarty->assign('pbBack',$returnfile);
 

@@ -60,7 +60,10 @@ if($result=$db->Execute("SELECT *, LD_var AS \"LD_var\"  FROM care_menu_main   O
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDMainMenu);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
 # href for return button
  $smarty->assign('pbBack',$returnfile);
 

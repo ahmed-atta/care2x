@@ -173,7 +173,10 @@ $smarty = new smarty_care ( 'system_admin' ) ;
 
 # Title in toolbar
 $smarty->assign ( 'sToolbarTitle', $LDManageAccess ) ;
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
 # href for return button
 $smarty->assign ( 'pbBack', $returnfile ) ;
 

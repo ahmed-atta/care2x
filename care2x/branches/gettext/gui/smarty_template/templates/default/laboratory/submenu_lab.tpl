@@ -144,6 +144,6 @@
 			</TBODY>
 			</TABLE>
 			<p>
-			<a href="{{$breakfile}}"><img {{$gifClose2}} alt="{{$LDCloseAlt}}" {{$dhtml}}></a>
+			<a href="{{$breakfile}}"><img {{$gifClose2}} alt="{{$LDCloseAlt}}"></a>
 			<p>
 			</blockquote>

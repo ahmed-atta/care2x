@@ -51,8 +51,9 @@ $breakfile="labor.php".URL_APPEND;
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDTestGroups);
- $smarty->assign('sToolbarTitle',$LDTestGroups);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('lab_group_config.php')");
 

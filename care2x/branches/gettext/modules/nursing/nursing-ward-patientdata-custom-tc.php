@@ -159,7 +159,10 @@ else{
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$TC_title $station");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

@@ -32,10 +32,10 @@ if($cat=='pharma')
 
 if($cat=='pharma') {
  	$dbtable='care_pharma_orderlist';
-	$title='Farmaci';
+	$title='Pharmacy';
 }else{
  	$dbtable='care_med_orderlist';
-	$title='Depo Mjekesore';
+	$title='Medical Stock';
 }
 
 if(($mode=='search')&&($keyword!='')&&($keyword!='%')){

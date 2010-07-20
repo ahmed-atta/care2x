@@ -43,7 +43,10 @@ if(empty($target)) $target='search';
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDUploadDicom :: $LDSearch ");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
   # hide back button
  $smarty->assign('pbBack',FALSE);
 

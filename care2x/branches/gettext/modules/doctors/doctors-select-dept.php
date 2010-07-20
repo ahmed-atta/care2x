@@ -73,7 +73,9 @@ switch($target){
 
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('dept_select.php')");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for return  button
  $smarty->assign('pbBack',$breakfile);
 

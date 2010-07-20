@@ -89,4 +89,8 @@ $LDPlsORNr='Please enter the OR number';
 #2004-08-06 EL
 $LDInvalidDate ='The entered date was invalid.';
 $LDNoPastDate = 'Dates in the past are not accepted.';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

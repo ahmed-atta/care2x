@@ -418,7 +418,9 @@ require_once ($root_path . 'gui/smarty_template/smarty_care.class.php');
 $smarty = new smarty_care ( 'common' );
 
 # Title in toolbar$smarty->assign ( 'sToolbarTitle', "$LDDiagnosticTest (#$batch_nr)" );
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
 # href for help button$smarty->assign ( 'pbHelp', "javascript:gethelp('pending_baclabor_findings.php')" );
 
 # hide return  button$smarty->assign ( 'pbBack', $returnfile );

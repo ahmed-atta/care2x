@@ -322,7 +322,10 @@ if(!isset($edit)) $edit=FALSE;
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle', "$LDDiagnosticTest :: $LDCentralLab");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('request_chemlab.php','$pn')");
 

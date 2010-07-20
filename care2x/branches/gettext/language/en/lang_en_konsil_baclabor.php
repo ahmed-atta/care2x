@@ -301,4 +301,8 @@ $lab_TestResultId_2[35]='';
 $lab_TestResultId_2[36]='NoG.oxacil.resist.Staphyloc.';
 $lab_TestResultId_2[37]='';
 $lab_TestResultId_2[38]='';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

@@ -176,7 +176,10 @@ require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 
 # Title in the toolbar
  $smarty->assign('sToolbarTitle',$LDPatientData.' ('.$encounter_nr.')');
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('admission_how2new.php')");
 

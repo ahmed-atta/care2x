@@ -61,4 +61,8 @@ $LDCredits='Credits';
 $LDPublicItems='Public items';
 # 2003-08-28 EL
 $LDHeadline='Headline';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

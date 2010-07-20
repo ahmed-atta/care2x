@@ -209,7 +209,10 @@ $sTitle = $sTitle.")";
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$sTitle);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('nursing_feverchart.php','main','','$station','Fever chart')");
 

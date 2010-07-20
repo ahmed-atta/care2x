@@ -113,7 +113,10 @@ if(isset($transfer)&&$transfer){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle', $TP_TITLE);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
   # hide back button
  $smarty->assign('pbBack',FALSE);
 

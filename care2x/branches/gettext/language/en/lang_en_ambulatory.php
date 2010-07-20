@@ -20,4 +20,8 @@ $LDPWListTxt='Todays admitted patients in the clinic';
 $LDOutpatientClinic='Outpatient clinic';
 $LDGeneralAmbulatory='General Ambulatory';
 $LDAmbulatory='Ambulatory';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

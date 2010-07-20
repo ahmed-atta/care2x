@@ -109,7 +109,9 @@ if($enc_obj->loadEncounterData($pn)){
 # Toolbar title
 
  $smarty->assign('sToolbarTitle',$LDReleasePatient);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for the return button
  $smarty->assign('pbBack',FALSE);
 

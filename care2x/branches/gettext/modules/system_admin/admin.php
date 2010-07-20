@@ -43,7 +43,10 @@ $_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
 
  # Title in the title bar
  $smarty->assign('sToolbarTitle',$LDEDP);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for the back button
 // $smarty->assign('pbBack',$returnfile);
 

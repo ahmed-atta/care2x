@@ -271,4 +271,8 @@ $LDBacLabTestType["_tx_gram_dye_"]='Gram.stain';
 $LDBacLabTestType["_tx_pharma_material_"]='Pharm.mat.';
 $LDBacLabTestType["_tx_go_dye_"]='GO-stain';
 
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

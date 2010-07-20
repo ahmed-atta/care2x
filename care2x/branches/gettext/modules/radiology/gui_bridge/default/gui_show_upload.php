@@ -14,7 +14,10 @@ $returnfile=$_SESSION['sess_file_return'];
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$page_title);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
   # hide back button
  $smarty->assign('pbBack',$returnfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr);
 

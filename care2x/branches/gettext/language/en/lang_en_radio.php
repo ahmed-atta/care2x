@@ -83,4 +83,8 @@ $LDImageNotes='Image notes';
 
 #2004-08-05 EL
 $LDMissingImageFile = 'Missing image file(s)!';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

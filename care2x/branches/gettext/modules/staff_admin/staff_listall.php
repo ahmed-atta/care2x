@@ -107,7 +107,10 @@ if($ergebnis=$db->SelectLimit($sql.$sql2.$sql3,$pagen->MaxCount(),$pagen->BlockS
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle', "$LDstaffManagement :: $LDstaffData :: $LDSearch");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

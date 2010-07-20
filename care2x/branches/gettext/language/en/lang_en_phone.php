@@ -92,4 +92,8 @@ $LDUpdate="Update data";
 $LDDirData="Edit directory entry nr. ~nr~";
 $LDTelephone='Telephone';
 $LDBeeper='Beeper';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

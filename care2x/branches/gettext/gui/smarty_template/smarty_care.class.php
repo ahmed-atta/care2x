@@ -165,9 +165,9 @@ class smarty_care extends Smarty {
 		$this->assign('bot_bgcolor',$this->cfg['bot_bgcolor']);
 
 		# Set title bar buttons
-		$this->assign('gifBack2',createLDImgSrc($this->root_path,'back2.gif','0') );
-		$this->assign('gifHilfeR',createLDImgSrc($this->root_path,'hilfe-r.gif','0') );
-		$this->assign('gifClose2',createLDImgSrc($this->root_path,'close2.gif','0') );
+		$this->assign('gifBack2',createComIcon($this->root_path,'arrow_left.png','0') );
+		$this->assign('gifHilfeR',createComIcon($this->root_path,'help.png','0') );
+		$this->assign('gifClose2',createComIcon($this->root_path,'cross.png','0') );
 		$this->assign('LDCloseAlt',$this->LDCloseAlt );
 
 		# Set default href of the title bar buttons
@@ -185,7 +185,7 @@ class smarty_care extends Smarty {
 		//$this->assign('sToolbarTitle','');
 
 		# By default the window title is Care2x
-		 $this->assign('title','SIIS');
+		 $this->assign('title','Care2X');
 
 		# For the dhtml effects
 

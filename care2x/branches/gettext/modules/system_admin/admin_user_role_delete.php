@@ -48,7 +48,10 @@ if($role->roleExists($itemname)){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDEDP::$LDAccessRight::$LDDelete");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',$returnfile);
 

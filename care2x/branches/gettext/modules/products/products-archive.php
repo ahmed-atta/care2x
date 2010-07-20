@@ -159,7 +159,10 @@ if((($mode=='search')||$update)&&($keyword!=''))
 
  # Title in the title bar
  $smarty->assign('sToolbarTitle',$title);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for the back button
 // $smarty->assign('pbBack',$returnfile);
 

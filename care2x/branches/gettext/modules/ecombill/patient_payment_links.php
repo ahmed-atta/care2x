@@ -39,7 +39,9 @@ if(is_object($chkfinalresult)) $chkexists=$chkfinalresult->RecordCount();
 # Toolbar title
 
  $smarty->assign('sToolbarTitle',$LDBilling . ' - ' . $LDPayments);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for the return button
  $smarty->assign('pbBack',$returnfile);
 

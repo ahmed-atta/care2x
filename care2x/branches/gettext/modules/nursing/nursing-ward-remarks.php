@@ -81,7 +81,10 @@ if($mode=='save'){
 # Title in toolbar
  $smarty->assign('sToolbarTitle', $LDNotes.' :: '.$station.' ('.formatDate2Local($s_date,$date_format).')');
 
-   # hide back button
+   $smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ # hide back button
  $smarty->assign('pbBack',FALSE);
 
  # href for help button

@@ -45,7 +45,10 @@ if(isset($mode)&&($mode=='save')&&!empty($max_items)){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDTheme);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
 # href for return button
  $smarty->assign('pbBack',$returnfile);
 

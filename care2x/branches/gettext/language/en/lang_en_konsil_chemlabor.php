@@ -63,4 +63,7 @@ $LDPendingTestRequest='Pending Test Request';
 /* 2002-10-14 EL */
 $LDDone='It\'s done! Move the form to the archive';
 
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

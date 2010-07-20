@@ -112,7 +112,10 @@ if($mode=='save'){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDDocsPrescription $station");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

@@ -35,7 +35,10 @@ if(!isset($_SESSION['sess_pid'])) $_SESSION['sess_pid'] = "";
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle', "$LDstaffManagement :: $LDPersonRegister");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

@@ -41,7 +41,10 @@ if(!isset($userid)) $userid=$_SESSION['sess_user_name'];
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDPWChange);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
 # href for return button
  $smarty->assign('pbBack',$breakfile);
 

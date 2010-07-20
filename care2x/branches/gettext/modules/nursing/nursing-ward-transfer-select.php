@@ -35,7 +35,10 @@ $ward_count=$ward_obj->LastRecordCount();
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle', $LDTransferPatient);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
   # hide back button
  $smarty->assign('pbBack',FALSE);
 

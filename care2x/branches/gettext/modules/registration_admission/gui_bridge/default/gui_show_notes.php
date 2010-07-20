@@ -32,7 +32,10 @@ if($_COOKIE["ck_login_logged".$sid]) $breakfilen = $root_path."main/startframe.p
 
 # Title in the toolbar
  $smarty->assign('sToolbarTitle',"$page_title ($sTitleNr)");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title

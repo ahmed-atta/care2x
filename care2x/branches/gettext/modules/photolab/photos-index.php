@@ -50,7 +50,10 @@ $all_image=$img->getAllImageData($pn);
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDPhotos);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

@@ -35,7 +35,10 @@ $bgc1='#fefefe';
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDReports [ ".ucwords($header)." ]");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

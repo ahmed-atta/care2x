@@ -223,7 +223,10 @@ if($mode=='match'||$mode=='search'||$mode=='paginate'){
 # Added for the common header top block
 
  $smarty->assign('sToolbarTitle',"$LDOrDocument :: $LDSearch (".$_SESSION['sess_dept_name'].")");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  $smarty->assign('pbHelp',"javascript:gethelp('opdoc.php','search','$mode','$rows')");
 
  # hide return button

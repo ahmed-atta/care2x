@@ -148,4 +148,8 @@ $LDDeletedParams='Parameters in red are deleted';
 $LDHiddenGroups='Groups in green are hidden';
 $LDDeletedGroups='Groups in red are deleted';
 $LDUrgent='Urgent';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

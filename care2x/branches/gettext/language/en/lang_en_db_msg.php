@@ -12,4 +12,8 @@ $LDSessionTimeoutTxt='There has been a long time of inactivity. The module has t
 To activate this module again, you can try doing one of the following:
 - Start the module again by selecting it on the main menu
 - Refresh your browser by clicking the refresh button Any unsaved previous data will be  lost unfortunately.';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

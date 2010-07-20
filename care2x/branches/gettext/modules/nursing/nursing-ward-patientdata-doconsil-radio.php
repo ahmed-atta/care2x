@@ -229,7 +229,10 @@ $core = & new Core;
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle', "$LDDiagnosticTest :: $formtitle");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
   # hide back button
  $smarty->assign('pbBack',FALSE);
 

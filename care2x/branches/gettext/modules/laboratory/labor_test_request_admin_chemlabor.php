@@ -168,7 +168,9 @@ $smarty = new smarty_care ( 'common' );
 
 # Title in toolbar
 $smarty->assign ( 'sToolbarTitle', $sTitle );
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
 # href for help button
 $smarty->assign ( 'pbHelp', "javascript:gethelp('pending_chemlab.php')" );
 

@@ -46,7 +46,10 @@ include_once($root_path.'include/helpers/inc_get_global_config.php');
 
  # Toolbar title
  $smarty->assign('sToolbarTitle',$title);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('dept_news.php')");
  # href for close file

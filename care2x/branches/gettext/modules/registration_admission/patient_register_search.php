@@ -44,7 +44,10 @@ $thisfile=basename(__FILE__);
 # Added for the common header top block
 
  $smarty->assign('sToolbarTitle',$LDPatientRegister." - ".$LDSearch);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # Added for the common header top block
  $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDPatientRegister." - ".$LDSearch')");
 

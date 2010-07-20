@@ -91,6 +91,9 @@ if(($mode=='')||($mode=='fresh')){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle', $LDAmbulant);
+ $smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
 
   # hide back button
  $smarty->assign('pbBack',FALSE);

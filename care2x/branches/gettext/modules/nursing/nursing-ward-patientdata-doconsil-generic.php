@@ -220,7 +220,10 @@ $medical_depts=$dept_obj->getAllActiveSort( 'name_formal' );
 # Added for the common header top block
 
  $smarty->assign('sToolbarTitle',$LDDiagnosticTest);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # Prepare start new form button and href
  if($user_origin=='lab' && $edit){
 	$smarty->assign('pbAux1',$thisfile.URL_APPEND."&station=$station&user_origin=$user_origin&status=$status&target=$target&noresize=$noresize");

@@ -87,4 +87,8 @@ $LDVisitTimes[3] = '12.30 - 15.00 , 19.00 - 21.00';
 $LDVisitTimes[4] = '12.30 - 15.00 , 19.00 - 21.00';
 $LDVisitTimes[5] = '12.30 - 15.00 , 19.00 - 21.00';
 $LDVisitTimes[6] = '12.30 - 15.00 , 19.00 - 21.00';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

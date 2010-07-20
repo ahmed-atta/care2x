@@ -298,4 +298,8 @@ $LDSupplyTxt='Suppliers list';
 $LDSupply='Supplier';
 $LDClickSelectSupplier='Select Supplier';
 $LDSelectSupplier='Select Supplier';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

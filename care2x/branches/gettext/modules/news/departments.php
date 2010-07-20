@@ -57,7 +57,10 @@ if ($result = $db->Execute($sql)) {
 # Toolbar title
 
  $smarty->assign('sToolbarTitle',$LDPageTitle);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp()");
  # href for close file

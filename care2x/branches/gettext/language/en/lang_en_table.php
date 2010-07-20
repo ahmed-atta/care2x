@@ -17,4 +17,8 @@ $LDUpdatedbForm='Update Record';
 $LDNewdbForm='Add Record';
 $LDDeletedbForm='Delete Record';
 $LDSelectdbForm='Select Record';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

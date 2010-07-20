@@ -32,7 +32,10 @@ $breakfile='pharmacy.php'.URL_APPEND;
 
  # Title in the title bar
  $smarty->assign('sToolbarTitle',"$LDPharmacy::$LDPharmaDb");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
+ 
  # href for the back button
 // $smarty->assign('pbBack',$returnfile);
 

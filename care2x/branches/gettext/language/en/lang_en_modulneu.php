@@ -69,4 +69,8 @@ $err_kopieren="Error accured while copying ";
 
 //Variablen aus Schlusssatz.php
 $ld_gratulation="Congratulation, the module is finished.";
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

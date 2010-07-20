@@ -161,4 +161,8 @@ $LDCreditCard='Credit card';
 $LDCheck='Cheque';
 $LDCheckNumber='Cheque number';
 $LDCardNumber='Card number';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>

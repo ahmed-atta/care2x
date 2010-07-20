@@ -122,4 +122,8 @@ $LDPlsEnterDeliveryPlace='Please enter delivery place.';
 $LDPlsSelectDeliveryMode='Please select delivery mode.';
 $LDPlsEnterDeliveryDate='Please enter delivery date.';
 $LDPlsEnterDeliveryTime='Please enter delivery time.';
+
+$LDClose = 'Close';
+$LDBack = 'Back';
+$LDHelp = 'Help';
 ?>
