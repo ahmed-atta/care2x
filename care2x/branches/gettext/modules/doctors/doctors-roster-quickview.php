@@ -98,7 +98,9 @@ if($force_no_cache || (!$force_no_cache && !$is_cached)){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDDocsOnDuty);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('docs_duty_quickview.php')");
 

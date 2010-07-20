@@ -83,7 +83,9 @@ if(isset($mode)&&$mode=='save'){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDNewsDisplay);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
 # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('newsdisplay.php')");
 

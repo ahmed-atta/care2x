@@ -40,7 +40,9 @@ $deptarray=$dept_obj->getAllActiveSort('name_formal');
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDDepartment :: $LDList");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('dept_list.php')");
 

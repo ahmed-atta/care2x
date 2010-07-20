@@ -160,7 +160,9 @@ if(($mode=='access')&&(($username=='')||($password=='')))  $onError=$LDErrorInco
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDIntraEmail);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('intramail.php','pass','$newuser')");
 

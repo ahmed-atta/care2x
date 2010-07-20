@@ -53,7 +53,9 @@ if(isset($mode)&&$mode=='search'&&!empty($searchkey)){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDAssignOcc $s");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('nursing_station.php','assign','','$s','$LDAssignOcc')");
 

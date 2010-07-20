@@ -212,7 +212,9 @@ if($mode=='such'||$mode=='paginate')
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle', "$LDNursing - $LDSearchPatient");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('nursing_how2search.php','$mode','$rows','search')");
 

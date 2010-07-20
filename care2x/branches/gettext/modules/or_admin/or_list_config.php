@@ -44,7 +44,9 @@ $rows=$OR_obj->LastRecordCount();
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDOR :: $LDListConfig");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('or_config.php')");
 

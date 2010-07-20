@@ -50,7 +50,9 @@ $smarty = new smarty_care('common');
 # Module title in the toolbar
 
 $smarty->assign('sToolbarTitle',$LDOr);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
 # Help button href
 $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDOr')");
 

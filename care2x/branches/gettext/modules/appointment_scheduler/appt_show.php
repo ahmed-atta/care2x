@@ -119,7 +119,9 @@ $img_female=createComIcon($root_path,'spf.gif','0','',TRUE);
 # Toolbar title
 
  $smarty->assign('sToolbarTitle',$LDAppointments);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
 # href for the  button
  $smarty->assign('pbHelp',"javascript:gethelp('appointment_show.php')");
 

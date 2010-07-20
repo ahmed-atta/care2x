@@ -74,7 +74,9 @@ $bgc2='#eeeeee';
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDInsuranceCo :: $LDNewData");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('insurance_new.php','new')");
 

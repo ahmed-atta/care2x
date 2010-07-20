@@ -228,7 +228,6 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&isset($searchkey)&&($sear
  $smarty = new smarty_care('common');
 
 # Title in the toolbar
- //$smarty->assign('sToolbarTitle',$LDPatientSearch);
  $smarty->assign('sToolbarTitle',"$LDAdmission :: $LDSearch");
 $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);

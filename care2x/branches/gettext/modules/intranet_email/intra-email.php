@@ -347,7 +347,9 @@ $content[body]";
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$sTemp);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('intramail.php','mail','$mode','$folder','$sendok')");
 

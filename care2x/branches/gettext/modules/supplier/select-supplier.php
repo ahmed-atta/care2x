@@ -39,7 +39,9 @@ $fileforward=$root_path."modules/supplier/supply.php".URL_APPEND."&cat=$cat";
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$title);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('dept_select.php')");
 

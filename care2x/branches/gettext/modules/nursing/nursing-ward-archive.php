@@ -71,7 +71,9 @@ while ($n<35)
 # Added for the common header top block
 
  $smarty->assign('sToolbarTitle',"$LDNursingStations - $LDArchive");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  $smarty->assign('pbHelp',"javascript:gethelp('nursing_how2search.php','','','arch')");
 
  # href for close button

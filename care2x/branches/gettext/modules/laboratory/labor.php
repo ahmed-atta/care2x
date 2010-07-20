@@ -32,7 +32,9 @@ require($root_path.'include/helpers/inc_2level_reset.php');
  # Module title in the toolbar
 
  $smarty->assign('sToolbarTitle',$LDLab);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # Help button href
  $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDLab')");
 

@@ -43,7 +43,9 @@ if(is_object($OR_info)){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDOR.' :: '.$ORoom['room_nr']);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('or_info.php')");
 

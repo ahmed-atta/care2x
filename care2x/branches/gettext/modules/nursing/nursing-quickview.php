@@ -117,7 +117,9 @@ $dbtable='care_ward';
 
  $smarty->assign('sToolbarTitle',$LDNursing );
  $smarty->assign('Subtitle',$LDQuickView ); // Nursing-Subtitle (header_toblock.tpl)  
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # Added for the common header top block
  $smarty->assign('pbHelp','javascript:gethelp(\'nursing_how2search.php\',\'\','.$rows.',\'quick\',\'\')');
 

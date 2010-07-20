@@ -268,5 +268,5 @@ if(!isset($rows)||!$rows) {
 	}
 }
 # Load GUI page
-require('./gui_bridge/default/gui_admission_list.php');
+require('gui_bridge/default/gui_admission_list.php');
 ?>

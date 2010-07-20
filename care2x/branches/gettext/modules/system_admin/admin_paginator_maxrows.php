@@ -44,7 +44,9 @@ if(isset($mode)&&$mode=='save'){
 
 # Title in toolbar
  $smarty->assign('sToolbarTitle',$LDPaginatorMaxRows);
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('paginator_maxrows_config.php')");
 

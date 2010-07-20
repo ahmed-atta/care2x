@@ -69,7 +69,9 @@ if($mode){
 # Added for the common header top block
 
  $smarty->assign('sToolbarTitle',"$LDCreate::$LDNewStation");
-
+$smarty->assign('LDBack', $LDBack);
+ $smarty->assign('LDHelp', $LDHelp);
+ $smarty->assign('LDClose', $LDClose);
  $smarty->assign('pbHelp',"javascript:gethelp('nursing_ward_mng.php','new')");
 
  # href for close button
