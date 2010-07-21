@@ -78,7 +78,6 @@ $TP_sickform=&$TP_obj->load('registration_admission/tp_show_sick_confirm'.$sickf
 eval("echo $TP_sickform;");	
 
 ?>
-
 <?php
 StdFooter();
 ?>

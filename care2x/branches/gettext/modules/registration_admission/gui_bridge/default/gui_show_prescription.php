@@ -20,7 +20,6 @@ while($row=$result->FetchRow()){
 		else $full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']; // outpatient admission
 
 ?>
-
   <tr bgcolor="<?php echo $bgc; ?>" valign="top">
     <td><FONT SIZE=-1  FACE="Arial"><?php echo @formatDate2Local($row['prescribe_date'],$date_format); ?></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['article']; ?></td>

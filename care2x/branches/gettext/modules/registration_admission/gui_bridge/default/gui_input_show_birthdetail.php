@@ -343,7 +343,6 @@ $tp_birth=$TP_obj->load('registration_admission/tp_input_show_birthdetail.htm');
 eval("echo $tp_birth;");
 ?>
 
-
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="encounter_nr" value="<?php echo $_SESSION['sess_en']; ?>">
