@@ -188,7 +188,6 @@ $smarty->assign('LDBack', $LDBack);
 
  ob_start();
 ?>
-
 <script language="javascript">
 
   var urlholder;
@@ -259,7 +258,6 @@ $smarty->assign('sFormAction','action="doctors-roster-plan.php"');
 
  ob_start();
 ?>
-
 <input type="hidden" name="mode" value="save">
 <input type="hidden" name="dept" value="<?php echo $dept_obj->ID(); ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">

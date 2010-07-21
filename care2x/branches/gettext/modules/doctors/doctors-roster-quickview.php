@@ -118,7 +118,6 @@ $smarty->assign('LDBack', $LDBack);
  ob_start();
 
 ?>
-
 <script language="javascript">
 <!-- 
   var urlholder;
@@ -144,7 +143,6 @@ function popinfo(l,d)
  ob_start();
 
 ?>
-
 	<table  cellpadding="2" cellspacing=0 border="0" >
 	<tr class="wardlisttitlerow" align=center>
 <?php
