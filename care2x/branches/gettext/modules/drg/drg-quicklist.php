@@ -189,7 +189,6 @@ if ($linecount) {
 	}
 }
 ?>
-
 </table>
 <?php if($linecount>0) : ?>
 <input type="hidden" name="lastindex" value="<?php echo $idx ?>">
@@ -218,7 +217,6 @@ if ($linecount) {
 <p>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 <?php endif ?>
-
 </ul>
 &nbsp;
 </FONT>

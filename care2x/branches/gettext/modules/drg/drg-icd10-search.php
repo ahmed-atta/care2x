@@ -419,7 +419,6 @@ function drawdata(&$data,&$advdata)
 					}
 				}
 ?>
-
 </table>
 
 <?php
@@ -449,7 +448,6 @@ if(!$showonly&&($linecount>0)) {
 }else{
  /*
  ?>
-
 <p>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 
@@ -458,11 +456,9 @@ if(!$showonly&&($linecount>0)) {
 */
 }
 ?>
-
 </form>
 
 <?php if(($linecount>15)&&!$showonly) : ?>
-
 <p>
 <FORM action="drg-icd10-search.php" method="post" onSubmit="return pruf(this)" name="form2">
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>
