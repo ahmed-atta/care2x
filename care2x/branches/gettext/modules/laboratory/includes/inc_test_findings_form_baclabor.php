@@ -6,7 +6,6 @@ if (stristr('inc_test_findings_form_baclabor.php',$PHP_SELF))
 if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php')) include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php');
   else include_once($root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_baclabor.php');
   ?>
-
 <table>
   <tbody>
     <tr>
@@ -214,7 +213,6 @@ for($n=0;$n<8;$n++)
 }
 ?>
 
-
  </table>
 	<!--  Barcode for the batch nr.  -->
 	<?php
@@ -329,7 +327,6 @@ for($n=0;$n<8;$n++)
 	for($i=1;$i<13;$i++)
 	   echo 	 "<td><font size=1 face=\"arial\" color= \"#990000\">".$LDShortMonth[$i]."&nbsp;</td>";
 	?>
-
    </tr>
    <tr>
 	<?php
@@ -446,7 +443,6 @@ for($n=0;$n<8;$n++)
 		 elseif($stored_findings['notes']) echo '<font face="verdana,arial" color="#000000" size=2>'.nl2br(chunk_split(stripslashes($stored_findings['notes']),35));
             
 	   ?>
-
 	</td>
     <td align="right" rowspan=8>
 	

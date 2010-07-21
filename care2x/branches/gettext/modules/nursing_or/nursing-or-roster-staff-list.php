@@ -186,7 +186,6 @@ $smarty->assign('LDBack', $LDBack);
  ob_start();
 
 ?>
-
 <style type="text/css">
 
 div.a3 {font-family: arial; font-size: 14; margin-left: 3; margin-right:3; }
@@ -231,7 +230,6 @@ function deleteItem(nr){
  ob_start();
  
 ?>
-
 <ul>
 <p><br>
 
@@ -347,7 +345,6 @@ if($mode=='search'||$mode=='paginate'){
 		<tr class="wardlisttitlerow">';
 			
 ?>
-
      <td><b>
 	  <?php echo $pagen->makeSortLink($LDstaffNr,'nr',$oitem,$odir,$append);  ?></b></td>
      <td ><b>
