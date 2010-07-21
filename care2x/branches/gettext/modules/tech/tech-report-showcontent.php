@@ -60,7 +60,6 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
-
 <ul>
 
 <p><br>
@@ -159,7 +158,6 @@ echo '
 	echo '<p><a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0','absmiddle').'</a>&nbsp;&nbsp;&nbsp;';
 }
  ?>
-
 </ul>
 
 <?php

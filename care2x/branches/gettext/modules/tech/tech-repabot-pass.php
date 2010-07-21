@@ -48,7 +48,6 @@ if ($versand=="Abschicken")
 
 
 ?>
-
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
@@ -73,7 +72,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
-<td colspan=3><FONT   SIZE=2  FACE="verdana,Arial">Dieser Bereich ist passwortgeschützt!<br></td>
+<td colspan=3><FONT   SIZE=2  FACE="verdana,Arial">Dieser Bereich ist passwortgeschï¿½tzt!<br></td>
 </tr>
 
 <tr>
@@ -112,7 +111,6 @@ echo '</STRONG></FONT><P>';
 
 }
 ?>
-
 <table  border=0 cellpadding=0 cellspacing=0>
 <tr>
 <?php if(!$passtag) echo'
