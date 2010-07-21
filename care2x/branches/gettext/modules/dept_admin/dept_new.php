@@ -300,7 +300,8 @@ ob_start();
   
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b></font><?php echo $LDIsSubDept ?>: </td>
-    <td class=pblock>	<input type="radio" name="is_sub_dept" value="1" <?php if($is_sub_dept) echo 'checked'; ?>> <?php echo $LDYes ?> <input type="radio" name="is_sub_dept" value="0" <?php if(!$is_sub_dept) echo 'checked'; ?>> <?php echo $LDNo ?>
+    <td class=pblock><label><input type="radio" name="is_sub_dept" value="1" <?php if($is_sub_dept) echo 'checked'; ?>> <?php echo $LDYes ?></label> 
+    <label><input type="radio" name="is_sub_dept" value="0" <?php if(!$is_sub_dept) echo 'checked'; ?>> <?php echo $LDNo ?></label>
 </td>
   </tr> 
 <tr>
@@ -354,25 +355,29 @@ ob_start();
   
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b></font><?php echo $LDDoesSurgeryOp ?>: </td>
-    <td class=pblock>	<input type="radio" name="does_surgery" value="1" <?php if($does_surgery) echo 'checked'; ?>> <?php echo $LDYes ?> <input type="radio" name="does_surgery" value="0" <?php if(!$does_surgery) echo 'checked'; ?>> <?php echo $LDNo ?>
+    <td class=pblock><label><input type="radio" name="does_surgery" value="1" <?php if($does_surgery) echo 'checked'; ?>> <?php echo $LDYes ?></label> 
+    <label><input type="radio" name="does_surgery" value="0" <?php if(!$does_surgery) echo 'checked'; ?>> <?php echo $LDNo ?></label>
 </td>
   </tr> 
   
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b></font><?php echo $LDAdmitsInpatients ?>: </td>
-    <td class=pblock>	<input type="radio" name="admit_inpatient" value="1" <?php if($admit_inpatient) echo 'checked'; ?>> <?php echo $LDYes ?> <input type="radio" name="admit_inpatient" value="0" <?php if(!$admit_inpatient) echo 'checked'; ?>> <?php echo $LDNo ?>
+    <td class=pblock><label><input type="radio" name="admit_inpatient" value="1" <?php if($admit_inpatient) echo 'checked'; ?>> <?php echo $LDYes ?></label>
+    <label><input type="radio" name="admit_inpatient" value="0" <?php if(!$admit_inpatient) echo 'checked'; ?>> <?php echo $LDNo ?></label>
 </td>
   </tr> 
   
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b></font><?php echo $LDAdmitsOutpatients ?>: </td>
-    <td class=pblock>	<input type="radio" name="admit_outpatient" value="1" <?php if($admit_outpatient) echo 'checked'; ?>> <?php echo $LDYes ?> <input type="radio" name="admit_outpatient" value="0" <?php if(!$admit_outpatient) echo 'checked'; ?>> <?php echo $LDNo ?>
+    <td class=pblock><label><input type="radio" name="admit_outpatient" value="1" <?php if($admit_outpatient) echo 'checked'; ?>> <?php echo $LDYes ?></label>
+    <label> <input type="radio" name="admit_outpatient" value="0" <?php if(!$admit_outpatient) echo 'checked'; ?>> <?php echo $LDNo ?></label>
 </td>
   </tr> 
 
     <tr>
     <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b></font><?php echo $LDBelongsToInst ?>: </td>
-    <td class=pblock>	<input type="radio" name="this_institution" value="1" <?php if($this_institution) echo 'checked'; ?>> <?php echo $LDYes ?> <input type="radio" name="this_institution" value="0" <?php if(!$this_institution) echo 'checked'; ?>> <?php echo $LDNo ?>
+    <td class=pblock><label><input type="radio" name="this_institution" value="1" <?php if($this_institution) echo 'checked'; ?>> <?php echo $LDYes ?></label> 
+    <label><input type="radio" name="this_institution" value="0" <?php if(!$this_institution) echo 'checked'; ?>> <?php echo $LDNo ?></label>
 </td>
   </tr> 
   
@@ -438,7 +443,8 @@ ob_start();
   </tr> 
   <tr>
     <td class=pblock align=right bgColor="#eeeeee"><font color=#ff0000><b>*</b></font><?php echo $LDIsPharmacy ?>: </td>
-    <td class=pblock>	<input type="radio" name="is_pharmacy" value="1" <?php if($is_pharmacy) echo 'checked'; ?>> <?php echo $LDYes ?> <input type="radio" name="is_pharmacy" value="0" <?php if(!$is_pharmacy) echo 'checked'; ?>> <?php echo $LDNo ?>
+    <td class=pblock><label><input type="radio" name="is_pharmacy" value="1" <?php if($is_pharmacy) echo 'checked'; ?>> <?php echo $LDYes ?> </label>
+    <label><input type="radio" name="is_pharmacy" value="0" <?php if(!$is_pharmacy) echo 'checked'; ?>> <?php echo $LDNo ?></label>
 </td>
   </tr>  
 

@@ -354,7 +354,8 @@ echo $LDEnterInfo;
   
   <tr>
     <td align=right bgColor="#eeeeee"><?php echo $LDTempClosed ?>: </td>
-    <td bgColor="#f9f9f9"><input type="radio" name="is_temp_closed" value="0" <?php if(!$is_temp_closed) echo 'checked'; ?>> <?php echo $LDNo ?> <input type="radio" name="is_temp_closed" value="1" <?php if($is_temp_closed) echo 'checked'; ?>> <?php echo $LDYes ?> 
+    <td bgColor="#f9f9f9"><label><input type="radio" name="is_temp_closed" value="0" <?php if(!$is_temp_closed) echo 'checked'; ?>> <?php echo $LDNo ?></label> 
+    <label><input type="radio" name="is_temp_closed" value="1" <?php if($is_temp_closed) echo 'checked'; ?>> <?php echo $LDYes ?></label> 
 </td>
   </tr> 
  

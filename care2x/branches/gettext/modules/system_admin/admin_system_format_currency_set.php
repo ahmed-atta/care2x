@@ -69,14 +69,14 @@ $bottomlink_txt=$LDClk2AddCurrency;
 require($root_path.'modules/cafeteria/includes/inc_currency_set_gui.php');
 
 $sTemp = ob_get_contents();
-ob_end_clean();
 
+ob_end_clean();
 # Assign page output to the mainframe template
 
 $smarty->assign('sMainFrameBlockData',$sTemp);
  /**
  * show Template
  */
- $smarty->display('common/mainframe.tpl');
+$smarty->display('common/mainframe.tpl');
 
 ?>

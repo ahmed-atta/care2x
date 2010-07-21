@@ -185,8 +185,8 @@ echo $LDEnterInfo;
 <tr>
 	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDTitleFontBold ?></b> </FONT></td>
 	<td class="submenu">
-		<input type="radio" name="news_headline_title_font_bold" value="1" <?php  if($GLOBAL_CONFIG['news_headline_title_font_bold']) echo 'checked'; ?>><?php echo $LDBold ?> 
-		<input type="radio" name="news_headline_title_font_bold" value="0" <?php  if(!$GLOBAL_CONFIG['news_headline_title_font_bold']) echo 'checked'; ?>><?php echo $LDNormal ?>
+		<label><input type="radio" name="news_headline_title_font_bold" value="1" <?php  if($GLOBAL_CONFIG['news_headline_title_font_bold']) echo 'checked'; ?>><?php echo $LDBold ?> </label>
+		<label><input type="radio" name="news_headline_title_font_bold" value="0" <?php  if(!$GLOBAL_CONFIG['news_headline_title_font_bold']) echo 'checked'; ?>><?php echo $LDNormal ?></label>
       </td>  
 	</tr>
 <tr>
@@ -218,8 +218,8 @@ echo $LDEnterInfo;
 <tr>
 	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><?php echo $LDPrefaceFontBold ?></b> </FONT></td>
 	<td class="submenu">
-		<input type="radio" name="news_headline_preface_font_bold" value="1" <?php  if($GLOBAL_CONFIG['news_headline_preface_font_bold']) echo 'checked'; ?>><?php echo $LDBold ?> 
-		<input type="radio" name="news_headline_preface_font_bold" value="0" <?php  if(!$GLOBAL_CONFIG['news_headline_preface_font_bold']) echo 'checked'; ?>><?php echo $LDNormal ?>
+		<label><input type="radio" name="news_headline_preface_font_bold" value="1" <?php  if($GLOBAL_CONFIG['news_headline_preface_font_bold']) echo 'checked'; ?>><?php echo $LDBold ?></label>
+		<label><input type="radio" name="news_headline_preface_font_bold" value="0" <?php  if(!$GLOBAL_CONFIG['news_headline_preface_font_bold']) echo 'checked'; ?>><?php echo $LDNormal ?></label>
       </td>  
 	</tr>
 <tr>

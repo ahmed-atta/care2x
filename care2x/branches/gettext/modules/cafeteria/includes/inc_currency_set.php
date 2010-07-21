@@ -40,7 +40,7 @@ if($dblink_ok)
  
     $sql="DELETE FROM care_currency WHERE item_no=".$item_no;
 	
-	if(!$db->Execute($sql)) echo "_("Delete failed!")<p>";
+	if(!$db->Execute($sql)) echo $LDDbNoDelete . "<p>";
 	
  } 
  
@@ -50,6 +50,6 @@ if($dblink_ok)
      $rows=$ergebnis->RecordCount();
   } // else get default from ini file
   
-} else { echo "_("Link attempt to DB failed!")<br> $sql<br>"; }
+} else { echo $LDDbNoLink . "<br> $sql<br>"; }
 
 ?>
