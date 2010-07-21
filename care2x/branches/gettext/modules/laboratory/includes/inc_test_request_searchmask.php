@@ -2,7 +2,6 @@
 if(!$searchform_count)
 {
 ?>
-
             <script language="javascript">
             <!-- 
             function chkSearch(d)
@@ -22,7 +21,6 @@ if(!$searchform_count)
 <?php
 }
 ?>
-
 		  <table border=0 cellspacing=5 cellpadding=5>
             <tr bgcolor="<?php if($searchmask_bgcolor)  echo $searchmask_bgcolor; else echo "#ffffff"; ?>">
             <td>
