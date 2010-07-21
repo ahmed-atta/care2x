@@ -73,7 +73,6 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
-
 <ul>
 <?php
 if(!empty($mode)){ 
