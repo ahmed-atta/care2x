@@ -171,7 +171,6 @@ if(is_object($result)){
 
 
 ?>
-
 <hr>
 
 <h3>uplaod image</h3>

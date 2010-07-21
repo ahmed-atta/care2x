@@ -54,7 +54,6 @@ $smarty->assign('LDBack', $LDBack);
 
 ob_start();
 ?>
-
 <script language="javascript">
 <!-- 
 function chkNumber(n)
@@ -124,7 +123,6 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
-
 <table width=100% border=0 cellspacing=0 >
 
 <!-- Tabs  -->
@@ -143,7 +141,6 @@ ob_start();
 <td valign=top colspan=2>
 
 <?php 	echo "[$patnum] $lastname, $firstname (".formatDate2Local($bday,$date_format).")<p>"; ?>
-
 <p>
 <font size=1 color="#cc0000">
 <?php if($nopatdata) echo '

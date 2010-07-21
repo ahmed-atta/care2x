@@ -15,7 +15,6 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 ?>
 <?php html_rtl($lang); ?>
-
 <head>
 <?php echo setCharSet(); ?>
 <title><?php echo $LDPhotos ?></title>
@@ -46,5 +45,4 @@ if($lang=='ar'||$lang=='fa'){
 <?php
 }
 ?>
-
 </html>
