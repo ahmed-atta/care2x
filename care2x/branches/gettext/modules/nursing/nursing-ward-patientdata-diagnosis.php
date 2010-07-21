@@ -91,7 +91,6 @@ if($dblink_ok)
 	else 
 		{ echo "$LDDbNoLink<br>$sql<br>"; }
 ?>
-
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
@@ -102,7 +101,6 @@ require($root_path.'include/helpers/inc_js_gethelp.php');
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 ?>
-
 <style type="text/css">
 div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
 div.fa2_ml10 {font-family: arial; font-size: 12; margin-left: 10;}
