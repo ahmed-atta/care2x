@@ -47,7 +47,6 @@ if(!($artopt%2)) $alignright=true;
     else $alignright=false;
 ?>
 <?php html_rtl($lang); ?>
-
 <head>
 
 <?php echo setCharSet(); ?>
@@ -83,7 +82,6 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <script language="javascript" src="<?php echo $root_path; ?>js/editor_chkform.js" type="text/javascript"></script>
  
 <?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
-
 </head>
 
 <body onLoad="HTMLArea.replace('newsbody')">
