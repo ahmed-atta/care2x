@@ -183,6 +183,5 @@ if ($linecount>0) {
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');
  ?>
-
 </BODY>
 </HTML>

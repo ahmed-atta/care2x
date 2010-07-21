@@ -48,7 +48,6 @@ if ($finalcommand=='delete'){
     }
 }
 ?>
-
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
