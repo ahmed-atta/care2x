@@ -29,7 +29,6 @@ $mo=date(m);
 $yr=date(Y);
 
 ?>
-
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
@@ -63,7 +62,6 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 <?php 
 	echo "$LDShowCurveDate <br><b>$title</b>";	
 ?>
-
 </font>
 <p>
 
@@ -98,7 +96,6 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 		 	echo '> '.$monat[$i-1].'</option>';
 		 }
 	?>
-
         </select>
         </td>
     <td><select name="year">

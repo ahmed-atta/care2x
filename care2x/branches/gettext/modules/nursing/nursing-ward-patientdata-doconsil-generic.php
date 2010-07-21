@@ -253,7 +253,6 @@ $smarty->assign('sOnLoadJs',$sTemp .'"');
  */
  ob_start();
 ?>
-
 <style type="text/css">
 
 div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
@@ -328,7 +327,6 @@ ob_start();
 if(!$noresize){
 
 ?>
-
 <script>	
       window.moveTo(0,0);
 	 window.resizeTo(1000,740);
@@ -337,7 +335,6 @@ if(!$noresize){
 <?php 
 }
 ?>
-
  <ul>
 
 <?php
@@ -481,12 +478,10 @@ if($edit){
 	include($root_path.'modules/laboratory/includes/inc_test_request_controls.php');
 	include($root_path.'modules/laboratory/includes/inc_test_request_hiddenvars.php');
 ?>
-
 </form>
 <?php
 }
 ?>
-
 </ul>
 
 <?php
