@@ -17,7 +17,6 @@ while($row=$result->FetchRow()){
 	$toggle=!$toggle;
 ?>
 
-
   <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
     <td><FONT SIZE=-1  FACE="Arial"><?php if(!empty($row['date'])) echo @formatDate2Local($row['date'],$date_format); ?></td>
     <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php echo $row['notes']; ?></td>

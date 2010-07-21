@@ -15,7 +15,6 @@ while($row=$result->FetchRow()){
 		else $full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']; // outpatient admission
 ?>
 
-
   <tr bgcolor="#fefefe">
     <td><a href="<?php echo $buf; ?>&user_origin=patreg" target="_new"><img <?php echo createComIcon($root_path,'info3.gif','0','',TRUE); ?>></a></td>
     <td><?php echo $row['report_nr']; ?></td>

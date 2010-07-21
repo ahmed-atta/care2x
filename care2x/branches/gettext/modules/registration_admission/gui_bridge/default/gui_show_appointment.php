@@ -55,7 +55,6 @@ while($row=$result->FetchRow()){
 	if($row['appt_status']=='cancelled') $tc='#9f9f9f';
 		else $tc='#000000';
 ?>
-
   <tr   class="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo @formatDate2Local($row['date'],$date_format); ?></td>
     <td rowspan=4 valign="top"><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>">
@@ -136,7 +135,6 @@ while($row=$result->FetchRow()){
 		 if (isset($$buf)&&!empty($$buf)) echo $$buf; 
     		else echo  $enc_class[$row['encounter_class_nr']]['name']; 
 	?>
-
 	&nbsp;
 	</td>  
   </tr>

@@ -9,7 +9,6 @@ if($rows){
 		if(empty($birth[$x])||stristr('nr,encounter_nr,delivery_date,pid',$x)) continue;
 ?>
 
-
   <tr bgcolor="#fefefe">
     <td><FONT color="#006600"><b><?php echo $LD[$x]; ?></b></td>
     <td>
