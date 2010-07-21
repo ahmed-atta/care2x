@@ -279,7 +279,6 @@ $smarty->assign('sOnLoadJs','onLoad="if(window.focus) window.focus();"');
  */
  ob_start();
 ?>
-
 <script  language="javascript">
 <!-- 
 
@@ -308,7 +307,6 @@ function chkForm(d)
 <?php 
 require($root_path.'include/helpers/inc_checkdate_lang.php'); 
 ?>
-
 // -->
 </script>
 <?php 
@@ -323,11 +321,9 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
-
 <table width=100% border=0 cellspacing=0 cellpadding=0>
 
 <?php require('./gui_tabs_op_docu.php'); ?>
-
 <tr>
 <td colspan=2><p><br>
 <ul>
@@ -452,7 +448,6 @@ $append="&dept_nr=$dept_nr&target=archiv&all_depts=$all_depts";
 <?php
 	}
 ?>
-
 
 <table border="0"  bgcolor="#ffffff">
 
@@ -606,7 +601,6 @@ if($row[class_s]) echo "$row[class_s] $LDMinor  &nbsp; ";
 	echo " $LDOperation";
 ?>
 <?php else : ?>
-
 <select name="klas_s">
 			<option value="0"> </option>
 <?php
@@ -638,7 +632,6 @@ if($row[class_s]) echo "$row[class_s] $LDMinor  &nbsp; ";
 ?>
 </select>
 <?php echo "$LDMajor $LDOperation" ?>
-
 <?php endif ?>
 </td>
 </tr>
