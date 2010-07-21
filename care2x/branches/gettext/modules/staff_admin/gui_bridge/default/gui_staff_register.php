@@ -134,7 +134,7 @@ if(!$pid&&!$staff_nr){
 
 	$user_origin='admit';
 	
-	require_once($root_path.'include/core/modules/registration_admission/model/class_gui_search_person.php');
+	require_once($root_path.'modules/registration_admission/model/class_gui_search_person.php');
 	$psearch = & new GuiSearchPerson;
 
 	$psearch->setSearchFile('staff_register_search.php');
