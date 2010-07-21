@@ -546,12 +546,13 @@ div.checker input {
 
 div.radio {
   position: relative;
-  float: left;
+  display: table-cell;
+ /* float: left;*/
 }
 
 div.radio span {
-  display: block;
-  float: left;
+  display: table-cell;
+ /* float: left;*/
   text-align: center;
 }
 
