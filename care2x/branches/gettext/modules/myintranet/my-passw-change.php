@@ -64,7 +64,6 @@ $smarty->assign('LDBack', $LDBack);
 
 ob_start();
 ?>
-
 <script language=javascript>
 function pruf(d)
 {
@@ -88,7 +87,6 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
-
 <P>
 
 <?php if($n_error) : ?><font class="warnprompt">
@@ -101,7 +99,6 @@ ob_start();
 <font face="verdana,arial" size=3 color="#009900">
 	<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><b><?php echo $LDPWChanged ?></b></font>
 <?php else : ?>
-
 <?php if (($pass=='check')&&$passtag) 
 {
 echo '<FONT  class="warnprompt">';
@@ -130,7 +127,6 @@ echo '</FONT><p>';
 
 }
 ?>
-
 <br>
 <form method=post action=<?php echo $thisfile; ?> onSubmit="return pruf(this)" name="pwchanger">
 <table  border=0 cellpadding="0" cellspacing=1 bgcolor=#666666>

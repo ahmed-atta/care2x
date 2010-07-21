@@ -179,7 +179,6 @@ if($dblink_ok){
 
 
 ?>
-
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
@@ -231,7 +230,6 @@ function savedata(iln,ifn,inx,ipr)
 require($root_path.'include/helpers/inc_js_gethelp.php');
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
-
 <STYLE type=text/css>
 div.box { border: double; border-width: thin; width: 100%; border-color: black; }
 .v12 { font-family:verdana,arial;font-size:12; }
@@ -331,7 +329,6 @@ echo'
   </tr>	';
   }
  ?>
-
   		<tr>
    			 <td  class="v12"  bgcolor="#cfcfcf" colspan=6>&nbsp;
 		 </td>
@@ -385,7 +382,6 @@ echo'
 	</td> 
     <td align=center bgcolor="#ffffff"  class="v13_n" >
 <?php echo $LDJobId ?>
-
 	</td> 
     <td align=center bgcolor="#ffffff"   class="v13_n" >
 <?php echo "$LDOr $LDFunction" ?>
@@ -457,7 +453,6 @@ echo'
 
 </form>
 <?php endif ?>
-
 <div align=right>
 &nbsp;&nbsp;
 <a href="javascript:window.close()">

@@ -162,7 +162,6 @@ if($order_nr&&$dept_nr){
      }
 }
 ?>
-
 <?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>

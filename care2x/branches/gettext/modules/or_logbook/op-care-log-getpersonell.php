@@ -37,7 +37,6 @@ $forwardfile="op-care-log-getinfo.php?sid=$sid&lang=$lang&winid=$winid&mode=save
 $search=$pers_obj->searchstaffBasicInfo($inputdata);
 
 ?>
-
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
@@ -73,7 +72,6 @@ function savedata(iln,ifn,inx,ipr)
 require($root_path.'include/helpers/inc_js_gethelp.php');
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
-
 <STYLE type=text/css>
 div.box { border: double; border-width: thin; width: 100%; border-color: black; }
 .v12 { font-family:verdana,arial;font-size:12; }
@@ -110,11 +108,9 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 	</td> 
     <td align=center bgcolor="#ffffff" class="v13_n" >
 <?php echo $LDName ?>
-
 	</td> 
     <td align=center bgcolor="#ffffff"  class="v13_n" >
 <?php echo $LDJobId ?>
-
 	</td> 
     <td align=center bgcolor="#ffffff"   class="v13_n" >
 <?php echo "$LDOr $LDFunction" ?>
@@ -125,7 +121,6 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
   </tr>	
 
 <?php if($pers_obj->record_count) : ?>
-
 <?php 	$counter=0;
 		while($result=$search->FetchRow())
 		{
@@ -162,7 +157,6 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 				$counter++;
 		}
 ?>
-
 <?php else : ?>
   <tr>
     <td bgcolor="#ffffff"  colspan=5 align=center>
@@ -182,7 +176,6 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 
   </tr>	
 <?php endif ?>
-
 
   		<tr>
    			 <td  class="v12"  bgcolor="#cfcfcf" colspan=5>&nbsp;

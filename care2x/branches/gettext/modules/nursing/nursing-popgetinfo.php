@@ -74,7 +74,6 @@ $charts_obj= new Charts;
 	}
 
 ?>
-
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
@@ -153,7 +152,6 @@ if($count){
 		$toggle=!$toggle;
 ?>
 
-
   <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
     <td><FONT SIZE=-1  FACE="Arial" color="#000033">
 	<?php 
@@ -173,7 +171,6 @@ if($count){
 <?php
 }
 ?>
-
 <p>
 <font face=verdana,arial size=2 ><b><?php echo $LDEntryPrompt ?>:</b><br></font>
 <textarea cols="35" rows="4" name="notes"><?php echo $notes ?></textarea>

@@ -115,7 +115,6 @@ if($rows>1){
 
 if(!$is_discharged){
 ?>
-
 <p>
 <form method="post" name="newform" action="<?php echo $thisfile; ?>">
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>

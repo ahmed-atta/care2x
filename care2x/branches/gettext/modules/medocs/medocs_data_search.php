@@ -205,7 +205,6 @@ require('./gui_bridge/default/gui_tabs_medocs.php');
 ob_start();
 
 ?>
-
 <ul>
 	<table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
 		<tr>

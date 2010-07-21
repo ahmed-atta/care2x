@@ -49,7 +49,6 @@ $minute="05";
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
-
 <script language="javascript">
 function refreshparent()
 {

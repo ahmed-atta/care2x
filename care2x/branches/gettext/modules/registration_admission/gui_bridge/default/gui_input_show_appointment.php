@@ -131,7 +131,6 @@ if($mode=='select'){
 <?php
 }
 ?>
-
 <input type="hidden" name="mode" value="<?php if($mode=='select') echo 'update'; else echo 'create';?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>

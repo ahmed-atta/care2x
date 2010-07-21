@@ -76,7 +76,6 @@ $smarty->assign('LDBack', $LDBack);
  ob_start()
 
 ?>
-
 <script language="javascript" >
 <!--
 
@@ -108,7 +107,6 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
-
 <a name="pagetop"></a>
 
 <ul>
@@ -120,7 +118,6 @@ ob_start();
 	<FONT class="prompt">'.$LDDataRemoved.'</font>
 	<hr>';
 ?>
-
 <form action="<?php echo $thisfile?>" method="get" name="suchform" onSubmit="return pruf(this)">
 	<table border=0 cellspacing=2 cellpadding=3>
 		<tr bgcolor=#ffffdd>

@@ -63,7 +63,6 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
-
  <ul>
 <?php
 if(isset($save_ok)&&$save_ok){ 

@@ -51,7 +51,6 @@ while(list($x,$row)=each($msr_comp)){
 <?php
 }
 ?>
-
 </table>
 <?php
 if($parent_admit&&!$is_discharged) {

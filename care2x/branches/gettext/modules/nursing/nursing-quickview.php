@@ -50,7 +50,7 @@ $dbtable='care_ward';
   /* Load date formatter */
   include_once($root_path.'include/helpers/inc_date_format_functions.php');
 	
-	# Get the wards´ info
+	# Get the wardsï¿½ info
     $sql="SELECT nr,ward_id,name,room_nr_start,room_nr_end	
 				FROM $dbtable
 				WHERE is_temp_closed IN ('',0) 
@@ -73,7 +73,7 @@ $dbtable='care_ward';
 	}else{echo "$sql<br>$LDDbNoRead";}
 
 
-	# Get the rooms´ info
+	# Get the roomsï¿½ info
   $sql="SELECT SUM(r.nr_of_beds) AS maxbed
 			FROM $dbtable AS w LEFT JOIN care_room AS r   ON r.ward_nr=w.nr
 			WHERE w.is_temp_closed IN ('',0)
@@ -86,7 +86,7 @@ $dbtable='care_ward';
 		$roomcount=$rooms->RecordCount();
 	}else{echo "$sql<br>$LDDbNoRead";}
 
-	# Get the today´s occupancy
+	# Get the todayï¿½s occupancy
   $sql="SELECT  COUNT(l.location_nr) AS maxoccbed, w.nr AS ward_nr
           FROM $dbtable AS w
      LEFT JOIN care_encounter_location AS l ON l.group_nr=w.nr AND l.type_nr=5 ";
@@ -309,4 +309,3 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->display('common/mainframe.tpl');
 
 ?>
-

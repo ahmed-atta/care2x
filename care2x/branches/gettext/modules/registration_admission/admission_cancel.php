@@ -44,7 +44,6 @@ if(isset($mode)&&($mode=='cancel')&&isset($encounter_nr)&&$encounter_nr){
 	$error_msg=$LDTellEdpIfPersist;
 }
 ?>
-
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>

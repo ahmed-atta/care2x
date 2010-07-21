@@ -107,7 +107,6 @@ if($mode=='save'){
 
  ob_start();
 ?>
-
 <script language="javascript">
 <!-- 
 var n=false;
@@ -159,7 +158,6 @@ if($occup){
 	
 ?>
 
-
   <tr  class="<?php echo $sRowClass ?>"  valign="top">
     <td><?php if(!empty($row['date'])) echo @formatDate2Local($row['date'],$date_format); ?></td>
     <td><?php if($row['time']) echo $row['time']; ?></td>
@@ -179,7 +177,6 @@ if($occup){
 <?php
 }
 ?>
-
  <ul>
  
 <form method="post" name=remform action="nursing-ward-remarks.php" onSubmit="return checkForm(this)">

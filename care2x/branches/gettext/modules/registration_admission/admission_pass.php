@@ -63,7 +63,6 @@ $errbuf=$LDAdmission;
 
 require($root_path.'include/helpers/inc_passcheck_head.php');
 ?>
-
 <BODY  onLoad="document.passwindow.userid.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
@@ -81,7 +80,6 @@ switch($target){
 echo '
 <img '.createComIcon($root_path,'persons.gif','0','top').'><FONT  COLOR="'.$cfg['top_txtcolor'].'"  SIZE=6  FACE="verdana"> <b>'.$buf.'</b></font>';
  ?>
-
   
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
@@ -119,7 +117,6 @@ if(defined('ADMISSION_EXT_TABS') && ADMISSION_EXT_TABS){
 endif
 */
 ?>
-
 <?php if($target!="search") : ?>
 <img <?php echo createComIcon($root_path,'update.gif','0','absmiddle') ?>> <a href="admission_pass.php?sid=<?php echo "$sid&lang=$lang" ?>&target=search"><?php echo $LDAdmWantSearch ?></a><br>
 <?php endif ?>
@@ -133,7 +130,6 @@ endif
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
-
 </FONT>
 </BODY>
 </HTML>

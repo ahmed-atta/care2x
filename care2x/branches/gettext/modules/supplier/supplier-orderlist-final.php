@@ -73,7 +73,6 @@ if(($mode=='send') && isset($idcare_supply) && $idcare_supply){
 <?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-
 <script language=javascript>
 function popinfo(b)
 {
@@ -110,7 +109,6 @@ function show_order(d,o,s) {
 		}";
 }
 ?>
-
 </script>
 <?php 
 require($root_path.'include/helpers/inc_js_gethelp.php');
@@ -137,7 +135,6 @@ if ($sendok) echo '<font face="Verdana, Arial" size=2 color="#800000">'.$LDBillD
 if ($error )
 {
 ?>
-
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif') ?>></td>
