@@ -388,7 +388,6 @@ a:visited:hover {
 /* Gjergj Sheldija - new buttons top */
 .buttons a, .buttons button{
     display:block;
-    float:right;
     margin:0 7px 0 0;
     background-color:#f5f5f5;
     border:1px solid #dedede;
@@ -405,7 +404,7 @@ a:visited:hover {
     padding:5px 10px 6px 7px; /* Links */
 }
 
-input[type=button], input[type=submit], input[type=reset]{
+input[type=button], input[type=submit], input[type=reset], input[type=image]{
     margin:0 7px 0 0;
     background-color:#f5f5f5;
     border:1px solid #dedede;
@@ -443,7 +442,8 @@ input[type=button], input[type=submit], input[type=reset]{
 
 /* STANDARD */
 
-button:hover, .buttons a:hover, input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover{
+button:hover, .buttons a:hover, input[type=button]:hover, input[type=submit]:hover, 
+input[type=reset]:hover, input[type=image] {
     background-color:#dff4ff;
     border:1px solid #c2e1ef;
     color:#336699;

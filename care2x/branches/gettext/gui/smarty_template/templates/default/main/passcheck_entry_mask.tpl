@@ -36,21 +36,21 @@
 											<td>
 
 												<p>
-												<FORM {{$sPassFormParams}}>
+												<form {{$sPassFormParams}}>
 													<div class="prompt">
 														{{$LDPwNeeded}}!<p>
 													</div>
-													<nobr>{{$LDUserPrompt}}:</nobr>
-													<br>
-													<INPUT type="text" name="userid" size="14" maxlength="25"> <p>
-													<nobr>{{$LDPwPrompt}}:<br>
-													<INPUT type="password" name="keyword" size="14" maxlength="25">
+													<label for="username">{{$LDUserPrompt}}:</label>
+													<input type="text" name="userid" size="14" maxlength="25" id="username"> <p>
+													<label for="username">{{$LDPwPrompt}}:</label>
+													<input type="password" name="keyword" size="14" maxlength="25" id="password">
 
 													{{* Do not move the sPassHiddenInputs outside of the <form></form> block *}}
 													{{$sPassHiddenInputs}}
 
-													</nobr><p>
-													{{$sPassSubmitButton}}&nbsp;&nbsp;&nbsp;&nbsp;{{$sCancelButton}}
+													<div class="buttons">
+													{{$sPassSubmitButton}} {{$sCancelButton}}
+													</div>
 												</form>
 
 											</td>

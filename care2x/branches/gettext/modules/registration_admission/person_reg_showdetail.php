@@ -71,7 +71,7 @@ href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'clos
 
 	# Display the data
 
-	require_once($root_path.'include/core/modules/registration_admission/model/class_gui_person_show.php');
+	require_once($root_path.'modules/registration_admission/model/class_gui_person_show.php');
 	$person = & new GuiPersonShow;
 	$person->setPID($pid);
 	$person->display();
