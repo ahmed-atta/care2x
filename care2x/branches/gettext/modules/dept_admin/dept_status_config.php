@@ -78,7 +78,6 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
-
 <style type="text/css" name="formstyle">
 
 div.box { border: solid; border-width: thin; width: 100% }
@@ -118,7 +117,6 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
-
 <ul>
 <?php if(isset($updateok)&&$updateok) { 
 	$backimg='close2.gif';
@@ -139,7 +137,6 @@ if(isset($$LD_var)&&$$LD_var) echo $$LD_var;
 ?></font>
 
 <?php echo $LDEnterAllFields ?>
-
 <form action="dept_status_config.php" method="post" name="newstat">
 <table border=0>
 <tbody class="submenu">
