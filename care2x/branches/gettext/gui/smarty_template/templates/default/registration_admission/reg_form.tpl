@@ -140,7 +140,7 @@
 				<td colspan=2 >
 					{{$sErrorInsClass}} 
 					{{foreach from=$sInsClasses item=InsClass}}
-						<label>{{$InsClass}}</label>
+						{{$InsClass}}
 					{{/foreach}}
 				</td>
 			
