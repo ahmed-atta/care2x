@@ -99,3 +99,5 @@ ImageStringUp($im,5,2,390,$LDFillByLab,$black);
 Imagepng ($im);
 ImageDestroy ($im);
  ?>
+
+

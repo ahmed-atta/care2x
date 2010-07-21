@@ -552,3 +552,4 @@ $mark_v_offset=1; /* Vertical offset of the marking blocks */
 	ImageDestroy($im);
 
 ?>
+

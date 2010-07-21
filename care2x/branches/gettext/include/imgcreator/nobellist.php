@@ -53,3 +53,5 @@ ImageString($im,3,9,92,$txt,$black);
 Imagepng ($im);
 ImageDestroy ($im);
  ?>
+
+

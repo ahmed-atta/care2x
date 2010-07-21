@@ -1,30 +1,30 @@
 <?php
 # This is the database name
-$dbname='care2x_26RC';
+$dbname='care2x_gettext';
 
 # Database user name, default is root or httpd for mysql, or postgres for postgresql
 $dbusername='root';
 
 # Database user password, default is empty char
-$dbpassword='';
+$dbpassword='root';
 
 # Database host name, default = localhost
 $dbhost='localhost';
 
 # First key used for simple chaining protection of scripts
-$key='3.4490598255973E+26';
+$key='7811371076400';
 
 # Second key used for accessing modules
-$key_2level='2.3096868388074E+28';
+$key_2level='7619423922162';
 
 # 3rd key for encrypting cookie information
-$key_login='2.9647067937614E+28';
+$key_login='46924924597506';
 
 # Main host address or domain
-$main_domain='localhost/care2x_26RC/';
+$main_domain='localhost/gettext/care2002/care2x/branches/gettext/';
 
 # Host address for images
-$photoserver_ip='localhost/care2x_26RC/';
+$photoserver_ip='localhost/gettext/care2002/care2x/branches/gettext/';
 
 # Transfer protocol. Use https if this runs on SSL server
 $httprotocol='http';
@@ -33,7 +33,7 @@ $httprotocol='http';
 $dbtype='mysql';
 
 # Set this to your timezone.
-$timezone = 'Africa/Abidjan';
+$timezone = 'Europe/Tirane';
 date_default_timezone_set($timezone);
 
 ?>

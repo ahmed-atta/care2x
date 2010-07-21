@@ -303,23 +303,23 @@ while ( list ( $x, $v ) = each ( $area_opt ) ) {
 		switch ( $cindex) {
 			case 0 :
 				echo '
-		                      <td  valign=top colspan=5><img  ' . createComIcon ( $root_path, 'redpfeil.gif', '0', 'absmiddle' ) . '><input type="checkbox" name="' . $x . '" value="' . $x . '" ' ;
+		                      <td  valign=top colspan=5><label><input type="checkbox" name="' . $x . '" value="' . $x . '" ' ;
 				if ($edit && strstr ( $userRole [ 'permission' ], $x ))
 					echo 'checked ><FONT SIZE=2  FACE="Arial" color="#ff0000">	' ; else
 					echo '>' ;
-				echo $v . '</td>' ;
+				echo $v . '</label></td>' ;
 			break ;
 			case 1 :
 				echo '
-		                      <td><img src="p.gif" width=15></td><td  valign=top colspan=4><img src="tl2-blue.gif" border=0 width=20 height=21 align="absmiddle"><input type="checkbox" name="' . $x . '" value="' . $x . '" ' ;
+		                      <td><img src="p.gif" width=15></td><td  valign=top colspan=4><sup>L</sup><label><input type="checkbox" name="' . $x . '" value="' . $x . '" ' ;
 				if ($edit && strstr ( $userRole [ 'permission' ], $x ))
 					echo 'checked ><FONT    SIZE=2  FACE="Arial" color="#ff0000">' ; else
 					echo '>' ;
-				echo $v . '</td>' ;
+				echo $v . '</label></td>' ;
 			break ;
 			case 2 :
 				echo '
-		                      <td><img src="p.gif" width=15><td><img src="p.gif" width=15><td  valign=top colspan=3><img src="tl2-blue.gif" border=0 width=20 height=21 align="absmiddle"><input type="checkbox" name="' . $x . '" value="' . $x . '" ' ;
+		                      <td><img src="p.gif" width=15><td><img src="p.gif" width=15><td  valign=top colspan=3><sup>L</sup><label><input type="checkbox" name="' . $x . '" value="' . $x . '" ' ;
 				if ($edit && strstr ( $userRole [ 'permission' ], $x ))
 					echo 'checked ><FONT    SIZE=2  FACE="Arial" color="#ff0000">' ; else
 					echo '>' ;
@@ -327,19 +327,19 @@ while ( list ( $x, $v ) = each ( $area_opt ) ) {
 			break ;
 			case 3 :
 				echo '
-		                       <td><img src="p.gif" width=15><td><img src="p.gif" width=15><td><img src="p.gif" width=15><td  valign=top colspan=2><img src="tl2-blue.gif" border=0 width=20 height=21 align="absmiddle"><input type="checkbox" name="' . $x . '" value="' . $x . '" ' ;
+		                       <td><img src="p.gif" width=15><td><img src="p.gif" width=15><td><img src="p.gif" width=15><td  valign=top colspan=2><sup>L</sup><label><input type="checkbox" name="' . $x . '" value="' . $x . '" ' ;
 				if ($edit && strstr ( $userRole [ 'permission' ], $x ))
 					echo 'checked ><FONT    SIZE=2  FACE="Arial" color="#ff0000">' ; else
 					echo '>' ;
-				echo $v . '</td>' ;
+				echo $v . '</label></td>' ;
 			break ;
 			case 4 :
 				echo '
-		                       <td><img src="p.gif" width=15><td><img src="p.gif" width=15><td><img src="p.gif" width=15><td><img src="p.gif" width=15><td  valign=top colspan=1><img src="tl2-blue.gif" border=0 width=20 height=21 align="absmiddle"><input type="checkbox" name="' . $x . '" value="' . $x . '" ' ;
+		                       <td><img src="p.gif" width=15><td><img src="p.gif" width=15><td><img src="p.gif" width=15><td><img src="p.gif" width=15><td  valign=top colspan=1><sup>L</sup><label><input type="checkbox" name="' . $x . '" value="' . $x . '" ' ;
 				if ($edit && strstr ( $userRole [ 'permission' ], $x ))
 					echo 'checked ><FONT    SIZE=2  FACE="Arial" color="#ff0000">' ; else
 					echo '>' ;
-				echo $v . '</td>' ;
+				echo $v . '</label></td>' ;
 			break ;
 		}
 	}
