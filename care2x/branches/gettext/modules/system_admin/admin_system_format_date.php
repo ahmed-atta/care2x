@@ -65,7 +65,6 @@ $smarty->assign('LDBack', $LDBack);
  ob_start();
 
 ?>
-
 <ul>
 <FONT  SIZE=+2>
 <?php echo $LDSetDateFormat ?> </FONT><FONT class="prompt"><p>

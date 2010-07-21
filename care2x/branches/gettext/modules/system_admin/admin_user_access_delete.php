@@ -66,7 +66,6 @@ $smarty->assign('LDBack', $LDBack);
 
  ob_start();
 ?>
-
 <p>
 
 <center>
