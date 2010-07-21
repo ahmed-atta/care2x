@@ -526,12 +526,13 @@ div.selector select {
 
 div.checker {
   position: relative;
-  float: left;
+  display: table-cell;
+ /* float: left;*/
 }
 
 div.checker span {
-  display: block;
-  float: left;
+  display: table-cell;
+ /* float: left;*/
   text-align: center;
 }
 
