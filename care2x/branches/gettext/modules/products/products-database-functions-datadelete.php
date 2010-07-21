@@ -91,7 +91,6 @@ $smarty->assign('LDBack', $LDBack);
  ob_start()
 
 ?>
-
 <a name="pagetop"></a>
 
 <ul>

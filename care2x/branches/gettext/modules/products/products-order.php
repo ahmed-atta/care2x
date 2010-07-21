@@ -50,4 +50,3 @@ $smarty->assign ( 'sBaseFramesetTemplate','products/ordering_frameset.tpl' );
 
 $smarty->display ( 'common/baseframe.tpl' );
 ?>
-
