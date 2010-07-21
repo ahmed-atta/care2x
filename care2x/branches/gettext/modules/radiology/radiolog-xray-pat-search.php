@@ -22,7 +22,6 @@ if(!empty($searchkey)) if(is_numeric($searchkey)) $searchkey=(int)$searchkey;
 include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 ?>
-
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
@@ -50,7 +49,6 @@ if(d.searchkey.value) startsrc(d);
 }
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
-
 // -->
 </script>
 <?php 
