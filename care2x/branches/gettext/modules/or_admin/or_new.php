@@ -173,7 +173,6 @@ $smarty->assign('LDBack', $LDBack);
  # Collect javascript code
  ob_start();
 ?>
-
 <script language="javascript">
 <!-- 
 
@@ -204,7 +203,6 @@ function newORnr(){
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); 
 
 ?>
-
 // -->
 </script>
 <?php
@@ -225,7 +223,6 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
-
 <ul>
  
 <FONT class="prompt"><p>
@@ -242,7 +239,6 @@ echo $LDEnterInfo;
 <p> 
  
 <?php echo $LDEnterAllFields ?>
-
 <form action="or_new.php" method="post" name="newstat"  onSubmit="return chkForm(this)">
 
 <table border=0>
