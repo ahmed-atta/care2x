@@ -80,7 +80,6 @@ if(($mode=='send') && isset($order_nr) && $order_nr){
 <?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
-
 <script language=javascript>
 function popinfo(b)
 {
@@ -113,7 +112,6 @@ echo "
 		}";
 }
 ?>
-
 </script>
 <?php 
 require($root_path.'include/helpers/inc_js_gethelp.php');
@@ -142,7 +140,6 @@ if ($sendok) echo '
 if ($error )
 {
 ?>
-
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif') ?>></td>
