@@ -31,3 +31,4 @@ var Thu="<?php echo $LDDayShortName[3]; ?>";
 var Fri="<?php echo $LDDayShortName[4]; ?>";
 var Sat="<?php echo $LDDayShortName[5]; ?>";
 var Sun="<?php echo $LDDayShortName[6]; ?>";
+
