@@ -121,7 +121,6 @@ window.close();
 <?php
 }
  ?>
-
 <?php if($dept_nr) { ?>
 <p>
 <b><?php echo "$LDOptions $LDFor ".$dept_name." (".formatDate2Local($i_date,$date_format).")"; ?></b>
@@ -155,7 +154,6 @@ window.close();
 <img <?php echo createComIcon($root_path,'r_arrowgrnsm.gif','0','absmiddle'); ?>><a href="<?php echo $root_path."modules/nursing_or/nursing-or-select-dept.php".URL_REDIRECT_APPEND."&target=calendar_opt&retpath=$retpath&year=$year&month=$month&day=$day" ?>"><b> <?php echo $LDSelectDept ?></b></a>
 
 <?php } ?>
-
 </font>
 
 <p><br>

@@ -97,7 +97,6 @@ $smarty->assign('LDBack', $LDBack);
 
 ob_start();
 ?>
-
 <script language="javascript" >
 <!-- 
 var urlholder;
@@ -151,7 +150,6 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
-
 <ul>
 
 <?php 
@@ -196,7 +194,6 @@ for($x=0;$x<6;$x++)
 echo '</table>';
 echo '</td></tr></table>';
 ?>
-
 <br><FONT color=navy>
 
 <form name="direct" method=get onSubmit="return update()" >
