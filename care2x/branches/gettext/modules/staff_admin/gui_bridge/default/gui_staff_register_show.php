@@ -56,7 +56,6 @@ ob_start();
 include('./gui_bridge/default/gui_tabs_staff_reg.php') 
 
 ?>
-
 <tr>
 <td colspan=3>
 
@@ -82,7 +81,6 @@ if(empty($is_discharged)){
 	}
 }
 ?>
-
 <FONT   >
 
 <table border=0>
@@ -344,4 +342,3 @@ $smarty->assign('sMainFrameBlockData',$sTemp);
  $smarty->display('common/mainframe.tpl');
 
 ?>
-

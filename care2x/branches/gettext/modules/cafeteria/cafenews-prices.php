@@ -58,7 +58,6 @@ function editcafe()
 </script>
 
 <?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
-
 </head>
 <body>
 <FONT  SIZE=8 COLOR="#cc6600">

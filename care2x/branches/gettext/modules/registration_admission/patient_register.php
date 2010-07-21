@@ -100,4 +100,3 @@ $smarty->assign('sMainBlockIncludeFile','registration_admission/reg_input.tpl');
 $smarty->display('common/mainframe.tpl');
 
 ?>
-

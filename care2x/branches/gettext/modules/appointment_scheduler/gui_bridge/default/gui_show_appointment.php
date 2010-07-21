@@ -50,7 +50,6 @@ while($row=$result->FetchRow()){
 	if($row['appt_status']=='cancelled') $tc='#9f9f9f';
 		else $tc='';
 ?>
-
   <tr   class="<?php echo $bgc; ?>" >
     <td><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><?php echo @formatDate2Local($row['date'],$date_format); ?></td>
     <td rowspan=4 valign="top"><FONT SIZE=-1  FACE="Arial" color="<?php echo $tc; ?>"><font color="<?php if(empty($tc)) echo '#0000cc'; else echo $tc; ?>"><b>

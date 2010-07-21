@@ -215,7 +215,6 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
-
 <p><br><ul>
 <?php if($onError!="") echo '
 	<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').'><FONT face="Verdana,Helvetica,Arial" size=2 color="#800000"> '.$onError.'</font>';

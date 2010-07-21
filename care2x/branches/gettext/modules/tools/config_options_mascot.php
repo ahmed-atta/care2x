@@ -82,7 +82,6 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
-
 <FONT  color="#000066" size=4><?php echo $LDMascotOpt; ?></font>
 <br>
 
@@ -92,7 +91,6 @@ ob_start();
 ?>
 <FONT  class="prompt"><?php echo $LDChangeSaved ?></font><br>
 <?php } ?>
-
 <table border=0 cellspacing=1 cellpadding=2>  
 
   <tr >

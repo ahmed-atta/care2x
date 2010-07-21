@@ -52,7 +52,6 @@ $errbuf="OP Logs $title";
 
 require($root_path.'include/helpers/inc_passcheck_head.php');
 ?>
-
 <BODY <?php if (!$nofocus)
 				{ echo 'onLoad="document.passwindow.userid.focus();';
 					if($retpath=="calendar_opt") echo "window.resizeTo(800,600);window.moveTo(20,20);";

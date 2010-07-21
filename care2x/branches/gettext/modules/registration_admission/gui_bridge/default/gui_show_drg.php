@@ -45,4 +45,3 @@ function openDRGComposite(enr,edit,isd){
 <?php
 }
 ?>
-

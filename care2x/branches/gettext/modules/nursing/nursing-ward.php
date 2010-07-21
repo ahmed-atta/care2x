@@ -198,7 +198,6 @@ function getinfo(pn){
 	/*else echo '
 	window.location.href=\'nursing-ward-pass.php'.URL_APPEND.'&rt=pflege&edit=1&station='.$station.'\'';*/
 ?>
-
 	}
 function getrem(pn){
 	urlholder="nursing-ward-remarks.php<?php echo URL_REDIRECT_APPEND; ?>&pn="+pn+"<?php echo "&dept_nr=$ward_nr&location_nr=$ward_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station"; ?>";

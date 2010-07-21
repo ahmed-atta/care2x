@@ -11,7 +11,6 @@ echo setCharSet();
 require($root_path.'include/helpers/inc_js_gethelp.php'); 
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
-
 </HEAD>
 
 <BODY bgcolor="<?php echo $cfg['bot_bgcolor'];?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus();" 
@@ -41,7 +40,6 @@ href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'clos
 	$person->display();
 
 ?>
-
 </ul>
 
 </FONT>

@@ -109,21 +109,17 @@ else
     $input_name='notes';
     }
 ?>
-
 <?php
 html_rtl ($lang);
 ?>
-
 <HEAD>
     <?php echo setCharSet(); ?>
-
     <TITLE><?php echo "$title $LDInputWin" ?></TITLE>
 
 <?php
 require ($root_path . 'include/helpers/inc_js_gethelp.php');
 require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
 ?>
-
 <script language = "javascript">
     <!-- 
 
@@ -193,7 +189,6 @@ require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
                 echo $LDFullDayName[$dyidx] . ' (' . formatDate2Local(date('Y-m-d', mktime(0, 0, 0, $mo, $dy, $yr)),
                                                                       $date_format) . ')</font>';
                 ?>
-
                 </font></b>
             </td>
 
@@ -202,20 +197,16 @@ require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
                                                               '',                          '',
                                                               '<?php echo $title ?>')"><img <?php echo
     createLDImgSrc($root_path, 'hilfe-r.gif', '0') ?>
-
                 <?php
                 if ($cfg['dhtml'])
                     echo 'class="fadeOut" >';
                 ?>
-
                 </a><a href = "javascript: window.close()"><img <?php echo
     createLDImgSrc($root_path, 'close2.gif', '0') ?>
-
                 <?php
                 if ($cfg['dhtml'])
                     echo 'class="fadeOut" >';
                 ?>
-
                 </a>
 
                 </nobr>
@@ -233,7 +224,6 @@ require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
             {
             $tbg       ='background="' . $root_path . 'gui/img/common/' . $theme_com_icon . '/tableHeaderbg3.gif"';
         ?>
-
             <table border = 0 cellpadding = 4 cellspacing = 1 width = 100%>
                 <tr bgcolor = "#f6f6f6">
                     <td <?php echo $tbg; ?>><FONT SIZE = -1 FACE = "Arial" color = "#000066"><?php echo $LDTime; ?></td>
@@ -259,7 +249,6 @@ require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
                     //if(!empty($row['short_notes'])) $bgc='yellow';
 
             ?>
-
                     <tr bgcolor = "<?php echo $bgc; ?>" valign = "top">
                         <td><FONT SIZE = 1 FACE = "Arial">
                     <?php
@@ -297,7 +286,6 @@ require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
             {
             echo $LDSFormatPrompt
         ?>
-
             <p>
             <input type = "text" name = "short_notes" value = "<?php echo $short_notes ?>" size = 16 maxlength = 16>
 
@@ -306,7 +294,6 @@ require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
         else
             {
         ?>
-
             <p>
             <font face = verdana,arial size = 2><b><?php echo $LDEntryPrompt ?>:</b>
 
@@ -323,7 +310,6 @@ require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
         <?php
             }
         ?>
-
         <input type = "hidden" name = "sid" value = "<?php echo $sid ?>">
         <input type = "hidden" name = "lang" value = "<?php echo $lang ?>">
         <input type = "hidden" name = "winid" value = "<?php echo $winid ?>">
@@ -350,14 +336,12 @@ require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
         <?php
         if ($saved):
         ?>
-
         <a href = "javascript: window.close()"><img <?php echo
     createLDImgSrc($root_path, 'close2.gif', '0') ?>alt = "<?php echo $LDClose ?>"></a>
 
         <?php
         else:
         ?>
-
         <a href = "javascript: window.close()"><img <?php echo
     createLDImgSrc($root_path, 'cancel.gif', '0') ?>border = "0" alt = "<?php echo $LDClose ?>"> </a>
 

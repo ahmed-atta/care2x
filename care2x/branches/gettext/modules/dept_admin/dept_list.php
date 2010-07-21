@@ -55,7 +55,6 @@ $smarty->assign('LDBack', $LDBack);
  # Buffer page output
  ob_start();
 ?>
-
 <style type="text/css" name="formstyle">
 td.pblock{ font-family: verdana,arial; font-size: 12}
 
@@ -76,7 +75,6 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
-
 <table border=0 cellpadding=3>
   <tr class="wardlisttitlerow">
 <!-- 	<td bgcolor="#e9e9e9"></td>

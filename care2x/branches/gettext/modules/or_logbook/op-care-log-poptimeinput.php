@@ -34,11 +34,10 @@ switch ($mode)
 	}
 }
 ?>
-
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
-<TITLE>Eingabefenster für die Kurve</TITLE>
+<TITLE>Eingabefenster fï¿½r die Kurve</TITLE>
 <META name="description" content="">
 <META name="keywords" content="">
 <META name="generator" content="CuteHTML">
@@ -213,7 +212,6 @@ echo '<p><font face=verdana,arial size=5 color=navy ><b>Reposition:</b></font><b
 }
 
 ?>
-
 </font><p>
 <input type="image" src=../img/save.gif border=0 alt="Zeitangaben speichern.">
 </form>
@@ -231,7 +229,6 @@ echo '<p><font face=verdana,arial size=5 color=navy ><b>Reposition:</b></font><b
 										window.focus();
 										</script>';
 ?>
-
 </td>
 </tr>
 </table>

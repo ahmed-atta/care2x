@@ -172,7 +172,6 @@ if($bpcount||$tempcount){
 			else $bgc='#f0f0f0';
 		$toggle=!$toggle;	
 ?>
-
   <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
     <td><FONT SIZE=1  FACE="Arial" color="#000033">
 	<?php 
@@ -204,7 +203,6 @@ if($bpcount||$tempcount){
 			else $bgc='#f0f0f0';
 		$toggle=!$toggle;
 ?>
-
   <tr  bgcolor="<?php echo $bgc; ?>"  valign="top">
     <td><FONT SIZE=1  FACE="Arial" color="#000033">
 	<?php 
@@ -224,7 +222,6 @@ if($bpcount||$tempcount){
 <?php
 }
 ?>
-
   <tr>
     <td  align=center bgcolor="#cfcfcf" class="v13"><font color="#ff0000"><?php echo $LDBp ?></td>
     <td  align=center bgcolor="#cfcfcf" class="v13"><font color="#0000ff"><?php echo $LDTemp ?></td>
@@ -315,7 +312,6 @@ if($bpcount||$tempcount){
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>">
 </a>
 <?php endif ?>
-
 </BODY>
 
 </HTML>

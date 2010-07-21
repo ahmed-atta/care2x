@@ -67,5 +67,4 @@ if($lang=='ar'||$lang=='fa'){
 }
 ?>
 
-
 </html>

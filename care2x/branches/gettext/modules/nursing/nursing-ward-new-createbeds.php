@@ -68,7 +68,6 @@ if(isset($mode)&&$mode=='save_beds'){
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
-
 <script language="javascript">
 <!-- 
 function checkForm(f){

@@ -46,7 +46,6 @@ $smarty->assign('LDBack', $LDBack);
  ob_start();
 
 ?>
-
 <br><ul>
 <FONT    SIZE=2  FACE="verdana,Arial">
 <?php echo $LDWelcome ?> <FONT    SIZE=3 color=#800000 FACE="Arial"><b><?php echo $_COOKIE[$local_user.$sid];?></b></font>. <p>

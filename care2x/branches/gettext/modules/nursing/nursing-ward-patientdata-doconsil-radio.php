@@ -264,7 +264,6 @@ $smarty->assign('sOnLoadJs','onLoad="'.$sOnLoadJs.'"');
 
  ob_start();
 ?>
-
 <style type="text/css">
 div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
 div.fa2_ml10 {font-family: arial; font-size: 12; margin-left: 10;}
@@ -328,7 +327,6 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
-
 <ul>
 
 <?php
@@ -348,7 +346,6 @@ require($root_path.'modules/laboratory/includes/inc_test_request_controls.php');
 elseif(!$read_form && !$no_proc_assist)
 {
 ?>
-
 <table border=0>
   <tr>
     <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_l.gif','0') ?>></td>
@@ -537,13 +534,11 @@ require($root_path.'modules/laboratory/includes/inc_test_request_controls.php');
 require($root_path.'modules/laboratory/includes/inc_test_request_hiddenvars.php');
 
 ?>
-
 </form>
 
 <?php
 }
 ?>
-
 </ul>
 
 <?php

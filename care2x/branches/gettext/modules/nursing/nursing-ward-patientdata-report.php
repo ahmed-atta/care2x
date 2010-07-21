@@ -146,7 +146,6 @@ $smarty->assign('sOnLoadJs',$sOnLoadJs.'"');
 
 ob_start();
 ?>
-
 <style type="text/css">
 div.fva2_ml10 {font-size: 12; margin-left: 10;}
 div.fa2_ml10 {font-size: 12; margin-left: 10;}
@@ -215,7 +214,6 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
-
 <ul>
 
 <form name="berichtform" method="post" action="<?php echo $thisfile ?>" onSubmit="return pruf(this)">
