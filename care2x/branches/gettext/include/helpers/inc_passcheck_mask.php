@@ -93,8 +93,8 @@ if(isset($c_flag)&&$c_flag) {
 
 $smarty->assign('sPassHiddenInputs',$sHiddenTemp);
 
-$smarty->assign('sPassSubmitButton','<INPUT type="image"  '.createLDImgSrc(CARE_GUI  ,'continue.gif','0').'>');
-$smarty->assign('sCancelButton','<a href="'.$breakfile.'"><img '.createLDImgSrc(CARE_GUI  ,'cancel.gif','0').'></a>');
+$smarty->assign('sPassSubmitButton','<button type="submit"  class="positive"><img '.createComIcon(CARE_GUI  ,'accept.png','0').'>'.$LDLogin.'</button>');
+$smarty->assign('sCancelButton','<a href="'.$breakfile.'" class="negative"><img '.createComIcon(CARE_GUI  ,'cross.png','0').'>'.$LDCancel.'</a>');
 
 #
 # Display this page if necessary

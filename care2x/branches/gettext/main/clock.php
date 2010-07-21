@@ -45,86 +45,45 @@ function gethelp(x,s,x1,x2,x3)
 
 </HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
-	bgcolor="silver" alink="navy" vlink="navy" onLoad=show5()>
-
+<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 bgcolor="silver" alink="navy" vlink="navy" onLoad=show5()>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 	<tr valign=top>
-		<td bgcolor="<?php
-		echo $cfg ['top_bgcolor'];
-		?>" height="10"><FONT
-			COLOR="<?php
-			echo $cfg ['top_txtcolor'];
-			?>" SIZE=+3 FACE="Arial"><STRONG> &nbsp;<?php
-			echo $LDClock?></STRONG></FONT></td>
-		<td bgcolor="<?php
-		echo $cfg ['top_bgcolor'];
-		?>" height="10"
-			align=right>
-<?php
-if ($cfg ['dhtml'])
-	echo '<a href="javascript:window.history.back()"><img ' . createLDImgSrc ( CARE_BASE , 'back2.gif', '0' ) . '  class="fadeOut" >';
-?></a>
-		<a href="javascript:gethelp('')">
-		<img
-			<?php
-			echo createLDImgSrc ( CARE_BASE , 'hilfe-r.gif', '0' )?>
-			<?php
-			if ($cfg ['dhtml'])
-				echo 'class="fadeOut">';
-			?> /></a><a
-			href="<?php
-			echo $breakfile;
-			?>" />
-			<img
-			<?php
-			echo createLDImgSrc ( CARE_BASE , 'close2.gif', '0' )?>
-			alt="<?php
-			echo $LDClose?>"
-			<?php
-			if ($cfg ['dhtml'])
-				echo 'class="fadeOut" >';
-			?> /></a></td>
+		<td bgcolor="<?php echo $cfg ['top_bgcolor']; ?>" height="10">
+			<FONT COLOR="<?php echo $cfg ['top_txtcolor'];?>" SIZE=+3 FACE="Arial">
+				<STRONG> &nbsp;<?php echo $LDClock?></STRONG>
+			</FONT>
+		</td>
+		<td bgcolor="<?php echo $cfg ['top_bgcolor']; ?>" height="10" align=right>
+			<div class="buttons">
+				<?php echo '<a href="javascript:window.history.back()"><img ' . createLDImgSrc ( CARE_BASE , 'back2.gif', '0' ) . '></a>'; ?>
+				<a href="javascript:gethelp('')">
+					<img <?php echo createLDImgSrc ( CARE_BASE , 'hilfe-r.gif', '0' )?> 
+				</a>
+				<a href="<?php echo $breakfile; ?>" />
+					<img <?php echo createLDImgSrc ( CARE_BASE , 'close2.gif', '0' )?> alt="<?php echo $LDClose?>"/>
+				</a>
+			</div>
+		</td>
 	</tr>
 	<tr>
-		<td bgcolor=<?php
-		echo $cfg ['body_bgcolor'];
-		?> valign=top colspan=2>
-		<p><br>
-		
-		
-		<p>
-		
-		
-		<CENTER><font face="verdana,arial" size=3>
-<?php
-echo "$LDPresent $LDTime"?>
-</FONT> <span id="liveclock"
-			style="position: relative; left: 0; top: 0; font-size: 146"> </span>
-		</CENTER>
-		<font face="Verdana, Arial, Helvetica" size=2>
-
-		<p></td>
+		<td bgcolor=<?php echo $cfg ['body_bgcolor']; ?> valign=top colspan=2>
+			<CENTER>
+				<font face="verdana,arial" size=3>  
+					<?php echo "$LDPresent $LDTime"?> 
+				</FONT> 
+				<span id="liveclock" style="position: relative; left: 0; top: 0; font-size: 146"> </span>
+			</CENTER>
+		</td>
 	</tr>
-
 	<tr>
-		<td bgcolor=<?php
-		echo $cfg ['bot_bgcolor'];
-		?> height=70 colspan=2>
-<?php
-require (CARE_BASE .'include/helpers/inc_load_copyrite.php');
-?>
-</td>
+		<td bgcolor=<?php echo $cfg ['bot_bgcolor']; ?> height=70 colspan=2>
+			<?php
+			require (CARE_BASE .'include/helpers/inc_load_copyrite.php');
+			?>
+		</td>
 	</tr>
 </table>
 &nbsp;
-
-
-
-
-</FONT>
-
-
 </BODY>
 </HTML>
