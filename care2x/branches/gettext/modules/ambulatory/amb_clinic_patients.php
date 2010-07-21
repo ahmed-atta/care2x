@@ -145,7 +145,6 @@ $smarty->assign('LDBack', $LDBack);
 
  ob_start();
 ?>
-
 <script language="javascript">
 <!-- 
   var urlholder;
@@ -221,7 +220,6 @@ function billinfo(patnum)
 <?php 
 require($root_path.'include/helpers/inc_checkdate_lang.php'); 
 ?>
-
 // -->
 </script>
 

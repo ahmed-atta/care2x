@@ -136,7 +136,6 @@ else  echo 'topmargin=2 marginheight=2';
 <!--  <input type="button" value="<?php echo $LDSearch4OPS301 ?>" onClick="javascript:openOPSsearch('','0')">&nbsp;
  <input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openOPSsearch('','0')">
  --><?php endif; ?>
-
 <table border=0 width=100%>
   <tr>
     <td width=100% valign="top">

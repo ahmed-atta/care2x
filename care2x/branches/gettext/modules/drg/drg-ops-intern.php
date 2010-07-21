@@ -112,7 +112,6 @@ function openRelatedCodes()
 			w=800;
 			h=650;';
 ?>
-
 	gn=document.ops_intern.group_nr.value;
 	if(gn!=0){
 		relcodewin_<?php echo $sid ?>=window.open("drg-related-codes.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&edit=$edit&is_discharged=$is_discharged&ln=$ln&fn=$fn&bd=$bd&opnr=$opnr&dept_nr=$dept_nr&oprm=$oprm" ?>&group_nr="+gn,"relcodewin_<?php echo $sid ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
@@ -194,7 +193,6 @@ if($opnr) echo" - OP# $opnr - $dept_nr OP $oprm";
  <input type="button" value="<?php echo $LDQuickList ?>" onClick="javascript:openICDsearch()">
 <p>
 <?php endif; ?>
-
 <table border=0 width=100%>
   <tr>
     <td width=100% valign="top">
