@@ -90,7 +90,6 @@ if(($report!=NULL)||($mode!=''))
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
-
  <script language="javascript" >
 <!-- 
 
@@ -199,7 +198,6 @@ echo '</font>
 </FONT>
 <p>
 <?php endif ?>
-
 <p>
 <p>
 <?php 
