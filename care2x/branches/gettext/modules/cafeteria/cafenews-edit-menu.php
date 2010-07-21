@@ -176,6 +176,7 @@ function aligndate(&$ad,&$am,&$ay)
 </style>
 
 <?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
+
 </head>
 
 <body onLoad="document.menuform.menuplan.focus()">
@@ -224,6 +225,7 @@ function aligndate(&$ad,&$am,&$ay)
 	';
 	}
 ?>
+
   </tr>
 </table>
 </td>
@@ -237,6 +239,7 @@ if($mode=="saveok") {
 <?php
 }
 ?>
+
 <p>
 <table border=0 cellspacing=0>
   <tr bgcolor="#ccffff" >

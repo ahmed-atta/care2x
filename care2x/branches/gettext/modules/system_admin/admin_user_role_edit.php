@@ -190,6 +190,7 @@ if (($mode != '' || $error) && $mode != 'edit') {
 <?php
 }
 ?>
+
 <FONT class="prompt">
 
 <?php
@@ -204,6 +205,7 @@ if (($mode == "") and ($remark != 'fromlist')) {
 	echo ' ' . $_COOKIE [ $local_user . $sid ] ;
 }
 ?>
+
 <p>
 <FORM action="admin_user_role_list.php" name="all">
 	<input type="hidden"name="sid" value="<?php echo $sid ;?>"> 
@@ -347,6 +349,7 @@ while ( list ( $x, $v ) = each ( $area_opt ) ) {
 }
 
 ?>
+
 </table>
 </td>
 </tr>

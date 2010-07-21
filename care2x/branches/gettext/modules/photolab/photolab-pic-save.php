@@ -59,6 +59,7 @@ $smarty->assign('LDBack', $LDBack);
 
 ob_start();
 ?>
+
 <script language="javascript">
 <!-- 
 
@@ -83,6 +84,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <p>
 
 <?php	

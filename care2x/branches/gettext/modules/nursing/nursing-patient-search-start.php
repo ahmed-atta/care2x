@@ -231,6 +231,7 @@ $smarty->assign('LDBack', $LDBack);
 
  ob_start();
 ?>
+
 <script language="javascript">
 <!-- 
 var urlholder;
@@ -264,6 +265,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <ul>
 
 <?php 
@@ -431,6 +433,7 @@ if($rows){
 	if($mode=='such') echo str_replace('~nr~','0',$LDSearchFound); 
 }
 ?>
+
 <?php echo $LDSearchPrompt ?>
 	
 <form action="nursing-patient-search-start.php" method="get" name="suchlogbuch" >

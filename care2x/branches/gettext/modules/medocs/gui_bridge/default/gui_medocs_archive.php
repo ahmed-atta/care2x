@@ -7,6 +7,7 @@ function createTR($input_name, $ld_text, $input_val, $colspan = 2, $input_size =
 	global $root_path;
 
 ?>
+
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $ld_text ?>:
 </td>
@@ -32,12 +33,14 @@ function popSearchWin(target,obj_val,obj_name) {
 }
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 -->
 </script>
 <?php
 require($root_path.'include/helpers/inc_js_gethelp.php');
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
+
 </HEAD>
 
 
@@ -64,6 +67,7 @@ if($_COOKIE["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$l
 $tab_bot_line='#66ee66';
 require('./gui_bridge/default/gui_tabs_medocs.php');
 ?>
+
 <tr>
 <td colspan=3   bgcolor="<?php echo $cfg['body_bgcolor']; ?>">
 
@@ -77,6 +81,7 @@ require('./gui_bridge/default/gui_tabs_medocs.php');
  {
    echo '<FONT  SIZE=2 FACE="verdana,Arial">'.$LDSearchKeyword.': '.$where; 
 ?>
+
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
@@ -88,11 +93,13 @@ require('./gui_bridge/default/gui_tabs_medocs.php');
 <?php
 }
 ?>
+
 <?php
 // if(isset($rows)&&$rows>1) 
  if(!empty($rows)) 
 {
  ?>
+
 <table border=0 cellpadding=0 cellspacing=0>
   <tr bgcolor=#0000aa background="<?php echo $root_path; ?>gui/img/common/default/tableHeaderbg.gif">
 
@@ -151,6 +158,7 @@ require('./gui_bridge/default/gui_tabs_medocs.php');
 else
 {
 ?>
+
 <form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform">
 
 <table border=0 cellspacing=1 cellpadding=0>
@@ -159,6 +167,7 @@ else
 if(!isset($pid)) $pid='';
 createTR('encounter_nr', $LDAdmitNr,$encounter_nr);
 ?>
+
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDAdmitDate ?>: 
 </td>
@@ -210,6 +219,7 @@ if(!isset($addr_str_nr)) $addr_str_nr='';
 if(!isset($addr_zip)) $addr_zip='';
 if(!isset($addr_city_town)) $addr_city_town='';
 ?>
+
 <tr>
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial"><?php echo $LDBday ?>:
 </td>
@@ -278,6 +288,7 @@ createTR( 'referrer_recom_therapy', $LDTherapy,$referrer_recom_therapy);
 createTR( 'referrer_notes', $LDSpecials,$referrer_notes);
 ?>
 
+
 <tr bgcolor="white">
 <td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>"><FONT SIZE=-1  FACE="Arial">&nbsp;<?php if ($errorkassetype) echo "<font color=red>"; ?><?php echo $LDBillType ?>:
 </td>
@@ -301,6 +312,7 @@ if($insurance_classes){
 createTR( 'insurance_nr', $LDInsuranceNr,$insurance_nr);
 createTR( 'insurance_firm_name', $LDInsuranceCo,$insurance_firm_name);
 ?>
+
 <?php
 
 //if (!$GLOBAL_CONFIG['patient_care_service_hide'] && $care_ok)
@@ -383,6 +395,7 @@ while($buffer=$att_dr_service->FetchRow())
 
 ?>
 
+
 </table>
 <p>
 <input type=hidden name="sid" value=<?php echo $sid; ?>>
@@ -397,6 +410,7 @@ while($buffer=$att_dr_service->FetchRow())
 <?php
 }
 ?>
+
 
 
 

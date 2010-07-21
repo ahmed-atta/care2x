@@ -14,10 +14,12 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 ?>
+
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
+
 </HEAD>
 
 <BODY bgcolor=black onLoad="if (window.focus) window.focus()" leftmargin=2 marginwidth=2>
@@ -28,6 +30,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 Patient:<br>
 Mustermann, Silvia<br>
 <?php echo formatDate2Local('1988-11-07',$date_format); ?>
+
 <p>
 <?php echo $LDShootDate ?>:<br>
 <?php echo formatDate2Local('2001-10-22',$date_format); ?><p>
@@ -39,6 +42,7 @@ Mustermann, Silvia<br>
 
 
 <?php if($mode!="display1") : ?>
+
 <input type="button" value="<?php echo $LDFullScreen ?>" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=display1')">
 
 <?php else : ?>
@@ -46,6 +50,7 @@ Mustermann, Silvia<br>
 <p>
 <input type="button" value="<?php echo $LDWriteDiag ?>" onClick="window.top.location.replace('radiolog-xray-javastart.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=display_diagnosis_write')">
 <?php endif ?>
+
 </form>
 
 <p>

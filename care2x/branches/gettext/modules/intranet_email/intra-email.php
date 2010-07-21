@@ -367,6 +367,7 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <script language="javascript" >
 <!-- 
 var feld="recipient";
@@ -397,6 +398,7 @@ function selectAll(s,m)
 ';
 ?>
 <?php if(($mode=='compose')||($mode=='sendmail')) : ?>
+
 function save2draft()
 {
 	d=document.mailform;

@@ -96,6 +96,7 @@ if(!$currency_short||!$currency_long)
 <title></title>
 
 <?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
+
 </head>
 <body>
 <FONT  SIZE=6 COLOR="#cc6600">
@@ -113,6 +114,7 @@ if(!$currency_short||!$currency_long)
 </table>
 <hr>
 <?php endif ?>
+
 <?php echo $LDProdGroup ?>: <FONT  SIZE=3 COLOR="#000099"><?php echo $groupname; ?><font>
 <p>
 <table border=0 cellspacing=0>

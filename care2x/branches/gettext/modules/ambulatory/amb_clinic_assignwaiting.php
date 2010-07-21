@@ -117,6 +117,7 @@ if(($mode=='')||($mode=='fresh')){
 
  ob_start();
 ?>
+
 <script language="javascript">
 <!-- 
   var urlholder;
@@ -206,11 +207,13 @@ ob_start();
 
 $smarty->display('nursing/basic_data_admit.tpl');
 ?>
+
 <!--  Show stop sign and warn if the initial ward assignment is different from this ward -->
 <?php
 if($encounter['current_dept_nr']!=$dept_nr){
 	$ack_but='takeover.gif';
 ?>
+
 <table border=0>
   <tr>
     <td><img <?php 	echo createLDImgSrc($root_path,'stop.png','0'); ?>></td>

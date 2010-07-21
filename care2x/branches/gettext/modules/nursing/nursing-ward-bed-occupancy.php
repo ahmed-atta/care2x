@@ -75,6 +75,7 @@ $smarty->assign('LDBack', $LDBack);
 
  ob_start();
 ?>
+
 <script language="javascript">
 <!-- 
 var urlholder;
@@ -106,6 +107,7 @@ function pruf(d){
 }
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 // -->
 </script>
 <?php 
@@ -121,6 +123,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <table width=100% border=0 cellpadding="5" cellspacing=0 >
 
 <tr>
@@ -242,6 +245,7 @@ if($mode=='search'){
 			<table border=0 cellpadding=2 cellspacing=1> <tr bgcolor="#0000aa" background="'.createBgSkin($root_path,'tableHeaderbg.gif').'">';
 			
 ?>
+
     <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDCaseNr; ?></b></td>
     <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDLastName; ?></td>
     <td><font face=arial size=2 color="#ffffff"><b><?php echo $LDName; ?></td>
@@ -294,6 +298,7 @@ if($mode=='search'){
 }
 
 ?>
+
 </td>
 </tr>
 </table>        

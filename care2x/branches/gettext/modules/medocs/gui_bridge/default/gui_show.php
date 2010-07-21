@@ -10,6 +10,7 @@ function createTR($ld_text, $input_val, $colspan = 1)
 {
 	global $toggle, $root_path;
 ?>
+
 <tr>
 <td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $ld_text ?>:
 </td>
@@ -30,6 +31,7 @@ echo setCharSet();
 <!--
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 function popRecordHistory(table,pid) {
 	urlholder="./record_history.php<?php echo URL_REDIRECT_APPEND; ?>&table="+table+"&pid="+pid;
 	HISTWIN<?php echo $sid ?>=window.open(urlholder,"histwin<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
@@ -42,6 +44,7 @@ if($parent_admit) include($root_path.'include/imgcreator/inc_js_barcode_wristban
 require($root_path.'include/helpers/inc_js_gethelp.php');
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
+
 </HEAD>
 
 
@@ -80,6 +83,7 @@ if($parent_admit) {
 	require('./gui_bridge/default/gui_tabs_medocs.php');
 }
 ?>
+
 <tr>
 <td colspan=3   bgcolor="<?php echo $cfg['body_bgcolor']; ?>">
 
@@ -158,6 +162,7 @@ if (!$GLOBAL_CONFIG['person_name_others_hide'])
 	createTR($LDNameOthers,$name_others);
 }
 ?>
+
 <tr>
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDBday ?>:
 </td>

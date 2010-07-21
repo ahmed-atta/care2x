@@ -51,6 +51,7 @@ require('./gui_bridge/default/gui_tabs_medocs.php');
 ob_start();
 
 ?>
+
 <script  language="javascript">
 <!-- 
 function setsex(d)
@@ -69,6 +70,7 @@ function settitle(d)
 }
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 -->
 </script>
 <?php 
@@ -87,6 +89,7 @@ include('./gui_bridge/default/gui_tabs_medocs.php');
 ob_start();
 
 ?>
+
 <ul>
 
 <?php 
@@ -128,6 +131,7 @@ $entry_body_bgcolor='#ffffff';
 <?php 
 }
 ?>
+
 <p>
 <a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 </ul>

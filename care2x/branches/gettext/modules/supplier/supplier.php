@@ -124,6 +124,7 @@ if ($saveok){
 ob_start();
 $sTemp='';
  ?>
+
   <input type="hidden" name="sid" value="<?php echo $sid?>">
   <input type="hidden" name="lang" value="<?php echo $lang?>">
   <input type="hidden" name="cat" value="<?php echo $cat?>">

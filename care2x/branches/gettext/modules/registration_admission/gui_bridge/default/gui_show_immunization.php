@@ -24,6 +24,7 @@ while($row=$result->FetchRow()){
 		else $bgc='#fefefe';
 	$toggle=!$toggle;?>
 
+
   <tr bgcolor="<?php echo $bgc; ?>">
     <td rowspan=2 valign="top">
 	<?php if(!empty($row['notes'])) { ?>

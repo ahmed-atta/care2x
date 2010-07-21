@@ -75,6 +75,7 @@ if ($dblink_ok) {
 	echo "$LDDbNoLink<br>$sql<br>" ;
 }
 ?>
+
 <?php
 html_rtl ( $lang ) ;
 ?>
@@ -87,6 +88,7 @@ require ($root_path . 'include/helpers/inc_js_gethelp.php') ;
 require ($root_path . 'include/helpers/inc_css_a_hilitebu.php') ;
 
 ?>
+
 <script language="javascript">
 <!-- 
 	function resetinput(){
@@ -233,6 +235,7 @@ if ($count) {
 <?php
 }
 ?>
+
 <?php
 if ($saved) {
 	?>
@@ -246,6 +249,7 @@ if ($saved) {
 	<img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>">
 </a>
 <?php } ?>
+
 
 
 </BODY>

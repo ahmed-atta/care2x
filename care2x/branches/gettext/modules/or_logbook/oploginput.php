@@ -604,15 +604,18 @@ if(!$patientfound) echo 'document.oppflegepatinfo.enc_nr.focus();';
 <?php if($op_nr) : ?>
 	<?php echo $LDOpNr ?> <FONT SIZE="3" ><b> <?php echo $op_nr; ?> </b></FONT>
 <?php endif ?>
+
 <?php echo $LDDate ?>: 
 
 <?php
 	echo formatDate2Local($thisday,$date_format);
 ?>
+
 &nbsp;
 <?php
 if($datafound||$patientfound){
 ?>
+
 <a href="javascript:document.oppflegepatinfo.submit()"><img <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> width=99 height=24 align=absmiddle alt="<?php echo $LDSaveLatest ?>"></a>
 <?php
 }
@@ -623,6 +626,7 @@ if($datafound||$patientfound){
 <?php 
 if($op_nr) { 
 ?>
+
 <?php } ?>
 <?php 
 if($datafound) { 
@@ -681,6 +685,7 @@ if(($mode=='search'||$mode=='paginate')&&!$datafound){
 	echo ' <font  class="prompt">'.$LDPlsClk1.'</font><br>';
 
 ?>
+
 			
 				<table cellpadding=0 cellspacing=0 border=0>
 				<tr>
@@ -759,6 +764,7 @@ if(($mode=='search'||$mode=='paginate')&&!$datafound){
 			';
 }
 ?>
+
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="internok" value="<?php echo $internok; ?>">
@@ -854,6 +860,7 @@ if($datafound)
 		while(list($x,$v)=each($cbuf)) echo "$v<p>";
 }
 ?>
+
 </TD>
 
 <TD valign=top width=150>
@@ -899,6 +906,7 @@ if($datafound)
 <?php else : ?>
 	<?php echo "$LDAna<p>$LDAnaDoc" ?>
 <?php endif ?>
+
 	<p>
 
 <table cellpadding="0" cellspacing="0" border=0 width=100% class="v10_n"> 
@@ -926,6 +934,7 @@ if($datafound)
 		if(trim($ccbuf['s'])) break;
 	}
 ?>
+
 <font  size=1 color="<?php if($datafound) echo "#0000cc"; else echo "#3f3f3f"; ?>">
 	<?php echo $LDOpCut ?>:
 	<?php if($datafound) : ?>

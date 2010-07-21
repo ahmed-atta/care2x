@@ -18,6 +18,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if (!isset($pn)||!$pn) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php?mode=close"); exit;}; 
 //$db->debug=true;
 if($saveok) { ?>
+
  <script language="javascript" >
  window.opener.parent.location.href='<?php echo "drg-composite-start.php?sid=$sid&lang=$lang&pn=$pn&opnr=$opnr&edit=1&ln=$ln&fn=$fn&bd=$bd&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>';
  window.close();
@@ -139,6 +140,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 echo $encounter['name_last'].", ".$encounter['name_first']." ".formatDate2Local($encounter['date_birth'],$date_format)." - $pn";
 if($opnr) echo" - OP# $opnr - $dept_nr OP $oprm";
 ?>
+
 </font><p>
 <ul>
 <FONT    SIZE=3  FACE="Arial" color="<?php echo $rowcolor ?>">
@@ -280,6 +282,7 @@ $hidselector='ops_px';
 <p>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 <?php endif ?>
+
 </ul>
 &nbsp;
 </FONT>

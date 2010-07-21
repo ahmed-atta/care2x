@@ -13,7 +13,7 @@ require_once ($root_path . 'include/helpers/inc_config_color.php') ;
 $pdata = array ( ) ;
 $filetitles = array ( ) ;
 $template = array ( ) ;
-$monat = array ( "januar" , "februar" , "mï¿½rz" , "april" , "mai" , "juni" , "juli" , "august" , "september" , "oktober" , "november" , "dezember" ) ;
+$monat = array ( "januar" , "februar" , "märz" , "april" , "mai" , "juni" , "juli" , "august" , "september" , "oktober" , "november" , "dezember" ) ;
 if ($pyear == "")
 	$pyear = date ( Y ) ;
 if ($pmonth == "")
@@ -29,7 +29,7 @@ $mainpath = "op/abteilung/" . strtolower ( $dept ) . "/op_saal_" . strtolower ( 
 
 function getlastnum ( $xyr , $xmon , $xday ) {
 	
-	$xmonat = array ( "januar" , "februar" , "mï¿½rz" , "april" , "mai" , "juni" , "juli" , "august" , "september" , "oktober" , "november" , "dezember" ) ;
+	$xmonat = array ( "januar" , "februar" , "märz" , "april" , "mai" , "juni" , "juli" , "august" , "september" , "oktober" , "november" , "dezember" ) ;
 	while ( ! sizeof ( $titles ) ) {
 		
 		if ($xday > 1) {
@@ -212,7 +212,7 @@ function isnum(val,idx)
 			}
 			
 			
-//			alert("Zeitangabe ist ungï¿½ltig! (ausserhalb des 24H Zeitrahmens)");
+//			alert("Zeitangabe ist ungültig! (ausserhalb des 24H Zeitrahmens)");
 	
 		}
 		switch(v3.length)
@@ -344,7 +344,7 @@ function checksubmit()
 	
 	if (xdoc.patnumber.value=="")
 	{
-		react=confirm("Die Aufnahmenummer fehlt! Mï¿½chten Sie trotzdem speichern?!");	
+		react=confirm("Die Aufnahmenummer fehlt! Möchten Sie trotzdem speichern?!");	
 		xdoc.patnumber.focus();
 		return react;
 	}
@@ -440,6 +440,7 @@ if (($mode != "") && ($mode != "fresh")) {
 	echo "\r\n" ;
 }
 ?>
+
 &nbsp;
 &nbsp; <!-- 
 <a href="op-care-log-arch-edit.php?mode=fresh&filename=<?php
@@ -509,7 +510,7 @@ echo $filename . '&pyear=' . date ( Y ) . '&pmonth=' . date ( m ) . '&pday=' . d
 				?>>Standby</option>
 			<option value="X">...</option>
 		</select> <BR>
-		Anï¿½sthesist<br>
+		Anästhesist<br>
 		<TEXTAREA NAME="anadoc1" Content-Type="text/html" COLS="17" ROWS="2"><?php
 		echo stripcslashes ( $pdata [ 'anadoc1' ] ) ;
 		?></TEXTAREA>

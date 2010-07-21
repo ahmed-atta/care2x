@@ -27,10 +27,12 @@ require($root_path.'include/helpers/inc_passcheck_internchk.php');
 if ($pass=='check') 	
 	include($root_path.'include/helpers/inc_passcheck.php');
 ?>
+
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
+
 </HEAD>
 
 <BODY  <?php if (!$nofocus) echo 'onLoad="document.passwindow.userid.focus()"'; echo  ' bgcolor='.$cfg['body_bgcolor']; 
@@ -61,6 +63,7 @@ echo '</STRONG></FONT>';
 
 }
 ?>
+
 
 <table  border=0 cellpadding=0 cellspacing=0>
 <tr>

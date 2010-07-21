@@ -87,6 +87,7 @@ ob_start();
 $psearch->display();
 
 ?>
+
 </ul>
 <p>
 

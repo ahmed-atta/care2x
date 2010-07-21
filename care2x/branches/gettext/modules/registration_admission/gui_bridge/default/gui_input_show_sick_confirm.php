@@ -1,6 +1,7 @@
 <?php
 if(!$is_discharged){
 ?>
+
 <script language="javascript">
 <!-- Script Begin
 function chkSickForm(f) {

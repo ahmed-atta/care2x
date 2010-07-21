@@ -15,6 +15,7 @@ $comdat="?sid=$sid&lang=$lang&enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
+
 <script language="javascript">
 
 function opentimewin(s)

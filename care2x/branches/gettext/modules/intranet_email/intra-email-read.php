@@ -113,6 +113,7 @@ $smarty->assign('LDBack', $LDBack);
 
 ob_start();
 ?>
+
 <script language="javascript" >
 <!-- 
 
@@ -146,6 +147,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 
 <tr valign=top >

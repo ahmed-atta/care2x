@@ -23,15 +23,17 @@ if($rows){
 		$show_details=true;
 		# Get the field names
 		$fields=&$obj->coreFieldNames();
-		# If not this encounterï¿½s pregnancy, show warn notice
+		# If not this encounter´s pregnancy, show warn notice
 		
 ?>
+
 	<tr>
 	<td colspan=6>
 	<table border=0 cellpadding=1 cellspacing=1 width=100% class="frame">
 <?php
 		if(!$parent_admit){
 ?>
+
   	<tr bgcolor="#fefefe">
     <td <?php echo $tbg; ?>><FONT color="#ff0000"><b><?php echo $LDEncounterNr; ?></b></font></td>
     <td <?php echo $tbg; ?>><FONT color="#ff0000"><?php echo $pregbuf[$show_preg_enc]['encounter_nr'] ?></font></td>
@@ -44,6 +46,7 @@ if($rows){
 			if($x=='status') break;
 			if($x=='nr'||$x=='encounter_nr'||empty($pregbuf[$show_preg_enc][$x])) continue;
 ?>
+
 
   <tr bgcolor="#fefefe">
     <td><FONT color="#006600"><b><?php echo $LD[$x]; ?></b></font></td>
@@ -150,7 +153,7 @@ if($rows){
   </tr>
 <?php
 		while(list($x,$v)=each($pregbuf)){
-			# Do not list this encounterï¿½s pregnancy in the admission module
+			# Do not list this encounter´s pregnancy in the admission module
 			if($x==$show_preg_enc) continue;
 ?>
   <tr bgcolor="#fefefe" valign="top">

@@ -17,7 +17,7 @@ if($edit&&!$_COOKIE[$local_user.$sid]) {header('Location:'.$root_path.'language/
 require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 $target='';
 
-# The mapping of department idï¿½s with the formsï¿½ idï¿½s must be done here
+# The mapping of department id´s with the forms´ id´s must be done here
 # The department id is forwarded to this script in   the format  "nr~string" or e.g "12~pediatrics"
 
 $nrbuf=explode('~',$dept_id);

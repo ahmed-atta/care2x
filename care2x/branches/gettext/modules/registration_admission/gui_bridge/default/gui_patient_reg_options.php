@@ -56,6 +56,7 @@ function Spacer()
 			?>
 			
            <?php Spacer(); ?>
+
 				  
               <TR>  <td align=center><img <?php echo createComIcon($root_path,'timeplan.gif','0','',FALSE) ?>></td>
                 <TD vAlign=top ><FONT 
@@ -111,6 +112,7 @@ function Spacer()
                 </TR>
 			   
            <?php Spacer(); ?>
+
                <TR> <td align=center><img <?php echo createComIcon($root_path,'discussions.gif','0','',FALSE) ?>></td>
                 <TD vAlign=top ><FONT 
                   face="Verdana,Helvetica,Arial" size=2> <nobr>

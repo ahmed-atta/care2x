@@ -180,6 +180,7 @@ $smarty->assign('LDBack', $LDBack);
 
  ob_start();
 ?>
+
 <style type="text/css">
 
 div.a3 {font-family: arial; font-size: 14; margin-left: 3; margin-right:3; }
@@ -264,6 +265,7 @@ $smarty->assign('sFormAction','action="nursing-or-roster-plan.php"');
  ob_start();
 
 ?>
+
 <input type="hidden" name="mode" value="save">
 <input type="hidden" name="dept" value="<?php echo $dept_obj->ID(); ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr; ?>">

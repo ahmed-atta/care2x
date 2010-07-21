@@ -245,6 +245,7 @@ $smarty->assign('sOnLoadJs','onLoad="if(window.focus) window.focus();document.ma
  */
  ob_start();
 ?>
+
 <script  language="javascript">
 <!--
 
@@ -277,9 +278,11 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <table width=100% border=0 cellspacing=0 cellpadding=0>
 
 <?php require('./gui_tabs_op_docu.php'); ?>
+
 <tr>
 <td colspan=2><p><br>
 
@@ -391,6 +394,7 @@ $append="&dept_nr=$dept_nr&target=search&all_depts=$all_depts";
 }elseif($rows&&$patientselected){
 
 ?>
+
 <table border="0">
 
 <form method="post" action="op-docu-start.php" name="opdoc">

@@ -107,6 +107,7 @@ $smarty->assign('LDBack', $LDBack);
  ob_start();
 
 ?>
+
 <ul>
 
 <table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">

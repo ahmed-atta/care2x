@@ -25,6 +25,7 @@ $drg= & new DRG;
 
 if($saveok){
 ?>
+
  <script language="javascript" >
 	window.opener.location.replace('drg-ops301.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&edit=$edit&ln=$ln&fn=$fn&bd=$bd&group_nr=$group_nr&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1" ?>');
     //window.opener.parent.OPS.location.reload();
@@ -380,6 +381,7 @@ function drawdata(&$data,&$advdata){
 						}
 					}
 ?>
+
 </table>
 <?php 
 
@@ -417,7 +419,9 @@ if(!$showonly&&($linecount>0)) {
 */
 }
 ?>
+
 <?php if(($linecount>15)&&!$showonly) { ?>
+
 <p>
 <FORM action="drg-ops301-search.php" method="post" onSubmit="return pruf(this)" name="form2">
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>

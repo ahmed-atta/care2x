@@ -9,6 +9,7 @@ function createTR($ld_text, $input_val, $colspan = 1)
 {
     global $toggle, $root_path;
 ?>
+
 <tr>
 <td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $ld_text ?>:
 </td>
@@ -29,6 +30,7 @@ echo setCharSet();
 <!-- 
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 function popRecordHistory(table,pid) {
 	urlholder="./record_history.php<?php echo URL_REDIRECT_APPEND; ?>&table="+table+"&pid="+pid;
 	HISTWIN<?php echo $sid ?>=window.open(urlholder,"histwin<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
@@ -46,6 +48,7 @@ $calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system',
 $calendar->load_files();
 //end : gjergji
 ?>
+
 </HEAD>
 
 
@@ -75,6 +78,7 @@ href="javascript:gethelp('admission_how2new.php')"><img <?php echo createLDImgSr
 require('./gui_bridge/default/gui_tabs_medocs.php');
 
 ?>
+
 <tr>
 <td colspan=3   bgcolor="<?php echo $cfg['body_bgcolor']; ?>">
 
@@ -159,6 +163,7 @@ if (!$GLOBAL_CONFIG['person_name_others_hide']&&$name_others)
 createTR($LDNameOthers,$name_others);
 }
 ?>
+
 <tr>
 <td bgColor="#eeeeee"><FONT SIZE=-1  FACE="Arial"><?php echo $LDBday ?>:
 </td>
@@ -285,6 +290,7 @@ if($mode=='show'){
 
 if(($mode=='show'||$mode=='details')&&!$is_discharged){
 ?>
+
 <p>
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
 <a href="<?php echo $thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&encounter_nr='.$_SESSION['sess_en'].'&target='.$target.'&mode=new&type_nr='.$type_nr; ?>"> 
@@ -318,6 +324,7 @@ if($parent_admit) {
 	include('./include/bottom_controls_registration_options.inc.php');
 }
 ?>
+
 <p>
 </ul>
 

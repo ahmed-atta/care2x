@@ -102,6 +102,7 @@ $smarty->assign('LDBack', $LDBack);
  # Buffer page output
  ob_start();
 ?>
+
 <script language=javascript>
 function popinfo(b)
 {
@@ -121,6 +122,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <ul>
 
 <form action="<?php echo $thisfile; ?>" method="get" name="smed">
@@ -162,6 +164,7 @@ echo '
   <input type="submit" value="'.$LDPut2Catalog.'">
    </form>';
 ?>
+
 </font>
 <hr>
 <?php

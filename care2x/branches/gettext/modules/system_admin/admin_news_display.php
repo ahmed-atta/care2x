@@ -100,6 +100,7 @@ $smarty->assign('LDBack', $LDBack);
  ob_start();
 
 ?>
+
 <script language="javascript">
 <!-- Script Begin
 function useDefault() {
@@ -139,6 +140,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <ul>
 <FONT  class="prompt"><p>
 <?php

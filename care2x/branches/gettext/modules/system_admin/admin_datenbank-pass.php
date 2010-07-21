@@ -66,6 +66,7 @@ if ($versand=="Abschicken")
 
 
 ?>
+
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <HTML>
 <HEAD>
@@ -138,6 +139,7 @@ echo '</STRONG></FONT><P>';
 
 }
 ?>
+
 <table  border=0 cellpadding=0 cellspacing=0>
 <tr>
 <?php if(!$passtag) echo'
@@ -207,6 +209,7 @@ Benutzername eingeben:<br></font>
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
+
 
 </FONT>
 

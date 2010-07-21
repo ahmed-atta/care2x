@@ -251,6 +251,7 @@ $smarty->assign('LDBack', $LDBack);
 
 ob_start();
 ?>
+
 <script  language="javascript">
 <!--
 
@@ -580,8 +581,10 @@ echo '
 			';
 }
 ?>
+
 <ul>
 <?php echo $LDPromptSearch ?>
+
 <form action="<?php echo $thisfile; ?>" method=post name=suchform onSubmit="return pruf(this)">
 <table border=0 cellspacing=0 cellpadding=1 bgcolor=#999999>
   <tr>

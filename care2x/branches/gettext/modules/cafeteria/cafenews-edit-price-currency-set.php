@@ -32,7 +32,9 @@ require('includes/inc_currency_set.php');
 <script language="javascript" src="<?php echo $root_path ?>js/check_currency_same_item.js">
 </script>
 <?php endif ?>
+
 <?php if($cfg['dhtml']) include($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
+
 </head>
 <body>
 <FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">

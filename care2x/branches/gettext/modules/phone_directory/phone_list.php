@@ -37,6 +37,7 @@ if( $ergebnis=$db->Execute($sql)){
    $rows=$ergebnis->RecordCount();
 }
 ?>
+
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
@@ -189,6 +190,7 @@ if($rows){
 		//echo "<INPUT type=submit  value=\"$LDShow\".></font></FORM>";		
 }// end of if(rows)
 ?>
+
 <?php if ($edit) : ?>
 <p>
 <FORM method="post" action="phone_edit.php" >
@@ -203,6 +205,7 @@ if($rows){
 <a href="<?php echo $sBreakUrl; ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0'); ?>></a>
 
 <?php endif; ?>
+
 </td>
 <td  class="passborder">&nbsp;</td>
 </tr>

@@ -74,6 +74,7 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <style type="text/css">
 	.a12_w {font-family: arial; color: navy; font-size:12; background-color:#ffffff}
 	.a12_gry {font-family: arial; color: navy; font-size:12; background-color:#000000}
@@ -105,6 +106,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <p>
 <ul>
 <font class="prompt">
@@ -128,6 +130,7 @@ if(is_object($encounter)){
 	echo "</font>";
 }
 ?>
+
 <table border=0>
 <tr>
 <td>

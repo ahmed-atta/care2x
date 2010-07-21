@@ -132,6 +132,7 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <ul>
 	 <table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
      <tr>
@@ -168,6 +169,7 @@ if($mode=='search'||$mode=='paginate'){
 			<table border=0 cellpadding=2 cellspacing=1> <tr class="wardlisttitlerow">';
 			
 ?>
+
      <td><b>
 	  <?php echo $pagen->makeSortLink($LDPatientNr,'encounter_nr',$oitem,$odir,$append);  ?></b></td>
       <td><b>

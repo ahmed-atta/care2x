@@ -57,6 +57,7 @@ function createTR($ld_text, $input_val, $colspan = 1)
 {
     global $toggle, $root_path;
 ?>
+
 <tr>
 <td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $ld_text ?>:
 </td>
@@ -74,6 +75,7 @@ $toggle=!$toggle;
 ob_start();
 
 ?>
+
 <script  language="javascript">
 <!-- 
 
@@ -103,6 +105,7 @@ function target(pn){
 
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 -->
 </script>
 <?php
@@ -255,7 +258,7 @@ if($mode=='show'){
 			$topdf= '<a href="'.$root_path.'modules/registration_admission/print/report.php'.URL_APPEND.'&enc='.$row['encounter_nr'].'&recnr='.$row['nr'].'&type_nr='.$this_type['nr'].'&LD_var='.$this_type['LD_var'].'" target=_blank><img '.createComIcon($root_path,'pdf_icon.gif','0','',TRUE).'></a>';
 
 			if (strlen($row['notes']) > $GLOBAL_CONFIG['notes_preview_maxlen']){
-				$smarty->assign('sDetails','<a href="javascript:popNotesDetails(\''.$row['nr'].'\',\''.strtr($subtitle,"' ","ï¿½+").'\',\''.$this_type['LD_var'].'\')"><img '.createComIcon($root_path,'info3.gif','0','',TRUE).'></a>');
+				$smarty->assign('sDetails','<a href="javascript:popNotesDetails(\''.$row['nr'].'\',\''.strtr($subtitle,"' ","´+").'\',\''.$this_type['LD_var'].'\')"><img '.createComIcon($root_path,'info3.gif','0','',TRUE).'></a>');
 				//'
 				$smarty->assign('sMakePdf',$topdf);
 			}elseif(!empty($row['notes'])){
@@ -295,6 +298,7 @@ if($mode=='show'){
 	ob_start();
 
 ?>
+
 <script language="JavaScript">
 <!-- Script Begin
 function chkform(d) {

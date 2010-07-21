@@ -6,6 +6,7 @@ function createTR($input_name, $ld_text, $input_val, $colspan = 2, $input_size =
 {
 
 ?>
+
 <tr>
 <td class="reg_item"><?php echo $ld_text ?>:
 </td>
@@ -21,6 +22,7 @@ function createTR($input_name, $ld_text, $input_val, $colspan = 2, $input_size =
 ob_start();
 
 ?>
+
 <script  language="javascript">
 <!--
 function popSearchWin(target,obj_val,obj_name) {
@@ -29,6 +31,7 @@ function popSearchWin(target,obj_val,obj_name) {
 }
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 -->
 </script>
 <?php
@@ -48,6 +51,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')){
 
   //  if(defined('SHOW_SEARCH_QUERY')&&SHOW_SEARCH_QUERY) echo $LDSearchKeyword.': '.$s2;
 ?>
+
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
@@ -60,11 +64,13 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')){
 <?php
 }
 ?>
+
 <?php
 
 if(isset($rows)&&$rows) {
 
  ?>
+
 <table border=0 cellpadding=0 cellspacing=0>
   <tr class="reg_list_titlebar">
       <td><b>
@@ -182,6 +188,7 @@ $img_female=createComIcon($root_path,'spf.gif','0');
 else
 {
 ?>
+
 <form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform">
 
 <table border=0 cellspacing=0 cellpadding=0>
@@ -192,6 +199,7 @@ createTR('pid', $LDAdmitNr,$pid);
 if(!isset($user_id)) $user_id='';
 createTR( 'user_id', $LDRegBy,$user_id);
 ?>
+
 <tr>
 <td class="reg_item"><?php echo $LDRegDate ?>:
 </td>
@@ -265,6 +273,7 @@ if(!isset($addr_str_nr)) $addr_str_nr='';
 if(!isset($addr_zip)) $addr_zip='';
 if(!isset($addr_city_town)) $addr_city_town='';
 ?>
+
 <tr>
 <td class="reg_item"><?php echo $LDBday ?>:
 </td>
@@ -387,6 +396,7 @@ if(!isset($ethnic_orig)) $ethnic_orig='';
 createTR('ethnic_orig', $LDEthnicOrigin,$ethnic_orig,2);
 }
 ?>
+
 </table>
 <p>
 <input type=hidden name="sid" value=<?php echo $sid; ?>>
@@ -410,6 +420,7 @@ $smarty->assign('sMainBlockIncludeFile','registration_admission/reg_plain.tpl');
 
 $smarty->display('common/mainframe.tpl');
 ?>
+
 <!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="patient_register.php<?php echo URL_APPEND; ?>&newdata=1&from=entry"><?php echo $LDPatientRegister ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="patient_register_search.php<?php echo URL_APPEND; ?>"><?php echo $LDPatientSearch ?></a><br>
 

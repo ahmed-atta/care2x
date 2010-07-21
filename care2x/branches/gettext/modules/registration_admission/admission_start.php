@@ -405,6 +405,7 @@ ob_start();
 if(isset($pid) && $pid){
 
 	?>
+
 <script language="javascript">
 <!--
 
@@ -460,6 +461,7 @@ function resolveLoc(){
 }
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 -->
 </script>
 <?php

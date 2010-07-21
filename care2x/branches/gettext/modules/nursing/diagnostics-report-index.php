@@ -56,6 +56,7 @@ if($dblink_ok)
 		{ echo "$LDDbNoLink<br>$sql<br>"; }
 
 ?>
+
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
@@ -66,6 +67,7 @@ require($root_path.'include/helpers/inc_js_gethelp.php');
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 ?>
+
 
 
 <script language="javascript">

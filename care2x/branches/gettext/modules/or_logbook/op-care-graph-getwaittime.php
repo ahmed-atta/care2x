@@ -105,6 +105,7 @@ if($mode=='save'){
 }
 
 ?>
+
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>

@@ -120,6 +120,7 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <script language="javascript" >
 <!-- 
 function show_order(d,D,t,r,i)
@@ -130,6 +131,7 @@ function show_order(d,D,t,r,i)
 }
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 // -->
 </script> 
 <?php
@@ -147,6 +149,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <ul>
 
 <p>

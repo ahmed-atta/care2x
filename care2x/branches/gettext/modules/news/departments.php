@@ -76,6 +76,7 @@ $smarty->assign('LDBack', $LDBack);
  ob_start();
 
 ?>
+
 <ul>
 	<table border=0 cellspacing=0 cellpadding=0>
 		<tr>
@@ -138,3 +139,4 @@ $smarty->assign('sMainFrameBlockData',$sTemp);
 $smarty->display('common/mainframe.tpl');
 
 ?>
+

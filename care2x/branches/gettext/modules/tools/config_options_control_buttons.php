@@ -79,6 +79,7 @@ $smarty->assign('LDBack', $LDBack);
 
  ob_start();
 ?>
+
 <FONT  color="#000066" size=4><?php echo $LDControlButtons; ?></font>
 <br>
 
@@ -88,6 +89,7 @@ $smarty->assign('LDBack', $LDBack);
 ?>
 <div class="prompt"><?php echo $LDChangeSaved ?></div><br>
 <?php } ?>
+
 <table border=0 cellspacing=1 cellpadding=2>
   <tbody>
   <tr >
@@ -134,6 +136,7 @@ while (false!==($theme = readdir($handle))) {
 }
 
 ?>
+
   <tr >
     <td colspan=4><br><input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?> border=0></td>
   </tr>

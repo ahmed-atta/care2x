@@ -76,6 +76,7 @@ var chgTag=false;
 <?php if($saveok) echo "var saveTag=true;"; 
 else echo "var saveTag=false;"; 
 ?>
+
 function chkform(d)
 {
  	if(!chgTag) return false;
@@ -134,6 +135,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 </script>
 <?php endif;?>
+
 <?php //foreach($argv as $v) echo "$v "; ?>
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
@@ -190,6 +192,7 @@ echo '
 				<input type="hidden" name="qadres'.$i.'" value="'.trim($c[$i]).'">';
 	}
 ?>
+
           
         </td>
     <td><input type="button" value="<?php echo $LDDelete ?> >>" onClick="delQadd()">

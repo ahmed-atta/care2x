@@ -137,6 +137,7 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <script language="javascript" >
 <!-- 
 	
@@ -200,6 +201,7 @@ ob_start();
   <hr color=#000080>
    &nbsp; <FONT  color="#800000">'.$_COOKIE[$local_user.$sid].'</font>';
 ?>
+
 <?php if($task=="newadd") : ?>
 <p><ul>
 <form name=newform action="<?php echo $thisfile ?>" method=post onSubmit="return chkAddress(this)">
@@ -249,6 +251,7 @@ ob_start();
 </ul>
 <hr color=#000080>
 <?php endif; ?>
+
  <?php
 // ******************************** show address book***************************************
 

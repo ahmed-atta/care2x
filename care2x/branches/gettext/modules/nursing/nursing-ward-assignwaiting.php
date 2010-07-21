@@ -139,6 +139,7 @@ $smarty->assign('LDBack', $LDBack);
 
  ob_start();
 ?>
+
 <script language="javascript">
 <!--
   var urlholder;
@@ -249,6 +250,7 @@ ob_start();
 
 $smarty->display('nursing/basic_data_admit.tpl');
 ?>
+
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 	<tr valign=top >
 		<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
@@ -507,6 +509,7 @@ if($ward_ok){
 }
 
 ?>
+
 <p>
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>></a>
 <p>

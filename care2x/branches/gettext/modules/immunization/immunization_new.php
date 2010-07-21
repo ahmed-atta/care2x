@@ -93,6 +93,7 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <script language="javascript">
 <!-- 
 function check(d)
@@ -132,6 +133,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
  <ul>
 <?php
 if(!empty($mode)){ 

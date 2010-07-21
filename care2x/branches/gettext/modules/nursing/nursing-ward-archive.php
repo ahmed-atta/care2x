@@ -87,6 +87,7 @@ $smarty->assign('LDBack', $LDBack);
  */
  ob_start();
 ?>
+
 <script language="javascript" >
 <!-- 
 var urlholder;
@@ -134,6 +135,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <ul>
 <FONT  class="prompt">
 <?php echo $LDClkDate ?>
@@ -201,6 +203,7 @@ for($x=0;$x<6;$x++)
 echo '</table>';
 echo '</td></tr></table>';
 ?>
+
 <br><FONT    SIZE=-1  FACE="Arial" color=navy>
 
 <form name="direct" method=post  onSubmit="return update()" >

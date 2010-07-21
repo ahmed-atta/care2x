@@ -47,6 +47,7 @@ if(isset($mode) && ($mode=='search')) {
 }
 
 ?>
+
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
@@ -149,6 +150,7 @@ function gethelp(x,s,x1,x2,x3)
 				</table>";
 }
 ?>
+
 <form method="post" action="<?php echo $thisfile; ?>" name="searchwin">
 <table  border=1 cellpadding="20">
 <tr>
@@ -193,6 +195,7 @@ function gethelp(x,s,x1,x2,x3)
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
+
 
 </FONT>
 
