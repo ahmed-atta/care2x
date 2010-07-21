@@ -36,7 +36,6 @@ function chkForm(d)
 </script>
 
 <?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
-
 </head>
 <body>
 <form name="selectform" method="get" action="cafenews-edit.php" onSubmit="return chkForm(this)">
