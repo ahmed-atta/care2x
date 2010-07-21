@@ -136,7 +136,6 @@ function popinfo(l,f,b)
 	$photo_filename=$person1['photo_filename'];
 	include($root_path.'include/helpers/inc_photo_filename_resolve.php');
 ?>
-
 <font face=verdana,arial size=+1 color=maroon>
 <b>
 <?php
@@ -235,7 +234,6 @@ echo ucfirst($person2['name_last']).', '.ucfirst($person2['name_first']);
 <p>
 
 <?php } ?>
-
  <?php
  if(!($person1||$person2)){
  ?>
