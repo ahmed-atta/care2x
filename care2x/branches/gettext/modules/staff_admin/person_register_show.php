@@ -79,7 +79,7 @@ require('./gui_bridge/default/gui_tabs_staff_reg.php');
 
 	# Display the person's demographic data using the object class modules/registration_admission/model/class_gui_person_show.php
 
-	require_once($root_path.'include/core/modules/registration_admission/model/class_gui_person_show.php');
+	require_once($root_path.'modules/registration_admission/model/class_gui_person_show.php');
 	$person = & new GuiPersonShow;
 	$person->setPID($pid);
 	$person->display();
