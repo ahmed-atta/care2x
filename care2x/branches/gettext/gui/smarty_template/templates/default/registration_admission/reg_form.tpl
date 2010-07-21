@@ -71,7 +71,7 @@
 						{{$sBdayInput}}&nbsp;{{$sCrossImg}} {{$sDeathDate}}
 					</td>
 					<td class="reg_input_must">
-						{{$LDSex}} {{$sSexM}} {{$LDMale}}&nbsp;&nbsp; {{$sSexF}} {{$LDFemale}}
+						{{$LDSex}} <label>{{$sSexM}}{{$LDMale}}</label> &nbsp;&nbsp; <label>{{$sSexF}}{{$LDFemale}}</label>
 					</td>
 				</tr>
 
@@ -81,7 +81,7 @@
 					{{$LDBloodGroup}}
 				</td>
 				<td colspan=2 class="reg_input">
-					{{$sBGAInput}}{{$LDA}}  &nbsp;&nbsp; {{$sBGBInput}}{{$LDB}} &nbsp;&nbsp; {{$sBGABInput}}{{$LDAB}}  &nbsp;&nbsp; {{$sBGOInput}}{{$LDO}}
+					<label>{{$sBGAInput}}{{$LDA}}</label>  &nbsp;&nbsp; <label>{{$sBGBInput}}{{$LDB}}</label> &nbsp;&nbsp; <label>{{$sBGABInput}}{{$LDAB}}</label>  &nbsp;&nbsp;<label>{{$sBGOInput}}{{$LDO}}</label>
 				</td>
 				</tr>
 			{{/if}}
@@ -92,11 +92,11 @@
 					{{$LDCivilStatus}}
 				</td>
 				<td colspan=2 class="reg_input">
-					{{$sCSSingleInput}}{{$LDSingle}}  &nbsp;&nbsp;
-					{{$sCSMarriedInput}}{{$LDMarried}} &nbsp;&nbsp;
-					{{$sCSDivorcedInput}}{{$LDDivorced}}  &nbsp;&nbsp;
-					{{$sCSWidowedInput}}{{$LDWidowed}} &nbsp;&nbsp;
-					{{$sCSSeparatedInput}}{{$LDSeparated}}
+					<label>{{$sCSSingleInput}}{{$LDSingle}}</label>  &nbsp;&nbsp;
+					<label>{{$sCSMarriedInput}}{{$LDMarried}}</label> &nbsp;&nbsp;
+					<label>{{$sCSDivorcedInput}}{{$LDDivorced}}</label>  &nbsp;&nbsp;
+					<label>{{$sCSWidowedInput}}{{$LDWidowed}}</label> &nbsp;&nbsp;
+					<label>{{$sCSSeparatedInput}}{{$LDSeparated}}</label>
 				</td>
 				</tr>
 			{{/if}}
@@ -140,7 +140,7 @@
 				<td colspan=2 >
 					{{$sErrorInsClass}} 
 					{{foreach from=$sInsClasses item=InsClass}}
-						{{$InsClass}}
+						<label>{{$InsClass}}</label>
 					{{/foreach}}
 				</td>
 			
