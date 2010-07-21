@@ -27,7 +27,6 @@ $dbtable='care_tech_repair_job';
     }else {echo "<p>$sq $LDDbNoRead<br>"; };
 
 ?>
-
 <?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>
@@ -139,7 +138,6 @@ else if($showlist)
 	{
 	    echo '<img '.createComIcon($root_path,'butft2_d.gif').'>';
 ?>
-
 <font face="Verdana, Arial" size=2 color=#800000>
 <MARQUEE dir=ltr scrollAmount=3 scrollDelay=120 width=150
       height=10 align="middle"><b><?php echo $LDImRepabot ?>...</b></MARQUEE></font>

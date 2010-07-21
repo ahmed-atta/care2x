@@ -141,7 +141,6 @@ $smarty->assign('LDBack', $LDBack);
  ob_start();
 
 ?>
-
 <script language="javascript" >
 <!-- 
 
