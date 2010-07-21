@@ -148,7 +148,6 @@ if(isset($bShowImageJApplet) && $bShowImageJApplet){
 	if($t==1){
 
 ?>
-
 <img src="<?php	echo $picsource; ?>" <?php if($preview_size) echo 'width="'.$preview_size.'"'; else echo $wh; ?> border=0  name="preview"
 <?php 
 
