@@ -60,7 +60,6 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
-
 <table width=100% border=0 cellspacing="0" cellpadding=0>
 
 <?php
@@ -68,7 +67,6 @@ ob_start();
 $tab_bot_line='#66ee66'; // Set the horizontal bottom line color
 require('./gui_bridge/default/gui_tabs_staff_reg.php');
 ?>
-
 </table>
 
 <ul>
@@ -78,7 +76,6 @@ require('./gui_bridge/default/gui_tabs_staff_reg.php');
 if(isset($origin) && $origin=='pass')
 {
 ?>
-
 <table border=0>
   <tr>
     <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_l.gif','0') ?>></td>
@@ -112,7 +109,6 @@ $psearch->setPrompt($LDEnterPersonSearchKey);
 $psearch->display();
 
 ?>
-
 </ul>
 <?php
 

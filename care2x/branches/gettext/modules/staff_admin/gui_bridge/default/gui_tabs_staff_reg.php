@@ -5,7 +5,6 @@ if(!isset($notabs)||!$notabs){
 	if($target=='person_reg') $tab_bot_line='reg_div';
 		else $tab_bot_line='adm_div';
 ?>
-
 <!-- Tabs  -->
 <tr>
 <td colspan=3><?php if($target=="staff_reg") $img='add_employee_blue.gif'; //echo '<img '.createLDImgSrc($root_path,'such-b.gif','0').' alt="'.$LDSearch.'">';

@@ -42,7 +42,6 @@ function Spacer()
                 </TR>
 			   
            <?php Spacer(); ?>
-
 				  
               <TR bgColor=#eeeeee>  <td align=center><img <?php echo createComIcon($root_path,'violet_phone.gif','0') ?>></td>
                 <TD vAlign=top > 
