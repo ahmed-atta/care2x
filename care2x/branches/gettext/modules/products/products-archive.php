@@ -182,7 +182,6 @@ $smarty->assign('LDBack', $LDBack);
  ob_start()
 
 ?>
-
 <script language="javascript" >
 <!--
 
@@ -220,7 +219,6 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
-
 <ul>
 <FONT size=3 color="#990000">
 <?php if($from=="archivepass")
@@ -237,7 +235,6 @@ echo ' '.$_COOKIE[$local_user.$sid];
 <p>
 
 <?php require('includes/inc_products_archive_search_form.php'); ?>
-
 <hr width=80%>
 <?php 
 if($linecount>0){
