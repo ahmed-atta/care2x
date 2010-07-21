@@ -98,8 +98,9 @@ ob_start();
   <tr>
     <td><FONT  color="#000099" FACE="verdana,arial" size=2></td>
     <td class="wardlisttitlerow"><FONT  color="#000099" FACE="verdana,arial" size=2><b><?php echo $LDFrameResizable; ?></b></td>
-    <td>	<input type="radio" name="bg_border" value="1" <?php if($GLOBALCONFIG['gui_frame_left_nav_border']) echo 'checked'; ?>> <?php echo $LDYes; ?> 	<input type="radio" name="bg_border" value="0" 
-	<?php if(!$GLOBALCONFIG['gui_frame_left_nav_border']) echo 'checked'; ?>> <?php echo $LDNo; ?>
+    <td><label><input type="radio" name="bg_border" value="1" <?php if($GLOBALCONFIG['gui_frame_left_nav_border']) echo 'checked'; ?>> <?php echo $LDYes; ?></label> 	
+    <label><input type="radio" name="bg_border" value="0" 
+	<?php if(!$GLOBALCONFIG['gui_frame_left_nav_border']) echo 'checked'; ?>></label> <?php echo $LDNo; ?>
         </td>
   </tr>
   <tr>
@@ -115,8 +116,9 @@ ob_start();
   <tr>
     <td><FONT  color="#000099" FACE="verdana,arial" size=2></td>
     <td class="wardlisttitlerow"><FONT  color="#000099" FACE="verdana,arial" size=2><b><?php echo $LDAllowMultiLang; ?></b></td>
-    <td>	<input type="radio" name="multilang" value="0" <?php if(!$GLOBALCONFIG['language_single']) echo 'checked'; ?>> <?php echo $LDYes; ?> 	<input type="radio" name="multilang" value="1" 
-	<?php if($GLOBALCONFIG['language_single']) echo 'checked'; ?>> <?php echo $LDNo; ?>
+    <td><label><input type="radio" name="multilang" value="0" <?php if(!$GLOBALCONFIG['language_single']) echo 'checked'; ?>> <?php echo $LDYes; ?></label> 	
+    <label><input type="radio" name="multilang" value="1" 
+	<?php if($GLOBALCONFIG['language_single']) echo 'checked'; ?>> <?php echo $LDNo; ?></label>
         </td>
   </tr>
   <tr>

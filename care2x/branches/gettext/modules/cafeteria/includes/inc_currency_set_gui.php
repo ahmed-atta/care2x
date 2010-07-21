@@ -1,5 +1,5 @@
 <script language="javascript">
-<!-- 
+
 function deleteCurrency(n,s)
 {
 	if(s=="main")
@@ -12,11 +12,9 @@ function deleteCurrency(n,s)
 		}
 
 }
- -->
+
 </script>
 
-
-<ul>
 
 <FONT  COLOR="<?php print $cfg['top_txtcolor']; ?>"  SIZE=+2>
 <?php echo $LDSetCurrency ?> </FONT><FONT  class="prompt"><p>

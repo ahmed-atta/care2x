@@ -111,8 +111,8 @@ echo $LDEnterInfo;
 <tr valign=top>
 	<td class="wardlisttitlerow" align="right"><FONT  color="#0000cc"><b><nobr><?php echo $LDTimeOutActive ?></nobr></b> </FONT></td>
 	<td class="wardlistrow1">
-		<input type="radio" name="timeout_inactive" value="0" <?php if(!$GLOBAL_CONFIG['timeout_inactive']) echo 'checked' ?>> <nobr><?php echo $LDYes ?>&nbsp;&nbsp;&nbsp;
-		<input type="radio" name="timeout_inactive" value="1" <?php if($GLOBAL_CONFIG['timeout_inactive']) echo 'checked' ?>> <?php echo $LDNo ?></nobr>
+		<label><input type="radio" name="timeout_inactive" value="0" <?php if(!$GLOBAL_CONFIG['timeout_inactive']) echo 'checked' ?>> <nobr><?php echo $LDYes ?></label>&nbsp;&nbsp;&nbsp;
+		<label><input type="radio" name="timeout_inactive" value="1" <?php if($GLOBAL_CONFIG['timeout_inactive']) echo 'checked' ?>> <?php echo $LDNo ?></label>
 	</td>  
 	<td class="wardlistrow2"><?php echo $LDTimeOutTxt ?></td>
 	</tr>
