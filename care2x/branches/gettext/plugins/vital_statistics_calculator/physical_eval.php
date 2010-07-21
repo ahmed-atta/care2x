@@ -318,6 +318,7 @@ BMI Interpretation: http://www.cdc.gov/nccdphp/dnpa/bmi/bmi-adult.htm
 			$BPAgeInt = "<font color=\"green\">".$LDVitalCalcTxt[22]."</font>";
 		}
 ?>
+
 <div align="center">
   <center>
 
@@ -474,6 +475,6 @@ BMI Interpretation: http://www.cdc.gov/nccdphp/dnpa/bmi/bmi-adult.htm
   </font>
   </p>
 </form>
-<font face="Verdana" size="1">ï¿½Sudisa - 2004 to 2014</font></DIV>
+<font face="Verdana" size="1">©Sudisa - 2004 to 2014</font></DIV>
 </BODY>
 </HTML>

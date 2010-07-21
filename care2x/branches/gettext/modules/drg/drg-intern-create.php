@@ -79,6 +79,7 @@ if(isset($mode)){
 
 if($saveok&&$mode=='linkgroup'){
 ?>
+
     <script language="javascript" >
     window.opener.parent.location.replace('drg-composite-start.php?sid=<?php echo "$sid&lang=$lang&pn=$pn&opnr=$opnr&group_nr=$group_nr&edit=$edit&ln=$ln&fn=$fn&bd=$bd&dept_nr=$dept_nr&oprm=$oprm&y=$y&m=$m&d=$d&display=composite&newsave=1"; ?>');
     //window.opener.parent.INTERN.location.reload();
@@ -162,6 +163,7 @@ if($saveok){
 }
 eval("echo $tp;");
 ?>
+
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="pn" value="<?php echo $pn; ?>">

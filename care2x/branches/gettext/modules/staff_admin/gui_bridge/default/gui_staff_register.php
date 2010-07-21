@@ -42,6 +42,7 @@ $smarty->assign('LDBack', $LDBack);
 
 ob_start();
 ?>
+
 <script  language="javascript">
 <!--
 function chkForm(d){
@@ -67,6 +68,7 @@ function chkForm(d){
 }
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 -->
 </script>
 <?php
@@ -81,6 +83,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 </HEAD>
 
 
@@ -106,6 +109,7 @@ $target='staff_reg';
 include('./gui_bridge/default/gui_tabs_staff_reg.php') 
 
 ?>
+
 <tr>
 <td colspan=3>
 
@@ -154,6 +158,7 @@ if(!$pid&&!$staff_nr){
 }else{
 
 ?>
+
 <form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform" onSubmit="return chkForm(this)">
 
 <table border="0" cellspacing=1 cellpadding=0 width=450>
@@ -175,6 +180,7 @@ if($error)
 <?php
 }
  ?>
+
 
 <tr>
 <td  class="adm_item"><?php echo $LDstaffNr ?>:
@@ -260,6 +266,7 @@ if($GLOBAL_CONFIG['patient_name_middle_show'])
 <?php
 }
 ?>
+
 <tr>
 <td class="adm_item"><?php echo $LDBday ?>:
 </td>
@@ -456,6 +463,7 @@ echo $calendar->show_calendar($calendar,$date_format,'contract_end',$contract_en
 
 <input name="multiple_employer" type="radio"  value="1"  <?php  if($multiple_employer) echo 'checked'; ?>><?php  echo $LDYes; ?>
 <input name="multiple_employer" type="radio"  value="0"  <?php  if(!$multiple_employer)  echo 'checked'; ?>><?php  echo $LDNo; ?>
+
 </td>
 </tr>
 
@@ -489,6 +497,7 @@ echo '<input type="hidden" name="forcesave" value="1"><input  type="submit" valu
 </form>
 
 <?php if (!($newdata)) : ?>
+
 <form action=<?php echo $thisfile; ?> method=post>
 <input type="hidden" name="sid" value=<?php echo $sid; ?>>
 <input type="hidden" name="staff_nr" value="<?php echo $staff_nr; ?>">

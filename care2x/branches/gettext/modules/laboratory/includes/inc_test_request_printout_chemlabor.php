@@ -20,6 +20,7 @@
        <?php echo $LDHospitalName ?><br>
        <?php echo $LDCentralLab ?><p><font size=2>
 	   <?php echo $LDRoomNr ?>
+
 	    <?php 
 		   if($read_form) echo stripslashes($stored_request['room_nr']);
 
@@ -371,6 +372,7 @@ for($n=0;$n<8;$n++)
 <?php
 }
 ?>
+
   <tr>
     <td colspan=10 align="right">
 	<?php

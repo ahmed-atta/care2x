@@ -284,6 +284,7 @@ if ($errorname) {
 	echo $LDName ;
 }
 ?>
+
 <?php
 
 if ($edit) {
@@ -302,6 +303,7 @@ if ($edit) {
 <?php
 }
 ?>
+
 <br>
 </td>
 <td>
@@ -312,6 +314,7 @@ if ($erroruser) {
 	echo $LDUserId ;
 }
 ?>
+
 <?php
 if ($edit)
 	echo '<input type="hidden" name="userid" value="' . $user [ 'login_id' ] . '">' . '<b>' . $user [ 'login_id' ] . '</b>' ; else {
@@ -320,6 +323,7 @@ if ($edit)
 	<?php
 }
 ?>
+
 <br>
 </td>
 <td>
@@ -330,6 +334,7 @@ if ($errorpass) {
 	echo $LDPassword ;
 }
 ?>
+
 <?php
 if ($edit)
 	echo '<input type="hidden" name="pass" value="*">****' ; else {
@@ -338,6 +343,7 @@ if ($edit)
 	<?php
 }
 ?>
+
 <br>
 </td>
 </tr>

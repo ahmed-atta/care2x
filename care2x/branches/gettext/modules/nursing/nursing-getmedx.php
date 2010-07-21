@@ -168,6 +168,7 @@ $charts_obj= new Charts;
 		$count=$medis->RecordCount();
 	}
 ?>
+
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
@@ -176,6 +177,7 @@ $charts_obj= new Charts;
 require($root_path.'include/helpers/inc_js_gethelp.php');
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
+
 <script type="text/javascript" src="../../js/scriptaculous/lib/prototype.js"></script>
 <script type="text/javascript" src="../../js/scriptaculous/src/effects.js"></script>
 <script type="text/javascript" src="../../js/scriptaculous/src/controls.js"></script>
@@ -527,6 +529,7 @@ li.selected {
 if($count){
 	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/tableHeaderbg3.gif"';
 ?>
+
 <?php
     // Load the editor functions
 	include_once($root_path.'modules/news/includes/inc_editor_fx.php');
@@ -570,6 +573,7 @@ if($count){
 					    	?>
 					    >
 					    <FONT SIZE=-1  FACE="Arial"><?php echo $row['article']; ?>
+
 					    </font></td>
 					    <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['dosage']; ?></font></td>
 					    <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['admin_time'];?></font></td>
@@ -793,6 +797,7 @@ src="../../gui/img/common/default/qbar_0_rose.gif" border=0 width="10" height="4
 <?php if($saved || $repeated)  : ?>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 <?php else : ?>
+
 <p><a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
   <?php endif ; ?>
 <script type="text/javascript">

@@ -61,6 +61,7 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <ul>
 <FONT class="prompt"><p>
 <?php

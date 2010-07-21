@@ -29,24 +29,24 @@ $fieldnames=array("no.","Pat.nummer","Anrede","Name","Vorname","Geburstdatum");
 										for ($i=$itemname+1;$i<=$linecount;$i++)
 										{
 											$sql='UPDATE '.$dbtable.' SET care_admission_patient_item="'.($i*10000).'" WHERE care_admission_patient_item="'.$i.'"';	
-											if (!($db->Execute($sql))) echo $sql."  Vorbereitung der Daten zum Lï¿½schen ist gescheitert.";
+											if (!($db->Execute($sql))) echo $sql."  Vorbereitung der Daten zum Löschen ist gescheitert.";
 										}
 									// then delete the  data
 										$sql='DELETE FROM '.$dbtable.' WHERE care_admission_patient_item="'.$itemname.'"';	
-										if (!($db->Execute($sql))) echo $sql."  Das Lï¿½schen der Daten ist gescheitert.";
+										if (!($db->Execute($sql))) echo $sql."  Das Löschen der Daten ist gescheitert.";
 
 									// then correctly itemize the remaining data
 										for ($i=$itemname+1;$i<=$linecount;$i++)
 										{
 											$sql='UPDATE '.$dbtable.' SET care_admission_patient_item="'.($i-1).'" WHERE care_admission_patient_item="'.($i*10000).'"';	
-											if (!($db->Execute($sql))) echo $sql."  Vorbereitung der Daten zum Lï¿½schen ist gescheitert.";
+											if (!($db->Execute($sql))) echo $sql."  Vorbereitung der Daten zum Löschen ist gescheitert.";
 										}	
 										
 									}else 									
 										// if item is the last then simply delete the  data
 										{
 											$sql='DELETE FROM '.$dbtable.' WHERE care_admission_patient_item="'.$itemname.'"';	
-											if (!($db->Execute($sql))) echo $sql."  Das Lï¿½schen der Daten ist gescheitert.";										
+											if (!($db->Execute($sql))) echo $sql."  Das Löschen der Daten ist gescheitert.";										
 										}
 
 									// check if the pagecount is reduced
@@ -73,9 +73,10 @@ $fieldnames=array("no.","Pat.nummer","Anrede","Name","Vorname","Geburstdatum");
 
 
 ?>
+
 <?php html_rtl($lang); ?>
 <HEAD>
- <TITLE>EDV - Zugangsberechtigunge lï¿½schen</TITLE>
+ <TITLE>EDV - Zugangsberechtigunge löschen</TITLE>
 </HEAD>
 
 <BODY BACKGROUND="leinwand.gif">
@@ -88,7 +89,7 @@ $fieldnames=array("no.","Pat.nummer","Anrede","Name","Vorname","Geburstdatum");
 <table width=100% border=1>
 <tr>
 <td bgcolor="navy" >
-<FONT  COLOR="white"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;Patientendaten lï¿½schen</STRONG></FONT>
+<FONT  COLOR="white"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;Patientendaten löschen</STRONG></FONT>
 
 
 
@@ -106,7 +107,7 @@ $fieldnames=array("no.","Pat.nummer","Anrede","Name","Vorname","Geburstdatum");
 <tr nowrap>
 <td bgcolor="#ffffaa">
 <p><FONT SIZE=2  FACE=Arial><img src="../img/exclaim.gif"><br>
-Wollen Sie die folgende Patientendaten wirklich lï¿½schen?<p>
+Wollen Sie die folgende Patientendaten wirklich löschen?<p>
 
 <table border="0" cellpadding="2" cellspacing="1">
 <tr bgcolor=orange nowrap>
@@ -128,6 +129,7 @@ for($i=0;$i<(sizeof($fieldnames));$i++)
    	}
 
 ?>
+
 </tr>
 
 </table>
@@ -141,7 +143,7 @@ for($i=0;$i<(sizeof($fieldnames));$i++)
 <input type=hidden name=displaysize value="<?php echo $displaysize ?>">
 <input type=hidden name=linecount value="<?php echo $linecount ?>">
 <input type=hidden name=pagecount value="<?php echo $pagecount ?>">
-<img src="../img/delete.gif"> <INPUT type="submit" name="versand" value="Ja, lï¿½schen"></font></FORM>
+<img src="../img/delete.gif"> <INPUT type="submit" name="versand" value="Ja, löschen"></font></FORM>
 
 <FORM  method=post action="<?php echo $breakfile ?>" >
 <input type=hidden name=route value="validroute">

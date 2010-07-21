@@ -286,6 +286,7 @@ if ($drg){
 	}
 }
 ?>
+
 </table>
 <?php if(!$showonly&&($linecount>0)) { ?>
 <input type="hidden" name="lastindex" value="<?php echo $idx ?>">
@@ -318,6 +319,7 @@ if ($drg){
 }
 ?>
 <?php if(($linecount>15)&&!$showonly) { ?>
+
 <p>
 <FORM action="<?php echo $thisfile ?>" method="post" onSubmit="return pruf(this)" name="form2">
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>

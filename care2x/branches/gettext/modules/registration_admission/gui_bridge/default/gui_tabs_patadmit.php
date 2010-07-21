@@ -57,3 +57,4 @@ $smarty->assign('sRegDividerClass',$sDivClass);
 if(!empty($subtitle)) $smarty->assign('sSubTitle',":: $subtitle");
 
 ?>
+

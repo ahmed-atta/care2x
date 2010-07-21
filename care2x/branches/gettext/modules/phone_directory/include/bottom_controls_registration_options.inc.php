@@ -13,6 +13,7 @@ if($current_encounter){
 <?php
 }
 ?>
+
 <form action="patient_register.php" method=post>
 <input type=submit value="<?php echo $LDNewForm ?>">
 <input type=hidden name="sid" value=<?php echo $sid; ?>>

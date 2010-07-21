@@ -81,6 +81,7 @@ if(isset($tid)&&$tid&&isset($dept)&&$dept)
 			//echo $sql;
 }
 ?>
+
 <?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>

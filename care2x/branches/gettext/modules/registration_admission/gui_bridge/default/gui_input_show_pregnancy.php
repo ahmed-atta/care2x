@@ -1,6 +1,7 @@
 <?php
 if($rows) $pregnancy=$pregs->FetchRow();
 ?>
+
 <script language="JavaScript">
 <!-- Script Begin
 function chkform(d) {
@@ -251,6 +252,7 @@ $TP_DBY=$_SESSION['sess_user_name'];
 $tp_preg=&$TP_obj->load('registration_admission/tp_input_show_pregnancy.htm');
 eval("echo $tp_preg;");
 ?>
+
  <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="encounter_nr" value="<?php echo $_SESSION['sess_en']; ?>">

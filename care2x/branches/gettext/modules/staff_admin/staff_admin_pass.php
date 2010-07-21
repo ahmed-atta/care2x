@@ -60,6 +60,7 @@ if(isset($_SESSION['sess_user_origin'])) $_SESSION['sess_user_origin']='';
 
 require($root_path.'include/helpers/inc_passcheck_head.php');
 ?>
+
 <BODY  onLoad="document.passwindow.userid.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
@@ -73,6 +74,7 @@ echo '
 <img '.createComIcon($root_path,'persons.gif','0','top').'><FONT  COLOR="'.$cfg['top_txtcolor'].'"  SIZE=6  FACE="verdana"> <b>'.$buf.'</b></font>';
 
  ?>
+
   
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>

@@ -399,6 +399,7 @@ $smarty->assign('LDBack', $LDBack);
  */
  ob_start();
 ?>
+
 <script  language="javascript">
 <!-- 
 var iscat=true;
@@ -495,6 +496,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <table width=100% border=0 cellspacing=0 cellpadding=0>
 
 <?php require('./gui_tabs_op_docu.php'); ?>
@@ -512,6 +514,7 @@ if(($mode=='search'||$mode=='paginate')&&$rows){
 	$bgimg='tableHeaderbg3.gif';
 	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 ?>
+
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
@@ -618,6 +621,7 @@ echo '
 	<?php
 	}
 	?>
+
 	
 <?php 
 if($rows || $err_data){
@@ -742,6 +746,7 @@ switch($result['status'])
 		case "amb": echo $LDAmbulant; break;
 	}
 ?>
+
 </font>
 <br>
 <FONT color="#000099">
@@ -877,12 +882,14 @@ else
 <?php
 }
 ?>
+
 </table>
 
 <?php 
 if($rows || $err_data) 
 {
 ?>
+
 <p>
  <FONT color=red><?php if($err_op_start) echo '*'; ?>
 <?php 
@@ -913,14 +920,17 @@ echo createElement('op_room',$op_room);
 <p>
 
 <?php if($mode=='saveok') : ?>
+
  <input  type="image" <?php echo createLDImgSrc($root_path,'update_data.gif','0','absmiddle') ?>  alt="<?php echo $LDSave ?>">
 <input type="button" value="<?php echo $LDStartNewDocu ?>" onclick="window.location.replace('op-docu-start.php<?php echo URL_REDIRECT_APPEND."&target=$target&dept_nr=$dept_nr"; ?>&mode=dummy')">
 
 <?php else : ?>
+
 <input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  alt="<?php echo $LDSave ?>">
 <a href="javascript:document.opdoc.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetAll ?>" ></a>
 
 <?php endif ?>
+
 <input type="hidden" name="mode" value="<?php if($mode=='saveok') echo 'update'; else echo 'save' ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
@@ -936,9 +946,11 @@ echo createElement('op_room',$op_room);
 }
 ?>
 
+
 <?php
 } 
 ?>
+
 <p>
 </ul>
 

@@ -389,3 +389,4 @@ class YellowPaper extends Core {
 	}
 }
 ?>
+

@@ -51,6 +51,7 @@ $news=&$newsobj->getNews($nr);
 
  ob_start();
 ?>
+
 <script language="javascript" >
 function editcafe()
 {

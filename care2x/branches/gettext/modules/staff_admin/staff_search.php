@@ -238,6 +238,7 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <table width=100% border=0 cellspacing="0" cellpadding=0>
 
 <!-- Load tabs -->
@@ -247,6 +248,7 @@ $target='staff_search';
  include('./gui_bridge/default/gui_tabs_staff_reg.php') 
 
 ?>
+
 </table>
 <ul>
 	 <table border=0 cellpadding=10 bgcolor="<?php echo $entry_border_bgcolor ?>">
@@ -282,6 +284,7 @@ if($mode=='search'||$mode=='paginate'){
 			<table border=0 cellpadding=2 cellspacing=1> <tr class="wardlisttitlerow">';
 			
 ?>
+
       <td><b>
 	  <?php 
 	  	if($oitem=='nr') $flag=TRUE;
@@ -395,6 +398,7 @@ if($mode=='search'||$mode=='paginate'){
 	}
 }
 ?>
+
 </ul>
 
 <?php

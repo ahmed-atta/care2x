@@ -339,6 +339,7 @@ $smarty->assign('sOnLoadJs',$sTemp .'"');
  # collect extra javascript code
  ob_start();
 ?>
+
 <style type="text/css">
 
 .fva0_ml10 {font-family: verdana,arial; font-size: 10; margin-left: 10; color:#000000;}
@@ -414,6 +415,7 @@ ob_start();
 if(!$noresize){
 
 ?>
+
 <script>	
       window.moveTo(0,0);
 	 window.resizeTo(1000,740);
@@ -422,6 +424,7 @@ if(!$noresize){
 <?php 
 }
 ?>
+
 <ul>
 
 <?php
@@ -441,6 +444,7 @@ if($edit){
 }elseif(!$read_form && !$no_proc_assist){
 
 ?>
+
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
@@ -451,6 +455,7 @@ if($edit){
 <?php
 }
 ?>
+
 <!--  Here starts the table of the form  -->
   <table   cellpadding=0 cellspacing=0 border=0 width=745>
 		
@@ -663,6 +668,7 @@ for($n=0;$n<8;$n++)
 <?php
 }
 ?>
+
  </table>
  
  <!-- Barcode for the batch nr  -->
@@ -681,6 +687,7 @@ for($n=0;$n<8;$n++)
 
     if($in_cache)   echo '<img src="'.$root_path.'cache/barcodes/form_'.$batch_nr.'.png"  border=0>';
 ?>
+
 <!--  Table for the day and month code -->
    <table border=0 cellspacing=0 cellpadding=0>
    <tr align="center">
@@ -772,6 +779,7 @@ for($n=0;$n<8;$n++)
 	for($i=1;$i<13;$i++)
 	   echo 	 "<td><font size=1 face=\"arial\" color= \"#990000\">".$LDShortMonth[$i]."&nbsp;</td>";
 	?>
+
    </tr>
    <tr>
 	<?php
@@ -833,11 +841,13 @@ require($root_path."modules/laboratory/includes/inc_test_request_controls.php");
 require($root_path."modules/laboratory/includes/inc_test_request_hiddenvars.php");
 
 ?>
+
 </form>
 
 <?php
 }
 ?>
+
 </ul>
 
 <?php

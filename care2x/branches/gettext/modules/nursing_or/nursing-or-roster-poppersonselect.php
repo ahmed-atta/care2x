@@ -22,6 +22,7 @@ $nurses=&$pers_obj->getNursesOfDept($dept_nr);
 
 $wkday=date("w",mktime(0,0,0,$month,$elemid+1,$year));
 ?>
+
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
@@ -63,6 +64,7 @@ function weekday($daynum,$mon,$yr){
 	}
 
 ?>
+
 </script>
 
 <STYLE type=text/css>

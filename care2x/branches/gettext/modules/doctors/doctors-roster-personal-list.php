@@ -178,6 +178,7 @@ $smarty->assign('LDBack', $LDBack);
  ob_start();
 
 ?>
+
 <script language="javascript">
 <!-- 
   var urlholder;
@@ -208,6 +209,7 @@ function deleteItem(nr){
  ob_start();
 
 ?>
+
 <ul>
 <p><br>
 <font face="arial,verdana,helvetica" size=2>

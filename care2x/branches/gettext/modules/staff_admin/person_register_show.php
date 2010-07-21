@@ -63,6 +63,7 @@ $smarty->assign('LDBack', $LDBack);
 
 ob_start();
 ?>
+
 <table width=100% border=0 cellspacing="0"  cellpadding=0 >
 
 <?php
@@ -70,6 +71,7 @@ ob_start();
 $tab_bot_line='#66ee66';
 require('./gui_bridge/default/gui_tabs_staff_reg.php');
 ?>
+
 <tr>
 <td colspan=3>
 
@@ -83,9 +85,11 @@ require('./gui_bridge/default/gui_tabs_staff_reg.php');
 	$person->display();
 
 ?>
+
 <p>
 
 <?php if (!$newdata) { ?>
+
 <?php if($target=="search") $newsearchfile='staff_search.php'.URL_APPEND.'&target=staff_search';
     else $newsearchfile='staff_register_search.php'.URL_APPEND.'&target=person_reg';
 ?>
@@ -139,3 +143,4 @@ $smarty->assign('sMainFrameBlockData',$sTemp);
  $smarty->display('common/mainframe.tpl');
 
 ?>
+

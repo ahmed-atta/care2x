@@ -87,6 +87,7 @@ $smarty->assign('sOnLoadJs','onLoad="document.suchform.keyword.focus()"');
 ob_start()
 
 ?>
+
 <script language="javascript">
 <!-- 
 function pruf(d) {
@@ -121,6 +122,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <ul>
 	<p><?php 
 	require('includes/inc_products_archive_search_form.php');

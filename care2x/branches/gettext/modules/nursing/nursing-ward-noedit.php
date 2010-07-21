@@ -16,9 +16,9 @@ $toggler=0;
 // if ($statdate=="") $statdate=$pyear.'-'.$pmonth.'-'.$pday;
 if ($filename=="") $filename=$pyear.'-'.$pmonth.'-'.$pday.'.bel';
 
-$monat=array("januar","februar","mï¿½rz","april","mai","juni","juli","august","september","oktober","november","dezember");
+$monat=array("januar","februar","märz","april","mai","juni","juli","august","september","oktober","november","dezember");
 
-//$xchars="!?*#/\&ï¿½+-_$;:~";
+//$xchars="!?*#/\&§+-_$;:~";
 
 $filename=$pyear.'-'.$pmonth.'-'.$pday.'.bel';	 
 $path="pflege/station/".strtolower($station)."/belegung/".$pyear."/".strtolower($monat[$pmonth-1])."/".strtolower($filename);
@@ -75,6 +75,7 @@ header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // always modifi
 header ("Cache-Control: no-cache, must-revalidate");  // HTTP/1.1
 header ("Pragma: no-cache");                          // HTTP/1.0
 ?>
+
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
@@ -117,6 +118,7 @@ require($root_path.'include/helpers/inc_js_gethelp.php');
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 
 ?>
+
 </HEAD>
 
 <BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> onLoad="if (window.focus) window.focus()" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
@@ -137,7 +139,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 <?php
 if($deffile)
 		 	{
-			 echo'<font face="verdana,arial" size="2"  color=red>Die Belegung fï¿½r heute ist noch nicht erstellt!</font><br>';
+			 echo'<font face="verdana,arial" size="2"  color=red>Die Belegung für heute ist noch nicht erstellt!</font><br>';
 			 }
 		
 //echo $statdata[$bd.$rm];
@@ -193,8 +195,8 @@ for ($i=$statdata['startnumber'];$i<=$statdata['endnumber'];$i++)
 	}
 	echo "\r\n</td>";
 	echo '<td><font face="verdana,arial" size="2" ><a href="#" onClick=';
-	if($buf[0]!="!") echo 'getinfo(\''.$buf[0].'\',\''.$buf2.'\') title="Click fï¿½r mehr Info">';
-	else echo 'unlock(\''.strtoupper($j).'\',\''.$i.'\') title="Click fï¿½r Info bzw. zum Aufheben der Sperre.">'; //$j=bed   $i=room number
+	if($buf[0]!="!") echo 'getinfo(\''.$buf[0].'\',\''.$buf2.'\') title="Click für mehr Info">';
+	else echo 'unlock(\''.strtoupper($j).'\',\''.$i.'\') title="Click für Info bzw. zum Aufheben der Sperre.">'; //$j=bed   $i=room number
 	echo str_replace("-"," ",$buf[1]).' <b>'.$buf[2].'</b> '.$buf[3].'</a>';
 	echo "\r\n";
 	
@@ -228,5 +230,6 @@ for ($i=$statdata['startnumber'];$i<=$statdata['endnumber'];$i++)
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
+
 </BODY>
 </HTML>

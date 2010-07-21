@@ -175,6 +175,7 @@ if ($remark=='itemdelete') echo '<img '.createMascot($root_path,'mascot1_r.gif',
 			</tr>
 		</table>";
 ?>
+
 <p>
 
 <FORM method="post" action="<?php if($ck_edvzugang_src=="listpass") echo "admin_accessplan-list-pass.php"; else echo "admin_user_access_edit.php"; ?>" >

@@ -60,6 +60,7 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <table border=0>
 <tbody class="submenu">
   <tr class="wardlisttitlerow">

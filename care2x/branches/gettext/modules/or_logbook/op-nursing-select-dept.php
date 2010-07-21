@@ -102,6 +102,7 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <script language="javascript">
 <!-- 
   var urlholder;
@@ -153,6 +154,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <ul>
 <form action="<?php echo $targetfile ?>" method="post" name="dept_select" onSubmit="return check(this)">
 <table  cellpadding="2"  border=0>

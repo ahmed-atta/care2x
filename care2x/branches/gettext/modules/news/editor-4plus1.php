@@ -64,6 +64,7 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <script language="javascript"  type="text/javascript" src="<?php echo $root_path.'js/html_editor/'; ?>dialog.js"></script>
 <style type="text/css">@import url("<?php echo $root_path.'js/html_editor/'; ?>htmlarea.css")</style>
 <?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
+
 </head>
 <body onLoad="HTMLArea.replace('newsbody');document.selectform.newstitle.focus()">
 

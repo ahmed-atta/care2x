@@ -52,6 +52,7 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <script language="JavaScript" src="<?php echo $root_path ?>js/clock.js">
 </script>
 
@@ -67,6 +68,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <p>
 
 <CENTER>

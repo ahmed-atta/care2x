@@ -26,6 +26,7 @@ html_rtl ( $lang );
 echo setCharSet ();
 ?>
 
+
 <?php
 require ($root_path . 'include/helpers/inc_js_gethelp.php');
 require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
@@ -146,6 +147,7 @@ if ($cfg ['dhtml'])
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
+
 </td>
 	</tr>
 </table>

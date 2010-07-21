@@ -46,6 +46,7 @@ function createTR($ld_text, $input_val, $colspan = 1)
 {
     global $toggle, $root_path;
 ?>
+
 <tr>
 <td bgColor="#eeeeee" ><FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $ld_text ?>:
 </td>
@@ -60,10 +61,12 @@ $toggle=!$toggle;
 }
 
 ?>
+
 <script  language="javascript">
 <!-- 
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 function popRecordHistory(table,pid) {
 	urlholder="./record_history.php<?php echo URL_REDIRECT_APPEND; ?>&table="+table+"&pid="+pid;
 	HISTWIN<?php echo $sid ?>=window.open(urlholder,"histwin<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
@@ -129,6 +132,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <table width=100% border=0 cellspacing="0"  cellpadding=0 >
 
 	<form method="post" name="entryform"  ENCTYPE="multipart/form-data"  action="<?php echo $thisfile; ?>" onSubmit="return chkform(this)">
@@ -208,6 +212,7 @@ if($blood_group){
 
 $smarty->display('registration_admission/basic_data.tpl');
 ?>
+
 					<table border=0 width=100% cellspacing=1 cellpadding=3>
 
 
@@ -257,6 +262,7 @@ if($mode=='show'){
 		$img_torsowin=createComIcon($root_path,'torso_win.gif','0'); // Load the torse icon image
 		$img_pix=createComIcon($root_path,'pixel.gif','0'); // Load the torse icon image
 ?>
+
 <table border=0 cellpadding=4 cellspacing=1 width=100%>
   <tr bgcolor="#f6f6f6">
     <td  colspan=5><FONT class="prompt"><nobr><?php echo $LDImageGroupNr; ?><?php echo $nr ?>&nbsp;
@@ -307,6 +313,7 @@ if($mode=='show'){
 <?php	
 	}else{
 ?>
+
 <table border=0>
   <tr>
     <td><img <?php echo createMascot($root_path,'mascot2_r.gif','0','absmiddle') ?>></td>
@@ -324,6 +331,7 @@ if($mode=='show'){
 # Create a new form
 }else {
 ?>
+
 <INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="8000000">
 
 <table border=0>
@@ -386,6 +394,7 @@ if($parent_admit) {
 	include('./include/bottom_controls_registration_options.inc.php');
 }
 ?>
+
 <p>
 </ul>
 

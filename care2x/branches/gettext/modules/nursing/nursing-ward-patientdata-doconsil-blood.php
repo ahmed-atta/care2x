@@ -275,6 +275,7 @@ $smarty->assign('sOnLoadJs',$sTemp .'"');
  */
  ob_start();
 ?>
+
 <style type="text/css">
 div.fva2_ml10 {font-family: verdana,arial; font-size: 12; margin-left: 10;}
 div.fa2_ml10 {font-family: arial; font-size: 12; margin-left: 10;}
@@ -378,6 +379,7 @@ topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 <?php if(!$noresize)
 {
 ?>
+
 <script>	
       window.moveTo(0,0);
 	 window.resizeTo(1000,740);
@@ -386,6 +388,7 @@ topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 <?php 
 }
 ?>
+
  <ul>
 
 <?php

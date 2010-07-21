@@ -56,12 +56,14 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <table width=100% border=0 cellspacing="0" cellpadding=0>
 
 <?php
 
 require('./gui_bridge/default/gui_tabs_staff_reg.php');
 ?>
+
 <tr>
 <td colspan=3>
 
@@ -80,6 +82,7 @@ $inperson->setDisplayFile('person_register_show.php');
 $inperson->display();
 
 ?>
+
 </ul>
 
 </td>

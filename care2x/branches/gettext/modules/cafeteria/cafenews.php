@@ -77,6 +77,7 @@ $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
  ob_start();
 
 ?>
+
 <script language="javascript" >
 function editcafe()
 {

@@ -232,6 +232,7 @@ $smarty->assign('sWindowTitle',$sTitle);
 # collect extra javascript code
 ob_start();
 ?>
+
 <style type="text/css">
 .va12_n {
 	font-family: verdana, arial;

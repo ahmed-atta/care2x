@@ -122,6 +122,7 @@ $smarty->assign('sOnLoadJs','onLoad="document.srcform.searchkey.select();" onFoc
 
  ob_start();
 ?>
+
  <style type="text/css" name="s2">
 .indx{ font-family:verdana,arial; color:#ffffff; font-size:12; background-color:#6666ff}
 .v12{ font-family:verdana,arial; color:#000000; font-size:12;}
@@ -172,6 +173,7 @@ function chkform(d){
 }
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 // -->
 </script>
 <script language="javascript" src="<?php echo $root_path; ?>js/dicom.js"></script>
@@ -187,6 +189,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <form action="<?php echo $thisfile ?>" method="get" onSubmit="return chkform(this)" name="srcform">
 <table border=0>
   <tr>

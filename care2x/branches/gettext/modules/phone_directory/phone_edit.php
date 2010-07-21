@@ -88,6 +88,7 @@ if($user_origin=='pers'&&$nr){
 		elseif($employee->PhoneKey()) $mode = 'update';
 }
 ?>
+
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 
 <?php html_rtl($lang); ?>
@@ -173,6 +174,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 <?php
 }
 ?>
+
 </td>
 <td colspan=2>
 

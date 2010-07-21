@@ -193,6 +193,7 @@ $smarty->assign('LDBack', $LDBack);
 
 ob_start();
 ?>
+
 <style type="text/css" name="formstyle">
 
 td.pblock{ font-family: verdana,arial; font-size: 12}
@@ -238,6 +239,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
  <ul>
 
  <?php

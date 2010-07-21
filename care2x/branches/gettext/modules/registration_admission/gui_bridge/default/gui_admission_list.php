@@ -47,6 +47,7 @@ function createTR($input_name, $ld_text, $input_val, $colspan = 2, $input_size =
 	global $root_path;
 
 ?>
+
 <tr>
 	<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<FONT SIZE=-1  FACE="Arial,verdana,sans serif"><?php echo $ld_text ?>:
 	</td>
@@ -62,6 +63,7 @@ function createTR($input_name, $ld_text, $input_val, $colspan = 2, $input_size =
 ob_start();
 
 ?>
+
 <script  language="javascript">
 <!-- 
 
@@ -71,6 +73,7 @@ function popSearchWin(target,obj_val,obj_name) {
 }
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 -->
 </script>
 <?php
@@ -102,6 +105,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')){
 
    //echo $LDSearchKeyword.': '.$where;
 ?>
+
 <table border=0>
 	<tr>
 		<td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
@@ -134,6 +138,7 @@ if(!empty($rows)){
 	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
 
 ?>
+
 <table border=0 cellpadding=0 cellspacing=0>
 	<tr class="wardlisttitlerow">
 		<td><b>
@@ -245,6 +250,7 @@ if(!empty($rows)){
 	# Else if result is empty, display the input form
 
 ?>
+
 <form method="post" action="<?php echo $thisfile; ?>" name="aufnahmeform">
 
 <table border=0 cellspacing=1 cellpadding=0>
@@ -256,6 +262,7 @@ if(!empty($rows)){
 	createTR('encounter_nr', $LDAdmitNr,$encounter_nr);
 
 ?>
+
 	<tr>
 		<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<?php echo $LDAdmitDate ?>:
 		</td>
@@ -304,6 +311,7 @@ if(!empty($rows)){
 	if(!isset($addr_zip)) $addr_zip='';
 	if(!isset($addr_city_town)) $addr_city_town='';
 ?>
+
 	<tr>
 		<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<?php echo $LDBday ?>:
 		</td>
@@ -380,6 +388,7 @@ if(!empty($rows)){
 	createTR( 'referrer_recom_therapy', $LDTherapy,$referrer_recom_therapy);
 	createTR( 'referrer_notes', $LDSpecials,$referrer_notes);
 ?>
+
 	<tr bgcolor="white">
 		<td background="<?php echo createBgSkin($root_path,'tableHeaderbg3.gif'); ?>">&nbsp;<?php echo $LDBillType ?>:
 		</td>
@@ -483,6 +492,7 @@ if(!empty($rows)){
 <?php
 	}
 ?>
+
 </table>
 
 <p>
@@ -498,6 +508,7 @@ if(!empty($rows)){
 <?php
 }
 ?>
+
 <p>
 <a href="
 <?php if($_COOKIE['ck_login_logged'.$sid]) echo 'startframe.php';

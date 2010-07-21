@@ -120,6 +120,7 @@ if($dblink_ok)
 	else 
 		{ echo "$LDDbNoLink<br>$sql<br>"; }
 ?>
+
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>

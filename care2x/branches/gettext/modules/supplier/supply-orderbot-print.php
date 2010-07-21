@@ -114,6 +114,7 @@ if($ergebnis=$db->Execute($sql)) {
 
 /*}*/
 ?>
+
 <?php html_rtl($lang); ?>
 <head>
 <?php echo setCharSet(); ?>

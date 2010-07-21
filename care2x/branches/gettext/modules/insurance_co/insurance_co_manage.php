@@ -44,6 +44,7 @@ $smarty->assign('LDBack', $LDBack);
 
 ob_start();
 ?>
+
   <p><br>
   <table border=0 cellpadding=5 >
     <tr>

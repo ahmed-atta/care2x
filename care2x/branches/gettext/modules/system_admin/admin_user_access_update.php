@@ -15,6 +15,7 @@ require($root_path.'include/helpers/inc_accessplan_areas_functions.php');
 $breakfile="admin.php?sid=".$sid."&lang=".$lang;
 
 ?>
+
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 
 <?php html_rtl($lang); ?>
@@ -180,6 +181,7 @@ if($dblink_ok)
  
 ?>
 
+
 <?php if ($error==1)
 {
 echo "<FONT  COLOR=red  SIZE=+1  FACE=Arial>$LDInputError<p>";
@@ -187,7 +189,9 @@ echo "<FONT  COLOR=red  SIZE=+1  FACE=Arial>$LDInputError<p>";
 
 ?>
 
+
 <?php if ((($error==1)and($mode=='save'))or(($error==0)and($mode==""))) :; ?>
+
 <form method="post" action="admin_user_access_update.php">
 <table border=0 cellpadding=0 cellspacing=0 bgcolor=#666666>
 <tr><td>
@@ -204,6 +208,7 @@ echo "<FONT  COLOR=red  SIZE=+1  FACE=Arial>$LDInputError<p>";
  echo " ".$username;
  echo "<input type=hidden name=username value=".strtr($username," ","+").">";
 ?>
+
 <br>
 </td>
 <td><FONT    SIZE=-1  FACE="Arial" color=#000080>
@@ -295,6 +300,7 @@ else { echo $LDAllowedArea;} ?>
 */
 printAccessAreas();
 ?>
+
 </td>
 </tr>
 <tr bgcolor="#dddddd">
@@ -324,6 +330,7 @@ printAccessAreas();
 
 <?php endif; ?>
 
+
 </ul>
 <p>
 </td>
@@ -334,6 +341,7 @@ printAccessAreas();
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>
+
 </FONT>
 
 

@@ -1,6 +1,7 @@
 <?php
 if($rows){
 ?>
+
 <table border=0 cellpadding=0 cellspacing=1 width=100% >
   <tr class="reg_list_titlebar">
     <td>&nbsp;</td>
@@ -39,3 +40,4 @@ if($rows){
 <?php
 }
 ?>
+

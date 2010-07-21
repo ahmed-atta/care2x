@@ -147,6 +147,7 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <style type="text/css" name="formstyle">
 
 td.pblock{ font-family: verdana,arial; font-size: 12; background-color: #ffffff}

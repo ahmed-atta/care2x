@@ -85,6 +85,7 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <form>
 <table border=0 cellspacing=1 cellpadding=2>  
 

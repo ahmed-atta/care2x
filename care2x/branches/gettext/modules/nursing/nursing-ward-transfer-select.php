@@ -61,6 +61,7 @@ $smarty->assign('LDBack', $LDBack);
 
  ob_start();
 ?>
+
 <script language="javascript">
 <!-- 
 var urlholder;
@@ -90,6 +91,7 @@ $smarty->append('JavaScript',$sTemp);
 ob_start();
 
 ?>
+
 <table border=0>
   <tr>
     <td><img <?php 	echo createMascot($root_path,'mascot2_r.gif','0'); ?>></td>
@@ -131,6 +133,7 @@ while($ward=$ward_info->FetchRow()){
 }
 
 ?>
+
 </table>
 
 <?php

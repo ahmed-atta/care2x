@@ -11,6 +11,7 @@ while($row=$result->FetchRow()){
 		else $loc_name=$row['loc_name'];
 
 ?>
+
   <tr bgcolor="#fefefe">
     <td><FONT SIZE=-1  FACE="Arial"><?php echo $row['encounter_nr'] ?></td>
     <td><FONT SIZE=-1  FACE="Arial" color="#006600"><b><?php echo $row['code']; ?></b></td>

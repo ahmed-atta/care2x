@@ -133,6 +133,7 @@ if($dblink_ok)
 
 
 ?>
+
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
@@ -195,7 +196,7 @@ function isnum(val,idx)
 			}
 			
 			
-//			alert("Zeitangabe ist ungï¿½ltig! (ausserhalb des 24H Zeitrahmens)");
+//			alert("Zeitangabe ist ungültig! (ausserhalb des 24H Zeitrahmens)");
 	
 		}
 		switch(v3.length)
@@ -414,6 +415,7 @@ onLoad="<?php if($saved)
 			}
 		}
 ?>
+
 
 
 <input type="hidden" name="sid" value="<?php echo $sid ?>">

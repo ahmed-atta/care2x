@@ -23,6 +23,7 @@ $breakfile='intra-email.php.'.URL_APPEND.'&mode=listmail';
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php echo setCharSet(); ?>
+
  <script language="javascript" >
 <!-- 
 
@@ -48,6 +49,7 @@ function echoer_v()
 require_once($root_path.'include/helpers/inc_js_gethelp.php');
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
+
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
