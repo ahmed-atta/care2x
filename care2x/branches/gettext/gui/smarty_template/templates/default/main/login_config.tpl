@@ -70,12 +70,13 @@
 		</tr>
 	</tbody>
 	</table>
-	<p>
-	{{* Do not move the following elements outside the <form></form> block *}}
-
-	{{$sHiddenInputs}}
-	{{$sSubmitFormButton}} {{$sNoChangeButton}}&nbsp;{{$sCancelButton}}
-
+	<br />
+	<div class="buttons">
+		{{* Do not move the following elements outside the <form></form> block *}}
+	
+		{{$sHiddenInputs}}
+		{{$sSubmitFormButton}}{{$sNoChangeButton}}{{$sCancelButton}}
+	</div>				
 </form>
 
 </ul>

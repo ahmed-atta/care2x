@@ -21,12 +21,14 @@ require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
 		<?php echo $nm.'<br>'; ?>
 		</FONT>
 		<form name="okbut" action="logout.php">
-			<input type="hidden"  name="sid" value="<?php echo $sid ?>" >
-			<input type="hidden"  name="lang" value="<?php echo $lang ?>" >
-			<input type="hidden"  name="logout" value="1" >
-			<input type="submit" value=" <?php echo $LDYes ?> " >
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" value="<?php echo $LDNotReally ?>" onClick="javascript:window.history.back()">
+			<div class="buttons" style="width:220px;align:center">
+				<input type="hidden"  name="sid" value="<?php echo $sid ?>" >
+				<input type="hidden"  name="lang" value="<?php echo $lang ?>" >
+				<input type="hidden"  name="logout" value="1" >
+				<button type="submit" value="<?php echo $LDYes ?>" class="positive"><?php echo $LDYes ?></button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="button" class="negative" value="<?php echo $LDNotReally ?>" onClick="javascript:window.history.back()"><?php echo $LDNotReally ?></button>
+			</div>
 		</form>
 	</center>
 </BODY>

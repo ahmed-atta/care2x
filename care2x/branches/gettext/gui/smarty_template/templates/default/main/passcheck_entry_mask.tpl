@@ -38,8 +38,8 @@
 												<p>
 												<form {{$sPassFormParams}}>
 													<div class="prompt">
-														{{$LDPwNeeded}}!<p>
-													</div>
+														{{$LDPwNeeded}}!
+													</div><br />
 													<label for="username">{{$LDUserPrompt}}:</label>
 													<input type="text" name="userid" size="14" maxlength="25" id="username"> <p>
 													<label for="username">{{$LDPwPrompt}}:</label>
@@ -49,7 +49,8 @@
 													{{$sPassHiddenInputs}}
 
 													<div class="buttons">
-													{{$sPassSubmitButton}} {{$sCancelButton}}
+													{{$sPassSubmitButton}} 
+													{{$sCancelButton}}
 													</div>
 												</form>
 

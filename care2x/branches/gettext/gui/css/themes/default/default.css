@@ -387,7 +387,7 @@ a:visited:hover {
 
 /* Gjergj Sheldija - new buttons top */
 .buttons a, .buttons button{
-	float:right;
+	float:left;
     display:block;
     margin:0 7px 0 0;
     background-color:#f5f5f5;
