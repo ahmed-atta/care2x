@@ -141,10 +141,9 @@ $smarty->assign('sWardSelect',$sTemp);
 #
  # Prepare the submit option buttons
  #
-
- $smarty->assign('sSubmitFormButton','<input type="submit" value="'.$LDSave.'">');
+$smarty->assign('sSubmitFormButton','<button type="submit"  class="positive"><img '.createComIcon(CARE_GUI  ,'accept.png','0').'>'.$LDSave.'</button>');
  $smarty->assign('sNoChangeButton','<input type="button" value="'.$LDNoChange.'" onClick="window.location.href=\'startframe.php'.URL_REDIRECT_APPEND.'\'">');
- $smarty->assign('sCancelButton','<a href="startframe.php'.URL_APPEND.'"><img '.createLDImgSrc(CARE_BASE ,'close2.gif','0','top').'  alt="'.$LDClose.'"></a>');
+ $smarty->assign('sCancelButton','<a href="startframe.php'.URL_APPEND.'" class="negative"><img '.createComIcon(CARE_BASE ,'cross.png','0').'  alt="'.$LDClose.'">'.$LDClose.'</a>');
  
  #
  # Prepare the hidden inputs
