@@ -17,10 +17,10 @@ if($ergebnis=$db->Execute($sql_menu)) {
 	    $menu = $ergebnis->FetchRow();
 	}
 	else {
-	    $menu['menu']=_("Menu is not available");
+	    $menu['menu']= $LDNoMenu;
     }
 }
 
-if(!$menu['menu']) $menu['menu']=_("Menu is not available");
+if(!$menu['menu']) $menu['menu']=$LDNoMenu;
 
 ?>
