@@ -312,7 +312,7 @@ $LDFollowing='following';
 $LDErrorDuplicateBed='Error: Duplicate bed occupancy record in table nursing_station_patients';
 $LDNoFound='Search found no patient.';
 
-$LDNoWardsYet='There are no nursing wards yet.';
+$LDNoWardsYet='There are no nursing wards yet. Please ask your administrator to create them';
 $LDClk2CreateWard='To create a ward, please click here.';
 /* 2002-10-12 EL */
 $LDToCreateNewList='To create a new list';
