@@ -49,7 +49,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbHelp',"javascript:gethelp('person_reg.php','$LDDoctors')");
 
 # Window title
- $smarty->assign('sWindowTitle',_('Person'));
+ $smarty->assign('sWindowTitle',$LDPerson);
  
  # Prepare the icons
  $aSubMenuIcon = array(createComIcon($root_path,'post_discussion.gif','0') ,
