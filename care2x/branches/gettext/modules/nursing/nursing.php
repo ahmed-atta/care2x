@@ -50,7 +50,7 @@
   }
 
  } else {
-  $sWardInfo = $LDNoWardsYet.'<br><img '.createComIcon($root_path,'redpfeil.gif','0','absmiddle').'> <a href="nursing-ward-manage-pass.php'.URL_APPEND.'">'.$LDClk2CreateWard.'</a>';
+  $sWardInfo = $LDNoWardsYet;
  }
 
 
