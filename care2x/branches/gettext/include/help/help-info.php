@@ -41,7 +41,9 @@ if($helpidx=='') {
 ?>
 <hr>
 <ul>
-<a href="javascript:window.parent.close()"><img <?php echo createLDImgSrc(CARE_GUI ,'closehelp.gif','0') ?> alt="<?php echo $LDCloseHelpWin ?>"></a>
+<div class="buttons" style="float: right;">
+<a href="javascript:window.parent.close()" class="negative"><img <?php echo createComIcon(CARE_GUI ,'cross.png','0') ?> alt="<?php echo $LDCloseHelpWin ?>"></a>
+</div>
 </ul>
 </body>
 </html>

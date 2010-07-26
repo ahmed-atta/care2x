@@ -416,6 +416,8 @@ $LDNoNrNoDelete = 'no number = delete';
 
 $LDNoAddress='No City defined yet. Please go to the main menu and click Special Tools -> Address Manager -> New data and <br>enter City and ZIP data.';
 
+
+$LDFind='Find';
 $LDClose = 'Close';
 $LDBack = 'Back';
 $LDHelp = 'Help';
