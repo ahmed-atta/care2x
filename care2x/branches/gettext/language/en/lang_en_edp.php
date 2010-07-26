@@ -357,6 +357,8 @@ $LDFindRole='Search Role';
 $LDCreateEditRoles='Create Role';
 $LDWelcome='Wellcome';
 $LDNursingManage='Wards administration';
+$LDRole = 'Role';
+$LDNewRole='New Role';
 
 $LDClose = 'Close';
 $LDBack = 'Back';

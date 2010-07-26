@@ -102,8 +102,14 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
        $dec_2level = new Crypt_HCEMD5($key_2level, '');
        $clear_2sid = $dec_2level->DecodeMimeSelfRand($_COOKIE[('ck_2level_sid'.$sid)]);
    
-       if(!$sid||($sid!=$clear_ck_sid)||($sid!=$clear_2sid)||!isset($_COOKIE[$local_user.$sid])||empty($_COOKIE[$local_user.$sid])) $no_valid=1;
-      
+       if(	!$sid ||(
+       		$sid!=$clear_ck_sid)||
+       		($sid!=$clear_2sid)||
+       		!isset($_COOKIE[$local_user.$sid])||
+       		empty($_COOKIE[$local_user.$sid])
+       	) { 
+       		$no_valid=1;
+       	}
    }elseif (!$sid||($sid!=$clear_ck_sid)){
    		$no_valid=1;
 	}else{
@@ -111,16 +117,13 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 		$_SESSION['sess_tos']=$tnow;
 	}
 
-
    if ($no_valid) {
 
        if(getLang('invalid-access-warning.php')) {
-
-	       header('Location:'.CARE_BASE .'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); 
+	       header('Location:'.CARE_GUI .'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); 
 	   }
 	     else {
-
-		     header('Location:'.CARE_BASE .'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_invalid-access-warning.php');
+		     header('Location:'.CARE_GUI .'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_invalid-access-warning.php');
 		 } 
        
 	   exit;

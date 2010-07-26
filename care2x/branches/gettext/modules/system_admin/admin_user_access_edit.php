@@ -307,7 +307,7 @@ if ($edit) {
 <td>
 <?php
 if ($erroruser) {
-	echo "<font color=red > <b>$LDUserId</b>" ;
+	echo "<font color=red > <b> $LDUserId</b>" ;
 } else {
 	echo $LDUserId ;
 }
