@@ -361,8 +361,8 @@ class GuiSearchPerson {
 		#
 		# Prepare the hidden inputs
 		#
-		$this->smarty->assign('sHiddenInputs','<input type="image" '.createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle').'>
-				<input type="hidden" name="sid" value="'.$sid.'">
+		$this->smarty->assign('sFindButton','<button type="submit"> <img '.createComIcon($root_path,'find.png','0','absmiddle').'>'.$LDFind.'</button>');
+		$this->smarty->assign('sHiddenInputs','<input type="hidden" name="sid" value="'.$sid.'">
 				<input type="hidden" name="lang" value="'.$lang.'">
 				<input type="hidden" name="noresize" value="'.$noresize.'">
 				<input type="hidden" name="target" value="'.$target.'">
@@ -373,7 +373,7 @@ class GuiSearchPerson {
 				<input type="hidden" name="ipath" value="'.$ipath.'">
 				<input type="hidden" name="mode" value="search">');
 
-		$this->smarty->assign('sCancelButton','<a href="'.$this->cancelfile.URL_APPEND.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').'></a>');
+		$this->smarty->assign('sCancelButton','<a href="'.$this->cancelfile.URL_APPEND.'" class="negative"><img '.createComIcon($root_path,'cross.png','0').'>'.$LDClose.'</a>');
 
 		//include($root_path.'include/helpers/inc_patient_searchmask.php');
 		#

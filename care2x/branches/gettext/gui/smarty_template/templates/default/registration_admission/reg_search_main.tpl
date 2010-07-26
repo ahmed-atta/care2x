@@ -17,17 +17,17 @@
 				<tr>
 					<td>
 						<form {{$sFormParams}}>
-							&nbsp;
-							<br>
-							{{$searchprompt}}
-							<br>
-							{{* Never rename this input. Redimensioning it is allowed. *}}
-							<input type="text" name="searchkey" size=40 maxlength=80>
-							<p>
-							{{$sCheckBoxFirstName}} {{$LDIncludeFirstName}}
-							
-							{{* Do not move the sHiddenInputs outside the <form> block *}}
-							{{$sHiddenInputs}}
+							<div class="buttons" style="float: right;">
+								<br>
+								{{$searchprompt}}
+								<br>
+								{{* Never rename this input. Redimensioning it is allowed. *}}
+								<input type="text" name="searchkey" size=40 maxlength=80>
+								<br>
+								{{$sFindButton}} <label>{{$sCheckBoxFirstName}}{{$LDIncludeFirstName}}</label> {{$sCancelButton}}
+								{{* Do not move the sHiddenInputs outside the <form> block *}}
+								{{$sHiddenInputs}}
+							</div>
 						</form>
 					</td>
 				</tr>
@@ -36,9 +36,6 @@
 		</td>
 	</tr>
 </table>
-<p>
-{{$sCancelButton}}
-<p>
 
 {{$LDSearchFound}}
 
