@@ -4,7 +4,7 @@ require_once($root_path.'include/core/class_globalconfig.php');
 require_once($root_path.'include/core/class_userconfig.php');
 
 
-if ($_SESSION['sess_user_id']) {
+if (isset($_SESSION['sess_user_id'])) {
     $user_id = $_SESSION['sess_user_id'];
 } else {
     $user_id = $_COOKIE['ck_config'];
