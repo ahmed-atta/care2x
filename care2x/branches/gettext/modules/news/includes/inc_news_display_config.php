@@ -13,7 +13,7 @@ if (isset($_SESSION['sess_user_id'])) {
 $userobj=new UserConfig;
 $globobj=new GlobalConfig($GLOBALCONFIG);
 
-$USERCONFIG=&$userobj->getConfig($user_id);
+$USERCONFIG=$userobj->getConfig($user_id);
 $globobj->getConfig('news_%');
 
 while(list($x,$v)=each($GLOBALCONFIG)) {
