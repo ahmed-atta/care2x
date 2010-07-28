@@ -34,7 +34,7 @@ if(!isset($_SESSION['sess_login_pw'])) $_SESSION['sess_login_pw'] = "";
 if ((($pass=='check')&&($keyword!=''))&&($userid!=''))
 {
 	include_once(CARE_BASE.'include/core/class_access.php');
-	$user = & new Access($userid,$keyword);
+	$user = new Access($userid,$keyword);
 
 	if($user->isKnown() && $user->hasValidPassword())
 	{
