@@ -34,7 +34,7 @@ if(!isset($news_headline_max_display)||!$news_headline_max_display) $news_num_st
 $thisfile=basename(__FILE__);
 require_once($root_path.'modules/news/model/class_news.php');
 $newsobj=new News;
-$news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
+$news=$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
 
 # Set initial session environment for this module
 
