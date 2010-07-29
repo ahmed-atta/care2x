@@ -84,15 +84,15 @@ function createLDImgSrc($froot, $fn, $border='', $align='')
    //return 1;
 	if(file_exists($froot.$img_path_control.$lang.'/'.$lang.'_'.$fn)){
 		$picfile_path=$froot.$img_path_control.$lang.'/'.$lang.'_'.$fn;
-		$picsize=getimagesize($picfile_path);
+		//$picsize=getimagesize($picfile_path);
 		$picfile_path=CARE_GUI.$img_path_control.$lang.'/'.$lang.'_'.$fn;
 	}elseif(file_exists($froot.'gui/img/control/default/'.$lang.'/'.$lang.'_'.$fn)){
 		$picfile_path=$froot.'gui/img/control/default/'.$lang.'/'.$lang.'_'.$fn;
-		$picsize=getimagesize($picfile_path);
+		//$picsize=getimagesize($picfile_path);
 		$picfile_path=CARE_GUI.'gui/img/control/default/'.$lang.'/'.$lang.'_'.$fn;
 	}else{
 		$picfile_path=$froot.'gui/img/control/default/'.LANG_DEFAULT.'/'.LANG_DEFAULT.'_'.$fn;
-		$picsize=getimagesize($picfile_path);
+		//$picsize=getimagesize($picfile_path);
 		$picfile_path=CARE_GUI.'gui/img/control/default/'.LANG_DEFAULT.'/'.LANG_DEFAULT.'_'.$fn;
 	}
 
@@ -102,7 +102,7 @@ function createLDImgSrc($froot, $fn, $border='', $align='')
 	if($border!='') $picfilesrc.=' border='.$border;
 	if($align) $picfilesrc.=' align="'.$align.'"';
 	  
-	$picfilesrc.=' '.$picsize[3];
+	//$picfilesrc.=' '.$picsize[3];
 	  
 	return $picfilesrc;
 }
@@ -123,15 +123,15 @@ function createComIcon($froot, $fn, $border='', $align='', $show_always=TRUE)
    # if icon theme is  "no_icon", return a transparent pixel gif
    if($theme_com_icon == 'no_icon' && !$show_always){
 	$picfile_path=$froot.'gui/img/common/default/pixel.gif';
-	$picsize= getimagesize($picfile_path);
+	//$picsize= getimagesize($picfile_path);
 	$picfile_path=CARE_GUI.'gui/img/common/default/pixel.gif';
    } elseif(file_exists($froot.$img_path_com_icon.$fn)){
       $picfile_path=$froot.$img_path_com_icon.$fn;
-      $picsize= getimagesize($picfile_path);
+     // $picsize= getimagesize($picfile_path);
       $picfile_path=CARE_GUI.$img_path_com_icon.$fn;
     } else {
         $picfile_path=$froot.'gui/img/common/default/'.$fn;
-        $picsize= getimagesize($picfile_path);
+     //   $picsize= getimagesize($picfile_path);
         $picfile_path=CARE_GUI.'gui/img/common/default/'.$fn;
 	}
    
@@ -142,7 +142,7 @@ function createComIcon($froot, $fn, $border='', $align='', $show_always=TRUE)
 	if($border!='') $picfilesrc.=' border='.$border;
 	if($align) $picfilesrc.=' align="'.$align.'"';
 	  
-	$picfilesrc.=' '.$picsize[3];
+	//$picfilesrc.=' '.$picsize[3];
 	  
 	return $picfilesrc;
 }
@@ -159,13 +159,13 @@ function createMascot($froot, $fn, $border='', $align='')
    if(file_exists($froot.$img_path_mascot.$fn))
    {
       $picfile_path=$froot.$img_path_mascot.$fn;
-      $picsize= getimagesize($picfile_path);
+     // $picsize= getimagesize($picfile_path);
       $picfile_path=CARE_GUI.$img_path_mascot.$fn;
     }
 	else
 	{
         $picfile_path=$froot.'gui/img/mascot/default/'.$fn;
-        $picsize= getimagesize($picfile_path);
+    //    $picsize= getimagesize($picfile_path);
         $picfile_path=CARE_GUI.'gui/img/mascot/default/'.$fn;
 	}
 	
@@ -174,7 +174,7 @@ function createMascot($froot, $fn, $border='', $align='')
 	if($border!='') $picfilesrc.=' border='.$border;
 	if($align) $picfilesrc.=' align="'.$align.'"';
 	  
-	$picfilesrc.=' '.$picsize[3];
+	//$picfilesrc.=' '.$picsize[3];
 	  
 	return $picfilesrc;
 }
