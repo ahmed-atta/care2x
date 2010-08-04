@@ -2099,19 +2099,20 @@ CREATE TABLE IF NOT EXISTS `care_med_products_main` (
 --
 
 CREATE TABLE IF NOT EXISTS `care_menu_main` (
-  `nr` tinyint(3) unsigned NOT NULL auto_increment,
-  `sort_nr` tinyint(2) NOT NULL default '0',
-  `name` varchar(35) collate latin1_general_ci NOT NULL,
-  `image` varchar(100) collate latin1_general_ci default NULL,
-  `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
-  `url` varchar(255) collate latin1_general_ci NOT NULL,
-  `is_visible` tinyint(1) unsigned NOT NULL default '1',
-  `hide_by` text collate latin1_general_ci,
-  `status` varchar(25) collate latin1_general_ci NOT NULL,
-  `modify_id` varchar(60) collate latin1_general_ci default NULL,
-  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+  `nr` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `sort_nr` tinyint(2) NOT NULL DEFAULT '0',
+  `name` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `permission` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `LD_var` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `url` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `is_visible` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `hide_by` text CHARACTER SET latin1 COLLATE latin1_general_ci,
+  `status` varchar(25) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `modify_id` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`nr`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `care_menu_main`
@@ -4885,25 +4886,27 @@ INSERT INTO care_group VALUES (6, 'prescription', 'Prescription', 'LDPrescriptio
 --
 
 
-INSERT INTO care_menu_main VALUES ('1', '1', 'Home', '','LDHome', 'main/startframe.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('2', '5', 'Patient', '', 'LDPatient', 'modules/registration_admission/patient_register_pass.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('3', '10', 'Admission', '', 'LDAdmission', 'modules/registration_admission/admission_pass.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('4', '15', 'Ambulatory', '', 'LDAmbulatory', 'modules/ambulatory/ambulatory.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('5', '20', 'Medocs', '', 'LDMedocs', 'modules/medocs/medocs_pass.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('6', '25', 'Doctors', '', 'LDDoctors', 'modules/doctors/doctors.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('7', '35', 'Nursing',  '','LDNursing', 'modules/nursing/nursing.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('8', '40', 'OR', 'LDOR', '', 'main/op-docu.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('9', '45', 'Laboratories', '', 'LDLabs', 'modules/laboratory/labor.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('10', '50', 'Radiology', '', 'LDRadiology', 'modules/radiology/radiolog.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('11', '55', 'Pharmacy', '', 'LDPharmacy', 'modules/pharmacy/pharmacy.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('12', '60', 'Medical Depot', '', 'LDMedDepot', 'modules/medstock/medstock.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('13', '65', 'Directory', '', 'LDDirectory', 'modules/phone_directory/phone.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('14', '70', 'Tech Support', '', 'LDTechSupport', 'modules/tech/tech.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('15', '72', 'System Admin', '', 'LDEDP', 'modules/system_admin/admin.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('16', '75', 'Intranet Email', '', 'LDIntraEmail', 'modules/intranet_email/intra-email-pass.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('18', '85', 'Special Tools', '', 'LDSpecials', 'main/spediens.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('19', '90', 'Login', '', 'LDLogin', 'main/login.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('20', '7', 'Appointments',  '','LDAppointments', 'modules/appointment_scheduler/appt_main_pass.php', '1', '',  '', 20030922232015, 20030405000145);
+INSERT INTO `care_menu_main` (`nr`, `sort_nr`, `name`, `permission`, `image`, `LD_var`, `url`, `is_visible`, `hide_by`, `status`, `modify_id`, `modify_time`) VALUES
+(1, 1, 'Home', '', '', 'LDHome', 'main/startframe.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(2, 5, 'Patient', '', '', 'LDPatient', 'modules/registration_admission/patient_register_pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(3, 10, 'Admission', 'admission', '', 'LDAdmission', 'modules/registration_admission/admission_pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(4, 15, 'Ambulatory', '', '', 'LDAmbulatory', 'modules/ambulatory/ambulatory.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(5, 20, 'Medocs', 'medocs', '', 'LDMedocs', 'modules/medocs/medocs_pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(6, 25, 'Doctors', 'doctors', '', 'LDDoctors', 'modules/doctors/doctors.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(7, 35, 'Nursing', 'nursing', '', 'LDNursing', 'modules/nursing/nursing.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(8, 40, 'OR', 'op', 'LDOR', '', 'main/op-docu.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(9, 45, 'Laboratories', 'lab', '', 'LDLabs', 'modules/laboratory/labor.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(10, 50, 'Radiology', 'radio', '', 'LDRadiology', 'modules/radiology/radiolog.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(11, 55, 'Pharmacy', 'pharma', '', 'LDPharmacy', 'modules/pharmacy/pharmacy.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(12, 60, 'Medical Depot', 'meddepot', '', 'LDMedDepot', 'modules/medstock/medstock.php ', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(13, 65, 'Directory', 'teldir', '', 'LDDirectory', 'modules/phone_directory/phone.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(14, 70, 'Tech Support', 'tech', '', 'LDTechSupport', 'modules/tech/tech.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(15, 72, 'System Admin', 'System Admin', '', 'LDEDP', 'modules/system_admin/admin.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(16, 75, 'Intranet Email', '', '', 'LDIntraEmail', 'modules/intranet_email/intra-email-pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(18, 85, 'Special Tools', '', '', 'LDSpecials', 'main/spediens.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(19, 90, 'Login', '', '', 'LDLogin', 'main/login.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(20, 7, 'Appointments', '', '', 'LDAppointments', 'modules/appointment_scheduler/appt_main_pass.php', 1, '', '', '20030922232015', '2003-04-05 00:01:45'),
+(21, 21, 'TCM Final Documentation', 'tcm_final_doc', NULL, '', 'modules/tcm/final_documentation/final_doc_pass.php', 1, NULL, '', '20030922232015', '2010-08-02 18:19:25');
 
 --
 -- Dumping data for table `care_menu_sub`
