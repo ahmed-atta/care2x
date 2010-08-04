@@ -420,6 +420,7 @@ CREATE TABLE IF NOT EXISTS `care_classif_neonatal` (
   `name` varchar(35) collate latin1_general_ci NOT NULL,
   `LD_var` varchar(35) collate latin1_general_ci NOT NULL,
   `description` varchar(255) collate latin1_general_ci default NULL,
+
   `status` varchar(25) collate latin1_general_ci NOT NULL,
   `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
   `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
@@ -3694,6 +3695,7 @@ CREATE TABLE IF NOT EXISTS `care_test_request_patho` (
 
 -- --------------------------------------------------------
 
+
 --
 -- Table structure for table `care_test_request_radio`
 --
@@ -4894,7 +4896,7 @@ INSERT INTO care_menu_main VALUES ('8', '40', 'OR', 'LDOR', '', 'main/op-docu.ph
 INSERT INTO care_menu_main VALUES ('9', '45', 'Laboratories', '', 'LDLabs', 'modules/laboratory/labor.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('10', '50', 'Radiology', '', 'LDRadiology', 'modules/radiology/radiolog.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('11', '55', 'Pharmacy', '', 'LDPharmacy', 'modules/pharmacy/pharmacy.php', '1', '', '', 20030922232015, 00000000000000);
-INSERT INTO care_menu_main VALUES ('12', '60', 'Medical Depot', '', 'LDMedDepot', 'modules/medstock/medstock.php ', '1', '', '', 20030922232015, 00000000000000);
+INSERT INTO care_menu_main VALUES ('12', '60', 'Medical Depot', '', 'LDMedDepot', 'modules/medstock/medstock.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('13', '65', 'Directory', '', 'LDDirectory', 'modules/phone_directory/phone.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('14', '70', 'Tech Support', '', 'LDTechSupport', 'modules/tech/tech.php', '1', '', '', 20030922232015, 00000000000000);
 INSERT INTO care_menu_main VALUES ('15', '72', 'System Admin', '', 'LDEDP', 'modules/system_admin/admin.php', '1', '', '', 20030922232015, 00000000000000);
