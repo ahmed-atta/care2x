@@ -1,88 +1,67 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
-/**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
-* GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
-*
-* See the file "copy_notice.txt" for the licence notice
-*/
+require('../../include/helpers/inc_environment_global.php');
+
 define('LANG_FILE','place.php');
 $local_user='aufnahme_user';
-require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once(CARE_BASE.'/include/helpers/inc_front_chain_lang.php');
 
-$breakfile=$root_path."main/spediens.php".URL_APPEND;
+$breakfile=CARE_BASE."/main/spediens.php".URL_APPEND;
 
-# Start Smarty templating here
- /**
- * LOAD Smarty
- */
- # Note: it is advisable to load this after the inc_front_chain_lang.php so
- # that the smarty script can use the user configured template theme
+require_once(CARE_BASE.'/gui/smarty_template/smarty_care.class.php');
+$smarty = new smarty_care('system_admin');
 
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
- $smarty = new smarty_care('system_admin');
-
-# Title in toolbar
- $smarty->assign('sToolbarTitle',"$LDAddress :: $LDManager");
+// Title in toolbar
+$smarty->assign('sToolbarTitle',"$LDAddress :: $LDManager");
 $smarty->assign('LDBack', $LDBack);
- $smarty->assign('LDHelp', $LDHelp);
- $smarty->assign('LDClose', $LDClose);
- # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('address_manage.php')");
+$smarty->assign('LDHelp', $LDHelp);
+$smarty->assign('LDClose', $LDClose);
 
- # href for close button
- $smarty->assign('breakfile',$breakfile);
+// href for help button
+$smarty->assign('pbHelp',"javascript:gethelp('address_manage.php')");
 
- # Window bar title
- $smarty->assign('sWindowTitle',"$LDAddress :: $LDManager");
+// href for close button
+$smarty->assign('breakfile',$breakfile);
 
-# Buffer page output
+// Window bar title
+$smarty->assign('sWindowTitle',"$LDAddress :: $LDManager");
 
-ob_start();
-?>
-  <p><br>
-  
-  <table border=0 cellpadding=5>
-    <tr>
-      <td> <a href="citytown_new.php<?php echo URL_APPEND; ?>"><img <?php  echo createComIcon($root_path,'form_pen.gif','0'); ?>></a> </td>
-      <td>
-	  		<a href="citytown_new.php<?php echo URL_APPEND; ?>"><b><font color="#990000"><?php echo $LDNewData; ?></font></b></a><br>
-	  		<?php echo $LDNewDataTxt ?></td>
-    </tr>
-    <tr>
-      <td> <a href="citytown_list.php<?php echo URL_APPEND; ?>"><img <?php  echo createComIcon($root_path,'form_pen.gif','0'); ?>></a> </td>
-      <td>
-	  		<a href="citytown_list.php<?php echo URL_APPEND; ?>"><b><font color="#990000"><?php echo $LDListAll ?></font></b></a><br>
-			<?php echo $LDListAllTxt ?></td>
-    </tr>
-    <tr>
-      <td> <a href="citytown_search.php<?php echo URL_APPEND; ?>"><img <?php  echo createComIcon($root_path,'search_glass.gif','0'); ?>></a> </td>
-      <td>
-	  	<a href="citytown_search.php<?php echo URL_APPEND; ?>"><b><font color="#990000"><?php echo $LDSearch ?></font></b></a><br>
-			<?php echo $LDSearchTxt ?></td>
-    </tr>
-  </table>
-  
-<p>
-<ul>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> border="0"></a>
-</ul>
 
-<?php
+$menu = array(
+	array(
+			'link' => 'citytown_new.php' . URL_APPEND,
+			'icon' => createComIcon(CARE_BASE,'form_pen.gif','0'),
+			'linkname' => $LDNewData,
+			'description' => $LDNewDataTxt
+	),
+	array(
+			'link' => 'citytown_list.php' . URL_APPEND,
+			'icon' => createComIcon(CARE_BASE,'form_pen.gif','0'),
+			'linkname' => $LDListAll,
+			'description' => $LDListAllTxt
+	),
+	array(
+			'link' => 'citytown_search.php' . URL_APPEND,
+			'icon' => createComIcon(CARE_BASE,'search_glass.gif','0'),
+			'linkname' => $LDSearch,
+			'description' => $LDSearchTxt
+	),
+);
 
-$sTemp = ob_get_contents();
-ob_end_clean();
+$smarty->assign('menu',$menu);
 
-# Assign page output to the mainframe template
 
-$smarty->assign('sMainFrameBlockData',$sTemp);
- /**
- * show Template
+// Assign page output to the mainframe template
+
+/**
+ * Show Template
  */
- $smarty->display('common/mainframe.tpl');
 
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/address_manage.tpl');
+/*
+$smarty->compile_check = true;
+$smarty->debugging = true;
+$smarty->display('debug.tpl');
+*/
+$smarty->display('common/mainframe.tpl');
 ?>

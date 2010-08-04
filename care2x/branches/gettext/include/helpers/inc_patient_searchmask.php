@@ -24,8 +24,7 @@ if(!isset($searchform_count) || !$searchform_count){
 			<td>
 
 			<form	method="post" name="searchform<?php if($searchform_count) echo "_".$searchform_count; ?>" onSubmit="return chkSearch(this)"
-				<?php if(isset($search_script) && $search_script!='') echo 'action="'.$search_script.'"'; ?>
-			>
+				<?php if(isset($search_script) && $search_script!='') echo 'action="'.$search_script.'"'; ?>>
 				&nbsp;
 				<br>
 				<?php echo $searchprompt ?>:

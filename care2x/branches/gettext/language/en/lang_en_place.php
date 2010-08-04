@@ -45,6 +45,8 @@ $LDEnterZero = 'If you do not know the value please enter 0';
 $LDEnterISOCountryCode = 'Please enter the ISO country code.';
 $LDEnterQMark ='If you do not know the code please enter a question mark (?)';
 
+$LDSave = 'Save';
+$LDCancel = 'Cancel';
 $LDClose = 'Close';
 $LDBack = 'Back';
 $LDHelp = 'Help';
