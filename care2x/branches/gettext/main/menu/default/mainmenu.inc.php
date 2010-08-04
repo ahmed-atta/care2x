@@ -10,8 +10,6 @@
 //set the css style for a links
 require(CARE_BASE.'include/helpers/inc_css_a_sublinker_d.php');
 // Code for checking menu's voices' permissions added by Daniele Palmas and Guido Porruvecchio
-//require_once(CARE_BASE."include/core/MenuVisibility.php");
-//require_once(CARE_BASE."include/core/StringPermissionParser.php");
 
 $sqlPermissions = "SELECT permission FROM care_users WHERE login_id = '".$_SESSION['sess_login_username']."'";
 $resultPermissions = $db->Execute($sqlPermissions);
@@ -33,7 +31,7 @@ if($permissionString  == '' ) {
 	$TP_menu_item.= 'Home';
 	$TP_menu_item.='</A>';
 	echo '<tr><td>'.$TP_img1.' <font size=2 face="arial,verdana,helvetica"><b>'.$TP_menu_item.'</b></font></td></tr>';
-	$TP_menu_item='<a href="'.CARE_GUI.'main/logout_confirm.php'.URL_APPEND.'" TARGET="CONTENTS" REL="child">';
+	$TP_menu_item='<a href="'.CARE_GUI.'main/login.php'.URL_APPEND.'" TARGET="CONTENTS" REL="child">';
 	$TP_menu_item.= 'Login';
 	$TP_menu_item.='</A>';
 	echo '<tr><td colspan=3>'.$TP_img1.' <font size=2 face="arial,verdana,helvetica"><b>'.$TP_menu_item.'</b></font></td></tr>';
