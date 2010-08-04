@@ -1,20 +1,12 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
-/**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
-* GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
-*
-* See the file "copy_notice.txt" for the licence notice
-*/
+require('../../include/helpers/inc_environment_global.php');
+
 define('LANG_FILE','place.php');
 $local_user='aufnahme_user';
-require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require_once(CARE_BASE.'/include/helpers/inc_front_chain_lang.php');
 # Load the insurance object
-require_once($root_path.'modules/address/model/class_address.php');
+require_once(CARE_BASE.'/modules/address/model/class_address.php');
 $address_obj=new Address;
 
 switch($retpath)
@@ -39,7 +31,7 @@ if(isset($nr)&&$nr&&($row=&$address_obj->getCityTownInfo($nr))){
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
 
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ require_once(CARE_BASE.'/gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('system_admin');
 
 # Title in toolbar
@@ -65,7 +57,7 @@ ob_start();
 <?php
 if(isset($save_ok)&&$save_ok){ 
 ?>
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>><font face="Verdana, Arial" size=3 color="#880000">
+<font face="Verdana, Arial" size=3 color="#880000">
 <b>
 <?php 
  	echo $LDAddressInfoSaved;
@@ -111,8 +103,8 @@ if(isset($save_ok)&&$save_ok){
     <td class="adm_input"><?php if($address['unece_coordinates']) echo $address['unece_coordinates'] ?><br></td>
   </tr>
   <tr>
-    <td><a href="citytown_update.php<?php echo URL_APPEND.'&retpath='.$retpath.'&nr='.$address['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'update.gif','0') ?>></a></td>
-    <td  align=right><a href="citytown_list.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'list_all.gif','0') ?>></a> <a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a></td>
+    <td><a href="citytown_update.php<?php echo URL_APPEND.'&retpath='.$retpath.'&nr='.$address['nr']; ?>"><img <?php echo createLDImgSrc(CARE_BASE,'update.gif','0') ?>></a></td>
+    <td  align=right><a href="citytown_list.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc(CARE_BASE,'list_all.gif','0') ?>></a> <a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc(CARE_BASE,'cancel.gif','0') ?>></a></td>
   </tr>
 </table>
 <p>

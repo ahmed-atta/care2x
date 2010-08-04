@@ -1,95 +1,87 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
-/**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
-* GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* elpidio@care2x.org, 
-*
-* See the file "copy_notice.txt" for the licence notice
-*/
-# Default value for the maximum nr of rows per block displayed, define this to the value you wish
-# In normal cases this value is derived from the db table "care_config_global" using the "pagin_address_list_max_block_rows" element.
+require('../../include/helpers/inc_environment_global.php');
+
+// Default value for the maximum nr of rows per block displayed, define this to the value you wish
+// In normal cases this value is derived from the db table "care_config_global" using the "pagin_address_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
-$lang_tables[]='search.php';
+$lang_tables[] = 'search.php';
 define('LANG_FILE','place.php');
-$local_user='aufnahme_user';
-require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-# Load the insurance object
-require_once($root_path.'modules/address/model/class_address.php');
-$address_obj=new Address;
+$local_user = 'aufnahme_user';
+require_once(CARE_BASE.'/include/helpers/inc_front_chain_lang.php');
+
+// Load the address object
+require_once(CARE_BASE.'/modules/address/model/class_address.php');
+$address_obj = new Address;
 
 $breakfile='address_manage.php'.URL_APPEND;
-$thisfile=basename(__FILE__);
+$thisfile = basename(__FILE__);
 
 # Initialize page's control variables
-if($mode!='paginate'){
+if($mode != 'paginate'){
 	# Reset paginator variables
 	$pgx=0;
 	$totalcount=0;
 	# Set the sort parameters
-	if(empty($oitem)) $oitem='name';
-	if(empty($odir)) $odir='ASC';
+	if(empty($oitem)) $oitem = 'name';
+	if(empty($odir)) $odir = 'ASC';
 }
 
 $GLOBAL_CONFIG=array();
-include_once($root_path.'include/core/class_globalconfig.php');
-$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+include_once(CARE_BASE.'/include/core/class_globalconfig.php');
+$glob_obj = new GlobalConfig($GLOBAL_CONFIG);
 $glob_obj->getConfig('pagin_address_list_max_block_rows');
-if(empty($GLOBAL_CONFIG['pagin_address_list_max_block_rows'])) $GLOBAL_CONFIG['pagin_address_list_max_block_rows']=MAX_BLOCK_ROWS; # Last resort, use the default defined at the start of this page
+if(empty($GLOBAL_CONFIG['pagin_address_list_max_block_rows'])) 
+	$GLOBAL_CONFIG['pagin_address_list_max_block_rows'] = MAX_BLOCK_ROWS; 
 
-#Load and create paginator object
-require_once($root_path.'include/core/class_paginator.php');
-$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
-# Adjust the max nr of rows in a block
+//Load and create paginator object
+require_once(CARE_BASE.'/include/core/class_paginator.php');
+$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],CARE_BASE);
+// Adjust the max nr of rows in a block
 $pagen->setMaxCount($GLOBAL_CONFIG['pagin_address_list_max_block_rows']);
 
-# Get all the active firms info
-//$address=$address_obj->getAllActiveCityTown();
-$address=&$address_obj->getLimitActiveCityTown($GLOBAL_CONFIG['pagin_address_list_max_block_rows'],$pgx,$oitem,$odir);
-# Get the resulting record count
-//echo $address_obj->getLastQuery();
-$linecount=$address_obj->LastRecordCount();
+// Get all the active firms info
+$address = $address_obj->getLimitActiveCityTown($GLOBAL_CONFIG['pagin_address_list_max_block_rows'],$pgx,$oitem,$odir);
+
+$linecount = $address_obj->LastRecordCount();
 $pagen->setTotalBlockCount($linecount);
-# Count total available data
-if(isset($totalcount)&&$totalcount){
+// Count total available data
+if( isset($totalcount) && $totalcount ){
 	$pagen->setTotalDataCount($totalcount);
 }else{
-	$totalcount=$address_obj->countAllActiveCityTown();
+	$totalcount = $address_obj->countAllActiveCityTown();
 	$pagen->setTotalDataCount($totalcount);
 }
 
 $pagen->setSortItem($oitem);
 $pagen->setSortDirection($odir);
 
-# Start Smarty templating here
+// Start Smarty templating here
  /**
  * LOAD Smarty
  */
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
 
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ require_once(CARE_BASE.'/gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('system_admin');
 
-# Title in toolbar
+// Title in toolbar
  $smarty->assign('sToolbarTitle',"$LDAddress :: $LDListAll");
 $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
- # href for help button
+ // href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('address_list.php')");
 
- # href for close button
+ // href for close button
  $smarty->assign('breakfile',$breakfile);
 
- # Window bar title
+ // Window bar title
  $smarty->assign('sWindowTitle',"$LDAddress :: $LDListAll");
 
-# Buffer page output
+// Buffer page output
 
 ob_start();
 ?>
@@ -99,11 +91,10 @@ ob_start();
  <br>
 <?php 
 if(is_object($address)){
-	
-	if ($linecount) echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
-		else echo str_replace('~nr~','0',$LDSearchFound); 
-
-
+	if ($linecount) 
+		echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
+	else 
+		echo str_replace('~nr~','0',$LDSearchFound); 
 ?>
 <table border=0 cellpadding=2 cellspacing=1>
   <tr class="wardlisttitlerow">
@@ -113,7 +104,6 @@ if(is_object($address)){
 			else $flag=FALSE; 
 		echo $pagen->SortLink($LDCityTownName,'name',$odir,$flag); 
 			 ?></b>
-  <!-- gjergji added zip code -->
 	</td>
       <td><b>
 	  <?php 
@@ -122,7 +112,6 @@ if(is_object($address)){
 		echo $pagen->SortLink($LDZipCode,'zip_code',$odir,$flag); 
 			 ?></b>
 	</td>
-  <!-- end:gjergji added zip code -->	
       <td><b>
 	  <?php 
 	  	if($oitem=='iso_country_id') $flag=TRUE;
@@ -191,12 +180,11 @@ if(is_object($address)){
 $sTemp = ob_get_contents();
 ob_end_clean();
 
-# Assign page output to the mainframe template
+// Assign page output to the mainframe template
 
 $smarty->assign('sMainFrameBlockData',$sTemp);
  /**
  * show Template
  */
  $smarty->display('common/mainframe.tpl');
-
 ?>

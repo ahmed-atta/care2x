@@ -5,7 +5,7 @@
 
 /**
 */
-require_once($root_path.'include/core/class_core.php');
+require_once('../../include/core/class_core.php');
 
 /**
 *  Address methods.
