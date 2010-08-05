@@ -12,7 +12,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 /**
 * LOAD Smarty Library
 */
-require_once (CARE_BASE.'classes/smarty/libs/Smarty.class.php');
+require_once (CARE_BASE.'classes/smarty/Smarty.class.php');
 
 class smarty_care extends Smarty {
 
@@ -45,7 +45,7 @@ class smarty_care extends Smarty {
 
  		global $templatedir, $default_template, $sDocRoot, $LDCloseAlt, $cfg, $lang, $pgt, $GLOBAL_CONFIG;
 
-		$this->smarty();
+		$this->__construct();
 
 		$this->root_path = CARE_BASE;
 
@@ -104,7 +104,7 @@ class smarty_care extends Smarty {
 		}
 
 		$this->config_dir = $this->sDocRoot.'/configs';
-		$this->cache_dir = $this->templateCache.'/cache';
+		$this->cache_dir = $this->compile_dir;//.'/cache';
 
 		# For temporary debugging
 /*		 if(0){
@@ -117,7 +117,7 @@ class smarty_care extends Smarty {
 		/* global configs
 		*/
 
-		$this->debug = true;
+		$this->debug = false;
 		// $this->caching = true;
 
 		/**

@@ -237,7 +237,7 @@ if($mode=='show'){
 
 	$TP_aux_notes=nl2br($row['aux_notes']);
 	
-	if(stristr($row['short_notes'],'marre_keshille_mjekesore')) $TP_YesNo=$LDYes; 
+	if(stristr($row['short_notes'],'took_medical_advice')) $TP_YesNo=$LDYes; 
 		else $TP_YesNo=$LDNo; 
 		
 	$TP_diagnosis=nl2br($row['diagnosis']);
