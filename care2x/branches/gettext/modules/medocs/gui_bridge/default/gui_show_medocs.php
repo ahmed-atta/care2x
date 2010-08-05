@@ -126,7 +126,7 @@ if($sex=='m') $smarty->assign('sSexType',$LDMale);
 $smarty->assign('LDBloodGroup',$LDBloodGroup);
 if($blood_group){
 	$buf='LD'.$blood_group;
-	$smarty->assign('blood_group',$$buf);
+	$smarty->assign('blood_group',$buf);
 }
 
 $smarty->assign('LDDate',$LDDate);
@@ -319,7 +319,5 @@ if(($mode!='show'&&!$nolist) ||($mode=='show'&&$nolist&&$rows>1)){
 $smarty->assign('pbBottomClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').'  title="'.$LDCancelClose.'"  align="absmiddle"></a>');
 
 $smarty->assign('sMainBlockIncludeFile','medocs/main.tpl');
-
 $smarty->display('common/mainframe.tpl');
-
 ?>
