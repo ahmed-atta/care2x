@@ -63,8 +63,7 @@
      <td>
 	 
 	 	{{if $bSetAsForm}}
-			<!-- gjergji : not needed anymore, since the new calendar 
-				<input type='text' name='date' size=10 maxlength=10 {{$sDateValidateJs}}>-->
+			 <input type='text' name='date' size=10 maxlength=10 {{$sDateValidateJs}}>
 			{{$sDateMiniCalendar}}
 		{{else}}
 			{{$sDate}}
