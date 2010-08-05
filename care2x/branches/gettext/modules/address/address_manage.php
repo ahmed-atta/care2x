@@ -58,10 +58,10 @@ $smarty->assign('menu',$menu);
  */
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/address_manage.tpl');
-/*
+
 $smarty->compile_check = true;
 $smarty->debugging = true;
 $smarty->display('debug.tpl');
-*/
+
 $smarty->display('common/mainframe.tpl');
 ?>

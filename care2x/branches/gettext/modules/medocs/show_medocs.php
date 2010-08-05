@@ -27,7 +27,7 @@ if(!isset($mode)){
 				&&!empty($_POST['text_diagnosis'])
 				&&!empty($_POST['text_therapy'])) {
 	# Prepare the posted data for saving in databank
-	include_once($root_path.'include/helpers/inc_date_format_functions.php');
+	include_once($root_path.'include/inc_date_format_functions.php');
 	# If date is empty,default to today
 	if(empty($_POST['date'])){
 		$_POST['date']=date('Y-m-d');

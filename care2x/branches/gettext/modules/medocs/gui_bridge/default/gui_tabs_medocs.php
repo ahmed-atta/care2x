@@ -13,5 +13,5 @@ if(!isset($notabs)||!$notabs){
 
 }
 
-if(!empty($subtitle)) $smarty->assign('subtitle','<font color="#fefefe" SIZE=3  FACE="verdana,Arial"><b>:: '.$subtitle);
+if(!empty($subtitle)) $smarty->assign('subtitle','<font color="#fefefe" SIZE=3  FACE="verdana,Arial"><b>:: '.$subtitle . '</b></font>');
 ?>

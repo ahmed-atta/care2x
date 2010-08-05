@@ -16,10 +16,7 @@ if($parent_admit) $sTitleNr= ($_SESSION['sess_full_en']);
 
 # Title in the toolbar
  $smarty->assign('sToolbarTitle',"$page_title $encounter_nr");
-$smarty->assign('LDBack', $LDBack);
- $smarty->assign('LDHelp', $LDHelp);
- $smarty->assign('LDClose', $LDClose);
- 
+
  # href for help button
  $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDPatientRegister')");
 
@@ -43,10 +40,12 @@ $smarty->assign('LDBack', $LDBack);
 ob_start();
 
 ?>
+
 <script  language="javascript">
 <!-- 
 
 <?php require($root_path.'include/helpers/inc_checkdate_lang.php'); ?>
+
 function popRecordHistory(table,pid) {
 	urlholder="./record_history.php<?php echo URL_REDIRECT_APPEND; ?>&table="+table+"&pid="+pid;
 	HISTWIN<?php echo $sid ?>=window.open(urlholder,"histwin<?php echo $sid ?>","menubar=no,width=400,height=550,resizable=yes,scrollbars=yes");
@@ -70,7 +69,7 @@ if($enc_obj->Is_Discharged()){
 
 }
 
-# Set the table columnsï¿½ classes
+# Set the table columns´ classes
 $smarty->assign('sClassItem','class="adm_item"');
 $smarty->assign('sClassInput','class="adm_input"');
 
@@ -167,8 +166,8 @@ if($mode=='show'){
 			if(!empty($row['therapy'])) $smarty->assign('sTherapy',substr($row['therapy'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']));
 
 			$smarty->assign('sDetailsIcon','<a href="'.$thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&encounter_nr='.$_SESSION['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr'].'"><img '.createComIcon($root_path,'info3.gif','0').'></a>');
-			$smarty->assign('sMakePdfIcon','<a href="'.$root_path.'modules/medocs/print/report.php'.URL_APPEND.'&enc='.$_SESSION['sess_en'].'&mnr='.$row['nr'].'&target='.$target.'" target=_blank><img '.createComIcon($root_path,'pdf_icon.gif','0').'></a>');
-			if($row['staff_name']) $smarty->assign('sAuthor',$row['staff_name']);
+			$smarty->assign('sMakePdfIcon','<a href="'.$root_path.'modules/pdfmaker/medocs/report.php'.URL_APPEND.'&enc='.$_SESSION['sess_en'].'&mnr='.$row['nr'].'&target='.$target.'" target=_blank><img '.createComIcon($root_path,'pdf_icon.gif','0').'></a>');
+			if($row['personell_name']) $smarty->assign('sAuthor',$row['personell_name']);
 			
 			ob_start();
 				$smarty->display('medocs/docslist_row.tpl');
@@ -204,7 +203,7 @@ if($mode=='show'){
 	$smarty->assign('sDiagnosis',nl2br($row['diagnosis']));
 	$smarty->assign('sTherapy',nl2br($row['therapy']));
 	$smarty->assign('sDate',formatDate2Local($row['date'],$date_format));
-	$smarty->assign('sAuthor',$row['staff_name']);
+	$smarty->assign('sAuthor',$row['personell_name']);
 
 # Create a new form for data entry
 
@@ -224,6 +223,7 @@ if($mode=='show'){
 	ob_start();
 
 ?>
+
 
 <script language="javascript">
 <!-- Script Begin
@@ -245,9 +245,9 @@ function chkForm(d) {
 		alert("<?php echo $LDPlsEnterDate ?>");
 		d.date.focus();
 		return false;
-	}else if(d.staff_name.value==""){
+	}else if(d.personell_name.value==""){
 		alert("<?php echo $LDPlsEnterFullName ?>");
-		d.staff_name.focus();
+		d.personell_name.focus();
 		return false;
 	}else{
 		return true;
@@ -306,7 +306,7 @@ if(($mode=='show'||$mode=='details')&&!$enc_obj->Is_Discharged()){
 
 	if($mode=='details'){
 		$smarty->assign('sPdfLinkIcon','<img '.createComIcon($root_path,'icon_acro.gif','0','absmiddle').'>');
-		$smarty->assign('sMakePdfLink','<a href="'.$root_path."modules/medocs/print/report.php".URL_APPEND."&enc=".$_SESSION['sess_en']."&mnr=".$nr.'&target='.$target.'" target=_blank>'.$LDPrintPDFDoc.'</a>');
+		$smarty->assign('sMakePdfLink','<a href="'.$root_path."modules/pdfmaker/medocs/report.php".URL_APPEND."&enc=".$_SESSION['sess_en']."&mnr=".$nr.'&target='.$target.'" target=_blank>'.$LDPrintPDFDoc.'</a>');
 	}
 } 
 if(($mode!='show'&&!$nolist) ||($mode=='show'&&$nolist&&$rows>1)){
