@@ -15,7 +15,7 @@ else
 <?php html_rtl($lang) ?>
 <?php 
 
-include_once('include/helpers/inc_charset_fx.php');
+include_once('include/core/helpers/inc_charset_fx.php');
 
 echo setCharSet(); 
 
