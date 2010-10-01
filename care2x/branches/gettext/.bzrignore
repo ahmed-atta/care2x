@@ -1,0 +1,16 @@
+.buildpath
+.project
+.settings
+cache/barcodes/*.png
+cache/templates_c/default/*.php
+uploads/logos_dept/*
+uploads/medstock/img/*
+uploads/pharma/img/*
+uploads/photos/credits/*
+uploads/photos/encounter/*
+uploads/photos/news/*
+uploads/photos/registration/*
+uploads/radiology/diagnosis/*
+uploads/radiology/dicom_img/*
+uploads/radiology/xrayfilms/*
+modules/tcm
