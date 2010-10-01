@@ -237,7 +237,7 @@
 						{{$LDTherapy}}:
 					</td>
 					<td colspan=2 class="adm_input">
-						{{ $referrer_recom_therapy}}
+						{{$referrer_recom_therapy}}
 					</td>
 				</tr>
 				<tr>
