@@ -1,6 +1,5 @@
 <?php
-if(!$searchform_count)
-{
+if(!$searchform_count) {
 ?>
 
             <script language="javascript">

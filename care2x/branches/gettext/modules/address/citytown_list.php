@@ -12,7 +12,7 @@ $local_user = 'aufnahme_user';
 require_once(CARE_BASE.'/include/helpers/inc_front_chain_lang.php');
 
 // Load the address object
-require_once(CARE_BASE.'/modules/address/model/class_address.php');
+require_once('model/class_address.php');
 $address_obj = new Address;
 
 $breakfile='address_manage.php'.URL_APPEND;
@@ -37,7 +37,7 @@ if(empty($GLOBAL_CONFIG['pagin_address_list_max_block_rows']))
 
 //Load and create paginator object
 require_once(CARE_BASE.'/include/core/class_paginator.php');
-$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],CARE_BASE);
+$pagen = new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],CARE_BASE);
 // Adjust the max nr of rows in a block
 $pagen->setMaxCount($GLOBAL_CONFIG['pagin_address_list_max_block_rows']);
 
@@ -64,127 +64,74 @@ $pagen->setSortDirection($odir);
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
 
- require_once(CARE_BASE.'/gui/smarty_template/smarty_care.class.php');
- $smarty = new smarty_care('system_admin');
+require_once(CARE_BASE.'/gui/smarty_template/smarty_care.class.php');
+$smarty = new smarty_care('system_admin');
+
+$smarty->assign('URL_APPEND',URL_APPEND);
 
 // Title in toolbar
- $smarty->assign('sToolbarTitle',"$LDAddress :: $LDListAll");
+$smarty->assign('sToolbarTitle',"$LDAddress :: $LDListAll");
 $smarty->assign('LDBack', $LDBack);
- $smarty->assign('LDHelp', $LDHelp);
- $smarty->assign('LDClose', $LDClose);
- // href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('address_list.php')");
+$smarty->assign('LDHelp', $LDHelp);
+$smarty->assign('LDClose', $LDClose);
 
- // href for close button
- $smarty->assign('breakfile',$breakfile);
+// href for help button
+$smarty->assign('pbHelp',"javascript:gethelp('address_list.php')");
 
- // Window bar title
- $smarty->assign('sWindowTitle',"$LDAddress :: $LDListAll");
+// href for close button
+$smarty->assign('breakfile',$breakfile);
 
-// Buffer page output
+// Window bar title
+$smarty->assign('sWindowTitle',"$LDAddress :: $LDListAll");
 
-ob_start();
-?>
- <ul>
-
- &nbsp;
- <br>
-<?php 
 if(is_object($address)){
-	if ($linecount) 
-		echo str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
-	else 
-		echo str_replace('~nr~','0',$LDSearchFound); 
-?>
-<table border=0 cellpadding=2 cellspacing=1>
-  <tr class="wardlisttitlerow">
-      <td><b>
-	  <?php 
-	  	if($oitem=='name') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDCityTownName,'name',$odir,$flag); 
-			 ?></b>
-	</td>
-      <td><b>
-	  <?php 
-	  	if($oitem=='zip_code') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDZipCode,'zip_code',$odir,$flag); 
-			 ?></b>
-	</td>
-      <td><b>
-	  <?php 
-	  	if($oitem=='iso_country_id') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDISOCountryCode,'iso_country_id',$odir,$flag); 
-			 ?></b>
-	</td>
-	
-      <td><b>
-	  <?php 
-	  	if($oitem=='unece_locode_type') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDUNECELocalCode,'unece_locode_type',$odir,$flag); 
-			 ?></b>
-	</td>
-
-      <td><b>
-	  <?php 
-	  	if($oitem=='info_url') $flag=TRUE;
-			else $flag=FALSE; 
-		echo $pagen->SortLink($LDWebsiteURL,'info_url',$odir,$flag); 
-			 ?></b>
-	</td>
-
-  </tr> 
-<?php
-	$toggle=0;
-	while($addr=$address->FetchRow()){
-		if($toggle) $bgc='wardlistrow2';
-			else $bgc='wardlistrow1';
-		$toggle=!$toggle;
-?>
-  <tr  class="<?php echo $bgc ?>">
-    <td><a href="citytown_info.php<?php echo URL_APPEND.'&retpath=list&nr='.$addr['nr']; ?>"><?php echo $addr['name']; ?></a></td>
-    <!-- gjergji added zip code -->
-    <td><?php echo $addr['zip_code']; ?></td>
-    <!-- end:gjergji added zip code -->
-    <td><?php echo $addr['iso_country_id']; ?></td>
-    <td><?php echo $addr['unece_locode']; ?></td>
-    <td><a href="<?php echo $addr['info_url']; ?>"><?php echo $addr['info_url']; ?></a></td>
-</td>
-  </tr> 
-<?php
+	if ($linecount) { 
+		$resultsFound =  str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.';
+	} else { 
+		$resultsFound =  str_replace('~nr~','0',$LDSearchFound); 
 	}
-	echo '
-	<tr><td colspan=3>'.$pagen->makePrevLink($LDPrevious).'</td>
-	<td align=right>'.$pagen->makeNextLink($LDNext).'</td>
-	</tr>';
-?>
-  </table>
-<?php
+	
+	$smarty->assign('resultsFound',$resultsFound);
+	
+	if($oitem == 'name') $flag=TRUE;
+	else $flag = FALSE; 
+	$nameTitle = $pagen->SortLink($LDCityTownName,'name',$odir,$flag); 
+	$smarty->assign('nameTitle',$nameTitle);
+	
+	if($oitem == 'zip_code') $flag=TRUE;
+	else $flag = FALSE; 
+	$zipTitle = $pagen->SortLink($LDZipCode,'zip_code',$odir,$flag); 
+	$smarty->assign('zipTitle',$zipTitle);
+	
+	if($oitem == 'iso_country_id') $flag=TRUE;
+	else $flag = FALSE; 
+	$isoTitle = $pagen->SortLink($LDISOCountryCode,'iso_country_id',$odir,$flag); 
+	$smarty->assign('isoTitle',$isoTitle);
+	
+	if($oitem == 'unece_locode_type') $flag=TRUE;
+	else $flag = FALSE; 
+	$uneceTitle = $pagen->SortLink($LDUNECELocalCode,'unece_locode_type',$odir,$flag); 
+	$smarty->assign('uneceTitle',$uneceTitle);
+	
+	if($oitem == 'info_url') $flag=TRUE;
+	else $flag = FALSE; 
+	$infoTitle = $pagen->SortLink($LDWebsiteURL,'info_url',$odir,$flag); 
+	$smarty->assign('infoTitle',$infoTitle);
+	
+	$smarty->assign('address',$address->GetAssoc());
+	
+	$smarty->assign('prev',$pagen->makePrevLink($LDPrevious));
+	$smarty->assign('next',$pagen->makeNextLink($LDPrevious));
+
 }
-?>
-<p>
 
-<form action="citytown_new.php" method="post">
-<input type="hidden" name="lang" value="<?php echo $lang ?>">
-<input type="hidden" name="sid" value="<?php echo $sid ?>">
-<input type="hidden" name="retpath" value="list">
-<input type="submit" value="<?php echo $LDNeedEmptyFormPls ?>">
-</form>
-</ul>
+$smarty->assign('sid',$sid);
+$smarty->assign('lang',$lang);
+$smarty->assign('LDNeedEmptyFormPls',$LDNeedEmptyFormPls);
 
-<?php
-
-$sTemp = ob_get_contents();
-ob_end_clean();
 
 // Assign page output to the mainframe template
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/citytown_list.tpl');
 
-$smarty->assign('sMainFrameBlockData',$sTemp);
- /**
- * show Template
- */
- $smarty->display('common/mainframe.tpl');
-?>
+//$smarty->compile_check = true; $smarty->debugging = true; $smarty->display('debug.tpl');
+$smarty->display('common/mainframe.tpl');
