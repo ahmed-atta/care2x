@@ -80,7 +80,7 @@ $_a_1_dutyplanallwrite = 'staff Duty/Leave plan (all areas) manage, read & write
 $_a_2_dutyplanallread = 'staff Duty/Leave plan read only';
 
 // Group start
-$title_bill = 'Billing';
+$title_bill = 'Billing';	
 $_a_1_billallwrite = 'Billing (all areas) read & write';
 $_a_2_billallread = 'Billing (all areas) read only';
 $_a_2_billpharmawrite = 'Billing (pharmacy) read & write';
@@ -104,4 +104,7 @@ $_a_1_teldirwrite = 'Telephone & Beeper information write';
 $title_hxpserver = 'HXP Server';
 $_a_1_hxpserver = 'HXP Server access';
 
+//TCM
+$title_tcm = 'TCM related input forms';
+$_a_1_tcmfinaldoc = 'TCM final doc';
 ?>
