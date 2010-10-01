@@ -1,7 +1,7 @@
 -- phpMyAdmin SQL Dump
 -- version 2.11.4
 -- http://www.phpmyadmin.net
---
+-- Ap.Muthu: care_encounter_appointment table renamed to care_encounter_appointment
 -- Host: localhost
 -- Generation Time: Oct 20, 2008 at 06:51 PM
 -- Server version: 5.0.51
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `care_address_citytown` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='InnoDB free: 4096 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC ;
 
 --
 -- Dumping data for table `care_address_citytown`
@@ -69,10 +69,10 @@ CREATE TABLE IF NOT EXISTS `care_address_citytown` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `care_appointment`
+-- Table structure for table `care_encounter_appointment`
 --
 
-CREATE TABLE IF NOT EXISTS `care_appointment` (
+CREATE TABLE IF NOT EXISTS `care_encounter_appointment` (
   `nr` bigint(20) unsigned NOT NULL auto_increment,
   `pid` int(11) NOT NULL default '0',
   `date` date NOT NULL default '0000-00-00',
@@ -101,10 +101,10 @@ CREATE TABLE IF NOT EXISTS `care_appointment` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `pid` (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='InnoDB free: 4096 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC ;
 
 --
--- Dumping data for table `care_appointment`
+-- Dumping data for table `care_encounter_appointment`
 --
 
 
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `care_billing_archive` (
   `creditcard_no` varchar(10) collate latin1_general_ci NOT NULL default '0',
   `paid_by` varchar(15) collate latin1_general_ci NOT NULL default '0',
   PRIMARY KEY  (`bill_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 4096 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_billing_archive`
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `care_billing_bill` (
   `bill_outstanding` float(10,2) default NULL,
   PRIMARY KEY  (`bill_bill_no`),
   KEY `index_bill_patnum` (`bill_encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 4096 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_billing_bill`
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `care_billing_bill_item` (
   PRIMARY KEY  (`bill_item_id`),
   KEY `index_bill_item_patnum` (`bill_item_encounter_nr`),
   KEY `index_bill_item_bill_no` (`bill_item_bill_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 4096 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_billing_bill_item`
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `care_billing_final` (
   `final_amount_recieved` float(10,2) default NULL,
   PRIMARY KEY  (`final_id`),
   KEY `index_final_patnum` (`final_encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='InnoDB free: 4096 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC ;
 
 --
 -- Dumping data for table `care_billing_final`
@@ -219,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `care_billing_item` (
   `item_type` tinytext collate latin1_general_ci,
   `item_discount_max_allowed` tinyint(4) unsigned default '0',
   PRIMARY KEY  (`item_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_billing_item`
@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `care_billing_payment` (
   PRIMARY KEY  (`payment_id`),
   KEY `index_payment_patnum` (`payment_encounter_nr`),
   KEY `index_payment_receipt_no` (`payment_receipt_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_billing_payment`
@@ -265,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `care_cache` (
   `cbinary` blob,
   `tstamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_cache`
@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `care_cafe_menu` (
   UNIQUE KEY `item_2` (`item`),
   KEY `item` (`item`,`lang`),
   KEY `cdate` (`cdate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_cafe_menu`
@@ -318,7 +318,7 @@ CREATE TABLE IF NOT EXISTS `care_cafe_prices` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   KEY `item` (`item`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_cafe_prices`
@@ -347,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `care_category_diagnosis` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_category_diagnosis`
@@ -372,7 +372,7 @@ CREATE TABLE IF NOT EXISTS `care_category_disease` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_category_disease`
@@ -401,7 +401,7 @@ CREATE TABLE IF NOT EXISTS `care_category_procedure` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_category_procedure`
@@ -428,7 +428,7 @@ CREATE TABLE IF NOT EXISTS `care_classif_neonatal` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_classif_neonatal`
@@ -455,7 +455,7 @@ CREATE TABLE IF NOT EXISTS `care_class_encounter` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`class_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_class_encounter`
@@ -478,7 +478,7 @@ CREATE TABLE IF NOT EXISTS `care_class_ethnic_orig` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_class_ethnic_orig`
@@ -508,7 +508,7 @@ CREATE TABLE IF NOT EXISTS `care_class_financial` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`class_nr`),
   KEY `class_2` (`class_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_class_financial`
@@ -534,7 +534,7 @@ CREATE TABLE IF NOT EXISTS `care_class_insurance` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`class_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 -- --------------------------------------------------------
 
@@ -555,7 +555,7 @@ CREATE TABLE IF NOT EXISTS `care_class_therapy` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 3072 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_class_therapy`
@@ -581,7 +581,7 @@ CREATE TABLE IF NOT EXISTS `care_complication` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 11264 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_complication`
@@ -605,7 +605,7 @@ CREATE TABLE IF NOT EXISTS `care_config_global` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 11264 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_config_global`
@@ -629,7 +629,7 @@ CREATE TABLE IF NOT EXISTS `care_config_user` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 11264 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_config_user`
@@ -654,7 +654,7 @@ CREATE TABLE IF NOT EXISTS `care_currency` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   KEY `item_no` (`item_no`),
   KEY `short_name` (`short_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 11264 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_currency`
@@ -699,10 +699,10 @@ CREATE TABLE IF NOT EXISTS `care_department` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   `is_pharmacy` tinyint(4) NOT NULL COMMENT 'is a pharmacy, or a normal dept ?',
-  `pharma_dept_nr` tinyint(3) unsigned default '0' COMMENT 'the pharmacy to which the epartement is connected',
+  `pharma_dept_nr` tinyint(3) unsigned default '0' COMMENT 'the pharmacy to which the departement is connected',
   PRIMARY KEY  (`nr`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 11264 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_department`
@@ -738,7 +738,7 @@ CREATE TABLE IF NOT EXISTS `care_diagnosis_localcode` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`localcode`),
   KEY `diagnosis_code` (`localcode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 11264 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_diagnosis_localcode`
@@ -769,7 +769,7 @@ CREATE TABLE IF NOT EXISTS `care_drg_intern` (
   PRIMARY KEY  (`nr`),
   KEY `nr` (`nr`),
   KEY `code` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 11264 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_drg_intern`
@@ -796,7 +796,7 @@ CREATE TABLE IF NOT EXISTS `care_drg_quicklist` (
   `create_id` varchar(25) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 11264 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_drg_quicklist`
@@ -823,7 +823,7 @@ CREATE TABLE IF NOT EXISTS `care_drg_related_codes` (
   `create_id` varchar(25) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 11264 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_drg_related_codes`
@@ -854,7 +854,7 @@ CREATE TABLE IF NOT EXISTS `care_dutyplan_oncall` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `dept_nr` (`dept_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 11264 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_dutyplan_oncall`
@@ -878,7 +878,7 @@ CREATE TABLE IF NOT EXISTS `care_effective_day` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`eff_day_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 11264 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_effective_day`
@@ -892,55 +892,61 @@ CREATE TABLE IF NOT EXISTS `care_effective_day` (
 --
 
 CREATE TABLE IF NOT EXISTS `care_encounter` (
-  `encounter_nr` bigint(11) unsigned NOT NULL auto_increment,
-  `pid` int(11) NOT NULL default '0',
-  `encounter_date` datetime NOT NULL default '0000-00-00 00:00:00',
-  `encounter_class_nr` smallint(5) unsigned NOT NULL default '0',
-  `encounter_type` varchar(35) collate latin1_general_ci NOT NULL,
-  `encounter_status` varchar(35) collate latin1_general_ci NOT NULL,
-  `referrer_diagnosis` varchar(255) collate latin1_general_ci NOT NULL,
-  `referrer_recom_therapy` varchar(255) collate latin1_general_ci default NULL,
-  `referrer_dr` varchar(60) collate latin1_general_ci NOT NULL,
-  `referrer_dept` varchar(255) collate latin1_general_ci NOT NULL,
-  `referrer_institution` varchar(255) collate latin1_general_ci NOT NULL,
-  `referrer_notes` text collate latin1_general_ci NOT NULL,
-  `regional_code` varchar(60) collate latin1_general_ci default NULL,
-  `triage` varchar(20) collate latin1_general_ci NOT NULL default 'white',
-  `admit_type` int(10) NOT NULL default '0',
-  `financial_class_nr` tinyint(3) unsigned NOT NULL default '0',
-  `insurance_nr` varchar(25) collate latin1_general_ci default '0',
-  `insurance_firm_id` varchar(25) collate latin1_general_ci NOT NULL default '0',
-  `insurance_class_nr` tinyint(3) unsigned NOT NULL default '0',
-  `insurance_2_nr` varchar(25) collate latin1_general_ci default '0',
-  `insurance_2_firm_id` varchar(25) collate latin1_general_ci NOT NULL default '0',
-  `guarantor_pid` int(11) NOT NULL default '0',
-  `contact_pid` int(11) NOT NULL default '0',
-  `contact_relation` varchar(35) collate latin1_general_ci NOT NULL,
-  `current_ward_nr` smallint(3) unsigned NOT NULL default '0',
-  `current_room_nr` smallint(5) unsigned NOT NULL default '0',
-  `in_ward` tinyint(1) NOT NULL default '0',
-  `current_dept_nr` smallint(3) unsigned NOT NULL default '0',
-  `in_dept` tinyint(1) NOT NULL default '0',
-  `current_firm_nr` smallint(5) unsigned NOT NULL default '0',
-  `current_att_dr_nr` int(10) NOT NULL default '0',
-  `consulting_dr` varchar(60) collate latin1_general_ci NOT NULL,
-  `extra_service` varchar(25) collate latin1_general_ci NOT NULL,
-  `is_discharged` tinyint(1) unsigned NOT NULL default '0',
-  `discharge_date` date default NULL,
-  `discharge_time` time default NULL,
-  `followup_date` date NOT NULL default '0000-00-00',
-  `followup_responsibility` varchar(255) collate latin1_general_ci default NULL,
-  `post_encounter_notes` text collate latin1_general_ci NOT NULL,
-  `status` varchar(25) collate latin1_general_ci NOT NULL,
-  `history` text collate latin1_general_ci NOT NULL,
-  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (`encounter_nr`),
+  `encounter_nr` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` int(10) unsigned NOT NULL DEFAULT '0',
+  `encounter_date` datetime DEFAULT '0000-00-00 00:00:00',
+  `encounter_class_nr` smallint(5) unsigned DEFAULT '0',
+  `encounter_type` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `encounter_status` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `referrer_diagnosis` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `referrer_recom_therapy` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `referrer_dr` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `referrer_dept` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `referrer_institution` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `referrer_notes` text CHARACTER SET latin1 COLLATE latin1_general_ci,
+  `regional_code` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `triage` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT 'white',
+  `admit_type` int(10) DEFAULT '0',
+  `financial_class_nr` tinyint(3) unsigned DEFAULT '0',
+  `insurance_nr` varchar(25) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT '0',
+  `insurance_firm_id` varchar(25) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT '0',
+  `insurance_class_nr` tinyint(3) unsigned DEFAULT '0',
+  `insurance_2_nr` varchar(25) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT '0',
+  `insurance_2_firm_id` varchar(25) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT '0',
+  `guarantor_pid` int(11) DEFAULT '0',
+  `contact_pid` int(11) DEFAULT '0',
+  `contact_relation` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `current_ward_nr` smallint(3) unsigned DEFAULT '0',
+  `current_room_nr` smallint(5) unsigned DEFAULT '0',
+  `in_ward` tinyint(1) DEFAULT '0',
+  `current_dept_nr` smallint(3) unsigned DEFAULT '0',
+  `in_dept` tinyint(1) DEFAULT '0',
+  `current_firm_nr` smallint(5) unsigned DEFAULT '0',
+  `current_att_dr_nr` int(10) DEFAULT '0',
+  `consulting_dr` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `extra_service` varchar(25) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `is_discharged` tinyint(1) unsigned DEFAULT '0',
+  `discharge_date` date DEFAULT NULL,
+  `discharge_time` time DEFAULT NULL,
+  `followup_date` date DEFAULT '0000-00-00',
+  `followup_responsibility` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `post_encounter_notes` text CHARACTER SET latin1 COLLATE latin1_general_ci,
+  `status` varchar(25) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `history` text CHARACTER SET latin1 COLLATE latin1_general_ci,
+  `modify_id` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_id` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`encounter_nr`),
   KEY `pid` (`pid`),
   KEY `encounter_date` (`encounter_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='InnoDB free: 11264 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC ;
+
+--
+-- Constraints for table `care_encounter`
+--
+ALTER TABLE `care_encounter`
+  ADD CONSTRAINT `fk_care_person_encounter` FOREIGN KEY (`pid`) REFERENCES `care_person` (`pid`);
 
 --
 -- Dumping data for table `care_encounter`
@@ -965,7 +971,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_custom_ddc` (
   `createid` varchar(64) collate latin1_general_ci NOT NULL,
   `createtime` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_custom_ddc`
@@ -995,7 +1001,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_custom_inout` (
   `createid` varchar(64) collate latin1_general_ci NOT NULL,
   `createtime` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_custom_inout`
@@ -1018,7 +1024,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_custom_noc` (
   `createid` varchar(64) collate latin1_general_ci NOT NULL,
   `createtime` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_custom_noc`
@@ -1040,7 +1046,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_custom_tc` (
   `time` time NOT NULL,
   `position` varchar(32) collate latin1_general_ci NOT NULL,
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_custom_tc`
@@ -1076,7 +1082,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_diagnosis` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`diagnosis_nr`),
   KEY `encounter_nr` (`encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_diagnosis`
@@ -1106,7 +1112,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_diagnostics_report` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`item_nr`,`report_nr`),
   KEY `report_nr` (`report_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_diagnostics_report`
@@ -1134,7 +1140,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_drg_intern` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `encounter_nr` (`encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_drg_intern`
@@ -1193,7 +1199,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_event_signaller` (
   `rose_23` tinyint(1) NOT NULL default '0',
   `rose_24` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_event_signaller`
@@ -1220,7 +1226,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_financial_class` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_financial_class`
@@ -1250,7 +1256,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_image` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `encounter_nr` (`encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_image`
@@ -1282,7 +1288,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_immunization` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_immunization`
@@ -1317,7 +1323,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_location` (
   KEY `location_id` (`location_nr`),
   KEY `encounter_nr` (`encounter_nr`),
   KEY `location_nr` (`location_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_location`
@@ -1350,7 +1356,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_measurement` (
   PRIMARY KEY  (`nr`),
   KEY `type` (`msr_type_nr`),
   KEY `encounter_nr` (`encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_measurement`
@@ -1397,7 +1403,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_notes` (
   PRIMARY KEY  (`nr`),
   KEY `encounter_nr` (`encounter_nr`),
   KEY `type_nr` (`type_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_notes`
@@ -1427,7 +1433,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_obstetric` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`encounter_nr`),
   KEY `encounter_nr` (`pregnancy_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_obstetric`
@@ -1486,7 +1492,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_op` (
   KEY `dept` (`dept_nr`),
   KEY `op_room` (`op_room`),
   KEY `op_date` (`op_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_op`
@@ -1514,7 +1520,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_prescription` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `encounter_nr` (`encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AVG_ROW_LENGTH=85 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_prescription`
@@ -1540,7 +1546,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_prescription_notes` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_prescription_notes`
@@ -1574,7 +1580,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_prescription_sub` (
   `price` decimal(10,2) NOT NULL default '0.00',
   PRIMARY KEY  (`nr`),
   KEY `prescription_nr` (`prescription_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_prescription_sub`
@@ -1609,7 +1615,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_procedure` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`procedure_nr`),
   KEY `encounter_nr` (`encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_procedure`
@@ -1639,7 +1645,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter_sickconfirm` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `encounter_nr` (`encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_encounter_sickconfirm`
@@ -1664,7 +1670,7 @@ CREATE TABLE IF NOT EXISTS `care_group` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 10240 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 -- --------------------------------------------------------
 
@@ -1875,7 +1881,7 @@ CREATE TABLE IF NOT EXISTS `care_img_diagnostic` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `encounter_nr` (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_img_diagnostic`
@@ -1915,7 +1921,7 @@ CREATE TABLE IF NOT EXISTS `care_insurance_firm` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`firm_id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_insurance_firm`
@@ -1950,7 +1956,7 @@ CREATE TABLE IF NOT EXISTS `care_mail_private` (
   `send_stamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `uid` varchar(255) collate latin1_general_ci NOT NULL,
   KEY `recipient` (`recipient`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_mail_private`
@@ -1982,7 +1988,7 @@ CREATE TABLE IF NOT EXISTS `care_mail_private_users` (
   `sig` tinytext collate latin1_general_ci NOT NULL,
   `append_sig` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_mail_private_users`
@@ -2008,7 +2014,7 @@ CREATE TABLE IF NOT EXISTS `care_med_ordercatalog` (
   `packing` tinytext collate latin1_general_ci,
   PRIMARY KEY  (`item_no`),
   KEY `item_no` (`item_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_med_ordercatalog`
@@ -2043,7 +2049,7 @@ CREATE TABLE IF NOT EXISTS `care_med_orderlist` (
   PRIMARY KEY  (`order_nr`),
   KEY `item_nr` (`order_nr`),
   KEY `dept` (`dept_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_med_orderlist`
@@ -2112,7 +2118,7 @@ CREATE TABLE IF NOT EXISTS `care_menu_main` (
   `modify_id` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
   `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`nr`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_menu_main`
@@ -2141,7 +2147,7 @@ CREATE TABLE IF NOT EXISTS `care_menu_sub` (
   `s_status` varchar(100) collate latin1_general_ci NOT NULL default '',
   `s_modify_id` varchar(100) collate latin1_general_ci NOT NULL default '',
   `s_modify_time` datetime NOT NULL default '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_menu_sub`
@@ -2167,7 +2173,7 @@ CREATE TABLE IF NOT EXISTS `care_method_induction` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_method_induction`
@@ -2193,7 +2199,7 @@ CREATE TABLE IF NOT EXISTS `care_mode_delivery` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_mode_delivery`
@@ -2244,7 +2250,7 @@ CREATE TABLE IF NOT EXISTS `care_neonatal` (
   KEY `pid` (`pid`),
   KEY `pregnancy_nr` (`parent_encounter_nr`),
   KEY `encounter_nr` (`encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_neonatal`
@@ -2282,7 +2288,7 @@ CREATE TABLE IF NOT EXISTS `care_news_article` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `item_no` (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 
 -- --------------------------------------------------------
@@ -2370,7 +2376,7 @@ CREATE TABLE IF NOT EXISTS `care_op_med_doc` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `encounter_nr` (`encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_op_med_doc`
@@ -2384,67 +2390,69 @@ CREATE TABLE IF NOT EXISTS `care_op_med_doc` (
 --
 
 CREATE TABLE IF NOT EXISTS `care_person` (
-  `pid` int(11) unsigned NOT NULL auto_increment,
-  `date_reg` datetime NOT NULL default '0000-00-00 00:00:00',
-  `name_first` varchar(60) collate latin1_general_ci NOT NULL,
-  `name_2` varchar(60) collate latin1_general_ci default NULL,
-  `name_3` varchar(60) collate latin1_general_ci default NULL,
-  `name_middle` varchar(60) collate latin1_general_ci default NULL,
-  `name_last` varchar(60) collate latin1_general_ci NOT NULL,
-  `name_maiden` varchar(60) collate latin1_general_ci default NULL,
-  `name_others` text collate latin1_general_ci NOT NULL,
-  `date_birth` date NOT NULL default '0000-00-00',
-  `blood_group` char(2) collate latin1_general_ci NOT NULL,
-  `addr_str` varchar(60) collate latin1_general_ci NOT NULL,
-  `addr_str_nr` varchar(10) collate latin1_general_ci NOT NULL,
-  `addr_zip` varchar(15) collate latin1_general_ci NOT NULL,
-  `addr_citytown_nr` mediumint(8) unsigned NOT NULL default '0',
-  `addr_is_valid` tinyint(1) NOT NULL default '0',
-  `citizenship` varchar(35) collate latin1_general_ci default NULL,
-  `phone_1_code` varchar(15) collate latin1_general_ci default '0',
-  `phone_1_nr` varchar(35) collate latin1_general_ci default NULL,
-  `phone_2_code` varchar(15) collate latin1_general_ci default '0',
-  `phone_2_nr` varchar(35) collate latin1_general_ci default NULL,
-  `cellphone_1_nr` varchar(35) collate latin1_general_ci default NULL,
-  `cellphone_2_nr` varchar(35) collate latin1_general_ci default NULL,
-  `fax` varchar(35) collate latin1_general_ci default NULL,
-  `email` varchar(60) collate latin1_general_ci default NULL,
-  `civil_status` varchar(35) collate latin1_general_ci NOT NULL,
-  `sex` char(1) collate latin1_general_ci NOT NULL,
-  `title` varchar(25) collate latin1_general_ci default NULL,
+  `pid` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `hospital_file_nr` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL COMMENT 'placeholder for existing individual hospital file number system',
+  `date_reg` datetime DEFAULT '0000-00-00 00:00:00',
+  `name_first` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `name_2` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `name_3` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `name_middle` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `name_last` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `name_maiden` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `name_others` text CHARACTER SET latin1 COLLATE latin1_general_ci,
+  `date_birth` date DEFAULT '0000-00-00',
+  `blood_group` char(2) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `addr_str` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `addr_str_nr` varchar(10) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `addr_zip` varchar(15) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `addr_citytown_nr` mediumint(8) unsigned DEFAULT '0',
+  `addr_is_valid` tinyint(1) DEFAULT '0',
+  `citizenship` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `phone_1_code` varchar(15) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT '0',
+  `phone_1_nr` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `phone_2_code` varchar(15) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT '0',
+  `phone_2_nr` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `cellphone_1_nr` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `cellphone_2_nr` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `fax` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `email` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `civil_status` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `sex` char(1) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `title` varchar(25) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
   `photo` blob,
-  `photo_filename` varchar(60) collate latin1_general_ci NOT NULL,
-  `ethnic_orig` mediumint(8) unsigned default NULL,
-  `org_id` varchar(60) collate latin1_general_ci default NULL,
-  `sss_nr` varchar(60) collate latin1_general_ci default NULL,
-  `nat_id_nr` varchar(60) collate latin1_general_ci default NULL,
-  `religion` varchar(125) collate latin1_general_ci default NULL,
-  `mother_pid` int(11) unsigned NOT NULL default '0',
-  `father_pid` int(11) unsigned NOT NULL default '0',
-  `contact_person` varchar(255) collate latin1_general_ci default NULL,
-  `contact_pid` int(11) unsigned NOT NULL default '0',
-  `contact_relation` varchar(25) collate latin1_general_ci default '0',
-  `death_date` date NOT NULL default '0000-00-00',
-  `death_encounter_nr` int(10) unsigned NOT NULL default '0',
-  `death_cause` varchar(255) collate latin1_general_ci default NULL,
-  `death_cause_code` varchar(15) collate latin1_general_ci default NULL,
-  `date_update` datetime default NULL,
-  `status` varchar(20) collate latin1_general_ci NOT NULL,
-  `history` text collate latin1_general_ci NOT NULL,
-  `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `create_id` varchar(35) collate latin1_general_ci NOT NULL,
-  `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
-  `relative_name_first` varchar(60) collate latin1_general_ci default NULL,
-  `relative_name_last` varchar(60) collate latin1_general_ci default NULL,
-  `relative_phone` varchar(35) collate latin1_general_ci default NULL,
-  PRIMARY KEY  (`pid`),
+  `photo_filename` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `ethnic_orig` mediumint(8) unsigned DEFAULT NULL,
+  `org_id` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `sss_nr` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `nat_id_nr` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `religion` varchar(125) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `mother_pid` int(10) unsigned DEFAULT '0',
+  `father_pid` int(10) unsigned DEFAULT '0',
+  `contact_person` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `contact_pid` int(10) unsigned DEFAULT '0',
+  `contact_relation` varchar(25) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT '0',
+  `death_date` date DEFAULT '0000-00-00',
+  `death_encounter_nr` int(10) unsigned DEFAULT '0',
+  `death_cause` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `death_cause_code` varchar(15) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `date_update` datetime DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `history` text CHARACTER SET latin1 COLLATE latin1_general_ci,
+  `modify_id` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_id` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `relative_name_first` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `relative_name_last` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `relative_phone` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  PRIMARY KEY (`pid`),
   KEY `name_last` (`name_last`),
   KEY `name_first` (`name_first`),
   KEY `date_reg` (`date_reg`),
   KEY `date_birth` (`date_birth`),
   KEY `pid` (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='InnoDB free: 11264 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC ;
+
 
 --
 -- Dumping data for table `care_person`
@@ -2487,7 +2495,7 @@ CREATE TABLE IF NOT EXISTS `care_staff` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`,`pid`,`job_type_nr`),
   KEY `pid` (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_staff`
@@ -2518,7 +2526,7 @@ CREATE TABLE IF NOT EXISTS `care_staff_assignment` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`,`staff_nr`,`role_nr`,`location_type_nr`,`location_nr`),
   KEY `staff_nr` (`staff_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_staff_assignment`
@@ -2546,7 +2554,7 @@ CREATE TABLE IF NOT EXISTS `care_person_insurance` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`item_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_person_insurance`
@@ -2573,7 +2581,7 @@ CREATE TABLE IF NOT EXISTS `care_person_other_number` (
   PRIMARY KEY  (`nr`),
   KEY `pid` (`pid`),
   KEY `other_nr` (`other_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_person_other_number`
@@ -2599,7 +2607,7 @@ CREATE TABLE IF NOT EXISTS `care_pharma_ordercatalog` (
   `packing` tinytext collate latin1_general_ci,
   `quantity` double NOT NULL default '0',
   KEY `item_no` (`item_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_pharma_ordercatalog`
@@ -2634,7 +2642,7 @@ CREATE TABLE IF NOT EXISTS `care_pharma_orderlist` (
   PRIMARY KEY  (`order_nr`,`dept_nr`),
   KEY `dept` (`dept_nr`),
   KEY `order_nr` (`order_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_pharma_orderlist`
@@ -2649,7 +2657,7 @@ CREATE TABLE IF NOT EXISTS `care_pharma_orderlist` (
 
 CREATE TABLE IF NOT EXISTS `care_pharma_products_main` (
   `bestellnum` varchar(25) collate latin1_general_ci NOT NULL,
-  `id_sub` int(11) NOT NULL COMMENT 'lidhja me nenkartelen e produktit',
+  `id_sub` int(11) NOT NULL COMMENT 'connection with the product under card',
   `artikelnum` tinytext collate latin1_general_ci NOT NULL,
   `industrynum` tinytext collate latin1_general_ci NOT NULL,
   `artikelname` tinytext collate latin1_general_ci NOT NULL,
@@ -2719,7 +2727,7 @@ CREATE TABLE IF NOT EXISTS `care_phone` (
   PRIMARY KEY  (`item_nr`,`pid`,`staff_nr`,`dept_nr`),
   KEY `name` (`name`),
   KEY `vorname` (`vorname`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_phone`
@@ -2771,7 +2779,7 @@ CREATE TABLE IF NOT EXISTS `care_pregnancy` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`,`encounter_nr`),
   KEY `encounter_nr` (`encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_pregnancy`
@@ -2798,7 +2806,7 @@ CREATE TABLE IF NOT EXISTS `care_registry` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`registry_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_registry`
@@ -2823,7 +2831,7 @@ CREATE TABLE IF NOT EXISTS `care_role_person` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`,`group_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 9216 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_role_person`
@@ -2858,7 +2866,7 @@ CREATE TABLE IF NOT EXISTS `care_room` (
   KEY `room_nr` (`room_nr`),
   KEY `ward_nr` (`ward_nr`),
   KEY `dept_nr` (`dept_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_room`
@@ -2878,7 +2886,7 @@ CREATE TABLE IF NOT EXISTS `care_sessions` (
   `DATA` text collate latin1_general_ci NOT NULL,
   PRIMARY KEY  (`SESSKEY`),
   KEY `EXPIRY` (`EXPIRY`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_sessions`
@@ -2912,7 +2920,7 @@ CREATE TABLE IF NOT EXISTS `care_standby_duty_report` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`report_nr`),
   KEY `report_nr` (`report_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_standby_duty_report`
@@ -2942,7 +2950,7 @@ CREATE TABLE IF NOT EXISTS `care_steri_products_main` (
   `lock_flag` tinyint(1) NOT NULL default '0',
   `medgroup` text collate latin1_general_ci NOT NULL,
   `cave` tinytext collate latin1_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_steri_products_main`
@@ -3042,7 +3050,7 @@ CREATE TABLE IF NOT EXISTS `care_target_test` (
   `reperti_addome` varchar(255) collate latin1_general_ci default NULL,
   PRIMARY KEY  (`nr`),
   UNIQUE KEY `nr` (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_target_test`
@@ -3077,7 +3085,7 @@ CREATE TABLE IF NOT EXISTS `care_tech_questions` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`batch_nr`),
   KEY `batch_nr` (`batch_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_tech_questions`
@@ -3110,7 +3118,7 @@ CREATE TABLE IF NOT EXISTS `care_tech_repair_done` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`batch_nr`,`dept_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_tech_repair_done`
@@ -3149,7 +3157,7 @@ CREATE TABLE IF NOT EXISTS `care_tech_repair_job` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`batch_nr`),
   KEY `batch_nr` (`batch_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_tech_repair_job`
@@ -3189,7 +3197,7 @@ CREATE TABLE IF NOT EXISTS `care_test_findings_baclabor` (
   PRIMARY KEY  (`batch_nr`,`encounter_nr`,`room_nr`,`dept_nr`),
   KEY `findings_date` (`findings_date`),
   KEY `rec_date` (`rec_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_test_findings_baclabor`
@@ -3219,7 +3227,7 @@ CREATE TABLE IF NOT EXISTS `care_test_findings_baclabor_sub` (
   `create_id` varchar(35) character set latin1 collate latin1_general_ci default NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`sub_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
 
 --
 -- Dumping data for table `care_test_findings_baclabor_sub`
@@ -3249,7 +3257,7 @@ CREATE TABLE IF NOT EXISTS `care_test_findings_chemlab` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`batch_nr`,`encounter_nr`,`job_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_test_findings_chemlab`
@@ -3276,7 +3284,7 @@ CREATE TABLE IF NOT EXISTS `care_test_findings_chemlabor_sub` (
   `create_id` varchar(35) character set latin1 collate latin1_general_ci default NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`sub_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
 
 --
 -- Dumping data for table `care_test_findings_chemlabor_sub`
@@ -3311,7 +3319,7 @@ CREATE TABLE IF NOT EXISTS `care_test_findings_patho` (
   PRIMARY KEY  (`batch_nr`,`encounter_nr`,`room_nr`,`dept_nr`),
   KEY `send_date` (`findings_date`),
   KEY `findings_date` (`findings_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_test_findings_patho`
@@ -3343,7 +3351,7 @@ CREATE TABLE IF NOT EXISTS `care_test_findings_radio` (
   PRIMARY KEY  (`batch_nr`,`encounter_nr`),
   KEY `send_date` (`findings_date`),
   KEY `findings_date` (`findings_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_test_findings_radio`
@@ -3406,7 +3414,7 @@ CREATE TABLE IF NOT EXISTS `care_test_param` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`,`group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 
 -- --------------------------------------------------------
@@ -3434,7 +3442,7 @@ CREATE TABLE IF NOT EXISTS `care_test_request_baclabor` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`batch_nr`),
   KEY `send_date` (`send_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_test_request_baclabor`
@@ -3456,7 +3464,7 @@ CREATE TABLE IF NOT EXISTS `care_test_request_baclabor_sub` (
   `material` varchar(255) NOT NULL default '0' COMMENT 'Material notes and remarks',
   `material_value` varchar(255) NOT NULL default '0',
   PRIMARY KEY  (`sub_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
 
 --
 -- Dumping data for table `care_test_request_baclabor_sub`
@@ -3542,7 +3550,7 @@ CREATE TABLE IF NOT EXISTS `care_test_request_blood` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`batch_nr`),
   KEY `send_date` (`send_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_test_request_blood`
@@ -3576,7 +3584,7 @@ CREATE TABLE IF NOT EXISTS `care_test_request_chemlabor` (
   `create_time` timestamp NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`batch_nr`),
   KEY `encounter_nr` (`encounter_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_test_request_chemlabor`
@@ -3596,7 +3604,7 @@ CREATE TABLE IF NOT EXISTS `care_test_request_chemlabor_sub` (
   `paramater_name` varchar(255) default '0',
   `parameter_value` varchar(255) default '0',
   PRIMARY KEY  (`sub_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
 
 --
 -- Dumping data for table `care_test_request_chemlabor_sub`
@@ -3630,7 +3638,7 @@ CREATE TABLE IF NOT EXISTS `care_test_request_generic` (
   PRIMARY KEY  (`batch_nr`),
   KEY `batch_nr` (`batch_nr`,`encounter_nr`),
   KEY `send_date` (`send_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_test_request_generic`
@@ -3687,7 +3695,7 @@ CREATE TABLE IF NOT EXISTS `care_test_request_patho` (
   PRIMARY KEY  (`batch_nr`),
   KEY `encounter_nr` (`encounter_nr`),
   KEY `send_date` (`send_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_test_request_patho`
@@ -3739,7 +3747,7 @@ CREATE TABLE IF NOT EXISTS `care_test_request_radio` (
   UNIQUE KEY `batch_nr_2` (`batch_nr`),
   KEY `batch_nr` (`batch_nr`,`encounter_nr`),
   KEY `send_date` (`xray_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_test_request_radio`
@@ -3765,7 +3773,7 @@ CREATE TABLE IF NOT EXISTS `care_type_anaesthesia` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_anaesthesia`
@@ -3791,7 +3799,7 @@ CREATE TABLE IF NOT EXISTS `care_type_application` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_application`
@@ -3816,7 +3824,7 @@ CREATE TABLE IF NOT EXISTS `care_type_assignment` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_assignment`
@@ -3841,7 +3849,7 @@ CREATE TABLE IF NOT EXISTS `care_type_cause_opdelay` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`type_nr`),
   KEY `type` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_cause_opdelay`
@@ -3862,7 +3870,7 @@ CREATE TABLE IF NOT EXISTS `care_type_color` (
   `modify_id` varchar(35) collate latin1_general_ci NOT NULL,
   `modify_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`color_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_color`
@@ -3888,7 +3896,7 @@ CREATE TABLE IF NOT EXISTS `care_type_department` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `type` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_department`
@@ -3912,7 +3920,7 @@ CREATE TABLE IF NOT EXISTS `care_type_discharge` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 8192 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_discharge`
@@ -3938,7 +3946,7 @@ CREATE TABLE IF NOT EXISTS `care_type_duty` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`type_nr`),
   KEY `type` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_duty`
@@ -3965,7 +3973,7 @@ CREATE TABLE IF NOT EXISTS `care_type_encounter` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`type_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_encounter`
@@ -3990,7 +3998,7 @@ CREATE TABLE IF NOT EXISTS `care_type_ethnic_orig` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `type` (`class_nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_ethnic_orig`
@@ -4016,7 +4024,7 @@ CREATE TABLE IF NOT EXISTS `care_type_feeding` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_feeding`
@@ -4048,7 +4056,7 @@ CREATE TABLE IF NOT EXISTS `care_type_immunization` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL default '',
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_immunization`
@@ -4075,7 +4083,7 @@ CREATE TABLE IF NOT EXISTS `care_type_insurance` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`type_nr`),
   KEY `type` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_insurance`
@@ -4104,7 +4112,7 @@ CREATE TABLE IF NOT EXISTS `care_type_localization` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_localization`
@@ -4129,7 +4137,7 @@ CREATE TABLE IF NOT EXISTS `care_type_location` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_location`
@@ -4153,7 +4161,7 @@ CREATE TABLE IF NOT EXISTS `care_type_measurement` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_measurement`
@@ -4179,7 +4187,7 @@ CREATE TABLE IF NOT EXISTS `care_type_notes` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   UNIQUE KEY `type` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_notes`
@@ -4205,7 +4213,7 @@ CREATE TABLE IF NOT EXISTS `care_type_outcome` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_outcome`
@@ -4231,7 +4239,7 @@ CREATE TABLE IF NOT EXISTS `care_type_perineum` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_perineum`
@@ -4255,7 +4263,7 @@ CREATE TABLE IF NOT EXISTS `care_type_prescription` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_prescription`
@@ -4280,7 +4288,7 @@ CREATE TABLE IF NOT EXISTS `care_type_room` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_room`
@@ -4306,7 +4314,7 @@ CREATE TABLE IF NOT EXISTS `care_type_test` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`type_nr`),
   KEY `type` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_test`
@@ -4332,7 +4340,7 @@ CREATE TABLE IF NOT EXISTS `care_type_time` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `type` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_time`
@@ -4358,7 +4366,7 @@ CREATE TABLE IF NOT EXISTS `care_type_unit_measurement` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `type` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_type_unit_measurement`
@@ -4386,7 +4394,7 @@ CREATE TABLE IF NOT EXISTS `care_unit_measurement` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_unit_measurement`
@@ -4411,7 +4419,7 @@ CREATE TABLE IF NOT EXISTS `care_users` (
   `s_time` time NOT NULL default '00:00:00',
   `expire_date` date NOT NULL default '0000-00-00',
   `expire_time` time NOT NULL default '00:00:00',
-  `dept_nr` text collate latin1_general_ci NOT NULL COMMENT 'the department in wich the user is allowed to enter / view',
+  `dept_nr` text collate latin1_general_ci NOT NULL COMMENT 'the department in which the user is allowed to enter / view',
   `user_role` tinyint(4) NOT NULL default '0',
   `status` varchar(15) collate latin1_general_ci NOT NULL,
   `history` text collate latin1_general_ci NOT NULL,
@@ -4445,7 +4453,7 @@ CREATE TABLE IF NOT EXISTS `care_user_roles` (
   `create_id` varchar(35) collate latin1_general_ci NOT NULL,
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_user_roles`
@@ -4466,7 +4474,7 @@ CREATE TABLE IF NOT EXISTS `care_version` (
   `date` date NOT NULL default '0000-00-00',
   `time` time NOT NULL default '00:00:00',
   `releaser` varchar(30) collate latin1_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_version`
@@ -4500,7 +4508,7 @@ CREATE TABLE IF NOT EXISTS `care_ward` (
   `create_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   KEY `ward_id` (`ward_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='InnoDB free: 7168 kB' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_ward`
@@ -4566,7 +4574,7 @@ CREATE TABLE IF NOT EXISTS `care_yellow_paper` (
   `modify_time` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`nr`),
   UNIQUE KEY `nr` (`nr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `care_yellow_paper`
@@ -4807,10 +4815,12 @@ INSERT INTO care_config_user VALUES ('default', 'a:19:{s:4:"mask";s:1:"1";s:11:"
 -- Dumping data for table care_currency
 --
 
-INSERT INTO care_currency VALUES (13, '?', 'Euro', 'European currency', 'main', 'Elpidio Latorilla', 20030802190637, '', 20021126200534);
-INSERT INTO care_currency VALUES (3, 'L', 'Pound', 'GB British Pound (ISO = GBP)', '', '', 20030213173107, '', 20020816230349);
-INSERT INTO care_currency VALUES (10, 'R', 'Rand', 'South African Rand (ISO = ZAR)', '', '', 20030802190637, 'Elpidio Latorilla', 20020817171805);
-INSERT INTO care_currency VALUES (8, 'R', 'Rupees', 'Indian Rupees (ISO = INR)', '', '', 20030213173059, 'Elpidio Latorilla', 20020920234306);
+INSERT INTO care_currency VALUES (1, 'S$', 'SG Dollar', 'Singapore Dollar (ISO = SGD)', 'main', '', 20100905190000, 'Ap Muthu', 20100905180000);
+INSERT INTO care_currency VALUES (2, '$', 'US Dollar', 'US Dollar (ISO = USD)', '', '', 20100905190000, 'Ap Muthu', 20100905180000);
+INSERT INTO care_currency VALUES (2, '€', 'Euro', 'European currency (ISO = EUR)', '', 'Elpidio Latorilla', 20030802190637, '', 20021126200534);
+INSERT INTO care_currency VALUES (3, '£', 'Pound', 'GB British Pound (ISO = GBP)', '', '', 20030213173107, '', 20020816230349);
+INSERT INTO care_currency VALUES (4, 'R', 'Rand', 'South African Rand (ISO = ZAR)', '', '', 20030802190637, 'Elpidio Latorilla', 20020817171805);
+INSERT INTO care_currency VALUES (5, 'Rs', 'Rupees', 'Indian Rupees (ISO = INR)', '', '', 20030213173059, 'Elpidio Latorilla', 20020920234306);
 
 --
 -- Dumping data for table care_department
@@ -4821,7 +4831,7 @@ INSERT INTO care_department VALUES (2, 'cafe', '2', 'Cafeteria', 'Cafe', 'Cantee
 INSERT INTO care_department VALUES (3, 'general_surgery', '1', 'General Surgery', 'General', 'General', 'LDGeneralSurgery', '', '1', '1', '1', '1', '1', '1', '0', '0', '8.30 - 21.00', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 20030828114327, '', 00000000000000, '','');
 INSERT INTO care_department VALUES (4, 'emergency_surgery', '1', 'Emergency Surgery', 'Emergency', '', 'LDEmergencySurgery', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000, '','');
 INSERT INTO care_department VALUES (5, 'plastic_surgery', '1', 'Plastic Surgery', 'Plastic', 'Aesthetic Surgery', 'LDPlasticSurgery', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000, '','');
-INSERT INTO care_department VALUES (6, 'ent', '1', 'Ear-Nose-Throath', 'ENT', 'HNO', 'LDEarNoseThroath', 'Ear-Nose-Throath, in german Hals-Nasen-Ohren. The department with  very old traditions that date back to the early beginnings of premodern medicine.', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', 'kope akjdielj asdlkasdf', '', '', 'Update: 2003-08-13 23:24:16 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:25:27 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:29:05 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:30:21 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:31:52 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:34:08 Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20031019155346, '', 00000000000000, '','');
+INSERT INTO care_department VALUES (6, 'ent', '1', 'Ear-Nose-Throat', 'ENT', 'HNO', 'LDEarNoseThroat', 'Ear-Nose-Throat, in german Hals-Nasen-Ohren. The department with  very old traditions that date back to the early beginnings of premodern medicine.', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', 'kope akjdielj asdlkasdf', '', '', 'Update: 2003-08-13 23:24:16 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:25:27 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:29:05 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:30:21 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:31:52 Elpidio Latorilla\r\nUpdate: 2003-08-13 23:34:08 Elpidio Latorilla\r\n', 'Elpidio Latorilla', 20031019155346, '', 00000000000000, '','');
 INSERT INTO care_department VALUES (7, 'opthalmology', '1', 'Opthalmology', 'Opthalmology', 'Eye Department', 'LDOpthalmology', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000, '','');
 INSERT INTO care_department VALUES (8, 'pathology', '1', 'Pathology', 'Pathology', 'Patho', 'LDPathology', '', '0', '0', '1', '1', '0', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0', '', '', '', '', '', '', '', 00000000000000, '', 00000000000000, '','');
 INSERT INTO care_department VALUES (9, 'ob_gyn', '1', 'Ob-Gynecology', 'Ob-Gyne', 'Gyn', 'LDObGynecology', '', '1', '1', '1', '1', '1', '1', '0', '0', '', '12.30 - 15.00 , 19.00 - 21.00', '0', '0',  NULL, '', '', '', '', '', '', 00000000000000, '', 00000000000000, '','');
@@ -4948,11 +4958,11 @@ INSERT INTO care_menu_sub  VALUES ('235', '0', '14', '0', '', '', '', '', '../gu
 -- Dumping data for table care_method_induction
 --
 
+INSERT INTO care_method_induction VALUES (1, '1', 'not_induced', 'Not induced', 'LDNotInduced', '', '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_method_induction VALUES (2, '1', 'unknown', 'Unknown', 'LDUnknown', '', '', '', 20030805191240, '', 00000000000000);
 INSERT INTO care_method_induction VALUES (3, '1', 'prostaglandin', 'Prostaglandin', 'LDProstaglandin', '', '', '', 20030805191247, '', 00000000000000);
 INSERT INTO care_method_induction VALUES (4, '1', 'oxytocin', 'Oxytocin', 'LDOxytocin', '', '', '', 20030805191254, '', 00000000000000);
 INSERT INTO care_method_induction VALUES (5, '1', 'arom', 'AROM', 'LDAROM', '', '', '', 20030805191302, '', 00000000000000);
-INSERT INTO care_method_induction VALUES (2, '1', 'unknown', 'Unknown', 'LDUnknown', '', '', '', 20030805191240, '', 00000000000000);
-INSERT INTO care_method_induction VALUES (1, '1', 'not_induced', 'Not induced', 'LDNotInduced', '', '', '', 00000000000000, '', 00000000000000);
 
 --
 -- Dumping data for table care_mode_delivery
@@ -5660,7 +5670,7 @@ INSERT INTO care_unit_measurement VALUES (14, 4, 'mmHg', 'mmHg', 'LDmmHg', 'metr
 INSERT INTO care_unit_measurement VALUES (15, 5, 'celsius', 'Celsius', 'LDCelsius', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_unit_measurement VALUES (16, 1, 'dl', 'deciliter', 'LDDeciliter', 'metric',  NULL, '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_unit_measurement VALUES (17, 1, 'cl', 'centiliter', 'LDCentiliter', 'metric', 0, '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_unit_measurement VALUES (18, 1, '?l', 'microliter', 'LDMicroliter', 'metric', 0, '', '', 00000000000000, '', 00000000000000);
+INSERT INTO care_unit_measurement VALUES (18, 1, 'µl', 'microliter', 'LDMicroliter', 'metric', 0, '', '', 00000000000000, '', 00000000000000);
 
 
 --
