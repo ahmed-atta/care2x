@@ -7,7 +7,7 @@ $local_user='aufnahme_user';
 require_once(CARE_BASE.'/include/helpers/inc_front_chain_lang.php');
 
 // Load the address object
-require_once(CARE_BASE.'/modules/address/model/class_address.php');
+require_once('model/class_address.php');
 $address_obj=new Address;
 
 switch($retpath) {
@@ -16,15 +16,15 @@ switch($retpath) {
 	default: $breakfile='address_manage.php'.URL_APPEND;
 }
 
-if(!isset($mode)){
+if(!isset($mode)) {
 	$mode = '';
 	$edit = true;
-}else{
+} else {
 	$_POST['name'] = trim($_POST['name']);
-	if(!empty($_POST['name'])){
+	if(!empty($_POST['name'])) {
 		if($address_obj->CityTownExists($_POST['name'],$_POST['iso_country_id'])){
 			$mode = 'citytown_exists';
-		}else{
+		} else {
 			if($address_obj->saveCityTownInfoFromArray($_POST)){
 				$insid = $db->Insert_ID();
 				$nr = $address_obj->LastInsertPK('nr',$insid);
@@ -33,7 +33,7 @@ if(!isset($mode)){
 				exit;
 			}else{ echo "$sql<br>$LDDbNoSave"; }
 		}
-	}else{
+	} else {
 		$mode = 'bad_data';
 	}
 }
@@ -72,7 +72,7 @@ switch($mode) {
 }
 
 $smarty->assign('formAction',$PHP_SELF);
-$smarty->assign('message',$LDEnterAllFields);
+$smarty->assign('message',$ErrorMessage);
 
 $inputFields = array (
 	array (
@@ -126,9 +126,9 @@ $inputFields = array (
 );
 
 $smarty->assign('inputFields',$inputFields);
-echo $thisfile;
+
 $smarty->assign('breakfile',$breakfile);
-$smarty->assign('imageSave',createComIcon(CARE_BASE,'accept.png','0'));
+$smarty->assign('imageSave',createComIcon(CARE_BASE,'pencil.png','0'));
 $smarty->assign('imageCancel',createComIcon(CARE_BASE,'cross.png','0'));
 $smarty->assign('Save',$LDSave);
 $smarty->assign('Cancel',$LDCancel);
@@ -137,10 +137,17 @@ $smarty->assign('sid',$sid);
 $smarty->assign('lang',$lang);
 $smarty->assign('retpath',$retpath);
 
+//js error checking
+$smarty->assign('LDAlertNoCityTownName',$LDAlertNoCityTownName);
+$smarty->assign('LDPlsEnterInfo',$LDPlsEnterInfo);
+$smarty->assign('LDEnterISOCountryCode',$LDPlsEnterInfo);
+$smarty->assign('LDEnterQMark',$LDEnterQMark);
+$smarty->assign('LDWrongUneceLocCode',$LDWrongUneceLocCode);
+$smarty->assign('LDEnterZero',$LDEnterZero);
+
 // Assign page output to the mainframe template
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/citytown_new.tpl');
 
 //$smarty->compile_check = true; $smarty->debugging = true; $smarty->display('debug.tpl');
-
 $smarty->display('common/mainframe.tpl');
 ?>

@@ -3,8 +3,6 @@
 * @package care_api
 */
 
-/**
-*/
 require_once('../../include/core/class_core.php');
 
 /**

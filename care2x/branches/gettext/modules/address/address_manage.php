@@ -3,10 +3,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('../../include/helpers/inc_environment_global.php');
 
 define('LANG_FILE','place.php');
-$local_user='aufnahme_user';
+$local_user = 'aufnahme_user';
 require_once(CARE_BASE.'/include/helpers/inc_front_chain_lang.php');
 
-$breakfile=CARE_BASE."/main/spediens.php".URL_APPEND;
+$breakfile = CARE_BASE."/main/spediens.php".URL_APPEND;
 
 require_once(CARE_BASE.'/gui/smarty_template/smarty_care.class.php');
 $smarty = new smarty_care('system_admin');
@@ -59,9 +59,11 @@ $smarty->assign('menu',$menu);
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/address_manage.tpl');
 
+/*
 $smarty->compile_check = true;
 $smarty->debugging = true;
 $smarty->display('debug.tpl');
+*/
 
 $smarty->display('common/mainframe.tpl');
 ?>
