@@ -36,6 +36,22 @@ function getLang($chk_file) {
       else return 0;
 }
 
+function getLangModular($chk_file) {
+   global $lang,  $sid ;
+
+   if(!isset($lang)||empty($lang))   {
+	  $ck_lang_buffer='ck_lang'.$sid;
+      if(!isset($_COOKIE[$ck_lang_buffer])||empty($_COOKIE[$ck_lang_buffer])) 
+      	include(CARE_BASE .'chklang.php');
+      else 
+      	$lang=$_COOKIE[$ck_lang_buffer];
+   }
+   if(file_exists(CARE_BASE .'modules/' . MODULE . '/language/' .$lang.'/'.LANG_FILE_MODULAR)) 
+   		return 1;
+   else 
+   		return 0;
+}
+
 # Load charset function
 require_once('inc_charset_fx.php'); // charset functions
 
@@ -125,7 +141,6 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 	     else {
 		     header('Location:'.CARE_GUI .'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_invalid-access-warning.php');
 		 } 
-       
 	   exit;
    }
 }; 
@@ -134,14 +149,30 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 # This constant  must be set by the script that calls this file.
 # If the calling script does not need a language table, the constant LANG_FILE must be set to empty string '' 
 
-if(defined('LANG_FILE')&&LANG_FILE!='') {
+if(defined('LANG_FILE') && LANG_FILE!='') {
     if(getLang(LANG_FILE)) include(CARE_BASE .'language/'.$lang.'/lang_'.$lang.'_'.LANG_FILE);
 	    else include (CARE_BASE .'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_'.LANG_FILE);
 }
 
-# Load additional language tables
-if(isset($lang_tables)&&is_array($lang_tables)&&sizeof($lang_tables)) include_once('inc_load_lang_tables.php');
+if(defined('LANG_FILE_MODULAR') && LANG_FILE_MODULAR != '') {
+    if(getLangModular(LANG_FILE_MODULAR)) 
+    	include (CARE_BASE .'modules/' . MODULE . '/language/' .$lang.'/'.LANG_FILE_MODULAR);
+	else 
+		include (CARE_BASE .'modules/' . MODULE . '/language/' .LANG_DEFAULT.'/'.LANG_FILE_MODULAR);
+}
 
+
+# Load additional language tables
+/* This routine includes the language tables which are listed in the array $lang_tables */
+if(isset($lang_tables)&&is_array($lang_tables)&&sizeof($lang_tables)) {
+	for($tc=0;$tc<sizeof($lang_tables);$tc++) {
+	    if(file_exists(CARE_BASE .'language/'.$lang.'/lang_'.$lang.'_'.$lang_tables[$tc]))    
+	    	include(CARE_BASE .'language/'.$lang.'/lang_'.$lang.'_'.$lang_tables[$tc]);
+	    else 
+	    	include(CARE_BASE .'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_'.$lang_tables[$tc]);
+	}
+
+}
 #  Load additional environment files 
 require_once('inc_config_color.php'); # load user configurations
 require_once('inc_img_fx.php'); # image functions

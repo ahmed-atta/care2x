@@ -6,8 +6,9 @@ require('../../include/helpers/inc_environment_global.php');
 # In normal cases this value is derived from the db table "care_config_global" using the "pagin_address_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30);
 
+define('MODULE','address');
+define('LANG_FILE_MODULAR','place.php');
 $lang_tables[]='search.php';
-define('LANG_FILE','place.php');
 $local_user='aufnahme_user';
 require_once(CARE_BASE.'/include/helpers/inc_front_chain_lang.php');
 # Load the insurance object
