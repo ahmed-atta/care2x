@@ -13,7 +13,7 @@ $allowedarea=&$allow_area['admit'];
 
 $fileforward='address_manage.php'.URL_REDIRECT_APPEND;
 $thisfile=basename(__FILE__);
-$breakfile=CARE_BASE.'/main/spediens.php'.URL_APPEND;
+$breakfile=CARE_GUI.'/main/spediens.php'.URL_APPEND;
 
 $lognote="$LDInsuranceCoManage ok";
 
@@ -33,22 +33,16 @@ $errbuf=$LDNursingManage;
 require(CARE_BASE.'/include/helpers/inc_passcheck_head.php');
 ?>
 <BODY  onLoad="document.passwindow.userid.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
-<?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <FONT    SIZE=-1  FACE="Arial">
 
 <P>
 
 <img <?php echo createComIcon(CARE_BASE,'home50x50.gif','0','top') ?>>
 <FONT  COLOR=<?php echo $cfg[top_txtcolor] ?>  SIZE=6  FACE="verdana"> <b><?php echo $LDAddressMngr; ?></b></font>
-
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
-
 <?php require(CARE_BASE.'/include/helpers/inc_passcheck_mask.php') ?>  
-
 <p>
-<?php
-require(CARE_BASE.'/include/helpers/inc_load_copyrite.php');
-?>
+<?php require(CARE_BASE.'/include/helpers/inc_load_copyrite.php'); ?>
 </FONT>
 </BODY>
 </HTML>

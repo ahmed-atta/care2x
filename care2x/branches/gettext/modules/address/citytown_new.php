@@ -52,7 +52,7 @@ $smarty->assign('LDBack', $LDBack);
 $smarty->assign('LDHelp', $LDHelp);
 $smarty->assign('LDClose', $LDClose);
 # href for help button
-$smarty->assign('pbHelp',"javascript:gethelp('address_new.php')");
+$smarty->assign('pbHelp',"javascript:gethelp('address_new.php','','','','','','" . MODULE . "')");
 
 # href for close button
 $smarty->assign('breakfile',$breakfile);
@@ -128,9 +128,8 @@ $inputFields = array (
 
 $smarty->assign('inputFields',$inputFields);
 
-$smarty->assign('breakfile',$breakfile);
-$smarty->assign('imageSave',createComIcon(CARE_BASE,'pencil.png','0'));
-$smarty->assign('imageCancel',createComIcon(CARE_BASE,'cross.png','0'));
+$smarty->assign('imageSave',createComIcon(CARE_GUI,'pencil.png','0'));
+$smarty->assign('imageCancel',createComIcon(CARE_GUI,'cross.png','0'));
 $smarty->assign('Save',$LDSave);
 $smarty->assign('Cancel',$LDCancel);
 

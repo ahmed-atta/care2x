@@ -34,7 +34,7 @@ $TP_insco_6='BGG';
 
 
 $TP_date_birth=formatDate2Local($date_birth,$date_format);
-$TP_care_logo=createLogo($root_path,'care_logo.gif','0','right','','nodim','25');
+$TP_care_logo=createLogo();
 # Signature stamp of the department
 $TP_dept_sigstamp=nl2br($sickconfirm['sig_stamp']); 
 $TP_width='';

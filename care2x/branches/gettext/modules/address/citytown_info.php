@@ -46,7 +46,7 @@ $smarty->assign('LDBack', $LDBack);
 $smarty->assign('LDHelp', $LDHelp);
 $smarty->assign('LDClose', $LDClose);
 # href for help button
-$smarty->assign('pbHelp',"javascript:gethelp('address_info.php')");
+$smarty->assign('pbHelp',"javascript:gethelp('address_info.php','','','','','','" . MODULE . "')");
 
 # href for close button
 $smarty->assign('breakfile',$breakfile);
@@ -95,10 +95,9 @@ $inputFields = array (
 
 $smarty->assign('inputFields',$inputFields);
 
-$smarty->assign('breakfile',$breakfile);
-$smarty->assign('imageUpdate',createComIcon(CARE_BASE,'pencil.png','0'));
-$smarty->assign('imageCancel',createComIcon(CARE_BASE,'cross.png','0'));
-$smarty->assign('imageListAll',createComIcon(CARE_BASE,'monitor.png','0'));
+$smarty->assign('imageUpdate',createComIcon(CARE_GUI,'pencil.png','0'));
+$smarty->assign('imageCancel',createComIcon(CARE_GUI,'cross.png','0'));
+$smarty->assign('imageListAll',createComIcon(CARE_GUI,'monitor.png','0'));
 
 $smarty->assign('updateLink','citytown_update.php' . URL_APPEND.'&retpath='.$retpath.'&nr='.$address['nr'] );
 $smarty->assign('listLink','citytown_list.php'  . URL_APPEND );
