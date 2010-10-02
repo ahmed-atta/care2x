@@ -31,7 +31,7 @@ function checkIfChanged(lang)
 echo 'bgcolor='.$cfg['idx_bgcolor'];
  if(!$cfg['dhtml']) echo ' link='.$cfg['idx_txtcolor'].' vlink='.$cfg['idx_txtcolor'].' alink='.$cfg['idx_alink']; ?> 
  >
-<center><img <?php echo createLogo($root_path,'care_logo.gif','0') ?>></center>
+<center><img <?php echo createLogo() ?>></center>
 <TABLE CELLPADDING=2 CELLSPACING=0 border=0 >
 <FONT  FACE="Arial"  SIZE="-1">
 
