@@ -11,38 +11,11 @@ require_once('../helpers/inc_environment_global.php');
 */
 define('LANG_FILE','help.php');
 define('NO_CHAIN',1);
+
 require_once('../helpers/inc_front_chain_lang.php');
- // globalize POST, GET, & COOKIE  vars
-if(file_exists('../help/'.$lang.'/help_'.$lang.'_index.php')) include ('../help/'.$lang.'/help_'.$lang.'_index.php');
- else  include ('../help/en/help_en_index.php');
 
-#
-# Start scanning for plugged local documents
-#
-
-$sDirPath = CARE_BASE .'docs/plugins/';
-
-if(file_exists($sDirPath.'.')){
-	
-	$bShowTitle = FALSE;
-
-	$handle=opendir($sDirPath.'.');
-
-	while (FALSE!==($sDocsDir = readdir($handle))) {
-			if ($sDocsDir != '.' && $sDocsDir != '..') {
-
-			if(is_dir($sDirPath.$sDocsDir)&&file_exists($sDirPath.$sDocsDir.'/tags.php')){
-				@include($sDirPath.$sDocsDir.'/tags.php');
-				
-				if(isset($sPluginDocsName) && !empty($sPluginDocsName) && isset($sPluginDocsHref) && !empty($sPluginDocsHref)){
-					if(!$bShowTitle){
-						echo '<p>Documents:';
-						$bShowTitle = TRUE;
-					}
-					echo "<li><a href=\"$sPluginDocsHref\" target=\"HELPINFOFRAME\">$sPluginDocsName</a></li>";
-				}
-			}
-		}
-	}
-}
+if(file_exists('../help/'.$lang.'/help_'.$lang.'_index.php')) 
+	include ('../help/'.$lang.'/help_'.$lang.'_index.php');
+else
+	include ('../help/en/help_en_index.php');
 ?>

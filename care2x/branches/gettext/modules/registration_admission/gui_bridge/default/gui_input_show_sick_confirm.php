@@ -57,7 +57,7 @@ if($insurance){
 
 
 $TP_dept_sigstamp=nl2br($dept_sigstamp); 
-$TP_care_logo=createLogo($root_path,'care_logo.gif','0','right');
+$TP_care_logo=createLogo();
 $TP_date_birth=formatDate2Local($date_birth,$date_format);
 
 //gjergji : new calendar
