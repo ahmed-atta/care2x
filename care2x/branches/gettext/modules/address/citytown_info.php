@@ -46,7 +46,7 @@ $smarty->assign('LDBack', $LDBack);
 $smarty->assign('LDHelp', $LDHelp);
 $smarty->assign('LDClose', $LDClose);
 # href for help button
-$smarty->assign('pbHelp',"javascript:gethelp('address_info.php','','','','','','" . MODULE . "')");
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/address_info.html");
 
 # href for close button
 $smarty->assign('breakfile',$breakfile);
