@@ -143,7 +143,6 @@ class smarty_care extends Smarty {
 		$this->assign('setCharSet',setCharSet());
 
 		# collect JavaScript for Smarty. By default collect the help javascript and css stylesheets
-		
 		if($this->bLoadJS){
 			ob_start();
 				include($this->root_path.'include/helpers/inc_js_gethelp.php');
@@ -165,10 +164,10 @@ class smarty_care extends Smarty {
 		$this->assign('bot_bgcolor',$this->cfg['bot_bgcolor']);
 
 		# Set title bar buttons
-		$this->assign('gifBack2',createComIcon($this->root_path,'arrow_left.png','0') );
-		$this->assign('gifHilfeR',createComIcon($this->root_path,'help.png','0') );
-		$this->assign('gifClose2',createComIcon($this->root_path,'cross.png','0') );
-		$this->assign('LDCloseAlt',$this->LDCloseAlt );
+		$this->assign('gifBack2',createComIcon(CARE_GUI,'arrow_left.png','0') );
+		$this->assign('gifHilfeR',createComIcon(CARE_GUI,'help.png','0') );
+		$this->assign('gifClose2',createComIcon(CARE_GUI,'cross.png','0') );
+		$this->assign('LDCloseAlt',CARE_GUI );
 
 		# Set default href of the title bar buttons
 		# By default, the back button uses the javascript
@@ -178,7 +177,7 @@ class smarty_care extends Smarty {
 		$this->assign('pbHelp',"javascript:gethelp()");
 
 		# By default the break/close button points to the main startframe
-		$this->assign('breakfile',$this->root_path.'main/startframe.php'.URL_APPEND);
+		$this->assign('breakfile',CARE_GUI.'main/startframe.php'.URL_APPEND);
 
 		
 		# By default the toolbar title is empty

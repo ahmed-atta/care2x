@@ -22,7 +22,7 @@ $(function(){
 <!--
 function popPic(pid,nm){
 
- if(pid!="") regpicwindow = window.open("<?php echo CARE_BASE   ?>main/pop_reg_pic.php<?php echo URL_REDIRECT_APPEND ?>&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
+ if(pid!="") regpicwindow = window.open("<?php echo CARE_GUI   ?>main/pop_reg_pic.php<?php echo URL_REDIRECT_APPEND ?>&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
 
 }
 // -->

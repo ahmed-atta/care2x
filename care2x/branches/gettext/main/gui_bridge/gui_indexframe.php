@@ -74,7 +74,7 @@ if(!$cfg['dhtml']){
 }
 
 
-$TP_logo=createLogo(CARE_BASE,'care_logo.png','0');
+$TP_logo=createLogo();
 
 $tp_body=&$TP_obj->load('tp_main_index_menu_body.htm');
 eval("echo $tp_body;");
@@ -89,7 +89,6 @@ require("menu/$LocMenuTreeDir/mainmenu.inc.php");
 <TABLE CELLPADDING=0 CELLSPACING=0 border=0>
 
 <?php
-//echo $_COOKIE['ck_config']; // used only in debugging related to user config data
 
 if(!$GLOBALCONFIG['language_single']){
     ?>

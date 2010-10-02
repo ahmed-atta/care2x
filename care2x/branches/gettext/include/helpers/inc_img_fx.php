@@ -80,7 +80,7 @@ $img_path_skin='gui/img/skin/'.$theme_skin.'/'; # the path for non-language depe
 function createLDImgSrc($froot, $fn, $border='', $align='')
 {
 	global $lang, $theme_control, $img_path_control;
-	$froot = CARE_BASE;
+	$froot = CARE_GUI;
 	//return 1;
 	if(file_exists($froot.$img_path_control.$lang.'/'.$lang.'_'.$fn)){
 		$picfile_path=$froot.$img_path_control.$lang.'/'.$lang.'_'.$fn;
@@ -119,7 +119,7 @@ function createLDImgSrc($froot, $fn, $border='', $align='')
 function createComIcon($froot, $fn, $border='', $align='', $show_always=TRUE)
 {
 	global $lang, $theme_com_icon, $img_path_com_icon;
-	$froot = CARE_BASE;
+	$froot = CARE_GUI;
 	# if icon theme is  "no_icon", return a transparent pixel gif
 	if($theme_com_icon == 'no_icon' && !$show_always){
 		$picfile_path=$froot.'gui/img/common/default/pixel.gif';
@@ -153,7 +153,7 @@ function createComIcon($froot, $fn, $border='', $align='', $show_always=TRUE)
  */
 function createMascot($froot, $fn, $border='', $align='')
 {
-	$froot = CARE_BASE;
+	$froot = CARE_GUI;
 	global $lang, $theme_mascot, $img_path_mascot;
 	 
 	if(file_exists($froot.$img_path_mascot.$fn))
@@ -202,24 +202,13 @@ function createBgSkin($froot,$fn)
 /**
  *  createLogo creates a logo image
  */
-function createLogo($froot, $fn, $border='', $align=''){
-	$froot = CARE_GUI;
-	global $lang, $img_path_com_icon;
-	# save the orig icon path
-	$icon_path=$img_path_com_icon;
-	# set the logo path
-	$img_path_com_icon='gui/img/logos/'; # the path for language dependent logo
-	if(!file_exists($froot.$img_path_com_icon.$fn)){
-		$img_path_com_icon='gui/img/logos/'; # the path for default dependent logo
-		if(!file_exists($froot.$img_path_com_icon.$fn)) $fn = 'care_logo.png';
-	}
-	if(!file_exists($froot.$img_path_com_icon.$fn)) $img_path_com_icon='gui/img/logos/';
+function createLogo(){
 
-	# create the icon/logo
-	$img_src=createComIcon($froot,$fn,$border,$align);
-	# reset the orig icon path
-	$img_path_com_icon=$icon_path;
-	return $img_src;
+	$froot = CARE_GUI;
+	$img_path_com_icon='gui/img/logos/';
+	$fn = 'care_logo.png';
+
+	return "src='$froot$img_path_com_icon$fn'";
 }
 /**
  * Checks if the given icon (or non-language dependent image) exists
