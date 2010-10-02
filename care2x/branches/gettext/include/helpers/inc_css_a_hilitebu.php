@@ -14,7 +14,10 @@ echo '
 <script type="text/javascript">
 $(function(){
 		$("select, input:checkbox, input:radio, input:file, input:text").uniform();
-		$(".help").colorbox({iframe:true, innerWidth:500, innerHeight:344});
+		$(".help").click(function(){
+			if(!$(this).attr("href").match("^javascript"))
+				$(this).colorbox({iframe:true, innerWidth:500, innerHeight:344});
+		});
 	}
 )
 </script>
