@@ -9,12 +9,17 @@ echo '
 <script src="'.CARE_GUI.'js/jquery-1.4.1.min.js" type="text/javascript"></script>
 <script src="'.CARE_GUI.'js/uniform/jquery.uniform.js" type="text/javascript"></script>
 <link rel="stylesheet" href="'.CARE_GUI.'js/uniform/css/uniform.default.css" type="text/css" media="screen" charset="utf-8" />
+<script src="'.CARE_GUI.'js/colorbox/js/jquery.colorbox-min.js" type="text/javascript"></script>
+<link type="text/css" media="screen" rel="stylesheet" href="'.CARE_GUI.'js/colorbox/styles/4/colorbox.css" />
 <script type="text/javascript">
 $(function(){
 		$("select, input:checkbox, input:radio, input:file, input:text").uniform();
+		$(".help").colorbox({iframe:true, innerWidth:500, innerHeight:344});
 	}
 )
-</script>';
+</script>
+
+';
 
 ?>
 
