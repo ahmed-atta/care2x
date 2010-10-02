@@ -144,7 +144,7 @@ ob_start();
 <table border=1>
   <tr >
     <td rowspan=3 bgcolor="<?php echo $config_new['idx_bgcolor']; ?>" width=100 align=left>
-	<center><img <?php echo createLogo($root_path,'care_logo.png','0') ?>></center>
+	<center><img <?php echo createLogo() ?>></center>
 
 <a href="#" title="<?php echo $LDClk4TxtColor ?>" onClick="chgcolor('idx_txtcolor')">
 <FONT    SIZE=1  color="<?php echo $config_new['idx_txtcolor']; ?>">

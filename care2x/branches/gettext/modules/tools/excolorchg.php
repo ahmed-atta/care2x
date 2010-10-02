@@ -145,7 +145,7 @@ ob_start();
 <table border=1>
   <tr >
     <td rowspan=3 bgcolor=<?php echo $cfg['idx_bgcolor']; ?> width=100 >
-	<center><img <?php echo createLogo($root_path,'care_logo.png','0') ?>></center>
+	<center><img <?php echo createLogo() ?>></center>
 
 
 <FONT    SIZE=1  color=<?php echo $cfg['idx_txtcolor']; ?>>
