@@ -11,7 +11,7 @@ require('../include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','indexframe.php');
-define(NO_CHAIN,1);
+define('NO_CHAIN',1);
 
 # Set here the window title
 $wintitle='Menu - CARE2X';
