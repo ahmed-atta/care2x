@@ -68,7 +68,7 @@ class smarty_care extends Smarty {
 			# create global config object
 			if(!isset($GLOBAL_CONFIG['template_smarty'])){
 				include_once(CARE_BASE.'include/core/class_globalconfig.php');
-				$gc=& new GlobalConfig($GLOBAL_CONFIG);
+				$gc= new GlobalConfig($GLOBAL_CONFIG);
 				# Get the global template config
 				$gc->getConfig('template_smarty');
 			}

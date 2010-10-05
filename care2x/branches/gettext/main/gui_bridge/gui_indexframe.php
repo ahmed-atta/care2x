@@ -56,7 +56,8 @@ function checkIfChanged(lang)
  <?php
  # Prepare values for body template
 if($boot || $_chg_lang_){
-	 $TP_js_onload= 'onLoad="if (window.focus) window.focus();window.parent.CONTENTS.location.replace(\'startframe.php?sid='.$sid.'&lang='.$lang.'&egal='.$egal.'&cookie='.$cookie.'\');"';
+	if(!isset($egal) || $egal == '') $egal = 1; 
+	$TP_js_onload= 'onLoad="if (window.focus) window.focus();window.parent.CONTENTS.location.replace(\'startframe.php?sid='.$sid.'&lang='.$lang.'&egal='.$egal.'&cookie='.$cookie.'\');"';
 }else{
 	$TP_js_onload='onLoad="if (window.focus) window.focus();"';
 }
@@ -76,7 +77,7 @@ if(!$cfg['dhtml']){
 
 $TP_logo=createLogo();
 
-$tp_body=&$TP_obj->load('tp_main_index_menu_body.htm');
+$tp_body=$TP_obj->load('tp_main_index_menu_body.htm');
 eval("echo $tp_body;");
 
 #
