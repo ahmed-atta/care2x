@@ -1,0 +1,54 @@
+head	1.2;
+access;
+symbols
+	care2watu:1.1.0.4
+	Root_care2watu:1.1
+	dodoma:1.1.0.2
+	Root_dodoma:1.1;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2009.01.12.19.09.45;	author andi;	state dead;
+branches;
+next	1.1;
+commitid	1591496b95754567;
+
+1.1
+date	2008.04.01.12.57.27;	author marcel;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@Away with temp rubish
+@
+text
+@<?php /* Smarty version 2.6.0, created on 2008-03-20 12:03:50
+         compiled from C:%5Cxampp%5Chtdocs%5Ccare2002_tz_mero%5Cinstaller/templates/action_sql_file.tpl */ ?>
+<tr><td>&nbsp;</td></tr>
+<table align="center">
+<?php if ($this->_tpl_vars['loop'] < 2): ?>
+<tr><td align="center">The database file is being installed.</td></tr>
+<tr><td align="center"><img src="images/animated_progress.gif"/></td></tr>
+<?php elseif ($this->_tpl_vars['loop'] == 3): ?>
+<tr><td align="center">Database installation complete.</td></tr>
+<?php endif; ?>
+</table>@
+
+
+1.1
+log
+@add installer
+fixed problem with create user
+fixed nursing station view
+@
+text
+@@
+

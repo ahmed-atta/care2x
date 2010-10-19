@@ -1,0 +1,62 @@
+head	1.1;
+access;
+symbols
+	care2watu:1.1.0.4
+	Root_care2watu:1.1
+	dodoma:1.1.0.2
+	Root_dodoma:1.1;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2008.04.01.12.57.20;	author marcel;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@add installer
+fixed problem with create user
+fixed nursing station view
+@
+text
+@<?php
+/*
+ * PHPVersionOver
+ *
+ * Tests that the running PHP Version is >= the supplied parameter
+ */
+ 
+class PHPVersionOver extends BaseTest{
+
+	function PHPVersionOver($params){
+		parent::BaseTest($params);	
+
+		if(!is_array($this->params) || count($this->params) <= 0){
+			ErrorStack::addError("Invalid parameters, version to test against must be supplied as the only item in an array", ERRORSTACK_ERROR, 'PHPVersionOver');
+			$this->result = INSTALLER_TEST_FAIL;
+			return $this->result;
+		}
+	}
+	
+	function perform(){		
+		if(version_compare(phpversion(), $this->params[0], '>=')){
+			$this->result_message = "PHP Version {$this->params[0]} or greater is required, you are running ".phpversion();
+			$this->result = INSTALLER_TEST_SUCCESS;
+			return $this->result;
+		}else{
+			$this->result = INSTALLER_TEST_FAIL;
+			$this->result_message = "PHP Version {$this->params[0]} or greater is required, you are running ".phpversion();
+		}
+		
+		return $this->result;
+	}
+}
+?>
+@
