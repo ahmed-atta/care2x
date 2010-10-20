@@ -1,0 +1,39 @@
+head	1.1;
+access;
+symbols
+	care2watu:1.1.0.4
+	Root_care2watu:1.1
+	dodoma:1.1.0.2
+	Root_dodoma:1.1;
+locks; strict;
+comment	@# @;
+expand	@b@;
+
+
+1.1
+date	2008.04.01.12.57.20;	author marcel;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@add installer
+fixed problem with create user
+fixed nursing station view
+@
+text
+@<tr><td valign="top">{if $test->getResult() == $smarty.const.INSTALLER_TEST_SUCCESS }
+<img src='images/green_check.gif'>
+{elseif $test->getResult() == $smarty.const.INSTALLER_TEST_WARNING }
+<img src='images/yellow_check.gif'>
+{else}
+<img src='images/red_check.gif'>
+{/if}</td>
+<td align="left" valign="bottom">{$test->getResultMessage()}</td>
+</tr>
+@

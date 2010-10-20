@@ -1,0 +1,93 @@
+head	1.2;
+access;
+symbols
+	care2watu:1.1.0.4
+	Root_care2watu:1.1
+	dodoma:1.1.0.2
+	Root_dodoma:1.1;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2008.12.27.15.47.35;	author timschofield;	state Exp;
+branches;
+next	1.1;
+commitid	2dde49564e174567;
+
+1.1
+date	2008.04.01.12.57.20;	author marcel;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@<?php
+/*
+ * PHPVersionUnder
+ *
+ * Tests that the running PHP Version is >= the supplied parameter
+ */
+
+class PHPVersionUnder extends BaseTest{
+
+	function PHPVersionUnder($params){
+		parent::BaseTest($params);
+
+		if(!is_array($this->params) || count($this->params) <= 0){
+			ErrorStack::addError("Invalid parameters, version to test against must be supplied as the only item in an array", ERRORSTACK_ERROR, 'PHPVersionUnder');
+			$this->result = INSTALLER_TEST_FAIL;
+			return $this->result;
+		}
+	}
+
+	function perform(){
+		if(version_compare(phpversion(), $this->params[0], '<')){
+			$this->result_message = "PHP Version lower than {$this->params[0]}  is required, you are running ".phpversion();
+			$this->result = INSTALLER_TEST_SUCCESS;
+			return $this->result;
+		}else{
+			$this->result = INSTALLER_TEST_SUCCESS;
+			$this->result_message = "PHP Version lower than {$this->params[0]}  is required, you are running ".phpversion();
+		}
+
+		return $this->result;
+	}
+}
+?>
+@
+
+
+1.1
+log
+@add installer
+fixed problem with create user
+fixed nursing station view
+@
+text
+@d7 1
+a7 1
+ 
+d11 1
+a11 1
+		parent::BaseTest($params);	
+d19 2
+a20 2
+	
+	function perform(){		
+d26 1
+a26 1
+			$this->result = INSTALLER_TEST_FAIL;
+d29 1
+a29 1
+		
+@
+
