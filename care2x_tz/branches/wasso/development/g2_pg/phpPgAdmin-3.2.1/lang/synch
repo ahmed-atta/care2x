@@ -1,0 +1,82 @@
+#!/bin/sh
+# This script will synchronize language file with the master 
+# english translation using chriskl's langcheck utility.
+# It doesn't translate strings, only inserts english versions
+# to proper positions and deletes removed. And it doesn't 
+# synchronize commented lines. Use it at your own risk!
+# You need to have GNU ed installed.
+# 
+# Usage: synch <language>
+#
+#   <language> is the filename without the .php extension
+
+# WARNING: THE SYNCH SCRIPT IS BUGGY.  IT MAY DELETE SOME
+# GOOD TRANSLATIONS.  COMMENT OUT THE LINES BELOW IF YOU
+# KNOW WHAT YOU ARE DOING.
+
+echo "The synch script has been found to be buggy.  We recommend using";
+echo "langcheck instead.  For more information, view the synch source code.";
+exit
+   
+if [ -z $1 ] ; then
+	echo "You must tell me which language I should synchronize."
+	echo -e "for example: \n\t$0 polish"
+	exit
+fi
+
+if [ ! -f $1.php ] ; then
+	echo "Sorry, I cannot find $1.php"
+	exit
+fi
+
+php langcheck $1 | awk '
+
+function grep_n(what, where,   n, ln) {
+# Returns "last occurance" line number
+	n=1;	# current index
+	ln=-1	# line number
+	while ( (getline line < where ) > 0 ) {
+		if (index(line, what)>0) {
+	        	ln=n;
+		}
+		n++;
+	}
+	close(where);
+	return ln;
+}
+
+BEGIN	    { line=1   }
+# Analyse of "php langcheck language" output. 
+# Chris - please, do not change those texts in langcheck :-)
+/^Missing/  { oper="+" }
+/^Deleted/  { oper="-" }
+/^Source/   { src=$3   }
+/^Target/   { trg=$3   }
+/\$lang/    {
+		split($1, a, "\\x27");
+		# a[2] = strxxxxx
+		# Adding a line
+		if(oper=="+") {
+			line = grep_n("\x27"a[2]"\x27", src) - 1;
+			if (line>0) {
+				print line"a";
+				# New lines got no "\t" at beginning because they are not 
+				# translated yet, so it will help translator to find them
+				print $0;
+				print ".";
+			}
+		}
+		# Deleting a line
+		if(oper=="-") {
+			line = grep_n("\x27"a[2]"\x27", trg);
+			if (line>0) {
+				print line"d"
+			}
+		}
+	    }
+END	{
+	    # Writing changes after every edit
+	    print "w";
+	}
+' | ed $1.php
+
