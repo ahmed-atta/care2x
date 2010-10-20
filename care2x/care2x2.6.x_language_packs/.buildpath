@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="ar"/>
+	<buildpathentry kind="src" path="bg"/>
+	<buildpathentry kind="src" path="bs"/>
+	<buildpathentry kind="src" path="cs-iso"/>
+	<buildpathentry kind="src" path="de"/>
+	<buildpathentry kind="src" path="en"/>
+	<buildpathentry kind="src" path="es"/>
+	<buildpathentry kind="src" path="es-ar"/>
+	<buildpathentry kind="src" path="fa"/>
+	<buildpathentry kind="src" path="fr"/>
+	<buildpathentry kind="src" path="gr"/>
+	<buildpathentry kind="src" path="hu"/>
+	<buildpathentry kind="src" path="id"/>
+	<buildpathentry kind="src" path="it"/>
+	<buildpathentry kind="src" path="nl"/>
+	<buildpathentry kind="src" path="no"/>
+	<buildpathentry kind="src" path="pl"/>
+	<buildpathentry kind="src" path="pt"/>
+	<buildpathentry kind="src" path="pt-br"/>
+	<buildpathentry kind="src" path="ro"/>
+	<buildpathentry kind="src" path="sr"/>
+	<buildpathentry kind="src" path="sw"/>
+	<buildpathentry kind="src" path="tr"/>
+	<buildpathentry kind="src" path="vi"/>
+	<buildpathentry kind="src" path="zh"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>
