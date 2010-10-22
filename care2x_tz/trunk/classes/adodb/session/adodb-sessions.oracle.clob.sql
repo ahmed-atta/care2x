@@ -1,4 +1,4 @@
--- $CVSHeader: care2002_tz_mero_vps/classes/adodb/session/adodb-sessions.oracle.clob.sql,v 1.3 2006/08/01 12:42:17 robert Exp $
+-- $CVSHeader$
 
 DROP TABLE adodb_sessions;
 
