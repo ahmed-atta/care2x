@@ -1,5 +1,5 @@
 <?php
-$version="3.01 Betaa";
+$version="2.05.3.1 tz";
 /*
  * History:
  * Version 2.05.2, 15-apr-08
