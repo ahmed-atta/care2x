@@ -35,8 +35,8 @@ include_once($root_path.'include/inc_date_format_functions.php');
 if($mode=='save'){
 	# Save the nr
 
-	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-	$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+	$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
+	$HTTP_POST_VARS['history']=$lab_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
 	# Set to use the test params
 	$lab_obj->useTestParams();
 	# Point to the data array

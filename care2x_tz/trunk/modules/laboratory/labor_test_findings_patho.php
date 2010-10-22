@@ -94,8 +94,8 @@ switch($mode)
 										   '".addslashes(htmlspecialchars($material))."','".addslashes(htmlspecialchars($macro))."',
 										   '".addslashes(htmlspecialchars($micro))."','".addslashes(htmlspecialchars($findings))."','".addslashes(htmlspecialchars($diagnosis))."',
 										   '".addslashes($doctor_id)."', '".formatDate2Std($findings_date,$date_format)."', '".date('H:i:s')."',
-										   'initial', 'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-											'".$HTTP_SESSION_VARS['sess_user_name']."', 
+										   'initial', 'Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n',
+											'".$_SESSION['sess_user_name']."', 
 											'".date('YmdHis')."'
 										   )";
 
@@ -120,8 +120,8 @@ switch($mode)
 										   diagnosis='".addslashes(htmlspecialchars($diagnosis))."',
 										   doctor_id='".addslashes($doctor_id)."', findings_date='".formatDate2Std($findings_date,$date_format)."',
 										   findings_time='".date('H:i:s')."',
-										   history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										   modify_id = '".$_SESSION['sess_user_name']."',
 										   modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
 
@@ -141,8 +141,8 @@ switch($mode)
 	case 'done':
 	{
 		$sqlbuffer =" SET		status='done',
-										   history=".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   history=".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										   modify_id = '".$_SESSION['sess_user_name']."',
 										   modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
 

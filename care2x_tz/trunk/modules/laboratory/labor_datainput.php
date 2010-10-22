@@ -30,7 +30,7 @@ $encounter=new Encounter($encounter_nr);
 include_once($root_path.'include/care_api_classes/class_multi.php');
 $multi= new multi;
 
-$multi->doctorSTAT($HTTP_SESSION_VARS['sess_login_userid'],$encounter_nr);
+$multi->doctorSTAT($_SESSION['sess_login_userid'],$encounter_nr);
 
 
 if ($debug) {
@@ -120,7 +120,7 @@ if($mode=='save'){
 			echo $index.' - '.$value.' - '.$dbuf['serial_value'].'<br>';
 		}
 		die(); */
-		//$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		//$dbuf['modify_id']=$_SESSION['sess_user_name'];
 		if($result=&$lab_obj->getResult($job_id,$dbuf['group_id'])){
 			$row=$result->FetchRow();
 			$pdata=unserialize($row['serial_value']);
@@ -134,10 +134,10 @@ if($mode=='save'){
 		}
 		if ($debug) echo "allow update is set to:".$allow_update."<br>";
 		if($allow_update){
-			$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+			$dbuf['modify_id']=$_SESSION['sess_user_name'];
 			$dbuf['modify_time']=date('YmdHis');
 
-			# Recheck the date, ! bug pat	$dbuf['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];ch
+			# Recheck the date, ! bug pat	$dbuf['modify_id']=$_SESSION['sess_user_name'];ch
 			if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
 
 			$lab_obj->setDataArray($dbuf);
@@ -159,8 +159,8 @@ if($mode=='save'){
 			}
 			$dbuf['test_time']=date('H:i:s');
 
-			$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-			$dbuf['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+			$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+			$dbuf['create_id']=$_SESSION['sess_user_name'];
 			$dbuf['create_time']=date('YmdHis');
 			# Insert new job record
 			$lab_obj->setDataArray($dbuf);

@@ -354,7 +354,7 @@ if(!$datafound)
 		/*echo '<img src="../img/'.$lang.'/'.$lang.'_cat-com2.gif">';*/
 	}elseif(!$firstentry){
 	
-		$buffy=str_replace(" ","+",$HTTP_SESSION_VARS['sess_user_name']); 
+		$buffy=str_replace(" ","+",$_SESSION['sess_user_name']); 
 		 echo '<img src="'.$root_path.'main/imgcreator/catcom.php?lang='.$lang.'&person='.$buffy.'">';
 	}
 }

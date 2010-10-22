@@ -131,7 +131,7 @@ echo $langselect;
 <nobr><b><?php echo $LDUser ?>:</b></nobr>
 <?php
 
-$name = $HTTP_SESSION_VARS['sess_login_username'];
+$name = $_SESSION['sess_login_username'];
 
 echo $name;
 

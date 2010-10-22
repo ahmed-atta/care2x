@@ -25,13 +25,13 @@ $ins_obj=new Insurance;
 $breakfile='insurance_co_manage.php'.URL_APPEND;
 $thisfile=basename(__FILE__);
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode!='paginate'){
 	# Reset paginator variables
 	$pgx=0;
 	$totalcount=0;
 }else{
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey']; # dummy search key to get past the search routine
+	$searchkey=$_SESSION['sess_searchkey']; # dummy search key to get past the search routine
 }
 # Set the sort parameters
 if(empty($oitem)) $oitem='name';
@@ -46,7 +46,7 @@ if(empty($GLOBAL_CONFIG['pagin_insurance_search_max_block_rows'])) $GLOBAL_CONFI
 
 #Load and create paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 # Adjust the max nr of rows in a block
 $pagen->setMaxCount($GLOBAL_CONFIG['pagin_insurance_search_max_block_rows']);
 
@@ -55,7 +55,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	# Convert wildcards 
 	$searchkey=strtr($searchkey,'*?','%_');
 	# Save the search keyword for eventual pagination routines
-	if($mode=='search') $HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
+	if($mode=='search') $_SESSION['sess_searchkey']=$searchkey;
 	
 	# Search for the firms
 	$firms=$ins_obj->searchLimitActiveFirm($searchkey,$GLOBAL_CONFIG['pagin_insurance_search_max_block_rows'],$pgx,$oitem,$odir);

@@ -111,8 +111,8 @@ $core = & new Core;
 										   '".$if_patmobile."','".$if_allergy."','".$if_hyperten."','".$if_pregnant."',
 										   '".htmlspecialchars($clinical_info)."','".htmlspecialchars($test_request)."','".formatDate2Std($send_date,$date_format)."',
 										   '".htmlspecialchars($send_doctor)."', 'pending',
-										   'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										   '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   'Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n',
+										   '".$_SESSION['sess_user_name']."',
 										   '".date('YmdHis')."'
 										   )";
 
@@ -146,8 +146,8 @@ $core = & new Core;
 										  clinical_info='".htmlspecialchars($clinical_info)."', test_request='".htmlspecialchars($test_request)."',
 										  send_date='".formatDate2Std($send_date,$date_format)."',
 										  send_doctor='".htmlspecialchars($send_doctor)."', status='".$status."',
-										  history=".$core->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										  modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+										  history=".$core->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										  modify_id='".$_SESSION['sess_user_name']."',
 										  modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
 
@@ -496,7 +496,7 @@ echo '
 		<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
 
   <?php echo $LDRequestingDoc ?>:
-		<input type="text" name="send_doctor" size=40 maxlength=40 value="<?php if($edit_form || $read_form) echo $stored_request['send_doctor']; else print $HTTP_SESSION_VARS['sess_user_name']; ?>"></div><br>
+		<input type="text" name="send_doctor" size=40 maxlength=40 value="<?php if($edit_form || $read_form) echo $stored_request['send_doctor']; else print $_SESSION['sess_user_name']; ?>"></div><br>
 		</td>
     </tr>
 	<tr bgcolor="<?php echo $bgc1 ?>">

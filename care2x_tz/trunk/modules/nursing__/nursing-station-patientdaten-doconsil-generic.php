@@ -109,8 +109,8 @@ $medical_depts=$dept_obj->getAllMedical();
 										 '".$batch_nr."','".$pn."','".$dept_nr."','".$visit."',
 										 '".$order_patient."','".addslashes($diagnosis_quiry)."','".formatDate2Std($send_date,$date_format)."',
 										 '".addslashes($send_doctor)."', 'pending',
-										 'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										 '".$HTTP_SESSION_VARS['sess_user_name']."','".date('YmdHis')."'
+										 'Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n',
+										 '".$_SESSION['sess_user_name']."','".date('YmdHis')."'
 										 )";
 
 								if($ergebnis=$dept_obj->Transact($sql))
@@ -141,8 +141,8 @@ $medical_depts=$dept_obj->getAllMedical();
 											send_date = '".formatDate2Std($send_date,$date_format)."',
 											send_doctor = '".$send_doctor."',
 											status = '".$status."',
-										    history=".$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										    modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										    history=".$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										    modify_id = '".$_SESSION['sess_user_name']."',
 											modify_time='".date('YmdHis')."'
 											WHERE batch_nr = '".$batch_nr."' ";
 
@@ -464,7 +464,7 @@ elseif(!$read_form && !$no_proc_assist)
   </div></td>
 			<td align="right"><div class=fva2_ml10><font color="#000099">
 		<?php echo $LDDoctor ?>
-		<input type="text" name="send_doctor" size=40 maxlength=40 value="<?php ($edit_form || $read_form)? print stripslashes($stored_request['send_doctor']) : print $HTTP_SESSION_VARS['sess_user_name']; //if($edit_form || $read_form) echo stripslashes($stored_request['send_doctor']) ?>">&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="text" name="send_doctor" size=40 maxlength=40 value="<?php ($edit_form || $read_form)? print stripslashes($stored_request['send_doctor']) : print $_SESSION['sess_user_name']; //if($edit_form || $read_form) echo stripslashes($stored_request['send_doctor']) ?>">&nbsp;&nbsp;&nbsp;&nbsp;
   </div></td>
 </tr>
 

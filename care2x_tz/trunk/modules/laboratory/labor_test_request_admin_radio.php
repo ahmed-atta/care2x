@@ -71,8 +71,8 @@ switch($mode){
                                           results_date='".formatDate2Std($results_date,$date_format)."',
 										  results_doctor='".htmlspecialchars($results_doctor)."',
 										  status='received',
-										  history=".$core->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										  modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										  history=".$core->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n").",
+										  modify_id = '".$_SESSION['sess_user_name']."',
 										  modify_time='".date('YmdHis')."'
 					WHERE batch_nr = '".$batch_nr."'";
 
@@ -427,7 +427,7 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 
 
   <?php echo $LDReportingDoc ?>
-        <input type="text" name="results_doctor" value="<?php if($read_form && $stored_request['results_doctor']) echo $stored_request['results_doctor']; else print $HTTP_SESSION_VARS['sess_user_name']; ?>" size=35 maxlength=35>
+        <input type="text" name="results_doctor" value="<?php if($read_form && $stored_request['results_doctor']) echo $stored_request['results_doctor']; else print $_SESSION['sess_user_name']; ?>" size=35 maxlength=35>
 		</td>
     </tr>
 		</table>

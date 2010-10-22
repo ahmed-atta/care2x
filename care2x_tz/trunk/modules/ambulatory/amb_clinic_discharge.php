@@ -14,7 +14,7 @@ $lang_tables[]='prompt.php';
 define('LANG_FILE','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
-if(!$encoder) $encoder=$HTTP_SESSION_VARS['sess_user_name'];
+if(!$encoder) $encoder=$_SESSION['sess_user_name'];
 
 //$breakfile="amb_clinic_patients.php".URL_APPEND."&edit=$edit&dept_nr=$dept_nr";
 $breakfile="javascript:window.close();";

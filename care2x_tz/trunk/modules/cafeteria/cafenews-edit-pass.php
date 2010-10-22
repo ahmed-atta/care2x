@@ -17,11 +17,11 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/areas_allow.php');
 $allowedarea=&$allow_area['cafenews'];
 
-$fileforward=$HTTP_SESSION_VARS['sess_file_editor'].URL_REDIRECT_APPEND;
+$fileforward=$_SESSION['sess_file_editor'].URL_REDIRECT_APPEND;
 
 $breakfile='cafenews.php'.URL_APPEND;
 
-$title= $HTTP_SESSION_VARS['sess_title']; 
+$title= $_SESSION['sess_title']; 
 
 $lognote="$title $LDEdit ok";
 

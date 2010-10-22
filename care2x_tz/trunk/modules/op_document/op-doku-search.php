@@ -52,8 +52,8 @@ require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 $buffer=$dept_obj->LDvar();
-if(isset($$buffer)&&!empty($$buffer)) $HTTP_SESSION_VARS['sess_dept_name']=$$buffer;
-	else $HTTP_SESSION_VARS['sess_dept_name']=$dept_obj->FormalName();
+if(isset($$buffer)&&!empty($$buffer)) $_SESSION['sess_dept_name']=$$buffer;
+	else $_SESSION['sess_dept_name']=$dept_obj->FormalName();
 
 /* Load global configs */
 include_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -76,9 +76,9 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 if($mode=='match'||$mode=='search'||$mode=='paginate'){
 
-	# Initialize page´s control variables
+	# Initialize pageï¿½s control variables
 	if($mode=='paginate'){
-		$matchcode=$HTTP_SESSION_VARS['sess_searchkey'];
+		$matchcode=$_SESSION['sess_searchkey'];
 		//$searchkey='USE_SESSION_SEARCHKEY';
 		//$mode='search';
 	}else{
@@ -87,11 +87,11 @@ if($mode=='match'||$mode=='search'||$mode=='paginate'){
 		$totalcount=0;
 		$odir='ASC';
 		$oitem='name_last';
-		$HTTP_SESSION_VARS['sess_searchkey']=$matchcode;
+		$_SESSION['sess_searchkey']=$matchcode;
 	}
 	# Paginator object
 	require_once($root_path.'include/care_api_classes/class_paginator.php');
-	$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+	$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 	require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -222,7 +222,7 @@ if($mode=='match'||$mode=='search'||$mode=='paginate'){
 
 # Added for the common header top block
 
- $smarty->assign('sToolbarTitle',"$LDOrDocument :: $LDSearch (".$HTTP_SESSION_VARS['sess_dept_name'].")");
+ $smarty->assign('sToolbarTitle',"$LDOrDocument :: $LDSearch (".$_SESSION['sess_dept_name'].")");
 
  $smarty->assign('pbHelp',"javascript:gethelp('opdoc.php','search','$mode','$rows')");
 
@@ -233,7 +233,7 @@ if($mode=='match'||$mode=='search'||$mode=='paginate'){
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
- $smarty->assign('sWindowTitle',"$LDOrDocument :: $LDSearch (".$HTTP_SESSION_VARS['sess_dept_name'].")");
+ $smarty->assign('sWindowTitle',"$LDOrDocument :: $LDSearch (".$_SESSION['sess_dept_name'].")");
 
 $smarty->assign('sOnLoadJs','onLoad="if(window.focus) window.focus();document.matchform.matchcode.focus();"');
 
@@ -407,7 +407,7 @@ $append="&dept_nr=$dept_nr&target=search&all_depts=$all_depts";
 <td><?php echo $LDSrcListElements[6] ?>:<br>
 </td>
 <td>
-<?php  echo '<font color="#800000">'.$HTTP_SESSION_VARS['sess_dept_name']; 
+<?php  echo '<font color="#800000">'.$_SESSION['sess_dept_name']; 
 ?>
 </td>
 </tr>

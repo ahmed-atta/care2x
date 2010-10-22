@@ -39,7 +39,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 if($mode=='save'){
 	# Know where we are
-	switch($HTTP_SESSION_VARS['sess_user_origin']){
+	switch($_SESSION['sess_user_origin']){
 		case 'lab': $HTTP_POST_VARS['location_type_nr']=1; # 1 =department
 						break;
 		default: 	$HTTP_POST_VARS['location_type_nr']=2; # 2 = ward
@@ -51,7 +51,7 @@ if($mode=='save'){
 		header("Location:$thisfile".URL_REDIRECT_APPEND."&pn=$pn&station=$station&dept_nr=$dept_nr&location_nr=$location_nr&saved=1");
 		exit;
 	}else{echo $report_obj->getLastQuery()."<p>$LDDbNoUpdate";}
-}else{ //echo $HTTP_SESSION_VARS['sess_pid'];
+}else{ //echo $_SESSION['sess_pid'];
 	if($d_notes=&$report_obj->getDailyWardNotes($pn)){
    		include_once($root_path.'include/inc_editor_fx.php');
 		$occup=true;
@@ -59,7 +59,7 @@ if($mode=='save'){
 	# If location name is empty, fetch by location nr
 	if(!isset($station)||empty($station)){
 		# Know where we are
-		switch($HTTP_SESSION_VARS['sess_user_origin']){
+		switch($_SESSION['sess_user_origin']){
 			case 'amb': # Create nursing notes object
 						include_once($root_path.'include/care_api_classes/class_department.php');
 						$obj= new Department;
@@ -189,7 +189,7 @@ if($occup){
 
 <form method="post" name=remform action="nursing-station-remarks.php" onSubmit="return checkForm(this)">
 <textarea name="notes" cols=60 rows=5 wrap="physical" onKeyup="setChg()"></textarea>
-<input type="text" name="personell_name" size=60 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly>
+<input type="text" name="personell_name" size=60 maxlength=60 value="<?php echo $_SESSION['sess_user_name']; ?>" readonly>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="station" value="<?php echo $station ?>">

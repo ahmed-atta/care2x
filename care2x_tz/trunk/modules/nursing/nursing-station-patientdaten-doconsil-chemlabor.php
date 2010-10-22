@@ -150,8 +150,8 @@ if(isset($pn)&&$pn) {
 	if($enc_obj->loadEncounterData($pn)){
 		$edit=true;
 		$full_en=$pn;
-		$HTTP_SESSION_VARS['sess_en']=$pn;
-		$HTTP_SESSION_VARS['sess_full_en']=$full_en;
+		$_SESSION['sess_en']=$pn;
+		$_SESSION['sess_full_en']=$full_en;
 
 		include_once($root_path.'include/care_api_classes/class_diagnostics.php');
 		$diag_obj=new Diagnostics;
@@ -183,9 +183,9 @@ if(isset($pn)&&$pn) {
 								$data['sample_time']=$sample_time;
 								$data['sample_weekday']=$sday;
 								$data['status']=$status;
-								$data['history']="Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-								$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-								$data['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+								$data['history']="Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n";
+								$data['modify_id']=$_SESSION['sess_user_name'];
+								$data['create_id']=$_SESSION['sess_user_name'];
 								$data['create_time']='NULL';
 								$diag_obj->setDataArray($data);
 							    if($diag_obj->insertDataFromInternalArray()){
@@ -226,8 +226,8 @@ if(isset($pn)&&$pn) {
 								$data['sample_time']=$sample_time;
 								$data['sample_weekday']=$sday;
 								$data['status']=$status;
-								$data['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
-								$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+								$data['history']="CONCAT(history,'Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n')";
+								$data['modify_id']=$_SESSION['sess_user_name'];
 								$diag_obj->setDataArray($data);
 								$diag_obj->setWhereCond(" batch_nr=$batch_nr");
 							    if($diag_obj->updateDataFromInternalArray($batch_nr)){

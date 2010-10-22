@@ -41,7 +41,7 @@
 	/* Retrieve the SIGNAL_COLOR_LEVEL_FULL = for convenience purposes */
 	$f = SIGNAL_COLOR_LEVEL_FULL;
 
-	$HTTP_SESSION_VARS['sess_user_origin']='nursing';
+	$_SESSION['sess_user_origin']='nursing';
 
 	/* Create department object and load all medical depts */
 	require_once($root_path.'include/care_api_classes/class_department.php');
@@ -58,7 +58,7 @@
 	$glob_obj->getConfig('patient_%');
 
 session_start();
-$_SESSION['logID'] = $HTTP_SESSION_VARS['sess_user_name'];
+$_SESSION['logID'] = $_SESSION['sess_user_name'];
 
 
 function Spacer()
@@ -424,8 +424,8 @@ function Spacer()
 				h=650;';
 	?>
 
-		drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=".$pn."&edit=$edit&ln=$name_last&fn=$name_first&bd=$date_birth&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $encounter_nr."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
-		window.drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
+		drgcomp_<?php echo $_SESSION['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=".$pn."&edit=$edit&ln=$name_last&fn=$name_first&bd=$date_birth&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $encounter_nr."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+		window.drgcomp_<?php echo $_SESSION['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
 	}
 
 	//-->

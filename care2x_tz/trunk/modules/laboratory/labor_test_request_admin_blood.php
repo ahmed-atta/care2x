@@ -90,8 +90,8 @@ $enc_obj=new Encounter;
 								$sql.=", mainlog_date = '".$mainlog_date."'";
 							}
 								   $sql.= ",  mainlog_sign = '".htmlspecialchars($mainlog_sign)."', lab_sign = '".htmlspecialchars($lab_sign)."',
-								   history = ".$enc_obj->ConcatHistory("Ack: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-								   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+								   history = ".$enc_obj->ConcatHistory("Ack: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+								   modify_id = '".$_SESSION['sess_user_name']."',
 									modify_time='".date('YmdHis')."'
 								  WHERE batch_nr = '".$batch_nr."'";
 								  
@@ -109,8 +109,8 @@ $enc_obj=new Encounter;
 		     case 'done':
 							      $sql="UPDATE care_test_request_blood SET 
 								  status = 'done',
-								  history = ".$enc_obj->ConcatHistory("Done ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-								   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+								  history = ".$enc_obj->ConcatHistory("Done ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+								   modify_id = '".$_SESSION['sess_user_name']."',
 									modify_time='".date('YmdHis')."'
 								  WHERE batch_nr = '".$batch_nr."'";
 								  

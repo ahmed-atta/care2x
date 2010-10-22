@@ -37,7 +37,7 @@
 		include_once($root_path.'include/care_api_classes/class_multi.php');
 		$multi= new multi;
 
-		$multi->doctorSTAT($HTTP_SESSION_VARS['sess_login_userid'],$encounter);
+		$multi->doctorSTAT($_SESSION['sess_login_userid'],$encounter);
 
 		//	echo 'saved';
 
@@ -78,7 +78,7 @@ session_start();
 		include_once($root_path.'include/care_api_classes/class_multi.php');
 		$multi= new multi;
 
-		$multi->doctorSTAT($HTTP_SESSION_VARS['sess_login_userid'],$encounter);
+		$multi->doctorSTAT($_SESSION['sess_login_userid'],$encounter);
 
 	}
 

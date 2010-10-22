@@ -39,7 +39,7 @@ if ($_POST['submit']=='submit') {
 	if ($debug) echo "current mode is submit!<br>";
 
 	  $timestamp = time();
-	  $user = $HTTP_SESSION_VARS['sess_user_name'];
+	  $user = $_SESSION['sess_user_name'];
 
 	  $db_buffer = array();
 

@@ -1,9 +1,9 @@
 <?php
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'];
+$returnfile=$_SESSION['sess_file_return'];
 
 require('./gui_bridge/default/gui_std_tags.php');
 
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 
 function createTR($ld_text, $input_val, $colspan = 1)
@@ -66,13 +66,13 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 <FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo $page_title ?></STRONG>
 <font size=+2>(
 <?php
-if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']);
-	else echo ($HTTP_SESSION_VARS['sess_full_pid']);
+if($parent_admit) echo ($_SESSION['sess_full_en']);
+	else echo ($_SESSION['sess_full_pid']);
 ?>)</font></FONT>
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-<a href="<?php echo $returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>" ><img
+<a href="<?php echo $returnfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>" ><img
 <?php echo createLDImgSrc($root_path,'back2.gif','0'); ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>><a href="javascript:gethelp('admission_how2new.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php
 if($HTTP_COOKIE_VARS["ck_login_logged".$sid]) echo "startframe.php?sid=".$sid."&lang=".$lang;
 	else echo $breakfile."?sid=$sid&target=entry&lang=$lang"; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
@@ -111,8 +111,8 @@ if($parent_admit) echo $LDAdmitNr;
 </td>
 <td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000">
 <?php
-if($parent_admit) echo ($HTTP_SESSION_VARS['sess_full_en']) ;
-	else echo ($HTTP_SESSION_VARS['sess_full_pid'])
+if($parent_admit) echo ($_SESSION['sess_full_en']) ;
+	else echo ($_SESSION['sess_full_pid'])
 ?>
 </td>
 

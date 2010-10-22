@@ -45,7 +45,7 @@ $lang_tables[]='diagnoses_ICD10.php';
 	/* Retrieve the SIGNAL_COLOR_LEVEL_FULL = for convenience purposes */
 	$f = SIGNAL_COLOR_LEVEL_FULL;
 
-	$HTTP_SESSION_VARS['sess_user_origin']='nursing';
+	$_SESSION['sess_user_origin']='nursing';
 
 	/* Create department object and load all medical depts */
 	require_once($root_path.'include/care_api_classes/class_department.php');
@@ -62,7 +62,7 @@ $lang_tables[]='diagnoses_ICD10.php';
 	$glob_obj->getConfig('patient_%');
 
 session_start();
-$_SESSION['logID'] = $HTTP_SESSION_VARS['sess_user_name'];
+$_SESSION['logID'] = $_SESSION['sess_user_name'];
 
 
 function Spacer()

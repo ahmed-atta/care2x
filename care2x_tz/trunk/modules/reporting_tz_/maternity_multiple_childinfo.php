@@ -20,9 +20,9 @@ require($root_path.'include/inc_2level_reset.php');
 
 if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
-$HTTP_SESSION_VARS['sess_user_origin']='amb';
-$HTTP_SESSION_VARS['sess_parent_mod']='';
+$_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
+$_SESSION['sess_user_origin']='amb';
+$_SESSION['sess_parent_mod']='';
 
 require_once($root_path.'include/care_api_classes/class_ward.php');
 $ward_obj=new Ward;

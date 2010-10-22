@@ -70,9 +70,9 @@ if(!empty($mode)&&!$inputerror){
 				if(!$HTTP_POST_VARS['nr_of_beds']) $HTTP_POST_VARS['nr_of_beds']=1;
 				
 				$HTTP_POST_VARS['type_nr']=$OR_obj->ORTypeNr(); # 2 = operating room
-				$HTTP_POST_VARS['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." ".$udata."\n";
-				$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
-				//$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+				$HTTP_POST_VARS['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." ".$udata."\n";
+				$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
+				//$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
 				$HTTP_POST_VARS['create_time']=date('YmdHis');
 				$HTTP_POST_VARS['modify_time']=date('YmdHis');
 				
@@ -96,8 +96,8 @@ if(!empty($mode)&&!$inputerror){
 		case 'update':
 		{ 
 			
-			$HTTP_POST_VARS['history']=$OR_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." $udata\n");
-			$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+			$HTTP_POST_VARS['history']=$OR_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." $udata\n");
+			$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
 			$HTTP_POST_VARS['modify_time']=date('YmdHis');
 			
 			$OR_obj->setDataArray($HTTP_POST_VARS);
@@ -113,7 +113,7 @@ if(!empty($mode)&&!$inputerror){
 		}
 		case 'select':
 		{
-			# Get department´s information
+			# Get departmentï¿½s information
 			if(isset($nr)&&$nr){
 				$OR_Info=$OR_obj->ORRecordInfo($nr);
 			}elseif(isset($OR_nr)&&$OR_nr){

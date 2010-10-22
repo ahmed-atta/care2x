@@ -315,8 +315,8 @@ class Obstetrics extends Core {
 	* @return mixed adodb record object or boolean
 	*/ 
 	function deactivateBirthDetails($pid){
-		global $HTTP_SESSION_VARS;
-		$this->sql="UPDATE  $this->tb_neonatal SET status='inactive', history=".$this->ConcatHistory("Deactivated ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n")." WHERE pid=$pid"; 
+		global $_SESSION;
+		$this->sql="UPDATE  $this->tb_neonatal SET status='inactive', history=".$this->ConcatHistory("Deactivated ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n")." WHERE pid=$pid"; 
 		return $this->Transact();
 	}
 	/**
@@ -425,8 +425,8 @@ class Obstetrics extends Core {
 	* @return mixed adodb record object or boolean
 	*/ 
 	function deactivatePregnancy($nr){
-		global $HTTP_SESSION_VARS;
-		$this->sql="UPDATE  $this->tb_preg SET status='inactive', history=".$this->ConcatHistory("Deactivated ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n")."
+		global $_SESSION;
+		$this->sql="UPDATE  $this->tb_preg SET status='inactive', history=".$this->ConcatHistory("Deactivated ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n")."
 							WHERE nr=$nr"; 
 		return $this->Transact();
 	}
@@ -618,14 +618,14 @@ class Obstetrics extends Core {
 	* @return boolean
 	*/
 	function AddChildNrToParent($child_nr=0,$parent_nr=0,&$birth){
-		global $HTTP_SESSION_VARS;
+		global $_SESSION;
 		if(!$child_nr||!$parent_nr) return false;
 		switch($this->ChildNrAtParent($child_nr,$parent_nr))
 		{
 			case '_NO_CHILD': # Update
 				$this->sql="UPDATE $this->tb_preg 
 								SET child_encounter_nr=".$this->ConcatFieldString('child_encounter_nr', '".$child_nr."').",
-										history=".$this->ConcatHistory("Updated by child  ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n")."
+										history=".$this->ConcatHistory("Updated by child  ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n")."
 								WHERE encounter_nr=$parent_nr AND status NOT IN ($this->dead_stat)";
 				return $this->Transact();
 				break; 
@@ -649,8 +649,8 @@ class Obstetrics extends Core {
 									'$child_nr',
 									'".$birth['delivery_mode']."',
 									'".$birth['outcome']."',
-									'Created by child ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-									'".$HTTP_SESSION_VARS['sess_user_name']."',
+									'Created by child ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n',
+									'".$_SESSION['sess_user_name']."',
 									'".date('YmdHis')."')";
 				return $this->Transact();
 				break;

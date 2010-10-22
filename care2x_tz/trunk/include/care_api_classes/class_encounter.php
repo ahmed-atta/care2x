@@ -1664,12 +1664,12 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function _setLocation($enr=0,$type_nr=0,$loc_nr=0,$group_nr,$date='',$time=''){
-		global $HTTP_SESSION_VARS, $db;
+		global $_SESSION, $db;
 		//$db->debug=1;
 		//if(!($enr&&$type_nr&&$loc_nr)) return FALSE;
 		if(empty($date)) $date=date('Y-m-d');
 		if(empty($time)) $time=date('H:i:s');
-		$user=$HTTP_SESSION_VARS['sess_user_name'];
+		$user=$_SESSION['sess_user_name'];
 		$history="Create: ".date('Y-m-d H:i:s')." ".$user."\n";
 		$this->sql="INSERT INTO $this->tb_location (encounter_nr,type_nr,location_nr,group_nr,date_from,time_from,history,create_id,create_time)
 						VALUES
@@ -1783,18 +1783,18 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function _setCurrentAssignment($enr,$data='',$act='Modified'){
-		global $HTTP_SESSION_VARS, $dbtype;
+		global $_SESSION, $dbtype;
 		//echo $data;
 		if(!$enr||empty($data)) return FALSE;
 		/*
 		if($dbtype=='mysql'){
-			$data.=",history=CONCAT(history,'\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'), ";
+			$data.=",history=CONCAT(history,'\n$act ".date('Y-m- H:i:s')." ".$_SESSION['sess_user_name']."'), ";
 		}else{
-			$data.=",history=(history || '\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'), ";
+			$data.=",history=(history || '\n$act ".date('Y-m- H:i:s')." ".$_SESSION['sess_user_name']."'), ";
 		}
 		*/
-		$data.=",history=".$this->ConcatHistory("\n$act ".date('Y-m- H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']).", ";
-		$data.="	modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+		$data.=",history=".$this->ConcatHistory("\n$act ".date('Y-m- H:i:s')." ".$_SESSION['sess_user_name']).", ";
+		$data.="	modify_id='".$_SESSION['sess_user_name']."',
 				modify_time='".date('YmdHis')."', in_dept=1 ";
 		$this->sql="UPDATE $this->tb_enc SET $data WHERE encounter_nr=$enr";
 		//echo "<br>_setCurrentAssignment :".$this->sql."<br>";
@@ -1963,12 +1963,12 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function Cancel($enc_nr=0,$by){
-		global $HTTP_SESSION_VARS;
+		global $_SESSION;
 		if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
-		if(empty($by)) $by=$HTTP_SESSION_VARS['sess_user_name'];
+		if(empty($by)) $by=$_SESSION['sess_user_name'];
 		$this->sql="UPDATE $this->tb_enc SET encounter_status='cancelled',status='void',is_discharged=1,
-						history=".$this->ConcatHistory("Cancelled ".date('Y-m- H:i:s')." by $by, logged-user ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-						modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+						history=".$this->ConcatHistory("Cancelled ".date('Y-m- H:i:s')." by $by, logged-user ".$_SESSION['sess_user_name']."\n").",
+						modify_id='".$_SESSION['sess_user_name']."',
 						modify_time='".date('YmdHis')."'
 						WHERE encounter_nr=$this->enc_nr AND encounter_status IN ('','0','allow_cancel')";
 		return $this->Transact($this->sql);
@@ -2030,7 +2030,7 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function _discharge($enr,$loc_types,$d_type_nr,$date='',$time=''){
-		global $HTTP_SESSION_VARS, $dbf_nodate, $dbtype;
+		global $_SESSION, $dbf_nodate, $dbtype;
 		if(empty($date)) $date=date('Y-m-d');
 		if(empty($time)) $time=date('H:i:s');
 		$this->sql="UPDATE $this->tb_location
@@ -2040,13 +2040,13 @@ class Encounter extends Notes {
 									status='discharged',";
         /*
         if($dbtype=='mysql'){
-			$this->sql.=" history=CONCAT(history,'\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."'),";
+			$this->sql.=" history=CONCAT(history,'\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."'),";
 		}else{
-			$this->sql.=" history= history || '\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."' ,";
+			$this->sql.=" history= history || '\nUpdate (discharged): ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."' ,";
 		}
         */
-            $this->sql.= "history =".$this->ConcatHistory("Update (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",";
-            $this->sql.=" modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'
+            $this->sql.= "history =".$this->ConcatHistory("Update (discharged): ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n").",";
+            $this->sql.=" modify_id='".$_SESSION['sess_user_name']."'
 							WHERE encounter_nr=$enr AND type_nr IN ($loc_types) AND date_to ='$dbf_nodate'";
 							//echo $this->sql;
 		if($this->Transact($this->sql)){
@@ -2059,7 +2059,7 @@ class Encounter extends Notes {
 	}
 
 	function DischargeAllPatient($encounter_class){
-		global $HTTP_SESSION_VARS,$db;
+		global $_SESSION,$db;
 
 		$db->debug = 0;
 
@@ -2068,8 +2068,8 @@ class Encounter extends Notes {
 									status='discharged',
 									discharge_date = curdate(),
 									discharge_time = curtime(),
-									history =".$this->ConcatHistory("Update (discharged): ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-									modify_id='".$HTTP_SESSION_VARS['sess_user_name']."'
+									history =".$this->ConcatHistory("Update (discharged): ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n").",
+									modify_id='".$_SESSION['sess_user_name']."'
 					WHERE IS_discharged='0' AND encounter_class_nr=$encounter_class";
 
 		$db->Execute($sql);
@@ -2303,11 +2303,11 @@ class Encounter extends Notes {
 	 * @return boolean
 	 */
 	function markAppointmentDone($appt_nr=0,$class_nr=0,$enc_nr=0){
-	    global $HTTP_SESSION_VARS;
+	    global $_SESSION;
 		if(!$appt_nr||!$this->internResolveEncounterNr($enc_nr)) return FALSE;
 		$this->sql="UPDATE $this->tb_appt SET  appt_status='done',encounter_nr=$this->enc_nr,encounter_class_nr=$class_nr,
-							history=".$this->ConcatHistory("Done ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-							modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+							history=".$this->ConcatHistory("Done ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n").",
+							modify_id='".$_SESSION['sess_user_name']."',
 							modify_time='".date('YmdHis')."'
 							WHERE nr=$appt_nr";
 		return $this->Transact();

@@ -94,7 +94,7 @@
 	        <tr align="center" bgcolor="#FFFFFF">
 	          <td align="right" class="cell" valign="middle">Created by: </td>
 	          <td align="left" bgcolor="#FFFFFF" class="style7">
-	          <input name="by" type="text" id="by" style="border:0px solid #000;" readonly="true" value="<?php echo $HTTP_SESSION_VARS['sess_user_name'];?>">
+	          <input name="by" type="text" id="by" style="border:0px solid #000;" readonly="true" value="<?php echo $_SESSION['sess_user_name'];?>">
 	            <input name="id" type="hidden" id="id" class="cell3" value="<?php echo $_GET['encounter']; ?>"></td>
 	        </tr>
 	        <tr align="center" valign="top">

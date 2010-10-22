@@ -30,7 +30,7 @@ $maxelement=10;
 		$saved=0;
 		$data_array=array();
 		$data_array['encounter_nr']=$pn;
-        $data_array['measured_by']=$HTTP_SESSION_VARS['sess_user_name'];
+        $data_array['measured_by']=$_SESSION['sess_user_name'];
 		$data_array['unit_nr']=14; // 14 = mmHg unit of measurement , must be set to local standards
 		$data_array['msr_date']=date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr)); 
 		// Save the blood pressure data
@@ -271,7 +271,7 @@ if($bpcount||$tempcount){
  						 <tr>
    						 <td><input type="text" name="ttime'.$i.'" size=6 maxlength=5 value="'.$bb['msr_time'].'" onKeyUp="isvalidtime(this,\''.$lang.'\')">
         				</td>
-   						 <td class="v12"><input type="text" name="tdata'.$i.'" size=8 maxlength=7 value="'.$bb['value'].'">°C'.$GLOBAL_CONFIG['measure_temp_unit_id'].'</td>
+   						 <td class="v12"><input type="text" name="tdata'.$i.'" size=8 maxlength=7 value="'.$bb['value'].'">ï¿½C'.$GLOBAL_CONFIG['measure_temp_unit_id'].'</td>
   						</tr>
   						';
 			}

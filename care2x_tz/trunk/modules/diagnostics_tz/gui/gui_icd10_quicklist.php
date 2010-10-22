@@ -29,7 +29,7 @@ function gethelp(x,s,x1,x2,x3,x4)
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	  <tr  class="titlebar" >
 	  	<td>&nbsp;&nbsp;<font color="#330066"><?php echo $LDICD10Description; ?>
-(<?php echo $HTTP_SESSION_VARS['sess_en']; ?>)</font></td>
+(<?php echo $_SESSION['sess_en']; ?>)</font></td>
 	  	<td align="right"><a href="<?php echo $_SESSION['backpath_diag'];?>"><img src="../../gui/img/control/default/en/en_back2.gif" border=0 width="110" height="24" alt="" style="filter:alpha(opacity=70)"></a><?php if($_SESSION['ispopup']=="true")
 	  		$closelink='javascript:window.close();';
 	  	else

@@ -36,7 +36,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 include_once($root_path.'include/care_api_classes/class_multi.php');
 $multi= new multi;
 
-$multi->doctorSTAT($HTTP_SESSION_VARS['sess_login_userid'],$pn);
+$multi->doctorSTAT($_SESSION['sess_login_userid'],$pn);
 
 
 $thisfile=basename(__FILE__);
@@ -116,8 +116,8 @@ $medical_depts=$dept_obj->getAllMedical();
 										 '".$batch_nr."','".$pn."','".$dept_nr."','".$visit."',
 										 '".$order_patient."','".addslashes($diagnosis_quiry)."','".formatDate2Std($send_date,$date_format)."',
 										 '".addslashes($send_doctor)."', 'pending',
-										 'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										 '".$HTTP_SESSION_VARS['sess_user_name']."','".date('YmdHis')."'
+										 'Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n',
+										 '".$_SESSION['sess_user_name']."','".date('YmdHis')."'
 										 )";
 
 								if($ergebnis=$dept_obj->Transact($sql))
@@ -148,8 +148,8 @@ $medical_depts=$dept_obj->getAllMedical();
 											send_date = '".formatDate2Std($send_date,$date_format)."',
 											send_doctor = '".$send_doctor."',
 											status = '".$status."',
-										    history=".$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										    modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										    history=".$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										    modify_id = '".$_SESSION['sess_user_name']."',
 											modify_time='".date('YmdHis')."'
 											WHERE batch_nr = '".$batch_nr."' ";
 

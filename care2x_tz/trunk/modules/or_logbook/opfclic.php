@@ -11,7 +11,7 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 //parse_str($ck_comdat,$varia);
-parse_str($HTTP_SESSION_VARS['sess_comdat'],$varia);
+parse_str($_SESSION['sess_comdat'],$varia);
 $fileforward="oplogtimebar.php?sid=$sid&lang=$lang&enc_nr=".$varia['enc_nr']."&op_nr=".$varia['op_nr']."&dept_nr=".$varia['dept_nr']."&saal=".$varia['saal']."&pyear=".$varia['pyear']."&pmonth=".$varia['pmonth']."&pday=".$varia['pday']."&scrolltab=$time";
 //echo $g;
 //echo $fileforward;

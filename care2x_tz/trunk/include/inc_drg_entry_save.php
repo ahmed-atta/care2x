@@ -24,9 +24,9 @@ $data['date']=date('Y-m-d H:i:s');
 $data['op_nr']=$opnr;
 $data['group_nr']=$group_nr;
 $data['category_nr']=99; // This is a dummy entry to force the new entries to appear below the current entries in the table
-$data['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-$data['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-$data['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+$data['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+$data['modify_id']=$_SESSION['sess_user_name'];
+$data['create_id']=$_SESSION['sess_user_name'];
 $data['create_time']=date('YmdHis');
 
 switch($element)
@@ -34,7 +34,7 @@ switch($element)
 	case 'icd_code': 
 	{	
 		$data['code_version']=$DRG_obj->ICDVersion();
-		$data['diagnosing_clinician']=$HTTP_SESSION_VARS['sess_user_name'];
+		$data['diagnosing_clinician']=$_SESSION['sess_user_name'];
 		$data['diagnosing_dept_nr']=$dept_nr;
 		$DRG_obj->useDiagnosis();
 		$qlist_type='diagnosis';
@@ -43,7 +43,7 @@ switch($element)
 	case 'ops_code':
 	{
 		$data['code_version']=$DRG_obj->OPSVersion();
-		$data['responsible_clinician']=$HTTP_SESSION_VARS['sess_user_name'];
+		$data['responsible_clinician']=$_SESSION['sess_user_name'];
 		$data['responsible_dept_nr']=$dept_nr;
 		$DRG_obj->useProcedure();
 		$qlist_type='procedure';

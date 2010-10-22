@@ -111,7 +111,7 @@ if($pid||$personell_nr){
 				$error=TRUE;
 			}
 			# Get default user if needed
-			if(empty($HTTP_POST_VARS['encoder'])) $encoder=$HTTP_SESSION_VARS['sess_user_name'];
+			if(empty($HTTP_POST_VARS['encoder'])) $encoder=$_SESSION['sess_user_name'];
 			# Start save routine if no error
 			if(!$error) {
 				if($update || $personell_nr){

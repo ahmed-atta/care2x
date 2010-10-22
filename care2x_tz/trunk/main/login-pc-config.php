@@ -89,7 +89,7 @@ if(isset($mode)&&($mode=='save')){
   	$smarty->assign('sPromptText',$LDChangeSaved);
  }else{
  	$smarty->assign('sPromptText',$LDWelcome);
- 	$smarty->assign('sUserName',$HTTP_SESSION_VARS['sess_login_username']);
+ 	$smarty->assign('sUserName',$_SESSION['sess_login_username']);
  }
 
  #

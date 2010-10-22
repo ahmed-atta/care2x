@@ -28,7 +28,7 @@ if($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spedie
 
 $thisfile=basename(__FILE__);
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode!='paginate'){
 	# Reset paginator variables
 	$pgx=0;
@@ -38,7 +38,7 @@ if($mode!='paginate'){
 }
 #Load and create paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 $GLOBAL_CONFIG=array();
 

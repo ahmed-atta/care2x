@@ -1,5 +1,5 @@
 <?php $case_arr=$diagnostic_obj->GetCase($id);
-$diagnostic_obj->loadEncounterData($HTTP_SESSION_VARS['sess_en']);
+$diagnostic_obj->loadEncounterData($_SESSION['sess_en']);
 $encounter_arr = $diagnostic_obj->getLoadedEncounterData();?>
 
 <html>

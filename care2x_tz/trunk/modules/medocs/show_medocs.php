@@ -39,7 +39,7 @@ if(!isset($mode)){
 		$HTTP_POST_VARS['aux_notes']=substr($HTTP_POST_VARS['aux_notes'],0,255);
 
 	# Prepare history
-	$HTTP_POST_VARS['history']='Entry: '.date('Y-m-d H:i:s').' '.$HTTP_SESSION_VARS['sess_user_name'];
+	$HTTP_POST_VARS['history']='Entry: '.date('Y-m-d H:i:s').' '.$_SESSION['sess_user_name'];
 	$HTTP_POST_VARS['time']=date('H:i:s');
 	$HTTP_POST_VARS['type_nr']=12; // 12 = text_diagnosis
 	$HTTP_POST_VARS['notes']=$HTTP_POST_VARS['text_diagnosis'];
@@ -66,15 +66,15 @@ $enc_obj=new Encounter($encounter_nr);
 $enc_obj->loadEncounterData();
 # Get encounter class
 $enc_class=$enc_obj->EncounterClass();
-/*if($enc_class==2)  $HTTP_SESSION_VARS['sess_full_en']=$GLOBAL_CONFIG['patient_outpatient_nr_adder']+$encounter_nr;
-	else $HTTP_SESSION_VARS['sess_full_en']=$GLOBAL_CONFIG['patient_inpatient_nr_adder']+$encounter_nr;
+/*if($enc_class==2)  $_SESSION['sess_full_en']=$GLOBAL_CONFIG['patient_outpatient_nr_adder']+$encounter_nr;
+	else $_SESSION['sess_full_en']=$GLOBAL_CONFIG['patient_inpatient_nr_adder']+$encounter_nr;
 */
-$HTTP_SESSION_VARS['sess_full_en']=$encounter_nr;
+$_SESSION['sess_full_en']=$encounter_nr;
 	
-if(empty($encounter_nr)&&!empty($HTTP_SESSION_VARS['sess_en'])){
-	$encounter_nr=$HTTP_SESSION_VARS['sess_en'];
+if(empty($encounter_nr)&&!empty($_SESSION['sess_en'])){
+	$encounter_nr=$_SESSION['sess_en'];
 }elseif($encounter_nr) {
-	$HTTP_SESSION_VARS['sess_en']=$encounter_nr;
+	$_SESSION['sess_en']=$encounter_nr;
 }
 	
 if($mode=='show') 
@@ -94,7 +94,7 @@ if($mode=='show')
 	if($result=$db->Execute($sql)){
 		if($rows=$result->RecordCount()){
 			# Resync the encounter_nr
-			if($HTTP_SESSION_VARS['sess_en']!=$encounter_nr) $HTTP_SESSION_VARS['sess_en']=$encounter_nr;
+			if($_SESSION['sess_en']!=$encounter_nr) $_SESSION['sess_en']=$encounter_nr;
 			if($rows==1){
 				$row=$result->FetchRow();
 				if($row['is_discharged']) $edit=0;
@@ -128,7 +128,7 @@ $subtitle=$LDMedocs;
 	
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 # Set break file
 require('include/inc_breakfile.php');

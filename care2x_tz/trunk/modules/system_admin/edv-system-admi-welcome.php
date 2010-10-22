@@ -16,7 +16,7 @@ $local_user='ck_edv_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 if(isset($ck_edv_admin_user)) setcookie('ck_edvzugang_user',$ck_edv_admin_user);
 $breakfile='edv.php'.URL_APPEND;
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+$_SESSION['sess_file_return']=basename(__FILE__);
 
 # Start Smarty templating here
  /**

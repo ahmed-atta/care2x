@@ -187,7 +187,7 @@ function printPage() {
       <td width="81" bgcolor="#F0F4F0"><div align="right"><span class="style3">Measurements:</span></div></td>
       <td width="572" bgcolor="#F9F9F9">
       	<strong>
-			<a href="#" onclick="window.location.href='../../modules/registration_admission/show_weight_height.php<?php print URL_REDIRECT_APPEND."&target=$target&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']; ?>'" title="Visit Patient Measurement History">
+			<a href="#" onclick="window.location.href='../../modules/registration_admission/show_weight_height.php<?php print URL_REDIRECT_APPEND."&target=$target&allow_update=1&pid=".$_SESSION['sess_pid']; ?>'" title="Visit Patient Measurement History">
 				View
 			</a>
 		</strong></td>

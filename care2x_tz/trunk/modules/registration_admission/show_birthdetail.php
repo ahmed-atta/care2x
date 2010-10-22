@@ -26,15 +26,15 @@ if(!isset($mode)){
 	$saved=false;
 
 	# Prepare additional info for saving
-	$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
 	$HTTP_POST_VARS['modify_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
 	if($HTTP_POST_VARS['docu_by']) $HTTP_POST_VARS['modify_id']=$HTTP_POST_VARS['docu_by'];
-		else $HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		else $HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
 	if(empty($HTTP_POST_VARS['delivery_date'])) $HTTP_POST_VARS['delivery_date']=date('Y-m-d');
 		//else $HTTP_POST_VARS['delivery_date']=@formatDate2STD($HTTP_POST_VARS['delivery_date'],$date_format);
 
 	# Update child encounter to parent encounter
-	if(!empty($HTTP_POST_VARS['parent_encounter_nr'])) $obj->AddChildNrToParent($HTTP_SESSION_VARS['sess_en'],$HTTP_POST_VARS['parent_encounter_nr'],$HTTP_POST_VARS);
+	if(!empty($HTTP_POST_VARS['parent_encounter_nr'])) $obj->AddChildNrToParent($_SESSION['sess_en'],$HTTP_POST_VARS['parent_encounter_nr'],$HTTP_POST_VARS);
 	//echo $obj->getLastQuery();
 	
 	if($allow_update){
@@ -48,11 +48,11 @@ if(!isset($mode)){
 		}
 	}else{
 		# Deactivate the old record first if exists
-		$obj->deactivateBirthDetails($HTTP_SESSION_VARS['sess_pid']);
+		$obj->deactivateBirthDetails($_SESSION['sess_pid']);
 		
-		$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
+		$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
 		if($HTTP_POST_VARS['docu_by']) $HTTP_POST_VARS['create_id']=$HTTP_POST_VARS['docu_by'];
-			else $HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+			else $HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
 		$HTTP_POST_VARS['create_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
 		$obj->setDataArray($HTTP_POST_VARS);
 
@@ -63,7 +63,7 @@ if(!isset($mode)){
 		}		
 	}
 	if($saved){
-		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&allow_update=1&pid=".$HTTP_SESSION_VARS['sess_pid']);
+		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&allow_update=1&pid=".$_SESSION['sess_pid']);
 		exit;
 	}
 }
@@ -73,14 +73,14 @@ $lang_tables=array('obstetrics.php');
 require('./include/init_show.php');
 
 # Get all birth details data of the person
-$result=&$obj->BirthDetails($HTTP_SESSION_VARS['sess_pid']);
+$result=&$obj->BirthDetails($_SESSION['sess_pid']);
 if($rows=$obj->LastRecordCount()){
 	$birth=$result->FetchRow();
 }
 
 $subtitle=$LDBirthDetails;
 
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer); 

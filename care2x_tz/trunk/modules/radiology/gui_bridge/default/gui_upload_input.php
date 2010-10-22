@@ -1,9 +1,9 @@
 <?php
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'];
+$returnfile=$_SESSION['sess_file_return'];
 
 require('./gui_bridge/default/gui_std_tags.php');
 
-//$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+//$_SESSION['sess_file_return']=$thisfile;
 
 function createTR($ld_text, $input_val, $colspan = 1)
 {
@@ -64,7 +64,7 @@ require($root_path.'include/inc_css_a_hilitebu.php');
 </td>
 
 <td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align="right">
-<a href="<?php echo $returnfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>" ><img 
+<a href="<?php echo $returnfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>" ><img 
 <?php echo createLDImgSrc($root_path,'back2.gif','0'); ?> <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)';?>><a 
 href="javascript:gethelp('admission_how2new.php')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a><a href="<?php 
  echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseWin ?>"   <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a>
@@ -106,7 +106,7 @@ echo $LDAdmitNr;
 </td>
 <td width="30%"  bgcolor="#ffffee"><FONT SIZE=-1  FACE="Arial" color="#800000">
 <?php 
- echo ($HTTP_SESSION_VARS['sess_en']) ;
+ echo ($_SESSION['sess_en']) ;
 ?>
 </td>
 
@@ -213,7 +213,7 @@ while($row=$result->FetchRow()){
 	</td>
     <td><FONT SIZE=-1  FACE="Arial" color="#000033"><?php if(!empty($row['therapy'])) echo substr($row['therapy'],0,$GLOBAL_CONFIG['medocs_text_preview_maxlen']).'<br>'; ?>
 
-	</td>    <td align="center"><a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr']; ?>"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a></td>
+	</td>    <td align="center"><a href="<?php echo $thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&encounter_nr='.$_SESSION['sess_en'].'&target='.$target.'&mode=details&type_nr='.$type_nr.'&nr='.$row['nr']; ?>"><img <?php echo createComIcon($root_path,'info3.gif','0'); ?>></a></td>
     <td><FONT SIZE=-1  FACE="Arial"><?php if($row['personell_name']) echo $row['personell_name']; ?></td>
   </tr>
 
@@ -265,21 +265,21 @@ eval("echo $TP_form;");
 	$TP_date_format=$$dfbuffer;
 
 	$TP_img_calendar=createComIcon($root_path,'show-calendar.gif','0','absmiddle');
-	$TP_user_name=$HTTP_SESSION_VARS['sess_user_name'];
+	$TP_user_name=$_SESSION['sess_user_name'];
 	# Load and output the template 
 	$TP_form=$TP_obj->load('medocs/tp_medocs_newform.htm');
 	eval("echo $TP_form;");
 ?>
-<input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
-<input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
-<input type="hidden" name="modify_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
-<input type="hidden" name="create_id" value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>">
+<input type="hidden" name="encounter_nr" value="<?php echo $_SESSION['sess_en']; ?>">
+<input type="hidden" name="pid" value="<?php echo $_SESSION['sess_pid']; ?>">
+<input type="hidden" name="modify_id" value="<?php echo $_SESSION['sess_user_name']; ?>">
+<input type="hidden" name="create_id" value="<?php echo $_SESSION['sess_user_name']; ?>">
 <input type="hidden" name="create_time" value="null">
 <input type="hidden" name="mode" value="create">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
 <input type="hidden" name="edit" value="<?php echo $edit; ?>">
 <input type="hidden" name="is_discharged" value="<?php echo $is_discharged; ?>">
-<input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $HTTP_SESSION_VARS['sess_user_name']."\n"; ?>">
+<input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $_SESSION['sess_user_name']."\n"; ?>">
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>>
 
 </form>
@@ -291,7 +291,7 @@ if(($mode=='show'||$mode=='details')&&!$is_discharged){
 
 <p>
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle'); ?>>
-<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=new&type_nr='.$type_nr; ?>"> 
+<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&encounter_nr='.$_SESSION['sess_en'].'&target='.$target.'&mode=new&type_nr='.$type_nr; ?>"> 
 <?php echo $LDEnterNewRecord; ?>
 </a><br>
 <?php
@@ -299,7 +299,7 @@ if(($mode=='show'||$mode=='details')&&!$is_discharged){
 if(($mode!='show'&&!$nolist) ||($mode=='show'&&$nolist&&$rows>1)){
 ?>
 <img <?php echo createComIcon($root_path,'l-arrowgrnlrg.gif','0','absmiddle'); ?>>
-<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>"> 
+<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&encounter_nr='.$_SESSION['sess_en'].'&target='.$target.'&mode=show&type_nr='.$type_nr; ?>"> 
 <?php echo $LDShowDocList; ?>
 </a>
 <?php

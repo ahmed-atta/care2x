@@ -31,7 +31,7 @@ if(($mode=='save')&&$short_name&&$long_name&&$info){
 	   $sql="UPDATE $dbtable SET short_name='$short_name',
 	                                               long_name='$long_name',
 							info='$info',
-							modify_id='".$HTTP_SESSION_VARS['sess_user_name']."',
+							modify_id='".$_SESSION['sess_user_name']."',
 							modify_time='".date('YmdHis')."'
 							WHERE item_no='$item_no'";
 	   if($ergebnis=$core->Transact($sql))
@@ -76,7 +76,7 @@ if(($mode=='save')&&$short_name&&$long_name&&$info){
 						              '$short_name',
 									  '$long_name',
 									  '$info',
-									  '".$HTTP_SESSION_VARS['sess_user_name']."',
+									  '".$_SESSION['sess_user_name']."',
 									  '".date('YmdHis')."')";
 			if($ergebnis=$core->Transact($sql))
        		{

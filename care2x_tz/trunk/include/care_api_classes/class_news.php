@@ -376,7 +376,7 @@ class News extends Core {
 	* @return mixed adodb record object or boolean
 	*/			
 	function saveNews($dept_nr=0, &$news) {
-	    global $db, $lang, $HTTP_SESSION_VARS, $dbtype;
+	    global $db, $lang, $_SESSION, $dbtype;
 	    //$db->debug=true;
 	    # Seed random gen
 	    srand();
@@ -419,8 +419,8 @@ class News extends Core {
 							'".$news['author']."',
 							'".date('Y-m-d H:i:s')."',
 							'".$news['publish_date']."',
-							'".$HTTP_SESSION_VARS['sess_user_name']."',
-							'".$HTTP_SESSION_VARS['sess_user_name']."',
+							'".$_SESSION['sess_user_name']."',
+							'".$_SESSION['sess_user_name']."',
 							".$ts."
 							)";
 			//echo $this->sql."<p>";

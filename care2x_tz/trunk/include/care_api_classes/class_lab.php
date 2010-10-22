@@ -258,8 +258,8 @@ class Lab extends Encounter {
 	* @return boolean
 	*/
 	function hideResultIfExists($enc_nr,$job_id,$grp_id){
-		global $HTTP_SESSION_VARS;
-		$this->sql="UPDATE $this->tb_find_chemlab SET status='hidden',history=".$this->ConcatHistory("Hide ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n")."
+		global $_SESSION;
+		$this->sql="UPDATE $this->tb_find_chemlab SET status='hidden',history=".$this->ConcatHistory("Hide ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n")."
 								WHERE encounter_nr='$enc_nr' AND job_id='$job_id' AND group_id='$grp_id' AND status NOT IN ($this->dead_stat)";
 		return $this->Transact();
 	}

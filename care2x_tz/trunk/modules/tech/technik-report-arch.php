@@ -16,8 +16,8 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
 $breakfile='technik.php'.URL_APPEND;
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+$returnfile=$_SESSION['sess_file_return'].URL_APPEND;
+$_SESSION['sess_file_return']=basename(__FILE__);
 
 if(!isset($dept)) $dept='';
 if(!isset($tech)) $tech='';
@@ -255,7 +255,7 @@ ob_start();
                    				<input type="hidden" name="nrows" value="'.$nrows.'">
                        			<input type="hidden" name="sid" value="'.$sid.'">           
                        			<input type="hidden" name="lang" value="'.$lang.'">           
-								<input type="submit" value="&lt;&lt; Zurück">
+								<input type="submit" value="&lt;&lt; Zurï¿½ck">
 								</form>';
 		echo "</td><td align=right>";
 		
@@ -291,7 +291,7 @@ if($ofset) echo '	<form name=back action='.$thisfile.' method=post>
                    				<input type="hidden" name="nrows" value="'.$nrows.'">
                        			<input type="hidden" name="sid" value="'.$sid.'">           
                        			<input type="hidden" name="lang" value="'.$lang.'">           
-								<input type="submit" value="&lt;&lt; Zurück">
+								<input type="submit" value="&lt;&lt; Zurï¿½ck">
 								</form>';
 							
 if($mode=='search') echo '

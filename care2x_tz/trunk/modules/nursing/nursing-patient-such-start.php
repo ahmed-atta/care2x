@@ -32,14 +32,14 @@ if($mode=='such'||$mode=='paginate')
 	$tb_location='care_encounter_location';
 	$tb_ward='care_ward';
 
-	# Initialize page´s control variables
+	# Initialize pageï¿½s control variables
 	if($mode=='paginate'){
-		$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+		$searchkey=$_SESSION['sess_searchkey'];
 	}else{
 		# Reset paginator variables
 		$pgx=0;
 		$totalcount=0;
-		$HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
+		$_SESSION['sess_searchkey']=$searchkey;
 		$oitem='';
 		$odir='';
 	}
@@ -49,7 +49,7 @@ if($mode=='such'||$mode=='paginate')
 
 	#Load and create paginator object
 	include_once($root_path.'include/care_api_classes/class_paginator.php');
-	$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+	$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 	
 	$GLOBAL_CONFIG=array();
 	include_once($root_path.'include/care_api_classes/class_globalconfig.php');

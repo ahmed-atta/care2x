@@ -22,7 +22,7 @@ $person_obj = new Person;
 
 if (empty($encounter_nr) and !empty($pid)) {
 	$encounter_nr = $person_obj->CurrentEncounter($pid);
-	$HTTP_SESSION_VARS['sess_en'] = $encounter_nr;
+	$_SESSION['sess_en'] = $encounter_nr;
 }
 $debug=FALSE;
 ($debug)?$db->debug=TRUE:$db->debug=FALSE;
@@ -49,7 +49,7 @@ if ($debug) {
 
     echo "encounter_nr:".$encounter_nr."<br>";
 
-	echo "Session-ecnounter_nr: ".$HTTP_SESSION_VARS['sess_en']."<br>";
+	echo "Session-ecnounter_nr: ".$_SESSION['sess_en']."<br>";
 
 	echo "show onyl pharamcy artivles is set to: ".$ShowOnlyPharmacy;
 }
@@ -69,7 +69,7 @@ if(!isset($mode)){
 	if($_POST['prescribe_date']) $_POST['prescribe_date']=@formatDate2STD($_POST['prescribe_date'],$date_format);
 	else $_POST['prescribe_date']=date('Y-m-d');
 
-	$_POST['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	$_POST['create_id']=$_SESSION['sess_user_name'];
 
 	//$db->debug=true;
 	// Insert the prescription without other checks into the database. This should be dony be the doctor and
@@ -86,8 +86,8 @@ if (isset($pn)) {
   require_once($root_path.'include/care_api_classes/class_encounter.php');
   $encounter_obj=new Encounter($pn);
   $pid=$encounter_obj->EncounterExists($pn);
-  $HTTP_SESSION_VARS['sess_pid']=$pid;
-  $HTTP_SESSION_VARS['sess_en']=$pn;
+  $_SESSION['sess_pid']=$pid;
+  $_SESSION['sess_en']=$pn;
 }
 
 
@@ -95,9 +95,9 @@ require('./include/init_show.php');
 
 if($parent_admit){
     $sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr, care_tz_drugsandservices as service
-		WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']."
+		WHERE p.pid=".$_SESSION['sess_pid']."
 			AND p.pid=e.pid
-			AND e.encounter_nr=".$HTTP_SESSION_VARS['sess_en']."
+			AND e.encounter_nr=".$_SESSION['sess_en']."
 			AND e.encounter_nr=pr.encounter_nr
 			AND pr.prescribe_date = '".$prescription_date."'
 			AND service.item_id=pr.article_item_number
@@ -106,11 +106,11 @@ if($parent_admit){
 }else{
 	if ($ShowOnlyPharmacy) {
 		$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr, care_tz_drugsandservices
-		  WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr AND pr.article_item_number=care_tz_drugsandservices.item_id AND ( purchasing_class = 'drug_list' OR purchasing_class ='supplies' OR purchasing_class ='dental')
+		  WHERE p.pid=".$_SESSION['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr AND pr.article_item_number=care_tz_drugsandservices.item_id AND ( purchasing_class = 'drug_list' OR purchasing_class ='supplies' OR purchasing_class ='dental')
 		  ORDER BY pr.modify_time DESC";
 	} else {
 		$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr, care_tz_drugsandservices as service
-		  WHERE p.pid=".$HTTP_SESSION_VARS['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr AND service.item_id=pr.article_item_number
+		  WHERE p.pid=".$_SESSION['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr AND service.item_id=pr.article_item_number
 			AND service.is_labtest=0 AND ( service.purchasing_class = 'drug_list' OR service.purchasing_class ='supplies' OR purchasing_class ='dental')
 		  ORDER BY pr.modify_time DESC";
 	}
@@ -124,7 +124,7 @@ if($result=$db->Execute($sql)){
 
 $subtitle=$LDPrescriptions;
 $notestype='prescription';
-$HTTP_SESSION_VARS['sess_file_return']=$thisfile;
+$_SESSION['sess_file_return']=$thisfile;
 
 $buffer=str_replace('~tag~',$title.' '.$name_last,$LDNoRecordFor);
 $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer);
@@ -132,7 +132,7 @@ $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer);
 include_once($root_path.'include/care_api_classes/class_multi.php');
 $multi= new multi;
 
-$multi->doctorSTAT($HTTP_SESSION_VARS['sess_login_userid'],$pn);
+$multi->doctorSTAT($_SESSION['sess_login_userid'],$pn);
 
 /* Load GUI page */
 require('./gui_bridge/default/gui_show.php');

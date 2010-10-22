@@ -1042,7 +1042,7 @@ if(!isset($pid) || !$pid){
 			}
 
 			$smarty->assign('LDAdmitBy',$LDAdmitBy);
-			$encoder = (empty($encoder))? $_COOKIE[$local_user.$sid] : $HTTP_SESSION_VARS['sess_user_name'];
+			$encoder = (empty($encoder))? $_COOKIE[$local_user.$sid] : $_SESSION['sess_user_name'];
 
 			$encoder = (empty($encoder) && ($create_id))? $create_id : $encoder;
 
