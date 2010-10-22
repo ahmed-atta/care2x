@@ -56,7 +56,7 @@ $template_theme='biju';
 #
 # Set the template path
 #
-if ($_GET['root_path'] || $_POST['root_path']) die();
+if (isset($_GET['root_path']) || isset($_POST['root_path'])) die();
 //require('roots.php');
 $template_path=$root_path.'gui/html_template/';
 
