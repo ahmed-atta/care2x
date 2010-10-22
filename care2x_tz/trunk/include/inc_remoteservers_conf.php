@@ -1,6 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_remoteservers_conf.php",$PHP_SELF)) 
+if (stristr($_SERVER['SCRIPT_NAME'],inc_remoteservers_conf.php')) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 

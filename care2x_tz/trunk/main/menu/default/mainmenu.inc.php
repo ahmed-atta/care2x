@@ -24,14 +24,7 @@ if($result){
 	# Load the menu item template
 	$tp =&$TP_obj->load('tp_main_index_menu_item.htm');
 	while($menu=$result->FetchRow()){
-		/* Deactivated because of laggy login-detection
-		if (eregi('LDLogin',$menu['LD_var'])){
-			if ($HTTP_COOKIE_VARS['ck_login_logged'.$sid]=='true'){
-				$menu['url']='main/logout_confirm.php';
-				$menu['LD_var']='LDLogout';
-			}
-		}
-		*/
+
 		$TP_menu_item='<a href="'.$root_path.$menu['url'].URL_APPEND.'" TARGET="CONTENTS" REL="child">';
 		if(isset($$menu['LD_var'])&&!empty($$menu['LD_var'])) $TP_menu_item.=$$menu['LD_var'];
 			else $TP_menu_item.=$menu['name'];

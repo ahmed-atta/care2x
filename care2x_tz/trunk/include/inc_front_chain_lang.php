@@ -2,7 +2,7 @@
 # To see how the script locking is implemented in this script see /development/dev_docs/script_locking.txt 
 
 #------begin------ This protection code was suggested by Luki R. luki@karet.org ----
-if (eregi('inc_front_chain_lang.php',$PHP_SELF)) 
+if (stristr($_SERVER['SCRIPT_NAME'],'inc_front_chain_lang.php')) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 #------end-----
 

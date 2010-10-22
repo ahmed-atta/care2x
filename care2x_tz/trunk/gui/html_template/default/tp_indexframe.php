@@ -39,7 +39,7 @@ echo 'bgcolor='.$cfg['idx_bgcolor'];
 //echo $HTTP_COOKIE_VARS['ck_config']; // used only in debugging related to user config data
 if($result){
 	while($menu=$result->FetchRow()){
-		if (eregi('LDLogin',$menu['LD_var'])){
+		if (stristr($menu['LD_var'],'LDLogin')){
 			if ($HTTP_COOKIE_VARS['ck_login_logged'.$sid]=='true'){
 				$menu['url']='main/logout_confirm.php';
 				$menu['LD_var']='LDLogout';

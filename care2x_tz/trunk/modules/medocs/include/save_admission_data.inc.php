@@ -1,6 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('save_admission_data.inc.php',$PHP_SELF)) 
+if (stristr($_SERVER['SCRIPT_NAME'],'save_admission_data.inc.php')) 
 	die('<meta http-equiv="refresh" content="0; url=../">');	
 
 	

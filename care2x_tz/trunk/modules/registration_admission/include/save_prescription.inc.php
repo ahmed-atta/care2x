@@ -1,6 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('save_immunization.inc.php',$PHP_SELF)) 
+if (stristr($_SERVER['SCRIPT_NAME'],'save_immunization.inc.php')) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 
 require_once($root_path.'include/care_api_classes/class_prescription.php');
