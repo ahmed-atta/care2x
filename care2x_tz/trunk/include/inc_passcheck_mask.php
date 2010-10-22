@@ -44,7 +44,7 @@ if (isset($pass)&&($pass=='check')&&($passtag)){
 	$smarty->assign('sErrorMsg',$err_msg);
 }
 
-if(!$passtag) $smarty->assign('sMascotColumn','<td><img '.createMascot($root_path,'mascot3_r.gif','0').'></td>');
+if(!isset($passtag)) $smarty->assign('sMascotColumn','<td><img '.createMascot($root_path,'mascot3_r.gif','0').'></td>');
 
 #
 # Prepare the auth entry form elements
@@ -60,16 +60,17 @@ $smarty->assign('LDPwPrompt',$LDPwPrompt);
 #
 # Prepare the hidden inputs
 #
-$sHiddenTemp = '<input type=hidden name=direction value="'.$direction.'">
-<input type=hidden name="pass" value="check">
-<input type="hidden" name="nointern" value="1">
-<input type="hidden" name="lang" value="'.$lang.'">
-<input type="hidden" name="mode" value="'.$mode.'">
-<input type="hidden" name="target" value="'.$target.'">
-<input type="hidden" name="subtarget" value="'.$subtarget.'">
-<input type="hidden" name="user_origin" value="'.$user_origin.'">
-<input type="hidden" name="title" value="'.$title.'">
-<input type="hidden" name="fwd_nr" value="'.$fwd_nr.'">';
+$sHiddenTemp = "";
+if (isset($direction)) $sHiddenTemp .= '<input type=hidden name=direction value="'.$direction.'">';
+$sHiddenTemp .= '<input type=hidden name="pass" value="check">';
+$sHiddenTemp .= '<input type="hidden" name="nointern" value="1">';
+$sHiddenTemp .= (isset($lang)) ?   '<input type="hidden" name="lang" value="'.$lang.'">' : '<input type="hidden" name="lang" value="'.en.'">';
+if (isset($mode)) $sHiddenTemp .= '<input type="hidden" name="mode" value="'.$mode.'">';
+if (isset($target)) $sHiddenTemp .= '<input type="hidden" name="target" value="'.$target.'">';
+if (isset($subtarget)) $sHiddenTemp .= '<input type="hidden" name="subtarget" value="'.$subtarget.'">';
+if (isset($user_origin)) $sHiddenTemp .= '<input type="hidden" name="user_origin" value="'.$user_origin.'">';
+if (isset($title)) $sHiddenTemp .= '<input type="hidden" name="title" value="'.$title.'">';
+if (isset($fwd_nr)) $sHiddenTemp .= '<input type="hidden" name="fwd_nr" value="'.$fwd_nr.'">';
 
 if($not_trans_id) {
 	$sHiddenTemp = $sHiddenTemp.'<input type="hidden" name="sid" value="'.$sid.'">';
