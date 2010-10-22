@@ -64,11 +64,11 @@ if($news[$j]){
 			
 		    $sBuffer = '<font size="'.$news_headline_body_font_size.'" face="'.$news_headline_body_font_face.'" color="'.$news_headline_body_font_color.'">';
 			
-			if ($news_headline_body_font_bold) $sBuffer = $sBuffer.'<b>';
+			if (isset($news_headline_body_font_bold)) $sBuffer = $sBuffer.'<b>';
 			
 			$sBuffer = $sBuffer.substr(deactivateHotHtml(nl2br($news[$j]['body'])), 0 ,$news_normal_preview_maxlen).'...';
 			
-			if ($news_headline_body_font_bold) $sBuffer = $sBuffer.'</b>';
+			if (isset($news_headline_body_font_bold)) $sBuffer = $sBuffer.'</b>';
 			
 			$sBuffer = $sBuffer.'</font>';
 			
