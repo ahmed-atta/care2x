@@ -70,6 +70,7 @@ require_once($root_path.'include/inc_news_display_config.php');
  $smarty->assign('bHideTitleBar',TRUE);
 
  # Window title
+ if (empty($LDPageTitle)) $LDPageTitle = 'NEWS';
  $smarty->assign('title',$LDPageTitle);
 
  $smarty->assign('news_normal_display_width',$news_normal_display_width);
