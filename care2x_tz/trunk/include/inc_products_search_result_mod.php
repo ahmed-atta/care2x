@@ -1,6 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_products_search_result_mod.php",$PHP_SELF)) 
+if (stristr($_SERVER['SCRIPT_NAME'],inc_products_search_result_mod.php')) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 

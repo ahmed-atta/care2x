@@ -142,7 +142,7 @@ function aff_mail($servr, $user, $passwd, $folder, $mail, $verbose, $lang, $sort
 	else
 		$header = '';
 	$tmp = array_pop($attach_tab);
-	if (eregi('text/html', $tmp['mime']) || eregi('text/plain', $tmp['mime']))
+	if (stristr( $tmp['mime'],'text/html') || stristr( $tmp['mime'],'text/plain'))
 	{	
 		if ($tmp['transfer'] == 'QUOTED-PRINTABLE')
 			$glob_body = imap_qprint(imap_fetchbody($pop, $mail, $tmp['number']));
@@ -315,7 +315,7 @@ function GetSinglePart($this_part, $header, $body)
 {
 	GLOBAL $attach_tab;
 
-	if (eregi('text/html', $header))
+	if (stristr(, $header,'text/html'))
 		$full_mime_type = 'text/html';
 	else
 		$full_mime_type = 'text/plain';
@@ -361,7 +361,7 @@ function remove_stuff($body, $lang, $mime)
 {
 	GLOBAL $PHP_SELF;
 
-	if (eregi('html', $mime))
+	if (stristr($mime,'html'))
 	{
 		$to_removed_array = array (
 						"'<html>'si",
@@ -387,7 +387,7 @@ function remove_stuff($body, $lang, $mime)
 		$body = eregi_replace("href=\"([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)\"","<a href=\"\\1\" target=\"_blank\"", $body);
 		$body = eregi_replace("href=([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)","<a href=\"\\1\" target=\"_blank\"", $body);
 	}
-	elseif (eregi('plain', $mime))
+	elseif (stristr($mime,'plain'))
 	{
 		$body = htmlspecialchars($body);
 		$body = eregi_replace("(http|https|ftp)://([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)","<a href=\"\\1://\\2\" target=\"_blank\">\\1://\\2</a>", $body);
@@ -458,15 +458,15 @@ function get_mail_size($this_part)
 // this function build an array with all the recipients of the message for later reply or reply all 
 function get_reply_all($user, $domain, $from, $to, $cc)
 {
-	if (!eregi($user.'@'.$domain, $from))
+	if (!stristr($from,$user.'@'.$domain))
 		$rcpt = $from.'; ';
 	$tab = explode(',', $to);
 	while ($tmp = array_shift($tab))
-		if (!eregi($user.'@'.$domain, $tmp))
+		if (!stristr($tmp,$user.'@'.$domain))
 			$rcpt .= $tmp.'; ';
 	$tab = explode(',', $cc);
 	while ($tmp = array_shift($tab))
-		if (!eregi($user.'@'.$domain, $tmp))
+		if (!stristr($tmp,$user.'@'.$domain))
 			$rcpt .= $tmp.'; ';
 	return (substr($rcpt, 0, strlen($rcpt) - 2));
 }

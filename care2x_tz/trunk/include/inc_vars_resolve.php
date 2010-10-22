@@ -127,7 +127,7 @@ $CARE_SERVER_VARS=&importGlobalVariable('server');
 }
 
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_vars_resolve.php',$PHP_SELF)) 
+if (stristr($PHP_SELF,'inc_vars_resolve.php')) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 ?>

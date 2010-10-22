@@ -1,6 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_left_menu_url.php',$PHP_SELF)) 
+if (stristr($_SERVER['SCRIPT_NAME'],'inc_left_menu_url.php')) 
 	die('<meta http-equiv=\'refresh\' content=\'0; url=../\'>');
 /*------end------*/
 
