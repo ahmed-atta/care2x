@@ -19,8 +19,9 @@ $breakfile='config_options.php'.URL_APPEND;
 
 $config_new=array();
 
-if(!session_is_registered('sess_serial_buffer')){
-	session_register('sess_serial_buffer');
+if(!isset($_SESSION['sess_serial_buffer']){
+	$_SESSION['sess_serial_buffer'];
+	//session_register('sess_serial_buffer');
 }
 if(isset($_SESSION['sess_serial_buffer'])){
 	$config_new=unserialize($_SESSION['sess_serial_buffer']);

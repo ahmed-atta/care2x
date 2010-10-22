@@ -29,7 +29,7 @@ if(empty($_SESSION['sess_path_referer']) || !file_exists($root_path.$_SESSION['s
     $breakfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND;
 }
 
-if(!session_is_registered('sess_pid')) session_register('sess_pid');
+if(!isset($_SESSION['sess_pid'])) $_SESSION['sess_pid']='';
 if(!isset($insurance_show)) $insurance_show=true;
 
 $newdata=1;

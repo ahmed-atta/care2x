@@ -21,7 +21,7 @@ if($update) $breakfile='person_register_show.php'.URL_APPEND.'&pid='.$pid;
 	elseif($HTTP_COOKIE_VARS['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 		else $breakfile='personell_admin_pass.php'.URL_APPEND.'&target='.$target;
 
-if(!session_is_registered('sess_pid')) session_register('sess_pid');
+if(!isset($_SESSION['sess_pid'])) $_SESSION['sess_pid']='';
 
 # Start Smarty templating here
  /**

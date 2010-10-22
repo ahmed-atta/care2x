@@ -28,9 +28,9 @@ include_once($root_path.'include/care_api_classes/class_multi.php');
 $cd_obj = new multi;
 $vct = $cd_obj->__genNumbers();
 
-if(!session_is_registered('sess_user_name')) session_register('sess_user_name');
+if(!isset($_SESSION['sess_user_name'])) $_SESSION['sess_user_name']='';
 
-if(!session_is_registered('sess_parent_mod')) session_register('sess_parent_mod');
+if(!isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod']='';
 
 # Create objects
 $encounter_obj=new Encounter($encounter_nr);
@@ -183,7 +183,7 @@ $dbtable='care_encounter';
 
 
 	/* Update History */
-	if(!$newdata) $encounter_obj->setHistorySeen($_SESSION['sess_user_name'],$encounter_nr);
+	if(!isset($newdata)) $encounter_obj->setHistorySeen($_SESSION['sess_user_name'],$encounter_nr);
 	/* Get insurance firm name*/
 	$insurance_firm_name=$insurance_obj->getFirmName($insurance_firm_id);
 	/* Check whether config path exists, else use default path */
@@ -386,15 +386,15 @@ if($encounter_class_nr==1){
 
 }
 
-$smarty->assign('LDDiagnosis',$LDDiagnosis);
-$smarty->assign('referrer_diagnosis',$referrer_diagnosis);
-$smarty->assign('LDRecBy',$LDReg);
-$smarty->assign('registration_fee',$registration_fee);
+if(isset($LDDiagnosis)) $smarty->assign('LDDiagnosis',$LDDiagnosis);
+if(isset($referrer_diagnosis)) $smarty->assign('referrer_diagnosis',$referrer_diagnosis);
+if(isset($LDReg)) $smarty->assign('LDRecBy',$LDReg);
+if(isset($registration_fee)) $smarty->assign('registration_fee',$registration_fee);
 #$smarty->assign('LDTherapy',$LDReg);
-$smarty->assign('LDTherapy',$LDCon);
-$smarty->assign('consultation_fee',$consultation_fee);
-$smarty->assign('LDSpecials',$LDSpecials);
-$smarty->assign('referrer_notes',$referrer_notes);
+if(isset($LDCon)) $smarty->assign('LDTherapy',$LDCon);
+if(isset($consultation_fee)) $smarty->assign('consultation_fee',$consultation_fee);
+if(isset($LDSpecials)) $smarty->assign('LDSpecials',$LDSpecials);
+if(isset($referrer_notes)) $smarty->assign('referrer_notes',$referrer_notes);
 
 $smarty->assign('LDBillType',$LDBillType);
 
@@ -410,14 +410,14 @@ $smarty->assign('insurance_firm_name',$insurance_firm_name);
 $smarty->assign('LDFrom',$LDFrom);
 $smarty->assign('LDTo',$LDTo);
 
-/*
+
 	$s = 'SELECT item_id, item_description FROM care_tz_drugsandservices WHERE  item_number LIKE "A%"';
 	$amb = $db->Execute($s);
 		while($station=$amb->FetchRow()){
 			$sTeemp = $station[1];
 		}
-*/
-	$smarty->assign('sAmbInput',$sTeemp);
+
+	if (isset($sTeemp)) $smarty->assign('sAmbInput',$sTeemp);
 
 
 

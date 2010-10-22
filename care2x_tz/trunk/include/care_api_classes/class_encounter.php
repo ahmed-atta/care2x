@@ -1181,7 +1181,7 @@ class Encounter extends Notes {
 	*/
 	function RecordModifierID($enr=0){
 		if($this->is_loaded) {
-			return $this->encounter['modify_id'];
+			return (isset($this->encounter['modify_id']))?isset($this->encounter['modify_id']):'';
 		}else{
 			if($enr) return $this->getValue('modify_id',$enr);
 				else return FALSE;

@@ -15,7 +15,7 @@ $smarty->assign('sNewsPreview','');
 $smarty->assign('sPreface','');
 $smarty->assign('sEditorLink','');
 
-if($news[$j]){
+if(isset($news[$j])){
 	# First test for record nr. + mime combination of image filename
 	# If not exists, try pic_file value + mime combination
 	
@@ -83,7 +83,7 @@ if($news[$j]){
 		 }
 	} 
 
-	if(!$news[$j]||$nofile)
+	if(!isset($news[$j])||isset($nofile))
 	{ 
 		$i=$j;
 		
