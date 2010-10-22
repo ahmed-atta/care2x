@@ -32,10 +32,10 @@ if($origin=='patreg_reg') $returnfile='patient_register_show.php'.URL_APPEND.'&p
 # Set break file
 require('include/inc_breakfile.php');
 
-if(!session_is_registered('sess_pid')) session_register('sess_pid');
-if(!session_is_registered('sess_full_pid')) session_register('sess_full_pid');
-if(!session_is_registered('sess_en')) session_register('sess_en');
-if(!session_is_registered('sess_full_en')) session_register('sess_full_en');
+if(!isset($_SESSION['sess_pid'])) $_SESSION['sess_pid']='';
+if(!isset($_SESSION['sess_full_pid'])) $_SESSION['sess_full_pid']='';
+if(!isset($_SESSION['sess_en'])) $_SESSION['sess_en']='';
+if(!isset($_SESSION['sess_full_en'])) $_SESSION['sess_full_en']='';
 
 $headframe_title=$LDMedocs;
 require('./gui_bridge/default/gui_medocs_start.php');

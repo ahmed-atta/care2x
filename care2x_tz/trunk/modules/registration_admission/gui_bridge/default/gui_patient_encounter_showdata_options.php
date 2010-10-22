@@ -62,7 +62,7 @@ if(!is_object($TP_obj)){
 
 # Assign the icons
 
-if($cfg['icons'] != 'no_icon'){
+if(isset($cfg['icons']) != 'no_icon'){
 	$TP_iconPost = '<img '.createComIcon($root_path,'post_discussion.gif','0').'>';
 	$TP_iconFolder = '<img '.createComIcon($root_path,'open.gif','0').'>';
 	$TP_iconBubble = '<img '.createComIcon($root_path,'bubble.gif','0').'>';
@@ -205,7 +205,8 @@ if(!$data_entry&&($enc_status['encounter_status']!='cancelled')&&!$enc_status['i
 }else{
 	$TP_xenc_BLK="<font color='#333333'>$LDCancelThisAdmission</font>";
 }
-
+// Workaround
+$TP_MEDOCS='';
 # Load the template
 $TP_options=$TP_obj->load('registration_admission/tp_pat_admit_options.htm');
 eval("echo $TP_options;");

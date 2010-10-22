@@ -6,10 +6,8 @@ define('LANG_FILE','or.php');
 define("NO_CHAIN",1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-/*if(!session_is_registered('sess_opfclic_rt')) session_register('sess_opfclic_rt');
-if(!session_is_registered('sess_opfclic_filename')) session_register('sess_opfclic_filename');
-*/
-if(!session_is_registered('sess_comdat')) session_register('sess_comdat');
+
+if(!isset($_SESSION['sess_comdat'])) $_SESSION['sess_comdat']='';
 
 $template=array();
 
