@@ -48,9 +48,9 @@ if(isset($pn)&&$pn){
 	//$db->debug=true;
 	if(isset($mode)&&$mode=='save'){
 
-		//$HTTP_POST_VARS['history']="CONCAT(history,'Notes ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n')";
-		$HTTP_POST_VARS['history']=$img_obj->ConcatHistory("Notes ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
-		$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		//$HTTP_POST_VARS['history']="CONCAT(history,'Notes ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n')";
+		$HTTP_POST_VARS['history']=$img_obj->ConcatHistory("Notes ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
+		$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
 		$HTTP_POST_VARS['modify_time']=date('YmdHis');
 		//$img_obj->setDataArray($HTTP_POST_VARS);
 		if($img_obj->updateImageNotes($HTTP_POST_VARS)){
@@ -123,7 +123,7 @@ list($w,$h,$t,$wh)=getImageSize($picsource); // get the size of the image
 
 if(isset($bShowImageJApplet) && $bShowImageJApplet){
 	#
-	# Set applet´s dimensions
+	# Set appletï¿½s dimensions
 	#
 	$iAppletHeight=$h + IMAGEJ_PANEL_HEIGHT;
 

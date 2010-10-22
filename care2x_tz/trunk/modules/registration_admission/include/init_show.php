@@ -16,10 +16,10 @@ $person_obj = new person;
 $breakfile='patient.php';
 $admissionfile='aufnahme_start.php'.URL_APPEND;
 
-if((!isset($pid)||!$pid)&&$HTTP_SESSION_VARS['sess_pid']) $pid=$HTTP_SESSION_VARS['sess_pid'];
-	elseif((isset($pid)&&$pid)&&!$HTTP_SESSION_VARS['sess_pid']) $HTTP_SESSION_VARS['sess_pid']=$pid;
+if((!isset($pid)||!$pid)&&$_SESSION['sess_pid']) $pid=$_SESSION['sess_pid'];
+	elseif((isset($pid)&&$pid)&&!$_SESSION['sess_pid']) $_SESSION['sess_pid']=$pid;
 
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
+$_SESSION['sess_path_referer']=$top_dir.$thisfile;
 //$HTPP_SESSION_VARS['sess_pid']=$pid;
 
 /* Default path for fotos. Make sure that this directory exists! */
@@ -51,8 +51,8 @@ $glob_obj->getConfig('person_%');
 $glob_obj->getConfig('notes_%');
 if(!$GLOBAL_CONFIG['notes_preview_maxlen']) $GLOBAL_CONFIG['notes_preview_maxlen']=60; // hardcoded default value;
 
-//$HTTP_SESSION_VARS['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
-$HTTP_SESSION_VARS['sess_full_pid']=$pid;
+//$_SESSION['sess_full_pid']=$pid+$GLOBAL_CONFIG['person_id_nr_adder'];
+$_SESSION['sess_full_pid']=$pid;
 
 /* Check whether config foto path exists, else use default path */
 $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
@@ -64,11 +64,11 @@ if(!isset($edit)) $edit=false;
 # Check if person is currently admitted
 $current_encounter=$person_obj->CurrentEncounter($pid);
 
-if($HTTP_SESSION_VARS['sess_parent_mod']=='admission') {
+if($_SESSION['sess_parent_mod']=='admission') {
 
 	# Resolve the encounter number
-	if((!isset($encounter_nr)||!$encounter_nr)&&$HTTP_SESSION_VARS['sess_en']) $encounter_nr=$HTTP_SESSION_VARS['sess_en'];
-		elseif((isset($encounter_nr)&&$encounter_nr)&&!$HTTP_SESSION_VARS['sess_en']) $HTTP_SESSION_VARS['sess_en']=$encounter_nr;
+	if((!isset($encounter_nr)||!$encounter_nr)&&$_SESSION['sess_en']) $encounter_nr=$_SESSION['sess_en'];
+		elseif((isset($encounter_nr)&&$encounter_nr)&&!$_SESSION['sess_en']) $_SESSION['sess_en']=$encounter_nr;
 
 	$parent_admit=true;
 	$page_title=$LDAdmission;
@@ -76,16 +76,16 @@ if($HTTP_SESSION_VARS['sess_parent_mod']=='admission') {
 	# Get the overall status
 	include_once($root_path.'include/care_api_classes/class_encounter.php');
 	$enc_obj=new Encounter;
-	if($stat=&$enc_obj->AllStatus($HTTP_SESSION_VARS['sess_en'])){
+	if($stat=&$enc_obj->AllStatus($_SESSION['sess_en'])){
 		$enc_status=$stat->FetchRow();
 	}
 	# If current_encounter is this encounter nr
-	if($current_encounter==$HTTP_SESSION_VARS['sess_en']){
+	if($current_encounter==$_SESSION['sess_en']){
 		$is_discharged=false;
 		$edit=true;
 
 	}
-	//echo " curr $current_encounter this ".$HTTP_SESSION_VARS['sess_en'];
+	//echo " curr $current_encounter this ".$_SESSION['sess_en'];
 }else{
 	$parent_admit=false;
 	$page_title=$LDPatientRegister;

@@ -46,8 +46,8 @@ if(($mode=="force_add") && !empty($artikelname) && !empty($pcs)){
 	$dbtable='care_encounter_op';
 	$sql="UPDATE $dbtable SET
 							material_codedlist='$matlist[0]',
-							history = ".$core->ConcatHistory("Material added ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-							modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+							history = ".$core->ConcatHistory("Material added ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n").",
+							modify_id = '".$_SESSION['sess_user_name']."',
 							modify_time = '".date('YmdHis')."'
 								WHERE dept_nr='$dept_nr'
 								AND op_room='$saal'

@@ -159,13 +159,13 @@ class Address extends Core {
 	* @return boolean
 	*/
 	function saveCityTownInfoFromArray(&$data){
-		global $HTTP_SESSION_VARS;
+		global $_SESSION;
 		$this->_useCityTown();
 		$this->data_array=$data;
 		$this->data_array['status']='normal';
-		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-		$this->data_array['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+		$this->data_array['modify_id']=$_SESSION['sess_user_name'];
+		$this->data_array['create_id']=$_SESSION['sess_user_name'];
 		$this->data_array['create_time']='NULL';
 		return $this->insertDataFromInternalArray();
 	}
@@ -178,7 +178,7 @@ class Address extends Core {
 	* @return boolean
 	*/
 	function updateCityTownInfoFromArray($nr,&$data){
-		global $HTTP_SESSION_VARS;
+		global $_SESSION;
 		$this->_useCityTown();
 		$this->data_array=$data;
 		// remove probable existing array data to avoid replacing the stored data
@@ -186,8 +186,8 @@ class Address extends Core {
 		if(isset($this->data_array['create_id'])) unset($this->data_array['create_id']);
 		// clear the where condition
 		$this->where='';
-		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
-		$this->data_array['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+		$this->data_array['history']=$this->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
+		$this->data_array['modify_id']=$_SESSION['sess_user_name'];
 		return $this->updateDataFromInternalArray($nr);
 	}
 	/**

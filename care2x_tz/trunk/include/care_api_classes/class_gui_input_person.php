@@ -110,7 +110,7 @@ class GuiInputPerson {
 	*/
 	function display(){
 		global $db, $sid, $lang, $root_path, $pid, $insurance_show, $user_id, $mode, $dbtype, $no_tribe,$no_region,
-						$update, $photo_filename, $HTTP_POST_VARS,  $HTTP_POST_FILES, $HTTP_SESSION_VARS;
+						$update, $photo_filename, $HTTP_POST_VARS,  $HTTP_POST_FILES, $_SESSION;
 
 		extract($HTTP_POST_VARS);
 		require_once($root_path.'include/care_api_classes/class_advanced_search.php');
@@ -307,7 +307,7 @@ class GuiInputPerson {
 					}
 
 					# complete the sql query
-					$sql.=" history=".$person_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." \n").", modify_id='".$HTTP_SESSION_VARS['sess_user_name']."' WHERE pid=$pid";
+					$sql.=" history=".$person_obj->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." \n").", modify_id='".$_SESSION['sess_user_name']."' WHERE pid=$pid";
 
 					//$db->debug=true;
 					//print $sql.'<hr />';
@@ -325,8 +325,8 @@ class GuiInputPerson {
 									$insure_data=array('insurance_nr'=>$insurance_nr,
 											'firm_id'=>$insurance_firm_id,
 											'class_nr'=>$insurance_class_nr,
-											'history'=>"Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." \n",
-											'modify_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+											'history'=>"Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." \n",
+											'modify_id'=>$_SESSION['sess_user_name'],
 											'modify_time'=>date('YmdHis')
 											);
 
@@ -337,8 +337,8 @@ class GuiInputPerson {
 											'firm_id'=>$insurance_firm_id,
 											'pid'=>$pid,
 											'class_nr'=>$insurance_class_nr,
-											'history'=>"Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']." \n",
-											'create_id'=>$HTTP_SESSION_VARS['sess_user_name'],
+											'history'=>"Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']." \n",
+											'create_id'=>$_SESSION['sess_user_name'],
 											'create_time'=>date('YmdHis')
 										);
 								$pinsure_obj->insertDataFromArray($insure_data);
@@ -360,9 +360,9 @@ class GuiInputPerson {
 					$HTTP_POST_VARS['date_reg']=date('Y-m-d H:i:s');
 					$HTTP_POST_VARS['blood_group']=trim($HTTP_POST_VARS['blood_group']);
 					$HTTP_POST_VARS['status']='normal';
-					$HTTP_POST_VARS['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-					//$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-					$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+					$HTTP_POST_VARS['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+					//$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
+					$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
 					$HTTP_POST_VARS['create_time']=date('YmdHis');
 
 					$r = $HTTP_POST_VARS['diabetic_nr'];
@@ -1601,7 +1601,7 @@ if(!$no_tribe)
 			</td>
 			<td colspan=2 class="reg_input">
 				<FONT SIZE=-1  FACE="Arial"><nobr>
-				<input  name="user_id" type="text" value="<?php if(isset($user_id) && $user_id) echo $user_id; else  echo $HTTP_SESSION_VARS['sess_user_name'] ?>"  size="35" readonly>
+				<input  name="user_id" type="text" value="<?php if(isset($user_id) && $user_id) echo $user_id; else  echo $_SESSION['sess_user_name'] ?>"  size="35" readonly>
 				</nobr>
 			</td>
 			</tr>

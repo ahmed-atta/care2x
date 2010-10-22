@@ -336,7 +336,7 @@ if($obj->LastRecordCount()){
 }
 # Documented by
 $TP_DOCBY=$LD['docu_by'];
-$TP_DBY=$HTTP_SESSION_VARS['sess_user_name'];
+$TP_DBY=$_SESSION['sess_user_name'];
 
 # Load the template
 $tp_birth=$TP_obj->load('registration_admission/tp_input_show_birthdetail.htm');
@@ -346,8 +346,8 @@ eval("echo $tp_birth;");
 
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
-<input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
-<input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
+<input type="hidden" name="encounter_nr" value="<?php echo $_SESSION['sess_en']; ?>">
+<input type="hidden" name="pid" value="<?php echo $_SESSION['sess_pid']; ?>">
 <input type="hidden" name="allow_update" value="<?php if(isset($allow_update)) echo $allow_update; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
 <input type="hidden" name="delivery_date" value="<?php echo $date_birth; ?>">

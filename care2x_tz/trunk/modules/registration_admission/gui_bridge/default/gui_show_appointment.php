@@ -14,7 +14,7 @@ if(is_object($encounter_classes)){
 function cancelAppointment(nr) {
 	if(confirm('<?php echo $LDSureCancelAppt; ?>')){
 		if(reason=prompt('<?php echo $LDEnterCancelReason; ?>','')){
-			window.location.href="<?php echo $thisfile.URL_REDIRECT_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=appt_cancel&nr='; ?>"+nr+"&reason="+reason;
+			window.location.href="<?php echo $thisfile.URL_REDIRECT_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=appt_cancel&nr='; ?>"+nr+"&reason="+reason;
 		}
 	}
 }
@@ -28,7 +28,7 @@ function checkApptDate(d,e,n){
 		}
 	}
 	if(fg){
-		window.location.href="<?php echo $root_path.'modules/registration_admission/aufnahme_start.php'.URL_REDIRECT_APPEND; ?>&pid=<?php echo $HTTP_SESSION_VARS['sess_pid'] ?>&origin=patreg_reg&encounter_class_nr="+e+"&appt_nr="+n;
+		window.location.href="<?php echo $root_path.'modules/registration_admission/aufnahme_start.php'.URL_REDIRECT_APPEND; ?>&pid=<?php echo $_SESSION['sess_pid'] ?>&origin=patreg_reg&encounter_class_nr="+e+"&appt_nr="+n;
 	}
 }
 //  Script End -->
@@ -90,7 +90,7 @@ while($row=$result->FetchRow()){
 		if($row['appt_status']=='pending'){
 			if(!$death_date||$death_date==$dbf_nodate){
 	?>
-	<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=select&nr='.$row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'edit_sm.gif','0'); ?>></a> <br> 
+	<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=select&nr='.$row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'edit_sm.gif','0'); ?>></a> <br> 
 	<a href="javascript:checkApptDate('<?php echo $row['date'] ?>','<?php echo $row['encounter_class_nr'] ?>','<?php echo $row['nr'] ?>' )"><img <?php echo createLDImgSrc($root_path,'admit_sm.gif','0'); ?>></a> <br>
 	<?php
 			}
@@ -150,7 +150,7 @@ while($row=$result->FetchRow()){
 if(!$death_date||$death_date == DBF_NODATE){
 ?>
 <img <?php echo createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE); ?>>
-<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new'; ?>"> 
+<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new'; ?>"> 
 <?php echo $LDScheduleNewAppointment; ?>
 </a>
 <?php

@@ -37,9 +37,9 @@ $thisfile=basename(__FILE__);
 
 if(isset($mode)){
 	/* Prepare the common data */
-	$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-	//$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+	//$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
+	$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
 	$HTTP_POST_VARS['create_time']=date('YmdHis');
 
 	switch($mode){
@@ -63,7 +63,7 @@ if(isset($mode)){
 		{
 			if(!$DRG_obj->EncounterDRGGroupExists($group_nr)){
 				$DRG_obj->useInternalDRG(); // Set the core variables to encounter DRG table
-				$HTTP_POST_VARS['clinician']=$HTTP_SESSION_VARS['sess_user_name'];
+				$HTTP_POST_VARS['clinician']=$_SESSION['sess_user_name'];
 				$HTTP_POST_VARS['encounter_nr']=$pn;
 				$HTTP_POST_VARS['date']=date('Y-m-d H:i:s');
 				$DRG_obj->setDataArray($HTTP_POST_VARS); // transfer the data

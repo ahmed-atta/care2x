@@ -473,7 +473,7 @@ if(!$GLOBAL_CONFIG['patient_service_att_dr_hide'] && $sc_att_dr_class_nr){
 
 $smarty->assign('LDAdmitBy',$LDAdmitBy);
 if (empty($encoder)) $encoder = $_COOKIE[$local_user.$sid]; # old code
-$encoder = (empty($encoder) && ($create_id))? $create_id : $HTTP_SESSION_VARS['sess_user_name']; # new code
+$encoder = (empty($encoder) && ($create_id))? $create_id : $_SESSION['sess_user_name']; # new code
 
 $smarty->assign('encoder',$encoder);
 

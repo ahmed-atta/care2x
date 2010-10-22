@@ -28,11 +28,11 @@
  $items='nr,ward_id,name';
  $ward_info=&$ward_obj->getAllWardsItemsObject($items);
 
- $HTTP_SESSION_VARS['sess_file_return']=$top_dir.basename(__FILE__);
+ $_SESSION['sess_file_return']=$top_dir.basename(__FILE__);
  /* Set this file as the referer */
- $HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
- $HTTP_SESSION_VARS['sess_user_origin']='dept';
- $HTTP_SESSION_VARS['sess_parent_mod']='';
+ $_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
+ $_SESSION['sess_user_origin']='dept';
+ $_SESSION['sess_parent_mod']='';
 
  /**
  * LOAD Smarty

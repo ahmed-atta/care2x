@@ -45,7 +45,7 @@ $lang_tables[]='diagnoses_ICD10.php';
 	/* Retrieve the SIGNAL_COLOR_LEVEL_FULL = for convenience purposes */
 	$f = SIGNAL_COLOR_LEVEL_FULL;
 
-	$HTTP_SESSION_VARS['sess_user_origin']='nursing';
+	$_SESSION['sess_user_origin']='nursing';
 
 	/* Create department object and load all medical depts */
 	require_once($root_path.'include/care_api_classes/class_department.php');
@@ -62,7 +62,7 @@ $lang_tables[]='diagnoses_ICD10.php';
 	$glob_obj->getConfig('patient_%');
 
 session_start();
-$_SESSION['logID'] = $HTTP_SESSION_VARS['sess_user_name'];
+$_SESSION['logID'] = $_SESSION['sess_user_name'];
 
 
 function Spacer()
@@ -299,7 +299,7 @@ function Spacer()
 
 	$pid = $enc_obj->EncounterExists($pn);
 
-	$multi->doctorSTAT($HTTP_SESSION_VARS['sess_login_userid'],$pn);
+	$multi->doctorSTAT($_SESSION['sess_login_userid'],$pn);
 
 	# Collect js code
 
@@ -451,8 +451,8 @@ function Spacer()
 				h=650;';
 	?>
 
-		drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=".$pn."&edit=$edit&ln=$name_last&fn=$name_first&bd=$date_birth&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $encounter_nr."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
-		window.drgcomp_<?php echo $HTTP_SESSION_VARS['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
+		drgcomp_<?php echo $_SESSION['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>=window.open("<?php echo $root_path ?>modules/drg/drg-composite-start.php<?php echo URL_REDIRECT_APPEND."&display=composite&pn=".$pn."&edit=$edit&ln=$name_last&fn=$name_first&bd=$date_birth&dept_nr=$dept_nr&oprm=$saal"; ?>","drgcomp_<?php echo $encounter_nr."_".$op_nr."_".$dept_nr."_".$saal ?>","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=" + (h-60));
+		window.drgcomp_<?php echo $_SESSION['sess_full_en']."_".$op_nr."_".$dept_nr."_".$saal ?>.moveTo(0,0);
 	}
 
 	//-->
@@ -934,7 +934,7 @@ function Spacer()
   <!-- measurements -->
   <tr>
   	<td style="text-align:center; background-color:lime; padding:5px; border:2px solid white;">
-  		<a href="#" onclick="window.location.href='../../modules/registration_admission/show_weight_height.php<?php print URL_REDIRECT_APPEND."&target=en&allow_update=1&pid=".(($pid!='')?$pid:$HTTP_SESSION_VARS['sess_pid']); ?>'" title="Visit Patient Measurement History">
+  		<a href="#" onclick="window.location.href='../../modules/registration_admission/show_weight_height.php<?php print URL_REDIRECT_APPEND."&target=en&allow_update=1&pid=".(($pid!='')?$pid:$_SESSION['sess_pid']); ?>'" title="Visit Patient Measurement History">
 				View Patient Measurements
 			</a>
   	</td>
@@ -976,7 +976,7 @@ function Spacer()
 	      </tr>
           <tr align="center" valign="middle">
             <td align="center" colspan=2 style="border-top:3px solid red;">
-			  	<input id="bner" onClick="window.location.href='./nursing-station-patientdaten_print.php<?php print "?&sid=".$_GET['sid']."&pday=".$_GET['pday']."&pn=".$_GET['pn']."&lang=".$_GET['lang']."&pday=".$_GET['pday']."&pmonth=".$_GET['pmonth']."&pyear=".$_GET['pyear']."&pid=".(($pid!='')?$pid:$HTTP_SESSION_VARS['sess_pid']); ?>'"
+			  	<input id="bner" onClick="window.location.href='./nursing-station-patientdaten_print.php<?php print "?&sid=".$_GET['sid']."&pday=".$_GET['pday']."&pn=".$_GET['pn']."&lang=".$_GET['lang']."&pday=".$_GET['pday']."&pmonth=".$_GET['pmonth']."&pyear=".$_GET['pyear']."&pid=".(($pid!='')?$pid:$_SESSION['sess_pid']); ?>'"
 			  	type="button" value="PRINT" style="width:100px; border:1px solid maroon; margin:-2px;">
 			</td>
           </tr>

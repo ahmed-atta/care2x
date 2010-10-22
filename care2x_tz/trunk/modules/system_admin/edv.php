@@ -20,12 +20,12 @@ $breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 
 if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
 
-$returnfile=$root_path.$HTTP_SESSION_VARS['sess_path_referer'].URL_APPEND;
+$returnfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND;
 
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
-$HTTP_SESSION_VARS['sess_user_origin']='it';
+$_SESSION['sess_file_return']=basename(__FILE__);
+$_SESSION['sess_user_origin']='it';
 /* Set this file as the referer */
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.basename(__FILE__);
+$_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
 
 # Start Smarty templating here
  /**

@@ -38,9 +38,9 @@ $target='archiv';
 
 $error=0;
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode=='paginate'){
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	$searchkey=$_SESSION['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
 	//$mode='search';
 }else{
@@ -52,7 +52,7 @@ if($mode=='paginate'){
 }
 require_once($root_path.'include/care_api_classes/class_paginator.php');
 
-$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -74,8 +74,8 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 	$pagen->setSortDirection($odir);
 
 	if($mode=='paginate'){
-		if(isset($oitem)&&!empty($oitem))	$sql=$HTTP_SESSION_VARS['sess_searchkey']." ORDER BY $oitem $odir";
-			else $sql=$HTTP_SESSION_VARS['sess_searchkey'];
+		if(isset($oitem)&&!empty($oitem))	$sql=$_SESSION['sess_searchkey']." ORDER BY $oitem $odir";
+			else $sql=$_SESSION['sess_searchkey'];
 		$s2=$sql; # Dummy  to force the sql query to be executed
 	}else{
 
@@ -213,7 +213,7 @@ if (isset($mode) && ($mode=='search'||$mode=='paginate')){
 								if($s2) $s2.=" AND ethnic_orig $sql_LIKE '$ethnic_orig%'"; else $s2.=" ethnic_orig $sql_LIKE '$ethnic_orig%'";
 
 
-		$HTTP_SESSION_VARS['sess_searchkey']=$sql.$s2;
+		$_SESSION['sess_searchkey']=$sql.$s2;
 
 		if(isset($oitem)&&!empty($oitem))	$sql=$sql.$s2." ORDER BY $oitem $odir";
 			else $sql=$sql.$s2;

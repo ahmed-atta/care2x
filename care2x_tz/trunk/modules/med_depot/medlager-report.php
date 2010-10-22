@@ -56,8 +56,8 @@ if(($report!=NULL)||($mode!=''))
 							'$report_date', 
 							'$report_time', 
 							'pending',
-							'Created: ".$HTTP_SESSION_VARS['sess_user_name']." ".date('Y-m-d H:i:s')."\n\r',
-							'".$HTTP_SESSION_VARS['sess_user_name']."',
+							'Created: ".$_SESSION['sess_user_name']." ".date('Y-m-d H:i:s')."\n\r',
+							'".$_SESSION['sess_user_name']."',
 							'".date('YmdHis')."'
 						)";
 						

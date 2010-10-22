@@ -39,9 +39,9 @@ if($srcword!=''||$mode=='paginate'){
 	//$db->debug=1;
 
 
-	# Initialize page´s control variables
+	# Initialize pageï¿½s control variables
 	if($mode=='paginate'){
-		$sql2=$HTTP_SESSION_VARS['sess_searchkey'];
+		$sql2=$_SESSION['sess_searchkey'];
 	}else{
 		# Reset paginator variables
 		$pgx=0;
@@ -117,7 +117,7 @@ if($srcword!=''||$mode=='paginate'){
 	}
 	#Load and create paginator object
 	include_once($root_path.'include/care_api_classes/class_paginator.php');
-	$pagen=& new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+	$pagen=& new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 	$GLOBAL_CONFIG=array();
 	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
@@ -153,7 +153,7 @@ if($srcword!=''||$mode=='paginate'){
 			if($rows=$ergebnis->RecordCount()){
 				if($rows==1) $datafound=1;
 						
-				$HTTP_SESSION_VARS['sess_searchkey']=$select.$sql2;
+				$_SESSION['sess_searchkey']=$select.$sql2;
 
 			}else{
 				$select="SELECT o.nr,o.op_nr,o.dept_nr,o.op_room,o.op_date, e.encounter_nr, p.pid, p.name_last, p.name_first, p.date_birth, p.sex";
@@ -173,7 +173,7 @@ if($srcword!=''||$mode=='paginate'){
 				
 				if($ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pgx)){
 					$rows=$ergebnis->RecordCount();
-					$HTTP_SESSION_VARS['sess_searchkey']=$select.$sql2;
+					$_SESSION['sess_searchkey']=$select.$sql2;
 	           	}else{ echo "$LDDbNoRead<br>$sql"; }
 			}
 		}else{

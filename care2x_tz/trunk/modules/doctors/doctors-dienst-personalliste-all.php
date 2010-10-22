@@ -18,7 +18,7 @@ define('MAX_BLOCK_ROWS',30);
 $lang_tables[]='search.php';
 $lang_tables[]='departments.php';
 define('LANG_FILE','doctors.php');
-if($HTTP_SESSION_VARS['sess_user_origin']=='personell_admin'){
+if($_SESSION['sess_user_origin']=='personell_admin'){
 	$local_user='aufnahme_user';
 	$bShowSearchEntry = FALSE;
 	if(!isset($saved)||!$saved){
@@ -64,9 +64,9 @@ if(!empty($ipath)){
 
 $append='&retpath='.$retpath.'&ipath='.$ipath;
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode=='paginate'){
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	$searchkey=$_SESSION['sess_searchkey'];
 	//$searchkey='USE_SESSION_SEARCHKEY';
 	//$mode='search';
 }else{
@@ -78,7 +78,7 @@ if($mode=='paginate'){
 }
 # Paginator object
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 
 # Get the max nr of rows from global config
@@ -94,7 +94,7 @@ if($mode=='search'||$mode=='paginate'){
 	# Convert other wildcards
 	$searchkey=strtr($searchkey,'*?','%_');
 	# Save the search keyword for eventual pagination routines
-	if($mode=='search') $HTTP_SESSION_VARS['sess_searchkey']=$searchkey;
+	if($mode=='search') $_SESSION['sess_searchkey']=$searchkey;
 
 	$search_result=&$pers_obj->searchLimitPersonellBasicInfo($searchkey,$pagen->MaxCount(),$pgx,$oitem,$odir);
 	//echo $pers_obj->getLastQuery();

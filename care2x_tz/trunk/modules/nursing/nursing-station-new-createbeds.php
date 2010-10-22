@@ -30,9 +30,9 @@ if(isset($mode)&&$mode=='save_beds'){
 	
 	// Set the values common to all rooms 
 	$HTTP_POST_VARS['date_create']=date('Y-m-d');
-	$HTTP_POST_VARS['history']="Created: ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n";
-	//$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
-	$HTTP_POST_VARS['create_id']=$HTTP_SESSION_VARS['sess_user_name'];
+	$HTTP_POST_VARS['history']="Created: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+	//$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
+	$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
 	$HTTP_POST_VARS['create_time']=date('YmdHis');
 	//$db->debug=1;
 	for($i=$room_nr_start;$i<=$room_nr_end;$i++){

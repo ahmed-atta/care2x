@@ -22,8 +22,8 @@ require_once($root_path.'include/care_api_classes/class_personell.php');
 require($root_path.'include/inc_accessplan_areas_functions.php');
 
 $breakfile='edv-system-admi-welcome.php'.URL_APPEND;
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+$returnfile=$_SESSION['sess_file_return'].URL_APPEND;
+$_SESSION['sess_file_return']=basename(__FILE__);
 
 $edit=0;
 $error=0;
@@ -107,7 +107,7 @@ if($mode!= ''){
 						   '".date('H:i:s')."',
 						   'normal',
 						   '',
-						   '".$HTTP_SESSION_VARS['sess_user_name']."',
+						   '".$_SESSION['sess_user_name']."',
 						   '".date('YmdHis')."'
 						 )";
 

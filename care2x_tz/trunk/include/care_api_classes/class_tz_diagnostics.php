@@ -625,7 +625,7 @@ class Diagnostics extends Encounter {
   function Display_Selected_Diagnoses($encounter, $itemlist, $pid){
   	global $db;
   	global $LDNewPatient,$LDNewCase,$LDRevisit,$LDComment,$LDVIEW,$LDResetFields,$LDSubmitDiagnose,
-  	       $LDSameDiagnose,$LDDiagnosis,$HTTP_SESSION_VARS;
+  	       $LDSameDiagnose,$LDDiagnosis,$_SESSION;
     $this->icd_old_array = $this->GetAllCasesFromPID($pid);
     echo '<form action="" method="post">
 				<table width="100%" border="0" cellpadding="1" cellspacing="1">
@@ -671,7 +671,7 @@ class Diagnostics extends Encounter {
             </div></td>
             <td valign="bottom"><input type="text" name="comment_'.$idcounter.'" value="" size="25" maxlength="255"></td>
 
-			<td valign="bottom"><input type="text" name="doctor_'.$idcounter.'" value="'.$HTTP_SESSION_VARS['sess_user_name'].'" size="25" maxlength="255"></td>
+			<td valign="bottom"><input type="text" name="doctor_'.$idcounter.'" value="'.$_SESSION['sess_user_name'].'" size="25" maxlength="255"></td>
 
           </tr>';
   	}

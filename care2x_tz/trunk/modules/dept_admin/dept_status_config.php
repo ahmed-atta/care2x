@@ -28,8 +28,8 @@ if($mode){
 			switch($mode){
 				
 				case 'update':
-									$HTTP_POST_VARS['history']=$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n");
-									$HTTP_POST_VARS['modify_id']=$HTTP_SESSION_VARS['sess_user_name'];
+									$HTTP_POST_VARS['history']=$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n");
+									$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
 									$HTTP_POST_VARS['modify_time']=date('YmdHis');
 									$dept_obj->setTable('care_department');
 									$dept_obj->setDataArray($HTTP_POST_VARS);

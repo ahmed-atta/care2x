@@ -93,8 +93,8 @@ $enc_obj=new Encounter;
 										   '".addslashes(htmlspecialchars($findings))."','".addslashes(htmlspecialchars($diagnosis))."',
 										   '".htmlspecialchars($doctor_id)."', '".formatDate2Std($findings_date,$date_format)."', '".date('H:i:s')."',
 										   'initial',  
-										   'Create: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-										  '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   'Create: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n',
+										  '".$_SESSION['sess_user_name']."',
 										  '".date('YmdHis')."'
 										   )";
 
@@ -122,8 +122,8 @@ $enc_obj=new Encounter;
 										   doctor_id='".htmlspecialchars($doctor_id)."', 
 										   findings_date='".formatDate2Std($findings_date,$date_format)."',
 										   findings_time='".date('H:i:s')."', 
-										   history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   history=".$enc_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										   modify_id = '".$_SESSION['sess_user_name']."',
 										   modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
 
@@ -146,8 +146,8 @@ $enc_obj=new Encounter;
 			 
 							      $sql="UPDATE care_test_findings_".$db_request_table." SET 
 										   status='done',
-										   history=".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   history=".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										   modify_id = '".$_SESSION['sess_user_name']."',
 										   modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
 										  							
@@ -156,8 +156,8 @@ $enc_obj=new Encounter;
 									//echo $sql;
 							          $sql="UPDATE care_test_request_".$db_request_table." SET 
 										   status='done',
-										   history=".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
-										   modify_id = '".$HTTP_SESSION_VARS['sess_user_name']."',
+										   history=".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
+										   modify_id = '".$_SESSION['sess_user_name']."',
 										   modify_time='".date('YmdHis')."'
 										   WHERE batch_nr = '".$batch_nr."'";
 

@@ -21,7 +21,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 if(!isset($currDay)||!$currDay) $currDay=date('d');
 if(!isset($currMonth)||!$currMonth) $currMonth=date('m');
 if(!isset($currYear)||!$currYear) $currYear=date('Y');
-if(isset($HTTP_SESSION_VARS['sess_parent_mod'])) $HTTP_SESSION_VARS['sess_parent_mod']='';
+if(isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod']='';
 
 $thisfile=basename(__FILE__);
 $editorfile=$root_path.'modules/registration_admission/show_appointment.php';
@@ -31,7 +31,7 @@ $appt_obj=new Appointment();
 if(!isset($mode)){
 	$mode='show';
 }elseif($mode=='appt_cancel'&&!empty($nr)){
-	if($appt_obj->cancelAppointment($nr,$reason,$HTTP_SESSION_VARS['sess_user_name'])){
+	if($appt_obj->cancelAppointment($nr,$reason,$_SESSION['sess_user_name'])){
 		header("location:$thisfile".URL_REDIRECT_APPEND."&currYear=$currYear&currMonth=$currMonth&currDay=$currDay");
 		exit;
 	}else{
@@ -41,7 +41,7 @@ if(!isset($mode)){
 if($mode=='show'){
 	$result=&$appt_obj->getAllByDateObj($currYear,$currMonth,$currDay);
 }
-$HTTP_SESSION_VARS['sess_parent_mod']='';
+$_SESSION['sess_parent_mod']='';
 /* Load departments */
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;

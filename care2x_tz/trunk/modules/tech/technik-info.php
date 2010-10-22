@@ -17,8 +17,8 @@ require_once($root_path.'include/inc_config_color.php');
 
 $thisfile=basename(__FILE__);
 $breakfile='technik.php'.URL_APPEND;
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+$returnfile=$_SESSION['sess_file_return'].URL_APPEND;
+$_SESSION['sess_file_return']=basename(__FILE__);
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -105,7 +105,7 @@ while(list($x,$v)=each($LDInfoCat))
 echo '
 <form name=backbut onSubmit="return false">
 <input type="hidden" name="sid" value="<?php echo $sid?>">
-<input type="submit" value="Zurück" onClick="history.back()">
+<input type="submit" value="Zurï¿½ck" onClick="history.back()">
 </form>
 ';
 ?>

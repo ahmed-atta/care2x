@@ -69,7 +69,7 @@ if ($_GET['mode']=='edit'){
         <tr align="center" valign="top" bgcolor="#FFFFFF">
           <td align="right" valign="middle" bgcolor="#E7EEE6"><strong>By: </strong></td>
           <td colspan="2" align="left" bgcolor="#FFFFFF" class="style7">
-          <input name="by" type="text" id="by" readonly="true" value="<?php echo $HTTP_SESSION_VARS['sess_user_name'];?>">
+          <input name="by" type="text" id="by" readonly="true" value="<?php echo $_SESSION['sess_user_name'];?>">
             <input name="encounter" type="hidden" id="encounter" value="<?php echo $_GET['encounter']; ?>"></td>
         </tr>
         <tr align="center" valign="top" bgcolor="#C0D2BD">

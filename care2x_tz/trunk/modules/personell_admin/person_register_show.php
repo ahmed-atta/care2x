@@ -25,10 +25,10 @@ $admissionfile='aufnahme_start.php'.URL_APPEND;
 
 if((!isset($pid)||!$pid)&&$HTPP_SESSION_VARS['sess_pid']) $pid=$HTPP_SESSION_VARS['sess_pid'];
 
-$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
-$HTTP_SESSION_VARS['sess_pid']=$pid;
-$HTTP_SESSION_VARS['sess_full_pid']=$pid;
-$HTTP_SESSION_VARS['sess_parent_mod']='registration';
+$_SESSION['sess_path_referer']=$top_dir.$thisfile;
+$_SESSION['sess_pid']=$pid;
+$_SESSION['sess_full_pid']=$pid;
+$_SESSION['sess_parent_mod']='registration';
 
 
 # Start Smarty templating here
@@ -74,7 +74,7 @@ require('./gui_bridge/default/gui_tabs_personell_reg.php');
 
 <?php
 
-	# Display the person´s demographic data using the object class class_gui_person_show.php
+	# Display the personï¿½s demographic data using the object class class_gui_person_show.php
 
 	require_once($root_path.'include/care_api_classes/class_gui_tz_person_show.php');
 	$person = & new GuiPersonShow;

@@ -241,7 +241,7 @@ if($obj->LastRecordCount()){
 	}
 }
 $TP_DOCBY=$LD['docu_by'];
-$TP_DBY=$HTTP_SESSION_VARS['sess_user_name'];
+$TP_DBY=$_SESSION['sess_user_name'];
 # Load the template
 $tp_preg=&$TP_obj->load('registration_admission/tp_input_show_pregnancy.htm');
 eval("echo $tp_preg;");
@@ -249,8 +249,8 @@ eval("echo $tp_preg;");
 
  <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
-<input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
-<input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
+<input type="hidden" name="encounter_nr" value="<?php echo $_SESSION['sess_en']; ?>">
+<input type="hidden" name="pid" value="<?php echo $_SESSION['sess_pid']; ?>">
 <input type="hidden" name="rec_nr" value="<?php echo $rec_nr; ?>">
 <input type="hidden" name="allow_update" value="<?php if(isset($allow_update)) echo $allow_update; ?>">
 <input type="hidden" name="target" value="<?php echo trim($target); ?>">

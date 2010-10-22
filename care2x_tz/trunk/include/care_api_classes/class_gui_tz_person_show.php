@@ -140,7 +140,7 @@ class GuiPersonShow extends Person{
 	* Displays the GUI showing the data
 	*/
 	function display($pid){
-		global $HTTP_SESSION_VARS, $root_path, $dbf_nodate, $newdata;
+		global $_SESSION, $root_path, $dbf_nodate, $newdata;
 
 		$validdata = TRUE;
 
@@ -200,7 +200,7 @@ class GuiPersonShow extends Person{
 				$this->current_encounter=$this->person_obj->CurrentEncounter($this->pid);
 
 				# update the record�s history
-				if(empty($newdata)) @$this->person_obj->setHistorySeen($HTTP_SESSION_VARS['sess_user_name']);
+				if(empty($newdata)) @$this->person_obj->setHistorySeen($_SESSION['sess_user_name']);
 
 				# Check whether config foto path exists, else use default path
 				$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $this->default_photo_path;

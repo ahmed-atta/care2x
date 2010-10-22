@@ -63,7 +63,7 @@ $eyeclinic->dbselect();
 include_once($root_path.'include/care_api_classes/class_multi.php');
 $multi= new multi;
 
-$multi->doctorSTAT($HTTP_SESSION_VARS['logID'],$_GET['encounter_nr']);
+$multi->doctorSTAT($_SESSION['logID'],$_GET['encounter_nr']);
 
 if(isset($_POST['addtest']) ){
 //echo 'add eyeclinic information to the database';

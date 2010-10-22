@@ -60,7 +60,7 @@ class ADODB_Pager {
 	//
 	function ADODB_Pager(&$db,$sql,$id = 'adodb', $showPageLinks = false)
 	{
-	global $HTTP_SERVER_VARS,$PHP_SELF,$HTTP_SESSION_VARS,$HTTP_GET_VARS;
+	global $HTTP_SERVER_VARS,$PHP_SELF,$_SESSION,$HTTP_GET_VARS;
 	
 		$curr_page = $id.'_curr_page';
 		if (empty($PHP_SELF)) $PHP_SELF = $HTTP_SERVER_VARS['PHP_SELF'];
@@ -73,11 +73,11 @@ class ADODB_Pager {
 		$next_page = $id.'_next_page';	
 		
 		if (isset($HTTP_GET_VARS[$next_page])) {
-			$HTTP_SESSION_VARS[$curr_page] = $HTTP_GET_VARS[$next_page];
+			$_SESSION[$curr_page] = $HTTP_GET_VARS[$next_page];
 		}
-		if (empty($HTTP_SESSION_VARS[$curr_page])) $HTTP_SESSION_VARS[$curr_page] = 1; ## at first page
+		if (empty($_SESSION[$curr_page])) $_SESSION[$curr_page] = 1; ## at first page
 		
-		$this->curr_page = $HTTP_SESSION_VARS[$curr_page];
+		$this->curr_page = $_SESSION[$curr_page];
 		
 	}
 	

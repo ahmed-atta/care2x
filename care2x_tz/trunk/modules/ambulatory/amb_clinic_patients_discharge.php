@@ -28,7 +28,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 /**
 * Set default values if not available from url
 */
-//if (!isset($dept_nr)||empty($dept_nr)) { $dept_nr=$HTTP_SESSION_VARS['sess_dept_nr'];} # Default station must be set here !!
+//if (!isset($dept_nr)||empty($dept_nr)) { $dept_nr=$_SESSION['sess_dept_nr'];} # Default station must be set here !!
 if(!isset($pday)||empty($pday)) $pday=date('d');
 if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
@@ -57,7 +57,7 @@ if(isset($retpath)){
 	}
 }
 # Mark where we are
-$HTTP_SESSION_VARS['sess_user_origin']='amb';
+$_SESSION['sess_user_origin']='amb';
 
 # Load date formatter
 require_once($root_path.'include/inc_date_format_functions.php');

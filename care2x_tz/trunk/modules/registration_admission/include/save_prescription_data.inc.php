@@ -93,7 +93,7 @@ foreach ($arr_item_number AS $item_number) {
   								break;
 
 								  //if (isset($externalcall))
-									//  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+									//  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$_SESSION['sess_pid']);
  								  //exit;
   								//break;
   		case 'update':
@@ -113,7 +113,7 @@ foreach ($arr_item_number AS $item_number) {
                   $db->Execute($sql);
 
 								  //if (isset($externalcall))
-									//  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+									//  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&pid=".$_SESSION['sess_pid']);
  								  //exit;
   								break;
   }// end of switch
@@ -123,9 +123,9 @@ if (isset($externalcall)){
 	if ($backpath=='billing' || $backpath=='billing')
   		header("location: $root_path/modules/billing_tz/billing_tz_quotation.php");
   	else
-  		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&backpath=".urlencode($backpath)."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+  		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&backpath=".urlencode($backpath)."&pid=".$_SESSION['sess_pid']);
 } else
-  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&backpath=".urlencode($backpath)."&pid=".$HTTP_SESSION_VARS['sess_pid']);
+  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&backpath=".urlencode($backpath)."&pid=".$_SESSION['sess_pid']);
 
 exit();
 ?>

@@ -1799,7 +1799,7 @@ function delete_bill_element($bill_elem_number) {
 //------------------------------------------------------------------------------
 
 	function DisplayBills($batch_nr, $specific_bill, $edit_fields) {
-	  global $insurancebudget, $used_budget, $ceiling, $insurance_tz, $bill_obj,$HTTP_SESSION_VARS,$sid;
+	  global $insurancebudget, $used_budget, $ceiling, $insurance_tz, $bill_obj,$_SESSION,$sid;
 	  global $LDInsurance,$LDOldBudget,$LDUsedBudget,$LDOverdrawnBudget,$LDOverdrawnPayment,
   		  	 $LDNoCompanyCredit,$LDCompanyCredit,$LDLabTotal,$LDPrescTotal,$LDSumtopay,
   		  	 $LDInsuranceTotal,$LDSummary,$LDNoPendingBills,$LDTranferPendingBillArchive,$LDDone;
@@ -2189,7 +2189,7 @@ function delete_bill_element($bill_elem_number) {
 	  	echo'
 
 	  	</table>';
-	  	echo ($printout) ? '<font color="#FF0000"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">Billed by:'.$HTTP_SESSION_VARS['sess_user_name'].'</font></span></span></font><br>' : '';
+	  	echo ($printout) ? '<font color="#FF0000"><span class=SpellE><span style="font-family:&quot;20 cpi&quot;"><font size="4">Billed by:'.$_SESSION['sess_user_name'].'</font></span></span></font><br>' : '';
 
 	  //if($edit_fields) echo '<form method=post action="#" name="edit_bill">';
 	}

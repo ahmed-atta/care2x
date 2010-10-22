@@ -34,9 +34,9 @@ if ($mode=='save'){
                 $HTTP_POST_VARS['roomnr']=$HTTP_POST_VARS['zimmerno'];
                 $HTTP_POST_VARS['date'] = $curdate;
                 $HTTP_POST_VARS['time'] = $curtime;
-                $HTTP_POST_VARS['modify_id'] = $HTTP_SESSION_VARS['sess_user_name'];
+                $HTTP_POST_VARS['modify_id'] = $_SESSION['sess_user_name'];
                 $HTTP_POST_VARS['modify_time'] = date('YmdHis');
-                $HTTP_POST_VARS['history'] = $phone->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n");
+                $HTTP_POST_VARS['history'] = $phone->ConcatHistory("Update ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
                 $HTTP_POST_VARS['title'] = $HTTP_POST_VARS['anrede'];
 
                 $phone->setWhereCondition("item_nr='$itemname'");

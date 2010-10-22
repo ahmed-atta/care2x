@@ -17,8 +17,8 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
 $breakfile='technik.php'.URL_APPEND;
-$returnfile=$HTTP_SESSION_VARS['sess_file_return'].URL_APPEND;
-$HTTP_SESSION_VARS['sess_file_return']=basename(__FILE__);
+$returnfile=$_SESSION['sess_file_return'].URL_APPEND;
+$_SESSION['sess_file_return']=basename(__FILE__);
 
 if(!isset($mode)) $mode='';
 
@@ -41,7 +41,7 @@ if(!isset($inquirer)||empty($inquirer))
     }
 /*	else
 	{
-	     $inquirer=$HTTP_SESSION_VARS['sess_user_name'];
+	     $inquirer=$_SESSION['sess_user_name'];
 	}
 */}
 
@@ -77,8 +77,8 @@ $dbtable='care_tech_questions';
 							'".date('YmdHis')."',
 							'0',
 							'pending',
-							'Create ".date('Y-m-d H:i:s')." ".$HTTP_SESSION_VARS['sess_user_name']."\n',
-							'".$HTTP_SESSION_VARS['sess_user_name']."',
+							'Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n',
+							'".$_SESSION['sess_user_name']."',
 							'".date('YmdHis')."'
 							)";
         $db->BeginTrans();
@@ -235,7 +235,7 @@ $smarty->assign('LDName',$LDName);
 $smarty->assign('LDDept',$LDDept);
 
 if($inquirer) $smarty->assign('sInquirer',$inquirer);
-	elseif(isset($HTTP_SESSION_VARS['sess_user_name'])) $smarty->assign('sInquirer',$HTTP_SESSION_VARS['sess_user_name']);
+	elseif(isset($_SESSION['sess_user_name'])) $smarty->assign('sInquirer',$_SESSION['sess_user_name']);
 
 $smarty->assign('dept_name',$dept_name);
 

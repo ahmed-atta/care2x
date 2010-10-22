@@ -2,11 +2,11 @@
 $lang_tables[]='prompt.php';
 define('LANG_FILE','aufnahme.php');
 # Resolve the local user based on the origin of the script
-if($HTTP_SESSION_VARS['sess_user_origin']=='admission') {
-	$breakfile=$root_path.'modules/registration_admission/aufnahme_daten_zeigen.php'.URL_APPEND.'&encounter_nr='.$HTTP_SESSION_VARS['sess_en'];
+if($_SESSION['sess_user_origin']=='admission') {
+	$breakfile=$root_path.'modules/registration_admission/aufnahme_daten_zeigen.php'.URL_APPEND.'&encounter_nr='.$_SESSION['sess_en'];
 	$local_user='aufnahme_user';
-}elseif($HTTP_SESSION_VARS['sess_user_origin']=='registration'){
-	$breakfile=$root_path.'modules/registration_admission/patient_register_show.php'.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'];
+}elseif($_SESSION['sess_user_origin']=='registration'){
+	$breakfile=$root_path.'modules/registration_admission/patient_register_show.php'.URL_APPEND.'&pid='.$_SESSION['sess_pid'];
 	$local_user='aufnahme_user';
 }else{
 	$breakfile='medocs_pass.php';
@@ -19,10 +19,10 @@ require_once($root_path.'include/care_api_classes/class_person.php');
 
 $admissionfile='aufnahme_start.php'.URL_APPEND;
 
-if((!isset($pid)||!$pid)&&$HTTP_SESSION_VARS['sess_pid']) $pid=$HTTP_SESSION_VARS['sess_pid'];
-	elseif($pid) $HTTP_SESSION_VARS['sess_pid']=$pid;
+if((!isset($pid)||!$pid)&&$_SESSION['sess_pid']) $pid=$_SESSION['sess_pid'];
+	elseif($pid) $_SESSION['sess_pid']=$pid;
 
-//$HTTP_SESSION_VARS['sess_path_referer']=$top_dir.$thisfile;
+//$_SESSION['sess_path_referer']=$top_dir.$thisfile;
 //$HTPP_SESSION_VARS['sess_pid']=$pid;
 
 /* Default path for fotos. Make sure that this directory exists! */
@@ -62,7 +62,7 @@ $glob_obj->getConfig('patient_%');
 $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
 require_once($root_path.'include/inc_photo_filename_resolve.php');
 
-if($HTTP_SESSION_VARS['sess_parent_mod']=='admission') {
+if($_SESSION['sess_parent_mod']=='admission') {
 	$parent_admit=true;
 	$page_title=$LDAdmission;
 }else{

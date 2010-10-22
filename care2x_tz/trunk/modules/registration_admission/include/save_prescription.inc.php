@@ -17,7 +17,7 @@ if($dblink_ok){
 								$obj->setDataArray($HTTP_POST_VARS);
 								if($obj->insertDataFromInternalArray()) 
 									{
-										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&pid=".$HTTP_SESSION_VARS['sess_pid']);
+										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&pid=".$_SESSION['sess_pid']);
 										exit;
 									}
 									else echo "<br>$LDDbNoSave";
@@ -28,7 +28,7 @@ if($dblink_ok){
 								$obj->where=' nr='.$imm_nr;
 								if($obj->updateDataFromInternalArray($dept_nr)) 
 									{
-										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&pid=".$HTTP_SESSION_VARS['sess_pid']);
+										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&pid=".$_SESSION['sess_pid']);
 										exit;
 									}
 									else echo "$sql<br>$LDDbNoUpdate";

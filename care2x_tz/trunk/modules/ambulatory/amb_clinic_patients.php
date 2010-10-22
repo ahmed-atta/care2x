@@ -28,7 +28,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 /**
 * Set default values if not available from url
 */
-if (!isset($dept_nr)||empty($dept_nr)) { $dept_nr=$HTTP_SESSION_VARS['sess_dept_nr'];} # Default station must be set here !!
+if (!isset($dept_nr)||empty($dept_nr)) { $dept_nr=$_SESSION['sess_dept_nr'];} # Default station must be set here !!
 if(!isset($pday)||empty($pday)) $pday=date('d');
 if(!isset($pmonth)||empty($pmonth)) $pmonth=date('m');
 if(!isset($pyear)||empty($pyear)) $pyear=date('Y');
@@ -61,7 +61,7 @@ if(isset($retpath)){
 
 
 # Mark where we are
-$HTTP_SESSION_VARS['sess_user_origin']='amb';
+$_SESSION['sess_user_origin']='amb';
 
 # Load date formatter
 require_once($root_path.'include/inc_date_format_functions.php');
@@ -92,7 +92,7 @@ if(($mode=='')||($mode=='fresh')){
 
 	# set to edit mode
 	$edit=true;
-		# Create the waiting outpatients´ list
+		# Create the waiting outpatientsï¿½ list
 
 		$dnr=(isset($w_waitlist)&&$w_waitlist)?0:$dept_nr;
 		//echo '<p>'.$enc_obj->getLastQuery();
@@ -101,7 +101,7 @@ if(($mode=='')||($mode=='fresh')){
 		$waitlist_count=$enc_obj->LastRecordCount();
 		//echo $waitlist_count.'<p>'.$enc_obj->getLastQuery();
 
-		# Get the doctor´s on duty information
+		# Get the doctorï¿½s on duty information
 		#### Start of routine to fetch doctors on duty
 		$elem='duty_1_pnr';
 		if(SHOW_DOC_2) $elem.=',duty_2_pnr';
@@ -136,7 +136,7 @@ include_once($root_path.'include/care_api_classes/class_multi.php');
 $cd_obj = new multi;
 $vct = $cd_obj->__genNumbers();
 
-$room = $cd_obj->user_RoomLookup($HTTP_SESSION_VARS['sess_login_userid'],$dept_nr);
+$room = $cd_obj->user_RoomLookup($_SESSION['sess_login_userid'],$dept_nr);
 
 # if rooming list enabled
 $room = ($vct[8]==2)? $room : 'GENERAL';
@@ -179,9 +179,9 @@ if ($vct[8]==2){
 
  # Collect extra javascript code
 
-# Initialize page´s control variables
+# Initialize pageï¿½s control variables
 if($mode=='paginate'){
-	$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+	$searchkey=$_SESSION['sess_searchkey'];
 }else{
 	# Reset paginator variables
 	$pgx=0;
@@ -190,7 +190,7 @@ if($mode=='paginate'){
 	$oitem='';
 }
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=& new Paginator($pgx,$thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+$pagen=& new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
  $breakfile='amb_clinic_patients.php';
 $newdata=1;
 $target='archiv';
@@ -336,7 +336,7 @@ if($rows){
 			if (($vct[8]==2) &&
 				($room!=$patient['room'])&&
 				($patient['room']!='GENERAL') &&
-				(strtolower($HTTP_SESSION_VARS['sess_login_userid'])!='admin'))
+				(strtolower($_SESSION['sess_login_userid'])!='admin'))
 					continue;
 
 			# Reset elements
@@ -452,7 +452,7 @@ if($rows){
 
 			$smarty->assign('sInsuarance',$sBuffer2);
 
-			$smarty->assign('sInsuranceType',$sBuffer.((strtolower($HTTP_SESSION_VARS['sess_login_userid'])=='admin')?' &nbsp; ['.$patient['room'].']':''));
+			$smarty->assign('sInsuranceType',$sBuffer.((strtolower($_SESSION['sess_login_userid'])=='admin')?' &nbsp; ['.$patient['room'].']':''));
 
 			if($edit){
 

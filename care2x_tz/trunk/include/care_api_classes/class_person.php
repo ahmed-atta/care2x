@@ -2012,7 +2012,7 @@ class Person extends Core {
 	* @return mixed string or boolean
 	*/
 	function setPhotoFilename($pid='',$fn=''){
-	    global $db; // $HTTP_SESSION_VARS;
+	    global $db; // $_SESSION;
 		if(empty($pid)||empty($fn)) return false;
 		if(!$this->internResolvePID($pid)) return false;
 

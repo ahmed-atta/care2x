@@ -35,7 +35,7 @@ A:visited:hover {color: #cc0033;}
 <!--
 function popPic(pid,nm){
 
- if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=<?php echo $HTTP_SESSION_VARS['sess_pid'];?>&lang=en&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
+ if(pid!="") regpicwindow = window.open("../../main/pop_reg_pic.php?sid=<?php echo $_SESSION['sess_pid'];?>&lang=en&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
 
 }
 function closewin()
@@ -44,7 +44,7 @@ function closewin()
 }
 
 function open_pending_prescriptions() {
-	urlholder="<?php echo $root_path;?>modules/pharmacy_tz/pharmacy_tz_pending_prescriptions.php?sid=<?php echo $HTTP_SESSION_VARS['sess_pid'];?>&comming_from=pharmacy";
+	urlholder="<?php echo $root_path;?>modules/pharmacy_tz/pharmacy_tz_pending_prescriptions.php?sid=<?php echo $_SESSION['sess_pid'];?>&comming_from=pharmacy";
 	patientwin=window.open(urlholder,"Ziel","width=1000,height=800,status=yes,menubar=no,resizable=yes,scrollbars=yes,statusbar=yes,top=0,left=0");
 	patientwin.moveTo(0,0);
 	patientwin.resizeTo(screen.availWidth,screen.availHeight);

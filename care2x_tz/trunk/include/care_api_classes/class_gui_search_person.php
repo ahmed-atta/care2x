@@ -149,7 +149,7 @@ class GuiSearchPerson {
 
 	function display($skey=''){
 		global 	$db, $searchkey, $root_path,  $firstname_too, $HTTP_POST_VARS, $HTTP_GET_VARS,
-				$sid, $lang, $mode,$totalcount, $pgx, $odir, $oitem, $HTTP_SESSION_VARS,
+				$sid, $lang, $mode,$totalcount, $pgx, $odir, $oitem, $_SESSION,
 				$dbf_nodate,  $user_origin, $parent_admit, $status, $target, $origin;
 
 		$this->thisfile = $filename;
@@ -172,7 +172,7 @@ class GuiSearchPerson {
 
 		# Initialize pages control variables
 		if($mode=='paginate'){
-			$searchkey=$HTTP_SESSION_VARS['sess_searchkey'];
+			$searchkey=$_SESSION['sess_searchkey'];
 			//$searchkey='USE_SESSION_SEARCHKEY';
 			//$mode='search';
 		}else{
@@ -188,7 +188,7 @@ class GuiSearchPerson {
 
 		#Load and create paginator object
 		include_once($root_path.'include/care_api_classes/class_paginator.php');
-		$pagen=new Paginator($pgx,$this->thisfile,$HTTP_SESSION_VARS['sess_searchkey'],$root_path);
+		$pagen=new Paginator($pgx,$this->thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 		include_once($root_path.'include/care_api_classes/class_globalconfig.php');
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -235,7 +235,7 @@ class GuiSearchPerson {
 			$sql='SELECT * FROM '.$dbtable.$sql2;
 
 			if($mode=='paginate'){
-				$fromwhere=$HTTP_SESSION_VARS['sess_searchkey'];
+				$fromwhere=$_SESSION['sess_searchkey'];
 				$sql='SELECT pid, name_last, name_first, date_birth, selian_pid, sex, death_date, status FROM '.$fromwhere.$sql3;
 				#print $sql.'<hr />';
 				$ergebnis=$db->SelectLimit($sql,$pagen->MaxCount(),$pagen->BlockStartIndex());
@@ -244,7 +244,7 @@ class GuiSearchPerson {
 				$ergebnis=$person->SearchSelect($searchkey,$pagen->MaxCount(),$pagen->BlockStartIndex(),$oitem,$odir,$firstname_too);
 				#Retrieve the sql fromwhere portion
 				$fromwhere=$person->buffer;
-				$HTTP_SESSION_VARS['sess_searchkey']=$fromwhere;
+				$_SESSION['sess_searchkey']=$fromwhere;
 				$sql=$person->getLastQuery();
 				#print $sql.'<br />';
 				$linecount=$person->LastRecordCount();

@@ -2,7 +2,7 @@
 
 if(!$death_date || $death_date == DBF_NODATE){
 
-	$smarty->assign('sPromptLink','<div class="warnprompt"><a href="'.$thisfile.URL_APPEND.'&pid='.$HTTP_SESSION_VARS['sess_pid'].'&target='.$target.'&mode=new"><img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>&nbsp;'.$LDScheduleNewAppointment.'</font></a></div>');
+	$smarty->assign('sPromptLink','<div class="warnprompt"><a href="'.$thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=new"><img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle',TRUE).'>&nbsp;'.$LDScheduleNewAppointment.'</font></a></div>');
 }
 
 ?>

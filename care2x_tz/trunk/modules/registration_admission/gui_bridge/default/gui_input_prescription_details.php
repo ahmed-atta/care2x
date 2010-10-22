@@ -36,7 +36,7 @@ if ($debug) {
 
     echo "encounter_nr:".$encounter_nr."<br>";
 
-    echo "Session-ecnounter_nr: ".$HTTP_SESSION_VARS['sess_en'];
+    echo "Session-ecnounter_nr: ".$_SESSION['sess_en'];
 }
 $pres_types=$pres_obj->getPrescriptionTypes();
 
@@ -309,7 +309,7 @@ else
 
    <tr bgcolor="#f6f6f6">
      <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPrescribedBy; ?></td>
-     <td><input type="text" name="prescriber" size=50 maxlength=60 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly></td>
+     <td><input type="text" name="prescriber" size=50 maxlength=60 value="<?php echo $_SESSION['sess_user_name']; ?>" readonly></td>
    </tr>
  </table>
 
@@ -320,15 +320,15 @@ else
 <?php
 } // end of loop
 ?>
-<input type="hidden" name="encounter_nr" value="<?php echo $HTTP_SESSION_VARS['sess_en']; ?>">
-<input type="hidden" name="pid" value="<?php echo $HTTP_SESSION_VARS['sess_pid']; ?>">
+<input type="hidden" name="encounter_nr" value="<?php echo $_SESSION['sess_en']; ?>">
+<input type="hidden" name="pid" value="<?php echo $_SESSION['sess_pid']; ?>">
 <?php
 if(!$nr)
 	echo '<input type="hidden" name="mode" value="create">';
 else
 	echo '<input type="hidden" name="mode" value="update">';
 ?>
-<input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $HTTP_SESSION_VARS['sess_user_name']."\n"; ?>">
+<input type="hidden" name="history" value="Created: <?php echo date('Y-m-d H:i:s'); ?> : <?php echo $_SESSION['sess_user_name']."\n"; ?>">
 <input type="hidden" name="target" value="<?php echo $target; ?>">
 
 
