@@ -29,7 +29,7 @@ $photo_filename='nopic';
 if(!isset($user_id) || !$user_id)
 {
     $user_id=$local_user.$sid;
-    $user_id=$$user_id;
+    $user_id= (isset($$user_id)) ? $$user_id : 0;
 }
 
 if(isset($pid) && ($pid!='')) {

@@ -447,5 +447,5 @@ $LDName='Name';
 
 $LDRooms = 'In Room';
 $LDNoRooms = 'GENERAL';
-
+$LDBloodGroup = 'Blood Group';
 ?>

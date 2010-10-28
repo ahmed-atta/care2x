@@ -1,5 +1,4 @@
 <?PHP
-session_start();
 require_once($root_path.'include/care_api_classes/class_core.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 include_once($root_path.'include/care_api_classes/class_person.php');

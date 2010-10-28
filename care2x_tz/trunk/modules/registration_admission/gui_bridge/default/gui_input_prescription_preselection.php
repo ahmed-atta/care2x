@@ -14,6 +14,7 @@ if (!empty($show)) { // In case something goes wrong, then do nothing!
   if ($debug) echo "DB-Filter2: ".$filter."<br>";
   if ($debug) echo "This is external call?: ".$externalcall."<br>";
 
+  if (!isset($filter)) $filter=NULL;
 
 
   if (empty($db_drug_filter))

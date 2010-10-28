@@ -54,7 +54,7 @@ if ($debug) {
 	echo "show onyl pharamcy artivles is set to: ".$ShowOnlyPharmacy;
 }
 
-if(!$prescription_date) $prescription_date = date("Y-m-d");
+if(!isset($prescription_date)) $prescription_date = date("Y-m-d");
 define('NO_2LEVEL_CHK',1);
 $thisfile=basename(__FILE__);
 if(!isset($mode)){
@@ -66,7 +66,7 @@ if(!isset($mode)){
 
 	include_once($root_path.'include/inc_date_format_functions.php');
 
-	if($_POST['prescribe_date']) $_POST['prescribe_date']=@formatDate2STD($_POST['prescribe_date'],$date_format);
+	if(isset($_POST['prescribe_date'])) $_POST['prescribe_date']=@formatDate2STD($_POST['prescribe_date'],$date_format);
 	else $_POST['prescribe_date']=date('Y-m-d');
 
 	$_POST['create_id']=$_SESSION['sess_user_name'];
@@ -93,7 +93,7 @@ if (isset($pn)) {
 
 require('./include/init_show.php');
 
-if($parent_admit){
+if(isset($parent_admit)){
     $sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr, care_tz_drugsandservices as service
 		WHERE p.pid=".$_SESSION['sess_pid']."
 			AND p.pid=e.pid
@@ -104,7 +104,7 @@ if($parent_admit){
 			AND service.is_labtest=0
 		ORDER BY pr.modify_time DESC";
 }else{
-	if ($ShowOnlyPharmacy) {
+	if (isset($ShowOnlyPharmacy)) {
 		$sql="SELECT pr.*, e.encounter_class_nr FROM care_encounter AS e, care_person AS p, care_encounter_prescription AS pr, care_tz_drugsandservices
 		  WHERE p.pid=".$_SESSION['sess_pid']." AND p.pid=e.pid AND e.encounter_nr=pr.encounter_nr AND pr.article_item_number=care_tz_drugsandservices.item_id AND ( purchasing_class = 'drug_list' OR purchasing_class ='supplies' OR purchasing_class ='dental')
 		  ORDER BY pr.modify_time DESC";
@@ -132,7 +132,7 @@ $norecordyet=str_replace('~obj~',strtolower($subtitle),$buffer);
 include_once($root_path.'include/care_api_classes/class_multi.php');
 $multi= new multi;
 
-$multi->doctorSTAT($_SESSION['sess_login_userid'],$pn);
+if (isset($pn)) $multi->doctorSTAT($_SESSION['sess_login_userid'],$pn);
 
 /* Load GUI page */
 require('./gui_bridge/default/gui_show.php');
