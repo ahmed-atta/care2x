@@ -15,14 +15,14 @@
 # Care2x will also refuse to run if this script is not deleted.
 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-$root_path='./';
+$root_path='../../';
 $sid='1'; # Dummy sid 
 require($root_path.'include/inc_environment_global.php');
 $lang_tables[]='intramail.php';
 $lang_tables[]='create_admin.php';
 define('LANG_FILE','edp.php');
 define('NO_CHAIN',1);
-require_once('./include/inc_front_chain_lang.php');
+require_once($root_path.'include/inc_front_chain_lang.php');
 
 if(empty($lang)) $lang='en';
 
@@ -51,7 +51,7 @@ if(isset($_POST['mode'])&&!empty($_POST['mode'])&&$_POST['mode']=='save'){
 
 }
 
-require_once('./include/inc_charset_fx.php');
+require_once($root_path.'include/inc_charset_fx.php');
 ?>
 <html>
 <head>
