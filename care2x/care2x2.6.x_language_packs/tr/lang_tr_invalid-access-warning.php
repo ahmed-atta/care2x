@@ -27,7 +27,8 @@ require_once($root_path.'include/core/inc_img_fx.php');
 <FONT    SIZE=3 color=red  FACE="Arial">
 <b>Bu belgeye eriþim hakkýnýz bulunmamaktadýr!</b></font><p>
 <FORM >
-<INPUT type="button"  value=" Tamam "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?></FORM>
+<INPUT type="button"  value=" OK "  onClick="<?php if ($mode=="close") print 'window.close()'; else print 'history.back()'; ?>"></FORM>
+</FORM>
 <p>
 </font>
 </center>
