@@ -1,7 +1,9 @@
 <?php
-$version="2.05.3.1 tz";
+$version="2.0.5.3.2 tz";
 /*
  * History:
+ * Version 2.05.3.2, 28-Oct-10
+ * PHP5 compatibility
  * Version 2.05.2, 15-apr-08
  * Pharmacy module did not show the dental prescriptions (bugfix)
  * Version 2.05.1, 14-apr-08
