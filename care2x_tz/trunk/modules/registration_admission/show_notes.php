@@ -24,9 +24,9 @@ if(!isset($mode)){
 } elseif($mode=='create'||$mode=='update') {
 	include_once($root_path.'include/inc_date_format_functions.php');
 	# Set the date, default is today
-	if(empty($HTTP_POST_VARS['date'])) $HTTP_POST_VARS['date']=date('Y-m-d');
-		else $HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
-	$HTTP_POST_VARS['time']=date('H:i:s');
+	if(empty($_POST['date'])) $_POST['date']=date('Y-m-d');
+		else $_POST['date']=@formatDate2STD($_POST['date'],$date_format);
+	$_POST['time']=date('H:i:s');
 	include('./include/save_admission_data.inc.php');
 }
 # Load the emr language table

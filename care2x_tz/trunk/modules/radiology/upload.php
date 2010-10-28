@@ -46,10 +46,10 @@ if(!isset($mode)){
 				//$data['mime_type']=$picext;
 				# Hard code image type to "dicom"
 				$data=array('pid'=>$pid,
-									'encounter_nr'=>$HTTP_POST_VARS['encounter_nr'],
-									'doc_ref_ids'=>$HTTP_POST_VARS['doc_ref_ids'],
+									'encounter_nr'=>$_POST['encounter_nr'],
+									'doc_ref_ids'=>$_POST['doc_ref_ids'],
 									'img_type'=>'dicom',
-									'notes'=>$HTTP_POST_VARS['notes'],
+									'notes'=>$_POST['notes'],
 									'upload_date'=>date('Y-m-d'),
 									'history'=>"Upload ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n",
 									'create_id'=>$_SESSION['sess_user_name'],

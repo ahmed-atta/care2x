@@ -39,7 +39,7 @@ if($mode){
 			//$db->debug=1;
 				/* check if ward already exists */
 								if(!$ward->IDExists($ward_id)){				
-									if($ergebnis=$ward->saveWard($HTTP_POST_VARS)){
+									if($ergebnis=$ward->saveWard($_POST)){
 										if($dbtype=='mysql'){
 											$ward_nr=$db->Insert_ID();
 										}else{

@@ -31,8 +31,8 @@ if(!isset($mode)){
 	#
 	if($mode=='create'||$mode=='update') {
 		include_once($root_path.'include/inc_date_format_functions.php');
-		$HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
-		$sBufDate = (int) str_replace('-','',$HTTP_POST_VARS['date']);
+		$_POST['date']=@formatDate2STD($_POST['date'],$date_format);
+		$sBufDate = (int) str_replace('-','',$_POST['date']);
 		$sBufToday = (int) date('Ymd');
 		$sBufDate = ($sBufDate - $sBufToday);
 		#
@@ -47,19 +47,19 @@ if(!isset($mode)){
 
 	if($mode=='create'||$mode=='update') {
 
-		$HTTP_POST_VARS['time']=@convertTimeToStandard($HTTP_POST_VARS['time']);
+		$_POST['time']=@convertTimeToStandard($_POST['time']);
 		if($mode=='update'){
-			if(!isset($HTTP_POST_VARS['remind_mail'])) $HTTP_POST_VARS['remind_mail']='0';
-			if(!isset($HTTP_POST_VARS['remind_email'])) $HTTP_POST_VARS['remind_email']='0';
-			if(!isset($HTTP_POST_VARS['remind_phone'])) $HTTP_POST_VARS['remind_phone']='0';
-            $HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-            $HTTP_POST_VARS['modify_time'] = date('YmdHis');
-			$HTTP_POST_VARS['history']= $obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." : ".$_SESSION['sess_user_name']."\n");
+			if(!isset($_POST['remind_mail'])) $_POST['remind_mail']='0';
+			if(!isset($_POST['remind_email'])) $_POST['remind_email']='0';
+			if(!isset($_POST['remind_phone'])) $_POST['remind_phone']='0';
+            $_POST['modify_id']=$_SESSION['sess_user_name'];
+            $_POST['modify_time'] = date('YmdHis');
+			$_POST['history']= $obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." : ".$_SESSION['sess_user_name']."\n");
 		}else{
-			$HTTP_POST_VARS['appt_status']='pending';
-            $HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
-            $HTTP_POST_VARS['create_time'] = date('YmdHis');
-            $HTTP_POST_VARS['history'] = "Created: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+			$_POST['appt_status']='pending';
+            $_POST['create_id']=$_SESSION['sess_user_name'];
+            $_POST['create_time'] = date('YmdHis');
+            $_POST['history'] = "Created: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
 		}
 		include('./include/save_admission_data.inc.php');
 	}elseif(($mode=='select')&&!empty($nr)){
@@ -69,11 +69,11 @@ if(!isset($mode)){
 			//while(list($x,$v)=each($appt_row)) $$x=$v;
 		}
 	}elseif($mode=='appt_cancel'&&!empty($nr)){
-			$HTTP_POST_VARS['history']=$obj->ConcatHistory("Cancel: ".date('Y-m-d H:i:s')." : ".$_SESSION['sess_user_name']."\n");
-			$HTTP_POST_VARS['appt_status']='cancelled';
-			$HTTP_POST_VARS['cancel_reason']=$reason;
-            $HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-            $HTTP_POST_VARS['modify_time'] = date('YmdHis');
+			$_POST['history']=$obj->ConcatHistory("Cancel: ".date('Y-m-d H:i:s')." : ".$_SESSION['sess_user_name']."\n");
+			$_POST['appt_status']='cancelled';
+			$_POST['cancel_reason']=$reason;
+            $_POST['modify_id']=$_SESSION['sess_user_name'];
+            $_POST['modify_time'] = date('YmdHis');
 			$mode='update';
 		include('./include/save_admission_data.inc.php');
 	}

@@ -42,7 +42,7 @@ if($mode=="updateflags")
 		exit();
 	}
 	$this_insurance = $_POST;
-	while(list($x,$v) = each($HTTP_POST_VARS))
+	while(list($x,$v) = each($_POST))
 	{
 		if(strstr($x,"cancel_"))
 		{

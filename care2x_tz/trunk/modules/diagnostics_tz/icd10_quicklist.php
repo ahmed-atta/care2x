@@ -25,8 +25,8 @@ require($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_tz_diagnostics.php');
 
 $diagnostic_obj = new Diagnostics;
-if($HTTP_GET_VARS['backpath_diag']) $_SESSION['backpath_diag'] = urldecode($HTTP_GET_VARS['backpath_diag']);
-if($HTTP_GET_VARS['ispopup']) $_SESSION['ispopup'] = $HTTP_GET_VARS['ispopup'];
+if($_GET['backpath_diag']) $_SESSION['backpath_diag'] = urldecode($_GET['backpath_diag']);
+if($_GET['ispopup']) $_SESSION['ispopup'] = $_GET['ispopup'];
 
 if ($mode=="search") {
   if (!empty($keyword)) {

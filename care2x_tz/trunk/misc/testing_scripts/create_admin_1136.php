@@ -26,7 +26,7 @@ require_once('./include/inc_front_chain_lang.php');
 
 if(empty($lang)) $lang='en';
 
-if(isset($HTTP_POST_VARS['mode'])&&!empty($HTTP_POST_VARS['mode'])&&$HTTP_POST_VARS['mode']=='save'){
+if(isset($_POST['mode'])&&!empty($_POST['mode'])&&$_POST['mode']=='save'){
 	$error_msg='';
 	if($pw1==$pw2){
 		$sql="INSERT INTO care_users (name, login_id, password, permission, lockflag, exc,status,history, modify_id, modify_time, create_id,create_time)

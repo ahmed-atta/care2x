@@ -22,17 +22,17 @@ if ($debug) echo $search_mode."<br>";
 
 $stock_obj = new Stock_tz();
 if ($task=="update") {
-	while(list($x,$v) = each($HTTP_POST_VARS))
+	while(list($x,$v) = each($_POST))
 	{
 		if(strstr($x,"trigger"))
 		{
 			
 			$itemid = substr(strrchr($x,"_"),1);
-			if($HTTP_POST_VARS['trigger_'.$itemid]=='update')
+			if($_POST['trigger_'.$itemid]=='update')
 			{
 				$stock_obj->transfer_update($itemid, $_POST['newdrugid_'.$itemid], $_POST['amount_'.$itemid]);
 			}
-			elseif($HTTP_POST_VARS['trigger_'.$itemid]=='delete')
+			elseif($_POST['trigger_'.$itemid]=='delete')
 			{
 				$stock_obj->transfer_cancel($itemid);
 			}

@@ -27,14 +27,14 @@ require_once($root_path.'include/inc_front_chain_lang.php');
   # This might need to be optimized ???
   
   if(stristr(substr(PHP_VERSION,0,3),'4.0')){
-      if( isset($HTTP_GET_VARS['status']) )
-        $sql .= " status='".$HTTP_GET_VARS['status']."', ";
+      if( isset($_GET['status']) )
+        $sql .= " status='".$_GET['status']."', ";
 
-      if( isset($HTTP_GET_VARS['active']) )
-        $sql .= " is_inactive='".(1-$HTTP_GET_VARS['active'])."', ";
+      if( isset($_GET['active']) )
+        $sql .= " is_inactive='".(1-$_GET['active'])."', ";
 
       $sql .= " modify_id='".$_SESSION['sess_user_name']."' ".
-        " WHERE nr='".$HTTP_GET_VARS['nr']."'";
+        " WHERE nr='".$_GET['nr']."'";
   }else{
       if( isset($_REQUEST['status']) )
         $sql .= " status='".$_REQUEST['status']."', ";

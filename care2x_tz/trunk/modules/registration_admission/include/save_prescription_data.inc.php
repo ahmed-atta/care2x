@@ -41,7 +41,7 @@ foreach ($arr_item_number AS $item_number) {
 
   $i++;
 
-  //$obj->setDataArray($HTTP_POST_VARS);
+  //$obj->setDataArray($_POST);
 
   switch($mode){
   		case 'create':

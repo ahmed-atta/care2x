@@ -49,10 +49,10 @@ if(empty($reg_glob_ini)||(!$reg_glob_ini))
 
 /* Process GET vars */
 
-  //if(sizeof($HTTP_GET_VARS))
+  //if(sizeof($_GET))
   if(sizeof($global_vars=&importGlobalVariable('get')))
   {
-    //while(list($x,$v)=each($HTTP_GET_VARS))    
+    //while(list($x,$v)=each($_GET))    
     while(list($x,$v)=each($global_vars))
     {
 		$$x=$v;
@@ -62,15 +62,15 @@ if(empty($reg_glob_ini)||(!$reg_glob_ini))
   
 /* Process POST vars */
   
-  //if(sizeof($HTTP_POST_VARS))
+  //if(sizeof($_POST))
   if(sizeof($global_vars=&importGlobalVariable('post')))
   {
-    //while(list($x,$v)=each($HTTP_POST_VARS)) 
+    //while(list($x,$v)=each($_POST)) 
     while(list($x,$v)=each($global_vars))    
     {
 		$$x=$v;
     }
-    //reset($HTTP_POST_VARS);
+    //reset($_POST);
     reset($global_vars);
   }
   

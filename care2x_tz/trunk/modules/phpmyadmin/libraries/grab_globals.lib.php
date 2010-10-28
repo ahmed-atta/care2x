@@ -34,14 +34,14 @@ if (!defined('PMA_GRAB_GLOBALS_INCLUDED')) {
 
     if (!empty($_GET)) {
         PMA_gpc_extract($_GET, $GLOBALS);
-    } else if (!empty($HTTP_GET_VARS)) {
-        PMA_gpc_extract($HTTP_GET_VARS, $GLOBALS);
+    } else if (!empty($_GET)) {
+        PMA_gpc_extract($_GET, $GLOBALS);
     } // end if
 
     if (!empty($_POST)) {
         PMA_gpc_extract($_POST, $GLOBALS);
-    } else if (!empty($HTTP_POST_VARS)) {
-        PMA_gpc_extract($HTTP_POST_VARS, $GLOBALS);
+    } else if (!empty($_POST)) {
+        PMA_gpc_extract($_POST, $GLOBALS);
     } // end if
 
     if (!empty($_FILES)) {

@@ -189,7 +189,7 @@ function Spacer()
 
 						    if($event_result=$enc_obj->Transact($sql))
 						    {
-						       $event=&$HTTP_POST_VARS;
+						       $event=&$_POST;
 
 							   $mode='changes_saved';
 							    //echo "ok insertd $sql";

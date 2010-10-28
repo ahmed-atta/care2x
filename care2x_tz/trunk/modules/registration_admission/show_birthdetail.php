@@ -26,22 +26,22 @@ if(!isset($mode)){
 	$saved=false;
 
 	# Prepare additional info for saving
-	$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-	$HTTP_POST_VARS['modify_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
-	if($HTTP_POST_VARS['docu_by']) $HTTP_POST_VARS['modify_id']=$HTTP_POST_VARS['docu_by'];
-		else $HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-	if(empty($HTTP_POST_VARS['delivery_date'])) $HTTP_POST_VARS['delivery_date']=date('Y-m-d');
-		//else $HTTP_POST_VARS['delivery_date']=@formatDate2STD($HTTP_POST_VARS['delivery_date'],$date_format);
+	$_POST['modify_id']=$_SESSION['sess_user_name'];
+	$_POST['modify_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
+	if($_POST['docu_by']) $_POST['modify_id']=$_POST['docu_by'];
+		else $_POST['modify_id']=$_SESSION['sess_user_name'];
+	if(empty($_POST['delivery_date'])) $_POST['delivery_date']=date('Y-m-d');
+		//else $_POST['delivery_date']=@formatDate2STD($_POST['delivery_date'],$date_format);
 
 	# Update child encounter to parent encounter
-	if(!empty($HTTP_POST_VARS['parent_encounter_nr'])) $obj->AddChildNrToParent($_SESSION['sess_en'],$HTTP_POST_VARS['parent_encounter_nr'],$HTTP_POST_VARS);
+	if(!empty($_POST['parent_encounter_nr'])) $obj->AddChildNrToParent($_SESSION['sess_en'],$_POST['parent_encounter_nr'],$_POST);
 	//echo $obj->getLastQuery();
 	
 	if($allow_update){
-		$obj->setWhereCondition('pid='.$HTTP_POST_VARS['pid']);
-		$obj->setDataArray($HTTP_POST_VARS);
+		$obj->setWhereCondition('pid='.$_POST['pid']);
+		$obj->setDataArray($_POST);
 
-		if($obj->updateDataFromInternalArray($HTTP_POST_VARS['pid'])) {
+		if($obj->updateDataFromInternalArray($_POST['pid'])) {
 			$saved=true;
 		}else{
 			echo $obj->getLastQuery."<br>$LDDbNoUpdate";
@@ -50,11 +50,11 @@ if(!isset($mode)){
 		# Deactivate the old record first if exists
 		$obj->deactivateBirthDetails($_SESSION['sess_pid']);
 		
-		$HTTP_POST_VARS['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
-		if($HTTP_POST_VARS['docu_by']) $HTTP_POST_VARS['create_id']=$HTTP_POST_VARS['docu_by'];
-			else $HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
-		$HTTP_POST_VARS['create_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
-		$obj->setDataArray($HTTP_POST_VARS);
+		$_POST['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+		if($_POST['docu_by']) $_POST['create_id']=$_POST['docu_by'];
+			else $_POST['create_id']=$_SESSION['sess_user_name'];
+		$_POST['create_time']=date('YmdHis'); # Create own timestamp for cross db compatibility
+		$obj->setDataArray($_POST);
 
 		if($obj->insertDataFromInternalArray()) {
 			$saved=true;

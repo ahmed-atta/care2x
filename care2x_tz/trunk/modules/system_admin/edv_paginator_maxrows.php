@@ -24,7 +24,7 @@ $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 
 # Save data if save mode
 if(isset($mode)&&$mode=='save'){
-	$glob_obj->saveConfigArray($HTTP_POST_VARS,'pagin_',TRUE,20);
+	$glob_obj->saveConfigArray($_POST,'pagin_',TRUE,20);
 	header("location:$thisfile".URL_REDIRECT_APPEND."&save_ok=1");
 	exit;
 # Else get current global data

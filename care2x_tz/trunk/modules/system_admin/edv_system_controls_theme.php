@@ -28,7 +28,7 @@ $gc=new GlobalConfig($GCONFIG);
 
 if(isset($mode)&&($mode=='save')&&!empty($max_items)){
 	
-	$gc->saveConfigItem('theme_control_buttons',$HTTP_POST_VARS['theme_control_buttons']);
+	$gc->saveConfigItem('theme_control_buttons',$_POST['theme_control_buttons']);
 	header('location:'.$thisfile.URL_REDIRECT_APPEND.'&mode=0');
 	exit;
 }

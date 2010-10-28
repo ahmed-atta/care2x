@@ -59,7 +59,7 @@ if(($mode=='search')&&($keyword!='')&&($keyword!='%')){
  	 include($root_path.'include/inc_products_search_mod.php');
  }elseif(($mode=='save')&&($bestellnum!='')&&($artikelname!='')){
 		//include($root_path.'include/inc_products_ordercatalog_save.php');
-		$saveok=$product_obj->SaveCatalogItem($HTTP_GET_VARS,$cat);
+		$saveok=$product_obj->SaveCatalogItem($_GET,$cat);
 }
 
 if(($mode=='delete')&&($keyword!='')) 

@@ -70,10 +70,10 @@ if($mode!= ''){
 	     $sql="SELECT * FROM care_menu_main";
 	     $result=$db->Execute($sql);
 
-	     while(list($x,$v)=each($HTTP_POST_VARS))
+	     while(list($x,$v)=each($_POST))
 	     {
            if(!ereg('_a_',$x)) continue;
-           if($HTTP_POST_VARS[$x] != '') $p_areas.=$v.' ';
+           if($_POST[$x] != '') $p_areas.=$v.' ';
 	     }
 
 	     /* If permission area is available, save it */

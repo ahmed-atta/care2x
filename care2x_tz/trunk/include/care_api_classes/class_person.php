@@ -1036,7 +1036,7 @@ class Person extends Core {
 	* @access private
 	*/
 	function prepInsertArray(){
-#        global $HTTP_POST_VARS;
+#        global $_POST;
 		$x='';
 		$v='';
 

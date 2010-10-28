@@ -61,76 +61,76 @@ if(!isset($mode)){
 }elseif($mode=='create'||$mode=='update') {
 
 	include_once($root_path.'include/inc_date_format_functions.php');
-	if($HTTP_POST_VARS['msr_date']) 	$HTTP_POST_VARS['msr_date']=@formatDate2STD($HTTP_POST_VARS['msr_date'],$date_format);
-		else $HTTP_POST_VARS['msr_date']=date('Y-m-d');
+	if($_POST['msr_date']) 	$_POST['msr_date']=@formatDate2STD($_POST['msr_date'],$date_format);
+		else $_POST['msr_date']=date('Y-m-d');
 
 	# Non standard time format
-	$HTTP_POST_VARS['msr_time']=date('H.i');
-	$HTTP_POST_VARS['create_time']=date('YmdHis'); # Create the timestamp to group the values
-	$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
+	$_POST['msr_time']=date('H.i');
+	$_POST['create_time']=date('YmdHis'); # Create the timestamp to group the values
+	$_POST['create_id']=$_SESSION['sess_user_name'];
 
 	if($weight||$height||$head_c){
 		# Set to no redirect
 		$no_redirect=TRUE;
 
 		if($weight){
-			$HTTP_POST_VARS['value']=$weight;
-			$HTTP_POST_VARS['msr_type_nr']=6; # msrmt type 6 = weight
-			$HTTP_POST_VARS['notes']=$wt_notes;
-			$HTTP_POST_VARS['unit_nr']=$wt_unit_nr;
-			$HTTP_POST_VARS['unit_type_nr']=2; # 2 = weight
+			$_POST['value']=$weight;
+			$_POST['msr_type_nr']=6; # msrmt type 6 = weight
+			$_POST['notes']=$wt_notes;
+			$_POST['unit_nr']=$wt_unit_nr;
+			$_POST['unit_type_nr']=2; # 2 = weight
 			include('./include/save_admission_data.inc.php');
 		}
 		if($height){
-			$HTTP_POST_VARS['value']=$height;
-			$HTTP_POST_VARS['msr_type_nr']=7;  # msrmt type 7 = height
-			$HTTP_POST_VARS['notes']=$ht_notes;
-			$HTTP_POST_VARS['unit_nr']=$ht_unit_nr;
-			$HTTP_POST_VARS['unit_type_nr']=3; # 3 = length
+			$_POST['value']=$height;
+			$_POST['msr_type_nr']=7;  # msrmt type 7 = height
+			$_POST['notes']=$ht_notes;
+			$_POST['unit_nr']=$ht_unit_nr;
+			$_POST['unit_type_nr']=3; # 3 = length
 			include('./include/save_admission_data.inc.php');
 		}
 		if($head_c){
-			$HTTP_POST_VARS['value']=$head_c;
-			$HTTP_POST_VARS['msr_type_nr']=9; # msrmt type 9 = head circumference
-			$HTTP_POST_VARS['notes']=$hc_notes;
-			$HTTP_POST_VARS['unit_nr']=$hc_unit_nr;
-			$HTTP_POST_VARS['unit_type_nr']=3; # 3 = length
+			$_POST['value']=$head_c;
+			$_POST['msr_type_nr']=9; # msrmt type 9 = head circumference
+			$_POST['notes']=$hc_notes;
+			$_POST['unit_nr']=$hc_unit_nr;
+			$_POST['unit_type_nr']=3; # 3 = length
 			include('./include/save_admission_data.inc.php');
 		}
 
 		if($pulse_c){
-			$HTTP_POST_VARS['value']=$pulse_c;
-			$HTTP_POST_VARS['msr_type_nr']=10; # msrmt type 10 = Pulse
-			$HTTP_POST_VARS['notes']=$pulse_notes;
-			$HTTP_POST_VARS['unit_nr']=$pulse_nr;
-			$HTTP_POST_VARS['unit_type_nr']=7; # 7 = rate
+			$_POST['value']=$pulse_c;
+			$_POST['msr_type_nr']=10; # msrmt type 10 = Pulse
+			$_POST['notes']=$pulse_notes;
+			$_POST['unit_nr']=$pulse_nr;
+			$_POST['unit_type_nr']=7; # 7 = rate
 			include('./include/save_admission_data.inc.php');
 		}
 
 		if($resprate_c){
-			$HTTP_POST_VARS['value']=$resprate_c;
-			$HTTP_POST_VARS['msr_type_nr']=11; # msrmt type 11 = Respiration Rate
-			$HTTP_POST_VARS['notes']=$resprate_notes;
-			$HTTP_POST_VARS['unit_nr']=$resprate_nr;
-			$HTTP_POST_VARS['unit_type_nr']=7; # 7 = rate
+			$_POST['value']=$resprate_c;
+			$_POST['msr_type_nr']=11; # msrmt type 11 = Respiration Rate
+			$_POST['notes']=$resprate_notes;
+			$_POST['unit_nr']=$resprate_nr;
+			$_POST['unit_type_nr']=7; # 7 = rate
 			include('./include/save_admission_data.inc.php');
 		}
 
 		if($bp_c){
-			$HTTP_POST_VARS['value']=$bp_c;
-			$HTTP_POST_VARS['msr_type_nr']=12; # msrmt type 12 = Blood Pressure
-			$HTTP_POST_VARS['notes']=$bp_notes;
-			$HTTP_POST_VARS['unit_nr']=$bp_nr;
-			$HTTP_POST_VARS['unit_type_nr']=4; # 4 = mmHg
+			$_POST['value']=$bp_c;
+			$_POST['msr_type_nr']=12; # msrmt type 12 = Blood Pressure
+			$_POST['notes']=$bp_notes;
+			$_POST['unit_nr']=$bp_nr;
+			$_POST['unit_type_nr']=4; # 4 = mmHg
 			include('./include/save_admission_data.inc.php');
 		}
 
 		if($temp_c){
-			$HTTP_POST_VARS['value']=$temp_c;
-			$HTTP_POST_VARS['msr_type_nr']=13; # msrmt type 12 = Blood Pressure
-			$HTTP_POST_VARS['notes']=$temp_notes;
-			$HTTP_POST_VARS['unit_nr']=$temp_nr;
-			$HTTP_POST_VARS['unit_type_nr']=5; # 4 = mmHg
+			$_POST['value']=$temp_c;
+			$_POST['msr_type_nr']=13; # msrmt type 12 = Blood Pressure
+			$_POST['notes']=$temp_notes;
+			$_POST['unit_nr']=$temp_nr;
+			$_POST['unit_type_nr']=5; # 4 = mmHg
 			include('./include/save_admission_data.inc.php');
 		}
 

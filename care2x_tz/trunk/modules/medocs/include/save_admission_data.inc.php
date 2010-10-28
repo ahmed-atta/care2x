@@ -4,14 +4,14 @@ if (stristr($_SERVER['SCRIPT_NAME'],'save_admission_data.inc.php'))
 	die('<meta http-equiv="refresh" content="0; url=../">');	
 
 	
-$obj->setDataArray($HTTP_POST_VARS);
+$obj->setDataArray($_POST);
 	
 switch($mode)
 {	
 	case 'create': 
 								if($obj->insertDataFromInternalArray()) {
 									if(isset($redirect)&&$redirect){
-										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&mode=details&encounter_nr=".$_SESSION['sess_en']."&nr=".$HTTP_POST_VARS['ref_notes_nr']);
+										header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&mode=details&encounter_nr=".$_SESSION['sess_en']."&nr=".$_POST['ref_notes_nr']);
 										exit;
 									}
 								} else echo "$obj->sql<br>$LDDbNoSave";

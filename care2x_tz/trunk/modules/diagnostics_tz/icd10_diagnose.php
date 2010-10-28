@@ -25,7 +25,7 @@ $diagnostic_obj = new Diagnostics;
 
 if($todo=='submit')
 {
-	$diagnostic_obj->EnterNewCase($HTTP_POST_VARS);
+	$diagnostic_obj->EnterNewCase($_POST);
 }
 
 require ("gui/gui_icd10_diagnose.php");

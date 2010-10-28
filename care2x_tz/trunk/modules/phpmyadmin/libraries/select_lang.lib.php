@@ -205,14 +205,14 @@ if (!defined('PMA_SELECT_LANG_LIB_INCLUDED')) {
         if (isset($_GET) && !empty($_GET['lang'])) {
             $lang = $_GET['lang'];
         }
-        else if (isset($HTTP_GET_VARS) && !empty($HTTP_GET_VARS['lang'])) {
-            $lang = $HTTP_GET_VARS['lang'];
+        else if (isset($_GET) && !empty($_GET['lang'])) {
+            $lang = $_GET['lang'];
         }
         else if (isset($_POST) && !empty($_POST['lang'])) {
             $lang = $_POST['lang'];
         }
-        else if (isset($HTTP_POST_VARS) && !empty($HTTP_POST_VARS['lang'])) {
-            $lang = $HTTP_POST_VARS['lang'];
+        else if (isset($_POST) && !empty($_POST['lang'])) {
+            $lang = $_POST['lang'];
         }
         else if (isset($_COOKIE) && !empty($_COOKIE['lang'])) {
             $lang = $_COOKIE['lang'];

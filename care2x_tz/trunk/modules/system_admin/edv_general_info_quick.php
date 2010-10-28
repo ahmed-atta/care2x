@@ -32,7 +32,7 @@ if(isset($mode)&&$mode=='save'){
 
 
 	# Save the configuration
-	$glob_obj->saveConfigArray($HTTP_POST_VARS,$filter,$numeric,'',$addslash);
+	$glob_obj->saveConfigArray($_POST,$filter,$numeric,'',$addslash);
 
 	# Loop back to self to get the newly stored values
 	header("location:$thisfile".URL_REDIRECT_APPEND."&save_ok=1");
