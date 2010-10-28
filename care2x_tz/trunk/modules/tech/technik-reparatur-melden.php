@@ -44,13 +44,13 @@ $dbtable='care_tech_repair_done';
 							 )
 						VALUES
 						(
-							'".htmlspecialchars($HTTP_POST_VARS['dept'])."',
-							'".htmlspecialchars($HTTP_POST_VARS['job'])."',
-							'".htmlspecialchars($HTTP_POST_VARS['job_id'])."',
-							'".htmlspecialchars($HTTP_POST_VARS['reporter'])."',
-							'".htmlspecialchars($HTTP_POST_VARS['id'])."', 
-							'".$HTTP_POST_VARS['tdate']."', 
-							'".$HTTP_POST_VARS['ttime']."',
+							'".htmlspecialchars($_POST['dept'])."',
+							'".htmlspecialchars($_POST['job'])."',
+							'".htmlspecialchars($_POST['job_id'])."',
+							'".htmlspecialchars($_POST['reporter'])."',
+							'".htmlspecialchars($_POST['id'])."', 
+							'".$_POST['tdate']."', 
+							'".$_POST['ttime']."',
 							'".date('YmdHis')."',
 							0,
 							'".date('Ymd')."',
@@ -62,7 +62,7 @@ $dbtable='care_tech_repair_done';
         $db->BeginTrans();
         $ok=$db->Execute($sql);
         if($ok && $db->CommitTrans()) {
-		    header("Location: technik-reparatur-empfang.php".URL_REDIRECT_APPEND."&dept=".$HTTP_POST_VARS['dept']."&reporter=".$HTTP_POST_VARS['reporter']."&tdate=".$HTTP_POST_VARS['tdate']."&ttime=".$HTTP_POST_VARS['ttime']);
+		    header("Location: technik-reparatur-empfang.php".URL_REDIRECT_APPEND."&dept=".$_POST['dept']."&reporter=".$_POST['reporter']."&tdate=".$_POST['tdate']."&ttime=".$_POST['ttime']);
 		    exit;
          } else {
 			$db->RollbackTrans();

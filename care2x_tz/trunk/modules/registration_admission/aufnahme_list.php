@@ -17,20 +17,20 @@ define('MAX_BLOCK_ROWS',30);
 define('AUTOSHOW_ONERESULT',1); # Defining to 1 will automatically show the admission data if the search result is one, otherwise the single result will be listed
 
 function Cond($item,$k){
-	global $where,$tab,$HTTP_POST_VARS, $sql_LIKE;
-	if(empty($HTTP_POST_VARS[$item])) return false;
+	global $where,$tab,$_POST, $sql_LIKE;
+	if(empty($_POST[$item])) return false;
 	else{
-		$buf=" $tab.$item $sql_LIKE '".$HTTP_POST_VARS[$item]."%'";
+		$buf=" $tab.$item $sql_LIKE '".$_POST[$item]."%'";
 		if(!empty($where)) $where.=' AND '.$buf;
 		 else $where=$buf;
 	}
 }
 	
 function fCond($item,$k){
-	global $orwhere,$tab,$HTTP_POST_VARS, $sql_LIKE;
-	if(empty($HTTP_POST_VARS[$item])) return false;
+	global $orwhere,$tab,$_POST, $sql_LIKE;
+	if(empty($_POST[$item])) return false;
 	else{
-		$buf=" f.class_nr $sql_LIKE '".$HTTP_POST_VARS[$item]."%'";
+		$buf=" f.class_nr $sql_LIKE '".$_POST[$item]."%'";
 		if(!empty($orwhere)) $orwhere.=' OR '.$buf;
 		 else $orwhere=$buf;
 	}

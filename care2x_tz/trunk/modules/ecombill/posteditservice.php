@@ -22,7 +22,7 @@ $core=new Core;
     error_reporting(0);
     connect_db();*/
     
-    while (list($cle, $val) = each($HTTP_POST_VARS))
+    while (list($cle, $val) = each($_POST))
     {
 	if (substr($cle,0,6) == "itemnm")
 	{

@@ -189,7 +189,7 @@ echo'
 	
 
 # Prepare the graph values
-$tparam=explode('~',$HTTP_POST_VARS['params']);
+$tparam=explode('~',$_POST['params']);
 /*
 while(list($x,$v) = each($tparam))
 {
@@ -256,7 +256,7 @@ while(list($group_id,$param_group)=each($paralistarray)){
 						//$txt.=$records[$job_id][$group_id][$param];
 							
 						# Print the row
-						 echo $txt.'<td colspan="'.$cols.'"><img  src="'.$root_path.'main/imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$tparams['lo_bound'].'&hi='.$tparams['hi_bound'].'&d='.$HTTP_POST_VARS['imgprep_'.$v].'" border=0>
+						 echo $txt.'<td colspan="'.$cols.'"><img  src="'.$root_path.'main/imgcreator/labor-datacurve.php?sid='.$sid.'&lang='.$lang.'&cols='.$cols.'&lo='.$tparams['lo_bound'].'&hi='.$tparams['hi_bound'].'&d='.$_POST['imgprep_'.$v].'" border=0>
 						</td></tr>';
 					}
 				}

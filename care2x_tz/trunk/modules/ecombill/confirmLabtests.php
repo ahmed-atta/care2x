@@ -19,7 +19,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
     /* include('includes/condb.php');
     error_reporting(0);
     connect_db(); */   
-    while (list($cle, $val) = each($HTTP_POST_VARS))
+    while (list($cle, $val) = each($_POST))
     {
 	if (substr($cle,0,7) == "nounits")
 	{

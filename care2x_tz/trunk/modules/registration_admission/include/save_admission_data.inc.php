@@ -8,7 +8,7 @@ if (stristr($_SERVER['SCRIPT_NAME'],'save_admission_data.inc.php'))
 
 	$multi->doctorSTAT($_SESSION['sess_login_userid'],$encounter_nr);
 
-	$obj->setDataArray($HTTP_POST_VARS);
+	$obj->setDataArray($_POST);
 
 	switch($mode){
 		case 'create':

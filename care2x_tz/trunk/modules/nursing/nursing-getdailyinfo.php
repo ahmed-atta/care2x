@@ -57,10 +57,10 @@ if($mode=='save'&&$sformat&&(trim($short_notes)=='')) $mode='';
 if($mode=='save'&&!$sformat&&(trim($notes)=='')) $mode='';
 	
 if($mode=='save'){
-	$HTTP_POST_VARS['encounter_nr']=$pn;
-	$HTTP_POST_VARS['date']=date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr));
-	$HTTP_POST_VARS['personell_name']=$_SESSION['sess_user_name'];
-	if($charts_obj->saveChartNotesFromArray($HTTP_POST_VARS,$notes_type_nr)){
+	$_POST['encounter_nr']=$pn;
+	$_POST['date']=date('Y-m-d',mktime(0,0,0,$mo,$dy,$yr));
+	$_POST['personell_name']=$_SESSION['sess_user_name'];
+	if($charts_obj->saveChartNotesFromArray($_POST,$notes_type_nr)){
 		header("location:$thisfile?sid=$sid&lang=$lang&edit=$edit&saved=1&pn=$pn&station=$station&winid=$winid&yr=$yr&mo=$mo&dy=$dy&dystart=$dystart&dyname=$dyname&sformat=$sformat");
 	}
 }else{// end of if(mode==save)

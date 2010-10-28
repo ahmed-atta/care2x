@@ -24,8 +24,8 @@ $lang_tables[]='departments.php';
 define('LANG_FILE','products.php');
 
 if(!isset($userck)) 
-  if(isset($HTTP_GET_VARS['userck'])) $userck=$HTTP_GET_VARS['userck'];
-    elseif(isset($HTTP_POST_VARS['userck'])) $userck=$HTTP_POST_VARS['userck'];
+  if(isset($_GET['userck'])) $userck=$_GET['userck'];
+    elseif(isset($_POST['userck'])) $userck=$_POST['userck'];
 $local_user=$userck;
 require_once($root_path.'include/inc_front_chain_lang.php');
 

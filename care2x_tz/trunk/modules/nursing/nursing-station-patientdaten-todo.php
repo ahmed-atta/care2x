@@ -41,12 +41,12 @@ if($mode=='save'){
 		include_once($root_path.'include/inc_visual_signalling_fx.php');
 
 		if($dateput&&$timeput&&$berichtput&&$author){
-			if($dateput)  $HTTP_POST_VARS['dateput']=formatDate2STD($dateput,$date_format);
-			$HTTP_POST_VARS['timeput']=$HTTP_POST_VARS['timeput'].':00'; // adjust time to 00:00:00 format
-			$HTTP_POST_VARS['berichtput']=deactivateHotHtml($berichtput);
-			if($report_obj->saveDirective($HTTP_POST_VARS)){
+			if($dateput)  $_POST['dateput']=formatDate2STD($dateput,$date_format);
+			$_POST['timeput']=$_POST['timeput'].':00'; // adjust time to 00:00:00 format
+			$_POST['berichtput']=deactivateHotHtml($berichtput);
+			if($report_obj->saveDirective($_POST)){
 				// Get the last insert id
-				$HTTP_POST_VARS['ref_notes_nr']=$db->Insert_ID();
+				$_POST['ref_notes_nr']=$db->Insert_ID();
 				// Set the visual signal
 				setEventSignalColor($pn, SIGNAL_COLOR_DOCTOR_INFO, SIGNAL_COLOR_LEVEL_FULL);
 				$saved=true;
@@ -56,10 +56,10 @@ if($mode=='save'){
 			}
 		}
 		if($dateput2&&$berichtput2&&$author2){
-			if(!$HTTP_POST_VARS['ref_notes_nr']) $HTTP_POST_VARS['timeput']=date('H:i:s');
-			if($dateput2) $HTTP_POST_VARS['dateput2']=formatDate2STD($dateput2,$date_format);
-			$HTTP_POST_VARS['berichtput2']=deactivateHotHtml($berichtput2);
-			if($report_obj->saveInquiry($HTTP_POST_VARS)){
+			if(!$_POST['ref_notes_nr']) $_POST['timeput']=date('H:i:s');
+			if($dateput2) $_POST['dateput2']=formatDate2STD($dateput2,$date_format);
+			$_POST['berichtput2']=deactivateHotHtml($berichtput2);
+			if($report_obj->saveInquiry($_POST)){
 				// Set the visual signal
 				setEventSignalColor($pn, SIGNAL_COLOR_QUERY_DOCTOR, SIGNAL_COLOR_LEVEL_FULL);
 				$saved=true;

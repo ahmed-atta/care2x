@@ -432,17 +432,17 @@ class Lab extends Encounter {
 	}
 
 	function InsertParams(){
-		global $db, $HTTP_POST_VARS;
+		global $db, $_POST;
 		// TODO: Make sure that this test will also added to drugsandservices
-		if ($HTTP_POST_VARS['name']=='New parameter') return FALSE;
+		if ($_POST['name']=='New parameter') return FALSE;
 		$this->sql="INSERT INTO $this->tb_test_group (parent, name, is_enabled) VALUES
-		(".$HTTP_POST_VARS['parameterselect'].", '".$HTTP_POST_VARS['name']."',1)";
+		(".$_POST['parameterselect'].", '".$_POST['name']."',1)";
 		$db->Execute($this->sql);
 		$this->sql="INSERT INTO $this->tb_test_param
 		(`group_id`, `name`, `id`, `msr_unit`, `median`, `hi_bound`, `lo_bound`, `hi_critical`, `lo_critical`, `hi_toxic`, `lo_toxic`,`add_type`,`add_label`, `status`, `history`, `modify_id`, `create_id`, `price`) VALUES
-		('".$HTTP_POST_VARS['parameterselect']."','".$HTTP_POST_VARS['name']."','".$db->Insert_ID()."','".$HTTP_POST_VARS['msr_unit']."','".$HTTP_POST_VARS['median']."','".$HTTP_POST_VARS['hi_bound']."','".$HTTP_POST_VARS['lo_bound']."',
-		'".$HTTP_POST_VARS['hi_critical']."','".$HTTP_POST_VARS['lo_critical']."','".$HTTP_POST_VARS['hi_toxic']."','".$HTTP_POST_VARS['lo_toxic']."','radio','Positive','".$HTTP_POST_VARS['status']."','".addslashes($HTTP_POST_VARS['history'])."','".$HTTP_POST_VARS['modify_id']."',
-		'".$HTTP_POST_VARS['create_id']."','".$HTTP_POST_VARS['price']."')";
+		('".$_POST['parameterselect']."','".$_POST['name']."','".$db->Insert_ID()."','".$_POST['msr_unit']."','".$_POST['median']."','".$_POST['hi_bound']."','".$_POST['lo_bound']."',
+		'".$_POST['hi_critical']."','".$_POST['lo_critical']."','".$_POST['hi_toxic']."','".$_POST['lo_toxic']."','radio','Positive','".$_POST['status']."','".addslashes($_POST['history'])."','".$_POST['modify_id']."',
+		'".$_POST['create_id']."','".$_POST['price']."')";
 
 		$id = $db->Insert_ID();
 
@@ -463,7 +463,7 @@ class Lab extends Encounter {
   							`unit_price_2` ,
   							`unit_price_3` ,
   							`purchasing_class` )
-  						VALUES ( 'LAB".$id."',0,0,0,0,1,'".$HTTP_POST_VARS['name']."','".$HTTP_POST_VARS['name']."',0,0,0,0,'labtest')";
+  						VALUES ( 'LAB".$id."',0,0,0,0,1,'".$_POST['name']."','".$_POST['name']."',0,0,0,0,'labtest')";
   				$db->Execute($sql);
   				return ($db->Insert_ID()>1) ? TRUE : FALSE;
 		} else {

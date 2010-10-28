@@ -21,7 +21,7 @@ require($root_path.'include/care_api_classes/class_prescription.php');
 */
 function prepareTestElements()
 {
-    global $HTTP_POST_VARS, $paramlist, $sday, $sample_time, $param_array;
+    global $_POST, $paramlist, $sday, $sample_time, $param_array;
 
 	/* Prepare the parameters
 	*  Check the first char of the POST_VARS. Concatenate all POST vars with
@@ -31,11 +31,11 @@ function prepareTestElements()
 	$param_array=array(); // store here alternatively all params in an assitiative array
 	$buffer=''; // Temporary buffer...
 
-	//foreach($HTTP_POST_VARS as $vvv =>$xb)
+	//foreach($_POST as $vvv =>$xb)
 	//	print $vvv.' === '.$xb.'<br>';
 
-	while(list($x,$v)=each($HTTP_POST_VARS)){
-    	if((substr($x,0,1)=='_')&&($HTTP_POST_VARS[$x]==1)){
+	while(list($x,$v)=each($_POST)){
+    	if((substr($x,0,1)=='_')&&($_POST[$x]==1)){
     		//echo $x."<br>";
     		$buffer=substr($x,5,strlen($x)+1);
     		//echo $buffer."<br>";
@@ -58,7 +58,7 @@ function prepareTestElements()
 		/* Prepare the sampling minutes */
 		for($i=15;$i<46;$i=$i+15){
 			$hmin="min_".$i;
-			if($HTTP_POST_VARS[$hmin]){
+			if($_POST[$hmin]){
 				$tmin=$i;
 				break;
 			}
@@ -66,13 +66,13 @@ function prepareTestElements()
 		if(!$tmin) $tmin=0;
 
 		/* Prepare the sampling ten hours */
-		if($HTTP_POST_VARS['hrs_20']) $th=20;
-			elseif($HTTP_POST_VARS['hrs_10']) $th=10;
+		if($_POST['hrs_20']) $th=20;
+			elseif($_POST['hrs_10']) $th=10;
 
 		/* Prepare the sampling one hours */
 		for($i=0;$i<10;$i++){
 			$h1s='hrs_'.$i;
-			if($HTTP_POST_VARS[$h1s]){
+			if($_POST[$h1s]){
 				$to=$i;
 				break;
 			}
@@ -82,7 +82,7 @@ function prepareTestElements()
 		/* Prepare the weekday */
 		for($i=0;$i<7;$i++){
 			$tday="day_".$i;
-			if($HTTP_POST_VARS[$tday]){
+			if($_POST[$tday]){
 				$sday=$i;
 				break;
 			}

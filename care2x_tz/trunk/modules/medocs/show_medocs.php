@@ -24,34 +24,34 @@ $this_type=$obj->getType($type_nr);
 if(!isset($mode)){
 	$mode='show';
 } elseif(($mode=='create'||$mode=='update')
-				&&!empty($HTTP_POST_VARS['text_diagnosis'])
-				&&!empty($HTTP_POST_VARS['text_therapy'])) {
+				&&!empty($_POST['text_diagnosis'])
+				&&!empty($_POST['text_therapy'])) {
 	# Prepare the posted data for saving in databank
 	include_once($root_path.'include/inc_date_format_functions.php');
 	# If date is empty,default to today
-	if(empty($HTTP_POST_VARS['date'])){
-		$HTTP_POST_VARS['date']=date('Y-m-d');
+	if(empty($_POST['date'])){
+		$_POST['date']=date('Y-m-d');
 	}else{
-		$HTTP_POST_VARS['date']=@formatDate2STD($HTTP_POST_VARS['date'],$date_format);
+		$_POST['date']=@formatDate2STD($_POST['date'],$date_format);
 	}
 	
 	# Prune the aux_notes  data to max 255
-		$HTTP_POST_VARS['aux_notes']=substr($HTTP_POST_VARS['aux_notes'],0,255);
+		$_POST['aux_notes']=substr($_POST['aux_notes'],0,255);
 
 	# Prepare history
-	$HTTP_POST_VARS['history']='Entry: '.date('Y-m-d H:i:s').' '.$_SESSION['sess_user_name'];
-	$HTTP_POST_VARS['time']=date('H:i:s');
-	$HTTP_POST_VARS['type_nr']=12; // 12 = text_diagnosis
-	$HTTP_POST_VARS['notes']=$HTTP_POST_VARS['text_diagnosis'];
+	$_POST['history']='Entry: '.date('Y-m-d H:i:s').' '.$_SESSION['sess_user_name'];
+	$_POST['time']=date('H:i:s');
+	$_POST['type_nr']=12; // 12 = text_diagnosis
+	$_POST['notes']=$_POST['text_diagnosis'];
 	# Prevent redirection
 	$redirect=false;
 	include('./include/save_admission_data.inc.php');
 	$insid=$db->Insert_ID();
-	$HTTP_POST_VARS['ref_notes_nr']=$obj->LastInsertPK('nr',$insid);
-	$HTTP_POST_VARS['notes']=$HTTP_POST_VARS['text_therapy'];
-	$HTTP_POST_VARS['type_nr']=13; // 13 = text_therapy
-	$HTTP_POST_VARS['short_notes']='';
-	$HTTP_POST_VARS['aux_notes']='';
+	$_POST['ref_notes_nr']=$obj->LastInsertPK('nr',$insid);
+	$_POST['notes']=$_POST['text_therapy'];
+	$_POST['type_nr']=13; // 13 = text_therapy
+	$_POST['short_notes']='';
+	$_POST['aux_notes']='';
 	$redirect=true;
 	include('./include/save_admission_data.inc.php');
 }

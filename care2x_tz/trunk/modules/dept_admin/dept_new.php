@@ -34,10 +34,10 @@ $comm=new Comm;
 
 # Validate 3 most important inputs
 if(isset($mode)&&!empty($mode)&&$mode!='select'){
-	if(empty($HTTP_POST_VARS['name_formal'])||empty($HTTP_POST_VARS['id'])||empty($HTTP_POST_VARS['type'])){
+	if(empty($_POST['name_formal'])||empty($_POST['id'])||empty($_POST['type'])){
 		$inputerror=TRUE; # Set error flag
 	}
-	//if($mode=='update'&&empty($HTTP_POST_VARS['id'])) $inputerror=TRUE;
+	//if($mode=='update'&&empty($_POST['id'])) $inputerror=TRUE;
 }
 
 if(!empty($mode)&&!$inputerror){
@@ -49,7 +49,7 @@ if(!empty($mode)&&!$inputerror){
 		if(stristr('jpg,gif,png',$picext)){
 			$is_img=true;	
 			# Forcibly convert file extension to lower case.
-			$HTTP_POST_VARS['logo_mime_type']=strtolower($picext);
+			$_POST['logo_mime_type']=strtolower($picext);
 		}
 	}
 	
@@ -57,12 +57,12 @@ if(!empty($mode)&&!$inputerror){
 	{	
 		case 'create': 
 		{
-			$HTTP_POST_VARS['history']='Create: '.date('Y-m-d H:i:s').' '.$_SESSION['sess_user_name'];
-			$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
-			$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-			$HTTP_POST_VARS['create_time']=date('YmdHis');
-			$HTTP_POST_VARS['modify_time']=date('YmdHis');
-			$dept_obj->setDataArray($HTTP_POST_VARS);
+			$_POST['history']='Create: '.date('Y-m-d H:i:s').' '.$_SESSION['sess_user_name'];
+			$_POST['create_id']=$_SESSION['sess_user_name'];
+			$_POST['modify_id']=$_SESSION['sess_user_name'];
+			$_POST['create_time']=date('YmdHis');
+			$_POST['modify_time']=date('YmdHis');
+			$dept_obj->setDataArray($_POST);
 			if($dept_obj->insertDataFromInternalArray()){
 				
 				# Get the inserted primary key as department nr.
@@ -70,15 +70,15 @@ if(!empty($mode)&&!$inputerror){
 				$dept_nr=$dept_obj->LastInsertPK('nr',$oid);
 
 				# If telephone/beeper info available, save into the phone table
-				if($HTTP_POST_VARS['inphone1']
-					||$HTTP_POST_VARS['inphone2']
-					||$HTTP_POST_VARS['inphone3']
-					||$HTTP_POST_VARS['funk1']
-					||$HTTP_POST_VARS['funk2']){
-						$HTTP_POST_VARS['dept_nr']=$dept_nr;
-						$HTTP_POST_VARS['name']=$HTTP_POST_VARS['name_formal'];
-						$HTTP_POST_VARS['vorname']=$HTTP_POST_VARS['id'];
-						$comm->setDataArray($HTTP_POST_VARS);
+				if($_POST['inphone1']
+					||$_POST['inphone2']
+					||$_POST['inphone3']
+					||$_POST['funk1']
+					||$_POST['funk2']){
+						$_POST['dept_nr']=$dept_nr;
+						$_POST['name']=$_POST['name_formal'];
+						$_POST['vorname']=$_POST['id'];
+						$comm->setDataArray($_POST);
 						if(!@$comm->insertDataFromInternalArray()) echo $comm->getLastQuery()."<br>$LDDbNosave";
 				}
 							
@@ -96,34 +96,34 @@ if(!empty($mode)&&!$inputerror){
 		}	
 		case 'update':
 		{ 
-			$HTTP_POST_VARS['history']=$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
-			$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-			$HTTP_POST_VARS['modify_time']=date('YmdHis');
+			$_POST['history']=$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n");
+			$_POST['modify_id']=$_SESSION['sess_user_name'];
+			$_POST['modify_time']=date('YmdHis');
 			$dept_obj->setTable('care_department');
-			$dept_obj->setDataArray($HTTP_POST_VARS);
+			$dept_obj->setDataArray($_POST);
 			$dept_obj->where=' nr='.$dept_nr;
 			if($dept_obj->updateDataFromInternalArray($dept_nr)){
 
 				# Update phone data
 				if($comm->DeptInfoExists($dept_nr)){
-					$HTTP_POST_VARS['name']=$HTTP_POST_VARS['name_formal'];
-					$HTTP_POST_VARS['vorname']=$HTTP_POST_VARS['id'];
-					$comm->setDataArray($HTTP_POST_VARS);
+					$_POST['name']=$_POST['name_formal'];
+					$_POST['vorname']=$_POST['id'];
+					$comm->setDataArray($_POST);
 					$comm->setWhereCondition("dept_nr=$dept_nr");
 					@$comm->updateDataFromInternalArray($dept_nr);
 				}else{
-					if($HTTP_POST_VARS['inphone1']
-						||$HTTP_POST_VARS['inphone2']
-						||$HTTP_POST_VARS['inphone3']
-						||$HTTP_POST_VARS['funk1']
-						||$HTTP_POST_VARS['funk2']){
-							$HTTP_POST_VARS['dept_nr']=$dept_nr;
-							$HTTP_POST_VARS['name']=$HTTP_POST_VARS['name_formal'];
-							$HTTP_POST_VARS['vorname']=$HTTP_POST_VARS['id'];
-							$HTTP_POST_VARS['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
-							$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
-							$HTTP_POST_VARS['create_time']=date('YmdHis');
-							$comm->setDataArray($HTTP_POST_VARS);
+					if($_POST['inphone1']
+						||$_POST['inphone2']
+						||$_POST['inphone3']
+						||$_POST['funk1']
+						||$_POST['funk2']){
+							$_POST['dept_nr']=$dept_nr;
+							$_POST['name']=$_POST['name_formal'];
+							$_POST['vorname']=$_POST['id'];
+							$_POST['history']="Create: ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+							$_POST['create_id']=$_SESSION['sess_user_name'];
+							$_POST['create_time']=date('YmdHis');
+							$comm->setDataArray($_POST);
 						if(!@$comm->insertDataFromInternalArray()) echo $comm->getLastQuery()."<br>$LDDbNoSave";
 					}
 				}

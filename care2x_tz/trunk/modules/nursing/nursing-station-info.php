@@ -52,8 +52,8 @@ $rows=0;
 		
 		case 'update':
 		{
-			$HTTP_POST_VARS['nr']=$HTTP_POST_VARS['ward_nr'];
-			if($ward_obj->updateWard($ward_nr,$HTTP_POST_VARS)){
+			$_POST['nr']=$_POST['ward_nr'];
+			if($ward_obj->updateWard($ward_nr,$_POST)){
 				header("location:nursing-station-info.php".URL_REDIRECT_APPEND."&edit=0&mode=show&ward_id=$station&ward_nr=$ward_nr");
 				exit;
 			}else{
@@ -105,7 +105,7 @@ $rows=0;
 					$ward=$wards->FetchRow();
 					# globalize ward values
 					extract($ward);
-					# Get ward´s active rooms info
+					# Get wardï¿½s active rooms info
 					$rooms=&$ward_obj->getAllActiveRoomsInfo($ward['nr']);
 				}else{
 					$rooms=$ward_obj->countCreatedRooms();

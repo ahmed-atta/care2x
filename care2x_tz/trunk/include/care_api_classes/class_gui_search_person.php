@@ -148,7 +148,7 @@ class GuiSearchPerson {
 	*/
 
 	function display($skey=''){
-		global 	$db, $searchkey, $root_path,  $firstname_too, $HTTP_POST_VARS, $HTTP_GET_VARS,
+		global 	$db, $searchkey, $root_path,  $firstname_too, $_POST, $_GET,
 				$sid, $lang, $mode,$totalcount, $pgx, $odir, $oitem, $_SESSION,
 				$dbf_nodate,  $user_origin, $parent_admit, $status, $target, $origin;
 
@@ -208,10 +208,10 @@ class GuiSearchPerson {
 		if(!defined('SHOW_FIRSTNAME_CONTROLLER')) define('SHOW_FIRSTNAME_CONTROLLER',$this->show_firstname_controller);
 
 		if(SHOW_FIRSTNAME_CONTROLLER){
-			if(isset($HTTP_POST_VARS['firstname_too'])){
-				if($HTTP_POST_VARS['firstname_too']){
+			if(isset($_POST['firstname_too'])){
+				if($_POST['firstname_too']){
 					$firstname_too=1;
-				}elseif($mode=='paginate'&&isset($HTTP_GET_VARS['firstname_too'])&&$HTTP_GET_VARS['firstname_too']){
+				}elseif($mode=='paginate'&&isset($_GET['firstname_too'])&&$_GET['firstname_too']){
 					$firstname_too=1;
 				}
 			}elseif($mode!='search'){

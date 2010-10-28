@@ -101,7 +101,7 @@ class weberp {
 
 
 			$this->user = php_xmlrpc_encode("admin");
-			$this->password = php_xmlrpc_encode("weberp");
+			$this->password = php_xmlrpc_encode("admin");
 			$this->client = new xmlrpc_client($this->ServerURL);
 			$this->client->setDebug($this->DebugLevel);
 

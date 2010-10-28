@@ -40,11 +40,11 @@ $ward_info=&$ward_obj->getAllWardsItemsArray($items);
 
 if(isset($mode)&&($mode=='save')){
 
-	$config['thispc_dept_nr']=$HTTP_POST_VARS['thispc_dept_nr'];
-	$config['thispc_ward_nr']=$HTTP_POST_VARS['thispc_ward_nr'];
-	$config['thispc_room_nr']=$HTTP_POST_VARS['thispc_room_nr'];
-	$config['thispc_phone']=$HTTP_POST_VARS['thispc_phone'];
-	$config['thispc_intercom']=$HTTP_POST_VARS['thispc_intercom'];
+	$config['thispc_dept_nr']=$_POST['thispc_dept_nr'];
+	$config['thispc_ward_nr']=$_POST['thispc_ward_nr'];
+	$config['thispc_room_nr']=$_POST['thispc_room_nr'];
+	$config['thispc_phone']=$_POST['thispc_phone'];
+	$config['thispc_intercom']=$_POST['thispc_intercom'];
 	
 	$user->saveConfig($HTTP_COOKIE_VARS['ck_config'],$config);
 	

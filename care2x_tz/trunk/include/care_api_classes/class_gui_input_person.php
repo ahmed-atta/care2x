@@ -110,9 +110,9 @@ class GuiInputPerson {
 	*/
 	function display(){
 		global $db, $sid, $lang, $root_path, $pid, $insurance_show, $user_id, $mode, $dbtype, $no_tribe,$no_region,
-						$update, $photo_filename, $HTTP_POST_VARS,  $HTTP_POST_FILES, $_SESSION;
+						$update, $photo_filename, $_POST,  $HTTP_POST_FILES, $_SESSION;
 
-		extract($HTTP_POST_VARS);
+		extract($_POST);
 		require_once($root_path.'include/care_api_classes/class_advanced_search.php');
 
 		# Load the language tables
@@ -276,15 +276,15 @@ class GuiInputPerson {
 							 religion='$religion',
 							 ethnic_orig='$ethnic_orig',
 							 date_update='".date('Y-m-d H:i:s')."',
-							 ctc_nr = '".$HTTP_POST_VARS['ctc_nr']."',
-							 hiv_nr = '".$HTTP_POST_VARS['hiv_nr']."',";
+							 ctc_nr = '".$_POST['ctc_nr']."',
+							 hiv_nr = '".$_POST['hiv_nr']."',";
 
 
 					# new features from kcmc
 					$sql.="
-							 diabetic_nr='" .$HTTP_POST_VARS['diabetic_nr']."',
-							 nhif_nr='" .$HTTP_POST_VARS['nhif_nr']."' ,
-							 insuarance_code='" .$HTTP_POST_VARS['insuarance_code']."'," ;
+							 diabetic_nr='" .$_POST['diabetic_nr']."',
+							 nhif_nr='" .$_POST['nhif_nr']."' ,
+							 insuarance_code='" .$_POST['insuarance_code']."'," ;
 
 
 					if($region !="-1" && $district!="-1" && $ward!="-1")
@@ -356,18 +356,18 @@ class GuiInputPerson {
 					}
   				} else {
 					$from='entry';
-					$HTTP_POST_VARS['date_birth']=formatDate2STD($date_birth,$date_format);
-					$HTTP_POST_VARS['date_reg']=date('Y-m-d H:i:s');
-					$HTTP_POST_VARS['blood_group']=trim($HTTP_POST_VARS['blood_group']);
-					$HTTP_POST_VARS['status']='normal';
-					$HTTP_POST_VARS['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
-					//$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-					$HTTP_POST_VARS['create_id']=$_SESSION['sess_user_name'];
-					$HTTP_POST_VARS['create_time']=date('YmdHis');
+					$_POST['date_birth']=formatDate2STD($date_birth,$date_format);
+					$_POST['date_reg']=date('Y-m-d H:i:s');
+					$_POST['blood_group']=trim($_POST['blood_group']);
+					$_POST['status']='normal';
+					$_POST['history']="Init.reg. ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+					//$_POST['modify_id']=$_SESSION['sess_user_name'];
+					$_POST['create_id']=$_SESSION['sess_user_name'];
+					$_POST['create_time']=date('YmdHis');
 
-					$r = $HTTP_POST_VARS['diabetic_nr'];
-					$r1 = $HTTP_POST_VARS['nhif_nr'];
-					$r2 = $HTTP_POST_VARS['insuarance_code'];
+					$r = $_POST['diabetic_nr'];
+					$r1 = $_POST['nhif_nr'];
+					$r2 = $_POST['insuarance_code'];
 
 					# Prepare internal data to be stored together with the user input data
 					if(!$person_obj->InitPIDExists($GLOBAL_CONFIG['person_id_nr_init'])){
@@ -376,11 +376,11 @@ class GuiInputPerson {
 						# However, the sequence generator must be configured during db creation to start at
 						# the initial value set in the global config
 						if($dbtype=='mysql'){
-							$HTTP_POST_VARS['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
+							$_POST['pid']=$GLOBAL_CONFIG['person_id_nr_init'];
 						}
 					}else{
 						# Persons are existing. Check if duplicate might exist
-						if(is_object($duperson=$person_obj->PIDbyData($HTTP_POST_VARS))){
+						if(is_object($duperson=$person_obj->PIDbyData($_POST))){
 							$error_person_exists=TRUE;
 						}
 					}

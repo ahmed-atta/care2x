@@ -31,9 +31,9 @@ $gc=new GlobalConfig($GCONFIG);
 if(isset($mode)&&($mode=='save')&&!empty($max_items)){
 	
 	for($i=1;$i<=$max_items;$i++){
-		if(empty($HTTP_POST_VARS["value$i"])) $HTTP_POST_VARS["value$i"]='0';
-		//echo $HTTP_POST_VARS["index$i"].'==>'.$HTTP_POST_VARS["value$i"].'<br>';
-		$gc->saveConfigItem($HTTP_POST_VARS["index$i"],$HTTP_POST_VARS["value$i"]);
+		if(empty($_POST["value$i"])) $_POST["value$i"]='0';
+		//echo $_POST["index$i"].'==>'.$_POST["value$i"].'<br>';
+		$gc->saveConfigItem($_POST["index$i"],$_POST["value$i"]);
 	}
 	header('location:'.$thisfile.URL_REDIRECT_APPEND.'&mode=0');
 	exit;

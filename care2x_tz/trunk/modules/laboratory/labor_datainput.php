@@ -88,16 +88,16 @@ if($mode=='save'){
 	{
 
 
-		if(isset($HTTP_POST_VARS['_task'.$x.'_'])&&!empty($HTTP_POST_VARS['_task'.$x.'_']) ){
+		if(isset($_POST['_task'.$x.'_'])&&!empty($_POST['_task'.$x.'_']) ){
 			$whichgroup = $lab_obj->TestGroupByID($x);
-		 	$nbuf[$whichgroup['parent']][$x]=$HTTP_POST_VARS['_task'.$x.'_'];
-		    $addbuf[$whichgroup['parent']][$x]=$HTTP_POST_VARS['_add'.$x.'_'];
+		 	$nbuf[$whichgroup['parent']][$x]=$_POST['_task'.$x.'_'];
+		    $addbuf[$whichgroup['parent']][$x]=$_POST['_add'.$x.'_'];
 
 		}
 		else
 		{
 
-			if(isset($HTTP_POST_VARS['_add'.$x.'_'])&& !empty($HTTP_POST_VARS['_add'.$x.'_'])){
+			if(isset($_POST['_add'.$x.'_'])&& !empty($_POST['_add'.$x.'_'])){
 				$nbuf = false;
 				$tickerror++;
 
@@ -138,7 +138,7 @@ if($mode=='save'){
 			$dbuf['modify_time']=date('YmdHis');
 
 			# Recheck the date, ! bug pat	$dbuf['modify_id']=$_SESSION['sess_user_name'];ch
-			if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
+			if($_POST['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
 
 			$lab_obj->setDataArray($dbuf);
 			# set update pointer
@@ -152,10 +152,10 @@ if($mode=='save'){
 			$lab_obj->hideResultIfExists($encounter_nr,$job_id,$parameterselect);
 			# Convert date to standard format
 			if(isset($std_date)){
-				if($HTTP_POST_VARS['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
-					else 	$dbuf['test_date']=$HTTP_POST_VARS['std_date'];
+				if($_POST['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
+					else 	$dbuf['test_date']=$_POST['std_date'];
 			}else{
-				$dbuf['test_date']=formatDate2STD($HTTP_POST_VARS['test_date'],$date_format);
+				$dbuf['test_date']=formatDate2STD($_POST['test_date'],$date_format);
 			}
 			$dbuf['test_time']=date('H:i:s');
 
@@ -332,7 +332,7 @@ function posneg(f)
 {
 	//if(d."<?php echo $adddata[$tp['id']] ?>[0].checked || d."<?php echo $adddata[$tp['id']] ?>"[1].checked)
 	//{
-	// alert(<?php echo $HTTP_POST_VARS['_add'.$x.'_'] ;?>);
+	// alert(<?php echo $_POST['_add'.$x.'_'] ;?>);
 	//return false;
 	//}
    //else return true;

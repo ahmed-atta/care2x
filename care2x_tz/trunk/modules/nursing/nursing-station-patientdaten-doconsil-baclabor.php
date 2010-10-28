@@ -12,33 +12,33 @@ require($root_path.'include/inc_environment_global.php');
 */
 function prepareTestParameters($param_type)
 {
-    global $HTTP_POST_VARS;
+    global $_POST;
 
 	$paramlist="";
 
-	while(list($x,$v)=each($HTTP_POST_VARS))
+	while(list($x,$v)=each($_POST))
 	{
-		if(substr_count($x,$param_type) && ($HTTP_POST_VARS[$x]==1))
+		if(substr_count($x,$param_type) && ($_POST[$x]==1))
 		{
 			if($paramlist=="") $paramlist=$x."=1";
 				else $paramlist.="&".$x."=1";
 		}
 	}
-    reset($HTTP_POST_VARS);
+    reset($_POST);
 	return $paramlist;
 }
 
 
 function prepareSampleDate()
 {
-    global $HTTP_POST_VARS;
+    global $_POST;
 
 
 								/* Prepare the weekday */
 								for($i=0;$i<7;$i++)
 								{
 								   $tday="day_".$i;
-								   if($HTTP_POST_VARS[$tday])
+								   if($_POST[$tday])
 								   {
 									  $sday=$i;
 									  break;
@@ -48,7 +48,7 @@ function prepareSampleDate()
 								for($i=1;$i<13;$i++)
 								{
 								   $tmon="month_".$i;
-								   if($HTTP_POST_VARS[$tmon])
+								   if($_POST[$tmon])
 								   {
 									  $smon=$i;
 									  break;

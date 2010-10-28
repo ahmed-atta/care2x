@@ -28,11 +28,11 @@ if($mode){
 			switch($mode){
 				
 				case 'update':
-									$HTTP_POST_VARS['history']=$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n");
-									$HTTP_POST_VARS['modify_id']=$_SESSION['sess_user_name'];
-									$HTTP_POST_VARS['modify_time']=date('YmdHis');
+									$_POST['history']=$dept_obj->ConcatHistory("Update: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n");
+									$_POST['modify_id']=$_SESSION['sess_user_name'];
+									$_POST['modify_time']=date('YmdHis');
 									$dept_obj->setTable('care_department');
-									$dept_obj->setDataArray($HTTP_POST_VARS);
+									$dept_obj->setDataArray($_POST);
 									$dept_obj->where=' nr='.$dept_nr;
 									if($dept_obj->updateDataFromInternalArray($dept_nr)){
 										header("location:dept_status_config.php".URL_REDIRECT_APPEND."&edit=1&updateok=1&dept_nr=$dept_nr");

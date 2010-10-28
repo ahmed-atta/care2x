@@ -77,8 +77,8 @@ function PMA_printDecodedBug($textdata)
 if (!empty($_POST) && isset($_POST['bug_encoded'])) {
     $bug_encoded = $_POST['bug_encoded'];
 }
-else if (!empty($HTTP_POST_VARS) && isset($HTTP_POST_VARS['bug_encoded'])) {
-    $bug_encoded = $HTTP_POST_VARS['bug_encoded'];
+else if (!empty($_POST) && isset($_POST['bug_encoded'])) {
+    $bug_encoded = $_POST['bug_encoded'];
 }
 
 if (!empty($bug_encoded)) {
