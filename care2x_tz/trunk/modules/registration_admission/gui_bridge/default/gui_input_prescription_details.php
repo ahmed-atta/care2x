@@ -7,6 +7,14 @@ $person_obj = new Person;
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 require_once($root_path.'include/care_api_classes/class_tz_billing.php');
 require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
+
+//* Get the global config for person's registration form*/
+include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+$glob_obj->getConfig('patient_%');
+
+extract($GLOBAL_CONFIG);
+
 $bill = new Bill();
 
 if (empty($encounter_nr) and !empty($pid))
@@ -88,9 +96,7 @@ onSubmit="return chkform(this)">
 <input type="hidden" name="backpath" value="<?php echo $backpath; ?>">
 <?PHP
 
-
-
-if(!$nr)
+if(!isset($nr))
 {
 	$item_array=$_SESSION['item_array'];
 }
@@ -104,7 +110,7 @@ else
 //echo "-->items in array: ".count($item_array)."<br>";#
 for ($i=0 ; $i<count($item_array) ; $i++) {
 $class = $pres_obj->GetClassOfItem($item_array[$i]);
-if($nexttime)
+if(isset($nexttime))
 {
 	$prescriptionitem['dosage']="";
 	$nexttime=false;
@@ -292,16 +298,16 @@ else
 			echo '<input type="hidden" id="dosage" name="arr_dosage['.$i.']" value="1">';
 		 }
 
+		  if (!isset($prescriptionitem['notes'])) $prescriptionitem['notes']=NULL;
 		 if (isset($nr)&&($prescrServ!='serv')) echo '('.$prescriptionitem['dosage'].')&nbsp;&nbsp;&nbsp;'
-
+		 
+		
      ?>
 
 	 </td>
    </tr>
    <tr bgcolor="#f6f6f6">
-     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDApplication.' '.$LDNotes; ?></td>
-     <!--<td><textarea name="arr_notes[<?PHP echo $i; ?>]" cols=40 rows=3 wrap="physical"><?php echo $prescriptionitem['notes'];?></textarea>
-         </td>-->
+     <td><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDNotes; ?></td>
 		 <td><input type="text" name="arr_notes[<?PHP echo $i; ?>]" size="120"><?php echo $prescriptionitem['notes'];?>
          </td>
    </tr>
@@ -323,7 +329,7 @@ else
 <input type="hidden" name="encounter_nr" value="<?php echo $_SESSION['sess_en']; ?>">
 <input type="hidden" name="pid" value="<?php echo $_SESSION['sess_pid']; ?>">
 <?php
-if(!$nr)
+if(!isset($nr))
 	echo '<input type="hidden" name="mode" value="create">';
 else
 	echo '<input type="hidden" name="mode" value="update">';

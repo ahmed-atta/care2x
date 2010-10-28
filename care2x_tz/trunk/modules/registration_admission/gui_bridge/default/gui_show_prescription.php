@@ -7,14 +7,24 @@
 
 <?php
 $toggle=0;
+		
+if (!isset($GLOBAL_CONFIG['patient_outpatient_nr_adder']) || !isset($GLOBAL_CONFIG['patient_inpatient_nr_adder'])) {
+	//* Get the global config for person's registration form*/
+	include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+	$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
+	$glob_obj->getConfig('patient_%');
+	extract($GLOBAL_CONFIG);
+}
 
 while($row=$result->FetchRow()){
 	if($toggle) $bgc='#f3f3f3';
 		else $bgc='#fefefe';
 	$toggle=!$toggle;
 
-	if($row['encounter_class_nr']==1) $full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']; // inpatient admission
-		else $full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']; // outpatient admission
+	if($row['encounter_class_nr']==1) 
+		$full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_inpatient_nr_adder']; // inpatient admission
+	else 
+		$full_en=$row['encounter_nr']+$GLOBAL_CONFIG['patient_outpatient_nr_adder']; // outpatient admission
 	$amount = 0;
 	$notbilledyet=false;
 	if($row['bill_number']>0)
@@ -81,13 +91,14 @@ while($row=$result->FetchRow()){
   	?>
     </td>
     <td><FONT SIZE=-1  FACE="Arial"><?php
-    if($row['is_disabled'] || $row['bill_number']>0)
-  	{
+    if($row['is_disabled'] || $row['bill_number']>0) {
   		echo '<font color="#D4D4D4">edit</font>';
   	}
-  	else
-    echo '<a href="'.$thisfile.URL_APPEND.'&mode=edit&nr='.$row['nr'].'&show=insert&backpath='.urlencode($backpath).'&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">'.$LDEdit.'</a>'
-
+  	else {
+  		if (!isset($disablebuttons))
+  			$disablebuttons = FALSE;
+    	echo '<a href="'.$thisfile.URL_APPEND.'&mode=edit&nr='.$row['nr'].'&show=insert&backpath='.urlencode($backpath).'&externalcall='.$externalcall.'&disablebuttons='.$disablebuttons.'">'.$LDEdit.'</a>';
+	}
     ?>
     </td><td><FONT SIZE=-1  FACE="Arial"><?php echo $row['order_nr']; ?></td>
   </tr>

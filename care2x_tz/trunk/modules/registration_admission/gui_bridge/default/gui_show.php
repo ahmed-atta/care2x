@@ -16,6 +16,11 @@ elseif($back_path) {
 	$backpath=$back_path; // Just an ugly workaround! Sometimes back_path instead of backpath is used!
 	$breakfile = urldecode($backpath);
 }
+
+if (!isset($mode)) $mode=NULL;
+if (!isset($show)) $show=NULL;
+
+
 $debug=FALSE;
 if ($debug) {
 	echo "file: gui_show.php<br>";
@@ -54,14 +59,14 @@ if($parent_admit) $sTitleNr= ($_SESSION['sess_full_en']);
  else
   $smarty->assign('sToolbarTitle',"$page_title ($sTitleNr)");
 
- if ($disablebuttons) $smarty->assign('disableButton',true);
+ if (isset($disablebuttons)) $smarty->assign('disableButton',true);
 
  # href for help button
 
  if ($breakfile=="billing") {
  	$help_site="billing";
  }
-
+ if (!isset($help_site)) $help_site = NULL;
  if (!isset($printout))
  	if($mode=='new')
  		if($show=='insert')
@@ -179,23 +184,6 @@ if($death_date && $death_date != DBF_NODATE){
 		$iRowSpan = 7;
 	}
 
-	if($GLOBAL_CONFIG['patient_name_2_show']&&$name_2){
-		$smarty->assign('LDName2',$LDName2);
-		$smarty->assign('name_2',$name_2);
-		$iRowSpan++;
-	}
-
-	if($GLOBAL_CONFIG['patient_name_3_show']&&$name_3){
-		$smarty->assign('LDName3',$LDName3);
-		$smarty->assign('name_3',$name_3);
-		$iRowSpan++;
-	}
-
-	if($GLOBAL_CONFIG['patient_name_middle_show']&&$name_middle){
-		$smarty->assign('LDNameMid',$LDNameMid);
-		$smarty->assign('name_middle',$name_middle);
-		$iRowSpan++;
-	}
 
 $smarty->assign('sRowSpan',"rowspan=\"$iRowSpan\"");
 

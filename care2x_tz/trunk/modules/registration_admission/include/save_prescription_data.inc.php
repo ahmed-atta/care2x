@@ -3,7 +3,6 @@
 if (stristr($_SERVER['SCRIPT_NAME'],'save_admission_data.inc.php'))
 	die('<meta http-equiv="refresh" content="0; url=../">');
 
-
 $debug=false;
 ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 if ($debug) {
@@ -26,7 +25,7 @@ if ($debug) {
 
     echo "encounter_nr:".$encounter_nr;
 }
-$i=0;
+$i=0; 
 if($mode=='delete') $arr_item_number[0] = $nr;
 foreach ($arr_item_number AS $item_number) {
 
@@ -118,14 +117,16 @@ foreach ($arr_item_number AS $item_number) {
   								break;
   }// end of switch
 } // end of foreach
+if (!isset($type_nr)) $type_nr=0;
 
+echo "location:".$thisfile.URL_REDIRECT_APPEND."&target=".$target."&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&backpath=".urlencode($backpath)."&pid=".$_SESSION['sess_pid'];
 if (isset($externalcall)){
-	if ($backpath=='billing' || $backpath=='billing')
+	if ($backpath=='billing')
   		header("location: $root_path/modules/billing_tz/billing_tz_quotation.php");
   	else
-  		header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&backpath=".urlencode($backpath)."&pid=".$_SESSION['sess_pid']);
+  		header("location:".$thisfile.URL_REDIRECT_APPEND."&type_nr=$type_nr&allow_update=1&externalcall=".$externalcall."&backpath=".urlencode($backpath)."&pid=".$_SESSION['sess_pid']);
 } else
-  header("location:".$thisfile.URL_REDIRECT_APPEND."&target=$target&type_nr=$type_nr&allow_update=1&backpath=".urlencode($backpath)."&pid=".$_SESSION['sess_pid']);
+  header("location:".$thisfile.URL_REDIRECT_APPEND."&type_nr=$type_nr&allow_update=1&backpath=".urlencode($backpath)."&pid=".$_SESSION['sess_pid']);
 
 exit();
 ?>
