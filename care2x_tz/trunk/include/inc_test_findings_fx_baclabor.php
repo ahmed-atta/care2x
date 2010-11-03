@@ -9,7 +9,7 @@
 */
 function processFindings(&$indx,$offset=0)
 {
-   global $_POST ;
+#   global $HTTP_POST_VARS ;
    
    $ret_str=''; 
     

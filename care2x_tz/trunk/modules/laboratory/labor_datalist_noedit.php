@@ -1,27 +1,87 @@
 <?php
 
-define('LAB_MAX_DAY_DISPLAY',7); # define the max number or days displayed at one time
-
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
+///$db->debug = true;
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
 */
+//gjergji :
+//data diff for the dob
+function dateDiff($dformat, $endDate, $beginDate){
+	$date_parts1=explode($dformat, $beginDate);
+	$date_parts2=explode($dformat, $endDate);
+	$start_date=gregoriantojd($date_parts1[1], $date_parts1[2], $date_parts1[0]);
+	$end_date=gregoriantojd($date_parts2[1], $date_parts2[2], $date_parts2[0]);
+	return $end_date - $start_date;
+}
+//gjergji :
+//utility function to print out the arrows depending on age / sex
+function checkParamValue($paramValue,$pName) {
+	global $root_path,$patient;
+	$txt = '';
+	$dobDiff = dateDiff("-", date("Y-m-d"), $patient['date_birth']);
+	switch ($dobDiff) {
+	case ( ($dobDiff >= 1) and ($dobDiff <= 30 ) ) :
+			if($pName->fields['hi_bound_n']&&$paramValue>$pName->fields['hi_bound_n']){
+				$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($paramValue).'</font>';
+			}elseif($paramValue<$pName->fields['lo_bound_n']){
+				$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($paramValue).'</font>';
+			}else{
+				$txt.=htmlspecialchars($paramValue);
+			}
+			break;
+	case ( ($dobDiff >= 31) and ($dobDiff <= 360 ) ) :
+			if($pName->fields['hi_bound_y']&&$paramValue>$pName->fields['hi_bound_y']){
+				$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($paramValue).'</font>';
+			}elseif($paramValue<$pName->fields['lo_bound_y']){
+				$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($paramValue).'</font>';
+			}else{
+				$txt.=htmlspecialchars($paramValue);
+			}
+			break;
+	case ( $dobDiff >= 361) and ($dobDiff <= 5040 ) :
+			if($pName->fields['hi_bound_c']&&$paramValue>$pName->fields['hi_bound_c']){
+				$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($paramValue).'</font>';
+			}elseif($paramValue<$pName->fields['lo_bound_c']){
+				$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($paramValue).'</font>';
+			}else{
+				$txt.=htmlspecialchars($paramValue);
+			}
+			break;
+	case $dobDiff > 5040 :
+		if($patient['sex']=='m')
+			if($pName->fields['hi_bound']&&$paramValue>$pName->fields['hi_bound']){
+				$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($paramValue).'</font>';
+			}elseif($paramValue<$pName->fields['lo_bound']){
+				$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($paramValue).'</font>';
+			}else{
+				$txt.=htmlspecialchars($paramValue);
+			}
+		elseif($patient['sex']=='f')
+			if($pName->fields['hi_bound_f']&&$paramValue>$pName->fields['hi_bound_f']){
+				$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($paramValue).'</font>';
+			}elseif($paramValue<$pName->fields['lo_bound_f']){
+				$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($paramValue).'</font>';
+			}else{
+				$txt.=htmlspecialchars($paramValue);
+			}
+			break;
+	}
+	return $txt;
+}
 
-
-$lang_tables=array('chemlab_groups.php','chemlab_params.php','prompt.php');
 define('LANG_FILE','lab.php');
 define('NO_2LEVEL_CHK',1);
-
-
 require_once($root_path.'include/inc_front_chain_lang.php');
 if(!isset($user_origin)) $user_origin='';
+
 if($user_origin=='lab'||$user_origin=='lab_mgmt'){
   	$local_user='ck_lab_user';
   	if(isset($from)&&$from=='input') $breakfile=$root_path.'modules/laboratory/labor_datainput.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&user_origin='.$user_origin;
@@ -31,64 +91,63 @@ if($user_origin=='lab'||$user_origin=='lab_mgmt'){
   	$breakfile=$root_path.'modules/nursing/nursing-station-patientdaten.php'.URL_APPEND.'&pn='.$pn.'&edit='.$edit;
 	$encounter_nr=$pn;
 }
-if(!$HTTP_COOKIE_VARS[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
+if(!$_COOKIE[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;};
 
 if(!$encounter_nr) header("location:".$root_path."modules/laboratory/labor_data_patient_such.php?sid=$sid&lang=$lang");
 
 $thisfile=basename(__FILE__);
 
-//$db->debug=1;
-
+///$db->debug=1;
 
 /* Create encounter object */
 require_once($root_path.'include/care_api_classes/class_lab.php');
 $enc_obj= new Encounter($encounter_nr);
 $lab_obj=new Lab($encounter_nr);
 
-$jobs = $lab_obj->GetJobsByEncounter($encounter_nr);
-$count_job = 0;
-$count_subjob=1;
-if ($jobs)
-  while($j=$jobs->FetchRow()){
-  		if($last_job != $j['job_id'])
-  			{
-  				$count_job++;
-  			}
-  		$arr_tasks = unserialize($j['serial_value']);
-  		while(list($x,$v) = each($arr_tasks))
-  		{
-
-  			$parameters[$count_job]['tasks'][$x] = $v;
-  			$taskstodo[$x] = $v;
-  			if($x>$old_x) $old_x=$x;
-
-  		}
-  		$parameters[$count_job]['jobs'] = $j;
-  		$last_job = $j['job_id'];
-  }
-$patient = $lab_obj->GetUserDataByEncounter($encounter_nr);
-if($debug)
-{
-	for($i=1;$i<=$count_job;$i++)
-	{
-			for($k=0;$k<=$old_x;$k++)
-			{
-				if($parameters[$i]['jobs'][$k])	echo 'parameters['.$i.'][\'jobs\']['.$k.'] = '.$parameters[$i]['jobs'][$k].'<br>';
-				if($parameters[$i]['tasks'][$k])	echo 'parameters['.$i.'][\'tasks\']['.$k.'] = '.$parameters[$i]['tasks'][$k].'<br>';
-			}
-
-	}
-}
 $cache='';
 
 if($nostat) $ret=$root_path."modules/laboratory/labor_data_patient_such.php?sid=$sid&lang=$lang&versand=1&keyword=$encounter_nr";
 	else $ret=$root_path."modules/nursing/nursing-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$encounter_nr";
 
-
 # Load the date formatter */
 require_once($root_path.'include/inc_date_format_functions.php');
 
+$enc_obj->setWhereCondition("encounter_nr='$encounter_nr'");
 
+if($encounter=&$enc_obj->getBasic4Data($encounter_nr)) {
+
+	$patient=$encounter->FetchRow();
+
+	$recs=&$lab_obj->getAllResults($encounter_nr);
+
+	if ($rows=$lab_obj->LastRecordCount()){
+
+		# Check if the lab result was recently modified
+		$modtime=$lab_obj->getLastModifyTime();
+
+		$lab_obj->getDBCache('chemlabs_result_'.$encounter_nr.'_'.$modtime,$cache);
+		# If cache not available, get the lab results and param items
+		if(empty($cache)){
+			echo "++++++++++++++++";
+			$records=array();
+			$dt=array();
+			while($buffer=&$recs->FetchRow()){
+				# Prepare the values
+				$tmp = array($buffer['paramater_name'] => $buffer['parameter_value']);
+				$records[$buffer['job_id']][] = $tmp;
+				$tdate[$buffer['job_id']]=&$buffer['test_date'];
+				$ttime[$buffer['job_id']]=&$buffer['test_time'];
+			}
+		}
+	}else{
+		if($nostat) header("location:".$root_path."modules/laboratory/labor-nodatafound.php".URL_REDIRECT_APPEND."&user_origin=$user_origin&ln=".strtr($patient['name_last'],' ','+')."&fn=".strtr($patient['name_first'],' ','+')."&bd=".formatDate2Local($patient['date_birth'],$date_format)."&encounter_nr=$encounter_nr&nodoc=labor&job_id=$job_id&parameterselect=$parameterselect&allow_update=$allow_update&from=$from");
+		 	else header("location:".$root_path."modules/nursing/nursing-station-patientdaten-nolabreport.php?sid=$sid&lang=$lang&edit=$edit&station=$station&pn=$encounter_nr&nodoc=labor&user_origin=$user_origin");
+			exit;
+	}
+
+}else{
+	echo "<p>".$lab_obj->getLastQuery()."sql$LDDbNoRead";exit;
+}
 
 # Start Smarty templating here
  /**
@@ -104,7 +163,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
  $smarty->assign('sToolbarTitle',"$LDLabReport $station");
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('patientcharts_lab_report.php','Laboratories :: Lab report','','','$LDLabReport')");
+ $smarty->assign('pbHelp',"javascript:gethelp('lab_list.php','','','','$LDLabReport')");
 
  # hide return  button
  $smarty->assign('pbBack',FALSE);
@@ -134,19 +193,21 @@ function selectall(){
 
 	d=document.labdata;
 	var t=d.ptk.value;
-
-	if(t==1){
-		if(toggle==true){ d.tk.checked=true;}
+	if(t == 1){
+		if(toggle==true){
+			d.tk.checked=true;
+		}
 	}else{
-		for(i=0;i<t;i++){
-			if(toggle==true){d.tk[i].checked=true; }
+		for(i = 0; i<t; i++){
+			if(toggle==true && d.tk[i]){
+				d.tk[i].checked=true;
+			}
 		}
 	}
 	if(toggle==false){
 		d.reset();
 	}
 	toggle=(!toggle);
-
 }
 
 function prep2submit(){
@@ -154,21 +215,18 @@ function prep2submit(){
 	var j=false;
 	var t=d.ptk.value;
 	var n=false;
-	for(i=0;i<t;i++)
-	{
+	for(i=0; i<t; i++) {
 		if(t==1) {
 			n=d.tk;
 			v=d.tk.value;
-		}else{
+		}else if( d.tk[i]){
 			n=d.tk[i];
 			v=d.tk[i].value;
 		}
-
-		if(n.checked==true){
-
+		if(n.checked==true && d.tk[i]){
 			if(j){
 				d.params.value=d.params.value +"~"+v;
-			}else{
+			}else if( d.tk[i]){
 				d.params.value=v;
 				j=1;
 			}
@@ -177,8 +235,40 @@ function prep2submit(){
 	if(d.params.value!=''){
 		d.submit();
 	}else{
-		alert("<?php echo $LDCheckParamFirst ?>");
+		alert('<?php echo $LDCheckParamFirst ?>');
 	}
+}
+
+function remove(s, t) {
+  /*
+  **  Remove all occurrences of a token in a string
+  **    s  string to be processed
+  **    t  token to be removed
+  **  returns new string
+  */
+  i = s.indexOf(t);
+  r = "";
+  if (i == -1) return s;
+  r += s.substring(0,i) + remove(s.substring(i + t.length), t);
+  return r;
+}
+
+var skipme = '';
+function wichOne(nr) {
+
+	if( document.getElementById(nr).checked == true ) {
+		if( skipme == '' ) skipme = nr;
+		else skipme += "-"+nr;
+	} else if ( document.getElementById(nr).checked == false )
+		skipme = remove(skipme,nr);
+}
+
+
+function openReport() {
+	enc = <?php echo $encounter_nr ?>;
+	userId = '<?php echo $_SESSION['sess_user_name']; ?>';
+	urlholder="<?php echo $root_path ?>modules/pdfmaker/laboratory/report_all.php<?php echo URL_REDIRECT_APPEND; ?>&encounter_nr="+enc+"&skipme="+skipme+"&userId="+userId;
+	window.open(urlholder,'<?php echo $LDOpenReport; ?>',"width=700,height=500,menubar=no,resizable=yes,scrollbars=yes");
 }
 //  Script End -->
 </script>
@@ -204,6 +294,7 @@ $smarty->assign('sBday',formatDate2Local($patient['date_birth'],$date_format));
 
 # Assign link  to generate graphic display of results
 $smarty->assign('sMakeGraphButton', '<img '.createComIcon($root_path,'chart.gif','0','absmiddle').'> '.$LDClk2Graph);
+$smarty->assign('sOpenReport', '<img '.createComIcon($root_path,'printer.gif','0','absmiddle').'> '.$LDOpenReport);
 
 # Buffer page output
 
@@ -217,7 +308,6 @@ if(empty($cache)){
 
 	# Get the number of colums
 	$cols=sizeof($records);
-
 	$cache= '
 		<tr bgcolor="#dd0000" >
 		<td class="va12_n"><font color="#ffffff"> &nbsp;<b>'.$LDParameter.'</b>
@@ -225,9 +315,9 @@ if(empty($cache)){
 		<td  class="j"><font color="#ffffff">&nbsp;<b>'.$LDNormalValue.'</b>&nbsp;</td>
 		<td  class="j"><font color="#ffffff">&nbsp;<b>'.$LDMsrUnit.'</b>&nbsp;</td>
 		';
-	for($i=1;$i<=$count_job;$i++){
+	while(list($x,$v)=each($tdate)){
 		$cache.= '
-		<td class="a12_b"><font color="#ffffff">&nbsp;<b>'.formatDate2Local($parameters[$i]['jobs'][2],$date_format).'<br>'.$parameters[$i]['jobs'][0].'</b>&nbsp;</td>';
+		<td class="a12_b"><font color="#ffffff">&nbsp;<b>'.formatDate2Local($v,$date_format).'<br>'.$x.'</b>&nbsp;<br><input type="checkbox" name="skipme[]" value="'.$x.'" id="'.$x.'" onclick="wichOne(this.id);"></td>';
 	}
 
 	$cache.= '
@@ -240,93 +330,77 @@ if(empty($cache)){
 		<td  class="j"><font color="#ffffff">&nbsp;</td>';
 
 
-	for($i=1;$i<=$count_job;$i++){
+	while(list($x,$v)=each($ttime)){
 		$cache.= '
-		<td class="a12_b"><font color="#0000cc">&nbsp;<b>'.convertTimeToLocal($parameters[$i]['jobs'][3]).'</b> '.$LDOClock.'&nbsp;</td>';
+		<td class="a12_b"><font color="#0000cc">&nbsp;<b>'.convertTimeToLocal($v).'</b> '.$LDOClock.'&nbsp;</td>';
 	}
 
-	# Reset array
-	reset($ttime);
 
 	$cache.= '
 		<td>&nbsp;<a href="javascript:selectall()"><img '.createComIcon($root_path,'dwnarrowgrnlrg.gif','0','absmiddle',TRUE).' alt="'.$LDClk2SelectAll.'"></a>
 		</tr>';
-
-	# Display the values
-
-	$tasks=&$lab_obj->TestParams();
-	while($t=$tasks->FetchRow())
-	{
-		$arr_task = $lab_obj->TestParamsDetails($t['id']);
-		$first=true;
-		$imgprep="";
-		if($taskstodo[$t['id']])
-		{
-			for($i=1;$i<=$count_job;$i++)
-			{
-				if(!$first) { $imgprep .= '~'; }
-				$imgprep .= $parameters[$i]['tasks'][$t['id']];
-
-				if($first)
-				{
-
-					$txt.= '<tr class="wardlistrow2">
-					<td class="j">'.$arr_task['name'].'</td><td class="j">';
-					if($arr_task['lo_bound'] && $arr_task['hi_bound'])
-					{
-						$txt.=$arr_task['lo_bound'].' - '.$arr_task['hi_bound'];
+//gjergji
+//looks much better like this :)
+//order the values
+$requestData=array();
+reset($records);
+$jIDArray = array();
+while (list($job_id,$paramgroupvalue)=each($records)) {
+		$jIDArray[] = $job_id;
+		foreach($paramgroupvalue as $paramgroup_a => $paramvalue_a) {
+			foreach($paramvalue_a as $paramgroup => $paramvalue) {
+				$ext = substr(stristr($paramgroup, '__'), 2);
+				$requestData[$ext][$paramgroup][$job_id] = $paramvalue;
 					}
-					$txt.='</td><td class="j">'.$arr_task['msr_unit'].'</td>';
-					$first=false;
 				}
-				$txt.= '
-				<td class="j">&nbsp;';
-
-					if($arr_task['hi_bound']&&$parameters[$i]['tasks'][$t['id']]>$arr_task['hi_bound'])
-					{
-						$txt.='<img '.createComIcon($root_path,'arrow_red_up_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($parameters[$i]['tasks'][$t['id']]).'</font>';
-					}
-					elseif($parameters[$i]['tasks'][$t['id']]<$arr_task['lo_bound'])
-					{
-						$txt.='<img '.createComIcon($root_path,'arrow_red_dwn_sm.gif','0','',TRUE).'> <font color="red">'.htmlspecialchars($parameters[$i]['tasks'][$t['id']]).'</font>';
-					}
-					else
-					{
-						$txt.=htmlspecialchars($parameters[$i]['tasks'][$t['id']]);
-					}
-					$flag=true;
-
-				$txt.='&nbsp;</td>';
-
-
-
-			}
-	$txt.='<td>
-				<input type="checkbox" name="tk" value="'.$t['id'].'">
-				<input type="hidden" name="imgprep_'.$t['id'].'" value="'.$imgprep.'">
-				</td></tr>';
-				$ptrack++;
-				$toggle=!$toggle;
-			}
-			$tracker++;
-
-
 }
-echo 				$cache.=$txt;
 
+//display the values
+$class='wardlistrow1';
+$columns=0;
+$ptrack=0;
+while (list($groupId,$paramEnc)=each($requestData)) {
+	$gName = $lab_obj->getGroupName($groupId) ;
+	$cache .= "<tr><td  class=\"va12_n\" colspan=\"".($cols + 4)."\"><b>" .$gName->fields['name'] . "</b></td></tr>";
+	while (list($paramId,$encounterNr)=each($paramEnc)) {
+		$pName = $lab_obj->TestParamsDetails($paramId);
+		$cache .=  "<tr>";
+		$cache .=  "<td class=\"" . $class ."\">" . $pName->fields['name'] . "</td>";
+		$cache .=  "<td class=\"" . $class ."\">" . $pName->fields['median'] . "</td>";
+		$cache .=  "<td class=\"" . $class ."\">" . $pName->fields['msr_unit'] . "</td>";
+		for($i=0;$i<count($jIDArray);$i++) {			
+			if(array_key_exists($jIDArray[$i],$encounterNr)) {	
+				$cache .= "<td align=\"right\" class=\"" . $class ."\">";
+				$cache .= checkParamValue($encounterNr[$jIDArray[$i]],$pName);
+				$cache .= "</td>";
+				$ptrack++;
+				$columns++;
+			} else {
+				$cache .= "<td align=\"right\" class=\"" . $class ."\">&nbsp;</td>";
+				$ptrack++;
+				$columns++;
+			}
 		}
-
-
-	echo '
+		$cache .= "<td align=\"right\" colspan=\"". ($cols-$columns+1) ."\" class=\"" . $class ."\"><input type=\"checkbox\" name=tk value=\"" . $pName->fields['id'] . "\"></td></tr>";
+		$class=='wardlistrow1' ? $class='wardlistrow2' : $class='wardlistrow1';	
+		$columns=0;	
+	}
+}
+//end:gjergji
+$cache.='
 		<input type="hidden" name="colsize" value="'.$cols.'">
 		<input type="hidden" name="params" value="">
 		<input type="hidden" name="ptk" value="'.$ptrack.'">
 		';
-
+# Delete old cache data first
+$lab_obj->deleteDBCache('chemlabs_result_'.$encounter_nr.'_%');
+# Save new cache data
+$lab_obj->saveDBCache('chemlabs_result_'.$encounter_nr.'_'.$modtime,$cache);
+}
 
 # Show the lab results table from the cache
 
-
+echo $cache;
 
 echo '</table>';
 

@@ -47,7 +47,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
  require_once($root_path.'gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('nursing');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $db_request_table=$target;
 
@@ -106,7 +106,7 @@ if(isset($pn)&&$pn) {
 							   $read_form=1;
 							   $printmode=1;
 							}
-			             }
+						}
 						else
 					     {
 						     echo "<p>$sql<p>$LDDbNoRead"; 

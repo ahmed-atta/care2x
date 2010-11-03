@@ -50,7 +50,7 @@ require($root_path.'include/inc_2level_reset.php');
 <script language="JavaScript">
 function open_request()
 {
- 	urlholder=("\labor_test_request_pass.php?sid=$sid&lang=$lang&target=admin&subtarget=chemlabor&user_origin=lab\"");
+ 	urlholder=("\labor_test_request_pass.php?sid=<?php echo $sid."&lang=".$lang;?>&target=admin&subtarget=chemlabor&user_origin=lab\"");
 	requestwin=window.open(urlholder,"requestwin_2","menubar=no,resizable=yes,scrollbars=yes,status=yes");
 	requestwin.moveTo(0,0);
 	requestwin_2.resizeTo(screen.availWidth,screen.availHeight);
@@ -109,6 +109,8 @@ function open_request()
 
   $smarty->assign('LDTestParameters',"<a href=\"labor_test_param_edit_pass.php?sid=$sid&lang=$lang&user_origin=lab\">$LDTestParameters</a>");
   $smarty->assign('LDTestParametersTxt',$LDTestParametersTxt);
+  $smarty->assign('LDTestGroups',"<a href=\"labor_test_group_edit_pass.php?sid=$sid&lang=$lang&user_origin=lab\">$LDTestGroups</a>");
+  $smarty->assign('LDTestGroupsTxt',$LDTestGroupsTxt);
 
 # Assign the submenu to the mainframe center block
 

@@ -31,9 +31,9 @@ if(!$searchform_count)
 			           name="searchform<?php if($searchform_count) echo "_".$searchform_count; ?>" 
 					   onSubmit="return chkSearch(this)">&nbsp;<br>
 					   
-	         <FONT    SIZE=2  FACE="Arial"><?php echo $LDSearchPatient ?>:<br>
+	         <font    SIZE=2  FACE="Arial"><?php echo $LDSearchPatient ?>:<br>
 			 
-	         <input type="text" name="searchkey" size=40 maxlength=40><p>
+	         <input type="text" name="searchkey" size=40 maxlength=40>
              <input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?>>
              <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 	         <input type="hidden" name="lang" value="<?php echo $lang; ?>">
@@ -42,7 +42,7 @@ if(!$searchform_count)
 	         <input type="hidden" name="user_origin" value="<?php echo $user_origin; ?>">
 	         <input type="hidden" name="mode" value="search">
 			 
-	         </form>
+	         </font></form>
 			
 			</td>
             </tr>

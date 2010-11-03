@@ -11,11 +11,11 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 
-/* Start initializations */
+/* Start initializations */ 
 $lang_tables[]='departments.php';
 define('LANG_FILE','konsil.php');
 
-/* We need to differentiate from where the user is coming:
+/* We need to differentiate from where the user is coming: 
 *  $user_origin != lab ;  from patient charts folder
 *  $user_origin == lab ;  from the laboratory
 *  and set the user cookie name and break or return filename
@@ -51,7 +51,7 @@ $db_request_table='radio';
 
 /* Here begins the real work */
 require_once($root_path.'include/inc_date_format_functions.php');
-
+  
 
 if(!isset($mode))   $mode='';
 
@@ -91,8 +91,10 @@ switch($mode){
 
 /* Get the pending test requests */
 if(!$mode) {
-	$sql="SELECT batch_nr,encounter_nr,send_date,dept_nr FROM care_test_request_".$db_request_table."
-				WHERE status='pending' OR status='received' ORDER BY  send_date DESC";
+	$sql="SELECT care_encounter.pid as selian_pid,name_first,name_last, batch_nr,care_encounter.encounter_nr,send_date,dept_nr FROM care_test_request_".$db_request_table."
+				LEFT JOIN care_encounter ON care_test_request_".$db_request_table.".encounter_nr=care_encounter.encounter_nr
+				LEFT JOIN care_person on care_encounter.pid=care_person.pid
+	WHERE care_test_request_".$db_request_table.".status='pending' OR care_test_request_".$db_request_table.".status='received' ORDER BY  send_date ASC";
 	if($requests=$db->Execute($sql)){
 		$batchrows=$requests->RecordCount();
 	 	if($batchrows && (!isset($batch_nr) || !$batch_nr)){
@@ -194,11 +196,11 @@ div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
 </style>
 
 <script language="javascript">
-<!--
+<!-- 
 
 function chkForm(d)
-{
-	if(d.results.value=="" || d.results.value==" ")
+{ 
+	if(d.results.value=="" || d.results.value==" ") 
 	{
 	  return false;
 	}
@@ -214,7 +216,7 @@ function chkForm(d)
 		 d.results_doctor.focus();
 		   return false;
 		}
-		else return true;
+		else return true; 
 }
 
 function printOut()
@@ -249,7 +251,7 @@ if($batchrows){
 <table border=0>
   <tr valign="top">
     <td>
-<?php
+<?php 
 
 /* The following routine creates the list of pending requests */
 require($root_path.'include/inc_test_request_lister_fx.php');
@@ -259,7 +261,7 @@ require($root_path.'include/inc_test_request_lister_fx.php');
     <td>
 
 	<form name="form_test_request" method="post" action="<?php echo $thisfile ?>" onSubmit="return chkForm(this)">
-		<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  title="<?php echo $LDSaveEntry ?>">
+		<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  title="<?php echo $LDSaveEntry ?>"> 
 		<a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0') ?> alt="<?php echo $LDPrintOut ?>"></a>
         <a href="<?php echo 'labor_test_findings_'.$subtarget.'.php?sid='.$sid.'&lang='.$lang.'&batch_nr='.$batch_nr.'&pn='.$pn.'&entry_date='.$stored_request['xray_date'].'&target='.$target.'&subtarget='.$subtarget.'&user_origin='.$user_origin.'&tracker='.$tracker; ?>"><img <?php echo createLDImgSrc($root_path,'enter_result.gif','0') ?> alt="<?php echo $LDEnterResult ?>"></a>
 
@@ -267,11 +269,11 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 <table border=0 bgcolor="#000000" cellpadding=1 cellspacing=0>
   <tr>
     <td>
-
+	
 	<table border=0 bgcolor="#ffffff" cellpadding=0 cellspacing=0>
    <tr>
      <td>
-
+	
 	   <table   cellpadding=0 cellspacing=1 border=0 width=700>
    <tr  valign="top">
    <td  bgcolor="<?php echo $bgc1 ?>" rowspan=2>
@@ -286,17 +288,17 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 		 </td>
 		 </tr>
 	 <tr>
-      <td bgcolor="<?php echo $bgc1 ?>" align="right" valign="bottom">
+      <td bgcolor="<?php echo $bgc1 ?>" align="right" valign="bottom">	 
 	  <?php
 		    echo '<font size=1 color="#990000" face="verdana,arial">'.$batch_nr.'</font>&nbsp;&nbsp;<br>';
 			  echo "<img src='".$root_path."classes/barcode/image.php?code=".$batch_nr."&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
      ?>
 	     </td>
 		 </tr>
-
+		 	
 		<tr bgcolor="<?php echo $bgc1 ?>">
 		<td  valign="top" colspan=2 >
-
+		
 		<table border=0 cellpadding=1 cellspacing=1 width=100%>
     <tr>
       <td align="right"><div class=fva2_ml10><?php echo $LDXrayTest ?></td><br>
@@ -316,7 +318,7 @@ require($root_path.'include/inc_test_request_lister_fx.php');
       <td align="right"><div class=fva2_ml10><?php echo $LDNuclear ?></td>
       <td>&nbsp;<?php printCheckBox('nuclear'); ?></td>
     </tr>
-
+	
     <tr>
       <td colspan=4><hr></td>
     </tr>
@@ -340,31 +342,36 @@ require($root_path.'include/inc_test_request_lister_fx.php');
     </tr>
   </table>
   &nbsp;<br>
-
+		
   </td>
 </tr>
-
+		 
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2><div class=fva2_ml10><?php echo $LDClinicalInfo ?>:<p><img src="../../gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
 		<font face="courier" size=2 color="#000099">&nbsp;&nbsp;<?php echo stripslashes($stored_request['clinical_info']) ?></font>
 				</td>
-		</tr>
+		</tr>	
+<?php 
+$sql='select item_full_description from care_tz_drugsandservices where item_id='.$stored_request['test_request'];
+$requests=$db->Execute($sql);
+if ($requests) $test_request=$requests->FetchRow();
+?>
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2><div class=fva2_ml10><?php echo $LDReqTest ?>:<p><img src="../../gui/img/common/default/pixel.gif" border=0 width=20 height=45 align="left">
-		<font face="courier" size=2 color="#000099">&nbsp;&nbsp;<?php echo stripslashes($stored_request['test_request']) ?></font>
+		<font face="courier" size=2 color="#000099">&nbsp;&nbsp;<?php echo stripslashes($test_request[0]) ?></font>
 				</td>
-		</tr>
+		</tr>	
 
 
-
+	
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2 align="right"><div class=fva2_ml10>
 		 <?php echo $LDDate ?>:
-		<font face="courier" size=2 color="#000000">&nbsp;<?php
-
-
-					  echo formatDate2Local($stored_request['send_date'],$date_format);
-
+		<font face="courier" size=2 color="#000000">&nbsp;<?php 
+		
+		            
+					  echo formatDate2Local($stored_request['send_date'],$date_format); 
+					
 				  ?></font>&nbsp;
   <?php echo $LDRequestingDoc ?>:
 		<font face="courier" size=2 color="#000000">&nbsp;<?php echo $stored_request['send_doctor'] ?></font></div><br>
@@ -375,17 +382,17 @@ require($root_path.'include/inc_test_request_lister_fx.php');
         <nobr>
 		<font color="#000099">
 		<?php echo $LDXrayNumber ?>
-        <input type="text" name="xray_nr" value="<?php if($read_form && $stored_request['xray_nr']) echo $stored_request['xray_nr']; ?>" size=9 maxlength=9>
+        <input type="text" name="xray_nr" value="<?php if($read_form && $stored_request['xray_nr']) echo $stored_request['xray_nr']; ?>" size=9 maxlength=9> 
 		<?php echo $LD_r_cm2 ?>
-        <input type="text" name="r_cm_2" value="<?php if($read_form && $stored_request['r_cm_2']) echo $stored_request['r_cm_2']; ?>" size=7 maxlength=15>
+        <input type="text" name="r_cm_2" value="<?php if($read_form && $stored_request['r_cm_2']) echo $stored_request['r_cm_2']; ?>" size=7 maxlength=15> 
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		 <?php echo $LDXrayTechnician ?>&nbsp;
-        <input type="text" name="mtr" value="<?php if($read_form && $stored_request['mtr']) echo $stored_request['mtr']; ?>" size=25 maxlength=35>
+        <input type="text" name="mtr" value="<?php if($read_form && $stored_request['mtr']) echo $stored_request['mtr']; ?>" size=25 maxlength=35> 
 		<?php echo $LDDate ?>&nbsp;
 
-		<input type="text" name="xray_date"
-		value="<?php
-
+		<input type="text" name="xray_date" 
+		value="<?php 
+		
 		            if($read_form && $stored_request['xray_date'] != DBF_NODATE)
 					{
 					  echo formatDate2Local($stored_request['xray_date'],$date_format);
@@ -394,27 +401,27 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 					{
 					  echo formatDate2Local(date('Y-m-d'),$date_format);
 					}
-				  ?>" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')">
+				  ?>" size=10 maxlength=10 onBlur="IsValidDate(this,'<?php echo $date_format ?>')"  onKeyUp="setDate(this,'<?php echo $date_format ?>','<?php echo $lang ?>')"> 
 		  	<a href="javascript:show_calendar('form_test_request.xray_date','<?php echo $date_format ?>')">
 			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a>
 		</nobr>
 	  </div>
-    </tr>
+    </tr>	
 	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td colspan=2>
+		<td colspan=2> 
 		 <div class=fva2_ml10>&nbsp;<br><font color="#000099"><?php echo $LDNotesTempReport ?></font><br>
-         <textarea name="results" cols=80 rows=5 wrap="physical"><?php if($read_form && $stored_request['results']) echo stripslashes($stored_request['results']) ?></textarea>
+         <textarea name="results" cols=80 rows=5 wrap="physical"><?php if($read_form && $stored_request['results']) echo stripslashes($stored_request['results']) ?></textarea>				
 		 </td>
-		</tr>
-
+		</tr>	
+		
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2 align="right"><div class=fva2_ml10><font color="#000099">
 		 <?php echo $LDDate ?>
-        <input type="text" name="results_date"
-		value="<?php
+        <input type="text" name="results_date" 
+		value="<?php 
 		            if($read_form && $stored_request['results_date']!=DBF_NODATE)
 					{
-					  echo formatDate2Local($stored_request['results_date'],$date_format);
+					  echo formatDate2Local($stored_request['results_date'],$date_format); 
 					}
 					else
 					{
@@ -426,22 +433,40 @@ require($root_path.'include/inc_test_request_lister_fx.php');
 			<img <?php echo createComIcon($root_path,'show-calendar.gif','0','absmiddle'); ?>></a><font size=1 face="arial">
 
 
-  <?php echo $LDReportingDoc ?>
-        <input type="text" name="results_doctor" value="<?php if($read_form && $stored_request['results_doctor']) echo $stored_request['results_doctor']; else print $_SESSION['sess_user_name']; ?>" size=35 maxlength=35>
-		</td>
-    </tr>
-		</table>
+							<font
+								size=1 face="arial"> <?php echo $LDRequestingDoc ?>:</font> <select
+								name="results_doctor"><option>===Select a Doctor===</option>
+<?php 
+$sql='select name_first, name_last from care_person left join care_personell on care_person.pid=care_personell.pid where care_personell.job_function_title=17';
+$doctors=$db->Execute($sql);
+while ($doctor_list=$doctors->FetchRow()) {
+	if (($doctor_list[0].' '.$doctor_list[1])==$stored_request['send_doctor']) {
+		echo '<option selected value="'.$doctor_list[0].' '.$doctor_list[1].'">'.$doctor_list[0].' '.$doctor_list[1].'</option>';
+	} else {
+		echo '<option value="'.$doctor_list[0].' '.$doctor_list[1].'">'.$doctor_list[0].' '.$doctor_list[1].'</option>';
+	}
+}
+?>
+								</select>
+							<br>
+							</td>
+						</tr>
 
+
+
+
+		</table> 
+		
 
 	 </td>
    </tr>
  </table>
-
+	
 	</td>
   </tr>
-</table>
+</table> 
 <p>
-		<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  title="<?php echo $LDSaveEntry ?>">
+		<input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  title="<?php echo $LDSaveEntry ?>"> 
 		<a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0') ?> alt="<?php echo $LDPrintOut ?>"></a>
         <a href="<?php echo 'labor_test_findings_'.$subtarget.'.php?sid='.$sid.'&lang='.$lang.'&batch_nr='.$batch_nr.'&pn='.$pn.'&entry_date='.$stored_request['xray_date'].'&target='.$target.'&subtarget='.$subtarget.'&user_origin='.$user_origin.'&tracker='.$tracker; ?>"><img <?php echo createLDImgSrc($root_path,'enter_result.gif','0') ?> alt="<?php echo $LDEnterResult ?>"></a>
 

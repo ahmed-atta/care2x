@@ -119,7 +119,7 @@ if(!isset($mode))   $mode='';
           if(!$mode) /* Get the pending test requests */
 		  {
 		                $sql="SELECT batch_nr,encounter_nr,send_date FROM care_test_request_".$db_request_table." 
-						         WHERE status='pending' AND testing_dept='".$subtarget."' ORDER BY  send_date DESC";
+						         WHERE status='pending' AND testing_dept='".$subtarget."' ORDER BY  send_date ASC";
 		                if($requests=$db->Execute($sql))
        		            {
 				            $batchrows=$requests->RecordCount();

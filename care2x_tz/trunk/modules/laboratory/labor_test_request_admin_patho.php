@@ -42,7 +42,7 @@ require_once($root_path.'include/inc_front_chain_lang.php'); # call the script l
  require_once($root_path.'gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('laboratory');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
 $bgc1='#cde1ec'; /* The main background color of the form */
 
@@ -77,7 +77,7 @@ if($dblink_ok)
 										  immune_histochem='".$immune_histochem."',
 										  hormone_receptors='".$hormone_receptors."',
 										  specials='".$specials."',
-										  modify_id = '".$HTTP_COOKIE_VARS[$local_user.$sid]."'
+										  modify_id = '".$_COOKIE[$local_user.$sid]."'
 										   WHERE batch_nr = '".$batch_nr."'";
 							      if($ergebnis=$db->Execute($sql))
        							  {
@@ -100,7 +100,7 @@ if($dblink_ok)
           if(!$mode) /* Get the pending test requests */
 		  {
 		                $sql="SELECT batch_nr,encounter_nr,send_date,dept_nr FROM care_test_request_".$subtarget." 
-						         WHERE (status='pending' OR status='') ORDER BY  send_date DESC";
+						         WHERE (status='pending' OR status='') ORDER BY  send_date ASC";
 		                if($requests=$db->Execute($sql))
        		            {
 						

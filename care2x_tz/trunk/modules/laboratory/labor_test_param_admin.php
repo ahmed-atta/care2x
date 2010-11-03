@@ -6,9 +6,9 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
+* CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
+* Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
 * elpidio@care2x.org,
 *
 * See the file "copy_notice.txt" for the licence notice
@@ -18,37 +18,28 @@ define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 
-//$db->debug=true;
+///$db->debug=true;
 
 # Create lab object
 require_once($root_path.'include/care_api_classes/class_lab.php');
 $lab_obj=new Lab();
 
-require($root_path.'include/inc_labor_param_group.php');
-
-if(!isset($parameterselect)||$parameterselect=='') $parameterselect='1';
-
-$parameters=$paralistarray[$parameterselect];
-$paramname=$parametergruppe[$parameterselect];
+if(!isset($parameterselect)||$parameterselect=='') $parameterselect='priority';
 
 $pitems=array('msr_unit','median','lo_bound','hi_bound','lo_critical','hi_critical','lo_toxic','hi_toxic');
 
 # Load the date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');
 
-//echo $lab_obj->getLastQuery();
-
 # Get the test test groups
-$tgroups=&$lab_obj->TestGroups();
+$tgroups=&$lab_obj->TestActiveGroups();
 
 # Get the test parameter values
-$tparams=&$lab_obj->TestParams($parameterselect);
-
+$tparams=&$lab_obj->TestParamsAdmin($parameterselect);
 $breakfile="labor.php".URL_APPEND;
 
-// echo "from table ".$linecount;
 # Start Smarty templating here
  /**
  * LOAD Smarty
@@ -64,7 +55,7 @@ $breakfile="labor.php".URL_APPEND;
  $smarty->assign('sToolbarTitle',$LDTestParameters);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('lab_test_parameters.php','Laboratories :: Test Parameters')");
+ $smarty->assign('pbHelp',"javascript:gethelp('lab_param_config.php')");
 
  # hide return  button
  $smarty->assign('pbBack',FALSE);
@@ -90,12 +81,19 @@ function chkselect(d)
 
 function editParam(nr)
 {
-	urlholder="<?php echo $root_path ?>modules/laboratory/labor_test_param_edit.php?sid=<?php echo "$sid&lang=$lang&parameterselect=$parameterselect" ?>&nr="+nr;
-	editparam_<?php echo $sid ?>=window.open(urlholder,"editparam_<?php echo $sid ?>","width=500,height=450,menubar=no,resizable=yes,scrollbars=yes");
+	urlholder="<?php echo $root_path ?>modules/laboratory/labor_test_param_edit.php?sid=<?php echo "$sid&lang=$lang" ?>&nr="+nr;
+	editparam_<?php echo $sid ?>=window.open(urlholder,"editparam_<?php echo $sid ?>","width=590,height=390,menubar=no,resizable=yes,scrollbars=yes");
+}
+
+function newParam()
+{
+	urlholder="<?php echo $root_path ?>modules/laboratory/labor_test_param_edit.php?sid=<?php echo "$sid&lang=$lang" ?>&mode=new";
+	editparam_<?php echo $sid ?>=window.open(urlholder,"editparam_<?php echo $sid ?>","width=590,height=390,menubar=no,resizable=yes,scrollbars=yes");
 }
 // -->
 </script>
-
+<script src="../../js/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+<link href="../../js/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
 <?php
 
 $sTemp = ob_get_contents();
@@ -103,9 +101,14 @@ ob_end_clean();
 
 $smarty->append('JavaScript',$sTemp);
 
+$sTempNew = '<a href="javascript:newParam()"><img '.createLDImgSrc($root_path,'newplan.gif','0').'></a>';
+$paramName = &$lab_obj->getGroupName($parameterselect);
+if(isset($paramName) && !empty($paramName)) {
+	$paramName = $paramName->fetchRow();
+}
 # Assign elements
-
-$smarty->assign('sParamGroup',$parametergruppe[$parameterselect]);
+$smarty->assign('sParamNew',$sTempNew);
+$smarty->assign('sParamGroup',$sTemp. $paramName['name'] );
 $smarty->assign('LDParameter',$LDParameter);
 $smarty->assign('LDMsrUnit',$LDMsrUnit);
 $smarty->assign('LDMedian',$LDMedian);
@@ -115,7 +118,6 @@ $smarty->assign('LDLowerCritical',$LDLowerCritical);
 $smarty->assign('LDUpperCritical',$LDUpperCritical);
 $smarty->assign('LDLowerToxic',$LDLowerToxic);
 $smarty->assign('LDUpperToxic',$LDUpperToxic);
-//$smarty->assign('LDPrice',$LDPrice);
 
 $smarty->assign('sFormAction',$thisfile);
 $smarty->assign('LDSelectParamGroup',$LDSelectParamGroup);
@@ -129,17 +131,25 @@ $toggle=0;
 
 if(is_object($tparams)){
  while($tp=$tparams->FetchRow()){
+
 	//if($toggle) $bgc='#ffffee'; else $bgc='#efefef';
 	if($toggle) $bgc='wardlistrow1'; else $bgc='wardlistrow2';
 	$toggle=!$toggle;
-
+	if($tp['status']=='hidden') {
+		echo '
+		<tr bgcolor="green">
+		<td ><nobr>&nbsp;';
+	} elseif($tp['status']=='deleted') {
+		echo '
+		<tr bgcolor="red">
+		<td ><nobr>&nbsp;';
+	} else {
 	echo '
 	<tr class="'.$bgc.'">
 	<td ><nobr>&nbsp;';
-	if($tp['is_enabled']!="1")
-	{
-		echo '<font color="#ABABAB">';
 	}
+
+	
 	if(isset($parameters[$tp['id']])&&!empty($parameters[$tp['id']])) echo $parameters[$tp['id']];
 		else echo $tp['name'];
 
@@ -149,9 +159,6 @@ if(is_object($tparams)){
 		echo '
 			<td>';
 		if($x){
-			if(gettype($tp[$v])=="string")
-				if(strlen($tp[$v])>=1) echo $tp[$v];
-			else
 				if($tp[$v]>0) echo $tp[$v];
 		}else{
 			echo $tp[$v];
@@ -168,23 +175,15 @@ if(is_object($tparams)){
 	echo '
 		</tr>';
  }
-	echo '
-	<tr class="'.$bgc.'">
-	<td colspan="9"><nobr>'.$LDInsertNewParameter.'</nobr></td>
-			<td>
-			<a href="javascript:editParam(0)"><img '.createLDImgSrc($root_path,'edit_sm.gif','0').'></a>
-			</td>';
-	echo '
-		</tr>';
-
 }
 
 $sTemp = ob_get_contents();
 
 ob_end_clean();
-
+$sShortHelp = $sShortHelp.  "<font color=\"green\">$LDHiddenParams</font><br>";
+$sShortHelp = $sShortHelp.   "<font color=\"red\">$LDDeletedParams</font><br>";
 $smarty->assign('sTestParamsRows',$sTemp);
-
+$smarty->assign('sShortHelp',$sShortHelp);
 # Create the parameter group select
 
 $sTemp = '<select name="parameterselect" size=1>';
@@ -193,7 +192,7 @@ while($tg=$tgroups->FetchRow()){
 		$sTemp = $sTemp.'<option value="'.$tg['id'].'"';
 		if($parameterselect==$tg['id']) $sTemp = $sTemp.' selected';
 		$sTemp = $sTemp.'>';
-		if(isset($parametergruppe[$tg['id']])&&!empty($parametergruppe[$tg['id']])) $sTemp = $sTemp.$parametergruppe[$tg['id']];
+	if(isset($parametergruppe[$tg['id']])&&!empty($parametergruppe[$tg['group_id']])) $sTemp = $sTemp.$parametergruppe[$tg['id']];
 			else $sTemp = $sTemp.$tg['name'];
 		$sTemp = $sTemp.'</option>';
 		$sTemp = $sTemp."\n";
@@ -203,6 +202,7 @@ $sTemp = $sTemp.'</select>';
 $smarty->assign('sParamGroupSelect',$sTemp);
 
 # Assign the parameter group hidden and submit inputs
+
 
 $smarty->assign('sSubmitSelect','<input type=hidden name="sid" value="'.$sid.'">
 	<input type=hidden name="lang" value="'.$lang.'">
