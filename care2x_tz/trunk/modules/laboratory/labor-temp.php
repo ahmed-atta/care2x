@@ -1,7 +1,7 @@
 <?php if(!$lang)
 	if(!$ck_language) include("../chklang.php");
 		else $lang=$ck_language;
-if (!$sid||($sid!=$$ck_sid_buffer)) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
+if (!$sid||($sid!=$$ck_sid_buffer)) {header("location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
 require("../language/".$lang."/lang_".$lang."_lab.php");
 require_once($root_path.'include/inc_config_color.php');

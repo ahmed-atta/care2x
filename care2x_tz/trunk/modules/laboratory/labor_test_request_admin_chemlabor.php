@@ -3,23 +3,23 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
-* CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
-* GNU General Public License
-* Copyright 2002,2003,2004,2005 Elpidio Latorilla
-* , elpidio@care2x.org
-*
-* See the file "copy_notice.txt" for the licence notice
-*/
+ * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
+ * GNU General Public License
+ * Copyright 2002,2003,2004,2005 Elpidio Latorilla
+ * , elpidio@care2x.org
+ *
+ * See the file "copy_notice.txt" for the licence notice
+ */
 
 /* Start initializations */
 $lang_tables=array('departments.php','konsil.php');
 define('LANG_FILE','konsil_chemlabor.php');
 
 /* We need to differentiate from where the user is coming:
-*  $user_origin != lab ;  from patient charts folder
-*  $user_origin == lab ;  from the laboratory
-*  and set the user cookie name and break or return filename
-*/
+ *  $user_origin != lab ;  from patient charts folder
+ *  $user_origin == lab ;  from the laboratory
+ *  and set the user cookie name and break or return filename
+ */
 
 //$db->debug=1;
 
@@ -53,17 +53,17 @@ $edit=0; /* Set script mode to no edit*/
 $formtitle=$LDChemicalLaboratory;
 $dept_nr=24; // 24 = department Nr. chemical lab
 
-$subtarget='chemlabor';
+$subtarget = 'chemlabor';
+$subtarget_sub = 'chemlabor_sub';
 
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 
 /* Here begins the real work */
 
-	if(!isset($mode))   $mode='';
+if(!isset($mode))   $mode='';
 
-	switch($mode)
-	{
+switch($mode) {
 		     case 'done':
 							      $sql="UPDATE care_test_request_".$subtarget."
 											SET status = 'done',
@@ -71,7 +71,7 @@ $enc_obj=new Encounter;
 													modify_id = '".$_SESSION['sess_user_name']."',
 													modify_time = '".date('YmdHis')."'
 											WHERE batch_nr = '".$batch_nr."'";
-
+								  //echo $sql;
 							      if($ergebnis=$enc_obj->Transact($sql))
        							  {
 								  	include_once($root_path.'include/inc_diagnostics_report_fx.php');
@@ -90,15 +90,17 @@ $enc_obj=new Encounter;
 								   }
 								break;
 
-	}// end of switch($mode)
+}// end of switch($mode)
 
-	if(!$mode) /* Get the pending test requests */ 	{
-		$sql="SELECT care_person.pid, care_person.selian_pid, name_first, name_last, batch_nr, tr.encounter_nr,tr.send_date,dept_nr,room_nr FROM care_test_request_".$subtarget." tr,
-					care_encounter, care_person
-						         WHERE (tr.status='pending' OR tr.status='') AND
+if(!$mode) /* Get the pending test requests */ 	{
+	$sql="SELECT care_person.pid, care_person.selian_pid, name_first, name_last, batch_nr, tr.encounter_nr,tr.send_date,dept_nr,room_nr, tr.priority
+	FROM care_test_request_".$subtarget." tr, care_encounter, care_person
+						         WHERE (tr.status='pending') AND
 						         tr.encounter_nr = care_encounter.encounter_nr AND
 						         care_encounter.pid = care_person.pid
-						         ORDER BY  tr.send_date DESC";
+						         ORDER BY  tr.send_date ASC";
+
+		//echo $sql;
 		if($requests=$db->Execute($sql)){
 			/* If request is available, load the date format functions */
 			require_once($root_path.'include/inc_date_format_functions.php');
@@ -125,12 +127,13 @@ $enc_obj=new Encounter;
 
 
 		/* prepare selection to show the headline... */
-		$sql_headline="SELECT care_person.pid, care_person.selian_pid, name_first, name_last, sex, batch_nr, date_birth, tr.encounter_nr,tr.send_date,dept_nr,room_nr FROM care_test_request_".$subtarget." tr, care_encounter, care_person
+	$sql_headline="SELECT care_person.pid, care_person.selian_pid, name_first, name_last, sex, batch_nr, date_birth, tr.encounter_nr,tr.send_date,dept_nr,room_nr, tr.create_id
+					FROM care_test_request_".$subtarget." tr, care_encounter, care_person
 						         WHERE (tr.status='pending' OR tr.status='') AND
 						         tr.encounter_nr = care_encounter.encounter_nr AND
 						         care_encounter.pid = care_person.pid
 						         AND tr.batch_nr = ".$h_batch_nr."
-						         ORDER BY  tr.send_date DESC";
+						         ORDER BY  tr.send_date ASC";
 		if($h_requests=$db->Execute($sql_headline)){
 			if ($test_request_headline = $h_requests->FetchRow()) {
 				$h_pid=$test_request_headline['pid'];
@@ -141,6 +144,12 @@ $enc_obj=new Encounter;
 				$h_name_last=$test_request_headline['name_last'];
 				$h_birthdate=$test_request_headline['date_birth'];
 		        $h_sex=$test_request_headline['sex'];
+		        $h_DoctorID=$test_request_headline['create_id'];
+
+	$sql_urgency='SELECT priority from care_test_request_chemlabor WHERE batch_nr='.$h_batch_nr;
+	$h_urgency=$db->Execute($sql_urgency);
+	$test_urgency=$h_urgency->FetchRow();
+	$urgency=$test_urgency['priority'];
 		        if ($_sex=="f")
 		        	$h_sex_img="spf.gif";
 		        else
@@ -148,10 +157,10 @@ $enc_obj=new Encounter;
 		        //echo "sex:".$_sex;
 			} // end of if ($test_request_headline = $h_requests->FetchRow())
 		} // end of if($h_requests=$db->Execute($sql_headline))
-	}
+}
 
-     /* Check for the patietn number = $pn. If available get the patients data */
-     if($batchrows && $pn){
+/* Check for the patietn number = $pn. If available get the patients data */
+if($batchrows && $pn){
 
 	    if( $enc_obj->loadEncounterData($pn)) {
 		    //echo "lade Patientendaten...";
@@ -170,7 +179,7 @@ $enc_obj=new Encounter;
 
 			$result=&$enc_obj->encounter;
 
-			$sql="SELECT * FROM care_test_request_".$subtarget." WHERE batch_nr='".$batch_nr."'";
+/*		$sql="SELECT * FROM care_test_request_".$subtarget." WHERE batch_nr='".$batch_nr."'";
 			if($ergebnis=$db->Execute($sql)){
 				if($editable_rows=$ergebnis->RecordCount()){
 
@@ -179,46 +188,62 @@ $enc_obj=new Encounter;
 					//echo $stored_request['parameters'];
 					parse_str($stored_request['parameters'],$stored_param);
 					$edit_form=1;
+			}*/
+		$sql = "SELECT * FROM care_test_request_" . $subtarget . " ";
+		$sql .= "INNER JOIN care_test_request_" . $subtarget_sub . " ON ";
+		$sql .= "( care_test_request_" . $subtarget . ".batch_nr = care_test_request_" . $subtarget_sub . ".batch_nr) ";
+		$sql .= "WHERE care_test_request_" . $subtarget . ".batch_nr='" . $batch_nr . "'";
+//echo $sql;
+		if ($ergebnis = $db->Execute ( $sql )) {
+			//if ($editable_rows = $ergebnis->RecordCount ()) {
+				while ( !$ergebnis->EOF ) {
+					$stored_param[$ergebnis->fields['paramater_name']] = $ergebnis->fields['parameter_value'];
+					$stored_request = $ergebnis->GetRowAssoc ( $toUpper = false );
+					$ergebnis->MoveNext ();
 				}
+
+				$edit_form = 1;
+			//}
+
             }else{
 				echo "<p>$sql<p>$LDDbNoRead";
 			}
 		}
-	}
+}
 
 # Prepare title
 $sTitle = $LDPendingTestRequest;
 if($batchrows) $sTitle = $sTitle." (".$batch_nr.")";
 
 # Start Smarty templating here
- /**
+/**
  * LOAD Smarty
  */
 
- # Note: it is advisable to load this after the inc_front_chain_lang.php so
- # that the smarty script can use the user configured template theme
+# Note: it is advisable to load this after the inc_front_chain_lang.php so
+# that the smarty script can use the user configured template theme
 
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
- $smarty = new smarty_care('common');
+require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+$smarty = new smarty_care('common');
 
 # Title in toolbar
- $smarty->assign('sToolbarTitle',$sTitle);
+$smarty->assign('sToolbarTitle',$sTitle);
 
- # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('lab_pending_requests.php','Laboratories :: Pending Requests')");
+# href for help button
+$smarty->assign('pbHelp',"javascript:gethelp('lab_pending_requests.php','Laboratories :: Pending Requests')");
 
- # hide return  button
- $smarty->assign('pbBack',FALSE);
+# hide return  button
+$smarty->assign('pbBack',FALSE);
 
- # href for close button
- $smarty->assign('breakfile',"javascript:window.close()");
+# href for close button
+$smarty->assign('breakfile',"javascript:window.close()");
 
- # Window bar title
- $smarty->assign('sWindowTitle',$sTitle);
+# Window bar title
+$smarty->assign('sWindowTitle',$sTitle);
 
- $smarty->assign('sOnLoadJs','onload="setBallon(\'BallonTip\');"');
- # collect extra javascript code
- ob_start();
+$smarty->assign('sOnLoadJs','onload="setBallon(\'BallonTip\');"');
+# collect extra javascript code
+ob_start();
 ?>
 <html>
 <head>
@@ -226,8 +251,15 @@ if($batchrows) $sTitle = $sTitle." (".$batch_nr.")";
 </head>
 
 <style type="text/css">
-.lab {font-family: arial; font-size: 9; color:purple;}
-.lmargin {margin-left: 5;}
+.lab {
+	font-family: arial;
+	font-size: 9;
+	color: purple;
+}
+
+.lmargin {
+	margin-left: 5;
+}
 </style>
 
 <script language="javascript">
@@ -309,11 +341,14 @@ function printOut()
 //-->
 </script>
 <script language="javascript" src="../js/setdatetime.js"></script>
-<script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
+<script language="javascript"
+	src="<?php echo $root_path; ?>js/checkdate.js"></script>
 
 <script language="JavaScript" src="<?php echo $root_path; ?>js/cross.js"></script>
-<script language="JavaScript" src="<?php echo $root_path; ?>js/tooltips.js"></script>
-<div id="BallonTip" style="POSITION:absolute; VISIBILITY:hidden; LEFT:-200px; Z-INDEX: 100"></div>
+<script language="JavaScript"
+	src="<?php echo $root_path; ?>js/tooltips.js"></script>
+<div id="BallonTip"
+	style="POSITION: absolute; VISIBILITY: hidden; LEFT: -200px; Z-INDEX: 100"></div>
 
 <?php
 
@@ -330,72 +365,77 @@ ob_start();
 
 if($batchrows){
 
-?>
+	?>
 
 <table border=0>
 	<tr valign="top">
 		<!-- Left block for the request list  -->
-		<td>
-<?php
-;
-/* The following routine creates the list of pending requests */
-require($root_path.'include/inc_test_request_lister_fx.php');
+		<td><?php
+		;
+		/* The following routine creates the list of pending requests */
+		require($root_path.'include/inc_test_request_lister_fx.php');
 
-?>
-		</td>
+		?></td>
 		<!-- right block for the form -->
-		<td>
+		<td><!-- Here begins the form  --> <a href="javascript:printOut()"><img
+		<?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?>
+			alt="<?php echo $LDPrintOut ?>"></a> <a
+			href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img
+			<?php echo createLDImgSrc($root_path,'enter.gif','0','absmiddle') ?>
+			alt="<?php echo $LDEnterResult ?>"></a> <a
+			href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img
+			<?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?>
+			alt="<?php echo $LDDone ?>"></a> <!--     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&discharge=true&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done_and_discharge.gif','0','absmiddle') ?> alt="Move the form to the archive and discharge our patient"></a>-->
 
-		<!-- Here begins the form  -->
 
-     <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
-     <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enter.gif','0','absmiddle') ?> alt="<?php echo $LDEnterResult ?>"></a>
-     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
-<!--     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&discharge=true&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done_and_discharge.gif','0','absmiddle') ?> alt="Move the form to the archive and discharge our patient"></a>-->
-
-
-<?php
-require_once($root_path.'include/care_api_classes/class_tz_billing.php');
-$bill_obj = new Bill;
-$bill_number = $bill_obj->GetBillByBatchNr($batch_nr);
-if($bill_number['bill_number']>0)
+			<?php
+			require_once($root_path.'include/care_api_classes/class_tz_billing.php');
+			$bill_obj = new Bill;
+			$bill_number = $bill_obj->GetBillByBatchNr($batch_nr);
+			if($bill_number['bill_number']>0)
 	echo '<br><br><font color="green">'.$LDLabRequestBilled.' '.$bill_number['bill_number'].'</font><br><br>';
-else
+			else
 	echo '<br><br><img src="../../gui/img/common/default/warn.gif" border=0 alt="" style="filter:alpha(opacity=70)"> <font color="red">'.$LDLabRequestNotBilled.'</font> <img src="../../gui/img/common/default/warn.gif" border=0 alt="" style="filter:alpha(opacity=70)"><br><br>';
 
-require_once($root_path.'include/inc_test_request_printout_chemlabor.php');
-?>
-
-     <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
-     <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enter.gif','0','absmiddle') ?> alt="<?php echo $LDEnterResult ?>"></a>
-     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
-	 <a href="labor_test_request_pass.php"><img <?php echo createLDImgSrc($root_path,'new.gif','0','absmiddle') ?></a>
+			require_once($root_path.'include/inc_test_request_printout_chemlabor.php');
+			?> <a href="javascript:printOut()"><img
+			<?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?>
+			alt="<?php echo $LDPrintOut ?>"></a> <a
+			href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img
+			<?php echo createLDImgSrc($root_path,'enter.gif','0','absmiddle') ?>
+			alt="<?php echo $LDEnterResult ?>"></a> <a
+			href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img
+			<?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?>
+			alt="<?php echo $LDDone ?>"></a> <a
+			href="labor_test_request_pass.php"><img
+			<?php echo createLDImgSrc($root_path,'new.gif','0','absmiddle') ?>></a>
 
 		</td>
 	</tr>
 </table>
 
-<?php
+			<?php
 }
 else
 {
-?>
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?> ><font size=3 face="verdana,arial" color="#990000"><b><?php echo $LDNoPendingRequest ?></b></font>
-<p>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
-<?php
+	?>
+<img
+<?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>>
+<font size=3 face="verdana,arial" color="#990000"><b><?php echo $LDNoPendingRequest ?></b></font>
+<p><a href="<?php echo $breakfile ?>"><img
+<?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a> <?php
 }
 
 $sTemp = ob_get_contents();
- ob_end_clean();
+ob_end_clean();
 
 # Assign the page output to main frame template
 
- $smarty->assign('sMainFrameBlockData',$sTemp);
+$smarty->assign('sMainFrameBlockData',$sTemp);
 
- /**
+/**
  * show Template
  */
- $smarty->display('common/mainframe.tpl');
+$smarty->display('common/mainframe.tpl');
 
 ?>

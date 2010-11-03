@@ -89,13 +89,15 @@ if (!isset($subtarget) || !$subtarget) $subtarget=$target;
 				</td>
 		</tr>
 	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td colspan=2><div class=fva2_ml10><?php echo $LDReqTest ?>:<p><blockquote><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=1 height=45 align="left">
+		<td><div class=fva2_ml10><?php echo $LDReqTest ?>:<p><blockquote><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=1 height=45 align="left">
 		<font face="courier" size=2 color="#000000"><?php echo  nl2br(stripslashes($stored_request['test_request'])) ?></font></blockquote>
-				</td>
+		</td>
+		
+		<td><div class=fva2_ml10><?php echo $LDNoOfTests ?>:<p><blockquote><img src="<?php echo $root_path ?>gui/img/common/default/pixel.gif" border=0 width=1 height=45 align="left">
+		<font face="courier" size=2 color="#000000"><?php echo  nl2br(stripslashes($stored_request['number_of_tests'])) ?></font></blockquote>
+		</td>
 		</tr>
-
-
-
+		
 	<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2 align="right"><div class=fva2_ml10>
 		 <?php echo $LDDate ?>:

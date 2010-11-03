@@ -20,7 +20,7 @@ define('LANG_FILE','lab.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/inc_front_chain_lang.php');
 
-$thisfile=basename(__FILE__);
+$thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile='labor.php'.URL_APPEND;
 
 # Workaround
@@ -277,7 +277,7 @@ if($linecount){
 				<td>&nbsp';
 						
 			if($editmode){
-				echo'<a href="labor_datainput.php?sid='.session_id().'&job_id='.$zeile['batch_nr'].'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1"  title="'.$LDEnterData.'">
+				echo'<a href="labor_datainput.php?sid='.$sid.'&job_id='.$zeile['batch_nr'].'&mode=edit&encounter_nr='.$zeile['encounter_nr'].'&update=1"  title="'.$LDEnterData.'">
 					<img '.createComIcon($root_path,'play_one.gif','0','absmiddle',FALSE).' </a> ';
 			}else{
 				echo'

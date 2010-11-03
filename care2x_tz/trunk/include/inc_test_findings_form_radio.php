@@ -1,5 +1,20 @@
 <?php
 
+if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
+include_once($root_path.'include/care_api_classes/class_globalconfig.php');
+$glob=& new GlobalConfig($GLOBAL_CONFIG);
+# Get all config items starting with "main_"
+$glob->getConfig('main_%');
+
+$addr[]=array($GLOBAL_CONFIG['main_info_address'],
+						"$LDPhone:\n$LDFax:\n$LDEmail:",
+						$GLOBAL_CONFIG['main_info_phone']."\n".$GLOBAL_CONFIG['main_info_fax']."\n".$GLOBAL_CONFIG['main_info_email']."\n"
+						);
+						
+$main_address = $GLOBAL_CONFIG['main_info_address'];
+$addr_line = explode(",",$main_address);
+
+
 function createDataBlock($param)
 {
     global $stored_findings, $edit;
@@ -22,10 +37,23 @@ function createInputBlock($param, $value)
     global $stored_findings, $date_format, $edit, $lang;
 	
 	if ($edit)
-	 {    
+	 {    /*
 	       echo '&nbsp;<input type="text" name="'.$param.'"  value="'.$value.'" size=';
 		   if ($param=='doctor_id') echo '35 maxlength=35>';
 		    else echo '10 maxlength=10 onBlur="IsValidDate(this,\''.$date_format.'\')"   onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
+			
+		*/
+		
+		if ($param=='doctor_id')
+		
+		
+		echo '&nbsp;<input type="text" name="'.$param.'" value="'.$value.'" size= 35 maxlength=35 >'; 
+		 
+		  else 
+		  
+		echo '&nbsp;<input type="text" name="'.$param.'" value="'.$value.'" size=10 maxlength=10  onBlur="IsValidDate(this,\''.$date_format.'\')"   onKeyUp="setDate(this,\''.$date_format.'\',\''. $lang.'\')">';
+		
+		
       }
 	 else	
 	 {
@@ -46,51 +74,120 @@ function createInputBlock($param, $value)
     <td>
 	
 	<table   cellpadding="0" cellspacing=1 border="0" width=700>
-		<tr  valign="top" bgcolor="<?php echo $bgc1 ?>">
-		<td width=35%><div class="fva2_ml10">
-		<font size=5 color="#0000ff" face="verdana,arial">
-		<b><?php echo $LDTestFindings ?></b></font><br>
-	     <font size=3 color="#000099" face="verdana,arial"><b><?php echo $formtitle ?></b></font><br>
-	     <font size=1 color="#000099" face="verdana,arial"><?php echo $global_address[$subtarget].'<br>'.$LDTel.'&nbsp;'.$global_phone[$subtarget] ?></font>
-	   </td> 
-		<td align="right" width=65%>
-		 <font size=1 color="#000099" face="verdana,arial">
-	    <?php 
-	      echo $batch_nr.'&nbsp;&nbsp;<br>';
-          echo "<img src='".$root_path."classes/barcode/image.php?code=$batch_nr&style=68&type=I25&width=145&height=40&xres=2&font=5' border=0>";
-         ?>&nbsp;&nbsp;<br>
-		 <?php echo $LDXrayDate.'&nbsp;&nbsp;<br>';
-		 if(!empty($entry_date) && $entry_date!= DBF_NODATE) echo formatDate2Local($entry_date,$date_format); ?>
-		 &nbsp;&nbsp;</font>
-		</td></tr>
 		
 	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" align="right"><font color="#000099" size=2 face="verdana,arial">	
+		<td  valign="top" align="left"><font color="#000099" size=2 face="verdana,arial">	
+		
+		<?php 
+
+			echo $addr_line[0].'<br>';
+			echo $addr_line[1];
+			echo $addr_line[2];
+			     
+		?>
+
+		</td>
+		 
+		<td  valign="top" align="right">
+		<div class="fva0_ml10"><font color="#000099" size=2 face="verdana,arial">	
 		<?php
-		  echo $LDCaseNr.'<br>'.$LDFamilyName.'<br>'.$LDName.'<br>'.$LDBDay;
+		  echo $LDCaseNr.'<br>'.$LDPatNr.'<br>'.$LDFamilyName.'<br>'.$LDNames.'<br>'.$LDSex.'<br>'.$LDBDay;
 		 ?>
-        </td>
-		<td  valign="top">
+		 </div> 		 </td>
+		 
+		 <td  valign="top">
 		<div class="fva0_ml10"><font color="#000000" size=2 face="verdana,arial">	
 		<?php
-		   echo $full_en.'<br>'.$result['name_last'].'<br>'.$result['name_first'].'<br>'.formatDate2Local($result['date_birth'],$date_format);
+		   echo $full_en.'<br>'.$result['selian_pid'].'<br>'.$result['name_last'].'<br>'.$result['name_first'].' '.$result['name_first'].'<br>'.$result['sex'].'<br>'.formatDate2Local($result['date_birth'],$date_format);
 		 ?>
-		 </div>
-  </td>
+		 </div> 		 </td>
 </tr>
 
 	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" colspan=2 ><div class=fva0_ml10><font color="#000099">	 
+	
+		<td  valign="top" colspan=3  align="center"><div class=fva0_ml10>
+		
+		</td>
+	</tr>
+	
+	<tr bgcolor="<?php echo $bgc1 ?>">
+	
+		<td  valign="top" colspan=3  align="center"><div class=fva0_ml10>
+		
+		<p>
+		
+		</td>
+	</tr>
+		
+	
+	<tr bgcolor="<?php echo $bgc1 ?>">
+		
+		<td  valign="top" colspan=3  align="center"><div class=fva0_ml10><font color="#000099">	 
+		<font size=3 color="#000099" face="verdana,arial"><b><?php echo $formtitle ?></b></font><br>
+		<hr />
+		
+  	</td>
+</tr>
+
+	<tr bgcolor="<?php echo $bgc1 ?>">
+	
+		<td  valign="top" colspan=3  align="left">
+		<div class=fva0_ml10><font color="#000099" size=2 face="verdana,arial">	
+		
+		<?php echo $LDRequestDate    ?>
+		<u><?php echo $stored_tests['send_date'] ?><p>
+		
+		</td>
+	</tr>
+	
+	<tr bgcolor="<?php echo $bgc1 ?>">
+	
+		<td  valign="top" colspan=3  align="left">
+		<div class=fva0_ml10><font color="#000099" size=2 face="verdana,arial">	
+		
+		<?php echo $LDRequestingDoc ?>
+		<u><?php echo $stored_tests['send_doctor'] ?><p>
+		
+		</td>
+	</tr>
+	
+	<tr bgcolor="<?php echo $bgc1 ?>">
+	
+		<td  valign="top" colspan=3  align="left">
+		<div class=fva0_ml10><font color="#000099" size=2 face="verdana,arial">	
+		
+		<?php echo $LDClinicalSum ?>
+		<u><?php echo $stored_tests['clinical_info'] ?><p>
+		
+		</td>
+	</tr>
+	
+	<tr bgcolor="<?php echo $bgc1 ?>">
+	
+		<td  valign="top" colspan=3  align="left">
+		<div class=fva0_ml10><font color="#000099" size=2 face="verdana,arial">	
+		
+		<?php echo $LDDiagnosticTest ?>
+		<u><?php echo $stored_tests['test_request'] ?><p>
+		
+		</div></td>
+	</tr>
+		
+	<tr bgcolor="<?php echo $bgc1 ?>">
+
+	<tr bgcolor="<?php echo $bgc1 ?>">
+		<td  valign="top" colspan=3><div class=fva0_ml10><font color="#000099" size=2 face="verdana,arial">	 
 		<?php echo $LDTestFindings ?><br>
 		<?php createDataBlock('findings') ?>
-  </div></td>
+  </td>
 </tr>
-
-	<tr bgcolor="<?php echo $bgc1 ?>">
-		<td  valign="top" colspan=2 ><div class=fva0_ml10><font color="#000099">	 
+  
+  	<tr bgcolor="<?php echo $bgc1 ?>">
+		<td  valign="top" colspan=3 ><div class=fva0_ml10><font color="#000099" size=2 face="verdana,arial">		 
 		<?php echo $LDDiagnosis ?><br>
 		<?php createDataBlock('diagnosis') ?>
   </div></td>
+  
 </tr>
 
 	<tr bgcolor="<?php echo $bgc1 ?>">
@@ -119,9 +216,27 @@ function createInputBlock($param, $value)
 		  }
 		  ?>
             </div></td>
-			<td align="right"><div class=fva2_ml10><font color="#000099">
-		<?php echo $LDReportingDoc ?>:</font><font color="#000000">
-		<?php createInputBlock('doctor_id',$stored_findings['doctor_id']); ?>
+			<td align="right" colspan=3><div class=fva2_ml10><font color="#000099">
+			
+		
+			
+		 <?php echo $LDReportingRad ?>:</font><font color="#000000"> 
+		 
+		 <?php	if($stored_findings['doctor_id']) 
+		
+		           $doctor_id=$stored_findings['doctor_id'];
+		
+		       else 
+		
+		           $doctor_id=$HTTP_SESSION_VARS['sess_user_name'];
+		
+		       createInputBlock('doctor_id',$doctor_id);
+		
+		?>
+		
+		<!-- <?php createInputBlock('doctor_id',$stored_findings['doctor_id']); ?>  -->
+		
+		<!-- <input type="text" name="doctor_id" size=30 maxlength=30 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly>  -->
         &nbsp;&nbsp;
   </div></td>
 </tr>
