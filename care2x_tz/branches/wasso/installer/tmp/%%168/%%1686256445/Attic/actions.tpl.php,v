@@ -1,0 +1,51 @@
+head	1.2;
+access;
+symbols
+	care2watu:1.1.0.4
+	Root_care2watu:1.1
+	dodoma:1.1.0.2
+	Root_dodoma:1.1;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2009.01.12.19.09.45;	author andi;	state dead;
+branches;
+next	1.1;
+commitid	1591496b95754567;
+
+1.1
+date	2008.04.01.12.57.27;	author marcel;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@Away with temp rubish
+@
+text
+@<?php /* Smarty version 2.6.0, created on 2008-03-20 11:01:09
+         compiled from C:%5Cxampp%5Chtdocs%5Ccare2002_tz_mero_vps%5Cinstaller/templates/actions.tpl */ ?>
+<form action="<?php echo $GLOBALS['HTTP_SERVER_VARS']['PHP_SELF']; ?>
+" method="POST">
+<input type="hidden" name="save_action" value="true">
+<?php echo $this->_tpl_vars['ACTION_HTML']; ?>
+
+</form>@
+
+
+1.1
+log
+@add installer
+fixed problem with create user
+fixed nursing station view
+@
+text
+@@
+

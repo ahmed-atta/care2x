@@ -1,0 +1,592 @@
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/misc/xmlrpc/xmlrpc/debugger/action.php line 84
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/development/g2_pg/phpPgAdmin-3.2.1/classes/database/Postgres.php line 1343
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/development/g2_pg/phpPgAdmin-3.2.1/classes/database/Postgres.php line 1389
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/development/g2_pg/phpPgAdmin-3.2.1/classes/database/Postgres.php line 2419
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/development/g2_pg/phpPgAdmin-3.2.1/classes/Misc.php line 102
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/development/g2_pg/phpPgAdmin-3.2.1/dataexport.php line 94
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/development/g2_pg/phpPgAdmin-3.2.1/dataexport.php line 197
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/development/g2_pg/phpPgAdmin-3.2.1/libraries/adodb/adodb-session.php line 292
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/development/g2_pg/phpPgAdmin-3.2.1/libraries/adodb/drivers/adodb-informix72.inc.php line 238
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/development/g2_pg/phpPgAdmin-3.2.1/libraries/adodb/drivers/adodb-sybase.inc.php line 277
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/development/g2_pg/phpPgAdmin-3.2.1/libraries/adodb/drivers/adodb-sybase.inc.php line 294
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/development/g2_pg/phpPgAdmin-3.2.1/libraries/adodb/drivers/adodb-postgres64.inc.php line 393
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/development/g2_pg/phpPgAdmin-3.2.1/libraries/adodb/drivers/adodb-postgres64.inc.php line 419
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 45
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 45
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 46
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 46
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 47
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 47
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 48
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 48
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 49
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 49
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 50
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 50
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 51
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 51
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 52
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 52
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 53
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 53
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 54
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 54
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 55
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 55
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 56
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 56
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 57
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/index.php line 57
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/include/care_api_classes/class_access.php line 242
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/include/care_api_classes/class_access.php line 246
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/include/care_api_classes/class_access.php line 250
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/include/care_api_classes/xmlrpc/debugger/action.php line 84
+WARNING: Function 'mysql_list_tables' is deprecated, please use 'mysql_query' instead in file /var/www/care2x_tz/include/inc_db_fx.php line 14
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/include/inc_front_chain_lang.php line 70
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/include/inc_front_chain_lang.php line 85
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/include/inc_date_format_functions.php line 70
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/include/inc_date_format_functions.php line 143
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/include/inc_editor_fx.php line 11
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/include/inc_editor_fx.php line 12
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/include/inc_editor_fx.php line 13
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/include/inc_editor_fx.php line 14
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/include/inc_editor_fx.php line 15
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/include/inc_passcheck.php line 20
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/include/inc_passcheck.php line 24
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/include/inc_passcheck.php line 28
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/get_img.php line 12
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/nocc/is_uploaded_file.php line 19
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/functions.php line 145
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/functions.php line 145
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/functions.php line 318
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/functions.php line 364
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/nocc/functions.php line 383
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/nocc/functions.php line 384
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/nocc/functions.php line 385
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/nocc/functions.php line 386
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/nocc/functions.php line 387
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/nocc/functions.php line 388
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/functions.php line 390
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/nocc/functions.php line 393
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/nocc/functions.php line 394
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/functions.php line 461
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/functions.php line 465
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/functions.php line 469
+WARNING: Function 'session_unregister' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/functions.php line 572
+WARNING: Function 'session_unregister' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/functions.php line 573
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/conf.php line 146
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/action.php line 36
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/action.php line 38
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/action.php line 42
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/action.php line 42
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/action.php line 42
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/action.php line 42
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/action.php line 72
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/action.php line 88
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/action.php line 100
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/action.php line 116
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/action.php line 126
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/delete.php line 14
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/download.php line 14
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/download.php line 14
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/download.php line 21
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/nocc/download.php line 21
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/send.php line 16
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/send.php line 48
+WARNING: Function 'session_unregister' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/send.php line 91
+WARNING: Function 'session_unregister' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/send.php line 92
+WARNING: Function 'session_unregister' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/send.php line 116
+WARNING: Function 'session_unregister' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/send.php line 117
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/nocc/send.php line 120
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/plugins/system_new_module/fileparsen.php line 59
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/plugins/system_new_module/inc_datei_array.php line 68
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/plugins/system_new_module/inc_datei_array.php line 88
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/plugins/system_new_module/includes/inc_modul_top.php line 42
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/plugins/system_new_module/includes/inc_modul_top.php line 42
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/chklang.php line 92
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/chklang.php line 93
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/installer/Installer.php line 89
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/main/colorchg.php line 22
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/main/colorchg.php line 23
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/main/excolorchg.php line 22
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/main/excolorchg.php line 23
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/main/login.php line 27
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/main/login.php line 27
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/main/login.php line 28
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/main/login.php line 28
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/main/login.php line 29
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/main/login.php line 29
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/adodb/adodb-session.php line 274
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/adodb/session/old/adodb-session.php line 433
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/adodb/session/old/adodb-session-clob.php line 442
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/classes/pear/pear/pear/DependencyDB.php line 439
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/pear/pear/pear/DependencyDB.php line 505
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/pear/pear/pear/DependencyDB.php line 514
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/pear/pear/pear/DependencyDB.php line 535
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/pear/pear/pear/DependencyDB.php line 537
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/classes/pear/pear/pear/PackageFile.php line 334
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/pear/pear/pear/Config.php line 974
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/pear/pear/pear/Config.php line 986
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/pear/pear/pear/Registry.php line 700
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/pear/pear/pear/Registry.php line 709
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/classes/pear/pear/pear/Registry.php line 735
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/pear/pear/pear/Registry.php line 1002
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/pear/pear/pear/Registry.php line 1011
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/pear/pear/pear/Registry.php line 1044
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/pear/pear/pear/Registry.php line 1053
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 116
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 139
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 147
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 148
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 149
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 150
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 164
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 166
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 166
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 178
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 179
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 179
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 184
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 185
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 185
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 291
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 292
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 300
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 301
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 308
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 318
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 328
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/pear/RunTest.php line 340
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/classes/pear/pear/os/Guess.php line 128
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/os/Guess.php line 158
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/os/Guess.php line 176
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/classes/pear/pear/os/Guess.php line 179
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/classes/pear/pear/os/Guess.php line 259
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/classes/pear/pear/os/Guess.php line 330
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/classes/pear/pear/xml/rpc.php line 1558
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/classes/pear/pear/html/QuickForm/select.php line 108
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/classes/pear/pear/html/QuickForm.php line 954
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/classes/pear/temp/download/XML_RPC-1.5.1/rpc.php line 1558
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/phppdf/class.pdf.php line 1514
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/phppdf/class.pdf.php line 1516
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/phppdf/class.pdf.php line 2641
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/phppdf/class.pdf.php line 2653
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/phppdf/class.pdf.php line 2856
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/phppdf/class.pdf.php line 2858
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/phppdf/class.pdf.php line 2907
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/classes/phppdf/class.pdf.php line 2920
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/classes/xmlrpc/debugger/action.php line 84
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/classes/smarty/libs/plugins/function.fetch.php line 184
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/classes/smarty/libs/plugins/function.fetch.php line 189
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/ambulatory/ambulatory.php line 22
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/ambulatory/ambulatory.php line 22
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/ambulatory/amb_clinic_patients_discharge.php line 392
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/ambulatory/amb_clinic_patients_discharge.php line 398
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/ambulatory/amb_clinic_patients_discharge.php line 414
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/ambulatory/amb_clinic_patients.php line 418
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/ambulatory/amb_clinic_patients.php line 424
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/ambulatory/amb_clinic_patients.php line 439
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/ambulatory/amb_clinic_patients.php line 444
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_details_importdocsql.php line 42
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_details_importdocsql.php line 43
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_details_importdocsql.php line 214
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_details_structure.php line 316
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_details_structure.php line 352
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties_structure.php line 132
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties_structure.php line 133
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties_structure.php line 142
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties_structure.php line 143
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties_structure.php line 144
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties_structure.php line 149
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties_structure.php line 149
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties_structure.php line 150
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties_structure.php line 151
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties_structure.php line 474
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties.inc.php line 225
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties.inc.php line 227
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties.inc.php line 229
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties.inc.php line 230
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties.inc.php line 231
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties.inc.php line 274
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties.inc.php line 279
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties.inc.php line 280
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties.inc.php line 281
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/pdf_schema.php line 1457
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/pdf_schema.php line 1458
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/pdf_schema.php line 1467
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/pdf_schema.php line 1468
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/pdf_schema.php line 1469
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/pdf_schema.php line 1474
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/pdf_schema.php line 1475
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/pdf_schema.php line 1476
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_datadict.php line 217
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_datadict.php line 218
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_datadict.php line 226
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_datadict.php line 227
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_datadict.php line 228
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_datadict.php line 230
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_datadict.php line 231
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_datadict.php line 232
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/left.php line 72
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_replace_fields.php line 62
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_addfield.php line 56
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_addfield.php line 103
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_addfield.php line 127
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_addfield.php line 145
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_addfield.php line 163
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_addfield.php line 180
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/transformation_wrapper.php line 57
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/read_dump.php line 25
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/read_dump.php line 30
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/read_dump.php line 154
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/read_dump.php line 226
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/read_dump.php line 241
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/read_dump.php line 286
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/main.php line 221
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/main.php line 222
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/main.php line 223
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/main.php line 223
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/main.php line 224
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/main.php line 255
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/main.php line 256
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/main.php line 256
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/main.php line 257
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/scripts/decode_bug.php line 89
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/phpmyadmin/config.inc.php line 722
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_alter.php line 55
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_indexes.php line 133
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_indexes.php line 134
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_indexes.php line 362
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_move_copy.php line 30
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_details_qbe.php line 24
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_details_qbe.php line 37
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_details_qbe.php line 766
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/user_password.php line 52
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_select.php line 71
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_select.php line 73
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_select.php line 74
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_select.php line 75
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_select.php line 141
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_select.php line 271
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 17
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 58
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 148
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 217
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 243
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 244
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 245
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 246
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 247
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 248
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 250
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 253
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 256
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 258
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 260
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 269
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 271
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 286
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 287
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 320
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 385
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/sql.php line 537
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_create.php line 91
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_create.php line 92
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_create.php line 104
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_create.php line 121
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_create.php line 138
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_create.php line 155
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_change.php line 53
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_change.php line 58
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_change.php line 223
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_change.php line 229
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_change.php line 255
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_change.php line 268
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_change.php line 269
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_change.php line 270
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_printview.php line 213
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_printview.php line 214
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_printview.php line 223
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_printview.php line 224
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_printview.php line 225
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_printview.php line 230
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_printview.php line 231
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_printview.php line 232
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_printview.php line 389
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/mult_submits.inc.php line 121
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_printview.php line 45
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_printview.php line 152
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_replace.php line 47
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_replace.php line 99
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_replace.php line 108
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_replace.php line 121
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_replace.php line 156
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_replace.php line 157
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_replace.php line 165
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_replace.php line 166
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_replace.php line 199
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/phpmyadmin/libraries/fpdf/fpdf.php line 324
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/phpmyadmin/libraries/fpdf/fpdf.php line 356
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/phpmyadmin/libraries/fpdf/fpdf.php line 2311
+WARNING: Function 'set_magic_quotes_runtime' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/phpmyadmin/libraries/fpdf/fpdf.php line 2321
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/auth/http.auth.lib.php line 172
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/auth/http.auth.lib.php line 177
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/auth/http.auth.lib.php line 182
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/auth/http.auth.lib.php line 186
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/mysql_wrappers.lib.php line 60
+WARNING: Function 'mysql_list_tables' is deprecated, please use 'mysql_query' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/mysql_wrappers.lib.php line 110
+WARNING: Function 'mysql_list_tables' is deprecated, please use 'mysql_query' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/mysql_wrappers.lib.php line 112
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 501
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 923
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 1048
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 1048
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 1051
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 1387
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 1450
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 1452
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 1628
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 1673
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 1674
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 1782
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 1783
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/common.lib.php line 1954
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/defines.lib.php line 82
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/defines.lib.php line 85
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/defines.lib.php line 88
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/defines.lib.php line 94
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/defines.lib.php line 97
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/defines.lib.php line 98
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/defines.lib.php line 101
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/ip_allow_deny.lib.php line 29
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/ip_allow_deny.lib.php line 222
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/ip_allow_deny.lib.php line 260
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/ip_allow_deny.lib.php line 280
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/ip_allow_deny.lib.php line 281
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/ip_allow_deny.lib.php line 285
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/read_dump.lib.php line 136
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/export/latex.php line 264
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/export/latex.php line 265
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/export/latex.php line 274
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/export/latex.php line 275
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/export/latex.php line 276
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/export/latex.php line 281
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/export/latex.php line 282
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/export/latex.php line 283
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/export/sql.php line 27
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/export/sql.php line 302
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/export/sql.php line 606
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/export/csv.php line 147
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/defines_php.lib.php line 24
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/defines_php.lib.php line 25
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/defines_php.lib.php line 58
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/defines_php.lib.php line 76
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/defines_php.lib.php line 77
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/defines_php.lib.php line 129
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/kanji-encoding.lib.php line 53
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/transformations.lib.php line 17
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/transformations.lib.php line 18
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/transformations.lib.php line 53
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/transformations.lib.php line 63
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/sqlparser.lib.php line 1873
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/select_lang.lib.php line 175
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/select_lang.lib.php line 176
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 98
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 574
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 614
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 615
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 618
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 621
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 624
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 629
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 659
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 677
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 682
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 686
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 690
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 958
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 1125
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 1215
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 1221
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 1268
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 1287
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/display_tbl.lib.php line 1705
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/transformations/text_plain__dateformat.inc.php line 34
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/transformations/global.inc.php line 43
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/libraries/transformations/text_plain__external.inc.php line 19
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/export.php line 195
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phpmyadmin/db_details_db_info.php line 30
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/ldi_check.php line 54
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/ldi_check.php line 54
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/modules/phpmyadmin/ldi_check.php line 160
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties_operations.php line 376
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phpmyadmin/tbl_properties_operations.php line 376
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/dental/dental_tz.php line 21
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/dental/dental_tz.php line 21
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/medocs/medocs_start.php line 35
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/medocs/medocs_start.php line 35
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/medocs/medocs_start.php line 36
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/medocs/medocs_start.php line 36
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/medocs/medocs_start.php line 37
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/medocs/medocs_start.php line 37
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/medocs/medocs_start.php line 38
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/medocs/medocs_start.php line 38
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/medocs/medocs_pass.php line 22
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/medocs/medocs_pass.php line 22
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/medocs/medocs_data_show.php line 129
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/medocs/medocs_data_show.php line 129
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phppgadmin/classes/database/Postgres.php line 1343
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phppgadmin/classes/database/Postgres.php line 1389
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phppgadmin/classes/database/Postgres.php line 2419
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phppgadmin/classes/Misc.php line 102
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phppgadmin/dataexport.php line 94
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/phppgadmin/dataexport.php line 197
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/phppgadmin/libraries/adodb/adodb-session.php line 292
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/modules/phppgadmin/libraries/adodb/drivers/adodb-informix72.inc.php line 238
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phppgadmin/libraries/adodb/drivers/adodb-sybase.inc.php line 277
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/phppgadmin/libraries/adodb/drivers/adodb-sybase.inc.php line 294
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/modules/phppgadmin/libraries/adodb/drivers/adodb-postgres64.inc.php line 393
+WARNING: Function 'split' is deprecated, please use 'explode' or 'preg_split' instead in file /var/www/care2x_tz/modules/phppgadmin/libraries/adodb/drivers/adodb-postgres64.inc.php line 419
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/doctors/doctors.php line 18
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/doctors/doctors.php line 18
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/news/start_page.php line 20
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/news/start_page.php line 20
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/news/start_page.php line 43
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/news/start_page.php line 43
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/news/start_page.php line 44
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/news/start_page.php line 44
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/news/departments.php line 20
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/news/departments.php line 20
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/inpatient/inpatient.php line 20
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/inpatient/inpatient.php line 20
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/get_img.php line 12
+WARNING: Function 'ereg_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nocc/is_uploaded_file.php line 19
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nocc/functions.php line 383
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nocc/functions.php line 384
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nocc/functions.php line 385
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nocc/functions.php line 386
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nocc/functions.php line 387
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nocc/functions.php line 388
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nocc/functions.php line 393
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nocc/functions.php line 394
+WARNING: Function 'session_unregister' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/functions.php line 572
+WARNING: Function 'session_unregister' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/functions.php line 573
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/conf.php line 146
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/nocc/action.php line 36
+WARNING: Function 'eregi' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/nocc/action.php line 38
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/action.php line 72
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/action.php line 88
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/action.php line 100
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/action.php line 116
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/action.php line 126
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/delete.php line 14
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/send.php line 16
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/send.php line 48
+WARNING: Function 'session_unregister' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/send.php line 91
+WARNING: Function 'session_unregister' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/send.php line 92
+WARNING: Function 'session_unregister' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/send.php line 116
+WARNING: Function 'session_unregister' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/send.php line 117
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/nocc/send.php line 120
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/op_document/op-doku-start.php line 71
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/op_document/op-doku-start.php line 71
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/op_document/op-doku-search.php line 48
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/op_document/op-doku-search.php line 48
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/op_document/op-doku-archiv.php line 42
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/op_document/op-doku-archiv.php line 42
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/system_admin/phpmyadmin-start.php line 24
+WARNING: Function 'ereg' is deprecated, please use 'preg_match' instead in file /var/www/care2x_tz/modules/system_admin/edv_user_access_edit.php line 75
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/system_admin/edv.php line 21
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/system_admin/edv.php line 21
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/system_admin/edv_patient_numbers.php line 20
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/system_admin/edv_patient_numbers.php line 20
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/calendar/calendar-options.php line 14
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/calendar/calendar-options.php line 14
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/calendar/calendar-options.php line 15
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/calendar/calendar-options.php line 15
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/calendar/calendar-options.php line 43
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/calendar/calendar-options.php line 43
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/pharmacy/apotheke.php line 20
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/pharmacy/apotheke.php line 20
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/pharmacy/apotheke.php line 21
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/pharmacy/apotheke.php line 21
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/tech/technik.php line 19
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/tech/technik.php line 19
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/tech/technik.php line 20
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/tech/technik.php line 20
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/tech/technik.php line 21
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/tech/technik.php line 21
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/pharmacy_tz/apotheke.php line 20
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/pharmacy_tz/apotheke.php line 20
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/pharmacy_tz/apotheke.php line 21
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/pharmacy_tz/apotheke.php line 21
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/cafeteria/cafenews.php line 25
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/cafeteria/cafenews.php line 25
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/cafeteria/cafenews.php line 26
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/cafeteria/cafenews.php line 26
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register.php line 51
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register.php line 51
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register.php line 52
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register.php line 52
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register.php line 53
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register.php line 53
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register.php line 54
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register.php line 54
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register.php line 55
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register.php line 55
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register.php line 56
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register.php line 56
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register_show.php line 90
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register_show.php line 90
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register_show.php line 91
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/personell_register_show.php line 91
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/person_register.php line 24
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/personell_admin/person_register.php line 24
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/patient.php line 21
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/patient.php line 21
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/patient.php line 22
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/patient.php line 22
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/patient.php line 23
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/patient.php line 23
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/patient.php line 24
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/patient.php line 24
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/patient.php line 25
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/patient.php line 25
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/aufnahme_daten_zeigen.php line 31
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/aufnahme_daten_zeigen.php line 31
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/aufnahme_daten_zeigen.php line 33
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/aufnahme_daten_zeigen.php line 33
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/aufnahme_start.php line 59
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/aufnahme_start.php line 59
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/aufnahme_start.php line 60
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/aufnahme_start.php line 60
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/aufnahme_start.php line 61
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/aufnahme_start.php line 61
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/aufnahme_start.php line 62
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/aufnahme_start.php line 62
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/patient_register.php line 32
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/registration_admission/patient_register.php line 32
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nursing/nursing-station.php line 485
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nursing/nursing-station.php line 491
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nursing/nursing-station.php line 514
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nursing/nursing-station-assignwaiting.php line 430
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nursing/nursing-station-assignwaiting.php line 436
+WARNING: Function 'eregi_replace' is deprecated, please use 'preg_replace' instead in file /var/www/care2x_tz/modules/nursing/nursing-station-assignwaiting.php line 460
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/radiology/upload_pass.php line 22
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/radiology/upload_pass.php line 22
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/radiology/radiolog_pass.php line 22
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/radiology/radiolog_pass.php line 22
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/radiology/radio_pass.php line 22
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/radiology/radio_pass.php line 22
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/or_logbook/oplogtimebar.php line 12
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/or_logbook/oplogtimebar.php line 12
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/or_logbook/oploginput.php line 322
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/or_logbook/oploginput.php line 322
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/reporting_tz/maternity_pregnancy_outcome.php line 21
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/reporting_tz/maternity_pregnancy_outcome.php line 21
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/reporting_tz/maternity_singleton_childinfo.php line 21
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/reporting_tz/maternity_singleton_childinfo.php line 21
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/reporting_tz/maternity_mother_info.php line 21
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/reporting_tz/maternity_mother_info.php line 21
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/reporting_tz/maternity_multiple_childinfo.php line 21
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/reporting_tz/maternity_multiple_childinfo.php line 21
+WARNING: Function 'session_is_registered' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/reporting_tz/maternity.php line 21
+WARNING: Function 'session_register' is deprecated, its use is no longer recommended in file /var/www/care2x_tz/modules/reporting_tz/maternity.php line 21
