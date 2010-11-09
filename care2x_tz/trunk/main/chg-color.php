@@ -58,7 +58,7 @@ function set(c)
 <FONT  COLOR="<?php echo $tt; ?>"  SIZE=+3  FACE="Arial"><STRONG> &nbsp;<?php echo $LDColorMap ?></STRONG></FONT>
 </td>
 <td bgcolor="<?php echo $tb; ?>" height="10" align=right>
-<a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?></a></td>
+<a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'style=filter:alpha(opacity=70) onMouseover=hilite(this,1) onMouseOut=hilite(this,0)>';?>></a></td>
 </tr>
 <tr>
 <td colspan=2  bgcolor=<?php echo $bb; ?>>
