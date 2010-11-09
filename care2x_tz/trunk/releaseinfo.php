@@ -1,7 +1,9 @@
 <?php
-$version="2.05.3.8";
+$version="2.5.4";
 /**
  * History:
+ * Version 2.5.4
+ * Working proper now under PHP5.3
  * Version 2.05.3.8
  * Improving the lab module, covering to the billing section. Embedded reporting elements on discharge and also patient tracking and presciption tracking
  * Version 2.05.3.5, 22-dec-08
