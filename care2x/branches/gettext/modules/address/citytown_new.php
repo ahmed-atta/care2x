@@ -1,4 +1,4 @@
-<?php
+<?
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('../../include/helpers/inc_environment_global.php');
 
@@ -24,7 +24,7 @@ if(!isset($mode)) {
 	$_POST['name'] = trim($_POST['name']);
 	if(!empty($_POST['name'])) {
 		if($address_obj->CityTownExists($_POST['name'],$_POST['iso_country_id'])){
-			$mode = 'citytown_exists';
+			$mode = 'citytown_dwg exists';
 		} else {
 			if($address_obj->saveCityTownInfoFromArray($_POST)){
 				$insid = $db->Insert_ID();
