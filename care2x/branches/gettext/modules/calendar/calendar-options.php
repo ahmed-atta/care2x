@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -15,8 +15,8 @@ if(!isset($_SESSION['sess_user_origin'])) $_SESSION['sess_user_origin'] = "";
 if(!isset($_SESSION['sess_dept_nr'])) $_SESSION['sess_dept_nr'] = "";
 
 /* Start creating this page */
-$lang_tables=array('departments.php');
-define('LANG_FILE','specials.php');
+define('MODULE','calendar');
+define('LANG_FILE_MODULAR','calendar.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 

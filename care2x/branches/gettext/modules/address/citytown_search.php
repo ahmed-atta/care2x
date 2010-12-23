@@ -8,7 +8,6 @@ define('MAX_BLOCK_ROWS',30);
 
 define('MODULE','address');
 define('LANG_FILE_MODULAR','place.php');
-$lang_tables[]='search.php';
 $local_user='aufnahme_user';
 require_once(CARE_BASE.'/include/helpers/inc_front_chain_lang.php');
 # Load the insurance object

@@ -6,7 +6,6 @@ require('../../include/helpers/inc_environment_global.php');
 // In normal cases this value is derived from the db table "care_config_global" using the "pagin_address_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
-$lang_tables[] = 'search.php';
 define('MODULE','address');
 define('LANG_FILE_MODULAR','place.php');
 $local_user = 'aufnahme_user';

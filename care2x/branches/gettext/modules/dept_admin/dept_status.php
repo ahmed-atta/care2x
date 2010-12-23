@@ -9,7 +9,7 @@
 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 
 # The following 2 lines are for the permission checking: EL - 2004-04-19
 $local_user='ck_admin_user';
