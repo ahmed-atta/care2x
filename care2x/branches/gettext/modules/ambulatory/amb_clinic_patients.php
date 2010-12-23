@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('../../include/helpers/inc_environment_global.php');
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -14,10 +14,8 @@ require($root_path.'include/helpers/inc_environment_global.php');
 define('SHOW_DOC_2',1);  # Define to 1 to  show the 2nd doctor-on-duty
 define('DOC_CHANGE_TIME','7.30'); # Define the time when the doc-on-duty will change in 24 hours H.M format (eg. 3 PM = 15.00, 12 PM = 0.00)
 
-$lang_tables[]='ambulatory.php';
-$lang_tables[]='prompt.php';
-$lang_tables[]='departments.php';
-define('LANG_FILE','nursing.php');
+define('MODULE','ambulatory');
+define('LANG_FILE_MODULAR','ambulatory.php');
 //define('NO_2LEVEL_CHK',1);
 $local_user='ck_pflege_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');

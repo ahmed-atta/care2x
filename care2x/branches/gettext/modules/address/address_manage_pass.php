@@ -2,7 +2,8 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('../../include/helpers/inc_environment_global.php');
 
-define('LANG_FILE','stdpass.php');
+define('MODULE','address');
+define('LANG_FILE_MODULAR','place.php');
 define('NO_2LEVEL_CHK',1);
 require_once(CARE_BASE.'/include/helpers/inc_front_chain_lang.php');
 require_once(CARE_BASE.'/include/helpers/inc_config_color.php');

@@ -10,8 +10,8 @@ require($root_path.'include/helpers/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('aufnahme.php','prompt.php','departments.php','person.php');
-define('LANG_FILE','nursing.php');
+define('MODULE','ambulatory');
+define('LANG_FILE_MODULAR','ambulatory.php');
 //define('NO_2LEVEL_CHK',1);
 $local_user='ck_pflege_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');

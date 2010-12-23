@@ -1,10 +1,11 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+require('../../include/helpers/inc_environment_global.php');
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
 
-$lang_tables=array('departments.php');
-define('LANG_FILE','ambulatory.php');
+define('MODULE','ambulatory');
+define('LANG_FILE_MODULAR','ambulatory.php');
+
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
