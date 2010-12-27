@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -10,8 +10,8 @@ require($root_path.'include/helpers/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables[]='prompt.php';
-define('LANG_FILE','drg.php');
+define('MODULE','drg');
+define('LANG_FILE_MODULAR','drg.php');
 
 require_once('drg_inc_local_user.php');
 
