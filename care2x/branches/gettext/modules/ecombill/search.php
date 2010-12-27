@@ -2,14 +2,13 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 define('NO_CHAIN',1);
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 
 # Define to true to echo the sql query, for debugging 
 define('SHOW_SQLQUERY',FALSE);
 
-$lang_tables[]='search.php';
-$lang_tables[]='billing.php';
-define('LANG_FILE','aufnahme.php');
+define('MODULE','ecombill');
+define('LANG_FILE_MODULAR','ecombill.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');

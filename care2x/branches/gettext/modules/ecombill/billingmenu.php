@@ -11,9 +11,10 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
  * GPL License
  */
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 
-define('LANG_FILE','billing.php');
+define('MODULE','ecombill');
+define('LANG_FILE_MODULAR','ecombill.php');
 define('NO_CHAIN',1);
 
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');

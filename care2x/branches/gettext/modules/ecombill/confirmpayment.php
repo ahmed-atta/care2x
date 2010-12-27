@@ -2,10 +2,10 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 define('NO_CHAIN',1);
-$lang_tables[]='billing.php';
-define('LANG_FILE','aufnahme.php');
+define('MODULE','ecombill');
+define('LANG_FILE_MODULAR','ecombill.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');

@@ -4,7 +4,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 $local_user='aufnahme_user';
 define('NO_CHAIN',1);
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 include_once($root_path."classes/fpdf/fpdf.php");
 include_once($root_path."classes/PHPJasperXML/PHPJasperXML.inc");
 
