@@ -7,7 +7,7 @@ $report_auxtitlesize=10;
 $report_authorsize=10;
 
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
@@ -82,8 +82,8 @@ function dec2frac( $decimal ) {
 
 
 //$lang_tables[]='startframe.php';
-$lang_tables[]='emr.php';
-define('LANG_FILE','aufnahme.php');
+define('MODULE','nursing');
+define('LANG_FILE_MODULAR','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 $thisfile=basename(__FILE__);

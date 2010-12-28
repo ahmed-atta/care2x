@@ -1,8 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
-define('LANG_FILE','konsil.php');
+require('../../include/helpers/inc_environment_global.php');
+define('MODULE','nursing');
+define('LANG_FILE_MODULAR','nursing.php');
 
 /* Globalize the variables */
 

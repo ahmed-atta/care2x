@@ -1,9 +1,10 @@
 <?php
  error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
  require('./roots.php');
- require($root_path.'include/helpers/inc_environment_global.php');
+ require('../../include/helpers/inc_environment_global.php');
 
- define('LANG_FILE','nursing.php');
+define('MODULE','nursing');
+define('LANG_FILE_MODULAR','nursing.php');
  define('NO_2LEVEL_CHK',1);
  require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 

@@ -2,7 +2,7 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 //error_reporting(E_ALL);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System version deployment 1.1 (mysql) 2004-01-11
 * GNU General Public License
@@ -88,7 +88,8 @@ function prepareTestElements()
 }
 
 /* Start initializations */
-define('LANG_FILE','konsil_chemlabor.php');
+define('MODULE','nursing');
+define('LANG_FILE_MODULAR','nursing.php');
 
 /* We need to differentiate from where the user is coming:
 *  $user_origin != lab ;  from patient charts folder

@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 if (file_exists($custom_lang_file)) {include "./lang_en_custom.php";}
 
 /**
@@ -12,8 +12,8 @@ if (file_exists($custom_lang_file)) {include "./lang_en_custom.php";}
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('actions.php');
-define('LANG_FILE','nursing.php');
+define('MODULE','nursing');
+define('LANG_FILE_MODULAR','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if($edit&&!$_COOKIE[$local_user.$sid]) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;}; 
