@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 
 //$db->debug=true;
 
@@ -13,7 +13,8 @@ require($root_path.'include/helpers/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define('LANG_FILE','prompt.php');
+define('MODULE','registration_admission');
+define('LANG_FILE_MODULAR','registration_admission.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 # Do some filtering

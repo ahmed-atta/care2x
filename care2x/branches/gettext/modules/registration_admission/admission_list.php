@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
  * CARE2X Integrated Hospital Information System beta 2.0.1 - 2004-07-04
  * GNU General Public License
@@ -43,7 +43,8 @@ function fCond($item,$k){
 }
 
 
-define('LANG_FILE','aufnahme.php');
+define('MODULE','registration_admission');
+define('LANG_FILE_MODULAR','registration_admission.php');
 $local_user='aufnahme_user';
 require($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
