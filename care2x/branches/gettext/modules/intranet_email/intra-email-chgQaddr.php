@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE 2X Integrated Hospital Information System beta 1.0.09 - 2003-11-25
 * GNU General Public License
@@ -10,7 +10,8 @@ require($root_path.'include/helpers/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define('LANG_FILE','intramail.php');
+define('MODULE','intranet_email');
+define('LANG_FILE_MODULAR','intranet_email.php');
 $local_user='ck_intra_email_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
