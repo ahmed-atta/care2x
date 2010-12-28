@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 ///$db->debug=1;
 /**
  * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
@@ -11,7 +11,8 @@ require($root_path.'include/helpers/inc_environment_global.php');
  *
  * See the file "copy_notice.txt" for the licence notice
  */
-define('LANG_FILE','products.php');
+define('MODULE','products');
+define('LANG_FILE_MODULAR','products.php');
 $local_user='ck_prod_arch_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
