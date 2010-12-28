@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -10,7 +10,8 @@ require($root_path.'include/helpers/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define('LANG_FILE','nursing.php');
+define('MODULE','nursing');
+define('LANG_FILE_MODULAR','nursing.php');
 
 require('./include/inc_admit_station_bridge.php');
 

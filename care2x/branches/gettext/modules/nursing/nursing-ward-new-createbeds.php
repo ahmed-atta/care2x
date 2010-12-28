@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -13,7 +13,8 @@ require($root_path.'include/helpers/inc_environment_global.php');
 
 define('DEFAULT_NR_OF_BEDS',2); // Define here the default number of beds if the bed value is empty or 0
 
-define('LANG_FILE','nursing.php');
+define('MODULE','nursing');
+define('LANG_FILE_MODULAR','nursing.php');
 $local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 

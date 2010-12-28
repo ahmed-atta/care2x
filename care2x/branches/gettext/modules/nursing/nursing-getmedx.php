@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 include_once($root_path.'include/helpers/inc_date_format_functions.php');
 global $db;
 include_once($root_path.'modules/nursing/model/class_prescription.php');
@@ -24,7 +24,8 @@ $isDischarged = $enc_obj->Is_Discharged($pn);
 * See the file "copy_notice.txt" for the licence notice
 */
 
-define('LANG_FILE','nursing.php');
+define('MODULE','nursing');
+define('LANG_FILE_MODULAR','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 include_once($root_path.'include/helpers/inc_visual_signalling_fx.php');
