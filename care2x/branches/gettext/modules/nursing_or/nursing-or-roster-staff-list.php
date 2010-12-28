@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -16,12 +16,8 @@ require($root_path.'include/helpers/inc_environment_global.php');
 
 define('MAX_BLOCK_ROWS',30); 
 
-$lang_tables[]='search.php';
-$lang_tables[]='or.php';
-$lang_tables[]='departments.php';
-$lang_tables[]='staff.php';
-
-define('LANG_FILE','doctors.php');
+define('MODULE','nursing_or');
+define('LANG_FILE_MODULAR','nursing_or.php');
 
 if($_SESSION['sess_user_origin']=='staff_admin'){
 	$local_user='aufnahme_user';
