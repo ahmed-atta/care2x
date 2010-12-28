@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 *
 * Jean-Philippe LIOT  <flip-zali@tiscali.fr>
@@ -19,7 +19,9 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 *
 */
-define('LANG_FILE','aufnahme.php');
+define('MODULE','staff_admin');
+define('LANG_FILE_MODULAR','staff_admin.php');
+
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
