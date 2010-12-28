@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
@@ -14,9 +14,8 @@ require($root_path.'include/helpers/inc_environment_global.php');
 # In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
-$lang_tables[]='search.php';
-
-define('LANG_FILE','lab.php');
+define('MODULE','laboratory');
+define('LANG_FILE_MODULAR','laboratory.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 

@@ -12,8 +12,8 @@ require ($root_path . 'include/helpers/inc_environment_global.php');
  */
 
 /* Start initializations */
-$lang_tables = array ('departments.php', 'konsil.php' );
-define ( 'LANG_FILE', 'konsil_chemlabor.php' );
+define('MODULE','laboratory');
+define('LANG_FILE_MODULAR','laboratory.php');
 
 /* We need to differentiate from where the user is coming:
 *  $user_origin != lab ;  from patient charts folder

@@ -10,9 +10,8 @@ require ($root_path . 'include/helpers/inc_environment_global.php');
  *
  * See the file "copy_notice.txt" for the licence notice
  */
-$lang_tables [] = 'departments.php';
-$lang_tables [] = 'konsil.php';
-define ( 'LANG_FILE', 'lab.php' );
+define('MODULE','laboratory');
+define('LANG_FILE_MODULAR','laboratory.php');
 /* We need to differentiate from where the user is coming: 
 *  $user_origin != lab ;  from patient charts folder
 *  $user_origin == lab ;  from the laboratory

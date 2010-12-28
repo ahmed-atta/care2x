@@ -13,7 +13,8 @@ require ($root_path . 'include/helpers/inc_environment_global.php') ;
  *
  * See the file "copy_notice.txt" for the licence notice
  */
-define ( 'LANG_FILE', 'lab.php' ) ;
+define('MODULE','laboratory');
+define('LANG_FILE_MODULAR','laboratory.php');
 $local_user = 'ck_lab_user' ;
 require_once ($root_path . 'include/helpers/inc_front_chain_lang.php') ;
 
