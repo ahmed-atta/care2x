@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -16,9 +16,8 @@ $def_max_hours=0;
 $def_max_mins=15; # 15 minutes
 $def_max_secs=59; # 59 seconds
 
-$lang_tables[]='startframe.php';
-$lang_tables[]='date_time.php';
-define('LANG_FILE','edp.php');
+define('MODULE','system_admin');
+define('LANG_FILE_MODULAR','system_admin.php');
 $local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 

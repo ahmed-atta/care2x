@@ -1,8 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-define('LANG_FILE','edp.php');
+define('MODULE','system_admin');
+define('LANG_FILE_MODULAR','system_admin.php');
 $local_user='ck_admin_user';
-require_once($root_path.'include/helpers/inc_front_chain_lang.php');
+require('../../include/helpers/inc_environment_global.php');
 
 require_once($root_path.'include/helpers/inc_config_color.php');
 
