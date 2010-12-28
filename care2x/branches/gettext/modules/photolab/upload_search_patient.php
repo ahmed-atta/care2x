@@ -14,9 +14,8 @@ require('../../include/helpers/inc_environment_global.php');
 # In normal cases this value is derived from the db table "care_config_global" using the "pagin_insurance_list_max_block_rows" element.
 define('MAX_BLOCK_ROWS',30); 
 
-$lang_tables[]='actions.php';
-$lang_tables[]='search.php';
-define('LANG_FILE','specials.php');
+define('MODULE','photolab');
+define('LANG_FILE_MODULAR','photolab.php');
 $local_user='ck_photolab_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 

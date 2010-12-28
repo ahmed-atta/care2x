@@ -10,7 +10,8 @@ require('../../include/helpers/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define('LANG_FILE','specials.php');
+define('MODULE','photolab');
+define('LANG_FILE_MODULAR','photolab.php');
 $local_user='ck_photolab_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 

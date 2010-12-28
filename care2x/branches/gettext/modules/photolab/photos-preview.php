@@ -27,8 +27,8 @@ define('IMAGEJ_PANEL_HEIGHT', 100);
 #
 define('IMAGEJ_PANEL_WIDTH_MIN', 250);
 
-$lang_tables=array('images.php');
-define('LANG_FILE','nursing.php');
+define('MODULE','photolab');
+define('LANG_FILE_MODULAR','photolab.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require($root_path.'global_conf/inc_remoteservers_conf.php');
