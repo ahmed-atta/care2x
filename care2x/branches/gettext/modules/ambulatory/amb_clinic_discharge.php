@@ -266,12 +266,12 @@ if(($mode=='release')&&($released)) $sBreakButton= '<img '.createLDImgSrc($root_
 
 $smarty->assign('pbCancel','<a href="'.$breakfile.'">'.$sBreakButton.'</a>');
 
-$smarty->assign('sMainBlockIncludeFile','nursing/discharge_patient_form.tpl');
+// Assign page output to the mainframe template
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/discharge_patient_form.tpl');
 
  /**
  * show Template
  */
 
- $smarty->display('common/mainframe.tpl');
- // $smarty->display('debug.tpl');
- ?>
+//$smarty->compile_check = true; $smarty->debugging = true; $smarty->display('debug.tpl');
+$smarty->display('common/mainframe.tpl');

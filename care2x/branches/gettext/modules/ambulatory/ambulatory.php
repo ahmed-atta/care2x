@@ -20,9 +20,9 @@ $_SESSION['sess_parent_mod']='';
 require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj= new Department;
 if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '')
-	$medical_depts=&$dept_obj->getAllActiveSort( 'name_formal' ) ; //get only the main depts
+	$medical_depts=$dept_obj->getAllActiveSort( 'name_formal' ) ; //get only the main depts
 else
-	$medical_depts=&$dept_obj->getAllMedical() ; // get all depts
+	$medical_depts=$dept_obj->getAllMedical() ; // get all depts
 # Start Smarty templating here
  /**
  * LOAD Smarty
@@ -183,7 +183,7 @@ if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '') {
     
      $sTemp='';
      ob_start();
-     		$smarty->display('ambulatory/submenu_dept.tpl');
+     		$smarty->display(__DIR__ . '/view/submenu_dept.tpl');
      		$sTemp = ob_get_contents();
      ob_end_clean();
     
@@ -201,7 +201,7 @@ if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '') {
     
      $sTemp='';
      ob_start();
-     		$smarty->display('ambulatory/submenu_dept.tpl');
+     		$smarty->display(__DIR__ . '/view/submenu_dept.tpl');
      		$sTemp = ob_get_contents();
      ob_end_clean();
     
@@ -219,7 +219,7 @@ if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '') {
     
      $sTemp='';
      ob_start();
-     		$smarty->display('ambulatory/submenu_dept.tpl');
+     		$smarty->display(__DIR__ . '/view/submenu_dept.tpl');
      		$sTemp = ob_get_contents();
      ob_end_clean();
     
@@ -237,7 +237,7 @@ if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '') {
     
      $sTemp='';
      ob_start();
-     		$smarty->display('ambulatory/submenu_dept.tpl');
+     		$smarty->display(__DIR__ . '/view/submenu_dept.tpl');
      		$sTemp = ob_get_contents();
      ob_end_clean();
     
@@ -255,7 +255,7 @@ if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '') {
     
      $sTemp='';
      ob_start();
-     		$smarty->display('ambulatory/submenu_dept.tpl');
+     		$smarty->display(__DIR__ . '/view/submenu_dept.tpl');
      		$sTemp = ob_get_contents();
      ob_end_clean();
     
@@ -273,20 +273,18 @@ if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '') {
     
      $sTemp='';
      ob_start();
-     		$smarty->display('ambulatory/submenu_dept.tpl');
+     		$smarty->display(__DIR__ . '/view/submenu_dept.tpl');
      		$sTemp = ob_get_contents();
      ob_end_clean();
 }
  # Assign to main template object
 	$smarty->assign('sBottomRightSubMenu',$sTemp);
 
-# Assign the submenu to the mainframe center block
-
- $smarty->assign('sMainBlockIncludeFile','ambulatory/submenu_ambulatory.tpl');
+// Assign page output to the mainframe template
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/submenu_ambulatory.tpl');
 
  /**
  * show Template
  */
- $smarty->display('common/mainframe.tpl');
-
-?>
+//$smarty->compile_check = true; $smarty->debugging = true; $smarty->display('debug.tpl');
+$smarty->display('common/mainframe.tpl');

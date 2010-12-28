@@ -401,7 +401,7 @@ if($rows){
 
 			# Create the rows using ward_occupancy_list_row.tpl template
 			ob_start();
-				$smarty->display('ambulatory/outpatients_list_row.tpl');
+				$smarty->display(__DIR__ . '/view//outpatients_list_row.tpl');
 				$sListRows = $sListRows.ob_get_contents();
 			ob_end_clean();
 
@@ -487,13 +487,8 @@ $tp=$TP_obj->load('ambulatory/tp_clinic_quickinfo.htm');
 	 # Assign to page template object
 	$smarty->assign('sSubMenuBlock',$sTemp);
 
-# Assign the submenu to the mainframe center block
+// Assign page output to the mainframe template
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/outpatients.tpl');
 
- $smarty->assign('sMainBlockIncludeFile','ambulatory/outpatients.tpl');
-
- /**
- * show Template
- */
- $smarty->display('common/mainframe.tpl');
-
- ?>
+//$smarty->compile_check = true; $smarty->debugging = true; $smarty->display('debug.tpl');
+$smarty->display('common/mainframe.tpl');

@@ -204,7 +204,7 @@ $smarty->assign('referrer_notes',$encounter['referrer_notes']);
 
 ob_start();
 
-$smarty->display('nursing/basic_data_admit.tpl');
+$smarty->display(__DIR__ . '/view/basic_data_admit.tpl');
 ?>
 <!--  Show stop sign and warn if the initial ward assignment is different from this ward -->
 <?php
@@ -253,5 +253,3 @@ ob_end_clean();
  * show Template
  */
  $smarty->display('common/mainframe.tpl');
-
- ?>
