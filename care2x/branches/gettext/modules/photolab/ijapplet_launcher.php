@@ -1,17 +1,17 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 ?>
 <!-- Runs ImageJ as an Apple -->
 
 <html>
 <head>
-<title>Editim i Pamjes</title>
+<title>Image editing</title>
 </head>
 <body>
 
-<h2>Editim i Pamjes</h2>
+<h2>Image editing</h2>
 
 <applet codebase="."
 	code="ij.ImageJApplet.class" archive="ij.jar"
@@ -21,7 +21,7 @@ require($root_path.'include/helpers/inc_environment_global.php');
 </applet>
 
 <p>
-<a href="javascript:window.history.back()">Prapa</a>
+<a href="javascript:window.history.back()">Back</a>
 </p>
 </body>
 </html>

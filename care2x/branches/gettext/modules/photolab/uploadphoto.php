@@ -1,7 +1,7 @@
 <?PHP
 
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 require($root_path.'global_conf/inc_remoteservers_conf.php');
 $local_user='ck_photolab_user';
 
