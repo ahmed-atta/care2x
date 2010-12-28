@@ -1,7 +1,6 @@
 <?php
-$lang_tables[]='person.php';
-$lang_tables[]='prompt.php';
-define('LANG_FILE','aufnahme.php');
+define('MODULE','registration_admission');
+define('LANG_FILE_MODULAR','registration_admission.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
