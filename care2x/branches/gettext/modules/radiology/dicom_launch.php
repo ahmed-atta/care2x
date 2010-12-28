@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 
 # Switch to the selected dicom viewer module
 switch($_SESSION['sess_dicom_viewer']){
@@ -21,8 +21,8 @@ switch($_SESSION['sess_dicom_viewer']){
 define('TMPSIZE_IN_MEM',9); # The number of files loaded in memory at once
 define('NUM_EQUALS_TMPSIZE',0); # 1 = actual nr. of files equals tmpsize in mem, 0 = the value of TMPSIZE_IN_MEM is used
 define('FILE_DISCRIM','.dcm'); # define here the file discrimator string 
-define('LANG_FILE','actions.php');
-//define('LANG_FILE','radio.php');
+define('MODULE','radiology');
+define('LANG_FILE_MODULAR','radiology.php');
 //define('NO_2LEVEL_CHK',1);
 $local_user='ck_radio_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');

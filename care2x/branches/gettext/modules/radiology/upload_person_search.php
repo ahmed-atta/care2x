@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -11,10 +11,8 @@ require($root_path.'include/helpers/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 
-$lang_tables[]='actions.php';
-$lang_tables[]='prompt.php';
-$lang_tables[]='aufnahme.php';
-define('LANG_FILE','radio.php');
+define('MODULE','radiology');
+define('LANG_FILE_MODULAR','radiology.php');
 # Resolve the local user based on the origin of the script
 require_once('include/inc_local_user.php');
 //define('NO_2LEVEL_CHK',1);

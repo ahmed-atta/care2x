@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 
 # Switch to the selected dicom viewer module
 
@@ -20,9 +20,8 @@ switch($_SESSION['sess_dicom_viewer']){
 *
 * See the file 'copy_notice.txt' for the licence notice
 */
-define('LANG_FILE','actions.php');
-//define('LANG_FILE','radio.php');
-//define('NO_2LEVEL_CHK',1);
+define('MODULE','radiology');
+define('LANG_FILE_MODULAR','radiology.php');
 $local_user='ck_radio_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
