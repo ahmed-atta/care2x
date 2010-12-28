@@ -10,9 +10,8 @@ require_once($root_path.'include/helpers/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$lang_tables=array('departments.php');
-
-define('LANG_FILE','abteilung.php');
+define('MODULE','news');
+define('LANG_FILE_MODULAR','news.php');
 define('NO_2LEVEL_CHK',1);
 
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');

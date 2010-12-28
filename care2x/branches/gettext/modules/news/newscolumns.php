@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
-require_once($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -13,8 +13,8 @@ require_once($root_path.'include/helpers/inc_environment_global.php');
 
 define('MODERATE_NEWS',0);  // define to 1 if news is moderated
 
-$lang_tables=array('departments.php');
-define('LANG_FILE','newscolumns.php');
+define('MODULE','news');
+define('LANG_FILE_MODULAR','news.php');
 define('NO_2LEVEL_CHK',1);
 
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
