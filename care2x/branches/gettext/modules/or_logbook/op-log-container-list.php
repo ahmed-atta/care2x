@@ -1,8 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
-define('LANG_FILE','or.php');
+require('../../include/helpers/inc_environment_global.php');
+define('MODULE','or_logbook');
+define('LANG_FILE_MODULAR','or_logbook.php');
 $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 $parsedstr=array();
