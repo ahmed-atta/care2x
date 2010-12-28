@@ -1,9 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR);
 require('./roots.php');
-require($root_path . 'include/helpers/inc_environment_global.php');
-$lang_tables[] = 'departments.php';
-define('LANG_FILE', 'products.php');
+require('../../include/helpers/inc_environment_global.php');
+define('MODULE','products');
+define('LANG_FILE_MODULAR','products.php');
 if (!isset($userck))
     if (isset($_GET['userck'])) $userck = $_GET['userck'];
         elseif (isset($_POST['userck'])) $userck = $_POST['userck'];

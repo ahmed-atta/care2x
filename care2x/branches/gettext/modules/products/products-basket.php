@@ -1,9 +1,9 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
-$lang_tables[]='departments.php';
-define('LANG_FILE','products.php');
+require('../../include/helpers/inc_environment_global.php');
+define('MODULE','products');
+define('LANG_FILE_MODULAR','products.php');
 $local_user='ck_prod_order_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 ///$db->debug=1;
