@@ -3,7 +3,7 @@ define(COL_MAX,6); # define here the maximum number of rows for displaying the p
 
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
  * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
  * GNU General Public License
@@ -12,7 +12,8 @@ require($root_path.'include/helpers/inc_environment_global.php');
  *
  * See the file "copy_notice.txt" for the licence notice
  */
-define('LANG_FILE','lab.php');
+define('MODULE','laboratory');
+define('LANG_FILE_MODULAR','laboratory.php');
 $local_user='ck_lab_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 //$db->debug=1;

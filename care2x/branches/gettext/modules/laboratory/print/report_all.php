@@ -7,7 +7,7 @@ $report_auxtitlesize=10;
 $report_authorsize=10;
 
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02

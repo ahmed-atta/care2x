@@ -10,8 +10,8 @@ require ($root_path . 'include/helpers/inc_environment_global.php');
  *
  * See the file "copy_notice.txt" for the licence notice
  */
-$lang_tables [] = 'departments.php';
-define ( 'LANG_FILE', 'konsil.php' );
+define('MODULE','laboratory');
+define('LANG_FILE_MODULAR','laboratory.php');
 
 /* Globalize the variables */
 
