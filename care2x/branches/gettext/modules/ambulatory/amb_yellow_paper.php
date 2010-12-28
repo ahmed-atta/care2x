@@ -458,5 +458,3 @@ ob_end_clean();
  * show Template
  */
  $smarty->display('common/mainframe.tpl');
-
- ?>
