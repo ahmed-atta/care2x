@@ -1,7 +1,11 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
+
+define('MODULE','medocs');
+define('LANG_FILE_MODULAR','medocs.php');
+
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -34,7 +38,6 @@ function fCond($item,$k){
 }
 
 
-define('LANG_FILE','aufnahme.php');
 $local_user='medocs_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_config_color.php');

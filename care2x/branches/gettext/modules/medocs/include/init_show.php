@@ -1,6 +1,6 @@
 <?php
-$lang_tables[]='prompt.php';
-define('LANG_FILE','aufnahme.php');
+define('MODULE','medocs');
+define('LANG_FILE_MODULAR','medocs.php');
 # Resolve the local user based on the origin of the script
 if($_SESSION['sess_user_origin']=='admission') {
 	$breakfile=$root_path.'modules/registration_admission/admission_data_search.php'.URL_APPEND.'&encounter_nr='.$_SESSION['sess_en'];
