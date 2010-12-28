@@ -1,9 +1,10 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 
-define('LANG_FILE','specials.php');
+define('MODULE','video_monitor');
+define('LANG_FILE_MODULAR','video_monitor.php');
 define('NO_2LEVEL_CHK',1);
 
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
@@ -21,9 +22,9 @@ var cam3=new Image();
 var cam4=new Image();
 
     cam1.src="http://192.168.11.158/view/index.shtml";
-	cam2.src="http://localhost/imed/modules/video_monitor/cam_img/cam_002.jpg";
-	cam3.src="http://localhost/imed/modules/video_monitor/cam_img/cam_003.jpg";
-	cam4.src="http://localhost/imed/modules/video_monitor/cam_img/cam_004.jpg";
+	cam2.src="http://localhost/c2x/modules/video_monitor/cam_img/cam_002.jpg";
+	cam3.src="http://localhost/c2x/modules/video_monitor/cam_img/cam_003.jpg";
+	cam4.src="http://localhost/c2x/modules/video_monitor/cam_img/cam_004.jpg";
 
 function show()
 {
