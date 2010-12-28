@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -28,8 +28,8 @@ define('NEWS_BODY_SIZE','2');
 define('NEWS_PREVIEW_MAXLEN','600');
 define('NEWS_DISPLAY_WIDTH','100%');
 
-$lang_tables[]='startframe.php';
-define('LANG_FILE','edp.php');
+define('MODULE','system_admin');
+define('LANG_FILE_MODULAR','system_admin.php');
 $local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
