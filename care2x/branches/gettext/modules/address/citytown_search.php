@@ -162,4 +162,3 @@ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/citytown_search.tpl');
 
 //$smarty->compile_check = true; $smarty->debugging = true; $smarty->display('debug.tpl');
 $smarty->display('common/mainframe.tpl');
-?>

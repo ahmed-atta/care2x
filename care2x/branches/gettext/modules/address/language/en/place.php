@@ -50,4 +50,3 @@ $LDCancel = 'Cancel';
 $LDClose = 'Close';
 $LDBack = 'Back';
 $LDHelp = 'Help';
-?>

@@ -67,4 +67,3 @@ $smarty->display('debug.tpl');
 */
 
 $smarty->display('common/mainframe.tpl');
-?>

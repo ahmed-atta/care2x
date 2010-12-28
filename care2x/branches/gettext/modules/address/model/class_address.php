@@ -297,4 +297,3 @@ class Address extends Core {
 		}else{return 0;}
 	}
 }
-?>
