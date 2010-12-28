@@ -3,8 +3,8 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/helpers/inc_environment_global.php');
 
-$lang_tables[]='prompt.php';
-define('LANG_FILE','products.php');
+define('MODULE','supplier');
+define('LANG_FILE_MODULAR','supplier.php');
 $local_user='ck_supply_db_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 

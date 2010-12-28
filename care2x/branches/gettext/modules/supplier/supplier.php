@@ -1,9 +1,10 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 
-define('LANG_FILE','products.php');
+define('MODULE','supplier');
+define('LANG_FILE_MODULAR','supplier.php');
 $local_user='ck_supplier_db_user';
 $breakfile=$root_path.'modules/medstock/medstock.php '.URL_APPEND;
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
