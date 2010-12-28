@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -41,12 +41,8 @@ function createElement($item,$err, $f_size=7, $mx=5)
 	}
 	return $ret_str;
 }
-$lang_tables[]='departments.php';
-$lang_tables[]='doctors.php';
-$lang_tables[]='search.php';
-$lang_tables[]='prompt.php';
-$lang_tables[]='actions.php';
-define('LANG_FILE','or.php');
+define('MODULE','op_document');
+define('LANG_FILE_MODULAR','op_document.php');
 $local_user='ck_opdocu_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
