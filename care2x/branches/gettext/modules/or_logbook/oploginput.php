@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
 * GNU General Public License
@@ -17,8 +17,8 @@ define('MAX_BLOCK_ROWS',30);
 # Define to 1 if the search the returns single result should be automatically redirect to user input page
 define('REDIRECT_SINGLERESULT',1);
 
-$lang_tables[]='search.php';
-define('LANG_FILE','or.php');
+define('MODULE','or_logbook');
+define('LANG_FILE_MODULAR','or_logbook.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
