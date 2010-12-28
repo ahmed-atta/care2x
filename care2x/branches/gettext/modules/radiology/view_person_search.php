@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
-require($root_path.'include/helpers/inc_environment_global.php');
+require('../../include/helpers/inc_environment_global.php');
 /*** CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
 * Copyright 2002,2003,2004,2005,2006 Elpidio Latorilla
@@ -40,7 +40,8 @@ function getFiles($sDirPath = '', $sDiscString = '') {
 	return FALSE;
 }
 
-define('LANG_FILE','radio.php');
+define('MODULE','radiology');
+define('LANG_FILE_MODULAR','radiology.php');
 //define('NO_2LEVEL_CHK',1);
 $local_user='ck_radio_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
