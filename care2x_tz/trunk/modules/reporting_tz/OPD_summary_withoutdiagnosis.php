@@ -2,8 +2,7 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-//require('con_db.php');
-//connect_db();
+
 #Load and create paginator object
 
 $lang_tables[]='aufnahme.php';
