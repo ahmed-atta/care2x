@@ -6,7 +6,7 @@
 /*------begin------ 
 * This protection code was suggested by Luki R. luki@karet.org 
 */
-if (eregi('inc_db_makelink.php',$_SERVER['PHP_SELF'])) die('<meta http-equiv="refresh" content="0; url=../">');
+if (stristr('inc_db_makelink.php',$PHP_SELF)) die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
 if(!isset($root_path)) $root_path='../'; // default language table root path is "../"
@@ -96,7 +96,7 @@ if(!isset($dbtype)||empty($dbtype)) $dbtype='mysql';
 
 # ADODB connection
 require_once($root_path.'classes/adodb/adodb.inc.php');
-$db = &ADONewConnection($dbtype);
+$db = ADONewConnection($dbtype);
 
 //if ($db) echo "ok"; else echo "no ok";
 
