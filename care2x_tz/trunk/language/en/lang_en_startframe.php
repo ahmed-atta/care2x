@@ -1,6 +1,6 @@
 <?php
 $LDMainTitle='CARE 2X Integrated Hospital Information System';
-
+$LDPageTitle='CARE 2X Integrated Hospital Information System';
 /*$LDMainTitle='Marienhospital a virtual Integrated Hospital Information System in Internet';
 */
 $LDInviteAskMe='Enter your query, for example: "What is the phone number of M9d?"';

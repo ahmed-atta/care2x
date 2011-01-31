@@ -124,7 +124,8 @@ if(!defined('NOSTART_SESSION')||(defined('NOSTART_SESSION')&&!NOSTART_SESSION)){
 
 	// Old adodb 250 session handler
 	//include_once($root_path.'classes/adodb/adodb-session.php');
-	session_start();
+	// *Depreciated!*
+    session_start();
 }
 
 #

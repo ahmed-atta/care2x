@@ -31,7 +31,7 @@ function validarea(&$zeile2, $permit_type_all = 1){
 	return 0;           // otherwise the user has no access permission in the area, return false
 }
 
-function logentry(&$userid,$key,$report,&$remark1,&$remark2)
+function logentry($userid='',$key,$report,$remark1,$remark2)
 {
    global $passtag, $root_path;
 
