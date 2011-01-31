@@ -15,6 +15,14 @@ if(!isset($smarty) || !is_object($smarty)){
 	$smarty = new smarty_care('common',FALSE);
 }
 
+$direction=(empty($direction)) ? '' : $direction;
+$mode=(empty($mode)) ? '' : $mode;
+$target=(empty($target)) ? '' : $target;
+$subtarget=(empty($subtarget)) ? '' : $subtarget;
+$user_origin=(empty($user_origin)) ? '' : $user_origin;
+$title=(empty($title)) ? '' : $title;
+$fwd_nr=(empty($fwd_nr)) ? '' : $fwd_nr;
+
 #
 # If authentication error, show prompt
 #
@@ -44,7 +52,7 @@ if (isset($pass)&&($pass=='check')&&($passtag)){
 	$smarty->assign('sErrorMsg',$err_msg);
 }
 
-if(!$passtag) $smarty->assign('sMascotColumn','<td><img '.createMascot($root_path,'mascot3_r.gif','0').'></td>');
+if(!empty($passtag)) $smarty->assign('sMascotColumn','<td><img '.createMascot($root_path,'mascot3_r.gif','0').'></td>');
 
 #
 # Prepare the auth entry form elements

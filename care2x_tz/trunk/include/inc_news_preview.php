@@ -15,7 +15,7 @@ $smarty->assign('sNewsPreview','');
 $smarty->assign('sPreface','');
 $smarty->assign('sEditorLink','');
 
-if($news[$j]){
+if(!empty($news[$j])){
 	# First test for record nr. + mime combination of image filename
 	# If not exists, try pic_file value + mime combination
 	
@@ -52,11 +52,11 @@ if($news[$j]){
 			
 		    $sBuffer ='<font size="'.$news_headline_preface_font_size.'" face="'.$news_headline_preface_font_face.'" color="'.$news_headline_preface_font_color.'">';
 
-			if ($news_headline_preface_font_bold) $sBuffer = $sBuffer.'<b>';
+			if (!empty($news_headline_preface_font_bold)) $sBuffer = $sBuffer.'<b>';
 			
 			$sBuffer = $sBuffer.ucfirst (deactivateHotHtml(nl2br($news[$j]['preface'])));
 			
-			if ($news_headline_preface_font_bold) $sBuffer = $sBuffer.'</b>';
+			if (!empty($news_headline_preface_font_bold)) $sBuffer = $sBuffer.'</b>';
 
 			$sBuffer = $sBuffer.'</font>';
 			
@@ -64,11 +64,11 @@ if($news[$j]){
 			
 		    $sBuffer = '<font size="'.$news_headline_body_font_size.'" face="'.$news_headline_body_font_face.'" color="'.$news_headline_body_font_color.'">';
 			
-			if ($news_headline_body_font_bold) $sBuffer = $sBuffer.'<b>';
+			if (!empty($news_headline_body_font_bold)) $sBuffer = $sBuffer.'<b>';
 			
 			$sBuffer = $sBuffer.substr(deactivateHotHtml(nl2br($news[$j]['body'])), 0 ,$news_normal_preview_maxlen).'...';
 			
-			if ($news_headline_body_font_bold) $sBuffer = $sBuffer.'</b>';
+			if (!empty($news_headline_body_font_bold)) $sBuffer = $sBuffer.'</b>';
 			
 			$sBuffer = $sBuffer.'</font>';
 			
@@ -83,7 +83,7 @@ if($news[$j]){
 		 }
 	} 
 
-	if(!$news[$j]||$nofile)
+	if(empty($news[$j]) || !empty($nofile))
 	{ 
 		$i=$j;
 		
