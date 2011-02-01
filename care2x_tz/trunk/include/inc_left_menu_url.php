@@ -1,8 +1,4 @@
 <?php
-/*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_left_menu_url.php',$_SERVER['PHP_SELF'])) 
-	die('<meta http-equiv=\'refresh\' content=\'0; url=../\'>');
-/*------end------*/
 
 /**
 * This array contains the url's of the target files of the left menu items

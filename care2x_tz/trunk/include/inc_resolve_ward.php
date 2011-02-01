@@ -1,8 +1,4 @@
 <?php
-/*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_resolve_ward.php",$_SERVER['PHP_SELF'])) 
-	die('<meta http-equiv="refresh" content="0; url=../">');
-/*------end------*/
 
 if(!isset($ward_nr)||!$ward_nr){
 	if($cfg['thispc_ward_nr']){

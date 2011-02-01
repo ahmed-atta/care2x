@@ -1,8 +1,4 @@
 <?php
-/*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_passcheck.php',$_SERVER['PHP_SELF']))
-	die('<meta http-equiv="refresh" content="0; url=../">');
-/*------end------*/
 
 /**
 * CARE 2002 Integrated Hospital Information System

@@ -1,8 +1,4 @@
 <?php
-/*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_products_ordercatalog_getactual.php',$_SERVER['PHP_SELF'])) 
-	die('<meta http-equiv="refresh" content="0; url=../">');
-/*------end------*/
 
 if($cat=='pharma') $dbtable='care_pharma_ordercatalog';
 	else $dbtable='care_med_ordercatalog';

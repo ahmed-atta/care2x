@@ -1,8 +1,6 @@
 <?php
 
-if (eregi('pageheader1.php',$_SERVER['PHP_SELF'])){
-	die('<meta http-equiv="refresh" content="0; url=../../../">');
-}
+
 
 #Get care logo
 $imgsize=GetImageSize($logo);

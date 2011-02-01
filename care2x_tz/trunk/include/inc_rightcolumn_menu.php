@@ -1,8 +1,4 @@
 <?php
-/*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_rightcolumn_menu.php",$_SERVER['PHP_SELF']))
-	die('<meta http-equiv="refresh" content="0; url=../">');
-/*------end------*/
 
 /* Get the main info data */
 $config_type='main_info_%';

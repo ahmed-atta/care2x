@@ -1,7 +1,4 @@
 <?php
-/*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('save_immunization.inc.php',$_SERVER['PHP_SELF'])) 
-	die('<meta http-equiv="refresh" content="0; url=../">');
 
 require_once($root_path.'include/care_api_classes/class_immunization.php');
 if(!isset($imm_obj)) $imm_obj=new Immunization;
