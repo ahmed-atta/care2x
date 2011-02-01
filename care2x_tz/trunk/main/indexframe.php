@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 define('LANG_FILE','indexframe.php');
-define(NO_CHAIN,1);
+define('NO_CHAIN',1);
 
 require_once($root_path.'include/inc_front_chain_lang.php');
 
