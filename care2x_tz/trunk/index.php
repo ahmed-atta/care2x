@@ -374,6 +374,7 @@ $smarty->assign('sContentsFrameSource',"src = \"blank.php?lang=$lang&sid=$sid\""
 #
 # If the floating menu window is selected
 #
+
 if($mask == 2){
 
 	if($lang=='ar'||$lang=='fa') $smarty->assign('sBaseFramesetTemplate','common/frameset_floatingmenu_rtl.tpl');
@@ -398,7 +399,7 @@ if($mask == 2){
 	} else{
 		#
 		# Else use normal frameset design
-		#
+		# 
 		$smarty->assign('sBaseFramesetTemplate','common/frameset_ltr.tpl');
 	}
 }
