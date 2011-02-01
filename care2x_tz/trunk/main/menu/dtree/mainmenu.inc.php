@@ -62,7 +62,8 @@ m.config.useCookies=false;
   //echo "</script>\n";
   $my_ebene=0; $p_last=0; $p_akt=0; $ip=0; $i=0; $j=1;
 	while($menu=$result1->FetchRow()){
-    if (eregi('LDLogin',$menu['LD_var'])){
+	//TODO: Check if that work like it is concepted (sounds like a bit "laggy" concept)
+    if (stristr($menu['LD_var'],'LDLogin')){
 			if ($_COOKIE['ck_login_logged'.$sid]=='true'){
 				$menu['url']='main/logout_confirm.php';
 				$menu['LD_var']='LDLogin';

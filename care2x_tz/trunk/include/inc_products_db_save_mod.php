@@ -1,8 +1,4 @@
  <?php
-/*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_products_db_save_mod.php',$_SERVER['PHP_SELF'])) 
-	die('<meta http-equiv="refresh" content="0; url=../">');
-/*------end------*/
 
 if(isset($cat)&&($cat=='pharma')) $dbtable='care_pharma_products_main';
 	else $dbtable='care_med_products_main';

@@ -1,8 +1,4 @@
 <?php
-/*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_remoteservers_conf.php",$_SERVER['PHP_SELF'])) 
-	die('<meta http-equiv="refresh" content="0; url=../">');
-/*------end------*/
 
 /* 
 main domain or ip address

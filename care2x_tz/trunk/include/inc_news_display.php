@@ -1,8 +1,4 @@
  <?php
- /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_news_display.php",$_SERVER['PHP_SELF'])) 
-	die('<meta http-equiv="refresh" content="0; url=../">');
-/*------end------*/
 
 require_once($root_path.'include/inc_news_display_config.php');
 
