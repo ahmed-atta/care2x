@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require('../releaseinfo.php');
 require($root_path.'include/inc_environment_global.php');
@@ -56,5 +56,5 @@ require_once($root_path.'include/care_api_classes/class_ward.php');
 $dept=new Department();
 $ward=new Ward();
 
-require('./gui_bridge/gui_indexframe.php');
+require('./gui_bridge/gui_indexframe.php'); 
 ?>

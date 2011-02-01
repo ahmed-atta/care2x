@@ -62,7 +62,6 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 	$time_out=FALSE;
 
    if(!defined('NO_2LEVEL_CHK')||NO_2LEVEL_CHK!=1){
-
 		# Let us check if the calling script is the time-out configuration script, if yes, then we skip the time out
 		if (!stristr($PHP_SELF,'edv_system_timeout.php')) {
 			# Load the global time out configs
@@ -79,7 +78,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 					#echo $_SESSION['sess_tos']."<br>";
 					#echo ($tnow-$_SESSION['sess_tos'])."<br>";
 	  			# Check if session is still valid
-	  			if(isset($_SESSION['sess_tos'])||isset($_SESSION['sess_tos']){
+	  			if(isset($_SESSION['sess_tos'])||isset($_SESSION['sess_tos'])){
 					# Check if time out value is positive or not zero
 					# current time minus start time
 					if(($tnow - $_SESSION['sess_tos']) >= $TIME_OUT_TIME) $time_out=TRUE;
