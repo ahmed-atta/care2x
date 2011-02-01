@@ -79,7 +79,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 					#echo $_SESSION['sess_tos']."<br>";
 					#echo ($tnow-$_SESSION['sess_tos'])."<br>";
 	  			# Check if session is still valid
-	  			if(isset($_SESSION['sess_tos'])||session_is_registered('sess_tos')){
+	  			if(isset($_SESSION['sess_tos'])||isset($_SESSION['sess_tos']){
 					# Check if time out value is positive or not zero
 					# current time minus start time
 					if(($tnow - $_SESSION['sess_tos']) >= $TIME_OUT_TIME) $time_out=TRUE;
@@ -88,7 +88,6 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 					$time_out=TRUE;
 				}
 
-    			//if(!isset($_SESSION['sess_tos'])||!session_is_registered('sess_tos')||!$_SESSION['sess_tos']||$time_out){
     			if($time_out||!$_SESSION['sess_tos']){
     				//echo $tnow."<br>";
 					//echo $_SESSION['sess_tos']."<br>";
