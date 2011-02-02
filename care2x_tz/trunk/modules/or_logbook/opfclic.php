@@ -54,7 +54,7 @@ switch($g)
 //echo $g;
 
 require($root_path.'include/care_api_classes/class_core.php');
-$core = & new Core;
+$core = new Core;
 
 $dbtable='care_encounter_op';
 

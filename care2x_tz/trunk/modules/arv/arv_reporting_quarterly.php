@@ -24,7 +24,7 @@ else {
 }
 
 //------------------------------------------------------------------------------------------------------
-$arv_report=&new Quarterly_report($_GET['quarter'],$_GET['year'],$_GET['month_6'],$_GET['month_12']);
+$arv_report= new Quarterly_report($_GET['quarter'],$_GET['year'],$_GET['month_6'],$_GET['month_12']);
 $arv_report->calc_timeframe();
 $arr_facility=$arv_report->getFacilityInfo();
 $arr_r1=$arv_report->display_quarterly_art_report_no1();

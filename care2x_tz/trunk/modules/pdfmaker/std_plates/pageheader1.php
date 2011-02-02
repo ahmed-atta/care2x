@@ -12,7 +12,7 @@ $pdf->ezStartPageNumbers(550,25,8);
 # Get the main informations
 if(!isset($GLOBAL_CONFIG)) $GLOBAL_CONFIG=array();
 include_once($root_path.'include/care_api_classes/class_globalconfig.php');
-$glob=& new GlobalConfig($GLOBAL_CONFIG);
+$glob= new GlobalConfig($GLOBAL_CONFIG);
 # Get all config items starting with "main_"
 $glob->getConfig('main_%');
 

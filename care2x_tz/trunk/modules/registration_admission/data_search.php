@@ -26,7 +26,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'classes/datetimemanager/class.dateTimeManager.php');
 
 # Create time manager object
-$datetime_obj= & new dateTimeManager;
+$datetime_obj= new dateTimeManager;
 
 $thisfile=basename($_SERVER['PHP_SELF']);
 $searchmask_bgcolor="#f3f3f3";

@@ -18,8 +18,8 @@ require_once($root_path.'include/care_api_classes/class_tz_arv_visit.php');
 //-------------------------------------------------------------------------------------------------------------------------------------
 $breakfile="modules/arv/arv_visit.php";
 $add_breakfile="&pid=".$_GET['pid'];
-$o_arv_case=&new ARV_case($_GET['pid']);
-$o_arv_visit=&new ARV_visit($o_arv_case->CurrentEncounter($_GET['pid']),$o_arv_case->getARVcaseID());
+$o_arv_case= new ARV_case($_GET['pid']);
+$o_arv_visit= new ARV_visit($o_arv_case->CurrentEncounter($_GET['pid']),$o_arv_case->getARVcaseID());
 //-------------------------------------------------------------------------------------------------------------------------------------
 $a_item_no=$_GET['a_item_no'];
 

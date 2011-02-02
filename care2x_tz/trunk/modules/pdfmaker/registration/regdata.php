@@ -31,8 +31,8 @@ include_once($root_path.'include/inc_t1ps_ar2uni.php');
 
 
 $insurance_obj=new PersonInsurance;
-$person_obj=& new Person($pid);
-# Get the person´s data
+$person_obj= new Person($pid);
+# Get the personï¿½s data
 if($person_obj->preloadPersonInfo($pid)){
 	$person=$person_obj->person;
 	# copy to encounter variable 
@@ -64,7 +64,7 @@ if (isset($$insurance_class['LD_var'])&&!empty($$insurance_class['LD_var'])) $in
     else $insclass=$insurance_class['name']; 
 
 
-# Get the global config for person´s registration form*/
+# Get the global config for personï¿½s registration form*/
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $GLOBAL_CONFIG=array();
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);
@@ -79,7 +79,7 @@ $classpath=$root_path.'classes/phppdf/';
 $fontpath=$classpath.'fonts/';
 # Load and create pdf object
 include($classpath.'class.ezpdf.php');
-$pdf=& new Cezpdf();
+$pdf= new Cezpdf();
 
 
 $logo=$root_path.'gui/img/logos/lopo/care_logo.png';

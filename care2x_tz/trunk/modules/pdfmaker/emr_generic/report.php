@@ -27,7 +27,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_encounter.php');
 # Get the encouter data
-$enc_obj=& new Encounter($enc);
+$enc_obj= new Encounter($enc);
 if($enc_obj->loadEncounterData()){
 	$encounter=$enc_obj->getLoadedEncounterData();
 	//extract($encounter);
@@ -41,7 +41,7 @@ $classpath=$root_path.'classes/phppdf/';
 $fontpath=$classpath.'fonts/';
 
 include($classpath.'class.ezpdf.php');
-$pdf=& new Cezpdf();
+$pdf= new Cezpdf();
 
 
 $logo=$root_path.'gui/img/logos/lopo/care_logo.png';

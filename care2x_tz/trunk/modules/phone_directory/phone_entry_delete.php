@@ -19,7 +19,7 @@ $thisfile=basename($_SERVER['PHP_SELF']);
 
 # Load the Comm class and create comm (phone) object
 require_once($root_path.'include/care_api_classes/class_comm.php');
-$phone = & new Comm;
+$phone = new Comm;
 
 /* Load the date formatter */
 include_once($root_path.'include/inc_date_format_functions.php');

@@ -36,7 +36,7 @@ if(empty($_REQUEST['pid']) OR empty($_REQUEST['encounter_nr'])){
 	require ("gui/gui_arv_registration.php");
 	die();
 }
-if(!$o_arv_patient=&new ART_patient($_REQUEST['pid'],$_REQUEST['registration_id'])){
+if(!$o_arv_patient= new ART_patient($_REQUEST['pid'],$_REQUEST['registration_id'])){
 	require ("gui/gui_arv_registration.php");
 	die();
 }
@@ -45,7 +45,7 @@ $facility_info=$o_arv_patient->getFacilityInfo();
 $registration_data=$o_arv_patient->getRegistrationData();
 
 if(isset($_POST['submit'])) {
-	$o_val=&new Validator($o_arv_patient->getDefaultData(),$_REQUEST);
+	$o_val= new Validator($o_arv_patient->getDefaultData(),$_REQUEST);
 	$o_val->set_rule('ctc_id','rule_required');		 		
 	$o_val->set_rule('signature','rule_required');	
 	

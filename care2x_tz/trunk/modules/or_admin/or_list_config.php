@@ -26,7 +26,7 @@ if($pyear=='') $pyear=date('Y');
 $t_date=$pday.'.'.$pmonth.'.'.$pyear;
 
 # Create the OR object
-$OR_obj=& new OPRoom;
+$OR_obj= new OPRoom;
 # Get all OR
 $OR_rooms=$OR_obj->AllORInfo();
 # Get the number or returned ORs

@@ -25,7 +25,7 @@ require_once($root_path.'include/care_api_classes/class_advanced_search.php');
 include_once($root_path.'include/inc_date_format_functions.php');
 //window.opener.location.reload();
 
-$search_obj = & new advanced_search();
+$search_obj = new advanced_search();
 if(!$chosentype) $chosentype='tribe';
 if($chosentype=='tribe')
 {

@@ -67,7 +67,7 @@ if($search&&!empty($keyword)){
 	
 	#Load and create paginator object
 	include_once($root_path.'include/care_api_classes/class_paginator.php');
-	$pagen=& new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
+	$pagen= new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
 
 	$GLOBAL_CONFIG=array();
 	include_once($root_path.'include/care_api_classes/class_globalconfig.php');

@@ -21,7 +21,7 @@ function signalNewDiagnosticsReportEvent($report_date='',$script_name)
 	
 	# Create a core object
 	include_once($root_path.'include/care_api_classes/class_core.php');
-	$core = & new Core;
+	$core = new Core;
 
 
     $entry_table='care_encounter_diagnostics_report';

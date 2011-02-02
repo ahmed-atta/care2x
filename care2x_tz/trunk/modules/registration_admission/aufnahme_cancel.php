@@ -21,7 +21,7 @@ if(isset($mode)&&($mode=='cancel')&&isset($encounter_nr)&&$encounter_nr){
 
 	include_once($root_path.'include/care_api_classes/class_access.php');
 	# Create user access object
-	$user=& new Access($cby,$pw);
+	$user= new Access($cby,$pw);
 
 	if($user->isKnown()&&$user->hasValidPassword()&&$user->isNotLocked()){
 		$is_cancelled=0;

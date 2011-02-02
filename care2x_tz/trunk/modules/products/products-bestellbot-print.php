@@ -31,7 +31,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 # Create core object
 require_once($root_path.'include/care_api_classes/class_core.php');
-$core = & new Core;
+$core = new Core;
 
 $thisfile=basename($_SERVER['PHP_SELF']);
 

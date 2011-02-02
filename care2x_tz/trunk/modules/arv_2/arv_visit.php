@@ -39,7 +39,7 @@ $o_arv_visit=new ARV_Visit($_REQUEST['encounter_nr'],$_REQUEST['visit_id'],$o_ar
 $art_info=$o_arv_patient->getshortARTSummary();
 
 if(isset($_REQUEST['submit'])) {
-	$o_val=&new Validator($o_arv_visit->getDefaultData(),$_REQUEST);
+	$o_val= new Validator($o_arv_visit->getDefaultData(),$_REQUEST);
 	$o_val->set_rule('visit_date','rule_required');
 	$o_val->set_rule('signature','rule_required');
 	

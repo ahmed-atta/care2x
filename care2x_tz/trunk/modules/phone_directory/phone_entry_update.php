@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 # Load the Comm class and create comm (phone) object
 require_once($root_path.'include/care_api_classes/class_comm.php');
-$phone = & new Comm;
+$phone = new Comm;
 
 //$db->debug=true;
 $error=1;

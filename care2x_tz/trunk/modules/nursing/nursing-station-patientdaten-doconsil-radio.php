@@ -62,7 +62,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 # Create a core object
 //require_once($root_path.'include/inc_front_chain_lang.php');
-$core = & new Core;
+$core = new Core;
 
 /* Check for the patient number = $pn. If available get the patients data, otherwise set edit to 0 */
 if(isset($pn)&&$pn)

@@ -18,7 +18,7 @@ require($root_path.'include/inc_date_format_functions.php');
 //-------------------------------------------------------------------------------------------------------------------------------------
 $breakfile="modules/arv/arv_menu.php";
 $add_breakfile="&pid=".$_GET['pid'];
-$o_arv_case=&new ARV_case($_GET['pid']);
+$o_arv_case= new ARV_case($_GET['pid']);
 
 require ("gui/gui_arv_overview.php");
 ?>
