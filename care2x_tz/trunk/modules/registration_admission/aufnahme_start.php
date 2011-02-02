@@ -61,10 +61,11 @@ if(!isset($mode)) $mode='';
 if(!isset($forcesave)) $forcesave=0;
 if(!isset($update)) $update=0;
 
-if(!session_is_registered('sess_pid')) session_register('sess_pid');
-if(!session_is_registered('sess_full_pid')) session_register('sess_full_pid');
-if(!session_is_registered('sess_en')) session_register('sess_en');
-if(!session_is_registered('sess_full_en')) session_register('sess_full_en');
+if(!isset($_SESSION['sess_pid'])) $_SESSION['sess_pid']='';
+if(!isset($_SESSION['sess_full_pid'])) $_SESSION['sess_full_pid']='';
+if(!isset($_SESSION['sess_en'])) $_SESSION['sess_en']='';
+if(!isset($_SESSION['sess_full_en'])) $_SESSION['sess_full_en']='';
+
 
 $patregtable='care_person';  // The table of the patient registration data
 

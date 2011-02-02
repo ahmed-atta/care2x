@@ -19,7 +19,7 @@ require_once($root_path.'global_conf/areas_allow.php');
 $allowedarea=&$allow_area['admit'];
 $append=URL_REDIRECT_APPEND.'&from=pass'; 
 
-if(!session_is_registered('sess_user_origin')) session_register('sess_user_origin');
+if(!isset($_SESSION['sess_user_origin'])) $_SESSION['sess_user_origin']='';
 
 switch($target)
 {

@@ -39,7 +39,7 @@ $thisfile=basename($_SERVER['PHP_SELF']);
 $breakfile=$root_path.'main/op-doku.php'.URL_APPEND;
 
 # Save dept name to session 
-if(!session_is_registered('sess_dept_name')) session_register('sess_dept_name');
+if(!isset($_SESSION['sess_dept_name'])) $_SESSION['sess_dept_name']='';
 
 # Create dept object and preload dept info
 require_once($root_path.'include/care_api_classes/class_department.php');

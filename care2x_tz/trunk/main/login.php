@@ -24,10 +24,9 @@ if(!isset($pass)) $pass='';
 if(!isset($keyword)) $keyword='';
 if(!isset($userid)) $userid='';
 
-if(!session_is_registered('sess_login_userid')) session_register('sess_login_userid');
-if(!session_is_registered('sess_login_username')) session_register('sess_login_username');
-if(!session_is_registered('sess_login_pw')) session_register('sess_login_pw');
-
+if(!isset($_SESSION['sess_login_userid'])) $_SESSION['sess_login_userid']='';
+if(!isset($_SESSION['sess_login_username'])) $_SESSION['sess_login_username']='';
+if(!isset($_SESSION['sess_login_pw'])) $_SESSION['sess_login_pw']='';
 
 # load config options
 include_once($root_path.'include/care_api_classes/class_multi.php');
