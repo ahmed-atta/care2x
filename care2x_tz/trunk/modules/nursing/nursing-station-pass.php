@@ -21,20 +21,15 @@ require_once($root_path.'global_conf/areas_allow.php');
 # from doctors===1
 $x_str=($doclist!='')?'&doclist='.$doclist:'';
 
-//if ($x_str!='')$_SESSION['doclist']=$doclist;
-//else if ($_SESSION['doclist']!='') $x_str=$_SESSION['doclist'];
 
-//if(!session_is_registered('sess_nursing_station')) session_register('sess_nursing_station');
-//if(isset($station)&&!empty($station)) $_SESSION['sess_nursing_station']=$station;
 
 $allowedarea=&$allow_area['wards'];
-//$fileforward="nursing-station.php".URL_REDIRECT_APPEND."&edit=$edit&retpath=$retpath&station=".$_SESSION['sess_nursing_station'];
 
 $file_ext = ($x_str!='')?'-doctor-service':'';
 
 $fileforward="nursing-station".$file_ext.".php".URL_REDIRECT_APPEND.$x_str."&fwd_nr=$fwd_nr&edit=$edit&retpath=$retpath&station=$station&ward_nr=$ward_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear";
 
-//$fileforward="nursing-station.php?sid=".$sid."&edit=$edit&retpath=$retpath&station=$station";
+
 $thisfile="nursing-station-pass.php";
 if($retpath=="quick") $breakfile="nursing-schnellsicht.php".URL_APPEND;
  else $breakfile="nursing.php".URL_APPEND;

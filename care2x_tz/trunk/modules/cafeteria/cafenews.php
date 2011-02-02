@@ -22,8 +22,8 @@ require($root_path.'include/inc_2level_reset.php');
 $dept_nr=2;// 2= cafeteria dept
 $title=$LDCafeNews;
 
-if(!session_is_registered('sess_file_editor')) session_register('sess_file_editor');
-if(!session_is_registered('sess_file_reader')) session_register('sess_file_reader');
+if(!isset($_SESSION['sess_file_editor'])) $_SESSION['sess_file_editor']='';
+if(!isset($_SESSION['sess_file_reader'])) $_SESSION['sess_file_reader']='';
 
 $_SESSION['sess_file_break']=basename(__FILE__);
 $_SESSION['sess_file_return']=basename(__FILE__);

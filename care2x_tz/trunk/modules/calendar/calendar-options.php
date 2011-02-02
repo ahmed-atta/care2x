@@ -11,8 +11,8 @@ require($root_path.'include/inc_environment_global.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 
-if(!session_is_registered('sess_user_origin')) session_register('sess_user_origin');
-if(!session_is_registered('sess_dept_nr')) session_register('sess_dept_nr');
+if(!isset($_SESSION['sess_user_origin'])) $_SESSION['sess_user_origin']='';
+if(!isset($_SESSION['sess_dept_nr'])) $_SESSION['sess_dept_nr']='';
 
 /* Start creating this page */
 $lang_tables=array('departments.php');
@@ -40,7 +40,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 $_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
 
-if(!session_is_registered('sess_date_process')) session_register('sess_date_process');
+if(!isset($_SESSION['sess_date_process'])) $_SESSION['sess_date_process']='';
 
 /* Filter the date */
 if(empty($month)||empty($day)||empty($year)){

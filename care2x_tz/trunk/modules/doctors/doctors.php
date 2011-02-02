@@ -15,7 +15,8 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 require($root_path.'include/inc_2level_reset.php');
 
-if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
+if(!isset($_SESSION['sess_path_referer'])) $_SESSION['sess_path_referer']='';
+
 $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
 
 $_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
