@@ -569,8 +569,8 @@ function go_back_index($attach_array, $tmpdir, $php_session, $sort, $sortdir, $l
 	if (is_array($attach_array))
 		while ($tmp = array_shift($attach_array))
 			unlink($tmpdir.'/'.$tmp->tmp_file);
-	session_unregister('num_attach');
-	session_unregister('attach_array');
+	unset($_SESSION['num_attach']);
+	unset($_SESSION['attach_array']);
 	header("location: action.php?sort=$sort&sortdir=$sortdir&lang=$lang&$php_session=".$$php_session);
 }
 
