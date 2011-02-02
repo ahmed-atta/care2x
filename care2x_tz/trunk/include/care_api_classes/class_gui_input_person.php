@@ -458,7 +458,7 @@ class GuiInputPerson {
 			$date_reg=date('Y-m-d H:i:s');
 		}
 		# Get the insurance classes
-		$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var AS "LD_var"');
+		$insurance_classes=$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var AS "LD_var"');
 
 		include_once($root_path.'include/inc_photo_filename_resolve.php');
 		$search_obj = new advanced_search();
