@@ -50,7 +50,6 @@ require('./include/inc_environment_global.php');
 
 
 # Register global session variables
-a
 if(!isset($_SESSION['sess_user_name'])) $_SESSION['sess_user_name']='';
 if(!isset($_SESSION['sess_user_origin'])) $_SESSION['sess_user_origin']='';
 if(!isset($_SESSION['sess_file_forward'])) $_SESSION['sess_file_forward']='';
