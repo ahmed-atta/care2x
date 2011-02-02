@@ -18,7 +18,7 @@ require_once($root_path.'include/care_api_classes/class_tz_arv_visit.php');
 * See the file "copy_notice.txt" for the licence notice
 */
 //-------------------------------------------------------------------------------------------------------------------------------------
-$o_arv_visit=&new ARV_Visit();
+$o_arv_visit= new ARV_Visit();
 require ("gui/gui_arv_code_tables.php");
 ?>
 

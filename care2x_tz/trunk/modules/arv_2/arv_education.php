@@ -26,7 +26,7 @@ if(empty($_REQUEST['pid']) OR empty($_REQUEST['encounter_nr'])){
 	require ("gui/gui_arv_education.php");
 	die();
 }
-if(!$o_arv_patient=&new ART_patient($_REQUEST['pid'])){
+if(!$o_arv_patient= new ART_patient($_REQUEST['pid'])){
 	echo "test";
 	require ("gui/gui_arv_education.php");
 	die();
@@ -42,7 +42,7 @@ $default_values=array('comment_id'=>'','comment_date'=>date('d/m/Y',time()),'com
 
 if(isset($_REQUEST['submit'])) {
 	
-	$o_val=&new Validator($default_values,$_REQUEST);
+	$o_val= new Validator($default_values,$_REQUEST);
 	$o_val->set_rule('comment_date','rule_required');
 	$o_val->set_rule('comment','rule_required');
 	$o_val->set_rule('comment_id','rule_required');

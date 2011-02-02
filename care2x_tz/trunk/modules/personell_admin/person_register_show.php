@@ -77,7 +77,7 @@ require('./gui_bridge/default/gui_tabs_personell_reg.php');
 	# Display the person�s demographic data using the object class class_gui_person_show.php
 
 	require_once($root_path.'include/care_api_classes/class_gui_tz_person_show.php');
-	$person = & new GuiPersonShow;
+	$person = new GuiPersonShow;
 	$person->setPID($pid);
 	$person->display();
 

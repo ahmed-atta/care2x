@@ -60,7 +60,7 @@ switch($mode){
 	{
 		# Create a core object
 		include_once($root_path.'include/inc_front_chain_lang.php');
-		$core = & new Core;
+		$core = new Core;
 
 		$sql="UPDATE care_test_request_".$db_request_table." SET
 										  xray_nr='".$xray_nr."',

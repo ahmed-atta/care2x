@@ -28,7 +28,7 @@ else {
 	$_GET['year_end']=$curr_year;
 }
 
-$arv_report=&new Report_cStatistics($_GET['year_start'],$_GET['year_end']);
+$arv_report= new Report_cStatistics($_GET['year_start'],$_GET['year_end']);
 echo $arv_report->calc_timeframe();
 
 //------------------------------------------------------------------------------------------------------

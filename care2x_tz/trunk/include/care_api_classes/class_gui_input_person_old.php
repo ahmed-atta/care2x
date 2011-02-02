@@ -125,10 +125,10 @@ class GuiInputPerson {
 		$db->debug=FALSE;
 
 		# Create the new person object
-		$person_obj=& new Person($pid);
+		$person_obj= new Person($pid);
 
 		# Create a new person insurance object
-		$pinsure_obj=& new PersonInsurance($pid);
+		$pinsure_obj= new PersonInsurance($pid);
 
 		if(!isset($insurance_show)) $insurance_show=TRUE;
 
@@ -152,7 +152,7 @@ class GuiInputPerson {
 		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $this->default_photo_path;
 
 		if (($mode=='save') || ($mode=='forcesave')) {
-		$search_obj = & new advanced_search();
+		$search_obj = new advanced_search();
 		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", false, 65, 'tribe_id')) && $name_maiden && !$no_tribe)
 		{
 			$tribe_array=$result_array;
@@ -224,7 +224,7 @@ class GuiInputPerson {
 
 				# Create image object
 				include_once($root_path.'include/care_api_classes/class_image.php');
-				$img_obj=& new Image;
+				$img_obj= new Image;
 
 				# Check the uploaded image file if exists and valid
 				if($img_obj->isValidUploadedImage($_FILES['photo_filename'])){
@@ -451,7 +451,7 @@ class GuiInputPerson {
 		$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var AS "LD_var"');
 
 		include_once($root_path.'include/inc_photo_filename_resolve.php');
-		$search_obj = & new advanced_search();
+		$search_obj = new advanced_search();
 		if(!$update)
 		{
 			$tribe=$name_maiden;

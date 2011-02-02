@@ -26,7 +26,7 @@ if(empty($_REQUEST['pid']) OR empty($_REQUEST['encounter_nr'])){
 	require ("gui/gui_arv_education.php");
 	die();
 }
-if(!$o_arv_patient=&new ART_patient($_REQUEST['pid'])){
+if(!$o_arv_patient= new ART_patient($_REQUEST['pid'])){
 	echo "test";
 	require ("gui/gui_arv_education.php");
 	die();

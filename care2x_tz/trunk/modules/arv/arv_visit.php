@@ -23,9 +23,9 @@ $add_breakfile="&pid=".$_GET['pid'];
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');	
 //-------------------------------------------------------------------------------------------------------
-$o_arv_case=&new ARV_case($_GET['pid']);
+$o_arv_case= new ARV_case($_GET['pid']);
 $o_arv_case->getPatientARVData();
-$o_arv_visit=&new ARV_visit($_GET['encounter_nr'],$o_arv_case->getARVcaseID(),$_GET['arv_visit_id']);
+$o_arv_visit= new ARV_visit($_GET['encounter_nr'],$o_arv_case->getARVcaseID(),$_GET['arv_visit_id']);
 
 $defaults = array (
     'weight' => '',

@@ -43,7 +43,7 @@ if ($mode=='save' || ($mode=='update' && !empty($nr)) ){
 
          # Create comm object
          include_once($root_path.'include/care_api_classes/class_comm.php');
-         $phone = & new Comm;
+         $phone = new Comm;
 
         # Correctly map some indexes
         $_POST['roomnr']=$_POST['zimmerno'];

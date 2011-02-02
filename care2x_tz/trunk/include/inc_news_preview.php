@@ -30,7 +30,8 @@ if(!empty($news[$j])){
 			
 			if ($news_headline_title_font_bold) $sBuffer = $sBuffer.'<b>';
 
-			$sBuffer = $sBuffer.ucfirst(deactivateHotHtml(nl2br($news[$j]['title'])));
+			$sBuffer = mb_strtoupper($news[$j]['title']); 
+			//$sBuffer = $sBuffer.ucfirst(deactivateHotHtml(nl2br($news[$j]['title'])));
 			
 			if ($news_headline_title_font_bold) $sBuffer = $sBuffer.'</b>';
 			
@@ -54,7 +55,8 @@ if(!empty($news[$j])){
 
 			if (!empty($news_headline_preface_font_bold)) $sBuffer = $sBuffer.'<b>';
 			
-			$sBuffer = $sBuffer.ucfirst (deactivateHotHtml(nl2br($news[$j]['preface'])));
+			$sBuffer = mb_strtoupper($news[$j]['preface']); 
+			//$sBuffer = $sBuffer.ucfirst (deactivateHotHtml(nl2br($news[$j]['preface'])));
 			
 			if (!empty($news_headline_preface_font_bold)) $sBuffer = $sBuffer.'</b>';
 
@@ -66,7 +68,8 @@ if(!empty($news[$j])){
 			
 			if (!empty($news_headline_body_font_bold)) $sBuffer = $sBuffer.'<b>';
 			
-			$sBuffer = $sBuffer.substr(deactivateHotHtml(nl2br($news[$j]['body'])), 0 ,$news_normal_preview_maxlen).'...';
+			$sBuffer = mb_strtoupper($news[$j]['body']).'...'; 
+			//$sBuffer = $sBuffer.substr(deactivateHotHtml(nl2br($news[$j]['body'])), 0 ,$news_normal_preview_maxlen).'...';
 			
 			if (!empty($news_headline_body_font_bold)) $sBuffer = $sBuffer.'</b>';
 			

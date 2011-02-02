@@ -31,7 +31,7 @@ $dbtable='care_encounter_op';
 if($mode=='save'){
 	
 	require_once($root_path.'include/care_api_classes/class_core.php');
-	$core = & new Core;
+	$core = new Core;
 
 				// check if entry is already existing
 				$sql="SELECT nr,$element FROM $dbtable 

@@ -17,7 +17,7 @@ class advanced_search extends Core {
   *
 	* Example:
 	*
-  *   $search_obj = & new advanced_search();
+  *   $search_obj = new advanced_search();
   *   if ($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", $tribe, 65)) {
   *     $tribe_array=$result_array;
   *     $error++;

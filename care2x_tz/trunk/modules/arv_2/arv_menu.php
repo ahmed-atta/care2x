@@ -17,7 +17,7 @@ require_once($root_path.'include/care_api_classes/class_tz_arv_patient.php');
 $breakfile="modules/ambulatory/amb_clinic_patients.php";
 $add_breakfile="&pid=".$_REQUEST['pid']."&dept_nr=42";
 
-$o_arv_patient=&new ART_patient($_REQUEST['pid']);
+$o_arv_patient= new ART_patient($_REQUEST['pid']);
 
 require ("gui/gui_arv_menu.php");
 ?>
