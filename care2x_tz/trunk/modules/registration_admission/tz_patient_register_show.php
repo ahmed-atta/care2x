@@ -43,7 +43,7 @@ $person = new GuiPersonShow;
 $person->setPID($pid);
 
 # Import the current encounter number
-$current_encounter = $person->CurrentEncounter();
+$current_encounter = $person->PersonCurrentEncounter();
 
 # Import the death date
 $death_date = $person->DeathDate();

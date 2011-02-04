@@ -59,7 +59,7 @@ require('./gui_bridge/default/gui_tz_tabs_patreg.php');
 	<tr valign="top">
 		<td> <?php
 		# Display the data
-		$person->display();
+		$person->display($pid);
 		?>
 		</td>
 		<td>
