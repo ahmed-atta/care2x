@@ -318,7 +318,7 @@ class GuiInputPerson {
 											'modify_time'=>date('YmdHis')
 											);
 
-									$pinsure_obj->updateDataFromArray($insure_data,$insurance_item_nr);
+									$pinsure_obj->updateInsuranceDataFromArray($insure_data,$insurance_item_nr);
 								}
 							} elseif ($insurance_nr && $insurance_firm_name  && $insurance_class_nr) {
 								$insure_data=array('insurance_nr'=>$insurance_nr,
@@ -329,7 +329,7 @@ class GuiInputPerson {
 											'create_id'=>$_SESSION['sess_user_name'],
 											'create_time'=>date('YmdHis')
 										);
-								$pinsure_obj->insertDataFromArray($insure_data);
+								$pinsure_obj->updateInsuranceDataFromArray($insure_data);
 							}
 						}
 						$newdata=1;
