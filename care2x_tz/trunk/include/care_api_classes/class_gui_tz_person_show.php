@@ -177,7 +177,7 @@ class GuiPersonShow extends Person{
 				extract($this->data);
 
 				# Get related insurance data
-				$p_insurance=&$pinsure_obj->getPersonInsuranceObject($this->pid);
+				$p_insurance=$pinsure_obj->getPersonInsuranceObject($this->pid);
 
 				if($p_insurance==FALSE) {
 					$insurance_show=true;
@@ -407,8 +407,8 @@ if(file_exists($root_path.'cache/barcodes/pn_'.$pid.'.png')){
 
 		<?php global $db;
 
-		    	$coreObj->sql="SELECT name FROM care_tz_company WHERE id=$insurance_ID";
-				if ($ergebnis = $db->Execute($coreObj->sql))
+		    	$this->sql="SELECT name FROM care_tz_company WHERE id=$insurance_ID";
+				if ($ergebnis = $db->Execute($this->sql))
 				{
 					$row = $ergebnis->FetchRow();
 					$insurance_name = $row['name'];
