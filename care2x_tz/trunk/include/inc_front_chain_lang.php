@@ -56,6 +56,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 
    $clear_ck_sid = $dec_hcemd5->DecodeMimeSelfRand($_COOKIE[$ck_sid_buffer]);
 
+   	ini_set('date.timezone', 'UTC');
 	$tnow=date('His');
 
    // echo $tnow."<p>";
