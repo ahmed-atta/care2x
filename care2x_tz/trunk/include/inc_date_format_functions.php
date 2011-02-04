@@ -62,7 +62,7 @@ function getDateFormat()
 */
 function formatDate2Local($stdDate, $localFormat, $retTime=FALSE, $timeOnly=FALSE, $sepChars=NULL){
    global $lang;
-   if(!isset($sepChars)) $sepChars=array('-','.','/',':',',');
+   if($sepChars==NULL) $sepChars=array('-','.','/',':',',');
    $localFormat=strtolower($localFormat);
 
    if(stristr($stdDate,'0000'))  return strtr($localFormat,'yYmMdDHis','000000000'); // IF  std date is 0 return 0's in local format
@@ -80,7 +80,7 @@ function formatDate2Local($stdDate, $localFormat, $retTime=FALSE, $timeOnly=FALS
    for($i=0;$i<sizeof($sepChars);$i++)
    {
      if(strchr($localFormat,$sepChars[$i]))
-	 {
+	 { echo $sepChars[$i];
 	    $localSeparator=$sepChars[$i];
         $localArray=explode($localSeparator,$localFormat);
 		break;
