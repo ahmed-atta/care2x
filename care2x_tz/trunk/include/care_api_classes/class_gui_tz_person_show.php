@@ -116,7 +116,7 @@ class GuiPersonShow extends Person{
 	* @private
 	*/
 	function _load(){
-		if($this->data_obj=&$this->person_obj->getAllInfoObject()){
+		if($this->data_obj=$this->person_obj->getAllInfoObject()){
 				$this->data=$this->data_obj->FetchRow();
 			return $this->is_loaded = TRUE;
 		}else{
