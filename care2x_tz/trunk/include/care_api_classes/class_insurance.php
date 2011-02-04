@@ -534,7 +534,7 @@ class PersonInsurance extends Insurance {
 	* @param mixed interger or string
 	* @return boolean
 	*/
-    function updateDataFromArray(&$array,$item_nr='') {
+    function updateInsuranceDataFromArray(&$array,$item_nr='') {
 		$x='';
 		$v='';
 		$sql='';
