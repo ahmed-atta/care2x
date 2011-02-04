@@ -49,6 +49,8 @@ class GuiInputPerson {
 	# Text block below the form
 	var $posttext='';
 
+	var $sql;
+
 	# filename for displaying the data after saving
 	var $displayfile='';
 	/**
@@ -1054,12 +1056,12 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 				<td class="reg_input"> <?php
 
 			// Create array of all insurances for GUI
-			$coreObj->sql="SELECT DISTINCT company_id,care_tz_company.name FROM care_tz_insurance
+			$this->sql="SELECT DISTINCT company_id,care_tz_company.name FROM care_tz_insurance
 			INNER JOIN care_tz_company ON care_tz_insurance.company_id = care_tz_company.id
 			WHERE cancel_flag='0'
 			AND  ( care_tz_insurance.start_date <= UNIX_TIMESTAMP() AND care_tz_insurance.end_date >= UNIX_TIMESTAMP())
 			 order by name asc ";
-			$result = $db->Execute($coreObj->sql);
+			$result = $db->Execute($this->sql);
 
 			$name_insurer_array = array();
 
@@ -1069,8 +1071,8 @@ TODO: Kompletly not shown, or dependig on who is editing: Doctor, Lab?
 
 				if ($nr != -1)
 				{
-				$coreObj->sql="SELECT name FROM care_tz_company WHERE ID=$nr";
-				$ergebnis = $db->Execute($coreObj->sql);
+				$this->sql="SELECT name FROM care_tz_company WHERE ID=$nr";
+				$ergebnis = $db->Execute($this->sql);
 				$row = $ergebnis->FetchRow();
 				$arrayTemp = array("name"=> $row['name'], "id"=>$nr);
 				array_push($name_insurer_array, $arrayTemp);

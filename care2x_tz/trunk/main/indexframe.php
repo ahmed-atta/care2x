@@ -1,5 +1,6 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+error_reporting(~E_NOTICE);
 require('./roots.php');
 require('../releaseinfo.php');
 require($root_path.'include/inc_environment_global.php');
