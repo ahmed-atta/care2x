@@ -1,5 +1,5 @@
 <?php
-
+//TODO This file is marked to dop out of the repository... if that is been used anywhere, please delete this TODO line (Feb2011)
 # Resolve href for return button
 
 if(isset($_SESSION['sess_file_return'])&&!empty($_SESSION['sess_file_return']))
