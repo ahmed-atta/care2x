@@ -1,5 +1,4 @@
 <?php 
-
 if (($route!=validroute)or($aufnahme_user==""))
 {header("location: invalid-access-warning.php"); exit;}
 
