@@ -101,7 +101,7 @@ class GuiPersonShow extends Person{
 	/**
 	* # Gets the encounter number if person is currently admitted
 	*/
-	function CurrentEncounter(){
+	function PersonCurrentEncounter(){
 		global $root_path;
 		if($this->current_encounter){
 			return $this->current_encounter;
@@ -140,7 +140,7 @@ class GuiPersonShow extends Person{
 	/**
 	* Displays the GUI showing the data
 	*/
-	function display($pid){
+	function display($pid=null){
 		global $root_path, $dbf_nodate, $newdata;
 
 		$validdata = TRUE;
