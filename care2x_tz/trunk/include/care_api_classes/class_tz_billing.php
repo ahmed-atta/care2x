@@ -5494,7 +5494,7 @@ value="'.$row['total_dosage'].'" name="total_dosage_'.$row['nr'].'"><br><br>';
 		$this->debug=FALSE;
 		($this->debug) ? $db->debug=FALSE : $db->debug=FALSE;
 		if ($this->debug) echo "<br><b>Method class_tz_billing::ShowNewQuotationEncounter_Laboratory()</b><br>";
-		$result = $this->GetNewQuotation_Laboratory($encounter_nr, $in_outpatient, &$id_array);
+		$result = $this->GetNewQuotation_Laboratory($encounter_nr, $in_outpatient, $id_array);
 
 		if($result)
 		{
@@ -5828,7 +5828,7 @@ value="'.$row['total_dosage'].'" name="total_dosage_'.$row['nr'].'"><br><br>';
 		if ($this->debug) echo "<br><b>Method class_tz_billing::ShowNewQuotationEncounter_Radiology()</b><br>";
 
 
-		$result = $this->GetNewQuotation_Radiology($encounter_nr,$in_outpatient, &$id_array);
+		$result = $this->GetNewQuotation_Radiology($encounter_nr,$in_outpatient, $id_array);
 
 		if($result)
 		{
