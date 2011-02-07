@@ -61,7 +61,7 @@ function getDateFormat()
 * therefore a validation routine must be done at the client side
 */
 function formatDate2Local($stdDate, $localFormat, $retTime=FALSE, $timeOnly=FALSE, $sepChars=NULL){
-   global $lang;
+	global $lang;
    if($sepChars==NULL) $sepChars=array('-','.','/',':',',');
    $localFormat=strtolower($localFormat);
 
@@ -80,7 +80,7 @@ function formatDate2Local($stdDate, $localFormat, $retTime=FALSE, $timeOnly=FALS
    for($i=0;$i<sizeof($sepChars);$i++)
    {
      if(strchr($localFormat,$sepChars[$i]))
-	 { echo $sepChars[$i];
+	 { //echo $sepChars[$i];
 	    $localSeparator=$sepChars[$i];
         $localArray=explode($localSeparator,$localFormat);
 		break;
@@ -94,8 +94,8 @@ function formatDate2Local($stdDate, $localFormat, $retTime=FALSE, $timeOnly=FALS
 	    elseif($localArray[$i]=='dd') $localArray[$i]=$stdArray[2];
    }
 
-   //if ($lang=='de') $stdTime=strtr($stdTime,':','.'); // This is a hard coded time  format translator for german "de" language
-
+   $rv=implode($localSeparator,$localArray);
+   
    if($retTime) return implode($localSeparator,$localArray).' '.$stdTime;
     else return implode($localSeparator,$localArray);
 

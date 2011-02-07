@@ -215,7 +215,7 @@ $target='archiv';
   var urlholder;
 
 function getinfo(pn){
-<?php /* if($edit)*/
+<?php /* if($edit)*/ 
 	{ echo '
 	urlholder="'.$root_path.'modules/nursing/nursing-station-patientdaten.php'.URL_REDIRECT_APPEND;
 	echo '&pn=" + pn + "';
