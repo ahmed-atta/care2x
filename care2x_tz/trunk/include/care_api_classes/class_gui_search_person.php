@@ -416,6 +416,7 @@ class GuiSearchPerson {
 			#
 			$sTemp = '';
 			$toggle=0;
+		
 			while($zeile=$ergebnis->FetchRow()){
 
 				if($zeile['status']=='' || $zeile['status']=='normal'){
@@ -455,6 +456,7 @@ class GuiSearchPerson {
 					#
 					# Generate the row in buffer and append as string
 					#
+					
 					ob_start();
 						$this->smarty->display('registration_admission/reg_search_list_row.tpl');
 						$sTemp = $sTemp.ob_get_contents();
