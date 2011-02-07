@@ -318,7 +318,7 @@ class GuiSearchPerson {
 		#
 		if(!isset($searchform_count) || !$searchform_count){
 			$this->smarty->assign('sJSFormCheck','<script language="javascript">
-			<!--
+			//<!--
 				function chkSearch(d){
 					if((d.searchkey.value=="") || (d.searchkey.value==" ")){
 						d.searchkey.focus();
