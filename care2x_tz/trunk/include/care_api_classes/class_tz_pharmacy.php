@@ -635,7 +635,7 @@ function get_all_items_in_category($keyword){
     $this->rs = $db->Execute($this->sql);
     if ($this->rs->RecordCount()) {
       $this->elem = $this->rs->FetchRow();
-      $return_string=number_format($this->elem[0],0,'.',',');
+      $return_string=number_format((double)$this->elem[0],0,'.',',');
       if (
       	(!empty($this->elem[1])) ||
       	(!empty($this->elem[2])) ||
@@ -648,34 +648,34 @@ function get_all_items_in_category($keyword){
       	$return_string .= "/";
 
       	if (!empty($this->elem[1]))
-      		$return_string .= number_format($this->elem[1],0,'.',',')."/";
+      		$return_string .= number_format((double)$this->elem[1],0,'.',',')."/";
       	else
       		$return_string .= "-"."/";
 
       	if (!empty($this->elem[2]))
-      		$return_string .= number_format($this->elem[2],0,'.',',')."/";
+      		$return_string .= number_format((double)$this->elem[2],0,'.',',')."/";
       	else
       		$return_string .= "-"."/";
 
       	if (!empty($this->elem[3]))
-      		$return_string .= number_format($this->elem[3],0,'.',',')."/";
+      		$return_string .= number_format((double)$this->elem[3],0,'.',',')."/";
       	else
       		$return_string .= "-"."/";
 
       	if (!empty($this->elem[4]))
-      		$return_string .= number_format($this->elem[4],0,'.',',')."/";
+      		$return_string .= number_format((double)$this->elem[4],0,'.',',')."/";
       	else
       		$return_string .= "-"."/";
 
 
       	if (!empty($this->elem[5]))
-      		$return_string .= number_format($this->elem[5],0,'.',',')."/";
+      		$return_string .= number_format((double)$this->elem[5],0,'.',',')."/";
       	else
       		$return_string .= "-"."/";
 
 
       	if (!empty($this->elem[6]))
-      		$return_string .= number_format($this->elem[6],0,'.',',')."/";
+      		$return_string .= number_format((double)$this->elem[6],0,'.',',')."/";
       	else
       		$return_string .= "-"."/";
       }
