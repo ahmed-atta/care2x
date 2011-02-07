@@ -172,8 +172,8 @@ function open_lab_request(){
 				echo '<td>'.$pid.'</td>';
 
 				$sqlPerson = "select * from care_person where pid=$pid";
-				$coreObjInner->result = $db->Execute($sqlPerson);
-				$rowPerson = $coreObjInner->result->FetchRow();
+				$result = $db->Execute($sqlPerson);
+				$rowPerson = $result->FetchRow();
 				$name_last =  $rowPerson['name_last'];
 				$name_first = $rowPerson['name_first'];
 
@@ -191,11 +191,11 @@ function open_lab_request(){
 				$sqlInner = "select * from care_tz_diagnosis" .
 						" where encounter_nr = $encounterNr";
 
-				$coreObjInner->result = $db->Execute($sqlInner);
+				$result = $db->Execute($sqlInner);
 
 				$prescr = '';
 
-				foreach ($coreObjInner->result as $rowPrescr){
+				foreach ($result as $rowPrescr){
 
 					if ($prescr=='')
 						$prescr .= '<td>';
