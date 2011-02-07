@@ -114,7 +114,7 @@ while(list($x,$v)=each($types)){
 		$pdf->ezTable($data,'','',array('xPos'=>'left','xOrientation'=>'right','showLines'=>0,'fontSize'=>$report_titlesize,'showHeadings'=>0,'shaded'=>2,'shadeCol2'=>array(0.9,0.9,0.9),'width'=>555));
 
 
-		if($notes=& getNotes($nr)){
+		if($notes= getNotes($nr)){
 			# get the report
 			while($report=$result->FetchRow()){
 				$y=$pdf->ezText("\n",6);

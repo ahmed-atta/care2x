@@ -92,7 +92,7 @@ if($dblink_ok)
 				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 			}						
 			if( $enc_obj->is_loaded){
-				$result=&$enc_obj->encounter;		
+				$result=$enc_obj->encounter;		
 				$rows=$enc_obj->record_count;	
 			}
 		}else{ 
@@ -100,9 +100,9 @@ if($dblink_ok)
 			$mode='?';
 		} 	
 		// Load the nursing and effectivity reports in one instance
-		$neff_report=&$report_obj->getNursingAndEffectivityReport($pn);
+		$neff_report=$report_obj->getNursingAndEffectivityReport($pn);
 		// Load the date range
-		$neff_date_range=&$report_obj->getNursingReportDateRange($pn);
+		$neff_date_range=$report_obj->getNursingReportDateRange($pn);
 	}
 }else{
 	echo "$LDDbNoLink<br>$sql<br>";

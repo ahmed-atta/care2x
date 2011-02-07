@@ -84,7 +84,7 @@ if(($mode=='')||($mode=='fresh')){
 
 	# Get all outpatients for this dept
 	 if($sort=='') $sort='name_last';
-	$opat_obj=&$enc_obj->OutPatientsBasic($sort,false);
+	$opat_obj=$enc_obj->OutPatientsBasic($sort,false);
 
 	//echo $enc_obj->getLastQuery();
 	$rows=$enc_obj->LastRecordCount();
@@ -107,7 +107,7 @@ if(($mode=='')||($mode=='fresh')){
 
 		$dnr=(isset($w_waitlist)&&$w_waitlist) ? 0 : $dept_nr;
 		//echo '<p>'.$enc_obj->getLastQuery();
-		$waitlist=&$enc_obj->createWaitingOutpatientList($dnr);
+		$waitlist=$enc_obj->createWaitingOutpatientList($dnr);
 
 		$waitlist_count=$enc_obj->LastRecordCount();
 		//echo $waitlist_count.'<p>'.$enc_obj->getLastQuery();
@@ -124,8 +124,8 @@ if(($mode=='')||($mode=='fresh')){
 		$pers_obj=new Personell;
 
 		if($result=$pers_obj->getDOCDutyplan($dept_nr,$pyear,$pmonth,$elem)){
-			$duty1=&unserialize($result['duty_1_pnr']);
-			if(SHOW_DOC_2) $duty2=&unserialize($result['duty_2_pnr']);
+			$duty1=unserialize($result['duty_1_pnr']);
+			if(SHOW_DOC_2) $duty2=unserialize($result['duty_2_pnr']);
 					//echo $sql."<br>";
 		}
 		//echo $pers_obj->getLastQuery();
@@ -134,10 +134,10 @@ if(($mode=='')||($mode=='fresh')){
 		# Consider the early morning hours to belong to the past day
 		if(date('H.i')<DOC_CHANGE_TIME) $offset_day--;
 		if($pnr1=$duty1['ha'.$offset_day]){
-			$person1=&$pers_obj->getPersonellInfo($pnr1);
+			$person1=$pers_obj->getPersonellInfo($pnr1);
 		}
 		if(SHOW_DOC_2 && ($pnr2=$duty2['hr'.$offset_day])){
-			$person2=&$pers_obj->getPersonellInfo($pnr2);
+			$person2=$pers_obj->getPersonellInfo($pnr2);
 		}
 		#### End of routine to fetch doctors on duty
 }

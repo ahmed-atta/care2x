@@ -44,12 +44,12 @@ $non_grouped=false;
 if(!isset($group_nr)) $group_nr=0;
 
 # Get the patient`s basic data
-if($enc=&$enc_obj->getBasic4Data()){
+if($enc=$enc_obj->getBasic4Data()){
 
 	$encounter=$enc->FetchRow();
 
 	# Get the internal drg groups for the encounter
-	$drg_rows=&$enc_obj->InternDRGGroups();
+	$drg_rows=$enc_obj->InternDRGGroups();
 
 	# Check for non grouped entries
 	if($enc_obj->nongroupedDiagnosisExists()){

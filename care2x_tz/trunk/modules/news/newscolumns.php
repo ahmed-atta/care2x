@@ -116,11 +116,11 @@ if($dblink_ok) {
 	
 	require_once($root_path.'include/care_api_classes/class_news.php');
     $newsobj=new News;
-    $news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
+    $news=$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
 	
 	/* Now get the archived news articles */
 	//echo $dept_nr;
-	$news_archive=&$newsobj->getArchiveList($dept_nr,$news);
+	$news_archive=$newsobj->getArchiveList($dept_nr,$news);
 	$rows=$newsobj->LastRecordCount();
 }
 $returnfile=$breakfile;

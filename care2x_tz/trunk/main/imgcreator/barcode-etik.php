@@ -71,7 +71,7 @@ else
 		include_once($root_path.'include/care_api_classes/class_ward.php');
 		$obj=new Ward;
 		# Get location data
-		$location=&$obj->EncounterLocationsInfo($en);
+		$location=$obj->EncounterLocationsInfo($en);
 		
 	   
 	//   $result['date_birth']=formatDate2Local($result['date_birth'],$date_format);

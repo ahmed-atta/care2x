@@ -133,7 +133,7 @@ class Ward extends Encounter {
 	* @access private
 	*/
 	function _useWard(){
-		$this->ref_array=&$this->fld_ward;
+		$this->ref_array=$this->fld_ward;
 		$this->coretable=$this->tb_ward;
 	}
 	/**

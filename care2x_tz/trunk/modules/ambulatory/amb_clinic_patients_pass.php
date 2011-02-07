@@ -16,7 +16,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
-$allowedarea=&$allow_area['admit'];
+$allowedarea=$allow_area['admit'];
 $append=URL_REDIRECT_APPEND; 
 $fileforward='amb_clinic_patients.php'.$append.'&origin=pass&target=list&dept_nr='.$dept_nr; 
 $lognote=$LDAppointments.'ok';

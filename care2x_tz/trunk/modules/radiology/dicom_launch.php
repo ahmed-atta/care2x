@@ -36,11 +36,11 @@ if(isset($img_nr)&&$img_nr){
 # Get the dicom image
 	include_once($root_path.'include/care_api_classes/class_image.php');
 	$img_obj=new Image;
-	$dicom=&$img_obj->getDicomImage($img_nr);
+	$dicom=$img_obj->getDicomImage($img_nr);
 	//echo $img_obj->getLastQuery();
 	$imgpath=$root_path.'radiology/dicom_img/'.$dicom['pid'].'/'.$img_nr;
 	if($count=$img_obj->LastRecordCount()){
-		if($files=&$img_obj->FilesListArray($imgpath,FILE_DISCRIM)){
+		if($files=$img_obj->FilesListArray($imgpath,FILE_DISCRIM)){
 			$NUM=$img_obj->LastRecordCount();
 		}else{
 			$nogo=true;

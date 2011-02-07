@@ -67,7 +67,7 @@ else
 		include_once($root_path.'include/care_api_classes/class_ward.php');
 		$obj=new Ward;
 		# Get location data
-		$location=&$obj->EncounterLocationsInfo($en);
+		$location=$obj->EncounterLocationsInfo($en);
 		# Location info, admission class, blood group
 		$locstr=strtoupper($location['dept_id']).' '.strtoupper($location['ward_id']).' '.$location['roomprefix'];
 		if($location['room_nr'])  $locstr.='-'.$location['room_nr'];

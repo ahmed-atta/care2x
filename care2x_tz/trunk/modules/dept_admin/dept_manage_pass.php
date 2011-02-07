@@ -8,7 +8,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['wards'];
+$allowedarea=$allow_area['wards'];
 
 $fileforward="dept_manage.php?sid=".$sid."&lang=".$lang;
 $thisfile=basename($_SERVER['PHP_SELF']);

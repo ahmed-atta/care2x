@@ -117,7 +117,7 @@ class GuiPersonShow {
 	* @access private
 	*/
 	function _load(){
-		if($this->data_obj=&$this->person_obj->getAllInfoObject()){
+		if($this->data_obj=$this->person_obj->getAllInfoObject()){
 				$this->data=$this->data_obj->FetchRow();
 			return $this->is_loaded = TRUE;
 		}else{
@@ -194,7 +194,7 @@ class GuiPersonShow {
 			if($this->is_loaded){
 				extract($this->data);
 				# Get related insurance data
-				$p_insurance=&$pinsure_obj->getPersonInsuranceObject($this->pid);
+				$p_insurance=$pinsure_obj->getPersonInsuranceObject($this->pid);
 
 				if($p_insurance==FALSE) {
 					$insurance_show=true;

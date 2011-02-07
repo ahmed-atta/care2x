@@ -17,7 +17,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['pharma'];
+$allowedarea=$allow_area['pharma'];
 $append=URL_REDIRECT_APPEND;
 $fileforward='pharmacy_tz.php'.$append;
 $lognow='Pharmacy login ok';

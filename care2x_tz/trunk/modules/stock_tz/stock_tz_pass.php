@@ -17,7 +17,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['bill'];
+$allowedarea=$allow_area['bill'];
 $append=URL_REDIRECT_APPEND;
 $fileforward='stock_main_menu.php'.$append;
 $lognow='Stock login ok';

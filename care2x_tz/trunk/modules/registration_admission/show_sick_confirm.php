@@ -21,12 +21,12 @@ $thisfile=basename($_SERVER['PHP_SELF']);
 
 if(!isset($mode)||empty($mode)){
 	
-	$sickconfirm_obj=&$enc_obj->allSicknessConfirm();
+	$sickconfirm_obj=$enc_obj->allSicknessConfirm();
 	if($rows=$enc_obj->LastRecordCount()){
 		$mode='show';
 		# If $get_nr is non-empty, get the  single record 
 		if(isset($get_nr)&&$get_nr){
-			if(!$single_obj=&$enc_obj->getSicknessConfirm($get_nr)) $get_nr=0;
+			if(!$single_obj=$enc_obj->getSicknessConfirm($get_nr)) $get_nr=0;
 		}else{
 			$get_nr=0;
 		}
@@ -60,7 +60,7 @@ if($mode=='new'){
 	# Load the department class 
 	include_once($root_path.'include/care_api_classes/class_department.php');
 	$dept_obj=new Department($dept_nr);
-	$dept=&$dept_obj->getDeptAllInfo($dept_nr);
+	$dept=$dept_obj->getDeptAllInfo($dept_nr);
 }
 # Get the insurance data of the encounter
 if($insure_obj=$enc_obj->EncounterInsuranceData()){

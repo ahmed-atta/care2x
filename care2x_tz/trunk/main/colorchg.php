@@ -39,7 +39,7 @@ if ($mode=='change'){
 
 	if($user->getConfig($_COOKIE['ck_config'])){
 
-		$config=&$user->getConfigData();
+		$config=$user->getConfigData();
 	
 		$config=array_merge($config,$config_new);
 

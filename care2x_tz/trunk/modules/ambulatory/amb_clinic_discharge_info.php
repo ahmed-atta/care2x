@@ -79,7 +79,7 @@ if($enc_obj->loadEncounterData($pn)){
 		$glob_obj->getConfig('patient_%');
 		$glob_obj->getConfig('person_%');
 
-		$result=&$enc_obj->encounter;
+		$result=$enc_obj->encounter;
 
 		/* Check whether config foto path exists, else use default path */
 		$default_photo_path='fotos/registration';
@@ -87,7 +87,7 @@ if($enc_obj->loadEncounterData($pn)){
 		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $default_photo_path;
 		require_once($root_path.'include/inc_photo_filename_resolve.php');
 		/* Load the discharge types */
-		$discharge_types=&$enc_obj->getDischargeTypesData();
+		$discharge_types=$enc_obj->getDischargeTypesData();
 
 		if(!isset($dept)||empty($dept)){
 			# Create nursing notes object

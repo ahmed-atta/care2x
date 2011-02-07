@@ -149,7 +149,7 @@ class GuiInputPerson {
 		$glob_obj=new GlobalConfig($GLOBAL_CONFIG);
 		$glob_obj->getConfig('person_%');
 
-		extract($GLOBAL_CONFIG);
+		if (!empty($GLOBAL_CONFIG)) extract($GLOBAL_CONFIG);
 
 		# Check whether config foto path exists, else use default path
 		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $this->default_photo_path;
@@ -434,13 +434,13 @@ class GuiInputPerson {
 			} // end of if(!$error)
 		}elseif(!empty($this->pid)){
 			 # Get the person?s data
-			if($data_obj=&$person_obj->getAllInfoObject()){
+			if($data_obj=$person_obj->getAllInfoObject()){
 
 				$zeile=$data_obj->FetchRow();
 				extract($zeile);
 				//print_r($zeile);
 				# Get the related insurance data
-				$p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
+				$p_insurance=$pinsure_obj->getPersonInsuranceObject($pid);
 				if($p_insurance==FALSE) {
 					$insurance_show=TRUE;
 				} else {

@@ -40,7 +40,7 @@ if(!isset($sickform_style)){
 	$TP_href_3=$url_prepend.'_plain';
 	$TP_href_4=$url_prepend.'_data';
 	
-	$TP_selector=&$TP_obj->load('registration_admission/tp_sick_confirm_selectstyle.htm');
+	$TP_selector=$TP_obj->load('registration_admission/tp_sick_confirm_selectstyle.htm');
 	eval("echo $TP_selector;");
 	exit;
 }
@@ -56,12 +56,12 @@ $enc_obj=new Encounter($_SESSION['sess_full_en']);
 
 if(!isset($mode)||empty($mode)){
 	
-	$sickconfirm_obj=&$enc_obj->allSicknessConfirm();
+	$sickconfirm_obj=$enc_obj->allSicknessConfirm();
 	if($rows=$enc_obj->LastRecordCount()){
 		$mode='show';
 		# If $get_nr is non-empty, get the  single record 
 		if(isset($get_nr)&&$get_nr){
-			if(!$single_obj=&$enc_obj->getSicknessConfirm($get_nr)) $get_nr=0;
+			if(!$single_obj=$enc_obj->getSicknessConfirm($get_nr)) $get_nr=0;
 		}else{
 			$get_nr=0;
 		}
@@ -93,7 +93,7 @@ if(!isset($user_id) || !$user_id)
  
 if(isset($pid) && ($pid!='')) {
 	$person_obj=new Person($pid);
-	if($data_obj=&$person_obj->getAllInfoObject()){
+	if($data_obj=$person_obj->getAllInfoObject()){
 		$zeile=$data_obj->FetchRow();
 		//while(list($x,$v)=each($zeile))	$$x=$v;
 		extract($zeile);       

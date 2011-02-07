@@ -150,7 +150,7 @@ $page_title=$LDUploadDicom;
 
 if($mode=='show'&&$nr) {
 	$imgpath=$root_path.$dicom_img_localpath.$pid."/$nr";
-	$files=&$img->FilesListArray($imgpath,FILE_DISCRIM);
+	$files=$img->FilesListArray($imgpath,FILE_DISCRIM);
 	$rows=$img->LastRecordCount();
 }
 

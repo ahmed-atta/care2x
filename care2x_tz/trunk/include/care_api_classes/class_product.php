@@ -185,7 +185,7 @@ class Product extends Core {
 	function SaveCatalogItem(&$data,$type){
 		if(empty($type)) return false;
 		$this->useOrderCatalog($type);
-		$this->data_array=&$data;
+		$this->data_array=$data;
 		return $this->insertDataFromInternalArray();
 	}
 	/**

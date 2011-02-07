@@ -51,7 +51,7 @@ $rows=0;
 include_once($root_path.'include/care_api_classes/class_product.php');
 $product=new Product;
 
-$ergebnis=&$product->PendingOrders($cat);
+$ergebnis=$product->PendingOrders($cat);
 $rows=$product->LastRecordCount();
 
 ?>
@@ -92,7 +92,7 @@ if($rows){
 	# Create the department object
 	include_once($root_path.'include/care_api_classes/class_department.php');
 	$dept_obj=new Department;
-	if($depts=&$dept_obj->getAllActiveObject()){
+	if($depts=$dept_obj->getAllActiveObject()){
 		while($buf=$depts->FetchRow()){
 			$dept[$buf['nr']]=$buf;
 		}

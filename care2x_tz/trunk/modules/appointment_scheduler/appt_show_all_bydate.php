@@ -39,7 +39,7 @@ if(!isset($mode)){
 	}
 }
 if($mode=='show'){
-	$result=&$appt_obj->getAllByDateObj($currYear,$currMonth,$currDay);
+	$result=$appt_obj->getAllByDateObj($currYear,$currMonth,$currDay);
 }
 $_SESSION['sess_parent_mod']='';
 /* Load departments */

@@ -18,7 +18,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['lab_w'];
+$allowedarea=$allow_area['lab_w'];
 
 $fileforward="radio_data_patient_such.php?sid=$sid&lang=$lang&edit=1&mode=edit";
 $thisfile=basename(__FILE__);

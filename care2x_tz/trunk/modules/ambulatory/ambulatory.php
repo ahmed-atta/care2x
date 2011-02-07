@@ -28,7 +28,7 @@ $_SESSION['sess_parent_mod']='';
 /* Create department object and load all medical depts */
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj= new Department;
-$medical_depts=&$dept_obj->getAllMedical();
+$medical_depts=$dept_obj->getAllMedical();
 
 # Start Smarty templating here
  /**

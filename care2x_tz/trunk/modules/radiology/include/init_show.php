@@ -38,7 +38,7 @@ if(isset($pid) && ($pid!='')) {
 	$person_obj=new Person($pid);
 		
 
-	if($data_obj=&$person_obj->getAllInfoObject()){
+	if($data_obj=$person_obj->getAllInfoObject()){
 		$zeile=$data_obj->FetchRow();
 	 
 		//while(list($x,$v)=each($zeile))	$$x=$v;       

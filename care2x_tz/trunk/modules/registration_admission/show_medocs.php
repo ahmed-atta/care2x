@@ -22,10 +22,10 @@ require('./include/init_show.php');
 
 if($parent_admit){
 	# Get the medocs records data of this encounter
-	$med_obj=&$obj->encMedocsList($_SESSION['sess_en']);
+	$med_obj=$obj->encMedocsList($_SESSION['sess_en']);
 }else{
 	# Get all medocs records  of this person
-	$med_obj=&$obj->pidMedocsList($_SESSION['sess_pid']);
+	$med_obj=$obj->pidMedocsList($_SESSION['sess_pid']);
 }
 $rows=$obj->LastRecordCount();
 

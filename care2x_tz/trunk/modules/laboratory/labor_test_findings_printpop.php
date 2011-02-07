@@ -94,7 +94,7 @@ $db_request_table=$subtarget;
 				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 			}						
 
-			$result=&$enc_obj->encounter;
+			$result=$enc_obj->encounter;
 		}		
      }
 	 

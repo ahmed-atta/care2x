@@ -66,10 +66,10 @@ $abtname=array();
 $datum=date("d.m.Y");
 
 /* Load the department list with oncall doctors */
-$dept_DOC=&$dept_obj->getAllActiveWithSurgery();
+$dept_DOC=$dept_obj->getAllActiveWithSurgery();
 if(is_array($dept_DOC)) $dlen=sizeof($dept_DOC);
 	else $dlen=0;
-$ORNrs=&$dept_obj->getAllActiveORNrs();
+$ORNrs=$dept_obj->getAllActiveORNrs();
 if(is_object($ORNrs)) $slen=$ORNrs->RecordCount();
 	else $slen=0;
 

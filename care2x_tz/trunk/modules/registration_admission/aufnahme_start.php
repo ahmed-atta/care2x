@@ -74,7 +74,7 @@ $dbtable='care_encounter'; // The table of admission data
 /* Create new person's insurance object */
 $pinsure_obj=new PersonInsurance($pid);
 /* Get the insurance classes */
-$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var AS "LD_var"');
+$insurance_classes=$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var AS "LD_var"');
 
 /* Create new person object */
 $person_obj=new Person($pid);
@@ -155,7 +155,7 @@ if($pid!='' || $encounter_nr!=''){
           }
 
 			 /* Get the related insurance data */
-			 $p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
+			 $p_insurance=$pinsure_obj->getPersonInsuranceObject($pid);
 			 if($p_insurance==false) {
 				$insurance_show=true;
 			 } else {
@@ -394,7 +394,7 @@ if($pid!='' || $encounter_nr!=''){
 			  if(!empty($GLOBAL_CONFIG['patient_financial_class_single_result'])) $encounter_obj->setSingleResult(true);
 
 				if(!$GLOBAL_CONFIG['patient_service_care_hide']){
-                	if($buff=&$encounter_obj->CareServiceClass()){
+                	if($buff=$encounter_obj->CareServiceClass()){
 					    while($care_class=$buff->FetchRow()){
 							extract($care_class);
 						}
@@ -402,7 +402,7 @@ if($pid!='' || $encounter_nr!=''){
 					}
 				}
 				if(!$GLOBAL_CONFIG['patient_service_room_hide']){
-                	if($buff=&$encounter_obj->RoomServiceClass()){
+                	if($buff=$encounter_obj->RoomServiceClass()){
 					    while($room_class=$buff->FetchRow()){
 							extract($room_class);
 						}
@@ -410,7 +410,7 @@ if($pid!='' || $encounter_nr!=''){
 					}
 				}
 				if(!$GLOBAL_CONFIG['patient_service_att_dr_hide']){
-                	if($buff=&$encounter_obj->AttDrServiceClass()){
+                	if($buff=$encounter_obj->AttDrServiceClass()){
 					    while($att_dr_class=$buff->FetchRow()){
 							extract($att_dr_class);
 						}
@@ -425,18 +425,18 @@ if($pid!='' || $encounter_nr!=''){
 		# Load all  wards info
 		$ward_obj=new Ward;
 		$items='nr,name';
-		$ward_info=&$ward_obj->getAllWardsItemsObject($items);
+		$ward_info=$ward_obj->getAllWardsItemsObject($items);
 	}
 	if(!$encounter_nr||$encounter_class_nr==2){
 		# Load all medical departments
 		include_once($root_path.'include/care_api_classes/class_department.php');
 		$dept_obj=new Department;
-		$all_meds=&$dept_obj->getAllMedicalObject();
+		$all_meds=$dept_obj->getAllMedicalObject();
 
 	}
 
 	$person_obj->setPID($pid);
-	if($data=&$person_obj->BasicDataArray($pid)){
+	if($data=$person_obj->BasicDataArray($pid)){
 		//while(list($x,$v)=each($data))	$$x=$v;
 		extract($data);
 	}

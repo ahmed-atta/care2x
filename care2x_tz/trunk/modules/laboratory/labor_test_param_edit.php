@@ -137,14 +137,14 @@ if(isset($mode) && !empty($mode)) {
 }
 
 # Get the test parameter values
-if($tparam=&$lab_obj->getTestParam($nr)){
+if($tparam=$lab_obj->getTestParam($nr)){
 	$tp=$tparam->FetchRow();
 	$parameters=$paralistarray[$tp['group_id']];
 }else{
 	$tp=false;
 }
 //gjergji : i get the groups here...
-$tgroups=&$lab_obj->TestActiveGroups();	
+$tgroups=$lab_obj->TestActiveGroups();	
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>

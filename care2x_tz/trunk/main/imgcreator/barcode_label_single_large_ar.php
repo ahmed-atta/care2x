@@ -29,7 +29,7 @@ else
 		include_once($root_path.'include/care_api_classes/class_ward.php');
 		$obj=new Ward;
 		if($obj->loadEncounterData($en)){
-			$result=&$obj->encounter;
+			$result=$obj->encounter;
 		}
 		
 		# Create insurance object
@@ -53,7 +53,7 @@ else
 	   include_once($root_path.'include/inc_date_format_functions.php');
 	  
 	  # Get location data
-	$location=&$obj->EncounterLocationsInfo($en);
+	$location=$obj->EncounterLocationsInfo($en);
 		 
 	   # Localize date data   
 	   $result['date_birth']=@formatDate2Local($result['date_birth'],$date_format);

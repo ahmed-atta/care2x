@@ -114,11 +114,11 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 $enc_obj->setWhereCondition("encounter_nr='$encounter_nr'");
 
-if($encounter=&$enc_obj->getBasic4Data($encounter_nr)) {
+if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
 
 	$patient=$encounter->FetchRow();
 
-	$recs=&$lab_obj->getAllResults($encounter_nr);
+	$recs=$lab_obj->getAllResults($encounter_nr);
 
 	if ($rows=$lab_obj->LastRecordCount()){
 
@@ -131,12 +131,12 @@ if($encounter=&$enc_obj->getBasic4Data($encounter_nr)) {
 			echo "++++++++++++++++";
 			$records=array();
 			$dt=array();
-			while($buffer=&$recs->FetchRow()){
+			while($buffer=$recs->FetchRow()){
 				# Prepare the values
 				$tmp = array($buffer['paramater_name'] => $buffer['parameter_value']);
 				$records[$buffer['job_id']][] = $tmp;
-				$tdate[$buffer['job_id']]=&$buffer['test_date'];
-				$ttime[$buffer['job_id']]=&$buffer['test_time'];
+				$tdate[$buffer['job_id']]=$buffer['test_date'];
+				$ttime[$buffer['job_id']]=$buffer['test_time'];
 			}
 		}
 	}else{

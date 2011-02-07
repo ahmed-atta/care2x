@@ -11,7 +11,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'include/care_api_classes/class_notes.php');
 $obj=new Notes;
 # Load the notes
-if($n_obj=&$obj->getEncounterNotes($nr)) $notes=$n_obj->FetchRow();
+if($n_obj=$obj->getEncounterNotes($nr)) $notes=$n_obj->FetchRow();
 
 # Prepare variables for template
 $bd=@formatDate2Local($bd,$date_format);

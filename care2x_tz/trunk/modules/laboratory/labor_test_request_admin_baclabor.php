@@ -101,7 +101,7 @@ if($batchrows && $pn){
 			default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 		}
 
-		$result=&$enc_obj->encounter;
+		$result=$enc_obj->encounter;
 
 		$sql="SELECT * FROM care_test_request_".$db_request_table." WHERE batch_nr='".$batch_nr."'";
 	    

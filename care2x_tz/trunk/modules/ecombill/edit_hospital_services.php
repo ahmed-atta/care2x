@@ -64,12 +64,12 @@ function submitform()
 	if($service=='LT') $TP_title= $LabTestItems;
 		elseif($service=='HS') $TP_title=$HospitalServiceItems;
 	
-	$TP_head=&$TP_obj->load('ecombill/tp_edit_head.htm');
+	$TP_head=$TP_obj->load('ecombill/tp_edit_head.htm');
 	eval("echo $TP_head;");
 	# Load the template for items
-	$TP_item=&$TP_obj->load('ecombill/tp_edit_item.htm');
+	$TP_item=$TP_obj->load('ecombill/tp_edit_item.htm');
 	# Load the template for spacer
-	$TP_spacer=&$TP_obj->load('ecombill/tp_edit_spacer.htm');
+	$TP_spacer=$TP_obj->load('ecombill/tp_edit_spacer.htm');
 
 	for($cnt=0;$cnt<$cntLT;$cnt++)
 	{

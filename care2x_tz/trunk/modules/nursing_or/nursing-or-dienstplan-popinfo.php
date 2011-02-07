@@ -16,11 +16,11 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'include/care_api_classes/class_personell.php');
 $pers_obj=new Personell;
-$person=&$pers_obj->getPersonellInfo($nr);
+$person=$pers_obj->getPersonellInfo($nr);
 
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
-$dept=&$dept_obj->getPhoneInfo($dept_nr);
+$dept=$dept_obj->getPhoneInfo($dept_nr);
 
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 $glob_obj=new GlobalConfig($GLOBAL_CONFIG);

@@ -56,9 +56,9 @@ require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
 /* Load all operative departments */
-$surgery_arr=&$dept_obj->getAllActiveWithSurgery();
+$surgery_arr=$dept_obj->getAllActiveWithSurgery();
 /* Get list of all active OR numbers */
-$ORNrs=&$dept_obj->getAllActiveORNrs();
+$ORNrs=$dept_obj->getAllActiveORNrs();
 
 
 function yesterday(&$fd,&$fm,&$fy,$minyr)

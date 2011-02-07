@@ -32,7 +32,7 @@ if (! isset ( $user_origin ) || empty ( $user_origin ))
 require_once ($root_path . 'include/care_api_classes/class_encounter.php');
 $encounter = new Encounter ( $encounter_nr );
 $enc_obj=new Encounter($encounter_nr);
-if($encounter =&$enc_obj->getBasic4Data($encounter_nr)){
+if($encounter =$enc_obj->getBasic4Data($encounter_nr)){
 	$patient = $encounter->FetchRow();
 }
 
@@ -56,7 +56,7 @@ $lab_obj = new Lab ( $encounter_nr );
 $lab_obj_sub = new Lab ( $encounter_nr, true );
 
 //to avoid reinserting allready done analysis
-if($result=&$lab_obj->getResult($job_id,$parameterselect)){
+if($result=$lab_obj->getResult($job_id,$parameterselect)){
 	while($row=$result->FetchRow()) {
 		$batch_nr = $row['batch_nr'];
 		$pdata[$row['paramater_name']] = $row['parameter_value'];
@@ -163,13 +163,13 @@ if ($mode == 'save') {
 
 	# If previously saved, get the values
 	if($saved){
-		if($result=&$lab_obj->getBatchResult($batch_nr)){
+		if($result=$lab_obj->getBatchResult($batch_nr)){
 			while($row=$result->FetchRow()) {
 				$pdata[$row['paramater_name']] = $row['parameter_value'];
 			}
 		}
 	}else{
-		if($result=&$lab_obj->getResult($job_id,$parameterselect)){
+		if($result=$lab_obj->getResult($job_id,$parameterselect)){
 			while($row=$result->FetchRow()) {
 				$pdata[$row['paramater_name']] = $row['parameter_value'];
 	}
@@ -182,10 +182,10 @@ if ($mode == 'save') {
 
 	//echo $lab_obj->getLastQuery();
 	# Get the test test groups
-	$tgroups=&$lab_obj->TestActiveGroups();
+	$tgroups=$lab_obj->TestActiveGroups();
 	# Get the test parameter values
 	//gjergji : take all the params for this group...
-	$tparams=&$lab_obj->TestParams();
+	$tparams=$lab_obj->TestParams();
 
 	# Set the return file
 	if (isset ( $job_id ) && $job_id) {

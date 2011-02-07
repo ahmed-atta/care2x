@@ -182,7 +182,7 @@ tr.encounter_nr,tr.send_date,dept_nr,room_nr,tr.create_id FROM care_test_request
 				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 			}
 
-			$result=&$enc_obj->encounter;
+			$result=$enc_obj->encounter;
 
 			$sql="SELECT * FROM care_test_request_".$subtarget." WHERE batch_nr='".$batch_nr."'";
 			if($ergebnis=$db->Execute($sql)){

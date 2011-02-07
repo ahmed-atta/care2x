@@ -62,7 +62,7 @@ $patregtable='care_person';  // The table of the patient registration data
 /* Create new person's insurance object */
 $pinsure_obj=new PersonInsurance($pid);	 
 /* Get the insurance classes */
-$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var');
+$insurance_classes=$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var');
 
 /* Create new person object */
 $person_obj=new Person($pid);
@@ -86,7 +86,7 @@ if($pid||$personell_nr){
 			exit;
 		}
 		# Get the related insurance data
-		$p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
+		$p_insurance=$pinsure_obj->getPersonInsuranceObject($pid);
 		if($p_insurance==FALSE) {
 			$insurance_show=TRUE;
 		} else {
@@ -173,7 +173,7 @@ if($pid||$personell_nr){
 		} // end of if($mode)
 		else{
 			$person_obj->setPID($pid);
-			if($data=&$person_obj->BasicDataArray($pid)){
+			if($data=$person_obj->BasicDataArray($pid)){
 				//while(list($x,$v)=each($data))	$$x=$v;
 				extract($data);
 			}
@@ -184,7 +184,7 @@ if($pid||$personell_nr){
 		# Load personnel data
 		$personell_obj->loadPersonellData($personell_nr);
 		if($personell_obj->is_loaded) {
-			$zeile=&$personell_obj->personell_data;
+			$zeile=$personell_obj->personell_data;
 			extract($zeile);
 			# Get insurance firm name
 			$insurance_firm_name=$pinsure_obj->getFirmName($insurance_firm_id);
@@ -196,7 +196,7 @@ if($pid||$personell_nr){
 # Load the wards info
 $ward_obj=new Ward;
 $items='nr,name';
-$ward_info=&$ward_obj->getAllWardsItemsObject($items);
+$ward_info=$ward_obj->getAllWardsItemsObject($items);
 
 if($update) $breakfile='personell_register_show.php'.URL_APPEND.'&personell_nr='.$personell_nr;
 	elseif($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;

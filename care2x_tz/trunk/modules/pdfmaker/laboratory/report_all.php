@@ -45,7 +45,7 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj= new Encounter($encounter_nr);
 $encounter = '';
 if($enc_obj->loadEncounterData()){
-	$encounter=&$enc_obj->getLoadedEncounterData();
+	$encounter=$enc_obj->getLoadedEncounterData();
 }
 
 // Get the Deparment name
@@ -65,11 +65,11 @@ $lab_obj=new Lab($encounter_nr);
 //get the lab results..
 $enc_obj->setWhereCondition("encounter_nr='$encounter_nr'");
 
-if($encounterLab=&$enc_obj->getBasic4Data($encounter_nr)) {
+if($encounterLab=$enc_obj->getBasic4Data($encounter_nr)) {
 
 	$patient=$encounterLab->FetchRow();
 
-	$recs=&$lab_obj->getAllResults($encounter_nr);
+	$recs=$lab_obj->getAllResults($encounter_nr);
 	
 	if ($rows=$lab_obj->LastRecordCount()){
 	
@@ -81,12 +81,12 @@ if($encounterLab=&$enc_obj->getBasic4Data($encounter_nr)) {
 		if(empty($cache)){
 			$records=array();
 			$dt=array();
-			while($buffer=&$recs->FetchRow()){
+			while($buffer=$recs->FetchRow()){
 				# Prepare the values
 				$tmp = array($buffer['paramater_name'] => $buffer['parameter_value']);
 				$records[$buffer['job_id']][] = $tmp;
-				$tdate[$buffer['job_id']]=&$buffer['test_date'];
-				$ttime[$buffer['job_id']]=&$buffer['test_time'];				
+				$tdate[$buffer['job_id']]=$buffer['test_date'];
+				$ttime[$buffer['job_id']]=$buffer['test_time'];				
 			}
 		}
 	}else{

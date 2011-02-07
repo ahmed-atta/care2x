@@ -23,7 +23,7 @@ $breakfile=$root_path.$_SESSION['sess_file_break'].URL_APPEND;
 # Get the news article
 require_once($root_path.'include/care_api_classes/class_news.php');
 $newsobj=new News;
-$news=&$newsobj->getNews($nr);
+$news=$newsobj->getNews($nr);
 
 # Get the news global configurations
 

@@ -70,8 +70,8 @@ require_once($root_path.'include/inc_date_format_functions.php');
 require_once($root_path.'global_conf/inc_remoteservers_conf.php');
 
 if(($mode=='')||($mode=='fresh')){
-	if($ward_info=&$ward_obj->getWardInfo($ward_nr)){
-		$room_obj=&$ward_obj->getRoomInfo($ward_nr,$ward_info['room_nr_start'],$ward_info['room_nr_end']);
+	if($ward_info=$ward_obj->getWardInfo($ward_nr)){
+		$room_obj=$ward_obj->getRoomInfo($ward_nr,$ward_info['room_nr_start'],$ward_info['room_nr_end']);
 		if(is_object($room_obj)) {
 			$room_ok=true;
 		}else{
@@ -81,8 +81,8 @@ if(($mode=='')||($mode=='fresh')){
 		$nr_beds=$ward_obj->countBeds($ward_nr);
 
 		# Get ward patients
-		if($is_today) $patients_obj=&$ward_obj->getDayWardOccupants($ward_nr);
-			else $patients_obj=&$ward_obj->getDayWardOccupants($ward_nr,$s_date);
+		if($is_today) $patients_obj=$ward_obj->getDayWardOccupants($ward_nr);
+			else $patients_obj=$ward_obj->getDayWardOccupants($ward_nr,$s_date);
 
 		//echo $ward_obj->getLastQuery();
 		//echo $ward_obj->LastRecordCount();
@@ -115,7 +115,7 @@ if(($mode=='')||($mode=='fresh')){
 		$pers_obj=new Personell;
 
 		if($result=$pers_obj->getDOCDutyplan($ward_info['dept_nr'],$pyear,$pmonth,$elem)){
-			$duty1=&unserialize($result['duty_1_pnr']);
+			$duty1=unserialize($result['duty_1_pnr']);
 			if(SHOW_DOC_2) $duty2=&unserialize($result['duty_2_pnr']);
 					//echo $sql."<br>";
 		}
@@ -125,10 +125,10 @@ if(($mode=='')||($mode=='fresh')){
 		# Consider the early morning hours to belong to the past day
 		if(date('H.i')<DOC_CHANGE_TIME) $offset_day--;
 		if($pnr1=$duty1['ha'.$offset_day]){
-			$person1=&$pers_obj->getPersonellInfo($pnr1);
+			$person1=$pers_obj->getPersonellInfo($pnr1);
 		}
 		if(SHOW_DOC_2 && ($pnr2=$duty2['hr'.$offset_day])){
-			$person2=&$pers_obj->getPersonellInfo($pnr2);
+			$person2=$pers_obj->getPersonellInfo($pnr2);
 		}
 		#### End of routine to fetch doctors on duty
 	}else{
@@ -137,19 +137,12 @@ if(($mode=='')||($mode=='fresh')){
 }elseif($mode=='newdata'){
 
 	if(($pn=='lock')||($pn=='unlock')){
-		//$db->debug=true;
 		if($pn=='lock') $ward_obj->closeBed($ward_nr,$rm,$bd);
 			else $ward_obj->openBed($ward_nr,$rm,$bd);
-
-		//header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
-		//exit;
 	}else{
 		if($ward_obj->AdmitInWard($pn,$ward_nr,$rm,$bd)){
-			//echo "ok";
 			$ward_obj->setAdmittedInWard($pn,$ward_nr,$rm,$bd);
 		}
-		//header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
-		//exit;
 	}
 	header("location:nursing-station.php".URL_REDIRECT_APPEND."&edit=1&mode=&pday=$pday&pmonth=$pmonth&pyear=$pyear&station=$station&ward_nr=$ward_nr");
 	exit;
@@ -430,7 +423,7 @@ if($ward_ok){
 			if($patients_ok){
 
 				if(isset($patient[$i][$j])){
-			 		$bed=&$patient[$i][$j];
+			 		$bed=$patient[$i][$j];
     			 	$is_patient=true;
 				 	# Increase occupied bed nr
 				 	$occ_beds++;

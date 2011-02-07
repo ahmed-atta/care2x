@@ -228,7 +228,7 @@ if(!isset($rows)||!$rows) {
 	# Load the wards info 
 	$ward_obj=new Ward;
 	$items='nr,name';
-	$ward_info=&$ward_obj->getAllWardsItemsObject($items);
+	$ward_info=$ward_obj->getAllWardsItemsObject($items);
 
 	# Load the departments info
         $dept_obj= new Department;
@@ -239,11 +239,11 @@ if(!isset($rows)||!$rows) {
 	# Get the insurance classes */
 	# Create new person�s insurance object */
 	$insurance_obj=new Insurance;	 
-	$insurance_classes=&$insurance_obj->getInsuranceClassInfoObject('class_nr,LD_var,name');
+	$insurance_classes=$insurance_obj->getInsuranceClassInfoObject('class_nr,LD_var,name');
 
 	/* Load the discharge types */
 	
-	$discharge_types=&$encounter_obj->getDischargeTypesData();
+	$discharge_types=$encounter_obj->getDischargeTypesData();
 
 
 	if(!$GLOBAL_CONFIG['patient_service_care_hide']){

@@ -130,7 +130,7 @@ if($batchrows && $pn){
 		}
 
 		if( $enc_obj->is_loaded){
-			$result=&$enc_obj->encounter;
+			$result=$enc_obj->encounter;
 
 			$sql="SELECT * FROM care_test_request_".$db_request_table." WHERE batch_nr='".$batch_nr."'";
 			if($ergebnis=$db->Execute($sql)){

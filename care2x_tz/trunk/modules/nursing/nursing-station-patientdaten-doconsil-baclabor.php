@@ -120,7 +120,7 @@ define('_BATCH_NR_INIT_',30000000);
 			}		
 */			$full_en=$pn;				
 			if($enc_obj->is_loaded){
-			$result=&$enc_obj->encounter;
+			$result=$enc_obj->encounter;
 			}
 		}else{
 	      $edit=0;

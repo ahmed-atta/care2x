@@ -66,7 +66,7 @@ function Link(x)
 	<?php
 
 		//$conn_des->PConnect($des_host, $des_user, $des_password, $des_dbname);
-		$fields_des=&$conn_des->Execute('show fields from '.$des_table.' '.$filter_d.'');
+		$fields_des=$conn_des->Execute('show fields from '.$des_table.' '.$filter_d.'');
 
 			while($field=$fields_des->FetchRow())
 			{
@@ -91,7 +91,7 @@ function Link(x)
 		//$conn_source->PConnect($des_host, $des_user, $des_password, $des_dbname);
 
 		echo "conneciton:".$des_host."".$des_user."". $des_password."". $des_dbname."<br>";
-		$fields_source=&$conn_source->Execute('show fields from '.$source_table.' '.$filter_s.'');
+		$fields_source=$conn_source->Execute('show fields from '.$source_table.' '.$filter_s.'');
 		echo 'show fields from '.$source_table.' '.$filter_s.'';
 			while($field=$fields_source->FetchRow())
 			{

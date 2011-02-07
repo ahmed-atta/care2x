@@ -71,8 +71,8 @@ if($mode=='save')
 }elseif(isset($group_nr)&&$group_nr){
 
 	/* Load related codes */
-	$diag_obj=&$DRG_obj->RelatedDiagnoses($group_nr);
- 	$proc_obj=&$DRG_obj->RelatedProcedures($group_nr);
+	$diag_obj=$DRG_obj->RelatedDiagnoses($group_nr);
+ 	$proc_obj=$DRG_obj->RelatedProcedures($group_nr);
 
 }
 
@@ -80,7 +80,7 @@ if($mode=='save')
 include_once($root_path.'include/inc_date_format_functions.php');
 
 # Get the patient`s basic data
-if($enc=&$DRG_obj->getBasic4Data()){
+if($enc=$DRG_obj->getBasic4Data()){
 	$encounter=$enc->FetchRow();
 }
 ?>

@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['doctors'];
+$allowedarea=$allow_area['doctors'];
 //$append="?sid=$sid&lang=$lang&from=pass"; 
 
 $fileforward="fotolab-parentframe.php?sid=$sid&lang=$lang&ck_config=$ck_config";

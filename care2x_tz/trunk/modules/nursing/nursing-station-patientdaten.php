@@ -70,7 +70,7 @@ if($dblink_ok)
 			$full_en=$pn;
 
 			if( $enc_obj->is_loaded){
-				$result=&$enc_obj->encounter;
+				$result=$enc_obj->encounter;
 				$rows=$enc_obj->record_count;
 
 					if($result['is_discharged']) $edit=0;
@@ -160,7 +160,7 @@ if($dblink_ok)
 
 					    if($event_result=$enc_obj->Transact($sql))
 					    {
-					       $event=&$HTTP_POST_VARS;
+					       $event=$HTTP_POST_VARS;
 
 						   $mode='changes_saved';
 						    //echo "ok insertd $sql";

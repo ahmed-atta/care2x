@@ -46,9 +46,9 @@ $dept_obj=new Department;
 # Preload the deparment info 
 $dept_obj->preloadDept($dept_nr);
 # Get list of all the OR room numbers 
-$ORNrs=&$dept_obj->getAllActiveORNrs();
+$ORNrs=$dept_obj->getAllActiveORNrs();
 
-$surgery_arr=&$dept_obj->getAllActiveWithSurgery();
+$surgery_arr=$dept_obj->getAllActiveWithSurgery();
 
 # Load the date formatter 
 require_once($root_path.'include/inc_date_format_functions.php');

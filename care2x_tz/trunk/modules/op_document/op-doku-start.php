@@ -134,7 +134,7 @@ if($mode=='save')
 			$full_en=$pn;
 
 			if( $enc_obj->is_loaded){
-				$result=&$enc_obj->encounter;		
+				$result=$enc_obj->encounter;		
 				$rows=$enc_obj->record_count;	
 			}
 		}else{ 
@@ -178,7 +178,7 @@ if($mode=='save')
 		include_once($root_path.'include/care_api_classes/class_encounter.php');
 		$enc_obj=new Encounter;
 
-		$encounter=& $enc_obj->searchLimitEncounterBasicInfo($searchkey,$pagen->MaxCount(),$pgx,$oitem,$odir);
+		$encounter= $enc_obj->searchLimitEncounterBasicInfo($searchkey,$pagen->MaxCount(),$pgx,$oitem,$odir);
 		//echo $enc_obj->getLastQuery();
 		# Get the resulting record count
 		$rows=$enc_obj->LastRecordCount();

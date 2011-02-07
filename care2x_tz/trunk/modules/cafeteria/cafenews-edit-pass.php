@@ -15,7 +15,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
-$allowedarea=&$allow_area['cafenews'];
+$allowedarea=$allow_area['cafenews'];
 
 $fileforward=$_SESSION['sess_file_editor'].URL_REDIRECT_APPEND;
 

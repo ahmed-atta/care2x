@@ -37,7 +37,7 @@ if($result=$db->Execute($sql)){
 	$rows=$result->RecordCount();
 	include_once($root_path.'include/care_api_classes/class_department.php');
 	$dept_obj=new Department();
-	$depts_array=&$dept_obj->getAll();
+	$depts_array=$dept_obj->getAll();
 }else{
 	echo $sql;
 }

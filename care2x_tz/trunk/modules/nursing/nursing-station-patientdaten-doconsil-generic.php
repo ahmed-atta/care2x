@@ -81,7 +81,7 @@ $medical_depts=$dept_obj->getAllMedical();
 				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 			}						
 */			$full_en=$pn;
-			$result=&$enc_obj->encounter;
+			$result=$enc_obj->encounter;
 		}
 	   else 
 	   {

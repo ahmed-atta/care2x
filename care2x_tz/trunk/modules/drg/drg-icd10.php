@@ -59,9 +59,9 @@ if(!isset($group_nr)) $group_nr=0;
 if(!isset($opnr)) $opnr=0;
 
 if($display=='composite'){
-	$drg=&$DRG_obj->DiagnosisCodes($group_nr);
+	$drg=$DRG_obj->DiagnosisCodes($group_nr);
 }else{
-	$drg=&$DRG_obj->OPDiagnosisCodes($opnr);
+	$drg=$DRG_obj->OPDiagnosisCodes($opnr);
 }
 $uid="$dept_$oprm_$pn_$opnr"; 
 /* Load the icon images */
@@ -159,10 +159,10 @@ else  echo 'topmargin=2 marginheight=2';
 if (is_object($drg)) { 
 	
 	# Load the diagnosis categories
-	if($cat_obj=&$DRG_obj->DiagnosisCategories()) $cat_ok=true;
+	if($cat_obj=$DRG_obj->DiagnosisCategories()) $cat_ok=true;
 		else $cat_ok=false;
 	# Load the localization types
-	if($loc_obj=&$DRG_obj->LocalizationTypes()) $loc_ok=true;
+	if($loc_obj=$DRG_obj->LocalizationTypes()) $loc_ok=true;
 		else $loc_ok=false;
 	
 	while($icd=$drg->FetchRow()){
