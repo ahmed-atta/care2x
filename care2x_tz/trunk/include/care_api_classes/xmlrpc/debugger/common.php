@@ -1,8 +1,8 @@
 <?php
 /**
- * @version $Id: common.php,v 1.1 2009/01/30 22:31:15 timschofield Exp $
+ * @version $Id: common.php 11 2009-03-17 09:17:49Z ggiunta $
  * @author Gaetano Giunta
- * @copyright (C) 2005-2008 G. Giunta
+ * @copyright (C) 2005-2009 G. Giunta
  * @license code licensed under the BSD License: http://phpxmlrpc.sourceforge.net/license.txt
  *
  * @todo switch params for http compression from 0,1,2 to values to be used directly
@@ -23,6 +23,11 @@
     $_GET = array_map('stripslashes_deep', $_GET);
   }
 
+
+  if ( isset( $_GET['usepost'] ) && $_GET['usepost'] === 'true' )
+  {
+      $_GET = $_POST;
+  }
 
 // recover input parameters
   $debug = false;
