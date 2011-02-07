@@ -70,7 +70,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	include_once($root_path.'include/inc_date_format_functions.php');
 	include_once($root_path.'include/care_api_classes/class_encounter.php');
 	$enc_obj=new Encounter;
-	$encounter=& $enc_obj->searchLimitEncounterBasicInfo($searchkey,$pagen->MaxCount(),$pgx,$oitem,$odir);
+	$encounter= $enc_obj->searchLimitEncounterBasicInfo($searchkey,$pagen->MaxCount(),$pgx,$oitem,$odir);
 	//echo $enc_obj->getLastQuery();
 	# Get the resulting record count
 	$linecount=$enc_obj->LastRecordCount();

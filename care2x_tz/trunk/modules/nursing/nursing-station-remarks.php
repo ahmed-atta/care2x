@@ -65,7 +65,7 @@ if($mode=='save'){
 		exit;
 	}else{echo $report_obj->getLastQuery()."<p>$LDDbNoUpdate";}
 }else{ //echo $HTTP_SESSION_VARS['sess_pid'];
-	if($d_notes=&$report_obj->getDailyWardNotes($pn)){
+	if($d_notes=$report_obj->getDailyWardNotes($pn)){
    		include_once($root_path.'include/inc_editor_fx.php');
 		$occup=true;
 	}
@@ -295,7 +295,7 @@ if($mode=='save'){
 		exit;
 	}else{echo $report_obj->getLastQuery()."<p>$LDDbNoUpdate";}
 }else{ //echo $_SESSION['sess_pid'];
-	if($d_notes=&$report_obj->getDailyNotesTypes($pn)){
+	if($d_notes=$report_obj->getDailyNotesTypes($pn)){
    		include_once($root_path.'include/inc_editor_fx.php');
 		$occup=true;
 	}

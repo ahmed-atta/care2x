@@ -67,14 +67,14 @@ class Paginator {
 	* @param string Field name to sort
 	* @param string Sort direction
 	*/
-	function Paginator($x=0,$fwdfile,&$sk,$rootpath,$oitem,$odir) {	
+	function Paginator($x=0,$fwdfile,&$sk,$rootpath,$oitem=NULL,$odir=NULL) {	
 		if(empty($x)) $this->csx=0;
 			else $this->csx=$x;
 		$this->page=$fwdfile;
 		$this->skey=strtr($sk,' ','+');
 		$this->rootpath=$rootpath;
-		$this->sort_item=$oitem;
-		$this->sort_dir=$odir;
+		if (!$otiem==NULL) $this->sort_item=$oitem;
+		if (!$odir==NULL) $this->sort_dir=$odir;
 	}	
 	/**
 	* Sets the total number of rows of resulting data block.

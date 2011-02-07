@@ -56,12 +56,12 @@ $thisfile=basename($_SERVER['PHP_SELF']);
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
 $dept_obj->preloadDept($dept_nr);
-$dept_list=&$dept_obj->getAllMedical();
+$dept_list=$dept_obj->getAllMedical();
 
 # Load the dept nurses
 require_once($root_path.'include/care_api_classes/class_personell.php');
 $pers_obj=new Personell;
-$nurses=&$pers_obj->getNursesOfDept($dept_nr);
+$nurses=$pers_obj->getNursesOfDept($dept_nr);
 
 # Load global values
 $GLOBAL_CONFIG=array();
@@ -120,7 +120,7 @@ if($mode=='search'||$mode=='paginate'){
 	# Save the search keyword for eventual pagination routines
 	if($mode=='search') $_SESSION['sess_searchkey']=$searchkey;
 	
-	$search_result=&$pers_obj->searchLimitPersonellBasicInfo($searchkey,$pagen->MaxCount(),$pgx,$oitem,$odi);
+	$search_result=$pers_obj->searchLimitPersonellBasicInfo($searchkey,$pagen->MaxCount(),$pgx,$oitem,$odi);
 	//echo $pers_obj->getLastQuery();
 	# Get the resulting record count
 	$linecount=$pers_obj->LastRecordCount();

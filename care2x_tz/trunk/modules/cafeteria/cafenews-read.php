@@ -26,7 +26,7 @@ if(!isset($mode)) $mode='';
 /* Get the news article */
 require_once($root_path.'include/care_api_classes/class_news.php');
 $newsobj=new News;
-$news=&$newsobj->getNews($nr);
+$news=$newsobj->getNews($nr);
 
 
 # Start Smarty templating here

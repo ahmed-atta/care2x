@@ -49,7 +49,7 @@ if($_SESSION['sess_user_origin']=='phonedir'&&$_SESSION['sess_personell_nr']){
 	//if(!empty($GLOBAL_CONFIG['patient_financial_class_single_result'])) $encounter_obj->setSingleResult(true);	
 	$personell_obj->loadPersonellData($personell_nr);
 	if($personell_obj->is_loaded) {
-		$row=&$personell_obj->personell_data;
+		$row=$personell_obj->personell_data;
 		
 		//load data
 		//while(list($x,$v)=each($row)) {$$x=$v;}

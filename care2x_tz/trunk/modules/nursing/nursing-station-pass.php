@@ -23,7 +23,7 @@ $x_str=($doclist!='')?'&doclist='.$doclist:'';
 
 
 
-$allowedarea=&$allow_area['wards'];
+$allowedarea=$allow_area['wards'];
 
 $file_ext = ($x_str!='')?'-doctor-service':'';
 

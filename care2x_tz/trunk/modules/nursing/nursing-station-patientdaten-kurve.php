@@ -107,24 +107,24 @@ $date_end=$dateshifter->shift_dates($date_start,-6,'d');
 		$full_en=$pn;
 		
 		if( $enc_obj->is_loaded){
-			$result=&$enc_obj->encounter;		
+			$result=$enc_obj->encounter;		
 			$rows=$enc_obj->record_count;	
 			/* Create charts object */
 			include_once($root_path.'include/care_api_classes/class_charts.php');
 			$charts_obj= new Charts;
 		
 			// get Allergy notes  type = 22
-			$allergy=&$charts_obj->getChartNotes($pn,22);
+			$allergy=$charts_obj->getChartNotes($pn,22);
 			// get Diagnosis notes  type = 12
-			$diagnosis=&$charts_obj->getChartNotes($pn,12);
+			$diagnosis=$charts_obj->getChartNotes($pn,12);
 			// get extra diagnosis notes   type = 14
-			$x_diagnosis=&$charts_obj->getChartNotes($pn,14);
+			$x_diagnosis=$charts_obj->getChartNotes($pn,14);
             // get anticoag notes   type = 10
-            $anticoag_notes=&$charts_obj->getChartNotes($pn,10);
+            $anticoag_notes=$charts_obj->getChartNotes($pn,10);
 			// get additional notes   type = 11
-			$lot_mat=&$charts_obj->getChartNotes($pn,11);
+			$lot_mat=$charts_obj->getChartNotes($pn,11);
 			// get daily Diet plans
-			$diet=&$charts_obj->getChartDailyDietPlans($pn,$date_start,$date_end);
+			$diet=$charts_obj->getChartDailyDietPlans($pn,$date_start,$date_end);
 			// get daily main notes (diag/therapy)
 			$main_notes=$charts_obj->getChartDailyMainNotes($pn,$date_start,$date_end);
 			// get daily etc notes (pt-atg-etc)
@@ -528,7 +528,7 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 	if($edit) echo '
 		<a href="javascript:popgetdailyinfo(\'diag_ther_dailyreport\',\''.$pn.'\',\''.$actjahr.'\',\''.$actmonat.'\',\''.$acttag.'\',\''.($d+$tagnamebuf).'\',\''.$jahr.'\',\''.$kmonat.'\',\''.$tag.'\',\''.$tagname.'\')">';
 
-	if($r=&getdata($main_notes,$i,$kmonat,$jahr))  echo hilite(nl2br($r));
+	if($r=getdata($main_notes,$i,$kmonat,$jahr))  echo hilite(nl2br($r));
 	else 
 	  if($edit) echo '<img src="'.$root_path.'gui/img/common/default/pixel.gif" width="97" height="148"  border=0 alt="'.str_replace("~tagword~",$LDDiagnosisTherapy,$LDClk2EnterDaily).'" >';
 	if($edit) echo "</a>";
@@ -571,7 +571,7 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 	echo '<br>';
 		$sbuf="";
 
-		if($r=&getdata($daily_etc,$i,$kmonat,$jahr))  echo hilite($r);
+		if($r=getdata($daily_etc,$i,$kmonat,$jahr))  echo hilite($r);
 
 	echo "
 		</td>";
@@ -613,7 +613,7 @@ $actjahr=$jahr;
 for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 {
 	aligndate(&$acttag,&$actmonat,&$actjahr); // function to align the date
-	$r=&getdata($daily_anticoag,$i,$kmonat,$jahr,1);
+	$r=getdata($daily_anticoag,$i,$kmonat,$jahr,1);
 	echo '
 	<td ';
 	if(!empty($r)) echo "bgcolor=aqua"; else echo "bgcolor=white";
@@ -707,7 +707,7 @@ $actjahr=$jahr;
 for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 {
 	aligndate(&$acttag,&$actmonat,&$actjahr); // function to align the date
-	$r=&getdata($daily_iv,$i,$kmonat,$jahr,1);
+	$r=getdata($daily_iv,$i,$kmonat,$jahr,1);
 	echo '
 	<td valign="bottom" ';
 	if($r) echo "bgcolor=#ff99cc"; else echo "bgcolor=white";
@@ -724,7 +724,6 @@ for ($i=$tag,$acttag=$tag,$d=0;$i<($tag+7);$i++,$d++,$acttag++)
 	if($edit) echo '</a>';
 	
 // ************** medication dailydose ************************
-	//$dosis=&getdata($daily_medis,$acttag,$actmonat,$actjahr);
 	$date=date('Y-m-d',mktime(0,0,0,$kmonat,$i,$jahr));
 	$toggle=0;
 	$dosis=array();

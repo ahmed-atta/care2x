@@ -8,7 +8,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['op_room'];
+$allowedarea=$allow_area['op_room'];
 
 if($retpath=='calendar_opt'){
 	$append=URL_APPEND."&dept_nr=$dept_nr&retpath=$retpath&pday=$pday&pmonth=$pmonth&pyear=$pyear"; 

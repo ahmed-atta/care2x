@@ -36,10 +36,10 @@ $person_obj= new Person($pid);
 if($person_obj->preloadPersonInfo($pid)){
 	$person=$person_obj->person;
 	# copy to encounter variable 
-	$encounter=& $person;
+	$encounter=$person;
 	//extract($encounter);
 			
-	$p_insurance=&$insurance_obj->getPersonInsuranceObject($pid);
+	$p_insurance=$insurance_obj->getPersonInsuranceObject($pid);
 	
 	if($p_insurance==false) {
 		$insurance_show=true;

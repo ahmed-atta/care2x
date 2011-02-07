@@ -115,7 +115,7 @@ if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
 
 	$patient=$encounter->FetchRow();
 
-	$recs=&$lab_obj->getAllResults($encounter_nr);
+	$recs=$lab_obj->getAllResults($encounter_nr);
 	
 	if ($rows=$lab_obj->LastRecordCount()){
 		# Merge the records to common date key
@@ -124,8 +124,8 @@ if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
 		while($buffer=$recs->FetchRow()){
 			$tmp = array($buffer['paramater_name'] => $buffer['parameter_value']);
 			$records[$buffer['job_id']][] = $tmp;
-			$tdate[$buffer['job_id']]=&$buffer['test_date'];
-			$ttime[$buffer['job_id']]=&$buffer['test_time'];
+			$tdate[$buffer['job_id']]=$buffer['test_date'];
+			$ttime[$buffer['job_id']]=$buffer['test_time'];
 		}
 		//gjergji :
 		//reverse date from past to current

@@ -116,7 +116,7 @@ if($dblink_ok)
 		 }// end of if(mode==save)
 		 else
 		 {
-		 	if($dutyplan=&$pers_obj->getDOCDutyplan($dept_nr,$pyear,$pmonth)){
+		 	if($dutyplan=$pers_obj->getDOCDutyplan($dept_nr,$pyear,$pmonth)){
 			
 				$aelems=unserialize($dutyplan['duty_1_txt']);
 				$relems=unserialize($dutyplan['duty_2_txt']);

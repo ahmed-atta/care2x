@@ -10,7 +10,7 @@ require_once($root_path.'include/inc_config_color.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['news'];
+$allowedarea=$allow_area['news'];
 
 $append="?sid=$sid&lang=$lang&target=$target&user_origin=$user_origin&title=".strtr($title," ","+");
 

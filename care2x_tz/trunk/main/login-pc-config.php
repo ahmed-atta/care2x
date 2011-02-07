@@ -21,7 +21,7 @@ $user=new UserConfig;
 //$db->debug=true;
 
 if($user->getConfig($_COOKIE['ck_config'])){
-	$config=&$user->getConfigData();
+	$config=$user->getConfigData();
 }else{
 	$config=array();
 }
@@ -29,13 +29,13 @@ if($user->getConfig($_COOKIE['ck_config'])){
 /* Load the dept object */
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept=new Department;
-$depts=&$dept->getAllActive();
+$depts=$dept->getAllActive();
 
 // Load the ward object and wards info 
 require_once($root_path.'include/care_api_classes/class_ward.php');
 $ward_obj=new Ward;
 $items='nr,ward_id,name'; // set the items to be fetched
-$ward_info=&$ward_obj->getAllWardsItemsArray($items);
+$ward_info=$ward_obj->getAllWardsItemsArray($items);
 
 
 if(isset($mode)&&($mode=='save')){

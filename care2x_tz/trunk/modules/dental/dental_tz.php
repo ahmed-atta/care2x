@@ -28,7 +28,7 @@ $HTTP_SESSION_VARS['sess_parent_mod']='';
 require_once($root_path.'include/care_api_classes/class_ward.php');
 $ward_obj=new Ward;
 $items='nr,name';
-$ward_info=&$ward_obj->getAllWardsItemsObject($items);
+$ward_info=$ward_obj->getAllWardsItemsObject($items);
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>

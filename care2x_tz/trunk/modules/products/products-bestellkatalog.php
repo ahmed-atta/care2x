@@ -168,7 +168,7 @@ echo '<p>';
 # get the actual order catalog
 //require($root_path.'include/inc_products_ordercatalog_getactual.php');
 
-$ergebnis=&$product_obj->ActualOrderCatalog($dept_nr,$cat);
+$ergebnis=$product_obj->ActualOrderCatalog($dept_nr,$cat);
 $rows= $product_obj->LastRecordCount();
 # show catalog
 

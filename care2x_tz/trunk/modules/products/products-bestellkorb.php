@@ -338,7 +338,7 @@ for($n=0;$n<sizeof($artikeln);$n++)
 
     $rows=0;
 
-	$ergebnis=&$product_obj->OrderDrafts($dept_nr,$cat);
+	$ergebnis=$product_obj->OrderDrafts($dept_nr,$cat);
 	$rows=$product_obj->LastRecordCount();
 
 # +++++++++ show the last lists+++++++++++++++++++++++++++++++++++++++++

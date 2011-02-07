@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['tech'];
+$allowedarea=$allow_area['tech'];
 
 $breakfile='technik.php?sid='.$sid.'&lang='.$lang;
 

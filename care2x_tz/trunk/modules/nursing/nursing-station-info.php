@@ -37,20 +37,12 @@ $rows=0;
 
 		case 'show':
 		{
-			if($ward=&$ward_obj->getWardInfo($ward_nr)){
-				$rooms=&$ward_obj->getAllActiveRoomsInfo();
+			if($ward=$ward_obj->getWardInfo($ward_nr)){
+				$rooms=$ward_obj->getAllActiveRoomsInfo();
 
 				$roomsTemp = &$rooms;
 				$rows=true;
 				extract($ward);
-				// Get all medical departments
-				/* Load the dept object */
-/*				if($edit){
-					include_once($root_path.'include/care_api_classes/class_department.php');
-					$dept=new Department;
-					$depts=&$dept->getAllMedical();
-				}
-*/
 			}else{
 				header('location:nursing-station-info.php'.URL_REDIRECT_APPEND);
 				exit;
@@ -62,12 +54,8 @@ $rows=0;
 		case 'update':
 		{
 
-			//$_POST['nr']=$_POST['ward_nr'];
-
 
 			if($ward_obj->updateWard($ward_nr,$_POST)){
-
-
 
 			//update number of beds
 			foreach ($roomBedsArr as $careRoom => $anzahl)
@@ -94,10 +82,8 @@ $rows=0;
 
 			}
 
-				//header("location:../inpatient/inpatient.php".URL_REDIRECT_APPEND."&edit=0&mode=show&ward_id=$ward_nr&ward_nr=$ward_nr");
-
-				if($ward=&$ward_obj->getWardInfo($ward_nr)){
-				$rooms=&$ward_obj->getAllActiveRoomsInfo();
+				if($ward=$ward_obj->getWardInfo($ward_nr)){
+				$rooms=$ward_obj->getAllActiveRoomsInfo();
 				$rows=true;
 				extract($ward);
 
@@ -153,7 +139,7 @@ $rows=0;
 
 		default:
 		{
-			if($wards=&$ward_obj->getAllActiveWards()){
+			if($wards=$ward_obj->getAllActiveWards()){
 				# Count wards
 				$rows=$wards->RecordCount();
 
@@ -163,8 +149,8 @@ $rows=0;
 					$ward=$wards->FetchRow();
 					# globalize ward values
 					extract($ward);
-					# Get ward�s active rooms info
-					$rooms=&$ward_obj->getAllActiveRoomsInfo($ward['nr']);
+					# Get wards active rooms info
+					$rooms=$ward_obj->getAllActiveRoomsInfo($ward['nr']);
 				}else{
 					$rooms=$ward_obj->countCreatedRooms();
 

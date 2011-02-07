@@ -114,7 +114,7 @@ if($dblink_ok)
 		 }// end of if(mode==save)
 		 else
 		 {
-		 	$dutyplan=&$pers_obj->getNOCDutyplan($dept_nr,$pyear,$pmonth);
+		 	$dutyplan=$pers_obj->getNOCDutyplan($dept_nr,$pyear,$pmonth);
 	 	}
 }
   else { echo "$LDDbNoLink<br>"; } 

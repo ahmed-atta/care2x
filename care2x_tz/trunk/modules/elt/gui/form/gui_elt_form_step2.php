@@ -29,7 +29,7 @@ $conn_des->PConnect($des_host, $des_user, $des_password, $des_dbname);
 
 $conn_source->PConnect($source_host, $source_user, $source_password, $source_dbname);
 */
-$tables_name_of_source=&$conn_source->Execute('show tables from '.$source_dbname.'');
+$tables_name_of_source=$conn_source->Execute('show tables from '.$source_dbname.'');
 
 ?>
 <script type='text/javascript'>
@@ -115,7 +115,7 @@ Source: <?php echo $table ?>
 
     if($table!="")
     {
-	    $test=&$conn_source->Execute('show fields from '.$table);
+	    $test=$conn_source->Execute('show fields from '.$table);
 		if(strpos($sql, "*"))
 		{
 			echo '<tr id="firstline">';
@@ -147,7 +147,7 @@ Source: <?php echo $table ?>
 		}
 
 
-	    $test2=&$conn_source->Execute(''.$sql.' limit 0,10');
+	    $test2=$conn_source->Execute(''.$sql.' limit 0,10');
 
 		while($fields_content=$test2->FetchRow())
 		{

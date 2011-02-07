@@ -22,8 +22,8 @@ if($rows){
 	if($show_preg_enc&&isset($pregbuf[$show_preg_enc])){
 		$show_details=true;
 		# Get the field names
-		$fields=&$obj->coreFieldNames();
-		# If not this encounter�s pregnancy, show warn notice
+		$fields=$obj->coreFieldNames();
+		# If not this encounters pregnancy, show warn notice
 		
 ?>
 
@@ -56,27 +56,27 @@ if($rows){
 				case 'delivery_date': echo formatDate2Local($pregbuf[$show_preg_enc][$x],$date_format); break;
 				case 'delivery_time': echo convertTimeToLocal($pregbuf[$show_preg_enc][$x]); break;
 				case 'delivery_mode':
-					$buf=&$obj->getDeliveryMode($pregbuf[$show_preg_enc]['delivery_mode']);
+					$buf=$obj->getDeliveryMode($pregbuf[$show_preg_enc]['delivery_mode']);
 					if(isset($$buf['LD_var'])&&$$buf['LD_var']) echo $$buf['LD_var'];
 						else echo $buf['name'];
 					break;
 				case 'outcome':
-					$buf=&$obj->getOutcome($pregbuf[$show_preg_enc]['outcome']);
+					$buf=$obj->getOutcome($pregbuf[$show_preg_enc]['outcome']);
 					if(isset($$buf['LD_var'])&&$$buf['LD_var']) echo $$buf['LD_var'];
 						else echo $buf['name'];
 					break;
 				case 'induction_method':
-					$buf=&$obj->getInductionMethod($pregbuf[$show_preg_enc][$x]);
+					$buf=$obj->getInductionMethod($pregbuf[$show_preg_enc][$x]);
 					if(isset($$buf['LD_var'])&&$$buf['LD_var']) echo $$buf['LD_var'];
 						else echo $buf['name'];
 					break;
 				case 'perineum':
-					$buf=&$obj->getPerineum($pregbuf[$show_preg_enc][$x]);
+					$buf=$obj->getPerineum($pregbuf[$show_preg_enc][$x]);
 					if(isset($$buf['LD_var'])&&$$buf['LD_var']) echo $$buf['LD_var'];
 						else echo $buf['name'];
 					break;
 				case 'anaesth_type_nr':
-					$buf=&$obj->getAnaesthesia($pregbuf[$show_preg_enc][$x]);
+					$buf=$obj->getAnaesthesia($pregbuf[$show_preg_enc][$x]);
 					if(isset($$buf['LD_var'])&&$$buf['LD_var']) echo $$buf['LD_var'];
 						else echo $buf['name'];
 					break;

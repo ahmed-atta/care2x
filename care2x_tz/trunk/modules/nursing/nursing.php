@@ -26,7 +26,7 @@
  // Load the wards info 
  $ward_obj=new Ward;
  $items='nr,ward_id,name';
- $ward_info=&$ward_obj->getAllWardsItemsObject($items);
+ $ward_info=$ward_obj->getAllWardsItemsObject($items);
 
  $_SESSION['sess_file_return']=$top_dir.basename(__FILE__);
  /* Set this file as the referer */

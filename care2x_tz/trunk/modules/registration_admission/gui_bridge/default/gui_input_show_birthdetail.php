@@ -100,7 +100,7 @@ $TP_DELIV_MODE=$LD['delivery_mode'];
 if(!$birth['delivery_mode']) $birth['delivery_mode']=1;  # 1= Normal delivery
 # Delivery mode radio buttons
 $TP_DMODE_RADIOS='';
-$dm=&$obj->DeliveryModes();
+$dm=$obj->DeliveryModes();
 if($obj->LastRecordCount()){
 	while($dmod=$dm->FetchRow()){
 		$TP_DMODE_RADIOS.='<input type="radio" name="delivery_mode" value="'.$dmod['nr'].'" ';
@@ -282,7 +282,7 @@ $TP_FEEDING=$LD['feeding'];
 if(!isset($birth['feeding'])||!$birth['feeding']) $birth['feeding']=1;
 # Feeding radio buttons
 $TP_FEED_RADIOS='';
-$fd=&$obj->FeedingTypes();
+$fd=$obj->FeedingTypes();
 if($obj->LastRecordCount()){
 	while($feed=$fd->FetchRow()){
 		$TP_FEED_RADIOS.='<input type="radio" name="feeding" value="'.$feed['nr'].'" ';
@@ -310,7 +310,7 @@ if(!$birth['outcome']) $birth['outcome']=1; # 1 = living
 $TP_OUTCOME=$LD['outcome'];
 # Outcome radio buttons
 $TP_OUT_RADIOS='';
-$oc=&$obj->Outcomes();
+$oc=$obj->Outcomes();
 if($obj->LastRecordCount()){
 	while($otc=$oc->FetchRow()){
 		$TP_OUT_RADIOS.='<input type="radio" name="outcome" value="'.$otc['nr'].'" ';
@@ -324,7 +324,7 @@ if($obj->LastRecordCount()){
 $TP_DIS_CAT=$LD['disease_category'];
 # Disease category radio buttons
 $TP_DISCAT_RADIOS='';
-$dc=&$obj->DiseaseCategories();
+$dc=$obj->DiseaseCategories();
 if($obj->LastRecordCount()){
 	while($dcat=$dc->FetchRow()){
 		$TP_DISCAT_RADIOS.='<input type="radio" name="disease_category" value="'.$dcat['nr'].'" ';

@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['edp'];
+$allowedarea=$allow_area['edp'];
 $breakfile='edv.php?sid='.$sid.'&lang='.$lang;
 
 switch($target)

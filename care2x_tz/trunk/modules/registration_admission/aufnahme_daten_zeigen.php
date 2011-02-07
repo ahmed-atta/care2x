@@ -70,7 +70,7 @@ $dbtable='care_encounter';
 	/* Get the care service classes*/
 		$care_service=$encounter_obj->AllCareServiceClassesObject();
 
-		if($buff=&$encounter_obj->CareServiceClass()){
+		if($buff=$encounter_obj->CareServiceClass()){
 		    $care_class=$buff->FetchRow();
 			//while(list($x,$v)=each($care_class))	$$x=$v;
 			extract($care_class);
@@ -81,7 +81,7 @@ $dbtable='care_encounter';
 	/* Get the room service classes */
 		$room_service=$encounter_obj->AllRoomServiceClassesObject();
 
-		if($buff=&$encounter_obj->RoomServiceClass()){
+		if($buff=$encounter_obj->RoomServiceClass()){
 			$room_class=$buff->FetchRow();
 			//while(list($x,$v)=each($room_class))	$$x=$v;
 			extract($room_class);
@@ -92,7 +92,7 @@ $dbtable='care_encounter';
 		/* Get the attending doctor service classes */
 		$att_dr_service=$encounter_obj->AllAttDrServiceClassesObject();
 
-		if($buff=&$encounter_obj->AttDrServiceClass()){
+		if($buff=$encounter_obj->AttDrServiceClass()){
 			$att_dr_class=$buff->FetchRow();
 			//while(list($x,$v)=each($att_dr_class))	$$x=$v;
 			extract($att_dr_class);
@@ -102,7 +102,7 @@ $dbtable='care_encounter';
 
 	$encounter_obj->loadEncounterData();
 	if($encounter_obj->is_loaded) {
-		$row=&$encounter_obj->encounter;
+		$row=$encounter_obj->encounter;
 		//load data
 		//while(list($x,$v)=each($row)) $$x=$v;
 		extract($row);
@@ -110,15 +110,15 @@ $dbtable='care_encounter';
 		if(!$is_discharged) $edit=true;
 			else $edit=false;
 		# Fetch insurance and encounter classes
-		$insurance_class=&$encounter_obj->getInsuranceClassInfo($insurance_class_nr);
-		$encounter_class=&$encounter_obj->getEncounterClassInfo($encounter_class_nr);
+		$insurance_class=$encounter_obj->getInsuranceClassInfo($insurance_class_nr);
+		$encounter_class=$encounter_obj->getEncounterClassInfo($encounter_class_nr);
 
 		//if($data_obj=&$person_obj->getAllInfoObject($pid))
 		$list='title,name_first,name_last,name_2,name_3,name_middle,name_maiden,name_others,date_birth,
 		         sex,addr_str,addr_str_nr,addr_zip,addr_citytown_nr,photo_filename';
 
 		$person_obj->setPID($pid);
-		if($row=&$person_obj->getValueByList($list))
+		if($row=$person_obj->getValueByList($list))
 		{
 			//while(list($x,$v)=each($row))	$$x=$v;
 			extract($row);
@@ -130,7 +130,7 @@ $dbtable='care_encounter';
 		$current_encounter=$person_obj->CurrentEncounter($pid);
 
 		# Get the overall status
-		if($stat=&$encounter_obj->AllStatus($encounter_nr)){
+		if($stat=$encounter_obj->AllStatus($encounter_nr)){
 			$enc_status=$stat->FetchRow();
 		}
 

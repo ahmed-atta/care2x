@@ -73,7 +73,7 @@ $lang_tables=array('obstetrics.php');
 require('./include/init_show.php');
 
 # Get all birth details data of the person
-$result=&$obj->BirthDetails($_SESSION['sess_pid']);
+$result=$obj->BirthDetails($_SESSION['sess_pid']);
 if($rows=$obj->LastRecordCount()){
 	$birth=$result->FetchRow();
 }

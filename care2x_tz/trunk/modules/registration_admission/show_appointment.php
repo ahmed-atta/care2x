@@ -81,7 +81,7 @@ if(!isset($mode)){
 $lang_tables=array('prompt.php','departments.php');
 require('./include/init_show.php');
 
-if($result=&$obj->getPersonsAppointmentsObj($pid)){
+if($result=$obj->getPersonsAppointmentsObj($pid)){
 	$rows=$result->RecordCount();
 }
 
@@ -90,7 +90,7 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 
 /* Get all encounter classes */
-$encounter_classes=&$enc_obj->AllEncounterClassesObject();
+$encounter_classes=$enc_obj->AllEncounterClassesObject();
 
 $subtitle=$LDAppointments;
 $_SESSION['sess_file_return']=$thisfile;

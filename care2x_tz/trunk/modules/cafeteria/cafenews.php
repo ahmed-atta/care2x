@@ -50,7 +50,7 @@ $news_num_stop=$news_headline_max_display;  // The maximum number of news articl
 
 require_once($root_path.'include/care_api_classes/class_news.php');
 $newsobj=new News;
-$news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
+$news=$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
 
 # Start Smarty templating here
  /**

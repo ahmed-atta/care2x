@@ -66,7 +66,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 			}						
 
-			$result=&$enc_obj->encounter;
+			$result=$enc_obj->encounter;
 		}else{
 			$edit=0;
 			$mode='';

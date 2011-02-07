@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['depot'];
+$allowedarea=$allow_area['depot'];
 $userck="ck_medlager_user";
 $breakfile="medlager.php".URL_APPEND."&userck=$userck";
 $fileforward="medlager.php".URL_REDIRECT_APPEND."&userck=$userck&stb=1";

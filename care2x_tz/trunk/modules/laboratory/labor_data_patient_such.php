@@ -77,7 +77,7 @@ if($search&&!empty($keyword)){
 	if(empty($GLOBAL_CONFIG['pagin_patient_search_max_block_rows'])) $pagen->setMaxCount(MAX_BLOCK_ROWS); # Last resort, use the default defined at the start of this page
 		else $pagen->setMaxCount($GLOBAL_CONFIG['pagin_patient_search_max_block_rows']);
 
-	$encounter=&$lab_obj->searchPatientWithPendingLabResults($keyword,$pagen->MaxCount(),$pgx,$oitem,$odir);  
+	$encounter=$lab_obj->searchPatientWithPendingLabResults($keyword,$pagen->MaxCount(),$pgx,$oitem,$odir);  
 
 	//echo $lab_obj->getLastQuery()."<p>";
 	# Get the resulting record count

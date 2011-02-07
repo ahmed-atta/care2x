@@ -405,7 +405,7 @@ $mark_v_offset=1; /* Vertical offset of the marking blocks */
 	     /* If test element is part of emergency program change bgcolor */
 	     if(strpos($x,"_emx_")!==FALSE)
 		 { 
-		    $bgcolor=&$light_violet; 
+		    $bgcolor=$light_violet; 
 		  	 doBgColor($len);
 	     }
 		 

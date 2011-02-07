@@ -34,7 +34,7 @@ if(isset($mode) && !empty($mode)) {
 }
 
 # Get the test test groups
-$tgroups=&$lab_obj->TestGroups();
+$tgroups=$lab_obj->TestGroups();
 
 $breakfile="labor.php".URL_APPEND;
 

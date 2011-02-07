@@ -90,7 +90,7 @@ if($mode=='search'||$mode=='paginate'){
 		# Convert other wildcards
 		$sk=strtr($sk,'*?','%_');
 
-		$result=&$enc_obj->searchLimitEncounterBasicInfo($sk,$pagen->MaxCount(),$pgx,$oitem,$odir);
+		$result=$enc_obj->searchLimitEncounterBasicInfo($sk,$pagen->MaxCount(),$pgx,$oitem,$odir);
 		//echo $enc_obj->getLastQuery();
 		# Get the resulting record count
 		$linecount=$enc_obj->LastRecordCount();

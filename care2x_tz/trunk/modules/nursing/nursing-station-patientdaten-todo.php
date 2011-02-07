@@ -87,7 +87,7 @@ if($mode=='save'){
 			default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 		}
 		if( $enc_obj->is_loaded){
-			$result=&$enc_obj->encounter;
+			$result=$enc_obj->encounter;
 			$rows=$enc_obj->record_count;
 		}
 	}else{
@@ -95,9 +95,9 @@ if($mode=='save'){
 		$mode='?';
 	}
 	// Load the nursing and effectivity reports in one instance
-	$dd_report=&$report_obj->getDirectivesAndInquiries($pn);
+	$dd_report=$report_obj->getDirectivesAndInquiries($pn);
 	// Load the date range
-	$dd_date_range=&$report_obj->getDoctorsDirectivesDateRange($pn);
+	$dd_date_range=$report_obj->getDoctorsDirectivesDateRange($pn);
 }
 
 # Start Smarty templating here

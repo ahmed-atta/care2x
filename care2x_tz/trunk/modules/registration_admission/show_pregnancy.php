@@ -75,10 +75,10 @@ require('./include/init_show.php');
 
 if($parent_admit){
 	# Get the pregnancy data of this encounter
-	$pregs=&$obj->Pregnancies($_SESSION['sess_en'],'_ENC');
+	$pregs=$obj->Pregnancies($_SESSION['sess_en'],'_ENC');
 }else{
 	# Get all pregnancies  of this person
-	$pregs=&$obj->Pregnancies($_SESSION['sess_pid'],'_REG');
+	$pregs=$obj->Pregnancies($_SESSION['sess_pid'],'_REG');
 }
 $rows=$obj->LastRecordCount();
 

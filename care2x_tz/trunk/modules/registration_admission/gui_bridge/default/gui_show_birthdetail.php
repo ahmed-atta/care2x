@@ -2,7 +2,7 @@
 <?php
 if($rows){
 	# Get the field names
-	$fields=&$obj->coreFieldNames();
+	$fields=$obj->coreFieldNames();
 	
 	while(list($z,$x)=each($fields)){
 		if($x=='status') break;
@@ -21,22 +21,22 @@ if($rows){
 			case 'delivery_date': echo formatDate2Local($birth[$x],$date_format); break;
 			case 'c_s_reason': 	echo nl2br($birth[$x]); break;
 			case 'delivery_mode':
-					$buf=&$obj->getDeliveryMode($birth[$x]);
+					$buf=$obj->getDeliveryMode($birth[$x]);
 					if(isset($$buf['LD_var'])&&$$buf['LD_var']) echo $$buf['LD_var'];
 						else echo $buf['name'];
 					break;
 			case 'feeding':
-					$buf=&$obj->getFeedingType($birth[$x]);
+					$buf=$obj->getFeedingType($birth[$x]);
 					if(isset($$buf['LD_var'])&&$$buf['LD_var']) echo $$buf['LD_var'];
 						else echo $buf['name'];
 					break;
 			case 'disease_category':
-					$buf=&$obj->getDiseaseCategory($birth[$x]);
+					$buf=$obj->getDiseaseCategory($birth[$x]);
 					if(isset($$buf['LD_var'])&&$$buf['LD_var']) echo $$buf['LD_var'];
 						else echo $buf['name'];
 					break;
 			case 'outcome':
-					$buf=&$obj->getOutcome($birth[$x]);
+					$buf=$obj->getOutcome($birth[$x]);
 					if(isset($$buf['LD_var'])&&$$buf['LD_var']) echo $$buf['LD_var'];
 						else echo $buf['name'];
 					break;

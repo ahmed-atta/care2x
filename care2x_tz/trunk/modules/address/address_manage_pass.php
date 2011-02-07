@@ -10,7 +10,7 @@ require_once($root_path.'include/inc_config_color.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['admit'];
+$allowedarea=$allow_area['admit'];
 
 $fileforward='address_manage.php'.URL_REDIRECT_APPEND;
 $thisfile=basename($_SERVER['PHP_SELF']);

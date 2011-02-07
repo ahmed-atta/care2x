@@ -26,7 +26,7 @@ include($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter($patnum);
 	
 // get orig data
-$p_obj=&$enc_obj->getBasic4Data($patnum);
+$p_obj=$enc_obj->getBasic4Data($patnum);
 if(is_object($p_obj)){
 	$pdata=$p_obj->FetchRow();
 }else{

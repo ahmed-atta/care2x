@@ -19,7 +19,7 @@ require_once($root_path.'include/care_api_classes/class_ward.php');
 ## Load all wards info 
 $ward_obj=new Ward;
 $items='nr,ward_id,name';
-$ward_info=&$ward_obj->getAllWardsItemsObject($items);
+$ward_info=$ward_obj->getAllWardsItemsObject($items);
 $ward_count=$ward_obj->LastRecordCount();
 
 # Start Smarty templating here

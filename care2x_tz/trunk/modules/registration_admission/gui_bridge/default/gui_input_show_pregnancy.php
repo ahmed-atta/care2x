@@ -98,7 +98,7 @@ if(!isset($pregnancy['delivery_mode'])) $pregnancy['delivery_mode']=1;
 $TP_DELIV_MODE=$LD['delivery_mode'];
 # Delivery mode radio buttosn
 $TP_DMODE_RADIOS='';
-$dm=&$obj->DeliveryModes();
+$dm=$obj->DeliveryModes();
 	if($obj->LastRecordCount()){
 		while($dmod=$dm->FetchRow()){
 			$TP_DMODE_RADIOS.='<input type="radio" name="delivery_mode" value="'.$dmod['nr'].'" ';
@@ -148,7 +148,7 @@ $TP_INDUCT_METHOD=$LD['induction_method'];
 if(!isset($pregnancy['induction_method'])||!$pregnancy['induction_method']) $pregnancy['induction_method']=1; # Defaults to 1 = not induced
 $TP_INDUCT_RADIOS='';
 # Fetch the induction methods
-$ind=&$obj->InductionMethods();
+$ind=$obj->InductionMethods();
 if($obj->LastRecordCount()){
 	while($induc=$ind->FetchRow()){
 		$TP_INDUCT_RADIOS.=' <input type="radio" name="induction_method" value="'.$induc['nr'].'" ';
@@ -168,7 +168,7 @@ if(!$pregnancy['anaesth_type_nr'])  $pregnancy['anaesth_type_nr']=1;
 $TP_ANAESTH=$LD['anaesth_type_nr'];
 # Anaesthesia radio buttons 
 $TP_ANAESTH_RADIOS='';
-$ana=&$obj->AnaesthesiaTypes();
+$ana=$obj->AnaesthesiaTypes();
 
 if($obj->LastRecordCount()){
 	while($row=$ana->FetchRow()){
@@ -189,7 +189,7 @@ if(!$pregnancy['perineum']) $pregnancy['perineum']=1;
 $TP_PERINEUM=$LD['perineum'];
 # Perineum radio buttons
 $TP_PERINEUM_RADIOS='';
-$buf=&$obj->Perineums();
+$buf=$obj->Perineums();
 if($obj->LastRecordCount()){
 	while($per=$buf->FetchRow()){
 		$TP_PERINEUM_RADIOS.=' <input type="radio" name="perineum" value="'.$per['nr'].'" ';
@@ -207,7 +207,7 @@ if($pregnancy['blood_loss']>0) $TP_BLOSS=$pregnancy['blood_loss'];
 if(empty($pregnancy['blood_loss_unit'])) $pregnancy['blood_loss_unit']='ml';
 $TP_BLOSS_OPTIONS='';
 # Load the volume units
-$unit=&$msr->VolumeUnits();
+$unit=$msr->VolumeUnits();
 while(list($x,$v)=each($unit)){
 	$TP_BLOSS_OPTIONS.='<option value="'.$v['id'].'" ';
 	if($pregnancy['blood_loss_unit']==$v['id']) $TP_BLOSS_OPTIONS.='selected';
@@ -229,7 +229,7 @@ if(!$pregnancy['outcome']) $pregnancy['outcome']=1;
 $TP_OUTCOME=$LD['outcome'];
 # Outcome radio buttons
 $TP_OUT_RADIOS='';
-$oc=&$obj->Outcomes();
+$oc=$obj->Outcomes();
 if($obj->LastRecordCount()){
 	while($otc=$oc->FetchRow()){
 		$TP_OUT_RADIOS.='<input type="radio" name="outcome" value="'.$otc['nr'].'" ';
@@ -243,7 +243,7 @@ if($obj->LastRecordCount()){
 $TP_DOCBY=$LD['docu_by'];
 $TP_DBY=$_SESSION['sess_user_name'];
 # Load the template
-$tp_preg=&$TP_obj->load('registration_admission/tp_input_show_pregnancy.htm');
+$tp_preg=$TP_obj->load('registration_admission/tp_input_show_pregnancy.htm');
 eval("echo $tp_preg;");
 ?>
 

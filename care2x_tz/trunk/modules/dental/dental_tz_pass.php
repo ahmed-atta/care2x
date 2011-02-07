@@ -17,7 +17,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['dental'];
+$allowedarea=$allow_area['dental'];
 $append=URL_REDIRECT_APPEND;
 
 

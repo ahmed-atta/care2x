@@ -17,7 +17,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['report_financial'];
+$allowedarea=$allow_area['report_financial'];
 $append=URL_REDIRECT_APPEND;
 $fileforward='reporting_financial_reports.php'.$append;
 $lognow='Reporting login ok';

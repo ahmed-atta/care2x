@@ -43,8 +43,8 @@ $ward_obj= new Ward;
 require_once($root_path.'include/inc_date_format_functions.php');
 
 if(($mode=='')||($mode=='fresh')){
-	if($ward_info=&$ward_obj->getWardInfo($ward_nr)){
-		$room_obj=&$ward_obj->getRoomInfo($ward_nr,$ward_info['room_nr_start'],$ward_info['room_nr_end']);
+	if($ward_info=$ward_obj->getWardInfo($ward_nr)){
+		$room_obj=$ward_obj->getRoomInfo($ward_nr,$ward_info['room_nr_start'],$ward_info['room_nr_end']);
 		if(is_object($room_obj)) {
 			$room_ok=true;
 		}else{
@@ -53,8 +53,8 @@ if(($mode=='')||($mode=='fresh')){
 		# GEt the number of beds
 		$nr_beds=$ward_obj->countBeds($ward_nr);
 		# Get ward patients
-		if($is_today) $patients_obj=&$ward_obj->getDayWardOccupants($ward_nr);
-			else $patients_obj=&$ward_obj->getDayWardOccupants($ward_nr,$s_date);
+		if($is_today) $patients_obj=$ward_obj->getDayWardOccupants($ward_nr);
+			else $patients_obj=$ward_obj->getDayWardOccupants($ward_nr,$s_date);
 		if(is_object($patients_obj)){
 			# Prepare patients data into array matrix
 			while($buf=$patients_obj->FetchRow()){
@@ -78,7 +78,7 @@ if(($mode=='')||($mode=='fresh')){
 		$enc_obj=new Encounter($pn);
 		$enc_obj->loadEncounterData();
 		if($enc_obj->is_loaded) {
-			$encounter=&$enc_obj->encounter;
+			$encounter=$enc_obj->encounter;
 		}
 
 		# Set the foto filename
@@ -87,7 +87,7 @@ if(($mode=='')||($mode=='fresh')){
 		require_once($root_path.'include/inc_photo_filename_resolve.php');
 
 		# Get billing type
-		$billing_type=&$enc_obj->getInsuranceClassInfo($encounter['insurance_class_nr']);
+		$billing_type=$enc_obj->getInsuranceClassInfo($encounter['insurance_class_nr']);
 
 	}else{
 			$ward_ok=false;
@@ -356,7 +356,7 @@ if($ward_ok){
 			if($patients_ok){
 
 				if(isset($patient[$i][$j])){
-			 		$bed=&$patient[$i][$j];
+			 		$bed=$patient[$i][$j];
     			 	$is_patient=true;
 				 	# Increase occupied bed nr
 				 	$occ_beds++;

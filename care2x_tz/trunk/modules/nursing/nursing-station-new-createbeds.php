@@ -58,7 +58,7 @@ if(isset($mode)&&$mode=='save_beds'){
 	}
 }else{
 	/* Get the ward's data */
-	$ward=&$ward_obj->getWardInfo($ward_nr);
+	$ward=$ward_obj->getWardInfo($ward_nr);
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

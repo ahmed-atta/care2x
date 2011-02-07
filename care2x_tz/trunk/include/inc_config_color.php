@@ -18,6 +18,6 @@ $cfg_obj=new UserConfig;
 
 if(is_object($cfg_obj)) {
 	$cfg_obj->getConfig($ck_userid);
-	$cfg=&$cfg_obj->buffer;
+	$cfg=$cfg_obj->buffer;
 }
 ?>

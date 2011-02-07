@@ -26,7 +26,7 @@ $lab_obj=new Lab();
 # Load the date formatter 
 require_once($root_path.'include/inc_date_format_functions.php');
     
-$lab_results=&$lab_obj->createResultsList($encounter_nr);
+$lab_results=$lab_obj->createResultsList($encounter_nr);
 $linecount=$lab_obj->LastRecordCount();
 if (!$linecount) { 		  
 					

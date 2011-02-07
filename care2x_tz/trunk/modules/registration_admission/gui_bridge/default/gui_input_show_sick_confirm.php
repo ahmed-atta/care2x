@@ -101,7 +101,7 @@ $glob_obj->getConfig('main_info_address');
 $TP_main_address=nl2br($GLOBAL_CONFIG['main_info_address']);
 
 # Load the template
-$TP_sickform=&$TP_obj->load('registration_admission/tp_show_sick_confirm.htm');
+$TP_sickform=$TP_obj->load('registration_admission/tp_show_sick_confirm.htm');
 # Output template
 eval("echo $TP_sickform;");
 ?>

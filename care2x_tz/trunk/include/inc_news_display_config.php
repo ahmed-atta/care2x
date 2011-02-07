@@ -7,9 +7,10 @@ $globobj=new GlobalConfig($GLOBALCONFIG);
 $USERCONFIG=$userobj->getConfig($user_id);
 $globobj->getConfig('news_%');
 
-while(list($x,$v)=each($GLOBALCONFIG)) {
-    $$x=($USERCONFIG[$x]) ? $USERCONFIG[$x] : $GLOBALCONFIG[$x];
-}
+if (!empty($GLOBALCONFIG))
+	while(list($x,$v)=each($GLOBALCONFIG)) {
+	    $$x=($USERCONFIG[$x]) ? $USERCONFIG[$x] : $GLOBALCONFIG[$x];
+	}
 
 if(!$news_normal_preview_maxlen) $news_normal_preview_maxlen=300;
 

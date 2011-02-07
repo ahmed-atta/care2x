@@ -18,7 +18,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
         
 require_once($root_path.'include/care_api_classes/class_personell.php');
 $pers_obj=new Personell;
-$doctors=&$pers_obj->getDoctorsOfDept($dept_nr);
+$doctors=$pers_obj->getDoctorsOfDept($dept_nr);
 
 $wkday=date("w",mktime(0,0,0,$month,$elemid+1,$year));
 ?>

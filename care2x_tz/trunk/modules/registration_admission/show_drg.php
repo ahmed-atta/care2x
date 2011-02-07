@@ -24,10 +24,10 @@ require('./include/init_show.php');
 
 if($parent_admit){
 	# Get the DRG records data of this encounter
-	$drg_obj=&$obj->encDRGList($_SESSION['sess_en']);
+	$drg_obj=$obj->encDRGList($_SESSION['sess_en']);
 }else{
 	# Get all DRG records  of this person
-	$drg_obj=&$obj->pidDRGList($_SESSION['sess_pid']);
+	$drg_obj=$obj->pidDRGList($_SESSION['sess_pid']);
 }
 $rows=$obj->LastRecordCount();
 //echo $obj->getLastQuery();

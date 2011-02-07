@@ -18,7 +18,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 require_once($root_path.'global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['lab_w'];
+$allowedarea=$allow_area['lab_w'];
 
 $fileforward="labor_data_patient_such.php?sid=$sid&lang=$lang&editmode=1";
 $thisfile=basename($_SERVER['PHP_SELF']);

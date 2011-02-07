@@ -44,7 +44,7 @@ if(($mode=='')||($mode=='fresh')){
 
 		@$enc_obj->loadEncounterData();
 		if($enc_obj->is_loaded) {
-			$encounter=&$enc_obj->encounter;
+			$encounter=$enc_obj->encounter;
 		}else{
 			$encounter=array();
 		}
@@ -65,7 +65,7 @@ if(($mode=='')||($mode=='fresh')){
 		require_once($root_path.'include/inc_photo_filename_resolve.php');
 
 		# Get billing type
-		$billing_type=&$enc_obj->getInsuranceClassInfo($encounter['insurance_class_nr']);
+		$billing_type=$enc_obj->getInsuranceClassInfo($encounter['insurance_class_nr']);
 		$breakfile='javascript:window.close()'; # Set default breakfile
 		
 }elseif($mode=='save'){

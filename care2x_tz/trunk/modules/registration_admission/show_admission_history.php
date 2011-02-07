@@ -17,7 +17,7 @@ if(!isset($mode)) $mode='show';
 require('./include/init_show.php');
 
 # Get all encounter records  of this person
-$list_obj=&$person_obj->EncounterList($pid);
+$list_obj=$person_obj->EncounterList($pid);
 $rows=$person_obj->LastRecordCount();
 //echo $obj->getLastQuery();
 

@@ -4,7 +4,7 @@
 #
 define('IS_TANZANIAN',true); 	// If TRUE use tanzanian modifications, else use standard care2x
 define('PID_PREFIX',00);		 	// Prefix for filenumbers (xx/00/00/01) Ex: 20/00/00/01
-
+error_reporting(~E_NOTICE);
 define('CURRENT_STOCK_ID', 1);
 
 

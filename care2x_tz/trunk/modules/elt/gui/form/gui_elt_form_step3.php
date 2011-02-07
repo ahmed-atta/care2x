@@ -5,7 +5,7 @@ include('roots.php');
 include($root_path.'classes/adodb/adodb.inc.php');	 # load code common to ADOdb
 include('config.php');
 
-$tables_name_of_des=&$conn_des->Execute('show tables from '.$des_dbname.'');
+$tables_name_of_des=$conn_des->Execute('show tables from '.$des_dbname.'');
 $c = &$conn_des;
 echo "constructor:"; print_r(get_object_vars($c));
 ?>
@@ -107,7 +107,7 @@ Destination: <?php echo $table ?>
     if($table!="")
     {
 
-		$test=&$conn_des->Execute('show fields from '.$table.'');
+		$test=$conn_des->Execute('show fields from '.$table.'');
 		if(strpos($sql, "*"))
 		{
 			echo '<tr id="firstline">';
@@ -141,7 +141,7 @@ Destination: <?php echo $table ?>
 		}
 
 
-	    $test2=&$conn_des->Execute(''.$sql.' limit 0,10');
+	    $test2=$conn_des->Execute(''.$sql.' limit 0,10');
 
 		while($fields_content=$test2->FetchRow())
 		{
@@ -188,7 +188,7 @@ Source: <?php echo $table ?>
 
     if($table!="")
     {
-	    $test=&$conn_source->Execute('show fields from '.$table.'');
+	    $test=$conn_source->Execute('show fields from '.$table.'');
 		if(strpos($sql, "*"))
 		{
 			echo '<tr id="firstline">';
@@ -223,7 +223,7 @@ Source: <?php echo $table ?>
 		}
 
 
-	    $test2=&$conn_source->Execute(''.$sql.' limit 0,10');
+	    $test2=$conn_source->Execute(''.$sql.' limit 0,10');
 
 		while($fields_content=$test2->FetchRow())
 		{

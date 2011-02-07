@@ -168,7 +168,7 @@ $enc_obj=new Encounter;
 							break;
 				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 			}						
-			$result=&$enc_obj->encounter;
+			$result=$enc_obj->encounter;
 
 			if( $enc_obj->is_loaded){
 

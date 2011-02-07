@@ -46,13 +46,13 @@ if($mode=='show'){
 	# Get the appointments basing on some conditions
 	if((isset($dept_nr)&&$dept_nr)){
 		# Get by department
-		$result=&$appt_obj->getAllByDeptObj($currYear,$currMonth,$currDay,$dept_nr);
+		$result=$appt_obj->getAllByDeptObj($currYear,$currMonth,$currDay,$dept_nr);
 	}elseif(isset($aux)&&!empty($aux)){
 		# Get by doctor
-		$result=&$appt_obj->getAllByDocObj($currYear,$currMonth,$currDay,$aux);
+		$result=$appt_obj->getAllByDocObj($currYear,$currMonth,$currDay,$aux);
 	}else{
 		# Get all appointments
-		$result=&$appt_obj->getAllByDateObj($currYear,$currMonth,$currDay);
+		$result=$appt_obj->getAllByDateObj($currYear,$currMonth,$currDay);
 	}
 }
 
@@ -65,7 +65,7 @@ require_once($root_path.'include/care_api_classes/class_encounter.php');
 $enc_obj=new Encounter;
 
 # load all encounter classes
-if($ec_obj=&$enc_obj->AllEncounterClassesObject()){
+if($ec_obj=$enc_obj->AllEncounterClassesObject()){
 	# Prepare to an array, technique is used in listing routines
 	while($ec_row=$ec_obj->FetchRow()) $enc_class[$ec_row['class_nr']]=$ec_row;
 }
@@ -84,7 +84,7 @@ switch($_SESSION['sess_user_origin']){
 require_once($root_path.'include/care_api_classes/class_department.php');
 $dept_obj=new Department;
 # Load all medical departments
-$med_arr=&$dept_obj->getAllMedical();
+$med_arr=$dept_obj->getAllMedical();
 
 # Prepare the html select options
 $options='';
