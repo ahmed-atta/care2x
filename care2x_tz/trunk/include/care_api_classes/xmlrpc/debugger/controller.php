@@ -1,8 +1,8 @@
 <?php
 /**
- * @version $Id: controller.php,v 1.1 2009/01/30 22:31:15 timschofield Exp $
+ * @version $Id: controller.php 11 2009-03-17 09:17:49Z ggiunta $
  * @author Gaetano Giunta
- * @copyright (C) 2005-2008 G. Giunta
+ * @copyright (C) 2005-2009 G. Giunta
  * @license code licensed under the BSD License: http://phpxmlrpc.sourceforge.net/license.txt
  *
  * @todo add links to documentation from every option caption
@@ -199,13 +199,26 @@ td {vertical-align: top; font-family: Verdana, Arial, Helvetica; font-size: 8pt;
         document.getElementById('methodpayload').value = base64_decode(base64data);
     }
   }
+
+  // use GET for ease of refresh, switch to POST when payload is too big to fit in url (in IE: 2048 bytes! see http://support.microsoft.com/kb/q208427/)
+  function switchFormMethod()
+  {
+      /// @todo use a more precise calculation, adding the rest of the fields to the actual generated url lenght
+      if (document.frmaction.methodpayload.value.length > 1536 )
+      {
+          document.frmaction.action = 'action.php?usepost=true';
+          document.frmaction.method = 'post';
+      }
+  }
+
 //-->
 </script>
 </head>
 <body onload="switchtransport(<?php echo $wstype;?>); switchaction(); switchssl(); switchauth(); swicthcainfo();<?php if ($run) echo ' document.forms[2].submit();'; ?>">
 <h1>XMLRPC <form name="frmxmlrpc" style="display: inline;" action="."><input name="yes" type="radio" onclick="switchtransport(0);"/></form>
 /<form name="frmjsonrpc" style="display: inline;" action="."><input name="yes" type="radio" onclick="switchtransport(1);"/></form>JSONRPC Debugger (based on the <a href="http://phpxmlrpc.sourceforge.net">PHP-XMLRPC</a> library)</h1>
-<form name="frmaction" method="get" action="action.php" target="frmaction">
+<form name="frmaction" method="get" action="action.php" target="frmaction" onSubmit="switchFormMethod();"
+>
 
 <table id="serverblock">
 <tr>
@@ -248,7 +261,7 @@ td {vertical-align: top; font-family: Verdana, Arial, Helvetica; font-size: 8pt;
 </select>
 </td>
 <td class="labelcell">Timeout:</td><td><input type="text" name="timeout" size="3" value="<?php if ($timeout > 0) echo $timeout; ?>" /></td>
-<td class="labelcell">Protocol:</td><td><select name="protocol" onclick="switchssl(); switchauth(); swicthcainfo();">
+<td class="labelcell">Protocol:</td><td><select name="protocol" onchange="switchssl(); switchauth(); swicthcainfo();">
 <option value="0"<?php if ($protocol == 0) echo ' selected="selected"'; ?>>HTTP 1.0</option>
 <option value="1"<?php if ($protocol == 1) echo ' selected="selected"'; ?>>HTTP 1.1</option>
 <option value="2"<?php if ($protocol == 2) echo ' selected="selected"'; ?>>HTTPS</option>

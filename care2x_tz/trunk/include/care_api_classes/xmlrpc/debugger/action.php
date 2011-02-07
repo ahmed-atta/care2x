@@ -1,8 +1,8 @@
 <?php
 /**
- * @version $Id: action.php,v 1.1 2009/01/30 22:31:15 timschofield Exp $
+ * @version $Id: action.php 37 2009-07-31 23:35:33Z ggiunta $
  * @author Gaetano Giunta
- * @copyright (C) 2005-2008 G. Giunta
+ * @copyright (C) 2005-2009 G. Giunta
  * @license code licensed under the BSD License: http://phpxmlrpc.sourceforge.net/license.txt
  *
  * @todo switch params for http compression from 0,1,2 to values to be used directly
@@ -81,7 +81,7 @@ td form {margin: 0;}
       $server = 'http://'.$server;
     }
     if ($proxy != '') {
-      $pproxy = split(':', $proxy);
+      $pproxy = explode(':', $proxy);
       if (count($pproxy) > 1)
         $pport = $pproxy[1];
       else
@@ -256,55 +256,57 @@ td form {margin: 0;}
         case 'list':
 
         $v = $response->value();
-        $max = $v->arraysize();
-        echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
-        echo "<thead>\n<tr><th>Method</th><th>Description</th></tr>\n</thead>\n<tbody>\n";
-        for($i=0; $i < $max; $i++)
+        if ($v->kindOf()=="array")
         {
-          $rec = $v->arraymem($i);
-          if ($i%2) $class=' class="oddrow"'; else $class = ' class="evenrow"';
-          echo ("<tr><td$class>".htmlspecialchars($rec->scalarval())."</td><td$class><form action=\"controller.php\" method=\"get\" target=\"frmcontroller\">".
-            "<input type=\"hidden\" name=\"host\" value=\"".htmlspecialchars($host)."\" />".
-            "<input type=\"hidden\" name=\"port\" value=\"".htmlspecialchars($port)."\" />".
-            "<input type=\"hidden\" name=\"path\" value=\"".htmlspecialchars($path)."\" />".
-            "<input type=\"hidden\" name=\"id\" value=\"".htmlspecialchars($id)."\" />".
-            "<input type=\"hidden\" name=\"debug\" value=\"$debug\" />".
-            "<input type=\"hidden\" name=\"username\" value=\"".htmlspecialchars($username)."\" />".
-            "<input type=\"hidden\" name=\"password\" value=\"".htmlspecialchars($password)."\" />".
-            "<input type=\"hidden\" name=\"authtype\" value=\"$authtype\" />".
-            "<input type=\"hidden\" name=\"verifyhost\" value=\"$verifyhost\" />".
-            "<input type=\"hidden\" name=\"verifypeer\" value=\"$verifypeer\" />".
-            "<input type=\"hidden\" name=\"cainfo\" value=\"".htmlspecialchars($cainfo)."\" />".
-            "<input type=\"hidden\" name=\"proxy\" value=\"".htmlspecialchars($proxy)."\" />".
-            "<input type=\"hidden\" name=\"proxyuser\" value=\"".htmlspecialchars($proxyuser)."\" />".
-            "<input type=\"hidden\" name=\"proxypwd\" value=\"".htmlspecialchars($proxypwd)."\" />".
-            "<input type=\"hidden\" name=\"responsecompression\" value=\"$responsecompression\" />".
-            "<input type=\"hidden\" name=\"requestcompression\" value=\"$requestcompression\" />".
-            "<input type=\"hidden\" name=\"clientcookies\" value=\"".htmlspecialchars($clientcookies)."\" />".
-            "<input type=\"hidden\" name=\"protocol\" value=\"$protocol\" />".
-            "<input type=\"hidden\" name=\"timeout\" value=\"".htmlspecialchars($timeout)."\" />".
-            "<input type=\"hidden\" name=\"method\" value=\"".$rec->scalarval()."\" />".
-            "<input type=\"hidden\" name=\"wstype\" value=\"$wstype\" />".
-            "<input type=\"hidden\" name=\"action\" value=\"describe\" />".
-            "<input type=\"hidden\" name=\"run\" value=\"now\" />".
-            "<input type=\"submit\" value=\"Describe\" /></form></td>");
-          //echo("</tr>\n");
+          $max = $v->arraysize();
+          echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
+          echo "<thead>\n<tr><th>Method</th><th>Description</th></tr>\n</thead>\n<tbody>\n";
+          for($i=0; $i < $max; $i++)
+          {
+            $rec = $v->arraymem($i);
+            if ($i%2) $class=' class="oddrow"'; else $class = ' class="evenrow"';
+            echo ("<tr><td$class>".htmlspecialchars($rec->scalarval())."</td><td$class><form action=\"controller.php\" method=\"get\" target=\"frmcontroller\">".
+              "<input type=\"hidden\" name=\"host\" value=\"".htmlspecialchars($host)."\" />".
+              "<input type=\"hidden\" name=\"port\" value=\"".htmlspecialchars($port)."\" />".
+              "<input type=\"hidden\" name=\"path\" value=\"".htmlspecialchars($path)."\" />".
+              "<input type=\"hidden\" name=\"id\" value=\"".htmlspecialchars($id)."\" />".
+              "<input type=\"hidden\" name=\"debug\" value=\"$debug\" />".
+              "<input type=\"hidden\" name=\"username\" value=\"".htmlspecialchars($username)."\" />".
+              "<input type=\"hidden\" name=\"password\" value=\"".htmlspecialchars($password)."\" />".
+              "<input type=\"hidden\" name=\"authtype\" value=\"$authtype\" />".
+              "<input type=\"hidden\" name=\"verifyhost\" value=\"$verifyhost\" />".
+              "<input type=\"hidden\" name=\"verifypeer\" value=\"$verifypeer\" />".
+              "<input type=\"hidden\" name=\"cainfo\" value=\"".htmlspecialchars($cainfo)."\" />".
+              "<input type=\"hidden\" name=\"proxy\" value=\"".htmlspecialchars($proxy)."\" />".
+              "<input type=\"hidden\" name=\"proxyuser\" value=\"".htmlspecialchars($proxyuser)."\" />".
+              "<input type=\"hidden\" name=\"proxypwd\" value=\"".htmlspecialchars($proxypwd)."\" />".
+              "<input type=\"hidden\" name=\"responsecompression\" value=\"$responsecompression\" />".
+              "<input type=\"hidden\" name=\"requestcompression\" value=\"$requestcompression\" />".
+              "<input type=\"hidden\" name=\"clientcookies\" value=\"".htmlspecialchars($clientcookies)."\" />".
+              "<input type=\"hidden\" name=\"protocol\" value=\"$protocol\" />".
+              "<input type=\"hidden\" name=\"timeout\" value=\"".htmlspecialchars($timeout)."\" />".
+              "<input type=\"hidden\" name=\"method\" value=\"".$rec->scalarval()."\" />".
+              "<input type=\"hidden\" name=\"wstype\" value=\"$wstype\" />".
+              "<input type=\"hidden\" name=\"action\" value=\"describe\" />".
+              "<input type=\"hidden\" name=\"run\" value=\"now\" />".
+              "<input type=\"submit\" value=\"Describe\" /></form></td>");
+            //echo("</tr>\n");
 
-          // generate lo scheletro per il method payload per eventuali test
-          //$methodpayload="<methodCall>\n<methodName>".$rec->scalarval()."</methodName>\n<params>\n<param><value></value></param>\n</params>\n</methodCall>";
+            // generate lo scheletro per il method payload per eventuali test
+            //$methodpayload="<methodCall>\n<methodName>".$rec->scalarval()."</methodName>\n<params>\n<param><value></value></param>\n</params>\n</methodCall>";
 
-          /*echo ("<form action=\"{$_SERVER['PHP_SELF']}\" method=\"get\"><td>".
-            "<input type=\"hidden\" name=\"host\" value=\"$host\" />".
-            "<input type=\"hidden\" name=\"port\" value=\"$port\" />".
-            "<input type=\"hidden\" name=\"path\" value=\"$path\" />".
-            "<input type=\"hidden\" name=\"method\" value=\"".$rec->scalarval()."\" />".
-            "<input type=\"hidden\" name=\"methodpayload\" value=\"$payload\" />".
-            "<input type=\"hidden\" name=\"action\" value=\"execute\" />".
-            "<input type=\"submit\" value=\"Test\" /></td></form>");*/
-          echo("</tr>\n");
+            /*echo ("<form action=\"{$_SERVER['PHP_SELF']}\" method=\"get\"><td>".
+              "<input type=\"hidden\" name=\"host\" value=\"$host\" />".
+              "<input type=\"hidden\" name=\"port\" value=\"$port\" />".
+              "<input type=\"hidden\" name=\"path\" value=\"$path\" />".
+              "<input type=\"hidden\" name=\"method\" value=\"".$rec->scalarval()."\" />".
+              "<input type=\"hidden\" name=\"methodpayload\" value=\"$payload\" />".
+              "<input type=\"hidden\" name=\"action\" value=\"execute\" />".
+              "<input type=\"submit\" value=\"Test\" /></td></form>");*/
+            echo("</tr>\n");
+          }
+          echo "</tbody>\n</table>";
         }
-        echo "</tbody>\n</table>";
-
           break;
 
         case 'describe':
@@ -329,27 +331,35 @@ td form {margin: 0;}
             if ($i+1%2) $class=' class="oddrow"'; else $class = ' class="evenrow"';
             echo "<tr><td$class>Signature&nbsp;".($i+1)."</td><td$class>";
             $x = $r2->arraymem($i);
-            $ret = $x->arraymem(0);
-            echo "<code>OUT:&nbsp;" . htmlspecialchars($ret->scalarval()) . "<br />IN: (";
-            if ($x->arraysize() > 1)
+            if ($x->kindOf()=="array")
             {
-              for($k = 1; $k < $x->arraysize(); $k++)
+              $ret = $x->arraymem(0);
+              echo "<code>OUT:&nbsp;" . htmlspecialchars($ret->scalarval()) . "<br />IN: (";
+              if ($x->arraysize() > 1)
               {
-                $y = $x->arraymem($k);
-                echo $y->scalarval();
-                if ($wstype != 1)
+                for($k = 1; $k < $x->arraysize(); $k++)
                 {
-                  $payload = $payload . '<param><value><'.htmlspecialchars($y->scalarval()).'></'.htmlspecialchars($y->scalarval())."></value></param>\n";
-                }
-                $alt_payload .= $y->scalarval();
-                if ($k < $x->arraysize()-1)
-                {
-                  $alt_payload .= ';';
-                  echo ", ";
+                  $y = $x->arraymem($k);
+                  echo $y->scalarval();
+                  if ($wstype != 1)
+                  {
+                    $payload = $payload . '<param><value><'.htmlspecialchars($y->scalarval()).'></'.htmlspecialchars($y->scalarval())."></value></param>\n";
+                  }
+                  $alt_payload .= $y->scalarval();
+                  if ($k < $x->arraysize()-1)
+                  {
+                    $alt_payload .= ';';
+                    echo ", ";
+                  }
                 }
               }
+              echo ")</code>";
             }
-            echo ")</code></td>";
+            else
+            {
+              echo 'Unknown';
+            }
+            echo '</td>';
             //bottone per testare questo metodo
             //$payload="<methodCall>\n<methodName>$method</methodName>\n<params>\n$payload</params>\n</methodCall>";
             echo "<td$class><form action=\"controller.php\" target=\"frmcontroller\" method=\"get\">".
