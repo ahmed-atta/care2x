@@ -1,5 +1,5 @@
 <?php
-
+ini_set('date.timezone', 'UTC');
 /*
 define (__TRACE_ENABLE__, true);
 define (__DEBUG_ENABLE__, true);
