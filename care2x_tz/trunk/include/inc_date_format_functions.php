@@ -4,6 +4,7 @@ if (stristr('inc_date_format_functions.php',$PHP_SELF))
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
+ini_set('date.timezone', 'UTC');
 
 /**
 * getDateFormat gets the date format stored in the databank
