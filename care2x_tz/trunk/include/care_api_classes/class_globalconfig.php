@@ -51,7 +51,7 @@ class GlobalConfig  extends Core{
 	* @param array Configuration handler. By reference.
 	*/
 	function GlobalConfig(&$handler) {
-	    $this->config=$handler;
+	    $this->config=&$handler;
 	}
 	/**
 	* Gets (a) global configuration value(s) of (a) configuration item(s).

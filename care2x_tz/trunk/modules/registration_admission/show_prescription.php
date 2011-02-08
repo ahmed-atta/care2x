@@ -26,7 +26,7 @@ if (empty($encounter_nr) and !empty($pid)) {
 	$encounter_nr = $person_obj->CurrentEncounter($pid);
 	$_SESSION['sess_en'] = $encounter_nr;
 }
-$debug=FALSE;
+$debug=TRUE;
 ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 if ($debug) {
 	if (!empty($back_path)) $backpath=$back_path;
