@@ -45,6 +45,7 @@ if(!isset($sid)) $sid='';
 
 require('./roots.php');
 require('./include/inc_environment_global.php');
+require('./include/inc_date_format_functions.php');
 
 //$db->debug=1;
 
