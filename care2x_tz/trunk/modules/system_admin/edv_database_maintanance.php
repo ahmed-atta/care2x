@@ -19,14 +19,19 @@ if($_REQUEST['movebills2archive']==true)
                       (	`nr`,
 			`date_change`,
 			`is_labtest`,
+			`is_radio_test`,
 			`is_medicine`,
 			`is_comment`,
 			`is_paid`,
 			`amount`,
+			`amount_doc`,
+			`times_per_day`,
+			`days`,
 			`price`,
 			`balanced_insurance`,
 			`insurance_id`,
 			`description`,
+			`notes`,
 			`item_number`,
 			`prescriptions_nr`,
 			`User_Id`
@@ -35,14 +40,19 @@ if($_REQUEST['movebills2archive']==true)
 			`nr`,
 			`date_change`,
 			`is_labtest`,
+			`is_radio_test`,
 			`is_medicine`,
 			`is_comment`,
-			1,
+			`is_paid`,
 			`amount`,
+			`amount_doc`,
+			`times_per_day`,
+			`days`,
 			`price`,
 			`balanced_insurance`,
 			`insurance_id`,
 			`description`,
+			`notes`,
 			`item_number`,
 			`prescriptions_nr`,
 			`User_Id`
@@ -50,14 +60,31 @@ if($_REQUEST['movebills2archive']==true)
 	$db->Execute($sql);
 	//$sql="UPDATE care_tz_billing_archive_elem SET user_id='admin' where user_id=''";
 	//$db->Execute($sql);
-	$sql="UPDATE care_encounter_prescription SET bill_status='archived'WHERE bill_status=''";
+
+	$sql="UPDATE care_encounter_prescription SET is_disabled=1,bill_number='-1', bill_status='archived'";
 	$db->Execute($sql);
-	$sql="UPDATE care_test_request_chemlabor SET bill_status='archived' WHERE bill_status=''";
+	$sql="UPDATE care_test_request_chemlabor_sub SET is_disabled=1,bill_number='-1', bill_status='archived'";
 	$db->Execute($sql);
+	$sql="UPDATE care_test_request_radio SET is_disabled=1,bill_number='-1', bill_status='archived'";
+	$db->Execute($sql);
+
+	/*
+	$sql="UPDATE care_encounter_prescription SET is_disabled=1,bill_number='-1', bill_status='archived' WHERE bill_status=''";
+	$db->Execute($sql);
+	$sql="UPDATE care_test_request_chemlabor SET is_disabled=1,bill_number='-1', bill_status='archived' WHERE bill_status=''";
+	$db->Execute($sql);
+	$sql="UPDATE care_test_request_radio SET is_disabled=1,bill_number='-1', bill_status='archived' WHERE bill_status=''";
+	$db->Execute($sql);
+	*/
 	$sql="DELETE FROM care_tz_billing";
 	$db->Execute($sql);
 	$sql="DELETE FROM care_tz_billing_elem";
 	$db->Execute($sql);
+	$sql="DELETE FROM care_tz_billing_archive";
+	$db->Execute($sql);
+	$sql="DELETE FROM care_tz_billing_archive_elem";
+	$db->Execute($sql);
+	
 }
 if($_REQUEST['prescription']==true)
 {
@@ -173,6 +200,7 @@ function popPic(pid,nm){
 	<td class="adm_item" align="right"><FONT  color="#0000cc"><b><?php echo $bill_count[0]; ?></b> Pendings Billing:</FONT></td>
 	<td  align="left"><FONT><a href="edv_database_maintanance.php?movebills2archive=true">Click here to move all Pending Bills to Archive</a> </FONT></td>
 </tr>
+<!--
 <tr>
 	<td class="adm_item" align="right"><FONT  color="#0000cc"><b><?php echo $admited_patient_count[0]; ?></b> admited Patient: </FONT></td>
 	<td  align="left"><FONT><a href="edv_database_maintanance.php?discharge=true">Click here to discharge all Patient</a> </FONT></td>
@@ -181,7 +209,7 @@ function popPic(pid,nm){
 	<td class="adm_item" align="right"><FONT  color="#0000cc"><b><?php echo $pending_prescription_count[0]; ?></b> Pending Prescription: </FONT></td>
 	<td  align="left"><FONT><a href="edv_database_maintanance.php?prescription=true">Click here to move out all pending prescription </a> </FONT></td>
 </tr>
-
+  -->
 
 </table>
 </form>

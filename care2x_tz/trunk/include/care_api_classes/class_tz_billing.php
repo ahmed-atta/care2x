@@ -10,15 +10,10 @@ require_once($root_path.'include/care_api_classes/class_tz_insurance.php');
  *  Billing methods for tanzania (the product-module is completely rewritten by Robert Meggle.
  *
  * Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
- * @author Robert Meggle
+ * @author Robert Meggle, Dennis Mollel
  * @version beta 1.0.0
  * @copyright 2005 Robert Meggle (MEROTECH info@merotech.de)
  * @package care_api from Elpidio Latirilla
- */
-
-/*
- * Updated by: Dennis Mollel - info@cybertechstudios.com  || nov-2010
- *
  */
 
 /*
