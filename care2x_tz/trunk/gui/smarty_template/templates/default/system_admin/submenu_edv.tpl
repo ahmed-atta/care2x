@@ -20,10 +20,6 @@
 
 					{{$LDNewsTxt}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
-
-					{{$LDELTTxt}}
-
 					</TBODY>
 					</TABLE>
 				</TD>

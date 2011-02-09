@@ -27,8 +27,6 @@ $LDValue='Value';
 
 $LDNews='News';
 $LDNewsTxt='Read or write news articles pertaining to system administration department';
-$LDETL='ETL';
-$LDELTTxt='Exact,transform,load Databases';
 $LDMemo='Memo';
 $LDMemoTxt='Read or write a memo';
 $LDSearchPat='Search patient';
