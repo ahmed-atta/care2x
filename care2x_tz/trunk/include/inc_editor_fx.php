@@ -6,7 +6,7 @@
 /**
 * deactivateHotHtml disables the <script> <input> <form> <print> tags by inserting the </> characters
 */
-function deactivateHotHtml(&$str)
+function deactivateHotHtml($str)
 {
     $str=str_ireplace('form','for</>m',$str);	
 	$str=str_ireplace('input','inp</>ut',$str);
