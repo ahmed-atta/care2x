@@ -373,12 +373,14 @@ $LDListing = 'No Filter';
 $LDFlagDiagnosis='Flag Patients without Diagnosis';
 $LDNoDischarge = 'Do not Discharge patients with no Diagnosis';
 $LDOtherSettings='Other Settings';
-
-
 $LDTimeExpire='Password Expire After: ';
 $LDTimeExpireTxt='Provide a lifespan of user password before automaticaly expire';
-
 $LDExpire = 'Password Expire';
 # end 2010-11-23 DM
+$LDXMLRPCInterface='XML-RPC Interface';
+$LDXMLConfig='Configuration';
+
+$LDDataMaintanance ='Data maintananace';
+$LDCleanup='Cleanup';
 
 ?>
