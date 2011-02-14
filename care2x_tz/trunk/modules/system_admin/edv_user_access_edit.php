@@ -72,7 +72,7 @@ if($mode!= ''){
 
 	     while(list($x,$v)=each($_POST))
 	     {
-           if(!ereg('_a_',$x)) continue;
+           if(!preg_match('#_a_#',$x)) continue;
            if($_POST[$x] != '') $p_areas.=$v.' ';
 	     }
 
