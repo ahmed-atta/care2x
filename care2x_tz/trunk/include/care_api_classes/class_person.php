@@ -247,7 +247,7 @@ class Person extends Core {
 
 	function GetPidFromEncounter($encounter_nr) {
 		global $db;
-		//$db->debug=TRUE;
+		$db->debug=FALSE;
 		$this->sql="SELECT pid FROM care_encounter where encounter_nr=".$encounter_nr;
 		if($this->result=$db->Execute($this->sql)){
 			if($this->row=$this->result->FetchRow()){

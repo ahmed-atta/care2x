@@ -164,7 +164,7 @@ else
 	{
 	 $this->msg="fill reordering level field";
 	}
-	elseif(!ereg('(^[0-9]+$)',$level))
+	elseif(!preg_match('/(^[0-9]+$)/',$level))
 	{
 	 $this->msg="use intergers only for reordering level";
 	}
