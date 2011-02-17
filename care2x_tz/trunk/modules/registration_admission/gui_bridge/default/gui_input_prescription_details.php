@@ -143,7 +143,7 @@ else
 }
 //echo "-->items in array: ".count($item_array)."<br>";#
 
- 
+
 
 for ($i=0 ; $i < count($item_array) ; $i++) {
 $class = $pres_obj->GetClassOfItem($item_array[$i]);
