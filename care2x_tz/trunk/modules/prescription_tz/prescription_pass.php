@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
 /**
@@ -18,34 +17,33 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'global_conf/areas_allow.php');
 $allowedarea=$allow_area['admit'];
 
-$append=URL_REDIRECT_APPEND; 
-$fileforward='amb_clinic_patients.php'.$append.'&origin=pass&target=list&dept_nr='.$dept_nr; 
-$lognote=$LDAppointments.'ok';
+$append=URL_REDIRECT_APPEND.'&from=pass';
 
-$thisfile=basename($_SERVER['PHP_SELF']);
-# Set the break (return) file
-switch($_SESSION['sess_user_origin']){
-	case 'amb': $breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND; break;
-	default: $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+switch($target){
+
+	// Prepared for later -. for mobile verison and independency of this module
+	case 'search':
+						$fileforward='aufnahme_daten_such.php'.$append;
+						break;
+	// default route by first call of this module
+	default: 
+						$fileforward='prescription.php'.$append;
+						break;
 }
+$thisfile=basename($_SERVER['PHP_SELF']);
 
-$_SESSION['sess_parent_mod']='';
-
-$userck='ck_pflege_user';
-
-# reset all 2nd level lock cookies
-setcookie($userck.$sid,'',0,'/');
+setcookie($userck.$sid,'');
 require($root_path.'include/inc_2level_reset.php'); 
-setcookie(ck_2level_sid.$sid,'',0,'/');
+setcookie(ck_2level_sid.$sid,'');
 
 require($root_path.'include/inc_passcheck_internchk.php');
-if ($pass=='check') include($root_path.'include/inc_passcheck.php');
 
-$errbuf=$LDOutpatientClinic;
+if ($pass=='check') 	
+	include($root_path.'include/inc_passcheck.php');
 
+$errbuf=$LDAdmission;
 
 require($root_path.'include/inc_passcheck_head.php');
-
 ?>
 
 <BODY  onLoad="document.passwindow.userid.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>

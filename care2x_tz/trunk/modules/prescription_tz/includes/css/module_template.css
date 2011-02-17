@@ -1,0 +1,96 @@
+/*
+	css style for individual look and feel for this module
+*/
+/*----------------------- customized part starts here ------------------------*/
+.modul {
+	height: 100%;
+	width: 100%;
+	background-color: white;
+	}
+	
+.head {
+	height: 30px;
+	width: 100%;
+	background-color: #99CCFF;
+	}
+.headline {
+	font-weight: bold;
+	font-size: 20px;
+	height: 30px;
+	width: 20%;
+	float: left;
+	background-color: #99CCFF;
+	}
+.help {
+	float: right;
+	}
+.patient_quickinfo {
+	border-style:dashed;
+	border-width:1px;
+	height: 20px;
+	}
+.patient_qickinfo_cell {
+	/* must be improved for mobile phones */
+	float: left;
+	width: 20%;
+	height: 100%;
+	}
+	
+/*TABS*/
+/* tab pane styling */
+.panes div {
+	display:none;		
+	padding:15px 10px;
+	border:1px solid #999;
+	border-top:0;
+	/*height:100px;*/
+	font-size:14px;
+	background-color:#fff;
+}
+
+/* overwriting existing ... if you want.. will work as well: */
+body {
+	padding:50px 80px;
+	font-family:"Lucida Grande","bitstream vera sans","trebuchet ms",sans-serif,verdana;
+}
+
+/* get rid of those system borders being generated for A tags */
+a:active {
+  outline:none;
+}
+
+:focus {
+  -moz-outline-style:none;
+}
+
+.item {
+	margin: 10px;
+	}
+.item_name {
+	border:1px solid #000000;
+	font-style:bolder;
+	background-color: #99CCFF;
+	text-align: center;
+	}
+
+.item_details {
+	border:1px solid #000000;
+	border-style:dashed;
+	background-color: #ADD8E6;
+	}
+
+.item_amount  {
+	width: 20%;
+	float: left;
+	}
+.item_times_per_day  {
+	width: 20%;
+	float: left;
+	}
+.item_total_dose {
+	width: 20%;
+
+	}
+
+.item_item_notes {
+	}

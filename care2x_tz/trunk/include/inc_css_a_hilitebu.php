@@ -8,8 +8,17 @@ if(isset($cfg['css']) && !empty($cfg['css']) && file_exists($root_path.'css/them
 
 echo '<link rel="stylesheet" href="'.$sCssFile.'" type="text/css">';
 
+//TODO: provide these scripts to care2x project and do not take it from internet
 if($cfg['dhtml']){
 
+/*
+echo '
+	<link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/css/standalone.css"/>	
+	<link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/css/tabs.css" />
+';
+*/
+
+//TODO: provide these scripts to care2x project and do not take it from internet
 echo '
 <script language="javascript" src="'.$root_path.'js/hilitebu.js"></script>
 
