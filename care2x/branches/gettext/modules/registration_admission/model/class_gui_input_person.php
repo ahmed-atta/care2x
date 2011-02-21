@@ -28,9 +28,6 @@ $thisfile = basename($_SERVER['PHP_SELF']);
 
 class GuiInputPerson {
 
-	# Language tables
-	var $langfiles= array('emr.php', 'person.php', 'date_time.php', 'aufnahme.php');
-
 	# Default path for photos. Make sure that this directory exists!
 	var $default_photo_path='uploads/photos/registration';
 
@@ -112,10 +109,9 @@ class GuiInputPerson {
 
 		extract($_POST);
 
-		# Load the language tables
-		$lang_tables =$this->langfiles;
-		include($root_path.'include/helpers/inc_load_lang_tables.php');
-
+		//temporary hack..
+		include (CARE_BASE .'modules/' . MODULE . '/language/' .$lang.'/'.LANG_FILE_MODULAR);
+		
 		# Load the other hospitals array
 		include_once($root_path.'global_conf/other_hospitals.php');
 
@@ -126,10 +122,10 @@ class GuiInputPerson {
 		//$db->debug=true;
 
 		# Create the new person object
-		$person_obj=& new Person($pid);
+		$person_obj= new Person($pid);
 
 		# Create a new person insurance object
-		$pinsure_obj=& new PersonInsurance($pid);
+		$pinsure_obj= new PersonInsurance($pid);
 
 		if(!isset($insurance_show)) $insurance_show=TRUE;
 
@@ -182,7 +178,7 @@ class GuiInputPerson {
 
 				# Create image object
 				include_once($root_path.'modules/photolab/model/class_image.php');
-				$img_obj=& new Image;
+				$img_obj= new Image;
 
 				# Check the uploaded image file if exists and valid
 				if($img_obj->isValidUploadedImage($_FILES['photo_filename'])){
@@ -376,13 +372,13 @@ class GuiInputPerson {
 			} // end of if(!$error)
 		}elseif(!empty($this->pid)){
 			 # Get the person's data
-			if($data_obj=&$person_obj->getAllInfoObject()){
+			if($data_obj=$person_obj->getAllInfoObject()){
 
 				$zeile=$data_obj->FetchRow();
 				extract($zeile);
 
 				# Get the related insurance data
-				$p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
+				$p_insurance=$pinsure_obj->getPersonInsuranceObject($pid);
 				if($p_insurance==FALSE) {
 					$insurance_show=TRUE;
 				} else {
