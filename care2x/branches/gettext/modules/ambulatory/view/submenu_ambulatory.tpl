@@ -3,7 +3,7 @@
 
   <tr>
     <td colspan=2>
-		{{include file="ambulatory/submenu_generic.tpl"}}
+		{{include file="view/submenu_generic.tpl"}}
 	</td>
   </tr>
   

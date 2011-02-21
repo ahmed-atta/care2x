@@ -7,7 +7,7 @@
 	<tr valign="top">
 		<td>
 			{{if $bShowPatientsList}}
-				{{include file="ambulatory/outpatients_list.tpl"}}
+				{{include file="view/outpatients_list.tpl"}}
 			{{/if}}
 			<p>
 			{{$pbClose}}

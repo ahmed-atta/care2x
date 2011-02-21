@@ -255,7 +255,7 @@ if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '') {
     
      $sTemp='';
      ob_start();
-     		$smarty->display(__DIR__ . '/view/submenu_dept.tpl');
+     		$smarty->display(__DIR__ . '/view/submenu_dept.tpl'); 
      		$sTemp = ob_get_contents();
      ob_end_clean();
     
@@ -282,7 +282,6 @@ if(!isset($_SESSION['department_nr']) || $_SESSION['department_nr'] == '') {
 
 // Assign page output to the mainframe template
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/submenu_ambulatory.tpl');
-
  /**
  * show Template
  */
