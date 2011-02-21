@@ -143,7 +143,7 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 		 } 
 	   exit;
    }
-}; 
+}
 
 # The constant LANG_FILE contains the file name of the language table without the lang_xx_ component.
 # This constant  must be set by the script that calls this file.
@@ -173,6 +173,7 @@ if(isset($lang_tables)&&is_array($lang_tables)&&sizeof($lang_tables)) {
 	}
 
 }
+
 #  Load additional environment files 
 require_once('inc_config_color.php'); # load user configurations
 require_once('inc_img_fx.php'); # image functions
@@ -181,10 +182,9 @@ require_once('inc_img_fx.php'); # image functions
 if(isset($cfg['template_theme'])&&!empty($cfg['template_theme'])) $template_theme=$cfg['template_theme'];
 	else $template_theme = 'default';
 
-# Load template class by default
+// Load template class by default
 if(!defined('NO_TEMPLATE')||!NO_TEMPLATE){
 	require_once(CARE_BASE . '/include/core/class_template.php'); // template class
 	# Template object
 	$TP_obj=new Template(CARE_BASE ,$template_path,$template_theme);
 }
-?>

@@ -73,7 +73,7 @@ require('gui_bridge/default/gui_tabs_patreg.php');
 
 require_once($root_path.'modules/registration_admission/model/class_gui_input_person.php');
 
-$inperson = & new GuiInputPerson;
+$inperson = new GuiInputPerson;
 
 $inperson->setPID($pid);
 $inperson->pretext = $sTemp;
