@@ -150,7 +150,7 @@ echo  $sTemp;
 require_once(CARE_BASE.'include/core/class_ward.php');
 $ward_obj=new Ward;
 $items='nr,ward_id,name, dept_nr'; // set the items to be fetched
-$ward_info=&$ward_obj->getAllWardsItemsArray($items);
+$ward_info=$ward_obj->getAllWardsItemsArray($items);
 $sTemp = '';         
 if($ward_info&&is_array($ward_info)){
      while(list($x,$v)=each($ward_info)){

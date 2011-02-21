@@ -29,7 +29,7 @@ A copy of this notice is also available as file named copy_notice.txt under the 
 */
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 define('FROM_ROOT',1);
-require ('./roots.php');
+
 
 if(!isset($mask)) $mask=false;
 if(!isset($cookie)) $cookie=false;

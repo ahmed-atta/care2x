@@ -10,7 +10,7 @@ require_once(CARE_BASE.'/include/helpers/inc_config_color.php');
 
 require_once(CARE_BASE.'/global_conf/areas_allow.php');
 
-$allowedarea=&$allow_area['admit'];
+$allowedarea=$allow_area['admit'];
 
 $fileforward='address_manage.php'.URL_REDIRECT_APPEND;
 $thisfile=basename(__FILE__);
