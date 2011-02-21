@@ -401,7 +401,7 @@ if($rows){
 
 			# Create the rows using ward_occupancy_list_row.tpl template
 			ob_start();
-				$smarty->display(__DIR__ . '/view//outpatients_list_row.tpl');
+				$smarty->display(__DIR__ . '/view/outpatients_list_row.tpl');
 				$sListRows = $sListRows.ob_get_contents();
 			ob_end_clean();
 
