@@ -70,6 +70,10 @@ switch ($model) {
 					
 					} elseif ($_POST['task']=='parameterisation') {
 						
+						// Define here the value for how many days a prescruption should be taken, 
+						// e.g. Tablets can be prescribed for x days:
+						$patient_prescription_obj->tpd=10;
+						
 						// Current task: parametrisation: Open the view where user can give 
 						// attributes on the already given combination of prescription elements
 
