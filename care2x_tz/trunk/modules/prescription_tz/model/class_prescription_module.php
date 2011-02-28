@@ -35,8 +35,11 @@ class PatientPrescription extends person {
 	
 	public $weberp_obj;
 	
-	// Set here the amount for prescriptions how many days a doctor can prescribe a drug
+	// Times Per Day: Set here the amount for prescriptions how many days a doctor can prescribe a drug
 	public $tpd=10;
+	
+	// Days: How many days should this item been prescribed 
+	public $d=120;
 
 
 	
@@ -272,6 +275,7 @@ class PatientPrescription extends person {
 							$smarty->assign('PresFrequency2',$LDPresFrequency2);
 
 							$smarty->assign('tpd',$this->tpd);
+							$smarty->assign('d',$this->d);
 							
 							// Load common icons
 							$img_arrow=createComIcon($root_path,'r_arrowgrnsm.gif','0');
