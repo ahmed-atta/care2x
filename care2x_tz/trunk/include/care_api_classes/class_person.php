@@ -476,11 +476,10 @@ class Person extends Core {
 	*/
 	function getValue($item,$pid='') {
 	    global $db;
-
-	    if($this->is_preloaded) {
+	    if($this->is_preloaded) { 
 		    if(isset($this->person[$item])) return $this->person[$item];
 		        else  return false;
-		} else {
+		} else { 
 		    if(!$this->internResolvePID($pid)) return false;
 		    $this->sql="SELECT $item FROM $this->tb_person WHERE pid=$this->pid";
 		    //return $this->sql;

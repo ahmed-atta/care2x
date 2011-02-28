@@ -34,6 +34,9 @@ class PatientPrescription extends person {
 	private $lang_tables=array('aufnahme.php','pharmacy.php');
 	
 	public $weberp_obj;
+	
+	// Set here the amount for prescriptions how many days a doctor can prescribe a drug
+	public $tpd=10;
 
 
 	
@@ -55,6 +58,7 @@ class PatientPrescription extends person {
 		} else {
 			$this->debug=false;
 			$this->encounter_nr = $encounter_nr;
+			$this->pid = $this->GetPidFromEncounter($encounter_nr);
 			
 			//***********************************
 			// Possible place for helper class webERP 
@@ -146,21 +150,18 @@ class PatientPrescription extends person {
 		while (list($x,$v)=each($item_array)) {
 			// Init the 2D assoc. array, key is the item number
 			$arrayOfItemDetails[$v]['item_number']=$v;
-			$this->sql="SELECT `item_number`,`partcode`, `item_description`, `purchasing_class`, `not_in_use`, `sub_class` FROM care_tz_drugsandservices where item_id=".$v;
+			$this->sql="SELECT `item_id`, `item_number`,`partcode`, `item_description`, `purchasing_class`, `not_in_use`, `sub_class` FROM care_tz_drugsandservices where item_id=".$v;
 			if ($res=$db->execute($this->sql)) {
 				$arr=$res->GetArray();
 				foreach ($arr as $value) {
 					//TODO: Put here the query about this item from webERP interface about availability & stuff - and add it to this array
+					$arrayOfItemDetails[$v]['item_id']=$value['item_id'];
 					$arrayOfItemDetails[$v]['item_number']=$value['item_number'];
 					$arrayOfItemDetails[$v]['partcode']=$value['partcode'];
 					$arrayOfItemDetails[$v]['item_description']=$value['item_description'];
 					$arrayOfItemDetails[$v]['purchasing_class']=$value['purchasing_class'];
 					$arrayOfItemDetails[$v]['not_in_use']=$value['not_in_use'];
-					
-					// Each element of this drugs and servies might have own classification what
-					// form element should be used (text field, select box etc.)
-					$arrayOfItemDetails[$v]['sub_class']=$this->GetFormElement($value['sub_class']);
-					
+					$arrayOfItemDetails[$v]['sub_class']=$value['sub_class'];	
 				}
 			}
 		}
@@ -233,16 +234,17 @@ class PatientPrescription extends person {
 		$smarty->assign('LDLastName',$LDLastName);
 		$smarty->assign('LDFirstName',$LDFirstName);
 		$smarty->assign('LDBday',$LDBday);
+		$smarty->assign('sPatientNumber',$this->getValue('selian_pid',$patient_prescription_obj->pid));
+		$smarty->assign('sNameLast',$this->getValue('name_last',$patient_prescription_obj->pid));
+		$smarty->assign('sNameFirst',$this->getValue('name_first',$patient_prescription_obj->pid));
+		$smarty->assign('sBirthDay',$this->getValue('date_birth',$patient_prescription_obj->pid));
 		
 		switch ($task) {
 			case 'preselection':
 							if ($this->debug) echo 'PatientPrescription::CreatePrescription() -> task: preselection <br>';
 							
 							// using getValue method from class_persin to get patient details for this PID
-							$smarty->assign('sPatientNumber',$this->getValue('selian_pid',$patient_prescription_obj->pid));
-							$smarty->assign('sNameLast',$this->getValue('name_last',$patient_prescription_obj->pid));
-							$smarty->assign('sNameFirst',$this->getValue('name_first',$patient_prescription_obj->pid));
-							$smarty->assign('sBirthDay',$this->getValue('date_birth',$patient_prescription_obj->pid));
+
 							// using smarty array to show the tabs:
 							$purchasing_class_array = $this->GetArrayOfAllPurchasingClasses();
 							$smarty->assign('tabs', $purchasing_class_array);
@@ -256,9 +258,9 @@ class PatientPrescription extends person {
 							$smarty->display('pharmacy/prescription_preselection.tpl');
 							break;
 			case 'parameterisation':
+				
 							if ($this->debug) echo 'PatientPrescription::CreatePrescription() -> task: parameterisation <br>';
 							if ($this->debug) print_r($item_array);
-							
 							// For each selected items getting the details and serve the template with it
 							$item_details_arr = $this->GetItemDetailsByID($item_array);
 							
@@ -269,6 +271,8 @@ class PatientPrescription extends person {
 							$smarty->assign('PresFrequency1',$LDPresFrequency1);
 							$smarty->assign('PresFrequency2',$LDPresFrequency2);
 							
+							$smarty->assign('tpd',$this->tpd);
+							
 							// Load common icons
 							$img_arrow=createComIcon($root_path,'r_arrowgrnsm.gif','0');
 							$smarty->assign('pres_send_img',$img_arrow);
@@ -277,12 +281,7 @@ class PatientPrescription extends person {
 							
 							$smarty->assign('SingleDoseValue','');
 							
-							// using getValue method from class_persin to get patient details for this PID
-							$smarty->assign('sPatientNumber',$this->getValue('selian_pid',$patient_prescription_obj->pid));
-							$smarty->assign('sNameLast',$this->getValue('name_last',$patient_prescription_obj->pid));
-							$smarty->assign('sNameFirst',$this->getValue('name_first',$patient_prescription_obj->pid));
-							$smarty->assign('sBirthDay',$this->getValue('date_birth',$patient_prescription_obj->pid));
-							
+							//TODO css definition for this template not be done so far
 							$smarty->display('pharmacy/module_prescription_parameterisation.tpl');
 							
 							break;
