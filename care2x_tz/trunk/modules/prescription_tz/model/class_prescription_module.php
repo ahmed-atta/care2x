@@ -270,7 +270,7 @@ class PatientPrescription extends person {
 							$smarty->assign('PresFrequency',$LDPresFrequency);
 							$smarty->assign('PresFrequency1',$LDPresFrequency1);
 							$smarty->assign('PresFrequency2',$LDPresFrequency2);
-							
+
 							$smarty->assign('tpd',$this->tpd);
 							
 							// Load common icons
