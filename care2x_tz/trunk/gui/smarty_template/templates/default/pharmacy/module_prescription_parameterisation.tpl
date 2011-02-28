@@ -22,7 +22,7 @@
 				<td colspan="2">{{$Item.item_description}}</td>
 			</tr>
 			
-			{{ if $Item.sub_class eq "Tablets" OR $Item.sub_class eq "Syrups" OR $Item.sub_class eq "Suspensions"}}
+			{{if $Item.sub_class eq "Tablets" OR $Item.sub_class eq "Syrups" OR $Item.sub_class eq "Suspensions"}}
 					{{*
 						When we have Tabs, Syrups and Suspentions, then we have 
 						* Times per day -> Select box from 1...10
@@ -39,11 +39,11 @@
 						<td>{{$PresFrequency}}:</td>
 						<td>
 							<select id="ComboBoxPresAmount{{$Item.item_id}}" >
-							{{*
+
 							     {{for $i=1 to $tpd}}
 								     <option value="{{$i}}">{{$i}} Days</option>
 								 {{/for}}
-						    *}}
+
 							  </select>
 						</td>
 					</tr>
@@ -55,7 +55,7 @@
 						<td>{{$PresFrequency2}}:</td>
 						<td><input name="Pres_Amount" type="input" disabled="disabled" size="2" maxlength="2" value="2"></td>
 					</tr>
-			{{elseif $Item.sub_class eq "Injections" }}
+			{{elseif $Item.sub_class eq "Injections"}}
 					{{*
 						When we have Injections, we ask for "ml"
 					*}}

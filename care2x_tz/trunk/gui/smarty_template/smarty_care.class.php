@@ -39,11 +39,13 @@ class smarty_care extends Smarty {
 	* @param boolean Show copyright footer (default TRUE)
 	* @param boolean Load standard Javascript code (default TRUE)
 	*/
-	function smarty_care ($dirname, $bInit = TRUE, $bShowCopy = TRUE, $bLoadJS = TRUE) {
+	function __construct($dirname, $bInit = TRUE, $bShowCopy = TRUE, $bLoadJS = TRUE) {
 
  		global $root_path, $template_theme, $templatedir, $default_template, $sDocRoot, $LDCloseAlt, $cfg, $lang, $pgt, $GLOBAL_CONFIG;
  		
-		$this->smarty();
+ 		parent::__construct();
+ 		
+		//$this->smarty();
 
 		$this->root_path = $root_path;
 

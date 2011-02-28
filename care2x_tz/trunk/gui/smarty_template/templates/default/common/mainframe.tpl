@@ -1,7 +1,7 @@
 {{* Smarty Template - mainframe.tpl 2004-06-11 Elpidio Latorilla *}}
 {{* This is the main template that frames the main work page *}}
 
-{{config_load file=test.conf section="setup"}}
+{{config_load file="test.conf" section="setup"}}
 
 {{include file="common/header.tpl"}}
 
