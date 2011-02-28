@@ -30,6 +30,7 @@ class dental extends Core {
 	var $viewtype; # service type
 
 
+	//TODO: Marked to remove -> correct place: class_encounter (Comment by Robert)
 	function SelianFileExists($selian_pid){
 		global $db;
 		// Patch for db where the pid does not start with the predefined init
@@ -42,6 +43,7 @@ class dental extends Core {
 		} else { return false; }
 	}
 
+	//TODO: Marked to remove -> correct place: class_encounter (Comment by Robert)
 	function GetNewSelianFileNumber(){
 		global $db;
 		// Patch for db where the pid does not start with the predefined init
@@ -55,6 +57,7 @@ class dental extends Core {
 		} else { return false; }
 	}
 
+	//TODO: Marked to remove -> correct place: ? (Comment by Robert)
 	function GetNewDCMCFileNumber(){
 		global $db;
 		$this->sql="SELECT max(selian_pid) as fileno FROM care_person";
@@ -62,6 +65,7 @@ class dental extends Core {
 		($this->row=$this->result->FetchRow())? print intval($this->row['fileno']+1) : print '';
 	}
 
+	//TODO: Marked to remove (Comment by Robert)
 	function GetPidFromEncounter($encounter_nr) {
 		global $db;
 		//$db->debug=TRUE;
@@ -73,6 +77,7 @@ class dental extends Core {
 		} else { return false; }
 	}
 
+	//TODO: Marked to remove -> correct place: class_encounter (Comment by Robert)
 	# get last encounter from pid
 	function GetEncounterFromPid($pid) {
 		global $db;
@@ -86,7 +91,7 @@ class dental extends Core {
 	}
 
      // get department number
-
+	//TODO: Marked to remove -> use already existing methods for this job (Comment by Robert)
 	function getDept($encounter_nr){
 		global $db;
 		//$db->debug=TRUE;
@@ -125,7 +130,7 @@ class dental extends Core {
 	/**
 	 * find file number with PID
 	 */
-
+    //TODO: Marked to remove -> correct place: class_encounter or ~person (Comment by Robert)
 	function GetFileNoFromPID($pid){
 		global $db;
 		//$db->debug=TRUE;

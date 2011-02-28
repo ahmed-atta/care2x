@@ -144,4 +144,12 @@ $LDShowPrescriptionsofPatientsOPD = 'Show Prescriptions of Outpatients';
 $LDShowPrescriptionsofpatientsIPD = 'Show Prescriptions of Inpatients';
 
 $LDDisabled ='ITEM STATUS';
+
+$LDNotes='Notes';
+$LDPresAmount='Single dose(per intake)';
+$LDPresFrequency='Times per day';
+$LDPresFrequency1='Days';
+$LDPresFrequency2='Total Dose/Items';
+
+
 ?>
