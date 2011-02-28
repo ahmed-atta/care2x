@@ -6,8 +6,11 @@ require_once($root_path.'include/care_api_classes/class_core.php');
 require_once($root_path.'/include/care_api_classes/class_person.php');
 
 
+// prepared for later:
 require_once($root_path.'/include/care_api_classes/class_weberp_c2x.php');
 
+
+// for view-methods
 require_once($root_path.'gui/smarty_template/smarty_care.class.php');
 
 
@@ -29,8 +32,11 @@ class PatientPrescription extends person {
 	private $debug;
 	
 	private $lang_tables=array('aufnahme.php','pharmacy.php');
+	
+	public $weberp_obj;
 
 
+	
 	/*
 	 * @name: PatientPrescription
 	 * @description: CONSTRUCTOR (to have compatibilty to php < 5 the name of the class is the function name of the constructor
@@ -47,9 +53,14 @@ class PatientPrescription extends person {
 		if ($encounter_nr==NULL) {
 			return false;
 		} else {
-			$this->debug=FALSE;
+			$this->debug=false;
 			$this->encounter_nr = $encounter_nr;
-			$this->pid = $this->GetPidFromEncounter($this->encounter_nr);
+			
+			//***********************************
+			// Possible place for helper class webERP 
+			//***********************************
+				
+			
 			return true;
 		}
 	}
@@ -112,8 +123,53 @@ class PatientPrescription extends person {
 				array_push($ArrayOfPurchasingClasses,$v[0]);
 			}
 			return $ArrayOfPurchasingClasses;
-		} else {
+		} else {	
 			return FALSE;
+		}
+	}
+	
+
+	/*
+	 * @name: GetItemDetailsByID
+	 * @description: Getting the details for this item of the druglist
+	 * @parameter: the id (PK) of the main item row
+	 * @returns array or false
+	 * @author: Robert Meggle, 2011
+	 *
+	 */
+	public function GetItemDetailsByID($item_array) {
+		global $db;
+		$arrayOfItemDetails = array();
+		if ($this->debug) echo "GetItemDetailsByID()";
+		if (!is_array($item_array)) return false;
+		// Query each item for its details:
+		while (list($x,$v)=each($item_array)) {
+			// Init the 2D assoc. array, key is the item number
+			$arrayOfItemDetails[$v]['item_number']=$v;
+			$this->sql="SELECT `item_number`,`partcode`, `item_description`, `purchasing_class`, `not_in_use`, `sub_class` FROM care_tz_drugsandservices where item_id=".$v;
+			if ($res=$db->execute($this->sql)) {
+				$arr=$res->GetArray();
+				foreach ($arr as $value) {
+					//TODO: Put here the query about this item from webERP interface about availability & stuff - and add it to this array
+					$arrayOfItemDetails[$v]['item_number']=$value['item_number'];
+					$arrayOfItemDetails[$v]['partcode']=$value['partcode'];
+					$arrayOfItemDetails[$v]['item_description']=$value['item_description'];
+					$arrayOfItemDetails[$v]['purchasing_class']=$value['purchasing_class'];
+					$arrayOfItemDetails[$v]['not_in_use']=$value['not_in_use'];
+					
+					// Each element of this drugs and servies might have own classification what
+					// form element should be used (text field, select box etc.)
+					$arrayOfItemDetails[$v]['sub_class']=$this->GetFormElement($value['sub_class']);
+					
+				}
+			}
+		}
+		if (is_array($arrayOfItemDetails)===TRUE) {
+			// if there is an array at this point of the code, then we found something
+			return $arrayOfItemDetails;
+		} else {
+			// there is no array, so we had an issue at all
+			return false;
 		}
 	}
 
@@ -168,17 +224,20 @@ class PatientPrescription extends person {
 		$lang_tables =$this->lang_tables;
 		$root_path = $this->root_path;
 		include($this->root_path.'include/inc_load_lang_tables.php');
-		$this->gui_init();	
+		$this->gui_init();
+
+		// Declare values for standard headline
+		$smarty = new smarty_care('common');
+		$smarty->assign('sToolbarTitle',$this->pid);
+		$smarty->assign('LDCaseNr',$LDFileNr);
+		$smarty->assign('LDLastName',$LDLastName);
+		$smarty->assign('LDFirstName',$LDFirstName);
+		$smarty->assign('LDBday',$LDBday);
+		
 		switch ($task) {
 			case 'preselection':
 							if ($this->debug) echo 'PatientPrescription::CreatePrescription() -> task: preselection <br>';
 							
-							$smarty = new smarty_care('common');
-							$smarty->assign('sToolbarTitle',$this->pid);
-							$smarty->assign('LDCaseNr',$LDFileNr);
-							$smarty->assign('LDLastName',$LDLastName);
-							$smarty->assign('LDFirstName',$LDFirstName);
-							$smarty->assign('LDBday',$LDBday);
 							// using getValue method from class_persin to get patient details for this PID
 							$smarty->assign('sPatientNumber',$this->getValue('selian_pid',$patient_prescription_obj->pid));
 							$smarty->assign('sNameLast',$this->getValue('name_last',$patient_prescription_obj->pid));
@@ -200,12 +259,24 @@ class PatientPrescription extends person {
 							if ($this->debug) echo 'PatientPrescription::CreatePrescription() -> task: parameterisation <br>';
 							if ($this->debug) print_r($item_array);
 							
-							$smarty = new smarty_care('common');
-							$smarty->assign('sToolbarTitle',$this->pid);
-							$smarty->assign('LDCaseNr',$LDFileNr);
-							$smarty->assign('LDLastName',$LDLastName);
-							$smarty->assign('LDFirstName',$LDFirstName);
-							$smarty->assign('LDBday',$LDBday);
+							// For each selected items getting the details and serve the template with it
+							$item_details_arr = $this->GetItemDetailsByID($item_array);
+							
+							$smarty->assign('ItemDetails', $item_details_arr);
+							$smarty->assign('Notes',$LDNotes);
+							$smarty->assign('PresAmount',$LDPresAmount);
+							$smarty->assign('PresFrequency',$LDPresFrequency);
+							$smarty->assign('PresFrequency1',$LDPresFrequency1);
+							$smarty->assign('PresFrequency2',$LDPresFrequency2);
+							
+							// Load common icons
+							$img_arrow=createComIcon($root_path,'r_arrowgrnsm.gif','0');
+							$smarty->assign('pres_send_img',$img_arrow);
+							
+							// Define the form
+							
+							$smarty->assign('SingleDoseValue','');
+							
 							// using getValue method from class_persin to get patient details for this PID
 							$smarty->assign('sPatientNumber',$this->getValue('selian_pid',$patient_prescription_obj->pid));
 							$smarty->assign('sNameLast',$this->getValue('name_last',$patient_prescription_obj->pid));

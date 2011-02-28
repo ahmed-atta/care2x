@@ -1385,6 +1385,8 @@ class Encounter extends Notes {
 		    return FALSE;
 		}
 	}
+	
+	
 	/**
 	* Gets the insurance class' information based on its class_nr key.
 	*

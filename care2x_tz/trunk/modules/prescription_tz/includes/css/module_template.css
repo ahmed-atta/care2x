@@ -63,34 +63,55 @@ a:active {
   -moz-outline-style:none;
 }
 
-.item {
-	margin: 10px;
-	}
-.item_name {
-	border:1px solid #000000;
-	font-style:bolder;
-	background-color: #99CCFF;
-	text-align: center;
-	}
 
-.item_details {
-	border:1px solid #000000;
-	border-style:dashed;
-	background-color: #ADD8E6;
-	}
 
-.item_amount  {
-	width: 20%;
+.pres_element {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 5px;
+	width: 80%;
+	font-size: 1.0em;
+	border: thin solid #CCCCCC;
+
+}
+
+.pres_element_desc {
+    width: 50%;
 	float: left;
-	}
-.item_times_per_day  {
-	width: 20%;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #999999;
+}
+.pres_element_val {
+	width: 49%;
 	float: left;
-	}
-.item_total_dose {
-	width: 20%;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #999999;
+	border-left-width: thin;
+	border-left-style: solid;
+	border-left-color: #999999;
+}
 
-	}
+.pres_headline {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #CCCCCC;
+	font-size: 16px;
+	font-weight: bolder;
+	color: #000000;
+	width: 100%;
+}
+.pres_element_rows {
+	float: inherit;
+	border: thin solid #CCCCCC;
+}
+.pres_notes {
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #999999;
+	text-align: center;	
+}
 
-.item_item_notes {
-	}
+.pres_element_send {
+	text-align: right;
+	background-color: #CCCCCC;
+}

@@ -44,7 +44,7 @@ function closewin()
 }
 
 function open_pending_prescriptions(admission_type) {
-	urlholder="<?php echo $root_path;?>modules/pharmacy_tz/pharmacy_tz_pending_prescriptions.php?sid=<?php echo $sid."&lang=".$lang;?>&prescrServ=prescr&admission="+admission_type+"&comming_from=pharmacy";
+	urlholder="<?php echo $root_path;?>modules/prescription_tz/prescription.php?model=create&sid=<?php echo $sid."&lang=".$lang;?>&prescrServ=prescr&admission="+admission_type+"&comming_from=pharmacy";
 	patientwin=window.open(urlholder,"Ziel","width=1000,height=800,status=yes,menubar=no,resizable=yes,scrollbars=yes,statusbar=yes,top=0,left=0");
 	patientwin.moveTo(0,0);
 	patientwin.resizeTo(screen.availWidth,screen.availHeight);
@@ -87,6 +87,11 @@ function open_pending_prescriptions(admission_type) {
 				<TD>
 					<TABLE cellSpacing=1 cellPadding=3 width=600>
                     <TBODY class="submenu">
+                      <TR>
+                        <td align=center><img src="../../gui/img/common/default/prescription.gif" border=0 width="27" height="17"></td>
+                        <TD class="submenu_item"><nobr><a href="javascript:open_pending_prescriptions()" ><?php echo $LDDrugPrescription; ?> (NEW)</a></nobr></TD>
+                        <TD><?php echo $LDShowPrescriptionsofPatients; ?></TD>
+                      </tr>
                       <TR>
                         <td align=center><img src="../../gui/img/common/default/prescription.gif" border=0 width="27" height="17"></td>
                         <TD class="submenu_item"><nobr><a href="javascript:open_pending_prescriptions()" ><?php echo $LDDrugPrescription; ?></a></nobr></TD>

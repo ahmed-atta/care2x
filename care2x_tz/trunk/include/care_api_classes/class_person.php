@@ -233,6 +233,8 @@ class Person extends Core {
 		} else { return false; }
 	}
 
+	
+	//TODO Use the GetValue method for this job (comment by Robert)
 	function GetNewSelianFileNumber(){
 		global $db;
 		// Patch for db where the pid does not start with the predefined init
