@@ -20,11 +20,11 @@ function smarty_core_assign_smarty_interface($params, &$smarty)
             return;
         }
 
-        $_globals_map = array('g'  => '_GET',
-                             'p'  => '_POST',
-                             'c'  => '_COOKIE',
-                             's'  => '_SERVER',
-                             'e'  => '_ENV');
+        $_globals_map = array('g'  => 'HTTP_GET_VARS',
+                             'p'  => 'HTTP_POST_VARS',
+                             'c'  => 'HTTP_COOKIE_VARS',
+                             's'  => 'HTTP_SERVER_VARS',
+                             'e'  => 'HTTP_ENV_VARS');
 
         $_smarty_vars_request  = array();
 
