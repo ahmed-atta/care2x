@@ -204,7 +204,7 @@ function f_checkBedOccupancy(){
 	     $pat_count=0;
 		  while($row=$ergebnis->FetchRow())
 		  {
-		    if(stristr($row[$bed_occ['bed_patient'],'patnum'])) continue;
+		    if(stristr($row[$bed_occ['bed_patient']],'patnum')) continue;
 			else
 			 {
 				 $new_zeile[]=$row;
