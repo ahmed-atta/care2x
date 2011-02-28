@@ -1,5 +1,5 @@
 <?php
-define(COL_MAX,6); # define here the maximum number of rows for displaying the parameters
+define('COL_MAX',6); # define here the maximum number of rows for displaying the parameters
 
 error_reporting ( E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR );
 require ('./roots.php');
