@@ -4,17 +4,25 @@ ini_set('date.timezone', 'UTC');
 require_once($root_path.'/include/inc_init_xmlrpc.php');
 require_once($root_path.'include/care_api_classes/class_core.php');
 require_once($root_path.'/include/care_api_classes/class_person.php');
-
-
-// prepared for later:
-require_once($root_path.'/include/care_api_classes/class_weberp_c2x.php');
-
-
 // for view-methods
 require_once($root_path.'gui/smarty_template/smarty_care.class.php');
 
+// will be done with interfaces for this class:
+// require_once($root_path.'/include/care_api_classes/class_weberp_c2x.php');
 
-class PatientPrescription extends person {
+
+/***************************
+ * Add to the interface the methods what are been used in class PatientPrescription and class PatientPrescriptionWebERP
+ */
+interface StockMethod {
+	public function GetItemDetailsByID($item_array);
+}
+
+
+/**************************
+ * Core class of all prescription work - what is been different handled will be overwritten by interface methods
+ */
+class PatientPrescription extends person implements StockMethod  {
 	
 	/*
 	 * Current encounter number what should be handled
@@ -134,7 +142,6 @@ class PatientPrescription extends person {
 		// TODO Discussion point if that section of GetArrayOfAllPurchasingClasses() can be outsorced in private class
 		// There could be some elements in purchasing class what should be not been shown in that list
 		if (is_array($this->arr_purchasing_class_filter) && !empty($this->arr_purchasing_class_filter)) {
-			print_r($this->arr_purchasing_class_filter);
 			//$SQLfilter = " WHERE ";
 			foreach ($this->arr_purchasing_class_filter as $filter) {
 				$SQLfilter .= 'purchasing_class<>"'.$filter.'" AND ';
@@ -144,11 +151,10 @@ class PatientPrescription extends person {
 		$SQLfilter .= '1=1';
 		
 		$this->sql="SELECT purchasing_class FROM ".$this->my_druglist_table." where purchasing_class<>'' AND ".$SQLfilter." GROUP BY purchasing_class";
-		echo $this->sql;
 		if ($res=$db->execute($this->sql)) {
 			$arr=$res->GetArray();
 			// First tab should show the "my often used prescription" what can be set manually - or automatically
-			array_push ($ArrayOfPurchasingClasses,'often_used');
+			array_push ($ArrayOfPurchasingClasses,'often used');
 			foreach ($arr as $v) {
 				array_push($ArrayOfPurchasingClasses,$v[0]);
 			}
@@ -334,6 +340,56 @@ class PatientPrescription extends person {
 		if ($this->debug) echo 'PatientPrescription::DeletePrescription(); we look for encounter nuber: '.$this->encounter_nr.'';
 		return true;
 	}
+}
+
+/*********************
+ * 
+ *  Place here the methods what are different to handle when webERP is enabled and add the method declaration to the interface section at the top of this file
+ *  
+*/
+
+class PatientPrescriptionWebERP extends PatientPrescription implements StockMethod {
+		/*
+	 * @name: GetItemDetailsByID
+	 * @description: Getting the details for this item of the druglist
+	 * @parameter: the id (PK) of the main item row
+	 * @returns array or false
+	 * @author: Robert Meggle, 2011
+	 *
+	 */
+	public function GetItemDetailsByID($item_array) {
+		global $db;
+		$arrayOfItemDetails = array();
+		if ($this->debug) echo "GetItemDetailsByID()";
+		if (!is_array($item_array)) return false;
+		// Query each item for its details:
+		while (list($x,$v)=each($item_array)) {
+			// Init the 2D assoc. array, key is the item number
+			$arrayOfItemDetails[$v]['item_number']=$v;
+			$this->sql="SELECT `item_id`, `item_number`,`partcode`, `item_description`, `purchasing_class`, `not_in_use`, `sub_class` FROM care_tz_drugsandservices where item_id=".$v;
+			if ($res=$db->execute($this->sql)) {
+				$arr=$res->GetArray();
+				foreach ($arr as $value) {
+					//TODO: Put here the query about this item from webERP interface about availability & stuff - and add it to this array
+					$arrayOfItemDetails[$v]['item_id']=$value['item_id'];
+					$arrayOfItemDetails[$v]['item_number']=$value['item_number'];
+					$arrayOfItemDetails[$v]['partcode']=$value['partcode'];
+					$arrayOfItemDetails[$v]['item_description']=$value['item_description'];
+					$arrayOfItemDetails[$v]['purchasing_class']=$value['purchasing_class'];
+					$arrayOfItemDetails[$v]['not_in_use']=$value['not_in_use'];
+					$arrayOfItemDetails[$v]['sub_class']=$value['sub_class'];	
+				}
+			}
+		}
+		if (is_array($arrayOfItemDetails)===TRUE) {
+			// if there is an array at this point of the code, then we found something
+			return $arrayOfItemDetails;
+		} else {
+			// there is no array, so we had an issue at all
+			return false;
+		}
+	}
+	
 }
 
 ?>
