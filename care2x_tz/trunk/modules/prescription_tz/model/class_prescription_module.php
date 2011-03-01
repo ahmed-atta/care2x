@@ -35,6 +35,13 @@ class PatientPrescription extends person {
 	
 	public $weberp_obj;
 	
+	// Set here the filter what kind of purchasing classes of the druglist *will not be shown* in the preseleciton of prescription
+	// This can simply be overloaded - it is classified as public. 
+	// Example: 
+	// $patient_prescription_obj = new PatientPrescription($encounter_nr);
+	// $patient_prescription_obj->$arr_purchasing_class_filter = array ('supplies');
+	public $arr_purchasing_class_filter=array('supplies','supplies_laboratory');
+	
 	// Times Per Day: Set here the amount for prescriptions how many days a doctor can prescribe a drug
 	public $tpd=10;
 	
@@ -80,7 +87,7 @@ class PatientPrescription extends person {
 	 * @Author: Robert Meggle, 2011
 	 */
 	private function gui_init() {
-		
+		// TODO Open discussion point if that kind of methods could be outsorced in helper class...
 		$root_path=$this->root_path;
 		$top_dir=$this->top_dir;
 		echo $root_path;
@@ -123,9 +130,25 @@ class PatientPrescription extends person {
 		$ArrayOfPurchasingClasses=array();
 		$v='';
 		if ($this->debug) echo 'PatientPrescription::GetArrayOfAllPurchasingClasses()<br>';
-		$this->sql="SELECT purchasing_class FROM ".$this->my_druglist_table." where purchasing_class<>'' GROUP BY purchasing_class";
+
+		// TODO Discussion point if that section of GetArrayOfAllPurchasingClasses() can be outsorced in private class
+		// There could be some elements in purchasing class what should be not been shown in that list
+		if (is_array($this->arr_purchasing_class_filter) && !empty($this->arr_purchasing_class_filter)) {
+			print_r($this->arr_purchasing_class_filter);
+			//$SQLfilter = " WHERE ";
+			foreach ($this->arr_purchasing_class_filter as $filter) {
+				$SQLfilter .= 'purchasing_class<>"'.$filter.'" AND ';
+			}
+		}
+		// filling up last AND with any valid expression (more easy to read the code here later)
+		$SQLfilter .= '1=1';
+		
+		$this->sql="SELECT purchasing_class FROM ".$this->my_druglist_table." where purchasing_class<>'' AND ".$SQLfilter." GROUP BY purchasing_class";
+		echo $this->sql;
 		if ($res=$db->execute($this->sql)) {
 			$arr=$res->GetArray();
+			// First tab should show the "my often used prescription" what can be set manually - or automatically
+			array_push ($ArrayOfPurchasingClasses,'often_used');
 			foreach ($arr as $v) {
 				array_push($ArrayOfPurchasingClasses,$v[0]);
 			}
