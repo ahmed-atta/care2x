@@ -1,5 +1,5 @@
-{{* Template for department's headlines page *}}
-{{* Used by /modules/news/newscolumns.php *}}
+{{*Template for department's headlines page*}}
+{{*Used by /modules/news/newscolumns.php*}}
 
 <table width="100%">
   <tbody>
@@ -14,7 +14,7 @@
     <tr>
       <td colspan="2">
 		
-		{{* New archive list or news category #5 block *}}
+		{{*New archive list or news category #5 block*}}
 		
 		{{if $bShowArchiveList}}
 
@@ -37,7 +37,7 @@
 
 		{{/if}}
 		
-		{{* End of news category #5 block *}}
+		{{*End of news category #5 block*}}
 
 	  </td>
     </tr>

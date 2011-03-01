@@ -17,7 +17,7 @@
 		});
 </script>
 
-	{{* Include standard headline for prescription module *}}
+	{{*Include standard headline for prescription module*}}
 	{{include file='pharmacy/module_prescription_headline.tpl'}}
 	
 	{{foreach from=$ItemDetails key=k item=Item}}
