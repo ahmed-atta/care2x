@@ -9,8 +9,13 @@ $thisfile=basename($_SERVER['PHP_SELF']);
 
 require_once('./model/class_prescription_module.php');
 
+
+/******************
+ * TEST ENVIROMENT
+ */
 // for testing case -> point encounter number to an example : 
 $encounter_nr = '2010581926';
+$is_weberp_enabled=FALSE;
 /*
 
 if (!empty($_GET['encounter_nr']) || !empty($_POST['encounter_nr'])) {
@@ -29,6 +34,8 @@ if (!empty($_GET['encounter_nr']) || !empty($_POST['encounter_nr'])) {
 
 */
 
+echo $_SESSION['sess_user_name'];
+
 $debug=FALSE;
 ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 
@@ -36,7 +43,11 @@ if(!$prescription_date) $prescription_date = date("Y-m-d");
 define('NO_2LEVEL_CHK',1);
 
 // create the prescription object 
-$patient_prescription_obj = new PatientPrescription($encounter_nr);
+
+if ($is_weberp_enabled==TRUE)
+	$patient_prescription_obj = new PatientPrescription($encounter_nr);
+else 
+	$patient_prescription_obj = new PatientPrescriptionWebERP($encounter_nr);
 
 // assign the current encunter number 
 //$patient_prescription_obj->encounter_nr = $encounter_nr;
