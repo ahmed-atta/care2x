@@ -1,4 +1,4 @@
-{{* Department headline page encapsulating frame *}}
+{{*Department headline page encapsulating frame*}}
 
 {{if $bShowPrompt}}
 <table>

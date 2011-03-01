@@ -1,4 +1,4 @@
-{{* Headline page encapsulating frame *}}
+{{*Headline page encapsulating frame*}}
 
 {{if $bShowPrompt}}
 <table>

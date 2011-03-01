@@ -1,4 +1,4 @@
-{{* Headline page encapsulating frame *}}
+{{*Headline page encapsulating frame*}}
 
 <TABLE CELLSPACING=3 cellpadding=0 border="0" width="{{$news_normal_display_width}}">
 
