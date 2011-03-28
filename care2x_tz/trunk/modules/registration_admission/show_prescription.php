@@ -26,11 +26,10 @@ if (empty($encounter_nr) and !empty($pid)) {
 	$encounter_nr = $person_obj->CurrentEncounter($pid);
 	$_SESSION['sess_en'] = $encounter_nr;
 }
-$debug=TRUE;
+$debug=FALSE;
 ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 if ($debug) {
 	if (!empty($back_path)) $backpath=$back_path;
-
 	echo "file: show_prescription<br>";
     if (!isset($externalcall))
       echo "internal call<br>";
@@ -47,7 +46,7 @@ if ($debug) {
 
     echo "backpath: ".$backpath."<br>";
 
-    echo "pid:".$pid."<br>";
+    echo "pid:".$_GET[$pid]."<br>";
 
     echo "encounter_nr:".$encounter_nr."<br>";
 
@@ -66,7 +65,7 @@ $thisfile=basename($_SERVER['PHP_SELF']);
 if(!isset($mode)){
 	$mode='show';
 } elseif($mode=='create'||$mode=='update' || $mode=='delete') {
-
+   
 	include_once($root_path.'include/care_api_classes/class_prescription.php');
 	if(!isset($obj)) $obj=new Prescription;
 
