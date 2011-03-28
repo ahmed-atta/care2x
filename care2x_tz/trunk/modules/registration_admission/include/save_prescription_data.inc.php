@@ -3,7 +3,10 @@
 require_once($root_path.'include/care_api_classes/class_prescription.php');
 $presc_obj= new Prescription;
 
-$debug=false;
+$encounter_nr = $_SESSION['sess_en'];
+$issuer = $_SESSION['sess_user_name'];
+print_r($_SESSION);
+	$debug=FALSE;
 ($debug)?$db->debug=TRUE:$db->debug=FALSE;
 if ($debug) {
     if (!isset($externalcall))
@@ -23,10 +26,10 @@ if ($debug) {
 
     echo "pid:".$pid."<br>";
 
-    echo "encounter_nr:".$encounter_nr;
+    echo "encounter_nr:".$_SESSION['sess_en'];
 	
 	echo "prescrServ: ".$_GET['prescrServ'];
-}
+}  
 $i=0;
 if($mode=='delete') $arr_item_number[0] = $nr;
 foreach ($arr_item_number AS $item_number) {
@@ -70,7 +73,13 @@ foreach ($arr_item_number AS $item_number) {
   		                          `prescriber`,
   		                          `is_outpatient_prescription`,
   		                          `history`,
-  		                          `modify_id`)
+  		                          `modify_id`,
+  		                          `is_disabled`,
+  		                          `disable_id`,
+  		                          `disable_date`,
+  		                          `taken`,
+  		                          `issuer`
+  		                          )
 
   		                          VALUES (
   		                          '".$encounter_nr."',
@@ -89,10 +98,15 @@ foreach ($arr_item_number AS $item_number) {
   		                          '".$prescriber."',
   		                          1,
   		                          '".$history."',
-  		                          ''
+  		                          '',
+  		                          0,
+  		                          '',
+  		                          '0000-00-00',
+  		                          0,
+  		                          '".$issuer."' 
   		                          )";
                   $db->Execute($sql);
-				  
+
 				  //*******
  								  	// Load the visual signalling functions
 									include_once($root_path.'include/inc_visual_signalling_fx.php');
