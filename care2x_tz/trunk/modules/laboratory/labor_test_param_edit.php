@@ -29,7 +29,7 @@ $das_obj = new DrugsAndServices();
 
 # Load the date formatter */
 function cleanString($wild) {
-    return ereg_replace("[^[:alnum:]+]","_",$wild);
+    return pereg_replace("/[^[:alnum:]+]/","_",$wild);
 }
 
 if(isset($mode) && !empty($mode)) {
