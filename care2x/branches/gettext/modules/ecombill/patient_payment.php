@@ -195,7 +195,7 @@ $smarty->assign('sHiddenInputs','<input type="hidden" name="patientno" value="'.
 /**
 * show Template
 */
-$smarty->assign('sMainBlockIncludeFile','ecombill/bill_payment_header.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/bill_payment_header.tpl');
 
 $smarty->display('common/mainframe.tpl');
 ?>

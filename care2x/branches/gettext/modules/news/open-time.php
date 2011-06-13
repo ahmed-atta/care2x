@@ -70,7 +70,7 @@ $smarty->assign('sOpenTimesRows',$sTemp);
 
 $smarty->assign('sBreakFile','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  alt="'.$LDBackTxt.'"></a>');
 
-$smarty->assign('sMainBlockIncludeFile','common/opentimes_table.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/opentimes_table.tpl');
 
 $smarty->display('common/mainframe.tpl');
 

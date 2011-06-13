@@ -329,7 +329,7 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++)
  $smarty->assign('sDutyRows',$sTemp);
 
 
-$smarty->assign('sMainBlockIncludeFile','common/duty_plan_entry_frame.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/duty_plan_entry_frame.tpl');
  /**
  * show Template
  */

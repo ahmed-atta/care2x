@@ -85,7 +85,7 @@ $smarty->assign('sSubMenuBlock',$sTemp);
 
 # Assign the subframe template file name to mainframe
 
-$smarty->assign('sMainBlockIncludeFile','news/headline_news.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/headline_news.tpl');
 
   /**
  * show Template

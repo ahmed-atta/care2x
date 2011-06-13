@@ -300,7 +300,7 @@ $smarty->assign('LDBack', $LDBack);
 
  # Assign quick view template to the mainframe block
  
- $smarty->assign('sMainBlockIncludeFile','nursing/nursing-quickview.tpl');
+ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/nursing-quickview.tpl');
 
  /**
  * show Template

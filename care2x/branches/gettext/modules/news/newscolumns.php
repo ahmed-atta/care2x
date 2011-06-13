@@ -214,7 +214,7 @@ if($rows) {
 
 $smarty->assign('sMainEditorLink','<a href="'.$editorpath.'">'.$LDClk2Compose.'</a>');
 
-$smarty->assign('sMainBlockIncludeFile','news/headline_dept_newslist.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/headline_dept_newslist.tpl');
 
 $smarty->display('common/mainframe.tpl');
 

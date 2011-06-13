@@ -159,7 +159,7 @@ $smarty->assign('sBreakButton','<a href="'.$breakfile.'"><img '.createLDImgSrc($
 
 # Assign the form template to mainframe
 
- $smarty->assign('sMainBlockIncludeFile','products/supplier.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/supplier.tpl');
 
  /**
  * show Template

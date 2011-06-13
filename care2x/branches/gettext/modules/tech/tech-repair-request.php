@@ -170,7 +170,7 @@ $smarty->assign('pbCancel','<a href="'.$breakfile.'" ><img '.createLDImgSrc($roo
 $smarty->assign('sReportLink','<a href="tech-repair-advice.php'.URL_APPEND.'">'.$LDRepairReportTxt.'</a>');
 $smarty->assign('sQuestionLink','<a href="tech-questions.php'.URL_APPEND.'">'.$LDQuestionsTxt.'</a>');
 
-$smarty->assign('sMainBlockIncludeFile','tech/repair_request.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/repair_request.tpl');
 
  /**
  * show Template

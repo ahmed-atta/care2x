@@ -113,7 +113,7 @@ $smarty->assign('sHiddenInputs','<input type="hidden" name="lang" value="'. $lan
 $smarty->assign('pbSubmit','<input type="image"  '.createLDImgSrc($root_path,'savedisc.gif','0','middle').'>');
 $smarty->assign('pbCancel','<a href="'.$breakfile.'" ><img '.createLDImgSrc($root_path,'cancel.gif','0','middle').' title="'.$LDCancel.'" align="middle"></a>');
 
-$smarty->assign('sMainBlockIncludeFile','ecombill/create_item.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/create_item.tpl');
  /**
  * show Template
  */

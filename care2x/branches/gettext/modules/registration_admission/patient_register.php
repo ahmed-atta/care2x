@@ -93,7 +93,7 @@ $sCancel.=URL_APPEND.'><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt=
 
 $smarty->assign('pbCancel',$sCancel);
 
-$smarty->assign('sMainBlockIncludeFile','registration_admission/reg_input.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/reg_input.tpl');
 
 $smarty->display('common/mainframe.tpl');
 

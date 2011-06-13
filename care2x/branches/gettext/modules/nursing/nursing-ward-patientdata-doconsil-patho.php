@@ -544,7 +544,7 @@ if($edit){
  * show Template
  */
 
- $smarty->assign('sMainBlockIncludeFile','laboratory/request_pathology.tpl');
+ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/request_pathology.tpl');
  // $smarty->display('debug.tpl');
 
  $smarty->display('common/mainframe.tpl');

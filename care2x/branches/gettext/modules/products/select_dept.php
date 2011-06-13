@@ -123,7 +123,7 @@ $sTemp = ob_get_contents();
 
 $smarty->assign('sBackLink','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0').' alt="'.$LDCloseAlt.'">');
 
- $smarty->assign('sMainBlockIncludeFile','or/select_dept.tpl');
+ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/select_dept.tpl');
 
  /**
  * show Template

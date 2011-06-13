@@ -248,7 +248,7 @@ $smarty->assign('pbCancel','<a href="'.$breakfile.'" ><img '.createLDImgSrc($roo
 $smarty->assign('sReportLink','<a href="tech-repair-advice.php'.URL_APPEND.'">'.$LDRepairReportTxt.'</a>');
 $smarty->assign('sRepairLink','<a href="tech-repair-request.php'.URL_APPEND.'">'.$LDReRepairTxt.'</a>');
 
-$smarty->assign('sMainBlockIncludeFile','tech/send_inquiry.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/send_inquiry.tpl');
 
  /**
  * show Template

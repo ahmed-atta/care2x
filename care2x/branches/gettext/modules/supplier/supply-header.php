@@ -41,7 +41,7 @@ $breakfile=$root_path.'modules/medstock/medstock.php '.URL_APPEND;
 
  $smarty->assign('LDCatalog',$LDCatalogSupplier);
  $smarty->assign('LDBasket',$LDBasket);
-$smarty->assign('sMainBlockIncludeFile','products/ordering_header.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/ordering_header.tpl');
 
 $smarty->display('common/mainframe.tpl');
 ?>

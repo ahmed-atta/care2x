@@ -81,7 +81,7 @@ $smarty->assign('sRepairLink','<a href="tech-repair-request.php'.URL_APPEND.'">'
 $smarty->assign('sReportLink','<a href="tech-repair-advice.php'.URL_APPEND.'">'.$LDRepairReportTxt.'</a>');
 $smarty->assign('sQuestionLink','<a href="tech-questions.php'.URL_APPEND.'">'.$LDQuestionsTxt.'</a>');
 
-$smarty->assign('sMainBlockIncludeFile','tech/acknowledge.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/acknowledge.tpl');
 
  /**
  * show Template

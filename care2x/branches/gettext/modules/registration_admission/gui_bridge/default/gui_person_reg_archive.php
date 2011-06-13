@@ -404,7 +404,7 @@ $sTemp = ob_get_contents();
 ob_end_clean();
 $smarty->assign('sMainDataBlock',$sTemp);
 
-$smarty->assign('sMainBlockIncludeFile','registration_admission/reg_plain.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/reg_plain.tpl');
 
 # Show mainframe
 

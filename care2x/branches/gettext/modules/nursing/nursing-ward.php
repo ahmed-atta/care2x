@@ -684,7 +684,7 @@ if(!$edit){
 
 # Assign the submenu to the mainframe center block
 
- $smarty->assign('sMainBlockIncludeFile','nursing/ward_occupancy.tpl');
+ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/ward_occupancy.tpl');
 
  /**
  * show Template  

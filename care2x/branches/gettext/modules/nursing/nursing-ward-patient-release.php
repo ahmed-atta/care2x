@@ -278,7 +278,7 @@ if(($mode=='release')&&($released)) $sBreakButton= '<img '.createLDImgSrc($root_
 
 $smarty->assign('pbCancel','<a href="'.$breakfile.'">'.$sBreakButton.'</a>');
 
-$smarty->assign('sMainBlockIncludeFile','nursing/discharge_patient_form.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/discharge_patient_form.tpl');
 
  /**
  * show Template

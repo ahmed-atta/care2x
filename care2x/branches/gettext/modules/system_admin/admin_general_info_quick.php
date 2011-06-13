@@ -104,7 +104,7 @@ $smarty->assign('sCancel','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_
 
 # Assign template as include file to the mainframe template
 
-$smarty->assign('sMainBlockIncludeFile','system_admin/quick_informer.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/quick_informer.tpl');
  /**
  * show Template
  */

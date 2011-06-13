@@ -171,7 +171,7 @@ $smarty->assign('sSubmitSelect','<input type=hidden name="sid" value="'.$sid.'">
 	<input type=hidden name="lang" value="'.$lang.'">
 	<input  type="image" '.createLDImgSrc($root_path,'auswahl2.gif','0').'>');
 
- $smarty->assign('sMainBlockIncludeFile','laboratory/test_groups.tpl');
+ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/test_groups.tpl');
 
  /**
  * show Template

@@ -97,7 +97,7 @@ while(list($x,$v)=each($aSubMenuItem)){
 
 # Assign the submenu to the mainframe center block
 
- $smarty->assign('sMainBlockIncludeFile','system_admin/submenu_edv.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/submenu_edv.tpl');
 
   /**
  * show Template
