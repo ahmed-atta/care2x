@@ -486,7 +486,7 @@ $smarty->assign('sAdmitLink','<img '.createComIcon($root_path,'varrow.gif','0').
 $smarty->assign('sSearchLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="admission_data_search.php'.URL_APPEND.'">'.$LDAdmWantSearch.'</a>');
 $smarty->assign('sArchiveLink','<img '.createComIcon($root_path,'varrow.gif','0').'> <a href="admission_list.php'.URL_APPEND.'&newdata=1">'.$LDAdmWantArchive.'</a>');
 
-$smarty->assign('sMainBlockIncludeFile','registration_admission/admit_show.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/admit_show.tpl');
 
 $smarty->display('common/mainframe.tpl');
 

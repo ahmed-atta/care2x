@@ -136,7 +136,7 @@ $smarty->assign('sHiddenInputs','<input type="hidden" name="hidden" value="'. $i
 								<input type="hidden" name="sid" value="'. $sid .'">
 								<input type="hidden" name="full_en" value="'. $full_en .'">');
 
-$smarty->assign('sMainBlockIncludeFile','ecombill/bill_items.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/bill_items.tpl');
 
 $smarty->display('common/mainframe.tpl');
 ?>

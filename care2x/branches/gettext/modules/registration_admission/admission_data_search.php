@@ -393,7 +393,7 @@ $smarty->assign('sPostText','<a href="admission_list.php'.URL_APPEND.'">'.$LDAdm
 
 $smarty->assign('sMainIncludeFile','registration_admission/admit_search_main.tpl');
 
-$smarty->assign('sMainBlockIncludeFile','registration_admission/admit_plain.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/admit_plain.tpl');
 
 $smarty->display('common/mainframe.tpl');
 

@@ -517,7 +517,7 @@ ob_end_clean();
 
 $smarty->assign('sMainDataBlock',$sTemp);
 
-$smarty->assign('sMainBlockIncludeFile','registration_admission/admit_plain.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/admit_plain.tpl');
 
 $smarty->display('common/mainframe.tpl');
 

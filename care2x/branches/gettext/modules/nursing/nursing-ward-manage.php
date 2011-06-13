@@ -55,7 +55,7 @@ $smarty->assign('LDBack', $LDBack);
 
 # Assign the include file to main frame template
 
- $smarty->assign('sMainBlockIncludeFile','nursing/ward_manage_submenu.tpl');
+ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/ward_manage_submenu.tpl');
 
  /**
  * show Template

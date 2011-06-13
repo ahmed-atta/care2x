@@ -69,7 +69,7 @@ if($enc_obj->Is_Discharged()){
 
 }
 
-# Set the table columns´ classes
+# Set the table columnsï¿½ classes
 $smarty->assign('sClassItem','class="adm_item"');
 $smarty->assign('sClassInput','class="adm_input"');
 
@@ -318,6 +318,6 @@ if(($mode!='show'&&!$nolist) ||($mode=='show'&&$nolist&&$rows>1)){
 
 $smarty->assign('pbBottomClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').'  title="'.$LDCancelClose.'"  align="absmiddle"></a>');
 
-$smarty->assign('sMainBlockIncludeFile','medocs/main.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/main.tpl');
 $smarty->display('common/mainframe.tpl');
 ?>

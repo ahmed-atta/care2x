@@ -84,7 +84,7 @@ include('includes/inc_news_display_one.php');
 
 $smarty->assign('sBackLink','<a href="'.$sReturn.'"><img '.createComIcon($root_path,'l-arrowgrnlrg.gif','0').'><font SIZE=-1 color="#006600"> '.$LDBackTxt.'</a>');
 
-$smarty->assign('sMainBlockIncludeFile','news/headline_dept_news.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/headline_dept_news.tpl');
 
 $smarty->display('common/mainframe.tpl');
 

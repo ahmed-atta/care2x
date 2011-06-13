@@ -485,7 +485,7 @@ $smarty->assign('sBottomControls',$sTemp);
 
 $smarty->assign('pbCancel','<a href="'.$returnfile.URL_APPEND.$buf.'&target='.$target.'&mode=show&type_nr='.$type_nr.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt="'.$LDCancelClose.'"></a>');
 
-$smarty->assign('sMainBlockIncludeFile','registration_admission/common_report.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/common_report.tpl');
 
 $smarty->display('common/mainframe.tpl');
 

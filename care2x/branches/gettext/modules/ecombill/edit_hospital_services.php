@@ -119,7 +119,7 @@ $smarty->assign('sHiddenInputs','<input type="hidden" name="itemcd" value="'. $i
 					<input type="hidden" name="sid" value="'. $sid .'">
 					<input type="hidden" name="full_en" value="'. $full_en .'">');
 
-$smarty->assign('sMainBlockIncludeFile','ecombill/edit_item.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/edit_item.tpl');
 
 $smarty->display('common/mainframe.tpl');
 ?>

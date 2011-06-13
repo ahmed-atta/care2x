@@ -47,7 +47,7 @@ switch($cat)
   $smarty->assign('LDCatalog',$LDCatalog);
  $smarty->assign('LDBasket',$LDBasket);
 
-$smarty->assign('sMainBlockIncludeFile','products/ordering_header.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/ordering_header.tpl');
 
 $smarty->display('common/mainframe.tpl');
 ?>

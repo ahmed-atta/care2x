@@ -432,7 +432,7 @@ $smarty->assign('sClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_p
 
 # Assign the include file to main frame template
 
- $smarty->assign('sMainBlockIncludeFile','laboratory/chemlab_data_results_show.tpl');
+ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/chemlab_data_results_show.tpl');
 
  /**
  * show Template

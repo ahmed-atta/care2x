@@ -98,7 +98,7 @@ $smarty->assign('LDBack', $LDBack);
 
 # Assign the submenu to the mainframe center block
 
- $smarty->assign('sMainBlockIncludeFile','laboratory/submenu_lab.tpl');
+ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/submenu_lab.tpl');
 
  /**
  * show  Mainframe Template

@@ -363,7 +363,7 @@ if($rows==1) {
 }
 
 if($rows==1){
-	$smarty->assign('sMainBlockIncludeFile','nursing/ward_profile.tpl');
+	$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/ward_profile.tpl');
 }else{
 	# Assign the page output to main frame template
 	$smarty->assign('sMainFrameBlockData',$sTemp);

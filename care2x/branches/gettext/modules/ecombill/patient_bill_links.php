@@ -131,7 +131,7 @@ $smarty->assign('sHiddenInputs','<input type="hidden" name="patientno" value="'.
 								<input type="hidden" name="lang" value="'. $lang .'">
 								<input type="hidden" name="sid" value="'. $sid .'">');
 
-$smarty->assign('sMainBlockIncludeFile','ecombill/bill_payment.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/bill_payment.tpl');
 
 $smarty->display('common/mainframe.tpl');
 ?>

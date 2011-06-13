@@ -183,7 +183,7 @@ while(list($x,$v)=each($aSubMenuItem)){
 }
 
 
-$smarty->assign('sMainBlockIncludeFile','ecombill/billing_menu_ecombill.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/billing_menu_ecombill.tpl');
  /**
  * show Template
  */

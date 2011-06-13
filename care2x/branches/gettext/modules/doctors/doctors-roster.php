@@ -176,7 +176,7 @@ $sTemp = ob_get_contents();
 
 $smarty->assign('sDutyRows',$sTemp);
 
- $smarty->assign('sMainBlockIncludeFile','common/duty_plan.tpl');
+ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/duty_plan.tpl');
 
  /**
  * show Template

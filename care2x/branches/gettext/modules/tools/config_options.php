@@ -94,7 +94,7 @@ $smarty->assign('LDBack', $LDBack);
   if(($cfg['mask']==1)||($cfg['mask']==''))  $smarty->assign('LDDisplayImg','<a href="'.$root_path.'index.php'.URL_APPEND.$sMask.'" target="_top"><img '.createComIcon($root_path,'redirects.gif','0','',FALSE).'></a>');
  	else $smarty->assign('LDDisplayImg','<a href="'.$root_path.'index.php'.URL_APPEND.$sMask.'" target="_top"><img '.createComIcon($root_path,'redirects.gif','0','',FALSE).'></a>');
 
-$smarty->assign('sMainBlockIncludeFile','main/config_options.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/config_options.tpl');
  /**
  * show Template
  */

@@ -63,7 +63,7 @@ $smarty->assign('LDBack', $LDBack);
 
  # Assign the form template to mainframe
 
- $smarty->assign('sMainBlockIncludeFile','products/form.tpl');
+ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/form.tpl');
 
  /**
  * show Template

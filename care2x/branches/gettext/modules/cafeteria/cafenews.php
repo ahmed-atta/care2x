@@ -136,7 +136,7 @@ $smarty->assign('sCafeNewsIncludeFile','cafeteria/cafenews_list.tpl');
 
 # Assign the subframe template file name to mainframe
 
-$smarty->assign('sMainBlockIncludeFile','cafeteria/cafenews.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/cafeteria/cafenews.tpl');
 
   /**
  * show Template

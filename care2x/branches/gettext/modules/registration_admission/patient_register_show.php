@@ -175,7 +175,7 @@ $sCancel.=URL_APPEND.'><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt=
 $smarty->assign('pbCancel',$sCancel);
 
 # Assign the page template to mainframe block
-$smarty->assign('sMainBlockIncludeFile','registration_admission/reg_show.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/reg_show.tpl');
 
 # Show main frame
 $smarty->display('common/mainframe.tpl');

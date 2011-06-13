@@ -90,7 +90,7 @@ ob_end_clean();
 
 $smarty->assign('sSubMenuRows',$sTemp);
 
-$smarty->assign('sMainBlockIncludeFile','common/submenu_tableframe.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/submenu_tableframe.tpl');
 
  /**
  * show Template

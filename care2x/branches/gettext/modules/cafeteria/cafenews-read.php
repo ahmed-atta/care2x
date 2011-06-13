@@ -117,7 +117,7 @@ if(!isset($picalign) || empty($picalign)) {
 
 # Assign the subframe template file name to mainframe
 
-$smarty->assign('sMainBlockIncludeFile','cafeteria/cafenews.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/cafeteria/cafenews.tpl');
 
   /**
  * show Template

@@ -468,7 +468,7 @@ $smarty->assign('LDImDone',"<a href=\"Javascript:gethelp('lab.php','input','done
 
 # Assign the include file to mainframe
 
-$smarty->assign('sMainBlockIncludeFile','laboratory/chemlab_data_results.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/chemlab_data_results.tpl');
 
 /**
  * show Template

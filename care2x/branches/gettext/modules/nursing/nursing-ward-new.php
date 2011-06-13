@@ -177,7 +177,7 @@ $smarty->assign('sSaveButton','<input type="hidden" name="sid" value="'.$sid.'">
 <input type="hidden" name="lang" value="'.$lang.'">
 <input type="submit" value="'.$LDCreateStation.'">');
 
-$smarty->assign('sMainBlockIncludeFile','nursing/ward_create_form.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/ward_create_form.tpl');
 
  /**
  * show Template
