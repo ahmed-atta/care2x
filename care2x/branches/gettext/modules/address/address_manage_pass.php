@@ -33,17 +33,18 @@ $errbuf=$LDNursingManage;
 
 require(CARE_BASE.'/include/helpers/inc_passcheck_head.php');
 ?>
-<BODY  onLoad="document.passwindow.userid.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
-<FONT    SIZE=-1  FACE="Arial">
+<BODY  onLoad="document.passwindow.userid.focus();" bgcolor="<?php echo $cfg['body_bgcolor']; ?>">
+<FONT    SIZE="-1" FACE="Arial">
 
 <P>
 
 <img <?php echo createComIcon(CARE_BASE,'home50x50.gif','0','top') ?>>
 <FONT  COLOR=<?php echo $cfg[top_txtcolor] ?>  SIZE=6  FACE="verdana"> <b><?php echo $LDAddressMngr; ?></b></font>
-<table width=100% border=0 cellpadding="0" cellspacing="0"> 
+<table width=100% border="0" cellpadding="0" cellspacing="0"> 
 <?php require(CARE_BASE.'/include/helpers/inc_passcheck_mask.php') ?>  
 <p>
 <?php require(CARE_BASE.'/include/helpers/inc_load_copyrite.php'); ?>
 </FONT>
+</table>
 </BODY>
 </HTML>
