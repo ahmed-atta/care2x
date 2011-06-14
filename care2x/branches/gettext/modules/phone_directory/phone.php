@@ -80,7 +80,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 <FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  SIZE=6 > <b><?php echo "$LDPhoneDir $LDSearch" ?></b></font>
 <table width=100% border=0 cellpadding="0" cellspacing="0">
 <tr>
-<td colspan=3><img <?php echo createLDImgSrc($root_path,'such-b.gif','0') ?>><a href="phone_list.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'phonedir-gray.gif','0') ?> <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><a href="phone_edit_pass.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'newdata-gray.gif','0') ?> <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a></td>
+<td colspan=3><img <?php echo createLDImgSrc($root_path,'such-b.gif','0') ?>><a href="phone_list.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'phonedir-gray.gif','0') ?> <?php if($cfg['dhtml'])echo'class="fadeOut" >';?>/></a><a href="phone_edit_pass.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'newdata-gray.gif','0') ?> <?php if($cfg['dhtml'])echo'class="fadeOut" >';?>/></a></td>
 </tr>
 <tr >
 <td class="passborder" colspan=3>
