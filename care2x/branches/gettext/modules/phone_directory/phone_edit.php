@@ -110,7 +110,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 	<table width=100% border=0 cellspacing=0 cellpadding=0>
 	<tr>
 	<td colspan=3><nobr>
-	<a href="phone_list.php<?php echo URL_APPEND.'&edit=$edit'; ?>"><img <?php echo createLDImgSrc($root_path,'phonedir-gray.gif','0') ?> <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><img <?php echo createLDImgSrc($root_path,'newdata-b.gif','0') ?>></nobr></td>
+	<a href="phone_list.php<?php echo URL_APPEND.'&edit=$edit'; ?>"><img <?php echo createLDImgSrc($root_path,'phonedir-gray.gif','0') ?> <?php if($cfg['dhtml'])echo'class="fadeOut" >';?>/></a><img <?php echo createLDImgSrc($root_path,'newdata-b.gif','0') ?>></nobr></td>
 	</tr>
 	<tr>
 	<td class="wardlisttitlerow" colspan=3 >
