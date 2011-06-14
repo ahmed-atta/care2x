@@ -57,7 +57,7 @@ ob_start();
 <TD colspan=3 align=middle>
 <input name="ReadOut" type="Text" size=24 value="0" width=100%>
 </TD>
-<TD
+<TD>
 </TD>
 <TD>
 <input name="btnClear" type="Button" value="  C  " onclick="Clear()">
