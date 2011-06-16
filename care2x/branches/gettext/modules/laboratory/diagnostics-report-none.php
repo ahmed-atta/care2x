@@ -26,7 +26,7 @@ $breakfile=$root_path."modules/nursing/nursing-ward-patientdata.php".URL_APPEND.
 
 <table border=0>
   <tr>
-    <td><img <?php  echo createMascot($root_path,'mascot1_r.gif','0') ?>/></td>
+    <td><img <?php  echo createMascot($root_path,'mascot1_r.gif','0') ?></td>
     <td class="warnprompt"><?php echo $LDNoDiagReport ?></td>
   </tr>
 </table>
