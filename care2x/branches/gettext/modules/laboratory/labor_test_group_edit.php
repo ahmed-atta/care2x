@@ -177,26 +177,27 @@ echo $tg [ 'name' ] ;
 		?>" height="10"
 			align=right><nobr><a href="javascript:gethelp('lab_param_edit.php')"><img
 			<?php
-			echo createLDImgSrc ( $root_path, 'hilfe-r.gif', '0' ) ?>/>
+			echo createLDImgSrc ( $root_path, 'hilfe-r.gif', '0' ) ?>
 			<?php
 			if ($cfg [ 'dhtml' ])
 				echo 'class="fadeOut" >' ;
 			?></a><a
 			href="javascript:window.close()"><img
 			<?php
-			echo createLDImgSrc ( $root_path, 'close2.gif', '0' ) ?>/>
+			echo createLDImgSrc ( $root_path, 'close2.gif', '0' ) ?>
 			<?php
 			if ($cfg [ 'dhtml' ])
 				echo 'class="fadeOut" >' ;
 			?></a></nobr></td>
 	</tr>
 	<tr align="center">
-		<td bgcolor="#dde1ec" colspan="2"><FONT SIZE=-1 FACE="Arial">
+		<td bgcolor=#dde1ec colspan=2><FONT SIZE=-1 FACE="Arial">
 
 
-		<table border="0" bgcolor="#ffdddd" cellspacing="1" cellpadding="1" width="100%">
+		<table border=0 bgcolor=#ffdddd cellspacing=1 cellpadding=1
+			width="100%">
 			<tr>
-				<td bgcolor="#ff0000" colspan="2"><FONT SIZE="2" FACE="Verdana,Arial"
+				<td bgcolor=#ff0000 colspan=2><FONT SIZE=2 FACE="Verdana,Arial"
 					color="#ffffff"> <b>
 <?php
 echo $tg [ 'name' ] ;

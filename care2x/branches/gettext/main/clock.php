@@ -58,7 +58,7 @@ function gethelp(x,s,x1,x2,x3)
 			<div class="buttons">
 				<?php echo '<a href="javascript:window.history.back()"><img ' . createLDImgSrc ( CARE_BASE , 'back2.gif', '0' ) . '></a>'; ?>
 				<a href="javascript:gethelp('')">
-					<img <?php echo createLDImgSrc ( CARE_BASE , 'hilfe-r.gif', '0' )?> "/>
+					<img <?php echo createLDImgSrc ( CARE_BASE , 'hilfe-r.gif', '0' )?> 
 				</a>
 				<a href="<?php echo $breakfile; ?>" />
 					<img <?php echo createLDImgSrc ( CARE_BASE , 'close2.gif', '0' )?> alt="<?php echo $LDClose?>"/>
