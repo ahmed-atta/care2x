@@ -14,3 +14,5 @@ uploads/radiology/diagnosis/*
 uploads/radiology/dicom_img/*
 uploads/radiology/xrayfilms/*
 modules/tcm
+build/1
+
