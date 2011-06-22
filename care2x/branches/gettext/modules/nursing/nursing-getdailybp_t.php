@@ -268,7 +268,7 @@ if($bpcount||$tempcount){
  						 <tr>
    						 <td><input type="text" name="ttime'.$i.'" size=6 maxlength=5 value="'.$bb['msr_time'].'" onKeyUp="isvalidtime(this,\''.$lang.'\')">
         				</td>
-   						 <td class="v12"><input type="text" name="tdata'.$i.'" size=8 maxlength=7 value="'.$bb['value'].'">'C'.$GLOBAL_CONFIG['measure_temp_unit_id'].'</td>
+   						 <td class="v12"><input type="text" name="tdata'.$i.'" size=8 maxlength=7 value="'.$bb['value'].'">'.$GLOBAL_CONFIG['measure_temp_unit_id'].'</td>
   						</tr>
   						';
 			}
