@@ -1,81 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="care2x_install_build" basedir="." default="main">
- 
-        <property name="src" value="${project.basedir}/../" override="true" />
-        <property name="dist" value="../../c2x_dist" override="true" />
-		
-		<target name="main">
-			<echo message="+------------------------------------------+"/>
-			<echo message="|                                          |"/>
-			<echo message="|     Creating distribution directory      |"/>
-			<echo message="|                                          |"/>
-			<echo message="+------------------------------------------+"/>		
-				
-			<mkdir dir="${dist}" />
-				
-			
-			<echo message="+------------------------------------------+"/>
-			<echo message="|                                          |"/>
-			<echo message="|                 Copying files            |"/>
-			<echo message="|                                          |"/>
-			<echo message="+------------------------------------------+"/>		
+<?xml version="1.0" ?>
+<project name="siis" basedir="." default="lint">
 
-			<copy todir="${dist}">
-		        <fileset dir="${src}" id="allfiles">
-		                <include name="cache/*" />
-		                <include name="classes/**" />
-		                <include name="conf/**" />
-		                <include name="docs/**" />
-		                <include name="global_conf/**" />
-		                <include name="gui/**" />
-		                <include name="help/**" />
-		                <include name="include/**" />
-		                <include name="installer/**" />
-		                <include name="js/**" />
-		                <include name="language/**" />
-		                <include name="main/**" />
-		                <include name="modules/**" />
-		                <include name="plugins/**" />
-		                <include name="uploads/**" />
-		                <include name="userconfig/**" />
-		                <include name="blank.htm" />
-		                <include name="blank.php" />
-		                <include name="chklang.php" />
-		                <include name="copy_notice.txt" />
-		                <include name="favicon.ico" />
-		                <include name="index.htm" />
-		                <include name="index.html" />
-		                <include name="index.php" />
-		                <include name="legal_gnu_gpl.htm" />
-		                <include name="roots.php" />
-		                	
-		        		<exclude name="installer/install_*" />
-						<exclude name="cache/barcodes/*.png" />
-						<exclude name="cache/cache/*" />
-						<exclude name="cache/templates_c/default/*.php"/>
-						<exclude name="uploads/logos_dept/*"/>
-						<exclude name="uploads/medstock/img/*"/>
-						<exclude name="uploads/radiology/diagnosis/*"/>
-						<exclude name="uploads/radiology/dicom_img/*"/>
-						<exclude name="uploads/radiology/xrayfilms/*"/>
-						<exclude name="uploads/photos/registration/*"/>
-						<exclude name="uploads/photos/news/*"/>
-						<exclude name="uploads/photos/encounter/*"/>
-		        </fileset>
-		    </copy>
+<tstamp/>
 
-			<copy todir="${dist}/installer" overwrite="true">
-				<mapper type="regexp" from="install_[0-9]*\.php" to="install.php"/>
-				<fileset dir="${src}" id="installerfile">
-					<include name="installer/*.php" />
-				</fileset>
-			</copy>
-			
-            <zip destfile="${dist}/../care2x.zip" basedir="${dist}">
-            </zip>
-			
-            <tar destfile="${dist}/../care2x.tar.gz" basedir="${dist}" compression="gzip">
-            </tar>
+<property file="./build.properties" />
+<!--
+<target name="migrate" description="database migrations">
+    <taskdef name="dbdeploy" classname="phing.tasks.ext.dbdeploy.DbDeployTask"/>
 
-		</target>
+    <property name="build.dbdeploy.deployfile" value="${build.dir}/sql/deploy-${DSTAMP}${TSTAMP}.sql" />
+    <property name="build.dbdeploy.undofile" value="${build.dir}/sql/undo-${DSTAMP}${TSTAMP}.sql" />
+
+    <dbdeploy
+        url="mysql:host=${db.host};dbname=${db.name}"
+        userid="${db.user}"
+        password="${db.pass}"
+        dir="${build.dir}/sql"
+        outputfile="${build.dir}/${build.dbdeploy.deployfile}"
+        undooutputfile="${build.dir}/${build.dbdeploy.undofile}" />
+
+    <exec
+        command="${progs.mysql} -h${db.host} -u${db.user} -p${db.pass} ${db.name} &lt; ${build.dbdeploy.deployfile}"
+        dir="."
+        checkreturn="true" />
+</target>
+-->
+<target name="lint" depends="delete_cache" >
+   <phplint haltonfailure="true" deprecatedAsError="true" cachefile="true">
+      <fileset dir="${build.dir}">
+         <include name="*.php" />
+         <include name="**/*.php" />
+      </fileset>
+   </phplint>
+</target>
+
+<fileset dir="${build.dir}" id="delete_cache_files">
+  <include name="cache/templates_c/default/*.php" />
+</fileset>
+
+<target name="delete_cache">
+  <delete>
+    <fileset refid="delete_cache_files" />
+  </delete>
+</target>
+
+<target name="mercurial" depends="lint">
+	<exec command="hg commit -m '${msg}' " dir="../" escape="false" />
+</target>
+
+
 </project>
+
