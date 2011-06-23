@@ -5,7 +5,7 @@ define('CARE_BASE', substr(dirname(__FILE__),0,-15 ));
 require_once CARE_BASE . 'classes/Log/Log.php';
 $mask = $mask = Log::MAX(PEAR_LOG_INFO);
 $conf = array ('lineFormat' => 	'%2$s [%3$s] %4$s  - %5$s:%6$s');
-$logger = &Log::singleton('firebug', '', 'c2x-log', $conf );
+$logger = Log::singleton('firebug', '', 'c2x-log', $conf );
 //$logger = Log::singleton('win', 'LogWindow', 'ident', $conf);
 $logger->setMask($mask);
 function errorHandler($code, $message, $file, $line)

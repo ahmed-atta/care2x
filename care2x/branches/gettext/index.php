@@ -140,15 +140,6 @@ $ciphersid=$enc_hcemd5->encodeMimeSelfRand($sid);
 setcookie($ck_sid_buffer,$ciphersid);
 $_COOKIE[$ck_sid_buffer]=$ciphersid;
 
-
-#
-# Simple counter, counts all hits including revisits
-# Uncomment the following line  if you  like to count the hits, then make sure
-# that the path /counter/hits/ and the file /counter/hitcount.txt  are system writeable
-#
-// include('./counter/count.php');
-
-
 if((isset($boot)&&$boot)||!isset($_COOKIE['ck_config'])||empty($_COOKIE['ck_config'])) {
     configNew($bname,$bversion,$user_id,$ip,$cfgid);
 } else {
