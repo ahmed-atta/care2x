@@ -166,7 +166,7 @@ body {
 		{{/foreach}}
 		</li>
 	</ul>
-	<img style="float: left;" alt="" src={{$care_gui}}modules/menu/view/menu_right.png" />
+	<img style="float: left;" alt="" src="{{$care_gui}}modules/menu/view/menu_right.png" />
 </div>
 <div style="float: none; clear: both;"></div>
 
