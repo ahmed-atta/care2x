@@ -2,7 +2,7 @@
 # To see how the script locking is implemented in this script see /development/dev_docs/script_locking.txt 
 
 #------begin------ This protection code was suggested by Luki R. luki@karet.org ----
-if (stristr('inc_front_chain_lang.php',$PHP_SELF)) 	die('<meta http-equiv="refresh" content="0; url=../">');
+if (stristr($PHP_SELF,'inc_front_chain_lang.php')) 	die('<meta http-equiv="refresh" content="0; url=../">');
 #------end-----
 
 # Set  to TRUE if you want to disable the time-out feature,
@@ -62,17 +62,17 @@ require_once('inc_charset_fx.php'); // charset functions
 
 if(!defined('NO_CHAIN')||NO_CHAIN!=1){
    $no_valid=0;
-   
+
    if(!isset($sid)) $sid=NULL;
    
    $ck_sid_buffer='ck_sid'.$sid;
-   
+
    define('INIT_DECODE',1); # set flag to decrypt
 	
    include('inc_init_crypt.php'); # initialize crypt 
-	
-   $clear_ck_sid = $dec_hcemd5->DecodeMimeSelfRand($_COOKIE[$ck_sid_buffer]);
 
+   $clear_ck_sid = $dec_hcemd5->DecodeMimeSelfRand($_COOKIE[$ck_sid_buffer]);
+   
 	$tnow=date('His');
    // echo $tnow."<p>";
 	$time_out=FALSE;
@@ -134,7 +134,6 @@ if(!defined('NO_CHAIN')||NO_CHAIN!=1){
 	}
 
    if ($no_valid) {
-
        if(getLang('invalid-access-warning.php')) {
 	       header('Location:'.CARE_GUI .'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); 
 	   }

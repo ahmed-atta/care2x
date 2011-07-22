@@ -6,7 +6,7 @@
 /*------begin------ 
 * This protection code was suggested by Luki R. luki@karet.org 
 */
-if (stristr('inc_db_makelink.php',$PHP_SELF)) die('<meta http-equiv="refresh" content="0; url=../">');
+if (stristr($PHP_SELF,'inc_db_makelink.php')) die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
 if(!isset($lang)) include(CARE_BASE.'chklang.php');

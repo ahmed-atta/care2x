@@ -1,7 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (stristr('save_admission_data.inc.php',$PHP_SELF)) 
-	die('<meta http-equiv="refresh" content="0; url=../">');	
+if (stristr($PHP_SELF,'save_admission_data.inc.php')) die('<meta http-equiv="refresh" content="0; url=../">');	
 	
 $obj->setDataArray($_POST);
 	
