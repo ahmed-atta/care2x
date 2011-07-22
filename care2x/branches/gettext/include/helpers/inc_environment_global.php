@@ -2,40 +2,42 @@
 //define the base path for all the following includes
 define('CARE_BASE', substr(dirname(__FILE__),0,-15 ));
 
-require_once CARE_BASE . 'classes/Log/Log.php';
-$mask = $mask = Log::MAX(PEAR_LOG_INFO);
-$conf = array ('lineFormat' => 	'%2$s [%3$s] %4$s  - %5$s:%6$s');
-$logger = Log::singleton('firebug', '', 'c2x-log', $conf );
-//$logger = Log::singleton('win', 'LogWindow', 'ident', $conf);
-$logger->setMask($mask);
-function errorHandler($code, $message, $file, $line)
-{
-    global $logger;
 
-    /* Map the PHP error to a Log priority. */
-    switch ($code) {
-    case E_WARNING:
-    case E_USER_WARNING:
-        $priority = PEAR_LOG_WARNING;
-        break;
-    case E_NOTICE:
-    case E_USER_NOTICE:
-        $priority = PEAR_LOG_NOTICE;
-        break;
-    case E_ERROR:
-    case E_USER_ERROR:
-        $priority = PEAR_LOG_ERR;
-        break;
-    default:
-        $priority = PEAR_LOG_INFO;
-    }
-
-    $logger->log($message . ' in ' . $file . ' at line ' . $line,
-                 $priority);
+$debug = false;
+if ($debug==true) {
+	require_once CARE_BASE . 'classes/Log/Log.php';
+	$mask = $mask = Log::MAX(PEAR_LOG_INFO);
+	$conf = array ('lineFormat' => 	'%2$s [%3$s] %4$s  - %5$s:%6$s');
+	$logger = Log::singleton('firebug', '', 'c2x-log', $conf );
+	//$logger = Log::singleton('win', 'LogWindow', 'ident', $conf);
+	$logger->setMask($mask);
+	function errorHandler($code, $message, $file, $line)
+	{
+	    global $logger;
+	
+	    switch ($code) {
+	    case E_WARNING:
+	    case E_USER_WARNING:
+	        $priority = PEAR_LOG_WARNING;
+	        break;
+	    case E_NOTICE:
+	    case E_USER_NOTICE:
+	        $priority = PEAR_LOG_NOTICE;
+	        break;
+	    case E_ERROR:
+	    case E_USER_ERROR:
+	        $priority = PEAR_LOG_ERR;
+	        break;
+	    default:
+	        $priority = PEAR_LOG_INFO;
+	    }
+	
+	    $logger->log($message . ' in ' . $file . ' at line ' . $line,
+	                 $priority);
+	}
+	
+	set_error_handler('errorHandler');
 }
-
-set_error_handler('errorHandler');
-
 
 #
 # Page generation time measurement
