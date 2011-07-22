@@ -137,8 +137,10 @@ $ck_sid_buffer='ck_sid'.$sid;
 
 include('include/helpers/inc_init_crypt.php'); // initialize crypt
 $ciphersid=$enc_hcemd5->encodeMimeSelfRand($sid);
-setcookie($ck_sid_buffer,$ciphersid);
+
+setcookie($ck_sid_buffer,$ciphersid); 
 $_COOKIE[$ck_sid_buffer]=$ciphersid;
+
 
 if((isset($boot)&&$boot)||!isset($_COOKIE['ck_config'])||empty($_COOKIE['ck_config'])) {
     configNew($bname,$bversion,$user_id,$ip,$cfgid);
@@ -332,6 +334,7 @@ if($mask == 2){
 	$smarty->assign('sMenuFrameSource','src="main/menubar2.php"');
 	$smarty->assign('sStartFrameSource',"src=\"main/indexframe.php?boot=1&lang=$lang&egal=$egal&cookie=$cookie&sid=$sid&mask=2\"");
 }else{
+
 	$smarty->assign('sStartFrameSource',"src = \"main/indexframe.php?boot=1&mask=$mask&lang=$lang&cookie=$cookie&sid=$sid\"");
 	
 	#
@@ -354,5 +357,4 @@ if($mask == 2){
 # Display the frame page
 #
 $smarty->display('common/baseframe.tpl');
-
 ?>

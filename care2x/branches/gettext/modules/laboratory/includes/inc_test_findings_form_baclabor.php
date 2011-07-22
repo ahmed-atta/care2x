@@ -1,7 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (stristr('inc_test_findings_form_baclabor.php',$PHP_SELF)) 
-	die('<meta http-equiv="refresh" content="0; url=../">');
+if (stristr($PHP_SELF,'inc_test_findings_form_baclabor.php')) die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 if(file_exists($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php')) include_once($root_path.'language/'.$lang.'/lang_'.$lang.'_konsil_baclabor.php');
   else include_once($root_path.'language/'.LANG_DEFAULT.'/lang_'.LANG_DEFAULT.'_konsil_baclabor.php');

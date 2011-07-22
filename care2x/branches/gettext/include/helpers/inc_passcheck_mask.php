@@ -1,7 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (stristr('inc_passcheck_mask.php',$PHP_SELF))
-die('<meta http-equiv="refresh" content="0; url=../">');
+if (stristr($PHP_SELF, 'inc_passcheck_mask.php')) die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
 $bShowThisPage = FALSE;

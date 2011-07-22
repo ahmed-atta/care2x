@@ -30,7 +30,7 @@ if($result){
 	#
 	while($menu=$result->FetchRow()){
 		echo "<tr><td align=\"center\">\n";
-		if (stristr('LDLogin',$menu['LD_var'])){
+		if (stristr($menu['LD_var'],'LDLogin')){
 			if ($_COOKIE['ck_login_logged'.$sid]=='true'){
 				$menu['url']='main/logout_confirm.php';
 				$menu['LD_var']='LDLogout';

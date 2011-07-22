@@ -43,7 +43,7 @@ if($permissionString  == '' ) {
 
 		// Load the menu item template
 		while($menu = $result->FetchRow()){
-			if (stristr('LDLogin',$menu['LD_var'])){
+			if (stristr($menu['LD_var'],'LDLogin')){
 				if ($_COOKIE['ck_login_logged'.$sid]=='true'){
 					$menu['url']='main/logout_confirm.php';
 					$menu['LD_var']='LDLogout';
