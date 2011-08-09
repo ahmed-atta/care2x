@@ -246,7 +246,8 @@ class Smarty extends Smarty_Internal_Data {
      */
     public function __construct()
     {
-		// selfpointer need by some other class methods
+
+    	// selfpointer need by some other class methods
 		$this->smarty = $this;
         if (is_callable('mb_internal_encoding')) {
             mb_internal_encoding(SMARTY_RESOURCE_CHAR_SET);

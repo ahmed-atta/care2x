@@ -21,11 +21,11 @@
 				<td>
 					<p align="center">
 					<a href="http://www.care2x.org/">Care2x Home</a> :: 
-					<a href="http://www.care2x.org/wiki/">Wiki</a> :: 
-					<a href="http://sourceforge.net/mailarchive/forum.php?forum_id=11772">Mailing List</a> :: 
+					<a href="http://wiki.care2x.org/">Wiki</a> :: 
+					<a href="http://sourceforge.net/mailarchive/forum.php?forum_name=care2002-developers">Mailing List</a> :: 
 					<a href="http://sourceforge.net/projects/care2002/">SF.net Project</a>&nbsp; 
                     //
-					Copyright 2002-2007 Elpidio Latorilla
+					Copyright 2002-2010 Elpidio Latorilla; 2010-now Mauri Niemi
 				</td>
 				<td align="right" valign="bottom">
 					&nbsp;</td>
