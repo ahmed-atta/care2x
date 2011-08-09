@@ -37,7 +37,7 @@ $version->collectText('2nd_key', '2nd Key', (rand(1,$rmax).rand(1,$rmax))*rand(1
 $version->collectText('3rd_key', '3rd Key', (rand(1,$rmax).rand(1,$rmax))*rand(1,$rmax));
 $version->addSeparator('');
 
-$version->addTest('PHPVersionOver', array('5.0.0'));
+$version->addTest('PHPVersionOver', array('5.3.0'));
 $version->addTest('PHPVersionUnder', array('6.0.0'));
 $version->addTest('PHPMemory', array('8M'));
 $version->addTest('PHPMagicQuotes', array('Off'));

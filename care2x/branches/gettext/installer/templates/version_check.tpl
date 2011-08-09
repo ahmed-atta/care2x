@@ -14,5 +14,5 @@
 </ul>
 <p>Some of the above steps does not need user interaction and you may not notice their existance. </p>
 <p>In order to navigate between the different interaction steps you will generally need to click on the <a href="">Continue...</a> link at the bottom. If you want to restart the installation procedure then click on the <a href="">Restart Installation</a> link. </p>
-<p>For more detailed instructions you can follow the <a href="http://www.care2x.org/wiki/index.php/Installation_Guide">Care2x Installation Guide</a>. </p>
+<p>For more detailed instructions you can follow the <a href="http://wiki.care2x.org/index.php/Installation_Guide">Care2x Installation Guide</a>. </p>
 </td></tr>

@@ -13,7 +13,7 @@ $app_name = "Care2x";
 /*
  * Version number
  */
-$short_version = "2.6";
+$short_version = "3.0";
 
 /*
  * Deployment | beta

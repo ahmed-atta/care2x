@@ -10,7 +10,7 @@
 <body>
 <table class="title">
 	<tr>
-		<td width="150"><img src="images/care_logo.gif"></td>
+		<td width="150"><img src="images/care_logo.png"></td>
 		<td align="center">{$INSTALLER_PHASE}</td>
 		<td width="150">&nbsp;</td>
 	</tr>

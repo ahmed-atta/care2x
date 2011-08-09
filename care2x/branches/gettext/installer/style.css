@@ -3,13 +3,13 @@ body {
 	font-family: verdana, arial, tahoma;
 	font-size: 12px;
 	color: Black;
-	background-color: grey;
+	background-color: white;
 }
 
 .title {
 	width: 100%;
-   background-color: darkgrey;
-   color: White;
+   background-color: white;
+   color: Black;
    font-size: 22px;
    font-weight: bold;
    border: 2px solid Black;
@@ -19,7 +19,7 @@ body {
 a {
 	text-decoration: none;
 	font-weight: bold; 
-	color: white;
+	color: red;
 }
 
 a:hover {
