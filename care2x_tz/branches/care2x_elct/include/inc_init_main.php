@@ -1,12 +1,12 @@
 <?php
 # This is the database name
-$dbname='caredb_seha_upgraded';
+$dbname='';
 
 # Database user name, default is root or httpd for mysql, or postgres for postgresql
-$dbusername='root';
+$dbusername='';
 
 # Database user password, default is empty char
-$dbpassword='kukzan2007';
+$dbpassword='';
 
 # Database host name, default = localhost
 $dbhost='localhost';
