@@ -39,6 +39,7 @@ if(!isset($sid)) $sid='';
 
 require('./include/helpers/inc_environment_global.php');
 
+
 ////$db->debug=FALSE;
 
 # Register global session variables
@@ -177,9 +178,7 @@ $glob_cfg->getConfig('gui_frame_left_nav_border');
 
 
 $savelang=0;
-/*echo $GLOBALCONFIG['language_non_single'];
-while (list($x,$v)=each($GLOBALCONFIG)) echo $x.'==>'.$v.'<br>';
-*/
+
 # Start checking language properties 
 if(!$GLOBALCONFIG['language_single']) {
     # We get the language code
@@ -314,16 +313,26 @@ $smarty = new smarty_care('common');
 $smarty->assign('sWindowTitle',$LDMainTitle);
 
 #
-# Assign the contents frame source
+# Find out if there should be the old school framebased GUI been shown or the
+# latest div based menu
 #
-$smarty->assign('sContentsFrameSource',"src = \"blank.php?lang=$lang&sid=$sid\"");
+$config_type = 'use_old_gui_style';
+require('./include/helpers/inc_get_global_config.php');
 
+if ($use_old_gui_style==1) {
+	#
+	# Assign the contents frame source
+	#
+	$smarty->assign('sContentsFrameSource',"src = \"blank.php?lang=$lang&sid=$sid\"");
+} else {
+	#
+	# Assign the contens start page 
+	#
+	$smarty->assign('sContentsFrameSource',"modules/news/start_page.php?lang=$lang&sid=$sid\"");
+}
+	
 #
 # Load the gui template
-#
-//require('gui/html_template/default/tp_index.php');
-#
-# If the floating menu window is selected
 #
 
 if($mask == 2){
@@ -353,8 +362,19 @@ if($mask == 2){
 		$smarty->assign('sBaseFramesetTemplate','common/frameset_ltr.tpl');
 	}
 }
+$smarty->assign('sBaseFramesetTemplate','common/noframe.tpl');
 #
 # Display the frame page
 #
-$smarty->display('common/baseframe.tpl');
+if ($use_old_gui_style==1) {
+	#
+	# The old school framebased gui should be shown now
+	#
+	$smarty->display('common/baseframe.tpl');
+} else {
+	#
+	# The div based menu should be used
+	#
+	$smarty->display('common/noframe.tpl');
+}
 ?>
