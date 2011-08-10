@@ -10,7 +10,12 @@ $menu = new Menu();
 
 require_once(CARE_BASE.'/gui/smarty_template/smarty_care.class.php');
 $smarty = new smarty_care('system_admin');
-$row = $menu->getMenuListing();
-$smarty->assign('menuFields',$row->GetRows());
+
+$topmenurow = $menu->getMenuListing();
+$submenurow = $menu->getSubMenuListing();
+
+$smarty->assign('menuFields',$topmenurow->GetRows());
+$smarty->assign('submenuFields',$submenurow->GetRows());
+
 $smarty->assign('care_gui', CARE_GUI);
 $smarty->display(__DIR__ . '/view/menu.tpl');

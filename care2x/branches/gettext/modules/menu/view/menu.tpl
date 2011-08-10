@@ -161,10 +161,23 @@ body {
 				</li>
 			</ul>
 		</li> 
+		{{foreach from=$menuFields key=menu_id item=menuname}}
+			<li><a href="{{$care_gui}}{{$menuname.url}}">{{$menuname.name}}</a>
+				<ul id="{{$i.name}}">
+				{{foreach from=$submenuFields key=id item=submenuname}}
+					{{if $menuname.nr eq $submenuname.s_main_nr}}
+						<li><a href="{{$care_gui}}{{$submenuname.s_url}}">{{$submenuname.s_name}}</a></li>
+					{{/if}} 
+				{{/foreach}}
+				</ul>
+			</li> 
+		{{/foreach}}
+{{*
 		{{foreach from=$menuFields key=id item=i}}
 			<li><a href="{{$care_gui}}{{$i.url}}">{{$i.name}}</a></li> 
 		{{/foreach}}
-		</li>
+*}}
+		
 	</ul>
 	<img style="float: left;" alt="" src="{{$care_gui}}modules/menu/view/menu_right.png" />
 </div>
