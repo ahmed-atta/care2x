@@ -41,6 +41,7 @@ echo '<html><body>';
 		  	  $date_person_reg = $v['REGISTRATION_DATE'];
 			  $sql_under_age="SELECT count( * ) AS Total_underage FROM $tmp_table2 WHERE (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) <5 AND date_format( date_reg, '%d.%m.%y' ) ='$date_person_reg'";
 			  $db_ptr_under_age = $db->Execute($sql_under_age);
+                           
 			  $sql_age5_14="SELECT count( * ) AS Total_age5_14 FROM $tmp_table2 WHERE (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) >=5  AND (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) <=14 AND date_format( date_reg, '%d.%m.%y' ) ='$date_person_reg'";
 			  $db_ptr_age5_14 = $db->Execute($sql_age5_14);
 
@@ -51,7 +52,7 @@ echo '<html><body>';
 
 			  $sql_under_age_return="SELECT count( * ) AS Total_underage_return FROM $tmp_table1 WHERE (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) <5 AND date_format( encounter_date, '%d.%m.%y' ) ='$date_person_reg'";
 			  $db_ptr_under_age_return = $db->Execute($sql_under_age_return);
-			  $sql_age5_14_return="SELECT count( * ) AS Total_age5_14_return FROM $tmp_table1 WHERE (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) >=5  AND (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) <=14 AND date_format( encounter_date, '%d.%m.%y' ) ='$date_person_reg'";
+                          $sql_age5_14_return="SELECT count( * ) AS Total_age5_14_return FROM $tmp_table1 WHERE (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) >=5  AND (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) <=14 AND date_format( encounter_date, '%d.%m.%y' ) ='$date_person_reg'";
 			  $db_ptr_age5_14_return= $db->Execute($sql_age5_14_return);
 
 			  $db_row_under_age_return=$db_ptr_under_age_return->FetchRow();
@@ -96,16 +97,16 @@ echo '<html><body>';
 		// echo "End time of the script:".date("G:i:s")."<br>";
 		?>
 		<tr>
-            <td width="79" bgcolor="#ffffaa" widtd="220"><b><?php echo $LDtotal; ?></td>
-            <td width="104" bgcolor="#ffffaa" widtd="32"><?php echo $total_opd;?></td>
-            <td width="51" bgcolor="#ffffaa" widtd="32"><?php echo $total_new;?></td>
-            <td width="65" bgcolor="#ffffaa"><?php echo $total_return;?></td>
-            <td width="100" bgcolor="#ffffaa" widtd="64"><?php echo $total_underage ?></td>
-            <td width="74" bgcolor="#ffffaa" widtd="64"><?php echo $total_age5_14 ?></td>
+            <td width="79" bgcolor="#ffffaa" widtd="220"><b><?php //echo $LDtotal; ?>LDtotal</td>
+            <td width="104" bgcolor="#ffffaa" widtd="32"><?php //echo $total_opd;?>total OPD</td>
+            <td width="51" bgcolor="#ffffaa" widtd="32"><?php //echo $total_new;?>total new</td>
+            <td width="65" bgcolor="#ffffaa"><?php //echo $total_return;?>total return</td>
+            <td width="100" bgcolor="#ffffaa" widtd="64"><?php //echo $total_underage ?>total new under 5</td>
+            <td width="74" bgcolor="#ffffaa" widtd="64"><?php //echo $total_age5_14 ?>total new over 5</td>
 
-            <td width="100" bgcolor="#ffffaa" widtd="64"><?php echo $return_underage_total?></td>
-            <td width="74" bgcolor="#ffffaa" widtd="64"><?php echo $return_age5_14_total ?></td>
-            <td width="155" bgcolor="#ffffaa" widtd="64"> <?php echo $total_paediatrics ?></td>
+            <td width="100" bgcolor="#ffffaa" widtd="64"><?php //echo $return_underage_total?>total return under 5</td>
+            <td width="74" bgcolor="#ffffaa" widtd="64"><?php //echo $return_age5_14_total ?>total return over 5</td>
+            <td width="155" bgcolor="#ffffaa" widtd="64"> <?php //echo $total_paediatrics ?>total patient</td>
           </tr>
         </table>
         <p>&nbsp; </p>
@@ -203,15 +204,15 @@ function popPic(pid,nm){
         </p>
         <table  border="1" cellspacing="0" cellpadding="0" align="center" bgcolor=#ffffdd>
           <tr>
-            <td width="79" bgcolor="#ffffaa" widtd="220"><b><?php echo $LDDay; ?></td>
-            <td width="104" bgcolor="#ffffaa" widtd="32"><b><?php echo $LDTotalOPD; ?></td>
-            <td width="51" bgcolor="#ffffaa" widtd="32"><b><?php echo $LDNEW; ?></td>
-            <td width="65" bgcolor="#ffffaa"><b><?php echo $LDRETURN; ?></td>
-            <td width="100" bgcolor="#ffffaa" widtd="64"><b><?php echo 'NEW '.$LDUNDERFIVE; ?></td>
-            <td width="74" bgcolor="#ffffaa" widtd="64"><b><?php echo 'NEW '.$LDAge; ?>5-14</td>
-            <td width="100" bgcolor="#ffffaa" widtd="64"><b><?php echo 'RETURN '.$LDUNDERFIVE; ?></td>
-            <td width="74" bgcolor="#ffffaa" widtd="64"><b><?php echo 'RETURN '.$LDAge; ?>5-14</td>
-            <td width="155" bgcolor="#ffffaa" widtd="64"><b><?php echo $LDTotalPediatrics; ?></td>
+            <td width="79" bgcolor="#ffffaa" widtd="220"><b><?php //echo $LDDay; ?>Day</td>
+            <td width="104" bgcolor="#ffffaa" widtd="32"><b><?php //echo $LDTotalOPD; ?>Total OPD</td>
+            <td width="51" bgcolor="#ffffaa" widtd="32"><b><?php //echo $LDNEW; ?>New</td>
+            <td width="65" bgcolor="#ffffaa"><b><?php //echo $LDRETURN; ?>Return</td>
+            <td width="100" bgcolor="#ffffaa" widtd="64"><b><?php //echo 'NEW '.$LDUNDERFIVE; ?>New under 5</td>
+            <td width="74" bgcolor="#ffffaa" widtd="64"><b><?php //echo 'NEW '.$LDAge; ?>New Over 5</td>
+            <td width="100" bgcolor="#ffffaa" widtd="64"><b><?php //echo 'RETURN '.$LDUNDERFIVE; ?>Return Under 5</td>
+            <td width="74" bgcolor="#ffffaa" widtd="64"><b><?php //echo 'RETURN '.$LDAge; ?>Return Over 5</td>
+            <td width="155" bgcolor="#ffffaa" widtd="64"><b><?php //echo $LDTotalPediatrics; ?>Total Patient</td>
           </tr>
 
 		  <?php
@@ -231,7 +232,10 @@ function popPic(pid,nm){
 		  	  $date_person_reg = $v['REGISTRATION_DATE'];
 			  $sql_under_age="SELECT count( * ) AS Total_underage FROM $tmp_table2 WHERE (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) <5 AND date_format( date_reg, '%d.%m.%y' ) ='$date_person_reg'";
 			  $db_ptr_under_age = $db->Execute($sql_under_age);
-			  $sql_age5_14="SELECT count( * ) AS Total_age5_14 FROM $tmp_table2 WHERE (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) >=5  AND (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) <=14 AND date_format( date_reg, '%d.%m.%y' ) ='$date_person_reg'";
+                          //added by israel, age 5-14 dont apply to tz settings
+                          // $sql_age5_14="SELECT count( * ) AS Total_underage FROM $tmp_table2 WHERE (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) >=5 AND date_format( date_reg, '%d.%m.%y' ) ='$date_person_reg'";
+                          //israel ended here 
+			  $sql_age5_14="SELECT count( * ) AS Total_age5_14 FROM $tmp_table2 WHERE (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) >=5  AND (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) <=1000 AND date_format( date_reg, '%d.%m.%y' ) ='$date_person_reg'";
 			  $db_ptr_age5_14 = $db->Execute($sql_age5_14);
 
   			  $sql_new="SELECT count( * ) AS NEW  FROM $tmp_table2 WHERE date_format( date_reg, '%d.%m.%y' ) ='$date_person_reg' ";
@@ -241,7 +245,10 @@ function popPic(pid,nm){
 
 			  $sql_under_age_return="SELECT count( * ) AS Total_underage_return FROM $tmp_table1 WHERE (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) <5 AND date_format( encounter_date, '%d.%m.%y' ) ='$date_person_reg'";
 			  $db_ptr_under_age_return = $db->Execute($sql_under_age_return);
-			  $sql_age5_14_return="SELECT count( * ) AS Total_age5_14_return FROM $tmp_table1 WHERE (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) >=5  AND (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) <=14 AND date_format( encounter_date, '%d.%m.%y' ) ='$date_person_reg'";
+			  //added by israel, age 5-14 dont apply to tz settings
+                          //$sql_age5_14_return="SELECT count( * ) AS Total_underage_return FROM $tmp_table1 WHERE (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) >5 AND date_format( encounter_date, '%d.%m.%y' ) ='$date_person_reg'";
+                          //israel ended here 
+                          $sql_age5_14_return="SELECT count( * ) AS Total_age5_14_return FROM $tmp_table1 WHERE (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) >=5  AND (DATE_FORMAT( NOW( ) , '%Y' ) - DATE_FORMAT( date_birth, '%Y' ) ) <=1000 AND date_format( encounter_date, '%d.%m.%y' ) ='$date_person_reg'";
 			  $db_ptr_age5_14_return= $db->Execute($sql_age5_14_return);
 
 			  $db_row_under_age_return=$db_ptr_under_age_return->FetchRow();
