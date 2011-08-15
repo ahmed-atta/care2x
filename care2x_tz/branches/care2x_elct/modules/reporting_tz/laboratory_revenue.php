@@ -36,6 +36,7 @@ if (empty($_GET['printout'])) {
 			
 			if(isset($selected_date)&&!empty($selected_date)) 
 			{
+                                        $selected_date=@formatDate2STD($selected_date,$date_format); 
 					$f_date = strtotime($selected_date);       
 					$day = date("d",$f_date); 
 					$month = date("n",$f_date);
