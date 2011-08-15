@@ -202,7 +202,7 @@ class GuiInputPerson {
 				# clean and check input data variables
 				if(trim($encoder)=='') $encoder=$aufnahme_user;
 				if (trim($name_last)=='') { $errornamelast=1; $error++;}
-				//if (trim($selian_pid)=='' || !is_numeric($selian_pid) || (!$update && $person_obj->SelianFileExists($selian_pid))) { $errorfilenr=1; $error++;}
+				if (trim($selian_pid)=='' || !is_numeric($selian_pid) || (!$update && $person_obj->SelianFileExists($selian_pid))) { $errorfilenr=1; $error++;}
 
 
 				if ($person_obj->IsHospitalFileNrMandatory())
