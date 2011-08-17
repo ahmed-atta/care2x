@@ -587,7 +587,11 @@ class GuiInputPerson {
 				alert("<?php echo 'Please Enter Father Name'; ?>");
 				d.name_2.focus();
 				return false;
-			}else if(d.date_birth.value==""){
+                        }else if(d.insurance_ID.value=="-1"){  			  
+                                alert("<?php echo 'Please Enter Insurance Or Cash';?>");
+                                d.insurance_ID.focus();
+                                return false; 
+                        }else if(d.date_birth.value==""){
 				alert("<?php echo $LDPlsEnterDateBirth; ?>");
 				d.date_birth.focus();
 				return false;
