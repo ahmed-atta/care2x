@@ -109,7 +109,7 @@ if($pid!='' || $encounter_nr!=''){
 		}
 		 
 		/* Get the related insurance data */
-		$p_insurance=&$pinsure_obj->getPersonInsuranceObject($pid);
+		$p_insurance=$pinsure_obj->getPersonInsuranceObject($pid);
 		if($p_insurance==false) {
 			$insurance_show=true;
 		} else {
@@ -136,7 +136,7 @@ if($pid!='' || $encounter_nr!=''){
 				//added the possibility to upload photo here
 				// Create image object
 				include_once($root_path.'modules/photolab/model/class_image.php');
-				$img_obj=& new Image;
+				$img_obj= new Image;
 				$picext='';
 				$valid_image=false;
 				$photo_filename='';
@@ -287,7 +287,7 @@ if($pid!='' || $encounter_nr!=''){
 		/* Load encounter data */
 		$encounter_obj->loadEncounterData();
 		if($encounter_obj->is_loaded) {
-			$zeile=&$encounter_obj->encounter;
+			$zeile=$encounter_obj->encounter;
 			//load data
 			extract($zeile);
 
@@ -299,7 +299,7 @@ if($pid!='' || $encounter_nr!=''){
 			if(!empty($GLOBAL_CONFIG['patient_financial_class_single_result'])) $encounter_obj->setSingleResult(true);
 
 			if(!$GLOBAL_CONFIG['patient_service_care_hide']){
-				if($buff=&$encounter_obj->CareServiceClass()){
+				if($buff=$encounter_obj->CareServiceClass()){
 					while($care_class=$buff->FetchRow()){
 						extract($care_class);
 					}
@@ -307,7 +307,7 @@ if($pid!='' || $encounter_nr!=''){
 				}
 			}
 			if(!$GLOBAL_CONFIG['patient_service_room_hide']){
-				if($buff=&$encounter_obj->RoomServiceClass()){
+				if($buff=$encounter_obj->RoomServiceClass()){
 					while($room_class=$buff->FetchRow()){
 						extract($room_class);
 					}
@@ -315,7 +315,7 @@ if($pid!='' || $encounter_nr!=''){
 				}
 			}
 			if(!$GLOBAL_CONFIG['patient_service_att_dr_hide']){
-				if($buff=&$encounter_obj->AttDrServiceClass()){
+				if($buff=$encounter_obj->AttDrServiceClass()){
 					while($att_dr_class=$buff->FetchRow()){
 						extract($att_dr_class);
 					}
@@ -330,17 +330,17 @@ if($pid!='' || $encounter_nr!=''){
 		# Load all  wards info
 		$ward_obj=new Ward;
 		$items='nr,name,dept_nr';
-		$ward_info=&$ward_obj->getAllWardsItemsObject($items);
+		$ward_info=$ward_obj->getAllWardsItemsObject($items);
 	}
 	if(!$encounter_nr||$encounter_class_nr==2){
 		# Load all medical departments
 		include_once($root_path.'modules/dept_admin/model/class_department.php');
 		$dept_obj=new Department;
-		$all_meds=&$dept_obj->getAllMedicalObject();
+		$all_meds=$dept_obj->getAllMedicalObject();
 	}
 	 
 	$person_obj->setPID($pid);
-	if($data=&$person_obj->BasicDataArray($pid)){
+	if($data=$person_obj->BasicDataArray($pid)){
 		//while(list($x,$v)=each($data))	$$x=$v;
 		extract($data);
 	}
