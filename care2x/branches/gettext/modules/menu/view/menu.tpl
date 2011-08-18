@@ -166,7 +166,7 @@ body {
 				<ul id="{{$i.name}}">
 				{{foreach from=$submenuFields key=id item=submenuname}}
 					{{if $menuname.nr eq $submenuname.s_main_nr}}
-						<img class="corner_inset_left" alt="" src="{{$care_gui}}modules/menu/view/corner_inset_left.png" />
+						<img class="corner_inset_left" alt="" src="{{$care_gui}}modules/menu/view/corner_inset_left.png" />r
 						<li><a href="{{$care_gui}}{{$submenuname.s_url}}">{{$submenuname.s_name}}</a></li>
 						<img class="corner_inset_right" alt="" src="{{$care_gui}}modules/menu/view/corner_inset_right.png" />
 					{{/if}}
