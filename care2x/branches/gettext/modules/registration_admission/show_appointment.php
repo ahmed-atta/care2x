@@ -13,7 +13,7 @@ require('../../include/helpers/inc_environment_global.php');
 $thisfile=basename(__FILE__);
 require_once($root_path.'modules/appointment_scheduler/model/class_appointment.php');
 $obj=new Appointment();
-//$db->debug=true;
+$db->debug=false;
 
 $bPastDateError = FALSE;
 

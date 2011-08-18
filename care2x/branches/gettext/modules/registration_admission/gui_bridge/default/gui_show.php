@@ -214,14 +214,14 @@ ob_start();
 
 	$sTemp= ob_get_contents();
 ob_end_clean();
-
+;
 $smarty->assign('sBottomControls',$sTemp);
 
 
 $smarty->assign('pbBottomClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0').'  title="'.$LDCancel.'"  align="absmiddle"></a>');
 
 
-$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/common_option.tpl');
+$smarty->assign('sMainBlockIncludeFile','registration_admission/common_option.tpl');
 
 
 $smarty->display('common/mainframe.tpl');
