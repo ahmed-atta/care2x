@@ -55,7 +55,7 @@ $version->addTest('AdminPasswordConfirmed', array(
 $version->addTest('WritableLocation', array(APP_PATH.'/cache'));
 $version->addTest('WritableLocation', array(APP_PATH.'/uploads'));
 $version->addTest('WritableLocation', array(APP_PATH.'/include/helpers/inc_init_main.php'));
-$version->addTest('WritableLocation', array(APP_PATH.'/installer/install.php'));
+$version->addTest('WritableLocation', array(APP_PATH.'/installer'));
 
 $version->addAction('AcceptText', 'License Agreement', array(dirname(__FILE__).'/LICENSE'));
 

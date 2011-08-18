@@ -1,20 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 2.11.4
--- http://www.phpmyadmin.net
--- Ap.Muthu: care_encounter_appointment table renamed to care_encounter_appointment
--- Host: localhost
--- Generation Time: Oct 20, 2008 at 06:51 PM
--- Server version: 5.0.51
--- PHP Version: 5.2.5
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
---
--- Database: `care2x`
---
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `care_accesslog`
 --
@@ -942,11 +926,7 @@ CREATE TABLE IF NOT EXISTS `care_encounter` (
   KEY `encounter_date` (`encounter_date`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC ;
 
---
--- Constraints for table `care_encounter`
---
-ALTER TABLE `care_encounter`
-  ADD CONSTRAINT `fk_care_person_encounter` FOREIGN KEY (`pid`) REFERENCES `care_person` (`pid`);
+
 
 --
 -- Dumping data for table `care_encounter`
@@ -4576,21 +4556,7 @@ CREATE TABLE IF NOT EXISTS `care_yellow_paper` (
   UNIQUE KEY `nr` (`nr`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
---
--- Dumping data for table `care_yellow_paper`
---
 
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `care_encounter_prescription_sub`
---
-ALTER TABLE `care_encounter_prescription_sub`
-  ADD CONSTRAINT `care_encounter_prescription_sub_fk` FOREIGN KEY (`prescription_nr`) REFERENCES `care_encounter_prescription` (`nr`) ON DELETE CASCADE ON UPDATE CASCADE;
-  
  
 -- The preloaded data follows -----------------------
 
@@ -4900,7 +4866,7 @@ INSERT INTO care_group VALUES (6, 'prescription', 'Prescription', 'LDPrescriptio
 INSERT INTO `care_menu_main` (`nr`, `sort_nr`, `name`, `permission`, `image`, `LD_var`, `url`, `is_visible`, `hide_by`, `status`, `modify_id`, `modify_time`) VALUES
 (1, 1, 'Home', '', '', 'LDHome', 'main/startframe.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
 (2, 5, 'Patient', '', '', 'LDPatient', 'modules/registration_admission/patient_register_pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(3, 10, 'Admission', 'admission', '', 'LDAdmission', 'modules/registration_admission/admission_pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(3, 10, 'Admission', 'admission', '', 'LDAdmission', 'modules/registration_admission/admission_pass.php', 0, '', '', '20030922232015', '0000-00-00 00:00:00'),
 (4, 15, 'Ambulatory', '', '', 'LDAmbulatory', 'modules/ambulatory/ambulatory.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
 (5, 20, 'Medocs', 'medocs', '', 'LDMedocs', 'modules/medocs/medocs_pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
 (6, 25, 'Doctors', 'doctors', '', 'LDDoctors', 'modules/doctors/doctors.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
@@ -4910,49 +4876,49 @@ INSERT INTO `care_menu_main` (`nr`, `sort_nr`, `name`, `permission`, `image`, `L
 (10, 50, 'Radiology', 'radio', '', 'LDRadiology', 'modules/radiology/radiolog.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
 (11, 55, 'Pharmacy', 'pharma', '', 'LDPharmacy', 'modules/pharmacy/pharmacy.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
 (12, 60, 'Medical Depot', 'meddepot', '', 'LDMedDepot', 'modules/medstock/medstock.php ', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(13, 65, 'Directory', 'teldir', '', 'LDDirectory', 'modules/phone_directory/phone.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(14, 70, 'Tech Support', 'tech', '', 'LDTechSupport', 'modules/tech/tech.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(13, 65, 'Directory', 'teldir', '', 'LDDirectory', 'modules/phone_directory/phone.php', 0, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(14, 70, 'Tech Support', 'tech', '', 'LDTechSupport', 'modules/tech/tech.php', 0, '', '', '20030922232015', '0000-00-00 00:00:00'),
 (15, 72, 'System Admin', 'System Admin', '', 'LDEDP', 'modules/system_admin/admin.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(16, 75, 'Intranet Email', '', '', 'LDIntraEmail', 'modules/intranet_email/intra-email-pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(16, 75, 'Intranet Email', '', '', 'LDIntraEmail', 'modules/intranet_email/intra-email-pass.php', 0, '', '', '20030922232015', '0000-00-00 00:00:00'),
 (18, 85, 'Special Tools', '', '', 'LDSpecials', 'main/spediens.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
 (19, 90, 'Login', '', '', 'LDLogin', 'main/login.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(20, 7, 'Appointments', '', '', 'LDAppointments', 'modules/appointment_scheduler/appt_main_pass.php', 1, '', '', '20030922232015', '2003-04-05 00:01:45'),
-(21, 21, 'TCM Final Documentation', 'tcm_final_doc', NULL, '', 'modules/tcm/final_documentation/final_doc_pass.php', 1, NULL, '', '20030922232015', '2010-08-02 18:19:25');
+(20, 7, 'Appointments', '', '', 'LDAppointments', 'modules/appointment_scheduler/appt_main_pass.php', 0, '', '', '20030922232015', '2003-04-05 00:01:45');
 
 --
 -- Dumping data for table `care_menu_sub`
 --
 
 
-INSERT INTO care_menu_sub  VALUES ('3', '0', '2', '0', '', '', '', '', '../gui/img/common/default/new_group.gif', '../gui/img/common/default/new_group.gif', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('70', '0', '7', '0', '', '', '', '', '../gui/img/common/default/nurse.gif', '../gui/img/common/default/nurse.gif', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('20', '0', '1', '0', '', '', '', '', '../gui/img/common/default/articles.gif', '../gui/img/common/default/home.gif', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('30', '0', '20', '0', '', '', '', '', '../gui/img/common/default/calendar.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('5', '2', '2', '1', 'Admission', 'LDAdmission', '../modules/registration_admission/admission_pass.php', '', '../gui/img/common/default/bn.gif', '../gui/img/common/default/bn.gif', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('1', '1', '2', '1', 'Registration', '', '../modules/registration_admission/patient_register_pass.php', '&target=entry', '../gui/img/common/default/post_discussion.gif', '', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('130', '1', '2', '1', 'Search', 'LDSearch', '../modules/registration_admission/patient_register_pass.php', '&target=search', '../gui/img/common/default/findnew.gif', '../gui/img/common/default/findnew.gif', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('135', '1', '2', '1', 'Archive', 'LDArchive', '../modules/registration_admission/patient_register_pass.php', '&target=archiv', '', '', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('140', '5', '2', '2', 'Search', 'LDSearch', '../modules/registration_admission/admission_pass.php', '&target=search', '../gui/img/common/default/findnew.gif', '../gui/img/common/default/findnew.gif', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('145', '6', '2', '2', 'Archive', 'LDArchive', '../modules/registration_admission/admission_pass.php', '&target=archiv', '', '', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('71', '1', '7', '1', 'Wards', '', '../modules/nursing/nursing.php', '', '../gui/img/common/default/bul_arrowgrnsm.gif', '../gui/img/common/default/bul_arrowgrnsm.gif', '', '', '[station]', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('155', '1', '3', '1', 'Archive', 'LDArchive', '../modules/registration_admission/admission_pass.php', '&target=archiv', '', '', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('40', '0', '3', '0', '', '', '', '', '../gui/img/common/default/bn.gif', '../gui/img/common/default/bn.gif', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('165', '0', '13', '0', '', '', '', '', '../gui/img/common/default/violet_phone.gif', '../gui/img/common/default/violet_phone.gif', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('7', '3', '7', '1', 'Search', '', '../modules/nursing/nursing-patient-search-start.php', '', '../gui/img/common/default/findnew.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('72', '2', '7', '1', 'Quick view', '', '../modules/nursing/nursing-quickview.php', '', '../gui/img/common/default/eye_s.gif', '', '1', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('50', '0', '4', '0', '', '', '', '', '../gui/img/common/default/disc_unrd.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('120', '0', '6', '0', '', '', '', '', '../gui/img/common/default/forums.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('160', '0', '17', '0', '', '', '', '', '../gui/img/common/default/c-mail.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('190', '0', '16', '0', '', '', '', '', '../gui/img/common/default/bubble2.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('195', '0', '10', '0', '', '', '', '', '../gui/img/common/default/torso.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('200', '0', '18', '0', '', '', '', '', '../gui/img/common/default/settings_tree.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('205', '0', '11', '0', '', '', '', '', '../gui/img/common/default/add.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('160', '0', '19', '0', '', '', '', '', '../gui/img/common/default/padlock.gif', '../gui/img/common/default/bul_arrowgrnsm.gif', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('215', '0', '15', '0', '', '', '', '', '../gui/img/common/default/sections.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('220', '0', '12', '0', '', '', '', '', '../gui/img/common/default/storage.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('225', '0', '8', '0', '', '', '', '', '../gui/img/common/default/people_search_online.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('230', '0', '9', '0', '', '', '', '', '../gui/img/common/default/chart.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-INSERT INTO care_menu_sub  VALUES ('235', '0', '14', '0', '', '', '', '', '../gui/img/common/default/settings_tree.gif', '', '', '', '', '', '0001-01-01 00:00:00');
+INSERT INTO `care_menu_sub` (`s_nr`, `s_sort_nr`, `s_main_nr`, `s_ebene`, `s_name`, `s_LD_var`, `s_url`, `s_url_ext`, `s_image`, `s_open_image`, `s_is_visible`, `s_hide_by`, `s_status`, `s_modify_id`, `s_modify_time`) VALUES
+(3, 0, 2, 0, '', '', '', '', 'gui/img/common/default/new_group.gif', 'gui/img/common/default/new_group.gif', '1', '', '', '', '0001-01-01 00:00:00'),
+(70, 0, 7, 0, '', '', '', '', 'gui/img/common/default/nurse.gif', 'gui/img/common/default/nurse.gif', '', '', '', '', '0001-01-01 00:00:00'),
+(20, 0, 1, 0, '', '', '', '', 'gui/img/common/default/articles.gif', 'gui/img/common/default/home.gif', '', '', '', '', '0001-01-01 00:00:00'),
+(30, 0, 20, 0, '', '', '', '', 'gui/img/common/default/calendar.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
+(5, 2, 2, 1, 'Admission', 'LDAdmission', 'modules/registration_admission/admission_pass.php', '', 'gui/img/common/default/bn.gif', 'gui/img/common/default/bn.gif', '1', '', '', '', '0001-01-01 00:00:00'),
+(1, 1, 2, 1, 'Registration', '', 'modules/registration_admission/patient_register_pass.php', '&target=entry', 'gui/img/common/default/post_discussion.gif', '', '1', '', '', '', '0001-01-01 00:00:00'),
+(130, 1, 2, 1, 'Search', 'LDSearch', 'modules/registration_admission/patient_register_pass.php', '&target=search', 'gui/img/common/default/findnew.gif', 'gui/img/common/default/findnew.gif', '1', '', '', '', '0001-01-01 00:00:00'),
+(135, 1, 2, 1, 'Archive', 'LDArchive', 'modules/registration_admission/patient_register_pass.php', '&target=archiv', '', '', '1', '', '', '', '0001-01-01 00:00:00'),
+(140, 5, 2, 2, 'Search', 'LDSearch', 'modules/registration_admission/admission_pass.php', '&target=search', 'gui/img/common/default/findnew.gif', 'gui/img/common/default/findnew.gif', '1', '', '', '', '0001-01-01 00:00:00'),
+(145, 6, 2, 2, 'Archive', 'LDArchive', 'modules/registration_admission/admission_pass.php', '&target=archiv', '', '', '1', '', '', '', '0001-01-01 00:00:00'),
+(71, 1, 7, 1, 'Wards', '', 'modules/nursing/nursing.php', '', 'gui/img/common/default/bul_arrowgrnsm.gif', 'gui/img/common/default/bul_arrowgrnsm.gif', '', '', '[station]', '', '0001-01-01 00:00:00'),
+(155, 1, 3, 1, 'Archive', 'LDArchive', 'modules/registration_admission/admission_pass.php', '&target=archiv', '', '', '1', '', '', '', '0001-01-01 00:00:00'),
+(40, 0, 3, 0, '', '', '', '', 'gui/img/common/default/bn.gif', 'gui/img/common/default/bn.gif', '', '', '', '', '0001-01-01 00:00:00'),
+(165, 0, 13, 0, '', '', '', '', 'gui/img/common/default/violet_phone.gif', 'gui/img/common/default/violet_phone.gif', '', '', '', '', '0001-01-01 00:00:00'),
+(7, 3, 7, 1, 'Search', '', 'modules/nursing/nursing-patient-search-start.php', '', 'gui/img/common/default/findnew.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
+(72, 2, 7, 1, 'Quick view', '', 'modules/nursing/nursing-quickview.php', '', 'gui/img/common/default/eye_s.gif', '', '1', '', '', '', '0001-01-01 00:00:00'),
+(50, 0, 4, 0, '', '', '', '', 'gui/img/common/default/disc_unrd.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
+(120, 0, 6, 0, '', '', '', '', 'gui/img/common/default/forums.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
+(160, 0, 17, 0, '', '', '', '', 'gui/img/common/default/c-mail.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
+(190, 0, 16, 0, '', '', '', '', 'gui/img/common/default/bubble2.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
+(195, 0, 10, 0, '', '', '', '', 'gui/img/common/default/torso.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
+(200, 0, 18, 0, '', '', '', '', 'gui/img/common/default/settings_tree.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
+(205, 0, 11, 0, '', '', '', '', 'gui/img/common/default/add.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
+(160, 0, 19, 0, '', '', '', '', 'gui/img/common/default/padlock.gif', 'gui/img/common/default/bul_arrowgrnsm.gif', '', '', '', '', '0001-01-01 00:00:00'),
+(215, 0, 15, 0, '', '', '', '', 'gui/img/common/default/sections.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
+(220, 0, 12, 0, '', '', '', '', 'gui/img/common/default/storage.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
+(225, 0, 8, 0, '', '', '', '', 'gui/img/common/default/people_search_online.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
+(230, 0, 9, 0, '', '', '', '', 'gui/img/common/default/chart.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
+(235, 0, 14, 0, '', '', '', '', 'gui/img/common/default/settings_tree.gif', '', '', '', '', '', '0001-01-01 00:00:00');
 
 
 --
@@ -5674,9 +5640,23 @@ INSERT INTO care_unit_measurement VALUES (17, 1, 'cl', 'centiliter', 'LDCentilit
 INSERT INTO care_unit_measurement VALUES (18, 1, '�l', 'microliter', 'LDMicroliter', 'metric', 0, '', '', 00000000000000, '', 00000000000000);
 
 
+-- 
+-- Constrains
+-- 
+--
+-- Constraints for table `care_encounter`
+--
+ALTER TABLE `care_encounter`
+  ADD CONSTRAINT `fk_care_person_encounter` FOREIGN KEY (`pid`) REFERENCES `care_person` (`pid`);
+--
+-- Constraints for table `care_encounter_prescription_sub`
+--
+ALTER TABLE `care_encounter_prescription_sub`
+  ADD CONSTRAINT `care_encounter_prescription_sub_fk` FOREIGN KEY (`prescription_nr`) REFERENCES `care_encounter_prescription` (`nr`) ON DELETE CASCADE ON UPDATE CASCADE;
+  
 --
 -- Dumping data for table care_version
 --
 
 
-INSERT INTO `care_version` (`name`, `type`, `number`, `build`, `date`, `time`, `releaser`) VALUES ('CARE2X', 'beta', '2.5.0', '6189', '2008-10-21', '00:00:00', 'Gjergj Sheldija');
+INSERT INTO `care_version` (`name`, `type`, `number`, `build`, `date`, `time`, `releaser`) VALUES ('CARE2X', 'beta', '3.0', '7110', '2011-08-18', '00:00:00', 'Gjergj Sheldija/Robert Meggle');
