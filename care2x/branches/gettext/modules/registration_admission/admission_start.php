@@ -59,7 +59,7 @@ $dbtable='care_encounter'; // The table of admission data
 /* Create new person's insurance object */
 $pinsure_obj=new PersonInsurance($pid);
 /* Get the insurance classes */
-$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var AS "LD_var"');
+$insurance_classes=$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var AS "LD_var"');
 
 /* Create new person object */
 $person_obj=new Person($pid);
