@@ -215,7 +215,7 @@ $smarty->assign('sNewApptLink','<a href="'.$root_path.'modules/registration_admi
 
 $smarty->assign('pbClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'close2.gif','0').' alt="'.$LDCloseAlt.'">');
 
-$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/appointment/appt_list.tpl');
+$smarty->assign('sMainBlockIncludeFile','appointment/appt_list.tpl');
 
  /**
  * show Template
