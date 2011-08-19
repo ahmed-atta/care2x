@@ -140,7 +140,7 @@ $smarty->assign('sMainDataBlock',$sTemp);
 
 ob_end_clean();
 
-$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/main_plain.tpl');
+$smarty->assign('sMainBlockIncludeFile','medocs/main_plain.tpl');
 
 $smarty->display('common/mainframe.tpl');
 
