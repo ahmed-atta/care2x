@@ -68,14 +68,22 @@ class GlobalConfig  extends Core{
 		
 	    if(empty($type)||!$type) {
 		    $this->condition='1';
+		    $type='1';
 		} else {
 		    $this->condition="type $sql_LIKE '$type'";
 		}
+		
+		if(isset($_COOKIE[ 'c2x_' . $type])) {
+			$this->config[$this->row['type']]= $_COOKIE[ 'c2x_' . $type ] ;
+			return TRUE;
+		}
+				
 		if($this->result=$db->Execute("SELECT type,value FROM $this->tb WHERE $this->condition")) {
             if ($this->result->RecordCount()) {
                 while($this->row=$this->result->FetchRow()) {
                     $this->config[$this->row['type']]=$this->row['value'];
-				}
+                    setcookie( 'c2x_' . $type , $this->row['value'] , time()+3600);
+                }
 				return true;
 			} else {
 			    return false;
@@ -161,13 +169,19 @@ class GlobalConfig  extends Core{
 	*/
 	function getConfigValue($type='') {
 	    global $db;
-		
+
+	    if(isset($_COOKIE[ 'c2x_' . $type])) {
+	    	$this->config[$this->row['type']]= $_COOKIE[ 'c2x_' . $type ] ;
+	    	return TRUE;
+	    }	    
+	    
 	    if(empty($type)||!$type) {
 		    return '';
 		}else{ 
 			if($this->result=$db->Execute("SELECT value FROM $this->tb WHERE type = '$type'")) {
             	if ($this->result->RecordCount()) {
 					$this->row=$this->result->FetchRow();
+					setcookie( 'c2x_' . $type , $this->row['value'] , time()+3600);
                		return $this->row['value'];
 				}else{return '_config_no_exists';}
 			}else{return '_config_no_exists';}

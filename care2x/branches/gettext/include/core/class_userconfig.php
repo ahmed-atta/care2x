@@ -108,12 +108,21 @@ class UserConfig {
 	    global $db;
 	
 		if(empty($user_id)) return $this->_getDefault();
+
+		if(isset($_COOKIE['c2x_'.str_replace('.','_',$user_id).'_serial_config_data'])) {
+			$this->buffer=unserialize($_COOKIE['c2x_'.$user_id.'_serial_config_data']);
+			$this->is_preloaded=TRUE;
+			return TRUE;
+		}
 		
 	    if ($this->result=$db->Execute("SELECT serial_config_data FROM $this->tb WHERE user_id='$user_id'")) {
 		    if ($this->result->RecordCount()) {
 		        $this->row=$this->result->FetchRow();
 			    $this->buffer=unserialize($this->row['serial_config_data']);
 			   	$this->is_preloaded=TRUE;
+			   	
+			   	//..and we set a nice cookie here to avoid too much queries
+			   	setcookie('c2x_'.str_replace('.','_',$user_id).'_serial_config_data',$this->row['serial_config_data'], time()+3600);
 			   	return TRUE;
 			}else{
 				return $this->getConfig(); # Returns default config

@@ -121,7 +121,7 @@ function configNew(&$bn,&$bv,&$f,$i,&$uid)
   else if ($bn == 'ie') { $bn='msie';}
 
   $uid=uniqid('');
-  $f='CFG'.$uid.microtime().'.cfg';
+  $f='CFG'.$uid.str_replace(' ','',microtime()).'.cfg';
 
    # Return previous error reporting 
    error_reporting($old_err_rep);
