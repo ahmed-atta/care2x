@@ -21,10 +21,10 @@ $key_2level='2.3096868388074E+28';
 $key_login='2.9647067937614E+28';
 
 # Main host address or domain
-$main_domain='localhost/gettext/care2002/care2x/branches/gettext/';
+$main_domain='localhost/gettext/';
 
 # Host address for images
-$photoserver_ip='localhost/gettext/care2002/care2x/branches/gettext/';
+$photoserver_ip='localhost/gettext/';
 
 # Transfer protocol. Use https if this runs on SSL server
 $httprotocol='http';
