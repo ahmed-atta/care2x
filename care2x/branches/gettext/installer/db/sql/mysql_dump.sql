@@ -2085,20 +2085,21 @@ CREATE TABLE IF NOT EXISTS `care_med_products_main` (
 --
 
 CREATE TABLE IF NOT EXISTS `care_menu_main` (
-  `nr` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
-  `sort_nr` tinyint(2) NOT NULL DEFAULT '0',
-  `name` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `permission` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `image` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
-  `LD_var` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `url` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `is_visible` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `hide_by` text CHARACTER SET latin1 COLLATE latin1_general_ci,
-  `status` varchar(25) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `modify_id` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
-  `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`nr`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+`nr` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+`sort` tinyint(2) NOT NULL DEFAULT '0',
+`parent` int(2) NOT NULL DEFAULT '0',
+`name` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+`permission` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+`image` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+`LD_var` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+`url` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+`is_visible` tinyint(1) unsigned NOT NULL DEFAULT '1',
+`hide_by` text CHARACTER SET latin1 COLLATE latin1_general_ci,
+`status` varchar(25) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+`modify_id` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+`modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (`nr`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `care_menu_main`
@@ -5619,4 +5620,3 @@ ALTER TABLE `care_encounter_prescription_sub`
 
 
 INSERT INTO `care_version` (`name`, `type`, `number`, `build`, `date`, `time`, `releaser`) VALUES ('CARE2X', 'beta', '3.0', '7110', '2011-08-18', '00:00:00', 'Gjergj Sheldija/Robert Meggle');
-
