@@ -14,7 +14,7 @@
 {{/if}}
 
 	<tr>
-		<td bgcolor={{$body_bgcolor}} valign=top>
+		<td  valign=top>
 		
 			{{* Note the ff: conditional block must always go together *}}
 			{{if $sMainBlockIncludeFile ne ""}}

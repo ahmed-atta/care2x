@@ -2105,34 +2105,23 @@ CREATE TABLE IF NOT EXISTS `care_menu_main` (
 --
 
 
--- --------------------------------------------------------
 
---
--- Table structure for table `care_menu_sub`
---
-
-CREATE TABLE IF NOT EXISTS `care_menu_sub` (
-  `s_nr` int(11) NOT NULL default '0',
-  `s_sort_nr` int(11) NOT NULL default '0',
-  `s_main_nr` int(11) NOT NULL default '0',
-  `s_ebene` int(11) NOT NULL default '0',
-  `s_name` varchar(100) collate latin1_general_ci NOT NULL default '',
-  `s_LD_var` varchar(100) collate latin1_general_ci NOT NULL default '',
-  `s_url` varchar(100) collate latin1_general_ci NOT NULL default '',
-  `s_url_ext` varchar(100) collate latin1_general_ci NOT NULL default '',
-  `s_image` varchar(100) collate latin1_general_ci NOT NULL default '',
-  `s_open_image` varchar(100) collate latin1_general_ci NOT NULL default '',
-  `s_is_visible` varchar(100) collate latin1_general_ci NOT NULL default '',
-  `s_hide_by` varchar(100) collate latin1_general_ci NOT NULL default '',
-  `s_status` varchar(100) collate latin1_general_ci NOT NULL default '',
-  `s_modify_id` varchar(100) collate latin1_general_ci NOT NULL default '',
-  `s_modify_time` datetime NOT NULL default '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
-
---
--- Dumping data for table `care_menu_sub`
---
-
+CREATE TABLE IF NOT EXISTS `care_menu_main` (
+  `nr` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `sort` tinyint(2) NOT NULL DEFAULT '0',
+  `parent` int(2) NOT NULL DEFAULT '0',
+  `name` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `permission` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `LD_var` varchar(35) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `url` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `is_visible` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `hide_by` text CHARACTER SET latin1 COLLATE latin1_general_ci,
+  `status` varchar(25) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `modify_id` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`nr`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4557,7 +4546,7 @@ CREATE TABLE IF NOT EXISTS `care_yellow_paper` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 
- 
+
 -- The preloaded data follows -----------------------
 
 --
@@ -4769,7 +4758,7 @@ INSERT INTO care_config_global VALUES ('person_title_hide', '0', NULL, 'normal',
 INSERT INTO care_config_global VALUES ('person_bloodgroup_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('person_civilstatus_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('person_insurance_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);
-INSERT INTO care_config_global VALUES ('person_other_his_nr_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);    
+INSERT INTO care_config_global VALUES ('person_other_his_nr_hide', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);
 INSERT INTO care_config_global VALUES ('use_old_gui_style', '0', NULL, 'normal', '', '', 00000000000000, '', 00000000000000);
 
 --
@@ -4863,63 +4852,33 @@ INSERT INTO care_group VALUES (6, 'prescription', 'Prescription', 'LDPrescriptio
 --
 
 
-INSERT INTO `care_menu_main` (`nr`, `sort_nr`, `name`, `permission`, `image`, `LD_var`, `url`, `is_visible`, `hide_by`, `status`, `modify_id`, `modify_time`) VALUES
-(1, 1, 'Home', '', '', 'LDHome', 'main/startframe.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(2, 5, 'Patient', '', '', 'LDPatient', 'modules/registration_admission/patient_register_pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(3, 10, 'Admission', 'admission', '', 'LDAdmission', 'modules/registration_admission/admission_pass.php', 0, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(4, 15, 'Ambulatory', '', '', 'LDAmbulatory', 'modules/ambulatory/ambulatory.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(5, 20, 'Medocs', 'medocs', '', 'LDMedocs', 'modules/medocs/medocs_pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(6, 25, 'Doctors', 'doctors', '', 'LDDoctors', 'modules/doctors/doctors.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(7, 35, 'Nursing', 'nursing', '', 'LDNursing', 'modules/nursing/nursing.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(8, 40, 'OR', 'op', 'LDOR', '', 'main/op-docu.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(9, 45, 'Laboratories', 'lab', '', 'LDLabs', 'modules/laboratory/labor.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(10, 50, 'Radiology', 'radio', '', 'LDRadiology', 'modules/radiology/radiolog.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(11, 55, 'Pharmacy', 'pharma', '', 'LDPharmacy', 'modules/pharmacy/pharmacy.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(12, 60, 'Medical Depot', 'meddepot', '', 'LDMedDepot', 'modules/medstock/medstock.php ', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(13, 65, 'Directory', 'teldir', '', 'LDDirectory', 'modules/phone_directory/phone.php', 0, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(14, 70, 'Tech Support', 'tech', '', 'LDTechSupport', 'modules/tech/tech.php', 0, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(15, 72, 'System Admin', 'System Admin', '', 'LDEDP', 'modules/system_admin/admin.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(16, 75, 'Intranet Email', '', '', 'LDIntraEmail', 'modules/intranet_email/intra-email-pass.php', 0, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(18, 85, 'Special Tools', '', '', 'LDSpecials', 'main/spediens.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(19, 90, 'Login', '', '', 'LDLogin', 'main/login.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
-(20, 7, 'Appointments', '', '', 'LDAppointments', 'modules/appointment_scheduler/appt_main_pass.php', 0, '', '', '20030922232015', '2003-04-05 00:01:45');
-
---
--- Dumping data for table `care_menu_sub`
---
-
-
-INSERT INTO `care_menu_sub` (`s_nr`, `s_sort_nr`, `s_main_nr`, `s_ebene`, `s_name`, `s_LD_var`, `s_url`, `s_url_ext`, `s_image`, `s_open_image`, `s_is_visible`, `s_hide_by`, `s_status`, `s_modify_id`, `s_modify_time`) VALUES
-(3, 0, 2, 0, '', '', '', '', 'gui/img/common/default/new_group.gif', 'gui/img/common/default/new_group.gif', '1', '', '', '', '0001-01-01 00:00:00'),
-(70, 0, 7, 0, '', '', '', '', 'gui/img/common/default/nurse.gif', 'gui/img/common/default/nurse.gif', '', '', '', '', '0001-01-01 00:00:00'),
-(20, 0, 1, 0, '', '', '', '', 'gui/img/common/default/articles.gif', 'gui/img/common/default/home.gif', '', '', '', '', '0001-01-01 00:00:00'),
-(30, 0, 20, 0, '', '', '', '', 'gui/img/common/default/calendar.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
-(5, 2, 2, 1, 'Admission', 'LDAdmission', 'modules/registration_admission/admission_pass.php', '', 'gui/img/common/default/bn.gif', 'gui/img/common/default/bn.gif', '1', '', '', '', '0001-01-01 00:00:00'),
-(1, 1, 2, 1, 'Registration', '', 'modules/registration_admission/patient_register_pass.php', '&target=entry', 'gui/img/common/default/post_discussion.gif', '', '1', '', '', '', '0001-01-01 00:00:00'),
-(130, 1, 2, 1, 'Search', 'LDSearch', 'modules/registration_admission/patient_register_pass.php', '&target=search', 'gui/img/common/default/findnew.gif', 'gui/img/common/default/findnew.gif', '1', '', '', '', '0001-01-01 00:00:00'),
-(135, 1, 2, 1, 'Archive', 'LDArchive', 'modules/registration_admission/patient_register_pass.php', '&target=archiv', '', '', '1', '', '', '', '0001-01-01 00:00:00'),
-(140, 5, 2, 2, 'Search', 'LDSearch', 'modules/registration_admission/admission_pass.php', '&target=search', 'gui/img/common/default/findnew.gif', 'gui/img/common/default/findnew.gif', '1', '', '', '', '0001-01-01 00:00:00'),
-(145, 6, 2, 2, 'Archive', 'LDArchive', 'modules/registration_admission/admission_pass.php', '&target=archiv', '', '', '1', '', '', '', '0001-01-01 00:00:00'),
-(71, 1, 7, 1, 'Wards', '', 'modules/nursing/nursing.php', '', 'gui/img/common/default/bul_arrowgrnsm.gif', 'gui/img/common/default/bul_arrowgrnsm.gif', '', '', '[station]', '', '0001-01-01 00:00:00'),
-(155, 1, 3, 1, 'Archive', 'LDArchive', 'modules/registration_admission/admission_pass.php', '&target=archiv', '', '', '1', '', '', '', '0001-01-01 00:00:00'),
-(40, 0, 3, 0, '', '', '', '', 'gui/img/common/default/bn.gif', 'gui/img/common/default/bn.gif', '', '', '', '', '0001-01-01 00:00:00'),
-(165, 0, 13, 0, '', '', '', '', 'gui/img/common/default/violet_phone.gif', 'gui/img/common/default/violet_phone.gif', '', '', '', '', '0001-01-01 00:00:00'),
-(7, 3, 7, 1, 'Search', '', 'modules/nursing/nursing-patient-search-start.php', '', 'gui/img/common/default/findnew.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
-(72, 2, 7, 1, 'Quick view', '', 'modules/nursing/nursing-quickview.php', '', 'gui/img/common/default/eye_s.gif', '', '1', '', '', '', '0001-01-01 00:00:00'),
-(50, 0, 4, 0, '', '', '', '', 'gui/img/common/default/disc_unrd.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
-(120, 0, 6, 0, '', '', '', '', 'gui/img/common/default/forums.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
-(160, 0, 17, 0, '', '', '', '', 'gui/img/common/default/c-mail.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
-(190, 0, 16, 0, '', '', '', '', 'gui/img/common/default/bubble2.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
-(195, 0, 10, 0, '', '', '', '', 'gui/img/common/default/torso.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
-(200, 0, 18, 0, '', '', '', '', 'gui/img/common/default/settings_tree.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
-(205, 0, 11, 0, '', '', '', '', 'gui/img/common/default/add.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
-(160, 0, 19, 0, '', '', '', '', 'gui/img/common/default/padlock.gif', 'gui/img/common/default/bul_arrowgrnsm.gif', '', '', '', '', '0001-01-01 00:00:00'),
-(215, 0, 15, 0, '', '', '', '', 'gui/img/common/default/sections.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
-(220, 0, 12, 0, '', '', '', '', 'gui/img/common/default/storage.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
-(225, 0, 8, 0, '', '', '', '', 'gui/img/common/default/people_search_online.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
-(230, 0, 9, 0, '', '', '', '', 'gui/img/common/default/chart.gif', '', '', '', '', '', '0001-01-01 00:00:00'),
-(235, 0, 14, 0, '', '', '', '', 'gui/img/common/default/settings_tree.gif', '', '', '', '', '', '0001-01-01 00:00:00');
-
+INSERT INTO `care_menu_main` (`nr`, `sort`, `parent`, `name`, `permission`, `image`, `LD_var`, `url`, `is_visible`, `hide_by`, `status`, `modify_id`, `modify_time`) VALUES
+(2, 5, 0, 'Patient', '', '', 'LDPatient', 'modules/registration_admission/patient_register_pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(3, 10, 0, 'Admission', 'admission', '', 'LDAdmission', 'modules/registration_admission/admission_pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(4, 15, 0, 'Ambulatory', '', '', 'LDAmbulatory', 'modules/ambulatory/ambulatory.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(5, 20, 0, 'Medocs', 'medocs', '', 'LDMedocs', 'modules/medocs/medocs_pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(6, 25, 0, 'Doctors', 'doctors', '', 'LDDoctors', 'modules/doctors/doctors.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(7, 35, 0, 'Nursing', 'nursing', '', 'LDNursing', 'modules/nursing/nursing.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(8, 40, 0, 'OR', 'op', 'LDOR', '', 'main/op-docu.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(9, 45, 0, 'Laboratories', 'lab', '', 'LDLabs', 'modules/laboratory/labor.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(10, 50, 0, 'Radiology', 'radio', '', 'LDRadiology', 'modules/radiology/radiolog.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(11, 55, 0, 'Pharmacy', 'pharma', '', 'LDPharmacy', 'modules/pharmacy/pharmacy.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(12, 60, 0, 'Medical Depot', 'meddepot', '', 'LDMedDepot', 'modules/medstock/medstock.php ', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(13, 65, 0, 'Directory', 'teldir', '', 'LDDirectory', 'modules/phone_directory/phone.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(14, 70, 0, 'Tech Support', 'tech', '', 'LDTechSupport', 'modules/tech/tech.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(15, 72, 0, 'System Admin', 'System Admin', '', 'LDEDP', 'modules/system_admin/admin.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(16, 75, 0, 'Intranet Email', '', '', 'LDIntraEmail', 'modules/intranet_email/intra-email-pass.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(18, 85, 0, 'Special Tools', '', '', 'LDSpecials', 'main/spediens.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(19, 90, 0, 'Login', '', '', 'LDLogin', 'main/login.php', 1, '', '', '20030922232015', '0000-00-00 00:00:00'),
+(20, 7, 0, 'Appointments', '', '', 'LDAppointments', 'modules/appointment_scheduler/appt_main_pass.php', 1, '', '', '20030922232015', '2003-04-05 00:01:45'),
+(21, 0, 2, 'Admission', '', NULL, 'LDAdmission', 'modules/registration_admission/patient_register_pass.php', 1, NULL, '', NULL, '2011-08-24 22:01:58'),
+(22, 0, 2, 'Registration', '', 'gui/img/common/default/post_discussion.gif', '', 'modules/registration_admission/patient_register_pass.php', 1, NULL, '', NULL, '2011-08-24 22:04:17'),
+(23, 0, 2, 'Search', '', 'gui/img/common/default/findnew.gif', 'LDSearch', 'modules/registration_admission/patient_register_pass.php&target=search', 1, NULL, '', NULL, '2011-08-24 22:04:59'),
+(24, 0, 2, 'Archive', '', 'LDArchive', '', 'modules/registration_admission/patient_register_pass.php&target=archiv', 1, NULL, '', NULL, '2011-08-24 22:05:50'),
+(25, 0, 7, 'Wards', '', 'gui/img/common/default/bul_arrowgrnsm.gif', '', 'modules/nursing/nursing.php', 1, NULL, '', NULL, '2011-08-24 22:07:09'),
+(26, 0, 3, 'Archive', '', NULL, 'LDArchive', 'modules/registration_admission/admission_pass.php&target=archiv', 1, NULL, '', NULL, '2011-08-24 22:07:39'),
+(27, 0, 7, 'Search', '', 'gui/img/common/default/findnew.gif', '', 'modules/nursing/nursing-patient-search-start.php', 1, NULL, '', NULL, '2011-08-24 22:08:06'),
+(28, 0, 7, 'Quick view', '', 'gui/img/common/default/eye_s.gif', '', 'modules/nursing/nursing-quickview.php', 1, NULL, '', NULL, '2011-08-24 22:08:36');
 
 --
 -- Dumping data for table care_method_induction
@@ -5640,9 +5599,9 @@ INSERT INTO care_unit_measurement VALUES (17, 1, 'cl', 'centiliter', 'LDCentilit
 INSERT INTO care_unit_measurement VALUES (18, 1, '�l', 'microliter', 'LDMicroliter', 'metric', 0, '', '', 00000000000000, '', 00000000000000);
 
 
--- 
+--
 -- Constrains
--- 
+--
 --
 -- Constraints for table `care_encounter`
 --
@@ -5653,10 +5612,11 @@ ALTER TABLE `care_encounter`
 --
 ALTER TABLE `care_encounter_prescription_sub`
   ADD CONSTRAINT `care_encounter_prescription_sub_fk` FOREIGN KEY (`prescription_nr`) REFERENCES `care_encounter_prescription` (`nr`) ON DELETE CASCADE ON UPDATE CASCADE;
-  
+
 --
 -- Dumping data for table care_version
 --
 
 
 INSERT INTO `care_version` (`name`, `type`, `number`, `build`, `date`, `time`, `releaser`) VALUES ('CARE2X', 'beta', '3.0', '7110', '2011-08-18', '00:00:00', 'Gjergj Sheldija/Robert Meggle');
+
