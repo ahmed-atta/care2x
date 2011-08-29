@@ -20,10 +20,11 @@ $('document').ready(function(){
 				<h3>
 					<a href="{{$care_gui}}">Care2X</a>
 				</h3>
-				<ul>
 					{{foreach from=$menu key=k item=v}} 
 						{{if not $v.children}}
+					<ul>
 							<li><a href="{{$care_gui}}{{$v.url}}">{{$v.name}}</a></li> 
+</ul>
 						{{else}}
 							<ul class="nav secondary-nav">
 								<li class="menu">
@@ -37,7 +38,6 @@ $('document').ready(function(){
 							</ul>
 						{{/if}} 
 					{{/foreach}}
-				</ul>
 			</div>
 		</div>
 		<!-- /fill -->
