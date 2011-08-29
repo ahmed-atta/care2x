@@ -50,7 +50,7 @@
 													{{* Do not move the sPassHiddenInputs outside of the <form></form> block *}}
 													{{$sPassHiddenInputs}}
 
-													<div class="buttons">
+													<div class="actions">
 													{{$sPassSubmitButton}} 
 													{{$sCancelButton}}
 													</div>
