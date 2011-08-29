@@ -12,19 +12,19 @@
 							<TD class="submenu_item" width=35%><nobr>{{$LDMedLabTestRequest}}</nobr></TD>
 							<TD>{{$LDTestRequestChemLabTxt}}</TD>
 						</tr>
-						{{include file="common/submenu_row_spacer.tpl"}}
+						
 
 						<TR>
 							<TD class="submenu_item" width=35%><nobr>{{$LDMedLabTestReception}}</nobr></TD>
 							<TD>{{$LDTestReceptionTxt}}</TD>
 						</tr>
-						{{include file="common/submenu_row_spacer.tpl"}}
+						
 
 						<TR>
 							<TD class="submenu_item" width=35%><nobr>{{$LDSeeData}}</nobr></TD>
 							<TD>{{$LDSeeLabData}}</TD>
 						</tr>
-						{{include file="common/submenu_row_spacer.tpl"}}
+						
 
 						<TR>
 							<TD class="submenu_item" width=35%><nobr>{{$LDNewData}}</nobr></TD>
@@ -51,7 +51,7 @@
 							<TD class="submenu_item" width=35%><nobr>{{$LDPathLabTestRequest}}</nobr></TD>
 							<TD>{{$LDTestRequestPathoTxt}}</TD>
 						</tr>
-						{{include file="common/submenu_row_spacer.tpl"}}
+						
 
 						<TR>
 							<TD class="submenu_item" width=35%><nobr>{{$LDPathLabTestReception}}</nobr></TD>
@@ -78,7 +78,7 @@
 							<TD class="submenu_item" width=35%><nobr>{{$LDBacLabTestRequest}}</nobr></TD>
 							<TD>{{$LDTestRequestBacterioTxt}}</TD>
 						</tr>
-						{{include file="common/submenu_row_spacer.tpl"}}
+						
 
 						<TR>
 							<TD class="submenu_item" width=35%><nobr>{{$LDBacLabTestReception}}</nobr></TD>
@@ -105,7 +105,7 @@
 							<TD class="submenu_item" width=35%><nobr>{{$LDBloodRequest}}</nobr></TD>
 							<TD>{{$LDBloodRequestTxt}}</TD>
 						</tr>
-						{{include file="common/submenu_row_spacer.tpl"}}
+						
 
 						<TR>
 							<TD class="submenu_item" width=35%><nobr>{{$LDBloodTestReception}}</nobr></TD>
@@ -132,7 +132,7 @@
 							<TD class="submenu_item" width=35% ><nobr>{{$LDTestParameters}}</nobr></TD>
 							<TD>{{$LDTestParametersTxt}}</TD>
 						</tr>
-						{{include file="common/submenu_row_spacer.tpl"}}						
+												
 						<TR>
 							<TD class="submenu_item" width=35% ><nobr>{{$LDTestGroups}}</nobr></TD>
 							<TD>{{$LDTestGroupsTxt}}</TD>

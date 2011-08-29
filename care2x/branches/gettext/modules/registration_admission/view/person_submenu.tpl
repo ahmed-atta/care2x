@@ -8,46 +8,46 @@
 
 					{{$LDPatientRegister}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDAdmission}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDVisit}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDAppointments}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDDiagXResults}}
 										
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDDRG}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDProcedures}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDPrescriptions}}
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDReports}}
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDImmunization}}
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDMeasurements}}
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDPregnancies}}
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDBirthDetails}}
 

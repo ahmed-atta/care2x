@@ -8,31 +8,31 @@
 
 					{{$LDPharmaOrder}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDHow2Order}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDOrderCat}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDOrderArchive}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 <!--					{{$LDPharmaDb}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}-->
+					-->
 
 					{{$LDOrderBotActivate}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDSupplier}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDSupply}}
 					</TBODY>

@@ -16,23 +16,23 @@
 						</td>
 					</TR>
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDQuickView}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDSearchPatient}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDArchive}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDNursesList}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDNews}}
 
