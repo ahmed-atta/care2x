@@ -1249,8 +1249,10 @@ table .headerSortUp.purple, table .headerSortDown.purple {
   position: relative;
 }
 .topbar ul.secondary-nav {
+  /*
   float: right;
   margin-left: 10px;
+  */
   margin-right: 0;
 }
 .topbar ul li {
