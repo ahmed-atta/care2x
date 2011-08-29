@@ -485,6 +485,11 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
   padding: 0;
   border: 0;
 }
+
+a.btn > img {
+	padding-right: 10px;
+	vertical-align:bottom;
+} 
 /* Typography.less
  * Headings, body text, lists, code, and more for a versatile and durable typography system
  * ---------------------------------------------------------------------------------------- */
