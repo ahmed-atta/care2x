@@ -373,7 +373,7 @@ class GuiSearchPerson {
 				<input type="hidden" name="ipath" value="'.$ipath.'">
 				<input type="hidden" name="mode" value="search">');
 
-		$this->smarty->assign('sCancelButton','<a href="'.$this->cancelfile.URL_APPEND.'" class="negative"><img '.createComIcon($root_path,'cross.png','0').'>'.$LDClose.'</a>');
+		$this->smarty->assign('sCancelButton','<a href="'.$this->cancelfile.URL_APPEND.'" class="btn"><img '.createComIcon($root_path,'cross.png','0').'>'.$LDClose.'</a>');
 
 		//include($root_path.'include/helpers/inc_patient_searchmask.php');
 		#

@@ -33,7 +33,7 @@ function check(d) {
 
 
 <form action="{{$formAction}}" method="post" name="citytown" onSubmit="return check(this)">
-	<div class="buttons">	
+	<div class="actions">	
 		<table border=0>
 		
 		{{foreach from=$inputFields key=id item=i}}
@@ -50,12 +50,12 @@ function check(d) {
 		
 			<tr>
 				<td>
-					<button type="submit" class="positive">
+					<button type="submit" class="btn primary">
 						<img {{$imageSave}} border="0">{{$Save}}
 					</button>
 				</td>
 				<td>
-					<a href="{{$breakfile}}" class="negative">
+					<a href="{{$breakfile}}" class="btn">
 						<img {{$imageCancel}} border="0">{{$Cancel}}
 					</a>
 				</td>

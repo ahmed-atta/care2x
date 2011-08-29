@@ -25,9 +25,9 @@ require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
 				<input type="hidden"  name="sid" value="<?php echo $sid ?>" >
 				<input type="hidden"  name="lang" value="<?php echo $lang ?>" >
 				<input type="hidden"  name="logout" value="1" >
-				<button type="submit" value="<?php echo $LDYes ?>" class="positive"><?php echo $LDYes ?></button>
+				<button type="submit" value="<?php echo $LDYes ?>" class="btn primary"><?php echo $LDYes ?></button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="button" class="negative" value="<?php echo $LDNotReally ?>" onClick="javascript:window.history.back()"><?php echo $LDNotReally ?></button>
+				<button type="button" class="btn" value="<?php echo $LDNotReally ?>" onClick="javascript:window.history.back()"><?php echo $LDNotReally ?></button>
 			</div>
 		</form>
 	</center>

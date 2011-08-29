@@ -71,7 +71,7 @@
 	</tbody>
 	</table>
 	<br />
-	<div class="buttons">
+	<div class="actions">
 		{{* Do not move the following elements outside the <form></form> block *}}
 	
 		{{$sHiddenInputs}}

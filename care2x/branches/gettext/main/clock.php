@@ -55,7 +55,7 @@ function gethelp(x,s,x1,x2,x3)
 			</FONT>
 		</td>
 		<td bgcolor="<?php echo $cfg ['top_bgcolor']; ?>" height="10" align=right>
-			<div class="buttons">
+			<div class="actions">
 				<?php echo '<a href="javascript:window.history.back()"><img ' . createLDImgSrc ( CARE_BASE , 'back2.gif', '0' ) . '></a>'; ?>
 				<a href="javascript:gethelp('')">
 					<img <?php echo createLDImgSrc ( CARE_BASE , 'hilfe-r.gif', '0' )?> 

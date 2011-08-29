@@ -7,7 +7,7 @@
 </table>
 {{/if}}
 
-<div class="buttons">	
+<div class="actions">	
 	<table border=0 cellpadding=4>
 		{{foreach from=$inputFields key=id item=i}}
 			<tr>
@@ -26,7 +26,7 @@
 				<a href="{{$listLink}}">
 					<img {{$imageListAll}} border="0">{{$ListAll}}
 				</a> 
-				<a href="{{$breakfile}}" class="negative">
+				<a href="{{$breakfile}}" class="btn">
 					<img {{$imageCancel}} border="0">{{$Cancel}}
 				</a>
 			</td>
