@@ -9,13 +9,27 @@
 	     {{/if}}
 	  </td>
 	  <td bgcolor="{{$top_bgcolor}}" align=right>
-	  	<div class="buttons" style="float:right">
-		{{if $pbAux2}}<a href="{{$pbAux2}}" class="regular"><img {{$gifAux2}} alt=""></a>{{/if}}
-		{{if $pbAux1}}<a href="{{$pbAux1}}" class="regular"><img {{$gifAux1}} alt=""></a>{{/if}}
-		{{if $pbBack}}<a href="{{$pbBack}}" class="regular"><img {{$gifBack2}} alt="">{{$LDBack}}</a>{{/if}}
-		{{if $pbHelp}}<a href="{{$pbHelp}}" class="help"><img {{$gifHilfeR}} alt="">{{$LDHelp}}</a>{{/if}}
-		{{if $breakfile}}<a href="{{$breakfile}}" {{$sCloseTarget}} class="btn"><img {{$gifClose2}} alt="{{$LDCloseAlt}}">{{$LDClose}}</a>{{/if}}
-		 </div>
+	  	<div  style="float:right">
+			{{if $pbAux2}}
+				<a href="{{$pbAux2}}" class="regular"><img {{$gifAux2}} alt=""></a>
+			{{/if}}
+			{{if $pbAux1}}
+				<button class="btn info">
+					<a href="{{$pbAux1}}"><img {{$gifAux1}} alt=""></a>
+				</button>
+			{{/if}}
+			{{if $pbBack}}
+				<a href="{{$pbBack}}" class="btn"><img {{$gifBack2}} alt="">{{$LDBack}}</a>
+			{{/if}}
+			{{if $pbHelp}}
+				<a href="{{$pbHelp}}" class="btn primary"><img {{$gifHilfeR}} alt="">{{$LDHelp}}</a>
+			{{/if}}
+			{{if $breakfile}}
+				<a href="{{$breakfile}}" {{$sCloseTarget}} class="btn danger">
+					<img {{$gifClose2}} alt="{{$LDCloseAlt}}">{{$LDClose}}
+				</a>
+			{{/if}}
+		</div>
 	  </td>
 	 </tr>
 	 </table>
