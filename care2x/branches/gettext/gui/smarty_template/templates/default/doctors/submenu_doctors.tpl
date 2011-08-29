@@ -8,15 +8,15 @@
 
 					{{$LDQViewTxt}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDDutyPlanTxt}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDDocsForumTxt}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDNewsTxt}}
 

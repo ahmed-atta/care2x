@@ -8,22 +8,22 @@
 
 					{{$LDTestRequestRadio}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDTestReception}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDDicomImages}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDUploadDicom}}
 
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDSelectViewer}}
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDNews}}
 					

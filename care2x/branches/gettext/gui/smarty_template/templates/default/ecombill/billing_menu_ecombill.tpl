@@ -10,22 +10,22 @@
 				{{if $LDSelectHospitalServices}}
 					{{$LDSelectHospitalServices}}
 				
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 				
 					{{$LDSelectLaboratoryTests}}
 				{{/if}}
 				{{if $LDViewBill}}
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					{{$LDViewBill}}	
 	
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 				{{/if}}
 				
 				{{if $LDViewPayment}}
 					{{$LDViewPayment}}
 	
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 				{{/if}}
 				
 				{{if $LDGenerateFinalBill}}

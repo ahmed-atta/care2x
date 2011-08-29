@@ -11,11 +11,11 @@
 						<TD class="submenu_item" width=35%>{{$LDOrDocument}}</TD>
 						<TD>{{$LDOrDocumentTxt}}</TD>
 					</tr>
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 					<tr>
 						<td colspan="2">{{$LDOrDocumentMenu}}</td>
 					</tr>
-					{{include file="common/submenu_row_spacer.tpl"}}					
+										
 					<TR>
 						<TD class="submenu_item" width=35%>{{$LDQviewDocs}}</TD>
 						<TD>{{$LDQviewTxtDocs}}</TD>
@@ -41,25 +41,25 @@
 						<TD class="submenu_item" width=35%>{{$LDOrLogBook}}</TD>
 						<TD>{{$LDOrLogBookTxt}}</TD>
 					</tr>
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 					<tr>
 						<td colspan="2">{{$LDOrLogBookMenu}}</td>
 					</tr>
-					{{include file="common/submenu_row_spacer.tpl"}}	
+						
 					<TR>
 						<TD class="submenu_item" width=35%>{{$LDORNOCQuickView}}</TD>
 						<TD>{{$LDQviewTxtNurse}}</TD>
 					</tr>
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 					<tr>
 						<td colspan="2">{{$LDDutyPlanMenu}}</td>
 					</tr>
-					{{include file="common/submenu_row_spacer.tpl"}}	
+						
 					<TR>
 						<TD class="submenu_item" width=35%>{{$LDORNOCScheduler}}</TD>
 						<TD>{{$LDDutyPlanTxt}}</TD>
 					</tr>
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					<TR>
 						<TD class="submenu_item" width=35%>{{$LDOnCallDuty}}</TD>
@@ -86,13 +86,13 @@
 						<TD class="submenu_item" width=35%>{{$LDORAnaQuickView}}</TD>
 						<TD>{{$LDQviewTxtAna}}</TD>
 					</tr>
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 
 					<TR>
 						<TD class="submenu_item" width=35%>{{$LDORAnaNOCScheduler}}</TD>
 						<TD>{{$LDDutyPlanTxt}}</TD>
 					</tr>
-					{{include file="common/submenu_row_spacer.tpl"}}
+					
 					<tr>
 						<td colspan="2">{{$LDORAnaNOCSchedulerMenu}}</td>
 					</tr>
