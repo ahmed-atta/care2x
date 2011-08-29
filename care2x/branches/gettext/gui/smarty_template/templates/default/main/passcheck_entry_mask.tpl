@@ -34,17 +34,19 @@
 									<table cellpadding=20 cellspacing=0 class="passmask">
 										<tr>
 											<td>
-
-												<p>
 												<form {{$sPassFormParams}}>
 													<div class="prompt">
 														{{$LDPwNeeded}}!
 													</div><br />
 													<label for="username">{{$LDUserPrompt}}:</label>
-													<input type="text" name="userid" size="14" maxlength="25" id="username"> <p>
+													<div class="input">
+													<input type="text" name="userid" size="14" maxlength="25" id="username">
+           											 </div>					
+													
 													<label for="username">{{$LDPwPrompt}}:</label>
+													<div class="input">
 													<input type="password" name="keyword" size="14" maxlength="25" id="password">
-
+													</div>
 													{{* Do not move the sPassHiddenInputs outside of the <form></form> block *}}
 													{{$sPassHiddenInputs}}
 
