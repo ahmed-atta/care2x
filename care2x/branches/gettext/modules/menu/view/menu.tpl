@@ -22,9 +22,9 @@ $('document').ready(function(){
 				</h3>
 					{{foreach from=$menu key=k item=v}} 
 						{{if not $v.children}}
-					<ul>
-							<li><a href="{{$care_gui}}{{$v.url}}">{{$v.name}}</a></li> 
-</ul>
+							<ul>
+								<li><a href="{{$care_gui}}{{$v.url}}">{{$v.name}}</a></li> 
+							</ul>
 						{{else}}
 							<ul class="nav secondary-nav">
 								<li class="menu">
@@ -45,3 +45,5 @@ $('document').ready(function(){
 	<!-- /topbar -->
 </div>
 <!-- topbar-wrapper -->
+
+<div class="clearfix" style="height:30px"></div>
