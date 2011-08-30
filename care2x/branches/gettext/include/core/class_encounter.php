@@ -17,144 +17,144 @@ require_once(CARE_BASE .'modules/nursing/model/class_notes.php');
 class Encounter extends Notes {
 	/**
 	* Table name for encounter (admission) data
-	* @var string
+	* @public string
 	*/
-    var $tb_enc='care_encounter';
+    public $tb_enc='care_encounter';
 	/**
 	* Table name for financial classes
-	* @var string
+	* @public string
 	*/
-	var $tb_fc='care_class_financial';
+	public $tb_fc='care_class_financial';
 	/**
 	* Table name for encounter's financial classes
-	* @var string
+	* @public string
 	*/
-	var $tb_enc_fc='care_encounter_financial_class';
+	public $tb_enc_fc='care_encounter_financial_class';
 	/**
 	* Table name for encounter classes
-	* @var string
+	* @public string
 	*/
-	var $tb_ec='care_class_encounter';
+	public $tb_ec='care_class_encounter';
 	/**
 	* Table name for insurance classes
-	* @var string
+	* @public string
 	*/
-	var $tb_ic='care_class_insurance';
+	public $tb_ic='care_class_insurance';
 	/**
 	* Table name for person (registration) data
-	* @var string
+	* @public string
 	*/
-	var $tb_person='care_person';
+	public $tb_person='care_person';
 	/**
 	* Table name for city/town names
-	* @var string
+	* @public string
 	*/
-	var $tb_citytown='care_address_citytown';
+	public $tb_citytown='care_address_citytown';
 	/**
 	* Table name for encounter's location data
-	* @var string
+	* @public string
 	*/
-	var $tb_location='care_encounter_location';
+	public $tb_location='care_encounter_location';
 	/**
 	* Table name for discharge types
-	* @var string
+	* @public string
 	*/
-	var $tb_dis_type='care_type_discharge';
+	public $tb_dis_type='care_type_discharge';
 	/**
 	* Table name for encounter's sick confirmations
-	* @var string
+	* @public string
 	*/
-	var $tb_sickconfirm='care_encounter_sickconfirm';
+	public $tb_sickconfirm='care_encounter_sickconfirm';
 	/**
 	* Table name for department general data
-	* @var string
+	* @public string
 	*/
-	var $tb_dept='care_department';
+	public $tb_dept='care_department';
 	/**
 	* Table name for insurance firms' general data
-	* @var string
+	* @public string
 	*/
-	var $tb_insco='care_insurance_firm';
+	public $tb_insco='care_insurance_firm';
 	/**
 	* Table name for appointments data
-	* @var string
+	* @public string
 	*/
-	var $tb_appt='care_encounter_appointment';
+	public $tb_appt='care_encounter_appointment';
 	/**
 	* Table name for encounter type
-	* @var string
+	* @public string
 	*/
-	var $tb_enc_type='care_type_encounter';	
+	public $tb_enc_type='care_type_encounter';	
 	/**
 	* Current encounter number
-	* @var int
+	* @public int
 	*/
-	var $enc_nr;
+	public $enc_nr;
 	/**
 	* Name of user
-	* @var string
+	* @public string
 	*/
-	var $encoder;
+	public $encoder;
 	/**
 	* Flag for ignoring certain events
-	* @var boolean
+	* @public boolean
 	*/
-	var $ignore_status=FALSE;
+	public $ignore_status=FALSE;
 	/**
 	* Flag for returning entire record or a part
-	* @var boolean
+	* @public boolean
 	*/
-	var $entire_record=FALSE;
+	public $entire_record=FALSE;
 	/**
 	* Current encounter data in array
-	* @var int
+	* @public int
 	*/
-	var $encounter;
+	public $encounter;
 	/**
 	* Status of preloaded encounter data
-	* @var boolean
+	* @public boolean
 	*/
-	var $is_loaded=FALSE;
+	public $is_loaded=FALSE;
 	/**
 	* Flag for returning single result or many
-	* @var boolean
+	* @public boolean
 	*/
-	var $single_result=FALSE;
+	public $single_result=FALSE;
 	/**
 	* Current record count
-	* @var int
+	* @public int
 	*/
-	var $record_count;
+	public $record_count;
 	/**
 	* Current type number
-	* @var int
+	* @public int
 	*/
-	var $type_nr;
+	public $type_nr;
 	/**
 	* Current localization type number
-	* @var int
+	* @public int
 	*/
-	var $loc_nr;
+	public $loc_nr;
 	/**
 	* Current group number
-	* @var int
+	* @public int
 	*/
-	var $group_nr;
+	public $group_nr;
 	/**
 	* Current date
-	* @var string
+	* @public string
 	*/
-	var $date;
+	public $date;
 	/**
 	* Current time
-	* @var string
+	* @public string
 	*/
-	var $time;
+	public $time;
 	/**
 	* Field names of care_encounter table
-	* @var array
+	* @public array
 	*/
-	var $tabfields=array('encounter_nr',
+	public $tabfields=array('encounter_nr',
 	                           'pid',
 							   'encounter_date',
 							   'encounter_class_nr',
@@ -194,9 +194,9 @@ class Encounter extends Notes {
 							   'create_time');
 	/**
 	* Field names of care_encounter_sickconfirm table
-	* @var array
+	* @public array
 	*/
-	var $fld_sickconfirm=array(
+	public $fld_sickconfirm=array(
 								'nr',
 								'encounter_nr',
 	                           'date_confirm',
@@ -321,7 +321,7 @@ class Encounter extends Notes {
 									  enfc.nr               AS sc_".$type."_nr,
 									  fc.name             AS sc_".$type."_name,
 									  fc.code              AS sc_".$type."_code,
-									  fc.LD_var           AS \"sc_".$type."_LD_var\"
+									  fc.LD_var          AS \"sc_".$type."_LD_var\"
 							FROM
 							          $this->tb_fc AS fc,
 									  $this->tb_enc_fc AS enfc
@@ -348,7 +348,7 @@ class Encounter extends Notes {
 	* - sc_care_nr = the service record's primary key number
 	* - sc_care_name = the service name
 	* - sc_care_code = the service code
-	* - sc_care_LD_var = the variable's name for language dependent name of the service
+	* - sc_care_LD_var= the variable's name for language dependent name of the service
 	*
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
@@ -366,7 +366,7 @@ class Encounter extends Notes {
 	* - sc_room_nr = the service record's primary key number
 	* - sc_room_name = the service name
 	* - sc_room_code = the service code
-	* - sc_room_LD_var = the variable's name for language dependent name of the service
+	* - sc_room_LD_var= the variable's name for language dependent name of the service
 	*
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
@@ -384,7 +384,7 @@ class Encounter extends Notes {
 	* - sc_att_dr_nr = the service record's primary key number
 	* - sc_att_dr_name = the service name
 	* - sc_att_dr_code = the service code
-	* - sc_att_dr_LD_var = the variable's name for language dependent name of the service
+	* - sc_att_dr_LD_var= the variable's name for language dependent name of the service
 	*
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
@@ -446,7 +446,7 @@ class Encounter extends Notes {
 	* - sc_care_end = the end date
 	* - sc_care_encoder = the user name
 	*
-	* @access public
+	* @access public 
 	* @param array Service data for saving. Associative. By reference.
 	* @param int Encounter number
 	* @return boolean
@@ -464,7 +464,7 @@ class Encounter extends Notes {
 	* - sc_room_end = the end date
 	* - sc_room_encoder = the user name
 	*
-	* @access public
+	* @access public 
 	* @param array Service data for saving. Associative. By reference.
 	* @param int Encounter number
 	* @return boolean
@@ -482,7 +482,7 @@ class Encounter extends Notes {
 	* - sc_att_dr_end = the end date
 	* - sc_att_dr_encoder = the user name
 	*
-	* @access public
+	* @access public 
 	* @param array Service data for saving. Associative. By reference.
 	* @param int Encounter number
 	* @return boolean
@@ -523,7 +523,7 @@ class Encounter extends Notes {
 	* - sc_care_end = the end date
 	* - sc_care_encoder = the user name
 	*
-	* @access public
+	* @access public 
 	* @param array Service data for saving. Associative. By reference.
 	* @return boolean
 	*/			
@@ -542,7 +542,7 @@ class Encounter extends Notes {
 	* - sc_room_end = the end date
 	* - sc_room_encoder = the user name
 	*
-	* @access public
+	* @access public 
 	* @param array Service data for saving. Associative. By reference.
 	* @param int Record's primary key number. (reserved)
 	* @return boolean
@@ -562,7 +562,7 @@ class Encounter extends Notes {
 	* - sc_att_dr_end = the end date
 	* - sc_att_dr_encoder = the user name
 	*
-	* @access public
+	* @access public 
 	* @param array Service data for saving. Associative. By reference.
 	* @param int Record's primary key number. (reserved)
 	* @return boolean
@@ -581,7 +581,7 @@ class Encounter extends Notes {
     function getAllServiceClassesObject($type=''){
 	    global $db;
 		if(empty($type)) return FALSE;
-		$this->sql="SELECT class_nr,class_id,code,name,LD_var AS \"LD_var\" FROM $this->tb_fc WHERE type='$type'";
+		$this->sql="SELECT class_nr,class_id,code,name,LD_varAS \"LD_var\" FROM $this->tb_fc WHERE type='$type'";
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->result->RecordCount()) {
 			    return $this->result;
@@ -591,7 +591,7 @@ class Encounter extends Notes {
 	/**
 	* Gets all service classes of 'care' class.
 	*
-	* @access public
+	* @access public 
 	* @return mixed adodb record object or boolean
 	*/			
 	function AllCareServiceClassesObject(){
@@ -600,7 +600,7 @@ class Encounter extends Notes {
 	/**
 	* Gets all service classes of 'room' class.
 	*
-	* @access public
+	* @access public 
 	* @return mixed adodb record object or boolean
 	*/			
 	function AllRoomServiceClassesObject(){
@@ -609,7 +609,7 @@ class Encounter extends Notes {
 	/**
 	* Gets all service classes of 'att_dr' class.
 	*
-	* @access public
+	* @access public 
 	* @return mixed adodb record object or boolean
 	*/			
 	function AllAttDrServiceClassesObject(){
@@ -622,15 +622,15 @@ class Encounter extends Notes {
 	* - class_nr = the class number, primary key (numeric)
 	* - class_id = the class ID (alphanumeric)
 	* - name = the name of class
-	* - LD_var = the variable's name for language dependent name of class
+	* - LD_var= the variable's name for language dependent name of class
 	*
-	* @access public
+	* @access public 
 	* @return mixed adodb record object or boolean
 	*/			
 	function AllEncounterClassesObject(){
 	    global $db;
 	    //$db->debug=true;
-		$this->sql="SELECT class_nr,class_id,name,LD_var AS \"LD_var\" FROM $this->tb_ec ";
+		$this->sql="SELECT class_nr,class_id,name,LD_varAS \"LD_var\" FROM $this->tb_ec ";
 		if($this->res['aec']=$db->Execute($this->sql)) {
 		    if($this->res['aec']->RecordCount()) {
 			    return $this->res['aec'];
@@ -1194,7 +1194,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Updates the encounter record with data from the internal buffer array.
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* returns boolean
 	*/
@@ -1205,7 +1205,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Checks if an encounter number is currently admitted (both inpatient & outpatient).
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param string Type of param <var>$nr</var> (<b>_ENC</b> = encounter nr, <b>_PID</b> = pid nr) , defaults to _ENC = encounter nr.
 	* @return mixed integer or boolean
@@ -1227,7 +1227,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Checks if the person's  is currently admitted based on his PID number.
-	* @access public
+	* @access public 
 	* @param int PID number
 	* @return mixed integer or boolean
 	*/
@@ -1236,7 +1236,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Checks if a given encounter number is currently admitted.
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @return mixed integer or boolean
 	*/
@@ -1245,7 +1245,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Adds a "View" note to the record's history data.
-	* @access public
+	* @access public 
 	* @param string Name of person viewing the data
 	* @param int Encounter number
 	* @return boolean
@@ -1277,13 +1277,13 @@ class Encounter extends Notes {
 	* - <b>LD_var</b> = the variable's name for the language dependent version of the class name
 	*
 	*
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @return mixed array or boolean
 	*/
 	function getEncounterClassInfo($class_nr){
 	    global $db;
-		$this->sql="SELECT class_id,name, LD_var AS \"LD_var\" FROM $this->tb_ec WHERE class_nr=$class_nr";
+		$this->sql="SELECT class_id,name, LD_varAS \"LD_var\" FROM $this->tb_ec WHERE class_nr=$class_nr";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result->FetchRow();
@@ -1302,12 +1302,12 @@ class Encounter extends Notes {
 	* - <b>LD_var</b> = the variable's name for the language dependent version of the class name
 	*
 	*
-	* @access public
+	* @access public 
 	* @return mixed array or boolean
 	*/
 	function getEncounterType(){
 	    global $db;
-		$this->sql="SELECT type_nr,type,name, LD_var AS \"LD_var\" FROM $this->tb_enc_type";
+		$this->sql="SELECT type_nr,type,name, LD_varAS \"LD_var\" FROM $this->tb_enc_type";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result;
@@ -1326,13 +1326,13 @@ class Encounter extends Notes {
 	* - <b>LD_var</b> = the variable's name for the language dependent version of the class name
 	*
 	*
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @return mixed array or boolean
 	*/
     function getInsuranceClassInfo($class_nr){
 	    global $db;
-		$this->sql="SELECT class_id,name, LD_var AS \"LD_var\" FROM $this->tb_ic WHERE class_nr=$class_nr";
+		$this->sql="SELECT class_id,name, LD_varAS \"LD_var\" FROM $this->tb_ic WHERE class_nr=$class_nr";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result->FetchRow();
@@ -1420,7 +1420,7 @@ class Encounter extends Notes {
 	* </code>
 	*
 	*
-	* @access public
+	* @access public 
 	* @param str Search keyword
 	* @return mixed adodb object or boolean
 	*/
@@ -1445,7 +1445,7 @@ class Encounter extends Notes {
 	* </code>
 	*
 	*
-	* @access public
+	* @access public 
 	* @param str Search keyword
 	* @return mixed adodb object or boolean
 	*/
@@ -1456,7 +1456,7 @@ class Encounter extends Notes {
 	* Search returning the basic admission information as outlined at <var>_searchAdmissionBasicInfo()</var>.
 	*
 	* This method gives the possibility to sort the results based on an item and sorting direction.
-	* @access public
+	* @access public 
 	* @param string Search keyword
 	* @param string Item as sort basis
 	* @param string Sorting direction. ASC = ascending, DESC  = descending, empty = ascending
@@ -1480,7 +1480,7 @@ class Encounter extends Notes {
 	* Limited results search returning basic information as outlined at <var>_searchAdmissionBasicInfo()</var>.
 	*
 	* This method gives the possibility to sort the results based on an item and sorting direction.
-	* @access public
+	* @access public 
 	* @param string Search keyword
 	* @param int Maximum number of rows returned
 	* @param int Start index of rows returned
@@ -1498,7 +1498,7 @@ class Encounter extends Notes {
 	* Search for inpatients who are not yet finally admittd in ward, returning basic information as outlined at <var>_searchAdmissionBasicInfo()</var>.
 	*
 	* The resulting data is usually listed on the "waiting list" modules.
-	* @access public
+	* @access public 
 	* @param string Search keyword
 	* @return mixed adodb record object or boolean
 	*/
@@ -1509,7 +1509,7 @@ class Encounter extends Notes {
 	* Checks if the encounter exists in the database based on the encounter number key.
 	*
 	* If the encounter exists, its PID number will be returned, else FALSE will be returned.
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @return mixed integer or boolean
 	*/
@@ -1629,7 +1629,7 @@ class Encounter extends Notes {
 	/**
 	* Saves the encounter's ward location. 
 	* If the save routine is successful, the "currently in ward" flag of the encounter record will also be set internally.
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param int Ward number
 	* @param int Department number
@@ -1644,7 +1644,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Saves the encounter's room location. 
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param int Room number
 	* @param int Ward number
@@ -1657,7 +1657,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Saves the encounter's room location. 
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param int Bed number
 	* @param int Room number
@@ -1671,7 +1671,7 @@ class Encounter extends Notes {
 	/**
 	* Saves the encounter's room location. 
 	* If the save routine is successful, the "currently in department" flag of the encounter record will also be set internally.
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param int Department number
 	* @param int Department number
@@ -1687,7 +1687,7 @@ class Encounter extends Notes {
 	/**
 	* Admits a patient in ward with  a ward number, room number and bed number.
 	* If the save routine is successful, the "currently in ward" flag of the encounter record will also be set internally.
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param int Ward number
 	* @param int Room number
@@ -1747,7 +1747,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Sets encounter's current ward number.
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @param int New ward number
 	* @return boolean
@@ -1757,7 +1757,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Sets encounter's current ward number and set the "currently in ward" status of the encounter.
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @param int New ward number
 	* @return boolean
@@ -1767,7 +1767,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Sets encounter's current room number.
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @param int New room number
 	* @return boolean
@@ -1777,7 +1777,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Sets encounter's current department number.
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @param int New department number
 	* @return boolean
@@ -1787,7 +1787,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Sets encounter's current department number and sets the "currently in department" status of the encounter..
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @param int New department number
 	* @return boolean
@@ -1797,7 +1797,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Sets encounter's current firm number.
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @param int New firm number
 	* @return boolean
@@ -1807,7 +1807,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Sets encounter's current attending physician number.
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @param int Attending physician number
 	* @return boolean
@@ -1817,7 +1817,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Resets encounter's current ward number to 0.
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @return boolean
 	*/
@@ -1826,7 +1826,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Resets encounter's current department number to 0.
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @return boolean
 	*/
@@ -1835,7 +1835,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Sets encounter's current "ward" status to "In ward". Sets the encounter to "disallow cancel".
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @return boolean
 	*/
@@ -1844,7 +1844,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Resets encounter's current "ward" status to "not in ward".
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @return boolean
 	*/
@@ -1853,7 +1853,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Sets encounter's current "department" status to "In department". Sets the encounter to "disallow cancel".
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @return boolean
 	*/
@@ -1862,7 +1862,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Resets encounter's current "department" status to "not in department".
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @return boolean
 	*/
@@ -1871,7 +1871,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Sets encounter's two status to "In ward" and "disallow cancel". Sets the current ward number and current room number.
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @param int Ward nr
 	* @param int Room nr
@@ -1889,7 +1889,7 @@ class Encounter extends Notes {
 	* - current departement number
 	* - current firm number
 	* - in ward flag
-	* @access public
+	* @access public 
 	* @param int Encounter nr
 	* @return boolean
 	*/
@@ -1900,7 +1900,7 @@ class Encounter extends Notes {
 	/**
 	* Cancels an encounter, but only when its encounter_status is set to '' (emtpy) or 'allow_cancel'.
 	* Sets the encounter_status= 'cancelled', status='void', is_discharged=1 and stores history and modify infos
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param string Optional name of person responsible for cancellation
 	* @return boolean
@@ -1918,7 +1918,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Replaces the current ward number and resets the in_ward flag to 0: status is "not in ward".
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param int New ward number
 	* @return boolean
@@ -1929,7 +1929,7 @@ class Encounter extends Notes {
 	/**
 	* Sets the discharge status that the encounter/admission is fully discharged.
 	* Sets the is_discharged field of care_encounter table and resets the current department,ward,room fields.
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param string Date of discharge
 	* @param string Time of discharge
@@ -1947,14 +1947,14 @@ class Encounter extends Notes {
 	* Each array contains the discharge type information with the following index keys:
 	* - nr = The primary key number
 	* - name = the name of discharge type
-	* - LD_var = the variable name for the foreign language version of the discharge name
+	* - LD_var= the variable name for the foreign language version of the discharge name
 	*
 	* @return mixed adodb record object or boolean
 	*/
 	function getDischargeTypesData(){
 		global $db;
 		//$db->debug=1;
-		$this->sql="SELECT nr,name,LD_var AS \"LD_var\" FROM $this->tb_dis_type ORDER BY nr";
+		$this->sql="SELECT nr,name,LD_varAS \"LD_var\" FROM $this->tb_dis_type ORDER BY nr";
 		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
 				return $this->result;
@@ -2001,7 +2001,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Complete discharge of patient from the hospital or clinic.
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param int Discharge type number
 	* @param string Date of discharge
@@ -2017,7 +2017,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Complete discharge of patient from the department, but patient remains admitted.
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param int Discharge type number
 	* @param string Date of discharge
@@ -2032,7 +2032,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Complete discharge of patient from the ward but patient remains admitted.
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param int Discharge type number
 	* @param string Date of discharge
@@ -2046,7 +2046,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Complete discharge of patient from the room but patient remains in ward.
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param int Discharge type number
 	* @param string Date of discharge
@@ -2060,7 +2060,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Complete discharge of patient from the bed but patient remains in room.
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @param int Discharge type number
 	* @param string Date of discharge
@@ -2120,7 +2120,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Points  the core to the care_encounter_sickconfirm table and fields
-	* @access public
+	* @access public 
 	*/
 	function useSicknessConfirm(){
 		$this->coretable=$this->tb_sickconfirm;
@@ -2136,7 +2136,7 @@ class Encounter extends Notes {
 	* - <b>logo_mime_type</b> = Mime type (or extension) of the department's logo image
 	*
 	*
-	* @access public
+	* @access public 
 	* @param int Primary key number of the record
 	* @return mixed adodb record object or boolean
 	*/
@@ -2156,7 +2156,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Gets all stored sickness confirmations of an encounter based on its department and encounter numbers.
-	* @access public
+	* @access public 
 	* @param int Department number , if department number is zero, all available sickness records will be fetched
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
@@ -2180,7 +2180,7 @@ class Encounter extends Notes {
 	}
 	/**
 	* Saves a sickness confirmation of an encounter.
-	* @access public
+	* @access public 
 	* @param array Sickness confirmation data. By reference.
 	* @return boolean
 	*/
@@ -2200,7 +2200,7 @@ class Encounter extends Notes {
 	* - <b>name</b> = insurance company's name
 	* - <b>sub_area</b> = insurance company's sub area
 	*
-	* @access public
+	* @access public 
 	* @param  int Encounter number
 	* @return mixed adodb record object or boolean
 	*/
@@ -2219,7 +2219,7 @@ class Encounter extends Notes {
 	}
 	 /**
 	 * Marks an appointment's status as "done" and links the encounter number resulting from the appointment.
-	 * @access public
+	 * @access public 
 	 * @param int Appointment record number
 	 * @param int Final type of encounter (1= inpatient, 2= outpatient)
 	 * @param int Encounter number that resulted from the appointment
@@ -2256,7 +2256,7 @@ class Encounter extends Notes {
 	* - <b>notes</b> = clinic's notes primary key number
 	*
 	*
-	* @access public
+	* @access public 
 	* @param int Department number, if empty all departments will be searched
 	* @return mixed adodb record object or boolean
 	*/
@@ -2267,7 +2267,7 @@ class Encounter extends Notes {
 			else $cond='';
 			//$cond='';
 		$this->sql="SELECT e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex, p.photo_filename,
-									a.date, a.time,a.urgency, i.LD_var AS \"LD_var\",i.name AS insurance_name,
+									a.date, a.time,a.urgency, i.LD_varAS \"LD_var\",i.name AS insurance_name,
 									n.nr AS notes
 							FROM $this->tb_enc AS e  
 									LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
@@ -2305,7 +2305,7 @@ class Encounter extends Notes {
 	* - <b>LD_var</b> = variable's name for the foreign language version of department name
 	*
 	*
-	* @access public
+	* @access public 
 	* @param int Department number, if empty all departments will be searched
 	* @return mixed adodb record object or boolean
 	*/
@@ -2316,7 +2316,7 @@ class Encounter extends Notes {
 			else $cond='';
 		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, e.current_dept_nr,
 									p.pid, p.name_last, p.name_first, p.date_birth, p.sex, 
-									d.nr AS dept_nr, d.name_short, d.LD_var AS \"dept_LDvar\"
+									d.nr AS dept_nr, d.name_short, d.LD_varAS \"dept_LDvar\"
 				FROM $this->tb_enc AS e
 					LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
 					LEFT JOIN $this->tb_dept AS d ON e.current_dept_nr=d.nr
@@ -2346,7 +2346,7 @@ class Encounter extends Notes {
 	* - <b>status</b> = record's technical status
 	*
 	*
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @return mixed  adodb record object or boolean
 	*/

@@ -15,9 +15,9 @@ class Language {
 	* Path to language files.
 	*
 	* Modify this path if you have placed the language tables somewhere else.
-	* @var string
+	* @public string
 	*/			
-	var $lang_path='language/';
+	public $lang_path='language/';
 	/**
 	* Generates  a list of <options> of available languages for a  combo box .
 	*

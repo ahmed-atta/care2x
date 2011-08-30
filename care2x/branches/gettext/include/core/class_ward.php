@@ -20,44 +20,44 @@ class Ward extends Encounter {
 	*/
 	/**
 	* Table name for ward data
-	* @var string
+	* @public string
 	*/
-    var $tb_ward='care_ward';
+    public $tb_ward='care_ward';
 	/**
 	* Table name for department data
-	* @var string
+	* @public string
 	*/
-	var $tb_dept='care_department';
+	public $tb_dept='care_department';
 	/**
 	* Table name for room data
-	* @var string
+	* @public string
 	*/
-	var $tb_room='care_room';
+	public $tb_room='care_room';
 	/**
 	* Table name for encounter notes
-	* @var string
+	* @public string
 	*/
-	var $tb_notes='care_encounter_notes';
+	public $tb_notes='care_encounter_notes';
 	/**
 	* Ward number buffer
-	* @var int
+	* @public int
 	*/
-	var $ward_nr;
+	public $ward_nr;
 	/**
 	* Department number buffer
-	* @var int
+	* @public int
 	*/
-	var $dept_nr;
+	public $dept_nr;
 	/**
 	* Buffer for technical information
-	* @var mixed
+	* @public mixed
 	*/
-	var $techinfo;
+	public $techinfo;
 	/**
 	* Field names of care_ward table
-	* @var array
+	* @public array
 	*/
-	var $fld_ward=array('nr',
+	public $fld_ward=array('nr',
 									'ward_id',
 									'name',
 									'is_temp_closed',
@@ -77,9 +77,9 @@ class Ward extends Encounter {
 									'create_time');
 	/**
 	*  Field names of table care_room
-	* @var array
+	* @public array
 	*/
-	var $fld_room=array('nr',
+	public $fld_room=array('nr',
 									'type_nr',
 									'date_create',
 									'date_close',
@@ -108,7 +108,7 @@ class Ward extends Encounter {
 	/**
 	* Sets the department number buffer.
 	* 
-	* @access public
+	* @access public 
 	*/
 	function setDeptNr($dept_nr) {
 	    $this->dept_nr=$dept_nr;
@@ -125,7 +125,7 @@ class Ward extends Encounter {
 	/**
 	* Returns items of all wards.
 	* 
-	* @access public
+	* @access public 
 	* @param string Field names of items to be fetched
 	* @return mixed adodb record object or boolean
 	* @author Gjergj Sheldija
@@ -157,7 +157,7 @@ class Ward extends Encounter {
 	* - all ward index keys as outlined in the <var>$fld_ward</var> variable
 	* - dept_name = Department default name
 	*
-	* @access public
+	* @access public 
 	* @return mixed adodb record object or boolean
 	*/
 	function getAllWardsDataObject() {
@@ -176,7 +176,7 @@ class Ward extends Encounter {
 	* 
 	* Similar to getAllWardsItemsObject() but returns a 2 dimensional array.  
 	* 
-	* @access public
+	* @access public 
 	* @param string Field names of items to be fetched
 	* @return mixed array or boolean
 	*/
@@ -195,7 +195,7 @@ class Ward extends Encounter {
 	* Similar to getAllWardsDataObject() but returns a 2 dimensional array.  
 	* Data returned have index keys as outlined in the <var>$fld_ward</var> array.
 	* 
-	* @access public
+	* @access public 
 	* @return mixed array or boolean
 	*/	
 	function getAllWardsDataArray() {
@@ -211,7 +211,7 @@ class Ward extends Encounter {
     }
 	/**
 	* Returns ward name based on its record number.
-	* @access public
+	* @access public 
 	* @param int Record number
 	* @return mixed string or boolean
 	*/	
@@ -232,7 +232,7 @@ class Ward extends Encounter {
 	* - all ward index keys as outlined in the <var>$fld_ward</var> variable
 	* - dept_name = Department default name
 	*
-	* @access public
+	* @access public 
 	* @param int Ward number
 	* @return mixed array or boolean
 	*/
@@ -252,7 +252,7 @@ class Ward extends Encounter {
 	* The returned adodb record object contains a row of array.
 	* This array contains the  data with index keys as outlined in the <var>$fld_room</var> variable
 	*
-	* @access public
+	* @access public 
 	* @param int Ward number
 	* @param int Starting room number
 	* @param int Ending room number
@@ -287,7 +287,7 @@ class Ward extends Encounter {
 	* - photo_filename = filename of stored picture id
 	* - insurance_class_nr = insurance class nr
 	* - insurance_name = insurance class default name
-	* - insurance_LDvar = variable's name for the foreign language version of the insurance class name
+	* - insurance_LDpublic = variable's name for the foreign language version of the insurance class name
 	* - ward_notes = ward notes record number
 	*
 	* @access private
@@ -315,7 +315,7 @@ class Ward extends Encounter {
 									p.photo_filename,
 									e.insurance_class_nr,
 									i.name AS insurance_name,
-									i.LD_var AS \"insurance_LDvar\",
+									i.LD_varAS \"insurance_LDvar\",
 									n.nr AS ward_notes
 							FROM $this->tb_location AS r 
 									LEFT JOIN $this->tb_location AS b  ON 	(r.encounter_nr=b.encounter_nr
@@ -350,7 +350,7 @@ class Ward extends Encounter {
 	* Returns ward occupants (inpatients) information on a given date.
 	* 
 	* For detailed structure of the returned data, see the <var>_getWardOccupants()</var> method.
-	* @access public
+	* @access public 
 	* @param int Ward number
 	* @param string Date of occupancy
 	* @return mixed adodb record object or boolean
@@ -379,7 +379,7 @@ class Ward extends Encounter {
 	/**
 	* Closes a bed.
 	* 
-	* @access public
+	* @access public 
 	* @param int Ward number
 	* @param int Room number
 	* @param int Bed number
@@ -393,7 +393,7 @@ class Ward extends Encounter {
 	/**
 	* Opens a bed.
 	* 
-	* @access public
+	* @access public 
 	* @param int Ward number
 	* @param int Room number
 	* @param int Bed number
@@ -419,7 +419,7 @@ class Ward extends Encounter {
 	* Saves ward new ward information.
 	*
 	* Data passed by reference with associative array and have index keys as outlined in the <var>$fld_ward</var> array.
-	* @access public
+	* @access public 
 	* @param array Data to save.
 	* @return boolean
 	*/
@@ -439,7 +439,7 @@ class Ward extends Encounter {
 	*
 	* Data passed by reference with associative array and have index keys as outlined in the <var>$fld_ward</var> array.
 	* Only the field  to be updated must be present in the array as index key to avoid replacing the wrong data.
-	* @access public
+	* @access public 
 	* @param int Primary key number of the ward record to be updated.
 	* @param array Data to save.
 	* @return boolean
@@ -459,7 +459,7 @@ class Ward extends Encounter {
 	}
 	/**
 	* IDExists() checks if the ward id is existing.
-	* @access public
+	* @access public 
 	* @param int Ward id
 	* @return boolean
 	*/
@@ -474,7 +474,7 @@ class Ward extends Encounter {
 	}
 	/** 
 	* Checks if there is at least one patient admitted in the ward.
-	* @access public
+	* @access public 
 	* @param int Ward id
 	* @return boolean
 	*/
@@ -519,7 +519,7 @@ class Ward extends Encounter {
 	}
 	/**
 	* Closes a ward temporarily.
-	* @access public
+	* @access public 
 	* @param int Primary record key number
 	* @return boolean
 	*/
@@ -528,7 +528,7 @@ class Ward extends Encounter {
 	}
 	/**
 	* Reopens a ward that was previously closed temporarily.
-	* @access public
+	* @access public 
 	* @param int Primary record key number
 	* @return boolean
 	*/
@@ -537,7 +537,7 @@ class Ward extends Encounter {
 	}
 	/**
 	* Closes a ward irreversibly.
-	* @access public
+	* @access public 
 	* @param int Primary record key number
 	* @return boolean
 	*/
@@ -562,7 +562,7 @@ class Ward extends Encounter {
 	* - all ward index keys as outlined in the <var>$fld_ward</var> variable
 	* - dept_name = Department default name
 	*
-	* @access public
+	* @access public 
 	* @param int Primary record key number
 	* @return mixed adodb record object or boolean
 	*/
@@ -588,7 +588,7 @@ class Ward extends Encounter {
 	* - nr_rooms  = total number of rooms
 	* - nr = the primary record key
 	*
-	* @access public
+	* @access public 
 	* @param int Primary record key number
 	* @return boolean
 	*/
@@ -612,7 +612,7 @@ class Ward extends Encounter {
 	* - nr_rooms  = total number of rooms
 	* - nr = the primary record key
 	*
-	* @access public
+	* @access public 
 	* @param int Primary record key number
 	* @return boolean
 	*/
@@ -631,7 +631,7 @@ class Ward extends Encounter {
 	* Saves new ward's room  information.
 	*
 	* Data passed by reference with associative array and have index keys as outlined in the <var>$fld_room</var> array.
-	* @access public
+	* @access public 
 	* @param array Data to save.
 	* @return boolean
 	*/
@@ -645,7 +645,7 @@ class Ward extends Encounter {
 	/**
 	* Checks if a room number of a given ward number exists.
 	*
-	* @access public
+	* @access public 
 	* @param int Room number
 	* @param int Ward number
 	* @return boolean
@@ -675,7 +675,7 @@ class Ward extends Encounter {
 	*
 	* param ward_nr = the ward number (optional). Used if supplied, else the ward number set by the constructor will used.
 	*
-	* return true = if room(s) found.  The result is stored in the internal result variable and returned by a public function.
+	* return true = if room(s) found.  The result is stored in the internal result variable and returned by a public  function.
 	*
 	* return false = if ward_nr is 0 AND internal ward_nr is 0
 	*
@@ -709,7 +709,7 @@ class Ward extends Encounter {
 	* The returned adodb record object contains rows of arrays.
 	* Each array contains the  data with index keys as outlined in the <var>$fld_room</var> variable
 	*
-	* @access public
+	* @access public 
 	* @param int Ward number
 	* @return mixed adodb record object or boolean
 	*/
@@ -724,7 +724,7 @@ class Ward extends Encounter {
 	* The returned adodb record object contains a row of array.
 	* This array contains the  data with index keys as outlined in the <var>$fld_room</var> variable
 	*
-	* @access public
+	* @access public 
 	* @param int Room number
 	* @param int Ward number
 	* @return mixed adodb record object or boolean
@@ -737,7 +737,7 @@ class Ward extends Encounter {
 	}
 	/**
 	* Counts and returns the number of  beds available to the ward.
-	* @access public
+	* @access public 
 	* @param int Ward number
 	* @return mixed integer or boolean
 	*/
@@ -767,7 +767,7 @@ class Ward extends Encounter {
 	* - sex = sex
 	* - ward_id = ward id
 	*
-	* @access public
+	* @access public 
 	* @param int Ward number
 	* @return mixed adodb record object or boolean
 	*/
@@ -801,7 +801,7 @@ class Ward extends Encounter {
 	* - room_nr = room number
 	* - bed_nr = bed number
 	*
-	* @access public
+	* @access public 
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
 	*/

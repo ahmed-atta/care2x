@@ -17,35 +17,35 @@ require_once('class_core.php');
 class GlobalConfig  extends Core{
 	/**
 	* Table name for encounter (admission) data
-	* @var string
+	* @public string
 	*/
-	var $tb='care_config_global'; // the table's name
+	public $tb='care_config_global'; // the table's name
 	/**
 	* SQL query result
 	*
-	* @var object adodb record object
+	* @public object adodb record object
 	*/
-	var $result;
+	public $result;
 	/**
 	* Current number or rows
-	* @var omt
+	* @public omt
 	*/
-	var $row;
+	public $row;
 	/**
 	* Configuration
-	* @var string
+	* @public string
 	*/
-	var $config;
+	public $config;
 	/**
 	* Status variable
-	* @var string
+	* @public string
 	*/
-	var $condition;
+	public $condition;
 	/**
 	* Buffer flag
-	* @var boolean
+	* @public boolean
 	*/
-	var $ok;
+	public $ok;
 	/**
 	* Constructor
 	* @param array Configuration handler. By reference.
@@ -59,7 +59,7 @@ class GlobalConfig  extends Core{
 	* The item to be fetched is passed as parameter. This could contain the % wild card where in such case all
 	* values of the configuration items that fit the type will be fetched and stored in the array.
 	* The array must be passed by reference to the class's constructor.	
-	* @access public
+	* @access public 
 	* @param string Configuration item to be fetched. 
 	* @return mixed string or boolean
 	*/
@@ -94,7 +94,7 @@ class GlobalConfig  extends Core{
 	}
 	/**
 	* Saves a global configuration value to its configuration item.
-	* @access public
+	* @access public 
 	* @param string Configuration item
 	* @param mixed Configuration value
 	* @return boolean

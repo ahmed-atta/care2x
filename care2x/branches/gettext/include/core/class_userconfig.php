@@ -17,44 +17,44 @@ class UserConfig {
 	*/
 	/**
 	* Table name for user configurations
-	* @var string
+	* @public string
 	*/
-	var $tb='care_config_user'; // table name
+	public $tb='care_config_user'; // table name
 	/**
 	* SQL query result buffer
-	* @var adodb record object
+	* @public adodb record object
 	*/
-	var $result;
+	public $result;
 	/**
 	* Resulting row buffer
-	* @var array
+	* @public array
 	*/
-	var $row;
+	public $row;
 	/**
 	* Universal buffer
-	* @var mixed
+	* @public mixed
 	*/
-	var $buffer;
+	public $buffer;
 	/**
 	* Universal flag
-	* @var boolean
+	* @public boolean
 	*/
-	var $bool=FALSE;
+	public $bool=FALSE;
 	/**
 	* Preloaded data flag
-	* @var boolean
+	* @public boolean
 	*/
-	var $is_preloaded=FALSE;
+	public $is_preloaded=FALSE;
 	/**
 	* SQL query
-	* @var string
+	* @public string
 	*/
-	var $sql;
+	public $sql;
 	/**
 	* Event flag
-	* @var boolean
+	* @public boolean
 	*/
-	var $ok;
+	public $ok;
 	/**#@-*/
 	
 	/**
@@ -80,7 +80,7 @@ class UserConfig {
 	* Loads the default configuration data.
 	*
 	* The loaded data is stored in the internal <var>$buffer</var> buffer array and the <var>$is_preloaded</var> flag is set.
-	* @deprec Use the public<var> getDefault()</var> method instead.
+	* @deprec Use the public <var> getDefault()</var> method instead.
 	* @access private
 	* @return boolean
 	*/
@@ -91,7 +91,7 @@ class UserConfig {
 	* Loads the default configuration data.
 	*
 	* The loaded data is stored in the internal <var>$buffer</var> buffer array and the <var>$is_preloaded</var> flag is set.
-	* @access public
+	* @access public 
 	* @return boolean
 	*/
 	function getDefault(){
@@ -101,7 +101,7 @@ class UserConfig {
 	* Loads  the user's configuration data based on its user configuration id key.
 	*
 	* The loaded data is stored in the internal <var>$buffer</var> buffer array and the <var>$is_preloaded</var> flag is set.
-	* @access public
+	* @access public 
 	* @param string User configuration id
 	* @return boolean
 	*/
@@ -134,7 +134,7 @@ class UserConfig {
 	}
 	/**
 	* Checks if  the user's configuration data exists in the database based on its user configuration id key.
-	* @access public
+	* @access public 
 	* @param string User configuration id
 	* @return boolean
 	*/
@@ -153,7 +153,7 @@ class UserConfig {
 	* Saves  the user's configuration data.
 	*
 	* The configuration data is serialized first before being passed to the method.
-	* @access public
+	* @access public 
 	* @param string User configuration id
 	* @param string Serialized data
 	* @return boolean
@@ -174,7 +174,7 @@ class UserConfig {
 	/**
 	* Replaces (updates)  a configuration item.
 	*
-	* @access public
+	* @access public 
 	* @param string User configuration id
 	* @param string Name of item to be replaced.
 	* @param string New value
@@ -197,7 +197,7 @@ class UserConfig {
 	}
 	/**
 	* Checks if the configuration data is successfully preloaded.
-	* @access public
+	* @access public 
 	* @return boolean
 	*/
 	function isPreLoaded(){
@@ -205,7 +205,7 @@ class UserConfig {
 	}
 	/**
 	* Returns the preloaded configuration data.
-	* @access public
+	* @access public 
 	* @return array
 	*/
 	function getConfigData(){
