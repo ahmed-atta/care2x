@@ -15,65 +15,65 @@ require_once(CARE_BASE .'include/core/class_core.php');
 class Access extends Core {
 	/**
 	* Users table name
-	* @var string
+	* @public string
 	*/
-	var $tb_user='care_users';
+	public $tb_user='care_users';
 	/**
 	* Users table name
-	* @var string
+	* @public string
 	*/
-	var $tb_role='care_user_roles';	
+	public $tb_role='care_user_roles';	
 	/**
 	* Holder for user data in associative array
-	* @var array
+	* @public array
 	*/
-	var $user=array();
+	public $user=array();
 	/**
 	* Holder for role data in associative array
-	* @var array
+	* @public array
 	*/
-	var $role=array();
+	public $role=array();
 	/**
 	* Allowed areas in hieararchical order
-	* @var array
+	* @public array
 	*/
-	var $allowedareas=array();
+	public $allowedareas=array();
 	/**
 	* Allowed department id
-	* @var int
+	* @public int
 	*/
-	var $dept_nr;
+	public $dept_nr;
 	/**
 	* User's registration status.
 	* FALSE = unknown.
 	* TRUE = known.
-	* @var boolean
+	* @public boolean
 	*/
-	var $usr_status=FALSE;
+	public $usr_status=FALSE;
 	/**
 	* Flags if the "all" permission type is permitted.
 	* Default is TRUE.
-	* @var boolean
+	* @public boolean
 	*/
-	var $permit_type_all=TRUE;
+	public $permit_type_all=TRUE;
 	/**
 	* Password status.
 	* FALSE = wrong password.
 	* TRUE = correct password.
-	* @var boolean
+	* @public boolean
 	*/
-	var $pw_status=FALSE;
+	public $pw_status=FALSE;
 	/**
 	* The access permission status.
 	* FALSE = locked.
 	* TRUE = access allowed.
-	* @var boolean
+	* @public boolean
 	*/
-	var $lock_status=FALSE;
+	public $lock_status=FALSE;
 	/**
 	* Internal buffer for the login id (username)
 	*/
-	var $login_id;
+	public $login_id;
 	/**
 	* Constructor. If login and password are passed as parameters, the access data are immediately loaded.
 	*
@@ -88,7 +88,7 @@ class Access extends Core {
 	*
 	* @param string Login name
 	* @param string Password
-	* @access public
+	* @access public 
 	* @return boolean
 	*/
 	function Access($login='',$pw=''){
@@ -125,7 +125,7 @@ class Access extends Core {
 	*
 	* @param string Login name
 	* @param string Password
-	* @access public
+	* @access public 
 	* @return boolean
 	*/
 	function loadAccess($login='',$pw=''){
@@ -190,7 +190,7 @@ class Access extends Core {
 	}
 	/**
 	* Returns the password status of the user
-	* @access public
+	* @access public 
 	* @return boolean  TRUE = password valid, else FALSE = invalid password
 	*/
 	function hasValidPassword(){
@@ -198,7 +198,7 @@ class Access extends Core {
 	}
 	/**
 	* Returns the user  status of the user whether he is registered user or not.
-	* @access public
+	* @access public 
 	* @return boolean  TRUE = is registered as user, else FALSE = invalid user
 	*/
 	function isKnown(){
@@ -207,7 +207,7 @@ class Access extends Core {
 	/**
 	* Returns the user permission "is locked?" status.
 	* Use only after the access data was loaded by the constructor or loadAccess() method.
-	* @access public
+	* @access public 
 	* @return boolean TRUE = User permissionis locked, else FALSE = user unknown or unregisted
 	*/
 	function isLocked(){
@@ -216,7 +216,7 @@ class Access extends Core {
 	/**
 	* Returns the permission "is not locked?" status. A negation of isLocked() method.
 	* Use only after the access data was loaded by the constructor or loadAccess() method.
-	* @access public
+	* @access public 
 	* @return boolean FALSE = User permission is locked, else TRUE = permission is locked
 	*/
 	function isNotLocked(){
@@ -225,7 +225,7 @@ class Access extends Core {
 	/**
 	* Returns the user's registered name.
 	* Use only after the access data was loaded by the constructor or loadAccess() method.
-	* @access public
+	* @access public 
 	* @return string
 	*/
 	function Name(){
@@ -234,7 +234,7 @@ class Access extends Core {
 	/**
 	* Returns the user's login name ( login username ).
 	* Use only after the access data was loaded by the constructor or loadAccess() method.
-	* @access public
+	* @access public 
 	* @return string
 	*/
 	function LoginName(){
@@ -243,7 +243,7 @@ class Access extends Core {
 	/**
 	* Returns the permission areas of the user. No interpretation is returned.
 	* Use only after the access data was loaded by the constructor or loadAccess() method.
-	* @access public
+	* @access public 
 	* @return string
 	*/
 	function PermissionAreas(){
@@ -252,7 +252,7 @@ class Access extends Core {
 	/**
 	* Returns the permission dept of the user. No interpretation is returned.
 	* Use only after the access data was loaded by the constructor or loadAccess() method.
-	* @access public
+	* @access public 
 	* @return string
 	*/
 	function PermittedDepartment(){
@@ -262,7 +262,7 @@ class Access extends Core {
 	* Checks if the user is permitted in a given protected area.
 	*
 	* Use only after the access data was loaded by the constructor or loadAccess() method.
-	* @access public
+	* @access public 
 	* @param string The area to be checked.
 	* @return string
 	*/
@@ -274,7 +274,7 @@ class Access extends Core {
 	* Sets the allowed hierarchical areas.
 	*
 	* @param array The allowed areas in hierarchy.
-	* @access public
+	* @access public 
 	* @return string
 	*/
 	function setAllowedAreas($areas=''){
@@ -291,7 +291,7 @@ class Access extends Core {
 	* This checks also whether the user is permitted in the area due to its role or position in the privilege hierarchy.
 	* The group of areas must be set first with the "setAllowedAreas()" method.
 	* Use only after the access data was loaded by the constructor or loadAccess() method.
-	* @access public
+	* @access public 
 	* @param string The area to be checked.
 	* @return string
 	*/
@@ -316,7 +316,7 @@ class Access extends Core {
 	/**
 	*  Checks the  data if user exists based on his username (login id)
 	*
-	* @public
+	* @public 
 	* @param string Username or login id
 	* @return mixed adodb record or boolean FALSE
 	*/
@@ -344,7 +344,7 @@ class Access extends Core {
 	/**
 	*  Checks the  data if role exists based on his id
 	*
-	* @public
+	* @public 
 	* @param int role id
 	* @return mixed adodb record or boolean FALSE
 	*/
@@ -368,7 +368,7 @@ class Access extends Core {
 	/**
 	*  Checks the  data if role exists based on his name
 	*
-	* @public
+	* @public 
 	* @param int role name
 	* @return mixed adodb record or boolean FALSE
 	*/
@@ -402,7 +402,7 @@ class Access extends Core {
 	/**
 	*  Locks access permission of the user
 	*
-	* @public
+	* @public 
 	* @return boolean
 	*/
 	function Lock(){
@@ -411,7 +411,7 @@ class Access extends Core {
 	/**
 	*  UNlocks access permission of the user
 	*
-	* @public
+	* @public 
 	* @return boolean
 	*/
 	function UnLock(){
@@ -420,7 +420,7 @@ class Access extends Core {
 	/**
 	*  Deletes the user if exists based on his username (login id)
 	*
-	* @public
+	* @public 
 	* @param string Username or login id
 	* @return mixed adodb record or boolean FALSE
 	*/
@@ -445,7 +445,7 @@ class Access extends Core {
 	/**
 	*  Deletes the role if exists based on his role id
 	*
-	* @public
+	* @public 
 	* @param id role id=
 	* @return mixed adodb record or boolean FALSE
 	*/

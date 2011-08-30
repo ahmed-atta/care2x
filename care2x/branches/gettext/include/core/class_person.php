@@ -21,91 +21,91 @@ class Person extends Core {
 	*/
 	/**
 	* Table name for person registration data.
-	* @var string
+	* @public string
 	*/
-    var $tb_person='care_person';
+    public $tb_person='care_person';
 	/**
 	* Table name for city town name.
-	* @var string
+	* @public string
 	*/
-	var $tb_citytown='care_address_citytown';
+	public $tb_citytown='care_address_citytown';
 	/**
 	* Table name for ethnic origin.
 	* Add by Jean-Philippe LIOT 13/05/2004
-	* @var string
+	* @public string
 	*/
-	var $tb_ethnic_orig='care_type_ethnic_orig';
+	public $tb_ethnic_orig='care_type_ethnic_orig';
 	/**
 	* Table name for encounter data.
-	* @var string
+	* @public string
 	*/
-	var $tb_enc='care_encounter';
+	public $tb_enc='care_encounter';
 	/**
 	* Table name for employee data.
-	* @var string
+	* @public string
 	*/
-	var $tb_employ='care_staff';
+	public $tb_employ='care_staff';
 	/**
 	* SQL query
 	*/
-	var $sql;
+	public $sql;
 	/**#@-*/
 	/**
 	* PID number
-	* @var int
+	* @public int
 	*/
-	var $pid;
+	public $pid;
 	/**
 	* Sql query result buffer
-	* @var adodb record object
+	* @public adodb record object
 	*/
-	var $result;
+	public $result;
 	/**
 	* Universal flag
-	* @var boolean
+	* @public boolean
 	*/
-	var $ok;
+	public $ok;
 	/**
 	* Internal data buffer
-	* @var array
+	* @public array
 	*/
-	var $data_array;
+	public $data_array;
 	/**
 	* Universal buffer
-	* @var mixed
+	* @public mixed
 	*/
-	var $buffer;
+	public $buffer;
 	/**
 	* Returned row buffer
-	* @var array
+	* @public array
 	*/
-	var $row;
+	public $row;
 	/**
 	* Returned person data buffer
-	* @var array
+	* @public array
 	*/
-	var $person=array();
+	public $person=array();
 	/**
 	* Preloaded data flag
-	* @var boolean
+	* @public boolean
 	*/
-	var $is_preloaded=false;
+	public $is_preloaded=false;
 	/**
 	* Valid number flag
-	* @var boolean
+	* @public boolean
 	*/
-	var $is_nr=false;
+	public $is_nr=false;
 	/**
 	* Field names of basic registration data to be returned.
-	* @var array
+	* @public array
 	*/
-	var $basic_list='pid,title,name_first,name_last,name_2,name_3,name_middle,name_maiden,name_others,date_birth,
+	public $basic_list='pid,title,name_first,name_last,name_2,name_3,name_middle,name_maiden,name_others,date_birth,
 				           sex,addr_str,addr_str_nr,addr_zip,addr_citytown_nr,photo_filename';
 	/**
 	* Field names of table care_person
-	* @var array
+	* @public array
 	*/
-	var  $elems_array=array(
+	public  $elems_array=array(
 				'pid',
 				 'title',
 				 'date_reg',
@@ -168,7 +168,7 @@ class Person extends Core {
 	}
 	/**
 	* Sets the PID number.
-	* @access public
+	* @access public 
 	* @param int PID number
 	*/
 	function setPID($pid) {
@@ -176,7 +176,7 @@ class Person extends Core {
 	}
 	/**
 	* Resolves the PID number to used in the methods.
-	* @access public
+	* @access public 
 	* @param int PID number
 	* @return boolean
 	*/
@@ -192,7 +192,7 @@ class Person extends Core {
 	}
 	/**
 	* Checks if PID number exists in the database.
-	* @access public
+	* @access public 
 	* @param int PID number
 	* @return boolean
 	*/
@@ -267,7 +267,7 @@ class Person extends Core {
 	* Inserts the data from the internal buffer array into the care_person table.
 	*
 	* The data must be packed in the buffer array with index keys as outlined in the <var>$elems_array</var> array.
-	* @access public
+	* @access public 
 	* @return boolean
 	*/
 	function insertDataFromInternalArray() {
@@ -306,7 +306,7 @@ class Person extends Core {
 	* - all index keys as outlined in the <var>$elems_array</var> array
 	* - addr_citytown_name = name of the city or town
 	*
-	* @access public
+	* @access public 
 	* @param int PID number
 	* @return mixed adodb object or boolean
 	*/
@@ -333,7 +333,7 @@ class Person extends Core {
 	* - all index keys as outlined in the <var>$elems_array</var> array
 	* - citytown = name of the city or town
 	*
-	* @access public
+	* @access public 
 	* @param int PID number
 	* @return mixed array or boolean
 	*/
@@ -387,7 +387,7 @@ class Person extends Core {
 	*
 	* For details on field names of items that can be fetched, see the <var>$elems_array</var> array.
 	* Several items can be fetched at once but their field names must be separated by comma.
-	* @access public
+	* @access public 
 	* @param string Field names of items to be fetched separated by comma.
 	* @param int PID number
 	* @return mixed
@@ -412,7 +412,7 @@ class Person extends Core {
 	* The buffered adodb record object contains a row or array.
 	* This array contains data with index keys as outlined in the <var>$elems_array</var> array
 	*
-	* @access public
+	* @access public 
 	* @param int PID number
 	* @return boolean
 	*/
@@ -432,7 +432,7 @@ class Person extends Core {
 	/**#@+
 	*
 	* Use this preferably after the person registration data was successfully preloaded in the internal buffer with the <var>preloadPersonInfo()</var> method.
-	* @access public
+	* @access public 
 	* @return string
 	*/
 	/**
@@ -643,7 +643,7 @@ class Person extends Core {
 	 * returns a list of other hospital numbers
 	 *
 	 * Added by Kurt Brauchli
-	 * @access public
+	 * @access public 
 	 * @return Associative array
 	 */
 	function OtherHospNrList(){
@@ -667,7 +667,7 @@ class Person extends Core {
 	 * Sets the number for other hospitals (orgs)
 	 *
 	 * Added by Kurt Brauchli. Enhanced by Elpidio Latorilla 2004-05-23
-	 * @access public
+	 * @access public 
 	 * @param string The other hospital, org , or institution
 	 * @param int The other number
 	 * @param string User id
@@ -739,7 +739,7 @@ class Person extends Core {
 	/**#@-*/
 	/**
 	* Returns encounter number in case person died during that encounter.
-	* @access public
+	* @access public 
 	* @return int
 	*/
 	function DeathEncounterNumber() {
@@ -747,7 +747,7 @@ class Person extends Core {
 	}
 	/**
 	* Returns city or town name based on its "nr" key.
-	* @access public
+	* @access public 
 	* @return mixed string or boolean
 	*/
 	function CityTownName($code_nr=''){
@@ -767,7 +767,7 @@ class Person extends Core {
 	* Returns person registration items as listed in the <var>$basic_list</var> array based on pid key.
 	*
 	* The data is returned as associative array.
-	* @access public
+	* @access public 
 	* @param int PID number
 	* @return mixed string or boolean
 	*/
@@ -778,7 +778,7 @@ class Person extends Core {
 	/**
 	* Adds a "View" note in the history field of the person's registration record.
 	*
-	* @access public
+	* @access public 
 	* @param string Name of viewing person
 	* @param int PID number
 	* @return mixed string or boolean
@@ -803,7 +803,7 @@ class Person extends Core {
 	* Checks if a person is currently admitted (either inpatient & outpatient).
 	*
 	* If person is currently admitted, his current encounter number is returned, else FALSE.
-	* @access public
+	* @access public 
 	* @param int PID number
 	* @return mixed integer or boolean
 	*/
@@ -829,7 +829,7 @@ class Person extends Core {
 	* - is_discharged = discharge flag, contains 0 (not discharged) or  1 (discharged)
 	* - discharge_date = date of discharge (end of encounter)
 	*
-	* @access public
+	* @access public 
 	* @param int PID number
 	* @return mixed integer or boolean
 	*/
@@ -854,7 +854,7 @@ class Person extends Core {
 	* - date_birth = date of birth
 	* - sex = sex
 	*
-	* @access public
+	* @access public 
 	* @param string Search keyword
 	* @param string Sort by the item name, default = name_last (last/family name)
 	*'@param string Sort direction, default = ASC (ascending)
@@ -912,7 +912,7 @@ class Person extends Core {
 	* - addr_zip = Address zip code
 	* - status = Record status
 	*
-	* @access public
+	* @access public 
 	* @param string Search keyword
 	* @param string Sort by the item name, default = name_last (last/family name)
 	*'@param string Sort direction, default = ASC (ascending)
@@ -1031,7 +1031,7 @@ class Person extends Core {
 	* Checks if the person is currently employed in this hospital.
 	*
 	* If currently employed the employee number is returned, else FALSE.
-	* @access public
+	* @access public 
 	* @param int PID number
 	* @return mixed integer or boolean
 	*/
@@ -1060,7 +1060,7 @@ class Person extends Core {
 	* - 'modify_id' = name of user
 	* - 'modify_time' = time of this modification in yyyymmddhhMMss format
 	*
-	* @access public
+	* @access public 
 	* @param int PID number
 	* @param array Death information.
 	* @return mixed integer or boolean
@@ -1075,7 +1075,7 @@ class Person extends Core {
 	*
 	* Special for postgresql or dbms that returns an OID key after an insert
 	*
-	* @access public
+	* @access public 
 	* @param int OID return insert key of a column
 	* @return mixed integer or boolean
 	*/
@@ -1087,7 +1087,7 @@ class Person extends Core {
 	/**
 	* returns basic data of living person(s) based on family name, first name & b-day
 	*
-	* @access public
+	* @access public 
 	* @param array The data keys
 	* @param boolean Flags if non-living persons are also returned. Default = FALSE
 	* @return mixed array or boolean
@@ -1108,7 +1108,7 @@ class Person extends Core {
 	/**
 	* Sets the  filename if the person in the databank
 	*
-	* @access public
+	* @access public 
 	* @param int PID number
 	* @param string Filename
 	* @return mixed string or boolean

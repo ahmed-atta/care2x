@@ -15,71 +15,71 @@
 */
 class Core {
 	/**
-	* @var string Table name used for core routines. Default table name.
+	* @public string Table name used for core routines. Default table name.
 	*/
-    var $coretable;
+    public $coretable;
 	/**
-	* @var string Holder for SQL query. Can be extracted with the "getLastQuery()" method.
+	* @public string Holder for SQL query. Can be extracted with the "getLastQuery()" method.
 	*/
-	var $sql='';
+	public $sql='';
 	/**
-	* @var array  Contains fieldnames of the table named in the $coretable. For internal update/insert operations.
+	* @public array  Contains fieldnames of the table named in the $coretable. For internal update/insert operations.
 	*/
-	var $ref_array=array();
+	public $ref_array=array();
 	/**
-	* @var array   For internal update/insert operations
+	* @public array   For internal update/insert operations
 	*/
-	var $data_array=array();
+	public $data_array=array();
 	/**
-	* @var array   For internal update/insert operations
+	* @public array   For internal update/insert operations
 	*/
-	var $buffer_array=array();
+	public $buffer_array=array();
 	/**
-	* @var ADODB record object  For sql query results.
+	* @public ADODB record object  For sql query results.
 	*/
-	var $result;
+	public $result;
 	/**
-	* @var string  For update sql queries condition
+	* @public string  For update sql queries condition
 	*/
-	var $where;
+	public $where;
 	/**
-	* @var int  For counting resulting rows. Can be extracted w/ the "LastRecordCount()" method.
+	* @public int  For counting resulting rows. Can be extracted w/ the "LastRecordCount()" method.
 	*/
-	var $rec_count;
+	public $rec_count;
 	/**
-	* @var mixed
+	* @public mixed
 	*/
-	var $buffer;
+	public $buffer;
 	/**
-	* @var array  Used for containing results returned as pointer.
+	* @public array  Used for containing results returned as pointer.
 	*/
-	var $res=array();
+	public $res=array();
 	/**#@+
-	* @var boolean
+	* @public boolean
 	* @access private
 	*/
-	var $do_intern;
-	var $ok;
+	public $do_intern;
+	public $ok;
 	/**#@-*/
-	var $is_preloaded=FALSE;
+	public $is_preloaded=FALSE;
 	/**
 	*  Internal error message  usually used in debugging.
-	* @var string
+	* @public string
 	* @access private
 	*/
-	var $error_msg='';
+	public $error_msg='';
 	/**
 	* Status items used in sql queries "IN (???)"
-	* @var string
+	* @public string
 	* @access private
 	*/
-	var $dead_stat="'deleted','hidden','inactive','void'";
+	public $dead_stat="'deleted','hidden','inactive','void'";
 	/**
 	* Status items used in sql queries "IN (???)"
-	* @var string
+	* @public string
 	* @access private
 	*/
-	var $normal_stat="'','normal'";
+	public $normal_stat="'','normal'";
 	/**
 	* Sets the coretable variable to the name of the database table.
 	*
@@ -162,7 +162,7 @@ class Core {
 	* @param string sql  SQL query statement.
 	* @return TRUE/FALSE
 	* @global ADODB db link
-	* @access public
+	* @access public 
 	*/
 	function Transact($sql='') {
 		global $db;
@@ -189,7 +189,7 @@ class Core {
 		reset($this->data_array);
 		while(list($x,$v)=each($this->ref_array)) {
 			// Gjergj Sheldija :
-			// deleted && ($this->data_array[$v]!='') gives me errors when var value == 0
+			// deleted && ($this->data_array[$v]!='') gives me errors when public value == 0
 			if(isset($this->data_array[$v]) ) {
 				$this->buffer_array[$v]=$this->data_array[$v];
 				if($v=='create_time' && $this->data['create_time']!='') $this->buffer_array[$v] = date('YmdHis');
@@ -204,7 +204,7 @@ class Core {
 	*
 	* This method also uses the field names from the internal array $ref_array previously set by "use????" methods that point
 	* the core object to the proper table and fields names.
-	* @access public
+	* @access public 
 	* @return boolean
 	*/
 	function insertDataFromInternalArray() {
@@ -327,7 +327,7 @@ class Core {
 	* Inserts data from an array  (passed by reference) into a table.
 	*
 	* This method  uses the table and field names from  internal variables previously set by "use????" methods that point
-	* the object to the proper table and fields names. Private or public (preferably private being called by other methods).
+	* the object to the proper table and fields names. Private or public  (preferably private being called by other methods).
 	* @access private
 	* @param array By reference. The array containing the data. Note: the array keys must correspond to the table field names.
 	* @return boolean
@@ -362,7 +362,7 @@ class Core {
 	*
 	* This method also uses the field names from an internal array previously set by "use????" methods that point
 	* the object to the proper table and fields names.
-	* private or public (preferably private being called by other methods)
+	* private or public  (preferably private being called by other methods)
 	* @param array Data. By reference. Note: the array keys must correspond to the table field names
 	* @param int Key used in the update queries' "where" condition
 	* @param boolean Flags if the param $item_nr should be strictly numeric or not. Defaults to TRUE = strictly numeric.
@@ -401,7 +401,7 @@ class Core {
 	* Update the record based on the primary key.
 	* This method also uses the field names from an internal array previously set by "use????" methods that point
 	* the object to the proper table and fields names.
-	* @access public
+	* @access public 
 	* @param int Key used in the update queries' "where" condition
 	* @param boolean Flags if the param $item_nr should be strictly numeric or not. Defaults to TRUE = strictly numeric.
 	* @return boolean
@@ -459,7 +459,7 @@ class Core {
 	}
 	/**
 	* Saves temporary data to a cache in database.
-	* @access public
+	* @access public 
 	* @param string Cached data identification
 	* @param mixed By referece.  Data to be saved.
 	* @param boolean Signals the type of the data contained in the param $data.  FALSE=nonbinary data, TRUE=binary
@@ -473,7 +473,7 @@ class Core {
 	}
 	/**
 	* Gets temporary data from the database cache.
-	* @access public
+	* @access public 
 	* @param string Cached data identification
 	* @param mixed By reference.  Variable for the data to be fetched.
 	* @param boolean   Signals the type of data contained in the $data.  FALSE=nonbinary data, TRUE=binary.
@@ -496,7 +496,7 @@ class Core {
 	}
 	/**
 	* Deletes data from the database cache based on the id key.
-	* @access public
+	* @access public 
 	* @param char ID of data for deletion.
 	* @return boolean
 	*/
@@ -510,7 +510,7 @@ class Core {
 	* Deletes data from a database table based on the job_id and
 	* batch_nr. Used in the update action for the laboratory tables
 	* ( chemlabor and baclabor )
-	* @access public
+	* @access public 
 	* @param varchar $batch_nr
 	* @param varchar $job_id
 	* @return boolean
@@ -522,7 +522,7 @@ class Core {
 	}	
 	/**
 	* Returns the  core field names of the core table in an array.
-	* @access public
+	* @access public 
 	* @return array
 	*/
 	function coreFieldNames(){
@@ -530,7 +530,7 @@ class Core {
 	}
 	/**
 	* Returns a list of filename within a path in array.
-	* @access public
+	* @access public 
 	* @param string Path of the filenames relative to the root path.
 	* @param string Discriminator string.
 	* @param  string The sort direction (ASC or DESC) defaults to ASC (ascending)

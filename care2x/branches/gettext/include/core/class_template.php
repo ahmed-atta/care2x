@@ -13,53 +13,53 @@
 class Template{
 	/**
 	* Filename of the template.
-	* @var string
+	* @public string
 	*/
-	var $filename;
+	public $filename;
 	/**
 	* Template text.
-	* @var string
+	* @public string
 	*/
-	var $template;
+	public $template;
 	/**
 	* Default template path, modify if you placed the template somewhere else. Will be attempted for use if the path is not passed the object.
-	* @var string 
+	* @public string 
 	*/
-	var $default_path='gui/html_template/';
+	public $default_path='gui/html_template/';
 	/**
 	* Default template theme.
-	* @var string 
+	* @public string 
 	*/
-	var $default_theme='default';
+	public $default_theme='default';
 	/**
 	* Template directory.
-	* @var string 
+	* @public string 
 	*/
-	var $tp_dirs=array();
+	public $tp_dirs=array();
 	/**
 	* Root path to template file.
-	* @var string 
+	* @public string 
 	*/
-	var $tp_root;
+	public $tp_root;
 	/**
 	* Path to template file.
-	* @var string 
+	* @public string 
 	*/
-	var $tp_path;
+	public $tp_path;
 	/**
 	* Main path to template file.
-	* @var string 
+	* @public string 
 	*/
-	var $tp_main_path;
+	public $tp_main_path;
 	/**
 	* Template theme.
-	* @var string 
+	* @public string 
 	*/
-	var $tp_theme;
+	public $tp_theme;
 	
 	/**
 	* Constructor
-	* @access public
+	* @access public 
 	* @param  string The root path of the current script that instantiates this class.
 	* @param string  Path of template source file.
 	* @param string The template theme.
@@ -73,7 +73,7 @@ class Template{
 	}
 	/**
 	* Sets the template path 
-	* @access public
+	* @access public 
 	* @param string Path to template source file
 	* @return boolean
 	*/
@@ -85,7 +85,7 @@ class Template{
 	}
 	/**
 	* Sets the template theme 
-	* @access public
+	* @access public 
 	* @param string  Template theme
 	*/
 	function setTheme($theme=''){
@@ -94,7 +94,7 @@ class Template{
 	}
 	/** 
 	* Sets the template path to the main path which was set at the construction time
-	* @access public
+	* @access public 
 	* @return boolean
 	*/
 	function useMainPath(){
@@ -124,7 +124,7 @@ class Template{
 	}
 	/**
 	* Loads the template file and appends/prepends '"' at the loaded string. Will return the template contents if succesful.
-	* @access public
+	* @access public 
 	*@param string Template filename.
 	* @return mixed  string boolean 
 	*/
@@ -142,7 +142,7 @@ class Template{
 	}
 	/**
 	* Creates and returns a select form element with the available templates as options.
-	* @access public
+	* @access public 
 	* @param string  Current theme, if the current theme is equal to a theme, the theme will be marked "selected"
 	* @return string
 	*/
@@ -159,7 +159,7 @@ class Template{
 	}
 	/**
 	* Creates  radio buttons with the list of available templates.
-	* @access public
+	* @access public 
 	* @param string Name of the radio  button element.
 	* @param string  Current theme, if the current theme is equal to a theme, the theme will be marked "checked"
 	* @return string
@@ -175,8 +175,8 @@ class Template{
 		return $str;
 	}
 	/**
-	* Public interface of the template list variable. Will return the list as array.
-	* @access public
+	* public  interface of the template list variable. Will return the list as array.
+	* @access public 
 	* @return array
 	*/
 	function getTemplateList(){
@@ -185,7 +185,7 @@ class Template{
 	}
 	/**
 	* Converts all \ chars  to \\ and " to \" of the string
-	* @access public
+	* @access public 
 	* @param string String to be neutralized
 	* @return string
 	*/

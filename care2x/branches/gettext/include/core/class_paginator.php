@@ -15,49 +15,49 @@
 class Paginator {
 	/**
 	* Maximum number of rows displayed. User configurable.
-	* @var int
+	* @public int
 	*/
-	var $max_nr=20;  
+	public $max_nr=20;  
 	/**
 	* Current first row index
-	* @var string
+	* @public string
 	*/
-	var $csx=0; 
+	public $csx=0; 
 	/**
 	* Total available data count
-	* @var string
+	* @public string
 	*/
-	var $tcount=0; 
+	public $tcount=0; 
 	/**
 	* Number of rows of resulting block
-	* @var string
+	* @public string
 	*/
-	var $blkcount=0;
+	public $blkcount=0;
 	/**
 	* This page name
-	* @var string
+	* @public string
 	*/
-	var $page='';
+	public $page='';
 	/**
 	* Internal searchkey
-	* @var string
+	* @public string
 	*/
-	var $skey='';
+	public $skey='';
 	/**
 	* Database table field to be sorted
-	* @var string
+	* @public string
 	*/
-	var $sort_item='';
+	public $sort_item='';
 	/**
 	* Sort direction, default is ascending
-	* @var string
+	* @public string
 	*/
-	var $sort_dir;
+	public $sort_dir;
 	/**
 	* Root path of the module calling this object
-	* @var string
+	* @public string
 	*/
-	var $rootpath;
+	public $rootpath;
 	/**
 	* Constructor
 	* @param int Index of the first row
@@ -92,7 +92,7 @@ class Paginator {
 	}
 	/**
 	* Creates and returns the "previous" block link.
-	* @access public
+	* @access public 
 	* @param string URL link text in local language
 	* @param string Additional url GET variables and values
 	* @return string Complete URL link to "previous" block
@@ -109,7 +109,7 @@ class Paginator {
 	}
 	/**
 	* Creates and returns the "Next" block link.
-	* @access public
+	* @access public 
 	* @param string URL link text in local language
 	* @param string Additional url GET variables and values
 	* @return string Complete URL link to "Next" block
@@ -146,7 +146,7 @@ class Paginator {
 	}
 	/**
 	* returns the maximal number of rows allowed for a block
-	* @access public
+	* @access public 
 	* @return int
 	*/
 	function MaxCount(){
@@ -154,7 +154,7 @@ class Paginator {
 	}
 	/**
 	* Sets the maximal number of rows allowed for a block.
-	* @access public
+	* @access public 
 	* @param int Maximum number or returned rows
 	* @return int
 	*/
@@ -168,7 +168,7 @@ class Paginator {
 	}
 	/**
 	* Returns the index of the first row of the block.
-	* @access public
+	* @access public 
 	* @return int
 	*/
 	function BlockStartIndex(){
@@ -176,7 +176,7 @@ class Paginator {
 	}
 	/**
 	* Returns the real block start number. Returns start index + 1.
-	* @access public
+	* @access public 
 	* @return int
 	*/
 	function BlockStartNr(){
@@ -184,7 +184,7 @@ class Paginator {
 	}
 	/**
 	* Returns the real block end number.
-	* @access public
+	* @access public 
 	* @return int
 	*/
 	function BlockEndNr(){
@@ -197,7 +197,7 @@ class Paginator {
 	}
 	/**
 	* Returns a link for sorting.
-	* @access public
+	* @access public 
 	* @deprec Prefer to use the <var>makeSortLink()</var> method
 	* @param string Text to display as link
 	* @param string Field name to sort
@@ -229,7 +229,7 @@ class Paginator {
 	}
 	/**
 	* Creates a link for sorting, improved version of SortLink().
-	* @access public
+	* @access public 
 	* @param string Text to display as link
 	* @param string Field name to sort
 	* @param string Previous field name used for sorting
