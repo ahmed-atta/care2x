@@ -321,7 +321,7 @@ class Encounter extends Notes {
 									  enfc.nr               AS sc_".$type."_nr,
 									  fc.name             AS sc_".$type."_name,
 									  fc.code              AS sc_".$type."_code,
-									  fc.LD_var          AS \"sc_".$type."_LD_var\"
+									  fc.LD_var           AS \"sc_".$type."_LD_var \"
 							FROM
 							          $this->tb_fc AS fc,
 									  $this->tb_enc_fc AS enfc
@@ -348,7 +348,7 @@ class Encounter extends Notes {
 	* - sc_care_nr = the service record's primary key number
 	* - sc_care_name = the service name
 	* - sc_care_code = the service code
-	* - sc_care_LD_var= the variable's name for language dependent name of the service
+	* - sc_care_LD_var = the variable's name for language dependent name of the service
 	*
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
@@ -366,7 +366,7 @@ class Encounter extends Notes {
 	* - sc_room_nr = the service record's primary key number
 	* - sc_room_name = the service name
 	* - sc_room_code = the service code
-	* - sc_room_LD_var= the variable's name for language dependent name of the service
+	* - sc_room_LD_var = the variable's name for language dependent name of the service
 	*
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
@@ -384,7 +384,7 @@ class Encounter extends Notes {
 	* - sc_att_dr_nr = the service record's primary key number
 	* - sc_att_dr_name = the service name
 	* - sc_att_dr_code = the service code
-	* - sc_att_dr_LD_var= the variable's name for language dependent name of the service
+	* - sc_att_dr_LD_var = the variable's name for language dependent name of the service
 	*
 	* @param int Encounter number
 	* @return mixed adodb record object or boolean
@@ -581,7 +581,7 @@ class Encounter extends Notes {
     function getAllServiceClassesObject($type=''){
 	    global $db;
 		if(empty($type)) return FALSE;
-		$this->sql="SELECT class_nr,class_id,code,name,LD_varAS \"LD_var\" FROM $this->tb_fc WHERE type='$type'";
+		$this->sql="SELECT class_nr,class_id,code,name,LD_var AS \"LD_var \" FROM $this->tb_fc WHERE type='$type'";
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->result->RecordCount()) {
 			    return $this->result;
@@ -622,7 +622,7 @@ class Encounter extends Notes {
 	* - class_nr = the class number, primary key (numeric)
 	* - class_id = the class ID (alphanumeric)
 	* - name = the name of class
-	* - LD_var= the variable's name for language dependent name of class
+	* - LD_var = the variable's name for language dependent name of class
 	*
 	* @access public 
 	* @return mixed adodb record object or boolean
@@ -630,7 +630,7 @@ class Encounter extends Notes {
 	function AllEncounterClassesObject(){
 	    global $db;
 	    //$db->debug=true;
-		$this->sql="SELECT class_nr,class_id,name,LD_varAS \"LD_var\" FROM $this->tb_ec ";
+		$this->sql="SELECT class_nr,class_id,name,LD_var AS \"LD_var \" FROM $this->tb_ec ";
 		if($this->res['aec']=$db->Execute($this->sql)) {
 		    if($this->res['aec']->RecordCount()) {
 			    return $this->res['aec'];
@@ -1274,7 +1274,7 @@ class Encounter extends Notes {
 	* The returned array contains data with following index keys:
 	* - <b>class_id</b> = the class id (alphanumeric)
 	* - <b>name</b> = the class name
-	* - <b>LD_var</b> = the variable's name for the language dependent version of the class name
+	* - <b>LD_var </b> = the variable's name for the language dependent version of the class name
 	*
 	*
 	* @access public 
@@ -1283,7 +1283,7 @@ class Encounter extends Notes {
 	*/
 	function getEncounterClassInfo($class_nr){
 	    global $db;
-		$this->sql="SELECT class_id,name, LD_varAS \"LD_var\" FROM $this->tb_ec WHERE class_nr=$class_nr";
+		$this->sql="SELECT class_id,name, LD_var AS \"LD_var \" FROM $this->tb_ec WHERE class_nr=$class_nr";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result->FetchRow();
@@ -1299,15 +1299,15 @@ class Encounter extends Notes {
 	* The returned array contains data with following index keys:
 	* - <b>type_nr</b> = the class id (alphanumeric)
 	* - <b>name</b> = the class name
-	* - <b>LD_var</b> = the variable's name for the language dependent version of the class name
+	* - <b>LD_var </b> = the variable's name for the language dependent version of the class name
 	*
 	*
 	* @access public 
 	* @return mixed array or boolean
 	*/
 	function getEncounterType(){
-	    global $db;
-		$this->sql="SELECT type_nr,type,name, LD_varAS \"LD_var\" FROM $this->tb_enc_type";
+	    global $db; 
+		$this->sql="SELECT type_nr,type,name, LD_var AS \"LD_var \" FROM $this->tb_enc_type";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result;
@@ -1323,7 +1323,7 @@ class Encounter extends Notes {
 	* The returned array contains data with following index keys:
 	* - <b>class_id</b> = the class id (alphanumeric)
 	* - <b>name</b> = the class name
-	* - <b>LD_var</b> = the variable's name for the language dependent version of the class name
+	* - <b>LD_var </b> = the variable's name for the language dependent version of the class name
 	*
 	*
 	* @access public 
@@ -1332,7 +1332,7 @@ class Encounter extends Notes {
 	*/
     function getInsuranceClassInfo($class_nr){
 	    global $db;
-		$this->sql="SELECT class_id,name, LD_varAS \"LD_var\" FROM $this->tb_ic WHERE class_nr=$class_nr";
+		$this->sql="SELECT class_id,name, LD_var AS \"LD_var \" FROM $this->tb_ic WHERE class_nr=$class_nr";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result->FetchRow();
@@ -1947,14 +1947,14 @@ class Encounter extends Notes {
 	* Each array contains the discharge type information with the following index keys:
 	* - nr = The primary key number
 	* - name = the name of discharge type
-	* - LD_var= the variable name for the foreign language version of the discharge name
+	* - LD_var = the variable name for the foreign language version of the discharge name
 	*
 	* @return mixed adodb record object or boolean
 	*/
 	function getDischargeTypesData(){
 		global $db;
 		//$db->debug=1;
-		$this->sql="SELECT nr,name,LD_varAS \"LD_var\" FROM $this->tb_dis_type ORDER BY nr";
+		$this->sql="SELECT nr,name,LD_var AS \"LD_var \" FROM $this->tb_dis_type ORDER BY nr";
 		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
 				return $this->result;
@@ -2164,7 +2164,7 @@ class Encounter extends Notes {
 	function allSicknessConfirm($dept_nr=0,$enc_nr=0){
 	    global $db;
 		//if(!$this->internResolveEncounterNr($enc_nr)) return FALSE;
-		$this->sql="SELECT s.*,d.LD_var,d.name_formal,d.sig_stamp,d.logo_mime_type
+		$this->sql="SELECT s.*,d.LD_var ,d.name_formal,d.sig_stamp,d.logo_mime_type
 						FROM $this->tb_sickconfirm AS s
 							LEFT JOIN $this->tb_dept AS d ON s.dept_nr=d.nr
 						WHERE s.encounter_nr=$this->enc_nr AND s.status NOT IN ($this->dead_stat)";
@@ -2251,7 +2251,7 @@ class Encounter extends Notes {
 	* - <b>photo_filename</b> = filename of the stored picture ID
 	* - <b>time</b> = appointment's scheduled time
 	* - <b>urgency</b> = appointment's urgency level
-	* - <b>LD_var</b> = variable's name for the foreign language version of insurance class name
+	* - <b>LD_var </b> = variable's name for the foreign language version of insurance class name
 	* - <b>insurance_name</b> = default insurance class name
 	* - <b>notes</b> = clinic's notes primary key number
 	*
@@ -2267,7 +2267,7 @@ class Encounter extends Notes {
 			else $cond='';
 			//$cond='';
 		$this->sql="SELECT e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex, p.photo_filename,
-									a.date, a.time,a.urgency, i.LD_varAS \"LD_var\",i.name AS insurance_name,
+									a.date, a.time,a.urgency, i.LD_var AS \"LD_var \",i.name AS insurance_name,
 									n.nr AS notes
 							FROM $this->tb_enc AS e  
 									LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
@@ -2279,7 +2279,7 @@ class Encounter extends Notes {
 									e.in_dept<>0 AND e.status NOT IN ($this->dead_stat)
 							ORDER BY e.encounter_nr";
 							/*							GROUP BY e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex,
-							p.photo_filename,a.date, a.time,a.urgency,i.LD_var,i.name, n.nr*/
+							p.photo_filename,a.date, a.time,a.urgency,i.LD_var ,i.name, n.nr*/
 							
         if($this->res['opb']=$db->Execute($this->sql)) {
             if($this->rec_count=$this->res['opb']->RecordCount()) {
@@ -2302,7 +2302,7 @@ class Encounter extends Notes {
 	* - <b>sex</b> = sex
 	* - <b>dept_nr</b> = current department number
 	* - <b>name_short</b> = short department name
-	* - <b>LD_var</b> = variable's name for the foreign language version of department name
+	* - <b>LD_var </b> = variable's name for the foreign language version of department name
 	*
 	*
 	* @access public 
@@ -2316,7 +2316,7 @@ class Encounter extends Notes {
 			else $cond='';
 		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, e.current_dept_nr,
 									p.pid, p.name_last, p.name_first, p.date_birth, p.sex, 
-									d.nr AS dept_nr, d.name_short, d.LD_varAS \"dept_LDvar\"
+									d.nr AS dept_nr, d.name_short, d.LD_var AS \"dept_LDvar\"
 				FROM $this->tb_enc AS e
 					LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
 					LEFT JOIN $this->tb_dept AS d ON e.current_dept_nr=d.nr

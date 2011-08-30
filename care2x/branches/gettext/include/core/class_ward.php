@@ -315,7 +315,7 @@ class Ward extends Encounter {
 									p.photo_filename,
 									e.insurance_class_nr,
 									i.name AS insurance_name,
-									i.LD_varAS \"insurance_LDvar\",
+									i.LD_var AS \"insurance_LDvar\",
 									n.nr AS ward_notes
 							FROM $this->tb_location AS r 
 									LEFT JOIN $this->tb_location AS b  ON 	(r.encounter_nr=b.encounter_nr
