@@ -581,7 +581,7 @@ class Encounter extends Notes {
     function getAllServiceClassesObject($type=''){
 	    global $db;
 		if(empty($type)) return FALSE;
-		$this->sql="SELECT class_nr,class_id,code,name,LD_varAS \"LD_var\" FROM $this->tb_fc WHERE type='$type'";
+		$this->sql="SELECT class_nr,class_id,code,name,LD_var AS \"LD_var\" FROM $this->tb_fc WHERE type='$type'";
 		if($this->result=$db->Execute($this->sql)) {
 		    if($this->result->RecordCount()) {
 			    return $this->result;
@@ -630,7 +630,7 @@ class Encounter extends Notes {
 	function AllEncounterClassesObject(){
 	    global $db;
 	    //$db->debug=true;
-		$this->sql="SELECT class_nr,class_id,name,LD_varAS \"LD_var\" FROM $this->tb_ec ";
+		$this->sql="SELECT class_nr,class_id,name,LD_var AS \"LD_var\" FROM $this->tb_ec ";
 		if($this->res['aec']=$db->Execute($this->sql)) {
 		    if($this->res['aec']->RecordCount()) {
 			    return $this->res['aec'];
@@ -1283,7 +1283,7 @@ class Encounter extends Notes {
 	*/
 	function getEncounterClassInfo($class_nr){
 	    global $db;
-		$this->sql="SELECT class_id,name, LD_varAS \"LD_var\" FROM $this->tb_ec WHERE class_nr=$class_nr";
+		$this->sql="SELECT class_id,name, LD_var AS \"LD_var\" FROM $this->tb_ec WHERE class_nr=$class_nr";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result->FetchRow();
@@ -1307,7 +1307,7 @@ class Encounter extends Notes {
 	*/
 	function getEncounterType(){
 	    global $db;
-		$this->sql="SELECT type_nr,type,name, LD_varAS \"LD_var\" FROM $this->tb_enc_type";
+		$this->sql="SELECT type_nr,type,name, LD_var AS \"LD_var\" FROM $this->tb_enc_type";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result;
@@ -1332,7 +1332,7 @@ class Encounter extends Notes {
 	*/
     function getInsuranceClassInfo($class_nr){
 	    global $db;
-		$this->sql="SELECT class_id,name, LD_varAS \"LD_var\" FROM $this->tb_ic WHERE class_nr=$class_nr";
+		$this->sql="SELECT class_id,name, LD_var AS \"LD_var\" FROM $this->tb_ic WHERE class_nr=$class_nr";
 		if($this->result=$db->Execute($this->sql)){
 		    if($this->result->RecordCount()) {
 			    $this->row=$this->result->FetchRow();
@@ -1954,7 +1954,7 @@ class Encounter extends Notes {
 	function getDischargeTypesData(){
 		global $db;
 		//$db->debug=1;
-		$this->sql="SELECT nr,name,LD_varAS \"LD_var\" FROM $this->tb_dis_type ORDER BY nr";
+		$this->sql="SELECT nr,name,LD_var AS \"LD_var\" FROM $this->tb_dis_type ORDER BY nr";
 		if($this->result=$db->Execute($this->sql)){
 			if($this->result->RecordCount()){
 				return $this->result;
@@ -2267,7 +2267,7 @@ class Encounter extends Notes {
 			else $cond='';
 			//$cond='';
 		$this->sql="SELECT e.encounter_nr,e.pid,e.insurance_class_nr,p.title,p.name_last,p.name_first,p.date_birth,p.sex, p.photo_filename,
-									a.date, a.time,a.urgency, i.LD_varAS \"LD_var\",i.name AS insurance_name,
+									a.date, a.time,a.urgency, i.LD_var AS \"LD_var\",i.name AS insurance_name,
 									n.nr AS notes
 							FROM $this->tb_enc AS e  
 									LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
@@ -2316,7 +2316,7 @@ class Encounter extends Notes {
 			else $cond='';
 		$this->sql="SELECT e.encounter_nr, e.encounter_class_nr, e.current_dept_nr,
 									p.pid, p.name_last, p.name_first, p.date_birth, p.sex, 
-									d.nr AS dept_nr, d.name_short, d.LD_varAS \"dept_LDvar\"
+									d.nr AS dept_nr, d.name_short, d.LD_var AS \"dept_LDvar\"
 				FROM $this->tb_enc AS e
 					LEFT JOIN $this->tb_person AS p ON e.pid=p.pid
 					LEFT JOIN $this->tb_dept AS d ON e.current_dept_nr=d.nr
