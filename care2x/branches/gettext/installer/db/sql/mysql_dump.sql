@@ -4856,8 +4856,8 @@ INSERT INTO `care_menu_main` VALUES
 (28, 0, 7, 'Quick view', '', 'gui/img/common/default/eye_s.gif', '', 'modules/nursing/nursing-quickview.php', 1, NULL, '', NULL, '2011-08-24 22:08:36'),
 (29, 0, 0, 'Special Tools', '', NULL, '', '', 1, NULL, '', NULL, '2011-08-29 19:12:10'),
 (30, 0, 0, 'Medicaments', '', NULL, '', '', 1, NULL, '', NULL, '2011-08-29 19:20:15'),
-(31, 0, 0, 'Analysis', '', NULL, '', '', 1, NULL, '', NULL, '2011-08-29 19:23:08');
-
+(31, 0, 0, 'Analysis', '', NULL, '', '', 1, NULL, '', NULL, '2011-08-29 19:23:08'),
+(32, 95, 19, 'Info', '', NULL, 'LDInfo', 'main/login-pc-config.php', 1, NULL, '', NULL, '2011-08-31 14:30:39');
 --
 -- Dumping data for table care_method_induction
 --
