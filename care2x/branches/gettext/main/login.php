@@ -19,7 +19,8 @@ require_once(CARE_BASE.'include/helpers/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
 require(CARE_BASE.'include/helpers/inc_2level_reset.php');
 
-$fileforward='login-pc-config.php'.URL_REDIRECT_APPEND;
+#$fileforward='login-pc-config.php'.URL_REDIRECT_APPEND;
+$fileforward='../modules/news/start_page.php'.URL_REDIRECT_APPEND;
 $thisfile='login.php';
 $breakfile='startframe.php'.URL_APPEND;
 
