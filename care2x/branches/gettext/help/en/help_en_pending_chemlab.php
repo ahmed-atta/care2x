@@ -1,34 +1,31 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Pending requests for chemical lab tests</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Pending requests for chemical lab tests</strong> 
 
+<p><a id="stime" name="stime"></a> How to display a pending request?</p>
 
-<a name="stime"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to display a pending request?</b></font>
-<ul> 
-	<b>Note:</b> The first request on the list is automatically displayed.<p>
-	<b>Step:</b> Click the batch number on the left list to display the request form.
-</ul>
-</ul>
+<div style="margin-left: 2em"><strong>Note:</strong> The first request on the list is automatically displayed.
 
-<a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to print the form?</b></font>
-<ul> 
-	<b>Step: </b>Click the <img <?php echo createLDImgSrc('../','printout.gif','0') ?>> button.
-</ul>
-<a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter  test results?</b></font>
-<ul> 
-	<b>Step: </b>  Click the <img <?php echo createLDImgSrc('../','enterresults.gif','0') ?>> button to go to the lab data entry module.</b> 
-</ul>
+<p><strong>Step:</strong> Click the batch number on the left list to display the request form.</p>
+</div>
 
-<a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-The test results are saved, what to do next?</b></font>
-<ul> 
-	<b>Step: </b>Click the <img <?php echo createLDImgSrc('../','done.gif','0') ?>> button to transfer the form to the archive and signal its availabilty to the clinic or ward.
-</ul>
+<a id="send" name="send"></a> How to print the form? 
 
+<div style="margin-left: 2em"><strong>Step:</strong> Click the button.</div>
 
+<a id="send" name="send"></a> How to enter test results? 
 
+<div style="margin-left: 2em"><strong>Step:</strong> Click the button to go to the lab data entry module.</div>
+
+<a id="send" name="send"></a> The test results are saved, what to do next? 
+
+<div style="margin-left: 2em"><strong>Step:</strong> Click the button to transfer the form to the archive and signal its availabilty to the clinic or ward.</div>
+</body>
+</html>
 

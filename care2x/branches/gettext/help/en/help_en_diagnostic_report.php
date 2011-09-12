@@ -1,17 +1,24 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?php echo "$x3 - $x2" ?></b></font>
-<form action="#" >
-<p><font size=2 face="verdana,arial" ><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to show a diagnostic report?</b></font>
-<ul> 
-<b>Note: </b>By default, the first report in the list is immediately shown.<p>
-<b>Step: </b>Click a particular report number in the left index to display that report.<br>
-</ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to print the report?</b></font>
-<ul> 	
-	<b>Step: </b>Click the <img <?php echo createLDImgSrc('../','printout.gif','0') ?> align="absmiddle">  button  to print the report.<br>
-</ul>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong> </strong> 
 
+<p><strong>How to show a diagnostic report?</strong></p>
 
-</form>
+<div style="margin-left: 2em"><strong>Note:</strong> By default, the first report in the list is immediately shown.
+
+<p><strong>Step:</strong> Click a particular report number in the left index to display that report.<br />
+</p>
+</div>
+
+<strong>How to print the report?</strong>
+<div style="margin-left: 2em"><strong>Step:</strong> Click the align="absmiddle"&gt; button to print the report.<br />
+</div>
+</body>
+</html>
+

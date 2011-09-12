@@ -1,16 +1,26 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Password change</b></font>
-<p>
-<font size=2 face="verdana,arial" >
-<form>
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to change my password?</b></font>
-<ul> 
-	<b>Step 1: </b>Enter your username in the "User login name:" field.<p>
-	<b>Step 2: </b>Enter your current password in the "Password:" field.<p>
-	<b>Step 3: </b>Enter your new password in the "Now, enter the new password of your choice:" field.<p>
-	<b>Step 4: </b>Repeat your new password in the "Repeat new password:" field.<p>
-	<b>Step 5: </b>Click the  <input type="button" value="Change password"> button.
-</ul>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Password change</strong> 
+
+<form><a id="sel" name="sel"></a> How to change my password? 
+
+<div style="margin-left: 2em"><strong>Step 1:</strong> Enter your username in the "User login name:" field.
+
+<p><strong>Step 2:</strong> Enter your current password in the "Password:" field.</p>
+
+<p><strong>Step 3:</strong> Enter your new password in the "Now, enter the new password of your choice:" field.</p>
+
+<p><strong>Step 4:</strong> Repeat your new password in the "Repeat new password:" field.</p>
+
+<p><strong>Step 5:</strong> Click the <input type="button" value="Change password" /> button.</p>
+</div>
 </form>
+</body>
+</html>
 

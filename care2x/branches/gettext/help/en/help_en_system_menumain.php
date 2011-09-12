@@ -1,29 +1,37 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Configuring the main menu</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Configuring the main menu</strong> 
 
+<p><a id="sel" name="sel"></a> How to hide or unhide a menu item?</p>
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to hide or unhide a menu item?</b></font>
-<ul> 
-	<b>Step 1: </b>Uncheck the "Visible" check box of a menu item to hide it.<p>
-	<b>Or: </b>Check the "Visible" check box of a menu item to make it visible.<p>
-	<b>Step 2: </b>Click the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button.<p>
-	<b>Note: </b>By default, all menu items are visible.<p>
-	<b>Note: </b> The following items cannot be hidden:
-	<ul>
-	System Admin<br>
-	Login/Logout
-	</ul>
-</ul>
+<div style="margin-left: 2em"><strong>Step 1:</strong> Uncheck the "Visible" check box of a menu item to hide it.
 
+<p><strong>Or:</strong> Check the "Visible" check box of a menu item to make it visible.</p>
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to rearrange the menu items?</b></font>
-<ul> 
-	<b>Step 1: </b>Edit the value of the menu item's "Sort nr.".<p>
-	<b>Note: </b>Make the interval between values not less than 5 to facilitate easier future rearrangement.<p>
-	<b>Step 2: </b>Click the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button.<p>
-</ul>
+<p><strong>Step 2:</strong> Click the button.</p>
+
+<p><strong>Note:</strong> By default, all menu items are visible.</p>
+
+<p><strong>Note:</strong> The following items cannot be hidden:</p>
+
+<div style="margin-left: 2em">System Admin<br />
+ Login/Logout</div>
+</div>
+
+<a id="sel" name="sel"></a> How to rearrange the menu items? 
+
+<div style="margin-left: 2em"><strong>Step 1:</strong> Edit the value of the menu item's "Sort nr.".
+
+<p><strong>Note:</strong> Make the interval between values not less than 5 to facilitate easier future rearrangement.</p>
+
+<p><strong>Step 2:</strong> Click the button.</p>
+</div>
+</body>
+</html>
 

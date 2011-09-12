@@ -1,20 +1,26 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Department administration</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Department administration</strong> 
 
-<form>
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to create a new department or update an existing one?</b></font>
-<ul> 
-	<b>Step 1: </b>Enter the necessary information about the new department.<p>
-	<b>Step 2: </b>Click the <input type="button" value="Create"> button<p>
-</ul>
+<p></p>
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-Compulsory information?</b></font>
-<ul> 
-	<b>Note: </b>All items marked with red <font color=#ff0000>*</font> must be filled in.<p>
-</ul>
+<form><a id="sel" name="sel"></a> How to create a new department or update an existing one? 
+
+<div style="margin-left: 2em"><strong>Step 1:</strong> Enter the necessary information about the new department.
+
+<p><strong>Step 2:</strong> Click the <input type="button" value="Create" /> button</p>
+</div>
+
+<a id="sel" name="sel"></a> Compulsory information? 
+
+<div style="margin-left: 2em"><strong>Note:</strong> All items marked with red * must be filled in.</div>
 </form>
+</body>
+</html>
 

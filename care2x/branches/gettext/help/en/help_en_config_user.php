@@ -1,9 +1,14 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>User configuration options</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>User configuration options</strong> 
 
-<img <?php echo createComIcon('../','warn.gif','0') ?>> <font color="#990000"><b>
-Please read the menu items' descriptions.</b></font>
-
+<p> <strong>Please read the menu items' descriptions.</strong></p>
+</body>
+</html>
 

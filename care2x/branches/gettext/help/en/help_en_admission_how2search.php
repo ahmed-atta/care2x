@@ -1,30 +1,35 @@
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>How to search a patient</b></font>
-<p><font size=2 face="verana,arial" >
-<form action="#" >
-<b>Step 1</b>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title></title>
+</head>
+<body>
+<strong>How to search a patient</strong> 
 
-<ul> Enter  either a full information or a few letters from a patient's information, like for example patient's encounter number, or family name, or given name.
-		
-		<p>Example 1: enter "21000012" or "12".
-		<br>Example 2: enter "Guerero" or "gue".
-		<br>Example 3: enter "Alfredo" or "Alf".
-	<p>
-	You can also use the <font color=#ff0000>%</font> and <font color=#ff0000>*</font> wildcards.
-</ul>
-<b>Step 2</b>
-<ul> Click the <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?> button   to start the search.<p>
-</ul>
-<b>Step 3</b>
-<ul> If the search finds a result or results, a list will be displayed.<br>
-		To see the admission data of the patient you are looking for, click the  <img <?php echo createComIcon('../','pdata.gif','0') ?>> icon following it.
-</ul>
-<br>
-<b>Note</b>
-<ul> If you decide to cancel search click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
-</ul>
+<p><strong>Step 1</strong></p>
 
+<div style="margin-left: 2em">Enter either a full information or a few letters from a patient's information, like for example patient's encounter number, or family name, or given name.
 
-</form>
+<p>Example 1: enter "21000012" or "12".<br />
+ Example 2: enter "Guerero" or "gue".<br />
+ Example 3: enter "Alfredo" or "Alf".</p>
+
+<p>You can also use the % and * wildcards.</p>
+</div>
+
+<strong>Step 2</strong>
+<div style="margin-left: 2em">Click the button to start the search.</div>
+
+<strong>Step 3</strong>
+<div style="margin-left: 2em">If the search finds a result or results, a list will be displayed.<br />
+ To see the admission data of the patient you are looking for, click the icon following it.</div>
+
+<br />
+ <strong>Note</strong>
+<div style="margin-left: 2em">If you decide to cancel search click the button .</div>
+</body>
+</html>
 

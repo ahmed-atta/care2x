@@ -1,31 +1,30 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Pending requests for bacteriological lab tests</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Pending requests for bacteriological lab tests</strong> 
 
-<?php
-if(!$src){
-?>
-<a name="stime"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to display a pending request?</b></font>
-<ul> 
-	<b>Note:</b> The first request on the list is automatically displayed.<p>
-	<b>Step:</b> Click the batch number on the left list to display the request form.
-</ul>
-</ul>
-<?php
-}
-?>
-<a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter the test results or findings?</b></font>
-<ul> 
-	<b>Step 1: </b>Click the <img <?php echo createLDImgSrc('../','enter_result.gif','0') ?>> button to go to the edit mode.<p>
-	<b>Step 2: </b>Enter the results or findings either by typing in the text boxes or clicking on the tiny pink rectangles to blacken it.
-</ul>
+<p>  <a id="stime" name="stime"></a> How to display a pending request?</p>
 
-<a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to print the form?</b></font>
-<ul> 
-	<b>Step: </b>Click the <img <?php echo createLDImgSrc('../','printout.gif','0') ?>> button.
-</ul>
+<div style="margin-left: 2em"><strong>Note:</strong> The first request on the list is automatically displayed.
+
+<p><strong>Step:</strong> Click the batch number on the left list to display the request form.</p>
+</div>
+
+ <a id="send" name="send"></a> How to enter the test results or findings? 
+
+<div style="margin-left: 2em"><strong>Step 1:</strong> Click the button to go to the edit mode.
+
+<p><strong>Step 2:</strong> Enter the results or findings either by typing in the text boxes or clicking on the tiny pink rectangles to blacken it.</p>
+</div>
+
+<a id="send" name="send"></a> How to print the form? 
+
+<div style="margin-left: 2em"><strong>Step:</strong> Click the button.</div>
+</body>
+</html>
 

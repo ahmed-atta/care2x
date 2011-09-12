@@ -1,16 +1,23 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Currency :: Adding new currency</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Currency :: Adding new currency</strong> 
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to add a currency?</b></font>
-<ul> 
-	<b>Step 1: </b>Type the official symbol or character of the currency (e.g. $).<p>
-	<b>Step 2: </b>Type the official name of the currency (e.g. Dollar).<p>
-	<b>Step 3: </b>If available, type additional information of the currency. e.g. Country of use, ISO code, etc.<p>
-		<b>Step 4: </b>Click the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button.<p>
-</ul>
+<p><strong>How to add a currency?</strong></p>
 
+<div style="margin-left: 2em"><strong>Step 1:</strong> Type the official symbol or character of the currency (e.g. $).
 
+<p><strong>Step 2:</strong> Type the official name of the currency (e.g. Dollar).</p>
+
+<p><strong>Step 3:</strong> If available, type additional information of the currency. e.g. Country of use, ISO code, etc.</p>
+
+<p><strong>Step 4:</strong> Click the button.</p>
+</div>
+</body>
+</html>
 

@@ -1,83 +1,55 @@
-<img src="../help/en/img/en_preg_options.png" border=0 width=192 height=318 align="right">
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Person registration options</b></font>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Person registration options</strong> 
 
-<p><font size=2 face="verdana,arial" >
+<p><strong>Admission - Inpatient</strong></p>
 
-<font color="#990000"><b>
-Admission - Inpatient</b></font>
-<ul> 
-Admits the person as <b>inpatient</b>.<p>
-</ul>
+<div style="margin-left: 2em">Admits the person as <strong>inpatient</strong>.</div>
 
-<font color="#990000"><b>
-Visit - Outpatient</b></font>
-<ul> 
-Admits the person as <b>outpatient</b>.
-</ul>
+<strong>Visit - Outpatient</strong>
+<div style="margin-left: 2em">Admits the person as <strong>outpatient</strong>.</div>
 
-<font color="#990000"><b>
-Appointments</b></font>
-<ul> 
-Schedule an appointment or view existing appointments.
-</ul>
+<strong>Appointments</strong>
+<div style="margin-left: 2em">Schedule an appointment or view existing appointments.</div>
 
-<font color="#990000"><b>
-Admissions' list</b></font>
-<ul> 
-Lists all encounters of this person.
-</ul>
+<strong>Admissions' list</strong>
+<div style="margin-left: 2em">Lists all encounters of this person.</div>
 
-<font color="#990000"><b>
-Medocs</b></font>
-<ul> 
-Lists all existing medocs documents for this person.
-</ul>
+<strong>Medocs</strong>
+<div style="margin-left: 2em">Lists all existing medocs documents for this person.</div>
 
-<font color="#990000"><b>
-DRG (composite)</b></font>
-<ul> 
-Lists all existing DRG documents for this person.
-</ul>
+<strong>DRG (composite)</strong>
+<div style="margin-left: 2em">Lists all existing DRG documents for this person.</div>
 
-<font color="#990000"><b>Diagnostic results</b></font>
-<ul> 
-Lists all existing diagnostic results for this person.
-</ul>
+<strong>Diagnostic results</strong>
+<div style="margin-left: 2em">Lists all existing diagnostic results for this person.</div>
 
-<font color="#990000"><b>Prescriptions</b></font>
-<ul> 
-Lists all existing prescriptions for this person.
-</ul>
+<strong>Prescriptions</strong>
+<div style="margin-left: 2em">Lists all existing prescriptions for this person.</div>
 
-<font color="#990000"><b>Notes & Reports</b></font>
-<ul> 
-Lists all existing notes or report documents for this person.
-</ul>
+<strong>Notes &amp; Reports</strong>
+<div style="margin-left: 2em">Lists all existing notes or report documents for this person.</div>
 
-<font color="#990000"><b>Immunization</b></font>
-<ul> 
-Lists all existing immunization documents for this person.
-</ul>
+<strong>Immunization</strong>
+<div style="margin-left: 2em">Lists all existing immunization documents for this person.</div>
 
-<font color="#990000"><b>Measurements</b></font>
-<ul> 
-Lists all existing measurement data for this person.
-</ul>
+<strong>Measurements</strong>
+<div style="margin-left: 2em">Lists all existing measurement data for this person.</div>
 
+<strong>Pregnancy</strong>
+<div style="margin-left: 2em">Lists all existing pregnancy documents for this person.</div>
 
-<font color="#990000"><b>Pregnancy</b></font>
-<ul> 
-Lists all existing pregnancy documents for this person.
-</ul>
+<strong>Birth details</strong>
+<div style="margin-left: 2em">Lists birth details for this person.</div>
 
-<font color="#990000"><b>Birth details</b></font>
-<ul> 
-Lists birth details for this person.
-</ul>
-
-<font color="#990000"><b>DB record's history</b></font>
-<ul> 
-Pop up window showing the registration record's history in the databank.
-</ul>
+<strong>DB record's history</strong>
+<div style="margin-left: 2em">Pop up window showing the registration record's history in the databank.</div>
+</body>
+</html>
 

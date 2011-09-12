@@ -1,29 +1,28 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Pending requests for bacteriological lab tests</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Pending requests for bacteriological lab tests</strong> 
 
-<a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter the test results or findings?</b></font>
-<ul> 
-	<b>Step: </b>Type the results, findings, diagnoses, etc. in their appropriate text boxes.
-</ul>
+<p><a id="send" name="send"></a> How to enter the test results or findings?</p>
 
-<a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to print the form?</b></font>
-<ul> 
-	<b>Step: </b>Click the <img <?php echo createLDImgSrc('../','printout.gif','0') ?>> button.
-</ul>
+<div style="margin-left: 2em"><strong>Step:</strong> Type the results, findings, diagnoses, etc. in their appropriate text boxes.</div>
 
-<a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-All data are entered, what to do next?</b></font>
-<ul> 
-	<b>Step: </b>Save the test results or findings by clicking the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button.
-</ul>
+<a id="send" name="send"></a> How to print the form? 
 
-<a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-The findings are saved, what to do next?</b></font>
-<ul> 
-	<b>Step: </b>Click the <img <?php echo createLDImgSrc('../','done.gif','0') ?>> button to transfer the form to the archive and signal its availabilty to the clinic or ward.
-</ul>
+<div style="margin-left: 2em"><strong>Step:</strong> Click the button.</div>
+
+<a id="send" name="send"></a> All data are entered, what to do next? 
+
+<div style="margin-left: 2em"><strong>Step:</strong> Save the test results or findings by clicking the button.</div>
+
+<a id="send" name="send"></a> The findings are saved, what to do next? 
+
+<div style="margin-left: 2em"><strong>Step:</strong> Click the button to transfer the form to the archive and signal its availabilty to the clinic or ward.</div>
+</body>
+</html>
 

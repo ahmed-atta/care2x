@@ -1,14 +1,19 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Selecting a clinic or department</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Selecting a clinic or department</strong> 
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-When to select a clinic or department ?</b></font>
+<p><strong>When to select a clinic or department ?</strong></p>
 
-<p><ul>
-     <b>For outpatients.</b>
-   </ul>
-</p>
+<div style="margin-left: 2em"><strong>For outpatients.</strong></div>
 
+<br />
+<br />
+</body>
+</html>
 

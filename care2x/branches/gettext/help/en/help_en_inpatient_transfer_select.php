@@ -1,19 +1,23 @@
-<form action="#" >
-<p><font size=2 face="verdana,arial" ><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to transfer patient to another ward?</b></font>
-<ul> <b>Step: </b>Click the <img <?php echo createLDImgSrc('../','transfer_sm.gif','0') ?>> button  of the department in the list.<br>
-</ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to transfer patient to another room or bed?</b></font>
-<ul> 	
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<p><strong>How to transfer patient to another ward?</strong></p>
 
-	<b>Step 1: </b>Click the <input type="button" value="Show beds"> button  to display the ward's occupancy list.<br>
-	<b>Step 2: </b>Click the <img <?php echo createLDImgSrc('../','transfer_sm.gif','0') ?>> button  to transfer the patient to a different room/bed.<br>							
-</ul>
+<div style="margin-left: 2em"><strong>Step:</strong> Click the button of the department in the list.<br />
+</div>
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I do not want to continue with the transfer?</b></font>
-<ul> 	<b>Step 1: </b>Click the button <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> to close the window.<p>
-</ul>
+<strong>How to transfer patient to another room or bed?</strong>
+<div style="margin-left: 2em"><strong>Step 1:</strong> Click the <input type="button" value="Show beds" /> button to display the ward's occupancy list.<br />
+ <strong>Step 2:</strong> Click the button to transfer the patient to a different room/bed.<br />
+</div>
 
-</form>
+<strong>I do not want to continue with the transfer?</strong>
+<div style="margin-left: 2em"><strong>Step 1:</strong> Click the button align="absmiddle"&gt; to close the window.</div>
+</body>
+</html>
+

@@ -1,15 +1,20 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b><?php echo "$x3 - $x2" ?></b></font>
-<font size=2 face="verdana,arial" >
-<p>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to transfer patient to another room or bed?</b></font>
-<ul> 	
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong> </strong> 
 
-	<b>Step: </b>Click the <img <?php echo createLDImgSrc('../','transfer_sm.gif','0') ?>> button  to transfer the patient to a different room/bed.<br>							
-</ul>
+<p><strong>How to transfer patient to another room or bed?</strong></p>
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-I do not want to continue with the transfer?</b></font>
-<ul> 	<b>Step: </b>Click the <img <?php echo createLDImgSrc('../','close2.gif','0') ?> align="absmiddle"> button to close the window.<p>
-</ul>
+<div style="margin-left: 2em"><strong>Step:</strong> Click the button to transfer the patient to a different room/bed.<br />
+</div>
+
+<strong>I do not want to continue with the transfer?</strong>
+<div style="margin-left: 2em"><strong>Step:</strong> Click the align="absmiddle"&gt; button to close the window.</div>
+</body>
+</html>
+

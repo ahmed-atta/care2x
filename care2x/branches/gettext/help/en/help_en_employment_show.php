@@ -1,42 +1,41 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>staff manager - Employment data</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>staff manager - Employment data</strong> 
 
-<form>
-<font size=2 face="verdana,arial" >
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to update the employment data?</b></font>
-<ul> 
-	<b>Step :</b> Click the <img <?php echo createLDImgSrc('../','update_data.gif','0') ?>> button.
-</ul>
+<p></p>
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to assign the employee as physician?</b></font>
-<ul> 
-	<b>Step :</b> Click the "<font color=#000088>Assign as DOCTOR to a department</font>" option.<p>
-	<img src="../help/en/img/en_employ_doctor.png" border=0 width=206 height=147>
-</ul>
+<form><a id="sel" name="sel"></a> How to update the employment data?
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to assign the employee as nurse?</b></font>
-<ul> 
-	<b>Step :</b> Click the "<font color=#000088>Assign as NURSE to a department</font>" option.<p>
-	<img src="../help/en/img/en_employ_nurse.png" border=0 width=206 height=147>
-</ul>
+<div style="margin-left: 2em"><strong>Step :</strong> Click the button.</div>
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter employee's phone or beeper information?</b></font>
-<ul> 
-	<b>Step :</b> Click the "<font color=#000088>Add phone/beeper info</font>" option.
-</ul>
+<a id="sel" name="sel"></a> How to assign the employee as physician? 
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to display employee's personal registration data?</b></font>
-<ul> 
-	<b>Step :</b> Click the "<font color=#000088>Show personal data</font>" option.
-</ul>
+<div style="margin-left: 2em"><strong>Step :</strong> Click the "Assign as DOCTOR to a department" option.
 
+<p></p>
+</div>
 
+<a id="sel" name="sel"></a> How to assign the employee as nurse? 
+
+<div style="margin-left: 2em"><strong>Step :</strong> Click the "Assign as NURSE to a department" option.
+
+<p></p>
+</div>
+
+<a id="sel" name="sel"></a> How to enter employee's phone or beeper information? 
+
+<div style="margin-left: 2em"><strong>Step :</strong> Click the "Add phone/beeper info" option.</div>
+
+<a id="sel" name="sel"></a> How to display employee's personal registration data? 
+
+<div style="margin-left: 2em"><strong>Step :</strong> Click the "Show personal data" option.</div>
 </form>
+</body>
+</html>
 

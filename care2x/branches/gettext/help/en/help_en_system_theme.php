@@ -1,15 +1,19 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Configuring the control button and image theme</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Configuring the control button and image theme</strong> 
 
+<p><a id="sel" name="sel"></a> How to change the theme?</p>
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to change the theme?</b></font>
-<ul> 
-	<b>Step 1: </b>Select the theme from the selector box.<p>
-	<b>Step 2: </b>Activate the new theme by clicking the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button.<p>
-</ul>
+<div style="margin-left: 2em"><strong>Step 1:</strong> Select the theme from the selector box.
 
-
+<p><strong>Step 2:</strong> Activate the new theme by clicking the button.</p>
+</div>
+</body>
+</html>
 
