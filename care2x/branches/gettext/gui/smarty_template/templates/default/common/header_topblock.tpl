@@ -22,7 +22,7 @@
 				<a href="{{$pbBack}}" class="btn"><img {{$gifBack2}} alt="">{{$LDBack}}</a>
 			{{/if}}
 			{{if $pbHelp}}
-				<a href="{{$pbHelp}}" class="btn primary"><img {{$gifHilfeR}} alt="">{{$LDHelp}}</a>
+				<a href="{{$pbHelp}}" class="btn primary help"><img {{$gifHilfeR}} alt="">{{$LDHelp}}</a>
 			{{/if}}
 			{{if $breakfile}}
 				<a href="{{$breakfile}}" {{$sCloseTarget}} class="btn danger">
