@@ -1,30 +1,33 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>OR administration</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>OR administration</strong> 
 
-<form>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to create a new OR or update an existing one?</b></font>
-<ul> 
-	<b>Step 1: </b>Enter the necessary information about the new OR.<p>
-	<b>Step 2: </b>Click the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button<p>
-</ul>
+<p></p>
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-Compulsory information?</b></font>
-<ul> 
-	<b>Note: </b>All items marked with red <font color=#ff0000>*</font> must be filled in.<p>
-</ul>
+<form><strong>How to create a new OR or update an existing one?</strong>
+<div style="margin-left: 2em"><strong>Step 1:</strong> Enter the necessary information about the new OR.
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-What items can I update?</b></font>
-<ul> 
-	<b>1: </b>Number of operation (OP) tables.<br>
-	<b>2: </b>OR room's name or information.<br>
-	<b>3: </b>Owner ward<br>
-	<b>4: </b>Owner department<p>
-	<p>
-</ul>
+<p><strong>Step 2:</strong> Click the button</p>
+</div>
+
+<strong>Compulsory information?</strong>
+<div style="margin-left: 2em"><strong>Note:</strong> All items marked with red * must be filled in.</div>
+
+<strong>What items can I update?</strong>
+<div style="margin-left: 2em"><strong>1:</strong> Number of operation (OP) tables.<br />
+ <strong>2:</strong> OR room's name or information.<br />
+ <strong>3:</strong> Owner ward<br />
+ <strong>4:</strong> Owner department
+
+<p></p>
+</div>
 </form>
+</body>
+</html>
 

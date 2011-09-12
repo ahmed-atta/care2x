@@ -1,24 +1,24 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Department administration</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Department administration</strong> 
 
+<p><a id="sel" name="sel"></a> How to create a new department?</p>
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to create a new department?</b></font>
-<ul> 
-	<b>Step: </b>Click the "<font color=#000080><b>Create</b></font>" item.<p>
-</ul>
+<div style="margin-left: 2em"><strong>Step:</strong> Click the "<strong>Create</strong>" item.</div>
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to display department profiles?</b></font>
-<ul> 
-	<b>Step: </b>Click the "<font color=#000080><b>Department profiles</b></font>" item.<p>
-</ul>
+<a id="sel" name="sel"></a> How to display department profiles? 
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to manage existing departments?</b></font>
-<ul> 
-	<b>Step: </b>Click the "<font color=#000080><b>Configuration options</b></font>" item.<p>
-</ul>
+<div style="margin-left: 2em"><strong>Step:</strong> Click the "<strong>Department profiles</strong>" item.</div>
+
+<a id="sel" name="sel"></a> How to manage existing departments? 
+
+<div style="margin-left: 2em"><strong>Step:</strong> Click the "<strong>Configuration options</strong>" item.</div>
+</body>
+</html>
 

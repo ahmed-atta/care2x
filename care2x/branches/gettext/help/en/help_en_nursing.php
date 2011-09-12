@@ -1,56 +1,43 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>
-Nursing  
-</b></font>
-<p><font size=2 face="verana,arial" >
-<form action="#" >
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to enter a ward?</b>
-</font>
-<ul>       	
- 	<b>Step: </b>Click the ward's ID in the list.<p>
-	<img src="../help/en/img/en_ward_select.png" border=0 width=317 height=144>
-</ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to display occupancy status of all wards?</b>
-</font>
-<ul>       	
- 	<b>Step: </b>Click "<font color=#000088><b>Quickview</b></font>".<br>
-</ul>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to search an inpatient?</b>
-</font>
-<ul>       	
- 	<b>Step: </b>Click "<font color=#000088><b>Search a patient</b></font>".<br>
-</ul>
-	
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to find old occupancy lists?</b>
-</font>
-<ul>       	
- 	<b>Step: </b>Click "<font color=#000088><b>Archive</b></font>".<br>
-</ul>
-	
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to create a new ward?</b>
-</font>
-<ul>       	
- 	<b>Step: </b>Click "<font color=#000088><b>Ward management</b></font>" to open the submenu.<br>
-</ul>
-	
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to edit ward's properties?</b>
-</font>
-<ul>       	
- 	<b>Step: </b>Click "<font color=#000088><b>Ward management</b></font>" to open the submenu.<br>
-</ul>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Nursing</strong> 
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to manage nurses' list?</b>
-</font>
-<ul>       	
- 	<b>Step: </b>Click "<font color=#000088><b>Nurses' List</b></font>" to open the submenu.<br>
-</ul>
+<p><strong>How to enter a ward?</strong></p>
 
-	</form>
+<div style="margin-left: 2em"><strong>Step:</strong> Click the ward's ID in the list.
+
+<p></p>
+</div>
+
+<strong>How to display occupancy status of all wards?</strong>
+<div style="margin-left: 2em"><strong>Step:</strong> Click "<strong>Quickview</strong>".<br />
+</div>
+
+<strong>How to search an inpatient?</strong>
+<div style="margin-left: 2em"><strong>Step:</strong> Click "<strong>Search a patient</strong>".<br />
+</div>
+
+<strong>How to find old occupancy lists?</strong>
+<div style="margin-left: 2em"><strong>Step:</strong> Click "<strong>Archive</strong>".<br />
+</div>
+
+<strong>How to create a new ward?</strong>
+<div style="margin-left: 2em"><strong>Step:</strong> Click "<strong>Ward management</strong>" to open the submenu.<br />
+</div>
+
+<strong>How to edit ward's properties?</strong>
+<div style="margin-left: 2em"><strong>Step:</strong> Click "<strong>Ward management</strong>" to open the submenu.<br />
+</div>
+
+<strong>How to manage nurses' list?</strong>
+<div style="margin-left: 2em"><strong>Step:</strong> Click "<strong>Nurses' List</strong>" to open the submenu.<br />
+</div>
+</body>
+</html>
 

@@ -1,27 +1,27 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>staff manager</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>staff manager</strong> 
 
-<form>
-<font size=2 face="verdana,arial" >
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to update the personal registration data?</b></font>
-<ul> 
-	<b>Step :</b> Click the <img <?php echo createLDImgSrc('../','update_data.gif','0') ?>> button.
-</ul>
+<p></p>
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to employ the person?</b></font>
-<ul> 
-	<b>Step :</b> Click the <img <?php echo createLDImgSrc('../','add_employ.gif','0') ?>> button.
-</ul>
+<form><a id="sel" name="sel"></a> How to update the personal registration data?
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-If the person is already employed, how to display his employment data?</b></font>
-<ul> 
-	<b>Step :</b> Click the <img <?php echo createLDImgSrc('../','employment_data.gif','0') ?>> button.
-</ul>
+<div style="margin-left: 2em"><strong>Step :</strong> Click the button.</div>
 
+<a id="sel" name="sel"></a> How to employ the person? 
+
+<div style="margin-left: 2em"><strong>Step :</strong> Click the button.</div>
+
+<a id="sel" name="sel"></a> If the person is already employed, how to display his employment data? 
+
+<div style="margin-left: 2em"><strong>Step :</strong> Click the button.</div>
 </form>
+</body>
+</html>
 

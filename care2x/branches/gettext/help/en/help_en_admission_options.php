@@ -1,99 +1,79 @@
-<img src="../help/en/img/en_admission_options.png" border=0 width=194 height=387 align="right">
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Admission options</b></font>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Admission options</strong> 
 
-<p><font size=2 face="verdana,arial" >
+<p><strong>Confirmation of inability to work</strong></p>
 
-<font color="#990000"><b>
-Confirmation of inability to work</b></font>
-<ul> 
-Create or view forms.<p>
+<div style="margin-left: 2em">Create or view forms.</div>
+
+<strong>Charts folder</strong>
+<ul>
+<li style="list-style: none">Opens the folder containing:</li>
+
+<li>fever chart</li>
+
+<li>nursing report</li>
+
+<li>physician orders</li>
+
+<li>diagnostic reports</li>
+
+<li>DRG composite module</li>
+
+<li>laboratory results</li>
+
+<li>encounter photos/images</li>
+
+<li>test request creator</li>
 </ul>
 
-<font color="#990000"><b>
-Charts folder</b></font>
-<ul> 
-Opens the folder containing:
-<li> fever chart
-<li> nursing report
-<li> physician orders
-<li> diagnostic reports
-<li> DRG composite module
-<li> laboratory results
-<li> encounter photos/images
-<li> test request creator
-</ul>
+<strong>Diagnostic results</strong>
+<div style="margin-left: 2em">Lists all diagnostic results/reports available for the encounter.</div>
 
-<font color="#990000"><b>
-Diagnostic results</b></font>
-<ul> 
-Lists all diagnostic results/reports available for the encounter.
-</ul>
+<strong>Medocs</strong>
+<div style="margin-left: 2em">Starts the medocs module for this encounter.</div>
 
-<font color="#990000"><b>
-Medocs</b></font>
-<ul> 
-Starts the medocs module for this encounter.
-</ul>
+<strong>DRG (composite)</strong>
+<div style="margin-left: 2em">Starts the DRG module for this encounter.</div>
 
-<font color="#990000"><b>
-DRG (composite)</b></font>
-<ul> 
-Starts the DRG module for this encounter.
-</ul>
+<strong>Prescriptions</strong>
+<div style="margin-left: 2em">View or enter prescriptions.</div>
 
-<font color="#990000"><b>Prescriptions</b></font>
-<ul> 
-View or enter prescriptions.
-</ul>
+<strong>Notes &amp; Reports</strong>
+<div style="margin-left: 2em">View or enter various notes and reports e.g. admission history or discharge summary.</div>
 
-<font color="#990000"><b>Notes & Reports</b></font>
-<ul> 
-View or enter various notes and reports e.g. admission history or discharge summary.
-</ul>
+<strong>Immunization</strong>
+<div style="margin-left: 2em">View or enter immunization data.</div>
 
-<font color="#990000"><b>Immunization</b></font>
-<ul> 
-View or enter immunization data.
-</ul>
+<strong>Measurements</strong>
+<div style="margin-left: 2em">View or enter measurement data for weight, height and head circumference.</div>
 
-<font color="#990000"><b>Measurements</b></font>
-<ul> 
-View or enter measurement data for weight, height and head circumference.
-</ul>
+<strong>Measurements</strong>
+<div style="margin-left: 2em">View or enter measurement data for weight, height and head circumference.</div>
 
-<font color="#990000"><b>Measurements</b></font>
-<ul> 
-View or enter measurement data for weight, height and head circumference.
-</ul>
+<strong>Pregnancy</strong>
+<div style="margin-left: 2em">View or enter pregnancy data (for female).</div>
 
-<font color="#990000"><b>Pregnancy</b></font>
-<ul> 
-View or enter pregnancy data (for female).
-</ul>
+<strong>Birth details</strong>
+<div style="margin-left: 2em">View or enter birth details data.</div>
 
-<font color="#990000"><b>Birth details</b></font>
-<ul> 
-View or enter birth details data.
-</ul>
+<strong>Show person registration</strong>
+<div style="margin-left: 2em">Shows the person's registration data.</div>
 
-<font color="#990000"><b>Show person registration</b></font>
-<ul> 
-Shows the person's registration data.
-</ul>
+<strong>Update person registration</strong>
+<div style="margin-left: 2em">Updates or edits the person's registration data.</div>
 
-<font color="#990000"><b>Update person registration</b></font>
-<ul> 
-Updates or edits the person's registration data.
-</ul>
+<strong>DB record's history</strong>
+<div style="margin-left: 2em">Pop up window showing the admission record's history in the databank.</div>
 
-<font color="#990000"><b>DB record's history</b></font>
-<ul> 
-Pop up window showing the admission record's history in the databank.
-</ul>
-
-<font color="#990000"><b>Cancel this admission</b></font>
-<ul> 
-Cancels admission. Possible only if patient not yet admitted to a ward or clinic.
-</ul>
+<strong>Cancel this admission</strong>
+<div style="margin-left: 2em">Cancels admission. Possible only if patient not yet admitted to a ward or clinic.</div>
+</body>
+</html>
 

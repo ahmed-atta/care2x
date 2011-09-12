@@ -1,33 +1,31 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Pending requests for radiological tests</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Pending requests for radiological tests</strong> 
 
+<p><a id="stime" name="stime"></a> How to display a pending request?</p>
 
-<a name="stime"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to display a pending request?</b></font>
-<ul> 
-	<b>Note:</b> The first request on the list is automatically displayed.<p>
-	<b>Step:</b> Click the batch number on the left list to display the request form.
-</ul>
-</ul>
+<div style="margin-left: 2em"><strong>Note:</strong> The first request on the list is automatically displayed.
 
-<a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to print the form?</b></font>
-<ul> 
-	<b>Step: </b>Click the <img <?php echo createLDImgSrc('../','printout.gif','0') ?>> button.
-</ul>
+<p><strong>Step:</strong> Click the batch number on the left list to display the request form.</p>
+</div>
 
-<a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to enter the test results or findings?</b></font>
-<ul> 
-	<b>Step: </b>Click the <img <?php echo createLDImgSrc('../','enter_result.gif','0') ?>> button to go to the edit mode.<p>
-</ul>
+<a id="send" name="send"></a> How to print the form? 
 
-<a name="send"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-All data are entered, what to do next?</b></font>
-<ul> 
-	<b>Step: </b>Save the information by clicking the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button.
-</ul>
+<div style="margin-left: 2em"><strong>Step:</strong> Click the button.</div>
 
+<a id="send" name="send"></a> How to enter the test results or findings? 
+
+<div style="margin-left: 2em"><strong>Step:</strong> Click the button to go to the edit mode.</div>
+
+<a id="send" name="send"></a> All data are entered, what to do next? 
+
+<div style="margin-left: 2em"><strong>Step:</strong> Save the information by clicking the button.</div>
+</body>
+</html>
 

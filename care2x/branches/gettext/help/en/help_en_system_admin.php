@@ -1,17 +1,22 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>System Admin</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>System Admin</strong> 
 
+<p></p>
 
-<form>
-	Click the menu item on the "Admin index" frame to open it for configuration.
-<ul> 
-<b>Note</b>:
-<p>
-	Be careful in configuring the system.
-	</p>
-</ul>
+<form>Click the menu item on the "Admin index" frame to open it for configuration.
 
-</font>
+<div style="margin-left: 2em"><strong>Note</strong>:
+
+<p>Be careful in configuring the system.</p>
+</div>
 </form>
+</body>
+</html>
+

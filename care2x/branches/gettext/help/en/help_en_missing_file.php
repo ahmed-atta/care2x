@@ -1,23 +1,39 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Missing file :: <?php echo $src ?></b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Missing file ::  </strong> 
 
-<img <?php echo createComIcon('../','warn.gif','0') ?>> <font color="#990000"><b>
-File(s) is/are missing</b></font>
-<p>
-Possible causes are:
+<p><strong>File(s) is/are missing</strong></p>
+
+<p>Possible causes are:</p>
+
 <blockquote>
+<ul class="noindent">
 <li>The file was deleted</li>
+
 <li>The file was moved to a different directory</li>
+
 <li>The file's permission was set to "no read" or "hidden"</li>
+
 <li>The filename was renamed</li>
+
 <li>The directory path was deleted</li>
+
 <li>The directory path was renamed</li>
+
 <li>The subdirectory was moved</li>
+</ul>
 </blockquote>
-<img <?php echo createComIcon('../','warn.gif','0') ?>> <font color="#990000"><b>
-What can I do?</b></font>
-<p>
-Notify your system administrator about the problem. Tell him that the affected directory path or file is:
-<blockquote><font color="red"><b><?php echo $x1 ?></b></font></blockquote>
+
+<strong>What can I do?</strong>
+<p>Notify your system administrator about the problem. Tell him that the affected directory path or file is:</p>
+
+<blockquote><strong> </strong></blockquote>
+</body>
+</html>
+

@@ -1,19 +1,26 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>User configuration</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>User configuration</strong> 
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to select a mascot?</b></font>
-<ul> 
-	<b>Step 1: </b>Check the radio button of the chosen mascot.<p>
-	<b>Step 2: </b>Click the <img <?php  print createLDImgSrc('../','savedisc.gif','0'); ?>> button.
-</ul>
+<p><a id="sel" name="sel"></a> How to select a mascot?</p>
 
-<a name="sel"><img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b></a>
-How to hide the mascot?</b></font>
-<ul> 
-	<b>Step 1: </b>Check the radio button of the "Do not show mascot" option.<p>
-	<b>Step 2: </b>Click the <img <?php  print createLDImgSrc('../','savedisc.gif','0'); ?>> button.
-</ul>
+<div style="margin-left: 2em"><strong>Step 1:</strong> Check the radio button of the chosen mascot.
+
+<p><strong>Step 2:</strong> Click the button.</p>
+</div>
+
+<a id="sel" name="sel"></a> How to hide the mascot? 
+
+<div style="margin-left: 2em"><strong>Step 1:</strong> Check the radio button of the "Do not show mascot" option.
+
+<p><strong>Step 2:</strong> Click the button.</p>
+</div>
+</body>
+</html>
 

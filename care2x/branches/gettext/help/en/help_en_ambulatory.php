@@ -1,46 +1,34 @@
-<html>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title></title>
-
 </head>
 <body>
-<font face="Verdana, Arial" size=3>
-<b>
-<p><font color="#990000">The department is not displayed on the page?</font></b><p>
-<font face="Verdana, Arial" size=2>
-<ul>
-<b>Step:</b> Select the department from the selector field.<p>
-<img src="../help/en/img/en_ambulatory.png" border=0 width=485 height=174>
-</ul>
-<font face="Verdana, Arial" size=3>
-<b>
-<p><font color="#990000">How to display the outpatients' list?</font></b><p>
-<font face="Verdana, Arial" size=2>
-<ul>
-<b>Step:</b> Click "Outpatient clinic" and supply the access authentication if prompted.
-</ul>
+<p><strong>The department is not displayed on the page?</strong></p>
 
-<font face="Verdana, Arial" size=3>
-<b>
-<p><font color="#990000">How to display the appointments for the department?</font></b><p>
-<font face="Verdana, Arial" size=2>
-<ul>
-<b>Step:</b> Click "Appointments" and supply the access authentication if prompted.
-</ul>
+<div style="margin-left: 2em"><strong>Step:</strong> Select the department from the selector field.
+
+<p></p>
+</div>
+
+<p><strong>How to display the outpatients' list?</strong></p>
+
+<div style="margin-left: 2em"><strong>Step:</strong> Click "Outpatient clinic" and supply the access authentication if prompted.</div>
 
 
-<font face="Verdana, Arial" size=3>
-<b>
-<p><font color="#990000">How to process pending requests?</font></b><p>
-<font face="Verdana, Arial" size=2>
-<ul>
-<b>Step:</b> Click "Pending request" and supply the access authentication if prompted.
-</ul>
+
+<p><strong>How to display the appointments for the department?</strong></p>
+
+<div style="margin-left: 2em"><strong>Step:</strong> Click "Appointments" and supply the access authentication if prompted.</div>
 
 
-</font>
 
+<p><strong>How to process pending requests?</strong></p>
+
+<div style="margin-left: 2em"><strong>Step:</strong> Click "Pending request" and supply the access authentication if prompted.</div>
 </body>
 </html>
+

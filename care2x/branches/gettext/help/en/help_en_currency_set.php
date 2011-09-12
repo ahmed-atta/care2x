@@ -1,25 +1,26 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Currency</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Currency</strong> 
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to set the currency?</b></font>
-<ul> 
-	<b>Step 1: </b>Click the radio button of the currency  you want to use.<p>
-	<b>Step 2: </b>Click the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button.<p>
-</ul>
-<form>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to edit the currency information?</b></font>
-<ul> 
-	<b>Step 1: </b>Click the <input type="button" value="Edit"> button of the currency  you want to use.<p>
-</ul>
+<p><strong>How to set the currency?</strong></p>
+
+<div style="margin-left: 2em"><strong>Step 1:</strong> Click the radio button of the currency you want to use.
+
+<p><strong>Step 2:</strong> Click the button.</p>
+</div>
+
+<form><strong>How to edit the currency information?</strong>
+<div style="margin-left: 2em"><strong>Step 1:</strong> Click the <input type="button" value="Edit" /> button of the currency you want to use.</div>
+
+<strong>How to delete a currency information?</strong>
+<div style="margin-left: 2em"><strong>Step 2:</strong> Click the button.</div>
 </form>
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-How to delete a currency information?</b></font>
-<ul> 
-	<b>Step 2: </b>Click the <img <?php echo createComIcon('../','delete2.gif','0') ?>> button.<p>
-</ul>
-
+</body>
+</html>
 

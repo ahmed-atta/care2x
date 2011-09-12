@@ -1,19 +1,28 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Insurance company - New company data</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Insurance company - New company data</strong> 
 
+<p><strong>What to fill in the form?</strong></p>
 
-<img <?php echo createComIcon('../','frage.gif','0') ?>> <font color="#990000"><b>
-What to fill in the form?</b></font>
-<ul> 
-	<b>Step 1:</b> Enter at least the compulsory items: 
-	<ul>
-	<li>Insurance company ID
-	<li>Insurance company name
-	<li>Mailing address
-	<li>Billing address
-	</ul>
-	<b>Step 2:</b> Click the <img <?php echo createLDImgSrc('../','savedisc.gif','0') ?>> button to save the data.
+<div style="margin-left: 2em"><strong>Step 1:</strong> Enter at least the compulsory items:
+
+<ul>
+<li>Insurance company ID</li>
+
+<li>Insurance company name</li>
+
+<li>Mailing address</li>
+
+<li>Billing address</li>
 </ul>
+
+<strong>Step 2:</strong> Click the button to save the data.</div>
+</body>
+</html>
 

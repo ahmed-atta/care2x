@@ -1,9 +1,14 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>Clock</b></font>
-<p>
-<font size=2 face="verdana,arial" >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>Clock</strong> 
 
-<img <?php echo createComIcon('../','warn.gif','0') ?>> <font color="#990000"><b></a>
-Currently there are no user controls for the clock</b></font>
-
+<p> <strong>Currently there are no user controls for the clock</strong></p>
+</body>
+</html>
 

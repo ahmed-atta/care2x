@@ -1,30 +1,33 @@
-<font face="Verdana, Arial" size=3 color="#0000cc">
-<b>How to search a person</b></font>
-<p><font size=2 face="verana,arial" >
-<form action="#" >
-<b>Step 1</b>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title></title>
+</head>
+<body>
+<strong>How to search a person</strong> 
 
-<ul> Enter  either a full information or a few letters from a person's information, like for example first name, or family name, 
-		or the PID (person identifier).
-		<p>Example 1: enter "21000012" or "12".
-		<br>Example 2: enter "Guerero" or "gue".
-		<br>Example 3: enter "Alfredo" or "Alf".
-	<p>
-	Note: You can also use the % or * wildcard.
-		
-</ul>
-<b>Step 2</b>
-<ul> Click the <img <?php echo createLDImgSrc('../','searchlamp.gif','0') ?>> button  to start the search.<p>
-</ul>
-<b>Step 3</b>
-<ul> If the search finds a result or results, a list will be displayed.<br>
-		To see the admission data of the person you are looking for, click the button <img <?php echo createLDImgSrc('../','ok_small.gif','0') ?>> following it.
-</ul>
+<p><strong>Step 1</strong></p>
 
-<b>Note</b>
-<ul> If you decide to cancel search click the button <img <?php echo createLDImgSrc('../','cancel.gif','0') ?>>.
-</ul>
+<div style="margin-left: 2em">Enter either a full information or a few letters from a person's information, like for example first name, or family name, or the PID (person identifier).
 
+<p>Example 1: enter "21000012" or "12".<br />
+ Example 2: enter "Guerero" or "gue".<br />
+ Example 3: enter "Alfredo" or "Alf".</p>
 
-</form>
+<p>Note: You can also use the % or * wildcard.</p>
+</div>
+
+<strong>Step 2</strong>
+<div style="margin-left: 2em">Click the button to start the search.</div>
+
+<strong>Step 3</strong>
+<div style="margin-left: 2em">If the search finds a result or results, a list will be displayed.<br />
+ To see the admission data of the person you are looking for, click the button following it.</div>
+
+<strong>Note</strong>
+<div style="margin-left: 2em">If you decide to cancel search click the button .</div>
+</body>
+</html>
 
