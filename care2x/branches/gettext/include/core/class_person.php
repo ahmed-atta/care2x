@@ -273,7 +273,7 @@ class Person extends Core {
 	function insertDataFromInternalArray() {
 	    //$this->data_array=NULL;
 		$this->prepInsertArray();
-		# Check if  "create_time" key has a value, if no, create a new value
+		// Check if  "create_time" key has a value, if no, create a new value
 		if(!isset($this->buffer_array['create_time'])||empty($this->buffer_array['create_time'])) $this->buffer_array['create_time']=date('YmdHis');
 		return $this->insertDataFromArray($this->data_array);
 	}
@@ -694,8 +694,8 @@ class Person extends Core {
 				if( $row = $result->FetchRow() ){
 					$this->sql = "UPDATE care_person_other_number ";
 
-					# If old number equals new number, we just set the status to "normal"
-					# else change the number but document the old number in history
+					// If old number equals new number, we just set the status to "normal"
+					// else change the number but document the old number in history
 
 					if($row['other_nr']==$other_nr){
 						$this->sql.="SET status='normal',
@@ -926,7 +926,7 @@ class Person extends Core {
 
 		include_once(CARE_BASE .'include/helpers/inc_date_format_functions.php');
 
-		# convert * and ? to % and &
+		// convert * and ? to % and &
 		$searchkey=strtr($searchkey,'*?','%_');
 		$searchkey=trim($searchkey);
 		$suchwort=$searchkey;
@@ -941,12 +941,12 @@ class Person extends Core {
 			//}
 
 			if(empty($oitem)) $oitem='pid';
-			if(empty($odir)) $odir='DESC'; # default, latest pid at top
+			if(empty($odir)) $odir='DESC'; // default, latest pid at top
 
 			$sql2="	WHERE pid=$suchwort ";
 
 		} else {
-			# Try to detect if searchkey is composite of first name + last name
+			// Try to detect if searchkey is composite of first name + last name
 			if(stristr($searchkey,',')){
 				$lastnamefirst=TRUE;
 			}else{
@@ -956,13 +956,13 @@ class Person extends Core {
 			$searchkey=strtr($searchkey,',',' ');
 			$cbuffer=explode(' ',$searchkey);
 
-			# Remove empty variables
+			// Remove empty variables
 			for($x=0;$x<sizeof($cbuffer);$x++){
 				$cbuffer[$x]=trim($cbuffer[$x]);
 				if($cbuffer[$x]!='') $comp[]=$cbuffer[$x];
 			}
 
-			# Arrange the values, ln= lastname, fn=first name, bd = birthday
+			// Arrange the values, ln= lastname, fn=first name, bd = birthday
 			if($lastnamefirst){
 				$fn=$comp[1];
 				$ln=$comp[0];
@@ -972,7 +972,7 @@ class Person extends Core {
 				$ln=$comp[1];
 				$bd=$comp[2];
 			}
-			# Check the size of the comp
+			// Check the size of the comp
 			if(sizeof($comp)>1){
 				$sql2=" WHERE (name_last $sql_LIKE '".strtr($ln,'+',' ')."%' AND name_first $sql_LIKE '".strtr($fn,'+',' ')."%')";
 				if(!empty($bd)){
@@ -984,11 +984,11 @@ class Person extends Core {
 					}
 				}
 			}else{
-				# Check if * or %
+				// Check if * or %
 				if($suchwort=='%'||$suchwort=='%%'){
 					$sql2=" WHERE status NOT IN ($this->dead_stat)";
 				}else{
-					# Check if it is a complete DOB
+					// Check if it is a complete DOB
 					$DOB=@formatDate2STD($suchwort,$date_format);
 					if($DOB=='') {
 						if(defined('SHOW_FIRSTNAME_CONTROLLER')&&SHOW_FIRSTNAME_CONTROLLER){
@@ -1012,10 +1012,10 @@ class Person extends Core {
 
 		$this->buffer=$this->tb_person.$sql2;
 		
-		# Save the query in buffer for pagination
+		// Save the query in buffer for pagination
 		//$this->buffer=$fromwhere;
 		//$sql2.=' AND status NOT IN ("void","hidden","deleted","inactive")  ORDER BY '.$oitem.' '.$odir;
-		# Set the sorting directive
+		// Set the sorting directive
 		if(isset($oitem)&&!empty($oitem)) $sql3 =" ORDER BY $oitem $odir";
 
 		$this->sql='SELECT pid, name_last, name_first, date_birth, addr_zip, sex, death_date, status FROM '.$this->buffer.$sql3;

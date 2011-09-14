@@ -108,7 +108,7 @@ class GlobalConfig  extends Core{
 
 		if($buf!='_config_no_exists'){
 		
-			# Update if values differ
+			// Update if values differ
 			if($buf!=$value){
 				$this->sql="UPDATE $this->tb SET type='$type',value='$value' WHERE type='$type'";
 				$db->BeginTrans();
@@ -148,7 +148,7 @@ class GlobalConfig  extends Core{
 		if(!is_array($data_array)||empty($filter)) return FALSE;
 		
 		while(list($x,$v)=each($data_array)){
-			# If index name fits in filter save the value
+			// If index name fits in filter save the value
 			if(stristr($x,$filter)){
 				if($numeric&&(empty($v)||!is_numeric($v))){
 					$this->saveConfigItem($x,$def_value);
