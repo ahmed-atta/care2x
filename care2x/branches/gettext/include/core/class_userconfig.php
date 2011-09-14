@@ -126,7 +126,7 @@ class UserConfig {
 			   	setcookie('c2x_'.str_replace('.','_',$user_id).'_serial_config_data',$this->row['serial_config_data'], time()+3600);
 			   	return TRUE;
 			}else{
-				return $this->getConfig(); # Returns default config
+				return $this->getConfig(); // Returns default config
 			}
 		}else{
 		    return FALSE;

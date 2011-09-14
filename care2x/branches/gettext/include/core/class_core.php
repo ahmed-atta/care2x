@@ -195,7 +195,7 @@ class Core {
 				if($v=='create_time' && $this->data['create_time']!='') $this->buffer_array[$v] = date('YmdHis');
 			}
 		}
-		# Reset the source array index to start
+		// Reset the source array index to start
 		reset($this->ref_array);
 		return sizeof($this->buffer_array);
 	}
@@ -210,7 +210,7 @@ class Core {
 	function insertDataFromInternalArray() {
 		//$this->data_array=NULL;
 		$this->_prepSaveArray();
-		# Check if  "create_time" key has a value, if no, create a new value
+		// Check if  "create_time" key has a value, if no, create a new value
 		//if(!isset($this->buffer_array['create_time'])||empty($this->buffer_array['create_time'])) $this->buffer_array['create_time']=date('YmdHis');
 		return $this->insertDataFromArray($this->buffer_array);
 	}
@@ -343,7 +343,7 @@ class Core {
 			else $concatfx='concat';
 		if(!is_array($array)){ return FALSE;}
 		while(list($x,$v)=each($array)) {
-			# use backquoting for mysql and no-quoting for other dbs
+			// use backquoting for mysql and no-quoting for other dbs
 			if ($dbtype=='mysql') $index.="`$x`,";
 				else $index.="$x,";
 				
@@ -378,20 +378,20 @@ class Core {
 		if(empty($array)) return FALSE;
 		if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
 		while(list($x,$v)=each($array)) {
-			# use backquoting for mysql and no-quoting for other dbs.
+			// use backquoting for mysql and no-quoting for other dbs.
 			if ($dbtype=='mysql') $elems.="`$x`=";
 				else $elems.="$x=";
 			
 			if(stristr($v,$concatfx)||stristr($v,'null')) $elems.=" $v,";
 				else $elems.="'$v',";
 		}
-		# Bug fix. Reset array.
+		// Bug fix. Reset array.
 		reset($array);
 
 		$elems=substr_replace($elems,'',(strlen($elems))-1);
 		if(empty($this->where)) $this->where="nr=$item_nr";
         $this->sql="UPDATE $this->coretable SET $elems WHERE $this->where";
-		# Bug fix. Reset the condition variable to prevent affecting subsequent update calls.
+		// Bug fix. Reset the condition variable to prevent affecting subsequent update calls.
 		$this->where='';
 		return $this->Transact();
 	}

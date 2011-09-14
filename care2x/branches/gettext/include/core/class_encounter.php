@@ -1397,7 +1397,7 @@ class Encounter extends Notes {
 		}
 	    if ($this->res['sabi']){
 		   	if ($this->record_count=$this->res['sabi']->RecordCount()) {
-				$this->rec_count=$this->record_count; # workaround
+				$this->rec_count=$this->record_count; // workaround
 				return $this->res['sabi'];
 			} else{return FALSE;}
 		}else{return FALSE;}
@@ -1411,9 +1411,9 @@ class Encounter extends Notes {
 	* <code>
 	* $kw="Magellan";
 	* if($result=$obj->searchInpatientBasicInfo($kw)){
-	*    echo $obj->LastRecordCount();  # Prints the number of resulting rows
+	*    echo $obj->LastRecordCount();  // Prints the number of resulting rows
 	*    while($admission=$result->FetchRow()){
-	*        echo $admission['name_last'];  # Prints the patient's name
+	*        echo $admission['name_last'];  // Prints the patient's name
 	*      ......
 	*    }
 	* }
@@ -1436,9 +1436,9 @@ class Encounter extends Notes {
 	* <code>
 	* $kw="Jennifer";
 	* if($result=$obj->searchOutpatientBasicInfo($kw)){
-	*    echo $obj->LastRecordCount();  # Prints the number of resulting rows
+	*    echo $obj->LastRecordCount();  // Prints the number of resulting rows
 	*    while($admission=$result->FetchRow()){
-	*        echo $admission['name_last'];  # Prints the patient's name
+	*        echo $admission['name_last'];  // Prints the patient's name
 	*      ......
 	*    }
 	* }
@@ -1638,7 +1638,7 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function assignInWard($enr,$loc_nr,$group_nr,$date,$time){
-		if($this->_setLocation($enr,2,$loc_nr,$group_nr,$date,$time)){ # loc. type 2 = ward
+		if($this->_setLocation($enr,2,$loc_nr,$group_nr,$date,$time)){ // loc. type 2 = ward
 			return $this->setCurrentWardInWard($enr,$loc_nr);
 		}
 	}
@@ -1653,7 +1653,7 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function assignInRoom($enr,$loc_nr,$group_nr,$date,$time){
-		return $this->_setLocation($enr,4,$loc_nr,$group_nr,$date,$time); # loc. type 4 = room
+		return $this->_setLocation($enr,4,$loc_nr,$group_nr,$date,$time); // loc. type 4 = room
 	}
 	/**
 	* Saves the encounter's room location. 
@@ -1666,7 +1666,7 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function assignInBed($enr,$loc_nr,$group_nr,$date,$time){
-		return $this->_setLocation($enr,5,$loc_nr,$group_nr,$date,$time); # loc. type 5 = bed
+		return $this->_setLocation($enr,5,$loc_nr,$group_nr,$date,$time); // loc. type 5 = bed
 	}
 	/**
 	* Saves the encounter's room location. 
@@ -1680,7 +1680,7 @@ class Encounter extends Notes {
 	* @return boolean
 	*/
 	function assignInDept($enr,$loc_nr,$group_nr,$date,$time){
-		if($this->_setLocation($enr,1,$loc_nr,$group_nr,$date,$time)){ # loc. type 1 = department
+		if($this->_setLocation($enr,1,$loc_nr,$group_nr,$date,$time)){ // loc. type 1 = department
 			return $this->setCurrentDeptInDept($enr,$loc_nr);
 		}
 	}
