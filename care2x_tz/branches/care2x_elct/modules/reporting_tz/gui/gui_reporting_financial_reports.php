@@ -123,6 +123,13 @@ function getARV(path) {
                   <td class="submenu_item"><a href="companies_financial_summary.php"><?php echo 'Companies Financial Summary'; ?></a></td>
                   <td><?php echo 'Monthly Summary of Insurance companies'; ?></td>
                 </tr>
+				
+				<tr>
+                  <td align=center><img src="../../gui/img/common/default/eyeglass.gif" border=0 width="17" height="17"></td>
+                  <td class="submenu_item"><a href="blockpayment_financial_summary.php"><?php echo 'Block Payment Summary Report'; ?></a></td>
+                  <td><?php echo 'Block Payment Summary Report'; ?></td>
+                </tr>
+				
 
 		 <TR  height=1>
                         <TD  class="submenu_item"><IMG height=1 src="../../gui/img/common/default/pixel.gif" width=5></TD>
