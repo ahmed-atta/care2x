@@ -4,6 +4,13 @@
 */
 
 /**
+*  Core methods. Will be extended by other classes.
+*  Note this class should be instantiated only after a "$db" adodb  connector object
+*  has been established by an adodb instance
+* @author Gjergj Sheldija, Robert Meggle
+* @version beta 3.0.0
+* @copyright 2002 - 2010: Elpidio Latorilla; 2011 - Today: Mauri Niemi
+* @package care_api
 */
 require_once(CARE_BASE .'include/core/class_core.php');
 /**

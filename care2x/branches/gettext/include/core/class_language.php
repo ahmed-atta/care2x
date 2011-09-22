@@ -6,8 +6,9 @@
 *  Language methods. 
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
 * @author Elpidio Latorilla
-* @version beta 2.0.1
-* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
+* @version beta 2.7.0
+* @copyright 2002 - 2010: Elpidio Latorilla; 2011 - Today: Mauri Niemi
+* @deprecated deprecated since version 2.7
 * @package care_api
 */
 class Language {

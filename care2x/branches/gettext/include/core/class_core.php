@@ -7,10 +7,10 @@
 /**
 *  Core methods. Will be extended by other classes.
 *  Note this class should be instantiated only after a "$db" adodb  connector object
-* has been established by an adodb instance
-* @author Elpidio Latorilla
-* @version beta 2.0.1
-* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
+*  has been established by an adodb instance
+* @author Elpidio Latorilla, Gjergj Sheldija, Robert Meggle
+* @version beta 3.0.0
+* @copyright 2002 - 2010: Elpidio Latorilla; 2011 - Today: Mauri Niemi
 * @package care_api
 */
 class Core {
@@ -54,13 +54,19 @@ class Core {
 	* @public array  Used for containing results returned as pointer.
 	*/
 	public $res=array();
-	/**#@+
+	/**
 	* @public boolean
 	* @access private
 	*/
-	public $do_intern;
-	public $ok;
-	/**#@-*/
+	private $do_intern;
+	/**
+	* @private boolean
+	* @access private
+	*/
+	private $ok;
+	/**
+	 * 
+	 * */
 	public $is_preloaded=FALSE;
 	/**
 	*  Internal error message  usually used in debugging.
@@ -211,7 +217,6 @@ class Core {
 		//$this->data_array=NULL;
 		$this->_prepSaveArray();
 		// Check if  "create_time" key has a value, if no, create a new value
-		//if(!isset($this->buffer_array['create_time'])||empty($this->buffer_array['create_time'])) $this->buffer_array['create_time']=date('YmdHis');
 		return $this->insertDataFromArray($this->buffer_array);
 	}
 	/**
@@ -291,8 +296,6 @@ class Core {
 	    $this->sql="SELECT $items  FROM $this->coretable";
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
-				 //while($this->ref_array=$this->result->FetchRow());
-				 //return $this->ref_array;
 				 return $this->result->GetArray();
 			} else { return FALSE; }
 		} else { return FALSE; }
@@ -385,13 +388,11 @@ class Core {
 			if(stristr($v,$concatfx)||stristr($v,'null')) $elems.=" $v,";
 				else $elems.="'$v',";
 		}
-		// Bug fix. Reset array.
 		reset($array);
 
 		$elems=substr_replace($elems,'',(strlen($elems))-1);
 		if(empty($this->where)) $this->where="nr=$item_nr";
         $this->sql="UPDATE $this->coretable SET $elems WHERE $this->where";
-		// Bug fix. Reset the condition variable to prevent affecting subsequent update calls.
 		$this->where='';
 		return $this->Transact();
 	}
