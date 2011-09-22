@@ -9,9 +9,9 @@ require_once(CARE_BASE .'modules/nursing/model/class_notes.php');
 /**
 *  Patient encounter.
 *  Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance.
-* @author Elpidio Latorilla
-* @version beta 2.0.1
-* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
+* @author Elpidio Latorilla, Gjergj Sheldija, Robert Meggle
+* @version beta 3.0.0
+* @copyright 2002 - 2010: Elpidio Latorilla; 2011 - Today: Mauri Niemi
 * @package care_api
 */
 class Encounter extends Notes {
@@ -276,7 +276,6 @@ class Encounter extends Notes {
 		global $db;
 		$row=array();
 		$this->sql="SELECT encounter_nr FROM $this->tb_enc WHERE encounter_nr>=$ref_nr AND encounter_class_nr=$enc_class_nr ORDER BY encounter_nr DESC";
-		//$this->sql="SELECT encounter_nr FROM $this->tb_enc WHERE encounter_nr>=$ref_nr ORDER BY encounter_nr DESC";
 		if($this->res['gnen']=$db->SelectLimit($this->sql,1)){
 			if($this->res['gnen']->RecordCount()){
 				$row=$this->res['gnen']->FetchRow();

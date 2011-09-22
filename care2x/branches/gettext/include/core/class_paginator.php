@@ -7,9 +7,9 @@
 *
 * Handles the pagination of search results or lists with large number of returned rows.
 * Note this class should be instantiated only after a "$db" adodb  connector object  has been established by an adodb instance
-* @author Elpidio Latorilla
-* @version beta 2.0.1
-* @copyright 2002,2003,2004,2005,2005 Elpidio Latorilla
+* @author Elpidio Latorilla, Gjergj Sheldija, Robert Meggle
+* @version beta 3.0.0
+* @copyright 2002 - 2010: Elpidio Latorilla; 2011 - Today: Mauri Niemi
 * @package care_api
 */
 class Paginator {
