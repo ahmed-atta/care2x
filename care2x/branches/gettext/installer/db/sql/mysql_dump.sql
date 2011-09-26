@@ -2099,7 +2099,7 @@ CREATE TABLE IF NOT EXISTS `care_menu_main` (
   `modify_id` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
   `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`nr`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=32 ;
 -- --------------------------------------------------------
 
 --
@@ -4848,16 +4848,16 @@ INSERT INTO `care_menu_main` VALUES
 (20, 7, 2, 'Appointments', '', '', 'LDAppointments', 'modules/appointment_scheduler/appt_main_pass.php', 1, '', '', '20030922232015', '2003-04-05 00:01:45'),
 (21, 0, 2, 'Admission', '', NULL, 'LDAdmission', 'modules/registration_admission/patient_register_pass.php', 1, NULL, '', NULL, '2011-08-24 22:01:58'),
 (22, 0, 2, 'Registration', '', 'gui/img/common/default/post_discussion.gif', '', 'modules/registration_admission/patient_register_pass.php', 1, NULL, '', NULL, '2011-08-24 22:04:17'),
-(23, 0, 2, 'Search', '', 'gui/img/common/default/findnew.gif', 'LDSearch', 'modules/registration_admission/patient_register_pass.php?target=search', 1, NULL, '', NULL, '2011-08-24 22:04:59'),
-(24, 0, 2, 'Archive', '', 'LDArchive', '', 'modules/registration_admission/patient_register_pass.php&target=archiv', 1, NULL, '', NULL, '2011-08-24 22:05:50'),
+(23, 0, 2, 'Search', '', 'gui/img/common/default/findnew.gif', 'LDSearch', 'modules/registration_admission/patient_register_pass.php&target=search', 1, NULL, '', NULL, '2011-08-24 22:04:59'),
+(24, 0, 2, 'Archive', '', 'LDArchive', '', 'modules/registration_admission/patient_register_pass.php?target=archiv', 1, NULL, '', NULL, '2011-08-24 22:05:50'),
 (25, 0, 7, 'Wards', '', 'gui/img/common/default/bul_arrowgrnsm.gif', '', 'modules/nursing/nursing.php', 1, NULL, '', NULL, '2011-08-24 22:07:09'),
 (26, 0, 3, 'Archive', '', NULL, 'LDArchive', 'modules/registration_admission/admission_pass.php?target=archiv', 1, NULL, '', NULL, '2011-08-24 22:07:39'),
 (27, 0, 7, 'Search', '', 'gui/img/common/default/findnew.gif', '', 'modules/nursing/nursing-patient-search-start.php', 1, NULL, '', NULL, '2011-08-24 22:08:06'),
 (28, 0, 7, 'Quick view', '', 'gui/img/common/default/eye_s.gif', '', 'modules/nursing/nursing-quickview.php', 1, NULL, '', NULL, '2011-08-24 22:08:36'),
 (29, 0, 0, 'Special Tools', '', NULL, '', '', 1, NULL, '', NULL, '2011-08-29 19:12:10'),
 (30, 0, 0, 'Medicaments', '', NULL, '', '', 1, NULL, '', NULL, '2011-08-29 19:20:15'),
-(31, 0, 0, 'Analysis', '', NULL, '', '', 1, NULL, '', NULL, '2011-08-29 19:23:08'),
-(32, 95, 19, 'Info', '', NULL, 'LDInfo', 'main/login-pc-config.php', 1, NULL, '', NULL, '2011-08-31 14:30:39');
+(31, 0, 0, 'Analysis', '', NULL, '', '', 1, NULL, '', NULL, '2011-08-29 19:23:08');
+
 --
 -- Dumping data for table care_method_induction
 --
