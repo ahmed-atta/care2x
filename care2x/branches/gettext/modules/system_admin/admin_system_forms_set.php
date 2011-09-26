@@ -65,8 +65,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',$returnfile);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('system_forms_set.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/system_forms_set.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

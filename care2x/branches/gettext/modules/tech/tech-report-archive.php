@@ -108,8 +108,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',$returnfile);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('tech.php','arch')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/tech.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

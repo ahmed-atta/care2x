@@ -216,8 +216,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('nursing_how2search.php','$mode','$rows','search')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/nursing_how2search.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
  

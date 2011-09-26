@@ -65,8 +65,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('config_mascot.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/config_mascot.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

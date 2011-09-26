@@ -72,8 +72,7 @@ if($mode){
 $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
- $smarty->assign('pbHelp',"javascript:gethelp('nursing_ward_mng.php','new')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/nursing_ward_mng.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

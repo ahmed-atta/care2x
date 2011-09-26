@@ -52,8 +52,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDClose', $LDClose);
  
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('dept_news.php')");
- # href for close file
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/dept_news.html");  # href for close file
  $smarty->assign('breakfile',$breakfile);
  
  if($mode!="preview4saved"){

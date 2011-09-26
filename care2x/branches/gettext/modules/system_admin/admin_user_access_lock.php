@@ -70,8 +70,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',$returnfile);
 
 # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('edp.php','access','lock','".$zeile['lockflag']."')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/edp.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

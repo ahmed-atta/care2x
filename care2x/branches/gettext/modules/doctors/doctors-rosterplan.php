@@ -170,8 +170,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('docs_dutyplan_edit.php','$mode','$rows')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/docs_dutyplan_edit.html"); 
 # href for return button
  $smarty->assign('pbBack','javascript:history.back();killchild();');
 

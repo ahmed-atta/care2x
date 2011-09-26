@@ -57,8 +57,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('lab_param_config.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/lab_param_config.html"); 
  # hide return  button
  $smarty->assign('pbBack',FALSE);
 

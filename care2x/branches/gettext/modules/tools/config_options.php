@@ -35,8 +35,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
 # href for the  button
- $smarty->assign('pbHelp',"javascript:gethelp('config_user.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/config_user.html"); 
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title

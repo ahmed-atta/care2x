@@ -44,8 +44,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('diagnostic_report.php','$LDReports','','$station','$LDReports')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/diagnostic_report.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

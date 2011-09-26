@@ -252,8 +252,7 @@ $smarty->assign('LDBack', $LDBack);
  }
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('request_blood.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/request_blood.html"); 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

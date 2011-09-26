@@ -41,8 +41,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('transfer_clinic_select.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/transfer_clinic_select.html"); 
  # href for close button
  $smarty->assign('breakfile',"javascript:window.close();");
 

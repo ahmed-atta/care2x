@@ -240,8 +240,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('title',$LDPatientSearch);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('admission_how2search.php','$from')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/admission_how2search.html"); 
   # Onload Javascript code
  $smarty->assign('sOnLoadJs','onLoad="if(window.focus) window.focus();document.searchform.searchkey.select();"');
 

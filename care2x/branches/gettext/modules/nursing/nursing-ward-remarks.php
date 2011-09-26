@@ -88,8 +88,7 @@ if($mode=='save'){
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('patient_remarks.php','','','$station','$LDNotes')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/patient_remarks.html"); 
  # href for close button
  $smarty->assign('breakfile','javascript:window.close()');
 

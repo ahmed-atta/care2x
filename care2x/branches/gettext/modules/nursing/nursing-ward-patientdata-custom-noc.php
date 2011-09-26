@@ -129,8 +129,7 @@ $smarty->assign('LDBack', $LDBack);
  
  $smarty->assign('pbBack',FALSE);
 
- $smarty->assign('pbHelp',"javascript:gethelp('nursing_report.php','','','$station','$NOC_title')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/nursing_report.html"); 
  $smarty->assign('breakfile',$breakfile);
 
  $smarty->assign('sWindowTitle',"$NOC_title $station");

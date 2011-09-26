@@ -116,8 +116,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',FALSE);
 
 # href for the  button
- $smarty->assign('pbHelp',"javascript:gethelp('outpatient_discharge.php','discharge','','$station','$LDReleasePatient')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/outpatient_discharge.html"); 
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title

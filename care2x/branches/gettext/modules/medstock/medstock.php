@@ -46,8 +46,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
  # Added for the common header top block
- $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDMedDepot')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/submenu1.html"); 
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title

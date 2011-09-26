@@ -31,8 +31,7 @@ $breakfile=$root_path.'modules/medstock/medstock.php '.URL_APPEND;
  $smarty->assign('bHideTitleBar',TRUE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('products.php','head','main','$cat')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/products.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

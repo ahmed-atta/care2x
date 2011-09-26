@@ -40,8 +40,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDAmbulatory')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/submenu1.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

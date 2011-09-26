@@ -65,8 +65,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('docs_dutyplan.php','show','$rows')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/docs_dutyplan.html"); 
  # href for close button
  $smarty->assign('breakfile',$rettarget);
 
