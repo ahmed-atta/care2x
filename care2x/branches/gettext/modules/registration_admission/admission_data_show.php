@@ -179,16 +179,14 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDClose', $LDClose);
  
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('admission_how2new.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/admission_how2new.html"); 
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
  $smarty->assign('title',$LDPatientData.' ('.$encounter_nr.')');
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('admission_show.php','$from')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/admission_show.html"); 
  # Hide the return button
  $smarty->assign('pbBack',FALSE);
 

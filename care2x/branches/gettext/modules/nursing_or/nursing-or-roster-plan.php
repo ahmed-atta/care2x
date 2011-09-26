@@ -161,8 +161,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDClose', $LDClose);
  
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('op_duty.php','plan','$rows')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/op_duty.html"); 
 # href for return button
  $smarty->assign('pbBack','javascript:history.back();killchild();');
 

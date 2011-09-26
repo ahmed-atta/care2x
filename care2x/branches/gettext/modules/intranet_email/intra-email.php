@@ -352,8 +352,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('intramail.php','mail','$mode','$folder','$sendok')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/intramail.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

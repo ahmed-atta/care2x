@@ -245,8 +245,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('patient_folder.php','$nodoc','','$station','Main folder')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/patient_folder.html"); 
  # href for close button
  $smarty->assign('breakfile','javascript:window.close()');
 

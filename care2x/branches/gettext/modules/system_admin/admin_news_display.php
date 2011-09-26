@@ -87,8 +87,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
 # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('newsdisplay.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/newsdisplay.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

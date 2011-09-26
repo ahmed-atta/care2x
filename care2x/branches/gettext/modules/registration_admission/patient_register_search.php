@@ -50,8 +50,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDClose', $LDClose);
  
  # Added for the common header top block
- $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDPatientRegister." - ".$LDSearch')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/submenu1.html"); 
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
@@ -59,8 +58,7 @@ $smarty->assign('LDBack', $LDBack);
 
  $smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.select()"');
 
- $smarty->assign('pbHelp',"javascript:gethelp('person_how2search.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/person_how2search.html"); 
  $smarty->assign('pbBack',FALSE);
  
  #

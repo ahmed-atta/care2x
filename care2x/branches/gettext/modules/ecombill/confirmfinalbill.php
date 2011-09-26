@@ -51,8 +51,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',$returnfile);
 
 # href for the  button
- $smarty->assign('pbHelp',"javascript:gethelp('billing.php','final-bill')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/billing.html"); 
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title

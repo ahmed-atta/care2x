@@ -224,8 +224,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
  
- $smarty->assign('pbHelp',"javascript:gethelp('opdoc.php','search','$mode','$rows')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/opdoc.html"); 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

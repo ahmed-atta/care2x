@@ -40,8 +40,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',$returnfile);
 
  # href for the help button
- $smarty->assign('pbHelp',"javascript:gethelp('products_db.php','inputsupplier','$mode','$cat')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/products_db.html"); 
  # href for the close button
  $smarty->assign('breakfile',$breakfile);
 

@@ -72,8 +72,7 @@ switch($target){
  $smarty->assign('sToolbarTitle',$title);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('dept_select.php')");
-$smarty->assign('LDBack', $LDBack);
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/dept_select.html"); $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
  # href for return  button

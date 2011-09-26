@@ -49,8 +49,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',$breakfile);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('pw_change.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/pw_change.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

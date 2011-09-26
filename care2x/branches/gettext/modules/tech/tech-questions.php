@@ -129,8 +129,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',$returnfile);
 
 # href for the  button
- $smarty->assign('pbHelp',"javascript:gethelp('tech.php','queries')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/tech.html"); 
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title

@@ -121,8 +121,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('inpatient_assignbed.php','$mode','$occup','$station','$LDStation')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/inpatient_assignbed.html"); 
  # href for close button
  $smarty->assign('breakfile',"javascript:window.close();");
 

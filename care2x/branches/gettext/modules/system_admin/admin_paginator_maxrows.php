@@ -48,8 +48,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('paginator_maxrows_config.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/paginator_maxrows_config.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

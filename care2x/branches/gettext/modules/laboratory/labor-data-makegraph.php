@@ -159,8 +159,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDClose', $LDClose);
  
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('lab_list.php','graph','','','$LDGraph')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/lab_list.html"); 
  # hide return  button
  $smarty->assign('pbBack',FALSE);
 

@@ -375,8 +375,7 @@ $smarty->assign('LDBack', $LDBack);
  if(!$mode) $sBuffer ='dummy';
  	else $sBuffer = $mode;
 
- $smarty->assign('pbHelp',"javascript:gethelp('opdoc.php','create','$sBuffer')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/opdoc.html"); 
  # hide return button
  $smarty->assign('pbBack',FALSE);
 

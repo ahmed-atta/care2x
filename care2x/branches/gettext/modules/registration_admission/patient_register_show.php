@@ -69,8 +69,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDClose', $LDClose);
  
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('submenu1.php','$LDPatientRegister')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/submenu1.html"); 
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
@@ -80,8 +79,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('sOnLoadJs',"if (window.focus) window.focus();");
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('person_admit.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/person_admit.html"); 
  # Hide the return button
  $smarty->assign('pbBack',FALSE);
 

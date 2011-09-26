@@ -75,8 +75,7 @@ while ($n<35)
 $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);
- $smarty->assign('pbHelp',"javascript:gethelp('nursing_how2search.php','','','arch')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/nursing_how2search.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

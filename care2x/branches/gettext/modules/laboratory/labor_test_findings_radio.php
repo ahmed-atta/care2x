@@ -236,8 +236,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',$returnfile);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('pending_radio_findings.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/pending_radio_findings.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

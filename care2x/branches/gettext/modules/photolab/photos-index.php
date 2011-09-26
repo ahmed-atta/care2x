@@ -59,8 +59,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('pbBack',FALSE);
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('encounter_photos.php','photos','','$station','$LDPhotos')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/encounter_photos.html"); 
  # href for close button
  $smarty->assign('breakfile',"javascript:window.parent.location.replace('$breakfile');");
 

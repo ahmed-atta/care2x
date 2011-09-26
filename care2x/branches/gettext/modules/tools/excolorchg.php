@@ -92,8 +92,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('sTitleImage','<img '.createComIcon($root_path,'settings_tree.gif','0').'>');
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('color_opt.php','ext')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/color_opt.html"); 
  # href for close button
  $smarty->assign('breakfile',$breakfile);
 

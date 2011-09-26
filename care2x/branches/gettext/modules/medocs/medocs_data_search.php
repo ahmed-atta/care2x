@@ -179,8 +179,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDClose', $LDClose);
  
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('medocs_search.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/medocs_search.html"); 
  $smarty->assign('breakfile',$breakfile);
 
  # Window bar title
@@ -190,8 +189,7 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.select()"');
 
  # href for help button
- $smarty->assign('pbHelp',"javascript:gethelp('medocs_entry.php')");
-
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/medocs_entry.html"); 
   # hide return button
  $smarty->assign('pbBack',FALSE);
 
