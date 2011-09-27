@@ -189,9 +189,9 @@ class smarty_care extends Smarty {
 		//i hate it.. :(
 		ob_start();
 		require_once (CARE_BASE.'modules/menu/menu.php');
-		$kot = ob_get_contents();
+		$menu_contents = ob_get_contents();
 		ob_clean();
-		$this->assign('menu_i_madh', $kot);
+		$this->assign('main_menu', $menu_contents);
 		# For the dhtml effects
 
 		if($this->cfg['dhtml']) {
