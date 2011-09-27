@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require('../include/helpers/inc_environment_global.php');
+require('./roots.php');
+require('../../include/helpers/inc_environment_global.php');
 /**
  * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
  * GNU General Public License
@@ -9,7 +10,8 @@ require('../include/helpers/inc_environment_global.php');
  *
  * See the file "copy_notice.txt" for the licence notice
  */
-define('LANG_FILE','or.php');
+define('MODULE','or_logbook');
+define('LANG_FILE_MODULAR','or_logbook.php');
 define('NO_2LEVEL_CHK',1);
 require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
 
@@ -78,9 +80,9 @@ $smarty->assign('LDOrDocumentMenu',
 			<TR>
 				<TD bgColor=#ffffff>
 				<font face=arial,verdana size=2>
-				» <A href="' . CARE_GUI  . 'modules/op_document/op-docu-pass.php' . URL_REDIRECT_APPEND . '&target=entry">' . $LDNewDocu . '</A>
-				» <A href="' . CARE_GUI  . 'modules/op_document/op-docu-pass.php' . URL_REDIRECT_APPEND . '&target=search">' . $LDSearch . '</A>
-				» <A href="' . CARE_GUI  . 'modules/op_document/op-docu-pass.php' . URL_REDIRECT_APPEND . '&target=archiv">' . $LDArchive . '</A>
+				- <A href="' . CARE_GUI  . 'modules/op_document/op-docu-pass.php' . URL_REDIRECT_APPEND . '&target=entry">' . $LDNewDocu . '</A>
+				- <A href="' . CARE_GUI  . 'modules/op_document/op-docu-pass.php' . URL_REDIRECT_APPEND . '&target=search">' . $LDSearch . '</A>
+				- <A href="' . CARE_GUI  . 'modules/op_document/op-docu-pass.php' . URL_REDIRECT_APPEND . '&target=archiv">' . $LDArchive . '</A>
 				</font>
 				</TD>
 			</TR>
@@ -99,9 +101,9 @@ $smarty->assign('LDOrLogBookMenu',
   		'<TABLE cellSpacing=1 cellPadding=5 width="100%" bgColor=#dddddd border=0>
 			<TR>
 				<TD bgColor=#ffffff><font face=arial,verdana size=2><nobr> 
-				» <A href="' . CARE_GUI  . 'modules/or_logbook/op-care-log-pass.php' . URL_REDIRECT_APPEND.'&target=entry";>'.  $LDNewDocu .'</A>
-				» <A href="'. CARE_GUI  .'modules/or_logbook/op-care-log-pass.php' .  URL_REDIRECT_APPEND . '&target=search";">' .  $LDSearch . '</A> 
-				» <A href="'.  CARE_GUI  . 'modules/or_logbook/op-care-log-pass.php' .  URL_REDIRECT_APPEND . '&target=archiv";">' .  $LDArchive . '</A>
+				- <A href="' . CARE_GUI  . 'modules/or_logbook/op-care-log-pass.php' . URL_REDIRECT_APPEND.'&target=entry";>'.  $LDNewDocu .'</A>
+				- <A href="'. CARE_GUI  .'modules/or_logbook/op-care-log-pass.php' .  URL_REDIRECT_APPEND . '&target=search";">' .  $LDSearch . '</A> 
+				- <A href="'.  CARE_GUI  . 'modules/or_logbook/op-care-log-pass.php' .  URL_REDIRECT_APPEND . '&target=archiv";">' .  $LDArchive . '</A>
 				</font></TD>
 			</TR>
 		</TABLE>');
@@ -114,9 +116,9 @@ $smarty->assign('LDDutyPlanMenu',
   		  		'<TABLE cellSpacing=1 cellPadding=5 width="100%" bgColor=#dddddd border=0>
 				<TR>
 					<TD bgColor=#ffffff><font face=arial,verdana size=2> 
-					» <A href="'.CARE_GUI .'modules/nursing_or/nursing-or-roster.php'. URL_REDIRECT_APPEND.'&retpath=menu">'. $LDSee .'</A> 
-					» <A href="'.CARE_GUI .'modules/nursing_or/nursing-or-main-pass.php'.URL_REDIRECT_APPEND.'&retpath=menu&target=dutyplan">'.$LDCreate . '/' . $LDUpdate .'</A> 
-					» <A href="'.CARE_GUI .'modules/nursing_or/nursing-or-main-pass.php'. URL_REDIRECT_APPEND.'&target=setpersonal&retpath=menu">' . $LDCreatePersonList .'</A>
+					- <A href="'.CARE_GUI .'modules/nursing_or/nursing-or-roster.php'. URL_REDIRECT_APPEND.'&retpath=menu">'. $LDSee .'</A> 
+					- <A href="'.CARE_GUI .'modules/nursing_or/nursing-or-main-pass.php'.URL_REDIRECT_APPEND.'&retpath=menu&target=dutyplan">'.$LDCreate . '/' . $LDUpdate .'</A> 
+					- <A href="'.CARE_GUI .'modules/nursing_or/nursing-or-main-pass.php'. URL_REDIRECT_APPEND.'&target=setpersonal&retpath=menu">' . $LDCreatePersonList .'</A>
 					</font></TD>
 				</TR>
 		</TABLE>');
@@ -136,8 +138,8 @@ $smarty->assign('LDORAnaNOCSchedulerMenu',
   		  		'<TABLE cellSpacing=1 cellPadding=5 width="100%" bgColor=#dddddd border=0>
 			<TR>
 				<TD bgColor=#ffffff><font face=arial,verdana size=2>
-				» <A href="' . CARE_GUI  . 'modules/nursing_or/nursing-or-roster.php'.URL_REDIRECT_APPEND.'">'. $LDSee .'</A>
-				» <A href="' . CARE_GUI  . 'modules/nursing_or/nursing-or-main-pass.php'.URL_REDIRECT_APPEND.'">'. $LDCreate . '/' . $LDUpdate  .'</A>
+				- <A href="' . CARE_GUI  . 'modules/nursing_or/nursing-or-roster.php'.URL_REDIRECT_APPEND.'">'. $LDSee .'</A>
+				- <A href="' . CARE_GUI  . 'modules/nursing_or/nursing-or-main-pass.php'.URL_REDIRECT_APPEND.'">'. $LDCreate . '/' . $LDUpdate  .'</A>
 				</font></TD>
 			</TR>
 		</TABLE>');
