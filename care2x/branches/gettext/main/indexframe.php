@@ -33,10 +33,6 @@ if(file_exists(CARE_BASE.'language/'.$lang.'/lang_'.$lang.'_indexframe.php')){
 
 // echo $_COOKIE['ck_config']; // for debugging only
 
-if(($mask==2)&&!$nonewmask){
-	header ("location: indexframe2.php?sid=$sid&lang=$lang&boot=$boot&cookie=$cookie");
-	exit;
-}
 
 # Get the global config for language usage
 require_once(CARE_BASE.'include/core/class_globalconfig.php');
@@ -53,5 +49,4 @@ require_once(CARE_BASE.'include/core/class_ward.php');
 $dept=new Department();
 $ward=new Ward();
 
-require('./gui_bridge/gui_indexframe.php');
 ?>
