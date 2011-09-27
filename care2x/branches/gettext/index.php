@@ -318,63 +318,8 @@ $smarty->assign('sWindowTitle',$LDMainTitle);
 #
 $config_type = 'use_old_gui_style';
 require('./include/helpers/inc_get_global_config.php');
-
-if ($use_old_gui_style==1) {
-	#
-	# Assign the contents frame source
-	#
-	$smarty->assign('sContentsFrameSource',"src = \"blank.php?lang=$lang&sid=$sid\"");
-} else {
-	#
-	# Assign the contens start page 
-	#
-	$smarty->assign('sContentsFrameSource',"modules/news/start_page.php?lang=$lang&sid=$sid\"");
-}
+$smarty->assign('sContentsFrameSource',"modules/news/start_page.php?lang=$lang&sid=$sid\"");
 	
-#
-# Load the gui template
-#
+$smarty->display('common/noframe.tpl');
 
-if($mask == 2){
-
-	if($lang=='ar'||$lang=='fa') $smarty->assign('sBaseFramesetTemplate','common/frameset_floatingmenu_rtl.tpl');
-		else $smarty->assign('sBaseFramesetTemplate','common/frameset_floatingmenu_ltr.tpl');
-	
-	$smarty->assign('sMenuFrameSource','src="main/menubar2.php"');
-	$smarty->assign('sStartFrameSource',"src=\"main/indexframe.php?boot=1&lang=$lang&egal=$egal&cookie=$cookie&sid=$sid&mask=2\"");
-}else{
-
-	$smarty->assign('sStartFrameSource',"src = \"main/indexframe.php?boot=1&mask=$mask&lang=$lang&cookie=$cookie&sid=$sid\"");
-	
-	#
-	# Assign frame dimensions
-	#
-	$smarty->assign('gui_frame_left_nav_width',$GLOBALCONFIG['gui_frame_left_nav_width']);
-	$smarty->assign('gui_frame_left_nav_border',$GLOBALCONFIG['gui_frame_left_nav_border']);
-
-	if($lang=='ar'||$lang=='fa') {
-		$smarty->assign('sBaseFramesetTemplate','common/frameset_rtl.tpl');
-		//require('gui/html_template/righttoliftdefault/tp_index.php');
-	} else{
-		#
-		# Else use normal frameset design
-		#
-		$smarty->assign('sBaseFramesetTemplate','common/frameset_ltr.tpl');
-	}
-}
-$smarty->assign('sBaseFramesetTemplate','common/noframe.tpl');
-#
-# Display the frame page
-#
-if ($use_old_gui_style==1) {
-	#
-	# The old school framebased gui should be shown now
-	#
-	$smarty->display('common/baseframe.tpl');
-} else {
-	#
-	# The div based menu should be used
-	#
-	$smarty->display('common/noframe.tpl');
-}
 ?>
