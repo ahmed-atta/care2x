@@ -103,7 +103,6 @@ class Paginator {
 		}else{
 			$x=$this->prevIndex();
 			if(empty($txt)) $txt='Previous';
-			//return '<a href="'.$this->page.URL_APPEND.'&mode=paginate&searchkey='.$this->skey.'&pgx='.$x.'&totalcount='.$this->tcount.'"><< '.$txt.'</a>';
 			return '<a href="'.$this->page.URL_APPEND.'&mode=paginate&pgx='.$x.'&totalcount='.$this->tcount.'&oitem='.$this->sort_item.'&odir='.$this->sort_dir.$append.'"><< '.$txt.'</a>';
 		}
 	}
@@ -118,7 +117,6 @@ class Paginator {
 		$x=$this->nextIndex();
 		if ($x){
 			if(empty($txt)) $txt='Next';
-			//return '<a href="'.$this->page.URL_APPEND.'&mode=paginate&searchkey='.$this->skey.'&pgx='.$x.'&totalcount='.$this->tcount.'">'.$txt.' >></a>';
 			return '<a href="'.$this->page.URL_APPEND.'&mode=paginate&pgx='.$x.'&totalcount='.$this->tcount.'&oitem='.$this->sort_item.'&odir='.$this->sort_dir.$append.'">'.$txt.' >></a>';
 		}else{
 			return '';

@@ -41,7 +41,7 @@ switch($target)
 
 $thisfile=basename(__FILE__);
 //$breakfile='startframe.php'.URL_APPEND;
-$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+$breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 
 $userck='medocs_user';
 

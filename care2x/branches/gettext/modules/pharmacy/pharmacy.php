@@ -21,7 +21,7 @@ require($root_path.'include/helpers/inc_2level_reset.php');
 if(!isset($_SESSION['sess_path_referer'])) $_SESSION['sess_path_referer'] = "";
 if(!isset($_SESSION['sess_user_origin'])) $_SESSION['sess_user_origin'] = "";
 
-$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+$breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 
 $_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
 $_SESSION['sess_user_origin']='pharma';

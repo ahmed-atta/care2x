@@ -12,7 +12,7 @@ define('LANG_FILE_MODULAR','nursing.php');
  require($root_path.'include/helpers/inc_2level_reset.php');
 
  $toggler=0;
- $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+ $breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 ///$db->debug=true;
  require_once($root_path.'include/core/class_ward.php');
  // Load the wards info 

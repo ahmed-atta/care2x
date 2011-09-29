@@ -78,7 +78,7 @@ $deptarray=$dept_obj->getAllMedical('name_formal');
 # Set the break (return) file
 switch($_SESSION['sess_user_origin']){
 	case 'amb': $breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND; break;
-	default: $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+	default: $breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 }
 # Create department object
 require_once($root_path.'modules/dept_admin/model/class_department.php');
