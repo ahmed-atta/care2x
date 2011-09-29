@@ -22,7 +22,7 @@ if(isset($_SESSION['sess_staff_nr'])&&$_SESSION['sess_user_origin']=='staff_admi
 }elseif(file_exists($root_path.$_SESSION['sess_path_referer'])){
 	$breakfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND;
 }else{
-	$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+	$breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 }
 
 //$db->debug=1;

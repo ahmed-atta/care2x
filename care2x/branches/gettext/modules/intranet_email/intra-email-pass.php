@@ -18,7 +18,7 @@ require_once('includes/inc_intramail_domains.php');
 
 $thisfile=basename(__FILE__);
 $forwardfile='intra-email.php'.URL_REDIRECT_APPEND.'&mode=listmail';
-$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+$breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 
 // reset all 2nd level lock cookies
 require($root_path.'include/helpers/inc_2level_reset.php');

@@ -23,7 +23,7 @@ $_SESSION['sess_user_origin']='dept';
 $default_url_news='modules/news/newscolumns.php';
 
 $returnfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND;
-$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+$breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 
 $_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
 

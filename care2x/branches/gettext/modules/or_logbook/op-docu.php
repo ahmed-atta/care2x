@@ -73,7 +73,7 @@ $smarty->append('JavaScript',$sTemp);
 
 $smarty->assign('LDOrDocs',"<img ".createLDImgSrc(CARE_BASE ,'arzt2.gif','0','absmiddle')."  alt=\"$LDDoctor\">");
 //ALog
-$smarty->assign('LDOrDocument',"<a href=\"".CARE_BASE ."modules/op_document/op-docu-pass.php".URL_APPEND."\">$LDOrDocument</a>");
+$smarty->assign('LDOrDocument',"<a href=\"".CARE_GUI ."modules/op_document/op-docu-pass.php".URL_APPEND."\">$LDOrDocument</a>");
 $smarty->assign('LDOrDocumentTxt',$LDOrDocumentTxt);
 $smarty->assign('LDOrDocumentMenu',
   '<TABLE cellSpacing=1 cellPadding=5 width="100%" bgColor=#dddddd border=0>

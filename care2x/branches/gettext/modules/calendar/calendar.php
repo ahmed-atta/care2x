@@ -20,7 +20,7 @@ require($root_path.'include/helpers/inc_2level_reset.php');
 
 require_once($root_path.'include/helpers/inc_config_color.php');
 
-if($retpath=='home') $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+if($retpath=='home') $breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 	else $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
 	 
 $datum=strftime("%d.%m.%Y");

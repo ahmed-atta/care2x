@@ -30,7 +30,7 @@ $staff_obj = new staff;
 
 $thisfile=basename(__FILE__);
 
-if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 	else $breakfile='admission_pass.php'.URL_APPEND.'&target=entry';
 
 //$breakfile='admission_pass.php'.URL_APPEND;

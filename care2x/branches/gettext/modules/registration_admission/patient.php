@@ -23,7 +23,7 @@ if(!isset($_SESSION['sess_en'])) $_SESSION['sess_en'] = "";
 if(!isset($_SESSION['sess_full_en'])) $_SESSION['sess_full_en'] = "";
 if(!isset($_SESSION['sess_path_referer'])) $_SESSION['sess_path_referer'] = "";
 
-$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+$breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 
 $_SESSION['sess_path_referer'] = 'modules/registration_admission/patient.php';
 

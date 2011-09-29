@@ -28,7 +28,7 @@ $thisfile=basename(__FILE__);
 # Set the break (return) file
 switch($_SESSION['sess_user_origin']){
 	case 'amb': $breakfile=$root_path.'modules/ambulatory/ambulatory.php'.URL_APPEND; break;
-	default: $breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+	default: $breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 }
 
 $userck='aufnahme_user';

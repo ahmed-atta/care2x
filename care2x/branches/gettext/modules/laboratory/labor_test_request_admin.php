@@ -16,7 +16,7 @@ define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_config_color.php');
 
-$breakfile=$root_path.'main/startframe.php'.URL_APPEND;
+$breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 // reset all 2nd level lock cookies
 require($root_path.'include/helpers/inc_2level_reset.php');
 
