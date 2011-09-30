@@ -40,7 +40,7 @@ if (!$linecount) {
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
  <TITLE>Labor Check Archive</TITLE>
  <style type="text/css" name="1">
 .va12_w{color:#ffffff}

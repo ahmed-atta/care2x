@@ -94,7 +94,7 @@ function aligndate(&$ad,&$am,&$ay)
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <title></title>
 
 <style type="text/css" name="s2">

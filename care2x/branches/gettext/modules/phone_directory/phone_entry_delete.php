@@ -51,7 +51,7 @@ if ($finalcommand=='delete'){
 ?>
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
  <TITLE></TITLE>
 <?php 
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');

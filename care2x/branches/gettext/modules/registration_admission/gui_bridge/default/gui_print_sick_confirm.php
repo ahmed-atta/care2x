@@ -5,7 +5,7 @@ require('./gui_bridge/default/gui_std_tags.php');
 
 
 echo StdHeader();
-echo setCharSet(); 
+ 
 ?>
  <TITLE><?php echo $title ?></TITLE>
 

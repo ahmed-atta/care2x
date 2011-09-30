@@ -48,7 +48,7 @@ if(isset($mode)&&($mode=='cancel')&&isset($encounter_nr)&&$encounter_nr){
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
  <TITLE></TITLE>
 </HEAD>
 

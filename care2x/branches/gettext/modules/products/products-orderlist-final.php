@@ -119,7 +119,7 @@ if( $ofinal && $sendok )
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 
 <script language=javascript>
 function popinfo(b) {

@@ -62,7 +62,7 @@ if ($mode=='save'){
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
 <TITLE></TITLE>
 <STYLE TYPE="text/css">
 	.va12_b {text-decoration: none; color: #0000cc;}

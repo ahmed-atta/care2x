@@ -18,7 +18,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
 </HEAD>
 
 <BODY bgcolor=black onLoad="if (window.focus) window.focus()" leftmargin=2 marginwidth=2>

@@ -99,7 +99,7 @@ switch($mode)
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <?php if(!isset($mode)||empty($mode)) echo '<meta http-equiv="refresh" content="30, url: tech-question-bot.php">'; ?>
 <title><?php echo $LDQBotActivate ?></title>
 <script language=javascript>

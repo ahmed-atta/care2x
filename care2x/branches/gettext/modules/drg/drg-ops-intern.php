@@ -65,7 +65,7 @@ $img_delete=createComIcon($root_path,'delete2.gif','0','right',TRUE);
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
  <TITLE></TITLE>
  
   <script language="javascript">

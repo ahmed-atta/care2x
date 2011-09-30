@@ -18,7 +18,7 @@ require($root_path.'global_conf/inc_remoteservers_conf.php');
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
 </HEAD>
 <BODY bgcolor=black onLoad="if (window.focus) window.focus()" marginwidth=0 leftmargin=0 topmargin=0 marginheight=0>
 <center >

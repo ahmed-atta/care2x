@@ -14,7 +14,7 @@ require($root_path.'global_conf/inc_remoteservers_conf.php');
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
 <script language="javascript">
 var cam1=new Image();
 var cam2=new Image();

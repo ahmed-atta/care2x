@@ -16,7 +16,7 @@ require_once('../helpers/inc_front_chain_lang.php');
 <?php html_rtl($lang); ?>
 
 <head>
-<?php echo setCharSet(); ?>
+
 <title></title>
 
 </head>

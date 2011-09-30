@@ -40,7 +40,7 @@ $search=$pers_obj->searchstaffBasicInfo($inputdata);
 ?>
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
 <TITLE><?php echo $title ?></TITLE>
 
 <script language="javascript">

@@ -13,13 +13,7 @@ else
 
 ?>
 <?php html_rtl($lang) ?>
-<?php 
 
-include_once('include/helpers/inc_charset_fx.php');
-
-echo setCharSet(); 
-
-?>
 <head>
  <title>Init Page</title>
 </head>

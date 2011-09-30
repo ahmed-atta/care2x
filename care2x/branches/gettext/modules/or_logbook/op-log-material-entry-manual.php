@@ -67,7 +67,7 @@ if(($mode=="force_add") && !empty($artikelname) && !empty($pcs)){
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
  <style type="text/css" name="s2">
 .v12{ font-family:verdana,arial; color:#000000; font-size:12;}
 .v12b{ font-family:verdana,arial; color:#cc0000; font-size:12;}

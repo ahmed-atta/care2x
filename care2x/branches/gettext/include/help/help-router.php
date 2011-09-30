@@ -2,11 +2,10 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 // globalize POST, GET, & COOKIE  vars
 require_once('../helpers/inc_environment_global.php');
-require_once('../helpers/inc_charset_fx.php') // load the charset functions
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <title>?</title>
 
 </head>

@@ -21,7 +21,7 @@ $toggle=!$toggle;
 }
 
 echo StdHeader();
-echo setCharSet(); 
+ 
 ?>
  <TITLE><?php echo $title ?></TITLE>
 

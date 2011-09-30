@@ -79,7 +79,7 @@ if(($mode=='send') && isset($order_nr) && $order_nr){
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <script language=javascript>
 function popinfo(b)
 {

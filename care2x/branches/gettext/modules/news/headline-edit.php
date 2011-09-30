@@ -50,7 +50,7 @@ if(!($artopt%2)) $alignright=true;
 <?php html_rtl($lang); ?>
 <head>
 
-<?php echo setCharSet(); ?>
+
 <title><?php echo $title ?></title>
 
 <script language="javascript">

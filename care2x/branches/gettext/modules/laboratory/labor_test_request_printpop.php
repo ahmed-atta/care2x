@@ -188,7 +188,7 @@ if($dept_obj->preloadDept($stored_request['testing_dept'])){
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
  <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
 <?php
 require($root_path.'include/helpers/inc_js_gethelp.php');

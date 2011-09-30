@@ -92,7 +92,7 @@ if($mode=='save')
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
  <TITLE><?php echo "$LDQuickList $title" ?></TITLE>
   <script language="javascript" src="../js/showhide-div.js">
 </script>
