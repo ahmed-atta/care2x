@@ -9,7 +9,8 @@ require('../include/helpers/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-define('LANG_FILE','or.php');
+define('MODULE','nursing_or');
+define('LANG_FILE_MODULAR','nursing_or.php');
 define('NO_2LEVEL_CHK',1);
 require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
 
