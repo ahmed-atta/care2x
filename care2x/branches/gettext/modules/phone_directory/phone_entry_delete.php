@@ -58,7 +58,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>
 </HEAD>
 
-<BODY  bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+<BODY  
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 

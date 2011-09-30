@@ -155,7 +155,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 <BODY  onLoad="if(window.focus) window.focus(); 
 <?php if(!$showonly) : ?> document.searchdata.keyword.select();document.searchdata.keyword.focus();
 <?php endif; ?>
-" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+" 
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 <FONT    SIZE=-1  FACE="Arial">

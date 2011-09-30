@@ -174,7 +174,7 @@ if($info_exist)
 <br>
 <ul>
 
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2>
+<FONT    SIZE=+2>
 <?php if($item_no) echo $LDUpdateCurrencyInfo; else echo $LDAddCurrency ?> </FONT><FONT class="prompt"><p>
 <?php
 if(($mode=='save')&&$new_currency_ok) echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'> '.$saved_msg.'<p>';

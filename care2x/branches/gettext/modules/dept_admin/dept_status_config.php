@@ -129,7 +129,7 @@ ob_start();
 } ?>
 &nbsp;
 <br>
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2>
+<FONT    SIZE=+2>
 <?php 
 if(isset($$LD_var)&&$$LD_var) echo $$LD_var;
 			else echo $name_formal; 

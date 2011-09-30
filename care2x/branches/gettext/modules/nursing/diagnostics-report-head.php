@@ -14,8 +14,6 @@ define('MODULE','nursing');
 define('LANG_FILE_MODULAR','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-//if($edit&&!$_COOKIE[$local_user.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 
 $thisfile=basename(__FILE__);
 $breakfile=$root_path."modules/nursing/nursing-ward-patientdata.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";

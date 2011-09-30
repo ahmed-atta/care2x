@@ -15,7 +15,6 @@ define('MODULE','nursing');
 define('LANG_FILE_MODULAR','nursing.php');
 $local_user='ck_pflege_user';
 require_once ($root_path . 'include/helpers/inc_front_chain_lang.php');
-require_once ($root_path . 'include/helpers/inc_config_color.php'); // load color preferences
 
 $thisfile  =basename(__FILE__);
 /* Create charts object */
@@ -196,16 +195,8 @@ require ($root_path . 'include/helpers/inc_css_a_hilitebu.php');
                                                               '',                          '',
                                                               '<?php echo $title ?>')"><img <?php echo
     createLDImgSrc($root_path, 'hilfe-r.gif', '0') ?>
-                <?php
-                if ($cfg['dhtml'])
-                    echo 'class="fadeOut" >';
-                ?>
                 </a><a href = "javascript: window.close()"><img <?php echo
     createLDImgSrc($root_path, 'close2.gif', '0') ?>
-                <?php
-                if ($cfg['dhtml'])
-                    echo 'class="fadeOut" >';
-                ?>
                 </a>
 
                 </nobr>

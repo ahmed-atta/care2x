@@ -12,8 +12,6 @@ require ('../include/helpers/inc_environment_global.php');
 define ( 'LANG_FILE', 'specials.php' );
 define ( 'NO_2LEVEL_CHK', 1 );
 require_once (CARE_BASE  . 'include/helpers/inc_front_chain_lang.php');
-require_once (CARE_BASE  . 'include/helpers/inc_config_color.php');
-
 $breakfile = "plugin.php?sid=" . $sid . "&lang=" . $lang;
 
 ?>
@@ -49,12 +47,12 @@ function gethelp(x,s,x1,x2,x3)
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 	<tr valign=top>
-		<td bgcolor="<?php echo $cfg ['top_bgcolor']; ?>" height="10">
-			<FONT COLOR="<?php echo $cfg ['top_txtcolor'];?>" SIZE=+3 FACE="Arial">
+		<td  height="10">
+			<FONT  SIZE=+3 FACE="Arial">
 				<STRONG> &nbsp;<?php echo $LDClock?></STRONG>
 			</FONT>
 		</td>
-		<td bgcolor="<?php echo $cfg ['top_bgcolor']; ?>" height="10" align=right>
+		<td  height="10" align=right>
 			<div class="actions">
 				<?php echo '<a href="javascript:window.history.back()"><img ' . createLDImgSrc ( CARE_BASE , 'back2.gif', '0' ) . '></a>'; ?>
 				<a href="javascript:gethelp('')">
@@ -67,7 +65,7 @@ function gethelp(x,s,x1,x2,x3)
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor=<?php echo $cfg ['body_bgcolor']; ?> valign=top colspan=2>
+		<td  valign=top colspan=2>
 			<CENTER>
 				<font face="verdana,arial" size=3>  
 					<?php echo "$LDPresent $LDTime"?> 
@@ -77,7 +75,7 @@ function gethelp(x,s,x1,x2,x3)
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor=<?php echo $cfg ['bot_bgcolor']; ?> height=70 colspan=2>
+		<td  height=70 colspan=2>
 			<?php
 			require (CARE_BASE .'include/helpers/inc_load_copyrite.php');
 			?>

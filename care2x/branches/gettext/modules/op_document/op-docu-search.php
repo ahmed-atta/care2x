@@ -61,7 +61,12 @@ $glob_obj->getConfig('patient_%');
 include_once($root_path.'include/core/class_encounter.php');
 $enc_obj=new Encounter();
 
-require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
+include_once(CARE_BASE . '/include/core/class_userconfig.php');
+$cfg_obj=new UserConfig;
+if(is_object($cfg_obj)) {
+	$cfg_obj->getConfig($_COOKIE['ck_config']);
+	$cfg=&$cfg_obj->buffer;
+}
 
 $thisfile=basename(__FILE__);
 $breakfile=$root_path.'main/op-docu.php'.URL_APPEND;

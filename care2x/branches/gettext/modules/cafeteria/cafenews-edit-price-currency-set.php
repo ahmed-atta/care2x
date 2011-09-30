@@ -14,7 +14,6 @@ define('MODULE','cafeteria');
 define('LANG_FILE_MODULAR','cafeteria.php');
 $local_user='ck_cafenews_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/helpers/inc_config_color.php');
 
 $breakfile='cafenews.php'.URL_APPEND;
 $returnfile='cafenews-edit-price-select.php'.URL_APPEND;
@@ -33,7 +32,7 @@ require('includes/inc_currency_set.php');
 <script language="javascript" src="<?php echo $root_path ?>js/check_currency_same_item.js">
 </script>
 <?php endif ?>
-<?php if($cfg['dhtml']) include($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
+
 </head>
 <body>
 <FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">

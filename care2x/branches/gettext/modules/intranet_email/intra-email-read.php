@@ -149,7 +149,7 @@ ob_start();
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 
 <tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td  valign=top colspan=2>
 
 
 <?php

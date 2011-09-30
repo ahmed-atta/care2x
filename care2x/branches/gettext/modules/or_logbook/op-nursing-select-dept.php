@@ -14,7 +14,13 @@ define('MODULE','or_logbook');
 define('LANG_FILE_MODULAR','or_logbook.php');
 $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
+include_once(CARE_BASE . '/include/core/class_userconfig.php');
+$cfg_obj=new UserConfig;
+if(is_object($cfg_obj)) {
+	$cfg_obj->getConfig($_COOKIE['ck_config']);
+	$cfg=&$cfg_obj->buffer;
+}
+
 require_once($root_path.'modules/dept_admin/model/class_department.php');
 $dept_obj=new Department;
 

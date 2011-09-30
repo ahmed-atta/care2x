@@ -367,7 +367,7 @@ ob_start();
 ?>
 </HEAD>
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
+<BODY  
 onLoad="if (window.focus) window.focus(); 
 <?php if($pn=="") echo "document.searchform.searchkey.focus();" ?>" 
 topmargin=0 leftmargin=0 marginwidth=0 marginheight=0

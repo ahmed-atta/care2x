@@ -25,8 +25,6 @@ if(!isset($task)) $task='';
 $addr=trim($addr);
 if(($mode=='saveadd')&&($addr=='')) { header('location:intra-email-addrbook.php'.URL_REDIRECT_APPEND); exit;}
 
-require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
-
 $thisfile=basename(__FILE__);
 $breakfile='intra-email.php'.URL_APPEND.'&mode=listmail';
 $dbtable='care_mail_private_users';

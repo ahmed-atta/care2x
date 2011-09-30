@@ -124,18 +124,18 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?></HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"  height="10" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDMedDepot - $LDReport" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<a href="#" onClick=history.back(1)><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><a 
-href="javascript:gethelp('products_db.php','report','<?php echo $mode ?>','<?php echo $cat ?>','<?php echo $update ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><a 
-href="<?php echo $breakfile ?>?sid=<?php echo "$sid&lang=$lang" ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a></td></tr>
+<td   height="10" >
+<FONT    SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDMedDepot - $LDReport" ?></STRONG></FONT></td>
+<td  height="10" align=right>
+<a href="#" onClick=history.back(1)><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  </a><a 
+href="javascript:gethelp('products_db.php','report','<?php echo $mode ?>','<?php echo $cat ?>','<?php echo $update ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  </a><a 
+href="<?php echo $breakfile ?>?sid=<?php echo "$sid&lang=$lang" ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> </a></td></tr>
 <tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
+<td  valign=top colspan=2><p><br>
 <ul>
 
 
@@ -222,7 +222,7 @@ else
 </td>
 </tr>
 <tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
+<td  height=70 colspan=2>
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>

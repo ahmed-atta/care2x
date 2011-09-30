@@ -13,7 +13,6 @@ define('MODULE','radiology');
 define('LANG_FILE_MODULAR','radiology.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/helpers/inc_config_color.php');
 
 $thisfile=basename(__FILE__);
 
@@ -58,19 +57,19 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?></HEAD>
 
 <BODY  topmargin=0 leftmargin=0  marginwidth=0 marginheight=0 bgcolor=silver onLoad="document.srcform.searchkey.select();" onFocus="document.srcform.searchkey.select();" 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+>
 
 <table width=100% border=0 cellspacing=0 height=100%>
 
 <tr valign=top height=10>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp; &nbsp; <?php echo "$LDRadio $LDSearchXray - $LDSearchPat" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right><nobr>
-<a href="javascript:window.history.back()"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><a href="javascript:gethelp('radio.php','search','','0')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><a href="javascript:window.top.opener.focus();window.top.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a>
+<td  height="10" >
+<FONT    SIZE=+2  FACE="Arial"><STRONG>&nbsp; &nbsp; <?php echo "$LDRadio $LDSearchXray - $LDSearchPat" ?></STRONG></FONT></td>
+<td  height="10" align=right><nobr>
+<a href="javascript:window.history.back()"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  </a><a href="javascript:gethelp('radio.php','search','','0')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  </a><a href="javascript:window.top.opener.focus();window.top.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  </a>
 </nobr>
 </td></tr>
 <tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td  valign=top colspan=2>
 <form action="<?php echo $thisfile ?>" method="get" onSubmit="return chkform(this)" name="srcform">
 <table border=0>
   <tr>

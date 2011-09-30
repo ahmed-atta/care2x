@@ -102,7 +102,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?> 
 </HEAD>
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+<BODY 
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 	<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>" SIZE=6 > <b><?php echo "$LDPhoneDir $LDNewData" ?></b></font>
@@ -110,7 +110,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 	<table width=100% border=0 cellspacing=0 cellpadding=0>
 	<tr>
 	<td colspan=3><nobr>
-	<a href="phone_list.php<?php echo URL_APPEND.'&edit=$edit'; ?>"><img <?php echo createLDImgSrc($root_path,'phonedir-gray.gif','0') ?> <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><img <?php echo createLDImgSrc($root_path,'newdata-b.gif','0') ?>></nobr></td>
+	<a href="phone_list.php<?php echo URL_APPEND.'&edit=$edit'; ?>"><img <?php echo createLDImgSrc($root_path,'phonedir-gray.gif','0') ?> </a><img <?php echo createLDImgSrc($root_path,'newdata-b.gif','0') ?>></nobr></td>
 	</tr>
 	<tr>
 	<td class="wardlisttitlerow" colspan=3 >

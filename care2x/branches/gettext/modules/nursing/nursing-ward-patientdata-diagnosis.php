@@ -14,7 +14,6 @@ define('MODULE','nursing');
 define('LANG_FILE_MODULAR','nursing.php');
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if($edit&&!$_COOKIE[$local_user.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 
 $thisfile='nursing-ward-patientdata-diagnosis.php';
 $breakfile="nursing-ward-patientdata.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
@@ -170,11 +169,10 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 </HEAD>
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> 
+<BODY  
 onLoad="if (window.focus) window.focus(); 
 <?php if(($mode=='save')||($saved)) echo ";window.location.href='#bottom';document.berichtform.berichtput.focus()"; ?>"  
-topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 >
 
 <script>	
 window.moveTo(0,0);
@@ -183,13 +181,13 @@ window.moveTo(0,0);
 
 <table width=100% border=0 cellpadding="5" cellspacing=0>
 <tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" >
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDReports $station"; ?></STRONG></FONT>
+<td  >
+<FONT    SIZE=+2  FACE="Arial"><STRONG><?php echo "$LDReports $station"; ?></STRONG></FONT>
 </td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right ><nobr><a href="javascript:gethelp('nursing_report.php','<?php echo $LDReports; ?>','','<?php echo $station ?>','<?php echo $LDReports; ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a></nobr></td>
+<td  height="10" align=right ><nobr><a href="javascript:gethelp('nursing_report.php','<?php echo $LDReports; ?>','','<?php echo $station ?>','<?php echo $LDReports; ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  </a><a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  </a></nobr></td>
 </tr>
 <tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> colspan=2>
+<td  colspan=2>
  <ul>
 
 

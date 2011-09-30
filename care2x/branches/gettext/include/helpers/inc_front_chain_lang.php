@@ -174,7 +174,12 @@ if(isset($lang_tables)&&is_array($lang_tables)&&sizeof($lang_tables)) {
 }
 
 #  Load additional environment files 
-require_once('inc_config_color.php'); # load user configurations
+include_once(CARE_BASE . '/include/core/class_userconfig.php');
+$cfg_obj=new UserConfig;
+if(is_object($cfg_obj)) {
+	$cfg_obj->getConfig($_COOKIE['ck_config']);
+	$cfg=&$cfg_obj->buffer;
+}
 require_once('inc_img_fx.php'); # image functions
 
 # Resolve the template theme

@@ -20,8 +20,6 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 */
 require($root_path.'include/helpers/inc_accessplan_areas_functions.php');
 
-require_once($root_path.'include/helpers/inc_config_color.php');
-
 $breakfile='admin.php?sid='.$sid.'&lang='.$lang;
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
 $_SESSION['sess_file_return']=basename(__FILE__);
@@ -68,7 +66,7 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 </HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['bot_bgcolor'];?> onLoad="document.searchwin.name.select()">
+<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 onLoad="document.searchwin.name.select()">
 
 
 <FONT    SIZE=-1  FACE="Arial">
@@ -78,14 +76,13 @@ function gethelp(x,s,x1,x2,x3)
 
 <table width=100% border=0 cellspacing=0>
 <tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td  height="45"><FONT    SIZE=+2  FACE="Arial">
 <STRONG> <?php echo "$LDEDP $LDAccessRight $LDSearch" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="'.$returnfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  class="fadeOut" >';?></a>
-<a href="javascript:gethelp('')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a></td>
+<td  height="10" align=right>
+<a href="javascript:gethelp('')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  </a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  </a></td>
 </tr>
 <tr>
-<td bgcolor=<?php echo $cfg['body_bgcolor'];?> colspan=2>
+<td colspan=2>
 
 <p><br>
 <ul>

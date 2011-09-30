@@ -18,8 +18,6 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
 require($root_path.'include/helpers/inc_2level_reset.php');
 
-require_once($root_path.'include/helpers/inc_config_color.php');
-
 if($retpath=='home') $breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 	else $breakfile=$root_path.'main/plugin.php'.URL_APPEND;
 	 
@@ -208,12 +206,10 @@ echo '</td></tr></table>';
 ?>
 </select>
 <?php echo $LDYear ?> <input type="text" name="jahr" size=4 value="<?php echo $pyear; ?>" >
-<?php if($cfg['dhtml'])
-echo '
+
 <a href="javascript:cxjahr(\'1\')"><img '.createComIcon($root_path,'varrow-u.gif','0').' alt="'.$LDPlus1Year.'"></a>
 <a href="javascript:cxjahr(\'0\')"><img '.createComIcon($root_path,'varrow-d.gif','0').' alt="'.$LDMinus1Year.'"></a>';
-else echo'<input  type="button" value="+1" onClick=cxjahr(\'1\')> <input  type="button" value="-1" onClick=cxjahr(\'0\')>';
-?>
+
 &nbsp;&nbsp;&nbsp;<input  type="submit" value="<?php echo $LDGO ?>">
 <p>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">

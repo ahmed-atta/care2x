@@ -13,7 +13,7 @@ echo setCharSet();
 
 
 <BODY bgcolor="<?php echo $cfg['body_bgcolor'];?>"  onLoad="window.print()" 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+>
 
 
 <?php 

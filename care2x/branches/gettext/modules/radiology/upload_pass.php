@@ -55,30 +55,15 @@ if ($pass=='check')
 	include($root_path.'include/helpers/inc_passcheck.php');
 
 
-require_once($root_path.'include/helpers/inc_config_color.php');
 require($root_path.'include/helpers/inc_passcheck_head.php');
 ?>
 <?php echo setCharSet(); ?>
-<BODY  onLoad="document.passwindow.userid.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
-<?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY  onLoad="document.passwindow.userid.focus();" >
 
 <FONT    SIZE=-1  FACE="Arial">
 
 <P>
-<?php
-if($cfg['dhtml'])
- {
 
-echo '
-<script language=javascript>
-<!--
- if (window.screen.width) 
- { if((window.screen.width)>1000) document.write(\'<img '.createComIcon($root_path,'skinbone.jpg','0','absmiddle').'><FONT  COLOR="'.$cfg['top_txtcolor'].'"  SIZE=6  FACE="verdana"> <b>'.$buf.'</b></font>\');}
- //-->
- </script>';
- }
- ?>
-  
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 
 

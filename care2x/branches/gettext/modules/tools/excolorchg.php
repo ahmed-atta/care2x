@@ -172,7 +172,7 @@ Index frame<p align=left >
   </tr>
   <tr valign=top>
   
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> width=400 >
+<td  width=400 >
 <p><br>&nbsp; <?php echo $LDMainFrame ?><p><br>
 &nbsp;<a href="#" onClick="chgcolor('body_hover','ex')"><img <?php echo createComIcon($root_path,'settings_tree.gif','0','absmiddle') ?>  alt="<?php echo $LDMainFrame ?> hover  link "><font face="Verdana, Arial" color=<?php echo $config_new['body_hover']; ?>> <?php echo $LDMainFrame ?> hover link.</font></a><br>
 &nbsp;<a href="#" onClick="chgcolor('body_alink','ex')"><img <?php echo createComIcon($root_path,'settings_tree.gif','0','absmiddle') ?>  alt="<?php echo $LDMainFrame ?> active link "><font face="Verdana, Arial" color=<?php echo $config_new['body_alink']; ?>> <?php echo $LDMainFrame ?> active link.</font></a><br>
@@ -181,7 +181,7 @@ Index frame<p align=left >
   </tr>
   <tr>
  
-    <td bgcolor=<?php echo $cfg['bot_bgcolor']; ?>>
+    <td >
 	<p><br>
 	&nbsp;&nbsp;&nbsp;<?php echo $LDBottomFrame ?>
 	<p>

@@ -44,7 +44,6 @@ if(!isset($sickform_style)){
 	exit;
 }
 
-//require_once($root_path.'include/helpers/inc_config_color.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'modules/news/includes/inc_editor_fx.php');
 require_once($root_path.'include/core/class_person.php');

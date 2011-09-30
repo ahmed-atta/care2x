@@ -5,8 +5,6 @@ define('LANG_FILE_MODULAR','system_admin.php');
 $local_user='ck_admin_user';
 require('../../include/helpers/inc_environment_global.php');
 
-require_once($root_path.'include/helpers/inc_config_color.php');
-
 /**
 * The following require loads the access areas that can be assigned for
 * user permissions.
@@ -38,17 +36,17 @@ function gethelp(x,s,x1,x2,x3)
 </script>
 	</HEAD>
 
-	<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['bot_bgcolor']?>>
+	<BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 >
 
 
 	<table width=100% border=0 cellspacing=0 >
 	<tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="45"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td  height="45"><FONT    SIZE=+2  FACE="Arial">
 <STRONG> &nbsp; <?php echo "$LDEDP $LDUpdateRight" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  class="fadeOut" >';?></a><a href="javascript:gethelp('edp.php','access','update')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a></td>
+<td  height="10" align=right>
+<a href="javascript:gethelp('edp.php','access','update')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  </a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  </a></td>
 </tr>
-	<tr bgcolor="<?php echo $cfg['body_bgcolor']?>">
+	<tr>
 	<td colspan=2><p><br>
 	<ul>
 <?php
