@@ -123,7 +123,7 @@ $smarty->assign('LDDutyPlanMenu',
 				</TR>
 		</TABLE>');
 
-$smarty->assign('LDOnCallDuty',"<a href=\"spediens-bdienst-zeit-erfassung.php".URL_APPEND."&retpath=op&encoder=".$_COOKIE['ck_login_username'.$sid]."\">$LDOnCallDuty</a>");
+$smarty->assign('LDOnCallDuty',"<a href=\"standby-duty.php".URL_APPEND."&retpath=op&encoder=".$_COOKIE['ck_login_username'.$sid]."\">$LDOnCallDuty</a>");
 $smarty->assign('LDOnCallDutyTxt',$LDOnCallDutyTxt);
 
 # OR Anesthesia submenu block

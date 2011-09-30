@@ -19,7 +19,7 @@ setcookie(currentuser,"");
 <script language="JavaScript">
 <!-- 
 	function bdienstwin(){
- 	meinfens=window.open("spediens-bdienst-zeit-erfassung.php","meinfens","width=800,height=600,locationbar=no,menubar=no,status=no,scrollbars=yes,resizable=yes,copyhistory=yes" );
+ 	meinfens=window.open("standby-duty.php","meinfens","width=800,height=600,locationbar=no,menubar=no,status=no,scrollbars=yes,resizable=yes,copyhistory=yes" );
 }
 -->
 </script>
@@ -40,7 +40,7 @@ setcookie(currentuser,"");
 <td valign=top bgcolor=#cde1ec colspan=2><p><br>
 <ul>
 <FONT    SIZE=-1  FACE="Arial">
-<img <?php echo createComIcon(CARE_BASE ,'varrow.gif','0') ?>> <a href="op-care-dienst-schnellsicht.php">Schnellübersicht über die gegenwärtige diensthabende OP Pfleger</a><br>
+<img <?php echo createComIcon(CARE_BASE ,'varrow.gif','0') ?>> <a href="op-care-dienst-schnellsicht.php">Schnellï¿½bersicht ï¿½ber die gegenwï¿½rtige diensthabende OP Pfleger</a><br>
 <img <?php echo createComIcon(CARE_BASE ,'varrow.gif','0') ?>> <a href="op-care-log-pass.php">OP Logbuch</a><br>
 <img <?php echo createComIcon(CARE_BASE ,'varrow.gif','0') ?>> <a href="#" ONCLICK="bdienstwin()">Bereitschaftsdienst - Zeiterfassung</a><br>
 <img <?php echo createComIcon(CARE_BASE ,'varrow.gif','0') ?>> <a href="#">Dienstplan</a><br>
@@ -59,7 +59,7 @@ setcookie(currentuser,"");
 <tr>
 <td bgcolor=silver valign="top" height="70" colspan="2">
 <FONT    SIZE=1  FACE="Arial">
-Copyright © 2000 by Elpidio Latorilla<p>
+Copyright ï¿½ 2000 by Elpidio Latorilla<p>
 All programs and scripts are not to be copied nor modified without permission from Elpidio Latorilla.<br>
 If you want to use the scripts or some of the scripts used here for your own purposes
 please contact Elpidio Latorilla at <a href=mailto:elpidio@care2x.org, >elpidio@care2x.org, </a>.
