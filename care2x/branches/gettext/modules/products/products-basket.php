@@ -53,7 +53,7 @@ $img_delete=createComIcon($root_path,'delete2.gif','0');
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 
 <script language=javascript>
 function popinfo(b){

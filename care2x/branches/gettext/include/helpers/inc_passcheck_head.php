@@ -5,7 +5,7 @@ if (stristr($PHP_SELF, 'inc_passcheck_head.php')) die('<meta http-equiv="refresh
 ?>
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
  <TITLE></TITLE>
  
 <script language="javascript">

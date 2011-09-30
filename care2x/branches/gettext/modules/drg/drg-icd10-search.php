@@ -108,7 +108,7 @@ $img['reset']=createComIcon($root_path,'button_reset.gif','0','absmiddle',TRUE);
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
  <TITLE><?php echo $LDIcd10Search ?></TITLE>
  <script language="javascript" src="<?php echo $root_path; ?>js/showhide-div.js">
 </script>

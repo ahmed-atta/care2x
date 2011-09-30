@@ -18,7 +18,7 @@ function createTR($input_name, $ld_text, $input_val, $colspan = 2, $input_size =
 }
 
 echo StdHeader();
-echo setCharSet(); 
+ 
 ?>
  <TITLE><?php echo $LDPatientRegister ?></TITLE>
 

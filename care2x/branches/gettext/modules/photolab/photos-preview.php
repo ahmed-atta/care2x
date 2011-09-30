@@ -77,7 +77,7 @@ function check(d) {
 }
 //-->
 </script>
-<?php echo setCharSet(); ?>
+
 </head>
 <body topmargin=0 marginheight=0>
 <form name="picnotes" method="post" onSubmit="return check(this)">

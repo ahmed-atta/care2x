@@ -18,7 +18,7 @@ $thisfile="radiolog-xray-diagnosis-write.php";
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 </head>
 <body>
 <form>

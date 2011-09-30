@@ -36,7 +36,7 @@ require('./gui_bridge/default/gui_std_tags.php');
 ######## here starts the GUI ############
 
 echo StdHeader();
-echo setCharSet();
+
 ?>
  <TITLE><?php echo $LDPatientRegister ?></TITLE>
 

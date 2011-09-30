@@ -85,7 +85,7 @@ if($dept_nr){
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <title><?php echo "$LDCalendar - $LDOptions" ?></title>
 
 </head>

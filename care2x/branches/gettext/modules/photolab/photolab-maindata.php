@@ -60,7 +60,7 @@ if(is_object($p_obj)){
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 
 
 

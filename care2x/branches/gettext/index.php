@@ -214,7 +214,6 @@ if($installerwarn){
 	#
 	$lang_tables[]='create_admin.php';
 	include_once('./include/inc_load_lang_tables.php');
-	include_once('include/inc_charset_fx.php');
 	include('./include/inc_installer_warning.php');
 	#
 	# redirect to the installer page after timeout of 5 seconds 
@@ -287,11 +286,6 @@ if(empty($_SESSION['sess_user_name'])) $_SESSION['sess_user_name']='default';
 #
 $_SESSION['sess_tos']=date('His');
 
-#
-# Load character set fx
-#
-include_once('include/helpers/inc_charset_fx.php');
-#
 # Load image fx
 #
 require_once('include/helpers/inc_img_fx.php');

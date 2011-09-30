@@ -1,7 +1,7 @@
 <?php html_rtl($lang); ?>
 <HEAD>
 <?php 
-echo setCharSet(); 
+ 
 ?>
  <TITLE><?php echo $LDMainTitle ?></TITLE>
 

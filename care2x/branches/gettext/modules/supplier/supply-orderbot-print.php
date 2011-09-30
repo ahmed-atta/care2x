@@ -116,7 +116,7 @@ if($ergebnis=$db->Execute($sql)) {
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <title><?php echo $title ?></title>
 
 <script language=javascript>

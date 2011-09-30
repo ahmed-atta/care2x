@@ -93,7 +93,7 @@ if($user_origin=='pers'&&$nr){
 
 <?php html_rtl($lang); ?>
 	<HEAD>
-<?php echo setCharSet(); ?>
+
  	<TITLE></TITLE>
 	 
 <?php

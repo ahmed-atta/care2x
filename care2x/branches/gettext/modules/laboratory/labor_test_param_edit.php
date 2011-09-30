@@ -105,7 +105,7 @@ $tgroups=&$lab_obj->TestActiveGroups();
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
  <TITLE>Konfigurimi i Parametrave</TITLE>
 
 <script language="javascript" name="j1">

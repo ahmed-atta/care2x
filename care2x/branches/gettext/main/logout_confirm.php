@@ -8,7 +8,7 @@ require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
 
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
 <TITLE></TITLE>
 <?php require(CARE_BASE .'include/helpers/inc_css_a_hilitebu.php'); ?>
 </head>

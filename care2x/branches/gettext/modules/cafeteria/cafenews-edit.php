@@ -36,7 +36,7 @@ $title=$_SESSION['sess_title'];
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <title></title>
 <script language="javascript">
 <!-- 

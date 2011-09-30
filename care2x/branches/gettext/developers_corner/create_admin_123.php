@@ -51,7 +51,6 @@ if(isset($_POST['mode'])&&!empty($_POST['mode'])&&$_POST['mode']=='save'){
 
 }
 
-require_once('./include/helpers/inc_charset_fx.php');
 ?>
 <html>
 <head>

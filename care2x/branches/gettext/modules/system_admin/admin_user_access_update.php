@@ -18,7 +18,7 @@ $breakfile="admin.php?sid=".$sid."&lang=".$lang;
 
 <?php html_rtl($lang); ?>
 	<HEAD>
-<?php echo setCharSet(); ?>
+
 <?php 
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?>

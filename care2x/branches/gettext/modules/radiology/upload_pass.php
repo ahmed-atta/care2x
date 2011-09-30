@@ -57,7 +57,7 @@ if ($pass=='check')
 
 require($root_path.'include/helpers/inc_passcheck_head.php');
 ?>
-<?php echo setCharSet(); ?>
+
 <BODY  onLoad="document.passwindow.userid.focus();" >
 
 <FONT    SIZE=-1  FACE="Arial">

@@ -84,7 +84,7 @@ if(isset($tid)&&$tid&&isset($dept)&&$dept)
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <title><?php echo "$LDRepabotActivate $LDAck" ?></title>
 
 <script language=javascript>

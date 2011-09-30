@@ -111,7 +111,7 @@ else
 html_rtl ($lang);
 ?>
 <HEAD>
-    <?php echo setCharSet(); ?>
+    
     <TITLE><?php echo "$title $LDInputWin" ?></TITLE>
 
 <?php

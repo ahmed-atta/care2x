@@ -5,7 +5,7 @@ if (stristr($PHP_SELF,'inc_mozillapatch_redirect_supplier.php')) die('<meta http
 ?>
 <html>
 <head>
-<?php echo setCharSet(); ?>
+
 <title></title>
 </head>
 <body>

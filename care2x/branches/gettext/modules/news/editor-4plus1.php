@@ -37,7 +37,7 @@ $breakfile='newscolumns.php'.URL_APPEND;
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <title></title>
 
 <script language="javascript">

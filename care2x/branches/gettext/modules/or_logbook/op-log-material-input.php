@@ -9,7 +9,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <script language="javascript">
 <!-- 
 

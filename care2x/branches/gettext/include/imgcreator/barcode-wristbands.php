@@ -15,7 +15,7 @@ require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <title>Barcode Labels Patient nr. <?php echo $full_en ?></title>
 </head>
 <body onLoad="if(window.focus) window.focus()">

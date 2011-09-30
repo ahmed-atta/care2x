@@ -16,7 +16,7 @@ $local_user='ck_pflege_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 ?>
 <?php html_rtl($lang); ?>
-<?php echo setCharSet(); ?>
+
 <title></title>
 
 </head><center>

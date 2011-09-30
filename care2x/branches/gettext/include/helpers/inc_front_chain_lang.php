@@ -52,8 +52,6 @@ function getLangModular($chk_file) {
    		return 0;
 }
 
-# Load charset function
-require_once('inc_charset_fx.php'); // charset functions
 
 # The following lines of code is the script chaining detector. It compares the sid values propagated via
 # the relative url with the ck_sid+sid (decrypted) cookie values. If the two don't match, a warning message will apear and

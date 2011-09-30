@@ -18,7 +18,7 @@ $thisfile=basename(__FILE__);
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 </head>
 <body>
 <?php

@@ -32,7 +32,7 @@ $yr=date(Y);
 ?>
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
 <TITLE><?php echo $title ?></TITLE>
 
 <script language="javascript">

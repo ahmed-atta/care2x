@@ -13,7 +13,7 @@ if (!$internok&&!$_COOKIE['ck_op_pflegelogbuch_user'.$sid]) {header("Location:..
 <?php html_rtl($lang); ?>
 <HEAD>
       <title><?php echo "$dept $LDOr $LDLOGBOOK" ?></title>
-<?php echo setCharSet(); ?>
+
 </HEAD>
 
 <frameset rows="83%,*" border=0>

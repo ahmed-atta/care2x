@@ -128,7 +128,7 @@ $entry_border_bgcolor='#66ee66';
 $entry_body_bgcolor='#ffffff';
 ?><?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <title><?php echo $title ?></title>
 
 

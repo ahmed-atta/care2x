@@ -1,6 +1,6 @@
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <title></title>
 </head>
 <frameset rows="50%,*">

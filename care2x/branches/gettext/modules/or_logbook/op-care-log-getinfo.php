@@ -182,7 +182,7 @@ if($dblink_ok){
 ?>
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
 <TITLE><?php echo $title ?></TITLE>
 
 <script language="javascript">

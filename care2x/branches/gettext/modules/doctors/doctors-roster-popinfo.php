@@ -34,7 +34,7 @@ require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 ?>
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
 <TITLE><?php echo $LDInfo4Duty ?></TITLE>
 
 <script language="javascript">

@@ -20,7 +20,7 @@ $person->preloadPersonInfo();
 <?php html_rtl($lang); ?>
 <head>
 <title><?php echo $person->LastName().', '.$person->FirstName().' ['.formatDate2Local($person->Birthdate(),$date_format).']';  ?></title>
-<?php echo setCharSet(); ?>
+
 
 </head>
 <body onLoad="if (window.focus) window.focus()">

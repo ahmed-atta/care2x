@@ -72,7 +72,7 @@ if(($mode=='send') && isset($idcare_supply) && $idcare_supply){
 ?>
 <?php html_rtl($lang); ?>
 <head>
-<?php echo setCharSet(); ?>
+
 <script language=javascript>
 function popinfo(b)
 {

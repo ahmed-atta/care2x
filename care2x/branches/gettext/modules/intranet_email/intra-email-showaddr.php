@@ -45,7 +45,7 @@ if($ergebnis=$db->Execute($sql))
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
  <TITLE><?php echo "$LDIntraEmail - $LDAddrBook" ?></TITLE>
 
  <script language="javascript" >

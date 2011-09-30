@@ -25,7 +25,7 @@ include_once($root_path.'include/helpers/inc_date_format_functions.php');
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
  <style type="text/css" name="s2">
 .indx{ font-family:verdana,arial; color:#ffffff; font-size:12; background-color:#6666ff}
 </style>

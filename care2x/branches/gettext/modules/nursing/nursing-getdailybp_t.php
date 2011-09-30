@@ -90,7 +90,7 @@ $maxelement=10;
 ?>
 <?php html_rtl($lang); ?>
 <HEAD>
-<?php echo setCharSet(); ?>
+
 <TITLE><?php echo "$title $LDInputWin" ?></TITLE>
 <?php
 require($root_path.'include/helpers/inc_js_gethelp.php');
