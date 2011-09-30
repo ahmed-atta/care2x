@@ -138,10 +138,6 @@ class smarty_care extends Smarty {
 		
 		if(empty($lang)) $lang = $this->lang;
 		
-		# HEAD META definition
-
-		$this->assign('setCharSet',setCharSet());
-
 		# collect JavaScript for Smarty. By default collect the help javascript and css stylesheets
 		if($this->bLoadJS){
 			ob_start();
