@@ -62,10 +62,10 @@ switch($dbtype){
 }
 
 # Load the db error messages lang table
-if(file_exists(CARE_BASE.'language/'.$lang.'/lang_'.$lang.'_db_msg.php')){
-	include_once(CARE_BASE.'language/'.$lang.'/lang_'.$lang.'_db_msg.php');
+if(file_exists(CARE_BASE.'main/language/'.$lang.'/db_msg.php')){
+	include_once(CARE_BASE.'main/language/'.$lang.'/db_msg.php');
 }else{
-	include_once(CARE_BASE.'language/en/lang_en_db_msg.php');
+	include_once(CARE_BASE.'main/language/en/db_msg.php');
 }
 	
 # Establish a database link	
