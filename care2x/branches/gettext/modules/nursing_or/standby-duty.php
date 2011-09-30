@@ -23,7 +23,7 @@ $opabt=get_meta_tags('../global_conf/'.$lang.'/op_tag_dept.pid');
 
 $dbtable='care_standby_duty_report';
 
-$thisfile='spediens-bdienst-zeit-erfassung.php';
+$thisfile='standby-duty.php';
 if($retpath=='spec') $breakfile="plugin.php".URL_APPEND;
  else $breakfile="op-docu.php".URL_APPEND;
 

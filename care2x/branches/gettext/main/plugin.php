@@ -104,7 +104,7 @@ $aSubMenuItem=array('LDPlugins' => '<a href="'.'../plugins/plugins.php'.URL_APPE
 					'LDImmunizationMngr' => '<a href="../modules/immunization/immunization_manage_pass.php'.URL_APPEND.'">'. $LDImmunizationMngr.'</a>',
 					'LDPhotoLab' => '<a href="../modules/photolab/photolab_pass.php'.URL_APPEND.'&ck_config='.$ck_config.'">'.$LDPhotoLab.'</a>',
 					'LDWebCam' => '<a href="../modules/video_monitor/video_monitoring.php'.URL_APPEND.'">'.$LDWebCam.'</a>',
-					'LDStandbyDuty' => '<a href="../main/spediens-bdienst-zeit-erfassung.php'.URL_APPEND.'&retpath=spec">'.$LDStandbyDuty.'</a>',
+					'LDStandbyDuty' => '<a href="../modules/nursing_or/standby-duty.php'.URL_APPEND.'&retpath=spec">'.$LDStandbyDuty.'</a>',
 					'LDCalendar' => '<a href="../modules/calendar/calendar.php'.URL_APPEND.'">'. $LDCalendar.'</a>',
 					'LDNews' => '<a href="../modules/news/editor-pass.php'.URL_APPEND.'&dept_nr=1&title='.$LDEditTitle.'">'.$LDNews.'</a>',
 					'LDCalc' => '<a href="../modules/tools/calculator.php'.URL_APPEND.'">'. $LDCalc.'</a>',
