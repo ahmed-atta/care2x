@@ -27,7 +27,6 @@ function dateDiff($dformat, $endDate, $beginDate){
 }
 
 
-//$lang_tables[]='startframe.php';
 $lang_tables[]='lab.php';
 define('LANG_FILE','aufnahme.php');
 $local_user='ck_lab_user';
