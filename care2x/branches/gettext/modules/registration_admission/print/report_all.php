@@ -44,7 +44,6 @@ function getNotes($type_nr){
 }
 
 
-//$lang_tables[]='startframe.php';
 
 define('MODULE','registration_admission');
 define('LANG_FILE_MODULAR','registration_admission.php');

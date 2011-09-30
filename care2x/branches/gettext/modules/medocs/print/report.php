@@ -16,7 +16,6 @@ require('../../include/helpers/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-//$lang_tables[]='startframe.php';
 
 $lang_tables[]='person.php';
 $lang_tables[]='departments.php';

@@ -16,7 +16,7 @@ require('../../include/helpers/inc_environment_global.php');
  *
  * See the file "copy_notice.txt" for the licence notice
  */
-//$lang_tables[]='startframe.php';
+
 
 define('MODULE','registration_admission');
 define('LANG_FILE_MODULAR','registration_admission.php');

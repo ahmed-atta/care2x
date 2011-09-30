@@ -81,7 +81,6 @@ function dec2frac( $decimal ) {
 }
 
 
-//$lang_tables[]='startframe.php';
 define('MODULE','nursing');
 define('LANG_FILE_MODULAR','nursing.php');
 $local_user='ck_pflege_user';
