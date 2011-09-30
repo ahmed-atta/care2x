@@ -15,7 +15,7 @@ define('LANG_FILE_MODULAR','system_admin.php');
 $local_user='ck_admin_user';
 
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require($root_path.'include/helpers/inc_accessplan_areas_functions.php');
+require ('helpers/inc_accessplan_areas_functions.php') ;
 
 $breakfile='admin_system-admi-welcome.php'.URL_APPEND;
 $returnfile='admin_user_role_list.php'.URL_APPEND;

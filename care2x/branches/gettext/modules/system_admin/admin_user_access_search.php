@@ -18,7 +18,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 * The following require loads the access areas that can be assigned for
 * user permissions.
 */
-require($root_path.'include/helpers/inc_accessplan_areas_functions.php');
+require ('helpers/inc_accessplan_areas_functions.php') ;
 
 $breakfile='admin.php?sid='.$sid.'&lang='.$lang;
 $returnfile=$_SESSION['sess_file_return'].URL_APPEND;
