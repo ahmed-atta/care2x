@@ -1,6 +1,5 @@
 <HTML>
 <HEAD>
-<?php echo $charset; ?>
 <TITLE><?php echo $wintitle; ?></TITLE>
 <?php
 //set the css style for a links

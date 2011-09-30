@@ -15,7 +15,7 @@ if($n_obj=&$obj->getEncounterNotes($nr)) $notes=$n_obj->FetchRow();
 
 # Prepare variables for template
 $bd=@formatDate2Local($bd,$date_format);
-$TP_CHARSET=setCharSet();
+
 $TP_DATE=@formatDate2Local($notes['date'],$date_format);
 $TP_TIME=@convertTimeToLocal($notes['time']);
 $TP_DOC=$notes['staff_name'];

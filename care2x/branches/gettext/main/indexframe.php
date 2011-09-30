@@ -40,9 +40,6 @@ $GLOBALCONFIG=array();
 $gc=new GlobalConfig($GLOBALCONFIG);
 $gc->getConfig('language_%');
 
-# Prepare additional data for the gui template
-$charset=setCharSet();
-
 # Load dept & ward classes
 require_once(CARE_BASE.'modules/dept_admin/model/class_department.php');
 require_once(CARE_BASE.'include/core/class_ward.php');
