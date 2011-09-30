@@ -8,7 +8,7 @@ define('LANG_FILE_MODULAR','video_monitor.php');
 define('NO_2LEVEL_CHK',1);
 
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-$breakfile=$root_path.'main/spediens.php?sid='.$sid.'&lang='.$lang;
+$breakfile=$root_path.'main/plugin.php?sid='.$sid.'&lang='.$lang;
 require($root_path.'global_conf/inc_remoteservers_conf.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">

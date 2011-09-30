@@ -23,7 +23,7 @@ $opabt=get_meta_tags('../global_conf/'.$lang.'/op_tag_dept.pid');
 $dbtable='care_standby_duty_report';
 
 $thisfile='spediens-bdienst-zeit-erfassung.php';
-if($retpath=='spec') $breakfile="spediens.php".URL_APPEND;
+if($retpath=='spec') $breakfile="plugin.php".URL_APPEND;
  else $breakfile="op-docu.php".URL_APPEND;
 
 /********************************* Resolve the department and op room ***********************/
@@ -229,7 +229,7 @@ eval("document.reportform.tag"+d+".value=1");
 switch($retpath)
 {
 	case "op": $rettarget="op-docu.php?sid=$sid"; break;
-	case "spec": $rettarget="spediens.php?sid=$sid"; break;
+	case "spec": $rettarget="plugin.php?sid=$sid"; break;
 	default: $rettarget="op-docu.php?sid=$sid"; break;
 }
 ?>
@@ -296,7 +296,7 @@ function isnum(val,idx)
 			}
 			
 			
-//			alert("Zeitangabe ist ungültig! (ausserhalb des 24H Zeitrahmens)");
+//			alert("Zeitangabe ist ungï¿½ltig! (ausserhalb des 24H Zeitrahmens)");
 	
 		}
 		switch(v3.length)

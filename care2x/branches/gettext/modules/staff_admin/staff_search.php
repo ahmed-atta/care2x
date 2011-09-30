@@ -32,7 +32,7 @@ if(isset($fwd_nr)&&$fwd_nr){
 }
 $thisfile=basename(__FILE__);
 $toggle=0;
-if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/plugin.php'.URL_APPEND;
 	else $breakfile='staff_admin_pass.php'.URL_APPEND.'&target='.$target;
  /* Set color values for the search mask */
 $searchmask_bgcolor='#f3f3f3';

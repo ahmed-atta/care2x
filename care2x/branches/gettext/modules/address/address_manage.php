@@ -7,7 +7,7 @@ define('LANG_FILE_MODULAR','place.php');
 $local_user = 'aufnahme_user';
 require_once(CARE_BASE.'/include/helpers/inc_front_chain_lang.php');
 
-$breakfile = CARE_GUI."/main/spediens.php".URL_APPEND;
+$breakfile = CARE_GUI."/main/plugin.php".URL_APPEND;
 
 require_once(CARE_BASE.'/gui/smarty_template/smarty_care.class.php');
 $smarty = new smarty_care('system_admin');

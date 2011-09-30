@@ -21,7 +21,7 @@ require_once($root_path.'include/core/class_globalconfig.php');
 $GLOBAL_CONFIG=array();
 
 $thisfile=basename(__FILE__);
-if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/plugin.php'.URL_APPEND;
 	else $breakfile='staff_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 $staff_obj=new staff();

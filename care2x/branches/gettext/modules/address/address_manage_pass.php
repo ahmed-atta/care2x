@@ -14,7 +14,7 @@ $allowedarea=$allow_area['admit'];
 
 $fileforward='address_manage.php'.URL_REDIRECT_APPEND;
 $thisfile=basename(__FILE__);
-$breakfile=CARE_GUI.'/main/spediens.php'.URL_APPEND;
+$breakfile=CARE_GUI.'/main/plugin.php'.URL_APPEND;
 
 $lognote="$LDInsuranceCoManage ok";
 

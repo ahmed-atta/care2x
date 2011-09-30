@@ -15,7 +15,7 @@ define('LANG_FILE_MODULAR','photolab.php');
 $local_user='ck_photolab_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_config_color.php');
-$breakfile="javascript:window.parent.location.replace('spediens.php?sid=$sid&lang=$lang')";
+$breakfile="javascript:window.parent.location.replace('plugin.php?sid=$sid&lang=$lang')";
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <?php html_rtl($lang); ?>

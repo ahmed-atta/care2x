@@ -20,7 +20,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if(empty($target)) $target='search';
 
 
-if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/plugin.php'.URL_APPEND;
 	else $breakfile='staff_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 
@@ -93,7 +93,7 @@ $psearch = & new GuiSearchPerson;
 
 $psearch->setTargetFile('person_register_show.php');
 
-$psearch->setCancelFile($root_path.'main/spediens.php');
+$psearch->setCancelFile($root_path.'main/plugin.php');
 
 # Set to TRUE if you want to auto display a single result
 //$psearch->auto_show_byalphanumeric =TRUE;

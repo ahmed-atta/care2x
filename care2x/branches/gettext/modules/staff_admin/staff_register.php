@@ -197,7 +197,7 @@ $items='nr,name';
 $ward_info=&$ward_obj->getAllWardsItemsObject($items);
 
 if($update) $breakfile='staff_register_show.php'.URL_APPEND.'&staff_nr='.$staff_nr;
-	elseif($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+	elseif($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/plugin.php'.URL_APPEND;
 		else $breakfile='staff_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 # Prepare the photo filename
