@@ -29,7 +29,6 @@ else
 }
 //echo $_COOKIE[$local_user.$sid]; exit;
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-//require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 
 ?>
 <?php html_rtl($lang); ?>

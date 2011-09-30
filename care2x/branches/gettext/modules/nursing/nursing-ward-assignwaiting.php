@@ -250,7 +250,7 @@ $smarty->display('nursing/basic_data_admit.tpl');
 ?>
 <table width=100% border=0 cellpadding="0" cellspacing=0>
 	<tr valign=top >
-		<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
+		<td  valign=top colspan=2>
 
 
 <!--  Show stop sign and warn if the initial ward assignment is different from this ward -->

@@ -129,7 +129,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
  
 </HEAD>
 
-<BODY   onLoad="if(window.focus) window.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+<BODY   onLoad="if(window.focus) window.focus();" 
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <FONT    SIZE=3  FACE="Arial" color="<?php echo $rowcolor ?>">
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> align="right"></a>

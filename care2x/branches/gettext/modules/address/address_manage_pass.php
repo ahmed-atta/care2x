@@ -6,8 +6,6 @@ define('MODULE','address');
 define('LANG_FILE_MODULAR','place.php');
 define('NO_2LEVEL_CHK',1);
 require_once(CARE_BASE.'/include/helpers/inc_front_chain_lang.php');
-require_once(CARE_BASE.'/include/helpers/inc_config_color.php');
-
 require_once(CARE_BASE.'/global_conf/areas_allow.php');
 
 $allowedarea=$allow_area['admit'];
@@ -33,13 +31,13 @@ $errbuf=$LDNursingManage;
 
 require(CARE_BASE.'/include/helpers/inc_passcheck_head.php');
 ?>
-<BODY  onLoad="document.passwindow.userid.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+<BODY  onLoad="document.passwindow.userid.focus();" >
 <FONT    SIZE=-1  FACE="Arial">
 
 <P>
 
 <img <?php echo createComIcon(CARE_BASE,'home50x50.gif','0','top') ?>>
-<FONT  COLOR=<?php echo $cfg[top_txtcolor] ?>  SIZE=6  FACE="verdana"> <b><?php echo $LDAddressMngr; ?></b></font>
+<FONT SIZE=6  FACE="verdana"> <b><?php echo $LDAddressMngr; ?></b></font>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <?php require(CARE_BASE.'/include/helpers/inc_passcheck_mask.php') ?>  
 <p>

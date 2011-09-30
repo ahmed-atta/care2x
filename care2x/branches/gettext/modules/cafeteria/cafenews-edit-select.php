@@ -14,7 +14,6 @@ define('MODULE','cafeteria');
 define('LANG_FILE_MODULAR','cafeteria.php');
 $local_user='ck_cafenews_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/helpers/inc_config_color.php');
 
 $breakfile='cafenews.php'.URL_APPEND;
 
@@ -47,7 +46,6 @@ function chkForm(d)
 }
 </script>
 
-<?php if($cfg['dhtml']) include($root_path."include/helpers/inc_css_a_hilitebu.php"); ?>
 </head>
 <body>
 <FONT  SIZE=8 COLOR="#cc6600" FACE="verdana,Arial">

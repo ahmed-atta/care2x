@@ -14,7 +14,6 @@ define('MODULE','news');
 define('LANG_FILE_MODULAR','news.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/helpers/inc_config_color.php');
 
 /* Set the return paths */
 $returnfile='editor-4plus1-select-art.php'.URL_APPEND;

@@ -70,7 +70,7 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10}
 </style>
 </HEAD>
 
-<BODY bgcolor=<?php echo $cfg['body_bgcolor']; ?> topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
+<BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
 <?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
 <table border=0>

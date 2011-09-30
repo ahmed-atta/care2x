@@ -14,7 +14,6 @@ define('MODULE','intranet_email');
 define('LANG_FILE_MODULAR','intranet_email.php');
 $local_user='ck_intra_email_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 
 $thisfile=basename(__FILE__);
 $breakfile='intra-email.php.'.URL_APPEND.'&mode=listmail';
@@ -52,17 +51,17 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+>
 <?php echo $test ?>
 <?php //foreach($argv as $v) echo "$v "; ?>
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="30"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td  height="30"><FONT    SIZE=+2  FACE="Arial">
 <STRONG> <?php echo "$LDIntraEmail - $LDOptions" ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a href="javascript:history.back();"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> class="fadeOut" ></a><a href="javascript:gethelp()"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> class="fadeOut" ></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> class="fadeOut" ></a></td>
+<td  align=right><a href="javascript:history.back();"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> class="fadeOut" ></a><a href="javascript:gethelp()"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> class="fadeOut" ></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> class="fadeOut" ></a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
+<td  valign=top colspan=2>
 
 <FONT face="Verdana,Helvetica,Arial" size=2>
 <?php
@@ -123,7 +122,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 </td>
 </tr>
 <tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?>  colspan=2>
+<td   colspan=2>
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');
 ?>

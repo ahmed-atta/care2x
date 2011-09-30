@@ -21,8 +21,6 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 if (!$internok&&!$_COOKIE['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 
-require_once($root_path.'include/helpers/inc_config_color.php');
-
 # Initialization
 $thisfile=basename(__FILE__);
 $breakfile='javascript:window.close()';
@@ -267,14 +265,8 @@ function pruf(f)
 function open_such_editwin(filename,y,m,d,dp,sl)
 {
 	url="op-care-log-arch-edit.php?mode=edit&fileid="+filename+"&sid=<?php echo "$sid&lang=$lang"; ?>&user=<?php echo str_replace(" ","+",$user); ?>&pyear="+y+"&pmonth="+m+"&pday="+d+"&dept_nr="+dp+"&saal="+sl;
-<?php if($cfg['dhtml'])
-	echo '
-			w=window.parent.screen.width;
-			h=window.parent.screen.height;';
-	else
-	echo '
-			w=800;';
-?>
+
+			w=800;
 	sucheditwin=window.open(url,"sucheditwin","menubar=no,resizable=yes,scrollbars=yes, width=" + (w-15) + ", height=400");
 	window.sucheditwin.moveTo(0,0);
 }

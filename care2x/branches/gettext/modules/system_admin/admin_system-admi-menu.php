@@ -41,7 +41,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 <BODY topmargin=0 leftmargin=0 marginheight=0 marginwidth=0 bgcolor=<?php echo $cfg['body_bgcolor'];?>>
 <table width=100% border=0 cellspacing=0>
 <tr>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"><FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td ><FONT    SIZE=+2  FACE="Arial">
 <STRONG> <?php echo $LDAdminIndex ?></STRONG></FONT></td>
 </tr>
 <tr>

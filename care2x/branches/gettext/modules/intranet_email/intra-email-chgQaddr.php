@@ -15,8 +15,6 @@ define('LANG_FILE_MODULAR','intranet_email.php');
 $local_user='ck_intra_email_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
-
 $thisfile=basename(__FILE__);
 
 //init db parameters
@@ -126,9 +124,7 @@ require($root_path.'include/helpers/inc_js_gethelp.php');
 require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 ?></HEAD>
 
-<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus()" 
-<?php 
- if (!$cfg['dhtml']){ echo ' link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+<BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus()" >
  
 <?php if($mode=="saveQadd") : ?>
 <script language=javascript>
@@ -138,11 +134,11 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 <?php //foreach($argv as $v) echo "$v "; ?>
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0">
 <tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>"  height="30">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo "$LDIntraEmail $LDQuickAddr"; ?></STRONG></FONT></td>
+<td   height="30">
+<FONT    SIZE=+2  FACE="Arial"><STRONG>&nbsp;<?php echo "$LDIntraEmail $LDQuickAddr"; ?></STRONG></FONT></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top >
+<td  valign=top >
 
 <FONT face="Verdana,Helvetica,Arial" size=2>
 

@@ -14,7 +14,6 @@ define('MODULE','photolab');
 define('LANG_FILE_MODULAR','photolab.php');
 $local_user='ck_photolab_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/helpers/inc_config_color.php');
 $breakfile="javascript:window.parent.location.replace('plugin.php?sid=$sid&lang=$lang')";
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
@@ -54,14 +53,14 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0
 	bgcolor=silver onFocus="document.srcform.maxpic.select()"
 	onFocus="document.srcform.maxpic.select()"
-	<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+	>
 
 <table width=100% border=0 cellspacing=0 height=100%>
 
 	<tr valign=top height=10>
-		<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10"><FONT
-			COLOR="<?php echo $cfg['top_txtcolor']; ?>" SIZE=+2 FACE="Arial"><STRONG>&nbsp;<?php echo $LDFotoLab ?></STRONG></FONT></td>
-		<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" align=right><a
+		<td  height="10"><FONT
+			 SIZE=+2 FACE="Arial"><STRONG>&nbsp;<?php echo $LDFotoLab ?></STRONG></FONT></td>
+		<td  align=right><a
 			href="javascript:history.back();"><img
 			<?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?>
 			style="filter: alpha(opacity = 70)" onMouseover=hilite(this,1)
@@ -73,7 +72,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 			class="fadeOut" /></a></td>
 	</tr>
 	<tr valign=top>
-		<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2>
+		<td  valign=top colspan=2>
 		<center>
 		<p><font face=verdana,arial size=3 color="#cc0000">
 		<form action="photolab-dir-select.php" method="get"

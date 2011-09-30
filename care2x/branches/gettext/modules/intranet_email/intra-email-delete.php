@@ -31,8 +31,6 @@ if(!isset($delok)||!$delok) {
 
 //$db->debug=1;
 
-require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
-//echo $del0;
 $thisfile=basename(__FILE__);
 //foreach($arg as $v) echo "$v<br>"; //init db parameters
 $dbtable='care_mail_private_users';

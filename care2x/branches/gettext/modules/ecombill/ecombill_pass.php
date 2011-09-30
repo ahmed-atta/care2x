@@ -33,11 +33,11 @@ $errbuf=$LDNursingManage;
 
 require($root_path.'include/helpers/inc_passcheck_head.php');
 ?>
-<BODY  onLoad="document.passwindow.userid.focus();" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+<BODY  onLoad="document.passwindow.userid.focus();" 
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <P> 
 <img <?php echo createComIcon($root_path,'billing.jpg','0','absmiddle') ?> /> 
-<FONT  COLOR=<?php echo $cfg[top_txtcolor] ?>  SIZE=6  FACE="verdana"> 
+<FONT    SIZE=6  FACE="verdana"> 
 <b> <?php echo $LDBilling ?> </b>
 </font>
 <table width=100% border=0 cellpadding="0" cellspacing="0">

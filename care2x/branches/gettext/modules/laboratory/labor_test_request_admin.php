@@ -14,7 +14,6 @@ define('MODULE','laboratory');
 define('LANG_FILE_MODULAR','laboratory.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require_once($root_path.'include/helpers/inc_config_color.php');
 
 $breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 // reset all 2nd level lock cookies
@@ -51,18 +50,18 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 </HEAD>
 
 <BODY topmargin=0 leftmargin=0 marginwidth=0 marginheight=0  
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['body_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['body_txtcolor']; } ?>>
+>
 
 <table width=100% border=0 height=100% cellpadding="0" cellspacing="0" >
 <tr valign=top>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10">
-<FONT  COLOR="<?php echo $cfg['top_txtcolor']; ?>"  SIZE=+2  FACE="Arial">
+<td  height="10">
+<FONT    SIZE=+2  FACE="Arial">
 <STRONG> &nbsp; <?php echo $LDLab ?></STRONG></FONT></td>
-<td bgcolor="<?php echo $cfg['top_bgcolor']; ?>" height="10" align=right><a href="startframe.php?sid=<?php echo "$sid&lang=$lang" ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>
-<?php if($cfg['dhtml'])echo' class="fadeOut" >';?></a><a href="javascript:gethelp('submenu1.php','<?php echo $LDLab ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  <?php if($cfg['dhtml'])echo'class="fadeOut" >';?></a></td>
+<td  height="10" align=right><a href="startframe.php?sid=<?php echo "$sid&lang=$lang" ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>
+</a><a href="javascript:gethelp('submenu1.php','<?php echo $LDLab ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  </a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"  </a></td>
 </tr>
 <tr valign=top >
-<td bgcolor=<?php echo $cfg['body_bgcolor']; ?> valign=top colspan=2><p><br>
+<td  valign=top colspan=2><p><br>
 
 <ul>
 
@@ -77,7 +76,7 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 </tr>
 
 <tr>
-<td bgcolor=<?php echo $cfg['bot_bgcolor']; ?> height=70 colspan=2>
+<td  height=70 colspan=2>
 <?php
 require($root_path.'include/helpers/inc_load_copyrite.php');?>
 </td>

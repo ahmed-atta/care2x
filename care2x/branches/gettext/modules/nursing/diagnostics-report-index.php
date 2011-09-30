@@ -24,7 +24,6 @@ else
 }
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if($edit&&!$_COOKIE[$local_user.$sid]) {header("Location:".$root_path."language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
-require_once($root_path.'include/helpers/inc_config_color.php'); // load color preferences
 
 $thisfile='diagnostics-report-index.php';
 $breakfile="pflege-station-patientdaten.php?sid=$sid&lang=$lang&station=$station&pn=$pn&edit=$edit";
@@ -81,8 +80,7 @@ function showInitPage() {
 
 </HEAD>
 
-<BODY bgcolor="<?php echo $cfg['top_bgcolor']; ?>" topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="showInitPage()" 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="showInitPage()" >
 <font face="verdana,arial" size=2>
 <?php 
 

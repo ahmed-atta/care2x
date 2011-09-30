@@ -114,7 +114,6 @@ if ($pass=='check')
 
 $errbuf=$title;
 $minimal=1;
-require_once($root_path.'include/helpers/inc_config_color.php');
 require($root_path.'include/helpers/inc_passcheck_head.php');
 ?>
 
@@ -125,7 +124,7 @@ require($root_path.'include/helpers/inc_passcheck_head.php');
 
 <P>
 
-<img <?php echo createComIcon($root_path,$test_pass_logo,'0','absmiddle') ?>><FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>"  size=5 FACE="verdana"> <b><?php echo $title;  ?></b></font>
+<img <?php echo createComIcon($root_path,$test_pass_logo,'0','absmiddle') ?>><FONT   size=5 FACE="verdana"> <b><?php echo $title;  ?></b></font>
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 

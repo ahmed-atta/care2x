@@ -126,8 +126,8 @@ require($root_path.'include/helpers/inc_css_a_hilitebu.php');
 <?php if($display=='composite') echo 'topmargin=0 marginheight=0 leftmargin=0 marginwidth=0';
 else  echo 'topmargin=2 marginheight=2';
 ?>
- onLoad="if(window.focus) window.focus()" bgcolor=<?php echo $cfg['body_bgcolor']; ?>
- bgcolor=<?php echo $cfg['body_bgcolor']; ?>
+ onLoad="if(window.focus) window.focus()" 
+ 
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <form>
 <?php if($display!="composite") : ?>
