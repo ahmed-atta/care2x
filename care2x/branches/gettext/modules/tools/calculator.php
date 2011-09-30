@@ -14,7 +14,7 @@ define('MODULE','tools');
 define('LANG_FILE_MODULAR','tools.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-$breakfile=$root_path."main/spediens.php".URL_APPEND;
+$breakfile=$root_path."main/plugin.php".URL_APPEND;
 
 # Start Smarty templating here
  /**

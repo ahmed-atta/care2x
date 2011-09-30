@@ -17,7 +17,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $thisfile=basename(__FILE__);
 if($update) $breakfile='person_register_show.php'.URL_APPEND.'&pid='.$pid;
-	elseif($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+	elseif($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/plugin.php'.URL_APPEND;
 		else $breakfile='staff_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 if(!isset($_SESSION['sess_pid'])) $_SESSION['sess_pid'] = "";

@@ -137,7 +137,7 @@ if(!$pid&&!$staff_nr){
 
 	$psearch->setTargetFile('person_register_show.php');
 
-	$psearch->setCancelFile($root_path.'main/spediens.php');
+	$psearch->setCancelFile($root_path.'main/plugin.php');
 
 	# Set to TRUE if you want to auto display a single result
 	//$psearch->auto_show_byalphanumeric =TRUE;

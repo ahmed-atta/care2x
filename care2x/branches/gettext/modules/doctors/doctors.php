@@ -1,6 +1,5 @@
 <?php
 //error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
-require('./roots.php');
 require('../../include/helpers/inc_environment_global.php');
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.1 - 2004-10-02
@@ -13,11 +12,11 @@ require('../../include/helpers/inc_environment_global.php');
 define('MODULE','doctors');
 define('LANG_FILE_MODULAR','doctors.php');
 define('NO_2LEVEL_CHK',1);
-require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-require($root_path.'include/helpers/inc_2level_reset.php');
+require_once(CARE_BASE.'include/helpers/inc_front_chain_lang.php');
+require(CARE_BASE.'include/helpers/inc_2level_reset.php');
 
 if(!isset($_SESSION['sess_path_referer'])) $_SESSION['sess_path_referer'] = "";
-$breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
+$breakfile=CARE_BASE.'modules/news/start_page.php'.URL_APPEND;
 
 $_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
 # Erase the cookie 
@@ -33,7 +32,7 @@ if(isset($_SESSION['sess_user_origin'])) $_SESSION['sess_user_origin']='';
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
 
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ require_once(CARE_BASE.'gui/smarty_template/smarty_care.class.php');
  $smarty = new smarty_care('common');
 
  # Create a helper smarty object without reinitializing the GUI
@@ -54,10 +53,10 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/s
 
  # Prepare the submenu icons
 
- $aSubMenuIcon=array(createComIcon($root_path,'eye_s.gif','0'),
-										createComIcon($root_path,'post_discussion.gif','0'),
-										createComIcon($root_path,'forums.gif','0'),
-										createComIcon($root_path,'bubble.gif','0')
+ $aSubMenuIcon=array(createComIcon(CARE_BASE,'eye_s.gif','0'),
+										createComIcon(CARE_BASE,'post_discussion.gif','0'),
+										createComIcon(CARE_BASE,'forums.gif','0'),
+										createComIcon(CARE_BASE,'bubble.gif','0')
 										);
 
 # Prepare the submenu item descriptions
@@ -73,7 +72,7 @@ $aSubMenuText=array($LDQViewTxt,
 $aSubMenuItem=array('LDQViewTxt' => '<a href="doctors-roster-quickview.php'.URL_APPEND.'&retpath=docs">'.$LDQView.'</a>',
 										'LDDutyPlanTxt' => '<a href="doctors-main-pass.php'.URL_APPEND.'&target=dutyplan&retpath=menu">'.$LDDOCS.'</a>',
 										'LDDocsForumTxt' => '<a href="doctors-main-pass.php'.URL_APPEND.'&target=setpersonal&retpath=menu">'.$LDDocsList.'</a>',
-										'LDNewsTxt' => '<a href="'.$root_path.'modules/news/newscolumns.php'.URL_APPEND.'&dept_nr=37&user_origin=dept">'.$LDNews.'</a>',
+										'LDNewsTxt' => '<a href="'.CARE_BASE.'modules/news/newscolumns.php'.URL_APPEND.'&dept_nr=37&user_origin=dept">'.$LDNews.'</a>',
 										);
 
 # Create the submenu rows

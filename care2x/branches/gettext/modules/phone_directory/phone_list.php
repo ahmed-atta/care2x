@@ -13,6 +13,9 @@ define('LANG_FILE_MODULAR','phone_directory.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
+require_once(CARE_BASE.'gui/smarty_template/smarty_care.class.php');
+$smarty = new smarty_care('common');
+
 if(isset($user_origin)&&$user_origin=='pers'){
 	$sBreakUrl = 'phone_edit.php'.URL_APPEND.'&user_origin='.$user_origin.'&nr='.$nr;
 }else{
@@ -37,18 +40,18 @@ $sql='SELECT '.$fielddata.' FROM '.$dbtable.' ORDER BY name';
 if( $ergebnis=$db->Execute($sql)){
    $rows=$ergebnis->RecordCount();
 }
-?>
-<?php html_rtl($lang); ?>
-<HEAD>
-<?php echo setCharSet(); ?>
-<TITLE></TITLE>
-<?php 
-require($root_path.'include/helpers/inc_css_a_hilitebu.php');
-?>
-</HEAD>
-<BODY  bgcolor=<?php echo $cfg['body_bgcolor']; ?>
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 
+
+//$db->debug=1;
+$smarty->assign('sToolbarTitle','');
+$smarty->assign('LDBack', $LDBack);
+$smarty->assign('LDHelp', $LDHelp);
+$smarty->assign('LDClose', $LDClose);
+# Added for the common header top block
+$smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/submenu1.html");
+$smarty->assign('breakfile',$breakfile);
+
+?>
 
 <?php if(!$edit) : ?>
 <img <?php echo createComIcon($root_path,'phone.gif','0','absmiddle') ?>>
@@ -210,12 +213,12 @@ if($rows){
 <tr >
 <td  class="passborder" colspan=3><font size=1>
 &nbsp; 
-</td>
-</tr>
-</table>        
-<p>
-<?php
-require($root_path.'include/helpers/inc_load_copyrite.php');
- ?>
-</BODY>
-</HTML>
+</td>	
+	        
+<?php 
+
+  /**
+ * show Template
+ */
+
+ $smarty->display('common/mainframe.tpl');

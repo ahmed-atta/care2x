@@ -31,7 +31,7 @@ $entry_block_bgcolor='#fff3f3';
 $entry_border_bgcolor='#6666ee';
 $entry_body_bgcolor='#ffffff';
 
-$breakfile=$root_path."main/spediens.php$append";
+$breakfile=$root_path."main/plugin.php$append";
 $thisfile=basename(__FILE__);
 # Data to append to url
 $append='&status='.$status.'&target='.$target.'&user_origin='.$user_origin;

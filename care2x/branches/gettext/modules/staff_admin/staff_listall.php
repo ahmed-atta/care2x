@@ -23,7 +23,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 //$db->debug=true;
 
-if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+if($_COOKIE['ck_login_logged'.$sid]) $breakfile=$root_path.'main/plugin.php'.URL_APPEND;
 	else $breakfile='staff_admin_pass.php'.URL_APPEND.'&target='.$target;
 
 $thisfile=basename(__FILE__);

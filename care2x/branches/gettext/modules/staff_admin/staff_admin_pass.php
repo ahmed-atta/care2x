@@ -40,7 +40,7 @@ switch($target)
 
 
 $thisfile=basename(__FILE__);
-$breakfile=$root_path.'main/spediens.php'.URL_APPEND;
+$breakfile=$root_path.'main/plugin.php'.URL_APPEND;
 
 $userck='aufnahme_user';
 //reset cookie;

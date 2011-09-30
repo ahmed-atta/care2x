@@ -49,7 +49,7 @@ if ($mode=='change'){
 
 		if($user->saveConfig($_COOKIE['ck_config'],$config)){
 			if($mode=='ok'){
-				header("location:spediens.php?sid=$sid&lang=$lang&idxreload=j");
+				header("location:plugin.php?sid=$sid&lang=$lang&idxreload=j");
 			}
 			if($mode=='remain'){
 				header("location:colorchg.php?sid=$sid&lang=$lang&idxreload=j");

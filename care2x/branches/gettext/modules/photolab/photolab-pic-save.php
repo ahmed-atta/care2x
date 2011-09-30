@@ -30,7 +30,7 @@ $img=new Image;
 
 
 $dirselectfile='photolab-dir-select.php';
-$breakfile="javascript:window.parent.location.replace('".$root_path."main/spediens.php?sid=$sid&lang=$lang')";
+$breakfile="javascript:window.parent.location.replace('".$root_path."main/plugin.php?sid=$sid&lang=$lang')";
 
 # Start Smarty templating here
  /**

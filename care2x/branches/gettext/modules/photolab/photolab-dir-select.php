@@ -21,7 +21,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 if(!isset($maxpic)||!$maxpic) $maxpic=4;
 
 $thisfile=basename(__FILE__);
-$breakfile="javascript:window.parent.location.replace('".$root_path."main/spediens.php?sid=$sid&lang=$lang')";
+$breakfile="javascript:window.parent.location.replace('".$root_path."main/plugin.php?sid=$sid&lang=$lang')";
 
 # Start Smarty templating here
  /**

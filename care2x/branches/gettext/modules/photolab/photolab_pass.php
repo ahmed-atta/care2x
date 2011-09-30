@@ -25,7 +25,7 @@ $title=$LDFotolab;
 							
 $thisfile="photolab_pass.php";
 
-$breakfile=$root_path."main/spediens.php".URL_APPEND;
+$breakfile=$root_path."main/plugin.php".URL_APPEND;
 
 $lognote="$LDFotolab $title ok";
 
