@@ -303,7 +303,7 @@ class GuiSearchPerson {
 		# Show tips and tricks link and the javascript
 		if($this->showtips){
 			ob_start();
-				include_once($root_path.'include/helpers/inc_js_gethelp.php');
+				require(CARE_BASE.'include/helpers/include_header_css_js.php');
 				$sTemp = ob_get_contents();
 				$this->smarty->assign('sJSGetHelp',$sTemp);
 			ob_end_clean();
