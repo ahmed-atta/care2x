@@ -161,7 +161,6 @@ class GuiPersonShow {
 
 		# Load the language tables
 		$lang_tables =$this->langfiles;
-		include($root_path.'include/helpers/inc_load_lang_tables.php');
 
 		# Load the other hospitals array
 		include_once($root_path.'global_conf/other_hospitals.php');
