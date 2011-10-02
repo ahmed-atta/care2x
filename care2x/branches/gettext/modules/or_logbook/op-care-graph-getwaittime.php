@@ -281,7 +281,7 @@ function updatebar()
 <script language="javascript" src="<?php echo $root_path ?>js/setdatetime.js">
 </script>
 <?php
-require($root_path.'include/helpers/inc_js_gethelp.php');
+
 require($root_path.'include/helpers/include_header_css_js.php');
 ?>
 <STYLE type=text/css>

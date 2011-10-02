@@ -31,5 +31,13 @@ function popPic(pid,nm){
  if(pid!="") regpicwindow = window.open("<?php echo CARE_GUI   ?>main/pop_reg_pic.php<?php echo URL_REDIRECT_APPEND ?>&pid="+pid+"&nm="+nm,"regpicwin","toolbar=no,scrollbars,width=180,height=250");
 
 }
+
+function gethelp(x,s,x1,x2,x3,x4)
+{
+	if (!x) x="";
+	urlholder="<?php echo CARE_GUI ; ?>include/help/help-router.php<?php echo URL_REDIRECT_APPEND ?>&helpidx="+x+"&src="+s+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4;
+	helpwin=window.open(urlholder,"helpwin","width=790,height=540,menubar=no,resizable=yes,scrollbars=yes");
+	window.helpwin.moveTo(0,0);
+}
 // -->
 </script>

@@ -25,7 +25,6 @@ echo setCharSet ();
 </script>
 
 <?php
-require (CARE_BASE  . 'include/helpers/inc_js_gethelp.php');
 require (CARE_BASE  . 'include/helpers/include_header_css_js.php');
 ?><script language="javascript">
 <!-- 

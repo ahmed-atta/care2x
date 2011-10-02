@@ -141,7 +141,6 @@ class smarty_care extends Smarty {
 		# collect JavaScript for Smarty. By default collect the help javascript and css stylesheets
 		if($this->bLoadJS){
 			ob_start();
-				include($this->root_path.'include/helpers/inc_js_gethelp.php');
 				include($this->root_path.'include/helpers/include_header_css_js.php');
 				$sTemp = ob_get_contents();
 			ob_end_clean();

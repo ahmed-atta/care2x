@@ -19,7 +19,7 @@ function pruf(d)
 </script>
  
  <?php 
-require(CARE_BASE .'include/helpers/inc_js_gethelp.php');
+
 include(CARE_BASE .'include/helpers/include_header_css_js.php');
 ?>
  

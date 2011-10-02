@@ -570,7 +570,7 @@ function openDRGComposite()
 .v10_n{font-family:verdana;font-size:10;color=#0000cc;}
 </style>
 <?php
-require($root_path.'include/helpers/inc_js_gethelp.php');
+
 require($root_path.'include/helpers/include_header_css_js.php');
 ?>
 </HEAD>
