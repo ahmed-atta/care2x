@@ -6,8 +6,10 @@ if (stristr("inc_rightcolumn_menu.php",$PHP_SELF))
 /*------end------*/
 
 /* Get the main info data */
-$config_type='main_info_%';
-require(CARE_BASE .'include/helpers/inc_get_global_config.php');
+$GLOBAL_CONFIG=array();
+include_once(CARE_BASE.'include/core/class_globalconfig.php');
+$gc= new GlobalConfig($GLOBAL_CONFIG);
+$data_result = $gc->getConfig('main_info_%');
 
 #Workaround
 $main_info_address=nl2br($main_info_address);
@@ -16,7 +18,7 @@ $main_info_address=nl2br($main_info_address);
 $url_open="open-time.php".URL_APPEND;
 $url_mgmt="newscolumns.php".URL_APPEND."&dept_nr=28&user_origin=dept";
 $url_dept="../modules/news/departments.php".URL_APPEND;
-$url_cafe="../modules/cafeteria/cafenews.php".URL_APPEND;
+$url_cafe="../cafeteria/cafenews.php".URL_APPEND;
 $url_adm="newscolumns.php".URL_APPEND."&dept_nr=33&user_origin=dept";
 $url_exh="newscolumns.php".URL_APPEND."&dept_nr=29&user_origin=dept";
 $url_edu="newscolumns.php".URL_APPEND."&dept_nr=30&user_origin=dept";

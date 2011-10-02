@@ -311,7 +311,6 @@ $smarty->assign('sWindowTitle',$LDMainTitle);
 # latest div based menu
 #
 $config_type = 'use_old_gui_style';
-require('./include/helpers/inc_get_global_config.php');
 $smarty->assign('sContentsFrameSource',"modules/news/start_page.php?lang=$lang&sid=$sid\"");
 	
 $smarty->display('common/noframe.tpl');
