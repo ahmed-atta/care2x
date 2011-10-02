@@ -42,7 +42,6 @@ require_once($root_path.'modules/news/includes/inc_news_display_config.php');
 
 /* Get the maximum number of headlines to be displayed */
 $config_type='news_headline_max_display';
-require($root_path.'include/helpers/inc_get_global_config.php');
 
 if(!$news_headline_max_display) $news_headline_max_display=3; /* default is 3 */
 

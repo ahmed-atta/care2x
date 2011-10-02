@@ -31,7 +31,6 @@ require('includes/inc_news_get_one.php');
 
 /* Get the news table width */
 $config_type='news_normal_display_width';
-include_once($root_path.'include/helpers/inc_get_global_config.php');
 
 # Start Smarty templating here
  /**

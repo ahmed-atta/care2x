@@ -25,9 +25,9 @@ require($root_path.'include/helpers/inc_2level_reset.php');
 		
 $dept_nr=1; # 1 = press relations
 
-# Get the maximum number of headlines to be displayed
-$config_type='news_headline_max_display';
-include($root_path.'include/helpers/inc_get_global_config.php');
+include_once(CARE_BASE.'include/core/class_globalconfig.php');
+$gc= new GlobalConfig($GLOBAL_CONFIG);
+$data_result = $gc->getConfig('news_headline_max_display');
 
 if(!isset($news_headline_max_display)||!$news_headline_max_display) $news_num_stop=3; # default is 3 
     else $news_num_stop=$news_headline_max_display;  # The maximum number of news article to be displayed

@@ -105,7 +105,6 @@ if($dblink_ok) {
 
 	# Get the maximum number of headlines to be displayed 
     $config_type='news_dept_max_display';
-    include($root_path.'include/helpers/inc_get_global_config.php');
 
     if(!$news_dept_max_display) $news_num_stop=4; // default is 3
         else $news_num_stop=$news_dept_max_display;  // The maximum number of news article to be displayed
@@ -155,8 +154,9 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/d
  $smarty->assign('title',$title);
 
  /* Get the news global configurations */
-$config_type='news_%';
-include($root_path.'include/helpers/inc_get_global_config.php');
+include_once(CARE_BASE.'include/core/class_globalconfig.php');
+$gc= new GlobalConfig($GLOBAL_CONFIG);
+$data_result = $gc->getConfig('news_%');
 
 if(!$news_normal_preview_maxlen) $news_normal_preview_maxlen=300;
 
