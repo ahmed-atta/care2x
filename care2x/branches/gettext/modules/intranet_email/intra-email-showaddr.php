@@ -91,7 +91,7 @@ function resit(d)
 
 <?php 
 require($root_path.'include/helpers/inc_js_gethelp.php');
-require($root_path.'include/helpers/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/include_header_css_js.php');
 ?></HEAD>
 
 <BODY  topmargin=0 leftmargin=0 marginwidth=0 marginheight=0 onLoad="if (window.focus) window.focus()">

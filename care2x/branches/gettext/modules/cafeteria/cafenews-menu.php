@@ -115,7 +115,7 @@ function editcafe()
 }
 </script>
 
-<?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
+<?php require($root_path.'include/helpers/include_header_css_js.php'); ?>
 </head>
 <body>
 <FONT  SIZE=8 COLOR="#cc6600">

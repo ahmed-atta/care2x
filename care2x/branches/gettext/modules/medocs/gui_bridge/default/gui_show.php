@@ -40,7 +40,7 @@ function popRecordHistory(table,pid) {
 <?php 
 if($parent_admit) include($root_path.'include/imgcreator/inc_js_barcode_wristband_popwin.php');
 require($root_path.'include/helpers/inc_js_gethelp.php');
-require($root_path.'include/helpers/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/include_header_css_js.php');
 ?>
 </HEAD>
 

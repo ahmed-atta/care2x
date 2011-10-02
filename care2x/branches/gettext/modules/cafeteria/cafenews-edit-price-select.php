@@ -72,14 +72,14 @@ function chkForm(d)
 }
 </script>
 <?php endif ?>
-<?php if($cfg['dhtml']) include("/include/helpers/inc_css_a_hilitebu.php"); ?>
+<?php if($cfg['dhtml']) include("/include/helpers/include_header_css_js.php"); ?>
 <SCRIPT LANGUAGE="javascript" >
 function chkRadioButton(e){
 	if(e) e.checked=true;
 }
 </SCRIPT>
 
-<?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
+<?php require($root_path.'include/helpers/include_header_css_js.php'); ?>
 </head>
 <body>
 <FONT  SIZE=8 COLOR="#cc6600">

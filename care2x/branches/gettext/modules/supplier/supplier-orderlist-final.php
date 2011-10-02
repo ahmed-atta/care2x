@@ -112,7 +112,7 @@ function show_order(d,o,s) {
 </script>
 <?php 
 require($root_path.'include/helpers/inc_js_gethelp.php');
-require($root_path.'include/helpers/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/include_header_css_js.php');
 ?>
 </head>
 <BODY  topmargin=5 leftmargin=10  marginwidth=10 marginheight=5 

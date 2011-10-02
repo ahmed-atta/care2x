@@ -96,7 +96,7 @@ if(!$currency_short||!$currency_long)
 
 <title></title>
 
-<?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
+<?php require($root_path.'include/helpers/include_header_css_js.php'); ?>
 </head>
 <body>
 <FONT  SIZE=6 COLOR="#cc6600">

@@ -257,7 +257,7 @@ $smarty->assign('sOnLoadJs','onLoad="if (window.focus) window.focus();"');
  <TITLE><?php echo "$LDDiagnosticTest $station" ?></TITLE>
 <?php
 require($root_path.'include/helpers/inc_js_gethelp.php');
-require($root_path.'include/helpers/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/include_header_css_js.php');
 
 ?>
 <style type="text/css">

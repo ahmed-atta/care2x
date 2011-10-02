@@ -71,7 +71,7 @@ function savedata(iln,ifn,inx,ipr)
 </script>
 <?php
 require($root_path.'include/helpers/inc_js_gethelp.php');
-require($root_path.'include/helpers/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/include_header_css_js.php');
 ?>
 <STYLE type=text/css>
 div.box { border: double; border-width: thin; width: 100%; border-color: black; }

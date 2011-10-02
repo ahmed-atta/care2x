@@ -40,7 +40,7 @@ function chkForm(d)
 }
 </script>
 
-<?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
+<?php require($root_path.'include/helpers/include_header_css_js.php'); ?>
 </head>
 <body>
 <form name="selectform" method="get" action="headline-edit.php" onSubmit="return chkForm(this)">

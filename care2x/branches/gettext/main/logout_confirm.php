@@ -10,7 +10,7 @@ require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
 <HEAD>
 
 <TITLE></TITLE>
-<?php require(CARE_BASE .'include/helpers/inc_css_a_hilitebu.php'); ?>
+<?php require(CARE_BASE .'include/helpers/include_header_css_js.php'); ?>
 </head>
 <BODY>
 	<center>

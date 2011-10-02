@@ -82,7 +82,7 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <!--  Load validators -->
 <script language="javascript" src="<?php echo $root_path; ?>js/editor_chkform.js" type="text/javascript"></script>
  
-<?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
+<?php require($root_path.'include/helpers/include_header_css_js.php'); ?>
 </head>
 
 <body onLoad="HTMLArea.replace('newsbody')">
