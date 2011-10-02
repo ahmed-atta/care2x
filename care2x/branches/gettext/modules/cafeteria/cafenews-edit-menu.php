@@ -176,7 +176,7 @@ function aligndate(&$ad,&$am,&$ay)
 .v18_b{ font-family:verdana,arial; color:#000066; font-size:18}
 </style>
 
-<?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
+<?php require($root_path.'include/helpers/include_header_css_js.php'); ?>
 </head>
 
 <body onLoad="document.menuform.menuplan.focus()">

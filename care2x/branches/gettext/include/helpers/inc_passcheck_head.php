@@ -20,7 +20,7 @@ function pruf(d)
  
  <?php 
 require(CARE_BASE .'include/helpers/inc_js_gethelp.php');
-include(CARE_BASE .'include/helpers/inc_css_a_hilitebu.php');
+include(CARE_BASE .'include/helpers/include_header_css_js.php');
 ?>
  
 </HEAD>

@@ -20,7 +20,7 @@ $breakfile=$root_path."modules/nursing/nursing-ward-patientdata.php".URL_APPEND.
 <?php html_rtl($lang); ?>
 <head>
 <title></title>
-<?php require($root_path.'include/helpers/inc_css_a_hilitebu.php'); ?>
+<?php require($root_path.'include/helpers/include_header_css_js.php'); ?>
 </head>
 <body>
 

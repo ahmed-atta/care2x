@@ -69,7 +69,7 @@ if ($mode=='save'){
 </style>
 <?php 
 require($root_path.'include/helpers/inc_js_gethelp.php');
-require($root_path.'include/helpers/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/include_header_css_js.php');
 ?>
 </HEAD>
 

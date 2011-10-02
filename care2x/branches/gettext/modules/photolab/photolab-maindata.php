@@ -88,7 +88,7 @@ function resetall()
 </script>
 <?php 
 require($root_path.'include/helpers/inc_js_gethelp.php');
-require($root_path.'include/helpers/inc_css_a_hilitebu.php');
+require($root_path.'include/helpers/include_header_css_js.php');
 ?>
 </head>
 <body topmargin=3 marginheight=3 onLoad="document.maindata.patnum.select()" onFocus="document.maindata.patnum.select()">

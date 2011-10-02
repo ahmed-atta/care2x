@@ -142,7 +142,7 @@ class smarty_care extends Smarty {
 		if($this->bLoadJS){
 			ob_start();
 				include($this->root_path.'include/helpers/inc_js_gethelp.php');
-				include($this->root_path.'include/helpers/inc_css_a_hilitebu.php');
+				include($this->root_path.'include/helpers/include_header_css_js.php');
 				$sTemp = ob_get_contents();
 			ob_end_clean();
 		}
