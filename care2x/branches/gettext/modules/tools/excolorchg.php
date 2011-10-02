@@ -71,7 +71,10 @@ $sql="SELECT name,LD_var FROM care_menu_main WHERE is_visible=1 OR LD_var='LDEDP
 $menu_obj=$db->Execute($sql);
 
 //prevent client from caching
-require_once($root_path.'include/helpers/inc_nocache_headers.php');
+header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT');    // Date in the past
+header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+header ('Cache-Control: no-cache, must-revalidate');  // HTTP/1.1
+header ('Pragma: no-cache');    
 
 # Start Smarty templating here
  /**
