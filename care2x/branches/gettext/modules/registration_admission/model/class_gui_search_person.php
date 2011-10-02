@@ -168,7 +168,6 @@ class GuiSearchPerson {
 		
 		# Load the language tables
 		$lang_tables =$this->langfile;
-		include($root_path.'include/helpers/inc_load_lang_tables.php');
 
 		# Initialize pages control variables
 		if($mode=='paginate'){
