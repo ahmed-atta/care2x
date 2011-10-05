@@ -134,6 +134,6 @@ ob_end_clean();
 
 $smarty->assign('sMainFrameBlockData',$sTemp);
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

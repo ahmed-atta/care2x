@@ -134,4 +134,4 @@ $smarty->assign('LDNeedEmptyFormPls',$LDNeedEmptyFormPls);
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/citytown_list.tpl');
 
 //$smarty->compile_check = true; $smarty->debugging = true; $smarty->display('debug.tpl');
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');

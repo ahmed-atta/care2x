@@ -48,5 +48,5 @@ $smarty->assign ( 'sCatalogSource', "src=\"products-ordercatalog.php?sid=$sid&la
 
 $smarty->assign ( 'sBaseFramesetTemplate','products/ordering_frameset.tpl' );
 
-$smarty->display ( 'common/baseframe.tpl' );
+$smarty->display(CARE_BASE . 'main/view/baseframe.tpl' );
 ?>

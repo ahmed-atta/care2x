@@ -220,6 +220,6 @@ $smarty->assign('sMainBlockIncludeFile','appointment/appt_list.tpl');
  * show Template
  */
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
  ?>

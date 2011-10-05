@@ -136,6 +136,6 @@ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/reg_plain.tpl');
 
 # Show mainframe
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

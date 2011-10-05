@@ -66,4 +66,4 @@ $smarty->debugging = true;
 $smarty->display('debug.tpl');
 */
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');

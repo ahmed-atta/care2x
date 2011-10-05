@@ -436,6 +436,6 @@ $smarty->assign('sClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_p
  /**
  * show Template
  */
- $smarty->display('common/mainframe.tpl');
+ $smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

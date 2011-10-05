@@ -123,7 +123,7 @@ while(list($x,$v)=each($aSubMenuItem)){
 		if($cfg['icons'] != 'no_icon') $smarty2->assign('sIconImg','<img '.$aSubMenuIcon[$iRunner].'>');
 		$smarty2->assign('sSubMenuItem',$v);
 		$smarty2->assign('sSubMenuText',$aSubMenuText[$iRunner]);
-		$smarty2->display('common/submenu_row.tpl');
+		$smarty2->display(__DIR__ . '/view/submenu_row.tpl');
  		$sTemp = ob_get_contents();
  	ob_end_clean();
 	$iRunner++;
@@ -138,7 +138,7 @@ if(($cfg['bname']=="msie")&&($cfg['bversion']>4)){
 		if($cfg['icons'] != 'no_icon') $smarty2->assign('sIconImg','<img '.createComIcon(CARE_BASE ,'uhr.gif','0').'>');
 		$smarty2->assign('sSubMenuItem','<a href="'.CARE_BASE .'modules/tools/clock.php?sid='.$sid.'&lang='.$lang.'">'.$LDClock.'</a>');
 		$smarty2->assign('sSubMenuText',$LDDigitalClock);
-		$smarty2->display('common/submenu_row.tpl');
+		$smarty2->display(__DIR__ . '/view/submenu_row.tpl');
  		$sTemp = ob_get_contents();
  	ob_end_clean();
 
@@ -148,12 +148,12 @@ if(($cfg['bname']=="msie")&&($cfg['bversion']>4)){
 
 # Assign the submenu to the mainframe center block
 
- $smarty->assign('sMainBlockIncludeFile','common/submenu_specialtools.tpl');
+ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/submenu_specialtools.tpl');
 
  /**
  * show Template
  */
 
- $smarty->display('common/mainframe.tpl');
+ $smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
  // $smarty->display('debug.tpl');
  ?>

@@ -42,5 +42,5 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/p
  $smarty->assign('LDBasket',$LDBasket);
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/ordering_header.tpl');
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 ?>

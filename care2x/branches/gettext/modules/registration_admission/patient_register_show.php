@@ -176,6 +176,6 @@ $smarty->assign('pbCancel',$sCancel);
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/reg_show.tpl');
 
 # Show main frame
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

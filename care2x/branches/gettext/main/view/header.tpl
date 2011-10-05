@@ -2,7 +2,7 @@
 {{$HTMLtag}}
 <HEAD>
  <TITLE>{{$sWindowTitle}} - {{$Name}}</TITLE>
- {{include file="common/metaheaders.tpl"}}
+ {{include file="{{$smarty.const.CARE_BASE}}main/view/metaheaders.tpl"}}
  {{$setCharSet}}
 
  {{foreach from=$JavaScript item=currentJS}}

@@ -330,7 +330,6 @@ $smarty->assign ( 'sPageTime', $smarty->Pagetime () );
 /**
  * show Template
  */
-
-$smarty->display ( 'laboratory/request_aftersave.tpl' );
+$smarty->display ( __DIR__ . '/view/request_aftersave.tpl' );
 // $smarty->display('debug.tpl');
 ?>

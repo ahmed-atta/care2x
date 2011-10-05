@@ -240,4 +240,4 @@ require(CARE_BASE.'include/helpers/include_header_css_js.php');
  * show Template
  */
 
- $smarty->display('common/mainframe.tpl');
+ $smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
