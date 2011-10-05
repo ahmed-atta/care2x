@@ -155,8 +155,5 @@ $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_e
 		</center>
 	</div>
 </form>
-<?php
-require($root_path.'include/helpers/inc_load_copyrite.php');
-?>
 </body>
 </html>

@@ -64,9 +64,6 @@ require($root_path.'include/helpers/inc_passcheck_head.php');
 <?php require($root_path.'include/helpers/inc_passcheck_mask.php') ?>  
 
 <p>
-<?php
-require($root_path.'include/helpers/inc_load_copyrite.php');
-?>
 </FONT>
 
 

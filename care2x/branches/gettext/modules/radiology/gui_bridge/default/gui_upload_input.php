@@ -332,9 +332,6 @@ if($parent_admit) {
 
 <p>
 </ul>
-<?php
-require($root_path.'include/helpers/inc_load_copyrite.php');
- ?>
 </FONT>
 <?php
 StdFooter();

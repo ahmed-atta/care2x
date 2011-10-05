@@ -75,9 +75,6 @@ function gethelp(x,s,x1,x2,x3)
 	</tr>
 	<tr>
 		<td  height=70 colspan=2>
-			<?php
-			require (CARE_BASE .'include/helpers/inc_load_copyrite.php');
-			?>
 		</td>
 	</tr>
 </table>

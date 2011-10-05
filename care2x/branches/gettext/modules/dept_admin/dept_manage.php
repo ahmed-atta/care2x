@@ -141,9 +141,6 @@ if ($cfg ['dhtml'])
 		echo $cfg ['bot_bgcolor'];
 		?>" colspan=2>
 
-<?php
-require($root_path.'include/helpers/inc_load_copyrite.php');
-?>
 </td>
 	</tr>
 </table>

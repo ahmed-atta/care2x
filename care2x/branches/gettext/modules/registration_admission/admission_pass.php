@@ -114,9 +114,6 @@ endif
 <img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>> <a href="javascript:gethelp('admission_how2start.php','<?php echo $target ?>','search')"><?php echo $LDAdmHow2Search ?></a><br>
 <img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>> <a href="javascript:gethelp('admission_how2start.php','<?php echo $target ?>','archiv')"><?php echo $LDAdmHow2Archive ?></a><br>
 <p>
-<?php
-require($root_path.'include/helpers/inc_load_copyrite.php');
-?>
 </FONT>
 </BODY>
 </HTML>

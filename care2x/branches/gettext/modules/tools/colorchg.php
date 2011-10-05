@@ -179,10 +179,6 @@ if(is_object($menu_obj)){
   <tr>
  
     <td bgcolor="<?php echo $config_new['bot_bgcolor']; ?>">
-
-<?php
-require($root_path.'include/helpers/inc_load_copyrite.php');
-?>
 <p><a href="#" title="<?php echo $LDClk4BgColor ?>" onClick="chgcolor('bot_bgcolor')"><?php echo $LDBgColor ?> <img <?php echo createComIcon($root_path,'settings_tree.gif','0') ?> alt="<?php echo $LDClk4BgColor ?>">
 </a>
 

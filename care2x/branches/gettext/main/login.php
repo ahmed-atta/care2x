@@ -88,9 +88,6 @@ if(isset($is_logged_out) && $is_logged_out) {
 
 <?php require(CARE_BASE.'include/helpers/inc_passcheck_mask.php') ?>
 <p>
-<?php
-require(CARE_BASE.'include/helpers/inc_load_copyrite.php');
-?>
 </FONT>
 </BODY>
 </HTML>
