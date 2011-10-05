@@ -63,10 +63,5 @@ if(file_exists($root_path.'language/$lang/lang_'.$lang.'_phone.php')) include($r
 <img <?php echo createComIcon($root_path,'frage.gif','0') ?>> <a href="javascript:gethelp('phone_how2start.php','newphone','search')"><?php echo $LDHow2SearchPhone ?></a><br>
 <img <?php echo createComIcon($root_path,'frage.gif','0') ?>> <a href="javascript:gethelp('phone_how2start.php','newphone','dir')"><?php echo $LDHow2OpenDir ?></a><br>
 <img <?php echo createComIcon($root_path,'frage.gif','0') ?>> <a href="javascript:gethelp('phone_how2start.php','newphone','newphone')"><?php echo $LDHowEnter ?></a><br>
-<HR>
-<p>
-<?php
-require($root_path.'include/helpers/inc_load_copyrite.php');
-?></FONT>
 </BODY>
 </HTML>

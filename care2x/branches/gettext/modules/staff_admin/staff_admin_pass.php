@@ -90,11 +90,6 @@ echo '
 
 <?php require($root_path.'include/helpers/inc_passcheck_mask.php') ?>  
 
-<p>
-<p>
-<?php
-require($root_path.'include/helpers/inc_load_copyrite.php');
-?>
 </FONT>
 </BODY>
 </HTML>

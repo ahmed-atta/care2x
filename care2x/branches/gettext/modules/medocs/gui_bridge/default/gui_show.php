@@ -240,10 +240,6 @@ else echo $breakfile.URL_APPEND;
 ?>
 "><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
 </ul>
-
-<?php
-require($root_path.'include/helpers/inc_load_copyrite.php');
- ?>
 </FONT>
 <?php
 StdFooter();

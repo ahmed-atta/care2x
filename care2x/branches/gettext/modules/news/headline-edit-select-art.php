@@ -81,9 +81,6 @@ function chkForm(d)
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="title" value="<?php echo $title ?>">
 <p>
-<?php 
-require($root_path.'include/helpers/inc_load_copyrite.php');
-?>
 </form>
 </body>
 </html>

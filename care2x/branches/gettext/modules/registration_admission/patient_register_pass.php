@@ -109,25 +109,6 @@ echo '
 $maskBorderColor='#66ee66';
 require($root_path.'include/helpers/inc_passcheck_mask.php') 
 ?>  
-
-<!-- <p>
-<?php if($target!="entry") : ?>
-<img <?php echo createComIcon($root_path,'update.gif','0','absmiddle') ?>> <a href="admission_pass.php?sid=<?php echo "$sid&lang=$lang" ?>&target=entry"><?php echo $LDAdmWantEntry ?></a><br>
-<?php endif ?>
-<?php if($target!="search") : ?>
-<img <?php echo createComIcon($root_path,'update.gif','0','absmiddle') ?>> <a href="admission_pass.php?sid=<?php echo "$sid&lang=$lang" ?>&target=search"><?php echo $LDAdmWantSearch ?></a><br>
-<?php endif ?>
-<?php if($target!="archiv") : ?>
-<img <?php echo createComIcon($root_path,'update.gif','0','absmiddle') ?>> <a href="admission_pass.php?sid=<?php echo "$sid&lang=$lang" ?>&target=archiv"><?php echo $LDAdmWantArchive ?></a><br>
-<?php endif ?>
-<img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>> <a href="javascript:gethelp('admission_how2start.php','<?php echo $target ?>','entry')"><?php echo $LDAdmHow2Enter ?></a><br>
-<img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>> <a href="javascript:gethelp('admission_how2start.php','<?php echo $target ?>','search')"><?php echo $LDAdmHow2Search ?></a><br>
-<img <?php echo createComIcon($root_path,'frage.gif','0','absmiddle') ?>> <a href="javascript:gethelp('admission_how2start.php','<?php echo $target ?>','archiv')"><?php echo $LDAdmHow2Archive ?></a><br>
- -->
-<p>
-<?php
-require($root_path.'include/helpers/inc_load_copyrite.php');
-?>
 </FONT>
 </BODY>
 </HTML>
