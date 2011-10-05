@@ -168,6 +168,6 @@ $smarty->assign('sSubmitFormButton','<button type="submit"  class="btn primary">
  */
 //$smarty->compile_check = true;
 //$smarty->debugging = true;
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 //$smarty->display('debug.tpl');
 ?>

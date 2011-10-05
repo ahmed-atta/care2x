@@ -83,6 +83,6 @@ $smarty->assign('sBackLink','<a href="'.$sReturn.'"><img '.createComIcon($root_p
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/headline_dept_news.tpl');
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

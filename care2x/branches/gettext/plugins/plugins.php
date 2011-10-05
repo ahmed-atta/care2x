@@ -68,7 +68,7 @@ $smarty->assign('LDBack', $LDBack);
 			}
 
 			if($count){
-				$smarty->display('common/submenu_row_spacer.tpl');
+				$smarty->display(__DIR__ . '/view/submenu_row_spacer.tpl');
 			}else{
 				$count++;
 			}
@@ -76,7 +76,7 @@ $smarty->assign('LDBack', $LDBack);
 			if($cfg['icons'] != 'no_icon') $smarty->assign('sIconImg','<img '.$sImgSrc.'>');
 			$smarty->assign('sSubMenuItem','<a href="'.$sPluginStartLocator.'">'.$sPluginName.'</a>');
 			$smarty->assign('sSubMenuText',$sPluginDescription);
-			$smarty->display('common/submenu_row.tpl');
+			$smarty2->display(__DIR__ . '/view/submenu_row.tpl');
 		}
 	}
 	closedir($handle);
@@ -96,6 +96,6 @@ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/submenu_tableframe.tpl'
  * show Template
  */
 
- $smarty->display('common/mainframe.tpl');
+ $smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
  // $smarty->display('debug.tpl');
  ?>

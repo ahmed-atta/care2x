@@ -486,6 +486,6 @@ $smarty->assign('sArchiveLink','<img '.createComIcon($root_path,'varrow.gif','0'
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/admit_show.tpl');
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

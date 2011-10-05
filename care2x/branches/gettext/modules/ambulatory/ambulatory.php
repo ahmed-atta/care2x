@@ -285,4 +285,4 @@ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/submenu_ambulatory.tpl'
  * show Template
  */
 //$smarty->compile_check = true; $smarty->debugging = true; $smarty->display('debug.tpl');
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');

@@ -109,6 +109,6 @@ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/create_item.tpl');
  * show Template
  */
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 // $smarty->display('debug.tpl');
 ?>

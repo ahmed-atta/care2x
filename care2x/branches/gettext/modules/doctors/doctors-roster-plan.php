@@ -318,20 +318,20 @@ for ($i=1,$n=0,$wd=$firstday;$i<=$maxdays;$i++,$n++,$wd++)
 	# Buffer each row and collect to a string
 	
 	ob_start();
-		$smarty->display('common/duty_plan_entry_row.tpl');
+		$smarty->display(__DIR__ . '/view/duty_plan_entry_row.tpl');
 		$sTemp = $sTemp.ob_get_contents();
 	ob_end_clean();
 }
 
 # Assign the duty entry rows to the subframe template
 
- $smarty->assign('sDutyRows',$sTemp);
+$smarty->assign('sDutyRows',$sTemp);
 
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/duty_plan_entry_frame.tpl');
  /**
  * show Template
  */
- $smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

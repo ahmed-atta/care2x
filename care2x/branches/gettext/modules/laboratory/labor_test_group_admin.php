@@ -175,6 +175,6 @@ $smarty->assign('sSubmitSelect','<input type=hidden name="sid" value="'.$sid.'">
  /**
  * show Template
  */
- $smarty->display('common/mainframe.tpl');
+ $smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

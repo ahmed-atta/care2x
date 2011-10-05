@@ -131,5 +131,5 @@ $smarty->assign('sHiddenInputs','<input type="hidden" name="labcod" value="'. $l
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/bill_items.tpl');
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 ?>

@@ -56,6 +56,3 @@ div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
 </div>
 
 <p>
-
-{{include file="common/copyright.tpl"}}
-{{include file="common/footer.tpl"}}

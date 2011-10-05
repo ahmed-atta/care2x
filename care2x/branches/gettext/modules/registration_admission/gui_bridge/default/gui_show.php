@@ -224,6 +224,6 @@ $smarty->assign('pbBottomClose','<a href="'.$breakfile.'"><img '.createLDImgSrc(
 $smarty->assign('sMainBlockIncludeFile','registration_admission/common_option.tpl');
 
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

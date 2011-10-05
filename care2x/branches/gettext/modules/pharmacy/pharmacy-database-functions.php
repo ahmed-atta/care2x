@@ -79,7 +79,7 @@ while(list($x,$v)=each($aSubMenuItem)){
 		if($cfg['icons'] != 'no_icon') $smarty2->assign('sIconImg','<img '.$aSubMenuIcon[$iRunner].'>');
 		$smarty2->assign('sSubMenuItem',$v);
 		$smarty2->assign('sSubMenuText',$aSubMenuText[$iRunner]);
-		$smarty2->display('common/submenu_row.tpl');
+		$smarty2->display(__DIR__ . '/view/submenu_row.tpl');
  		$sTemp = ob_get_contents();
  	ob_end_clean();
 	$iRunner++;
@@ -95,6 +95,6 @@ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/submenu_tableframe.tpl'
   /**
  * show Template
  */
- $smarty->display('common/mainframe.tpl');
+ $smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

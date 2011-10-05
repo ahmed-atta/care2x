@@ -60,7 +60,7 @@ $smarty->assign('LDBack', $LDBack);
  	$smarty->assign('sVisitTimes',$LDVisitTimes[$i]);
 
  	ob_start();
-		$smarty->display('common/opentimes_row.tpl');
+		$smarty->display(CARE_BASE . 'view/opentimes_row.tpl');
  		$sTemp = $sTemp.ob_get_contents();
  	ob_end_clean();
 
@@ -72,6 +72,6 @@ $smarty->assign('sBreakFile','<a href="'.$breakfile.'"><img '.createLDImgSrc($ro
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/opentimes_table.tpl');
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

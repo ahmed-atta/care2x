@@ -149,4 +149,4 @@ $smarty->assign('LDEnterZero',$LDEnterZero);
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/citytown_new.tpl');
 
 //$smarty->compile_check = true; $smarty->debugging = true; $smarty->display('debug.tpl');
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');

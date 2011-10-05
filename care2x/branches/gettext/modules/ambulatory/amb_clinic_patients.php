@@ -490,4 +490,4 @@ $tp=$TP_obj->load('ambulatory/tp_clinic_quickinfo.htm');
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/outpatients.tpl');
 
 //$smarty->compile_check = true; $smarty->debugging = true; $smarty->display('debug.tpl');
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');

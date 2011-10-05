@@ -2,7 +2,7 @@
 {{$HTMLtag}}
 <HEAD>
  <TITLE>{{$sWindowTitle}}</TITLE>
- {{include file="common/metaheaders.tpl"}}
+ {{include file="metaheaders.tpl"}}
  {{$setCharSet}}
 
 </HEAD>

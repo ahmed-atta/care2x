@@ -120,5 +120,5 @@ $smarty->assign('sHiddenInputs','<input type="hidden" name="itemcd" value="'. $i
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/edit_item.tpl');
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 ?>

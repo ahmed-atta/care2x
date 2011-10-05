@@ -311,7 +311,7 @@ $smarty->assign('sWindowTitle',$LDMainTitle);
 #
 $config_type = 'use_old_gui_style';
 $smarty->assign('sContentsFrameSource',"modules/news/start_page.php?lang=$lang&sid=$sid\"");
-	
-$smarty->display('common/noframe.tpl');
+
+$smarty->display(CARE_BASE . 'main/view/noframe.tpl');
 
 ?>

@@ -86,6 +86,6 @@ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/acknowledge.tpl');
  * show Template
  */
 
- $smarty->display('common/mainframe.tpl');
+ $smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
  // $smarty->display('debug.tpl');
  ?>

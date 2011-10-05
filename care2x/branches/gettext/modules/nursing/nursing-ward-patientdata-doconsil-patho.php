@@ -547,5 +547,5 @@ if($edit){
  $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/request_pathology.tpl');
  // $smarty->display('debug.tpl');
 
- $smarty->display('common/mainframe.tpl');
+ $smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 ?>

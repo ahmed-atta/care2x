@@ -125,5 +125,5 @@ $smarty->assign('sHiddenInputs','<input type="hidden" name="patientno" value="'.
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/bill_payment_header.tpl');
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 ?>

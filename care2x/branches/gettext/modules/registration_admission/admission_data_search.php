@@ -394,6 +394,6 @@ $smarty->assign('sMainIncludeFile','registration_admission/admit_search_main.tpl
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/admit_plain.tpl');
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

@@ -93,6 +93,6 @@ $smarty->assign('pbCancel',$sCancel);
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/reg_input.tpl');
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

@@ -487,6 +487,6 @@ $smarty->assign('pbCancel','<a href="'.$returnfile.URL_APPEND.$buf.'&target='.$t
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/common_report.tpl');
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

@@ -163,5 +163,5 @@ $smarty->assign('sMainBlockIncludeFile','or/submenu_or.tpl');
  * show  Mainframe Template
  */
 
-$smarty->display('common/mainframe.tpl');
+$smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 ?>

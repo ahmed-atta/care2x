@@ -275,6 +275,6 @@ echo nl2br($content['body']);
  /**
  * show Template
  */
- $smarty->display('common/mainframe.tpl');
+ $smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>

@@ -1049,6 +1049,6 @@ $sTemp = ob_get_contents();
  /**
  * show Template
  */
- $smarty->display('common/mainframe.tpl');
+ $smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 
 ?>
