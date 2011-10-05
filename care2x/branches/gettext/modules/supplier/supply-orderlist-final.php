@@ -77,7 +77,7 @@ if(($mode=='send') && isset($order_nr) && $order_nr){
 	} 
 }
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <script language=javascript>

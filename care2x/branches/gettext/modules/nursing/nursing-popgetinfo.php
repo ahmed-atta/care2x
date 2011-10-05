@@ -73,7 +73,7 @@ $charts_obj= new Charts;
 	}
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
 <TITLE><?php echo "$title - $LDInputWin" ?></TITLE>

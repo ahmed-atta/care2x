@@ -149,7 +149,7 @@ class smarty_care extends Smarty {
 		$this->assign('JavaScript',$sTemp);
 
 		# Added for the html tag direction
-		$this->assign('HTMLtag',html_ret_rtl($this->lang));
+		$this->assign('HTMLtag','<html>');
 
 		# Set colors
 		$this->assign('top_txtcolor',$this->cfg['top_txtcolor']);

@@ -92,7 +92,7 @@ function aligndate(&$ad,&$am,&$ay)
 	}
 }
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title></title>

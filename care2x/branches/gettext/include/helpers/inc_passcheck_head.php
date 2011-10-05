@@ -3,7 +3,7 @@
 if (stristr($PHP_SELF, 'inc_passcheck_head.php')) die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
  <TITLE></TITLE>

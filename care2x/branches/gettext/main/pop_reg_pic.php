@@ -17,7 +17,7 @@ require_once(CARE_BASE .'include/core/class_person.php');
 $person=& new Person($pid);
 $person->preloadPersonInfo();
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 <title><?php echo $person->LastName().', '.$person->FirstName().' ['.formatDate2Local($person->Birthdate(),$date_format).']';  ?></title>
 

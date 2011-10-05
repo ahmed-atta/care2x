@@ -180,7 +180,7 @@ if($dblink_ok){
 
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
 <TITLE><?php echo $title ?></TITLE>

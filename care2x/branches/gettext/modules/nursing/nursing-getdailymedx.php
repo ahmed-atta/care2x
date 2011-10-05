@@ -76,9 +76,7 @@ if ($dblink_ok) {
 	echo "$LDDbNoLink<br>$sql<br>" ;
 }
 ?>
-<?php
-html_rtl ( $lang ) ;
-?>
+<html>
 <HEAD>
 <?php echo setCharSet () ; ?>
 <TITLE><?php

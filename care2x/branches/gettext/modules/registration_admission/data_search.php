@@ -130,10 +130,7 @@ $entry_block_bgcolor = '#fff3f3';
 $entry_border_bgcolor = '#66ee66';
 $entry_body_bgcolor = '#ffffff';
 ?>
-<?php
-
-html_rtl ( $lang );
-?>
+<html>
 <head>
 <?php
 echo setCharSet ();

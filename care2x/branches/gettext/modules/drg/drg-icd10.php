@@ -68,7 +68,7 @@ $uid="$dept_$oprm_$pn_$opnr";
 $img_delete=createComIcon($root_path,'delete2.gif','0','right',TRUE);
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
  <TITLE></TITLE>

@@ -183,7 +183,7 @@ if (!isset ( $edit ) || empty ( $edit ))
 $smarty->assign ( 'printmode', TRUE );
 
 # Added for the html tag direction
-$smarty->assign ( 'HTMLtag', html_ret_rtl ( $lang ) );
+$smarty->assign ( 'HTMLtag', '<html>');
 
 # Set colors
 $smarty->assign ( 'top_txtcolor', $cfg ['top_txtcolor'] );

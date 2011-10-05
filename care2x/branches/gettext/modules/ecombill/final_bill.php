@@ -32,7 +32,7 @@ if(is_object($chkpendbillres))
 	$chkcnt=$chkpendbillres->RecordCount();
            
 if($chkcnt>0)    {
-	html_rtl($lang); 
+	echo "<html>";
 	echo "<table border=0 width=101% bgcolor=#99ccff>";
 	echo "<tr>";
 	echo "<td width=101%><font color=#330066 size=+3 face=Arial><strong>" . $LDBilling . "</strong></font></td>";

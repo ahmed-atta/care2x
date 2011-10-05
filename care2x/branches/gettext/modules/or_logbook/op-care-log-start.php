@@ -10,7 +10,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if (!$internok&&!$_COOKIE['ck_op_pflegelogbuch_user'.$sid]) {header("Location:../language/".$lang."/lang_".$lang."_invalid-access-warning.php"); exit;}; 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
       <title><?php echo "$dept $LDOr $LDLOGBOOK" ?></title>
 

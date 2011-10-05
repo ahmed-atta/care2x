@@ -82,7 +82,7 @@ if(isset($tid)&&$tid&&isset($dept)&&$dept)
 			//echo $sql;
 }
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title><?php echo "$LDRepabotActivate $LDAck" ?></title>

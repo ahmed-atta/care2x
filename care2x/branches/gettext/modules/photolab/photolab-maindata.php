@@ -58,7 +58,7 @@ if(is_object($p_obj)){
 }
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 

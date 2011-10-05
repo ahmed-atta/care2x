@@ -49,7 +49,7 @@ if ($finalcommand=='delete'){
     }
 }
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
  <TITLE></TITLE>

@@ -103,7 +103,7 @@ if($tparam=&$lab_obj->getTestParam($nr)){
 $tgroups=&$lab_obj->TestActiveGroups();	
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
  <TITLE>Konfigurimi i Parametrave</TITLE>

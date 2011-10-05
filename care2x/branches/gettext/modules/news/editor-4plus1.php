@@ -35,7 +35,7 @@ $breakfile='newscolumns.php'.URL_APPEND;
 //$_SESSION['sess_file_return']=basename(__FILE__);
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title></title>

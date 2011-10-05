@@ -23,7 +23,7 @@ include_once($root_path.'include/helpers/inc_date_format_functions.php');
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
  <style type="text/css" name="s2">

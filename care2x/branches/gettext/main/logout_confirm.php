@@ -6,7 +6,7 @@ define('NO_2LEVEL_CHK',1);
 require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
 ?>
 
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
 <TITLE></TITLE>

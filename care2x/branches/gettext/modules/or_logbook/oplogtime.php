@@ -13,7 +13,7 @@ $comdat="?sid=$sid&lang=$lang&enc_nr=$enc_nr&op_nr=$op_nr&dept_nr=$dept_nr&saal=
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
 <script language="javascript">

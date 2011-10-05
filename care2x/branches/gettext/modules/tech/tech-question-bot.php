@@ -97,7 +97,7 @@ switch($mode)
 				}else {echo "<p>".$sql."$LDDbNoRead<br>"; };
 			//echo $sql;
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <?php if(!isset($mode)||empty($mode)) echo '<meta http-equiv="refresh" content="30, url: tech-question-bot.php">'; ?>

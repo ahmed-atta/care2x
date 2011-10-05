@@ -30,9 +30,7 @@ if (!isset($userck))
     $rows = $product->LastRecordCount();
 
     ?>
-<?php html_rtl($lang);
-
-    ?>
+<html>
 <head>
 <?php 
 

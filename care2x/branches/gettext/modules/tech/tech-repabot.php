@@ -28,7 +28,7 @@ $dbtable='care_tech_repair_job';
     }else {echo "<p>$sq $LDDbNoRead<br>"; };
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <meta http-equiv="refresh" content="15, url: tech-repabot.php?<?php echo "sid=$sid&lang=$lang" ?>">

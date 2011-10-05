@@ -192,7 +192,7 @@ $img_info=createComIcon($root_path,'info3.gif','0');
 $img_delete=createComIcon($root_path,'delete2.gif','0');
  
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 

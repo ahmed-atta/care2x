@@ -70,7 +70,7 @@ if(($mode=='send') && isset($idcare_supply) && $idcare_supply){
 	} 
 }
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <script language=javascript>

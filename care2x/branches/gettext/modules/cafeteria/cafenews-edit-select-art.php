@@ -23,7 +23,7 @@ $_SESSION['sess_file_return']=basename(__FILE__);
 
 $title= (isset($title)&&!empty($title)) ? $title : $_SESSION['sess_title']; 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title></title>

@@ -114,7 +114,7 @@ if($ergebnis=$db->Execute($sql)) {
 
 /*}*/
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title><?php echo $title ?></title>

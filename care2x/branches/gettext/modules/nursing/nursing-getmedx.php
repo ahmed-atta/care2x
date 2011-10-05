@@ -169,7 +169,7 @@ $charts_obj= new Charts;
 		$count=$medis->RecordCount();
 	}
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
 <TITLE><?php echo "$title &LDInputWin" ?></TITLE>

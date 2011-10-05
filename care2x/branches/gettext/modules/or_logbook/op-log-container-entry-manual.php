@@ -69,7 +69,7 @@ if(($mode=='force_add')&&$containername&&$pcs){
 }
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
  <style type="text/css" name="s2">

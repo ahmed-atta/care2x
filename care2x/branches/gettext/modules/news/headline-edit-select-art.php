@@ -27,7 +27,7 @@ $_SESSION['sess_file_forward']='headline-read.php';
 
 $title= $_SESSION['sess_title']; 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title></title>

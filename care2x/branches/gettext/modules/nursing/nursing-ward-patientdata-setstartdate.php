@@ -30,7 +30,7 @@ $mo=date(m);
 $yr=date(Y);
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
 <TITLE><?php echo $title ?></TITLE>

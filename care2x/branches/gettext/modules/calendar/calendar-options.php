@@ -83,7 +83,7 @@ if($dept_nr){
 
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title><?php echo "$LDCalendar - $LDOptions" ?></title>

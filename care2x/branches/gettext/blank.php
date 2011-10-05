@@ -12,7 +12,7 @@ else
 
 
 ?>
-<?php html_rtl($lang) ?>
+<html>
 
 <head>
  <title>Init Page</title>

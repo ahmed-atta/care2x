@@ -46,7 +46,7 @@ if(isset($mode) && ($mode=='search')) {
 }
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
 <?php 

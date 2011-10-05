@@ -19,9 +19,7 @@ $breakfile = $root_path . 'modules/system_admin/admin_system-admi-menu.php' . UR
 $title = $LDDeptAdmin;
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php
-html_rtl ( $lang );
-?>
+<html>
 <HEAD>
 <?php
 echo setCharSet ();

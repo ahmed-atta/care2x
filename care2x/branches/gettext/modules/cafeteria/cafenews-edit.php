@@ -34,7 +34,7 @@ $calendar->load_files();
 
 $title=$_SESSION['sess_title'];
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title></title>

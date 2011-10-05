@@ -4,7 +4,7 @@ require('./roots.php');
 require('../../include/helpers/inc_environment_global.php');
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 </head>
 <body>
