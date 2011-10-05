@@ -110,7 +110,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/c
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
  <TITLE>Spezielle Dienste</TITLE>

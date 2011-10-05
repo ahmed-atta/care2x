@@ -32,7 +32,7 @@ $photo_filename=$person['photo_filename'];
 $photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_photo_path'])) ? $GLOBAL_CONFIG['person_photo_path'] : $default_photo_path;
 require_once($root_path.'include/helpers/inc_photo_filename_resolve.php');
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
 <TITLE><?php echo $LDInfo4Duty ?></TITLE>

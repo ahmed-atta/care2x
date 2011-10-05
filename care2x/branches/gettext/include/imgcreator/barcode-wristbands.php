@@ -13,7 +13,7 @@ define('LANG_FILE','aufnahme.php');
 define('NO_2LEVEL_CHK',1);
 require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title>Barcode Labels Patient nr. <?php echo $full_en ?></title>

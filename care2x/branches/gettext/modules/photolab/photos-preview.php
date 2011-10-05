@@ -66,7 +66,7 @@ if(isset($pn)&&$pn){
 }
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 <script language="javascript">
 <!-- 

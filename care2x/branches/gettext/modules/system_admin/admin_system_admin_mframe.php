@@ -15,7 +15,7 @@ $local_user='ck_admin_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 if(isset($ck_admin_admin_user)) setcookie('ck_edvzugang_user',$ck_admin_admin_user);
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title></title>

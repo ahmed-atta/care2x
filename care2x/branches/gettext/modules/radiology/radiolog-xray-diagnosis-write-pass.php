@@ -29,7 +29,7 @@ if ($pass=='check')
 	include($root_path.'include/helpers/inc_passcheck.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
 </HEAD>

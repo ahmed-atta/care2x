@@ -107,9 +107,7 @@ else
     $input_name='notes';
     }
 ?>
-<?php
-html_rtl ($lang);
-?>
+<html>
 <HEAD>
     
     <TITLE><?php echo "$title $LDInputWin" ?></TITLE>

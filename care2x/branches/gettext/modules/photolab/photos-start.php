@@ -15,7 +15,7 @@ define('LANG_FILE_MODULAR','photolab.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title><?php echo $LDPhotos ?></title>

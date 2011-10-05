@@ -31,7 +31,7 @@ if(is_object($finshowresult)) $final=$finshowresult->FetchRow();
 $breakfile='patient_bill_links.php'.URL_APPEND.'&patientno='.$patientno.'&full_en='.$full_en;
     
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title>Patient Name</title>

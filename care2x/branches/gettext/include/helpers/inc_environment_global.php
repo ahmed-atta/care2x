@@ -168,26 +168,3 @@ define('CARE_GUI',$httprotocol . '://' . $main_domain);
 $TP_ALIGN='left'; # template variable for document direction
 $TP_ANTIALIGN='right';
 $TP_DIR='ltr';
-#
-# Function to return the <html> or <html dir-rtl> tag
-#
-function html_ret_rtl($lang){
-	global $TP_ALIGN,$TP_ANTIALIGN, $TP_DIR;
-	if(($lang=='ar')||($lang=='fa')){
-		$TP_ANTIALIGN=$TP_ALIGN;
-		$TP_ALIGN='right';
-		$TP_DIR='rtl';
-		return '<HTML dir=rtl>';
-		}else{
-			return '<HTML>';
-		}
-}
-
-#
-# Function to echo the returned value from function html_ret_rtl()
-#
-function html_rtl($lang){
-	echo html_ret_rtl($lang);
-}
-
-?>

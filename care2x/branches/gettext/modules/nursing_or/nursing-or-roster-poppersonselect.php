@@ -23,7 +23,7 @@ $nurses=&$pers_obj->getNursesOfDept($dept_nr);
 
 $wkday=date("w",mktime(0,0,0,$month,$elemid+1,$year));
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
 <TITLE><?php echo $LDInfo4Duty ?></TITLE>

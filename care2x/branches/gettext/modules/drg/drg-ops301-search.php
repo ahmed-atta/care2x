@@ -92,7 +92,7 @@ $img['plus']=createComIcon($root_path,'plus2.gif','0','absmiddle',TRUE);
 $img['reset']=createComIcon($root_path,'button_reset.gif','0','absmiddle',TRUE);
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
  <TITLE><?php echo $LDOps301 ?></TITLE>

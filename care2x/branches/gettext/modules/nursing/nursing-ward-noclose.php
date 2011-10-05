@@ -15,7 +15,7 @@ define('LANG_FILE_MODULAR','nursing.php');
 $local_user='ck_pflege_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 ?>
-<?php html_rtl($lang); ?>
+<html>
 
 <title></title>
 

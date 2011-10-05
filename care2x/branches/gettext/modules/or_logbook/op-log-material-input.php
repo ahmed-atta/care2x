@@ -7,7 +7,7 @@ define('LANG_FILE_MODULAR','or_logbook.php');
 $local_user='ck_op_pflegelogbuch_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <script language="javascript">

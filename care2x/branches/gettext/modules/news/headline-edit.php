@@ -47,7 +47,7 @@ require_once($root_path.'include/helpers/inc_date_format_functions.php');
 if(!($artopt%2)) $alignright=true;
     else $alignright=false;
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 

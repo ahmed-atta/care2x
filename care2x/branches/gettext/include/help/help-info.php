@@ -13,7 +13,7 @@ define('LANG_FILE','help.php');
 define('NO_CHAIN',1);
 require_once('../helpers/inc_front_chain_lang.php');
 ?>
-<?php html_rtl($lang); ?>
+<html>
 
 <head>
 

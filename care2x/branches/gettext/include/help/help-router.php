@@ -3,7 +3,7 @@ error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 // globalize POST, GET, & COOKIE  vars
 require_once('../helpers/inc_environment_global.php');
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title>?</title>

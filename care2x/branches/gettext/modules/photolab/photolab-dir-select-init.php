@@ -17,7 +17,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 $breakfile="javascript:window.parent.location.replace('plugin.php?sid=$sid&lang=$lang')";
 ?>
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
 <script language="javascript">

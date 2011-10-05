@@ -88,7 +88,7 @@ $maxelement=10;
 				else {echo "<p>$sql$LDDbNoRead";}*/
 	 }
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
 <TITLE><?php echo "$title $LDInputWin" ?></TITLE>

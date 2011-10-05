@@ -117,7 +117,7 @@ if(($mode=='send') && isset($_SESSION['current_order']) ){
 if( $ofinal && $sendok )
 	unset($_SESSION['current_order']);
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 

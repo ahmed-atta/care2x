@@ -38,7 +38,7 @@ $forwardfile="op-care-log-getinfo.php?sid=$sid&lang=$lang&winid=$winid&mode=save
 $search=$pers_obj->searchstaffBasicInfo($inputdata);
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <HEAD>
 
 <TITLE><?php echo $title ?></TITLE>

@@ -17,7 +17,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
 $breakfile=$root_path."modules/nursing/nursing-ward-patientdata.php".URL_APPEND."&station=$station&pn=$pn&edit=$edit";
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 <title></title>
 <?php require($root_path.'include/helpers/include_header_css_js.php'); ?>

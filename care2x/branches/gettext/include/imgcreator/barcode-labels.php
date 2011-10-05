@@ -15,7 +15,7 @@ require_once(CARE_BASE .'include/helpers/inc_front_chain_lang.php');
 
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title>Barcode Labels Patient nr. <?php echo $_SESSION['sess_full_en'] ?></title>

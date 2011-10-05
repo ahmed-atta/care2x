@@ -41,7 +41,7 @@ if($c_result=$db->Execute($sql)){
 } // else get default from ini file
 
 ?>
-<?php html_rtl($lang); ?>
+<html>
 <head>
 
 <title></title>
