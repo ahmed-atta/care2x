@@ -210,7 +210,7 @@ $medical_depts=$dept_obj->getAllActiveSort( 'name_formal' );
  # param 3 = display copyright footer
  # param 4 = load standard javascripts
 
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ require_once(CARE_BASE.'/include/helpers/smarty_care.class.php');
  $smarty = new smarty_care('nursing');
 
  if(!isset($edit) || empty($edit)) $smarty->assign('edit',FALSE);
