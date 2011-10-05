@@ -232,7 +232,7 @@ $fr=strtolower(str_replace('.','-',($result['encounter_nr'].'_'.$result['name_la
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
 
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ require_once(CARE_BASE.'/include/helpers/smarty_care.class.php');
  $smarty = new smarty_care('nursing');
 
 # Title in toolbar

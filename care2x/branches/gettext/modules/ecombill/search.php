@@ -133,7 +133,7 @@ if(($mode=='search'||$mode=='paginate')&&!empty($searchkey)){
 	$mode='';
 }
 
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ require_once(CARE_BASE.'/include/helpers/smarty_care.class.php');
  $smarty = new smarty_care('common');
 
 

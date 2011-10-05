@@ -49,7 +49,7 @@ if(is_object($payqueryresult))	$payexists = $payqueryresult->RecordCount();
  /**
  * LOAD Smarty
  */
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ require_once(CARE_BASE.'/include/helpers/smarty_care.class.php');
  $smarty = new smarty_care('common');
  $smarty2 = new smarty_care('common', FALSE);
 # Toolbar title

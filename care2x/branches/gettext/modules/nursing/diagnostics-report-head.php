@@ -29,7 +29,7 @@ $bgc1='#fefefe';
  
  # We set the 3rd parameter to FALSE to prevent initiliazing the copyright footer
 
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ require_once(CARE_BASE.'/include/helpers/smarty_care.class.php');
  $smarty = new smarty_care('nursing',TRUE,FALSE);
 
 # Title in toolbar

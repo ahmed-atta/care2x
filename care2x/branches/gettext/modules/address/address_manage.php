@@ -9,7 +9,7 @@ require_once(CARE_BASE.'/include/helpers/inc_front_chain_lang.php');
 
 $breakfile = CARE_GUI."/main/plugin.php".URL_APPEND;
 
-require_once(CARE_BASE.'/gui/smarty_template/smarty_care.class.php');
+require_once(CARE_BASE.'/include/helpers/smarty_care.class.php');
 $smarty = new smarty_care('system_admin');
 
 // Title in toolbar

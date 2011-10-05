@@ -119,7 +119,7 @@ if($dblink_ok)
 }
 
 
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ require_once(CARE_BASE.'/include/helpers/smarty_care.class.php');
  $smarty = new smarty_care('nursing');
 
  $smarty->assign('sToolbarTitle',"$NOC_title $station");

@@ -7,7 +7,7 @@ require_once('model/class_menu.php');
 
 $menu = new Menu();
 
-require_once(CARE_BASE.'/gui/smarty_template/smarty_care.class.php');
+require_once(CARE_BASE.'/include/helpers/smarty_care.class.php');
 $smarty = new smarty_care('system_admin');
 
 $topmenurow = $menu->getMenuListing();

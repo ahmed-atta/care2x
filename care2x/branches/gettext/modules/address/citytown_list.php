@@ -64,7 +64,7 @@ $pagen->setSortDirection($odir);
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
 
-require_once(CARE_BASE.'/gui/smarty_template/smarty_care.class.php');
+require_once(CARE_BASE.'/include/helpers/smarty_care.class.php');
 $smarty = new smarty_care('system_admin');
 
 $smarty->assign('URL_APPEND',URL_APPEND);

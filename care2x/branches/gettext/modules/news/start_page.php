@@ -62,7 +62,7 @@ require_once('includes/inc_news_display_config.php');
  # Note: it is advisable to load this after the inc_front_chain_lang.php so
  # that the smarty script can use the user configured template theme
 
- require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+ require_once(CARE_BASE.'/include/helpers/smarty_care.class.php');
  $smarty = new smarty_care('common');
 
  # Hide the title bar
@@ -87,7 +87,7 @@ for($j=1;$j<=$news_num_stop;$j++){
 
 	 ob_start();
 		include('includes/inc_news_preview.php');
-		($j==2)? $smarty->display('news/headline_newslist_item2.tpl') : $smarty->display('news/headline_newslist_item.tpl');
+		($j==2)? $smarty->display(__DIR__ . '/view/headline_newslist_item2.tpl') : $smarty->display(__DIR__ . '/view/headline_newslist_item.tpl');
 		$sTemp = ob_get_contents();
 	ob_end_clean();
 	
