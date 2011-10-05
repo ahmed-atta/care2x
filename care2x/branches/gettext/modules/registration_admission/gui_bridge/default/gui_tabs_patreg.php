@@ -5,20 +5,10 @@ if(!isset($notabs)||!$notabs){
 	$smarty->assign('bShowTabs',TRUE);
 
 	#
-	# Starting at version 2.0.2, the button is named "new patient"
-	# It can be reverted to "new person" by defining the ADMISSION_EXT_TABS constant to TRUE
-	# at the /include/inc_enviroment_global.php script
+	# User "register new person" button
 	#
-	if(defined('ADMISSION_EXT_TABS') && ADMISSION_EXT_TABS){
-		#
-		# User "register new person" button
-		#
-		$sNewPatientButton ='register_green.gif';
-		$sNewPatientButtonGray ='register_gray.gif';
-	}else{
-		$sNewPatientButton ='new_patient_green.gif';
-		$sNewPatientButtonGray ='admit-gray.gif';
-	}
+	$sNewPatientButton ='register_green.gif';
+	$sNewPatientButtonGray ='register_gray.gif';
 
 	if($target=="entry") $img=$sNewPatientButton; //echo '<img '.createLDImgSrc($root_path,'register_green.gif','0').' alt="'.$LDAdmit.'">';
 								else{ $img=$sNewPatientButtonGray;}

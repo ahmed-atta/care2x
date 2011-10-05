@@ -3,25 +3,16 @@
 if(!isset($notabs)||!$notabs){
 
 	$smarty->assign('bShowTabs',TRUE);
-
+	if($target=="entry") $img='admit-blue.gif';
+								else{ $img='admit-gray.gif';}
+	$pbBuffer='<a href="admission_start.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDAdmit.'"  title="'.$LDAdmit.'"';
+	if($cfg['dhtml']) $pbBuffer.='class="fadeOut" ';
+	$pbBuffer.=' align=middle></a>';
+	$smarty->assign('pbNew',$pbBuffer);
 	#
-	# Starting at version 2.0.2, the "new patient" button is hidden. It can be shown by defining the ADMISSION_EXT_TABS constant to TRUE
-	# at the /include/inc_enviroment_global.php script
+	# User "register new person" button
 	#
-	if(defined('ADMISSION_EXT_TABS') && ADMISSION_EXT_TABS){
-		if($target=="entry") $img='admit-blue.gif';
-									else{ $img='admit-gray.gif';}
-		$pbBuffer='<a href="admission_start.php'.URL_APPEND.'&target=entry"><img '.createLDImgSrc($root_path,$img,'0').' alt="'.$LDAdmit.'"  title="'.$LDAdmit.'"';
-		if($cfg['dhtml']) $pbBuffer.='class="fadeOut" ';
-		$pbBuffer.=' align=middle></a>';
-		$smarty->assign('pbNew',$pbBuffer);
-		#
-		# User "register new person" button
-		#
-		$sNewPersonButton ='register_gray.gif';
-	}else{
-		$sNewPersonButton ='admit-gray.gif';
-	}
+	$sNewPersonButton ='register_gray.gif';
 
 	
 	if($target=="search") $img='such-b.gif'; //echo '<img '.createLDImgSrc($root_path,'search_green.gif','0').' alt="'.$LDSearch.'">';

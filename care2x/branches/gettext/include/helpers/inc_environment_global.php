@@ -73,12 +73,6 @@ define('NODATE_ORACLE','0001-01-01');
 define('NODATE_DEFAULT','0000-00-00');
 
 #
-# Admission module's extended tabs. Care2x >= 2.0.2
-# Define to TRUE for extended tabs mode
-#
-define('ADMISSION_EXT_TABS',TRUE);
-
-#
 # Template theme for Care2x`s own template object
 # Set the default template theme
 #

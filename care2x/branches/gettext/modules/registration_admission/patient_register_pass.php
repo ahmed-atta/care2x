@@ -86,22 +86,13 @@ echo '
 	<td colspan=3>
 <?php
 
-#
-# Starting at version 2.0.2, the "new person" button is "new patient". 
-# It can be reverted to "new person"  by defining the ADMISSION_EXT_TABS constant to TRUE
-# at the /include/inc_enviroment_global.php script
-#
-	if(defined('ADMISSION_EXT_TABS') && ADMISSION_EXT_TABS){
 
-		#
-		# User "register new person" button
-		#
-		$sNewPatientButton ='register_green.gif';
-		$sNewPatientButtonGray ='register_gray.gif';
-	}else{
-		$sNewPatientButton ='new_patient_green.gif';
-		$sNewPatientButtonGray ='admit-gray.gif';
-	}
+	#
+	# User "register new person" button
+	#
+	$sNewPatientButton ='register_green.gif';
+	$sNewPatientButtonGray ='register_gray.gif';
+
 	//if($target=="entry") echo '<img '.createLDImgSrc($root_path,'register_green.gif','0').' alt="'.$LDNewPerson.'" title="'.$LDNewPerson.'">';
 	//	else{ echo'<a href="patient_register_pass.php?sid='.$sid.'&target=entry&lang='.$lang.'"><img '.createLDImgSrc($root_path,'register_gray.gif','0').' alt="'.$LDNewPerson.'" title="'.$LDNewPerson.'" '; if($cfg['dhtml'])echo'class="fadeOut" '; echo '></a>';}
 	if($target=="entry") echo '<img '.createLDImgSrc($root_path,$sNewPatientButton,'0').' alt="'.$LDNewPerson.'" title="'.$LDNewPerson.'">';

@@ -20,14 +20,6 @@ require_once($root_path.'global_conf/areas_allow.php');
 $allowedarea=&$allow_area['admit'];
 $append=URL_REDIRECT_APPEND.'&from=pass&fwd_nr='.$fwd_nr; 
 
-#
-# Starting at version 2.0.2, the "new patient" button is hidden. It can be shown by defining the ADMISSION_EXT_TABS constant to TRUE
-# at the /include/inc_enviroment_global.php script
-#
-if(!defined('ADMISSION_EXT_TABS') || !ADMISSION_EXT_TABS){
-	if(isset($target) && $target == 'entry') $target = 'search';
-}
-
 switch($target){
 
 	case 'entry':$fileforward='admission_start.php'.$append;
@@ -86,15 +78,9 @@ echo '
 <tr>
 <td colspan=3>
 <?php 
-#
-# Starting at version 2.0.2, the "new patient" button is hidden. It can be shown by defining the ADMISSION_EXT_TABS constant to TRUE
-# at the /include/inc_enviroment_global.php script
-#
-if(defined('ADMISSION_EXT_TABS') && ADMISSION_EXT_TABS){
 
 	if($target=="entry") echo '<img '.createLDImgSrc($root_path,'admit-blue.gif','0').' alt="'.$LDAdmit.'">';
 		else{ echo'<a href="admission_pass.php?sid='.$sid.'&target=entry&lang='.$lang.'"><img '.createLDImgSrc($root_path,'admit-gray.gif','0').' alt="'.$LDAdmit.'"'; if($cfg['dhtml'])echo'class="fadeOut" '; echo '></a>';}
-}
 
 	if($target=="search") echo '<img '.createLDImgSrc($root_path,'such-b.gif','0').' alt="'.$LDSearch.'">';
 		else{ echo '<a href="admission_pass.php?sid='.$sid.'&target=search&lang='.$lang.'"><img '.createLDImgSrc($root_path,'such-gray.gif','0').' alt="'.$LDSearch.'" ';if($cfg['dhtml'])echo'class="fadeOut" '; echo '></a>';}
