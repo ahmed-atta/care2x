@@ -10,7 +10,7 @@ $bShowThisPage = FALSE;
 #
 if(!isset($smarty) || !is_object($smarty)){
 	$bShowThisPage = TRUE;
-	require_once(CARE_BASE .'gui/smarty_template/smarty_care.class.php');
+	require_once(CARE_BASE.'/include/helpers/smarty_care.class.php');
 	$smarty = new smarty_care('common',FALSE);
 }
 
@@ -98,5 +98,4 @@ $smarty->assign('sCancelButton','<a href="'.$breakfile.'" class="btn"><img '.cre
 #
 # Display this page if necessary
 #
-if($bShowThisPage) $smarty->display('main/passcheck_entry_mask.tpl');
-?>
+if($bShowThisPage) $smarty->display(CARE_BASE . 'main/view/passcheck_entry_mask.tpl');

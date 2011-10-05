@@ -152,7 +152,7 @@ $smarty->assign('sSubmitFormButton','<button type="submit"  class="btn primary">
 	<input type="hidden" name="lang" value="'.$lang.'">
 	<input type="hidden" name="mode" value="save">');		 
  
- $smarty->assign('sMainBlockIncludeFile','main/login_config.tpl');
+ $smarty->assign('sMainBlockIncludeFile',__DIR__ . 'view/login_config.tpl');
 	 
 #
 # Prepare the hidden inputs
