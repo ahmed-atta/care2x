@@ -17,7 +17,7 @@ require_once(CARE_BASE.'include/helpers/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
 require(CARE_BASE.'include/helpers/inc_2level_reset.php');
 
-require_once(CARE_BASE.'gui/smarty_template/smarty_care.class.php');
+require_once(CARE_BASE.'include/helpers/smarty_care.class.php');
 $smarty = new smarty_care('common');
 
 if(isset($_SESSION['sess_staff_nr'])&&$_SESSION['sess_user_origin']=='staff_admin'){
@@ -76,7 +76,6 @@ function pruf(d)
 
 
 <?php
-require(CARE_BASE.'include/helpers/inc_js_gethelp.php');
 require(CARE_BASE.'include/helpers/include_header_css_js.php');
 ?>
 
