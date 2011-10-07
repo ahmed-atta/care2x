@@ -21,7 +21,7 @@ require_once(CARE_BASE.'include/helpers/inc_front_chain_lang.php');
 * We check again the language variable lang. If table file not available use default (lang = "en")
 */
 
-if(!isset($lang)||empty($lang))  include(CARE_BASE.'chklang.php');
+if(!isset($lang)||empty($lang))  include(CARE_BASE.'/include/helpers/chklang.php');
 
 /* Load the language table */
 if(file_exists(CARE_BASE.'language/'.$lang.'/lang_'.$lang.'_indexframe.php')){

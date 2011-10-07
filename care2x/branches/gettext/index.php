@@ -170,10 +170,6 @@ $glob_cfg=new GlobalConfig($GLOBALCONFIG);
 
 # Get the global config for language usage
 $glob_cfg->getConfig('language_%');
-# Get the global config for frames 
-$glob_cfg->getConfig('gui_frame_left_nav_width');
-# Get the global config for lev nav border 
-$glob_cfg->getConfig('gui_frame_left_nav_border');
 
 
 $savelang=0;
@@ -186,7 +182,7 @@ if(!$GLOBALCONFIG['language_single']) {
 	}else{
 		//echo $lang=$USERCONFIG['lang'];
         if($USERCONFIG['lang']) $lang=$USERCONFIG['lang'];
-			    else  include('chklang.php');
+			    else  include('/include/helpers/chklang.php');
 	 } 
 }else{
 
@@ -312,5 +308,3 @@ $config_type = 'use_old_gui_style';
 $smarty->assign('sContentsFrameSource',"modules/news/start_page.php?lang=$lang&sid=$sid\"");
 
 $smarty->display(CARE_BASE . 'main/view/noframe.tpl');
-
-?>
