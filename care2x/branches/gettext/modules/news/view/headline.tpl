@@ -5,7 +5,7 @@
 	<tr>
 		<td VALIGN="top" width="100%">
 
-			{{include file="news/headline_newslist.tpl"}}
+			{{include file="headline_newslist.tpl"}}
 
 		</td>
 		<!--      Vertical spacer column      -->

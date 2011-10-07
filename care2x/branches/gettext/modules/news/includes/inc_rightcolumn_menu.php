@@ -33,7 +33,7 @@ $url_jscredits="javascript:openCreditsWindow()";
 $TP_com_img_path=CARE_BASE .'gui/img/common';
 
 # Load the template
-$tp=$TP_obj->load('tp_rightcolumn_menu.htm');
+$tp=$TP_obj->load(__DIR__ . 'template/tp_rightcolumn_menu.htm');
 # Output display
 eval ("echo $tp;");
 ?>
