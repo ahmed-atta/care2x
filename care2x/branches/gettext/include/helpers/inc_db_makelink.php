@@ -9,7 +9,7 @@
 if (stristr($PHP_SELF,'inc_db_makelink.php')) die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
-if(!isset($lang)) include(CARE_BASE.'chklang.php');
+if(!isset($lang)) include(CARE_BASE.'/include/helpers/chklang.php');
 //if(!isset($dbtype) || empty($dbtype)) $dbtype='mysql';
 
 /*********************************************************

@@ -28,7 +28,7 @@ function getLang($chk_file) {
    
    if(!isset($lang)||empty($lang))   {
 	  $ck_lang_buffer='ck_lang'.$sid;
-      if(!isset($_COOKIE[$ck_lang_buffer])||empty($_COOKIE[$ck_lang_buffer])) include(CARE_BASE .'chklang.php');
+      if(!isset($_COOKIE[$ck_lang_buffer])||empty($_COOKIE[$ck_lang_buffer])) include(CARE_BASE .'/include/helpers/chklang.php');
          else $lang=$_COOKIE[$ck_lang_buffer];
    }
    
@@ -42,7 +42,7 @@ function getLangModular($chk_file) {
    if(!isset($lang)||empty($lang))   {
 	  $ck_lang_buffer='ck_lang'.$sid;
       if(!isset($_COOKIE[$ck_lang_buffer])||empty($_COOKIE[$ck_lang_buffer])) 
-      	include(CARE_BASE .'chklang.php');
+      	include(CARE_BASE .'/include/helpers/chklang.php');
       else 
       	$lang=$_COOKIE[$ck_lang_buffer];
    }
