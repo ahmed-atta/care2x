@@ -1,7 +1,7 @@
 <table width=100%>
 	<tr>
 		<td>
-			{{include file="news/headline_titleblock.tpl"}}
+			{{include file="headline_titleblock.tpl"}}
 		</td>
 	</tr>
 

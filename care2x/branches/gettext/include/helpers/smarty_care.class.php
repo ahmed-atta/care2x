@@ -53,7 +53,7 @@ class smarty_care extends Smarty {
 		$this->assign('root_path',CARE_BASE);
 		
 		# Path to the smarty care templates and classes
-		$this->sDocRoot = CARE_BASE.'gui/smarty_template';
+		$this->sDocRoot = CARE_BASE;
 		# Path to the template cache
 		$this->templateCache = CARE_BASE.'cache/templates_c';
 
@@ -94,14 +94,11 @@ class smarty_care extends Smarty {
 
 		# Another check if the working directory is really inside the template theme.
 		# If not, use default template theme.
-
-		if(file_exists($this->sDocRoot."/templates/$this->templatedir/$dirname/.")){
-			$this->template_dir = $this->sDocRoot."/templates/$this->templatedir";
+		$module = LANG_FILE_MODULAR != '' ? "modules/" : "";
+		if( file_exists( $this->sDocRoot. $module . MODULE . "/view/")){
+			$this->template_dir = $this->sDocRoot. $module . MODULE . "/view/";
 			$this->compile_dir = $this->templateCache."/$this->templatedir";
-		}else{
-			$this->template_dir = $this->sDocRoot."/templates/$this->default_template";
-			$this->compile_dir = $this->templateCache."/$this->default_template";
-		}
+		} 
 
 		$this->config_dir = $this->sDocRoot.'/configs';
 		$this->cache_dir = $this->compile_dir;//.'/cache';
