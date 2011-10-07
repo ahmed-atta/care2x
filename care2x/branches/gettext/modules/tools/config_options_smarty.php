@@ -104,7 +104,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/c
 
 $filepath=$root_path.'gui/smarty_template/templates/';
 
-$handle=opendir($filepath.'.');  // Modify this path if you have placed the mascot directories somewhere else
+$handle=opendir($filepath.'.');  // Modify this path if you have placed the  directories somewhere else
 $dirs=array();
 while (false!==($theme = readdir($handle))) { 
     if ($theme != '.' && $theme != '..') {
