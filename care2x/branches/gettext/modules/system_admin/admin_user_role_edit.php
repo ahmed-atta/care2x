@@ -170,7 +170,6 @@ if (($mode != '' || $error) && $mode != 'edit') {
 	?>
 <table border=0>
 	<tr>
-		<td><img <?php echo createMascot ( $root_path, 'mascot1_r.gif', '0', 'bottom' ) ?> align="absmiddle"></td>
 		<td class="warnprompt">
 			<?php
 			if ($error)

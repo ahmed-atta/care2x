@@ -309,7 +309,6 @@ if($mode=='show'){
 ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot2_r.gif','0','absmiddle') ?>></td>
     <td><font class="warnprompt">
 	<?php 
 		echo $LDNoImageSaved;

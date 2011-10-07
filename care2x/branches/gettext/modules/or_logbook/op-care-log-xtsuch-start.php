@@ -443,9 +443,6 @@ echo '
 				<td valign="middle" class="prompt">
 				'.$LDPatientsFound.'
 				</td>
-				<td>
-					<img '.createMascot($root_path,'mascot1_l.gif','0','middle').'>
-				</td>
 				</tr>';
 	echo '
 				<tr>

@@ -684,9 +684,6 @@ if(($mode=='search'||$mode=='paginate')&&!$datafound){
 			
 				<table cellpadding=0 cellspacing=0 border=0>
 				<tr>
-				<td>	
-			<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?>>
-			</td>
 				<td valign=top>
 				<table cellpadding=1 cellspacing=0 border=0 class="frame">
 				

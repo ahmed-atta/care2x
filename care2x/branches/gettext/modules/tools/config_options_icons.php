@@ -83,7 +83,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/c
 
 <form method="post">
 <?php if (isset($saved)&&$saved) { 
-	echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>';	
+	echo '';	
 ?>
 <div class="prompt"><?php echo $LDChangeSaved ?></div><br>
 <?php } ?>

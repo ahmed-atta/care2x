@@ -34,7 +34,6 @@ div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
   <tr>
     <td valign="bottom">{{$imgAngledown}}</td>
     <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b>{{$LDPlsSelectPatientFirst}}</b></font></td>
-    <td>{{$imgMascot}}</td>
   </tr>
 </table>
 	{{/if}}

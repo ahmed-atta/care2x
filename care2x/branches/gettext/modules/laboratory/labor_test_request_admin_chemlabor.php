@@ -369,9 +369,6 @@ if ($batchrows) {
 <?php
 } else {
 	?>
-<img
-	<?php
-	echo createMascot ( $root_path, 'mascot1_r.gif', '0', 'absmiddle' )?>>
 <font size=3 face="verdana,arial" color="#990000"><b><?php
 	echo $LDNoPendingRequest?></b></font>
 <p><a href="<?php

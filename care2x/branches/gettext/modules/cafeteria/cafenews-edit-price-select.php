@@ -88,7 +88,6 @@ function chkRadioButton(e){
 <form name="selectform" action="cafenews-edit-price-select.php" <?php if($rows) echo 'onSubmit="return chkForm(this)"'; ?>>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
     <td colspan=2><FONT  SIZE=4 COLOR="#000066">
 <?php if ($rows) : ?>
 			<?php echo $LDMarkGroup ?>

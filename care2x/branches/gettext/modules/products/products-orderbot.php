@@ -122,7 +122,7 @@ if ($rows) {
     		</td></tr></table>
     		</center>';
     } else {
-        echo '<center><img ' . createMascot($root_path, 'mascot1_r.gif', '0', 'middle') . '>
+        echo '<center>
         			<font face="Verdana, Arial" size=3 color=#ff0000>
         			&nbsp;<b>' . $LDOrderArrived . '</b><p>
         			<form name=ack>

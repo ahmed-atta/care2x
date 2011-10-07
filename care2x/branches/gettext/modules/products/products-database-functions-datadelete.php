@@ -103,7 +103,7 @@ if(!$sure)
 	 echo '
 	 	<table border=0>
      <tr>
-       <td><img '.createMascot($root_path,'mascot1_r.gif','0','middle').'></td>
+       <td></td>
        <td><FONT face="Verdana,Helvetica,Arial" size=3  color="#800000">
 		'.$LDConfirmDelete.'</font><br>
 		<font size=2>'.$LDAlertDelete.'</font><p>
@@ -114,7 +114,7 @@ if(!$sure)
 else
 {
 	if(!$deleteok) echo'
-			<img '.createMascot($root_path,'mascot1_r.gif','0','middle').'><FONT face="Verdana,Helvetica,Arial" size=3  color="#800000">
+			<FONT face="Verdana,Helvetica,Arial" size=3  color="#800000">
 		'.$LDNoDelete.'</font><p>';
 }
 

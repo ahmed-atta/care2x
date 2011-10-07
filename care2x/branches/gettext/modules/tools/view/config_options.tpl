@@ -12,10 +12,6 @@
       <td><font size=4>{{$LDColorOptExt}}</font><br><font size=2>{{$LDColorOptExtTxt}}</font></td>
     </tr>
     <tr>
-      <td>&nbsp;&nbsp;{{$LDMascotOptImg}}</td>
-      <td><font size=4>{{$LDMascotOpt}}</font><br><font size=2>{{$LDMascotOptTxt}}</font></td>
-    </tr>
-    <tr>
       <td>&nbsp;&nbsp;{{$LDMainMenuTreeImg}}</td>
       <td><font size=4>{{$LDMainMenuTree}}</font><br><font size=2>{{$LDMainMenuTreeTxt}}</font></td>
     </tr>

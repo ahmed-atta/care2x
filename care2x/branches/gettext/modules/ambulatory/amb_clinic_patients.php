@@ -413,7 +413,6 @@ if($rows){
 
 	# Prompt no outpatients available
 	$smarty->assign('sWarningPrompt','
-			<div class="warnprompt"><p><ul><img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>
 			'.str_replace("~station~",strtoupper($station),$LDNoOutpatients).'</b></font><br><img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','',TRUE).'>
 			<a href="'.$root_path.'modules/appointment_scheduler/appt_main_pass.php'.URL_APPEND.'&dept_nr='.$dept_nr.'&dept_name='.$dept.'">'.$LDGoToAppointments.'</a><p>
 			</ul></div>');

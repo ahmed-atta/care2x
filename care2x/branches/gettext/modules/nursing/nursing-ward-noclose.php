@@ -29,7 +29,7 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
  <table border=0>
    <tr>
-     <td><img <?php echo createMascot($root_path,'mascot1_r.gif') ?>></td>
+     
      <td><font size=3 face="verdana,arial" color="#990000"><b>
 	 <?php 
 	 	echo str_replace('~str~',strtoupper($ward_id),$LDWardNoClose);

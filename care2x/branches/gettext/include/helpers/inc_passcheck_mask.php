@@ -36,11 +36,8 @@ if (isset($pass)&&($pass=='check')&&($passtag)){
 
 	$smarty->assign('bShowErrorPrompt',TRUE);
 
-	$smarty->assign('sMascotImg','<img '.createMascot(CARE_GUI  ,'mascot1_r.gif','0').'>');
 	$smarty->assign('sErrorMsg',$err_msg);
 }
-
-if(!$passtag) $smarty->assign('sMascotColumn','<td><img '.createMascot(CARE_GUI  ,'mascot3_r.gif','0').'></td>');
 
 #
 # Prepare the auth entry form elements

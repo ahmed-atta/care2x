@@ -6,7 +6,6 @@
 
 <table>
 	<tr>
-		<td align=right><img {{$gifMascot}} align="absmiddle"></td>
 		<td>
 			<font class="warnprompt">{{$sPromptText}}</font>
 			<br>

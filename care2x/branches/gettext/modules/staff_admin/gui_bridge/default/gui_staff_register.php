@@ -121,7 +121,7 @@ if(!$pid&&!$staff_nr){
 			<tr>
 				<td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_l.gif','0') ?>></td>
 				<td class="prompt"><?php echo $LDPlsFindPersonFirst ?></td>
-				<td><img <?php echo createMascot($root_path,'mascot1_l.gif','0','absmiddle') ?>></td>
+				
 			</tr>
 		</table>
 <?php
@@ -167,7 +167,7 @@ if($error)
 <tr>
 <td colspan=4><center>
 <font class="warnprompt">
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle">
+
 	<?php echo $LDDataNoSaved; ?>
 </center>
 </td>

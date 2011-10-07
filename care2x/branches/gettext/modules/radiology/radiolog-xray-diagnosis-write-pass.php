@@ -65,13 +65,6 @@ echo '</STRONG></FONT>';
 
 <table  border=0 cellpadding=0 cellspacing=0>
 <tr>
-<?php if(!$passtag) echo'
-<td>
-
-<img '.createMascot($root_path,'mascot3_r.gif','0').'>
-</td>
-';
-?>
 <td bgcolor="#999999" valign=top>
 
 <table cellpadding=1 bgcolor=#999999 cellspacing=0>

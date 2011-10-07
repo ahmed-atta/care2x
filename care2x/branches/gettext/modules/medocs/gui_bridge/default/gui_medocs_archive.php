@@ -79,7 +79,7 @@ require('./gui_bridge/default/gui_tabs_medocs.php');
 ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
+    
     <td><FONT  SIZE=3 FACE="verdana,Arial" color=#800000>
 <b><?php if($rows) echo str_replace("~nr~",$rows,$LDFoundData); else echo str_replace("~nr~",$rows,$LDSearchFoundAdmit); ?></b></font></td>
   </tr>

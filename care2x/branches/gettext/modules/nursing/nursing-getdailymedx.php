@@ -188,7 +188,7 @@ echo $LDFullDayName [ $dyidx ] . ' (' . formatDate2Local ( date ( 'Y-m-d', mktim
 		} else {
 			echo '
 		 		<tr>
-	   				<td  colspan="3" bgcolor="#ffffff"><img ' . createMascot ( $root_path, 'mascot1_r.gif', '0', 'absmiddle' ) . '>
+	   				<td  colspan="3" bgcolor="#ffffff">
 		        		<font face="Verdana, Arial" size=4 color="#800000">' . $LDNoMedicineYet . '&nbsp;</font>
 	        		</td>
   				</tr>' ;

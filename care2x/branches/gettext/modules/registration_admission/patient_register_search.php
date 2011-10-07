@@ -83,7 +83,7 @@ if(isset($origin) && $origin=='pass')
   <tr>
     <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_l.gif','0') ?>></td>
     <td class="prompt"><?php echo $LDPlsSelectPatientFirst ?></td>
-    <td><img <?php echo createMascot($root_path,'mascot1_l.gif','0','absmiddle') ?>></td>
+    
   </tr>
 </table>
 <?php 

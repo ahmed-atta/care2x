@@ -228,7 +228,7 @@ ob_start();
  if(isset($inputerror)&&$inputerror){
  	echo "$error_msg<p>";
  }elseif(isset($save_ok)&&$save_ok){
- 	 echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>'.$LDDataSaved.'<p>';
+ 	 echo ''.$LDDataSaved.'<p>';
 }
 
 echo $LDEnterInfo;

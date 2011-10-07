@@ -147,7 +147,7 @@ require($root_path.'include/helpers/include_header_css_js.php');
 </FONT>
 <?php if (($error)&&($mode=='save'))
 {
-echo "<img ".createMascot($root_path,'mascot1_r.gif','0','absmiddle')."><FONT  COLOR=maroon  SIZE=+2  FACE=Arial> <b>$LDNewPhoneEntry</b><p>";
+echo "<FONT  COLOR=maroon  SIZE=+2  FACE=Arial> <b>$LDNewPhoneEntry</b><p>";
 }
 ?>
 <form method="post" action="phone_edit.php" enctype="" name="entryform">

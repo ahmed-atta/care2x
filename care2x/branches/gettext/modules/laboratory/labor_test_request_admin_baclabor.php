@@ -323,7 +323,7 @@ require('includes/inc_test_findings_form_baclabor.php');
 else
 {
 ?>
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>><font size=3 face="verdana,arial" color="#990000"><b><?php echo $LDNoPendingRequest ?></b></font>
+<font size=3 face="verdana,arial" color="#990000"><b><?php echo $LDNoPendingRequest ?></b></font>
 <p>
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
 <?php

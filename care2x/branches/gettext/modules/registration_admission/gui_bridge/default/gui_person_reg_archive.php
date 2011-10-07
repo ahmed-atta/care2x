@@ -50,7 +50,7 @@ if(isset($mode)&&($mode=='search'||$mode=='paginate')){
 ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
+    
     <td class="prompt">
 	<b>
 	<?php if($rows) echo str_replace("~nr~",$totalcount,$LDFoundData).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.'; else echo str_replace('~nr~','0',$LDSearchFound); ?></b></td>

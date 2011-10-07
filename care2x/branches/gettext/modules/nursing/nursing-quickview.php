@@ -276,7 +276,6 @@ $smarty->assign('LDBack', $LDBack);
  */
  $smarty->assign('is_today',$is_today);
  $smarty->assign('gifBul_arrowgrnlrg',createComIcon($root_path,'bul_arrowgrnlrg.gif','0','absmiddle') );  
- $smarty->assign('gifMascot1_r',createMascot($root_path,'mascot1_r.gif','0','absmiddle') );
  $smarty->assign('LDNoOcc',$LDNoOcc); 
  $smarty->assign('LDClk2Archive',$LDClk2Archive);
 

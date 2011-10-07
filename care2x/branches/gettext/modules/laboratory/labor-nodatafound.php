@@ -30,7 +30,6 @@ if(isset($from)&&$from=='input'){
 <P><br>
 <table border=0>
   <tr>
-    <td valign="top"><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="left"></td>
     <td><font face=verdana,arial size=5 color=maroon><?php echo "$LDNoLabReport <br>".ucfirst($ln).", ".ucfirst($fn)." ".$bd ?>.<br> (<?php echo "$LDCaseNr $encounter_nr" ?>)
 			<p><br><a href="<?php echo $backfile ?>">
 			<img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>

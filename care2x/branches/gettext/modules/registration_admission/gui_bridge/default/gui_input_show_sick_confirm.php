@@ -138,7 +138,7 @@ eval("echo $TP_sickform;");
 ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
+    <td></td>
     <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b>
 	<?php 
 		echo $norecordyet;

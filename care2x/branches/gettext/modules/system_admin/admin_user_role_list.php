@@ -69,7 +69,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/e
 
  ob_start();
 
-if ($remark=='itemdelete') echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'><FONT class="warnprompt"> '.$LDAccessDeleted.'<br>'.$LDFfActualAccess.' </font><p>';
+if ($remark=='itemdelete') echo '<FONT class="warnprompt"> '.$LDAccessDeleted.'<br>'.$LDFfActualAccess.' </font><p>';
 
         echo '
 				<table border=0 class="frame" cellpadding=0 cellspacing=0>

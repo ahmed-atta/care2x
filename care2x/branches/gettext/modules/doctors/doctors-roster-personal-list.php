@@ -270,7 +270,6 @@ if(is_object($doctors)&&$doctors->RecordCount()){
  echo '
  	<table border=0>
     <tr>
-      <td><img '.createMascot($root_path,'mascot1_r.gif','0','left').'  ></td>
       <td><font face="verdana,arial" size=3><b>'.$LDNoPersonList.'</b></td>
     </tr>
   </table>';

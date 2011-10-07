@@ -67,7 +67,6 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/q
 
  # Assign prompt if saved
  if(isset($save_ok)&&$save_ok){
-	$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>');
 	$smarty->assign('LDDataSaved',$LDDataSaved);
   }
 

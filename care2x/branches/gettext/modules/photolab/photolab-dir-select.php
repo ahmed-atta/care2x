@@ -144,7 +144,7 @@ ob_start();
 <p>
 <font size=1 color="#cc0000">
 <?php if($nopatdata) echo '
-	<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').'> <font size=2>'.$LDAlertNoPatientData.'<br></font>';
+	 <font size=2>'.$LDAlertNoPatientData.'<br></font>';
 //gjergji : new calendar
 require_once ('../../js/jscalendar/calendar.php');
 $calendar = new DHTML_Calendar('../../js/jscalendar/', $lang, 'calendar-system', true);

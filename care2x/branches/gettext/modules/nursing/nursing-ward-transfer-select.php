@@ -91,7 +91,7 @@ ob_start();
 ?>
 <table border=0>
   <tr>
-    <td><img <?php 	echo createMascot($root_path,'mascot2_r.gif','0'); ?>></td>
+    
     <td class="prompt"><?php 	echo $LDWhereToTransfer; ?></td>
   </tr>
 </table>

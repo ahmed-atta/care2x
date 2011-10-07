@@ -12,7 +12,7 @@ if (stristr($PHP_SELF,'inc_mozillapatch_redirect_supplier.php')) die('<meta http
 
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
+    
 
 	<td colspan=4><center>
 	<font face=arial color="#990000" size=4>

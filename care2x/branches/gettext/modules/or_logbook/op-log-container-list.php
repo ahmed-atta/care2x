@@ -319,7 +319,7 @@ else
 		echo '
 			<font size=2 face="verdana,arial">
  			<font size=4 color="#009900">
- 			<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'> <b>'.$LDPlsClkArticle.'</b></font> 
+ 			 <b>'.$LDPlsClkArticle.'</b></font> 
 			<br>';
 		echo'
 			<table border=0 cellpadding=0 cellspacing=0 width="100%">
@@ -357,7 +357,7 @@ else
  		echo '<center>
  			<font size=2 face="verdana,arial">
  			<font size=4 color="#cc0000">
- 			<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'> <b>'.$LDArticleNotFound.'</b><p></font> '.$LDNoArticleTxt.'<p>';
+ 			 <b>'.$LDArticleNotFound.'</b><p></font> '.$LDNoArticleTxt.'<p>';
 			$databuf="$sid&lang=$lang&op_nr=$op_nr&dept_nr=$dept_nr&saal=$saal&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&artikelnum=$material_nr";
 		echo '
 			<a href="log-container-entry-manual.php?sid='.$databuf.'"><img '.createComIcon($root_path,'accessrights.gif','0','absmiddle').'> 

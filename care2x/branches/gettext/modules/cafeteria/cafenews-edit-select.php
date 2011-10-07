@@ -54,7 +54,6 @@ function chkForm(d)
 <form name="selectform" action="cafenews-edit-select.php" onSubmit="return chkForm(this)" method="post">
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
     <td colspan=2><FONT FACE="verdana,Arial"><FONT  SIZE=5 COLOR="#000066" FACE="verdana,Arial"><?php echo $LDWhatToDo ?></font><p>
 			<font size=2><?php echo $LDPlsMarkSelection ?></td>
   </tr>

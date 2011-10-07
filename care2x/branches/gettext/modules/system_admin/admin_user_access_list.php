@@ -89,7 +89,7 @@ ob_start();
 <script type="text/javascript" src="../../js/scriptaculous/src/builder.js"></script>
 <?php
 
-if ($remark=='itemdelete') echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'><font class="warnprompt"> '.$LDAccessDeleted.'<br>'.$LDFfActualAccess.' </font><p>';
+if ($remark=='itemdelete') echo '<font class="warnprompt"> '.$LDAccessDeleted.'<br>'.$LDFfActualAccess.' </font><p>';
 
         echo '
 				<table border=0 class="frame" cellpadding=0 cellspacing=0>

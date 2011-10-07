@@ -67,7 +67,7 @@ if(empty($is_discharged)){
 ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
+    <td></td>
     <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b><?php echo $LDPersonCurrentlyEmployed; ?></b></font></td>
 <!--     <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_r.gif','0') ?>></td>
  -->  </tr>

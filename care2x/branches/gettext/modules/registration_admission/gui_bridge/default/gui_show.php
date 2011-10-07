@@ -181,7 +181,6 @@ if($mode=='show'){
 
 		$smarty->assign('bShowNoRecord',TRUE);
 		
-		$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>');
 		$smarty->assign('norecordyet',$norecordyet);
 
 		if($parent_admit && !$is_discharged && $thisfile!='show_diagnostics_result.php'){

@@ -205,7 +205,6 @@ if($appt_obj->count){
 	$smarty->assign('sApptList',$sTemp);
 }else{
 	$smarty->assign('bShowPrompt',TRUE);
-	$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>');
 	$smarty->assign('sPrompt',((date('Y-m-d'))==$currYear.'-'.$currMonth.'-'.$currDay) ? $LDNoPendingApptToday : $LDNoPendingApptThisDay);
 }
 

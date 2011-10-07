@@ -272,7 +272,7 @@ if($rows){
 ?>
 	<table border=0>
 		<tr>
-			<td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
+			
 			<td class="prompt">
 				<?php echo "$LDSearchKeyword <font color=#0000ff>\"$searchkey\"</font> ".str_replace("~rows~",$totalcount,$LDWasFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.'; ?> <br>
 				<?php echo $LDPlsClk ?>

@@ -59,7 +59,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/o
 ?>
 <ul>
 <?php if($rows) : ?>
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><font class="prompt">
+<font class="prompt">
 <b><?php echo str_replace("~station~",strtoupper($station),$LDStationExists) ?></b></font><p>
 <?php endif ?>
 <?php echo $LDEnterAllFields ?>

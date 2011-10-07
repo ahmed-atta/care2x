@@ -101,7 +101,6 @@ ob_start();
 
 <ul>
 <?php if($rows) { ?>
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?>
 		align="absmiddle">
 	<font face="Verdana, Arial" size=3 color="#880000"> <b><?php echo str_replace("~station~",strtoupper($station),$LDStationExists) ?></b></font>
 	<p>

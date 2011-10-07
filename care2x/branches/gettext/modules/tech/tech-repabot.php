@@ -113,8 +113,7 @@ if($rows)
 	}
 	else 
 	{
- 	echo '<center><img '.createMascot($root_path,'mascot2_r.gif','0','middle').'>
-			<font face="Verdana, Arial" size=3 color=#ff0000>
+ 	echo '<center><font face="Verdana, Arial" size=3 color=#ff0000>
 			&nbsp;<b>'.$LDReportArrived.'</b><p>
 			<form name=ack>
 			<input type="hidden" name="showlist" value="1">

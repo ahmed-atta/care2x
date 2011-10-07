@@ -495,7 +495,7 @@ echo '<ul><form name="mailform" action="'.$thisfile.'" method="post" onSubmit="r
 	if(($mode=='sendmail')&&($sendok)) 
 	{
 
-		echo '<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').'> <font class="prompt">';
+		echo ' <font class="prompt">';
 		if($folder=='drafts') echo $LDEmail2Drafts;
 		 else echo $LDEmailSent;
 		 echo '</font>';
@@ -733,7 +733,7 @@ if($maxrow)
 } // end of if maxrow
 else 
 {
-	echo '<img '.createMascot($root_path,'mascot1_r.gif','0','middle').'>
+	echo '
 			<FONT class="prompt">';
 	switch($folder)
 	{
@@ -751,7 +751,7 @@ else
   ';
 }elseif($mode==''){
 	echo'<center>
-	<img '.createMascot($root_path,'mascot1_r.gif','0','middle').'> 
+	 
 	<FONT face="Verdana,Helvetica,Arial" size=3 color="#800000">
 	'.$LDWelcome.' '.$usr.'</font><p>
 	<FONT face="Verdana,Helvetica,Arial" size=2 > 

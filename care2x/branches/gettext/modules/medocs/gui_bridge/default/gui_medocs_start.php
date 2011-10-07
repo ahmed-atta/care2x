@@ -28,10 +28,6 @@ $smarty->assign('LDBack', $LDBack);
 	$onLoadJs='onLoad="if(document.searchform.searchkey.focus) document.searchform.searchkey.focus();"';
 }
 
- if(defined('MASCOT_SHOW') && MASCOT_SHOW==1){
-	$onLoadJs='onLoad="if (window.focus) window.focus();"';
-}
-
  # Onload Javascript code
  $smarty->assign('sOnLoadJs',$onLoadJs);
 
@@ -106,7 +102,7 @@ $entry_body_bgcolor='#ffffff';
   <tr>
     <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_l.gif','0') ?>></td>
     <td><font color="#000099" SIZE=3  FACE="verdana,Arial"> <b><?php echo $LDPlsSelectPatientFirst ?></b></font></td>
-    <td><img <?php echo createMascot($root_path,'mascot1_l.gif','0','absmiddle') ?>></td>
+    
   </tr>
 </table>
 

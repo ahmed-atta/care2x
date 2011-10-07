@@ -489,7 +489,6 @@ if(!isset($pid) || !$pid){
 	$smarty->assign('sSearchPromptImg','<img '.createComIcon($root_path,'angle_down_l.gif','0','',TRUE).'>');
 
 	$smarty->assign('LDPlsSelectPatientFirst',$LDPlsSelectPatientFirst);
-	$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_l.gif','0','absmiddle').'>');
 
 	# Start buffering the searchmask
 
@@ -513,7 +512,7 @@ if(!isset($pid) || !$pid){
 
 	if($error){
 		$smarty->assign('error',TRUE);
-		$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
+		
 
 		if ($errornum>1) $smarty->assign('LDError',$LDErrorS);
 		else 	$smarty->assign('LDError',$LDError);

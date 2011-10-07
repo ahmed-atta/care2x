@@ -266,8 +266,6 @@ $sTemp = ob_get_contents ();
 ob_end_clean ();
 $smarty->assign ( 'JavaScript', $sTemp );
 
-$smarty->assign ( 'gifMascot', '<img ' . createMascot ( $root_path, 'mascot1_r.gif', '0', 'absmiddle' ) . '>' );
-
 if ($status == "draft")
 	$smarty->assign ( 'sAfterSavePrompt', $LDFormSaved [$saved] );
 else

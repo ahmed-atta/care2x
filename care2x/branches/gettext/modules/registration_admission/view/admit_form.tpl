@@ -13,7 +13,7 @@
 				<tr>
 					<td colspan=4 class="warnprompt">
 						<center>
-						{{$sMascotImg}}
+						
 						{{$LDError}}
 						</center>
 					</td>
