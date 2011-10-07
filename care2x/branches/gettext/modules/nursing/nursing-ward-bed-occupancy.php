@@ -290,7 +290,7 @@ if($mode=='search'){
 						window.resizeTo(700,600);</script>";
 					
 	} // end of if($linecount)
-	 	else  echo "<hr><ul><img ".createMascot($root_path,'mascot1_r.gif','0','absmiddle')."><font face=arial size=2>".$LDNoFound."<br>\r\n";
+	 	else  echo "<hr><ul><font face=arial size=2>".$LDNoFound."<br>\r\n";
 }
 
 ?>

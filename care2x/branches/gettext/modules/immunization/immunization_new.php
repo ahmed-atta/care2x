@@ -139,7 +139,6 @@ if(!empty($mode)){
 ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?>></td>
     <td valign="bottom"><br><font face="Verdana, Arial" size=3 color="#880000"><b>
 <?php 
 	switch($mode)

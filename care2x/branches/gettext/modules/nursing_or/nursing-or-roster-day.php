@@ -239,7 +239,7 @@ echo ucfirst($person2['name_last']).', '.ucfirst($person2['name_first']);
  ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
+    
     <td><font face="Verdana, Arial" size=3 color="#cc0000"><b><?php echo $LDNoEntryFound ?></b></font></td>
   </tr>
 </table>

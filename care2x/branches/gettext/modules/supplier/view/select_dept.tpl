@@ -4,7 +4,7 @@
 <table border=0>
 	<tr>
 		<td>
-			{{$sMascotImg}}
+			
 		</td>
 
 		<td colspan=4 class="prompt">

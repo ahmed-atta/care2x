@@ -662,7 +662,7 @@ if($ward_ok){
 
 }else{
 
-	$smarty->assign('sNewWardLink','<ul><div class="prompt"><img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>
+	$smarty->assign('sNewWardLink','<ul><div class="prompt">
 			'.str_replace("~station~",strtoupper($station),$LDNoInit).'</b></font><br>
 			<a href="nursing-ward-new.php'.URL_APPEND.'&station='.$station.'&edit='.$edit.'">'.$LDIfInit.' <img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','',TRUE).'></a><p>
 			</div></ul>');

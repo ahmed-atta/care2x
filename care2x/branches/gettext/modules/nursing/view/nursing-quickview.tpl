@@ -61,7 +61,6 @@ var urlholder;
 
 {{if !$iWardCount}}
 	<p class="warnprompt">
-	<img {{$gifMascot1_r}} alt="">
     <b>{{$LDNoOcc}}</b>
 	</p>
 	

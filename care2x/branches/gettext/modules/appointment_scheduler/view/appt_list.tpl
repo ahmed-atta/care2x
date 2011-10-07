@@ -34,7 +34,6 @@
 				<table>
 				<tbody>
 					<tr>
-						<td>{{$sMascotImg}}</td>
 						<td class="warnprompt">{{$sPrompt}}</td>
 					</tr>
 				</tbody>

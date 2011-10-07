@@ -291,7 +291,7 @@ for($n=0;$n<sizeof($artikeln);$n++)	{
 }else{
 	if($itwassent) echo '<font size=2>'.$LDWasSent.'<p></font>';
 
-	echo '<img '.createMascot($root_path,'mascot1_r.gif','0','middle').'><font size=2>'.$LDBasketEmpty.'<p>';
+	echo '<font size=2>'.$LDBasketEmpty.'<p>';
 
 	// get all lists that are not sent
 

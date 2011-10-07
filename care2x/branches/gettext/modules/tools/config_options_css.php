@@ -83,7 +83,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/c
 
 <form method="post">
 <?php if (isset($saved)&&$saved) { 
-	echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>';	
+	echo '';	
 ?>
 <div class="prompt"><?php echo $LDChangeSaved ?></div><br>
 <?php } ?>
@@ -104,7 +104,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/c
 
 $filepath=$root_path.'gui/css/themes/';
 
-$handle=opendir($filepath.'.');  // Modify this path if you have placed the mascot directories somewhere else
+$handle=opendir($filepath.'.');  // Modify this path if you have placed the directories somewhere else
 $dirs=array();
 while (false!==($theme = readdir($handle))) { 
     if ($theme != '.' && $theme != '..') {

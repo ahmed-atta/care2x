@@ -157,7 +157,6 @@ if($linecount==1) echo '
 
 if($mode=='save'){
 	if($saveok) {
-		$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>');
 		$smarty->assign('sSaveFeedBack',$LDDataSaved);
 	}else{
 		echo $sql.'<p>';

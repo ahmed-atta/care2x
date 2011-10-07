@@ -331,7 +331,7 @@ if($rows&&!$patientselected) {
 ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
+    
     <td class="prompt">
 <?php
 if (($mode=='search'||$mode=='paginate')){
@@ -436,7 +436,7 @@ $append="&dept_nr=$dept_nr&target=archiv&all_depts=$all_depts";
 ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot2_r.gif','0','bottom') ?> align="absmiddle"></td>
+    
     <td class="warnprompt">
 <b><?php echo ''.$LDSorryNotFound.'</font>'; ?>
 </td>

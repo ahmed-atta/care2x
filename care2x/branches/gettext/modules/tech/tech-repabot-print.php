@@ -179,7 +179,7 @@ if($rows>0)
 } // end of if(rows)
 else
 {
-   echo'<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>'.$LDNoDataFound;
+   echo''.$LDNoDataFound;
 }
 ?>
 <p align=right><input type="button" value="<?php echo $LDClose ?>" onClick="if(parentref('')) window.close();"></p>

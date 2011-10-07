@@ -160,9 +160,7 @@ if ($update || ($mode == "search")) {
 
 		} //end of else
 	} else {
-		echo '
-			<p><img ' . createMascot ( $root_path, 'mascot1_r.gif', '0', 'middle' ) . '>
-			' . $LDNoDataFound;
+		echo $LDNoDataFound;
 	}
 }
 ?>

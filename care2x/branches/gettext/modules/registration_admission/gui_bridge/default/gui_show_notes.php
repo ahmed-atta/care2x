@@ -279,7 +279,6 @@ if($mode=='show'){
 		# Else prompt no data available yet.
 		
 		$smarty->assign('bShowNoRecord',TRUE);
-		$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>');
 		$smarty->assign('norecordyet',$norecordyet);
 	} // end of if $rows
 

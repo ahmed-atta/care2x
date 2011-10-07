@@ -223,7 +223,6 @@ ob_start();
 <FONT size=3 color="#990000">
 <?php if($from=="archivepass")
 {
-echo '<img '.createMascot($root_path,'mascot1_r.gif','0','bottom','absmiddle').'>';
 $curtime=date('H.i');
 if ($curtime<'9.00') echo $LDGoodMorning;
 if (($curtime>'9.00')and($curtime<'18.00')) echo $LDGoodDay;
@@ -368,7 +367,7 @@ if($ofset) echo '	<form name=back action="'.$thisfile.'" method=post>
 if($mode=='search') echo '
 	<table border=0>
    <tr>
-     <td><img '.createMascot($root_path,'mascot1_r.gif','0','middle').'></td>
+     <td></td>
      <td>'.$LDNoDataFound.'<br>'.$LDPlsEnterMore.'</td>
    </tr>
  </table>';
@@ -379,7 +378,7 @@ if($invalid) echo'
 
 	<table border=0>
    <tr>
-     <td> <img '.createMascot($root_path,'mascot1_r.gif','0','middle').'>
+     <td> 
 		</td>
      <td>'.$LDNoSingleChar.'<br>'.$LDPlsEnterMore.'
 </td>

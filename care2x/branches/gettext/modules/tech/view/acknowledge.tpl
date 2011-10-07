@@ -5,7 +5,7 @@
 <p>
 <div style="border: 1px dotted black" align="center">
 	<p>
-	{{$sMascotImg}}
+	
 	{{$LDThanksSir}} {{$reporte}}
 	<p>
 	{{$LDYour}} {{$sDate}} {{$LDAt}} {{$sTime}}

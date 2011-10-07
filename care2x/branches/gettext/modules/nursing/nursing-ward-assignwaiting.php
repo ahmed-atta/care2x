@@ -271,7 +271,6 @@ if($encounter['current_ward_nr']!=$ward_nr){
 				<tr>
 					<td><img <?php 	echo createComIcon($root_path,'angle_down_l.gif','0','',TRUE); ?>></td>
 					<td><FONT SIZE=3><?php 	echo $LDSelectRoomBed; ?></font></td>
-					<td><img <?php 	echo createMascot($root_path,'mascot1_l.gif','0'); ?>></td>
 				</tr>
 			</table>
 
@@ -499,7 +498,7 @@ if($ward_ok){
 
 }else{
 	echo '
-			<ul><img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'><font face="Verdana, Arial" size=3>
+			<font face="Verdana, Arial" size=3>
 			<font class="prompt"><b>'.str_replace("~station~",strtoupper($station),$LDNoInit).'</b></font><br>
 			<a href="nursing-ward-new.php'.URL_APPEND.'&station='.$station.'&edit='.$edit.'">'.$LDIfInit.' <img '.createComIcon($root_path,'bul_arrowgrnlrg.gif','0','',TRUE).'></a><p></font>
 			</ul>';

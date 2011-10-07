@@ -77,7 +77,6 @@ $smarty->assign('LDBack', $LDBack);
  #
  # Prepare the top message
  #
- $smarty->assign('gifMascot',createMascot(CARE_BASE ,'mascot1_r.gif','0','bottom'));
  if ($saved){
   	$smarty->assign('sPromptText',$LDChangeSaved);
  }else{

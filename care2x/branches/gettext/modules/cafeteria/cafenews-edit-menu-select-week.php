@@ -41,7 +41,6 @@ function chkForm(d)
 <form name="selectform" action="cafenews-edit-menu.php" onSubmit="return chkForm(this)">
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
     <td ><FONT  SIZE=5 COLOR="#000066">
 		<?php echo $LDMarkWeek ?></font><p>
 			<font size=2><?php echo $LDClkContinue ?></td>

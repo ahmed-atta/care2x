@@ -217,7 +217,7 @@ ob_start();
 ?>
 <p><br><ul>
 <?php if($onError!="") echo '
-	<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').'><FONT face="Verdana,Helvetica,Arial" size=2 color="#800000"> '.$onError.'</font>';
+	<FONT face="Verdana,Helvetica,Arial" size=2 color="#800000"> '.$onError.'</font>';
 ?>
   <form action="<?php echo $thisfile ?>" method="get" name="loginform" onSubmit="return pruf(this)">
   <table border=0 cellspacing=2 cellpadding=3>
@@ -263,7 +263,7 @@ ob_start();
 <HR>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?>></td>
+    
     <td><FONT face="Verdana,Helvetica,Arial" size=2 color="#990000">
 <?php 
 if ($regError) echo $regError;

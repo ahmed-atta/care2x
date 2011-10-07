@@ -477,7 +477,7 @@ if($edit){
 
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>></td>
+    <td></td>
     <td class="prompt"><?php echo $LDPlsSelectPatientFirst ?></td>
     <td valign="bottom"><img <?php echo createComIcon($root_path,'angle_down_r.gif','0','',TRUE) ?>></td>
   </tr>

@@ -300,7 +300,7 @@ if($rows&&!$patientselected){
 ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
+    
     <td><FONT  class="prompt">
 <b><?php 
 if (($mode=='match'||$mode=='paginate')){
@@ -564,7 +564,7 @@ $buf="op-docu-start.php?sid=$sid&lang=$lang&mode=update&update=1&nr=".$row['nr']
 ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot2_r.gif','0','bottom') ?> align="absmiddle"></td>
+    
     <td class="warnprompt">
 	<?php echo $LDSorryNotFound; ?>
 </td>

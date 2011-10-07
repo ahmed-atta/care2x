@@ -234,7 +234,7 @@ function aligndate(&$ad,&$am,&$ay)
 <?php
 if($mode=="saveok") {
 ?>
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><FONT  SIZE=4  FACE="verdana,Arial" color="#990000"><?php echo $LDMenuSaved ?></font>
+<?php echo $LDMenuSaved ?></font>
 <?php
 }
 ?>

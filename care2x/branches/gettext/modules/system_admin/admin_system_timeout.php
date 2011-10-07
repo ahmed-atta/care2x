@@ -96,7 +96,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/t
 <p>
 <?php
 
-if(isset($save_ok)&&$save_ok) echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>'.$LDDataSaved.'<p>';
+if(isset($save_ok)&&$save_ok) echo ''.$LDDataSaved.'<p>';
 
 echo $LDEnterInfo;
 

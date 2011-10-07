@@ -36,7 +36,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/p
  
 $sTemp= '<ul><p><br>
 	<center><FONT class="warnprompt"><p><br>
-	<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'> &nbsp;
+	 &nbsp;
 	<b>'.$LDNoLabReport.'</b><p>
 		<form method="post" action="'.$root_path.'modules/nursing/nursing-ward-patientdata.php" name="retform">
 	<input type="hidden" name="sid" value="'.$sid.'">

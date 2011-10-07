@@ -103,7 +103,7 @@ td.vn { font-family:verdana,arial; color:#000088; font-size:10}
 
 <table border=0>
   <tr>
-    <td><img <?php 	echo createMascot($root_path,'mascot2_r.gif','0'); ?>></td>
+    
     <td><FONT SIZE=3  FACE="Arial" color="maroon"><?php 	echo $LDErrorOccured.'<br>'.$LDTryOrNotifyEDP; ?></td>
   </tr>
 </table>

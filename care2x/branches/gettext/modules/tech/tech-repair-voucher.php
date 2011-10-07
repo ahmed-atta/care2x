@@ -60,7 +60,6 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/t
 $smarty->assign('sButton','<img '.createComIcon($root_path,'varrow.gif','0').'>');
 
 $smarty->assign('LDAck',$LDAck);
-$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align=left>');
 $smarty->assign('LDThanksSir',$LDThanksSir); 
 $smarty->assign('reporter',$reporter); 
 $smarty->assign('LDYour',$LDYour); 

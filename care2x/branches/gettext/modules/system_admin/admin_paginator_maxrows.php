@@ -63,7 +63,7 @@ ob_start();
 <ul>
 <FONT class="prompt"><p>
 <?php
-if(isset($save_ok)&&$save_ok) echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>'.$LDDataSaved.'<p>';
+if(isset($save_ok)&&$save_ok) echo ''.$LDDataSaved.'<p>';
 
 echo $LDEnterMaxRows;
 ?></font><p>

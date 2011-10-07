@@ -89,14 +89,14 @@ ob_start();
 <P>
 
 <?php if($n_error) : ?><font class="warnprompt">
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"> <?php echo $LDNewPwDiffer ?>
+<?php echo $LDNewPwDiffer ?>
 </font>
 <?php endif; ?>
 <ul>
 
 <?php if($mode=='pwchg') : ?>
 <font face="verdana,arial" size=3 color="#009900">
-	<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"><b><?php echo $LDPWChanged ?></b></font>
+<b><?php echo $LDPWChanged ?></b></font>
 <?php else : ?>
 <?php if (($pass=='check')&&$passtag) 
 {
@@ -107,15 +107,15 @@ $errbuf=$title;
 switch($passtag)
 {
 	case 1:$errbuf="$errbuf $LDWrongEntry";
-				print '<img '.createMascot($root_path,'mascot3_r.gif','0').'> '." $LDWrongEntry <font size=2 color=\"#000000\">$LDPlsTryAgain</font>";
+				print ''." $LDWrongEntry <font size=2 color=\"#000000\">$LDPlsTryAgain</font>";
 				//echo '<img '.createLDImgSrc($root_path,'cat-fe.gif','0','left').'>';
 				break;
 	case 2:$errbuf="$errbuf $LDNoAuth";
-				print '<img '.createMascot($root_path,'mascot3_r.gif','0').'>'."$LDNoAuth  <font size=2 color=\"#000000\">$LDPlsContactEDP</font>";
+				print ''."$LDNoAuth  <font size=2 color=\"#000000\">$LDPlsContactEDP</font>";
 				//echo '<img '.createLDImgSrc($root_path,'cat-noacc.gif','0','left').'>';
 				break;
 	default:$errbuf="$errbuf $LDAuthLocked";
-				print '<img '.createMascot($root_path,'mascot3_r.gif','0').'>'."$LDAuthLocked  <font size=2 color=\"#000000\">$LDPlsContactEDP</font>";
+				print ''."$LDAuthLocked  <font size=2 color=\"#000000\">$LDPlsContactEDP</font>";
 				//echo '<img '.createLDImgSrc($root_path,'cat-sperr.gif','0','left').'>';
 }
 

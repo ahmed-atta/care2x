@@ -83,7 +83,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/d
  # Window bar title
  $smarty->assign('sWindowTitle',$title);
 
-$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
+
 if($cat=='medstock')
 	$smarty->assign('LDPlsSelectDept',$LDPlsSelectFarma);
 elseif($cat=='pharma') 

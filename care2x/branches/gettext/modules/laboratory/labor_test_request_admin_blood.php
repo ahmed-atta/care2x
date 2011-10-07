@@ -652,7 +652,7 @@ else
 {
 ?>
 
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>><font class="prompt"><b><?php echo $LDNoPendingRequest ?></b></font>
+<font class="prompt"><b><?php echo $LDNoPendingRequest ?></b></font>
 <p>
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
 <?php

@@ -375,7 +375,7 @@ if($edit){
 	$smarty->assign('show_selectprompt',TRUE);
 	$smarty->assign('imgAngledown','<img '.createComIcon($root_path,'angle_down_l.gif','0').'>');
     $smarty->assign('LDPlsSelectPatientFirst',$LDPlsSelectPatientFirst);
-    $smarty->assign('imgMascot','<img '.createMascot($root_path,'mascot1_l.gif','0','absmiddle').'>');
+    
 
 }
 

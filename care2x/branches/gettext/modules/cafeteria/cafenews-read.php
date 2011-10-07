@@ -84,7 +84,6 @@ if($mode=="preview4saved"){
 
 	$smarty->assign('bShowPrompt',TRUE);
 
-	$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0').'>');
     $smarty->assign('LDArticleSaved', $LDArticleSaved);
 
 	$sTemp = $returnfile;

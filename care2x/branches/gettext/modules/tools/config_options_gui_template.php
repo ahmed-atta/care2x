@@ -102,7 +102,7 @@ ob_start();
 
 <form method="post">
 <?php if (isset($saved)&&$saved) { 
-	echo '<img '.createMascot($root_path,'mascot1_r.gif','0','absmiddle').'>';	
+	echo '';	
 ?>
 <FONT class="prompt"><?php echo $LDChangeSaved ?></font><br>
 <?php } ?>

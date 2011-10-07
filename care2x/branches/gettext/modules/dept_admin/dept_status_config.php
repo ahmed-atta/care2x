@@ -120,7 +120,6 @@ ob_start();
 <?php if(isset($updateok)&&$updateok) { 
 	$backimg='close2.gif';
 ?>
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="middle"><font class="prompt">
 <?php echo $LDUpdateOk; ?></font>
 
 <?php 

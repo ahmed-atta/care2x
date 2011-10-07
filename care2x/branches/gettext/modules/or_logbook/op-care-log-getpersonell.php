@@ -164,7 +164,7 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 	
 	<table border=0>
    <tr>
-     <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom'); ?>> </td>
+     
      <td><font size=3 color=maroon face=verdana,arial>
 	 <?php echo $LDSorryNotFound ?>
 	</td>

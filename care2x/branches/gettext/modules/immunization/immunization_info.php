@@ -67,7 +67,7 @@ ob_start();
 <?php
 if(isset($save_ok)&&$save_ok){ 
 ?>
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?>><font class="prompt">
+<font class="prompt">
 <b>
 <?php 
  	echo $LDImmuInfoSaved;

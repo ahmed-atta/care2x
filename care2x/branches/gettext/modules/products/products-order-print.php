@@ -269,7 +269,7 @@ if($rows){
            break;
 	}
 } else {
-    echo' <img '.createMascot($root_path,'mascot1_r.gif','0','middle').'>'.$LDDataNoFoundTxt;
+    echo' '.$LDDataNoFoundTxt;
 }
 ?>
 <form name="opt4">

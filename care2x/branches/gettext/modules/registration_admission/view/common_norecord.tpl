@@ -1,6 +1,6 @@
 						<table border=0>
 							<tr>
-								<td>{{$sMascotImg}}</td>
+								<td></td>
 								<td class="prompt">
 									{{$norecordyet}}
 								</td>

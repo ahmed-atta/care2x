@@ -28,7 +28,7 @@ div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
 
 <table border=0>
   <tr valign="top">
-    <td>{{$gifMascot}}</td>
+    
     <td><FONT    SIZE=4  FACE="verdana,Arial" color="#990000">
 	{{$sAfterSavePrompt}}<br>
 	{{$LDWhatToDo}}

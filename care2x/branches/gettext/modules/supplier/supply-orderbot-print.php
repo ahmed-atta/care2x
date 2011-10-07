@@ -230,7 +230,7 @@ for($n=0;$n<sizeof($artikeln);$n++)	{
 	}//end of switch(status)
 } // end of if(rows)
 else {
-    echo' <img '.createMascot($root_path,'mascot1_r.gif','0','middle').'>'.$LDDataNoFoundTxt.$sql;
+    echo' '.$LDDataNoFoundTxt.$sql;
 }
 ?>
 <form name="opt4">

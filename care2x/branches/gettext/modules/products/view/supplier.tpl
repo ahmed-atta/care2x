@@ -1,7 +1,7 @@
 {{* form.tpl  Form template for products module (pharmacy & meddepot) 2004-07-04 Elpidio Latorilla *}}
 
 <font class="prompt">{{$sSaveFeedBack}}</font>
-<font class="warnprompt">{{$sMascotImg}} {{$LDOrderNrExists}} <br> {{$sNoSave}}</font>
+<font class="warnprompt"> {{$LDOrderNrExists}} <br> {{$sNoSave}}</font>
 
 {{$sFormStart}}
 

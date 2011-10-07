@@ -3,7 +3,6 @@
 {{if $bShowPrompt}}
 <table>
 	<tr>
-		<td>{{$sMascotImg}}</td>
 		<td  class="prompt">
 			{{$LDArticleSaved}}
 			<hr>

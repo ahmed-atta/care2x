@@ -106,7 +106,6 @@ if(!$currency_short||!$currency_long)
 <?php if($mode=='saveok') : ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0') ?>></td>
     <td colspan=2><FONT  SIZE=3 COLOR="#000066"><?php echo $LDPriceSaved ?></font><p>
 			<font size=2><?php echo $LDClk2End ?> <input type="button" value="<?php echo $LDFinishBut ?>" onClick="window.location.replace('cafenews-prices.php?sid=<?php echo $sid."&lang=".$lang; ?>')">
                                                     </td>

@@ -82,7 +82,6 @@ if($saveok){
 }
 
 if($error=="order_nr_exists"){
-	$smarty->assign('sMascotImg',"<img ".createMascot($root_path,'mascot1_r.gif','0','absmiddle').">");
 	$smarty->assign('LDOrderNrExists',$LDOrderNrExists);
 }
 

@@ -5,7 +5,7 @@
 
 <ul>
 <FONT class="prompt"><p>
-{{$sMascotImg}} {{$LDDataSaved}}
+ {{$LDDataSaved}}
 <p>
 {{$LDEnterInfo}}
 </font>

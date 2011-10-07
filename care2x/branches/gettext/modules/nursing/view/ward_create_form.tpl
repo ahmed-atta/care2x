@@ -4,7 +4,7 @@
 {{* Note: Never change the "maxlength" value *}}
 
 <ul>
-{{$sMascotImg}} {{$sStationExists}} {{$LDEnterAllFields}}
+{{$sStationExists}} {{$LDEnterAllFields}}
 <p>
 
 <form action="nursing-ward-new.php" method="post" name="newstat" onSubmit="return check(this)">

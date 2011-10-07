@@ -60,7 +60,6 @@ if(isset($is_cancelled)&&$is_cancelled){
 ?>
 <table border=0 align=center>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0'); ?>></td>
     <td><font size=4 face="verdana,arial" color="#006600"><?php echo $LDAdmissionCancelled; ?></font></td>
   </tr>
   <tr>
@@ -80,7 +79,6 @@ if(isset($is_cancelled)&&$is_cancelled){
 ?>
 <table border=0 align=center>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0'); ?>></td>
     <td><font size=4 face="verdana,arial" color="red"><?php echo "$LDCancelError<br>$error_msg"; ?></td>
   </tr>
   <tr>

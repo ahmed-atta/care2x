@@ -241,11 +241,11 @@ $LDAddressMngr='Address Manager';
 $LDAddressMngrTxt='Enter, list, edit, & update address data';
 /* 2003-05-18 EL */
 $LDUserConfigOpt='Configuration options';
-$LDUserConfigOptTxt='User options for background & text colors, mascots, avatar, etc.';
-$LDMascotOpt='Mascot options';
-$LDMascotOptTxt='Hide, show, or select prompt mascots.';
-$LDMascot='Mascot';
-$LDSampleMascot='Sample mascots';
+$LDUserConfigOptTxt='User options for background & text colors, avatar, etc.';
+
+
+
+
 /* 2003-04-24 EL*/
 $LDGUITemplate='GUI Template option';
 $LDGUITemplateTxt='Select a GUI (graphic user interface) template';

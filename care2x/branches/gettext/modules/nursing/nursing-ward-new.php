@@ -123,7 +123,6 @@ $smarty->append('JavaScript',$sTemp);
 
 # Assign prompt elements
 if($rows){
-	$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
 	$smarty->assign('sStationExists',str_replace("~station~",strtoupper($station),$LDStationExists));
 }
 

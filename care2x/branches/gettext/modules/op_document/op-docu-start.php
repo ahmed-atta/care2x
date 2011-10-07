@@ -509,7 +509,7 @@ if(($mode=='search'||$mode=='paginate')&&$rows){
 ?>
 <table border=0>
   <tr>
-    <td><img <?php echo createMascot($root_path,'mascot1_r.gif','0','bottom') ?> align="absmiddle"></td>
+    
     <td class="prompt">
 <b>
 <?php 
@@ -594,9 +594,6 @@ echo '
 					else echo $LDPlsSelectPatientFirst; 
 			?>
 			</td>
-            <td valign="top"> 
-			<img <?php echo createMascot($root_path,'mascot1_l.gif','0','absmiddle') ?>>
-			</td>
           </tr>
 	</table>
 
@@ -623,7 +620,7 @@ $bg_img=$root_path.'gui/img/common/default/tableHeaderbg3.gif';
 ?>
 	<table border="0">
           <tr>
-            <td> <img <?php echo createMascot($root_path,'mascot2_r.gif','0','absmiddle') ?>></td>
+            
             <td class="prompt"><?php echo $LDPlsFillInfo ?></td>
           </tr>
 	</table>

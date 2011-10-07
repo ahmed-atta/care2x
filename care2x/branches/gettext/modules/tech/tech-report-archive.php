@@ -295,7 +295,7 @@ if($ofset) echo '	<form name=back action='.$thisfile.' method=post>
 if($mode=='search') echo '
 	<table border=0>
    <tr>
-     <td><img '.createMascot($root_path,'mascot1_r.gif','0','middle').'></td>
+     <td></td>
      <td class="warnprompt">'.$LDNoFound.'</td>
    </tr>
  </table>';

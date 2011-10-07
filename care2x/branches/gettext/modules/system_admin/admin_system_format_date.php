@@ -69,7 +69,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/d
 <FONT  SIZE=+2>
 <?php echo $LDSetDateFormat ?> </FONT><FONT class="prompt"><p>
 <?php
-if(($mode=='save')&&$new_date_ok) echo '<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').'> '.$LDNewDateFormatSaved.'<p>';
+if(($mode=='save')&&$new_date_ok) echo ' '.$LDNewDateFormatSaved.'<p>';
 echo $LDSelectDateFormat;
 ?>
 </font>

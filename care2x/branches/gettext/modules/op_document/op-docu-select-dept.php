@@ -104,7 +104,7 @@ function popinfo(l,d)
  ob_end_clean();
  $smarty->append('JavaScript',$sTemp);
 
-$smarty->assign('sMascotImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
+
 $smarty->assign('LDPlsSelectDept',$LDPlsSelectDept);
 
  # Buffer department rows output

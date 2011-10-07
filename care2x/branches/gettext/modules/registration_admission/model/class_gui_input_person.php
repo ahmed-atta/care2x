@@ -497,13 +497,11 @@ class GuiInputPerson {
 
 		if($error) {
 			$this->smarty->assign('error',TRUE);
-			$this->smarty->assign('sErrorImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
 			if ($error>1) $this->smarty->assign('sErrorText',$LDErrorS);
 				else $this->smarty->assign('sErrorText',$LDError);
 
 		}elseif($error_person_exists){
 			$this->smarty->assign('errorDupPerson',TRUE);
-			$this->smarty->assign('sErrorImg','<img '.createMascot($root_path,'mascot1_r.gif','0','bottom').' align="absmiddle">');
 			$this->smarty->assign('LDPersonDuplicate',$LDPersonDuplicate);
 			if($duperson->RecordCount()>1) $this->smarty->assign('sErrorText',"$LDSimilarData2 $LDPlsCheckFirst2");
 				else $this->smarty->assign('sErrorText',"$LDSimilarData $LDPlsCheckFirst");

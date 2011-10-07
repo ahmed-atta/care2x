@@ -11,7 +11,7 @@
 				<tr>
 					<td valign="bottom">{{$sSearchPromptImg}}</td>
 					<td class="prompt">{{$LDPlsSelectPatientFirst}}</td>
-					<td>{{$sMascotImg}}</td>
+					<td></td>
 				</tr>
 			</table>
 

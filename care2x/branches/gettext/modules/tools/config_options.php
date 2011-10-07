@@ -52,7 +52,6 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/c
 
  $smarty->assign('LDColorOpt','<a href="'.$root_path.'modules/tools/colorchg.php'.URL_APPEND.'">'.$LDColorOpt.'</a>');
  $smarty->assign('LDColorOptExt','<a href="'.$root_path.'modules/tools/excolorchg.php'.URL_APPEND.'">'.$LDColorOptExt.'</a>');
- $smarty->assign('LDMascotOpt','<a href="config_options_mascot.php'.URL_APPEND.'">'.$LDMascotOpt.'</a>');
  $smarty->assign('LDMainMenuTree','<a href="config_options_mainmenu_tree.php'.URL_APPEND.'">'.$LDMainMenuTree.'</a>');
  $smarty->assign('LDGUITemplate','<a href="config_options_gui_template.php'.URL_APPEND.'">'.$LDGUITemplate.'</a>');
  $smarty->assign('LDControlButtons','<a href="'.$root_path.'modules/tools/config_options_control_buttons.php'.URL_APPEND.'">'.$LDControlButtons.'</a>');
@@ -67,7 +66,6 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/c
 
  $smarty->assign('LDColorOptTxt',$LDColorOptTxt);
  $smarty->assign('LDColorOptExtTxt',$LDColorOptExtTxt);
- $smarty->assign('LDMascotOptTxt',$LDMascotOptTxt);
  $smarty->assign('LDMainMenuTreeTxt',$LDMainMenuTreeTxt);
  $smarty->assign('LDGUITemplateTxt',$LDGUITemplateTxt);
  $smarty->assign('LDControlButtonsTxt',$LDControlButtonsTxt);
@@ -82,7 +80,6 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/c
 
  $smarty->assign('LDColorOptImg','<a href="'.$root_path.'modules/tools/colorchg.php'.URL_APPEND.'"><img '.createComIcon($root_path,'fileman.gif','0','',FALSE).'></a>');
  $smarty->assign('LDColorOptExtImg','<a href="'.$root_path.'modules/tools/excolorchg.php'.URL_APPEND.'"><img '.createComIcon($root_path,'password.gif','0','',FALSE).'></a>');
- $smarty->assign('LDMascotOptImg','<a href="config_options_mascot.php'.URL_APPEND.'"><img '.createComIcon($root_path,'smiley2.gif','0','',FALSE).'></a>');
  $smarty->assign('LDMainMenuTreeImg','<a href="config_options_mainmenu_tree.php'.URL_APPEND.'"><img '.createComIcon($root_path,'ftpmanager.gif','0','',FALSE).'></a>');
  $smarty->assign('LDGUITemplateImg','<a href="config_options_gui_template.php'.URL_APPEND.'"><img '.createComIcon($root_path,'ftpmanager.gif','0','',FALSE).'></a>');
  $smarty->assign('LDControlButtonsImg','<a href="'.$root_path.'modules/tools/config_options_control_buttons.php'.URL_APPEND.'"><img '.createComIcon($root_path,'ftpmanager.gif','0','',FALSE).'></a>');
