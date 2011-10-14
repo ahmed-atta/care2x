@@ -26,10 +26,10 @@ require($root_path.'include/inc_environment_global.php');
 <form id="form1" name="form1" method="post" action="">
   <table width="596" border="0" align="center" bgcolor="#CCCCFF">
     <tr>
-      <td width="81">BETWEEN:</td>
+      <td width="81">FROM:</td>
       <td width="144"><input type="text" id="dfrom" name="dfrom" /></td>
       <td width="98"><a href="javascript:NewCal('dfrom','ddmmyyyy')"><img src="../../gui/img/common/default/calendar.gif" /></a></td>
-      <td width="47">AND:</td>
+      <td width="47">TO:</td>
       <td width="144"><input type="text" id="dto" name="dto" /></td>
       <td width="56"><a href="javascript:NewCal('dto','ddmmyyyy')"><img src="../../gui/img/common/default/calendar.gif" /></a></td><td><input type="submit" name="show" value="SHOW" /></td>
     </tr>
@@ -38,79 +38,73 @@ require($root_path.'include/inc_environment_global.php');
 <?php
 $dfrom       =   $_POST['dfrom'];
 $dto         =   $_POST['dto'];
-if(empty($datefrom) || empty($dto)) echo 'Please Enter Date Range';  
+//if(empty($datefrom) || empty($dto)) echo 'Please Enter Date Range';  
 
 $dfrom_timestamp =  strtotime($dfrom);
 $dto_timestamp   =  strtotime($dto);
 
+//CREATE TEMPORARY TABLE WHICH PULL ALL THE NEEDED COLUMNS FROM THE DATABASE
+$sql_temp = "CREATE TEMPORARY TABLE block_temp SELECT date_change, description, price FROM care_tz_billing_archive_elem WHERE insurance_id=0 AND description LIKE 'cons%'";
+$sql_temp_result= $db->Execute($sql_temp);
 
-//echo 'This is date from '. $datefrom_timestamp.'<br>';
-//echo 'This is date to   '. $dto_timestamp;
+//PULL DATA FROM TEMPORARY TABLE ($sql_temp) WITHIN THE DEFINED DATE RANGE
+$sql_temp_date_range="SELECT date_change,description,SUM(price) as total FROM block_temp WHERE date_change BETWEEN $dfrom_timestamp AND $dto_timestamp GROUP BY description";
+$sql_temp_date_range_result = $db->Execute($sql_temp_date_range);
 
-$sql_temp = " CREATE TEMPORARY TABLE block_temp SELECT c.name AS company, b . * FROM care_tz_company AS c INNER JOIN care_tz_billing_archive_elem AS b ON c.id = b.insurance_id  WHERE b.description LIKE 'cons%'";
-
-$result_temp = $db->Execute($sql_temp);
-
-
-
-
-$sql = "SELECT company,date_change, SUM(price) as total_price FROM block_temp WHERE description LIKE 'consq%' and date_change>= $dfrom_timestamp AND date_change < $dto_timestamp       GROUP BY company";
-       $result = $db->Execute($sql);
-	   if(empty($result)){
-	     echo 'No data found';
-		 exit;
-		 
-	   }
-	   
-
-	   
-
+if(!$sql_temp_date_range_result){
+	echo "SELECT DATE RANGE";
+	exit;
+	}
 
  ?>
  <form id="form2" name="form2" method="post" action="">
  <table width="605" border="0" >
- <tr><td>Start Date:<?php echo $dfrom;?></td><td>End Date:<?php echo $dto;?></td></tr>
+ <?php
+ //$dto minus one day
+ $newdateto = strtotime('-1 day', strtotime($dto));
+ $newdateto = date('j-m-Y',$newdateto);
+ 
+  ?>
+ <tr><td>Start Date:<?php echo $dfrom;?></td><td>End Date:<?php echo $newdateto;?></td></tr>
  
  <tr>
  
    <!--  <td width="174" bgcolor="#CCCCFF">DATE</td> -->
-    <td width="224" bgcolor="#CCCCFF">BLOCK PAYMENT </td>
-    <td width="185" bgcolor="#CCCCFF">TOTAL AMOUNT </td>
+    <td width="224" bgcolor="#CCCCFF">Item Description </td>
+    <td width="185" bgcolor="#CCCCFF">Sub-Total </td>
   </tr>
+<?php
+//PUT DATA IN THE LOOP READY TO DISPLAY
 
+  while($rows= $sql_temp_date_range_result->FetchRow()){
+  	
 
- <?php
- while($rows=$result->FetchRow()){
-  $realdate = date('d-M-Y',$rows['date_change']);
+  echo '<tr><td width="224">'.$rows['description'].'</td></br>';
+  echo '<td width="185">'.number_format($rows['total'],2).'</td><br></tr>';
   
- 
-	  
-		  
-		  ?>
-
+   
   
-  <?php echo '<tr>';?>
- <!--  <?php echo  '<td width="174">'.$realdate.'</td><br>';?>  -->
-  <?php echo  '<td width="224">'.$rows['company'].'</td></br>';?>
-  <?php echo  '<td width="185">'.$rows['total_price'].'</td><br>';?>
- 
-  <?php
-  echo '<tr>';
-  }
-  
-  $s= "CREATE TEMPORARY TABLE sum_block SELECT company,date_change, SUM(price) as total_price FROM block_temp WHERE description LIKE 'consq%' and date_change BETWEEN $dfrom_timestamp AND $dto_timestamp   GROUP BY company";
-  
-  $r= $db->Execute($s);
-  $total= "SELECT SUM(total_price) as grand_total FROM sum_block";
-  $results= $db->Execute($total);
-  while($rows= $results->FetchRow()){
-  $sum = $rows['grand_total'];
   }
   
     
-  
-   
   ?>
+  
+  
+  <?php
+  //SUM TOTAL OF ALL BLOCK PAYMENT
+  $sql = "SELECT SUM(price) AS grand_total FROM block_temp WHERE date_change BETWEEN $dfrom_timestamp AND $dto_timestamp ";
+  $sql_result = $db->Execute($sql);
+  while($r=$sql_result->FetchRow()){
+  	$sum = $r['grand_total'];
+  	$formatted_sum = number_format($sum, 2);
+  	
+  	 
+  	}
+  ?>
+  
+ 
+   
+  
   
   
   
@@ -118,8 +112,9 @@ $sql = "SELECT company,date_change, SUM(price) as total_price FROM block_temp WH
 </table>
 <table width="605" height="25" border="0" bgcolor="#CCCCFF">
   <tr>
-    <td width="224"><strong>SUM</strong></td>
-    <td width="185"><?php echo $sum;?></td>
+    <td width="224"><strong>Sum</strong></td>
+    <td width="185"><?php echo $formatted_sum; ?></td>
+    
   </tr>
 </table>
 <input type="button" name="print" value="PRINT" onclick="window.print()" />
