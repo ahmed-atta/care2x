@@ -94,10 +94,12 @@ class smarty_care extends Smarty {
 		$module = MODULE != '' ? "modules/" : "";
 		$this->template_dir = MODULE != '' ? $this->sDocRoot . $module . MODULE . "/view/"
 										   : "";
-										
+		$this->cache_dir = MODULE != '' ? $this->compile_dir . $module . MODULE . "/view/"
+										   : $this->compile_dir ;
+		
 		$this->compile_dir = $this->templateCache ;
 		$this->config_dir = $this->sDocRoot.'configs';
-		$this->cache_dir = $this->compile_dir;//.'/cache';
+		//$this->cache_dir = $this->compile_dir;//.'/cache';
 
 		# For temporary debugging
 	    if(0){
@@ -112,7 +114,7 @@ class smarty_care extends Smarty {
 
 		$this->debug = true;
 		//TODO : move this to a global configuration 
-		$this->caching = false;
+		$this->caching = true;
 
 		/**
 		* Smarty delimiters
