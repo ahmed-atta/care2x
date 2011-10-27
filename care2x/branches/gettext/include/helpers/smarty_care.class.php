@@ -31,7 +31,6 @@ class smarty_care extends Smarty {
 	var $LDCloseAlt;
 	var $cfg;
 	var $lang;
-	var $pgt;
 
 	/**
 	* Constructor
@@ -43,7 +42,7 @@ class smarty_care extends Smarty {
 	*/
 	function smarty_care ($dirname, $bInit = TRUE, $bShowCopy = TRUE, $bLoadJS = TRUE) {
 
- 		global $templatedir, $default_template, $sDocRoot, $LDCloseAlt, $cfg, $lang, $pgt, $GLOBAL_CONFIG;
+ 		global $templatedir, $default_template, $sDocRoot, $LDCloseAlt, $cfg, $lang, $GLOBAL_CONFIG;
 
 		$this->__construct();
 
@@ -90,32 +89,34 @@ class smarty_care extends Smarty {
 		$this->LDCloseAlt = $LDCloseAlt;
 		$this->cfg = $cfg;
 		$this->lang = $lang;
-		$this->pgt = $pgt;
 
 		# Another check if the working directory is really inside the template theme.
 		# If not, use default template theme.
-		$module = LANG_FILE_MODULAR != '' ? "modules/" : "";
+		$module = MODULE != '' ? "modules/" : "";
 		if( file_exists( $this->sDocRoot. $module . MODULE . "/view/")){
 			$this->template_dir = $this->sDocRoot. $module . MODULE . "/view/";
-			$this->compile_dir = $this->templateCache."/$this->templatedir";
-		} 
+			$this->compile_dir = $this->templateCache ."/" . $this->templatedir;
+		} else {
+			$this->template_dir = "";
+			$this->compile_dir = $this->templateCache;
+		}
 
-		$this->config_dir = $this->sDocRoot.'/configs';
+		$this->config_dir = $this->sDocRoot.'configs';
 		$this->cache_dir = $this->compile_dir;//.'/cache';
 
 		# For temporary debugging
-/*		 if(0){
-			echo  $this->template_dir."<p>";
-			echo  $this->compile_dir."<p>";
-			echo  $this->config_dir."<p>";
-			echo  $this->cache_dir."<p>";
+	    if(0){
+			echo  "template dir : " . $this->template_dir."<p>";
+			echo  "compile dir : " .$this->compile_dir."<p>";
+			echo  "config dir : " .$this->config_dir."<p>";
+			echo  "cache dir : " .$this->cache_dir."<p>";
 		 }
 		/***/
 		/* global configs
 		*/
 
-		$this->debug = false;
-		// $this->caching = true;
+		$this->debug = true;
+		$this->caching = false;
 
 		/**
 		* Smarty delimiters
@@ -199,7 +200,6 @@ class smarty_care extends Smarty {
 		
 		if($this->bShowCopyright){
 			$this->assign('sCopyright',$this->Copyright());
-			$this->assign('sPageTime',$this->Pagetime());
 		}
 	}
 
@@ -215,18 +215,6 @@ class smarty_care extends Smarty {
 			$sTemp = ob_get_contents();
 		ob_end_clean();
 		return "<div class=\"copyright\">$sTemp</div>";
-	}
-
-	function PageTime(){
-		//global $pgt;
-		ob_start();
-			if(defined('USE_PAGE_GEN_TIME')&&USE_PAGE_GEN_TIME){
-				$this->pgt->ende();
-				$this->pgt->ausgabe();
-			}
-			$sTemp = ob_get_contents();
-		ob_end_clean();
-		return $sTemp;
 	}
 
 } // end class
