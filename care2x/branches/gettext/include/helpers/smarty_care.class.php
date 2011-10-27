@@ -90,15 +90,11 @@ class smarty_care extends Smarty {
 		$this->cfg = $cfg;
 		$this->lang = $lang;
 
-		# Another check if the working directory is really inside the template theme.
-		# If not, use default template theme.
+		// being called from a module or from the main ?
 		$module = MODULE != '' ? "modules/" : "";
-		if( file_exists( $this->sDocRoot. $module . MODULE . "/view/")){
-			$this->template_dir = $this->sDocRoot. $module . MODULE . "/view/";
-		} else {
-			$this->template_dir = "";
-		}
-
+		$this->template_dir = MODULE != '' ? $this->sDocRoot . $module . MODULE . "/view/"
+										   : "";
+										
 		$this->compile_dir = $this->templateCache ;
 		$this->config_dir = $this->sDocRoot.'configs';
 		$this->cache_dir = $this->compile_dir;//.'/cache';
@@ -115,6 +111,7 @@ class smarty_care extends Smarty {
 		*/
 
 		$this->debug = true;
+		//TODO : move this to a global configuration 
 		$this->caching = false;
 
 		/**
