@@ -27,7 +27,7 @@ Contact author at: elpidio@care2x.org
 This notice also applies to other scripts which are integral to the functioning of CARE 2X within this directory and its top level directory
 A copy of this notice is also available as file named copy_notice.txt under the top level directory.
 */
-error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+error_reporting(E_ALL);
 define('FROM_ROOT',1);
 
 if(!isset($mask)) $mask=false;
@@ -42,20 +42,21 @@ require('./include/helpers/inc_environment_global.php');
 ////$db->debug=FALSE;
 
 # Register global session variables
-if(!session_is_registered('sess_user_name')) session_register('sess_user_name');
-if(!session_is_registered('sess_user_origin')) session_register('sess_user_origin');
-if(!session_is_registered('sess_file_forward')) session_register('sess_file_forward');
-if(!session_is_registered('sess_file_return')) session_register('sess_file_return');
-if(!session_is_registered('sess_file_break')) session_register('sess_file_break');
-if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
-if(!session_is_registered('sess_dept_nr')) session_register('sess_dept_nr');
-if(!session_is_registered('sess_title')) session_register('sess_title');
-if(!session_is_registered('sess_lang')) session_register('sess_lang');
-if(!session_is_registered('sess_user_id')) session_register('sess_user_id');
-if(!session_is_registered('sess_cur_page')) session_register('sess_cur_page');
-if(!session_is_registered('sess_searchkey')) session_register('sess_searchkey');
-if(!session_is_registered('sess_tos')) session_register('sess_tos'); # the session time out start time
-
+/*
+if( !isset($_SESSION['$sess_user_name'])) session_register('sess_user_name');
+if( !isset($_SESSION['$sess_user_origin'])) session_register('sess_user_origin');
+if( !isset($_SESSION['$sess_file_forward'])) session_register('sess_file_forward');
+if( !isset($_SESSION['$sess_file_return'])) session_register('sess_file_return');
+if( !isset($_SESSION['$sess_file_break'])) session_register('sess_file_break');
+if( !isset($_SESSION['$sess_path_referer'])) session_register('sess_path_referer');
+if( !isset($_SESSION['$sess_dept_nr'])) session_register('sess_dept_nr');
+if( !isset($_SESSION['$sess_title'])) session_register('sess_title');
+if( !isset($_SESSION['$sess_lang'])) session_register('sess_lang');
+if( !isset($_SESSION['$sess_user_id'])) session_register('sess_user_id');
+if( !isset($_SESSION['$sess_cur_page'])) session_register('sess_cur_page');
+if( !isset($_SESSION['$sess_searchkey'])) session_register('sess_searchkey');
+if( !isset($_SESSION['$sess_tos'])) session_register('sess_tos'); # the session time out start time
+*/
 $bname='';
 $bversion='';
 $user_id='';
@@ -83,7 +84,7 @@ $USERCONFIG=array();
 ****************************************************************************
 */
 
-require_once('./classes/phpSniff/phpSniff.class.php'); # Sniffer for PHP
+//require_once('./classes/phpSniff/phpSniff.class.php'); # Sniffer for PHP
 
 function configNew(&$bn,&$bv,&$f,$i,&$uid)
 {
@@ -92,7 +93,7 @@ function configNew(&$bn,&$bv,&$f,$i,&$uid)
 
   # We disable the error reporting, because Konqueror 3.0.3 causes a  runtime error output that stops the program.
   #  could be a bug in phpsniff .. hmmm?
-  $old_err_rep= error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+  //$old_err_rep= error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
   
   # Function rewritten by Thomas Wiedmann to use phpSniff class
   
@@ -105,25 +106,25 @@ function configNew(&$bn,&$bv,&$f,$i,&$uid)
   //$timer = new phpTimer();
   //$timer->start('main');
   //$timer->start('client1');
-  $sniffer_settings = array('check_cookies'=>$cc,'default_language'=>$dl,'allow_masquerading'=>$am);
-  $client = new phpSniff($UA,$sniffer_settings);
+  //$sniffer_settings = array('check_cookies'=>$cc,'default_language'=>$dl,'allow_masquerading'=>$am);
+  //$client = new phpSniff($UA,$sniffer_settings);
 
   # get phpSniff result
-  $i=$client->get_property('ip');
-  $bv=$client->get_property('version');
-  $bn=$client->get_property('browser');
+//   $i=$client->get_property('ip');
+//   $bv=$client->get_property('version');
+//   $bn=$client->get_property('browser');
 
   # translate some browsernames for "Care2x"
-  if ($bn == 'moz') { $bn='mozilla';}
-  else if ($bn == 'op') { $bn='opera';}
-  else if ($bn == 'ns') { $bn='netscape';}
-  else if ($bn == 'ie') { $bn='msie';}
+//   if ($bn == 'moz') { $bn='mozilla';}
+//   else if ($bn == 'op') { $bn='opera';}
+//   else if ($bn == 'ns') { $bn='netscape';}
+//   else if ($bn == 'ie') { $bn='msie';}
 
   $uid=uniqid('');
   $f='CFG'.$uid.str_replace(' ','',microtime()).'.cfg';
 
    # Return previous error reporting 
-   error_reporting($old_err_rep);
+   //error_reporting($old_err_rep);
 }
 
 /**
@@ -173,7 +174,7 @@ $glob_cfg->getConfig('language_%');
 
 
 $savelang=0;
-
+//TODO : only one language, remove all the other language related code
 # Start checking language properties 
 if(!$GLOBALCONFIG['language_single']) {
     # We get the language code
@@ -227,7 +228,7 @@ if(file_exists($lang_file)) {
     include($lang_file);
 } else {
     include('language/en/lang_en_startframe.php');  # en = english is the default language table
-	$lang='en';
+    $lang='en';
 }
 
 #
@@ -258,9 +259,9 @@ if((isset($mask)&&$mask)||!$config_exists||$savelang) {
 	if(empty($ip)) $USERCONFIG['ip']=$REMOTE_ADDR;
 	$USERCONFIG['mask']=$mask;
 	$USERCONFIG['lang']=$lang;
-	if(((($bname=='msie') ||($bname=='opera')) &&($bversion>4)) ||(($bname=='netscape')&&($bversion>3.5)) ||($bname=='mozilla')) {
-		$USERCONFIG['dhtml']=1;
-	}
+// 	if(((($bname=='msie') ||($bname=='opera')) &&($bversion>4)) ||(($bname=='netscape')&&($bversion>3.5)) ||($bname=='mozilla')) {
+// 		$USERCONFIG['dhtml']=1;
+// 	}
 	// *****************************
 	// Save config to db
 	// *****************************
@@ -304,7 +305,7 @@ $smarty->assign('sWindowTitle',$LDMainTitle);
 # Find out if there should be the old school framebased GUI been shown or the
 # latest div based menu
 #
-$config_type = 'use_old_gui_style';
+//$config_type = 'use_old_gui_style';
 $smarty->assign('sContentsFrameSource',"modules/news/start_page.php?lang=$lang&sid=$sid\"");
 
 $smarty->display(CARE_BASE . 'main/view/noframe.tpl');

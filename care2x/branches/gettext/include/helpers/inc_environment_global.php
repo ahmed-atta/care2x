@@ -32,8 +32,7 @@ if ($debug==true) {
 	        $priority = PEAR_LOG_INFO;
 	    }
 	
-	    $logger->log($message . ' in ' . $file . ' at line ' . $line,
-	                 $priority);
+	    $logger->log($message . ' in ' . $file . ' at line ' . $line, $priority);
 	}
 	
 	set_error_handler('errorHandler');
@@ -76,8 +75,8 @@ define('NODATE_DEFAULT','0000-00-00');
 # Template theme for Care2x`s own template object
 # Set the default template theme
 #
-$template_theme='biju';
-//$template_theme='default';
+//$template_theme='biju';
+$template_theme='default';
 #
 # Set the template path
 #
@@ -148,17 +147,17 @@ define('URL_REDIRECT_APPEND','?sid='.$sid.'&lang='.$lang);
 #
 # Page generation time start
 #
+/*
 if(defined('USE_PAGE_GEN_TIME')&&USE_PAGE_GEN_TIME){
 	include(CARE_BASE .'classes/loadtime/loadtimeclass.php');
 	$pgt=new loadtime();
 	$pgt->start();
 }
+*/
 //echo URL_APPEND; echo URL_REDIRECT_APPEND;
 define('CARE_GUI',$httprotocol . '://' . $main_domain);
 
 #
 # Template align tags, default values
 #
-$TP_ALIGN='left'; # template variable for document direction
-$TP_ANTIALIGN='right';
 $TP_DIR='ltr';
