@@ -95,12 +95,11 @@ class smarty_care extends Smarty {
 		$module = MODULE != '' ? "modules/" : "";
 		if( file_exists( $this->sDocRoot. $module . MODULE . "/view/")){
 			$this->template_dir = $this->sDocRoot. $module . MODULE . "/view/";
-			$this->compile_dir = $this->templateCache ."/" . $this->templatedir;
 		} else {
 			$this->template_dir = "";
-			$this->compile_dir = $this->templateCache;
 		}
 
+		$this->compile_dir = $this->templateCache ;
 		$this->config_dir = $this->sDocRoot.'configs';
 		$this->cache_dir = $this->compile_dir;//.'/cache';
 
