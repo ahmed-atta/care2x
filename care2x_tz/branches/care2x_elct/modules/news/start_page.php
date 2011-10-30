@@ -18,7 +18,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 $cksid='ck_sid'.$sid;
 if(!$_COOKIE[$cksid] && !$cookie) { header("location:".$root_path."cookies.php?lang=$lang&startframe=1"); exit;}
 
-if(!session_is_registered('sess_news_nr')) session_register('sess_news_nr');
+if(!isset($_SESSION['sess_news_nr'])) $_SESSION['sess_news_nr']="";
 
 $readerpath='headline-read.php?sid='.$sid.'&lang='.$lang;
 # reset all 2nd level lock cookies
@@ -37,12 +37,12 @@ if(!isset($news_headline_max_display)||!$news_headline_max_display) $news_num_st
 $thisfile=basename($_SERVER['PHP_SELF']);
 require_once($root_path.'include/care_api_classes/class_news.php');
 $newsobj=new News;
-$news=&$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
+$news=$newsobj->getHeadlinesPreview($dept_nr,$news_num_stop);
 
 # Set initial session environment for this module
 
-if(!session_is_registered('sess_file_editor')) session_register('sess_file_editor');
-if(!session_is_registered('sess_file_reader')) session_register('sess_file_reader');
+if(!isset($_SESSION['sess_file_editor'])) $_SESSION['sess_file_editor']="";
+if(!isset($_SESSION['sess_file_reader'])) $_SESSION['sess_file_reader']="";
 
 $_SESSION['sess_file_break']=$top_dir.$thisfile;
 $_SESSION['sess_file_return']=$top_dir.$thisfile;

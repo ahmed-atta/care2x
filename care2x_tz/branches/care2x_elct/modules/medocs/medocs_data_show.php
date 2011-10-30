@@ -126,7 +126,7 @@ if($dblink_ok) {
 /* Prepare text and resolve the numbers */
 require_once($root_path.'include/inc_patient_encounter_type.php');		 
 
-if(!session_is_registered('sess_parent_mod')) session_register('sess_parent_mod');
+if(!isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod']="";
 
 /* Save encounter nrs to session */
 $_SESSION['sess_pid']=$pid;

@@ -24,7 +24,7 @@ require_once($root_path.'include/care_api_classes/class_ward.php');
 require_once($root_path.'include/care_api_classes/class_globalconfig.php');
 
 
-if(!session_is_registered('sess_parent_mod')) session_register('sess_parent_mod');
+if(!isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod']="";
 
 # Create objects
 $encounter_obj=new Encounter($encounter_nr);

@@ -50,19 +50,19 @@ require('./include/inc_environment_global.php');
 
 
 # Register global session variables
-if(!session_is_registered('sess_user_name')) session_register('sess_user_name');
-if(!session_is_registered('sess_user_origin')) session_register('sess_user_origin');
-if(!session_is_registered('sess_file_forward')) session_register('sess_file_forward');
-if(!session_is_registered('sess_file_return')) session_register('sess_file_return');
-if(!session_is_registered('sess_file_break')) session_register('sess_file_break');
-if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
-if(!session_is_registered('sess_dept_nr')) session_register('sess_dept_nr');
-if(!session_is_registered('sess_title')) session_register('sess_title');
-if(!session_is_registered('sess_lang')) session_register('sess_lang');
-if(!session_is_registered('sess_user_id')) session_register('sess_user_id');
-if(!session_is_registered('sess_cur_page')) session_register('sess_cur_page');
-if(!session_is_registered('sess_searchkey')) session_register('sess_searchkey');
-if(!session_is_registered('sess_tos')) session_register('sess_tos'); # the session time out start time
+if(!isset($_SESSION['sess_user_name'])) $_SESSION['sess_user_name']="";
+if(!isset($_SESSION['sess_user_origin'])) $_SESSION['sess_user_origin']="";
+if(!isset($_SESSION['sess_file_forward'])) $_SESSION['sess_file_forward']="";
+if(!isset($_SESSION['sess_file_return'])) $_SESSION['sess_file_return']="";
+if(!isset($_SESSION['sess_file_break'])) $_SESSION['sess_file_break']="";
+if(!isset($_SESSION['sess_path_referer'])) $_SESSION['sess_path_referer']="";
+if(!isset($_SESSION['sess_dept_nr'])) $_SESSION['sess_dept_nr']="";
+if(!isset($_SESSION['sess_title'])) $_SESSION['sess_title']="";
+if(!isset($_SESSION['sess_lang'])) $_SESSION['sess_lang']="";
+if(!isset($_SESSION['sess_user_id'])) $_SESSION['sess_user_id']="";
+if(!isset($_SESSION['sess_cur_page'])) $_SESSION['sess_cur_page']="";
+if(!isset($_SESSION['sess_searchkey'])) $_SESSION['sess_searchkey']="";
+if(!isset($_SESSION['sess_tos'])) $_SESSION['sess_tos']=""; # the session time out start time
 
 $bname='';
 $bversion='';
