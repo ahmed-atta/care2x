@@ -39,7 +39,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 //$breakfile und $returnfile f�r den "R�ckweg" setzen
 
-if(!session_is_registered('sess_path_referer')) session_register('sess_path_referer');
+if(!isset($_SESSION['sess_path_referer'])) $_SESSION['sess_path_referer']="";
 $returnfile=$root_path.$_SESSION['sess_path_referer'].URL_APPEND;
 $_SESSION['sess_file_return']=basename(__FILE__);
 $_SESSION['sess_user_origin']='it';

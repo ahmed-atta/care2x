@@ -87,8 +87,8 @@ if($_SESSION['sess_user_origin']=='phonedir'&&$_SESSION['sess_personell_nr']){
 /* Prepare text and resolve the numbers */
 require_once($root_path.'include/inc_patient_encounter_type.php');		 
 
-if(!session_is_registered('sess_parent_mod')) session_register('sess_parent_mod');
-if(!session_is_registered('sess_user_origin')) session_register('sess_user_origin');
+if(!isset($_SESSION['sess_parent_mod'])) $_SESSION['sess_parent_mod']="";
+if(!isset($_SESSION['sess_user_origin'])) $_SESSION['sess_user_origin']="";
 
 /* Save encounter nrs to session */
 $_SESSION['sess_pid']=$pid;

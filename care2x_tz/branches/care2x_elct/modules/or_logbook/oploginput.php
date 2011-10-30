@@ -319,7 +319,7 @@ if($mode=='search'||$mode=='paginate'){
 		} // end of switch mode
 }
 
-if(!session_is_registered('sess_comdat')) session_register('sess_comdat');
+if(!isset($_SESSION['sess_comdat'])) $_SESSION['sess_comdat']="";
 # Set the user origin
 $_SESSION['sess_user_origin']='op_room';
 $_SESSION['sess_comdat']="&enc_nr=".$pdata['encounter_nr']."&dept_nr=$dept_nr&saal=$saal&thisday=$pyear-$pmonth-$pday&op_nr=$op_nr&pyear=$pyear&pmonth=$pmonth&pday=$pday";
