@@ -33,13 +33,13 @@ switch ($action)
 		{
 			// $attach_tab is the array of attachments
 			// If it's a text/plain, display it
-			if ($display_text_attach && eregi ('text/plain', $tmp['mime']))
+			if ($display_text_attach && stristr ($tmp['mime'],'text/plain'))
 				echo '<hr />'.view_part($servr, $user, stripslashes($passwd), $folder, $mail, $tmp['number'], $tmp['transfer'], $tmp['charset'], $charset);
-			if ($display_img_attach && (eregi ('image', $tmp['mime']) && ($tmp['id'] == '')))
+			if ($display_img_attach && (stristr ($tmp['mime'],'image') && ($tmp['id'] == '')))
 			{
 				// if it's an image, display it
 				$img_type = array_pop(explode('/', $tmp['mime']));
-				if (eregi('JPEG', $img_type) || eregi('JPG', $img_type) || eregi('GIF', $img_type) || eregi ('PNG', $img_type))
+				if (stristr($img_type,'JPEG') || stristr($img_type,'JPG') || stristr($img_type,'GIF') || stristr($img_type,'PNG'))
 				{
 					echo '<hr />';
 					echo '<center><img src="get_img.php?'.$php_session.'='.$$php_session.'&amp;mail='.$mail.'&amp;folder='.$folder.'&amp;num='.$tmp['number'].'&amp;mime='.$img_type.'&amp;transfer='.$tmp['transfer'].'" /></center>';

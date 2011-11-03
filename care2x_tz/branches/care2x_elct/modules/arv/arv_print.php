@@ -21,9 +21,9 @@ require_once($root_path.'include/care_api_classes/class_tz_arv_visit.php');
 $breakfile="modules/arv/arv_overview.php";
 $add_breakfile="&pid=".$_GET['pid'];
 
-$o_arv_case=&new ARV_case($_GET['pid']);
+$o_arv_case=new ARV_case($_GET['pid']);
 $o_arv_case->getPatientARVData();
-$o_arv_visit=&new ARV_visit($o_arv_case->CurrentEncounter($_GET['pid']),$o_arv_case->getARVcaseID(),$_GET['arv_visit_id']);
+$o_arv_visit=new ARV_visit($o_arv_case->CurrentEncounter($_GET['pid']),$o_arv_case->getARVcaseID(),$_GET['arv_visit_id']);
 
 $visit_data=$o_arv_visit->get_visit_data();
 $codes=$o_arv_visit->get_aidsdef_codes();

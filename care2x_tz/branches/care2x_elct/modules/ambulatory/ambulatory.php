@@ -19,7 +19,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 // reset all 2nd level lock cookies
 require($root_path.'include/inc_2level_reset.php');
 
-if(!isset($_SESSION['sess_path_referer']) $_SESSION['sess_path_referer']="";
+//if(!isset($_SESSION['sess_path_referer']) $_SESSION['sess_path_referer']="";
 $breakfile=$root_path.'modules/news/start_page.php'.URL_APPEND;
 $_SESSION['sess_path_referer']=$top_dir.basename(__FILE__);
 $_SESSION['sess_user_origin']='amb';

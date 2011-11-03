@@ -25,7 +25,7 @@ $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');	
 $messages=null;
 //------------------------------------------------------------------------------------------------------
-$o_arv_case=&new ARV_case($_GET['pid']);
+$o_arv_case=new ARV_case($_GET['pid']);
 if(!$o_arv_case->isOk()) {
 	$messages_err=$o_arv_case->get_Error_message('all');
 	require ("gui/gui_arv_case.php");

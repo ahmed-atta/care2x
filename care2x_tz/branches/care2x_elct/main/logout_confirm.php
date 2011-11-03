@@ -5,6 +5,7 @@ require($root_path.'include/inc_environment_global.php');
 define('LANG_FILE','stdpass.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
+if (!isset($nm)) $nm="";
 ?>
 
 <?php html_rtl($lang); ?>

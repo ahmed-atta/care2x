@@ -2,7 +2,7 @@
 /**
 * this include file will only work properly if the calling script has created an smarty template object named $smarty
 */
-
+//error_reporting(~E_ALL);
 $nofile=0;
 
 /**
@@ -15,7 +15,7 @@ $smarty->assign('sNewsPreview','');
 $smarty->assign('sPreface','');
 $smarty->assign('sEditorLink','');
 
-if($news[$j]){
+if(isset($news[$j])){
 	# First test for record nr. + mime combination of image filename
 	# If not exists, try pic_file value + mime combination
 	
@@ -64,11 +64,11 @@ if($news[$j]){
 			
 		    $sBuffer = '<font size="'.$news_headline_body_font_size.'" face="'.$news_headline_body_font_face.'" color="'.$news_headline_body_font_color.'">';
 			
-			if ($news_headline_body_font_bold) $sBuffer = $sBuffer.'<b>';
+			if (isset($news_headline_body_font_bold)) $sBuffer = $sBuffer.'<b>';
 			
 			$sBuffer = $sBuffer.substr(deactivateHotHtml(nl2br($news[$j]['body'])), 0 ,$news_normal_preview_maxlen).'...';
 			
-			if ($news_headline_body_font_bold) $sBuffer = $sBuffer.'</b>';
+			if (isset($news_headline_body_font_bold)) $sBuffer = $sBuffer.'</b>';
 			
 			$sBuffer = $sBuffer.'</font>';
 			
@@ -83,7 +83,7 @@ if($news[$j]){
 		 }
 	} 
 
-	if(!$news[$j]||$nofile)
+	if(!isset($news[$j])||$nofile)
 	{ 
 		$i=$j;
 		

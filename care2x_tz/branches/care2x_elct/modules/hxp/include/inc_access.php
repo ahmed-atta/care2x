@@ -3,12 +3,12 @@
 /*------begin------
 * This protection code was suggested by Luki R. luki@karet.org
 */
-if (eregi('inc_access.php',$_SERVER['PHP_SELF'])) die('<meta http-equiv="refresh" content="0; url=../">');
+if (preg_match('/inc_access.php/i',$_SERVER['PHP_SELF'])) die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
 //include('./class/class_xmlrpcaccess.php');
 include($root_path.'include/care_api_classes/class_access.php');
-$access = & new Access();
+$access = new Access();
 //$permitarea='System_Admin';
 //$permitarea='_a_1_techreception';
 

@@ -48,7 +48,7 @@ if(($mode=='send') && isset($order_nr) && $order_nr){
 	#Check authenticity of validator person
 	   
 	include_once($root_path.'include/care_api_classes/class_access.php');
-	$user = & new Access($validator,$vpw);
+	$user = new Access($validator,$vpw);
 	   
 	if($user->isKnown()){
 		  

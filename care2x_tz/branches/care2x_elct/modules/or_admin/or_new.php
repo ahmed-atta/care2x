@@ -31,7 +31,7 @@ if(!isset($mode)) $mode='';
 # Create department object
 $dept_obj=& new Department;
 # Create the OR object
-$OR_obj= & new OPRoom;
+$OR_obj= new OPRoom;
 # Create the ward object
 $ward_obj=& new Ward;
 

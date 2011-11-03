@@ -1,6 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_date_format_functions.php',$_SERVER['PHP_SELF']))
+if (preg_match('/inc_date_format_functions.php/i',$_SERVER['PHP_SELF']))
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
@@ -65,7 +65,7 @@ function formatDate2Local($stdDate, $localFormat, $retTime=FALSE, $timeOnly=FALS
    if(!$sepChars) $sepChars=array('-','.','/',':',',');
    $localFormat=strtolower($localFormat);
 
-   if(eregi('0000',$stdDate))  return strtr($localFormat,'yYmMdDHis','000000000'); // IF  std date is 0 return 0's in local format
+   if(preg_match('/0000/i',$stdDate))  return strtr($localFormat,'yYmMdDHis','000000000'); // IF  std date is 0 return 0's in local format
 
    /* If time is included then isolate */
    if(strchr($stdDate,':'))
@@ -138,7 +138,7 @@ function formatDate2STD($localDate,$localFormat,&$sepChars)
 
    if(!$sepChars) $sepChars=array('-','.','/',':',',');
 
-	  if(eregi('0000',$finalDate)) $finalDate=0;
+	  if(preg_match('/0000/i',$finalDate)) $finalDate=0;
 
 
    if(!$finalDate)

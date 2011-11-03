@@ -1,6 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi('inc_currency_set.php',$_SERVER['PHP_SELF'])) 
+if (preg_match('/inc_currency_set.php/i',$_SERVER['PHP_SELF'])) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 

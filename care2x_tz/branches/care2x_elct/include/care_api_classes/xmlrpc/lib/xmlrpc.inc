@@ -1372,14 +1372,14 @@
 			else
 			{
 				$this->errstr='Connect error: '.$this->errstr;
-				$r=&new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['http_error'], $this->errstr . ' (' . $this->errno . ')');
+				$r=new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['http_error'], $this->errstr . ' (' . $this->errno . ')');
 				return $r;
 			}
 
 			if(!fputs($fp, $op, strlen($op)))
 			{
 				$this->errstr='Write error';
-				$r=&new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['http_error'], $this->errstr);
+				$r=new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['http_error'], $this->errstr);
 				return $r;
 			}
 			else
@@ -1430,7 +1430,7 @@
 			if(!function_exists('curl_init'))
 			{
 				$this->errstr='CURL unavailable on this install';
-				$r=&new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['no_curl'], $GLOBALS['xmlrpcstr']['no_curl']);
+				$r=new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['no_curl'], $GLOBALS['xmlrpcstr']['no_curl']);
 				return $r;
 			}
 			if($method == 'https')
@@ -1439,7 +1439,7 @@
 					((is_string($info) && strpos($info, 'OpenSSL') === null) || (is_array($info) && !isset($info['ssl_version']))))
 				{
 					$this->errstr='SSL unavailable on this install';
-					$r=&new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['no_ssl'], $GLOBALS['xmlrpcstr']['no_ssl']);
+					$r=new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['no_ssl'], $GLOBALS['xmlrpcstr']['no_ssl']);
 					return $r;
 				}
 			}
@@ -1660,7 +1660,7 @@
 			if(!$result) /// @todo we should use a better check here - what if we get back '' or '0'?
 			{
 				$this->errstr='no response';
-				$resp=&new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['curl_fail'], $GLOBALS['xmlrpcstr']['curl_fail']. ': '. curl_error($curl));
+				$resp=new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['curl_fail'], $GLOBALS['xmlrpcstr']['curl_fail']. ': '. curl_error($curl));
 				curl_close($curl);
 				if($keepalive)
 				{
@@ -2260,7 +2260,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 					else
 					{
 						error_log('XML-RPC: xmlrpcmsg::parseResponse: HTTPS via proxy error, tunnel connection possibly failed');
-						$r=&new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['http_error'], $GLOBALS['xmlrpcstr']['http_error']. ' (HTTPS via proxy error, tunnel connection possibly failed)');
+						$r=new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['http_error'], $GLOBALS['xmlrpcstr']['http_error']. ' (HTTPS via proxy error, tunnel connection possibly failed)');
 						return $r;
 					}
 				}
@@ -2281,7 +2281,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 				{
 					$errstr= substr($data, 0, strpos($data, "\n")-1);
 					error_log('XML-RPC: xmlrpcmsg::parseResponse: HTTP error, got response: ' .$errstr);
-					$r=&new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['http_error'], $GLOBALS['xmlrpcstr']['http_error']. ' (' . $errstr . ')');
+					$r=new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['http_error'], $GLOBALS['xmlrpcstr']['http_error']. ' (' . $errstr . ')');
 					return $r;
 				}
 
@@ -2607,7 +2607,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 						xml_get_current_line_number($parser), xml_get_current_column_number($parser));
 				}
 				error_log($errstr);
-				$r=&new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['invalid_return'], $GLOBALS['xmlrpcstr']['invalid_return'].' ('.$errstr.')');
+				$r=new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['invalid_return'], $GLOBALS['xmlrpcstr']['invalid_return'].' ('.$errstr.')');
 				xml_parser_free($parser);
 				if($this->debug)
 				{
@@ -2637,7 +2637,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 				// something odd has happened
 				// and it's time to generate a client side error
 				// indicating something odd went on
-				$r=&new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['invalid_return'],
+				$r=new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['invalid_return'],
 					$GLOBALS['xmlrpcstr']['invalid_return']);
 			}
 			else
@@ -2681,7 +2681,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 				}
 				else
 				{
-					$r=&new xmlrpcresp($v, 0, '', $return_type);
+					$r=new xmlrpcresp($v, 0, '', $return_type);
 				}
 			}
 
@@ -2797,10 +2797,10 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 				case 2:
 					// we're adding a scalar value to an array here
 					//$ar=$this->me['array'];
-					//$ar[]=&new xmlrpcval($val, $type);
+					//$ar[]=new xmlrpcval($val, $type);
 					//$this->me['array']=$ar;
 					// Faster (?) avoid all the costly array-copy-by-val done here...
-					$this->me['array'][]=&new xmlrpcval($val, $type);
+					$this->me['array'][]=new xmlrpcval($val, $type);
 					return 1;
 				default:
 					// a scalar, so set the value and remember we're scalar

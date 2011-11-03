@@ -1,6 +1,6 @@
 <?php
 
-if (eregi('pageheader1.php',$_SERVER['PHP_SELF'])){
+if (stristr($_SERVER['PHP_SELF'],'pageheader1.php')){
 	die('<meta http-equiv="refresh" content="0; url=../../../">');
 }
 

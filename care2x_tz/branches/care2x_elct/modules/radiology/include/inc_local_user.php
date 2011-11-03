@@ -1,6 +1,6 @@
 <?php
 #------begin------ This protection code was suggested by Luki R. luki@karet.org
-if (eregi('inc_drg_entry_save.php',$_SERVER['PHP_SELF'])) 
+if (stristr($_SERVER['PHP_SELF'],'inc_drg_entry_save.php')) 
 	die('<meta http-equiv="refresh" content="0; url=../../">');
 #------end
 

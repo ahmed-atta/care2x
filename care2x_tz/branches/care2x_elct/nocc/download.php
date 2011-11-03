@@ -11,14 +11,14 @@
  * File for downloading the attachments
  */
 
-if (eregi('MSIE', $_SERVER['HTTP_USER_AGENT']) || eregi('Internet Explorer', $_SERVER['HTTP_USER_AGENT']))
+if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE') || stristr($_SERVER['HTTP_USER_AGENT'],'Internet Explorer'))
 	session_cache_limiter('public');
 session_start();
 require ('conf.php');
 
 header('Content-Type: application/x-unknown-' . $mime);
 // IE 5.5 is weird, the line is not correct but it works
-if (eregi('MSIE', $_SERVER['HTTP_USER_AGENT']) && eregi('5.5', $_SERVER['HTTP_USER_AGENT']))
+if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE') && stristr($_SERVER['HTTP_USER_AGENT'],'5.5'))
 	header('Content-Disposition: filename=' . urldecode($filename));
 else
 	header('Content-Disposition: attachment; filename=' . urldecode($filename));
