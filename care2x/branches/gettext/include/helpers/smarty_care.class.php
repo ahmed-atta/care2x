@@ -102,7 +102,7 @@ class smarty_care extends Smarty {
 		//$this->cache_dir = $this->compile_dir;//.'/cache';
 
 		# For temporary debugging
-	    if(0){
+	    	if(0){
 			echo  "template dir : " . $this->template_dir."<p>";
 			echo  "compile dir : " .$this->compile_dir."<p>";
 			echo  "config dir : " .$this->config_dir."<p>";
