@@ -54,7 +54,8 @@ $modetypes=array('sendmail','listmail');
 											if(!isset($$delbuf)||!$$delbuf) continue;
 											$delbuf2=trim(strtr($$delbuf,"+"," "));
 											//echo "$delbuf2<br>$inb[$i]<br>"; 
-											if(eregi($delbuf2,trim($inb[$i])))
+											$check = "/".$delbuf2."/i";
+											if(preg_match($check,trim($inb[$i])))
 											{
 												$trash=array_splice($inb,$i,1);
 												$i--;

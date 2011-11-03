@@ -497,7 +497,7 @@ if($rows){
 				*/
 				if ($dept_nr==42)
 				{
-					$o_arv_patient=&new ART_patient($patient['pid']);
+					$o_arv_patient=new ART_patient($patient['pid']);
 					if($o_arv_patient->is_arv_admitted($patient['pid'])) {
 						$temp_image="<a href=\"javascript:getARV('".$patient['pid']."','".$patient['encounter_nr']."')\"><img ".createComIcon($root_path,'ball_gray.png','0','',TRUE)." alt=\"inARV\"></a>";
 					}
@@ -508,7 +508,7 @@ if($rows){
 
 				if ($dept_nr==7)
 				{
-					//$o_arv_patient=&new ART_patient($patient['pid']);
+					//$o_arv_patient=new ART_patient($patient['pid']);
 					//if($o_arv_patient->is_arv_admitted($patient['pid'])) {
 						//$temp_image="<a href=\"javascript:getEyeclinic('".$patient['pid']."','".$patient['encounter_nr']."')\"><img ".createComIcon($root_path,'ball_gray.png','0','',TRUE)." alt=\"inARV\"></a>";
 					//}

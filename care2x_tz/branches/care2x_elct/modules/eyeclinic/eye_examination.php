@@ -18,7 +18,7 @@ require_once($root_path.'include/care_api_classes/class_eye_clinic.php');
 */
 //-------------------------------------------------------------------------------------------------------------------------------------
 
-$o_arv_patient=&new ART_patient($_REQUEST['pid'],$_REQUEST['registration_id']);
+$o_arv_patient=new ART_patient($_REQUEST['pid'],$_REQUEST['registration_id']);
 
 $registration_data=$o_arv_patient->getRegistrationData();
 

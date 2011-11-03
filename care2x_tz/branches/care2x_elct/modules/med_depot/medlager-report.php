@@ -21,7 +21,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 
 # Create a core object
 require_once($root_path.'include/care_api_classes/class_core.php');
-$core = & new Core;
+$core = new Core;
 
 $thisfile='medlager-report.php';
 

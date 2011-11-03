@@ -6,13 +6,13 @@
 /**
 * deactivateHotHtml disables the <script> <input> <form> <print> tags by inserting the </> characters
 */
-function deactivateHotHtml(&$str)
+function deactivateHotHtml($str)
 {
-    $str=eregi_replace('script','scri</>pt',$str);    
-	$str=eregi_replace('form','for</>m',$str);	
-	$str=eregi_replace('input','inp</>ut',$str);
-	$str=eregi_replace('echo','ec</>ho',$str);
-	$str=eregi_replace('print','pr</>int',$str);
+    $str=str_ireplace('script','scri</>pt',$str);    
+	$str=str_ireplace('form','for</>m',$str);	
+	$str=str_ireplace('input','inp</>ut',$str);
+	$str=str_ireplace('echo','ec</>ho',$str);
+	$str=str_ireplace('print','pr</>int',$str);
 	
 	return $str;
 }

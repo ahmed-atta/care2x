@@ -9,7 +9,7 @@ require($root_path.'include/inc_environment_global.php');
 //require_once($root_path.'include/inc_front_chain_lang.php');
 # Create the encounter object
 include($root_path.'include/care_api_classes/class_encounter.php');
-$enc = & new Encounter();
+$enc = new Encounter();
 # Load the authentication functions
 require('./include/inc_access.php');
 

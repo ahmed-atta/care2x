@@ -7,7 +7,7 @@ require($root_path.'include/inc_environment_global.php');
 //define('NO_CHAIN',1);
 //require_once($root_path.'include/inc_front_chain_lang.php');
 include($root_path.'include/care_api_classes/class_person.php');
-$person = & new Person();
+$person = new Person();
 
 require('./include/inc_access.php');
 

@@ -1,6 +1,6 @@
 <?php
 /*------begin------ This protection code was suggested by Luki R. luki@karet.org ---- */
-if (eregi("inc_rightcolumn_menu.php",$_SERVER['PHP_SELF']))
+if (preg_match("/inc_rightcolumn_menu.php/i",$_SERVER['PHP_SELF']))
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 
@@ -9,6 +9,7 @@ $config_type='main_info_%';
 require($root_path.'include/inc_get_global_config.php');
 
 #Workaround
+if (!isset($main_info_address)) $main_info_address="";
 $main_info_address=nl2br($main_info_address);
 /* Prepare the url links variables */
 $url_open="open-time.php".URL_APPEND;
@@ -29,7 +30,7 @@ $url_jscredits="javascript:openCreditsWindow()";
 $TP_com_img_path=$root_path.'gui/img/common';
 
 # Load the template
-$tp=&$TP_obj->load('tp_rightcolumn_menu.htm');
+$tp=$TP_obj->load('tp_rightcolumn_menu.htm');
 
 # Output display
 eval ("echo $tp;");

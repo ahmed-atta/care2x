@@ -47,7 +47,7 @@ require('./gui_bridge/default/gui_tabs_personell_reg.php');
 <?php
 
 	require_once($root_path.'include/care_api_classes/class_gui_person_show.php');
-	$person = & new GuiPersonShow;
+	$person = new GuiPersonShow;
 	$person->setPID($pid);
 	$person->display();
 

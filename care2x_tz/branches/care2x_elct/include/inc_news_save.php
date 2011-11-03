@@ -1,5 +1,5 @@
 <?php
-if (eregi("inc_news_save.php",$_SERVER['PHP_SELF'])) 
+if (preg_match("/inc_news_save.php/i",$_SERVER['PHP_SELF'])) 
 	die('<meta http-equiv="refresh" content="0; url=../">');
 /*------end------*/
 

@@ -63,7 +63,7 @@ $smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.select()";');
 # Start creating the search module
 require_once($root_path.'include/care_api_classes/class_gui_search_person.php');
 
-$psearch = & new GuiSearchPerson;
+$psearch = new GuiSearchPerson;
 
 $psearch->setTargetFile('upload.php');
 

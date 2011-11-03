@@ -19,7 +19,7 @@ $returnfile='edv_user_access_list.php'.URL_APPEND;
 //$_SESSION['sess_file_return']='edv.php';
 
 require_once($root_path.'include/care_api_classes/class_access.php');
-$user = & new Access($itemname);
+$user = new Access($itemname);
 
 if($user->UserExists()){
 

@@ -233,7 +233,7 @@ ob_start();
 	 {
 		 echo '
 		<option value="'.$v.'"';
-		if (eregi($dept,$x)) echo 'selected'; 
+		if (preg_match("/".$dept."/i",$x)) echo 'selected'; 
 		echo '>'.$v.'</option>';
 	}
 	reset($LDEmailDomains);
@@ -290,7 +290,7 @@ if ($regError) echo $regError;
 	 {
 		 echo '
 		<option value="'.$v.'"';
-		if (eregi($dept,$x)) echo "selected"; 
+		if (preg_match("/".$dept."/i",$x)) echo "selected"; 
 		echo '>'.$v.'</option>';
 	}
 ?>

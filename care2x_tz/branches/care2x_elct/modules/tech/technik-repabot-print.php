@@ -14,7 +14,7 @@ define('LANG_FILE','tech.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/inc_front_chain_lang.php');
 require_once($root_path.'include/care_api_classes/class_core.php');
-$core = & new Core;
+$core = new Core;
 
 //$db->debug=1;
 

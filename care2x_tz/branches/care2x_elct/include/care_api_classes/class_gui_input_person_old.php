@@ -152,7 +152,7 @@ class GuiInputPerson {
 		$photo_path = (is_dir($root_path.$GLOBAL_CONFIG['person_foto_path'])) ? $GLOBAL_CONFIG['person_foto_path'] : $this->default_photo_path;
 
 		if (($mode=='save') || ($mode=='forcesave')) {
-		$search_obj = & new advanced_search();
+		$search_obj = new advanced_search();
 		if (is_array($result_array=$search_obj->get_equal_words("tribe_name", "care_tz_tribes", false, 65, 'tribe_id')) && $name_maiden && !$no_tribe)
 		{
 			$tribe_array=$result_array;
@@ -451,7 +451,7 @@ class GuiInputPerson {
 		$insurance_classes=&$pinsure_obj->getInsuranceClassInfoObject('class_nr,name,LD_var AS "LD_var"');
 
 		include_once($root_path.'include/inc_photo_filename_resolve.php');
-		$search_obj = & new advanced_search();
+		$search_obj = new advanced_search();
 		if(!$update)
 		{
 			$tribe=$name_maiden;
