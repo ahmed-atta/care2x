@@ -285,10 +285,6 @@ if($rows){
 
 <?php
 
-	$bgimg='tableHeaderbg3.gif';
-	//$bgimg='tableHeader_gr.gif';
-	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
-
 	$append="&usenum=$usenum&arch=$arch";
 
 	if($usenum){

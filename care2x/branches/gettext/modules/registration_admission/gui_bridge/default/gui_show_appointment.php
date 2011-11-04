@@ -1,8 +1,4 @@
 <?php
-if($parent_admit) $bgimg='tableHeaderbg3.gif';
-	else $bgimg='tableHeader_gr.gif';
-$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
-
 # Prepare the encounter classes into an array
 if(is_object($encounter_classes)){
 	while($ec_row=$encounter_classes->FetchRow()) $enc_class[$ec_row['class_nr']]=$ec_row;

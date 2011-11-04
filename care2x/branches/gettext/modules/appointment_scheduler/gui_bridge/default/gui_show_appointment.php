@@ -1,7 +1,3 @@
-<?php
-$bgimg='tableHeader_gr.gif';
-$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
-?>
 <script language="">
 <!-- Script Begin
 function cancelAppointment(nr) {
@@ -30,10 +26,10 @@ function checkApptDate(d,e,n){
 
 <table border=0 cellpadding=3 cellspacing=1 width=100%>
   <tr class="wardlisttitlerow">
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDDate/$LDTime/$LDDetails"; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPatient; ?></td>
-    <td <?php echo $tbg; ?>><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDAppointments; ?></td>
-    <td <?php echo $tbg; ?> colspan=2><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDStatus; ?></td>
+    <td ><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo "$LDDate/$LDTime/$LDDetails"; ?></td>
+    <td ><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDPatient; ?></td>
+    <td ><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDAppointments; ?></td>
+    <td colspan=2><FONT SIZE=-1  FACE="Arial" color="#000066"><?php echo $LDStatus; ?></td>
   </tr>
 <?php
 $toggle=0;

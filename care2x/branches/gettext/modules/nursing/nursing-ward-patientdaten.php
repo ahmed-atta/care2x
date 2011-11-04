@@ -544,7 +544,7 @@ function rx(){
 		</td>
 		</tr>
 		<tr bgcolor="#696969" >
-		<td colspan=3   background="'.createBgSkin($root_path,'folderskin2.jpg').'">&nbsp;</td>
+		<td colspan=3>&nbsp;</td>
 		</tr>';
 /**
 *  Display the patient's basic info
@@ -554,7 +554,7 @@ function rx(){
 */		
 echo '
 <tr  bgcolor="#696969" >
-	<td  background="'.createBgSkin($root_path,'folderskin2.jpg').'" width="10%">&nbsp;</td>
+	<td  width="10%">&nbsp;</td>
 		<td valign="top" bgcolor="#ffffff"><font face="verdana,arial" size="2">';
 
 //..................... START...... PATIENT_INFO_HTML
@@ -639,11 +639,11 @@ echo '
 
 echo '
 		</td>
-		<td   background="'.createBgSkin($root_path,'folderskin2.jpg').'" >&nbsp;
+		<td >&nbsp;
 		</td>
 		</tr>
 		<tr bgcolor="#696969" >
-		<td colspan=3  background="'.createBgSkin($root_path,'folderskin2.jpg').'">&nbsp;</td>
+		<td colspan=3 >&nbsp;</td>
 		</tr>
 		</table>
 		';

@@ -163,11 +163,6 @@ $smarty->assign('sOptionsMenu',$sTemp);
 
 if($mode=='show'){
 
-	if($parent_admit) $bgimg='tableHeaderbg3.gif';
-		else $bgimg='tableHeader_gr.gif';
-
-	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
-
 	if($rows){
 		
 		# Buffer the option block
