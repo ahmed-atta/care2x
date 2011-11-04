@@ -103,8 +103,8 @@ ob_start();
 	# Stop buffering, get contents
 
 	$sTemp = ob_get_contents();
+	
 ob_end_clean();
-
 # assign contents to subframe
 
 $smarty->assign('sSubMenuBlock',$sTemp);
