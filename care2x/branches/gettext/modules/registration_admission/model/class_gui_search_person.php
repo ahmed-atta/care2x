@@ -380,11 +380,6 @@ class GuiSearchPerson {
 		#
 		$this->targetappend.="&firstname_too=$firstname_too&origin=$origin";
 
-		//echo $mode;
-		if($parent_admit) $bgimg='tableHeaderbg3.gif';
-			else $bgimg='tableHeader_gr.gif';
-		$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
-
 		if($mode=='search'||$mode=='paginate'){
 			if ($linecount) $this->smarty->assign('LDSearchFound',str_replace("~nr~",$totalcount,$LDSearchFound).' '.$LDShowing.' '.$pagen->BlockStartNr().' '.$LDTo.' '.$pagen->BlockEndNr().'.');
 				else $this->smarty->assign('LDSearchFound',str_replace('~nr~','0',$LDSearchFound));

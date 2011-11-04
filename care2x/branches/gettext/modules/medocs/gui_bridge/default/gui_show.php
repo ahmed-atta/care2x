@@ -189,14 +189,9 @@ if (!$GLOBAL_CONFIG['person_name_others_hide'])
 <?php
 if($mode=='show'){
 
-	if($parent_admit) $bgimg='tableHeaderbg3.gif';
-	else $bgimg='tableHeader_gr.gif';
-
-	$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
-
 	if($rows){
 
-		@ include('./gui_bridge/default/gui_'.$thisfile);
+		include('./gui_bridge/default/gui_'.$thisfile);
 
 	}else{
 ?>

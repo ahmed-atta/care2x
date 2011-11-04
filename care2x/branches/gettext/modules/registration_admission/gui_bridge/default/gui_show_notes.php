@@ -214,10 +214,6 @@ $smarty->assign('LDBy',$LDBy);
 
 if($mode=='show'){
 	if($rows){
-		if($parent_admit) $bgimg='tableHeaderbg3.gif';
-			else $bgimg='tableHeader_gr.gif';
-		$tbg= 'background="'.$root_path.'gui/img/common/'.$theme_com_icon.'/'.$bgimg.'"';
-
 		$smarty->assign('subtitle',$subtitle);
 		$smarty->assign('LDDetails',$LDDetails);
 
