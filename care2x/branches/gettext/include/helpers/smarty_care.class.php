@@ -114,7 +114,7 @@ class smarty_care extends Smarty {
 
 		$this->debug = true;
 		//TODO : move this to a global configuration 
-		$this->caching = true;
+		$this->caching = false;
 
 		/**
 		* Smarty delimiters
