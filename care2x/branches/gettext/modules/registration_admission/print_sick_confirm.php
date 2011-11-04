@@ -17,10 +17,6 @@ define('MODULE','registration_admission');
 define('LANG_FILE_MODULAR','registration_admission.php');
 $local_user='aufnahme_user';
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
-# Load the template class
-require_once($root_path.'include/core/class_template.php');
-# Create the template object
-$TP_obj=new Template($root_path);
 
 $thisfile=basename(__FILE__);
 
@@ -38,10 +34,22 @@ if(!isset($sickform_style)){
 	$TP_href_2=$url_prepend.'_alltext';
 	$TP_href_3=$url_prepend.'_plain';
 	$TP_href_4=$url_prepend.'_data';
-	
-	$TP_selector=&$TP_obj->load('registration_admission/tp_sick_confirm_selectstyle.htm');
-	eval("echo $TP_selector;");
-	exit;
+	$smarty->assign('LDSickformStyleSelect',$LDSickformStyleSelect);
+	$smarty->assign('TP_root_path',$TP_root_path);
+	$smarty->assign('LDPlsSelectStyle',$LDPlsSelectStyle);
+	$smarty->assign('TP_href_1',$TP_href_1);
+	$smarty->assign('TP_img_1',$TP_img_1);
+	$smarty->assign('LDFullForm',$LDFullForm);
+	$smarty->assign('TP_href_2',$TP_href_2);
+	$smarty->assign('TP_img_2',$TP_img_2);
+	$smarty->assign('LDAllContents',$LDAllContents);
+	$smarty->assign('TP_href_3',$TP_href_3);
+	$smarty->assign('TP_img_3',$TP_img_3);
+	$smarty->assign('LDAllText',$LDAllText);
+	$smarty->assign('TP_href_4',$TP_href_4);
+	$smarty->assign('TP_img_4',$TP_img_4);
+	$smarty->assign('LDDataOnly',$LDDataOnly);
+	$smarty->display(__DIR__ . '/view/tp_sick_confirm_selectstyle.tpl');
 }
 
 require_once($root_path.'include/helpers/inc_date_format_functions.php');

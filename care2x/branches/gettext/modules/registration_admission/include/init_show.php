@@ -6,10 +6,6 @@ require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 require_once($root_path.'include/helpers/inc_date_format_functions.php');
 require_once($root_path.'modules/news/includes/inc_editor_fx.php');
 require_once($root_path.'include/core/class_person.php');
-# Load the template class
-require_once($root_path.'include/core/class_template.php');
-# Create the template object
-$TP_obj=new Template($root_path);
 
 $breakfile='patient.php';
 $admissionfile='admission_start.php'.URL_APPEND;

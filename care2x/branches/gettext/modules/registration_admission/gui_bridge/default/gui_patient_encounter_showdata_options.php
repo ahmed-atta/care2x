@@ -62,12 +62,6 @@ if(!$is_discharged&&!$enc_status['in_ward']&&!$enc_status['in_dept']&&(!$enc_sta
 }
 
 
-# Create the template object
-if(!is_object($TP_obj)){
-	include_once($root_path.'include/core/class_template.php');
-	$TP_obj=new Template($root_path);
-}
-
 # Assign the icons
 
 if($cfg['icons'] != 'no_icon'){

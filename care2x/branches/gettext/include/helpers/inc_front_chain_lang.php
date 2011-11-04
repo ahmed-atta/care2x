@@ -184,9 +184,3 @@ require_once('inc_img_fx.php'); # image functions
 if(isset($cfg['template_theme'])&&!empty($cfg['template_theme'])) $template_theme=$cfg['template_theme'];
 	else $template_theme = 'default';
 
-// Load template class by default
-if(!defined('NO_TEMPLATE')||!NO_TEMPLATE){
-	require_once(CARE_BASE . '/include/core/class_template.php'); // template class
-	# Template object
-	$TP_obj=new Template(CARE_BASE ,$template_path,$template_theme);
-}

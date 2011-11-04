@@ -117,22 +117,6 @@ ob_start();
     <td><b><?php echo $LDTheme; ?></b></td>
   </tr>
   
-<?php
-
-$dirs=&$TP_obj->getTemplateList();
-
-while(list($x,$v)=each($dirs)){
-?>
-  <tr class="submenu">
-    <td> <input type="radio" name="gui_theme" value="<?php echo $x; ?>" <?php	if($template_theme==$x) echo 'checked';	?>>
-		</td>
-    <td><b><?php echo $v; ?></b></td>
-  </tr>
-
-  
-  <?php
-}
-?>
   <tr >
     <td colspan=3><br><input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?> border=0></td>
   </tr>
