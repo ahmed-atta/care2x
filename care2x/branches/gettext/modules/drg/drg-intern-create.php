@@ -26,9 +26,6 @@ if(!isset($mode)) $mode='';
 if(!isset($non_grouped)) $non_grouped=false;
 
 
-require_once($root_path.'include/core/class_template.php');
-$tp_obj = new Template($root_path,$template_path,$template_theme);
-
 require_once($root_path.'modules/drg/model/class_drg.php');
 $DRG_obj = new DRG($pn);
 
