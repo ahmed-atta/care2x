@@ -207,6 +207,40 @@ if(!$data_entry&&($enc_status['encounter_status']!='cancelled')&&!$enc_status['i
 }
 
 # Load the template
-$TP_options=$TP_obj->load('registration_admission/tp_pat_admit_options.htm');
-eval("echo $TP_options;");
+$smarty->assign('TP_root_path',$TP_root_path);
+$smarty->assign('LDOptsForPatient',$LDOptsForPatient);
+$smarty->assign('TP_root_path',$TP_root_path);
+$smarty->assign('TP_iconPost',$TP_iconPost);
+$smarty->assign('TP_SICKCONFIRM',$TP_SICKCONFIRM);
+$smarty->assign('TP_iconFolder',$TP_iconFolder);
+$smarty->assign('TP_CHARTSFOLDER',$TP_CHARTSFOLDER);
+$smarty->assign('TP_iconBubble',$TP_iconBubble);
+$smarty->assign('TP_DIAGXRESULTS',$TP_DIAGXRESULTS);
+$smarty->assign('TP_iconTalk',$TP_iconTalk);
+$smarty->assign('TP_MEDOCS',$TP_MEDOCS);
+$smarty->assign('TP_iconEye',$TP_iconEye);
+$smarty->assign('TP_DRG',$TP_DRG);
+$smarty->assign('TP_iconOGuy',$TP_iconOGuy);
+$smarty->assign('TP_PRESCRIPTIONS',$TP_PRESCRIPTIONS);
+$smarty->assign('TP_iconHeads',$TP_iconHeads);
+$smarty->assign('TP_NOTESREPORTS',$TP_NOTESREPORTS);
+$smarty->assign('TP_iconWGuy',$TP_iconWGuy);
+$smarty->assign('TP_IMMUNIZATION',$TP_IMMUNIZATION);
+$smarty->assign('TP_iconWGuy',$TP_iconWGuy);
+$smarty->assign('TP_MSRMNTS',$TP_MSRMNTS);
+$smarty->assign('TP_iconWTorso',$TP_iconWTorso);
+$smarty->assign('TP_preg_BLK',$TP_preg_BLK);
+$smarty->assign('TP_iconIDCard',$TP_iconIDCard);
+$smarty->assign('TP_BIRTHDX',$TP_BIRTHDX);
+$smarty->assign('TP_iconGTeen',$TP_iconGTeen);
+$smarty->assign('TP_PATREGSHOW',$TP_PATREGSHOW);
+$smarty->assign('TP_iconCrossTeen',$TP_iconCrossTeen);
+$smarty->assign('TP_PATREGUPDATE',$TP_PATREGUPDATE);
+$smarty->assign('TP_iconIDCard',$TP_iconIDCard);
+$smarty->assign('TP_HISTORY',$TP_HISTORY);
+$smarty->assign('TP_iconPDF',$TP_iconPDF);
+$smarty->assign('TP_PRINT_PDFDOC',$TP_PRINT_PDFDOC);
+$smarty->assign('TP_iconXPaper',$TP_iconXPaper);
+$smarty->assign('TP_xenc_BLK',$TP_xenc_BLK);
+$smarty->display('/../../view/tp_pat_admit_options.tpl');
 ?>

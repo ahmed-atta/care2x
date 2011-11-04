@@ -342,8 +342,47 @@ if (($stored_request['result']!='') && $stored_request['status']!='done')
 	$TP_input_2='input';
 	
 	# Load template
-	$TP_generic=$TP_obj->load('laboratory/tp_form_generic.htm');
-	eval("echo $TP_generic;");
+	$smarty->assign('bgc1',$bgc1);
+	$smarty->assign('LDRequestTo',$LDRequestTo);
+	$smarty->assign('formtitle',$formtitle);
+	$smarty->assign('LDDepartment',$LDDepartment);
+	$smarty->assign('TP_checkbox_1',$TP_checkbox_1);
+	$smarty->assign('LDVisitRequested',$LDVisitRequested);
+	$smarty->assign('TP_checkbox_2',$TP_checkbox_2);
+	$smarty->assign('LDPatCanBeOrdered',$LDPatCanBeOrdered);
+	$smarty->assign('batch_nr',$batch_nr);
+	$smarty->assign('TP_img_barcode',$TP_img_barcode);
+	$smarty->assign('bgc1',$bgc1);
+	$smarty->assign('TP_img_patient_label',$TP_img_patient_label);
+	$smarty->assign('bgc1',$bgc1);
+	$smarty->assign('LDDiagnosesInquiries',$LDDiagnosesInquiries);
+	$smarty->assign('TP_vspacer_1',$TP_vspacer_1);
+	$smarty->assign('TP_block_1',$TP_block_1);
+	$smarty->assign('TP_diagnosis_quiry',$TP_diagnosis_quiry);
+	$smarty->assign('TP_block_1',$TP_block_1);
+	$smarty->assign('bgc1',$bgc1);
+	$smarty->assign('LDDate',$LDDate);
+	$smarty->assign('TP_send_date',$TP_send_date);
+	$smarty->assign('TP_calender_1',$TP_calender_1);
+	$smarty->assign('LDDoctor',$LDDoctor);
+	$smarty->assign('TP_input_1',$TP_input_1);
+	$smarty->assign('TP_send_doctor',$TP_send_doctor);
+	$smarty->assign('TP_send_doctor_x',$TP_send_doctor_x);
+	$smarty->assign('bgc1',$bgc1);
+	$smarty->assign('LDDeptReport',$LDDeptReport);
+	$smarty->assign('TP_vspacer_2',$TP_vspacer_2);
+	$smarty->assign('TP_block_2',$TP_block_2);
+	$smarty->assign('TP_result',$TP_result);
+	$smarty->assign('TP_block_2',$TP_block_2);
+	$smarty->assign('bgc1',$bgc1);
+	$smarty->assign('LDDate',$LDDate);
+	$smarty->assign('TP_report_date',$TP_report_date);
+	$smarty->assign('TP_calendar_2',$TP_calendar_2);
+	$smarty->assign('LDDoctor',$LDDoctor);
+	$smarty->assign('TP_input_2',$TP_input_2);
+	$smarty->assign('TP_result_doctor',$TP_result_doctor);
+	$smarty->assign('TP_result_doctor_x',$TP_result_doctor_x);	
+	$smarty->display(__DIR__ . '/view/tp_form_generic.tpl');
 	#  End of form 
 
 require($root_path.'modules/laboratory/includes/inc_test_request_hiddenvars.php');

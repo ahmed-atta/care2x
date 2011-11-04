@@ -24,6 +24,16 @@ $TP_NOTES=nl2br($notes['notes']);
 $TP_CLOSE='<a href="javascript:window.close()"><img '.createLDImgSrc($root_path,'close2.gif','0').'></a>';
 
 # Load the template
-$tp_notes=$TP_obj->load('registration_admission/tp_show_notes_details.htm');
-eval("echo $tp_notes;");
+$smarty->assign('title',$title);
+$smarty->assign('ln',$ln);
+$smarty->assign('fn',$fn);
+$smarty->assign('bd',$bd);
+$smarty->assign('title',$title);
+$smarty->assign('TP_NOTES',$TP_NOTES);
+$smarty->assign('TP_DATE',$TP_DATE);
+$smarty->assign('TP_TIME',$TP_TIME);
+$smarty->assign('TP_DOC',$TP_DOC);
+$smarty->assign('TP_USR',$TP_USR);
+$smarty->assign('TP_CLOSE',$TP_CLOSE);
+$smarty->display('/view/tp_show_notes_details.tpl');
 ?>
