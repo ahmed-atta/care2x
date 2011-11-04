@@ -157,7 +157,7 @@ function createBgSkin($froot,$fn)
 function createLogo(){
 
 	$froot = CARE_GUI;
-	$img_path_com_icon='gui/img/logos/';
+	$img_path_com_icon='uploads/logos/';
 	$fn = 'care_logo.png';
 
 	return "src='$froot$img_path_com_icon$fn'";
