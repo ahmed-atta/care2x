@@ -75,8 +75,7 @@ include($classpath.'class.ezpdf.php');
 $pdf=& new Cezpdf();
 
 
-//$logo=$root_path.'gui/img/logos/care_logo.jpg';
-$logo=$root_path.'gui/img/logos/care_logo_print.png';
+$logo=$root_path.'uploads/logos/care_logo_print.png';
 $pidbarcode=$root_path.'cache/barcodes/pn_'.$encounter['pid'].'.png';
 $encbarcode=$root_path.'cache/barcodes/en_'.$enc.'.png';
 
