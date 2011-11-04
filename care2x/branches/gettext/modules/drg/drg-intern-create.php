@@ -154,14 +154,50 @@ if($saveok){
 	}
 	
 	# Load the template
-	$tp=&$tp_obj->load('drg/tp_drg_group_create_show.htm');
+	$smarty->assign('LDInternalCodeNr',$LDInternalCodeNr);
+	$smarty->assign('code',$code);
+	$smarty->assign('LDDescription',$LDDescription);
+	$smarty->assign('description',$description);
+	$smarty->assign('LDSynonyms',$LDSynonyms);
+	$smarty->assign('synonyms',$synonyms);
+	$smarty->assign('LDAuxillaryNotes',$LDAuxillaryNotes);
+	$smarty->assign('LDIsSubGroup',$LDIsSubGroup);
+	$smarty->assign('TP_radio_value',$TP_radio_value);
+	$smarty->assign('LDParentCodeNr',$LDParentCodeNr);
+	$smarty->assign('parent_code',$parent_code);
+	$smarty->assign('LDStdCodeNr',$LDStdCodeNr);
+	$smarty->assign('std_code',$std_code);
+	$smarty->assign('LDExtraNotes',$LDExtraNotes);
+	$smarty->assign('notes',$notes);
+	$smarty->assign('TP_submit_src',$TP_submit_src);	
+	$smarty->display(__DIR__ . '/view/tp_drg_group_create_show.tpl');
 }else{
 	// Create the submit button
 	$TP_submit_src=createLDImgSrc($root_path,'savedisc.gif','0');
 	# Load the template
-	$tp=&$tp_obj->load('drg/tp_drg_group_create.htm');
+	$smarty->assign('LDInternalCodeNr',$LDInternalCodeNr);
+	$smarty->assign('code',$code);
+	$smarty->assign('LDDescription',$LDDescription);
+	$smarty->assign('description',$description);
+	$smarty->assign('LDSynonyms',$LDSynonyms);
+	$smarty->assign('synonyms',$synonyms);
+	$smarty->assign('LDSeparateCommas',$LDSeparateCommas);
+	$smarty->assign('LDAuxillaryNotes',$LDAuxillaryNotes);
+	$smarty->assign('LDIsSubGroup',$LDIsSubGroup);
+	$smarty->assign('LDYes',$LDYes);
+	$smarty->assign('LDNo',$LDNo);
+	$smarty->assign('LDParentCodeNr',$LDParentCodeNr);
+	$smarty->assign('parent_code',$parent_code);
+	$smarty->assign('LDIfSubGroup',$LDIfSubGroup);
+	$smarty->assign('LDStdCodeNr',$LDStdCodeNr);
+	$smarty->assign('std_code',$std_code);
+	$smarty->assign('LDIfAvailable',$LDIfAvailable);
+	$smarty->assign('LDExtraNotes',$LDExtraNotes);
+	$smarty->assign('notes',$notes);
+	$smarty->assign('TP_submit_src',$TP_submit_src);	
+	$smarty->display(__DIR__ . '/view/tp_drg_group_create.tpl');
 }
-eval("echo $tp;");
+
 ?>
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">

@@ -70,11 +70,49 @@ $glob_obj->getConfig('main_info_address');
 $TP_main_address=nl2br($GLOBAL_CONFIG['main_info_address']);
 
 # Load the template
-$TP_sickform=&$TP_obj->load('registration_admission/tp_show_sick_confirm.htm');
+$smarty->assign('TP_insco_1',$TP_insco_1);
+$smarty->assign('TP_insco_2',$TP_insco_2);
+$smarty->assign('TP_insco_3',$TP_insco_3);
+$smarty->assign('TP_insco_4',$TP_insco_4);
+$smarty->assign('TP_insco_5',$TP_insco_5);
+$smarty->assign('TP_insco_6',$TP_insco_6);
+$smarty->assign('TP_enc_insurance_nr',$TP_enc_insurance_nr);
+$smarty->assign('TP_enc_insurance_name',$TP_enc_insurance_name);
+$smarty->assign('TP_enc_insurance_subarea',$TP_enc_insurance_subarea);
+$smarty->assign('title',$title);
+$smarty->assign('name_last',$name_last);
+$smarty->assign('name_first',$name_first);
+$smarty->assign('TP_date_birth',$TP_date_birth);
+$smarty->assign('LDSickReport',$LDSickReport);
+$smarty->assign('TP_care_logo',$TP_care_logo);
+$smarty->assign('TP_main_address',$TP_main_address);
+$smarty->assign('LDSickConfirm',$LDSickConfirm);
+$smarty->assign('LDSickUntil',$LDSickUntil);
+$smarty->assign('TP_date_end',$TP_date_end);
+$smarty->assign('TP_href_des',$TP_href_des);
+$smarty->assign('TP_img_calendar',$TP_img_calendar);
+$smarty->assign('TP_href_end',$TP_href_end);
+$smarty->assign('LDStartingFrom',$LDStartingFrom);
+$smarty->assign('TP_date_start',$TP_date_start);
+$smarty->assign('TP_href_dss',$TP_href_dss);
+$smarty->assign('TP_img_calendar',$TP_img_calendar);
+$smarty->assign('TP_href_end',$TP_href_end);
+$smarty->assign('LDConfirmedOn',$LDConfirmedOn);
+$smarty->assign('TP_date_confirm',$TP_date_confirm);
+$smarty->assign('TP_href_dcs',$TP_href_dcs);
+$smarty->assign('TP_img_calendar',$TP_img_calendar);
+$smarty->assign('TP_href_end',$TP_href_end);
+$smarty->assign('TP_dept_logo',$TP_dept_logo);
+$smarty->assign('TP_width',$TP_width);
+$smarty->assign('TP_height',$TP_height);
+$smarty->assign('TP_dept_sigstamp',$TP_dept_sigstamp);
+$smarty->assign('LDInsurersCopy',$LDInsurersCopy);
+$smarty->assign('LDDiagnosis2',$LDDiagnosis2);
+$smarty->assign('TP_diagnosis',$TP_diagnosis);
+$smarty->display('/../../view/tp_show_sick_confirm.tpl');
 # Show the print button
 echo '<a href="javascript:printForm(\''.$sickconfirm['nr'].'\')"><img '.createLDImgSrc($root_path,'printout.gif','0').'></a>';
-# Output template
-eval("echo $TP_sickform;");
+
 
 # If more than 1 record available, list the remaining
 if($rows>1){
@@ -95,7 +133,15 @@ if($rows>1){
 		if($other_row['nr']==$get_nr) continue;
 		# If still empty, load and show the table header row.
 		if($TP_tb_header==''){
-			$TP_tb_header=$TP_obj->load('registration_admission/tp_show_sick_confirm_tb_header.htm');
+			$smarty->assign('TP_root_path',$TP_root_path);
+			$smarty->assign('LDOtherRecords',$LDOtherRecords);
+			$smarty->assign('TP_root_path',$TP_root_path);
+			$smarty->assign('LDConfirmedOn',$LDConfirmedOn);
+			$smarty->assign('TP_root_path',$TP_root_path);
+			$smarty->assign('LDDiagnosis2',$LDDiagnosis2);
+			$smarty->assign('TP_root_path',$TP_root_path);
+			$smarty->assign('LDDepartment',$LDDepartment);
+			$smarty->display(__DIR__ . '/../../view/tp_show_sick_confirm_tb_header.tpl');
 			eval("echo $TP_tb_header;");
 		}
 		# Prepare the confim date & diagnosis and href url and dept name
@@ -106,7 +152,13 @@ if($rows>1){
 			else $TP_dept_name=$other_row['name_formal'];
 		# Load  item row template if still empty
 		if($TP_tb_row==''){
-			$TP_tb_row=$TP_obj->load('registration_admission/tp_show_sick_confirm_tb_row.htm');
+			$smarty->assign('TP_bgcolor',$TP_bgcolor);
+			$smarty->assign('TP_href',$TP_href);
+			$smarty->assign('TP_date_confirm',$TP_date_confirm);
+			$smarty->assign('TP_href',$TP_href);
+			$smarty->assign('TP_diagnosis',$TP_diagnosis);
+			$smarty->assign('TP_dept_name',$TP_dept_name);
+			$smarty->display('/../../view/tp_show_sick_confirm_tb_row.tpl');
 		}
 		eval("echo $TP_tb_row;");
 	}

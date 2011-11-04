@@ -245,8 +245,20 @@ if($mode=='show'){
 	$TP_date=formatDate2Local($row['date'],$date_format);
 	$TP_staff_name=$row['staff_name'];
 	# Load and output the template 
-	$TP_form=$TP_obj->load('medocs/tp_medocs_showdata.htm');
-	eval("echo $TP_form;");
+	$smarty->assign('LDExtraInfo',$LDExtraInfo);
+	$smarty->assign('LDInsurance',$LDInsurance);
+	$smarty->assign('TP_aux_notes',$TP_aux_notes);
+	$smarty->assign('LDGotMedAdvice',$LDGotMedAdvice);
+	$smarty->assign('TP_YesNo',$TP_YesNo);
+	$smarty->assign('LDDiagnosis',$LDDiagnosis);
+	$smarty->assign('TP_diagnosis',$TP_diagnosis);
+	$smarty->assign('LDTherapy',$LDTherapy);
+	$smarty->assign('TP_therapy',$TP_therapy);
+	$smarty->assign('LDDate',$LDDate);
+	$smarty->assign('TP_date',$TP_date);
+	$smarty->assign('LDBy',$LDBy);
+	$smarty->assign('TP_staff_name',$TP_staff_name);
+	$smarty->display(__DIR__ . '/../../view/tp_medocs_showdata.tpl');
 	
 	# Create a new form
 }else {
@@ -264,8 +276,21 @@ if($mode=='show'){
 		
 		$TP_user_name=$_SESSION['sess_user_name'];
 		# Load and output the template 
-		$TP_form=$TP_obj->load('medocs/tp_medocs_newform.htm');
-		eval("echo $TP_form;");
+		$smarty->assign('LDExtraInfo',$LDExtraInfo);
+		$smarty->assign('LDInsurance',$LDInsurance);
+		$smarty->assign('LDGotMedAdvice',$LDGotMedAdvice);
+		$smarty->assign('LDYes',$LDYes);
+		$smarty->assign('LDNo',$LDNo);
+		$smarty->assign('LDDiagnosis',$LDDiagnosis);
+		$smarty->assign('LDTherapy',$LDTherapy);
+		$smarty->assign('LDDate',$LDDate);
+		$smarty->assign('TP_date_validate',$TP_date_validate);
+		$smarty->assign('TP_href_date',$TP_href_date);
+		$smarty->assign('TP_img_calendar',$TP_img_calendar);
+		$smarty->assign('TP_date_format',$TP_date_format);
+		$smarty->assign('LDBy',$LDBy);
+		$smarty->assign('TP_user_name',$TP_user_name);
+		$smarty->display(__DIR__ . '/../../view/tp_medocs_newform.tpl');
 	?>
 	<input type="hidden" name="encounter_nr" value="<?php echo $_SESSION['sess_en']; ?>">
 	<input type="hidden" name="pid" value="<?php echo $_SESSION['sess_pid']; ?>">

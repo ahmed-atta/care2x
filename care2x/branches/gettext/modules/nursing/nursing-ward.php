@@ -650,11 +650,33 @@ if($ward_ok){
 		&nbsp;<img '.createComIcon($root_path,'spm.gif','0','absmiddle',TRUE).'> <b>'.$LDMale.'</b><br>';
 	}
 	# Load the quick info block template
-	$tp=$TP_obj->load('nursing/tp_ward_quickinfo.htm');
+	$smarty->assign('LDWaitingList',$LDWaitingList);
+	$smarty->assign('TP_WLIST_BLOCK',$TP_WLIST_BLOCK);
+	$smarty->assign('TP_WLIST_OPT',$TP_WLIST_OPT);
+	$smarty->assign('LDQuickInformer',$LDQuickInformer);
+	$smarty->assign('occ_beds',$occ_beds);
+	$smarty->assign('LDOccupied',$LDOccupied);
+	$smarty->assign('occ_percent',$occ_percent);
+	$smarty->assign('vac_beds',$vac_beds);
+	$smarty->assign('LDFree',$LDFree);
+	$smarty->assign('lock_beds',$lock_beds);
+	$smarty->assign('LDLocked',$LDLocked);
+	$smarty->assign('males',$males);
+	$smarty->assign('LDShortMale',$LDShortMale);
+	$smarty->assign('females',$females);
+	$smarty->assign('LDShortFemale',$LDShortFemale);
+	$smarty->assign('LDDutyDoctor',$LDDutyDoctor);
+	$smarty->assign('TP_ICON1',$TP_ICON1);
+	$smarty->assign('TP_DOC1_BLOCK',$TP_DOC1_BLOCK);
+	$smarty->assign('TP_ICON2',$TP_ICON2);
+	$smarty->assign('TP_DOC2_BLOCK',$TP_DOC2_BLOCK);
+	$smarty->assign('LDLegend',$LDLegend);
+	$smarty->assign('TP_Legend1_BLOCK',$TP_Legend1_BLOCK);
+	$smarty->assign('TP_Legend2_BLOCK',$TP_Legend2_BLOCK);
 	
 	# Buffer orig template output
 	ob_start();
-		eval("echo $tp;");
+		$smarty->display(__DIR__ . '/view/tp_ward_quickinfo.tpl');
 		$sTemp = ob_get_contents();
 	ob_end_clean();
 	 # Assign to page template object
