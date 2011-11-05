@@ -50,7 +50,13 @@ require($root_path.'include/helpers/inc_passcheck_head.php');
 
 <table width=100% border=0 cellpadding="0" cellspacing="0"> 
 <tr>
-<td colspan=3><a href="phone.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'such-gray.gif','0') ?> </a><a href="phone_list.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'phonedir-gray.gif','0') ?> </a><img <?php echo createLDImgSrc($root_path,'newdata-b.gif','0') ?>></td>
+<td colspan=3>
+    <ul class="tabs">
+	    <li><a href="phone.php<?php echo URL_APPEND; ?>">Search</a></li>
+	    <li><a href="phone_list.php<?php echo URL_APPEND; ?>">Directory</a></li>
+	    <li class="active"><a href="#">New Data</a></li>
+    </ul>
+</td>
 </tr>
 
 <?php require($root_path.'include/helpers/inc_passcheck_mask.php') ?>  

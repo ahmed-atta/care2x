@@ -293,7 +293,7 @@ class GuiSearchPerson {
 		# Start Smarty templating here
 		# Create smarty object without initiliazing the GUI (2nd param = FALSE)
 
-		include_once($root_path.'gui/smarty_template/smarty_care.class.php');
+		include_once(CARE_BASE.'/include/helpers/smarty_care.class.php');
 		$this->smarty = new smarty_care('common',FALSE);
 
 		# Output any existing text before the search block
@@ -469,13 +469,13 @@ class GuiSearchPerson {
 		#
 		if($this->bReturnOnly){
 			ob_start();
-				$this->smarty->display('registration_admission/reg_search_main.tpl');
+				$this->smarty->display(__DIR__ . '/../view/reg_search_main.tpl');
 				$sTemp=ob_get_contents();
 			ob_end_clean();
 			return $sTemp;
 		}else{
 			# show Template
-			$this->smarty->display('registration_admission/reg_search_main.tpl');
+			$this->smarty->display(__DIR__ . '/../view/reg_search_main.tpl');
 		}
 	} // end of function display()
 

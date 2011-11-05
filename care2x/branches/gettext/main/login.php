@@ -83,7 +83,11 @@ if(isset($is_logged_out) && $is_logged_out) {
 <p>
 <table width=100% border=0 cellpadding="0" cellspacing="0">
 <tr>
-<td colspan=3><img <?php echo createLDImgSrc(CARE_GUI,'login-b.gif'); ?>></td>
+<td colspan=3>
+<ul class="tabs">
+	<li class="active"><a href="#">Login</a></li>
+</ul>
+</td>
 </tr>
 
 <?php require(CARE_BASE.'include/helpers/inc_passcheck_mask.php') ?>

@@ -102,15 +102,17 @@ require($root_path.'include/helpers/include_header_css_js.php');
 ?> 
 </HEAD>
 
-<BODY 
-<?php if (!$cfg['dhtml']){ echo 'link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
+<BODY>
 
 	<FONT  COLOR="<?php echo $cfg[top_txtcolor] ?>" SIZE=6 > <b><?php echo "$LDPhoneDir $LDNewData" ?></b></font>
 
 	<table width=100% border=0 cellspacing=0 cellpadding=0>
 	<tr>
 	<td colspan=3><nobr>
-	<a href="phone_list.php<?php echo URL_APPEND.'&edit=$edit'; ?>"><img <?php echo createLDImgSrc($root_path,'phonedir-gray.gif','0') ?> </a><img <?php echo createLDImgSrc($root_path,'newdata-b.gif','0') ?>></nobr></td>
+	    <ul class="tabs">
+	    <li><a href="phone_list.php<?php echo URL_APPEND.'&edit=$edit'; ?>">Directory</a></li>
+	    <li class="active"><a href="phone_edit_pass.php<?php echo URL_APPEND; ?>">New Data</a></li>
+    </ul>
 	</tr>
 	<tr>
 	<td class="wardlisttitlerow" colspan=3 >

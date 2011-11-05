@@ -13,7 +13,7 @@ define('LANG_FILE_MODULAR','phone_directory.php');
 define('NO_2LEVEL_CHK',1);
 require_once($root_path.'include/helpers/inc_front_chain_lang.php');
 
-require_once(CARE_BASE.'gui/smarty_template/smarty_care.class.php');
+require_once(CARE_BASE.'include/helpers/smarty_care.class.php');
 $smarty = new smarty_care('common');
 
 if(isset($user_origin)&&$user_origin=='pers'){
@@ -61,12 +61,22 @@ $smarty->assign('breakfile',$breakfile);
 <table  border=0 cellpadding=0 cellspacing=0 width="100%">
 <tr>
 <td colspan=3><nobr>
-<?php 
-if (!$edit) { echo '<a href="phone.php'.URL_APPEND.'"><img '.createLDImgSrc($root_path,'such-gray.gif','0').'';
-if($cfg['dhtml'])echo' class="fadeOut" ';
-echo '></a>'; } ?><img <?php echo createLDImgSrc($root_path,'phonedir-b.gif','0') ?>><?php if(!$edit) echo '<a href="phone_edit_pass.php'.URL_APPEND.'">';
-	else echo "<a href=\"phone_edit.php".URL_APPEND."&remark=fromlist&sid=$sid&edit=$edit\">";
-?><img <?php echo createLDImgSrc($root_path,'newdata-gray.gif','0') ?> border=0 <?php if($cfg['dhtml'])echo' class="fadeOut" '; ?>></a></nobr></td>
+
+<ul class="tabs">
+	<?php 
+	if (!$edit) { 
+		echo '<li><a href="phone.php'. URL_APPEND.'">Search</a></li>';
+	}
+	?>
+	<li class="active"><a href="phone_list.php<?php echo URL_APPEND; ?>">Directory</a></li>
+	<?php 
+	if(!$edit) 
+		echo '<li><a href="phone_edit_pass.php' . URL_APPEND. '">New Data</a></li>';
+	else 	
+		echo '<li><a href="phone_edit_pass.php' . URL_APPEND .'&remark=fromlist&sid='.$sid.'&edit='.$edit.'">New Data</a></li>'
+	?>
+</ul>
+</td>
 </tr>
 
 <tr>

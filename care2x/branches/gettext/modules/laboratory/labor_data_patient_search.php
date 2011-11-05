@@ -139,8 +139,11 @@ function checkForm(v) {
 <FONT COLOR="<?php echo $cfg[top_txtcolor] ?>" SIZE=5> <b><?php echo "$LDMedLab - "; if($editmode) echo "$LDNewData"; else echo "$LDSeeData"; ?></b></font>
 <table width=100% border=0 cellpadding="0" cellspacing="0">
 	<tr>
-		<td colspan=3><img
-			<?php echo createLDImgSrc($root_path,'such-b.gif') ?>></td>
+		<td colspan=3>
+		<ul class="tabs">
+			<li class="active"><a href="#">Search</a></li>
+		</ul>
+		</td>
 	</tr>
 	<tr>
 		<td bgcolor=#333399 colspan=3>&nbsp;</td>
