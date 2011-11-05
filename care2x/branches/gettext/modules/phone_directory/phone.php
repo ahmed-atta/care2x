@@ -89,13 +89,12 @@ require(CARE_BASE.'include/helpers/include_header_css_js.php');
 	<table width=100% border=0 cellpadding="0" cellspacing="0">
 		<tr>
 			<td colspan=3>
-			<img <?php echo createLDImgSrc(CARE_BASE,'such-b.gif','0') ?>>
-			<a href="phone_list.php<?php echo URL_APPEND; ?>">
-				<img <?php echo createLDImgSrc(CARE_BASE,'phonedir-gray.gif','0') ?>
-			</a>
-			<a href="phone_edit_pass.php<?php echo URL_APPEND; ?>">
-				<img <?php echo createLDImgSrc(CARE_BASE,'newdata-gray.gif','0') ?>
-			</a>
+    <ul class="tabs">
+	    <li class="active"><a href="#">Search</a></li>
+	    <li><a href="phone_list.php<?php echo URL_APPEND; ?>">Directory</a></li>
+	    <li><a href="phone_edit_pass.php<?php echo URL_APPEND; ?>">New Data</a></li>
+    </ul>
+			
 		</td>
 		</tr>
 		<tr>
