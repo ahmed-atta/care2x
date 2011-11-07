@@ -71,7 +71,7 @@ $smarty->append('JavaScript',$sTemp);
 
 # OR Surgeons submenu block
 
-$smarty->assign('LDOrDocs',"<img ".createLDImgSrc(CARE_BASE ,'arzt2.gif','0','absmiddle')."  alt=\"$LDDoctor\">");
+$smarty->assign('LDOrDocs',"<h2>Physician/Surgeon</h2>");
 //ALog
 $smarty->assign('LDOrDocument',"<a href=\"".CARE_GUI ."modules/op_document/op-docu-pass.php".URL_APPEND."\">$LDOrDocument</a>");
 $smarty->assign('LDOrDocumentTxt',$LDOrDocumentTxt);
@@ -93,7 +93,7 @@ $smarty->assign('LDQviewTxtDocs',$LDQviewTxtDocs);
 
 # OR Nursing submenu block
 
-$smarty->assign('LDOrNursing',"<img ".createLDImgSrc(CARE_BASE ,'pflege2.gif','0','absmiddle')."  alt=\"$LDNursing\">");
+$smarty->assign('LDOrNursing',"<h2>Nursing</h2>");
 //PLog
 $smarty->assign('LDOrLogBook',"<a href=\"".CARE_GUI ."modules/or_logbook/op-care-log-pass.php".URL_APPEND."\">$LDOrLogBook</a>");
 $smarty->assign('LDOrLogBookTxt',$LDOrLogBookTxt);
@@ -128,7 +128,7 @@ $smarty->assign('LDOnCallDutyTxt',$LDOnCallDutyTxt);
 
 # OR Anesthesia submenu block
 
-$smarty->assign('LDORAnesthesia',"<img ".createLDImgSrc(CARE_BASE ,'anaes.gif','0','absmiddle')."  alt=\"$LDAna\">");
+$smarty->assign('LDORAnesthesia',"<h2>Anaesthesia</h2>");
 
 $smarty->assign('LDORAnaQuickView',"<a href=\"".CARE_GUI ."modules/nursing_or/nursing-or-roster-quickview.php".URL_APPEND."&retpath=menu&hilitedept=39\">$LDQuickView</a>");
 $smarty->assign('LDQviewTxtAna',$LDQviewTxtAna);
