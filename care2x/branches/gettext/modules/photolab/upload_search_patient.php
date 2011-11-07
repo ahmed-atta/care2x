@@ -145,7 +145,7 @@ ob_start();
    </table>
 
 <p>
-<a href="<?php	echo $breakfile; ?>" target='_parent'><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+<a href="<?php	echo $breakfile; ?>" class="button icon remove danger" target='_parent'>Cancel</a>
 <p>
 </ul>
 <?php
@@ -253,7 +253,7 @@ if($mode=='search'||$mode=='paginate'){
      	</tr>
    		</table>
 		<p>
-		<a href="<?php	echo $breakfile; ?>" target='_parent'><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+		<a href="<?php	echo $breakfile; ?>" target='_parent' class="button icon remove danger">Cancel</a>
 		</ul>
 					<?php
 					}

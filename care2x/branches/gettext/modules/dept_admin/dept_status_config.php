@@ -118,13 +118,13 @@ ob_start();
 ?>
 <ul>
 <?php if(isset($updateok)&&$updateok) { 
-	$backimg='close2.gif';
+	$backimg='Close';
 ?>
 <?php echo $LDUpdateOk; ?></font>
 
 <?php 
 }else{
-	$backimg='cancel.gif';
+	$backimg='Cancel';
 } ?>
 &nbsp;
 <br>
@@ -163,7 +163,7 @@ if(isset($$LD_var)&&$$LD_var) echo $$LD_var;
 </form>
 <p>
 
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,$backimg,'0') ?> border="0"></a>
+<a href="<?php echo $breakfile ?>" class="button icon remove danger"></a>
 
 </ul>
 

@@ -794,7 +794,7 @@ src="../../gui/img/common/default/qbar_0_rose.gif" border=0 width="10" height="4
 <?php if($saved || $repeated)  : ?>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 <?php else : ?>
-<p><a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
+<p><a href="javascript:window.close()" class="button icon remove danger">Cancel</a>
   <?php endif ; ?>
 <script type="text/javascript">
 <!--

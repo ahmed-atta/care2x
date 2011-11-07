@@ -254,7 +254,7 @@ echo '
 <a href="products-database-functions-manage.php'.URL_APPEND.'&cat='.$cat.'"><img '.createLDImgSrc($root_path,'back2.gif','0','absmiddle').' alt="'.$LDBack.'"></a>
 ';
 ?>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+<a href="<?php echo $breakfile ?>" class="button icon remove danger">Cancel</a>
 </ul>
 
 <?php

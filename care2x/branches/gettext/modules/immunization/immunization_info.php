@@ -120,7 +120,9 @@ if(isset($save_ok)&&$save_ok){
   </tr>
   <tr>
     <td><a href="immunization_update.php<?php echo URL_APPEND.'&retpath='.$retpath.'&immu_id='.$immu['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'update.gif','0') ?> border="0"></a></td>
-    <td  align=right><a href="immunization_list.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'list_all.gif','0') ?> border="0"></a><a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a></td>
+    <td  align=right><a href="immunization_list.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'list_all.gif','0') ?> border="0"></a>
+    <a href="<?php echo $breakfile; ?>" class="button icon remove danger">Cancel</a>
+    </td>
   </tr>
 </table>
 <p>

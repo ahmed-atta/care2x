@@ -536,7 +536,7 @@ function set(c)
 </table>        
 
 <ul>
-<a href="#" <?php if ($d) echo 'onClick="opener.focus();window.close()"'; else echo 'onClick="window.close()"'; ?>><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>  alt="<?php echo $LDCancel ?>"></a>
+<a href="#" <?php if ($d) echo 'onClick="opener.focus();window.close()"'; else echo 'onClick="window.close()"'; ?> class="button icon remove danger">Cancel</a>
 </ul>
 
 <hr>

@@ -316,7 +316,7 @@ if($user_origin=='pers'&&$employee->isPreLoaded()){
 </form>
 
 <p>
-<a href="<?php echo $sBreakUrl; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></a>
+<a href="<?php echo $sBreakUrl; ?>" class="button icon remove danger">Cancel</a>
 <p>
 </FONT>
 </ul>

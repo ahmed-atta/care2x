@@ -180,7 +180,7 @@ $smarty->assign('sOnLoadJs','onLoad="document.searchform.searchkey.select()"');
    </table>
 
 <p>
-<a href="<?php	echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+<a href="<?php	echo $breakfile; ?>" class="button icon remove danger">Cancel</a>
 <p>
 
 <?php

@@ -275,12 +275,12 @@ $smarty->assign('sFormAction','action="doctors-roster-plan.php"');
  ob_end_clean();
  $smarty->assign('sHiddenInputs',$sTemp);
 
- if($saved) $sBuffer = createLDImgSrc($root_path,'close2.gif','0');
- 	else $sBuffer = createLDImgSrc($root_path,'cancel.gif','0');
+ if($saved) $sBuffer = "Close";
+ 	else $sBuffer = "Cancel";
 
  # Assign control links
 $smarty->assign('sSave','<input type="image" '.createLDImgSrc($root_path,'savedisc.gif','0').'"></a>');
-$smarty->assign('sClose',"<a href=\"$breakfile\" onUnload=\"killchild()\"><img ".$sBuffer." alt=\"$LDClosePlan\"></a>");
+$smarty->assign('sClose',"<a href=\"$breakfile\" onUnload=\"killchild()\" class=\"button icon remove danger\">".$sBuffer."</a>");
 
 $sTemp='';
 

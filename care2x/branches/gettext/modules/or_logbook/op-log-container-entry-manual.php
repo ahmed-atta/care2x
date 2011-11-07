@@ -159,7 +159,7 @@ var brwsVer=parseInt(navigator.appVersion);var timer;var curSubMenu='';
 <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?> width=99 height=24 align="absmiddle" alt="<?php echo $LDSave ?>">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.plist.reset()" title="<?php echo $LDReset ?>"><img <?php echo createLDImgSrc($root_path,'reset.gif','0','absmiddle') ?>></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="log-material-list.php?<?php echo $globdata ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0','absmiddle') ?> alt="<?php echo $LDCancel ?>"></a>
+<a href="log-material-list.php?<?php echo $globdata ?>" class="button icon remove danger">Cancel</a>
 </form>
 
 

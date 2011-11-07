@@ -421,7 +421,7 @@ echo $LDReset ?>">
 </form>
 
 <p>
-<a href="<?php echo $breakfile ?>" ><img <?php echo createLDImgSrc ( $root_path, 'cancel.gif', '0' ) ?> alt="<?php echo $LDCancel ?>" align="middle"></a>
+<a href="<?php echo $breakfile ?>" class="button icon remove danger">Cancel</a>
 
 </ul>
 

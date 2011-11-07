@@ -122,7 +122,7 @@ $smarty->assign('sHiddenInputs','<input type="hidden" name="patientno" value="'.
 	<input type="hidden" name="sid" value="'. $sid .'">
 	<input type="hidden" name="full_en" value="'. $full_en .'">');
 
-$smarty->assign('pbCancel','<a href="'.$breakfile.'" ><img '.createLDImgSrc($root_path,'cancel.gif','0','middle').' title="'.$LDCancel.'" align="middle"></a>');
+$smarty->assign('pbCancel','<a href="'.$breakfile.'" class="button icon remove danger">Cancel</a>');
 
 
  # Prepare the submenu icons

@@ -87,7 +87,7 @@ echo '</STRONG></FONT>';
 <input type="hidden" name="mode" value="<?php echo $mode ?>">
 <input type="hidden" name="nointern" value="1"><p>
 <input type="image" <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>&nbsp;&nbsp;
-<a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancel ?>" align="absmiddle"></a>
+<a href="<?php echo $breakfile; ?>" class="button icon remove danger">Cancel</a>
 </font></td>
 </tr>
 </table>

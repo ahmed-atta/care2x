@@ -138,8 +138,7 @@ if($linecount>1) echo "<br> $LDIfWantEditMany<p>";
 <p>
 <p>
 <hr width=80% align=left>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>>
-</a><p>
+<a href="<?php echo $breakfile ?>" class="button icon remove danger">Cancel</a><p>
 
 </ul>
 &nbsp;

@@ -227,7 +227,7 @@ if($encounter['current_dept_nr']!=$dept_nr){
 <table border=0 width=100%>
   <tr>
     <td align=left><a href="javascript:admitOutpatient()"><img <?php echo createLDImgSrc($root_path,$ack_but,'0'); ?>></a></td>
-    <td align=right><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a></td>
+    <td align=right><a href="<?php echo $breakfile ?>" class="button icon remove danger"></a></td>
   </tr>
 </table>
 

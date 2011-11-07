@@ -315,7 +315,7 @@ if(($mode!='show'&&!$nolist) ||($mode=='show'&&$nolist&&$rows>1)){
 
 }
 
-$smarty->assign('pbBottomClose','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').'  title="'.$LDCancelClose.'"  align="absmiddle"></a>');
+$smarty->assign('pbBottomClose','<a href="'.$breakfile.'" class="button icon remove danger">Cancel</a>');
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/main.tpl');
 $smarty->display(CARE_BASE . 'main/view/mainframe.tpl');

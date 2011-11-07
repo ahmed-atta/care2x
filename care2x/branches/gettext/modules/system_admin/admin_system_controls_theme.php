@@ -122,8 +122,8 @@ while(list($x,$v)=each($tlist)){
     <td><FONT  color="#000099"><b></b></td>
     <td><b><?php echo $v; ?></b></td>
    <td><img src="<?php echo $root_path; ?>gui/img/control/<?php echo $v; ?>/<?php echo $lang; ?>/<?php echo $lang; ?>_back2.gif" border=0>
-   			<img src="<?php echo $root_path; ?>gui/img/control/<?php echo $v; ?>/<?php echo $lang; ?>/<?php echo $lang; ?>_hilfe-r.gif" border=0>
-   			<img src="<?php echo $root_path; ?>gui/img/control/<?php echo $v; ?>/<?php echo $lang; ?>/<?php echo $lang; ?>_cancel.gif" border=0></td>
+   		<img src="<?php echo $root_path; ?>gui/img/control/<?php echo $v; ?>/<?php echo $lang; ?>/<?php echo $lang; ?>_hilfe-r.gif" border=0>
+   		<img src="<?php echo $root_path; ?>gui/img/control/<?php echo $v; ?>/<?php echo $lang; ?>/<?php echo $lang; ?>_cancel.gif" border=0></td>
   </tr>
 <?php
 }

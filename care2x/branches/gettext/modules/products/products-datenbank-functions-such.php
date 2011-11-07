@@ -155,7 +155,7 @@ require ("includes/inc_products_search_result_mod.php");
 	<input type="hidden" name="sid" value="<?php echo $sid?>"> 
 	<input type="hidden" name="lang" value="<?php echo $lang?>"> 
 	<input type="hidden" name="userck" value="<?php echo $userck?>"> 
-	<input type="image" <?php echo createLDImgSrc ( $root_path, 'cancel.gif', '0' )?> border=0 width=103 height=24 alt="<?php echo $LDBack2Menu?>">
+	<input type="image" class="button icon remove danger" name="cancel" value="Cancel" />
 </form>
 <?php
 if ($from == "multiple")

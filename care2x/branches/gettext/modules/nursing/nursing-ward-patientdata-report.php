@@ -398,7 +398,6 @@ if($edit) {
 <?php endif ?> -->
 
 <!-- Uncomment the following line if you want to show the cancel button at the bottom of the page -->
-<!--<a href="<?php //echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>-->
 
 </td>
 </tr>

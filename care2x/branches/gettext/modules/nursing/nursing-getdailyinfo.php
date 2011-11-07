@@ -330,8 +330,7 @@ require ($root_path . 'include/helpers/include_header_css_js.php');
         <?php
         else:
         ?>
-        <a href = "javascript: window.close()"><img <?php echo
-    createLDImgSrc($root_path, 'cancel.gif', '0') ?>border = "0" alt = "<?php echo $LDClose ?>"> </a>
+        <a href = "javascript: window.close()" class="button icon remove danger">Cancel</a>
 
         <?php
         endif

@@ -118,8 +118,7 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 <p>
 <br>
 &nbsp;<p>
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>">
-</a>
+<a href="javascript:window.close()" class="button icon remove danger">Cancel</a>
 
 
 </BODY>

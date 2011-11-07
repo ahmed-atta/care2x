@@ -119,7 +119,7 @@ if(isset($current_employ)&&$current_employ){
 <p>
 
 <ul>
-<a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
+<a href="<?php echo $breakfile;?>" class="button icon remove danger">Cancel and Close</a>
 </ul>
 
 <?php

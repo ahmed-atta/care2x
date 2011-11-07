@@ -161,7 +161,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/b
 			</td>
 		</tr>
 	</table>
-	<p> <a href='<?php echo 'billingmenu.php'.URL_APPEND.'&target=search">'; ?>'><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> /></a>
+	<p> <a href='<?php echo 'billingmenu.php'.URL_APPEND.'&target=search" class="button icon remove danger">'; ?>'>Cancel</a>
 	<p> 
 		<?php
 if($mode=='search'||$mode=='paginate'){

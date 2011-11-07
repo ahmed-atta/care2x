@@ -7,14 +7,10 @@
 if ($mode=="edit")
 {
 ?>
-<!-- <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0') ?>></a> -->
 <?php
 }
 ?>
-<!--
-<a href="javascript:sendLater()"><img <?php echo createLDImgSrc($root_path,'sendlater.gif','0') ?> alt="<?php echo $LDSendLater ?>"></a>
--->
- <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
+ <a href="<?php echo $breakfile ?>" class="button icon remove danger">Cancel</a>
 </td>
 </tr>
 </table>

@@ -422,7 +422,7 @@ while($buffer=$att_dr_service->FetchRow())
 	else echo 'patient.php';
 	echo URL_APPEND;
 ?>
-"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
+" class="button icon remove danger">Cancel</a>
 </ul>
 <p>
 <hr>
