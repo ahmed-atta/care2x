@@ -117,12 +117,6 @@ require($root_path.'include/helpers/include_header_css_js.php');
  <tr>
 	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDTheme ?></b> </FONT></td>
   </tr>
-  <tr>
-	<td bgcolor="#ffffff" valign="top">
-	<FONT  color="#0000cc" FACE="verdana,arial" size=2>	
-	&nbsp;&nbsp;&nbsp;<img <?php echo createComIcon($root_path,'redpfeil.gif','0','absmiddle') ?>> <a href="admin_system_controls_theme.php?sid=<?php echo $sid."&lang=".$lang."&target=currency_admin"; ?>" target="SYSADMIN_WFRAME"><?php echo $LDControlButImg ?></a>
-	</td>
-  </tr>
  <tr>
 	<td bgcolor="#e9e9e9"><FONT  color="#0000cc" FACE="verdana,arial" size=2><b><?php echo $LDDeptAdmin ?></b> </FONT></td>
   </tr>
