@@ -83,7 +83,7 @@ require($root_path.'include/helpers/include_header_css_js.php');
 <input type="hidden" name="mode" value="search">
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
-<input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?> alt="<?php echo $LDSearchPat ?>">
+<button type="submit" class="button icon search"/>Search</button>
                                                                                                      
 </form>
 

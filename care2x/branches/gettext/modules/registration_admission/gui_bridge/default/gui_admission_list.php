@@ -491,7 +491,7 @@ if(!empty($rows)){
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="mode" value="search">
 <input type="hidden" name="addr_citytown_nr">
-<input  type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0') ?> alt="<?php echo $LDSaveData ?>" align="absmiddle">
+<button type="submit" class="button icon search"/>Search</button>
 
 </form>
 

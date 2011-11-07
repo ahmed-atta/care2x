@@ -659,7 +659,7 @@ if($row[class_s]) echo "$row[class_s] $LDMinor  &nbsp; ";
 
 <?php else : ?>
 <input type="hidden" name="target" value="archiv">
-<input  type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0') ?> border=0  alt="<?php echo $LDSearch ?>">
+<button type="submit" class="button icon search"/>Search</button>
 <input type="hidden" name="mode" value="search">
 <a href="javascript:document.opdoc.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetAll ?>" ></a>
 <?php endif ?>

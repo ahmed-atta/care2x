@@ -32,7 +32,7 @@ if(!$searchform_count)
 	         <FONT    SIZE=2  FACE="Arial"><?php echo $LDSearchPatient ?>:<br>
 			 
 	         <input type="text" name="searchkey" size=40 maxlength=40><p>
-             <input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?>>
+             <button type="submit" class="button icon search"/>Search</button>
              <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 	         <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 	         <input type="hidden" name="noresize" value="<?php echo $noresize; ?>">
