@@ -140,7 +140,7 @@ if(is_object($tgroups)){
 		
 		echo '
 				<td>
-				<a href="javascript:editGroup('.$array_groups[$i]['nr'].')"><img '.createLDImgSrc($root_path,'edit_sm.gif','0').'></a>
+				<a href="javascript:editGroup('.$array_groups[$i]['nr'].')"  class="button icon edit">Edit</a>
 				</td>';
 		echo '<td>';
 			if(isset($array_groups[$i-1]['nr'])) 
