@@ -170,7 +170,6 @@ switch ($target) {
 /**
  * HEAD META definition
  */
-$smarty->assign ( 'setCharSet', setCharSet () );
 
 /**
  * Toolbar

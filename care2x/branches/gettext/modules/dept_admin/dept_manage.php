@@ -21,9 +21,6 @@ $title = $LDDeptAdmin;
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <html>
 <HEAD>
-<?php
-echo setCharSet ();
-?>
 
 <?php
 require ($root_path . 'include/helpers/include_header_css_js.php');

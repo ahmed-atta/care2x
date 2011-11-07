@@ -3,7 +3,6 @@
 <HEAD>
  <TITLE>{{$sWindowTitle}} - {{$Name}}</TITLE>
  {{include file="{{$smarty.const.CARE_BASE}}main/view/metaheaders.tpl"}}
- {{$setCharSet}}
 
  {{foreach from=$JavaScript item=currentJS}}
  	{{$currentJS}}

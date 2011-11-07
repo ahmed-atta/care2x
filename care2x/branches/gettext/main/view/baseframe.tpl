@@ -3,8 +3,6 @@
 <HEAD>
  <TITLE>{{$sWindowTitle}}</TITLE>
  {{include file="metaheaders.tpl"}}
- {{$setCharSet}}
-
 </HEAD>
 
 {{* Load the base frameset *}}

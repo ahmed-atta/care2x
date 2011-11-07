@@ -54,7 +54,6 @@ if(isset($_POST['mode'])&&!empty($_POST['mode'])&&$_POST['mode']=='save'){
 ?>
 <html>
 <head>
-<?php echo setCharSet($lang) ?>
 <title></title>
 
 <script language="">

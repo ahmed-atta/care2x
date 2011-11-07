@@ -1,6 +1,5 @@
 <html>
 <head>
-<?php echo setCharSet($lang) ?>
 <title></title>
 </head>
 <body>
