@@ -353,7 +353,7 @@ if($parent_admit) {
 </table>        
 <ul>
 <p>
-<a href="<?php echo $breakfile?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
+<a href="<?php echo $breakfile?>" class="button icon remove danger">Cancel</a>
 
 <p>
 </ul>

@@ -94,7 +94,7 @@ for($i=0;$i<sizeof($LDDateFormats);$i++)
 </table>
 <p>
 <input type="image" <?php echo createLDImgSrc($root_path,'apply.gif','0') ?>>&nbsp;&nbsp;
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+<a href="<?php echo $breakfile ?>" class="button icon remove danger">Cancel</a>
 <input type="hidden" name="sid" value="<?php echo $sid;?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
 <input type="hidden" name="mode" value="save">

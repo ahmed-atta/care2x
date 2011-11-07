@@ -388,7 +388,7 @@ style=" VISIBILITY: hidden; POSITION: relative;">
 			<a href="log-material-entry-manual.php?sid='.$databuf.'"><img '.createComIcon($root_path,'accessrights.gif','0','absmiddle').'> 
 			<font size=3 > '.$LDClk2ManualEntry.'</font></a>
 			</font><p>
-			<a href="log-material-list.php?sid='.$databuf.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt="'.$LDCancel.'">
+			<a href="log-material-list.php?sid='.$databuf.'" class="button icon remove danger">Cancel
 			</a>
 			</center>
 			';

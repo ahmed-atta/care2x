@@ -465,7 +465,7 @@ if($rows){
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="javascript:gethelp('nursing_how2search.php','<?php echo $mode ?>','<?php echo $rows ?>','search')"><?php echo $LDHow2Search ?></a><br>
 
 <p>
-<a href="nursing.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>  alt="<?php echo $LDCancel ?>"></a>
+<a href="nursing.php<?php echo URL_APPEND; ?>" class="button icon remove danger">Cancel</a>
 </ul>
 
 <?php

@@ -328,10 +328,10 @@ $smarty->assign('sParamGroup',strtr($parametergruppe[$parameterselect],"_","-"))
 $smarty->assign('pbSave','<input  type="image" '.createLDImgSrc($root_path,'savedisc.gif','0').'>');
 $smarty->assign('pbShowReport','<a href="labor_datalist_noedit.php'.URL_APPEND.'&encounter_nr='.$encounter_nr.'&noexpand=1&from=input&job_id='.$job_id.'&parameterselect='.$parameterselect.'&allow_update='.$allow_update.'&nostat=1&user_origin='.$user_origin.'"><img '.createLDImgSrc($root_path,'showreport.gif','0','absmiddle').' alt="'.$LDClk2See.'"></a>');
 
-if($saved) $sCancelBut='<img '.createLDImgSrc($root_path,'close2.gif','0','absmiddle').'>';
-else $sCancelBut='<img  '.createLDImgSrc($root_path,'cancel.gif','0','absmiddle').'>';
+if($saved) $sCancelBut="Close";
+else $sCancelBut="Cancel";
 
-$smarty->assign('pbCancel',"<a href=\"$breakfile\">$sCancelBut</a>");
+$smarty->assign('pbCancel',"<a href=\"$breakfile\" class=\"button icon remove danger\">$sCancelBut</a>");
 
 $smarty->assign('sAskIcon',"<img ".createComIcon($root_path,'small_help.gif','0').">");
 

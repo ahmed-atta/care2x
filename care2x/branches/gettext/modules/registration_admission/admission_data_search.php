@@ -297,7 +297,7 @@ $smarty->assign('sHiddenInputs','<button type="submit" class="button icon search
 		<input type="hidden" name="ipath" value="'.$ipath.'">
 		<input type="hidden" name="mode" value="search">');
 
-$smarty->assign('sCancelButton','<a href="patient.php'.URL_APPEND.'&target=search"><img '.createLDImgSrc($root_path,'cancel.gif','0').'></a>');
+$smarty->assign('sCancelButton','<a href="patient.php'.URL_APPEND.'&target=search" class="button icon remove danger">Cancel</a>');
 
 if($mode=='search'||$mode=='paginate'){
 	

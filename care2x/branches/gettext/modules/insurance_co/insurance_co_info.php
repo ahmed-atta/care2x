@@ -136,7 +136,8 @@ if(isset($save_ok)&&$save_ok){
   </tr>
   <tr>
     <td><a href="insurance_co_update.php<?php echo URL_APPEND.'&retpath='.$retpath.'&firm_id='.$firm['firm_id']; ?>"><img <?php echo createLDImgSrc($root_path,'update.gif','0') ?> border="0"></a></td>
-    <td  align=right><a href="insurance_co_list.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'list_all.gif','0') ?> border="0"></a><a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a></td>
+    <td  align=right><a href="insurance_co_list.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'list_all.gif','0') ?> border="0"></a>
+    <a href="<?php echo $breakfile; ?>" class="button icon remove danger">Cancel</a></td>
   </tr>
 </table>
 <p>

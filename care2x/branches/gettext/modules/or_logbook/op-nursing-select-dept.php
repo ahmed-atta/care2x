@@ -267,7 +267,7 @@ ob_start();
   
   
     <tr>
-      <td colspan=2><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCloseAlt ?>"></a></td>
+      <td colspan=2><a href="<?php echo $breakfile ?>" class="button icon remove danger">Cancel</a></td>
       <td align="right"><input type="image" <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>></td>
     </tr>
   

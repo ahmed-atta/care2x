@@ -145,15 +145,15 @@ if($saveok){
 	# Show update button
 	$smarty->assign('sUpdateButton','<input type="image" '.createLDImgSrc($root_path,'update.gif','0').'>');
 	
-	$sBreakImg ='close2.gif';
+	$sBreakImg ='Close';
 
 }else{
 
-	$sBreakImg ='cancel.gif';
+	$sBreakImg ='Cancel';
 }
 $smarty->assign('sHiddenInputs',$sTemp);
 
-$smarty->assign('sBreakButton','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,$sBreakImg,'0','left').' alt="'.$LDBack2Menu.'"></a>');
+$smarty->assign('sBreakButton','<a href="'.$breakfile.'" class="button icon remove danger">'.$sBreakImg.'"</a>');
 
 # Assign the form template to mainframe
 

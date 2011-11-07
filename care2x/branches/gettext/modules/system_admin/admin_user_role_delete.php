@@ -105,7 +105,7 @@ for($n=0;$n<sizeof($area);$n++) {
 <input type="hidden" name="lang" value="<?php echo $lang;?>">
 <INPUT type="submit" name="versand" value="<?php echo $LDYesDelete ?>"></font></FORM>
 <p>
-<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>  alt="<?php echo $LDCancel ?>" align="middle"></a>
+<a href="<?php echo $returnfile ?>" class="button icon remove danger">Cancel</a>
 
 </center>
 

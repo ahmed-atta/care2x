@@ -228,7 +228,7 @@ else echo'<input  type="button" value="+1" onClick=cxjahr(\'1\')> <input  type="
 
 </form>
 <p>
-<a href="nursing.php<?php echo URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancel ?>"></a>
+<a href="nursing.php<?php echo URL_APPEND; ?>" class="button icon remove danger">Cancel</a>
 
 </ul>
 

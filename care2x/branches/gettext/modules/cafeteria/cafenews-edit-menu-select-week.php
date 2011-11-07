@@ -60,7 +60,7 @@ function chkForm(d)
     <td><p><br>
     <input type="image" <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>
     &nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+	<a href="<?php echo $breakfile ?>" class="button icon remove danger">Cancel</a>
   </td>
   </tr>
 </table>

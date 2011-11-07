@@ -233,7 +233,7 @@ if($mode=='show'){
 <?php if($_COOKIE['ck_login_logged'.$sid]) echo 'startframe.php'.URL_APPEND;
 else echo $breakfile.URL_APPEND;
 ?>
-"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
+" class="button icon remove danger">Cancel</a>
 </ul>
 </FONT>
 <?php

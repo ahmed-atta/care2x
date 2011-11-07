@@ -462,7 +462,7 @@ if(!$showonly&&($linecount>0)) {
 <?php if(($linecount>15)&&!$showonly) : ?>
 <p>
 <FORM action="drg-icd10-search.php" method="post" onSubmit="return pruf(this)" name="form2">
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> align="right"></a>
+<a href="javascript:window.close()" class="button icon remove danger">Cancel</a>
 <font face="Arial,Verdana"  color="#000000" size=-1>
 <INPUT type="text" name="keyword" size="14" maxlength="25" value="<?php echo $keyword ?>">
 <br>

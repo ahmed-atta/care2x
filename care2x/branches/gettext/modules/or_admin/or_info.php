@@ -138,7 +138,7 @@ if(!empty($ORoom['ward_id'])){
 </form>
 <p>
 
-<a href="javascript:history.back()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a>
+<a href="javascript:history.back()" class="button icon remove danger">Cancel</a>
 </ul>
 <?php
 

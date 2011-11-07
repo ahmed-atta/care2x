@@ -478,7 +478,7 @@ echo $calendar->show_calendar($calendar,$date_format,'contract_end',$contract_en
 
 <?php if($update) echo '<input type="hidden" name=update value=1>'; ?>
 <input  type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>  alt="<?php echo $LDSaveData ?>" align="absmiddle"> 
-<a href="<?php echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDResetData ?>"   align="absmiddle"></a>
+<a href="<?php echo $breakfile; ?>" class="button icon remove danger">Reset</a>
 <!-- Note: uncomment the ff: line if you want to have a reset button  -->
 <!-- 
 <a href="javascript:document.aufnahmeform.reset()"><img <?php echo createLDImgSrc($root_path,'reset.gif','0') ?> alt="<?php echo $LDResetData ?>"   align="absmiddle"></a> 

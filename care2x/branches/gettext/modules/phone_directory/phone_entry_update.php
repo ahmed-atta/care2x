@@ -212,7 +212,9 @@ require($root_path.'include/helpers/include_header_css_js.php');
 <input type="hidden" name="edit" value="<?php echo $edit ?>">
 <input type="hidden" name="sid" value="<?php echo $sid; ?>">
 <input type="hidden" name="lang" value="<?php echo $lang; ?>">
-<INPUT type="image"  <?php echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></font></FORM>
+<input type="cancel"  class="button icon remove danger" value="cancel">
+</font>
+</FORM>
 <p>
 </FONT>
 </ul>

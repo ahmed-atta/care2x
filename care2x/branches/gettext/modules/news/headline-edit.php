@@ -143,7 +143,7 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
 <!-- <a href="javascript:chkForm(document.selectform)"><img <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>></a> -->
   </td>
     <td align=right >
-		<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+		<a href="<?php echo $breakfile ?>" class="button icon remove danger">Cancel</a>
  </td>
 <?php if($alignright) : ?>
     <td align=right >&nbsp;

@@ -261,9 +261,8 @@ $calendar->load_files();
 
 
 if(($mode=='release')&&($released)) $sBreakButton= '<img '.createLDImgSrc($root_path,'close2.gif','0').'>';
-	else $sBreakButton= '<img '.createLDImgSrc($root_path,'cancel.gif','0').' border="0">';
 
-$smarty->assign('pbCancel','<a href="'.$breakfile.'">'.$sBreakButton.'</a>');
+$smarty->assign('pbCancel','<a href="'.$breakfile.'" class="button icon remove danger">'.$sBreakButton.'</a>');
 
 // Assign page output to the mainframe template
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/discharge_patient_form.tpl');

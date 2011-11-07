@@ -456,12 +456,12 @@ echo'
 <?php endif ?>
 <div align=right>
 &nbsp;&nbsp;
-<a href="javascript:window.close()">
-<?php if($mode=='saveok')  { ?>
-<img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>">
-<?php }else{ ?>
-<img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0" alt="<?php echo $LDClose ?>">
-<?php } ?>
+<a href="javascript:window.close()" class="button icon remove danger">
+<?php if($mode=='saveok')  { 
+echo "Close"; 
+ }else{ 
+echo "Cancel";
+ } ?>
 </a></div>
 </BODY>
 

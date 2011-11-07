@@ -146,7 +146,7 @@ ob_start();
 		</tr>
 		<tr>
 			<td><button type="submit" class="button icon search"/>Search</button> </td>
-			<td> <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a></td>
+			<td> <a href="javascript:window.close()" class="button icon remove danger">Cancel</a></td>
 		</tr>
 	</table>
 	

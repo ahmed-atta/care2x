@@ -119,7 +119,7 @@ echo $calendar->show_calendar($calendar,$date_format,'publishdate');
 <input type="image" <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>
   </td>
     <td>
-	<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+	<a href="<?php echo $breakfile ?>" class="button icon remove danger">Cancel</a>
   </td>
 <?php if($artopt==2) : ?>
     <td align=right >&nbsp;

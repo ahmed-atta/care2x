@@ -564,10 +564,7 @@ echo '
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-care-log-xtsuch-start.php?sid=<?php echo "$sid&lang=$lang&mode=fresh&dept_nr=$dept_nr&saal=$saal&child=$child" ?>"><?php echo "$LDSearchPatient [$LDOrLogBook]" ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="op-care-log-start.php?sid=<?php echo "$sid&lang=$lang&mode=fresh&dept_nr=$dept_nr&saal=$saal" ?>" <?php if ($child) echo "target=\"_parent\""; ?>><?php echo "$LDStartNewDocu [$opabt[$dept_nr] $LDRoom $saal]" ?></a><br>
 <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="javascript:gethelp('oplog.php','arch','<?php echo $dif ?>','<?php echo $lastlog ?>','<?php echo $datafound ?>')"><?php echo "$LDHelp" ?></a><br>
-<!-- 
-<p>
-<a href="javascript:window.close();"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>  alt="<?php echo $LDCancel ?>"></a>
- --></ul>
+</ul>
 
 <?php
 

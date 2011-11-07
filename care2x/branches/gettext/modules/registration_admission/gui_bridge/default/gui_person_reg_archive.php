@@ -410,10 +410,7 @@ $smarty->assign('sMainBlockIncludeFile','registration_admission/reg_plain.tpl');
 
 $smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
 ?>
-<!-- <img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="patient_register.php<?php echo URL_APPEND; ?>&newdata=1&from=entry"><?php echo $LDPatientRegister ?></a><br>
-<img <?php echo createComIcon($root_path,'varrow.gif','0') ?>> <a href="patient_register_search.php<?php echo URL_APPEND; ?>"><?php echo $LDPatientSearch ?></a><br>
-
- --><p>
-<a href="<?php	echo 'patient.php'.URL_APPEND; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDCancelClose ?>"></a>
+<p>
+<a href="<?php	echo 'patient.php'.URL_APPEND; ?>" class="button icon remove danger">Cancel</a>
 
 

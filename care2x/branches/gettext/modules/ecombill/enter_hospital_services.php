@@ -110,7 +110,7 @@ $smarty->assign('sHiddenInputs','<input type="hidden" name="lang" value="'. $lan
 		<input type="hidden" name="sid" value="'. $sid .'">');
 
 $smarty->assign('pbSubmit','<input type="image"  '.createLDImgSrc($root_path,'savedisc.gif','0','middle').'>');
-$smarty->assign('pbCancel','<a href="'.$breakfile.'" ><img '.createLDImgSrc($root_path,'cancel.gif','0','middle').' title="'.$LDCancel.'" align="middle"></a>');
+$smarty->assign('pbCancel','<a href="'.$breakfile.'" class="button icon remove danger">Cancel</a>');
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/create_item.tpl');
  /**

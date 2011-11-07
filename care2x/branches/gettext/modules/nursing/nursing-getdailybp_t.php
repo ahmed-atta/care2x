@@ -309,8 +309,7 @@ if($bpcount||$tempcount){
 <?php if($saved)  : ?>
 <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"></a>
 <?php else : ?>
-<a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> alt="<?php echo $LDClose ?>">
-</a>
+<a href="javascript:window.close()" class="button icon remove danger">Cancel</a>
 <?php endif ?>
 </BODY>
 

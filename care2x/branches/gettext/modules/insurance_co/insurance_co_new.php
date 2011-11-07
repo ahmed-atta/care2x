@@ -220,7 +220,7 @@ if(!empty($mode)){
   </tr>
   <tr>
     <td><input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0'); ?>></td>
-    <td  align=right><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a></td>
+    <td  align=right><a href="<?php echo $breakfile ?>" class="button icon remove danger">Cancel</a></td>
   </tr>
 </table>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">

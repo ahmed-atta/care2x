@@ -167,8 +167,7 @@ echo '</FONT><p>';
 
 <p>
 
-<a href="<?php echo $breakfile; ?>"><img <?php if($mode=='pwchg') echo createLDImgSrc($root_path,'close2.gif','0'); else echo createLDImgSrc($root_path,'cancel.gif','0'); ?>>
-</a>
+<a href="<?php echo $breakfile; ?>" class="button icon remove danger"><?php if($mode=='pwchg') echo "Close"; else echo "Cancel"; ?></a>
 
 </ul>
 <?php

@@ -168,7 +168,7 @@ $sTemp = $sTemp.'
 
 $smarty->assign('sDeptSelectBox',$sTemp);
 
-$smarty->assign('sCancel','<a href="javascript:history.back()"><img '.createLDImgSrc($root_path,'cancel.gif','0').' border="0"></a>');
+$smarty->assign('sCancel','<a href="javascript:history.back()" class="button icon remove danger">Cancel</a>');
 $smarty->assign('sSaveButton','<input type="hidden" name="sid" value="'.$sid.'">
 <input type="hidden" name="mode" value="create">
 <input type="hidden" name="edit" value="'.$edit.'">

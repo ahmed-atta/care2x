@@ -98,7 +98,7 @@ $smarty->assign('sSave','<input type="image" '.createLDImgSrc($root_path,'savedi
 	<input type="hidden" name="mode" value="save">');
 
 # Cancel button
-$smarty->assign('sCancel','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').'></a>');
+$smarty->assign('sCancel','<a href="'.$breakfile.'" class="button icon remove danger">Cancel</a>');
 
 # Assign template as include file to the mainframe template
 

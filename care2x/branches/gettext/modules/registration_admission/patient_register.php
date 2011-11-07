@@ -87,7 +87,7 @@ $smarty->assign('sArchiveLink','<img '.createComIcon($root_path,'varrow.gif','0'
 $sCancel="<a href=";
 if($_COOKIE['ck_login_logged'.$sid]) $sCancel.=$breakfile;
 else $sCancel.='admission_pass.php';
-$sCancel.=URL_APPEND.'><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt="'.$LDCancelClose.'"></a>';
+$sCancel.=URL_APPEND.' class="button icon remove danger">Cancel</a>';
 
 $smarty->assign('pbCancel',$sCancel);
 

@@ -264,7 +264,7 @@ echo $LDEnterInfo;
 <p>
 <?php if($item_no) $save_button='update.gif'; else $save_button='savedisc.gif'; ?>
 <input type="image" <?php echo createLDImgSrc($root_path,$save_button,'0') ?>>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+<a href="<?php echo $breakfile ?>" class="button icon remove danger">Cancel</a>
 <?php if($item_no) : ?>
 <a href="<?php echo $thisfile.''.URL_APPEND.'&from='.$from ?>"><img <?php echo createLDImgSrc($root_path,'newcurrency.gif','0') ?>></a>
 <?php endif ?>

@@ -300,8 +300,7 @@ ob_start();
 		type="hidden" name="dept_nr" value="<?php echo $dept['nr']; ?>"> <input
 		type="hidden" name="mode" value="select"> <input type="submit"
 		value="<?php echo $LDUpdateData; ?>"></form>
-	<p><a href="javascript:history.back()"><img
-		<?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0"></a>
+	<p><a href="javascript:history.back()" class="button icon remove danger">Cancel</a>
 
 </ul>
 

@@ -50,7 +50,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/n
 
  $smarty->assign('LDShowStationDataTxt',$LDShowStationDataTxt);
  
- $smarty->assign('sCancel','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').' border="0"></a>');
+ $smarty->assign('sCancel','<a href="'.$breakfile.'" class="button icon remove danger">Cancel</a>');
 
 # Assign the include file to main frame template
 

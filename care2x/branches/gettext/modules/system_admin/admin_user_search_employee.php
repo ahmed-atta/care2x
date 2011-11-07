@@ -122,7 +122,7 @@ $smarty->assign('pbHelp',CARE_GUI . "modules/" . MODULE . "/help/" . $lang . "/e
 
 
 <p>
-<a href="<?php  echo $breakfile; ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a>
+<a href="<?php  echo $breakfile; ?>" class="button icon remove danger">Cancel</a>
 <p>
 
 <?php

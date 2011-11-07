@@ -241,8 +241,8 @@ if ($saved) {
 <?php
 } else {
 	?>
-<a href="javascript:window.close()">
-	<img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>" border="0" alt="<?php echo $LDClose ?>">
+<a href="javascript:window.close()" class="button icon remove danger">
+	Cancel
 </a>
 <?php } ?>
 

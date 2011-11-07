@@ -218,8 +218,8 @@ onLoad="<?php if($saved) echo "parentrefresh();"; ?>if (window.focus) window.foc
 </form>
 <p>
 <a href="<?php echo "op-care-log-getinfo.php?sid=$sid&lang=$lang&dept_nr=$dept_nr&saal=$saal&op_nr=$op_nr&enc_nr=$enc_nr&pday=$pday&pmonth=$pmonth&pyear=$pyear&winid=$winid";?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','left'); ?>>
-</a><a href="javascript:window.close()">
-<img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?> border="0" alt="<?php echo $LDClose ?>" align="right">
+</a><a href="javascript:window.close()" class="button icon remove danger">
+Cancel
 </a>
 
 </BODY>

@@ -478,7 +478,7 @@ ob_end_clean();
 
 $smarty->assign('sBottomControls',$sTemp);
 
-$smarty->assign('pbCancel','<a href="'.$returnfile.URL_APPEND.$buf.'&target='.$target.'&mode=show&type_nr='.$type_nr.'"><img '.createLDImgSrc($root_path,'cancel.gif','0').' alt="'.$LDCancelClose.'"></a>');
+$smarty->assign('pbCancel','<a href="'.$returnfile.URL_APPEND.$buf.'&target='.$target.'&mode=show&type_nr='.$type_nr.'" class="button icon remove danger">Cancel and Close</a>');
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/common_report.tpl');
 

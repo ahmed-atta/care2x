@@ -431,7 +431,7 @@ while(list($x,$v)=each($dept_list))
 </form>
 
 <p>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0'); ?>></a>
+<a href="<?php echo $breakfile ?>" class="button icon remove danger">Cancel</a>
 
 </ul>
 
