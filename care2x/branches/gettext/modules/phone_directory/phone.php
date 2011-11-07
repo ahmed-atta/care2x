@@ -118,20 +118,16 @@ require(CARE_BASE.'include/helpers/include_header_css_js.php');
 								maxlength="40" onfocus=this.select()
 								value="<?php echo $keyword ?>"> </font>
 							<!-- <INPUT type="submit" name="versand" value="<?php echo $LDSEARCH ?>"> -->
-							<INPUT type="image"
-
-							<?php echo createLDImgSrc(CARE_BASE,'searchlamp.gif','0') ?>> <input
-								type="hidden" name="sid" value="<?php echo $sid; ?>"> <input
-								type="hidden" name="lang" value="<?php echo $lang; ?>">
+							<button type="submit" class="button icon search"/>Search</button>
+							<a href="<?php echo $breakfile; ?>" class="button icon remove danger">Cancel</a>
+							<!--  <INPUT type="image" <?php echo createLDImgSrc(CARE_BASE,'searchlamp.gif','0') ?>> --> 
+							<input type="hidden" name="sid" value="<?php echo $sid; ?>"> 
+							<input type="hidden" name="lang" value="<?php echo $lang; ?>">
 					
 					</FORM>
 
 					<p>
-						<a href="<?php echo $breakfile; ?>"><img
-							
-						<?php echo createLDImgSrc(CARE_BASE,'cancel.gif','0') ?>> </a>
-					
-					
+						
 					<p>
 
 

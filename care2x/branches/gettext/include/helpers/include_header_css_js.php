@@ -1,11 +1,7 @@
 <?php
-if(isset($cfg['css']) && !empty($cfg['css']) && file_exists( CARE_GUI. '/gui/css/themes/'.$cfg['css'])){
-	$sCssFile = CARE_GUI.  '/gui/css/themes/'.$cfg['css'];
-}else{
-	//$sCssFile=  CARE_GUI. '/gui/css/themes/default/default.css';
-	$sCssFile=  CARE_GUI. '/gui/css/themes/default/bootstrap-1.1.0.css';
-}
-echo '<link rel="stylesheet" href="'.$sCssFile.'" type="text/css">';
+
+echo '<link rel="stylesheet" href="'.CARE_GUI. '/gui/css/themes/default/bootstrap-1.1.0.css" type="text/css">';
+echo '<link rel="stylesheet" href="'.CARE_GUI. '/gui/css/themes/default/gh-buttons.css" type="text/css">';
 echo '
 <script src="'.CARE_GUI.'js/jquery-1.4.1.min.js" type="text/javascript"></script>
 <script src="'.CARE_GUI.'js/colorbox/js/jquery.colorbox-min.js" type="text/javascript"></script>
