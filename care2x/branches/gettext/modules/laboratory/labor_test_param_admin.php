@@ -170,7 +170,7 @@ if(is_object($tparams)){
 	
 	echo '
 			<td>
-			<a href="javascript:editParam('.$tp['nr'].')"><img '.createLDImgSrc($root_path,'edit_sm.gif','0').'></a>
+			<a href="javascript:editParam('.$tp['nr'].')"  class="button icon edit">Edit</a>
 			</td>';
 	echo '
 		</tr>';

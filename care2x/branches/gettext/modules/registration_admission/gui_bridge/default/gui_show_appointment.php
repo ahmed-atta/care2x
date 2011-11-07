@@ -85,7 +85,7 @@ while($row=$result->FetchRow()){
 		if($row['appt_status']=='pending'){
 			if(!$death_date||$death_date==$dbf_nodate){
 	?>
-	<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=select&nr='.$row['nr']; ?>"><img <?php echo createLDImgSrc($root_path,'edit_sm.gif','0'); ?>></a> <br> 
+	<a href="<?php echo $thisfile.URL_APPEND.'&pid='.$_SESSION['sess_pid'].'&target='.$target.'&mode=select&nr='.$row['nr']; ?>"  class="button icon edit">Edit</a> <br> 
 	<a href="javascript:checkApptDate('<?php echo $row['date'] ?>','<?php echo $row['encounter_class_nr'] ?>','<?php echo $row['nr'] ?>' )"><img <?php echo createLDImgSrc($root_path,'admit_sm.gif','0'); ?>></a> <br>
 	<?php
 			}
