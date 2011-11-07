@@ -39,7 +39,7 @@ div.fa2_ml3 {font-family: arial; font-size: 12; margin-left: 3; }
 	{{/if}}
 {{/if}}
 
-{{include file="forms/pathology.tpl"}}
+{{include file="pathology.tpl"}}
 
 <p>
 

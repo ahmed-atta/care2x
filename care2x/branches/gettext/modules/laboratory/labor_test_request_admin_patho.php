@@ -336,7 +336,7 @@ if($stored_request['entry_date'] && $stored_request['entry_date'] != DBF_NODATE)
 
 	include('includes/inc_test_request_printout_patho.php');
 
-	$smarty->display('forms/pathology.tpl');
+	$smarty->display(__DIR__ . '/view/pathology.tpl');
 
 	require($root_path.'modules/laboratory/includes/inc_test_request_hiddenvars.php');
 

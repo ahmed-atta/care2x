@@ -247,7 +247,7 @@ if($subtarget=='chemlabor' || $subtarget=='baclabor'){
 	$read_form=TRUE;
 	include($root_path.'include/inc_test_request_printout_'.$formfile.'.php');
 	
-	$smarty->display('forms/pathology.tpl');
+	$smarty->display(__DIR__ . '/view/pathology.tpl');
 
 }else{
     include($root_path.'include/inc_test_request_printout_'.$formfile.'.php');
