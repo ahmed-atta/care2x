@@ -305,7 +305,7 @@ if($mode=='search') echo '
 
 ?>
 <p><br>
- <a> <?php echo'<a href="tech.php'.URL_APPEND.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'>';?></a>
+ <a> <?php echo'<a href="tech.php'.URL_APPEND.'" class="button icon arrowleft">Back</a>
 </ul>
 <?php
 

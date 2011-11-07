@@ -284,7 +284,6 @@ $smarty->assign('LDBack', $LDBack);
  */
  $smarty->assign('from',$from);
  $smarty->assign('LINKArchiv','nursing-ward-archive.php'.URL_APPEND.'&pyear='.$pyear.'&pmonth='.$pmonth);
- $smarty->assign('pbBack2',createLDImgSrc($root_path,'back2.gif','0') );
  $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDHelp', $LDHelp);
  $smarty->assign('LDClose', $LDClose);

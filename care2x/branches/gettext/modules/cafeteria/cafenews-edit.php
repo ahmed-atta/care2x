@@ -109,12 +109,12 @@ echo $calendar->show_calendar($calendar,$date_format,'publishdate');
   <tr>
 <?php if($artopt!=2) : ?>
     <td align=right >
-	<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+	<a href="<?php echo $returnfile ?>" class="button icon arrowleft">Back</a>
   </td>
 <?php endif ?>
     <td >
 <?php if($artopt==2) : ?>
-	<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+	<a href="<?php echo $returnfile ?>" class="button icon arrowleft">Back</a>
 <?php endif ?>
 <input type="image" <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>
   </td>

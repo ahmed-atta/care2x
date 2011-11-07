@@ -55,7 +55,7 @@ function chkForm(d)
   </tr>
   <tr>
    <td><p><br>
-   <a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+   <a href="<?php echo $returnfile ?>" class="button icon arrowleft">Back</a>
   </td>
     <td><p><br>
     <input type="image" <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>

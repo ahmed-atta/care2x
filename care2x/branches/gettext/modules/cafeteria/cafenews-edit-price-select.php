@@ -144,7 +144,7 @@ function chkRadioButton(e){
   </tr>
   <tr>
     <td>
-	<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+	<a href="<?php echo $returnfile ?>" class="button icon arrowleft">Back</a>
 	</td>
     <td >
 <input type="image" <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>

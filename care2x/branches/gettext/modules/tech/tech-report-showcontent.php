@@ -148,14 +148,14 @@ echo '
 <input type="hidden" name="ttime" value="'.$content['ttime'].'">
 <input type="hidden" name="tid" value="'.$content['tid'].'">
 <input type="hidden" name="job_id" value="'.$content['job_id'].'">
-<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0','absmiddle').'</a>&nbsp;&nbsp;&nbsp;
+<a href="'.$breakfile.'" class="button icon arrowleft">Back</a>&nbsp;&nbsp;&nbsp;
 <input type="submit" value="'.$LDMarkRead.'">&nbsp;&nbsp;&nbsp;
 <input type="button" value="'.$LDPrint.'" onClick="javascript:window.print()"><a>
 
 </form>
 ';
 }else{
-	echo '<p><a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0','absmiddle').'</a>&nbsp;&nbsp;&nbsp;';
+	echo '<p><a href="'.$breakfile.'" class="button icon arrowleft">Back</a>&nbsp;&nbsp;&nbsp;';
 }
  ?>
 </ul>

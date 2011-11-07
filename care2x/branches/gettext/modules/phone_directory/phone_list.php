@@ -214,7 +214,7 @@ if($rows){
 <p>
 <?php else : ?>
 <p>
-<a href="<?php echo $sBreakUrl; ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0'); ?>></a>
+<a href="<?php echo $sBreakUrl; ?>" class="button icon arrowleft">Back</a>
 
 <?php endif; ?>
 </td>

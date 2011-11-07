@@ -51,7 +51,7 @@ echo $test?>
 			align=right>
 <?php
 if ($cfg ['dhtml'])
-	echo '<a href="javascript:window.history.back()"><img ' . createLDImgSrc ( $root_path, 'back2.gif', '0' ) . '  class="fadeOut" >';
+	echo '<a href="javascript:window.history.back()" class="button icon arrowleft">Back';
 ?></a><a
 			href="javascript:gethelp('dept_manage.php')"><img
 			<?php

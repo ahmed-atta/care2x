@@ -131,7 +131,7 @@ else  echo 'topmargin=2 marginheight=2';
 <?php if (!$cfg['dhtml']){ echo ' link='.$cfg['idx_txtcolor'].' alink='.$cfg['body_alink'].' vlink='.$cfg['idx_txtcolor']; } ?>>
 <form>
 <?php if($display!="composite") : ?>
-<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?> width=110 height=24 align="right"></a>
+<a href="javascript:window.history.back()" class="button icon arrowleft">Back</a>
 <FONT    SIZE=3  FACE="verdana,Arial" color="#006600">
 <b><?php echo $LDOps301 ?></b></font>&nbsp;
 <!--  <input type="button" value="<?php echo $LDSearch4OPS301 ?>" onClick="javascript:openOPSsearch('','0')">&nbsp;

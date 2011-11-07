@@ -60,7 +60,7 @@ function chkForm(d)
   </tr>
   <tr>
      <td >
-	<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+	<a href="<?php echo $breakfile ?>" class="button icon arrowleft">Back</a>
 <input type="image" <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>>
   </td>
     <td align=right >

@@ -654,7 +654,7 @@ else
 
 <font class="prompt"><b><?php echo $LDNoPendingRequest ?></b></font>
 <p>
-<a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+<a href="<?php echo $breakfile ?>" class="button icon arrowleft">Back</a>
 <?php
 }
 

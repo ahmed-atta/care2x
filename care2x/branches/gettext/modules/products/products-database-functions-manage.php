@@ -251,7 +251,7 @@ if($linecount==1){
 
 <?php if ($from=="multiple")
 echo '
-<a href="products-database-functions-manage.php'.URL_APPEND.'&cat='.$cat.'"><img '.createLDImgSrc($root_path,'back2.gif','0','absmiddle').' alt="'.$LDBack.'"></a>
+<a href="products-database-functions-manage.php'.URL_APPEND.'&cat='.$cat.'" class="button icon arrowleft">Back</a>
 ';
 ?>
 <a href="<?php echo $breakfile ?>" class="button icon remove danger">Cancel</a>

@@ -131,13 +131,13 @@ var _editor_url="<?php echo $root_path.'js/html_editor/'; ?>";
   <tr>
 <?php if(!$alignright) : ?>
     <td align=right >
-		<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+		<a href="<?php echo $returnfile ?>" class="button icon arrowleft">Back</a>
 	&nbsp;
   </td>
 <?php endif ?>
     <td >
 <?php if($alignright) : ?>
-		<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+		<a href="<?php echo $returnfile ?>" class="button icon arrowleft">Back</a>
 <?php endif ?>
  <input type="image" <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>> 
 <!-- <a href="javascript:chkForm(document.selectform)"><img <?php echo createLDImgSrc($root_path,'continue.gif','0') ?>></a> -->

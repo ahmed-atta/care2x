@@ -204,7 +204,6 @@ $smarty->assign('LDBack', $LDBack);
  $smarty->assign('LDClose', $LDClose);
  
 $smarty->assign ( 'pbBack', 'javascript:window.history.back()' );
-$smarty->assign ( 'gifBack2', createLDImgSrc ( $root_path, 'back2.gif', '0' ) );
 
 # Added for the common header top block
 $smarty->assign ( 'pbHelp', 'javascript:gethelp(\'request_aftersave.php\')' );

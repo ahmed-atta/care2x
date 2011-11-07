@@ -131,7 +131,7 @@ require($root_path.'include/helpers/include_header_css_js.php');
 <td   height="10" >
 <FONT    SIZE=+2  FACE="Arial"><STRONG> &nbsp;<?php echo "$LDMedDepot - $LDReport" ?></STRONG></FONT></td>
 <td  height="10" align=right>
-<a href="#" onClick=history.back(1)><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  </a><a 
+<a href="#" onClick=history.back(1) class="button icon arrowleft">Back</a><a 
 href="javascript:gethelp('products_db.php','report','<?php echo $mode ?>','<?php echo $cat ?>','<?php echo $update ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  </a><a 
 href="<?php echo $breakfile ?>?sid=<?php echo "$sid&lang=$lang" ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> </a></td></tr>
 <tr valign=top >
