@@ -157,7 +157,7 @@ $smarty->assign('sOnHoverMenu',$sTemp);
 
 # Assign the submenu to the mainframe center block
 
-$smarty->assign('sMainBlockIncludeFile','or/submenu_or.tpl');
+$smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/submenu_or.tpl');
 
 /**
  * show  Mainframe Template
