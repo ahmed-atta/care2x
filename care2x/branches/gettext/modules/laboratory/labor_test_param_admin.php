@@ -101,7 +101,7 @@ ob_end_clean();
 
 $smarty->append('JavaScript',$sTemp);
 
-$sTempNew = '<a href="javascript:newParam()"><img '.createLDImgSrc($root_path,'newplan.gif','0').'></a>';	
+$sTempNew = '<a href="javascript:newParam()" class="button icon add">Add new Parameter</a>';	
 $paramName = &$lab_obj->getGroupName($parameterselect);
 if(isset($paramName) && !empty($paramName)) {
 	$paramName = $paramName->fetchRow();

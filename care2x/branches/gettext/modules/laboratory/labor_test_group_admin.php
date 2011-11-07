@@ -97,7 +97,7 @@ ob_end_clean();
 
 $smarty->append('JavaScript',$sTemp);
 
-$sTempNew = '<a href="javascript:newGroup()"><img '.createLDImgSrc($root_path,'newplan.gif','0').'></a>';	
+$sTempNew = '<a href="javascript:newGroup()" class="button icon add">Add a new  Group</a>';	
 
 # Assign elements
 $smarty->assign('sGroupNew',$sTempNew);
