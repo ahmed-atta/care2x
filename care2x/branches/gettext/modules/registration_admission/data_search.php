@@ -132,9 +132,6 @@ $entry_body_bgcolor = '#ffffff';
 ?>
 <html>
 <head>
-<?php
-echo setCharSet ();
-?>
 <title><?php
 echo $title?></title>
 

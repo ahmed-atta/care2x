@@ -100,10 +100,7 @@ if ($mode != 'new')
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
 <html>
 <HEAD>
-<?php
-echo setCharSet () ;
-?>
- <TITLE>Konfigurimi i Grupeve</TITLE>
+ <TITLE>Group Configuration</TITLE>
 
 <script language="javascript" name="j1">
 <!--        
