@@ -165,8 +165,8 @@ function checkForm(v) {
 				type=hidden name="search" value=1> <input type=hidden name="sid"
 				value=<?php echo $sid ?>> <input type=hidden name="lang"
 				value=<?php echo $lang ?>> <input type=hidden name="editmode"
-				value=<?php echo $editmode ?>> <INPUT type="image"
-				<?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				value=<?php echo $editmode ?>> 
+				<button type="submit" class="button icon search"/>Search</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<a
 				href="javascript:gethelp('lab.php','search','<?php echo $mode ?>','<?php echo $linecount ?>','<?php echo $datafound ?>')"><img
 				<?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?>></a>
@@ -298,7 +298,8 @@ if($linecount){
 				<input type=hidden name="sid" value="'.$sid.'">
 				<input type=hidden name="lang" value="'.$lang.'">
 				<input type=hidden name="editmode" value="'.$editmode.'">
-				<INPUT type="image"  '.createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle').'></FORM>
+				<button type="submit" class="button icon search"/>Search</button>
+				</FORM>
 				<p>';
 	}
 }

@@ -145,7 +145,7 @@ ob_start();
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
-			<td><input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?> alt="<?php echo $LDSearchPatient ?>" > </td>
+			<td><button type="submit" class="button icon search"/>Search</button> </td>
 			<td> <a href="javascript:window.close()"><img <?php echo createLDImgSrc($root_path,'cancel.gif','0') ?>></a></td>
 		</tr>
 	</table>

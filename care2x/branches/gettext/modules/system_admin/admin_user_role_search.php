@@ -142,7 +142,7 @@ function gethelp(x,s,x1,x2,x3)
 </td>
 </tr>
 
-<tr><td><input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0') ?>>
+<tr><td><button type="submit" class="button icon search"/>Search</button>
 		</td>
 </tr>
 </table>

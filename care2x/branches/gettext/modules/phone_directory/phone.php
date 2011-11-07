@@ -109,18 +109,15 @@ require(CARE_BASE.'include/helpers/include_header_css_js.php');
 				
 				<ul>
 
-					<FORM action="phone.php" method="post" name="searchdata"
-						onSubmit="return pruf(this)">
+					<FORM action="phone.php" method="post" name="searchdata" onSubmit="return pruf(this)">
 
 						<B><?php echo $LDKeywordPrompt ?> </B></font>
 						<p>
 							<font size=3><INPUT type="text" name="keyword" size="14"
 								maxlength="40" onfocus=this.select()
 								value="<?php echo $keyword ?>"> </font>
-							<!-- <INPUT type="submit" name="versand" value="<?php echo $LDSEARCH ?>"> -->
 							<button type="submit" class="button icon search"/>Search</button>
 							<a href="<?php echo $breakfile; ?>" class="button icon remove danger">Cancel</a>
-							<!--  <INPUT type="image" <?php echo createLDImgSrc(CARE_BASE,'searchlamp.gif','0') ?>> --> 
 							<input type="hidden" name="sid" value="<?php echo $sid; ?>"> 
 							<input type="hidden" name="lang" value="<?php echo $lang; ?>">
 					

@@ -285,7 +285,7 @@ $smarty->assign('searchprompt',$searchprompt);
 #
 # Prepare the hidden inputs
 #
-$smarty->assign('sHiddenInputs','<input type="image" '.createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle').'>
+$smarty->assign('sHiddenInputs','<button type="submit" class="button icon search"/>Search</button>
 		<input type="hidden" name="sid" value="'.$sid.'">
 		<input type="hidden" name="lang" value="'.$lang.'">
 		<input type="hidden" name="noresize" value="'.$noresize.'">

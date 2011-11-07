@@ -177,7 +177,7 @@ ob_start();
     </tr>
 
     <tr >
-      <td colspan=2><input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0'); ?>>
+      <td colspan=2><button type="submit" class="button icon search"/>Search</button>
            </td>
     </tr>
   </table>

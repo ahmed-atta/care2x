@@ -288,7 +288,7 @@ ob_start();
 <form method="post"  name="matchform" onSubmit="return lookmatch(this)">
 <?php echo $LDSearchKeyword ?>: <input name="matchcode" type="text" size="20">&nbsp;<br>
 <input type="checkbox" name="all_depts" <?php if ($all_depts=='true') echo 'checked' ?>> <?php echo $LDSearchInAllDepts ?><br>
-<input type="image" <?php echo createLDImgSrc($root_path,'searchlamp.gif','0','absmiddle') ?> alt="<?php echo $LDSearch ?>">
+<button type="submit" class="button icon search"/>Search</button>
 <input type="hidden" name="sid" value="<?php echo $sid ?>">
 <input type="hidden" name="lang" value="<?php echo $lang ?>">
 <input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
