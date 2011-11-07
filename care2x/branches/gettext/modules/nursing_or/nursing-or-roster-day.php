@@ -246,7 +246,7 @@ echo ucfirst($person2['name_last']).', '.ucfirst($person2['name_first']);
 
 <?php } ?>
 <p>
-<a href="<?php echo $rettarget ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+<a href="<?php echo $rettarget ?>" class="button icon arrowleft">Back</a>
 </FONT>
 </BODY>
 </HTML>

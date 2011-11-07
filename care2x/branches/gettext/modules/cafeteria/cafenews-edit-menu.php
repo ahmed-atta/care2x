@@ -248,7 +248,7 @@ if($mode=="saveok") {
 
  <tr>
     <td ><p><br>
-	<a href="<?php echo $returnfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+	<a href="<?php echo $returnfile ?>" class="button icon arrowleft">Back</a>
     <input type="image" <?php echo createLDImgSrc($root_path,'savedisc.gif','0') ?>>
   </td>
     <td align=right ><p><br>&nbsp;&nbsp;

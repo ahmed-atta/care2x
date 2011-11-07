@@ -65,7 +65,7 @@ require($root_path.'include/helpers/include_header_css_js.php');
 <td  height="10" >
 <FONT    SIZE=+2  FACE="Arial"><STRONG>&nbsp; &nbsp; <?php echo "$LDRadio $LDSearchXray - $LDSearchPat" ?></STRONG></FONT></td>
 <td  height="10" align=right><nobr>
-<a href="javascript:window.history.back()"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>  </a><a href="javascript:gethelp('radio.php','search','','0')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  </a><a href="javascript:window.top.opener.focus();window.top.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  </a>
+<a href="javascript:window.history.back()" class="button icon arrowleft">Back</a><a href="javascript:gethelp('radio.php','search','','0')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  </a><a href="javascript:window.top.opener.focus();window.top.close()" ><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?>  </a>
 </nobr>
 </td></tr>
 <tr valign=top >

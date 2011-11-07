@@ -57,7 +57,7 @@ require($root_path.'include/helpers/include_header_css_js.php');
 <tr valign=top>
 <td  height="30"><FONT    SIZE=+2  FACE="Arial">
 <STRONG> <?php echo "$LDIntraEmail - $LDOptions" ?></STRONG></FONT></td>
-<td  align=right><a href="javascript:history.back();"><img <?php echo createLDImgSrc($root_path,'back2.gif','0','absmiddle') ?> class="fadeOut" ></a><a href="javascript:gethelp()"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> class="fadeOut" ></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> class="fadeOut" ></a></td>
+<td  align=right><a href="javascript:history.back();" class="button icon arrowleft">Back</a><a href="javascript:gethelp()"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0','absmiddle') ?> class="fadeOut" ></a><a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0','absmiddle') ?> class="fadeOut" ></a></td>
 </tr>
 <tr valign=top >
 <td  valign=top colspan=2>

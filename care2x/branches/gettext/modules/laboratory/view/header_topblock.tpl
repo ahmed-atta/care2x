@@ -19,7 +19,7 @@
 				</button>
 			{{/if}}
 			{{if $pbBack}}
-				<a href="{{$pbBack}}" class="btn"><img {{$gifBack2}} alt="">{{$LDBack}}</a>
+				<a href="{{$pbBack}}" class="button icon arrowleft"><img {{$gifBack2}} alt="">Back</a>
 			{{/if}}
 			{{if $pbHelp}}
 				<a href="{{$pbHelp}}" class="btn primary help"><img {{$gifHilfeR}} alt="">{{$LDHelp}}</a>

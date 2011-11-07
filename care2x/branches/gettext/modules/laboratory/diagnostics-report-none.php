@@ -31,7 +31,6 @@ $breakfile=$root_path."modules/nursing/nursing-ward-patientdata.php".URL_APPEND.
   </tr>
 </table>
 <p><br>
-<a href="<?php echo $breakfile ?>" target="_top"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>>
-</a>
+<a href="<?php echo $breakfile ?>" target="_top" class="button icon arrowleft">Back</a>
 </body>
 </html>

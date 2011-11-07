@@ -371,10 +371,7 @@ if ($batchrows) {
 	?>
 <font size=3 face="verdana,arial" color="#990000"><b><?php
 	echo $LDNoPendingRequest?></b></font>
-<p><a href="<?php
-	echo $breakfile?>"><img
-	<?php
-	echo createLDImgSrc ( $root_path, 'back2.gif', '0' )?>></a>
+<p><a href="<?php echo $breakfile?>" class="button icon arrowleft">Back</a>
 <?php
 }
 

@@ -232,8 +232,7 @@ ob_start();
 			</form>
 			';
 	}
-	?> <a href="<?php echo $returnfile; ?>"><img
-	<?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
+	?> <a href="<?php echo $returnfile; ?>" class="button icon arrowleft">Back</a>
 	
 	
 	</table>

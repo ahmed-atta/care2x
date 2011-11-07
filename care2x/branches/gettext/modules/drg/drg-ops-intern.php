@@ -186,7 +186,7 @@ echo $encounter['name_last'].", ".$encounter['name_first']." ".formatDate2Local(
 if($opnr) echo" - OP# $opnr - $dept_nr OP $oprm"; 
 ?>
 <?php if($display!="composite") : ?>
-<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?> width=110 height=24 align="right"></a>
+<a href="javascript:window.history.back()" class="button icon arrowleft">Back</a>
 
 <b><?php echo $LDOps301 ?></b></font>&nbsp;
  <input type="button" value="<?php echo $LDSearch4OPS301 ?>" onClick="javascript:openOPSsearch()">&nbsp;
@@ -265,7 +265,7 @@ if($non_grouped){
 	</td>
 	<?php if($display!='composite') { ?>   
 	 <td valign="top" bgcolor="#990000"><font size=2 color=#ffffff>
-	<a href="javascript:window.history.back()" ><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?> width=110 height=24></a>
+	<a href="javascript:window.history.back()" class="button icon arrowleft">Back</a>
 	</td>
 	<?php }elseif($edit){ ?>
 	 <td valign="top" bgcolor="#990000"><font size=2 color=#ffffff>

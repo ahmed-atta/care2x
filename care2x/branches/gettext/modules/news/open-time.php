@@ -68,7 +68,7 @@ $smarty->assign('LDBack', $LDBack);
 
 $smarty->assign('sOpenTimesRows',$sTemp);
 
-$smarty->assign('sBreakFile','<a href="'.$breakfile.'"><img '.createLDImgSrc($root_path,'back2.gif','0').'  alt="'.$LDBackTxt.'"></a>');
+$smarty->assign('sBreakFile','<a href="'.$breakfile.'" class="button icon arrowleft">Back</a>');
 
 $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/opentimes_table.tpl');
 

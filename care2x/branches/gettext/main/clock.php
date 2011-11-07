@@ -50,7 +50,7 @@ function gethelp(x,s,x1,x2,x3)
 		</td>
 		<td  height="10" align=right>
 			<div class="actions">
-				<?php echo '<a href="javascript:window.history.back()"><img ' . createLDImgSrc ( CARE_BASE , 'back2.gif', '0' ) . '></a>'; ?>
+				<?php echo '<a href="javascript:window.history.back()" class="button icon arrowleft">Back</a>'; ?>
 				<a href="javascript:gethelp('')">
 					<img <?php echo createLDImgSrc ( CARE_BASE , 'hilfe-r.gif', '0' )?> 
 				</a>

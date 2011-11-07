@@ -34,7 +34,7 @@ require($root_path.'include/helpers/include_header_css_js.php');
 <FONT    SIZE=+2  FACE="Arial">
 <STRONG> &nbsp; <?php echo "$LDMedDepot $LDPharmaDb" ?></STRONG></FONT></td>
 <td  height="10" align=right>
-<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()"><img '.createLDImgSrc($root_path,'back2.gif','0').'  class="fadeOut" >';?></a><a href="javascript:gethelp('submenu1.php','<?php echo "$LDMedDepot $LDPharmaDb" ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  </a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  </a></td>
+<?php if($cfg['dhtml'])echo'<a href="javascript:window.history.back()" class="button icon arrowleft">Back</a><a href="javascript:gethelp('submenu1.php','<?php echo "$LDMedDepot $LDPharmaDb" ?>')"><img <?php echo createLDImgSrc($root_path,'hilfe-r.gif','0') ?>  </a><a href="<?php echo $breakfile;?>"><img <?php echo createLDImgSrc($root_path,'close2.gif','0') ?> alt="<?php echo $LDClose ?>"  </a></td>
 </tr>
 <tr valign=top >
 <td  valign=top colspan=2>
