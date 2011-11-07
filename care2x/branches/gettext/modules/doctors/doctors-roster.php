@@ -128,7 +128,7 @@ if ($pmonth==12) $sBuffer = $sBuffer.$monat[1];
 $smarty->assign('sNextMonth',$sBuffer.'</a>');
 
 # Assign control links
-$smarty->assign('sNewPlan',"<a href=\"doctors-main-pass.php".URL_APPEND."&target=dutyplan&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath\"><img ".createLDImgSrc($root_path,'newplan.gif','0')."  alt=\"$LDNewPlan\"></a>");
+$smarty->assign('sNewPlan',"<a href=\"doctors-main-pass.php".URL_APPEND."&target=dutyplan&dept_nr=$dept_nr&pmonth=$pmonth&pyear=$pyear&retpath=$retpath\" class=\"button icon add\">Add a new Plan</a>");
 $smarty->assign('sCancel',"<a href=\"$rettarget\"><img ".createLDImgSrc($root_path,'close2.gif','0')." alt=\"$LDClosePlan\"></a>");
 
  # Buffer form
