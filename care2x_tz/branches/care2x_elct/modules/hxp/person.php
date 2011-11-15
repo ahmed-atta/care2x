@@ -388,7 +388,7 @@ function PersonAppt($args){
 function PersonApptList($args){
 	global $error,$root_path;
 	include($root_path.'include/care_api_classes/class_appointment.php');
-	$appt=& new Appointment();
+	$appt= new Appointment();
 	if(checkAccess($args[0])){
 		$buf=$appt->getPersonsAppointmentsObj($args[1]);
 		if($buf){

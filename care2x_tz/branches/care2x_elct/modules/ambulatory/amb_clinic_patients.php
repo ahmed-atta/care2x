@@ -201,7 +201,7 @@ if($mode=='paginate'){
 	$oitem='';
 }
 require_once($root_path.'include/care_api_classes/class_paginator.php');
-$pagen=& new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
+$pagen= new Paginator($pgx,$thisfile,$_SESSION['sess_searchkey'],$root_path);
  $breakfile='amb_clinic_patients.php';
 $newdata=1;
 $target='archiv';
@@ -223,7 +223,6 @@ function getinfo(pn){
 	echo '";';
 	echo '
 	patientwin=window.open(urlholder,pn,"width=700,height=600,menubar=no,resizable=yes,scrollbars=yes");
-
 	patientwin.moveTo(0,0)
 	patientwin.resizeTo(screen.availWidth,screen.availHeight)';
 	}

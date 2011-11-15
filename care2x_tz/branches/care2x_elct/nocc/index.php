@@ -11,8 +11,7 @@
 
 require ('conf.php');
 require ('check_lang.php');
-session_start();
-session_destroy();
+
 Header("Content-type: text/html; Charset=$charset");
 
 if (floor(phpversion()) != 4)

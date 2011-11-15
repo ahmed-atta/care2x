@@ -16,7 +16,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 // Load the insurance object
 require_once($root_path.'include/care_api_classes/class_insurance.php');
-$ins_obj=& new Insurance;
+$ins_obj= new Insurance;
 
 switch($retpath){
 	case 'list': $breakfile='insurance_co_list.php'.URL_APPEND; break;

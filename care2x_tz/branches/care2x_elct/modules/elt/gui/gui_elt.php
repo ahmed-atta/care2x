@@ -1,6 +1,5 @@
 <?php
 include('../../../classes/adodb/adodb.inc.php');	 # load code common to ADOdb
-session_start();
 $tabs['Step1'] = "./form/gui_elt_form_step1.php";
 $tabs['Step2'] = "./form/gui_elt_form_step2.php";
 $tabs['Step3'] = "./form/gui_elt_form_step3.php";

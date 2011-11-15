@@ -1,4 +1,5 @@
-<?php session_start();
+<?php 
+//session_start();
 
 	error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 	require('./roots.php');
@@ -6,11 +7,11 @@
 
 	$lang_tables[]='departments.php';
 	$lang_tables[]='pharmacy.php';
-$lang_tables[]='diagnoses_ICD10.php';
+	$lang_tables[]='diagnoses_ICD10.php';
 	define('LANG_FILE','nursing.php');
 	//define('LANG_FILE','aufnahme.php');
 
-	define('NO_2LEVEL_CHK',1);
+	//define('NO_2LEVEL_CHK',1);
 	require_once($root_path.'include/inc_front_chain_lang.php');
 
 	include_once($root_path.'include/care_api_classes/class_mini_dental.php');
@@ -83,6 +84,7 @@ function Spacer()
 
 	/* Establish db connection */
 	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
+
 	if($dblink_ok)
 	{
 	    /* Load date formatter */
@@ -997,7 +999,7 @@ function Spacer()
 	<input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
 	<input type="hidden" name="pn" value="<?php echo $pn ?>">
 
-	<?php
+	<?php 
 	# If in edit mode create the hidden items
 	if($edit){
 	?>

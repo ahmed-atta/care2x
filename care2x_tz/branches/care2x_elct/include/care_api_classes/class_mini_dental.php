@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once($root_path.'include/care_api_classes/class_core.php');
 /**
 *  Person methods.

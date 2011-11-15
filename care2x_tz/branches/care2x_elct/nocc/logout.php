@@ -11,13 +11,13 @@
 
 require ('conf.php');
 
-session_start();
+
 $old_theme = $theme;
 $ini_tmpdir = ini_get($upload_tmp_dir);
 $tmpdir = (!empty($ini_tmpdir)) ? $ini_tmpdir : $tmpdir;
 if (is_array($attach_array))
 	while ($tmp = array_shift($attach_array))
 		@unlink($tmpdir.'/'.$tmp->tmp_file);
-session_destroy();
+
 header("location: index.php?lang=$lang&theme=$old_theme");
 ?>

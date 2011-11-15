@@ -36,13 +36,13 @@ $thisfile=basename($_SERVER['PHP_SELF']);
 require_once($root_path.'include/inc_date_format_functions.php');
 
 require_once($root_path.'include/care_api_classes/class_access.php');
-$access =& new Access();
+$access = new Access();
 $access->UserExists($_SESSION['sess_user_name']);
 
 //get in the classes i need
 /* Create encounter object */
 require_once($root_path.'include/care_api_classes/class_encounter.php');
-$enc_obj=& new Encounter($encounter_nr);
+$enc_obj= new Encounter($encounter_nr);
 $encounter = '';
 if($enc_obj->loadEncounterData()){
 	$encounter=&$enc_obj->getLoadedEncounterData();
@@ -102,7 +102,7 @@ $classpath=$root_path.'classes/phppdf/';
 $fontpath=$classpath.'fonts/';
 
 include($classpath.'class.ezpdf.php');
-$pdf=& new Cezpdf();
+$pdf= new Cezpdf();
 
 
 $logo=$root_path.'gui/img/logos/lopo/care_logo.jpg';
