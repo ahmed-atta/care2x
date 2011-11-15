@@ -13,7 +13,6 @@
 
 if (stristr($_SERVER['HTTP_USER_AGENT'],'MSIE') || stristr($_SERVER['HTTP_USER_AGENT'],'Internet Explorer'))
 	session_cache_limiter('public');
-session_start();
 require ('conf.php');
 
 header('Content-Type: application/x-unknown-' . $mime);

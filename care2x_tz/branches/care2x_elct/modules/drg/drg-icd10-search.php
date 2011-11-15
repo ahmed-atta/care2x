@@ -19,7 +19,7 @@ require_once($root_path.'include/inc_front_chain_lang.php');
 
 # Create drg object
 require_once($root_path.'include/care_api_classes/class_drg.php');
-$drg=& new DRG;
+$drg= new DRG;
 
 //$db->debug=true;
 

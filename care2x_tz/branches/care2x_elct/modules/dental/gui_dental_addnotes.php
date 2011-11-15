@@ -3,13 +3,8 @@
 require('./roots.php');
 
  $pageURL = 'http';
- if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
  $pageURL .= "://";
- if ($_SERVER["SERVER_PORT"] != "80") {
-  $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
- } else {
-  $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
- }
+ $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 
 $lang_tables[]='search.php';
 define('LANG_FILE','dental.php');
@@ -19,7 +14,7 @@ $notes_obj = new dental;
 
 $url = explode('|',$_GET['url']);
 
-if ($_GET['mode']=='edit'){
+if (isset($_GET['mode']) && $_GET['mode']=='edit'){
 	$sq = "SELECT * FROM care_encounter_notes WHERE nr=".$_GET['id'];
 	$d  = $db->Execute($sq);
 	$yy = $d->FetchRow();
@@ -38,7 +33,7 @@ if ($_GET['mode']=='edit'){
     <tr>
       <td><table width="470"  border="0" align="center" cellpadding="4" cellspacing="1" bgcolor="#D2DFD0" class="style3">
         <tr align="center" bgcolor="#E7EEE6">
-          <td height="38" colspan="3" bgcolor="#C0D2BD"><div align="center" class="style5" style="text-transform:uppercase;"><?php print ($_GET['mode']=='edit')?$mode:' Add'; ?> Patient notes</div></td>
+          <td height="38" colspan="3" bgcolor="#C0D2BD"><div align="center" class="style5" style="text-transform:uppercase;"><?php print (isset($_GET['mode']) && $_GET['mode']=='edit')?$mode:' Add'; ?> Patient notes</div></td>
         </tr>
         <tr bgcolor="#E7EEE6">
           <td width="111" height="30" align="right" bgcolor="#E7EEE6"><strong>Date:</strong></td>

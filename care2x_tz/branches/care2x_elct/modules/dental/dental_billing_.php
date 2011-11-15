@@ -44,9 +44,6 @@
 	}
 
 
-session_start();
-
-
 	/**
 	  *
 	  * for PATIENT NOTES

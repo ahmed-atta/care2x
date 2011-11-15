@@ -124,10 +124,10 @@ class GuiInputPerson {
 		$db->debug=FALSE;
 
 		# Create the new person object
-		$person_obj=& new Person($pid);
+		$person_obj= new Person($pid);
 
 		# Create a new person insurance object
-		$pinsure_obj=& new PersonInsurance($pid);
+		$pinsure_obj= new PersonInsurance($pid);
 
 		if(!isset($insurance_show)) $insurance_show=TRUE;
 
@@ -228,7 +228,7 @@ class GuiInputPerson {
 
 				# Create image object
 				include_once($root_path.'include/care_api_classes/class_image.php');
-				$img_obj=& new Image;
+				$img_obj= new Image;
 
 				# Check the uploaded image file if exists and valid
 				if($img_obj->isValidUploadedImage($_FILES['photo_filename'])){

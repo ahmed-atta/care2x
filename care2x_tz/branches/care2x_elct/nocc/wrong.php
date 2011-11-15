@@ -11,8 +11,7 @@
 
 require ('conf.php');
 require ('check_lang.php');
-session_start();
-session_destroy();
+
 ?>
 <table border="0" width="100%">
 	<tr>

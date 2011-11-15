@@ -5,7 +5,6 @@
  * deemagics@yahoo.com
  * October 2008.
  */
-session_start();
 
 require('./roots.php');
 
@@ -23,7 +22,7 @@ include_once($root_path.'include/care_api_classes/class_mini_dental.php');
 $histry= new dental;
 
 $pName = new dental;
-
+if(!isset($view)) $view="";
 $histry->viewtype=($view=='cons')?4:0;
 
 #print ($pName->viewtype.'<hr />');
@@ -62,7 +61,7 @@ $encounter_nr= $_GET['encounter'];
   * Double-Check for File No.
   */
 
-(!$_GET['filenr'])?	$fileno = $fileno_obj->GetFileNoFromPID($pid) : $fileno = $_GET['filenr'];
+(!isset($_GET['filenr']))?	$fileno = $fileno_obj->GetFileNoFromPID($pid) : $fileno = $_GET['filenr'];
 
 ?>
 
@@ -119,7 +118,7 @@ function printPage() {
 </head>
 
 <?php   print '<body ';
-
+		if(!isset($mode)) $mode="";
 		($mode=='new')? print 'onload="' .
 							  'navigate(\''.$_GET['encounter'] .
 							  '&url=../dental/gui_patient_history.php|' . $pid .

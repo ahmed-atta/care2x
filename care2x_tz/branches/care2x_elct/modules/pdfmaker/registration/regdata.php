@@ -31,7 +31,7 @@ include_once($root_path.'include/inc_t1ps_ar2uni.php');
 
 
 $insurance_obj=new PersonInsurance;
-$person_obj=& new Person($pid);
+$person_obj= new Person($pid);
 # Get the person´s data
 if($person_obj->preloadPersonInfo($pid)){
 	$person=$person_obj->person;
@@ -79,7 +79,7 @@ $classpath=$root_path.'classes/phppdf/';
 $fontpath=$classpath.'fonts/';
 # Load and create pdf object
 include($classpath.'class.ezpdf.php');
-$pdf=& new Cezpdf();
+$pdf= new Cezpdf();
 
 
 $logo=$root_path.'gui/img/logos/lopo/care_logo.png';

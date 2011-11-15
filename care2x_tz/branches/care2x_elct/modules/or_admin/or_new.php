@@ -29,11 +29,11 @@ $breakfile=$root_path.'modules/system_admin/edv-system-admi-welcome.php'.URL_APP
 
 if(!isset($mode)) $mode='';
 # Create department object
-$dept_obj=& new Department;
+$dept_obj= new Department;
 # Create the OR object
 $OR_obj= new OPRoom;
 # Create the ward object
-$ward_obj=& new Ward;
+$ward_obj= new Ward;
 
 //$db->debug=1;
 

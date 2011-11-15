@@ -60,7 +60,7 @@ if ($debug) {
 
 //echo '$prescrServ = '.$_GET['prescrServ'];
 
-if(!$prescription_date) $prescription_date = date("Y-m-d");
+if(!isset($prescription_date)) $prescription_date = date("Y-m-d");
 define('NO_2LEVEL_CHK',1);
 $thisfile=basename($_SERVER['PHP_SELF']);
 if(!isset($mode)){

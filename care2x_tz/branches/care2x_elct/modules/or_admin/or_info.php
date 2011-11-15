@@ -20,7 +20,7 @@ require_once($root_path.'include/inc_date_format_functions.php');
 $breakfile=$root_path.'modules/system_admin/edv-system-admi-welcome.php'.URL_APPEND	;
 
 # Create the OR object
-$OR_obj=& new OPRoom;
+$OR_obj= new OPRoom;
 
 # Get the OR info
 $OR_info=$OR_obj->ORRecordInfo($nr);

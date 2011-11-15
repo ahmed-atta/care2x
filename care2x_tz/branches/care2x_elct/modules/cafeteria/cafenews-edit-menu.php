@@ -17,7 +17,7 @@ $breakfile='cafenews.php'.URL_APPEND;
 $returnfile='cafenews-edit-menu-select-week.php'.URL_APPEND;
 
 require_once($root_path.'include/care_api_classes/class_core.php');
-$core=& new Core();
+$core= new Core();
 
 //$db->debug=true;
 
