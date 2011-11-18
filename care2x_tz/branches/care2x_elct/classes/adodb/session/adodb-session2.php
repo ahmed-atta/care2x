@@ -99,6 +99,7 @@ function adodb_session_regenerate_id()
 		session_id(md5(uniqid(rand(), true)));
 		$ck = session_get_cookie_params();
 		setcookie(session_name(), session_id(), false, $ck['path'], $ck['domain'], $ck['secure']);
+		//@session_start();
 	}
 	$new_id = session_id();
 	$ok = $conn->Execute('UPDATE '. ADODB_Session::table(). ' SET sesskey='. $conn->qstr($new_id). ' WHERE sesskey='.$conn->qstr($old_id));
