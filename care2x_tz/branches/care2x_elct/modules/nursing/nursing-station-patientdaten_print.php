@@ -24,16 +24,16 @@ $lang_tables[]='diagnoses_ICD10.php';
 	*/
 	//$db->debug=true;
 	if(isset($op_shortcut)&&$op_shortcut){
-		$HTTP_COOKIE_VARS['ck_pflege_user'.$sid]=$op_shortcut;
+		$_COOKIE['ck_pflege_user'.$sid]=$op_shortcut;
 		setcookie('ck_pflege_user'.$sid,$op_shortcut,0,'/');
 		$edit=1;
-	}elseif($HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]){
-		setcookie('ck_pflege_user'.$sid,$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid],0,'/');
+	}elseif($_COOKIE['ck_op_pflegelogbuch_user'.$sid]){
+		setcookie('ck_pflege_user'.$sid,$_COOKIE['ck_op_pflegelogbuch_user'.$sid],0,'/');
 		$edit=1;
-	}elseif($HTTP_COOKIE_VARS['aufnahme_user'.$sid]){
-		setcookie('ck_pflege_user'.$sid,$HTTP_COOKIE_VARS['aufnahme_user'.$sid],0,'/');
+	}elseif($_COOKIE['aufnahme_user'.$sid]){
+		setcookie('ck_pflege_user'.$sid,$_COOKIE['aufnahme_user'.$sid],0,'/');
 		$edit=1;
-	}elseif(!$HTTP_COOKIE_VARS['ck_pflege_user'.$sid]){
+	}elseif(!$_COOKIE['ck_pflege_user'.$sid]){
 		//if($edit) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;};
 	}
 	/* Load the visual signalling defined constants */

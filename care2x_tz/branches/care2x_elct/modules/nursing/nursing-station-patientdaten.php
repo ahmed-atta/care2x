@@ -1,5 +1,5 @@
 <?php 
-//session_start();
+session_start();
 
 	error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 	require('./roots.php');
@@ -7,7 +7,7 @@
 
 	$lang_tables[]='departments.php';
 	$lang_tables[]='pharmacy.php';
-	$lang_tables[]='diagnoses_ICD10.php';
+$lang_tables[]='diagnoses_ICD10.php';
 	define('LANG_FILE','nursing.php');
 	//define('LANG_FILE','aufnahme.php');
 
@@ -27,16 +27,16 @@
 	*/
 	//$db->debug=true;
 	if(isset($op_shortcut)&&$op_shortcut){
-		$HTTP_COOKIE_VARS['ck_pflege_user'.$sid]=$op_shortcut;
+		$_COOKIE['ck_pflege_user'.$sid]=$op_shortcut;
 		setcookie('ck_pflege_user'.$sid,$op_shortcut,0,'/');
 		$edit=1;
-	}elseif($HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid]){
-		setcookie('ck_pflege_user'.$sid,$HTTP_COOKIE_VARS['ck_op_pflegelogbuch_user'.$sid],0,'/');
+	}elseif($_COOKIE['ck_op_pflegelogbuch_user'.$sid]){
+		setcookie('ck_pflege_user'.$sid,$_COOKIE['ck_op_pflegelogbuch_user'.$sid],0,'/');
 		$edit=1;
-	}elseif($HTTP_COOKIE_VARS['aufnahme_user'.$sid]){
-		setcookie('ck_pflege_user'.$sid,$HTTP_COOKIE_VARS['aufnahme_user'.$sid],0,'/');
+	}elseif($_COOKIE['aufnahme_user'.$sid]){
+		setcookie('ck_pflege_user'.$sid,$_COOKIE['aufnahme_user'.$sid],0,'/');
 		$edit=1;
-	}elseif(!$HTTP_COOKIE_VARS['ck_pflege_user'.$sid]){
+	}elseif(!$_COOKIE['ck_pflege_user'.$sid]){
 		//if($edit) {header('Location:'.$root_path.'language/'.$lang.'/lang_'.$lang.'_invalid-access-warning.php'); exit;};
 	}
 	/* Load the visual signalling defined constants */
@@ -84,7 +84,6 @@ function Spacer()
 
 	/* Establish db connection */
 	if(!isset($db)||!$db) include($root_path.'include/inc_db_makelink.php');
-
 	if($dblink_ok)
 	{
 	    /* Load date formatter */
@@ -620,7 +619,7 @@ function Spacer()
     <td  colspan="3" align="center" valign="top" <?php echo 'background="'.createBgSkin($root_path,'folderskin2.jpg').'"'; ?>>
 
 
-<?PHP
+<?PHP 
 	echo '<table width="868" border="0" cellpadding="1" cellspacing="1" style="width:500px; overflow:hidden;">';
 
 		'<tr><td colspan="3" bgcolor="#696969"><nobr>';
@@ -971,13 +970,13 @@ function Spacer()
 		  <tr>
 	        <td width="15%" bgcolor="#D2DFD0" style="border-top:3px solid red;" valign="top"><strong>Diagnosis</strong></td>
 	        <td width="85%" style="border-top:3px solid red;">
-				<?php include('./labor_datalist_icd10_history.php'); ?>
+				<?php //include('./labor_datalist_icd10_history.php'); ?>
 			</td>
 	      </tr>
 		  <tr>
 	        <td width="15%" bgcolor="#D2DFD0" style="border-top:3px solid red;" valign="top"><strong>Prescriptions</strong></td>
 	        <td width="85%" style="border-top:3px solid red;">
-				<?php include('./labor_datalist_prescription.php'); ?>
+				<?php //include('./labor_datalist_prescription.php'); ?>
 			</td>
 	      </tr>
           <tr align="center" valign="middle">
@@ -999,7 +998,7 @@ function Spacer()
 	<input type="hidden" name="dept_nr" value="<?php echo $dept_nr ?>">
 	<input type="hidden" name="pn" value="<?php echo $pn ?>">
 
-	<?php 
+	<?php
 	# If in edit mode create the hidden items
 	if($edit){
 	?>
