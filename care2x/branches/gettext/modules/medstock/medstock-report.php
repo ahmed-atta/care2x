@@ -192,8 +192,8 @@ echo '</font>
 <p>
 <!-- <input type="submit" name="versand" value="<?php echo $LDSend ?>"  >  
  -->
- <input type="image" <?php echo createLDImgSrc($root_path,'abschic.gif','0','absmiddle') ?>>  
-<input type="reset" value="<?php echo $LDResetAll ?>" >&nbsp;&nbsp;&nbsp;
+ <button type="submit" class="button icon approve"><?php echo $LDSend ?>"></button>
+&nbsp;&nbsp;&nbsp;
 </form>
 
 </FONT>

@@ -1,5 +1,6 @@
 <table width="<?php echo $controls_table_width ?>"  cellpadding=0 cellspacing=0>
 <tr><td>
+<button type="submit" class="button icon approve"><?php echo $LDSend ?>"></button>
 <input type="image" <?php echo createLDImgSrc($root_path,'abschic.gif') ?> alt="<?php echo $LDSend ?>">
 </td>
 <td align=right>
