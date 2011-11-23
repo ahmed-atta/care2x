@@ -241,7 +241,7 @@ $smarty->assign('sHiddenInputs','<input type="hidden" name="tdate" value="'.date
 		<input type="hidden" name="lang" value= "'.$lang.'">
 		<input type="hidden" name="mode" value="save">');
 
-$smarty->assign('pbSubmit','<input type="image"  '.createLDImgSrc($root_path,'abschic.gif','0','middle').'>');
+$smarty->assign('pbSubmit','<button type="submit" class="button icon approve">' . $LDSend .'</button>');
 $smarty->assign('pbCancel','<a href="'.$breakfile.'" class="button icon remove danger">Cancel</a>');
 
 $smarty->assign('sReportLink','<a href="tech-repair-advice.php'.URL_APPEND.'">'.$LDRepairReportTxt.'</a>');
