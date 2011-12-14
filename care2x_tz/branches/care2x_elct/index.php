@@ -140,7 +140,7 @@ function configNew(&$bn,&$bv,&$f,$i,&$uid)
 * For more information about the encryption class, see the proper docs of the pear's "hcemd5.php" class.
 */
 //$sid=uniqid('');
-$sid=session_id();
+$sid=session_id(); 
 $ck_sid_buffer='ck_sid'.$sid;
 
 include('include/inc_init_crypt.php'); // initialize crypt
@@ -368,7 +368,6 @@ if($mask == 2){
 	$smarty->assign('sStartFrameSource',"src=\"main/indexframe.php?boot=1&lang=$lang&egal=$egal&cookie=$cookie&sid=$sid&mask=2\"");
 
 }else{
-
 	$smarty->assign('sStartFrameSource',"src = \"main/indexframe.php?boot=1&mask=$mask&lang=$lang&cookie=$cookie&sid=$sid\"");
 
 	#
@@ -387,7 +386,6 @@ if($mask == 2){
 		$smarty->assign('sBaseFramesetTemplate','common/frameset_ltr.tpl');
 	}
 }
-
 #
 # Display the frame page
 #

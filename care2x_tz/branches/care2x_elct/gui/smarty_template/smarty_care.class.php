@@ -1,4 +1,4 @@
-<?php
+<?php 
 /**
 * SETUP Smarty for CARE2X
 *
