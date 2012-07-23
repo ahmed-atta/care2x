@@ -518,7 +518,7 @@ class Prescription extends Core {
 	  		"			'', " .
 	  		"			NOW( ), " .
 	  		"			'', " .
-	  		"			NOW() )";
+	  		"			NOW() );";
 
 	if ($debug) echo $this->sql;
 	$db->Execute($this->sql);
