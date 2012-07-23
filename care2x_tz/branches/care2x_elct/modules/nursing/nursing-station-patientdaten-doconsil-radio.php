@@ -92,7 +92,7 @@ if(isset($pn)&&$pn)
 		include_once($root_path.'include/care_api_classes/class_diagnostics.php');
 		$diag_obj_rad=new Diagnostics;
 		$diag_obj_rad->useRadioRequestTable();
-			
+
 	}
 	else
 	{
@@ -105,11 +105,11 @@ if(isset($pn)&&$pn)
 if (!isset($dept_nr) or $dept_nr=='') $dept_nr=$data['dept_nr'];
 
 if(!isset($mode))   $mode="";
-	
+
 switch($mode)
 {
 	case 'save':
-/*			
+/*
 		$diag_obj_rad->useRadioRequestTable();
 		$data['batch_nr']=$batch_nr;
 		$data['encounter_nr']=$pn;
@@ -139,7 +139,7 @@ switch($mode)
 		$data['process_time']=date('YmdHis');
 		$diag_obj_rad->setDataArray($data);
 		//echo 'Name: '.$tmpParam[0];
-			
+
 */
 		if (empty($xray)) $xray=0;
 		if (empty($ct)) $ct=0;
@@ -147,7 +147,7 @@ switch($mode)
 		if (empty($mammograph)) $mammograph=0;
 		if (empty($mrt)) $mrt=0;
 		if (empty($nuclear)) $nuclear=0;
-		
+
 		$sql="INSERT INTO care_test_request_".$db_request_table."
 			(batch_nr, encounter_nr, dept_nr,
 			xray, ct, sono, mammograph, mrt, nuclear,
@@ -171,12 +171,10 @@ switch($mode)
 			''
 			)";
 
- 
+
 $presc_obj = new Prescription;
 
-$drug_list_id = $presc_obj-> GetItemIDByName($_POST['test_request']);
-
-$presc_obj->insert_prescription_Radio($pn, $drug_list_id, $_POST['number_of_tests']);
+$presc_obj->insert_prescription_Radio($pn, $_POST['test_request'], $_POST['number_of_tests']);
 									      if($ergebnis=$core->Transact($sql))
        							  {
 									//echo $sql;
@@ -193,7 +191,7 @@ $presc_obj->insert_prescription_Radio($pn, $drug_list_id, $_POST['number_of_test
 			echo "<p>$sql<p>$LDDbNoSave";
 			$mode="";
 		}
-			
+
 
 		break; // end of case 'save'
 
@@ -430,7 +428,7 @@ function printOut()
     testprintout<?php echo $sid ?>.print();
 }
 
-			
+
 
 
 
@@ -523,7 +521,7 @@ elseif(!$read_form && !$no_proc_assist)
 							?> </td>
 <?php /* ?>							     <td bgcolor="<?php echo $bgc1 ?>"  class=fva2_ml10><div class=fva2_ml10><font size=5 color="#0000ff"><b><?php echo $formtitle ?></b></font>
 		 <br><?php echo $global_address[$target].'<br>'.$LDTel.'&nbsp;'.$global_phone[$target]; ?>
-		 </td> 
+		 </td>
 						</tr>
 						<tr>
 							<td bgcolor="<?php echo $bgc1 ?>" align="right" valign="bottom">
@@ -538,20 +536,20 @@ elseif(!$read_form && !$no_proc_assist)
 
 
 							<table border=0 cellpadding=1 cellspacing=1 width=100%>
-								
+
 <?php
  echo '<tr><td colspan=2><div class=fva2_ml10>'.$LDReqTest .':<br>';
 echo '<select name="test_request">';
-echo '<option value="">==Select a test==</option>';		
+echo '<option value="">==Select a test==</option>';
 $drug_list = $pres_obj->getDrugList('xray', '0');
 for ($i=0;$i<sizeOf($drug_list);$i++) {
-	
+
 	if ($drug_list[$i][1]==$stored_request['test_request']) {
                 echo '<option selected value="'.$drug_list[$i][1].'">'.$drug_list[$i][0].'</option>';
         } else {
                 echo '<option value="'.$drug_list[$i][1].'">'.$drug_list[$i][0].'</option>';
         }
-	
+
 }
 echo '</select></td></tr>';
 
@@ -563,12 +561,12 @@ echo '<tr><td colspan=2><div class=fva2_ml10>'.$LDNoOfTests .':<br>';
 echo '<select name="number_of_tests">';
 echo '<option selected value="">=>Number of Tests= </option>';
 echo '<option value="1">1</option>';
-echo '<option value="2">2</option>';		
+echo '<option value="2">2</option>';
 echo '</select></td></tr>';
 
 ?>
 	<tr>
-		<td align="right"><div class=fva2_ml10><?php echo $LDXrayTest ?></td>	  
+		<td align="right"><div class=fva2_ml10><?php echo $LDXrayTest ?></td>
  	      <td><input type="checkbox" name="xray" value="1" <?php if(($edit_form || $read_form) && $stored_request['xray']) echo "checked" ?>></td>
      <td align="right"><div class=fva2_ml10><?php echo $LDSonograph ?></td>
       <td><input type="checkbox" name="sono" value="1" <?php if(($edit_form || $read_form) && $stored_request['sono']) echo "checked" ?>></td>
@@ -577,17 +575,17 @@ echo '</select></td></tr>';
       <td align="right"><div class=fva2_ml10><?php echo $LDCT ?></td>
       <td><input type="checkbox" name="ct" value="1" <?php if(($edit_form || $read_form) && $stored_request['ct']) echo "checked" ?>></td>
     <td align="right"><div class=fva2_ml10><?php echo $LDMammograph ?></td>
-      <td><input type="checkbox" name="mammograph" value="1" <?php if(($edit_form || $read_form) && $stored_request['mammograph']) echo "checked" ?>></td> 
+      <td><input type="checkbox" name="mammograph" value="1" <?php if(($edit_form || $read_form) && $stored_request['mammograph']) echo "checked" ?>></td>
     </tr>
     <tr>
       <td align="right"><div class=fva2_ml10><?php echo $LDMRT ?></td>
       <td><input type="checkbox" name="mrt" value="1" <?php if(($edit_form || $read_form) && $stored_request['mrt']) echo "checked" ?>></td>
       <td align="right"><div class=fva2_ml10><?php echo $LDNuclear ?></td>
       <td><input type="checkbox" name="nuclear" value="1" <?php if(($edit_form || $read_form) && $stored_request['nuclear']) echo "checked" ?>></td>
-	 </tr> 
+	 </tr>
 
 
-								
+
 								<tr>
 									<td colspan=4>
 									<hr>									</td>
@@ -639,7 +637,7 @@ echo '</select></td></tr>';
 							</div>							</td>
 						</tr>
 
-						<!-- 
+						<!--
 echo '<tr bgcolor="<?php echo $bgc1 ?>">
 		<td colspan=2><div class=fva2_ml10><?php echo $LDReqTest ?>:<br>
 		<textarea name="test_request" cols=80 rows=5 wrap="physical"><?php if($edit_form || $read_form) echo stripslashes($stored_request['test_request']) ?></textarea>
@@ -647,10 +645,10 @@ echo '<tr bgcolor="<?php echo $bgc1 ?>">
 						<tr bgcolor="<?php echo $bgc1 ?>">
 							<td colspan=2 align="right">
 							<div class=fva2_ml10><font color="#000099"> <?php echo $LDDate ?>:
-							
+
 							<font
-								size=1 face="arial"> <?php echo $LDRequestingDoc ?>: 
-								
+								size=1 face="arial"> <?php echo $LDRequestingDoc ?>:
+
 								<input type="text" name="send_doctor" size=40 maxlength=40 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly> </font></div><br>							</td>
 						</tr>
 						<tr bgcolor="<?php echo $bgc1 ?>">
@@ -692,7 +690,7 @@ echo '<tr bgcolor="<?php echo $bgc1 ?>">
 			</table>		</td>
 		</tr>
 		</table>
-		
+
 
 
 
