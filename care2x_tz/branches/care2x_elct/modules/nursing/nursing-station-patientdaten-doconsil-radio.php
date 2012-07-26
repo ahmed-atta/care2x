@@ -649,7 +649,7 @@ echo '<tr bgcolor="<?php echo $bgc1 ?>">
 							<font
 								size=1 face="arial"> <?php echo $LDRequestingDoc ?>:
 
-								<input type="text" name="send_doctor" size=40 maxlength=40 value="<?php echo $HTTP_SESSION_VARS['sess_user_name']; ?>" readonly> </font></div><br>							</td>
+								<input type="text" name="send_doctor" size=40 maxlength=40 value="<?php echo $_SESSION['sess_user_name']; ?>" readonly> </font></div><br>							</td>
 						</tr>
 						<tr bgcolor="<?php echo $bgc1 ?>">
 							<td colspan=2 bgcolor="#cccccc">
