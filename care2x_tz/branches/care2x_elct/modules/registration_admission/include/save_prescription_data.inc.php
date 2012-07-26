@@ -92,7 +92,7 @@ foreach ($arr_item_number AS $item_number) {
   		                          '".$notes."',
   		                          '".date('Y-m-d',time())."',
   		                          '".$prescriber."',
-  		                          1,
+  		                          '".$is_outpatient."',
   		                          '".$history."',
   		                          ''
   		                          )";
