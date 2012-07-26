@@ -81,7 +81,14 @@ if(!isset($mode)){
 	// Insert the prescription without other checks into the database. This should be dony be the doctor and
 	// there was the requirement that there should be no restrictions given...
 	//include('./include/save_admission_data.inc.php');
-
+	$sql_tmp="SELECT e.encounter_class_nr FROM care_encounter AS e WHERE ".$_SESSION['sess_pid']." = e.pid";
+	$result_tmp=$db->Execute($sql_tmp);
+	$row_tmp = $result_tmp->FetchRow();
+	if ($row_tmp['encounter_class_nr'] == 1) {
+		$is_outpatient=0;
+	} else {
+		$is_outpatient=1;
+	}
 	include('./include/save_prescription_data.inc.php');
 
 }
