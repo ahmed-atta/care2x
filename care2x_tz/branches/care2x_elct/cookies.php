@@ -2,7 +2,7 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require_once('./roots.php');
 require_once('include/inc_environment_global.php');
-require("language/$lang/lang_".$lang."_startframe.php"); ?>
+require_once("language/$lang/lang_".$lang."_startframe.php"); ?>
 <html>
 <head>
 <?php 
@@ -22,13 +22,13 @@ echo setCharSet();
 <p><br><p><br>
 <font color="#990000" size=4 face="verdana,arial">
 <?php echo $LDAlertNoCookie ?>
-<a href="<?php if($startframe) print "index.php?lang=$lang"; else print "index.php?lang=$lang&egal=1"; ?>" 
+<a href="<?php if($startframe) print 'index.php?lang=$lang'; else print 'index.php?lang=$lang&egal=1'; ?>" 
 <?php if($startframe) print ' target="_top"'; ?>><font size=2><u> <?php echo $LDClkAfter ?></u></font></a>
 <BR>
 <p><br>
 <p><br>
 <font size=3>
-<A HREF="<?php echo "index.php?lang=$lang&egal=1&sid=.$sid.&cookie=egal" ?>" <?php if($startframe) print ' target="_top"'; ?>><u><?php echo $LDGoAheadEgalCookie ?></u></A>
+<A HREF="<?php echo 'index.php?lang=$lang&egal=1&sid=.$sid.&cookie=egal' ?>" <?php if($startframe) print ' target="_top"'; ?>><u><?php echo $LDGoAheadEgalCookie ?></u></A>
 </font>
 <font size=2 color="#000000">
 <p><br>
