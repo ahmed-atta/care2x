@@ -2,6 +2,7 @@
 $LDPharmacy="Pharmacy";
 $LDLogin="Login";
 # d.r. from merotech
+$LDPrescription='Prescriptions';
 $LDDrugPrescription='Drug prescription';
 $LDShowPrescriptionsofPatients='Show prescriptions of patients';
 $LDOrderingProducts='Ordering products';
@@ -141,7 +142,7 @@ $LDForInventory = 'For Inventory';
 $LDDrugPrescriptionOPD ='Drug Prescriptions Outpatients';
 $LDDrugPrescriptionIPD ='Drug Prescriptions Inpatients';
 $LDShowPrescriptionsofPatientsOPD = 'Show Prescriptions of Outpatients';
-$LDShowPrescriptionsofpatientsIPD = 'Show Prescriptions of Inpatients';
+$LDShowPrescriptionsofPatientsIPD = 'Show Prescriptions of Inpatients';
 
 $LDDisabled ='ITEM STATUS';
 ?>
