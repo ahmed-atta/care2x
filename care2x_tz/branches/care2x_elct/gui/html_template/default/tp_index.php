@@ -16,7 +16,7 @@ if($mask==2)
 ?>
 <frameset rows="25,*" border=0>
   <frameset cols="9%,*" border=0>
-    <frame name="STARTPAGE" src="main/indexframe.php?boot=1&lang=<?php echo "$lang&egal=$egal&cookie=$cookie&sid=$sid" ?>&mask=2">
+    <frame name="STARTPAGE" src="main/indexframe.php?boot=1&lang=<?php echo $lang'&egal='$egal'&cookie='$cookie'&sid='$sid' ?>&mask=2">
     <frame name="MENUBAR" src="main/menubar2.php" scrolling=no>
   </frameset>
  <!--  <frame name="CONTENTS" src=""> -->
@@ -28,11 +28,11 @@ else
 ?>
 <frameset cols="<?php echo $GLOBALCONFIG['gui_frame_left_nav_width'] ?>,*" 
 	border="<?php echo $GLOBALCONFIG['gui_frame_left_nav_border'] ?>" >
-	<FRAME MARGINHEIGHT="5"	MARGINWIDTH  ="5" NAME = "STARTPAGE" SRC = "main/indexframe.php?boot=1&mask=<?php echo "$mask&lang=$lang&cookie=$cookie&sid=$sid" ?>" SCROLLING="auto"  >
+	<FRAME MARGINHEIGHT="5"	MARGINWIDTH  ="5" NAME = "STARTPAGE" SRC = "main/indexframe.php?boot=1&mask=<?php echo $mask'&lang='$lang'&cookie='$cookie'&sid='$sid ?>" SCROLLING="auto"  >
 <?php
 }
 ?>
-	<FRAME NAME = "CONTENTS" SRC = "blank.php?lang=<?php echo "$lang&sid=$sid&root_path=" ?>">
+	<FRAME NAME = "CONTENTS" SRC = "blank.php?lang=<?php echo $lang'&sid='$sid'&root_path=' ?>">
 </frameset>
 <noframes>
 <BODY bgcolor=white>

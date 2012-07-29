@@ -98,7 +98,9 @@ class Lab extends Encounter {
 		'test_time',
 		'history',
 		'create_id',
-		'create_time' );
+		'create_time',
+		'modify_id',
+		'modify_time' );
 	/**
 	 * Field names for care_test_param table
 	 * @var array
@@ -932,7 +934,7 @@ laboratory result.
 		$row;
 		if (! $this->internResolveEncounterNr ( $enc_nr ))
 			return FALSE;
-		$this->sql = "SELECT modify_time FROM $this->tb_find_chemlab
+		$this->sql = "SELECT modify_time FROM $this->tb_find_chemlab_sub
 WHERE encounter_nr='$this->enc_nr' AND status NOT IN
 ($this->dead_stat) ORDER BY modify_time DESC";
 		if ($buf = $db->SelectLimit ( $this->sql, 1 )) {
