@@ -17,7 +17,7 @@ define ( 'LANG_FILE', 'lab.php' );
 $local_user = 'ck_lab_user';
 require_once ($root_path . 'include/inc_front_chain_lang.php');
 
-$debug = FALSE;
+$debug = true;
 ($debug) ? $db->debug = true : $db->debug = FALSE;
 
 if (! $encounter_nr) {
@@ -101,6 +101,8 @@ if ($mode == 'save') {
 				$parsedParamList['history']			= "Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
 				$parsedParamList['create_id']		= $_SESSION['sess_user_name'];
 				$parsedParamList['create_time']		= date('YmdHis');
+				$parsedParamList['modify_id']		= $_SESSION['sess_user_name'];
+				$parsedParamList['modify_time']		= date('YmdHis');
 				$lab_obj_sub->setDataArray($parsedParamList);
 				if($lab_obj_sub->insertDataFromInternalArray()){
 					$saved = TRUE;
