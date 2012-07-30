@@ -17,7 +17,7 @@ define ( 'LANG_FILE', 'lab.php' );
 $local_user = 'ck_lab_user';
 require_once ($root_path . 'include/inc_front_chain_lang.php');
 
-$debug = true;
+$debug = false;
 ($debug) ? $db->debug = true : $db->debug = FALSE;
 
 if (! $encounter_nr) {

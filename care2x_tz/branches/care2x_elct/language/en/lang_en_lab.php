@@ -53,6 +53,7 @@ $LDDeletedParams='Parameters in red are deleted';
 $LDNormalValue='Normal range';
 $LDOClock='Hour';
 $LDClk2Graph='Click to show the graphical display';
+$LDCheckParamFirst='Check a parameter first!';
 $LDClk2SelectAll='Click to select or deselect all for graphical display';
 $LDGraph='Graph';
 $LDBack='Go back';

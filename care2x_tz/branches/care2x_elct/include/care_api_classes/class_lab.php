@@ -934,7 +934,7 @@ laboratory result.
 		$row;
 		if (! $this->internResolveEncounterNr ( $enc_nr ))
 			return FALSE;
-		$this->sql = "SELECT modify_time FROM $this->tb_find_chemlab_sub
+		$this->sql = "SELECT modify_time FROM $this->tb_find_chemlab
 WHERE encounter_nr='$this->enc_nr' AND status NOT IN
 ($this->dead_stat) ORDER BY modify_time DESC";
 		if ($buf = $db->SelectLimit ( $this->sql, 1 )) {
