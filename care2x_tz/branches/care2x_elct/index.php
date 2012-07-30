@@ -34,7 +34,7 @@ Contact author at: elpidio@care2x.org
 This notice also applies to other scripts which are integral to the functioning of CARE 2X within this directory and its top level directory
 A copy of this notice is also available as file named copy_notice.txt under the top level directory.
 */
-//error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
+error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 define('FROM_ROOT',1);
 
 if(!isset($mask)) $mask=false;
@@ -43,8 +43,9 @@ if(!isset($_chg_lang_)) $_chg_lang_=false;
 if(!isset($boot)) $boot=false;
 if(!isset($sid)) $sid='';
 
-require('./roots.php');
-require('./include/inc_environment_global.php');
+require_once('./roots.php');
+require_once('./include/inc_environment_global.php');
+require_once('./include/inc_date_format_functions.php');
 
 //$db->debug=1;
 
@@ -340,8 +341,9 @@ $cfg = $USERCONFIG;
 
 //while(list($x,$v)=each($cfg)) echo "$x => $v<br>";
 require_once($root_path.'gui/smarty_template/smarty_care.class.php');
+$smarty->allow_php_tag=true;
 $smarty = new smarty_care('common');
-
+$smarty->allow_php_tag=true;
 #
 # Window bar title
 #
