@@ -1,5 +1,5 @@
 <?php
-define(COL_MAX,6); # define here the maximum number of rows for displaying the parameters
+define("COL_MAX",6); # define here the maximum number of rows for displaying the parameters
 
 error_reporting ( E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR );
 require ('./roots.php');
@@ -321,7 +321,7 @@ function chkselect(d)
 	}
 }
 function labReport(){
-	window.location.replace("<?php echo 'labor_datalist_noedit.php'" . URL_REDIRECT_APPEND . "'&encounter_nr=' . $encounter_nr . '&noexpand=1&from=input&job_id=' . $job_id . '&parameterselect=' . $parameterselect . '&allow_update=' . $allow_update . '&nostat=1&user_origin=lab'; ?>");
+	window.location.replace("<?php echo 'labor_datalist_noedit.php"' . URL_REDIRECT_APPEND . '"&encounter_nr=' . $encounter_nr . '&noexpand=1&from=input&job_id=' . $job_id . '&parameterselect=' . $parameterselect . '&allow_update=' . $allow_update . '&nostat=1&user_origin=lab'; ?>");
 }
 <?php
 require ($root_path . 'include/inc_checkdate_lang.php');
