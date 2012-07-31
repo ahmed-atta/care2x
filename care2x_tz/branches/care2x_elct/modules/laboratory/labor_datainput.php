@@ -72,10 +72,11 @@ if ($mode == 'save') {
 	//Prepare parameter values
 	//gjergji
 	while (list($z,$y)=each($_POST)) {
-		if($result_tests = $lab_obj->GetTestsToDo($job_id))
-		while($row_tests = $result_tests->FetchRow()) {
-			if ($z == $row_tests['paramater_name'] ) {
-				$nbuf[$z]=$y;
+		if($result_tests = $lab_obj->GetTestsToDo($batch_nr)) {
+			while($row_tests = $result_tests->FetchRow()) {
+				if ($z == $row_tests['paramater_name'] ) {
+					$nbuf[$z]=$y;
+				}
 			}
 		}
 	}
@@ -85,32 +86,37 @@ if ($mode == 'save') {
 	if($allow_update == TRUE){
 		$dbuf['modify_id']=$_SESSION['sess_user_name'];
 		$dbuf['modify_time']=date('YmdHis');
-
-		# Recheck the date, ! bug pat	$dbuf['modify_id']=$_SESSION['sess_user_name'];
+		$where="batch_nr='$batch_nr'";
+		$lab_obj=setWhereCondition($where);
+		$dbup=array();
+		$dbup['modify_id']=$_SESSION['sess_user_name'];
+		$dbup['modify_time']=date('YmdHis');
+		$lab_obj->updateDataFromArray($dbup,$batch_nr);
+		//echo $dbup['modify_time'].'=modtime. user='.$dbup['modify_id'];
+			# Recheck the date, ! bug pat	$dbuf['modify_id']=$_SESSION['sess_user_name'];
 		if($_POST['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
 		$lab_obj_sub->deleteOldValues($batch_nr,$encounter_nr);
 		foreach( $nbuf as $key => $value) {
 			if(isset($value) && !empty($value) ) {
-				$parsedParamList['test_date']		= date('Y-m-d');
+				//$parsedParamList['test_date']		= date('Y-m-d');
 				$parsedParamList['batch_nr'] 		= $batch_nr;
-				$parsedParamList['job_id'] 			= $job_id;
+				$parsedParamList['job_id'] 		= $job_id;
 				$parsedParamList['encounter_nr'] 	= $encounter_nr;
 				$parsedParamList['paramater_name']	= $key;
 				$parsedParamList['parameter_value']	= $value;
-				$parsedParamList['test_time']		= date('H:i:s');
-				$parsedParamList['history']			= "Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
-				$parsedParamList['create_id']		= $_SESSION['sess_user_name'];
-				$parsedParamList['create_time']		= date('YmdHis');
-				$parsedParamList['modify_id']		= $_SESSION['sess_user_name'];
-				$parsedParamList['modify_time']		= date('YmdHis');
+				//$parsedParamList['test_time']		= date('H:i:s');
+				//$parsedParamList['history']			= "Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+				//$parsedParamList['create_id']		= $_SESSION['sess_user_name'];
+				//$parsedParamList['create_time']		= date('YmdHis');
+				//$parsedParamList_sub['modify_id']		= $_SESSION['sess_user_name'];
+				//$parsedParamList_sub['modify_time']		= date('YmdHis');
 				$lab_obj_sub->setDataArray($parsedParamList);
 				if($lab_obj_sub->insertDataFromInternalArray()){
 					$saved = TRUE;
 					$lab_obj->getLastQuery();
-				}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
+				} else { echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
 			}
 		}
-
 
 		# If save successful, jump to display values
 		if ($saved) {
@@ -120,33 +126,34 @@ if ($mode == 'save') {
 			//header("location:$thisfile?sid=$sid&lang=$lang&saved=1&batch_nr=$batch_nr&encounter_nr=$encounter_nr&job_id=$job_id&parameterselect=$parameterselect&allow_update=1&user_origin=$user_origin&tickerror=$tickerror");
 			header("location:labor_test_request_admin_chemlabor.php?sid=$sid");
 			exit;
-			}
+		}
 	} else {
-			$dbuf['test_date']=formatDate2STD($_POST['test_date'],$date_format);
-			$dbuf['test_time']=date('H:i:s');
+		//echo $_POST['test_date'];
+		$dbuf['test_date']=formatDate2STD($_POST['test_date'],$date_format);
+		$dbuf['test_time']=date('H:i:s');
 
-			$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
-			$dbuf['create_id']=$_SESSION['sess_user_name'];
-			$dbuf['create_time']=date('YmdHis');
+		$dbuf['history']="Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
+		$dbuf['create_id']=$_SESSION['sess_user_name'];
+		$dbuf['create_time']=date('YmdHis');
 
-			# Insert new job record
-			$lab_obj->setDataArray($dbuf);
-			if($lab_obj->insertDataFromInternalArray()){
-				$pk_nr=$db->Insert_ID();
-	            $batch_nr=$lab_obj->LastInsertPK('batch_nr',$pk_nr);
-				foreach( $nbuf as $key => $value) {
-					if(isset($value) && !empty($value)) {
-						$parsedParamList['batch_nr']=$batch_nr;
-						$parsedParamList['encounter_nr']=$encounter_nr;
-						$parsedParamList['job_id']=$job_id;
-						$parsedParamList['paramater_name']=$key;
-						$parsedParamList['parameter_value']=$value;
-						$lab_obj_sub->setDataArray($parsedParamList);
-						$lab_obj_sub->insertDataFromInternalArray();
-					}
+		# Insert new job record
+		$lab_obj->setDataArray($dbuf);
+		if($lab_obj->insertDataFromInternalArray()){
+			$pk_nr=$db->Insert_ID();
+		        $batch_nr=$lab_obj->LastInsertPK('batch_nr',$pk_nr);
+			foreach( $nbuf as $key => $value) {
+				if(isset($value) && !empty($value)) {
+					$parsedParamList['batch_nr']=$batch_nr;
+					$parsedParamList['encounter_nr']=$encounter_nr;
+					$parsedParamList['job_id']=$job_id;
+					$parsedParamList['paramater_name']=$key;
+					$parsedParamList['parameter_value']=$value;
+					$lab_obj_sub->setDataArray($parsedParamList);
+					$lab_obj_sub->insertDataFromInternalArray();
 				}
-				$saved=true;
-			}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
+			}
+			$saved=true;
+		}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
 
 	}
 	# If save successful, jump to display values
@@ -170,15 +177,15 @@ if ($mode == 'save') {
 				$pdata[$row['paramater_name']] = $row['parameter_value'];
 			}
 		}
-	}else{
+	} else {
 		if($result=&$lab_obj->getResult($job_id,$parameterselect)){
 			while($row=$result->FetchRow()) {
 				$pdata[$row['paramater_name']] = $row['parameter_value'];
-	}
-		}else{
-		# disallow update if group does not exist yet
-		$allow_update=false;
-	}
+			}
+		} else {
+			# disallow update if group does not exist yet
+			$allow_update=false;
+		}
 	}
 
 
@@ -265,8 +272,7 @@ ob_start ();
 function pruf(d)
 {
 	if(!d.job_id.value)
-		{ alert("<?php
-		echo $LDAlertJobId?>");
+		{ alert("<?php echo $LDAlertJobId?>");
 			d.job_id.focus();
 			 return false;
 		}
@@ -274,8 +280,7 @@ function pruf(d)
 		{
 			if(d.test_date){
 				if(!d.test_date.value)
-				{ alert("<?php
-				echo $LDAlertTestDate?>");
+				{ alert("<?php echo $LDAlertTestDate?>");
 					d.test_date.focus();
 					return false;
 				}
@@ -286,16 +291,12 @@ function pruf(d)
 
 function posneg(f)
 {
-	//if(d."<?php
-	echo $adddata [$tp ['id']]?>[0].checked || d."<?php
-	echo $adddata [$tp ['id']]?>"[1].checked)
-	//{
-	// alert(<?php
-	echo $_POST ['_add' . $x . '_'];
-	?>);
-	//return false;
-	//}
-   //else return true;
+	if(d."<?php echo $adddata [$tp ['id']]?>"[0].checked || d."<?php echo $adddata [$tp ['id']]?>"[1].checked)
+	{
+	 alert("<?php echo $_POST ['_add' . $x . '_']; ?>");
+	return false;
+	}
+   else { return true; }
 
 }
 
@@ -315,15 +316,12 @@ function limitedInput(inputId, range) {
 
 function chkselect(d)
 {
- 	if(d.parameterselect.value=="<?php
-		echo $parameterselect?>"){
+ 	if(d.parameterselect.value=="<?php echo $parameterselect?>"){
 		return false;
 	}
 }
 function labReport(){
-	window.location.replace("<?php
-	echo 'labor_datalist_noedit.php' . URL_REDIRECT_APPEND . '&encounter_nr=' . $encounter_nr . '&noexpand=1&from=input&job_id=' . $job_id . '&parameterselect=' . $parameterselect . '&allow_update=' . $allow_update . '&nostat=1&user_origin=lab';
-	?>");
+	window.location.replace("<?php echo 'labor_datalist_noedit.php'" . URL_REDIRECT_APPEND . "'&encounter_nr=' . $encounter_nr . '&noexpand=1&from=input&job_id=' . $job_id . '&parameterselect=' . $parameterselect . '&allow_update=' . $allow_update . '&nostat=1&user_origin=lab'; ?>");
 }
 <?php
 require ($root_path . 'include/inc_checkdate_lang.php');
@@ -335,7 +333,7 @@ require ($root_path . 'include/inc_checkdate_lang.php');
 <script language="javascript"
 	src="<?php echo $root_path?>js/setdatetime.js"></script>
 <script language="javascript"
-	src="<?php	echo $root_path;?>js/dtpick_care2x.js"></script>
+	src="<?php echo $root_path;?>js/dtpick_care2x.js"></script>
 
 <?php
 
@@ -369,7 +367,7 @@ $smarty->assign ( 'sMiniCalendar', "<a href=\"javascript:show_calendar('datain.t
 //$smarty->assign ( 'sParamGroup', strtr ( $parametergruppe [$parameterselect], "_", "-" ) );
 
 $smarty->assign ( 'pbSave', '<input  type="image" ' . createLDImgSrc ( $root_path, 'send.gif', '0' ) . ' >' );
-$smarty->assign ( 'pbShowReport', '<a href="labor_datalist_noedit.php' . URL_APPEND . '&encounter_nr=' . $encounter_nr . '&noexpand=1&from=input&job_id=' . $job_id . '&parameterselect=' . $parameterselect . '&allow_update=' . $allow_update . '&nostat=1&user_origin=' . $user_origin . '"><img ' . createLDImgSrc ( $root_path, 'showreport.gif', '0', 'absmiddle' ) . ' alt="' . $LDClk2See . '"></a>' );
+$smarty->assign ( "pbShowReport", "<a href='labor_datalist_noedit.php'" . URL_APPEND . "'&encounter_nr=' . $encounter_nr . '&noexpand=1&from=input&job_id=' . $job_id . '&parameterselect=' . $parameterselect . '&allow_update=' . $allow_update . '&nostat=1&user_origin=' . $user_origin . '><img '" . createLDImgSrc ( $root_path, 'showreport.gif', '0', 'absmiddle' ) . "' alt=' . $LDClk2See . '></a>'" );
 
 if ($saved || $update)
 	$sCancelBut = '<img ' . createLDImgSrc ( $root_path, 'close2.gif', '0', 'absmiddle' ) . '>';
@@ -470,13 +468,13 @@ while(list($group,$pm)=each($requestData)) {
 		//	echo trim($pdata[$pId]) . "\" readonly >";
 	echo $inputValue;
 	echo '</td>';
-		$collimit++;
-		if($collimit==(COL_MAX/2)){
+	$collimit++;
+	if($collimit==(COL_MAX/2)){
 		echo '
 		</tr>';
-			$collimit=0;
+		$collimit=0;
 	}
- }
+}
 }
 # Assign parameter output
 
@@ -492,7 +490,7 @@ $smarty->assign ( 'sParameters', $sTemp );
 ob_start ();
 
 ?>
-<input type=hidden name="parameterselect" value=<?php echo $parameterselect; ?>>
+<input type=hidden name="parameterselect" value="<?php echo $parameterselect; ?>">
 <input type=hidden name="encounter_nr" value="<?php echo $encounter_nr; ?>">
 <input type=hidden name="sid" value="<?php echo $sid; ?>">
 <input type=hidden name="lang" value="<?php echo $lang; ?>">
