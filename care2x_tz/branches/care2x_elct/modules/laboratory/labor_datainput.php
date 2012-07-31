@@ -1,5 +1,5 @@
 <?php
-define("COL_MAX",6); # define here the maximum number of rows for displaying the parameters
+define(COL_MAX,6); # define here the maximum number of rows for displaying the parameters
 
 error_reporting ( E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR );
 require ('./roots.php');
@@ -72,26 +72,26 @@ if ($mode == 'save') {
 	//Prepare parameter values
 	//gjergji
 	while (list($z,$y)=each($_POST)) {
-		if($result_tests = $lab_obj->GetTestsToDo($batch_nr)) {
+		if($result_tests = $lab_obj->GetTestsToDo($job_id)) 
 			while($row_tests = $result_tests->FetchRow()) {
 				if ($z == $row_tests['paramater_name'] ) {
 					$nbuf[$z]=$y;
 				}
 			}
 		}
-	}
 
 	$dbuf['job_id']=$job_id;
 	$dbuf['encounter_nr']=$encounter_nr;
 	if($allow_update == TRUE){
 		$dbuf['modify_id']=$_SESSION['sess_user_name'];
 		$dbuf['modify_time']=date('YmdHis');
-		$where="batch_nr='$batch_nr'";
-		$lab_obj=setWhereCondition($where);
+		$where="batch_nr='".$batch_nr."'";
+		//echo $where;
+		$lab_obj->setWhereCondition($where);
 		$dbup=array();
 		$dbup['modify_id']=$_SESSION['sess_user_name'];
 		$dbup['modify_time']=date('YmdHis');
-		$lab_obj->updateDataFromArray($dbup,$batch_nr);
+		$lab_obj->updateDataFromArray($dbup,$batch_nr,'true');
 		//echo $dbup['modify_time'].'=modtime. user='.$dbup['modify_id'];
 			# Recheck the date, ! bug pat	$dbuf['modify_id']=$_SESSION['sess_user_name'];
 		if($_POST['std_date']==DBF_NODATE) $dbuf['test_date']=date('Y-m-d');
@@ -114,7 +114,7 @@ if ($mode == 'save') {
 				if($lab_obj_sub->insertDataFromInternalArray()){
 					$saved = TRUE;
 					$lab_obj->getLastQuery();
-				} else { echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
+				}else{echo "<p>".$lab_obj->getLastQuery()."$LDDbNoSave";}
 			}
 		}
 
@@ -291,13 +291,12 @@ function pruf(d)
 
 function posneg(f)
 {
-	if(d."<?php echo $adddata [$tp ['id']]?>"[0].checked || d."<?php echo $adddata [$tp ['id']]?>"[1].checked)
-	{
-	 alert("<?php echo $_POST ['_add' . $x . '_']; ?>");
-	return false;
-	}
-   else { return true; }
-
+	//if(d."<?php echo $adddata [$tp ['id']]?>"[0].checked || d."<?php echo $adddata [$tp ['id']]?>"[1].checked)
+	//{
+	// alert("<?php echo $_POST ['_add' . $x . '_']; ?>");
+	//return false;
+	//}
+   //else { return true; }
 }
 
 function limitedInput(inputId, range) {
@@ -321,7 +320,7 @@ function chkselect(d)
 	}
 }
 function labReport(){
-	window.location.replace("<?php echo 'labor_datalist_noedit.php"' . URL_REDIRECT_APPEND . '"&encounter_nr=' . $encounter_nr . '&noexpand=1&from=input&job_id=' . $job_id . '&parameterselect=' . $parameterselect . '&allow_update=' . $allow_update . '&nostat=1&user_origin=lab'; ?>");
+	window.location.replace("<?php echo 'labor_datalist_noedit.php' . URL_REDIRECT_APPEND . '&encounter_nr=' . $encounter_nr . '&noexpand=1&from=input&job_id=' . $job_id . '&parameterselect=' . $parameterselect . '&allow_update=' . $allow_update . '&nostat=1&user_origin=lab'; ?>");
 }
 <?php
 require ($root_path . 'include/inc_checkdate_lang.php');
@@ -367,7 +366,7 @@ $smarty->assign ( 'sMiniCalendar', "<a href=\"javascript:show_calendar('datain.t
 //$smarty->assign ( 'sParamGroup', strtr ( $parametergruppe [$parameterselect], "_", "-" ) );
 
 $smarty->assign ( 'pbSave', '<input  type="image" ' . createLDImgSrc ( $root_path, 'send.gif', '0' ) . ' >' );
-$smarty->assign ( "pbShowReport", "<a href='labor_datalist_noedit.php'" . URL_APPEND . "'&encounter_nr=' . $encounter_nr . '&noexpand=1&from=input&job_id=' . $job_id . '&parameterselect=' . $parameterselect . '&allow_update=' . $allow_update . '&nostat=1&user_origin=' . $user_origin . '><img '" . createLDImgSrc ( $root_path, 'showreport.gif', '0', 'absmiddle' ) . "' alt=' . $LDClk2See . '></a>'" );
+$smarty->assign ( "pbShowReport", "<a href='labor_datalist_noedit.php'" . URL_APPEND . "'&encounter_nr=' . $encounter_nr . '&noexpand=1&from=input&job_id=' . $job_id . '&parameterselect=' . $parameterselect . '&allow_update=' . $allow_update . '&nostat=1&user_origin=' . $user_origin . '><img " . createLDImgSrc ( $root_path, 'showreport.gif', '0', 'absmiddle' ) . " alt=' . $LDClk2See . '></a>'" );
 
 if ($saved || $update)
 	$sCancelBut = '<img ' . createLDImgSrc ( $root_path, 'close2.gif', '0', 'absmiddle' ) . '>';
