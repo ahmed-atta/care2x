@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-$db->debug=true;
+$db->debug=false;
 $lang_tables=array('chemlab_groups.php','chemlab_params.php');
 define('LANG_FILE','lab.php');
 define('NO_2LEVEL_CHK',1);
@@ -122,9 +122,9 @@ if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
 		$records=array();
 		$dt=array();
 		while($buffer=$recs->FetchRow()){
-			$tmp = array($buffer['paramater_name'] => $buffer['parameter_value']);
+			$tmp = array($buffer['paramater_name'] => $buffer['parameter_value']); //echo $buffer['paramater_name'].'name and value'.$buffer['parameter_value'];
 			$records[$buffer['job_id']][] = $tmp;
-			$tdate[$buffer['job_id']]=&$buffer['test_date'];
+			$tdate[$buffer['job_id']]=&$buffer['test_date']; //echo $buffer['test_date'];
 			$ttime[$buffer['job_id']]=&$buffer['test_time'];
 		}
 		//gjergji :
@@ -192,7 +192,7 @@ $smarty->append('JavaScript',$sTemp);
 $smarty->assign('LDCaseNr',$LDCaseNr);
 $smarty->assign('LDLastName',$LDLastName);
 $smarty->assign('LDName',$LDName);
-$smarty->assign('LDBday',LDBday);
+$smarty->assign('LDBday',$LDBday);
 
 # Assign patient basic data
 $smarty->assign('encounter_nr',$encounter_nr);
@@ -249,6 +249,7 @@ while (list($job_id,$paramgroupvalue)=each($records)) {
 			foreach($paramvalue_a as $paramgroup => $paramvalue) {
 				$ext = substr(stristr($paramgroup, '__'), 2);
 				$requestData[$ext][$paramgroup][$job_id] = $paramvalue;
+				//echo $requestData[$ext][$paramgroup][$job_id].'reqdata for paramgroup '.$paramgroup;
 					}
 				}
 }
@@ -282,6 +283,7 @@ while (list($groupId,$paramEnc)=each($requestData)) {
 		if($cols != $columns)
 			echo "<td align=\"right\" colspan=\"". ($cols - $columns) ."\" class=\"" . $class ."\">&nbsp;</td>";
 		echo "<td align=\"right\" colspan=\"". $columns ."\" class=\"" . $class ."\">";
+		//echo $paramvalue[0].'PARAMVALS'.$pName[0].'PNAME'.$columns[0].'COLS';
 		echo doGraph($paramValue,$pName,$valueBuff,$columns)."</td>";	
 		$valueBuff = '';
 		echo "</tr>";
