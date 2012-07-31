@@ -3,7 +3,7 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-///$db->debug = true;
+$db->debug = true;
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
@@ -14,6 +14,7 @@ require($root_path.'include/inc_environment_global.php');
 */
 //gjergji :
 //data diff for the dob
+
 function dateDiff($dformat, $endDate, $beginDate){
 	$date_parts1=explode($dformat, $beginDate);
 	$date_parts2=explode($dformat, $endDate);
@@ -123,7 +124,7 @@ if($encounter=&$enc_obj->getBasic4Data($encounter_nr)) {
 	if ($rows=$lab_obj->LastRecordCount()){
 
 		# Check if the lab result was recently modified
-		$modtime=$lab_obj->getLastModifyTime();
+		$modtime=$lab_obj->getLastModifyTime($encounter_nr);
 
 		$lab_obj->getDBCache('chemlabs_result_'.$encounter_nr.'_'.$modtime,$cache);
 		# If cache not available, get the lab results and param items
@@ -135,8 +136,8 @@ if($encounter=&$enc_obj->getBasic4Data($encounter_nr)) {
 				# Prepare the values
 				$tmp = array($buffer['paramater_name'] => $buffer['parameter_value']);
 				$records[$buffer['job_id']][] = $tmp;
-				$tdate[$buffer['job_id']]=&$buffer['test_date'];
-				$ttime[$buffer['job_id']]=&$buffer['test_time'];
+				$tdate[$buffer['job_id']]=&$buffer['_date'];
+				$ttime[$buffer['job_id']]=&$buffer['modify_time'];
 			}
 		}
 	}else{

@@ -13,7 +13,7 @@ require($root_path.'include/inc_environment_global.php');
 *
 * See the file "copy_notice.txt" for the licence notice
 */
-///$db->debug=1;
+$db->debug=true;
 $lang_tables=array('chemlab_groups.php','chemlab_params.php');
 define('LANG_FILE','lab.php');
 define('NO_2LEVEL_CHK',1);
