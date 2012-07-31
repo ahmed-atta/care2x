@@ -230,6 +230,7 @@ class Core {
 		# Check if  "create_time" key has a value, if no, create a new value
 		//if(!isset($this->buffer_array['create_time'])||empty($this->buffer_array['create_time'])) $this->buffer_array['create_time']=date('YmdHis');
 		//print_r($this->buffer_array);
+			//echo $this->buffer_array;
 		return $this->insertDataFromArray($this->buffer_array);
 	}
 	/**
@@ -336,7 +337,7 @@ class Core {
 	*/
 	function getAllDataArray() {
 	    global $db;
-	    $this->sql="SELECT *  FROM $this->coretable";
+	    $this->sql="SELECT * FROM $this->coretable";
         //echo $this->sql;
         if($this->result=$db->Execute($this->sql)) {
             if($this->result->RecordCount()) {
