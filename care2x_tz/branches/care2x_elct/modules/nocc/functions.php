@@ -1,6 +1,6 @@
 <?php
 /*
- * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/functions.php,v 1.2 2009/01/31 20:06:45 andi Exp $ 
+ * $Header: /usr/share/cvs/care2002_tz_mero_vps/modules/nocc/functions.php,v 1.2 2009/01/31 20:06:45 andi Exp $
  *
  * Copyright 2001 Nicolas Chalanset <nicocha@free.fr>
  * Copyright 2001 Olivier Cahagne <cahagn_o@epita.fr>
@@ -22,7 +22,7 @@ function inbox($servr, $user, $passwd, $folder, $sort, $sortdir, $lang, $theme)
 	if ($pop == false)
 		return (-1);
 	else
-	{ 
+	{
 		if (($num_messages = @imap_num_msg($pop)) == 0)
 		{
 			imap_close($pop);
@@ -31,7 +31,7 @@ function inbox($servr, $user, $passwd, $folder, $sort, $sortdir, $lang, $theme)
 		else
 		{
 			//if ($sort != '' && $sortdir != '')
-			$sorted = imap_sort($pop, $sort, $sortdir, SE_UID); 
+			$sorted = imap_sort($pop, $sort, $sortdir, SE_UID);
 			for ($i = 0; $i < $num_messages; $i++)
 			{
 				$subject = $from = '';
@@ -68,7 +68,7 @@ function inbox($servr, $user, $passwd, $folder, $sort, $sortdir, $lang, $theme)
 					while (list($k, $v) = each($header_lines))
 					{
 						list ($header_field, $header_value) = explode(':', $v);
-						if ($header_field == 'Status') 
+						if ($header_field == 'Status')
 							$new_mail_from_header = $header_value;
 					}
 				}
@@ -84,13 +84,13 @@ function inbox($servr, $user, $passwd, $folder, $sort, $sortdir, $lang, $theme)
 				else
 					$newmail = '&nbsp;';
 				$msg_list[$i] =  Array(
-						'new' => $newmail, 
+						'new' => $newmail,
 						'number' => imap_msgno($pop, $msgnum),
 						'next' => imap_msgno($pop, $sorted[$i + 1]),
 						'prev' => imap_msgno($pop, $sorted[$i - 1]),
-						'attach' => $attach, 
-						'from' => htmlspecialchars($from), 
-						'subject' => htmlspecialchars($subject), 
+						'attach' => $attach,
+						'from' => htmlspecialchars($from),
+						'subject' => htmlspecialchars($subject),
 						'date' => change_date(chop($ref_contenu_message->udate), $lang),
 						'size' => $msg_size,
 						'sort' => $sort,
@@ -143,7 +143,7 @@ function aff_mail($servr, $user, $passwd, $folder, $mail, $verbose, $lang, $sort
 		$header = '';
 	$tmp = array_pop($attach_tab);
 	if (stristr($tmp['mime'],'text/html') || stristr($tmp['mime'],'text/plain'))
-	{	
+	{
 		if ($tmp['transfer'] == 'QUOTED-PRINTABLE')
 			$glob_body = imap_qprint(imap_fetchbody($pop, $mail, $tmp['number']));
 		elseif ($tmp['transfer'] == 'BASE64')
@@ -210,7 +210,7 @@ function GetPart($this_part, $part_no, $display_rfc822)
 	if ($this_part->ifdescription == TRUE)
 		$att_name = $this_part->description;
 	for ($lcv = 0; $lcv < count($this_part->parameters); $lcv++)
-	{ 
+	{
 		$param = $this_part->parameters[$lcv];
 			if (($param->attribute == 'NAME') || ($param->attribute == 'name'))
 			{
@@ -234,7 +234,7 @@ function GetPart($this_part, $part_no, $display_rfc822)
 					// if it's an alternative, we skip the text part to only keep the HTML part
 					if ($this_part->subtype == ALTERNATIVE)// && $read == true)
 						GetPart($this_part->parts[++$i], $part_no . ($i + 1), $display_rfc822);
-					else 
+					else
 						GetPart($this_part->parts[$i], $part_no . ($i + 1), $display_rfc822);
 				}
 			}
@@ -304,7 +304,7 @@ function GetPart($this_part, $part_no, $display_rfc822)
 				'transfer' => $encoding,
 				'charset' => $this_part->charset,
 				'size' => ($this_part->bytes > 1000) ? ceil($this_part->bytes / 1000) : 1);
-		
+
 		array_unshift($attach_tab, $tmp);
 	}
 }
@@ -380,8 +380,8 @@ function remove_stuff($body, $lang, $mime)
 		$body = preg_replace("|<([^>]*)java|i", '<nocc_removed_java_tag', $body);
 		$body = preg_replace("|<([^>]*)&{.*}([^>]*)>|i", "<&{;}\\3>", $body);
 		//$body = preg_replace("|<([^>]*)mocha:([^>]*)>|i", "<nocc_removed_mocha:\\2>",$body);
-		$body = eregi_replace("href=\"mailto:([[:alnum:]+-=%&:_.~?@]+[#[:alnum:]+]*)\"","<A HREF=\"$_SERVER['PHP_SELF']?action=write&amp;mail_to=\\1&amp;lang=$lang\"", $body);
-		$body = eregi_replace("href=mailto:([[:alnum:]+-=%&:_.~?@]+[#[:alnum:]+]*)","<A HREF=\"$_SERVER['PHP_SELF']?action=write&amp;mail_to=\\1&amp;lang=$lang\"", $body);
+		$body = eregi_replace("href=\"mailto:([[:alnum:]+-=%&:_.~?@]+[#[:alnum:]+]*)\"","<A HREF=\"".$_SERVER['PHP_SELF']."?action=write&amp;mail_to=\\1&amp;lang=\"".$lang."\"", $body);
+		$body = eregi_replace("href=mailto:([[:alnum:]+-=%&:_.~?@]+[#[:alnum:]+]*)","<A HREF=\"".$_SERVER['PHP_SELF']."?action=write&amp;mail_to=\\1&amp;lang=\"".$lang."\"", $body);
 		$body = eregi_replace("target=\"([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)\"", "", $body);
 		$body = eregi_replace("target=([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)", "", $body);
 		$body = eregi_replace("href=\"([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)\"","<a href=\"\\1\" target=\"_blank\"", $body);
@@ -391,11 +391,11 @@ function remove_stuff($body, $lang, $mime)
 	{
 		$body = htmlspecialchars($body);
 		$body = eregi_replace("(http|https|ftp)://([[:alnum:]+-=%&:_.~?]+[#[:alnum:]+]*)","<a href=\"\\1://\\2\" target=\"_blank\">\\1://\\2</a>", $body);
-		$body = eregi_replace("([#[:alnum:]+-._]*)@([#[:alnum:]+-_]*)\.([[:alnum:]+-_.]+[#[:alnum:]+]*)","<a href=\"$_SERVER['PHP_SELF']?action=write&amp;mail_to=\\1@\\2.\\3&amp;lang=$lang\">\\1@\\2.\\3</a>", $body);
+		$body = eregi_replace("([#[:alnum:]+-._]*)@([#[:alnum:]+-_]*)\.([[:alnum:]+-_.]+[#[:alnum:]+]*)","<a href=\"".$_SERVER['PHP_SELF']."?action=write&amp;mail_to=\\1@\\2.\\3&amp;lang=\"".$lang."\">\\1@\\2.\\3</a>", $body);
 		$body = nl2br($body);
 		if (function_exists('wordwrap'))
 			$body = wordwrap($body, 80, "\n");
-	}	
+	}
 	return ($body);
 }
 
@@ -455,7 +455,7 @@ function get_mail_size($this_part)
 
 /* ----------------------------------------------------- */
 
-// this function build an array with all the recipients of the message for later reply or reply all 
+// this function build an array with all the recipients of the message for later reply or reply all
 function get_reply_all($user, $domain, $from, $to, $cc)
 {
 	if (!stristr($from, $user.'@'.$domain))
@@ -523,7 +523,7 @@ function save_attachment($servr, $user, $passwd, $folder, $mail, $tmpdir)
 		$attach_array[$i]->tmp_file = $filename;
 		$attach_array[$i]->file_size = strlen($file);
 		$attach_array[$i]->file_mime = $tmp['mime'];
-	} 
+	}
 	imap_close($pop);
 	return(array($i, $attach_array));
 }
@@ -548,17 +548,17 @@ function view_part($servr, $user, $passwd, $folder, $mail, $part_no, $transfer, 
 /* ----------------------------------------------------- */
 
 function encode_mime($string, $charset)
-{ 
-	$text = '=?' . $charset . '?Q?'; 
+{
+	$text = '=?' . $charset . '?Q?';
 	for($i = 0; $i < strlen($string); $i++ )
-	{ 
-		$val = ord($string[$i]); 
-		$val = dechex($val); 
-		$text .= '=' . $val; 
-	} 
-	$text .= '?='; 
-	return ($text); 
-} 
+	{
+		$val = ord($string[$i]);
+		$val = dechex($val);
+		$text .= '=' . $val;
+	}
+	$text .= '?=';
+	return ($text);
+}
 
 /* ----------------------------------------------------- */
 
