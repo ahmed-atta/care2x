@@ -36,6 +36,7 @@ $LDName='Name';
 $LDBday='Birthdate';
 
 $LDNoLabReport='No lab report available for';
+$LDDbNoSave='Update not saved!';
 $LDParameter='Parameter';
 $LDMale='Male';
 $LDFemales='Female';
