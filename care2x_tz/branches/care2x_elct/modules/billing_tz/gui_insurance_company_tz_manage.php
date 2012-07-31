@@ -28,7 +28,7 @@ function reset()
 		<tr valign=top>
 
 		<!-- left side (list of insurances) -->
-		
+
 		<td>
 			<table cellpadding=5>
 				<tr>
@@ -47,7 +47,7 @@ function reset()
 				<tr>
 					<td bgcolor="<?php echo $colorText?>">$text</td>
 				</tr>
-				
+
 			<?php
 
 			/* The following routine creates the list of insurances on the left side:  */
@@ -77,7 +77,7 @@ function reset()
 			}
 		echo '</td></tr><tr><td><font color='.$color.'>'.$LDInsurance.':</td>';
 		echo '<td><input type="text" name="name" size="30" maxlength="60" value="<?php echo $name?>"></td></tr>';
-		
+
 			if ($insuranceParentSame)
 				$color = '#FF0000';
 			else $color = '#000000';
@@ -102,8 +102,8 @@ function reset()
 				echo '<OPTION value="'.$row['insurance_ID'].'" '.$check.'>'.$row['name'].$markOn.'</OPTION></i>';
 
 			}
-			
-			echo '</SELECT>'; 
+
+			echo '</SELECT>';
 
 		echo '</td></tr>';
 
@@ -113,15 +113,15 @@ function reset()
 			$color = '#FF0000';
 			else $color = '#000000';
 
-		echo '<td><font color='.$color.'>'.$LDInsurance_Limit.'</td><td><input type="text" name="max_pay" size="10" maxlength="10" value="<?php echo $max_pay?>"><?php echo $LDPerPerson?></td>'
-		
+		echo '<td><font color='.$color.'>'.$LDInsurance_Limit.'</td><td><input type="text" name="max_pay" size="10" maxlength="10" value="'.$max_pay.'" >' . $LDPerPerson . '</td>';
+
 		echo '</tr>';
 		echo '
-		<tr><td><?php echo $LDContactPerson.':'?></td><td><input type="text" name="contact_person" size="30" maxlength="60" value="<?php echo $contact_person?>"></td></tr>
-		<tr><td><?php echo $LDPOBOX.':'?></td><td><input type="text" name="po_box" size="30" maxlength="50" value="<?php echo $po_box?>"></td></tr>
-		<tr><td><?php echo $LDCity?></td><td><input type="text" name="city" size="30" maxlength="60" value="<?php echo $city?>"></td></tr>
-		<tr><td><?php echo $LDPhone.':'?></td><td><input type="text" name="phone" size="30" maxlength="60" value="<?php echo $phone?>"></td></tr>
-		<tr><td><?php echo $LDEmail.':'?></td><td><input type="text" name="email" size="30" maxlength="60" value="<?php echo $email?>"></td></tr>';
+		<tr><td>' . $LDContactPerson . ':</td><td><input type="text" name="contact_person" size="30" maxlength="60" value="' . $contact_person . '"></td></tr>
+		<tr><td>' . $LDPOBOX . ':</td><td><input type="text" name="po_box" size="30" maxlength="50" value="' . $po_box . '"></td></tr>
+		<tr><td>' . $LDCity . '</td><td><input type="text" name="city" size="30" maxlength="60" value="' . $city . '"></td></tr>
+		<tr><td>' . $LDPhone . ':</td><td><input type="text" name="phone" size="30" maxlength="60" value="' . $phone . '"></td></tr>
+		<tr><td>' . $LDEmail.':</td><td><input type="text" name="email" size="30" maxlength="60" value="' . $email . '"></td></tr>';
 
 		if ($insuranceExists )
 				{
@@ -183,7 +183,7 @@ function reset()
 			{
 				//innerer Einschub:
 
-				$sql="SELECT *  FROM care_tz_insurances_admin where insurance_ID = "'.$rowOuter['insurance_ID'].'";";
+				$sql="SELECT *  FROM care_tz_insurances_admin where insurance_ID = '".$rowOuter['insurance_ID'] . "';";
 
 				$resultInner = $db->Execute($sql);
 
@@ -256,7 +256,7 @@ function reset()
 
 			echo '</SELECT>';
 			echo '<input type="submit" name="deletebutton" value="delete insurance" onClick="return confirm(\'Are You sure you want to delete?\')"/></td></tr>';
-			
+
 		}
 
 		else //REACTIVATE (deleted insurances)
@@ -271,7 +271,7 @@ function reset()
 
 			echo '</SELECT>';
 			echo '<input type="submit" name="reactivatebutton" value="reactivate"/></td></tr>';
-			
+
 		}
 
 		?>
@@ -290,7 +290,7 @@ function reset()
 		<input type="hidden" name="phone_old" value='<?php echo $phone?>'>
 		<input type="hidden" name="email_old" value='<?php echo $email?>'>
 
-		
+
 			<!--<?php if (!$status)
 			{
 				echo '<input height="21" border="0" align="absmiddle" width="76" type="image" name="clear" value="clear" onClick="reset()" alt="clear" src="../../gui/img/control/blue_aqua/en/en_newpat2.gif"/><br><br>';
@@ -304,7 +304,7 @@ function reset()
 			</p>
 			<a href="insurance_tz.php?ntid=false&lang=$lang"><img src="../../gui/img/control/blue_aqua/en/en_close2.gif" border=0 width="76" height="21" alt="" style="filter:alpha(opacity=70)" onMouseover="hilite(this,1)" onMouseOut="hilite(this,0)"></a>-->
 
-		
+
 		</td>
 		</tr>
 		</table>
