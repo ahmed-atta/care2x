@@ -3,7 +3,7 @@
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 require('./roots.php');
 require($root_path.'include/inc_environment_global.php');
-$db->debug = true;
+$db->debug = false;
 /**
 * CARE2X Integrated Hospital Information System Deployment 2.2 - 2006-07-10
 * GNU General Public License
@@ -136,8 +136,8 @@ if($encounter=&$enc_obj->getBasic4Data($encounter_nr)) {
 				# Prepare the values
 				$tmp = array($buffer['paramater_name'] => $buffer['parameter_value']);
 				$records[$buffer['job_id']][] = $tmp;
-				$tdate[$buffer['job_id']]=&$buffer['_date'];
-				$ttime[$buffer['job_id']]=&$buffer['modify_time'];
+				$tdate[$buffer['job_id']]=&$buffer['test_date'];
+				$ttime[$buffer['job_id']]=&$buffer['test_time'];
 			}
 		}
 	}else{
@@ -393,6 +393,7 @@ $cache.='
 		<input type="hidden" name="params" value="">
 		<input type="hidden" name="ptk" value="'.$ptrack.'">
 		';
+//echo 'new cache'.$cache;
 # Delete old cache data first
 $lab_obj->deleteDBCache('chemlabs_result_'.$encounter_nr.'_%');
 # Save new cache data

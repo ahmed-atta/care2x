@@ -399,7 +399,9 @@ class Core {
 		$elems='';
 		if($dbtype=='postgres7'||$dbtype=='postgres') $concatfx='||';
 			else $concatfx='concat';
+		//echo $array.'array';
 		if(empty($array)) return FALSE;
+		//echo $item_nr.'item_nr and isnum'.$isnum;
 		if(empty($item_nr)||($isnum&&!is_numeric($item_nr))) return FALSE;
 		while(list($x,$v)=each($array)) {
 			if(stristr($v,$concatfx)||stristr($v,'null')) $elems.="$x= $v,";
@@ -410,6 +412,7 @@ class Core {
 		//echo strlen($elems)." leng<br>";
 		$elems=substr_replace($elems,'',(strlen($elems))-1);
 		if(empty($this->where)) $this->where="nr=$item_nr";
+		//echo $this->where.' where and elems '.$elems;
         $this->sql="UPDATE $this->coretable SET $elems WHERE $this->where";
 
 		# Bug fix. Reset the condition variable to prevent affecting subsequent update calls.
@@ -463,6 +466,7 @@ class Core {
 	*/
 	function setWhereCondition($cond){
 		$this->where=$cond;
+		//echo $this->where.'this->where';
 	}
 	/**
 	* Returns the value of is_preloaded that is set by methods that preload large number of data.

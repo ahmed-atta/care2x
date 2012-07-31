@@ -587,9 +587,9 @@ job_id='$job_id' AND group_id='$grp_id' AND status NOT IN
 		if (empty ( $id ))
 			$cond = '';
 		else
-			$cond = "WHERE batch_nr='$id'";
+			$cond = "batch_nr='$id'";
 		$sub = "_sub";
-		$this->sql = "SELECT paramater_name, parameter_value FROM $this->tb_req_chemlab$sub $cond";
+		$this->sql = "SELECT paramater_name, parameter_value FROM $this->tb_req_chemlab$sub WHERE $cond";
 		if ($this->tparams = $db->Execute ( $this->sql )) {
 			if ($this->rec_count = $this->tparams->RecordCount ()) {
 				return $this->tparams;
