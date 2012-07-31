@@ -67,11 +67,9 @@ class Lab extends Encounter {
 	 */
 	var $fld_find_chemlab = array (
 		'batch_nr',
-		'send_date',
 		'encounter_nr',
 		'test_date',
 		'test_time',
-		'lab_notes',
 		'job_id',
 		'group_id',
 		'serial_value',
@@ -89,18 +87,14 @@ class Lab extends Encounter {
 	 * @var array
 	 */
 	var $fld_find_chemlab_sub = array (
+		'sub_id',		
 		'batch_nr',
 		'job_id',
 		'encounter_nr',
 		'paramater_name',
 		'parameter_value',
 		'test_date',
-		'test_time',
-		'history',
-		'create_id',
-		'create_time',
-		'modify_id',
-		'modify_time' );
+		'test_time' );
 	/**
 	 * Field names for care_test_param table
 	 * @var array
@@ -108,7 +102,10 @@ class Lab extends Encounter {
 	var $fld_test_param = array (
 		'nr',
 		'group_id',
-		'name', 'id',
+		'item_id',
+		'name', 
+		'shortname',
+		'id',
 		'msr_unit',
 		'median',
 		'hi_bound',
@@ -155,7 +152,11 @@ class Lab extends Encounter {
 		'create_time',
 		'add_type',
 		'add_label',
-		'sort_nr' );
+		'sort_nr',
+		'price',
+		'price1',
+		'price2',
+		'price3' );
 	/**
 	 * Field names for care_tz_laboratory_param_type table
 	 * @var array
@@ -169,6 +170,7 @@ class Lab extends Encounter {
 	var $fld_req_chemlab = array (
 		'batch_nr',
 		'encounter_nr',
+		'item_id',
 		'room_nr',
 		'dept_nr',
 		'parameters',
@@ -177,7 +179,7 @@ class Lab extends Encounter {
 		'notes',
 		'send_date',
 		'sample_time',
-		'sample_week',
+		'sample_weekday',
 		'status',
 		'history',
 		'bill_nr',
@@ -186,7 +188,8 @@ class Lab extends Encounter {
 		'modify_id',
 		'modify_time',
 		'create_id',
-		'create_time' );
+		'create_time',
+		'priority' );
 	 /* Field names for care_test_request_chemlab_sub table*/
 	var $fld_req_chemlab_sub = array (
 		'sub_id',
@@ -194,11 +197,16 @@ class Lab extends Encounter {
 		'encounter_nr',
 		'paramater_name',
 		'parameter_value',
+		'item_id',
+		'bill_number',
+		'bill_status',
+		'is_disabled',
+		'disable_id',
+		'disable_date',
 		'test_date',
 		'test_time',
-		'history',
-		'create_id',
-		'create_time' );
+		'status',
+		'history');
 
 	/**
 	 * Constructor
@@ -506,7 +514,7 @@ job_id='$job_id' AND group_id='$grp_id' AND status NOT IN
 			return FALSE;
 		$this->sql = "SELECT * FROM $this->tb_find_chemlab INNER JOIN $this->tb_find_chemlab_sub ";
 		$this->sql .= "ON ($this->tb_find_chemlab.job_id = $this->tb_find_chemlab_sub.job_id) ";
-		$this->sql .= "WHERE $this->tb_find_chemlab.encounter_nr='$this->enc_nr' AND $this->tb_find_chemlab.status NOT IN ($this->dead_stat) ORDER BY $this->tb_find_chemlab_sub.test_date";
+		$this->sql .= "WHERE $this->tb_find_chemlab.encounter_nr='$this->enc_nr' AND $this->tb_find_chemlab.status NOT IN ($this->dead_stat) ORDER BY $this->tb_find_chemlab.test_date";
 		if ($this->result = $db->Execute ( $this->sql )) {
 			if ($this->rec_count = $this->result->RecordCount ()) {
 				return $this->result;
@@ -579,9 +587,9 @@ job_id='$job_id' AND group_id='$grp_id' AND status NOT IN
 		if (empty ( $id ))
 			$cond = '';
 		else
-			$cond = "batch_nr='$id'";
+			$cond = "WHERE batch_nr='$id'";
 		$sub = "_sub";
-		$this->sql = "SELECT paramater_name, parameter_value FROM $this->tb_req_chemlab$sub  WHERE $cond";
+		$this->sql = "SELECT paramater_name, parameter_value FROM $this->tb_req_chemlab$sub $cond";
 		if ($this->tparams = $db->Execute ( $this->sql )) {
 			if ($this->rec_count = $this->tparams->RecordCount ()) {
 				return $this->tparams;
@@ -932,7 +940,7 @@ laboratory result.
 		global $db;
 		$buf;
 		$row;
-		if (! $this->internResolveEncounterNr ( $enc_nr ))
+		if ( !$this->internResolveEncounterNr ( $enc_nr ))
 			return FALSE;
 		$this->sql = "SELECT modify_time FROM $this->tb_find_chemlab
 WHERE encounter_nr='$this->enc_nr' AND status NOT IN
