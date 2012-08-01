@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `care_test_request_chemlabor` (
   `sample_weekday` smallint(1) NOT NULL DEFAULT '0',
   `status` varchar(15) NOT NULL DEFAULT '',
   `history` text,
-  `bill_nr` bigint(20) NOT NULL DEFAULT '0',
+  `bill_number` bigint(20) NOT NULL DEFAULT '0',
   `bill_status` varchar(10) NOT NULL DEFAULT '',
   `is_disabled` varchar(255) DEFAULT NULL,
   `modify_id` varchar(35) NOT NULL DEFAULT '',
