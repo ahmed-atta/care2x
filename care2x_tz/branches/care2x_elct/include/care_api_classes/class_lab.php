@@ -182,7 +182,7 @@ class Lab extends Encounter {
 		'sample_weekday',
 		'status',
 		'history',
-		'bill_nr',
+		'bill_number',
 		'bill_status',
 		'is_disabled',
 		'modify_id',
