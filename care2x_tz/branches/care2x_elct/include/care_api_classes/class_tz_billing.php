@@ -1302,7 +1302,7 @@ return $total_advance;
 		($debug) ? $db->debug=FALSE : $db->debug=FALSE;
 
 
-		$this->sql="SELECT bill_number FROM $this->tbl_lab_requests WHERE batch_nr=".$nr;
+		$this->sql="SELECT bill_nr FROM $this->tbl_lab_requests WHERE batch_nr=".$nr;
 		$this->result= $db->Execute($this->sql);
 		return $this->result->FetchRow();
 	}
@@ -4246,7 +4246,7 @@ function TransferBillItemsWithAdvance($bill_number) {
 		$all_services=$svc_obj->getBillables();
 		$quotations=$this->getBillables();
 */
-		$this->debug=FALSE;
+		$this->debug=false;
 		($this->debug) ? $db->debug=TRUE : $db->debug=FALSE;
 		if ($this->debug) echo "<br><b>Method class_tz_billing::CreateTmpTableOfElementsToQuote()</b><br>";
 
@@ -4885,7 +4885,7 @@ date_birth, encounter_date , encounter_class_nr, insurance_ID
 		global $db;
 		$counter=0;
 		$color_change=FALSE;
-		$this->debug=FALSE;
+		$this->debug=false;
 		($this->debug) ? $db->debug=true : $db->debug=FALSE;
 		if ($this->debug) echo "<br><b>Method class_tz_billing::ShowNewQuotations()</b><br>";
 

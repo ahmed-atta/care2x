@@ -64,45 +64,52 @@ $lab_obj=new Lab;
 
 /* Here begins the real work */
 
-	if(!isset($mode))   $mode='';
+	if(!isset($mode)) $mode='';
 
 	switch($mode)
 	{
 		     case 'done':
-							      $sql="UPDATE care_test_request_".$subtarget."
-											SET status = 'done',
-													history=".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$_SESSION['sess_user_name']."\n").",
-													modify_id = '".$_SESSION['sess_user_name']."',
-													modify_time = '".date('YmdHis')."'
-											WHERE batch_nr = '".$batch_nr."'";
-
-							      if($ergebnis=$enc_obj->Transact($sql))
-       							  {
-								  	include_once($root_path.'include/inc_diagnostics_report_fx.php');
-									//echo $sql;
-									/* If the findings are saved, signal the availability of report
-									*/
-								     signalNewDiagnosticsReportEvent('', 'labor_test_request_printpop.php');
-									 if(!$discharge)
-									 	header("location:".$thisfile.URL_REDIRECT_APPEND."&edit=$edit&pn=$pn&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize");
-									 else
-									 	header ( 'Location: ../ambulatory/amb_clinic_discharge.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&pyear='.date("Y").'&pmonth='.date("n").'&pday='.date(j).'&tb='.str_replace("#","",$cfg['top_bgcolor']).'&tt='.str_replace("#","",$cfg['top_txtcolor']).'&bb='.str_replace("#","",$cfg['body_bgcolor']).'&d='.$cfg['dhtml'].'&station='.$station.'&backpath='.urlencode('../laboratory/labor_test_request_admin_chemlabor.php').'&dept_nr='.$dept_nr);
-									 exit;
-								  }else{
-								      echo "<p>$sql<p>$LDDbNoSave";
-								      $mode="";
-								   }
-								break;
+			$sql="UPDATE care_test_request_$subtarget 
+				SET status = 'done', 
+				history=".$enc_obj->ConcatHistory('Done: '.date('Y-m-d H:i:s').' = '.$_SESSION['sess_user_name'].'\n').", 
+				modify_id = ".$_SESSION['sess_user_name'].", 
+				modify_time = ".date('YmdHis')." 
+			WHERE batch_nr = $batch_nr";
+		      	if($ergebnis=$enc_obj->Transact($sql)) {
+				include_once($root_path.'include/inc_diagnostics_report_fx.php');
+				//echo $sql;
+				/* If the findings are saved, signal the availability of report
+				*/
+				signalNewDiagnosticsReportEvent('', 'labor_test_request_printpop.php');
+				if(!$discharge) {
+					header("location:".$thisfile.URL_REDIRECT_APPEND."&edit=$edit&pn=$pn&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize"); 
+				} else {
+					header( "Location:' ../ambulatory/amb_clinic_discharge.php'".URL_REDIRECT_APPEND."'&pn='$pn'&pyear='".date("Y")."'&pmonth='".date("n")."'&pday='".date(j)."'&tb='".str_replace("#","",$cfg['top_bgcolor'])."'&tt='".str_replace("#","",$cfg['top_txtcolor'])."'&bb='".str_replace("#","",$cfg['body_bgcolor'])."'&d='".$cfg['dhtml']."'&station='$station'&backpath='".urlencode("../laboratory/labor_test_request_admin_chemlabor.php")."'&dept_nr='$dept_nr'");
+					exit;
+				}
+			}else{
+				echo "<p>$sql<p>$LDDbNoSave";
+				$mode="";
+			}
+		break;
 
 	}// end of switch($mode)
 
 	if(!$mode) /* Get the pending test requests */ 	{
-		$sql="SELECT care_person.pid, care_person.selian_pid, name_first, name_last, batch_nr, tr.encounter_nr,tr.send_date,dept_nr,room_nr FROM care_test_request_".$subtarget." tr,
-					care_encounter, care_person
-						         WHERE (tr.status='pending' OR tr.status='') AND
-						         tr.encounter_nr = care_encounter.encounter_nr AND
-						         care_encounter.pid = care_person.pid
-						         ORDER BY  tr.send_date DESC";
+		$sql="SELECT care_person.pid, 
+				care_person.selian_pid, 
+				name_first, 
+				name_last, 
+				batch_nr, 
+				tr.encounter_nr,
+				tr.send_date,
+				dept_nr,
+				room_nr 
+			FROM care_test_request_$subtarget tr, care_encounter, care_person
+		        WHERE (tr.status='pending' OR tr.status='')
+			AND tr.encounter_nr = care_encounter.encounter_nr
+			AND care_encounter.pid = care_person.pid
+			ORDER BY  tr.send_date DESC";
 		if($requests=$db->Execute($sql)){
 			/* If request is available, load the date format functions */
 			require_once($root_path.'include/inc_date_format_functions.php');
@@ -128,22 +135,36 @@ $lab_obj=new Lab;
 			$h_batch_nr=$batch_nr;
 		
 
-			include_once($root_path.'include/care_api_classes/class_department.php');
-			$dept_obj= new Department;
+		include_once($root_path.'include/care_api_classes/class_department.php');
+		$dept_obj= new Department;
 			
-			include_once($root_path.'include/care_api_classes/class_ward.php');
-			$ward_obj= new Ward;
+		include_once($root_path.'include/care_api_classes/class_ward.php');
+		$ward_obj= new Ward;
 
 
 		/* prepare selection to show the headline... */
-		$sql_headline="SELECT care_person.pid, care_person.selian_pid, name_first, name_last, sex, batch_nr, 
-date_birth,care_encounter.encounter_class_nr,care_encounter.current_ward_nr,care_encounter.current_dept_nr, 
-tr.encounter_nr,tr.send_date,dept_nr,room_nr,tr.create_id FROM care_test_request_".$subtarget." tr, care_encounter, care_person
-						         WHERE (tr.status='pending' OR tr.status='') AND
-						         tr.encounter_nr = care_encounter.encounter_nr AND
-						         care_encounter.pid = care_person.pid
-						         AND tr.batch_nr = ".$h_batch_nr."
-						         ORDER BY  tr.send_date DESC";
+		$sql_headline="SELECT care_person.pid, 
+					care_person.
+					selian_pid, 
+					name_first, 
+					name_last, 
+					sex, 
+					batch_nr, 
+					date_birth, 
+					care_encounter.encounter_class_nr,
+					care_encounter.current_ward_nr,
+					care_encounter.current_dept_nr, 
+					tr.encounter_nr, 
+					tr.send_date, 
+					dept_nr, 
+					room_nr, 
+					tr.create_id 
+				FROM care_test_request_$subtarget tr, care_encounter, care_person
+				WHERE (tr.status='pending' OR tr.status='')
+				AND tr.encounter_nr = care_encounter.encounter_nr
+				AND care_encounter.pid = care_person.pid
+				AND tr.batch_nr = $h_batch_nr
+				ORDER BY  tr.send_date DESC";
 		if($h_requests=$db->Execute($sql_headline)){
 			if ($test_request_headline = $h_requests->FetchRow()) {
 				$h_pid=$test_request_headline['pid'];
@@ -159,11 +180,11 @@ tr.encounter_nr,tr.send_date,dept_nr,room_nr,tr.create_id FROM care_test_request
 			        $h_sex=$test_request_headline['sex'];
 				$h_DoctorID=$test_request_headline['create_id'];
 
-		        if ($_sex=="f")
-		        	$h_sex_img="spf.gif";
-		        else
-		        	$h_sex_img="spm.gif";
-		        //echo "sex:".$_sex;
+		        	if ($_sex=="f")
+		        		$h_sex_img="spf.gif";
+			        else
+			        	$h_sex_img="spm.gif";
+				        //echo "sex:".$_sex;
 			} // end of if ($test_request_headline = $h_requests->FetchRow())
 		} // end of if($h_requests=$db->Execute($sql_headline))
 	}
@@ -179,16 +200,19 @@ tr.encounter_nr,tr.send_date,dept_nr,room_nr,tr.create_id FROM care_test_request
 			$glob_obj->getConfig('patient_%');
 			switch ($enc_obj->EncounterClass())
 			{
-		    	case '1': $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
-		                   break;
-				case '2': $full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
-							break;
-				default: $full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+		    	case '1': 
+				$full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
+		                break;
+			case '2': 
+				$full_en = ($pn + $GLOBAL_CONFIG['patient_outpatient_nr_adder']);
+				break;
+			default: 
+				$full_en = ($pn + $GLOBAL_CONFIG['patient_inpatient_nr_adder']);
 			}
 
 			$result=&$enc_obj->encounter;
 
-			$sql="SELECT * FROM care_test_request_".$subtarget." WHERE batch_nr='".$batch_nr."'"; 
+			$sql="SELECT * FROM care_test_request_$subtarget WHERE batch_nr=$batch_nr"; 
 			if($ergebnis=$db->Execute($sql)){
 				if($editable_rows=$ergebnis->RecordCount()){
 
@@ -198,7 +222,7 @@ tr.encounter_nr,tr.send_date,dept_nr,room_nr,tr.create_id FROM care_test_request
 					parse_str($stored_request['parameters'],$stored_param);
 					$edit_form=1;
 				}
-            }else{
+            		}else{
 				echo "<p>$sql<p>$LDDbNoRead";
 			}
 		}
@@ -248,14 +272,12 @@ if($batchrows) $sTitle = $sTitle." (".$batch_nr.")";
 .lmargin {margin-left: 5;}
 </style>
 
-<script language="javascript">
+<script type="text/javascript">
 <!--
-
 <?php
 if($edit)
 {
 ?>
-
 function chkForm(d)
 {
    return true
@@ -267,13 +289,12 @@ function loadM(fn)
 	mBlank.src="../img/pink_border.gif";
 	mFilled=new Image();
 	mFilled.src="../img/filled_pink_block.gif";
-
 	form_name=fn;
 }
 
 function setM(m)
 {
-    eval("marker=document.images."+m);
+	eval("marker=document.images."+m);
 	eval("element=document."+form_name+"."+m);
 
     if(marker.src!=mFilled.src)
@@ -320,12 +341,12 @@ function printOut()
 	urlholder="labor_test_request_printpop.php?sid=<?php echo $sid ?>&lang=<?php echo $lang ?>&user_origin=<?php echo $user_origin ?>&target=<?php echo $target ?>&subtarget=<?php echo $subtarget ?>&batch_nr=<?php echo $batch_nr ?>&pn=<?php echo $stored_request['encounter_nr'] ?>";
 	testprintout<?php echo $sid ?>=window.open(urlholder,"testprintout<?php echo $sid ?>","width=755,height=600,menubar=no,resizable=no,scrollbars=yes");
     //testprintout<?php echo $sid ?>.print();
+
 }
-
 <?php require($root_path.'include/inc_checkdate_lang.php'); ?>
-
 //-->
 </script>
+
 <script language="javascript" src="../js/setdatetime.js"></script>
 <script language="javascript" src="<?php echo $root_path; ?>js/checkdate.js"></script>
 
@@ -355,7 +376,7 @@ if($batchrows){
 		<!-- Left block for the request list  -->
 		<td>
 <?php
-;
+
 /* The following routine creates the list of pending requests */
 require($root_path.'include/inc_test_request_lister_fx.php');
 
@@ -369,6 +390,7 @@ require($root_path.'include/inc_test_request_lister_fx.php');
      <a href="javascript:printOut()"><img <?php echo createLDImgSrc($root_path,'printout.gif','0','absmiddle') ?> alt="<?php echo $LDPrintOut ?>"></a>
      <a href="<?php echo 'labor_datainput.php'.URL_APPEND.'&encounter_nr='.$pn.'&job_id='.$batch_nr.'&mode='.$mode.'&update=1&user_origin=lab_mgmt'; ?>"><img <?php echo createLDImgSrc($root_path,'enter.gif','0','absmiddle') ?> alt="<?php echo $LDEnterResult ?>"></a>
      <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done.gif','0','absmiddle') ?> alt="<?php echo $LDDone ?>"></a>
+
 <!--     <a href="<?php echo $thisfile.URL_APPEND."&edit=".$edit."&mode=done&discharge=true&target=".$target."&subtarget=".$subtarget."&batch_nr=".$batch_nr."&pn=".$pn."&formtitle=".$formtitle."&user_origin=".$user_origin."&noresize=".$noresize; ?>"><img <?php echo createLDImgSrc($root_path,'done_and_discharge.gif','0','absmiddle') ?> alt="Move the form to the archive and discharge our patient"></a>-->
 
 
@@ -394,7 +416,7 @@ require_once($root_path.'include/inc_test_request_printout_chemlabor.php');
 else
 {
 ?>
-<img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?> ><font size=3 face="verdana,arial" color="#990000"><b><?php echo $LDNoPendingRequest ?></b></font>
+<img <?php echo createMascot($root_path,'mascot1_r.gif','0','absmiddle') ?> ><font size="3" face="verdana,arial" color="#990000"><b><?php echo $LDNoPendingRequest ?></b></font>
 <p>
 <a href="<?php echo $breakfile ?>"><img <?php echo createLDImgSrc($root_path,'back2.gif','0') ?>></a>
 <?php
