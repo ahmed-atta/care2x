@@ -1302,7 +1302,7 @@ return $total_advance;
 		($debug) ? $db->debug=FALSE : $db->debug=FALSE;
 
 
-		$this->sql="SELECT bill_nr FROM $this->tbl_lab_requests WHERE batch_number=".$nr;
+		$this->sql="SELECT bill_nr FROM $this->tbl_lab_requests WHERE batch_nr=".$nr;
 		$this->result= $db->Execute($this->sql);
 		return $this->result->FetchRow();
 	}
