@@ -1302,7 +1302,7 @@ return $total_advance;
 		($debug) ? $db->debug=FALSE : $db->debug=FALSE;
 
 
-		$this->sql="SELECT bill_nr FROM $this->tbl_lab_requests WHERE batch_nr=".$nr;
+		$this->sql="SELECT bill_number FROM $this->tbl_lab_requests WHERE batch_nr=".$nr;
 		$this->result= $db->Execute($this->sql);
 		return $this->result->FetchRow();
 	}
@@ -4014,7 +4014,7 @@ A:visited:hover {color: #cc0033;}
 		if ($CARE_TZ_BILLING_ARCHIVED && $CARE_TZ_BILLING_ELEM_ARCHIVED) {
 			$this->sql = "UPDATE care_encounter_prescription SET bill_status='archived' WHERE bill_number=".$bill_number;
 			$db->Execute($this->sql);
-			$this->sql = "UPDATE $this->tbl_lab_requests SET bill_status='archived' WHERE bill_number=".$bill_number;
+			$this->sql = "UPDATE $this->tbl_lab_requests SET bill_status='archived', bill_number=".$bill_number." WHERE bill_number=".$bill_number;
 			$db->Execute($this->sql);
 			$this->DeleteBillFromPendingList($bill_number);
 			return TRUE;
