@@ -96,9 +96,8 @@ class weberp {
  	public $defaultPriceList;
 
 	function weberp() {
-
 		$this->DebugLevel = 0;
-		$this->ServerURL = "http://weberp.almc.or.tz/api/api_xml-rpc.php";
+		$this->ServerURL = "http://localhost/webERP-Medical_stable/api/api_xml-rpc.php";
 
 
 			$this->user = php_xmlrpc_encode("admin");
@@ -122,13 +121,13 @@ class weberp {
 	    	if ($currency[0]==0) {
 	    		$this->defaultCurrency=$currency[1]['currencydefault'];
 	    	} else {
-	    		$this->defaultCurrency='GBP';
+	    		$this->defaultCurrency='TZS';
 	    	}
 	    	$pricelist=$this->transfer(null, $this->weberpcalls['getDefaultPriceList']);
 	    	if ($pricelist[0]==0) {
 	    		$this->defaultPriceList=$this->verifyPriceList($pricelist[1]['confvalue']);
 	    	} else {
-	    		$this->defaultPriceList='0';
+	    		$this->defaultPriceList='GE';
 	    	}
 
 
@@ -139,16 +138,16 @@ class weberp {
 
 	function params($call) {
 		if (isset($this->parms[$call])) {
-			$answer[0]=$this->parms[$call];
-			return $answer[0];
+			$answer[1]=$this->parms[$call];
+			return $answer[1];
 		}
 		$msg = new xmlrpcmsg("system.methodSignature", array(php_xmlrpc_encode($call)));
 		$client = new xmlrpc_client($this->ServerURL);
 		$client->setDebug($this->DebugLevel);
 		$response = $client->send($msg);
 		$answer = php_xmlrpc_decode($response->value());
-		$this->parms[$call]=$answer[0];
-		return $answer[0];
+		$this->parms[$call]=$answer[1];
+		return $answer[1];
 	}
 
 	function transfer_invoice_to_weberp($invoicedata) {
@@ -258,7 +257,7 @@ class weberp {
 
     function get_stock_items_from_category_property($property, $category) {
     	$catdata[0]=$property;
-    	$catdata[1]=$category; 
+    	$catdata[1]=$category;
     	$transmit=$this->transfer($catdata,$this->weberpcalls['stockCatPropertyList']);
     	if ($transmit[0]==0) {
     		return $transmit[1];
