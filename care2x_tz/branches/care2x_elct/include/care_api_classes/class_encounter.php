@@ -168,7 +168,6 @@ class Encounter extends Notes {
 	*/
 	var $tabfields=array('encounter_nr',
 	                           'pid',
-
 							   'encounter_date',
 							   'encounter_class_nr',
 							   'encounter_type',
