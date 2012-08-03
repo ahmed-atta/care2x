@@ -6,9 +6,9 @@ if (stristr($_SERVER['PHP_SELF'],'save_admission_data.inc.php'))
 	include_once($root_path.'include/care_api_classes/class_multi.php');
  	$multi= new multi;
 
-	$multi->doctorSTAT($HTTP_SESSION_VARS['sess_login_userid'],$encounter_nr);
+	$multi->doctorSTAT($_SESSION['sess_login_userid'],$encounter_nr);
 
-	$obj->setDataArray($HTTP_POST_VARS);
+	$obj->setDataArray($_POST);
 
 switch($mode){
 		case 'create':
