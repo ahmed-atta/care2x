@@ -69,12 +69,13 @@ $lab_obj=new Lab;
 	switch($mode)
 	{
 		     case 'done':
-			$sql="UPDATE care_test_request_$subtarget 
-				SET status = 'done', 
-				history=".$enc_obj->ConcatHistory('Done: '.date('Y-m-d H:i:s').' = '.$_SESSION['sess_user_name'].'\n').", 
-				modify_id = ".$_SESSION['sess_user_name'].", 
-				modify_time = ".date('YmdHis')." 
-			WHERE batch_nr = $batch_nr";
+			      $sql="UPDATE care_test_request_".$subtarget."
+					SET status = 'done',
+					history=".$enc_obj->ConcatHistory("Done: ".date('Y-m-d H:i:s')." = ".$HTTP_SESSION_VARS['sess_user_name']."\n").",
+					modify_id = '".$_SESSION['sess_user_name']."',
+					modify_time = '".date('YmdHis')."'
+				WHERE batch_nr = '".$batch_nr."'";
+
 		      	if($ergebnis=$enc_obj->Transact($sql)) {
 				include_once($root_path.'include/inc_diagnostics_report_fx.php');
 				//echo $sql;
@@ -82,9 +83,9 @@ $lab_obj=new Lab;
 				*/
 				signalNewDiagnosticsReportEvent('', 'labor_test_request_printpop.php');
 				if(!$discharge) {
-					header("location:".$thisfile.URL_REDIRECT_APPEND."&edit=$edit&pn=$pn&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize"); 
+					header("location:$thisfile".URL_REDIRECT_APPEND."&edit=$edit&pn=$pn&user_origin=$user_origin&status=$status&target=$target&subtarget=$subtarget&noresize=$noresize");
 				} else {
-					header( "Location:' ../ambulatory/amb_clinic_discharge.php'".URL_REDIRECT_APPEND."'&pn='$pn'&pyear='".date("Y")."'&pmonth='".date("n")."'&pday='".date(j)."'&tb='".str_replace("#","",$cfg['top_bgcolor'])."'&tt='".str_replace("#","",$cfg['top_txtcolor'])."'&bb='".str_replace("#","",$cfg['body_bgcolor'])."'&d='".$cfg['dhtml']."'&station='$station'&backpath='".urlencode("../laboratory/labor_test_request_admin_chemlabor.php")."'&dept_nr='$dept_nr'");
+					header ( 'Location: ../ambulatory/amb_clinic_discharge.php'.URL_REDIRECT_APPEND.'&pn='.$pn.'&pyear='.date("Y").'&pmonth='.date("n").'&pday='.date(j).'&tb='.str_replace("#","",$cfg['top_bgcolor']).'&tt='.str_replace("#","",$cfg['top_txtcolor']).'&bb='.str_replace("#","",$cfg['body_bgcolor']).'&d='.$cfg['dhtml'].'&station='.$station.'&backpath='.urlencode('../laboratory/labor_test_request_admin_chemlabor.php').'&dept_nr='.$dept_nr);
 					exit;
 				}
 			}else{
