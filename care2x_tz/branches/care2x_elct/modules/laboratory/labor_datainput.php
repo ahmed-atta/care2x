@@ -98,7 +98,7 @@ if ($mode == 'save') {
 		$lab_obj_sub->deleteOldValues($batch_nr,$encounter_nr);
 		foreach( $nbuf as $key => $value) {
 			if(isset($value) && !empty($value) ) {
-				//$parsedParamList['test_date']		= date('Y-m-d');
+				$parsedParamList['test_date']		= date('Y-m-d');
 				$parsedParamList['batch_nr'] 		= $batch_nr;
 				$parsedParamList['job_id'] 		= $job_id;
 				$parsedParamList['encounter_nr'] 	= $encounter_nr;
