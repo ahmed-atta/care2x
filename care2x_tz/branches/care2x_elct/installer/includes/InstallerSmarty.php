@@ -11,7 +11,8 @@ require_once(APP_PATH.'/classes/smarty/libs/Smarty.class.php');
 class InstallerSmarty extends Smarty {
 
 	function InstallerSmarty(){
-		$this->Smarty();
+ 		parent::__construct();
+		//$this->Smarty();
 		$this->template_dir = INSTALLER_PATH;
 		$this->cache_dir = $GLOBALS['INSTALLER']['ENGINE']->getSetting('WRITABLE_DIR');
 		$this->config_dir = realpath(dirname(__FILE__)).'/smarty';
