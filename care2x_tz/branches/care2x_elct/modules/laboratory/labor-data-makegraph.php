@@ -205,7 +205,7 @@ ob_start();
 
 echo '
 <form action="labor-data-makegraph.php" method="post" name="labdata">
-<table border=0 cellpadding=0 cellspacing=1 class="frame">';
+<table border=0 cellpadding=0 cellspacing=1 class="frame" style="margin-left: 60px;">';
 
 # Get the number of colums
 $cols=sizeof($tdate);

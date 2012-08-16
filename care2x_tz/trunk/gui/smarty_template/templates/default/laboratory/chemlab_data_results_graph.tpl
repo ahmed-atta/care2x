@@ -5,7 +5,7 @@
 	{{include file="laboratory/patient_data_basic.tpl"}}
 </ul>
 
-{{$sLabResultsGraphTable}}
+	{{$sLabResultsGraphTable}}
 
 <ul>
 	{{$sClose}}
