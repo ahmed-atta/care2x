@@ -104,7 +104,7 @@ if ($mode == 'save') {
 				$parsedParamList['encounter_nr'] 	= $encounter_nr;
 				$parsedParamList['paramater_name']	= $key;
 				$parsedParamList['parameter_value']	= $value;
-				//$parsedParamList['test_time']		= date('H:i:s');
+				$parsedParamList['test_time']		= date('H:i:s');
 				//$parsedParamList['history']			= "Create ".date('Y-m-d H:i:s')." ".$_SESSION['sess_user_name']."\n";
 				//$parsedParamList['create_id']		= $_SESSION['sess_user_name'];
 				//$parsedParamList['create_time']		= date('YmdHis');
