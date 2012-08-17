@@ -148,6 +148,8 @@ if ($mode == 'save') {
 					$parsedParamList['job_id']=$job_id;
 					$parsedParamList['paramater_name']=$key;
 					$parsedParamList['parameter_value']=$value;
+					$parsedParamList['test_date'] = date('Y-m-d');
+					$parsedParamList['test_time'] = date('H:i:s');
 					$lab_obj_sub->setDataArray($parsedParamList);
 					$lab_obj_sub->insertDataFromInternalArray();
 				}
