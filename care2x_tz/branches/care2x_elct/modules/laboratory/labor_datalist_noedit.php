@@ -138,6 +138,7 @@ if($encounter=&$enc_obj->getBasic4Data($encounter_nr)) {
 				$records[$buffer['job_id']][] = $tmp;
 				$tdate[$buffer['job_id']]=&$buffer['test_date'];
 				$ttime[$buffer['job_id']]=&$buffer['test_time'];
+				$gName[$buffer['job_id']]=&$buffer['groupname'];
 			}
 		}
 	}else{
@@ -202,6 +203,7 @@ function selectall(){
 		for(i = 0; i<t; i++){
 			if(toggle==true && d.tk[i]){
 				d.tk[i].checked=true;
+				preprep2submit(d.tk[i].value);
 			}
 		}
 	}
@@ -211,28 +213,31 @@ function selectall(){
 	toggle=(!toggle);
 }
 
-function prep2submit(){
+function preprep2submit(nr){
 	d=document.labdata;
 	var j=false;
 	var t=d.ptk.value;
+alert(t+'=t');
 	var n=false;
-	for(i=0; i<t; i++) {
+	var v=document.getElementById(nr);
+	/*for(i=0; i<t; i++) {
 		if(t==1) {
 			n=d.tk;
 			v=d.tk.value;
-		}else if( d.tk[i]){
+		}else if(d.tk[i]){
 			n=d.tk[i];
 			v=d.tk[i].value;
-		}
-		if(n.checked==true && d.tk[i]){
-			if(j){
-				d.params.value=d.params.value +"~"+v;
-			}else if( d.tk[i]){
-				d.params.value=v;
-				j=1;
-			}
+alert(v+'=v (else)');
+		}*/
+		if(v.checked==true){
+			if( d.params.value == '' ) d.params.value = nr;
+		else d.params.value += "~"+nr;
 		 }
+alert(d.params.value+'=params-value');
 	}
+
+function prep2submit(){
+	d=document.labdata;
 	if(d.params.value!=''){
 		d.submit();
 	}else{
@@ -262,6 +267,7 @@ function wichOne(nr) {
 		else skipme += "-"+nr;
 	} else if ( document.getElementById(nr).checked == false )
 		skipme = remove(skipme,nr);
+alert(skipme+'=skipme');
 }
 
 
@@ -318,7 +324,7 @@ if(empty($cache)){
 		';
 	while(list($x,$v)=each($tdate)){
 		$cache.= '
-		<td class="a12_b"><font color="#ffffff">&nbsp;<b>'.formatDate2Local($v,$date_format).'<br>'.$x.'</b>&nbsp;<br><input type="checkbox" name="skipme[]" value="'.$x.'" id="'.$x.'" onclick="wichOne(this.id);"></td>';
+		<td class="a12_b"><font color="#ffffff">&nbsp;<b>'.formatDate2Local($v,$date_format).'<br>'.$x.'</b>&nbsp;<br><input type="checkbox" name="skipme" value="'.$x.'" id="'.$x.'" onclick="wichOne(this.id);"></td>';
 	}
 
 	$cache.= '
@@ -382,7 +388,9 @@ while (list($groupId,$paramEnc)=each($requestData)) {
 				$columns++;
 			}
 		}
-		$cache .= "<td align=\"right\" colspan=\"". ($cols-$columns+1) ."\" class=\"" . $class ."\"><input type=\"checkbox\" name=tk value=\"" . $pName->fields['id'] . "\"></td></tr>";
+		$cache .= '<td align="right" colspan="'. ($cols-$columns+1) .'" class="' . $class . '">';
+		$cache .= '
+		<input type="checkbox" name="tk" value="' . $paramId . '" id="' . $paramId . '" onclick="preprep2submit(this.id)";></td></tr>';
 		$class=='wardlistrow1' ? $class='wardlistrow2' : $class='wardlistrow1';	
 		$columns=0;	
 	}
@@ -419,7 +427,7 @@ if($from=='input'){
 <input type="hidden" name="job_id" value="'.$job_id.'">
 <input type="hidden" name="allow_update" value="'.$allow_update.'">';
 }
-
+//echo $parameterselect.'=paramselect';
 echo '
 <input type="hidden" name="user_origin" value="'.$user_origin.'">
 </form>';
