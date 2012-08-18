@@ -217,7 +217,6 @@ function preprep2submit(nr){
 	d=document.labdata;
 	var j=false;
 	var t=d.ptk.value;
-alert(t+'=t');
 	var n=false;
 	var v=document.getElementById(nr);
 	/*for(i=0; i<t; i++) {
@@ -233,7 +232,6 @@ alert(v+'=v (else)');
 			if( d.params.value == '' ) d.params.value = nr;
 		else d.params.value += "~"+nr;
 		 }
-alert(d.params.value+'=params-value');
 	}
 
 function prep2submit(){
@@ -267,7 +265,6 @@ function wichOne(nr) {
 		else skipme += "-"+nr;
 	} else if ( document.getElementById(nr).checked == false )
 		skipme = remove(skipme,nr);
-alert(skipme+'=skipme');
 }
 
 
