@@ -109,6 +109,8 @@ if($nostat) $ret=$root_path."modules/laboratory/labor_data_patient_such.php?sid=
 # Load the date formatter
 require_once($root_path.'include/inc_date_format_functions.php');
 
+$tencnrs=explode('~',$_POST['skipme']);
+
 $enc_obj->setWhereCondition("encounter_nr='$encounter_nr'");
 
 if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
@@ -122,10 +124,12 @@ if($encounter=$enc_obj->getBasic4Data($encounter_nr)) {
 		$records=array();
 		$dt=array();
 		while($buffer=$recs->FetchRow()){
+			if (!in_array($buffer['job_id'], $tencnrs)) {
 			$tmp = array($buffer['paramater_name'] => $buffer['parameter_value']); //echo $buffer['paramater_name'].'name and value'.$buffer['parameter_value'];
 			$records[$buffer['job_id']][] = $tmp;
 			$tdate[$buffer['job_id']]=&$buffer['test_date']; //echo $buffer['test_date'];
 			$ttime[$buffer['job_id']]=&$buffer['test_time'];
+			}
 		}
 		//gjergji :
 		//reverse date from past to current
@@ -235,23 +239,25 @@ echo'
 
 	# Reset array
 	reset($ttime);
-	
 
 # Prepare the graph values
 $tparam=explode('~',$_POST['params']);
+
 //order the values
 $requestData=array();	
 reset($records);
 $jIDArray = array();
 while (list($job_id,$paramgroupvalue)=each($records)) {
-		$jIDArray[] = $job_id;
-		foreach($paramgroupvalue as $paramgroup_a => $paramvalue_a) {
-			foreach($paramvalue_a as $paramgroup => $paramvalue) {
-				$ext = substr(stristr($paramgroup, '__'), 2);
-				$requestData[$ext][$paramgroup][$job_id] = $paramvalue;
-				//echo $requestData[$ext][$paramgroup][$job_id].'reqdata for paramgroup '.$paramgroup;
+			$jIDArray[] = $job_id;
+			foreach($paramgroupvalue as $paramgroup_a => $paramvalue_a) {
+				foreach($paramvalue_a as $paramgroup => $paramvalue) {
+					if (in_array($paramgroup, $tparam)) {
+						$ext = substr(stristr($paramgroup, '__'), 2);
+						$requestData[$ext][$paramgroup][$job_id] = $paramvalue;
+						//echo $requestData[$ext][$paramgroup][$job_id].' =reqdata for paramgroup '.$paramgroup.' t= '.$t.' tparam= '.$tparam[$t].'END';
 					}
 				}
+			}
 }
 
 //display the values
@@ -259,6 +265,7 @@ $class='wardlistrow1';
 $columns=0;
 $ptrack=0;
 $temp = '';
+
 while (list($groupId,$paramEnc)=each($requestData)) {
 	$valueBuff = '';
 	$gName = $lab_obj->getGroupName($groupId) ;

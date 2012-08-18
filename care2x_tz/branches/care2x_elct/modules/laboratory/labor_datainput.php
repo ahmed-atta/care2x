@@ -1,5 +1,5 @@
 <?php
-define("COL_MAX",6); # define here the maximum number of rows for displaying the parameters
+define(COL_MAX,6); # define here the maximum number of rows for displaying the parameters
 
 error_reporting ( E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR );
 require ('./roots.php');
@@ -72,7 +72,7 @@ if ($mode == 'save') {
 	//Prepare parameter values
 	//gjergji
 	while (list($z,$y)=each($_POST)) {
-		if($result_tests = $lab_obj->GetTestsToDo($job_id))
+		if($result_tests = $lab_obj->GetTestsToDo($job_id)) 
 			while($row_tests = $result_tests->FetchRow()) {
 				if ($z == $row_tests['paramater_name'] ) {
 					$nbuf[$z]=$y;
