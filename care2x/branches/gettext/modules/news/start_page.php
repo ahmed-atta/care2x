@@ -117,5 +117,5 @@ $smarty->assign('sMainBlockIncludeFile',__DIR__ . '/view/headline.tpl');
  * show Template
  */
 $smarty->display(CARE_BASE . 'main/view/mainframe.tpl');
- 
+
 ?>
