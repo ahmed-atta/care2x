@@ -10,7 +10,7 @@
  *
  * See the file "copy_notice.txt" for the licence notice
  */
- define('USE_PIE_CHART',1); // define to 1 if pie chart is preferred as display, define to 0 if tiny person icons
+ define('USE_PIE_CHART',0); // define to 1 if pie chart is preferred as display, define to 0 if tiny person icons
  define('PIE_CHART_USED_COLOR','red'); // define the color of the used bed portion of the graph
 
  $lang_tables=array('date_time.php');
