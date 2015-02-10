@@ -1,4 +1,4 @@
 <?php
-
+// oic... :-P
 //phpinfo();
 ?>
